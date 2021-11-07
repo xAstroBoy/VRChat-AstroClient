@@ -12,7 +12,6 @@
     public class ESP_UdonBehaviour : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
-        private Color DefaultColor = ColorUtils.HexToColor("CD14C7");
 
         public ESP_UdonBehaviour(IntPtr obj0) : base(obj0)
         {
@@ -58,10 +57,13 @@
 
         private void SetupHighlighter()
         {
-            HighlightOptions ??= EspHelper.HighlightFXCamera.AddHighlighter();
-            if (HighlightOptions != null)
+            if (HighLightOptions == null)
             {
-                HighlightOptions.SetHighlighterColor(ESPColor);
+                HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
+            }
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighlighterColor(ESPColor);
                 for (int i = 0; i < ObjMeshRenderers.Count; i++)
                 {
                     MeshRenderer obj = ObjMeshRenderers[i];
@@ -81,39 +83,44 @@
         internal void ResetColor()
         {
             ESPColor = DefaultColor;
-            HighLightOptions?.SetHighLighterColor(DefaultColor);
+            HighLightOptions?.SetHighlighterColor(DefaultColor);
         }
 
         internal void OnDestroy()
         {
-            HighlightOptions.DestroyHighlighter();
+            HighLightOptions.DestroyHighlighter();
         }
 
         internal void OnEnable()
         {
-            SetupHighlighter();
+            HighLightOptions.enabled = true;
         }
 
         internal void OnDisable()
         {
-            HighlightOptions.DestroyHighlighter();
+            HighLightOptions.enabled = false;
         }
 
         internal void ChangeColor(Color newcolor)
         {
             ESPColor = newcolor;
-            HighlightOptions?.SetHighlighterColor(newcolor);
+            HighLightOptions?.SetHighlighterColor(newcolor);
         }
 
-        internal void ResetColor()
+        internal void ChangeColor(string HexColor)
         {
-            ChangeColor(DefaultColor);
+            Color hextocolor = ColorUtils.HexToColor(HexColor);
+            ESPColor = hextocolor;
+            HighLightOptions?.SetHighlighterColor(hextocolor);
         }
 
         internal Color GetCurrentESPColor
         {
             [HideFromIl2Cpp]
-            get => HighLightOptions.highlightColor;
+            get
+            {
+                return HighLightOptions.highlightColor;
+            }
         }
 
         internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }

@@ -9,6 +9,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using CodeDebugTools;
     using UnhollowerBaseLib;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -93,11 +94,19 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            if (JarRoleLinks.Count() != 0 && player != null)
+            CodeDebug.StopWatchDebug("JarRoleController OnPlayerJoined", new Action(() =>
             {
-                var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
-                if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer)) RoleEspComponents.Add(RoleRevealer);
+
+            if (IsAmongUsWorld || IsMurder4World)
+            {
+                if (JarRoleLinks.Count() != 0 && player != null)
+                {
+                    var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
+                    if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer)) RoleEspComponents.Add(RoleRevealer);
+                }
             }
+
+            }));
         }
 
         internal class LinkedNodes

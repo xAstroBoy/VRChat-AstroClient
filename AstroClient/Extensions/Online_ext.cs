@@ -15,6 +15,11 @@
             return obj.IsOwner();
         }
 
+        internal static void TakeOwnership(this GameObject obj)
+        {
+            OnlineEditor.TakeObjectOwnership(obj);
+        }
+
         internal static void DropOwnership(this GameObject obj)
         {
             OnlineEditor.RemoveOwnerShip(obj);

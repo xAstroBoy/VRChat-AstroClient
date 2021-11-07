@@ -1,8 +1,10 @@
 ﻿namespace AstroClient.AstroMonos
 {
+    using System;
     using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
+    using CodeDebugTools;
     using UnhollowerBaseLib.Attributes;
     using VRC;
 
@@ -10,9 +12,15 @@
     {
         internal override void OnPlayerLeft(Player player)
         {
-            var id = player.GetAPIUser().GetUserID();
 
-            if (blockeduserids.Contains(id)) blockeduserids.Remove(id);
+
+            CodeDebug.StopWatchDebug("PickupBlocker OnPlayerLeft", new Action(() =>
+            {
+
+                var id = player.GetAPIUser().GetUserID();
+
+                if (blockeduserids.Contains(id)) blockeduserids.Remove(id);
+            }));
         }
 
         internal static void RegisterPlayer(Player player)
@@ -40,6 +48,6 @@
             blockeduserids.Clear();
         }
 
-        internal static List<string> blockeduserids { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new List<string>();
+        internal static List<string> blockeduserids {  get;  private set; } = new List<string>();
     }
 }

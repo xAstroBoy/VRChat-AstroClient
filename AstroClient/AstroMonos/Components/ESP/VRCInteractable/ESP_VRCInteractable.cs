@@ -12,7 +12,6 @@
     public class ESP_VRCInteractable : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
-        private Color DefaultColor = ColorUtils.HexToColor("E47D39");
 
         public ESP_VRCInteractable(IntPtr obj0) : base(obj0)
         {
@@ -59,10 +58,13 @@
 
         private void SetupHighlighter()
         {
-            HighlightOptions ??= EspHelper.HighlightFXCamera.AddHighlighter();
-            if (HighlightOptions != null)
+            if (HighLightOptions == null)
             {
-                HighlightOptions.SetHighlighterColor(ESPColor);
+                HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
+            }
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighlighterColor(ESPColor);
                 for (int i = 0; i < ObjMeshRenderers.Count; i++)
                 {
                     MeshRenderer obj = ObjMeshRenderers[i];
@@ -83,42 +85,56 @@
             ESPColor = DefaultColor;
             if (HighLightOptions != null)
             {
-                HighLightOptions.SetHighLighterColor(DefaultColor);
+                HighLightOptions.SetHighlighterColor(DefaultColor);
             }
         }
 
         internal void OnDestroy()
         {
-            HighlightOptions.DestroyHighlighter();
+            HighLightOptions.DestroyHighlighter();
         }
 
         internal void OnEnable()
         {
-            SetupHighlighter();
+            HighLightOptions.enabled = true;
         }
 
         internal void OnDisable()
         {
-            HighlightOptions.DestroyHighlighter();
+            HighLightOptions.enabled = false;
         }
 
         internal void ChangeColor(Color newcolor)
         {
             ESPColor = newcolor;
-            HighlightOptions?.SetHighlighterColor(newcolor);
-        }
-
-        internal void ResetColor()
-        {
-            ChangeColor(DefaultColor);
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighlighterColor(newcolor);
+            }
         }
 
         internal void ChangeColor(string HexColor)
         {
+            Color hextocolor = ColorUtils.HexToColor(HexColor);
+            ESPColor = hextocolor;
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighlighterColor(hextocolor);
+            }
+        }
+
+        internal Color GetCurrentESPColor
+        {
             [HideFromIl2Cpp]
-            get => HighLightOptions.highlightColor;
+            get
+            {
+                return HighLightOptions.highlightColor;
+            }
             [HideFromIl2Cpp]
-            set => HighLightOptions.highlightColor = value;
+            set
+            {
+                HighLightOptions.highlightColor = value;
+            }
         }
 
         internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }

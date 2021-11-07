@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
+    using CodeDebugTools;
     using VRC;
 
     internal class TargetSelector : GameEvents
@@ -12,13 +13,23 @@
 
         internal override void OnPlayerLeft(Player player)
         {
-            if (player != null)
+
+            CodeDebug.StopWatchDebug("TargetSelector OnPlayerLeft", new Action(() =>
             {
-                if (CurrentTarget == player.GetVRCPlayer())
+                if (player != null)
                 {
-                    CurrentTarget = null;
+                    if (CurrentTarget != null)
+                    {
+                        if (CurrentTarget == player.GetVRCPlayer())
+                        {
+                            CurrentTarget = null;
+                        }
+
+                    }
                 }
-            }
+
+            }));
+
         }
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)

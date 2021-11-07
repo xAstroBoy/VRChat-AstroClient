@@ -6,6 +6,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroMonos.Components.ESP.Player;
+    using CodeDebugTools;
     using UnityEngine;
     using VRC;
 
@@ -79,13 +80,18 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            if (Toggle_Player_ESP)
+            CodeDebug.StopWatchDebug("PlayerESPMenu OnPlayerJoined", new Action(() =>
             {
-                if (player != null && !player.GetAPIUser().IsSelf)
+                if (Toggle_Player_ESP)
                 {
-                    _ = player.gameObject.GetOrAddComponent<PlayerESP>();
+                    if (player != null && !player.GetAPIUser().IsSelf)
+                    {
+                        _ = player.gameObject.GetOrAddComponent<PlayerESP>();
+                    }
                 }
-            }
+
+            }));
+
         }
 
         private static void AddESPToAllPlayers()

@@ -27,13 +27,21 @@
         {
             // FIND ALLOCATED PLAYER
             var p = gameObject.GetComponent<Player>();
-            if (p != null) AssignedPlayer = p;
-            else Destroy(this);
-
+            if (p != null)
+            {
+                AssignedPlayer = p;
+            }
+            else
+            {
+                Destroy(this);
+            }
             if (AssignedPlayer != null)
             {
                 SelectRegion = AssignedPlayer.transform.Find("SelectRegion");
-                if (SelectRegion == null) Destroy(this);
+                if (SelectRegion == null)
+                {
+                    Destroy(this);
+                }
                 else
                 {
                     if (CurrentRenderers == null && CurrentRenderers.Count() == 0)
@@ -44,12 +52,17 @@
                     }
                     else
                     {
-                        HighlightOptions ??= HighlightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
-
+                        if (HighLightOptions == null)
+                        {
+                            HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
+                        }
                         for (int i = 0; i < CurrentRenderers.Count; i++)
                         {
                             var ObjRenderer = CurrentRenderers[i];
-                            if (ObjRenderer != null) HighlightOptions.SetHighlighter(ObjRenderer, true);
+                            if (ObjRenderer != null)
+                            {
+                                HighLightOptions.SetHighlighter(ObjRenderer, true);
+                            }
                         }
                     }
                 }
@@ -69,32 +82,50 @@
         private Color FriendColor
         {
             [HideFromIl2Cpp]
-            get => ConfigManager.ESPFriendColor;
+            get
+            {
+                return ConfigManager.ESPFriendColor;
+            }
         }
 
         private Color PublicColor
         {
             [HideFromIl2Cpp]
-            get => ConfigManager.PublicESPColor;
+            get
+            {
+                return ConfigManager.PublicESPColor;
+            }
         }
 
         internal override void OnFriended()
         {
             if (!CanActuallyEditOnEvent) return;
-            if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = FriendColor;
+            if (AssignedPlayer.GetAPIUser().IsFriend())
+            {
+                CurrentColor = FriendColor;
+            }
         }
 
         internal override void OnUnfriended()
         {
             if (!CanActuallyEditOnEvent) return;
-            if (!AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = PublicColor;
-            
+            if (!AssignedPlayer.GetAPIUser().IsFriend())
+            {
+                CurrentColor = PublicColor;
+            }
         }
 
         internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
             if (!CanActuallyEditOnEvent) return;
-            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()) && !UseCustomColor) CurrentColor = ConfigManager.ESPBlockedColor;
+
+            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
+            {
+                if (!UseCustomColor)
+                {
+                    CurrentColor = BlockedColor;
+                }
+            }
         }
 
         internal override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
@@ -102,29 +133,35 @@
             if (!CanActuallyEditOnEvent) return;
             if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
             {
-                if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = ConfigManager.ESPFriendColor;
-                else CurrentColor = ConfigManager.PublicESPColor;
+                if (AssignedPlayer.GetAPIUser().IsFriend())
+                {
+                    CurrentColor = FriendColor;
+                }
+                else
+                {
+                    CurrentColor = PublicColor;
+                }
             }
         }
 
         internal void OnDestroy()
         {
-            HighlightOptions.DestroyHighlighter();
+            HighLightOptions.DestroyHighlighter();
         }
 
         internal void OnEnable()
         {
-            HighlightOptions.enabled = true;
+            HighLightOptions.enabled = true;
         }
 
         internal void OnDisable()
         {
-            HighlightOptions.enabled = false;
+            HighLightOptions.enabled = false;
         }
 
         internal void ChangeColor(Color newcolor)
         {
-            HighlightOptions?.SetHighlighterColor(newcolor);
+            HighLightOptions.SetHighlighterColor(newcolor);
         }
 
         internal void ResetColor()
@@ -134,29 +171,51 @@
 
         internal override void OnPublicESPColorChanged(Color color)
         {
-            if (!AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = color;
+            if (!CanActuallyEditOnEvent) return;
+            if (!AssignedPlayer.GetAPIUser().IsFriend())
+            {
+                CurrentColor = color;
+            }
         }
 
-        }
         internal override void OnFriendESPColorChanged(Color color)
         {
-            if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = color;
+            if (!CanActuallyEditOnEvent) return;
+            if (AssignedPlayer.GetAPIUser().IsFriend())
+            {
+                CurrentColor = color;
+            }
         }
-
 
         internal override void OnBlockedESPColorChanged(Color color)
         {
             if (!CanActuallyEditOnEvent) return;
-            if (AssignedPlayer.GetAPIUser().HasBlockedYou() && CurrentColor.HasValue) CurrentColor = color;
+
+            if (AssignedPlayer.GetAPIUser().HasBlockedYou())
+            {
+                if (CurrentColor.HasValue)
+                {
+                    CurrentColor = color;
+                }
+            }
         }
 
         private void SetPlayerDefaultESP()
         {
             if (CanEditValues)
             {
-                if (AssignedPlayer.GetAPIUser().HasBlockedYou()) CurrentColor = ConfigManager.ESPBlockedColor;
-                else if (AssignedPlayer.GetAPIUser().GetIsFriend()) CurrentColor = ConfigManager.ESPFriendColor;
-                else CurrentColor = ConfigManager.PublicESPColor;
+                if (AssignedPlayer.GetAPIUser().HasBlockedYou())
+                {
+                    CurrentColor = BlockedColor;
+                }
+                else if (AssignedPlayer.GetAPIUser().GetIsFriend())
+                {
+                    CurrentColor = FriendColor;
+                }
+                else
+                {
+                    CurrentColor = PublicColor;
+                }
             }
         }
 
@@ -203,7 +262,7 @@
             [HideFromIl2Cpp]
             get
             {
-                return HighlightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null && CurrentColor.HasValue;
+                return HighLightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null && CurrentColor.HasValue;
             }
         }
 
@@ -212,13 +271,16 @@
             [HideFromIl2Cpp]
             get
             {
-                if (SelectRegion != null) return SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToList();
+                if (SelectRegion != null)
+                {
+                    return SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToArray().ToList();
+                }
                 return null;
             }
         }
+
         private Transform SelectRegion { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private HighlightsFXStandalone HighLightOptions { get; set; }
         internal bool _UseCustomColor;
 
         internal bool UseCustomColor
@@ -231,8 +293,14 @@
             [HideFromIl2Cpp]
             set
             {
-                if (value == _UseCustomColor) return;
-                if (!value) SetPlayerDefaultESP();
+                if (value == _UseCustomColor)
+                {
+                    return;
+                }
+                if (!value)
+                {
+                    SetPlayerDefaultESP();
+                }
                 _UseCustomColor = value;
             }
         }

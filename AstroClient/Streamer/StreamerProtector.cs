@@ -7,6 +7,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using CodeDebugTools;
     using VRC;
 
     internal class StreamerProtector : GameEvents
@@ -38,6 +39,8 @@
 
         internal override void OnPlayerJoined(Player player)
         {
+            CodeDebug.StopWatchDebug("StreamerProtector OnPlayerJoined", new Action(() =>
+            {
             if (player != null)
             {
                 var apiuser = player.GetAPIUser();
@@ -51,25 +54,31 @@
                     }
                 }
             }
+
+            }));
+
         }
 
 
         internal override void OnPlayerLeft(Player player)
         {
-            if (player != null)
+            CodeDebug.StopWatchDebug("StreamerProtector OnPlayerLeft", new Action(() =>
             {
-                var apiuser = player.GetAPIUser();
-                if (apiuser != null)
+                if (player != null)
                 {
-                    var userid = apiuser.id;
-                    if (StreamerIDs.Contains(userid))
+                    var apiuser = player.GetAPIUser();
+                    if (apiuser != null)
                     {
-                        Event_OnStreamerLeft.SafetyRaise(new PlayerEventArgs(player));
+                        var userid = apiuser.id;
+                        if (StreamerIDs.Contains(userid))
+                        {
+                            Event_OnStreamerLeft.SafetyRaise(new PlayerEventArgs(player));
 
-                        StreamersInInstance--;
+                            StreamersInInstance--;
+                        }
                     }
                 }
-            }
+            }));
         }
 
         internal override void OnRoomLeft()

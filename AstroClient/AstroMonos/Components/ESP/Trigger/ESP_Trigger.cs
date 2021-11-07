@@ -12,7 +12,6 @@
     public class ESP_Trigger : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
-        private Color DefaultColor = ColorUtils.HexToColor("EF2C3F");
 
         public ESP_Trigger(IntPtr obj0) : base(obj0)
         {
@@ -45,8 +44,14 @@
 
             foreach (var obj in ObjMeshRenderers)
             {
-                if (obj != null && obj.gameObject.active) HighlightOptions.AddRenderer(obj);
-                else HighlightOptions.RemoveRenderer(obj);
+                if (obj != null && obj.gameObject.active)
+                {
+                    HighLightOptions.AddRenderer(obj);
+                }
+                else
+                {
+                    HighLightOptions.RemoveRenderer(obj);
+                }
             }
         }
 
@@ -54,14 +59,23 @@
         {
             if (!HasSetupESP)
             {
-                HighlightOptions ??= HighlightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
-                if (HighlightOptions != null)
+                if (HighLightOptions == null)
                 {
-                    HighlightOptions.SetHighlighterColor(ESPColor);
+                    HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
+                }
+                if (HighLightOptions != null)
+                {
+                    HighLightOptions.SetHighlighterColor(ESPColor);
                     foreach (var obj in ObjMeshRenderers)
                     {
-                        if (obj != null && obj.gameObject.active) HighlightOptions.AddRenderer(obj);
-                        else HighlightOptions.RemoveRenderer(obj);
+                        if (obj != null && obj.gameObject.active)
+                        {
+                            HighLightOptions.AddRenderer(obj);
+                        }
+                        else
+                        {
+                            HighLightOptions.RemoveRenderer(obj);
+                        }
                     }
                 }
                 HasSetupESP = true;
@@ -74,19 +88,25 @@
             {
                 if (trigger != null)
                 {
-                    if (trigger.enabled) SetupHighlighter();
+                    if (trigger.enabled)
+                    {
+                        SetupHighlighter();
+                    }
                     else
                     {
-                        HighlightOptions.DestroyHighlighter();
+                        HighLightOptions.DestroyHighlighter();
                         HasSetupESP = false;
                     }
                 }
                 else if (trigger2 != null)
                 {
-                    if (trigger2.enabled) SetupHighlighter();
+                    if (trigger2.enabled)
+                    {
+                        SetupHighlighter();
+                    }
                     else
                     {
-                        HighlightOptions.DestroyHighlighter();
+                        HighLightOptions.DestroyHighlighter();
                         HasSetupESP = false;
                     }
                 }
@@ -97,40 +117,51 @@
             ESPColor = DefaultColor;
             if (HighLightOptions != null)
             {
-                HighLightOptions.SetHighLighterColor(DefaultColor);
+                HighLightOptions.SetHighlighterColor(DefaultColor);
             }
         }
 
         internal void OnDestroy()
         {
-            HighlightOptions.DestroyHighlighter();
+            HighLightOptions.DestroyHighlighter();
         }
 
         internal void OnEnable()
         {
-            SetupHighlighter();
+            HighLightOptions.enabled = true;
         }
 
         internal void OnDisable()
         {
-            HighlightOptions.DestroyHighlighter();
+            HighLightOptions.enabled = false;
         }
 
         internal void ChangeColor(Color newcolor)
         {
             ESPColor = newcolor;
-            HighlightOptions?.SetHighlighterColor(newcolor);
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighlighterColor(newcolor);
+            }
         }
 
-        internal void ResetColor()
+        internal void ChangeColor(string HexColor)
         {
-            ChangeColor(DefaultColor);
+            Color hextocolor = ColorUtils.HexToColor(HexColor);
+            ESPColor = hextocolor;
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighlighterColor(hextocolor);
+            }
         }
 
         internal Color GetCurrentESPColor
         {
             [HideFromIl2Cpp]
-            get => HighLightOptions.highlightColor;
+            get
+            {
+                return HighLightOptions.highlightColor;
+            }
         }
 
         internal VRC.SDKBase.VRC_Trigger trigger;
