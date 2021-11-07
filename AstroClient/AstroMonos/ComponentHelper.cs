@@ -10,6 +10,7 @@
     using Components.Cheats.Worlds.JarWorlds;
     using Components.Malicious;
     using Components.Malicious.Orbit;
+    using Components.Tools;
     using CustomMono;
     using UnhollowerRuntimeLib;
     using Variables;
@@ -68,7 +69,12 @@
             }
         }
 
-        internal override void OnUpdate()
+        internal override void VRChat_OnUiManagerInit()
+        {
+            if (Bools.AllowOrbitComponent) OrbitManager.MakeInstance();
+        }
+
+        internal override void OnRoomJoined()
         {
             if (Bools.AllowOrbitComponent) OrbitManager.MakeInstance();
         }

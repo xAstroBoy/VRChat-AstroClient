@@ -173,9 +173,14 @@
 
         internal override void OnUpdate()
         {
-            Update(SphereCache, SphereColliders);
-            Update(CubeCache, BoxColliders);
-            Update(CapsuleCache, CapsuleColliders);
+            if (!AutoUpdateColliderList)
+            {
+                return;
+            }
+                Update(SphereCache, SphereColliders);
+                Update(CubeCache, BoxColliders);
+                Update(CapsuleCache, CapsuleColliders);
+            
         }
 
         private static void Update<T, TSelf>(IList<TSelf> cache, List<T> colliders) where T : Collider where TSelf : class, IDisplay<T, TSelf>, new()

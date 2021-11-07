@@ -4,8 +4,10 @@
 
     using System;
     using System.Collections.Generic;
+    using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using ClientUI.QuickMenuButtons;
+    using CodeDebugTools;
     using ModDetector;
     using UnityEngine;
     using VRC.Animation;
@@ -123,158 +125,162 @@
 
         internal override void OnUpdate()
         {
-            if (!isInRoom || PopupUtils.IsTyping)
-            {
-                return;
-            }
-
-            try
-            {
-                if (currentPlayer == null || transform == null)
+                if (!isInRoom || PopupUtils.IsTyping)
                 {
-                    currentPlayer = PlayerUtils.GetVRCPlayer();
-                    isInVR = currentPlayer.IsInVR();
-                    transform = Camera.main.transform;
+                    return;
                 }
 
-                if (!FindMods.IsNotoriousPresent && ConfigManager.General.KeyBinds)
+                try
                 {
-                    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+                    if (currentPlayer == null || transform == null)
                     {
-                        FlyEnabled = !FlyEnabled;
-                        ExploitsMenu.RefreshFlightButtons();
-                    }
-
-                    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
-                    {
-                        NoClipEnabled = !NoClipEnabled;
-                        ExploitsMenu.RefreshFlightButtons();
-                    }
-                }
-
-                if (FlyEnabled)
-                {
-                    float flySpeed = isInVR ? ConfigManager.Flight.VRFlySpeed : ConfigManager.Flight.DesktopFlySpeed;
-
-                    if (Input.GetKey(KeyCode.LeftShift))
-                    {
-                        flySpeed *= 2;
-                    }
-
-                    if (ConfigManager.Flight.BasicFly)
-                    {
-                        if (isInVR)
+                        currentPlayer = PlayerUtils.GetVRCPlayer();
+                        if (currentPlayer != null)
                         {
-                            if (Math.Abs(Input.GetAxis("Vertical")) != 0f)
-                                currentPlayer.transform.position += currentPlayer.transform.forward *
-                                                                    flySpeed * Time.deltaTime *
-                                                                    Input.GetAxis("Vertical");
+                            isInVR = currentPlayer.IsInVR();
+                            transform = Camera.main.transform;
+                        }
+                    }
 
-                            if (Math.Abs(Input.GetAxis("Horizontal")) != 0f)
-                                currentPlayer.transform.position += currentPlayer.transform.right *
-                                                                    flySpeed * Time.deltaTime *
-                                                                    Input.GetAxis("Horizontal");
+                    if (!FindMods.IsNotoriousPresent && ConfigManager.General.KeyBinds)
+                    {
+                        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+                        {
+                            FlyEnabled = !FlyEnabled;
+                            ExploitsMenu.RefreshFlightButtons();
+                        }
 
-                            if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
-                                currentPlayer.transform.position += currentPlayer.transform.up *
-                                                                    flySpeed * Time.deltaTime *
-                                                                    Input.GetAxisRaw(
-                                                                        "Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                            if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
-                                currentPlayer.transform.position += currentPlayer.transform.up *
-                                                                    flySpeed * Time.deltaTime *
-                                                                    Input.GetAxisRaw(
-                                                                        "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+                        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
+                        {
+                            NoClipEnabled = !NoClipEnabled;
+                            ExploitsMenu.RefreshFlightButtons();
+                        }
+                    }
+
+                    if (FlyEnabled)
+                    {
+                        float flySpeed = isInVR ? ConfigManager.Flight.VRFlySpeed : ConfigManager.Flight.DesktopFlySpeed;
+
+                        if (Input.GetKey(KeyCode.LeftShift))
+                        {
+                            flySpeed *= 2;
+                        }
+
+                        if (ConfigManager.Flight.BasicFly)
+                        {
+                            if (isInVR)
+                            {
+                                if (Math.Abs(Input.GetAxis("Vertical")) != 0f)
+                                    currentPlayer.transform.position += currentPlayer.transform.forward *
+                                                                        flySpeed * Time.deltaTime *
+                                                                        Input.GetAxis("Vertical");
+
+                                if (Math.Abs(Input.GetAxis("Horizontal")) != 0f)
+                                    currentPlayer.transform.position += currentPlayer.transform.right *
+                                                                        flySpeed * Time.deltaTime *
+                                                                        Input.GetAxis("Horizontal");
+
+                                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
+                                    currentPlayer.transform.position += currentPlayer.transform.up *
+                                                                        flySpeed * Time.deltaTime *
+                                                                        Input.GetAxisRaw(
+                                                                            "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+                                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
+                                    currentPlayer.transform.position += currentPlayer.transform.up *
+                                                                        flySpeed * Time.deltaTime *
+                                                                        Input.GetAxisRaw(
+                                                                            "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+                            }
+                            else
+                            {
+                                if (Input.GetKey(KeyCode.E))
+                                    currentPlayer.transform.position += currentPlayer.transform.up *
+                                                                        flySpeed * Time.deltaTime;
+
+                                if (Input.GetKey(KeyCode.Q))
+                                    currentPlayer.transform.position += currentPlayer.transform.up * -1 *
+                                                                        flySpeed * Time.deltaTime;
+
+                                if (Input.GetKey(KeyCode.W))
+                                    currentPlayer.transform.position += currentPlayer.transform.forward *
+                                                                        flySpeed * Time.deltaTime;
+
+                                if (Input.GetKey(KeyCode.A))
+                                    currentPlayer.transform.position += currentPlayer.transform.right * -1f *
+                                                                        flySpeed * Time.deltaTime;
+
+                                if (Input.GetKey(KeyCode.D))
+                                    currentPlayer.transform.position += currentPlayer.transform.right *
+                                                                        flySpeed * Time.deltaTime;
+
+                                if (Input.GetKey(KeyCode.S))
+                                    currentPlayer.transform.position += currentPlayer.transform.forward * -1f *
+                                                                        flySpeed * Time.deltaTime;
+                            }
                         }
                         else
                         {
-                            if (Input.GetKey(KeyCode.E))
-                                currentPlayer.transform.position += currentPlayer.transform.up *
-                                                                    flySpeed * Time.deltaTime;
+                            if (isInVR)
+                            {
+                                if (Math.Abs(Input.GetAxis("Vertical")) != 0f)
+                                    currentPlayer.transform.position += transform.transform.forward *
+                                                                        flySpeed * Time.deltaTime *
+                                                                        Input.GetAxis("Vertical");
 
-                            if (Input.GetKey(KeyCode.Q))
-                                currentPlayer.transform.position += currentPlayer.transform.up * -1 *
-                                                                    flySpeed * Time.deltaTime;
+                                if (Math.Abs(Input.GetAxis("Horizontal")) != 0f)
+                                    currentPlayer.transform.position += transform.transform.right *
+                                                                        flySpeed * Time.deltaTime *
+                                                                        Input.GetAxis("Horizontal");
 
-                            if (Input.GetKey(KeyCode.W))
-                                currentPlayer.transform.position += currentPlayer.transform.forward *
-                                                                    flySpeed * Time.deltaTime;
+                                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
+                                    currentPlayer.transform.position += transform.transform.up *
+                                                                        flySpeed * Time.deltaTime *
+                                                                        Input.GetAxisRaw(
+                                                                            "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+                                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
+                                    currentPlayer.transform.position += transform.transform.up *
+                                                                        flySpeed * Time.deltaTime *
+                                                                        Input.GetAxisRaw(
+                                                                            "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+                            }
+                            else
+                            {
+                                if (Input.GetKey(KeyCode.E))
+                                    currentPlayer.transform.position += transform.transform.up *
+                                                                        flySpeed * Time.deltaTime;
 
-                            if (Input.GetKey(KeyCode.A))
-                                currentPlayer.transform.position += currentPlayer.transform.right * -1f *
-                                                                    flySpeed * Time.deltaTime;
+                                if (Input.GetKey(KeyCode.Q))
+                                    currentPlayer.transform.position += transform.transform.up * -1 *
+                                                                        flySpeed * Time.deltaTime;
 
-                            if (Input.GetKey(KeyCode.D))
-                                currentPlayer.transform.position += currentPlayer.transform.right *
-                                                                    flySpeed * Time.deltaTime;
+                                if (Input.GetKey(KeyCode.W))
+                                    currentPlayer.transform.position += transform.transform.forward *
+                                                                        flySpeed * Time.deltaTime;
 
-                            if (Input.GetKey(KeyCode.S))
-                                currentPlayer.transform.position += currentPlayer.transform.forward * -1f *
-                                                                    flySpeed * Time.deltaTime;
+                                if (Input.GetKey(KeyCode.A))
+                                    currentPlayer.transform.position += transform.transform.right * -1f *
+                                                                        flySpeed * Time.deltaTime;
+
+                                if (Input.GetKey(KeyCode.D))
+                                    currentPlayer.transform.position += transform.transform.right *
+                                                                        flySpeed * Time.deltaTime;
+
+                                if (Input.GetKey(KeyCode.S))
+                                    currentPlayer.transform.position += transform.transform.forward * -1f *
+                                                                        flySpeed * Time.deltaTime;
+                            }
                         }
                     }
-                    else
-                    {
-                        if (isInVR)
-                        {
-                            if (Math.Abs(Input.GetAxis("Vertical")) != 0f)
-                                currentPlayer.transform.position += transform.transform.forward *
-                                                                    flySpeed * Time.deltaTime *
-                                                                    Input.GetAxis("Vertical");
 
-                            if (Math.Abs(Input.GetAxis("Horizontal")) != 0f)
-                                currentPlayer.transform.position += transform.transform.right *
-                                                                    flySpeed * Time.deltaTime *
-                                                                    Input.GetAxis("Horizontal");
-
-                            if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
-                                currentPlayer.transform.position += transform.transform.up *
-                                                                    flySpeed * Time.deltaTime *
-                                                                    Input.GetAxisRaw(
-                                                                        "Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                            if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
-                                currentPlayer.transform.position += transform.transform.up *
-                                                                    flySpeed * Time.deltaTime *
-                                                                    Input.GetAxisRaw(
-                                                                        "Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                        }
-                        else
-                        {
-                            if (Input.GetKey(KeyCode.E))
-                                currentPlayer.transform.position += transform.transform.up *
-                                                                    flySpeed * Time.deltaTime;
-
-                            if (Input.GetKey(KeyCode.Q))
-                                currentPlayer.transform.position += transform.transform.up * -1 *
-                                                                    flySpeed * Time.deltaTime;
-
-                            if (Input.GetKey(KeyCode.W))
-                                currentPlayer.transform.position += transform.transform.forward *
-                                                                    flySpeed * Time.deltaTime;
-
-                            if (Input.GetKey(KeyCode.A))
-                                currentPlayer.transform.position += transform.transform.right * -1f *
-                                                                    flySpeed * Time.deltaTime;
-
-                            if (Input.GetKey(KeyCode.D))
-                                currentPlayer.transform.position += transform.transform.right *
-                                                                    flySpeed * Time.deltaTime;
-
-                            if (Input.GetKey(KeyCode.S))
-                                currentPlayer.transform.position += transform.transform.forward * -1f *
-                                                                    flySpeed * Time.deltaTime;
-                        }
-                    }
+                    //if (motionState != null)
+                    //{
+                    //	motionState.Reset();
+                    //}
                 }
-
-                //if (motionState != null)
-                //{
-                //	motionState.Reset();
-                //}
-            }
-            catch
-            {
-            }
+                catch (Exception e)
+                {
+                    ModConsole.ErrorExc(e);
+                }
         }
     }
 }

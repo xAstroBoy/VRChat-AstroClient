@@ -1,28 +1,50 @@
 ﻿namespace AstroClient.ClientUI.QuickMenuButtons
 {
     using System;
+    using System.Collections;
     using AstroButtonAPI;
+    using AstroLibrary;
+    using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using AstroMonos;
     using AstroMonos.Components.Malicious;
     using AstroMonos.Components.Player;
+    using AstroMonos.Components.Tools;
     using Cheetos;
+    using MelonLoader;
     using UnityEngine;
     using Variables;
 
     internal class UserInteractMenuBtns : GameEvents
     {
-        internal static GameObject OldCloneButton;
 
-        internal static void InitButtons(float x, float y, bool btnHalf)
+        private static IEnumerator WaitForCloneBtnInit()
         {
-            OldCloneButton = AstroLibrary.Finder.GameObjectFinder.Find("UserInterface/QuickMenu/UserInteractMenu/CloneAvatarButton");
-            OldCloneButton?.SetActive(false);
+            while (VRChatObjects.UICloneAvatarButton == null)
+                yield return new WaitForSeconds(0.001f);
+            if (VRChatObjects.UICloneAvatarButton != null)
+            {
+                VRChatObjects.UICloneAvatarButton.GetOrAddComponent<GameObjectDisabler>();
+            }
+
+            yield return null;
+        }
+
+
+        internal static void InitUserButtons(float x, float y, bool btnHalf)
+        {
+            ModConsole.DebugLog("1");
+            MelonCoroutines.Start(WaitForCloneBtnInit());
+            ModConsole.DebugLog("2");
+
             Init_UserMenu_Exploits(x, y, true);
+            ModConsole.DebugLog("3");
 
             //  NO TOUCH!
             new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(TargetSelector.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf).SetResizeTextForBestFit(true);
             var forceClone = new QMSingleButton("UserInteractMenu", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
+            ModConsole.DebugLog("4");
+
         }
 
         internal static void Init_UserMenu_Exploits(float x, float y, bool btnHalf)
@@ -91,9 +113,5 @@
             , "Removes everything bound to this player.", null, null);
         }
 
-        internal override void OnLateUpdate()
-        {
-            OldCloneButton?.SetActive(false);
-        }
     }
 }

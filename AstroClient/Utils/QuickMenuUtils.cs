@@ -18,7 +18,8 @@
             HasQuickMenuBoxColliderCalled = true;
         }
 
-        internal override void OnUpdate()
+
+        internal override void OnQuickMenuOpen()
         {
             if (HasQuickMenuBoxColliderCalled)
             {

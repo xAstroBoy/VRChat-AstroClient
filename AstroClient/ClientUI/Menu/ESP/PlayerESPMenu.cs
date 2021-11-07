@@ -3,6 +3,7 @@
     using System;
     using AstroButtonAPI;
     using AstroClientCore.Events;
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroMonos.Components.ESP.Player;
@@ -82,14 +83,16 @@
         {
             CodeDebug.StopWatchDebug("PlayerESPMenu OnPlayerJoined", new Action(() =>
             {
-                if (Toggle_Player_ESP)
+                MiscUtils.DelayFunction(1, () =>
                 {
-                    if (player != null && !player.GetAPIUser().IsSelf)
+                    if (Toggle_Player_ESP)
                     {
-                        _ = player.gameObject.GetOrAddComponent<PlayerESP>();
+                        if (player != null && !player.GetAPIUser().IsSelf)
+                        {
+                            player.gameObject.GetOrAddComponent<PlayerESP>();
+                        }
                     }
-                }
-
+                });
             }));
 
         }

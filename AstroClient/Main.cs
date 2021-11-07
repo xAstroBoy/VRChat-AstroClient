@@ -11,10 +11,12 @@
     using System.Windows.Forms;
     using AstroButtonAPI;
     using AstroClientCore.Events;
+    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroMonos;
+    using AstroMonos.Components.Tools;
     using ButtonShortcut;
     using CheetoLibrary;
     using CheetosConsole;
@@ -47,9 +49,11 @@
 
         internal static event EventHandler Event_OnApplicationLateStart;
 
+
         internal static event EventHandler Event_OnUpdate;
 
         internal static event EventHandler Event_LateUpdate;
+
 
         internal static event EventHandler Event_VRChat_OnUiManagerInit;
 
@@ -121,7 +125,20 @@
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
                 DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
                 DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
+
             }
+        }
+
+
+        public override void OnUpdate()
+        {
+            if(KeyManager.IsAuthed)
+            Event_OnUpdate?.SafetyRaise();
+        }
+        public override void OnLateUpdate()
+        {
+            if (KeyManager.IsAuthed)
+                Event_LateUpdate?.SafetyRaise();
         }
 
         private IEnumerator WaitForActionMenuInit()
@@ -140,6 +157,7 @@
         {
             if (!KeyManager.IsAuthed) return;
             Event_OnApplicationQuit?.SafetyRaise();
+            ConfigManager.SaveAll();
         }
 
         public override void OnPreferencesSaved()
@@ -215,17 +233,7 @@
             }
         }
 
-        public override void OnUpdate()
-        {
-            if (!KeyManager.IsAuthed) return;
-            Event_OnUpdate.SafetyRaise();
-        }
 
-        public override void OnLateUpdate()
-        {
-            if (!KeyManager.IsAuthed) return;
-            Event_LateUpdate.SafetyRaise();
-        }
 
         protected void DoAfterQuickMenuInit(Action code)
         {
@@ -241,6 +249,12 @@
             code();
         }
 
+        protected void DoAfterUserInteractMenuInit(Action code)
+        {
+            if (!KeyManager.IsAuthed) return;
+            _ = MelonCoroutines.Start(OnUserInteractMenuInitCoro(code));
+        }
+
         protected void DoAfterActionMenuInit(Action code)
         {
             if (!KeyManager.IsAuthed) return;
@@ -250,6 +264,13 @@
         private IEnumerator OnActionMenuInitCoro(Action code)
         {
             while (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
+                yield return null;
+
+            code();
+        }
+        private IEnumerator OnUserInteractMenuInitCoro(Action code)
+        {
+            while (VRChatObjects.UserInteractMenu == null)
                 yield return null;
 
             code();
@@ -282,6 +303,7 @@
             }
 
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
+            DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
             stopwatch.Stop();
             ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
@@ -302,6 +324,25 @@
             ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
+
+        private void Start_VRChat_OnUserInteractMenuInit()
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            if (!KeyManager.IsAuthed)
+            {
+                stopwatch.Stop();
+                return;
+            }
+
+            UserInteractMenuBtns.InitUserButtons(-1, 3, true); //UserMenu Main Button
+            stopwatch.Stop();
+            ModConsole.DebugLog($"UserInteractMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
+        }
+
+
+
         private void Start_VRChat_OnUiManagerInit()
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -313,7 +354,6 @@
             }
 
             QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
-            UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
             InitMainsButtons();
             try
             {

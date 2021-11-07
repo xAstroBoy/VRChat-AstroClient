@@ -6,15 +6,15 @@
     internal class UserInterfaceObjects
     {
 
-        private static GameObject _ScreenFade;
+        private static Transform _ScreenFade;
 
-        internal static GameObject ScreenFade
+        internal static Transform ScreenFade
         {
             get
             {
                 if (_ScreenFade == null)
                 {
-                    _ScreenFade = GameObjectFinder.Find("UserInterface/PlayerDisplay/BlackFade/inverted_sphere");
+                    _ScreenFade = GameObjectFinder.Find("UserInterface/PlayerDisplay/BlackFade/inverted_sphere").transform;
                 }
 
                 return _ScreenFade;

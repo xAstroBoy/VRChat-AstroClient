@@ -9,7 +9,12 @@
 
     internal class PlayerSpooferUtils : GameEvents
     {
-        internal override void OnUpdate()
+        internal override void OnRoomJoined()
+        {
+            TryMakeInstance();
+        }
+
+        internal override void VRChat_OnUiManagerInit()
         {
             TryMakeInstance();
         }
@@ -26,6 +31,7 @@
                 else ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
             }
         }
+
 
         private static PlayerSpoofer Instance;
 

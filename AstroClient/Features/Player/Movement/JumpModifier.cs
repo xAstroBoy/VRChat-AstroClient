@@ -10,71 +10,63 @@
     {
         internal override void OnUpdate()
         {
-            CheckForJumpUpdates();
-            FixJumpMissing();
-        }
-
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
-        {
-            HasCheckedJump = false;
-        }
-
-        internal static void OnLevelLoad()
-        {
-            IsJumpOverriden = false;
-        }
-
-        private static void FixJumpMissing()
-        {
-            try
+            if (IsRocketJumpActive || IsJumpOverriden || IsUnlimitedJumpActive)
             {
-                if (Networking.LocalPlayer != null)
+                if (Utils.LocalPlayer != null)
                 {
-                    if (!HasCheckedJump)
+                    if (InputUtils.IsInputJumpPressed || InputUtils.IsImputJumpCalled)
                     {
-                        if (Networking.LocalPlayer.GetJumpImpulse() == 0f)
+                        if (!IsRocketJumpActive)
                         {
-                            HasCheckedJump = true;
-                            Networking.LocalPlayer.SetJumpImpulse(4);
+                            if (Utils.LocalPlayer.IsPlayerGrounded())
+                            {
+                                if (IsJumpOverriden)
+                                {
+                                    EmulatedJump();
+                                }
+                            }
+                            else
+                            {
+                                if (IsUnlimitedJumpActive)
+                                {
+                                    EmulatedJump();
+                                }
+
+                            }
                         }
+
                         else
-                        {
-                            HasCheckedJump = true;
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                HasCheckedJump = false;
-            }
-        }
-
-        internal static void CheckForJumpUpdates()
-        {
-            if (Utils.LocalPlayer != null)
-            {
-                if (InputUtils.IsImputJumpCalled)
-                {
-                    if (Utils.LocalPlayer.IsPlayerGrounded() && IsJumpOverriden)
-                    {
-                        EmulatedJump();
-                    }
-                    else
-                    {
-                        if (!Utils.LocalPlayer.IsPlayerGrounded() && IsUnlimitedJumpActive)
                         {
                             EmulatedJump();
                         }
                     }
                 }
+            }
+            //CodeDebugTools.CodeDebug.StopWatchDebug("JumpModifier OnUpdate ", () => {
+              
+            //});
+        }
 
-                if (InputUtils.IsInputJumpPressed&& IsRocketJumpActive)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            if (Networking.LocalPlayer != null)
+            {
+                if (Networking.LocalPlayer.GetJumpImpulse() == 0f)
                 {
-                    EmulatedJump();
+                    Networking.LocalPlayer.SetJumpImpulse(4);
                 }
             }
+
         }
+
+
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        {
+            IsJumpOverriden = false;
+        }
+
+
+
 
         internal static void EmulatedJump()
         {
@@ -86,7 +78,6 @@
             }
         }
 
-        private static bool HasCheckedJump = false;
 
         internal static QMSingleToggleButton UnlimitedJumpToggle;
 

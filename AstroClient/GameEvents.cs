@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using AstroClientCore.Events;
     using AstroMonos;
+    using AstroMonos.Components.Tools;
     using Cheetos;
     using Moderation;
     using Startup.Hooks;
@@ -26,6 +27,7 @@
 
             Main.Event_OnUpdate += Internal_OnUpdate;
             Main.Event_LateUpdate += Internal_OnLateUpdate;
+
             Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
             Main.Event_VRChat_OnQuickMenuInit += Internal_VRChat_OnQuickMenuInit;
             Main.Event_VRChat_OnActionMenuInit += Internal_VRChat_OnActionMenuInit;

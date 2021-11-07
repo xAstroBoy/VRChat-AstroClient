@@ -114,7 +114,7 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\RefCountedObject.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
-    <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
+    <Compile Include="AstroMonos\Components\Tools\GameObjectDisabler.cs" />
     <Compile Include="CodeDebugTools\CodeDebug.cs" />
     <Compile Include="MenuAPI\ActionMenu\Api\ActionMenuPage.cs" />
     <Compile Include="MenuAPI\ActionMenu\Api\AMUtils.cs" />
