@@ -86,22 +86,22 @@
             }
         }
 
-        internal override void OnUpdate()
+
+        internal override void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
         {
             // Prevent Jumping bug.
-            if(Frozen && FreezePlayerOnQMOpen)
+            if (Frozen && FreezePlayerOnQMOpen)
             {
-                if (InputUtils.IsImputJumpCalled || InputUtils.IsInputJumpPressed)
+                if (isClicked)
                 {
                     if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
                     {
                         Networking.LocalPlayer.SetVelocity(Vector3.zero);
                     }
                 }
-
             }
-        }
 
+        }
 
         internal static bool FreezePlayerOnQMOpen
         {

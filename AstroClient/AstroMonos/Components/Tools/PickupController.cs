@@ -13,8 +13,12 @@
     [RegisterComponent]
     public class PickupController : GameEventsBehaviour
     {
-        public PickupController(IntPtr ptr) : base(ptr)
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+
+        public PickupController(IntPtr obj0) : base(obj0)
         {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
         }
 
         // Use this for initialization
@@ -49,35 +53,41 @@
         private void Update()
         {
             PickupProtection();
-            AntiPickupTheft();
         }
 
-        private void AntiPickupTheft()
+
+
+        internal override void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
         {
-            if (isUsingUI) return;
-            if (!AntiTheft) return;
-            if (Utils.LocalPlayer == null) return;
-            bool TeleporToAntiTheft = false;
-            if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal)
+            if (AntiTheft)
             {
-                TeleporToAntiTheft = true;
-            }
-            if (TeleporToAntiTheft)
-            {
-                if (InputUtils.IsImputUseRightCalled)
+                if (isUsingUI) return;
+                if (isClicked)
                 {
-                    if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null) return;
-                    else gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
-                }
-                else if (InputUtils.IsImputUseLeftCalled)
-                {
-                    if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) != null)
+                    if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal)
                     {
-                        return;
+                        if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
+                        {
+                            gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
+                        }
                     }
-                    else
+                }
+            }
+        }
+
+        internal override void OnInput_UseLeft(bool isClicked, bool isDown, bool isUp)
+        {
+            if (AntiTheft)
+            {
+                if (isUsingUI) return;
+                if (isClicked)
+                {
+                    if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal)
                     {
-                        gameObject.TeleportToMe(HumanBodyBones.LeftHand, false, true);
+                        if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == null)
+                        {
+                            gameObject.TeleportToMe(HumanBodyBones.LeftHand, false, true);
+                        }
                     }
                 }
             }

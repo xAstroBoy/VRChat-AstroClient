@@ -1,51 +1,63 @@
 ﻿namespace AstroClient.Features.Player.Movement
 {
+    using System.Collections;
     using System.Collections.Generic;
     using AstroButtonAPI;
+    using AstroLibrary.Console;
     using AstroLibrary.Utility;
+    using MelonLoader;
     using UnityEngine;
     using VRC.SDKBase;
 
     internal class JumpModifier : GameEvents
     {
-        internal override void OnUpdate()
+
+
+        internal override void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
         {
-            if (IsRocketJumpActive || IsJumpOverriden || IsUnlimitedJumpActive)
+            if (isDown)
             {
-                if (Utils.LocalPlayer != null)
+                if (!IsRocketJumpActive)
                 {
-                    if (InputUtils.IsInputJumpPressed || InputUtils.IsImputJumpCalled)
+                    if (LocalPlayer.IsPlayerGrounded())
                     {
-                        if (!IsRocketJumpActive)
-                        {
-                            if (Utils.LocalPlayer.IsPlayerGrounded())
-                            {
-                                if (IsJumpOverriden)
-                                {
-                                    EmulatedJump();
-                                }
-                            }
-                            else
-                            {
-                                if (IsUnlimitedJumpActive)
-                                {
-                                    EmulatedJump();
-                                }
-
-                            }
-                        }
-
-                        else
+                        if (IsJumpOverriden)
                         {
                             EmulatedJump();
                         }
                     }
+                    else
+                    {
+                        if (IsUnlimitedJumpActive)
+                        {
+                            EmulatedJump();
+                        }
+
+                    }
+                }
+                else
+                {
+                    EmulatedJump();
                 }
             }
-            //CodeDebugTools.CodeDebug.StopWatchDebug("JumpModifier OnUpdate ", () => {
-              
-            //});
         }
+
+
+        private VRCPlayerApi _LocalPlayer;
+
+        private VRCPlayerApi LocalPlayer
+        {
+            get
+            {
+                if (_LocalPlayer == null)
+                {
+                    return _LocalPlayer = Utils.LocalPlayer;
+                }
+
+                return _LocalPlayer;
+            }
+        }
+
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -53,6 +65,9 @@
             {
                 if (Networking.LocalPlayer.GetJumpImpulse() == 0f)
                 {
+                    ModConsole.Warning("This World has Jump disabled by default.");
+                    PopupUtils.QueHudMessage($"This World has Jump disabled by default!");
+
                     Networking.LocalPlayer.SetJumpImpulse(4);
                 }
             }

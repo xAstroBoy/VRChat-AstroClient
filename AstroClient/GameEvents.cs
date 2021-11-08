@@ -74,6 +74,14 @@
             PhotonModerationHandler.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
             PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
             PhotonModerationHandler.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
+
+
+            InputPatches.Event_OnInput_Jump += Internal_OnInput_Jump;
+            InputPatches.Event_OnInput_UseLeft += Internal_OnInput_UseLeft;
+            InputPatches.Event_OnInput_UseRight += Internal_OnInput_UseRight;
+            InputPatches.Event_OnInput_GrabLeft += Internal_OnInput_GrabLeft;
+            InputPatches.Event_OnInput_GrabRight += Internal_OnInput_GrabRight;
+
         }
 
         private void Internal_OnShowScreen(object sender, ScreenEventArgs e)
@@ -90,7 +98,6 @@
         {
             OnStreamerLeft(e.player);
         }
-
         private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
         {
             OnMasterClientSwitched(e.player);
@@ -251,6 +258,28 @@
         {
             OnAvatarSpawn(e.Player, e.Avatar, e.VRCAvatarManager, e.VRC_AvatarDescriptor);
         }
+        private void Internal_OnInput_Jump(object sender, VRCInputArgs e)
+        {
+            OnInput_Jump(e.isClicked, e.isDown, e.isUp);
+        }
+
+        private void Internal_OnInput_UseLeft(object sender, VRCInputArgs e)
+        {
+            OnInput_UseLeft(e.isClicked, e.isDown, e.isUp);
+        }
+        private void Internal_OnInput_UseRight(object sender, VRCInputArgs e)
+        {
+            OnInput_UseRight(e.isClicked, e.isDown, e.isUp);
+        }
+        private void Internal_OnInput_GrabLeft(object sender, VRCInputArgs e)
+        {
+            OnInput_GrabLeft(e.isClicked, e.isDown, e.isUp);
+        }
+        private void Internal_OnInput_GrabRight(object sender, VRCInputArgs e)
+        {
+            OnInput_GrabRight(e.isClicked, e.isDown, e.isUp);
+        }
+
 
         internal virtual void VRChat_OnUiManagerInit()
         {
@@ -407,5 +436,28 @@
         internal virtual void OnTargetSet(Player player)
         {
         }
+
+        internal virtual void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
+        {
+        }
+
+
+        internal virtual void OnInput_UseLeft(bool isClicked, bool isDown, bool isUp)
+        {
+        }
+
+        internal virtual void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
+        {
+        }
+
+        internal virtual void OnInput_GrabLeft(bool isClicked, bool isDown, bool isUp)
+        {
+        }
+
+        internal virtual void OnInput_GrabRight(bool isClicked, bool isDown, bool isUp)
+        {
+        }
+
+
     }
 }

@@ -83,16 +83,12 @@
             for (int i = 0; i < list.Count; i++)
             {
                 var obj = list[i];
-                if (obj != null && obj.name.Equals(name))
+                if (obj != null && obj.name.isMatch(name))
                 {
                     return obj;
                 }
-                else
-                {
-                    ModConsole.DebugWarning($"[WARNING (FindRootSceneObject) ]  Root Gameobject name [ {name} ]  is Invalid, No Object Found!");
-                }
             }
-
+            ModConsole.DebugWarning($"[WARNING (FindRootSceneObject) ]  Root Gameobject name [ {name} ]  is Invalid, No Object Found!");
             return null;
         }
 

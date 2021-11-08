@@ -39,20 +39,6 @@
             return text;
         }
 
-        internal static GameObject FindObject(this GameObject parent, string name)
-        {
-            Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
-            for (int i = 0; i < trs.Length; i++)
-            {
-                Transform t = trs[i];
-                if (t.name == name)
-                {
-                    return t.gameObject;
-                }
-            }
-            return null;
-        }
-
         internal static AvatarData GetAvatarData(this ApiAvatar instance)
         {
             return new AvatarData()

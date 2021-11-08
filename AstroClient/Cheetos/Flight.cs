@@ -123,164 +123,164 @@
             NoClipEnabled = false;
         }
 
-        internal override void OnUpdate()
-        {
-                if (!isInRoom || PopupUtils.IsTyping)
-                {
-                    return;
-                }
+        //internal override void OnUpdate()
+        //{
+        //    if (!isInRoom || PopupUtils.IsTyping)
+        //    {
+        //        return;
+        //    }
 
-                try
-                {
-                    if (currentPlayer == null || transform == null)
-                    {
-                        currentPlayer = PlayerUtils.GetVRCPlayer();
-                        if (currentPlayer != null)
-                        {
-                            isInVR = currentPlayer.IsInVR();
-                            transform = Camera.main.transform;
-                        }
-                    }
+        //    try
+        //    {
+        //        if (currentPlayer == null || transform == null)
+        //        {
+        //            currentPlayer = PlayerUtils.GetVRCPlayer();
+        //            if (currentPlayer != null)
+        //            {
+        //                isInVR = currentPlayer.IsInVR();
+        //                transform = Camera.main.transform;
+        //            }
+        //        }
 
-                    if (!FindMods.IsNotoriousPresent && ConfigManager.General.KeyBinds)
-                    {
-                        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
-                        {
-                            FlyEnabled = !FlyEnabled;
-                            ExploitsMenu.RefreshFlightButtons();
-                        }
+        //        if (!FindMods.IsNotoriousPresent && ConfigManager.General.KeyBinds)
+        //        {
+        //            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+        //            {
+        //                FlyEnabled = !FlyEnabled;
+        //                ExploitsMenu.RefreshFlightButtons();
+        //            }
 
-                        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
-                        {
-                            NoClipEnabled = !NoClipEnabled;
-                            ExploitsMenu.RefreshFlightButtons();
-                        }
-                    }
+        //            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
+        //            {
+        //                NoClipEnabled = !NoClipEnabled;
+        //                ExploitsMenu.RefreshFlightButtons();
+        //            }
+        //        }
 
-                    if (FlyEnabled)
-                    {
-                        float flySpeed = isInVR ? ConfigManager.Flight.VRFlySpeed : ConfigManager.Flight.DesktopFlySpeed;
+        //        if (FlyEnabled)
+        //        {
+        //            float flySpeed = isInVR ? ConfigManager.Flight.VRFlySpeed : ConfigManager.Flight.DesktopFlySpeed;
 
-                        if (Input.GetKey(KeyCode.LeftShift))
-                        {
-                            flySpeed *= 2;
-                        }
+        //            if (Input.GetKey(KeyCode.LeftShift))
+        //            {
+        //                flySpeed *= 2;
+        //            }
 
-                        if (ConfigManager.Flight.BasicFly)
-                        {
-                            if (isInVR)
-                            {
-                                if (Math.Abs(Input.GetAxis("Vertical")) != 0f)
-                                    currentPlayer.transform.position += currentPlayer.transform.forward *
-                                                                        flySpeed * Time.deltaTime *
-                                                                        Input.GetAxis("Vertical");
+        //            if (ConfigManager.Flight.BasicFly)
+        //            {
+        //                if (isInVR)
+        //                {
+        //                    if (Math.Abs(Input.GetAxis("Vertical")) != 0f)
+        //                        currentPlayer.transform.position += currentPlayer.transform.forward *
+        //                                                            flySpeed * Time.deltaTime *
+        //                                                            Input.GetAxis("Vertical");
 
-                                if (Math.Abs(Input.GetAxis("Horizontal")) != 0f)
-                                    currentPlayer.transform.position += currentPlayer.transform.right *
-                                                                        flySpeed * Time.deltaTime *
-                                                                        Input.GetAxis("Horizontal");
+        //                    if (Math.Abs(Input.GetAxis("Horizontal")) != 0f)
+        //                        currentPlayer.transform.position += currentPlayer.transform.right *
+        //                                                            flySpeed * Time.deltaTime *
+        //                                                            Input.GetAxis("Horizontal");
 
-                                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
-                                    currentPlayer.transform.position += currentPlayer.transform.up *
-                                                                        flySpeed * Time.deltaTime *
-                                                                        Input.GetAxisRaw(
-                                                                            "Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
-                                    currentPlayer.transform.position += currentPlayer.transform.up *
-                                                                        flySpeed * Time.deltaTime *
-                                                                        Input.GetAxisRaw(
-                                                                            "Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                            }
-                            else
-                            {
-                                if (Input.GetKey(KeyCode.E))
-                                    currentPlayer.transform.position += currentPlayer.transform.up *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
+        //                        currentPlayer.transform.position += currentPlayer.transform.up *
+        //                                                            flySpeed * Time.deltaTime *
+        //                                                            Input.GetAxisRaw(
+        //                                                                "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+        //                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
+        //                        currentPlayer.transform.position += currentPlayer.transform.up *
+        //                                                            flySpeed * Time.deltaTime *
+        //                                                            Input.GetAxisRaw(
+        //                                                                "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+        //                }
+        //                else
+        //                {
+        //                    if (Input.GetKey(KeyCode.E))
+        //                        currentPlayer.transform.position += currentPlayer.transform.up *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.Q))
-                                    currentPlayer.transform.position += currentPlayer.transform.up * -1 *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetKey(KeyCode.Q))
+        //                        currentPlayer.transform.position += currentPlayer.transform.up * -1 *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.W))
-                                    currentPlayer.transform.position += currentPlayer.transform.forward *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetKey(KeyCode.W))
+        //                        currentPlayer.transform.position += currentPlayer.transform.forward *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.A))
-                                    currentPlayer.transform.position += currentPlayer.transform.right * -1f *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetKey(KeyCode.A))
+        //                        currentPlayer.transform.position += currentPlayer.transform.right * -1f *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.D))
-                                    currentPlayer.transform.position += currentPlayer.transform.right *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetKey(KeyCode.D))
+        //                        currentPlayer.transform.position += currentPlayer.transform.right *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.S))
-                                    currentPlayer.transform.position += currentPlayer.transform.forward * -1f *
-                                                                        flySpeed * Time.deltaTime;
-                            }
-                        }
-                        else
-                        {
-                            if (isInVR)
-                            {
-                                if (Math.Abs(Input.GetAxis("Vertical")) != 0f)
-                                    currentPlayer.transform.position += transform.transform.forward *
-                                                                        flySpeed * Time.deltaTime *
-                                                                        Input.GetAxis("Vertical");
+        //                    if (Input.GetKey(KeyCode.S))
+        //                        currentPlayer.transform.position += currentPlayer.transform.forward * -1f *
+        //                                                            flySpeed * Time.deltaTime;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                if (isInVR)
+        //                {
+        //                    if (Math.Abs(Input.GetAxis("Vertical")) != 0f)
+        //                        currentPlayer.transform.position += transform.transform.forward *
+        //                                                            flySpeed * Time.deltaTime *
+        //                                                            Input.GetAxis("Vertical");
 
-                                if (Math.Abs(Input.GetAxis("Horizontal")) != 0f)
-                                    currentPlayer.transform.position += transform.transform.right *
-                                                                        flySpeed * Time.deltaTime *
-                                                                        Input.GetAxis("Horizontal");
+        //                    if (Math.Abs(Input.GetAxis("Horizontal")) != 0f)
+        //                        currentPlayer.transform.position += transform.transform.right *
+        //                                                            flySpeed * Time.deltaTime *
+        //                                                            Input.GetAxis("Horizontal");
 
-                                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
-                                    currentPlayer.transform.position += transform.transform.up *
-                                                                        flySpeed * Time.deltaTime *
-                                                                        Input.GetAxisRaw(
-                                                                            "Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                                if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
-                                    currentPlayer.transform.position += transform.transform.up *
-                                                                        flySpeed * Time.deltaTime *
-                                                                        Input.GetAxisRaw(
-                                                                            "Oculus_CrossPlatform_SecondaryThumbstickVertical");
-                            }
-                            else
-                            {
-                                if (Input.GetKey(KeyCode.E))
-                                    currentPlayer.transform.position += transform.transform.up *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") < 0f)
+        //                        currentPlayer.transform.position += transform.transform.up *
+        //                                                            flySpeed * Time.deltaTime *
+        //                                                            Input.GetAxisRaw(
+        //                                                                "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+        //                    if (Input.GetAxis("Oculus_CrossPlatform_SecondaryThumbstickVertical") > 0f)
+        //                        currentPlayer.transform.position += transform.transform.up *
+        //                                                            flySpeed * Time.deltaTime *
+        //                                                            Input.GetAxisRaw(
+        //                                                                "Oculus_CrossPlatform_SecondaryThumbstickVertical");
+        //                }
+        //                else
+        //                {
+        //                    if (Input.GetKey(KeyCode.E))
+        //                        currentPlayer.transform.position += transform.transform.up *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.Q))
-                                    currentPlayer.transform.position += transform.transform.up * -1 *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetKey(KeyCode.Q))
+        //                        currentPlayer.transform.position += transform.transform.up * -1 *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.W))
-                                    currentPlayer.transform.position += transform.transform.forward *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetKey(KeyCode.W))
+        //                        currentPlayer.transform.position += transform.transform.forward *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.A))
-                                    currentPlayer.transform.position += transform.transform.right * -1f *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetKey(KeyCode.A))
+        //                        currentPlayer.transform.position += transform.transform.right * -1f *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.D))
-                                    currentPlayer.transform.position += transform.transform.right *
-                                                                        flySpeed * Time.deltaTime;
+        //                    if (Input.GetKey(KeyCode.D))
+        //                        currentPlayer.transform.position += transform.transform.right *
+        //                                                            flySpeed * Time.deltaTime;
 
-                                if (Input.GetKey(KeyCode.S))
-                                    currentPlayer.transform.position += transform.transform.forward * -1f *
-                                                                        flySpeed * Time.deltaTime;
-                            }
-                        }
-                    }
+        //                    if (Input.GetKey(KeyCode.S))
+        //                        currentPlayer.transform.position += transform.transform.forward * -1f *
+        //                                                            flySpeed * Time.deltaTime;
+        //                }
+        //            }
+        //        }
 
-                    //if (motionState != null)
-                    //{
-                    //	motionState.Reset();
-                    //}
-                }
-                catch (Exception e)
-                {
-                    ModConsole.ErrorExc(e);
-                }
-        }
+        //        //if (motionState != null)
+        //        //{
+        //        //	motionState.Reset();
+        //        //}
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        ModConsole.ErrorExc(e);
+        //    }
+        //}
     }
 }

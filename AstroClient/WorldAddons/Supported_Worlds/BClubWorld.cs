@@ -21,6 +21,8 @@
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Spoofer;
     using AstroMonos.Components.Tools.Listeners;
+    using CheetoLibrary;
+    using Discord;
 
     #endregion Imports
 
@@ -30,6 +32,12 @@
         internal static GameObject VIPInsideDoor;
         internal static GameObject VIPButton;
         internal static GameObject VIPControls;
+        internal static GameObject FlairBtnTablet;
+        internal static GameObject ElevatorFlairBtn;
+        private static GameObject PenthouseRoot;
+        internal static GameObject GlobalUdon;
+        internal static GameObject LobbyRoot;
+
 
         internal static QMNestedButton BClubExploitsPage;
 
@@ -534,7 +542,6 @@
         private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
         private static UdonBehaviour_Cached VoiceAction;
 
-        private static GameObject PenthouseRoot;
 
         internal static GameObject GetIndicator(int id)
         {
@@ -552,12 +559,44 @@
                 throw new IndexOutOfRangeException();
             }
         }
+        private static IEnumerator BypassElevator()
+        {
+            ModConsole.DebugLog("Elevator Bypass Started", System.Drawing.Color.Aquamarine);
+            var elevator = LobbyRoot.transform.FindObject("New Part/Udon/Warning");
+            
+            while (elevator == null) yield return new WaitForSeconds(0.001f);
+            while (elevator.gameObject.active)
+            {
+                var udons = elevator.GetComponentsInChildren<UdonBehaviour>();
+                foreach (var udon in udons)
+                {
+                    if (udon != null)
+                    {
+                        udon.Interact();
+                    }
+                }
+
+                if (!elevator.gameObject.active)
+                {
+                    ModConsole.DebugLog("Unable to Bypass Elevator Warning.", System.Drawing.Color.Aquamarine);
+                    yield return new WaitForSeconds(0.5f);
+                }
+                else
+                {
+                    ModConsole.DebugLog("Bypassed Elevator Warning!", System.Drawing.Color.Aquamarine);
+                    yield break;
+                }
+            }
+
+            yield return null;
+        }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.BClub)
             {
-                isCurrentWorld = true;
+
+                    isCurrentWorld = true;
                 UdonParser.CleanedWorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
@@ -589,6 +628,8 @@
 
                 MiscUtils.DelayFunction(2f, () =>
                 {
+                    ModConsole.DebugLog("Rainbow Exploit!");
+
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Red"));
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Red"));
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Cyan"));
@@ -611,19 +652,37 @@
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
                 });
 
-                var Lobby = GameObjectFinder.FindRootSceneObject("Lobby");
-                if (Lobby != null)
+                LobbyRoot = GameObjectFinder.FindRootSceneObject("Lobby");
+                if (LobbyRoot != null)
                 {
-                    var fuckthiscancer = Lobby.transform.FindObject("Entrance Corridor").FindObject("Cancer Spawn");
+                    var fuckthiscancer = LobbyRoot.transform.FindObject("New Part").FindObject("Cancer Spawn");
                     if(fuckthiscancer != null)
                     {
                         fuckthiscancer.DestroyMeLocal();
                     }
 
-                    VIPControls = Lobby.transform.FindObject("Udon/MyI Control Panel").gameObject;
+
+                    VIPControls = LobbyRoot.transform.FindObject("Udon/MyI Control Panel").gameObject;
                     if (VIPControls != null)
                     {
                         VIPControls.SetActive(true);
+                    }
+
+                    ElevatorFlairBtn = LobbyRoot.transform.FindObject("New Part/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide").gameObject;
+                    if (ElevatorFlairBtn != null)
+                    {
+                        ElevatorFlairBtn.SetActive(true);
+                    }
+
+                }
+
+                GlobalUdon = GameObjectFinder.FindRootSceneObject("Udon");
+                if (GlobalUdon != null)
+                {
+                    FlairBtnTablet = GlobalUdon.transform.FindObject("Main Controls/New Contents/Pages/World/Buttons/Own Flair - BlueButtonWide").gameObject;
+                    if (FlairBtnTablet != null)
+                    {
+                        FlairBtnTablet.SetActive(true);
                     }
                 }
                 try
@@ -636,10 +695,8 @@
                     _ = CreateButtonGroup(5, new Vector3(-95.01436f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
                     _ = CreateButtonGroup(6, new Vector3(-93.28891f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
 
-                    // Penthouse/Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/VIP Out Walls
-
-                    // VIP Room
-                    VIPRoom = GameObjectFinder.FindRootSceneObject("Bedroom VIP");
+                    // VIP Room 
+                    VIPRoom = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP").gameObject;
                     if (VIPRoom == null)
                     {
                         ModConsole.Error("VIP Bedroom was not found!");
@@ -688,31 +745,16 @@
 
         private static IEnumerator RestoreFlairButton()
         {
-            var flairButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide");
+            var flairButton = LobbyRoot.transform.FindObject("New Part/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide");
             if (flairButton != null)
             {
-                flairButton.SetActive(true);
+                flairButton.gameObject.SetActive(true);
                 yield break;
             }
 
             yield return new WaitForSeconds(0.5f);
         }
 
-        private static IEnumerator BypassElevator()
-        {
-            var elevatorButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Warning/Enter - BlueButtonWide/Button Interactable");
-            if (elevatorButton != null)
-            {
-                var udonComp = elevatorButton.GetComponent<UdonBehaviour>();
-                if (udonComp != null)
-                {
-                    udonComp.Interact();
-                    yield break;
-                }
-            }
-
-            yield return new WaitForSeconds(0.5f);
-        }
 
         private static void RestoreVIPButton()
         {
@@ -730,11 +772,11 @@
 
         private static void CreateVIPUnlockButton(Vector3 position, Quaternion rotation)
         {
-            VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
+            VIPInsideDoor = VIPRoom.transform.FindObject("Door001 (1)").gameObject;
 
             if (VIPInsideDoor != null)
             {
-                _ = new WorldButton(position, rotation, "Lock/Unlock\nVIP Room", () =>
+                _ = new WorldButton(position, rotation, Environment.NewLine + "Lock/Unlock\nVIP Room", () =>
                 {
                     ToggleDoor(7);
                 });
@@ -762,12 +804,12 @@
         // TODO : FIX THE UDON EVENT OR MAKE A LOCAL TELEPORT AND ENABLE THE ROOM WITH ONE BUTTON.
         private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
-            GameObject nlobby = GameObjectFinder.FindRootSceneObject("Penthouse");
+            GameObject Penthouse = GameObjectFinder.FindRootSceneObject("Penthouse");
             GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
 
             if (Bedrooms != null)
             {
-                var room = nlobby.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
+                var room = Penthouse.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
                 var room_BedroomPreview = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
                 var room_ToggleLooking = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
                 var room_ToggleLock = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
@@ -1056,7 +1098,7 @@
             }
             else
             {
-                if (nlobby == null)
+                if (Penthouse == null)
                 {
                     ModConsole.Error("Failed to Find Penthouse!");
                 }

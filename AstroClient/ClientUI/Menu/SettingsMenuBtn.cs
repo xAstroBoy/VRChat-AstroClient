@@ -21,8 +21,8 @@
 
             QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Save Config", () => { ConfigManager.SaveAll(); }, "Save Config", Color.magenta, null, true);
 
-            QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
-            playerListToggle.SetToggleState(ConfigManager.UI.ShowPlayersMenu, false);
+            //QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
+            //playerListToggle.SetToggleState(ConfigManager.UI.ShowPlayersMenu, false);
 
             QMSingleToggleButton joinLeaveToggle = new QMSingleToggleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.General.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves", Color.green, Color.red, null, ConfigManager.General.JoinLeave, true);
             joinLeaveToggle.SetToggleState(ConfigManager.General.JoinLeave, false);
@@ -89,7 +89,7 @@
             removeGalleryButton.SetToggleState(ConfigManager.UI.RemoveGalleryButton, false);
 
             // Fly and ESP
-            FlightMenu.InitButtons(sub, 1f, 1.5f, true);
+            //FlightMenu.InitButtons(sub, 1f, 1.5f, true);
             PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
 
             // Nameplate Toggle

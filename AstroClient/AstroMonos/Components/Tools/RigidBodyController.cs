@@ -10,8 +10,12 @@
     [RegisterComponent]
     public class RigidBodyController : GameEventsBehaviour
     {
-        public RigidBodyController(IntPtr ptr) : base(ptr)
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+
+        public RigidBodyController(IntPtr obj0) : base(obj0)
         {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
         }
 
         // Use this for initialization
