@@ -9,7 +9,7 @@
         {
             if (UserInterfaceObjects.ScreenFade != null)
             {
-                UserInterfaceObjects.ScreenFade.GetOrAddComponent<GameObjectDisabler>();
+                UserInterfaceObjects.ScreenFade.GetOrAddComponent<Disabler>();
             }
         }
     }

@@ -4,12 +4,12 @@ namespace AstroClient.AstroMonos.Components.Tools
     using UnityEngine;
 
     [RegisterComponent]
-    public class GameObjectDisabler : MonoBehaviour
+    public class Disabler : MonoBehaviour
     {
 
         public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
-        public GameObjectDisabler(IntPtr obj0) : base(obj0)
+        public Disabler(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);

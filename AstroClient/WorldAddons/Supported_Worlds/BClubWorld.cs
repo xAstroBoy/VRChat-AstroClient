@@ -20,6 +20,7 @@
     using AstroClient.Udon.UdonEditor;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Spoofer;
+    using AstroMonos.Components.Tools;
     using AstroMonos.Components.Tools.Listeners;
     using CheetoLibrary;
     using Discord;
@@ -37,6 +38,9 @@
         private static GameObject PenthouseRoot;
         internal static GameObject GlobalUdon;
         internal static GameObject LobbyRoot;
+
+
+
 
 
         internal static QMNestedButton BClubExploitsPage;
@@ -666,12 +670,14 @@
                     if (VIPControls != null)
                     {
                         VIPControls.SetActive(true);
+                    VIPControls.GetOrAddComponent<Enabler>();
                     }
 
                     ElevatorFlairBtn = LobbyRoot.transform.FindObject("New Part/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide").gameObject;
                     if (ElevatorFlairBtn != null)
                     {
                         ElevatorFlairBtn.SetActive(true);
+                    ElevatorFlairBtn.GetOrAddComponent<Enabler>();
                     }
 
                 }
@@ -683,6 +689,8 @@
                     if (FlairBtnTablet != null)
                     {
                         FlairBtnTablet.SetActive(true);
+                        FlairBtnTablet.GetOrAddComponent<Enabler>();
+
                     }
                 }
                 try
@@ -712,7 +720,8 @@
                 ModConsole.Log("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
                 _ = MelonCoroutines.Start(BypassElevator());
-                _ = MelonCoroutines.Start(RestoreFlairButton());
+                _ = MelonCoroutines.Start(EnableElevatorFlairBtn());
+                _ = MelonCoroutines.Start(EnableTabletFlairBtn());
                 _ = MelonCoroutines.Start(UpdateLoop());
             }
         }
@@ -743,18 +752,37 @@
             }
         }
 
-        private static IEnumerator RestoreFlairButton()
+        private static IEnumerator EnableElevatorFlairBtn()
         {
-            var flairButton = LobbyRoot.transform.FindObject("New Part/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide");
-            if (flairButton != null)
+            while (ElevatorFlairBtn == null) yield return null;
+            for (; ; )
             {
-                flairButton.gameObject.SetActive(true);
-                yield break;
+                if (!isCurrentWorld) yield break;
+                if (!ElevatorFlairBtn.active)
+                {
+                    ElevatorFlairBtn.SetActive(true);
+                }
+                yield return new WaitForSeconds(5f);
             }
 
-            yield return new WaitForSeconds(0.5f);
-        }
+            yield break;
+        } 
 
+        private static IEnumerator EnableTabletFlairBtn()
+        {
+            while (FlairBtnTablet == null) yield return null;
+            for (; ; )
+            {
+                if (!isCurrentWorld) yield break;
+                if (!FlairBtnTablet.active)
+                {
+                    FlairBtnTablet.SetActive(true);
+                }
+                yield return new WaitForSeconds(5f);
+            }
+
+            yield break;
+        }
 
         private static void RestoreVIPButton()
         {

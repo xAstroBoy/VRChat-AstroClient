@@ -24,7 +24,7 @@
                 yield return new WaitForSeconds(0.001f);
             if (VRChatObjects.UICloneAvatarButton != null)
             {
-                VRChatObjects.UICloneAvatarButton.GetOrAddComponent<GameObjectDisabler>();
+                VRChatObjects.UICloneAvatarButton.GetOrAddComponent<Disabler>();
             }
 
             yield return null;

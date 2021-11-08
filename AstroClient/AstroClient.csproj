@@ -107,6 +107,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\UdonTycoon\UdonTycoon_LevelController.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\UdonTycoon\UdonTycoon_PolyCollector.cs" />
     <Compile Include="AstroMonos\Components\Player\Movement\MovementManager.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Enabler.cs" />
     <Compile Include="ClientUI\ActionMenu\ESPModule.cs" />
     <Compile Include="ClientUI\ActionMenu\MovementModule.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Avatar.cs" />
@@ -115,7 +116,7 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\RefCountedObject.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
-    <Compile Include="AstroMonos\Components\Tools\GameObjectDisabler.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
     <Compile Include="CodeDebugTools\CodeDebug.cs" />
     <Compile Include="MenuAPI\ActionMenu\Api\ActionMenuPage.cs" />
     <Compile Include="MenuAPI\ActionMenu\Api\AMUtils.cs" />
