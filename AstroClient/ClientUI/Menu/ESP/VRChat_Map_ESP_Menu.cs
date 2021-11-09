@@ -16,16 +16,16 @@
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
 
-            PickupESPToggleBtn = new QMSingleToggleButton(main, 1, 0f, "Pickup ESP ON", new Action(() => { Toggle_Pickup_ESP = true; }), "Pickup ESP OFF", new Action(() => { Toggle_Pickup_ESP = false; }), "Toggle Pickup ESP", Color.green, Color.red, null, false, true);
-            VRCInteractableESPToggleBtn = new QMSingleToggleButton(main, 1, 0.5f, "VRC Interactable ESP ON", new Action(() => { Toggle_VRCInteractable_ESP = true; }), "VRC Interactable ESP OFF", new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP", Color.green, Color.red, null, false, true);
-            TriggerESPToggleBtn = new QMSingleToggleButton(main, 1, 1f, "Trigger ESP ON", new Action(() => { Toggle_Trigger_ESP = true; }), "Trigger ESP OFF", new Action(() => { Toggle_Trigger_ESP = false; }), "Toggle Trigger ESP", Color.green, Color.red, null, false, true);
-            UdonBehaviourESPToggleBtn = new QMSingleToggleButton(main, 1, 1.5f, "Udon Behaviour ESP ON", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), "Udon Behaviour ESP OFF", new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP", Color.green, Color.red, null, false, true);
+            PickupESPToggleBtn = new QMSingleButton(main, 1, 0f, "Pickup ESP ON", new Action(() => { Toggle_Pickup_ESP = true; }), "Pickup ESP OFF", new Action(() => { Toggle_Pickup_ESP = false; }), "Toggle Pickup ESP", Color.green, Color.red, null, false, true);
+            VRCInteractableESPToggleBtn = new QMSingleButton(main, 1, 0.5f, "VRC Interactable ESP ON", new Action(() => { Toggle_VRCInteractable_ESP = true; }), "VRC Interactable ESP OFF", new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP", Color.green, Color.red, null, false, true);
+            TriggerESPToggleBtn = new QMSingleButton(main, 1, 1f, "Trigger ESP ON", new Action(() => { Toggle_Trigger_ESP = true; }), "Trigger ESP OFF", new Action(() => { Toggle_Trigger_ESP = false; }), "Toggle Trigger ESP", Color.green, Color.red, null, false, true);
+            UdonBehaviourESPToggleBtn = new QMSingleButton(main, 1, 1.5f, "Udon Behaviour ESP ON", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), "Udon Behaviour ESP OFF", new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP", Color.green, Color.red, null, false, true);
         }
 
-        private static QMSingleToggleButton VRCInteractableESPToggleBtn;
-        private static QMSingleToggleButton PickupESPToggleBtn;
-        private static QMSingleToggleButton TriggerESPToggleBtn;
-        private static QMSingleToggleButton UdonBehaviourESPToggleBtn;
+        private static QMSingleButton VRCInteractableESPToggleBtn;
+        private static QMSingleButton PickupESPToggleBtn;
+        private static QMSingleButton TriggerESPToggleBtn;
+        private static QMSingleButton UdonBehaviourESPToggleBtn;
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {

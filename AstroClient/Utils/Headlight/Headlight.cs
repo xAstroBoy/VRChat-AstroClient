@@ -54,8 +54,8 @@
             }
         }
 
-        internal static QMSingleToggleButton DesktopHeadlightBtn;
-        internal static QMSingleToggleButton VRHeadlightBtn;
+        internal static QMSingleButton DesktopHeadlightBtn;
+        internal static QMSingleButton VRHeadlightBtn;
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -72,13 +72,13 @@
             QMNestedButton HeadlightConfig = new QMNestedButton(menu, x, y, "Custom Headlight", "Headlight Settings", null, null, null, null, btnHalf);
 
             QMNestedButton HeadlightColor = new QMNestedButton(HeadlightConfig, 4, 0, "Headlight Color", "Configure the Color For the Headlight", null, null, null);
-            DesktopHeadlightBtn = new QMSingleToggleButton(HeadlightConfig, 0, 0, "Desktop Headlight On", () =>
+            DesktopHeadlightBtn = new QMSingleButton(HeadlightConfig, 0, 0, "Desktop Headlight On", () =>
            {
                DesktopHeadlightBool = true;
            }, "Desktop Headlight Off", () => { DesktopHeadlightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);
             DesktopHeadlightBtn.SetResizeTextForBestFit(true);
 
-            VRHeadlightBtn = new QMSingleToggleButton(HeadlightConfig, 0, 0.5f, "VR Headlight On", () =>
+            VRHeadlightBtn = new QMSingleButton(HeadlightConfig, 0, 0.5f, "VR Headlight On", () =>
             {
                 VRHeadLightBool = true;
             }, "VR Headlight Off", () => { VRHeadLightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);

@@ -16,9 +16,9 @@
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Movement Options", "Control Your Movements", null, null, null, null, btnHalf);
-            JumpModifier.UnlimitedJumpToggle = new QMSingleToggleButton(temp, 1, 0, "Unlimited Jumps", new Action(() => { JumpModifier.IsUnlimitedJumpActive = true; }), "Unlimited Jumps OFF", new Action(() => { JumpModifier.IsUnlimitedJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
+            JumpModifier.UnlimitedJumpToggle = new QMSingleButton(temp, 1, 0, "Unlimited Jumps", new Action(() => { JumpModifier.IsUnlimitedJumpActive = true; }), "Unlimited Jumps OFF", new Action(() => { JumpModifier.IsUnlimitedJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
             JumpModifier.UnlimitedJumpToggle.SetToggleState(ConfigManager.Movement.UnlimitedJump);
-            JumpModifier.RocketJumpToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Rocket Jump", new Action(() => { JumpModifier.IsRocketJumpActive = true; }), "Rocket Jump", new Action(() => { JumpModifier.IsRocketJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
+            JumpModifier.RocketJumpToggle = new QMSingleButton(temp, 1, 0.5f, "Rocket Jump", new Action(() => { JumpModifier.IsRocketJumpActive = true; }), "Rocket Jump", new Action(() => { JumpModifier.IsRocketJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
             JumpModifier.RocketJumpToggle.SetToggleState(ConfigManager.Movement.RocketJump);
 
             JumpModifier.JumpOverrideToggle = new QMToggleButton(temp, 2, 0, "Jump Override ON", new Action(() => { JumpModifier.IsJumpOverriden = true; }), "Jump Override OFF", new Action(() => { JumpModifier.IsJumpOverriden = false; }), "Allows you to Bypass jump Block in certain worlds.", null, null, null, false);
