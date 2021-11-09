@@ -7,6 +7,8 @@
     using AstroClientCore.Events;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
+    using global::AstroLibrary.Console;
+    using global::AstroLibrary.Extensions;
     using Harmony;
 
     #endregion Imports

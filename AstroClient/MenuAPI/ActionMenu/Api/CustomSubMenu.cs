@@ -1,6 +1,6 @@
 using System;
-using ActionMenuApi.Helpers;
-using ActionMenuApi.Managers;
+using AstroActionMenu.Helpers;
+using AstroActionMenu.Managers;
 using MelonLoader;
 using UnityEngine;
 using VRC.SDK3.Avatars.ScriptableObjects;
@@ -9,6 +9,8 @@ using VRC.SDK3.Avatars.ScriptableObjects;
 
 namespace AstroActionMenu.Api
 {
+    using Helpers;
+
     /// <summary>
     ///     Class for adding buttons,toggles,radial puppets inside of a custom submenu
     /// </summary>

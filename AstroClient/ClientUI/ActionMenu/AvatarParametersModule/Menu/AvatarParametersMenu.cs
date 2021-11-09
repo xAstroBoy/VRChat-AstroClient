@@ -6,9 +6,9 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
     using System.Reflection;
     using System.Runtime.InteropServices;
     using AstroActionMenu.Api;
-    using AstroLibrary.Console;
     using AstroMonos.Components.Tools.Listeners;
     using CheetoLibrary;
+    using global::AstroLibrary.Console;
     using MelonLoader;
     using UnityEngine;
     using VRC;
@@ -155,8 +155,8 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
                                             CustomSubMenu.AddToggle(
                                                 control.TruncatedName(),
                                                 current_value == target_value,
-                                                param.prop_EnumNPublicSealedvaUnBoInFl5vUnique_0 ==
-                                                AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Bool
+                                                param.field_Private_ParameterType_0 ==
+                                                AvatarParameter.ParameterType.Bool
                                                     ? SetBool
                                                     : SetIntFloat,
                                                 control.icon ?? default_expression);
