@@ -1,4 +1,4 @@
-﻿namespace QuickMenuAPI
+﻿namespace AstroButtonAPI
 {
     using AstroClient;
     using global::AstroLibrary.Extensions;

@@ -132,13 +132,13 @@
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 3, 0f, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 3, 0.5f, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!", null, null, true);
 
-            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            HammerToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            HealthToolBtn = new QMSingleButton(SuperTowerDefensecheatPage, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            HammerToolBtn = new QMSingleButton(SuperTowerDefensecheatPage, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             HammerToolBtn.SetResizeTextForBestFit(true);
             HealthToolBtn.SetResizeTextForBestFit(true);
-            AutomaticWaveBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            AutomaticWaveBtn = new QMSingleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             AutomaticWaveBtn.SetResizeTextForBestFit(true);
-            AutomaticGodModebnt = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            AutomaticGodModebnt = new QMSingleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             AutomaticGodModebnt.SetResizeTextForBestFit(true);
         }
 
@@ -359,12 +359,12 @@
         internal static SuperTowerDefense_HealthEditor HealthEditor { get; set; }
         internal static SuperTowerDefense_BankEditor BankEditor { get; set; }
 
-        private static QMSingleToggleButton HealthToolBtn { get; set; }
-        private static QMSingleToggleButton HammerToolBtn { get; set; }
+        private static QMSingleButton HealthToolBtn { get; set; }
+        private static QMSingleButton HammerToolBtn { get; set; }
 
-        private static QMSingleToggleButton AutomaticWaveBtn { get; set; }
+        private static QMSingleButton AutomaticWaveBtn { get; set; }
 
-        private static QMSingleToggleButton AutomaticGodModebnt { get; set; }
+        private static QMSingleButton AutomaticGodModebnt { get; set; }
 
         private static object cancellationwavetoken { get; set; }
 

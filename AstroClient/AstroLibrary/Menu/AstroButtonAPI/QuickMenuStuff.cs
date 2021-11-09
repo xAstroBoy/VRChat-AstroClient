@@ -1,4 +1,4 @@
-﻿namespace QuickMenuAPI
+﻿namespace AstroButtonAPI
 {
     using UnityEngine;
     using UnityEngine.UI;

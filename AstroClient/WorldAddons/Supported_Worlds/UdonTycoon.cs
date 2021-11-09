@@ -6,13 +6,13 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
+    using AstroLibrary.Menu.AstroButtonAPI;
     using AstroLibrary.Utility;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
     using CheetoLibrary;
     using MelonLoader;
-    using QuickMenuAPI;
     using UnityEngine;
     using Variables;
     using VRC.Udon.Serialization.OdinSerializer.Utilities;

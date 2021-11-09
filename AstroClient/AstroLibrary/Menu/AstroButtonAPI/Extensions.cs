@@ -1,4 +1,4 @@
-﻿namespace QuickMenuAPI
+﻿namespace AstroButtonAPI
 {
     using System;
     using CheetoLibrary;
@@ -21,6 +21,22 @@
                 }
             }
         }
+
+        internal static void LoadSprite(this GameObject Parent, byte[] LoadSprite, string name)
+        {
+            foreach (var image in Parent.GetComponentsInChildren<Image>(true))
+            {
+                if (image.name == name)// allows background image change
+                {
+                    image.gameObject.SetActive(true);
+                    var texture = CheetoUtils.LoadPNG(LoadSprite);
+                    image.overrideSprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+
+                }
+            }
+        }
+
+
 
         internal static Sprite ToSprite(this Texture2D texture)
         {

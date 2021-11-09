@@ -1,20 +1,20 @@
-﻿namespace QuickMenuAPI
+﻿namespace AstroButtonAPI
 {
     using System;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
 
-    internal class QMSingleButton : QMButtonBase
+    internal class QMSingleToggle : QMButtonBase
     {
         internal bool State = false;
         internal TMPro.TextMeshProUGUI Text;
-        public QMSingleButton(QMWings Parent, string btnText, System.Action btnAction, string btnToolTip, bool IsToggle = false, string TextColor = null)
+        public QMSingleToggle(QMWings Parent, string btnText, System.Action btnAction, string btnToolTip, bool IsToggle = false, string TextColor = null)
         {
             initButton2(Parent.WingPage.gameObject, btnText, btnAction, btnToolTip, IsToggle);
         }
 
-        public QMSingleButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
+        public QMSingleToggle(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
         {
             btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
@@ -38,7 +38,7 @@
             }
         }
 
-        public QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, String btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
+        public QMSingleToggle(string btnMenu, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, String btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
         {
             btnQMLoc = btnMenu;
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);

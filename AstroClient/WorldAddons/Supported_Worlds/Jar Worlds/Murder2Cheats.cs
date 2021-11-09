@@ -247,8 +247,8 @@
             _ = new QMSingleButton(MurderItemWatcherMenu, 3, 1, "Knifes Watchs you!", new Action(() => { Knifes.WatchSelf(); }), "Make Knifes Watch you", null, null);
             _ = new QMSingleButton(MurderItemWatcherMenu, 4, 1, "Clues Watchs you!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you", null, null);
 
-            GodModeMurder2 = new QMSingleToggleButton(Murder2CheatPage, 4, 0, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
-            Murder2ESPtoggler = new QMSingleToggleButton(Murder2CheatPage, 4, 0.5f, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
+            GodModeMurder2 = new QMSingleButton(Murder2CheatPage, 4, 0, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+            Murder2ESPtoggler = new QMSingleButton(Murder2CheatPage, 4, 0.5f, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
         }
 
         // MAP GameObjects Required for control.
@@ -277,7 +277,7 @@
         internal static GameObject item_knife_7 = null;
         internal static GameObject item_knife_8 = null;
         internal static QMNestedButton Murder2CheatPage;
-        internal static QMSingleToggleButton GodModeMurder2;
-        internal static QMSingleToggleButton Murder2ESPtoggler;
+        internal static QMSingleButton GodModeMurder2;
+        internal static QMSingleButton Murder2ESPtoggler;
     }
 }

@@ -18,13 +18,13 @@
     using VRC.Udon;
     using static AstroClient.Variables.CustomLists;
     using AstroClient.Udon.UdonEditor;
+    using AstroLibrary.Menu.AstroButtonAPI;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Spoofer;
     using AstroMonos.Components.Tools;
     using AstroMonos.Components.Tools.Listeners;
     using CheetoLibrary;
     using Discord;
-    using QuickMenuAPI;
 
     #endregion Imports
 

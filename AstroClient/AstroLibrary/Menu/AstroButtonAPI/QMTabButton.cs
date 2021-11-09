@@ -1,4 +1,4 @@
-﻿namespace QuickMenuAPI
+﻿namespace AstroButtonAPI
 {
     using System;
     using UnityEngine;
@@ -11,7 +11,25 @@
         {
             initButton(Index, btnAction, btnToolTip, btnBackgroundColor, LoadSprite);
         }
+        internal QMTabButton(int Index, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, byte[] LoadSprite = null)
+        {
+            initButton(Index, btnAction, btnToolTip, btnBackgroundColor, LoadSprite);
+        }
 
+        internal void initButton(int Index, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, byte[] LoadSprite = null)
+        {
+            btnType = "_QMTabButton_";
+            button = UnityEngine.Object.Instantiate(QuickMenuStuff.TabButtonTemplate(), QuickMenuStuff.TabButtonTemplate().transform.parent, true);
+            button.name = QMButtonAPI.identifier + btnType + Index;
+            setToolTip(btnToolTip);
+            setAction(btnAction);
+            button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
+
+            if (LoadSprite != null)
+                button.LoadSprite(LoadSprite, "Icon");
+
+            SetActive(true);
+        }
         internal void initButton(int Index, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnType = "_QMTabButton_";
