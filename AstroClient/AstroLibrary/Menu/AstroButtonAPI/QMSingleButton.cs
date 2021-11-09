@@ -15,6 +15,12 @@
             initButton2(Parent.WingPage.gameObject, btnText, btnAction, btnToolTip, IsToggle);
         }
 
+        public QMSingleButton(QMTabMenu astroClient, QMWings Parent, string btnText, System.Action btnAction, string btnToolTip, bool IsToggle = false, string TextColor = null)
+        {
+            initButton2(Parent.WingPage.gameObject, btnText, btnAction, btnToolTip, IsToggle);
+        }
+
+
         public QMSingleButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
         {
             btnQMLoc = Parent.GetMenuName();

@@ -4,7 +4,7 @@
     using UnityEngine.UI;
     using VRC.UI.Elements;
 
-    internal class QMNestedButton
+    internal class QMNestedGridMenu
     {
         internal QMSingleButton mainButton;
         internal QMSingleButton backButton;
@@ -14,13 +14,13 @@
         internal string btnType;
         private bool AutomaticGrid = false;
 
-        internal QMNestedButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
+        internal QMNestedGridMenu(QMNestedGridMenu Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
             btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, Title, LoadSprite, TextColor);
         }
 
-        internal QMNestedButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
+        internal QMNestedGridMenu(string btnMenu, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
             btnQMLoc = btnMenu;
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, Title, LoadSprite, TextColor);
@@ -29,13 +29,14 @@
 
         internal void initButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title, string LoadSprite = "", string TextColor = null, bool CanBeDragged = false)
         {
-            btnType = QMButtonAPI.identifier + "_Nested_Menu_";
+            btnType = QMButtonAPI.identifier + "_GridNested_Menu_";
             menuName = "Page_" + btnType + Title;
 
             GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate_GameO(), QuickMenuStuff.NestedPages(), true);
-            UnityEngine.Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
-            UnityEngine.Object.Destroy(NestedPart.FindObject("Buttons").GetComponentInChildren<GridLayoutGroup>());
+            UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
+            NestedPart.FindObject("Buttons").GetComponentInChildren<GridLayoutGroup>().enabled = true;
+            
             UIPage Page_UI = NestedPart.AddComponent<UIPage>();
             Page_UI.name = menuName; 
             Page_UI.field_Public_Boolean_0 = true;
@@ -71,7 +72,7 @@
                     break;
 
                 default:
-                    NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_Menu_" + "Main Menu");
+                    NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
                     break;
             }
         }

@@ -120,40 +120,12 @@
 
 
         //Creates button and parents it to a GameObject
-        private protected void initButton(GameObject Parent, string btnText, System.Action btnAction, String btnToolTip)
-        {
-            btnType = "SingleButton";
 
-            button = UnityEngine.Object.Instantiate(QuickMenuStuff.SingleButtonTemplate(), Parent.FindObject("Buttons").transform, true);
-            button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
-
-            SetButtonText(btnText);
-            setToolTip(btnToolTip);
-            SetAction(btnAction);
-
-            button.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
-
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition += new Vector2(0, 50);
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().fontSize = 30;
-
-            //if (btnBackgroundColor != null)
-            //    setBackgroundColor((Color)btnBackgroundColor);
-            //else
-            //    OrigBackground = button.GetComponentInChildren<UnityEngine.UI.Image>().color;
-
-            //if (btnTextColor != null)
-            //    setTextColor((Color)btnTextColor);
-            //else
-            //    OrigText = button.GetComponentInChildren<TMPro.TextMeshProUGUI>().color;
-
-            SetActive(true);
-            //QMButtonAPI.allSingleButtons.Add(this);
-        }
 
         internal string BtnText;
         private protected void initButton2(GameObject Parent, string btnText, System.Action btnAction, String btnToolTip, bool IsToggle = false)
         {
-            btnType = "SingleButton";
+            btnType = "SingleToggleButton";
 
             var Layout = Parent.FindObject("VerticalLayoutGroup");
             button = UnityEngine.Object.Instantiate(QuickMenuStuff.WingPageButtonTemplate(), Layout.transform, true);

@@ -10,20 +10,20 @@
         protected string btnQMLoc;
         protected string btnType;
 
-        internal QMTabMenu(float btnXLocation, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
+        internal QMTabMenu(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
         {
-            InitButton(btnXLocation, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, ImageData);
+            InitButton(index, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, ImageData);
         }
 
-        internal void InitButton(float btnXLocation, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, string ImageURL = null)
+        internal void InitButton(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, string ImageURL = null)
         {
             btnType = "QMTabMenu";
 
             Transform menu = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
-            menuName = QMButtonAPI.identifier + btnQMLoc + "_" + btnXLocation + "_" + btnToolTip;
+            menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
             menu.name = menuName;
 
-            mainButton = new QMTabButton(btnXLocation, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, ImageURL);
+            mainButton = new QMTabButton(index, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, ImageURL);
 
             Il2CppSystem.Collections.IEnumerator enumerator = menu.transform.GetEnumerator();
             while (enumerator.MoveNext())
