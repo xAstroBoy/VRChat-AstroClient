@@ -1,13 +1,14 @@
-using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
+using System;
+using ActionMenuApi.Helpers;
+using ActionMenuApi.Managers;
+using MelonLoader;
+using UnityEngine;
+using VRC.SDK3.Avatars.ScriptableObjects;
+
 // ReSharper disable HeuristicUnreachableCode
 
 namespace AstroActionMenu.Api
 {
-    using System;
-    using Helpers;
-    using Managers;
-    using UnityEngine;
-
     /// <summary>
     ///     Class for adding buttons,toggles,radial puppets inside of a custom submenu
     /// </summary>
@@ -64,7 +65,7 @@ namespace AstroActionMenu.Api
                 pedalOption.SetPedalAction(
                     delegate
                     {
-                        var combinedAction = (Action<float>) Delegate.Combine(new Action<float>(delegate(float f)
+                        var combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate (float f)
                         {
                             startingValue = f;
                             pedalOption.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
@@ -103,7 +104,7 @@ namespace AstroActionMenu.Api
                 pedalOption.SetPedalAction(
                     delegate
                     {
-                        var combinedAction = (Action<float>) Delegate.Combine(new Action<float>(delegate(float f)
+                        var combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate (float f)
                         {
                             startingValue = f;
                             pedalOption.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
@@ -227,7 +228,5 @@ namespace AstroActionMenu.Api
             else pedalOption.Lock();
             return pedalOption;
         }
-
-
     }
 }

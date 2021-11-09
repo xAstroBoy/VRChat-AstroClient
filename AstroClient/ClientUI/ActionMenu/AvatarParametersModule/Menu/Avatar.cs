@@ -48,18 +48,18 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
 
             internal Parameter(AvatarParameter src)
             {
-                type = src.field_Private_EnumNPublicSealedvaUnBoInFl5vUnique_0;
+                type = src.field_Private_ParameterType_0;
                 switch (type)
                 {
-                    case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Bool:
+                    case AvatarParameter.ParameterType.Bool:
                         val_bool = src.prop_Boolean_0;
                         break;
 
-                    case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Int:
+                    case AvatarParameter.ParameterType.Int:
                         val_int = src.prop_Int32_1;
                         break;
 
-                    case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Float:
+                    case AvatarParameter.ParameterType.Float:
                         val_float = src.prop_Single_0;
                         break;
                 }
@@ -69,15 +69,15 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
             {
                 switch (type)
                 {
-                    case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Bool:
+                    case AvatarParameter.ParameterType.Bool:
                         dst.SetBoolProperty(val_bool);
                         break;
 
-                    case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Int:
+                    case AvatarParameter.ParameterType.Int:
                         dst.SetIntProperty(val_int);
                         break;
 
-                    case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Float:
+                    case AvatarParameter.ParameterType.Float:
                         dst.SetFloatProperty(val_float);
                         break;
                 }
@@ -85,7 +85,7 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
                 dst.Lock();
             }
 
-            internal AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique type;
+            internal AvatarParameter.ParameterType type;
             internal int val_int = 0;
             internal float val_float = 0.0f;
             internal bool val_bool = false;
@@ -204,17 +204,17 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
         {
             if (parameter == null) return;
             /* Call original delegate to avoid self MITM */
-            switch (parameter.field_Private_EnumNPublicSealedvaUnBoInFl5vUnique_0)
+            switch (parameter.field_Private_ParameterType_0)
             {
-                case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Bool:
+                case AvatarParameter.ParameterType.Bool:
                     _boolPropertySetterDelegate(parameter.Pointer, value != 0.0f);
                     break;
 
-                case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Int:
+                case AvatarParameter.ParameterType.Int:
                     _intPropertySetterDelegate(parameter.Pointer, (int)value);
                     break;
 
-                case AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Float:
+                case AvatarParameter.ParameterType.Float:
                     _floatPropertySetterDelegate(parameter.Pointer, value);
                     break;
             }
@@ -223,11 +223,11 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
         internal static float GetValue(this AvatarParameter parameter)
         {
             if (parameter == null) return 0f;
-            return parameter.field_Private_EnumNPublicSealedvaUnBoInFl5vUnique_0 switch
+            return parameter.field_Private_ParameterType_0 switch
             {
-                AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Bool => parameter.prop_Boolean_0 ? 1f : 0f,
-                AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Int => parameter.prop_Int32_1,
-                AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique.Float => parameter.prop_Single_0,
+                AvatarParameter.ParameterType.Bool => parameter.prop_Boolean_0 ? 1f : 0f,
+                AvatarParameter.ParameterType.Int => parameter.prop_Int32_1,
+                AvatarParameter.ParameterType.Float => parameter.prop_Single_0,
                 _ => 0f
             };
         }

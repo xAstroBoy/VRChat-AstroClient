@@ -1,5 +1,4 @@
-﻿using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique;
-
+﻿
 namespace AstroActionMenu.Pedals
 {
     using System;

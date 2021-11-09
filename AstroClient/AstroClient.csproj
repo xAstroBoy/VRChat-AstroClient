@@ -102,6 +102,7 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\UdonTycoon\UdonTycoon_LevelController.cs" />
@@ -233,7 +234,6 @@
     <Compile Include="AstroLibrary\Utility\PhotonUtils.cs" />
     <Compile Include="AstroLibrary\Utility\PlayerUtils.cs" />
     <Compile Include="AstroLibrary\Utility\PopupUtils.cs" />
-    <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
     <Compile Include="AstroLibrary\Utility\Utils.cs" />
     <Compile Include="AstroLibrary\Utility\WorldUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects.cs" />
@@ -515,7 +515,6 @@
     <Compile Include="Utils\Player\Cloner.cs" />
     <Compile Include="Utils\Player\Hands.cs" />
     <Compile Include="Utils\QPens\QVPensUtils.cs" />
-    <Compile Include="Utils\QuickMenuUtils.cs" />
     <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
     <Compile Include="Utils\World\WorldUtils_Old.cs" />
     <Compile Include="Utils\XrefScannerUtils.cs" />
@@ -1231,6 +1230,12 @@
     <Reference Include="VRC.UI.Elements">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
     </Reference>
+    <Reference Include="VRC.UI.Shared">
+      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.Utility">
+      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="VRCCore-Editor">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
       <Private>False</Private>
@@ -1345,9 +1350,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MenuAPI\ActionMenu\MenuAPI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

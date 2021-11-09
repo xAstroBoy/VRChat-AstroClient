@@ -34,8 +34,6 @@ namespace AstroLibrary.Utility
 
         public static UserInteractMenu UserInteractMenu => Resources.FindObjectsOfTypeAll<UserInteractMenu>()[0];
 
-        public static QuickMenuContextualDisplay QuickMenuContextualDisplay => QuickMenuUtils.QuickMenu.field_Private_QuickMenuContextualDisplay_0;
-
         public static Camera Camera => VRCVrCamera.field_Private_Static_VRCVrCamera_0.field_Public_Camera_0;
 
         public static VRCVrCamera VRCVrCamera => VRCVrCamera.field_Private_Static_VRCVrCamera_0;

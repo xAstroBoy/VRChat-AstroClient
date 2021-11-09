@@ -33,6 +33,7 @@
     using VRC;
     using VRC.Core;
     using VRC.UI;
+    using VRC.UI.Elements;
     using WorldLights;
     using Worlds;
     using Application = UnityEngine.Application;
@@ -123,7 +124,6 @@
             {
                 InitializeOverridables();
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
-                DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
                 DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
 
             }
@@ -235,19 +235,6 @@
 
 
 
-        protected void DoAfterQuickMenuInit(Action code)
-        {
-            if (!KeyManager.IsAuthed) return;
-            _ = MelonCoroutines.Start(OnQuickMenuInitCoro(code));
-        }
-
-        protected IEnumerator OnQuickMenuInitCoro(Action code)
-        {
-            while (QuickMenu.prop_QuickMenu_0 == null)
-                yield return null;
-
-            code();
-        }
 
         protected void DoAfterUserInteractMenuInit(Action code)
         {
@@ -353,7 +340,6 @@
                 return;
             }
 
-            QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
             InitMainsButtons();
             try
             {

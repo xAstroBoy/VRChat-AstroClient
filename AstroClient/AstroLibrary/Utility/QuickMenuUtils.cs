@@ -6,10 +6,11 @@ namespace AstroLibrary.Utility
     using UnityEngine;
     using VRC;
     using VRC.Core;
+    using VRC.UI.Elements;
 
     public static class QuickMenuUtils
     {
-        public static QuickMenu QuickMenu => QuickMenu.prop_QuickMenu_0;
+        public static QuickMenu QuickMenu => QuickMenu.CurrentThreadIsMainThread();
 
         #region SelectPlayer
         public static void SelectPlayer(VRCPlayer instance)

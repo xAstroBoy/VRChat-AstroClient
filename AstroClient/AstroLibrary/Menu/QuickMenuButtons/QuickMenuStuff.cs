@@ -5,6 +5,7 @@
     using Il2CppSystem.Reflection;
     using UnhollowerRuntimeLib;
     using UnityEngine;
+    using VRC.UI.Elements;
 
     public class QuickMenuStuff
     {
