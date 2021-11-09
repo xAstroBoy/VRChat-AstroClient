@@ -103,6 +103,7 @@
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\Extensions.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\MenuAPI_New.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonAPI.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonBase.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedGridMenu.cs" />

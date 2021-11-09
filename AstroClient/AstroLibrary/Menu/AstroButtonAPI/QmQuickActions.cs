@@ -26,7 +26,7 @@
                 case "MainMenu":
                     Header = UnityEngine.Object.Instantiate(QuickMenuStuff.Header_DashboardTemplate(), QuickMenuStuff.Header_DashboardTemplate().transform.parent, true);
                     Header.name = QMButtonAPI.identifier + btnType + Title + "_Header";
-                    var Text = Extensions.NewText(Header, "Text_Title");
+                    var Text = Header.NewText("Text_Title");
                     Text.text = Title;
                     Text.SetFaceColor(TextColor);
                     Header.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
@@ -41,7 +41,7 @@
                     Index += 5;
                     Header = UnityEngine.Object.Instantiate(QuickMenuStuff.Header_DashboardTemplate(), QuickMenuStuff.SelectedUserPage().transform.parent, true);
                     Header.name = QMButtonAPI.identifier + btnType + Title + "_Header";
-                    var Text2 = Extensions.NewText(Header, "Text_Title");
+                    var Text2 = Header.NewText("Text_Title");
                     Text2.text = Title;
                     Text2.SetFaceColor(TextColor);
                     Header.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
@@ -55,4 +55,5 @@
 
         }
     }
+
 }

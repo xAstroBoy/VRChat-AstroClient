@@ -30,7 +30,7 @@
 
         internal QMScrollMenu(QMNestedButton Parent, float btnXLocation, float btnYLocation, Action<QMScrollMenu> Open, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
-            BaseMenu = new QMNestedButton(Parent, btnXLocation, btnYLocation, btnText, Title, btnToolTip, TextColor, LoadSprite);
+            BaseMenu = new QMNestedGridMenu(Parent, btnXLocation, btnYLocation, btnText, Title, btnToolTip, TextColor, LoadSprite);
             SetAction(Open);
             IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "");
             IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
@@ -75,7 +75,7 @@
             {
                 OpenAction = Open;
                 //  SetAction
-                BaseMenu.GetMainButton().SetAction(new Action(() =>
+                BaseMenu.GetMainButton().setAction(new Action(() =>
                 {
                     if (shouldClear) Clear();
                     OpenAction.Invoke(this);

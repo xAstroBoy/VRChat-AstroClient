@@ -6,13 +6,19 @@
 
     internal class QMNestedGridMenu
     {
-        internal QMSingleButton mainButton;
-        internal QMSingleButton backButton;
+        public QMSingleButton mainButton;
+        internal static QMSingleButton backButton;
+        internal GameObject ButtonsMenu;
 
         internal string menuName;
         internal string btnQMLoc;
         internal string btnType;
-        private bool AutomaticGrid = false;
+
+        internal QMNestedGridMenu(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
+        {
+            btnQMLoc = Parent.GetMenuName();
+            initButton(btnXLocation, btnYLocation, btnText, btnToolTip, Title, LoadSprite, TextColor);
+        }
 
         internal QMNestedGridMenu(QMNestedGridMenu Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
@@ -26,32 +32,30 @@
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, Title, LoadSprite, TextColor);
         }
 
-
         internal void initButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title, string LoadSprite = "", string TextColor = null, bool CanBeDragged = false)
         {
-            btnType = QMButtonAPI.identifier + "_GridNested_Menu_";
+            btnType = QMButtonAPI.identifier + "_Nested_Menu_";
             menuName = "Page_" + btnType + Title;
 
             GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate_GameO(), QuickMenuStuff.NestedPages(), true);
-            UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+            ButtonsMenu = NestedPart.FindObject("Buttons");
+            UnityEngine.Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
-            NestedPart.FindObject("Buttons").GetComponentInChildren<GridLayoutGroup>().enabled = true;
-            
             UIPage Page_UI = NestedPart.AddComponent<UIPage>();
-            Page_UI.name = menuName; 
+            Page_UI.name = menuName;
+            Page_UI.field_Public_String_0 = menuName;
             Page_UI.field_Public_Boolean_0 = true;
             Page_UI.field_Private_MenuStateController_0 = QuickMenuStuff.QuickMenuController();
             Page_UI.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
             Page_UI.field_Private_List_1_UIPage_0.Add(Page_UI);
             NestedPart.name = menuName;
-            Extensions.NewText(NestedPart, "Text_Title").text = Title;
+            NestedPart.NewText("Text_Title").text = Title;
             NestedPart.SetActive(false);
-            Extensions.CleanButtonsNestedMenu(NestedPart);
+            NestedPart.CleanButtonsNestedMenu();
             QuickMenuStuff.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, Page_UI);
 
             mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, TextColor);
 
-            //Sets image for nested menu if needed
 
             if (LoadSprite.Contains("_ICON"))
             {
@@ -63,8 +67,6 @@
                 mainButton.GetGameObject().LoadSprite(LoadSprite, "Background");
             }
 
-            //QMButtonAPI.allNestedButtons.Add(this);
-
             switch (Title)
             {
                 case "Main Menu":
@@ -72,7 +74,7 @@
                     break;
 
                 default:
-                    NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
+                    NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_Menu_" + "Main Menu");
                     break;
             }
         }
@@ -83,11 +85,11 @@
             return menuName;
         }
 
-        internal QMSingleButton GetMainButton()
+        internal QMSingleButton getMainButton()
         {
             return mainButton;
         }
-        internal QMSingleButton GetBackButton()
+        internal QMSingleButton getBackButton()
         {
             return backButton;
         }

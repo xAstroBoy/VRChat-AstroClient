@@ -4,13 +4,14 @@
     using UnityEngine.UI;
     using VRC.UI.Elements;
 
+
     internal class QuickMenuStuff
     {
         //Templates and references
         internal static bool SelectSelf = false;
         internal static BoxCollider QuickMenuBackgroundReference;
         internal static GameObject SingleButtonReference;
-        internal static Vector3? SingleButtonReferencePosition;
+        internal static Vector3 SingleButtonReferencePosition;
         internal static GameObject SingleButtonReferenceSelectedUser;
         internal static GameObject ToggleButtonReference;
         internal static Transform NestedButtonReference;
@@ -47,6 +48,8 @@
         internal static MenuStateController _QuickMenuControllert;
         //New shit
 
+
+
         internal static UIPage UIPageTemplate_Right()
         {
             if (UIPageReference_Right == null)
@@ -59,8 +62,11 @@
                         UIPageReference_Right = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return UIPageReference_Right;
         }
 
@@ -76,9 +82,34 @@
                         UIPageReference_Left = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return UIPageReference_Left;
+        }
+
+        static GameObject DebugPanelReference;
+
+        internal static GameObject DebugPanelTemplate()
+        {
+            if (DebugPanelReference == null)
+            {
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<DebugInfoPanel>(true);
+                foreach (var button in Buttons)
+                {
+                    if (button.name == "DebugInfoPanel")
+                    {
+                        DebugPanelReference = button.gameObject;
+                        break;
+                    }
+                }
+
+                ;
+            }
+
+            return DebugPanelReference;
         }
 
         internal static MenuStateController WingMenuStateControllerRight()
@@ -93,8 +124,11 @@
                         MenuStateController_Wing_Right = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return MenuStateController_Wing_Right;
         }
 
@@ -110,8 +144,11 @@
                         MenuStateController_Wing_Left = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return MenuStateController_Wing_Left;
         }
 
@@ -127,10 +164,14 @@
                         _Wing_Left = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return _Wing_Left;
         }
+
         internal static Wing Wing_Right()
         {
             if (_Wing_Right == null)
@@ -143,8 +184,11 @@
                         _Wing_Right = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return _Wing_Right;
         }
 
@@ -160,8 +204,11 @@
                         _QuickMenuControllert = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return _QuickMenuControllert;
         }
 
@@ -173,12 +220,12 @@
             return quickmenuInstance;
         }
 
-        internal static BoxCollider QuickMenuBackground()
-        {
-            if (QuickMenuBackgroundReference == null)
-                QuickMenuBackgroundReference = GetQuickMenuInstance().transform.Find("Container/Button_Worlds").GetComponent<BoxCollider>();
-            return QuickMenuBackgroundReference;
-        }
+        //internal static BoxCollider QuickMenuBackground()
+        //{
+        //    if (QuickMenuBackgroundReference == null)
+        //        QuickMenuBackgroundReference = GetQuickMenuInstance().transform.Find("Container/Button_Worlds").GetComponent<BoxCollider>();
+        //    return QuickMenuBackgroundReference;
+        //}
 
         internal static GameObject SingleButtonTemplate()
         {
@@ -191,8 +238,11 @@
                     {
                         SingleButtonReference = button.gameObject;
                     }
-                };
+                }
+
+                ;
             }
+
             return SingleButtonReference;
         }
 
@@ -202,7 +252,8 @@
             {
                 SingleButtonReferencePosition = SingleButtonTemplate().transform.position;
             }
-            return SingleButtonReferencePosition.Value;
+
+            return SingleButtonReferencePosition;
         }
 
         internal static GameObject SingleButtonTemplateSelUser()
@@ -216,8 +267,11 @@
                     {
                         SingleButtonReferenceSelectedUser = button.gameObject;
                     }
-                };
+                }
+
+                ;
             }
+
             return SingleButtonReferenceSelectedUser;
         }
 
@@ -233,7 +287,9 @@
                         _CarouselBanners = transform.gameObject;
                         break;
                     }
-                };
+                }
+
+                ;
             }
 
             return _CarouselBanners;
@@ -250,7 +306,9 @@
                     {
                         HeaderDashboardReference = transform.gameObject;
                     }
-                };
+                }
+
+                ;
             }
 
             return HeaderDashboardReference;
@@ -268,8 +326,11 @@
                         TabButtonReference = button.gameObject;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return TabButtonReference;
         }
 
@@ -285,8 +346,11 @@
                         WingPageButtonReference = button.gameObject;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return WingPageButtonReference;
         }
 
@@ -302,8 +366,11 @@
                         WingButtonReferenceRight = button.gameObject;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return WingButtonReferenceRight;
         }
 
@@ -319,8 +386,11 @@
                         WingPageButtonReferenceLeft = button.gameObject;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return WingPageButtonReferenceLeft;
         }
 
@@ -336,8 +406,11 @@
                         ToggleButtonReference = button.gameObject;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return ToggleButtonReference;
         }
 
@@ -353,8 +426,11 @@
                         NestedButtonReference = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return NestedButtonReference;
         }
 
@@ -371,8 +447,11 @@
                         SelectedUserPageReference = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return SelectedUserPageReference;
         }
 
@@ -388,8 +467,11 @@
                         SelectedUserPageButtonsReference = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return SelectedUserPageButtonsReference;
         }
 
@@ -405,8 +487,11 @@
                         NestedButtonReferenceGameO = button.gameObject;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return NestedButtonReferenceGameO;
         }
 
@@ -422,8 +507,11 @@
                         MenuDashboardReference = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return MenuDashboardReference;
         }
 
@@ -440,8 +528,11 @@
                         NestedButtonReference = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return NestedButtonReference;
         }
 
@@ -457,8 +548,11 @@
                         NestedPagesReference = button;
                         break;
                     }
-                };
+                }
+
+                ;
             }
+
             return NestedPagesReference;
         }
 
@@ -468,12 +562,27 @@
             {
                 NestedButtonReference = SingleButtonTemplate().transform.parent;
             }
+
             return NestedButtonReference;
         }
 
         internal static void ShowQuickmenuPage(string pagename)
         {
-            QuickMenuStuff.GetQuickMenuInstance().prop_MenuStateController_0.PushPage(pagename);
+            QuickMenuController().PushPage(pagename);
         }
+
+
+
+        internal static void NoShader(QMSingleButton x)
+        {
+            x.GetGameObject().GetComponent<Button>().name = "NoShader";
+        }
+
+        internal static void NoShader(QMNestedButton x)
+        {
+            x.getMainButton().GetGameObject().GetComponent<Button>().name = "NoShader";
+        }
+
+
     }
 }

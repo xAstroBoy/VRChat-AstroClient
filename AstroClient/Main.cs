@@ -366,7 +366,7 @@
         internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
-            QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            QMTabMenu AstroClient = new QMTabMenu(1, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
             ExploitsMenu.InitButtons(2f);
             WorldsCheats.InitButtons(4f);
             HistoryMenu.InitButtons(6f);

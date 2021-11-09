@@ -52,6 +52,18 @@
         //}
 
 
+        internal static void ShowQuickmenuPage(this QuickMenu instance, string pagename)
+        {
+            instance.field_Protected_MenuStateController_0.PushPage(pagename);
+        }
+
+        internal static void ShowQuickmenuPage(this Wing instance, string pagename)
+        {
+            instance.field_Private_MenuStateController_0.PushPage(pagename);
+        }
+
+
+
         public static GameObject FindObject(this GameObject parent, string name)
         {
             Transform[] trs = parent.GetComponentsInChildren<Transform>(true);

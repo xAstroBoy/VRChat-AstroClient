@@ -6,13 +6,13 @@
 
     internal class QMNestedButton
     {
-        internal QMSingleButton mainButton;
-        internal QMSingleButton backButton;
+        public QMSingleButton mainButton;
+        internal static GameObject backButton;
+        internal GameObject ButtonsMenu;
 
         internal string menuName;
         internal string btnQMLoc;
         internal string btnType;
-        private bool AutomaticGrid = false;
 
         internal QMNestedButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
@@ -26,31 +26,31 @@
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, Title, LoadSprite, TextColor);
         }
 
-
         internal void initButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title, string LoadSprite = "", string TextColor = null, bool CanBeDragged = false)
         {
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
             menuName = "Page_" + btnType + Title;
 
             GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate_GameO(), QuickMenuStuff.NestedPages(), true);
-            UnityEngine.Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
-            UnityEngine.Object.Destroy(NestedPart.FindObject("Buttons").GetComponentInChildren<GridLayoutGroup>());
+            ButtonsMenu = NestedPart.FindObject("Buttons");
+            UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
+            UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
             UIPage Page_UI = NestedPart.AddComponent<UIPage>();
-            Page_UI.name = menuName; 
+            Page_UI.name = menuName;
+            Page_UI.field_Public_String_0 = menuName;
             Page_UI.field_Public_Boolean_0 = true;
             Page_UI.field_Private_MenuStateController_0 = QuickMenuStuff.QuickMenuController();
             Page_UI.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
             Page_UI.field_Private_List_1_UIPage_0.Add(Page_UI);
             NestedPart.name = menuName;
-            Extensions.NewText(NestedPart, "Text_Title").text = Title;
+            NestedPart.NewText("Text_Title").text = Title;
             NestedPart.SetActive(false);
-            Extensions.CleanButtonsNestedMenu(NestedPart);
+            NestedPart.CleanButtonsNestedMenu();
             QuickMenuStuff.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, Page_UI);
 
             mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, TextColor);
 
-            //Sets image for nested menu if needed
 
             if (LoadSprite.Contains("_ICON"))
             {
@@ -61,8 +61,6 @@
             {
                 mainButton.GetGameObject().LoadSprite(LoadSprite, "Background");
             }
-
-            //QMButtonAPI.allNestedButtons.Add(this);
 
             switch (Title)
             {
@@ -82,19 +80,15 @@
             return menuName;
         }
 
-        internal QMSingleButton GetMainButton()
+        internal QMSingleButton getMainButton()
         {
             return mainButton;
-        }
-        internal QMSingleButton GetBackButton()
-        {
-            return backButton;
         }
 
         internal void DestroyMe()
         {
-            mainButton.DestroyMe();
-            backButton.DestroyMe();
+            //mainButton.DestroyMe();
+            //backButton.DestroyMe();
         }
     }
 }
