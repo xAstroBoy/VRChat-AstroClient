@@ -102,16 +102,16 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Extensions.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMButtonAPI.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\ExtendedQuickMenu.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\MenuButton.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\MenuCategory.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\MenuPage.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\MenuToggle.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\UIButton.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\UIElement.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\UIText.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\WingButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMButtonBase.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMNestedButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QmQuickActions.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMSingleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMStuff.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMTabButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMToggleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMWings.cs" />
     <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
@@ -1329,7 +1329,10 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\cancel.png" />
+    <Content Include="Resources\check.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
