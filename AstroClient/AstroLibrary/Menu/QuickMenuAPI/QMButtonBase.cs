@@ -12,7 +12,7 @@
         protected Color OrigBackground;
         protected Color OrigText;
 
-        public GameObject getGameObject()
+        public GameObject GetGameObject()
         {
             return button;
         }

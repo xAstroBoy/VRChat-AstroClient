@@ -2,36 +2,37 @@
 {
     using System;
     using System.Collections.Generic;
+    using QuickMenuAPI;
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class QMScrollMenu
+    internal class QMScrollMenu
     {
-        public class ScrollObject
+        internal class ScrollObject
         {
-            public QMButtonBase ButtonBase;
-            public int Index;
+            internal QMButtonBase ButtonBase;
+            internal int Index;
         }
 
-        public QMNestedButton BaseMenu;
-        public QMSingleButton NextButton;
-        public QMSingleButton BackButton;
-        public QMSingleButton IndexButton;
-        public List<ScrollObject> QMButtons = new List<ScrollObject>();
+        internal QMNestedButton BaseMenu;
+        internal QMSingleButton NextButton;
+        internal QMSingleButton BackButton;
+        internal QMSingleButton IndexButton;
+        internal List<ScrollObject> QMButtons = new List<ScrollObject>();
         private int Posx = 1;
         private int Posy = 0;
         private int Pos = 0;
         private int Index = 0;
         private Action<QMScrollMenu> OpenAction;
-        public int currentMenuIndex = 0;
+        internal int currentMenuIndex = 0;
 
-        public bool ShouldChangePos = true;
-        public bool AllowOverStepping = false;
-        public bool IgnoreEverything = false;
+        internal bool ShouldChangePos = true;
+        internal bool AllowOverStepping = false;
+        internal bool IgnoreEverything = false;
 
-        public QMScrollMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, Action<QMScrollMenu> MenuOpenAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        internal QMScrollMenu(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
-            BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+            BaseMenu = new QMNestedButton(Parent, btnXLocation, btnYLocation, btnText, Title, btnToolTip, TextColor, LoadSprite);
             SetAction(MenuOpenAction);
             IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "");
             IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
@@ -40,13 +41,13 @@
             {
                 ShowMenu(currentMenuIndex - 1);
             }, "Go Back", null, null, true);
-            NextButton = new QMSingleButton(BaseMenu, 5, 1.5f, "Next", delegate
+            NextButton = new QMSingleButton(BaseMenu, 5, 1.5f, "Next", false, delegate
             {
                 ShowMenu(currentMenuIndex + 1);
             }, "Go Next", null, null, true);
         }
 
-        public QMScrollMenu(QMNestedButton basemenu)
+        internal QMScrollMenu(QMNestedButton basemenu)
         {
             BaseMenu = basemenu;
             IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "");
@@ -62,7 +63,7 @@
             }, "Go Next", null, null, true);
         }
 
-        public void ShowMenu(int MenuIndex)
+        internal void ShowMenu(int MenuIndex)
         {
             if (!AllowOverStepping && (MenuIndex < 0 || MenuIndex > Index))
                 return;
@@ -78,11 +79,12 @@
             IndexButton.SetButtonText("Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString());
         }
 
-        public void SetAction(Action<QMScrollMenu> Open, bool shouldClear = true)
+        internal void SetAction(Action<QMScrollMenu> Open, bool shouldClear = true)
         {
             try
             {
                 OpenAction = Open;
+                //  SetAction
                 BaseMenu.GetMainButton().SetAction(new Action(() =>
                 {
                     if (shouldClear) Clear();
@@ -97,7 +99,7 @@
             }
         }
 
-        public void Refresh()
+        internal void Refresh()
         {
             Clear();
             OpenAction?.Invoke(this);
@@ -105,7 +107,7 @@
             ShowMenu(0);
         }
 
-        public void DestroyMe()
+        internal void DestroyMe()
         {
             foreach (var item in QMButtons)
             {
@@ -122,7 +124,7 @@
                 NextButton.DestroyMe();
         }
 
-        public void Clear()
+        internal void Clear()
         {
             try
             {
@@ -140,7 +142,7 @@
             catch { }
         }
 
-        public void Add(QMButtonBase Button)
+        internal void Add(QMButtonBase Button)
         {
             if (!IgnoreEverything)
             {
@@ -174,7 +176,7 @@
             });
         }
 
-        public void Add(QMButtonBase Button, int Page, float POSX = 0, float POSY = 0)
+        internal void Add(QMButtonBase Button, int Page, float POSX = 0, float POSY = 0)
         {
             Button.SetLocation(POSX, POSY);
             Button.SetActive(false);

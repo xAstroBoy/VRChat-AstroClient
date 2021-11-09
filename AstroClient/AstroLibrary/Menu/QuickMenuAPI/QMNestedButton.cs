@@ -54,11 +54,11 @@
             if (LoadSprite.Contains("_ICON"))
             {
                 LoadSprite = LoadSprite.Replace("_ICON", "");
-                mainButton.getGameObject().LoadSprite(LoadSprite, "Icon");
+                mainButton.GetGameObject().LoadSprite(LoadSprite, "Icon");
             }
             else if (LoadSprite != "")
             {
-                mainButton.getGameObject().LoadSprite(LoadSprite, "Background");
+                mainButton.GetGameObject().LoadSprite(LoadSprite, "Background");
             }
 
             //QMButtonAPI.allNestedButtons.Add(this);
@@ -81,7 +81,7 @@
             return menuName;
         }
 
-        internal QMSingleButton getMainButton()
+        internal QMSingleButton GetMainButton()
         {
             return mainButton;
         }

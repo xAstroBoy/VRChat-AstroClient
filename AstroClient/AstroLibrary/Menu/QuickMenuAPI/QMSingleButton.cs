@@ -99,7 +99,7 @@
             setButtonText(btnText);
             setToolTip(btnToolTip);
 
-            setAction(btnAction);
+            SetAction(btnAction);
 
             button.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
 
@@ -129,7 +129,7 @@
 
             setButtonText(btnText);
             setToolTip(btnToolTip);
-            setAction(btnAction);
+            SetAction(btnAction);
 
             button.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
 
@@ -179,7 +179,7 @@
             }
 
 
-            setAction(btnAction);
+            SetAction(btnAction);
 
 
             //if (btnBackgroundColor != null)
@@ -212,7 +212,7 @@
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Text;
         }
 
-        internal void setAction(System.Action buttonAction)
+        internal void SetAction(System.Action buttonAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonAction != null)

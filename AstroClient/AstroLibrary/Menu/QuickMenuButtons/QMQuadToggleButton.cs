@@ -1,4 +1,4 @@
-﻿// By Cheetos
+﻿/ By Cheetos
 namespace AstroButtonAPI
 {
     using System;

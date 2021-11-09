@@ -478,12 +478,12 @@
 
         internal static void NoShader(QMSingleButton x)
         {
-            x.getGameObject().GetComponent<Button>().name = "NoShader";
+            x.GetGameObject().GetComponent<Button>().name = "NoShader";
         }
 
         internal static void NoShader(QMNestedButton x)
         {
-            x.getMainButton().getGameObject().GetComponent<Button>().name = "NoShader";
+            x.GetMainButton().GetGameObject().GetComponent<Button>().name = "NoShader";
         }
     }
 }

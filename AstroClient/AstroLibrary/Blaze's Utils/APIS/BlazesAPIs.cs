@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using AstroButtonAPI;
+    using QuickMenuAPI;
     using UnityEngine;
     using VRC;
 

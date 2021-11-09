@@ -112,6 +112,7 @@
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMTabButton.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMToggleButton.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMWings.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMScrollMenu.cs" />
     <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
@@ -185,7 +186,6 @@
     <Compile Include="AstroLibrary\Managers\ConversionManager.cs" />
     <Compile Include="AstroLibrary\Managers\CustomJsonTypes.cs" />
     <Compile Include="AstroLibrary\Managers\ExploitManager_Old.cs" />
-    <Compile Include="AstroLibrary\Menu\UnityUIUtils.cs" />
     <Compile Include="AstroLibrary\Misc\Api\API.cs" />
     <Compile Include="AstroLibrary\Misc\Api\Object\VRChatAPIObjects.cs" />
     <Compile Include="AstroLibrary\Misc\Api\Object\WebSocketObject.cs" />
