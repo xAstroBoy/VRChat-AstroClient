@@ -102,16 +102,24 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMButtonAPI.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\ExtendedQuickMenu.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\MenuButton.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\MenuCategory.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\MenuPage.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\MenuToggle.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\UIButton.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\UIElement.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\UIText.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\Wings\WingButton.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\Extensions.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\MenuAPI_New.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonAPI.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonBase.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMHalfScroll.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedButton.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedGridMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QmQuickActions.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMScrollMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleToggle.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSlider.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMTabBase.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMTabButton.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMTabMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMToggleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMWings.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QuickMenuStuff.cs" />
     <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
