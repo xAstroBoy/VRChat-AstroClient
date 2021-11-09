@@ -40,7 +40,7 @@
             labels[2] = "Third";
             labels[3] = "Fourth";
 
-            var quadToggle = new QMQuadToggleButton(MainButton, 3, 0, labels, actions);
+            //var quadToggle = new QMQuadToggleButton(MainButton, 3, 0, labels, actions);
 
             _ = new QMSingleButton(MainButton, 0, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
             _ = new QMSingleButton(MainButton, 3, 2, "Notorious\nHome 1", () => { WorldUtils.JoinWorld("wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938#wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938:42069"); }, "");

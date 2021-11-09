@@ -164,10 +164,10 @@ namespace AstroLibrary.Utility
             Utils.UserCameraController.field_Private_UserCameraSpace_0 = (UserCameraSpace)mode;
         }
 
-        public static void SetCameraSpace(CameraBehaviour mode)
-        {
-            Utils.UserCameraController.field_Private_UserCameraMovementBehaviour_0 = (UserCameraMovementBehaviour)mode;
-        }
+        //public static void SetCameraSpace(CameraBehaviour mode)
+        //{
+        //    Utils.UserCameraController.field_Private_UserCameraMode_0 = (UserCameraMovementBehaviour)mode;
+        //}
 
         //public static void CycleCameraBehaviour()
         //{
@@ -213,10 +213,10 @@ namespace AstroLibrary.Utility
             }
         }
 
-        public static CameraBehaviour GetCameraBehaviour()
-        {
-            return (CameraBehaviour)Utils.UserCameraController.field_Private_UserCameraMovementBehaviour_0;
-        }
+        //public static CameraBehaviour GetCameraBehaviour()
+        //{
+        //    return (CameraBehaviour)Utils.UserCameraController.field_Private_UserCameraMovementBehaviour_0;
+        //}
 
         public static CameraSpace GetCameraSpace()
         {

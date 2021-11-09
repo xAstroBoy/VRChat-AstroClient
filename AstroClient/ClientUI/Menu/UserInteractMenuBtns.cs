@@ -33,23 +33,19 @@
 
         internal static void InitUserButtons(float x, float y, bool btnHalf)
         {
-            ModConsole.DebugLog("1");
-            MelonCoroutines.Start(WaitForCloneBtnInit());
-            ModConsole.DebugLog("2");
+            //MelonCoroutines.Start(WaitForCloneBtnInit());
 
             Init_UserMenu_Exploits(x, y, true);
-            ModConsole.DebugLog("3");
 
             //  NO TOUCH!
-            new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(TargetSelector.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf).SetResizeTextForBestFit(true);
-            var forceClone = new QMSingleButton("UserInteractMenu", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
-            ModConsole.DebugLog("4");
+            new QMSingleButton("QA_SelectedUser", x, y + 0.5f, "AstroClient : Set Target.", new Action(TargetSelector.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf).SetResizeTextForBestFit(true);
+            var forceClone = new QMSingleButton("QA_SelectedUser", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
 
         }
 
         internal static void Init_UserMenu_Exploits(float x, float y, bool btnHalf)
         {
-            var menu = new QMNestedButton("UserInteractMenu", x, y, "AstroClient Exploits", "AstroClient Menu", null, null, null, null, btnHalf);
+            var menu = new QMNestedButton("QA_SelectedUser", x, y, "AstroClient Exploits", "AstroClient Menu", null, null, null, null, btnHalf);
             menu.GetMainButton().SetResizeTextForBestFit(true);
             if (Bools.IsDeveloper)
             {

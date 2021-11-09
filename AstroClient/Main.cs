@@ -124,6 +124,7 @@
             {
                 InitializeOverridables();
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
+                DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
                 DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
 
             }
@@ -200,9 +201,22 @@
                     GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
                     if (component != null)
                     {
-                        component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
-
-                        component.OnApplicationStart();
+                        try
+                        {
+                            component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
+                        }
+                        catch (System.Exception e)
+                        {
+                            ModConsole.ErrorExc(e);
+                        }
+                        try
+                        {
+                            component.OnApplicationStart();
+                        }
+                        catch (System.Exception e)
+                        {
+                            ModConsole.ErrorExc(e);
+                        }
                         GameEvents.Add(component);
                     }
                 }
@@ -257,7 +271,7 @@
         }
         private IEnumerator OnUserInteractMenuInitCoro(Action code)
         {
-            while (VRChatObjects.UserInteractMenu == null)
+            while (QuickMenuStuff.GetSelectedUserQMInstance() == null)
                 yield return null;
 
             code();
@@ -267,6 +281,21 @@
         {
             if (!KeyManager.IsAuthed) return;
             _ = MelonCoroutines.Start(OnUiManagerInitCoro(code));
+        }
+
+        protected void DoAfterQuickMenuInit(Action code)
+        {
+            if (!KeyManager.IsAuthed) return;
+            _ = MelonCoroutines.Start(OnQuickMenuInitCoro(code));
+        }
+
+        protected IEnumerator OnQuickMenuInitCoro(Action code)
+        {
+            while (QuickMenuStuff.GetQuickMenuInstance() == null)
+                yield return new WaitForSeconds(0.001f);
+            //while (GameObject.Find(UIUtils.QuickMenu) == null)
+            //    yield return new WaitForSeconds(0.001f);
+            code();
         }
 
         protected IEnumerator OnUiManagerInitCoro(Action code)

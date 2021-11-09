@@ -23,10 +23,12 @@ namespace AstroLibrary.Extensions
             return Instance.GetMenuContent().GetComponentInChildren<PageUserInfo>().GetUser();
         }
 
+
+        //TODO : FIX
         public static void SelectAPIUser(this VRCUiManager instance, APIUser user)
         {
-            QuickMenuUtils.SelectPlayer(user);
-            QuickMenuUtils.QuickMenu.Method_Public_Void_EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique_Boolean_0(QuickMenu.EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique.UserDetailsMenu, false);
+            //QuickMenuUtils.SelectPlayer(user);
+            //QuickMenuUtils.QuickMenu.Method_Public_Void_EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique_Boolean_0(QuickMenu.EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique.UserDetailsMenu, false);
         }
 
         public static void SelectAPIUser(this VRCUiManager instance, string userid)
@@ -200,7 +202,7 @@ namespace AstroLibrary.Extensions
             {
                 userList.Method_Public_Void_0();
                 userList.Method_Public_Void_1();
-                userList.Method_Public_Void_2();
+                //userList.Method_Public_Void_2();
             }
             ModConsole.Log("Refreshed social lists!");
         }

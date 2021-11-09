@@ -3,6 +3,7 @@
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
+    using VRC.UI.Elements.Menus;
 
 
     internal class QuickMenuStuff
@@ -46,8 +47,18 @@
         internal static MenuStateController MenuStateController_Wing_Left;
 
         internal static MenuStateController _QuickMenuControllert;
+
+        internal static SelectedUserMenuQM _SelectedQMGO;
         //New shit
 
+        internal static SelectedUserMenuQM GetSelectedUserQMInstance()
+        {
+            if (_SelectedQMGO == null)
+            {
+                _SelectedQMGO = GetQuickMenuInstance().gameObject.FindObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
+            }
+            return _SelectedQMGO;
+        }
 
 
         internal static UIPage UIPageTemplate_Right()
@@ -214,8 +225,15 @@
 
         internal static QuickMenu GetQuickMenuInstance()
         {
-            if (quickmenuInstance == null)
-                quickmenuInstance = Resources.FindObjectsOfTypeAll<QuickMenu>()[0];
+            try
+            {
+                if (quickmenuInstance == null)
+                    quickmenuInstance = Resources.FindObjectsOfTypeAll<QuickMenu>()[0];
+            }
+            catch
+            {
+                return null;
+            }
 
             return quickmenuInstance;
         }

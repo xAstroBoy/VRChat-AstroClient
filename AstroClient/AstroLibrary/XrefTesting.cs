@@ -261,7 +261,7 @@
                                 {
                                     if (jt.Type == XrefType.Method && jt.TryResolve() != null
                                     && jt.TryResolve().GetParameters().Length == 1
-                                    && jt.TryResolve().GetParameters()[0].ParameterType == typeof(QuickMenuContextualDisplay.EnumNPublicSealedvaUnNoToUs7vUsNoUnique)
+                                    && jt.TryResolve().GetParameters()[0].ParameterType == typeof(QuickMenuContextualDisplay.QuickMenuContext)
                                     && jt.TryResolve().ReflectedType == typeof(QuickMenuContextualDisplay)
                                     && jt.TryResolve().IsStatic == false
                                     )

@@ -78,7 +78,7 @@
 
         #region UserInteract
 
-        public static GameObject UserInteractMenu { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu").gameObject; } }
+        public static GameObject UserInteractMenu { get { return QuickMenuUtils.QuickMenu.transform.Find("QA_SelectedUser").gameObject; } }
         public static GameObject UIFriendButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/FriendButton").gameObject; } }
         public static GameObject UIDetailsButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/DetailsButton").gameObject; } }
         public static GameObject UIBlockButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/BlockButton").gameObject; } }

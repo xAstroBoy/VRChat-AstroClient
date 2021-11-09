@@ -9,7 +9,7 @@
         public VRCList(Transform parent, string name, int Position = 0)
         {
             GameObject = Object.Instantiate(PublicAvatarList.gameObject, parent);
-            GameObject.GetComponent<UiAvatarList>().field_Public_EnumNPublicSealedvaInPuMiFaSpClPuLi11Unique_0 = UiAvatarList.EnumNPublicSealedvaInPuMiFaSpClPuLi11Unique.SpecificList;
+            GameObject.GetComponent<UiAvatarList>().field_Public_Category_0 = UiAvatarList.Category.SpecificList;
             UiVRCList = GameObject.GetComponent<UiVRCList>();
             Text = GameObject.transform.Find("Button").GetComponentInChildren<Text>();
             GameObject.transform.SetSiblingIndex(Position);

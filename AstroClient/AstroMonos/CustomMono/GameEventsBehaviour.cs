@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using AstroButtonAPI;
     using AstroClientCore.Events;
     using Cheetos;
     using Moderation;
@@ -10,6 +11,7 @@
     using Streamer;
     using UnityEngine;
     using VRC.SDKBase;
+    using VRC.UI.Elements;
 
     public class GameEventsBehaviour : MonoBehaviour
     {
@@ -39,11 +41,13 @@
             CheetosHooks.Event_OnMasterClientSwitched += Internal_OnMasterClientSwitched;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
-            VRChatUIEvents.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
-            VRChatUIEvents.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
-            VRChatUIEvents.Event_OnBigMenuOpen += Internal_OnBigMenuOpen;
-            VRChatUIEvents.Event_OnBigMenuClose += Internal_OnBigMenuClose;
-
+            UiManager.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
+            UiManager.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
+            UiManager.Event_OnBigMenuOpen += Internal_OnBigMenuOpen;
+            UiManager.Event_OnBigMenuClose += Internal_OnBigMenuClose;
+            UiManager.Event_OnUserInfoMenuOpen += Internal_OnUserInfoMenuOpen;
+            UiManager.Event_OnUserInfoMenuClose += Internal_OnUserInfoMenuClose;
+            UiManager.Event_OnUiPageToggled += Internal_OnUiPageToggled;
             CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
             CheetosHooks.Event_OnFriended += Internal_OnFriended;
@@ -142,6 +146,20 @@
         private void Internal_OnBigMenuClose(object sender, EventArgs e)
         {
             OnBigMenuClose();
+        }
+        private void Internal_OnUserInfoMenuOpen(object sender, EventArgs e)
+        {
+            onUserInfoMenuOpen();
+        }
+
+        private void Internal_OnUserInfoMenuClose(object sender, EventArgs e)
+        {
+            onUserInfoMenuClose();
+        }
+
+        private void Internal_OnUiPageToggled(object sender, OnUiPageEventArgs e)
+        {
+            OnUiPageToggled(e.Page, e.Toggle);
         }
 
         private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
@@ -299,6 +317,17 @@
         }
 
         internal virtual void OnBigMenuClose()
+        {
+        }
+        internal virtual void onUserInfoMenuOpen()
+        {
+        }
+
+        internal virtual void onUserInfoMenuClose()
+        {
+        }
+
+        internal virtual void OnUiPageToggled(UIPage Page, bool Toggle)
         {
         }
 

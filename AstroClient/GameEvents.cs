@@ -4,6 +4,7 @@
 
     using System;
     using System.Collections.Generic;
+    using AstroButtonAPI;
     using AstroClientCore.Events;
     using AstroMonos;
     using AstroMonos.Components.Tools;
@@ -14,6 +15,7 @@
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;
+    using VRC.UI.Elements;
 
     #endregion Imports
 
@@ -54,10 +56,6 @@
             CheetosHooks.Event_OnShowScreen += Internal_OnShowScreen;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
-            VRChatUIEvents.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
-            VRChatUIEvents.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
-            VRChatUIEvents.Event_OnBigMenuOpen += Internal_OnBigMenuOpen;
-            VRChatUIEvents.Event_OnBigMenuClose += Internal_OnBigMenuClose;
             CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
             CheetosHooks.Event_OnFriended += Internal_OnFriended;
@@ -75,6 +73,13 @@
             PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
             PhotonModerationHandler.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
 
+            UiManager.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
+            UiManager.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
+            UiManager.Event_OnBigMenuOpen += Internal_OnBigMenuOpen;
+            UiManager.Event_OnBigMenuClose += Internal_OnBigMenuClose;
+            UiManager.Event_OnUserInfoMenuOpen += Internal_OnUserInfoMenuOpen;
+            UiManager.Event_OnUserInfoMenuClose += Internal_OnUserInfoMenuClose;
+            UiManager.Event_OnUiPageToggled += Internal_OnUiPageToggled;
 
             InputPatches.Event_OnInput_Jump += Internal_OnInput_Jump;
             InputPatches.Event_OnInput_UseLeft += Internal_OnInput_UseLeft;
@@ -280,6 +285,34 @@
             OnInput_GrabRight(e.isClicked, e.isDown, e.isUp);
         }
 
+        private void Internal_OnUserInfoMenuOpen(object sender, EventArgs e)
+        {
+            onUserInfoMenuOpen();
+        }
+
+        private void Internal_OnUserInfoMenuClose(object sender, EventArgs e)
+        {
+            onUserInfoMenuClose();
+        }
+
+        private void Internal_OnUiPageToggled(object sender, OnUiPageEventArgs e)
+        {
+            OnUiPageToggled(e.Page, e.Toggle);
+        }
+
+
+
+        internal virtual void onUserInfoMenuOpen()
+        {
+        }
+
+        internal virtual void onUserInfoMenuClose()
+        {
+        }
+
+        internal virtual void OnUiPageToggled(UIPage Page, bool Toggle)
+        {
+        }
 
         internal virtual void VRChat_OnUiManagerInit()
         {

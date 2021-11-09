@@ -1,13 +1,23 @@
 ﻿namespace AstroButtonAPI
 {
     using System;
+    using System.Linq;
+    using System.Reflection;
+    using AstroLibrary.Utility;
     using CheetoLibrary;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC;
+    using VRC.Core;
+    using VRC.DataModel;
+    using VRC.DataModel.Core;
     using VRC.UI.Elements;
+    using VRC.UI.Elements.Menus;
 
     internal static class Extensions
     {
+
+
         internal static void LoadSprite(this GameObject Parent, string LoadSprite, string name)
         {
             foreach (var image in Parent.GetComponentsInChildren<Image>(true))
@@ -51,6 +61,21 @@
         //    image.color = Color.white;
         //}
 
+        public static IUser ToIUser(this APIUser value)
+        {
+            return ((Il2CppSystem.Object)UiMethods._apiUserToIUser.Invoke(DataModelManager.field_Private_Static_DataModelManager_0.field_Private_DataModelCache_0, new object[3] { value.id, value, false })).Cast<IUser>();
+        }
+
+        /// <summary>
+        /// Converts the given IUser to an APIUser.
+        /// Thanks knah for providing this.
+        /// </summary>
+        /// <param name="value">The IUser to convert to APIUser</param>
+        /// <returns></returns>
+        public static APIUser ToAPIUser(this IUser value)
+        {
+            return value.Cast<DataModel<APIUser>>().field_Protected_TYPE_0;
+        }
 
         internal static void ShowQuickmenuPage(this QuickMenu instance, string pagename)
         {
@@ -62,7 +87,29 @@
             instance.field_Private_MenuStateController_0.PushPage(pagename);
         }
 
+        internal static Player GetSelectedPlayer(this SelectedUserMenuQM instance)
+        {
+            return instance.field_Private_IUser_0.ToAPIUser().GetPlayer();
+            //return instance.field_Private_Player_0;
+        }
 
+        internal static APIUser GetSelectedApiUser(this SelectedUserMenuQM instance)
+        {
+            return instance.field_Private_IUser_0.ToAPIUser();
+            //return instance.field_Private_Player_0;
+        }
+
+        public static Player GetPlayer(this VRC.DataModel.IUser Instance)
+        {
+            foreach (Player player in PlayerManager.field_Private_Static_PlayerManager_0.GetAllPlayers())
+            {
+                if (player.GetAPIUser().id == Instance.prop_String_0)
+                {
+                    return player;
+                }
+            }
+            return null;
+        }
 
         public static GameObject FindObject(this GameObject parent, string name)
         {

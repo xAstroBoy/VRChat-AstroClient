@@ -142,9 +142,8 @@
 
         private static void UpdateMathStuff()
         {
-            var mousePos = hand == ActionMenuHand.Left
-                ? Utilities.GetCursorPosLeft()
-                : Utilities.GetCursorPosRight();
+            var mousePos = (hand == ActionMenuHand.Left) ? InputManager.LeftInput : InputManager.RightInput;
+            radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4f;
             radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4;
 
             if (Vector2.Distance(mousePos, Vector2.zero) > 12)

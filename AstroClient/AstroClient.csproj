@@ -102,6 +102,8 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroLibrary\EventArgs\OnUiPageEventArgs.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Managers\InputManager.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\Extensions.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\MenuAPI_New.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonAPI.cs" />
@@ -120,6 +122,18 @@
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMToggleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMWings.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QuickMenuStuff.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\UiMethods.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuArrow.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuButtonAPI.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuButtonType.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuCheckbox.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuSlider.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuSocialText.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuText.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuType.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\VRCList.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\VRCMenuAPI.cs" />
+    <Compile Include="AstroLibrary\UiManager.cs" />
     <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
@@ -137,33 +151,30 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
     <Compile Include="CodeDebugTools\CodeDebug.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Api\ActionMenuPage.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Api\AMUtils.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Api\CustomSubMenu.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Api\VRCActionMenuPage.cs" />
-    <Compile Include="MenuAPI\ActionMenu\AstroActionMenuPatches.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Helpers\Constants.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Helpers\ExtensionMethods.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Helpers\Utilities.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Managers\FourAxisPuppetManager.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Managers\ModsFolderManager.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Managers\RadialPuppetManager.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Managers\ResourcesManager.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalButton.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalFourAxis.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalRadial.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalStruct.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalSubMenu.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalToggle.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Types\ActionMenuHand.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Types\ActionMenuPageType.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Types\Insertion.cs" />
-    <Compile Include="MenuAPI\ActionMenu\Types\PedalType.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Api\ActionMenuPage.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Api\AMUtils.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Api\CustomSubMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Api\VRCActionMenuPage.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\AstroActionMenuPatches.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Helpers\Constants.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Helpers\ExtensionMethods.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Helpers\Utilities.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Managers\FourAxisPuppetManager.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Managers\ModsFolderManager.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Managers\RadialPuppetManager.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Managers\ResourcesManager.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Pedals\PedalButton.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Pedals\PedalFourAxis.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Pedals\PedalRadial.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Pedals\PedalStruct.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Pedals\PedalSubMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Pedals\PedalToggle.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Types\ActionMenuHand.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Types\ActionMenuPageType.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Types\Insertion.cs" />
+    <Compile Include="AstroLibrary\Menu\ActionMenu\Types\PedalType.cs" />
     <Compile Include="ClientUI\ActionMenu\LightsModule.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\BlazesAPIs.cs" />
-    <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMButton.cs" />
-    <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMList.cs" />
-    <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMText.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\TagsAPI.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\BlazesXRefs.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\ConversionUtils.cs" />
@@ -193,7 +204,7 @@
     <Compile Include="AstroLibrary\Managers\ConversionManager.cs" />
     <Compile Include="AstroLibrary\Managers\CustomJsonTypes.cs" />
     <Compile Include="AstroLibrary\Managers\ExploitManager_Old.cs" />
-    <Compile Include="AstroLibrary\Menu\UnityUIUtils.cs" />
+    <Compile Include="AstroLibrary\UnityUIUtils.cs" />
     <Compile Include="AstroLibrary\Misc\Api\API.cs" />
     <Compile Include="AstroLibrary\Misc\Api\Object\VRChatAPIObjects.cs" />
     <Compile Include="AstroLibrary\Misc\Api\Object\WebSocketObject.cs" />
@@ -257,7 +268,6 @@
     <Compile Include="AstroMonos\Components\Custom\Random\Watcher.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Spinner.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\UiListener.cs" />
-    <Compile Include="AstroMonos\VRChatUIEvents.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_BankEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_HealthEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerEditor.cs" />
@@ -314,11 +324,11 @@
     <Compile Include="Extensions\EventHandler_ext.cs" />
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
-    <Compile Include="Startup\EventArgs\BoolEventsArgs.cs" />
-    <Compile Include="Startup\EventArgs\ColorEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\APIUserEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\VRCInputArgs.cs" />
-    <Compile Include="Startup\EventArgs\ScreenEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\BoolEventsArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\ColorEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\APIUserEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\VRCInputArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\ScreenEventArgs.cs" />
     <Compile Include="Startup\Hooks\PhotonOnEventHook.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
@@ -366,6 +376,7 @@
     <Compile Include="Extensions\Udon_ext.cs" />
     <Compile Include="Utils\Player\Avatar.cs" />
     <Compile Include="BuildInfo.cs" />
+    <Compile Include="Utils\XrefUtils.cs" />
     <Compile Include="WorldAddons\CheatsShortcutButton.cs" />
     <Compile Include="ClientUI\Menu\ESP\PlayerESPMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus.cs" />
@@ -465,22 +476,22 @@
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Networking\NetworkingManager.cs" />
-    <Compile Include="Startup\EventArgs\OnSceneLoadedEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\OnSceneLoadedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
     <Compile Include="AstroMonos\ComponentHelper.cs" />
-    <Compile Include="Startup\EventArgs\OnAvatarDownloadArgs.cs" />
-    <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
-    <Compile Include="Startup\EventArgs\OnTeleportRPCArgs.cs" />
-    <Compile Include="Startup\EventArgs\OnWorldRevealArgs.cs" />
-    <Compile Include="Startup\EventArgs\PhotonPlayerEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\PlayerEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
-    <Compile Include="Startup\EventArgs\UdonSyncRPCEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\VRCPlayerEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\OnAvatarDownloadArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\OnAvatarSpawnArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\OnTeleportRPCArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\OnWorldRevealArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\PhotonPlayerEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\PlayerEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\RayCastEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\SpawnEmojiArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\UdonSyncRPCEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\VRCPlayerEventArgs.cs" />
+    <Compile Include="AstroLibrary\EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
@@ -587,6 +598,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="CustomMarshalers" />
+    <Reference Include="DataModel">
+      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\DataModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\DOTween.dll</HintPath>
       <Private>False</Private>
@@ -1213,15 +1228,19 @@
     </Reference>
     <Reference Include="VRC.UI.Core">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRC.UI.Elements">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRC.UI.Shared">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Shared.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Utility">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.Utility.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="VRCCore-Editor">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
@@ -1340,6 +1359,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\cancel.png" />
     <EmbeddedResource Include="Resources\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AstroLibrary\Blaze%27s Utils\APIS\SM\" />
+    <Folder Include="AstroLibrary\Menu\QuickMenuButtons\" />
+    <Folder Include="MenuAPI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
