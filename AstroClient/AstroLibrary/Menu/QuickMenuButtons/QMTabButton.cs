@@ -1,19 +1,20 @@
 ﻿namespace AstroButtonAPI
 {
     using System;
+    using QuickMenuAPI;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
 
-    public class QMTabButton : QMTabBase
+    internal class QMTabButton : QMTabBase
     {
-        public QMTabButton(float btnXLocation, Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, string ImageURL = null)
+        internal QMTabButton(float btnXLocation, Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, string ImageURL = null)
         {
             InitButton(btnXLocation, btnAction, btnToolTip, btnBackgroundColor, ImageURL);
         }
 
-        public QMTabButton(float btnXLocation, Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, byte[] ImageData = null)
+        internal QMTabButton(float btnXLocation, Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, byte[] ImageData = null)
         {
             InitButton(btnXLocation, btnAction, btnToolTip, btnBackgroundColor, ImageData);
         }
@@ -62,14 +63,14 @@
             SetActive(true);
         }
 
-        public void SetAction(Action buttonAction)
+        internal void SetAction(Action buttonAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonAction != null)
                 button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
         }
 
-        public override void SetBackgroundColor(Color buttonBackgroundColor, bool save = true)
+        internal override void SetBackgroundColor(Color buttonBackgroundColor, bool save = true)
         {
             //button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
             if (save)

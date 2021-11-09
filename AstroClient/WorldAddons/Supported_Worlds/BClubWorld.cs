@@ -24,6 +24,7 @@
     using AstroMonos.Components.Tools.Listeners;
     using CheetoLibrary;
     using Discord;
+    using QuickMenuAPI;
 
     #endregion Imports
 

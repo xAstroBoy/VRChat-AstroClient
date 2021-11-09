@@ -136,8 +136,8 @@
             QMNestedButton.backButton.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             QMNestedButton.backButton.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
-                QMStuff.GetQuickMenuInstance().prop_MenuStateController_0.field_Private_UIPage_0.enabled = true;
-                QMStuff.GetQuickMenuInstance().prop_MenuStateController_0.Method_Public_UIPage_String_1("QuickMenuDashboard");
+                QuickMenuStuff.GetQuickMenuInstance().prop_MenuStateController_0.field_Private_UIPage_0.enabled = true;
+                QuickMenuStuff.GetQuickMenuInstance().prop_MenuStateController_0.Method_Public_UIPage_String_1("QuickMenuDashboard");
             }));
         }
 
@@ -148,8 +148,8 @@
             QMNestedButton.backButton.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             QMNestedButton.backButton.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
-                QuickMenu quickmenu = QMStuff.GetQuickMenuInstance();
-                QMStuff.ShowQuickmenuPage(menuName);
+                QuickMenu quickmenu = QuickMenuStuff.GetQuickMenuInstance();
+                QuickMenuStuff.ShowQuickmenuPage(menuName);
             }));
         }
 

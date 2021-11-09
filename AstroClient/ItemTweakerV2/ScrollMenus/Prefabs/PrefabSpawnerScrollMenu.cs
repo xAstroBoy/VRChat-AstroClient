@@ -2,6 +2,7 @@
 {
     using AstroButtonAPI;
     using AstroLibrary.Utility;
+    using QuickMenuAPI;
     using Selector;
     using UnityEngine;
     using VRC.SDKBase;

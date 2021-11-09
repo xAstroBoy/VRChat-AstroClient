@@ -42,7 +42,10 @@
 
         internal void DestroyMe()
         {
-            UnityEngine.Object.Destroy(button);
+            if (button != null)
+            {
+                UnityEngine.Object.Destroy(button);
+            }
         }
 
     }

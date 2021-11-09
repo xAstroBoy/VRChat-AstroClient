@@ -1,8 +1,9 @@
 ﻿namespace AstroButtonAPI
 {
+    using QuickMenuAPI;
     using UnityEngine;
 
-    public class QMTabMenu
+    internal class QMTabMenu
     {
         protected QMTabButton mainButton;
         protected QMSingleButton backButton;
@@ -10,12 +11,12 @@
         protected string btnQMLoc;
         protected string btnType;
 
-        public QMTabMenu(float btnXLocation, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
+        internal QMTabMenu(float btnXLocation, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
         {
             InitButton(btnXLocation, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, ImageData);
         }
 
-        public void InitButton(float btnXLocation, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, string ImageURL = null)
+        internal void InitButton(float btnXLocation, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, string ImageURL = null)
         {
             btnType = "QMTabMenu";
 
@@ -42,7 +43,7 @@
             // backButton = new QMSingleButton(menuName, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage("ShortcutMenu"); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
         }
 
-        public void InitButton(float btnXLocation, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
+        internal void InitButton(float btnXLocation, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
         {
             btnType = "QMTabMenu";
 
@@ -69,28 +70,28 @@
             // backButton = new QMSingleButton(menuName, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage("ShortcutMenu"); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
         }
 
-        public string GetMenuName()
+        internal string GetMenuName()
         {
             return menuName;
         }
 
-        public QMTabButton GetMainButton()
+        internal QMTabButton GetMainButton()
         {
             return mainButton;
         }
 
-        public QMSingleButton GetBackButton()
+        internal QMSingleButton GetBackButton()
         {
             return backButton;
         }
 
-        public void DestroyMe()
+        internal void DestroyMe()
         {
             mainButton.DestroyMe();
             backButton.DestroyMe();
         }
 
-        public void OpenMe()
+        internal void OpenMe()
         {
             QuickMenuStuff.ShowQuickmenuPage(menuName);
         }

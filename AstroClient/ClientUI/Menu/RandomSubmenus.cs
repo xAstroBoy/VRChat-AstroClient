@@ -4,6 +4,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroMonos.Components.Tools.Listeners;
+    using QuickMenuAPI;
 
     internal class RandomSubmenus
     {

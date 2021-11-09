@@ -29,10 +29,10 @@
         internal bool AllowOverStepping = false;
         internal bool IgnoreEverything = false;
 
-        internal QMScrollMenu(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
+        internal QMScrollMenu(QMNestedButton Parent, float btnXLocation, float btnYLocation, Action<QMScrollMenu> Open, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
             BaseMenu = new QMNestedButton(Parent, btnXLocation, btnYLocation, btnText, Title, btnToolTip, TextColor, LoadSprite);
-            SetAction(MenuOpenAction);
+            SetAction(Open);
             IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "");
             IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
             IndexButton.GetGameObject().GetComponentInChildren<Image>().enabled = false;
@@ -51,7 +51,7 @@
             BackButton = new QMSingleButton(BaseMenu, 5, 0f, "Back", delegate
             {
                 ShowMenu(currentMenuIndex - 1);
-            }, "Go Back", null, null, true);
+            }, "Go Back");
         }
 
         internal void ShowMenu(int MenuIndex)
@@ -80,7 +80,7 @@
                 {
                     if (shouldClear) Clear();
                     OpenAction.Invoke(this);
-                    QMStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
+                    QuickMenuStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
                     ShowMenu(0);
                 }));
             }
@@ -94,7 +94,7 @@
         {
             Clear();
             OpenAction?.Invoke(this);
-            QMStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
+            QuickMenuStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
             ShowMenu(0);
         }
 
@@ -111,8 +111,6 @@
                 IndexButton.DestroyMe();
             if (BackButton != null)
                 BackButton.DestroyMe();
-            if (NextButton != null)
-                NextButton.DestroyMe();
         }
 
         internal void Clear()

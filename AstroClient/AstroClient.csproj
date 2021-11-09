@@ -108,11 +108,14 @@
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMNestedButton.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QmQuickActions.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMSingleButton.cs" />
-    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMStuff.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QuickMenuStuff.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMTabButton.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMToggleButton.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuAPI\QMWings.cs" />
     <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMScrollMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMTabBase.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMTabButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMTabMenu.cs" />
     <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />

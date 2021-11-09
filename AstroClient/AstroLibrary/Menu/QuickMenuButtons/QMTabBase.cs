@@ -1,10 +1,11 @@
 ﻿namespace AstroButtonAPI
 {
     using CheetoLibrary;
+    using QuickMenuAPI;
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class QMTabBase
+    internal class QMTabBase
     {
         protected GameObject button;
         protected GameObject Icon;
@@ -14,24 +15,24 @@
         protected int[] initShift = { 0, 0 };
         protected Color OrigBackground;
 
-        public GameObject GetGameObject()
+        internal GameObject GetGameObject()
         {
             return button;
         }
 
-        public GameObject GetIcon()
+        internal GameObject GetIcon()
         {
             if (Icon == null)
                 Icon = button.transform.Find("Icon").gameObject;
             return Icon;
         }
 
-        public void SetActive(bool isActive)
+        internal void SetActive(bool isActive)
         {
             button.gameObject.SetActive(isActive);
         }
 
-        public void SetIntractable(bool isIntractable)
+        internal void SetIntractable(bool isIntractable)
         {
             if (isIntractable)
             {
@@ -44,7 +45,7 @@
             button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
-        public void SetLocation(float buttonXLoc)
+        internal void SetLocation(float buttonXLoc)
         {
             //button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (210 * (buttonXLoc + initShift[0]));
             //button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 * (buttonYLoc + initShift[1]));
@@ -54,13 +55,13 @@
             button.GetComponent<Button>().name = btnType + btnTag;
         }
 
-        public void SetToolTip(string buttonToolTip)
+        internal void SetToolTip(string buttonToolTip)
         {
             button.GetComponent<UiTooltip>().field_Public_String_0 = buttonToolTip;
             button.GetComponent<UiTooltip>().field_Public_String_1 = buttonToolTip;
         }
 
-        public void DestroyMe()
+        internal void DestroyMe()
         {
             try
             {
@@ -69,7 +70,7 @@
             catch { }
         }
 
-        public void LoadSprite(string path)
+        internal void LoadSprite(string path)
         {
             var image = GetIcon().GetComponent<Image>();
             var texture = CheetoUtils.LoadPNG(path);
@@ -77,7 +78,7 @@
             image.color = Color.white;
         }
 
-        public void LoadSprite(byte[] data)
+        internal void LoadSprite(byte[] data)
         {
             var image = GetIcon().GetComponent<Image>();
             var texture = CheetoUtils.LoadPNG(data);
@@ -85,17 +86,17 @@
             image.color = Color.white;
         }
 
-        public void SetParent(QMNestedButton Parent)
+        internal void SetParent(QMNestedButton Parent)
         {
             button.transform.SetParent(QuickMenuStuff.GetQuickMenuInstance().transform.Find(Parent.GetMenuName()));
         }
 
-        public void SetParent(Transform Parent)
+        internal void SetParent(Transform Parent)
         {
             button.transform.SetParent(Parent);
         }
 
-        public virtual void SetBackgroundColor(Color buttonBackgroundColor, bool save = true)
+        internal virtual void SetBackgroundColor(Color buttonBackgroundColor, bool save = true)
         {
         }
     }

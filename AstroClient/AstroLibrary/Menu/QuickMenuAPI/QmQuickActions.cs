@@ -24,14 +24,14 @@
             switch (Menu)
             {
                 case "MainMenu":
-                    Header = UnityEngine.Object.Instantiate(QMStuff.Header_DashboardTemplate(), QMStuff.Header_DashboardTemplate().transform.parent, true);
+                    Header = UnityEngine.Object.Instantiate(QuickMenuStuff.Header_DashboardTemplate(), QuickMenuStuff.Header_DashboardTemplate().transform.parent, true);
                     Header.name = QMButtonAPI.identifier + btnType + Title + "_Header";
                     var Text = Extensions.NewText(Header, "Text_Title");
                     Text.text = Title;
                     Text.SetFaceColor(TextColor);
                     Header.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
-                    QuickActions = UnityEngine.Object.Instantiate(QMStuff.MenuDashboard_ButtonsSection().gameObject, QMStuff.Header_DashboardTemplate().transform.parent, true);
+                    QuickActions = UnityEngine.Object.Instantiate(QuickMenuStuff.MenuDashboard_ButtonsSection().gameObject, QuickMenuStuff.Header_DashboardTemplate().transform.parent, true);
                     QuickActions.CleanButtonsQuickActions();
                     QuickActions.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index + 1);
                     QuickActions.name = QMButtonAPI.identifier + btnType + Title + "_Buttons";
@@ -39,14 +39,14 @@
 
                 case "SelectedUser":
                     Index += 5;
-                    Header = UnityEngine.Object.Instantiate(QMStuff.Header_DashboardTemplate(), QMStuff.SelectedUserPage().transform.parent, true);
+                    Header = UnityEngine.Object.Instantiate(QuickMenuStuff.Header_DashboardTemplate(), QuickMenuStuff.SelectedUserPage().transform.parent, true);
                     Header.name = QMButtonAPI.identifier + btnType + Title + "_Header";
                     var Text2 = Extensions.NewText(Header, "Text_Title");
                     Text2.text = Title;
                     Text2.SetFaceColor(TextColor);
                     Header.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
-                    QuickActions = UnityEngine.Object.Instantiate(QMStuff.SelectedUserPage_ButtonsSection().gameObject, QMStuff.SelectedUserPage().transform.parent, true);
+                    QuickActions = UnityEngine.Object.Instantiate(QuickMenuStuff.SelectedUserPage_ButtonsSection().gameObject, QuickMenuStuff.SelectedUserPage().transform.parent, true);
                     QuickActions.CleanButtonsQuickActions();
                     QuickActions.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index + 1);
                     QuickActions.name = QMButtonAPI.identifier + btnType + Title + "_Buttons";

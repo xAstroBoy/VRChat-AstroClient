@@ -33,8 +33,8 @@
         private protected void initButton(System.Action btnActionOn, float btnXLocation, float btnYLocation, string Title, System.Action btnActionOff, string btnToolTip, string TextColor = null, bool shouldSaveInConf = false, bool defaultPosition = false)
         {
             btnType = "_ToggleButton_";
-            var Part1 = QMStuff.GetQuickMenuInstance().gameObject.FindObject(btnQMLoc);
-            button = UnityEngine.Object.Instantiate<GameObject>(QMStuff.ToggleButtonTemplate(), Part1.FindObject("Buttons").transform, true);
+            var Part1 = QuickMenuStuff.GetQuickMenuInstance().gameObject.FindObject(btnQMLoc);
+            button = UnityEngine.Object.Instantiate<GameObject>(QuickMenuStuff.ToggleButtonTemplate(), Part1.FindObject("Buttons").transform, true);
             Extensions.NewText(button, "Text_H4").text = Title;
             button.name = QMButtonAPI.identifier + btnType + Title;
             btnOn = button.FindObject("Icon_On");
@@ -47,7 +47,7 @@
             else
                 setTextColorHTML("#blue");
 
-            button.transform.position = QMStuff.SingleButtonTemplate().transform.position;
+            button.transform.position = QuickMenuStuff.SingleButtonTemplate().transform.position;
             initShift[0] = -1;
             initShift[1] = -3;
             SetLocation(btnXLocation, btnYLocation);

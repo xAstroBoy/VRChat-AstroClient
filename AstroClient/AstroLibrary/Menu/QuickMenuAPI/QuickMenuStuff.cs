@@ -4,13 +4,13 @@
     using UnityEngine.UI;
     using VRC.UI.Elements;
 
-    internal class QMStuff
+    internal class QuickMenuStuff
     {
         //Templates and references
         internal static bool SelectSelf = false;
         internal static BoxCollider QuickMenuBackgroundReference;
         internal static GameObject SingleButtonReference;
-        internal static Vector3 SingleButtonReferencePosition;
+        internal static Vector3? SingleButtonReferencePosition;
         internal static GameObject SingleButtonReferenceSelectedUser;
         internal static GameObject ToggleButtonReference;
         internal static Transform NestedButtonReference;
@@ -51,7 +51,7 @@
         {
             if (UIPageReference_Right == null)
             {
-                var Buttons = QMStuff.Wing_Right().GetComponentsInChildren<UIPage>(true);
+                var Buttons = QuickMenuStuff.Wing_Right().GetComponentsInChildren<UIPage>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Friends")
@@ -68,7 +68,7 @@
         {
             if (UIPageReference_Left == null)
             {
-                var Buttons = QMStuff.Wing_Left().GetComponentsInChildren<UIPage>(true);
+                var Buttons = QuickMenuStuff.Wing_Left().GetComponentsInChildren<UIPage>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Friends")
@@ -85,7 +85,7 @@
         {
             if (MenuStateController_Wing_Right == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Right")
@@ -102,7 +102,7 @@
         {
             if (MenuStateController_Wing_Left == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Left")
@@ -119,7 +119,7 @@
         {
             if (_Wing_Left == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Wing>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Wing>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Left")
@@ -135,7 +135,7 @@
         {
             if (_Wing_Right == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Wing>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Wing>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Right")
@@ -152,7 +152,7 @@
         {
             if (_QuickMenuControllert == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Canvas_QuickMenu(Clone)")
@@ -173,18 +173,18 @@
             return quickmenuInstance;
         }
 
-        //internal static BoxCollider QuickMenuBackground()
-        //{
-        //    if (QuickMenuBackgroundReference == null)
-        //        QuickMenuBackgroundReference = GetQuickMenuInstance().transform.Find("Container/Button_Worlds").GetComponent<BoxCollider>();
-        //    return QuickMenuBackgroundReference;
-        //}
+        internal static BoxCollider QuickMenuBackground()
+        {
+            if (QuickMenuBackgroundReference == null)
+                QuickMenuBackgroundReference = GetQuickMenuInstance().transform.Find("Container/Button_Worlds").GetComponent<BoxCollider>();
+            return QuickMenuBackgroundReference;
+        }
 
         internal static GameObject SingleButtonTemplate()
         {
             if (SingleButtonReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_Respawn")
@@ -202,14 +202,14 @@
             {
                 SingleButtonReferencePosition = SingleButtonTemplate().transform.position;
             }
-            return SingleButtonReferencePosition;
+            return SingleButtonReferencePosition.Value;
         }
 
         internal static GameObject SingleButtonTemplateSelUser()
         {
             if (SingleButtonReferenceSelectedUser == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_VoteKick")
@@ -225,7 +225,7 @@
         {
             if (_CarouselBanners == null)
             {
-                var Transforms = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Transforms = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var transform in Transforms)
                 {
                     if (transform.name == "Carousel_Banners")
@@ -243,7 +243,7 @@
         {
             if (HeaderDashboardReference == null)
             {
-                var Transforms = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Transforms = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var transform in Transforms)
                 {
                     if (transform.name == "Header_QuickLinks")
@@ -260,7 +260,7 @@
         {
             if (TabButtonReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Page_Settings")
@@ -277,7 +277,7 @@
         {
             if (WingPageButtonReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_ActionMenu")
@@ -294,7 +294,7 @@
         {
             if (WingButtonReferenceRight == null)
             {
-                var Buttons = QMStuff.Wing_Right().GetComponentsInChildren<Button>(true);
+                var Buttons = QuickMenuStuff.Wing_Right().GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_Profile")
@@ -311,7 +311,7 @@
         {
             if (WingPageButtonReferenceLeft == null)
             {
-                var Buttons = QMStuff.Wing_Left().GetComponentsInChildren<Button>(true);
+                var Buttons = QuickMenuStuff.Wing_Left().GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_Profile")
@@ -328,7 +328,7 @@
         {
             if (ToggleButtonReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Toggle>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Toggle>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_ToggleFallbackIcon")
@@ -345,7 +345,7 @@
         {
             if (NestedButtonReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Menu_Camera")
@@ -363,7 +363,7 @@
 
             if (SelectedUserPageReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Header_UserActions")
@@ -380,7 +380,7 @@
         {
             if (SelectedUserPageButtonsReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Buttons_UserActions")
@@ -397,7 +397,7 @@
         {
             if (NestedButtonReferenceGameO == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Menu_Camera")
@@ -414,7 +414,7 @@
         {
             if (MenuDashboardReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Buttons_QuickActions")
@@ -432,7 +432,7 @@
             if (NestedButtonReference == null)
             {
 
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Menu_Camera")
@@ -449,7 +449,7 @@
         {
             if (NestedPagesReference == null)
             {
-                var Buttons = QMStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "QMParent")
@@ -473,17 +473,7 @@
 
         internal static void ShowQuickmenuPage(string pagename)
         {
-            QMStuff.GetQuickMenuInstance().prop_MenuStateController_0.PushPage(pagename);
-        }
-
-        internal static void NoShader(QMSingleButton x)
-        {
-            x.GetGameObject().GetComponent<Button>().name = "NoShader";
-        }
-
-        internal static void NoShader(QMNestedButton x)
-        {
-            x.GetMainButton().GetGameObject().GetComponent<Button>().name = "NoShader";
+            QuickMenuStuff.GetQuickMenuInstance().prop_MenuStateController_0.PushPage(pagename);
         }
     }
 }

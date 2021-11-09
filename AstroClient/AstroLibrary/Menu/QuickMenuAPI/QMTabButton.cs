@@ -15,7 +15,7 @@
         internal void initButton(int Index, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnType = "_QMTabButton_";
-            button = UnityEngine.Object.Instantiate(QMStuff.TabButtonTemplate(), QMStuff.TabButtonTemplate().transform.parent, true);
+            button = UnityEngine.Object.Instantiate(QuickMenuStuff.TabButtonTemplate(), QuickMenuStuff.TabButtonTemplate().transform.parent, true);
             button.name = QMButtonAPI.identifier + btnType + Index;
             setToolTip(btnToolTip);
             setAction(btnAction);
