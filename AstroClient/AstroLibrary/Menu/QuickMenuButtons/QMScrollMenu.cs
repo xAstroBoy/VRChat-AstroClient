@@ -15,7 +15,6 @@
         }
 
         internal QMNestedButton BaseMenu;
-        internal QMSingleButton NextButton;
         internal QMSingleButton BackButton;
         internal QMSingleButton IndexButton;
         internal List<ScrollObject> QMButtons = new List<ScrollObject>();
@@ -40,11 +39,7 @@
             BackButton = new QMSingleButton(BaseMenu, 5, 0f, "Back", delegate
             {
                 ShowMenu(currentMenuIndex - 1);
-            }, "Go Back", null, null, true);
-            NextButton = new QMSingleButton(BaseMenu, 5, 1.5f, "Next", false, delegate
-            {
-                ShowMenu(currentMenuIndex + 1);
-            }, "Go Next", null, null, true);
+            }, "Go Back");
         }
 
         internal QMScrollMenu(QMNestedButton basemenu)
@@ -57,10 +52,6 @@
             {
                 ShowMenu(currentMenuIndex - 1);
             }, "Go Back", null, null, true);
-            NextButton = new QMSingleButton(BaseMenu, 5, 1.5f, "Next", delegate
-            {
-                ShowMenu(currentMenuIndex + 1);
-            }, "Go Next", null, null, true);
         }
 
         internal void ShowMenu(int MenuIndex)
@@ -89,7 +80,7 @@
                 {
                     if (shouldClear) Clear();
                     OpenAction.Invoke(this);
-                    QuickMenuStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
+                    QMStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
                     ShowMenu(0);
                 }));
             }
@@ -103,7 +94,7 @@
         {
             Clear();
             OpenAction?.Invoke(this);
-            QuickMenuStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
+            QMStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
             ShowMenu(0);
         }
 

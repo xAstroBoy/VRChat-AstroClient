@@ -16,7 +16,7 @@
 
         public QMSingleButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
         {
-            btnQMLoc = Parent.getMenuName();
+            btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
 
             if (btnHalf)
@@ -92,11 +92,11 @@
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     initShift[0] = -1;
                     initShift[1] = -3;
-                    setLocation(btnXLocation, btnYLocation);
+                    SetLocation(btnXLocation, btnYLocation);
                     break;
             }
 
-            setButtonText(btnText);
+            SetButtonText(btnText);
             setToolTip(btnToolTip);
 
             SetAction(btnAction);
@@ -112,7 +112,7 @@
                 setTextColorHTML("#blue");
 
 
-            setActive(true);
+            SetActive(true);
             //QMButtonAPI.allSingleButtons.Add(this);
         }
 
@@ -127,7 +127,7 @@
             button = UnityEngine.Object.Instantiate(QMStuff.SingleButtonTemplate(), Parent.FindObject("Buttons").transform, true);
             button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
 
-            setButtonText(btnText);
+            SetButtonText(btnText);
             setToolTip(btnToolTip);
             SetAction(btnAction);
 
@@ -146,7 +146,7 @@
             //else
             //    OrigText = button.GetComponentInChildren<TMPro.TextMeshProUGUI>().color;
 
-            setActive(true);
+            SetActive(true);
             //QMButtonAPI.allSingleButtons.Add(this);
         }
 
@@ -175,7 +175,7 @@
             }
             else
             {
-                setButtonText(btnText);
+                SetButtonText(btnText);
             }
 
 
@@ -195,7 +195,7 @@
             //QMButtonAPI.allSingleButtons.Add(this);
         }
 
-        internal void setButtonText(string buttonText)
+        internal void SetButtonText(string buttonText)
         {
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
         }

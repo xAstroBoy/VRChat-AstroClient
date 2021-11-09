@@ -6,8 +6,8 @@
 
     internal class QMNestedButton
     {
-        public QMSingleButton mainButton;
-        internal static GameObject backButton;
+        internal QMSingleButton mainButton;
+        internal QMSingleButton backButton;
         //internal QMSingleButton NotoriousMainButton;
 
         internal string menuName;
@@ -16,7 +16,7 @@
 
         internal QMNestedButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
-            btnQMLoc = Parent.getMenuName();
+            btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, Title, LoadSprite, TextColor);
         }
 
@@ -76,7 +76,7 @@
         }
 
 
-        internal string getMenuName()
+        internal string GetMenuName()
         {
             return menuName;
         }
@@ -84,6 +84,10 @@
         internal QMSingleButton GetMainButton()
         {
             return mainButton;
+        }
+        internal QMSingleButton GetBackButton()
+        {
+            return backButton;
         }
 
         internal void DestroyMe()

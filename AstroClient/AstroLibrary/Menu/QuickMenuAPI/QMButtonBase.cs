@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class QMButtonBase
+    internal class QMButtonBase
     {
         protected GameObject button;
         protected string btnQMLoc;
@@ -12,17 +12,17 @@
         protected Color OrigBackground;
         protected Color OrigText;
 
-        public GameObject GetGameObject()
+        internal GameObject GetGameObject()
         {
             return button;
         }
 
-        public void setActive(bool state)
+        internal void SetActive(bool state)
         {
             button.gameObject.SetActive(state);
         }
 
-        public void setLocation(float buttonXLoc, float buttonYLoc)
+        internal void SetLocation(float buttonXLoc, float buttonYLoc)
         {
             button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 / 2 * (buttonXLoc + initShift[0]));
             button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 / 2 * (buttonYLoc + initShift[1]));
@@ -39,5 +39,11 @@
 
         internal virtual void setBackgroundColor(Color buttonBackgroundColor, bool save = true) { }
         internal virtual void setTextColor(Color buttonTextColor) { }
+
+        internal void DestroyMe()
+        {
+            UnityEngine.Object.Destroy(button);
+        }
+
     }
 }

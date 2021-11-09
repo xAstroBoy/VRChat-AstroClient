@@ -20,7 +20,7 @@
 
         internal QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string Title, System.Action btnActionOn, System.Action btnActionOff, string btnToolTip, string btnTextColor = null, bool shouldSaveInConfig = false, bool defaultPosition = false)
         {
-            btnQMLoc = btnMenu.getMenuName();
+            btnQMLoc = btnMenu.GetMenuName();
             initButton(btnActionOn, btnXLocation, btnYLocation, Title, btnActionOff, btnToolTip, btnTextColor, shouldSaveInConfig, defaultPosition);
         }
 
@@ -50,7 +50,7 @@
             button.transform.position = QMStuff.SingleButtonTemplate().transform.position;
             initShift[0] = -1;
             initShift[1] = -3;
-            setLocation(btnXLocation, btnYLocation);
+            SetLocation(btnXLocation, btnYLocation);
 
             btnOn.GetComponentInChildren<RectTransform>().anchoredPosition -= new Vector2(50, 0);
             btnOff.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(50, 0);

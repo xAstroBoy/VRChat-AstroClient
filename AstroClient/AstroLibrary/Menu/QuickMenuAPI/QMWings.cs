@@ -108,7 +108,7 @@
 
             if (LoadSprite != "")
                 button.LoadSprite(LoadSprite, "Icon");
-            setActive(true);
+            SetActive(true);
         }
 
         internal void setAction(System.Action buttonAction)
