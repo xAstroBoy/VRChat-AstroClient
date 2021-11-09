@@ -70,7 +70,7 @@
 
         #region Buttons
 
-        internal static QMSingleButton ToggleDebugInfo;
+        internal static QMSingleToggleButton ToggleDebugInfo;
         internal static QMSingleButton CopyIDButton;
         internal static QMSingleButton AvatarByIDButton;
         internal static QMSingleButton ClearVRamButton;
@@ -366,14 +366,14 @@
         internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
-            QMTabMenu AstroClient = new QMTabMenu(1, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
             ExploitsMenu.InitButtons(2f);
             WorldsCheats.InitButtons(4f);
             HistoryMenu.InitButtons(6f);
             AdminMenu.InitButtons(8f);
             DevMenu.InitButtons(10f);
 
-            ToggleDebugInfo = new QMSingleButton(AstroClient, 4, 2.5f, "Debug Console ON", () => { Bools.IsDebugMode = true; }, "Debug Console OFF", () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", () => { Bools.IsDebugMode = true; }, "Debug Console OFF", () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 
             // Top Right Buttons
             CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", () => { Clipboard.SetText($"{WorldUtils.FullID}"); }, "Copy the ID of the current instance.", null, null, true);
@@ -396,13 +396,13 @@
             // Protections
             QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, UnityEngine.Color.yellow, null, null, true);
 
-            QMSingleButton toggleBlockRPC = new QMSingleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.BlockRPC, true);
+            QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.BlockRPC, true);
             toggleBlockRPC.SetToggleState(Bools.BlockRPC);
 
-            QMSingleButton toggleBlockUdon = new QMSingleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.BlockRPC, true);
+            QMSingleToggleButton toggleBlockUdon = new QMSingleToggleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.BlockRPC, true);
             toggleBlockUdon.SetToggleState(Bools.BlockUdon);
 
-            QMSingleButton toggleAntiPortal = new QMSingleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.AntiPortal, true);
+            QMSingleToggleButton toggleAntiPortal = new QMSingleToggleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.AntiPortal, true);
             toggleAntiPortal.SetToggleState(Bools.AntiPortal);
 
             // Misc

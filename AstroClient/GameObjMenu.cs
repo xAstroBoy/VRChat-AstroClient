@@ -267,9 +267,9 @@
 
         internal static QMSingleButton GoToParentBtn;
 
-        private static QMSingleButton ToggleModeSwitch;
-        private static QMSingleButton DestroyModeSwitch;
-        private static QMSingleButton PasstoTweakerModeSwitch;
+        private static QMSingleToggleButton ToggleModeSwitch;
+        private static QMSingleToggleButton DestroyModeSwitch;
+        private static QMSingleToggleButton PasstoTweakerModeSwitch;
         internal static QMSingleButton GameObjMenuObjectToEdit;
 
         private static QMHalfScroll MainScroll; // Original : MainScroll
@@ -297,9 +297,9 @@
 
             _ = new QMSingleButton(gameobjtogglermenu, -1, -1, "Root Transforms", new Action(() => { CurrentSelection = GetAllCurrentSceneObjects(); MainScroll.Refresh(); subscroll.Refresh(); }), "Return To Root Objects", null, null, true);
             GoToParentBtn = new QMSingleButton(gameobjtogglermenu, -1, 0f, "previous parent", new Action(() => { ReturnToParent(); }), "Go Back to previous parent", null, null, true);
-            ToggleModeSwitch = new QMSingleButton(gameobjtogglermenu, -1, 0.5f, "Toggle Object", new Action(() => { IsToggleMode = true; }), "Toggle Object", new Action(() => { IsToggleMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
-            DestroyModeSwitch = new QMSingleButton(gameobjtogglermenu, -1, 1f, "Destroy Object", new Action(() => { IsDestroyMode = true; }), "Destroy Object", new Action(() => { IsDestroyMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
-            PasstoTweakerModeSwitch = new QMSingleButton(gameobjtogglermenu, -1, 1.5f, "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = true; }), "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
+            ToggleModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 0.5f, "Toggle Object", new Action(() => { IsToggleMode = true; }), "Toggle Object", new Action(() => { IsToggleMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
+            DestroyModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1f, "Destroy Object", new Action(() => { IsDestroyMode = true; }), "Destroy Object", new Action(() => { IsDestroyMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
+            PasstoTweakerModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1.5f, "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = true; }), "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
             GameObjMenuObjectToEdit = new QMSingleButton(gameobjtogglermenu, -1, 2f, "Not Selected", null, "Shows what item is current set on the item tweaker", null, null, false);
             if (DestroyModeSwitch != null)
             {

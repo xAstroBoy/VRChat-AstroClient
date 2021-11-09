@@ -6,7 +6,6 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
-    using AstroLibrary.Menu.AstroButtonAPI;
     using AstroLibrary.Utility;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
@@ -47,7 +46,7 @@
 
         internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
-            udonTycoonCheatPage = new QMNestedButton(main, x, y, "Udon Tycoon", "Udon Tycoon Cheats",  "Manage Udon Cheats", null, null);
+            udonTycoonCheatPage = new QMNestedButton(main, x, y, "Udon Tycoon", "Udon Tycoon Cheats", null, null, null, null, btnHalf);
 
             _ = new QMSingleButton(udonTycoonCheatPage, 1, 0f, "Set 9999999999 Polys", () => { SetPolys(999999999); }, "Edit Current Polys Balance!", null, null, true);
         }

@@ -377,16 +377,16 @@
         {
             var temp = new QMNestedButton(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
 
-            ToggleFullbright = new QMSingleButton(temp, 1, 0, "Player Headlight: ON", () => { IsHeadLightActive = true; }, "Player Headlight: OFF", () => { IsHeadLightActive = false; }, "Toggle Player Headlight", Color.green, Color.red, null, false, true);
+            ToggleFullbright = new QMSingleToggleButton(temp, 1, 0, "Player Headlight: ON", () => { IsHeadLightActive = true; }, "Player Headlight: OFF", () => { IsHeadLightActive = false; }, "Toggle Player Headlight", Color.green, Color.red, null, false, true);
 
-            RenderFullbrightToggle = new QMSingleButton(temp, 1, 0.5f, "Render Fullbright: ON", () => { FullbrightByRender = true; }, "Render Fullbright: OFF", () => { FullbrightByRender = false; }, "Tweaks Level RenderSettings To Make the whole place Visible.", Color.green, Color.red, null, false, true);
-            FogSwitch = new QMSingleButton(temp, 1, 1f, "FOG: ON", () => { ToggleFog(true); }, "FOG: OFF", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog.", Color.green, Color.red, null, false, true);
+            RenderFullbrightToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Render Fullbright: ON", () => { FullbrightByRender = true; }, "Render Fullbright: OFF", () => { FullbrightByRender = false; }, "Tweaks Level RenderSettings To Make the whole place Visible.", Color.green, Color.red, null, false, true);
+            FogSwitch = new QMSingleToggleButton(temp, 1, 1f, "FOG: ON", () => { ToggleFog(true); }, "FOG: OFF", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog.", Color.green, Color.red, null, false, true);
 
             _ = new QMSingleButton(temp, 2, 0, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight", null, null, true);
             _ = new QMSingleButton(temp, 2, 0.5f, "Destroy Spawned Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, "Kill Spawned Flashlights", null, null, true);
 
             // TODO : make it less laggy and able to toggle em on/off without breaking itself.
-            //ToggleLightmaps = new QMSingleButton(temp, 1, 1f, "Baked Lightings: ON", () => { ToggleLightMaps(true); }, "Baked Lightings: OFF", () => { ToggleLightMaps(false); }, "Tries to toggle on/off LightMaps but is broken and buggy.", Color.green, Color.red, null, false, true);
+            //ToggleLightmaps = new QMSingleToggleButton(temp, 1, 1f, "Baked Lightings: ON", () => { ToggleLightMaps(true); }, "Baked Lightings: OFF", () => { ToggleLightMaps(false); }, "Tries to toggle on/off LightMaps but is broken and buggy.", Color.green, Color.red, null, false, true);
         }
 
 
@@ -429,11 +429,11 @@
         private static float Originalsunintensity { get; set; }
         private static bool HasLightmapsStored { get; set; } = false;
         private static bool AreLightMapsEnabled { get; set; } = true;
-        internal static QMSingleButton FogSwitch { get; set; }
+        internal static QMSingleToggleButton FogSwitch { get; set; }
 
         private static Light FullBrightLight { get; set; }
-        private static QMSingleButton ToggleFullbright { get; set; }
-        private static QMSingleButton RenderFullbrightToggle { get; set; }
-        private static QMSingleButton ToggleLightmaps { get; set; }
+        private static QMSingleToggleButton ToggleFullbright { get; set; }
+        private static QMSingleToggleButton RenderFullbrightToggle { get; set; }
+        private static QMSingleToggleButton ToggleLightmaps { get; set; }
     }
 }

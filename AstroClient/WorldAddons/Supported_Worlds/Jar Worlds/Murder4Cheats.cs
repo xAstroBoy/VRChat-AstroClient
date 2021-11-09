@@ -409,7 +409,7 @@
 
             #region Item Teleporter
 
-            DoUnlockedSoundbtn = new QMSingleButton(MurderItemTeleporter, 0, 0, "Do Sound", new Action(() => { DoUnlockedSound = true; }), "Quiet Mode", new Action(() => { DoUnlockedSound = false; }), "Should i run the Sound action on pickups teleport.", Color.green, Color.red, null, false, true);
+            DoUnlockedSoundbtn = new QMSingleToggleButton(MurderItemTeleporter, 0, 0, "Do Sound", new Action(() => { DoUnlockedSound = true; }), "Quiet Mode", new Action(() => { DoUnlockedSound = false; }), "Should i run the Sound action on pickups teleport.", Color.green, Color.red, null, false, true);
             _ = new QMSingleButton(MurderItemTeleporter, 1, 0, "Clues!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
             _ = new QMSingleButton(MurderItemTeleporter, 2, 0, "Photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
             _ = new QMSingleButton(MurderItemTeleporter, 3, 0, "Notebook!", new Action(() => { Clue_notebook.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
@@ -452,9 +452,9 @@
             new QMSingleButton(MurderItemTweaker, 4, 2.5f, "Kill Crazy Effects!", new Action(() => { RemoveCrazy(); }), "Remove Crazy effect to all items", null, null, true).SetResizeTextForBestFit(true);
 
             _ = new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null, true);
-            ToggleGravityMode = new QMSingleButton(MurderItemTweaker, 1, 0.5f, "Fall (World Gravity)", new Action(() => { UseGravity = true; }), "Float (Space Mode)", new Action(() => { UseGravity = false; }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+            ToggleGravityMode = new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Fall (World Gravity)", new Action(() => { UseGravity = true; }), "Float (Space Mode)", new Action(() => { UseGravity = false; }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
 
-            KnifesGrabbableToggle = new QMSingleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+            KnifesGrabbableToggle = new QMSingleToggleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
             new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true).SetResizeTextForBestFit(true); ;
             new QMSingleButton(MurderItemTweaker, 1, 2, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true).SetResizeTextForBestFit(true); ;
 
@@ -567,14 +567,14 @@
 
             Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage, 2, 0.5f, true);
 
-            GetSelfPatreonGunBtn = new QMSingleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!", Color.green, Color.red, null, false, true);
-            GetEveryonePatreonGunBtn = new QMSingleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!", Color.green, Color.red, null, false, true);
+            GetSelfPatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!", Color.green, Color.red, null, false, true);
+            GetEveryonePatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!", Color.green, Color.red, null, false, true);
 
-            GetDetectiveRoleBtn = new QMSingleButton(Murder4CheatPage, 3, 1, "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
-            GetMurdererRoleBtn = new QMSingleButton(Murder4CheatPage, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = false; }), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1, "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = false; }), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
 
-            Murder4ESPtoggler = new QMSingleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
-            JarRoleController.Murder4RolesRevealerToggle = new QMSingleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
+            Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
+            JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
             Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 0, true);
             Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 0.5f, true);
             Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 1f, true);
@@ -784,7 +784,7 @@
         private static bool SafetySwap;
 
         // MAP GameObjects Required for control.
-        internal static QMSingleButton Murder4ESPtoggler;
+        internal static QMSingleToggleButton Murder4ESPtoggler;
 
         internal static QMSingleButton GameStartbtn;
         internal static QMSingleButton GameAbortbtn;
@@ -795,7 +795,7 @@
         private static QMSingleButton PresentSpawner;
         private static QMSingleButton PresentClicker;
 
-        private static QMSingleButton DoUnlockedSoundbtn;
+        private static QMSingleToggleButton DoUnlockedSoundbtn;
 
         private static bool _DoUnlockedSound;
 
@@ -815,7 +815,7 @@
             }
         }
 
-        internal static QMSingleButton KnifesGrabbableToggle;
+        internal static QMSingleToggleButton KnifesGrabbableToggle;
 
         internal static QMSingleButton KnifesGrabFromFar;
         private static bool _isChristmasMode;
@@ -895,12 +895,12 @@
         internal static UdonBehaviour_Cached VictoryBystanderEvent;
         internal static UdonBehaviour_Cached VictoryMurdererEvent;
 
-        internal static QMSingleButton GetDetectiveRoleBtn;
-        internal static QMSingleButton GetMurdererRoleBtn;
+        internal static QMSingleToggleButton GetDetectiveRoleBtn;
+        internal static QMSingleToggleButton GetMurdererRoleBtn;
 
-        internal static QMSingleButton GetSelfPatreonGunBtn;
-        internal static QMSingleButton GetEveryonePatreonGunBtn;
-        internal static QMSingleButton ToggleGravityMode;
+        internal static QMSingleToggleButton GetSelfPatreonGunBtn;
+        internal static QMSingleToggleButton GetEveryonePatreonGunBtn;
+        internal static QMSingleToggleButton ToggleGravityMode;
 
         internal static bool _RoleSwapper_GetDetectiveRole;
 

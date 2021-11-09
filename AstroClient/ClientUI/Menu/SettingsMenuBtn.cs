@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Console;
-    using AstroLibrary.Menu.AstroButtonAPI;
     using AstroLibrary.Utility;
     using CheetoLibrary;
     using Cheetos;
@@ -22,34 +21,34 @@
 
             QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Save Config", () => { ConfigManager.SaveAll(); }, "Save Config", Color.magenta, null, true);
 
-            //QMSingleButton playerListToggle = new QMSingleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
+            //QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
             //playerListToggle.SetToggleState(ConfigManager.UI.ShowPlayersMenu, false);
 
-            QMSingleButton joinLeaveToggle = new QMSingleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.General.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves", Color.green, Color.red, null, ConfigManager.General.JoinLeave, true);
+            QMSingleToggleButton joinLeaveToggle = new QMSingleToggleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.General.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves", Color.green, Color.red, null, ConfigManager.General.JoinLeave, true);
             joinLeaveToggle.SetToggleState(ConfigManager.General.JoinLeave, false);
 
-            QMSingleButton rpcLogToggle = new QMSingleButton(sub, 3, 0, "RPC Log ON", () => { ConfigManager.General.LogRPCEvents = true; }, "RPC Log OFF", () => { ConfigManager.General.LogRPCEvents = false; }, "Log RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogRPCEvents, true);
+            QMSingleToggleButton rpcLogToggle = new QMSingleToggleButton(sub, 3, 0, "RPC Log ON", () => { ConfigManager.General.LogRPCEvents = true; }, "RPC Log OFF", () => { ConfigManager.General.LogRPCEvents = false; }, "Log RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogRPCEvents, true);
             rpcLogToggle.SetToggleState(ConfigManager.General.LogRPCEvents, false);
 
-            QMSingleButton udonRPCToggle = new QMSingleButton(sub, 4, 0, "Udon Log ON", () => { ConfigManager.General.LogUdonEvents = true; }, "Udon Log OFF", () => { ConfigManager.General.LogUdonEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogUdonEvents, true);
+            QMSingleToggleButton udonRPCToggle = new QMSingleToggleButton(sub, 4, 0, "Udon Log ON", () => { ConfigManager.General.LogUdonEvents = true; }, "Udon Log OFF", () => { ConfigManager.General.LogUdonEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogUdonEvents, true);
             udonRPCToggle.SetToggleState(ConfigManager.General.LogUdonEvents, false);
 
-            QMSingleButton eventLogTottle = new QMSingleButton(sub, 4, 0.5f, "Event Log ON", () => { ConfigManager.General.LogEvents = true; }, "Event Log OFF", () => { ConfigManager.General.LogEvents = false; }, "Log Events to the console", Color.green, Color.red, null, ConfigManager.General.LogEvents, true);
+            QMSingleToggleButton eventLogTottle = new QMSingleToggleButton(sub, 4, 0.5f, "Event Log ON", () => { ConfigManager.General.LogEvents = true; }, "Event Log OFF", () => { ConfigManager.General.LogEvents = false; }, "Log Events to the console", Color.green, Color.red, null, ConfigManager.General.LogEvents, true);
             eventLogTottle.SetToggleState(ConfigManager.General.LogEvents, false);
 
             // Performance Menu
 
             QMNestedButton performanceMenu = new QMNestedButton(sub, 4, 2f, "Performance", "Performance Menu");
 
-            QMSingleButton highPriorityToggle = new QMSingleButton(performanceMenu, 1, 0f, "Priority High", () => { HighPriority.IsEnabled = true; }, "Priority Normal", () => { HighPriority.IsEnabled = false; }, "Sets the process priority", Color.green, Color.red, null, HighPriority.IsEnabled, false);
+            QMSingleToggleButton highPriorityToggle = new QMSingleToggleButton(performanceMenu, 1, 0f, "Priority High", () => { HighPriority.IsEnabled = true; }, "Priority Normal", () => { HighPriority.IsEnabled = false; }, "Sets the process priority", Color.green, Color.red, null, HighPriority.IsEnabled, false);
             highPriorityToggle.SetToggleState(HighPriority.IsEnabled, false);
 
-            QMSingleButton frameUnlimiterToggle = new QMSingleButton(performanceMenu, 2, 0f, "FrameUnlimiter\nOn", () => { FrameUnlimiter.IsEnabled = true; }, "FrameUnlimiter\nOff", () => { FrameUnlimiter.IsEnabled = false; }, "Unlimit the games framerate", Color.green, Color.red, null, FrameUnlimiter.IsEnabled, false);
+            QMSingleToggleButton frameUnlimiterToggle = new QMSingleToggleButton(performanceMenu, 2, 0f, "FrameUnlimiter\nOn", () => { FrameUnlimiter.IsEnabled = true; }, "FrameUnlimiter\nOff", () => { FrameUnlimiter.IsEnabled = false; }, "Unlimit the games framerate", Color.green, Color.red, null, FrameUnlimiter.IsEnabled, false);
             frameUnlimiterToggle.SetToggleState(FrameUnlimiter.IsEnabled, false);
 
             // Other
 
-            QMSingleButton TriggerEventToggle = new QMSingleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
+            QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
             TriggerEventToggle.SetToggleState(ConfigManager.General.LogTriggerEvents, false);
 
             QMNestedButton cameraSettings = new QMNestedButton(sub, 2, 2, "Camera", "Camera", null, null, null, null, false);
@@ -94,23 +93,23 @@
             PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
 
             // Nameplate Toggle
-            var toggleNameplates = new QMSingleButton(sub, 3f, 1.5f, "Nameplates", () => { ConfigManager.UI.NamePlates = true; }, "Nameplates", () => { ConfigManager.UI.NamePlates = false; }, "Nameplates", Color.green, Color.red, null, false, true);
+            var toggleNameplates = new QMSingleToggleButton(sub, 3f, 1.5f, "Nameplates", () => { ConfigManager.UI.NamePlates = true; }, "Nameplates", () => { ConfigManager.UI.NamePlates = false; }, "Nameplates", Color.green, Color.red, null, false, true);
             toggleNameplates.SetToggleState(ConfigManager.UI.NamePlates, false);
 
             // KeyBind Toggle
-            var toggleKeyBinds = new QMSingleButton(sub, 4f, 1.5f, "KeyBinds", () => { ConfigManager.General.KeyBinds = true; }, "KeyBinds", () => { ConfigManager.General.KeyBinds = false; }, "KeyBinds", Color.green, Color.red, null, false, true);
+            var toggleKeyBinds = new QMSingleToggleButton(sub, 4f, 1.5f, "KeyBinds", () => { ConfigManager.General.KeyBinds = true; }, "KeyBinds", () => { ConfigManager.General.KeyBinds = false; }, "KeyBinds", Color.green, Color.red, null, false, true);
             toggleKeyBinds.SetToggleState(ConfigManager.General.KeyBinds, false);
 
             // Spoofs
             QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
 
-            QMSingleButton toggleSpoofFPS = new QMSingleButton(subSpoofButton, 2, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);
+            QMSingleToggleButton toggleSpoofFPS = new QMSingleToggleButton(subSpoofButton, 2, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);
             toggleSpoofFPS.SetToggleState(ConfigManager.General.SpoofFPS, false);
 
-            QMSingleButton toggleSpoofPing = new QMSingleButton(subSpoofButton, 3, 0, "Ping Spoof", () => { ConfigManager.General.SpoofPing = true; }, "Ping Spoof", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofPing, false);
+            QMSingleToggleButton toggleSpoofPing = new QMSingleToggleButton(subSpoofButton, 3, 0, "Ping Spoof", () => { ConfigManager.General.SpoofPing = true; }, "Ping Spoof", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofPing, false);
             toggleSpoofPing.SetToggleState(ConfigManager.General.SpoofPing, false);
 
-            QMSingleButton toggleSpoofQuest = new QMSingleButton(subSpoofButton, 4, 0, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = true; }, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = false; }, "Toggle Quest Spoofing\n(Requires Restart)", Color.green, Color.red, null, ConfigManager.General.SpoofQuest, false);
+            QMSingleToggleButton toggleSpoofQuest = new QMSingleToggleButton(subSpoofButton, 4, 0, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = true; }, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = false; }, "Toggle Quest Spoofing\n(Requires Restart)", Color.green, Color.red, null, ConfigManager.General.SpoofQuest, false);
             toggleSpoofQuest.SetToggleState(ConfigManager.General.SpoofQuest, false);
 
             _ = new QMSingleButton(subSpoofButton, 2, 1, "Set\nFPS\nValue", () =>

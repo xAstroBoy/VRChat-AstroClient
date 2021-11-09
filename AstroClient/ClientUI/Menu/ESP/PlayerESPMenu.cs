@@ -19,7 +19,7 @@
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
 
-            PlayerESPToggleBtn = new QMSingleButton(main, 1, 0f, "Player ESP ON", new Action(() => { Toggle_Player_ESP = true; }), "Player ESP OFF", new Action(() => { Toggle_Player_ESP = false; }), "Toggles Player ESP", Color.green, Color.red, null, false, true);
+            PlayerESPToggleBtn = new QMSingleToggleButton(main, 1, 0f, "Player ESP ON", new Action(() => { Toggle_Player_ESP = true; }), "Player ESP OFF", new Action(() => { Toggle_Player_ESP = false; }), "Toggles Player ESP", Color.green, Color.red, null, false, true);
             PlayerESPToggleBtn.SetToggleState(ConfigManager.ESP.PlayerESP);
 
             // TOOD : ADD A STRING Parser and allow people  to set HEX colors as well.
@@ -48,7 +48,7 @@
             _ = new QMSingleButton(BlockedESP, 1, 2.5f, "White", () => { ConfigManager.ESPBlockedColor = Color.white; }, null, null, null, true);
         }
 
-        private static QMSingleButton PlayerESPToggleBtn;
+        private static QMSingleToggleButton PlayerESPToggleBtn;
 
         #region playerESP
 

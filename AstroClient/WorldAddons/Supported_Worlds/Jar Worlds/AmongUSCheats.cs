@@ -7,7 +7,6 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
-    using AstroLibrary.Menu.AstroButtonAPI;
     using AstroLibrary.Utility;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.ESP.VRCInteractable;
@@ -179,7 +178,7 @@
         internal static void AmongUSCheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
             AmongUsCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Among US Cheats", "Manage Among US Cheats", null, null, null, null, btnHalf);
-            JarRoleController.AmongUSRolesRevealerToggle = new QMSingleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
+            JarRoleController.AmongUSRolesRevealerToggle = new QMSingleToggleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
 
             AmongUSUdonExploits.Init_GameController_Menu(AmongUsCheatsPage, 2, 0, true);
 
@@ -193,9 +192,9 @@
             AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage, 4f, 0.5f, true);
 
             AmongUSUdonExploits.Init_RoleSwap_Menu(AmongUsCheatsPage, 4f, 1f, true);
-            GetImpostorRoleBtn = new QMSingleButton(AmongUsCheatsPage, 4, 1.5f, "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!", Color.green, Color.red, null, false, true);
-            ToggleSerializerShortcut = new QMSingleButton(AmongUsCheatsPage, 4, 2f, "Toggle Serializer", new Action(() => { AmongUsSerializer = true; }), "Toggle Serializer", new Action(() => { AmongUsSerializer = false; }), "Serialize For Stealth or to frame someone else!", Color.green, Color.red, null, false, true);
-            GameBodyESPBtn = new QMSingleButton(AmongUsCheatsPage, 4, 2.5f, "Body ESP", new Action(() => { BodyESPs = true; }), "Body ESP", new Action(() => { BodyESPs = false; }), "Makes Impostor Kills Visible (Yellow)!", Color.green, Color.red, null, false, true);
+            GetImpostorRoleBtn = new QMSingleToggleButton(AmongUsCheatsPage, 4, 1.5f, "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!", Color.green, Color.red, null, false, true);
+            ToggleSerializerShortcut = new QMSingleToggleButton(AmongUsCheatsPage, 4, 2f, "Toggle Serializer", new Action(() => { AmongUsSerializer = true; }), "Toggle Serializer", new Action(() => { AmongUsSerializer = false; }), "Serialize For Stealth or to frame someone else!", Color.green, Color.red, null, false, true);
+            GameBodyESPBtn = new QMSingleToggleButton(AmongUsCheatsPage, 4, 2.5f, "Body ESP", new Action(() => { BodyESPs = true; }), "Body ESP", new Action(() => { BodyESPs = false; }), "Makes Impostor Kills Visible (Yellow)!", Color.green, Color.red, null, false, true);
 
             GameStartbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
             GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
@@ -403,10 +402,10 @@
         internal static QMSingleButton GameAbortbtn;
         internal static QMSingleButton GameVictoryCrewmateBtn;
         internal static QMSingleButton GameVictoryImpostorBtn;
-        internal static QMSingleButton GameBodyESPBtn;
+        internal static QMSingleToggleButton GameBodyESPBtn;
 
-        internal static QMSingleButton GetImpostorRoleBtn;
-        internal static QMSingleButton ToggleSerializerShortcut;
+        internal static QMSingleToggleButton GetImpostorRoleBtn;
+        internal static QMSingleToggleButton ToggleSerializerShortcut;
 
         internal static QMNestedButton AmongUsCheatsPage;
 

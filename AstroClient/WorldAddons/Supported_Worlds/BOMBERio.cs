@@ -20,12 +20,12 @@
         internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             BOMBERioCheatsPage = new QMNestedButton(main, x, y, "BOMBERio", "BOMBERio Cheats", null, null, null, null, btnHalf);
-            Always_ShootBomb_0_Toggle = new QMSingleButton(BOMBERioCheatsPage, 1, 0, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = true; }, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
-            Always_ShootBomb_1_Toggle = new QMSingleButton(BOMBERioCheatsPage, 1, 0.5f, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = true; }, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
-            Always_ShootBomb_2_Toggle = new QMSingleButton(BOMBERioCheatsPage, 1, 1, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = true; }, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
-            Always_ShootBomb_3_Toggle = new QMSingleButton(BOMBERioCheatsPage, 1, 1.5f, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = true; }, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
-            Always_ShootBomb_4_Toggle = new QMSingleButton(BOMBERioCheatsPage, 1, 2, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = true; }, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
-            Always_ShootBomb_5_Toggle = new QMSingleButton(BOMBERioCheatsPage, 1, 2.5f, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = true; }, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
+            Always_ShootBomb_0_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 0, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = true; }, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
+            Always_ShootBomb_1_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 0.5f, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = true; }, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
+            Always_ShootBomb_2_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 1, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = true; }, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
+            Always_ShootBomb_3_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 1.5f, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = true; }, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
+            Always_ShootBomb_4_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 2, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = true; }, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
+            Always_ShootBomb_5_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 2.5f, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = true; }, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
 
             _ = new QMSingleButton(BOMBERioCheatsPage, 2, 0f, "Harvest 10 Crystals", () => { HarvestQuads(10); }, "Harvest some Quads!", null, null, true);
             _ = new QMSingleButton(BOMBERioCheatsPage, 2, 0.5f, "Harvest 20 Crystals", () => { HarvestQuads(20); }, "Harvest some Quads!", null, null, true);
@@ -34,7 +34,7 @@
             _ = new QMSingleButton(BOMBERioCheatsPage, 2, 2f, "Harvest 500 Crystals", () => { HarvestQuads(500); }, "Harvest some Quads!", null, null, true);
             _ = new QMSingleButton(BOMBERioCheatsPage, 2, 2.5f, "Harvest 1000 Crystals", () => { HarvestQuads(1000); }, "Harvest some Quads!", null, null, true);
 
-            Bypass_Outside_Circle_speed_Toggle = new QMSingleButton(BOMBERioCheatsPage, 4, 0, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
+            Bypass_Outside_Circle_speed_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 4, 0, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -354,14 +354,14 @@
         internal static GameObject AssignedNode;
         internal static QMNestedButton BOMBERioCheatsPage;
 
-        internal static QMSingleButton Always_ShootBomb_0_Toggle;
-        internal static QMSingleButton Always_ShootBomb_1_Toggle;
-        internal static QMSingleButton Always_ShootBomb_2_Toggle;
-        internal static QMSingleButton Always_ShootBomb_3_Toggle;
-        internal static QMSingleButton Always_ShootBomb_4_Toggle;
-        internal static QMSingleButton Always_ShootBomb_5_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_0_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_1_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_2_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_3_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_4_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_5_Toggle;
 
-        internal static QMSingleButton Bypass_Outside_Circle_speed_Toggle;
+        internal static QMSingleToggleButton Bypass_Outside_Circle_speed_Toggle;
 
         private static bool _BypassOutsideCircleSpeed;
 
