@@ -1,5 +1,6 @@
 ﻿namespace AstroButtonAPI
 {
+    using AstroLibrary.Extensions;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
@@ -35,7 +36,7 @@
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
             menuName = "Page_" + btnType + Title;
 
-            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages(), true);
+            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
@@ -106,9 +107,16 @@
         internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = "", Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
-            menuName = "Page_" + btnType + Title;
+            if (!Title.IsNotNullOrEmptyOrWhiteSpace())
+            {
+                menuName = "Page_" + btnType + Title;
+            }
+            else
+            {
+                menuName = "Page_" + btnType + btnText;
 
-            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages(), true);
+            }
+            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());

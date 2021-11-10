@@ -21,7 +21,7 @@
         private static bool DoOnce;
         private static WebSocket ws;
 
-        internal override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnQuickMenuInit()
         {
             var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
             var infobartext = GameObject.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar/EarlyAccessText").GetComponent<Text>();

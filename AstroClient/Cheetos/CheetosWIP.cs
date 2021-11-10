@@ -23,7 +23,7 @@
 
         internal QMScrollMenu MainScroller { get; private set; }
 
-        internal override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnQuickMenuInit()
         {
             MainButton = new QMNestedButton("MainMenu", 5, 4, "<color=cyan>WIP Menu</color>", "WIP Features", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);

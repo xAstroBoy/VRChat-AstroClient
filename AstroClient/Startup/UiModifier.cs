@@ -5,7 +5,7 @@
 
     internal class UiModifier : GameEvents
     {
-        internal override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnQuickMenuInit()
         {
             if (UserInterfaceObjects.ScreenFade != null)
             {

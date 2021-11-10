@@ -138,10 +138,13 @@ namespace AstroButtonAPI
             Init();
         }
 
-        internal override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnQuickMenuInit()
         {
             UiInit();
         }
+
+
+
 
         internal static void Init()
         {

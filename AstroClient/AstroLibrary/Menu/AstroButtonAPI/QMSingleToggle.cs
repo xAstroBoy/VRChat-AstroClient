@@ -1,6 +1,7 @@
 ﻿namespace AstroButtonAPI
 {
     using System;
+    using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
     using Button = UnityEngine.UI.Button;
@@ -60,7 +61,7 @@
         private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool defaultstate = false, bool btnHalf = false)
         {
             btnType = "SingleToggleButton";
-            button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate().gameObject, QuickMenuTools.QuickMenuInstance.transform.Find(btnQMLoc), true);
+            button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.QuickMenuInstance.transform.Find(btnQMLoc), true);
 
             initShift[0] = -1;
             initShift[1] = 0;
@@ -93,7 +94,7 @@
 
         internal void SetButtonText(string buttonText)
         {
-            button.GetComponentInChildren<Text>().text = buttonText;
+            button.GetComponentInChildren<TextMeshPro>().text = buttonText;
         }
 
         internal void SetAction(Action buttonONAction, Action buttonOFFAction)

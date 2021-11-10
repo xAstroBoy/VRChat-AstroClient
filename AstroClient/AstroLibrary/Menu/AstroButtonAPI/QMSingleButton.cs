@@ -280,12 +280,12 @@
             switch (btnQMLoc)
             {
                 case "Dashboard":
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate().gameObject, QuickMenuTools.MenuDashboard_ButtonsSection(), true);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection(), true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 
                 case "QA_MainMenu":
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate().gameObject, MenuAPI_New.QA_MainMenu.QuickActions.transform, true);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_MainMenu.QuickActions.transform, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 
@@ -298,7 +298,7 @@
 
                 default:
                     var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate().gameObject, Part1.FindObject("Buttons").transform, true);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     initShift[0] = -1;
                     initShift[1] = -3;

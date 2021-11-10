@@ -1,6 +1,8 @@
 ﻿namespace AstroButtonAPI
 {
+    using System;
     using System.Threading.Tasks;
+    using TMPro;
     using UnityEngine;
     using UnityEngine.Networking;
     using UnityEngine.UI;
@@ -52,19 +54,21 @@
 
         internal void SetRawLocation(float buttonXLoc, float buttonYLoc)
         {
-            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + (Vector2.right * (420 * (buttonXLoc + initShift[0])));
-            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + (Vector2.down * (420 * (buttonYLoc + initShift[1])));
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate.GetComponent<RectTransform>().anchoredPosition + (Vector2.right * (420 * (buttonXLoc + initShift[0])));
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate.GetComponent<RectTransform>().anchoredPosition + (Vector2.down * (420 * (buttonYLoc + initShift[1])));
 
             //btnTag = "(" + buttonXLoc + "," + buttonYLoc + ")";
             //button.name = btnQMLoc + "/" + btnType + btnTag;
             //button.GetComponent<Button>().name = btnType + btnTag;
         }
 
+
         internal void SetToolTip(string buttonToolTip)
         {
-            button.GetComponent<UiTooltip>().field_Public_String_0 = buttonToolTip;
-            button.GetComponent<UiTooltip>().field_Public_String_1 = buttonToolTip;
+            button.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true).field_Public_String_0 = buttonToolTip;
+            //button.GetComponentInChildren<UiTooltip>().field_Public_String_1 = buttonToolTip;
         }
+
 
         internal void DestroyMe()
         {
@@ -82,7 +86,7 @@
 
         internal void SetImage(Sprite image)
         {
-            button.GetComponent<Image>().sprite = image;
+            button.GetComponent<Image>().overrideSprite = image;
         }
 
         internal async void SetImage(string URL)
@@ -130,9 +134,16 @@
             button.transform.SetParent(Parent);
         }
 
+        internal void SetButtonText(string text)
+        {
+            button.gameObject.GetComponent<TextMeshPro>().text = text;
+        }
+
+        [Obsolete("Not working anymore.")]
         internal void SetResizeTextForBestFit(bool resizeTextForBestFit)
         {
-            button.gameObject.GetComponentInChildren<Text>().resizeTextForBestFit = resizeTextForBestFit;
+
+            return;
         }
 
         internal virtual void SetBackgroundColor(Color buttonBackgroundColor)

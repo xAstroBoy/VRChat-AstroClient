@@ -295,6 +295,7 @@
             Transform Critical1 = null;
             Transform Critical2 = null;
             Transform Critical3 = null;
+            VRC.UI.Elements.QuickMenu Critical4 = null;
             bool exception = false;
             bool Instantiated = false;
             while (!Instantiated)
@@ -304,6 +305,7 @@
                     Critical1 = QuickMenuTools.UserInterface;
                     Critical2 = QuickMenuTools.QuickMenuTransform;
                     Critical3 = QuickMenuTools.NestedMenuTemplate;
+                    Critical4 = QuickMenuTools.QuickMenuInstance;
                 }
                 catch
                 {
@@ -353,7 +355,17 @@
                 return;
             }
 
+            try
+            {
+                InitSetupUI();
+
+            }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
+                        
             DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
             stopwatch.Stop();
             ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
@@ -399,6 +411,16 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
+
+            Event_VRChat_OnUiManagerInit?.SafetyRaise();
+
+            stopwatch.Stop();
+            ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
+        }
+
+
+        private void InitSetupUI()
+        {
             if (!KeyManager.IsAuthed)
             {
                 return;
@@ -428,10 +450,6 @@
             }, "Advanced GameObject Toggler", null, null, true);
             CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
 
-            Event_VRChat_OnUiManagerInit?.SafetyRaise();
-
-            stopwatch.Stop();
-            ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
         internal static void InitMainsButtons()

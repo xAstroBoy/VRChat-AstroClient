@@ -1,9 +1,11 @@
 ﻿namespace AstroButtonAPI
 {
+    using AstroLibrary.Console;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
     using VRC.UI.Elements.Menus;
+    using Color = System.Drawing.Color;
 
     internal static class QuickMenuTools
     {
@@ -13,17 +15,19 @@
         private static Transform _UserInterface = null;
         private static BoxCollider QuickMenuBackgroundReference = null;
         private static Transform SingleButtonReference = null;
-        private static Vector3? SingleButtonReferencePosition = null;
+        private static Vector3? _SingleButtonReferencePosition = null;
         private static Transform SingleButtonReferenceSelectedUser = null;
         private static Transform ToggleButtonReference = null;
         private static Transform _NestedButtonReference = null;
         private static Transform SelectedUserPageReference = null;
         private static Transform SelectedUserPageButtonsReference = null;
-        private static Transform NestedPagesReference = null;
+        private static Transform _NestedPagesReference = null;
         private static Transform MenuDashboardReference = null;
-        private static Transform TabButtonReference = null;
+        private static Transform _TabButtonReference = null;
         private static Transform _QuickMenuTransform = null;
         private static Transform HeaderDashboardReference = null;
+
+        private static Transform _SingleButtonTemplate = null;
 
         //VRC
         private static Transform _CarouselBanners = null;
@@ -43,6 +47,7 @@
         private static MenuStateController MenuStateController_Wing_Right = null;
         private static MenuStateController MenuStateController_Wing_Left = null;
         private static MenuStateController _QuickMenuControllert = null;
+
         private static SelectedUserMenuQM _SelectedQMGO = null;
         //New shit
 
@@ -53,6 +58,7 @@
             {
                 _SelectedQMGO = QuickMenuTransform.gameObject.FindObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
             }
+
             return _SelectedQMGO;
         }
 
@@ -70,7 +76,7 @@
                     }
                 }
 
-                
+
             }
 
             return UIPageReference_Right;
@@ -90,7 +96,7 @@
                     }
                 }
 
-                
+
             }
 
             return UIPageReference_Left;
@@ -112,7 +118,7 @@
                     }
                 }
 
-                
+
             }
 
             return DebugPanelReference;
@@ -132,7 +138,7 @@
                     }
                 }
 
-                
+
             }
 
             return MenuStateController_Wing_Right;
@@ -152,7 +158,7 @@
                     }
                 }
 
-                
+
             }
 
             return MenuStateController_Wing_Left;
@@ -172,7 +178,7 @@
                     }
                 }
 
-                
+
             }
 
             return _Wing_Left;
@@ -192,7 +198,7 @@
                     }
                 }
 
-                
+
             }
 
             return _Wing_Right;
@@ -238,8 +244,15 @@
                 if (UserInterface == null || QuickMenuTransform == null) return null;
                 if (_QuickMenuInstance == null)
                 {
-                    return _QuickMenuInstance = QuickMenuTransform.GetComponent<VRC.UI.Elements.QuickMenu>();
+                    var test = QuickMenuTransform.GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true);
+                    if (test != null)
+                    {
+                        ModConsole.DebugLog("Found QuickMenu Instance!", Color.Chartreuse);
+                    }
+
+                    return _QuickMenuInstance = test;
                 }
+
                 return _QuickMenuInstance;
             }
         }
@@ -252,28 +265,37 @@
         //    return QuickMenuBackgroundReference;
         //}
 
-        internal static Transform SingleButtonTemplate()
+        internal static Transform SingleButtonTemplate
         {
-            if (SingleButtonReference == null)
+            get
             {
-                SingleButtonReference = QuickMenuInstance.transform.Find("Container/Window/QMParent/Menu_Camera/Scrollrect/Viewport/VerticalLayoutGroup/Buttons/Button_Screenshot");
-            }
+                if (_SingleButtonTemplate == null)
+                {
+                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
+                    foreach (var button in Buttons)
+                    {
+                        if (button.name == "Button_VoteKick")
+                        {
+                            _SingleButtonTemplate = button.transform;
+                        }
+                    }
+                }
 
-            return SingleButtonReference;
+                return _SingleButtonTemplate;
+            }
         }
 
-        internal static Vector3? SingleButtonTemplatePosition()
+        internal static Vector3? SingleButtonTemplatePosition
         {
-            if (SingleButtonReferencePosition == null)
+            get
             {
-                SingleButtonReferencePosition = SingleButtonTemplate().transform.position;
-            }
+                if (_SingleButtonReferencePosition == null)
+                {
+                    return _SingleButtonReferencePosition = SingleButtonTemplate.transform.position;
+                }
 
-            if (!SingleButtonReferencePosition.HasValue)
-            {
-                return null;
+                return _SingleButtonReferencePosition;
             }
-            return SingleButtonReferencePosition;
         }
 
         internal static Transform SingleButtonTemplateSelUser()
@@ -288,8 +310,6 @@
                         SingleButtonReferenceSelectedUser = button.transform;
                     }
                 }
-
-                ;
             }
 
             return SingleButtonReferenceSelectedUser;
@@ -309,7 +329,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return _CarouselBanners;
@@ -347,15 +367,28 @@
             }
         }
 
-
-        internal static Transform TabButtonTemplate()
+        internal static Transform TabButtonTemplate
         {
-            if (TabButtonReference == null)
+            get
             {
-                TabButtonReference = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings").transform;
+                if (_TabButtonReference == null)
+                {
+                    var Buttons = QuickMenuInstance.GetComponentsInChildren<Button>(true);
+                    foreach (var button in Buttons)
+                    {
+                        if (button.name == "Page_Settings")
+                        {
+                            ModConsole.DebugLog("Found Tab Settings!", Color.Chartreuse);
+                            return _TabButtonReference = button.transform;
+                        }
+                    }
+                }
+
+                return _TabButtonReference;
             }
-            return TabButtonReference;
         }
+
+
 
         internal static GameObject WingPageButtonTemplate()
         {
@@ -371,7 +404,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return WingPageButtonReference;
@@ -434,10 +467,17 @@
                 if (QuickMenuTransform == null) return null;
                 if (_NestedButtonReference == null)
                 {
-                    return _NestedButtonReference = QuickMenuTransform.Find("Container/Window/QMParent/Menu_Camera");
+                    var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
+                    foreach (var button in Buttons)
+                    {
+                        if (button.name == "Menu_Camera")
+                        {
+                            ModConsole.DebugLog("Found Camera Page!", Color.Chartreuse);
+                            return _NestedButtonReference = button;
+                        }
+                    };
                 }
                 return _NestedButtonReference;
-
             }
         }
 
@@ -505,24 +545,25 @@
         }
 
 
-        internal static Transform NestedPages()
+        internal static Transform NestedPages
         {
-            if (NestedPagesReference == null)
+            get
             {
-                var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                foreach (var button in Buttons)
+                if (_NestedPagesReference == null)
                 {
-                    if (button.name == "QMParent")
+                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
+                    foreach (var button in Buttons)
                     {
-                        NestedPagesReference = button;
-                        break;
+                        if (button.name == "QMParent")
+                        {
+                            return _NestedPagesReference = button;
+                            break;
+                        }
                     }
                 }
 
-                
+                return _NestedPagesReference;
             }
-
-            return NestedPagesReference;
         }
 
         internal static void ShowQuickmenuPage(string pagename)

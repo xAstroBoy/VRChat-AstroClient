@@ -65,7 +65,7 @@
             PRIVATE
         }
 
-        internal override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnQuickMenuInit()
         {
             inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 

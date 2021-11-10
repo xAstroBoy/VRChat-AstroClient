@@ -29,7 +29,7 @@
 
         //Get the difference between the current cost and its parent's cost to get the fraction by which to lerp each frame
 
-        internal override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnQuickMenuInit()
         {
             WIPMenu = new QMNestedButton("MainMenu", 5, 4.5f, "KWIP", "WIP Features", btnTextColor: Color.red, btnHalf: true);
 

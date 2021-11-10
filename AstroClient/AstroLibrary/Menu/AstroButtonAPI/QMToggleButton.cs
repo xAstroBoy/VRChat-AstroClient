@@ -167,7 +167,7 @@
             else
                 setTextColorHTML("#blue", Texto);
 
-            button.transform.position = QuickMenuTools.SingleButtonTemplate().transform.position;
+            button.transform.position = QuickMenuTools.SingleButtonTemplate.transform.position;
             initShift[0] = -1;
             initShift[1] = -3;
             SetLocation(btnXLocation, btnYLocation);
@@ -211,7 +211,7 @@
             else
                 setTextColorHTML("#blue", Texto);
 
-            button.transform.position = QuickMenuTools.SingleButtonTemplate().transform.position;
+            button.transform.position = QuickMenuTools.SingleButtonTemplate.transform.position;
             initShift[0] = -1;
             initShift[1] = -3;
             SetLocation(btnXLocation, btnYLocation);

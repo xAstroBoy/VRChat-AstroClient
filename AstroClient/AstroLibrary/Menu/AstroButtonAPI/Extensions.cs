@@ -113,6 +113,7 @@
 
         public static GameObject FindObject(this GameObject parent, string name)
         {
+            if (parent == null) return null;
             Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
             foreach (Transform t in trs)
             {

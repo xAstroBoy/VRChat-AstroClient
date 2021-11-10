@@ -15,7 +15,7 @@
 
         internal static bool IsOpen = false;
 
-        internal override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnQuickMenuInit()
         {
             //try
             //{

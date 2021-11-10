@@ -1,5 +1,6 @@
 ﻿namespace AstroButtonAPI
 {
+    using AstroLibrary.Extensions;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
@@ -34,10 +35,18 @@
 
         internal void initButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title, string LoadSprite = "", string TextColor = null, bool CanBeDragged = false)
         {
-            btnType = QMButtonAPI.identifier + "_Nested_Menu_";
-            menuName = "Page_" + btnType + Title;
+            btnType = QMButtonAPI.identifier + "_GridNestedNested_Menu_";
+            if (!Title.IsNotNullOrEmptyOrWhiteSpace())
+            {
+                menuName = "Page_" + btnType + Title;
+            }
+            else
+            {
+                menuName = "Page_" + btnType + btnText;
 
-            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages(), true);
+            }
+
+            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             UnityEngine.Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
