@@ -88,7 +88,7 @@
                 {
                     if (shouldClear) Clear();
                     OpenAction.Invoke(this);
-                    QuickMenuStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
+                    QuickMenuTools.ShowQuickmenuPage(BaseMenu.GetMenuName());
                     ShowMenu(0);
                 }));
             }
@@ -102,7 +102,7 @@
         {
             Clear();
             OpenAction?.Invoke(this);
-            QuickMenuStuff.ShowQuickmenuPage(BaseMenu.GetMenuName());
+            QuickMenuTools.ShowQuickmenuPage(BaseMenu.GetMenuName());
             ShowMenu(0);
         }
 

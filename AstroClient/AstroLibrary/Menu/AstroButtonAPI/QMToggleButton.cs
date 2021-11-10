@@ -139,12 +139,12 @@
 
             if (ButtonsPageNestedButton == null)
             {
-                var Part1 = QuickMenuStuff.GetQuickMenuInstance().gameObject.FindObject(btnQMLoc);
-                button = UnityEngine.Object.Instantiate(QuickMenuStuff.ToggleButtonTemplate(), Part1.FindObject("Buttons").transform, true);
+                var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate().gameObject, Part1.FindObject("Buttons").transform, true);
             }
             else
             {
-                button = UnityEngine.Object.Instantiate(QuickMenuStuff.ToggleButtonTemplate(), ButtonsPageNestedButton.transform, true);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate().gameObject, ButtonsPageNestedButton.transform, true);
             }
 
             var Texto = button.NewText("Text_H4");
@@ -167,7 +167,7 @@
             else
                 setTextColorHTML("#blue", Texto);
 
-            button.transform.position = QuickMenuStuff.SingleButtonTemplate().transform.position;
+            button.transform.position = QuickMenuTools.SingleButtonTemplate().transform.position;
             initShift[0] = -1;
             initShift[1] = -3;
             SetLocation(btnXLocation, btnYLocation);
@@ -189,12 +189,12 @@
 
             if (ButtonsPageNestedButton == null)
             {
-                var Part1 = QuickMenuStuff.GetQuickMenuInstance().gameObject.FindObject(btnQMLoc);
-                button = UnityEngine.Object.Instantiate(QuickMenuStuff.ToggleButtonTemplate(), Part1.FindObject("Buttons").transform, true);
+                var Part1 = QuickMenuTools.NestedMenuTemplate.gameObject.FindObject(btnQMLoc);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate().gameObject, Part1.FindObject("Buttons").transform, true);
             }
             else
             {
-                button = UnityEngine.Object.Instantiate(QuickMenuStuff.ToggleButtonTemplate(), ButtonsPageNestedButton.transform, true);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate().gameObject, ButtonsPageNestedButton.transform, true);
             }
 
             var Texto = button.NewText("Text_H4");
@@ -211,7 +211,7 @@
             else
                 setTextColorHTML("#blue", Texto);
 
-            button.transform.position = QuickMenuStuff.SingleButtonTemplate().transform.position;
+            button.transform.position = QuickMenuTools.SingleButtonTemplate().transform.position;
             initShift[0] = -1;
             initShift[1] = -3;
             SetLocation(btnXLocation, btnYLocation);

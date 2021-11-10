@@ -280,25 +280,25 @@
             switch (btnQMLoc)
             {
                 case "Dashboard":
-                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.SingleButtonTemplate(), QuickMenuStuff.MenuDashboard_ButtonsSection(), true);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate().gameObject, QuickMenuTools.MenuDashboard_ButtonsSection(), true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 
                 case "QA_MainMenu":
-                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.SingleButtonTemplate(), MenuAPI_New.QA_MainMenu.QuickActions.transform, true);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate().gameObject, MenuAPI_New.QA_MainMenu.QuickActions.transform, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 
                 case "QA_SelectedUser":
-                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.SingleButtonTemplateSelUser(), MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplateSelUser().gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
                     button.EnableComponents();
                     button.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 
                 default:
-                    var Part1 = QuickMenuStuff.GetQuickMenuInstance().gameObject.FindObject(btnQMLoc);
-                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.SingleButtonTemplate(), Part1.FindObject("Buttons").transform, true);
+                    var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate().gameObject, Part1.FindObject("Buttons").transform, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     initShift[0] = -1;
                     initShift[1] = -3;

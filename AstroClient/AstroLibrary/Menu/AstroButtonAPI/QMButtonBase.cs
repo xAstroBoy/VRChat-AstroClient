@@ -52,8 +52,8 @@
 
         internal void SetRawLocation(float buttonXLoc, float buttonYLoc)
         {
-            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuStuff.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + (Vector2.right * (420 * (buttonXLoc + initShift[0])));
-            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuStuff.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + (Vector2.down * (420 * (buttonYLoc + initShift[1])));
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + (Vector2.right * (420 * (buttonXLoc + initShift[0])));
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + (Vector2.down * (420 * (buttonYLoc + initShift[1])));
 
             //btnTag = "(" + buttonXLoc + "," + buttonYLoc + ")";
             //button.name = btnQMLoc + "/" + btnType + btnTag;
@@ -122,7 +122,7 @@
 
         internal void SetParent(QMNestedButton Parent)
         {
-            button.transform.SetParent(QuickMenuStuff.GetQuickMenuInstance().transform.Find(Parent.GetMenuName()));
+            button.transform.SetParent(QuickMenuTools.QuickMenuInstance.transform.Find(Parent.GetMenuName()));
         }
 
         internal void SetParent(Transform Parent)

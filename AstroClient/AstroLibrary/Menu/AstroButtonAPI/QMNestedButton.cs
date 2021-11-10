@@ -35,7 +35,7 @@
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
             menuName = "Page_" + btnType + Title;
 
-            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate_GameO(), QuickMenuStuff.NestedPages(), true);
+            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages(), true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
@@ -44,16 +44,16 @@
             Page_UI.name = menuName;
             Page_UI.field_Public_String_0 = menuName;
             Page_UI.field_Public_Boolean_0 = true;
-            Page_UI.field_Private_MenuStateController_0 = QuickMenuStuff.QuickMenuController();
+            Page_UI.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController();
             Page_UI.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
             Page_UI.field_Private_List_1_UIPage_0.Add(Page_UI);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = Title;
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
-            QuickMenuStuff.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, Page_UI);
+            QuickMenuTools.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, Page_UI);
 
-            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, TextColor);
+            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColor);
 
             if (LoadSprite.Contains("_ICON"))
             {
@@ -108,7 +108,7 @@
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
             menuName = "Page_" + btnType + Title;
 
-            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate_GameO(), QuickMenuStuff.NestedPages(), true);
+            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages(), true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
@@ -117,21 +117,21 @@
             Page_UI.name = menuName;
             Page_UI.field_Public_String_0 = menuName;
             Page_UI.field_Public_Boolean_0 = true;
-            Page_UI.field_Private_MenuStateController_0 = QuickMenuStuff.QuickMenuController();
+            Page_UI.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController();
             Page_UI.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
             Page_UI.field_Private_List_1_UIPage_0.Add(Page_UI);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = Title;
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
-            QuickMenuStuff.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, Page_UI);
+            QuickMenuTools.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, Page_UI);
             string TextColorHTML = null;
             if (btnTextColor.HasValue)
             {
                 TextColorHTML = ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
             }
 
-            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf);
+            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf);
 
             switch (Title)
             {
@@ -145,7 +145,7 @@
             }
             //btnType = "NestedButton";
 
-            //Transform menu = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
+            //Transform menu = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.QuickMenuInstance.transform);
             //menuName = $"{QMButtonAPI.identifier}{btnQMLoc}_{btnXLocation}_{btnYLocation}";
             //menu.name = menuName;
 

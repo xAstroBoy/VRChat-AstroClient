@@ -212,8 +212,8 @@
             btn.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
-                QuickMenuStuff.GetQuickMenuInstance().prop_MenuStateController_0.field_Private_UIPage_0.enabled = true;
-                QuickMenuStuff.GetQuickMenuInstance().prop_MenuStateController_0.Method_Public_UIPage_String_1("QuickMenuDashboard");
+                QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.field_Private_UIPage_0.enabled = true;
+                QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.Method_Public_UIPage_String_1("QuickMenuDashboard");
             }));
         }
 
@@ -224,8 +224,8 @@
             btn.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
-                QuickMenu quickmenu = QuickMenuStuff.GetQuickMenuInstance();
-                QuickMenuStuff.ShowQuickmenuPage(menuName);
+                QuickMenu quickmenu = QuickMenuTools.QuickMenuInstance;
+                QuickMenuTools.ShowQuickmenuPage(menuName);
             }));
         }
 

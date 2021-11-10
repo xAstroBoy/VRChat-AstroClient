@@ -19,23 +19,23 @@
             if (LeftWing)
             {
                 btnQMLoc += "_LEFT";
-                button = UnityEngine.Object.Instantiate(QuickMenuStuff.WingButtonTemplate_Left(), QuickMenuStuff.Wing_Left().gameObject.FindObject("VerticalLayoutGroup").transform, true);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left(), QuickMenuTools.Wing_Left().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
                 button.NewText("Text_QM_H3").text = MenuName;
                 SetToolTip(btnToolTip);
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
-                UIPage Page = QuickMenuStuff.UIPageTemplate_Left();
+                UIPage Page = QuickMenuTools.UIPageTemplate_Left();
                 UIPage Wing_UP_1 = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
                 WingPage = Wing_UP_1.transform;
                 Wing_UP_1.gameObject.NewText("Text_Title").text = $"{MenuName}";
                 Wing_UP_1.field_Public_String_0 = btnQMLoc; //Name
                 Wing_UP_1.gameObject.name = btnQMLoc;
                 Wing_UP_1.field_Public_Boolean_0 = true; //_inited
-                Wing_UP_1.field_Private_MenuStateController_0 = QuickMenuStuff.WingMenuStateControllerLeft(); //_menuStateController
+                Wing_UP_1.field_Private_MenuStateController_0 = QuickMenuTools.WingMenuStateControllerLeft(); //_menuStateController
                 Wing_UP_1.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>(); //_pageStack
                 Wing_UP_1.field_Private_List_1_UIPage_0.Add(Wing_UP_1);
-                QuickMenuStuff.WingMenuStateControllerLeft().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, Wing_UP_1); //_uiPages
+                QuickMenuTools.WingMenuStateControllerLeft().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, Wing_UP_1); //_uiPages
 
                 var VLGC = Wing_UP_1.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
@@ -54,19 +54,19 @@
                 Rect.offsetMin = new Vector2(0, 40);
 
                 //PushPage
-                setAction(() => { QuickMenuStuff.Wing_Left().ShowQuickmenuPage(btnQMLoc); });
+                setAction(() => { QuickMenuTools.Wing_Left().ShowQuickmenuPage(btnQMLoc); });
             }
             else
             {
                 btnQMLoc += "_RIGHT";
-                button = UnityEngine.Object.Instantiate(QuickMenuStuff.WingButtonTemplate_Right(), QuickMenuStuff.Wing_Right().gameObject.FindObject("VerticalLayoutGroup").transform, true);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right(), QuickMenuTools.Wing_Right().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
                 button.NewText("Text_QM_H3").text = MenuName;
                 SetToolTip(btnToolTip);
 
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
-                UIPage Page = QuickMenuStuff.UIPageTemplate_Right();
+                UIPage Page = QuickMenuTools.UIPageTemplate_Right();
                 UIPage Wing_UP_1 = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
                 WingPage = Wing_UP_1.transform;
                 Wing_UP_1.gameObject.NewText("Text_Title").text = MenuName;
@@ -74,10 +74,10 @@
                 Wing_UP_1.field_Public_String_0 = btnQMLoc;
                 Wing_UP_1.gameObject.name = btnQMLoc;
                 Wing_UP_1.field_Public_Boolean_0 = true;
-                Wing_UP_1.field_Private_MenuStateController_0 = QuickMenuStuff.WingMenuStateControllerRight();
+                Wing_UP_1.field_Private_MenuStateController_0 = QuickMenuTools.WingMenuStateControllerRight();
                 Wing_UP_1.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
                 Wing_UP_1.field_Private_List_1_UIPage_0.Add(Wing_UP_1);
-                QuickMenuStuff.WingMenuStateControllerRight().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, Wing_UP_1);
+                QuickMenuTools.WingMenuStateControllerRight().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, Wing_UP_1);
 
                 var VLGC2 = Wing_UP_1.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC2.spacing = 12;
@@ -96,7 +96,7 @@
                 Rect.offsetMin = new Vector2(0, 40);
 
                 //PushPage
-                setAction(() => { QuickMenuStuff.Wing_Right().ShowQuickmenuPage(btnQMLoc); });
+                setAction(() => { QuickMenuTools.Wing_Right().ShowQuickmenuPage(btnQMLoc); });
             }
 
 

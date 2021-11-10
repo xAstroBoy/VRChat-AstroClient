@@ -42,6 +42,7 @@
     using Button = UnityEngine.UI.Button;
     using Color = System.Drawing.Color;
     using Console = CheetosConsole.Console;
+    using QuickMenu = QuickMenu;
 
     #endregion Imports
 
@@ -272,7 +273,7 @@
         }
         private IEnumerator OnUserInteractMenuInitCoro(Action code)
         {
-            while (QuickMenuStuff.GetSelectedUserQMInstance() == null)
+            while (QuickMenuTools.GetSelectedUserQMInstance() == null)
                 yield return null;
 
             code();
@@ -292,11 +293,45 @@
 
         protected IEnumerator OnQuickMenuInitCoro(Action code)
         {
-            while (QuickMenuStuff.GetQuickMenuInstance() == null)
-                yield return new WaitForSeconds(0.001f);
-            //while (GameObject.Find(UIUtils.QuickMenu) == null)
-            //    yield return new WaitForSeconds(0.001f);
-            code();
+            Transform Critical1 = null;
+            Transform Critical2 = null;
+            Transform Critical3 = null;
+            bool exception = false;
+            bool Instantiated = false;
+            while (!Instantiated)
+            {
+                try
+                {
+                    Critical1 = QuickMenuTools.UserInterface;
+                    Critical2 = QuickMenuTools.QuickMenuTransform;
+                    Critical3 = QuickMenuTools.NestedMenuTemplate;
+                }
+                catch
+                {
+                    exception = true;
+                }
+
+                if (exception)
+                {
+                    exception = false;
+                    yield return new WaitForSeconds(0.001f);
+                }
+                else
+                {
+                    if (Critical1 != null && Critical2 != null && Critical3 != null)
+                    {
+                        code();
+                        Instantiated = true;
+                        yield break;
+                    }
+                    else if (Critical1 == null || Critical2 == null || Critical3 == null)
+                    {
+                        yield return new WaitForSeconds(0.001f);
+                    }
+                }
+            }
+
+            yield return null;
         }
 
         protected IEnumerator OnUiManagerInitCoro(Action code)

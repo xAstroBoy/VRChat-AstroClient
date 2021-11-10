@@ -87,7 +87,7 @@
 
         internal void SetParent(QMNestedButton Parent)
         {
-            button.transform.SetParent(QuickMenuStuff.GetQuickMenuInstance().transform.Find(Parent.GetMenuName()));
+            button.transform.SetParent(QuickMenuTools.QuickMenuTransform.Find(Parent.GetMenuName()));
         }
 
         internal void SetParent(Transform Parent)

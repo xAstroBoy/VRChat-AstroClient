@@ -8,7 +8,7 @@
     {
         internal MenuText(QMNestedButton menuBase, float posx, float posy, string text)
         {
-            menuTitle = Object.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("ShortcutMenu/EarlyAccessText").gameObject, menuBase.GetBackButton().transform.parent);
+            menuTitle = Object.Instantiate(QuickMenuTools.QuickMenuInstance.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, menuBase.GetBackButton().transform.parent);
             Init(menuTitle, posx, posy, text);
         }
 

@@ -12,7 +12,7 @@ namespace AstroLibrary.Utility
 
     public static class QuickMenuUtils
     {
-        public static QuickMenu QuickMenu => QuickMenuStuff.GetQuickMenuInstance();
+        public static QuickMenu QuickMenu => QuickMenuTools.QuickMenuInstance;
 
 
 
@@ -40,11 +40,11 @@ namespace AstroLibrary.Utility
 
         #region GetSelected
 
-        public static Player SelectedPlayer => QuickMenuStuff.GetSelectedUserQMInstance().GetSelectedPlayer();
+        public static Player SelectedPlayer => QuickMenuTools.GetSelectedUserQMInstance().GetSelectedPlayer();
 
-        public static APIUser SelectedUser => QuickMenuStuff.GetSelectedUserQMInstance().GetSelectedApiUser();
+        public static APIUser SelectedUser => QuickMenuTools.GetSelectedUserQMInstance().GetSelectedApiUser();
 
-        public static VRCPlayer SelectedVRCPlayer => QuickMenuStuff.GetSelectedUserQMInstance().GetSelectedPlayer().GetVRCPlayer();
+        public static VRCPlayer SelectedVRCPlayer => QuickMenuTools.GetSelectedUserQMInstance().GetSelectedPlayer().GetVRCPlayer();
 
         #endregion
 

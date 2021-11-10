@@ -16,7 +16,7 @@
 
         internal  QMSlider(Transform parent, string name, float x, float y, Action<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f, bool DisplayState = true)
         {
-            Slider = UnityEngine.Object.Instantiate(QuickMenuStuff.vrcuimInstance.GetMenuContent().transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld"), parent).gameObject;
+            Slider = UnityEngine.Object.Instantiate(QuickMenuTools.vrcuimInstance.GetMenuContent().transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld"), parent).gameObject;
             UnityEngine.Object.Destroy(Slider.GetComponent<UiSettingConfig>());
             Slider.name = "QMSlider";
             labelObj = Slider.transform.Find("Label").gameObject;
@@ -45,7 +45,7 @@
 
         internal  QMSlider(QMNestedButton parent, string name, float x, float y, Action<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f, bool DisplayState = true)
         {
-            Slider = UnityEngine.Object.Instantiate(QuickMenuStuff.vrcuimInstance.GetMenuContent().transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld"), QuickMenuStuff.GetQuickMenuInstance().transform.Find(parent.GetMenuName())).gameObject;
+            Slider = UnityEngine.Object.Instantiate(QuickMenuTools.vrcuimInstance.GetMenuContent().transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld"), QuickMenuTools.QuickMenuInstance.transform.Find(parent.GetMenuName())).gameObject;
             UnityEngine.Object.Destroy(Slider.GetComponent<UiSettingConfig>());
             Slider.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
             Slider.name = "QMSlider";

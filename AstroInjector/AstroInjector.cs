@@ -53,6 +53,11 @@
             }
             LoadEmbeddedMelons();
 
+
+        }
+
+        public override void OnApplicationStart()
+        {
 #if DEBUG
             LoadDebug();
             return;
@@ -93,11 +98,6 @@
                     Assembly.Load(bytes);
                 }
             }
-        }
-
-        public override void OnApplicationStart()
-        {
-          
         }
 
         internal void LoadEmbeddedLibraries()

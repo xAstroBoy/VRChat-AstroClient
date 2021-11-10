@@ -1,5 +1,6 @@
 ﻿namespace AstroButtonAPI
 {
+    using AstroLibrary.Console;
     using UnityEngine;
 
     internal class QMTabMenu
@@ -22,11 +23,11 @@
         {
             btnType = "QMTabMenu";
 
-            Transform menu = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
+            Transform menu = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate, QuickMenuTools.QuickMenuTransform);
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
             menu.name = menuName;
 
-            mainButton = new QMTabButton(index, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, ImageURL);
+            mainButton = new QMTabButton(index, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, ImageURL);
 
             Il2CppSystem.Collections.IEnumerator enumerator = menu.transform.GetEnumerator();
             while (enumerator.MoveNext())
@@ -48,12 +49,20 @@
         internal void InitButton(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
         {
             btnType = "QMTabMenu";
+            if (QuickMenuTools.NestedMenuTemplate == null)
+            {
+                ModConsole.DebugLog("QuickMenuStuff.NestedMenuTemplate is null");
+            }
+            if (QuickMenuTools.QuickMenuTransform == null)
+            {
+                ModConsole.DebugLog("QuickMenuStuff.QuickMenuTransform is null");
+            }
 
-            Transform menu = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
+            Transform menu = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate, QuickMenuTools.QuickMenuTransform);
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
             menu.name = menuName;
 
-            mainButton = new QMTabButton(index, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, ImageData);
+            mainButton = new QMTabButton(index, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, ImageData);
 
             Il2CppSystem.Collections.IEnumerator enumerator = menu.transform.GetEnumerator();
             while (enumerator.MoveNext())
@@ -95,7 +104,7 @@
 
         internal void OpenMe()
         {
-            QuickMenuStuff.ShowQuickmenuPage(menuName);
+            QuickMenuTools.ShowQuickmenuPage(menuName);
         }
     }
 }

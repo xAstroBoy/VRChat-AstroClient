@@ -5,67 +5,62 @@
     using VRC.UI.Elements;
     using VRC.UI.Elements.Menus;
 
-
-    internal class QuickMenuStuff
+    internal static class QuickMenuTools
     {
         //Templates and references
         internal static bool SelectSelf = false;
-        internal static BoxCollider QuickMenuBackgroundReference;
-        internal static GameObject SingleButtonReference;
-        internal static Vector3 SingleButtonReferencePosition;
-        internal static GameObject SingleButtonReferenceSelectedUser;
-        internal static GameObject ToggleButtonReference;
-        internal static Transform NestedButtonReference;
-        internal static Transform SelectedUserPageReference;
-        internal static Transform SelectedUserPageButtonsReference;
-        internal static GameObject NestedButtonReferenceGameO;
-        internal static Transform NestedPagesReference;
-        internal static Transform MenuDashboardReference;
-        internal static GameObject TabButtonReference;
 
-        internal static GameObject HeaderDashboardReference;
+        private static Transform _UserInterface = null;
+        private static BoxCollider QuickMenuBackgroundReference = null;
+        private static Transform SingleButtonReference = null;
+        private static Vector3? SingleButtonReferencePosition = null;
+        private static Transform SingleButtonReferenceSelectedUser = null;
+        private static Transform ToggleButtonReference = null;
+        private static Transform _NestedButtonReference = null;
+        private static Transform SelectedUserPageReference = null;
+        private static Transform SelectedUserPageButtonsReference = null;
+        private static Transform NestedPagesReference = null;
+        private static Transform MenuDashboardReference = null;
+        private static Transform TabButtonReference = null;
+        private static Transform _QuickMenuTransform = null;
+        private static Transform HeaderDashboardReference = null;
 
         //VRC
-        internal static GameObject _CarouselBanners;
-        internal static QuickMenu quickmenuInstance;
-        internal static VRCUiManager vrcuimInstance;
-        internal static GameObject shortcutMenu;
-        internal static GameObject userInteractMenu;
-
-
-
-        internal static GameObject _SelectedUserPage;
-        internal static UIPage UIPageReference_Right;
-        internal static UIPage UIPageReference_Left;
-        internal static Wing WingmenuInstance;
-        internal static Wing _Wing_Right;
-        internal static Wing _Wing_Left;
-        internal static GameObject WingButtonReferenceRight;
-        internal static GameObject WingPageButtonReferenceLeft;
-        internal static GameObject WingPageButtonReference;
-        internal static MenuStateController MenuStateController_Wing_Right;
-        internal static MenuStateController MenuStateController_Wing_Left;
-
-        internal static MenuStateController _QuickMenuControllert;
-
-        internal static SelectedUserMenuQM _SelectedQMGO;
+        private static Transform _CarouselBanners = null;
+        private static VRC.UI.Elements.QuickMenu _QuickMenuInstance = null;
+        internal static VRCUiManager vrcuimInstance = null; // Dead
+        private static GameObject shortcutMenu = null;
+        private static GameObject userInteractMenu = null;
+        private static GameObject _SelectedUserPage = null;
+        private static UIPage UIPageReference_Right = null;
+        private static UIPage UIPageReference_Left = null;
+        private static Wing WingmenuInstance = null;
+        private static Wing _Wing_Right = null;
+        private static Wing _Wing_Left = null;
+        private static GameObject WingButtonReferenceRight = null;
+        private static GameObject WingPageButtonReferenceLeft = null;
+        private static GameObject WingPageButtonReference = null;
+        private static MenuStateController MenuStateController_Wing_Right = null;
+        private static MenuStateController MenuStateController_Wing_Left = null;
+        private static MenuStateController _QuickMenuControllert = null;
+        private static SelectedUserMenuQM _SelectedQMGO = null;
         //New shit
+
 
         internal static SelectedUserMenuQM GetSelectedUserQMInstance()
         {
             if (_SelectedQMGO == null)
             {
-                _SelectedQMGO = GetQuickMenuInstance().gameObject.FindObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
+                _SelectedQMGO = QuickMenuTransform.gameObject.FindObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
             }
             return _SelectedQMGO;
         }
-
 
         internal static UIPage UIPageTemplate_Right()
         {
             if (UIPageReference_Right == null)
             {
-                var Buttons = QuickMenuStuff.Wing_Right().GetComponentsInChildren<UIPage>(true);
+                var Buttons = Wing_Right().GetComponentsInChildren<UIPage>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Friends")
@@ -75,7 +70,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return UIPageReference_Right;
@@ -85,7 +80,7 @@
         {
             if (UIPageReference_Left == null)
             {
-                var Buttons = QuickMenuStuff.Wing_Left().GetComponentsInChildren<UIPage>(true);
+                var Buttons = Wing_Left().GetComponentsInChildren<UIPage>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Friends")
@@ -95,19 +90,19 @@
                     }
                 }
 
-                ;
+                
             }
 
             return UIPageReference_Left;
         }
 
-        static GameObject DebugPanelReference;
+        private static GameObject DebugPanelReference;
 
         internal static GameObject DebugPanelTemplate()
         {
             if (DebugPanelReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<DebugInfoPanel>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<DebugInfoPanel>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "DebugInfoPanel")
@@ -117,7 +112,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return DebugPanelReference;
@@ -127,7 +122,7 @@
         {
             if (MenuStateController_Wing_Right == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<MenuStateController>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Right")
@@ -137,7 +132,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return MenuStateController_Wing_Right;
@@ -147,7 +142,7 @@
         {
             if (MenuStateController_Wing_Left == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<MenuStateController>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Left")
@@ -157,7 +152,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return MenuStateController_Wing_Left;
@@ -167,7 +162,7 @@
         {
             if (_Wing_Left == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Wing>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<Wing>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Left")
@@ -177,7 +172,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return _Wing_Left;
@@ -187,7 +182,7 @@
         {
             if (_Wing_Right == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Wing>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<Wing>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Right")
@@ -197,7 +192,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return _Wing_Right;
@@ -207,7 +202,7 @@
         {
             if (_QuickMenuControllert == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<MenuStateController>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<MenuStateController>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Canvas_QuickMenu(Clone)")
@@ -216,69 +211,81 @@
                         break;
                     }
                 }
-
-                ;
             }
 
             return _QuickMenuControllert;
         }
 
-
-        internal static VRC.UI.Elements.QuickMenu GetQuickMenuInstance()
+        internal static Transform QuickMenuTransform
         {
-            if (quickmenuInstance == null)
+            get
             {
-                quickmenuInstance = Resources.FindObjectsOfTypeAll<VRC.UI.Elements.QuickMenu>()[0];
-            }
+                if (UserInterface == null) return null;
+                if (_QuickMenuTransform == null)
+                {
+                    return _QuickMenuTransform = UserInterface.Find("Canvas_QuickMenu(Clone)");
+                }
 
-            return quickmenuInstance;
+                return _QuickMenuTransform;
+
+            }
         }
+
+        internal static VRC.UI.Elements.QuickMenu QuickMenuInstance
+        {
+            get
+            {
+                if (UserInterface == null || QuickMenuTransform == null) return null;
+                if (_QuickMenuInstance == null)
+                {
+                    return _QuickMenuInstance = QuickMenuTransform.GetComponent<VRC.UI.Elements.QuickMenu>();
+                }
+                return _QuickMenuInstance;
+            }
+        }
+
+
         //internal static BoxCollider QuickMenuBackground()
         //{
         //    if (QuickMenuBackgroundReference == null)
-        //        QuickMenuBackgroundReference = GetQuickMenuInstance().transform.Find("Container/Button_Worlds").GetComponent<BoxCollider>();
+        //        QuickMenuBackgroundReference = QuickMenuTransform.transform.Find("Container/Button_Worlds").GetComponent<BoxCollider>();
         //    return QuickMenuBackgroundReference;
         //}
 
-        internal static GameObject SingleButtonTemplate()
+        internal static Transform SingleButtonTemplate()
         {
             if (SingleButtonReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
-                foreach (var button in Buttons)
-                {
-                    if (button.name == "Button_Respawn")
-                    {
-                        SingleButtonReference = button.gameObject;
-                    }
-                }
-
-                ;
+                SingleButtonReference = QuickMenuInstance.transform.Find("Container/Window/QMParent/Menu_Camera/Scrollrect/Viewport/VerticalLayoutGroup/Buttons/Button_Screenshot");
             }
 
             return SingleButtonReference;
         }
 
-        internal static Vector3 SingleButtonTemplatePosition()
+        internal static Vector3? SingleButtonTemplatePosition()
         {
             if (SingleButtonReferencePosition == null)
             {
                 SingleButtonReferencePosition = SingleButtonTemplate().transform.position;
             }
 
+            if (!SingleButtonReferencePosition.HasValue)
+            {
+                return null;
+            }
             return SingleButtonReferencePosition;
         }
 
-        internal static GameObject SingleButtonTemplateSelUser()
+        internal static Transform SingleButtonTemplateSelUser()
         {
             if (SingleButtonReferenceSelectedUser == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_VoteKick")
                     {
-                        SingleButtonReferenceSelectedUser = button.gameObject;
+                        SingleButtonReferenceSelectedUser = button.transform;
                     }
                 }
 
@@ -288,16 +295,16 @@
             return SingleButtonReferenceSelectedUser;
         }
 
-        internal static GameObject Carousel_Banners()
+        internal static Transform Carousel_Banners()
         {
             if (_CarouselBanners == null)
             {
-                var Transforms = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Transforms = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
                 foreach (var transform in Transforms)
                 {
                     if (transform.name == "Carousel_Banners")
                     {
-                        _CarouselBanners = transform.gameObject;
+                        _CarouselBanners = transform;
                         break;
                     }
                 }
@@ -308,16 +315,16 @@
             return _CarouselBanners;
         }
 
-        internal static GameObject Header_DashboardTemplate()
+        internal static Transform Header_DashboardTemplate()
         {
             if (HeaderDashboardReference == null)
             {
-                var Transforms = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Transforms = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
                 foreach (var transform in Transforms)
                 {
                     if (transform.name == "Header_QuickLinks")
                     {
-                        HeaderDashboardReference = transform.gameObject;
+                        HeaderDashboardReference = transform;
                     }
                 }
 
@@ -327,23 +334,26 @@
             return HeaderDashboardReference;
         }
 
-        internal static GameObject TabButtonTemplate()
+
+        internal static Transform UserInterface
+        {
+            get
+            {
+                if (_UserInterface == null)
+                {
+                    return _UserInterface = GameObject.Find("UserInterface").transform;
+                }
+                return _UserInterface;
+            }
+        }
+
+
+        internal static Transform TabButtonTemplate()
         {
             if (TabButtonReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
-                foreach (var button in Buttons)
-                {
-                    if (button.name == "Page_Settings")
-                    {
-                        TabButtonReference = button.gameObject;
-                        break;
-                    }
-                }
-
-                ;
+                TabButtonReference = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings").transform;
             }
-
             return TabButtonReference;
         }
 
@@ -351,7 +361,7 @@
         {
             if (WingPageButtonReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Button>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_ActionMenu")
@@ -371,7 +381,7 @@
         {
             if (WingButtonReferenceRight == null)
             {
-                var Buttons = QuickMenuStuff.Wing_Right().GetComponentsInChildren<Button>(true);
+                var Buttons = Wing_Right().GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_Profile")
@@ -391,7 +401,7 @@
         {
             if (WingPageButtonReferenceLeft == null)
             {
-                var Buttons = QuickMenuStuff.Wing_Left().GetComponentsInChildren<Button>(true);
+                var Buttons = Wing_Left().GetComponentsInChildren<Button>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Button_Profile")
@@ -406,53 +416,39 @@
 
             return WingPageButtonReferenceLeft;
         }
-
-        internal static GameObject ToggleButtonTemplate()
+        internal static Transform ToggleButtonTemplate()
         {
             if (ToggleButtonReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Toggle>(true);
-                foreach (var button in Buttons)
-                {
-                    if (button.name == "Button_ToggleFallbackIcon")
-                    {
-                        ToggleButtonReference = button.gameObject;
-                        break;
-                    }
-                }
-
-                ;
+                ToggleButtonReference = QuickMenuTransform.Find("Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/Button_Mute");
             }
-
             return ToggleButtonReference;
         }
 
-        internal static Transform NestedMenuTemplate()
+
+
+        internal static Transform NestedMenuTemplate
         {
-            if (NestedButtonReference == null)
+            get
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
-                foreach (var button in Buttons)
+                if (QuickMenuTransform == null) return null;
+                if (_NestedButtonReference == null)
                 {
-                    if (button.name == "Menu_Camera")
-                    {
-                        NestedButtonReference = button;
-                        break;
-                    }
+                    return _NestedButtonReference = QuickMenuTransform.Find("Container/Window/QMParent/Menu_Camera");
                 }
+                return _NestedButtonReference;
 
-                ;
             }
-
-            return NestedButtonReference;
         }
+
+
+
 
         internal static Transform SelectedUserPage()
         {
-
             if (SelectedUserPageReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Header_UserActions")
@@ -462,7 +458,7 @@
                     }
                 }
 
-                ;
+                
             }
 
             return SelectedUserPageReference;
@@ -472,7 +468,7 @@
         {
             if (SelectedUserPageButtonsReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Buttons_UserActions")
@@ -482,37 +478,17 @@
                     }
                 }
 
-                ;
+                
             }
 
             return SelectedUserPageButtonsReference;
-        }
-
-        internal static GameObject NestedMenuTemplate_GameO()
-        {
-            if (NestedButtonReferenceGameO == null)
-            {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
-                foreach (var button in Buttons)
-                {
-                    if (button.name == "Menu_Camera")
-                    {
-                        NestedButtonReferenceGameO = button.gameObject;
-                        break;
-                    }
-                }
-
-                ;
-            }
-
-            return NestedButtonReferenceGameO;
         }
 
         internal static Transform MenuDashboard_ButtonsSection()
         {
             if (MenuDashboardReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Buttons_QuickActions")
@@ -522,38 +498,18 @@
                     }
                 }
 
-                ;
+                
             }
 
             return MenuDashboardReference;
         }
 
-        internal static Transform NestedMenus()
-        {
-            if (NestedButtonReference == null)
-            {
-
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
-                foreach (var button in Buttons)
-                {
-                    if (button.name == "Menu_Camera")
-                    {
-                        NestedButtonReference = button;
-                        break;
-                    }
-                }
-
-                ;
-            }
-
-            return NestedButtonReference;
-        }
 
         internal static Transform NestedPages()
         {
             if (NestedPagesReference == null)
             {
-                var Buttons = QuickMenuStuff.GetQuickMenuInstance().GetComponentsInChildren<Transform>(true);
+                var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "QMParent")
@@ -563,28 +519,16 @@
                     }
                 }
 
-                ;
+                
             }
 
             return NestedPagesReference;
-        }
-
-        internal static Transform VRC_Camera_Menu()
-        {
-            if (NestedButtonReference == null)
-            {
-                NestedButtonReference = SingleButtonTemplate().transform.parent;
-            }
-
-            return NestedButtonReference;
         }
 
         internal static void ShowQuickmenuPage(string pagename)
         {
             QuickMenuController().PushPage(pagename);
         }
-
-
 
         internal static void NoShader(QMSingleButton x)
         {
@@ -595,7 +539,5 @@
         {
             x.GetMainButton().GetGameObject().GetComponent<Button>().name = "NoShader";
         }
-
-
     }
 }

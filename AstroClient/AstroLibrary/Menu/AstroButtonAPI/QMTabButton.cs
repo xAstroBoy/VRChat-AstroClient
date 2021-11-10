@@ -19,7 +19,7 @@
         internal void initButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, byte[] LoadSprite = null)
         {
             btnType = "_QMTabButton_";
-            button = UnityEngine.Object.Instantiate(QuickMenuStuff.TabButtonTemplate(), QuickMenuStuff.TabButtonTemplate().transform.parent, true);
+            button = UnityEngine.Object.Instantiate(QuickMenuTools.TabButtonTemplate().gameObject, QuickMenuTools.TabButtonTemplate().parent, true);
             button.name = QMButtonAPI.identifier + btnType + Index;
             SetToolTip(btnToolTip);
             setAction(btnAction);
@@ -33,7 +33,7 @@
         internal void initButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnType = "_QMTabButton_";
-            button = UnityEngine.Object.Instantiate(QuickMenuStuff.TabButtonTemplate(), QuickMenuStuff.TabButtonTemplate().transform.parent, true);
+            button = UnityEngine.Object.Instantiate(QuickMenuTools.TabButtonTemplate().gameObject, QuickMenuTools.TabButtonTemplate().parent, true);
             button.name = QMButtonAPI.identifier + btnType + Index;
             SetToolTip(btnToolTip);
             setAction(btnAction);
