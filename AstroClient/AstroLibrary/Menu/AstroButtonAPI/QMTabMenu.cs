@@ -49,14 +49,6 @@
         internal void InitButton(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
         {
             btnType = "QMTabMenu";
-            if (QuickMenuTools.NestedMenuTemplate == null)
-            {
-                ModConsole.DebugLog("QuickMenuStuff.NestedMenuTemplate is null");
-            }
-            if (QuickMenuTools.QuickMenuTransform == null)
-            {
-                ModConsole.DebugLog("QuickMenuStuff.QuickMenuTransform is null");
-            }
 
             Transform menu = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate, QuickMenuTools.QuickMenuTransform);
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
