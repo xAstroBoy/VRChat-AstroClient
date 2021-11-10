@@ -23,7 +23,7 @@
         {
             btnType = "QMTabMenu";
 
-            Transform menu = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate, QuickMenuTools.QuickMenuTransform);
+            Transform menu = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate, QuickMenuTools.NestedPages);
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
             menu.name = menuName;
 
@@ -50,7 +50,7 @@
         {
             btnType = "QMTabMenu";
 
-            Transform menu = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate, QuickMenuTools.QuickMenuTransform);
+            Transform menu = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate, QuickMenuTools.NestedPages);
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
             menu.name = menuName;
 
