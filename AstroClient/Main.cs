@@ -20,6 +20,7 @@
     using ButtonShortcut;
     using CheetoLibrary;
     using CheetosConsole;
+    using ClientUI.Menu;
     using ClientUI.QuickMenuButtons;
     using Experiments;
     using GameObjectDebug;
@@ -368,18 +369,25 @@
             {
                 return;
             }
-
-            InitMainsButtons();
             try
             {
-                TweakerV2Main.Init_TweakerV2Main();
+                InitMainsButtons();
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
             }
 
-            _ = new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", () =>
+            try
+            {
+                TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
+            }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
+
+            _ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>
             {
                 GameObjMenu.ReturnToRoot();
                 GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke();
@@ -395,12 +403,12 @@
         internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
-            QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
-            ExploitsMenu.InitButtons(2f);
-            WorldsCheats.InitButtons(4f);
-            HistoryMenu.InitButtons(6f);
-            AdminMenu.InitButtons(8f);
-            DevMenu.InitButtons(10f);
+            QMTabMenu AstroClient = new QMTabMenu(TabIndexs.Main, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            ExploitsMenu.InitButtons(TabIndexs.Exploits);
+            WorldsCheats.InitButtons(TabIndexs.Cheats);
+            HistoryMenu.InitButtons(TabIndexs.History);
+            AdminMenu.InitButtons(TabIndexs.Admin);
+            DevMenu.InitButtons(TabIndexs.Dev);
 
             ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", () => { Bools.IsDebugMode = true; }, "Debug Console OFF", () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 

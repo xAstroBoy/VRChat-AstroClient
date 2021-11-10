@@ -25,7 +25,7 @@
 
         internal override void VRChat_OnUiManagerInit()
         {
-            MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "<color=cyan>WIP Menu</color>", "WIP Features", null, null, null, null, true);
+            MainButton = new QMNestedButton("MainMenu", 5, 4, "<color=cyan>WIP Menu</color>", "WIP Features", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
 
             var actions = new Action[4];

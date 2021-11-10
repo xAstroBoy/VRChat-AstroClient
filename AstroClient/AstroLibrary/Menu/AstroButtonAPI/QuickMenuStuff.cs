@@ -223,21 +223,16 @@
             return _QuickMenuControllert;
         }
 
-        internal static QuickMenu GetQuickMenuInstance()
+
+        internal static VRC.UI.Elements.QuickMenu GetQuickMenuInstance()
         {
-            try
+            if (quickmenuInstance == null)
             {
-                if (quickmenuInstance == null)
-                    quickmenuInstance = Resources.FindObjectsOfTypeAll<QuickMenu>()[0];
-            }
-            catch
-            {
-                return null;
+                quickmenuInstance = Resources.FindObjectsOfTypeAll<VRC.UI.Elements.QuickMenu>()[0];
             }
 
             return quickmenuInstance;
         }
-
         //internal static BoxCollider QuickMenuBackground()
         //{
         //    if (QuickMenuBackgroundReference == null)

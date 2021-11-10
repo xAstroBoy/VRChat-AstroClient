@@ -150,6 +150,7 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
+    <Compile Include="ClientUI\Menu\Tabs\TabIndexs.cs" />
     <Compile Include="CodeDebugTools\CodeDebug.cs" />
     <Compile Include="AstroLibrary\Menu\ActionMenu\Api\ActionMenuPage.cs" />
     <Compile Include="AstroLibrary\Menu\ActionMenu\Api\AMUtils.cs" />

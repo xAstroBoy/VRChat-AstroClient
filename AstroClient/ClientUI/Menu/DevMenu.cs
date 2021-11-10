@@ -26,11 +26,11 @@
 
         #endregion UIElements
 
-        internal static void InitButtons(float pos)
+        internal static void InitButtons(int index)
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(pos, "Developer Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.repair.png"));
+                SubMenu = new QMTabMenu(index, "Developer Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.repair.png"));
 
                 DisconectButton = new QMSingleButton(SubMenu, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
                 ReconnectButton = new QMSingleButton(SubMenu, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");

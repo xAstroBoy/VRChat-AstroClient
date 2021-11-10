@@ -13,11 +13,11 @@
     {
         internal static QMTabMenu SubMenu { get; private set; }
 
-        internal static void InitButtons(float pos)
+        internal static void InitButtons(int index)
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(pos, "History Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.history.png"));
+                SubMenu = new QMTabMenu(index, "History Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.history.png"));
             }
         }
     }

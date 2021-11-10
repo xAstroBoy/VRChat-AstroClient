@@ -31,7 +31,7 @@
 
         internal override void VRChat_OnUiManagerInit()
         {
-            WIPMenu = new QMNestedButton("ShortcutMenu", 5, 4.5f, "KWIP", "WIP Features", btnTextColor: Color.red, btnHalf: true);
+            WIPMenu = new QMNestedButton("MainMenu", 5, 4.5f, "KWIP", "WIP Features", btnTextColor: Color.red, btnHalf: true);
 
             _ = new QMSingleButton(WIPMenu, 1, 0, "Select Objects", () =>
             {

@@ -19,7 +19,11 @@
             btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, Title, LoadSprite, TextColor);
         }
-
+        internal QMNestedButton(QMTabMenu Parent, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = null,  string TextColor = null, string LoadSprite = "")
+        {
+            btnQMLoc = Parent.GetMenuName();
+            initButton(btnXLocation, btnYLocation, btnText, btnToolTip, Title, LoadSprite, TextColor);
+        }
         internal QMNestedButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
             btnQMLoc = btnMenu;
@@ -86,7 +90,6 @@
             btnQMLoc = btnMenu.GetMenuName();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
-
         internal QMNestedButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -100,7 +103,7 @@
         }
 
 
-        internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = null, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = "", Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
             menuName = "Page_" + btnType + Title;

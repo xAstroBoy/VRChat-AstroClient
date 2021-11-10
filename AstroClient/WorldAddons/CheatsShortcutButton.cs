@@ -15,7 +15,7 @@
 
         internal static void Init_Cheats_ShortcutBtn(float x, float y, bool btnHalf)
         {
-            WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
+            WorldCheatsShortcut = new QMSingleButton("MainMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
             ToggleButtonVisibilityAndInteractivity(false);
         }
 
