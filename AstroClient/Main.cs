@@ -487,11 +487,10 @@
 
             QMSingleToggleButton toggleAntiPortal = new QMSingleToggleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.AntiPortal, true);
             toggleAntiPortal.SetToggleState(Bools.AntiPortal);
-            //ModConsole.DebugLog("12");
 
 
-
-            //TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
+            ModConsole.DebugLog("12");
+            TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
             ModConsole.DebugLog("13");
             ExploitsMenu.InitButtons(TabIndexs.Exploits);
             ModConsole.DebugLog("14");
@@ -535,14 +534,14 @@
             SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
             ModConsole.DebugLog("27");
 
-            _ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>
-            {
-                GameObjMenu.ReturnToRoot();
-                GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke();
-            }, "Advanced GameObject Toggler", null, null, true);
-            ModConsole.DebugLog("28");
-            CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
-            ModConsole.DebugLog("29");
+            //_ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>
+            //{
+            //    GameObjMenu.ReturnToRoot();
+            //    GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke();
+            //}, "Advanced GameObject Toggler", null, null, true);
+            //ModConsole.DebugLog("28");
+            //CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
+            //ModConsole.DebugLog("29");
 
 
         }

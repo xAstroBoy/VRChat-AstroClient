@@ -39,6 +39,7 @@
             menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}";
 
             GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
+            NestedPart.ToggleScrollRectOnExistingMenu(true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             UnityEngine.Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
             ButtonsMenu.GetComponentInChildren<GridLayoutGroup>().enabled = true;
@@ -101,5 +102,9 @@
             mainButton.DestroyMe();
             //backButton.DestroyMe();
         }
+
+
+
+
     }
 }

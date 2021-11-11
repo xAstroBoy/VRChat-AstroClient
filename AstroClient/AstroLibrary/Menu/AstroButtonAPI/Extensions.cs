@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Reflection;
+    using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using CheetoLibrary;
     using UnityEngine;
@@ -23,6 +24,37 @@
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        internal static void ToggleScrollRectOnExistingMenu(this GameObject NestedPart, bool active)
+        {
+            try
+            {
+                ScrollRect scrollRect = NestedPart.GetComponentInChildren<ScrollRect>(true);
+                Scrollbar scrollbar = NestedPart.GetComponentInChildren<Scrollbar>(true);
+                if (scrollbar != null && scrollRect != null)
+                {
+                    scrollbar.enabled = active;
+                    scrollbar.gameObject.SetActive(active);
+                    scrollRect.enabled = active;
+                    scrollRect.gameObject.SetActive(active);
+
+                    //var buttons = NestedPart.FindObject("Buttons");
+                    //if (buttons != null)
+                    //{
+                    //    scrollRect.viewport = buttons.GetComponent<RectTransform>();
+                    //}
+                    scrollRect.movementType = ScrollRect.MovementType.Elastic;
+                    scrollRect.verticalScrollbar = scrollbar;
+                    //scrollRect.horizontalScrollbar = scrollbar;
+
+                }
+            }
+            catch(Exception e)
+            {
+                ModConsole.DebugErrorExc(e);
+            }
+        }
+
 
 
         internal static void LoadSprite(this GameObject Parent, string LoadSprite, string name)

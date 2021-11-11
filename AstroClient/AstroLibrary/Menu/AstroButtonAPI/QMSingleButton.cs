@@ -121,12 +121,12 @@
             string TextColorHTML = null;
             if (TextColor.HasValue)
             {
-                TextColorHTML = ColorUtility.ToHtmlStringRGB(TextColor.Value);
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
             }
             string BackgroundHTML = null;
             if (BackgroundColor.HasValue)
             {
-                BackgroundHTML = ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
+                BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
             }
 
             btnQMLoc = Parent.GetMenuName();
@@ -148,12 +148,12 @@
             string TextColorHTML = null;
             if (TextColor.HasValue)
             {
-                TextColorHTML = ColorUtility.ToHtmlStringRGB(TextColor.Value);
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
             }
             string BackgroundHTML = null;
             if (BackgroundColor.HasValue)
             {
-                BackgroundHTML = ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
+                BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
             }
 
             btnQMLoc = btnMenu;

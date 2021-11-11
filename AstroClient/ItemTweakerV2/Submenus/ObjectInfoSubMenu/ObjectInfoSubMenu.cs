@@ -10,7 +10,7 @@
     {
         internal static void Init_ObjectInfoSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var main = new QMNestedButton(menu, x, y, "Object info", "Object Info Menu!", "Show Object Info", null, null);
+            var main = new QMNestedButton(menu, x, y, "Object info", "Object Info Menu!", null, null, null, null, btnHalf);
 
             _ = new QMSingleButton(main, 1, 0f, "Copy Position.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPosition(); }, "Copies Object Current Position in clipboard.", null, Color.yellow, true);
             _ = new QMSingleButton(main, 1, 0.5f, "Copy Rotation.", () => { Tweaker_Object.GetGameObjectToEdit().CopyRotation(); }, "Copies Object Current Rotation in clipboard.", null, Color.yellow, true);
