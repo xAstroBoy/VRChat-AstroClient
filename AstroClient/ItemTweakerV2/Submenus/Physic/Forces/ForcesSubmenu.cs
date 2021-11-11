@@ -30,21 +30,21 @@
             ForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 0, "Force : " + Force, () => { Force = DefaultForce; }, string.Empty, null, null);
             SpinForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 1, "Spin Force : " + SpinForce, () => { SpinForce = DefaultSpinForce; }, string.Empty, null, null);
 
-            ForceSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Force Power :", 150, -720, delegate (float value)
-            {
-                Force = (int)value;
-            }, DefaultForce, 1000, 1, true);
-            ForceSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
-            ForceSlider.SetTextLabel("");
-            Force = DefaultForce;
+            //ForceSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Force Power :", 150, -720, delegate (float value)
+            //{
+            //    Force = (int)value;
+            //}, DefaultForce, 1000, 1, true);
+            //ForceSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            //ForceSlider.SetTextLabel("");
+            //Force = DefaultForce;
 
-            SpinForceSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Spin Power : ", 150, -1120, delegate (float value)
-            {
-                SpinForce = (int)value;
-            }, DefaultSpinForce, 1000, 1, true);
-            SpinForceSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
-            SpinForceSlider.SetTextLabel("");
-            SpinForce = DefaultSpinForce;
+            //SpinForceSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Spin Power : ", 150, -1120, delegate (float value)
+            //{
+            //    SpinForce = (int)value;
+            //}, DefaultSpinForce, 1000, 1, true);
+            //SpinForceSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            //SpinForceSlider.SetTextLabel("");
+            //SpinForce = DefaultSpinForce;
 
             _ = new QMSingleButton(ForceSubMenu, 5, 1, "Kill Any Object Forces", new Action(() => { Tweaker_Object.GetGameObjectToEdit().KillForces(); }), "Kill Obj Forces", null, null);
             var right = new QMSingleButton(ForceSubMenu, 4, 2, "→", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Right(); }), string.Empty, null, null);
@@ -82,8 +82,8 @@
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
         private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
-        internal static QMSlider ForceSlider { get; private set; }
-        internal static QMSlider SpinForceSlider { get; private set; }
+        //internal static QMSlider ForceSlider { get; private set; }
+        //internal static QMSlider SpinForceSlider { get; private set; }
 
         internal static QMSingleButton ForceAmnt1;
 
@@ -110,10 +110,10 @@
                 {
                     ForceAmnt2.SetButtonText("Force : " + value.ToString());
                 }
-                if (ForceSlider != null)
-                {
-                    ForceSlider.SetValue(value);
-                }
+                //if (ForceSlider != null)
+                //{
+                //    ForceSlider.SetValue(value);
+                //}
             }
         }
 
@@ -137,10 +137,10 @@
                     SpinForceAmnt2.SetButtonText("Spin Force : " + SpinForce.ToString());
                 }
 
-                if (SpinForceSlider != null)
-                {
-                    SpinForceSlider.SetValue(value);
-                }
+                //if (SpinForceSlider != null)
+                //{
+                //    SpinForceSlider.SetValue(value);
+                //}
             }
         }
 

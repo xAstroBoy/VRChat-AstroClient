@@ -136,7 +136,7 @@
 
         internal void SetButtonText(string text)
         {
-            button.gameObject.GetComponent<TextMeshPro>().text = text;
+            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = text;
         }
 
         [Obsolete("Not working anymore.")]

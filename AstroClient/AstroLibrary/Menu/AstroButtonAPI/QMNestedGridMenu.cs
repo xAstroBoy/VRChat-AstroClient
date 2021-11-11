@@ -36,19 +36,12 @@
         internal void initButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title, string LoadSprite = "", string TextColor = null, bool CanBeDragged = false)
         {
             btnType = QMButtonAPI.identifier + "_GridNestedNested_Menu_";
-            if (!Title.IsNotNullOrEmptyOrWhiteSpace())
-            {
-                menuName = "Page_" + btnType + Title;
-            }
-            else
-            {
-                menuName = "Page_" + btnType + btnText;
-
-            }
+            menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}";
 
             GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             UnityEngine.Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+            ButtonsMenu.GetComponentInChildren<GridLayoutGroup>().enabled = true;
 
             UIPage Page_UI = NestedPart.AddComponent<UIPage>();
             Page_UI.name = menuName;

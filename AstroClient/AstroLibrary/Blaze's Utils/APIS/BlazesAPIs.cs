@@ -23,7 +23,7 @@
         internal static List<QMToggleButton> allToggleButtons = new List<QMToggleButton>();
         internal static List<QMNestedButton> allNestedButtons = new List<QMNestedButton>();
         //internal static List<QMImage> allImages = new List<QMImage>();
-        internal static List<QMSlider> allSliders = new List<QMSlider>();
+        //internal static List<QMSlider> allSliders = new List<QMSlider>();
 
         //SocialMenu Settings
         //internal static List<SMButton> allSMButtons = new List<SMButton>();

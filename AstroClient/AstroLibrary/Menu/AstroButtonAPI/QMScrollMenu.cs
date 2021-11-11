@@ -34,7 +34,7 @@
         {
             BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
             SetAction(MenuOpenAction);
-            IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "", null, null, false);
+            IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { });
             IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
             IndexButton.GetGameObject().GetComponentInChildren<Image>().enabled = false;
             BackButton = new QMSingleButton(BaseMenu, 5, 0f, "Back", delegate
@@ -50,7 +50,7 @@
         internal QMScrollMenu(QMNestedButton basemenu)
         {
             BaseMenu = basemenu;
-            IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "", null, null, false);
+            IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { });
             IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
             IndexButton.GetGameObject().GetComponentInChildren<Image>().enabled = false;
             BackButton = new QMSingleButton(BaseMenu, 5, 0f, "Back", delegate

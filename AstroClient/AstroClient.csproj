@@ -115,7 +115,6 @@
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMScrollMenu.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleToggle.cs" />
-    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSlider.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMTabBase.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMTabButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMTabMenu.cs" />

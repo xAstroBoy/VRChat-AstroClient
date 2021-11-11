@@ -140,11 +140,11 @@
             if (ButtonsPageNestedButton == null)
             {
                 var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate().gameObject, Part1.FindObject("Buttons").transform, true);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
             }
             else
             {
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate().gameObject, ButtonsPageNestedButton.transform, true);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsPageNestedButton.transform, true);
             }
 
             var Texto = button.NewText("Text_H4");
@@ -179,7 +179,7 @@
             btnOff.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG("cancel.png").ToSprite();
 
             SetToolTip(btnToolTip);
-            setAction(btnActionOn, btnActionOff);
+            SetAction(btnActionOn, btnActionOff);
         }
 
 
@@ -190,11 +190,11 @@
             if (ButtonsPageNestedButton == null)
             {
                 var Part1 = QuickMenuTools.NestedMenuTemplate.gameObject.FindObject(btnQMLoc);
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate().gameObject, Part1.FindObject("Buttons").transform, true);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
             }
             else
             {
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate().gameObject, ButtonsPageNestedButton.transform, true);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsPageNestedButton.transform, true);
             }
 
             var Texto = button.NewText("Text_H4");
@@ -223,7 +223,7 @@
             btnOff.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG("cancel.png").ToSprite();
 
             SetToolTip(btnToolTip);
-            setAction(btnActionOn, btnActionOff);
+            SetAction(btnActionOn, btnActionOff);
         }
 
         internal void setTextColorHTML(string buttonTextColor, TMPro.TextMeshProUGUI Texto)
@@ -248,37 +248,37 @@
 
 
 
-        internal void setAction(System.Action buttonOnAction, System.Action buttonOffAction)
-        {
-            btnOnAction = buttonOnAction;
-            btnOffAction = buttonOffAction;
+        //internal void setAction(System.Action buttonOnAction, System.Action buttonOffAction)
+        //{
+        //    btnOnAction = buttonOnAction;
+        //    btnOffAction = buttonOffAction;
 
-            button.GetComponent<Toggle>().onValueChanged = new Toggle.ToggleEvent();
-            button.GetComponentInChildren<Toggle>().onValueChanged.AddListener(new Action<bool>
-            ((g) =>
-            {
-                if (g)
-                {
-                    if (!IsBeingCreated)
-                    {
-                        btnOn.SetActive(true);
-                        btnOff.SetActive(false);
-                        btnOnAction.Invoke();
-                    }
-                }
-                else
-                {
-                    if (!IsBeingCreated)
-                    {
-                        btnOn.SetActive(false);
-                        btnOff.SetActive(true);
-                        btnOffAction.Invoke();
-                    }
-                }
+        //    button.GetComponent<Toggle>().onValueChanged = new Toggle.ToggleEvent();
+        //    button.GetComponentInChildren<Toggle>().onValueChanged.AddListener(new Action<bool>
+        //    ((g) =>
+        //    {
+        //        if (g)
+        //        {
+        //            if (!IsBeingCreated)
+        //            {
+        //                btnOn.SetActive(true);
+        //                btnOff.SetActive(false);
+        //                btnOnAction.Invoke();
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (!IsBeingCreated)
+        //            {
+        //                btnOn.SetActive(false);
+        //                btnOff.SetActive(true);
+        //                btnOffAction.Invoke();
+        //            }
+        //        }
 
-                ButtonChangedState = true;
-            }));
-        }
+        //        ButtonChangedState = true;
+        //    }));
+        //}
 
         internal  void SetAction(Action buttonOnAction, Action buttonOffAction)
         {

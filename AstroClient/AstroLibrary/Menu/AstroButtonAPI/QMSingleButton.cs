@@ -22,9 +22,7 @@
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
-
         }
-
 
         internal QMSingleButton(QMTabMenu baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf)
         {
@@ -41,7 +39,6 @@
 
         }
 
-
         internal QMSingleButton(QMNestedGridMenu baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf)
         {
             btnQMLoc = baseMenu.GetMenuName();
@@ -56,8 +53,6 @@
             }
 
         }
-
-
 
         internal QMSingleButton(QMNestedButton baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf)
         {
@@ -74,78 +69,6 @@
 
         }
 
-        //internal QMSingleButton(QMNestedGridMenu Parent, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
-        //{
-        //    btnQMLoc = Parent.GetMenuName();
-        //    initButton(0, 0, btnText, btnAction, btnToolTip, TextColor);
-
-        //    if (btnHalf)
-        //    {
-        //        RectTransform Recto = button.GetComponent<RectTransform>();
-        //        if (IsUp)
-        //        {
-        //            Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-        //            Recto.anchoredPosition += new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-        //            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-        //        }
-        //        else
-        //        {
-        //            Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-        //            Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-        //            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-        //        }
-        //    }
-        //}
-
-
-
-        //internal  QMSingleButton(QMTabMenu Parent, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
-        //{
-        //    btnQMLoc = Parent.GetMenuName();
-        //    initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
-
-        //    if (btnHalf)
-        //    {
-        //        RectTransform Recto = button.GetComponent<RectTransform>();
-
-        //        if (IsUp)
-        //        {
-        //            Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-        //            Recto.anchoredPosition += new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-        //            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-        //        }
-        //        else
-        //        {
-        //            Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-        //            Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-        //            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-        //        }
-        //    }
-        //}
-
-        //internal  QMSingleButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
-        //{
-        //    btnQMLoc = Parent.GetMenuName();
-        //    initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
-
-        //    if (btnHalf)
-        //    {
-        //        RectTransform Recto = button.GetComponent<RectTransform>();
-
-        //        if (IsUp)
-        //        {
-        //            Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-        //            Recto.anchoredPosition += new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-        //            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-        //        }
-        //        else
-        //        {
-        //            Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-        //            Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-        //            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-        //        }
-        //    }
-        //}
 
         internal  QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null, bool btnHalf = false)
         {
@@ -172,12 +95,12 @@
             string TextColorHTML = null;
             if (TextColor.HasValue)
             {
-                TextColorHTML = ColorUtility.ToHtmlStringRGB(TextColor.Value);
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
             }
             string BackgroundHTML = null;
-            if (TextColor.HasValue)
+            if (BackgroundColor.HasValue)
             {
-                BackgroundHTML = ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
+                BackgroundHTML = "#" +  ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
             }
 
             btnQMLoc = Parent.GetMenuName();
@@ -201,7 +124,7 @@
                 TextColorHTML = ColorUtility.ToHtmlStringRGB(TextColor.Value);
             }
             string BackgroundHTML = null;
-            if (TextColor.HasValue)
+            if (BackgroundColor.HasValue)
             {
                 BackgroundHTML = ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
             }
@@ -228,7 +151,7 @@
                 TextColorHTML = ColorUtility.ToHtmlStringRGB(TextColor.Value);
             }
             string BackgroundHTML = null;
-            if (TextColor.HasValue)
+            if (BackgroundColor.HasValue)
             {
                 BackgroundHTML = ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
             }
@@ -290,7 +213,7 @@
                     break;
 
                 case "QA_SelectedUser":
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplateSelUser().gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
                     button.EnableComponents();
                     button.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
@@ -312,7 +235,6 @@
             SetAction(btnAction);
 
             button.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
-
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition += new Vector2(0, 50);
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().fontSize = 26;
 

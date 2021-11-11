@@ -14,12 +14,12 @@
         {
             var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
 
-            ScaleSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ScaleEditor.GetMenuName()), "Scale:", 250, -720, delegate (float value)
-            {
-                ScaleValueToUse = value;
-            }, 0.1f, 20, 0, true);
-            ScaleSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
-            ScaleSlider.SetTextLabel("");
+            //ScaleSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ScaleEditor.GetMenuName()), "Scale:", 250, -720, delegate (float value)
+            //{
+            //    ScaleValueToUse = value;
+            //}, 0.1f, 20, 0, true);
+            //ScaleSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            //ScaleSlider.SetTextLabel("");
 
             CurrentAddValue = new QMSingleButton(ScaleEditor, 5, -1, ScaleValueToUse.ToString(), null, string.Empty, null, null, true);
             GameObjectActualScale = new QMSingleButton(ScaleEditor, 5, 0, string.Empty, null, "Current Inflater Object Scale", null, null);
@@ -90,7 +90,7 @@
 
 
 
-        internal static QMSlider ScaleSlider;
+        //internal static QMSlider ScaleSlider;
 
         internal static QMSingleButton CurrentAddValue;
         internal static QMSingleButton GameObjectActualScale;
@@ -112,10 +112,10 @@
                 {
                     CurrentAddValue.SetButtonText(value.ToString());
                 }
-                if (ScaleSlider != null)
-                {
-                    ScaleSlider.SetValue(value);
-                }
+                //if (ScaleSlider != null)
+                //{
+                //    ScaleSlider.SetValue(value);
+                //}
             }
         }
 

@@ -12,7 +12,7 @@
     internal class SettingsMenuBtn : GameEvents
     {
 
-        internal static QMSlider farClipPlaneSlider;
+        //internal static QMSlider farClipPlaneSlider;
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             // Main Settings Menu
@@ -52,10 +52,10 @@
             TriggerEventToggle.SetToggleState(ConfigManager.General.LogTriggerEvents, false);
 
             QMNestedButton cameraSettings = new QMNestedButton(sub, 2, 2, "Camera", "Camera", null, null, null, null, false);
-            QMSlider fovSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FOV", 400, -620, delegate (float value) { FOV.Set_Camera_FOV(value); }, ConfigManager.General.FOV, 140, 20, true);
-            fovSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
-            farClipPlaneSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FarClipPlane", 400, -820, delegate (float value) { PlayerCameraEditor.PlayerCamera.farClipPlane = value; }, PlayerCameraEditor.PlayerCamera.farClipPlane, 999999999, 1, true);
-            farClipPlaneSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            //QMSlider fovSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FOV", 400, -620, delegate (float value) { FOV.Set_Camera_FOV(value); }, ConfigManager.General.FOV, 140, 20, true);
+            //fovSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            //farClipPlaneSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FarClipPlane", 400, -820, delegate (float value) { PlayerCameraEditor.PlayerCamera.farClipPlane = value; }, PlayerCameraEditor.PlayerCamera.farClipPlane, 999999999, 1, true);
+            //farClipPlaneSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
 
             // Hide Elements Menu
             QMNestedButton subHideElements = new QMNestedButton(sub, 1, 2f, "Hide Elements", "Hide Elements", null, null, null, null, false);
@@ -158,10 +158,10 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (farClipPlaneSlider != null)
-            {
-                farClipPlaneSlider.SetValue(PlayerCameraEditor.PlayerCamera.farClipPlane);
-            }
+            //if (farClipPlaneSlider != null)
+            //{
+            //    farClipPlaneSlider.SetValue(PlayerCameraEditor.PlayerCamera.farClipPlane);
+            //}
         }
 
 

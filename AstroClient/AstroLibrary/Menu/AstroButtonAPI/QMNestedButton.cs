@@ -1,5 +1,6 @@
 ﻿namespace AstroButtonAPI
 {
+    using System;
     using AstroLibrary.Extensions;
     using UnityEngine;
     using UnityEngine.UI;
@@ -14,7 +15,7 @@
         internal string menuName;
         internal string btnQMLoc;
         internal string btnType;
-
+        
         internal QMNestedButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, string Title, string btnToolTip, string TextColor = null, string LoadSprite = "")
         {
             btnQMLoc = Parent.GetMenuName();
@@ -34,7 +35,7 @@
         internal void initButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title, string LoadSprite = "", string TextColor = null, bool CanBeDragged = false)
         {
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
-            menuName = "Page_" + btnType + Title;
+            menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}_{btnToolTip}_{Guid.NewGuid().ToString()}";
 
             GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
@@ -91,7 +92,7 @@
             btnQMLoc = btnMenu.GetMenuName();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
-        internal QMNestedButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        internal  QMNestedButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
@@ -107,15 +108,8 @@
         internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = "", Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
-            if (!Title.IsNotNullOrEmptyOrWhiteSpace())
-            {
-                menuName = "Page_" + btnType + Title;
-            }
-            else
-            {
-                menuName = "Page_" + btnType + btnText;
+            menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}_{btnToolTip}_{Guid.NewGuid().ToString()}";
 
-            }
             GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
@@ -134,12 +128,16 @@
             NestedPart.CleanButtonsNestedMenu();
             QuickMenuTools.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, Page_UI);
             string TextColorHTML = null;
-            if (btnTextColor.HasValue)
+            if (btnTextColor.HasValue && btnTextColor != null)
             {
                 TextColorHTML = ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
             }
+            else
+            {
+                TextColorHTML = "#blue";
+            }
 
-            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf);
+            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf, false);
 
             switch (Title)
             {
@@ -151,32 +149,6 @@
                     NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_Menu_" + "Main Menu");
                     break;
             }
-            //btnType = "NestedButton";
-
-            //Transform menu = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.QuickMenuInstance.transform);
-            //menuName = $"{QMButtonAPI.identifier}{btnQMLoc}_{btnXLocation}_{btnYLocation}";
-            //menu.name = menuName;
-
-            //mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, btnTextColor, btnHalf);
-
-            //Il2CppSystem.Collections.IEnumerator enumerator = menu.transform.GetEnumerator();
-            //while (enumerator.MoveNext())
-            //{
-            //    Il2CppSystem.Object obj = enumerator.Current;
-            //    Transform btnEnum = obj.Cast<Transform>();
-            //    if (btnEnum != null)
-            //    {
-            //        UnityEngine.Object.Destroy(btnEnum.gameObject);
-            //    }
-            //}
-
-            //if (backbtnTextColor == null)
-            //{
-            //    backbtnTextColor = Color.yellow;
-            //}
-
-            //QMButtonAPI.allNestedButtons.Add(this);
-            //backButton = new QMSingleButton(this, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage(btnQMLoc); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
         }
 
         internal string GetMenuName()

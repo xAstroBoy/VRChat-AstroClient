@@ -44,11 +44,11 @@
         internal static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var slider = new QMNestedButton(menu, x, y, "Proximity", "Pickup Proximity Slider Editor!", null, null, null, null, btnHalf);
-            PickupProximitySlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
-            {
-                Tweaker_Object.GetGameObjectToEdit().Pickup_Set_proximity((int)value);
-            }, 5, 1000, 0, true);
-            PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            //PickupProximitySlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
+            //{
+            //    Tweaker_Object.GetGameObjectToEdit().Pickup_Set_proximity((int)value);
+            //}, 5, 1000, 0, true);
+            //PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
         }
 
         internal override void OnPickupController_Selected(PickupController control)
@@ -168,10 +168,10 @@
                             Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
                         }
                     }
-                    if (PickupProximitySlider != null)
-                    {
-                        PickupProximitySlider.SetValue(controller.proximity);
-                    }
+                    //if (PickupProximitySlider != null)
+                    //{
+                    //    PickupProximitySlider.SetValue(controller.proximity);
+                    //}
                     if (Pickup_IsHeld != null)
                     {
                         Pickup_IsHeld.SetButtonText(controller.Get_IsHeld_ButtonText());
@@ -235,10 +235,10 @@
             {
                 Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
             }
-            if (PickupProximitySlider != null)
-            {
-                PickupProximitySlider.SetValue(0);
-            }
+            //if (PickupProximitySlider != null)
+            //{
+            //    PickupProximitySlider.SetValue(0);
+            //}
             if (Pickup_IsHeld != null)
             {
                 Pickup_IsHeld.SetButtonText("Not Found");
@@ -272,6 +272,6 @@
         internal static QMSingleButton Pickup_IsHeld { get; private set; }
         internal static QMSingleButton Pickup_CurrentObjOwner { get; private set; }
         internal static QMSingleButton Pickup_CurrentObjHolder { get; private set; }
-        internal static QMSlider PickupProximitySlider { get; private set; }
+        //internal static QMSlider PickupProximitySlider { get; private set; }
     }
 }

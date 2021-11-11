@@ -15,6 +15,7 @@
         private Color OnColor { get; set; }
         private Action OffAction { get; set; }
         private Action OnAction { get; set; }
+        private string btnQMLoc { get; set; }
 
 
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
@@ -61,7 +62,34 @@
         private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool defaultstate = false, bool btnHalf = false)
         {
             btnType = "SingleToggleButton";
-            button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.QuickMenuInstance.transform.Find(btnQMLoc), true);
+            switch (btnQMLoc)
+            {
+                case "Dashboard":
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection(), true);
+                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
+                    break;
+
+                case "QA_MainMenu":
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_MainMenu.QuickActions.transform, true);
+                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
+                    break;
+
+                case "QA_SelectedUser":
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
+                    button.EnableComponents();
+                    button.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
+                    break;
+
+                default:
+                    var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
+                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
+                    initShift[0] = -1;
+                    initShift[1] = -3;
+                    SetLocation(btnXLocation, btnYLocation);
+                    break;
+            }
 
             initShift[0] = -1;
             initShift[1] = 0;
@@ -94,9 +122,8 @@
 
         internal void SetButtonText(string buttonText)
         {
-            button.GetComponentInChildren<TextMeshPro>().text = buttonText;
+            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
         }
-
         internal void SetAction(Action buttonONAction, Action buttonOFFAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
@@ -146,7 +173,7 @@
 
         internal override void SetTextColor(Color buttonTextColor)
         {
-            button.GetComponentInChildren<Text>().color = buttonTextColor;
+            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = buttonTextColor;
             //if (save)
             //OrigText = (Color)buttonTextColor;
         }

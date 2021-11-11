@@ -16,8 +16,7 @@
         private static BoxCollider QuickMenuBackgroundReference = null;
         private static Transform SingleButtonReference = null;
         private static Vector3? _SingleButtonReferencePosition = null;
-        private static Transform SingleButtonReferenceSelectedUser = null;
-        private static Transform ToggleButtonReference = null;
+        private static Transform _ToggleButtonReference = null;
         private static Transform _NestedButtonReference = null;
         private static Transform SelectedUserPageReference = null;
         private static Transform SelectedUserPageButtonsReference = null;
@@ -298,22 +297,6 @@
             }
         }
 
-        internal static Transform SingleButtonTemplateSelUser()
-        {
-            if (SingleButtonReferenceSelectedUser == null)
-            {
-                var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
-                foreach (var button in Buttons)
-                {
-                    if (button.name == "Button_VoteKick")
-                    {
-                        SingleButtonReferenceSelectedUser = button.transform;
-                    }
-                }
-            }
-
-            return SingleButtonReferenceSelectedUser;
-        }
 
         internal static Transform Carousel_Banners()
         {
@@ -444,18 +427,29 @@
                     }
                 }
 
-                ;
+                
             }
 
             return WingPageButtonReferenceLeft;
         }
-        internal static Transform ToggleButtonTemplate()
+        internal static Transform ToggleButtonTemplate
         {
-            if (ToggleButtonReference == null)
+            get
             {
-                ToggleButtonReference = QuickMenuTransform.Find("Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions/Button_Mute");
+                if (_ToggleButtonReference == null)
+                {
+                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
+                    foreach (var button in Buttons)
+                    {
+                        if (button.name == "Button_Mute")
+                        {
+                            _ToggleButtonReference = button.transform;
+                        }
+                    }
+                }
+
+                return _ToggleButtonReference;
             }
-            return ToggleButtonReference;
         }
 
 
