@@ -192,7 +192,7 @@
         internal static void Murder2CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
             Murder2CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 2 Cheats", "Manage Murder 2 Cheats", null, null, null, null, btnHalf);
-            Murder2CheatPage.GetMainButton().SetResizeTextForBestFit(true);
+            Murder2CheatPage.GetMainButton();
             QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder2CheatPage, 1, 0, "Item Teleporter", "", null, null, null, null, true);
             _ = new QMSingleButton(MurderItemTeleporter, 1, 0, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null);
             _ = new QMSingleButton(MurderItemTeleporter, 2, 0, "Teleport the Detective Gun!", new Action(() => { item_detectiveGun.TeleportToMe(); }), "Detective Gun Teleporter!", null, null);

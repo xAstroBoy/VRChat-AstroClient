@@ -18,16 +18,12 @@
             Pickup_IsHeldStatus = new QMSingleButton(main, -1, -1f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
 
             Pickup_CurrentObjectHolder = new QMSingleButton(main, -1, -0.5f, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
-            Pickup_CurrentObjectHolder.SetResizeTextForBestFit(true);
 
             Pickup_CurrentObjectOwner = new QMSingleButton(main, -1, 0.5f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
-            Pickup_CurrentObjectOwner.SetResizeTextForBestFit(true);
 
             TeleportToMe = new QMSingleButton(main, -1, 1.5f, ButtonStringExtensions.Generate_TeleportToMe_ButtonText(null), new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToMe(); }), ButtonStringExtensions.Generate_TeleportToMe_ButtonText(null), null, null);
-            TeleportToMe.SetResizeTextForBestFit(true);
 
             TeleportToTarget = new QMSingleButton(main, -1, 2.5f, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToTarget(); }), ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), null, null);
-            TeleportToTarget.SetResizeTextForBestFit(true);
 
             GravityToggler = new QMSingleToggleButton(main, 1, 0, "Use Gravity", () => { Modified_SetGravity(true); }, "No Gravity", () => { Modified_SetGravity(false); }, "Toggle Object Gravity", Color.green, Color.red, null, false, true);
             KinematicToggler = new QMSingleToggleButton(main, 1, 0.5f, "Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(true); }, "Not Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(false); }, "Toggle Object Kinematic", Color.green, Color.red, null, false, true);

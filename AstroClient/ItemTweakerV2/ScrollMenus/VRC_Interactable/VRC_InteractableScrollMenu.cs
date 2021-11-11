@@ -11,7 +11,7 @@
         internal static void Init_VRC_InteractableScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Internal VRC_Interactable ", "Interact with Internal VRC_Interactable Triggers", null, null, null, null, btnHalf);
-            menu.GetMainButton().SetResizeTextForBestFit(true);
+            menu.GetMainButton();
             var scroll = new QMScrollMenu(menu);
             _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
               {

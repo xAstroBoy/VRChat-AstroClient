@@ -38,7 +38,7 @@
             Init_UserMenu_Exploits(x, y, true);
 
             //  NO TOUCH!
-            new QMSingleButton("QA_SelectedUser", x, y + 0.5f, "AstroClient : Set Target.", new Action(TargetSelector.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf).SetResizeTextForBestFit(true);
+            new QMSingleButton("QA_SelectedUser", x, y + 0.5f, "AstroClient : Set Target.", new Action(TargetSelector.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf);
             var forceClone = new QMSingleButton("QA_SelectedUser", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
 
         }
@@ -46,7 +46,7 @@
         internal static void Init_UserMenu_Exploits(float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton("QA_SelectedUser", x, y, "AstroClient Exploits", "AstroClient Menu", null, null, null, null, btnHalf);
-            menu.GetMainButton().SetResizeTextForBestFit(true);
+            menu.GetMainButton();
             if (Bools.IsDeveloper)
             {
             _ = new QMSingleButton(menu, 0, 0, "Deny Pickups to Player.", new Action(() => { PickupBlocker.RegisterPlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);

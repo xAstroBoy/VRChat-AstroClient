@@ -20,9 +20,7 @@
             _ = new QMSingleButton(PickupEditor, 0, 0, "Reset Properties", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_RestoreOriginalProperties(); }), "Revert Pickup Properties Edits. (disabling editmode)", null, null, true);
             Pickup_IsHeld = new QMSingleButton(PickupEditor, 0, 0.5f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
             Pickup_CurrentObjOwner = new QMSingleButton(PickupEditor, 0, 1f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
-            Pickup_CurrentObjOwner.SetResizeTextForBestFit(true);
             Pickup_CurrentObjHolder = new QMSingleButton(PickupEditor, -1, 1f, "Current Holder : null", null, "Who is Holding the object.", null, null, false);
-            Pickup_CurrentObjHolder.SetResizeTextForBestFit(true);
 
             _ = new QMSingleButton(PickupEditor, 1, 0, "Pickup Orientation", null, "Pickup Orientation", null, null, true);
             Pickup_PickupOrientation_prop_any = new QMSingleButton(PickupEditor, 1, 0.5f, "Any", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Any); }), "", null, null, true);
@@ -30,7 +28,6 @@
             Pickup_PickupOrientation_prop_Gun = new QMSingleButton(PickupEditor, 1, 1.5f, "Gun", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Gun); }), "", null, null, true);
 
             var autohold = new QMSingleButton(PickupEditor, 2, 0, "Pickup AutoHoldMode", null, "Pickup AutoHoldMode", null, null, true);
-            autohold.SetResizeTextForBestFit(true);
 
             Pickup_AutoHoldMode_prop_AutoDetect = new QMSingleButton(PickupEditor, 2, 0.5f, "AutoDetect", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.AutoDetect); }), "", null, null, true);
             Pickup_AutoHoldMode_prop_Yes = new QMSingleButton(PickupEditor, 2, 1f, "Yes", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.Yes); }), "", null, null, true);

@@ -25,13 +25,11 @@
            {
                Tweaker_Object.GetGameObjectToEdit().TeleportToMe();
            }, Tweaker_Selector.SelectedObject.Generate_TeleportToMe_ButtonText());
-            TeleportToMe.SetResizeTextForBestFit(true);
 
             TeleportToTarget = new QMSingleButton(menu, 0, 0.5f, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), delegate
             {
                 Tweaker_Object.GetGameObjectToEdit().TeleportToTarget();
             }, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget));
-            TeleportToTarget.SetResizeTextForBestFit(true);
 
             _ = new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
 

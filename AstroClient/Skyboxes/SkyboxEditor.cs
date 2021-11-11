@@ -227,7 +227,6 @@
                         if (skybox != null)
                         {
                             var tmp = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Set : {skybox.SkyboxName}", null, $"Load Skybox {skybox.SkyboxName} as map Skybox.", null, null, true);
-                            tmp.SetResizeTextForBestFit(true);
                             tmp.SetAction(new Action(() =>
                             {
                                 SetRenderSettingSkybox(skybox);

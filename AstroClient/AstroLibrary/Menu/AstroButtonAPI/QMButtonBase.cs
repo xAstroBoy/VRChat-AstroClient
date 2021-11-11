@@ -139,12 +139,6 @@
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = text;
         }
 
-        [Obsolete("Not working anymore.")]
-        internal void SetResizeTextForBestFit(bool resizeTextForBestFit)
-        {
-
-            return;
-        }
 
         internal virtual void SetBackgroundColor(Color buttonBackgroundColor)
         {

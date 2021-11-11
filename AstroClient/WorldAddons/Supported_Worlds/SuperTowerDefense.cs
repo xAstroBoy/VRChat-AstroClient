@@ -134,12 +134,8 @@
 
             HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             HammerToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            HammerToolBtn.SetResizeTextForBestFit(true);
-            HealthToolBtn.SetResizeTextForBestFit(true);
             AutomaticWaveBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            AutomaticWaveBtn.SetResizeTextForBestFit(true);
             AutomaticGodModebnt = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            AutomaticGodModebnt.SetResizeTextForBestFit(true);
         }
 
 

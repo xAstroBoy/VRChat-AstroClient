@@ -76,13 +76,11 @@
            {
                DesktopHeadlightBool = true;
            }, "Desktop Headlight Off", () => { DesktopHeadlightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);
-            DesktopHeadlightBtn.SetResizeTextForBestFit(true);
 
             VRHeadlightBtn = new QMSingleToggleButton(HeadlightConfig, 0, 0.5f, "VR Headlight On", () =>
             {
                 VRHeadLightBool = true;
             }, "VR Headlight Off", () => { VRHeadLightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);
-            VRHeadlightBtn.SetResizeTextForBestFit(true);
 
             _ = new QMSingleButton(HeadlightConfig, 1, 0, "+ \n Intensity \n +", () =>
               {

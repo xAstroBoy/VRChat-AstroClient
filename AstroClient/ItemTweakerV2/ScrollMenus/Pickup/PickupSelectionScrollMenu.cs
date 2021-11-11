@@ -24,22 +24,18 @@
             Pickup_IsHeldStatus = new QMSingleButton(menu, -1, -1f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
 
             Pickup_CurrentObjectHolder = new QMSingleButton(menu, -1, -0.5f, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
-            Pickup_CurrentObjectHolder.SetResizeTextForBestFit(true);
 
             Pickup_CurrentObjectOwner = new QMSingleButton(menu, -1, 0.5f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
-            Pickup_CurrentObjectOwner.SetResizeTextForBestFit(true);
 
             TeleportToMe = new QMSingleButton(menu, 0, -0.5f, Tweaker_Selector.SelectedObject.Generate_TeleportToMe_ButtonText(), delegate
            {
                Tweaker_Object.GetGameObjectToEdit().TeleportToMe();
            }, Tweaker_Selector.SelectedObject.Generate_TeleportToMe_ButtonText());
-            TeleportToMe.SetResizeTextForBestFit(true);
 
             TeleportToTarget = new QMSingleButton(menu, 0, 0.5f, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), delegate
             {
                 Tweaker_Object.GetGameObjectToEdit().TeleportToTarget();
             }, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget));
-            TeleportToTarget.SetResizeTextForBestFit(true);
 
             _ = new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
 
