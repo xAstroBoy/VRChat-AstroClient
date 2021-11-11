@@ -1,5 +1,6 @@
 ﻿namespace AstroButtonAPI
 {
+    using AstroClient;
     using AstroLibrary.Console;
     using UnityEngine;
     using UnityEngine.UI;
@@ -263,6 +264,24 @@
         //        QuickMenuBackgroundReference = QuickMenuTransform.transform.Find("Container/Button_Worlds").GetComponent<BoxCollider>();
         //    return QuickMenuBackgroundReference;
         //}
+
+        internal static Vector2 SingleButtonDefaultSize
+        {
+            get
+            {
+                return new Vector2(200, 176);
+            }
+        }
+
+        internal static Vector2 SingleButtonTemplatePos
+        {
+            get
+            {
+                return new Vector2(-110, -88);
+            }
+        }
+
+
 
         internal static Transform SingleButtonTemplate
         {

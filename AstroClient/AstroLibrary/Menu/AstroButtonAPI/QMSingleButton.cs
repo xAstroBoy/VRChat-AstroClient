@@ -131,10 +131,10 @@
 
             btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
-
+            RectTransform Recto = button.GetComponent<RectTransform>();
+Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
-                RectTransform Recto = button.GetComponent<RectTransform>();
 
                 Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);

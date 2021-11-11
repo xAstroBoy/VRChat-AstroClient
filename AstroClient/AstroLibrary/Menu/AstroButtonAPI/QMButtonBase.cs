@@ -43,10 +43,18 @@
             button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
+
         internal void SetLocation(float buttonXLoc, float buttonYLoc)
         {
-            button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 / 2 * (buttonXLoc + initShift[0]));
-            button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 / 2 * (buttonYLoc + initShift[1]));
+            // This zeroifies the position.
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplatePos;
+
+            button.GetComponent<RectTransform>().anchoredPosition +=  Vector2.right * (420 / 2 * buttonXLoc);
+            button.GetComponent<RectTransform>().anchoredPosition +=  Vector2.down * (420 / 2 * buttonYLoc);
+
+
+            //button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 / 2 * (buttonXLoc + initShift[0]));
+            //button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 / 2 * (buttonYLoc + initShift[1]));
             //btnTag = "(" + buttonXLoc + "," + buttonYLoc + ")";
             //button.name = btnQMLoc + "/" + btnType + btnTag;
             //button.GetComponent<Button>().name = btnType + btnTag;

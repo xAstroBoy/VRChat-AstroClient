@@ -104,15 +104,15 @@
     </Compile>
     <Compile Include="AstroLibrary\EventArgs\OnUiPageEventArgs.cs" />
     <Compile Include="AstroLibrary\Menu\ActionMenu\Managers\InputManager.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMScrollMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMHalfScroll.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\Extensions.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\MenuAPI_New.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonAPI.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonBase.cs" />
-    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMHalfScroll.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedGridMenu.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QmQuickActions.cs" />
-    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMScrollMenu.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleToggle.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMTabBase.cs" />

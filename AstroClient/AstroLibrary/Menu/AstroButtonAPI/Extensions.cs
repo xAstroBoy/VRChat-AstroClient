@@ -43,7 +43,7 @@
                     //{
                     //    scrollRect.viewport = buttons.GetComponent<RectTransform>();
                     //}
-                    scrollRect.movementType = ScrollRect.MovementType.Elastic;
+                    scrollRect.movementType = ScrollRect.MovementType.Unrestricted;
                     scrollRect.verticalScrollbar = scrollbar;
                     //scrollRect.horizontalScrollbar = scrollbar;
 

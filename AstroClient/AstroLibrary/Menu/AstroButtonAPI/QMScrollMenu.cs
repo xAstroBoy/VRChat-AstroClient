@@ -14,18 +14,12 @@
             internal int Index;
         }
 
-        internal QMNestedButton BaseMenu;
-        internal QMSingleButton NextButton;
-        internal QMSingleButton BackButton;
-        internal QMSingleButton IndexButton;
         internal List<ScrollObject> QMButtons = new List<ScrollObject>();
         private int Posx = 1;
         private int Posy = 0;
-        private int Pos = 0;
-        private int Index = 0;
         private Action<QMScrollMenu> OpenAction;
         internal int currentMenuIndex = 0;
-
+        internal QMNestedButton BaseMenu;
         internal bool ShouldChangePos = true;
         internal bool AllowOverStepping = false;
         internal bool IgnoreEverything = false;
@@ -34,40 +28,15 @@
         {
             BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
             SetAction(MenuOpenAction);
-            IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { });
-            IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
-            IndexButton.GetGameObject().GetComponentInChildren<Image>().enabled = false;
-            BackButton = new QMSingleButton(BaseMenu, 5, 0f, "Back", delegate
-            {
-                ShowMenu(currentMenuIndex - 1);
-            }, "Go Back", null, null, true);
-            NextButton = new QMSingleButton(BaseMenu, 5, 1.5f, "Next", delegate
-            {
-                ShowMenu(currentMenuIndex + 1);
-            }, "Go Next", null, null, true);
         }
 
         internal QMScrollMenu(QMNestedButton basemenu)
         {
             BaseMenu = basemenu;
-            IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { });
-            IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
-            IndexButton.GetGameObject().GetComponentInChildren<Image>().enabled = false;
-            BackButton = new QMSingleButton(BaseMenu, 5, 0f, "Back", delegate
-            {
-                ShowMenu(currentMenuIndex - 1);
-            }, "Go Back", null, null, true);
-            NextButton = new QMSingleButton(BaseMenu, 5, 1.5f, "Next", delegate
-            {
-                ShowMenu(currentMenuIndex + 1);
-            }, "Go Next", null, null, true);
         }
 
         internal void ShowMenu(int MenuIndex)
         {
-            if (!AllowOverStepping && (MenuIndex < 0 || MenuIndex > Index))
-                return;
-
             foreach (var item in QMButtons)
             {
                 if (item.Index == MenuIndex)
@@ -76,7 +45,6 @@
                     item.ButtonBase?.SetActive(false);
             }
             currentMenuIndex = MenuIndex;
-            IndexButton.SetButtonText("Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString());
         }
 
         internal void SetAction(Action<QMScrollMenu> Open, bool shouldClear = true)
@@ -115,12 +83,6 @@
             QMButtons.Clear();
             if (BaseMenu.GetBackButton() != null)
                 UnityEngine.Object.Destroy(BaseMenu.GetBackButton());
-            if (IndexButton != null)
-                IndexButton.DestroyMe();
-            if (BackButton != null)
-                BackButton.DestroyMe();
-            if (NextButton != null)
-                NextButton.DestroyMe();
         }
 
         internal void Clear()
@@ -134,8 +96,6 @@
                 QMButtons.Clear();
                 Posx = 1;
                 Posy = 0;
-                Pos = 0;
-                Index = 0;
                 currentMenuIndex = 0;
             }
             catch { }
@@ -154,24 +114,13 @@
                     Posx = 2;
                     Posy++;
                 }
-                if (Pos == 12)
-                {
-                    Posx = 2;
-                    Posy = 0;
-                    Pos = 0;
-                    Index++;
-                }
             }
-            if (!IgnoreEverything)
-                Pos++;
-
             if (ShouldChangePos)
                 Button.SetLocation(Posx, Posy);
             Button.SetActive(false);
             QMButtons.Add(new ScrollObject()
             {
                 ButtonBase = Button,
-                Index = Index
             });
         }
 
@@ -184,13 +133,6 @@
                 ButtonBase = Button,
                 Index = Page
             });
-            if (!IgnoreEverything)
-            {
-                if (Page > Index)
-                {
-                    Index = Page;
-                }
-            }
         }
     }
 }

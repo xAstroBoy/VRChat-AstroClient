@@ -1,122 +1,94 @@
-﻿namespace AstroButtonAPI
+﻿using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using Object = UnityEngine.Object;
+
+namespace Apollo.Utils.API.QM
 {
-    using System;
-    using AstroLibrary.Extensions;
-    using UnityEngine;
-    using UnityEngine.UI;
-
-    internal  class QMSlider
+    public class QMSlider
     {
-        internal  GameObject Slider;
-        internal  Text label;
-        internal  Text SliderLabel;
-        private GameObject labelObj;
-        private bool displayState;
-        private float[] initShift = { 0, 0 };
-
-        internal  QMSlider(Transform parent, string name, float x, float y, Action<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f, bool DisplayState = true)
+        private readonly TextMeshProUGUI sliderText;
+        private readonly TextMeshProUGUI sliderPercentText;
+        private readonly UnityEngine.UI.Slider sliderSlider;
+        private readonly VRC.UI.Elements.Tooltips.UiTooltip sliderTooltip;
+        private bool _floor;
+        private bool _percent;
+        public readonly GameObject gameObject;
+        
+        public QMSlider(Transform parent, string text, Action<float> onSliderAdjust, string tooltip, float maxValue = 100f, float defaultValue = 50f, bool floor = false, bool percent = true)
         {
-            Slider = UnityEngine.Object.Instantiate(QuickMenuTools.vrcuimInstance.GetMenuContent().transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld"), parent).gameObject;
-            UnityEngine.Object.Destroy(Slider.GetComponent<UiSettingConfig>());
-            Slider.name = "QMSlider";
-            labelObj = Slider.transform.Find("Label").gameObject;
-            label = labelObj.GetComponent<Text>();
-            SliderLabel = Slider.transform.Find("SliderLabel").GetComponent<Text>();
-            displayState = DisplayState;
-            // Day: this still needs work
-            initShift[0] = -1f;
-            initShift[1] = -0.5f;
-            Slider.GetComponentInChildren<RectTransform>().anchorMin += new Vector2(0.06f, 0f);
-            Slider.GetComponentInChildren<RectTransform>().anchorMax += new Vector2(0.1f, 0f);
-            Slider.GetComponentInChildren<Slider>().onValueChanged = new Slider.SliderEvent();
-            Slider.GetComponentInChildren<Slider>().onValueChanged.AddListener(evt);
-            if (DisplayState)
-                Slider.GetComponentInChildren<Slider>().onValueChanged.AddListener(new Action<float>((value) =>
-                {
-                    SetSliderLabelText(Slider.GetComponentInChildren<Slider>().value.ToString("0.00"));
-                }));
-
-            SetRawPos(x, y);
-            SetMaxValue(MaxValue);
-            SetMinValue(MinValue);
-            SetValue(defaultValue);
-            SetTextLabel(name);
+            Slider slider = this;
+            gameObject = Object.Instantiate(APIStuff.GetSliderTemplate(), parent);
+            sliderText = gameObject.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>(true);
+            sliderText.text = text;
+            sliderPercentText = gameObject.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>(true);
+            sliderPercentText.text = "0" + (percent ? "%" : "");
+            sliderSlider = gameObject.GetComponentInChildren<UnityEngine.UI.Slider>();
+            sliderSlider.onValueChanged = new UnityEngine.UI.Slider.SliderEvent();
+            sliderSlider.maxValue = maxValue;
+            sliderSlider.value = defaultValue;
+            sliderSlider.onValueChanged.AddListener(new Action<float>(val =>
+            {
+                slider.sliderPercentText.text = (floor ? Mathf.Floor(val) : val) + (percent ? "%" : "");
+                onSliderAdjust(val);
+            }));
+            sliderTooltip = gameObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
+            sliderTooltip.field_Public_String_0 = tooltip;
+            _floor = floor;
+            _percent = percent;
         }
-
-        internal  QMSlider(QMNestedButton parent, string name, float x, float y, Action<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f, bool DisplayState = true)
+        
+        public QMSlider(MenuPage pge, string text, Action<float> onSliderAdjust, string tooltip, float maxValue = 100f, float defaultValue = 50f, bool floor = false, bool percent = true) : this(pge.menuContents, text, onSliderAdjust, tooltip, maxValue, defaultValue, floor, percent)
         {
-            Slider = UnityEngine.Object.Instantiate(QuickMenuTools.vrcuimInstance.GetMenuContent().transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld"), QuickMenuTools.QuickMenuInstance.transform.Find(parent.GetMenuName())).gameObject;
-            UnityEngine.Object.Destroy(Slider.GetComponent<UiSettingConfig>());
-            Slider.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
-            Slider.name = "QMSlider";
-            labelObj = Slider.transform.Find("Label").gameObject;
-            label = labelObj.GetComponent<Text>();
-            SliderLabel = Slider.transform.Find("SliderLabel").GetComponent<Text>();
-            displayState = DisplayState;
-            // Day: this still needs work
-            initShift[0] = -1f;
-            initShift[1] = -0.5f;
-            Slider.GetComponentInChildren<RectTransform>().anchorMin += new Vector2(0.06f, 0f);
-            Slider.GetComponentInChildren<RectTransform>().anchorMax += new Vector2(0.1f, 0f);
-            Slider.GetComponentInChildren<Slider>().onValueChanged = new Slider.SliderEvent();
-            Slider.GetComponentInChildren<Slider>().onValueChanged.AddListener(evt);
-            if (DisplayState)
-                Slider.GetComponentInChildren<Slider>().onValueChanged.AddListener(new Action<float>((value) =>
-                {
-                    SetSliderLabelText(Slider.GetComponentInChildren<Slider>().value.ToString("0.00"));
-                }));
-
-            SetMaxValue(MaxValue);
-            SetMinValue(MinValue);
-            SetValue(defaultValue);
-            SetTextLabel(name);
-            SetRawPos(x, y);
         }
-
-        internal  void SetMaxValue(float MaxValue)
+        
+        public QMSlider(ButtonGroup grp, string text, Action<float> onSliderAdjust, string tooltip, float maxValue = 100f, float defaultValue = 50f, bool floor = false, bool percent = true) : this(grp.gameObject.transform, text, onSliderAdjust, tooltip, maxValue, defaultValue, floor, percent)
         {
-            Slider.GetComponentInChildren<Slider>().maxValue = MaxValue;
         }
-
-        internal  void SetMinValue(float MinValue)
+        
+        public void SetAction(Action<float> newAction)
         {
-            Slider.GetComponentInChildren<Slider>().minValue = MinValue;
+            sliderSlider.onValueChanged = new UnityEngine.UI.Slider.SliderEvent();
+            sliderSlider.onValueChanged.AddListener(new Action<float>(val =>
+            {
+                sliderPercentText.text = (_floor ? Mathf.Floor(val) : val) + (_percent ? "%" : "");
+                newAction(val);
+            }));
         }
-
-        internal  void SetPos(float SliderXLoc, float SliderYLoc)
+        
+        public void SetText(string newText)
         {
-            Slider.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 * (SliderXLoc + initShift[0]));
-            Slider.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 * (SliderYLoc + initShift[1]));
+            sliderText.text = newText;
         }
-
-        internal  void SetRawPos(float SliderXLoc, float SliderYLoc)
+        
+        public void SetTooltip(string newTooltip)
         {
-            Slider.GetComponent<RectTransform>().anchoredPosition = new Vector2(SliderXLoc, SliderYLoc);
+            sliderTooltip.field_Public_String_0 = newTooltip;
         }
-
-        internal  float GetSliderValue()
+        
+        public void SetInteractable(bool val)
         {
-            return Slider.GetComponentInChildren<Slider>().value;
+            sliderSlider.interactable = val;
         }
-        internal  void SetValue(float Value)
+        
+        public void SetActive(bool state)
         {
-            Slider.GetComponentInChildren<Slider>().value = Value;
-            SetSliderLabelText(Value.ToString());
+            sliderSlider.gameObject.SetActive(state);
+            sliderTooltip.gameObject.SetActive(state);
+            sliderPercentText.gameObject.SetActive(state);
         }
-
-        internal  void SetTextLabel(string text)
+        
+        public void SetValue(float newValue, bool invoke = false)
         {
-            label.text = text;
-        }
-
-        internal  void SetSliderLabelText(string Text)
-        {
-            SliderLabel.text = Text;
-        }
-
-        internal  void SetLocalLabelPosition(float x, float y)
-        {
-            labelObj.transform.position = new Vector3(x, y);
+            var onValueChanged = sliderSlider.onValueChanged;
+            sliderSlider.onValueChanged = new UnityEngine.UI.Slider.SliderEvent();
+            sliderSlider.value = newValue;
+            sliderSlider.onValueChanged = onValueChanged;
+            if (invoke)
+            {
+                sliderSlider.onValueChanged.Invoke(newValue);
+            }
         }
     }
 }

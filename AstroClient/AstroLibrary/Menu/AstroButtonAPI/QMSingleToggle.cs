@@ -91,9 +91,7 @@
                     break;
             }
 
-            initShift[0] = -1;
-            initShift[1] = 0;
-            SetLocation(btnXLocation, btnYLocation);
+            button.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
             SetButtonText(defaultstate ? btnONText : btnOffText);
             OnText = btnONText;
             OffText = btnOffText;
@@ -115,7 +113,7 @@
             SetActive(true);
             if (btnHalf)
             {
-                SetSize(new Vector2(420, 210));
+                SetSize(new Vector2(200, 88));
             }
             //QMButtonAPI.allSingleToggleButtons.Add(this);
         }
@@ -207,7 +205,7 @@
             if (size == null)
             {
                 // Standart Size
-                button.GetComponent<RectTransform>().sizeDelta = new Vector2(420, 420);
+                button.GetComponent<RectTransform>().sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             }
             else
             {
