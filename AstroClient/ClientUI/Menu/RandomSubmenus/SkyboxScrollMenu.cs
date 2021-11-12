@@ -28,7 +28,7 @@
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "VRC_Interactables", "Interact VRC_Interactable", null, null, null, null, btnHalf);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Skybox Options", "Edit Current Skybox", null, null, null, null, btnHalf);
             CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
                 WingMenu.SetActive(false);

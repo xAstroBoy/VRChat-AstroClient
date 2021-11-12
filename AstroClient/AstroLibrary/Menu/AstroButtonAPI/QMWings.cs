@@ -8,17 +8,17 @@
     internal class QMWings : QMButtonBase
     {
         internal Transform WingPage;
-        internal QMWings(int Index, bool LeftWing, string MenuName, String btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
+        internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnQMLoc = "WingPage" + MenuName;
             initButton(Index, LeftWing, MenuName, btnToolTip, btnBackgroundColor, LoadSprite);
         }
 
-        internal void initButton(int Index, bool LeftWing, string MenuName, String btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
+        internal void initButton(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             if (LeftWing)
             {
-                btnQMLoc += "_LEFT";
+                btnQMLoc += $"_LEFT_{System.Guid.NewGuid().ToString()} ";
                 button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left(), QuickMenuTools.Wing_Left().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
                 button.NewText("Text_QM_H3").text = MenuName;
@@ -57,7 +57,7 @@
             }
             else
             {
-                btnQMLoc += "_RIGHT";
+                btnQMLoc += $"_RIGHT_{System.Guid.NewGuid().ToString()}";
                 button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right(), QuickMenuTools.Wing_Right().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
                 button.NewText("Text_QM_H3").text = MenuName;

@@ -9,7 +9,7 @@
     {
         internal TMPro.TextMeshProUGUI Text;
         internal string BtnText;
-
+        
         internal QMSingleButton(string baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu;
@@ -74,8 +74,9 @@
             string TextColorHTML = null;
             if (TextColor.HasValue)
             {
-                TextColorHTML = ColorUtility.ToHtmlStringRGB(TextColor.Value);
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
             }
+            string BackgroundHTML = null;
             btnQMLoc = Parent.GetMenuName();
             initButton(0, 0, btnText, btnAction, btnToolTip, TextColorHTML);
 
@@ -99,7 +100,7 @@
             string BackgroundHTML = null;
             if (BackgroundColor.HasValue)
             {
-                BackgroundHTML = "#" +  ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
+                BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
             }
 
             btnQMLoc = Parent.GetMenuName();
@@ -250,19 +251,8 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
 
         internal void SetButtonText(string buttonText)
         {
+            BtnText = buttonText;
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
-        }
-
-        internal void setOnText()
-        {
-            string Text = BtnText + " <color=green>ON</color>";
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Text;
-        }
-
-        internal void setOffText()
-        {
-            string Text = BtnText + " <color=red>OFF</color>";
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Text;
         }
 
         internal void SetAction(System.Action buttonAction)
@@ -288,7 +278,7 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
 
         internal void setTextColorHTML(string buttonTextColor)
         {
-            string NewText = $"<color={buttonTextColor}>{button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text}</color>";
+            string NewText = $"<color={buttonTextColor}>{BtnText}</color>";
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = NewText;
         }
 

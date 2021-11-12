@@ -36,6 +36,7 @@
                 Regenerate();
             });
             InitWingPage();
+            
         }
 
         private static void Regenerate()
