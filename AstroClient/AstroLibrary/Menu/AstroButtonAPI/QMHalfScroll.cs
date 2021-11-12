@@ -16,7 +16,7 @@
         }
 
         internal List<ScrollObject> QMButtons = new List<ScrollObject>();
-        private float Posx = 1;
+        private float Posx = 0;
         private float Posy = 0;
         private int Pos = 0;
         private Action<QMHalfScroll> OpenAction;
@@ -96,7 +96,7 @@
                     UnityEngine.Object.Destroy(item.ButtonBase.GetGameObject());
                 }
                 QMButtons.Clear();
-                Posx = 1f;
+                Posx = 0f;
                 Posy = 0f;
                 Pos = 0;
                 currentMenuIndex = 0;
@@ -122,9 +122,9 @@
                 {
                     Posx++;
                 }
-                if (Posx > 5 && Posy < 2.5)
+                if (Posx > 5)
                 {
-                    Posx = 2;
+                    Posx = 1;
                     Posy += 0.5f;
                 }
 

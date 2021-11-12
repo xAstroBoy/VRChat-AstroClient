@@ -15,7 +15,7 @@
         }
 
         internal List<ScrollObject> QMButtons = new List<ScrollObject>();
-        private int Posx = 1;
+        private int Posx = 0;
         private int Posy = 0;
         private Action<QMScrollMenu> OpenAction;
         internal int currentMenuIndex = 0;
@@ -94,7 +94,7 @@
                     UnityEngine.Object.Destroy(item.ButtonBase.GetGameObject());
                 }
                 QMButtons.Clear();
-                Posx = 1;
+                Posx = 0;
                 Posy = 0;
                 currentMenuIndex = 0;
             }
@@ -109,9 +109,9 @@
                 {
                     Posx++;
                 }
-                if (Posx > 5 && Posy < 3)
+                if (Posx > 5)
                 {
-                    Posx = 2;
+                    Posx = 0;
                     Posy++;
                 }
             }
