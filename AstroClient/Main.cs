@@ -488,49 +488,49 @@
 
 
             ModConsole.DebugLog("12");
-            TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
-            ModConsole.DebugLog("13");
-            ExploitsMenu.InitButtons(TabIndexs.Exploits);
-            ModConsole.DebugLog("14");
-            WorldsCheats.InitButtons(TabIndexs.Cheats);
-            ModConsole.DebugLog("15");
-            HistoryMenu.InitButtons(TabIndexs.History);
-            ModConsole.DebugLog("16");
-            AdminMenu.InitButtons(TabIndexs.Admin);
-            ModConsole.DebugLog("17");
-            DevMenu.InitButtons(TabIndexs.Dev);
-            ModConsole.DebugLog("18");
-
-            // Misc
             SkyboxScrollMenu.InitButtons(AstroClient, 1, 0, true);
-            ModConsole.DebugLog("19");
 
+            ModConsole.DebugLog("13");
             LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-            ModConsole.DebugLog("20");
-
+            ModConsole.DebugLog("14");
             GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
-            ModConsole.DebugLog("21");
-
+            ModConsole.DebugLog("15");
             if (Bools.IsDeveloper)
             {
                 MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
             }
-            ModConsole.DebugLog("22");
+            ModConsole.DebugLog("16");
 
             WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
 
-            ModConsole.DebugLog("23");
+            ModConsole.DebugLog("17");
             ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
-            ModConsole.DebugLog("24");
+            ModConsole.DebugLog("18");
 
             Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
-            ModConsole.DebugLog("25");
+            ModConsole.DebugLog("19");
 
             CameraTweaker.InitQMMenu(AstroClient, 3, 0.5f, true);
-            ModConsole.DebugLog("26");
+            ModConsole.DebugLog("20");
 
             SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
-            ModConsole.DebugLog("27");
+            ModConsole.DebugLog("21");
+
+            ExploitsMenu.InitButtons(TabIndexs.Exploits);
+            ModConsole.DebugLog("22");
+            WorldsCheats.InitButtons(TabIndexs.Cheats);
+            ModConsole.DebugLog("23");
+            HistoryMenu.InitButtons(TabIndexs.History);
+            ModConsole.DebugLog("24");
+            AdminMenu.InitButtons(TabIndexs.Admin);
+            ModConsole.DebugLog("25");
+            DevMenu.InitButtons(TabIndexs.Dev);
+            ModConsole.DebugLog("26");
+
+            // Misc
+            TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
+            ModConsole.DebugLog("Done.");
+
 
             //_ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>
             //{

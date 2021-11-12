@@ -11,8 +11,12 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
         internal QMSingleButton SingleButton;
         internal QMNestedGridMenu NestedGridButton;
 
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+
         public ScrollMenuListener(IntPtr obj0) : base(obj0)
         {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
         }
 
         private void OnEnable()

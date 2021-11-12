@@ -13,6 +13,7 @@
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
+        private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
 
         internal override void OnRoomLeft()
         {
@@ -50,6 +51,8 @@
                 {
                     listener.SingleButton = btn;
                 }
+                Listeners.Add(listener);
+
                 GeneratedButtons.Add(btn);
             }
         }
@@ -66,6 +69,11 @@
             {
                 foreach (var item in GeneratedButtons) item.DestroyMe();
             }
+            if (Listeners.Count != 0)
+            {
+                foreach (var item in Listeners) UnityEngine.Object.Destroy(item);
+            }
+
         }
 
         internal override void OnQuickMenuClose()

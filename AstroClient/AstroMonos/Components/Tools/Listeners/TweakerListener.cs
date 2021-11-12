@@ -16,8 +16,12 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
         [method: HideFromIl2Cpp]
         internal event Action? OnDestroyed;
 
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+
         public TweakerListener(IntPtr obj0) : base(obj0)
         {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
         }
 
         internal void RemoveListener()

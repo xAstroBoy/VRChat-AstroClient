@@ -13,9 +13,14 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
         [method: HideFromIl2Cpp]
         internal event Action? OnDisabled;
 
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+
         public UiListener(IntPtr obj0) : base(obj0)
         {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
         }
+
 
         private void OnEnable()
         {

@@ -298,6 +298,8 @@
     <Compile Include="ItemTweakerV2\Handlers\InflaterBehaviourHandler.cs" />
     <Compile Include="ItemTweakerV2\Handlers\RocketBehaviourHandler.cs" />
     <Compile Include="ItemTweakerV2\Handlers\SpinnerBehaviourHandler.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\Udon\UdonScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Interactable\VRC_InteractableScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Components\Fun\FunBehavioursSubMenu.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnCrazyBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnInflaterBehaviourArgs.cs" />
@@ -463,9 +465,7 @@
     <Compile Include="ItemTweakerV2\Submenus\Physic\Constraints\ConstraintsSubmenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Pickup\PickupSubmenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Scale\ScaleSubmenu.cs" />
-    <Compile Include="ItemTweakerV2\ScrollMenus\Udon\UdonScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\ScrollMenus\Pickup\PickupSelectionScrollMenu.cs" />
-    <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Interactable\VRC_InteractableScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Triggers\VRC_TriggersScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\ScrollMenus\Prefabs\PrefabSpawnerScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\ScrollMenus\WorldObjects\WorldObjectsScrollMenu.cs" />

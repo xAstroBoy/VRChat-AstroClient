@@ -41,13 +41,13 @@
             ObjectInfoSubMenu.Init_ObjectInfoSubMenu(menu, 3, 0.5f, true);
             _ = new QMSingleButton(menu, 3, 1f, "Teleport to Object", new Action(() => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
             _ = new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { GameObjectMenu.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
-            PickupSelectionScrollMenu.Init_PickupSelectionQMScroll(menu, 3, 2, true);
-            WorldObjectsScrollMenu.Init_WorldObjectScrollMenu(menu, 3, 2.5f, true);
-            VRC_TriggersScrollMenu.Init_VRC_TriggersScrollMenu(menu, 4, 0, true);
-            VRC_InteractableScrollMenu.Init_VRC_InteractableScrollMenu(menu, 4, 0.5f, true);
+            PickupSelectionScrollMenu.InitButtons(menu, 3, 2, true);
+            WorldObjectsScrollMenu.InitButtons(menu, 3, 2.5f, true);
+            VRC_TriggersScrollMenu.InitButtons(menu, 4, 0, true);
+            VRC_InteractableScrollMenu.InitButtons(menu, 4, 0.5f, true);
             if (Bools.IsDeveloper)
             {
-                UdonScrollMenu.Init_Internal_UdonEvents(menu, 4, 1, true);
+                UdonScrollMenu.InitButtons(menu, 4, 1, true);
             }
 
             ComponentSubMenu.Init_ComponentSubMenu(menu, 4, 1.5f, true);

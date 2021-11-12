@@ -1,111 +1,117 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
-    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroMonos.Components.Tools;
     using AstroMonos.Components.Tools.Listeners;
+    using CheetoLibrary;
+    using System.Collections.Generic;
     using Selector;
-    using UnityEngine;
-    using VRC;
+    using VRC.UI.Elements;
 
-    internal class PickupSelectionScrollMenu : Tweaker_Events
+    internal class PickupSelectionScrollMenu : GameEvents
     {
-        internal static void Init_PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
+        private static QMWings WingMenu;
+        private static QMNestedGridMenu CurrentScrollMenu;
+        private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
+        private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
+
+        internal override void OnRoomLeft()
         {
-            var menu = new QMNestedButton(main, x, y, "Select Pickup", "Select World Pickup to edit", null, null, null, null, btnHalf);
-            var PickupQMScroll = new QMScrollMenu(menu);
-            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
-              {
-                  PickupQMScroll.Refresh();
-              }, "", null, null, true);
+            DestroyGeneratedButtons();
+        }
 
-            Pickup_IsHeldStatus = new QMSingleButton(menu, -1, -1f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
-
-            Pickup_CurrentObjectHolder = new QMSingleButton(menu, -1, -0.5f, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
-
-            Pickup_CurrentObjectOwner = new QMSingleButton(menu, -1, 0.5f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
-
-            TeleportToMe = new QMSingleButton(menu, 0, -0.5f, Tweaker_Selector.SelectedObject.Generate_TeleportToMe_ButtonText(), delegate
-           {
-               Tweaker_Object.GetGameObjectToEdit().TeleportToMe();
-           }, Tweaker_Selector.SelectedObject.Generate_TeleportToMe_ButtonText());
-
-            TeleportToTarget = new QMSingleButton(menu, 0, 0.5f, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), delegate
+        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        {
+            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Select Pickup", "Select World Pickup", null, null, null, null, btnHalf);
+            CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
-                Tweaker_Object.GetGameObjectToEdit().TeleportToTarget();
-            }, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget));
-
-            _ = new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
-
-            PickupQMScroll.SetAction(delegate
-            {
-                foreach (var pickup in WorldUtils_Old.Get_Pickups())
-                {
-                    var btn = new QMSingleButton(PickupQMScroll.BaseMenu, 0, 0, $"Select {pickup.name}", delegate
-                    {
-                        Tweaker_Object.SetObjectToEdit(pickup);
-                    }, $"Select {pickup.name}", null, pickup.Get_GameObject_Active_ToColor());
-                    var listener = pickup.GetOrAddComponent<ScrollMenuListener>();
-                    if (listener != null)
-                    {
-                        listener.SingleButton = btn;
-                    }
-
-                    PickupQMScroll.Add(btn);
-                }
+                OnCloseMenu();
             });
-        }
-
-        internal override void OnPickupController_OnUpdate(PickupController control)
-        {
-            if (control != null)
+            CurrentScrollMenu.AddOpenAction(() =>
             {
-                if (Pickup_IsHeldStatus != null)
+                if (WingMenu != null)
                 {
-                    Pickup_IsHeldStatus.SetButtonText(control.Get_IsHeld_ButtonText());
-                    Pickup_IsHeldStatus.SetTextColor(control.Get_IsHeld_ButtonColor());
+                    WingMenu.SetActive(true);
                 }
-                if (Pickup_CurrentObjectOwner != null)
-                {
-                    Pickup_CurrentObjectOwner.SetButtonText(control.Get_PickupOwner_ButtonText());
-                }
-                if (Pickup_CurrentObjectHolder != null)
-                {
-                    Pickup_CurrentObjectHolder.SetButtonText(control.Get_IsHeldBy_ButtonText());
-                }
-            }
+                Regenerate();
+            });
+            InitWingPage();
         }
 
-        private static QMSingleButton Pickup_IsHeldStatus { get; set; }
-        private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
-        private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
-
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private static void Regenerate()
         {
-            if (TeleportToTarget != null)
+            foreach (var pickup in WorldUtils_Old.Get_Pickups())
             {
-                TeleportToTarget.SetButtonText(ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(obj, TargetSelector.CurrentTarget));
-                TeleportToTarget.SetToolTip(ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(obj, TargetSelector.CurrentTarget));
-            }
-            if (TeleportToMe != null)
-            {
-                TeleportToMe.SetButtonText(obj.Generate_TeleportToMe_ButtonText());
-                TeleportToMe.SetToolTip(obj.Generate_TeleportToMe_ButtonText());
+                var btn = new QMSingleButton(CurrentScrollMenu, $"Select {pickup.name}", () => 
+                {
+                    Tweaker_Object.SetObjectToEdit(pickup);
+                }, $"Select {pickup.name}", pickup.Get_GameObject_Active_ToColor());
+
+
+
+                var listener = pickup.GetOrAddComponent<ScrollMenuListener>();
+                if (listener != null)
+                {
+                    listener.SingleButton = btn;
+                }
+                Listeners.Add(listener);
+
+                GeneratedButtons.Add(btn);
             }
         }
 
-        internal override void OnTargetSet(Player player)
+        private static void OnCloseMenu()
         {
-            if (TeleportToTarget != null)
+            WingMenu.SetActive(false);
+            DestroyGeneratedButtons();
+        }
+
+        private static void DestroyGeneratedButtons()
+        {
+            if (GeneratedButtons.Count != 0)
             {
-                TeleportToTarget.SetButtonText(ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, player));
-                TeleportToTarget.SetToolTip(ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, player));
+                foreach (var item in GeneratedButtons) item.DestroyMe();
+            }
+            if (Listeners.Count != 0)
+            {
+                foreach (var item in Listeners) UnityEngine.Object.Destroy(item);
             }
         }
 
-        internal static QMSingleButton TeleportToMe;
-        internal static QMSingleButton TeleportToTarget;
+        internal override void OnQuickMenuClose()
+        {
+            OnCloseMenu();
+        }
+
+        internal override void OnUiPageToggled(UIPage Page, bool Toggle)
+        {
+            if (Page != null)
+            {
+                if (QuickMenuTools.UIPageTemplate_Left() != null)
+                {
+                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Left())) return;
+                }
+                if (QuickMenuTools.UIPageTemplate_Right() != null)
+                {
+                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Right())) return;
+                }
+
+                if (Page.Equals(WingMenu.CurrentPage)) return;
+
+                if (!Page.Equals(CurrentScrollMenu.page))
+                {
+                    WingMenu.SetActive(false);
+                    OnCloseMenu();
+                }
+            }
+        }
+
+        private static void InitWingPage()
+        {
+            WingMenu = new QMWings(1003, true, "Tweaker Pickups", "Interact with Internal Triggers");
+            new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
+            WingMenu.SetActive(false);
+        }
     }
 }

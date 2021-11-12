@@ -1,75 +1,154 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Management;
     using AstroButtonAPI;
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroMonos.Components.Tools.Listeners;
+    using MelonLoader;
     using Selector;
+    using Udon;
+    using Udon.UdonEditor;
     using UnityEngine;
     using Variables;
     using VRC.Udon.Common.Interfaces;
+    using VRC.UI.Elements;
 
-    internal class UdonScrollMenu
+    internal class UdonScrollMenu : GameEvents
     {
-        internal static void Init_Internal_UdonEvents(QMTabMenu main, float x, float y, bool btnHalf)
+
+        private static QMWings WingMenu;
+        private static QMNestedGridMenu CurrentScrollMenu;
+        private static QMWingSingleButton CurrentUnboxBehaviourToConsole;
+        private static List<QMNestedGridMenu> GeneratedPages = new List<QMNestedGridMenu>();
+
+        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            if (!Bools.IsDeveloper) // TODO : Add permission check for udon events.
+            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal Udon Events", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
+            CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
-                return;
-            }
-            var Menu = new QMNestedButton(main, x, y, "Internal Udon Events ", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
-            var whytfisthishere = new QMNestedButton(Menu, -5f, -5f, "", "");
-            whytfisthishere.GetMainButton().SetActive(false);
-            var MainScroll = new QMScrollMenu(whytfisthishere);
-            var subscroll = new QMScrollMenu(Menu);
-            _ = new QMSingleButton(Menu, 0, -1.5f, "Refresh", delegate
-              {
-                  MainScroll.Refresh();
-                  subscroll.Refresh();
-              }, "", null, null, true);
-            subscroll.SetAction(delegate
+                OnCloseMenu();
+            });
+            CurrentScrollMenu.AddOpenAction(() =>
             {
-                foreach (var action in Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours())
+                if (WingMenu != null)
                 {
-                    var btn = new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
+                    WingMenu.SetActive(true);
+                }
+                var udonevents = UdonParser.CleanedWorldBehaviours;
+                if (udonevents != null && udonevents.Count() != 0)
+                {
+                    for (int i = 0; i < udonevents.Length; i++)
                     {
-                        MainScroll.SetAction(delegate
+                        VRC.Udon.UdonBehaviour action = udonevents[i];
+                        if (action._eventTable.Count != 0)
                         {
-                            bool HasAddedUnboxerBtn = false;
-                            foreach (var subaction in action._eventTable)
+                            var udon = new QMNestedGridMenu(CurrentScrollMenu, action.gameObject.name, "Open Events of " + action.gameObject.name);
+                            GeneratedPages.Add(udon);
+                            udon.AddOpenAction(() =>
                             {
-                                if (!HasAddedUnboxerBtn)
+                                if (WingMenu != null)
                                 {
-                                    var unboxer = new QMSingleButton(MainScroll.BaseMenu, 0, 0, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, false);
-                                    MainScroll.Add(unboxer, 0, 1f, 0f);
-                                    HasAddedUnboxerBtn = true;
+                                    WingMenu.SetActive(true);
+                                }
+                                if (CurrentUnboxBehaviourToConsole != null)
+                                {
+                                    CurrentUnboxBehaviourToConsole.setButtonText($"Unbox {action.gameObject.name}");
+                                    CurrentUnboxBehaviourToConsole.setButtonToolTip($"Attempts to unbox  {action.gameObject.name} in console");
+                                    CurrentUnboxBehaviourToConsole.setAction(() => { action.UnboxUdonEventToConsole(); });
+                                    CurrentUnboxBehaviourToConsole.SetActive(true);
+                                }
+                                foreach (var subaction in action._eventTable)
+                                {
+                                    new QMSingleButton(udon, subaction.Key, () =>
+                                    {
+                                        if (subaction.key.StartsWith("_"))
+                                        {
+                                            action.SendCustomEvent(subaction.Key);
+                                        }
+                                        else
+                                        {
+                                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                                        }
+
+                                    }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})", null, false);
+                                }
+                            });
+                            udon.SetBackButtonAction(CurrentScrollMenu, () =>
+                            {
+                                if (WingMenu != null)
+                                {
+                                    WingMenu.SetActive(true);
                                 }
 
-                                MainScroll.Add(new QMSingleButton(MainScroll.BaseMenu, 0f, 0f, subaction.Key, delegate
+                                if (CurrentUnboxBehaviourToConsole != null)
                                 {
-                                    if (subaction.key.StartsWith("_"))
-                                    {
-                                        action.SendCustomEvent(subaction.Key);
-                                    }
-                                    else
-                                    {
-                                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                                    }
-                                }, action.gameObject?.ToString() + " Run " + subaction.Key));
-                            }
-                        });
-                        MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
-                            .onClick.Invoke();
-                    }, action.interactText);
-
-                    var listener = action.gameObject.GetOrAddComponent<ScrollMenuListener>();
-                    if (listener != null)
-                    {
-                        listener.SingleButton = btn;
+                                    CurrentUnboxBehaviourToConsole.setButtonText($"Not Available");
+                                    CurrentUnboxBehaviourToConsole.setButtonToolTip($"Not Available");
+                                    CurrentUnboxBehaviourToConsole.setAction(null);
+                                    CurrentUnboxBehaviourToConsole.SetActive(false);
+                                }
+                            });
+                        }
                     }
-                    subscroll.Add(btn);
                 }
             });
+            InitWingPage();
         }
+
+        internal static void OnCloseMenu()
+        {
+            WingMenu.SetActive(false);
+            if (GeneratedPages.Count != 0)
+            {
+                foreach (var item in GeneratedPages) item.DestroyMe();
+            }
+        }
+
+        internal override void OnQuickMenuClose()
+        {
+            OnCloseMenu();
+        }
+        internal override void OnUiPageToggled(UIPage Page, bool Toggle)
+        {
+            if (Page != null)
+            {
+                if (QuickMenuTools.UIPageTemplate_Left() != null)
+                {
+                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Left())) return;
+                }
+                if (QuickMenuTools.UIPageTemplate_Right() != null)
+                {
+                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Right())) return;
+                }
+
+                if (Page.Equals(WingMenu.CurrentPage)) return;
+                if (!Page.Equals(CurrentScrollMenu.page) || !GeneratedPages.ContainsPage(Page))
+                {
+                    WingMenu.SetActive(false);
+                    OnCloseMenu();
+                }
+            }
+        }
+
+
+        private static void InitWingPage()
+        {
+            WingMenu = new QMWings(1000, true, "Udon Behaviours (Tweaker)", "Udon Behaviours (Tweaker) Interact with behaviours internally.");
+            CurrentUnboxBehaviourToConsole = new QMWingSingleButton(WingMenu, "Not Available", () => { }, "Not Available");
+            CurrentUnboxBehaviourToConsole.SetActive(false);
+            WingMenu.SetActive(false);
+        }
+
+
+
+
+       
     }
 }
