@@ -38,10 +38,18 @@
 
         public static Texture2D LoadPNG(string filePath)
         {
-            byte[] fileData = ExtractResource(Assembly.GetExecutingAssembly(), filePath);
-            Texture2D tex = new Texture2D(2, 2);
-            ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
-            return tex;
+            try
+            {
+                byte[] fileData = ExtractResource(Assembly.GetExecutingAssembly(), filePath);
+                Texture2D tex = new Texture2D(2, 2);
+                ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
+                return tex;
+            }
+            catch(Exception e)
+            {
+                ModConsole.ErrorExc(e);
+                return null;
+            }
         }
 
         public static Texture2D LoadPNG(byte[] fileData)

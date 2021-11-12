@@ -1,286 +1,106 @@
 ﻿namespace AstroButtonAPI
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Reflection;
     using CheetoLibrary;
+    using TMPro;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
+
     internal class QMToggleButton : QMButtonBase
     {
-        internal GameObject btnOn;
-        internal GameObject btnOff;
+        internal GameObject btnOn { get; set; }
+        internal GameObject btnOff { get; set; }
         private bool State { get; set; }
-        internal GameObject ButtonsPageNestedButton;
+        internal GameObject ButtonsPageNestedButton { get; set; }
+        private string BtnType { get; set; }
 
-        System.Action btnOnAction = null;
-        System.Action btnOffAction = null;
+        private TMPro.TextMeshProUGUI TextMesh;
+        private string ButtonText { get; set; }
+        private System.Action btnOnAction { get; set; }
+        private System.Action btnOffAction { get; set; }
 
+        private Color btnOffColor { get; set; }
+        public bool V { get; }
 
-        public QMToggleButton(QMNestedButton btnMenu, int btnXLocation, int btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip)
+        public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.ButtonsMenu;
-            InitButton(btnXLocation, btnYLocation, null, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, null, null, null, false);
+            initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
-        public QMToggleButton(QMNestedGridMenu btnMenu, int btnXLocation, int btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip)
+        public QMToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.ButtonsMenu;
-            InitButton(btnXLocation, btnYLocation, null, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, null, null, null, false);
+            initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
-        public QMToggleButton(QMTabMenu btnMenu, int btnXLocation, int btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip)
+        public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.GetMainButton().GetGameObject();
-            InitButton(btnXLocation, btnYLocation, null, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, null, null, null, false);
+            initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
-
-        public QMToggleButton(string btnMenu, int btnXLocation, int btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip)
+        public QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu;
-            InitButton(btnXLocation, btnYLocation, null, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, null, null, null, false);
-        }
-
-        public QMToggleButton(QMNestedGridMenu btnMenu, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.ButtonsMenu;
-            InitButton(0, 0, null, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
-        }
-
-        public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.ButtonsMenu;
-            InitButton(btnXLocation, btnYLocation, null, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
-        }
-
-        public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.GetMainButton().GetGameObject();
-            InitButton(btnXLocation, btnYLocation, null, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
-        }
-
-        public QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu;
-            InitButton(btnXLocation, btnYLocation, null, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
+            initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
 
-        public QMToggleButton(QMNestedGridMenu btnMenu, string Title, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultPosition = false)
+        internal void initButton(float btnXLocation, float btnYLocation, string btnTextOn, System.Action btnActionOn, string btnTextOff, System.Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = "", bool DefaultState = false)
         {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.ButtonsMenu;
-            InitButton(0, 0, Title, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
-        }
-
-        public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string Title, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.ButtonsMenu;
-            InitButton(btnXLocation, btnYLocation, Title, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
-        }
-
-        public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string Title,  string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.GetMainButton().GetGameObject();
-            InitButton(btnXLocation, btnYLocation, Title, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
-        }
-
-        public QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, string Title ,string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu;
-            InitButton(btnXLocation, btnYLocation,  Title, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
-        }
-
-
-
-
-        internal QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string Title, System.Action btnActionOn, System.Action btnActionOff, string btnToolTip, string btnTextColor = null, bool shouldSaveInConfig = false, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.GetMainButton().GetGameObject();
-            initButton(btnActionOn, btnXLocation, btnYLocation, Title, btnActionOff, btnToolTip, btnTextColor, shouldSaveInConfig, defaultPosition);
-        }
-
-        internal QMToggleButton(QMNestedGridMenu btnMenu,  string Title, System.Action btnActionOn, System.Action btnActionOff, string btnToolTip, string btnTextColor = null, bool shouldSaveInConfig = false, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.ButtonsMenu;
-            initButton(btnActionOn, 0, 0, Title, btnActionOff, btnToolTip, btnTextColor, shouldSaveInConfig, defaultPosition);
-        }
-
-
-        internal QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string Title, System.Action btnActionOn, System.Action btnActionOff, string btnToolTip, string btnTextColor = null, bool shouldSaveInConfig = false, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu.GetMenuName();
-            ButtonsPageNestedButton = btnMenu.ButtonsMenu;
-            initButton(btnActionOn, btnXLocation, btnYLocation, Title, btnActionOff, btnToolTip, btnTextColor, shouldSaveInConfig, defaultPosition);
-        }
-
-        internal QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, string Title, System.Action btnActionOn, System.Action btnActionOff, string btnToolTip, string btnTextColor = null, bool shouldSaveInConfig = false, bool defaultPosition = false)
-        {
-            btnQMLoc = btnMenu;
-            initButton(btnActionOn, btnXLocation, btnYLocation, Title, btnActionOff, btnToolTip, btnTextColor, shouldSaveInConfig, defaultPosition);
-        }
-
-
-        private void InitButton(float btnXLocation, float btnYLocation, string Title, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultState = false)
-        {
-            btnType = "_ToggleButton_";
-
-            if (ButtonsPageNestedButton == null)
-            {
-                var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
-            }
-            else
-            {
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsPageNestedButton.transform, true);
-            }
-
-            var Texto = button.NewText("Text_H4");
-            Texto.text = Title;
-            Texto.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(0, 90);
-            button.name = QMButtonAPI.identifier + btnType + Title;
+            BtnType = "_ToggleButton_";
+            var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
+            button = UnityEngine.Object.Instantiate<GameObject>(QuickMenuTools.ToggleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
+            Extensions.NewText(button, "Text_H4").text = Title;
+            button.name = QMButtonAPI.identifier + BtnType + Title;
             btnOn = button.FindObject("Icon_On");
             btnOff = button.FindObject("Icon_Off");
             btnOff.SetActive(true);
             btnOn.SetActive(false);
-            string TextColorHTML = null;
 
-            if (btnTextColorOn.HasValue)
-            {
-                TextColorHTML = ColorUtility.ToHtmlStringRGB(btnTextColorOn.Value);
-            }
-
-            if (TextColorHTML != null)
-                setTextColorHTML(TextColorHTML, Texto);
-            else
-                setTextColorHTML("#blue", Texto);
+            //string TextColorHTML = null;
+            //if (btnTextColor.HasValue)
+            //{
+            //    TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
+            //}
+            //else
+            //{
+            //}
+            setTextColorHTML("#blue");
 
             button.transform.position = QuickMenuTools.SingleButtonTemplate.transform.position;
             initShift[0] = -1;
             initShift[1] = -3;
             SetLocation(btnXLocation, btnYLocation);
 
-            btnOn.GetComponentInChildren<RectTransform>().anchoredPosition -= new Vector2(50, 60);
-            btnOff.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(50, -60);
+            btnOn.GetComponentInChildren<RectTransform>().anchoredPosition -= new Vector2(50, 0);
+            btnOff.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(50, 0);
 
-            btnOn.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG("check.png").ToSprite();
-            btnOff.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG("cancel.png").ToSprite();
-
-            SetToolTip(btnToolTip);
-            SetAction(btnActionOn, btnActionOff);
-        }
-
-
-        private protected void initButton(System.Action btnActionOn, float btnXLocation, float btnYLocation, string Title, System.Action btnActionOff, string btnToolTip, string TextColor = null, bool shouldSaveInConf = false, bool defaultPosition = false)
-        {
-            btnType = "_ToggleButton_";
-
-            if (ButtonsPageNestedButton == null)
-            {
-                var Part1 = QuickMenuTools.NestedMenuTemplate.gameObject.FindObject(btnQMLoc);
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
-            }
-            else
-            {
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsPageNestedButton.transform, true);
-            }
-
-            var Texto = button.NewText("Text_H4");
-            Texto.text = Title;
-            Texto.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(0, 90);
-            button.name = QMButtonAPI.identifier + btnType + Title;
-            btnOn = button.FindObject("Icon_On");
-            btnOff = button.FindObject("Icon_Off");
-            btnOff.SetActive(true);
-            btnOn.SetActive(false);
-
-            if (TextColor != null)
-                setTextColorHTML(TextColor, Texto);
-            else
-                setTextColorHTML("#blue", Texto);
-
-            button.transform.position = QuickMenuTools.SingleButtonTemplate.transform.position;
-            initShift[0] = -1;
-            initShift[1] = -3;
-            SetLocation(btnXLocation, btnYLocation);
-
-            btnOn.GetComponentInChildren<RectTransform>().anchoredPosition -= new Vector2(50, 60);
-            btnOff.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(50, -60);
-
-            btnOn.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG("check.png").ToSprite();
-            btnOff.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG("cancel.png").ToSprite();
+            btnOn.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.check.png")).ToSprite();
+            btnOff.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.cancel.png")).ToSprite();
 
             SetToolTip(btnToolTip);
             SetAction(btnActionOn, btnActionOff);
         }
 
-        internal void setTextColorHTML(string buttonTextColor, TMPro.TextMeshProUGUI Texto)
+
+        internal void setTextColorHTML(string buttonTextColor)
         {
-            string NewText = $"<color={buttonTextColor}>{Texto.text}</color>";
-            Texto.text = NewText;
+            string NewText = $"<color={buttonTextColor}>{ButtonText}</color>";
+            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = NewText;
         }
+
 
         internal void SetButtonText(string Text)
         {
+            ButtonText = Text;
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Text;
         }
 
-        internal override void SetBackgroundColor(Color buttonBackgroundColor)
-        {
-            UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
-            foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
-        }
-        internal static bool IsBeingCreated = true;
-
-        internal static bool ButtonChangedState = false;
-
-
-
-        //internal void setAction(System.Action buttonOnAction, System.Action buttonOffAction)
-        //{
-        //    btnOnAction = buttonOnAction;
-        //    btnOffAction = buttonOffAction;
-
-        //    button.GetComponent<Toggle>().onValueChanged = new Toggle.ToggleEvent();
-        //    button.GetComponentInChildren<Toggle>().onValueChanged.AddListener(new Action<bool>
-        //    ((g) =>
-        //    {
-        //        if (g)
-        //        {
-        //            if (!IsBeingCreated)
-        //            {
-        //                btnOn.SetActive(true);
-        //                btnOff.SetActive(false);
-        //                btnOnAction.Invoke();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (!IsBeingCreated)
-        //            {
-        //                btnOn.SetActive(false);
-        //                btnOff.SetActive(true);
-        //                btnOffAction.Invoke();
-        //            }
-        //        }
-
-        //        ButtonChangedState = true;
-        //    }));
-        //}
-
-        internal  void SetAction(Action buttonOnAction, Action buttonOffAction)
+        internal void SetAction(Action buttonOnAction, Action buttonOffAction)
         {
             btnOnAction = buttonOnAction;
             btnOffAction = buttonOffAction;
@@ -298,8 +118,12 @@
                 }
             })));
         }
+        internal override void SetTextColor(Color color)
+        {
+            setTextColorHTML("#" + ColorUtility.ToHtmlStringRGB(color));
+        }
 
-        internal  void SetOnText(string buttonOnText)
+        internal void SetOnText(string buttonOnText)
         {
             Text[] btnTextsOn = btnOn.GetComponentsInChildren<Text>();
             btnTextsOn[0].text = buttonOnText;
@@ -307,7 +131,7 @@
             btnTextsOff[0].text = buttonOnText;
         }
 
-        internal  void SetOffText(string buttonOffText)
+        internal void SetOffText(string buttonOffText)
         {
             Text[] btnTextsOn = btnOn.GetComponentsInChildren<Text>();
             btnTextsOn[1].text = buttonOffText;
@@ -315,10 +139,7 @@
             btnTextsOff[1].text = buttonOffText;
         }
 
-
-
-
-        internal  void SetToggleState(bool toggleOn, bool shouldInvoke = false)
+        internal void SetToggleState(bool toggleOn, bool shouldInvoke = false)
         {
             btnOn.SetActive(toggleOn);
             btnOff.SetActive(!toggleOn);
@@ -346,8 +167,5 @@
             }
             catch { }
         }
-
-
     }
-
 }

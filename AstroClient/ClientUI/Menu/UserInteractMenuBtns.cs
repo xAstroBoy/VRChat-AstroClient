@@ -70,8 +70,7 @@
             var sitMenu = new QMNestedButton(menu, 1, 2, "Sit", "Sit on selected player");
             _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.SelectedPlayer.transform.position; }, "Teleport To Player");
 
-            var newOrbitToggle = new QMToggleButton(menu, 3, 2, "Cheetos\nOrbit", () => { OrbitManager.OrbitPlayer(QuickMenuUtils.SelectedPlayer); }, "Cheetos\nOrbit", () => { OrbitManager.DisableOrbit(); }, "Cheetos' WIP Orbit", null, Color.green, Color.red, OrbitManager.IsEnabled);
-            newOrbitToggle.SetToggleState(OrbitManager.IsEnabled);
+            var newOrbitToggle = new QMToggleButton(menu, 3, 2, "Cheetos\nOrbit", () => { OrbitManager.OrbitPlayer(QuickMenuUtils.SelectedPlayer); }, "Cheetos\nOrbit", () => { OrbitManager.DisableOrbit(); }, "Cheetos' WIP Orbit", Color.green, Color.red, null, OrbitManager.IsEnabled);
 
             _ = new QMSingleButton(sitMenu, 1, 0, "Sit On Head", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.SelectedPlayer, HumanBodyBones.Head); }, "Sit On Head", null, null);
             _ = new QMSingleButton(sitMenu, 2, 1, "Sit On LeftHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.SelectedPlayer, HumanBodyBones.LeftHand); }, "Sit On LeftHand", null, null);

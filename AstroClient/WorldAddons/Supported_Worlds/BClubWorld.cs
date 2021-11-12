@@ -260,34 +260,34 @@
             BClubExploitsPage = new QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, btnHalf);
 
             // Locks
-            LockButton1 = new QMToggleButton(BClubExploitsPage, 1, 0, "Unlock 1", () => { ToggleDoor(1); }, "Lock 1", () => { ToggleDoor(1); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton2 = new QMToggleButton(BClubExploitsPage, 2, 0, "Unlock 2", () => { ToggleDoor(2); }, "Lock 2", () => { ToggleDoor(2); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton3 = new QMToggleButton(BClubExploitsPage, 3, 0, "Unlock 3", () => { ToggleDoor(3); }, "Lock 3", () => { ToggleDoor(3); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton4 = new QMToggleButton(BClubExploitsPage, 1, 1, "Unlock 4", () => { ToggleDoor(4); }, "Lock 4", () => { ToggleDoor(4); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton5 = new QMToggleButton(BClubExploitsPage, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton7 = new QMToggleButton(BClubExploitsPage, 4, 0, "Unlock 7", () => { ToggleDoor(7); }, "Lock 7", () => { ToggleDoor(7); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton1 = new QMToggleButton(BClubExploitsPage, 1, 0, "Unlock 1", () => { ToggleDoor(1); }, "Lock 1", () => { ToggleDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton2 = new QMToggleButton(BClubExploitsPage, 2, 0, "Unlock 2", () => { ToggleDoor(2); }, "Lock 2", () => { ToggleDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton3 = new QMToggleButton(BClubExploitsPage, 3, 0, "Unlock 3", () => { ToggleDoor(3); }, "Lock 3", () => { ToggleDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton4 = new QMToggleButton(BClubExploitsPage, 1, 1, "Unlock 4", () => { ToggleDoor(4); }, "Lock 4", () => { ToggleDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton5 = new QMToggleButton(BClubExploitsPage, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton7 = new QMToggleButton(BClubExploitsPage, 4, 0, "Unlock 7", () => { ToggleDoor(7); }, "Lock 7", () => { ToggleDoor(7); }, "Toggle Door Lock", Color.green, Color.red);
 
             // Rainbow
-            ToggleRainbowBtn = new QMToggleButton(BClubExploitsPage, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, "Rainbow", () => { IsRainbowEnabled = false; }, "Rainbow", null, Color.green, Color.red, false);
+            ToggleRainbowBtn = new QMToggleButton(BClubExploitsPage, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, "Rainbow", () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
             ToggleRainbowBtn.SetToggleState(IsRainbowEnabled, false);
 
-            ToggleMoanSpamBtn = new QMToggleButton(BClubExploitsPage, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, "Moan Spam", () => { IsMoanSpamEnabled = false; }, "Moan Spam", null, Color.green, Color.red, false);
+            ToggleMoanSpamBtn = new QMToggleButton(BClubExploitsPage, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, "Moan Spam", () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
 
             // VIP
-            SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 6, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", null, Color.green, Color.red, false);
+            SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 6, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", Color.green, Color.red);
             //_ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
 
             // Freeze Locks
-            FreezeLockedToggle = new QMToggleButton(BClubExploitsPage, -1, 1, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, "", () => { IsFreezeLockEnabed = false; }, "Door Freezer", null, Color.green, Color.red, false);
-            FreezeUnlockedToggle = new QMToggleButton(BClubExploitsPage, -1, 2, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, "", () => { IsFreezeUnlockEnabed = false; }, "Door Freezer", null, Color.green, Color.red, false);
+            FreezeLockedToggle = new QMToggleButton(BClubExploitsPage, -1, 1, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, "", () => { IsFreezeLockEnabed = false; }, "Door Freezer", Color.green, Color.red);
+            FreezeUnlockedToggle = new QMToggleButton(BClubExploitsPage, -1, 2, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, "", () => { IsFreezeUnlockEnabed = false; }, "Door Freezer", Color.green, Color.red);
             FreezeLockedToggle.SetToggleState(IsFreezeLockEnabed, false);
             FreezeUnlockedToggle.SetToggleState(IsFreezeUnlockEnabed, false);
 
             // Spamming
             if (Bools.IsDeveloper)
             {
-                BlueChairToggle = new QMToggleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, "", () => IsBlueChairEnabled = false, "BlueChair Everyone", null, Color.green, Color.red, false);
+                BlueChairToggle = new QMToggleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, "", () => IsBlueChairEnabled = false, "BlueChair Everyone", Color.green, Color.red);
             }
             SpamDoorbellsToggle = new QMToggleButton(BClubExploitsPage, 5, 0, "Spam Doorbells", () => IsDoorbellSpamEnabled = true, "", () => IsDoorbellSpamEnabled = false, "Toggle Doorbell Spam");
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);

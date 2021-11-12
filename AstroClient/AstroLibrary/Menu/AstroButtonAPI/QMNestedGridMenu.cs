@@ -77,7 +77,7 @@
                 TextColorHTML = "#blue";
             }
 
-            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { }, btnToolTip, TextColorHTML, btnHalf, false);
+            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf, false);
 
             switch (Title)
             {
