@@ -24,7 +24,6 @@
                 button.NewText("Text_QM_H3").text = MenuName;
                 SetToolTip(btnToolTip);
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
-
                 UIPage Page = QuickMenuTools.UIPageTemplate_Left();
                 UIPage Wing_UP_1 = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
                 WingPage = Wing_UP_1.transform;

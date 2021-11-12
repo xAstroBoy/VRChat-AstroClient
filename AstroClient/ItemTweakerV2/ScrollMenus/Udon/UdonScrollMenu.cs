@@ -65,7 +65,7 @@
                     var listener = action.gameObject.GetOrAddComponent<ScrollMenuListener>();
                     if (listener != null)
                     {
-                        listener.assignedbtn = btn;
+                        listener.SingleButton = btn;
                     }
                     subscroll.Add(btn);
                 }

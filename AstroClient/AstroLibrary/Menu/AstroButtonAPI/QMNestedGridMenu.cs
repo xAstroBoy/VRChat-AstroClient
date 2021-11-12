@@ -1,26 +1,29 @@
 ﻿namespace AstroButtonAPI
 {
     using System;
-    using AstroLibrary.Extensions;
     using UnityEngine;
-    using UnityEngine.UI;
     using VRC.UI.Elements;
 
     internal class QMNestedGridMenu
     {
-        internal QMSingleButton mainButton;
-        internal GameObject backButton;
-        internal GameObject ButtonsMenu;
+        internal QMSingleButton mainButton { get; set; }
 
-        internal string menuName;
-        internal string btnQMLoc;
-        internal string btnType;
+        internal GameObject backButton { get; set; }
 
+        internal GameObject ButtonsMenu { get; set; }
 
-        internal QMNestedGridMenu(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        internal string menuName { get; set; }
+
+        internal string btnQMLoc { get; set; }
+
+        internal string btnType { get; set; }
+
+        internal UIPage page { get; set; }
+
+        internal QMNestedGridMenu(QMNestedGridMenu btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
-            InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+            InitButton(0, 0, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
 
         internal QMNestedGridMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
@@ -28,6 +31,7 @@
             btnQMLoc = btnMenu.GetMenuName();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
+
         internal QMNestedGridMenu(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -40,16 +44,15 @@
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
 
-
         internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = "", Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
-            btnType = QMButtonAPI.identifier + "_GridNested_Menu_";
+            btnType = QMButtonAPI.identifier + "_Nested_GridMenu_";
             menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}_{btnToolTip}_{Guid.NewGuid().ToString()}";
 
             GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
-            ButtonsMenu.GetComponentInChildren<GridLayoutGroup>().enabled = true;
+            //UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
             UIPage Page_UI = NestedPart.AddComponent<UIPage>();
@@ -74,19 +77,63 @@
                 TextColorHTML = "#blue";
             }
 
-            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf, false);
+            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { }, btnToolTip, TextColorHTML, btnHalf, false);
 
             switch (Title)
             {
                 case "Main Menu":
-                    NestedPart.CreateMainBackButton();
+                    backButton = NestedPart.CreateMainBackButton();
                     break;
 
                 default:
-                    NestedPart.CreateBackButton(QMButtonAPI.identifier + "_GridNested_Menu_" + "Main Menu");
+                    backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
                     break;
             }
         }
+
+        internal void SetTextColor(Color buttonTextColor)
+        {
+            mainButton.SetTextColor(buttonTextColor);
+        }
+        internal void SetBackButtonAction(Action back)
+        {
+            backButton.SetBackButtonAction(back);
+        }
+
+
+        internal void AddOpenAction(Action action)
+        {
+            mainButton.SetAction(() =>
+            {
+                QuickMenuTools.ShowQuickmenuPage(menuName);
+                action();
+            });
+        }
+
+        internal void SetBackButtonAction(QMNestedGridMenu action)
+        {
+            mainButton.SetAction(() =>
+            {
+                QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
+            });
+        }
+
+        internal void SetBackButtonAction(QMNestedButton action)
+        {
+            mainButton.SetAction(() =>
+            {
+                QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
+            });
+        }
+
+        internal void SetBackButtonAction(QMTabMenu action)
+        {
+            mainButton.SetAction(() =>
+            {
+                QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
+            });
+        }
+
 
         internal string GetMenuName()
         {
@@ -106,11 +153,6 @@
         internal void DestroyMe()
         {
             mainButton.DestroyMe();
-            //backButton.DestroyMe();
         }
-
-
-
-
     }
 }

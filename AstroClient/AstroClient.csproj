@@ -113,6 +113,8 @@
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedGridMenu.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QmQuickActions.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMWingToggleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMWingSingleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleToggle.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMTabBase.cs" />

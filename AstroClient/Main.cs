@@ -297,8 +297,7 @@
             Transform Critical3 = null;
             VRC.UI.Elements.QuickMenu Critical4 = null;
             bool exception = false;
-            bool Instantiated = false;
-            while (!Instantiated)
+            while (true)
             {
                 try
                 {
@@ -319,13 +318,12 @@
                 }
                 else
                 {
-                    if (Critical1 != null && Critical2 != null && Critical3 != null)
+                    if (Critical1 != null && Critical2 != null && Critical3 != null && Critical4 != null)
                     {
                         code();
-                        Instantiated = true;
                         yield break;
                     }
-                    else if (Critical1 == null || Critical2 == null || Critical3 == null)
+                    else if (Critical1 == null || Critical2 == null || Critical3 == null || Critical4 == null)
                     {
                         yield return new WaitForSeconds(0.001f);
                     }

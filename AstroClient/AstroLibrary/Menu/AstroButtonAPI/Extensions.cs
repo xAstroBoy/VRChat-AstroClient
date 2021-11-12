@@ -1,6 +1,7 @@
 ﻿namespace AstroButtonAPI
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using AstroLibrary.Console;
@@ -17,13 +18,6 @@
 
     internal static class Extensions
     {
-        private static System.Random random = new System.Random();
-        internal static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
 
         internal static void ToggleScrollRectOnExistingMenu(this GameObject NestedPart, bool active)
         {
@@ -66,7 +60,6 @@
                     image.gameObject.SetActive(true);
                     var texture = CheetoUtils.LoadPNG(LoadSprite);
                     image.overrideSprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-
                 }
             }
         }
@@ -149,6 +142,31 @@
             }
             return null;
         }
+
+        internal static bool ContainsPage(this List<QMNestedGridMenu> menus, UIPage page)
+        {
+            if (page != null && menus != null)
+            {
+                if (menus.Count != 0)
+                {
+                    foreach (var item in menus)
+                    {
+                        if (item.Equals(page))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+
 
         public static GameObject FindObject(this GameObject parent, string name)
         {
@@ -245,7 +263,7 @@
         }
 
 
-        internal static void CreateMainBackButton(this GameObject NestedPart)
+        internal static GameObject CreateMainBackButton(this GameObject NestedPart)
         {
             var btn = NestedPart.FindObject("Button_Back");
             btn.SetActive(true);
@@ -255,9 +273,10 @@
                 QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.field_Private_UIPage_0.enabled = true;
                 QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.Method_Public_UIPage_String_1("QuickMenuDashboard");
             }));
+            return btn;
         }
 
-        internal static void CreateBackButton(this GameObject NestedPart, string menuName)
+        internal static GameObject CreateBackButton(this GameObject NestedPart, string menuName)
         {
             var btn = NestedPart.FindObject("Button_Back");
             btn.SetActive(true);
@@ -266,6 +285,17 @@
             {
                 QuickMenu quickmenu = QuickMenuTools.QuickMenuInstance;
                 QuickMenuTools.ShowQuickmenuPage(menuName);
+            }));
+            return btn;
+        }
+
+
+        internal static void SetBackButtonAction(this GameObject NestedButton, Action action)
+        {
+            NestedButton.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
+            NestedButton.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
+            {
+                action();
             }));
         }
 

@@ -27,7 +27,7 @@
                     var listener = obj.GetOrAddComponent<ScrollMenuListener>();
                     if (listener != null)
                     {
-                        listener.assignedbtn = btn;
+                        listener.SingleButton = btn;
                     }
 
                     scroll.Add(btn);
@@ -81,7 +81,7 @@
                     var listener = trigger.GetOrAddComponent<ScrollMenuListener>();
                     if (listener != null)
                     {
-                        listener.assignedbtn = btn;
+                        listener.SingleButton = btn;
                     }
                     scroll.Add(btn);
                 }

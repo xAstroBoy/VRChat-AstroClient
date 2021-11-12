@@ -79,11 +79,11 @@
             switch (Title)
             {
                 case "Main Menu":
-                    NestedPart.CreateMainBackButton();
+                   backButton = NestedPart.CreateMainBackButton();
                     break;
 
                 default:
-                    NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_Menu_" + "Main Menu");
+                    backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_Menu_" + "Main Menu");
                     break;
             }
         }
@@ -102,6 +102,13 @@
         {
             return backButton;
         }
+
+        internal void SetBackButtonAction(Action back)
+        {
+            backButton.SetBackButtonAction(back);
+        }
+
+
 
         internal void DestroyMe()
         {

@@ -8,7 +8,8 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
     [RegisterComponent]
     public class ScrollMenuListener : GameEventsBehaviour
     {
-        internal QMSingleButton assignedbtn;
+        internal QMSingleButton SingleButton;
+        internal QMNestedGridMenu NestedGridButton;
 
         public ScrollMenuListener(IntPtr obj0) : base(obj0)
         {
@@ -16,11 +17,15 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
 
         private void OnEnable()
         {
-            if (assignedbtn != null)
+            if (NestedGridButton != null)
             {
-                assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+                NestedGridButton.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
             }
-            else
+            else if (SingleButton != null)
+            {
+                SingleButton.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+            }
+            else if(SingleButton == null && NestedGridButton == null)
             {
                 DestroyImmediate(this);
             }
@@ -28,13 +33,23 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
 
         private void OnDisable()
         {
-            if (assignedbtn != null) assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
-            else DestroyImmediate(this);
+            if (NestedGridButton != null)
+            {
+                NestedGridButton.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+            }
+            else if (SingleButton != null)
+            {
+                SingleButton.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+            }
+            else if (SingleButton == null && NestedGridButton == null)
+            {
+                DestroyImmediate(this);
+            }
         }
 
         private void OnDestroy()
         {
-            assignedbtn?.DestroyMe();
+            NestedGridButton?.DestroyMe();
             DestroyImmediate(this);
         }
     }

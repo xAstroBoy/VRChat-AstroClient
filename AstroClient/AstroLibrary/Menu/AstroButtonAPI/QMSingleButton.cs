@@ -10,7 +10,7 @@
         internal TMPro.TextMeshProUGUI Text;
         internal string BtnText;
 
-        internal QMSingleButton(string baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf)
+        internal QMSingleButton(string baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu;
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, null);
@@ -24,7 +24,7 @@
             }
         }
 
-        internal QMSingleButton(QMTabMenu baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf)
+        internal QMSingleButton(QMTabMenu baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, null);
@@ -39,11 +39,10 @@
 
         }
 
-        internal QMSingleButton(QMNestedGridMenu baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf)
+        internal QMSingleButton(QMNestedGridMenu baseMenu, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu.GetMenuName();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, null);
-
+            initButton(0, 0, btnText, btnAction, btnToolTip, null);
             if (btnHalf)
             {
                 RectTransform Recto = button.GetComponent<RectTransform>();
@@ -54,7 +53,7 @@
 
         }
 
-        internal QMSingleButton(QMNestedButton baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf)
+        internal QMSingleButton(QMNestedButton baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, null);

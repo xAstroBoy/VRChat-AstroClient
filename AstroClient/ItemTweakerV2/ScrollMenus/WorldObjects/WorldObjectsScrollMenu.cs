@@ -44,7 +44,7 @@
                     var listener = item.GetOrAddComponent<ScrollMenuListener>();
                     if (listener != null)
                     {
-                        listener.assignedbtn = btn;
+                        listener.SingleButton = btn;
                     }
                     scroll.Add(btn);
                 }

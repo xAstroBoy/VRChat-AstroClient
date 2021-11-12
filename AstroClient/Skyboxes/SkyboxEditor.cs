@@ -8,8 +8,10 @@
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
+    using MelonLoader.TinyJSON;
     using UnhollowerRuntimeLib;
     using UnityEngine;
+    using VRC.UI.Elements;
 
     internal class SkyboxEditor : GameEvents
     {
@@ -202,45 +204,78 @@
             return false;
         }
 
+        private static QMWings WingMenu;
+        private static QMNestedGridMenu CurrentScrollMenu;
+
+        private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
+        private static bool HasGenerated = false;
+
+        private static void InitWingPage()
+        {
+            WingMenu = new QMWings(1001, true, "Skybox Options", "Edit Current Skybox");
+            new QMWingSingleButton(WingMenu, "Refresh", () => {
+                _ = MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
+                HasGenerated = false;
+                foreach(var item in GeneratedButtons) item.DestroyMe();
+
+            }, "Find New Skyboxes");
+            new QMWingSingleButton(WingMenu, "Reset Skybox", () => {
+                SetRenderSettingSkybox(OriginalSkybox);
+
+            }, "Restore Original Skybox.");
+
+            WingMenu.SetActive(false);
+        }
+
+        internal override void OnUiPageToggled(UIPage Page, bool Toggle)
+        {
+            if (Page != null)
+            {
+                if (CurrentScrollMenu != null)
+                {
+                    if (Page.Equals(CurrentScrollMenu.page))
+                    {
+                        WingMenu.SetActive(true);
+                    }
+                    else
+                    {
+                        WingMenu.SetActive(false);
+
+                    }
+                }
+            }
+        }
 
 
         internal static void CustomSkyboxesMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
-            var menu = new QMNestedButton(main, x, y, "Skyboxes", "Change Map Skybox with a custom one", null, null, null, null, btnHalf);
-            var scroll = new QMHalfScroll(menu);
-            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
-              {
-                  ModConsole.DebugLog("[Skybox Loader (VR MODE) ] : This will Probably take awhile...");
-                  _ = MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
-                  scroll.Refresh();
-              }, "", null, null, true);
-            _ = new QMSingleButton(menu, 0, 0.5f, "Reset Skybox", delegate
-              {
-                  SetRenderSettingSkybox(OriginalSkybox);
-              }, "", null, null, true);
-            scroll.SetAction(delegate
+            var menu = new QMNestedGridMenu(main, x, y, "Skyboxes", "Change Map Skybox with a custom one", null, null, null, null, btnHalf);
+            menu.SetBackButtonAction(main);
+            menu.AddOpenAction(() =>
             {
-                if (LoadedSkyboxesBundles.Count() != 0)
+                if (!HasGenerated)
                 {
-                    foreach (var skybox in LoadedSkyboxesBundles)
+                    if (LoadedSkyboxesBundles.Count() != 0)
                     {
-                        if (skybox != null)
+                        foreach (var skybox in LoadedSkyboxesBundles)
                         {
-                            var tmp = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Set : {skybox.SkyboxName}", null, $"Load Skybox {skybox.SkyboxName} as map Skybox.", null, null, true);
-                            tmp.SetAction(new Action(() =>
+                            if (skybox != null)
                             {
-                                SetRenderSettingSkybox(skybox);
-                            }));
-                            scroll.Add(tmp);
+                                var btn = new QMSingleButton(menu, $"Load Skybox {skybox.SkyboxName} as map Skybox.", () => { SetRenderSettingSkybox(skybox); }, $"Set : {skybox.SkyboxName}", false);
+                                GeneratedButtons.Add(btn);
+                            }
                         }
+                        HasGenerated = true;
+                    }
+                    else
+                    {
+                        var empty = new QMSingleButton(menu, "No Skyboxes Found", null, "No Skyboxes Found", null, false);
+                        GeneratedButtons.Add(empty);
+                        HasGenerated = true;
                     }
                 }
-                else
-                {
-                    var empty = new QMSingleButton(scroll.BaseMenu, 0, 0, $"No Skyboxes Found...", null, $"No Skybox Found...", null, null, true);
-                    scroll.Add(empty);
-                }
             });
+            InitWingPage();
         }
     }
 }
