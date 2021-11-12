@@ -151,7 +151,7 @@
                 {
                     foreach (var item in menus)
                     {
-                        if (item.Equals(page))
+                        if (item.page.Equals(page))
                         {
                             return true;
                         }
@@ -290,10 +290,10 @@
         }
 
 
-        internal static void SetBackButtonAction(this GameObject NestedButton, Action action)
+        internal static void SetBackButtonAction(this GameObject button, Action action)
         {
-            NestedButton.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            NestedButton.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
+            button.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
+            button.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
                 action();
             }));

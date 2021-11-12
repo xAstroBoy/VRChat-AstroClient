@@ -55,20 +55,20 @@
             //UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
-            UIPage Page_UI = NestedPart.AddComponent<UIPage>();
-            Page_UI.name = menuName;
-            Page_UI.field_Public_String_0 = menuName;
-            Page_UI.field_Public_Boolean_0 = true;
-            Page_UI.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController();
-            Page_UI.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
-            Page_UI.field_Private_List_1_UIPage_0.Add(Page_UI);
+            page = NestedPart.AddComponent<UIPage>();
+            page.name = menuName;
+            page.field_Public_String_0 = menuName;
+            page.field_Public_Boolean_0 = true;
+            page.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController();
+            page.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
+            page.field_Private_List_1_UIPage_0.Add(page);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = Title;
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
-            QuickMenuTools.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, Page_UI);
+            QuickMenuTools.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, page);
             string TextColorHTML = null;
-            if (btnTextColor.HasValue && btnTextColor != null)
+            if (btnTextColor.HasValue)
             {
                 TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
             }
@@ -101,38 +101,55 @@
         }
 
 
-        internal void AddOpenAction(Action action)
+        internal void AddOpenAction(Action onOpenAction)
         {
             mainButton.SetAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menuName);
-                action();
+                if (onOpenAction != null)
+                {
+                    onOpenAction();
+                }
             });
         }
 
-        internal void SetBackButtonAction(QMNestedGridMenu action)
+        internal void SetBackButtonAction(QMNestedGridMenu action, System.Action onCloseAction = null)
         {
-            mainButton.SetAction(() =>
+            backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
+                if (onCloseAction != null)
+                {
+                    onCloseAction();
+                }
             });
         }
 
-        internal void SetBackButtonAction(QMNestedButton action)
+        internal void SetBackButtonAction(QMNestedButton action, System.Action onCloseAction = null)
         {
-            mainButton.SetAction(() =>
+            backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
+                if (onCloseAction != null)
+                {
+                    onCloseAction();
+                }
             });
         }
 
-        internal void SetBackButtonAction(QMTabMenu action)
+
+        internal void SetBackButtonAction(QMTabMenu action, System.Action onCloseAction = null)
         {
-            mainButton.SetAction(() =>
+            backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
+                if (onCloseAction != null)
+                {
+                    onCloseAction();
+                }
             });
         }
+
 
 
         internal string GetMenuName()
