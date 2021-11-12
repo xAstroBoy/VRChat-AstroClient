@@ -57,7 +57,7 @@
 
         private static bool HasLoadedCachedSkyboxes = false;
 
-        private static Material OriginalSkybox;
+        internal static Material OriginalSkybox { get; private set; }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -77,7 +77,7 @@
 
         internal static bool IsBundleAlreadyRegistered(string filename)
         {
-            return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any(); ;
+            return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any(); 
         }
 
         //internal static bool IsMaterialAlreadyRegistered(string filename)
@@ -166,7 +166,7 @@
             yield break;
         }
 
-        private static void SetRenderSettingSkybox(Material mat)
+        internal static void SetRenderSettingSkybox(Material mat)
         {
             RenderSettings.skybox = mat;
         }
@@ -205,92 +205,5 @@
             return false;
         }
 
-        private static QMWings WingMenu;
-        private static QMNestedGridMenu CurrentScrollMenu;
-
-        private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
-        private static bool HasGenerated = false;
-
-        private static void InitWingPage()
-        {
-            WingMenu = new QMWings(1001, true, "Skybox Options", "Edit Current Skybox");
-            new QMWingSingleButton(WingMenu, "Refresh", () => {
-                _ = MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
-                HasGenerated = false;
-                foreach(var item in GeneratedButtons) item.DestroyMe();
-                Regenerate(CurrentScrollMenu);
-            }, "Find New Skyboxes");
-            new QMWingSingleButton(WingMenu, "Reset Skybox", () => {
-                SetRenderSettingSkybox(OriginalSkybox);
-
-            }, "Restore Original Skybox.");
-
-            WingMenu.SetActive(false);
-        }
-        internal override void OnQuickMenuClose()
-        {
-            if (WingMenu != null)
-            {
-                WingMenu.SetActive(false);
-            }
-        }
-
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle)
-        {
-            if (Page != null)
-            {
-                if (!Page.Equals(CurrentScrollMenu.page))
-                {
-                    WingMenu.SetActive(false);
-                }
-            }
-        }
-
-
-        private static void Regenerate(QMNestedGridMenu menu)
-        {
-            if (!HasGenerated)
-            {
-                if (LoadedSkyboxesBundles.Count() != 0)
-                {
-                    foreach (var skybox in LoadedSkyboxesBundles)
-                    {
-                        if (skybox != null)
-                        {
-                            var btn = new QMSingleButton(menu, $" Skybox : {skybox.SkyboxName}.", () => { SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.SkyboxName} as map Skybox.", false);
-                            GeneratedButtons.Add(btn);
-                        }
-                    }
-
-                    HasGenerated = true;
-                }
-                else
-                {
-                    var empty = new QMSingleButton(menu, "No Skyboxes Found", null, "No Skyboxes Found", null, false);
-                    GeneratedButtons.Add(empty);
-                    HasGenerated = true;
-                }
-            }
-        }
-
-
-        internal static void CustomSkyboxesMenu(QMTabMenu main, float x, float y, bool btnHalf)
-        {
-            CurrentScrollMenu = new QMNestedGridMenu(main, x, y, "Skyboxes", "Change Map Skybox with a custom one", null, null, null, null, btnHalf);
-            CurrentScrollMenu.SetBackButtonAction(main, () =>
-            {
-                if (WingMenu != null)
-                {
-                    WingMenu.SetActive(false);
-                }
-            });
-            CurrentScrollMenu.AddOpenAction(() =>
-            {
-                WingMenu.SetActive(true);
-                Regenerate(CurrentScrollMenu);
-            });
-
-            InitWingPage();
-        }
     }
 }

@@ -502,7 +502,7 @@
             ModConsole.DebugLog("18");
 
             // Misc
-            SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
+            SkyboxScrollMenu.InitButtons(AstroClient, 1, 0, true);
             ModConsole.DebugLog("19");
 
             LightControl.InitButtons(AstroClient, 1, 0.5f, true);

@@ -90,7 +90,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1003, true, "Toggle AudioSources", "Toggle World Audio Sources");
+            WingMenu = new QMWings(1004, true, "Toggle AudioSources", "Toggle World Audio Sources");
             new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
