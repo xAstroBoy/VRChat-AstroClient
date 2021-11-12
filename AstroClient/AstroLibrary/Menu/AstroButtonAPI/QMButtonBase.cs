@@ -142,12 +142,6 @@
             button.transform.SetParent(Parent);
         }
 
-        internal void SetButtonText(string text)
-        {
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = text;
-        }
-
-
         internal virtual void SetBackgroundColor(Color buttonBackgroundColor)
         {
         }

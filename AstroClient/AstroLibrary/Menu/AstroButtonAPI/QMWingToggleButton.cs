@@ -20,7 +20,7 @@
             {
                 TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
             }
-            initButton2(Parent.WingPage.gameObject, btnText, OnAction, OffAction, btnToolTip, TextColorHTML, Defaultstate);
+            initButton2(Parent.WingPageTransform.gameObject, btnText, OnAction, OffAction, btnToolTip, TextColorHTML, Defaultstate);
         }
 
         //public QMWingToggleButton(QMWings Parent, string btnText, System.Action OnAction, System.Action OffAction, string btnToolTip, string TextColor = null , bool Defaultstate = false)

@@ -90,6 +90,15 @@
         {
             if (Page != null)
             {
+                if (QuickMenuTools.UIPageTemplate_Left() != null)
+                {
+                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Left())) return;
+                }
+                if (QuickMenuTools.UIPageTemplate_Right() != null)
+                {
+                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Right())) return;
+                }
+                if (Page.Equals(WingMenu.CurrentPage)) return;
                 if (!Page.Equals(CurrentScrollMenu.page))
                 {
                     WingMenu.SetActive(false);

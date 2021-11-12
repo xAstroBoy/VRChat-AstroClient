@@ -252,7 +252,7 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
         internal void SetButtonText(string buttonText)
         {
             BtnText = buttonText;
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
+            button.GetComponentInChildren<TMPro.TextMeshProUGUI>(true).text = buttonText;
         }
 
         internal void SetAction(System.Action buttonAction)
@@ -272,14 +272,20 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
 
         internal override void SetTextColor(Color buttonTextColor)
         {
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = buttonTextColor;
+            string TextColorHTML = null;
+            if (buttonTextColor != null)
+            {
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(buttonTextColor);
+            }
+
+            setTextColorHTML(TextColorHTML);
         }
 
 
         internal void setTextColorHTML(string buttonTextColor)
         {
             string NewText = $"<color={buttonTextColor}>{BtnText}</color>";
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = NewText;
+            SetButtonText(NewText);
         }
 
     }

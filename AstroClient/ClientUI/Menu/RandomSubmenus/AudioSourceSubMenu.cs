@@ -14,7 +14,6 @@
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
 
-
         internal override void OnRoomLeft()
         {
             DestroyGeneratedButtons();
@@ -36,24 +35,25 @@
                 Regenerate();
             });
             InitWingPage();
-            
         }
 
         private static void Regenerate()
         {
             foreach (var obj in WorldUtils_Old.Get_AudioSources())
             {
-                var btn = new QMSingleButton(CurrentScrollMenu, $"Toggle {obj.name}", () =>
+                var btn = new QMSingleButton(CurrentScrollMenu, $"Toggle {obj.name}", null, $"Toggle {obj.name}", obj.Get_AudioSource_Active_ToColor());
+                btn.SetAction(() =>
                 {
                     obj.enabled = !obj.enabled;
-                }, $"Toggle {obj.name}", obj.Get_AudioSource_Active_ToColor());
-                var listener = obj.gameObject.GetOrAddComponent<ScrollMenuListener_AudioSource>();
-                if (listener != null)
-                {
-                    listener.Assignedbtn = btn;
-                    listener.source = obj;
-                    listener.Lock = false;
-                }
+                    btn.SetTextColor(obj.Get_AudioSource_Active_ToColor());
+                });
+                //var listener = obj.gameObject.AddComponent<ScrollMenuListener_AudioSource>();
+                //if (listener != null)
+                //{
+                //    listener.Assignedbtn = btn;
+                //    listener.source = obj;
+                //    listener.Lock = false;
+                //}
                 GeneratedButtons.Add(btn);
             }
         }
@@ -81,6 +81,16 @@
         {
             if (Page != null)
             {
+                if (QuickMenuTools.UIPageTemplate_Left() != null)
+                {
+                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Left())) return;
+                }
+                if (QuickMenuTools.UIPageTemplate_Right() != null)
+                {
+                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Right())) return;
+                }
+
+                if (Page.Equals(WingMenu.CurrentPage)) return;
                 if (!Page.Equals(CurrentScrollMenu.page))
                 {
                     WingMenu.SetActive(false);
@@ -91,7 +101,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1004, true, "Toggle AudioSources", "Toggle World Audio Sources");
+            WingMenu = new QMWings(1007, true, "AudioSources", "AudioSources Control");
             new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }

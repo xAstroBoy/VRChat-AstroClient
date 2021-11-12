@@ -7,7 +7,10 @@
     using VRC.UI.Elements;
     internal class QMWings : QMButtonBase
     {
-        internal Transform WingPage;
+        internal Transform WingPageTransform;
+
+        internal UIPage CurrentPage;
+
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnQMLoc = "WingPage" + MenuName;
@@ -25,18 +28,18 @@
                 SetToolTip(btnToolTip);
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
                 UIPage Page = QuickMenuTools.UIPageTemplate_Left();
-                UIPage Wing_UP_1 = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
-                WingPage = Wing_UP_1.transform;
-                Wing_UP_1.gameObject.NewText("Text_Title").text = $"{MenuName}";
-                Wing_UP_1.field_Public_String_0 = btnQMLoc; //Name
-                Wing_UP_1.gameObject.name = btnQMLoc;
-                Wing_UP_1.field_Public_Boolean_0 = true; //_inited
-                Wing_UP_1.field_Private_MenuStateController_0 = QuickMenuTools.WingMenuStateControllerLeft(); //_menuStateController
-                Wing_UP_1.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>(); //_pageStack
-                Wing_UP_1.field_Private_List_1_UIPage_0.Add(Wing_UP_1);
-                QuickMenuTools.WingMenuStateControllerLeft().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, Wing_UP_1); //_uiPages
+                CurrentPage = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
+                WingPageTransform = CurrentPage.transform;
+                CurrentPage.gameObject.NewText("Text_Title").text = $"{MenuName}";
+                CurrentPage.field_Public_String_0 = btnQMLoc; //Name
+                CurrentPage.gameObject.name = btnQMLoc;
+                CurrentPage.field_Public_Boolean_0 = true; //_inited
+                CurrentPage.field_Private_MenuStateController_0 = QuickMenuTools.WingMenuStateControllerLeft(); //_menuStateController
+                CurrentPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>(); //_pageStack
+                CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
+                QuickMenuTools.WingMenuStateControllerLeft().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, CurrentPage); //_uiPages
 
-                var VLGC = Wing_UP_1.GetComponentInChildren<VerticalLayoutGroup>();
+                var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
                 VLGC.m_Spacing = 12;
                 VLGC.childScaleHeight = false;
@@ -44,11 +47,11 @@
                 VLGC.childControlHeight = false;
                 VLGC.childControlWidth = false;
 
-                GameObject VLG = Wing_UP_1.gameObject.FindObject("VerticalLayoutGroup");
+                GameObject VLG = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
                 VLG.transform.FindChild("VerticalLayoutGroup").gameObject.SetActive(false);
                 VLG.transform.FindChild("Header_Wing_H3").gameObject.SetActive(false);
-                Wing_UP_1.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
-                var Rect = Wing_UP_1.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
+                CurrentPage.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
+                var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
 
@@ -66,19 +69,19 @@
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
                 UIPage Page = QuickMenuTools.UIPageTemplate_Right();
-                UIPage Wing_UP_1 = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
-                WingPage = Wing_UP_1.transform;
-                Wing_UP_1.gameObject.NewText("Text_Title").text = MenuName;
-                Wing_UP_1.gameObject.NewText("Text_Title").fontSize = 36;
-                Wing_UP_1.field_Public_String_0 = btnQMLoc;
-                Wing_UP_1.gameObject.name = btnQMLoc;
-                Wing_UP_1.field_Public_Boolean_0 = true;
-                Wing_UP_1.field_Private_MenuStateController_0 = QuickMenuTools.WingMenuStateControllerRight();
-                Wing_UP_1.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
-                Wing_UP_1.field_Private_List_1_UIPage_0.Add(Wing_UP_1);
-                QuickMenuTools.WingMenuStateControllerRight().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, Wing_UP_1);
+                CurrentPage = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
+                WingPageTransform = CurrentPage.transform;
+                CurrentPage.gameObject.NewText("Text_Title").text = MenuName;
+                CurrentPage.gameObject.NewText("Text_Title").fontSize = 36;
+                CurrentPage.field_Public_String_0 = btnQMLoc;
+                CurrentPage.gameObject.name = btnQMLoc;
+                CurrentPage.field_Public_Boolean_0 = true;
+                CurrentPage.field_Private_MenuStateController_0 = QuickMenuTools.WingMenuStateControllerRight();
+                CurrentPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
+                CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
+                QuickMenuTools.WingMenuStateControllerRight().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, CurrentPage);
 
-                var VLGC2 = Wing_UP_1.GetComponentInChildren<VerticalLayoutGroup>();
+                var VLGC2 = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC2.spacing = 12;
                 VLGC2.m_Spacing = 12;
                 VLGC2.childScaleHeight = false;
@@ -86,11 +89,11 @@
                 VLGC2.childControlHeight = false;
                 VLGC2.childControlWidth = false;
 
-                GameObject VLG = Wing_UP_1.gameObject.FindObject("VerticalLayoutGroup");
+                GameObject VLG = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
                 VLG.transform.FindChild("VerticalLayoutGroup").gameObject.SetActive(false);
                 VLG.transform.FindChild("Header_Wing_H3").gameObject.SetActive(false);
-                Wing_UP_1.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
-                var Rect = Wing_UP_1.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
+                CurrentPage.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
+                var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
 

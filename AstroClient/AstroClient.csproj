@@ -151,10 +151,10 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\AudioSourceSubMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\TriggerSubmenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\SkyboxScrollMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\VRC_InteractableSubMenu.cs" />
-    <Compile Include="ClientUI\Menu\RandomSubmenus\AudioSourceSubMenu.cs" />
     <Compile Include="ClientUI\Menu\Tabs\TabIndexs.cs" />
     <Compile Include="CodeDebugTools\CodeDebug.cs" />
     <Compile Include="AstroLibrary\Menu\ActionMenu\Api\ActionMenuPage.cs" />
@@ -287,7 +287,6 @@
     <Compile Include="Cheetos\AvatarFavorites.cs" />
     <Compile Include="Cheetos\FrameUnlimiter.cs" />
     <Compile Include="AstroMonos\Components\UI\NamePlates\CheetoNameplate.cs" />
-    <Compile Include="AstroMonos\Components\Tools\Listeners\ScrollMenuListener_AudioSource.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\ScrollMenuListener.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\GameObjectListener.cs" />
     <Compile Include="AstroMonos\Components\Player\SitOnPlayer.cs" />

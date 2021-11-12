@@ -16,7 +16,7 @@
             {
                 TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
             }
-            initButton2(Parent.WingPage.gameObject, btnText, btnAction, btnToolTip, TextColorHTML);
+            initButton2(Parent.WingPageTransform.gameObject, btnText, btnAction, btnToolTip, TextColorHTML);
         }
 
 

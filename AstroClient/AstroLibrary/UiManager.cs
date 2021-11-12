@@ -307,7 +307,11 @@ namespace AstroButtonAPI
 
         private static void OnQuickMenuClose_Event() => Event_OnQuickMenuClose.SafetyRaise();
 
-        private static void OnUIPageToggle(UIPage __instance, bool __0) => Event_OnUiPageToggled.SafetyRaise(new OnUiPageEventArgs(__instance, __0));
+        private static void OnUIPageToggle(UIPage __instance, bool __0)
+        {
+
+            Event_OnUiPageToggled.SafetyRaise(new OnUiPageEventArgs(__instance, __0));
+        }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)
         {
