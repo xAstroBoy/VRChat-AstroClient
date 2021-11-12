@@ -151,6 +151,9 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\TriggerSubmenu.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\VRC_InteractableSubMenu.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\AudioSourceSubMenu.cs" />
     <Compile Include="ClientUI\Menu\Tabs\TabIndexs.cs" />
     <Compile Include="CodeDebugTools\CodeDebug.cs" />
     <Compile Include="AstroLibrary\Menu\ActionMenu\Api\ActionMenuPage.cs" />
@@ -274,6 +277,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_HealthEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_WaveEditor.cs" />
+    <Compile Include="DumpTool.cs" />
     <Compile Include="EmojiMenu\EmojiCooldownKiller.cs" />
     <Compile Include="Exploits\ExploitUtils.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
@@ -381,7 +385,6 @@
     <Compile Include="Utils\XrefUtils.cs" />
     <Compile Include="WorldAddons\CheatsShortcutButton.cs" />
     <Compile Include="ClientUI\Menu\ESP\PlayerESPMenu.cs" />
-    <Compile Include="ClientUI\Menu\RandomSubmenus.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenuBtn.cs" />
     <Compile Include="ClientUI\Menu\ExploitsMenu.cs" />
     <Compile Include="ClientUI\Menu\UserInteractMenuBtns.cs" />
