@@ -1,10 +1,6 @@
 ﻿namespace AstroClient
 {
     using AstroButtonAPI;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using AstroMonos.Components.Tools.Listeners;
-    using CheetoLibrary;
     using System.Collections.Generic;
     using VRC.UI.Elements;
 
@@ -12,7 +8,8 @@
     {
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
-        private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
+        private static List<QMToggleButton> GeneratedButtons = new List<QMToggleButton>();
+        private static bool isOpen;
 
         internal override void OnRoomLeft()
         {
@@ -42,12 +39,17 @@
         {
             foreach (var obj in WorldUtils_Old.Get_AudioSources())
             {
-                var btn = new QMSingleButton(CurrentScrollMenu, $"Toggle {obj.name}", null, $"Toggle {obj.name}", obj.Get_AudioSource_Active_ToColor());
+                var btn = new QMToggleButton(CurrentScrollMenu, $"Toggle {obj.name}", null, $"Toggle {obj.name}", null, $"Toggle {obj.name}", null, null, $"Toggle AudioSource {obj.name}", obj.enabled);
                 btn.SetAction(() =>
                 {
-                    obj.enabled = !obj.enabled;
-                    btn.SetTextColor(obj.Get_AudioSource_Active_ToColor());
+                    obj.enabled = true;
+                    btn.SetToggleState(obj.enabled);
+                }, () =>
+                {
+                    obj.enabled = false;
+                    btn.SetToggleState(obj.enabled);
                 });
+
                 //var listener = obj.gameObject.AddComponent<ScrollMenuListener_AudioSource>();
                 //if (listener != null)
                 //{
@@ -59,8 +61,19 @@
             }
         }
 
+        private static void OnOpenMenu()
+        {
+            isOpen = true;
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(true);
+                WingMenu.ShowLeftWingPage();
+            }
+        }
+
         private static void OnCloseMenu()
         {
+            isOpen = false;
             WingMenu.SetActive(false);
             WingMenu.ClickBackButton();
             DestroyGeneratedButtons();
@@ -81,21 +94,11 @@
 
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
         {
+            if (!isOpen) return;
             if (Page != null)
             {
-                if (QuickMenuTools.UIPageTemplate_Left() != null)
+                if (!Page.ContainsPage(CurrentScrollMenu.page))
                 {
-                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Left())) return;
-                }
-                if (QuickMenuTools.UIPageTemplate_Right() != null)
-                {
-                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Right())) return;
-                }
-
-                if (Page.Equals(WingMenu.CurrentPage)) return;
-                if (!Page.Equals(CurrentScrollMenu.page))
-                {
-                    WingMenu.SetActive(false);
                     OnCloseMenu();
                 }
             }

@@ -1,30 +1,18 @@
 ﻿namespace AstroClient
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Management;
     using AstroButtonAPI;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using AstroMonos.Components.Tools.Listeners;
-    using MelonLoader;
     using Skyboxes;
-    using Udon;
-    using Udon.UdonEditor;
-    using UnityEngine;
-    using VRC.Udon.Common.Interfaces;
+    using System.Collections.Generic;
+    using System.Linq;
     using VRC.UI.Elements;
 
     internal class SkyboxScrollMenu : GameEvents
     {
-
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
         private static bool HasGenerated = false;
+        private static bool isOpen;
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -40,13 +28,11 @@
                 {
                     WingMenu.SetActive(true);
                     WingMenu.ShowLeftWingPage();
-
                 }
                 Regenerate();
             });
             InitWingPage();
         }
-
 
         private static void Regenerate()
         {
@@ -74,7 +60,6 @@
             }
         }
 
-
         internal static void DestroyGeneratedButtons()
         {
             if (GeneratedButtons.Count != 0)
@@ -85,50 +70,54 @@
 
         internal override void OnQuickMenuClose()
         {
+            OnCloseMenu();
+        }
+
+        private static void OnCloseMenu()
+        {
             WingMenu.SetActive(false);
             WingMenu.ClickBackButton();
         }
 
+        private static void OnOpenMenu()
+        {
+            isOpen = true;
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(true);
+                WingMenu.ShowLeftWingPage();
+            }
+        }
 
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
         {
+            if (!isOpen) return;
+
             if (Page != null)
             {
-                if (QuickMenuTools.UIPageTemplate_Left() != null)
+                if (!Page.ContainsPage(CurrentScrollMenu.page))
                 {
-                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Left())) return;
-                }
-                if (QuickMenuTools.UIPageTemplate_Right() != null)
-                {
-                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Right())) return;
-                }
-                if (Page.Equals(WingMenu.CurrentPage)) return;
-                if (!Page.Equals(CurrentScrollMenu.page))
-                {
-                    WingMenu.SetActive(false);
+                    OnCloseMenu();
                 }
             }
         }
 
-
-
         private static void InitWingPage()
         {
             WingMenu = new QMWings(1007, true, "Skybox Options", "Edit Current Skybox");
-            new QMWingSingleButton(WingMenu, "Refresh", () => {
+            new QMWingSingleButton(WingMenu, "Refresh", () =>
+            {
                 _ = MelonLoader.MelonCoroutines.Start(SkyboxEditor.FindAndLoadBundle());
                 HasGenerated = false;
                 foreach (var item in GeneratedButtons) item.DestroyMe();
                 Regenerate();
             }, "Find New Skyboxes");
-            new QMWingSingleButton(WingMenu, "Reset Skybox", () => {
+            new QMWingSingleButton(WingMenu, "Reset Skybox", () =>
+            {
                 SkyboxEditor.SetRenderSettingSkybox(SkyboxEditor.OriginalSkybox);
-
             }, "Restore Original Skybox.");
 
             WingMenu.SetActive(false);
         }
-
-
     }
 }

@@ -1,13 +1,12 @@
 ﻿namespace AstroButtonAPI
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
+    using AstroClient;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using CheetoLibrary;
+    using System;
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC;
@@ -19,7 +18,6 @@
 
     internal static class Extensions
     {
-
         internal static void ToggleScrollRectOnExistingMenu(this GameObject NestedPart, bool active)
         {
             try
@@ -41,16 +39,67 @@
                     scrollRect.movementType = ScrollRect.MovementType.Unrestricted;
                     scrollRect.verticalScrollbar = scrollbar;
                     //scrollRect.horizontalScrollbar = scrollbar;
-
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.DebugErrorExc(e);
             }
         }
 
+        internal static bool isAstroPage(this UIPage page)
+        {
+            if (page != null)
+            {
+                if (page.name.isMatch(BuildInfo.Name)) return true;
+                if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
+                {
+                    foreach (var item in page.field_Private_List_1_UIPage_0)
+                    {
+                        if (item.name.isMatch(BuildInfo.Name)) return true;
+                    }
+                }
+            }
+            return false;
+        }
 
+
+        internal static bool ContainsPage(this UIPage page, List<QMNestedGridMenu> menus)
+        {
+            if (menus != null)
+            {
+                if (menus.Count != 0)
+                {
+                    foreach (var item in menus)
+                    {
+                        if (item != null)
+                        {
+                            if (page.ContainsPage(item.GetPage()))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        internal static bool ContainsPage(this UIPage page, UIPage TargetPage)
+        {
+            if (page != null)
+            {
+                if (page.name.Equals(TargetPage.name)) return true;
+                if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
+                {
+                    foreach (var item in page.field_Private_List_1_UIPage_0)
+                    {
+                        if (item.name.Equals(TargetPage.name)) return true;
+                    }
+                }
+            }
+            return false;
+        }
 
         internal static void LoadSprite(this GameObject Parent, string LoadSprite, string name)
         {
@@ -76,12 +125,9 @@
                     image.gameObject.SetActive(true);
                     var texture = CheetoUtils.LoadPNG(LoadSprite);
                     image.overrideSprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-
                 }
             }
         }
-
-
 
         internal static Sprite ToSprite(this Texture2D texture)
         {
@@ -164,8 +210,6 @@
             return false;
         }
 
-
-
         public static GameObject FindObject(this GameObject parent, string name)
         {
             if (parent == null) return null;
@@ -192,8 +236,6 @@
             parent.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().enabled = true;
             UnityEngine.GameObject.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37Vo12St37VoUnique>());
         }
-
-
 
         public static TMPro.TextMeshProUGUI NewText(this GameObject Parent, string search)
         {
@@ -251,7 +293,7 @@
             //}
             //foreach (var Button in ButtonToDelete)
             //{
-            //    if (Button.name.Contains("Wing_Button_") || Button.name == "Expressions_SDK3" || Button.name == "Emotes_SDK2" 
+            //    if (Button.name.Contains("Wing_Button_") || Button.name == "Expressions_SDK3" || Button.name == "Emotes_SDK2"
             //        || Button.name == "AV3_Text" || Button.name == "Button_ActionMenu")
             //        UnityEngine.Object.Destroy(Button.gameObject);
             //}
@@ -271,8 +313,6 @@
         {
             QuickMenuTools.Wing_Right().ShowQuickmenuPage(pagename.GetMenuName());
         }
-
-
 
         internal static GameObject CreateMainBackButton(this GameObject NestedPart)
         {
@@ -299,7 +339,6 @@
             }));
             return btn;
         }
-
 
         internal static void SetBackButtonAction(this GameObject button, Action action)
         {

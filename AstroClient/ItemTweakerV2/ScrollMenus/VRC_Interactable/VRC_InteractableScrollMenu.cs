@@ -5,8 +5,8 @@
     using AstroLibrary.Utility;
     using AstroMonos.Components.Tools.Listeners;
     using CheetoLibrary;
-    using System.Collections.Generic;
     using Selector;
+    using System.Collections.Generic;
     using VRC.UI.Elements;
 
     internal class VRC_InteractableScrollMenu : GameEvents
@@ -15,6 +15,7 @@
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
         private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
+        private static bool isOpen;
 
         internal override void OnRoomLeft()
         {
@@ -30,11 +31,7 @@
             });
             CurrentScrollMenu.AddOpenAction(() =>
             {
-                if (WingMenu != null)
-                {
-                    WingMenu.SetActive(true);
-                    WingMenu.ShowLeftWingPage();
-                }
+                OnOpenMenu();
                 Regenerate();
             });
             InitWingPage();
@@ -58,8 +55,19 @@
             }
         }
 
+        private static void OnOpenMenu()
+        {
+            isOpen = true;
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(true);
+                WingMenu.ShowLeftWingPage();
+            }
+        }
+
         private static void OnCloseMenu()
         {
+            isOpen = false;
             WingMenu.SetActive(false);
             WingMenu.ClickBackButton();
             DestroyGeneratedButtons();
@@ -84,22 +92,11 @@
 
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
         {
+            if (!isOpen) return;
             if (Page != null)
             {
-                if (QuickMenuTools.UIPageTemplate_Left() != null)
+                if (!Page.ContainsPage(CurrentScrollMenu.GetPage()))
                 {
-                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Left())) return;
-                }
-                if (QuickMenuTools.UIPageTemplate_Right() != null)
-                {
-                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Right())) return;
-                }
-
-                if (Page.Equals(WingMenu.CurrentPage)) return;
-
-                if (!Page.Equals(CurrentScrollMenu.page))
-                {
-                    WingMenu.SetActive(false);
                     OnCloseMenu();
                 }
             }

@@ -1,32 +1,20 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Management;
     using AstroButtonAPI;
-    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using AstroMonos.Components.Tools.Listeners;
-    using MelonLoader;
     using Selector;
-    using Udon;
-    using Udon.UdonEditor;
-    using UnityEngine;
-    using Variables;
+    using System.Collections.Generic;
+    using System.Linq;
     using VRC.Udon.Common.Interfaces;
     using VRC.UI.Elements;
 
     internal class UdonScrollMenu : GameEvents
     {
-
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static QMWingSingleButton CurrentUnboxBehaviourToConsole;
         private static List<QMNestedGridMenu> GeneratedPages = new List<QMNestedGridMenu>();
+        private static bool isOpen;
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -37,11 +25,7 @@
             });
             CurrentScrollMenu.AddOpenAction(() =>
             {
-                if (WingMenu != null)
-                {
-                    WingMenu.SetActive(true);
-                    WingMenu.ShowLeftWingPage();
-                }
+                OnOpenMenu();
                 var udonevents = Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours();
                 if (udonevents != null && udonevents.Count() != 0)
                 {
@@ -78,7 +62,6 @@
                                         {
                                             action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
                                         }
-
                                     }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})", null, false);
                                 }
                             });
@@ -105,8 +88,19 @@
             InitWingPage();
         }
 
+        private static void OnOpenMenu()
+        {
+            isOpen = true;
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(true);
+                WingMenu.ShowLeftWingPage();
+            }
+        }
+
         internal static void OnCloseMenu()
         {
+            isOpen = false;
             WingMenu.SetActive(false);
             WingMenu.ClickBackButton();
             if (GeneratedPages.Count != 0)
@@ -119,28 +113,18 @@
         {
             OnCloseMenu();
         }
+
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
         {
+            if (!isOpen) return;
             if (Page != null)
             {
-                if (QuickMenuTools.UIPageTemplate_Left() != null)
+                if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(GeneratedPages))
                 {
-                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Left())) return;
-                }
-                if (QuickMenuTools.UIPageTemplate_Right() != null)
-                {
-                    if (Page.Equals(QuickMenuTools.UIPageTemplate_Right())) return;
-                }
-
-                if (Page.Equals(WingMenu.CurrentPage)) return;
-                if (!Page.Equals(CurrentScrollMenu.page) || !GeneratedPages.ContainsPage(Page))
-                {
-                    WingMenu.SetActive(false);
                     OnCloseMenu();
                 }
             }
         }
-
 
         private static void InitWingPage()
         {
@@ -149,10 +133,5 @@
             CurrentUnboxBehaviourToConsole.SetActive(false);
             WingMenu.SetActive(false);
         }
-
-
-
-
-       
     }
 }
