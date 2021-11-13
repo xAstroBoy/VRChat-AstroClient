@@ -16,9 +16,9 @@
             DestroyGeneratedButtons();
         }
 
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "AudioSources", "Toggle AudioSources", null, null, null, null, btnHalf);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, "AudioSources", "Toggle AudioSources");
             CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
                 OnCloseMenu();
@@ -40,6 +40,7 @@
             foreach (var obj in WorldUtils_Old.Get_AudioSources())
             {
                 var btn = new QMToggleButton(CurrentScrollMenu, $"Toggle {obj.name}", null, $"Toggle {obj.name}", null, $"Toggle {obj.name}", null, null, $"Toggle AudioSource {obj.name}", obj.enabled);
+                
                 btn.SetAction(() =>
                 {
                     obj.enabled = true;
@@ -49,7 +50,7 @@
                     obj.enabled = false;
                     btn.SetToggleState(obj.enabled);
                 });
-
+                btn.SetToggleState(obj.enabled);
                 //var listener = obj.gameObject.AddComponent<ScrollMenuListener_AudioSource>();
                 //if (listener != null)
                 //{

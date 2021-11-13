@@ -20,9 +20,9 @@
             DestroyGeneratedButtons();
         }
 
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "VRC_Interactables", "Interact VRC_Interactable", null, null, null, null, btnHalf);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, "VRC_Interactables", "Interact VRC_Interactable");
             CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
                 OnCloseMenu();

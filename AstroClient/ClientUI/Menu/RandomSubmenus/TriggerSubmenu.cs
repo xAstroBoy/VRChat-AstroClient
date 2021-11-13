@@ -21,9 +21,9 @@
             DestroyGeneratedButtons();
         }
 
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Triggers", "Interact with World Triggers", null, null, null, null, btnHalf);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, "Triggers", "Interact with World Triggers");
             CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
                 OnCloseMenu();

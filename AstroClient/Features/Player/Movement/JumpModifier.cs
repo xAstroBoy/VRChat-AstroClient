@@ -94,7 +94,7 @@
         }
 
 
-        internal static QMSingleToggleButton UnlimitedJumpToggle;
+        internal static QMToggleButton UnlimitedJumpToggle;
 
         internal static bool IsUnlimitedJumpActive
         {
@@ -112,7 +112,7 @@
             }
         }
 
-        internal static QMSingleToggleButton RocketJumpToggle;
+        internal static QMToggleButton RocketJumpToggle;
 
         internal static bool IsRocketJumpActive
         {
