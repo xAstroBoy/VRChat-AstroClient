@@ -150,6 +150,10 @@
             });
         }
 
+        internal GameObject GetButtonsMenu()
+        {
+            return ButtonsMenu;
+        }
 
 
         internal string GetMenuName()

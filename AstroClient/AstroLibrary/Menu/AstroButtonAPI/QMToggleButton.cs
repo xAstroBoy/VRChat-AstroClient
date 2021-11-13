@@ -2,6 +2,7 @@
 {
     using System;
     using System.Reflection;
+    using AstroLibrary.Console;
     using CheetoLibrary;
     using TMPro;
     using UnhollowerRuntimeLib;
@@ -16,24 +17,36 @@
         private bool State { get; set; }
         internal GameObject ButtonsPageNestedButton { get; set; }
         private string BtnType { get; set; }
+        private GameObject ButtonsMenu { get; set; }
 
         private TMPro.TextMeshProUGUI TextMesh;
-        private string ButtonText { get; set; }
+        private string CurrentButtonText { get; set; }
+
         private System.Action btnOnAction { get; set; }
         private System.Action btnOffAction { get; set; }
 
-        private Color btnOffColor { get; set; }
-        public bool V { get; }
+        private Toggle ButtonToggle { get; set; }
+        private Color OffColor { get; set; }
+        private Color OnColor { get; set; }
+
+        private string CurrentColor { get; set; }
+        private TextMeshProUGUI ButtonText { get; set; }
+
+        private string ButtonText_On { get; set; }
+        private string ButtonText_Off { get; set; }
 
         public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
+            ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
         public QMToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
+            ButtonsMenu = btnMenu.GetButtonsMenu();
+
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
@@ -52,15 +65,42 @@
         internal void initButton(float btnXLocation, float btnYLocation, string btnTextOn, System.Action btnActionOn, string btnTextOff, System.Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = "", bool DefaultState = false)
         {
             BtnType = "_ToggleButton_";
-            var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-            button = UnityEngine.Object.Instantiate<GameObject>(QuickMenuTools.ToggleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
+            var id = $"{QMButtonAPI.identifier}_{BtnType}_{Title}_{btnTextOff}_{btnTextOn}";
+            if (ButtonsMenu == null)
+            {
+                var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
+                if (Part1 != null)
+                {
+                    ButtonsMenu = Part1.FindObject("Buttons");
+                }
+            }
+            button = UnityEngine.Object.Instantiate<GameObject>(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
             Extensions.NewText(button, "Text_H4").text = Title;
-            button.name = QMButtonAPI.identifier + BtnType + Title;
+            button.name = id;
+            ButtonText = button.GetComponentInChildren<TextMeshProUGUI>();
             btnOn = button.FindObject("Icon_On");
             btnOff = button.FindObject("Icon_Off");
             btnOff.SetActive(true);
             btnOn.SetActive(false);
+            if (btnOnColor.HasValue)
+            {
+                OnColor = btnOnColor.Value;
+            }
+            else
+            {
+                OnColor = Color.green;
+            }
+            if (btnOffColor.HasValue)
+            {
+                OffColor = btnOffColor.Value;
+            }
+            else
+            {
+                OffColor = Color.red;
+            }
 
+            ButtonText_On = btnTextOn;
+            ButtonText_Off = btnTextOff;
             //string TextColorHTML = null;
             //if (btnTextColor.HasValue)
             //{
@@ -69,88 +109,128 @@
             //else
             //{
             //}
-            setTextColorHTML("#blue");
-
-            button.transform.position = QuickMenuTools.SingleButtonTemplate.transform.position;
-            initShift[0] = -1;
-            initShift[1] = -3;
+            setTextColorHTML("#red");
+            ButtonToggle = button.GetComponentInChildren<Toggle>();
             SetLocation(btnXLocation, btnYLocation);
-
             btnOn.GetComponentInChildren<RectTransform>().anchoredPosition -= new Vector2(50, 0);
             btnOff.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(50, 0);
 
             btnOn.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.check.png")).ToSprite();
+
             btnOff.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.cancel.png")).ToSprite();
 
             SetToolTip(btnToolTip);
             SetAction(btnActionOn, btnActionOff);
+            SetToggleState(DefaultState);
         }
 
 
         internal void setTextColorHTML(string buttonTextColor)
         {
-            string NewText = $"<color={buttonTextColor}>{ButtonText}</color>";
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = NewText;
+            CurrentColor = buttonTextColor;
+            string NewText = $"<color={CurrentColor}>{CurrentButtonText}</color>";
+            ButtonText.text = NewText;
         }
 
+        internal void SetOffButtonText(string Text)
+        {
+            ButtonText_Off = Text;
+            if (!State)
+            {
+                SetButtonText(ButtonText_Off);
+            }
+        }
+        internal void SetOnButtonText(string Text)
+        {
+            ButtonText_On = Text;
+            if (State)
+            {
+                SetButtonText(ButtonText_On);
+            }
+        }
+        internal void SetOffColor(Color color)
+        {
+            OffColor = color;
+            if (!State)
+            {
+                SetTextColor(OffColor);
+            }
+        }
+        internal void SetOnColor(Color color)
+        {
+            OnColor = color;
+            if (State)
+            {
+                SetTextColor(OnColor);
+            }
+        }
 
         internal void SetButtonText(string Text)
         {
-            ButtonText = Text;
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Text;
+            CurrentButtonText = Text;
+            string NewText = $"<color={CurrentColor}>{CurrentButtonText}</color>";
+
+            ButtonText.text = NewText;
         }
 
         internal void SetAction(Action buttonOnAction, Action buttonOffAction)
         {
             btnOnAction = buttonOnAction;
             btnOffAction = buttonOffAction;
-
-            button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>((Action)(() =>
+            ButtonToggle.onValueChanged.AddListener(new Action<bool>
+            ((state) =>
             {
-                if (btnOn.activeSelf)
+                State = state;
+                if (state)
                 {
-                    SetToggleState(false, true);
+                    btnOn.SetActive(true);
+                    btnOff.SetActive(false);
+                    SetButtonText(ButtonText_On);
+                    SetTextColor(OnColor);
+                    btnOnAction.Invoke();
                 }
                 else
                 {
-                    SetToggleState(true, true);
+                    btnOn.SetActive(false);
+                    btnOff.SetActive(true);
+                    SetButtonText(ButtonText_Off);
+                    SetTextColor(OffColor);
+                    btnOffAction.Invoke();
                 }
-            })));
+            }));
         }
         internal override void SetTextColor(Color color)
         {
             setTextColorHTML("#" + ColorUtility.ToHtmlStringRGB(color));
         }
 
-        internal void SetOnText(string buttonOnText)
-        {
-            Text[] btnTextsOn = btnOn.GetComponentsInChildren<Text>();
-            btnTextsOn[0].text = buttonOnText;
-            Text[] btnTextsOff = btnOff.GetComponentsInChildren<Text>();
-            btnTextsOff[0].text = buttonOnText;
-        }
-
-        internal void SetOffText(string buttonOffText)
-        {
-            Text[] btnTextsOn = btnOn.GetComponentsInChildren<Text>();
-            btnTextsOn[1].text = buttonOffText;
-            Text[] btnTextsOff = btnOff.GetComponentsInChildren<Text>();
-            btnTextsOff[1].text = buttonOffText;
-        }
 
         internal void SetToggleState(bool toggleOn, bool shouldInvoke = false)
         {
-            btnOn.SetActive(toggleOn);
-            btnOff.SetActive(!toggleOn);
             State = toggleOn;
+            ButtonToggle.SetIsOnWithoutNotify(toggleOn);
+            if (toggleOn)
+            {
+                SetButtonText(ButtonText_On);
+                SetTextColor(OnColor);
+                btnOn.SetActive(true);
+                btnOff.SetActive(false);
+            }
+            else
+            {
+                SetButtonText(ButtonText_Off);
+                SetTextColor(OffColor);
+                btnOn.SetActive(false);
+                btnOff.SetActive(true);
+
+            }
             try
             {
                 if (toggleOn && shouldInvoke)
                 {
                     if (shouldInvoke)
                     {
-                        btnOffAction.Invoke();
+                        btnOnAction.Invoke();
                     }
                     btnOn.SetActive(true);
                     btnOff.SetActive(false);

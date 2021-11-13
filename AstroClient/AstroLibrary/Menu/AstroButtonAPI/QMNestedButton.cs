@@ -162,6 +162,10 @@
         {
             return mainButton;
         }
+        internal GameObject GetButtonsMenu()
+        {
+            return ButtonsMenu;
+        }
 
         internal GameObject GetBackButton()
         {

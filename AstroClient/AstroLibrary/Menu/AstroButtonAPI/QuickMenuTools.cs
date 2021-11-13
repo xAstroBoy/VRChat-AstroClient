@@ -457,12 +457,13 @@
             {
                 if (_ToggleButtonReference == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
+                    var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
                     foreach (var button in Buttons)
                     {
-                        if (button.name == "Button_Mute")
+                        if (button.name == "Button_ToggleTooltips")
                         {
-                            _ToggleButtonReference = button.transform;
+                            ModConsole.DebugLog("Found ToolTips button!", Color.Chartreuse);
+                            return _ToggleButtonReference = button;
                         }
                     }
                 }
@@ -488,7 +489,7 @@
                             ModConsole.DebugLog("Found Camera Page!", Color.Chartreuse);
                             return _NestedButtonReference = button;
                         }
-                    };
+                    }
                 }
                 return _NestedButtonReference;
             }
