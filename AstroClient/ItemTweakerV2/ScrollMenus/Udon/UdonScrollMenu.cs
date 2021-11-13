@@ -41,10 +41,10 @@
                 {
                     WingMenu.SetActive(true);
                 }
-                var udonevents = UdonParser.CleanedWorldBehaviours;
+                var udonevents = Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours();
                 if (udonevents != null && udonevents.Count() != 0)
                 {
-                    for (int i = 0; i < udonevents.Length; i++)
+                    for (int i = 0; i < udonevents.Count; i++)
                     {
                         VRC.Udon.UdonBehaviour action = udonevents[i];
                         if (action._eventTable.Count != 0)
