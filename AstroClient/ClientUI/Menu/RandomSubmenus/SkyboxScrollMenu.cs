@@ -14,9 +14,9 @@
         private static bool HasGenerated = false;
         private static bool isOpen;
 
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Skybox Options", "Edit Current Skybox", null, null, null, null, btnHalf);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, "Skybox Options", "Edit Current Skybox");
             CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
                 WingMenu.SetActive(false);

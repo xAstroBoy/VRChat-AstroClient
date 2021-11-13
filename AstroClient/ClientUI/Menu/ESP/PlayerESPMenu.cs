@@ -7,6 +7,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroMonos.Components.ESP.Player;
+    using Boo.Lang.Useful.Collections;
     using CodeDebugTools;
     using UnityEngine;
     using VRC;
@@ -15,40 +16,44 @@
     {
         internal static EventHandler<BoolEventsArgs> Event_OnPlayerESPPropertyChanged;
 
-        internal static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMNestedGridMenu menu)
         {
-            var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
+            var main = new QMNestedGridMenu(menu, "ESP Menu", "ESP Options");
 
-            PlayerESPToggleBtn = new QMSingleToggleButton(main, 1, 0f, "Player ESP ON", new Action(() => { Toggle_Player_ESP = true; }), "Player ESP OFF", new Action(() => { Toggle_Player_ESP = false; }), "Toggles Player ESP", Color.green, Color.red, null, false, true);
+            PlayerESPToggleBtn = new QMToggleButton(main, "Player ESP", () => { Toggle_Player_ESP = true; }, () => { Toggle_Player_ESP = false; }, "Toggles Player ESP");
             PlayerESPToggleBtn.SetToggleState(ConfigManager.ESP.PlayerESP);
 
             // TOOD : ADD A STRING Parser and allow people  to set HEX colors as well.
-            var PublicESP = new QMNestedButton(main, 2, 0, "Global ESP Colors", "Set Player ESP Default Color", null, null, null, null, true);
-            _ = new QMSingleButton(PublicESP, 1, 0, "Blue", () => { ConfigManager.PublicESPColor = Color.blue; }, null, null, null, true);
-            _ = new QMSingleButton(PublicESP, 1, 0.5f, "Red", () => { ConfigManager.PublicESPColor = Color.red; }, null, null, null, true);
-            _ = new QMSingleButton(PublicESP, 1, 1, "Green", () => { ConfigManager.PublicESPColor = Color.green; }, null, null, null, true);
-            _ = new QMSingleButton(PublicESP, 1, 1.5f, "Yellow", () => { ConfigManager.PublicESPColor = Color.yellow; }, null, null, null, true);
-            _ = new QMSingleButton(PublicESP, 1, 2, "Cyan", () => { ConfigManager.PublicESPColor = Color.cyan; }, null, null, null, true);
-            _ = new QMSingleButton(PublicESP, 1, 2.5f, "White", () => { ConfigManager.PublicESPColor = Color.white; }, null, null, null, true);
+            var PublicESP = new QMNestedGridMenu(main, "Global ESP Colors", "Set Player ESP Default Color");
 
-            var FriendESP = new QMNestedButton(main, 2, 0.5f, "Friend ESP Colors", "Set Player ESP Friend Color", null, null, null, null, true);
-            _ = new QMSingleButton(FriendESP, 1, 0, "Blue", () => { ConfigManager.ESPFriendColor = Color.blue; }, null, null, null, true);
-            _ = new QMSingleButton(FriendESP, 1, 0.5f, "Red", () => { ConfigManager.ESPFriendColor = Color.red; }, null, null, null, true);
-            _ = new QMSingleButton(FriendESP, 1, 1, "Green", () => { ConfigManager.ESPFriendColor = Color.green; }, null, null, null, true);
-            _ = new QMSingleButton(FriendESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPFriendColor = Color.yellow; }, null, null, null, true);
-            _ = new QMSingleButton(FriendESP, 1, 2, "Cyan", () => { ConfigManager.ESPFriendColor = Color.cyan; }, null, null, null, true);
-            _ = new QMSingleButton(FriendESP, 1, 2.5f, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, null, null, null, true);
+            new QMSingleButton(PublicESP, "Blue", () => { ConfigManager.PublicESPColor = Color.blue; }, "Set Public People ESP To Blue", Color.blue);
+            new QMSingleButton(PublicESP, "Red", () => { ConfigManager.PublicESPColor = Color.red; }, "Set Public People ESP To Red", Color.red);
+            new QMSingleButton(PublicESP, "Green", () => { ConfigManager.PublicESPColor = Color.green; }, "Set Public People ESP To green", Color.green);
+            new QMSingleButton(PublicESP, "Yellow", () => { ConfigManager.PublicESPColor = Color.yellow; }, "Set Public People ESP To yellow", Color.yellow);
+            new QMSingleButton(PublicESP, "Cyan", () => { ConfigManager.PublicESPColor = Color.cyan; }, "Set Public People ESP To Cyan", Color.cyan);
+            new QMSingleButton(PublicESP, "White", () => { ConfigManager.PublicESPColor = Color.white; }, "Set Public People ESP To white", Color.white);
 
-            var BlockedESP = new QMNestedButton(main, 2, 1f, "Blocked ESP Colors", "Set Player ESP Blocked Color", null, null, null, null, true);
-            _ = new QMSingleButton(BlockedESP, 1, 0, "Blue", () => { ConfigManager.ESPBlockedColor = Color.blue; }, null, null, null, true);
-            _ = new QMSingleButton(BlockedESP, 1, 0.5f, "Red", () => { ConfigManager.ESPBlockedColor = Color.red; }, null, null, null, true);
-            _ = new QMSingleButton(BlockedESP, 1, 1, "Green", () => { ConfigManager.ESPBlockedColor = Color.green; }, null, null, null, true);
-            _ = new QMSingleButton(BlockedESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPBlockedColor = Color.yellow; }, null, null, null, true);
-            _ = new QMSingleButton(BlockedESP, 1, 2, "Cyan", () => { ConfigManager.ESPBlockedColor = Color.cyan; }, null, null, null, true);
-            _ = new QMSingleButton(BlockedESP, 1, 2.5f, "White", () => { ConfigManager.ESPBlockedColor = Color.white; }, null, null, null, true);
+
+            var FriendESP = new QMNestedGridMenu(main,  "Friend ESP Colors", "Set Player ESP Friend Color");
+
+            new QMSingleButton(PublicESP, "Blue", () => { ConfigManager.ESPFriendColor = Color.blue; }, "Set Friends People ESP To Blue", Color.blue);
+            new QMSingleButton(PublicESP, "Red", () => { ConfigManager.ESPFriendColor = Color.red; }, "Set Friends People ESP To Red", Color.red);
+            new QMSingleButton(PublicESP, "Green", () => { ConfigManager.ESPFriendColor = Color.green; }, "Set Friends People ESP To green", Color.green);
+            new QMSingleButton(PublicESP, "Yellow", () => { ConfigManager.ESPFriendColor = Color.yellow; }, "Set Friends People ESP To yellow", Color.yellow);
+            new QMSingleButton(PublicESP, "Cyan", () => { ConfigManager.ESPFriendColor = Color.cyan; }, "Set Friends People ESP To Cyan", Color.cyan);
+            new QMSingleButton(PublicESP, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, "Set Friends  ESP To white", Color.white);
+
+            var BlockedESP = new QMNestedGridMenu(main,  "Blocked ESP Colors", "Set Player ESP Blocked Color");
+            new QMSingleButton(PublicESP, "Blue", () => { ConfigManager.ESPBlockedColor = Color.blue; }, "Set Blocked People ESP To Blue", Color.blue);
+            new QMSingleButton(PublicESP, "Red", () => { ConfigManager.ESPBlockedColor = Color.red; }, "Set Blocked People ESP To Red", Color.red);
+            new QMSingleButton(PublicESP, "Green", () => { ConfigManager.ESPBlockedColor = Color.green; }, "Set Blocked People ESP To green", Color.green);
+            new QMSingleButton(PublicESP, "Yellow", () => { ConfigManager.ESPBlockedColor = Color.yellow; }, "Set Blocked People ESP To yellow", Color.yellow);
+            new QMSingleButton(PublicESP, "Cyan", () => { ConfigManager.ESPBlockedColor = Color.cyan; }, "Set Blocked People ESP To Cyan", Color.cyan);
+            new QMSingleButton(PublicESP, "White", () => { ConfigManager.ESPBlockedColor = Color.white; }, "Set Blocked  ESP To white", Color.white);
+
         }
 
-        private static QMSingleToggleButton PlayerESPToggleBtn;
+        private static QMToggleButton PlayerESPToggleBtn;
 
         #region playerESP
 

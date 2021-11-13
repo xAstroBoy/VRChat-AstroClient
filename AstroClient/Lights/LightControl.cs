@@ -366,16 +366,16 @@
                 {
                     RestoreRenderSettings();
                 }
-                if (ToggleFullbright != null)
+                if (RenderFullbrightToggle != null)
                 {
-                    ToggleFullbright.SetToggleState(value);
+                    RenderFullbrightToggle.SetToggleState(value);
                 }
             }
         }
 
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            var temp = new QMNestedGridMenu(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
+            var temp = new QMNestedGridMenu(menu, "Light Menu", "Control Avatar & World Lights!");
 
             ToggleFullbright = new QMToggleButton(temp, 0, 0, "Player Headlight", () => { IsHeadLightActive = true; }, "Player Headlight", () => { IsHeadLightActive = false; }, "Spawns a Light in Player Camera (makes the entire map visible)", Color.green, Color.red);
             RenderFullbrightToggle = new QMToggleButton(temp, 0, 0, "Render Fullbright", () => { FullbrightByRender = true; }, "Render Fullbright", () => { FullbrightByRender = false; }, "Attempts to edit RenderSettings to show the entire map (WIP)", Color.green, Color.red);

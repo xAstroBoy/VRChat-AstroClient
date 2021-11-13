@@ -8,7 +8,7 @@
     internal class QMWingToggleButton : QMButtonBase
     {
         private bool State { get; set; }
-        private TMPro.TextMeshProUGUI Text { get; set; }
+        private TMPro.TextMeshProUGUI ButtonText { get; set; }
         private string BtnText { get; set; }
         private Action OffAction { get; set; }
         private Action OnAction { get; set; }
@@ -40,7 +40,7 @@
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().autoSizeTextContainer = true;
             button.AddComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = btnToolTip;
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(350, 120);
-
+            ButtonText = button.GetComponentInChildren<TMPro.TextMeshProUGUI>();
             BtnText = btnText;
             OnAction = OnAction;
             OffAction = OffAction;
@@ -60,19 +60,20 @@
 
         internal void setButtonText(string buttonText)
         {
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
+            BtnText = buttonText;
+            ButtonText.text = buttonText;
         }
 
         internal void setOnText()
         {
             string Text = BtnText + " <color=green>ON</color>";
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Text;
+            ButtonText.text = Text;
         }
 
         internal void setOffText()
         {
             string Text = BtnText + " <color=red>OFF</color>";
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = Text;
+            ButtonText.text = Text;
         }
 
         internal void SetAction(Action buttonONAction, Action buttonOFFAction)
@@ -85,12 +86,12 @@
                     if (State)
                     {
                         setOnText();
-                        SetToggleState(true, true);
+                        OnAction.Invoke();
                     }
                     else
                     {
                         setOffText();
-                        SetToggleState(false, true);
+                        OffAction.Invoke();
                     }
                 }));
         }
@@ -133,7 +134,7 @@
 
         internal void setTextColorHTML(string buttonTextColor)
         {
-            string NewText = $"<color={buttonTextColor}>{button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text}</color>";
+            string NewText = $"<color={buttonTextColor}>{BtnText}</color>";
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = NewText;
         }
     }

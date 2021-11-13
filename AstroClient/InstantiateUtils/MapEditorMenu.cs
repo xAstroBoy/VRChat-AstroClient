@@ -9,14 +9,14 @@
 
     internal static class MapEditorMenu
     {
-        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab main)
         {
-            var menu = new QMNestedButton(main, x, y, "Map Editor Utils", "Map Editor", null, null, null, null, btnHalf);
+            var menu = new QMNestedGridMenu(main, "Map Editor Utils", "Map Editor");
             _ = new QMSingleButton(menu, 1, 0, "Spawn Empty Button", new Action(() =>
               {
                   Vector3? buttonPosition = Utils.LocalPlayer.GetPlayer().Get_Center_Of_Player();
                   Quaternion? buttonRotation = Utils.LocalPlayer.GetPlayer().gameObject.transform.rotation;
-                  if (buttonRotation != null && buttonRotation != null)
+                  if (buttonPosition.HasValue && buttonRotation.HasValue)
                   {
                       var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, "Template Test", null);
                       btn.gameObject.Pickup_Set_ForceComponent();

@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Variables
 {
     using AstroLibrary.Console;
+    using ClientUI.QuickMenuButtons;
 
     internal class Bools
     {
@@ -9,8 +10,6 @@
         internal static bool BlockRPC;
 
         internal static bool BlockUdon;
-
-        internal static bool DisableNSFWMenu = true;
 
         internal static bool IsDeveloperAndDebug
         {
@@ -37,6 +36,11 @@
                 if (Main.ToggleDebugInfo != null)
                 {
                     Main.ToggleDebugInfo.SetToggleState(value);
+                }
+
+                if (MainClientWings.WingDebugButton != null)
+                {
+                    MainClientWings.WingDebugButton.SetToggleState(value);
                 }
                 if (value)
                 {

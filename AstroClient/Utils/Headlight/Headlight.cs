@@ -80,7 +80,7 @@
 
 
 
-        internal static void HeadlightButtonInit(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void HeadlightButtonInit(QMGridTab menu, float x, float y, bool btnHalf)
         {
             QMNestedButton HeadlightConfig = new QMNestedButton(menu, x, y, "Custom Headlight", "Headlight Settings", null, null, null, null, btnHalf);
             HeadlightConfig.AddOpenAction(() =>
@@ -235,7 +235,7 @@
         {
             if (Player.prop_Player_0 != null)
             {
-                var PlayerHeadTransform = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.Head);
+                var PlayerHeadTransform = PlayerCameraEditor.PlayerCameraObject.transform;
                 if (PlayerHeadTransform != null)
                 {
                     if (state)
@@ -262,7 +262,7 @@
         {
             if (Camera.main != null)
             {
-                Transform cam = Camera.main.transform;
+                Transform cam = PlayerCameraEditor.PlayerCameraObject.transform;
                 if (cam != null)
                 {
                     if (state)

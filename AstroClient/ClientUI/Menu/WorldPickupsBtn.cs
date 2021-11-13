@@ -7,9 +7,9 @@
 
     internal class WorldPickupsBtn
     {
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            var sub = new QMNestedGridMenu(menu, x, y, "World Pickup Control", "Pickup Control", null, null, null, null, btnHalf);
+            var sub = new QMNestedGridMenu(menu, "World Pickup Control", "Pickup Control");
             _ = new QMSingleButton(sub, 1, 0, "Reveal all world pickups", new Action(GameObjectMenu.EnableAllWorldPickups), "Enables all world pickups!", null, null);
             _ = new QMSingleButton(sub, 2, 0, "Hide all world pickups", new Action(GameObjectMenu.DisableAllWorldPickups), "Disables all world pickups!", null, null);
             new QMSingleButton(sub, 3, 0, "Restore Original pickups pos (Revert Rigidbody Edits)", () => { GameObjectMenu.TeleportPickupsToTheirDefaultPosition(true); }, "Restores all Pickups Original Position!", null, null, true);

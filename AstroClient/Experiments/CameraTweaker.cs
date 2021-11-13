@@ -84,14 +84,14 @@
             }
         }
 
-        internal static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
+        internal static void InitQMMenu(QMGridTab tab)
         {
-            var tmp = new QMNestedButton(tab, x, y, "Camera Experiments", "Edit Camera Behaviours", null, null, null, null, btnHalf);
+            var tmp = new QMNestedGridMenu(tab, "Camera Experiments", "Edit Camera Behaviours");
             _ = new QMSingleButton(tmp, 1, 0, "Set Camera (Tweaker)", () => { UserCamera.gameObject.Set_As_Object_To_Edit(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
             _ = new QMSingleButton(tmp, 1, 0.5f, "Set ViewFinder (Tweaker)", () => { ViewFinder.gameObject.Set_As_Object_To_Edit(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
             _ = new QMSingleButton(tmp, 1, 1f, "Reset Camera Parent", () => { UserCamera.parent = userCameraParent; CheckCamera(); }, "Restore Original parent", null, null, true);
-            IsCameraFreeToggle = new QMSingleToggleButton(tmp, 1, 1.5f, "Free Camera", () => { IsCameraFree = true; }, "Parented Camera", () => { IsCameraFree = false; }, "Set if Camera needs to be bound or freed from you.", Color.green, Color.red, null, false, true);
-            RespawnOnLevelChangeToggle = new QMSingleToggleButton(tmp, 1, 2f, "Reset Camera on Level Change", () => { RespawnCameraOnLevelLoad = true; }, "Reset Camera on Level Change", () => { RespawnCameraOnLevelLoad = false; }, "Resets Camera Position to be in front of you on level changes.", Color.green, Color.red, null, false, true);
+            IsCameraFreeToggle = new QMToggleButton(tmp, 1, 1.5f, "Free Camera", () => { IsCameraFree = true; }, "Parented Camera", () => { IsCameraFree = false; }, "Set if Camera needs to be bound or freed from you.", Color.green, Color.red, null, false);
+            RespawnOnLevelChangeToggle = new QMToggleButton(tmp, 1, 2f, "Reset Camera on Level Change", () => { RespawnCameraOnLevelLoad = true; }, () => { RespawnCameraOnLevelLoad = false; }, "Resets Camera Position to be in front of you on level changes.", Color.green, Color.red, null, false);
         }
 
         internal static Transform UserCamera
@@ -166,8 +166,8 @@
         private static Transform _ViewFinder;
         private static Transform _UserCameraParent;
 
-        private static QMSingleToggleButton RespawnOnLevelChangeToggle;
-        private static QMSingleToggleButton IsCameraFreeToggle;
+        private static QMToggleButton RespawnOnLevelChangeToggle;
+        private static QMToggleButton IsCameraFreeToggle;
 
         private static bool _RespawnCameraOnLevelLoad;
 

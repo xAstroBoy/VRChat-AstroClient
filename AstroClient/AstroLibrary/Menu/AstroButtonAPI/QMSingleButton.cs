@@ -25,6 +25,20 @@
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
+        internal QMSingleButton(QMGridTab baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
+        {
+            btnQMLoc = baseMenu.GetMenuName();
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, null);
+
+            if (btnHalf)
+            {
+                RectTransform Recto = button.GetComponent<RectTransform>();
+                Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
+                Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
+                button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+            }
+
+        }
 
         internal QMSingleButton(QMTabMenu baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
@@ -134,6 +148,32 @@
 
             btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
+        }
+        internal QMSingleButton(QMGridTab Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
+        {
+            string TextColorHTML = null;
+            if (TextColor.HasValue)
+            {
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
+            }
+            string BackgroundHTML = null;
+            if (BackgroundColor.HasValue)
+            {
+                BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
+            }
+
+            btnQMLoc = Parent.GetMenuName();
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
+            RectTransform Recto = button.GetComponent<RectTransform>();
+            Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
+            if (btnHalf)
+            {
+
+                Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
+                Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
+                button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+            }
+
         }
 
         internal QMSingleButton(QMTabMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)

@@ -72,14 +72,12 @@
 
         #region Buttons
 
-        internal static QMSingleToggleButton ToggleDebugInfo;
+        internal static QMToggleButton ToggleDebugInfo;
         internal static QMSingleButton CopyIDButton;
         internal static QMSingleButton AvatarByIDButton;
         internal static QMSingleButton ClearVRamButton;
         internal static QMSingleButton JoinInstanceButton;
         internal static QMSingleButton ReloadAvatarsButton;
-        internal static QMSingleButton CloseButton;
-        internal static QMSingleButton RestartButton;
 
         #endregion Buttons
 
@@ -438,94 +436,38 @@
         internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
-            QMTabMenu AstroClient = new QMTabMenu(TabIndexs.Main, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
-            ModConsole.DebugLog("1");
-            ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", () => { Bools.IsDebugMode = true; }, "Debug Console OFF", () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            ModConsole.DebugLog("2");
-
-            // Top Right Buttons
-            CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", () => { Clipboard.SetText($"{WorldUtils.FullID}"); }, "Copy the ID of the current instance.", null, null, true);
-
-            ModConsole.DebugLog("3");
-            JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", () => { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
-            ModConsole.DebugLog("4");
-
-            AvatarByIDButton = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", () =>
-            {
-                string text = Clipboard.GetText();
-                if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar();
-                else MelonLogger.Error("Clipboard does not contains Avatar ID!");
-            }, "Alows you to change into a public avatar with its id.", null, null, true);
-
-            ModConsole.DebugLog("5");
-            ReloadAvatarsButton = new QMSingleButton(AstroClient, 5, 1f, "Reload\nAvatars", () => { MelonCoroutines.Start(AvatarUtils.ReloadAllAvatars()); }, "Reloads All Avatars", null, null, true);
-            ModConsole.DebugLog("6");
-
-            CloseButton = new QMSingleButton(AstroClient, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
-            ModConsole.DebugLog("7");
-
-            RestartButton = new QMSingleButton(AstroClient, 0, 1, "Restart Game", () =>
-            {
-                _ = Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
-                Process.GetCurrentProcess().Kill();
-            }, "Restart the game");
-            ModConsole.DebugLog("8");
-
-            // Protections
-            QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, UnityEngine.Color.yellow, null, null, true);
-            ModConsole.DebugLog("9");
-
-            QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.BlockRPC, true);
-            toggleBlockRPC.SetToggleState(Bools.BlockRPC);
-            ModConsole.DebugLog("10");
-
-            QMSingleToggleButton toggleBlockUdon = new QMSingleToggleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.BlockRPC, true);
-            toggleBlockUdon.SetToggleState(Bools.BlockUdon);
-            ModConsole.DebugLog("11");
-
-            QMSingleToggleButton toggleAntiPortal = new QMSingleToggleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", UnityEngine.Color.green, UnityEngine.Color.red, null, Bools.AntiPortal, true);
-            toggleAntiPortal.SetToggleState(Bools.AntiPortal);
-
-
-            ModConsole.DebugLog("12");
-            SkyboxScrollMenu.InitButtons(AstroClient, 1, 0, true);
-
-            ModConsole.DebugLog("13");
-            LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-            ModConsole.DebugLog("14");
-            GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
-            ModConsole.DebugLog("15");
+            QMGridTab AstroClient = new QMGridTab(TabIndexs.Main, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            MainClientWings.InitMainWing();
+            GameProcessMenu.InitButtons(AstroClient);
+            ProtectionsMenu.InitButtons(AstroClient);
+            SkyboxScrollMenu.InitButtons(AstroClient);
+            LightControl.InitButtons(AstroClient);
+            GameObjectMenu.InitButtons(AstroClient);
             if (Bools.IsDeveloper)
             {
-                MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
+                MapEditorMenu.InitButtons(AstroClient);
             }
-            ModConsole.DebugLog("16");
 
-            WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
+            WorldPickupsBtn.InitButtons(AstroClient);
 
-            ModConsole.DebugLog("17");
-            ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
-            ModConsole.DebugLog("18");
+            ComponentsBtn.InitButtons(AstroClient);
 
             Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
-            ModConsole.DebugLog("19");
 
-            CameraTweaker.InitQMMenu(AstroClient, 3, 0.5f, true);
-            ModConsole.DebugLog("20");
+            CameraTweaker.InitQMMenu(AstroClient);
 
             SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
-            ModConsole.DebugLog("21");
+
+
+            ToggleDebugInfo = new QMToggleButton(AstroClient, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", null, null, null, Bools.AntiPortal);
+            // Top Right Buttons
+            ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
 
             ExploitsMenu.InitButtons(TabIndexs.Exploits);
-            ModConsole.DebugLog("22");
             WorldsCheats.InitButtons(TabIndexs.Cheats);
-            ModConsole.DebugLog("23");
             HistoryMenu.InitButtons(TabIndexs.History);
-            ModConsole.DebugLog("24");
             AdminMenu.InitButtons(TabIndexs.Admin);
-            ModConsole.DebugLog("25");
             DevMenu.InitButtons(TabIndexs.Dev);
-            ModConsole.DebugLog("26");
 
             // Misc
             TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);

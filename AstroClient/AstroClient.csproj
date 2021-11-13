@@ -113,6 +113,7 @@
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedGridMenu.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QmQuickActions.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSlider.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMGridTab.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMWingToggleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMWingSingleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleButton.cs" />
@@ -136,7 +137,7 @@
     <Compile Include="AstroLibrary\Menu\MenuApi\VRCMenuAPI.cs" />
     <Compile Include="AstroLibrary\UiManager.cs" />
     <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
-    <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
+    <Compile Include="AstroLibrary\VRChatObjects\PlayerCameraEditor.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\UdonTycoon\UdonTycoon_LevelController.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\UdonTycoon\UdonTycoon_PolyCollector.cs" />
@@ -151,11 +152,19 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
+    <Compile Include="ClientUI\Menu\GameProcessMenu.cs" />
+    <Compile Include="ClientUI\Menu\ProtectionsMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\AudioSourceSubMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\TriggerSubmenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\SkyboxScrollMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\VRC_InteractableSubMenu.cs" />
+    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_Camera.cs" />
+    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_Spoofs.cs" />
+    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_HideElements.cs" />
+    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_Performance.cs" />
+    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_LogsMenu.cs" />
     <Compile Include="ClientUI\Menu\Tabs\TabIndexs.cs" />
+    <Compile Include="ClientUI\Menu\Wings\MainClientWings.cs" />
     <Compile Include="CodeDebugTools\CodeDebug.cs" />
     <Compile Include="AstroLibrary\Menu\ActionMenu\Api\ActionMenuPage.cs" />
     <Compile Include="AstroLibrary\Menu\ActionMenu\Api\AMUtils.cs" />

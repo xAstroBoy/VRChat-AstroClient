@@ -12,9 +12,9 @@
 
     internal static class ComponentsBtn
     {
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            var temp = new QMNestedButton(menu, x, y, "Component Menu", "Control Object Custom Components!", null, null, null, null, btnHalf);
+            var temp = new QMNestedGridMenu(menu, "Component Menu", "Control Object Custom Components!");
             if (Bools.AllowAttackerComponent)
             {
                 _ = new QMSingleButton(temp, 1, 0, "Make Held object attack Target", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AttackTarget(); }), "Make Held object attack Target!", null, null);

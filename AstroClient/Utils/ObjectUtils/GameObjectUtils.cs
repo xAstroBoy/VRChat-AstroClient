@@ -28,13 +28,9 @@
 
     internal class GameObjectMenu : GameEvents
     {
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            var GameObjectsMenus = new QMNestedButton(menu, x, y, "GameObjects DebugMenu", "Find Whatever is in these VRChat GameObjects in console", null, null, null, null, btnHalf);
-            GameObjDumper = new QMSingleButton(GameObjectsMenus, 1, 0, "World's Gameobject Dumper", new Action(GameObjectDumper), "Dump All World GameObjects's names in a file!", null, null);
-            _ = new QMSingleButton(GameObjectsMenus, 2, 0, "Print GameObject Components in console", new Action(DumpHoldingGameObjComponent), "Prints Gameobj components in console", null, null);
-            GrabGameObjDumper = new QMSingleButton(GameObjectsMenus, 3, 0, "Grabbable name Dumper", new Action(GrabbableGameObjDumper), "Dump All Grabbable GameObjects's names in a file!", null, null);
-            ObjDumperWithComponentsBtn = new QMSingleButton(GameObjectsMenus, 4, 0, "Dump World GameObjects with components", new Action(GameObjDumperWithComponents), "Dump All World GameObjects's along with their components!", null, null);
+            var GameObjectsMenus = new QMNestedGridMenu(menu, "GameObjects DebugMenu", "Find Whatever is in these VRChat GameObjects in console");
             _ = new QMSingleButton(GameObjectsMenus, 1, 1, "Print RigidBody Info In Console", new Action(() => { Tweaker_Object.GetGameObjectToEdit().gameObject.PrintAllRigidBodySettings(); }), "Print RigidBody Details in console!", null, null);
             _ = new QMSingleButton(GameObjectsMenus, 2, 1, "Find who is controlling pickups", new Action(GetAllPickupsOwners), "Print Pickups Owners in console!", null, null);
             _ = new QMSingleButton(GameObjectsMenus, 3, 1, "Print VideoPlayer Links in console.", new Action(DumpVideoPlayerURLS), "Print VideoPlayers URLS Queque in console!", null, null);
