@@ -258,32 +258,15 @@
         {
             _MenuStateController.Method_Public_Void_String_UIContext_Boolean_0(Page);
         }
-        internal static void ShowPage(this MenuStateController _MenuStateController, UIPage Page)
-        {
-            _MenuStateController.ShowTabContent(_MenuStateController.Method_Private_Int32_UIPage_PDM_0(Page));
-        }
 
-
-        internal static void ShowQuickmenuPage(this QMNestedButton menu)
-        {
-            QuickMenuTools.QuickMenuController().ShowPage(menu.GetPage());
-        }
-        internal static void ShowQuickmenuPage(this QMTabMenu menu)
-        {
-            QuickMenuTools.QuickMenuController().ShowPage(menu.GetPage());
-        }
-        internal static void ShowQuickmenuPage(this QMNestedGridMenu menu)
-        {
-            QuickMenuTools.QuickMenuController().ShowPage(menu.GetPage());
-        }
         internal static void ShowLeftWingPage(this QMWings pagename)
         {
-            QuickMenuTools.WingMenuStateControllerLeft().ShowPage(pagename.GetPage());
+            QuickMenuTools.Wing_Left().ShowQuickmenuPage(pagename.GetMenuName());
         }
 
         internal static void ShowRightWingPage(this QMWings pagename)
         {
-            QuickMenuTools.WingMenuStateControllerRight().ShowPage(pagename.GetPage());
+            QuickMenuTools.Wing_Right().ShowQuickmenuPage(pagename.GetMenuName());
         }
 
 

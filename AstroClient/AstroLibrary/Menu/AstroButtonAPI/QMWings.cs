@@ -113,7 +113,7 @@
         }
         internal string GetMenuName()
         {
-            return MenuName;
+            return btnQMLoc;
         }
         internal UIPage GetPage()
         {
