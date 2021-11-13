@@ -13,7 +13,7 @@
     {
         internal static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var main = new QMNestedButton(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
+            var main = new QMNestedGridMenu(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
 
             GravityToggler = new QMSingleToggleButton(main, 1, 0, "Use Gravity", () => { Modified_SetGravity(true); }, "No Gravity", () => { Modified_SetGravity(false); }, "Toggle Object Gravity", Color.green, Color.red, null, false, true);
             KinematicToggler = new QMSingleToggleButton(main, 1, 0.5f, "Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(true); }, "Not Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(false); }, "Toggle Object Kinematic", Color.green, Color.red, null, false, true);
@@ -23,7 +23,7 @@
             ConstraintsSubmenu.Init_ConstraintsSubmenu(main, 1, 1.5f, true);
              new QMSingleButton(main, 1, 2f, "Restore Rigidbody", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_RestoreOriginalBody(); }, "Restore Default RigidBody Config.", null, null, true);
 
-            ColliderEditor.Init_ColliderEditor(main, 2, 0, true);
+            ColliderEditor.Init_ColliderEditor(main, true);
 
             ForcesSubmenu.Init_ForceSubMenu(main, 4, 0, true);
         }

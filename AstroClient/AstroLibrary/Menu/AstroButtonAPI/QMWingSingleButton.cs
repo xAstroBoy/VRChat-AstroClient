@@ -9,6 +9,12 @@
     {
         internal TMPro.TextMeshProUGUI Text;
         internal VRC.UI.Elements.Tooltips.UiTooltip ToolTip;
+
+
+        internal string CurrentButtonText;
+        internal string CurrentButtonColor;
+
+
         public QMWingSingleButton(QMWings Parent, string btnText, System.Action btnAction, string btnToolTip, Color? TextColor = null)
         {
             string TextColorHTML = null;
@@ -40,15 +46,17 @@
             ToolTip = button.AddComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
             SetToolTip(btnToolTip);
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(350, 120);
-
+            Text = button.GetComponentInChildren<TMPro.TextMeshProUGUI>();
             BtnText = btnText;
-            setButtonText(btnText);
+            SetButtonText(btnText);
             setAction(btnAction);
         }
 
-        internal void setButtonText(string buttonText)
+        internal void SetButtonText(string buttonText)
         {
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
+            CurrentButtonText = buttonText;
+            string NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
+            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = CurrentButtonText;
         }
         internal void setButtonToolTip(string ButtonToolTip)
         {
@@ -66,19 +74,20 @@
         }
 
 
-        internal void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
-        {
-            button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
-        }
+        //internal void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
+        //{
+        //    button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
+        //}
 
         internal void setTextColor(Color buttonTextColor)
         {
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = buttonTextColor;
+            setTextColorHTML("#" + ColorUtility.ToHtmlStringRGB(buttonTextColor));
         }
 
         internal void setTextColorHTML(string buttonTextColor)
         {
-            string NewText = $"<color={buttonTextColor}>{button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text}</color>";
+            CurrentButtonColor = buttonTextColor;
+            string NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = NewText;
         }
     }

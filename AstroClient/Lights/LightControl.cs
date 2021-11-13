@@ -375,12 +375,12 @@
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var temp = new QMNestedButton(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
+            var temp = new QMNestedGridMenu(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
 
-            ToggleFullbright = new QMSingleToggleButton(temp, 1, 0, "Player Headlight: ON", () => { IsHeadLightActive = true; }, "Player Headlight: OFF", () => { IsHeadLightActive = false; }, "Toggle Player Headlight", Color.green, Color.red, null, false, true);
+            ToggleFullbright = new QMToggleButton(temp, 0, 0, "Player Headlight", () => { IsHeadLightActive = true; }, "Player Headlight", () => { IsHeadLightActive = false; }, "Spawns a Light in Player Camera (makes the entire map visible)", Color.green, Color.red);
+            RenderFullbrightToggle = new QMToggleButton(temp, 0, 0, "Render Fullbright", () => { FullbrightByRender = true; }, "Render Fullbright", () => { FullbrightByRender = false; }, "Attempts to edit RenderSettings to show the entire map (WIP)", Color.green, Color.red);
+            FogSwitch = new QMToggleButton(temp, 0, 0, "Fog", () => { ToggleFog(true); }, "Fog", () => { ToggleFog(false);}, "Tweaks Level RenderSettings Fog", Color.green, Color.red);
 
-            RenderFullbrightToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Render Fullbright: ON", () => { FullbrightByRender = true; }, "Render Fullbright: OFF", () => { FullbrightByRender = false; }, "Tweaks Level RenderSettings To Make the whole place Visible.", Color.green, Color.red, null, false, true);
-            FogSwitch = new QMSingleToggleButton(temp, 1, 1f, "FOG: ON", () => { ToggleFog(true); }, "FOG: OFF", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog.", Color.green, Color.red, null, false, true);
 
             _ = new QMSingleButton(temp, 2, 0, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight", null, null, true);
             _ = new QMSingleButton(temp, 2, 0.5f, "Destroy Spawned Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, "Kill Spawned Flashlights", null, null, true);
@@ -429,11 +429,11 @@
         private static float Originalsunintensity { get; set; }
         private static bool HasLightmapsStored { get; set; } = false;
         private static bool AreLightMapsEnabled { get; set; } = true;
-        internal static QMSingleToggleButton FogSwitch { get; set; }
+        internal static QMToggleButton FogSwitch { get; set; }
 
         private static Light FullBrightLight { get; set; }
-        private static QMSingleToggleButton ToggleFullbright { get; set; }
-        private static QMSingleToggleButton RenderFullbrightToggle { get; set; }
-        private static QMSingleToggleButton ToggleLightmaps { get; set; }
+        private static QMToggleButton ToggleFullbright { get; set; }
+        private static QMToggleButton RenderFullbrightToggle { get; set; }
+        private static QMToggleButton ToggleLightmaps { get; set; }
     }
 }

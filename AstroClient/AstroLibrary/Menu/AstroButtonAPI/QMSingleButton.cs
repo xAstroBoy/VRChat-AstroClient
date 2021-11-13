@@ -118,7 +118,25 @@
             }
         }
 
-        internal  QMSingleButton(QMTabMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
+
+        internal QMSingleButton(QMNestedGridMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
+        {
+            string TextColorHTML = null;
+            if (TextColor.HasValue)
+            {
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
+            }
+            string BackgroundHTML = null;
+            if (BackgroundColor.HasValue)
+            {
+                BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
+            }
+
+            btnQMLoc = Parent.GetMenuName();
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
+        }
+
+        internal QMSingleButton(QMTabMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
             string TextColorHTML = null;
             if (TextColor.HasValue)
@@ -209,17 +227,17 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 
-                case "QA_MainMenu":
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_MainMenu.QuickActions.transform, true);
-                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
-                    break;
+                //case "QA_MainMenu":
+                //    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_MainMenu.QuickActions.transform, true);
+                //    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
+                //    break;
 
-                case "QA_SelectedUser":
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
-                    button.EnableComponents();
-                    button.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
-                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
-                    break;
+                //case "QA_SelectedUser":
+                //    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
+                //    button.EnableComponents();
+                //    button.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                //    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
+                //    break;
 
                 default:
                     var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);

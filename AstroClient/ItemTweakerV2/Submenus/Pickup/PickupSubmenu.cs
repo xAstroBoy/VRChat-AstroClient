@@ -18,9 +18,6 @@
             Pickup_IsEditMode = new QMSingleButton(PickupEditor, 0, -0.5f, "Edit Mode : OFF", null, "Shows if Pickup properties are currently being overriden.", null, null, true);
 
             _ = new QMSingleButton(PickupEditor, 0, 0, "Reset Properties", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_RestoreOriginalProperties(); }), "Revert Pickup Properties Edits. (disabling editmode)", null, null, true);
-            Pickup_IsHeld = new QMSingleButton(PickupEditor, 0, 0.5f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
-            Pickup_CurrentObjOwner = new QMSingleButton(PickupEditor, 0, 1f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
-            Pickup_CurrentObjHolder = new QMSingleButton(PickupEditor, -1, 1f, "Current Holder : null", null, "Who is Holding the object.", null, null, false);
 
             _ = new QMSingleButton(PickupEditor, 1, 0, "Pickup Orientation", null, "Pickup Orientation", null, null, true);
             Pickup_PickupOrientation_prop_any = new QMSingleButton(PickupEditor, 1, 0.5f, "Any", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Any); }), "", null, null, true);
@@ -169,19 +166,6 @@
                     //{
                     //    PickupProximitySlider.SetValue(controller.proximity);
                     //}
-                    if (Pickup_IsHeld != null)
-                    {
-                        Pickup_IsHeld.SetButtonText(controller.Get_IsHeld_ButtonText());
-                        Pickup_IsHeld.SetTextColor(controller.Get_IsHeld_ButtonColor());
-                    }
-                    if (Pickup_CurrentObjOwner != null)
-                    {
-                        Pickup_CurrentObjOwner.SetButtonText(controller.Get_PickupOwner_ButtonText());
-                    }
-                    if (Pickup_CurrentObjHolder != null)
-                    {
-                        Pickup_CurrentObjHolder.SetButtonText(controller.Get_IsHeldBy_ButtonText());
-                    }
                     return;
                 }
                 //else
@@ -236,19 +220,7 @@
             //{
             //    PickupProximitySlider.SetValue(0);
             //}
-            if (Pickup_IsHeld != null)
-            {
-                Pickup_IsHeld.SetButtonText("Not Found");
-                Pickup_IsHeld.SetTextColor(Color.red);
-            }
-            if (Pickup_CurrentObjOwner != null)
-            {
-                Pickup_CurrentObjOwner.SetButtonText("Not Found");
-            }
-            if (Pickup_CurrentObjHolder != null)
-            {
-                Pickup_CurrentObjHolder.SetButtonText("Not Found");
-            }
+
         }
 
         internal static QMSingleButton HasPickupComponent { get; private set; }
@@ -266,9 +238,6 @@
         internal static QMToggleButton Pickup_DisallowTheft { get; private set; }
 
         internal static QMSingleButton Pickup_IsEditMode { get; private set; }
-        internal static QMSingleButton Pickup_IsHeld { get; private set; }
-        internal static QMSingleButton Pickup_CurrentObjOwner { get; private set; }
-        internal static QMSingleButton Pickup_CurrentObjHolder { get; private set; }
         //internal static QMSlider PickupProximitySlider { get; private set; }
     }
 }

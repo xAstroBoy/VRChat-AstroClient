@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using CheetoLibrary;
     using UnityEngine;
@@ -53,6 +54,7 @@
 
         internal static void LoadSprite(this GameObject Parent, string LoadSprite, string name)
         {
+            if (!LoadSprite.IsNotNullOrEmptyOrWhiteSpace()) return;
             foreach (var image in Parent.GetComponentsInChildren<Image>(true))
             {
                 if (image.name == name)// allows background image change
@@ -66,6 +68,7 @@
 
         internal static void LoadSprite(this GameObject Parent, byte[] LoadSprite, string name)
         {
+            if (LoadSprite == null) return;
             foreach (var image in Parent.GetComponentsInChildren<Image>(true))
             {
                 if (image.name == name)// allows background image change

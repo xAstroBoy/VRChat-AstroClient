@@ -46,7 +46,6 @@
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
-
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 

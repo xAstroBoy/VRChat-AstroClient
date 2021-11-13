@@ -22,6 +22,7 @@
             initButton(Index, LeftWing, MenuName, btnToolTip, btnBackgroundColor, LoadSprite);
         }
 
+
         internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             if (LeftWing)
@@ -125,6 +126,20 @@
         internal UIPage GetPage()
         {
             return CurrentPage;
+        }
+        internal void LoadIcon(byte[] icon)
+        {
+            if (icon != null)
+                button.LoadSprite(icon, "Icon");
+
+        }
+
+
+        internal void LoadIcon(string icon)
+        {
+            if (icon != "")
+                button.LoadSprite(icon, "Icon");
+
         }
 
         internal void ClickBackButton()

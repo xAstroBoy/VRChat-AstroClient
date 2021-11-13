@@ -107,12 +107,12 @@
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMScrollMenu.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMHalfScroll.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\Extensions.cs" />
-    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\MenuAPI_New.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonAPI.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMButtonBase.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMNestedGridMenu.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QmQuickActions.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSlider.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMWingToggleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMWingSingleButton.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMSingleButton.cs" />
@@ -305,6 +305,7 @@
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnInflaterBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRocketBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRigidBodyControllerArgs.cs" />
+    <Compile Include="ItemTweakerV2\TweakerWings.cs" />
     <Compile Include="Kaned\Pathfinder.cs" />
     <Compile Include="Kaned\Pathfinding.cs" />
     <Compile Include="Moderation\ModerationExtensions.cs" />

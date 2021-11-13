@@ -26,6 +26,7 @@
         private static Transform _TabButtonReference = null;
         private static Transform _QuickMenuTransform = null;
         private static Transform HeaderDashboardReference = null;
+        private static Transform _SliderReference;
 
         private static Transform _SingleButtonTemplate = null;
 
@@ -47,7 +48,6 @@
         private static MenuStateController MenuStateController_Wing_Right = null;
         private static MenuStateController MenuStateController_Wing_Left = null;
         private static MenuStateController _QuickMenuControllert = null;
-
         private static SelectedUserMenuQM _SelectedQMGO = null;
         //New shit
 
@@ -430,6 +430,29 @@
             }
 
             return WingButtonReferenceRight;
+        }
+
+        public static Transform SliderTemplate
+        {
+            get
+            {
+                if (_SliderReference == null)
+                {
+                    // 
+                    var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
+                    foreach (var button in Buttons)
+                    {
+                        if (button.name == "VolumeSlider_Master")
+                        {
+                            ModConsole.DebugLog("Found Slider Template!", Color.Chartreuse);
+                            return _SliderReference = button;
+                        }
+                    }
+
+                }
+
+                return _SliderReference;
+            }
         }
 
         internal static GameObject WingButtonTemplate_Left()

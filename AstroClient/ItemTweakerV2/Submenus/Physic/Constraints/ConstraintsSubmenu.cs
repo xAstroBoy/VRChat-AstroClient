@@ -9,7 +9,7 @@
 
     internal class ConstraintsSubmenu : Tweaker_Events
     {
-        internal static void Init_ConstraintsSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void Init_ConstraintsSubmenu(QMNestedGridMenu menu, float x, float y, bool btnHalf)
         {
             var ConstraintMenu = new QMNestedButton(menu, x, y, "Constraints", "Item Constraint Editor Menu!", null, null, null, null, btnHalf);
             Constraint_X_Toggle = new QMToggleButton(ConstraintMenu, 1, 0, "Block X Movement", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Add_Constraint(RigidbodyConstraints.FreezePositionX); }), "Unlock X Movement", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Remove_Constraint(RigidbodyConstraints.FreezePositionX); }), "Control Current Object Constraints!", null, null, null, false);

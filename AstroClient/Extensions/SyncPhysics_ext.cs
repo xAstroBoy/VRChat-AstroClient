@@ -8,7 +8,7 @@
         {
             if (instance != null)
             {
-                instance.Method_Public_Void_PDM_0();
+                instance.Method_Public_Void_PDM_1();
             }
         }
 
@@ -16,7 +16,7 @@
         {
             if (instance != null)
             {
-                instance.Method_Public_Void_PDM_1();
+                instance.Method_Public_Void_PDM_0();
             }
         }
 

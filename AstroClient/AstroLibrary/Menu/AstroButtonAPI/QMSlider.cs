@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
 
-namespace Apollo.Utils.API.QM
+namespace AstroButtonAPI
 {
     public class QMSlider
     {
@@ -18,8 +18,8 @@ namespace Apollo.Utils.API.QM
         
         public QMSlider(Transform parent, string text, Action<float> onSliderAdjust, string tooltip, float maxValue = 100f, float defaultValue = 50f, bool floor = false, bool percent = true)
         {
-            Slider slider = this;
-            gameObject = Object.Instantiate(APIStuff.GetSliderTemplate(), parent);
+            QMSlider slider = this;
+            gameObject = Object.Instantiate(QuickMenuTools.SliderTemplate.gameObject, parent);
             sliderText = gameObject.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>(true);
             sliderText.text = text;
             sliderPercentText = gameObject.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>(true);
@@ -39,13 +39,6 @@ namespace Apollo.Utils.API.QM
             _percent = percent;
         }
         
-        public QMSlider(MenuPage pge, string text, Action<float> onSliderAdjust, string tooltip, float maxValue = 100f, float defaultValue = 50f, bool floor = false, bool percent = true) : this(pge.menuContents, text, onSliderAdjust, tooltip, maxValue, defaultValue, floor, percent)
-        {
-        }
-        
-        public QMSlider(ButtonGroup grp, string text, Action<float> onSliderAdjust, string tooltip, float maxValue = 100f, float defaultValue = 50f, bool floor = false, bool percent = true) : this(grp.gameObject.transform, text, onSliderAdjust, tooltip, maxValue, defaultValue, floor, percent)
-        {
-        }
         
         public void SetAction(Action<float> newAction)
         {

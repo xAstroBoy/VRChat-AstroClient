@@ -19,7 +19,7 @@
             _ = new QMSingleButton(main, 1, 2, "Copy Object Path.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPath(); }, "Copies Object Current Path in clipboard.", null, Color.yellow, true);
 
             float Position = 3f;
-            float stretch = 1250f;
+            float stretch = 125f;
             CurrentObjectCoordsBtn = new QMSingleButton(main, Position, 0, "", null, "Shows Object Position", null, null, true);
             CurrentObjectCoordsBtn.ToggleBtnImage(false);
             CurrentObjectCoordsBtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectCoordsBtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + stretch, CurrentObjectCoordsBtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);

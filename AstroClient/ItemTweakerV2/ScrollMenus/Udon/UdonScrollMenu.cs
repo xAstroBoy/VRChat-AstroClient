@@ -61,7 +61,7 @@
                                 }
                                 if (CurrentUnboxBehaviourToConsole != null)
                                 {
-                                    CurrentUnboxBehaviourToConsole.setButtonText($"Unbox {action.gameObject.name}");
+                                    CurrentUnboxBehaviourToConsole.SetButtonText($"Unbox {action.gameObject.name}");
                                     CurrentUnboxBehaviourToConsole.setButtonToolTip($"Attempts to unbox  {action.gameObject.name} in console");
                                     CurrentUnboxBehaviourToConsole.setAction(() => { action.UnboxUdonEventToConsole(); });
                                     CurrentUnboxBehaviourToConsole.SetActive(true);
@@ -92,7 +92,7 @@
 
                                 if (CurrentUnboxBehaviourToConsole != null)
                                 {
-                                    CurrentUnboxBehaviourToConsole.setButtonText($"Not Available");
+                                    CurrentUnboxBehaviourToConsole.SetButtonText($"Not Available");
                                     CurrentUnboxBehaviourToConsole.setButtonToolTip($"Not Available");
                                     CurrentUnboxBehaviourToConsole.setAction(null);
                                     CurrentUnboxBehaviourToConsole.SetActive(false);

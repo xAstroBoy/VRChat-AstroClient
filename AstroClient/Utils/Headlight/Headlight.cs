@@ -54,8 +54,6 @@
             }
         }
 
-        internal static QMSingleToggleButton DesktopHeadlightBtn;
-        internal static QMSingleToggleButton VRHeadlightBtn;
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -67,129 +65,144 @@
             VRLight = null;
         }
 
+
+        private static QMWings WingsMenu;
+        internal static QMWingToggleButton DesktopHeadlightBtn;
+        internal static QMWingToggleButton VRHeadlightBtn;
+
+        private static void InitWings()
+        {
+            WingsMenu = new QMWings(1012, true, "Headlight", "Headlight Options", null, null);
+            VRHeadlightBtn = new QMWingToggleButton(WingsMenu, "VR headlight", () => { VRHeadLightBool = true; }, () => { VRHeadLightBool = false; }, "Toggle VR Headlight");
+            DesktopHeadlightBtn = new QMWingToggleButton(WingsMenu, "Desktop Headlight", () => { DesktopHeadlightBool = true; }, () => { DesktopHeadlightBool = false;}, "Toggle Desktop Headlight");
+            WingsMenu.SetActive(false);
+        }
+
+
         internal static void HeadlightButtonInit(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             QMNestedButton HeadlightConfig = new QMNestedButton(menu, x, y, "Custom Headlight", "Headlight Settings", null, null, null, null, btnHalf);
-
-            QMNestedButton HeadlightColor = new QMNestedButton(HeadlightConfig, 4, 0, "Headlight Color", "Configure the Color For the Headlight", null, null, null);
-            DesktopHeadlightBtn = new QMSingleToggleButton(HeadlightConfig, 0, 0, "Desktop Headlight On", () =>
-           {
-               DesktopHeadlightBool = true;
-           }, "Desktop Headlight Off", () => { DesktopHeadlightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);
-
-            VRHeadlightBtn = new QMSingleToggleButton(HeadlightConfig, 0, 0.5f, "VR Headlight On", () =>
+            HeadlightConfig.AddOpenAction(() =>
             {
-                VRHeadLightBool = true;
-            }, "VR Headlight Off", () => { VRHeadLightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);
+                WingsMenu.SetActive(true);
+                WingsMenu.ShowLeftWingPage();
+            });
+            HeadlightConfig.SetBackButtonAction(menu, () =>
+            {
+                WingsMenu.SetActive(false);
+                WingsMenu.ClickBackButton();
+            });
+            QMNestedButton HeadlightColor = new QMNestedButton(HeadlightConfig, 4, 0, "Headlight Color", "Configure the Color For the Headlight", null, null, null);
 
             _ = new QMSingleButton(HeadlightConfig, 1, 0, "+ \n Intensity \n +", () =>
-              {
-                  LightIntensity += 1f;
-                  UpdateLights();
-              }, "Increase Intensity of the Headlight");
+            {
+                LightIntensity += 1f;
+                UpdateLights();
+            }, "Increase Intensity of the Headlight");
 
             _ = new QMSingleButton(HeadlightConfig, 1, 1, "- \n Intensity \n -", () =>
-              {
-                  LightIntensity -= 1f;
-                  UpdateLights();
-              }, "Decrease Intensity of the Headlight");
+            {
+                LightIntensity -= 1f;
+                UpdateLights();
+            }, "Decrease Intensity of the Headlight");
 
             _ = new QMSingleButton(HeadlightConfig, 1, 2, "Reset", () =>
-              {
-                  LightIntensity = 1f;
-                  UpdateLights();
-              }, "Reset Intensity of the Headlight");
+            {
+                LightIntensity = 1f;
+                UpdateLights();
+            }, "Reset Intensity of the Headlight");
 
             _ = new QMSingleButton(HeadlightConfig, 2, 0, "+ \n Angle \n +", () =>
-              {
-                  LightAngle += 10f;
-                  UpdateLights();
-              }, "Increase Angle of the Headlight");
+            {
+                LightAngle += 10f;
+                UpdateLights();
+            }, "Increase Angle of the Headlight");
 
             _ = new QMSingleButton(HeadlightConfig, 2, 1, "- \n Angle \n -", () =>
-              {
-                  LightAngle -= 10f;
-                  UpdateLights();
-              }, "Decrease Angle of the Headlight");
+            {
+                LightAngle -= 10f;
+                UpdateLights();
+            }, "Decrease Angle of the Headlight");
 
             _ = new QMSingleButton(HeadlightConfig, 2, 2, "Reset", () =>
-              {
-                  LightAngle = 80f;
-                  UpdateLights();
-              }, "Reset Angle of the Headlight");
+            {
+                LightAngle = 80f;
+                UpdateLights();
+            }, "Reset Angle of the Headlight");
 
             _ = new QMSingleButton(HeadlightConfig, 3, 0, "+ \n Range \n +", () =>
-              {
-                  LightRange += 10f;
-                  UpdateLights();
-              }, "Increase Range of the Headlight");
+            {
+                LightRange += 10f;
+                UpdateLights();
+            }, "Increase Range of the Headlight");
 
             _ = new QMSingleButton(HeadlightConfig, 3, 1, "- \n Range \n -", () =>
-              {
-                  LightRange -= 10f;
-                  UpdateLights();
-              }, "Decrease Range of the Headlight");
+            {
+                LightRange -= 10f;
+                UpdateLights();
+            }, "Decrease Range of the Headlight");
 
             _ = new QMSingleButton(HeadlightConfig, 3, 2, "Reset", () =>
-              {
-                  LightRange = 10f;
-                  UpdateLights();
-              }, "Reset Range of the Headlight");
+            {
+                LightRange = 10f;
+                UpdateLights();
+            }, "Reset Range of the Headlight");
 
             _ = new QMSingleButton(HeadlightColor, 1, 0, "White", () =>
-              {
-                  LightColor = Color.white;
-                  UpdateLights();
-              }, "Changes Headlight Color", Color.white, Color.white);
+            {
+                LightColor = Color.white;
+                UpdateLights();
+            }, "Changes Headlight Color", Color.white, Color.white);
 
             _ = new QMSingleButton(HeadlightColor, 2, 0, "Red", () =>
-              {
-                  LightColor = Color.red;
-                  UpdateLights();
-              }, "Changes Headlight Color", Color.red, Color.red);
+            {
+                LightColor = Color.red;
+                UpdateLights();
+            }, "Changes Headlight Color", Color.red, Color.red);
 
             _ = new QMSingleButton(HeadlightColor, 3, 0, "Green", () =>
-              {
-                  LightColor = Color.green;
-                  UpdateLights();
-              }, "Changes Headlight Color", Color.green, Color.green);
+            {
+                LightColor = Color.green;
+                UpdateLights();
+            }, "Changes Headlight Color", Color.green, Color.green);
 
             _ = new QMSingleButton(HeadlightColor, 4, 0, "Blue", () =>
-              {
-                  LightColor = Color.blue;
-                  UpdateLights();
-              }, "Changes Headlight Color", Color.blue, Color.blue);
+            {
+                LightColor = Color.blue;
+                UpdateLights();
+            }, "Changes Headlight Color", Color.blue, Color.blue);
 
             _ = new QMSingleButton(HeadlightColor, 1, 1, "Magenta", () =>
-              {
-                  LightColor = Color.magenta;
-                  UpdateLights();
-              }, "Changes Headlight Color", Color.magenta, Color.magenta);
+            {
+                LightColor = Color.magenta;
+                UpdateLights();
+            }, "Changes Headlight Color", Color.magenta, Color.magenta);
 
             _ = new QMSingleButton(HeadlightColor, 2, 1, "Yellow", () =>
-              {
-                  LightColor = Color.yellow;
-                  UpdateLights();
-              }, "Changes Headlight Color", Color.yellow, Color.yellow);
+            {
+                LightColor = Color.yellow;
+                UpdateLights();
+            }, "Changes Headlight Color", Color.yellow, Color.yellow);
 
             _ = new QMSingleButton(HeadlightColor, 3, 1, "Cyan", () =>
-              {
-                  LightColor = Color.cyan;
-                  UpdateLights();
-              }, "Changes Headlight Color", Color.cyan, Color.cyan);
+            {
+                LightColor = Color.cyan;
+                UpdateLights();
+            }, "Changes Headlight Color", Color.cyan, Color.cyan);
 
             _ = new QMSingleButton(HeadlightColor, 4, 1, "Hex From Clipboard", () =>
-              {
-                  try
-                  {
-                      LightColor = ColorUtils.HexToColor(Clipboard.GetText());
-                      UpdateLights();
-                  }
-                  catch (Exception)
-                  {
-                      ModConsole.Error("Error: [Invalid Hex Code]");
-                  }
-              }, "Changes Headlight Color");
+            {
+                try
+                {
+                    LightColor = ColorUtils.HexToColor(Clipboard.GetText());
+                    UpdateLights();
+                }
+                catch (Exception)
+                {
+                    ModConsole.Error("Error: [Invalid Hex Code]");
+                }
+            }, "Changes Headlight Color");
+            InitWings();
         }
 
         internal static Light DesktopLight;
