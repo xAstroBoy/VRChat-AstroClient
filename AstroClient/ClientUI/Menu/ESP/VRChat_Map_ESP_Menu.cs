@@ -1,6 +1,5 @@
 ﻿namespace AstroClient.ClientUI.QuickMenuButtons.ESP
 {
-    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -8,7 +7,7 @@
     using AstroMonos.Components.ESP.Trigger;
     using AstroMonos.Components.ESP.UdonBehaviour;
     using AstroMonos.Components.ESP.VRCInteractable;
-    using UnityEngine;
+    using System;
 
     internal class VRChat_Map_ESP_Menu : GameEvents
     {
@@ -17,7 +16,7 @@
             var main = new QMNestedGridMenu(menu, "ESP Menu", "ESP Options");
 
             PickupESPToggleBtn = new QMToggleButton(main, 1, 0f, "Pickup ESP", new Action(() => { Toggle_Pickup_ESP = true; }), new Action(() => { Toggle_Pickup_ESP = false; }), "Toggle Pickup ESP");
-            VRCInteractableESPToggleBtn = new QMToggleButton(main, 1, 0.5f, "VRC Interactable ESP", new Action(() => { Toggle_VRCInteractable_ESP = true; }), "VRC Interactable ESP OFF", new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP");
+            VRCInteractableESPToggleBtn = new QMToggleButton(main, 1, 0.5f, "VRC Interactable ESP", new Action(() => { Toggle_VRCInteractable_ESP = true; }), new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP");
             TriggerESPToggleBtn = new QMToggleButton(main, 1, 1f, "Trigger ESP", new Action(() => { Toggle_Trigger_ESP = true; }), new Action(() => { Toggle_Trigger_ESP = false; }), "Toggle Trigger ESP");
             UdonBehaviourESPToggleBtn = new QMToggleButton(main, 1, 1.5f, "Udon Behaviour ESP", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP");
         }

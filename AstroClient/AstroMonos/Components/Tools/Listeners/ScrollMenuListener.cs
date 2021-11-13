@@ -1,9 +1,9 @@
 namespace AstroClient.AstroMonos.Components.Tools.Listeners
 {
-    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using CustomMono;
+    using System;
 
     [RegisterComponent]
     public class ScrollMenuListener : GameEventsBehaviour
@@ -29,7 +29,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
             {
                 SingleButton.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
             }
-            else if(SingleButton == null && NestedGridButton == null)
+            else if (SingleButton == null && NestedGridButton == null)
             {
                 DestroyImmediate(this);
             }

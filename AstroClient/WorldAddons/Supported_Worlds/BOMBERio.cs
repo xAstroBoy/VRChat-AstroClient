@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
     using AstroMonos.AstroUdons;
+    using System.Collections;
+    using System.Collections.Generic;
     using Udon;
     using UnityEngine;
     using Variables;
@@ -19,7 +19,7 @@
     {
         internal static void InitButtons(QMGridTab main)
         {
-            BOMBERioCheatsPage = new QMNestedGridMenu(main,"BOMBERio", "BOMBERio Cheats");
+            BOMBERioCheatsPage = new QMNestedGridMenu(main, "BOMBERio", "BOMBERio Cheats");
 
             var GunModifier = new QMNestedGridMenu(BOMBERioCheatsPage, "Gun Modifier", "Modify Projectiles");
 
@@ -31,7 +31,6 @@
             Always_ShootBomb_5_Toggle = new QMToggleButton(GunModifier, 1, 2.5f, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = true; }, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = false; }, "Always Shoot A Specified Projectile");
 
             var Harvester = new QMNestedGridMenu(BOMBERioCheatsPage, "Crystal Harvester", "Harvest Crystals To boost circle area");
-
 
             _ = new QMSingleButton(Harvester, 2, 0f, "Harvest 10 Crystals", () => { HarvestQuads(10); }, "Harvest some Quads!", null, null, true);
             _ = new QMSingleButton(Harvester, 2, 0.5f, "Harvest 20 Crystals", () => { HarvestQuads(20); }, "Harvest some Quads!", null, null, true);
@@ -185,7 +184,6 @@
             {
                 HasShot = false;
             }
-
         }
 
         private static bool HasShot = false;
@@ -294,7 +292,7 @@
                     if (Item != null)
                     {
                         control = Item.GetOrAddComponent<VRC_AstroPickup>();
-                        if(control != null)
+                        if (control != null)
                         {
                             control.OnPickupUseUp = OnPickupInteract;
                             control.InteractionText = "Hello Motherfuckers (Modified By AstroClient Developers)";

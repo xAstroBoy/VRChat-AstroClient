@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.WorldAddons
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using Variables;
     using VRC.SDKBase;
@@ -46,7 +46,6 @@
                     JustHPartyMenu.SetIntractable(false);
                     JustHPartyMenu.SetTextColor(Color.red);
                 }
-
             }
         }
 

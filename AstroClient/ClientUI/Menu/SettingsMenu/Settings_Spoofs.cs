@@ -2,11 +2,9 @@
 {
     #region Imports
 
-    using System.Reflection;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using CheetoLibrary;
-    using Variables;
 
     #endregion Imports
 
@@ -15,7 +13,6 @@
     /// </summary>
     internal class Settings_Spoofs : GameEvents
     {
-
         internal static void InitButtons(QMNestedGridMenu tab)
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Spoofs", "Spoof Menu");
@@ -71,7 +68,6 @@
                     }
                 });
             }, "Input a Ping value");
-
         }
     }
 }

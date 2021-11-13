@@ -1,8 +1,6 @@
 ﻿namespace AstroButtonAPI
 {
-    using System;
     using System.Threading.Tasks;
-    using TMPro;
     using UnityEngine;
     using UnityEngine.Networking;
     using UnityEngine.UI;
@@ -43,15 +41,13 @@
             button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
-
         internal void SetLocation(float buttonXLoc, float buttonYLoc)
         {
             // This zeroifies the position.
             button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplatePos;
 
-            button.GetComponent<RectTransform>().anchoredPosition +=  Vector2.right * (420 / 2 * buttonXLoc);
-            button.GetComponent<RectTransform>().anchoredPosition +=  Vector2.down * (420 / 2 * buttonYLoc);
-
+            button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 / 2 * buttonXLoc);
+            button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 / 2 * buttonYLoc);
 
             //button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 / 2 * (buttonXLoc + initShift[0]));
             //button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 / 2 * (buttonYLoc + initShift[1]));
@@ -70,13 +66,11 @@
             //button.GetComponent<Button>().name = btnType + btnTag;
         }
 
-
         internal void SetToolTip(string buttonToolTip)
         {
             button.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true).field_Public_String_0 = buttonToolTip;
             //button.GetComponentInChildren<UiTooltip>().field_Public_String_1 = buttonToolTip;
         }
-
 
         internal void DestroyMe()
         {

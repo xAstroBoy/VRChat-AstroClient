@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.ClientUI.QuickMenuButtons
 {
-    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using GameObjectDebug;
+    using System;
 
     internal class WorldPickupsBtn
     {

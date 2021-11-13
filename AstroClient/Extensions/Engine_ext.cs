@@ -2,13 +2,13 @@
 {
     #region Imports
 
-    using System.Collections.Generic;
-    using System.Windows.Forms;
     using AstroClient;
     using AstroClient.AstroMonos;
     using AstroClient.Cloner;
     using Console;
     using Finder;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
     using UnityEngine;
     using Utility;
     using VRC.SDK3.Components;
@@ -125,7 +125,6 @@
                 }
             }
         }
-
 
         internal static void CopyRotation(this GameObject obj)
         {
@@ -374,7 +373,6 @@
                    item.GetComponent<MirrorReflection>() != null ||
                    item.GetComponent<VRCSDK2.VRC_MirrorReflection>() != null ||
                    item.GetComponent<VRCMirrorReflection>() != null;
-
         }
 
         internal static bool isMirror(this Transform item)

@@ -1,10 +1,10 @@
 ﻿namespace AstroLibrary.Finder
 {
+    using Console;
+    using Extensions;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Console;
-    using Extensions;
     using UnityEngine;
     using UnityEngine.SceneManagement;
 
@@ -65,7 +65,6 @@
                     }
                 }
                 return results;
-
             }
             catch (Exception e)
             {
@@ -91,7 +90,6 @@
             ModConsole.DebugWarning($"[WARNING (FindRootSceneObject) ]  Root Gameobject name [ {name} ]  is Invalid, No Object Found!");
             return null;
         }
-
 
         public static Transform FindObject(this Transform transform, string path)
         {

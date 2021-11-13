@@ -2,9 +2,6 @@
 {
     #region Imports
 
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -14,6 +11,9 @@
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.ESP.Pickup;
     using ClientUI.QuickMenuButtons.ESP;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Udon.UdonEditor;
     using UdonExploits;
     using UnityEngine;

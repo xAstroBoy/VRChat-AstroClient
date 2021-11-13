@@ -1,6 +1,5 @@
 ﻿namespace AstroButtonAPI
 {
-    using System;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
@@ -11,6 +10,7 @@
         {
             initButton(Index, btnAction, btnToolTip, btnBackgroundColor, LoadSprite);
         }
+
         internal QMTabButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, byte[] LoadSprite = null)
         {
             initButton(Index, btnAction, btnToolTip, btnBackgroundColor, LoadSprite);
@@ -30,6 +30,7 @@
 
             SetActive(true);
         }
+
         internal void initButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnType = "_QMTabButton_";

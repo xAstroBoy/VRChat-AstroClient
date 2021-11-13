@@ -2,21 +2,11 @@
 {
     #region Imports
 
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Reflection;
-    using System.Windows.Forms;
     using AstroButtonAPI;
     using AstroClientCore.Events;
-    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using AstroMonos;
-    using AstroMonos.Components.Tools;
     using ButtonShortcut;
     using CheetoLibrary;
     using CheetosConsole;
@@ -27,23 +17,19 @@
     using ItemTweakerV2;
     using ItemTweakerV2.Selector;
     using MelonLoader;
-    using Skyboxes;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Reflection;
     using UnhollowerBaseLib;
     using UnityEngine;
     using Variables;
-    using VRC;
-    using VRC.Core;
-    using VRC.UI;
-    using VRC.UI.Elements;
     using WorldLights;
     using Worlds;
     using Application = UnityEngine.Application;
-    using AvatarUtils = AvatarMods.AvatarUtils;
-    using Button = UnityEngine.UI.Button;
     using Color = System.Drawing.Color;
     using Console = CheetosConsole.Console;
-    using Extensions = AstroButtonAPI.Extensions;
-    using QuickMenu = QuickMenu;
 
     #endregion Imports
 
@@ -53,11 +39,9 @@
 
         internal static event EventHandler Event_OnApplicationLateStart;
 
-
         internal static event EventHandler Event_OnUpdate;
 
         internal static event EventHandler Event_LateUpdate;
-
 
         internal static event EventHandler Event_VRChat_OnUiManagerInit;
 
@@ -127,15 +111,15 @@
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
                 DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
                 DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
-
             }
         }
 
         public override void OnUpdate()
         {
-            if(KeyManager.IsAuthed)
-            Event_OnUpdate?.SafetyRaise();
+            if (KeyManager.IsAuthed)
+                Event_OnUpdate?.SafetyRaise();
         }
+
         public override void OnLateUpdate()
         {
             if (KeyManager.IsAuthed)
@@ -144,7 +128,7 @@
 
         private IEnumerator WaitForActionMenuInit()
         {
-            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
+            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early
                 yield return null;
         }
 
@@ -247,9 +231,6 @@
             }
         }
 
-
-
-
         protected void DoAfterUserInteractMenuInit(Action code)
         {
             if (!KeyManager.IsAuthed) return;
@@ -269,6 +250,7 @@
 
             code();
         }
+
         private IEnumerator OnUserInteractMenuInitCoro(Action code)
         {
             while (QuickMenuTools.GetSelectedUserQMInstance() == null)
@@ -355,14 +337,13 @@
             try
             {
                 InitSetupUI();
-
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
             }
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
-                        
+
             DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
             stopwatch.Stop();
             ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
@@ -384,7 +365,6 @@
             ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
-
         private void Start_VRChat_OnUserInteractMenuInit()
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -401,20 +381,16 @@
             ModConsole.DebugLog($"UserInteractMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
-
-
         private void Start_VRChat_OnUiManagerInit()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-
 
             Event_VRChat_OnUiManagerInit?.SafetyRaise();
 
             stopwatch.Stop();
             ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
         }
-
 
         private void InitSetupUI()
         {
@@ -430,8 +406,6 @@
             {
                 ModConsole.ErrorExc(e);
             }
-
-
         }
 
         internal static void InitMainsButtons()
@@ -459,7 +433,6 @@
 
             SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
 
-
             ToggleDebugInfo = new QMToggleButton(AstroClient, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", null, null, null, Bools.AntiPortal);
             // Top Right Buttons
             ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
@@ -483,8 +456,6 @@
             //}, "Advanced GameObject Toggler", null, null, true);
             //ModConsole.DebugLog("28");
             //ModConsole.DebugLog("29");
-
-
         }
     }
 }

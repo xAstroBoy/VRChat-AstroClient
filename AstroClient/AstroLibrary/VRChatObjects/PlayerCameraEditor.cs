@@ -5,6 +5,7 @@
     internal class PlayerCameraEditor : GameEvents
     {
         private static GameObject _PlayerCameraObject;
+
         internal static GameObject PlayerCameraObject
         {
             get
@@ -18,8 +19,8 @@
             }
         }
 
-
         private static Camera _PlayerCamera;
+
         internal static Camera PlayerCamera
         {
             get
@@ -32,7 +33,5 @@
                 return _PlayerCamera;
             }
         }
-
-
     }
 }

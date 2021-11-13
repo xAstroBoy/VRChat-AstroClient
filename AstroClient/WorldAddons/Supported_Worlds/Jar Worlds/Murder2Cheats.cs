@@ -2,15 +2,15 @@
 {
     #region Imports
 
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
     using ClientUI.QuickMenuButtons.ESP;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using Variables;
 
@@ -208,7 +208,7 @@
             _ = new QMSingleButton(MurderItemTweaker, 3, 1, "Turn Guns into Crazy!", new Action(MurderGunsCrazy), "Make Guns in Instance go nuts!");
             _ = new QMSingleButton(MurderItemTweaker, 4, 1, "Turn Clues into Crazy!", new Action(() => { Clues.Add_Crazy_Component(false); }), "Make Clues in Instance go nuts!");
 
-            QMNestedGridMenu MurderItemSpawner = new QMNestedGridMenu(Murder2CheatPage,"Item Spawner", "Item Spawner!");
+            QMNestedGridMenu MurderItemSpawner = new QMNestedGridMenu(Murder2CheatPage, "Item Spawner", "Item Spawner!");
             _ = new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_detectiveGun.CloneObject(); }), "Detective Gun Cloner!");
             _ = new QMSingleButton(MurderItemSpawner, 2, 0, "Spawn Silenced Gun", new Action(() => { item_SilencedGun.CloneObject(); }), "Silenced Gun Cloner!");
             _ = new QMSingleButton(MurderItemSpawner, 3, 0, "Spawn Knife", new Action(() => { item_knife_0.CloneObject(); }), "Knife Cloner!");
@@ -237,7 +237,7 @@
                 _ = new QMSingleButton(MurderItemOrbiterMenu, 3, 1, "Knifes orbits around you!", new Action(() => { Knifes.OrbitSelf(); }), "Make Knifes orbit around you");
                 _ = new QMSingleButton(MurderItemOrbiterMenu, 4, 1, "Clues orbits around you!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you");
             }
-            QMNestedGridMenu MurderItemWatcherMenu = new QMNestedGridMenu(Murder2CheatPage,  "Watchers", "Murder item Watchers!");
+            QMNestedGridMenu MurderItemWatcherMenu = new QMNestedGridMenu(Murder2CheatPage, "Watchers", "Murder item Watchers!");
             _ = new QMSingleButton(MurderItemWatcherMenu, 1, 0, "Detective Gun Watchs target!", new Action(() => { DetectiveGuns.WatchTarget(); }), "Make Detective Gun Watch Target");
             _ = new QMSingleButton(MurderItemWatcherMenu, 2, 0, "Silenced Gun Watchs target!", new Action(() => { SilencedGuns.WatchTarget(); }), "Make Silenced Gun Watch Target");
             _ = new QMSingleButton(MurderItemWatcherMenu, 3, 0, "Knifes Watchs target!", new Action(() => { Knifes.WatchTarget(); }), "Make Knifes Watch Target");
@@ -248,7 +248,7 @@
             _ = new QMSingleButton(MurderItemWatcherMenu, 4, 1, "Clues Watchs you!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you");
 
             GodModeMurder2 = new QMToggleButton(Murder2CheatPage, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!");
-            Murder2ESPtoggler = new QMToggleButton(Murder2CheatPage,  "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.");
+            Murder2ESPtoggler = new QMToggleButton(Murder2CheatPage, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.");
         }
 
         // MAP GameObjects Required for control.

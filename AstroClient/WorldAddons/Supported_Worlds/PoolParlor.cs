@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-    using System;
-    using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Spoofer;
+    using System;
+    using System.Collections.Generic;
     using Udon;
     using UnityEngine;
     using Variables;
@@ -15,7 +15,6 @@
 
     internal class PoolParlor : GameEvents
     {
-
         // TODO : Rewrite this (read and cache from behaviour themself!)
         internal static void InitButtons(QMGridTab main)
         {
@@ -40,7 +39,6 @@
                 {
                     PoolParlorCheats.SetIntractable(true);
                     PoolParlorCheats.SetTextColor(Color.green);
-
                 }
 
                 ModConsole.Log($"Recognized {Name} World, Patching Skins....");
@@ -92,9 +90,7 @@
                 {
                     PoolParlorCheats.SetIntractable(false);
                     PoolParlorCheats.SetTextColor(Color.red);
-
                 }
-
             }
         }
 
@@ -202,13 +198,11 @@
             }
         }
 
-
         internal static void SetCueSkin(CueSkins skin)
         {
             SetActiveCueSkin(skin);
             SetSyncedCueSkin(skin);
         }
-
 
         private static void SetActiveCueSkin(CueSkins value)
         {
@@ -223,7 +217,6 @@
                 }
                 catch
                 {
-
                 }
             }
         }
@@ -237,7 +230,6 @@
             catch { } // Nobody cares .
             try
             {
-
                 UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
             }
             catch { } // Nobody cares .
@@ -249,7 +241,6 @@
             catch { } // Nobody cares .
             try
             {
-
                 UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
             }
             catch { } // Nobody cares .
@@ -360,8 +351,6 @@
                 PlayerSpooferUtils.SpoofAsWorldAuthor = true;
             }
         }
-
-
 
         internal static VRC_AstroPickup Cue1_Primary { get; private set; }
         internal static VRC_AstroPickup Cue1_Secondary { get; private set; }

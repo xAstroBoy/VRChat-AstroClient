@@ -1,6 +1,5 @@
 ﻿namespace AstroButtonAPI
 {
-    using AstroClient;
     using AstroLibrary.Console;
     using UnityEngine;
     using UnityEngine.UI;
@@ -24,15 +23,17 @@
         private static Transform _NestedPagesReference = null;
         private static Transform MenuDashboardReference = null;
         private static Transform _TabButtonReference = null;
-        private static Transform _TabMenuReference = null;
         private static Transform _QuickMenuTransform = null;
         private static Transform HeaderDashboardReference = null;
         private static Transform _SliderReference;
+        private static Transform _ToolTipPanel;
+        private static Transform _TabMenuReference = null;
 
         private static Transform _SingleButtonTemplate = null;
 
         //VRC
         private static Transform _CarouselBanners = null;
+
         private static VRC.UI.Elements.QuickMenu _QuickMenuInstance = null;
         internal static VRCUiManager vrcuimInstance = null; // Dead
         private static GameObject shortcutMenu = null;
@@ -51,7 +52,6 @@
         private static MenuStateController _QuickMenuControllert = null;
         private static SelectedUserMenuQM _SelectedQMGO = null;
         //New shit
-
 
         internal static SelectedUserMenuQM GetSelectedUserQMInstance()
         {
@@ -76,8 +76,6 @@
                         break;
                     }
                 }
-
-
             }
 
             return UIPageReference_Right;
@@ -96,8 +94,6 @@
                         break;
                     }
                 }
-
-
             }
 
             return UIPageReference_Left;
@@ -118,8 +114,6 @@
                         break;
                     }
                 }
-
-
             }
 
             return DebugPanelReference;
@@ -138,8 +132,6 @@
                         break;
                     }
                 }
-
-
             }
 
             return MenuStateController_Wing_Right;
@@ -158,8 +150,6 @@
                         break;
                     }
                 }
-
-
             }
 
             return MenuStateController_Wing_Left;
@@ -178,8 +168,6 @@
                         break;
                     }
                 }
-
-
             }
 
             return _Wing_Left;
@@ -198,8 +186,6 @@
                         break;
                     }
                 }
-
-
             }
 
             return _Wing_Right;
@@ -234,7 +220,6 @@
                 }
 
                 return _QuickMenuTransform;
-
             }
         }
 
@@ -258,7 +243,6 @@
             }
         }
 
-
         //internal static BoxCollider QuickMenuBackground()
         //{
         //    if (QuickMenuBackgroundReference == null)
@@ -281,8 +265,6 @@
                 return new Vector2(-110, -88);
             }
         }
-
-
 
         internal static Transform SingleButtonTemplate
         {
@@ -317,7 +299,6 @@
             }
         }
 
-
         internal static Transform Carousel_Banners()
         {
             if (_CarouselBanners == null)
@@ -331,8 +312,6 @@
                         break;
                     }
                 }
-
-                
             }
 
             return _CarouselBanners;
@@ -356,7 +335,6 @@
 
             return HeaderDashboardReference;
         }
-
 
         internal static Transform UserInterface
         {
@@ -391,7 +369,6 @@
             }
         }
 
-
         internal static Transform TabMenu
         {
             get
@@ -413,7 +390,29 @@
             }
         }
 
-        
+
+        internal static Transform ToolTipPanel
+        {
+            get
+            {
+                if (_ToolTipPanel == null)
+                {
+                    var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
+                    foreach (var button in Buttons)
+                    {
+                        if (button.name == "ToolTipPanel")
+                        {
+                            ModConsole.DebugLog("Found ToolTip Panel!", Color.Chartreuse);
+                            return _ToolTipPanel = button.transform;
+                        }
+                    }
+                }
+
+                return _ToolTipPanel;
+            }
+        }
+
+
 
         internal static GameObject WingPageButtonTemplate()
         {
@@ -428,8 +427,6 @@
                         break;
                     }
                 }
-
-                
             }
 
             return WingPageButtonReference;
@@ -461,7 +458,7 @@
             {
                 if (_SliderReference == null)
                 {
-                    // 
+                    //
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
                     foreach (var button in Buttons)
                     {
@@ -471,7 +468,6 @@
                             return _SliderReference = button;
                         }
                     }
-
                 }
 
                 return _SliderReference;
@@ -491,12 +487,11 @@
                         break;
                     }
                 }
-
-                
             }
 
             return WingPageButtonReferenceLeft;
         }
+
         internal static Transform ToggleButtonTemplate
         {
             get
@@ -517,8 +512,6 @@
                 return _ToggleButtonReference;
             }
         }
-
-
 
         internal static Transform NestedMenuTemplate
         {
@@ -541,9 +534,6 @@
             }
         }
 
-
-
-
         internal static Transform SelectedUserPage()
         {
             if (SelectedUserPageReference == null)
@@ -557,8 +547,6 @@
                         break;
                     }
                 }
-
-                
             }
 
             return SelectedUserPageReference;
@@ -577,8 +565,6 @@
                         break;
                     }
                 }
-
-                
             }
 
             return SelectedUserPageButtonsReference;
@@ -597,13 +583,10 @@
                         break;
                     }
                 }
-
-                
             }
 
             return MenuDashboardReference;
         }
-
 
         internal static Transform NestedPages
         {

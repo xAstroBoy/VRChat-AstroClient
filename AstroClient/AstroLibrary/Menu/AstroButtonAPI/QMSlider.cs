@@ -1,7 +1,6 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using Object = UnityEngine.Object;
 
 namespace AstroButtonAPI
@@ -15,7 +14,7 @@ namespace AstroButtonAPI
         private bool _floor;
         private bool _percent;
         public readonly GameObject gameObject;
-        
+
         public QMSlider(Transform parent, string text, Action<float> onSliderAdjust, string tooltip, float maxValue = 100f, float defaultValue = 50f, bool floor = false, bool percent = true)
         {
             QMSlider slider = this;
@@ -38,8 +37,7 @@ namespace AstroButtonAPI
             _floor = floor;
             _percent = percent;
         }
-        
-        
+
         public void SetAction(Action<float> newAction)
         {
             sliderSlider.onValueChanged = new UnityEngine.UI.Slider.SliderEvent();
@@ -49,29 +47,29 @@ namespace AstroButtonAPI
                 newAction(val);
             }));
         }
-        
+
         public void SetText(string newText)
         {
             sliderText.text = newText;
         }
-        
+
         public void SetTooltip(string newTooltip)
         {
             sliderTooltip.field_Public_String_0 = newTooltip;
         }
-        
+
         public void SetInteractable(bool val)
         {
             sliderSlider.interactable = val;
         }
-        
+
         public void SetActive(bool state)
         {
             sliderSlider.gameObject.SetActive(state);
             sliderTooltip.gameObject.SetActive(state);
             sliderPercentText.gameObject.SetActive(state);
         }
-        
+
         public void SetValue(float newValue, bool invoke = false)
         {
             var onValueChanged = sliderSlider.onValueChanged;

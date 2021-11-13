@@ -1,7 +1,5 @@
 ﻿namespace AstroClient.ItemTweakerV2
 {
-    using System;
-    using System.Reflection;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroMonos.Components.Tools;
@@ -11,9 +9,10 @@
     using Selector;
     using Submenus;
     using Submenus.ScrollMenus;
+    using System;
+    using System.Reflection;
     using UnityEngine;
     using Variables;
-    using VRC;
 
     internal class TweakerV2Main : Tweaker_Events
     {
@@ -44,28 +43,23 @@
             SpawnerSubmenu.Init_SpawnerSubmenu(menu, 4, 2f, true);
 
             _ = new QMSingleButton(menu, 1, 0f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TryTakeOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
-            AntiTheftInteractor = new QMSingleToggleButton(menu,1, 0.5f, "AntiTheft ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(true); }, "AntiTheft OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(false); }, "Toggles PickupController WIP antitheft", Color.green, Color.red, null, false, true);
+            AntiTheftInteractor = new QMSingleToggleButton(menu, 1, 0.5f, "AntiTheft ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(true); }, "AntiTheft OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(false); }, "Toggles PickupController WIP antitheft", Color.green, Color.red, null, false, true);
 
             ProtectionInteractor = new QMSingleToggleButton(menu, 1, 1, "Interaction block ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, "Interaction block OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object", Color.green, Color.red, null, false, true);
             ObjectActiveToggle = new QMSingleToggleButton(menu, 1, 1.5f, "Enabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(true); }, "Disabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(false); }, "Toggles SetActive", Color.green, Color.red, null, false, true);
             new QMSingleToggleButton(menu, 2, 1.5f, "Selected Item ESP : ON", () => { EspHandler.TweakerESPEnabled = true; }, "Selected Item ESP : OFF", () => { EspHandler.TweakerESPEnabled = false; }, "Toggles Selected item ESP", Color.green, Color.red, null, false, true);
 
-
             LockHoldItem = new QMSingleToggleButton(menu, 2, 2.5f, "Lock ON", () => { Tweaker_Object.LockItem = true; }, "Lock OFF", () => { Tweaker_Object.LockItem = false; }, "Lock the Held object (prevents the mod from grabbing a new holding object)", Color.green, Color.red, null, false, true);
             ObjectToEditBtn = new QMSingleButton(menu, 1, 2f, "None", new Action(() => { _ = Tweaker_Object.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
-
 
             _ = new QMSingleButton(menu, 5, -0.5f, "DANGER : Destroy item.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red, true);
             TweakerWings.InitTweakerWings();
         }
 
-
         internal override void On_New_GameObject_Selected(GameObject obj)
         {
             UpdateCapturedObject(obj);
         }
-
-
 
         internal override void OnPickupController_Selected(PickupController control)
         {
@@ -73,12 +67,11 @@
             {
                 ProtectionInteractor.SetToggleState(control.AllowOnlySelfToGrab);
             }
-            if(AntiTheftInteractor != null)
+            if (AntiTheftInteractor != null)
             {
                 AntiTheftInteractor.SetToggleState(control.AntiTheft);
             }
         }
-
 
         internal override void OnSelectedObject_Enabled()
         {
@@ -154,13 +147,10 @@
             }
         }
 
-
-
         internal static QMSingleToggleButton LockHoldItem;
         internal static QMSingleButton ObjectToEditBtn;
         internal static QMSingleToggleButton ObjectActiveToggle;
         internal static QMSingleToggleButton ProtectionInteractor;
         internal static QMSingleToggleButton AntiTheftInteractor;
-
     }
 }

@@ -2,11 +2,7 @@
 {
     #region Imports
 
-    using System.Reflection;
     using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using CheetoLibrary;
-    using Variables;
 
     #endregion Imports
 
@@ -15,7 +11,6 @@
     /// </summary>
     internal class Settings_LogsMenu : GameEvents
     {
-
         internal static void InitButtons(QMNestedGridMenu tab)
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Log Settings", "toggle Events Logs");
@@ -34,10 +29,6 @@
 
             QMToggleButton eventLogTottle = new QMToggleButton(sub, 4, 0.5f, "Event Log", () => { ConfigManager.General.LogEvents = true; }, () => { ConfigManager.General.LogEvents = false; }, "Log Events to the console");
             eventLogTottle.SetToggleState(ConfigManager.General.LogEvents, false);
-
-
-
-
         }
     }
 }

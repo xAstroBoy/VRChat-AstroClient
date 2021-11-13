@@ -1,23 +1,16 @@
 ﻿namespace AstroClient.ItemTweakerV2
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroMonos.Components.Tools;
     using CheetoLibrary;
     using Selector;
+    using System.Reflection;
     using UnityEngine;
     using VRC;
 
     internal class TweakerWings : Tweaker_Events
     {
-
-
         private static QMWingSingleButton Pickup_IsHeldStatus;
         private static QMWingSingleButton Pickup_CurrentObjectHolder;
         private static QMWingSingleButton Pickup_CurrentObjectOwner;
@@ -26,7 +19,6 @@
 
         private static QMWingToggleButton LockHoldItem;
         private static QMWingSingleButton ObjectToEditBtn;
-
 
         private static QMWings WingsMenu;
 
@@ -74,6 +66,7 @@
                 TeleportToMe.SetToolTip(obj.Generate_TeleportToMe_ButtonText());
             }
         }
+
         internal override void OnTargetSet(Player player)
         {
             if (TeleportToTarget != null)
@@ -82,7 +75,5 @@
                 TeleportToTarget.SetToolTip(ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, player));
             }
         }
-
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using System.Collections.Generic;
     using AstroClient.AstroMonos.Components.Tools;
+    using System.Collections.Generic;
     using UnityEngine;
     using Utility;
     using VRC.SDKBase;
@@ -28,7 +28,6 @@
                 instance.AntiTheft = AntiTheft;
             }
         }
-
 
         internal static void Pickup_Set_proximity(this PickupController instance, float proximity)
         {
@@ -136,7 +135,6 @@
             return false;
         }
 
-
         internal static VRCPlayerApi Pickup_Get_HeldByUser(this PickupController instance)
         {
             if (instance != null)
@@ -223,7 +221,6 @@
                 }
             }
         }
-
 
         internal static void Pickup_Set_proximity(this List<GameObject> items, float proximity)
         {
@@ -349,7 +346,6 @@
                 control.AllowOnlySelfToGrab = AllowOnlySelfToGrab;
             }
         }
-
 
         internal static void Pickup_Set_ThrowVelocityBoostScale(this PickupController instance, float ThrowVelocityBoostScale)
         {

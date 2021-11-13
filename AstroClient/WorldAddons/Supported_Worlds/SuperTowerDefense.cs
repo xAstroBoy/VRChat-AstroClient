@@ -1,7 +1,5 @@
 ﻿namespace AstroClient
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -11,6 +9,8 @@
     using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using CheetoLibrary;
     using MelonLoader;
+    using System.Collections;
+    using System.Collections.Generic;
     using UnityEngine;
     using Variables;
     using static Variables.CustomLists;
@@ -25,7 +25,6 @@
                 {
                     SuperTowerDefensecheatPage.SetIntractable(true);
                     SuperTowerDefensecheatPage.SetTextColor(Color.green);
-
                 }
 
                 ModConsole.Log($"Recognized {Name}, Cheats available.");
@@ -108,10 +107,7 @@
                 {
                     SuperTowerDefensecheatPage.SetIntractable(false);
                     SuperTowerDefensecheatPage.SetTextColor(Color.red);
-
                 }
-
-                
             }
         }
 
@@ -155,19 +151,16 @@
 
             _ = new QMSingleButton(TowerMods, 3, 0f, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!", null, null, true);
             _ = new QMSingleButton(TowerMods, 3, 0.5f, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!", null, null, true);
-           
+
             var ToolMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Tool Mods", "Enable Extra Tools");
             HealthToolBtn = new QMToggleButton(ToolMods, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
             HammerToolBtn = new QMToggleButton(ToolMods, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
-            
-            
+
             AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
             AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
         }
 
-
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
-
 
         // TODO : make a Hook to detect when a object is instantiated to immediately add and optimize the component as well, to avoid running this on loop.
 
@@ -347,7 +340,6 @@
             }
             yield return null;
         }
-
 
         private static bool? GodMode
         {

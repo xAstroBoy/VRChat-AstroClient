@@ -2,10 +2,7 @@
 {
     #region Imports
 
-    using System.Reflection;
     using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using CheetoLibrary;
     using Variables;
 
     #endregion Imports
@@ -15,7 +12,6 @@
     /// </summary>
     internal class ProtectionsMenu : GameEvents
     {
-
         internal static void InitButtons(QMGridTab tab)
         {
             QMNestedGridMenu protectionsButton = new QMNestedGridMenu(tab, 4, 2f, "Protections", "Protections Menu", null, UnityEngine.Color.yellow, null, null, true);
@@ -27,7 +23,6 @@
             toggleBlockUdon.SetToggleState(Bools.BlockUdon);
             QMToggleButton toggleAntiPortal = new QMToggleButton(protectionsButton, "Anti Portal", () => { Bools.AntiPortal = true; }, () => { Bools.AntiPortal = false; }, "Anti-Portal", null, null, null, Bools.AntiPortal);
             toggleAntiPortal.SetToggleState(Bools.AntiPortal);
-
         }
     }
 }

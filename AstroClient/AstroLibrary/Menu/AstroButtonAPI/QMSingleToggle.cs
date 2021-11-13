@@ -1,7 +1,6 @@
 ﻿namespace AstroButtonAPI
 {
     using System;
-    using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
     using Button = UnityEngine.UI.Button;
@@ -16,7 +15,6 @@
         private Action OffAction { get; set; }
         private Action OnAction { get; set; }
         private string btnQMLoc { get; set; }
-
 
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
@@ -43,6 +41,7 @@
             }
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
+
         internal QMSingleToggleButton(QMGridTab btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -136,6 +135,7 @@
         {
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
         }
+
         internal void SetAction(Action buttonONAction, Action buttonOFFAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();

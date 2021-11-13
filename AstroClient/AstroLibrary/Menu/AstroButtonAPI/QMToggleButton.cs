@@ -1,13 +1,10 @@
 ﻿namespace AstroButtonAPI
 {
+    using CheetoLibrary;
     using System;
     using System.Reflection;
-    using AstroLibrary.Console;
-    using CheetoLibrary;
     using TMPro;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
-    using UnityEngine.Events;
     using UnityEngine.UI;
 
     internal class QMToggleButton : QMButtonBase
@@ -41,18 +38,21 @@
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMTabMenu btnMenu, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMTabMenu btnMenu, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOn, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -60,25 +60,27 @@
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOn, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
-
         public QMToggleButton(QMGridTab btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMGridTab btnMenu, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMGridTab btnMenu, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOn, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMGridTab btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -92,18 +94,21 @@
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMNestedGridMenu btnMenu, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMNestedGridMenu btnMenu, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOn, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -111,25 +116,27 @@
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOn, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
-
         public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMNestedButton btnMenu, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMNestedButton btnMenu, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOn, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+
         public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -137,13 +144,11 @@
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOn, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
-        
         public QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu;
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
-
 
         internal void initButton(float btnXLocation, float btnYLocation, string btnTextOn, System.Action btnActionOn, string btnTextOff, System.Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = "", bool DefaultState = false)
         {
@@ -207,7 +212,6 @@
             SetToggleState(DefaultState);
         }
 
-
         internal void setTextColorHTML(string buttonTextColor)
         {
             CurrentColor = buttonTextColor;
@@ -223,6 +227,7 @@
                 SetButtonText(ButtonText_Off);
             }
         }
+
         internal void SetOnButtonText(string Text)
         {
             ButtonText_On = Text;
@@ -231,6 +236,7 @@
                 SetButtonText(ButtonText_On);
             }
         }
+
         internal void SetOffColor(Color color)
         {
             OffColor = color;
@@ -239,6 +245,7 @@
                 SetTextColor(OffColor);
             }
         }
+
         internal void SetOnColor(Color color)
         {
             OnColor = color;
@@ -282,11 +289,11 @@
                 }
             }));
         }
+
         internal override void SetTextColor(Color color)
         {
             setTextColorHTML("#" + ColorUtility.ToHtmlStringRGB(color));
         }
-
 
         internal void SetToggleState(bool toggleOn, bool shouldInvoke = false)
         {
@@ -305,7 +312,7 @@
                         btnOnAction.Invoke();
                     }
                 }
-                catch{}
+                catch { }
             }
             else
             {
@@ -320,7 +327,7 @@
                         btnOffAction.Invoke();
                     }
                 }
-                catch{}
+                catch { }
             }
         }
     }

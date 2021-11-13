@@ -1,10 +1,7 @@
 ﻿namespace AstroClient
 {
-    using AstroLibrary;
     using AstroLibrary.Utility;
     using System.Collections.Generic;
-    using AstroButtonAPI;
-    using MelonLoader;
 
     internal class Welcome : GameEvents
     {

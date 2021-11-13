@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.WorldLights
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using UnityEngine.Rendering;
     using static Variables.CustomLists;
@@ -52,7 +52,6 @@
             {
                 FogSwitch.SetToggleState(RenderSettings.fog);
             }
-
         }
 
         internal static void ToggleFog(bool value)
@@ -379,8 +378,7 @@
 
             ToggleFullbright = new QMToggleButton(temp, 0, 0, "Player Headlight", () => { IsHeadLightActive = true; }, "Player Headlight", () => { IsHeadLightActive = false; }, "Spawns a Light in Player Camera (makes the entire map visible)", Color.green, Color.red);
             RenderFullbrightToggle = new QMToggleButton(temp, 0, 0, "Render Fullbright", () => { FullbrightByRender = true; }, "Render Fullbright", () => { FullbrightByRender = false; }, "Attempts to edit RenderSettings to show the entire map (WIP)", Color.green, Color.red);
-            FogSwitch = new QMToggleButton(temp, 0, 0, "Fog", () => { ToggleFog(true); }, "Fog", () => { ToggleFog(false);}, "Tweaks Level RenderSettings Fog", Color.green, Color.red);
-
+            FogSwitch = new QMToggleButton(temp, 0, 0, "Fog", () => { ToggleFog(true); }, "Fog", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog", Color.green, Color.red);
 
             _ = new QMSingleButton(temp, 2, 0, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight", null, null, true);
             _ = new QMSingleButton(temp, 2, 0.5f, "Destroy Spawned Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, "Kill Spawned Flashlights", null, null, true);
@@ -388,7 +386,6 @@
             // TODO : make it less laggy and able to toggle em on/off without breaking itself.
             //ToggleLightmaps = new QMSingleToggleButton(temp, 1, 1f, "Baked Lightings: ON", () => { ToggleLightMaps(true); }, "Baked Lightings: OFF", () => { ToggleLightMaps(false); }, "Tries to toggle on/off LightMaps but is broken and buggy.", Color.green, Color.red, null, false, true);
         }
-
 
         // TODO : Make a Component to handle RenderSettings
 

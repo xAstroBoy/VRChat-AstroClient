@@ -2,9 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using MongoDB.Entities;
     using UnityEngine;
-    using UnityEngine.UI;
     using Button = UnityEngine.UI.Button;
 
     internal class QMHalfScroll
@@ -112,8 +110,6 @@
             });
         }
 
-
-
         internal void Add(QMButtonBase Button)
         {
             if (!IgnoreEverything)
@@ -127,7 +123,6 @@
                     Posx = 1;
                     Posy += 0.5f;
                 }
-
             }
             if (!IgnoreEverything)
                 Pos++;

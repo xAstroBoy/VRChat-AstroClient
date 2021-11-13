@@ -11,7 +11,6 @@
         internal string BtnText;
         internal string CurrentBtnColor;
 
-
         internal QMSingleButton(string baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu;
@@ -25,6 +24,7 @@
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
+
         internal QMSingleButton(QMGridTab baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu.GetMenuName();
@@ -37,7 +37,6 @@
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
-
         }
 
         internal QMSingleButton(QMTabMenu baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
@@ -52,7 +51,6 @@
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
-
         }
 
         internal QMSingleButton(QMNestedGridMenu baseMenu, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
@@ -66,7 +64,6 @@
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
-
         }
 
         internal QMSingleButton(QMNestedButton baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
@@ -81,11 +78,9 @@
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
-
         }
 
-
-        internal  QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null, bool btnHalf = false)
+        internal QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null, bool btnHalf = false)
         {
             string TextColorHTML = null;
             if (TextColor.HasValue)
@@ -106,7 +101,7 @@
             }
         }
 
-        internal  QMSingleButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
+        internal QMSingleButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
             string TextColorHTML = null;
             if (TextColor.HasValue)
@@ -132,7 +127,6 @@
             }
         }
 
-
         internal QMSingleButton(QMNestedGridMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
             string TextColorHTML = null;
@@ -149,6 +143,7 @@
             btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
         }
+
         internal QMSingleButton(QMGridTab Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
             string TextColorHTML = null;
@@ -168,12 +163,10 @@
             Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
-
                 Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
-
         }
 
         internal QMSingleButton(QMTabMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
@@ -192,18 +185,16 @@
             btnQMLoc = Parent.GetMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
             RectTransform Recto = button.GetComponent<RectTransform>();
-Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
+            Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
-
                 Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
-
         }
 
-        internal  QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
+        internal QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
             string TextColorHTML = null;
             if (TextColor.HasValue)
@@ -226,11 +217,9 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
                 Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
                 button.GetComponentInChildren<TMPro.TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
-
         }
 
-
-        internal  QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
+        internal QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
         {
             btnQMLoc = btnMenu;
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
@@ -254,9 +243,8 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             }
         }
 
-
         //Creates a button for VRC Menus
-        private protected void initButton(float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null)
+        protected void initButton(float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null)
         {
             btnType = "SingleButton";
 
@@ -303,11 +291,9 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             else
                 setTextColorHTML("#blue");
 
-
             SetActive(true);
             //QMButtonAPI.allSingleButtons.Add(this);
         }
-
 
         internal void SetButtonText(string buttonText)
         {
@@ -325,7 +311,6 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             }
         }
 
-
         internal override void SetBackgroundColor(Color buttonBackgroundColor)
         {
             button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
@@ -342,13 +327,11 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             setTextColorHTML(TextColorHTML);
         }
 
-
         internal void setTextColorHTML(string buttonTextColor)
         {
             CurrentBtnColor = buttonTextColor;
             string NewText = $"<color={buttonTextColor}>{BtnText}</color>";
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>(true).text = NewText;
         }
-
     }
 }

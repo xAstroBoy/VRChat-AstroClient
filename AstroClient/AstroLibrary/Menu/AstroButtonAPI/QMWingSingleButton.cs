@@ -1,6 +1,5 @@
 ﻿namespace AstroButtonAPI
 {
-    using System;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
@@ -10,10 +9,8 @@
         internal TMPro.TextMeshProUGUI Text;
         internal VRC.UI.Elements.Tooltips.UiTooltip ToolTip;
 
-
         internal string CurrentButtonText;
         internal string CurrentButtonColor;
-
 
         public QMWingSingleButton(QMWings Parent, string btnText, System.Action btnAction, string btnToolTip, Color? TextColor = null)
         {
@@ -25,15 +22,14 @@
             initButton2(Parent.WingPageTransform.gameObject, btnText, btnAction, btnToolTip, TextColorHTML);
         }
 
-
-
         //public QMWingSingleButton(QMWings Parent, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null)
         //{
         //    initButton2(Parent.WingPage.gameObject, btnText, btnAction, btnToolTip, TextColor);
         //}
 
         internal string BtnText;
-        private protected void initButton2(GameObject Parent, string btnText, System.Action btnAction, string btnToolTip, string TextColor)
+
+        protected void initButton2(GameObject Parent, string btnText, System.Action btnAction, string btnToolTip, string TextColor)
         {
             btnType = "WingSingleButton";
 
@@ -58,11 +54,11 @@
             string NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
             button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = CurrentButtonText;
         }
+
         internal void setButtonToolTip(string ButtonToolTip)
         {
             ToolTip.field_Public_String_0 = ButtonToolTip;
         }
-
 
         internal void setAction(System.Action buttonAction)
         {
@@ -72,7 +68,6 @@
                 button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
             }
         }
-
 
         //internal void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
         //{

@@ -23,7 +23,6 @@ namespace AstroButtonAPI
     /// </summary>
     internal class UiManager : GameEvents
     {
-
         internal static EventHandler Event_OnQuickMenuOpen { get; set; }
         internal static EventHandler Event_OnQuickMenuClose { get; set; }
 
@@ -34,7 +33,6 @@ namespace AstroButtonAPI
         internal static EventHandler Event_OnUserInfoMenuClose { get; set; }
 
         internal static EventHandler<OnUiPageEventArgs> Event_OnUiPageToggled { get; set; }
-
 
         private static MethodInfo _popupV2;
         private static MethodInfo _popupV2Small;
@@ -132,7 +130,6 @@ namespace AstroButtonAPI
         /// </summary>
         internal static MenuStateController QMStateController { get; private set; }
 
-
         internal override void ExecutePriorityPatches()
         {
             Init();
@@ -142,9 +139,6 @@ namespace AstroButtonAPI
         {
             UiInit();
         }
-
-
-
 
         internal static void Init()
         {
@@ -309,7 +303,6 @@ namespace AstroButtonAPI
 
         private static void OnUIPageToggle(UIPage __instance, bool __0)
         {
-
             Event_OnUiPageToggled.SafetyRaise(new OnUiPageEventArgs(__instance, __0));
         }
 

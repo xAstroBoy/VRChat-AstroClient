@@ -2,14 +2,10 @@
 {
     #region Imports
 
+    using AstroButtonAPI;
     using System.Diagnostics;
     using System.IO;
-    using System.Reflection;
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using CheetoLibrary;
     using UnityEngine;
-    using Variables;
 
     #endregion Imports
 
@@ -18,7 +14,6 @@
     /// </summary>
     internal class GameProcessMenu : GameEvents
     {
-
         internal static void InitButtons(QMGridTab tab)
         {
             QMNestedGridMenu menu = new QMNestedGridMenu(tab, 4, 2f, "Process", "Process Menu", null, UnityEngine.Color.red, null, null, true);
@@ -30,7 +25,6 @@
                 _ = Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
                 Process.GetCurrentProcess().Kill();
             }, "Restart the game");
-
         }
     }
 }

@@ -2,11 +2,7 @@
 {
     #region Imports
 
-    using System.Reflection;
     using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using CheetoLibrary;
-    using Variables;
 
     #endregion Imports
 
@@ -15,7 +11,6 @@
     /// </summary>
     internal class Settings_HideElements : GameEvents
     {
-
         internal static void InitButtons(QMNestedGridMenu tab)
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Hide Elements", "Hide Elements");
@@ -46,8 +41,6 @@
 
             QMToggleButton removeGalleryButton = new QMToggleButton(sub, 1, 2, "Remove GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = true; }, "Keep GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = false; }, "Requires Restart");
             removeGalleryButton.SetToggleState(ConfigManager.UI.RemoveGalleryButton, false);
-
-
         }
     }
 }

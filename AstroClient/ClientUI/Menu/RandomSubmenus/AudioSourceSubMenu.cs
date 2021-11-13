@@ -40,7 +40,7 @@
             foreach (var obj in WorldUtils_Old.Get_AudioSources())
             {
                 var btn = new QMToggleButton(CurrentScrollMenu, $"Toggle {obj.name}", null, $"Toggle {obj.name}", null, $"Toggle {obj.name}", null, null, $"Toggle AudioSource {obj.name}", obj.enabled);
-                
+
                 btn.SetAction(() =>
                 {
                     obj.enabled = true;
@@ -98,7 +98,7 @@
             if (!isOpen) return;
             if (Page != null)
             {
-                if (!Page.ContainsPage(CurrentScrollMenu.page))
+                if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))
                 {
                     OnCloseMenu();
                 }

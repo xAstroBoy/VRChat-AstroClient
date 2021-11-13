@@ -1,23 +1,20 @@
 ﻿namespace AstroClient.ClientUI.QuickMenuButtons
 {
-    using System;
-    using System.Collections;
     using AstroButtonAPI;
     using AstroLibrary;
-    using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using AstroMonos;
     using AstroMonos.Components.Malicious;
     using AstroMonos.Components.Player;
     using AstroMonos.Components.Tools;
     using Cheetos;
-    using MelonLoader;
+    using System;
+    using System.Collections;
     using UnityEngine;
     using Variables;
 
     internal class UserInteractMenuBtns : GameEvents
     {
-
         private static IEnumerator WaitForCloneBtnInit()
         {
             while (VRChatObjects.UICloneAvatarButton == null)
@@ -30,7 +27,6 @@
             yield return null;
         }
 
-
         internal static void InitUserButtons(float x, float y, bool btnHalf)
         {
             //MelonCoroutines.Start(WaitForCloneBtnInit());
@@ -40,7 +36,6 @@
             //  NO TOUCH!
             new QMSingleButton("QA_SelectedUser", x, y + 0.5f, "AstroClient : Set Target.", new Action(TargetSelector.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf);
             var forceClone = new QMSingleButton("QA_SelectedUser", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
-
         }
 
         internal static void Init_UserMenu_Exploits(float x, float y, bool btnHalf)
@@ -49,8 +44,8 @@
             menu.GetMainButton();
             if (Bools.IsDeveloper)
             {
-            _ = new QMSingleButton(menu, 0, 0, "Deny Pickups to Player.", new Action(() => { PickupBlocker.RegisterPlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);
-            _ = new QMSingleButton(menu, 0, 0.5f, "Re-allow Pickups to Player.", new Action(() => { PickupBlocker.RemovePlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);
+                _ = new QMSingleButton(menu, 0, 0, "Deny Pickups to Player.", new Action(() => { PickupBlocker.RegisterPlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);
+                _ = new QMSingleButton(menu, 0, 0.5f, "Re-allow Pickups to Player.", new Action(() => { PickupBlocker.RemovePlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);
             }
 
             _ = new QMSingleButton(menu, 1, 0, "Teleport All\nPickups\nTo\nplayer.", new Action(ObjectMiscOptions.TeleportAllWorldPickupsToPlayer), "Teleport World Pickups To Player.", null, null); ;
@@ -107,6 +102,5 @@
               }
             , "Removes everything bound to this player.", null, null);
         }
-
     }
 }

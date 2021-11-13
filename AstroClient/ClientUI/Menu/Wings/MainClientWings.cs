@@ -15,9 +15,7 @@
 
     internal class MainClientWings
     {
-
         internal static QMWingToggleButton WingDebugButton;
-
 
         internal static void InitMainWing()
         {
@@ -35,7 +33,6 @@
             new QMWingSingleButton(menu, "Reload Avatars", () => { MelonCoroutines.Start(AvatarUtils.ReloadAllAvatars()); }, "Reloads All Avatars.");
 
             WingDebugButton = new QMWingToggleButton(menu, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Toggle Debug Console", null, Bools.IsDebugMode);
-
         }
     }
 }

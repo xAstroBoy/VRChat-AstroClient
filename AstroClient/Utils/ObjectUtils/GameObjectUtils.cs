@@ -2,11 +2,6 @@
 {
     #region Imports
 
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -15,6 +10,11 @@
     using Il2CppSystem.Text;
     using ItemTweakerV2.Selector;
     using Photon.Pun;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
     using UnhollowerBaseLib;
     using UnityEngine;
     using VRC;
@@ -86,10 +86,10 @@
                 {
                     var components = Obj.GetComponentsInChildren<Component>(true);
                     for (int i = 0; i < components.Count; i++)
-					{
-						Component OriginalComponent = components[i];
-						ModConsole.Log(Obj.name + " component : " + OriginalComponent.ToString());
-					}
+                    {
+                        Component OriginalComponent = components[i];
+                        ModConsole.Log(Obj.name + " component : " + OriginalComponent.ToString());
+                    }
                 }
             }
             catch (Exception) { }

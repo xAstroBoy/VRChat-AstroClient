@@ -1,7 +1,7 @@
 namespace AstroClient.AstroMonos.Components.Tools.Listeners
 {
-    using System;
     using CustomMono;
+    using System;
     using UnhollowerBaseLib.Attributes;
 
     [RegisterComponent]
@@ -23,6 +23,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
+
         internal void RemoveListener()
         {
             OnDestroyed = null;

@@ -2,10 +2,10 @@
 
 namespace AstroLibrary.Utility
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using Extensions;
     using Photon.Pun;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using UnityEngine.XR;
     using VRC;
@@ -222,22 +222,31 @@ namespace AstroLibrary.Utility
             {
                 case "moderation user":
                     return "#5e0000";
+
                 case "admin user":
                     return "#5e0000";
+
                 case "legend":
                     return "#ff5e5e";
+
                 case "veteran":
                     return "#fff821";
+
                 case "trusted":
                     return "#a621ff";
+
                 case "known":
                     return "#ffa200";
+
                 case "user":
                     return "#00e62a";
+
                 case "new user":
                     return "#00aeff";
+
                 case "visitor":
                     return "#bababa";
+
                 default:
                     return "#303030";
             }

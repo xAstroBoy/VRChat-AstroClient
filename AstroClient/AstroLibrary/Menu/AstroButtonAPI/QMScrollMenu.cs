@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using UnityEngine;
-    using UnityEngine.UI;
     using Button = UnityEngine.UI.Button;
 
     internal class QMScrollMenu

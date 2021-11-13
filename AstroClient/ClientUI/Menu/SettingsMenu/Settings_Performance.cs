@@ -2,12 +2,8 @@
 {
     #region Imports
 
-    using System.Reflection;
     using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using CheetoLibrary;
     using Cheetos;
-    using Variables;
 
     #endregion Imports
 
@@ -16,7 +12,6 @@
     /// </summary>
     internal class Settings_Performance : GameEvents
     {
-
         internal static void InitButtons(QMNestedGridMenu tab)
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Performance", "Performance Settings");
@@ -26,8 +21,6 @@
 
             QMToggleButton frameUnlimiterToggle = new QMToggleButton(sub, 2, 0f, "FrameUnlimiter\nOn", () => { FrameUnlimiter.IsEnabled = true; }, "FrameUnlimiter\nOff", () => { FrameUnlimiter.IsEnabled = false; }, "Unlimit the games framerate");
             frameUnlimiterToggle.SetToggleState(FrameUnlimiter.IsEnabled, false);
-
-
         }
     }
 }

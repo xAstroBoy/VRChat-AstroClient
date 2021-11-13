@@ -1,11 +1,10 @@
 ﻿namespace AstroClient.Headlight
 {
-    using System;
-    using System.Windows.Forms;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using System;
+    using System.Windows.Forms;
     using UnityEngine;
     using VRC;
     using Object = UnityEngine.Object;
@@ -54,7 +53,6 @@
             }
         }
 
-
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             DesktopHeadlightBool = false;
@@ -65,7 +63,6 @@
             VRLight = null;
         }
 
-
         private static QMWings WingsMenu;
         internal static QMWingToggleButton DesktopHeadlightBtn;
         internal static QMWingToggleButton VRHeadlightBtn;
@@ -74,11 +71,9 @@
         {
             WingsMenu = new QMWings(1012, true, "Headlight", "Headlight Options", null, null);
             VRHeadlightBtn = new QMWingToggleButton(WingsMenu, "VR headlight", () => { VRHeadLightBool = true; }, () => { VRHeadLightBool = false; }, "Toggle VR Headlight");
-            DesktopHeadlightBtn = new QMWingToggleButton(WingsMenu, "Desktop Headlight", () => { DesktopHeadlightBool = true; }, () => { DesktopHeadlightBool = false;}, "Toggle Desktop Headlight");
+            DesktopHeadlightBtn = new QMWingToggleButton(WingsMenu, "Desktop Headlight", () => { DesktopHeadlightBool = true; }, () => { DesktopHeadlightBool = false; }, "Toggle Desktop Headlight");
             WingsMenu.SetActive(false);
         }
-
-
 
         internal static void HeadlightButtonInit(QMGridTab menu, float x, float y, bool btnHalf)
         {

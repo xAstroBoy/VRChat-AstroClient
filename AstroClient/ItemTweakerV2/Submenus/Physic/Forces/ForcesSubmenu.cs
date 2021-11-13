@@ -1,12 +1,10 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroMonos.Components.Tools;
     using Selector;
-    using UnityEngine;
+    using System;
 
     internal class ForcesSubmenu : Tweaker_Events
     {
@@ -19,13 +17,13 @@
 
             QMNestedGridMenu ForceAddControl = new QMNestedGridMenu(ForceSubMenu, 5, 0, "Tweak Force Amounts", "Force Tweaker Menu!", null, null, null, null);
 
-            ForceSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Force Power :", delegate (float value)
+            ForceSlider = new QMSlider(ForceAddControl.ButtonsMenu.transform, "Force Power :", delegate (float value)
             {
                 Force = (int)value;
             }, "Change Force", 1000, DefaultForce, true);
             Force = DefaultForce;
 
-            SpinForceSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Spin Power : ", delegate (float value)
+            SpinForceSlider = new QMSlider(ForceAddControl.ButtonsMenu.transform, "Spin Power : ", delegate (float value)
             {
                 SpinForce = (int)value;
             }, "Change Spin Force", 1000, DefaultForce, true);

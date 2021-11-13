@@ -2,7 +2,6 @@
 {
     using System;
     using UnityEngine;
-    using UnityEngine.Events;
     using UnityEngine.UI;
 
     internal class QMWingToggleButton : QMButtonBase
@@ -28,7 +27,7 @@
         //    initButton2(Parent.WingPage.gameObject, btnText, OnAction, OffAction, btnToolTip, TextColor, Defaultstate);
         //}
 
-        private protected void initButton2(GameObject Parent, string btnText, System.Action btnONAction, System.Action btnOFFAction,  string btnToolTip, string TextColor = null, bool Defaultstate = false)
+        protected void initButton2(GameObject Parent, string btnText, System.Action btnONAction, System.Action btnOFFAction, string btnToolTip, string TextColor = null, bool Defaultstate = false)
         {
             btnType = "WingToggleButton";
 
@@ -55,7 +54,6 @@
             }
 
             SetAction(btnONAction, btnOFFAction);
-
         }
 
         internal void setButtonText(string buttonText)
@@ -120,7 +118,6 @@
             }
             catch { }
         }
-
 
         internal void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
         {

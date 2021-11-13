@@ -1,21 +1,14 @@
 ﻿namespace AstroClient
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using AstroMonos.AstroUdons;
-    using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
     using CheetoLibrary;
-    using MelonLoader;
+    using System.Collections.Generic;
     using UnityEngine;
     using Variables;
-    using VRC.Udon.Serialization.OdinSerializer.Utilities;
-    using static Variables.CustomLists;
 
     internal class UdonTycoon : GameEvents
     {
@@ -27,7 +20,6 @@
                 {
                     udonTycoonCheatPage.SetIntractable(true);
                     udonTycoonCheatPage.SetTextColor(Color.green);
-
                 }
 
                 ModConsole.Log($"Recognized {Name}, Cheats available.");
@@ -36,13 +28,11 @@
                 {
                     PolyCollector = one.GetOrAddComponent<UdonTycoon_PolyCollector>();
                 }
-                var two  = UdonSearch.FindUdonEvent("LevelController", "_ConfirmAllPartsPlaced").UdonBehaviour.gameObject;
+                var two = UdonSearch.FindUdonEvent("LevelController", "_ConfirmAllPartsPlaced").UdonBehaviour.gameObject;
                 if (two != null)
                 {
                     LevelController = two.GetOrAddComponent<UdonTycoon_LevelController>();
                 }
-
-
             }
             else
             {
@@ -50,9 +40,7 @@
                 {
                     udonTycoonCheatPage.SetIntractable(false);
                     udonTycoonCheatPage.SetTextColor(Color.red);
-
                 }
-
             }
         }
 
@@ -67,7 +55,6 @@
 
             _ = new QMSingleButton(udonTycoonCheatPage, 1, 0f, "Set 9999999999 Polys", () => { SetPolys(999999999); }, "Edit Current Polys Balance!", null, null, true);
         }
-
 
         private static void SetPolys(int value)
         {
@@ -99,15 +86,10 @@
             }
         }
 
-
-
-
-
         internal static QMNestedGridMenu udonTycoonCheatPage { get; set; }
 
         internal static UdonTycoon_PolyCollector PolyCollector { get; set; }
 
         internal static UdonTycoon_LevelController LevelController { get; set; }
-
     }
 }

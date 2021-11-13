@@ -1,10 +1,10 @@
 namespace AstroActionMenu.Managers
 {
-    using System.Reflection;
     using AstroClient;
     using AstroLibrary.Console;
     using CheetoLibrary;
     using Helpers;
+    using System.Reflection;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -21,8 +21,7 @@ namespace AstroActionMenu.Managers
         }
     }
 
-
-    internal static class ResourcesManager 
+    internal static class ResourcesManager
     {
         private static GameObject lockPrefab;
         private static Texture2D pageOne;
@@ -43,7 +42,7 @@ namespace AstroActionMenu.Managers
             pageOne.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             pageTwo = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.2.png"));
             pageTwo.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageThree = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.3.png"));;
+            pageThree = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.3.png")); ;
             pageThree.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             pageFour = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.4.png"));
             pageFour.hideFlags |= HideFlags.DontUnloadUnusedAsset;
@@ -76,18 +75,25 @@ namespace AstroActionMenu.Managers
             {
                 case 1:
                     return pageOne;
+
                 case 2:
                     return pageTwo;
+
                 case 3:
                     return pageThree;
+
                 case 4:
                     return pageFour;
+
                 case 5:
                     return pageFive;
+
                 case 6:
                     return pageSix;
+
                 case 7:
                     return pageSeven;
+
                 default:
                     return null;
             }

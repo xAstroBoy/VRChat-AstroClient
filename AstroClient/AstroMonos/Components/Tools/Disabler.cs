@@ -6,7 +6,6 @@ namespace AstroClient.AstroMonos.Components.Tools
     [RegisterComponent]
     public class Disabler : MonoBehaviour
     {
-
         public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
         public Disabler(IntPtr obj0) : base(obj0)
@@ -24,6 +23,5 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             this.gameObject.SetActive(false);
         }
-
     }
 }

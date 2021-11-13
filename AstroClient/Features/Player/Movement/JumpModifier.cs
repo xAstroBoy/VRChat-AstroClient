@@ -1,18 +1,14 @@
 ﻿namespace AstroClient.Features.Player.Movement
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
-    using MelonLoader;
+    using System.Collections.Generic;
     using UnityEngine;
     using VRC.SDKBase;
 
     internal class JumpModifier : GameEvents
     {
-
-
         internal override void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
         {
             if (isDown)
@@ -32,7 +28,6 @@
                         {
                             EmulatedJump();
                         }
-
                     }
                 }
                 else
@@ -41,7 +36,6 @@
                 }
             }
         }
-
 
         private VRCPlayerApi _LocalPlayer;
 
@@ -58,7 +52,6 @@
             }
         }
 
-
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (Networking.LocalPlayer != null)
@@ -71,17 +64,12 @@
                     Networking.LocalPlayer.SetJumpImpulse(4);
                 }
             }
-
         }
-
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             IsJumpOverriden = false;
         }
-
-
-
 
         internal static void EmulatedJump()
         {
@@ -92,7 +80,6 @@
                 Networking.LocalPlayer.SetVelocity(velocity);
             }
         }
-
 
         internal static QMToggleButton UnlimitedJumpToggle;
 

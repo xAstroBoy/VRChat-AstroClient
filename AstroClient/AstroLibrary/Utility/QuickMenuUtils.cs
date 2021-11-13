@@ -3,40 +3,38 @@
 namespace AstroLibrary.Utility
 {
     using AstroButtonAPI;
-    using Transmtn.DTO.Notifications;
     using UnityEngine;
     using VRC;
     using VRC.Core;
     using VRC.UI.Elements;
-    using VRC.UI.Elements.Menus;
 
     public static class QuickMenuUtils
     {
         public static QuickMenu QuickMenu => QuickMenuTools.QuickMenuInstance;
 
-
-
         #region SelectPlayer
-
 
         public static void OpenUserInQuickMenu(this APIUser user)
         {
             UiManager.OpenUserInQuickMenu(user);
         }
+
         public static void OpenUserInUserInfoPage(this APIUser user)
         {
             UiManager.OpenUserInUserInfoPage(user.ToIUser());
         }
+
         public static void OpenUserInQuickMenu(this Player user)
         {
             UiManager.OpenUserInQuickMenu(user.GetAPIUser());
         }
+
         public static void OpenUserInUserInfoPage(this Player user)
         {
             UiManager.OpenUserInUserInfoPage(user.GetAPIUser().ToIUser());
         }
 
-        #endregion
+        #endregion SelectPlayer
 
         #region GetSelected
 
@@ -46,7 +44,7 @@ namespace AstroLibrary.Utility
 
         public static VRCPlayer SelectedVRCPlayer => QuickMenuTools.GetSelectedUserQMInstance().GetSelectedPlayer().GetVRCPlayer();
 
-        #endregion
+        #endregion GetSelected
 
         //public static void OpenQM()
         //{
@@ -57,7 +55,6 @@ namespace AstroLibrary.Utility
         //{
         //    QuickMenu.prop_QuickMenu_0.Method_Private_Void_Boolean_0(false);
         //}
-
 
         //public static Notification Notification(this QuickMenu instance)
         //{
@@ -78,6 +75,7 @@ namespace AstroLibrary.Utility
         }
 
         #region Collider
+
         public static void ResizeCollider(Vector3 size)
         {
             QuickMenu.GetComponent<BoxCollider>().size = size;
@@ -99,6 +97,7 @@ namespace AstroLibrary.Utility
         {
             QuickMenu.GetComponent<BoxCollider>().size = new Vector3(2517.34f, 1671.213f, 1f);
         }
-        #endregion
+
+        #endregion Collider
     }
 }

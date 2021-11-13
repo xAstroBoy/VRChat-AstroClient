@@ -26,6 +26,7 @@
             btnQMLoc = btnMenu.GetMenuName();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
+
         internal QMNestedButton(QMNestedGridMenu btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -37,11 +38,13 @@
             btnQMLoc = btnMenu.GetMenuName();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
+
         internal QMNestedButton(QMGridTab btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
+
         internal QMNestedButton(QMGridTab btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -111,11 +114,11 @@
         {
             mainButton.SetTextColor(buttonTextColor);
         }
+
         internal void SetBackButtonAction(Action back)
         {
             backButton.SetBackButtonAction(back);
         }
-
 
         internal void AddOpenAction(Action onOpenAction)
         {
@@ -153,7 +156,6 @@
             });
         }
 
-
         internal void SetBackButtonAction(QMTabMenu action, System.Action onCloseAction = null)
         {
             backButton.SetBackButtonAction(() =>
@@ -178,7 +180,6 @@
             });
         }
 
-
         internal string GetMenuName()
         {
             return menuName;
@@ -188,14 +189,17 @@
         {
             return mainButton;
         }
+
         internal GameObject GetButtonsMenu()
         {
             return ButtonsMenu;
         }
+
         internal UIPage GetPage()
         {
             return page;
         }
+
         internal void SetIntractable(bool Interactable)
         {
             mainButton.SetIntractable(Interactable);

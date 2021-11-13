@@ -1,11 +1,10 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using AstroMonos.Components.Tools;
     using Selector;
+    using System;
     using UnityEngine;
     using VRC.SDKBase;
 
@@ -220,7 +219,6 @@
             //{
             //    PickupProximitySlider.SetValue(0);
             //}
-
         }
 
         internal static QMSingleButton HasPickupComponent { get; private set; }

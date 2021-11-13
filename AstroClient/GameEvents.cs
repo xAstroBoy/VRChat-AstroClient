@@ -2,16 +2,14 @@
 {
     #region Imports
 
-    using System;
-    using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroClientCore.Events;
-    using AstroMonos;
-    using AstroMonos.Components.Tools;
     using Cheetos;
     using Moderation;
     using Startup.Hooks;
     using Streamer;
+    using System;
+    using System.Collections.Generic;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;
@@ -34,7 +32,6 @@
             Main.Event_VRChat_OnQuickMenuInit += Internal_VRChat_OnQuickMenuInit;
             Main.Event_VRChat_OnActionMenuInit += Internal_VRChat_OnActionMenuInit;
 
-            
             Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
             Main.Event_OnApplicationQuit += Internal_OnApplicationQuit;
 
@@ -86,7 +83,6 @@
             InputPatches.Event_OnInput_UseRight += Internal_OnInput_UseRight;
             InputPatches.Event_OnInput_GrabLeft += Internal_OnInput_GrabLeft;
             InputPatches.Event_OnInput_GrabRight += Internal_OnInput_GrabRight;
-
         }
 
         private void Internal_OnShowScreen(object sender, ScreenEventArgs e)
@@ -103,6 +99,7 @@
         {
             OnStreamerLeft(e.player);
         }
+
         private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
         {
             OnMasterClientSwitched(e.player);
@@ -187,6 +184,7 @@
         {
             OnQuickMenuClose();
         }
+
         private void Internal_OnBigMenuOpen(object sender, EventArgs e)
         {
             OnBigMenuOpen();
@@ -196,8 +194,6 @@
         {
             OnBigMenuClose();
         }
-
-
 
         private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
         {
@@ -263,6 +259,7 @@
         {
             OnAvatarSpawn(e.Player, e.Avatar, e.VRCAvatarManager, e.VRC_AvatarDescriptor);
         }
+
         private void Internal_OnInput_Jump(object sender, VRCInputArgs e)
         {
             OnInput_Jump(e.isClicked, e.isDown, e.isUp);
@@ -272,14 +269,17 @@
         {
             OnInput_UseLeft(e.isClicked, e.isDown, e.isUp);
         }
+
         private void Internal_OnInput_UseRight(object sender, VRCInputArgs e)
         {
             OnInput_UseRight(e.isClicked, e.isDown, e.isUp);
         }
+
         private void Internal_OnInput_GrabLeft(object sender, VRCInputArgs e)
         {
             OnInput_GrabLeft(e.isClicked, e.isDown, e.isUp);
         }
+
         private void Internal_OnInput_GrabRight(object sender, VRCInputArgs e)
         {
             OnInput_GrabRight(e.isClicked, e.isDown, e.isUp);
@@ -299,8 +299,6 @@
         {
             OnUiPageToggled(e.Page, e.Toggle);
         }
-
-
 
         internal virtual void onUserInfoMenuOpen()
         {
@@ -325,7 +323,6 @@
         internal virtual void VRChat_OnActionMenuInit()
         {
         }
-
 
         internal virtual void ExecutePriorityPatches()
         {
@@ -415,7 +412,6 @@
         {
         }
 
-
         internal virtual void OnBigMenuOpen()
         {
         }
@@ -423,8 +419,6 @@
         internal virtual void OnBigMenuClose()
         {
         }
-
-
 
         internal virtual void SpawnEmojiRPC(VRCPlayer player, int emoji)
         {
@@ -474,7 +468,6 @@
         {
         }
 
-
         internal virtual void OnInput_UseLeft(bool isClicked, bool isDown, bool isUp)
         {
         }
@@ -490,7 +483,5 @@
         internal virtual void OnInput_GrabRight(bool isClicked, bool isDown, bool isUp)
         {
         }
-
-
     }
 }

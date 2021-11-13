@@ -1,11 +1,11 @@
 ﻿namespace AstroButtonAPI
 {
-    using System;
     using TMPro;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
     using VRC.UI.Elements;
+
     internal class QMWings : QMButtonBase
     {
         internal Transform WingPageTransform;
@@ -19,13 +19,11 @@
 
         internal TextMeshProUGUI ButtonText;
 
-
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnQMLoc = "WingPage" + MenuName;
             initButton(Index, LeftWing, MenuName, btnToolTip, btnBackgroundColor, LoadSprite);
         }
-
 
         internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
@@ -34,7 +32,7 @@
                 btnQMLoc += $"_LEFT_{System.Guid.NewGuid().ToString()} ";
                 button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left(), QuickMenuTools.Wing_Left().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
-                MenuName = AssignedMenu; 
+                MenuName = AssignedMenu;
                 button.NewText("Text_QM_H3").text = MenuName;
                 SetToolTip(btnToolTip);
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
@@ -121,25 +119,25 @@
                 SetAction(() => { QuickMenuTools.Wing_Right().ShowQuickmenuPage(btnQMLoc); });
             }
 
-
-
             if (LoadSprite != "")
                 button.LoadSprite(LoadSprite, "Icon");
             SetActive(true);
         }
+
         internal string GetMenuName()
         {
             return btnQMLoc;
         }
+
         internal UIPage GetPage()
         {
             return CurrentPage;
         }
+
         internal void LoadIcon(byte[] icon)
         {
             if (icon != null)
                 button.LoadSprite(icon, "Icon");
-
         }
 
         internal void SetButtonText(string text)
@@ -151,7 +149,6 @@
         {
             if (icon != "")
                 button.LoadSprite(icon, "Icon");
-
         }
 
         internal void ClickBackButton()

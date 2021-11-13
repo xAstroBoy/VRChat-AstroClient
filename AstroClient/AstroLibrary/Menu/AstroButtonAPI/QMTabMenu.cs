@@ -1,7 +1,5 @@
 ﻿namespace AstroButtonAPI
 {
-    using AstroLibrary.Console;
-    using System;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
@@ -20,10 +18,12 @@
         {
             InitButton(index, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, ImageData);
         }
+
         internal QMTabMenu(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, string ImageData = null)
         {
             InitButton(index, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, ImageData);
         }
+
         internal void InitButton(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, string ImageURL = null)
         {
             btnType = "QMTabMenu";
@@ -50,7 +50,6 @@
             mainButton = new QMTabButton(index, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, ImageURL);
             // backButton = new QMSingleButton(menuName, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage("ShortcutMenu"); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
         }
-
 
         internal void InitButton(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, byte[] ImageData = null)
         {
@@ -92,21 +91,23 @@
         {
             return backButton;
         }
+
         internal GameObject GetButtonsMenu()
         {
             return ButtonsMenu;
         }
+
         internal UIPage GetPage()
         {
             return page;
         }
-
 
         internal void DestroyMe()
         {
             mainButton.DestroyMe();
             backButton.DestroyMe();
         }
+
         internal void OpenMe()
         {
             QuickMenuTools.ShowQuickmenuPage(menuName);

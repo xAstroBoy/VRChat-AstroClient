@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.WorldAddons
 {
-    using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Finder;
+    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
     using Variables;
@@ -28,7 +28,6 @@
                 {
                     VoidClubMenu.SetIntractable(true);
                     VoidClubMenu.SetTextColor(Color.green);
-
                 }
             }
             else
@@ -37,9 +36,7 @@
                 {
                     VoidClubMenu.SetIntractable(false);
                     VoidClubMenu.SetTextColor(Color.red);
-
                 }
-
             }
         }
 

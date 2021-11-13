@@ -16,9 +16,7 @@
             FunBehavioursSubMenu.Init_FunMenu(main, 1, 2, true);
 
             _ = new QMSingleButton(main, 4, 0f, "Remove All Components", () => { ComponentSubMenu.KillCustomComponents(); }, "Kill All Custom Add-ons.", null, null, true);
-
         }
-
 
         internal static void KillCustomComponents()
         {

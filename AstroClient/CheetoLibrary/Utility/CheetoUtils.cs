@@ -2,10 +2,10 @@
 {
     #region Imports
 
+    using AstroLibrary.Console;
     using System;
     using System.IO;
     using System.Reflection;
-    using AstroLibrary.Console;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -45,7 +45,7 @@
                 ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
                 return tex;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
                 return null;
@@ -58,8 +58,6 @@
             ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
             return tex;
         }
-
-
 
         public static byte[] ExtractResource(Assembly assembly, string filename)
         {

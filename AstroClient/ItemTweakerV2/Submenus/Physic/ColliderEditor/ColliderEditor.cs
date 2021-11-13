@@ -1,12 +1,9 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.Collider
 {
-    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
-    using AstroMonos.Components.Tools;
     using Selector;
-    using UnityEngine;
-    using VRC;
+    using System;
 
     internal class ColliderEditor : Tweaker_Events
     {
@@ -18,6 +15,5 @@
             _ = new QMSingleButton(menu, 1, 0.5f, "Add Collider", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddCollider(); }), "Adds A Collider to the object (use it in case it doesn't have any!)", null, null, true);
             _ = new QMSingleButton(menu, 1, 1f, "Add Trigger Collider", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddTriggerCollider(); }), "Adds A Collider to the object (use it in case it doesn't have any!)", null, null, true);
         }
-
     }
 }

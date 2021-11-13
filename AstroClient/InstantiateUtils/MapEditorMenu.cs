@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using System;
     using UnityEngine;
 
     internal static class MapEditorMenu

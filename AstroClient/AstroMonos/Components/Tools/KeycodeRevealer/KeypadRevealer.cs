@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.AstroMonos.Components.Tools.KeycodeRevealer
 {
-    using System;
-    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using CustomMono;
+    using System;
+    using System.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 

@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.AstroMonos.Components.Tools
 {
-    using System;
-    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using CustomMono;
+    using System;
+    using System.Linq;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC.SDKBase;
@@ -37,8 +37,11 @@
         private bool isUsingUI { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal override void OnQuickMenuClose() => isUsingUI = false;
+
         internal override void OnQuickMenuOpen() => isUsingUI = true;
+
         internal override void OnBigMenuOpen() => isUsingUI = true;
+
         internal override void OnBigMenuClose() => isUsingUI = false;
 
         private void PickupUpdate()
@@ -54,8 +57,6 @@
         {
             PickupProtection();
         }
-
-
 
         internal override void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
         {
@@ -999,7 +1000,6 @@
         #endregion actions
 
         #region Force Pickup Functions
-
 
         private void ForcePickupComponent()
         {

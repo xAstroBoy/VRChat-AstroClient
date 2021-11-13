@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.World.Hub
 
 {
-    using System;
-    using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using System;
+    using System.Collections.Generic;
     using UnityEngine;
     using Variables;
     using VRC.SDKBase;
@@ -23,10 +23,6 @@
         }
 
         internal static QMNestedGridMenu VRChat_Hub_Addons;
-
-
-
-
 
         internal static void ToggleAllHubObjectOn()
         {
@@ -289,8 +285,10 @@
             {
                 case VrcBooleanOp.True:
                     return true;
+
                 case VrcBooleanOp.False:
                     return false;
+
                 default:
                     return false;
             }
@@ -314,11 +312,11 @@
                     if (IsHubButtonLocked)
                     {
                         if (VrcEvent.ParameterObject.name == "_RolePlay_Props" && VrcEvent.ParameterBoolOp != Table_Props)
-						{
-							ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the roleplay props!");
-							Status_Table_Props = VrcEvent.ParameterBoolOp;
-							Fighting_RolePlayFighting_Props = true;
-						}
+                        {
+                            ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the roleplay props!");
+                            Status_Table_Props = VrcEvent.ParameterBoolOp;
+                            Fighting_RolePlayFighting_Props = true;
+                        }
                         if (VrcEvent.ParameterObject.name == "_MirrorProps" && VrcEvent.ParameterBoolOp != Mirror_Props)
                         {
                             ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the mirror props!");
@@ -342,11 +340,11 @@
                         }
 
                         if (VrcEvent.ParameterObject.name == "_BOATS" && VrcEvent.ParameterBoolOp != Boats_Props)
-						{
-							ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the boats props!");
-							Status_Boats_Props = VrcEvent.ParameterBoolOp;
-							Fighting_Boats_Props = true;
-						}
+                        {
+                            ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the boats props!");
+                            Status_Boats_Props = VrcEvent.ParameterBoolOp;
+                            Fighting_Boats_Props = true;
+                        }
                     }
                 }
             }

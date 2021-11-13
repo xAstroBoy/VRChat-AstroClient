@@ -76,7 +76,6 @@
             }
         }
 
-
         internal static GameObject CurrentObjectToEdit
         {
             get
@@ -84,6 +83,7 @@
                 return Tweaker_Selector.SelectedObject;
             }
         }
+
         internal static string GetObjectToEditName
         {
             get

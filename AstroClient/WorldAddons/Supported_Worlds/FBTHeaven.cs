@@ -1,9 +1,7 @@
 ﻿#pragma warning disable 649
+
 namespace AstroClient
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -11,6 +9,9 @@ namespace AstroClient
     using AstroLibrary.Utility;
     using AstroMonos.AstroUdons;
     using Skyboxes;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using Variables;
 
@@ -36,7 +37,7 @@ namespace AstroClient
 
         internal static void InitButtons(QMGridTab main)
         {
-            FBTExploitsPage = new QMNestedGridMenu(main,  "FBTHeaven Exploits", "FBTHeaven Exploits");
+            FBTExploitsPage = new QMNestedGridMenu(main, "FBTHeaven Exploits", "FBTHeaven Exploits");
 
             _ = new QMSingleButton(FBTExploitsPage, 1, 0, "Unlock Door\n1", () => { UnlockDoor(1); }, "Unlock Door 1");
             _ = new QMSingleButton(FBTExploitsPage, 2, 0, "Unlock Door\n2", () => { UnlockDoor(2); }, "Unlock Door 2");
@@ -62,7 +63,6 @@ namespace AstroClient
                 {
                     FBTExploitsPage.SetIntractable(true);
                     FBTExploitsPage.SetTextColor(Color.green);
-
                 }
 
                 isCurrentWorld = true;
@@ -178,7 +178,6 @@ namespace AstroClient
                 {
                     FBTExploitsPage.SetIntractable(false);
                     FBTExploitsPage.SetTextColor(Color.red);
-
                 }
             }
         }
@@ -209,7 +208,7 @@ namespace AstroClient
 
         private static IEnumerator UpdateButtonsLoop()
         {
-            for (;;)
+            for (; ; )
             {
                 if (!isCurrentWorld) yield break;
                 RefreshButtons();
