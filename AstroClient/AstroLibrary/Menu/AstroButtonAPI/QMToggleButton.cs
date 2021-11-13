@@ -215,6 +215,14 @@
                 SetTextColor(OnColor);
                 btnOn.SetActive(true);
                 btnOff.SetActive(false);
+                try
+                {
+                    if (shouldInvoke)
+                    {
+                        btnOnAction.Invoke();
+                    }
+                }
+                catch{}
             }
             else
             {
@@ -222,30 +230,15 @@
                 SetTextColor(OffColor);
                 btnOn.SetActive(false);
                 btnOff.SetActive(true);
-
-            }
-            try
-            {
-                if (toggleOn && shouldInvoke)
-                {
-                    if (shouldInvoke)
-                    {
-                        btnOnAction.Invoke();
-                    }
-                    btnOn.SetActive(true);
-                    btnOff.SetActive(false);
-                }
-                if (!toggleOn && shouldInvoke)
+                try
                 {
                     if (shouldInvoke)
                     {
                         btnOffAction.Invoke();
                     }
-                    btnOn.SetActive(false);
-                    btnOff.SetActive(true);
                 }
+                catch{}
             }
-            catch { }
         }
     }
 }

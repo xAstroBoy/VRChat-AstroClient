@@ -61,6 +61,7 @@
         private static void OnCloseMenu()
         {
             WingMenu.SetActive(false);
+            WingMenu.ClickBackButton();
             DestroyGeneratedButtons();
         }
 

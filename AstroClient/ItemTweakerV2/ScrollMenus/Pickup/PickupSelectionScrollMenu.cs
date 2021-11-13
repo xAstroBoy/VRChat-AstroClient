@@ -65,6 +65,7 @@
         private static void OnCloseMenu()
         {
             WingMenu.SetActive(false);
+            WingMenu.ClickBackButton();
             DestroyGeneratedButtons();
         }
 
@@ -102,7 +103,6 @@
 
                 if (!Page.Equals(CurrentScrollMenu.page))
                 {
-                    WingMenu.SetActive(false);
                     OnCloseMenu();
                 }
             }

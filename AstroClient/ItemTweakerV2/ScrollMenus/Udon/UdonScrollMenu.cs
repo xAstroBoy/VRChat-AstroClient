@@ -108,6 +108,7 @@
         internal static void OnCloseMenu()
         {
             WingMenu.SetActive(false);
+            WingMenu.ClickBackButton();
             if (GeneratedPages.Count != 0)
             {
                 foreach (var item in GeneratedPages) item.DestroyMe();

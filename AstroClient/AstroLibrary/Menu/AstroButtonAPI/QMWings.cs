@@ -13,6 +13,9 @@
 
         internal string MenuName;
 
+        internal GameObject backbuttonObject;
+        internal Button BackButton;
+
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnQMLoc = "WingPage" + MenuName;
@@ -57,6 +60,8 @@
                 var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
+                backbuttonObject = CurrentPage.gameObject.FindObject("Button_Back");
+                BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
                 setAction(() => { QuickMenuTools.Wing_Left().ShowQuickmenuPage(btnQMLoc); });
@@ -100,6 +105,8 @@
                 var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
+                backbuttonObject = CurrentPage.gameObject.FindObject("Button_Back");
+                BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
                 setAction(() => { QuickMenuTools.Wing_Right().ShowQuickmenuPage(btnQMLoc); });
@@ -118,6 +125,11 @@
         internal UIPage GetPage()
         {
             return CurrentPage;
+        }
+
+        internal void ClickBackButton()
+        {
+            BackButton.onClick.Invoke();
         }
 
         internal void setAction(System.Action buttonAction)

@@ -9,7 +9,9 @@
     {
         internal TMPro.TextMeshProUGUI Text;
         internal string BtnText;
-        
+        internal string CurrentBtnColor;
+
+
         internal QMSingleButton(string baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu;
@@ -252,7 +254,8 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
         internal void SetButtonText(string buttonText)
         {
             BtnText = buttonText;
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>(true).text = buttonText;
+            string NewText = $"<color={CurrentBtnColor}>{BtnText}</color>";
+            button.GetComponentInChildren<TMPro.TextMeshProUGUI>(true).text = NewText;
         }
 
         internal void SetAction(System.Action buttonAction)
@@ -284,8 +287,9 @@ Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
 
         internal void setTextColorHTML(string buttonTextColor)
         {
+            CurrentBtnColor = buttonTextColor;
             string NewText = $"<color={buttonTextColor}>{BtnText}</color>";
-            SetButtonText(NewText);
+            button.GetComponentInChildren<TMPro.TextMeshProUGUI>(true).text = NewText;
         }
 
     }

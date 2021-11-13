@@ -32,6 +32,7 @@
             CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
                 WingMenu.SetActive(false);
+                WingMenu.ClickBackButton();
             });
             CurrentScrollMenu.AddOpenAction(() =>
             {
@@ -85,6 +86,7 @@
         internal override void OnQuickMenuClose()
         {
             WingMenu.SetActive(false);
+            WingMenu.ClickBackButton();
         }
 
 
