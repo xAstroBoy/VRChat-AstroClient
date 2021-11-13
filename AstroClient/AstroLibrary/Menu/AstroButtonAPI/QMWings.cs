@@ -115,6 +115,10 @@
         {
             return MenuName;
         }
+        internal UIPage GetPage()
+        {
+            return CurrentPage;
+        }
 
         internal void setAction(System.Action buttonAction)
         {

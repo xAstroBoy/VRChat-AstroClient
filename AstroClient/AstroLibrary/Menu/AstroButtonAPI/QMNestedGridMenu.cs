@@ -155,6 +155,10 @@
             return ButtonsMenu;
         }
 
+        internal UIPage GetPage()
+        {
+            return page;
+        }
 
         internal string GetMenuName()
         {

@@ -166,6 +166,10 @@
         {
             return ButtonsMenu;
         }
+        internal UIPage GetPage()
+        {
+            return page;
+        }
 
         internal GameObject GetBackButton()
         {

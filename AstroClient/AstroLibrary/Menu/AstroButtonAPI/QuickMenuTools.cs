@@ -148,7 +148,7 @@
         {
             if (MenuStateController_Wing_Left == null)
             {
-                var Buttons = QuickMenuTransform.GetComponentsInChildren<MenuStateController>(true);
+                var Buttons = QuickMenuInstance.GetComponentsInChildren<MenuStateController>(true);
                 foreach (var button in Buttons)
                 {
                     if (button.name == "Wing_Left")

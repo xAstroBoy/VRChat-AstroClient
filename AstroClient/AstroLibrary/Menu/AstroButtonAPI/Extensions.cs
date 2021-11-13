@@ -258,37 +258,32 @@
         {
             _MenuStateController.Method_Public_Void_String_UIContext_Boolean_0(Page);
         }
+        internal static void ShowPage(this MenuStateController _MenuStateController, UIPage Page)
+        {
+            _MenuStateController.ShowTabContent(_MenuStateController.Method_Private_Int32_UIPage_PDM_0(Page));
+        }
 
 
         internal static void ShowQuickmenuPage(this QMNestedButton menu)
         {
-            QuickMenuTools.QuickMenuController().PushPage(menu.GetMenuName());
+            QuickMenuTools.QuickMenuController().ShowPage(menu.GetPage());
         }
         internal static void ShowQuickmenuPage(this QMTabMenu menu)
         {
-            QuickMenuTools.QuickMenuController().PushPage(menu.GetMenuName());
+            QuickMenuTools.QuickMenuController().ShowPage(menu.GetPage());
         }
         internal static void ShowQuickmenuPage(this QMNestedGridMenu menu)
         {
-            QuickMenuTools.QuickMenuController().PushPage(menu.GetMenuName());
+            QuickMenuTools.QuickMenuController().ShowPage(menu.GetPage());
         }
-        internal static void ShowLeftWingPage(this string pagename)
-        {
-            QuickMenuTools.WingMenuStateControllerLeft().PushPage(pagename);
-        }
-        internal static void ShowRightWingPage(this string pagename)
-        {
-            QuickMenuTools.WingMenuStateControllerLeft().PushPage(pagename);
-        }
-
         internal static void ShowLeftWingPage(this QMWings pagename)
         {
-            QuickMenuTools.WingMenuStateControllerLeft().PushPage(pagename.GetMenuName());
+            QuickMenuTools.WingMenuStateControllerLeft().ShowPage(pagename.GetPage());
         }
 
         internal static void ShowRightWingPage(this QMWings pagename)
         {
-            QuickMenuTools.WingMenuStateControllerRight().PushPage(pagename.GetMenuName());
+            QuickMenuTools.WingMenuStateControllerRight().ShowPage(pagename.GetPage());
         }
 
 
