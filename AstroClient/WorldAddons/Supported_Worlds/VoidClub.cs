@@ -3,15 +3,17 @@
     using System.Collections.Generic;
     using AstroButtonAPI;
     using AstroLibrary.Finder;
+    using UnityEngine;
     using UnityEngine.UI;
+    using Variables;
 
     internal class VoidClub : GameEvents
     {
-        internal static QMNestedButton VoidClubMenu;
+        internal static QMNestedGridMenu VoidClubMenu;
 
-        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab main)
         {
-            VoidClubMenu = new QMNestedButton(main, x, y, "VoidClubMenu Exploits", "VoidClubMenu Exploits", null, null, null, null, btnHalf);
+            VoidClubMenu = new QMNestedGridMenu(main, "VoidClubMenu Exploits", "VoidClubMenu Exploits");
 
             _ = new QMSingleButton(VoidClubMenu, 1, 0, "Unlock\nHotel\n1", () => { UnlockHotel(); }, "Unlock Hotel 1");
             _ = new QMSingleButton(VoidClubMenu, 1, 1, "Unlock\nJapanese\n2", () => { UnlockJapanese(); }, "Unlock Japanese 2");
@@ -20,6 +22,25 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
+            if (id.Equals(WorldIds.VoidClub))
+            {
+                if (VoidClubMenu != null)
+                {
+                    VoidClubMenu.SetIntractable(true);
+                    VoidClubMenu.SetTextColor(Color.green);
+
+                }
+            }
+            else
+            {
+                if (VoidClubMenu != null)
+                {
+                    VoidClubMenu.SetIntractable(false);
+                    VoidClubMenu.SetTextColor(Color.red);
+
+                }
+
+            }
         }
 
         private static void UnlockHotel()

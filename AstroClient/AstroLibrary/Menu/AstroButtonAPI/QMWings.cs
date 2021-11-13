@@ -43,6 +43,7 @@
                 WingPageTransform = CurrentPage.transform;
                 ButtonText = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText.text = $"{MenuName}";
+                ButtonText.fontSize = 36;
                 CurrentPage.field_Public_String_0 = btnQMLoc; //Name
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true; //_inited
@@ -86,8 +87,10 @@
                 UIPage Page = QuickMenuTools.UIPageTemplate_Right();
                 CurrentPage = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
                 WingPageTransform = CurrentPage.transform;
-                CurrentPage.gameObject.NewText("Text_Title").text = MenuName;
-                CurrentPage.gameObject.NewText("Text_Title").fontSize = 36;
+                ButtonText = CurrentPage.gameObject.NewText("Text_Title");
+
+                ButtonText.text = MenuName;
+                ButtonText.fontSize = 36;
                 CurrentPage.field_Public_String_0 = btnQMLoc;
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true;

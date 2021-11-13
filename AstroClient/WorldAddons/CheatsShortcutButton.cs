@@ -206,6 +206,16 @@
             }
         }
 
+
+
+        internal static void SetButtonShortcut(QMNestedGridMenu btn)
+        {
+            if (WorldCheatsShortcut != null)
+            {
+                WorldCheatsShortcut.SetAction(new Action(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
+            }
+        }
+
         internal static void SetButtonShortcut(QMSingleButton btn)
         {
             if (WorldCheatsShortcut != null)

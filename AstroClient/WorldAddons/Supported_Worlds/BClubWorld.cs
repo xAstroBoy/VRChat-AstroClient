@@ -43,7 +43,7 @@
 
 
 
-        internal static QMNestedButton BClubExploitsPage;
+        internal static QMNestedGridMenu BClubExploitsPage;
 
         private static QMToggleButton FreezeLockedToggle;
         private static QMToggleButton FreezeUnlockedToggle;
@@ -255,41 +255,47 @@
             return null;
         }
 
-        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab main)
         {
-            BClubExploitsPage = new QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, btnHalf);
+            BClubExploitsPage = new QMNestedGridMenu(main, "BClub Exploits", "BClub Exploits");
+
+
+            var DoorController = new QMNestedGridMenu(BClubExploitsPage, "Private Rooms Door", "Control B Club Doors ");
 
             // Locks
-            LockButton1 = new QMToggleButton(BClubExploitsPage, 1, 0, "Unlock 1", () => { ToggleDoor(1); }, "Lock 1", () => { ToggleDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton2 = new QMToggleButton(BClubExploitsPage, 2, 0, "Unlock 2", () => { ToggleDoor(2); }, "Lock 2", () => { ToggleDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton3 = new QMToggleButton(BClubExploitsPage, 3, 0, "Unlock 3", () => { ToggleDoor(3); }, "Lock 3", () => { ToggleDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton4 = new QMToggleButton(BClubExploitsPage, 1, 1, "Unlock 4", () => { ToggleDoor(4); }, "Lock 4", () => { ToggleDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton5 = new QMToggleButton(BClubExploitsPage, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton7 = new QMToggleButton(BClubExploitsPage, 4, 0, "Unlock 7", () => { ToggleDoor(7); }, "Lock 7", () => { ToggleDoor(7); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton1 = new QMToggleButton(DoorController, 1, 0, "Unlock 1", () => { ToggleDoor(1); }, "Lock 1", () => { ToggleDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton2 = new QMToggleButton(DoorController, 2, 0, "Unlock 2", () => { ToggleDoor(2); }, "Lock 2", () => { ToggleDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton3 = new QMToggleButton(DoorController, 3, 0, "Unlock 3", () => { ToggleDoor(3); }, "Lock 3", () => { ToggleDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton4 = new QMToggleButton(DoorController, 1, 1, "Unlock 4", () => { ToggleDoor(4); }, "Lock 4", () => { ToggleDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton5 = new QMToggleButton(DoorController, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton6 = new QMToggleButton(DoorController, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton7 = new QMToggleButton(DoorController, 4, 0, "Unlock 7", () => { ToggleDoor(7); }, "Lock 7", () => { ToggleDoor(7); }, "Toggle Door Lock", Color.green, Color.red);
+
+            // Freeze Locks
+            FreezeLockedToggle = new QMToggleButton(DoorController, -1, 1, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, () => { IsFreezeLockEnabed = false; }, "Door Freezer", Color.green, Color.red);
+            FreezeUnlockedToggle = new QMToggleButton(DoorController, -1, 2, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, () => { IsFreezeUnlockEnabed = false; }, "Door Freezer", Color.green, Color.red);
+            FreezeLockedToggle.SetToggleState(IsFreezeLockEnabed, false);
+            FreezeUnlockedToggle.SetToggleState(IsFreezeUnlockEnabed, false);
+
+            var MapFun = new QMNestedGridMenu(BClubExploitsPage, "World Fun", "Some Random Fun things");
 
             // Rainbow
-            ToggleRainbowBtn = new QMToggleButton(BClubExploitsPage, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, "Rainbow", () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
+            ToggleRainbowBtn = new QMToggleButton(MapFun, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, "Rainbow", () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
             ToggleRainbowBtn.SetToggleState(IsRainbowEnabled, false);
-
-            ToggleMoanSpamBtn = new QMToggleButton(BClubExploitsPage, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, "Moan Spam", () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
+            ToggleMoanSpamBtn = new QMToggleButton(MapFun, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, "Moan Spam", () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
 
             // VIP
             SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 6, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", Color.green, Color.red);
             //_ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
 
-            // Freeze Locks
-            FreezeLockedToggle = new QMToggleButton(BClubExploitsPage, -1, 1, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, "", () => { IsFreezeLockEnabed = false; }, "Door Freezer", Color.green, Color.red);
-            FreezeUnlockedToggle = new QMToggleButton(BClubExploitsPage, -1, 2, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, "", () => { IsFreezeUnlockEnabed = false; }, "Door Freezer", Color.green, Color.red);
-            FreezeLockedToggle.SetToggleState(IsFreezeLockEnabed, false);
-            FreezeUnlockedToggle.SetToggleState(IsFreezeUnlockEnabed, false);
+            var Exploits = new QMNestedGridMenu(BClubExploitsPage, "World Exploits", "World exploits");
 
             // Spamming
             if (Bools.IsDeveloper)
             {
-                BlueChairToggle = new QMToggleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, "", () => IsBlueChairEnabled = false, "BlueChair Everyone", Color.green, Color.red);
+                BlueChairToggle = new QMToggleButton(Exploits, 5, -1, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, "", () => IsBlueChairEnabled = false, "BlueChair Everyone", Color.green, Color.red);
             }
-            SpamDoorbellsToggle = new QMToggleButton(BClubExploitsPage, 5, 0, "Spam Doorbells", () => IsDoorbellSpamEnabled = true, "", () => IsDoorbellSpamEnabled = false, "Toggle Doorbell Spam");
+            SpamDoorbellsToggle = new QMToggleButton(Exploits, 5, 0, "Spam Doorbells", () => IsDoorbellSpamEnabled = true, "", () => IsDoorbellSpamEnabled = false, "Toggle Doorbell Spam");
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
         }
 
@@ -599,7 +605,11 @@
         {
             if (id == WorldIds.BClub)
             {
-
+                if (BClubExploitsPage != null)
+                {
+                    BClubExploitsPage.SetIntractable(true);
+                    BClubExploitsPage.SetTextColor(Color.green);
+                }
                     isCurrentWorld = true;
                 UdonParser.CleanedWorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
@@ -723,6 +733,16 @@
                 _ = MelonCoroutines.Start(EnableElevatorFlairBtn());
                 _ = MelonCoroutines.Start(EnableTabletFlairBtn());
                 _ = MelonCoroutines.Start(UpdateLoop());
+            }
+            else
+            {
+                isCurrentWorld = false;
+                if (BClubExploitsPage != null)
+                {
+                    BClubExploitsPage.SetIntractable(false);
+                    BClubExploitsPage.SetTextColor(Color.red);
+                }
+
             }
         }
 

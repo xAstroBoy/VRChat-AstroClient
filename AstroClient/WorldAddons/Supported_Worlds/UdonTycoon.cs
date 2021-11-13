@@ -23,6 +23,13 @@
         {
             if (id == WorldIds.Udon_Tycoon)
             {
+                if (udonTycoonCheatPage != null)
+                {
+                    udonTycoonCheatPage.SetIntractable(true);
+                    udonTycoonCheatPage.SetTextColor(Color.green);
+
+                }
+
                 ModConsole.Log($"Recognized {Name}, Cheats available.");
                 var one = UdonSearch.FindUdonEvent("_polyCollector", "_UpdateCounter").UdonBehaviour.gameObject;
                 if (one != null)
@@ -37,6 +44,16 @@
 
 
             }
+            else
+            {
+                if (udonTycoonCheatPage != null)
+                {
+                    udonTycoonCheatPage.SetIntractable(false);
+                    udonTycoonCheatPage.SetTextColor(Color.red);
+
+                }
+
+            }
         }
 
         internal override void OnRoomLeft()
@@ -44,9 +61,9 @@
             PolyCollector = null;
         }
 
-        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab main)
         {
-            udonTycoonCheatPage = new QMNestedButton(main, x, y, "Udon Tycoon", "Udon Tycoon Cheats", null, null, null, null, btnHalf);
+            udonTycoonCheatPage = new QMNestedGridMenu(main, "Udon Tycoon", "Udon Tycoon Cheats");
 
             _ = new QMSingleButton(udonTycoonCheatPage, 1, 0f, "Set 9999999999 Polys", () => { SetPolys(999999999); }, "Edit Current Polys Balance!", null, null, true);
         }
@@ -86,7 +103,7 @@
 
 
 
-        internal static QMNestedButton udonTycoonCheatPage { get; set; }
+        internal static QMNestedGridMenu udonTycoonCheatPage { get; set; }
 
         internal static UdonTycoon_PolyCollector PolyCollector { get; set; }
 

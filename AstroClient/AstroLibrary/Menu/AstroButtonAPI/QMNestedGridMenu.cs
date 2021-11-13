@@ -32,6 +32,13 @@
         }
 
 
+        internal QMNestedGridMenu(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation ,string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        {
+            btnQMLoc = btnMenu.GetMenuName();
+            InitButton(0, 0, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+        }
+
+
         internal QMNestedGridMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -186,6 +193,12 @@
         {
             return menuName;
         }
+
+        internal void SetIntractable(bool Interactable)
+        {
+            mainButton.SetIntractable(Interactable);
+        }
+
 
         internal QMSingleButton GetMainButton()
         {

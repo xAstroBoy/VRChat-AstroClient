@@ -16,7 +16,7 @@ namespace AstroClient
 
     internal class FBTHeaven : GameEvents
     {
-        internal static QMNestedButton FBTExploitsPage;
+        internal static QMNestedGridMenu FBTExploitsPage;
         internal static float ButtonUpdateTime = 0f;
         private static List<GameObject> TrashToDelete = new List<GameObject>();
         private static bool isCurrentWorld;
@@ -34,9 +34,9 @@ namespace AstroClient
             TrashToDelete.Clear();
         }
 
-        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab main)
         {
-            FBTExploitsPage = new QMNestedButton(main, x, y, "FBTHeaven Exploits", "FBTHeaven Exploits", null, null, null, null, btnHalf);
+            FBTExploitsPage = new QMNestedGridMenu(main,  "FBTHeaven Exploits", "FBTHeaven Exploits");
 
             _ = new QMSingleButton(FBTExploitsPage, 1, 0, "Unlock Door\n1", () => { UnlockDoor(1); }, "Unlock Door 1");
             _ = new QMSingleButton(FBTExploitsPage, 2, 0, "Unlock Door\n2", () => { UnlockDoor(2); }, "Unlock Door 2");
@@ -58,6 +58,13 @@ namespace AstroClient
         {
             if (id == WorldIds.FBTHeaven)
             {
+                if (FBTExploitsPage != null)
+                {
+                    FBTExploitsPage.SetIntractable(true);
+                    FBTExploitsPage.SetTextColor(Color.green);
+
+                }
+
                 isCurrentWorld = true;
                 ModConsole.DebugLog($"Recognized {Name} World,  Removing Blinders and Dividers...");
                 var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
@@ -164,6 +171,15 @@ namespace AstroClient
 
                 // I'll fix this later..
                 //MelonCoroutines.Start(UpdateButtonsLoop());
+            }
+            else
+            {
+                if (FBTExploitsPage != null)
+                {
+                    FBTExploitsPage.SetIntractable(false);
+                    FBTExploitsPage.SetTextColor(Color.red);
+
+                }
             }
         }
 

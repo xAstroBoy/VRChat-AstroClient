@@ -21,6 +21,13 @@
         {
             if (id == WorldIds.Super_Tower_defense)
             {
+                if (SuperTowerDefensecheatPage != null)
+                {
+                    SuperTowerDefensecheatPage.SetIntractable(true);
+                    SuperTowerDefensecheatPage.SetTextColor(Color.green);
+
+                }
+
                 ModConsole.Log($"Recognized {Name}, Cheats available.");
                 var one = UdonSearch.FindUdonEvent("Bank", "Restart").UdonBehaviour.gameObject;
                 if (one != null)
@@ -95,6 +102,17 @@
                     }
                 }
             }
+            else
+            {
+                if (SuperTowerDefensecheatPage != null)
+                {
+                    SuperTowerDefensecheatPage.SetIntractable(false);
+                    SuperTowerDefensecheatPage.SetTextColor(Color.red);
+
+                }
+
+                
+            }
         }
 
         internal override void OnRoomLeft()
@@ -112,30 +130,39 @@
             WaveEvent = null;
         }
 
-        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab main)
         {
-            SuperTowerDefensecheatPage = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);
+            SuperTowerDefensecheatPage = new QMNestedGridMenu(main, "Super Tower Defense", "Super Tower Defense Cheats");
 
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0f, "Set 0 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 0; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0.5f, "Add 10000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 1, "Add 100000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 1.5f, "Add 1000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 1000000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 999999999; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0f, "Wave +1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 1; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Wave +10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 10; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 1, "Wave +100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 100; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 1.5f, "Wave -1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 1; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 2f, "Wave -10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 10; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 2.5f, "Wave -100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 100; } }, "Edit Current Round!", null, null, true);
+            var bankmods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Bank Mods", "Modify Current Bank Balance");
+            _ = new QMSingleButton(bankmods, 1, 0f, "Set 0 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 0; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(bankmods, 1, 0.5f, "Add 10000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(bankmods, 1, 1, "Add 100000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(bankmods, 1, 1.5f, "Add 1000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 1000000; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(bankmods, 1, 2f, "Add 10000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(bankmods, 1, 2.5f, "Set 999999999 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 999999999; } }, "Edit Current Balance!", null, null, true);
 
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 3, 0f, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 3, 0.5f, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!", null, null, true);
+            var WaveMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Wave Mods", "Modify Current Rounds");
 
-            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            HammerToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            AutomaticWaveBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            AutomaticGodModebnt = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            _ = new QMSingleButton(WaveMods, 2, 0f, "Wave +1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 1; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(WaveMods, 2, 0.5f, "Wave +10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 10; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(WaveMods, 2, 1, "Wave +100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 100; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(WaveMods, 2, 1.5f, "Wave -1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 1; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(WaveMods, 2, 2f, "Wave -10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 10; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(WaveMods, 2, 2.5f, "Wave -100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 100; } }, "Edit Current Round!", null, null, true);
+
+            var TowerMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Towers Mods", "Make Towers SuperPowerful");
+
+            _ = new QMSingleButton(TowerMods, 3, 0f, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!", null, null, true);
+            _ = new QMSingleButton(TowerMods, 3, 0.5f, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!", null, null, true);
+           
+            var ToolMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Tool Mods", "Enable Extra Tools");
+            HealthToolBtn = new QMToggleButton(ToolMods, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
+            HammerToolBtn = new QMToggleButton(ToolMods, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
+            
+            
+            AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
+            AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
         }
 
 
@@ -349,18 +376,18 @@
             }
         }
 
-        internal static QMNestedButton SuperTowerDefensecheatPage { get; set; }
+        internal static QMNestedGridMenu SuperTowerDefensecheatPage { get; set; }
 
         internal static SuperTowerDefense_WaveEditor WaveEditor { get; set; }
         internal static SuperTowerDefense_HealthEditor HealthEditor { get; set; }
         internal static SuperTowerDefense_BankEditor BankEditor { get; set; }
 
-        private static QMSingleToggleButton HealthToolBtn { get; set; }
-        private static QMSingleToggleButton HammerToolBtn { get; set; }
+        private static QMToggleButton HealthToolBtn { get; set; }
+        private static QMToggleButton HammerToolBtn { get; set; }
 
-        private static QMSingleToggleButton AutomaticWaveBtn { get; set; }
+        private static QMToggleButton AutomaticWaveBtn { get; set; }
 
-        private static QMSingleToggleButton AutomaticGodModebnt { get; set; }
+        private static QMToggleButton AutomaticGodModebnt { get; set; }
 
         private static object cancellationwavetoken { get; set; }
 

@@ -12,11 +12,11 @@
 
     internal class JustHParty : GameEvents
     {
-        internal static QMNestedButton JustHPartyMenu;
+        internal static QMNestedGridMenu JustHPartyMenu;
 
-        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab main)
         {
-            JustHPartyMenu = new QMNestedButton(main, x, y, "JustHParty Exploits", "JustHParty Exploits", null, null, null, null, btnHalf);
+            JustHPartyMenu = new QMNestedGridMenu(main, "JustHParty Exploits", "JustHParty Exploits");
 
             _ = new QMSingleButton(JustHPartyMenu, 1, 0, "Toggle\nLock\n1", () => { ToggleDoor(1); }, "Toggle Door Lock");
             _ = new QMSingleButton(JustHPartyMenu, 2, 0, "Toggle\nLock\n2", () => { ToggleDoor(2); }, "Toggle Door Lock");
@@ -32,7 +32,21 @@
         {
             if (WorldUtils.WorldID == WorldIds.JustHParty)
             {
+                if (JustHPartyMenu != null)
+                {
+                    JustHPartyMenu.SetIntractable(true);
+                    JustHPartyMenu.SetTextColor(Color.green);
+                }
                 GameObjectFinder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
+            }
+            else
+            {
+                if (JustHPartyMenu != null)
+                {
+                    JustHPartyMenu.SetIntractable(false);
+                    JustHPartyMenu.SetTextColor(Color.red);
+                }
+
             }
         }
 

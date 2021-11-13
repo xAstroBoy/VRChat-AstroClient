@@ -175,26 +175,26 @@
             }
         }
 
-        internal static void AmongUSCheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
+        internal static void AmongUSCheatsButtons(QMGridTab submenu)
         {
-            AmongUsCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Among US Cheats", "Manage Among US Cheats", null, null, null, null, btnHalf);
-            JarRoleController.AmongUSRolesRevealerToggle = new QMSingleToggleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
+            AmongUsCheatsPage = new QMNestedGridMenu(submenu, "Among US Cheats", "Manage Among US Cheats");
+            JarRoleController.AmongUSRolesRevealerToggle = new QMToggleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.");
 
-            AmongUSUdonExploits.Init_GameController_Menu(AmongUsCheatsPage, 2, 0, true);
+            AmongUSUdonExploits.Init_GameController_Menu(AmongUsCheatsPage);
 
-            AmongUSUdonExploits.Init_FilteredNodes_Menu(AmongUsCheatsPage, 2f, 0.5f, true);
-            AmongUSUdonExploits.Init_Unfiltered_Nodes_Menu(AmongUsCheatsPage, 2f, 1f, true);
+            AmongUSUdonExploits.Init_FilteredNodes_Menu(AmongUsCheatsPage);
+            AmongUSUdonExploits.Init_Unfiltered_Nodes_Menu(AmongUsCheatsPage);
 
-            AmongUSUdonExploits.Init_SabotageAndRepair_Menu(AmongUsCheatsPage, 3f, 0f, true);
-            AmongUSUdonExploits.Init_KillPlayers_Menu(AmongUsCheatsPage, 3f, 0.5f, true);
+            AmongUSUdonExploits.Init_SabotageAndRepair_Menu(AmongUsCheatsPage);
+            AmongUSUdonExploits.Init_KillPlayers_Menu(AmongUsCheatsPage);
 
-            AmongUSUdonExploits.Init_ForceVotePlayer_menu(AmongUsCheatsPage, 4f, 0f, true);
-            AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage, 4f, 0.5f, true);
+            AmongUSUdonExploits.Init_ForceVotePlayer_menu(AmongUsCheatsPage);
+            AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage);
 
-            AmongUSUdonExploits.Init_RoleSwap_Menu(AmongUsCheatsPage, 4f, 1f, true);
-            GetImpostorRoleBtn = new QMSingleToggleButton(AmongUsCheatsPage, 4, 1.5f, "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!", Color.green, Color.red, null, false, true);
-            ToggleSerializerShortcut = new QMSingleToggleButton(AmongUsCheatsPage, 4, 2f, "Toggle Serializer", new Action(() => { AmongUsSerializer = true; }), "Toggle Serializer", new Action(() => { AmongUsSerializer = false; }), "Serialize For Stealth or to frame someone else!", Color.green, Color.red, null, false, true);
-            GameBodyESPBtn = new QMSingleToggleButton(AmongUsCheatsPage, 4, 2.5f, "Body ESP", new Action(() => { BodyESPs = true; }), "Body ESP", new Action(() => { BodyESPs = false; }), "Makes Impostor Kills Visible (Yellow)!", Color.green, Color.red, null, false, true);
+            AmongUSUdonExploits.Init_RoleSwap_Menu(AmongUsCheatsPage);
+            GetImpostorRoleBtn = new QMToggleButton(AmongUsCheatsPage, 4, 1.5f, "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!");
+            ToggleSerializerShortcut = new QMToggleButton(AmongUsCheatsPage, 4, 2f, "Toggle Serializer", new Action(() => { AmongUsSerializer = true; }), "Toggle Serializer", new Action(() => { AmongUsSerializer = false; }), "Serialize For Stealth or to frame someone else!");
+            GameBodyESPBtn = new QMToggleButton(AmongUsCheatsPage, 4, 2.5f, "Body ESP", new Action(() => { BodyESPs = true; }), "Body ESP", new Action(() => { BodyESPs = false; }), "Makes Impostor Kills Visible (Yellow)!");
 
             GameStartbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
             GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
@@ -402,12 +402,12 @@
         internal static QMSingleButton GameAbortbtn;
         internal static QMSingleButton GameVictoryCrewmateBtn;
         internal static QMSingleButton GameVictoryImpostorBtn;
-        internal static QMSingleToggleButton GameBodyESPBtn;
+        internal static QMToggleButton GameBodyESPBtn;
 
-        internal static QMSingleToggleButton GetImpostorRoleBtn;
-        internal static QMSingleToggleButton ToggleSerializerShortcut;
+        internal static QMToggleButton GetImpostorRoleBtn;
+        internal static QMToggleButton ToggleSerializerShortcut;
 
-        internal static QMNestedButton AmongUsCheatsPage;
+        internal static QMNestedGridMenu AmongUsCheatsPage;
 
         internal static bool HasAmongUsWorldLoaded = false;
 

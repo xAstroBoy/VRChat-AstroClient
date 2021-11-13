@@ -189,66 +189,66 @@
             }
         }
 
-        internal static void Murder2CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
+        internal static void Murder2CheatsButtons(QMGridTab submenu)
         {
-            Murder2CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 2 Cheats", "Manage Murder 2 Cheats", null, null, null, null, btnHalf);
-            Murder2CheatPage.GetMainButton();
-            QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder2CheatPage, 1, 0, "Item Teleporter", "", null, null, null, null, true);
-            _ = new QMSingleButton(MurderItemTeleporter, 1, 0, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null);
-            _ = new QMSingleButton(MurderItemTeleporter, 2, 0, "Teleport the Detective Gun!", new Action(() => { item_detectiveGun.TeleportToMe(); }), "Detective Gun Teleporter!", null, null);
-            _ = new QMSingleButton(MurderItemTeleporter, 3, 0, "Teleport the Silenced Gun!", new Action(() => { item_SilencedGun.TeleportToMe(); }), "Silenced gun Teleporter!", null, null);
+            Murder2CheatPage = new QMNestedGridMenu(submenu, "Murder 2 Cheats", "Manage Murder 2 Cheats");
 
-            QMNestedButton MurderItemTweaker = new QMNestedButton(Murder2CheatPage, 1, 0.5f, "Item Tweaker", "Item Tweaks!", null, null, null, null, true);
-            _ = new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null);
-            _ = new QMToggleButton(MurderItemTweaker, 2, 0, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", null, null, null, false);
-            _ = new QMSingleButton(MurderItemTweaker, 3, 0, "Turn Knifes into rockets!", new Action(() => { Knifes.Add_Rocket_Component(false); }), "Make Knifes in Instance go nuts!", null, null);
-            _ = new QMSingleButton(MurderItemTweaker, 4, 0, "Turn Guns into rockets!", new Action(() => { MurderGunsRockets(); }), "Make Guns in Instance go nuts!", null, null);
-            _ = new QMSingleButton(MurderItemTweaker, 1, 1, "Turn Clues into rockets!", new Action(() => { Clues.Add_Rocket_Component(false); }), "Make Clues in Instance go nuts!", null, null);
-            _ = new QMSingleButton(MurderItemTweaker, 2, 1, "Turn Knifes into Crazy!", new Action(() => { Knifes.Add_Crazy_Component(false); }), "Make Knifes in Instance go nuts!", null, null);
-            _ = new QMSingleButton(MurderItemTweaker, 3, 1, "Turn Guns into Crazy!", new Action(MurderGunsCrazy), "Make Guns in Instance go nuts!", null, null);
-            _ = new QMSingleButton(MurderItemTweaker, 4, 1, "Turn Clues into Crazy!", new Action(() => { Clues.Add_Crazy_Component(false); }), "Make Clues in Instance go nuts!", null, null);
+            QMNestedGridMenu MurderItemTeleporter = new QMNestedGridMenu(Murder2CheatPage, "Item Teleporter", "Item Teleporter");
+            _ = new QMSingleButton(MurderItemTeleporter, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, false);
+            _ = new QMSingleButton(MurderItemTeleporter, "Teleport the Detective Gun!", new Action(() => { item_detectiveGun.TeleportToMe(); }), "Detective Gun Teleporter!", null, false);
+            _ = new QMSingleButton(MurderItemTeleporter, "Teleport the Silenced Gun!", new Action(() => { item_SilencedGun.TeleportToMe(); }), "Silenced gun Teleporter!", null, false);
 
-            QMNestedButton MurderItemSpawner = new QMNestedButton(Murder2CheatPage, 1, 1, "Item Spawner", "Item Spawner!", null, null, null, null, true);
-            _ = new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_detectiveGun.CloneObject(); }), "Detective Gun Cloner!", null, null);
-            _ = new QMSingleButton(MurderItemSpawner, 2, 0, "Spawn Silenced Gun", new Action(() => { item_SilencedGun.CloneObject(); }), "Silenced Gun Cloner!", null, null);
-            _ = new QMSingleButton(MurderItemSpawner, 3, 0, "Spawn Knife", new Action(() => { item_knife_0.CloneObject(); }), "Knife Cloner!", null, null);
+            QMNestedGridMenu MurderItemTweaker = new QMNestedGridMenu(Murder2CheatPage, "Item Tweaker", "Item Tweaks!");
+            _ = new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!");
+            _ = new QMToggleButton(MurderItemTweaker, 2, 0, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!");
+            _ = new QMSingleButton(MurderItemTweaker, 3, 0, "Turn Knifes into rockets!", new Action(() => { Knifes.Add_Rocket_Component(false); }), "Make Knifes in Instance go nuts!");
+            _ = new QMSingleButton(MurderItemTweaker, 4, 0, "Turn Guns into rockets!", new Action(() => { MurderGunsRockets(); }), "Make Guns in Instance go nuts!");
+            _ = new QMSingleButton(MurderItemTweaker, 1, 1, "Turn Clues into rockets!", new Action(() => { Clues.Add_Rocket_Component(false); }), "Make Clues in Instance go nuts!");
+            _ = new QMSingleButton(MurderItemTweaker, 2, 1, "Turn Knifes into Crazy!", new Action(() => { Knifes.Add_Crazy_Component(false); }), "Make Knifes in Instance go nuts!");
+            _ = new QMSingleButton(MurderItemTweaker, 3, 1, "Turn Guns into Crazy!", new Action(MurderGunsCrazy), "Make Guns in Instance go nuts!");
+            _ = new QMSingleButton(MurderItemTweaker, 4, 1, "Turn Clues into Crazy!", new Action(() => { Clues.Add_Crazy_Component(false); }), "Make Clues in Instance go nuts!");
+
+            QMNestedGridMenu MurderItemSpawner = new QMNestedGridMenu(Murder2CheatPage,"Item Spawner", "Item Spawner!");
+            _ = new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_detectiveGun.CloneObject(); }), "Detective Gun Cloner!");
+            _ = new QMSingleButton(MurderItemSpawner, 2, 0, "Spawn Silenced Gun", new Action(() => { item_SilencedGun.CloneObject(); }), "Silenced Gun Cloner!");
+            _ = new QMSingleButton(MurderItemSpawner, 3, 0, "Spawn Knife", new Action(() => { item_knife_0.CloneObject(); }), "Knife Cloner!");
 
             if (Bools.AllowAttackerComponent)
             {
-                QMNestedButton MurderItemAttackerMenu = new QMNestedButton(Murder2CheatPage, 1, 1.5f, "Followers", "Murder item Followers!", null, null, null, null, true);
-                _ = new QMSingleButton(MurderItemAttackerMenu, 1, 0, "Detective Gun follows target!", new Action(() => { DetectiveGuns.AttackTarget(); }), "Make Detective Gun follow Target", null, null);
-                _ = new QMSingleButton(MurderItemAttackerMenu, 2, 0, "Silenced Gun follows target!", new Action(() => { SilencedGuns.AttackTarget(); }), "Make Silenced Gun follow Target", null, null);
-                _ = new QMSingleButton(MurderItemAttackerMenu, 3, 0, "Knifes follows target!", new Action(() => { Knifes.AttackTarget(); }), "Make Knifes follow Target", null, null);
-                _ = new QMSingleButton(MurderItemAttackerMenu, 4, 0, "Clues follows target!", new Action(() => { Clues.AttackTarget(); }), "Make Clues follow Target", null, null);
-                _ = new QMSingleButton(MurderItemAttackerMenu, 1, 1, "Detective Gun follows you!", new Action(() => { DetectiveGuns.AttackSelf(); }), "Make Detective Gun follow you", null, null);
-                _ = new QMSingleButton(MurderItemAttackerMenu, 2, 1, "Silenced Guns follows you!", new Action(() => { SilencedGuns.AttackSelf(); }), "Make Silenced Gun follow you", null, null);
-                _ = new QMSingleButton(MurderItemAttackerMenu, 3, 1, "Knifes follows you!", new Action(() => { Knifes.AttackSelf(); }), "Make Knifes follow you", null, null);
-                _ = new QMSingleButton(MurderItemAttackerMenu, 4, 1, "Clues follows you!", new Action(() => { Clues.AttackSelf(); }), "Make Clues follow you", null, null);
+                QMNestedGridMenu MurderItemAttackerMenu = new QMNestedGridMenu(Murder2CheatPage, "Followers", "Murder item Followers!");
+                _ = new QMSingleButton(MurderItemAttackerMenu, 1, 0, "Detective Gun follows target!", new Action(() => { DetectiveGuns.AttackTarget(); }), "Make Detective Gun follow Target");
+                _ = new QMSingleButton(MurderItemAttackerMenu, 2, 0, "Silenced Gun follows target!", new Action(() => { SilencedGuns.AttackTarget(); }), "Make Silenced Gun follow Target");
+                _ = new QMSingleButton(MurderItemAttackerMenu, 3, 0, "Knifes follows target!", new Action(() => { Knifes.AttackTarget(); }), "Make Knifes follow Target");
+                _ = new QMSingleButton(MurderItemAttackerMenu, 4, 0, "Clues follows target!", new Action(() => { Clues.AttackTarget(); }), "Make Clues follow Target");
+                _ = new QMSingleButton(MurderItemAttackerMenu, 1, 1, "Detective Gun follows you!", new Action(() => { DetectiveGuns.AttackSelf(); }), "Make Detective Gun follow you");
+                _ = new QMSingleButton(MurderItemAttackerMenu, 2, 1, "Silenced Guns follows you!", new Action(() => { SilencedGuns.AttackSelf(); }), "Make Silenced Gun follow you");
+                _ = new QMSingleButton(MurderItemAttackerMenu, 3, 1, "Knifes follows you!", new Action(() => { Knifes.AttackSelf(); }), "Make Knifes follow you");
+                _ = new QMSingleButton(MurderItemAttackerMenu, 4, 1, "Clues follows you!", new Action(() => { Clues.AttackSelf(); }), "Make Clues follow you");
             }
             if (Bools.AllowOrbitComponent)
             {
-                QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(Murder2CheatPage, 1, 2, "orbiters", "Murder item Orbits!", null, null, null, null);
-                _ = new QMSingleButton(MurderItemOrbiterMenu, 1, 0, "Detective Gun orbits around target!", new Action(() => { DetectiveGuns.OrbitTarget(); }), "Make Detective Gun orbit around Target", null, null);
-                _ = new QMSingleButton(MurderItemOrbiterMenu, 2, 0, "Silenced Guns orbits around target!", new Action(() => { SilencedGuns.OrbitTarget(); }), "Make Silenced Gun around orbit Target", null, null);
-                _ = new QMSingleButton(MurderItemOrbiterMenu, 3, 0, "Knifes orbits around target!", new Action(() => { Knifes.OrbitTarget(); }), "Make Knifes orbit around Target", null, null);
-                _ = new QMSingleButton(MurderItemOrbiterMenu, 4, 0, "Clues orbits around target!", new Action(() => { Clues.OrbitTarget(); }), "Make Clues orbit around Target", null, null);
-                _ = new QMSingleButton(MurderItemOrbiterMenu, 1, 1, "Detective Gun orbits around you!", new Action(() => { DetectiveGuns.OrbitSelf(); }), "Make Detective Gun orbit around you", null, null);
-                _ = new QMSingleButton(MurderItemOrbiterMenu, 2, 1, "Silenced Guns orbits around you!", new Action(() => { SilencedGuns.OrbitSelf(); }), "Make Silenced Gun around orbit you", null, null);
-                _ = new QMSingleButton(MurderItemOrbiterMenu, 3, 1, "Knifes orbits around you!", new Action(() => { Knifes.OrbitSelf(); }), "Make Knifes orbit around you", null, null);
-                _ = new QMSingleButton(MurderItemOrbiterMenu, 4, 1, "Clues orbits around you!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you", null, null);
+                QMNestedGridMenu MurderItemOrbiterMenu = new QMNestedGridMenu(Murder2CheatPage, "orbiters", "Murder item Orbits!");
+                _ = new QMSingleButton(MurderItemOrbiterMenu, 1, 0, "Detective Gun orbits around target!", new Action(() => { DetectiveGuns.OrbitTarget(); }), "Make Detective Gun orbit around Target");
+                _ = new QMSingleButton(MurderItemOrbiterMenu, 2, 0, "Silenced Guns orbits around target!", new Action(() => { SilencedGuns.OrbitTarget(); }), "Make Silenced Gun around orbit Target");
+                _ = new QMSingleButton(MurderItemOrbiterMenu, 3, 0, "Knifes orbits around target!", new Action(() => { Knifes.OrbitTarget(); }), "Make Knifes orbit around Target");
+                _ = new QMSingleButton(MurderItemOrbiterMenu, 4, 0, "Clues orbits around target!", new Action(() => { Clues.OrbitTarget(); }), "Make Clues orbit around Target");
+                _ = new QMSingleButton(MurderItemOrbiterMenu, 1, 1, "Detective Gun orbits around you!", new Action(() => { DetectiveGuns.OrbitSelf(); }), "Make Detective Gun orbit around you");
+                _ = new QMSingleButton(MurderItemOrbiterMenu, 2, 1, "Silenced Guns orbits around you!", new Action(() => { SilencedGuns.OrbitSelf(); }), "Make Silenced Gun around orbit you");
+                _ = new QMSingleButton(MurderItemOrbiterMenu, 3, 1, "Knifes orbits around you!", new Action(() => { Knifes.OrbitSelf(); }), "Make Knifes orbit around you");
+                _ = new QMSingleButton(MurderItemOrbiterMenu, 4, 1, "Clues orbits around you!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you");
             }
-            QMNestedButton MurderItemWatcherMenu = new QMNestedButton(Murder2CheatPage, 1, 2.5f, "Watchers", "Murder item Watchers!", null, null, null, null);
-            _ = new QMSingleButton(MurderItemWatcherMenu, 1, 0, "Detective Gun Watchs target!", new Action(() => { DetectiveGuns.WatchTarget(); }), "Make Detective Gun Watch Target", null, null);
-            _ = new QMSingleButton(MurderItemWatcherMenu, 2, 0, "Silenced Gun Watchs target!", new Action(() => { SilencedGuns.WatchTarget(); }), "Make Silenced Gun Watch Target", null, null);
-            _ = new QMSingleButton(MurderItemWatcherMenu, 3, 0, "Knifes Watchs target!", new Action(() => { Knifes.WatchTarget(); }), "Make Knifes Watch Target", null, null);
-            _ = new QMSingleButton(MurderItemWatcherMenu, 4, 0, "Clues Watchs target!", new Action(() => { Clues.WatchTarget(); }), "Make Clues Watch Target", null, null);
-            _ = new QMSingleButton(MurderItemWatcherMenu, 1, 1, "Detective Gun Watchs you!", new Action(() => { DetectiveGuns.WatchSelf(); }), "Make Detective Gun Watch you", null, null);
-            _ = new QMSingleButton(MurderItemWatcherMenu, 2, 1, "Silenced Guns Watchs you!", new Action(() => { SilencedGuns.WatchSelf(); }), "Make Silenced Gun Watch you", null, null);
-            _ = new QMSingleButton(MurderItemWatcherMenu, 3, 1, "Knifes Watchs you!", new Action(() => { Knifes.WatchSelf(); }), "Make Knifes Watch you", null, null);
-            _ = new QMSingleButton(MurderItemWatcherMenu, 4, 1, "Clues Watchs you!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you", null, null);
+            QMNestedGridMenu MurderItemWatcherMenu = new QMNestedGridMenu(Murder2CheatPage,  "Watchers", "Murder item Watchers!");
+            _ = new QMSingleButton(MurderItemWatcherMenu, 1, 0, "Detective Gun Watchs target!", new Action(() => { DetectiveGuns.WatchTarget(); }), "Make Detective Gun Watch Target");
+            _ = new QMSingleButton(MurderItemWatcherMenu, 2, 0, "Silenced Gun Watchs target!", new Action(() => { SilencedGuns.WatchTarget(); }), "Make Silenced Gun Watch Target");
+            _ = new QMSingleButton(MurderItemWatcherMenu, 3, 0, "Knifes Watchs target!", new Action(() => { Knifes.WatchTarget(); }), "Make Knifes Watch Target");
+            _ = new QMSingleButton(MurderItemWatcherMenu, 4, 0, "Clues Watchs target!", new Action(() => { Clues.WatchTarget(); }), "Make Clues Watch Target");
+            _ = new QMSingleButton(MurderItemWatcherMenu, 1, 1, "Detective Gun Watchs you!", new Action(() => { DetectiveGuns.WatchSelf(); }), "Make Detective Gun Watch you");
+            _ = new QMSingleButton(MurderItemWatcherMenu, 2, 1, "Silenced Guns Watchs you!", new Action(() => { SilencedGuns.WatchSelf(); }), "Make Silenced Gun Watch you");
+            _ = new QMSingleButton(MurderItemWatcherMenu, 3, 1, "Knifes Watchs you!", new Action(() => { Knifes.WatchSelf(); }), "Make Knifes Watch you");
+            _ = new QMSingleButton(MurderItemWatcherMenu, 4, 1, "Clues Watchs you!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you");
 
-            GodModeMurder2 = new QMSingleToggleButton(Murder2CheatPage, 4, 0, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
-            Murder2ESPtoggler = new QMSingleToggleButton(Murder2CheatPage, 4, 0.5f, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
+            GodModeMurder2 = new QMToggleButton(Murder2CheatPage, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!");
+            Murder2ESPtoggler = new QMToggleButton(Murder2CheatPage,  "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.");
         }
 
         // MAP GameObjects Required for control.
@@ -276,8 +276,8 @@
         internal static GameObject item_knife_6 = null;
         internal static GameObject item_knife_7 = null;
         internal static GameObject item_knife_8 = null;
-        internal static QMNestedButton Murder2CheatPage;
-        internal static QMSingleToggleButton GodModeMurder2;
-        internal static QMSingleToggleButton Murder2ESPtoggler;
+        internal static QMNestedGridMenu Murder2CheatPage;
+        internal static QMToggleButton GodModeMurder2;
+        internal static QMToggleButton Murder2ESPtoggler;
     }
 }

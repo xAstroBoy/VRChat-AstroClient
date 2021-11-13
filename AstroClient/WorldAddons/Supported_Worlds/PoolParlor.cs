@@ -15,9 +15,11 @@
 
     internal class PoolParlor : GameEvents
     {
-        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+
+        // TODO : Rewrite this (read and cache from behaviour themself!)
+        internal static void InitButtons(QMGridTab main)
         {
-            PoolParlorCheats = new QMNestedButton(main, x, y, "PoolParlor", "PoolParlor Customization", null, null, null, null, btnHalf);
+            PoolParlorCheats = new QMNestedButton(main, "PoolParlor", "PoolParlor Customization");
 
             _ = new QMSingleButton(PoolParlorCheats, 1, 0f, "+", () => { CurrentTableSkin++; }, "Set Table Skin!", null, null, true);
             TableSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 0f, "Default Table", () => { CurrentTableSkin = _CurrentTableSkin; }, "Table Skin!", null, null, true);
@@ -34,6 +36,13 @@
         {
             if (id == WorldIds.PoolParlor)
             {
+                if (PoolParlorCheats != null)
+                {
+                    PoolParlorCheats.SetIntractable(true);
+                    PoolParlorCheats.SetTextColor(Color.green);
+
+                }
+
                 ModConsole.Log($"Recognized {Name} World, Patching Skins....");
 
                 if (PlayerSpooferUtils.SpoofAsWorldAuthor)
@@ -76,6 +85,16 @@
                 GetCurrentTable();
                 GetCurrentCue();
                 SetupCues();
+            }
+            else
+            {
+                if (PoolParlorCheats != null)
+                {
+                    PoolParlorCheats.SetIntractable(false);
+                    PoolParlorCheats.SetTextColor(Color.red);
+
+                }
+
             }
         }
 

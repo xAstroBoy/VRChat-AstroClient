@@ -14,16 +14,19 @@
 
     internal class VRChatHub : GameEvents
     {
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            VRChat_Hub_Addons = new QMNestedButton(menu, x, y, "Hub Mods", "Control HUB World.", null, null, null, null, btnHalf);
-            VRChat_Hub_Addons.GetMainButton();
-            HubLock = new QMToggleButton(VRChat_Hub_Addons, 1, 0, "Hub Button Lock ON", new Action(ToggleHubButtonLock), "Hub Button Lock OFF", new Action(ToggleHubButtonLock), "Prevents other people from annoying you in the hub by fighting back!", null, null, null, btnHalf);
-            _ = new QMSingleButton(VRChat_Hub_Addons, 2, 0, "Active all Hub Objects!", new Action(ToggleAllHubObjectOn), "Enable all Hub Props!", null, null);
-            IgnoreSelfFight = new QMToggleButton(VRChat_Hub_Addons, 3, 0, "Ignore Self ON", new Action(ToggleIgnoreSelf), "Ignore Self OFF", new Action(ToggleIgnoreSelf), "Prevents other people from annoying you in the hub by fighting back!", null, null, null, false);
+            VRChat_Hub_Addons = new QMNestedGridMenu(menu, "Hub Mods", "Control HUB World.");
+            HubLock = new QMToggleButton(VRChat_Hub_Addons, 1, 0, "Hub Button Lock ON", new Action(ToggleHubButtonLock), "Hub Button Lock OFF", new Action(ToggleHubButtonLock), "Prevents other people from annoying you in the hub by fighting back!");
+            _ = new QMSingleButton(VRChat_Hub_Addons, 2, 0, "Active all Hub Objects!", new Action(ToggleAllHubObjectOn), "Enable all Hub Props!");
+            IgnoreSelfFight = new QMToggleButton(VRChat_Hub_Addons, 3, 0, "Ignore Self ON", new Action(ToggleIgnoreSelf), "Ignore Self OFF", new Action(ToggleIgnoreSelf), "Prevents other people from annoying you in the hub by fighting back!");
         }
 
-        internal static QMNestedButton VRChat_Hub_Addons;
+        internal static QMNestedGridMenu VRChat_Hub_Addons;
+
+
+
+
 
         internal static void ToggleAllHubObjectOn()
         {
@@ -130,12 +133,23 @@
         {
             if (id == WorldIds.VRChatDefaultHub)
             {
-                isHubWorldLoaded = true;
-                FindHubButtons();
+                if (VRChat_Hub_Addons != null)
+                {
+                    ModConsole.Log($"Recognized {Name} World, revealing Hub Addons Submenu Button!", System.Drawing.Color.Green);
+                    VRChat_Hub_Addons.GetMainButton().SetIntractable(true);
+                    VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.green);
+                    isHubWorldLoaded = true;
+                    FindHubButtons();
+                }
             }
             else
             {
-                isHubWorldLoaded = false;
+                if (VRChat_Hub_Addons != null)
+                {
+                    VRChat_Hub_Addons.GetMainButton().SetIntractable(false);
+                    VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.red);
+                    isHubWorldLoaded = false;
+                }
             }
         }
 
