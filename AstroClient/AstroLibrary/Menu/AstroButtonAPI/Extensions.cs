@@ -6,6 +6,7 @@
     using AstroLibrary.Utility;
     using CheetoLibrary;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
@@ -24,6 +25,7 @@
             {
                 ScrollRect scrollRect = NestedPart.GetComponentInChildren<ScrollRect>(true);
                 Scrollbar scrollbar = NestedPart.GetComponentInChildren<Scrollbar>(true);
+                VerticalLayoutGroup layout = NestedPart.GetComponentInChildren<VerticalLayoutGroup>(true);
                 if (scrollbar != null && scrollRect != null)
                 {
                     scrollbar.enabled = active;
@@ -36,7 +38,11 @@
                     //{
                     //    scrollRect.viewport = buttons.GetComponent<RectTransform>();
                     //}
-                    scrollRect.movementType = ScrollRect.MovementType.Unrestricted;
+                    if (layout != null)
+                    {
+                        layout.childControlHeight = true;
+                    }
+                    scrollRect.movementType = ScrollRect.MovementType.Elastic;
                     scrollRect.verticalScrollbar = scrollbar;
                     //scrollRect.horizontalScrollbar = scrollbar;
                 }
@@ -62,7 +68,45 @@
             }
             return false;
         }
+        internal static IEnumerator FixTabSpacing()
+        {
+            Transform layoutGroup = QuickMenuTools.QuickMenuInstance.field_Public_Transform_0.Find("Window/Page_Buttons_QM/HorizontalLayoutGroup");
+            if (layoutGroup.GetComponent<ContentSizeFitter>() != null && layoutGroup.GetComponent<HorizontalLayoutGroup>() != null)
+            {
+                GameObject.DestroyImmediate(layoutGroup.GetComponent<ContentSizeFitter>()); // Destroying weird thing that broke everything
+                GameObject.DestroyImmediate(layoutGroup.GetComponent<HorizontalLayoutGroup>()); // Destroying inferior HorizontalLayoutGroup
+                GridLayoutGroup gridLayoutGroup = layoutGroup.gameObject.AddComponent<GridLayoutGroup>(); //Adding superior GridLayoutGroup
+                int maxwidth = 960; // Sets Max Width of Tab buttons
+                int minwidth = 120; //Sets Icon Size
+                int activeChildren = 0;
+                int rows = 1;
+                for (int i = 0; i < layoutGroup.childCount; i++)
+                {
+                    if (layoutGroup.GetChild(i).gameObject.active)
+                        activeChildren++;
+                }
 
+                while (maxwidth / Math.Ceiling((float)activeChildren / (float)rows) < minwidth)
+                {
+                    rows++;
+                }
+
+                gridLayoutGroup.cellSize = new Vector2((float)(maxwidth / Math.Ceiling((float)activeChildren / (float)rows)), 100f);
+                gridLayoutGroup.childAlignment = TextAnchor.UpperCenter;
+                layoutGroup.GetComponent<RectTransform>().sizeDelta = new Vector2(maxwidth, 100);
+                Transform tooltip = QuickMenuTools.QuickMenuInstance.field_Public_Transform_0.Find("Window/ToolTipPanel/Panel");
+                tooltip.localPosition = new Vector3(tooltip.localPosition.x, 220, tooltip.localPosition.z); //Changes the Tooltip Position so it dosent cover the buttons
+                BoxCollider boxCollider = QuickMenuTools.QuickMenuInstance.field_Public_Transform_0.Find("Window/Page_Buttons_QM").GetComponent<BoxCollider>();
+                boxCollider.center = new Vector3(0, -150, 0); //Centers the Collider to the 2nd Row
+                boxCollider.size = new Vector3(1200, 300, 1); //Increases the Size of the Collider to cover all Buttons
+                yield return null;
+            }
+            else
+            {
+                ModConsole.DebugLog("Another Mod must have applied the Tabs fix, aborting!");
+                yield return null;
+            }
+        }
 
         internal static bool ContainsPage(this UIPage page, List<QMNestedGridMenu> menus)
         {

@@ -42,6 +42,7 @@
     using Button = UnityEngine.UI.Button;
     using Color = System.Drawing.Color;
     using Console = CheetosConsole.Console;
+    using Extensions = AstroButtonAPI.Extensions;
     using QuickMenu = QuickMenu;
 
     #endregion Imports
@@ -353,6 +354,7 @@
 
             try
             {
+                MelonCoroutines.Start(Extensions.FixTabSpacing());
                 InitSetupUI();
 
             }
