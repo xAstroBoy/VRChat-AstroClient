@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
     using AstroButtonAPI;
+    using CheetoLibrary;
     using UnityEngine;
     using UnityEngine.UI;
     using Variables;
@@ -11,12 +13,13 @@
 
     internal class CheatsShortcutButton : GameEvents
     {
-        private static QMSingleButton WorldCheatsShortcut;
+        private static QMWings WorldCheatsShortcut;
 
-        internal static void Init_Cheats_ShortcutBtn(float x, float y, bool btnHalf)
+        internal static void Init_Cheats_ShortcutBtn()
         {
-            WorldCheatsShortcut = new QMSingleButton("MainMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
-            ToggleButtonVisibilityAndInteractivity(false);
+            WorldCheatsShortcut = new QMWings(1020, true, "World Cheats", "This Opens Compatible World cheats", null, null);
+           WorldCheatsShortcut.LoadIcon(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.thief.png")); 
+           ToggleButtonVisibilityAndInteractivity(false);
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -173,8 +176,8 @@
         {
             if (WorldCheatsShortcut != null)
             {
-                WorldCheatsShortcut.SetButtonText(ButtonText + " Shortcut.");
-                WorldCheatsShortcut.SetToolTip(ButtonText + " Shortcut.");
+                WorldCheatsShortcut.SetButtonText(ButtonText);
+                WorldCheatsShortcut.SetToolTip(ButtonText);
             }
         }
 
@@ -182,8 +185,8 @@
         {
             if (WorldCheatsShortcut != null)
             {
-                WorldCheatsShortcut.SetButtonText(ButtonText + " Shortcut.");
-                WorldCheatsShortcut.SetToolTip(ButtonToolTip + " Shortcut.");
+                WorldCheatsShortcut.SetButtonText(ButtonText);
+                WorldCheatsShortcut.SetToolTip(ButtonToolTip);
             }
         }
 

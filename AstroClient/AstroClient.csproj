@@ -346,6 +346,7 @@
     <Compile Include="AstroLibrary\EventArgs\APIUserEventArgs.cs" />
     <Compile Include="AstroLibrary\EventArgs\VRCInputArgs.cs" />
     <Compile Include="AstroLibrary\EventArgs\ScreenEventArgs.cs" />
+    <Compile Include="Startup\Welcome.cs" />
     <Compile Include="Startup\Hooks\PhotonOnEventHook.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
@@ -486,7 +487,6 @@
     <Compile Include="ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="ClientUI\Menu\MovementMenu.cs" />
-    <Compile Include="Startup\Welcome.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Networking\NetworkingManager.cs" />

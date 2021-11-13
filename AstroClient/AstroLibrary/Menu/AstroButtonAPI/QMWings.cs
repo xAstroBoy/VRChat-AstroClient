@@ -1,6 +1,7 @@
 ﻿namespace AstroButtonAPI
 {
     using System;
+    using TMPro;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
@@ -15,6 +16,9 @@
 
         internal GameObject backbuttonObject;
         internal Button BackButton;
+
+        internal TextMeshProUGUI ButtonText;
+
 
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
@@ -37,7 +41,8 @@
                 UIPage Page = QuickMenuTools.UIPageTemplate_Left();
                 CurrentPage = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
                 WingPageTransform = CurrentPage.transform;
-                CurrentPage.gameObject.NewText("Text_Title").text = $"{MenuName}";
+                ButtonText = CurrentPage.gameObject.NewText("Text_Title");
+                ButtonText.text = $"{MenuName}";
                 CurrentPage.field_Public_String_0 = btnQMLoc; //Name
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true; //_inited
@@ -65,7 +70,7 @@
                 BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
-                setAction(() => { QuickMenuTools.Wing_Left().ShowQuickmenuPage(btnQMLoc); });
+                SetAction(() => { QuickMenuTools.Wing_Left().ShowQuickmenuPage(btnQMLoc); });
             }
             else
             {
@@ -110,7 +115,7 @@
                 BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
-                setAction(() => { QuickMenuTools.Wing_Right().ShowQuickmenuPage(btnQMLoc); });
+                SetAction(() => { QuickMenuTools.Wing_Right().ShowQuickmenuPage(btnQMLoc); });
             }
 
 
@@ -134,6 +139,10 @@
 
         }
 
+        internal void SetButtonText(string text)
+        {
+            ButtonText.text = text;
+        }
 
         internal void LoadIcon(string icon)
         {
@@ -147,7 +156,7 @@
             BackButton.onClick.Invoke();
         }
 
-        internal void setAction(System.Action buttonAction)
+        internal void SetAction(System.Action buttonAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonAction != null)

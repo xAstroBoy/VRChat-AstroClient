@@ -474,6 +474,7 @@
             TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
             ModConsole.DebugLog("Done.");
 
+            CheatsShortcutButton.Init_Cheats_ShortcutBtn();
 
             //_ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>
             //{
@@ -481,7 +482,6 @@
             //    GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke();
             //}, "Advanced GameObject Toggler", null, null, true);
             //ModConsole.DebugLog("28");
-            //CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
             //ModConsole.DebugLog("29");
 
 
