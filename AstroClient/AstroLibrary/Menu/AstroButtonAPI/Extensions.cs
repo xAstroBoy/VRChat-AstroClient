@@ -190,6 +190,8 @@
             UnityEngine.GameObject.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37Vo12St37VoUnique>());
         }
 
+
+
         public static TMPro.TextMeshProUGUI NewText(this GameObject Parent, string search)
         {
             TMPro.TextMeshProUGUI text = new TMPro.TextMeshProUGUI();
@@ -256,6 +258,39 @@
         {
             _MenuStateController.Method_Public_Void_String_UIContext_Boolean_0(Page);
         }
+
+
+        internal static void ShowQuickmenuPage(this QMNestedButton menu)
+        {
+            QuickMenuTools.QuickMenuController().PushPage(menu.GetMenuName());
+        }
+        internal static void ShowQuickmenuPage(this QMTabMenu menu)
+        {
+            QuickMenuTools.QuickMenuController().PushPage(menu.GetMenuName());
+        }
+        internal static void ShowQuickmenuPage(this QMNestedGridMenu menu)
+        {
+            QuickMenuTools.QuickMenuController().PushPage(menu.GetMenuName());
+        }
+        internal static void ShowLeftWingPage(this string pagename)
+        {
+            QuickMenuTools.WingMenuStateControllerLeft().PushPage(pagename);
+        }
+        internal static void ShowRightWingPage(this string pagename)
+        {
+            QuickMenuTools.WingMenuStateControllerLeft().PushPage(pagename);
+        }
+
+        internal static void ShowLeftWingPage(this QMWings pagename)
+        {
+            QuickMenuTools.WingMenuStateControllerLeft().PushPage(pagename.GetMenuName());
+        }
+
+        internal static void ShowRightWingPage(this QMWings pagename)
+        {
+            QuickMenuTools.WingMenuStateControllerRight().PushPage(pagename.GetMenuName());
+        }
+
 
 
         internal static GameObject CreateMainBackButton(this GameObject NestedPart)

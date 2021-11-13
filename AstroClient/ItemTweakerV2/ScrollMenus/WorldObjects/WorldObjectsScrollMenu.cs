@@ -35,6 +35,7 @@
                 if (WingMenu != null)
                 {
                     WingMenu.SetActive(true);
+                    WingMenu.ShowLeftWingPage();
                 }
                 Regenerate();
             });
@@ -121,7 +122,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1003, true, "Tweaker World Objects", "Select World Obj");
+            WingMenu = new QMWings(1001, true, "Tweaker World Objects", "Select World Obj");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

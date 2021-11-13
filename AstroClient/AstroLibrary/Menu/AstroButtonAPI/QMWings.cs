@@ -11,19 +11,22 @@
 
         internal UIPage CurrentPage;
 
+        internal string MenuName;
+
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             btnQMLoc = "WingPage" + MenuName;
             initButton(Index, LeftWing, MenuName, btnToolTip, btnBackgroundColor, LoadSprite);
         }
 
-        internal void initButton(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
+        internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
         {
             if (LeftWing)
             {
                 btnQMLoc += $"_LEFT_{System.Guid.NewGuid().ToString()} ";
                 button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left(), QuickMenuTools.Wing_Left().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
+                MenuName = AssignedMenu; 
                 button.NewText("Text_QM_H3").text = MenuName;
                 SetToolTip(btnToolTip);
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
@@ -63,6 +66,7 @@
                 btnQMLoc += $"_RIGHT_{System.Guid.NewGuid().ToString()}";
                 button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right(), QuickMenuTools.Wing_Right().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
+                MenuName = AssignedMenu;
                 button.NewText("Text_QM_H3").text = MenuName;
                 SetToolTip(btnToolTip);
 
@@ -106,6 +110,10 @@
             if (LoadSprite != "")
                 button.LoadSprite(LoadSprite, "Icon");
             SetActive(true);
+        }
+        internal string GetMenuName()
+        {
+            return MenuName;
         }
 
         internal void setAction(System.Action buttonAction)

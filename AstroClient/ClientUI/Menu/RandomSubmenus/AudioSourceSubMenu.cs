@@ -31,6 +31,7 @@
                 if (WingMenu != null)
                 {
                     WingMenu.SetActive(true);
+                    WingMenu.ShowLeftWingPage();
                 }
                 Regenerate();
             });
@@ -101,7 +102,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1007, true, "AudioSources", "AudioSources Control");
+            WingMenu = new QMWings(1010, true, "AudioSources", "AudioSources Control");
             new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }

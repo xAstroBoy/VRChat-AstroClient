@@ -42,6 +42,7 @@
                 if (WingMenu != null)
                 {
                     WingMenu.SetActive(true);
+                    WingMenu.ShowLeftWingPage();
                 }
                 Regenerate();
             });
@@ -114,7 +115,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1002, true, "VRC Interactables Menu", "Interact with VRC_Interactable Triggers");
+            WingMenu = new QMWings(1003, true, "VRC Interactables Menu", "Interact with VRC_Interactable Triggers");
             new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons();   Regenerate(); }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }

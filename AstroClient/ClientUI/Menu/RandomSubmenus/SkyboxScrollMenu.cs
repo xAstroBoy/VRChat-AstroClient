@@ -38,6 +38,8 @@
                 if (WingMenu != null)
                 {
                     WingMenu.SetActive(true);
+                    WingMenu.ShowLeftWingPage();
+
                 }
                 Regenerate();
             });
@@ -110,7 +112,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1001, true, "Skybox Options", "Edit Current Skybox");
+            WingMenu = new QMWings(1007, true, "Skybox Options", "Edit Current Skybox");
             new QMWingSingleButton(WingMenu, "Refresh", () => {
                 _ = MelonLoader.MelonCoroutines.Start(SkyboxEditor.FindAndLoadBundle());
                 HasGenerated = false;

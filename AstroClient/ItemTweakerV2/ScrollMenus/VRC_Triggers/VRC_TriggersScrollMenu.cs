@@ -32,6 +32,7 @@
                 if (WingMenu != null)
                 {
                     WingMenu.SetActive(true);
+                    WingMenu.ShowLeftWingPage();
                 }
                 Regenerate();
             });
@@ -105,7 +106,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1003, true, "Tweaker Triggers", "Interact with Internal Triggers");
+            WingMenu = new QMWings(1002, true, "Tweaker Triggers", "Interact with Internal Triggers");
             new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }

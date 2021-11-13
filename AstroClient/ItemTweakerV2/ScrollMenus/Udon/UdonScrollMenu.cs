@@ -40,6 +40,7 @@
                 if (WingMenu != null)
                 {
                     WingMenu.SetActive(true);
+                    WingMenu.ShowLeftWingPage();
                 }
                 var udonevents = Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours();
                 if (udonevents != null && udonevents.Count() != 0)
@@ -56,6 +57,7 @@
                                 if (WingMenu != null)
                                 {
                                     WingMenu.SetActive(true);
+                                    WingMenu.ShowLeftWingPage();
                                 }
                                 if (CurrentUnboxBehaviourToConsole != null)
                                 {
@@ -85,6 +87,7 @@
                                 if (WingMenu != null)
                                 {
                                     WingMenu.SetActive(true);
+                                    WingMenu.ShowLeftWingPage();
                                 }
 
                                 if (CurrentUnboxBehaviourToConsole != null)
@@ -140,7 +143,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1000, true, "Udon Behaviours (Tweaker)", "Udon Behaviours (Tweaker) Interact with behaviours internally.");
+            WingMenu = new QMWings(1005, true, "Udon Behaviours (Tweaker)", "Udon Behaviours (Tweaker) Interact with behaviours internally.");
             CurrentUnboxBehaviourToConsole = new QMWingSingleButton(WingMenu, "Not Available", () => { }, "Not Available");
             CurrentUnboxBehaviourToConsole.SetActive(false);
             WingMenu.SetActive(false);

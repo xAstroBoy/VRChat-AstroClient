@@ -32,6 +32,7 @@
                 if (WingMenu != null)
                 {
                     WingMenu.SetActive(true);
+                    WingMenu.ShowLeftWingPage();
                 }
                 Regenerate();
             });
@@ -106,7 +107,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1003, true, "Triggers", "Interact with World Triggers");
+            WingMenu = new QMWings(1006, true, "Triggers", "Interact with World Triggers");
             new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
