@@ -24,6 +24,7 @@
         private static Transform _NestedPagesReference = null;
         private static Transform MenuDashboardReference = null;
         private static Transform _TabButtonReference = null;
+        private static Transform _TabMenuReference = null;
         private static Transform _QuickMenuTransform = null;
         private static Transform HeaderDashboardReference = null;
         private static Transform _SliderReference;
@@ -391,6 +392,28 @@
         }
 
 
+        internal static Transform TabMenu
+        {
+            get
+            {
+                if (_TabMenuReference == null)
+                {
+                    var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
+                    foreach (var button in Buttons)
+                    {
+                        if (button.name == "Page_Buttons_QM")
+                        {
+                            ModConsole.DebugLog("Found Tab Menu!", Color.Chartreuse);
+                            return _TabMenuReference = button.transform;
+                        }
+                    }
+                }
+
+                return _TabMenuReference;
+            }
+        }
+
+        
 
         internal static GameObject WingPageButtonTemplate()
         {

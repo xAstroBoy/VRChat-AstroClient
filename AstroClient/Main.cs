@@ -354,7 +354,6 @@
 
             try
             {
-                MelonCoroutines.Start(Extensions.FixTabSpacing());
                 InitSetupUI();
 
             }

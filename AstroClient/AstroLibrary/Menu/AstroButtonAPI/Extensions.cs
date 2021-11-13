@@ -71,41 +71,31 @@
         internal static IEnumerator FixTabSpacing()
         {
             Transform layoutGroup = QuickMenuTools.QuickMenuInstance.field_Public_Transform_0.Find("Window/Page_Buttons_QM/HorizontalLayoutGroup");
-            if (layoutGroup.GetComponent<ContentSizeFitter>() != null && layoutGroup.GetComponent<HorizontalLayoutGroup>() != null)
+            GameObject.DestroyImmediate(layoutGroup.GetComponent<ContentSizeFitter>()); // Destroying weird thing that broke everything
+            GameObject.DestroyImmediate(layoutGroup.GetComponent<HorizontalLayoutGroup>()); // Destroying inferior HorizontalLayoutGroup
+            GridLayoutGroup gridLayoutGroup = layoutGroup.gameObject.AddComponent<GridLayoutGroup>(); //Adding superior GridLayoutGroup
+            int maxwidth = 960; // Sets Max Width of Tab buttons
+            int minwidth = 120; //Sets Icon Size
+            int activeChildren = 0;
+            int rows = 1;
+            for (int i = 0; i < layoutGroup.childCount; i++)
             {
-                GameObject.DestroyImmediate(layoutGroup.GetComponent<ContentSizeFitter>()); // Destroying weird thing that broke everything
-                GameObject.DestroyImmediate(layoutGroup.GetComponent<HorizontalLayoutGroup>()); // Destroying inferior HorizontalLayoutGroup
-                GridLayoutGroup gridLayoutGroup = layoutGroup.gameObject.AddComponent<GridLayoutGroup>(); //Adding superior GridLayoutGroup
-                int maxwidth = 960; // Sets Max Width of Tab buttons
-                int minwidth = 120; //Sets Icon Size
-                int activeChildren = 0;
-                int rows = 1;
-                for (int i = 0; i < layoutGroup.childCount; i++)
-                {
-                    if (layoutGroup.GetChild(i).gameObject.active)
-                        activeChildren++;
-                }
-
-                while (maxwidth / Math.Ceiling((float)activeChildren / (float)rows) < minwidth)
-                {
-                    rows++;
-                }
-
-                gridLayoutGroup.cellSize = new Vector2((float)(maxwidth / Math.Ceiling((float)activeChildren / (float)rows)), 100f);
-                gridLayoutGroup.childAlignment = TextAnchor.UpperCenter;
-                layoutGroup.GetComponent<RectTransform>().sizeDelta = new Vector2(maxwidth, 100);
-                Transform tooltip = QuickMenuTools.QuickMenuInstance.field_Public_Transform_0.Find("Window/ToolTipPanel/Panel");
-                tooltip.localPosition = new Vector3(tooltip.localPosition.x, 220, tooltip.localPosition.z); //Changes the Tooltip Position so it dosent cover the buttons
-                BoxCollider boxCollider = QuickMenuTools.QuickMenuInstance.field_Public_Transform_0.Find("Window/Page_Buttons_QM").GetComponent<BoxCollider>();
-                boxCollider.center = new Vector3(0, -150, 0); //Centers the Collider to the 2nd Row
-                boxCollider.size = new Vector3(1200, 300, 1); //Increases the Size of the Collider to cover all Buttons
-                yield return null;
+                if (layoutGroup.GetChild(i).gameObject.active)
+                    activeChildren++;
             }
-            else
+            while (maxwidth / Math.Ceiling((float)activeChildren / (float)rows) < minwidth)
             {
-                ModConsole.DebugLog("Another Mod must have applied the Tabs fix, aborting!");
-                yield return null;
+                rows++;
             }
+            gridLayoutGroup.cellSize = new Vector2((float)(maxwidth / Math.Ceiling((float)activeChildren / (float)rows)), 100f);
+            gridLayoutGroup.childAlignment = TextAnchor.UpperCenter;
+            layoutGroup.GetComponent<RectTransform>().sizeDelta = new Vector2(maxwidth, 100);
+            Transform tooltip = QuickMenuTools.QuickMenuInstance.field_Public_Transform_0.Find("Window/ToolTipPanel/Panel");
+            tooltip.localPosition = new Vector3(tooltip.localPosition.x, 220, tooltip.localPosition.z); //Changes the Tooltip Position so it dosent cover the buttons
+            BoxCollider boxCollider = QuickMenuTools.QuickMenuInstance.field_Public_Transform_0.Find("Window/Page_Buttons_QM").GetComponent<BoxCollider>();
+            boxCollider.center = new Vector3(0, -150, 0); //Centers the Collider to the 2nd Row
+            boxCollider.size = new Vector3(1200, 300, 1); //Increases the Size of the Collider to cover all Buttons
+            yield return null;
         }
 
         internal static bool ContainsPage(this UIPage page, List<QMNestedGridMenu> menus)
