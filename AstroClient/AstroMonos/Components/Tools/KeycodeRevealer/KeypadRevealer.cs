@@ -79,6 +79,7 @@
             "code",
             "PassCode",
             "correctCodes",
+            "PinCode",
         };
 
         internal void GenerateButtonWithPassword(string password)

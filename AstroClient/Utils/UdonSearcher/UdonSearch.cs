@@ -52,57 +52,64 @@
 
             return null;
         }
+        
 
-        internal static List<GameObject> FindAllUdonEvents(string action,  List<string> TermsToAvoid , bool Debug = false)
+
+        internal static List<GameObject> FindAllUdonEvents(List<string> actions,  List<string> TermsToAvoid , bool Debug = false)
         {
             var gameobjects = UdonParser.CleanedWorldBehaviours;
 
             List<GameObject> foundEvents = new List<GameObject>();
-            var behaviours = gameobjects.Where(x => x.gameObject.name.isMatch(action));
-            if (behaviours.Any())
+            foreach (var names in actions)
             {
-                foreach (var behaviour in behaviours)
+                var behaviours = gameobjects.Where(x => x.gameObject.name.isMatch(names));
+                if (behaviours.Any())
                 {
-                    if (behaviour._eventTable.count != 0)
+                    foreach (var behaviour in behaviours)
                     {
-                        if (Debug)
+                        if (behaviour._eventTable.count != 0)
                         {
-                            ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
-                        }
-
-                        if (foundEvents.Contains(behaviour.gameObject))
-                        {
-                            continue;
-                        }
-                        bool HasAvoidTermKey = false;
-                        if (TermsToAvoid != null)
-                        {
-                            if (TermsToAvoid.Count() != 0)
+                            if (Debug)
                             {
-                                foreach (var actionkeys in behaviour._eventTable)
+                                ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                            }
+
+                            if (foundEvents.Contains(behaviour.gameObject))
+                            {
+                                continue;
+                            }
+
+                            bool HasAvoidTermKey = false;
+                            if (TermsToAvoid != null)
+                            {
+                                if (TermsToAvoid.Count() != 0)
                                 {
-                                    if (TermsToAvoid.Contains(actionkeys.key))
+                                    foreach (var actionkeys in behaviour._eventTable)
                                     {
-                                        HasAvoidTermKey = true;
-                                        break;
+                                        if (TermsToAvoid.Contains(actionkeys.key))
+                                        {
+                                            HasAvoidTermKey = true;
+                                            break;
+                                        }
                                     }
                                 }
                             }
-                        }
 
 
-                        if (!HasAvoidTermKey)
-                        {
-                            foundEvents.Add(behaviour.gameObject);
+                            if (!HasAvoidTermKey)
+                            {
+                                foundEvents.Add(behaviour.gameObject);
+                            }
+                            else
+                            {
+                                continue;
+                            }
                         }
-                        else
-                        {
-                            continue;
-                        }
+
                     }
 
+                    return foundEvents;
                 }
-                return foundEvents;
             }
 
             return null;
