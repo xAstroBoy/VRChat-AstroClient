@@ -31,6 +31,7 @@
             Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
             Main.Event_VRChat_OnQuickMenuInit += Internal_VRChat_OnQuickMenuInit;
             Main.Event_VRChat_OnActionMenuInit += Internal_VRChat_OnActionMenuInit;
+            Main.Event_OnGui += Internal_OnGui;
 
             Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
             Main.Event_OnApplicationQuit += Internal_OnApplicationQuit;
