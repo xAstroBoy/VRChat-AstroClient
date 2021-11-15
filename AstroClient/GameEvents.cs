@@ -134,6 +134,10 @@
         {
             OnApplicationQuit();
         }
+        private void Internal_OnGui(object sender, EventArgs e)
+        {
+            OnGUI();
+        }
 
         private void Internal_OnLateUpdate(object sender, EventArgs e)
         {
@@ -335,6 +339,12 @@
         internal virtual void OnApplicationLateStart()
         {
         }
+
+
+        internal virtual void OnGUI()
+        {
+        }
+
 
         internal virtual void OnApplicationQuit()
         {

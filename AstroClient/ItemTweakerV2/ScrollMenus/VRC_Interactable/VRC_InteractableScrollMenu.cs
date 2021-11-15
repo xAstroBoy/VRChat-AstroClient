@@ -1,12 +1,13 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
     using AstroButtonAPI;
+    using Skyboxes;
+    using System.Collections.Generic;
+    using System.Linq;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroMonos.Components.Tools.Listeners;
-    using CheetoLibrary;
-    using Selector;
-    using System.Collections.Generic;
+    using ItemTweakerV2.Selector;
     using VRC.UI.Elements;
 
     internal class VRC_InteractableScrollMenu : GameEvents
@@ -15,12 +16,24 @@
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
         private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
-        private static bool isOpen;
+
+
+
+        private static bool CleanOnRoomLeave { get; } = true;
+        private static bool DestroyOnMenuClose { get; } = true;
+
+        private static bool HasGenerated { get; set; } = false;
+        private static bool isOpen { get; set; }
+
 
         internal override void OnRoomLeft()
         {
-            DestroyGeneratedButtons();
+            if (CleanOnRoomLeave)
+            {
+                DestroyGeneratedButtons();
+            }
         }
+
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -32,56 +45,43 @@
             CurrentScrollMenu.AddOpenAction(() =>
             {
                 OnOpenMenu();
-                Regenerate();
             });
             InitWingPage();
         }
 
         private static void Regenerate()
         {
-            foreach (var obj in Tweaker_Object.GetGameObjectToEdit().Get_Triggers())
+            if (!HasGenerated)
             {
-                var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () =>
+                foreach (var obj in Tweaker_Object.GetGameObjectToEdit().Get_Triggers())
                 {
-                    obj.TriggerClick();
-                }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
-                var listener = obj.gameObject.GetOrAddComponent<ScrollMenuListener>();
-                if (listener != null)
-                {
-                    listener.SingleButton = btn;
+                    var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () =>
+                    {
+                        obj.TriggerClick();
+                    }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
+                    var listener = obj.gameObject.GetOrAddComponent<ScrollMenuListener>();
+                    if (listener != null)
+                    {
+                        listener.SingleButton = btn;
+                    }
+                    Listeners.Add(listener);
+                    GeneratedButtons.Add(btn);
                 }
-                Listeners.Add(listener);
-                GeneratedButtons.Add(btn);
+
+                HasGenerated = true;
             }
         }
 
-        private static void OnOpenMenu()
+        internal static void DestroyGeneratedButtons()
         {
-            isOpen = true;
-            if (WingMenu != null)
-            {
-                WingMenu.SetActive(true);
-                WingMenu.ShowLeftWingPage();
-            }
-        }
-
-        private static void OnCloseMenu()
-        {
-            isOpen = false;
-            WingMenu.SetActive(false);
-            WingMenu.ClickBackButton();
-            DestroyGeneratedButtons();
-        }
-
-        private static void DestroyGeneratedButtons()
-        {
+            HasGenerated = false;
             if (GeneratedButtons.Count != 0)
             {
                 foreach (var item in GeneratedButtons) item.DestroyMe();
             }
             if (Listeners.Count != 0)
             {
-                foreach (var item in Listeners) UnityEngine.Object.Destroy(item);
+                foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
             }
         }
 
@@ -90,9 +90,31 @@
             OnCloseMenu();
         }
 
+        private static void OnCloseMenu()
+        {
+            if (DestroyOnMenuClose)
+            {
+                DestroyGeneratedButtons();
+            }
+            WingMenu.SetActive(false);
+            WingMenu.ClickBackButton();
+        }
+
+        private static void OnOpenMenu()
+        {
+            isOpen = true; 
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(true);
+                WingMenu.ShowLeftWingPage();
+            }
+            Regenerate();
+        }
+
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
         {
             if (!isOpen) return;
+
             if (Page != null)
             {
                 if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))
@@ -104,8 +126,12 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1004, true, "Tweaker Triggers", "Interact with Internal Triggers");
-            new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
+            WingMenu = new QMWings(1004, true, "Tweaker VRC_interactables", "Interact with Internal VRC_interactables");
+            new QMWingSingleButton(WingMenu, "Refresh", () =>
+            {
+                DestroyGeneratedButtons();
+                Regenerate();
+            }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
     }

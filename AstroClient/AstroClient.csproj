@@ -135,6 +135,9 @@
     <Compile Include="AstroLibrary\Menu\MenuApi\MenuType.cs" />
     <Compile Include="AstroLibrary\Menu\MenuApi\VRCList.cs" />
     <Compile Include="AstroLibrary\Menu\MenuApi\VRCMenuAPI.cs" />
+    <Compile Include="AstroLibrary\Tasks\TaskHandler.cs" />
+    <Compile Include="AstroLibrary\Tasks\TaskHandler\AwaitProvider.cs" />
+    <Compile Include="AstroLibrary\Tasks\TaskUtilities.cs" />
     <Compile Include="AstroLibrary\UiManager.cs" />
     <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\PlayerCameraEditor.cs" />
@@ -154,10 +157,10 @@
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
     <Compile Include="ClientUI\Menu\GameProcessMenu.cs" />
     <Compile Include="ClientUI\Menu\ProtectionsMenu.cs" />
-    <Compile Include="ClientUI\Menu\RandomSubmenus\AudioSourceSubMenu.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\VRC_InteractableSubMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\TriggerSubmenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\SkyboxScrollMenu.cs" />
-    <Compile Include="ClientUI\Menu\RandomSubmenus\VRC_InteractableSubMenu.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\AudioSourceSubMenu.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_Camera.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_Spoofs.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_HideElements.cs" />
@@ -309,6 +312,10 @@
     <Compile Include="ItemTweakerV2\Handlers\SpinnerBehaviourHandler.cs" />
     <Compile Include="ItemTweakerV2\ScrollMenus\Udon\UdonScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Interactable\VRC_InteractableScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\Pickup\PickupSelectionScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\Prefabs\PrefabSpawnerScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Triggers\VRC_TriggersScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\WorldObjects\WorldObjectsScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Components\Fun\FunBehavioursSubMenu.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnCrazyBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnInflaterBehaviourArgs.cs" />
@@ -357,6 +364,7 @@
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
+    <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Utils\Decompiler\DecompilerUtils.cs" />
     <Compile Include="Utils\Decompiler\IL2CPPDecompiler.cs" />
     <Compile Include="Utils\Decompiler\MethodsTools\ParameterInfoTools.cs" />
@@ -477,10 +485,6 @@
     <Compile Include="ItemTweakerV2\Submenus\Physic\Constraints\ConstraintsSubmenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Pickup\PickupSubmenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Scale\ScaleSubmenu.cs" />
-    <Compile Include="ItemTweakerV2\ScrollMenus\Pickup\PickupSelectionScrollMenu.cs" />
-    <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Triggers\VRC_TriggersScrollMenu.cs" />
-    <Compile Include="ItemTweakerV2\ScrollMenus\Prefabs\PrefabSpawnerScrollMenu.cs" />
-    <Compile Include="ItemTweakerV2\ScrollMenus\WorldObjects\WorldObjectsScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\ObjectInfoSubMenu\ObjectInfoSubMenu.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnSpinnerBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnPickupControllerArgs.cs" />
@@ -515,7 +519,6 @@
     <Compile Include="Startup\WorldJoinMsg.cs" />
     <Compile Include="Target\TargetSelector.cs" />
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
-    <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
     <Compile Include="Utils\UdonEditor\UdonUnboxer.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderDisplay.cs" />

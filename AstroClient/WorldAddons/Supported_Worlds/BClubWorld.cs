@@ -456,7 +456,7 @@
 
         private static void BlueChairSpam()
         {
-            var temp = UdonParser.CleanedWorldBehaviours.Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToList();
+            var temp = UdonParser.WorldBehaviours.Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToList();
             foreach (var chair in temp)
             {
                 if (chair.name.Contains("Chair") || chair.name.Contains("Seat"))
@@ -598,7 +598,7 @@
                     BClubExploitsPage.SetTextColor(Color.green);
                 }
                 isCurrentWorld = true;
-                UdonParser.CleanedWorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
+                UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
                 PenthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");

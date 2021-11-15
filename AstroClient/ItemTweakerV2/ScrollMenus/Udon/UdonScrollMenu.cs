@@ -2,9 +2,19 @@
 {
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
-    using Selector;
+    using AstroLibrary.Utility;
+    using AstroMonos.Components.Tools.Listeners;
+    using MelonLoader;
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using ItemTweakerV2.Selector;
+    using Udon;
+    using Udon.UdonEditor;
+    using UnityEngine;
+    using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using VRC.UI.Elements;
 
@@ -12,9 +22,22 @@
     {
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
-        private static QMWingSingleButton CurrentUnboxBehaviourToConsole;
+        private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
         private static List<QMNestedGridMenu> GeneratedPages = new List<QMNestedGridMenu>();
-        private static bool isOpen;
+
+        private static bool CleanOnRoomLeave { get; } = true;
+        private static bool DestroyOnMenuClose { get; } = true;
+
+        private static bool HasGenerated { get; set; } = false;
+        private static bool isOpen { get; set; }
+
+        internal override void OnRoomLeft()
+        {
+            if (CleanOnRoomLeave)
+            {
+                DestroyGeneratedButtons();
+            }
+        }
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -26,6 +49,14 @@
             CurrentScrollMenu.AddOpenAction(() =>
             {
                 OnOpenMenu();
+            });
+            InitWingPage();
+        }
+
+        private static void Regenerate()
+        {
+            if (!HasGenerated)
+            {
                 var udonevents = Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours();
                 if (udonevents != null && udonevents.Count() != 0)
                 {
@@ -38,11 +69,6 @@
                             GeneratedPages.Add(udon);
                             udon.AddOpenAction(() =>
                             {
-                                if (WingMenu != null)
-                                {
-                                    WingMenu.SetActive(true);
-                                    WingMenu.ShowLeftWingPage();
-                                }
                                 if (CurrentUnboxBehaviourToConsole != null)
                                 {
                                     CurrentUnboxBehaviourToConsole.SetButtonText($"Unbox {action.gameObject.name}");
@@ -50,42 +76,78 @@
                                     CurrentUnboxBehaviourToConsole.setAction(() => { action.UnboxUdonEventToConsole(); });
                                     CurrentUnboxBehaviourToConsole.SetActive(true);
                                 }
-                                foreach (var subaction in action._eventTable)
-                                {
-                                    new QMSingleButton(udon, subaction.Key, () =>
-                                    {
-                                        if (subaction.key.StartsWith("_"))
-                                        {
-                                            action.SendCustomEvent(subaction.Key);
-                                        }
-                                        else
-                                        {
-                                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                                        }
-                                    }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})", null, false);
-                                }
+
+                                GenerateInternal(udon, action);
                             });
                             udon.SetBackButtonAction(CurrentScrollMenu, () =>
                             {
-                                if (WingMenu != null)
-                                {
-                                    WingMenu.SetActive(true);
-                                    WingMenu.ShowLeftWingPage();
-                                }
-
                                 if (CurrentUnboxBehaviourToConsole != null)
                                 {
-                                    CurrentUnboxBehaviourToConsole.SetButtonText($"Not Available");
-                                    CurrentUnboxBehaviourToConsole.setButtonToolTip($"Not Available");
-                                    CurrentUnboxBehaviourToConsole.setAction(null);
+                                    CurrentUnboxBehaviourToConsole.SetButtonText($"Unavailable");
+                                    CurrentUnboxBehaviourToConsole.setButtonToolTip($"Unavailable");
+                                    CurrentUnboxBehaviourToConsole.setAction(() => { });
                                     CurrentUnboxBehaviourToConsole.SetActive(false);
                                 }
                             });
+
+                            var listener = action.gameObject.AddComponent<ScrollMenuListener>();
+                            if (listener != null)
+                            {
+                                listener.NestedGridButton = udon;
+                                Listeners.Add(listener);
+                            }
                         }
                     }
                 }
-            });
-            InitWingPage();
+                HasGenerated = true;
+            }
+        }
+
+        private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action)
+        {
+            foreach (var subaction in action._eventTable)
+            {
+                new QMSingleButton(menu, subaction.Key, () =>
+                {
+                    if (subaction.key.StartsWith("_"))
+                    {
+                        action.SendCustomEvent(subaction.Key);
+                    }
+                    else
+                    {
+                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                    }
+                }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})", null, false);
+            }
+        }
+
+        internal static void DestroyGeneratedButtons()
+        {
+            HasGenerated = false;
+
+            if (GeneratedPages.Count != 0)
+            {
+                foreach (var item in GeneratedPages) item.DestroyMe();
+            }
+            if (Listeners.Count != 0)
+            {
+                foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
+            }
+        }
+
+        internal override void OnQuickMenuClose()
+        {
+            OnCloseMenu();
+        }
+
+        private static void OnCloseMenu()
+        {
+            if (DestroyOnMenuClose)
+            {
+                DestroyGeneratedButtons();
+            }
+            WingMenu.SetActive(false);
+            WingMenu.ClickBackButton();
         }
 
         private static void OnOpenMenu()
@@ -96,22 +158,14 @@
                 WingMenu.SetActive(true);
                 WingMenu.ShowLeftWingPage();
             }
-        }
-
-        internal static void OnCloseMenu()
-        {
-            isOpen = false;
-            WingMenu.SetActive(false);
-            WingMenu.ClickBackButton();
-            if (GeneratedPages.Count != 0)
+            Regenerate();
+            if (CurrentUnboxBehaviourToConsole != null)
             {
-                foreach (var item in GeneratedPages) item.DestroyMe();
+                CurrentUnboxBehaviourToConsole.SetButtonText($"Unavailable");
+                CurrentUnboxBehaviourToConsole.setButtonToolTip($"Unavailable");
+                CurrentUnboxBehaviourToConsole.setAction(() => { });
+                CurrentUnboxBehaviourToConsole.SetActive(false);
             }
-        }
-
-        internal override void OnQuickMenuClose()
-        {
-            OnCloseMenu();
         }
 
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
@@ -133,5 +187,9 @@
             CurrentUnboxBehaviourToConsole.SetActive(false);
             WingMenu.SetActive(false);
         }
+
+        private static QMWingSingleButton CurrentUnboxBehaviourToConsole;
+
+        
     }
 }

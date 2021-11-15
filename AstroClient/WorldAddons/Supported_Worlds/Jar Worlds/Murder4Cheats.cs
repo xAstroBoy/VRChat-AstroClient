@@ -86,7 +86,7 @@
             item_Silenced_Revolver_1 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
             item_Grenade = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
             Snake_Crate = GameObjectFinder.Find("/Game Logic/Snakes/SnakeDispenser");
-            foreach (var action in UdonParser.CleanedWorldBehaviours)
+            foreach (var action in UdonParser.WorldBehaviours)
             {
                 if (action.gameObject.name == "Game Logic")
                 {

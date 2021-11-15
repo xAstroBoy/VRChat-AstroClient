@@ -16,7 +16,7 @@
             _ = new QMSingleButton(main, 1, 0, "Spawn Clone", () => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }, "Instantiates a copy of The selected object.", null, null, true);
             _ = new QMSingleButton(main, 1, 0.5f, "Kill Clones", () => { Cloner.ObjectCloner.ClonedObjectsDeleter(); }, "Removes All Cloned Objects.", null, null, true);
 
-            PrefabSpawnerScrollMenu.Init_PrefabSpawnerQMScroll(main, 1, 1f, true);
+            PrefabSpawnerScrollMenu.InitButtons(main, 1, 1f, true);
             _ = new QMSingleButton(main, 1, 1.5f, "Kill Spawned Prefabs", () => { SpawnerSubmenu.KillSpawnedPrefabs(); }, "Removes All Prefabs Objects.", null, null, true);
 
             SpawnedPickupsCounter = new QMSingleButton(main, 4, 0, GetClonesPickupText, null, GetClonesPickupText, null, Color.cyan, true);

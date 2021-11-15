@@ -17,7 +17,7 @@
     {
         internal static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction, bool Debug = false)
         {
-            var gameobjects = UdonParser.CleanedWorldBehaviours;
+            var gameobjects = UdonParser.WorldBehaviours;
 
             List<UdonBehaviour_Cached> foundEvents = new List<UdonBehaviour_Cached>();
             var behaviours = gameobjects.Where(x => x.gameObject.name == action);
@@ -57,7 +57,7 @@
 
         internal static List<GameObject> FindAllUdonEvents(List<string> actions,  List<string> TermsToAvoid , bool Debug = false)
         {
-            var gameobjects = UdonParser.CleanedWorldBehaviours;
+            var gameobjects = UdonParser.WorldBehaviours;
 
             List<GameObject> foundEvents = new List<GameObject>();
             foreach (var names in actions)
@@ -117,7 +117,7 @@
 
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
         {
-            var gameobjects = UdonParser.CleanedWorldBehaviours;
+            var gameobjects = UdonParser.WorldBehaviours;
 
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)

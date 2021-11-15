@@ -64,7 +64,7 @@
                 invisiblewall_1.DestroyMeLocal();
             }
 
-            foreach (var action in UdonParser.CleanedWorldBehaviours)
+            foreach (var action in UdonParser.WorldBehaviours)
             {
                 if (action.gameObject.name == "Game Logic")
                 {

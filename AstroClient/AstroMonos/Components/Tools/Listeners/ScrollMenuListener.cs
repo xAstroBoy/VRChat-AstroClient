@@ -10,6 +10,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
     {
         internal QMSingleButton SingleButton;
         internal QMNestedGridMenu NestedGridButton;
+        internal QMToggleButton ToggleButton;
 
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
@@ -29,7 +30,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
             {
                 SingleButton.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
             }
-            else if (SingleButton == null && NestedGridButton == null)
+            else if (SingleButton == null && NestedGridButton == null && ToggleButton == null)
             {
                 DestroyImmediate(this);
             }
@@ -45,7 +46,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
             {
                 SingleButton.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
             }
-            else if (SingleButton == null && NestedGridButton == null)
+            else if (SingleButton == null && NestedGridButton == null && ToggleButton == null)
             {
                 DestroyImmediate(this);
             }
@@ -53,7 +54,9 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
 
         private void OnDestroy()
         {
+            SingleButton?.DestroyMe();
             NestedGridButton?.DestroyMe();
+            ToggleButton?.DestroyMe();
             DestroyImmediate(this);
         }
     }

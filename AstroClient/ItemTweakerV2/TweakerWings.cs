@@ -17,8 +17,11 @@
         private static QMWingSingleButton TeleportToMe;
         private static QMWingSingleButton TeleportToTarget;
 
-        private static QMWingToggleButton LockHoldItem;
         private static QMWingSingleButton ObjectToEditBtn;
+
+        private static QMWingToggleButton LockHoldItem;
+        private static QMWingToggleButton AntiTheftInteractor;
+        private static QMWingToggleButton ProtectionInteractor;
 
         private static QMWings WingsMenu;
 
@@ -31,6 +34,16 @@
             Pickup_CurrentObjectHolder = new QMWingSingleButton(WingsMenu, "Current holder : null", () => { }, "Who is the Holding the object", null);
             TeleportToMe = new QMWingSingleButton(WingsMenu, ButtonStringExtensions.Generate_TeleportToMe_ButtonText(Tweaker_Selector.SelectedObject), () => { Tweaker_Object.GetGameObjectToEdit().TeleportToMe(); }, ButtonStringExtensions.Generate_TeleportToMe_ButtonText(Tweaker_Selector.SelectedObject), null);
             TeleportToTarget = new QMWingSingleButton(WingsMenu, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), () => { Tweaker_Object.GetGameObjectToEdit().TeleportToTarget(); }, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), null);
+          
+            
+            //AntiTheftInteractor = new QMWingToggleButton(WingsMenu, "AntiTheft", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object");
+            //ProtectionInteractor = new QMWingToggleButton(WingsMenu, "Interaction block", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object");
+            //LockHoldItem = new QMWingToggleButton(WingsMenu, "Lock", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object");
+
+
+            new QMWingSingleButton(WingsMenu, "DANGER : Destroy item.", () => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }, "Destroys Object , You need to reload the world to restore it back.", Color.red);
+
+
         }
 
         internal override void OnPickupController_OnUpdate(PickupController control)

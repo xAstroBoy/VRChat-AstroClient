@@ -1,11 +1,13 @@
 ﻿namespace AstroClient
 {
     using AstroButtonAPI;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using AstroMonos.Components.Tools.Listeners;
+    using Skyboxes;
     using System.Collections.Generic;
+    using System.Linq;
+    using AstroLibrary.Extensions;
+    using AstroMonos.Components.Tools.Listeners;
     using VRC.UI.Elements;
+    using AstroLibrary.Utility;
 
     internal class VRC_InteractableSubMenu : GameEvents
     {
@@ -13,12 +15,24 @@
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
         private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
-        private static bool isOpen;
+
+
+
+        private static bool CleanOnRoomLeave { get; } = true;
+        private static bool DestroyOnMenuClose { get; } = false;
+
+        private static bool HasGenerated { get; set; } = false;
+        private static bool isOpen { get; set; }
+
 
         internal override void OnRoomLeft()
         {
-            DestroyGeneratedButtons();
+            if (CleanOnRoomLeave)
+            {
+                DestroyGeneratedButtons();
+            }
         }
+
 
         internal static void InitButtons(QMGridTab menu)
         {
@@ -30,24 +44,56 @@
             CurrentScrollMenu.AddOpenAction(() =>
             {
                 OnOpenMenu();
-                Regenerate();
             });
             InitWingPage();
         }
 
         private static void Regenerate()
         {
-            foreach (var obj in WorldUtils_Old.Get_VRCInteractables())
+            if (!HasGenerated)
             {
-                var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () => { obj.VRC_Interactable_Click(); }, $"Interact with {obj.name}", obj.Get_GameObject_Active_ToColor());
-                var listener = obj.GetOrAddComponent<ScrollMenuListener>();
-                if (listener != null)
+                foreach (var obj in WorldUtils_Old.Get_VRCInteractables())
                 {
-                    listener.SingleButton = btn;
+                    var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () => { obj.VRC_Interactable_Click(); }, $"Interact with {obj.name}", obj.Get_GameObject_Active_ToColor());
+                    var listener = obj.AddComponent<ScrollMenuListener>();
+                    if (listener != null)
+                    {
+                        listener.SingleButton = btn;
+                    }
+                    Listeners.Add(listener);
+                    GeneratedButtons.Add(btn);
                 }
-                Listeners.Add(listener);
-                GeneratedButtons.Add(btn);
+                HasGenerated = true;
             }
+        }
+
+        internal static void DestroyGeneratedButtons()
+        {
+            HasGenerated = false;
+            if (GeneratedButtons.Count != 0)
+            {
+                foreach (var item in GeneratedButtons) item.DestroyMe();
+            }
+            if (Listeners.Count != 0)
+            {
+                foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
+            }
+
+        }
+
+        internal override void OnQuickMenuClose()
+        {
+            OnCloseMenu();
+        }
+
+        private static void OnCloseMenu()
+        {
+            if (DestroyOnMenuClose)
+            {
+                DestroyGeneratedButtons();
+            }
+            WingMenu.SetActive(false);
+            WingMenu.ClickBackButton();
         }
 
         private static void OnOpenMenu()
@@ -58,36 +104,13 @@
                 WingMenu.SetActive(true);
                 WingMenu.ShowLeftWingPage();
             }
-        }
-
-        internal static void OnCloseMenu()
-        {
-            isOpen = false;
-            WingMenu.SetActive(false);
-            WingMenu.ClickBackButton();
-            DestroyGeneratedButtons();
-        }
-
-        internal static void DestroyGeneratedButtons()
-        {
-            if (GeneratedButtons.Count != 0)
-            {
-                foreach (var item in GeneratedButtons) item.DestroyMe();
-            }
-            if (Listeners.Count != 0)
-            {
-                foreach (var item in Listeners) UnityEngine.Object.Destroy(item);
-            }
-        }
-
-        internal override void OnQuickMenuClose()
-        {
-            OnCloseMenu();
+            Regenerate();
         }
 
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
         {
             if (!isOpen) return;
+
             if (Page != null)
             {
                 if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))
@@ -100,7 +123,11 @@
         private static void InitWingPage()
         {
             WingMenu = new QMWings(1003, true, "VRC Interactables Menu", "Interact with VRC_Interactable Triggers");
-            new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
+            new QMWingSingleButton(WingMenu, "Refresh", () =>
+            {
+                DestroyGeneratedButtons();
+                Regenerate();
+            }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
     }

@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
     using AstroButtonAPI;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using AstroMonos.Components.Tools.Listeners;
-    using CheetoLibrary;
-    using Selector;
+    using Skyboxes;
     using System.Collections.Generic;
+    using System.Linq;
+    using AstroLibrary.Extensions;
+    using AstroMonos.Components.Tools.Listeners;
+    using ItemTweakerV2.Selector;
     using VRC.UI.Elements;
 
     internal class PickupSelectionScrollMenu : GameEvents
@@ -15,12 +15,24 @@
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
         private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
-        private static bool isOpen;
+
+
+
+        private static bool CleanOnRoomLeave { get; } = true;
+        private static bool DestroyOnMenuClose { get; } = false;
+
+        private static bool HasGenerated { get; set; } = false;
+        private static bool isOpen { get; set; }
+
 
         internal override void OnRoomLeft()
         {
-            DestroyGeneratedButtons();
+            if (CleanOnRoomLeave)
+            {
+                DestroyGeneratedButtons();
+            }
         }
+
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -32,58 +44,47 @@
             CurrentScrollMenu.AddOpenAction(() =>
             {
                 OnOpenMenu();
-                Regenerate();
             });
             InitWingPage();
         }
 
         private static void Regenerate()
         {
-            foreach (var pickup in WorldUtils_Old.Get_Pickups())
+            if (!HasGenerated)
             {
-                var btn = new QMSingleButton(CurrentScrollMenu, $"Select {pickup.name}", () =>
+                foreach (var pickup in WorldUtils_Old.Get_Pickups())
                 {
-                    Tweaker_Object.SetObjectToEdit(pickup);
-                }, $"Select {pickup.name}", pickup.Get_GameObject_Active_ToColor());
+                    var btn = new QMSingleButton(CurrentScrollMenu, $"Select {pickup.name}", () =>
+                    {
+                        Tweaker_Object.SetObjectToEdit(pickup);
+                    }, $"Select {pickup.name}", pickup.Get_GameObject_Active_ToColor());
 
-                var listener = pickup.GetOrAddComponent<ScrollMenuListener>();
-                if (listener != null)
-                {
-                    listener.SingleButton = btn;
+                    var listener = pickup.AddComponent<ScrollMenuListener>();
+                    if (listener != null)
+                    {
+                        listener.SingleButton = btn;
+                    }
+                    Listeners.Add(listener);
+
+                    GeneratedButtons.Add(btn);
                 }
-                Listeners.Add(listener);
 
-                GeneratedButtons.Add(btn);
+                HasGenerated = true;
             }
         }
 
-        private static void OnCloseMenu()
+        internal static void DestroyGeneratedButtons()
         {
-            WingMenu.SetActive(false);
-            WingMenu.ClickBackButton();
-            DestroyGeneratedButtons();
-        }
-
-        private static void OnOpenMenu()
-        {
-            isOpen = true;
-            if (WingMenu != null)
-            {
-                WingMenu.SetActive(true);
-                WingMenu.ShowLeftWingPage();
-            }
-        }
-
-        private static void DestroyGeneratedButtons()
-        {
+            HasGenerated = false;
             if (GeneratedButtons.Count != 0)
             {
                 foreach (var item in GeneratedButtons) item.DestroyMe();
             }
             if (Listeners.Count != 0)
             {
-                foreach (var item in Listeners) UnityEngine.Object.Destroy(item);
+                foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
             }
+
         }
 
         internal override void OnQuickMenuClose()
@@ -91,9 +92,32 @@
             OnCloseMenu();
         }
 
+        private static void OnCloseMenu()
+        {
+            if (DestroyOnMenuClose)
+            {
+                DestroyGeneratedButtons();
+            }
+            WingMenu.SetActive(false);
+            WingMenu.ClickBackButton();
+        }
+
+        private static void OnOpenMenu()
+        {
+            isOpen = true; 
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(true);
+                WingMenu.ShowLeftWingPage();
+            }
+
+            Regenerate();
+        }
+
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
         {
             if (!isOpen) return;
+
             if (Page != null)
             {
                 if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))
@@ -105,8 +129,12 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1008, true, "Tweaker Pickups", "Interact with Internal Triggers");
-            new QMWingSingleButton(WingMenu, "Refresh", () => { DestroyGeneratedButtons(); Regenerate(); }, "Refresh and force menu to regenerate");
+            WingMenu = new QMWings(1008, true, "Tweaker Pickups", "Select Pickup To modify!");
+            new QMWingSingleButton(WingMenu, "Refresh", () =>
+            {
+                DestroyGeneratedButtons();
+                Regenerate();
+            }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
     }

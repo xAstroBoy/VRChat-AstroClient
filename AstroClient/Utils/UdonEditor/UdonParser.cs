@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using AstroLibrary.Finder;
     using AstroMonos.AstroUdons.Programs;
+    using UnityEngine;
     using VRC.Udon;
 
     internal class UdonParser
@@ -28,9 +29,9 @@
         }
 
 
-        internal static UdonBehaviour[] CleanedWorldBehaviours
+        internal static UdonBehaviour[] WorldBehaviours
         {
-            get => FilteredUdonBehaviours().ToArray();
+            get => Resources.FindObjectsOfTypeAll<UdonBehaviour>();
         }
     }
 }

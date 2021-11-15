@@ -11,7 +11,7 @@
     {
         internal static void Init_FunMenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
-            var submenu = new QMNestedButton(menu, x, y, "Fun Stuff", "Weird Behaviours that are fun and random.!", null, null, null, null, btnHalf);
+            var submenu = new QMNestedGridMenu(menu, x, y, "Fun Stuff", "Weird Behaviours that are fun and random.!", null, null, null, null, btnHalf);
 
             new QMSingleButton(submenu, 1, 0f, "Make Stretchy Cheese", () => { Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<StretchyCheeseBehaviour>(); }, "Make sure is a Fork with Behaviour Extend", null, null, true);
             new QMSingleButton(submenu, 1, 0.5f, "Remove Stretchy Cheese", () => { DestroyStretchyCheese(); }, "Make sure is a Fork with Behaviour Extend", null, null, true);

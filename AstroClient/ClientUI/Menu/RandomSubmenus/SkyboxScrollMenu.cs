@@ -4,6 +4,7 @@
     using Skyboxes;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroMonos.Components.Tools.Listeners;
     using VRC.UI.Elements;
 
     internal class SkyboxScrollMenu : GameEvents
@@ -11,25 +12,36 @@
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
-        private static bool HasGenerated = false;
-        private static bool isOpen;
+        //private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
+
+
+
+        private static bool CleanOnRoomLeave { get; } = false;
+        private static bool DestroyOnMenuClose { get; } = false;
+
+        private static bool HasGenerated { get; set; } = false;
+        private static bool isOpen { get; set; }
+
+
+        internal override void OnRoomLeft()
+        {
+            if (CleanOnRoomLeave)
+            {
+                DestroyGeneratedButtons();
+            }
+        }
+
 
         internal static void InitButtons(QMGridTab menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Skybox Options", "Edit Current Skybox");
             CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
-                WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
+                OnCloseMenu();
             });
             CurrentScrollMenu.AddOpenAction(() =>
             {
-                if (WingMenu != null)
-                {
-                    WingMenu.SetActive(true);
-                    WingMenu.ShowLeftWingPage();
-                }
-                Regenerate();
+                OnOpenMenu();
             });
             InitWingPage();
         }
@@ -48,24 +60,30 @@
                             GeneratedButtons.Add(btn);
                         }
                     }
-
-                    HasGenerated = true;
                 }
                 else
                 {
                     var empty = new QMSingleButton(CurrentScrollMenu, "No Skyboxes Found", null, "No Skyboxes Found", null, false);
                     GeneratedButtons.Add(empty);
-                    HasGenerated = true;
                 }
+
+
+                HasGenerated = true;
             }
         }
 
         internal static void DestroyGeneratedButtons()
         {
+            HasGenerated = false;
             if (GeneratedButtons.Count != 0)
             {
                 foreach (var item in GeneratedButtons) item.DestroyMe();
             }
+            //if (Listeners.Count != 0)
+            //{
+            //    foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
+            //}
+
         }
 
         internal override void OnQuickMenuClose()
@@ -75,6 +93,10 @@
 
         private static void OnCloseMenu()
         {
+            if (DestroyOnMenuClose)
+            {
+                DestroyGeneratedButtons();
+            }
             WingMenu.SetActive(false);
             WingMenu.ClickBackButton();
         }
@@ -87,6 +109,7 @@
                 WingMenu.SetActive(true);
                 WingMenu.ShowLeftWingPage();
             }
+            Regenerate();
         }
 
         internal override void OnUiPageToggled(UIPage Page, bool Toggle)
@@ -108,8 +131,7 @@
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 _ = MelonLoader.MelonCoroutines.Start(SkyboxEditor.FindAndLoadBundle());
-                HasGenerated = false;
-                foreach (var item in GeneratedButtons) item.DestroyMe();
+                DestroyGeneratedButtons();
                 Regenerate();
             }, "Find New Skyboxes");
             new QMWingSingleButton(WingMenu, "Reset Skybox", () =>

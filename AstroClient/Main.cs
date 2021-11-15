@@ -43,6 +43,8 @@
 
         internal static event EventHandler Event_LateUpdate;
 
+        internal static event EventHandler Event_OnGui;
+
         internal static event EventHandler Event_VRChat_OnUiManagerInit;
 
         internal static event EventHandler Event_VRChat_OnQuickMenuInit;
@@ -130,6 +132,11 @@
         {
             while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early
                 yield return null;
+        }
+
+        public override void OnGUI()
+        {
+            Event_OnGui?.SafetyRaise();
         }
 
         public override void OnApplicationLateStart()
