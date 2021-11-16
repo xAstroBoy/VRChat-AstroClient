@@ -54,7 +54,7 @@
             {
                 foreach (var prefab in WorldUtils.Prefabs)
                 {
-                    new QMSingleButton(CurrentScrollMenu, 0, 0, $"Spawn {prefab.name}", delegate
+                    var btn = new QMSingleButton(CurrentScrollMenu, 0, 0, $"Spawn {prefab.name}", () => 
                     {
                         var broadcast = VRC_EventHandler.VrcBroadcastType.Always;
                         var prefabinfo = prefab.name;
@@ -71,8 +71,8 @@
                             }
                         }
                     }, $"Spawn {prefab.name}");
+                    GeneratedButtons.Add(btn);
                 }
-
                 HasGenerated = true;
             }
         }
@@ -102,8 +102,13 @@
             {
                 DestroyGeneratedButtons();
             }
-            WingMenu.SetActive(false);
-            WingMenu.ClickBackButton();
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(false);
+                WingMenu.ClickBackButton();
+            }
+            isOpen = false;
+
         }
 
         private static void OnOpenMenu()

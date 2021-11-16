@@ -96,8 +96,13 @@
             {
                 DestroyGeneratedButtons();
             }
-            WingMenu.SetActive(false);
-            WingMenu.ClickBackButton();
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(false);
+                WingMenu.ClickBackButton();
+            }
+            isOpen = false;
+
         }
 
         private static void OnOpenMenu()

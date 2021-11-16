@@ -63,16 +63,16 @@
             VRLight = null;
         }
 
-        private static QMWings WingsMenu;
+        private static QMWings WingMenu;
         internal static QMWingToggleButton DesktopHeadlightBtn;
         internal static QMWingToggleButton VRHeadlightBtn;
 
         private static void InitWings()
         {
-            WingsMenu = new QMWings(1012, true, "Headlight", "Headlight Options", null, null);
-            VRHeadlightBtn = new QMWingToggleButton(WingsMenu, "VR headlight", () => { VRHeadLightBool = true; }, () => { VRHeadLightBool = false; }, "Toggle VR Headlight");
-            DesktopHeadlightBtn = new QMWingToggleButton(WingsMenu, "Desktop Headlight", () => { DesktopHeadlightBool = true; }, () => { DesktopHeadlightBool = false; }, "Toggle Desktop Headlight");
-            WingsMenu.SetActive(false);
+            WingMenu = new QMWings(1012, true, "Headlight", "Headlight Options", null, null);
+            VRHeadlightBtn = new QMWingToggleButton(WingMenu, "VR headlight", () => { VRHeadLightBool = true; }, () => { VRHeadLightBool = false; }, "Toggle VR Headlight");
+            DesktopHeadlightBtn = new QMWingToggleButton(WingMenu, "Desktop Headlight", () => { DesktopHeadlightBool = true; }, () => { DesktopHeadlightBool = false; }, "Toggle Desktop Headlight");
+            WingMenu.SetActive(false);
         }
 
         internal static void HeadlightButtonInit(QMGridTab menu, float x, float y, bool btnHalf)
@@ -80,13 +80,16 @@
             QMNestedButton HeadlightConfig = new QMNestedButton(menu, x, y, "Custom Headlight", "Headlight Settings", null, null, null, null, btnHalf);
             HeadlightConfig.AddOpenAction(() =>
             {
-                WingsMenu.SetActive(true);
-                WingsMenu.ShowLeftWingPage();
+                WingMenu.SetActive(true);
+                WingMenu.ShowLeftWingPage();
             });
             HeadlightConfig.SetBackButtonAction(menu, () =>
             {
-                WingsMenu.SetActive(false);
-                WingsMenu.ClickBackButton();
+                if (WingMenu != null)
+                {
+                    WingMenu.SetActive(false);
+                    WingMenu.ClickBackButton();
+                }
             });
             QMNestedButton HeadlightColor = new QMNestedButton(HeadlightConfig, 4, 0, "Headlight Color", "Configure the Color For the Headlight", null, null, null);
 

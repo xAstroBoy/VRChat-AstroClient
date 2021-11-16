@@ -51,6 +51,8 @@
         private static MenuStateController MenuStateController_Wing_Left = null;
         private static MenuStateController _QuickMenuControllert = null;
         private static SelectedUserMenuQM _SelectedQMGO = null;
+        private static Il2CppSystem.Type _UIPageType = null;
+
         //New shit
 
         internal static SelectedUserMenuQM GetSelectedUserQMInstance()
@@ -347,6 +349,27 @@
                 return _UserInterface;
             }
         }
+
+        internal static Il2CppSystem.Type UIPageType
+        {
+            get
+            {
+                if (UserInterface == null || QuickMenuTransform == null) return null;
+                if (QuickMenuInstance != null)
+                {
+                    var test = QuickMenuTransform.GetComponentInChildren<UIPage>(true);
+                    if (test != null)
+                    {
+                        ModConsole.DebugLog("Found A UIPage!", Color.Chartreuse);
+                    }
+
+                    return _UIPageType = test.GetIl2CppType();
+                }
+
+                return _UIPageType;
+            }
+        }
+
 
         internal static Transform TabButtonTemplate
         {

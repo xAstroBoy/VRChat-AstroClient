@@ -74,18 +74,11 @@
             UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
-            page = NestedPart.AddComponent<UIPage>();
-            page.name = menuName;
-            page.field_Public_String_0 = menuName;
-            page.field_Public_Boolean_0 = true;
-            page.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController();
-            page.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
-            page.field_Private_List_1_UIPage_0.Add(page);
+            page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = Title;
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
-            QuickMenuTools.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, page);
             string TextColorHTML = null;
             if (btnTextColor.HasValue)
             {
