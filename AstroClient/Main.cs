@@ -434,11 +434,11 @@
 
             ComponentsBtn.InitButtons(AstroClient);
 
-            Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
+            Headlight.Headlight.HeadlightButtonInit(AstroClient);
 
             CameraTweaker.InitQMMenu(AstroClient);
 
-            SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
+            SettingsMenuBtn.InitButtons(AstroClient);
 
             ToggleDebugInfo = new QMToggleButton(AstroClient, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", null, null, null, Bools.AntiPortal);
             // Top Right Buttons
@@ -461,8 +461,6 @@
             //    GameObjMenu.ReturnToRoot();
             //    GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke();
             //}, "Advanced GameObject Toggler", null, null, true);
-            //ModConsole.DebugLog("28");
-            //ModConsole.DebugLog("29");
         }
     }
 }

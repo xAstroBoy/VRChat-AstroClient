@@ -13,8 +13,6 @@
         {
 
 
-            CodeDebug.StopWatchDebug("EmojiCoolDownKiller OnPlayerJoined", new Action(() =>
-            {
             MiscUtils.DelayFunction(1f, () =>
             {
                 if (player != null)
@@ -27,8 +25,6 @@
                     }
                 }
             });
-
-            }));
 
         }
     }

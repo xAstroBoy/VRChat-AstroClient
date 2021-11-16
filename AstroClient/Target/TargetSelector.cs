@@ -14,22 +14,17 @@
         internal override void OnPlayerLeft(Player player)
         {
 
-            CodeDebug.StopWatchDebug("TargetSelector OnPlayerLeft", new Action(() =>
+            if (player != null)
             {
-                if (player != null)
+                if (CurrentTarget != null)
                 {
-                    if (CurrentTarget != null)
+                    if (CurrentTarget == player.GetVRCPlayer())
                     {
-                        if (CurrentTarget == player.GetVRCPlayer())
-                        {
-                            CurrentTarget = null;
-                        }
-
+                        CurrentTarget = null;
                     }
+
                 }
-
-            }));
-
+            }
         }
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)

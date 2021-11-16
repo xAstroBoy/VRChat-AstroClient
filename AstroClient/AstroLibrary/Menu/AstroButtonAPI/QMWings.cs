@@ -17,6 +17,7 @@
         internal GameObject backbuttonObject;
         internal Button BackButton;
 
+        internal TextMeshProUGUI ButtonText_Title;
         internal TextMeshProUGUI ButtonText;
 
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
@@ -33,15 +34,19 @@
                 button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left(), QuickMenuTools.Wing_Left().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
-                button.NewText("Text_QM_H3").text = MenuName;
+                ButtonText = button.NewText("Text_QM_H3");
+                ButtonText.text = MenuName;
+
+
+
                 SetToolTip(btnToolTip);
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
                 UIPage Page = QuickMenuTools.UIPageTemplate_Left();
                 CurrentPage = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
                 WingPageTransform = CurrentPage.transform;
-                ButtonText = CurrentPage.gameObject.NewText("Text_Title");
-                ButtonText.text = $"{MenuName}";
-                ButtonText.fontSize = 36;
+                ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
+                ButtonText_Title.text = $"{MenuName}";
+                ButtonText_Title.fontSize = 36;
                 CurrentPage.field_Public_String_0 = btnQMLoc; //Name
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true; //_inited
@@ -77,7 +82,8 @@
                 button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right(), QuickMenuTools.Wing_Right().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
-                button.NewText("Text_QM_H3").text = MenuName;
+                ButtonText = button.NewText("Text_QM_H3");
+                ButtonText.text = MenuName;
                 SetToolTip(btnToolTip);
 
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
@@ -85,10 +91,10 @@
                 UIPage Page = QuickMenuTools.UIPageTemplate_Right();
                 CurrentPage = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
                 WingPageTransform = CurrentPage.transform;
-                ButtonText = CurrentPage.gameObject.NewText("Text_Title");
+                ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
 
-                ButtonText.text = MenuName;
-                ButtonText.fontSize = 36;
+                ButtonText_Title.text = MenuName;
+                ButtonText_Title.fontSize = 36;
                 CurrentPage.field_Public_String_0 = btnQMLoc;
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true;
@@ -138,6 +144,10 @@
         {
             if (icon != null)
                 button.LoadSprite(icon, "Icon");
+        }
+        internal void SetButtonTitle(string text)
+        {
+            ButtonText_Title.text = text;
         }
 
         internal void SetButtonText(string text)

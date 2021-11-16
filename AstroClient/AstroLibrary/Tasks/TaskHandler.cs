@@ -11,7 +11,7 @@
 
         internal override void OnUpdate()
         {
-            TaskUtilities.ourMainThreadQueue.Flush();
+            TaskUtilities.ourMainThreadQueue?.Flush();
         }
 
         internal override void OnGUI()

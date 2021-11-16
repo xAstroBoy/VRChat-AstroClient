@@ -86,19 +86,16 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            CodeDebug.StopWatchDebug("PlayerESPMenu OnPlayerJoined", new Action(() =>
+            MiscUtils.DelayFunction(1, () =>
             {
-                MiscUtils.DelayFunction(1, () =>
+                if (Toggle_Player_ESP)
                 {
-                    if (Toggle_Player_ESP)
+                    if (player != null && !player.GetAPIUser().IsSelf)
                     {
-                        if (player != null && !player.GetAPIUser().IsSelf)
-                        {
-                            player.gameObject.GetOrAddComponent<PlayerESP>();
-                        }
+                        player.gameObject.GetOrAddComponent<PlayerESP>();
                     }
-                });
-            }));
+                }
+            });
 
         }
 

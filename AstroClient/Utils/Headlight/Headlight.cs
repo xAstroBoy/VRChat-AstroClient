@@ -75,9 +75,9 @@
             WingMenu.SetActive(false);
         }
 
-        internal static void HeadlightButtonInit(QMGridTab menu, float x, float y, bool btnHalf)
+        internal static void HeadlightButtonInit(QMGridTab menu)
         {
-            QMNestedButton HeadlightConfig = new QMNestedButton(menu, x, y, "Custom Headlight", "Headlight Settings", null, null, null, null, btnHalf);
+            QMNestedButton HeadlightConfig = new QMNestedButton(menu, "Custom Headlight", "Headlight Settings");
             HeadlightConfig.AddOpenAction(() =>
             {
                 WingMenu.SetActive(true);

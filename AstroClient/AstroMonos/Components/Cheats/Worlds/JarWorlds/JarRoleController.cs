@@ -94,9 +94,6 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            CodeDebug.StopWatchDebug("JarRoleController OnPlayerJoined", new Action(() =>
-            {
-
             if (IsAmongUsWorld || IsMurder4World)
             {
                 if (JarRoleLinks.Count() != 0 && player != null)
@@ -106,7 +103,6 @@
                 }
             }
 
-            }));
         }
 
         internal class LinkedNodes

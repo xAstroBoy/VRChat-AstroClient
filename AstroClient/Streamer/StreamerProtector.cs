@@ -39,26 +39,22 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            CodeDebug.StopWatchDebug("StreamerProtector OnPlayerJoined", new Action(() =>
+            MiscUtils.DelayFunction(2f, new Action(() =>
             {
-                MiscUtils.DelayFunction(2f, new Action(() =>
+                if (player != null)
                 {
-                    if (player != null)
+                    var apiuser = player.GetAPIUser();
+                    if (apiuser != null)
                     {
-                        var apiuser = player.GetAPIUser();
-                        if (apiuser != null)
+                        var userid = apiuser.id;
+                        if (StreamerIDs.Contains(userid))
                         {
-                            var userid = apiuser.id;
-                            if (StreamerIDs.Contains(userid))
-                            {
-                                Event_OnStreamerJoined.SafetyRaise(new PlayerEventArgs(player));
-                                StreamersInInstance++;
-                            }
+                            Event_OnStreamerJoined.SafetyRaise(new PlayerEventArgs(player));
+                            StreamersInInstance++;
                         }
                     }
+                }
 
-
-                }));
 
             }));
         }
@@ -66,27 +62,22 @@
 
         internal override void OnPlayerLeft(Player player)
         {
-
-
-            CodeDebug.StopWatchDebug("StreamerProtector OnPlayerLeft", new Action(() =>
+            MiscUtils.DelayFunction(2f, new Action(() =>
             {
-                MiscUtils.DelayFunction(2f, new Action(() =>
+                if (player != null)
                 {
-                    if (player != null)
+                    var apiuser = player.GetAPIUser();
+                    if (apiuser != null)
                     {
-                        var apiuser = player.GetAPIUser();
-                        if (apiuser != null)
+                        var userid = apiuser.id;
+                        if (StreamerIDs.Contains(userid))
                         {
-                            var userid = apiuser.id;
-                            if (StreamerIDs.Contains(userid))
-                            {
-                                Event_OnStreamerLeft.SafetyRaise(new PlayerEventArgs(player));
+                            Event_OnStreamerLeft.SafetyRaise(new PlayerEventArgs(player));
 
-                                StreamersInInstance--;
-                            }
+                            StreamersInInstance--;
                         }
                     }
-                }));
+                }
             }));
         }
 

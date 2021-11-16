@@ -15,10 +15,12 @@
         private Action OffAction { get; set; }
         private Action OnAction { get; set; }
         private string btnQMLoc { get; set; }
+        private GameObject ButtonsMenu { get; set; }
 
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
+            ButtonsMenu = btnMenu.GetButtonsMenu();
             if (btnHalf)
             {
                 btnYLocation -= 0.25f;
@@ -29,12 +31,14 @@
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
+            ButtonsMenu = btnMenu.GetButtonsMenu();
             InitButton(0, 0, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
 
         internal QMSingleToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
+            ButtonsMenu = btnMenu.GetButtonsMenu();
             if (btnHalf)
             {
                 btnYLocation -= 0.25f;
@@ -45,6 +49,7 @@
         internal QMSingleToggleButton(QMGridTab btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
+            ButtonsMenu = btnMenu.GetButtonsMenu();
             if (btnHalf)
             {
                 btnYLocation -= 0.25f;
@@ -95,8 +100,12 @@
                 //    break;
 
                 default:
-                    var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, Part1.FindObject("Buttons").transform, true);
+                    if (ButtonsMenu == null)
+                    {
+                        var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
+                        ButtonsMenu = Part1.FindObject("Buttons");
+                    }
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     initShift[0] = -1;
                     initShift[1] = -3;

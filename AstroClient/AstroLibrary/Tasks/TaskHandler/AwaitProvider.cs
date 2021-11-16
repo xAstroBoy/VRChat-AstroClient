@@ -6,6 +6,7 @@ using MelonLoader;
 
 namespace AstroClient.TaskHandler
 {
+    using AstroLibrary.Console;
 
     /// <summary>
     /// This class implements a simple delegate queue intended for interop with async/await
@@ -51,7 +52,8 @@ namespace AstroClient.TaskHandler
                 }
                 catch (Exception ex)
                 {
-                    MelonLogger.Warning($"Exception in delegate queue {QueueName}: {ex}");
+                    ModConsole.Warning($"Exception in delegate queue {QueueName}:");
+                    ModConsole.WarningExc(ex);
                 }
             }
         }

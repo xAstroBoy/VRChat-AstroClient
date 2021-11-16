@@ -12,10 +12,10 @@
     internal class SettingsMenuBtn : GameEvents
     {
 
-        internal static void InitButtons(QMGridTab menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
             // Main Settings Menu
-            QMNestedGridMenu sub = new QMNestedGridMenu(menu, x, y, "Settings", "Settings", null, null, null, null, btnHalf);
+            QMNestedGridMenu sub = new QMNestedGridMenu(menu, "Settings", "Settings");
             sub.GetMainButton().SetTextColor(Color.cyan);
 
 

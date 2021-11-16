@@ -51,7 +51,7 @@
         private static MenuStateController MenuStateController_Wing_Left = null;
         private static MenuStateController _QuickMenuControllert = null;
         private static SelectedUserMenuQM _SelectedQMGO = null;
-        private static Il2CppSystem.Type _UIPageType = null;
+        private static UIPage _QuickMenuPage = null;
 
         //New shit
 
@@ -350,23 +350,23 @@
             }
         }
 
-        internal static Il2CppSystem.Type UIPageType
+        internal static UIPage QuickMenuPage
         {
             get
             {
-                if (UserInterface == null || QuickMenuTransform == null) return null;
-                if (QuickMenuInstance != null)
+                if (_QuickMenuPage == null)
                 {
-                    var test = QuickMenuTransform.GetComponentInChildren<UIPage>(true);
-                    if (test != null)
+                    foreach (var item in QuickMenuInstance.GetComponentsInChildren<UIPage>(true))
                     {
-                        ModConsole.DebugLog("Found A UIPage!", Color.Chartreuse);
-                    }
+                        if (item.name == "Menu_Camera")
+                        {
+                            return _QuickMenuPage = item;
+                        }
 
-                    return _UIPageType = test.GetIl2CppType();
+                    }
                 }
 
-                return _UIPageType;
+                return _QuickMenuPage;
             }
         }
 

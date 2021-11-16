@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="AstroLibrary\EventArgs\OnUiPageEventArgs.cs" />
     <Compile Include="AstroLibrary\Menu\ActionMenu\Managers\InputManager.cs" />
+    <Compile Include="AstroLibrary\Menu\AstroButtonAPI\UIPageGenerator.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMScrollMenu.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\QMHalfScroll.cs" />
     <Compile Include="AstroLibrary\Menu\AstroButtonAPI\Extensions.cs" />

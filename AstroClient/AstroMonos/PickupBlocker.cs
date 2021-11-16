@@ -13,14 +13,9 @@
         internal override void OnPlayerLeft(Player player)
         {
 
+            var id = player.GetAPIUser().GetUserID();
 
-            CodeDebug.StopWatchDebug("PickupBlocker OnPlayerLeft", new Action(() =>
-            {
-
-                var id = player.GetAPIUser().GetUserID();
-
-                if (blockeduserids.Contains(id)) blockeduserids.Remove(id);
-            }));
+            if (blockeduserids.Contains(id)) blockeduserids.Remove(id);
         }
 
         internal static void RegisterPlayer(Player player)

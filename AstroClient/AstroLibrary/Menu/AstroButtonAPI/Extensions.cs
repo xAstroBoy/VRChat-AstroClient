@@ -7,6 +7,9 @@
     using CheetoLibrary;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using AstroClient.Tasks;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC;
@@ -68,26 +71,7 @@
             return false;
         }
 
-        internal static UIPage GenerateQuickMenuPage(this GameObject nested, string menuName)
-        {
-            if (nested != null)
-            {
-                var page = nested.AddComponent<UIPage>();
-                if (page != null)
-                {
-                    page.name = menuName;
-                    page.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController();
-                    page.field_Public_String_0 = menuName;
-                    page.field_Private_Boolean_1 = true;
-                    page.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
-                    page.field_Private_List_1_UIPage_0.Add(page);
-                    QuickMenuTools.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, page);
-                    return page;
-                }
-            }
 
-            return null;
-        }
 
         internal static bool ContainsPage(this UIPage page, List<QMNestedGridMenu> menus)
         {
