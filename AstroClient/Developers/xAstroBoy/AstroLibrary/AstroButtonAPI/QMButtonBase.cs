@@ -4,7 +4,6 @@
     using UnityEngine;
     using UnityEngine.Networking;
     using UnityEngine.UI;
-    using Button = UnityEngine.UI.Button;
 
     internal class QMButtonBase
     {

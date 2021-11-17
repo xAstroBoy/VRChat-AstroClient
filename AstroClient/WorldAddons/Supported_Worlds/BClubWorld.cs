@@ -51,10 +51,10 @@
 
         private static bool isCurrentWorld;
 
-        private static System.Object Rainbow_CancellationToken { get; set; }
-        private static System.Object MoanSpam_CancellationToken { get; set; }
-        private static System.Object DoorLockFreeze_CancellationToken { get; set; }
-        private static System.Object DoorUnlockFreeze_CancellationToken { get; set; }
+        private static object Rainbow_CancellationToken { get; set; }
+        private static object MoanSpam_CancellationToken { get; set; }
+        private static object DoorLockFreeze_CancellationToken { get; set; }
+        private static object DoorUnlockFreeze_CancellationToken { get; set; }
 
         #region BlueChairSpam
 
@@ -106,7 +106,7 @@
 
         private static QMToggleButton SpamDoorbellsToggle;
         private static bool _isDoorBellSpamEnabled;
-        private static System.Object DoorbellSpam_CancellationToken;
+        private static object DoorbellSpam_CancellationToken;
 
         #endregion DoorbellSpam
 

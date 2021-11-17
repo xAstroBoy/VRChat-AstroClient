@@ -2,6 +2,7 @@
 {
     using System;
     using AstroClient.Tools.Extensions;
+    using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 

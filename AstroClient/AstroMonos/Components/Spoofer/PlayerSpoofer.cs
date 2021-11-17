@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using ClientAttributes;
     using MelonLoader;
     using Photon.Realtime;
     using UnhollowerBaseLib.Attributes;

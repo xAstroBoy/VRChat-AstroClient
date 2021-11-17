@@ -2,6 +2,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using System;
     using AstroUdons;
+    using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 

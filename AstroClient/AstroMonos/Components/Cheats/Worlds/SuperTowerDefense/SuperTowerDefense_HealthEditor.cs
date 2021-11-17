@@ -3,6 +3,7 @@
     using System;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
+    using ClientAttributes;
     using Constants;
     using UnhollowerBaseLib.Attributes;
     using WorldAddons.WorldsIds;

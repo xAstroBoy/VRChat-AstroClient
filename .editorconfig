@@ -49,3 +49,6 @@ dotnet_diagnostic.CA2215.severity=suggestion
 
 # Default severity for all analyzer diagnostics
 dotnet_analyzer_diagnostic.severity = none
+
+# CS8032: Non è possibile creare un'istanza dell'analizzatore Microsoft.CodeAnalysis.UseExplicitTupleName.UseExplicitTupleNameDiagnosticAnalyzer da C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk\codestyle\cs\Microsoft.CodeAnalysis.CodeStyle.dll : Non è stato possibile caricare il file o l'assembly 'Microsoft.CodeAnalysis, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' o una delle relative dipendenze. Impossibile trovare il file specificato..
+dotnet_diagnostic.CS8032.severity = none

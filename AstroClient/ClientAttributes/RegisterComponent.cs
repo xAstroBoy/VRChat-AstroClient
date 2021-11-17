@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.ClientAttributes
 {
     /// <summary>
     /// This tells the ComponentHelper to include this class

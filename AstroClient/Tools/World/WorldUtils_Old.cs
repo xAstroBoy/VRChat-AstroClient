@@ -555,10 +555,7 @@
                     UdonBehaviour item = list[i];
                     if (item._eventTable.Keys.Count != 0)
                     {
-                        if (!UdonBehaviourObjects.Contains(item))
-                        {
-                            UdonBehaviourObjects.Add(item);
-                        }
+                        UdonBehaviourObjects.Add(item);
                     }
                 }
                 return UdonBehaviourObjects;

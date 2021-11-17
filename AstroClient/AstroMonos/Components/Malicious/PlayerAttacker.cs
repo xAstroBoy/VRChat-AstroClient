@@ -5,6 +5,7 @@
     using AstroClient.Tools.ObjectEditor;
     using AstroClient.Tools.ObjectEditor.Online;
     using AstroUdons;
+    using ClientAttributes;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;

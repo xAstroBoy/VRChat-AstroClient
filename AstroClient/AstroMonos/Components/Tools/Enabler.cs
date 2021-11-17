@@ -1,6 +1,7 @@
 namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
+    using ClientAttributes;
     using UnityEngine;
 
     [RegisterComponent]

@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Tools.Skybox
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
@@ -7,7 +8,6 @@
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using xAstroBoy.Extensions;
-    using Environment = System.Environment;
 
     internal class SkyboxEditor : AstroEvents
     {

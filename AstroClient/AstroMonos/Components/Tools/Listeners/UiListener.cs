@@ -1,6 +1,7 @@
 namespace AstroClient.AstroMonos.Components.Tools.Listeners
 {
     using System;
+    using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
 
     [RegisterComponent]

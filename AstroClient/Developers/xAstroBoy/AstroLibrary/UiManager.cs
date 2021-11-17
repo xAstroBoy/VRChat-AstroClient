@@ -38,15 +38,6 @@
         private static MethodInfo _popupV2;
         private static MethodInfo _popupV2Small;
 
-        /// <summary>
-        /// Called when the big menu is opened.
-        /// </summary>
-        internal static event Action OnBigMenuOpened;
-
-        /// <summary>
-        /// Called when the big menu is closed.
-        /// </summary>
-        internal static event Action OnBigMenuClosed;
 
         private static MethodInfo _closeBigMenu;
         private static MethodBase _openBigMenu;
@@ -80,31 +71,6 @@
             { 10, "UserInterface/MenuContent/Screens/Gallery" },
         };
 
-        /// <summary>
-        /// Called when the user info menu is opened.
-        /// </summary>
-        internal static event Action OnUserInfoMenuOpened;
-
-        /// <summary>
-        /// Called when the user info menu is closed.
-        /// </summary>
-        internal static event Action OnUserInfoMenuClosed;
-
-        /// <summary>
-        /// Called when the QuickMenu is opened.
-        /// </summary>
-        internal static event Action OnQuickMenuOpened;
-
-        /// <summary>
-        /// Called when the QuickMenu is closed.
-        /// </summary>
-        internal static event Action OnQuickMenuClosed;
-
-        /// <summary>
-        /// Called when a UIPage is shown in the QuickMenu.
-        /// The bool in the event is whether the page was shown or hidden.
-        /// </summary>
-        internal static event Action<UIPage, bool> OnUIPageToggled;
 
         internal static object _selectedUserManagerObject;
         private static MethodInfo _selectUserMethod;

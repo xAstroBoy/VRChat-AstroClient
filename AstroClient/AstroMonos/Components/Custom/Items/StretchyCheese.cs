@@ -4,6 +4,7 @@
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonSearcher;
     using AstroUdons;
+    using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using static Constants.CustomLists;

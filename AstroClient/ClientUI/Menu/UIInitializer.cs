@@ -1,15 +1,8 @@
 ﻿namespace AstroClient.ClientUI.Menu
 {
     using AstroMonos;
-    using ClientUI.Menu;
-    using Experiments;
-    using MelonLoader;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Reflection;
     using Constants;
+    using Experiments;
     using ItemTweakerV2;
     using Menus;
     using Networking;
@@ -17,14 +10,9 @@
     using Tabs;
     using Tools.Headlight;
     using Tools.ObjectEditor;
-    using UnhollowerBaseLib;
-    using UnityEngine;
     using Wings;
     using WorldAddons;
     using xAstroBoy.AstroButtonAPI;
-    using Application = UnityEngine.Application;
-    using Color = System.Drawing.Color;
-    using Console = CheetosConsole.Console;
 
     internal class UIInitializer : AstroEvents
     {

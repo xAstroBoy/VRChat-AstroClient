@@ -3,7 +3,6 @@
     using System;
     using UnityEngine;
     using UnityEngine.UI;
-    using Button = UnityEngine.UI.Button;
 
     internal class QMSingleToggleButton : QMButtonBase
     {
@@ -14,7 +13,6 @@
         private Color OnColor { get; set; }
         private Action OffAction { get; set; }
         private Action OnAction { get; set; }
-        private string btnQMLoc { get; set; }
         private GameObject ButtonsMenu { get; set; }
 
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)

@@ -5,6 +5,7 @@
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.Extensions.Components_exts;
     using CheetosUI;
+    using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using xAstroBoy.Extensions;

@@ -2,6 +2,7 @@
 {
     using System;
     using AstroEventArgs;
+    using ClientAttributes;
     using Config;
 
     [RegisterComponent]

@@ -7,6 +7,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
+    using ClientAttributes;
     using Config;
     using MelonLoader;
     using TMPro;

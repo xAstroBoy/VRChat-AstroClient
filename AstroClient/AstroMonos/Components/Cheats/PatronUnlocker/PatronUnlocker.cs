@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using AstroClient.Tools.Extensions;
     using AstroUdons;
+    using ClientAttributes;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;

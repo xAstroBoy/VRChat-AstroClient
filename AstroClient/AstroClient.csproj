@@ -322,7 +322,7 @@
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Tools\Regexes\RegexExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexUtils.cs" />
-    <Compile Include="RegisterComponent.cs" />
+    <Compile Include="ClientAttributes\RegisterComponent.cs" />
     <Compile Include="Spawnables\Enderpearl\AstroEnderPearl.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\EnderPearl.cs" />
     <Compile Include="Experiments\CameraTweaker.cs" />

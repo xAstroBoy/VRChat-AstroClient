@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.AstroMonos.Components.Player
 {
     using System;
+    using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;

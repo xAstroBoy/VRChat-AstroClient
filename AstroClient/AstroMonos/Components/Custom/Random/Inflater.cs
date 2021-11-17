@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
+    using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 

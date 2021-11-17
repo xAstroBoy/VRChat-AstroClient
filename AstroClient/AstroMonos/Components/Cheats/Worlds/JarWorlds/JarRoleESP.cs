@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using AstroClient.Tools.Colors;
+    using ClientAttributes;
     using ESP.Player;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;

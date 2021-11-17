@@ -2,6 +2,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
 {
     using System;
     using AstroClient.Tools.Extensions;
+    using ClientAttributes;
     using xAstroBoy.AstroButtonAPI;
 
     [RegisterComponent]

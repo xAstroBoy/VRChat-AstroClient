@@ -2,6 +2,7 @@
 {
     using System;
     using AstroClient.Tools.UdonEditor;
+    using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using VRC.Udon;
 

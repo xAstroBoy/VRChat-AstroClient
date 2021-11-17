@@ -1,6 +1,7 @@
 namespace AstroClient.AstroMonos.AstroUdons
 {
     using System;
+    using ClientAttributes;
     using Components.Tools;
     using Programs;
     using UnhollowerBaseLib.Attributes;

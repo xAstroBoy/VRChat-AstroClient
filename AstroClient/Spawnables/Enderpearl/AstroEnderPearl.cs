@@ -1,10 +1,10 @@
 namespace AstroClient.Spawnables.Enderpearl
 {
-    using AstroClient.xAstroBoy.Utility;
     using AstroMonos.Components.Custom.Items;
     using Tools.Holders;
     using UnityEngine;
     using VRC.SDKBase;
+    using xAstroBoy.Utility;
 
     internal class AstroEnderPearl
     {

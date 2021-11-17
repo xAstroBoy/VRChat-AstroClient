@@ -1,8 +1,6 @@
 ﻿namespace AstroClient.AstroMonos
 {
-    using System;
     using System.Collections.Generic;
-    using UnhollowerBaseLib.Attributes;
     using VRC;
     using xAstroBoy.Utility;
 
