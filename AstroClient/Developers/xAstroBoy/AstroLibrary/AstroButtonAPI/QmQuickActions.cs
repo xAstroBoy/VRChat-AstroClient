@@ -7,6 +7,8 @@
         internal string btnType;
         internal GameObject Header;
         internal GameObject QuickActions;
+        internal string menuName;
+
 
         internal QmQuickActions(int Index, string Menu, string Title, Color32 TextColor)
         {
@@ -16,6 +18,10 @@
         internal QmQuickActions(int Index, string Menu, string Title, string TextColor)
         {
             initButton(Index, Menu, Title, TextColor.HexToColor());
+        }
+        internal string GetMenuName()
+        {
+            return menuName;
         }
 
         internal void initButton(int Index, string Menu, string Title, Color32 TextColor)

@@ -1,11 +1,13 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
 {
     using System;
+    using global::AstroButtonAPI;
     using TMPro;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
+    using xAstroBoy.Extensions;
     using Object = UnityEngine.Object;
 
     internal class QMSingleButton : QMButtonBase
@@ -38,6 +40,23 @@
                 button.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
+
+        internal QMSingleButton(QmQuickActions baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
+        {
+            btnQMLoc = baseMenu.Header.name;
+            ButtonsMenu = baseMenu.QuickActions;
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip);
+
+            if (btnHalf)
+            {
+                var Recto = button.GetComponent<RectTransform>();
+                Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
+                Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
+                button.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+            }
+        }
+
+
 
         internal QMSingleButton(QMTabMenu baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
@@ -158,15 +177,11 @@
             }
         }
 
-        internal QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
+        internal QMSingleButton(string btnQMloc, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", string TextColor = null, bool btnHalf = false)
         {
-            string TextColorHTML = null;
-            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
-            string BackgroundHTML = null;
-            if (BackgroundColor.HasValue) BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
 
-            btnQMLoc = btnMenu;
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
+            btnQMLoc = btnQMloc;
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
             if (btnHalf)
             {
                 var Recto = button.GetComponent<RectTransform>();
@@ -176,29 +191,21 @@
             }
         }
 
-        internal QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, string TextColor = null, bool btnHalf = false, bool IsUp = true)
-        {
-            btnQMLoc = btnMenu;
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
 
+        internal QMSingleButton(GameObject btnMenu, string btnQMloc, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", string TextColor = null, bool btnHalf = false)
+        {
+            ButtonsMenu = btnMenu;
+            btnQMLoc = btnQMloc;
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
             if (btnHalf)
             {
                 var Recto = button.GetComponent<RectTransform>();
-
-                if (IsUp)
-                {
-                    Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-                    Recto.anchoredPosition += new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-                    button.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-                }
-                else
-                {
-                    Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-                    Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-                    button.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-                }
+                Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
+                Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
+                button.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
+
 
         internal TextMeshProUGUI Text { get; set; }
         internal string BtnText { get; set; }
@@ -224,12 +231,12 @@
                 //    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                 //    break;
 
-                //case "QA_SelectedUser":
-                //    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
-                //    button.EnableComponents();
-                //    button.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
-                //    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
-                //    break;
+                case "QA_SelectedUser":
+                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
+                    button.EnableComponents();
+                    button.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
+                    break;
 
                 default:
                     if (ButtonsMenu == null)
@@ -237,7 +244,6 @@
                         var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
                         ButtonsMenu = Part1.FindObject("Buttons");
                     }
-
                     button = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     buttonRect = button.GetComponent<RectTransform>();

@@ -41,7 +41,7 @@
 
         public MenuSlider(string parentPath, string name, float x, float y, UnityAction<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f)
         {
-            basePosition = new QMSingleButton(parentPath, x, y, "", null, "", null, null);
+            basePosition = new QMSingleButton(null, parentPath, x, y, "", null, "", null, null);
             basePosition.SetActive(false);
             Slider = Object.Instantiate(GameInstances.VRCUiManager.GetMenuContent().transform.Find("Screens/Settings/AudioDevicePanel/VolumeSlider"), QuickMenuTools.QuickMenuInstance.transform.Find(parentPath)).gameObject;
             Slider.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);

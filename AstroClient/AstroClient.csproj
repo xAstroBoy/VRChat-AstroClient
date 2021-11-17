@@ -104,9 +104,9 @@
     </Compile>
     <Compile Include="ClientUI\Menu\Menus\UserMenu\OrbitUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\PickupProtector.cs" />
-    <Compile Include="ClientUI\Menu\Menus\UserMenu\SitUserMenu.cs" />
-    <Compile Include="ClientUI\Menu\Menus\UserMenu\AttackerUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\WatcherUserMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\UserMenu\AttackerUserMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\UserMenu\SitUserMenu.cs" />
     <Compile Include="ClientUI\Menu\UIInitializer.cs" />
     <Compile Include="ClientResources\ClientResources.cs" />
     <Compile Include="ClientResources\ResourceHelper.cs" />
@@ -135,6 +135,7 @@
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Types\ActionMenuPageType.cs" />
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Types\Insertion.cs" />
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Types\PedalType.cs" />
+    <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\MenuAPI_New.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\UIPageGenerator.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QMScrollMenu.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QMHalfScroll.cs" />
@@ -161,7 +162,6 @@
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuButtonAPI.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuButtonType.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuCheckbox.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuSlider.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuSocialText.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuText.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuType.cs" />

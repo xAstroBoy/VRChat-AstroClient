@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections;
+    using AstroButtonAPI;
     using AstroMonos.Components.Tools;
     using Cheetos;
     using Target;
@@ -36,12 +37,12 @@
 
         internal static void Init_UserMenu()
         {
-            var menu = new QMNestedGridMenu("Menu_SelectedUser_Local", "AstroClient User Options", "AstroClient User Options");
+            var menu = new QMNestedGridMenu(MenuAPI_New.QA_SelectedUser, 1, 0, "AstroClient User Options", "AstroClient User Options");
             PickupProtector.InitButtons(menu);
             OrbitUserMenu.InitButtons(menu);
             AttackerUserMenu.InitButtons(menu);
             WatcherUserMenu.InitButtons(menu);
-
+            SitUserMenu.InitButtons(menu);
             new QMSingleButton(menu, "AstroClient : Set Target.", new Action(TargetSelector.MarkPlayerAsTarget), "Mark this player as target.");
             new QMSingleButton(menu, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar");
             _ = new QMSingleButton(menu, 1, 0, "Teleport All\nPickups\nTo\nplayer.", new Action(ObjectMiscOptions.TeleportAllWorldPickupsToPlayer), "Teleport World Pickups To Player.", null, null); ;
