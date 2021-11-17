@@ -71,7 +71,7 @@
                 if (menus.Count != 0)
                     foreach (var item in menus)
                         if (item != null)
-                            if (ContainsPage(page, (List<QMNestedGridMenu>)item.GetPage()))
+                            if (ContainsPage(page, item.GetPage()))
                                 return true;
             return false;
         }

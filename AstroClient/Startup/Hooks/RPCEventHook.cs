@@ -8,13 +8,13 @@
     using Cheetos;
     using Config;
     using Constants;
-    using Harmony;
     using Tools.Extensions;
     using UnityEngine;
     using VRC.SDKBase;
     using WorldAddons.WorldsIds;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
+    using HarmonyLib;
 
     #endregion Imports
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
@@ -36,15 +36,15 @@
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
-        private static HarmonyMethod GetPatch(string name)
+        private static HarmonyLib.HarmonyMethod GetPatch(string name)
         {
-            return new HarmonyMethod(typeof(RPCEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+            return new HarmonyLib.HarmonyMethod(typeof(RPCEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
-                new AstroPatch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent)));
+                new AstroPatch(HarmonyLib.AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent)));
             
         }
 

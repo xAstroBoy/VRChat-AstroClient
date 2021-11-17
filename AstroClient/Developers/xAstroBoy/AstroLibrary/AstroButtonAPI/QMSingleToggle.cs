@@ -1,28 +1,18 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
 {
     using System;
+    using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
+    using Object = UnityEngine.Object;
 
     internal class QMSingleToggleButton : QMButtonBase
     {
-        private bool State { get; set; }
-        private string OnText { get; set; }
-        private string OffText { get; set; }
-        private Color OffColor { get; set; }
-        private Color OnColor { get; set; }
-        private Action OffAction { get; set; }
-        private Action OnAction { get; set; }
-        private GameObject ButtonsMenu { get; set; }
-
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
-            if (btnHalf)
-            {
-                btnYLocation -= 0.25f;
-            }
+            if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
 
@@ -37,10 +27,7 @@
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
-            if (btnHalf)
-            {
-                btnYLocation -= 0.25f;
-            }
+            if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
 
@@ -48,32 +35,32 @@
         {
             btnQMLoc = btnMenu.GetMenuName();
             ButtonsMenu = btnMenu.GetButtonsMenu();
-            if (btnHalf)
-            {
-                btnYLocation -= 0.25f;
-            }
+            if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
 
         internal QMSingleToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
-            if (btnHalf)
-            {
-                btnYLocation -= 0.25f;
-            }
+            if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
 
         internal QMSingleToggleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu;
-            if (btnHalf)
-            {
-                btnYLocation -= 0.25f;
-            }
+            if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
+
+        private bool State { get; set; }
+        private string OnText { get; set; }
+        private string OffText { get; set; }
+        private Color OffColor { get; set; }
+        private Color OnColor { get; set; }
+        private Action OffAction { get; set; }
+        private Action OnAction { get; set; }
+        private GameObject ButtonsMenu { get; set; }
 
         private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool defaultstate = false, bool btnHalf = false)
         {
@@ -81,7 +68,7 @@
             switch (btnQMLoc)
             {
                 case "Dashboard":
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection(), true);
+                    button = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection(), true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     break;
 
@@ -103,7 +90,8 @@
                         var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
                         ButtonsMenu = Part1.FindObject("Buttons");
                     }
-                    button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
+
+                    button = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     initShift[0] = -1;
                     initShift[1] = -3;
@@ -131,16 +119,13 @@
             OnColor = btnOnColor == null ? Color.magenta : (Color)btnOnColor;
             OffColor = btnOFFColor == null ? Color.white : (Color)btnOFFColor;
             SetActive(true);
-            if (btnHalf)
-            {
-                SetSize(new Vector2(200, 88));
-            }
+            if (btnHalf) SetSize(new Vector2(200, 88));
             //QMButtonAPI.allSingleToggleButtons.Add(this);
         }
 
         internal void SetButtonText(string buttonText)
         {
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = buttonText;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = buttonText;
         }
 
         internal void SetAction(Action buttonONAction, Action buttonOFFAction)
@@ -151,13 +136,9 @@
                 {
                     State = !State;
                     if (State)
-                    {
                         SetToggleState(true, true);
-                    }
                     else
-                    {
                         SetToggleState(false, true);
-                    }
                 }));
         }
 
@@ -168,7 +149,7 @@
             //    OrigBackground = buttonBackgroundColor;
             //UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
             //foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
-            button.GetComponentInChildren<Button>().colors = new ColorBlock()
+            button.GetComponentInChildren<Button>().colors = new ColorBlock
             {
                 colorMultiplier = 1f,
                 disabledColor = Color.grey,
@@ -192,7 +173,7 @@
 
         internal override void SetTextColor(Color buttonTextColor)
         {
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().color = buttonTextColor;
+            button.GetComponentInChildren<TextMeshProUGUI>().color = buttonTextColor;
             //if (save)
             //OrigText = (Color)buttonTextColor;
         }
@@ -209,16 +190,12 @@
             State = toggleOn;
             try
             {
-                if (toggleOn && shouldInvoke)
-                {
-                    OnAction.Invoke();
-                }
-                if (!toggleOn && shouldInvoke)
-                {
-                    OffAction.Invoke();
-                }
+                if (toggleOn && shouldInvoke) OnAction.Invoke();
+                if (!toggleOn && shouldInvoke) OffAction.Invoke();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void SetSize(Vector2? size = null)
