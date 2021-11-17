@@ -11,6 +11,7 @@
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
     using UdonExploits.AmongUS;
+    using UdonExploits.Global;
     using UnityEngine;
     using VRC;
     using WorldsIds;
@@ -179,29 +180,31 @@
         internal static void AmongUSCheatsButtons(QMGridTab submenu)
         {
             AmongUsCheatsPage = new QMNestedGridMenu(submenu, "Among US Cheats", "Manage Among US Cheats");
-            JarRoleController.AmongUSRolesRevealerToggle = new QMToggleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.");
+            JarRoleController.AmongUSRolesRevealerToggle = new QMToggleButton(AmongUsCheatsPage, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.");
 
-            AmongUSUdonExploits.Init_GameController_Menu(AmongUsCheatsPage);
+            AmongUS_GameLogic.InitButtons(AmongUsCheatsPage);
 
-            AmongUSUdonExploits.Init_FilteredNodes_Menu(AmongUsCheatsPage);
-            AmongUSUdonExploits.Init_Unfiltered_Nodes_Menu(AmongUsCheatsPage);
+            AmongUS_FilteredNodes.InitButtons(AmongUsCheatsPage);
+            AmongUS_UnfilteredNodes.InitButtons(AmongUsCheatsPage);
 
-            AmongUSUdonExploits.Init_SabotageAndRepair_Menu(AmongUsCheatsPage);
-            AmongUSUdonExploits.Init_KillPlayers_Menu(AmongUsCheatsPage);
+            AmongUS_SabotageAndRepair.InitButtons(AmongUsCheatsPage);
+            AmongUS_KillPlayers.InitButtons(AmongUsCheatsPage);
 
-            AmongUSUdonExploits.Init_ForceVotePlayer_menu(AmongUsCheatsPage);
-            AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage);
+            AmongUS_ForceVotePlayer.InitButtons(AmongUsCheatsPage);
+            AmongUS_ForceEjectPlayer.InitButtons(AmongUsCheatsPage);
 
-            AmongUSUdonExploits.Init_RoleSwap_Menu(AmongUsCheatsPage);
-            GetImpostorRoleBtn = new QMToggleButton(AmongUsCheatsPage, 4, 1.5f, "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!");
-            ToggleSerializerShortcut = new QMToggleButton(AmongUsCheatsPage, 4, 2f, "Toggle Serializer", new Action(() => { AmongUsSerializer = true; }), "Toggle Serializer", new Action(() => { AmongUsSerializer = false; }), "Serialize For Stealth or to frame someone else!");
-            GameBodyESPBtn = new QMToggleButton(AmongUsCheatsPage, 4, 2.5f, "Body ESP", new Action(() => { BodyESPs = true; }), "Body ESP", new Action(() => { BodyESPs = false; }), "Makes Impostor Kills Visible (Yellow)!");
+            AmongUS_RoleSwapper.InitButtons(AmongUsCheatsPage);
 
-            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
-            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
 
-            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2, "Victory Crewmate", new Action(() => { VictoryCrewmateEvent.ExecuteUdonEvent(); }), "Force Victory Crewmate Event", null, Color.green, true);
-            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2.5f, "Victory Impostor", new Action(() => { VictoryImpostorEvent.ExecuteUdonEvent(); }), "Force Victory Impostor Event", null, Color.red, true);
+            GetImpostorRoleBtn = new QMToggleButton(AmongUsCheatsPage, "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!");
+            ToggleSerializerShortcut = new QMToggleButton(AmongUsCheatsPage,  "Toggle Serializer", new Action(() => { AmongUsSerializer = true; }), "Toggle Serializer", new Action(() => { AmongUsSerializer = false; }), "Serialize For Stealth or to frame someone else!");
+            GameBodyESPBtn = new QMToggleButton(AmongUsCheatsPage, "Body ESP", new Action(() => { BodyESPs = true; }), "Body ESP", new Action(() => { BodyESPs = false; }), "Makes Impostor Kills Visible (Yellow)!");
+
+            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", Color.green);
+            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", Color.green);
+
+            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Crewmate", new Action(() => { VictoryCrewmateEvent.ExecuteUdonEvent(); }), "Force Victory Crewmate Event", Color.green);
+            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Impostor", new Action(() => { VictoryImpostorEvent.ExecuteUdonEvent(); }), "Force Victory Impostor Event", Color.red);
         }
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)

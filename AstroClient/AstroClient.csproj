@@ -362,6 +362,15 @@
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_KillPlayers.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_ForceEjectPlayer.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_ForceVotePlayer.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_SabotageAndRepair.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_UnfilteredNodes.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_FilteredNodes.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_Utils.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_GameLogic.cs" />
+    <Compile Include="UdonExploits\AmongUS\AmongUS_RoleSwapper.cs" />
     <Compile Include="UdonExploits\Murder4\Murder4_RoleSwapper.cs" />
     <Compile Include="UdonExploits\Murder4\Murder4_UnfilteredNodes.cs" />
     <Compile Include="UdonExploits\Murder4\Murder4_FilteredNodes.cs" />
@@ -519,7 +528,6 @@
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
     <Compile Include="Target\TargetSelector.cs" />
-    <Compile Include="UdonExploits\AmongUS\AmongUSUdonExploits.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnboxer.cs" />
     <Compile Include="Tools\ColliderViewer\ColliderDisplay.cs" />
     <Compile Include="Tools\ColliderViewer\ColliderToggler.cs" />
