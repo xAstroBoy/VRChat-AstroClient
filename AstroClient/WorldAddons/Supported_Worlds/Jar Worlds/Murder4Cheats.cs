@@ -5,6 +5,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroClient.UdonExploits.Global;
     using AstroMonos.Components.Cheats.PatronUnlocker;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.ESP.Pickup;
@@ -14,7 +15,6 @@
     using Tools.Extensions.Components_exts;
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
-    using UdonExploits.Murder4;
     using UnityEngine;
     using VRC;
     using WorldsIds;
@@ -568,25 +568,28 @@
 
             #endregion Watchers
 
-            Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage);
+            QMNestedGridMenu Cheats = new QMNestedGridMenu(Murder4CheatPage, 1, 2.5f, "World Cheats", "Interact with Items!");
 
-            GetSelfPatreonGunBtn = new QMToggleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!");
-            GetEveryonePatreonGunBtn = new QMToggleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!");
+            GetSelfPatreonGunBtn = new QMToggleButton(Cheats, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!");
+            GetEveryonePatreonGunBtn = new QMToggleButton(Cheats, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!");
 
-            GetDetectiveRoleBtn = new QMToggleButton(Murder4CheatPage, 3, 1, "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!");
-            GetMurdererRoleBtn = new QMToggleButton(Murder4CheatPage, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = false; }), "Assign Yourself Murderer Role on Next Round!");
+            GetDetectiveRoleBtn = new QMToggleButton(Cheats, 3, 1, "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!");
+            GetMurdererRoleBtn = new QMToggleButton(Cheats, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = false; }), "Assign Yourself Murderer Role on Next Round!");
 
-            Murder4ESPtoggler = new QMToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.");
-            JarRoleController.Murder4RolesRevealerToggle = new QMToggleButton(Murder4CheatPage, "Reveal Roles", new Action(() => { JarRoleController.ViewRoles = true; }), new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.");
-            Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage);
-            Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage);
-            Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage);
+            Murder4ESPtoggler = new QMToggleButton(Cheats, 3, 0, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.");
+            JarRoleController.Murder4RolesRevealerToggle = new QMToggleButton(Cheats, "Reveal Roles", new Action(() => { JarRoleController.ViewRoles = true; }), new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.");
+            
+            GameVictoryBystanderBtn = new QMSingleButton(Cheats, 4, 2, "Victory Bystander", new Action(() => { VictoryBystanderEvent.ExecuteUdonEvent(); }), "Force Victory Bystander Event", null, Color.green, true);
+            GameVictoryMurdererBtn = new QMSingleButton(Cheats, 4, 2.5f, "Victory Murderer", new Action(() => { VictoryMurdererEvent.ExecuteUdonEvent(); }), "Force Victory Murderer Event", null, Color.red, true);
 
-            GameStartbtn = new QMSingleButton(Murder4CheatPage, 3, 2, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
-            GameAbortbtn = new QMSingleButton(Murder4CheatPage, 3, 2.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
+            Murder4_GameLogic.InitButtons(Cheats);
+            Murder4_FilteredNodes.InitButtons(Cheats);
+            Murder4_UnfilteredNodes.InitButtons(Cheats);
+            Murder4_RoleSwapper.InitButtons(Cheats);
 
-            GameVictoryBystanderBtn = new QMSingleButton(Murder4CheatPage, 4, 2, "Victory Bystander", new Action(() => { VictoryBystanderEvent.ExecuteUdonEvent(); }), "Force Victory Bystander Event", null, Color.green, true);
-            GameVictoryMurdererBtn = new QMSingleButton(Murder4CheatPage, 4, 2.5f, "Victory Murderer", new Action(() => { VictoryMurdererEvent.ExecuteUdonEvent(); }), "Force Victory Murderer Event", null, Color.red, true);
+            GameStartbtn = new QMSingleButton(Cheats, 3, 2, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
+            GameAbortbtn = new QMSingleButton(Cheats, 3, 2.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
+
         }
 
         internal static void ToggleKnifesGrab(bool Pickupable)

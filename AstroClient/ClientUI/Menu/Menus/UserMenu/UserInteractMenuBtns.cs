@@ -37,7 +37,7 @@
 
         internal static void Init_UserMenu()
         {
-            var menu = new QMNestedGridMenu(MenuAPI_New.QA_SelectedUser, 1, 0, "AstroClient User Options", "AstroClient User Options");
+            var menu = new QMNestedGridMenu(MenuAPI_New.QA_SelectedUser, 1, 0, "AstroClient User Options", "AstroClient User Options", Color.cyan, true);
             PickupProtector.InitButtons(menu);
             OrbitUserMenu.InitButtons(menu);
             AttackerUserMenu.InitButtons(menu);

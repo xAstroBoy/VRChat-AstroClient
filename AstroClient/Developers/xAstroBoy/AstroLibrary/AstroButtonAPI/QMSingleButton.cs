@@ -41,18 +41,18 @@
             }
         }
 
-        internal QMSingleButton(QmQuickActions baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
+        internal QMSingleButton(QmQuickActions baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool isUserPage = false)
         {
             btnQMLoc = baseMenu.GetMenuName();
             ButtonsMenu = baseMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip);
 
-            if (btnHalf)
+            if (isUserPage)
             {
-                var Recto = button.GetComponent<RectTransform>();
-                Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-                Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-                button.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+                button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser.QuickActions.transform, true);
+                button.EnableComponents();
+                button.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
             }
         }
 
@@ -287,6 +287,11 @@
         internal override void SetBackgroundColor(Color buttonBackgroundColor)
         {
             button.GetComponentInChildren<Image>().color = buttonBackgroundColor;
+        }
+
+        internal GameObject GetGameObject()
+        {
+            return button;
         }
 
         internal override void SetTextColor(Color buttonTextColor)

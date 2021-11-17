@@ -362,6 +362,10 @@
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
+    <Compile Include="UdonExploits\Murder4\Murder4_RoleSwapper.cs" />
+    <Compile Include="UdonExploits\Murder4\Murder4_UnfilteredNodes.cs" />
+    <Compile Include="UdonExploits\Murder4\Murder4_FilteredNodes.cs" />
+    <Compile Include="UdonExploits\Murder4\Murder4_GameLogic.cs" />
     <Compile Include="UdonExploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Tools\Decompiler\DecompilerUtils.cs" />
     <Compile Include="Tools\Decompiler\IL2CPPDecompiler.cs" />
@@ -516,7 +520,6 @@
     <Compile Include="Startup\WorldJoinMsg.cs" />
     <Compile Include="Target\TargetSelector.cs" />
     <Compile Include="UdonExploits\AmongUS\AmongUSUdonExploits.cs" />
-    <Compile Include="UdonExploits\Murder4\Murder4UdonExploits.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnboxer.cs" />
     <Compile Include="Tools\ColliderViewer\ColliderDisplay.cs" />
     <Compile Include="Tools\ColliderViewer\ColliderToggler.cs" />
