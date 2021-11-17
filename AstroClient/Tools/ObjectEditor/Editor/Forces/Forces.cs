@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Tools.ObjectEditor.Editor.Forces
 {
     using AstroMonos.Components.Tools;
-    using ClientUI.ItemTweakerV2.Submenus.Physic.Forces;
+    using ClientUI.Menu.ItemTweakerV2.Submenus.Physic.Forces;
     using Online;
     using UnityEngine;
     using xAstroBoy.Utility;

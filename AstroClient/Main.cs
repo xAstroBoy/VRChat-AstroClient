@@ -9,7 +9,7 @@
     using System.Reflection;
     using AstroEventArgs;
     using CheetosConsole;
-    using ClientUI.ItemTweakerV2.Selector;
+    using ClientUI.Menu.ItemTweakerV2.Selector;
     using ClientUI.Menu.Menus;
     using Config;
     using Constants;

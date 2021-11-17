@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.AstroMonos
 {
     using System;
-    using ClientUI.ItemTweakerV2.Selector;
+    using ClientUI.Menu.ItemTweakerV2.Selector;
     using Components.Custom.Random;
     using Components.Malicious;
     using Components.Malicious.Orbit;

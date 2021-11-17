@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Custom.Random;
-    using ClientUI.ItemTweakerV2.Handlers;
-    using ClientUI.ItemTweakerV2.ScrollMenus.WorldObjects;
-    using ClientUI.ItemTweakerV2.Selector;
+    using ClientUI.Menu.ItemTweakerV2.Handlers;
+    using ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects;
+    using ClientUI.Menu.ItemTweakerV2.Selector;
     using UnityEngine;
 
     internal static class ItemTweaker_ext

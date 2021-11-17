@@ -27,6 +27,7 @@
         private static Transform _SliderReference;
         private static Transform _ToolTipPanel;
         private static Transform _TabMenuReference;
+        private static Transform _MenuDashboard;
 
         private static Transform _SingleButtonTemplate;
 
@@ -256,6 +257,25 @@
                 }
 
                 return _NestedButtonReference;
+            }
+        }
+        internal static Transform MenuDashboard
+        {
+            get
+            {
+                if (QuickMenuTransform == null) return null;
+                if (_MenuDashboard == null)
+                {
+                    var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
+                    foreach (var button in Buttons)
+                        if (button.name == "Menu_Dashboard")
+                        {
+                            ModConsole.DebugLog("Found Dashboard Page!", Color.Chartreuse);
+                            return _MenuDashboard = button;
+                        }
+                }
+
+                return _MenuDashboard;
             }
         }
 

@@ -41,7 +41,6 @@
                         {
                             UnityEngine.Object.DestroyImmediate(destroy1);
                             UnityEngine.Object.DestroyImmediate(destroy2);
-                         ModConsole.DebugLog("1");
                             GridLayoutGroup gridLayoutGroup = layoutGroup.GetOrAddComponent<GridLayoutGroup>(); //Adding superior GridLayoutGroup
                             int maxwidth = 960; // Sets Max Width of Tab buttons
                             int minwidth = 120; //Sets Icon Size
@@ -53,24 +52,16 @@
                                     activeChildren++;
                             }
 
-                            ModConsole.DebugLog("2");
-
                             while (maxwidth / Math.Ceiling((float)activeChildren / (float)rows) < minwidth)
                             {
                                 rows++;
                             }
-                            ModConsole.DebugLog("3");
-
                             gridLayoutGroup.cellSize = new Vector2((float)(maxwidth / Math.Ceiling((float)activeChildren / (float)rows)), 100f);
-                            ModConsole.DebugLog("4");
                             gridLayoutGroup.childAlignment = TextAnchor.UpperCenter;
                             layoutGroup.GetComponent<RectTransform>().sizeDelta = new Vector2(maxwidth, 100);
-                            ModConsole.DebugLog("5");
                             Transform tooltip = QuickMenuTools.ToolTipPanel.Find("Panel");
-                            ModConsole.DebugLog("6");
                             if (tooltip != null)
                             {
-                                ModConsole.DebugLog("7");
                                 tooltip.localPosition = new Vector3(tooltip.localPosition.x, 220, tooltip.localPosition.z); //Changes the Tooltip Position so it dosent cover the buttons
                             }
                         }
@@ -95,12 +86,8 @@
                 {
                     if (box != null)
                     {
-                        ModConsole.DebugLog("8");
                         box.center = new Vector3(0, -150, 0); //Centers the Collider to the 2nd Row
-                        ModConsole.DebugLog("9");
                         box.size = new Vector3(1200, 300, 1); //Increases the Size of the Collider to cover all Buttons
-                        ModConsole.DebugLog("10");
-
                         ModConsole.DebugLog("Fixed Tabs! Enjoy!");
                         HasFixed2 = true;
                         break;

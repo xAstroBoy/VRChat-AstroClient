@@ -5,7 +5,7 @@
     using Extensions;
     using UnityEngine;
     using VRC.Udon;
-    using static ClientUI.ItemTweakerV2.Submenus.Scale.ScaleSubmenu;
+    using static ClientUI.Menu.ItemTweakerV2.Submenus.Scale.ScaleSubmenu;
     using static Constants.CustomLists;
 
     internal class ScaleEditor : AstroEvents

@@ -8,7 +8,7 @@
     using System.Linq;
     using System.Threading;
     using AstroMonos.Components.Tools;
-    using ClientUI.ItemTweakerV2.Selector;
+    using ClientUI.Menu.ItemTweakerV2.Selector;
     using ColliderViewer;
     using Extensions;
     using Il2CppSystem.Text;

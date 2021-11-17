@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Tools.ObjectEditor.Cloner
 {
-    using ClientUI.ItemTweakerV2.Selector;
-    using ClientUI.ItemTweakerV2.Submenus.Spawner;
+    using ClientUI.Menu.ItemTweakerV2.Selector;
+    using ClientUI.Menu.ItemTweakerV2.Submenus.Spawner;
     using Extensions;
     using UnityEngine;
 
