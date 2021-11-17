@@ -13,8 +13,7 @@
         protected string btnType;
         protected GameObject button;
         protected int[] initShift = { 0, 0 };
-        protected Color OrigBackground;
-        protected Color OrigText;
+
 
         internal GameObject GetGameObject()
         {
@@ -26,23 +25,7 @@
             button.gameObject.SetActive(isActive);
         }
 
-        internal void SetIntractable(bool isIntractable)
-        {
-            if (isIntractable)
-            {
-                SetBackgroundColor(OrigBackground);
-                SetTextColor(OrigText);
-            }
-            else
-            {
-                SetBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1));
-                SetTextColor(new Color(0.7f, 0.7f, 0.7f, 1));
-                ;
-            }
-
-            button.gameObject.GetComponent<Button>().interactable = isIntractable;
-        }
-
+ 
         internal void SetLocation(float buttonXLoc, float buttonYLoc)
         {
             // This zeroifies the position.
@@ -72,6 +55,10 @@
         {
             button.GetComponentInChildren<UiTooltip>(true).field_Public_String_0 = buttonToolTip;
             //button.GetComponentInChildren<UiTooltip>().field_Public_String_1 = buttonToolTip;
+        }
+        internal void SetIntractable(bool isIntractable)
+        {
+            button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
         internal void DestroyMe()

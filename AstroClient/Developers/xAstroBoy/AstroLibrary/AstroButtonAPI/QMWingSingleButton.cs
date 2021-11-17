@@ -25,9 +25,7 @@
 
         public QMWingSingleButton(QMWings Parent, string btnText, Action btnAction, string btnToolTip, Color? TextColor = null)
         {
-            string TextColorHTML = null;
-            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
-            initButton2(Parent.WingPageTransform.gameObject, btnText, btnAction, btnToolTip, TextColorHTML);
+            initButton2(Parent.WingPageTransform.gameObject, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
         }
 
         protected void initButton2(GameObject Parent, string btnText, Action btnAction, string btnToolTip, string TextColor)

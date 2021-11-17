@@ -3,6 +3,7 @@
     using System;
     using global::AstroButtonAPI;
     using TMPro;
+    using Tools.Colors;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
@@ -97,23 +98,23 @@
 
         internal QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null)
         {
-            string TextColorHTML = null;
-            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(0, 0, btnText, btnAction, btnToolTip, TextColorHTML);
+            initButton(0, 0, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
         }
+        internal QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", System.Drawing.Color? TextColor = null)
+        {
+            btnQMLoc = Parent.GetMenuName();
+            ButtonsMenu = Parent.GetButtonsMenu();
+            initButton(0, 0, btnText, btnAction, btnToolTip, ColorUtils.ColorToHex(TextColor.GetValueOrDefault(System.Drawing.Color.Aqua)));
+        }
+
 
         internal QMSingleButton(QMNestedButton Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
-            string TextColorHTML = null;
-            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
-            string BackgroundHTML = null;
-            if (BackgroundColor.HasValue) BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
-
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
 
             if (btnHalf)
             {
@@ -127,26 +128,16 @@
 
         internal QMSingleButton(QMNestedGridMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
-            string TextColorHTML = null;
-            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
-            string BackgroundHTML = null;
-            if (BackgroundColor.HasValue) BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
-
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
         }
 
         internal QMSingleButton(QMGridTab Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
-            string TextColorHTML = null;
-            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
-            string BackgroundHTML = null;
-            if (BackgroundColor.HasValue) BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
-
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
             var Recto = button.GetComponent<RectTransform>();
             Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
@@ -159,14 +150,10 @@
 
         internal QMSingleButton(QMTabMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
-            string TextColorHTML = null;
-            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
-            string BackgroundHTML = null;
-            if (BackgroundColor.HasValue) BackgroundHTML = "#" + ColorUtility.ToHtmlStringRGB(BackgroundColor.Value);
 
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColorHTML);
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
             var Recto = button.GetComponent<RectTransform>();
             Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
@@ -207,7 +194,7 @@
         }
 
 
-        internal TextMeshProUGUI Text { get; set; }
+        internal TextMeshProUGUI ButtonText { get; set; }
         internal string BtnText { get; set; }
         internal string CurrentBtnColor { get; set; }
         private GameObject ButtonsMenu { get; set; }
@@ -253,6 +240,7 @@
                     break;
             }
 
+            ButtonText = button.GetComponentInChildren<TextMeshProUGUI>(true);
             SetButtonText(btnText);
             SetToolTip(btnToolTip);
 
@@ -275,7 +263,7 @@
         {
             BtnText = buttonText;
             var NewText = $"<color={CurrentBtnColor}>{BtnText}</color>";
-            button.GetComponentInChildren<TextMeshProUGUI>(true).text = NewText;
+            ButtonText.text = NewText;
         }
 
         internal void SetAction(Action buttonAction)
@@ -296,17 +284,15 @@
 
         internal override void SetTextColor(Color buttonTextColor)
         {
-            string TextColorHTML = null;
-            if (buttonTextColor != null) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(buttonTextColor);
 
-            setTextColorHTML(TextColorHTML);
+            setTextColorHTML($"#{ColorUtility.ToHtmlStringRGB(buttonTextColor)}");
         }
 
         internal void setTextColorHTML(string buttonTextColor)
         {
             CurrentBtnColor = buttonTextColor;
             var NewText = $"<color={buttonTextColor}>{BtnText}</color>";
-            button.GetComponentInChildren<TextMeshProUGUI>(true).text = NewText;
+            ButtonText.text = NewText;
         }
     }
 }

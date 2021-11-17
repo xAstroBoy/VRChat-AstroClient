@@ -118,8 +118,6 @@
 
             if (btnBackgroundColor != null)
                 SetBackgroundColor((Color)btnBackgroundColor);
-            else
-                OrigBackground = button.GetComponentInChildren<Image>().color;
 
             SetTextColor(defaultstate ? (Color)btnOnColor : (Color)btnOFFColor);
             //OrigText = button.GetComponentInChildren<Text>().color;

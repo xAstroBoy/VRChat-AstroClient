@@ -107,7 +107,7 @@
             NestedPart.CleanButtonsNestedMenu();
             string TextColorHTML = null;
             if (btnTextColor.HasValue)
-                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
+                TextColorHTML = $"#{ColorUtility.ToHtmlStringRGB(btnTextColor.GetValueOrDefault(Color.cyan))}";
             else
                 TextColorHTML = "#blue";
             if (Parent != null)

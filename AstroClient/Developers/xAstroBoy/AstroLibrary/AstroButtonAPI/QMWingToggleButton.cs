@@ -11,9 +11,7 @@
     {
         public QMWingToggleButton(QMWings Parent, string btnText, Action OnAction, Action OffAction, string btnToolTip, Color? TextColor = null, bool Defaultstate = false)
         {
-            string TextColorHTML = null;
-            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
-            initButton2(Parent.WingPageTransform.gameObject, btnText, OnAction, OffAction, btnToolTip, TextColorHTML, Defaultstate);
+            initButton2(Parent.WingPageTransform.gameObject, btnText, OnAction, OffAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}", Defaultstate);
         }
 
         private bool State { get; set; }
