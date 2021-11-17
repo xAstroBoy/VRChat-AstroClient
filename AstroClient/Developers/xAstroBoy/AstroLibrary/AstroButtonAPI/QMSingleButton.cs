@@ -54,18 +54,11 @@
             }
         }
 
-        internal QMSingleButton(QMNestedGridMenu baseMenu, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
+        internal QMSingleButton(QMNestedGridMenu baseMenu, string btnText, Action btnAction, string btnToolTip)
         {
             btnQMLoc = baseMenu.GetMenuName();
             ButtonsMenu = baseMenu.GetButtonsMenu();
             initButton(0, 0, btnText, btnAction, btnToolTip);
-            if (btnHalf)
-            {
-                var Recto = button.GetComponent<RectTransform>();
-                Recto.sizeDelta = new Vector2(Recto.sizeDelta.x, Recto.sizeDelta.y / 2 - 10f);
-                Recto.anchoredPosition -= new Vector2(0, Recto.sizeDelta.y / 2 + 10);
-                button.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
-            }
         }
 
         internal QMSingleButton(QMNestedButton baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
@@ -83,7 +76,7 @@
             }
         }
 
-        internal QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null, bool btnHalf = false)
+        internal QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null)
         {
             string TextColorHTML = null;
             if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);

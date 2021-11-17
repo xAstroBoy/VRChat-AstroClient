@@ -1,4 +1,4 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus
+﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
 {
     #region Imports
 

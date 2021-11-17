@@ -1,4 +1,4 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus
+﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
 {
     using System;
     using Tools.Extensions.Components_exts;

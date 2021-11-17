@@ -11,6 +11,7 @@
     using CheetosConsole;
     using ClientUI.Menu.ItemTweakerV2.Selector;
     using ClientUI.Menu.Menus;
+    using ClientUI.Menu.Menus.UserMenu;
     using Config;
     using Constants;
     using MelonLoader;
@@ -356,7 +357,7 @@
                 return;
             }
 
-            UserInteractMenuBtns.InitUserButtons(-1, 3, true); //UserMenu Main Button
+            UserInteractMenuBtns.InitUserButtons(); //UserMenu Main Button
             stopwatch.Stop();
             ModConsole.DebugLog($"UserInteractMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }

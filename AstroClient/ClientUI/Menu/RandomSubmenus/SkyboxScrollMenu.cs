@@ -55,14 +55,14 @@
                     {
                         if (skybox != null)
                         {
-                            var btn = new QMSingleButton(CurrentScrollMenu, $" Skybox : {skybox.SkyboxName}.", () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.SkyboxName} as map Skybox.", false);
+                            var btn = new QMSingleButton(CurrentScrollMenu, $" Skybox : {skybox.SkyboxName}.", () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.SkyboxName} as map Skybox.");
                             GeneratedButtons.Add(btn);
                         }
                     }
                 }
                 else
                 {
-                    var empty = new QMSingleButton(CurrentScrollMenu, "No Skyboxes Found", null, "No Skyboxes Found", null, false);
+                    var empty = new QMSingleButton(CurrentScrollMenu, "No Skyboxes Found", null, "No Skyboxes Found");
                     GeneratedButtons.Add(empty);
                 }
 

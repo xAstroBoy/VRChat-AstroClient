@@ -196,9 +196,9 @@
             Murder2CheatPage = new QMNestedGridMenu(submenu, "Murder 2 Cheats", "Manage Murder 2 Cheats");
 
             QMNestedGridMenu MurderItemTeleporter = new QMNestedGridMenu(Murder2CheatPage, "Item Teleporter", "Item Teleporter");
-            _ = new QMSingleButton(MurderItemTeleporter, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, false);
-            _ = new QMSingleButton(MurderItemTeleporter, "Teleport the Detective Gun!", new Action(() => { item_detectiveGun.TeleportToMe(); }), "Detective Gun Teleporter!", null, false);
-            _ = new QMSingleButton(MurderItemTeleporter, "Teleport the Silenced Gun!", new Action(() => { item_SilencedGun.TeleportToMe(); }), "Silenced gun Teleporter!", null, false);
+            _ = new QMSingleButton(MurderItemTeleporter, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!");
+            _ = new QMSingleButton(MurderItemTeleporter, "Teleport the Detective Gun!", new Action(() => { item_detectiveGun.TeleportToMe(); }), "Detective Gun Teleporter!");
+            _ = new QMSingleButton(MurderItemTeleporter, "Teleport the Silenced Gun!", new Action(() => { item_SilencedGun.TeleportToMe(); }), "Silenced gun Teleporter!");
 
             QMNestedGridMenu MurderItemTweaker = new QMNestedGridMenu(Murder2CheatPage, "Item Tweaker", "Item Tweaks!");
             _ = new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!");

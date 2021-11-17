@@ -2,6 +2,7 @@
 {
     using System.Drawing;
     using ClientUI.Menu.Menus;
+    using ClientUI.Menu.Menus.Quickmenu;
     using Constants;
     using UnhollowerBaseLib.Attributes;
     using xAstroBoy.Utility;

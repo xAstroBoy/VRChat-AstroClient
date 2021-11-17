@@ -102,6 +102,11 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="ClientUI\Menu\Menus\UserMenu\OrbitUserMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\UserMenu\PickupProtector.cs" />
+    <Compile Include="ClientUI\Menu\Menus\UserMenu\SitUserMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\UserMenu\AttackerUserMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\UserMenu\WatcherUserMenu.cs" />
     <Compile Include="ClientUI\Menu\UIInitializer.cs" />
     <Compile Include="ClientResources\ClientResources.cs" />
     <Compile Include="ClientResources\ResourceHelper.cs" />
@@ -182,8 +187,8 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
-    <Compile Include="ClientUI\Menu\Menus\GameProcessMenu.cs" />
-    <Compile Include="ClientUI\Menu\Menus\ProtectionsMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\GameProcessMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\ProtectionsMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\VRC_InteractableSubMenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\TriggerSubmenu.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\SkyboxScrollMenu.cs" />
@@ -248,7 +253,7 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\WorldUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\UIObjects.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\XrefTesting.cs" />
-    <Compile Include="ClientUI\Menu\Menus\HistoryMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\HistoryMenu.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Extensions.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Utility\CheetoUtils.cs" />
     <Compile Include="Developers\Cheetos\CheetosConsole\Console.cs" />
@@ -399,21 +404,21 @@
     <Compile Include="Tools\XrefUtils.cs" />
     <Compile Include="WorldAddons\CheatsShortcutButton.cs" />
     <Compile Include="ClientUI\Menu\ESP\PlayerESPMenu.cs" />
-    <Compile Include="ClientUI\Menu\Menus\SettingsMenuBtn.cs" />
-    <Compile Include="ClientUI\Menu\Menus\ExploitsMenu.cs" />
-    <Compile Include="ClientUI\Menu\Menus\UserInteractMenuBtns.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\SettingsMenuBtn.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\ExploitsMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\UserMenu\UserInteractMenuBtns.cs" />
     <Compile Include="ClientUI\Menu\ESP\VRChat_Map_ESP_Menu.cs" />
-    <Compile Include="ClientUI\Menu\Menus\WorldPickupsBtn.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\WorldPickupsBtn.cs" />
     <Compile Include="Developers\Cheetos\CheetosUI\CMBackground.cs" />
     <Compile Include="Developers\Cheetos\CheetosUI\CMButton.cs" />
     <Compile Include="Developers\Cheetos\CheetosUI\CMLabel.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AvatarSearch.cs" />
     <Compile Include="Developers\Cheetos\CheetosUI\CMPage.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\CheetosHooks.cs" />
-    <Compile Include="ClientUI\Menu\Menus\DevMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\DevMenu.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AstroInput.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AvatarHider.cs" />
-    <Compile Include="ClientUI\Menu\Menus\AdminMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\AdminMenu.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\ForceClone.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\VRCPlusHider.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\CheetosTestStuff.cs" />
@@ -457,7 +462,7 @@
     <Compile Include="Tools\ObjectEditor\ObjectMiscTools.cs" />
     <Compile Include="Tools\ObjectEditor\Online\OnlineEditor.cs" />
     <Compile Include="GameObjMenu.cs" />
-    <Compile Include="ClientUI\Menu\Menus\MapEditorMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\MapEditorMenu.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\EspHandler.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\ListenerHandler.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\PickupControllerHandler.cs" />
@@ -482,8 +487,8 @@
     <Compile Include="ClientUI\Menu\ItemTweakerV2\TweakerEventArgs\OnPickupControllerArgs.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\TweakerEventArgs\SelectedObjectArgs.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
-    <Compile Include="ClientUI\Menu\Menus\LightControlMenu.cs" />
-    <Compile Include="ClientUI\Menu\Menus\MovementMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\LightControlMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\MovementMenu.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Networking\NetworkingManager.cs" />

@@ -109,7 +109,7 @@
                     {
                         action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
                     }
-                }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})", null, false);
+                }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
             }
         }
 

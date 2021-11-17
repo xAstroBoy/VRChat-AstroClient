@@ -39,9 +39,9 @@
 
             //var quadToggle = new QMQuadToggleButton(MainButton, 3, 0, labels, actions);
 
-            _ = new QMSingleButton(MainButton, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!", null, false);
-            _ = new QMSingleButton(MainButton, "Notorious\nHome 1", () => { WorldUtils.JoinWorld("wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938#wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938:42069"); }, "Go to Notorious Home 1", null, false);
-            _ = new QMSingleButton(MainButton, "Notorious\nHome 2", () => { WorldUtils.JoinWorld("wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d#wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d:42069"); }, "Go to Notorious Home 2", null, false);
+            _ = new QMSingleButton(MainButton, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
+            _ = new QMSingleButton(MainButton, "Notorious\nHome 1", () => { WorldUtils.JoinWorld("wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938#wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938:42069"); }, "Go to Notorious Home 1");
+            _ = new QMSingleButton(MainButton, "Notorious\nHome 2", () => { WorldUtils.JoinWorld("wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d#wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d:42069"); }, "Go to Notorious Home 2");
         }
 
         private static void DoFriendEveryone()

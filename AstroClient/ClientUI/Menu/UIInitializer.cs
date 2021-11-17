@@ -6,6 +6,7 @@
     using Experiments;
     using ItemTweakerV2;
     using Menus;
+    using Menus.Quickmenu;
     using Networking;
     using RandomSubmenus;
     using Tabs;

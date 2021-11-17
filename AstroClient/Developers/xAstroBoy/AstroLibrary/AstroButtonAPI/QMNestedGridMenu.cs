@@ -48,6 +48,11 @@
             btnQMLoc = btnMenu;
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
+        internal QMNestedGridMenu(string btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null)
+        {
+            btnQMLoc = btnMenu;
+            InitButton(0, 0, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor);
+        }
 
         internal QMSingleButton mainButton { get; set; }
 

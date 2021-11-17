@@ -2,6 +2,7 @@ namespace AstroClient.ClientUI.ActionMenu
 {
     using Gompoc.ActionMenuAPI.Api;
     using Menu.Menus;
+    using Menu.Menus.Quickmenu;
     using Spawnables.Flashlight;
     using UnityEngine;
     using Color = System.Drawing.Color;
