@@ -3,24 +3,20 @@
     using System;
     using System.Collections.Generic;
     using UnityEngine;
+    using Object = UnityEngine.Object;
 
     internal class QMScrollMenu
     {
-        internal class ScrollObject
-        {
-            internal QMButtonBase ButtonBase;
-            internal int Index;
-        }
-
-        internal List<ScrollObject> QMButtons = new List<ScrollObject>();
-        private int Posx = 0;
-        private int Posy = 0;
-        private Action<QMScrollMenu> OpenAction;
-        internal int currentMenuIndex = 0;
-        internal QMNestedButton BaseMenu;
-        internal bool ShouldChangePos = true;
         internal bool AllowOverStepping = false;
+        internal QMNestedButton BaseMenu;
+        internal int currentMenuIndex;
         internal bool IgnoreEverything = false;
+        private Action<QMScrollMenu> OpenAction;
+        private int Posx;
+        private int Posy;
+
+        internal List<ScrollObject> QMButtons = new();
+        internal bool ShouldChangePos = true;
 
         internal QMScrollMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, Action<QMScrollMenu> MenuOpenAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
@@ -36,12 +32,10 @@
         internal void ShowMenu(int MenuIndex)
         {
             foreach (var item in QMButtons)
-            {
                 if (item.Index == MenuIndex)
                     item.ButtonBase?.SetActive(true);
                 else
                     item.ButtonBase?.SetActive(false);
-            }
             currentMenuIndex = MenuIndex;
         }
 
@@ -50,13 +44,13 @@
             try
             {
                 OpenAction = Open;
-                BaseMenu.GetMainButton().SetAction(new Action(() =>
+                BaseMenu.GetMainButton().SetAction(() =>
                 {
                     if (shouldClear) Clear();
                     OpenAction.Invoke(this);
                     QuickMenuTools.ShowQuickmenuPage(BaseMenu.GetMenuName());
                     ShowMenu(0);
-                }));
+                });
             }
             catch (Exception e)
             {
@@ -74,51 +68,45 @@
 
         internal void DestroyMe()
         {
-            foreach (var item in QMButtons)
-            {
-                UnityEngine.Object.Destroy(item.ButtonBase.GetGameObject());
-            }
+            foreach (var item in QMButtons) Object.Destroy(item.ButtonBase.GetGameObject());
             QMButtons.Clear();
             if (BaseMenu.GetBackButton() != null)
-                UnityEngine.Object.Destroy(BaseMenu.GetBackButton());
+                Object.Destroy(BaseMenu.GetBackButton());
         }
 
         internal void Clear()
         {
             try
             {
-                foreach (var item in QMButtons)
-                {
-                    UnityEngine.Object.Destroy(item.ButtonBase.GetGameObject());
-                }
+                foreach (var item in QMButtons) Object.Destroy(item.ButtonBase.GetGameObject());
                 QMButtons.Clear();
                 Posx = 0;
                 Posy = 0;
                 currentMenuIndex = 0;
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void Add(QMButtonBase Button)
         {
             if (!IgnoreEverything)
             {
-                if (Posx < 6)
-                {
-                    Posx++;
-                }
+                if (Posx < 6) Posx++;
                 if (Posx > 5)
                 {
                     Posx = 0;
                     Posy++;
                 }
             }
+
             if (ShouldChangePos)
                 Button.SetLocation(Posx, Posy);
             Button.SetActive(false);
-            QMButtons.Add(new ScrollObject()
+            QMButtons.Add(new ScrollObject
             {
-                ButtonBase = Button,
+                ButtonBase = Button
             });
         }
 
@@ -126,11 +114,17 @@
         {
             Button.SetLocation(POSX, POSY);
             Button.SetActive(false);
-            QMButtons.Add(new ScrollObject()
+            QMButtons.Add(new ScrollObject
             {
                 ButtonBase = Button,
                 Index = Page
             });
+        }
+
+        internal class ScrollObject
+        {
+            internal QMButtonBase ButtonBase;
+            internal int Index;
         }
     }
 }

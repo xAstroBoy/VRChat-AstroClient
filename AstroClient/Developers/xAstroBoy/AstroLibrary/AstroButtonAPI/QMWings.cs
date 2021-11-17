@@ -1,24 +1,28 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
 {
+    using System;
+    using Il2CppSystem.Collections.Generic;
     using TMPro;
+    using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
     using VRC.UI.Elements;
+    using Object = UnityEngine.Object;
 
     internal class QMWings : QMButtonBase
     {
-        internal Transform WingPageTransform;
+        internal Button BackButton;
+
+        internal GameObject backbuttonObject;
+        internal TextMeshProUGUI ButtonText;
+
+        internal TextMeshProUGUI ButtonText_Title;
 
         internal UIPage CurrentPage;
 
         internal string MenuName;
-
-        internal GameObject backbuttonObject;
-        internal Button BackButton;
-
-        internal TextMeshProUGUI ButtonText_Title;
-        internal TextMeshProUGUI ButtonText;
+        internal Transform WingPageTransform;
 
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, Sprite icon = null)
         {
@@ -30,19 +34,18 @@
         {
             if (LeftWing)
             {
-                btnQMLoc += $"_LEFT_{System.Guid.NewGuid().ToString()} ";
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left(), QuickMenuTools.Wing_Left().gameObject.FindObject("VerticalLayoutGroup").transform, true);
+                btnQMLoc += $"_LEFT_{Guid.NewGuid().ToString()} ";
+                button = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left(), QuickMenuTools.Wing_Left().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
                 ButtonText = button.NewText("Text_QM_H3");
                 ButtonText.text = MenuName;
 
 
-
                 SetToolTip(btnToolTip);
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
-                UIPage Page = QuickMenuTools.UIPageTemplate_Left();
-                CurrentPage = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
+                var Page = QuickMenuTools.UIPageTemplate_Left();
+                CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
                 WingPageTransform = CurrentPage.transform;
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
@@ -51,7 +54,7 @@
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true; //_inited
                 CurrentPage.field_Private_MenuStateController_0 = QuickMenuTools.WingMenuStateControllerLeft(); //_menuStateController
-                CurrentPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>(); //_pageStack
+                CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
                 CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
                 QuickMenuTools.WingMenuStateControllerLeft().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, CurrentPage); //_uiPages
 
@@ -63,7 +66,7 @@
                 VLGC.childControlHeight = false;
                 VLGC.childControlWidth = false;
 
-                GameObject VLG = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
+                var VLG = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
                 VLG.transform.FindChild("VerticalLayoutGroup").gameObject.SetActive(false);
                 VLG.transform.FindChild("Header_Wing_H3").gameObject.SetActive(false);
                 CurrentPage.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
@@ -78,8 +81,8 @@
             }
             else
             {
-                btnQMLoc += $"_RIGHT_{System.Guid.NewGuid().ToString()}";
-                button = UnityEngine.Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right(), QuickMenuTools.Wing_Right().gameObject.FindObject("VerticalLayoutGroup").transform, true);
+                btnQMLoc += $"_RIGHT_{Guid.NewGuid().ToString()}";
+                button = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right(), QuickMenuTools.Wing_Right().gameObject.FindObject("VerticalLayoutGroup").transform, true);
                 button.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
                 ButtonText = button.NewText("Text_QM_H3");
@@ -88,8 +91,8 @@
 
                 button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
-                UIPage Page = QuickMenuTools.UIPageTemplate_Right();
-                CurrentPage = UnityEngine.Object.Instantiate(Page, Page.transform.parent, true);
+                var Page = QuickMenuTools.UIPageTemplate_Right();
+                CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
                 WingPageTransform = CurrentPage.transform;
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
 
@@ -99,7 +102,7 @@
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true;
                 CurrentPage.field_Private_MenuStateController_0 = QuickMenuTools.WingMenuStateControllerRight();
-                CurrentPage.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
+                CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>();
                 CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
                 QuickMenuTools.WingMenuStateControllerRight().field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, CurrentPage);
 
@@ -111,7 +114,7 @@
                 VLGC2.childControlHeight = false;
                 VLGC2.childControlWidth = false;
 
-                GameObject VLG = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
+                var VLG = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
                 VLG.transform.FindChild("VerticalLayoutGroup").gameObject.SetActive(false);
                 VLG.transform.FindChild("Header_Wing_H3").gameObject.SetActive(false);
                 CurrentPage.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
@@ -161,11 +164,11 @@
             BackButton.onClick.Invoke();
         }
 
-        internal void SetAction(System.Action buttonAction)
+        internal void SetAction(Action buttonAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonAction != null)
-                button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
+                button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
         }
     }
 }

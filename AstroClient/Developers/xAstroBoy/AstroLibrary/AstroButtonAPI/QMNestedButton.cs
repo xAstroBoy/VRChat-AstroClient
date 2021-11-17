@@ -4,23 +4,10 @@
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
+    using Object = UnityEngine.Object;
 
     internal class QMNestedButton
     {
-        internal QMSingleButton mainButton { get; set; }
-
-        internal GameObject backButton { get; set; }
-
-        internal GameObject ButtonsMenu { get; set; }
-
-        internal string menuName { get; set; }
-
-        internal string btnQMLoc { get; set; }
-
-        internal string btnType { get; set; }
-
-        internal UIPage page { get; set; }
-
         internal QMNestedButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -63,16 +50,30 @@
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
 
+        internal QMSingleButton mainButton { get; set; }
+
+        internal GameObject backButton { get; set; }
+
+        internal GameObject ButtonsMenu { get; set; }
+
+        internal string menuName { get; set; }
+
+        internal string btnQMLoc { get; set; }
+
+        internal string btnType { get; set; }
+
+        internal UIPage page { get; set; }
+
         internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = "", Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
             menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}_{btnToolTip}_{Guid.NewGuid().ToString()}";
 
-            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
+            var NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
-            UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
-            UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+            Object.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
+            Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;
@@ -81,13 +82,9 @@
             NestedPart.CleanButtonsNestedMenu();
             string TextColorHTML = null;
             if (btnTextColor.HasValue)
-            {
                 TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
-            }
             else
-            {
                 TextColorHTML = "#blue";
-            }
 
             mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf, false);
 
@@ -118,58 +115,43 @@
             mainButton.SetAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menuName);
-                if (onOpenAction != null)
-                {
-                    onOpenAction();
-                }
+                if (onOpenAction != null) onOpenAction();
             });
         }
 
-        internal void SetBackButtonAction(QMNestedButton action, System.Action onCloseAction = null)
+        internal void SetBackButtonAction(QMNestedButton action, Action onCloseAction = null)
         {
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
-                if (onCloseAction != null)
-                {
-                    onCloseAction();
-                }
+                if (onCloseAction != null) onCloseAction();
             });
         }
 
-        internal void SetBackButtonAction(QMNestedGridMenu action, System.Action onCloseAction = null)
+        internal void SetBackButtonAction(QMNestedGridMenu action, Action onCloseAction = null)
         {
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
-                if (onCloseAction != null)
-                {
-                    onCloseAction();
-                }
+                if (onCloseAction != null) onCloseAction();
             });
         }
 
-        internal void SetBackButtonAction(QMTabMenu action, System.Action onCloseAction = null)
+        internal void SetBackButtonAction(QMTabMenu action, Action onCloseAction = null)
         {
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
-                if (onCloseAction != null)
-                {
-                    onCloseAction();
-                }
+                if (onCloseAction != null) onCloseAction();
             });
         }
 
-        internal void SetBackButtonAction(QMGridTab action, System.Action onCloseAction = null)
+        internal void SetBackButtonAction(QMGridTab action, Action onCloseAction = null)
         {
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
-                if (onCloseAction != null)
-                {
-                    onCloseAction();
-                }
+                if (onCloseAction != null) onCloseAction();
             });
         }
 

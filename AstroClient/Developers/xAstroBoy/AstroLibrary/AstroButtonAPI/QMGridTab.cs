@@ -5,12 +5,12 @@
 
     internal class QMGridTab
     {
-        protected QMTabButton mainButton;
         protected QMSingleButton backButton;
-        protected GameObject ButtonsMenu;
-        protected string menuName;
         protected string btnQMLoc;
         protected string btnType;
+        protected GameObject ButtonsMenu;
+        protected QMTabButton mainButton;
+        protected string menuName;
         protected UIPage page;
 
 
@@ -25,10 +25,10 @@
             btnType = "QMTabMenu";
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
 
-            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
+            var NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
-            UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+            Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = btnToolTip;

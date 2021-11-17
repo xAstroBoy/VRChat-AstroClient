@@ -4,13 +4,14 @@
     using UnityEngine;
     using UnityEngine.Networking;
     using UnityEngine.UI;
+    using VRC.UI.Elements.Tooltips;
 
     internal class QMButtonBase
     {
-        protected GameObject button;
         protected string btnQMLoc;
-        protected string btnType;
         protected string btnTag;
+        protected string btnType;
+        protected GameObject button;
         protected int[] initShift = { 0, 0 };
         protected Color OrigBackground;
         protected Color OrigText;
@@ -35,8 +36,10 @@
             else
             {
                 SetBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1));
-                SetTextColor(new Color(0.7f, 0.7f, 0.7f, 1)); ;
+                SetTextColor(new Color(0.7f, 0.7f, 0.7f, 1));
+                ;
             }
+
             button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
@@ -57,8 +60,8 @@
 
         internal void SetRawLocation(float buttonXLoc, float buttonYLoc)
         {
-            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate.GetComponent<RectTransform>().anchoredPosition + (Vector2.right * (420 * (buttonXLoc + initShift[0])));
-            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate.GetComponent<RectTransform>().anchoredPosition + (Vector2.down * (420 * (buttonYLoc + initShift[1])));
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate.GetComponent<RectTransform>().anchoredPosition + Vector2.right * (420 * (buttonXLoc + initShift[0]));
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplate.GetComponent<RectTransform>().anchoredPosition + Vector2.down * (420 * (buttonYLoc + initShift[1]));
 
             //btnTag = "(" + buttonXLoc + "," + buttonYLoc + ")";
             //button.name = btnQMLoc + "/" + btnType + btnTag;
@@ -67,7 +70,7 @@
 
         internal void SetToolTip(string buttonToolTip)
         {
-            button.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true).field_Public_String_0 = buttonToolTip;
+            button.GetComponentInChildren<UiTooltip>(true).field_Public_String_0 = buttonToolTip;
             //button.GetComponentInChildren<UiTooltip>().field_Public_String_1 = buttonToolTip;
         }
 
@@ -75,9 +78,11 @@
         {
             try
             {
-                UnityEngine.Object.Destroy(button);
+                Object.Destroy(button);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void ClickMe()
@@ -100,20 +105,18 @@
             var www = UnityWebRequestTexture.GetTexture(url);
             var asyncOp = www.SendWebRequest();
             while (asyncOp.isDone == false)
-                await Task.Delay(1000 / 30);//30 hertz
+                await Task.Delay(1000 / 30); //30 hertz
 
             if (www.isNetworkError || www.isHttpError)
             {
                 return null;
             }
-            else
-            {
-                var Sprite = new Sprite();
-                Sprite = Sprite.CreateSprite(DownloadHandlerTexture.GetContent(www), new Rect(0, 0, DownloadHandlerTexture.GetContent(www).width, DownloadHandlerTexture.GetContent(www).height), Vector2.zero, 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-                Instance.sprite = Sprite;
-                Instance.color = Color.white;
-                return DownloadHandlerTexture.GetContent(www);
-            }
+
+            var Sprite = new Sprite();
+            Sprite = Sprite.CreateSprite(DownloadHandlerTexture.GetContent(www), new Rect(0, 0, DownloadHandlerTexture.GetContent(www).width, DownloadHandlerTexture.GetContent(www).height), Vector2.zero, 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+            Instance.sprite = Sprite;
+            Instance.color = Color.white;
+            return DownloadHandlerTexture.GetContent(www);
         }
 
         internal void SetShader(string shaderName)

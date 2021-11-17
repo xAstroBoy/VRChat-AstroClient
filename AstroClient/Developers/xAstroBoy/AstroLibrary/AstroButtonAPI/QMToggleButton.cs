@@ -5,31 +5,11 @@
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
+    using Object = UnityEngine.Object;
 
     internal class QMToggleButton : QMButtonBase
     {
-        internal GameObject btnOn { get; set; }
-        internal GameObject btnOff { get; set; }
-        private bool State { get; set; }
-        internal GameObject ButtonsPageNestedButton { get; set; }
-        private string BtnType { get; set; }
-        private GameObject ButtonsMenu { get; set; }
-
-        private TMPro.TextMeshProUGUI TextMesh;
-        private string CurrentButtonText { get; set; }
-
-        private System.Action btnOnAction { get; set; }
-        private System.Action btnOffAction { get; set; }
-
-        private Toggle ButtonToggle { get; set; }
-        private Color OffColor { get; set; }
-        private Color OnColor { get; set; }
-
-        private string CurrentColor { get; set; }
-        private TextMeshProUGUI ButtonText { get; set; }
-
-        private string ButtonText_On { get; set; }
-        private string ButtonText_Off { get; set; }
+        private TextMeshProUGUI TextMesh;
 
         public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
@@ -149,19 +129,38 @@
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
 
-        internal void initButton(float btnXLocation, float btnYLocation, string btnTextOn, System.Action btnActionOn, string btnTextOff, System.Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = "", bool DefaultState = false)
+        internal GameObject btnOn { get; set; }
+        internal GameObject btnOff { get; set; }
+        private bool State { get; set; }
+        internal GameObject ButtonsPageNestedButton { get; set; }
+        private string BtnType { get; set; }
+        private GameObject ButtonsMenu { get; set; }
+        private string CurrentButtonText { get; set; }
+
+        private Action btnOnAction { get; set; }
+        private Action btnOffAction { get; set; }
+
+        private Toggle ButtonToggle { get; set; }
+        private Color OffColor { get; set; }
+        private Color OnColor { get; set; }
+
+        private string CurrentColor { get; set; }
+        private TextMeshProUGUI ButtonText { get; set; }
+
+        private string ButtonText_On { get; set; }
+        private string ButtonText_Off { get; set; }
+
+        internal void initButton(float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = "", bool DefaultState = false)
         {
             BtnType = "_ToggleButton_";
             var id = $"{QMButtonAPI.identifier}_{BtnType}_{Title}_{btnTextOff}_{btnTextOn}";
             if (ButtonsMenu == null)
             {
                 var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-                if (Part1 != null)
-                {
-                    ButtonsMenu = Part1.FindObject("Buttons");
-                }
+                if (Part1 != null) ButtonsMenu = Part1.FindObject("Buttons");
             }
-            button = UnityEngine.Object.Instantiate<GameObject>(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
+
+            button = Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
             Extensions.NewText(button, "Text_H4").text = Title;
             button.name = id;
             ButtonText = button.GetComponentInChildren<TextMeshProUGUI>();
@@ -170,21 +169,13 @@
             btnOff.SetActive(true);
             btnOn.SetActive(false);
             if (btnOnColor.HasValue)
-            {
                 OnColor = btnOnColor.Value;
-            }
             else
-            {
                 OnColor = Color.green;
-            }
             if (btnOffColor.HasValue)
-            {
                 OffColor = btnOffColor.Value;
-            }
             else
-            {
                 OffColor = Color.red;
-            }
 
             ButtonText_On = btnTextOn;
             ButtonText_Off = btnTextOff;
@@ -214,50 +205,38 @@
         internal void setTextColorHTML(string buttonTextColor)
         {
             CurrentColor = buttonTextColor;
-            string NewText = $"<color={CurrentColor}>{CurrentButtonText}</color>";
+            var NewText = $"<color={CurrentColor}>{CurrentButtonText}</color>";
             ButtonText.text = NewText;
         }
 
         internal void SetOffButtonText(string Text)
         {
             ButtonText_Off = Text;
-            if (!State)
-            {
-                SetButtonText(ButtonText_Off);
-            }
+            if (!State) SetButtonText(ButtonText_Off);
         }
 
         internal void SetOnButtonText(string Text)
         {
             ButtonText_On = Text;
-            if (State)
-            {
-                SetButtonText(ButtonText_On);
-            }
+            if (State) SetButtonText(ButtonText_On);
         }
 
         internal void SetOffColor(Color color)
         {
             OffColor = color;
-            if (!State)
-            {
-                SetTextColor(OffColor);
-            }
+            if (!State) SetTextColor(OffColor);
         }
 
         internal void SetOnColor(Color color)
         {
             OnColor = color;
-            if (State)
-            {
-                SetTextColor(OnColor);
-            }
+            if (State) SetTextColor(OnColor);
         }
 
         internal void SetButtonText(string Text)
         {
             CurrentButtonText = Text;
-            string NewText = $"<color={CurrentColor}>{CurrentButtonText}</color>";
+            var NewText = $"<color={CurrentColor}>{CurrentButtonText}</color>";
 
             ButtonText.text = NewText;
         }
@@ -267,7 +246,7 @@
             btnOnAction = buttonOnAction;
             btnOffAction = buttonOffAction;
             ButtonToggle.onValueChanged.AddListener(new Action<bool>
-            ((state) =>
+            (state =>
             {
                 State = state;
                 if (state)
@@ -306,12 +285,11 @@
                 btnOff.SetActive(false);
                 try
                 {
-                    if (shouldInvoke)
-                    {
-                        btnOnAction.Invoke();
-                    }
+                    if (shouldInvoke) btnOnAction.Invoke();
                 }
-                catch { }
+                catch
+                {
+                }
             }
             else
             {
@@ -321,12 +299,11 @@
                 btnOff.SetActive(true);
                 try
                 {
-                    if (shouldInvoke)
-                    {
-                        btnOffAction.Invoke();
-                    }
+                    if (shouldInvoke) btnOffAction.Invoke();
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
     }

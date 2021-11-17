@@ -6,11 +6,11 @@
 
     internal class QMTabBase
     {
+        protected string btnQMLoc;
+        protected string btnTag;
+        protected string btnType;
         protected GameObject button;
         protected GameObject Icon;
-        protected string btnQMLoc;
-        protected string btnType;
-        protected string btnTag;
         protected int[] initShift = { 0, 0 };
         protected Color OrigBackground;
 
@@ -34,13 +34,9 @@
         internal void SetIntractable(bool isIntractable)
         {
             if (isIntractable)
-            {
                 SetBackgroundColor(OrigBackground);
-            }
             else
-            {
                 SetBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1));
-            }
             button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
@@ -64,10 +60,13 @@
         {
             try
             {
-                UnityEngine.Object.Destroy(button);
+                Object.Destroy(button);
             }
-            catch { }
+            catch
+            {
+            }
         }
+
         internal void LoadSprite(Sprite sprite)
         {
             var image = GetIcon().GetComponent<Image>();

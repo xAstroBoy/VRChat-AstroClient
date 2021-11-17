@@ -6,12 +6,12 @@
 
     internal class QMTabMenu
     {
-        protected QMTabButton mainButton;
         protected QMSingleButton backButton;
-        protected GameObject ButtonsMenu;
-        protected string menuName;
         protected string btnQMLoc;
         protected string btnType;
+        protected GameObject ButtonsMenu;
+        protected QMTabButton mainButton;
+        protected string menuName;
         protected UIPage page;
 
         internal QMTabMenu(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
@@ -24,11 +24,11 @@
             btnType = "QMTabMenu";
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
 
-            GameObject NestedPart = UnityEngine.Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
+            var NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
-            UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
-            UnityEngine.GameObject.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+            Object.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
+            Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
 
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;

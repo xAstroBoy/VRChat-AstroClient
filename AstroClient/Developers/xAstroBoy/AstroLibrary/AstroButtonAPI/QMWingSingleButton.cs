@@ -1,48 +1,49 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
 {
+    using System;
+    using TMPro;
+    using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
+    using VRC.UI.Elements.Tooltips;
+    using Object = UnityEngine.Object;
 
     internal class QMWingSingleButton : QMButtonBase
     {
-        internal TMPro.TextMeshProUGUI Text;
-        internal VRC.UI.Elements.Tooltips.UiTooltip ToolTip;
-
-        internal string CurrentButtonText;
-        internal string CurrentButtonColor;
-
-        public QMWingSingleButton(QMWings Parent, string btnText, System.Action btnAction, string btnToolTip, Color? TextColor = null)
-        {
-            string TextColorHTML = null;
-            if (TextColor.HasValue)
-            {
-                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
-            }
-            initButton2(Parent.WingPageTransform.gameObject, btnText, btnAction, btnToolTip, TextColorHTML);
-        }
-
         //public QMWingSingleButton(QMWings Parent, string btnText, System.Action btnAction, string btnToolTip, string TextColor = null)
         //{
         //    initButton2(Parent.WingPage.gameObject, btnText, btnAction, btnToolTip, TextColor);
         //}
 
         internal string BtnText;
+        internal string CurrentButtonColor;
 
-        protected void initButton2(GameObject Parent, string btnText, System.Action btnAction, string btnToolTip, string TextColor)
+        internal string CurrentButtonText;
+        internal TextMeshProUGUI Text;
+        internal UiTooltip ToolTip;
+
+        public QMWingSingleButton(QMWings Parent, string btnText, Action btnAction, string btnToolTip, Color? TextColor = null)
+        {
+            string TextColorHTML = null;
+            if (TextColor.HasValue) TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(TextColor.Value);
+            initButton2(Parent.WingPageTransform.gameObject, btnText, btnAction, btnToolTip, TextColorHTML);
+        }
+
+        protected void initButton2(GameObject Parent, string btnText, Action btnAction, string btnToolTip, string TextColor)
         {
             btnType = "WingSingleButton";
 
             var Layout = Parent.FindObject("VerticalLayoutGroup");
-            button = UnityEngine.Object.Instantiate(QuickMenuTools.WingPageButtonTemplate(), Layout.transform, true);
+            button = Object.Instantiate(QuickMenuTools.WingPageButtonTemplate(), Layout.transform, true);
             button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
             button.SetActive(true);
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().fontSize = 35;
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().autoSizeTextContainer = true;
-            ToolTip = button.AddComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
+            button.GetComponentInChildren<TextMeshProUGUI>().fontSize = 35;
+            button.GetComponentInChildren<TextMeshProUGUI>().autoSizeTextContainer = true;
+            ToolTip = button.AddComponent<UiTooltip>();
             SetToolTip(btnToolTip);
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(350, 120);
-            Text = button.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            Text = button.GetComponentInChildren<TextMeshProUGUI>();
             BtnText = btnText;
             SetButtonText(btnText);
             setAction(btnAction);
@@ -51,8 +52,8 @@
         internal void SetButtonText(string buttonText)
         {
             CurrentButtonText = buttonText;
-            string NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = CurrentButtonText;
+            var NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
+            button.GetComponentInChildren<TextMeshProUGUI>().text = CurrentButtonText;
         }
 
         internal void setButtonToolTip(string ButtonToolTip)
@@ -60,13 +61,10 @@
             ToolTip.field_Public_String_0 = ButtonToolTip;
         }
 
-        internal void setAction(System.Action buttonAction)
+        internal void setAction(Action buttonAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            if (buttonAction != null)
-            {
-                button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
-            }
+            if (buttonAction != null) button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
         }
 
         //internal void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
@@ -82,8 +80,8 @@
         internal void setTextColorHTML(string buttonTextColor)
         {
             CurrentButtonColor = buttonTextColor;
-            string NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
-            button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = NewText;
+            var NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
+            button.GetComponentInChildren<TextMeshProUGUI>().text = NewText;
         }
     }
 }

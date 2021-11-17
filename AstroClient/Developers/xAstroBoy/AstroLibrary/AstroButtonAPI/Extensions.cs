@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
     using Utility;
@@ -9,9 +10,12 @@
     using VRC.Core;
     using VRC.DataModel;
     using VRC.DataModel.Core;
+    using VRC.UI.Core.Styles;
     using VRC.UI.Elements;
     using VRC.UI.Elements.Menus;
+    using VRC.UI.Elements.Tooltips;
     using xAstroBoy.Extensions;
+    using Object = Il2CppSystem.Object;
 
     internal static class Extensions
     {
@@ -19,9 +23,9 @@
         {
             try
             {
-                ScrollRect scrollRect = NestedPart.GetComponentInChildren<ScrollRect>(true);
-                Scrollbar scrollbar = NestedPart.GetComponentInChildren<Scrollbar>(true);
-                VerticalLayoutGroup layout = NestedPart.GetComponentInChildren<VerticalLayoutGroup>(true);
+                var scrollRect = NestedPart.GetComponentInChildren<ScrollRect>(true);
+                var scrollbar = NestedPart.GetComponentInChildren<Scrollbar>(true);
+                var layout = NestedPart.GetComponentInChildren<VerticalLayoutGroup>(true);
                 if (scrollbar != null && scrollRect != null)
                 {
                     scrollbar.enabled = active;
@@ -34,10 +38,7 @@
                     //{
                     //    scrollRect.viewport = buttons.GetComponent<RectTransform>();
                     //}
-                    if (layout != null)
-                    {
-                        layout.childControlHeight = true;
-                    }
+                    if (layout != null) layout.childControlHeight = true;
                     scrollRect.movementType = ScrollRect.MovementType.Elastic;
                     scrollRect.verticalScrollbar = scrollbar;
                     //scrollRect.horizontalScrollbar = scrollbar;
@@ -55,36 +56,23 @@
             {
                 if (page.name.isMatch(BuildInfo.Name)) return true;
                 if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
-                {
                     foreach (var item in page.field_Private_List_1_UIPage_0)
-                    {
-                        if (item.name.isMatch(BuildInfo.Name)) return true;
-                    }
-                }
+                        if (item.name.isMatch(BuildInfo.Name))
+                            return true;
             }
+
             return false;
         }
-
 
 
         internal static bool ContainsPage(this UIPage page, List<QMNestedGridMenu> menus)
         {
             if (menus != null)
-            {
                 if (menus.Count != 0)
-                {
                     foreach (var item in menus)
-                    {
                         if (item != null)
-                        {
-                            if (page.ContainsPage(item.GetPage()))
-                            {
+                            if (ContainsPage(page, (List<QMNestedGridMenu>)item.GetPage()))
                                 return true;
-                            }
-                        }
-                    }
-                }
-            }
             return false;
         }
 
@@ -94,13 +82,11 @@
             {
                 if (page.name.Equals(TargetPage.name)) return true;
                 if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
-                {
                     foreach (var item in page.field_Private_List_1_UIPage_0)
-                    {
-                        if (item.name.Equals(TargetPage.name)) return true;
-                    }
-                }
+                        if (item.name.Equals(TargetPage.name))
+                            return true;
             }
+
             return false;
         }
 
@@ -108,13 +94,11 @@
         {
             if (sprite == null) return;
             foreach (var image in Parent.GetComponentsInChildren<Image>(true))
-            {
-                if (image.name == name)// allows background image change
+                if (image.name == name) // allows background image change
                 {
                     image.gameObject.SetActive(true);
                     image.overrideSprite = sprite;
                 }
-            }
         }
 
 
@@ -128,12 +112,12 @@
 
         public static IUser ToIUser(this APIUser value)
         {
-            return ((Il2CppSystem.Object)UiMethods._apiUserToIUser.Invoke(DataModelManager.field_Private_Static_DataModelManager_0.field_Private_DataModelCache_0, new object[3] { value.id, value, false })).Cast<IUser>();
+            return ((Object)UiMethods._apiUserToIUser.Invoke(DataModelManager.field_Private_Static_DataModelManager_0.field_Private_DataModelCache_0, new object[3] { value.id, value, false })).Cast<IUser>();
         }
 
         /// <summary>
-        /// Converts the given IUser to an APIUser.
-        /// Thanks knah for providing this.
+        ///     Converts the given IUser to an APIUser.
+        ///     Thanks knah for providing this.
         /// </summary>
         /// <param name="value">The IUser to convert to APIUser</param>
         /// <returns></returns>
@@ -164,33 +148,21 @@
             //return instance.field_Private_Player_0;
         }
 
-        public static Player GetPlayer(this VRC.DataModel.IUser Instance)
+        public static Player GetPlayer(this IUser Instance)
         {
-            foreach (Player player in PlayerManager.field_Private_Static_PlayerManager_0.GetAllPlayers())
-            {
+            foreach (var player in PlayerManager.field_Private_Static_PlayerManager_0.GetAllPlayers())
                 if (player.GetAPIUser().id == Instance.prop_String_0)
-                {
                     return player;
-                }
-            }
             return null;
         }
 
         internal static bool ContainsPage(this List<QMNestedGridMenu> menus, UIPage page)
         {
             if (page != null && menus != null)
-            {
                 if (menus.Count != 0)
-                {
                     foreach (var item in menus)
-                    {
                         if (item.page.Equals(page))
-                        {
                             return true;
-                        }
-                    }
-                }
-            }
             return false;
         }
 
@@ -198,13 +170,9 @@
         {
             if (parent == null) return null;
             Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
-            foreach (Transform t in trs)
-            {
+            foreach (var t in trs)
                 if (t.name == name)
-                {
                     return t.gameObject;
-                }
-            }
             return null;
         }
 
@@ -212,58 +180,50 @@
         {
             parent.GetComponent<Button>().enabled = true;
             parent.GetComponent<LayoutElement>().enabled = true;
-            parent.GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
-            parent.GetComponentInChildren<VRC.UI.Core.Styles.StyleElement>(true).enabled = true;
+            parent.GetComponent<StyleElement>().enabled = true;
+            parent.GetComponentInChildren<StyleElement>(true).enabled = true;
             parent.GetComponent<CanvasGroup>().enabled = true;
             parent.GetComponentInChildren<Image>().enabled = true;
-            parent.GetComponentInChildren<TMPro.TextMeshProUGUI>(true).enabled = true;
-            parent.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().enabled = true;
-            UnityEngine.GameObject.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37Vo12St37VoUnique>());
+            parent.GetComponentInChildren<TextMeshProUGUI>(true).enabled = true;
+            parent.GetComponent<UiTooltip>().enabled = true;
+            UnityEngine.Object.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37Vo12St37VoUnique>());
         }
 
-        public static TMPro.TextMeshProUGUI NewText(this GameObject Parent, string search)
+        public static TextMeshProUGUI NewText(this GameObject Parent, string search)
         {
-            TMPro.TextMeshProUGUI text = new TMPro.TextMeshProUGUI();
+            var text = new TextMeshProUGUI();
 
-            var TextTop = Parent.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
-            foreach (TMPro.TextMeshProUGUI texto in TextTop)
-            {
+            var TextTop = Parent.GetComponentsInChildren<TextMeshProUGUI>();
+            foreach (var texto in TextTop)
                 if (texto.name == search)
                     text = texto;
-            }
 
             return text;
         }
 
         public static void CleanButtonsQuickActions(this GameObject Parent)
         {
-            TMPro.TextMeshProUGUI text = new TMPro.TextMeshProUGUI();
+            var text = new TextMeshProUGUI();
 
             var Buttons = Parent.GetComponentsInChildren<Transform>(true);
             foreach (var button in Buttons)
-            {
                 if (button.name.Contains("Button_") || button.name == "SitStandCalibrateButton" || button.name == "Buttons_AvatarDetails"
                     || button.name == "Buttons_AvatarAuthor")
                     UnityEngine.Object.Destroy(button.gameObject);
-            }
         }
 
         public static void CleanButtonsNestedMenu(this GameObject Parent)
         {
             var ButtonToDelete = Parent.GetComponentsInChildren<Button>(true);
             foreach (var Button in ButtonToDelete)
-            {
                 if (Button.name.Contains("Camera") || Button.name == "Button_Panorama" || Button.name == "Button_Screenshot"
                     || Button.name == "Button_VrChivePano" || Button.name == "Button_DynamicLight")
                     UnityEngine.Object.Destroy(Button.gameObject);
-            }
 
             var ButtonToDelete2 = Parent.GetComponentsInChildren<Toggle>(true);
             foreach (var Button in ButtonToDelete2)
-            {
                 if (Button.name == "Button_Steadycam")
                     UnityEngine.Object.Destroy(Button.gameObject);
-            }
         }
 
         public static void CleanButtonsWingMenu(this GameObject Parent)
@@ -318,7 +278,7 @@
             btn.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
-                QuickMenu quickmenu = QuickMenuTools.QuickMenuInstance;
+                var quickmenu = QuickMenuTools.QuickMenuInstance;
                 QuickMenuTools.ShowQuickmenuPage(menuName);
             }));
             return btn;
@@ -327,20 +287,14 @@
         internal static void SetBackButtonAction(this GameObject button, Action action)
         {
             button.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            button.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
-            {
-                action();
-            }));
+            button.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => { action(); }));
         }
 
         internal static Color HexToColor(this string hex)
         {
-            Color color = Color.white;
+            var color = Color.white;
 
-            if (ColorUtility.TryParseHtmlString(hex, out color))
-            {
-                return color;
-            }
+            if (ColorUtility.TryParseHtmlString(hex, out color)) return color;
 
             return color;
         }

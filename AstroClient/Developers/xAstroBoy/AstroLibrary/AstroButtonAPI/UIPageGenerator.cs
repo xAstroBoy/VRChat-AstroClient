@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
 {
     using System.Threading.Tasks;
+    using Il2CppSystem.Collections.Generic;
     using UnityEngine;
     using VRC.UI.Elements;
 
@@ -10,7 +11,6 @@
         {
             return GenerateQuickMenuPageAsync(nested, menuName).Result;
         }
-
 
 
         private static async Task<UIPage> GenerateQuickMenuPageAsync(this GameObject nested, string menuName)
@@ -35,11 +35,12 @@
                         result.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController();
                         result.field_Public_String_0 = menuName;
                         result.field_Private_Boolean_1 = true;
-                        result.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
+                        result.field_Private_List_1_UIPage_0 = new List<UIPage>();
                         result.field_Private_List_1_UIPage_0.Add(result);
                         QuickMenuTools.QuickMenuController().field_Private_Dictionary_2_String_UIPage_0.Add(menuName, result);
                     }
                 }
+
                 return result;
             });
         }
