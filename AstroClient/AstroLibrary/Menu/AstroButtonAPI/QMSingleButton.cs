@@ -11,6 +11,8 @@
         internal string BtnText { get; set; }
         internal string CurrentBtnColor { get; set; }
         private GameObject ButtonsMenu { get; set; }
+
+        internal RectTransform buttonRect { get; set; }
         internal QMSingleButton(string baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
             btnQMLoc = baseMenu;
@@ -273,6 +275,7 @@
                     }
                     button = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
+                    buttonRect = button.GetComponent<RectTransform>();
                     initShift[0] = -1;
                     initShift[1] = -3;
                     SetLocation(btnXLocation, btnYLocation);

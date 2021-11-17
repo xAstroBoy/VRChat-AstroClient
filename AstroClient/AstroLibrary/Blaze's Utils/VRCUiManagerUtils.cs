@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Reflection;
+    using AstroLibrary.Console;
     using MelonLoader;
     using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;
@@ -34,12 +35,12 @@
                 vrcuiPage = gameObject.GetComponent<VRCUiPage>();
                 if (vrcuiPage == null)
                 {
-                    MelonLogger.Error("Screen Not Found - " + screenPath);
+                    ModConsole.Error("Screen Not Found - " + screenPath);
                 }
             }
             else
             {
-                MelonLogger.Warning("Screen Not Found - " + screenPath);
+                ModConsole.Warning("Screen Not Found - " + screenPath);
             }
             return vrcuiPage;
         }

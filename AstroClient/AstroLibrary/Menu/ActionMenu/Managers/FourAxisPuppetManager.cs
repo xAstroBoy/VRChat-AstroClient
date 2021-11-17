@@ -14,14 +14,11 @@
         {
             FourAxisPuppetManager.Setup();
         }
-
-
         internal override void OnUpdate()
         {
             FourAxisPuppetManager.OnUpdate();
         }
     }
-
 
 
     internal static class FourAxisPuppetManager
@@ -30,13 +27,13 @@
         private static AxisPuppetMenu fourAxisPuppetMenuLeft;
         private static ActionMenuHand hand;
         private static bool open;
-        internal static AxisPuppetMenu current { get; private set; }
+        public static AxisPuppetMenu current { get; private set; }
 
-        internal static Vector2 fourAxisPuppetValue { get; set; }
+        public static Vector2 fourAxisPuppetValue { get; set; }
 
-        internal static Action<Vector2> onUpdate { get; set; }
+        public static Action<Vector2> onUpdate { get; set; }
 
-        internal static void Setup()
+        public static void Setup()
         {
             fourAxisPuppetMenuLeft = Utilities
                 .CloneGameObject("UserInterface/ActionMenu/Container/MenuL/ActionMenu/AxisPuppetMenu",
@@ -46,7 +43,7 @@
                     "UserInterface/ActionMenu/Container/MenuR/ActionMenu").GetComponent<AxisPuppetMenu>();
         }
 
-        internal static void OnUpdate()
+        public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
             if (current != null && current.gameObject.gameObject.active)
@@ -106,7 +103,7 @@
             }
         }
 
-        internal static void OpenFourAxisMenu(string title, Action<Vector2> update, PedalOption pedalOption)
+        public static void OpenFourAxisMenu(string title, Action<Vector2> update, PedalOption pedalOption)
         {
             if (open) return;
             switch (hand = Utilities.GetActionMenuHand())
@@ -122,7 +119,6 @@
                     open = true;
                     break;
             }
-
             Input.ResetInputAxes();
             InputManager.ResetMousePos();
             onUpdate = update;
@@ -142,12 +138,12 @@
             }
             catch (Exception e)
             {
-                ModConsole.DebugError($"Exception caught in onUpdate action passed to Four Axis Puppet: ");
-                ModConsole.DebugErrorExc(e);
+                ModConsole.Error($"Exception caught in onUpdate action passed to Four Axis Puppet:");
+                ModConsole.ErrorExc(e);
             }
         }
 
-        internal static void CloseFourAxisMenu()
+        public static void CloseFourAxisMenu()
         {
             if (current == null) return;
             CallUpdateAction();

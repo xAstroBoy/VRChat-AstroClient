@@ -6,11 +6,11 @@
     using System.Reflection;
     using AstroLibrary.Console;
     using HarmonyLib;
+    using MelonLoader;
     using Pedals;
     using Types;
     using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;
-    using UnityEngine.XR;
     using Object = UnityEngine.Object;
 
     internal static class Utilities
@@ -27,11 +27,11 @@
                     m =>
                         m.Name.StartsWith("Method_Private_Void_PDM_")
                         && !m.HasStringLiterals()
-                        && m.SameClassMethodCallCount(1)
+                        && m.SameClassMethodCallCount(1) 
                         && m.HasMethodCallWithName("ThrowArgumentOutOfRangeException")
                         && !m.HasMethodWithDeclaringType(typeof(ActionMenuDriver))
                 );
-                refreshAMDelegate = (RefreshAMDelegate)Delegate.CreateDelegate(
+                refreshAMDelegate = (RefreshAMDelegate) Delegate.CreateDelegate(
                     typeof(RefreshAMDelegate),
                     null,
                     refreshAMMethod);
@@ -96,14 +96,14 @@
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeFolder);
                         break;*/
                     case PedalType.RadialPuppet:
-                        var pedalRadial = (PedalRadial)pedalStruct;
+                        var pedalRadial = (PedalRadial) pedalStruct;
                         pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeRadial);
                         pedalOption.SetButtonPercentText($"{Math.Round(pedalRadial.currentValue)}%");
                         pedalRadial.pedal = pedalOption;
                         pedalOption.SetBackgroundIcon(pedalStruct.icon);
                         break;
                     case PedalType.Toggle:
-                        var pedalToggle = (PedalToggle)pedalStruct;
+                        var pedalToggle = (PedalToggle) pedalStruct;
                         if (pedalToggle.toggled)
                             pedalOption.SetPedalTypeIcon(GetExpressionsIcons().typeToggleOn);
                         else
@@ -131,7 +131,6 @@
             if (angle <= 0 && angle >= -90) return 180 - (angle + 180) + 90;
             return 0;
         }
-
 
         public static float ConvertFromEuler(float angle)
         {
@@ -189,14 +188,14 @@
 
         public static void ScanMethod(MethodInfo m)
         {
-            ModConsole.DebugLog($"Scanning: {m.FullDescription()}");
+            MelonLogger.Msg($"Scanning: {m.FullDescription()}");
             foreach (var instance in XrefScanner.XrefScan(m))
                 try
                 {
                     if (instance.Type == XrefType.Global && instance.ReadAsObject() != null)
                         try
                         {
-                            ModConsole.DebugLog($"   Found String: {instance.ReadAsObject().ToString()}");
+                            ModConsole.Log($"   Found String: {instance.ReadAsObject().ToString()}");
                         }
                         catch
                         {
@@ -204,7 +203,7 @@
                     else if (instance.Type == XrefType.Method && instance.TryResolve() != null)
                         try
                         {
-                            ModConsole.DebugLog($"   Found Method: {instance.TryResolve().FullDescription()}");
+                            ModConsole.Log($"   Found Method: {instance.TryResolve().FullDescription()}");
                         }
                         catch
                         {
@@ -220,7 +219,7 @@
                     if (instance.Type == XrefType.Method && instance.TryResolve() != null)
                         try
                         {
-                            ModConsole.DebugLog($"   Found Used By Method: {instance.TryResolve().FullDescription()}");
+                            ModConsole.Log($"   Found Used By Method: {instance.TryResolve().FullDescription()}");
                         }
                         catch
                         {
@@ -266,12 +265,12 @@
                 //rightOpener.GetActionMenu().ResetMenu();
             }
         }
-
+        
         public static (double x1, double y1, double x2, double y2) GetIntersection(float x, float y, float r)
         {
             var tmp = Math.Pow(y / x, 2);
-            var c4 = -Math.Pow(r, 2) * -4;
-            var x1 = Math.Sqrt(c4 + c4 * tmp) / (2 + 2 * tmp);
+            var c4 = -Math.Pow(r, 2)*-4;
+            var x1 = Math.Sqrt(c4 + c4*tmp) / (2+2*tmp);
             var x2 = -x1;
             return (x1, x1 * (y / x), x2, x2 * (y / x));
         }

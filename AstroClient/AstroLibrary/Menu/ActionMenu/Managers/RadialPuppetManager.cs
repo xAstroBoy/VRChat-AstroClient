@@ -4,14 +4,13 @@
     using AstroClient;
     using AstroLibrary.Console;
     using Helpers;
+    using MelonLoader;
     using Types;
     using UnityEngine;
     using UnityEngine.XR;
 
-
     internal class RadialPuppetEventsHandler : GameEvents
     {
-
         internal override void VRChat_OnActionMenuInit()
         {
             RadialPuppetManager.Setup();
@@ -38,14 +37,14 @@
         public static void Setup()
         {
             radialPuppetMenuLeft = Utilities
-                .CloneGameObject("UserInterface/ActionMenu/MenuL/ActionMenu/RadialPuppetMenu",
-                    "UserInterface/ActionMenu/MenuL/ActionMenu").GetComponent<RadialPuppetMenu>();
+                .CloneGameObject("UserInterface/ActionMenu/Container/MenuL/ActionMenu/RadialPuppetMenu",
+                    "UserInterface/ActionMenu/Container/MenuL/ActionMenu").GetComponent<RadialPuppetMenu>();
             radialPuppetMenuRight = Utilities
-                .CloneGameObject("UserInterface/ActionMenu/MenuR/ActionMenu/RadialPuppetMenu",
-                    "UserInterface/ActionMenu/MenuR/ActionMenu").GetComponent<RadialPuppetMenu>();
+                .CloneGameObject("UserInterface/ActionMenu/Container/MenuR/ActionMenu/RadialPuppetMenu",
+                    "UserInterface/ActionMenu/Container/MenuR/ActionMenu").GetComponent<RadialPuppetMenu>();
         }
 
-        internal static void OnUpdate()
+        public static void OnUpdate()
         {
             //Probably a better more efficient way to do all this
             if (current != null && current.gameObject.gameObject.active)
@@ -69,7 +68,7 @@
                         }
                     }
                 }
-                else if (Input.GetMouseButton(0))
+                else if (Input.GetMouseButtonUp(0))
                 {
                     CloseRadialMenu();
                     return;
@@ -80,8 +79,7 @@
             }
         }
 
-        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title,
-            PedalOption pedalOption, bool restricted = false)
+        public static void OpenRadialMenu(float startingValue, Action<float> onUpdate, string title, PedalOption pedalOption, bool restricted = false)
         {
             if (open) return;
             switch (Utilities.GetActionMenuHand())
@@ -98,22 +96,26 @@
                     hand = ActionMenuHand.Right;
                     open = true;
                     break;
+                   
             }
 
             RadialPuppetManager.restricted = restricted;
             Input.ResetInputAxes();
+            InputManager.ResetMousePos();
             current.gameObject.SetActive(true);
             current.GetFill().SetFillAngle(startingValue * 360); //Please dont break
             RadialPuppetManager.onUpdate = onUpdate;
             currentValue = startingValue;
+            
             current.GetTitle().text = title;
             current.GetCenterText().text = $"{Mathf.Round(startingValue * 100f)}%";
             current.GetFill().UpdateGeometry();
-            ;
-            current.transform.localPosition =
-                pedalOption.GetActionButton().transform.localPosition; //new Vector3(-256f, 0, 0); 
+            current.transform.localPosition = pedalOption.GetActionButton().transform.localPosition; //new Vector3(-256f, 0, 0); 
             var angleOriginal = Utilities.ConvertFromEuler(startingValue * 360);
             var eulerAngle = Utilities.ConvertFromDegToEuler(angleOriginal);
+            var actionMenu = Utilities.GetActionMenuOpener().GetActionMenu();
+            actionMenu.DisableInput();
+            actionMenu.SetMainMenuOpacity(0.5f);
             current.UpdateArrow(angleOriginal, eulerAngle);
         }
 
@@ -125,6 +127,9 @@
             current = null;
             open = false;
             hand = ActionMenuHand.Invalid;
+            var actionMenu = Utilities.GetActionMenuOpener().GetActionMenu();
+            actionMenu.EnableInput();
+            actionMenu.SetMainMenuOpacity();
         }
 
         private static void CallUpdateAction()
@@ -135,15 +140,14 @@
             }
             catch (Exception e)
             {
-                ModConsole.DebugError($"Exception caught in onUpdate action passed to Radial Puppet:");
-                ModConsole.DebugErrorExc(e);
+                MelonLogger.Error($"Exception caught in onUpdate action passed to Radial Puppet:");
+                ModConsole.ErrorExc(e);
             }
         }
 
         private static void UpdateMathStuff()
         {
-            var mousePos = (hand == ActionMenuHand.Left) ? InputManager.LeftInput : InputManager.RightInput;
-            radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4f;
+            var mousePos = hand == ActionMenuHand.Left ? InputManager.LeftInput : InputManager.RightInput;
             radialPuppetMenuRight.GetCursor().transform.localPosition = mousePos * 4;
 
             if (Vector2.Distance(mousePos, Vector2.zero) > 12)

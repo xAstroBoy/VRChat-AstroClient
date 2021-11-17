@@ -15,7 +15,7 @@
             this.icon = icon;
             triggerEvent = delegate
             {
-                //ModConsole.Msg($"Old state: {this.toggled}, New state: {!this.toggled}");
+                //MelonLogger.Msg($"Old state: {this.toggled}, New state: {!this.toggled}");
                 this.toggled = !this.toggled;
                 if (this.toggled)
                     pedal.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);

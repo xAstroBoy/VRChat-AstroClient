@@ -136,7 +136,8 @@ namespace AstroClient
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"Failed while dumping {method.Name}:\n{ex}");
+                ModConsole.Error($"Failed while dumping {method.Name}:");
+                ModConsole.ErrorExc(ex);
             }
         }
 

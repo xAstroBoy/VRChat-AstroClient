@@ -77,12 +77,12 @@ namespace AstroLibrary.Extensions
                 vrcuiPage = gameObject.GetComponent<VRCUiPage>();
                 if (vrcuiPage == null)
                 {
-                    MelonLogger.Error("Screen Not Found - " + screenPath);
+                    ModConsole.Error("Screen Not Found - " + screenPath);
                 }
             }
             else
             {
-                MelonLogger.Warning("Screen Not Found - " + screenPath);
+                ModConsole.Warning("Screen Not Found - " + screenPath);
             }
             return vrcuiPage;
         }

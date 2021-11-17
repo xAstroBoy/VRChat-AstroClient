@@ -15,6 +15,12 @@
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
+
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
+
         public PickupController(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
@@ -65,12 +71,21 @@
                 if (isUsingUI) return;
                 if (isClicked)
                 {
-                    if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal)
+                    try
                     {
-                        if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
+
+                        if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                         {
-                            gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
+                            if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
+                            {
+                                gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
+                            }
                         }
+
+
+                    }
+                    catch
+                    {
                     }
                 }
             }
@@ -83,13 +98,17 @@
                 if (isUsingUI) return;
                 if (isClicked)
                 {
-                    if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal)
+                    try
                     {
-                        if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == null)
+                        if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                         {
-                            gameObject.TeleportToMe(HumanBodyBones.LeftHand, false, true);
+                            if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == null)
+                            {
+                                gameObject.TeleportToMe(HumanBodyBones.LeftHand, false, true);
+                            }
                         }
                     }
+                    catch{}
                 }
             }
         }

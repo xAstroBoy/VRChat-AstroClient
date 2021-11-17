@@ -352,7 +352,7 @@
             }
             catch
             {
-                MelonLogger.Msg("Invite Failed");
+                ModConsole.Log("Invite Failed");
             }
         }
 

@@ -1,10 +1,10 @@
 namespace AstroActionMenu.Managers
 {
+    using System.Reflection;
     using AstroClient;
     using AstroLibrary.Console;
     using CheetoLibrary;
     using Helpers;
-    using System.Reflection;
     using UnityEngine;
     using UnityEngine.UI;
 

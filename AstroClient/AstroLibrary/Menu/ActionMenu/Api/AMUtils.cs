@@ -22,7 +22,7 @@ namespace AstroActionMenu.Api
             }
             catch (Exception e)
             {
-                ModConsole.DebugWarning(
+                ModConsole.Warning(
                     $"Refresh failed (oops). This may or may not be an oof if another exception immediately follows after this exception: {e}");
                 //This is semi-abusable if this fails so its probably a good idea to have a fail-safe to protect sensitive functions that are meant to be locked
                 Utilities.ResetMenu();

@@ -1,5 +1,4 @@
-﻿
-namespace AstroActionMenu.Pedals
+﻿namespace AstroActionMenu.Pedals
 {
     using System;
     using Helpers;

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
     using AstroClient;
@@ -25,6 +26,9 @@
         }
     }
 
+
+    [SuppressMessage("ReSharper", "Unity.IncorrectMonoBehaviourInstantiation")]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal static class AstroActionMenuPatches
     {
         public static List<PedalStruct>
@@ -94,15 +98,15 @@
 
             //Method_Private_Void_PDM_11
             //Special Child
-           /* new AstroPatch(
+            /*harmonyInstance.Patch(
                 typeof(ActionMenu).GetMethods().Single(
-                    m => Utilities.CheckXref(m, openNameplatesSizePageKeyWords)
+                    m => Utilities.checkXref(m, openNameplatesSizePageKeyWords)
                          && m.CheckStringsCount(5)
                 ),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePre")),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePost"))
             );*/
-            ModConsole.DebugLog("ActionMenu Patches Applied");
+            ModConsole.Log("Patches Applied");
         }
 
         public static void OpenConfigPagePre(ActionMenu __instance)
