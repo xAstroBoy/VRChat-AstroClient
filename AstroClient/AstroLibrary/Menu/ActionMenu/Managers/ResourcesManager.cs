@@ -10,11 +10,6 @@ namespace AstroActionMenu.Managers
 
     internal class ResourceManagerEvents : GameEvents
     {
-        internal override void OnApplicationStart()
-        {
-            ResourcesManager.LoadTextures();
-        }
-
         internal override void VRChat_OnActionMenuInit()
         {
             ResourcesManager.InitLockGameObject();
@@ -24,39 +19,6 @@ namespace AstroActionMenu.Managers
     internal static class ResourcesManager
     {
         private static GameObject lockPrefab;
-        private static Texture2D pageOne;
-        private static Texture2D pageTwo;
-        private static Texture2D pageThree;
-        private static Texture2D pageFour;
-        private static Texture2D pageFive;
-        private static Texture2D pageSix;
-        private static Texture2D pageSeven;
-        private static Texture2D locked;
-        private static Texture2D modsSectionIcon;
-
-        public static void LoadTextures()
-        {
-            modsSectionIcon = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
-            modsSectionIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageOne = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.1.png"));
-            pageOne.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageTwo = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.2.png"));
-            pageTwo.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageThree = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.3.png")); ;
-            pageThree.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageFour = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.4.png"));
-            pageFour.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageFive = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.5.png"));
-            pageFive.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageSix = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.6.png"));
-            pageSix.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageSeven = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.7.png"));
-            pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            locked = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.locked.png"));
-            locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            ModConsole.DebugLog("ActionMenu Loaded textures");
-        }
-
         public static void InitLockGameObject()
         {
             lockPrefab = Object.Instantiate(ActionMenuDriver.prop_ActionMenuDriver_0.GetRightOpener().GetActionMenu()
@@ -65,7 +27,7 @@ namespace AstroActionMenu.Managers
             Object.DontDestroyOnLoad(lockPrefab);
             lockPrefab.active = false;
             lockPrefab.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
-            lockPrefab.GetComponent<RawImage>().texture = locked;
+            lockPrefab.GetComponent<RawImage>().texture = ClientResources.locked;
             ModConsole.DebugLog("Created lock gameobject");
         }
 
@@ -74,25 +36,25 @@ namespace AstroActionMenu.Managers
             switch (pageIndex)
             {
                 case 1:
-                    return pageOne;
+                    return ClientResources.one;
 
                 case 2:
-                    return pageTwo;
+                    return ClientResources.two;
 
                 case 3:
-                    return pageThree;
+                    return ClientResources.three;
 
                 case 4:
-                    return pageFour;
+                    return ClientResources.four;
 
                 case 5:
-                    return pageFive;
+                    return ClientResources.five;
 
                 case 6:
-                    return pageSix;
+                    return ClientResources.six;
 
                 case 7:
-                    return pageSeven;
+                    return ClientResources.seven;
 
                 default:
                     return null;
@@ -109,7 +71,7 @@ namespace AstroActionMenu.Managers
 
         public static Texture2D GetModsSectionIcon()
         {
-            return modsSectionIcon;
+            return ClientResources.planet;
         }
     }
 }

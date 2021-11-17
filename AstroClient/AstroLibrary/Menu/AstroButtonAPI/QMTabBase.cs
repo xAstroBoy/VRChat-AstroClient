@@ -68,12 +68,10 @@
             }
             catch { }
         }
-
-        internal void LoadSprite(string path)
+        internal void LoadSprite(Sprite sprite)
         {
             var image = GetIcon().GetComponent<Image>();
-            var texture = CheetoUtils.LoadPNG(path);
-            image.sprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+            image.sprite = sprite;
             image.color = Color.white;
         }
 

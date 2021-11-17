@@ -418,7 +418,7 @@
         internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
-            QMGridTab AstroClient = new QMGridTab(TabIndexs.Main, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            QMGridTab AstroClient = new QMGridTab(TabIndexs.Main, "AstroClient Menu", null, null, null, ClientResources.planet_sprite);
             MainClientWings.InitMainWing();
             GameProcessMenu.InitButtons(AstroClient);
             ProtectionsMenu.InitButtons(AstroClient);

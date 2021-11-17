@@ -21,7 +21,7 @@
     {
         internal static void InitButtons(int index)
         {
-            QMGridTab WorldCheats = new QMGridTab(index, "WorldCheats Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.thief.png"));
+            QMGridTab WorldCheats = new QMGridTab(index, "WorldCheats Menu", null, null, null, ClientResources.thief_sprite);
             Murder2Cheats.Murder2CheatsButtons(WorldCheats);
             Murder4Cheats.Murder4CheatsButtons(WorldCheats);
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats);

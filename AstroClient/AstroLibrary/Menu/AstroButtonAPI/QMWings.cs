@@ -20,13 +20,13 @@
         internal TextMeshProUGUI ButtonText_Title;
         internal TextMeshProUGUI ButtonText;
 
-        internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
+        internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, Sprite icon = null)
         {
             btnQMLoc = "WingPage" + MenuName;
-            initButton(Index, LeftWing, MenuName, btnToolTip, btnBackgroundColor, LoadSprite);
+            initButton(Index, LeftWing, MenuName, btnToolTip, btnBackgroundColor, icon);
         }
 
-        internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
+        internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip, Color? btnBackgroundColor = null, Sprite icon = null)
         {
             if (LeftWing)
             {
@@ -125,8 +125,8 @@
                 SetAction(() => { QuickMenuTools.Wing_Right().ShowQuickmenuPage(btnQMLoc); });
             }
 
-            if (LoadSprite != "")
-                button.LoadSprite(LoadSprite, "Icon");
+            if (icon != null)
+                button.LoadSprite(icon, "Icon");
             SetActive(true);
         }
 
@@ -140,11 +140,6 @@
             return CurrentPage;
         }
 
-        internal void LoadIcon(byte[] icon)
-        {
-            if (icon != null)
-                button.LoadSprite(icon, "Icon");
-        }
         internal void SetButtonTitle(string text)
         {
             ButtonText_Title.text = text;
@@ -155,9 +150,9 @@
             ButtonText.text = text;
         }
 
-        internal void LoadIcon(string icon)
+        internal void LoadIcon(Sprite icon)
         {
-            if (icon != "")
+            if (icon != null)
                 button.LoadSprite(icon, "Icon");
         }
 

@@ -30,7 +30,7 @@
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(index, "Developer Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.repair.png"));
+                SubMenu = new QMTabMenu(index, "Developer Menu", null, null, null, ClientResources.repair_sprite);
 
                 DisconectButton = new QMSingleButton(SubMenu, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
                 ReconnectButton = new QMSingleButton(SubMenu, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");

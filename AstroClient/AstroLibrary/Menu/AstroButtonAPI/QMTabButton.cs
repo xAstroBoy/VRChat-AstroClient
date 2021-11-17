@@ -6,17 +6,13 @@
 
     internal class QMTabButton : QMButtonBase
     {
-        internal QMTabButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
+
+        internal QMTabButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Sprite LoadSprite = null)
         {
             initButton(Index, btnAction, btnToolTip, btnBackgroundColor, LoadSprite);
         }
 
-        internal QMTabButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, byte[] LoadSprite = null)
-        {
-            initButton(Index, btnAction, btnToolTip, btnBackgroundColor, LoadSprite);
-        }
-
-        internal void initButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, byte[] LoadSprite = null)
+        internal void initButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Sprite LoadSprite = null) 
         {
             btnType = "_QMTabButton_";
             button = UnityEngine.Object.Instantiate(QuickMenuTools.TabButtonTemplate.gameObject, QuickMenuTools.TabButtonTemplate.parent, true);
@@ -31,20 +27,6 @@
             SetActive(true);
         }
 
-        internal void initButton(int Index, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, string LoadSprite = "")
-        {
-            btnType = "_QMTabButton_";
-            button = UnityEngine.Object.Instantiate(QuickMenuTools.TabButtonTemplate.gameObject, QuickMenuTools.TabButtonTemplate.parent, true);
-            button.name = QMButtonAPI.identifier + btnType + Index;
-            SetToolTip(btnToolTip);
-            setAction(btnAction);
-            button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
-
-            if (LoadSprite != "")
-                button.LoadSprite(LoadSprite, "Icon");
-
-            SetActive(true);
-        }
 
         internal void setAction(System.Action buttonAction)
         {

@@ -92,13 +92,8 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
                         var filtered = Parameters.FilterDefaultParameters(parameters);
                         var avatar_descriptor = manager.prop_VRCAvatarDescriptor_0;
 
-                        CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked),
-                            (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); },
-                        CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(),
-                                "AstroClient.Resources.locked.png")));
-                        CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager),
-                            CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(),
-                                "AstroClient.Resources.save.png")));
+                        CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked), (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); }, ClientResources.locked);
+                        CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager), ClientResources.save);
 
                         AvatarParameter FindParameter(string name)
                         {
@@ -155,11 +150,8 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
                                             CustomSubMenu.AddToggle(
                                                 control.TruncatedName(),
                                                 current_value == target_value,
-                                                param.field_Private_ParameterType_0 ==
-                                                AvatarParameter.ParameterType.Bool
-                                                    ? SetBool
-                                                    : SetIntFloat,
-                                                control.icon ?? default_expression);
+                                                param.prop_ParameterType_0 == AvatarParameter.ParameterType.Bool ? SetBool : SetIntFloat,
+                                                icon: control.icon ?? default_expression);
                                             break;
                                         }
 
@@ -243,7 +235,7 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
         internal override void OnAvatarSpawn(Player player, GameObject Avatar, VRCAvatarManager VRCAvatarManager,
             VRC_AvatarDescriptor descriptor)
         {
-            var player_name = Avatar.transform.root.GetComponentInChildren<VRCPlayer>().prop_String_0;
+            var player_name = Avatar.transform.root.GetComponentInChildren<VRCPlayer>().prop_String_1;
             s_PlayerList[player_name] = Avatar;
             Parameters.ApplyParameters(VRCAvatarManager);
             var avatar_id = Avatar.GetComponent<VRC.Core.PipelineManager>().blueprintId;

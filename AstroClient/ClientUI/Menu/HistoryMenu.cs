@@ -17,7 +17,7 @@
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(index, "History Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.history.png"));
+                SubMenu = new QMTabMenu(index, "History Menu", null, null, null, ClientResources.history_sprite);
             }
         }
     }

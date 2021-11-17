@@ -18,7 +18,7 @@
     {
         internal static void Init_TweakerV2Main(int index)
         {
-            QMTabMenu menu = new QMTabMenu(index, "Item Tweaker", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.box.png"));
+            QMTabMenu menu = new QMTabMenu(index, "Item Tweaker", null, null, null, ClientResources.box_sprite);
 
             // Outside Area
 

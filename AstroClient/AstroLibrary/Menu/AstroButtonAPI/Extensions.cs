@@ -110,38 +110,19 @@
             return false;
         }
 
-        internal static void LoadSprite(this GameObject Parent, string LoadSprite, string name)
+        internal static void LoadSprite(this GameObject Parent, Sprite sprite, string name)
         {
-            if (!LoadSprite.IsNotNullOrEmptyOrWhiteSpace()) return;
+            if (sprite == null) return;
             foreach (var image in Parent.GetComponentsInChildren<Image>(true))
             {
                 if (image.name == name)// allows background image change
                 {
                     image.gameObject.SetActive(true);
-                    var texture = CheetoUtils.LoadPNG(LoadSprite);
-                    image.overrideSprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+                    image.overrideSprite = sprite;
                 }
             }
         }
 
-        internal static void LoadSprite(this GameObject Parent, byte[] LoadSprite, string name)
-        {
-            if (LoadSprite == null) return;
-            foreach (var image in Parent.GetComponentsInChildren<Image>(true))
-            {
-                if (image.name == name)// allows background image change
-                {
-                    image.gameObject.SetActive(true);
-                    var texture = CheetoUtils.LoadPNG(LoadSprite);
-                    image.overrideSprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-                }
-            }
-        }
-
-        internal static Sprite ToSprite(this Texture2D texture)
-        {
-            return Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-        }
 
         //public void LoadSprite(byte[] data)
         //{

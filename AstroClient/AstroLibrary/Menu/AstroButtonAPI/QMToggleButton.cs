@@ -3,6 +3,7 @@
     using CheetoLibrary;
     using System;
     using System.Reflection;
+    using AstroClient;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -203,9 +204,9 @@
             btnOn.GetComponentInChildren<RectTransform>().anchoredPosition -= new Vector2(50, 0);
             btnOff.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(50, 0);
 
-            btnOn.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.check.png")).ToSprite();
+            btnOn.GetComponentInChildren<Image>().overrideSprite = ClientResources.check_sprite;
 
-            btnOff.GetComponentInChildren<Image>().overrideSprite = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.cancel.png")).ToSprite();
+            btnOff.GetComponentInChildren<Image>().overrideSprite = ClientResources.cancel_sprite;
 
             SetToolTip(btnToolTip);
             SetAction(btnActionOn, btnActionOff);

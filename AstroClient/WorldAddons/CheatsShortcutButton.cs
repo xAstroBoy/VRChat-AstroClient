@@ -17,8 +17,7 @@
 
         internal static void Init_Cheats_ShortcutBtn()
         {
-            WorldCheatsShortcut = new QMWings(1020, true, "World Cheats", "This Opens Compatible World cheats", null, null);
-            WorldCheatsShortcut.LoadIcon(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.thief.png"));
+            WorldCheatsShortcut = new QMWings(1020, true, "World Cheats", "This Opens Compatible World cheats", null, ClientResources.thief_sprite);
             ToggleButtonVisibilityAndInteractivity(false);
         }
 
