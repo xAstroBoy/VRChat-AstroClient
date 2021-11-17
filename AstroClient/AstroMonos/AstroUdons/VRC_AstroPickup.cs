@@ -1,8 +1,6 @@
 namespace AstroClient.AstroMonos.AstroUdons
 {
     using System;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
     using Components.Tools;
     using Programs;
     using UnhollowerBaseLib.Attributes;
@@ -10,6 +8,7 @@ namespace AstroClient.AstroMonos.AstroUdons
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using VRC.Udon.ProgramSources;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
     public class VRC_AstroPickup : MonoBehaviour

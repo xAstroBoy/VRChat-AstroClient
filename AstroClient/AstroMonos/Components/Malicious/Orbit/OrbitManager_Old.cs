@@ -4,28 +4,26 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.InteropServices;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using CustomMono;
+    using AstroClient.Tools.Extensions;
     using UnhollowerBaseLib.Attributes;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
     using VRC.Core;
-    using static Variables.InstanceBuilder;
+    using static Constants.InstanceBuilder;
     using Color = System.Drawing.Color;
 
-    public class OrbitManager_Old : GameEventsBehaviour
+    public class OrbitManager_Old : AstroMonoBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public OrbitManager_Old(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -50,12 +48,12 @@
 
         #region Module
 
-        internal static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> OrbitBehaviours;
+        internal static Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> OrbitBehaviours;
         internal static float Offset = 0f;
 
         internal void Start()
         {
-            OrbitBehaviours = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
+            OrbitBehaviours = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>();
             Instance = this;
         }
 

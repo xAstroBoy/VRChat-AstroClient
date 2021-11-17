@@ -1,21 +1,22 @@
 ﻿#pragma warning disable 649
 
-namespace AstroClient
+namespace AstroClient.WorldAddons.Supported_Worlds
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using AstroMonos.AstroUdons;
-    using Skyboxes;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroMonos.AstroUdons;
+    using Tools.Extensions;
+    using Tools.Skybox;
+    using Tools.UdonSearcher;
     using UnityEngine;
-    using Variables;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
-    internal class FBTHeaven : GameEvents
+    internal class FBTHeaven : AstroEvents
     {
         internal static QMNestedGridMenu FBTExploitsPage;
         internal static float ButtonUpdateTime = 0f;

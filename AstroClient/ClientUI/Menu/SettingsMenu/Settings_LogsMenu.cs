@@ -1,15 +1,16 @@
-﻿namespace AstroClient.ClientUI.QuickMenuButtons
+﻿namespace AstroClient.ClientUI.Menu.SettingsMenu
 {
     #region Imports
 
-    using AstroButtonAPI;
+    using Config;
+    using xAstroBoy.AstroButtonAPI;
 
     #endregion Imports
 
     /// <summary>
     /// Cheeto's temporary UI for new/wip features
     /// </summary>
-    internal class Settings_LogsMenu : GameEvents
+    internal class Settings_LogsMenu : AstroEvents
     {
         internal static void InitButtons(QMNestedGridMenu tab)
         {

@@ -5,15 +5,16 @@
     using System;
     using System.Collections;
     using System.Reflection;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
+    using AstroEventArgs;
+    using Cheetos;
     using Harmony;
     using MelonLoader;
+    using Tools.Extensions;
 
     #endregion Imports
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    internal class QuickMenuHooks : GameEvents
+    internal class QuickMenuHooks : AstroEvents
     {
         internal static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
 

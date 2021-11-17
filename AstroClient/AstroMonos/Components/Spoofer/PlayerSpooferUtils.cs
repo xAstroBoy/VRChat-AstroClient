@@ -1,13 +1,12 @@
 ﻿namespace AstroClient.AstroMonos.Components.Spoofer
 {
     using System.Drawing;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using ClientUI.QuickMenuButtons;
+    using ClientUI.Menu.Menus;
+    using Constants;
     using UnhollowerBaseLib.Attributes;
-    using Variables;
+    using xAstroBoy.Utility;
 
-    internal class PlayerSpooferUtils : GameEvents
+    internal class PlayerSpooferUtils : AstroEvents
     {
         internal override void OnRoomJoined()
         {

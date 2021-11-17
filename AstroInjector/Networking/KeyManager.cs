@@ -1,8 +1,8 @@
 ﻿namespace AstroInjector
 {
-    using AstroNetworkingLibrary.Serializable;
     using System;
     using System.IO;
+    using AstroNetworkingLibrary.Serializable;
 
     internal static class KeyManager
     {

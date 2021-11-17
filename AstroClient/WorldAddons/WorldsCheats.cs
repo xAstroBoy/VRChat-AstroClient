@@ -1,23 +1,15 @@
-﻿namespace AstroClient.Worlds
+﻿namespace AstroClient.WorldAddons
 {
     #region Imports
 
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using CheetoLibrary;
-    using UnityEngine;
-    using Variables;
-    using World.Hub;
-    using WorldAddons;
+    using ClientResources;
+    using Supported_Worlds;
+    using Supported_Worlds.Jar_Worlds;
+    using xAstroBoy.AstroButtonAPI;
 
     #endregion Imports
 
-    internal class WorldsCheats : GameEvents
+    internal class WorldsCheats : AstroEvents
     {
         internal static void InitButtons(int index)
         {

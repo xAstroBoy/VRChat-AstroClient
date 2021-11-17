@@ -1,15 +1,13 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.ClientUI.Menu.RandomSubmenus
 {
-    using AstroButtonAPI;
-    using Skyboxes;
     using System.Collections.Generic;
-    using System.Linq;
-    using AstroLibrary.Extensions;
     using AstroMonos.Components.Tools.Listeners;
+    using Tools.Extensions;
+    using Tools.World;
     using VRC.UI.Elements;
-    using AstroLibrary.Utility;
+    using xAstroBoy.AstroButtonAPI;
 
-    internal class VRC_InteractableSubMenu : GameEvents
+    internal class VRC_InteractableSubMenu : AstroEvents
     {
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;

@@ -1,14 +1,15 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
     using System.Collections.Generic;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using AstroMonos.Components.Spoofer;
-    using Udon;
-    using Variables;
+    using Constants;
+    using Tools.Extensions;
+    using Tools.UdonEditor;
+    using Tools.UdonSearcher;
+    using WorldsIds;
+    using xAstroBoy.Utility;
 
-    internal class FurryTalkAndChill : GameEvents
+    internal class FurryTalkAndChill : AstroEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

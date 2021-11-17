@@ -1,16 +1,14 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
 {
     using System;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using CustomMono;
-    using Udon;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.UdonEditor;
     using UnhollowerBaseLib.Attributes;
-    using Variables;
+    using WorldAddons.WorldsIds;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class UdonTycoon_LevelController : GameEventsBehaviour
+    public class UdonTycoon_LevelController : AstroMonoBehaviour
     {
         public UdonTycoon_LevelController(IntPtr ptr) : base(ptr)
         {

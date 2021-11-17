@@ -1,12 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu
+﻿namespace AstroClient.ClientUI.Menu.Tabs
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
-   internal struct TabIndexs
+    internal struct TabIndexs
    {
        internal const int Main = 100;
        internal const int Exploits = 101;

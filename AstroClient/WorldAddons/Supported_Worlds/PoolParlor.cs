@@ -1,19 +1,19 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroMonos.AstroUdons;
-    using AstroMonos.Components.Spoofer;
     using System;
     using System.Collections.Generic;
-    using Udon;
+    using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Spoofer;
+    using Tools.Extensions;
+    using Tools.UdonEditor;
+    using Tools.UdonSearcher;
     using UnityEngine;
-    using Variables;
-    using static Variables.CustomLists;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using static Constants.CustomLists;
 
-    internal class PoolParlor : GameEvents
+    internal class PoolParlor : AstroEvents
     {
         // TODO : Rewrite this (read and cache from behaviour themself!)
         internal static void InitButtons(QMGridTab main)

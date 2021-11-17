@@ -2,14 +2,14 @@
 {
     using System;
     using System.Linq;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroClient.Tools.Colors;
     using ESP.Player;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
     using static JarRoleController;
 
     [RegisterComponent]

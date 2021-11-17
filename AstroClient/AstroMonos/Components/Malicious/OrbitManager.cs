@@ -4,30 +4,31 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using CustomMono;
-    using GameObjectDebug;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.Extensions.Components_exts;
+    using AstroClient.Tools.ObjectEditor;
+    using AstroClient.Tools.ObjectEditor.Online;
     using MelonLoader;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
-    using static Variables.InstanceBuilder;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
+    using static Constants.InstanceBuilder;
 
-    public class OrbitManager : GameEventsBehaviour
+    public class OrbitManager : AstroMonoBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public OrbitManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

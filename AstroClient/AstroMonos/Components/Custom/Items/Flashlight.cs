@@ -2,18 +2,17 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using System;
     using AstroUdons;
-    using CustomMono;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
-    public class FlashlightBehaviour : GameEventsBehaviour
+    public class FlashlightBehaviour : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public FlashlightBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

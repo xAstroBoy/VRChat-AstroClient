@@ -1,29 +1,32 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds.Jar_Worlds
 {
     #region Imports
 
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using AstroMonos.Components.Cheats.PatronUnlocker;
-    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
-    using AstroMonos.Components.ESP.Pickup;
-    using ClientUI.QuickMenuButtons.ESP;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Udon.UdonEditor;
-    using UdonExploits;
+    using AstroMonos.Components.Cheats.PatronUnlocker;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.ESP.Pickup;
+    using ClientUI.Menu.ESP;
+    using Constants;
+    using Tools.Extensions;
+    using Tools.Extensions.Components_exts;
+    using Tools.UdonEditor;
+    using Tools.UdonSearcher;
+    using UdonExploits.Murder4;
     using UnityEngine;
-    using Variables;
     using VRC;
-    using static Variables.CustomLists;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
+    using static Constants.CustomLists;
 
     #endregion Imports
 
-    internal class Murder4Cheats : GameEvents
+    internal class Murder4Cheats : AstroEvents
     {
         internal static void FindGameMurderObjects()
         {

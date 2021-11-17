@@ -1,13 +1,13 @@
-﻿namespace AstroClient.WorldAddons
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Finder;
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
-    using Variables;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
 
-    internal class VoidClub : GameEvents
+    internal class VoidClub : AstroEvents
     {
         internal static QMNestedGridMenu VoidClubMenu;
 

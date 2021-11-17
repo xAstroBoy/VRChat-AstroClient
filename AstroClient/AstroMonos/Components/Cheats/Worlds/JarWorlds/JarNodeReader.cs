@@ -1,13 +1,12 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
     using System;
-    using CustomMono;
-    using Udon;
+    using AstroClient.Tools.UdonEditor;
     using UnhollowerBaseLib.Attributes;
     using VRC.Udon;
 
     [RegisterComponent]
-    public class JarNodeReader : GameEventsBehaviour
+    public class JarNodeReader : AstroMonoBehaviour
     {
         public JarNodeReader(IntPtr ptr) : base(ptr)
         {

@@ -1,32 +1,32 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
     #region Imports
 
-    using AstroButtonAPI;
-    using AstroClient.Udon;
-    using AstroClient.Udon.UdonEditor;
-    using AstroClient.Variables;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using AstroMonos.AstroUdons;
-    using AstroMonos.Components.Spoofer;
-    using AstroMonos.Components.Tools;
-    using AstroMonos.Components.Tools.Listeners;
-    using CheetoLibrary;
-    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Spoofer;
+    using AstroMonos.Components.Tools;
+    using AstroMonos.Components.Tools.Listeners;
+    using CheetosUI;
+    using Constants;
+    using MelonLoader;
+    using Tools.Extensions;
+    using Tools.UdonEditor;
+    using Tools.UdonSearcher;
     using UnityEngine;
     using VRC.Udon;
-    using static AstroClient.Variables.CustomLists;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
+    using static Constants.CustomLists;
 
     #endregion Imports
 
-    internal class BClubWorld : GameEvents
+    internal class BClubWorld : AstroEvents
     {
         internal static GameObject VIPRoom;
         internal static GameObject VIPInsideDoor;
@@ -1154,31 +1154,31 @@
                         var obj_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("localPatrons"));
                         if (obj_List != null)
                         {
-                            UdonHeapEditor.PatchHeap(disassembled, "localPatrons", Utils.LocalPlayer.displayName, true);
+                            UdonHeapEditor.PatchHeap(disassembled, "localPatrons", GameInstances.LocalPlayer.displayName, true);
                         }
 
                         var localVipsPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("localVips"));
                         if (localVipsPatch != null)
                         {
-                            UdonHeapEditor.PatchHeap(disassembled, "localVips", Utils.LocalPlayer.displayName, true);
+                            UdonHeapEditor.PatchHeap(disassembled, "localVips", GameInstances.LocalPlayer.displayName, true);
                         }
 
                         var obj_List2 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_intnl_interpolatedStr_String"));
                         if (obj_List2 != null)
                         {
-                            UdonHeapEditor.PatchHeap(disassembled, "__0_intnl_interpolatedStr_String", Utils.LocalPlayer.displayName, true);
+                            UdonHeapEditor.PatchHeap(disassembled, "__0_intnl_interpolatedStr_String", GameInstances.LocalPlayer.displayName, true);
                         }
 
                         var obj_List3 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("syncedVips"));
                         if (obj_List3 != null)
                         {
-                            UdonHeapEditor.PatchHeap(disassembled, "syncedVips", Utils.LocalPlayer.displayName, true);
+                            UdonHeapEditor.PatchHeap(disassembled, "syncedVips", GameInstances.LocalPlayer.displayName, true);
                         }
 
                         var obj_List4 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_mp_liveVips_String"));
                         if (obj_List4 != null)
                         {
-                            UdonHeapEditor.PatchHeap(disassembled, "__0_mp_liveVips_String", Utils.LocalPlayer.displayName, true);
+                            UdonHeapEditor.PatchHeap(disassembled, "__0_mp_liveVips_String", GameInstances.LocalPlayer.displayName, true);
                         }
                     }
                 }
@@ -1234,7 +1234,7 @@
                         var obj_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_mp_patronsToProcess_String"));
                         if (obj_List != null)
                         {
-                            UdonHeapEditor.PatchHeap(disassembled, "__0_mp_patronsToProcess_String", Utils.LocalPlayer.displayName, true);
+                            UdonHeapEditor.PatchHeap(disassembled, "__0_mp_patronsToProcess_String", GameInstances.LocalPlayer.displayName, true);
                         }
                     }
                     catch (Exception e)
@@ -1250,16 +1250,16 @@
                         var list = Elite_List.Unpack_Array_VRCPlayerApi().ToList();
                         if (list.Count() != 0)
                         {
-                            if (!list.Contains(Utils.LocalPlayer))
+                            if (!list.Contains(GameInstances.LocalPlayer))
                             {
-                                list.Add(Utils.LocalPlayer);
+                                list.Add(GameInstances.LocalPlayer);
                             }
                         }
                         else
                         {
                             list = new List<VRC.SDKBase.VRCPlayerApi>
                             {
-                                Utils.LocalPlayer
+                                GameInstances.LocalPlayer
                             };
                         }
 
@@ -1272,16 +1272,16 @@
                         var list = Patron_List.Unpack_Array_VRCPlayerApi().ToList();
                         if (list.Count() != 0)
                         {
-                            if (!list.Contains(Utils.LocalPlayer))
+                            if (!list.Contains(GameInstances.LocalPlayer))
                             {
-                                list.Add(Utils.LocalPlayer);
+                                list.Add(GameInstances.LocalPlayer);
                             }
                         }
                         else
                         {
                             list = new List<VRC.SDKBase.VRCPlayerApi>
                             {
-                                Utils.LocalPlayer
+                                GameInstances.LocalPlayer
                             };
                         }
 

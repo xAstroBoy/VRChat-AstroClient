@@ -3,17 +3,15 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using CustomMono;
     using MelonLoader;
     using Photon.Realtime;
     using UnhollowerBaseLib.Attributes;
     using VRC.Core;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class PlayerSpoofer : GameEventsBehaviour
+    public class PlayerSpoofer : AstroMonoBehaviour
     {
         public PlayerSpoofer(IntPtr ptr) : base(ptr)
         {

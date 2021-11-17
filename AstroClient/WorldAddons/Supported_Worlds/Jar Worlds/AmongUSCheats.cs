@@ -1,25 +1,26 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds.Jar_Worlds
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.ESP.VRCInteractable;
     using AstroMonos.Components.Spoofer;
-    using Features.Player.Movement.Exploit;
-    using Udon.UdonEditor;
-    using UdonExploits;
+    using Tools.Extensions;
+    using Tools.Player.Movement.Exploit;
+    using Tools.UdonEditor;
+    using Tools.UdonSearcher;
+    using UdonExploits.AmongUS;
     using UnityEngine;
-    using Variables;
     using VRC;
-    using static Variables.CustomLists;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
+    using static Constants.CustomLists;
 
-    internal class AmongUSCheats : GameEvents
+    internal class AmongUSCheats : AstroEvents
     {
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -335,13 +336,13 @@
             {
                 if (value)
                 {
-                    SerializerPos = Utils.CurrentUser.transform.position;
-                    SerializerRot = Utils.CurrentUser.transform.rotation;
+                    SerializerPos = GameInstances.CurrentUser.transform.position;
+                    SerializerRot = GameInstances.CurrentUser.transform.rotation;
                 }
                 else
                 {
-                    Utils.CurrentUser.transform.position = SerializerPos;
-                    Utils.CurrentUser.transform.rotation = SerializerRot;
+                    GameInstances.CurrentUser.transform.position = SerializerPos;
+                    GameInstances.CurrentUser.transform.rotation = SerializerRot;
 
                     SerializerRot = new Quaternion(0, 0, 0, 0);
                     SerializerPos = Vector3.zero;

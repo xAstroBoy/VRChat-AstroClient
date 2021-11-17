@@ -1,15 +1,14 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
     using System;
-    using AstroClientCore.Events;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroEventArgs;
+    using Tools.Extensions;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;
+    using xAstroBoy.Utility;
 
-    internal class AvatarManagerHook : GameEvents
+    internal class AvatarManagerHook : AstroEvents
     {
         internal static event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
 

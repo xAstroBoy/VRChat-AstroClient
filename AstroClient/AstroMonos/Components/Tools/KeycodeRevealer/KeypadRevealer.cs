@@ -1,21 +1,22 @@
 ﻿namespace AstroClient.AstroMonos.Components.Tools.KeycodeRevealer
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using CustomMono;
     using System;
     using System.Collections.Generic;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.Extensions.Components_exts;
+    using CheetosUI;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
+    using xAstroBoy.Extensions;
 
     [RegisterComponent]
-    public class KeypadRevealer : GameEventsBehaviour
+    public class KeypadRevealer : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public KeypadRevealer(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

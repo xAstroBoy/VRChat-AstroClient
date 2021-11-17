@@ -2,21 +2,19 @@
 {
     using System;
     using System.Linq;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using CustomMono;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using xAstroBoy.Extensions;
 
     [RegisterComponent]
-    public class SingleTag : GameEventsBehaviour
+    public class SingleTag : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public SingleTag(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

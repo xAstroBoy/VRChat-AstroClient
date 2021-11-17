@@ -1,11 +1,10 @@
 ﻿namespace AstroClient.Startup
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
     using System.Linq;
+    using xAstroBoy.Utility;
 
-    internal class WorldJoinMsg : GameEvents
+    internal class WorldJoinMsg : AstroEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

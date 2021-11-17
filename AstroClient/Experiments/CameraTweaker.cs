@@ -1,15 +1,14 @@
 ﻿namespace AstroClient.Experiments
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
     using AstroMonos.Components.Tools;
     using System.Collections.Generic;
+    using Tools.Extensions;
     using UnityEngine;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
 
-    internal class CameraTweaker : GameEvents
+    internal class CameraTweaker : AstroEvents
     {
         internal static void CheckCamera()
         {

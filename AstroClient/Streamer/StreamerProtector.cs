@@ -3,14 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroClientCore.Events;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using CodeDebugTools;
+    using AstroEventArgs;
+    using Tools.Extensions;
     using VRC;
+    using xAstroBoy.Utility;
 
-    internal class StreamerProtector : GameEvents
+    internal class StreamerProtector : AstroEvents
     {
         internal override void OnApplicationLateStart()
         {

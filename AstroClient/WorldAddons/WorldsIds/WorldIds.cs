@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Variables
+﻿namespace AstroClient.WorldAddons.WorldsIds
 {
     // Yes, the mod supports these worlds : = )
 

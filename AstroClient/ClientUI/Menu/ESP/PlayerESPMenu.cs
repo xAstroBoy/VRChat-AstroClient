@@ -1,18 +1,16 @@
-﻿namespace AstroClient.ClientUI.QuickMenuButtons.ESP
+﻿namespace AstroClient.ClientUI.Menu.ESP
 {
     using System;
-    using AstroButtonAPI;
-    using AstroClientCore.Events;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroEventArgs;
     using AstroMonos.Components.ESP.Player;
-    using Boo.Lang.Useful.Collections;
-    using CodeDebugTools;
+    using Config;
+    using Tools.Extensions;
     using UnityEngine;
     using VRC;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
 
-    internal class PlayerESPMenu : GameEvents
+    internal class PlayerESPMenu : AstroEvents
     {
         internal static EventHandler<BoolEventsArgs> Event_OnPlayerESPPropertyChanged;
 
@@ -103,7 +101,7 @@
         {
             foreach (var item in WorldUtils.Players)
             {
-                if (item != Utils.LocalPlayer.GetPlayer())
+                if (item != GameInstances.LocalPlayer.GetPlayer())
                 {
                     if (!item.gameObject.GetComponent<PlayerESP>())
                     {

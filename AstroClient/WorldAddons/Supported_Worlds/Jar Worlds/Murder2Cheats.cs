@@ -1,22 +1,24 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds.Jar_Worlds
 {
     #region Imports
 
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using ClientUI.QuickMenuButtons.ESP;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ClientUI.Menu.ESP;
+    using Constants;
+    using Tools.Extensions;
+    using Tools.Extensions.Components_exts;
     using UnityEngine;
-    using Variables;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
     #endregion Imports
 
-    internal class Murder2Cheats : GameEvents
+    internal class Murder2Cheats : AstroEvents
     {
         internal static void FindGameMurderObjects()
         {

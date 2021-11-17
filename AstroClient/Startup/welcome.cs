@@ -1,9 +1,9 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Startup
 {
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
+    using xAstroBoy.Utility;
 
-    internal class Welcome : GameEvents
+    internal class Welcome : AstroEvents
     {
         internal static bool HasDisplayed { get; private set; }
 

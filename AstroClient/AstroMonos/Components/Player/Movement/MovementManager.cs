@@ -1,22 +1,17 @@
 ﻿namespace AstroClient.AstroMonos.Components.Player.Movement
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using CustomMono;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC.SDKBase;
 
-    public class MovementManager : GameEventsBehaviour
+    public class MovementManager : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public MovementManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

@@ -1,11 +1,10 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
     using System;
-    using AstroClientCore.Events;
-    using ClientUI.QuickMenuButtons.ESP;
-    using CustomMono;
+    using AstroEventArgs;
+    using ClientUI.Menu.ESP;
 
-    public class JarControllerEvents : GameEventsBehaviour
+    public class JarControllerEvents : AstroMonoBehaviour
     {
         public JarControllerEvents(IntPtr obj0) : base(obj0)
         {

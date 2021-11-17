@@ -6,18 +6,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using AstroLibrary.Console;
     using Components.Cheats.Worlds.JarWorlds;
     using Components.Malicious;
     using Components.Malicious.Orbit;
-    using Components.Tools;
-    using CustomMono;
+    using Constants;
     using UnhollowerRuntimeLib;
-    using Variables;
 
     #endregion Imports
 
-    internal class ComponentHelper : GameEvents
+    internal class ComponentHelper : AstroEvents
     {
         internal static void RegisterComponent<T>() where T : class
         {
@@ -41,7 +38,7 @@
 
         internal override void OnApplicationStart()
         {
-            RegisterComponent<GameEventsBehaviour>();
+            RegisterComponent<AstroMonoBehaviour>();
             RegisterComponent<JarControllerEvents>();
 
             var classes = Assembly.GetExecutingAssembly().GetTypes();

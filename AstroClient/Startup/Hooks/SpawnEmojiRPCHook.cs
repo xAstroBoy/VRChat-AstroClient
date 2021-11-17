@@ -3,14 +3,14 @@
     using System;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
+    using AstroEventArgs;
     using MelonLoader;
+    using Tools.Extensions;
     using UnhollowerBaseLib;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 
-    internal class SpawnEmojiRPCHook : GameEvents
+    internal class SpawnEmojiRPCHook : AstroEvents
     {
         internal static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
 

@@ -1,11 +1,10 @@
-namespace AstroClient.ClientUI.ActionMenuButtons
+namespace AstroClient.ClientUI.ActionMenu
 {
     using System.Drawing;
-    using AstroActionMenu.Api;
-    using AstroLibrary.Console;
-    using QuickMenuButtons.ESP;
+    using Gompoc.ActionMenuAPI.Api;
+    using Menu.ESP;
 
-    internal class ESPModule : GameEvents
+    internal class ESPModule : AstroEvents
     {
         internal override void OnApplicationStart()
         {

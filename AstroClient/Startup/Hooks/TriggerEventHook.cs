@@ -2,14 +2,16 @@
 {
     using System;
     using System.Reflection;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
+    using AstroEventArgs;
+    using Cheetos;
+    using Config;
     using Harmony;
+    using Tools.Extensions;
     using UnhollowerRuntimeLib.XrefScans;
     using VRC.SDKBase;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    internal class TriggerEventHook : GameEvents
+    internal class TriggerEventHook : AstroEvents
     {
 
         internal static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;

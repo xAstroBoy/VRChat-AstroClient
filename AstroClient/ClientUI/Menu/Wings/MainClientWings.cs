@@ -1,17 +1,15 @@
-﻿namespace AstroClient.ClientUI.QuickMenuButtons
+﻿namespace AstroClient.ClientUI.Menu.Wings
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using CheetoLibrary;
-    using MelonLoader;
-    using System.Reflection;
     using System.Windows.Forms;
-    using Variables;
+    using ClientResources;
+    using Constants;
+    using MelonLoader;
     using VRC;
     using VRC.Core;
     using VRC.UI;
-    using AvatarUtils = AvatarMods.AvatarUtils;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
+    using AvatarUtils = Tools.Player.AvatarUtils;
 
     internal class MainClientWings
     {

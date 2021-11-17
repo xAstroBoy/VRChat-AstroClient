@@ -1,13 +1,12 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Target
 {
     using System;
     using System.Collections.Generic;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using CodeDebugTools;
+    using AstroEventArgs;
     using VRC;
+    using xAstroBoy.Utility;
 
-    internal class TargetSelector : GameEvents
+    internal class TargetSelector : AstroEvents
     {
         internal static event EventHandler<VRCPlayerEventArgs> Event_OnTargetSet;
 

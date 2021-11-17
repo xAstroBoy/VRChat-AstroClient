@@ -1,21 +1,21 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
+    using System.Collections;
+    using System.Collections.Generic;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using CheetoLibrary;
     using MelonLoader;
-    using System.Collections;
-    using System.Collections.Generic;
+    using Tools.Extensions;
+    using Tools.UdonSearcher;
     using UnityEngine;
-    using Variables;
-    using static Variables.CustomLists;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
+    using static Constants.CustomLists;
 
-    internal class SuperTowerDefense : GameEvents
+    internal class SuperTowerDefense : AstroEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

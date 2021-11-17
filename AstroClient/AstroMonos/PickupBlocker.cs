@@ -2,13 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using CodeDebugTools;
     using UnhollowerBaseLib.Attributes;
     using VRC;
+    using xAstroBoy.Utility;
 
-    internal class PickupBlocker : GameEvents
+    internal class PickupBlocker : AstroEvents
     {
         internal override void OnPlayerLeft(Player player)
         {

@@ -1,12 +1,11 @@
 ﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
-    using CustomMono;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
-    public class InflaterBehaviour : GameEventsBehaviour
+    public class InflaterBehaviour : AstroMonoBehaviour
     {
         public InflaterBehaviour(IntPtr ptr) : base(ptr)
         {

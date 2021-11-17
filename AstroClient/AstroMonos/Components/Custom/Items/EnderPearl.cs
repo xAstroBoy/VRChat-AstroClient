@@ -1,23 +1,21 @@
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using System;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroClient.Tools.Extensions;
     using AstroUdons;
-    using CustomMono;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class EnderPearlBehaviour : GameEventsBehaviour
+    public class EnderPearlBehaviour : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public EnderPearlBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -119,7 +117,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             {
                 ModConsole.DebugLog(contact.point.ToString() + "Point To Teleport To");
                 Vector3 position = new Vector3(contact.point.x, contact.point.y, contact.point.z);
-                Utils.CurrentUser.gameObject.transform.position = position;
+                GameInstances.CurrentUser.gameObject.transform.position = position;
                 gameObject.DestroyMeLocal();
                 break;
             }

@@ -3,13 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using Moderation;
+    using AstroClient.Tools.Extensions;
+    using Config;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
     public class PlayerESP : EspEvents

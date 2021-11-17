@@ -1,9 +1,10 @@
 ﻿namespace AstroClient.Startup
 {
-    using AstroLibrary.Utility;
     using AstroMonos.Components.Tools;
+    using xAstroBoy.UIPaths;
+    using xAstroBoy.Utility;
 
-    internal class UiModifier : GameEvents
+    internal class UiModifier : AstroEvents
     {
         internal override void VRChat_OnQuickMenuInit()
         {

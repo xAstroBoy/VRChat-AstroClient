@@ -1,14 +1,13 @@
-namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
+namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using AstroActionMenu.Api;
     using AstroMonos.Components.Tools.Listeners;
-    using CheetoLibrary;
-    using global::AstroLibrary.Console;
+    using ClientResources;
+    using Gompoc.ActionMenuAPI.Api;
     using MelonLoader;
     using UnityEngine;
     using VRC;
@@ -17,7 +16,7 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
     using VRC.SDKBase;
     using Color = System.Drawing.Color;
 
-    internal class AvatarParametersEditorMod : GameEvents
+    internal class AvatarParametersEditorMod : AstroEvents
     {
         internal static Dictionary<string, GameObject> s_PlayerList;
         internal static Dictionary<string, RefCountedObject<Texture2D>> s_Portraits;

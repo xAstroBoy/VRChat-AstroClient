@@ -1,21 +1,21 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using AstroMonos.AstroUdons;
     using System.Collections;
     using System.Collections.Generic;
-    using Udon;
+    using AstroMonos.AstroUdons;
+    using Tools.Extensions;
+    using Tools.UdonEditor;
     using UnityEngine;
-    using Variables;
     using VRC;
     using VRC.Udon;
-    using static Variables.CustomLists;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
+    using static Constants.CustomLists;
 
-    internal class BOMBERio : GameEvents
+    internal class BOMBERio : AstroEvents
     {
         internal static void InitButtons(QMGridTab main)
         {
@@ -137,7 +137,7 @@
         {
             if (isBomberIO)
             {
-                if (sender.DisplayName() == Utils.LocalPlayer.GetPlayer().DisplayName())
+                if (sender.DisplayName() == GameInstances.LocalPlayer.GetPlayer().DisplayName())
                 {
                     if (obj.name.ToLower().StartsWith("followobj"))
                     {

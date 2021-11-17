@@ -4,15 +4,14 @@
 
     using System.Collections.Generic;
     using System.Linq;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using UnhollowerBaseLib.Attributes;
     using VRC;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
     #endregion Imports
 
-    internal class SingleTagsUtils : GameEvents
+    internal class SingleTagsUtils : AstroEvents
     {
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {

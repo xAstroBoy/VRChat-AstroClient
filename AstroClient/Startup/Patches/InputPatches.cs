@@ -1,21 +1,20 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Startup.Patches
 {
     #region Imports
 
     using System;
     using System.Reflection;
-    using AstroClientCore.Events;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using global::AstroLibrary.Console;
-    using global::AstroLibrary.Extensions;
+    using AstroEventArgs;
+    using Cheetos;
     using Harmony;
+    using Tools.Extensions;
+    using Tools.Input;
 
     #endregion Imports
 
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    internal class InputPatches : GameEvents
+    internal class InputPatches : AstroEvents
     {
 
 

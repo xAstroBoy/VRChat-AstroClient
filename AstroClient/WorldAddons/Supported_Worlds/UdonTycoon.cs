@@ -1,16 +1,15 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
-    using CheetoLibrary;
     using System.Collections.Generic;
+    using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
+    using Tools.UdonSearcher;
     using UnityEngine;
-    using Variables;
+    using WorldsIds;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
-    internal class UdonTycoon : GameEvents
+    internal class UdonTycoon : AstroEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

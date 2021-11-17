@@ -1,14 +1,13 @@
 ﻿namespace AstroClient.AstroMonos.Components.Player
 {
     using System;
-    using AstroLibrary.Utility;
-    using CustomMono;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class SitOnPlayer : GameEventsBehaviour
+    public class SitOnPlayer : AstroMonoBehaviour
     {
         private static Player TargetPlayer;
         private static HumanBodyBones TargetBone;

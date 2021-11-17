@@ -1,20 +1,18 @@
 ﻿namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using CustomMono;
+    using AstroClient.Tools.Extensions;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
-    public class RigidBodyController : GameEventsBehaviour
+    public class RigidBodyController : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public RigidBodyController(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

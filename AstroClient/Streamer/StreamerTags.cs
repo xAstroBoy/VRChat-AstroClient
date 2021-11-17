@@ -1,11 +1,12 @@
 ﻿namespace AstroClient.Streamer
 {
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using Variables;
+    using Constants;
+    using Tools.Colors;
+    using Tools.Extensions;
     using VRC;
+    using xAstroBoy.Utility;
 
-    internal class StreamerTags : GameEvents
+    internal class StreamerTags : AstroEvents
     {
         internal override void OnStreamerJoined(Player player)
         {

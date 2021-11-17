@@ -1,22 +1,21 @@
 ﻿namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using System;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.UdonSearcher;
     using AstroUdons;
-    using CustomMono;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
-    using static Variables.CustomLists;
+    using static Constants.CustomLists;
 
     [RegisterComponent]
-    public class StretchyCheeseBehaviour : GameEventsBehaviour
+    public class StretchyCheeseBehaviour : AstroMonoBehaviour
     {
-        public List<GameEventsBehaviour> AntiGcList;
+        public List<AstroMonoBehaviour> AntiGcList;
 
         public StretchyCheeseBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<GameEventsBehaviour>(1);
+            AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

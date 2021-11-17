@@ -1,17 +1,15 @@
 ﻿namespace AstroClient.Streamer
 {
-    using AstroClient.Variables;
-    using AstroLibrary;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Constants;
     using VRC;
+    using xAstroBoy.Utility;
 
-    internal class StreamerNotifier : GameEvents
+    internal class StreamerNotifier : AstroEvents
     {
 
         internal override void OnStreamerJoined(Player player)

@@ -1,11 +1,10 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
     using System.Collections.Generic;
-    using AstroLibrary.Console;
-    using AstroLibrary.Finder;
-    using Variables;
+    using WorldsIds;
+    using xAstroBoy;
 
-    internal class LPD : GameEvents
+    internal class LPD : AstroEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

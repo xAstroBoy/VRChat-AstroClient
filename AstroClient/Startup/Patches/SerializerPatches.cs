@@ -1,19 +1,19 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Startup.Patches
 {
     #region Imports
 
     using System;
     using System.Reflection;
-    using AstroLibrary.Console;
+    using Cheetos;
     using ExitGames.Client.Photon;
-    using Features.Player.Movement.Exploit;
     using Harmony;
+    using Tools.Player.Movement.Exploit;
 
     #endregion Imports
 
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    internal class SerializerPatches : GameEvents
+    internal class SerializerPatches : AstroEvents
     {
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
 

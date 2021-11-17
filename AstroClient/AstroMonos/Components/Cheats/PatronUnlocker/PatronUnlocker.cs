@@ -2,26 +2,24 @@
 {
     using System;
     using System.Collections.Generic;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroClient.Tools.Extensions;
     using AstroUdons;
-    using CustomMono;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
     using VRC.Udon;
-    using static Variables.CustomLists;
+    using xAstroBoy.Utility;
+    using static Constants.CustomLists;
 
     [RegisterComponent]
-    public class PatronUnlocker : GameEventsBehaviour
+    public class PatronUnlocker : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public PatronUnlocker(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -124,7 +122,7 @@
                         }
                         if (OnlySelfHasPatreonPerk)
                         {
-                            if (sender == Utils.LocalPlayer.GetPlayer())
+                            if (sender == GameInstances.LocalPlayer.GetPlayer())
                             {
                                 if (action == NonPatronSkinEvent.EventKey)
                                 {

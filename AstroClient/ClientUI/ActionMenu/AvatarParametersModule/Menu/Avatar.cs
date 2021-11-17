@@ -1,9 +1,8 @@
-namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
+namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroLibrary.Console;
     using UnityEngine;
     using VRC.Playables;
 

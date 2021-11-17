@@ -1,12 +1,14 @@
-namespace AstroClient
+namespace AstroClient.Spawnables.Flashlight
 {
     using System.Collections.Generic;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using AstroMonos.Components.Custom.Items;
+    using Tools.Extensions;
+    using Tools.Holders;
     using UnityEngine;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
-    internal class Astro_Flashlight : GameEvents
+    internal class Astro_Flashlight : AstroEvents
     {
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -30,7 +32,7 @@ namespace AstroClient
             FlashLight_Body.AddComponent<BoxCollider>().isTrigger = true;
 
             FlashLight_Body.transform.localScale = new Vector3(0.05f, 0.125f, 0.05f);
-            FlashLight_Body.transform.position = Utils.CurrentUser.transform.position + new Vector3(0f, 1f, 0f);
+            FlashLight_Body.transform.position = GameInstances.CurrentUser.transform.position + new Vector3(0f, 1f, 0f);
 
             var body = FlashLight_Body.AddComponent<Rigidbody>();
             if (body != null)

@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Networking
 {
     #region Imports
 
@@ -6,15 +6,14 @@
     using System.Collections;
     using System.Net.Sockets;
     using System.Timers;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
     using Cheetos;
+    using Constants;
     using MelonLoader;
     using Newtonsoft.Json;
     using UnityEngine;
-    using Variables;
+    using xAstroBoy.Utility;
 
     #endregion Imports
 

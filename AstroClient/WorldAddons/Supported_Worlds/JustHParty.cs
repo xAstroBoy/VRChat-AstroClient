@@ -1,16 +1,16 @@
-﻿namespace AstroClient.WorldAddons
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
     using System.Linq;
+    using Tools.Extensions;
     using UnityEngine;
-    using Variables;
     using VRC.SDKBase;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
 
-    internal class JustHParty : GameEvents
+    internal class JustHParty : AstroEvents
     {
         internal static QMNestedGridMenu JustHPartyMenu;
 

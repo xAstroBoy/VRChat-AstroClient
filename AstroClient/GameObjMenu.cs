@@ -2,23 +2,22 @@
 {
     #region Imports
 
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using AstroMonos.Components.Tools.Listeners;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using Tools.Extensions;
     using UnityEngine;
     using UnityEngine.SceneManagement;
     using UnityEngine.UI;
     using VRC;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
 
     #endregion Imports
 
-    internal class GameObjMenu : GameEvents
+    internal class GameObjMenu : AstroEvents
     {
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {

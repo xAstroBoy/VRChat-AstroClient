@@ -1,12 +1,11 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
     using System.Collections.Generic;
-    using AstroLibrary.Console;
     using UnityEngine;
     using UnityEngine.UI;
-    using Variables;
+    using WorldsIds;
 
-    internal class Club808 : GameEvents
+    internal class Club808 : AstroEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

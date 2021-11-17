@@ -2,31 +2,26 @@
 {
     #region Imports
 
-    using AstroButtonAPI;
-    using AstroClientCore.Events;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
     using AstroMonos;
-    using ButtonShortcut;
-    using CheetoLibrary;
-    using CheetosConsole;
     using ClientUI.Menu;
-    using ClientUI.QuickMenuButtons;
     using Experiments;
-    using GameObjectDebug;
-    using ItemTweakerV2;
-    using ItemTweakerV2.Selector;
     using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
+    using AstroEventArgs;
+    using CheetosConsole;
+    using ClientUI.ItemTweakerV2.Selector;
+    using ClientUI.Menu.Menus;
+    using Config;
+    using Constants;
+    using Networking;
+    using Tools.Extensions;
     using UnhollowerBaseLib;
     using UnityEngine;
-    using Variables;
-    using WorldLights;
-    using Worlds;
+    using xAstroBoy.AstroButtonAPI;
     using Application = UnityEngine.Application;
     using Color = System.Drawing.Color;
     using Console = CheetosConsole.Console;
@@ -57,18 +52,8 @@
 
         #endregion EventHandlers
 
-        #region Buttons
 
-        internal static QMToggleButton ToggleDebugInfo;
-        internal static QMSingleButton CopyIDButton;
-        internal static QMSingleButton AvatarByIDButton;
-        internal static QMSingleButton ClearVRamButton;
-        internal static QMSingleButton JoinInstanceButton;
-        internal static QMSingleButton ReloadAvatarsButton;
-
-        #endregion Buttons
-
-        private static List<GameEvents> GameEvents { get; set; } = new List<GameEvents>();
+        private static List<AstroEvents> GameEvents { get; set; } = new List<AstroEvents>();
 
         private static List<Tweaker_Events> Tweaker_Overridables { get; set; } = new List<Tweaker_Events>();
 
@@ -187,9 +172,9 @@
                 Type type = array[i];
                 var btype = type.BaseType;
 
-                if (btype != null && btype.Equals(typeof(GameEvents)))
+                if (btype != null && btype.Equals(typeof(AstroEvents)))
                 {
-                    GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
+                    AstroEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as AstroEvents;
                     if (component != null)
                     {
                         try
@@ -341,14 +326,6 @@
                 return;
             }
 
-            try
-            {
-                InitSetupUI();
-            }
-            catch (Exception e)
-            {
-                ModConsole.ErrorExc(e);
-            }
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
 
             DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
@@ -399,68 +376,6 @@
             ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
-        private void InitSetupUI()
-        {
-            if (!KeyManager.IsAuthed)
-            {
-                return;
-            }
-            try
-            {
-                InitMainsButtons();
-            }
-            catch (Exception e)
-            {
-                ModConsole.ErrorExc(e);
-            }
-        }
 
-        internal static void InitMainsButtons()
-        {
-            if (!KeyManager.IsAuthed) return;
-            QMGridTab AstroClient = new QMGridTab(TabIndexs.Main, "AstroClient Menu", null, null, null, ClientResources.planet_sprite);
-            MainClientWings.InitMainWing();
-            GameProcessMenu.InitButtons(AstroClient);
-            ProtectionsMenu.InitButtons(AstroClient);
-            SkyboxScrollMenu.InitButtons(AstroClient);
-            LightControl.InitButtons(AstroClient);
-            GameObjectMenu.InitButtons(AstroClient);
-            if (Bools.IsDeveloper)
-            {
-                MapEditorMenu.InitButtons(AstroClient);
-            }
-
-            WorldPickupsBtn.InitButtons(AstroClient);
-
-            ComponentsBtn.InitButtons(AstroClient);
-
-            Headlight.Headlight.HeadlightButtonInit(AstroClient);
-
-            CameraTweaker.InitQMMenu(AstroClient);
-
-            SettingsMenuBtn.InitButtons(AstroClient);
-
-            ToggleDebugInfo = new QMToggleButton(AstroClient, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", null, null, null, Bools.AntiPortal);
-            // Top Right Buttons
-            ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
-
-            ExploitsMenu.InitButtons(TabIndexs.Exploits);
-            WorldsCheats.InitButtons(TabIndexs.Cheats);
-            HistoryMenu.InitButtons(TabIndexs.History);
-            AdminMenu.InitButtons(TabIndexs.Admin);
-            DevMenu.InitButtons(TabIndexs.Dev);
-
-            // Misc
-            TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
-            ModConsole.DebugLog("Done.");
-
-            CheatsShortcutButton.Init_Cheats_ShortcutBtn();
-
-            //_ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>
-            //{
-            //    GameObjMenu.ReturnToRoot();
-            //    GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke();
-            //}, "Advanced GameObject Toggler", null, null, true);
-        }
     }
 }

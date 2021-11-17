@@ -4,18 +4,22 @@
     using System.Collections.Generic;
     using System.Reflection;
     using System.Text;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using Cheetos;
+    using Config;
     using ExitGames.Client.Photon;
     using Harmony;
     using Moderation;
     using Photon.Realtime;
+    using Tools;
+    using Tools.Extensions;
+    using Tools.UdonEditor;
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    internal class PhotonOnEventHook : GameEvents
+    internal class PhotonOnEventHook : AstroEvents
     {
         internal override void ExecutePriorityPatches()
         {
@@ -192,7 +196,7 @@
                 Dictionary<byte, Il2CppSystem.Object> ConvertedToNormalDict = new Dictionary<byte, Il2CppSystem.Object>();
                 if (__0 != null)
                 {
-                    var PhotonSender = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
+                    var PhotonSender = GameInstances.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
                     var PhotonID = __0.sender;
                     StringBuilder line = new StringBuilder();
                     StringBuilder prefix = new StringBuilder();
@@ -305,7 +309,7 @@
                                                             if (ConvertedToNormalDict.ContainsKey(photonid))
                                                             {
                                                                 int RemoteModerationPhotonID = ConvertedToNormalDict[photonid].Unpack_Int32().Value;
-                                                                var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(RemoteModerationPhotonID);
+                                                                var PhotonPlayer = GameInstances.LoadBalancingPeer.GetPhotonPlayer(RemoteModerationPhotonID);
                                                                 if (ConvertedToNormalDict.ContainsKey(blockbyte))
                                                                 {
                                                                     bool blocked = ConvertedToNormalDict[blockbyte].Unpack_Boolean().Value;
@@ -366,7 +370,7 @@
                                                                             int count = BlockedPlayersArray.Count;
                                                                             for (int i = 0; i < count; i++)
                                                                             {
-                                                                                var blockedplayers = Utils.LoadBalancingPeer.GetPhotonPlayer(BlockedPlayersArray[i]);
+                                                                                var blockedplayers = GameInstances.LoadBalancingPeer.GetPhotonPlayer(BlockedPlayersArray[i]);
                                                                                 PhotonModerationHandler.OnPlayerBlockedYou_Invoker(blockedplayers);
                                                                                 BlockedPlayersArray[i] = -1;
                                                                             }
@@ -390,7 +394,7 @@
                                                                             int count = MutePlayersArray.Count;
                                                                             for (int i = 0; i < count; i++)
                                                                             {
-                                                                                var MutePlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(MutePlayersArray[i]);
+                                                                                var MutePlayer = GameInstances.LoadBalancingPeer.GetPhotonPlayer(MutePlayersArray[i]);
                                                                                 PhotonModerationHandler.OnPlayerMutedYou_Invoker(MutePlayer);
                                                                             }
                                                                         }

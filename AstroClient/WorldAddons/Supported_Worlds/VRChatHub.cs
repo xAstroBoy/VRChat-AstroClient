@@ -1,18 +1,17 @@
-﻿namespace AstroClient.World.Hub
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
-    using Variables;
     using VRC.SDKBase;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
     using static VRC.SDKBase.VRC_EventHandler;
 
-    internal class VRChatHub : GameEvents
+    internal class VRChatHub : AstroEvents
     {
         internal static void InitButtons(QMGridTab menu)
         {

@@ -3,16 +3,16 @@
     using System;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroEventArgs;
+    using Constants;
     using MelonLoader;
+    using Tools.Extensions;
     using UnhollowerBaseLib;
-    using Variables;
+    using xAstroBoy.Utility;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 
-    internal class OnWorldRevealHook : GameEvents
+    internal class OnWorldRevealHook : AstroEvents
     {
         internal static event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
 

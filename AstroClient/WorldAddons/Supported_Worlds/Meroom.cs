@@ -1,12 +1,12 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
     using System.Collections.Generic;
     using System.Drawing;
-    using AstroLibrary.Console;
-    using AstroLibrary.Finder;
-    using Variables;
+    using Tools.DeepCloneUtils;
+    using WorldsIds;
+    using xAstroBoy;
 
-    internal class Meroom : GameEvents
+    internal class Meroom : AstroEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

@@ -1,23 +1,22 @@
 ﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroClient.Tools.Extensions;
     using AstroUdons;
-    using CustomMono;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class Bouncer : GameEventsBehaviour
+    public class Bouncer : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public Bouncer(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

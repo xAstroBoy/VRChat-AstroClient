@@ -1,22 +1,23 @@
 ﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
-    using AstroLibrary.Extensions;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.ObjectEditor.Online;
     using AstroUdons;
-    using CustomMono;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
-    using static AstroClient.Forces;
+    using xAstroBoy.Extensions;
+    using static AstroClient.Tools.ObjectEditor.Editor.Forces.Forces;
 
     [RegisterComponent]
-    public class CrazyBehaviour : GameEventsBehaviour
+    public class CrazyBehaviour : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public CrazyBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

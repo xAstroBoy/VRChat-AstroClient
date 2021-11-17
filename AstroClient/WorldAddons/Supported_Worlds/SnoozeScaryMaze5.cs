@@ -1,12 +1,11 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
     using System.Collections.Generic;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using Variables;
+    using Tools.Extensions;
+    using WorldsIds;
+    using xAstroBoy;
 
-    internal class SnoozeScaryMaze5 : GameEvents
+    internal class SnoozeScaryMaze5 : AstroEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

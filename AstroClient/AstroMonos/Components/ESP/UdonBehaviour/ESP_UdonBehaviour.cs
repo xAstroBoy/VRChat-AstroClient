@@ -2,20 +2,19 @@
 {
     using System;
     using System.Linq;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using CustomMono;
+    using AstroClient.Tools.Colors;
+    using AstroClient.Tools.Extensions;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_UdonBehaviour : GameEventsBehaviour
+    public class ESP_UdonBehaviour : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public ESP_UdonBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

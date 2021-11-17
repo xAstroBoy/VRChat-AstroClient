@@ -2,12 +2,12 @@
 {
     using System;
     using System.Collections;
-    using AstroClientCore.Events;
-    using AstroLibrary.Extensions;
+    using AstroEventArgs;
     using MelonLoader;
+    using Tools.Extensions;
     using VRC;
 
-    internal class NetworkManagerHooks : GameEvents
+    internal class NetworkManagerHooks : AstroEvents
     {
         private static bool IsInitialized;
         private static bool SeenFire;

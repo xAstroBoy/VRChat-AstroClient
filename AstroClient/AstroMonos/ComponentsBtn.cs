@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.AstroMonos
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Extensions;
     using Components.Custom.Random;
     using Components.Malicious;
     using Components.Malicious.Orbit;
-    using ItemTweakerV2.Selector;
     using System;
+    using ClientUI.ItemTweakerV2.Selector;
+    using Constants;
+    using Tools.Extensions;
     using UnityEngine;
-    using Variables;
+    using xAstroBoy.AstroButtonAPI;
 
     internal static class ComponentsBtn
     {

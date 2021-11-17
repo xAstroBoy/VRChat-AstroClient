@@ -1,19 +1,18 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Networking
 {
     #region Imports
 
     using System.Collections;
     using System.Collections.Generic;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
     using MelonLoader;
+    using xAstroBoy.Utility;
     using static Cheetos.AvatarSearch;
 
     #endregion Imports
 
-    internal class NetworkingManager : GameEvents
+    internal class NetworkingManager : AstroEvents
     {
         /// <summary>
         /// Gets whether the NetworkingManager has initialized and contains the player's information.

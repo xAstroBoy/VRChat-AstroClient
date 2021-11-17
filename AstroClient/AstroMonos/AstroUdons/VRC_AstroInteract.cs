@@ -1,18 +1,16 @@
 namespace AstroClient.AstroMonos.AstroUdons
 {
     using System;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using CustomMono;
     using Programs;
     using UnhollowerBaseLib.Attributes;
     using VRC.SDK3.Components;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using VRC.Udon.ProgramSources;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class VRC_AstroInteract : GameEventsBehaviour
+    public class VRC_AstroInteract : AstroMonoBehaviour
     {
         public VRC_AstroInteract(IntPtr ptr)
             : base(ptr)

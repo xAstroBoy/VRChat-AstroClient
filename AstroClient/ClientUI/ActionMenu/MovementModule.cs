@@ -1,11 +1,11 @@
-namespace AstroClient.ClientUI.ActionMenuButtons
+namespace AstroClient.ClientUI.ActionMenu
 {
     using System.Drawing;
-    using AstroActionMenu.Api;
-    using AstroLibrary.Console;
-    using Features.Player.Movement.Exploit;
+    using Gompoc.ActionMenuAPI.Api;
+    using Spawnables.Enderpearl;
+    using Tools.Player.Movement.Exploit;
 
-    internal class MovementModule : GameEvents
+    internal class MovementModule : AstroEvents
     {
         internal override void OnApplicationStart()
         {

@@ -1,15 +1,14 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Config
 {
     #region Imports
 
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroNetworkingLibrary;
     using System;
     using System.Diagnostics;
     using System.IO;
     using System.Threading;
-    using AstroClientCore.Events;
+    using AstroEventArgs;
+    using AstroNetworkingLibrary;
+    using Tools.Extensions;
     using UnityEngine;
 
     #endregion Imports

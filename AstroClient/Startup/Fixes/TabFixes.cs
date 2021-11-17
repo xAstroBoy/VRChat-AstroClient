@@ -1,16 +1,13 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Startup.Fixes
 {
     using System;
-    using AstroLibrary;
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using MelonLoader;
     using UnityEngine;
     using UnityEngine.UI;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
 
-    internal class TabFixes : GameEvents
+    internal class TabFixes : AstroEvents
     {
         internal static bool HasFixed { get; private set; }
         internal static bool HasFixed2 { get; private set; }

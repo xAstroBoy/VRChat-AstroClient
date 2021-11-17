@@ -3,26 +3,26 @@
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using CustomMono;
-    using GameObjectDebug;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.ObjectEditor;
+    using AstroClient.Tools.ObjectEditor.Online;
     using Tools;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
+    using xAstroBoy.Utility;
 
-    public class Orbit : GameEventsBehaviour
+    public class Orbit : AstroMonoBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public Orbit(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

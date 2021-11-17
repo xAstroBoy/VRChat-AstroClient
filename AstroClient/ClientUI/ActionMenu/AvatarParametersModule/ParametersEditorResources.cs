@@ -1,5 +1,6 @@
-﻿namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule
+﻿namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule
 {
+    using Tools.Holders;
     using UnityEngine;
     using UnityEngine.Experimental.Rendering;
     using UnityEngine.Rendering;

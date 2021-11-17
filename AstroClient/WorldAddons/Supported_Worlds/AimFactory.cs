@@ -1,20 +1,20 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.WorldAddons.Supported_Worlds
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using Tools.Extensions;
+    using Tools.UdonSearcher;
     using UnityEngine;
-    using Variables;
     using VRC;
+    using WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
     using Random = System.Random;
 
-    internal class AimFactory : GameEvents
+    internal class AimFactory : AstroEvents
     {
         internal static void InitButtons(QMGridTab main)
         {
@@ -164,7 +164,7 @@
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            if (IsAimFactory && obj != null && IsAlwaysPerfectHit && sender != null && sender == Utils.LocalPlayer.GetPlayer() && obj.name.Equals("Handgun_M1911A (Model)") && action == "AllwaysTrigger" && !IsPoppingTarget)
+            if (IsAimFactory && obj != null && IsAlwaysPerfectHit && sender != null && sender == GameInstances.LocalPlayer.GetPlayer() && obj.name.Equals("Handgun_M1911A (Model)") && action == "AllwaysTrigger" && !IsPoppingTarget)
             {
                 IsPoppingTarget = true;
                 _ = MelonLoader.MelonCoroutines.Start(PopTarget());

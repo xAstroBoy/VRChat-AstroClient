@@ -1,17 +1,16 @@
-﻿namespace AstroClient.ButtonShortcut
+﻿namespace AstroClient.WorldAddons
 {
-    using AstroButtonAPI;
-    using CheetoLibrary;
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
+    using ClientResources;
+    using Supported_Worlds;
+    using Supported_Worlds.Jar_Worlds;
     using UnityEngine;
     using UnityEngine.UI;
-    using Variables;
-    using World.Hub;
-    using WorldAddons;
+    using WorldsIds;
+    using xAstroBoy.AstroButtonAPI;
 
-    internal class CheatsShortcutButton : GameEvents
+    internal class CheatsShortcutButton : AstroEvents
     {
         private static QMWings WorldCheatsShortcut;
 

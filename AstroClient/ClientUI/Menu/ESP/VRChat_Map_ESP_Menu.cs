@@ -1,15 +1,16 @@
-﻿namespace AstroClient.ClientUI.QuickMenuButtons.ESP
+﻿namespace AstroClient.ClientUI.Menu.ESP
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using System;
     using AstroMonos.Components.ESP.Pickup;
     using AstroMonos.Components.ESP.Trigger;
     using AstroMonos.Components.ESP.UdonBehaviour;
     using AstroMonos.Components.ESP.VRCInteractable;
-    using System;
+    using Tools.Extensions;
+    using Tools.World;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
 
-    internal class VRChat_Map_ESP_Menu : GameEvents
+    internal class VRChat_Map_ESP_Menu : AstroEvents
     {
         internal static void InitButtons(QMGridTab menu)
         {

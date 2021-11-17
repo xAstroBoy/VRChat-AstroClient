@@ -1,22 +1,21 @@
 namespace AstroClient.AstroMonos.Components.Tools.Listeners
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Extensions;
-    using CustomMono;
     using System;
+    using AstroClient.Tools.Extensions;
+    using xAstroBoy.AstroButtonAPI;
 
     [RegisterComponent]
-    public class ScrollMenuListener : GameEventsBehaviour
+    public class ScrollMenuListener : AstroMonoBehaviour
     {
         internal QMSingleButton SingleButton;
         internal QMNestedGridMenu NestedGridButton;
         internal QMToggleButton ToggleButton;
 
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public ScrollMenuListener(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

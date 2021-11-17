@@ -3,20 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroButtonAPI;
-    using AstroClientCore.Events;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using CodeDebugTools;
+    using AstroClient.Tools.Extensions;
+    using AstroEventArgs;
     using UnhollowerBaseLib;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
-    using Variables;
     using VRC;
+    using WorldAddons.WorldsIds;
+    using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.Utility;
 
-    internal class JarRoleController : GameEvents
+    internal class JarRoleController : AstroEvents
     {
         private static bool _ViewRoles;
 
@@ -62,7 +60,7 @@
                 switch (_CurrentPlayerRoleESP)
                 {
                     case null:
-                        return _CurrentPlayerRoleESP = Utils.LocalPlayer.GetPlayer().gameObject.GetComponent<JarRoleESP>();
+                        return _CurrentPlayerRoleESP = GameInstances.LocalPlayer.GetPlayer().gameObject.GetComponent<JarRoleESP>();
 
                     default:
                         return _CurrentPlayerRoleESP;

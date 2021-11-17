@@ -7,19 +7,18 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using CustomMono;
+    using Config;
     using MelonLoader;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC;
+    using xAstroBoy.Utility;
 
     #endregion Imports
 
     [RegisterComponent]
-    public class CheetoNameplate : GameEventsBehaviour
+    public class CheetoNameplate : AstroMonoBehaviour
     {
         private PlayerNameplate nameplate;
 

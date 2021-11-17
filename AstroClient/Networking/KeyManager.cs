@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Networking
 {
     using System;
     using System.IO;

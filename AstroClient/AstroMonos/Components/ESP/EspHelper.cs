@@ -4,7 +4,7 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
-    internal class EspHelper : GameEvents
+    internal class EspHelper : AstroEvents
     {
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {

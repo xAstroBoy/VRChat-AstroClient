@@ -1,24 +1,24 @@
 ﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.ObjectEditor;
+    using AstroClient.Tools.ObjectEditor.Online;
     using AstroUdons;
-    using CustomMono;
-    using GameObjectDebug;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class PlayerWatcher : GameEventsBehaviour
+    public class PlayerWatcher : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public PlayerWatcher(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

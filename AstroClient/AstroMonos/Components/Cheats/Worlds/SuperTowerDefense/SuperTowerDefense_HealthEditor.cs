@@ -1,16 +1,15 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
     using System;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using CustomMono;
-    using Udon;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.UdonEditor;
+    using Constants;
     using UnhollowerBaseLib.Attributes;
-    using Variables;
+    using WorldAddons.WorldsIds;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class SuperTowerDefense_HealthEditor : GameEventsBehaviour
+    public class SuperTowerDefense_HealthEditor : AstroMonoBehaviour
     {
         public SuperTowerDefense_HealthEditor(IntPtr ptr) : base(ptr)
         {

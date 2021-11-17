@@ -4,19 +4,22 @@
 
     using System;
     using System.Reflection;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using AstroEventArgs;
+    using Cheetos;
+    using Config;
+    using Constants;
     using Harmony;
-    using Iced.Intel;
+    using Tools.Extensions;
     using UnityEngine;
-    using Variables;
     using VRC.SDKBase;
+    using WorldAddons.WorldsIds;
+    using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
     #endregion Imports
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 
-    internal class RPCEventHook : GameEvents
+    internal class RPCEventHook : AstroEvents
     {
 
         internal static event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;

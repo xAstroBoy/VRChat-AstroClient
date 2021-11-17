@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Config
 {
     using System;
     using System.Collections.Generic;
