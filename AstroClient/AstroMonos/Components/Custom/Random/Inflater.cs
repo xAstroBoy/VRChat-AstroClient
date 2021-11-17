@@ -8,8 +8,27 @@
     [RegisterComponent]
     public class InflaterBehaviour : AstroMonoBehaviour
     {
+        private Vector3 _NewSize;
+        private float InflateTimer = 0.05f;
+        private float LastTimeCheck;
+
+        private Vector3 OriginalSize;
+
+        internal float TimerOffset = 0f;
+
         public InflaterBehaviour(IntPtr ptr) : base(ptr)
         {
+        }
+
+        internal Vector3 NewSize
+        {
+            [HideFromIl2Cpp] get => _NewSize;
+            [HideFromIl2Cpp]
+            set
+            {
+                _NewSize = value;
+                Run_OnOnInflaterPropertyChanged();
+            }
         }
 
         // Use this for initialization
@@ -17,11 +36,6 @@
         {
             NewSize = gameObject.transform.localScale;
             OriginalSize = gameObject.transform.localScale;
-        }
-
-        private void OnDestroy()
-        {
-            gameObject.transform.localScale = OriginalSize;
         }
 
         // Update is called once per frame
@@ -35,9 +49,15 @@
                     FixY();
                     FixZ();
                 }
+
                 Run_OnOnInflaterUpdate();
                 LastTimeCheck = Time.time;
             }
+        }
+
+        private void OnDestroy()
+        {
+            gameObject.transform.localScale = OriginalSize;
         }
 
         private void FixX()
@@ -91,24 +111,5 @@
         private event Action? OnInflaterUpdate;
 
         #endregion actions
-
-        internal float TimerOffset = 0f;
-        private float LastTimeCheck = 0;
-        private float InflateTimer = 0.05f;
-        private Vector3 _NewSize;
-
-        internal Vector3 NewSize
-        {
-            [HideFromIl2Cpp]
-            get => _NewSize;
-            [HideFromIl2Cpp]
-            set
-            {
-                _NewSize = value;
-                Run_OnOnInflaterPropertyChanged();
-            }
-        }
-
-        private Vector3 OriginalSize;
     }
 }

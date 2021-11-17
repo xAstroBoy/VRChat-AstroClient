@@ -1,22 +1,47 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
     using ClientAttributes;
+    using Il2CppSystem;
+    using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using WorldAddons.WorldsIds;
     using xAstroBoy.Utility;
+    using IntPtr = System.IntPtr;
+    using Math = System.Math;
 
     [RegisterComponent]
     public class SuperTowerDefense_BankEditor : AstroMonoBehaviour
     {
+        private List<Object> AntiGarbageCollection = new();
+
         public SuperTowerDefense_BankEditor(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
 
-        private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
+        internal int? CurrentBankBalance
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (BankController != null) return UdonHeapParser.Udon_Parse_Int32(BankController, CurrentMoney);
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (BankController != null)
+                    if (value.HasValue)
+                        UdonHeapEditor.PatchHeap(BankController, CurrentMoney, Math.Abs(value.Value));
+            }
+        }
+
+        private string StartMoney { [HideFromIl2Cpp] get; } = "StartMoney";
+        private string CurrentMoney { [HideFromIl2Cpp] get; } = "Money";
+
+        private static DisassembledUdonBehaviour BankController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // Use this for initialization
         internal void Start()
@@ -34,36 +59,10 @@
                     Destroy(this);
                 }
             }
-            else { Destroy(this); }
-        }
-
-        internal int? CurrentBankBalance
-        {
-            [HideFromIl2Cpp]
-            get
+            else
             {
-                if (BankController != null)
-                {
-                    return UdonHeapParser.Udon_Parse_Int32(BankController, CurrentMoney);
-                }
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (BankController != null)
-                {
-                    if (value.HasValue)
-                    {
-                        UdonHeapEditor.PatchHeap(BankController, CurrentMoney, Math.Abs(value.Value));
-                    }
-                }
+                Destroy(this);
             }
         }
-
-        private string StartMoney { [HideFromIl2Cpp] get; } = "StartMoney";
-        private string CurrentMoney { [HideFromIl2Cpp] get; } = "Money";
-
-        private static DisassembledUdonBehaviour BankController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

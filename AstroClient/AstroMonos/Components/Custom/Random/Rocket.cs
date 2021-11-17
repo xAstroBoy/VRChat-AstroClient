@@ -5,114 +5,39 @@
     using AstroClient.Tools.ObjectEditor.Online;
     using AstroUdons;
     using ClientAttributes;
+    using Il2CppSystem.Collections.Generic;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using xAstroBoy.Extensions;
     using static AstroClient.Tools.ObjectEditor.Editor.Forces.Forces;
+    using Random = UnityEngine.Random;
 
     [RegisterComponent]
     public class RocketBehaviour : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        private bool _HasRequiredSettings;
+
+        private bool _IsEnabled;
+        public List<AstroMonoBehaviour> AntiGcList;
 
         public RocketBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        // Use this for initialization
-        private void Start()
-        {
-            RigidBody = GetComponent<Rigidbody>();
-            RigidBodyController = GetComponent<RigidBodyController>();
-            RigidBodyController ??= gameObject.AddComponent<RigidBodyController>();
-            PickupController = GetComponent<PickupController>();
-            PickupController ??= gameObject.AddComponent<PickupController>();
-            VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
-            if (VRC_AstroPickup != null)
-            {
-                VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
-                VRC_AstroPickup.OnPickupUseDown += new Action(() => { IsEnabled = !IsEnabled; });
-                VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
-            }
-            IsEnabled = false;
-        }
-
-        private void Update()
-        {
-            if (!IsEnabled || isPaused || isHeld)
-            {
-                if (HasRequiredSettings) HasRequiredSettings = false;
-                return;
-            }
-            if (!CheckisOwner)
-            {
-                if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
-                {
-                    CheckisOwner = true;
-                    CheckisOwnerTimeCheck = Time.time;
-                }
-            }
-            if (Time.time - RocketTimeCheck > RocketTimer)
-            {
-                if (!HasRequiredSettings) HasRequiredSettings = true;
-                if (isCurrentOwner)
-                {
-                    if (!ShouldBeAlwaysUp) ApplyRelativeForce(gameObject, 0, UnityEngine.Random.Range(1f, 10f), 0);
-                    else ApplyForce(gameObject, 0, UnityEngine.Random.Range(1f, 10f), 0);
-                }
-
-                RocketTimeCheck = Time.time;
-            }
-        }
-
-        private void OnDestroy()
-        {
-            try
-            {
-                RigidBodyController.RestoreOriginalBody();
-                if (gameObject.IsOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
-                if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
-                PickupController.UseText = OriginalText_Use;
-            }
-            catch { }
-        }
-
-        #region actions
-
-        private void Run_OnOnRocketPropertyChanged()
-        {
-            OnRocketPropertyChanged?.Invoke();
-        }
-
-        internal void SetOnRocketPropertyChanged(Action action)
-        {
-            OnRocketPropertyChanged += action;
-        }
-
-        internal void RemoveActionEvents()
-        {
-            OnRocketPropertyChanged = null;
-        }
-
-        private event Action? OnRocketPropertyChanged;
-
-        #endregion actions
-
-        private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
+        private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
-        private bool CheckisOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private bool CheckisOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private float RocketTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
+        private float RocketTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private float _RocketTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.07f;
 
         internal float RocketTimer
         {
-            [HideFromIl2Cpp]
-            get => _RocketTimer;
+            [HideFromIl2Cpp] get => _RocketTimer;
             [HideFromIl2Cpp]
             set
             {
@@ -121,12 +46,11 @@
             }
         }
 
-        private bool _ShouldBeAlwaysUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private bool _ShouldBeAlwaysUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal bool ShouldBeAlwaysUp
         {
-            [HideFromIl2Cpp]
-            get => _ShouldBeAlwaysUp;
+            [HideFromIl2Cpp] get => _ShouldBeAlwaysUp;
             [HideFromIl2Cpp]
             set
             {
@@ -135,12 +59,11 @@
             }
         }
 
-        private bool _UseGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private bool _UseGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal bool UseGravity
         {
-            [HideFromIl2Cpp]
-            get => _UseGravity;
+            [HideFromIl2Cpp] get => _UseGravity;
             [HideFromIl2Cpp]
             set
             {
@@ -155,18 +78,15 @@
             get
             {
                 if (CheckisOwner) return gameObject.TryTakeOwnership();
-                else return true;
+                return true;
             }
         }
 
         private bool isHeld => PickupController.IsHeld;
 
-        private bool _HasRequiredSettings = false;
-
         private bool HasRequiredSettings
         {
-            [HideFromIl2Cpp]
-            get => _HasRequiredSettings;
+            [HideFromIl2Cpp] get => _HasRequiredSettings;
             [HideFromIl2Cpp]
             set
             {
@@ -191,7 +111,7 @@
             }
         }
 
-        private Rigidbody RigidBody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private Rigidbody RigidBody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -199,12 +119,9 @@
 
         private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool _IsEnabled;
-
         internal bool IsEnabled
         {
-            [HideFromIl2Cpp]
-            get => _IsEnabled;
+            [HideFromIl2Cpp] get => _IsEnabled;
             [HideFromIl2Cpp]
             set
             {
@@ -217,5 +134,87 @@
                 }
             }
         }
+
+        // Use this for initialization
+        private void Start()
+        {
+            RigidBody = GetComponent<Rigidbody>();
+            RigidBodyController = GetComponent<RigidBodyController>();
+            RigidBodyController ??= gameObject.AddComponent<RigidBodyController>();
+            PickupController = GetComponent<PickupController>();
+            PickupController ??= gameObject.AddComponent<PickupController>();
+            VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
+            if (VRC_AstroPickup != null)
+            {
+                VRC_AstroPickup.OnPickup += () => { isPaused = true; };
+                VRC_AstroPickup.OnPickupUseDown += () => { IsEnabled = !IsEnabled; };
+                VRC_AstroPickup.OnDrop += () => { isPaused = false; };
+            }
+
+            IsEnabled = false;
+        }
+
+        private void Update()
+        {
+            if (!IsEnabled || isPaused || isHeld)
+            {
+                if (HasRequiredSettings) HasRequiredSettings = false;
+                return;
+            }
+
+            if (!CheckisOwner)
+                if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
+                {
+                    CheckisOwner = true;
+                    CheckisOwnerTimeCheck = Time.time;
+                }
+
+            if (Time.time - RocketTimeCheck > RocketTimer)
+            {
+                if (!HasRequiredSettings) HasRequiredSettings = true;
+                if (isCurrentOwner)
+                {
+                    if (!ShouldBeAlwaysUp) ApplyRelativeForce(gameObject, 0, Random.Range(1f, 10f), 0);
+                    else ApplyForce(gameObject, 0, Random.Range(1f, 10f), 0);
+                }
+
+                RocketTimeCheck = Time.time;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            try
+            {
+                RigidBodyController.RestoreOriginalBody();
+                if (gameObject.IsOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
+                if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
+                PickupController.UseText = OriginalText_Use;
+            }
+            catch
+            {
+            }
+        }
+
+        #region actions
+
+        private void Run_OnOnRocketPropertyChanged()
+        {
+            OnRocketPropertyChanged?.Invoke();
+        }
+
+        internal void SetOnRocketPropertyChanged(Action action)
+        {
+            OnRocketPropertyChanged += action;
+        }
+
+        internal void RemoveActionEvents()
+        {
+            OnRocketPropertyChanged = null;
+        }
+
+        private event Action? OnRocketPropertyChanged;
+
+        #endregion actions
     }
 }

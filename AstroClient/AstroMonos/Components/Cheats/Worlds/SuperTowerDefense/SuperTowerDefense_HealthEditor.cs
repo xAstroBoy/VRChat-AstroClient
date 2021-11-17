@@ -1,23 +1,51 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
     using ClientAttributes;
     using Constants;
+    using Il2CppSystem;
+    using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using WorldAddons.WorldsIds;
     using xAstroBoy.Utility;
+    using IntPtr = System.IntPtr;
+    using Math = System.Math;
 
     [RegisterComponent]
     public class SuperTowerDefense_HealthEditor : AstroMonoBehaviour
     {
+        private List<Object> AntiGarbageCollection = new();
+
         public SuperTowerDefense_HealthEditor(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
 
-        private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
+        internal int? CurrentHealth
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (HealthController != null) return UdonHeapParser.Udon_Parse_Int32(HealthController, Lives);
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (HealthController != null)
+                    if (value.HasValue)
+                        UdonHeapEditor.PatchHeap(HealthController, Lives, Math.Abs(value.Value));
+            }
+        }
+
+        private string Lives { [HideFromIl2Cpp] get; } = "Lives";
+
+        internal bool GodMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
+        internal DisassembledUdonBehaviour HealthController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
+        internal static CustomLists.UdonBehaviour_Cached ResetHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         // Use this for initialization
         internal void Start()
@@ -36,15 +64,16 @@
                     Destroy(this);
                 }
             }
-            else { Destroy(this); }
+            else
+            {
+                Destroy(this);
+            }
         }
 
         private void LateUpdate()
         {
             if (ResetHealth != null && GodMode)
-            {
                 if (CurrentHealth.HasValue)
-                {
                     switch (CurrentHealth.Value)
                     {
                         case 3:
@@ -59,37 +88,7 @@
                         case 0:
                             ResetHealth.ExecuteUdonEvent();
                             break;
-                        default:
-                            break;
                     }
-                }
-            }
         }
-
-        internal int? CurrentHealth
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (HealthController != null) return UdonHeapParser.Udon_Parse_Int32(HealthController, Lives);
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (HealthController != null)
-                {
-                    if (value.HasValue) UdonHeapEditor.PatchHeap(HealthController, Lives, Math.Abs(value.Value));
-                }
-            }
-        }
-
-        private string Lives { [HideFromIl2Cpp] get; } = "Lives";
-
-        internal bool GodMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-
-        internal DisassembledUdonBehaviour HealthController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-
-        internal static CustomLists.UdonBehaviour_Cached ResetHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
     }
 }

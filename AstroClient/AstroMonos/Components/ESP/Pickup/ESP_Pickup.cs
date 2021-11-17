@@ -5,29 +5,35 @@
     using AstroClient.Tools.Colors;
     using AstroClient.Tools.Extensions;
     using ClientAttributes;
+    using Il2CppSystem.Collections.Generic;
+    using UnhollowerBaseLib;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
     public class ESP_Pickup : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public List<AstroMonoBehaviour> AntiGcList;
+
+        private bool DebugMode = true;
+        private Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
 
         public ESP_Pickup(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        private bool DebugMode = true;
-
-        private void Debug(string msg)
+        internal Color GetCurrentESPColor
         {
-            if (DebugMode)
-            {
-                ModConsole.DebugLog($"[ESP_Pickup Debug] : {msg}");
-            }
+            [HideFromIl2Cpp] get => HighLightOptions.highlightColor;
         }
+
+        internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
+        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("4AB30D");
+
+        internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         // Use this for initialization
         internal void Start()
@@ -42,48 +48,14 @@
             }
 
             SetupHighlighter();
-            for (int i = 0; i < ObjMeshRenderers.Count; i++)
+            for (var i = 0; i < ObjMeshRenderers.Count; i++)
             {
-                MeshRenderer obj = ObjMeshRenderers[i];
+                var obj = ObjMeshRenderers[i];
                 if (obj != null && obj.gameObject.active)
-                {
                     HighLightOptions.AddRenderer(obj);
-                }
                 else
-                {
                     HighLightOptions.RemoveRenderer(obj);
-                }
             }
-        }
-
-        private void SetupHighlighter()
-        {
-            if (HighLightOptions == null)
-            {
-                HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
-            }
-
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighlighterColor(ESPColor);
-                for (int i = 0; i < ObjMeshRenderers.Count; i++)
-                {
-                    MeshRenderer obj = ObjMeshRenderers[i];
-                    if (obj != null && obj.gameObject.active)
-                    {
-                        HighLightOptions.AddRenderer(obj);
-                    }
-                    else
-                    {
-                        HighLightOptions.RemoveRenderer(obj);
-                    }
-                }
-            }
-        }
-
-        internal void OnDestroy()
-        {
-            HighLightOptions.DestroyHighlighter();
         }
 
         internal void OnEnable()
@@ -96,35 +68,44 @@
             HighLightOptions.enabled = false;
         }
 
+        internal void OnDestroy()
+        {
+            HighLightOptions.DestroyHighlighter();
+        }
+
+        private void Debug(string msg)
+        {
+            if (DebugMode) ModConsole.DebugLog($"[ESP_Pickup Debug] : {msg}");
+        }
+
+        private void SetupHighlighter()
+        {
+            if (HighLightOptions == null) HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
+
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighlighterColor(ESPColor);
+                for (var i = 0; i < ObjMeshRenderers.Count; i++)
+                {
+                    var obj = ObjMeshRenderers[i];
+                    if (obj != null && obj.gameObject.active)
+                        HighLightOptions.AddRenderer(obj);
+                    else
+                        HighLightOptions.RemoveRenderer(obj);
+                }
+            }
+        }
+
         internal void ChangeColor(Color newcolor)
         {
             ESPColor = newcolor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.highlightColor = newcolor;
-            }
+            if (HighLightOptions != null) HighLightOptions.highlightColor = newcolor;
         }
 
         internal void ResetColor()
         {
             ESPColor = DefaultColor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighlighterColor(DefaultColor);
-            }
+            if (HighLightOptions != null) HighLightOptions.SetHighlighterColor(DefaultColor);
         }
-
-        internal Color GetCurrentESPColor
-        {
-            [HideFromIl2Cpp]
-            get { return HighLightOptions.highlightColor; }
-        }
-
-        internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-
-        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("4AB30D");
-
-        internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
     }
 }

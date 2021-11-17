@@ -3,17 +3,18 @@
     using System;
     using AstroClient.Tools.Extensions;
     using ClientAttributes;
+    using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
     public class RigidBodyController : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public List<AstroMonoBehaviour> AntiGcList;
 
         public RigidBodyController(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -28,25 +29,30 @@
             else
             {
                 Rigidbody = SyncPhysics.GetRigidBody();
-                if (Rigidbody == null)
-                {
-                    Rigidbody = gameObject.GetComponent<Rigidbody>();
-                }
+                if (Rigidbody == null) Rigidbody = gameObject.GetComponent<Rigidbody>();
             }
+
             ModConsole.DebugLog("Attacked Successfully RigidBodyController to object " + gameObject.name);
             EditMode = false;
             InvokeRepeating(nameof(BodyUpdate), 0.1f, 0.3f);
+        }
 
+        internal void FixedUpdate()
+        {
+        }
+
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
         }
 
         private void BodyUpdate()
         {
             if (gameObject != null)
-            {
-                if (gameObject.active && this.isActiveAndEnabled)
-                {
+                if (gameObject.active && isActiveAndEnabled)
                     if (!EditMode)
-                    {   // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
+                    {
+                        // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
                         Run_OnRigidbodyControllerOnUpdate();
 
                         // Makes sure if EditMode is OFF. As long is off it keeps updating the properties.
@@ -105,20 +111,13 @@
                             Original_solverIterations = Rigidbody.solverIterations;
                         }
                     }
-                }
-            }
-
-
         }
 
         private void BackupBasicBody()
         {
             if (Rigidbody != null)
             {
-                if (_EditMode)
-                {
-                    _EditMode = false; // To be sure to backup the original properties without writing them .
-                }
+                if (_EditMode) _EditMode = false; // To be sure to backup the original properties without writing them .
                 ModConsole.DebugLog($"Backupping from RigidBody properties for object  {gameObject.name}");
                 solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
                 inertiaTensor = Rigidbody.inertiaTensor;
@@ -172,15 +171,13 @@
                 Original_useConeFriction = Rigidbody.useConeFriction;
                 Original_solverIterations = Rigidbody.solverIterations;
             }
+
             _EditMode = false;
         }
 
         internal void RestoreOriginalBody() // Restore only if Editmode is already active, and Activate sync mode Once Restored.
         {
-            if (!_EditMode)
-            {
-                _EditMode = true;
-            }
+            if (!_EditMode) _EditMode = true;
             if (_EditMode)
             {
                 solverVelocityIterationCount = Original_solverVelocityIterationCount;
@@ -212,10 +209,20 @@
             }
         }
 
-        internal void FixedUpdate()
-        {
+        #region Forced Rigidbody Method
 
+        private void Force_RigidBody()
+        {
+            if (gameObject.GetComponent<Rigidbody>() == null && Rigidbody == null)
+            {
+                ModConsole.DebugLog($"RigidBodyController : Object {gameObject.name} Spawned Rigidbody..");
+                Rigidbody = gameObject.AddComponent<Rigidbody>();
+                isKinematic = true;
+                Original_isKinematic = true;
+            }
         }
+
+        #endregion Forced Rigidbody Method
 
         #region Rigidbody Reflected Properties
 
@@ -251,575 +258,450 @@
 
         internal int solverVelocityIterationCount
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _solverVelocityIterationCount;
-            }
+            [HideFromIl2Cpp] get => _solverVelocityIterationCount;
             [HideFromIl2Cpp]
             set
             {
                 _solverVelocityIterationCount = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.solverVelocityIterationCount = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal Vector3 inertiaTensor
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _inertiaTensor;
-            }
+            [HideFromIl2Cpp] get => _inertiaTensor;
             [HideFromIl2Cpp]
             set
             {
                 _inertiaTensor = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.inertiaTensor = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal Quaternion inertiaTensorRotation
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _inertiaTensorRotation;
-            }
+            [HideFromIl2Cpp] get => _inertiaTensorRotation;
             [HideFromIl2Cpp]
             set
             {
                 _inertiaTensorRotation = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.inertiaTensorRotation = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal Vector3 centerOfMass
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _centerOfMass;
-            }
+            [HideFromIl2Cpp] get => _centerOfMass;
             [HideFromIl2Cpp]
             set
             {
                 _centerOfMass = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.centerOfMass = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal CollisionDetectionMode collisionDetectionMode
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _collisionDetectionMode;
-            }
+            [HideFromIl2Cpp] get => _collisionDetectionMode;
             [HideFromIl2Cpp]
             set
             {
                 _collisionDetectionMode = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.collisionDetectionMode = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal RigidbodyConstraints constraints
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _constraints;
-            }
+            [HideFromIl2Cpp] get => _constraints;
             [HideFromIl2Cpp]
             set
             {
                 _constraints = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.constraints = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal bool freezeRotation
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _freezeRotation;
-            }
+            [HideFromIl2Cpp] get => _freezeRotation;
             [HideFromIl2Cpp]
             set
             {
                 _freezeRotation = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.freezeRotation = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal float maxDepenetrationVelocity
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _maxDepenetrationVelocity;
-            }
+            [HideFromIl2Cpp] get => _maxDepenetrationVelocity;
             [HideFromIl2Cpp]
             set
             {
                 _maxDepenetrationVelocity = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.maxDepenetrationVelocity = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal bool detectCollisions
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _detectCollisions;
-            }
+            [HideFromIl2Cpp] get => _detectCollisions;
             [HideFromIl2Cpp]
             set
             {
                 _detectCollisions = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.detectCollisions = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal bool useGravity
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _useGravity;
-            }
+            [HideFromIl2Cpp] get => _useGravity;
             [HideFromIl2Cpp]
             set
             {
                 _useGravity = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.useGravity = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal float mass
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _mass;
-            }
+            [HideFromIl2Cpp] get => _mass;
             [HideFromIl2Cpp]
             set
             {
                 _mass = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.mass = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal int solverIterationCount
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _solverIterationCount;
-            }
+            [HideFromIl2Cpp] get => _solverIterationCount;
             [HideFromIl2Cpp]
             set
             {
                 _solverIterationCount = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.solverIterationCount = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal float angularDrag
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _angularDrag;
-            }
+            [HideFromIl2Cpp] get => _angularDrag;
             [HideFromIl2Cpp]
             set
             {
                 _angularDrag = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.angularDrag = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal float drag
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _drag;
-            }
+            [HideFromIl2Cpp] get => _drag;
             [HideFromIl2Cpp]
             set
             {
                 _drag = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.drag = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal Vector3 angularVelocity
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _angularVelocity;
-            }
+            [HideFromIl2Cpp] get => _angularVelocity;
             [HideFromIl2Cpp]
             set
             {
                 _angularVelocity = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.angularVelocity = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal Vector3 velocity
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _velocity;
-            }
+            [HideFromIl2Cpp] get => _velocity;
             [HideFromIl2Cpp]
             set
             {
                 _velocity = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.velocity = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal bool isKinematic
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _isKinematic;
-            }
+            [HideFromIl2Cpp] get => _isKinematic;
             [HideFromIl2Cpp]
             set
             {
                 _isKinematic = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.isKinematic = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal float sleepVelocity
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _sleepVelocity;
-            }
+            [HideFromIl2Cpp] get => _sleepVelocity;
             [HideFromIl2Cpp]
             set
             {
                 _sleepVelocity = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.sleepVelocity = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal float sleepThreshold
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _sleepThreshold;
-            }
+            [HideFromIl2Cpp] get => _sleepThreshold;
             [HideFromIl2Cpp]
             set
             {
                 _sleepThreshold = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.sleepThreshold = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal float maxAngularVelocity
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _maxAngularVelocity;
-            }
+            [HideFromIl2Cpp] get => _maxAngularVelocity;
             [HideFromIl2Cpp]
             set
             {
                 _maxAngularVelocity = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.maxAngularVelocity = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal int solverVelocityIterations
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _solverVelocityIterations;
-            }
+            [HideFromIl2Cpp] get => _solverVelocityIterations;
             [HideFromIl2Cpp]
             set
             {
                 _solverVelocityIterations = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.solverVelocityIterations = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal RigidbodyInterpolation interpolation
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _interpolation;
-            }
+            [HideFromIl2Cpp] get => _interpolation;
             [HideFromIl2Cpp]
             set
             {
                 _interpolation = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.interpolation = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal float sleepAngularVelocity
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _sleepAngularVelocity;
-            }
+            [HideFromIl2Cpp] get => _sleepAngularVelocity;
             [HideFromIl2Cpp]
             set
             {
                 _sleepAngularVelocity = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.sleepAngularVelocity = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal bool useConeFriction
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _useConeFriction;
-            }
+            [HideFromIl2Cpp] get => _useConeFriction;
             [HideFromIl2Cpp]
             set
             {
                 _useConeFriction = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.useConeFriction = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
 
         internal int solverIterations
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _solverIterations;
-            }
+            [HideFromIl2Cpp] get => _solverIterations;
             [HideFromIl2Cpp]
             set
             {
                 _solverIterations = value;
                 if (EditMode)
-                {
                     if (Rigidbody != null)
                     {
                         Rigidbody.solverIterations = value;
                         SyncPhysics.RefreshProperties();
                     }
-                }
+
                 Run_OnRigidBodyPropertyChanged();
             }
         }
@@ -830,10 +712,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (Rigidbody != null)
-                {
-                    return Rigidbody.worldCenterOfMass;
-                }
+                if (Rigidbody != null) return Rigidbody.worldCenterOfMass;
                 return Vector3.zero;
             }
         }
@@ -904,21 +783,6 @@
 
         #endregion Actions To Bind
 
-        #region Forced Rigidbody Method
-
-        private void Force_RigidBody()
-        {
-            if (gameObject.GetComponent<Rigidbody>() == null && Rigidbody == null)
-            {
-                ModConsole.DebugLog($"RigidBodyController : Object {gameObject.name} Spawned Rigidbody..");
-                Rigidbody = gameObject.AddComponent<Rigidbody>();
-                isKinematic = true;
-                Original_isKinematic = true;
-            }
-        }
-
-        #endregion Forced Rigidbody Method
-
         #region Random Methods
 
         internal bool UpdateKinematic(bool isKinematic)
@@ -950,32 +814,25 @@
 
         internal Rigidbody Rigidbody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal SyncPhysics SyncPhysics { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        private bool _EditMode = false;
+        private bool _EditMode;
 
         private bool IsActived = false;
 
         internal bool EditMode
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _EditMode;
-            }
+            [HideFromIl2Cpp] get => _EditMode;
             [HideFromIl2Cpp]
             set
             {
                 if (value != _EditMode)
                 {
                     if (value)
-                    {
                         BackupBasicBody();
-                    }
                     else
-                    {
                         RestoreOriginalBody();
-                    }
                     Run_OnRigidBodyPropertyChanged();
                 }
+
                 _EditMode = value;
             }
         }
@@ -984,11 +841,7 @@
 
         internal bool Forced_Rigidbody
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _Forced_RigidBody;
-            }
+            [HideFromIl2Cpp] get => _Forced_RigidBody;
             [HideFromIl2Cpp]
             set
             {
@@ -1002,10 +855,7 @@
                 }
                 else
                 {
-                    if (_Forced_RigidBody)
-                    {
-                        return;
-                    }
+                    if (_Forced_RigidBody) return;
                 }
             }
         }

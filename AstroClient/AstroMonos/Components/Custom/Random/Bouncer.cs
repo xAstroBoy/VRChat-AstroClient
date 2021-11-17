@@ -4,6 +4,7 @@
     using AstroClient.Tools.Extensions;
     using AstroUdons;
     using ClientAttributes;
+    using Il2CppSystem.Collections.Generic;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -13,21 +14,48 @@
     [RegisterComponent]
     public class Bouncer : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
-
-        public Bouncer(IntPtr obj0) : base(obj0)
-        {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
-            AntiGcList.Add(this);
-        }
+        private bool _IsEnabled = true;
+        public List<AstroMonoBehaviour> AntiGcList;
 
         private bool DebugMode = false;
 
-        private void Debug(string msg)
+        public Bouncer(IntPtr obj0) : base(obj0)
         {
-            if (DebugMode)
+            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList.Add(this);
+        }
+
+        private Vector3 initialVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new(0, 0, 0);
+        private Vector3 lastFrameVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Rigidbody rb { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float minVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
+
+        // TODO : MAKE PLAYER BOUNCE  BACK SUPPORTED AS WELL
+        private float bias { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.5f;
+
+        private float bounceVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
+
+        internal bool BounceTowardPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+        internal bool IsEnabled
+        {
+            [HideFromIl2Cpp] get => _IsEnabled;
+            [HideFromIl2Cpp]
+            set
             {
-                ModConsole.DebugLog($"[Bouncer Debug] : {msg}");
+                _IsEnabled = value;
+                if (VRC_AstroPickup != null)
+                {
+                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
+                    if (value)
+                        VRC_AstroPickup.UseText = "Toggle Bouncy Off";
+                    else
+                        VRC_AstroPickup.UseText = "Toggle Bouncy On";
+                }
             }
         }
 
@@ -37,17 +65,15 @@
             rb = GetComponent<Rigidbody>();
             initialVelocity = rb.velocity;
             PickupController = GetComponent<PickupController>();
-            if (PickupController == null)
-            {
-                PickupController = gameObject.AddComponent<PickupController>();
-            }
+            if (PickupController == null) PickupController = gameObject.AddComponent<PickupController>();
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
             if (VRC_AstroPickup != null)
             {
-                VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
-                VRC_AstroPickup.OnPickupUseDown += new Action(() => { IsEnabled = !IsEnabled; });
-                VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
+                VRC_AstroPickup.OnPickup += () => { isPaused = true; };
+                VRC_AstroPickup.OnPickupUseDown += () => { IsEnabled = !IsEnabled; };
+                VRC_AstroPickup.OnDrop += () => { isPaused = false; };
             }
+
             IsEnabled = true;
         }
 
@@ -56,21 +82,26 @@
             lastFrameVelocity = rb.velocity;
         }
 
+        private void OnDestroy()
+        {
+            gameObject.KillForces();
+            if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
+            PickupController.UseText = OriginalText_Use;
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
-            if (!IsEnabled || isPaused)
-            {
-                return;
-            }
+            if (!IsEnabled || isPaused) return;
             _ = GameObjectUtils.TakeOwnershipIfNecessary(gameObject);
             if (!BounceTowardPlayer)
-            {
                 Bounce(collision.contacts[0].normal);
-            }
             else
-            {
                 BounceToPlayer(collision.contacts[0].normal);
-            }
+        }
+
+        private void Debug(string msg)
+        {
+            if (DebugMode) ModConsole.DebugLog($"[Bouncer Debug] : {msg}");
         }
 
         private void Bounce(Vector3 collisionNormal)
@@ -92,62 +123,6 @@
 
             Debug("Out Direction: " + direction);
             rb.velocity = direction * bounceVelocity;
-        }
-
-        private void OnDestroy()
-        {
-            gameObject.KillForces(true);
-            if (VRC_AstroPickup != null)
-            {
-                Destroy(VRC_AstroPickup);
-            }
-            PickupController.UseText = OriginalText_Use;
-        }
-
-        private Vector3 initialVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new Vector3(0, 0, 0);
-        private Vector3 lastFrameVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Rigidbody rb { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private float minVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
-
-        // TODO : MAKE PLAYER BOUNCE  BACK SUPPORTED AS WELL
-        private float bias { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.5f;
-
-        private float bounceVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
-
-        internal bool BounceTowardPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool _IsEnabled = true;
-
-        internal bool IsEnabled
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _IsEnabled;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                _IsEnabled = value;
-                if (VRC_AstroPickup != null)
-                {
-                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace())
-                    {
-                        OriginalText_Use = PickupController.UseText;
-                    }
-                    if (value)
-                    {
-                        VRC_AstroPickup.UseText = "Toggle Bouncy Off";
-                    }
-                    else
-                    {
-                        VRC_AstroPickup.UseText = "Toggle Bouncy On";
-                    }
-                }
-            }
         }
     }
 }

@@ -6,34 +6,32 @@
     using AstroClient.Tools.Extensions.Components_exts;
     using AstroClient.Tools.ObjectEditor.Online;
     using ClientAttributes;
+    using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
+    using VRC.SDK3.Components;
     using VRC.SDKBase;
     using xAstroBoy.Utility;
 
     [RegisterComponent]
     public class PickupController : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
-
-
-        internal override void OnRoomLeft()
-        {
-            Destroy(this);
-        }
+        public List<AstroMonoBehaviour> AntiGcList;
 
         public PickupController(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+
+        private bool isUsingUI { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // Use this for initialization
         internal void Start()
         {
-            SDKBase_Pickup = gameObject.GetComponent<VRC.SDKBase.VRC_Pickup>();
+            SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
             SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
-            SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
+            SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             SyncProperties(true);
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
@@ -41,28 +39,44 @@
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
         }
 
-        private bool isUsingUI { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private void Update()
+        {
+            PickupProtection();
+        }
 
-        internal override void OnQuickMenuClose() => isUsingUI = false;
 
-        internal override void OnQuickMenuOpen() => isUsingUI = true;
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
-        internal override void OnBigMenuOpen() => isUsingUI = true;
+        internal override void OnQuickMenuClose()
+        {
+            isUsingUI = false;
+        }
 
-        internal override void OnBigMenuClose() => isUsingUI = false;
+        internal override void OnQuickMenuOpen()
+        {
+            isUsingUI = true;
+        }
+
+        internal override void OnBigMenuOpen()
+        {
+            isUsingUI = true;
+        }
+
+        internal override void OnBigMenuClose()
+        {
+            isUsingUI = false;
+        }
 
         private void PickupUpdate()
         {
-            if (gameObject != null && gameObject.active && this.isActiveAndEnabled)
+            if (gameObject != null && gameObject.active && isActiveAndEnabled)
             {
                 Run_onPickupUpdate();
                 if (!EditMode) SyncProperties(true);
             }
-        }
-
-        private void Update()
-        {
-            PickupProtection();
         }
 
         internal override void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
@@ -71,24 +85,15 @@
             {
                 if (isUsingUI) return;
                 if (isClicked)
-                {
                     try
                     {
-
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
-                        {
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
-                            {
-                                gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
-                            }
-                        }
-
-
+                                gameObject.TeleportToMe(HumanBodyBones.RightHand, false);
                     }
                     catch
                     {
                     }
-                }
             }
         }
 
@@ -98,19 +103,15 @@
             {
                 if (isUsingUI) return;
                 if (isClicked)
-                {
                     try
                     {
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
-                        {
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == null)
-                            {
-                                gameObject.TeleportToMe(HumanBodyBones.LeftHand, false, true);
-                            }
-                        }
+                                gameObject.TeleportToMe(HumanBodyBones.LeftHand, false);
                     }
-                    catch{}
-                }
+                    catch
+                    {
+                    }
             }
         }
 
@@ -129,7 +130,7 @@
                     var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
                     if (PickupBlocker.blockeduserids.Contains(id))
                     {
-                        ModConsole.DebugLog($"Prevented {this.gameObject} from being used from Blacklisted user {CurrentHolderDisplayName}");
+                        ModConsole.DebugLog($"Prevented {gameObject} from being used from Blacklisted user {CurrentHolderDisplayName}");
                         OnlineEditor.TakeObjectOwnership(gameObject);
                     }
                 }
@@ -137,23 +138,18 @@
             else
             {
                 if (!CurrentHolder.isLocal)
-                {
-                    if (!OnlineEditor.IsLocalPlayerOwner(gameObject)) OnlineEditor.TakeObjectOwnership(gameObject);
-                }
+                    if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
+                        OnlineEditor.TakeObjectOwnership(gameObject);
             }
         }
 
         internal bool AntiTheft = false;
 
-        private bool _PreventOthersFromGrabbing = false;
+        private bool _PreventOthersFromGrabbing;
 
         internal bool AllowOnlySelfToGrab
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _PreventOthersFromGrabbing;
-            }
+            [HideFromIl2Cpp] get => _PreventOthersFromGrabbing;
             [HideFromIl2Cpp]
             set
             {
@@ -402,11 +398,7 @@
 
         internal Component currentlyHeldBy
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _currentlyHeldBy;
-            }
+            [HideFromIl2Cpp] get => _currentlyHeldBy;
             [HideFromIl2Cpp]
             set
             {
@@ -423,11 +415,7 @@
 
         internal string UseDownEventName
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _UseDownEventName;
-            }
+            [HideFromIl2Cpp] get => _UseDownEventName;
             [HideFromIl2Cpp]
             set
             {
@@ -444,11 +432,7 @@
 
         internal VRCPlayerApi currentLocalPlayer
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _currentLocalPlayer;
-            }
+            [HideFromIl2Cpp] get => _currentLocalPlayer;
             [HideFromIl2Cpp]
             set
             {
@@ -465,11 +449,7 @@
 
         internal float ThrowVelocityBoostScale
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _ThrowVelocityBoostScale;
-            }
+            [HideFromIl2Cpp] get => _ThrowVelocityBoostScale;
             [HideFromIl2Cpp]
             set
             {
@@ -486,11 +466,7 @@
 
         internal float ThrowVelocityBoostMinSpeed
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _ThrowVelocityBoostMinSpeed;
-            }
+            [HideFromIl2Cpp] get => _ThrowVelocityBoostMinSpeed;
             [HideFromIl2Cpp]
             set
             {
@@ -507,11 +483,7 @@
 
         internal string DropEventName
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _DropEventName;
-            }
+            [HideFromIl2Cpp] get => _DropEventName;
             [HideFromIl2Cpp]
             set
             {
@@ -528,11 +500,7 @@
 
         internal string PickupEventName
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _PickupEventName;
-            }
+            [HideFromIl2Cpp] get => _PickupEventName;
             [HideFromIl2Cpp]
             set
             {
@@ -549,11 +517,7 @@
 
         internal bool pickupable
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _pickupable;
-            }
+            [HideFromIl2Cpp] get => _pickupable;
             [HideFromIl2Cpp]
             set
             {
@@ -570,11 +534,7 @@
 
         internal string UseUpEventName
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _UseUpEventName;
-            }
+            [HideFromIl2Cpp] get => _UseUpEventName;
             [HideFromIl2Cpp]
             set
             {
@@ -591,11 +551,7 @@
 
         internal VRC_EventHandler.VrcBroadcastType useEventBroadcastType
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _useEventBroadcastType;
-            }
+            [HideFromIl2Cpp] get => _useEventBroadcastType;
             [HideFromIl2Cpp]
             set
             {
@@ -612,11 +568,7 @@
 
         internal VRC_Pickup.PickupOrientation orientation
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _orientation;
-            }
+            [HideFromIl2Cpp] get => _orientation;
             [HideFromIl2Cpp]
             set
             {
@@ -633,11 +585,7 @@
 
         internal string InteractionText
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _InteractionText;
-            }
+            [HideFromIl2Cpp] get => _InteractionText;
             [HideFromIl2Cpp]
             set
             {
@@ -651,11 +599,7 @@
 
         internal VRC_Pickup.AutoHoldMode AutoHold
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _AutoHold;
-            }
+            [HideFromIl2Cpp] get => _AutoHold;
             [HideFromIl2Cpp]
             set
             {
@@ -669,11 +613,7 @@
 
         internal float proximity
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _proximity;
-            }
+            [HideFromIl2Cpp] get => _proximity;
             [HideFromIl2Cpp]
             set
             {
@@ -690,11 +630,7 @@
 
         internal bool allowManipulationWhenEquipped
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _allowManipulationWhenEquipped;
-            }
+            [HideFromIl2Cpp] get => _allowManipulationWhenEquipped;
             [HideFromIl2Cpp]
             set
             {
@@ -711,11 +647,7 @@
 
         internal Transform ExactGrip
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _ExactGrip;
-            }
+            [HideFromIl2Cpp] get => _ExactGrip;
             [HideFromIl2Cpp]
             set
             {
@@ -732,11 +664,7 @@
 
         internal Transform ExactGun
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _ExactGun;
-            }
+            [HideFromIl2Cpp] get => _ExactGun;
             [HideFromIl2Cpp]
             set
             {
@@ -753,11 +681,7 @@
 
         internal bool DisallowTheft
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _DisallowTheft;
-            }
+            [HideFromIl2Cpp] get => _DisallowTheft;
             [HideFromIl2Cpp]
             set
             {
@@ -774,11 +698,7 @@
 
         internal ForceMode MomentumTransferMethod
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _MomentumTransferMethod;
-            }
+            [HideFromIl2Cpp] get => _MomentumTransferMethod;
             [HideFromIl2Cpp]
             set
             {
@@ -795,11 +715,7 @@
 
         internal string UseText
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _UseText;
-            }
+            [HideFromIl2Cpp] get => _UseText;
             [HideFromIl2Cpp]
             set
             {
@@ -813,11 +729,7 @@
 
         internal VRC_EventHandler.VrcBroadcastType pickupDropEventBroadcastType
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _pickupDropEventBroadcastType;
-            }
+            [HideFromIl2Cpp] get => _pickupDropEventBroadcastType;
             [HideFromIl2Cpp]
             set
             {
@@ -842,9 +754,9 @@
             get
             {
                 if (SDKBase_Pickup != null) return SDKBase_Pickup.IsHeld;
-                else if (SDK2_Pickup != null) return SDK2_Pickup.IsHeld;
-                else if (SDK3_Pickup != null) return SDK3_Pickup.IsHeld;
-                else return false;
+                if (SDK2_Pickup != null) return SDK2_Pickup.IsHeld;
+                if (SDK3_Pickup != null) return SDK3_Pickup.IsHeld;
+                return false;
             }
         }
 
@@ -854,8 +766,8 @@
             get
             {
                 if (SDKBase_Pickup != null) return SDKBase_Pickup.currentHand;
-                else if (SDK2_Pickup != null) return SDK2_Pickup.currentHand;
-                else if (SDK3_Pickup != null) return SDK3_Pickup.currentHand;
+                if (SDK2_Pickup != null) return SDK2_Pickup.currentHand;
+                if (SDK3_Pickup != null) return SDK3_Pickup.currentHand;
                 return VRC_Pickup.PickupHand.None;
             }
         }
@@ -886,6 +798,7 @@
                 catch
                 {
                 }
+
                 return null;
             }
         }
@@ -917,6 +830,7 @@
                 catch
                 {
                 }
+
                 return "None";
             }
         }
@@ -947,6 +861,7 @@
                 catch
                 {
                 }
+
                 return null;
             }
         }
@@ -963,7 +878,6 @@
             if (!HasSetRigidbodyController)
             {
                 if (RigidBodyController != null)
-                {
                     // IF INTERNAL SYNC IS NULL, Force The rigidbody to take over , Then [HideFromIl2Cpp] set it as Kinematic in case no collider is present.
                     if (RigidBodyController.SyncPhysics == null)
                     {
@@ -978,7 +892,7 @@
                             else RigidBodyController.RigidBody_Set_isKinematic(true);
                         }
                     }
-                }
+
                 HasSetRigidbodyController = true;
             }
         }
@@ -1029,9 +943,8 @@
             {
                 SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
                 SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
-                SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
+                SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
                 if (!HasTriedWithSDKBase_Pickup)
-                {
                     if (SDKBase_Pickup == null)
                     {
                         ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
@@ -1049,6 +962,7 @@
                                 SDKBase_Pickup.ExactGrip = gameObject.transform;
                                 ModConsole.DebugLog("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + gameObject.name);
                             }
+
                             if (SDKBase_Pickup.ExactGun == null)
                             {
                                 SDKBase_Pickup.ExactGun = gameObject.transform;
@@ -1060,9 +974,8 @@
                             return;
                         }
                     }
-                }
+
                 if (!HasTriedWithSDK2_Pickup)
-                {
                     if (SDK2_Pickup == null)
                     {
                         ModConsole.DebugLog("PickupController : Attempting to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
@@ -1080,23 +993,24 @@
                                 SDK2_Pickup.ExactGrip = gameObject.transform;
                                 ModConsole.DebugLog("PickupController : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + gameObject.name);
                             }
+
                             if (SDK2_Pickup.ExactGun == null)
                             {
                                 SDK2_Pickup.ExactGun = gameObject.transform;
                                 ModConsole.DebugLog("PickupController : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + gameObject.name);
                             }
+
                             hasRequiredComponentBeenAdded = true;
                             HasTriedWithSDK2_Pickup = true;
                             return;
                         }
                     }
-                }
+
                 if (!HasTriedWithSDK3_Pickup)
-                {
                     if (SDK3_Pickup == null)
                     {
                         ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
-                        SDK3_Pickup = gameObject.AddComponent<VRC.SDK3.Components.VRCPickup>();
+                        SDK3_Pickup = gameObject.AddComponent<VRCPickup>();
                         if (SDK3_Pickup == null)
                         {
                             ModConsole.DebugLog("PickupController : Failed to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
@@ -1110,6 +1024,7 @@
                                 SDK3_Pickup.ExactGrip = gameObject.transform;
                                 ModConsole.DebugLog("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + gameObject.name);
                             }
+
                             if (SDK3_Pickup.ExactGun == null)
                             {
                                 SDK3_Pickup.ExactGun = gameObject.transform;
@@ -1121,7 +1036,7 @@
                             return;
                         }
                     }
-                }
+
                 if (!hasRequiredComponentBeenAdded && HasTriedWithSDKBase_Pickup && HasTriedWithSDK2_Pickup && HasTriedWithSDK3_Pickup)
                 {
                     ModConsole.DebugWarning("Failed to add A Pickup Component to the object : " + gameObject.name);
@@ -1130,26 +1045,21 @@
                     HasTriedWithSDK2_Pickup = false;
                     HasTriedWithSDK3_Pickup = false;
                     hasRequiredComponentBeenAdded = false;
-                    return;
                 }
             }
         }
 
-        private bool HasTriedWithSDKBase_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        private bool HasTriedWithSDK2_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        private bool HasTriedWithSDK3_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        private bool HasSetRigidbodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        private bool hasRequiredComponentBeenAdded { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private bool HasTriedWithSDKBase_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool HasTriedWithSDK2_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool HasTriedWithSDK3_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool HasSetRigidbodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool hasRequiredComponentBeenAdded { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool _ForceComponent = false;
+        private bool _ForceComponent;
 
         internal bool ForceComponent
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _ForceComponent;
-            }
+            [HideFromIl2Cpp] get => _ForceComponent;
             [HideFromIl2Cpp]
             set
             {
@@ -1158,10 +1068,6 @@
                     _ForceComponent = value;
                     if (!hasRequiredComponentBeenAdded) ForcePickupComponent();
                     Run_OnOnPickupPropertyChanged();
-                }
-                else
-                {
-                    return;
                 }
             }
         }
@@ -1180,11 +1086,7 @@
                 if (_SDKBase_Pickup == null) return _SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
                 return _SDKBase_Pickup;
             }
-            [HideFromIl2Cpp]
-            private set
-            {
-                _SDKBase_Pickup = value;
-            }
+            [HideFromIl2Cpp] private set => _SDKBase_Pickup = value;
         }
 
         private VRCSDK2.VRC_Pickup _SDK2_Pickup;
@@ -1197,41 +1099,29 @@
                 if (_SDK2_Pickup == null) return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
                 return _SDK2_Pickup;
             }
-            [HideFromIl2Cpp]
-            private set
-            {
-                _SDK2_Pickup = value;
-            }
+            [HideFromIl2Cpp] private set => _SDK2_Pickup = value;
         }
 
-        private VRC.SDK3.Components.VRCPickup _SDK3_Pickup;
+        private VRCPickup _SDK3_Pickup;
 
-        internal VRC.SDK3.Components.VRCPickup SDK3_Pickup
+        internal VRCPickup SDK3_Pickup
         {
             [HideFromIl2Cpp]
             get
             {
-                if (_SDK3_Pickup == null) return _SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
+                if (_SDK3_Pickup == null) return _SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
                 return _SDK3_Pickup;
             }
-            [HideFromIl2Cpp]
-            private set
-            {
-                _SDK3_Pickup = value;
-            }
+            [HideFromIl2Cpp] private set => _SDK3_Pickup = value;
         }
 
         internal RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        private bool _EditMode = false;
+        private bool _EditMode;
 
         internal bool EditMode
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _EditMode;
-            }
+            [HideFromIl2Cpp] get => _EditMode;
             [HideFromIl2Cpp]
             set
             {

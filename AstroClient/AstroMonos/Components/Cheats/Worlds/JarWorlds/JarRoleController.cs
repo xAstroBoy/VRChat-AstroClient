@@ -18,21 +18,19 @@
     {
         private static bool _ViewRoles;
 
+        internal static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
+
+        internal static JarRoleESP _CurrentPlayerRoleESP;
+
         internal static bool IsMurder4World { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal static bool IsAmongUsWorld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-
-        internal static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
 
         // TODO: Make A Action event to bind on JarRoleESP Component.
 
         internal static bool ViewRoles
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _ViewRoles;
-            }
+            [HideFromIl2Cpp] get => _ViewRoles;
             [HideFromIl2Cpp]
             set
             {
@@ -42,6 +40,7 @@
                     Murder4RolesRevealerToggle.SetToggleState(value);
                     Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
                 }
+
                 if (AmongUSRolesRevealerToggle != null && IsAmongUsWorld)
                 {
                     AmongUSRolesRevealerToggle.SetToggleState(value);
@@ -50,7 +49,6 @@
             }
         }
 
-        internal static JarRoleESP _CurrentPlayerRoleESP = null;
         internal static JarRoleESP CurrentPlayerRoleESP
         {
             [HideFromIl2Cpp]
@@ -71,12 +69,30 @@
         internal static QMToggleButton Murder4RolesRevealerToggle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal static QMToggleButton AmongUSRolesRevealerToggle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal static List<LinkedNodes> JarRoleLinks { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new List<LinkedNodes>();
+        internal static List<LinkedNodes> JarRoleLinks { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new();
 
-        internal static List<JarRoleESP> RoleEspComponents { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new List<JarRoleESP>();
+        internal static List<JarRoleESP> RoleEspComponents { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new();
 
-        internal static LinkedNodes GetLinkedNode(int value) => JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
-        internal static JarRoleESP GetLinkedComponent(int value) => RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
+        internal static string DescPart
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (IsAmongUsWorld) return "ability To see who is the impostor";
+                if (IsMurder4World) return "ability to see who is the murderer";
+                return "WORLD NOT RECOGNIZED!";
+            }
+        }
+
+        internal static LinkedNodes GetLinkedNode(int value)
+        {
+            return JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
+        }
+
+        internal static JarRoleESP GetLinkedComponent(int value)
+        {
+            return RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
+        }
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -93,41 +109,11 @@
         internal override void OnPlayerJoined(Player player)
         {
             if (IsAmongUsWorld || IsMurder4World)
-            {
                 if (JarRoleLinks.Count() != 0 && player != null)
                 {
                     var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
                     if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer)) RoleEspComponents.Add(RoleRevealer);
                 }
-            }
-
-        }
-
-        internal class LinkedNodes
-        {
-            internal Transform Entry { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-            internal Transform Node { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-            internal JarNodeReader NodeReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-            internal int Nodevalue { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-
-            internal LinkedNodes(Transform EntryObj, Transform Nodeobj, JarNodeReader JarNodeReader, int linknumber)
-            {
-                Entry = EntryObj;
-                Node = Nodeobj;
-                NodeReader = JarNodeReader;
-                Nodevalue = linknumber;
-            }
-        }
-
-        internal static string DescPart
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (IsAmongUsWorld) return "ability To see who is the impostor";
-                if (IsMurder4World) return "ability to see who is the murderer";
-                return "WORLD NOT RECOGNIZED!";
-            }
         }
 
         internal static int? RemoveNodeText(Transform node)
@@ -135,20 +121,23 @@
             var replacedstring = node.name.Replace("Player Node ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty);
             if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
             {
-                _ = int.TryParse(replacedstring, out int value);
+                _ = int.TryParse(replacedstring, out var value);
                 return value;
             }
+
             return null;
         }
 
         internal static int? RemoveEntryText(Transform Entry)
         {
-            var replacedstring = Entry.name.Replace("Player Entry ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty); ;
+            var replacedstring = Entry.name.Replace("Player Entry ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty);
+            ;
             if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
             {
-                _ = int.TryParse(replacedstring, out int value);
+                _ = int.TryParse(replacedstring, out var value);
                 return value;
             }
+
             return null;
         }
 
@@ -164,13 +153,20 @@
                 Il2CppArrayBase<Transform> EntryChilds;
                 Il2CppArrayBase<Transform> NodeChilds;
 
-                if (PlayerEntries != null) EntryChilds = PlayerEntries.GetComponentsInChildren<Transform>(true);
+                if (PlayerEntries != null)
+                {
+                    EntryChilds = PlayerEntries.GetComponentsInChildren<Transform>(true);
+                }
                 else
                 {
                     ModConsole.Error("PlayerEntries Returned Null, Ignored Finding Nodes & Entries");
                     return;
                 }
-                if (GameNodes != null) NodeChilds = GameNodes.GetComponentsInChildren<Transform>(true);
+
+                if (GameNodes != null)
+                {
+                    NodeChilds = GameNodes.GetComponentsInChildren<Transform>(true);
+                }
                 else
                 {
                     ModConsole.Error("GameNodes Returned Null, Ignored Finding Nodes & Entries");
@@ -179,9 +175,9 @@
 
                 if (PlayerEntries != null)
                 {
-                    for (int i1 = 0; i1 < EntryChilds.Count; i1++)
+                    for (var i1 = 0; i1 < EntryChilds.Count; i1++)
                     {
-                        Transform Entry = EntryChilds[i1];
+                        var Entry = EntryChilds[i1];
                         if (Entry != null)
                         {
                             // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
@@ -189,12 +185,11 @@
                             if (Entry.name.StartsWith("Player Entry"))
                             {
                                 //Debug($"Found Entry : {Entry.name}, Finding Link in Nodes...");
-                                int? EntryNumber = RemoveEntryText(Entry);
+                                var EntryNumber = RemoveEntryText(Entry);
                                 if (EntryNumber != null)
-                                {
-                                    for (int i = 0; i < NodeChilds.Count; i++)
+                                    for (var i = 0; i < NodeChilds.Count; i++)
                                     {
-                                        Transform node = NodeChilds[i];
+                                        var node = NodeChilds[i];
                                         if (node != null)
                                         {
                                             //if(node.name.Equals("Player Nodes"))
@@ -203,12 +198,10 @@
                                             //}
                                             // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
                                             if (node.gameObject == GameNodes) continue;
-                                            int? NodeNumber = RemoveNodeText(node);
+                                            var NodeNumber = RemoveNodeText(node);
                                             if (NodeNumber != null)
-                                            {
                                                 //Debug($"Comparing Entry Nr. {EntryNumber} Having Name {Entry.name} with Node nr {NodeNumber} having Name {node.name}");
                                                 if (NodeNumber == EntryNumber)
-                                                {
                                                     //Debug($"Linked Player Entry : {Entry.name}, With node : {node.name}, with link : {NodeNumber}");
                                                     if (node != null)
                                                     {
@@ -218,25 +211,21 @@
                                                             var addme = new LinkedNodes(Entry, node, NodeReader, NodeNumber.Value);
 
                                                             if (GetLinkedNode(addme.Nodevalue) != null) continue;
-                                                            else
+
+                                                            if (!JarRoleLinks.Contains(addme))
                                                             {
-                                                                if (!JarRoleLinks.Contains(addme))
-                                                                {
-                                                                    JarRoleLinks.Add(addme);
-                                                                    //Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
-                                                                    break;
-                                                                }
+                                                                JarRoleLinks.Add(addme);
+                                                                //Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
+                                                                break;
                                                             }
                                                         }
                                                     }
-                                                }
-                                            }
                                         }
                                     }
-                                }
                             }
                         }
                     }
+
                     ModConsole.DebugLog($"[Jar Role Revealer] Registered {JarRoleLinks.Count()} Linked Nodes and Player Entries. ({DescPart})");
                 }
                 else
@@ -245,6 +234,22 @@
                     if (IsAmongUsWorld) ModConsole.Error("Player List Group Path in Among us Changed! Unable to Reveal Roles!");
                 }
             }
+        }
+
+        internal class LinkedNodes
+        {
+            internal LinkedNodes(Transform EntryObj, Transform Nodeobj, JarNodeReader JarNodeReader, int linknumber)
+            {
+                Entry = EntryObj;
+                Node = Nodeobj;
+                NodeReader = JarNodeReader;
+                Nodevalue = linknumber;
+            }
+
+            internal Transform Entry { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+            internal Transform Node { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+            internal JarNodeReader NodeReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+            internal int Nodevalue { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         }
     }
 }

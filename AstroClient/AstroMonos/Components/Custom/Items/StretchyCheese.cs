@@ -20,16 +20,16 @@
             AntiGcList.Add(this);
         }
 
+        private UdonBehaviour_Cached ExtendCheese { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal VRC_AstroPickup PickupBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
+
         private void Start()
         {
             ExtendCheese = UdonSearch.FindUdonEvent(gameObject, "Extend");
             if (ExtendCheese != null)
             {
                 var PickupBehaviour = gameObject.AddComponent<VRC_AstroPickup>();
-                if (PickupBehaviour != null)
-                {
-                    PickupBehaviour.OnPickupUseUp += () => { ExtendCheese.ExecuteUdonEvent(); };
-                }
+                if (PickupBehaviour != null) PickupBehaviour.OnPickupUseUp += () => { ExtendCheese.ExecuteUdonEvent(); };
             }
             else
             {
@@ -38,31 +38,19 @@
             }
         }
 
-        private void OnDestroy()
+        private void OnEnable()
         {
-            if (PickupBehaviour != null)
-            {
-                Destroy(PickupBehaviour);
-            }
+            if (PickupBehaviour != null) PickupBehaviour.enabled = true;
         }
 
         private void OnDisable()
         {
-            if (PickupBehaviour != null)
-            {
-                PickupBehaviour.enabled = false;
-            }
+            if (PickupBehaviour != null) PickupBehaviour.enabled = false;
         }
 
-        private void OnEnable()
+        private void OnDestroy()
         {
-            if (PickupBehaviour != null)
-            {
-                PickupBehaviour.enabled = true;
-            }
+            if (PickupBehaviour != null) Destroy(PickupBehaviour);
         }
-
-        private UdonBehaviour_Cached ExtendCheese { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal VRC_AstroPickup PickupBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
     }
 }

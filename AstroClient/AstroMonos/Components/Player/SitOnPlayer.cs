@@ -14,29 +14,13 @@
         private static HumanBodyBones TargetBone;
         private static GameObject Target;
         private static GameObject Self;
-        internal static bool IsEnabled { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        internal static float Height { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0f;
 
         public SitOnPlayer(IntPtr obj0) : base(obj0)
         {
         }
 
-        internal static void AttachToTarget(Player targetPlayer, HumanBodyBones targetBone)
-        {
-            Detach();
-            Self.gameObject.GetComponent<CharacterController>().enabled = false;
-            TargetPlayer = targetPlayer;
-            TargetBone = targetBone;
-            IsEnabled = true;
-        }
-
-        internal static void Detach()
-        {
-            Self.gameObject.GetComponent<CharacterController>().enabled = true;
-            TargetBone = HumanBodyBones.Head;
-            Target = null;
-            IsEnabled = false;
-        }
+        internal static bool IsEnabled { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal static float Height { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal void Start()
         {
@@ -60,6 +44,23 @@
 
                 Self.transform.position = Target.transform.position + new Vector3(0, Height, 0);
             }
+        }
+
+        internal static void AttachToTarget(Player targetPlayer, HumanBodyBones targetBone)
+        {
+            Detach();
+            Self.gameObject.GetComponent<CharacterController>().enabled = false;
+            TargetPlayer = targetPlayer;
+            TargetBone = targetBone;
+            IsEnabled = true;
+        }
+
+        internal static void Detach()
+        {
+            Self.gameObject.GetComponent<CharacterController>().enabled = true;
+            TargetBone = HumanBodyBones.Head;
+            Target = null;
+            IsEnabled = false;
         }
     }
 }

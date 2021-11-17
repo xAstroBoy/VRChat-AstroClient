@@ -3,19 +3,45 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
     using System;
     using AstroUdons;
     using ClientAttributes;
+    using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
     public class FlashlightBehaviour : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        private bool _IsFlashlightActive;
+        public List<AstroMonoBehaviour> AntiGcList;
 
         public FlashlightBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+
+        internal bool IsFlashlightActive
+        {
+            [HideFromIl2Cpp] get => _IsFlashlightActive;
+            [HideFromIl2Cpp]
+            set
+            {
+                _IsFlashlightActive = value;
+                if (FlashLight_Light != null && ToggleLightTrigger != null)
+                {
+                    FlashLight_Light.enabled = value;
+                    if (FlashLight_Light.enabled) ToggleLightTrigger.UseText = OffText;
+                    else ToggleLightTrigger.UseText = OnText;
+                }
+            }
+        }
+
+        internal string OnText { [HideFromIl2Cpp] get; } = "Turn On Flashlight";
+        internal string OffText { [HideFromIl2Cpp] get; } = "Turn Off Flashlight";
+        internal GameObject FlashLight_Base { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal GameObject FlashLight_Body { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal GameObject FlashLight_Head { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Light FlashLight_Light { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal VRC_AstroPickup ToggleLightTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
 
         internal void InitiateLight()
         {
@@ -37,38 +63,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             }
         }
 
-        private void ToggleFlashLight() { IsFlashlightActive = !IsFlashlightActive; }
-
-        private bool _IsFlashlightActive;
-
-        internal bool IsFlashlightActive
+        private void ToggleFlashLight()
         {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _IsFlashlightActive;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                _IsFlashlightActive = value;
-                if (FlashLight_Light != null && ToggleLightTrigger != null)
-                {
-                    FlashLight_Light.enabled = value;
-                    if (FlashLight_Light.enabled) ToggleLightTrigger.UseText = OffText;
-                    else ToggleLightTrigger.UseText = OnText;
-                }
-            }
+            IsFlashlightActive = !IsFlashlightActive;
         }
-
-        internal string OnText { [HideFromIl2Cpp] get; } = "Turn On Flashlight";
-        internal string OffText { [HideFromIl2Cpp] get; } = "Turn Off Flashlight";
-        internal GameObject FlashLight_Base { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal GameObject FlashLight_Body { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal GameObject FlashLight_Head { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal Light FlashLight_Light { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal VRC_AstroPickup ToggleLightTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
     }
-
-
 }

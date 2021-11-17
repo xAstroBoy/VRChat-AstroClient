@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.AstroMonos.Components.Tools.KeycodeRevealer
 {
     using System;
-    using System.Collections.Generic;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.Extensions.Components_exts;
     using CheetosUI;
     using ClientAttributes;
+    using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using xAstroBoy.Extensions;
@@ -13,13 +13,23 @@
     [RegisterComponent]
     public class KeypadRevealer : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public List<AstroMonoBehaviour> AntiGcList;
 
         public KeypadRevealer(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+
+        private System.Collections.Generic.List<string> PasswordsVariables { [HideFromIl2Cpp] get; } = new()
+        {
+            "password",
+            "solution",
+            "code",
+            "PassCode",
+            "correctCodes",
+            "PinCode"
+        };
 
         // Use this for initialization
         private void Start()
@@ -35,21 +45,23 @@
             }
         }
 
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
+
         private bool FindAndRevealPassword()
         {
             foreach (var item in PasswordsVariables)
             {
-                var UdonObj = this.gameObject.FindUdonVariable(item);
+                var UdonObj = gameObject.FindUdonVariable(item);
                 if (UdonObj != null)
                 {
                     var heaptostring = UdonObj.UnboxUdonHeap();
                     if (heaptostring.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         var cleaned = heaptostring.RemoveWhitespace();
-                        if (HasFailedUnpacking(heaptostring) || isInvalidPasscode(cleaned))
-                        {
-                            continue;
-                        }
+                        if (HasFailedUnpacking(heaptostring) || isInvalidPasscode(cleaned)) continue;
 
                         // At this point it should contain the keycode password.
                         GenerateButtonWithPassword(Environment.NewLine + cleaned + Environment.NewLine);
@@ -57,6 +69,7 @@
                     }
                 }
             }
+
             return false;
         }
 
@@ -74,20 +87,10 @@
             return value == "_" || value == "-";
         }
 
-        private List<string> PasswordsVariables { [HideFromIl2Cpp] get; } = new List<string>
-        {
-            "password",
-            "solution",
-            "code",
-            "PassCode",
-            "correctCodes",
-            "PinCode",
-        };
-
         internal void GenerateButtonWithPassword(string password)
         {
-            Vector3? buttonPosition = this.gameObject.transform.position + new Vector3(0, 0.5f, 0);
-            Quaternion? buttonRotation = this.gameObject.transform.rotation;
+            Vector3? buttonPosition = gameObject.transform.position + new Vector3(0, 0.5f, 0);
+            Quaternion? buttonRotation = gameObject.transform.rotation;
             if (buttonRotation != null && buttonRotation != null)
             {
                 var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, password, null);
