@@ -24,6 +24,8 @@
         private Murder4Roles _Murder4CurrentRole = Murder4Roles.Unassigned;
 
         private List<Object> AntiGarbageCollection = new();
+
+
         //-----------------------------------------------------------
         //Could separate the murder 4 and among us role esps into 2 seperate classes
         //-----------------------------------------------------------
@@ -430,7 +432,6 @@
             if (LinkedNode != null)
             {
                 if (ESP != null)
-                    if (ESP.UseCustomColor != ViewRoles)
                         ESP.UseCustomColor = ViewRoles;
                 if (ViewRoles)
                 {
@@ -471,7 +472,7 @@
             if (LinkedNode != null)
             {
                 AmongUSVoteRevealTag ??= SingleTagsUtils.AddSingleTag(Player);
-                if (ESP != null && ESP.UseCustomColor != ViewRoles) ESP.UseCustomColor = ViewRoles;
+                if (ESP != null) ESP.UseCustomColor = ViewRoles;
                 if (ViewRoles)
                 {
                     if (AmongUSHasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
