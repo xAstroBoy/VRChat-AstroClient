@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.ClientUI.Menu
 {
     using AstroMonos;
+    using Cheetos;
     using Constants;
     using Experiments;
     using ItemTweakerV2;
@@ -27,6 +28,10 @@
 
         #endregion Buttons
 
+        internal override void VRChat_OnQuickMenuInit()
+        {
+            InitMainsButtons();
+        }
 
         internal static void InitMainsButtons()
         {
@@ -38,11 +43,6 @@
             SkyboxScrollMenu.InitButtons(AstroClient);
             LightControlMenu.InitButtons(AstroClient);
             GameObjectMenu.InitButtons(AstroClient);
-            if (Bools.IsDeveloper)
-            {
-                MapEditorMenu.InitButtons(AstroClient);
-            }
-
             WorldPickupsBtn.InitButtons(AstroClient);
 
             ComponentsBtn.InitButtons(AstroClient);
@@ -52,11 +52,18 @@
             CameraTweaker.InitQMMenu(AstroClient);
 
             SettingsMenuBtn.InitButtons(AstroClient);
+            if (Bools.IsDeveloper)
+            {
+                MapEditorMenu.InitButtons(AstroClient);
+                Kaned.Pathfinding.InitMenu(AstroClient);
+                CheetosWIP.InitCheetosWIPMenu(AstroClient);
+            }
 
-            ToggleDebugInfo = new QMToggleButton(AstroClient, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", null, null, null, Bools.AntiPortal);
-            // Top Right Buttons
+            ToggleDebugInfo = new QMToggleButton(AstroClient, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", null, null, null, Bools.IsDebugMode);
             ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
 
+
+            // Tabs.
             ExploitsMenu.InitButtons(TabIndexs.Exploits);
             WorldsCheats.InitButtons(TabIndexs.Cheats);
             HistoryMenu.InitButtons(TabIndexs.History);
@@ -65,10 +72,9 @@
 
             // Misc
             TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
-            ModConsole.DebugLog("Done.");
-
             CheatsShortcutButton.Init_Cheats_ShortcutBtn();
 
+            ModConsole.DebugLog("Main UI Created!.");
             //_ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>
             //{
             //    GameObjMenu.ReturnToRoot();

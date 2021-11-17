@@ -20,18 +20,18 @@
         private static bool DoOnce;
         private static WebSocket ws;
 
-        internal override void VRChat_OnQuickMenuInit()
-        {
-            var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
-            var infobartext = GameObject.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar/EarlyAccessText").GetComponent<Text>();
+        //internal override void VRChat_OnQuickMenuInit()
+        //{
+        //    var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
+        //    var infobartext = GameObject.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar/EarlyAccessText").GetComponent<Text>();
 
-            infobartext.color = new Color(1, 0, 1, 1);
+        //    infobartext.color = new Color(1, 0, 1, 1);
 
-            infoBar.transform.localPosition -= new Vector3(0, 110, 0);
-            infobartext.text = "AstroClient";
+        //    infoBar.transform.localPosition -= new Vector3(0, 110, 0);
+        //    infobartext.text = "AstroClient";
 
-            //_ = MelonCoroutines.Start(Connect());
-        }
+        //    //_ = MelonCoroutines.Start(Connect());
+        //}
 
         //private static IEnumerator Connect()
         //{

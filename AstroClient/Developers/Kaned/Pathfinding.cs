@@ -12,26 +12,26 @@
 
     internal class Pathfinding : AstroEvents
     {
-        private float coarseness = 0.2f;
-        private int maxMSPerFrame = 25;
+        private static float coarseness = 0.2f;
+        private static int maxMSPerFrame = 25;
 
-        internal Player targetedPlayer;
+        internal static Player targetedPlayer;
 
-        internal List<Hunter> hunters = new List<Hunter>();
+        internal static List<Hunter> hunters = new List<Hunter>();
 
         //List<GameObject> indicators = new List<GameObject>();
 
-        internal QMNestedButton WIPMenu { get; private set; }
-        internal QMSingleButton[] buttons;
-        internal QMSingleButton targetInfo;
-        internal QMSingleButton hunterInfo;
-        internal bool followingState = false;
+        internal static QMNestedGridMenu WIPMenu { get; private set; }
+        internal static QMSingleButton[] buttons;
+        internal static QMSingleButton targetInfo;
+        internal static QMSingleButton hunterInfo;
+        internal static bool followingState = false;
 
         //Get the difference between the current cost and its parent's cost to get the fraction by which to lerp each frame
 
-        internal override void VRChat_OnQuickMenuInit()
+        internal static void InitMenu(QMGridTab main)
         {
-            WIPMenu = new QMNestedButton("MainMenu", 5, 4.5f, "KWIP", "WIP Features", btnTextColor: Color.red, btnHalf: true);
+            WIPMenu = new QMNestedGridMenu(main, "Khaned WIP", "WIP Features", null, Color.red, null, null, false);
 
             _ = new QMSingleButton(WIPMenu, 1, 0, "Select Objects", () =>
             {
@@ -211,7 +211,7 @@
             }
         }
 
-        private void RefreshInfo()
+        private static void RefreshInfo()
         {
             targetInfo.SetButtonText($"Player: {(targetedPlayer == null ? "No Target" : targetedPlayer.GetDisplayName())}");
             hunterInfo.SetButtonText($"Active Hunters: {hunters.Count}");

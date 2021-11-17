@@ -412,7 +412,6 @@
     <Compile Include="ClientUI\Menu\Menus\DevMenu.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AstroInput.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AvatarHider.cs" />
-    <Compile Include="Developers\Cheetos\CheetosUI\CheetoMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\AdminMenu.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\ForceClone.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\VRCPlusHider.cs" />
