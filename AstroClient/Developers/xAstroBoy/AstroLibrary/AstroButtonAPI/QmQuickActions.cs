@@ -24,10 +24,17 @@
             return menuName;
         }
 
+
+        internal GameObject GetButtonsMenu()
+        {
+            return QuickActions;
+        }
+
+
         internal void initButton(int Index, string Menu, string Title, Color32 TextColor)
         {
             btnType = "_QMQuickActions_";
-
+            menuName = Menu;
             switch (Menu)
             {
                 case "MainMenu":

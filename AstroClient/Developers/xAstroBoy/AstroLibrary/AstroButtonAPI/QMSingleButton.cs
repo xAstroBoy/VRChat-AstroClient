@@ -43,8 +43,8 @@
 
         internal QMSingleButton(QmQuickActions baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
-            btnQMLoc = baseMenu.Header.name;
-            ButtonsMenu = baseMenu.QuickActions;
+            btnQMLoc = baseMenu.GetMenuName();
+            ButtonsMenu = baseMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip);
 
             if (btnHalf)
