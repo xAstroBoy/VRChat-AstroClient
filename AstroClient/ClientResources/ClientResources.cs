@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.ClientResources
 {
-    using System.Reflection;
     using CheetoLibrary.Utility;
+    using System.Reflection;
     using UnityEngine;
 
     internal static class ClientResources
@@ -29,7 +29,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads 1.png in resources as sprite
         /// </summary>
@@ -48,7 +47,7 @@
             }
         }
 
-        #endregion
+        #endregion 1.png
 
         #region 2.png
 
@@ -73,7 +72,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads 2.png in resources as sprite
         /// </summary>
@@ -92,7 +90,7 @@
             }
         }
 
-        #endregion
+        #endregion 2.png
 
         #region 3.png
 
@@ -117,7 +115,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads 3.png in resources as sprite
         /// </summary>
@@ -136,7 +133,7 @@
             }
         }
 
-        #endregion
+        #endregion 3.png
 
         #region 4.png
 
@@ -161,7 +158,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads 4.png in resources as sprite
         /// </summary>
@@ -180,7 +176,7 @@
             }
         }
 
-        #endregion
+        #endregion 4.png
 
         #region 5.png
 
@@ -205,7 +201,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads 5.png in resources as sprite
         /// </summary>
@@ -224,7 +219,7 @@
             }
         }
 
-        #endregion
+        #endregion 5.png
 
         #region 6.png
 
@@ -249,7 +244,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads 6.png in resources as sprite
         /// </summary>
@@ -268,7 +262,7 @@
             }
         }
 
-        #endregion
+        #endregion 6.png
 
         #region 7.png
 
@@ -293,7 +287,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads 7.png in resources as sprite
         /// </summary>
@@ -312,7 +305,7 @@
             }
         }
 
-        #endregion
+        #endregion 7.png
 
         #region badge.png
 
@@ -337,7 +330,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads badge.png in resources as sprite
         /// </summary>
@@ -356,7 +348,7 @@
             }
         }
 
-        #endregion
+        #endregion badge.png
 
         #region blank.png
 
@@ -381,7 +373,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads blank.png in resources as sprite
         /// </summary>
@@ -400,7 +391,7 @@
             }
         }
 
-        #endregion
+        #endregion blank.png
 
         #region box.png
 
@@ -425,7 +416,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads box.png in resources as sprite
         /// </summary>
@@ -444,7 +434,7 @@
             }
         }
 
-        #endregion
+        #endregion box.png
 
         #region button.png
 
@@ -469,7 +459,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads button.png in resources as sprite
         /// </summary>
@@ -488,7 +477,7 @@
             }
         }
 
-        #endregion
+        #endregion button.png
 
         #region cancel.png
 
@@ -513,7 +502,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads cancel.png in resources as sprite
         /// </summary>
@@ -532,7 +520,7 @@
             }
         }
 
-        #endregion
+        #endregion cancel.png
 
         #region check.png
 
@@ -557,7 +545,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads check.png in resources as sprite
         /// </summary>
@@ -576,7 +563,7 @@
             }
         }
 
-        #endregion
+        #endregion check.png
 
         #region history.png
 
@@ -602,7 +589,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads history.png in resources as sprite
         /// </summary>
@@ -621,7 +607,7 @@
             }
         }
 
-        #endregion
+        #endregion history.png
 
         #region planet.png
 
@@ -646,7 +632,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads planet.png in resources as sprite
         /// </summary>
@@ -665,7 +650,7 @@
             }
         }
 
-        #endregion
+        #endregion planet.png
 
         #region repair.png
 
@@ -690,7 +675,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads repair.png in resources as sprite
         /// </summary>
@@ -709,7 +693,7 @@
             }
         }
 
-        #endregion
+        #endregion repair.png
 
         #region thief.png
 
@@ -734,7 +718,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads thief.png in resources as sprite
         /// </summary>
@@ -753,7 +736,7 @@
             }
         }
 
-        #endregion
+        #endregion thief.png
 
         #region shuttle.png
 
@@ -779,7 +762,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads shuttle.png in resources as sprite
         /// </summary>
@@ -798,7 +780,7 @@
             }
         }
 
-        #endregion
+        #endregion shuttle.png
 
         #region save.png
 
@@ -823,7 +805,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads save.png in resources as sprite
         /// </summary>
@@ -842,7 +823,7 @@
             }
         }
 
-        #endregion
+        #endregion save.png
 
         #region locked.png
 
@@ -867,7 +848,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads locked.png in resources as sprite
         /// </summary>
@@ -886,7 +866,7 @@
             }
         }
 
-        #endregion
+        #endregion locked.png
 
         #region unlocked.png
 
@@ -911,7 +891,6 @@
             }
         }
 
-
         /// <summary>
         ///     Loads unlocked.png in resources as sprite
         /// </summary>
@@ -930,6 +909,6 @@
             }
         }
 
-        #endregion
+        #endregion unlocked.png
     }
 }
