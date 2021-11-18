@@ -638,7 +638,7 @@
                         }
                     }
 
-                    if (!RoleSwapper_GetDetectiveRole || RoleSwapper_GetMurdererRole || !SafetySwap) return;
+                    if (!RoleSwapper_GetDetectiveRole || !RoleSwapper_GetMurdererRole || SafetySwap) return;
                     if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject != null)
                     {
                         if (RoleSwapper_GetDetectiveRole)
