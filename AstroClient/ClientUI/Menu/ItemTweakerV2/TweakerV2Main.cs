@@ -5,6 +5,7 @@
     using ClientResources;
     using Constants;
     using Handlers;
+    using ScrollMenus.GameObjectToggler;
     using ScrollMenus.Pickup;
     using ScrollMenus.Udon;
     using ScrollMenus.VRC_Interactable;

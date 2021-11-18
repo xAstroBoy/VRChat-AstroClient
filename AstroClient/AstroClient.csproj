@@ -474,7 +474,7 @@
     <Compile Include="Tools\ObjectEditor\Editor\Scale\ScaleEditor.cs" />
     <Compile Include="Tools\ObjectEditor\ObjectMiscTools.cs" />
     <Compile Include="Tools\ObjectEditor\Online\OnlineEditor.cs" />
-    <Compile Include="GameObjMenu.cs" />
+    <Compile Include="ClientUI\Menu\ItemTweakerV2\ScrollMenus\GameObjectToggler\GameObjectTogglerScrollMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\MapEditorMenu.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\EspHandler.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\ListenerHandler.cs" />

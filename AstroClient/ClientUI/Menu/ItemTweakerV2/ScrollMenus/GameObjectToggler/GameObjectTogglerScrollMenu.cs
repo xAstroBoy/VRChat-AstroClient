@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.GameObjectToggler
 {
     #region Imports
 

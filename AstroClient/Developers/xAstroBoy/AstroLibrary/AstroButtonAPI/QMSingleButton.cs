@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
 {
     using System;
-    using global::AstroButtonAPI;
     using TMPro;
     using Tools.Colors;
     using UnhollowerRuntimeLib;

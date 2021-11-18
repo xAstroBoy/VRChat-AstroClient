@@ -1,7 +1,6 @@
-﻿namespace AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
 {
     using AstroClient;
-    using AstroClient.xAstroBoy.AstroButtonAPI;
 
     internal static class MenuAPI_New
     {
