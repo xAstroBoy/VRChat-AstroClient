@@ -40,7 +40,6 @@
         internal override void OnApplicationStart()
         {
             RegisterComponent<AstroMonoBehaviour>();
-            RegisterComponent<JarControllerEvents>();
 
             var classes = Assembly.GetExecutingAssembly().GetTypes();
             for (int i = 0; i < classes.Length; i++)
@@ -55,7 +54,6 @@
                 }
             }
 
-            //RegisterComponent<Murder4PatronUnlocker>();
 
             if (Bools.AllowAttackerComponent) RegisterComponent<PlayerAttacker>();
 

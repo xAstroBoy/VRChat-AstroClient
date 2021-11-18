@@ -274,6 +274,7 @@
                 SafetySwap = false;
                 return false;
             }
+            SafetySwap = true;
 
             MiscUtils.DelayFunction(0.01f, new Action(() =>
             {
@@ -291,7 +292,6 @@
                 }
             }));
 
-            SafetySwap = true;
 
             SafetySwap = false;
             return false; // Deactivate.

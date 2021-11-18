@@ -274,7 +274,6 @@
     <Compile Include="AstroMonos\Components\Custom\Items\Flashlight.cs" />
     <Compile Include="AstroMonos\Components\Malicious\OrbitManager.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\StretchyCheese.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarControllerEvents.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarNodeReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronUnlocker.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Orbit\OrbitBehaviour.cs" />

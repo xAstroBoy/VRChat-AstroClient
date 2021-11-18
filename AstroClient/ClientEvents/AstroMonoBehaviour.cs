@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using AstroEventArgs;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using Cheetos;
+    using ClientUI.Menu.ESP;
     using Moderation;
     using Photon.Realtime;
     using Startup.Hooks;
@@ -72,6 +74,9 @@
             InputPatches.Event_OnInput_UseRight += Internal_OnInput_UseRight;
             InputPatches.Event_OnInput_GrabLeft += Internal_OnInput_GrabLeft;
             InputPatches.Event_OnInput_GrabRight += Internal_OnInput_GrabRight;
+
+            JarRoleController.Event_OnViewRolesPropertyChanged += Internal_OnViewRolesPropertyChanged;
+            PlayerESPMenu.Event_OnPlayerESPPropertyChanged += Internal_OnPlayerESPPropertyChanged;
 
         }
 
@@ -253,6 +258,9 @@
         {
             OnInput_GrabRight(e.isClicked, e.isDown, e.isUp);
         }
+        private void Internal_OnViewRolesPropertyChanged(object sender, BoolEventsArgs e) => OnViewRolesPropertyChanged(e.value);
+
+        private void Internal_OnPlayerESPPropertyChanged(object sender, BoolEventsArgs e) => OnPlayerESPPropertyChanged(e.value);
 
         internal virtual void VRChat_OnUiManagerInit()
         {
@@ -383,6 +391,10 @@
         internal virtual void OnViewRolesPropertyChanged(bool value)
         {
         }
+
+        internal virtual void OnPlayerESPPropertyChanged(bool value) { }
+
+
         internal virtual void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
         {
         }

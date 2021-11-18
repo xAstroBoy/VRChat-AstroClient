@@ -138,6 +138,7 @@
                         }
                         catch
                         {
+                            return true;
                         }
 
                         return true;
@@ -174,6 +175,7 @@
                     }
                     catch
                     {
+                        return true;
                     }
 
                     return true;
@@ -199,9 +201,11 @@
             }
             catch(Exception e)
             {
-
+                ModConsole.DebugErrorExc(e);
                 return true;
             }
+
+            return true;
         }
     }
 }

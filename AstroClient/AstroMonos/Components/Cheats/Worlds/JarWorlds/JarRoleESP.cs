@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
-    using System;
-    using System.Linq;
     using AstroClient.Tools.Colors;
     using ClientAttributes;
     using ESP.Player;
     using Il2CppSystem.Collections.Generic;
+    using System;
+    using System.Linq;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -17,7 +17,7 @@
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class JarRoleESP : JarControllerEvents
+    public class JarRoleESP : AstroMonoBehaviour
     {
         private AmongUsRoles _AmongUsCurrentRole = AmongUsRoles.Unassigned;
 
@@ -25,11 +25,9 @@
 
         private List<Object> AntiGarbageCollection = new();
 
-
         //-----------------------------------------------------------
         //Could separate the murder 4 and among us role esps into 2 seperate classes
         //-----------------------------------------------------------
-
 
         public JarRoleESP(IntPtr ptr) : base(ptr)
         {
@@ -40,7 +38,8 @@
 
         internal bool AmongUSHasVoted
         {
-            [HideFromIl2Cpp] get => _AmongUSHasVoted;
+            [HideFromIl2Cpp]
+            get => _AmongUSHasVoted;
 
             [HideFromIl2Cpp]
             set
@@ -71,11 +70,10 @@
             }
         }
 
-        internal bool IsRPCActive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-
         internal AmongUsRoles AmongUsCurrentRole
         {
-            [HideFromIl2Cpp] get => _AmongUsCurrentRole;
+            [HideFromIl2Cpp]
+            get => _AmongUsCurrentRole;
             [HideFromIl2Cpp]
             private set
             {
@@ -86,7 +84,8 @@
 
         internal Murder4Roles Murder4CurrentRole
         {
-            [HideFromIl2Cpp] get => _Murder4CurrentRole;
+            [HideFromIl2Cpp]
+            get => _Murder4CurrentRole;
             [HideFromIl2Cpp]
             private set
             {
@@ -101,7 +100,8 @@
 
         internal bool IsSelf
         {
-            [HideFromIl2Cpp] get => Player.GetAPIUser().IsSelf;
+            [HideFromIl2Cpp]
+            get => Player.GetAPIUser().IsSelf;
         }
 
         internal bool ViewRoles { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
@@ -116,15 +116,18 @@
 
         // MURDER 4 MAP
         internal Color MurderColor { [HideFromIl2Cpp] get; } = new(0.5377358f, 0.1648718f, 0.1728278f, 1f);
+
         internal Color BystanderColor { [HideFromIl2Cpp] get; } = new(0.3428266f, 0.5883213f, 0.6792453f, 1f);
         internal Color DetectiveColor { [HideFromIl2Cpp] get; } = new(0.2976544f, 0.251424f, 0.4716981f, 1f);
 
         // AMONG US MAP
         internal Color ImpostorColor { [HideFromIl2Cpp] get; } = new(0.5377358f, 0.1648718f, 0.1728278f, 1f);
+
         internal Color CrewmateColor { [HideFromIl2Cpp] get; } = new(0f, 0.3228593f, 0.8396226f, 1f);
 
         // GENERAL
         internal Color Unassigned { [HideFromIl2Cpp] get; } = new(0.5f, 0.5f, 0.5f, 1f);
+
         internal Color NoRolesAssigned { [HideFromIl2Cpp] get; } = new(0f, 0f, 0f, 0f);
 
         // Use this for initialization
@@ -135,7 +138,6 @@
                 Player = p;
             else
                 Destroy(this);
-            IsRPCActive = false;
             if (ESP == null && !IsSelf) ESP = Player.gameObject.GetComponent<PlayerESP>();
             GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
             if (IsAmongUsWorld)
@@ -206,6 +208,11 @@
         {
             try
             {
+                if (LinkedNode == null) return;
+                if (LinkedNode.Entry == null) return;
+                if (LinkedNode.Node == null) return;
+                if (LinkedNode.Node.gameObject == null) return;
+                if (sender == null) return;
                 if (obj != null)
                 {
                     if (IsAmongUsWorld)
@@ -215,24 +222,20 @@
                             if (action == "SyncAssignB")
                             {
                                 AmongUsCurrentRole = AmongUsRoles.Crewmate;
-                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action == "SyncAssignM")
                             {
                                 AmongUsCurrentRole = AmongUsRoles.Impostor;
-                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action == "SyncKill")
                             {
                                 AmongUsCurrentRole = AmongUsRoles.None;
                                 AmongUSHasVoted = false;
-                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action == "SyncVotedOut")
                             {
                                 AmongUsCurrentRole = AmongUsRoles.None;
                                 AmongUSHasVoted = false;
-                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action.Contains("SyncVotedFor"))
                             {
@@ -246,13 +249,11 @@
                                 }
 
                                 AmongUSHasVoted = true;
-                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action.Equals("SyncAbstainedVoting"))
                             {
                                 _ = SetTag(AmongUSVoteRevealTag, "Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
                                 AmongUSHasVoted = true;
-                                if (!IsRPCActive) IsRPCActive = true;
                             }
                         }
 
@@ -265,8 +266,6 @@
                                 AmongUsCurrentRole = AmongUsRoles.None;
                                 AmongUSHasVoted = false;
                             }
-
-                            if (!IsRPCActive) IsRPCActive = true;
                         }
                     }
                     else if (IsMurder4World)
@@ -278,35 +277,30 @@
                                 if (action == "SyncAssignB")
                                 {
                                     Murder4CurrentRole = Murder4Roles.Bystander;
-                                    if (!IsRPCActive) IsRPCActive = true;
                                 }
                                 else if (action == "SyncAssignD")
                                 {
                                     Murder4CurrentRole = Murder4Roles.Detective;
-                                    if (!IsRPCActive) IsRPCActive = true;
                                 }
                                 else if (action == "SyncAssignM")
                                 {
                                     Murder4CurrentRole = Murder4Roles.Murderer;
-                                    if (!IsRPCActive) IsRPCActive = true;
                                 }
                                 else if (action == "SyncKill")
                                 {
                                     Murder4CurrentRole = Murder4Roles.None;
-                                    if (!IsRPCActive) IsRPCActive = true;
                                 }
                             }
 
                             if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action.Equals("SyncStart"))
                             {
                                 Murder4CurrentRole = Murder4Roles.None;
-                                if (!IsRPCActive) IsRPCActive = true;
                             }
                         }
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
             }
@@ -433,7 +427,7 @@
             if (LinkedNode != null)
             {
                 if (ESP != null)
-                        ESP.UseCustomColor = ViewRoles;
+                    ESP.UseCustomColor = ViewRoles;
                 if (ViewRoles)
                 {
                     if (role != Murder4Roles.None && role != Murder4Roles.Unassigned)

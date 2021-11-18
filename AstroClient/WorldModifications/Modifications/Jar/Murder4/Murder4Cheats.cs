@@ -621,6 +621,8 @@
         {
             try
             {
+                if (obj == null) return;
+                if (sender == null) return;
                 if (HasMurder4WorldLoaded)
                 {
                     if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action == "SyncStart")
@@ -715,8 +717,9 @@
                 SafetySwap = false;
                 return false;
             }
+            SafetySwap = true;
 
-            MiscUtils.DelayFunction(0.01f, new Action(() =>
+            MiscUtils.DelayFunction(0.1f, new Action(() =>
             {
                 var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
                 if (TargetEvent != null)
@@ -731,7 +734,6 @@
                 }
             }));
 
-            SafetySwap = true;
 
             ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
 
