@@ -638,6 +638,7 @@
                         }
                     }
 
+                    if (!RoleSwapper_GetDetectiveRole || RoleSwapper_GetMurdererRole || !SafetySwap) return;
                     if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject != null)
                     {
                         if (RoleSwapper_GetDetectiveRole)
@@ -679,7 +680,10 @@
                     }
                 }
             }
-            catch { }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
         }
 
         internal static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)

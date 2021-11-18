@@ -1,12 +1,16 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
 {
     using System;
+    using ClientResources.Helpers;
+    using Iced.Intel;
     using TMPro;
     using Tools.Colors;
+    using Tools.Extensions;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
+    using Utility;
     using xAstroBoy.Extensions;
     using Object = UnityEngine.Object;
 
@@ -198,6 +202,8 @@
         internal string CurrentBtnColor { get; set; }
         private GameObject ButtonsMenu { get; set; }
 
+        internal GameObject Background { get; set; }
+        internal Image BackgroundImage { get; set; }
         internal RectTransform buttonRect { get; set; }
 
         //Creates a button for VRC Menus
@@ -246,6 +252,11 @@
             SetAction(btnAction);
 
             button.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
+            Background = button.transform.Find("Background").gameObject;
+            if (Background != null)
+            {
+                BackgroundImage = Background.GetComponent<Image>();
+            }
             button.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition += new Vector2(0, 50);
             button.GetComponentInChildren<TextMeshProUGUI>().fontSize = 26;
 
@@ -280,6 +291,17 @@
         {
             return button;
         }
+
+        internal void SetButtonImage(Texture2D image, bool DontUnloadAsset = false)
+        {
+                if (BackgroundImage != null)
+                {
+                    BackgroundImage.overrideSprite = image.ToSprite();
+                }
+                BackgroundImage.color = Color.white;
+                BackgroundImage.MakeBackgroundMoreSolid();
+        }
+
 
         internal override void SetTextColor(Color buttonTextColor)
         {

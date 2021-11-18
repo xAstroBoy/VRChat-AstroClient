@@ -210,6 +210,7 @@
         {
             try
             {
+                if (!RoleSwapper_GetImpostorRole || SafetySwap) return;
                 if (HasAmongUsWorldLoaded)
                 {
                     if (obj != null)
@@ -238,7 +239,10 @@
                     }
                 }
             }
-            catch { }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
         }
 
         internal static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)

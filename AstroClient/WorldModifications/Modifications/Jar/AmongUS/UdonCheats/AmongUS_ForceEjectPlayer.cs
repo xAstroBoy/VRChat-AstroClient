@@ -201,7 +201,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1032, true, "Among US Force Votes", "Interact with udon behaviours");
+            WingMenu = new QMWings(1035, true, "Among US Force Votes", "Interact with udon behaviours");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

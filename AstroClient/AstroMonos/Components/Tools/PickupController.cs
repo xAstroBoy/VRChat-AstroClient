@@ -89,7 +89,7 @@
                     {
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
-                                gameObject.TeleportToMe(HumanBodyBones.RightHand, false);
+                                gameObject.TeleportToMeWithRot(HumanBodyBones.RightHand, false);
                     }
                     catch
                     {
@@ -107,7 +107,7 @@
                     {
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == null)
-                                gameObject.TeleportToMe(HumanBodyBones.LeftHand, false);
+                                gameObject.TeleportToMeWithRot(HumanBodyBones.LeftHand, false);
                     }
                     catch
                     {
@@ -130,7 +130,7 @@
                     var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
                     if (PickupBlocker.blockeduserids.Contains(id))
                     {
-                        ModConsole.DebugLog($"Prevented {gameObject} from being used from Blacklisted user {CurrentHolderDisplayName}");
+                        ModConsole.DebugLog($"Prevented {gameObject.name} from being used from Blacklisted user {CurrentHolderDisplayName}");
                         OnlineEditor.TakeObjectOwnership(gameObject);
                     }
                 }

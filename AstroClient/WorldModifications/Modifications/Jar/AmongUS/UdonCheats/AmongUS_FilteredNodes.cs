@@ -265,7 +265,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1032, true, "Among US Filtered Nodes", "Interact with udon behaviours");
+            WingMenu = new QMWings(1036, true, "Among US Filtered Nodes", "Interact with udon behaviours");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

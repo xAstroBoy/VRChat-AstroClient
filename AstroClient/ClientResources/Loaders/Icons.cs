@@ -40,8 +40,7 @@
             {
                 if (_one_sprite == null)
                 {
-                    _one_sprite = one.ToSprite();
-                    _one_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _one_sprite = one.ToSprite(true);
                     return _one_sprite;
                 }
 
@@ -83,8 +82,7 @@
             {
                 if (_two_sprite == null)
                 {
-                    _two_sprite = two.ToSprite();
-                    _two_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _two_sprite = two.ToSprite(true);
                     return _two_sprite;
                 }
 
@@ -126,8 +124,7 @@
             {
                 if (_three_sprite == null)
                 {
-                    _three_sprite = three.ToSprite();
-                    _three_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _three_sprite = three.ToSprite(true);
                     return _three_sprite;
                 }
 
@@ -169,8 +166,7 @@
             {
                 if (_four_sprite == null)
                 {
-                    _four_sprite = four.ToSprite();
-                    _four_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _four_sprite = four.ToSprite(true);
                     return _four_sprite;
                 }
 
@@ -212,8 +208,7 @@
             {
                 if (_five_sprite == null)
                 {
-                    _five_sprite = five.ToSprite();
-                    _five_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _five_sprite = five.ToSprite(true);
                     return _five_sprite;
                 }
 
@@ -255,8 +250,7 @@
             {
                 if (_six_sprite == null)
                 {
-                    _six_sprite = six.ToSprite();
-                    _six_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _six_sprite = six.ToSprite(true);
                     return _six_sprite;
                 }
 
@@ -298,8 +292,7 @@
             {
                 if (_seven_sprite == null)
                 {
-                    _seven_sprite = seven.ToSprite();
-                    _seven_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _seven_sprite = seven.ToSprite(true);
                     return _seven_sprite;
                 }
 
@@ -341,8 +334,7 @@
             {
                 if (_badge_sprite == null)
                 {
-                    _badge_sprite = badge.ToSprite();
-                    _badge_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _badge_sprite = badge.ToSprite(true);
                     return _badge_sprite;
                 }
 
@@ -384,8 +376,7 @@
             {
                 if (_blank_sprite == null)
                 {
-                    _blank_sprite = blank.ToSprite();
-                    _blank_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _blank_sprite = blank.ToSprite(true);
                     return _blank_sprite;
                 }
 
@@ -427,8 +418,7 @@
             {
                 if (_box_sprite == null)
                 {
-                    _box_sprite = box.ToSprite();
-                    _box_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _box_sprite = box.ToSprite(true);
                     return _box_sprite;
                 }
 
@@ -470,8 +460,7 @@
             {
                 if (_button_sprite == null)
                 {
-                    _button_sprite = button.ToSprite();
-                    _button_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _button_sprite = button.ToSprite(true);
                     return _button_sprite;
                 }
 
@@ -513,8 +502,7 @@
             {
                 if (_cancel_sprite == null)
                 {
-                    _cancel_sprite = cancel.ToSprite();
-                    _cancel_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _cancel_sprite = cancel.ToSprite(true);
                     return _cancel_sprite;
                 }
 
@@ -556,8 +544,7 @@
             {
                 if (_check_sprite == null)
                 {
-                    _check_sprite = check.ToSprite();
-                    _check_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _check_sprite = check.ToSprite(true);
                     return _check_sprite;
                 }
 
@@ -600,8 +587,7 @@
             {
                 if (_history_sprite == null)
                 {
-                    _history_sprite = history.ToSprite();
-                    _history_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _history_sprite = history.ToSprite(true);
                     return _history_sprite;
                 }
 
@@ -643,8 +629,7 @@
             {
                 if (_planet_sprite == null)
                 {
-                    _planet_sprite = planet.ToSprite();
-                    _planet_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _planet_sprite = planet.ToSprite(true);
                     return _planet_sprite;
                 }
 
@@ -686,8 +671,7 @@
             {
                 if (_repair_sprite == null)
                 {
-                    _repair_sprite = repair.ToSprite();
-                    _repair_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _repair_sprite = repair.ToSprite(true);
                     return _repair_sprite;
                 }
 
@@ -729,8 +713,7 @@
             {
                 if (_thief_sprite == null)
                 {
-                    _thief_sprite = thief.ToSprite();
-                    _thief_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _thief_sprite = thief.ToSprite(true);
                     return _thief_sprite;
                 }
 
@@ -773,8 +756,7 @@
             {
                 if (_shuttle_sprite == null)
                 {
-                    _shuttle_sprite = shuttle.ToSprite();
-                    _shuttle_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _shuttle_sprite = shuttle.ToSprite(true);
                     return _shuttle_sprite;
                 }
 
@@ -816,8 +798,7 @@
             {
                 if (_save_sprite == null)
                 {
-                    _save_sprite = save.ToSprite();
-                    _save_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _save_sprite = save.ToSprite(true);
                     return _save_sprite;
                 }
 
@@ -859,8 +840,7 @@
             {
                 if (_locked_sprite == null)
                 {
-                    _locked_sprite = locked.ToSprite();
-                    _locked_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _locked_sprite = locked.ToSprite(true);
                     return _locked_sprite;
                 }
 
@@ -902,8 +882,7 @@
             {
                 if (_unlocked_sprite == null)
                 {
-                    _unlocked_sprite = unlocked.ToSprite();
-                    _unlocked_sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _unlocked_sprite = unlocked.ToSprite(true);
                     return _unlocked_sprite;
                 }
 

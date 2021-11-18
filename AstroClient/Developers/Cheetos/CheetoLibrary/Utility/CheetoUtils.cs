@@ -36,6 +36,22 @@
             }
         }
 
+        public static Texture2D LoadBundlePng(byte[] bundle)
+        {
+            try
+            {
+                Texture2D tex = new Texture2D(2, 2);
+                ImageConversion.LoadImage(tex, bundle); //..this will auto-resize the texture dimensions.
+                return tex;
+            }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+                return null;
+            }
+
+        }
+
         public static Texture2D LoadPNG(string filePath)
         {
             try

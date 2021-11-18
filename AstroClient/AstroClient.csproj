@@ -329,6 +329,7 @@
     <Compile Include="ClientEvents\Moderation\ModerationNotifier.cs" />
     <Compile Include="ClientEvents\Moderation\PhotonModerationHandler.cs" />
     <Compile Include="Networking\HandleClient.cs" />
+    <Compile Include="Tools\Extensions\Texture_Ext.cs" />
     <Compile Include="Tools\Regexes\RegexExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexUtils.cs" />
     <Compile Include="ClientAttributes\RegisterComponent.cs" />

@@ -54,6 +54,13 @@
         }
 
 
+        internal static void TeleportToMeWithRot(this GameObject obj, HumanBodyBones bone, bool KillcustomScripts = true, bool KillForces = true)
+        {
+            if (obj != null)
+            {
+                ItemPosition.TeleportObjectWithRot(obj, bone, KillcustomScripts, KillForces);
+            }
+        }
 
         internal static void TeleportToMe(this GameObject obj, HumanBodyBones bone, bool KillcustomScripts = true, bool KillForces = true)
         {

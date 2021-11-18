@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.ClientUI.Menu.RandomSubmenus
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Tools.Skybox;
@@ -14,7 +15,7 @@
         //private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
 
 
-
+        private static bool HasThrownException { get; set; } = false;
         private static bool CleanOnRoomLeave { get; } = false;
         private static bool DestroyOnMenuClose { get; } = false;
 
@@ -49,21 +50,49 @@
         {
             if (!HasGenerated)
             {
-                if (SkyboxEditor.LoadedSkyboxesBundles.Count() != 0)
+                try
                 {
-                    foreach (var skybox in SkyboxEditor.LoadedSkyboxesBundles)
+                    if (SkyboxEditor.LoadedSkyboxesBundles.Count() != 0)
                     {
-                        if (skybox != null)
+                        foreach (var skybox in SkyboxEditor.LoadedSkyboxesBundles)
                         {
-                            var btn = new QMSingleButton(CurrentScrollMenu, $" Skybox : {skybox.SkyboxName}.", () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.SkyboxName} as map Skybox.");
-                            GeneratedButtons.Add(btn);
+                            if (skybox != null)
+                            {
+                                var btn = new QMSingleButton(CurrentScrollMenu, skybox.SkyboxName, () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.SkyboxName} as map Skybox.");
+                               if(skybox.isCubeMap)
+                               {
+                                   btn.SetButtonImage(skybox.content.CubeMap);
+                               }
+                                else
+                               {
+                                   if (skybox.content.Back != null)
+                                   {
+                                       btn.SetButtonImage(skybox.content.Back);
+                                   }
+                                   else if (skybox.content.Left != null)
+                                   {
+                                       btn.SetButtonImage(skybox.content.Left);
+                                   }
+                                   else if (skybox.content.Front != null)
+                                   {
+                                       btn.SetButtonImage(skybox.content.Front);
+                                   }
+                               }
+
+                                GeneratedButtons.Add(btn);
+                            }
                         }
                     }
+                    else
+                    {
+                        var empty = new QMSingleButton(CurrentScrollMenu, "No Skyboxes Found", null, "No Skyboxes Found");
+                        GeneratedButtons.Add(empty);
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    var empty = new QMSingleButton(CurrentScrollMenu, "No Skyboxes Found", null, "No Skyboxes Found");
-                    GeneratedButtons.Add(empty);
+                    ModConsole.ErrorExc(e);
+                    HasThrownException = true;
                 }
 
 
@@ -92,7 +121,7 @@
 
         private static void OnCloseMenu()
         {
-            if (DestroyOnMenuClose)
+            if (DestroyOnMenuClose || HasThrownException)
             {
                 DestroyGeneratedButtons();
             }

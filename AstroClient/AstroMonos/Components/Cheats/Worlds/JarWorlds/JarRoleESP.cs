@@ -306,8 +306,9 @@
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
+                ModConsole.ErrorExc(e);
             }
         }
 

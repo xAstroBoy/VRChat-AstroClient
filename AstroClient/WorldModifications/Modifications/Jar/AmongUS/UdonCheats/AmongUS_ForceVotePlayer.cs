@@ -258,7 +258,7 @@
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1032, true, "Among US Force Voting", "Interact with udon behaviours");
+            WingMenu = new QMWings(1034, true, "Among US Force Voting", "Interact with udon behaviours");
             new QMWingSingleButton(WingMenu, "All Skip voting", () => { AmongUS_Utils.AllSkipVote(); }, "Force Everyone to Skip Vote");
 
             new QMWingSingleButton(WingMenu, "Refresh", () =>

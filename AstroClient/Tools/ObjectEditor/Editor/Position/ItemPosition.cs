@@ -58,6 +58,27 @@
                 }
             }
         }
+        internal static void TeleportObjectWithRot(GameObject obj, HumanBodyBones SelfBones, bool KillcustomScripts, bool KillForces)
+        {
+            if (obj != null && GameInstances.LocalPlayer != null)
+            {
+                var bone = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(SelfBones);
+                if (bone != null)
+                {
+                    OnlineEditor.TakeObjectOwnership(obj);
+                    obj.transform.position = bone.position;
+                    obj.transform.rotation = bone.rotation;
+                    if (KillcustomScripts)
+                    {
+                        obj.KillCustomComponents(true);
+                    }
+                    if (KillForces)
+                    {
+                        obj.KillForces(true);
+                    }
+                }
+            }
+        }
 
         internal static void TeleportObject(GameObject obj, Vector3 NewPos, bool SkipKillScripts = false)
         {
