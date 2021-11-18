@@ -1,6 +1,6 @@
 ﻿#pragma warning disable 649
 
-namespace AstroClient.WorldAddons.Supported_Worlds
+namespace AstroClient.WorldModifications.Modifications
 {
     using System.Collections;
     using System.Collections.Generic;

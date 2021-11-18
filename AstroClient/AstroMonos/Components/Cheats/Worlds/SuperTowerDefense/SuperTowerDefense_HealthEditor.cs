@@ -7,7 +7,7 @@
     using Il2CppSystem;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
-    using WorldAddons.WorldsIds;
+    using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
     using Math = System.Math;

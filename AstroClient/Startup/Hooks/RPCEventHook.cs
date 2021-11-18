@@ -11,10 +11,10 @@
     using Tools.Extensions;
     using UnityEngine;
     using VRC.SDKBase;
-    using WorldAddons.WorldsIds;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using HarmonyLib;
+    using WorldModifications.WorldsIds;
 
     #endregion Imports
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]

@@ -1,10 +1,12 @@
-﻿namespace AstroClient.WorldAddons
+﻿namespace AstroClient.WorldModifications
 {
     using System;
     using System.Collections.Generic;
     using ClientResources;
-    using Supported_Worlds;
-    using Supported_Worlds.Jar_Worlds;
+    using Modifications;
+    using Modifications.Jar.AmongUS;
+    using Modifications.Jar.Murder2;
+    using Modifications.Jar.Murder4;
     using UnityEngine;
     using UnityEngine.UI;
     using WorldsIds;

@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldAddons.Supported_Worlds
+﻿namespace AstroClient.WorldModifications.Modifications
 {
     using System.Collections.Generic;
     using Tools.Extensions;

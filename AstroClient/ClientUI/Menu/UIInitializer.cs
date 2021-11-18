@@ -13,7 +13,7 @@
     using Tools.Headlight;
     using Tools.ObjectEditor;
     using Wings;
-    using WorldAddons;
+    using WorldModifications;
     using xAstroBoy.AstroButtonAPI;
 
     internal class UIInitializer : AstroEvents

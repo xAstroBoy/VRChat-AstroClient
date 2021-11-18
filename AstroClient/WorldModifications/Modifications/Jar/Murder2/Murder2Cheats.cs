@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldAddons.Supported_Worlds.Jar_Worlds
+﻿namespace AstroClient.WorldModifications.Modifications.Jar.Murder2
 {
     #region Imports
 

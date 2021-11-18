@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Developers.xAstroBoy.AstroLibrary.Utility
+﻿namespace AstroClient.xAstroBoy.Utility
 {
     using UnityEngine;
     using UnityEngine.UI;
