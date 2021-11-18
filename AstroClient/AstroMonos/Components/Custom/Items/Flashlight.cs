@@ -18,6 +18,10 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         internal bool IsFlashlightActive
         {

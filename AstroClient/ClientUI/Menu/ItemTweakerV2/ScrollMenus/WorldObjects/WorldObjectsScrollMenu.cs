@@ -135,10 +135,7 @@
         {
             if (obj != null)
             {
-                if (!WorldObjects.Contains(obj))
-                {
-                    WorldObjects.Add(obj);
-                }
+                WorldObjects.Add(obj);
             }
         }
 

@@ -37,6 +37,10 @@
                 Destroy(this);
             }
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         private void OnEnable()
         {

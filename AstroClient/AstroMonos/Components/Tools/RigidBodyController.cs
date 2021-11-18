@@ -37,10 +37,6 @@
             InvokeRepeating(nameof(BodyUpdate), 0.1f, 0.3f);
         }
 
-        internal void FixedUpdate()
-        {
-        }
-
         internal override void OnRoomLeft()
         {
             Destroy(this);

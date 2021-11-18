@@ -20,6 +20,10 @@
         {
             AntiGarbageCollection.Add(this);
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         internal string PolyCounter1
         {

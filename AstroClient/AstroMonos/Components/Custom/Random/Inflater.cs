@@ -19,6 +19,10 @@
         public InflaterBehaviour(IntPtr ptr) : base(ptr)
         {
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         internal Vector3 NewSize
         {

@@ -25,6 +25,10 @@
             AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         private float _ForceX { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 

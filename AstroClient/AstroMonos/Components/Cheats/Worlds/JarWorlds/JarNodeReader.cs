@@ -18,6 +18,10 @@
         {
             AntiGarbageCollection.Add(this);
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         internal VRCPlayerApi VRCPlayerAPI
         {

@@ -16,6 +16,10 @@
     public class PlayerAttacker : AstroMonoBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         public PlayerAttacker(IntPtr obj0) : base(obj0)
         {

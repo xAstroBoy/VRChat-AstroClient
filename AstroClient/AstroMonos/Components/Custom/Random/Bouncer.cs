@@ -24,6 +24,10 @@
             AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         private Vector3 initialVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new(0, 0, 0);
         private Vector3 lastFrameVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
