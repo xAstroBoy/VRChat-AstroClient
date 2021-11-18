@@ -1,10 +1,6 @@
-﻿namespace AstroClient.UdonExploits.AmongUS
+﻿namespace AstroClient.WorldModifications.Modifications.Jar.AmongUS.UdonCheats
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;

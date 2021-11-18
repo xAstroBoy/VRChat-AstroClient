@@ -1,4 +1,4 @@
-﻿namespace AstroClient.UdonExploits.Murder4
+﻿namespace AstroClient.WorldModifications.Modifications.Jar.Murder4.UdonCheats
 {
     using System;
     using System.Collections.Generic;

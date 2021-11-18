@@ -6,6 +6,7 @@
     using Extensions;
     using UnityEngine;
     using UnityEngine.SceneManagement;
+    using Utility;
 
     public static class GameObjectFinder
     {
@@ -125,26 +126,19 @@
         }
 
         /// <summary>
-        /// This is obsolete.
-        /// Use root object finder, then find the object from there
+        /// fixed With knah's UIX Inactive finder.
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        [Obsolete("Use root object finder, then find the object from there")]
-        public static GameObject InactiveFind(string path)
+        public static Transform InactiveFind(string path)
         {
-            UnhollowerBaseLib.Il2CppArrayBase<GameObject> list = Resources.FindObjectsOfTypeAll<GameObject>();
-            for (int i = 0; i < list.Count; i++)
+            Transform obj = UnityUtils.FindInactiveObjectInActiveRoot(path);
+
+            if (obj == null)
             {
-                GameObject gameObj = list[i];
-                if (GetGameObjectPath(gameObj).Equals(path))
-                {
-                    ModConsole.Log($"FOUND: {GetGameObjectPath(gameObj)}");
-                    return gameObj;
-                }
+                ModConsole.DebugWarning($"[WARNING (InactiveFind) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
             }
-            ModConsole.DebugWarning($"[WARNING (InactiveFind) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
-            return null;
+            return obj;
         }
 
         public static string GetGameObjectPath(GameObject obj)

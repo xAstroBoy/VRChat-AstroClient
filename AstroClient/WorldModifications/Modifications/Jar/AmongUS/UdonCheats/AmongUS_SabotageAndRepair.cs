@@ -1,4 +1,4 @@
-﻿namespace AstroClient.UdonExploits.AmongUS
+﻿namespace AstroClient.WorldModifications.Modifications.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,6 @@
     using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
-    using WorldAddons.Supported_Worlds.Jar_Worlds;
     using xAstroBoy.AstroButtonAPI;
 
     internal class AmongUS_SabotageAndRepair : AstroEvents

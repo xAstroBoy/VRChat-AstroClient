@@ -242,7 +242,7 @@
 
         private IEnumerator OnUserInteractMenuInitCoro(Action code)
         {
-            while (QuickMenuTools.GetSelectedUserQMInstance() == null)
+            while (QuickMenuTools.SelectedUserMenuQM == null)
                 yield return null;
 
             code();

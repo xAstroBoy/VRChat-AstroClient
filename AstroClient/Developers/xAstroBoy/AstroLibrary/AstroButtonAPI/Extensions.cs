@@ -250,12 +250,12 @@
 
         internal static void ShowLeftWingPage(this QMWings pagename)
         {
-            QuickMenuTools.Wing_Left().ShowQuickmenuPage(pagename.GetMenuName());
+            QuickMenuTools.Wing_Left.ShowQuickmenuPage(pagename.GetMenuName());
         }
 
         internal static void ShowRightWingPage(this QMWings pagename)
         {
-            QuickMenuTools.Wing_Right().ShowQuickmenuPage(pagename.GetMenuName());
+            QuickMenuTools.Wing_Right.ShowQuickmenuPage(pagename.GetMenuName());
         }
 
         internal static GameObject CreateMainBackButton(this GameObject NestedPart)

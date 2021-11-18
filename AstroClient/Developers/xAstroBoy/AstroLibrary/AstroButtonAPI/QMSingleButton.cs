@@ -208,7 +208,7 @@
             switch (btnQMLoc)
             {
                 case "Dashboard":
-                    button = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection(), true);
+                    button = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection, true);
                     button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 

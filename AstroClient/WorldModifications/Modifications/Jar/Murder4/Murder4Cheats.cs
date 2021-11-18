@@ -1,11 +1,10 @@
-﻿namespace AstroClient.WorldAddons.Supported_Worlds.Jar_Worlds
+﻿namespace AstroClient.WorldModifications.Modifications.Jar.Murder4
 {
     #region Imports
 
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroClient.UdonExploits.Global;
     using AstroMonos.Components.Cheats.PatronUnlocker;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.ESP.Pickup;
@@ -15,7 +14,7 @@
     using Tools.Extensions.Components_exts;
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
-    using UdonExploits.Murder4;
+    using UdonCheats;
     using UnityEngine;
     using VRC;
     using WorldsIds;

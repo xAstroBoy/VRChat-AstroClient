@@ -1,4 +1,4 @@
-﻿namespace AstroClient.UdonExploits.AmongUS
+﻿namespace AstroClient.WorldModifications.Modifications.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;

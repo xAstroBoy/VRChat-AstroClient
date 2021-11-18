@@ -38,11 +38,11 @@ namespace AstroClient.xAstroBoy.Utility
 
         #region GetSelected
 
-        public static Player SelectedPlayer => QuickMenuTools.GetSelectedUserQMInstance().GetSelectedPlayer();
+        public static Player SelectedPlayer => QuickMenuTools.SelectedUserMenuQM.GetSelectedPlayer();
 
-        public static APIUser SelectedUser => QuickMenuTools.GetSelectedUserQMInstance().GetSelectedApiUser();
+        public static APIUser SelectedUser => QuickMenuTools.SelectedUserMenuQM.GetSelectedApiUser();
 
-        public static VRCPlayer SelectedVRCPlayer => QuickMenuTools.GetSelectedUserQMInstance().GetSelectedPlayer().GetVRCPlayer();
+        public static VRCPlayer SelectedVRCPlayer => QuickMenuTools.SelectedUserMenuQM.GetSelectedPlayer().GetVRCPlayer();
 
         #endregion GetSelected
 

@@ -9,7 +9,7 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using WorldAddons.WorldsIds;
+    using WorldModifications.WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.Utility;

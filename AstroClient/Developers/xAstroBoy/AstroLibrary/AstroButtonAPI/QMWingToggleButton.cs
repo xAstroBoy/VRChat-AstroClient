@@ -30,7 +30,7 @@
             btnType = "WingToggleButton";
 
             var Layout = Parent.FindObject("VerticalLayoutGroup");
-            button = Object.Instantiate(QuickMenuTools.WingPageButtonTemplate(), Layout.transform, true);
+            button = Object.Instantiate(QuickMenuTools.WingPageButtonTemplate, Layout.transform, true);
             button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
             button.SetActive(true);
             button.GetComponentInChildren<TextMeshProUGUI>().fontSize = 35;

@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldAddons.Supported_Worlds.Jar_Worlds
+﻿namespace AstroClient.WorldModifications.Modifications.Jar.AmongUS
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@
     using Tools.Player.Movement.Exploit;
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
-    using UdonExploits.AmongUS;
+    using UdonCheats;
     using UnityEngine;
     using VRC;
     using WorldsIds;
