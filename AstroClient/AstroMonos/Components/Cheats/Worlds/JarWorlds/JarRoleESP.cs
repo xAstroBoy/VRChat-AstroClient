@@ -96,12 +96,22 @@
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        internal PlayerESP ESP { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
+        private bool HasChecked { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; } = false;
+        private bool _isSelf;
         internal bool IsSelf
         {
             [HideFromIl2Cpp]
-            get => Player.GetAPIUser().IsSelf;
+            get
+            {
+                if (!HasChecked)
+                {
+                    _isSelf = Player.GetAPIUser().IsSelf;
+                    HasChecked = true;
+                }
+
+                return _isSelf;
+            }
         }
 
         internal bool ViewRoles { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
@@ -138,7 +148,6 @@
                 Player = p;
             else
                 Destroy(this);
-            if (ESP == null && !IsSelf) ESP = Player.gameObject.GetComponent<PlayerESP>();
             GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
             if (IsAmongUsWorld)
             {
@@ -170,6 +179,23 @@
             {
                 AmongUsCurrentRole = AmongUsRoles.Unassigned;
                 ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Among US Role ESP.");
+            }
+        }
+
+        private PlayerESP _ESP;
+
+        private PlayerESP ESP
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (IsSelf) return null;
+                if (_ESP == null)
+                {
+                    return _ESP = Player.GetComponent<PlayerESP>();
+                }
+
+                return _ESP;
             }
         }
 
@@ -413,13 +439,6 @@
                             else if (IsMurder4World) UpdateMurder4Role(Murder4CurrentRole);
                         }
                 }
-        }
-
-        internal override void OnPlayerESPPropertyChanged(bool value)
-        {
-            if (value)
-                if (!IsSelf)
-                    ESP ??= Player.gameObject.GetComponent<PlayerESP>();
         }
 
         private void UpdateMurder4Role(Murder4Roles role)

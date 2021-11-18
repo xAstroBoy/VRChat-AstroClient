@@ -294,10 +294,6 @@
             [HideFromIl2Cpp]
             set
             {
-                if (value == _UseCustomColor)
-                {
-                    return;
-                }
                 if (!value)
                 {
                     SetPlayerDefaultESP();
