@@ -6,9 +6,8 @@
 
     internal static class ClientResources
     {
-
-
         #region 1.png
+
         private static Texture2D _one;
         private static Sprite _one_sprite;
 
@@ -49,9 +48,10 @@
             }
         }
 
-
         #endregion
+
         #region 2.png
+
         private static Texture2D _two;
         private static Sprite _two_sprite;
 
@@ -92,9 +92,10 @@
             }
         }
 
-
         #endregion
+
         #region 3.png
+
         private static Texture2D _three;
         private static Sprite _three_sprite;
 
@@ -135,9 +136,10 @@
             }
         }
 
-
         #endregion
+
         #region 4.png
+
         private static Texture2D _four;
         private static Sprite _four_sprite;
 
@@ -178,9 +180,10 @@
             }
         }
 
-
         #endregion
+
         #region 5.png
+
         private static Texture2D _five;
         private static Sprite _five_sprite;
 
@@ -221,9 +224,10 @@
             }
         }
 
-
         #endregion
+
         #region 6.png
+
         private static Texture2D _six;
         private static Sprite _six_sprite;
 
@@ -264,9 +268,10 @@
             }
         }
 
-
         #endregion
+
         #region 7.png
+
         private static Texture2D _seven;
         private static Sprite _seven_sprite;
 
@@ -307,9 +312,10 @@
             }
         }
 
-
         #endregion
+
         #region badge.png
+
         private static Texture2D _badge;
         private static Sprite _badge_sprite;
 
@@ -350,9 +356,10 @@
             }
         }
 
-
         #endregion
+
         #region blank.png
+
         private static Texture2D _blank;
         private static Sprite _blank_sprite;
 
@@ -393,9 +400,10 @@
             }
         }
 
-
         #endregion
+
         #region box.png
+
         private static Texture2D _box;
         private static Sprite _box_sprite;
 
@@ -436,9 +444,10 @@
             }
         }
 
+        #endregion
 
-        #endregion        /// <summary>
         #region button.png
+
         private static Texture2D _button;
         private static Sprite _button_sprite;
 
@@ -479,9 +488,10 @@
             }
         }
 
-
         #endregion
+
         #region cancel.png
+
         private static Texture2D _cancel;
         private static Sprite _cancel_sprite;
 
@@ -522,9 +532,10 @@
             }
         }
 
-
         #endregion
+
         #region check.png
+
         private static Texture2D _check;
         private static Sprite _check_sprite;
 
@@ -565,10 +576,12 @@
             }
         }
 
+        #endregion
 
-        #endregion        /// <summary>
         #region history.png
+
         private static Texture2D _history;
+
         private static Sprite _history_sprite;
 
         /// <summary>
@@ -608,9 +621,10 @@
             }
         }
 
-
         #endregion
+
         #region planet.png
+
         private static Texture2D _planet;
         private static Sprite _planet_sprite;
 
@@ -651,9 +665,10 @@
             }
         }
 
-
         #endregion
+
         #region repair.png
+
         private static Texture2D _repair;
         private static Sprite _repair_sprite;
 
@@ -694,9 +709,10 @@
             }
         }
 
-
         #endregion
+
         #region thief.png
+
         private static Texture2D _thief;
         private static Sprite _thief_sprite;
 
@@ -737,10 +753,12 @@
             }
         }
 
+        #endregion
 
-        #endregion        /// <summary>
         #region shuttle.png
+
         private static Texture2D _shuttle;
+
         private static Sprite _shuttle_sprite;
 
         /// <summary>
@@ -780,9 +798,10 @@
             }
         }
 
-
         #endregion
+
         #region save.png
+
         private static Texture2D _save;
         private static Sprite _save_sprite;
 
@@ -823,9 +842,10 @@
             }
         }
 
-
         #endregion
+
         #region locked.png
+
         private static Texture2D _locked;
         private static Sprite _locked_sprite;
 
@@ -866,9 +886,10 @@
             }
         }
 
-
         #endregion
+
         #region unlocked.png
+
         private static Texture2D _unlocked;
         private static Sprite _unlocked_sprite;
 
@@ -909,8 +930,6 @@
             }
         }
 
-
         #endregion
-
     }
 }

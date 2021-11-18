@@ -11,7 +11,6 @@
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
     using UdonExploits.AmongUS;
-    using UdonExploits.Global;
     using UnityEngine;
     using VRC;
     using WorldsIds;
