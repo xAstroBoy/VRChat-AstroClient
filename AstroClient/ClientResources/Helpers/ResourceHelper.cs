@@ -1,4 +1,4 @@
-﻿namespace AstroClient.ClientResources
+﻿namespace AstroClient.ClientResources.Helpers
 {
     using UnityEngine;
 

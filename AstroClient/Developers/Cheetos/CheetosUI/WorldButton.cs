@@ -2,6 +2,7 @@
 {
     using System;
     using AstroMonos.AstroUdons;
+    using ClientResources.Loaders;
     using TMPro;
     using Tools.Extensions;
     using UnityEngine;
@@ -50,11 +51,11 @@
             var front_renderer = front.GetComponent<Renderer>();
             front_renderer.material = new Material(Shader.Find("Standard"))
             {
-                mainTexture = ClientResources.ClientResources.button
+                mainTexture = Icons.button
             };
             front_renderer.material.EnableKeyword("_EMISSION");
             front_renderer.material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
-            front_renderer.material.SetTexture("_EmissionMap", ClientResources.ClientResources.button);
+            front_renderer.material.SetTexture("_EmissionMap", Icons.button);
             front_renderer.material.SetFloat("_EmissionScaleUI", 1f);
             front_renderer.material.SetColor("_EmissionColor", Color.white);
 

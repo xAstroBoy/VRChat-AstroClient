@@ -3,6 +3,7 @@
     #region Imports
 
     using ClientResources;
+    using ClientResources.Loaders;
     using Constants;
     using xAstroBoy.AstroButtonAPI;
 
@@ -16,7 +17,7 @@
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(index, "History Menu", null, null, null, ClientResources.history_sprite);
+                SubMenu = new QMTabMenu(index, "History Menu", null, null, null, Icons.history_sprite);
             }
         }
     }

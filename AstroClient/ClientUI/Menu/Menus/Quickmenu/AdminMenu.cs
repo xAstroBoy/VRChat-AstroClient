@@ -6,6 +6,7 @@
     using AstroNetworkingLibrary.Serializable;
     using CheetoLibrary.Utility;
     using ClientResources;
+    using ClientResources.Loaders;
     using Constants;
     using Networking;
     using xAstroBoy.AstroButtonAPI;
@@ -19,7 +20,7 @@
         internal static void InitButtons(int index)
         {
             if (!Bools.IsDeveloper) { return; }
-            SubMenu = new QMTabMenu(index, "Admin Menu", null, null, null, ClientResources.badge_sprite);
+            SubMenu = new QMTabMenu(index, "Admin Menu", null, null, null, Icons.badge_sprite);
 
             _ = new QMSingleButton(SubMenu, 1, 1, "Mass\nNotify", () => {
                 CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text)

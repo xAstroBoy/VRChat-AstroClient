@@ -9,6 +9,7 @@
     using System.Reflection;
     using AstroEventArgs;
     using CheetosConsole;
+    using ClientResources.Loaders;
     using ClientUI.Menu.ItemTweakerV2.Selector;
     using ClientUI.Menu.Menus;
     using ClientUI.Menu.Menus.UserMenu;
@@ -147,7 +148,7 @@
         {
             try
             {
-                Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, Color.LightBlue, Color.MidnightBlue);
+                Console.WriteFigletWithGradient(Figlets.Larry3D, BuildInfo.Name, Color.LightBlue, Color.MidnightBlue);
             }
             catch (Exception e)
             {
@@ -259,49 +260,56 @@
             if (!KeyManager.IsAuthed) return;
             _ = MelonCoroutines.Start(OnQuickMenuInitCoro(code));
         }
-
-        protected IEnumerator OnQuickMenuInitCoro(Action code)
+        private IEnumerator OnQuickMenuInitCoro(Action code)
         {
-            Transform Critical1 = null;
-            Transform Critical2 = null;
-            Transform Critical3 = null;
-            VRC.UI.Elements.QuickMenu Critical4 = null;
-            bool exception = false;
-            while (true)
-            {
-                try
-                {
-                    Critical1 = QuickMenuTools.UserInterface;
-                    Critical2 = QuickMenuTools.QuickMenuTransform;
-                    Critical3 = QuickMenuTools.NestedMenuTemplate;
-                    Critical4 = QuickMenuTools.QuickMenuInstance;
-                }
-                catch
-                {
-                    exception = true;
-                }
+            while (QuickMenuTools.QuickMenuInstance == null)
+                yield return null;
 
-                if (exception)
-                {
-                    exception = false;
-                    yield return new WaitForSeconds(0.001f);
-                }
-                else
-                {
-                    if (Critical1 != null && Critical2 != null && Critical3 != null && Critical4 != null)
-                    {
-                        code();
-                        yield break;
-                    }
-                    else if (Critical1 == null || Critical2 == null || Critical3 == null || Critical4 == null)
-                    {
-                        yield return new WaitForSeconds(0.001f);
-                    }
-                }
-            }
-
-            yield return null;
+            code();
         }
+
+        //protected IEnumerator OnQuickMenuInitCoro(Action code)
+        //{
+        //    Transform Critical1 = null;
+        //    Transform Critical2 = null;
+        //    Transform Critical3 = null;
+        //    VRC.UI.Elements.QuickMenu Critical4 = null;
+        //    bool exception = false;
+        //    while (true)
+        //    {
+        //        try
+        //        {
+        //            Critical1 = QuickMenuTools.UserInterface;
+        //            Critical2 = QuickMenuTools.QuickMenuTransform;
+        //            Critical3 = QuickMenuTools.NestedMenuTemplate;
+        //            Critical4 = QuickMenuTools.QuickMenuInstance;
+        //        }
+        //        catch
+        //        {
+        //            exception = true;
+        //        }
+
+        //        if (exception)
+        //        {
+        //            exception = false;
+        //            yield return new WaitForSeconds(0.001f);
+        //        }
+        //        else
+        //        {
+        //            if (Critical1 != null && Critical2 != null && Critical3 != null && Critical4 != null)
+        //            {
+        //                code();
+        //                yield break;
+        //            }
+        //            else if (Critical1 == null || Critical2 == null || Critical3 == null || Critical4 == null)
+        //            {
+        //                yield return new WaitForSeconds(0.001f);
+        //            }
+        //        }
+        //    }
+
+        //    yield return null;
+        //}
 
         protected IEnumerator OnUiManagerInitCoro(Action code)
         {

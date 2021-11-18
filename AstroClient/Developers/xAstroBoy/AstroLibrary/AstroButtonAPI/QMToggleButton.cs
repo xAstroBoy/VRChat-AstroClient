@@ -2,6 +2,7 @@
 {
     using System;
     using ClientResources;
+    using ClientResources.Loaders;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -193,9 +194,9 @@
             btnOn.GetComponentInChildren<RectTransform>().anchoredPosition -= new Vector2(50, 0);
             btnOff.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(50, 0);
 
-            btnOn.GetComponentInChildren<Image>().overrideSprite = ClientResources.check_sprite;
+            btnOn.GetComponentInChildren<Image>().overrideSprite = Icons.check_sprite;
 
-            btnOff.GetComponentInChildren<Image>().overrideSprite = ClientResources.cancel_sprite;
+            btnOff.GetComponentInChildren<Image>().overrideSprite = Icons.cancel_sprite;
 
             SetToolTip(btnToolTip);
             SetAction(btnActionOn, btnActionOff);

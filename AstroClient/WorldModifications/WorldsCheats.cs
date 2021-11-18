@@ -3,6 +3,7 @@
     #region Imports
 
     using ClientResources;
+    using ClientResources.Loaders;
     using Modifications;
     using Modifications.Jar.AmongUS;
     using Modifications.Jar.Murder2;
@@ -15,7 +16,7 @@
     {
         internal static void InitButtons(int index)
         {
-            QMGridTab WorldCheats = new QMGridTab(index, "WorldCheats Menu", null, null, null, ClientResources.thief_sprite);
+            QMGridTab WorldCheats = new QMGridTab(index, "WorldCheats Menu", null, null, null, Icons.thief_sprite);
             Murder2Cheats.Murder2CheatsButtons(WorldCheats);
             Murder4Cheats.Murder4CheatsButtons(WorldCheats);
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats);

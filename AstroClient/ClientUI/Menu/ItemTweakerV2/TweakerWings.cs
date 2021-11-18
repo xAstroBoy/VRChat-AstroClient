@@ -2,6 +2,7 @@
 {
     using AstroMonos.Components.Tools;
     using ClientResources;
+    using ClientResources.Loaders;
     using Selector;
     using Target;
     using Tools.Extensions;
@@ -37,7 +38,7 @@
 
         internal static void InitTweakerWings()
         {
-            WingsMenu = new QMWings(1011, true, "Tweaker", "Item Tweaker", null, ClientResources.box_sprite);
+            WingsMenu = new QMWings(1011, true, "Tweaker", "Item Tweaker", null, Icons.box_sprite);
             Pickup_CurrentObjectOwner = new QMWingSingleButton(WingsMenu, "Current Owner : null", () => { }, "Who is the current object owner,", null);
             Pickup_IsHeldStatus = new QMWingSingleButton(WingsMenu, "", () => { }, "Held : No.", null);
             Pickup_CurrentObjectHolder = new QMWingSingleButton(WingsMenu, "Current holder : null", () => { }, "Who is the Holding the object", null);

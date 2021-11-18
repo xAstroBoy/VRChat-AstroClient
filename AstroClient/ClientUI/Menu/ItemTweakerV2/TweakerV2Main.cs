@@ -3,6 +3,7 @@
     using System;
     using AstroMonos.Components.Tools;
     using ClientResources;
+    using ClientResources.Loaders;
     using Constants;
     using Handlers;
     using ScrollMenus.GameObjectToggler;
@@ -28,7 +29,7 @@
     {
         internal static void Init_TweakerV2Main(int index)
         {
-            QMTabMenu menu = new QMTabMenu(index, "Item Tweaker", null, null, null, ClientResources.box_sprite);
+            QMTabMenu menu = new QMTabMenu(index, "Item Tweaker", null, null, null, Icons.box_sprite);
 
             // Outside Area
 

@@ -2,6 +2,7 @@
 {
     using AstroMonos;
     using Cheetos;
+    using ClientResources.Loaders;
     using Constants;
     using Experiments;
     using ItemTweakerV2;
@@ -37,7 +38,7 @@
         internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
-            QMGridTab AstroClient = new QMGridTab(TabIndexs.Main, "AstroClient Menu", null, null, null, ClientResources.ClientResources.planet_sprite);
+            QMGridTab AstroClient = new QMGridTab(TabIndexs.Main, "AstroClient Menu", null, null, null, Icons.planet_sprite);
             MainClientWings.InitMainWing();
             GameProcessMenu.InitButtons(AstroClient);
             ProtectionsMenu.InitButtons(AstroClient);

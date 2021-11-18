@@ -1,10 +1,12 @@
-﻿namespace AstroClient.ClientResources
+﻿namespace AstroClient.ClientResources.Loaders
 {
-    using CheetoLibrary.Utility;
     using System.Reflection;
+    using CheetoLibrary.Utility;
+    using Helpers;
+    using Paths;
     using UnityEngine;
 
-    internal static class ClientResources
+    internal static class Icons
     {
         #region 1.png
 
@@ -20,7 +22,7 @@
             {
                 if (_one == null)
                 {
-                    _one = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.1.png"));
+                    _one = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}1.png"));
                     _one.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _one;
                 }
@@ -63,7 +65,7 @@
             {
                 if (_two == null)
                 {
-                    _two = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.2.png"));
+                    _two = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}2.png"));
                     _two.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _two;
                 }
@@ -106,7 +108,7 @@
             {
                 if (_three == null)
                 {
-                    _three = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.3.png"));
+                    _three = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}3.png"));
                     _three.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _three;
                 }
@@ -149,7 +151,7 @@
             {
                 if (_four == null)
                 {
-                    _four = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.4.png"));
+                    _four = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}4.png"));
                     _four.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _four;
                 }
@@ -192,7 +194,7 @@
             {
                 if (_five == null)
                 {
-                    _five = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.5.png"));
+                    _five = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}5.png"));
                     _five.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _five;
                 }
@@ -235,7 +237,7 @@
             {
                 if (_six == null)
                 {
-                    _six = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.6.png"));
+                    _six = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}6.png"));
                     _six.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _six;
                 }
@@ -278,7 +280,7 @@
             {
                 if (_seven == null)
                 {
-                    _seven = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.7.png"));
+                    _seven = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}7.png"));
                     _seven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _seven;
                 }
@@ -321,7 +323,7 @@
             {
                 if (_badge == null)
                 {
-                    _badge = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.badge.png"));
+                    _badge = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}badge.png"));
                     _badge.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _badge;
                 }
@@ -364,7 +366,7 @@
             {
                 if (_blank == null)
                 {
-                    _blank = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.blank.png"));
+                    _blank = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}blank.png"));
                     _blank.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _blank;
                 }
@@ -407,7 +409,7 @@
             {
                 if (_box == null)
                 {
-                    _box = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.box.png"));
+                    _box = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}box.png"));
                     _box.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _box;
                 }
@@ -450,7 +452,7 @@
             {
                 if (_button == null)
                 {
-                    _button = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png"));
+                    _button = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}button.png"));
                     _button.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _button;
                 }
@@ -493,7 +495,7 @@
             {
                 if (_cancel == null)
                 {
-                    _cancel = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.cancel.png"));
+                    _cancel = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}cancel.png"));
                     _cancel.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _cancel;
                 }
@@ -536,7 +538,7 @@
             {
                 if (_check == null)
                 {
-                    _check = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.check.png"));
+                    _check = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}check.png"));
                     _check.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _check;
                 }
@@ -580,7 +582,7 @@
             {
                 if (_history == null)
                 {
-                    _history = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.history.png"));
+                    _history = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}history.png"));
                     _history.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _history;
                 }
@@ -623,7 +625,7 @@
             {
                 if (_planet == null)
                 {
-                    _planet = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+                    _planet = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}planet.png"));
                     _planet.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _planet;
                 }
@@ -666,7 +668,7 @@
             {
                 if (_repair == null)
                 {
-                    _repair = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.repair.png"));
+                    _repair = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}repair.png"));
                     _repair.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _repair;
                 }
@@ -709,7 +711,7 @@
             {
                 if (_thief == null)
                 {
-                    _thief = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.thief.png"));
+                    _thief = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}thief.png"));
                     _thief.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _thief;
                 }
@@ -753,7 +755,7 @@
             {
                 if (_shuttle == null)
                 {
-                    _shuttle = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.shuttle.png"));
+                    _shuttle = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}shuttle.png"));
                     _shuttle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _shuttle;
                 }
@@ -796,7 +798,7 @@
             {
                 if (_save == null)
                 {
-                    _save = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.save.png"));
+                    _save = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}save.png"));
                     _save.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _save;
                 }
@@ -839,7 +841,7 @@
             {
                 if (_locked == null)
                 {
-                    _locked = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.locked.png"));
+                    _locked = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}locked.png"));
                     _locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _locked;
                 }
@@ -882,7 +884,7 @@
             {
                 if (_unlocked == null)
                 {
-                    _unlocked = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.unlocked.png"));
+                    _unlocked = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}unlocked.png"));
                     _unlocked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _unlocked;
                 }

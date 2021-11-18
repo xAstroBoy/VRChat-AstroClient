@@ -1,6 +1,7 @@
 namespace AstroClient.Gompoc.ActionMenuAPI.Managers
 {
     using ClientResources;
+    using ClientResources.Loaders;
     using Helpers;
     using UnityEngine;
     using UnityEngine.UI;
@@ -24,7 +25,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
             Object.DontDestroyOnLoad(lockPrefab);
             lockPrefab.active = false;
             lockPrefab.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
-            lockPrefab.GetComponent<RawImage>().texture = ClientResources.locked;
+            lockPrefab.GetComponent<RawImage>().texture = Icons.locked;
             ModConsole.DebugLog("Created lock gameobject");
         }
 
@@ -33,25 +34,25 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
             switch (pageIndex)
             {
                 case 1:
-                    return ClientResources.one;
+                    return Icons.one;
 
                 case 2:
-                    return ClientResources.two;
+                    return Icons.two;
 
                 case 3:
-                    return ClientResources.three;
+                    return Icons.three;
 
                 case 4:
-                    return ClientResources.four;
+                    return Icons.four;
 
                 case 5:
-                    return ClientResources.five;
+                    return Icons.five;
 
                 case 6:
-                    return ClientResources.six;
+                    return Icons.six;
 
                 case 7:
-                    return ClientResources.seven;
+                    return Icons.seven;
 
                 default:
                     return null;
@@ -68,7 +69,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
 
         public static Texture2D GetModsSectionIcon()
         {
-            return ClientResources.planet;
+            return Icons.planet;
         }
     }
 }

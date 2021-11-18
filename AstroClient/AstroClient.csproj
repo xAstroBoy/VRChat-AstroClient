@@ -102,14 +102,16 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="ClientResources\Loaders\Figlets.cs" />
+    <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\OrbitUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\PickupProtector.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\WatcherUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\AttackerUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\SitUserMenu.cs" />
     <Compile Include="ClientUI\Menu\UIInitializer.cs" />
-    <Compile Include="ClientResources\ClientResources.cs" />
-    <Compile Include="ClientResources\ResourceHelper.cs" />
+    <Compile Include="ClientResources\Loaders\Icons.cs" />
+    <Compile Include="ClientResources\Helpers\ResourceHelper.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnUiPageEventArgs.cs" />
     <Compile Include="Developers\Blaze\SerializationUtils.cs" />
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Api\ActionMenuPage.cs" />
@@ -1307,75 +1309,75 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <EmbeddedResource Include="Libraries\Figlet\Larry3D.flf" />
+    <EmbeddedResource Include="ClientResources\FigletsArchive\Larry3D.flf" />
     <None Include="app.config" />
     <Compile Include="AstroMonos\Components\Tools\RigidBodyController.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClientResources\Resources\shuttle.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\shuttle.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClientResources\Resources\box.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\box.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\planet.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\planet.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\thief.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\Resources\save.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\unlocked.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\blank.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\1.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\2.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\3.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\4.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\5.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\6.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\7.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\locked.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\history.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\thief.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClientResources\Resources\repair.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\save.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\badge.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\unlocked.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\blank.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\1.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\2.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\3.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\4.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\5.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\6.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\7.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\locked.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\history.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClientResources\Resources\button.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\repair.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\badge.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\button.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
@@ -1384,10 +1386,10 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClientResources\Resources\cancel.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\cancel.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\Resources\check.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\check.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>

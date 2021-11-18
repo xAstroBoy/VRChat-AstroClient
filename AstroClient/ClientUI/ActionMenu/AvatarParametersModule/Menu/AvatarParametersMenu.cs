@@ -7,6 +7,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
     using System.Runtime.InteropServices;
     using AstroMonos.Components.Tools.Listeners;
     using ClientResources;
+    using ClientResources.Loaders;
     using Gompoc.ActionMenuAPI.Api;
     using MelonLoader;
     using UnityEngine;
@@ -91,8 +92,8 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                         var filtered = Parameters.FilterDefaultParameters(parameters);
                         var avatar_descriptor = manager.prop_VRCAvatarDescriptor_0;
 
-                        CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked), (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); }, ClientResources.locked);
-                        CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager), ClientResources.save);
+                        CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked), (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); }, Icons.locked);
+                        CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager), Icons.save);
 
                         AvatarParameter FindParameter(string name)
                         {

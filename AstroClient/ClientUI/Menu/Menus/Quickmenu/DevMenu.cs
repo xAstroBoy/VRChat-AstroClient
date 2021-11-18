@@ -3,6 +3,7 @@
     #region Imports
 
     using ClientResources;
+    using ClientResources.Loaders;
     using Constants;
     using Networking;
     using xAstroBoy.AstroButtonAPI;
@@ -30,7 +31,7 @@
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(index, "Developer Menu", null, null, null, ClientResources.repair_sprite);
+                SubMenu = new QMTabMenu(index, "Developer Menu", null, null, null, Icons.repair_sprite);
 
                 DisconectButton = new QMSingleButton(SubMenu, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
                 ReconnectButton = new QMSingleButton(SubMenu, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using ClientResources;
+    using ClientResources.Loaders;
     using Modifications;
     using Modifications.Jar.AmongUS;
     using Modifications.Jar.Murder2;
@@ -18,7 +19,7 @@
 
         internal static void Init_Cheats_ShortcutBtn()
         {
-            WorldCheatsShortcut = new QMWings(1020, true, "World Cheats", "This Opens Compatible World cheats", null, ClientResources.thief_sprite);
+            WorldCheatsShortcut = new QMWings(1020, true, "World Cheats", "This Opens Compatible World cheats", null, Icons.thief_sprite);
             ToggleButtonVisibilityAndInteractivity(false);
         }
 
