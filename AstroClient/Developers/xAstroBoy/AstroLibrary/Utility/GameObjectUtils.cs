@@ -13,6 +13,7 @@
             return GetOwnerOfGameObject(gameObject) != GameInstances.CurrentUser._player;
         }
 
+
         public static Player GetOwnerOfGameObject(GameObject gameObject)
         {
             for (int i = 0; i < WorldUtils.Players.Count; i++)

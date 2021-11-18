@@ -200,6 +200,7 @@
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_LogsMenu.cs" />
     <Compile Include="ClientUI\Menu\Tabs\TabIndexs.cs" />
     <Compile Include="ClientUI\Menu\Wings\MainClientWings.cs" />
+    <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\UnityUtils.cs" />
     <Compile Include="Developers\xAstroBoy\CodeDebugTools\CodeDebug.cs" />
     <Compile Include="ClientUI\ActionMenu\LightsModule.cs" />
     <Compile Include="Developers\Cheetos\Exceptions\InvalidArrayItemCount.cs" />
