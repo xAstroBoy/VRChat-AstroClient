@@ -235,6 +235,7 @@
         [HideFromIl2Cpp]
         internal void SetRole(AmongUs_Roles NewRole)
         {
+            if (LinkedNode.NodeReader.Node == null) return; // Discard and dont Execute anything if Node is null!
             switch (NewRole)
             {
                 case AmongUs_Roles.Crewmate:

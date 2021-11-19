@@ -207,6 +207,7 @@
         [HideFromIl2Cpp]
         internal void SetRole(Murder4_Roles NewRole)
         {
+            if (LinkedNode.NodeReader.Node == null) return; // Discard and dont Execute anything if Node is null!
             switch (NewRole)
             {
                 case Murder4_Roles.Bystander:

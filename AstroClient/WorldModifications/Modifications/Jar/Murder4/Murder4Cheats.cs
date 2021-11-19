@@ -43,7 +43,6 @@
 
         private static PatronUnlocker DetectiveGunPerkUnlocker;
 
-        private static bool SafetySwap;
 
         // MAP GameObjects Required for control.
         internal static QMToggleButton Murder4ESPtoggler;
@@ -816,7 +815,7 @@
             {
                 var item = JarRoleController.Murder4_ESPs[index];
                 if (item != null)
-                    if (item.LinkedNode.NodeReader.Node.Equals(node))
+                    if (item.LinkedNode.NodeReader.Node.gameObject.Equals(node))
                         return item;
             }
 
@@ -864,7 +863,7 @@
                         return;
                     }
 
-                    if (!RoleSwapper_GetDetectiveRole || !RoleSwapper_GetMurdererRole || SafetySwap) return;
+                    if (!RoleSwapper_GetDetectiveRole || !RoleSwapper_GetMurdererRole) return;
                     if (!action.StartsWith("SyncAssign")) return; // Ignore any action that doesn't have assignments!
                     var TranslatedAction = ConvertStringToRole(action);
                     if (RoleSwapper_GetDetectiveRole)

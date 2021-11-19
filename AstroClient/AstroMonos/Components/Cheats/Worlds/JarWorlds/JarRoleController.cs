@@ -20,8 +20,8 @@
 
         internal static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
 
-        internal static Murder4_ESP _CurrentPlayer_Murder4ESP;
-        internal static AmongUS_ESP _CurrentPlayer_AmongUSESP;
+        private static Murder4_ESP _CurrentPlayer_Murder4ESP;
+        private static AmongUS_ESP _CurrentPlayer_AmongUS_ESP;
 
         internal static bool IsMurder4World { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
@@ -51,7 +51,12 @@
                 switch (_CurrentPlayer_Murder4ESP)
                 {
                     case null:
-                        return _CurrentPlayer_Murder4ESP = GameInstances.LocalPlayer.GetPlayer().gameObject.GetComponent<Murder4_ESP>();
+                        var item = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<Murder4_ESP>();
+                        if (!Murder4_ESPs.Contains(item))
+                        {
+                            Murder4_ESPs.Add(item);
+                        }
+                        return _CurrentPlayer_Murder4ESP = item;
 
                     default:
                         return _CurrentPlayer_Murder4ESP;
@@ -65,13 +70,17 @@
             get
             {
                 //this just looks weird
-                switch (_CurrentPlayer_AmongUSESP)
+                switch (_CurrentPlayer_AmongUS_ESP)
                 {
                     case null:
-                        return _CurrentPlayer_AmongUSESP = GameInstances.LocalPlayer.GetPlayer().gameObject.GetComponent<AmongUS_ESP>();
-
+                            var item = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<AmongUS_ESP>();
+                            if (!AmongUS_ESPs.Contains(item))
+                            {
+                                AmongUS_ESPs.Add(item);
+                            }
+                            return _CurrentPlayer_AmongUS_ESP = item;
                     default:
-                        return _CurrentPlayer_AmongUSESP;
+                        return _CurrentPlayer_AmongUS_ESP;
                 }
             }
         }
