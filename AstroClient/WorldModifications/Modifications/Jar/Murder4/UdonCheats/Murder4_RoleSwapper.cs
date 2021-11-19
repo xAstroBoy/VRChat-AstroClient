@@ -74,18 +74,18 @@
                         var tmplist = new List<string>();
                         for (int i = 0; i < JarRoleController.Murder4_ESPs.Count; i++)
                         {
-                            Murder4_ESP Component = JarRoleController.Murder4_ESPs[i];
-                            if (Component != null && Component.LinkedNode != null)
+                            Murder4_ESP TargetComponent = JarRoleController.Murder4_ESPs[i];
+                            if (TargetComponent != null && TargetComponent.LinkedNode != null)
                             {
-                                Il2CppArrayBase<UdonBehaviour> list = Component.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
+                                Il2CppArrayBase<UdonBehaviour> list = TargetComponent.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
                                 for (int i1 = 0; i1 < list.Count; i1++)
                                 {
                                     UdonBehaviour action = list[i1];
                                     if (action != null)
                                     {
-                                        if (Component.LinkedNode.NodeReader.VRCPlayerAPI != null)
+                                        if (TargetComponent.LinkedNode.NodeReader.VRCPlayerAPI != null)
                                         {
-                                            var NodeTranslated = Component.LinkedNode.NodeReader.VRCPlayerAPI.displayName;
+                                            var NodeTranslated = TargetComponent.LinkedNode.NodeReader.VRCPlayerAPI.displayName;
 
                                             if (tmplist.Contains(NodeTranslated))
                                             {
@@ -95,54 +95,26 @@
                                             var playerbtn = new QMSingleButton(CurrentScrollMenu, NodeTranslated, null, "Swap Role with " + NodeTranslated);
                                             playerbtn.SetAction(() =>
                                             {
-                                                // FIND ASSIGNED ROLE ON PLAYER NODE
-                                                string SelfRoleString = "none";
-                                                string TargetRoleString = "none";
-
+                                                Murder4_Roles SelfRole = Murder4_Roles.Null;
+                                                Murder4_Roles TargetRole = Murder4_Roles.Null;
                                                 var LocalPlayer = JarRoleController.CurrentPlayer_Murder4ESP;
                                                 if (LocalPlayer != null)
                                                 {
-                                                    if (LocalPlayer.CurrentRole == Murder4_Roles.Bystander)
-                                                    {
-                                                        SelfRoleString = "SyncAssignB";
-                                                    }
-
-                                                    if (LocalPlayer.CurrentRole == Murder4_Roles.Detective)
-                                                    {
-                                                        SelfRoleString = "SyncAssignD";
-                                                    }
-
-                                                    if (LocalPlayer.CurrentRole == Murder4_Roles.Murderer)
-                                                    {
-                                                        SelfRoleString = "SyncAssignM";
-                                                    }
+                                                    SelfRole = LocalPlayer.CurrentRole;
                                                 }
-
-                                                if (Component != null)
+                                                if (TargetComponent != null)
                                                 {
-                                                    if (Component.CurrentRole == Murder4_Roles.Bystander)
-                                                    {
-                                                        TargetRoleString = "SyncAssignB";
-                                                    }
-
-                                                    if (Component.CurrentRole == Murder4_Roles.Detective)
-                                                    {
-                                                        TargetRoleString = "SyncAssignD";
-                                                    }
-
-                                                    if (Component.CurrentRole == Murder4_Roles.Murderer)
-                                                    {
-                                                        TargetRoleString = "SyncAssignM";
-                                                    }
+                                                    TargetRole = TargetComponent.CurrentRole;
                                                 }
 
-                                                UdonSearch.FindUdonEvent(LocalPlayer.LinkedNode.Node.gameObject, TargetRoleString).ExecuteUdonEvent();
-                                                UdonSearch.FindUdonEvent(Component.LinkedNode.Node.gameObject, SelfRoleString).ExecuteUdonEvent();
+                                                TargetComponent.SetRole(SelfRole);
+                                                LocalPlayer.SetRole(TargetRole);
+
                                             });
 
-                                            if (Component.RoleToColor != null && Component.RoleToColor.HasValue)
+                                            if (TargetComponent.RoleToColor != null && TargetComponent.RoleToColor.HasValue)
                                             {
-                                                playerbtn.SetTextColor(Component.RoleToColor.GetValueOrDefault());
+                                                playerbtn.SetTextColor(TargetComponent.RoleToColor.GetValueOrDefault());
                                             }
 
 

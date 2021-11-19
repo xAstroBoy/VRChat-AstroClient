@@ -32,11 +32,6 @@
     {
         private static bool _UseGravity;
 
-        private static Murder4_ESP TargetNode;
-
-        private static Murder4_Roles TargetRole = Murder4_Roles.Null;
-        private static Murder4_Roles SelfRole = Murder4_Roles.Null;
-
         private static bool _OnlySelfHasPatreonPerk;
 
         private static bool _EveryoneHasPatreonPerk;
@@ -198,13 +193,6 @@
                 if (value == _RoleSwapper_GetDetectiveRole) return;
                 _RoleSwapper_GetDetectiveRole = value;
                 if (GetDetectiveRoleBtn != null) GetDetectiveRoleBtn.SetToggleState(value);
-
-                if (value)
-                {
-                    SelfRole = Murder4_Roles.Null;
-                    TargetRole = Murder4_Roles.Null;
-                    TargetNode = null;
-                }
             }
         }
 
@@ -216,12 +204,6 @@
                 if (value == _RoleSwapper_GetMurdererRole) return;
                 _RoleSwapper_GetMurdererRole = value;
                 if (GetMurdererRoleBtn != null) GetMurdererRoleBtn.SetToggleState(value);
-                if (value)
-                {
-                    SelfRole = Murder4_Roles.Null;
-                    TargetRole = Murder4_Roles.Null;
-                    TargetNode = null;
-                }
             }
         }
 
@@ -515,9 +497,6 @@
             EveryoneHasPatreonPerk = false;
             OnlySelfHasPatreonPerk = false;
             Snake_Crate = null;
-            SelfRole = Murder4_Roles.Null;
-            TargetRole = Murder4_Roles.Null;
-            TargetNode = null;
             if (Murder4ESPtoggler != null) Murder4ESPtoggler.SetToggleState(false);
             UseGravity = true;
         }
@@ -809,37 +788,19 @@
             foreach (var knife in Knifes) knife.Pickup_RestoreOriginalProperties();
         }
 
-        internal static Murder4_ESP FindRoleEspByNode(GameObject node)
+        internal static Murder4_ESP FindNodeWithRole(Murder4_Roles role)
         {
             for (var index = 0; index < JarRoleController.Murder4_ESPs.Count; index++)
             {
                 var item = JarRoleController.Murder4_ESPs[index];
                 if (item != null)
-                    if (item.LinkedNode.Node.gameObject.Equals(node))
+                    if (item.CurrentRole == role)
                         return item;
             }
 
             return null;
         }
 
-        internal static Murder4_Roles ConvertStringToRole(string action)
-        {
-            if (!action.IsNotNullOrEmptyOrWhiteSpace()) return Murder4_Roles.Null;
-            switch (action)
-            {
-                case "SyncAssignD":
-                    return Murder4_Roles.Detective;
-
-                case "SyncAssignM":
-                    return Murder4_Roles.Murderer;
-
-                case "SyncAssignB":
-                    return Murder4_Roles.Bystander;
-
-                default:
-                    return Murder4_Roles.Null;
-            }
-        }
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
@@ -865,42 +826,29 @@
 
                     if (!RoleSwapper_GetDetectiveRole || !RoleSwapper_GetMurdererRole) return;
                     if (!action.StartsWith("SyncAssign")) return; // Ignore any action that doesn't have assignments!
-                    var TranslatedAction = ConvertStringToRole(action);
                     if (RoleSwapper_GetDetectiveRole)
                     {
-                        if (obj == JarRoleController.CurrentPlayer_Murder4ESP.LinkedNode.Node.gameObject)
+                        MiscUtils.DelayFunction(0.5f, () =>
                         {
-                            SelfRole = TranslatedAction;
-                        }
-                        else if (TranslatedAction == Murder4_Roles.Detective)
-                        {
-                            TargetNode = FindRoleEspByNode(obj);
-                            TargetRole = TranslatedAction;
-                        }
-
-                        if (TargetNode != null)
-                        {
+                            var TargetNode = FindNodeWithRole(Murder4_Roles.Detective);
+                            if (TargetNode != null)
+                            {
+                                SwapRoles(TargetNode);
+                            }
                             RoleSwapper_GetDetectiveRole = false;
-                            SwapRoles(JarRoleController.CurrentPlayer_Murder4ESP, TargetNode, SelfRole, TargetRole);
-                        }
+                        });
                     }
                     else if (RoleSwapper_GetMurdererRole)
                     {
-                        if (obj == JarRoleController.CurrentPlayer_Murder4ESP.LinkedNode.Node.gameObject)
+                        MiscUtils.DelayFunction(0.5f, () =>
                         {
-                            SelfRole = TranslatedAction;
-                        }
-                        else if (TranslatedAction == Murder4_Roles.Murderer)
-                        {
-                            TargetNode = FindRoleEspByNode(obj);
-                            TargetRole = TranslatedAction;
-                        }
-
-                        if (TargetNode != null)
-                        {
-                            RoleSwapper_GetMurdererRole = false;
-                            SwapRoles(JarRoleController.CurrentPlayer_Murder4ESP, TargetNode, SelfRole, TargetRole);
-                        }
+                            var TargetNode = FindNodeWithRole(Murder4_Roles.Murderer);
+                            if (TargetNode != null)
+                            {
+                                SwapRoles(TargetNode);
+                            }
+                            RoleSwapper_GetDetectiveRole = false;
+                        });
                     }
                 }
             }
@@ -910,15 +858,17 @@
             }
         }
 
-        internal static void SwapRoles(Murder4_ESP SelfESP, Murder4_ESP TargetESP, Murder4_Roles AssignedSelfRole, Murder4_Roles AssignedTargetRole)
+        internal static void SwapRoles(Murder4_ESP TargetESP)
         {
-            if (SelfESP == TargetESP)
+            var AssignedSelfRole = JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole;
+            var AssignedTargetRole = TargetESP.CurrentRole;
+            if (JarRoleController.CurrentPlayer_Murder4ESP == TargetESP)
             {
                 ModConsole.DebugLog("Target Node and SelfNode are the same!");
                 return;
             }
 
-            if (AssignedTargetRole == AssignedSelfRole)
+            if (AssignedTargetRole == JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole)
             {
                 ModConsole.DebugLog("Target Role  and Self Role  are the same!");
                 return;
@@ -929,8 +879,7 @@
             //}));
 
             if (TargetESP != null) TargetESP.SetRole(AssignedSelfRole);
-
-            if (SelfESP != null) SelfESP.SetRole(AssignedTargetRole);
+            if (JarRoleController.CurrentPlayer_Murder4ESP != null) JarRoleController.CurrentPlayer_Murder4ESP.SetRole(AssignedTargetRole);
             ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
         }
     }

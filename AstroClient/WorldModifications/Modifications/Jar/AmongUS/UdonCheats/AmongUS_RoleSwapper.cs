@@ -74,18 +74,18 @@
                         var tmplist = new List<string>();
                         for (int i = 0; i < JarRoleController.AmongUS_ESPs.Count; i++)
                         {
-                            AmongUS_ESP Component = JarRoleController.AmongUS_ESPs[i];
-                            if (Component != null && Component.LinkedNode != null)
+                            AmongUS_ESP TargetComponent = JarRoleController.AmongUS_ESPs[i];
+                            if (TargetComponent != null && TargetComponent.LinkedNode != null)
                             {
-                                Il2CppArrayBase<UdonBehaviour> list = Component.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
+                                Il2CppArrayBase<UdonBehaviour> list = TargetComponent.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
                                 for (int i1 = 0; i1 < list.Count; i1++)
                                 {
                                     UdonBehaviour action = list[i1];
                                     if (action != null)
                                     {
-                                        if (Component.LinkedNode.NodeReader.VRCPlayerAPI != null)
+                                        if (TargetComponent.LinkedNode.NodeReader.VRCPlayerAPI != null)
                                         {
-                                            var NodeTranslated = Component.LinkedNode.NodeReader.VRCPlayerAPI.displayName;
+                                            var NodeTranslated = TargetComponent.LinkedNode.NodeReader.VRCPlayerAPI.displayName;
 
                                             if (tmplist.Contains(NodeTranslated))
                                             {
@@ -95,41 +95,25 @@
                                             var playerbtn = new QMSingleButton(CurrentScrollMenu, NodeTranslated, null, "Swap Role with " + NodeTranslated);
                                             playerbtn.SetAction(new Action(() =>
                                             {
-                                                // FIND ASSIGNED ROLE ON PLAYER NODE
-                                                string SelfRoleString = "none";
-                                                string TargetRoleString = "none";
-
+                                                AmongUs_Roles SelfRole = AmongUs_Roles.Null;
+                                                AmongUs_Roles TargetRole = AmongUs_Roles.Null;
                                                 var LocalPlayer = JarRoleController.CurrentPlayer_AmongUS_ESP;
                                                 if (LocalPlayer != null)
                                                 {
-                                                    if (LocalPlayer.CurrentRole == AmongUs_Roles.Crewmate)
-                                                    {
-                                                        SelfRoleString = "SyncAssignB";
-                                                    }
-                                                    if (LocalPlayer.CurrentRole == AmongUs_Roles.Impostor)
-                                                    {
-                                                        SelfRoleString = "SyncAssignM";
-                                                    }
+                                                  SelfRole = LocalPlayer.CurrentRole;
                                                 }
-                                                if (Component != null)
+                                                if (TargetComponent != null)
                                                 {
-                                                    if (Component.CurrentRole == AmongUs_Roles.Crewmate)
-                                                    {
-                                                        TargetRoleString = "SyncAssignB";
-                                                    }
-                                                    if (Component.CurrentRole == AmongUs_Roles.Impostor)
-                                                    {
-                                                        TargetRoleString = "SyncAssignM";
-                                                    }
+                                                    TargetRole = TargetComponent.CurrentRole;
                                                 }
 
-                                                UdonSearch.FindUdonEvent(LocalPlayer.LinkedNode.Node.gameObject, TargetRoleString).ExecuteUdonEvent();
-                                                UdonSearch.FindUdonEvent(Component.LinkedNode.Node.gameObject, SelfRoleString).ExecuteUdonEvent();
+                                                TargetComponent.SetRole(SelfRole);
+                                                LocalPlayer.SetRole(TargetRole);
                                             }));
 
-                                            if (Component.RoleToColor != null)
+                                            if (TargetComponent.RoleToColor != null)
                                             {
-                                                playerbtn.SetTextColor(Component.RoleToColor.GetValueOrDefault());
+                                                playerbtn.SetTextColor(TargetComponent.RoleToColor.GetValueOrDefault());
                                             }
 
                                             Generated.Add(playerbtn);

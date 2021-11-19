@@ -23,10 +23,6 @@
 
     internal class AmongUSCheats : AstroEvents
     {
-        private static AmongUS_ESP TargetNode;
-
-        private static AmongUs_Roles TargetRole = AmongUs_Roles.Null;
-        private static AmongUs_Roles SelfRole = AmongUs_Roles.Null;
 
         internal static bool _RoleSwapper_GetImpostorRole;
 
@@ -63,12 +59,6 @@
                 if (value == _RoleSwapper_GetImpostorRole) return;
                 _RoleSwapper_GetImpostorRole = value;
                 if (GetImpostorRoleBtn != null) GetImpostorRoleBtn.SetToggleState(value);
-                if (value)
-                {
-                    SelfRole = AmongUs_Roles.Null;
-                    TargetRole = AmongUs_Roles.Null;
-                    TargetNode = null;
-                }
             }
         }
 
@@ -124,10 +114,6 @@
             AbortGameEvent = null;
             VictoryCrewmateEvent = null;
             VictoryImpostorEvent = null;
-
-            SelfRole = AmongUs_Roles.Null;
-            TargetRole = AmongUs_Roles.Null;
-            TargetNode = null;
 
             RoleSwapper_GetImpostorRole = false;
             SerializerRot = new Quaternion(0, 0, 0, 0);
@@ -288,34 +274,19 @@
             GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Impostor", () => { VictoryImpostorEvent.ExecuteUdonEvent(); }, "Force Victory Impostor Event", Color.red);
         }
 
-        internal static AmongUS_ESP FindRoleEspByNode(GameObject node)
+        internal static AmongUS_ESP FindNodeWithRole(AmongUs_Roles role)
         {
             for (var index = 0; index < JarRoleController.AmongUS_ESPs.Count; index++)
             {
                 var item = JarRoleController.AmongUS_ESPs[index];
                 if (item != null)
-                    if (item.LinkedNode.Node.gameObject.Equals(node))
+                    if (item.CurrentRole == role)
                         return item;
             }
 
             return null;
         }
 
-        internal static AmongUs_Roles ConvertStringToRole(string action)
-        {
-            if (!action.IsNotNullOrEmptyOrWhiteSpace()) return AmongUs_Roles.Null;
-            switch (action)
-            {
-                case "SyncAssignM":
-                    return AmongUs_Roles.Impostor;
-
-                case "SyncAssignB":
-                    return AmongUs_Roles.Crewmate;
-
-                default:
-                    return AmongUs_Roles.Null;
-            }
-        }
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
@@ -325,24 +296,19 @@
                 {
                     if (!RoleSwapper_GetImpostorRole) return;
                     if (!action.StartsWith("SyncAssign")) return; // Ignore any action that doesn't have assignments!
-                    var TranslatedAction = ConvertStringToRole(action);
                     if (RoleSwapper_GetImpostorRole)
                     {
-                        if (obj == JarRoleController.CurrentPlayer_AmongUS_ESP.LinkedNode.Node.gameObject)
-                        {
-                            SelfRole = TranslatedAction;
-                        }
-                        else if (TranslatedAction == AmongUs_Roles.Impostor)
-                        {
-                            TargetNode = FindRoleEspByNode(obj);
-                            TargetRole = TranslatedAction;
-                        }
 
-                        if (TargetNode != null)
+                        MiscUtils.DelayFunction(0.5f, () =>
                         {
+                            var TargetNode = FindNodeWithRole(AmongUs_Roles.Impostor);
+                            if (TargetNode != null)
+                            {
+                                SwapRoles(TargetNode);
+                            }
                             RoleSwapper_GetImpostorRole = false;
-                            SwapRoles(JarRoleController.CurrentPlayer_AmongUS_ESP, TargetNode, SelfRole, TargetRole);
-                        }
+                        });
+
                     }
                 }
             }
@@ -352,9 +318,11 @@
             }
         }
 
-        internal static void SwapRoles(AmongUS_ESP SelfESP, AmongUS_ESP TargetESP, AmongUs_Roles AssignedSelfRole, AmongUs_Roles AssignedTargetRole)
+        internal static void SwapRoles(AmongUS_ESP TargetESP)
         {
-            if (SelfESP == TargetESP)
+            var AssignedSelfRole = JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole;
+            var AssignedTargetRole = TargetESP.CurrentRole;
+            if (JarRoleController.CurrentPlayer_AmongUS_ESP == TargetESP)
             {
                 ModConsole.DebugLog("Target Node and SelfNode are the same!");
                 return;
@@ -371,9 +339,12 @@
             //}));
 
             if (TargetESP != null) TargetESP.SetRole(AssignedSelfRole);
-
-            if (SelfESP != null) SelfESP.SetRole(AssignedTargetRole);
+            if (JarRoleController.CurrentPlayer_AmongUS_ESP != null) JarRoleController.CurrentPlayer_AmongUS_ESP.SetRole(AssignedTargetRole);
             ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
         }
+
+
+
+
     }
 }

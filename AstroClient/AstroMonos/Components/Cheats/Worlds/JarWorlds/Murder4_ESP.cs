@@ -8,6 +8,9 @@
     using System;
     using System.Collections;
     using System.Linq;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.UdonSearcher;
+    using Constants;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -195,7 +198,7 @@
 
             CurrentRole = Murder4_Roles.Unassigned;
             ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
-            MelonCoroutines.Start(FindLinkedNode());
+            MelonCoroutines.Start(FindEverything());
         }
 
         internal void OnDestroy()
@@ -212,23 +215,22 @@
             {
                 case Murder4_Roles.Bystander:
                     {
-                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignB");
+                        GetBystanderEvent?.ExecuteUdonEvent();
                         break;
                     }
                 case Murder4_Roles.Detective:
                     {
-                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignD");
+                        GetDetectiveEvent?.ExecuteUdonEvent();
                         break;
                     }
                 case Murder4_Roles.Murderer:
                     {
-                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignM");
+                        GetMurdererEvent?.ExecuteUdonEvent();
                         break;
                     }
                 case Murder4_Roles.None:
                     if (CurrentRole == Murder4_Roles.Detective || CurrentRole == Murder4_Roles.Murderer || CurrentRole == Murder4_Roles.Bystander)
-                        if (LinkedNode.NodeReader.Node != null)
-                            LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncKill");
+                        GetKillEvent?.ExecuteUdonEvent();
                     break;
 
                 case Murder4_Roles.Null:
@@ -236,17 +238,22 @@
                     return;
                     break;
             }
-
-            if (NewRole == Murder4_Roles.Unassigned || NewRole == Murder4_Roles.Null) return;
-
-            CurrentRole = NewRole;
         }
 
-        private IEnumerator FindLinkedNode()
+        private IEnumerator FindEverything()
         {
             while (LinkedNode == null)
                 yield return null;
-            ModConsole.DebugLog($"Murder 4 ESP , Found Linked Node to {Player.GetDisplayName()}");
+            while (GetBystanderEvent == null)
+                yield return null;
+            while (GetKillEvent == null)
+                yield return null;
+            while (GetDetectiveEvent == null)
+                yield return null;
+            while (GetMurdererEvent == null)
+                yield return null;
+
+            ModConsole.DebugLog($"Found all the required Events and Node!");
         }
 
         internal override void OnRoomLeft()
@@ -277,18 +284,14 @@
 
                                     break;
                                 }
-
                             case "SyncAssignM":
                                 {
                                     CurrentRole = Murder4_Roles.Murderer;
-
                                     break;
                                 }
-
                             case "SyncKill":
                                 {
                                     CurrentRole = Murder4_Roles.None;
-
                                     break;
                                 }
                         }
@@ -308,6 +311,67 @@
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
+            }
+        }
+
+        private CustomLists.UdonBehaviour_Cached _GetBystanderEvent;
+        private CustomLists.UdonBehaviour_Cached GetBystanderEvent
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_GetBystanderEvent == null)
+                {
+                    _GetBystanderEvent = UdonSearch.FindUdonEvent(LinkedNode.Node.gameObject, "SyncAssignB");
+                }
+
+                return _GetBystanderEvent;
+            }
+        }
+        private CustomLists.UdonBehaviour_Cached _GetMurdererEvent;
+        private CustomLists.UdonBehaviour_Cached GetMurdererEvent
+        {
+            [HideFromIl2Cpp]
+
+            get
+            {
+                if (_GetMurdererEvent == null)
+                {
+                    _GetMurdererEvent = UdonSearch.FindUdonEvent(LinkedNode.Node.gameObject, "SyncAssignM");
+                }
+
+                return _GetMurdererEvent;
+            }
+        }
+
+        private CustomLists.UdonBehaviour_Cached _GetKillEvent;
+        private CustomLists.UdonBehaviour_Cached GetKillEvent
+        {
+            [HideFromIl2Cpp]
+
+            get
+            {
+                if (_GetKillEvent == null)
+                {
+                    _GetKillEvent = UdonSearch.FindUdonEvent(LinkedNode.Node.gameObject, "SyncKill");
+                }
+
+                return _GetKillEvent;
+            }
+        }
+
+        private CustomLists.UdonBehaviour_Cached _GetDetectiveEvent;
+        private CustomLists.UdonBehaviour_Cached GetDetectiveEvent
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_GetDetectiveEvent == null)
+                {
+                    _GetDetectiveEvent = UdonSearch.FindUdonEvent(LinkedNode.Node.gameObject, "SyncAssignD");
+                }
+
+                return _GetDetectiveEvent;
             }
         }
 

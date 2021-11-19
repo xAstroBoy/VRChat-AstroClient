@@ -9,6 +9,9 @@
     using System;
     using System.Collections;
     using System.Linq;
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.UdonSearcher;
+    using Constants;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -222,7 +225,7 @@
 
             CurrentRole = AmongUs_Roles.Unassigned;
             ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Among US Role ESP.");
-            MelonCoroutines.Start(FindLinkedNode());
+            MelonCoroutines.Start(FindEverything());
         }
 
         internal void OnDestroy()
@@ -240,19 +243,18 @@
             {
                 case AmongUs_Roles.Crewmate:
                     {
-                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignB");
+                        GetCrewmateEvent?.ExecuteUdonEvent();
                         break;
                     }
                 case AmongUs_Roles.Impostor:
                     {
-                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignM");
+                        GetImpostorEvent?.ExecuteUdonEvent();
                         break;
                     }
                 case AmongUs_Roles.None:
                     if (CurrentRole == AmongUs_Roles.Impostor || CurrentRole == AmongUs_Roles.Crewmate)
                     {
-                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncKill");
-                        HasVoted = false;
+                        GetKillEvent?.ExecuteUdonEvent();
                     }
 
                     break;
@@ -262,17 +264,66 @@
                     return;
                     break;
             }
-
-            if (NewRole == AmongUs_Roles.Unassigned || NewRole == AmongUs_Roles.Null) return;
-
-            CurrentRole = NewRole;
         }
 
-        private IEnumerator FindLinkedNode()
+        private CustomLists.UdonBehaviour_Cached _GetCrewmateEvent;
+        private CustomLists.UdonBehaviour_Cached GetCrewmateEvent
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_GetCrewmateEvent == null)
+                {
+                    _GetCrewmateEvent = UdonSearch.FindUdonEvent(LinkedNode.Node.gameObject, "SyncAssignB");
+                }
+
+                return _GetCrewmateEvent;
+            }
+        }
+        private CustomLists.UdonBehaviour_Cached _GetImpostorEvent;
+        private CustomLists.UdonBehaviour_Cached GetImpostorEvent
+        {
+            [HideFromIl2Cpp]
+
+            get
+            {
+                if (_GetImpostorEvent == null)
+                {
+                    _GetImpostorEvent = UdonSearch.FindUdonEvent(LinkedNode.Node.gameObject, "SyncAssignM");
+                }
+
+                return _GetImpostorEvent;
+            }
+        }
+
+        private CustomLists.UdonBehaviour_Cached _GetKillEvent;
+        private CustomLists.UdonBehaviour_Cached GetKillEvent
+        {
+            [HideFromIl2Cpp]
+
+            get
+            {
+                if (_GetKillEvent == null)
+                {
+                    _GetKillEvent = UdonSearch.FindUdonEvent(LinkedNode.Node.gameObject, "SyncKill");
+                }
+
+                return _GetKillEvent;
+            }
+        }
+
+        private IEnumerator FindEverything()
         {
             while (LinkedNode == null)
                 yield return null;
-            ModConsole.DebugLog($"Among US ESP , Found Linked Node to {Player.GetDisplayName()}");
+            while (GetKillEvent == null)
+                yield return null;
+            while (GetCrewmateEvent == null)
+                yield return null;
+            while (GetImpostorEvent  == null)
+                yield return null;
+
+            ModConsole.DebugLog($"Found all the required Events and Node!");
         }
 
         private void ResetESP()
