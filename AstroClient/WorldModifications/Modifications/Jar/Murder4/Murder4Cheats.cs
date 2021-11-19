@@ -812,7 +812,7 @@
                 if (sender == null) return;
                 if (HasMurder4WorldLoaded)
                 {
-                    if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action == "SyncStart")
+                    if (action is "SyncVictoryB" or "SyncVictoryM" or "SyncAbort" or "SyncStart")
                     {
                         Knifes.KillCustomComponents(false);
                         DetectiveGuns.KillCustomComponents(false);
@@ -822,35 +822,35 @@
                         Grenades.KillCustomComponents(false);
                         Knifes.KillCustomComponents(false);
                         if (!UseGravity) UseGravity = true;
-
                         return;
                     }
-
-                    if (!RoleSwapper_GetDetectiveRole || !RoleSwapper_GetMurdererRole) return;
-                    if (!action.StartsWith("SyncAssign")) return; // Ignore any action that doesn't have assignments!
-                    if (RoleSwapper_GetDetectiveRole)
+                    if (action.StartsWith("SyncAssign"))
                     {
-                        MelonCoroutines.Start(SwapRole(Murder4_Roles.Detective));
-                        RoleSwapper_GetDetectiveRole = false;
-                    }
-                    else if (RoleSwapper_GetMurdererRole)
-                    {
-                        MelonCoroutines.Start(SwapRole(Murder4_Roles.Murderer));
-                        RoleSwapper_GetMurdererRole = false;
+                        if (RoleSwapper_GetDetectiveRole)
+                        {
+                            RoleSwapper_GetDetectiveRole = false;
+                            ModConsole.DebugLog("Starting Swapping for Detective Role!");
+                            MelonCoroutines.Start(SwapRole(Murder4_Roles.Detective));
+                        }
+                        if (RoleSwapper_GetMurdererRole)
+                        {
+                            RoleSwapper_GetMurdererRole = false;
+                            ModConsole.DebugLog("Starting Swapping for Murderer role!");
+                            MelonCoroutines.Start(SwapRole(Murder4_Roles.Murderer));
+                        }
                     }
                 }
             }
-            catch (Exception e)
+            catch
             {
-                ModConsole.ErrorExc(e);
             }
         }
 
         private static IEnumerator SwapRole(Murder4_Roles Selectedrole)
         {
             while (FindNodeWithRole(Selectedrole) == null)
-                yield return null;
-            yield return new WaitForSeconds(0.5f);
+                yield return new WaitForEndOfFrame();
+            ModConsole.DebugLog("Initiating Swap!");
             var TargetNode = FindNodeWithRole(Selectedrole);
             if (TargetNode != null)
             {
@@ -880,7 +880,7 @@
 
             if (TargetESP != null) TargetESP.SetRole(AssignedSelfRole);
             if (JarRoleController.CurrentPlayer_Murder4ESP != null) JarRoleController.CurrentPlayer_Murder4ESP.SetRole(AssignedTargetRole);
-            ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
+            ModConsole.DebugLog($"Executed Role Swapping!, {TargetESP.Player.DisplayName()} Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
         }
     }
 }

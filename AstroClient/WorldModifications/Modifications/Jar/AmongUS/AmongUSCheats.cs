@@ -297,24 +297,25 @@
                 if (HasAmongUsWorldLoaded)
                 {
                     if (!RoleSwapper_GetImpostorRole) return;
-                    if (!action.StartsWith("SyncAssign")) return; // Ignore any action that doesn't have assignments!
-                    if (RoleSwapper_GetImpostorRole)
+                    if (action.StartsWith("SyncAssign"))
                     {
-                        MelonCoroutines.Start(SwapRole(AmongUs_Roles.Impostor));
-                        RoleSwapper_GetImpostorRole = false;
+                        if (RoleSwapper_GetImpostorRole)
+                        {
+                            MelonCoroutines.Start(SwapRole(AmongUs_Roles.Impostor));
+                            RoleSwapper_GetImpostorRole = false;
+                        }
                     }
                 }
             }
-            catch (Exception e)
+            catch 
             {
-                ModConsole.ErrorExc(e);
             }
         }
         private static IEnumerator SwapRole(AmongUs_Roles Selectedrole)
         {
             while (FindNodeWithRole(Selectedrole) == null)
-                yield return null;
-            yield return new WaitForSeconds(0.5f);
+                yield return new WaitForEndOfFrame();
+            ModConsole.DebugLog("Initiating Swap!");
             var TargetNode = FindNodeWithRole(Selectedrole);
             if (TargetNode != null)
             {
@@ -344,7 +345,7 @@
 
             if (TargetESP != null) TargetESP.SetRole(AssignedSelfRole);
             if (JarRoleController.CurrentPlayer_AmongUS_ESP != null) JarRoleController.CurrentPlayer_AmongUS_ESP.SetRole(AssignedTargetRole);
-            ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
+            ModConsole.DebugLog($"Executed Role Swapping!, {TargetESP.Player.DisplayName()} Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
         }
 
 

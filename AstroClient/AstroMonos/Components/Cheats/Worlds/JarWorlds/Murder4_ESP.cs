@@ -259,12 +259,21 @@
             Destroy(this);
         }
 
+        internal override void OnPlayerLeft(Player player)
+        {
+            if (player.Equals(this.Player))
+            {
+                Destroy(this);
+            }
+        }
+
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             try
             {
                 if (LinkedNode.Node == null) return;
                 if (LinkedNode.Node.gameObject == null) return;
+                if (Player == null) Destroy(this);
                 if (sender == null) return;
                 if (!action.IsNotNullOrEmptyOrWhiteSpace()) return;
                 if (obj != null) // Node events (only on Assigned node)!
@@ -307,9 +316,8 @@
                         }
                 }
             }
-            catch (Exception e)
+            catch
             {
-                ModConsole.ErrorExc(e);
             }
         }
 
@@ -402,6 +410,8 @@
         }
         private void ResetESPColor()
         {
+
+            if (IsSelf) return;
             if (ESP != null)
             {
                 ESP.ResetColor();
@@ -411,6 +421,7 @@
 
         private void UpdateESP()
         {
+            if (IsSelf) return;
             if (ESP != null)
             {
                 ESP.UseCustomColor = ViewRoles;

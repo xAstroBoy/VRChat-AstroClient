@@ -413,9 +413,8 @@
                         }
                 }
             }
-            catch (Exception e)
+            catch 
             {
-                ModConsole.ErrorExc(e);
             }
         }
 
