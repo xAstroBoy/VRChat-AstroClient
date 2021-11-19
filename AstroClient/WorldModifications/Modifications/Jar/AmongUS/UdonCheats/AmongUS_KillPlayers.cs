@@ -61,16 +61,16 @@
         {
             if (!HasGenerated)
             {
-                if (JarRoleController.RoleEspComponents.Count() != 0)
+                if (JarRoleController.AmongUS_ESPs.Count() != 0)
                 {
                     try
                     {
-                        if (JarRoleController.RoleEspComponents.Count() != 0)
+                        if (JarRoleController.AmongUS_ESPs.Count() != 0)
                         {
                             var tmplist = new List<string>();
-                            for (int i = 0; i < JarRoleController.RoleEspComponents.Count; i++)
+                            for (int i = 0; i < JarRoleController.AmongUS_ESPs.Count; i++)
                             {
-                                JarRoleESP Component = JarRoleController.RoleEspComponents[i];
+                                AmongUS_ESP Component = JarRoleController.AmongUS_ESPs[i];
                                 if (Component != null && Component.LinkedNode != null)
                                 {
                                     UnhollowerBaseLib.Il2CppArrayBase<UdonBehaviour> list = Component.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();

@@ -20,13 +20,13 @@
 
         internal static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
 
-        internal static JarRoleESP _CurrentPlayerRoleESP;
+        internal static Murder4_ESP _CurrentPlayer_Murder4ESP;
+        internal static AmongUS_ESP _CurrentPlayer_AmongUSESP;
 
         internal static bool IsMurder4World { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal static bool IsAmongUsWorld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        // TODO: Make A Action event to bind on JarRoleESP Component.
 
         internal static bool ViewRoles
         {
@@ -35,43 +35,62 @@
             set
             {
                 _ViewRoles = value;
-                if (Murder4RolesRevealerToggle != null && IsMurder4World)
+                if (Murder4RolesRevealerToggle != null)
                 {
                     Murder4RolesRevealerToggle.SetToggleState(value);
-                    Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
                 }
-
-                if (AmongUSRolesRevealerToggle != null && IsAmongUsWorld)
+                if (AmongUSRolesRevealerToggle != null)
                 {
                     AmongUSRolesRevealerToggle.SetToggleState(value);
-                    Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
                 }
+
+                Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
+
             }
         }
 
-        internal static JarRoleESP CurrentPlayerRoleESP
+        internal static Murder4_ESP CurrentPlayer_Murder4ESP
         {
             [HideFromIl2Cpp]
             get
             {
                 //this just looks weird
-                switch (_CurrentPlayerRoleESP)
+                switch (_CurrentPlayer_Murder4ESP)
                 {
                     case null:
-                        return _CurrentPlayerRoleESP = GameInstances.LocalPlayer.GetPlayer().gameObject.GetComponent<JarRoleESP>();
+                        return _CurrentPlayer_Murder4ESP = GameInstances.LocalPlayer.GetPlayer().gameObject.GetComponent<Murder4_ESP>();
 
                     default:
-                        return _CurrentPlayerRoleESP;
+                        return _CurrentPlayer_Murder4ESP;
                 }
             }
         }
+
+        internal static AmongUS_ESP CurrentPlayer_AmongUS_ESP
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                //this just looks weird
+                switch (_CurrentPlayer_AmongUSESP)
+                {
+                    case null:
+                        return _CurrentPlayer_AmongUSESP = GameInstances.LocalPlayer.GetPlayer().gameObject.GetComponent<AmongUS_ESP>();
+
+                    default:
+                        return _CurrentPlayer_AmongUSESP;
+                }
+            }
+        }
+
 
         internal static QMToggleButton Murder4RolesRevealerToggle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal static QMToggleButton AmongUSRolesRevealerToggle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal static List<LinkedNodes> JarRoleLinks { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new();
 
-        internal static List<JarRoleESP> RoleEspComponents { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new();
+        internal static List<Murder4_ESP> Murder4_ESPs { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new();
+        internal static List<AmongUS_ESP> AmongUS_ESPs { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new();
 
         internal static string DescPart
         {
@@ -89,18 +108,25 @@
             return JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
         }
 
-        internal static JarRoleESP GetLinkedComponent(int value)
+        internal static Murder4_ESP Murder4_GetLinkedComponent(int value)
         {
-            return RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
+            return Murder4_ESPs.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
+        }
+
+        internal static AmongUS_ESP AmongUS_GetLinkedComponent(int value)
+        {
+            return AmongUS_ESPs.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
         }
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             JarRoleLinks.Clear();
-            RoleEspComponents.Clear();
+            Murder4_ESPs.Clear();
+            AmongUS_ESPs.Clear();
+
             //Murder4RolesRevealerToggle.SetToggleState(false);
             //AmongUSRolesRevealerToggle.SetToggleState(false);
-            _CurrentPlayerRoleESP = null;
+            _CurrentPlayer_Murder4ESP = null;
             ViewRoles = false;
             IsAmongUsWorld = false;
             IsMurder4World = false;
@@ -108,12 +134,21 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            if (IsAmongUsWorld || IsMurder4World)
-                if (JarRoleLinks.Count() != 0 && player != null)
-                {
-                    var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
-                    if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer)) RoleEspComponents.Add(RoleRevealer);
-                }
+            if (!IsAmongUsWorld || !IsMurder4World) return;
+            if (JarRoleLinks.Count == 0 && player == null) return;
+            if (IsMurder4World)
+            {
+                var RoleRevealer = player.gameObject.AddComponent<Murder4_ESP>();
+                if (RoleRevealer != null && !Murder4_ESPs.Contains(RoleRevealer)) Murder4_ESPs.Add(RoleRevealer);
+
+            }
+            else if (IsAmongUsWorld)
+            {
+                var RoleRevealer = player.gameObject.AddComponent<AmongUS_ESP>();
+                if (RoleRevealer != null && !AmongUS_ESPs.Contains(RoleRevealer)) AmongUS_ESPs.Add(RoleRevealer);
+            }
+
+
         }
 
         internal static int? RemoveNodeText(Transform node)

@@ -17,12 +17,12 @@
         }
         internal static void AllSkipVote()
         {
-            if (JarRoleController.RoleEspComponents.Count() != 0)
+            if (JarRoleController.AmongUS_ESPs.Count() != 0)
             {
-                for (int i = 0; i < JarRoleController.RoleEspComponents.Count; i++)
+                for (int i = 0; i < JarRoleController.AmongUS_ESPs.Count; i++)
                 {
-                    JarRoleESP ActiveNode = JarRoleController.RoleEspComponents[i];
-                    if (ActiveNode != null && ActiveNode.LinkedNode != null && ActiveNode.AmongUsCurrentRole != JarRoleESP.AmongUsRoles.None && ActiveNode.AmongUsCurrentRole != JarRoleESP.AmongUsRoles.Unassigned)
+                    AmongUS_ESP ActiveNode = JarRoleController.AmongUS_ESPs[i];
+                    if (ActiveNode != null && ActiveNode.LinkedNode != null && ActiveNode.AmongUsCurrentRole != AmongUs_Roles.None && ActiveNode.AmongUsCurrentRole != AmongUs_Roles.Unassigned)
                     {
                         bool HasVoted = false;
                         UnhollowerBaseLib.Il2CppArrayBase<UdonBehaviour> list = ActiveNode.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
@@ -51,16 +51,16 @@
             }
         }
 
-        internal static void AllVoteFor(JarRoleESP VictimComponent)
+        internal static void AllVoteFor(AmongUS_ESP VictimComponent)
         {
             if (VictimComponent != null && VictimComponent.Player != null && VictimComponent.LinkedNode != null)
             {
-                if (JarRoleController.RoleEspComponents.Count() != 0)
+                if (JarRoleController.AmongUS_ESPs.Count() != 0)
                 {
-                    for (int i = 0; i < JarRoleController.RoleEspComponents.Count; i++)
+                    for (int i = 0; i < JarRoleController.AmongUS_ESPs.Count; i++)
                     {
-                        JarRoleESP ActiveNode = JarRoleController.RoleEspComponents[i];
-                        if (ActiveNode != null && VictimComponent.LinkedNode.Node != null && ActiveNode.AmongUsCurrentRole != JarRoleESP.AmongUsRoles.None && ActiveNode.AmongUsCurrentRole != JarRoleESP.AmongUsRoles.Unassigned && ActiveNode != VictimComponent.LinkedNode.Node)
+                        AmongUS_ESP ActiveNode = JarRoleController.AmongUS_ESPs[i];
+                        if (ActiveNode != null && VictimComponent.LinkedNode.Node != null && ActiveNode.AmongUsCurrentRole != AmongUs_Roles.None && ActiveNode.AmongUsCurrentRole != AmongUs_Roles.Unassigned && ActiveNode != VictimComponent.LinkedNode.Node)
                         {
                             bool HasVoted = false;
                             UnhollowerBaseLib.Il2CppArrayBase<UdonBehaviour> list = ActiveNode.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
@@ -71,8 +71,8 @@
                                 {
                                     if (subaction.Key.ToLower().StartsWith("syncvotedfor"))
                                     {
-                                        var ExtractedNode = JarRoleController.GetLinkedComponent(RemoveSyncVotedForText(subaction.key));
-                                        if (ExtractedNode != null && ExtractedNode.LinkedNode.Node != null && ExtractedNode.AmongUsCurrentRole != JarRoleESP.AmongUsRoles.None && ExtractedNode.AmongUsCurrentRole != JarRoleESP.AmongUsRoles.Unassigned)
+                                        var ExtractedNode = JarRoleController.AmongUS_GetLinkedComponent(RemoveSyncVotedForText(subaction.key));
+                                        if (ExtractedNode != null && ExtractedNode.LinkedNode.Node != null && ExtractedNode.AmongUsCurrentRole != AmongUs_Roles.None && ExtractedNode.AmongUsCurrentRole != AmongUs_Roles.Unassigned)
                                         {
                                             if (ExtractedNode.Player.DisplayName() == VictimComponent.Player.DisplayName())
                                             {

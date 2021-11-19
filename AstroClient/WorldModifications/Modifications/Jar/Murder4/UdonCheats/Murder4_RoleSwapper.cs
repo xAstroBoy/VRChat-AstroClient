@@ -68,12 +68,12 @@
             {
                 try
                 {
-                    if (JarRoleController.RoleEspComponents.Count() != 0)
+                    if (JarRoleController.Murder4_ESPs.Count() != 0)
                     {
                         var tmplist = new List<string>();
-                        for (int i = 0; i < JarRoleController.RoleEspComponents.Count; i++)
+                        for (int i = 0; i < JarRoleController.Murder4_ESPs.Count; i++)
                         {
-                            JarRoleESP Component = JarRoleController.RoleEspComponents[i];
+                            Murder4_ESP Component = JarRoleController.Murder4_ESPs[i];
                             if (Component != null && Component.LinkedNode != null)
                             {
                                 Il2CppArrayBase<UdonBehaviour> list = Component.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
@@ -98,20 +98,20 @@
                                                 string SelfRoleString = "none";
                                                 string TargetRoleString = "none";
 
-                                                var LocalPlayer = JarRoleController.CurrentPlayerRoleESP;
+                                                var LocalPlayer = JarRoleController.CurrentPlayer_Murder4ESP;
                                                 if (LocalPlayer != null)
                                                 {
-                                                    if (LocalPlayer.Murder4CurrentRole == JarRoleESP.Murder4Roles.Bystander)
+                                                    if (LocalPlayer.Murder4CurrentRole == Murder4_Roles.Bystander)
                                                     {
                                                         SelfRoleString = "SyncAssignB";
                                                     }
 
-                                                    if (LocalPlayer.Murder4CurrentRole == JarRoleESP.Murder4Roles.Detective)
+                                                    if (LocalPlayer.Murder4CurrentRole == Murder4_Roles.Detective)
                                                     {
                                                         SelfRoleString = "SyncAssignD";
                                                     }
 
-                                                    if (LocalPlayer.Murder4CurrentRole == JarRoleESP.Murder4Roles.Murderer)
+                                                    if (LocalPlayer.Murder4CurrentRole == Murder4_Roles.Murderer)
                                                     {
                                                         SelfRoleString = "SyncAssignM";
                                                     }
@@ -119,17 +119,17 @@
 
                                                 if (Component != null)
                                                 {
-                                                    if (Component.Murder4CurrentRole == JarRoleESP.Murder4Roles.Bystander)
+                                                    if (Component.Murder4CurrentRole == Murder4_Roles.Bystander)
                                                     {
                                                         TargetRoleString = "SyncAssignB";
                                                     }
 
-                                                    if (Component.Murder4CurrentRole == JarRoleESP.Murder4Roles.Detective)
+                                                    if (Component.Murder4CurrentRole == Murder4_Roles.Detective)
                                                     {
                                                         TargetRoleString = "SyncAssignD";
                                                     }
 
-                                                    if (Component.Murder4CurrentRole == JarRoleESP.Murder4Roles.Murderer)
+                                                    if (Component.Murder4CurrentRole == Murder4_Roles.Murderer)
                                                     {
                                                         TargetRoleString = "SyncAssignM";
                                                     }

@@ -215,13 +215,13 @@
                 {
                     if (obj != null)
                     {
-                        if (action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject != null)
+                        if (action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayer_Murder4ESP.LinkedNode.Node.gameObject != null)
                         {
                             if (RoleSwapper_GetImpostorRole)
                             {
                                 if (!SafetySwap) // In case it grabs and update the current ones already!
                                 {
-                                    if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject)
+                                    if (obj == JarRoleController.CurrentPlayer_Murder4ESP.LinkedNode.Node.gameObject)
                                     {
                                         AssignedSelfRole = action;
                                     }
@@ -232,7 +232,7 @@
                                         AssignedTargetRole = action;
                                     }
 
-                                    RoleSwapper_GetImpostorRole = SwapRoles(JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                    RoleSwapper_GetImpostorRole = SwapRoles(JarRoleController.CurrentPlayer_Murder4ESP.LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
                                 }
                             }
                         }

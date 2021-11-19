@@ -63,12 +63,12 @@
         {
             if (!HasGenerated)
             {
-                if (JarRoleController.RoleEspComponents.Count() != 0)
+                if (JarRoleController.Murder4_ESPs.Count() != 0)
                 {
                     var tmplist = new List<string>(); // WHY SO SUDDENLY IT DECIDES TO HAVE MULTIPLE BUTTONS WITH THE SAME PLAYER? FFS
-                    for (int i = 0; i < JarRoleController.RoleEspComponents.Count; i++)
+                    for (int i = 0; i < JarRoleController.Murder4_ESPs.Count; i++)
                     {
-                        JarRoleESP Component = JarRoleController.RoleEspComponents[i];
+                        Murder4_ESP Component = JarRoleController.Murder4_ESPs[i];
                         if (Component != null && Component.LinkedNode != null)
                         {
                             Il2CppArrayBase<UdonBehaviour> list = Component.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();

@@ -85,6 +85,8 @@
 
         private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action)
         {
+            var sabotagepage = new QMNestedGridMenu(menu, "Sabotage Options", "All Sabotage Options here!", null, Color.red);
+            var RepairsPage = new QMNestedGridMenu(menu, "Repairs Options", "All Repairs Options here!", null, Color.red);
 
             foreach (var subaction in action._eventTable)
             {
@@ -92,7 +94,7 @@
                 {
                     var cleanedstr = subaction.key.Replace("SyncDoSabotage", string.Empty).Replace(" ", string.Empty);
 
-                    var subaction_btn = new QMSingleButton(menu, "Sabotage " + cleanedstr, null, action.gameObject?.ToString() + " Sabotage " + cleanedstr);
+                    var subaction_btn = new QMSingleButton(sabotagepage, "Sabotage " + cleanedstr, null, action.gameObject?.ToString() + " Sabotage " + cleanedstr);
                     subaction_btn.SetTextColor(Color.red);
                     subaction_btn.SetAction(new Action(() => {
                         if (subaction.key.StartsWith("_"))
@@ -133,7 +135,7 @@
                 else if (subaction.Key.StartsWith("SyncRepair"))
                 {
                     var cleanedstr = subaction.key.Replace("SyncRepair", string.Empty).Replace(" ", string.Empty);
-                    var subaction_btn = new QMSingleButton(menu, "Repair " + cleanedstr, null, action.gameObject?.ToString() + " Repair " + cleanedstr);
+                    var subaction_btn = new QMSingleButton(RepairsPage, "Repair " + cleanedstr, null, action.gameObject?.ToString() + " Repair " + cleanedstr);
                     subaction_btn.SetAction(new Action(() => {
                         if (subaction.key.StartsWith("_"))
                         {

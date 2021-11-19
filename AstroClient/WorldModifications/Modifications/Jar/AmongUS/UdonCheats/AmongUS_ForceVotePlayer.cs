@@ -66,16 +66,16 @@
         {
             if (!HasGenerated)
             {
-                if (JarRoleController.RoleEspComponents.Count() != 0)
+                if (JarRoleController.AmongUS_ESPs.Count() != 0)
                 {
                     try
                     {
-                        if (JarRoleController.RoleEspComponents.Count() != 0)
+                        if (JarRoleController.AmongUS_ESPs.Count() != 0)
                         {
                             var tmplist = new List<string>();
-                            for (int i = 0; i < JarRoleController.RoleEspComponents.Count; i++)
+                            for (int i = 0; i < JarRoleController.AmongUS_ESPs.Count; i++)
                             {
-                                JarRoleESP Reader = JarRoleController.RoleEspComponents[i];
+                                AmongUS_ESP Reader = JarRoleController.AmongUS_ESPs[i];
                                 if (Reader != null && Reader.LinkedNode != null)
                                 {
                                     UnhollowerBaseLib.Il2CppArrayBase<UdonBehaviour> list = Reader.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
@@ -131,7 +131,7 @@
             }
         }
 
-        private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action, JarRoleESP Component, string NodeTranslated)
+        private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action, AmongUS_ESP Component, string NodeTranslated)
         {
 
             bool HasAddedEveryoneVoteBtn = false;
@@ -141,7 +141,7 @@
                 // RENAME SyncVotedFor With Node Name.
                 if (subaction.Key.ToLower().StartsWith("syncvotedfor"))
                 {
-                    var LinkedComponent = JarRoleController.GetLinkedComponent(AmongUS_Utils.RemoveSyncVotedForText(subaction.key));
+                    var LinkedComponent = JarRoleController.AmongUS_GetLinkedComponent(AmongUS_Utils.RemoveSyncVotedForText(subaction.key));
                     if (LinkedComponent != null)
                     {
                         if (LinkedComponent.LinkedNode != null)

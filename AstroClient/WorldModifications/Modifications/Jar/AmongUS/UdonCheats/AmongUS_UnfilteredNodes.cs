@@ -129,7 +129,7 @@
                 // RENAME SyncVotedFor With Node Name.
                 if (subaction.Key.ToLower().StartsWith("syncvotedfor"))
                 {
-                    var LinkedComponent = JarRoleController.GetLinkedComponent(AmongUS_Utils.RemoveSyncVotedForText(subaction.key));
+                    var LinkedComponent = JarRoleController.AmongUS_GetLinkedComponent(AmongUS_Utils.RemoveSyncVotedForText(subaction.key));
                     if (LinkedComponent != null && LinkedComponent.LinkedNode != null)
                     {
                         if (LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI != null)

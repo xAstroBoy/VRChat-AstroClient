@@ -102,6 +102,9 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\OrbitUserMenu.cs" />
@@ -463,7 +466,7 @@
     <Compile Include="AstroMonos\Components\ESP\EspHelper.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Inflater.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarRoleController.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarRoleESP.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Murder4_ESP.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupController.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Rocket.cs" />
     <Compile Include="AstroMonos\Components\ESP\Player\PlayerESP.cs" />
