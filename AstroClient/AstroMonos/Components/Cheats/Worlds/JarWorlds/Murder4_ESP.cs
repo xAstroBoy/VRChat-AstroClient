@@ -5,7 +5,9 @@
     using Il2CppSystem.Collections.Generic;
     using Roles;
     using System;
+    using System.Collections;
     using System.Linq;
+    using MelonLoader;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -101,6 +103,12 @@
         internal Color Unassigned { [HideFromIl2Cpp] get; } = new(0.5f, 0.5f, 0.5f, 1f);
 
         internal Color NoRolesAssigned { [HideFromIl2Cpp] get; } = new(0f, 0f, 0f, 0f);
+        private IEnumerator FindLinkedNode()
+        {
+            while (LinkedNode == null)
+                yield return null;
+            ModConsole.DebugLog($"Murder 4 ESP , Found Linked Node to {Player.GetDisplayName()}");
+        }
 
         private PlayerESP ESP
         {
@@ -192,6 +200,8 @@
 
             CurrentRole = Murder4_Roles.Unassigned;
             ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
+            MelonCoroutines.Start(FindLinkedNode());
+
         }
 
         internal void OnDestroy()
@@ -209,27 +219,52 @@
         {
             try
             {
-                if (LinkedNode == null) return;
-                if (LinkedNode.Entry == null) return;
                 if (LinkedNode.Node == null) return;
                 if (LinkedNode.Node.gameObject == null) return;
                 if (sender == null) return;
-                if (obj != null)
-                    if (LinkedNode != null && LinkedNode.Node != null)
-                    {
-                        if (obj.Equals(LinkedNode.Node.gameObject))
+                if (obj != null) // Node events (only on Assigned node)!
+                    if (obj.Equals(LinkedNode.Node.gameObject))
+                        switch (action)
                         {
-                            if (action == "SyncAssignB")
-                                CurrentRole = Murder4_Roles.Bystander;
-                            else if (action == "SyncAssignD")
-                                CurrentRole = Murder4_Roles.Detective;
-                            else if (action == "SyncAssignM")
-                                CurrentRole = Murder4_Roles.Murderer;
-                            else if (action == "SyncKill") CurrentRole = Murder4_Roles.None;
+                            case "SyncAssignB":
+                                {
+                                    CurrentRole = Murder4_Roles.Bystander;
+
+                                    break;
+                                }
+                            case "SyncAssignD":
+                                {
+                                    CurrentRole = Murder4_Roles.Detective;
+
+                                    break;
+                                }
+
+                            case "SyncAssignM":
+                                {
+                                    CurrentRole = Murder4_Roles.Murderer;
+
+                                    break;
+                                }
+
+                            case "SyncKill":
+                                {
+                                    CurrentRole = Murder4_Roles.None;
+
+                                    break;
+                                }
                         }
 
-                        if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action.Equals("SyncStart")) CurrentRole = Murder4_Roles.None;
-                    }
+                switch (action)
+                {
+                    case "SyncAbort":
+                    case "SyncVictoryB":
+                    case "SyncVictoryM":
+                    case "SyncStart":
+                        {
+                            CurrentRole = Murder4_Roles.None;
+                            break;
+                        }
+                }
             }
             catch (Exception e)
             {

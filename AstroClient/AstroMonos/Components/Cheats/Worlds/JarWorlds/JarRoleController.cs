@@ -115,9 +115,6 @@
             JarRoleLinks.Clear();
             Murder4_ESPs.Clear();
             AmongUS_ESPs.Clear();
-
-            //Murder4RolesRevealerToggle.SetToggleState(false);
-            //AmongUSRolesRevealerToggle.SetToggleState(false);
             _CurrentPlayer_Murder4ESP = null;
             ViewRoles = false;
             IsAmongUsWorld = false;
@@ -126,17 +123,15 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            if (!IsAmongUsWorld || !IsMurder4World) return;
-            if (JarRoleLinks.Count == 0 && player == null) return;
             if (IsMurder4World)
             {
-                var RoleRevealer = player.gameObject.AddComponent<Murder4_ESP>();
-                if (RoleRevealer != null && !Murder4_ESPs.Contains(RoleRevealer)) Murder4_ESPs.Add(RoleRevealer);
+                var RoleRevealer = player.gameObject.GetOrAddComponent<Murder4_ESP>();
+                if (RoleRevealer != null) Murder4_ESPs.Add(RoleRevealer);
             }
             else if (IsAmongUsWorld)
             {
-                var RoleRevealer = player.gameObject.AddComponent<AmongUS_ESP>();
-                if (RoleRevealer != null && !AmongUS_ESPs.Contains(RoleRevealer)) AmongUS_ESPs.Add(RoleRevealer);
+                var RoleRevealer = player.gameObject.GetOrAddComponent<AmongUS_ESP>();
+                if (RoleRevealer != null) AmongUS_ESPs.Add(RoleRevealer);
             }
         }
 

@@ -6,11 +6,14 @@
     using Il2CppSystem.Collections.Generic;
     using Roles;
     using System;
+    using System.Collections;
     using System.Linq;
+    using MelonLoader;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;
@@ -128,11 +131,18 @@
                     if (GameRoleTag != null)
                     {
                         GameRoleTag.ShowTag = value;
-                        if (value)
-                            if (ESP != null)
-                                UpdateAmongUSRole(CurrentRole);
                     }
+                if (value)
+                    if (ESP != null)
+                        UpdateAmongUSRole(CurrentRole);
+
             }
+        }
+        private IEnumerator FindLinkedNode()
+        {
+            while (LinkedNode == null)
+                yield return null;
+            ModConsole.DebugLog($"Among US ESP , Found Linked Node to {Player.GetDisplayName()}");
         }
 
         internal LinkedNodes LinkedNode
@@ -149,7 +159,6 @@
                             var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayerAPI;
                             if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer))
                             {
-                                ModConsole.DebugLog($"Found Assigned Linked Node in Player {InternalNodeAssignedPlayer.displayName}");
                                 return _LinkedNode = item;
                             }
                         }
@@ -197,7 +206,7 @@
             }
         }
 
-        private void Reset()
+        private void ResetESP()
         {
             if (Player != null && ESP != null) ESP.ResetColor();
         }
@@ -211,28 +220,26 @@
             else
                 Destroy(this);
             GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
-            if (IsAmongUsWorld)
-            {
-                AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Player);
-                AmongUSVoteRevealTag.ShowTag = false;
-                HasVoted = false;
-            }
+            AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Player);
+            AmongUSVoteRevealTag.ShowTag = false;
+            HasVoted = false;
 
             if (ViewRoles)
             {
                 _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
-                Reset();
+                ResetESP();
                 GameRoleTag.ShowTag = false;
             }
             else
             {
                 _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                Reset();
+                ResetESP();
                 GameRoleTag.ShowTag = false;
             }
 
             CurrentRole = AmongUs_Roles.Unassigned;
             ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Among US Role ESP.");
+            MelonCoroutines.Start(FindLinkedNode());
         }
 
         internal void OnDestroy()
@@ -263,86 +270,78 @@
         {
             try
             {
-                if (LinkedNode == null) return;
-                if (LinkedNode.Entry == null) return;
                 if (LinkedNode.Node == null) return;
                 if (LinkedNode.Node.gameObject == null) return;
                 if (sender == null) return;
-                if (obj != null)
+                if (obj != null) // Node events (only on Assigned node)!
+                    if (obj.Equals(LinkedNode.Node.gameObject))
+                        switch (action)
+                        {
+                            case "SyncAssignB":
+                                {
+                                    CurrentRole = AmongUs_Roles.Crewmate;
+
+                                    break;
+                                }
+                            case "SyncAssignM":
+                                {
+                                    CurrentRole = AmongUs_Roles.Impostor;
+
+                                    break;
+                                }
+                            case "SyncKill":
+                            case "SyncVotedOut":
+                                {
+                                    CurrentRole = AmongUs_Roles.None;
+                                    HasVoted = false;
+                                    break;
+                                }
+                            case "SyncAbstainedVoting":
+                                {
+                                    _ = SetTag(AmongUSVoteRevealTag, "Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
+                                    HasVoted = true;
+                                    break;
+                                }
+                            case string a when a.Contains("SyncVotedFor"):
+                                {
+                                    var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
+                                    if (against != null)
+                                    {
+                                        if (against != CurrentPlayer_AmongUS_ESP)
+                                            SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#44DBAC"));
+                                        else
+                                            SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#C22B26"));
+                                    }
+
+                                    HasVoted = true;
+                                    break;
+                                }
+                        }
+
+                switch (action)
                 {
-                    if (LinkedNode != null && LinkedNode.Node != null && obj.Equals(LinkedNode.Node.gameObject))
-                    {
-                        if (action == "SyncAssignB")
+                    case "SyncEndVotingPhase":
                         {
-                            CurrentRole = AmongUs_Roles.Crewmate;
-                        }
-                        else if (action == "SyncAssignM")
-                        {
-                            CurrentRole = AmongUs_Roles.Impostor;
-                        }
-                        else if (action == "SyncKill")
-                        {
-                            CurrentRole = AmongUs_Roles.None;
+                            if (AmongUSVoteRevealTag != null) _ = SetTag(AmongUSVoteRevealTag, "Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
                             HasVoted = false;
+                            break;
                         }
-                        else if (action == "SyncVotedOut")
+                    case "SyncAbort":
+                    case "SyncVictoryB":
+                    case "SyncVictoryM":
+                    case "SyncStart":
                         {
-                            CurrentRole = AmongUs_Roles.None;
+                            if (AmongUSVoteRevealTag != null) _ = SetTag(AmongUSVoteRevealTag, "Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
                             HasVoted = false;
-                        }
-                        else if (action.Contains("SyncVotedFor"))
-                        {
-                            var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
-                            if (against != null)
-                            {
-                                if (against != CurrentPlayer_Murder4ESP)
-                                    SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#44DBAC"));
-                                else
-                                    SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#C22B26"));
-                            }
-
-                            HasVoted = true;
-                        }
-                        else if (action.Equals("SyncAbstainedVoting"))
-                        {
-                            _ = SetTag(AmongUSVoteRevealTag, "Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
-                            HasVoted = true;
-                        }
-                    }
-
-                    if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
-                    {
-                        HasVoted = false;
-                        if (AmongUSVoteRevealTag != null) _ = SetTag(AmongUSVoteRevealTag, "Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
-                        if (action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
-                        {
                             CurrentRole = AmongUs_Roles.None;
-                            HasVoted = false;
+                            break;
                         }
-                    }
                 }
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
             }
-        }
-
-        private LinkedNodes GetEntryWithUser()
-        {
-            foreach (var item in JarRoleLinks.Where(x => x.NodeReader.VRCPlayerAPI != null))
-                if (item != null)
-                {
-                    var Internal_User_VRCPlayerAPI = Player.GetVRCPlayerApi();
-                    var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayerAPI;
-                    if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer))
-                    {
-                        ModConsole.DebugLog($"Found Assigned Linked Node in Player {InternalNodeAssignedPlayer.displayName}");
-                        return item;
-                    }
-                }
-
-            return null;
         }
 
         private SingleTag SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
@@ -406,7 +405,7 @@
                         if (GetCurrentSingleTagText() != NoRoles)
                         {
                             SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
-                            Reset();
+                            ResetESP();
                             HasVoted = false;
                         }
                     }
@@ -418,7 +417,7 @@
                     if (GetCurrentSingleTagText() != HiddenRole)
                     {
                         SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                        Reset();
+                        ResetESP();
                     }
                 }
             }

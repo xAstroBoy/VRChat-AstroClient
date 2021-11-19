@@ -86,7 +86,7 @@
         private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action)
         {
             var sabotagepage = new QMNestedGridMenu(menu, "Sabotage Options", "All Sabotage Options here!", null, Color.red);
-            var RepairsPage = new QMNestedGridMenu(menu, "Repairs Options", "All Repairs Options here!", null, Color.red);
+            var RepairsPage = new QMNestedGridMenu(menu, "Repairs Options", "All Repairs Options here!", null, Color.green);
 
             foreach (var subaction in action._eventTable)
             {
