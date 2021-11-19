@@ -9,8 +9,10 @@
     using ClientUI.Menu.ESP;
     using Constants;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using MelonLoader;
     using Tools.Extensions;
     using Tools.Extensions.Components_exts;
     using Tools.UdonEditor;
@@ -828,33 +830,31 @@
                     if (!action.StartsWith("SyncAssign")) return; // Ignore any action that doesn't have assignments!
                     if (RoleSwapper_GetDetectiveRole)
                     {
-                        MiscUtils.DelayFunction(0.5f, () =>
-                        {
-                            var TargetNode = FindNodeWithRole(Murder4_Roles.Detective);
-                            if (TargetNode != null)
-                            {
-                                SwapRoles(TargetNode);
-                            }
-                            RoleSwapper_GetDetectiveRole = false;
-                        });
+                        MelonCoroutines.Start(SwapRole(Murder4_Roles.Detective));
+                        RoleSwapper_GetDetectiveRole = false;
                     }
                     else if (RoleSwapper_GetMurdererRole)
                     {
-                        MiscUtils.DelayFunction(0.5f, () =>
-                        {
-                            var TargetNode = FindNodeWithRole(Murder4_Roles.Murderer);
-                            if (TargetNode != null)
-                            {
-                                SwapRoles(TargetNode);
-                            }
-                            RoleSwapper_GetDetectiveRole = false;
-                        });
+                        MelonCoroutines.Start(SwapRole(Murder4_Roles.Murderer));
+                        RoleSwapper_GetMurdererRole = false;
                     }
                 }
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
+            }
+        }
+
+        private static IEnumerator SwapRole(Murder4_Roles Selectedrole)
+        {
+            while (FindNodeWithRole(Selectedrole) == null)
+                yield return null;
+            yield return new WaitForSeconds(0.5f);
+            var TargetNode = FindNodeWithRole(Selectedrole);
+            if (TargetNode != null)
+            {
+                SwapRoles(TargetNode);
             }
         }
 

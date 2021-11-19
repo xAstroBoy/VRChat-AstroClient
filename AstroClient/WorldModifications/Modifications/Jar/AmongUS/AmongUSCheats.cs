@@ -5,8 +5,10 @@
     using AstroMonos.Components.ESP.VRCInteractable;
     using AstroMonos.Components.Spoofer;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using MelonLoader;
     using Tools.Extensions;
     using Tools.Player.Movement.Exploit;
     using Tools.UdonEditor;
@@ -298,23 +300,25 @@
                     if (!action.StartsWith("SyncAssign")) return; // Ignore any action that doesn't have assignments!
                     if (RoleSwapper_GetImpostorRole)
                     {
-
-                        MiscUtils.DelayFunction(0.5f, () =>
-                        {
-                            var TargetNode = FindNodeWithRole(AmongUs_Roles.Impostor);
-                            if (TargetNode != null)
-                            {
-                                SwapRoles(TargetNode);
-                            }
-                            RoleSwapper_GetImpostorRole = false;
-                        });
-
+                        MelonCoroutines.Start(SwapRole(AmongUs_Roles.Impostor));
+                        RoleSwapper_GetImpostorRole = false;
                     }
                 }
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
+            }
+        }
+        private static IEnumerator SwapRole(AmongUs_Roles Selectedrole)
+        {
+            while (FindNodeWithRole(Selectedrole) == null)
+                yield return null;
+            yield return new WaitForSeconds(0.5f);
+            var TargetNode = FindNodeWithRole(Selectedrole);
+            if (TargetNode != null)
+            {
+                SwapRoles(TargetNode);
             }
         }
 
