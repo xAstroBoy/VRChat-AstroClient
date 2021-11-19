@@ -294,7 +294,7 @@
             {
                 var item = JarRoleController.AmongUS_ESPs[index];
                 if (item != null)
-                    if (item.LinkedNode.NodeReader.Node.gameObject.Equals(node))
+                    if (item.LinkedNode.Node.gameObject.Equals(node))
                         return item;
             }
 
