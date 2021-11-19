@@ -148,7 +148,7 @@ namespace AstroClient.xAstroBoy.Extensions
                     PageUserInfo pageUserInfo = GameInstances.VRCUiManager.GetMenuContent().GetComponentInChildren<PageUserInfo>();
                     if (pageUserInfo != null)
                     {
-                        pageUserInfo.Method_Private_Boolean_APIUser_PDM_0(userapi);
+                        pageUserInfo.Method_Private_Void_APIUser_PDM_0(userapi);
 
                         ModConsole.Log("Refreshed user: " + userapi.id);
                     }
@@ -213,7 +213,7 @@ namespace AstroClient.xAstroBoy.Extensions
 
         public static APIUser GetUser(this PageUserInfo Instance)
         {
-            return Instance.field_Public_APIUser_0;
+            return Instance.field_Private_APIUser_0;
         }
     }
 }

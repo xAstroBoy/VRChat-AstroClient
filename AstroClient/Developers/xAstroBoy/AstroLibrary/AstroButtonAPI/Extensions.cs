@@ -266,7 +266,7 @@
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
                 QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.field_Private_UIPage_0.enabled = true;
-                QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.Method_Public_UIPage_String_1("QuickMenuDashboard");
+                QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.Method_Public_UIPage_String_0("QuickMenuDashboard");
             }));
             return btn;
         }
