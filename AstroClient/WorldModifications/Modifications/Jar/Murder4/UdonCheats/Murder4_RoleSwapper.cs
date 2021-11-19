@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
     using AstroMonos.Components.Tools.Listeners;
     using Tools.Extensions;
     using Tools.UdonSearcher;
@@ -101,17 +102,17 @@
                                                 var LocalPlayer = JarRoleController.CurrentPlayer_Murder4ESP;
                                                 if (LocalPlayer != null)
                                                 {
-                                                    if (LocalPlayer.Murder4CurrentRole == Murder4_Roles.Bystander)
+                                                    if (LocalPlayer.CurrentRole == Murder4_Roles.Bystander)
                                                     {
                                                         SelfRoleString = "SyncAssignB";
                                                     }
 
-                                                    if (LocalPlayer.Murder4CurrentRole == Murder4_Roles.Detective)
+                                                    if (LocalPlayer.CurrentRole == Murder4_Roles.Detective)
                                                     {
                                                         SelfRoleString = "SyncAssignD";
                                                     }
 
-                                                    if (LocalPlayer.Murder4CurrentRole == Murder4_Roles.Murderer)
+                                                    if (LocalPlayer.CurrentRole == Murder4_Roles.Murderer)
                                                     {
                                                         SelfRoleString = "SyncAssignM";
                                                     }
@@ -119,17 +120,17 @@
 
                                                 if (Component != null)
                                                 {
-                                                    if (Component.Murder4CurrentRole == Murder4_Roles.Bystander)
+                                                    if (Component.CurrentRole == Murder4_Roles.Bystander)
                                                     {
                                                         TargetRoleString = "SyncAssignB";
                                                     }
 
-                                                    if (Component.Murder4CurrentRole == Murder4_Roles.Detective)
+                                                    if (Component.CurrentRole == Murder4_Roles.Detective)
                                                     {
                                                         TargetRoleString = "SyncAssignD";
                                                     }
 
-                                                    if (Component.Murder4CurrentRole == Murder4_Roles.Murderer)
+                                                    if (Component.CurrentRole == Murder4_Roles.Murderer)
                                                     {
                                                         TargetRoleString = "SyncAssignM";
                                                     }
@@ -139,11 +140,11 @@
                                                 UdonSearch.FindUdonEvent(Component.LinkedNode.Node.gameObject, SelfRoleString).ExecuteUdonEvent();
                                             });
 
-                                            var textcolor = Component.Murder4GetNamePlateColor();
-                                            if (textcolor != null)
+                                            if (Component.RoleToColor != null && Component.RoleToColor.HasValue)
                                             {
-                                                playerbtn.SetTextColor(textcolor.Value);
+                                                playerbtn.SetTextColor(Component.RoleToColor.GetValueOrDefault());
                                             }
+
 
                                             Generated.Add(playerbtn);
                                             tmplist.Add(NodeTranslated);

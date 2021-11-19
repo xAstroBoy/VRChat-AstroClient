@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using xAstroBoy.Extensions;
@@ -22,7 +23,7 @@
                 for (int i = 0; i < JarRoleController.AmongUS_ESPs.Count; i++)
                 {
                     AmongUS_ESP ActiveNode = JarRoleController.AmongUS_ESPs[i];
-                    if (ActiveNode != null && ActiveNode.LinkedNode != null && ActiveNode.AmongUsCurrentRole != AmongUs_Roles.None && ActiveNode.AmongUsCurrentRole != AmongUs_Roles.Unassigned)
+                    if (ActiveNode != null && ActiveNode.LinkedNode != null && ActiveNode.CurrentRole != AmongUs_Roles.None && ActiveNode.CurrentRole != AmongUs_Roles.Unassigned)
                     {
                         bool HasVoted = false;
                         UnhollowerBaseLib.Il2CppArrayBase<UdonBehaviour> list = ActiveNode.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
@@ -60,7 +61,7 @@
                     for (int i = 0; i < JarRoleController.AmongUS_ESPs.Count; i++)
                     {
                         AmongUS_ESP ActiveNode = JarRoleController.AmongUS_ESPs[i];
-                        if (ActiveNode != null && VictimComponent.LinkedNode.Node != null && ActiveNode.AmongUsCurrentRole != AmongUs_Roles.None && ActiveNode.AmongUsCurrentRole != AmongUs_Roles.Unassigned && ActiveNode != VictimComponent.LinkedNode.Node)
+                        if (ActiveNode != null && VictimComponent.LinkedNode.Node != null && ActiveNode.CurrentRole != AmongUs_Roles.None && ActiveNode.CurrentRole != AmongUs_Roles.Unassigned && ActiveNode != VictimComponent.LinkedNode.Node)
                         {
                             bool HasVoted = false;
                             UnhollowerBaseLib.Il2CppArrayBase<UdonBehaviour> list = ActiveNode.LinkedNode.Node.GetComponentsInChildren<UdonBehaviour>();
@@ -72,7 +73,7 @@
                                     if (subaction.Key.ToLower().StartsWith("syncvotedfor"))
                                     {
                                         var ExtractedNode = JarRoleController.AmongUS_GetLinkedComponent(RemoveSyncVotedForText(subaction.key));
-                                        if (ExtractedNode != null && ExtractedNode.LinkedNode.Node != null && ExtractedNode.AmongUsCurrentRole != AmongUs_Roles.None && ExtractedNode.AmongUsCurrentRole != AmongUs_Roles.Unassigned)
+                                        if (ExtractedNode != null && ExtractedNode.LinkedNode.Node != null && ExtractedNode.CurrentRole != AmongUs_Roles.None && ExtractedNode.CurrentRole != AmongUs_Roles.Unassigned)
                                         {
                                             if (ExtractedNode.Player.DisplayName() == VictimComponent.Player.DisplayName())
                                             {

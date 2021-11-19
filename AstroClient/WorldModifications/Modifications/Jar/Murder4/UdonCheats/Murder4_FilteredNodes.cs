@@ -86,10 +86,9 @@
 
                                     var Page = new QMNestedGridMenu(CurrentScrollMenu, PlayerNode, $"Mess with {PlayerNode} 's node");
                                     GenerateInternal(Page, action);
-                                    var textcolor = Component.Murder4GetNamePlateColor();
-                                    if (textcolor != null)
+                                    if (Component.RoleToColor != null && Component.RoleToColor.HasValue)
                                     {
-                                        Page.SetTextColor(textcolor.Value);
+                                        Page.SetTextColor(Component.RoleToColor.GetValueOrDefault());
                                     }
 
                                     GeneratedPages.Add(Page);

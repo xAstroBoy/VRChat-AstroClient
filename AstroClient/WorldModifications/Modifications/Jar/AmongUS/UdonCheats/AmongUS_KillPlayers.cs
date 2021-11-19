@@ -103,10 +103,9 @@
                                                         }
                                                     }
 
-                                                    var textcolor = Component.AmongUsGetNamePlateColor();
-                                                    if (textcolor != null)
+                                                    if (Component.RoleToColor != null)
                                                     {
-                                                        KillPlayerBtn.SetTextColor(textcolor.Value);
+                                                        KillPlayerBtn.SetTextColor(Component.RoleToColor.GetValueOrDefault());
                                                     }
                                                     GeneratedButtons.Add(KillPlayerBtn);
                                                     tmplist.Add(NodeName);

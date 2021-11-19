@@ -1,6 +1,5 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles
 {
-
     internal enum Murder4_Roles
     {
         None = 0,

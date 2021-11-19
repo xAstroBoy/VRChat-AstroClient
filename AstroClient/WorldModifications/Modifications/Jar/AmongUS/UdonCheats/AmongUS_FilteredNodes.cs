@@ -93,10 +93,9 @@
                                                 {
                                                     var Page = new QMNestedGridMenu(CurrentScrollMenu, NodeTranslated, action.interactText);
                                                     GenerateInternal(Page, action);
-                                                    var textcolor = Component.AmongUsGetNamePlateColor();
-                                                    if (textcolor != null)
+                                                    if (Component.RoleToColor != null && Component.RoleToColor.HasValue)
                                                     {
-                                                        Page.SetTextColor(textcolor.Value);
+                                                        Page.SetTextColor(Component.RoleToColor.GetValueOrDefault());
                                                     }
                                                     GeneratedPages.Add(Page);
                                                     tmplist.Add(NodeTranslated);
@@ -161,9 +160,9 @@
                                         action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
                                     }
                                 }, action.gameObject?.ToString() + " Run " + "Vote: " + LinkedNodeTranslated, null, null, true);
-                                if (LinkedComponent.AmongUsGetNamePlateColor() != null)
+                                if (LinkedComponent.RoleToColor != null && LinkedComponent.RoleToColor.HasValue)
                                 {
-                                    SyncVotedForBtn.SetTextColor(LinkedComponent.AmongUsGetNamePlateColor().Value);
+                                    SyncVotedForBtn.SetTextColor(LinkedComponent.RoleToColor.GetValueOrDefault());
                                 }
                                 anothertmplist.Add(LinkedNodeTranslated);
                             }

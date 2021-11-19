@@ -4,6 +4,7 @@
     using ClientAttributes;
     using ESP.Player;
     using Il2CppSystem.Collections.Generic;
+    using Roles;
     using System;
     using System.Linq;
     using UI.SingleTag;
@@ -19,7 +20,7 @@
     [RegisterComponent]
     public class AmongUS_ESP : AstroMonoBehaviour
     {
-        private AmongUs_Roles _AmongUsCurrentRole = AmongUs_Roles.Unassigned;
+        private AmongUs_Roles _CurrentRole = AmongUs_Roles.Unassigned;
 
         private PlayerESP _ESP;
         private bool _isSelf;
@@ -37,7 +38,7 @@
 
         internal bool _AmongUSHasVoted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        internal bool AmongUSHasVoted
+        internal bool HasVoted
         {
             [HideFromIl2Cpp]
             get => _AmongUSHasVoted;
@@ -49,7 +50,7 @@
                 {
                     if (ViewRoles)
                     {
-                        if (AmongUsCurrentRole == AmongUs_Roles.Crewmate || AmongUsCurrentRole == AmongUs_Roles.Impostor) AmongUSVoteRevealTag.ShowTag = value;
+                        if (CurrentRole == AmongUs_Roles.Crewmate || CurrentRole == AmongUs_Roles.Impostor) AmongUSVoteRevealTag.ShowTag = value;
                     }
                     else
                     {
@@ -66,19 +67,19 @@
             [HideFromIl2Cpp]
             get
             {
-                if (AmongUsCurrentRole == AmongUs_Roles.Crewmate || AmongUsCurrentRole == AmongUs_Roles.Impostor) return !AmongUSHasVoted;
+                if (CurrentRole == AmongUs_Roles.Crewmate || CurrentRole == AmongUs_Roles.Impostor) return !HasVoted;
                 return false;
             }
         }
 
-        internal AmongUs_Roles AmongUsCurrentRole
+        internal AmongUs_Roles CurrentRole
         {
             [HideFromIl2Cpp]
-            get => _AmongUsCurrentRole;
+            get => _CurrentRole;
             [HideFromIl2Cpp]
             private set
             {
-                _AmongUsCurrentRole = value;
+                _CurrentRole = value;
                 UpdateAmongUSRole(value);
             }
         }
@@ -129,7 +130,7 @@
                         GameRoleTag.ShowTag = value;
                         if (value)
                             if (ESP != null)
-                                UpdateAmongUSRole(AmongUsCurrentRole);
+                                UpdateAmongUSRole(CurrentRole);
                     }
             }
         }
@@ -170,6 +171,37 @@
             }
         }
 
+        [HideFromIl2Cpp]
+        internal Color? RoleToColor
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                switch (CurrentRole)
+                {
+                    case AmongUs_Roles.Crewmate:
+                        return CrewmateColor;
+
+                    case AmongUs_Roles.Impostor:
+                        return ImpostorColor;
+
+                    case AmongUs_Roles.Unassigned:
+                        return null;
+
+                    case AmongUs_Roles.None:
+                        return null;
+
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        private void Reset()
+        {
+            if (Player != null && ESP != null) ESP.ResetColor();
+        }
+
         // Use this for initialization
         internal void Start()
         {
@@ -183,26 +215,24 @@
             {
                 AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Player);
                 AmongUSVoteRevealTag.ShowTag = false;
-                AmongUSHasVoted = false;
+                HasVoted = false;
             }
 
             if (ViewRoles)
             {
                 _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
-                ResetESPColor();
+                Reset();
                 GameRoleTag.ShowTag = false;
             }
             else
             {
                 _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                ResetESPColor();
+                Reset();
                 GameRoleTag.ShowTag = false;
             }
 
-            {
-                AmongUsCurrentRole = AmongUs_Roles.Unassigned;
-                ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Among US Role ESP.");
-            }
+            CurrentRole = AmongUs_Roles.Unassigned;
+            ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Among US Role ESP.");
         }
 
         internal void OnDestroy()
@@ -219,7 +249,7 @@
 
         private static AmongUS_ESP TranslateSyncVotedFor(int value)
         {
-            return AmongUS_ESPs.Where(x => x.LinkedNode.Nodevalue == value).First();
+            return AmongUS_ESPs.First(x => x.LinkedNode.Nodevalue == value);
         }
 
         private static int RemoveSyncVotedForText(string key)
@@ -244,21 +274,21 @@
                     {
                         if (action == "SyncAssignB")
                         {
-                            AmongUsCurrentRole = AmongUs_Roles.Crewmate;
+                            CurrentRole = AmongUs_Roles.Crewmate;
                         }
                         else if (action == "SyncAssignM")
                         {
-                            AmongUsCurrentRole = AmongUs_Roles.Impostor;
+                            CurrentRole = AmongUs_Roles.Impostor;
                         }
                         else if (action == "SyncKill")
                         {
-                            AmongUsCurrentRole = AmongUs_Roles.None;
-                            AmongUSHasVoted = false;
+                            CurrentRole = AmongUs_Roles.None;
+                            HasVoted = false;
                         }
                         else if (action == "SyncVotedOut")
                         {
-                            AmongUsCurrentRole = AmongUs_Roles.None;
-                            AmongUSHasVoted = false;
+                            CurrentRole = AmongUs_Roles.None;
+                            HasVoted = false;
                         }
                         else if (action.Contains("SyncVotedFor"))
                         {
@@ -271,23 +301,23 @@
                                     SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#C22B26"));
                             }
 
-                            AmongUSHasVoted = true;
+                            HasVoted = true;
                         }
                         else if (action.Equals("SyncAbstainedVoting"))
                         {
                             _ = SetTag(AmongUSVoteRevealTag, "Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
-                            AmongUSHasVoted = true;
+                            HasVoted = true;
                         }
                     }
 
                     if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
                     {
-                        AmongUSHasVoted = false;
+                        HasVoted = false;
                         if (AmongUSVoteRevealTag != null) _ = SetTag(AmongUSVoteRevealTag, "Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
                         if (action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
                         {
-                            AmongUsCurrentRole = AmongUs_Roles.None;
-                            AmongUSHasVoted = false;
+                            CurrentRole = AmongUs_Roles.None;
+                            HasVoted = false;
                         }
                     }
                 }
@@ -315,28 +345,6 @@
             return null;
         }
 
-        [HideFromIl2Cpp]
-        internal Color? AmongUsGetNamePlateColor()
-        {
-            switch (AmongUsCurrentRole)
-            {
-                case AmongUs_Roles.Crewmate:
-                    return CrewmateColor;
-
-                case AmongUs_Roles.Impostor:
-                    return ImpostorColor;
-
-                case AmongUs_Roles.Unassigned:
-                    return null;
-
-                case AmongUs_Roles.None:
-                    return null;
-
-                default:
-                    return null;
-            }
-        }
-
         private SingleTag SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
         {
             if (tag != null)
@@ -361,11 +369,6 @@
             if (Player != null && ESP != null && ESP.UseCustomColor) ESP.ChangeColor(color);
         }
 
-        private void ResetESPColor()
-        {
-            if (Player != null && ESP != null) ESP.ResetColor();
-        }
-
         internal override void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
@@ -375,7 +378,7 @@
                     GameRoleTag.ShowTag = value;
                     if (value)
                         if (ESP != null)
-                            UpdateAmongUSRole(AmongUsCurrentRole);
+                            UpdateAmongUSRole(CurrentRole);
                 }
         }
 
@@ -387,27 +390,24 @@
                 if (ESP != null) ESP.UseCustomColor = ViewRoles;
                 if (ViewRoles)
                 {
-                    if (AmongUSHasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
+                    if (HasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
 
                     if (role != AmongUs_Roles.None && role != AmongUs_Roles.Unassigned)
                     {
                         if (GetCurrentSingleTagText() != role.ToString())
-                        {
-                            var color = AmongUsGetNamePlateColor();
-                            if (color != null)
+                            if (RoleToColor != null && RoleToColor.HasValue)
                             {
-                                SetTag(GameRoleTag, role.ToString(), DefaultTextColor, color.Value);
-                                SetEspColorIfExists(color.Value);
+                                SetTag(GameRoleTag, role.ToString(), DefaultTextColor, RoleToColor.GetValueOrDefault());
+                                SetEspColorIfExists(RoleToColor.GetValueOrDefault());
                             }
-                        }
                     }
                     else
                     {
                         if (GetCurrentSingleTagText() != NoRoles)
                         {
                             SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
-                            ResetESPColor();
-                            AmongUSHasVoted = false;
+                            Reset();
+                            HasVoted = false;
                         }
                     }
                 }
@@ -418,11 +418,10 @@
                     if (GetCurrentSingleTagText() != HiddenRole)
                     {
                         SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                        ResetESPColor();
+                        Reset();
                     }
                 }
             }
         }
-
     }
 }

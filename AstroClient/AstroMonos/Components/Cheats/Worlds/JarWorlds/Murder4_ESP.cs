@@ -1,10 +1,11 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
-    using System;
-    using System.Linq;
     using ClientAttributes;
     using ESP.Player;
     using Il2CppSystem.Collections.Generic;
+    using Roles;
+    using System;
+    using System.Linq;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -18,11 +19,11 @@
     [RegisterComponent]
     public class Murder4_ESP : AstroMonoBehaviour
     {
+        private Murder4_Roles _CurrentRole = Murder4_Roles.Unassigned;
         private PlayerESP _ESP;
         private bool _isSelf;
 
         private LinkedNodes _LinkedNode;
-        private Murder4_Roles _Murder4CurrentRole = Murder4_Roles.Unassigned;
 
         private bool _ViewRoles;
 
@@ -33,13 +34,14 @@
             AntiGarbageCollection.Add(this);
         }
 
-        internal Murder4_Roles Murder4CurrentRole
+        internal Murder4_Roles CurrentRole
         {
-            [HideFromIl2Cpp] get => _Murder4CurrentRole;
+            [HideFromIl2Cpp]
+            get => _CurrentRole;
             [HideFromIl2Cpp]
             private set
             {
-                _Murder4CurrentRole = value;
+                _CurrentRole = value;
                 UpdateMurder4Role(value);
             }
         }
@@ -65,7 +67,8 @@
 
         internal bool ViewRoles
         {
-            [HideFromIl2Cpp] get => _ViewRoles;
+            [HideFromIl2Cpp]
+            get => _ViewRoles;
             [HideFromIl2Cpp]
             private set
             {
@@ -76,7 +79,7 @@
                         GameRoleTag.ShowTag = value;
                         if (value)
                             if (ESP != null)
-                                UpdateMurder4Role(Murder4CurrentRole);
+                                UpdateMurder4Role(CurrentRole);
                     }
             }
         }
@@ -135,6 +138,35 @@
             }
         }
 
+        [HideFromIl2Cpp]
+        internal Color? RoleToColor
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                switch (CurrentRole)
+                {
+                    case Murder4_Roles.Detective:
+                        return DetectiveColor;
+
+                    case Murder4_Roles.Murderer:
+                        return MurderColor;
+
+                    case Murder4_Roles.Bystander:
+                        return BystanderColor;
+
+                    case Murder4_Roles.Unassigned:
+                        return null;
+
+                    case Murder4_Roles.None:
+                        return null;
+
+                    default:
+                        return null;
+                }
+            }
+        }
+
         // Use this for initialization
         internal void Start()
         {
@@ -158,11 +190,8 @@
                 GameRoleTag.ShowTag = false;
             }
 
-            if (IsMurder4World)
-            {
-                Murder4CurrentRole = Murder4_Roles.Unassigned;
-                ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
-            }
+            CurrentRole = Murder4_Roles.Unassigned;
+            ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
         }
 
         internal void OnDestroy()
@@ -191,45 +220,20 @@
                         if (obj.Equals(LinkedNode.Node.gameObject))
                         {
                             if (action == "SyncAssignB")
-                                Murder4CurrentRole = Murder4_Roles.Bystander;
+                                CurrentRole = Murder4_Roles.Bystander;
                             else if (action == "SyncAssignD")
-                                Murder4CurrentRole = Murder4_Roles.Detective;
+                                CurrentRole = Murder4_Roles.Detective;
                             else if (action == "SyncAssignM")
-                                Murder4CurrentRole = Murder4_Roles.Murderer;
-                            else if (action == "SyncKill") Murder4CurrentRole = Murder4_Roles.None;
+                                CurrentRole = Murder4_Roles.Murderer;
+                            else if (action == "SyncKill") CurrentRole = Murder4_Roles.None;
                         }
 
-                        if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action.Equals("SyncStart")) Murder4CurrentRole = Murder4_Roles.None;
+                        if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action.Equals("SyncStart")) CurrentRole = Murder4_Roles.None;
                     }
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
-            }
-        }
-
-        [HideFromIl2Cpp]
-        internal Color? Murder4GetNamePlateColor()
-        {
-            switch (Murder4CurrentRole)
-            {
-                case Murder4_Roles.Detective:
-                    return DetectiveColor;
-
-                case Murder4_Roles.Murderer:
-                    return MurderColor;
-
-                case Murder4_Roles.Bystander:
-                    return BystanderColor;
-
-                case Murder4_Roles.Unassigned:
-                    return null;
-
-                case Murder4_Roles.None:
-                    return null;
-
-                default:
-                    return null;
             }
         }
 
@@ -278,14 +282,11 @@
                     if (role != Murder4_Roles.None && role != Murder4_Roles.Unassigned)
                     {
                         if (GetCurrentSingleTagText() != role.ToString())
-                        {
-                            var color = Murder4GetNamePlateColor();
-                            if (color != null)
+                            if (RoleToColor != null && RoleToColor.HasValue)
                             {
-                                SetTag(GameRoleTag, role.ToString(), DefaultTextColor, color.Value);
-                                SetEspColorIfExists(color.Value);
+                                SetTag(GameRoleTag, role.ToString(), DefaultTextColor, RoleToColor.GetValueOrDefault());
+                                SetEspColorIfExists(RoleToColor.GetValueOrDefault());
                             }
-                        }
                     }
                     else
                     {
@@ -306,6 +307,5 @@
                 }
             }
         }
-
     }
 }

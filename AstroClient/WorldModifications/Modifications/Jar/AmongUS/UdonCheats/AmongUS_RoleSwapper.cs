@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
     using AstroMonos.Components.Tools.Listeners;
     using Tools.Extensions;
     using Tools.UdonSearcher;
@@ -101,22 +102,22 @@
                                                 var LocalPlayer = JarRoleController.CurrentPlayer_AmongUS_ESP;
                                                 if (LocalPlayer != null)
                                                 {
-                                                    if (LocalPlayer.AmongUsCurrentRole == AmongUs_Roles.Crewmate)
+                                                    if (LocalPlayer.CurrentRole == AmongUs_Roles.Crewmate)
                                                     {
                                                         SelfRoleString = "SyncAssignB";
                                                     }
-                                                    if (LocalPlayer.AmongUsCurrentRole == AmongUs_Roles.Impostor)
+                                                    if (LocalPlayer.CurrentRole == AmongUs_Roles.Impostor)
                                                     {
                                                         SelfRoleString = "SyncAssignM";
                                                     }
                                                 }
                                                 if (Component != null)
                                                 {
-                                                    if (Component.AmongUsCurrentRole == AmongUs_Roles.Crewmate)
+                                                    if (Component.CurrentRole == AmongUs_Roles.Crewmate)
                                                     {
                                                         TargetRoleString = "SyncAssignB";
                                                     }
-                                                    if (Component.AmongUsCurrentRole == AmongUs_Roles.Impostor)
+                                                    if (Component.CurrentRole == AmongUs_Roles.Impostor)
                                                     {
                                                         TargetRoleString = "SyncAssignM";
                                                     }
@@ -126,10 +127,9 @@
                                                 UdonSearch.FindUdonEvent(Component.LinkedNode.Node.gameObject, SelfRoleString).ExecuteUdonEvent();
                                             }));
 
-                                            var textcolor = Component.AmongUsGetNamePlateColor();
-                                            if (textcolor != null)
+                                            if (Component.RoleToColor != null)
                                             {
-                                                playerbtn.SetTextColor(textcolor.Value);
+                                                playerbtn.SetTextColor(Component.RoleToColor.GetValueOrDefault());
                                             }
 
                                             Generated.Add(playerbtn);

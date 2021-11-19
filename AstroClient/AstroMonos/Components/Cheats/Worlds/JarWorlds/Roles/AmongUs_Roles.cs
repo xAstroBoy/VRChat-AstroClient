@@ -1,11 +1,5 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     internal enum AmongUs_Roles
     {
         None = 0,

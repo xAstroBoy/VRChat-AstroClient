@@ -96,10 +96,9 @@
                                                     var Page = new QMNestedGridMenu(CurrentScrollMenu, NodeTranslated, action.interactText);
                                                     GenerateInternal(Page, action, Reader, NodeTranslated);
 
-                                                    var textcolor = Reader.AmongUsGetNamePlateColor();
-                                                    if (textcolor != null)
+                                                    if (Reader.RoleToColor != null && Reader.RoleToColor.HasValue)
                                                     {
-                                                        Page.SetTextColor(textcolor.Value);
+                                                        Page.SetTextColor(Reader.RoleToColor.GetValueOrDefault());
                                                     }
                                                     GeneratedPages.Add(Page);
                                                     tmplist.Add(NodeTranslated);
@@ -155,10 +154,10 @@
                                 }
                                 else
                                 {
-                                    var SyncVotedForBtn = new QMSingleButton(menu, btnactionname, delegate { if (!Component.AmongUSHasVoted) { action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key); } }, action.gameObject?.ToString() + " Run " + btnactionname);
-                                    if (LinkedComponent.AmongUsGetNamePlateColor() != null)
+                                    var SyncVotedForBtn = new QMSingleButton(menu, btnactionname, delegate { if (!Component.HasVoted) { action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key); } }, action.gameObject?.ToString() + " Run " + btnactionname);
+                                    if (LinkedComponent.RoleToColor != null && LinkedComponent.RoleToColor.HasValue)
                                     {
-                                        SyncVotedForBtn.SetTextColor(LinkedComponent.AmongUsGetNamePlateColor().Value);
+                                        SyncVotedForBtn.SetTextColor(LinkedComponent.RoleToColor.GetValueOrDefault());
                                     }
                                     if (!anothertmplist.Contains(btnactionname))
                                     {

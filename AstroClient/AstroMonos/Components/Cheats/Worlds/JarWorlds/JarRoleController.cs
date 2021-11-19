@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
+    using AstroClient.Tools.Extensions;
+    using AstroEventArgs;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroClient.Tools.Extensions;
-    using AstroEventArgs;
     using UnhollowerBaseLib;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -27,25 +27,18 @@
 
         internal static bool IsAmongUsWorld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-
         internal static bool ViewRoles
         {
-            [HideFromIl2Cpp] get => _ViewRoles;
+            [HideFromIl2Cpp]
+            get => _ViewRoles;
             [HideFromIl2Cpp]
             set
             {
                 _ViewRoles = value;
-                if (Murder4RolesRevealerToggle != null)
-                {
-                    Murder4RolesRevealerToggle.SetToggleState(value);
-                }
-                if (AmongUSRolesRevealerToggle != null)
-                {
-                    AmongUSRolesRevealerToggle.SetToggleState(value);
-                }
+                if (Murder4RolesRevealerToggle != null) Murder4RolesRevealerToggle.SetToggleState(value);
+                if (AmongUSRolesRevealerToggle != null) AmongUSRolesRevealerToggle.SetToggleState(value);
 
                 Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
-
             }
         }
 
@@ -82,7 +75,6 @@
                 }
             }
         }
-
 
         internal static QMToggleButton Murder4RolesRevealerToggle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal static QMToggleButton AmongUSRolesRevealerToggle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -140,15 +132,12 @@
             {
                 var RoleRevealer = player.gameObject.AddComponent<Murder4_ESP>();
                 if (RoleRevealer != null && !Murder4_ESPs.Contains(RoleRevealer)) Murder4_ESPs.Add(RoleRevealer);
-
             }
             else if (IsAmongUsWorld)
             {
                 var RoleRevealer = player.gameObject.AddComponent<AmongUS_ESP>();
                 if (RoleRevealer != null && !AmongUS_ESPs.Contains(RoleRevealer)) AmongUS_ESPs.Add(RoleRevealer);
             }
-
-
         }
 
         internal static int? RemoveNodeText(Transform node)

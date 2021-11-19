@@ -153,9 +153,9 @@
                                         action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
                                     }
                                 }, action.gameObject?.ToString() + " Run " + "Vote: " + LinkedNodeTranslated, null, null, true);
-                                if (LinkedComponent.AmongUsGetNamePlateColor() != null)
+                                if (LinkedComponent.RoleToColor != null && LinkedComponent.RoleToColor.HasValue)
                                 {
-                                    SyncVotedForBtn.SetTextColor(LinkedComponent.AmongUsGetNamePlateColor().Value);
+                                    SyncVotedForBtn.SetTextColor(LinkedComponent.RoleToColor.GetValueOrDefault());
                                 }
 
                                 anothertmplist.Add(LinkedNodeTranslated);

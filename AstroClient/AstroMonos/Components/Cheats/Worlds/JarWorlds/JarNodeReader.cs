@@ -18,10 +18,6 @@
         {
             AntiGarbageCollection.Add(this);
         }
-        internal override void OnRoomLeft()
-        {
-            Destroy(this);
-        }
 
         internal VRCPlayerApi VRCPlayerAPI
         {
@@ -46,6 +42,11 @@
         {
             Node = gameObject.GetComponent<UdonBehaviour>();
             if (Node != null) DisassembledNode = Node.DisassembleUdonBehaviour();
+        }
+
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
         }
     }
 }
