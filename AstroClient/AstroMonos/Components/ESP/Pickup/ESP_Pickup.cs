@@ -95,6 +95,10 @@
                 }
             }
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         internal void ChangeColor(Color newcolor)
         {

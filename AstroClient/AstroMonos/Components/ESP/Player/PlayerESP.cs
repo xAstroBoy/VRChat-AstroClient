@@ -13,13 +13,13 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class PlayerESP : EspEvents
+    public class PlayerESP : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<EspEvents> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
 
         public PlayerESP(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<EspEvents>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -278,6 +278,10 @@
                 }
                 return null;
             }
+        }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
         }
 
         private Transform SelectRegion { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }

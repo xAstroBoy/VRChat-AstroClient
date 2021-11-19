@@ -163,6 +163,10 @@
                 return HighLightOptions.highlightColor;
             }
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         internal VRC.SDKBase.VRC_Trigger trigger;
         internal VRCSDK2.VRC_Trigger trigger2;

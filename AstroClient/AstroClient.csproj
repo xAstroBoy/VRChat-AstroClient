@@ -270,7 +270,6 @@
     <Compile Include="Developers\Cheetos\Cheetos\AstroPatch.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\InstanceHistory.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Crazy.cs" />
-    <Compile Include="AstroMonos\Components\ESP\EspEvents.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\Flashlight.cs" />
     <Compile Include="AstroMonos\Components\Malicious\OrbitManager.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\StretchyCheese.cs" />

@@ -136,6 +136,10 @@
                 HighLightOptions.highlightColor = value;
             }
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("E47D39");

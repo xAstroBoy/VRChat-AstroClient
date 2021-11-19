@@ -6,6 +6,7 @@
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using Cheetos;
     using ClientUI.Menu.ESP;
+    using Config;
     using Moderation;
     using Photon.Realtime;
     using Startup.Hooks;
@@ -77,6 +78,10 @@
 
             JarRoleController.Event_OnViewRolesPropertyChanged += Internal_OnViewRolesPropertyChanged;
             PlayerESPMenu.Event_OnPlayerESPPropertyChanged += Internal_OnPlayerESPPropertyChanged;
+
+            ConfigManager.Event_OnPublicESPColorChanged += Internal_OnPublicESPColorChanged;
+            ConfigManager.Event_OnFriendESPColorChanged += Internal_OnFriendESPColorChanged;
+            ConfigManager.Event_OnBlockedESPColorChanged += Internal_OnBlockedESPColorChanged;
 
         }
 
@@ -261,7 +266,32 @@
         private void Internal_OnViewRolesPropertyChanged(object sender, BoolEventsArgs e) => OnViewRolesPropertyChanged(e.value);
 
         private void Internal_OnPlayerESPPropertyChanged(object sender, BoolEventsArgs e) => OnPlayerESPPropertyChanged(e.value);
+        private void Internal_OnPublicESPColorChanged(object sender, ColorEventArgs e)
+        {
+            OnPublicESPColorChanged(e.Color);
+        }
 
+        private void Internal_OnBlockedESPColorChanged(object sender, ColorEventArgs e)
+        {
+            OnBlockedESPColorChanged(e.Color);
+        }
+
+        private void Internal_OnFriendESPColorChanged(object sender, ColorEventArgs e)
+        {
+            OnFriendESPColorChanged(e.Color);
+        }
+
+        internal virtual void OnPublicESPColorChanged(UnityEngine.Color color)
+        {
+        }
+
+        internal virtual void OnBlockedESPColorChanged(UnityEngine.Color color)
+        {
+        }
+
+        internal virtual void OnFriendESPColorChanged(UnityEngine.Color color)
+        {
+        }
         internal virtual void VRChat_OnUiManagerInit()
         {
         }

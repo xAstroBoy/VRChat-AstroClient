@@ -65,6 +65,10 @@
                 }
             }
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
 
         internal void ResetColor()

@@ -21,6 +21,10 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
         private void FixedUpdate()
         {
