@@ -339,6 +339,14 @@
             _ = int.TryParse(removedtext, out var value);
             return value;
         }
+        internal override void OnPlayerLeft(Player player)
+        {
+            if (player.Equals(this.Player))
+            {
+                Destroy(this);
+            }
+        }
+
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
