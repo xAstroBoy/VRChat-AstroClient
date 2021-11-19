@@ -1,6 +1,9 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
+    using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.UdonSearcher;
     using ClientAttributes;
+    using Constants;
     using ESP.Player;
     using Il2CppSystem.Collections.Generic;
     using MelonLoader;
@@ -8,14 +11,10 @@
     using System;
     using System.Collections;
     using System.Linq;
-    using AstroClient.Tools.Extensions;
-    using AstroClient.Tools.UdonSearcher;
-    using Constants;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using VRC.Udon.Common.Interfaces;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;
@@ -84,8 +83,7 @@
                     {
                         GameRoleTag.ShowTag = value;
                         if (value)
-                            if (ESP != null)
-                                UpdateMurder4Role(CurrentRole);
+                            UpdateMurder4Role(CurrentRole);
                     }
             }
         }
@@ -315,6 +313,7 @@
         }
 
         private CustomLists.UdonBehaviour_Cached _GetBystanderEvent;
+
         private CustomLists.UdonBehaviour_Cached GetBystanderEvent
         {
             [HideFromIl2Cpp]
@@ -328,11 +327,12 @@
                 return _GetBystanderEvent;
             }
         }
+
         private CustomLists.UdonBehaviour_Cached _GetMurdererEvent;
+
         private CustomLists.UdonBehaviour_Cached GetMurdererEvent
         {
             [HideFromIl2Cpp]
-
             get
             {
                 if (_GetMurdererEvent == null)
@@ -345,10 +345,10 @@
         }
 
         private CustomLists.UdonBehaviour_Cached _GetKillEvent;
+
         private CustomLists.UdonBehaviour_Cached GetKillEvent
         {
             [HideFromIl2Cpp]
-
             get
             {
                 if (_GetKillEvent == null)
@@ -361,6 +361,7 @@
         }
 
         private CustomLists.UdonBehaviour_Cached _GetDetectiveEvent;
+
         private CustomLists.UdonBehaviour_Cached GetDetectiveEvent
         {
             [HideFromIl2Cpp]
@@ -394,27 +395,35 @@
             return GameRoleTag.Label_Text;
         }
 
-        private void SetEspColorIfExists(Color color)
-        {
-            if (Player != null && ESP != null && ESP.UseCustomColor) ESP.ChangeColor(color);
-        }
-
-        private void ResetESPColor()
-        {
-            if (Player != null && ESP != null) ESP.ResetColor();
-        }
-
         internal override void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
+        }
+        private void ResetESPColor()
+        {
+            if (ESP != null)
+            {
+                ESP.ResetColor();
+            }
+        }
+
+
+        private void UpdateESP()
+        {
+            if (ESP != null)
+            {
+                ESP.UseCustomColor = ViewRoles;
+                if (ESP.UseCustomColor)
+                {
+                    ESP.ChangeColor(RoleToColor.GetValueOrDefault());
+                }
+            }
         }
 
         private void UpdateMurder4Role(Murder4_Roles role)
         {
             if (LinkedNode != null)
             {
-                if (ESP != null)
-                    ESP.UseCustomColor = ViewRoles;
                 if (ViewRoles)
                 {
                     if (role != Murder4_Roles.None && role != Murder4_Roles.Unassigned)
@@ -423,8 +432,8 @@
                             if (RoleToColor != null && RoleToColor.HasValue)
                             {
                                 SetTag(GameRoleTag, role.ToString(), DefaultTextColor, RoleToColor.GetValueOrDefault());
-                                SetEspColorIfExists(RoleToColor.GetValueOrDefault());
                             }
+                        UpdateESP();
                     }
                     else
                     {
@@ -440,8 +449,8 @@
                     if (GetCurrentSingleTagText() != HiddenRole)
                     {
                         SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                        ResetESPColor();
                     }
+                    ResetESPColor();
                 }
             }
         }

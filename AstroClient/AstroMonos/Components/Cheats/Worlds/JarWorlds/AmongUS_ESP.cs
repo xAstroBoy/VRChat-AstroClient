@@ -133,9 +133,7 @@
                 if (LinkedNode != null)
                     if (GameRoleTag != null)
                         GameRoleTag.ShowTag = value;
-                if (value)
-                    if (ESP != null)
-                        UpdateAmongUSRole(CurrentRole);
+                UpdateAmongUSRole(CurrentRole);
             }
         }
 
@@ -213,13 +211,11 @@
             if (ViewRoles)
             {
                 _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
-                ResetESP();
                 GameRoleTag.ShowTag = false;
             }
             else
             {
                 _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                ResetESP();
                 GameRoleTag.ShowTag = false;
             }
 
@@ -324,11 +320,6 @@
                 yield return null;
 
             ModConsole.DebugLog($"Found all the required Events and Node!");
-        }
-
-        private void ResetESP()
-        {
-            if (Player != null && ESP != null) ESP.ResetColor();
         }
 
         internal override void OnRoomLeft()
@@ -445,11 +436,7 @@
             return GameRoleTag.Label_Text;
         }
 
-        private void SetEspColorIfExists(Color color)
-        {
-            if (Player != null && ESP != null && ESP.UseCustomColor) ESP.ChangeColor(color);
-        }
-
+       
         internal override void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
@@ -462,7 +449,28 @@
                             UpdateAmongUSRole(CurrentRole);
                 }
         }
+        private void ResetESPColor()
+        {
+            if (ESP != null)
+            {
+                ESP.ResetColor();
+            }
+        }
 
+
+        private void UpdateESP()
+        {
+            if (ESP != null)
+            {
+                ESP.UseCustomColor = ViewRoles;
+                if (ESP.UseCustomColor)
+                {
+                    ESP.ChangeColor(RoleToColor.GetValueOrDefault());
+                }
+            }
+        }
+
+ 
         private void UpdateAmongUSRole(AmongUs_Roles role)
         {
             if (LinkedNode != null)
@@ -479,15 +487,16 @@
                             if (RoleToColor != null && RoleToColor.HasValue)
                             {
                                 SetTag(GameRoleTag, role.ToString(), DefaultTextColor, RoleToColor.GetValueOrDefault());
-                                SetEspColorIfExists(RoleToColor.GetValueOrDefault());
                             }
+                        UpdateESP();
+
                     }
                     else
                     {
                         if (GetCurrentSingleTagText() != NoRoles)
                         {
                             SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
-                            ResetESP();
+                            ResetESPColor();
                             HasVoted = false;
                         }
                     }
@@ -499,7 +508,7 @@
                     if (GetCurrentSingleTagText() != HiddenRole)
                     {
                         SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                        ResetESP();
+                        ResetESPColor();
                     }
                 }
             }
