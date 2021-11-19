@@ -3,15 +3,16 @@
     using ClientAttributes;
     using ESP.Player;
     using Il2CppSystem.Collections.Generic;
+    using MelonLoader;
     using Roles;
     using System;
     using System.Collections;
     using System.Linq;
-    using MelonLoader;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using VRC.Udon.Common.Interfaces;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;
@@ -103,12 +104,6 @@
         internal Color Unassigned { [HideFromIl2Cpp] get; } = new(0.5f, 0.5f, 0.5f, 1f);
 
         internal Color NoRolesAssigned { [HideFromIl2Cpp] get; } = new(0f, 0f, 0f, 0f);
-        private IEnumerator FindLinkedNode()
-        {
-            while (LinkedNode == null)
-                yield return null;
-            ModConsole.DebugLog($"Murder 4 ESP , Found Linked Node to {Player.GetDisplayName()}");
-        }
 
         private PlayerESP ESP
         {
@@ -201,13 +196,56 @@
             CurrentRole = Murder4_Roles.Unassigned;
             ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
             MelonCoroutines.Start(FindLinkedNode());
-
         }
 
         internal void OnDestroy()
         {
             if (GameRoleTag != null) Destroy(GameRoleTag);
             Murder4_ESPs.Remove(this);
+        }
+
+        [HideFromIl2Cpp]
+        internal void SetRole(Murder4_Roles NewRole)
+        {
+            switch (NewRole)
+            {
+                case Murder4_Roles.Bystander:
+                    {
+                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignB");
+                        break;
+                    }
+                case Murder4_Roles.Detective:
+                    {
+                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignD");
+                        break;
+                    }
+                case Murder4_Roles.Murderer:
+                    {
+                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignM");
+                        break;
+                    }
+                case Murder4_Roles.None:
+                    if (CurrentRole == Murder4_Roles.Detective || CurrentRole == Murder4_Roles.Murderer || CurrentRole == Murder4_Roles.Bystander)
+                        if (LinkedNode.NodeReader.Node != null)
+                            LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncKill");
+                    break;
+
+                case Murder4_Roles.Null:
+                case Murder4_Roles.Unassigned:
+                    return;
+                    break;
+            }
+
+            if (NewRole == Murder4_Roles.Unassigned || NewRole == Murder4_Roles.Null) return;
+
+            CurrentRole = NewRole;
+        }
+
+        private IEnumerator FindLinkedNode()
+        {
+            while (LinkedNode == null)
+                yield return null;
+            ModConsole.DebugLog($"Murder 4 ESP , Found Linked Node to {Player.GetDisplayName()}");
         }
 
         internal override void OnRoomLeft()

@@ -4,16 +4,16 @@
     using ClientAttributes;
     using ESP.Player;
     using Il2CppSystem.Collections.Generic;
+    using MelonLoader;
     using Roles;
     using System;
     using System.Collections;
     using System.Linq;
-    using MelonLoader;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using xAstroBoy.AstroButtonAPI;
+    using VRC.Udon.Common.Interfaces;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;
@@ -129,20 +129,11 @@
                 _ViewRoles = value;
                 if (LinkedNode != null)
                     if (GameRoleTag != null)
-                    {
                         GameRoleTag.ShowTag = value;
-                    }
                 if (value)
                     if (ESP != null)
                         UpdateAmongUSRole(CurrentRole);
-
             }
-        }
-        private IEnumerator FindLinkedNode()
-        {
-            while (LinkedNode == null)
-                yield return null;
-            ModConsole.DebugLog($"Among US ESP , Found Linked Node to {Player.GetDisplayName()}");
         }
 
         internal LinkedNodes LinkedNode
@@ -157,10 +148,7 @@
                         if (item != null)
                         {
                             var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayerAPI;
-                            if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer))
-                            {
-                                return _LinkedNode = item;
-                            }
+                            if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer)) return _LinkedNode = item;
                         }
                 }
 
@@ -206,11 +194,6 @@
             }
         }
 
-        private void ResetESP()
-        {
-            if (Player != null && ESP != null) ESP.ResetColor();
-        }
-
         // Use this for initialization
         internal void Start()
         {
@@ -247,6 +230,53 @@
             if (GameRoleTag != null) Destroy(GameRoleTag);
             if (AmongUSVoteRevealTag != null) Destroy(AmongUSVoteRevealTag);
             AmongUS_ESPs.Remove(this);
+        }
+
+        [HideFromIl2Cpp]
+        internal void SetRole(AmongUs_Roles NewRole)
+        {
+            switch (NewRole)
+            {
+                case AmongUs_Roles.Crewmate:
+                    {
+                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignB");
+                        break;
+                    }
+                case AmongUs_Roles.Impostor:
+                    {
+                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncAssignM");
+                        break;
+                    }
+                case AmongUs_Roles.None:
+                    if (CurrentRole == AmongUs_Roles.Impostor || CurrentRole == AmongUs_Roles.Crewmate)
+                    {
+                        if (LinkedNode.NodeReader.Node != null) LinkedNode.NodeReader.Node.SendCustomNetworkEvent(NetworkEventTarget.All, "SyncKill");
+                        HasVoted = false;
+                    }
+
+                    break;
+
+                case AmongUs_Roles.Null:
+                case AmongUs_Roles.Unassigned:
+                    return;
+                    break;
+            }
+
+            if (NewRole == AmongUs_Roles.Unassigned || NewRole == AmongUs_Roles.Null) return;
+
+            CurrentRole = NewRole;
+        }
+
+        private IEnumerator FindLinkedNode()
+        {
+            while (LinkedNode == null)
+                yield return null;
+            ModConsole.DebugLog($"Among US ESP , Found Linked Node to {Player.GetDisplayName()}");
+        }
+
+        private void ResetESP()
+        {
+            if (Player != null && ESP != null) ESP.ResetColor();
         }
 
         internal override void OnRoomLeft()

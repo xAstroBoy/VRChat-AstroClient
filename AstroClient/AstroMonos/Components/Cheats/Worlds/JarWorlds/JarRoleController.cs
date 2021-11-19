@@ -100,11 +100,6 @@
             return JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
         }
 
-        internal static Murder4_ESP Murder4_GetLinkedComponent(int value)
-        {
-            return Murder4_ESPs.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
-        }
-
         internal static AmongUS_ESP AmongUS_GetLinkedComponent(int value)
         {
             return AmongUS_ESPs.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
