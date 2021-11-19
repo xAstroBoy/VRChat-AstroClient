@@ -10,6 +10,7 @@
     using System.Collections;
     using System.Linq;
     using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.Player;
     using AstroClient.Tools.UdonSearcher;
     using Constants;
     using UI.SingleTag;
@@ -346,6 +347,7 @@
                 if (LinkedNode.Node == null) return;
                 if (LinkedNode.Node.gameObject == null) return;
                 if (sender == null) return;
+                if (!action.IsNotNullOrEmptyOrWhiteSpace()) return;
                 if (obj != null) // Node events (only on Assigned node)!
                     if (obj.Equals(LinkedNode.Node.gameObject))
                         switch (action)
@@ -465,7 +467,7 @@
                 ESP.UseCustomColor = ViewRoles;
                 if (ESP.UseCustomColor)
                 {
-                    ESP.ChangeColor(RoleToColor.GetValueOrDefault());
+                    ESP.ChangeColor(RoleToColor.GetValueOrDefault(Player.FriendStateToColor()));
                 }
             }
         }
