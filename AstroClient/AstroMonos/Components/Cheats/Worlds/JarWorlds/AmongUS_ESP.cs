@@ -110,10 +110,46 @@
             }
         }
 
-        internal SingleTag GameRoleTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        internal SingleTag AmongUSVoteRevealTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        private SingleTag _GameRoleTag;
+        internal SingleTag GameRoleTag
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_GameRoleTag == null)
+                {
+                    return _GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
+                }
+
+                return _GameRoleTag;
+            }
+        }
+        private SingleTag _AmongUSVoteRevealTag;
+        internal SingleTag AmongUSVoteRevealTag
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_AmongUSVoteRevealTag == null)
+                {
+                    return _AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Player);
+                }
+
+                return _AmongUSVoteRevealTag;
+            }
+        }
+
         internal string HiddenRole { [HideFromIl2Cpp] get; } = "Role Hidden";
         internal string NoRoles { [HideFromIl2Cpp] get; } = "No Role";
+        internal string NotVotedYet { [HideFromIl2Cpp] get; } = "Has not voted Yet";
+        internal string VotedAgainst { [HideFromIl2Cpp] get; } = "Voted: ";
+        internal string SkippedVote { [HideFromIl2Cpp] get; } = "Skipped Vote";
+
+        internal Color NotVotedYetColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("#034989");
+        internal Color VotedAgainstCurrentPlayer { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("#C22B26");
+        internal Color VotedAgainstAnotherPlayer { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("#44DBAC");
+        internal Color SkippedVoteColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("#1BA039");
+
         internal Color NoRolesColor { [HideFromIl2Cpp] get; } = Color.yellow;
         internal Color HiddenRolesColor { [HideFromIl2Cpp] get; } = Color.green;
         internal Color DefaultTextColor { [HideFromIl2Cpp] get; } = Color.white;
@@ -204,20 +240,35 @@
                 Player = p;
             else
                 Destroy(this);
-            GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
-            AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Player);
-            AmongUSVoteRevealTag.ShowTag = false;
-            HasVoted = false;
 
+            if (GameRoleTag != null)
+            {
+                GameRoleTag.ShowTag = false;
+            }
+            if (AmongUSVoteRevealTag != null)
+            {
+                AmongUSVoteRevealTag.ShowTag = false;
+            }
+
+
+            HasVoted = false;
             if (ViewRoles)
             {
-                _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
-                GameRoleTag.ShowTag = false;
+                if (GameRoleTag != null)
+                {
+                    GameRoleTag.Text = NoRoles;
+                    GameRoleTag.BackGroundColor = NoRolesColor;
+                    GameRoleTag.ShowTag = false;
+                }
             }
             else
             {
-                _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                GameRoleTag.ShowTag = false;
+                if (GameRoleTag != null)
+                {
+                    GameRoleTag.Text = HiddenRole;
+                    GameRoleTag.BackGroundColor = HiddenRolesColor;
+                    GameRoleTag.ShowTag = false;
+                }
             }
 
             CurrentRole = AmongUs_Roles.Unassigned;
@@ -381,7 +432,12 @@
                                 }
                             case "SyncAbstainedVoting":
                                 {
-                                    _ = SetTag(AmongUSVoteRevealTag, "Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
+                                    if (AmongUSVoteRevealTag != null)
+                                    {
+                                        AmongUSVoteRevealTag.Text = SkippedVote;
+                                        AmongUSVoteRevealTag.BackGroundColor = SkippedVoteColor;
+                                        AmongUSVoteRevealTag.ShowTag = true;
+                                    }
                                     HasVoted = true;
                                     break;
                                 }
@@ -390,10 +446,21 @@
                                     var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
                                     if (against != null)
                                     {
-                                        if (against != CurrentPlayer_AmongUS_ESP)
-                                            SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#44DBAC"));
-                                        else
-                                            SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#C22B26"));
+                                        if (AmongUSVoteRevealTag != null)
+                                        {
+                                            AmongUSVoteRevealTag.Text = VotedAgainst + against.Player.DisplayName();
+                                            if (against != CurrentPlayer_AmongUS_ESP)
+                                            {
+                                                AmongUSVoteRevealTag.BackGroundColor = VotedAgainstAnotherPlayer;
+                                            }
+                                            else
+                                            {
+                                                AmongUSVoteRevealTag.BackGroundColor = VotedAgainstCurrentPlayer;
+                                            }
+
+                                            AmongUSVoteRevealTag.ShowTag = true;
+                                        }
+                                        HasVoted = true;
                                     }
 
                                     HasVoted = true;
@@ -405,7 +472,12 @@
                 {
                     case "SyncEndVotingPhase":
                         {
-                            if (AmongUSVoteRevealTag != null) _ = SetTag(AmongUSVoteRevealTag, "Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
+                            if (AmongUSVoteRevealTag != null)
+                            {
+                                AmongUSVoteRevealTag.Text = NotVotedYet;
+                                AmongUSVoteRevealTag.BackGroundColor = NotVotedYetColor;
+                                AmongUSVoteRevealTag.ShowTag = false;
+                            }
                             HasVoted = false;
                             break;
                         }
@@ -414,7 +486,18 @@
                     case "SyncVictoryM":
                     case "SyncStart":
                         {
-                            if (AmongUSVoteRevealTag != null) _ = SetTag(AmongUSVoteRevealTag, "Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
+                            if (GameRoleTag != null)
+                            {
+                                GameRoleTag.Text = NoRoles;
+                                GameRoleTag.BackGroundColor = NoRolesColor;
+                                GameRoleTag.ShowTag = false;
+                            }
+                            if (AmongUSVoteRevealTag != null)
+                            {
+                                AmongUSVoteRevealTag.Text = NotVotedYet;
+                                AmongUSVoteRevealTag.BackGroundColor = NotVotedYetColor;
+                                AmongUSVoteRevealTag.ShowTag = false;
+                            }
                             HasVoted = false;
                             CurrentRole = AmongUs_Roles.None;
                             break;
@@ -426,23 +509,9 @@
             }
         }
 
-        private SingleTag SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
-        {
-            if (tag != null)
-            {
-                if (tag.Label_Text != text) tag.Label_Text = text;
-                if (tag.Label_TextColor != TextColor) tag.Label_TextColor = TextColor;
-                if (tag.Tag_Color != TagColor) tag.Tag_Color = TagColor;
-                return tag;
-            }
-
-            tag = SingleTagsUtils.AddSingleTag(Player);
-            return SetTag(tag, text, TextColor, TagColor);
-        }
-
         private string GetCurrentSingleTagText()
         {
-            return GameRoleTag.Label_Text;
+            return GameRoleTag.Text;
         }
 
        
@@ -484,7 +553,6 @@
         {
             if (LinkedNode != null)
             {
-                AmongUSVoteRevealTag ??= SingleTagsUtils.AddSingleTag(Player);
                 if (ESP != null) ESP.UseCustomColor = ViewRoles;
                 if (ViewRoles)
                 {
@@ -493,21 +561,33 @@
                     if (role != AmongUs_Roles.None && role != AmongUs_Roles.Unassigned)
                     {
                         if (GetCurrentSingleTagText() != role.ToString())
+
                             if (RoleToColor != null && RoleToColor.HasValue)
                             {
-                                SetTag(GameRoleTag, role.ToString(), DefaultTextColor, RoleToColor.GetValueOrDefault());
+                                if (GameRoleTag != null)
+                                {
+                                    GameRoleTag.Text = role.ToString();
+                                    GameRoleTag.BackGroundColor = RoleToColor.GetValueOrDefault();
+                                    GameRoleTag.ShowTag = true;
+                                }
                             }
                         UpdateESP();
 
                     }
                     else
                     {
-                        if (GetCurrentSingleTagText() != NoRoles)
+                        if (GameRoleTag != null)
                         {
-                            SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                            if (GameRoleTag.Text != NoRoles)
+                            {
+                                GameRoleTag.Text = NoRoles;
+                                GameRoleTag.BackGroundColor = NoRolesColor;
+                                GameRoleTag.ShowTag = false;
+                            }
                             ResetESPColor();
-                            HasVoted = false;
                         }
+
+                        HasVoted = false;
                     }
                 }
                 else
@@ -516,7 +596,12 @@
 
                     if (GetCurrentSingleTagText() != HiddenRole)
                     {
-                        SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                        if (GameRoleTag != null)
+                        {
+                            GameRoleTag.Text = HiddenRole;
+                            GameRoleTag.BackGroundColor = HiddenRolesColor;
+                            GameRoleTag.ShowTag = false;
+                        }
                         ResetESPColor();
                     }
                 }

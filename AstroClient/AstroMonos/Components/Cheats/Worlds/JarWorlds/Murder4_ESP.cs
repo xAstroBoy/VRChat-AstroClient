@@ -88,7 +88,21 @@
             }
         }
 
-        internal SingleTag GameRoleTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        private SingleTag _GameRoleTag;
+        internal SingleTag GameRoleTag
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_GameRoleTag == null)
+                {
+                    return _GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
+                }
+
+                return _GameRoleTag;
+            }
+        }
+
         internal string HiddenRole { [HideFromIl2Cpp] get; } = "Role Hidden";
         internal string NoRoles { [HideFromIl2Cpp] get; } = "No Role";
         internal Color NoRolesColor { [HideFromIl2Cpp] get; } = Color.yellow;
@@ -179,17 +193,29 @@
                 Player = p;
             else
                 Destroy(this);
-            GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
 
+            if (GameRoleTag != null)
+            {
+                GameRoleTag.ShowTag = false;
+            }
             if (ViewRoles)
             {
-                _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                if (GameRoleTag != null)
+                {
+                    GameRoleTag.Text = NoRoles;
+                    GameRoleTag.BackGroundColor = NoRolesColor;
+                    GameRoleTag.ShowTag = false;
+                }
                 ResetESPColor();
-                GameRoleTag.ShowTag = false;
             }
             else
             {
-                _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                if (GameRoleTag != null)
+                {
+                    GameRoleTag.Text = HiddenRole;
+                    GameRoleTag.BackGroundColor = HiddenRolesColor;
+                    GameRoleTag.ShowTag = false;
+                }
                 ResetESPColor();
                 GameRoleTag.ShowTag = false;
             }
@@ -385,23 +411,9 @@
             }
         }
 
-        private SingleTag SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
-        {
-            if (tag != null)
-            {
-                if (tag.Label_Text != text) tag.Label_Text = text;
-                if (tag.Label_TextColor != TextColor) tag.Label_TextColor = TextColor;
-                if (tag.Tag_Color != TagColor) tag.Tag_Color = TagColor;
-                return tag;
-            }
-
-            tag = SingleTagsUtils.AddSingleTag(Player);
-            return SetTag(tag, text, TextColor, TagColor);
-        }
-
         private string GetCurrentSingleTagText()
         {
-            return GameRoleTag.Label_Text;
+            return GameRoleTag.Text;
         }
 
         internal override void OnViewRolesPropertyChanged(bool value)
@@ -421,50 +433,75 @@
 
         private void UpdateESP()
         {
-            if (IsSelf) return;
-            if (ESP != null)
+            try
             {
-                ESP.UseCustomColor = ViewRoles;
-                if (ESP.UseCustomColor)
+                if (IsSelf) return;
+                if (ESP != null)
                 {
-                    ESP.ChangeColor(RoleToColor.GetValueOrDefault(Player.FriendStateToColor()));
+                    ESP.UseCustomColor = ViewRoles;
+                    if (ESP.UseCustomColor)
+                    {
+                        ESP.ChangeColor(RoleToColor.GetValueOrDefault(Player.FriendStateToColor()));
+                    }
                 }
             }
+            catch{}
         }
 
         private void UpdateMurder4Role(Murder4_Roles role)
         {
-            if (LinkedNode != null)
+            try
             {
-                if (ViewRoles)
+                if (LinkedNode != null)
                 {
-                    if (role != Murder4_Roles.None && role != Murder4_Roles.Unassigned)
+                    if (ViewRoles)
                     {
-                        if (GetCurrentSingleTagText() != role.ToString())
-                            if (RoleToColor != null && RoleToColor.HasValue)
+                        if (role != Murder4_Roles.None && role != Murder4_Roles.Unassigned)
+                        {
+                            if (GetCurrentSingleTagText() != role.ToString())
+                                if (RoleToColor != null && RoleToColor.HasValue)
+                                {
+                                    if (GameRoleTag != null)
+                                    {
+                                        GameRoleTag.Text = role.ToString();
+                                        GameRoleTag.BackGroundColor = RoleToColor.GetValueOrDefault();
+                                        GameRoleTag.ShowTag = true;
+                                    }
+                                }
+
+                            UpdateESP();
+                        }
+                        else
+                        {
+                            if (GetCurrentSingleTagText() != NoRoles)
                             {
-                                SetTag(GameRoleTag, role.ToString(), DefaultTextColor, RoleToColor.GetValueOrDefault());
+                                if (GameRoleTag != null)
+                                {
+                                    GameRoleTag.Text = NoRoles;
+                                    GameRoleTag.BackGroundColor = NoRolesColor;
+                                    GameRoleTag.ShowTag = true;
+                                }
+                                ResetESPColor();
                             }
-                        UpdateESP();
+                        }
                     }
                     else
                     {
-                        if (GetCurrentSingleTagText() != NoRoles)
+                        if (GetCurrentSingleTagText() != HiddenRole)
                         {
-                            SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
-                            ResetESPColor();
+                            if (GameRoleTag != null)
+                            {
+                                GameRoleTag.Text = HiddenRole;
+                                GameRoleTag.BackGroundColor = HiddenRolesColor;
+                                GameRoleTag.ShowTag = false;
+                            }
                         }
+
+                        ResetESPColor();
                     }
-                }
-                else
-                {
-                    if (GetCurrentSingleTagText() != HiddenRole)
-                    {
-                        SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
-                    }
-                    ResetESPColor();
                 }
             }
+            catch{}
         }
     }
 }

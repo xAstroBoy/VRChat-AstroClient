@@ -2,7 +2,9 @@
 {
     using System;
     using System.Linq;
+    using CheetoLibrary;
     using ClientAttributes;
+    using Tools.Listeners;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
@@ -81,7 +83,7 @@
                             {
                                 Debug($"Found Child {child.name} As TextChild in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
                                 Label = child;
-                                if (Label != null) LabelText = Label.GetComponent<TMPro.TextMeshProUGUI>();
+                                if (Label != null) TagText = Label.GetComponent<TMPro.TextMeshProUGUI>();
                                 continue;
                             }
                             Debug($"Removed Child {child.name} in {SpawnedTag.name} allocated on {Player.DisplayName()}");
@@ -109,13 +111,48 @@
                         }
                     }
                 }
+
+                if (SpawnedTag != null)
+                {
+                    TextColor = Color.white;
+                    KeepTagVisible = true;
+                    if (TagListener == null)
+                    {
+                        TagListener = SpawnedTag.GetOrAddComponent<GameObjectListener>();
+                    }
+
+                    if (TagListener != null)
+                    {
+                        TagListener.OnDisabled += OnTagDisable;
+                        TagListener.OnDestroyed += onTagDestroy;
+
+                    }
+                }
             }
         }
+
+        private void OnTagDisable()
+        {
+            if (KeepTagVisible)
+            {
+                if (ShowTag)
+                {
+                    SpawnedTag.gameObject.SetActive(true);
+                }
+            }
+        }
+
+        private void onTagDestroy()
+        {
+            OnDestroy();
+        }
+
 
         internal void OnDestroy()
         {
             if (Player != null)
             {
+                Destroy(TagListener);
                 Destroy(SpawnedTag.gameObject);
                 var sorted = (from s in Player.GetComponentsInChildren<SingleTag>(true) orderby s.AllocatedStack descending select s).ToList();
                 if (sorted.Count() != 0 && sorted.Count() != 1)
@@ -145,33 +182,78 @@
             }
         }
 
-        // Update is called once per frame
-        internal void Update()
-        {
-            try
-            {
-                if (InternalStack != AllocatedStack)
-                {
-                    AllocatedStack = InternalStack;
-                }
-                if (SpawnedTag != null)
-                {
-                    if (SpawnedTag.gameObject.active != ShowTag) SpawnedTag.gameObject.SetActive(ShowTag);
 
-                    if (LabelText != null)
-                    {
-                        if (LabelText.text != Label_Text) LabelText.text = Label_Text;
-                        if (LabelText.color != Label_TextColor) LabelText.color = Label_TextColor;
-                    }
-                    if (SpawnedStatsImage != null)
-                    {
-                        if (SpawnedStatsImage.color != Tag_Color) SpawnedStatsImage.color = Tag_Color;
-                    }
-                }
-            }
-            catch (Exception e)
+        // TODO : Rewrite (suspicions of Taking performance) !!!
+        //// Update is called once per frame
+        //internal void Update()
+        //{
+        //    try
+        //    {
+        //        //if (InternalStack != AllocatedStack)
+        //        //{
+        //        //    AllocatedStack = InternalStack;
+        //        //}
+        //        if (SpawnedTag != null)
+        //        {
+        //            if (SpawnedTag.gameObject.active != ShowTag) 
+
+        //            if (TagText != null)
+        //            {
+        //                if (TagText.text != Label_Text) TagText.text = Label_Text;
+        //                if (TagText.color != Label_TextColor) TagText.color = Label_TextColor;
+        //            }
+        //            if (SpawnedStatsImage != null)
+        //            {
+        //                if (SpawnedStatsImage.color != Tag_Color)  = Tag_Color;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        ModConsole.DebugError($"SingleTag Exception in Update Event : " + e);
+        //    }
+        //}
+
+
+        internal string Text
+        {
+            [HideFromIl2Cpp]
+            get
             {
-                ModConsole.DebugError($"SingleTag Exception in Update Event : " + e);
+                return TagText.text;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                TagText.text = value;
+            }
+        }
+
+        internal Color TextColor
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return TagText.color;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                TagText.color = value;
+            }
+        }
+
+        internal Color BackGroundColor
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return SpawnedStatsImage.color;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                SpawnedStatsImage.color = value;
             }
         }
 
@@ -202,7 +284,41 @@
             }
         }
 
-        internal int InternalStack;
+        private int _InternalStack;
+        internal int InternalStack
+        {
+            [HideFromIl2Cpp]
+
+            get
+            {
+                return _InternalStack;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                _InternalStack = value;
+                AllocatedStack = value;
+            }
+        }
+
+        internal bool KeepTagVisible { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+
+        private bool _ShowTag;
+        internal bool ShowTag 
+        {
+            get
+            {
+                return _ShowTag; 
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                _ShowTag = value;
+                 SpawnedTag.gameObject.SetActive(value);
+            }
+        }
+
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
@@ -212,15 +328,11 @@
 
         // TAG TEXT
         private Transform Label;
-
-        private TMPro.TextMeshProUGUI LabelText;
-        internal Color Label_TextColor = Color.white;
-        internal string Label_Text;
+        private GameObjectListener TagListener;
+        private TMPro.TextMeshProUGUI TagText;
 
         // STATS
         private Transform Player_QuickStats;
         private ImageThreeSlice SpawnedStatsImage;
-        internal Color Tag_Color = Color.grey;
-        internal bool ShowTag = true;
     }
 }

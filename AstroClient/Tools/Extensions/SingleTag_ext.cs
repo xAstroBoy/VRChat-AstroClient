@@ -13,8 +13,8 @@
 
             foreach (var tag in tags)
             {
-                ModConsole.DebugLog($"Found Singletag with text : {tag.Label_Text} , With Search {searchtext}");
-                if (tag.Label_Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
+                ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
+                if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
@@ -28,8 +28,8 @@
             var tags = player.transform.root.GetComponentsInChildren<SingleTag>(true);
             foreach (var tag in tags)
             {
-                ModConsole.DebugLog($"Found Singletag with text : {tag.Label_Text} , With Search {searchtext}");
-                if (tag.Label_Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
+                ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
+                if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
                 {
                     ModConsole.DebugLog($"Destroying...");
 
@@ -44,8 +44,8 @@
             var tags = player.transform.root.GetComponentsInChildren<SingleTag>(true);
             foreach (var tag in tags)
             {
-                ModConsole.DebugLog($"Found Singletag with text : {tag.Label_Text} , With Search {searchtext}");
-                if (tag.Label_Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
+                ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
+                if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
                 {
                     FoundTags.Add(tag);
                 }
@@ -95,7 +95,7 @@
 
         }
 
-        internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color Tag_Color, UnityEngine.Color Label_TextColor, string Label_Text)
+        internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color Background, UnityEngine.Color TextColor, string Text)
         {
 
             var tag = player.AddSingleTag();
@@ -103,9 +103,9 @@
             {
                 MiscUtils.DelayFunction(0.5f, () => 
                 {
-                    tag.Tag_Color = Tag_Color;
-                    tag.Label_TextColor = Label_TextColor;
-                    tag.Label_Text = Label_Text;
+                    tag.BackGroundColor = Background;
+                    tag.TextColor = TextColor;
+                    tag.Text = Text;
                 
                 });
                 return tag;
