@@ -471,6 +471,7 @@
             item_Shotgun = null;
             item_Silenced_Revolver_0 = null;
             item_Silenced_Revolver_1 = null;
+            CancellationToken = null;
             item_Grenade = null;
             Clue_photograph = null;
             Clue_notebook = null;
@@ -830,13 +831,19 @@
                         {
                             RoleSwapper_GetDetectiveRole = false;
                             ModConsole.DebugLog("Starting Swapping for Detective Role!");
-                            MelonCoroutines.Start(SwapRole(Murder4_Roles.Detective));
+                            if (CancellationToken == null)
+                            {
+                                CancellationToken = MelonCoroutines.Start(SwapRole(Murder4_Roles.Detective));
+                            }
                         }
                         if (RoleSwapper_GetMurdererRole)
                         {
                             RoleSwapper_GetMurdererRole = false;
                             ModConsole.DebugLog("Starting Swapping for Murderer role!");
-                            MelonCoroutines.Start(SwapRole(Murder4_Roles.Murderer));
+                            if (CancellationToken == null)
+                            {
+                                CancellationToken = MelonCoroutines.Start(SwapRole(Murder4_Roles.Murderer));
+                            }
                         }
                     }
                 }
@@ -846,8 +853,15 @@
             }
         }
 
+        private static object CancellationToken;
         private static IEnumerator SwapRole(Murder4_Roles Selectedrole)
         {
+            while (JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole == Murder4_Roles.Null)
+                yield return null;
+            while (JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole == Murder4_Roles.Unassigned)
+                yield return new WaitForEndOfFrame();
+            while (JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole == Murder4_Roles.None)
+                yield return new WaitForEndOfFrame();
             while (FindNodeWithRole(Selectedrole) == null)
                 yield return new WaitForEndOfFrame();
             ModConsole.DebugLog("Initiating Swap!");
@@ -856,6 +870,8 @@
             {
                 SwapRoles(TargetNode);
             }
+
+            CancellationToken = null;
         }
 
         internal static void SwapRoles(Murder4_ESP TargetESP)

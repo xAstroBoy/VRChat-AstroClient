@@ -116,7 +116,7 @@
             AbortGameEvent = null;
             VictoryCrewmateEvent = null;
             VictoryImpostorEvent = null;
-
+            CancellationToken = null;
             RoleSwapper_GetImpostorRole = false;
             SerializerRot = new Quaternion(0, 0, 0, 0);
             SerializerPos = Vector3.zero;
@@ -301,8 +301,11 @@
                     {
                         if (RoleSwapper_GetImpostorRole)
                         {
-                            MelonCoroutines.Start(SwapRole(AmongUs_Roles.Impostor));
                             RoleSwapper_GetImpostorRole = false;
+                            if (CancellationToken == null)
+                            {
+                                MelonCoroutines.Start(SwapRole(AmongUs_Roles.Impostor));
+                            }
                         }
                     }
                 }
@@ -311,8 +314,15 @@
             {
             }
         }
+        private static object CancellationToken;
         private static IEnumerator SwapRole(AmongUs_Roles Selectedrole)
         {
+            while (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole == AmongUs_Roles.Null)
+                yield return null;
+            while (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole == AmongUs_Roles.Unassigned)
+                yield return new WaitForEndOfFrame();
+            while (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole == AmongUs_Roles.None)
+                yield return new WaitForEndOfFrame();
             while (FindNodeWithRole(Selectedrole) == null)
                 yield return new WaitForEndOfFrame();
             ModConsole.DebugLog("Initiating Swap!");
@@ -321,6 +331,8 @@
             {
                 SwapRoles(TargetNode);
             }
+
+            CancellationToken = null;
         }
 
         internal static void SwapRoles(AmongUS_ESP TargetESP)
