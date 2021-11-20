@@ -33,6 +33,7 @@
             return TagStackingMechanism.Where(x => x.Player == player).DefaultIfEmpty(null).First();
         }
 
+
         private static readonly bool DebugMode = false;
         internal static void Debug(string msg)
         {
@@ -43,21 +44,7 @@
         }
         // TODO : MERGE THIS IN THE STARTING PROCESS OF SINGLETAG AND MAKE IT EASIER AS .AddComponent<SINGLETAG>() instead of using this!
 
-        internal static List<TagStacker> GetAssignedTagsToPlayer(Player player)
-        {
-            List<TagStacker> AssignedTags = new List<TagStacker>();
-            if (player != null)
-            {
-                foreach (var tag in TagStackingMechanism)
-                {
-                    if (tag != null && tag.Player != null)
-                    {
-                        if (tag.Player == player) AssignedTags.Add(tag);
-                    }
-                }
-            }
-            return AssignedTags;
-        }
+
 
         internal static List<TagStacker> TagStackingMechanism { get; } = new List<TagStacker>();
 

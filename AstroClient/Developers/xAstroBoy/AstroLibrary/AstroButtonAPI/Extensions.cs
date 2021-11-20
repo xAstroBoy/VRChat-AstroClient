@@ -12,6 +12,7 @@
     using VRC.DataModel.Core;
     using VRC.UI.Core.Styles;
     using VRC.UI.Elements;
+    using VRC.UI.Elements.Buttons;
     using VRC.UI.Elements.Menus;
     using VRC.UI.Elements.Tooltips;
     using xAstroBoy.Extensions;
@@ -186,7 +187,7 @@
             parent.GetComponentInChildren<Image>().enabled = true;
             parent.GetComponentInChildren<TextMeshProUGUI>(true).enabled = true;
             parent.GetComponent<UiTooltip>().enabled = true;
-            UnityEngine.Object.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37Vo12St37VoUnique>());
+            UnityEngine.Object.Destroy(parent.GetComponent<MuteUserButton>());
         }
 
         public static TextMeshProUGUI NewText(this GameObject Parent, string search)

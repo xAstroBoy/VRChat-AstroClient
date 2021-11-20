@@ -105,11 +105,5 @@
             }
         }
 
-        internal static T GetOrAddComponent<T>(this Component c) where T : Component
-        {
-            var existing = c.GetComponent<T>();
-            if (existing) return existing;
-            return c.gameObject.AddComponent<T>();
-        }
     }
 }

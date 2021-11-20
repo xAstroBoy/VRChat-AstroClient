@@ -1,10 +1,14 @@
 ﻿namespace AstroClient.AstroMonos.Components.UI.SingleTag
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroClient.Tools.Extensions;
+    using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Modes;
     using CheetoLibrary;
     using ClientAttributes;
+    using MelonLoader;
     using Tools.Listeners;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -49,6 +53,36 @@
             // I HOPE THIS WORKS CAUSE WHY TF IT DOESNT COUNT EM
 
             // FIND ESSENTIALS TO GENERATE A TAG.
+            int stack = 2;
+            try
+            {
+                StackerEntry.AssignedTags.Add(this);
+                switch (StackerEntry.AssignedTags.Count)
+                {
+                    case 1:
+                    {
+                        stack = 2;
+                        break;
+                    }
+                    default:
+                    {
+                        stack = StackerEntry.AssignedTags.Count + 1;
+                        break;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
+
+            MelonCoroutines.Start(BuildTag());
+            AllocatedStack = stack;
+        }
+
+
+        private IEnumerator BuildTag()
+        {
             if (Player_content == null)
             {
                 if (Player != null)
@@ -119,7 +153,12 @@
                 if (SpawnedTag != null)
                 {
                     TextColor = Color.white;
-                    KeepTagVisible = true;
+                    TagText.text = Text;
+                    SpawnedTag.gameObject.SetActive(ShowTag);
+                    if (SpawnedStatsImage)
+                    {
+                        SpawnedStatsImage.color = BackGroundColor;
+                    }
                     if (TagListener == null)
                     {
                         TagListener = SpawnedTag.gameObject.AddComponent<GameObjectListener>();
@@ -133,33 +172,9 @@
                     }
                 }
             }
-            
-            int stack = 2;
-            try
-            {
-                StackerEntry.AssignedTags.Add(this);
-                switch (StackerEntry.AssignedTags.Count)
-                {
-                    case 1:
-                    {
-                        stack = 2;
-                        break;
-                    }
-                    default:
-                    {
-                        stack = StackerEntry.AssignedTags.Count + 1;
-                        break;
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                ModConsole.ErrorExc(e);
-            }
 
-            AllocatedStack = stack;
+            yield return null;
         }
-
 
         private TagStacker _StackerEntry;
         private TagStacker StackerEntry
@@ -195,6 +210,18 @@
                 }
             }
         }
+
+        internal void SystemColor_SetTextColor(System.Drawing.Color Color)
+        {
+            TextColor = Color.ToUnityEngineColor();
+        }
+
+
+        internal void SystemColor_SetBackgroundColor(System.Drawing.Color Color)
+        {
+            BackGroundColor = Color.ToUnityEngineColor();
+        }
+
 
         private void onTagDestroy()
         {
@@ -307,46 +334,59 @@
         //    }
         //}
 
-
+        private string _Text = "";
         internal string Text
         {
             [HideFromIl2Cpp]
             get
             {
-                return TagText.text;
+                return _Text;
             }
             [HideFromIl2Cpp]
             set
             {
-                TagText.text = value;
+                _Text = value;
+                if (TagText != null)
+                {
+                    TagText.text = value;
+                }
             }
         }
 
+        private Color _TextColor;
         internal Color TextColor
         {
             [HideFromIl2Cpp]
             get
             {
-                return TagText.color;
+                return _TextColor;
             }
             [HideFromIl2Cpp]
             set
             {
-                TagText.color = value;
+                _TextColor = value;
+                if (TagText)
+                {
+                    TagText.color = value;
+                }
             }
         }
-
+        private Color _BackGroundColor;
         internal Color BackGroundColor
         {
             [HideFromIl2Cpp]
             get
             {
-                return SpawnedStatsImage.color;
+                return _BackGroundColor;
             }
             [HideFromIl2Cpp]
             set
             {
-                SpawnedStatsImage.color = value;
+                _BackGroundColor = value;
+                if (SpawnedStatsImage)
+                {
+                    SpawnedStatsImage.color = value;
+                }
             }
         }
 
@@ -405,7 +445,10 @@
             set
             {
                 _ShowTag = value;
-                 SpawnedTag.gameObject.SetActive(value);
+                if (SpawnedTag.gameObject != null)
+                {
+                    SpawnedTag.gameObject.SetActive(value);
+                }
             }
         }
 

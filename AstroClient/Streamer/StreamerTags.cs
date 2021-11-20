@@ -1,10 +1,11 @@
 ﻿namespace AstroClient.Streamer
 {
+    using System.Drawing;
     using Constants;
-    using Tools.Colors;
     using Tools.Extensions;
     using VRC;
     using xAstroBoy.Utility;
+    using SystemColors = Tools.Colors.SystemColors;
 
     internal class StreamerTags : AstroEvents
     {
@@ -20,37 +21,37 @@
                 if (apiuser != null)
                 {
                     var userid = apiuser.id;
-                    player.AddSingleTag(SystemColors.LimeGreen, UnityEngine.Color.white, "Streamer");
+                    player.AddSingleTag(Color.Lime,  "Streamer");
                     switch (userid)
                     {
                         case Streamers.StarNovaKitty:
-                            player.AddSingleTag(SystemColors.Pink, UnityEngine.Color.white, "A Sweet Kitty"); ;
+                            player.AddSingleTag(Color.Pink,  "A Sweet Kitty"); ;
                             break;
 
                         case Streamers.Cambly:
-                            player.AddSingleTag(SystemColors.Turquoise, UnityEngine.Color.white, "A Clumsy Cute Birb ");
+                            player.AddSingleTag(Color.Turquoise,  "A Clumsy Cute Birb ");
                             break;
 
                         case Streamers.Lolathon:
-                            player.AddSingleTag(SystemColors.OrangeRed, UnityEngine.Color.white, "Clown & Prankster");
+                            player.AddSingleTag(Color.OrangeRed,  "Clown & Prankster");
                             break;
                         case Streamers.PATTIIIIIIII:
-                            player.AddSingleTag(SystemColors.Gold, UnityEngine.Color.white, "Golden Toast Protector!");
+                            player.AddSingleTag(Color.Gold,  "Golden Toast Protector!");
                             break;
                         case Streamers.Ratchet232:
-                            player.AddSingleTag(SystemColors.Red, UnityEngine.Color.white, "Official Psycho And cutie!");
+                            player.AddSingleTag(Color.Red,  "Official Psycho And cutie!");
                             break;
                         case Streamers.Thor_ChanVR:
-                            player.AddSingleTag(SystemColors.Gold, UnityEngine.Color.white, "Official VRChat goddess!");
+                            player.AddSingleTag(Color.Gold,  "Official VRChat goddess!");
                             break;
                         case Streamers.Pud_Pud:
-                            player.AddSingleTag(SystemColors.ForestGreen, UnityEngine.Color.white, "Sensible Squeaky panda and Cute!");
+                            player.AddSingleTag(Color.ForestGreen,  "Sensible Squeaky panda and Cute!");
                             break;
                         case Streamers.Ruqaa:
-                            player.AddSingleTag(SystemColors.CornflowerBlue, UnityEngine.Color.white, "Cute Bunny!");
+                            player.AddSingleTag(Color.CornflowerBlue,  "Cute Bunny!");
                             break;
                         case Streamers.Nifty:
-                            player.AddSingleTag(SystemColors.MediumPurple, UnityEngine.Color.white, "The Legendary Pan Bonker! (Give Her Hugs tho)");
+                            player.AddSingleTag(Color.Gold,  "The Legendary Pan Bonker! (Give Her Hugs tho)");
                             break;
 
                         default:

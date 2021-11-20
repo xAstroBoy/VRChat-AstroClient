@@ -7,6 +7,7 @@
     using CheetoLibrary;
     using MelonLoader;
     using Tools.Extensions;
+    using Tools.Extensions.Components_exts;
     using Tools.UdonSearcher;
     using UnityEngine;
     using WorldsIds;
@@ -100,6 +101,15 @@
                         }
                     }
                 }
+                MiscUtils.DelayFunction(1f, () => {
+                foreach (var item in WorldUtils.Pickups)
+                {
+                    if (item.gameObject.name.StartsWith("Tower"))
+                    {
+                        item.gameObject.Pickup_Set_Pickupable(true); // Override and fix potential Tower Bugs.
+                    }
+                }
+                });
             }
             else
             {
@@ -205,6 +215,7 @@
         {
             foreach (var tower in GetCurrentEditors)
             {
+                if (tower.name.Contains("RocketLauncher")) continue; // Ignore due to Lag reasons.
                 if (tower != null)
                 {
                     tower.SpeedMultiplier = value;

@@ -16,5 +16,16 @@
         {
             return obj.gameObject.GetOrAddComponent<T>();
         }
+        internal static T AddComponent<T>(this Component c) where T : Component
+        {
+            return c.gameObject.AddComponent<T>();
+        }
+
+        internal static T GetOrAddComponent<T>(this Component c) where T : Component
+        {
+            var existing = c.GetComponent<T>();
+            if (existing) return existing;
+            return c.gameObject.AddComponent<T>();
+        }
     }
 }

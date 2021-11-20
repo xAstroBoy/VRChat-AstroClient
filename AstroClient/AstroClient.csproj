@@ -105,6 +105,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
@@ -295,6 +296,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_WaveEditor.cs" />
     <Compile Include="Experiments\EmojiCooldownKiller.cs" />
+    <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealer.cs" />
     <Compile Include="Startup\Fixes\DashboardFix.cs" />
     <Compile Include="Tools\Exploits\ExploitUtils.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />

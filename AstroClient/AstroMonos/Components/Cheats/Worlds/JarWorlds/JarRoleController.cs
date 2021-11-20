@@ -38,7 +38,10 @@
                 if (Murder4RolesRevealerToggle != null) Murder4RolesRevealerToggle.SetToggleState(value);
                 if (AmongUSRolesRevealerToggle != null) AmongUSRolesRevealerToggle.SetToggleState(value);
 
-                Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
+                if (IsAmongUsWorld || IsMurder4World)
+                {
+                    Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
+                }
             }
         }
 

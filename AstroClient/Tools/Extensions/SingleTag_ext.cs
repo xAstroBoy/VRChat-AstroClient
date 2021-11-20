@@ -2,16 +2,18 @@
 {
     using System.Collections.Generic;
     using AstroMonos.Components.UI.SingleTag;
+    using CheetoLibrary;
     using VRC;
+    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
 
     internal static class SingleTag_ext
     {
         internal static bool HasTagWithText(this Player player, string searchtext)
         {
-            var tags = player.transform.root.GetComponentsInChildren<SingleTag>(true);
-
-            foreach (var tag in tags)
+            var entry = SingleTagsUtils.GetEntry(player);
+            if (entry == null) return false;
+            foreach (var tag in entry.AssignedTags)
             {
                 ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
                 if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
@@ -25,8 +27,9 @@
 
         internal static void DestroyTagsWithText(this Player player, string searchtext)
         {
-            var tags = player.transform.root.GetComponentsInChildren<SingleTag>(true);
-            foreach (var tag in tags)
+            var entry = SingleTagsUtils.GetEntry(player);
+            if (entry == null) return;
+            foreach (var tag in entry.AssignedTags)
             {
                 ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
                 if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
@@ -41,8 +44,9 @@
         internal static List<SingleTag> SearchTags(this Player player, string searchtext)
         {
             List<SingleTag> FoundTags = new List<SingleTag>();
-            var tags = player.transform.root.GetComponentsInChildren<SingleTag>(true);
-            foreach (var tag in tags)
+            var entry = SingleTagsUtils.GetEntry(player);
+            if (entry == null) return null;
+            foreach (var tag in entry.AssignedTags)
             {
                 ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
                 if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
@@ -54,60 +58,50 @@
             return FoundTags;
         }
 
-
-
-        internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color Tag_Color)
+        internal static SingleTag FindTag(this Player player, string TagText)
         {
+            var entry = SingleTagsUtils.GetEntry(player);
+            if (entry == null) return null;
+            foreach (var tag in entry.AssignedTags)
+            {
+                if (tag.Text.isMatch(TagText))
+                {
+                    return tag;
+                }
+            }
 
-
-            return AddSingleTag(player, Tag_Color, UnityEngine.Color.white, "TAG NOT SET");
+            return null;
         }
 
-        internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color Tag_Color, UnityEngine.Color Label_TextColor)
+
+
+        internal static SingleTag AddSingleTag(this Player player, System.Drawing.Color BackGround,  string Text)
         {
-            return AddSingleTag(player, Tag_Color, Label_TextColor, "TAG NOT SET");
-        }
-
-
-        internal static SingleTag AddSingleTag(this Player player, System.Drawing.Color Tag_Color, System.Drawing.Color Label_TextColor)
-        {
-            return AddSingleTag(player, Tag_Color.ToUnityEngineColor(), Label_TextColor.ToUnityEngineColor(), "TAG NOT SET");
-        }
-
-        internal static SingleTag AddSingleTag(this Player player, System.Drawing.Color Tag_Color, System.Drawing.Color Label_TextColor, string Label_Text)
-        {
-            return AddSingleTag(player, Tag_Color.ToUnityEngineColor(), Label_TextColor.ToUnityEngineColor(), Label_Text);
-
-        }
-        internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color Tag_Color, System.Drawing.Color Label_TextColor, string Label_Text)
-        {
-            return AddSingleTag(player, Tag_Color, Label_TextColor.ToUnityEngineColor(), Label_Text);
-
-        }
-
-        internal static SingleTag AddSingleTag(this Player player, System.Drawing.Color Tag_Color, UnityEngine.Color Label_TextColor, string Label_Text)
-        {
-            return AddSingleTag(player, Tag_Color.ToUnityEngineColor(), Label_TextColor, Label_Text);
-
-        }
-
-        internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color Background, UnityEngine.Color TextColor, string Text)
-        {
-
-            var tag = player.gameObject.AddComponent<SingleTag>();
+            if (player == null) return null;
+            var tag = player.AddComponent<SingleTag>();
+            MiscUtils.DelayFunction(0.5f, () => { 
             if (tag != null)
             {
-                MiscUtils.DelayFunction(0.5f, () => 
-                {
-                    tag.BackGroundColor = Background;
-                    tag.TextColor = TextColor;
-                    tag.Text = Text;
-                
-                });
-                return tag;
+                tag.Text = Text;
+                tag.SystemColor_SetBackgroundColor(BackGround);
             }
-            return null;
+            });
+            return tag;
+        }
 
+        internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color BackGround, string Text)
+        {
+            if (player == null) return null;
+            var tag = player.AddComponent<SingleTag>();
+            MiscUtils.DelayFunction(0.5f, () =>
+            {
+                if (tag != null)
+                {
+                    tag.Text = Text;
+                    tag.BackGroundColor = BackGround;
+                }
+            });
+            return tag;
         }
 
     }
