@@ -49,10 +49,10 @@
                 //ModConsole.Error($"Failed to Generate a SingleTag for Player {Player.DisplayName()}");
                 Destroy(this);
             }
-            //Debug("Searching for Entries To Parse stack order...");
-            // I HOPE THIS WORKS CAUSE WHY TF IT DOESNT COUNT EM
 
-            // FIND ESSENTIALS TO GENERATE A TAG.
+
+            #region Find and Generate a stack
+
             int stack = 2;
             try
             {
@@ -71,18 +71,17 @@
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
             }
 
-            MelonCoroutines.Start(BuildTag());
-            AllocatedStack = stack;
-        }
 
+            #endregion
 
-        private IEnumerator BuildTag()
-        {
+            #region Find and Build a tag!
+
+            // FIND ESSENTIALS TO GENERATE A TAG.
             if (Player_content == null)
             {
                 if (Player != null)
@@ -91,11 +90,13 @@
                     //if (Player_content != null) Debug($"Found {Player.DisplayName()}  Nameplate Contents Required to generate a SingleTag (using : {Player_content.name})!");
                 }
             }
+
             if (Player_QuickStats == null && Player_content != null)
             {
                 Player_QuickStats = Player_content.Find("Quick Stats");
                 //if (Player_QuickStats != null) Debug($"Found {Player.DisplayName()}  Nameplate Quick Stats Required to generate a SingleTag (using : {Player_QuickStats.name})!");
             }
+
             if (Player_content != null && Player_QuickStats != null)
             {
                 //Debug($"Using Content from {Player.DisplayName()}  Contents : {Player_content.name})!");
@@ -124,6 +125,7 @@
                                 if (Label != null) TagText = Label.GetComponent<TMPro.TextMeshProUGUI>();
                                 continue;
                             }
+
                             //Debug($"Removed Child {child.name} in {SpawnedTag.name} allocated on {Player.DisplayName()}");
                             Destroy(child.gameObject);
                             if (!SpawnedTag.gameObject.active) SpawnedTag.gameObject.SetActive(true);
@@ -149,32 +151,45 @@
                         }
                     }
                 }
+            }
 
-                if (SpawnedTag != null)
+
+
+
+            #endregion
+
+            #region  Program and set Tag!
+            if (SpawnedTag != null)
+            {
+                TextColor = Color.white;
+                TagText.text = Text;
+                SpawnedTag.gameObject.SetActive(ShowTag);
+                if (SpawnedStatsImage)
                 {
-                    TextColor = Color.white;
-                    TagText.text = Text;
-                    SpawnedTag.gameObject.SetActive(ShowTag);
-                    if (SpawnedStatsImage)
-                    {
-                        SpawnedStatsImage.color = BackGroundColor;
-                    }
-                    if (TagListener == null)
-                    {
-                        TagListener = SpawnedTag.gameObject.AddComponent<GameObjectListener>();
-                    }
+                    SpawnedStatsImage.color = BackGroundColor;
+                }
 
-                    if (TagListener != null)
-                    {
-                        TagListener.OnDisabled += OnTagDisable;
-                        TagListener.OnDestroyed += onTagDestroy;
+                if (TagListener == null)
+                {
+                    TagListener = SpawnedTag.gameObject.AddComponent<GameObjectListener>();
+                }
 
-                    }
+                if (TagListener != null)
+                {
+                    TagListener.OnDisabled += OnTagDisable;
+                    TagListener.OnDestroyed += onTagDestroy;
+
                 }
             }
 
-            yield return null;
+            AllocatedStack = stack;
+
+
+
+            #endregion
         }
+
+
 
         private TagStacker _StackerEntry;
         private TagStacker StackerEntry
