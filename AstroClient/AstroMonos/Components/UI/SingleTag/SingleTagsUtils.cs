@@ -2,6 +2,7 @@
 {
     #region Imports
 
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using UnhollowerBaseLib.Attributes;
@@ -15,7 +16,7 @@
     {
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
-            Counter.Clear();
+            TagStackingMechanism.Clear();
         }
 
         //internal override void OnPlayerLeft(Player player)
@@ -27,9 +28,9 @@
         //    }
         //}
 
-        internal static PlayerTagCounter GetEntry(Player player)
+        internal static TagStacker GetEntry(Player player)
         {
-            return Counter.Where(x => x.Player == player).DefaultIfEmpty(null).First();
+            return TagStackingMechanism.Where(x => x.Player == player).DefaultIfEmpty(null).First();
         }
 
         private static readonly bool DebugMode = false;
@@ -42,12 +43,12 @@
         }
         // TODO : MERGE THIS IN THE STARTING PROCESS OF SINGLETAG AND MAKE IT EASIER AS .AddComponent<SINGLETAG>() instead of using this!
 
-        internal static List<PlayerTagCounter> GetAssignedTagsToPlayer(Player player)
+        internal static List<TagStacker> GetAssignedTagsToPlayer(Player player)
         {
-            List<PlayerTagCounter> AssignedTags = new List<PlayerTagCounter>();
+            List<TagStacker> AssignedTags = new List<TagStacker>();
             if (player != null)
             {
-                foreach (var tag in Counter)
+                foreach (var tag in TagStackingMechanism)
                 {
                     if (tag != null && tag.Player != null)
                     {
@@ -58,26 +59,17 @@
             return AssignedTags;
         }
 
-        internal static List<PlayerTagCounter> Counter = new List<PlayerTagCounter>();
+        internal static List<TagStacker> TagStackingMechanism { get; } = new List<TagStacker>();
 
-        internal static void RemoveCounter(PlayerTagCounter entry)
+        internal static void RemoveCounter(TagStacker entry)
         {
             if (entry != null)
             {
-                if (Counter.Contains(entry)) _ = Counter.Remove(entry);
+                if (TagStackingMechanism.Contains(entry)) _ = TagStackingMechanism.Remove(entry);
             }
         }
 
-        internal class PlayerTagCounter
-        {
-            internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-            internal int AssignedStack { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-            internal PlayerTagCounter(Player user, int stack)
-            {
-                this.Player = user;
-                AssignedStack = stack;
-            }
-        }
+
     }
 }

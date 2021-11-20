@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.AstroMonos.Components.UI.SingleTag
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using CheetoLibrary;
     using ClientAttributes;
@@ -36,42 +37,16 @@
             var p = this.GetComponent<Player>();
             if (p != null)
             {
-                Debug($"Found Target Player {p.DisplayName()}, For SingleTag");
+                //Debug($"Found Target Player {p.DisplayName()}, For SingleTag");
                 Player = p;
             }
             else
             {
-                ModConsole.Error($"Failed to Generate a SingleTag for Player {Player.DisplayName()}");
+                //ModConsole.Error($"Failed to Generate a SingleTag for Player {Player.DisplayName()}");
                 Destroy(this);
             }
-            bool AddNewPlayer = false;
-            int stack = 2;
-            Debug("Searching for Entries To Parse stack order...");
+            //Debug("Searching for Entries To Parse stack order...");
             // I HOPE THIS WORKS CAUSE WHY TF IT DOESNT COUNT EM
-            var entry = SingleTagsUtils.GetEntry(Player);
-            if (entry != null)
-            {
-                Debug($"Found existing stack for {Player.DisplayName()} having current stack value : {entry.AssignedStack}");
-                entry.AssignedStack++;
-                stack = entry.AssignedStack;
-            }
-            else
-            {
-                Debug($"No Entry Found for player {Player.DisplayName()} , using default stack value {stack} for generated SingleTag");
-                AddNewPlayer = true;
-            }
-            if (AddNewPlayer)
-            {
-                var addme = new SingleTagsUtils.PlayerTagCounter(Player, stack);
-                if (SingleTagsUtils.Counter != null)
-                {
-                    if (!SingleTagsUtils.Counter.Contains(addme))
-                    {
-                        Debug($"Added New Entry for Player : {Player.DisplayName()} using stack {addme.AssignedStack}");
-                        SingleTagsUtils.Counter.Add(addme);
-                    }
-                }
-            }
 
             // FIND ESSENTIALS TO GENERATE A TAG.
             if (Player_content == null)
@@ -79,43 +54,43 @@
                 if (Player != null)
                 {
                     Player_content = Player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents");
-                    if (Player_content != null) Debug($"Found {Player.DisplayName()}  Nameplate Contents Required to generate a SingleTag (using : {Player_content.name})!");
+                    //if (Player_content != null) Debug($"Found {Player.DisplayName()}  Nameplate Contents Required to generate a SingleTag (using : {Player_content.name})!");
                 }
             }
             if (Player_QuickStats == null && Player_content != null)
             {
                 Player_QuickStats = Player_content.Find("Quick Stats");
-                if (Player_QuickStats != null) Debug($"Found {Player.DisplayName()}  Nameplate Quick Stats Required to generate a SingleTag (using : {Player_QuickStats.name})!");
+                //if (Player_QuickStats != null) Debug($"Found {Player.DisplayName()}  Nameplate Quick Stats Required to generate a SingleTag (using : {Player_QuickStats.name})!");
             }
             if (Player_content != null && Player_QuickStats != null)
             {
-                Debug($"Using Content from {Player.DisplayName()}  Contents : {Player_content.name})!");
-                Debug($"Using QuickStats from {Player.DisplayName()}  Player_QuickStats : {Player_QuickStats.name})!");
+                //Debug($"Using Content from {Player.DisplayName()}  Contents : {Player_content.name})!");
+                //Debug($"Using QuickStats from {Player.DisplayName()}  Player_QuickStats : {Player_QuickStats.name})!");
 
                 if (SpawnedTag == null)
                 {
-                    Debug($"Starting Tag Generation..");
+                    //Debug($"Starting Tag Generation..");
 
                     SpawnedTag = Instantiate(Player_QuickStats, Player_QuickStats.parent, false);
                     if (SpawnedTag != null)
                     {
-                        Debug($"Spawned SingleTag for {Player.DisplayName()}!");
+                        //Debug($"Spawned SingleTag for {Player.DisplayName()}!");
                         SpawnedTag.name = TagName;
 
                         // TODO : MAKE A SYSTEM TO MAKE IT AUTOMATIC STACK!
 
-                        Debug($"Purging  {Player.DisplayName()}  {SpawnedTag.name} from Useless Internals");
+                        //Debug($"Purging  {Player.DisplayName()}  {SpawnedTag.name} from Useless Internals");
                         for (int i = SpawnedTag.childCount; i > 0; i--)
                         {
                             Transform child = SpawnedTag.GetChild(i - 1);
                             if (child.name == "Trust Text")
                             {
-                                Debug($"Found Child {child.name} As TextChild in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
+                                //Debug($"Found Child {child.name} As TextChild in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
                                 Label = child;
                                 if (Label != null) TagText = Label.GetComponent<TMPro.TextMeshProUGUI>();
                                 continue;
                             }
-                            Debug($"Removed Child {child.name} in {SpawnedTag.name} allocated on {Player.DisplayName()}");
+                            //Debug($"Removed Child {child.name} in {SpawnedTag.name} allocated on {Player.DisplayName()}");
                             Destroy(child.gameObject);
                             if (!SpawnedTag.gameObject.active) SpawnedTag.gameObject.SetActive(true);
                         }
@@ -125,7 +100,7 @@
                             var spawnedimageslice = SpawnedTag.GetComponent<ImageThreeSlice>();
                             if (spawnedimageslice != null)
                             {
-                                Debug($"Found ImageThreeSlice Component As SpawnedStatsImage in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
+                                //Debug($"Found ImageThreeSlice Component As SpawnedStatsImage in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
                                 SpawnedStatsImage = spawnedimageslice;
                             }
                             else
@@ -133,7 +108,7 @@
                                 var statsimageslice = Player_QuickStats.GetComponent<ImageThreeSlice>();
                                 if (statsimageslice != null)
                                 {
-                                    Debug($"Using ImageThreeSlice from Original Stats As SpawnedStatsImage in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
+                                    //Debug($"Using ImageThreeSlice from Original Stats As SpawnedStatsImage in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
                                     SpawnedStatsImage = statsimageslice;
                                 }
                             }
@@ -158,10 +133,57 @@
                     }
                 }
             }
-
+            
+            int stack = 2;
+            try
+            {
+                StackerEntry.AssignedTags.Add(this);
+                switch (StackerEntry.AssignedTags.Count)
+                {
+                    case 1:
+                    {
+                        stack = 2;
+                        break;
+                    }
+                    default:
+                    {
+                        stack = StackerEntry.AssignedTags.Count + 1;
+                        break;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
 
             AllocatedStack = stack;
         }
+
+
+        private TagStacker _StackerEntry;
+        private TagStacker StackerEntry
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_StackerEntry == null)
+                {
+                    _StackerEntry = SingleTagsUtils.GetEntry(Player);
+                    if (_StackerEntry == null)
+                    {
+                        _StackerEntry = new TagStacker(Player);
+                        if (SingleTagsUtils.TagStackingMechanism != null)
+                        {
+                            SingleTagsUtils.TagStackingMechanism.Add(_StackerEntry);
+                        }
+                    }
+                }
+
+                return _StackerEntry;
+            }
+        }
+
 
         private void OnTagDisable()
         {
@@ -176,46 +198,81 @@
 
         private void onTagDestroy()
         {
-            FixStacking();
-            Destroy(TagListener);
-            Destroy(this);
+            StackerEntry.AssignedTags.Remove(this);
+            if (TagListener != null)
+            {
+                TagListener.RemoveListener();
+            }
+            if (SpawnedTag.gameObject != null)
+            {
+                DestroyImmediate(SpawnedTag.gameObject);
+            }
+            CorrectTagStacking();
+            DestroyImmediate(this);
         }
 
-        internal void FixStacking()
+        private bool isAllocatedTagExisting(int value)
         {
-            var sorted = (from s in Player.GetComponentsInChildren<SingleTag>(true) orderby s.AllocatedStack descending select s).ToList();
-            if (sorted.Count() != 0 && sorted.Count() != 1)
+            foreach (var tag in StackerEntry.AssignedTags)
             {
-                for (int i = 0; i < sorted.Count; i++)
+                if (tag != null)
                 {
-                    SingleTag tag = sorted[i];
-                    if (tag != null)
+                    if (tag.TagName.Equals($"SingleTag:{value}"))
                     {
-                        Debug($"Found SingleTag with Allocated TagStack {tag.AllocatedStack}");
-                        if (tag == this)
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private void CorrectTagStacking()
+        {
+            try
+            {
+                foreach (SingleTag item in StackerEntry.AssignedTags)
+                {
+                    if (item != null)
+                    {
+                        try
                         {
-                            Debug($"Skipped SingleTag marked for Destroy with Allocated TagStack {tag.AllocatedStack}");
-                            continue;
+                            var assignedstack = item.AllocatedStack;
+
+                        CheckAgain:
+                            var result = assignedstack -1;
+                            if (isAllocatedTagExisting(result))
+                            {
+                                goto CheckAgain;
+                            }
+                            item.AllocatedStack = result;
                         }
-                        int newTagOrder = sorted.Count();
-                        if (tag.AllocatedStack > newTagOrder)
+                        catch (Exception e)
                         {
-                            newTagOrder--;
-                            tag.AllocatedStack = newTagOrder;
+                            ModConsole.ErrorExc(e);
                         }
                     }
                 }
             }
-            var entry = SingleTagsUtils.GetEntry(Player);
-            if (entry != null) entry.AssignedStack--;
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
         }
 
         internal void OnDestroy()
         {
-            FixStacking();
-            Destroy(TagListener);
-            Destroy(SpawnedTag.gameObject);
-            Destroy(this);
+            StackerEntry.AssignedTags.Remove(this);
+            if (TagListener != null)
+            {
+                TagListener.RemoveListener();
+            }
+            if (SpawnedTag.gameObject != null)
+            {
+                DestroyImmediate(SpawnedTag.gameObject);
+            }
+            CorrectTagStacking();
+            DestroyImmediate(this);
         }
 
 
@@ -302,32 +359,44 @@
         private int _allocatedStack;
         internal int AllocatedStack
         {
-            [HideFromIl2Cpp]
             get => _allocatedStack;
-            [HideFromIl2Cpp]
             set
             {
-                if (SpawnedTag != null)
+                if (value <= 1) // Limit for Default tag is 2.
                 {
-                    _allocatedStack = value;
-                    var NewLocalPosition = new Vector3(0, 30 * value, 0);
-                    Debug($"updating {SpawnedTag.name} LocalPosition to follow Index from {value} , New LocalPosition is  {NewLocalPosition}");
-                    SpawnedTag.localPosition = NewLocalPosition;
-                    var oldname = SpawnedTag.name;
-                    Debug($"Updated Spawned SingleTag from {oldname} to {TagName}");
-                    SpawnedTag.name = TagName;
+                    value = 2;
                 }
+                _allocatedStack = value;
+                try
+                {
+                    if (SpawnedTag != null)
+                    {
+                        var NewLocalPosition = new Vector3(0, 30 * value, 0);
+                        //Debug($"updating {SpawnedTag.name} LocalPosition to follow Index from {value} , New LocalPosition is  {NewLocalPosition.ToString()}");
+                        SpawnedTag.localPosition = NewLocalPosition;
+                        SpawnedTag.name = TagName;
+                        if (DebugMode)
+                        {
+                            Text = TagName;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    ModConsole.DebugErrorExc(e);
+                }
+
             }
         }
 
 
-
-        internal bool KeepTagVisible { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool KeepTagVisible { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
 
 
         private bool _ShowTag;
-        internal bool ShowTag 
+        internal bool ShowTag
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _ShowTag; 
@@ -343,17 +412,17 @@
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        private Transform Player_content;
+        private Transform Player_content { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private Transform SpawnedTag;
+        private Transform SpawnedTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // TAG TEXT
-        private Transform Label;
-        private GameObjectListener TagListener;
-        private TMPro.TextMeshProUGUI TagText;
+        private Transform Label { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObjectListener TagListener { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private TMPro.TextMeshProUGUI TagText { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // STATS
-        private Transform Player_QuickStats;
-        private ImageThreeSlice SpawnedStatsImage;
+        private Transform Player_QuickStats { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ImageThreeSlice SpawnedStatsImage { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }
