@@ -8,6 +8,7 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using VRC.SDK.Internal.ModularPieces;
     using xAstroBoy.Extensions;
 
     [RegisterComponent]
@@ -43,7 +44,35 @@
                 ModConsole.Error($"Failed to Generate a SingleTag for Player {Player.DisplayName()}");
                 Destroy(this);
             }
-            Debug($"Pre-assigned InternalStack {InternalStack}");
+            bool AddNewPlayer = false;
+            int stack = 2;
+            Debug("Searching for Entries To Parse stack order...");
+            // I HOPE THIS WORKS CAUSE WHY TF IT DOESNT COUNT EM
+            var entry = SingleTagsUtils.GetEntry(Player);
+            if (entry != null)
+            {
+                Debug($"Found existing stack for {Player.DisplayName()} having current stack value : {entry.AssignedStack}");
+                entry.AssignedStack++;
+                stack = entry.AssignedStack;
+            }
+            else
+            {
+                Debug($"No Entry Found for player {Player.DisplayName()} , using default stack value {stack} for generated SingleTag");
+                AddNewPlayer = true;
+            }
+            if (AddNewPlayer)
+            {
+                var addme = new SingleTagsUtils.PlayerTagCounter(Player, stack);
+                if (SingleTagsUtils.Counter != null)
+                {
+                    if (!SingleTagsUtils.Counter.Contains(addme))
+                    {
+                        Debug($"Added New Entry for Player : {Player.DisplayName()} using stack {addme.AssignedStack}");
+                        SingleTagsUtils.Counter.Add(addme);
+                    }
+                }
+            }
+
             // FIND ESSENTIALS TO GENERATE A TAG.
             if (Player_content == null)
             {
@@ -118,7 +147,7 @@
                     KeepTagVisible = true;
                     if (TagListener == null)
                     {
-                        TagListener = SpawnedTag.GetOrAddComponent<GameObjectListener>();
+                        TagListener = SpawnedTag.gameObject.AddComponent<GameObjectListener>();
                     }
 
                     if (TagListener != null)
@@ -129,6 +158,9 @@
                     }
                 }
             }
+
+
+            AllocatedStack = stack;
         }
 
         private void OnTagDisable()
@@ -144,42 +176,46 @@
 
         private void onTagDestroy()
         {
-            OnDestroy();
+            FixStacking();
+            Destroy(TagListener);
+            Destroy(this);
         }
 
-
-        internal void OnDestroy()
+        internal void FixStacking()
         {
-            if (Player != null)
+            var sorted = (from s in Player.GetComponentsInChildren<SingleTag>(true) orderby s.AllocatedStack descending select s).ToList();
+            if (sorted.Count() != 0 && sorted.Count() != 1)
             {
-                Destroy(TagListener);
-                Destroy(SpawnedTag.gameObject);
-                var sorted = (from s in Player.GetComponentsInChildren<SingleTag>(true) orderby s.AllocatedStack descending select s).ToList();
-                if (sorted.Count() != 0 && sorted.Count() != 1)
+                for (int i = 0; i < sorted.Count; i++)
                 {
-                    for (int i = 0; i < sorted.Count; i++)
+                    SingleTag tag = sorted[i];
+                    if (tag != null)
                     {
-                        SingleTag tag = sorted[i];
-                        if (tag != null)
+                        Debug($"Found SingleTag with Allocated TagStack {tag.AllocatedStack}");
+                        if (tag == this)
                         {
-                            Debug($"Found SingleTag with Allocated TagStack {tag.InternalStack}");
-                            if (tag == this)
-                            {
-                                Debug($"Skipped SingleTag marked for Destroy with Allocated TagStack {tag.InternalStack}");
-                                continue;
-                            }
-                            int newTagOrder = sorted.Count();
-                            if (tag.InternalStack > newTagOrder)
-                            {
-                                newTagOrder--;
-                                tag.InternalStack = newTagOrder;
-                            }
+                            Debug($"Skipped SingleTag marked for Destroy with Allocated TagStack {tag.AllocatedStack}");
+                            continue;
+                        }
+                        int newTagOrder = sorted.Count();
+                        if (tag.AllocatedStack > newTagOrder)
+                        {
+                            newTagOrder--;
+                            tag.AllocatedStack = newTagOrder;
                         }
                     }
                 }
-                var entry = SingleTagsUtils.GetEntry(Player);
-                if (entry != null) entry.AssignedStack--;
             }
+            var entry = SingleTagsUtils.GetEntry(Player);
+            if (entry != null) entry.AssignedStack--;
+        }
+
+        internal void OnDestroy()
+        {
+            FixStacking();
+            Destroy(TagListener);
+            Destroy(SpawnedTag.gameObject);
+            Destroy(this);
         }
 
 
@@ -260,11 +296,11 @@
         internal string TagName
         {
             [HideFromIl2Cpp]
-            get => $"SingleTag:{_allocatedStack}";
+            get => $"SingleTag:{AllocatedStack}";
         }
 
         private int _allocatedStack;
-        private int AllocatedStack
+        internal int AllocatedStack
         {
             [HideFromIl2Cpp]
             get => _allocatedStack;
@@ -284,22 +320,7 @@
             }
         }
 
-        private int _InternalStack;
-        internal int InternalStack
-        {
-            [HideFromIl2Cpp]
 
-            get
-            {
-                return _InternalStack;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                _InternalStack = value;
-                AllocatedStack = value;
-            }
-        }
 
         internal bool KeepTagVisible { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 

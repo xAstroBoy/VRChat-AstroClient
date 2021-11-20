@@ -118,7 +118,7 @@
             {
                 if (_GameRoleTag == null)
                 {
-                    return _GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
+                    return _GameRoleTag = Player.gameObject.AddComponent<SingleTag>();
                 }
 
                 return _GameRoleTag;
@@ -132,7 +132,7 @@
             {
                 if (_AmongUSVoteRevealTag == null)
                 {
-                    return _AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Player);
+                    return _AmongUSVoteRevealTag = Player.gameObject.AddComponent<SingleTag>();
                 }
 
                 return _AmongUSVoteRevealTag;

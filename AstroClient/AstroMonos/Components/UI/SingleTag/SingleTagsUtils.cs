@@ -40,47 +40,7 @@
                 ModConsole.DebugLog($"SingleTagsUtils Debug : {msg}");
             }
         }
-
-        internal static SingleTag AddSingleTag(Player player)
-        {
-            SingleTag newtag = null;
-            if (player != null)
-            {
-                bool AddNewPlayer = false;
-                newtag = player.gameObject.AddComponent<SingleTag>();
-                int stack = 2;
-                Debug("Searching for Entries To Parse stack order...");
-                // I HOPE THIS WORKS CAUSE WHY TF IT DOESNT COUNT EM
-                var entry = GetEntry(player);
-                if (entry != null)
-                {
-                    Debug($"Found existing stack for {player.DisplayName()} having current stack value : {entry.AssignedStack}");
-                    entry.AssignedStack++;
-                    stack = entry.AssignedStack;
-                }
-                else
-                {
-                    Debug($"No Entry Found for player {player.DisplayName()} , using default stack value {stack} for generated SingleTag");
-                    AddNewPlayer = true;
-                }
-                Debug($"Assigned to newly Generated SingleTag a stack value of {stack}");
-
-                newtag.InternalStack = stack;
-                if (AddNewPlayer)
-                {
-                    var addme = new PlayerTagCounter(player, stack);
-                    if (Counter != null)
-                    {
-                        if (!Counter.Contains(addme))
-                        {
-                            Debug($"Added New Entry for Player : {player.GetAPIUser().DisplayName()} using stack {addme.AssignedStack}");
-                            Counter.Add(addme);
-                        }
-                    }
-                }
-            }
-            return newtag;
-        }
+        // TODO : MERGE THIS IN THE STARTING PROCESS OF SINGLETAG AND MAKE IT EASIER AS .AddComponent<SINGLETAG>() instead of using this!
 
         internal static List<PlayerTagCounter> GetAssignedTagsToPlayer(Player player)
         {

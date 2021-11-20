@@ -96,7 +96,7 @@
             {
                 if (_GameRoleTag == null)
                 {
-                    return _GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
+                    return _GameRoleTag = Player.gameObject.AddComponent<SingleTag>();
                 }
 
                 return _GameRoleTag;

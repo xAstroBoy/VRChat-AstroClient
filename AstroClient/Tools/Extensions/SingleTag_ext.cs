@@ -54,10 +54,6 @@
             return FoundTags;
         }
 
-        internal static SingleTag AddSingleTag(this Player player)
-        {
-            return SingleTagsUtils.AddSingleTag(player);
-        }
 
 
         internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color Tag_Color)
@@ -98,8 +94,8 @@
         internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color Background, UnityEngine.Color TextColor, string Text)
         {
 
-            var tag = player.AddSingleTag();
-            if(tag != null)
+            var tag = player.gameObject.AddComponent<SingleTag>();
+            if (tag != null)
             {
                 MiscUtils.DelayFunction(0.5f, () => 
                 {
