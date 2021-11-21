@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Tools.Input
 {
     internal class InputUtils
     {
@@ -29,5 +29,10 @@
         internal static bool IsImputDropRightCalled => VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["DropRight"].prop_Boolean_0;
 
         internal static bool IsInputDropRightPressed => VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["DropRight"].prop_Single_0 == 1;
+
+
+        internal static VRCInput GrabRight = VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["GrabRight"];
+
+        internal static VRCInput GrabLeft = VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["GrabLeft"];
     }
 }

@@ -43,6 +43,7 @@
             }
         }
 
+        
         internal static string GetPath(this GameObject obj)
         {
             if (obj != null)

@@ -7,7 +7,7 @@
     {
         internal override void OnApplicationLateStart()
         {
-            DecompilerUtils.DumpClass<SyncPhysics>();
+            DecompilerUtils.DumpClass<VRCInput>();
             ModConsole.Log("Finished Dumping Classes.");
             Console.ReadKey();
         }

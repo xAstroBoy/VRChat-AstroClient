@@ -5,6 +5,7 @@
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.Extensions.Components_exts;
     using AstroClient.Tools.ObjectEditor.Online;
+    using AstroClient.Tools.Player;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
@@ -89,7 +90,28 @@
                     {
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
-                                gameObject.TeleportToMeWithRot(HumanBodyBones.RightHand, false);
+                            {
+                                DisallowTheft = true;
+                                if (SDKBase_Pickup != null)
+                                {
+                                    PlayerHands.SetPickupInRightHand(SDKBase_Pickup);
+
+                                    return;
+                                }
+                                if (SDK2_Pickup != null)
+                                {
+                                    PlayerHands.SetPickupInRightHand(SDK2_Pickup);
+
+                                    return;
+                                }
+                                if (SDK3_Pickup != null)
+                                {
+                                    PlayerHands.SetPickupInRightHand(SDK3_Pickup);
+                                    return;
+                                }
+                            }
+                        //gameObject.TeleportToMeWithRot(HumanBodyBones.RightHand, false);
+
                     }
                     catch
                     {
@@ -107,7 +129,28 @@
                     {
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == null)
-                                gameObject.TeleportToMeWithRot(HumanBodyBones.LeftHand, false);
+                            {
+                                DisallowTheft = true;
+                                if (SDKBase_Pickup != null)
+                                {
+                                    PlayerHands.SetPickupLeftHand(SDKBase_Pickup);;
+
+                                    return;
+                                }
+                                if (SDK2_Pickup != null)
+                                {
+                                    PlayerHands.SetPickupLeftHand(SDK2_Pickup);
+
+                                    return;
+                                }
+                                if (SDK3_Pickup != null)
+                                {
+                                    PlayerHands.SetPickupLeftHand(SDK3_Pickup);
+                                    return;
+                                }
+
+                            }
+                        //gameObject.TeleportToMeWithRot(HumanBodyBones.LeftHand, false);
                     }
                     catch
                     {
@@ -143,7 +186,24 @@
             }
         }
 
-        internal bool AntiTheft = false;
+        private bool _AntiTheft = false;
+
+        internal bool AntiTheft
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return _AntiTheft;
+            }
+            set
+            {
+                _AntiTheft = value;
+                if (!value)
+                {
+                    DisallowTheft = Original_DisallowTheft;
+                }
+            }
+        }
 
         private bool _PreventOthersFromGrabbing;
 

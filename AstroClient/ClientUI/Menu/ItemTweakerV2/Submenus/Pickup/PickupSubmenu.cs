@@ -31,7 +31,7 @@
             InitProximitySliderSubmenu(PickupEditor, 3, 0, true);
             Pickup_allowManipulationWhenEquipped = new QMToggleButton(PickupEditor, 4, 0, "Allow Manipulation Equip", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_allowManipulationWhenEquipped(true); }), "Disallow Manipulation Equip", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_allowManipulationWhenEquipped(false); }), "Control Manipulation Equip property", null, null, null);
             Pickup_pickupable = new QMToggleButton(PickupEditor, 4, 1, "Pickupable", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_Pickupable(true); }), "Not Pickupable", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_Pickupable(false); }), "Control Pickupable Property", null, null, null);
-            Pickup_DisallowTheft = new QMToggleButton(PickupEditor, 4, 2, "Allow Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(false); }), "Block Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(true); }), "Control DisallowTheft property", null, null, null);
+            Pickup_DisallowTheft = new QMToggleButton(PickupEditor, 4, 2, "Block Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(true); }), "Allow Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(false); }), "Control DisallowTheft property", null, null, null);
         }
 
         internal static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)

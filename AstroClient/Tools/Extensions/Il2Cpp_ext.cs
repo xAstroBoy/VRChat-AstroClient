@@ -1,5 +1,8 @@
 ﻿namespace AstroClient.Tools.Extensions
 {
+    using System.Collections.Generic;
+    using VRC.SDKBase;
+
     internal static class Il2Cpp_ext
     {
         //internal static List<UnityEngine.Object> ConvertToUnityObject(this Il2CppReferenceArray<Il2CppSystem.Object> list)
@@ -19,5 +22,17 @@
         //	}
         //	return items;
         //}
+
+        internal static Il2CppSystem.Collections.Generic.List<T> ToIl2CPPlist<T>(this System.Collections.Generic.List<T> list)
+        {
+            var result = new Il2CppSystem.Collections.Generic.List<T>();
+            foreach (var item in list)
+            {
+                result.Add(item);
+            }
+
+            return result;
+        }
+
     }
 }
