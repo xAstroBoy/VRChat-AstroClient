@@ -16,6 +16,7 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using VRC.Core;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;
@@ -26,12 +27,8 @@
     public class Murder4_ESP : AstroMonoBehaviour
     {
         private PlayerESP _ESP;
-        private bool _isSelf;
-
         private LinkedNodes _LinkedNode;
-
         private bool _ViewRoles;
-
         private List<Object> AntiGarbageCollection = new();
 
         public Murder4_ESP(IntPtr ptr) : base(ptr)
@@ -53,23 +50,28 @@
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        private bool HasChecked { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private APIUser _APIUser;
+        internal APIUser APIUser
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_APIUser == null)
+                {
+                    return _APIUser = Player.GetAPIUser();
+                }
 
+                return _APIUser;
+            }
+        }
         internal bool IsSelf
         {
             [HideFromIl2Cpp]
             get
             {
-                if (!HasChecked)
-                {
-                    _isSelf = Player.GetAPIUser().IsSelf;
-                    HasChecked = true;
-                }
-
-                return _isSelf;
+                return APIUser.IsSelf;
             }
         }
-
         internal bool ViewRoles
         {
             [HideFromIl2Cpp]
@@ -78,13 +80,10 @@
             private set
             {
                 _ViewRoles = value;
-                if (LinkedNode != null)
-                    if (GameRoleTag != null)
-                    {
-                        GameRoleTag.ShowTag = value;
-                        if (value)
-                            UpdateMurder4Role(CurrentRole);
-                    }
+                if (value)
+                {
+                    UpdateMurder4Role(CurrentRole);
+                }
             }
         }
 
@@ -105,20 +104,15 @@
 
         internal string HiddenRole { [HideFromIl2Cpp] get; } = "Role Hidden";
         internal string NoRoles { [HideFromIl2Cpp] get; } = "No Role";
-        internal Color NoRolesColor { [HideFromIl2Cpp] get; } = Color.yellow;
-        internal Color HiddenRolesColor { [HideFromIl2Cpp] get; } = Color.green;
-        internal Color DefaultTextColor { [HideFromIl2Cpp] get; } = Color.white;
+
+        internal Color UnknownRole { [HideFromIl2Cpp] get; } = System.Drawing.Color.DeepSkyBlue.ToUnityEngineColor();
 
         // MURDER 4 MAP
-        internal Color MurderColor { [HideFromIl2Cpp] get; } = new(0.5377358f, 0.1648718f, 0.1728278f, 1f);
+        internal Color MurderColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.Red.ToUnityEngineColor();
+        internal Color BystanderColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.DodgerBlue.ToUnityEngineColor();
 
-        internal Color BystanderColor { [HideFromIl2Cpp] get; } = new(0.3428266f, 0.5883213f, 0.6792453f, 1f);
-        internal Color DetectiveColor { [HideFromIl2Cpp] get; } = new(0.2976544f, 0.251424f, 0.4716981f, 1f);
+        internal Color DetectiveColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.Navy.ToUnityEngineColor();
 
-        // GENERAL
-        internal Color Unassigned { [HideFromIl2Cpp] get; } = new(0.5f, 0.5f, 0.5f, 1f);
-
-        internal Color NoRolesAssigned { [HideFromIl2Cpp] get; } = new(0f, 0f, 0f, 0f);
 
         private PlayerESP ESP
         {
@@ -203,23 +197,22 @@
                 if (GameRoleTag != null)
                 {
                     GameRoleTag.Text = NoRoles;
-                    GameRoleTag.BackGroundColor = NoRolesColor;
+                    GameRoleTag.BackGroundColor = UnknownRole;
                     GameRoleTag.ShowTag = false;
                 }
-                ResetESPColor();
             }
             else
             {
                 if (GameRoleTag != null)
                 {
                     GameRoleTag.Text = HiddenRole;
-                    GameRoleTag.BackGroundColor = HiddenRolesColor;
+                    GameRoleTag.BackGroundColor = UnknownRole;
                     GameRoleTag.ShowTag = false;
                 }
-                ResetESPColor();
-                GameRoleTag.ShowTag = false;
             }
 
+
+            ResetESPColor();
             CurrentRole = Murder4_Roles.Unassigned;
             ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
             MelonCoroutines.Start(FindEverything());
@@ -478,8 +471,8 @@
                                 if (GameRoleTag != null)
                                 {
                                     GameRoleTag.Text = NoRoles;
-                                    GameRoleTag.BackGroundColor = NoRolesColor;
-                                    GameRoleTag.ShowTag = true;
+                                    GameRoleTag.BackGroundColor = UnknownRole;
+                                    GameRoleTag.ShowTag = false;
                                 }
                                 ResetESPColor();
                             }
@@ -492,7 +485,7 @@
                             if (GameRoleTag != null)
                             {
                                 GameRoleTag.Text = HiddenRole;
-                                GameRoleTag.BackGroundColor = HiddenRolesColor;
+                                GameRoleTag.BackGroundColor = UnknownRole;
                                 GameRoleTag.ShowTag = false;
                             }
                         }

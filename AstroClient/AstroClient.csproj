@@ -114,6 +114,7 @@
     <Compile Include="ClientUI\Menu\Menus\UserMenu\WatcherUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\AttackerUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\SitUserMenu.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\ESPColorSelector.cs" />
     <Compile Include="ClientUI\Menu\UIInitializer.cs" />
     <Compile Include="ClientResources\Loaders\Icons.cs" />
     <Compile Include="ClientResources\Helpers\ResourceHelper.cs" />

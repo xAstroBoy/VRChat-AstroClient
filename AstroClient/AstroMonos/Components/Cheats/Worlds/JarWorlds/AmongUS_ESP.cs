@@ -17,6 +17,7 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
+    using VRC.Core;
     using VRC.Udon.Common.Interfaces;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
@@ -30,10 +31,7 @@
         private AmongUs_Roles _CurrentRole = AmongUs_Roles.Unassigned;
 
         private PlayerESP _ESP;
-        private bool _isSelf;
-
         private LinkedNodes _LinkedNode;
-
         private bool _ViewRoles;
 
         private List<Object> AntiGarbageCollection = new();
@@ -93,20 +91,27 @@
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        private bool HasChecked { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool IsSelf
+        private APIUser _APIUser;
+        internal APIUser APIUser
         {
             [HideFromIl2Cpp]
             get
             {
-                if (!HasChecked)
+                if (_APIUser == null)
                 {
-                    _isSelf = Player.GetAPIUser().IsSelf;
-                    HasChecked = true;
+                    return _APIUser = Player.GetAPIUser();
                 }
 
-                return _isSelf;
+                return _APIUser;
+            }
+        }
+        internal bool IsSelf
+        {
+            [HideFromIl2Cpp]
+            get
+            { 
+                return APIUser.IsSelf;
             }
         }
 
@@ -145,19 +150,13 @@
         internal string VotedAgainst { [HideFromIl2Cpp] get; } = "Voted: ";
         internal string SkippedVote { [HideFromIl2Cpp] get; } = "Skipped Vote";
 
-        internal Color NotVotedYetColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("#034989");
-        internal Color VotedAgainstCurrentPlayer { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("#C22B26");
-        internal Color VotedAgainstAnotherPlayer { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("#44DBAC");
-        internal Color SkippedVoteColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("#1BA039");
-
-        internal Color NoRolesColor { [HideFromIl2Cpp] get; } = Color.yellow;
-        internal Color HiddenRolesColor { [HideFromIl2Cpp] get; } = Color.green;
-        internal Color DefaultTextColor { [HideFromIl2Cpp] get; } = Color.white;
-
-        // AMONG US MAP
-        internal Color ImpostorColor { [HideFromIl2Cpp] get; } = new(0.5377358f, 0.1648718f, 0.1728278f, 1f);
-
-        internal Color CrewmateColor { [HideFromIl2Cpp] get; } = new(0f, 0.3228593f, 0.8396226f, 1f);
+        internal Color NotVotedYetColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.DarkGreen.ToUnityEngineColor();
+        internal Color VotedAgainstCurrentPlayer { [HideFromIl2Cpp] get; } = System.Drawing.Color.Red.ToUnityEngineColor();
+        internal Color VotedAgainstAnotherPlayer { [HideFromIl2Cpp] get; } = System.Drawing.Color.SeaGreen.ToUnityEngineColor();
+        internal Color SkippedVoteColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.ForestGreen.ToUnityEngineColor();
+        internal Color UnknownRole { [HideFromIl2Cpp] get; } = System.Drawing.Color.DeepSkyBlue.ToUnityEngineColor();
+        internal Color ImpostorColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.Red.ToUnityEngineColor();
+        internal Color CrewmateColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.DodgerBlue.ToUnityEngineColor();
 
         internal bool ViewRoles
         {
@@ -167,10 +166,10 @@
             private set
             {
                 _ViewRoles = value;
-                if (LinkedNode != null)
-                    if (GameRoleTag != null)
-                        GameRoleTag.ShowTag = value;
-                UpdateAmongUSRole(CurrentRole);
+                if (value)
+                {
+                    UpdateAmongUSRole(CurrentRole);
+                }
             }
         }
 
@@ -257,7 +256,7 @@
                 if (GameRoleTag != null)
                 {
                     GameRoleTag.Text = NoRoles;
-                    GameRoleTag.BackGroundColor = NoRolesColor;
+                    GameRoleTag.BackGroundColor = UnknownRole;
                     GameRoleTag.ShowTag = false;
                 }
             }
@@ -266,7 +265,7 @@
                 if (GameRoleTag != null)
                 {
                     GameRoleTag.Text = HiddenRole;
-                    GameRoleTag.BackGroundColor = HiddenRolesColor;
+                    GameRoleTag.BackGroundColor = UnknownRole;
                     GameRoleTag.ShowTag = false;
                 }
             }
@@ -449,13 +448,13 @@
                                         if (AmongUSVoteRevealTag != null)
                                         {
                                             AmongUSVoteRevealTag.Text = VotedAgainst + against.Player.DisplayName();
-                                            if (against != CurrentPlayer_AmongUS_ESP)
+                                            if (against.IsSelf)
                                             {
-                                                AmongUSVoteRevealTag.BackGroundColor = VotedAgainstAnotherPlayer;
+                                                AmongUSVoteRevealTag.BackGroundColor = VotedAgainstCurrentPlayer;
                                             }
                                             else
                                             {
-                                                AmongUSVoteRevealTag.BackGroundColor = VotedAgainstCurrentPlayer;
+                                                AmongUSVoteRevealTag.BackGroundColor = VotedAgainstAnotherPlayer;
                                             }
 
                                             AmongUSVoteRevealTag.ShowTag = true;
@@ -489,7 +488,7 @@
                             if (GameRoleTag != null)
                             {
                                 GameRoleTag.Text = NoRoles;
-                                GameRoleTag.BackGroundColor = NoRolesColor;
+                                GameRoleTag.BackGroundColor = UnknownRole;
                                 GameRoleTag.ShowTag = false;
                             }
                             if (AmongUSVoteRevealTag != null)
@@ -514,19 +513,13 @@
             return GameRoleTag.Text;
         }
 
-       
+
         internal override void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
-            if (LinkedNode != null)
-                if (GameRoleTag != null)
-                {
-                    GameRoleTag.ShowTag = value;
-                    if (value)
-                        if (ESP != null)
-                            UpdateAmongUSRole(CurrentRole);
-                }
         }
+
+
         private void ResetESPColor()
         {
             if (ESP != null)
@@ -581,7 +574,7 @@
                             if (GameRoleTag.Text != NoRoles)
                             {
                                 GameRoleTag.Text = NoRoles;
-                                GameRoleTag.BackGroundColor = NoRolesColor;
+                                GameRoleTag.BackGroundColor = UnknownRole;
                                 GameRoleTag.ShowTag = false;
                             }
                             ResetESPColor();
@@ -592,14 +585,13 @@
                 }
                 else
                 {
-                    if (AmongUSVoteRevealTag != null && AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = false;
-
+                        AmongUSVoteRevealTag.ShowTag = false;
                     if (GetCurrentSingleTagText() != HiddenRole)
                     {
                         if (GameRoleTag != null)
                         {
                             GameRoleTag.Text = HiddenRole;
-                            GameRoleTag.BackGroundColor = HiddenRolesColor;
+                            GameRoleTag.BackGroundColor = UnknownRole;
                             GameRoleTag.ShowTag = false;
                         }
                         ResetESPColor();

@@ -16,7 +16,6 @@
     using VRC.DataModel;
     using VRC.UI;
     using VRC.UI.Elements;
-    using QuickMenu = QuickMenu;
 
     // This "Button API", if you can it that, is based off of RubyButtonAPI, by DubyaDude (dooba lol) (https://github.com/DubyaDude)
     /// <summary>
@@ -109,49 +108,56 @@
 
         internal static void Init()
         {
-            List<Type> quickMenuNestedEnums = typeof(QuickMenu).GetNestedTypes().Where(type => type.IsEnum).ToList();
-            _quickMenuEnumProperty = typeof(QuickMenu).GetProperties()
-                .First(pi => pi.PropertyType.IsEnum && quickMenuNestedEnums.Contains(pi.PropertyType));
-            QuickMenuIndexEnum = _quickMenuEnumProperty.PropertyType;
+            try
+            {
+                List<Type> quickMenuNestedEnums = typeof(QuickMenu).GetNestedTypes().Where(type => type.IsEnum).ToList();
+                _quickMenuEnumProperty = typeof(QuickMenu).GetProperties()
+                    .First(pi => pi.PropertyType.IsEnum && quickMenuNestedEnums.Contains(pi.PropertyType));
+                QuickMenuIndexEnum = _quickMenuEnumProperty.PropertyType;
 
-            BigMenuIndexEnum = quickMenuNestedEnums.First(type => type.IsEnum && type != QuickMenuIndexEnum);
-            _closeBigMenu = typeof(VRCUiManager).GetMethods()
-                .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") && !mb.Name.Contains("_PDM_") && XrefUtils.CheckUsedBy(mb, "ChangeToSelectedAvatar"));
-            _openBigMenu = typeof(VRCUiManager).GetMethods()
-                .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") && !mb.Name.Contains("_PDM_") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Backdrop/Backdrop"));
+                BigMenuIndexEnum = quickMenuNestedEnums.First(type => type.IsEnum && type != QuickMenuIndexEnum);
+                _closeBigMenu = typeof(VRCUiManager).GetMethods()
+                    .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") && !mb.Name.Contains("_PDM_") && XrefUtils.CheckUsedBy(mb, "ChangeToSelectedAvatar"));
+                _openBigMenu = typeof(VRCUiManager).GetMethods()
+                    .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") && !mb.Name.Contains("_PDM_") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Backdrop/Backdrop"));
 
-            MethodInfo _placeUiAfterPause = typeof(QuickMenu).GetNestedTypes().First(type => type.Name.Contains("IEnumerator")).GetMethod("MoveNext");
+                MethodInfo _placeUiAfterPause = typeof(QuickMenu).GetNestedTypes().First(type => type.Name.Contains("IEnumerator")).GetMethod("MoveNext");
 
-            new AstroPatch(typeof(UIPage).GetMethod("Method_Public_Void_Boolean_TransitionType_0"), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUIPageToggle), BindingFlags.NonPublic | BindingFlags.Static)));
-            new AstroPatch(_openBigMenu, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnBigMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
-            new AstroPatch(_closeBigMenu, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnBigMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
-            new AstroPatch(_placeUiAfterPause, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnPlaceUiAfterPause), BindingFlags.NonPublic | BindingFlags.Static)));
-            new AstroPatch(typeof(VRCUiManager).GetMethod("Method_Public_Void_String_Boolean_0"), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnShowScreen), BindingFlags.NonPublic | BindingFlags.Static)));
+                new AstroPatch(typeof(UIPage).GetMethod("Method_Public_Void_Boolean_TransitionType_0"), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUIPageToggle), BindingFlags.NonPublic | BindingFlags.Static)));
+                new AstroPatch(_openBigMenu, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnBigMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
+                new AstroPatch(_closeBigMenu, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnBigMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
+                new AstroPatch(_placeUiAfterPause, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnPlaceUiAfterPause), BindingFlags.NonPublic | BindingFlags.Static)));
+                new AstroPatch(typeof(VRCUiManager).GetMethod("Method_Public_Void_String_Boolean_0"), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnShowScreen), BindingFlags.NonPublic | BindingFlags.Static)));
 
-            foreach (MethodInfo method in typeof(MenuController).GetMethods().Where(mi => mi.Name.StartsWith("Method_Public_Void_APIUser_") && !mi.Name.Contains("_PDM_")))
-                new AstroPatch(method, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUserInfoOpen_event), BindingFlags.NonPublic | BindingFlags.Static)));
-            new AstroPatch(AccessTools.Method(typeof(PageUserInfo), "Back"), null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUserInfoClose), BindingFlags.NonPublic | BindingFlags.Static)));
+                foreach (MethodInfo method in typeof(MenuController).GetMethods().Where(mi => mi.Name.StartsWith("Method_Public_Void_APIUser_") && !mi.Name.Contains("_PDM_")))
+                    new AstroPatch(method, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUserInfoOpen_event), BindingFlags.NonPublic | BindingFlags.Static)));
+                new AstroPatch(AccessTools.Method(typeof(PageUserInfo), "Back"), null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUserInfoClose), BindingFlags.NonPublic | BindingFlags.Static)));
 
-            _closeMenuMethod = typeof(UIManagerImpl).GetMethods()
-                .First(method => method.Name.StartsWith("Method_Public_Virtual_Final_New_Void_") && XrefScanner.XrefScan(method).Count() == 2);
-            _closeQuickMenuMethod = typeof(UIManagerImpl).GetMethods()
-                .First(method => method.Name.StartsWith("Method_Public_Void_Boolean_") && XrefUtils.CheckUsedBy(method, _closeMenuMethod.Name));
-            new AstroPatch(_closeQuickMenuMethod, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
+                _closeMenuMethod = typeof(UIManagerImpl).GetMethods()
+                    .First(method => method.Name.StartsWith("Method_Public_Virtual_Final_New_Void_") && XrefScanner.XrefScan(method).Count() == 2);
+                _closeQuickMenuMethod = typeof(UIManagerImpl).GetMethods()
+                    .First(method => method.Name.StartsWith("Method_Public_Void_Boolean_") && XrefUtils.CheckUsedBy(method, _closeMenuMethod.Name));
+                new AstroPatch(_closeQuickMenuMethod, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
 
-            _openQuickMenuMethod = typeof(UIManagerImpl).GetMethods()
-                .First(method => method.Name.StartsWith("Method_Public_Void_Boolean_") && method.Name.Length <= 29 && XrefUtils.CheckUsing(method, "Method_Private_Void_"));
-            _openQuickMenuPageMethod = typeof(UIManagerImpl).GetMethods()
-                .First(method => method.Name.StartsWith("Method_Public_Virtual_Final_New_Void_String_") && XrefUtils.CheckUsing(method, _openQuickMenuMethod.Name, _openQuickMenuMethod.DeclaringType));
+                _openQuickMenuMethod = typeof(UIManagerImpl).GetMethods()
+                    .First(method => method.Name.StartsWith("Method_Public_Void_Boolean_") && method.Name.Length <= 29 && XrefUtils.CheckUsing(method, "Method_Private_Void_"));
+                _openQuickMenuPageMethod = typeof(UIManagerImpl).GetMethods()
+                    .First(method => method.Name.StartsWith("Method_Public_Virtual_Final_New_Void_String_") && XrefUtils.CheckUsing(method, _openQuickMenuMethod.Name, _openQuickMenuMethod.DeclaringType));
 
-            // Patching the other method doesn't work for some reason you have to patch this
-            MethodInfo _onQuickMenuOpenedMethod = typeof(UIManagerImpl).GetMethods()
-                .First(method => method.Name.StartsWith("Method_Private_Void_Boolean_") && !method.Name.Contains("_PDM_") && XrefUtils.CheckUsedBy(method, _openQuickMenuMethod.Name));
-            new AstroPatch(_onQuickMenuOpenedMethod, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
+                // Patching the other method doesn't work for some reason you have to patch this
+                MethodInfo _onQuickMenuOpenedMethod = typeof(UIManagerImpl).GetMethods()
+                    .First(method => method.Name.StartsWith("Method_Private_Void_Boolean_") && !method.Name.Contains("_PDM_") && XrefUtils.CheckUsedBy(method, _openQuickMenuMethod.Name));
+                new AstroPatch(_onQuickMenuOpenedMethod, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
 
-            _popupV2Small = typeof(VRCUiPopupManager).GetMethods()
-                .First(mb => mb.Name.StartsWith("Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_") && !mb.Name.Contains("PDM") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Popups/StandardPopupV2") && XrefUtils.CheckUsedBy(mb, "OpenSaveSearchPopup"));
-            _popupV2 = typeof(VRCUiPopupManager).GetMethods()
-                .First(mb => mb.Name.StartsWith("Method_Public_Void_String_String_String_Action_String_Action_Action_1_VRCUiPopup_") && !mb.Name.Contains("PDM") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Popups/StandardPopupV2"));
+                _popupV2Small = typeof(VRCUiPopupManager).GetMethods()
+                    .First(mb => mb.Name.StartsWith("Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_") && !mb.Name.Contains("PDM") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Popups/StandardPopupV2") && XrefUtils.CheckUsedBy(mb, "OpenSaveSearchPopup"));
+                _popupV2 = typeof(VRCUiPopupManager).GetMethods()
+                    .First(mb => mb.Name.StartsWith("Method_Public_Void_String_String_String_Action_String_Action_Action_1_VRCUiPopup_") && !mb.Name.Contains("PDM") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Popups/StandardPopupV2"));
+            }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
         }
 
         internal static void UiInit()
@@ -172,6 +178,10 @@
                 .ToArray();
             _pushPageMethod = pageMethods.First(method => XrefUtils.CheckUsing(method, "Add"));
             _removePageMethod = pageMethods.First(method => method != _pushPageMethod);
+
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
+
         }
 
         private static void OnBigMenuOpen_Event() => Event_OnBigMenuOpen.SafetyRaise();

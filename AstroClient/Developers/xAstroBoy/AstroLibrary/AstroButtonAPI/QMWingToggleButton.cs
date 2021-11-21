@@ -7,7 +7,7 @@
     using VRC.UI.Elements.Tooltips;
     using Object = UnityEngine.Object;
 
-    internal class QMWingToggleButton : QMButtonBase
+    internal class QMWingToggleButton 
     {
         public QMWingToggleButton(QMWings Parent, string btnText, Action OnAction, Action OffAction, string btnToolTip, Color? TextColor = null, bool Defaultstate = false)
         {
@@ -19,7 +19,8 @@
         private string BtnText { get; set; }
         private Action OffAction { get; set; }
         private Action OnAction { get; set; }
-
+        private GameObject button { get; set; }
+        internal string btnType { get; set; }
         //public QMWingToggleButton(QMWings Parent, string btnText, System.Action OnAction, System.Action OffAction, string btnToolTip, string TextColor = null , bool Defaultstate = false)
         //{
         //    initButton2(Parent.WingPage.gameObject, btnText, OnAction, OffAction, btnToolTip, TextColor, Defaultstate);
@@ -39,8 +40,6 @@
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(350, 120);
             ButtonText = button.GetComponentInChildren<TextMeshProUGUI>();
             BtnText = btnText;
-            OnAction = OnAction;
-            OffAction = OffAction;
             State = Defaultstate;
             if (!State)
                 setOffText();
@@ -70,31 +69,31 @@
 
         internal void SetAction(Action buttonONAction, Action buttonOFFAction)
         {
+            OnAction = buttonONAction;
+            OffAction = buttonOFFAction;
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            if (buttonONAction != null && buttonOFFAction != null)
                 button.GetComponent<Button>().onClick.AddListener(new Action(() =>
                 {
                     State = !State;
                     if (State)
-                    {
-                        setOnText();
-                        OnAction.Invoke();
-                    }
+                        SetToggleState(true, true);
                     else
-                    {
-                        setOffText();
-                        OffAction.Invoke();
-                    }
+                        SetToggleState(false, true);
                 }));
         }
+
 
         internal void SetToggleState(bool toggleOn, bool shouldInvoke = false)
         {
             State = toggleOn;
-            if (State)
+            if (toggleOn)
+            {
                 setOnText();
+            }
             else
+            {
                 setOffText();
+            }
             try
             {
                 if (toggleOn && shouldInvoke) OnAction.Invoke();
@@ -104,6 +103,7 @@
             {
             }
         }
+
 
         internal void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
         {
