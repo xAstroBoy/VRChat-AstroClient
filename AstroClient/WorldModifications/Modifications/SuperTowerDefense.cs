@@ -101,15 +101,9 @@
                         }
                     }
                 }
-                MiscUtils.DelayFunction(1f, () => {
-                foreach (var item in WorldUtils.Pickups)
-                {
-                    if (item.gameObject.name.StartsWith("Tower"))
-                    {
-                        item.gameObject.Pickup_Set_Pickupable(true); // Override and fix potential Tower Bugs.
-                    }
-                }
-                });
+
+                FixTheTowers();
+
             }
             else
             {
@@ -135,6 +129,19 @@
             LoseHealth = null;
             WaveEvent = null;
         }
+
+
+        private static void FixTheTowers()
+        {
+            foreach (var item in WorldUtils.Pickups)
+            {
+                if (item.gameObject.name.ToLower().StartsWith("tower"))
+                {
+                    item.gameObject.Pickup_Set_Pickupable(true); // Override and fix potential Tower Bugs.
+                }
+            }
+        }
+
 
         internal static void InitButtons(QMGridTab main)
         {
@@ -168,6 +175,7 @@
 
             AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
             AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
+            new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers();}, "Fix Towers Being unpickable bug ", Color.green);
         }
 
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
