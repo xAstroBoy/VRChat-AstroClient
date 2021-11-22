@@ -13,6 +13,7 @@
     using VRC.DataModel.Core;
     using VRC.UI.Core.Styles;
     using VRC.UI.Elements;
+    using VRC.UI.Elements.Buttons;
     using VRC.UI.Elements.Menus;
     using VRC.UI.Elements.Tooltips;
     using WingsAPI;
@@ -195,13 +196,14 @@
             parent.GetComponentInChildren<Image>().enabled = true;
             parent.GetComponentInChildren<TextMeshProUGUI>(true).enabled = true;
             parent.GetComponent<UiTooltip>().enabled = true;
+            UnityEngine.Object.Destroy(parent.GetComponent<MuteUserButton>());
 
-            foreach (var component in parent.GetComponents<Component>())
-            {
-                if (component is Button or LayoutElement or CanvasGroup or Image or TextMeshProUGUI or Transform) return;
-                UnityEngine.Object.Destroy(component);
+            //foreach (var component in parent.GetComponents<Component>())
+            //{
+            //    if (component is Button or LayoutElement or CanvasGroup or Image or TextMeshProUGUI or Transform) return;
+            //    UnityEngine.Object.Destroy(component);
 
-            }
+            //}
 
         }
 

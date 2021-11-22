@@ -23,8 +23,6 @@
             AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        private static string BlockedText { get; } = "Blocked You";
-        private static string MutedText { get; } = "Muted You";
 
         // Use this for initialization
         private void Start()
@@ -62,7 +60,8 @@
                 if (MutedTag != null)
                 {
                     MutedTag.SystemColor_SetBackgroundColor(System.Drawing.Color.Orange);
-                    MutedTag.Text = MutedText;
+                    MutedTag.Text = "Muted You";
+                    MutedTag.ShowTag = true;
                 }
 
             }
@@ -77,8 +76,9 @@
                 BlockedTag = AssignedPlayer.AddComponent<SingleTag>();
                 if (BlockedTag != null)
                 {
-                    MutedTag.SystemColor_SetBackgroundColor(System.Drawing.Color.Red);
-                    BlockedTag.Text = BlockedText;
+                    BlockedTag.SystemColor_SetBackgroundColor(System.Drawing.Color.Red);
+                    BlockedTag.Text = "Blocked You";
+                    MutedTag.ShowTag = true;
                 }
             }
         }
