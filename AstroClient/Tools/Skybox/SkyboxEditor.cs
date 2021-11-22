@@ -9,6 +9,10 @@
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using xAstroBoy.Extensions;
+    using UnityEngine;
+    using UnityEngine.Networking;
+    using System.Collections;
+    using System.IO;
 
     internal class SkyboxEditor : AstroEvents
     {
@@ -19,19 +23,32 @@
                 return Path.Combine(Environment.CurrentDirectory, $"AstroSkyboxes");
             }
         }
+        internal static string BundlesPath
+        {
+            get
+            {
+                return Path.Combine(SkyboxesPath, $"Bundles");
+            }
+        }
+
+        internal static string YoinkedSkyboxes
+        {
+            get
+            {
+                return Path.Combine(SkyboxesPath, $"YoinkedSkyboxes");
+            }
+        }
 
         internal class AssetBundleSkyboxes
         {
-            internal AssetBundle SkyboxBundle { get; set; }
             internal string SkyboxName { get; set; }
 
             internal BundleContent content { get; set; }
 
             internal bool isCubeMap { get; set; } = false;
 
-            internal AssetBundleSkyboxes(AssetBundle SkyboxBundle, string SkyboxName, BundleContent content, bool isCubeMap)
+            internal AssetBundleSkyboxes(string SkyboxName, BundleContent content, bool isCubeMap)
             {
-                this.SkyboxBundle = SkyboxBundle;
                 this.SkyboxName = SkyboxName;
                 this.content = content;
                 this.isCubeMap = isCubeMap;
@@ -118,9 +135,9 @@
 
         internal static IEnumerator FindAndLoadBundle()
         {
-            if (Directory.Exists(SkyboxesPath))
+            if (Directory.Exists(BundlesPath))
             {
-                var files = Directory.GetFiles(SkyboxesPath).ToList();
+                var files = Directory.GetFiles(BundlesPath).ToList();
                 if (files.IsNotEmpty())
                 {
                     for (int i1 = 0; i1 < files.Count; i1++)
@@ -248,98 +265,253 @@
                                                         }
                                                     }
                                                 }
-
                                             }
                                         }
                                     }
                                 }
                             }
+
                             #endregion Loading Bundle Textures (For Previewing in the buttons)
 
-                        if (Material != null)
-                        {
-                            #region Caching Bundle and The results.
-
-                            // End of the Parsing mechanism.
-                            var cachedskybox = new AssetBundleSkyboxes(bundle, Path.GetFileName(file), new BundleContent(Up, Down, Back, Front, Left, Right, CubeMapToTexture, Material), isCubeMap);
-                            if (LoadedSkyboxesBundles != null)
+                            if (Material != null)
                             {
-                                LoadedSkyboxesBundles.Add(cachedskybox);
-                            }
+                                #region Caching Bundle and The results.
 
-                            #endregion Caching Bundle and The results.
+                                // End of the Parsing mechanism.
+                                var cachedskybox = new AssetBundleSkyboxes(Path.GetFileName(file), new BundleContent(Up, Down, Back, Front, Left, Right, CubeMapToTexture, Material), isCubeMap);
+                                if (LoadedSkyboxesBundles != null)
+                                {
+                                    LoadedSkyboxesBundles.Add(cachedskybox);
+                                }
+
+                                #endregion Caching Bundle and The results.
+                            }
+                            else
+                            {
+                                ModConsole.DebugLog($"Failed to parse {file}, Due to Material being null!");
+                            }
                         }
-                        else
-                        {
-                            ModConsole.DebugLog($"Failed to parse {file}, Due to Material being null!");
-                        }
-                    }
 
                         #endregion bundle Resource searcher.
 
                         // TODO : ADD SOMETHING TO YOINK WORLD SKYBOXES
-                    else
-                    {
-                        ModConsole.Warning("Skipping Registered Skybox :" + Path.GetFileName(file));
-                        continue;
-                    }
+                        else
+                        {
+                            ModConsole.Warning("Skipping Registered Skybox :" + Path.GetFileName(file));
+                            continue;
+                        }
 
-                    yield return new WaitForSeconds(0.001f);
+                        yield return new WaitForSeconds(0.001f);
+                    }
+                }
+                else
+                {
+                    ModConsole.Warning("To Add custom Skyboxes , import the skyboxes assetbundles here : " + BundlesPath);
                 }
             }
             else
             {
-                ModConsole.Warning("To Add custom Skyboxes , import the skyboxes assetbundles here : " + SkyboxesPath);
-            }
-        }
-
-            else
-            {
-                _ = Directory.CreateDirectory(SkyboxesPath);
-                ModConsole.Warning("To Add custom Skyboxes , import the skyboxes assetbundles here : " + SkyboxesPath);
+                _ = Directory.CreateDirectory(BundlesPath);
+                ModConsole.Warning("To Add custom Skyboxes , import the skyboxes assetbundles here : " + BundlesPath);
             }
 
-    ModConsole.Log("Done checking for skyboxes.");
+            ModConsole.Log("Done checking for skyboxes.");
             yield break;
         }
 
-internal static void SetRenderSettingSkybox(Material mat)
-{
-    RenderSettings.skybox = mat;
-}
-
-internal static void SetRenderSettingSkybox(AssetBundleSkyboxes skybox)
-{
-    SetRenderSettingSkybox(skybox.content.Material);
-}
-
-internal static bool SetSkyboxByFileName(string name)
-{
-    if (!name.IsNotNullOrEmptyOrWhiteSpace())
-    {
-        ModConsole.DebugError($"Set a valid Skybox Name , Got {name}");
-        return false;
-    }
-    if (LoadedSkyboxesBundles.Count() == 0)
-    {
-        ModConsole.Error($"There are no skybox Registered, unable to set a custom skybox.");
-        return false;
-    }
-    if (LoadedSkyboxesBundles.Count() != 0)
-    {
-        foreach (var skybox in LoadedSkyboxesBundles)
+        internal static void YoinkSkybox()
         {
-            if (skybox != null)
+            Texture2D Up = null;
+            Texture2D Down = null;
+            Texture2D Back = null;
+            Texture2D Front = null;
+            Texture2D Left = null;
+            Texture2D Right = null;
+            Texture2D CubeMapToTexture = null;
+
+            bool isCubeMap = false;
+
+            if (OriginalSkybox != null)
             {
-                if (skybox.SkyboxName.ToLower().Equals(name.ToLower()))
+                foreach (var TextureName in OriginalSkybox.GetTexturePropertyNames())
                 {
-                    SetRenderSettingSkybox(skybox);
-                    return true;
+                    var MaterialTexture = OriginalSkybox.GetTexture(TextureName);
+                    //ModConsole.DebugLog($"Texture name : {TextureNames}, Material Name {mattexture.name}");
+
+                    if (CubeMapToTexture == null)
+                    {
+                        if (TextureName.isMatch("_Tex"))
+                        {
+                            isCubeMap = true;
+                            CubeMapToTexture = MaterialTexture.ToTexture2D();
+                            if (CubeMapToTexture != null)
+                            {
+                                CubeMapToTexture.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                            }
+                        }
+                    }
+
+                    if (Up == null)
+                    {
+                        if (TextureName.isMatch("_UpTex"))
+                        {
+                            Up = MaterialTexture.ToTexture2D();
+                            if (Up != null)
+                            {
+                                Up.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                            }
+                        }
+                    }
+
+                    if (Down == null)
+                    {
+                        if (TextureName.isMatch("_DownTex"))
+                        {
+                            Down = MaterialTexture.ToTexture2D();
+                            if (Down != null)
+                            {
+                                Down.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                            }
+                        }
+                    }
+
+                    if (Back == null)
+                    {
+                        if (TextureName.isMatch("_BackTex"))
+                        {
+                            Back = MaterialTexture.ToTexture2D();
+                            if (Back != null)
+                            {
+                                Back.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                            }
+                        }
+                    }
+
+                    if (Front == null)
+                    {
+                        if (TextureName.isMatch("_FrontTex"))
+                        {
+                            Front = MaterialTexture.ToTexture2D();
+                            if (Front != null)
+                            {
+                                Front.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                            }
+                        }
+                    }
+
+                    if (Left == null)
+                    {
+                        if (TextureName.isMatch("_LeftTex"))
+                        {
+                            Left = MaterialTexture.ToTexture2D();
+                            if (Left != null)
+                            {
+                                Left.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                            }
+                        }
+                    }
+
+                    if (Right == null)
+                    {
+                        if (TextureName.isMatch("_RightTex"))
+                        {
+                            Right = MaterialTexture.ToTexture2D();
+                            if (Right != null)
+                            {
+                                Right.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                            }
+                        }
+                    }
+
                 }
+
+                if (!isCubeMap)
+                {
+                    #region Caching Bundle and The results.
+
+
+                    // End of the Parsing mechanism.
+                    var cachedskybox = new AssetBundleSkyboxes(OriginalSkybox.name, new BundleContent(Up, Down, Back, Front, Left, Right, CubeMapToTexture, OriginalSkybox), isCubeMap);
+                    if (LoadedSkyboxesBundles != null)
+                    {
+                        LoadedSkyboxesBundles.Add(cachedskybox);
+                    }
+
+                    // Save Skybox in File
+
+                    if (!Directory.Exists(YoinkedSkyboxes))
+                    {
+                        Directory.CreateDirectory(YoinkedSkyboxes);
+                    }
+
+                    var savepath = Path.Combine(YoinkedSkyboxes, $"Skybox_{OriginalSkybox.name}");
+                    if (!Directory.Exists(savepath))
+                    {
+                        Directory.CreateDirectory(savepath);
+                    }
+
+                    SaveTexture(Up, savepath, "up");
+                    SaveTexture(Down, savepath, "Down");
+                    SaveTexture(Back, savepath, "Back");
+                    SaveTexture(Front, savepath, "Front");
+                    SaveTexture(Left, savepath, "Left");
+                    SaveTexture(Right, savepath, "Right");
+
+                    #endregion Caching Bundle and The results.
+
+                }
+                else
+                {
+                    ModConsole.DebugLog($"Failed to parse {OriginalSkybox.name}, Due to being unsupported!");
+                }
+
             }
         }
-    }
-    return false;
-}
+
+        private static void SaveTexture(Texture2D texture, string path, string direction)
+        {
+            byte[] bytes = ImageConversion.EncodeToPNG(texture).ToArray();
+            File.WriteAllBytes(Path.Combine(path, $"{direction}_.png"), bytes);
+        }
+
+
+        internal static void SetRenderSettingSkybox(Material mat)
+        {
+            RenderSettings.skybox = mat;
+        }
+
+        internal static void SetRenderSettingSkybox(AssetBundleSkyboxes skybox)
+        {
+            SetRenderSettingSkybox(skybox.content.Material);
+        }
+
+        internal static bool SetSkyboxByFileName(string name)
+        {
+            if (!name.IsNotNullOrEmptyOrWhiteSpace())
+            {
+                ModConsole.DebugError($"Set a valid Skybox Name , Got {name}");
+                return false;
+            }
+            if (LoadedSkyboxesBundles.Count() == 0)
+            {
+                ModConsole.Error($"There are no skybox Registered, unable to set a custom skybox.");
+                return false;
+            }
+            if (LoadedSkyboxesBundles.Count() != 0)
+            {
+                foreach (var skybox in LoadedSkyboxesBundles)
+                {
+                    if (skybox != null)
+                    {
+                        if (skybox.SkyboxName.ToLower().Equals(name.ToLower()))
+                        {
+                            SetRenderSettingSkybox(skybox);
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

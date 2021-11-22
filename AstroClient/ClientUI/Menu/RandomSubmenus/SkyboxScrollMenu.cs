@@ -174,6 +174,11 @@
             {
                 SkyboxEditor.SetRenderSettingSkybox(SkyboxEditor.OriginalSkybox);
             }, "Restore Original Skybox.");
+            new QMWingSingleButton(WingMenu, "Yoink Skybox", () =>
+            {
+                SkyboxEditor.YoinkSkybox();
+            }, "Attempts to Steal Skybox and save it (WIP).");
+
 
             WingMenu.SetActive(false);
         }

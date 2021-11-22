@@ -83,7 +83,7 @@
             if (tag != null)
             {
                 tag.Text = Text;
-                tag.SystemColor_SetBackgroundColor(BackGround);
+                tag.BackGroundColor = BackGround.ToUnityEngineColor();
             }
             });
             return tag;

@@ -23,7 +23,9 @@
             AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+        private Color MutedColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.Orange.ToUnityEngineColor();
 
+        private Color BlockedColor { [HideFromIl2Cpp] get; }= System.Drawing.Color.Red.ToUnityEngineColor();
         // Use this for initialization
         private void Start()
         {
@@ -43,43 +45,68 @@
 
             if (AssignedPlayer.GetAPIUser().HasBlockedYou())
             {
-                GenerateBlockedTag();
+                GetBlockedTag();
             }
 
             if (AssignedPlayer.GetAPIUser().HasMutedYou())
             {
-                GenerateMutedTag();
+                GetMutedTag();
             }
         }
-        private SingleTag MutedTag;
-        private void GenerateMutedTag()
+        private SingleTag MutedTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+        private void GetMutedTag()
         {
+
             if (MutedTag == null)
             {
-                MutedTag = AssignedPlayer.AddComponent<SingleTag>();
+                MutedTag = gameObject.AddComponent<SingleTag>();
+            }
+
+            MiscUtils.DelayFunction(0.5f, () =>
+            {
+
                 if (MutedTag != null)
                 {
-                    MutedTag.SystemColor_SetBackgroundColor(System.Drawing.Color.Orange);
                     MutedTag.Text = "Muted You";
+                    MutedTag.BackGroundColor = MutedColor;
                     MutedTag.ShowTag = true;
                 }
-
-            }
+            });
         }
 
+        private SingleTag BlockedTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private SingleTag BlockedTag;
-        private void GenerateBlockedTag()
+        private void GetBlockedTag()
         {
-            if (BlockedTag == null)
+            int debug = 0;
+            try
             {
-                BlockedTag = AssignedPlayer.AddComponent<SingleTag>();
-                if (BlockedTag != null)
+                debug = 1;
+                if (BlockedTag == null)
                 {
-                    BlockedTag.SystemColor_SetBackgroundColor(System.Drawing.Color.Red);
-                    BlockedTag.Text = "Blocked You";
-                    MutedTag.ShowTag = true;
+                    BlockedTag = gameObject.AddComponent<SingleTag>();
                 }
+                debug = 2;
+                MiscUtils.DelayFunction(0.5f, () =>
+                {
+                    debug = 3;
+                    if (BlockedTag != null)
+                    {
+
+                        BlockedTag.Text = "Blocked You";
+                        debug = 4;
+                        BlockedTag.BackGroundColor = BlockedColor;
+                        debug = 5;
+                        BlockedTag.ShowTag = true;
+                        debug = 6;
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error($"Error at debug {debug}");
+                ModConsole.ErrorExc(e);
             }
         }
 
@@ -108,18 +135,19 @@
 
         internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
-            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
+            if (AssignedPlayer.GetAPIUser().HasBlockedYou())
             {
-                GenerateBlockedTag();
+                GetBlockedTag();
             }
 
         }
         internal override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
-            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
+            if (!AssignedPlayer.GetAPIUser().HasBlockedYou())
             {
                 if (BlockedTag != null)
                 {
+                    BlockedTag.ShowTag = false;
                     Destroy(BlockedTag);
                 }
             }
@@ -128,20 +156,17 @@
 
         internal override void OnPlayerMutedYou(Photon.Realtime.Player player)
         {
-            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
+            if (AssignedPlayer.GetAPIUser().HasMutedYou())
             {
-                GenerateMutedTag();
+                GetMutedTag();
             }
         }
 
         internal override void OnPlayerUnmutedYou(Photon.Realtime.Player player)
         {
-            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
+            if (!AssignedPlayer.GetAPIUser().HasMutedYou())
             {
-                if (MutedTag != null)
-                {
-                    Destroy(MutedTag);
-                }
+                Destroy(MutedTag);
             }
         }
 

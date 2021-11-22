@@ -164,7 +164,7 @@
                 TextColor = Color.white;
                 TagText.text = Text;
                 SpawnedTag.gameObject.SetActive(ShowTag);
-                if (SpawnedStatsImage)
+                if (SpawnedStatsImage != null)
                 {
                     SpawnedStatsImage.color = BackGroundColor;
                 }
@@ -226,16 +226,6 @@
             }
         }
 
-        internal void SystemColor_SetTextColor(System.Drawing.Color Color)
-        {
-            TextColor = Color.ToUnityEngineColor();
-        }
-
-
-        internal void SystemColor_SetBackgroundColor(System.Drawing.Color Color)
-        {
-            BackGroundColor = Color.ToUnityEngineColor();
-        }
 
 
         private void onTagDestroy()
@@ -460,9 +450,12 @@
             set
             {
                 _ShowTag = value;
-                if (SpawnedTag.gameObject != null)
+                if (SpawnedTag != null)
                 {
-                    SpawnedTag.gameObject.SetActive(value);
+                    if (SpawnedTag.gameObject != null)
+                    {
+                        SpawnedTag.gameObject.SetActive(value);
+                    }
                 }
             }
         }
