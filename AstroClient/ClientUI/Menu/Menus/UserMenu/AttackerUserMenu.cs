@@ -4,7 +4,7 @@
     using Constants;
     using Tools.ObjectEditor;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     internal class AttackerUserMenu : AstroEvents
     {

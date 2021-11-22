@@ -6,7 +6,7 @@
     using ClientResources.Loaders;
     using Constants;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     #endregion Imports
 

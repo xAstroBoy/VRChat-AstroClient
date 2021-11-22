@@ -8,7 +8,7 @@
     using Tools.Extensions;
     using Tools.World;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
 
     internal class VRChat_Map_ESP_Menu : AstroEvents

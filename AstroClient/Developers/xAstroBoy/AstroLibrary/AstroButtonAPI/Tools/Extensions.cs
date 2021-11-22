@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using QuickMenu;
+    using QuickMenuAPI;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -15,7 +15,7 @@
     using VRC.UI.Elements;
     using VRC.UI.Elements.Menus;
     using VRC.UI.Elements.Tooltips;
-    using Wings;
+    using WingsAPI;
     using xAstroBoy.Extensions;
     using Object = Il2CppSystem.Object;
 

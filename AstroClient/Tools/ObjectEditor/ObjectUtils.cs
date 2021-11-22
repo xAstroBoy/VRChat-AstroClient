@@ -22,7 +22,7 @@
     using VRCSDK2;
     using World;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
     using Color = System.Drawing.Color;
     using VRC_Pickup = VRC.SDKBase.VRC_Pickup;

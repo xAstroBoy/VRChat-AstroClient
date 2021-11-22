@@ -5,7 +5,7 @@
     using Tools.Extensions;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
 
     internal class ObjectInfoSubMenu : Tweaker_Events

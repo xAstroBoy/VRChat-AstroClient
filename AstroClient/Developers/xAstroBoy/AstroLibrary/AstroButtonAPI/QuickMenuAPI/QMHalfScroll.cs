@@ -1,4 +1,4 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
     using System.Collections.Generic;
@@ -6,26 +6,27 @@
     using UnityEngine;
     using Object = UnityEngine.Object;
 
-    internal class QMScrollMenu
+    internal class QMHalfScroll
     {
         internal bool AllowOverStepping = false;
         internal QMNestedButton BaseMenu;
         internal int currentMenuIndex;
         internal bool IgnoreEverything = false;
-        private Action<QMScrollMenu> OpenAction;
-        private int Posx;
-        private int Posy;
+        private Action<QMHalfScroll> OpenAction;
+        private int Pos;
+        private float Posx;
+        private float Posy;
 
         internal List<ScrollObject> QMButtons = new();
         internal bool ShouldChangePos = true;
 
-        internal QMScrollMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, Action<QMScrollMenu> MenuOpenAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        internal QMHalfScroll(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, Action<QMHalfScroll> MenuOpenAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
             SetAction(MenuOpenAction);
         }
 
-        internal QMScrollMenu(QMNestedButton basemenu)
+        internal QMHalfScroll(QMNestedButton basemenu)
         {
             BaseMenu = basemenu;
         }
@@ -40,7 +41,7 @@
             currentMenuIndex = MenuIndex;
         }
 
-        internal void SetAction(Action<QMScrollMenu> Open, bool shouldClear = true)
+        internal void SetAction(Action<QMHalfScroll> Open, bool shouldClear = true)
         {
             try
             {
@@ -81,13 +82,22 @@
             {
                 foreach (var item in QMButtons) Object.Destroy(item.ButtonBase.GetGameObject());
                 QMButtons.Clear();
-                Posx = 0;
-                Posy = 0;
+                Posx = 0f;
+                Posy = 0f;
+                Pos = 0;
                 currentMenuIndex = 0;
             }
             catch
             {
             }
+        }
+
+        internal void AddExtraButton(QMButtonBase Button)
+        {
+            QMButtons.Add(new ScrollObject
+            {
+                ButtonBase = Button
+            });
         }
 
         internal void Add(QMButtonBase Button)
@@ -97,10 +107,13 @@
                 if (Posx < 6) Posx++;
                 if (Posx > 5)
                 {
-                    Posx = 0;
-                    Posy++;
+                    Posx = 1;
+                    Posy += 0.5f;
                 }
             }
+
+            if (!IgnoreEverything)
+                Pos++;
 
             if (ShouldChangePos)
                 Button.SetLocation(Posx, Posy);

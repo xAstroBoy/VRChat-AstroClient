@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
-    using QuickMenu;
+    using QuickMenuAPI;
     using UnityEngine;
     using UnityEngine.UI;
     using Utility;

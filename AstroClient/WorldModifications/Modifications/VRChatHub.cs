@@ -8,7 +8,7 @@
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
     using static VRC.SDKBase.VRC_EventHandler;
 

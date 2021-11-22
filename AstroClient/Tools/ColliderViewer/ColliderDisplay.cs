@@ -7,7 +7,7 @@
     using UnityEngine;
     using UnityEngine.SceneManagement;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     internal class ColliderDisplay : AstroEvents
     {

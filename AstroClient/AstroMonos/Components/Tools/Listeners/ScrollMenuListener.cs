@@ -5,7 +5,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     [RegisterComponent]
     public class ScrollMenuListener : AstroMonoBehaviour

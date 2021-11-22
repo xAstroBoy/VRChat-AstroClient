@@ -9,9 +9,9 @@
     using VRC.Udon.Common.Interfaces;
     using VRC.UI.Elements;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.Wings;
+    using xAstroBoy.AstroButtonAPI.WingsAPI;
 
     internal class AmongUS_UnfilteredNodes : AstroEvents
     {

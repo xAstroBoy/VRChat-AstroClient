@@ -9,7 +9,7 @@
     using VRC.Core;
     using VRC.UI;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.Wings;
+    using xAstroBoy.AstroButtonAPI.WingsAPI;
     using xAstroBoy.Utility;
     using AvatarUtils = Tools.Player.AvatarUtils;
 

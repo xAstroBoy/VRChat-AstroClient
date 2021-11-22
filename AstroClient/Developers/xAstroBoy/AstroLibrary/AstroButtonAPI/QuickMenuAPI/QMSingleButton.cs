@@ -1,4 +1,4 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
     using AstroClient.Tools.Colors;

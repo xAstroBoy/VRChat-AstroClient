@@ -1,7 +1,7 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Wings
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 {
     using System;
-    using QuickMenu;
+    using QuickMenuAPI;
     using TMPro;
     using Tools;
     using UnhollowerRuntimeLib;

@@ -6,7 +6,7 @@
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
 

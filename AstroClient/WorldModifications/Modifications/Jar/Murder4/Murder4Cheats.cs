@@ -23,7 +23,7 @@
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static Constants.CustomLists;

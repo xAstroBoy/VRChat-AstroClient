@@ -11,7 +11,7 @@
     using UnityEngine;
     using VRC;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.Wings;
+    using xAstroBoy.AstroButtonAPI.WingsAPI;
     using xAstroBoy.Extensions;
 
     internal class TweakerWings : Tweaker_Events

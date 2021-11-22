@@ -5,7 +5,7 @@
     using Selector;
     using Tools.Extensions;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
 
     internal class FunBehavioursSubMenu : Tweaker_Events

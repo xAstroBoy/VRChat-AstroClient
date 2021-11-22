@@ -9,7 +9,7 @@
     using UnityEngine;
     using VRC;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
 
     #endregion Imports

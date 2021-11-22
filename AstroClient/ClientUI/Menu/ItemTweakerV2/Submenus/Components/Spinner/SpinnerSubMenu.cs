@@ -7,7 +7,7 @@
     using Tools.Extensions;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     internal class SpinnerSubMenu : Tweaker_Events
     {

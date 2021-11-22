@@ -7,9 +7,9 @@
     using UnityEngine;
     using VRC.SDKBase;
     using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.Wings;
+    using xAstroBoy.AstroButtonAPI.WingsAPI;
     using xAstroBoy.Utility;
 
     internal class PickupSubmenu : Tweaker_Events
