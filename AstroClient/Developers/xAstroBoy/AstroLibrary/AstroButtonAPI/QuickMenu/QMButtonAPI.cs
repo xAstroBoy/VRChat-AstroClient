@@ -1,4 +1,4 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
 {
     internal static class QMButtonAPI
     {

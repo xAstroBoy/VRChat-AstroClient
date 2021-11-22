@@ -5,6 +5,7 @@
     using UnityEngine;
     using UnityEngine.UI;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.Utility;
 
     internal class TabFixes : AstroEvents

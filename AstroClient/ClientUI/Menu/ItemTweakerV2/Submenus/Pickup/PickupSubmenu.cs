@@ -7,16 +7,26 @@
     using UnityEngine;
     using VRC.SDKBase;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.Tools;
+    using xAstroBoy.AstroButtonAPI.Wings;
+    using xAstroBoy.Utility;
 
     internal class PickupSubmenu : Tweaker_Events
     {
         internal static void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
-            HasPickupComponent = new QMSingleButton(PickupEditor, 0, -1f, "Force Pickup Component", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_ForceComponent(); }), "Forces Pickup component in case there's none.", null, null, true);
-            Pickup_IsEditMode = new QMSingleButton(PickupEditor, 0, -0.5f, "Edit Mode : OFF", null, "Shows if Pickup properties are currently being overriden.", null, null, true);
 
-            _ = new QMSingleButton(PickupEditor, 0, 0, "Reset Properties", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_RestoreOriginalProperties(); }), "Revert Pickup Properties Edits. (disabling editmode)", null, null, true);
+            PickupEditor.SetBackButtonAction(() =>
+            {
+                PickupEditorWings.ClickBackButton();
+            });
+
+            PickupEditor.AddOpenAction(() =>
+            {
+                PickupEditorWings.ShowWingsPage();
+            });
 
             _ = new QMSingleButton(PickupEditor, 1, 0, "Pickup Orientation", null, "Pickup Orientation", null, null, true);
             Pickup_PickupOrientation_prop_any = new QMSingleButton(PickupEditor, 1, 0.5f, "Any", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Any); }), "", null, null, true);
@@ -37,11 +47,11 @@
         internal static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var slider = new QMNestedButton(menu, x, y, "Proximity", "Pickup Proximity Slider Editor!", null, null, null, null, btnHalf);
-            //PickupProximitySlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
-            //{
-            //    Tweaker_Object.GetGameObjectToEdit().Pickup_Set_proximity((int)value);
-            //}, 5, 1000, 0, true);
-            //PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+            PickupProximitySlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", delegate (float value)
+            {
+                Tweaker_Object.GetGameObjectToEdit().Pickup_Set_proximity((int)value);
+            }, "Set Pickup Proximity",  5, 1000, false, true);
+            PickupProximitySlider.gameObject.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
         }
 
         internal override void OnPickupController_Selected(PickupController control)
@@ -215,13 +225,26 @@
             {
                 Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
             }
-            //if (PickupProximitySlider != null)
-            //{
-            //    PickupProximitySlider.SetValue(0);
-            //}
+            if (PickupProximitySlider != null)
+            {
+                PickupProximitySlider.SetValue(0);
+            }
         }
 
-        internal static QMSingleButton HasPickupComponent { get; private set; }
+        internal static void InitWings(QMWings main)
+        {
+            PickupEditorWings = new QMWings(main, "Pickup Modifier", "Modify Pickup Properties", null, null);
+
+            HasPickupComponent = new QMWingSingleButton(PickupEditorWings, "Force Pickup Component", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_ForceComponent(); }), "Forces Pickup component in case there's none.");
+            Pickup_IsEditMode = new QMWingSingleButton(PickupEditorWings, "Edit Mode", null, "Shows if Pickup properties are currently being overriden.");
+            new QMWingSingleButton(PickupEditorWings, "Reset Properties", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_RestoreOriginalProperties(); }), "Revert Pickup Properties Edits. (disabling editmode)");
+
+        }
+
+
+        internal static QMWings PickupEditorWings;
+        internal static QMWingSingleButton HasPickupComponent { get; private set; }
+        internal static QMWingSingleButton Pickup_IsEditMode { get; private set; }
 
         internal static QMSingleButton Pickup_PickupOrientation_prop_any { get; private set; }
         internal static QMSingleButton Pickup_PickupOrientation_prop_Grip { get; private set; }
@@ -235,7 +258,6 @@
         internal static QMToggleButton Pickup_pickupable { get; private set; }
         internal static QMToggleButton Pickup_DisallowTheft { get; private set; }
 
-        internal static QMSingleButton Pickup_IsEditMode { get; private set; }
-        //internal static QMSlider PickupProximitySlider { get; private set; }
+        internal static QMSlider PickupProximitySlider { get; private set; }
     }
 }

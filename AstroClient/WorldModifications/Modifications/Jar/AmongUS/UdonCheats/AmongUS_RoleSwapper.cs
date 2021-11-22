@@ -13,6 +13,9 @@
     using VRC.Udon;
     using VRC.UI.Elements;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.Tools;
+    using xAstroBoy.AstroButtonAPI.Wings;
 
     internal class AmongUS_RoleSwapper : AstroEvents
     {
@@ -184,7 +187,7 @@
             if (WingMenu != null)
             {
                 WingMenu.SetActive(true);
-                WingMenu.ShowLeftWingPage();
+                WingMenu.ShowWingsPage();
             }
 
             if (!isGenerating)

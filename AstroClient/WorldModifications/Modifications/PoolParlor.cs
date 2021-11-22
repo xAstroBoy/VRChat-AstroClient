@@ -11,6 +11,7 @@
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using static Constants.CustomLists;
 
     internal class PoolParlor : AstroEvents

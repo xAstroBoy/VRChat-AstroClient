@@ -5,6 +5,7 @@
     using UnityEngine;
     using VRC.SDKBase;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.Utility;
 
     internal class JumpModifier : AstroEvents

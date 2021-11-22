@@ -6,6 +6,7 @@
     using Tools.Extensions.Components_exts;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class ConstraintsSubmenu : Tweaker_Events
     {

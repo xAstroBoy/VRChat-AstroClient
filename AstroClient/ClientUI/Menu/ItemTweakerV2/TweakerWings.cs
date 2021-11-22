@@ -4,12 +4,14 @@
     using ClientResources;
     using ClientResources.Loaders;
     using Selector;
+    using Submenus.Pickup;
     using Target;
     using Tools.Extensions;
     using Tools.Extensions.Components_exts;
     using UnityEngine;
     using VRC;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.Wings;
     using xAstroBoy.Extensions;
 
     internal class TweakerWings : Tweaker_Events
@@ -26,7 +28,7 @@
         private static QMWingToggleButton AntiTheftInteractor;
         private static QMWingToggleButton ProtectionInteractor;
 
-        private static QMWings WingsMenu;
+        internal static QMWings TweakerMainWings;
 
         // Future Wings.
            //_ = new QMSingleButton(menu, 1, 0f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TryTakeOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
@@ -38,12 +40,12 @@
 
         internal static void InitTweakerWings()
         {
-            WingsMenu = new QMWings(1011, true, "Tweaker", "Item Tweaker", null, Icons.box_sprite);
-            Pickup_CurrentObjectOwner = new QMWingSingleButton(WingsMenu, "Current Owner : null", () => { }, "Who is the current object owner,", null);
-            Pickup_IsHeldStatus = new QMWingSingleButton(WingsMenu, "", () => { }, "Held : No.", null);
-            Pickup_CurrentObjectHolder = new QMWingSingleButton(WingsMenu, "Current holder : null", () => { }, "Who is the Holding the object", null);
-            TeleportToMe = new QMWingSingleButton(WingsMenu, ButtonStringExtensions.Generate_TeleportToMe_ButtonText(Tweaker_Selector.SelectedObject), () => { Tweaker_Object.GetGameObjectToEdit().TeleportToMe(); }, ButtonStringExtensions.Generate_TeleportToMe_ButtonText(Tweaker_Selector.SelectedObject), null);
-            TeleportToTarget = new QMWingSingleButton(WingsMenu, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), () => { Tweaker_Object.GetGameObjectToEdit().TeleportToTarget(); }, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), null);
+            TweakerMainWings = new QMWings(1011, true, "Tweaker", "Item Tweaker", null, Icons.box_sprite);
+            Pickup_CurrentObjectOwner = new QMWingSingleButton(TweakerMainWings, "Current Owner : null", () => { }, "Who is the current object owner,", null);
+            Pickup_IsHeldStatus = new QMWingSingleButton(TweakerMainWings, "", () => { }, "Held : No.", null);
+            Pickup_CurrentObjectHolder = new QMWingSingleButton(TweakerMainWings, "Current holder : null", () => { }, "Who is the Holding the object", null);
+            TeleportToMe = new QMWingSingleButton(TweakerMainWings, ButtonStringExtensions.Generate_TeleportToMe_ButtonText(Tweaker_Selector.SelectedObject), () => { Tweaker_Object.GetGameObjectToEdit().TeleportToMe(); }, ButtonStringExtensions.Generate_TeleportToMe_ButtonText(Tweaker_Selector.SelectedObject), null);
+            TeleportToTarget = new QMWingSingleButton(TweakerMainWings, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), () => { Tweaker_Object.GetGameObjectToEdit().TeleportToTarget(); }, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), null);
           
             
             //AntiTheftInteractor = new QMWingToggleButton(WingsMenu, "AntiTheft", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object");
@@ -51,9 +53,9 @@
             //LockHoldItem = new QMWingToggleButton(WingsMenu, "Lock", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object");
 
 
-            new QMWingSingleButton(WingsMenu, "DANGER : Destroy item.", () => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }, "Destroys Object , You need to reload the world to restore it back.", Color.red);
+            new QMWingSingleButton(TweakerMainWings, "DANGER : Destroy item.", () => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }, "Destroys Object , You need to reload the world to restore it back.", Color.red);
 
-
+            PickupSubmenu.InitWings(TweakerMainWings);
         }
 
         internal override void OnPickupController_OnUpdate(PickupController control)

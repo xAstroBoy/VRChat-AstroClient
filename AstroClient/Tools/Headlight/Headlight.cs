@@ -7,6 +7,9 @@
     using UnityEngine;
     using VRC;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.Tools;
+    using xAstroBoy.AstroButtonAPI.Wings;
     using xAstroBoy.UIPaths;
     using Object = UnityEngine.Object;
 
@@ -82,7 +85,7 @@
             HeadlightConfig.AddOpenAction(() =>
             {
                 WingMenu.SetActive(true);
-                WingMenu.ShowLeftWingPage();
+                WingMenu.ShowWingsPage();
             });
             HeadlightConfig.SetBackButtonAction(menu, () =>
             {

@@ -13,6 +13,7 @@
     using UnityEngine.UI;
     using VRC;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.Utility;
 
     #endregion Imports

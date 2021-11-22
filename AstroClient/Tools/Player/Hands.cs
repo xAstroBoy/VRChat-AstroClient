@@ -139,7 +139,7 @@
                 {
                     if (GameInstances.LocalPlayer.GetPlayer() != null)
                     {
-                        return GameInstances.LocalPlayer.GetPlayer().transform.Find("AnimationController/HeadAndHandIK/RightEffector").GetComponent<VRCHandGrasper>();
+                        return _RightHandGrasper = GameInstances.LocalPlayer.GetPlayer().transform.Find("AnimationController/HeadAndHandIK/RightEffector").GetComponent<VRCHandGrasper>();
                     }
                 }
 
@@ -154,15 +154,15 @@
         {
             get
             {
-                if (_RightHandGrasper == null)
+                if (_LeftHandGrasper == null)
                 {
                     if (GameInstances.LocalPlayer.GetPlayer() != null)
                     {
-                        return GameInstances.LocalPlayer.GetPlayer().transform.Find("AnimationController/HeadAndHandIK/LeftEffector").GetComponent<VRCHandGrasper>();
+                        return _LeftHandGrasper = GameInstances.LocalPlayer.GetPlayer().transform.Find("AnimationController/HeadAndHandIK/LeftEffector").GetComponent<VRCHandGrasper>();
                     }
                 }
 
-                return _RightHandGrasper;
+                return _LeftHandGrasper;
             }
         }
 

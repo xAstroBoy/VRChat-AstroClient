@@ -1,6 +1,8 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
 {
     using System;
+    using PageGenerators;
+    using Tools;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;

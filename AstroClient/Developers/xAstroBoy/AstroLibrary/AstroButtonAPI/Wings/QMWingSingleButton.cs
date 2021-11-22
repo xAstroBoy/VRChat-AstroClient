@@ -1,7 +1,9 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Wings
 {
     using System;
+    using QuickMenu;
     using TMPro;
+    using Tools;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
@@ -20,7 +22,7 @@
         internal string CurrentButtonColor;
 
         internal string CurrentButtonText;
-        internal TextMeshProUGUI Text;
+        internal TextMeshProUGUI ButtonText;
         internal UiTooltip ToolTip;
 
         public QMWingSingleButton(QMWings Parent, string btnText, Action btnAction, string btnToolTip, Color? TextColor = null)
@@ -41,7 +43,7 @@
             ToolTip = button.AddComponent<UiTooltip>();
             SetToolTip(btnToolTip);
             button.GetComponent<RectTransform>().sizeDelta = new Vector2(350, 120);
-            Text = button.GetComponentInChildren<TextMeshProUGUI>();
+            ButtonText = button.GetComponentInChildren<TextMeshProUGUI>();
             BtnText = btnText;
             SetButtonText(btnText);
             setAction(btnAction);
@@ -51,7 +53,7 @@
         {
             CurrentButtonText = buttonText;
             var NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
-            button.GetComponentInChildren<TextMeshProUGUI>().text = CurrentButtonText;
+            ButtonText.text = CurrentButtonText;
         }
 
         internal void setButtonToolTip(string ButtonToolTip)
@@ -79,7 +81,7 @@
         {
             CurrentButtonColor = buttonTextColor;
             var NewText = $"<color={CurrentButtonColor}>{CurrentButtonText}</color>";
-            button.GetComponentInChildren<TextMeshProUGUI>().text = NewText;
+            ButtonText.text = NewText;
         }
     }
 }

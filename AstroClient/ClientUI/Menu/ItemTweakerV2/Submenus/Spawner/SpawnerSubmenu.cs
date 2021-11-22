@@ -8,6 +8,7 @@
     using Tools.ObjectEditor.Cloner;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class SpawnerSubmenu : Tweaker_Events
     {

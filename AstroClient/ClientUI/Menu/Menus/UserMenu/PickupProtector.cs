@@ -4,6 +4,7 @@
     using AstroMonos;
     using Constants;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.Utility;
 
     internal class PickupProtector : AstroEvents

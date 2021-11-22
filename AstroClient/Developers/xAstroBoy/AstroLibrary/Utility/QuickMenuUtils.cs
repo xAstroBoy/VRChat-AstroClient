@@ -3,6 +3,7 @@
 namespace AstroClient.xAstroBoy.Utility
 {
     using AstroButtonAPI;
+    using AstroButtonAPI.Tools;
     using UnityEngine;
     using VRC;
     using VRC.Core;

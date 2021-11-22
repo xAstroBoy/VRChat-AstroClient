@@ -3,6 +3,7 @@
     using AstroMonos.Components.Player;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.Utility;
 
     internal class SitUserMenu : AstroEvents

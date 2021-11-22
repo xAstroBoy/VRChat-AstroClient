@@ -21,6 +21,7 @@
     using UnhollowerBaseLib;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.Tools;
     using Color = System.Drawing.Color;
     using Console = CheetosConsole.Console;
 

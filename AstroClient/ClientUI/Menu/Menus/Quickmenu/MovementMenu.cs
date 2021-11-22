@@ -9,6 +9,7 @@
     using Tools.Player.Movement.Exploit;
     using Tools.Player.Movement.QuickMenu;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     #endregion Imports
 

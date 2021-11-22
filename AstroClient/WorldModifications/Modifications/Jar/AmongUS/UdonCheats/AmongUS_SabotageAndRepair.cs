@@ -9,6 +9,7 @@
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class AmongUS_SabotageAndRepair : AstroEvents
     {

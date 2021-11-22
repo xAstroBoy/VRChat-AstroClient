@@ -1,5 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
 {
+    using Tools;
     using UnityEngine;
 
     internal class QmQuickActions

@@ -8,6 +8,7 @@
     using Spinner;
     using Tools.Extensions;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class ComponentSubMenu : Tweaker_Events
     {

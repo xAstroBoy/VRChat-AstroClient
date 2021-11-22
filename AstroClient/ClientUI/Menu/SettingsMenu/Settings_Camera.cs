@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using Cheetos.CameraStuff;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.UIPaths;
 
     #endregion Imports

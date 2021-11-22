@@ -16,6 +16,7 @@
     using Wings;
     using WorldModifications;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class UIInitializer : AstroEvents
     {

@@ -7,6 +7,7 @@
     using Tools.Extensions;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class RocketComponentSubMenu : Tweaker_Events
     {

@@ -1,7 +1,8 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
 {
     using System;
     using System.Collections.Generic;
+    using Tools;
     using UnityEngine;
     using Object = UnityEngine.Object;
 

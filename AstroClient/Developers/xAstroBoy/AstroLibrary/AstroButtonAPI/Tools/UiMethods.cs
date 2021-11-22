@@ -1,4 +1,4 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
     using System.Linq;
     using System.Reflection;

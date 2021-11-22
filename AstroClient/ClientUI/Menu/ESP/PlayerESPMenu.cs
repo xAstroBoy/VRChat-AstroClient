@@ -10,6 +10,7 @@
     using UnityEngine;
     using VRC;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.Utility;
 
     internal class PlayerESPMenu : AstroEvents

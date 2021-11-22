@@ -1,7 +1,9 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Wings
 {
     using System;
+    using QuickMenu;
     using TMPro;
+    using Tools;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements.Tooltips;

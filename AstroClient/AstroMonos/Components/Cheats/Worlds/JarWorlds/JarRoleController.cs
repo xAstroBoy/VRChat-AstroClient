@@ -12,6 +12,7 @@
     using WorldModifications.WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.Utility;
 
     internal class JarRoleController : AstroEvents

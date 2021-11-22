@@ -8,6 +8,7 @@
     using UnityEngine;
     using UnityEngine.Rendering;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.UIPaths;
     using static Constants.CustomLists;
     using static Constants.GlobalLists;

@@ -6,6 +6,9 @@
     using Tools.Extensions;
     using VRC.UI.Elements;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.Tools;
+    using xAstroBoy.AstroButtonAPI.Wings;
     using xAstroBoy.Utility;
 
     internal class VRC_TriggersScrollMenu : AstroEvents
@@ -110,7 +113,7 @@
             if (WingMenu != null)
             {
                 WingMenu.SetActive(true);
-                WingMenu.ShowLeftWingPage();
+                WingMenu.ShowWingsPage();
             }
             Regenerate();
         }

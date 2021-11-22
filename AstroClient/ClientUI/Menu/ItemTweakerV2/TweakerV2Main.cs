@@ -24,6 +24,7 @@
     using Tools.ObjectEditor;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class TweakerV2Main : Tweaker_Events
     {

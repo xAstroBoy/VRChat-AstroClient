@@ -3,6 +3,8 @@
     using UnityEngine;
     using UnityEngine.UI;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.Utility;
 
     internal class MenuText

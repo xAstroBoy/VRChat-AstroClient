@@ -1,6 +1,7 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
 {
     using System;
+    using Tools;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;

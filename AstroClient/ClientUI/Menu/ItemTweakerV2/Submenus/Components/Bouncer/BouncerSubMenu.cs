@@ -4,6 +4,7 @@
     using Selector;
     using Tools.Extensions.Components_exts;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class BouncerSubMenu : Tweaker_Events
     {

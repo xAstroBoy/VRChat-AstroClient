@@ -1,6 +1,7 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
 {
     using System.Threading.Tasks;
+    using Tools;
     using UnityEngine;
     using UnityEngine.Networking;
     using UnityEngine.UI;
@@ -53,9 +54,14 @@
 
         internal void SetToolTip(string buttonToolTip)
         {
-            button.GetComponentInChildren<UiTooltip>(true).field_Public_String_0 = buttonToolTip;
-            //button.GetComponentInChildren<UiTooltip>().field_Public_String_1 = buttonToolTip;
+            var tooltip = button.GetComponentInChildren<UiTooltip>(true);
+            if (tooltip != null)
+            {
+                tooltip.field_Public_String_0 = buttonToolTip;
+                //button.GetComponentInChildren<UiTooltip>().field_Public_String_1 = buttonToolTip;
+            }
         }
+
         internal void SetIntractable(bool isIntractable)
         {
             button.gameObject.GetComponent<Button>().interactable = isIntractable;

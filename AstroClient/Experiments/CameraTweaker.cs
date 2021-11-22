@@ -6,6 +6,7 @@
     using UnityEngine;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.Utility;
 
     internal class CameraTweaker : AstroEvents

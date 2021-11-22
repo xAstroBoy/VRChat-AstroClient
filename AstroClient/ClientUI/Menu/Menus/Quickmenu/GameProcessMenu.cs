@@ -6,6 +6,7 @@
     using System.IO;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     #endregion Imports
 

@@ -1,17 +1,15 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
 {
     using System;
+    using AstroClient.Tools.Colors;
     using ClientResources.Helpers;
-    using Iced.Intel;
     using TMPro;
-    using Tools.Colors;
-    using Tools.Extensions;
+    using Tools;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
     using Utility;
-    using xAstroBoy.Extensions;
     using Object = UnityEngine.Object;
 
     internal class QMSingleButton : QMButtonBase

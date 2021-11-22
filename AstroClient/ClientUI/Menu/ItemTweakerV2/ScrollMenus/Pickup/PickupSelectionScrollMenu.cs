@@ -7,6 +7,9 @@
     using Tools.World;
     using VRC.UI.Elements;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.Tools;
+    using xAstroBoy.AstroButtonAPI.Wings;
 
     internal class PickupSelectionScrollMenu : AstroEvents
     {
@@ -112,7 +115,7 @@
             if (WingMenu != null)
             {
                 WingMenu.SetActive(true);
-                WingMenu.ShowLeftWingPage();
+                WingMenu.ShowWingsPage();
             }
 
             Regenerate();

@@ -4,6 +4,7 @@
 
     using Cheetos;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     #endregion Imports
 

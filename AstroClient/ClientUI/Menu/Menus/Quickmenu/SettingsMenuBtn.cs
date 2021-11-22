@@ -5,6 +5,7 @@
     using SettingsMenu;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class SettingsMenuBtn : AstroEvents
     {

@@ -9,6 +9,9 @@
     using VRC.Udon.Common.Interfaces;
     using VRC.UI.Elements;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.Tools;
+    using xAstroBoy.AstroButtonAPI.Wings;
 
     internal class Murder4_FilteredNodes : AstroEvents
     {
@@ -163,7 +166,7 @@
             if (WingMenu != null)
             {
                 WingMenu.SetActive(true);
-                WingMenu.ShowLeftWingPage();
+                WingMenu.ShowWingsPage();
             }
 
             if (!isGenerating)

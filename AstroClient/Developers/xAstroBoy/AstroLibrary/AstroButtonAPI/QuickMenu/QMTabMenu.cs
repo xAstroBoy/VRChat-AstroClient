@@ -1,9 +1,12 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenu
 {
+    using PageGenerators;
+    using Tools;
     using UnityEngine;
+    using UnityEngine.UI;
     using VRC.UI.Elements;
 
-    internal class QMGridTab
+    internal class QMTabMenu
     {
         protected QMSingleButton backButton;
         protected string btnQMLoc;
@@ -13,12 +16,10 @@
         protected string menuName;
         protected UIPage page;
 
-
-        internal QMGridTab(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
+        internal QMTabMenu(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
         {
             InitButton(index, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, icon);
         }
-
 
         internal void InitButton(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
         {
@@ -28,7 +29,9 @@
             var NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
+            Object.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = btnToolTip;

@@ -4,6 +4,7 @@
     using Selector;
     using Tools.Extensions;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class ForcesSubmenu : Tweaker_Events
     {

@@ -7,6 +7,7 @@
     using Tools.ObjectEditor.Editor.Scale;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     internal class ScaleSubmenu : Tweaker_Events
     {

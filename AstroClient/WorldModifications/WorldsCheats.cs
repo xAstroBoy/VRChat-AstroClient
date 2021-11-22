@@ -9,6 +9,7 @@
     using Modifications.Jar.Murder2;
     using Modifications.Jar.Murder4;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
 
     #endregion Imports
 

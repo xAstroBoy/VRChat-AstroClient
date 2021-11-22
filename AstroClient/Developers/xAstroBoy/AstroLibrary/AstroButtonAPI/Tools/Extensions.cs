@@ -1,7 +1,8 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
     using System;
     using System.Collections.Generic;
+    using QuickMenu;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -12,9 +13,9 @@
     using VRC.DataModel.Core;
     using VRC.UI.Core.Styles;
     using VRC.UI.Elements;
-    using VRC.UI.Elements.Buttons;
     using VRC.UI.Elements.Menus;
     using VRC.UI.Elements.Tooltips;
+    using Wings;
     using xAstroBoy.Extensions;
     using Object = Il2CppSystem.Object;
 
@@ -187,7 +188,14 @@
             parent.GetComponentInChildren<Image>().enabled = true;
             parent.GetComponentInChildren<TextMeshProUGUI>(true).enabled = true;
             parent.GetComponent<UiTooltip>().enabled = true;
-            UnityEngine.Object.Destroy(parent.GetComponent<MuteUserButton>());
+
+            foreach (var component in parent.GetComponents<Component>())
+            {
+                if (component is Button or LayoutElement or CanvasGroup or Image or TextMeshProUGUI or Transform) return;
+                UnityEngine.Object.Destroy(component);
+
+            }
+
         }
 
         public static TextMeshProUGUI NewText(this GameObject Parent, string search)
@@ -249,15 +257,18 @@
             _MenuStateController.Method_Public_Void_String_UIContext_Boolean_0(Page);
         }
 
-        internal static void ShowLeftWingPage(this QMWings pagename)
+        internal static void ShowWingsPage(this QMWings pagename)
         {
-            QuickMenuTools.Wing_Left.ShowQuickmenuPage(pagename.GetMenuName());
+            if (pagename.isLeftWing)
+            {
+                QuickMenuTools.Wing_Left.ShowQuickmenuPage(pagename.GetMenuName());
+            }
+            else
+            {
+                QuickMenuTools.Wing_Right.ShowQuickmenuPage(pagename.GetMenuName());
+            }
         }
 
-        internal static void ShowRightWingPage(this QMWings pagename)
-        {
-            QuickMenuTools.Wing_Right.ShowQuickmenuPage(pagename.GetMenuName());
-        }
 
         internal static GameObject CreateMainBackButton(this GameObject NestedPart)
         {

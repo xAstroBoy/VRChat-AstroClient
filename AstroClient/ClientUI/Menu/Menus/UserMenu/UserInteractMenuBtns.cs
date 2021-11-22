@@ -8,6 +8,7 @@
     using Tools.ObjectEditor;
     using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
     using xAstroBoy.UIPaths;
     using xAstroBoy.Utility;
 

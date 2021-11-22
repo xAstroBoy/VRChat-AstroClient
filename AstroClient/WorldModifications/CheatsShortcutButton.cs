@@ -12,6 +12,8 @@
     using UnityEngine.UI;
     using WorldsIds;
     using xAstroBoy.AstroButtonAPI;
+    using xAstroBoy.AstroButtonAPI.QuickMenu;
+    using xAstroBoy.AstroButtonAPI.Wings;
 
     internal class CheatsShortcutButton : AstroEvents
     {
