@@ -166,7 +166,7 @@
             WingMenu = new QMWings(1007, true, "Skybox Options", "Edit Current Skybox");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
-                _ = MelonLoader.MelonCoroutines.Start(SkyboxEditor.FindAndLoadBundle());
+                SkyboxEditor.FindAndLoadSkyboxes();
                 DestroyGeneratedButtons();
                 Regenerate();
             }, "Find New Skyboxes");

@@ -51,6 +51,21 @@
             }
 
         }
+        public static Texture2D LoadPNGFromDir(string filePath)
+        {
+            try
+            {
+                byte[] fileData = File.ReadAllBytes(filePath);
+                Texture2D tex = new Texture2D(2, 2);
+                ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
+                return tex;
+            }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+                return null;
+            }
+        }
 
         public static Texture2D LoadPNG(string filePath)
         {
