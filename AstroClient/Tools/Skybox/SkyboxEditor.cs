@@ -172,6 +172,8 @@
                                         Up = CheetoUtils.LoadPNGFromDir(imagepaths);
                                         if (Up != null)
                                         {
+                                            Up.wrapMode = TextureWrapMode.Clamp;
+                                            Up.Apply();
                                             Up.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                         }
                                         else
@@ -187,6 +189,8 @@
                                         Down = CheetoUtils.LoadPNGFromDir(imagepaths);
                                         if (Down != null)
                                         {
+                                            Down.wrapMode = TextureWrapMode.Clamp;
+                                            Down.Apply();
                                             Down.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                         }
                                         else
@@ -202,6 +206,8 @@
                                         Back = CheetoUtils.LoadPNGFromDir(imagepaths);
                                         if (Back != null)
                                         {
+                                            Back.wrapMode = TextureWrapMode.Clamp;
+                                            Back.Apply();
                                             Back.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                         }
                                         else
@@ -217,6 +223,8 @@
                                         Front = CheetoUtils.LoadPNGFromDir(imagepaths);
                                         if (Front != null)
                                         {
+                                            Front.wrapMode = TextureWrapMode.Clamp;
+                                            Front.Apply();
                                             Front.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                         }
                                         else
@@ -232,6 +240,8 @@
                                         Left = CheetoUtils.LoadPNGFromDir(imagepaths);
                                         if (Left != null)
                                         {
+                                            Left.wrapMode = TextureWrapMode.Clamp;
+                                            Left.Apply();
                                             Left.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                         }
                                         else
@@ -247,6 +257,8 @@
                                         Right = CheetoUtils.LoadPNGFromDir(imagepaths);
                                         if (Right != null)
                                         {
+                                            Right.wrapMode = TextureWrapMode.Clamp;
+                                            Right.Apply();
                                             Right.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                         }
                                         else
@@ -263,8 +275,10 @@
                             GeneratedMaterial = BuildMaterial(Up, Down, Back, Front, Left, Right);
                             if (GeneratedMaterial != null)
                             {
+                                var SkyboxName = Path.GetFileName(dir);
+                                GeneratedMaterial.name = SkyboxName;
                                 GeneratedMaterial.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                var cachedskybox = new AssetBundleSkyboxes(Path.GetFileName(dir), new BundleContent(Up, Down, Back, Front, Left, Right, null, GeneratedMaterial), false);
+                                var cachedskybox = new AssetBundleSkyboxes(SkyboxName, new BundleContent(Up, Down, Back, Front, Left, Right, null, GeneratedMaterial), false);
                                 if (LoadedSkyboxesBundles != null)
                                 {
                                     LoadedSkyboxesBundles.Add(cachedskybox);
