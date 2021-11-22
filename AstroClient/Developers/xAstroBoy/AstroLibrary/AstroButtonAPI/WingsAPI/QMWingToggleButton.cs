@@ -11,9 +11,9 @@
 
     internal class QMWingToggleButton 
     {
-        public QMWingToggleButton(QMWings Parent, string btnText, Action OnAction, Action OffAction, string btnToolTip, Color? TextColor = null, bool Defaultstate = false)
+        internal QMWingToggleButton(QMWings Parent, string btnText, Action OnAction, Action OffAction, string btnToolTip, Color? TextColor = null, bool Defaultstate = false)
         {
-            initButton2(Parent.WingPageTransform.gameObject, btnText, OnAction, OffAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}", Defaultstate);
+            initButton(Parent.VerticalLayoutGroup, btnText, OnAction, OffAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}", Defaultstate);
         }
 
         private bool State { get; set; }
@@ -28,12 +28,11 @@
         //    initButton2(Parent.WingPage.gameObject, btnText, OnAction, OffAction, btnToolTip, TextColor, Defaultstate);
         //}
 
-        protected void initButton2(GameObject Parent, string btnText, Action btnONAction, Action btnOFFAction, string btnToolTip, string TextColor = null, bool Defaultstate = false)
+        protected void initButton(GameObject VerticalLayoutGroup, string btnText, Action btnONAction, Action btnOFFAction, string btnToolTip, string TextColor = null, bool Defaultstate = false)
         {
             btnType = "WingToggleButton";
 
-            var Layout = Parent.FindObject("VerticalLayoutGroup");
-            button = Object.Instantiate(QuickMenuTools.WingPageButtonTemplate, Layout.transform, true);
+            button = Object.Instantiate(QuickMenuTools.WingPageButtonTemplate, VerticalLayoutGroup.transform, true);
             button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
             button.SetActive(true);
             button.GetComponentInChildren<TextMeshProUGUI>().fontSize = 35;

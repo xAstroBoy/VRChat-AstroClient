@@ -35,7 +35,7 @@
         {
             AntiGarbageCollection.Add(this);
         }
-        private Murder4_Roles _CurrentRole = Murder4_Roles.Unassigned;
+        private Murder4_Roles _CurrentRole = Murder4_Roles.None;
         internal Murder4_Roles CurrentRole
         {
             [HideFromIl2Cpp]
@@ -167,12 +167,6 @@
                     case Murder4_Roles.Bystander:
                         return BystanderColor;
 
-                    case Murder4_Roles.Unassigned:
-                        return null;
-
-                    case Murder4_Roles.None:
-                        return null;
-
                     default:
                         return null;
                 }
@@ -213,7 +207,7 @@
 
 
             ResetESPColor();
-            CurrentRole = Murder4_Roles.Unassigned;
+            CurrentRole = Murder4_Roles.None;
             ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
             MelonCoroutines.Start(FindEverything());
         }
@@ -250,10 +244,8 @@
                         GetKillEvent?.ExecuteUdonEvent();
                     break;
 
-                case Murder4_Roles.Null:
-                case Murder4_Roles.Unassigned:
+                default:
                     return;
-                    break;
             }
         }
 
@@ -449,7 +441,7 @@
                 {
                     if (ViewRoles)
                     {
-                        if (role != Murder4_Roles.None && role != Murder4_Roles.Unassigned)
+                        if (role != Murder4_Roles.None)
                         {
                             if (GetCurrentSingleTagText() != role.ToString())
                                 if (RoleToColor != null && RoleToColor.HasValue)

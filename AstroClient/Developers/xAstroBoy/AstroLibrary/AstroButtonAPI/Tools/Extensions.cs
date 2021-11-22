@@ -94,12 +94,19 @@
 
         internal static void LoadSprite(this GameObject Parent, Sprite sprite, string name)
         {
-            if (sprite == null) return;
             foreach (var image in Parent.GetComponentsInChildren<Image>(true))
                 if (image.name == name) // allows background image change
                 {
-                    image.gameObject.SetActive(true);
-                    image.overrideSprite = sprite;
+                    if (sprite != null)
+                    {
+                        image.gameObject.SetActive(true);
+                        image.overrideSprite = sprite;
+                    }
+                    else
+                    {
+                        image.gameObject.SetActive(false);
+                        image.overrideSprite = null;
+                    }
                 }
         }
 

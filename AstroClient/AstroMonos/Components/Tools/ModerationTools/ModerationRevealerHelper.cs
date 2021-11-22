@@ -8,7 +8,7 @@
     {
         internal override void OnPlayerJoined(Player player)
         {
-            if (player != null && !player.GetAPIUser().IsSelf)
+            if (player != null)
             {
                 player.gameObject.GetOrAddComponent<ModerationRevealer>();
             }

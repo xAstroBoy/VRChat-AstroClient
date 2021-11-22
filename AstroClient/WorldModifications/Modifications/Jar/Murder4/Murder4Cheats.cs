@@ -857,10 +857,6 @@
         private static object CancellationToken;
         private static IEnumerator SwapRole(Murder4_Roles Selectedrole)
         {
-            while (JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole == Murder4_Roles.Null)
-                yield return null;
-            while (JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole == Murder4_Roles.Unassigned)
-                yield return new WaitForEndOfFrame();
             while (JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole == Murder4_Roles.None)
                 yield return new WaitForEndOfFrame();
             while (FindNodeWithRole(Selectedrole) == null)

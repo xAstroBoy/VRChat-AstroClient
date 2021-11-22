@@ -98,8 +98,8 @@
                                             var playerbtn = new QMSingleButton(CurrentScrollMenu, NodeTranslated, null, "Swap Role with " + NodeTranslated);
                                             playerbtn.SetAction(() =>
                                             {
-                                                Murder4_Roles SelfRole = Murder4_Roles.Null;
-                                                Murder4_Roles TargetRole = Murder4_Roles.Null;
+                                                Murder4_Roles SelfRole = Murder4_Roles.None;
+                                                Murder4_Roles TargetRole = Murder4_Roles.None;
                                                 var LocalPlayer = JarRoleController.CurrentPlayer_Murder4ESP;
                                                 if (LocalPlayer != null)
                                                 {

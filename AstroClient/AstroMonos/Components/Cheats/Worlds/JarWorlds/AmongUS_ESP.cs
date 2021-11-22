@@ -28,7 +28,7 @@
     [RegisterComponent]
     public class AmongUS_ESP : AstroMonoBehaviour
     {
-        private AmongUs_Roles _CurrentRole = AmongUs_Roles.Unassigned;
+        private AmongUs_Roles _CurrentRole = AmongUs_Roles.None;
 
         private PlayerESP _ESP;
         private LinkedNodes _LinkedNode;
@@ -219,9 +219,6 @@
                     case AmongUs_Roles.Impostor:
                         return ImpostorColor;
 
-                    case AmongUs_Roles.Unassigned:
-                        return null;
-
                     case AmongUs_Roles.None:
                         return null;
 
@@ -270,7 +267,7 @@
                 }
             }
 
-            CurrentRole = AmongUs_Roles.Unassigned;
+            CurrentRole = AmongUs_Roles.None;
             ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Among US Role ESP.");
             MelonCoroutines.Start(FindEverything());
         }
@@ -306,9 +303,7 @@
 
                     break;
 
-                case AmongUs_Roles.Null:
-                case AmongUs_Roles.Unassigned:
-                    return;
+                    default:
                     break;
             }
         }
@@ -551,7 +546,7 @@
                 {
                     if (HasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
 
-                    if (role != AmongUs_Roles.None && role != AmongUs_Roles.Unassigned)
+                    if (role != AmongUs_Roles.None)
                     {
                         if (GetCurrentSingleTagText() != role.ToString())
 

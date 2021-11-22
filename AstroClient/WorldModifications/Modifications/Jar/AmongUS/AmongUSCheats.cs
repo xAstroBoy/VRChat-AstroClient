@@ -318,10 +318,6 @@
         private static object CancellationToken;
         private static IEnumerator SwapRole(AmongUs_Roles Selectedrole)
         {
-            while (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole == AmongUs_Roles.Null)
-                yield return null;
-            while (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole == AmongUs_Roles.Unassigned)
-                yield return new WaitForEndOfFrame();
             while (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole == AmongUs_Roles.None)
                 yield return new WaitForEndOfFrame();
             while (FindNodeWithRole(Selectedrole) == null)

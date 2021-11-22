@@ -98,8 +98,8 @@
                                             var playerbtn = new QMSingleButton(CurrentScrollMenu, NodeTranslated, null, "Swap Role with " + NodeTranslated);
                                             playerbtn.SetAction(new Action(() =>
                                             {
-                                                AmongUs_Roles SelfRole = AmongUs_Roles.Null;
-                                                AmongUs_Roles TargetRole = AmongUs_Roles.Null;
+                                                AmongUs_Roles SelfRole = AmongUs_Roles.None;
+                                                AmongUs_Roles TargetRole = AmongUs_Roles.None;
                                                 var LocalPlayer = JarRoleController.CurrentPlayer_AmongUS_ESP;
                                                 if (LocalPlayer != null)
                                                 {

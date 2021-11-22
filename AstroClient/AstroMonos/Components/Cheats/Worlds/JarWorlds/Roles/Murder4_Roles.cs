@@ -6,7 +6,5 @@
         Detective = 1,
         Murderer = 2,
         Bystander = 3,
-        Unassigned = 4,
-        Null = 5
     }
 }

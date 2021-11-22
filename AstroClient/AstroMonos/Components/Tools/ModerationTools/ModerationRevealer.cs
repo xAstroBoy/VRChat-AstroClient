@@ -38,7 +38,7 @@
                 }
             }
 
-            if (AssignedPlayer.GetAPIUser().IsSelf)
+            if (AssignedPlayer.GetVRCPlayerApi().isLocal)
             {
                 Destroy(this);
             }
@@ -58,7 +58,13 @@
         {
             if (MutedTag == null)
             {
-                MutedTag = AssignedPlayer.AddSingleTag(System.Drawing.Color.Orange, MutedText);
+                MutedTag = AssignedPlayer.AddComponent<SingleTag>();
+                if (MutedTag != null)
+                {
+                    MutedTag.SystemColor_SetBackgroundColor(System.Drawing.Color.Orange);
+                    MutedTag.Text = MutedText;
+                }
+
             }
         }
 
@@ -68,7 +74,12 @@
         {
             if (BlockedTag == null)
             {
-                BlockedTag = AssignedPlayer.AddSingleTag(Color.red, BlockedText);
+                BlockedTag = AssignedPlayer.AddComponent<SingleTag>();
+                if (BlockedTag != null)
+                {
+                    MutedTag.SystemColor_SetBackgroundColor(System.Drawing.Color.Red);
+                    BlockedTag.Text = BlockedText;
+                }
             }
         }
 

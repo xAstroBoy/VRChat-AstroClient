@@ -27,15 +27,14 @@
 
         public QMWingSingleButton(QMWings Parent, string btnText, Action btnAction, string btnToolTip, Color? TextColor = null)
         {
-            initButton2(Parent.WingPageTransform.gameObject, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
+            initButton2(Parent.VerticalLayoutGroup.gameObject, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
         }
 
-        protected void initButton2(GameObject Parent, string btnText, Action btnAction, string btnToolTip, string TextColor)
+        protected void initButton2(GameObject VerticalLayoutGroup, string btnText, Action btnAction, string btnToolTip, string TextColor)
         {
             btnType = "WingSingleButton";
 
-            var Layout = Parent.FindObject("VerticalLayoutGroup");
-            button = Object.Instantiate(QuickMenuTools.WingPageButtonTemplate, Layout.transform, true);
+            button = Object.Instantiate(QuickMenuTools.WingPageButtonTemplate, VerticalLayoutGroup.transform, true);
             button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
             button.SetActive(true);
             button.GetComponentInChildren<TextMeshProUGUI>().fontSize = 35;
