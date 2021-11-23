@@ -9,10 +9,12 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Constants;
     using CubemapTools;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
     using Object = UnityEngine.Object;
 
     internal class SkyboxEditor : AstroEvents
@@ -69,16 +71,33 @@
             }
 
             OriginalSkybox = RenderSettings.skybox;
-            var texlist = OriginalSkybox.GetTexturePropertyNames();
-            if (texlist.Contains("_UpTex") && texlist.Contains("_DownTex") && texlist.Contains("_BackTex") && texlist.Contains("_FrontTex") && texlist.Contains("_LeftTex") && texlist.Contains("_RightTex"))
+            ModConsole.DebugLog("[Skybox INFO] : Material name : " + OriginalSkybox.name);
+            ModConsole.DebugLog("[Skybox INFO] : Material Shader : " + OriginalSkybox.shader.name);
+            var textureIDs = OriginalSkybox.GetTexturePropertyNames().ToList();
+            foreach (var TextureName in textureIDs) ModConsole.DebugLog("[Skybox INFO] : Texture name : " + TextureName);
+            if (textureIDs.Contains("_UpTex") && textureIDs.Contains("_DownTex") && textureIDs.Contains("_BackTex") &&
+                textureIDs.Contains("_FrontTex") && textureIDs.Contains("_LeftTex") && textureIDs.Contains("_RightTex"))
             {
+                ModConsole.DebugLog("This Skybox can be Asported!");
+                if (Bools.IsDeveloper)
+                {
+                    PopupUtils.QueHudMessage("This Skybox can Be Asported");
+                }
                 isSupportedSkybox = true;
+            }
+            else
+            {
+                isSupportedSkybox = false;
             }
         }
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             OriginalSkybox = null;
+        }
+
+        internal override void OnRoomLeft()
+        {
             isSupportedSkybox = false;
         }
 
@@ -338,64 +357,54 @@
             ModConsole.Log("Done checking for skyboxes.");
         }
 
-        internal static bool ExportSkybox()
+        internal static bool ExportSixSidedSkybox()
         {
+            if (!isSupportedSkybox) return false;
             if (OriginalSkybox == null) return false;
             if (!Directory.Exists(YoinkedSkyboxesPath)) Directory.CreateDirectory(YoinkedSkyboxesPath);
-            ModConsole.DebugLog("[Skybox INFO] : Material name : " + OriginalSkybox.name);
-            ModConsole.DebugLog("[Skybox INFO] : Material Shader : " + OriginalSkybox.shader.name);
-            foreach (var textureID in OriginalSkybox.GetTexturePropertyNames()) ModConsole.DebugLog("[Skybox INFO] : Texture name : " + textureID);
             string SkyboxType = "Skybox";
 
-            foreach (var textureID in OriginalSkybox.GetTexturePropertyNames())
-            {
-                if (textureID.isMatch("_Tex"))
-                {
-                    SkyboxType = "CubeMap";
-                    return false; // Till we find a way, just disable everything if is not supported.
-                    break;
-                }
-            }
+            //foreach (var textureID in OriginalSkybox.GetTexturePropertyNames())
+            //{
+            //    if (textureID.isMatch("_Tex"))
+            //    {
+            //        SkyboxType = "CubeMap";
+            //        return false; // Till we find a way, just disable everything if is not supported.
+            //        break;
+            //    }
+            //}
+            //if (TextureName.isMatch("_Tex") && MaterialTexture != null)
+            //{
+            //    ModConsole.DebugLog("This is a cubemap Texture!");
+            //    var cubemap = MaterialTexture.TryCast<Texture>().CreateReadableCopy();
+            //    if (cubemap != null)
+            //    {
+            //        ModConsole.DebugLog($"Created Copy of {cubemap.name}");
+            //        SaveTexture(cubemap.ToTexture2D(), savepath, Texture_Name_Cubemap);
+            //    }
+            //    break;
+            //}
 
 
             var savepath = Path.Combine(YoinkedSkyboxesPath, $"{SkyboxType}_" + OriginalSkybox.name);
             if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
-            foreach (var TextureName in OriginalSkybox.GetTexturePropertyNames())
-            {
-                var MaterialTexture = OriginalSkybox.GetTexture(TextureName);
-                //if (TextureName.isMatch("_Tex") && MaterialTexture != null)
-                //{
-                //    ModConsole.DebugLog("This is a cubemap Texture!");
-                //    var cubemap = MaterialTexture.TryCast<Texture>().CreateReadableCopy();
-                //    if (cubemap != null)
-                //    {
-                //        ModConsole.DebugLog($"Created Copy of {cubemap.name}");
-                //        SaveTexture(cubemap.ToTexture2D(), savepath, Texture_Name_Cubemap);
-                //    }
-                //    break;
-                //}
 
-                if (TextureName.isMatch("_UpTex")) SaveTexture(MaterialTexture.ToTexture2D(), savepath, Side_Up);
-                if (TextureName.isMatch("_DownTex")) SaveTexture(MaterialTexture.ToTexture2D(), savepath, Side_Down);
-                if (TextureName.isMatch("_BackTex")) SaveTexture(MaterialTexture.ToTexture2D(), savepath, Side_Back);
-                if (TextureName.isMatch("_FrontTex")) SaveTexture(MaterialTexture.ToTexture2D(), savepath, Side_Front);
-                if (TextureName.isMatch("_LeftTex")) SaveTexture(MaterialTexture.ToTexture2D(), savepath, Side_Left);
-                if (TextureName.isMatch("_RightTex")) SaveTexture(MaterialTexture.ToTexture2D(), savepath, Side_Right);
-                return true;
+            try
+            {
+                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_UpTex"), savepath, Side_Up);
+                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_DownTex"), savepath, Side_Down);
+                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_BackTex"), savepath, Side_Back);
+                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_FrontTex"), savepath, Side_Front);
+                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_LeftTex"), savepath, Side_Left);
+                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_RightTex"), savepath, Side_Right);
+            }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+                return false;
             }
 
             return true;
-        }
-
-        private static void YoinkCubeMaps(Cubemap map)
-        {
-            if (map != null)
-            {
-                ModConsole.DebugLog("Found Cubemap " + map.name);
-                var savepath = Path.Combine(YoinkedSkyboxesPath, "Cubemap_" + map.name);
-                if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
-                CubeMapAndTexture2D.SaveCubemapToFile(map, savepath);
-            }
         }
 
 
@@ -436,13 +445,6 @@
             return null;
         }
 
-        private static void SaveTexture(Texture2D texture, string path, string direction)
-        {
-            var bytes = ImageConversion.EncodeToPNG(texture).ToArray();
-            var filepath = Path.Combine(path, direction + ".png");
-            File.WriteAllBytes(filepath, bytes);
-            ModConsole.DebugLog("Generated Skybox File : " + filepath);
-        }
 
         internal static void SetRenderSettingSkybox(Material mat)
         {

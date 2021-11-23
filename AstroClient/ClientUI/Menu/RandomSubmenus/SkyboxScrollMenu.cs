@@ -33,6 +33,8 @@
             {
                 DestroyGeneratedButtons();
             }
+
+            HasExportedSkybox = false;
         }
 
         internal static void InitButtons(QMGridTab menu)
@@ -195,7 +197,7 @@
              {
                  if (!HasExportedSkybox)
                  {
-                     SkyboxEditor.ExportSkybox();
+                     SkyboxEditor.ExportSixSidedSkybox();
                      SkyboxEditor.FindAndLoadSkyboxes();
                      DestroyGeneratedButtons();
                      Regenerate();
