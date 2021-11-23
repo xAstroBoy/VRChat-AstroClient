@@ -438,7 +438,7 @@
         internal bool KeepTagVisible { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
 
 
-        private bool _ShowTag;
+        private bool _ShowTag = true;
         internal bool ShowTag
         {
             [HideFromIl2Cpp]

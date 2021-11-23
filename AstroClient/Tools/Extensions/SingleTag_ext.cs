@@ -79,13 +79,11 @@
         {
             if (player == null) return null;
             var tag = player.AddComponent<SingleTag>();
-            MiscUtils.DelayFunction(0.5f, () => { 
             if (tag != null)
             {
                 tag.Text = Text;
                 tag.BackGroundColor = BackGround.ToUnityEngineColor();
             }
-            });
             return tag;
         }
 
@@ -93,14 +91,11 @@
         {
             if (player == null) return null;
             var tag = player.AddComponent<SingleTag>();
-            MiscUtils.DelayFunction(0.5f, () =>
+            if (tag != null)
             {
-                if (tag != null)
-                {
-                    tag.Text = Text;
-                    tag.BackGroundColor = BackGround;
-                }
-            });
+                tag.Text = Text;
+                tag.BackGroundColor = BackGround;
+            }
             return tag;
         }
 
