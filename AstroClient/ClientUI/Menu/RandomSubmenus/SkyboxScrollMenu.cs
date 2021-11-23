@@ -199,10 +199,11 @@
                  {
                      SkyboxEditor.ExportSixSidedSkybox();
                      SkyboxEditor.FindAndLoadSkyboxes();
-                     DestroyGeneratedButtons();
-                     Regenerate();
                      ExportSkybox.SetActive(false);
                      HasExportedSkybox = true;
+                     DestroyGeneratedButtons();
+                     Regenerate();
+
                  }
              }, "Attempts to Export Skybox and save it. (WIP).");
 
