@@ -46,6 +46,8 @@
 
         internal static Texture2D ForceReadTexture(this Texture2D tex)
         {
+            RenderTexture currentRT = RenderTexture.active;
+
             try
             {
                 FilterMode origFilter = tex.filterMode;
@@ -62,13 +64,14 @@
                 _newTex.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
                 _newTex.Apply(false, false);
 
-                RenderTexture.active = null;
                 tex.filterMode = origFilter;
 
+                RenderTexture.active = currentRT;
                 return _newTex;
             }
             catch (Exception e)
             {
+                RenderTexture.active = currentRT;
                 ModConsole.Error($"Exception on ForceReadTexture: {e.ToString()}");
                 return default;
             }
