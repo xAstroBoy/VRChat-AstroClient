@@ -7,24 +7,76 @@
     {
 
 
-        internal static Texture2D ToTexture2D(this Texture texture)
+        public static Texture CreateReadableCopy(this Texture tex)
         {
-            Texture2D texture2D = new Texture2D(texture.width, texture.height, TextureFormat.RGBA32, false);
             RenderTexture currentRT = RenderTexture.active;
-            RenderTexture renderTexture = RenderTexture.GetTemporary(texture.width, texture.height, 32);
-            Graphics.Blit(texture, renderTexture);
 
-            RenderTexture.active = renderTexture;
-            texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
-            texture2D.Apply();
+            try
+            {
+                FilterMode origFilter = tex.filterMode;
+                tex.filterMode = FilterMode.Point;
 
-            RenderTexture.active = currentRT;
-            RenderTexture.ReleaseTemporary(renderTexture);
+                var rt = RenderTexture.GetTemporary(tex.width, tex.height, 0, RenderTextureFormat.ARGB32);
+                rt.filterMode = FilterMode.Point;
+                RenderTexture.active = rt;
 
-            return texture2D;
+                Graphics.Blit(tex, rt);
+
+                var _newTex = new Texture2D(tex.width, tex.height, TextureFormat.ARGB32, false);
+
+                _newTex.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
+                _newTex.Apply(false, false);
+
+                tex.filterMode = origFilter;
+
+                RenderTexture.active = currentRT;
+                RenderTexture.ReleaseTemporary(rt);
+
+                return _newTex;
+            }
+            catch (Exception e)
+            {
+                RenderTexture.active = currentRT;
+                ModConsole.ErrorExc(e);
+                return default;
+            }
         }
 
 
+        public static Texture2D ToTexture2D(this Texture tex)
+        {
+            RenderTexture currentRT = RenderTexture.active;
+
+            try
+            {
+                FilterMode origFilter = tex.filterMode;
+                tex.filterMode = FilterMode.Point;
+
+                var rt = RenderTexture.GetTemporary(tex.width, tex.height, 0, RenderTextureFormat.ARGB32);
+                rt.filterMode = FilterMode.Point;
+                RenderTexture.active = rt;
+
+                Graphics.Blit(tex, rt);
+
+                var _newTex = new Texture2D(tex.width, tex.height, TextureFormat.ARGB32, false);
+
+                _newTex.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
+                _newTex.Apply(false, false);
+
+                tex.filterMode = origFilter;
+
+                RenderTexture.active = currentRT;
+                RenderTexture.ReleaseTemporary(rt);
+
+                return _newTex;
+            }
+            catch (Exception e)
+            {
+                RenderTexture.active = currentRT;
+                ModConsole.ErrorExc(e);
+                return default;
+            }
+        }
         //internal static Texture2D ToTexture2D(this Texture Texture)
         //{
         //    RenderTexture currentRT = RenderTexture.active;

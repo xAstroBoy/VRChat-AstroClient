@@ -1,27 +1,40 @@
 ﻿namespace AstroClient
 {
     using System;
+    using System.Reflection;
+    using Cheetos;
+    using HarmonyLib;
+    using UnityEngine;
 
     internal class BullshitTest : AstroEvents
-	{
-		internal override void OnApplicationStart()
+    {
+        [Obfuscation(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyMethod(typeof(BullshitTest).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+        internal override void OnApplicationStart()
 		{
 
-            System.Drawing.Color structValue = new System.Drawing.Color();
-            ModConsole.DebugLog("Attempting to Dump System Colors!");
-            ModConsole.DebugLog("Fields..");
-            foreach (var item in typeof(System.Drawing.Color).GetProperties())
-            {
-                if (item.ToString().StartsWith("System.Drawing.Color "))
-                {
-                    var cleaned = "System.Drawing.Color." + item.ToString().Replace("System.Drawing.Color ",string.Empty);
-                    ModConsole.DebugLog("new QMSingleButton(CurrentScrollMenu, "+ cleaned + ".Name, () => { SetESPColor( " + cleaned + "); },  " + cleaned + ".Name,  " + cleaned + ");");
-                }
-            }
+            new AstroPatch(AccessTools.Property(typeof(Cubemap), nameof(Cubemap.isReadable)).GetMethod, null, null, null, null, GetPatch(nameof(MakeReadableCubeMap)));
 
-            Console.ReadKey();
+            new AstroPatch(AccessTools.Property(typeof(Texture), nameof(Texture.isReadable)).GetMethod, null, null, null, null, GetPatch(nameof(MakeReadableTexture)));
 
 
+        }
+
+
+        private static void MakeReadableCubeMap(Cubemap __instance, ref bool __result)
+        {
+            ModConsole.DebugLog($"Hijacking {__instance.name} Readability.");
+            __result = true;
+        }
+
+        private static void MakeReadableTexture(Texture __instance, ref bool __result)
+        {
+            ModConsole.DebugLog($"Hijacking {__instance.name} Readability.");
+            __result = true;
         }
 
     }

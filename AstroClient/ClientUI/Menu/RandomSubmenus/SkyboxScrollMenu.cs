@@ -5,7 +5,6 @@
     using System.Linq;
     using Tools.Skybox;
     using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.AstroButtonAPI.WingsAPI;
@@ -15,8 +14,11 @@
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
-        //private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
 
+        //private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
+        private static QMWingSingleButton ExportSkybox;
+
+        private static bool HasExportedSkybox { get; set; } = false;
 
         private static bool HasThrownException { get; set; } = false;
         private static bool CleanOnRoomLeave { get; } = false;
@@ -25,7 +27,6 @@
         private static bool HasGenerated { get; set; } = false;
         private static bool isOpen { get; set; }
 
-
         internal override void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
@@ -33,7 +34,6 @@
                 DestroyGeneratedButtons();
             }
         }
-
 
         internal static void InitButtons(QMGridTab menu)
         {
@@ -62,26 +62,21 @@
                             if (skybox != null)
                             {
                                 var btn = new QMSingleButton(CurrentScrollMenu, skybox.SkyboxName, () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.SkyboxName} as map Skybox.");
-                               if(skybox.isCubeMap)
-                               {
-                                   btn.SetButtonImage(skybox.content.CubeMap);
-                               }
-                                else
-                               {
-                                   if (skybox.content.Back != null)
-                                   {
-                                       btn.SetButtonImage(skybox.content.Back);
-                                   }
-                                   else if (skybox.content.Left != null)
-                                   {
-                                       btn.SetButtonImage(skybox.content.Left);
-                                   }
-                                   else if (skybox.content.Front != null)
-                                   {
-                                       btn.SetButtonImage(skybox.content.Front);
-                                   }
-                               }
-
+                                if (!skybox.isCubeMap)
+                                {
+                                    if (skybox.content.Front != null)
+                                    {
+                                        btn.SetButtonImage(skybox.content.Front);
+                                    }
+                                    else if (skybox.content.Left != null)
+                                    {
+                                        btn.SetButtonImage(skybox.content.Left);
+                                    }
+                                    else if (skybox.content.Back != null)
+                                    {
+                                        btn.SetButtonImage(skybox.content.Back);
+                                    }
+                                }
                                 GeneratedButtons.Add(btn);
                             }
                         }
@@ -98,7 +93,6 @@
                     HasThrownException = true;
                 }
 
-
                 HasGenerated = true;
             }
         }
@@ -114,7 +108,6 @@
             //{
             //    foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
             //}
-
         }
 
         internal override void OnQuickMenuClose()
@@ -134,7 +127,6 @@
                 WingMenu.ClickBackButton();
             }
             isOpen = false;
-
         }
 
         private static void OnOpenMenu()
@@ -144,6 +136,31 @@
             {
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
+
+                if (SkyboxEditor.isSupportedSkybox)
+                {
+                    if (!HasExportedSkybox)
+                    {
+                        if (ExportSkybox != null)
+                        {
+                            ExportSkybox.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        if (ExportSkybox != null)
+                        {
+                            ExportSkybox.SetActive(false);
+                        }
+                    }
+                }
+                else
+                {
+                    if (ExportSkybox != null)
+                    {
+                        ExportSkybox.SetActive(false);
+                    }
+                }
             }
             Regenerate();
         }
@@ -174,11 +191,18 @@
             {
                 SkyboxEditor.SetRenderSettingSkybox(SkyboxEditor.OriginalSkybox);
             }, "Restore Original Skybox.");
-            new QMWingSingleButton(WingMenu, "Yoink Skybox", () =>
-            {
-                SkyboxEditor.YoinkSkybox();
-            }, "Attempts to Steal Skybox and save it (WIP).");
-
+            ExportSkybox = new QMWingSingleButton(WingMenu, "Export Skybox", () =>
+             {
+                 if (!HasExportedSkybox)
+                 {
+                     SkyboxEditor.ExportSkybox();
+                     SkyboxEditor.FindAndLoadSkyboxes();
+                     DestroyGeneratedButtons();
+                     Regenerate();
+                     ExportSkybox.SetActive(false);
+                     HasExportedSkybox = true;
+                 }
+             }, "Attempts to Export Skybox and save it. (WIP).");
 
             WingMenu.SetActive(false);
         }

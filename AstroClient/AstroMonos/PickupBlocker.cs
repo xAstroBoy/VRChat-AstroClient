@@ -16,6 +16,12 @@
 
         internal static void RegisterPlayer(Player player)
         {
+            var vrcplayer = player.GetVRCPlayerApi();
+            if (vrcplayer != null)
+            {
+                vrcplayer.EnablePickups(false);
+            }
+
             var id = player.GetAPIUser().GetUserID();
             if (!blockeduserids.Contains(id))
             {
@@ -26,6 +32,11 @@
 
         internal static void RemovePlayer(Player player)
         {
+            var vrcplayer = player.GetVRCPlayerApi();
+            if (vrcplayer != null)
+            {
+                vrcplayer.EnablePickups(true);
+            }
             var id = player.GetAPIUser().GetUserID();
             if (blockeduserids.Contains(id))
             {

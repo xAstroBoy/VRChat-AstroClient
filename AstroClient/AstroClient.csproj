@@ -373,6 +373,7 @@
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
+    <Compile Include="Tools\Skybox\CubemapTools\CubeMapAndTexture2D.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_ForceEjectPlayer.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_ForceVotePlayer.cs" />

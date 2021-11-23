@@ -175,6 +175,8 @@
                     {
                         ModConsole.DebugLog($"Prevented {gameObject.name} from being used from Blacklisted user {CurrentHolderDisplayName}");
                         OnlineEditor.TakeObjectOwnership(gameObject);
+                        gameObject.transform.position = gameObject.transform.position;
+                        gameObject.transform.rotation = gameObject.transform.rotation;
                     }
                 }
             }
@@ -183,6 +185,9 @@
                 if (!CurrentHolder.isLocal)
                     if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
                         OnlineEditor.TakeObjectOwnership(gameObject);
+                        gameObject.transform.position = gameObject.transform.position;
+                        gameObject.transform.rotation = gameObject.transform.rotation;
+
             }
         }
 
