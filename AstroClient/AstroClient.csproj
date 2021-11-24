@@ -105,10 +105,12 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Tools\FreezeLocation\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\OrbitUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\PickupProtector.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\WatcherUserMenu.cs" />
@@ -301,6 +303,7 @@
     <Compile Include="Startup\Fixes\DashboardFix.cs" />
     <Compile Include="Tools\Exploits\ExploitUtils.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />
+    <Compile Include="Tools\Extensions\Components_exts\BouncerExtensions.cs" />
     <Compile Include="Tools\Extensions\Engine_ext.cs" />
     <Compile Include="Developers\Cheetos\CheetosUI\CMBase.cs" />
     <Compile Include="Developers\Cheetos\CheetosUI\WorldButton.cs" />
@@ -347,7 +350,7 @@
     <Compile Include="Tools\Exploits\TeleportExploit.cs" />
     <Compile Include="Tools\Extensions\Click_ext.cs" />
     <Compile Include="Tools\Extensions\Components_exts\RocketExtensions.cs" />
-    <Compile Include="Tools\Extensions\Components_exts\BouncerExtensions.cs" />
+    <Compile Include="Tools\Extensions\Components_exts\ObjectFreezerExtensions.cs" />
     <Compile Include="Tools\Extensions\ComponentParser_ext.cs" />
     <Compile Include="Tools\Extensions\CustomList_ext.cs" />
     <Compile Include="Tools\Extensions\Custom_Components_ext.cs" />

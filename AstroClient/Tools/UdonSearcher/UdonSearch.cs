@@ -52,34 +52,103 @@
 
             return null;
         }
-        
 
 
-        internal static List<GameObject> FindAllUdonEvents(List<string> actions,  List<string> TermsToAvoid , bool Debug = false)
+
+        internal static List<GameObject> FindAllUdonEvents(List<string> GameObjectNames, List<string> TermsToWhitelist, List<string> TermsToAvoid, bool Debug = false)
         {
-            var gameobjects = UdonParser.WorldBehaviours;
+            List<GameObject> SearchResult = new List<GameObject>();
+            List<UdonBehaviour> AllBehavioursToAnalyze = new List<UdonBehaviour>();
 
-            List<GameObject> foundEvents = new List<GameObject>();
-            foreach (var names in actions)
+            foreach (var name in GameObjectNames)
             {
-                var behaviours = gameobjects.Where(x => x.gameObject.name.isMatch(names));
-                if (behaviours.Any())
+                var NameSearched = UdonParser.WorldBehaviours.Where(x => x.gameObject.name.isMatch(name)).ToList();
+                if (NameSearched.IsNotNull() && NameSearched.IsNotEmpty())
                 {
-                    foreach (var behaviour in behaviours)
+                    foreach (var item in NameSearched)
                     {
-                        if (behaviour._eventTable.count != 0)
+                        if (!AllBehavioursToAnalyze.Contains(item))
                         {
-                            if (Debug)
-                            {
-                                ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
-                            }
+                            AllBehavioursToAnalyze.Add(item);
+                        }
+                    }
 
-                            if (foundEvents.Contains(behaviour.gameObject))
-                            {
-                                continue;
-                            }
+                }
+            }
+            if (TermsToWhitelist.IsNotEmpty())
+            {
+                // Required to dig out The Behaviour Whitelisted terms.
+                foreach (var name in TermsToWhitelist)
+                {
+                    var WhitelistedTermresult = new List<UdonBehaviour>();
+                    foreach (var item in UdonParser.WorldBehaviours)
+                    {
+                        if (item._eventTable.count != 0)
+                        {
 
-                            bool HasAvoidTermKey = false;
+                            if (item != null)
+                            {
+                                foreach (var subkey in item._eventTable)
+                                {
+                                    if (subkey.key.isMatch(name))
+                                    {
+                                        WhitelistedTermresult.Add(item);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (WhitelistedTermresult.IsNotNull() && WhitelistedTermresult.IsNotEmpty())
+                    {
+                        foreach (var item in WhitelistedTermresult)
+                        {
+                            if (!AllBehavioursToAnalyze.Contains(item))
+                            {
+                                AllBehavioursToAnalyze.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (AllBehavioursToAnalyze.IsNotEmpty())
+            {
+                foreach (var behaviour in AllBehavioursToAnalyze)
+                {
+                    if (behaviour._eventTable.count != 0)
+                    {
+                        if (Debug)
+                        {
+                            ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                        }
+
+                        if (SearchResult.Contains(behaviour.gameObject))
+                        {
+                            continue;
+                        }
+
+                        bool HasAvoidTermKey = false;
+                        bool HasWhiteListedKey = false;
+
+                        if (TermsToWhitelist != null)
+                        {
+                            if (TermsToWhitelist.Count() != 0)
+                            {
+                                foreach (var actionkeys in behaviour._eventTable)
+                                {
+                                    if (TermsToWhitelist.Contains(actionkeys.key))
+                                    {
+                                        HasWhiteListedKey = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (!HasWhiteListedKey)
+                        {
                             if (TermsToAvoid != null)
                             {
                                 if (TermsToAvoid.Count() != 0)
@@ -94,25 +163,29 @@
                                     }
                                 }
                             }
-
-
-                            if (!HasAvoidTermKey)
-                            {
-                                foundEvents.Add(behaviour.gameObject);
-                            }
-                            else
-                            {
-                                continue;
-                            }
                         }
 
+
+
+                        if (HasWhiteListedKey)
+                        {
+                            SearchResult.Add(behaviour.gameObject);
+                        }
+                        else if (!HasAvoidTermKey)
+                        {
+                            SearchResult.Add(behaviour.gameObject);
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
 
-                    return foundEvents;
                 }
+
             }
 
-            return null;
+            return SearchResult;
         }
 
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
