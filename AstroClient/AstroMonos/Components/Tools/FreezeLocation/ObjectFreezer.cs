@@ -114,15 +114,33 @@
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
             if (VRC_AstroPickup != null)
             {
-                VRC_AstroPickup.OnPickup += () => { isPaused = true; };
-                VRC_AstroPickup.OnPickupUseDown += () => { IsEnabled = !IsEnabled; };
-                VRC_AstroPickup.OnDrop += () => { isPaused = false; };
+                VRC_AstroPickup.OnPickup += OnPickup;
+                VRC_AstroPickup.OnPickupUseDown += OnPickupUseDown;
+                VRC_AstroPickup.OnDrop += onDrop;
             }
 
 
             IsEnabled = false;
         }
 
+        private void OnPickup()
+        {
+            isPaused = true;
+        }
+        private void OnPickupUseDown()
+        {
+            IsEnabled = !IsEnabled;
+        }
+
+        private void onDrop()
+        {
+            isPaused = false;
+            if (IsEnabled)
+            {
+                FreezePos = gameObject.transform.position;
+                FreezeRot = gameObject.transform.rotation;
+            }
+        }
         private void Update()
         {
             if (!IsEnabled || isPaused)
