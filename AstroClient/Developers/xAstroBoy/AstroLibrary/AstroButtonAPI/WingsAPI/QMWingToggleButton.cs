@@ -13,7 +13,7 @@
     {
         internal QMWingToggleButton(QMWings Parent, string btnText, Action OnAction, Action OffAction, string btnToolTip, Color? TextColor = null, bool Defaultstate = false)
         {
-            initButton(Parent.VerticalLayoutGroup, btnText, OnAction, OffAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}", Defaultstate);
+            initButton(Parent.VerticalLayoutGroup, btnText, OnAction, OffAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}", Defaultstate);
         }
 
         private bool State { get; set; }

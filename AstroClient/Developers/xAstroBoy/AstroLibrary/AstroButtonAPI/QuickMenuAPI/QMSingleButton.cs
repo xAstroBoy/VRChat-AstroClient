@@ -3,6 +3,7 @@
     using System;
     using AstroClient.Tools.Colors;
     using ClientResources.Helpers;
+    using Extensions;
     using TMPro;
     using Tools;
     using UnhollowerRuntimeLib;
@@ -101,13 +102,13 @@
         {
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(0, 0, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
+            initButton(0, 0, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
         }
         internal QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", System.Drawing.Color? TextColor = null)
         {
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(0, 0, btnText, btnAction, btnToolTip, ColorUtils.ColorToHex(TextColor.GetValueOrDefault(System.Drawing.Color.Aqua)));
+            initButton(0, 0, btnText, btnAction, btnToolTip, ColorUtils.ColorToHex(TextColor.GetValueOrDefault(System.Drawing.Color.White)));
         }
 
 
@@ -115,7 +116,7 @@
         {
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
 
             if (btnHalf)
             {
@@ -131,14 +132,14 @@
         {
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
         }
 
         internal QMSingleButton(QMGridTab Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
             var Recto = button.GetComponent<RectTransform>();
             Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
@@ -154,7 +155,7 @@
 
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
-            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.cyan))}");
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
             var Recto = button.GetComponent<RectTransform>();
             Recto.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
@@ -260,7 +261,8 @@
 
             if (TextColor != null)
                 setTextColorHTML(TextColor);
-
+            else
+            SetTextColor(Color.white);
             SetActive(true);
             //QMButtonAPI.allSingleButtons.Add(this);
         }
@@ -307,9 +309,12 @@
 
         internal void setTextColorHTML(string buttonTextColor)
         {
-            CurrentBtnColor = buttonTextColor;
-            var NewText = $"<color={buttonTextColor}>{BtnText}</color>";
-            ButtonText.text = NewText;
+            if (buttonTextColor.IsNotNullOrEmptyOrWhiteSpace())
+            {
+                CurrentBtnColor = buttonTextColor;
+                var NewText = $"<color={buttonTextColor}>{BtnText}</color>";
+                ButtonText.text = NewText;
+            }
         }
     }
 }

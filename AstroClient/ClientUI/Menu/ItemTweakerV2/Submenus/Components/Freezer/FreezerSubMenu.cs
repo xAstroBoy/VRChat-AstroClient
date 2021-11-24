@@ -10,9 +10,9 @@
     {
         internal static void Init_FreezerMenu(QMNestedGridMenu menu)
         {
-            var mainmenu = new QMNestedButton(menu, "Freeze", "Freeze Pickups in a Location!");
-            _ = new QMSingleButton(mainmenu, 1, 0f, "Add Object Freezer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_ObjectFreezer(); }), "Make it Stay into a Location!", null, null, true);
-            _ = new QMSingleButton(mainmenu, 1, 0.5f, "Remove Object Freezer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_ObjectFreezer(); }), "Kill the Object Freeze!!", null, null, true);
+            var mainmenu = new QMNestedGridMenu(menu, "Freeze", "Freeze Pickups in a Location!");
+            _ = new QMSingleButton(mainmenu, "Add Object Freezer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_ObjectFreezer(); }), "Make it Stay into a Location!");
+            _ = new QMSingleButton(mainmenu, "Remove Object Freezer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_ObjectFreezer(); }), "Kill the Object Freeze!!");
         }
     }
 }

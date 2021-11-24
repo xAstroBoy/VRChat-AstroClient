@@ -18,12 +18,11 @@
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
-        private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
 
 
 
         private static bool CleanOnRoomLeave { get; } = true;
-        private static bool DestroyOnMenuClose { get; } = false;
+        private static bool DestroyOnMenuClose { get; } = true;
 
         private static bool HasGenerated { get; set; } = false;
         private static bool isOpen { get; set; }
@@ -38,9 +37,9 @@
         }
 
 
-        internal static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMNestedGridMenu menu)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Spawn Prefabs", "Spawn World Prefabs", null, null, null, null, btnHalf);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, "Spawn Prefabs", "Spawn World Prefabs");
             CurrentScrollMenu.SetBackButtonAction(menu, () =>
             {
                 OnCloseMenu();

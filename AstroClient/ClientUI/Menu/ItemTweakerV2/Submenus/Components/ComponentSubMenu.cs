@@ -1,5 +1,8 @@
 ﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components
 {
+    using System.Drawing;
+    using AstroClient.xAstroBoy.Utility;
+    using AstroMonos.Components.Tools.KeycodeRevealer;
     using Bouncer;
     using Crazy;
     using Fun;
@@ -21,8 +24,9 @@
             BouncerSubMenu.Init_BouncerMenu(main);
             FunBehavioursSubMenu.Init_FunMenu(main);
             FreezerSubMenu.Init_FreezerMenu(main);
+            new QMSingleButton(main, "Reveal Current Object Keycode ", () => { Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<KeypadRevealer>(); }, "(works only with keycodes Objects.)");
 
-            _ = new QMSingleButton(main, "Remove All Components", () => { KillCustomComponents(); }, "Kill All Custom Add-ons.");
+            _ = new QMSingleButton(main, "Remove All Components", () => { KillCustomComponents(); }, "Kill All Custom Add-ons.", Color.Red);
         }
 
         internal static void KillCustomComponents()

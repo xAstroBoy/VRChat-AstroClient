@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
+    using AstroClient.Tools.Extensions;
     using PageGenerators;
     using Tools;
     using UnityEngine;
@@ -102,9 +103,9 @@
             NestedPart.CleanButtonsNestedMenu();
             string TextColorHTML = null;
             if (btnTextColor.HasValue)
-                TextColorHTML = $"#{ColorUtility.ToHtmlStringRGB(btnTextColor.GetValueOrDefault(Color.cyan))}";
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
             else
-                TextColorHTML = "#blue";
+                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(System.Drawing.Color.White.ToUnityEngineColor());
             if (Parent != null)
             {
                 mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf);

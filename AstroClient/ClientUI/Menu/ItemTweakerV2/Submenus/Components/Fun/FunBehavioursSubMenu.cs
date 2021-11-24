@@ -14,9 +14,8 @@
         {
             var submenu = new QMNestedGridMenu(menu, "Fun Stuff", "Weird Behaviours that are fun and random.!");
 
-            new QMSingleButton(submenu, 1, 0f, "Make Stretchy Cheese", () => { Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<StretchyCheeseBehaviour>(); }, "Make sure is a Fork with Behaviour Extend", null, null, true);
-            new QMSingleButton(submenu, 1, 0.5f, "Remove Stretchy Cheese", () => { DestroyStretchyCheese(); }, "Make sure is a Fork with Behaviour Extend", null, null, true);
-            new QMSingleButton(submenu, 1, 1f, "Reveal Current Object Keycode ", () => { Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<KeypadRevealer>(); }, "(works only with keycodes Objects.)", null, null, true);
+            new QMSingleButton(submenu, "Make Stretchy Cheese", () => { Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<StretchyCheeseBehaviour>(); }, "Make sure is a Fork with Behaviour Extend");
+            new QMSingleButton(submenu, "Remove Stretchy Cheese", () => { DestroyStretchyCheese(); }, "Make sure is a Fork with Behaviour Extend");
         }
 
         internal static void DestroyStretchyCheese()

@@ -14,15 +14,15 @@
     {
         internal static void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var main = new QMNestedButton(menu, x, y, "Spawner", "Spawner Menu!", null, null, null, null, btnHalf);
-            _ = new QMSingleButton(main, 1, 0, "Spawn Clone", () => { ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }, "Instantiates a copy of The selected object.", null, null, true);
-            _ = new QMSingleButton(main, 1, 0.5f, "Kill Clones", () => { ObjectCloner.ClonedObjectsDeleter(); }, "Removes All Cloned Objects.", null, null, true);
+            var main = new QMNestedGridMenu(menu, x, y, "Spawner", "Spawner Menu!", null, null, null, null, btnHalf);
+            _ = new QMSingleButton(main, "Spawn Clone", () => { ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }, "Instantiates a copy of The selected object.");
+            _ = new QMSingleButton(main, "Kill Clones", () => { ObjectCloner.ClonedObjectsDeleter(); }, "Removes All Cloned Objects.");
 
-            PrefabSpawnerScrollMenu.InitButtons(main, 1, 1f, true);
+            PrefabSpawnerScrollMenu.InitButtons(main);
             _ = new QMSingleButton(main, 1, 1.5f, "Kill Spawned Prefabs", () => { SpawnerSubmenu.KillSpawnedPrefabs(); }, "Removes All Prefabs Objects.", null, null, true);
 
-            SpawnedPickupsCounter = new QMSingleButton(main, 4, 0, GetClonesPickupText, null, GetClonesPickupText, null, Color.cyan, true);
-            SpawnedPrefabsCounter = new QMSingleButton(main, 4, 0.5f, GetSpawnedPrefabText, null, GetSpawnedPrefabText, null, Color.cyan, true);
+            SpawnedPickupsCounter = new QMSingleButton(main, GetClonesPickupText, null, GetClonesPickupText);
+            SpawnedPrefabsCounter = new QMSingleButton(main, GetSpawnedPrefabText, null, GetSpawnedPrefabText);
         }
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
