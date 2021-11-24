@@ -50,7 +50,6 @@
             set
             {
 
-                _IsEnabled = value;
                 if (VRC_AstroPickup != null)
                 {
                     if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
@@ -59,8 +58,8 @@
                 }
                 FreezePos = gameObject.transform.position;
                 FreezeRot = gameObject.transform.rotation;
-
                 if (value.Equals(_IsEnabled)) return;
+                _IsEnabled = value;
                 if (value)
                 {
                     if (RigidBodyController != null)
