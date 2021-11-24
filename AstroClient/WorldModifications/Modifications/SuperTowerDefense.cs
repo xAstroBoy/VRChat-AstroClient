@@ -390,11 +390,16 @@
                     {
                         LockAppleOnButton(Apple1);
                         LockAppleOnButton(Apple2);
+                        LockAppleOnButton(Apple3);
+                        LockAppleOnButton(Apple4);
                     }
                     else
                     {
                         Apple1.gameObject.Remove_ObjectFreezer();
                         Apple2.gameObject.Remove_ObjectFreezer();
+                        Apple3.gameObject.Remove_ObjectFreezer();
+                        Apple4.gameObject.Remove_ObjectFreezer();
+
                     }
                 }
             }

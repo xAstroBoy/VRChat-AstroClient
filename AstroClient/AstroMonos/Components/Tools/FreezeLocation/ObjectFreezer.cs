@@ -135,16 +135,9 @@
             {
                 return;
             }
-            gameObject.TryTakeOwnership();
-
-            if (gameObject.transform.position != FreezePos)
-            {
+                gameObject.TakeOwnership();
                 gameObject.transform.position = FreezePos;
-            }
-            if (gameObject.transform.rotation != FreezeRot)
-            {
                 gameObject.transform.rotation = FreezeRot;
-            }
 
         }
 
