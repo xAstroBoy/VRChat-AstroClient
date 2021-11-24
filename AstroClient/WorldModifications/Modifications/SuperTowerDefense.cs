@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
+    using AstroMonos.Components.Custom.Random;
     using CheetoLibrary;
     using MelonLoader;
     using Tools.Extensions;
@@ -103,6 +104,22 @@
                     }
                 }
 
+                var toolshop = GameObjectFinder.FindRootSceneObject("ToolShop");
+                if (toolshop != null)
+                {
+                    ReturnHammerButtonTool = toolshop.transform.Find("ReturnSellTool").gameObject;
+                }
+
+                var ApplesRoot = GameObjectFinder.FindRootSceneObject("Apples");
+                if (ApplesRoot != null)
+                {
+                    Apple1 = ApplesRoot.transform.Find("Apple_01").gameObject;
+                    Apple2 = ApplesRoot.transform.Find("Apple_01 (1)").gameObject;
+                    Apple3 = ApplesRoot.transform.Find("Apple_01 (2)").gameObject;
+                    Apple4 = ApplesRoot.transform.Find("Apple_01 (3)").gameObject;
+
+                }
+
                 FixTheTowers();
 
             }
@@ -132,6 +149,11 @@
             FreezeHammer = false;
             LoseLifeHammer = false;
             RepairLifeWrenches = false;
+            BlockHammerReturnButton = false;
+            Apple1 = null;
+            Apple2 = null;
+            Apple3 = null;
+            Apple4 = null;
         }
 
 
@@ -176,12 +198,14 @@
             var ToolMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Tool Mods", "Enable Extra Tools");
             RepairLifeWrenchToolsButton = new QMToggleButton(ToolMods, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
             LoseLifeHammerToolBtn = new QMToggleButton(ToolMods, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; },  () => { LoseLifeHammer = false; }, "Hammer = Lose health (useful to troll)!");
-            FreezeHammerToolBtn = new QMToggleButton(ToolMods, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Hammer = Lose health (useful to troll)!");
 
-            new QMToggleButton(ToolMods, "Freeze Hammer", () => { LoseLifeHammer = true; }, () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
             AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage,  "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
             AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
+
             new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers();}, "Fix Towers Being unpickable bug ", Color.green);
+            FreezeHammerToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Add a Protection Shield to the hammer!");
+            BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
+
         }
 
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
@@ -331,7 +355,11 @@
                 {
                     if (value)
                     {
-                        HammerPickup.gameObject.Add_ObjectFreezer();
+                       var item = HammerPickup.gameObject.GetOrAddComponent<ObjectFreezer>();
+                       if (item != null)
+                       {
+                           item.IsEnabled = true;
+                       }
                     }
                     else
                     {
@@ -340,6 +368,60 @@
                 }
             }
         }
+        private static bool _BlockHammerReturn;
+
+        private static bool BlockHammerReturnButton
+        {
+            get
+            {
+                return _BlockHammerReturn;
+            }
+            set
+            {
+                if (BlockHammerReturnToolBtn != null)
+                {
+                    BlockHammerReturnToolBtn.SetToggleState(value);
+                }
+                _BlockHammerReturn = value;
+
+                if (ReturnHammerButtonTool != null)
+                {
+                    if (value)
+                    {
+                        LockAppleOnButton(Apple1);
+                        LockAppleOnButton(Apple2);
+                    }
+                    else
+                    {
+                        Apple1.gameObject.Remove_ObjectFreezer();
+                        Apple2.gameObject.Remove_ObjectFreezer();
+                    }
+                }
+            }
+        }
+
+
+        private static void LockAppleOnButton(GameObject Apple)
+        {
+            if (Apple != null)
+            {
+                if (ReturnHammerButtonTool != null)
+                {
+                    Apple.TakeOwnership();
+                    Apple.transform.position = ReturnHammerButtonTool.transform.position;
+                    Apple.transform.rotation = ReturnHammerButtonTool.transform.rotation;
+                    var item = Apple.gameObject.GetOrAddComponent<ObjectFreezer>();
+                    if (item != null)
+                    {
+                        item.Capture();
+                        item.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
+                        item.IsEnabled = true;
+                    }
+                }
+            }
+        }
+
+
 
         private static bool _AutomaticWaveStart = false;
 
@@ -417,6 +499,12 @@
             }
         }
 
+
+        private static GameObject Apple1;
+        private static GameObject Apple2;
+        private static GameObject Apple3;
+        private static GameObject Apple4;
+
         internal static QMNestedGridMenu SuperTowerDefensecheatPage { get; set; }
 
         internal static SuperTowerDefense_WaveEditor WaveEditor { get; set; }
@@ -426,6 +514,7 @@
         private static QMToggleButton RepairLifeWrenchToolsButton { get; set; }
         private static QMToggleButton LoseLifeHammerToolBtn { get; set; }
         private static QMToggleButton FreezeHammerToolBtn { get; set; }
+        private static QMToggleButton BlockHammerReturnToolBtn { get; set; }
 
         private static QMToggleButton AutomaticWaveBtn { get; set; }
 
@@ -436,6 +525,8 @@
         private static VRC_AstroPickup RedWrenchPickup { get; set; }
         private static VRC_AstroPickup BlueWrenchPickup { get; set; }
         private static VRC_AstroPickup HammerPickup { get; set; }
+
+        private static GameObject ReturnHammerButtonTool { get; set; }
 
         private static UdonBehaviour_Cached ResetHealth { get; set; }
 

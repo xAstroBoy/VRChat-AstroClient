@@ -45,29 +45,25 @@
 
         private bool isKinematic = true;
 
-        private bool IsEnabled
+        internal bool IsEnabled
         {
             [HideFromIl2Cpp] get => _IsEnabled;
             [HideFromIl2Cpp]
             set
             {
+                Capture();
                 _IsEnabled = value;
-
                 if (VRC_AstroPickup != null)
                 {
                     if (value) VRC_AstroPickup.UseText = "Toggle Off Freeze";
                     else VRC_AstroPickup.UseText = "Toggle On Freeze";
                 }
-                FreezePos = gameObject.transform.position;
-                FreezeRot = gameObject.transform.rotation;
                 if (value)
                 {
                     RigidBodyController.RigidBody_Set_isKinematic(true);
                 }
                 else
                 {
-
-                    
                     if (RigidBodyController != null)
                     {
                         var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
@@ -99,9 +95,28 @@
             }
         }
 
+        /// <summary>
+        /// Flag it To Semi-permanently freeze A Gameobject to that position (Disable future captures)
+        /// </summary>
+        internal bool LockPosition { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+
+        /// <summary>
+        /// Calling this will Refresh Position/rotation capture of the current gameobject
+        /// </summary>
+        internal void Capture()
+        {
+            if (!LockPosition)
+            {
+                FreezePos = gameObject.transform.position;
+                FreezeRot = gameObject.transform.rotation;
+            }
+        }
+
         private void OnPickup()
         {
             isPaused = true;
+            Capture();
         }
         private void OnPickupUseDown()
         {
@@ -110,8 +125,7 @@
 
         private void onDrop()
         {
-            FreezePos = gameObject.transform.position;
-            FreezeRot = gameObject.transform.rotation;
+            Capture();
             isPaused = false;
         }
 
@@ -121,15 +135,14 @@
             {
                 return;
             }
+            gameObject.TryTakeOwnership();
 
             if (gameObject.transform.position != FreezePos)
             {
-                gameObject.TryTakeOwnership();
                 gameObject.transform.position = FreezePos;
             }
             if (gameObject.transform.rotation != FreezeRot)
             {
-                gameObject.TryTakeOwnership();
                 gameObject.transform.rotation = FreezeRot;
             }
 

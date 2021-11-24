@@ -16,12 +16,14 @@
             }
         }
 
-        internal static void Add_ObjectFreezer(this GameObject obj)
+        internal static ObjectFreezer Add_ObjectFreezer(this GameObject obj)
         {
             if (obj != null)
             {
-                obj.GetOrAddComponent<ObjectFreezer>();
+               return obj.GetOrAddComponent<ObjectFreezer>();
             }
+
+            return null;
         }
 
         internal static void Remove_ObjectFreezer(this GameObject obj)
