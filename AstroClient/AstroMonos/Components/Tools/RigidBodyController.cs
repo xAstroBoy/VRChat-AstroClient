@@ -7,6 +7,8 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
+
+    // TODO : Fix this Crap Again ( Backupping mechanism doesn't work!)
     [RegisterComponent]
     public class RigidBodyController : AstroMonoBehaviour
     {

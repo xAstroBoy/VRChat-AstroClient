@@ -71,19 +71,22 @@
             }
 
             OriginalSkybox = RenderSettings.skybox;
-            ModConsole.DebugLog("[Skybox INFO] : Material name : " + OriginalSkybox.name);
-            ModConsole.DebugLog("[Skybox INFO] : Material Shader : " + OriginalSkybox.shader.name);
-            var textureIDs = OriginalSkybox.GetTexturePropertyNames().ToList();
-            foreach (var TextureName in textureIDs) ModConsole.DebugLog("[Skybox INFO] : Texture name : " + TextureName);
-            if (textureIDs.Contains("_UpTex") && textureIDs.Contains("_DownTex") && textureIDs.Contains("_BackTex") &&
-                textureIDs.Contains("_FrontTex") && textureIDs.Contains("_LeftTex") && textureIDs.Contains("_RightTex"))
+            if (OriginalSkybox != null)
             {
-                ModConsole.DebugLog("This Skybox can be Asported!");
-                if (Bools.IsDeveloper)
+                ModConsole.DebugLog("[Skybox INFO] : Material name : " + OriginalSkybox.name);
+                ModConsole.DebugLog("[Skybox INFO] : Material Shader : " + OriginalSkybox.shader.name);
+                var textureIDs = OriginalSkybox.GetTexturePropertyNames().ToList();
+                foreach (var TextureName in textureIDs) ModConsole.DebugLog("[Skybox INFO] : Texture name : " + TextureName);
+                if (textureIDs.Contains("_UpTex") && textureIDs.Contains("_DownTex") && textureIDs.Contains("_BackTex") &&
+                    textureIDs.Contains("_FrontTex") && textureIDs.Contains("_LeftTex") && textureIDs.Contains("_RightTex"))
                 {
-                    PopupUtils.QueHudMessage("This Skybox can Be Asported");
+                    ModConsole.DebugLog("This Skybox can be Yoinked!");
+                    if (Bools.IsDeveloper)
+                    {
+                        PopupUtils.QueHudMessage("This Skybox can Be Yoinked!");
+                    }
+                    isSupportedSkybox = true;
                 }
-                isSupportedSkybox = true;
             }
             else
             {
@@ -127,7 +130,7 @@
                             Texture2D Right = null;
                             foreach (var imagepaths in images)
                             {
-                                ModConsole.DebugLog("Found File in " + imagepaths);
+                                //ModConsole.DebugLog("Found File in " + imagepaths);
                                 if (Up == null && imagepaths.EndsWith(Side_Up + ".png"))
                                 {
                                     Up = CheetoUtils.LoadPNGFromDir(imagepaths);
@@ -136,10 +139,6 @@
                                         Up.wrapMode = TextureWrapMode.Clamp;
                                         Up.Apply();
                                         Up.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                    else
-                                    {
-                                        ModConsole.DebugLog("Up is Missing");
                                     }
                                 }
 
@@ -152,10 +151,6 @@
                                         Down.Apply();
                                         Down.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                     }
-                                    else
-                                    {
-                                        ModConsole.DebugLog("Down is Missing");
-                                    }
                                 }
 
                                 if (Back == null && imagepaths.EndsWith(Side_Back + ".png"))
@@ -166,10 +161,6 @@
                                         Back.wrapMode = TextureWrapMode.Clamp;
                                         Back.Apply();
                                         Back.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                    else
-                                    {
-                                        ModConsole.DebugLog("Back is Missing");
                                     }
                                 }
 
@@ -182,10 +173,6 @@
                                         Front.Apply();
                                         Front.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                     }
-                                    else
-                                    {
-                                        ModConsole.DebugLog("Front is Missing");
-                                    }
                                 }
 
                                 if (Left == null && imagepaths.EndsWith(Side_Left + ".png"))
@@ -196,10 +183,6 @@
                                         Left.wrapMode = TextureWrapMode.Clamp;
                                         Left.Apply();
                                         Left.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                    else
-                                    {
-                                        ModConsole.DebugLog("Left is Missing");
                                     }
                                 }
 
@@ -212,10 +195,6 @@
                                         Right.Apply();
                                         Right.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                     }
-                                    else
-                                    {
-                                        ModConsole.DebugLog("Right is Missing or failed conversion");
-                                    }
                                 }
                             }
 
@@ -226,6 +205,10 @@
                                 GeneratedMaterial.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                                 var cachedskybox = new AssetBundleSkyboxes(SkyboxName, new BundleContent(Up, Down, Back, Front, Left, Right, null, null, GeneratedMaterial), false);
                                 if (LoadedSkyboxesBundles != null) LoadedSkyboxesBundles.Add(cachedskybox);
+                            }
+                            else
+                            {
+                                ModConsole.Error($"Unable to Generate Material For {Path.GetFileName(dir)}");
                             }
 
                             yield return new WaitForSeconds(0.001f);

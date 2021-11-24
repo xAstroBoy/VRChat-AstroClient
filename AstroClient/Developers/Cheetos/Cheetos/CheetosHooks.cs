@@ -78,9 +78,11 @@
                 new AstroPatch(typeof(PlayerNameplate).GetMethod(nameof(PlayerNameplate.Method_Private_Void_1)), GetPatch(nameof(NameplatePatch)));
                 new AstroPatch(typeof(APIUser).GetMethod(nameof(APIUser.LocalAddFriend)), GetPatch(nameof(OnFriended)));
                 new AstroPatch(typeof(APIUser).GetMethod(nameof(APIUser.UnfriendUser)), GetPatch(nameof(OnUnfriended)));
-                new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSeeAllUsersStatus)).GetMethod, null, GetPatch(nameof(APIUserBypass)));
-                new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasScriptingAccess)).GetMethod, null, GetPatch(nameof(APIUserBypass)));
-                new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasVIPAccess)).GetMethod, null, GetPatch(nameof(APIUserBypass)));
+                new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSeeAllUsersStatus)).GetMethod, null, GetPatch(nameof(APIUserBypassTrue)));
+                new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasScriptingAccess)).GetMethod, null, GetPatch(nameof(APIUserBypassTrue)));
+                new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasVIPAccess)).GetMethod, null, GetPatch(nameof(APIUserBypassTrue)));
+                new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasNoPowers)).GetMethod, null, GetPatch(nameof(APIUserBypassFalse)));
+                new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.developerType)).GetMethod, null, GetPatch(nameof(APIUserDeveloper)));
                 new AstroPatch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new AstroPatch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new AstroPatch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
@@ -133,8 +135,23 @@
 
             return true;
         }
+        private static void APIUserBypassFalse(APIUser __instance, ref bool __result)
+        {
+            if (__instance.IsSelf)
+            {
+                __result = false;
+            }
+        }
+        private static void APIUserDeveloper(APIUser __instance, ref APIUser.DeveloperType __result)
+        {
+            if (__instance.IsSelf)
+            {
+                __result = APIUser.DeveloperType.Internal;
+            }
+        }
 
-        private static void APIUserBypass(APIUser __instance, ref bool __result)
+
+        private static void APIUserBypassTrue(APIUser __instance, ref bool __result)
         {
             if (__instance.IsSelf)
             {
