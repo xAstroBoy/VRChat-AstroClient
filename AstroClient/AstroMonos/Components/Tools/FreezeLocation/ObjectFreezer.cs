@@ -66,7 +66,16 @@
                 }
                 else
                 {
-                    RigidBodyController.RigidBody_Set_isKinematic(RigidBodyController.Original_isKinematic);
+                    if (RigidBodyController != null)
+                    {
+                        var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
+                        if (!will_it_fall_throught)
+                        {
+                            RigidBodyController.RigidBody_Set_isKinematic(false);
+                            RigidBodyController.Override_isKinematic(false);
+                        }
+                        RigidBodyController.Override_UseGravity(true);
+                    }
                 }
             }
         }

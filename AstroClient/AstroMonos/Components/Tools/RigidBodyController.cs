@@ -87,7 +87,7 @@
 
         internal void BackupBasicBody()
         { 
-            _EditMode = false; // To be sure to backup the original properties without writing them .
+            _EditMode = true; // To be sure to backup the original properties without writing them .
             isBackupping = true;
             ModConsole.DebugLog($"Backupping from RigidBody properties for object  {gameObject.name}");
             solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
@@ -689,31 +689,31 @@
 
         #region Backupped Properties
 
-        internal int Original_solverVelocityIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal Vector3 Original_inertiaTensor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal Quaternion Original_inertiaTensorRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal Vector3 Original_centerOfMass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal CollisionDetectionMode Original_collisionDetectionMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal RigidbodyConstraints Original_constraints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal bool Original_freezeRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float Original_maxDepenetrationVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal bool Original_detectCollisions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal bool Original_useGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }  = true;
-        internal float Original_mass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal int Original_solverIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float Original_angularDrag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float Original_drag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal Vector3 Original_angularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal Vector3 Original_velocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal bool Original_isKinematic { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        internal float Original_sleepVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float Original_sleepThreshold { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float Original_maxAngularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal int Original_solverVelocityIterations { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal RigidbodyInterpolation Original_interpolation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float Original_sleepAngularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal bool Original_useConeFriction { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal int Original_solverIterations { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private int Original_solverVelocityIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 Original_inertiaTensor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Quaternion Original_inertiaTensorRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 Original_centerOfMass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private CollisionDetectionMode Original_collisionDetectionMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RigidbodyConstraints Original_constraints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool Original_freezeRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float Original_maxDepenetrationVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool Original_detectCollisions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool Original_useGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }  = true;
+        private float Original_mass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private int Original_solverIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float Original_angularDrag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float Original_drag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 Original_angularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 Original_velocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool Original_isKinematic { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private float Original_sleepVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float Original_sleepThreshold { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float Original_maxAngularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private int Original_solverVelocityIterations { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RigidbodyInterpolation Original_interpolation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float Original_sleepAngularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool Original_useConeFriction { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private int Original_solverIterations { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         #endregion Backupped Properties
 
@@ -751,29 +751,18 @@
 
         #endregion Actions To Bind
 
-        #region Random Methods
+        #region Override Methods
 
-        internal bool UpdateKinematic(bool isKinematic)
-        {
-            this.isKinematic = isKinematic;
-            return this.isKinematic == isKinematic;
-        }
 
-        internal void OverrideInternalKinematic(bool isKinematic)
+        internal void Override_isKinematic(bool isKinematic)
         {
             Original_isKinematic = isKinematic;
+            this.isKinematic = isKinematic;
         }
-
-        internal bool UpdateAngularDrag(float angularDrag)
+        internal void Override_UseGravity(bool useGravity)
         {
-            this.angularDrag = angularDrag;
-            return this.angularDrag == angularDrag;
-        }
-
-        internal bool UpdateDrag(float drag)
-        {
-            this.drag = drag;
-            return this.drag == drag;
+            Original_useGravity = useGravity;
+            this.useGravity = useGravity;
         }
 
         #endregion Random Methods
