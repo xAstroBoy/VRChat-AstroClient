@@ -7,6 +7,7 @@
     using UnityEngine.UI;
     using Object = UnityEngine.Object;
 
+    [Obsolete("Use GridNestedMenu and new QMSingleToggles instead, this class will be removed In future!")]
     internal class QMSingleToggleButton : QMButtonBase
     {
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
