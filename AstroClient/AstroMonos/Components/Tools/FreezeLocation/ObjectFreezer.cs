@@ -2,6 +2,7 @@
 {
     using System;
     using AstroClient.Tools.Extensions;
+    using AstroClient.Tools.Extensions.Components_exts;
     using AstroClient.Tools.ObjectEditor.Online;
     using AstroUdons;
     using ClientAttributes;
@@ -61,12 +62,7 @@
                 {
                     if (RigidBodyController != null)
                     {
-                        if (!RigidBodyController.EditMode)
-                        {
-                            RigidBodyController.BackupBasicBody();
-                            RigidBodyController.EditMode = true;
-                            RigidBodyController.isKinematic = true;
-                        }
+                        RigidBodyController.RigidBody_Set_isKinematic(true);
                     }
                 }
                 else
