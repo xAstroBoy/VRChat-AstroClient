@@ -87,10 +87,6 @@
             {
                 foreach (var item in GeneratedButtons) item.DestroyMe();
             }
-            if (Listeners.Count != 0)
-            {
-                foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
-            }
 
         }
 
