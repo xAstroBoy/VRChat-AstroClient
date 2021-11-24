@@ -30,37 +30,6 @@
             Destroy(this);
         }
 
-        private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-
-        private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
-        private bool CheckisOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
-
-        private float FreezeTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private float _FreezeTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.07f;
-
-        internal float FreezeTimer
-        {
-            [HideFromIl2Cpp]
-            get => _FreezeTimer;
-            [HideFromIl2Cpp]
-            set
-            {
-                _FreezeTimer = value;
-            }
-        }
-
-
-
-        private bool isCurrentOwner
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (CheckisOwner) return gameObject.TryTakeOwnership();
-                return true;
-            }
-        }
-
 
 
         private RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -78,6 +47,7 @@
             [HideFromIl2Cpp]
             set
             {
+
                 _IsEnabled = value;
                 if (VRC_AstroPickup != null)
                 {
@@ -85,22 +55,25 @@
                     if (value) VRC_AstroPickup.UseText = "Toggle Off Freeze";
                     else VRC_AstroPickup.UseText = "Toggle On Freeze";
                 }
-
+                FreezePos = gameObject.transform.position;
+                FreezeRot = gameObject.transform.rotation;
                 if (value)
                 {
                     if (RigidBodyController != null)
                     {
-                        RigidBodyController.EditMode = true;
-                        RigidBodyController.isKinematic = true;
+                        if (!RigidBodyController.EditMode)
+                        {
+                            RigidBodyController.BackupBasicBody();
+                            RigidBodyController.EditMode = true;
+                            RigidBodyController.isKinematic = true;
+                        }
                     }
-
-                    FreezePos = gameObject.transform.position;
-                    FreezeRot = gameObject.transform.rotation;
                 }
                 else
                 {
                     RigidBodyController.RestoreOriginalBody();
                 }
+
             }
         }
 
@@ -134,43 +107,28 @@
 
         private void onDrop()
         {
+            FreezePos = gameObject.transform.position;
+            FreezeRot = gameObject.transform.rotation;
             isPaused = false;
-            if (IsEnabled)
-            {
-                FreezePos = gameObject.transform.position;
-                FreezeRot = gameObject.transform.rotation;
-            }
         }
-        private void Update()
+
+        private void FixedUpdate()
         {
             if (!IsEnabled || isPaused)
             {
                 return;
             }
 
-            if (!CheckisOwner)
-                if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
-                {
-                    CheckisOwner = true;
-                    CheckisOwnerTimeCheck = Time.time;
-                }
-
-            if (Time.time - FreezeTimeCheck > FreezeTimer)
+            gameObject.TryTakeOwnership();
+            if (gameObject.transform.position != FreezePos)
             {
-                if (isCurrentOwner)
-                {
-                    if (gameObject.transform.position != FreezePos)
-                    {
-                        gameObject.transform.position = FreezePos;
-                    }
-                    if (gameObject.transform.rotation != FreezeRot)
-                    {
-                        gameObject.transform.rotation = FreezeRot;
-                    }
-                }
-
-                FreezeTimeCheck = Time.time;
+                gameObject.transform.position = FreezePos;
             }
+            if (gameObject.transform.rotation != FreezeRot)
+            {
+                gameObject.transform.rotation = FreezeRot;
+            }
+
         }
 
         private void OnDestroy()

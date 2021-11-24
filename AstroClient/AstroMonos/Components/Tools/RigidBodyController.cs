@@ -109,7 +109,7 @@
                     }
         }
 
-        private void BackupBasicBody()
+        internal void BackupBasicBody()
         {
             if (Rigidbody != null)
             {
