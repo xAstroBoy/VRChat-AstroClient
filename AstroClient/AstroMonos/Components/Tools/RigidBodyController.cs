@@ -33,7 +33,7 @@
             }
 
             ModConsole.DebugLog("Attacked Successfully RigidBodyController to object " + gameObject.name);
-            EditMode = false;
+            BackupBasicBody();
             InvokeRepeating(nameof(BodyUpdate), 0.1f, 0.3f);
         }
 
@@ -46,6 +46,8 @@
         {
             if (gameObject != null)
                 if (gameObject.active && isActiveAndEnabled)
+                    if (isBackupping)
+                        return;
                     if (!EditMode)
                     {
                         // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
@@ -79,130 +81,100 @@
                             sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
                             useConeFriction = Rigidbody.useConeFriction;
                             solverIterations = Rigidbody.solverIterations;
-
-                            Original_solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
-                            Original_inertiaTensor = Rigidbody.inertiaTensor;
-                            Original_inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
-                            Original_centerOfMass = Rigidbody.centerOfMass;
-                            Original_collisionDetectionMode = Rigidbody.collisionDetectionMode;
-                            Original_constraints = Rigidbody.constraints;
-                            Original_freezeRotation = Rigidbody.freezeRotation;
-                            Original_maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
-                            Original_detectCollisions = Rigidbody.detectCollisions;
-                            Original_useGravity = Rigidbody.useGravity;
-                            Original_mass = Rigidbody.mass;
-                            Original_solverIterationCount = Rigidbody.solverIterationCount;
-                            Original_angularDrag = Rigidbody.angularDrag;
-                            Original_drag = Rigidbody.drag;
-                            Original_angularVelocity = Rigidbody.angularVelocity;
-                            Original_velocity = Rigidbody.velocity;
-                            Original_isKinematic = Rigidbody.isKinematic;
-                            Original_sleepVelocity = Rigidbody.sleepVelocity;
-                            Original_sleepThreshold = Rigidbody.sleepThreshold;
-                            Original_maxAngularVelocity = Rigidbody.maxAngularVelocity;
-                            Original_solverVelocityIterations = Rigidbody.solverVelocityIterations;
-                            Original_interpolation = Rigidbody.interpolation;
-                            Original_sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
-                            Original_useConeFriction = Rigidbody.useConeFriction;
-                            Original_solverIterations = Rigidbody.solverIterations;
                         }
                     }
         }
 
         internal void BackupBasicBody()
-        {
-            if (Rigidbody != null)
-            {
-                if (_EditMode) _EditMode = false; // To be sure to backup the original properties without writing them .
-                ModConsole.DebugLog($"Backupping from RigidBody properties for object  {gameObject.name}");
-                solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
-                inertiaTensor = Rigidbody.inertiaTensor;
-                inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
-                centerOfMass = Rigidbody.centerOfMass;
-                collisionDetectionMode = Rigidbody.collisionDetectionMode;
-                constraints = Rigidbody.constraints;
-                freezeRotation = Rigidbody.freezeRotation;
-                maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
-                detectCollisions = Rigidbody.detectCollisions;
-                useGravity = Rigidbody.useGravity;
-                mass = Rigidbody.mass;
-                solverIterationCount = Rigidbody.solverIterationCount;
-                angularDrag = Rigidbody.angularDrag;
-                drag = Rigidbody.drag;
-                angularVelocity = Rigidbody.angularVelocity;
-                velocity = Rigidbody.velocity;
-                isKinematic = Rigidbody.isKinematic;
-                sleepVelocity = Rigidbody.sleepVelocity;
-                sleepThreshold = Rigidbody.sleepThreshold;
-                maxAngularVelocity = Rigidbody.maxAngularVelocity;
-                solverVelocityIterations = Rigidbody.solverVelocityIterations;
-                interpolation = Rigidbody.interpolation;
-                sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
-                useConeFriction = Rigidbody.useConeFriction;
-                solverIterations = Rigidbody.solverIterations;
+        { 
+            _EditMode = false; // To be sure to backup the original properties without writing them .
+            isBackupping = true;
+            ModConsole.DebugLog($"Backupping from RigidBody properties for object  {gameObject.name}");
+            solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
+            inertiaTensor = Rigidbody.inertiaTensor;
+            inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
+            centerOfMass = Rigidbody.centerOfMass;
+            collisionDetectionMode = Rigidbody.collisionDetectionMode;
+            constraints = Rigidbody.constraints;
+            freezeRotation = Rigidbody.freezeRotation;
+            maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
+            detectCollisions = Rigidbody.detectCollisions;
+            useGravity = Rigidbody.useGravity;
+            mass = Rigidbody.mass;
+            solverIterationCount = Rigidbody.solverIterationCount;
+            angularDrag = Rigidbody.angularDrag;
+            drag = Rigidbody.drag;
+            angularVelocity = Rigidbody.angularVelocity;
+            velocity = Rigidbody.velocity;
+            isKinematic = Rigidbody.isKinematic;
+            sleepVelocity = Rigidbody.sleepVelocity;
+            sleepThreshold = Rigidbody.sleepThreshold;
+            maxAngularVelocity = Rigidbody.maxAngularVelocity;
+            solverVelocityIterations = Rigidbody.solverVelocityIterations;
+            interpolation = Rigidbody.interpolation;
+            sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
+            useConeFriction = Rigidbody.useConeFriction;
+            solverIterations = Rigidbody.solverIterations;
 
-                Original_solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
-                Original_inertiaTensor = Rigidbody.inertiaTensor;
-                Original_inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
-                Original_centerOfMass = Rigidbody.centerOfMass;
-                Original_collisionDetectionMode = Rigidbody.collisionDetectionMode;
-                Original_constraints = Rigidbody.constraints;
-                Original_freezeRotation = Rigidbody.freezeRotation;
-                Original_maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
-                Original_detectCollisions = Rigidbody.detectCollisions;
-                Original_useGravity = Rigidbody.useGravity;
-                Original_mass = Rigidbody.mass;
-                Original_solverIterationCount = Rigidbody.solverIterationCount;
-                Original_angularDrag = Rigidbody.angularDrag;
-                Original_drag = Rigidbody.drag;
-                Original_angularVelocity = Rigidbody.angularVelocity;
-                Original_velocity = Rigidbody.velocity;
-                Original_isKinematic = Rigidbody.isKinematic;
-                Original_sleepVelocity = Rigidbody.sleepVelocity;
-                Original_sleepThreshold = Rigidbody.sleepThreshold;
-                Original_maxAngularVelocity = Rigidbody.maxAngularVelocity;
-                Original_solverVelocityIterations = Rigidbody.solverVelocityIterations;
-                Original_interpolation = Rigidbody.interpolation;
-                Original_sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
-                Original_useConeFriction = Rigidbody.useConeFriction;
-                Original_solverIterations = Rigidbody.solverIterations;
-            }
-
+            Original_solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
+            Original_inertiaTensor = Rigidbody.inertiaTensor;
+            Original_inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
+            Original_centerOfMass = Rigidbody.centerOfMass;
+            Original_collisionDetectionMode = Rigidbody.collisionDetectionMode;
+            Original_constraints = Rigidbody.constraints;
+            Original_freezeRotation = Rigidbody.freezeRotation;
+            Original_maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
+            Original_detectCollisions = Rigidbody.detectCollisions;
+            Original_useGravity = Rigidbody.useGravity;
+            Original_mass = Rigidbody.mass;
+            Original_solverIterationCount = Rigidbody.solverIterationCount;
+            Original_angularDrag = Rigidbody.angularDrag;
+            Original_drag = Rigidbody.drag;
+            Original_angularVelocity = Rigidbody.angularVelocity;
+            Original_velocity = Rigidbody.velocity;
+            Original_isKinematic = Rigidbody.isKinematic;
+            Original_sleepVelocity = Rigidbody.sleepVelocity;
+            Original_sleepThreshold = Rigidbody.sleepThreshold;
+            Original_maxAngularVelocity = Rigidbody.maxAngularVelocity;
+            Original_solverVelocityIterations = Rigidbody.solverVelocityIterations;
+            Original_interpolation = Rigidbody.interpolation;
+            Original_sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
+            Original_useConeFriction = Rigidbody.useConeFriction;
+            Original_solverIterations = Rigidbody.solverIterations;
+            isBackupping = false;
             _EditMode = false;
         }
 
         internal void RestoreOriginalBody() // Restore only if Editmode is already active, and Activate sync mode Once Restored.
         {
-            if (!_EditMode) _EditMode = true;
-            if (_EditMode)
-            {
-                solverVelocityIterationCount = Original_solverVelocityIterationCount;
-                inertiaTensor = Original_inertiaTensor;
-                inertiaTensorRotation = Original_inertiaTensorRotation;
-                centerOfMass = Original_centerOfMass;
-                collisionDetectionMode = Original_collisionDetectionMode;
-                constraints = Original_constraints;
-                freezeRotation = Original_freezeRotation;
-                maxDepenetrationVelocity = Original_maxDepenetrationVelocity;
-                detectCollisions = Original_detectCollisions;
-                useGravity = Original_useGravity;
-                mass = Original_mass;
-                solverIterationCount = Original_solverIterationCount;
-                angularDrag = Original_angularDrag;
-                drag = Original_drag;
-                angularVelocity = Original_angularVelocity;
-                velocity = Original_velocity;
-                isKinematic = Original_isKinematic;
-                sleepVelocity = Original_sleepVelocity;
-                sleepThreshold = Original_sleepThreshold;
-                maxAngularVelocity = Original_maxAngularVelocity;
-                solverVelocityIterations = Original_solverVelocityIterations;
-                interpolation = Original_interpolation;
-                sleepAngularVelocity = Original_sleepAngularVelocity;
-                useConeFriction = Original_useConeFriction;
-                solverIterations = Original_solverIterations;
-                _EditMode = false;
-            }
+            _EditMode = true;
+            solverVelocityIterationCount = Original_solverVelocityIterationCount;
+            inertiaTensor = Original_inertiaTensor;
+            inertiaTensorRotation = Original_inertiaTensorRotation;
+            centerOfMass = Original_centerOfMass;
+            collisionDetectionMode = Original_collisionDetectionMode;
+            constraints = Original_constraints;
+            freezeRotation = Original_freezeRotation;
+            maxDepenetrationVelocity = Original_maxDepenetrationVelocity;
+            detectCollisions = Original_detectCollisions;
+            useGravity = Original_useGravity;
+            mass = Original_mass;
+            solverIterationCount = Original_solverIterationCount;
+            angularDrag = Original_angularDrag;
+            drag = Original_drag;
+            angularVelocity = Original_angularVelocity;
+            velocity = Original_velocity;
+            isKinematic = Original_isKinematic;
+            sleepVelocity = Original_sleepVelocity;
+            sleepThreshold = Original_sleepThreshold;
+            maxAngularVelocity = Original_maxAngularVelocity;
+            solverVelocityIterations = Original_solverVelocityIterations;
+            interpolation = Original_interpolation;
+            sleepAngularVelocity = Original_sleepAngularVelocity;
+            useConeFriction = Original_useConeFriction;
+            solverIterations = Original_solverIterations;
+
+           _EditMode = false;
         }
 
         #region Forced Rigidbody Method
@@ -224,31 +196,31 @@
 
         #region Internal Reflection (Private Values, Do Not Edit.)
 
-        private int _solverVelocityIterationCount;
-        private Vector3 _inertiaTensor;
-        private Quaternion _inertiaTensorRotation;
-        private Vector3 _centerOfMass;
-        private CollisionDetectionMode _collisionDetectionMode;
-        private RigidbodyConstraints _constraints;
-        private bool _freezeRotation;
-        private float _maxDepenetrationVelocity;
-        private bool _detectCollisions;
-        private bool _useGravity;
-        private float _mass;
-        private int _solverIterationCount;
-        private float _angularDrag;
-        private float _drag;
-        private Vector3 _angularVelocity;
-        private Vector3 _velocity;
-        private bool _isKinematic;
-        private float _sleepVelocity;
-        private float _sleepThreshold;
-        private float _maxAngularVelocity;
-        private int _solverVelocityIterations;
-        private RigidbodyInterpolation _interpolation;
-        private float _sleepAngularVelocity;
-        private bool _useConeFriction;
-        private int _solverIterations;
+        private int _solverVelocityIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 _inertiaTensor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Quaternion _inertiaTensorRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 _centerOfMass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private CollisionDetectionMode _collisionDetectionMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RigidbodyConstraints _constraints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool _freezeRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float _maxDepenetrationVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool _detectCollisions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool _useGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }  = true;
+        private float _mass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private int _solverIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float _angularDrag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float _drag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 _angularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 _velocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool _isKinematic { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float _sleepVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float _sleepThreshold { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float _maxAngularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private int _solverVelocityIterations { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RigidbodyInterpolation _interpolation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float _sleepAngularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool _useConeFriction { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private int _solverIterations { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         #endregion Internal Reflection (Private Values, Do Not Edit.)
 
@@ -717,31 +689,31 @@
 
         #region Backupped Properties
 
-        private int Original_solverVelocityIterationCount;
-        private Vector3 Original_inertiaTensor;
-        private Quaternion Original_inertiaTensorRotation;
-        private Vector3 Original_centerOfMass;
-        private CollisionDetectionMode Original_collisionDetectionMode;
-        private RigidbodyConstraints Original_constraints;
-        private bool Original_freezeRotation;
-        private float Original_maxDepenetrationVelocity;
-        private bool Original_detectCollisions;
-        private bool Original_useGravity;
-        private float Original_mass;
-        private int Original_solverIterationCount;
-        private float Original_angularDrag;
-        private float Original_drag;
-        private Vector3 Original_angularVelocity;
-        private Vector3 Original_velocity;
-        private bool Original_isKinematic;
-        private float Original_sleepVelocity;
-        private float Original_sleepThreshold;
-        private float Original_maxAngularVelocity;
-        private int Original_solverVelocityIterations;
-        private RigidbodyInterpolation Original_interpolation;
-        private float Original_sleepAngularVelocity;
-        private bool Original_useConeFriction;
-        private int Original_solverIterations;
+        internal int Original_solverVelocityIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Vector3 Original_inertiaTensor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Quaternion Original_inertiaTensorRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Vector3 Original_centerOfMass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal CollisionDetectionMode Original_collisionDetectionMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal RigidbodyConstraints Original_constraints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool Original_freezeRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float Original_maxDepenetrationVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool Original_detectCollisions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool Original_useGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }  = true;
+        internal float Original_mass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal int Original_solverIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float Original_angularDrag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float Original_drag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Vector3 Original_angularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Vector3 Original_velocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool Original_isKinematic { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        internal float Original_sleepVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float Original_sleepThreshold { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float Original_maxAngularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal int Original_solverVelocityIterations { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal RigidbodyInterpolation Original_interpolation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float Original_sleepAngularVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool Original_useConeFriction { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal int Original_solverIterations { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         #endregion Backupped Properties
 
@@ -811,6 +783,7 @@
         internal Rigidbody Rigidbody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal SyncPhysics SyncPhysics { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         private bool _EditMode;
+        private bool isBackupping;
 
         private bool IsActived = false;
 
@@ -822,10 +795,11 @@
             {
                 if (value != _EditMode)
                 {
-                    if (value)
-                        BackupBasicBody();
-                    else
+                    if (!value)
+                    {
                         RestoreOriginalBody();
+                    }
+
                     Run_OnRigidBodyPropertyChanged();
                 }
 

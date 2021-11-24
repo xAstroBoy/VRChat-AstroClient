@@ -43,35 +43,31 @@
         private Vector3 FreezePos { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Quaternion FreezeRot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool IsEnabled
+        private bool isKinematic = true;
+
+        private bool IsEnabled
         {
             [HideFromIl2Cpp] get => _IsEnabled;
             [HideFromIl2Cpp]
             set
             {
+                _IsEnabled = value;
 
                 if (VRC_AstroPickup != null)
                 {
-                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
                     if (value) VRC_AstroPickup.UseText = "Toggle Off Freeze";
                     else VRC_AstroPickup.UseText = "Toggle On Freeze";
                 }
                 FreezePos = gameObject.transform.position;
                 FreezeRot = gameObject.transform.rotation;
-                if (value.Equals(_IsEnabled)) return;
-                _IsEnabled = value;
                 if (value)
                 {
-                    if (RigidBodyController != null)
-                    {
-                        RigidBodyController.RigidBody_Set_isKinematic(true);
-                    }
+                    RigidBodyController.RigidBody_Set_isKinematic(true);
                 }
                 else
                 {
-                    RigidBodyController.RestoreOriginalBody();
+                    RigidBodyController.RigidBody_Set_isKinematic(RigidBodyController.Original_isKinematic);
                 }
-
             }
         }
 
@@ -80,16 +76,16 @@
         {
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             PickupController = gameObject.GetOrAddComponent<PickupController>();
+
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
+            if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
             if (VRC_AstroPickup != null)
             {
                 VRC_AstroPickup.OnPickup += OnPickup;
                 VRC_AstroPickup.OnPickupUseDown += OnPickupUseDown;
                 VRC_AstroPickup.OnDrop += onDrop;
+                VRC_AstroPickup.UseText = "Toggle On Freeze";
             }
-
-
-            IsEnabled = false;
         }
 
         private void OnPickup()
@@ -108,20 +104,21 @@
             isPaused = false;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (!IsEnabled || isPaused)
             {
                 return;
             }
 
-            gameObject.TryTakeOwnership();
             if (gameObject.transform.position != FreezePos)
             {
+                gameObject.TryTakeOwnership();
                 gameObject.transform.position = FreezePos;
             }
             if (gameObject.transform.rotation != FreezeRot)
             {
+                gameObject.TryTakeOwnership();
                 gameObject.transform.rotation = FreezeRot;
             }
 
