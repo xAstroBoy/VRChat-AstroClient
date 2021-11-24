@@ -129,7 +129,7 @@
             ResetHealth = null;
             LoseHealth = null;
             WaveEvent = null;
-            FreezeToolHammer = false;
+            FreezeHammer = false;
             LoseLifeHammer = false;
             RepairLifeWrenches = false;
         }
@@ -152,35 +152,35 @@
             SuperTowerDefensecheatPage = new QMNestedGridMenu(main, "Super Tower Defense", "Super Tower Defense Cheats");
 
             var bankmods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Bank Mods", "Modify Current Bank Balance");
-            _ = new QMSingleButton(bankmods, 1, 0f, "Set 0 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 0; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(bankmods, 1, 0.5f, "Add 10000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(bankmods, 1, 1, "Add 100000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(bankmods, 1, 1.5f, "Add 1000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 1000000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(bankmods, 1, 2f, "Add 10000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(bankmods, 1, 2.5f, "Set 999999999 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 999999999; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(bankmods, "Set 0 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 0; } }, "Edit Current Balance!");
+            _ = new QMSingleButton(bankmods,  "Add 10000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!");
+            _ = new QMSingleButton(bankmods,  "Add 100000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!");
+            _ = new QMSingleButton(bankmods, "Add 1000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 1000000; } }, "Edit Current Balance!");
+            _ = new QMSingleButton(bankmods,  "Add 10000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!");
+            _ = new QMSingleButton(bankmods, "Set 999999999 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 999999999; } }, "Edit Current Balance!");
 
             var WaveMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Wave Mods", "Modify Current Rounds");
 
-            _ = new QMSingleButton(WaveMods, 2, 0f, "Wave +1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 1; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(WaveMods, 2, 0.5f, "Wave +10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 10; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(WaveMods, 2, 1, "Wave +100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 100; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(WaveMods, 2, 1.5f, "Wave -1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 1; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(WaveMods, 2, 2f, "Wave -10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 10; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(WaveMods, 2, 2.5f, "Wave -100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 100; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(WaveMods,  "Wave +1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 1; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods,  "Wave +10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 10; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods,  "Wave +100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 100; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods,  "Wave -1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 1; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods,  "Wave -10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 10; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods,  "Wave -100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 100; } }, "Edit Current Round!");
 
             var TowerMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Towers Mods", "Make Towers SuperPowerful");
 
-            _ = new QMSingleButton(TowerMods, 3, 0f, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!", null, null, true);
-            _ = new QMSingleButton(TowerMods, 3, 0.5f, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!", null, null, true);
+            _ = new QMSingleButton(TowerMods, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!");
+            _ = new QMSingleButton(TowerMods, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!");
 
             var ToolMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Tool Mods", "Enable Extra Tools");
-            HealthToolBtn = new QMToggleButton(ToolMods, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
-            HammerToolBtn = new QMToggleButton(ToolMods, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; },  () => { LoseLifeHammer = false; }, "Hammer = Lose health (useful to troll)!");
-            FreezeHammerToolBtn = new QMToggleButton(ToolMods, "Freeze Hammer", () => { FreezeToolHammer = true; }, () => { FreezeToolHammer = false; }, "Hammer = Lose health (useful to troll)!");
+            RepairLifeWrenchToolsButton = new QMToggleButton(ToolMods, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
+            LoseLifeHammerToolBtn = new QMToggleButton(ToolMods, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; },  () => { LoseLifeHammer = false; }, "Hammer = Lose health (useful to troll)!");
+            FreezeHammerToolBtn = new QMToggleButton(ToolMods, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Hammer = Lose health (useful to troll)!");
 
             new QMToggleButton(ToolMods, "Freeze Hammer", () => { LoseLifeHammer = true; }, () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
-            AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
-            AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
+            AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage,  "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
+            AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
             new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers();}, "Fix Towers Being unpickable bug ", Color.green);
         }
 
@@ -247,9 +247,9 @@
             }
             set
             {
-                if (HealthToolBtn != null)
+                if (RepairLifeWrenchToolsButton != null)
                 {
-                    HealthToolBtn.SetToggleState(value);
+                    RepairLifeWrenchToolsButton.SetToggleState(value);
                 }
                 _RepairLifeWrenches = value;
                 if (RedWrenchPickup != null)
@@ -289,9 +289,9 @@
             }
             set
             {
-                if (HammerToolBtn != null)
+                if (LoseLifeHammerToolBtn != null)
                 {
-                    HammerToolBtn.SetToggleState(value);
+                    LoseLifeHammerToolBtn.SetToggleState(value);
                 }
                 _LoseLifeHammer = value;
                 if (HammerPickup != null)
@@ -311,13 +311,13 @@
 
 
 
-        private static bool _FreezeToolHammer;
+        private static bool _FreezeHammer;
 
-        private static bool FreezeToolHammer
+        private static bool FreezeHammer
         {
             get
             {
-                return _FreezeToolHammer;
+                return _FreezeHammer;
             }
             set
             {
@@ -325,7 +325,7 @@
                 {
                     FreezeHammerToolBtn.SetToggleState(value);
                 }
-                _FreezeToolHammer = value;
+                _FreezeHammer = value;
 
                 if (HammerPickup != null)
                 {
@@ -380,7 +380,7 @@
         {
             while (AutomaticWaveStart)
             {
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1);
                 if (WaveEvent != null)
                 {
                     WaveEvent.ExecuteUdonEvent();
@@ -423,8 +423,8 @@
         internal static SuperTowerDefense_HealthEditor HealthEditor { get; set; }
         internal static SuperTowerDefense_BankEditor BankEditor { get; set; }
 
-        private static QMToggleButton HealthToolBtn { get; set; }
-        private static QMToggleButton HammerToolBtn { get; set; }
+        private static QMToggleButton RepairLifeWrenchToolsButton { get; set; }
+        private static QMToggleButton LoseLifeHammerToolBtn { get; set; }
         private static QMToggleButton FreezeHammerToolBtn { get; set; }
 
         private static QMToggleButton AutomaticWaveBtn { get; set; }
