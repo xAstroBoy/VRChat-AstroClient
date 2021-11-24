@@ -4,6 +4,7 @@
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.Extensions.Components_exts;
     using AstroClient.Tools.ObjectEditor.Online;
+    using AstroClient.xAstroBoy.Utility;
     using AstroUdons;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
@@ -58,6 +59,8 @@
                 }
                 FreezePos = gameObject.transform.position;
                 FreezeRot = gameObject.transform.rotation;
+
+                if (value.Equals(_IsEnabled)) return;
                 if (value)
                 {
                     if (RigidBodyController != null)
@@ -76,10 +79,8 @@
         // Use this for initialization
         private void Start()
         {
-            RigidBodyController = GetComponent<RigidBodyController>();
-            RigidBodyController ??= gameObject.AddComponent<RigidBodyController>();
-            PickupController = GetComponent<PickupController>();
-            PickupController ??= gameObject.AddComponent<PickupController>();
+            RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
+            PickupController = gameObject.GetOrAddComponent<PickupController>();
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
             if (VRC_AstroPickup != null)
             {
