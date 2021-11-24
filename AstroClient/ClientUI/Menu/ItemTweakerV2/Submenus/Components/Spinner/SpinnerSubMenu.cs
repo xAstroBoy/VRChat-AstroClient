@@ -14,9 +14,9 @@
 
 
 
-        internal static void Init_SpinnerSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void Init_SpinnerSubMenu(QMNestedGridMenu menu)
         {
-            var submenu = new QMNestedButton(menu, x, y, "Spin Control", "Make them spiiiiin!", null, null, null, null, btnHalf);
+            var submenu = new QMNestedButton(menu, "Spin Control", "Make them spiiiiin!");
             _ = new QMSingleButton(submenu, 1, 0, "+ 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceX(); }), "Add Spin Force to spinner!", null, null);
             _ = new QMSingleButton(submenu, 2, 0, "+ 1 Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceY(); }), "Add Spin Force to spinner!", null, null);
             _ = new QMSingleButton(submenu, 3, 0, "+ 1 Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceZ(); }), "Add Spin Force to spinner!", null, null);

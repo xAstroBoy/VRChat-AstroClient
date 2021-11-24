@@ -260,8 +260,6 @@
 
             if (TextColor != null)
                 setTextColorHTML(TextColor);
-            else
-                setTextColorHTML("#blue");
 
             SetActive(true);
             //QMButtonAPI.allSingleButtons.Add(this);

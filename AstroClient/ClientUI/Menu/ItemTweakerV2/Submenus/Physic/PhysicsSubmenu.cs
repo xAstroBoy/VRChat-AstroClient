@@ -15,13 +15,13 @@
         {
             var main = new QMNestedGridMenu(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
 
-            GravityToggler = new QMSingleToggleButton(main, 1, 0, "Use Gravity", () => { Modified_SetGravity(true); }, "No Gravity", () => { Modified_SetGravity(false); }, "Toggle Object Gravity", Color.green, Color.red, null, false, true);
-            KinematicToggler = new QMSingleToggleButton(main, 1, 0.5f, "Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(true); }, "Not Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(false); }, "Toggle Object Kinematic", Color.green, Color.red, null, false, true);
-            SmartKinematicToggler = new QMSingleToggleButton(main, 2, 0.5f, "Smart Kinematic Toggler", () => { SmartKinematicEnabled = true; }, "Smart Kinematic Toggler", () => { SmartKinematicEnabled = false; }, "Toggle Smart Kinematic Toggler (Check if Object won't fall throught before toggling kinematic with gravity !)", Color.green, Color.red, null, false, true);
+            GravityToggler = new QMToggleButton(main, "Use Gravity", () => { Modified_SetGravity(true); }, "No Gravity", () => { Modified_SetGravity(false); }, "Toggle Object Gravity");
+            KinematicToggler = new QMToggleButton(main, "Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(true); }, "Not Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(false); }, "Toggle Object Kinematic");
+            SmartKinematicToggler = new QMToggleButton(main,"Smart Kinematic Toggler", () => { SmartKinematicEnabled = true; }, "Smart Kinematic Toggler", () => { SmartKinematicEnabled = false; }, "Toggle Smart Kinematic Toggler (Check if Object won't fall throught before toggling kinematic with gravity !)");
 
-            CollisionsToggler = new QMSingleToggleButton(main, 1, 1, "Use Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(true); }, "No Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(false); }, "Toggle Object Collisions", Color.green, Color.red, null, false, true);
-            ConstraintsSubmenu.Init_ConstraintsSubmenu(main, 1, 1.5f, true);
-            new QMSingleButton(main, 1, 2f, "Restore Rigidbody", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_RestoreOriginalBody(); }, "Restore Default RigidBody Config.", null, null, true);
+            CollisionsToggler = new QMToggleButton(main, "Use Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(true); }, "No Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(false); }, "Toggle Object Collisions");
+            ConstraintsSubmenu.Init_ConstraintsSubmenu(main);
+            new QMSingleButton(main, "Restore Rigidbody", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_RestoreOriginalBody(); }, "Restore Default RigidBody Config.");
 
             ColliderEditor.ColliderEditor.Init_ColliderEditor(main, true);
 
@@ -92,10 +92,10 @@
             Reset();
         }
 
-        private static QMSingleToggleButton GravityToggler;
-        private static QMSingleToggleButton KinematicToggler;
-        private static QMSingleToggleButton CollisionsToggler;
-        private static QMSingleToggleButton SmartKinematicToggler;
+        private static QMToggleButton GravityToggler;
+        private static QMToggleButton KinematicToggler;
+        private static QMToggleButton CollisionsToggler;
+        private static QMToggleButton SmartKinematicToggler;
 
         private static bool _SmartKinematicEnabled;
 

@@ -10,7 +10,7 @@
     {
         internal static void Init_ForceSubMenu(QMNestedGridMenu menu, float x, float y, bool btnHalf)
         {
-            var ForceSubMenu = new QMNestedButton(menu, x, y, "Forces", "You have the Force! Dont abuse it! <3!", null, null, null, null, btnHalf);
+            var ForceSubMenu = new QMNestedButton(menu, "Forces", "You have the Force! Dont abuse it! <3!");
 
             ForceAmnt1 = new QMSingleButton(ForceSubMenu, 0, 0, "Force : " + Force, () => { Force = DefaultForce; }, string.Empty, null, null);
             SpinForceAmnt1 = new QMSingleButton(ForceSubMenu, 0, 1, "Spin Force : " + SpinForce, () => { SpinForce = DefaultSpinForce; }, string.Empty, null, null);

@@ -14,15 +14,15 @@
     {
         internal static void Init_ComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var main = new QMNestedButton(menu, x, y, "Astro Components", "Custom Component Editor Menu!", null, null, null, null, btnHalf);
-            RocketComponentSubMenu.Init_RocketComponentSubMenu(main, 1, 0, true);
-            CrazyComponentSubMenu.Init_CrazyComponentSubMenu(main, 1, 0.5f, true);
-            SpinnerSubMenu.Init_SpinnerSubMenu(main, 1, 1, true);
-            BouncerSubMenu.Init_BouncerMenu(main, 1, 1.5f, true);
-            FunBehavioursSubMenu.Init_FunMenu(main, 1, 2, true);
-            FreezerSubMenu.Init_FreezerMenu(main, 1, 2.5f, true);
+            var main = new QMNestedGridMenu(menu, x, y, "Astro Components", "Custom Component Editor Menu!", null, null, null, null, btnHalf);
+            RocketComponentSubMenu.Init_RocketComponentSubMenu(main);
+            CrazyComponentSubMenu.Init_CrazyComponentSubMenu(main);
+            SpinnerSubMenu.Init_SpinnerSubMenu(main);
+            BouncerSubMenu.Init_BouncerMenu(main);
+            FunBehavioursSubMenu.Init_FunMenu(main);
+            FreezerSubMenu.Init_FreezerMenu(main);
 
-            _ = new QMSingleButton(main, 4, 0f, "Remove All Components", () => { ComponentSubMenu.KillCustomComponents(); }, "Kill All Custom Add-ons.", null, null, true);
+            _ = new QMSingleButton(main, "Remove All Components", () => { KillCustomComponents(); }, "Kill All Custom Add-ons.");
         }
 
         internal static void KillCustomComponents()

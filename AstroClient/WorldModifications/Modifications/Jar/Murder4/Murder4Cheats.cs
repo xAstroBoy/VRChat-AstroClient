@@ -593,7 +593,7 @@
 
             #endregion Item Teleporter
 
-            var MurderItemTweaker = new QMNestedGridMenu(Murder4CheatPage, 1, 0f, "Item Tweaker", "Item Tweaks!");
+            var MurderItemTweaker = new QMNestedGridMenu(Murder4CheatPage,  "Item Tweaker", "Item Tweaks!");
 
             #region Item Tweaker
 
@@ -629,7 +629,7 @@
 
             #endregion Item Tweaker
 
-            var MurderItemSpawner = new QMNestedGridMenu(Murder4CheatPage, 1, 1f, "Item Spawner", "Item Spawner!");
+            var MurderItemSpawner = new QMNestedGridMenu(Murder4CheatPage, "Item Spawner", "Item Spawner!");
 
             #region Item Spawner
 
@@ -650,7 +650,7 @@
 
             if (Bools.AllowAttackerComponent)
             {
-                var MurderItemAttackerMenu = new QMNestedGridMenu(Murder4CheatPage, 1, 1f, "Followers", "Murder item Followers!");
+                var MurderItemAttackerMenu = new QMNestedGridMenu(Murder4CheatPage,  "Followers", "Murder item Followers!");
 
                 #region Followers
 
@@ -675,7 +675,7 @@
 
             if (Bools.AllowOrbitComponent)
             {
-                var MurderItemOrbiterMenu = new QMNestedGridMenu(Murder4CheatPage, 1, 2, "Orbiters", "Murder item Orbits!");
+                var MurderItemOrbiterMenu = new QMNestedGridMenu(Murder4CheatPage,  "Orbiters", "Murder item Orbits!");
 
                 #region orbiters
 
@@ -735,7 +735,7 @@
 
             #endregion Watchers
 
-            var Cheats = new QMNestedGridMenu(Murder4CheatPage, 1, 2f, "World Cheats", "Some Powerful cheats!");
+            var Cheats = new QMNestedGridMenu(Murder4CheatPage,  "World Cheats", "Some Powerful cheats!");
 
             GetSelfPatreonGunBtn = new QMToggleButton(Cheats, "Private Golden Gun", () =>
             {

@@ -129,6 +129,9 @@
             ResetHealth = null;
             LoseHealth = null;
             WaveEvent = null;
+            FreezeToolHammer = false;
+            LoseLifeHammer = false;
+            RepairLifeWrenches = false;
         }
 
 
@@ -171,9 +174,11 @@
             _ = new QMSingleButton(TowerMods, 3, 0.5f, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!", null, null, true);
 
             var ToolMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Tool Mods", "Enable Extra Tools");
-            HealthToolBtn = new QMToggleButton(ToolMods, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
-            HammerToolBtn = new QMToggleButton(ToolMods, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
+            HealthToolBtn = new QMToggleButton(ToolMods, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
+            HammerToolBtn = new QMToggleButton(ToolMods, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; },  () => { LoseLifeHammer = false; }, "Hammer = Lose health (useful to troll)!");
+            FreezeHammerToolBtn = new QMToggleButton(ToolMods, "Freeze Hammer", () => { FreezeToolHammer = true; }, () => { FreezeToolHammer = false; }, "Hammer = Lose health (useful to troll)!");
 
+            new QMToggleButton(ToolMods, "Freeze Hammer", () => { LoseLifeHammer = true; }, () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
             AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
             AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
             new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers();}, "Fix Towers Being unpickable bug ", Color.green);
@@ -246,10 +251,6 @@
                 {
                     HealthToolBtn.SetToggleState(value);
                 }
-                if (value.Equals(_RepairLifeWrenches))
-                {
-                    return;
-                }
                 _RepairLifeWrenches = value;
                 if (RedWrenchPickup != null)
                 {
@@ -292,10 +293,6 @@
                 {
                     HammerToolBtn.SetToggleState(value);
                 }
-                if (value.Equals(_LoseLifeHammer))
-                {
-                    return;
-                }
                 _LoseLifeHammer = value;
                 if (HammerPickup != null)
                 {
@@ -307,6 +304,38 @@
                     else
                     {
                         HammerPickup.UseText = "Use";
+                    }
+                }
+            }
+        }
+
+
+
+        private static bool _FreezeToolHammer;
+
+        private static bool FreezeToolHammer
+        {
+            get
+            {
+                return _FreezeToolHammer;
+            }
+            set
+            {
+                if (FreezeHammerToolBtn != null)
+                {
+                    FreezeHammerToolBtn.SetToggleState(value);
+                }
+                _FreezeToolHammer = value;
+
+                if (HammerPickup != null)
+                {
+                    if (value)
+                    {
+                        HammerPickup.gameObject.Add_ObjectFreezer();
+                    }
+                    else
+                    {
+                        HammerPickup.gameObject.Remove_ObjectFreezer();
                     }
                 }
             }
@@ -396,6 +425,7 @@
 
         private static QMToggleButton HealthToolBtn { get; set; }
         private static QMToggleButton HammerToolBtn { get; set; }
+        private static QMToggleButton FreezeHammerToolBtn { get; set; }
 
         private static QMToggleButton AutomaticWaveBtn { get; set; }
 
