@@ -358,6 +358,7 @@
                        var item = HammerPickup.gameObject.GetOrAddComponent<ObjectFreezer>();
                        if (item != null)
                        {
+                           item.Capture();
                            item.IsEnabled = true;
                        }
                     }

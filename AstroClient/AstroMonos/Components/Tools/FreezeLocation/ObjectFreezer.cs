@@ -17,7 +17,6 @@
     public class ObjectFreezer : AstroMonoBehaviour
     {
 
-        private bool _IsEnabled;
         public List<AstroMonoBehaviour> AntiGcList;
 
         public ObjectFreezer(IntPtr obj0) : base(obj0)
@@ -55,8 +54,9 @@
         private Vector3 FreezePos { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Quaternion FreezeRot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool isKinematic = true;
 
+
+        private bool _IsEnabled = true;
         internal bool IsEnabled
         {
             [HideFromIl2Cpp] get => _IsEnabled;
@@ -73,7 +73,6 @@
                 if (value)
                 {
                     Capture();
-                    RigidBodyController.RigidBody_Set_isKinematic(true);
                 }
                 else
                 {
@@ -96,7 +95,6 @@
         {
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             PickupController = gameObject.GetOrAddComponent<PickupController>();
-
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
             if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
             if (VRC_AstroPickup != null)
@@ -104,7 +102,8 @@
                 VRC_AstroPickup.OnPickup += OnPickup;
                 VRC_AstroPickup.OnPickupUseDown += OnPickupUseDown;
                 VRC_AstroPickup.OnDrop += onDrop;
-                VRC_AstroPickup.UseText = "Toggle On Freeze";
+                if (IsEnabled) VRC_AstroPickup.UseText = "Toggle Off Freeze";
+                else VRC_AstroPickup.UseText = "Toggle On Freeze";
             }
         }
 
@@ -146,9 +145,26 @@
             {
                 return;
             }
-                gameObject.TakeOwnership();
-                transform.position = FreezePos;
-                transform.rotation = FreezeRot;
+            gameObject.TakeOwnership();
+
+            if (!RigidBodyController.EditMode)
+            {
+                RigidBodyController.EditMode = true;
+            }
+            if (!RigidBodyController.isKinematic)
+            {
+                RigidBodyController.isKinematic = true;
+            }
+            if (RigidBodyController.velocity != Vector3.zero)
+            {
+                RigidBodyController.velocity = Vector3.zero;
+            }
+            if (RigidBodyController.angularVelocity != Vector3.zero)
+            {
+                RigidBodyController.angularVelocity = Vector3.zero;
+            }
+            gameObject.transform.position = FreezePos;
+            gameObject.transform.rotation = FreezeRot;
         }
 
         private void OnDestroy()
