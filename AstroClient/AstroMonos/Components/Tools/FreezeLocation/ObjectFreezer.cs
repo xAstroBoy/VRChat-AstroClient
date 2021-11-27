@@ -192,7 +192,7 @@
 
             if (!RigidBodyController.constraints.HasFlag(RigidbodyConstraints.FreezeAll))
             {
-                RigidBodyController.constraints = RigidbodyConstraints.FreezeAll;
+                RigidBodyController.RigidBody_Add_Constraint(RigidbodyConstraints.FreezeAll);
             }
             gameObject.transform.position = FreezePos;
             gameObject.transform.rotation = FreezeRot;
