@@ -44,7 +44,11 @@
             set
             {
                 _isPaused = value;
-                if (!value)
+                if (value)
+                {
+                    RigidBodyController.constraints = RigidbodyConstraints.None;
+                }
+                else
                 {
                     Capture();
                 }
@@ -85,6 +89,7 @@
                             RigidBodyController.Override_isKinematic(false);
                         }
                         RigidBodyController.Override_UseGravity(true);
+                        
                     }
                 }
             }
@@ -155,6 +160,12 @@
             {
                 RigidBodyController.isKinematic = true;
             }
+
+            if (RigidBodyController.useGravity)
+            {
+                RigidBodyController.useGravity = false;
+            }
+
             if (RigidBodyController.velocity != Vector3.zero)
             {
                 RigidBodyController.velocity = Vector3.zero;
@@ -162,6 +173,11 @@
             if (RigidBodyController.angularVelocity != Vector3.zero)
             {
                 RigidBodyController.angularVelocity = Vector3.zero;
+            }
+
+            if (RigidBodyController.constraints != RigidbodyConstraints.FreezeAll)
+            {
+                RigidBodyController.constraints = RigidbodyConstraints.FreezeAll;
             }
             gameObject.transform.position = FreezePos;
             gameObject.transform.rotation = FreezeRot;

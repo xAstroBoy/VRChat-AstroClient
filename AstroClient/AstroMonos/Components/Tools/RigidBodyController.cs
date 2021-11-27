@@ -696,7 +696,7 @@
         private Quaternion Original_inertiaTensorRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Vector3 Original_centerOfMass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private CollisionDetectionMode Original_collisionDetectionMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private RigidbodyConstraints Original_constraints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RigidbodyConstraints Original_constraints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = RigidbodyConstraints.None;
         private bool Original_freezeRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private float Original_maxDepenetrationVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool Original_detectCollisions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
