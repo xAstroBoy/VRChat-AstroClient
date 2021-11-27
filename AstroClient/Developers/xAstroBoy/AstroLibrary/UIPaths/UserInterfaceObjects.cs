@@ -5,6 +5,21 @@
     internal class UserInterfaceObjects
     {
 
+
+        private static Transform _VoiceDotDisabled;
+
+        internal static Transform VoiceDotDisabled
+        {
+            get
+            {
+                if (_VoiceDotDisabled == null)
+                {
+                    _VoiceDotDisabled = GameObject.Find("UserInterface/UnscaledUI/HudContent/Hud/VoiceDotParent/VoiceDotDisabled").transform;
+                }
+
+                return _VoiceDotDisabled;
+            }
+        }
         private static Transform _ScreenFade;
 
         internal static Transform ScreenFade

@@ -1,6 +1,8 @@
 ﻿namespace AstroClient.Startup
 {
     using AstroMonos.Components.Tools;
+    using Tools.Extensions;
+    using UnityEngine;
     using xAstroBoy.UIPaths;
     using xAstroBoy.Utility;
 
@@ -11,6 +13,15 @@
             if (UserInterfaceObjects.ScreenFade != null)
             {
                 UserInterfaceObjects.ScreenFade.GetOrAddComponent<Disabler>();
+            }
+
+            if (UserInterfaceObjects.VoiceDotDisabled != null)
+            {
+                var annoyingblink = UserInterfaceObjects.VoiceDotDisabled.GetComponent<FadeCycleEffect>();
+                if (annoyingblink != null)
+                {
+                    annoyingblink.DestroyMeLocal();
+                }
             }
         }
     }
