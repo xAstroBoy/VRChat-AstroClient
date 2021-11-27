@@ -92,11 +92,10 @@
                 var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
                 if (!will_it_fall_throught)
                 {
-                    RigidBodyController.RigidBody_Set_isKinematic(false);
                     RigidBodyController.Override_isKinematic(false);
                 }
                 RigidBodyController.Override_UseGravity(true);
-                RigidBodyController.constraints = RigidbodyConstraints.None;
+                RigidBodyController.RigidBody_Remove_All_Constraints();
 
             }
         }
@@ -117,6 +116,7 @@
                 if (IsEnabled) VRC_AstroPickup.UseText = "Toggle Off Freeze";
                 else VRC_AstroPickup.UseText = "Toggle On Freeze";
             }
+            Capture();
         }
 
         /// <summary>
@@ -167,22 +167,30 @@
             {
                 RigidBodyController.isKinematic = true;
             }
+            if (RigidBodyController.Rigidbody.isKinematic)
+            {
+                RigidBodyController.Rigidbody.isKinematic = true;
+            }
 
             if (RigidBodyController.useGravity)
             {
                 RigidBodyController.useGravity = false;
             }
-
-            if (RigidBodyController.velocity != Vector3.zero)
+            if (RigidBodyController.Rigidbody.useGravity)
             {
-                RigidBodyController.velocity = Vector3.zero;
-            }
-            if (RigidBodyController.angularVelocity != Vector3.zero)
-            {
-                RigidBodyController.angularVelocity = Vector3.zero;
+                RigidBodyController.Rigidbody.useGravity = false;
             }
 
-            if (RigidBodyController.constraints != RigidbodyConstraints.FreezeAll)
+            if (RigidBodyController.Rigidbody.velocity != Vector3.zero)
+            {
+                RigidBodyController.Rigidbody.velocity = Vector3.zero;
+            }
+            if (RigidBodyController.Rigidbody.angularVelocity != Vector3.zero)
+            {
+                RigidBodyController.Rigidbody.angularVelocity = Vector3.zero;
+            }
+
+            if (!RigidBodyController.constraints.HasFlag(RigidbodyConstraints.FreezeAll))
             {
                 RigidBodyController.constraints = RigidbodyConstraints.FreezeAll;
             }
