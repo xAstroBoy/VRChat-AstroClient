@@ -41,6 +41,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 UdonBehaviour.enabled = true;
             }
             DoChecks();
+            UseText = _UseText;
         }
 
         private void DoChecks()

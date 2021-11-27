@@ -365,7 +365,6 @@
     <Compile Include="ClientEvents\AstroEventArgs\APIUserEventArgs.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\VRCInputArgs.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\ScreenEventArgs.cs" />
-    <Compile Include="Startup\Fixes\TabFixes.cs" />
     <Compile Include="Startup\Welcome.cs" />
     <Compile Include="Startup\Hooks\PhotonOnEventHook.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />

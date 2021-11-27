@@ -12,8 +12,6 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using xAstroBoy.Extensions;
-    using static AstroClient.Tools.ObjectEditor.Editor.Forces.Forces;
-    using Random = UnityEngine.Random;
 
     [RegisterComponent]
     public class ObjectFreezer : AstroMonoBehaviour
@@ -39,7 +37,21 @@
         private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool _isPaused = false;
+        private bool isPaused
+        {
+            [HideFromIl2Cpp] get => _isPaused;
+            [HideFromIl2Cpp]
+            set
+            {
+                _isPaused = value;
+                if (!value)
+                {
+                    Capture();
+                }
+            }
+        }
+
         private Vector3 FreezePos { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Quaternion FreezeRot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
@@ -60,6 +72,7 @@
                 }
                 if (value)
                 {
+                    Capture();
                     RigidBodyController.RigidBody_Set_isKinematic(true);
                 }
                 else
@@ -116,7 +129,6 @@
         private void OnPickup()
         {
             isPaused = true;
-            Capture();
         }
         private void OnPickupUseDown()
         {
@@ -125,7 +137,6 @@
 
         private void onDrop()
         {
-            Capture();
             isPaused = false;
         }
 
@@ -136,9 +147,8 @@
                 return;
             }
                 gameObject.TakeOwnership();
-                gameObject.transform.position = FreezePos;
-                gameObject.transform.rotation = FreezeRot;
-
+                transform.position = FreezePos;
+                transform.rotation = FreezeRot;
         }
 
         private void OnDestroy()
