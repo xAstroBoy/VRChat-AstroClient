@@ -46,7 +46,7 @@
                 _isPaused = value;
                 if (value)
                 {
-                    RigidBodyController.constraints = RigidbodyConstraints.None;
+                    RestoreToOriginal();
                 }
                 else
                 {
@@ -80,20 +80,27 @@
                 }
                 else
                 {
-                    if (RigidBodyController != null)
-                    {
-                        var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
-                        if (!will_it_fall_throught)
-                        {
-                            RigidBodyController.RigidBody_Set_isKinematic(false);
-                            RigidBodyController.Override_isKinematic(false);
-                        }
-                        RigidBodyController.Override_UseGravity(true);
-                        
-                    }
+                    RestoreToOriginal();
                 }
             }
         }
+
+        private void RestoreToOriginal()
+        {
+            if (RigidBodyController != null)
+            {
+                var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
+                if (!will_it_fall_throught)
+                {
+                    RigidBodyController.RigidBody_Set_isKinematic(false);
+                    RigidBodyController.Override_isKinematic(false);
+                }
+                RigidBodyController.Override_UseGravity(true);
+                RigidBodyController.constraints = RigidbodyConstraints.None;
+
+            }
+        }
+
 
         // Use this for initialization
         private void Start()
