@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.WorldModifications.Modifications
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using AstroMonos.AstroUdons;
@@ -263,9 +264,10 @@
         {
             foreach (var tower in GetCurrentEditors)
             {
-                if (tower.name.Contains("RocketLauncher")) continue; // Ignore due to Lag reasons.
                 if (tower != null)
                 {
+                    if (tower.name.Contains("RocketLauncher")) continue; // Ignore due to Lag reasons.
+
                     tower.SpeedMultiplier = value;
                 }
             }
@@ -368,9 +370,10 @@
                        var item = HammerPickup.gameObject.GetOrAddComponent<ObjectFreezer>();
                        if (item != null)
                        {
-                           item.Capture();
                            item.IsEnabled = true;
-                       }
+                           ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+
+                        }
                     }
                     else
                     {
@@ -418,19 +421,27 @@
 
         private static void LockAppleOnButton(GameObject Apple)
         {
-            if (Apple != null)
+            try
             {
-                if (ReturnHammerButtonTool != null)
+                if (Apple != null)
                 {
-                    Apple.TakeOwnership();
-                    var item = Apple.GetOrAddComponent<ObjectFreezer>();
-                    if (item != null)
+                    if (ReturnHammerButtonTool != null)
                     {
-                        item.Capture(ReturnHammerButtonTool.transform.position, ReturnHammerButtonTool.transform.rotation);
-                        item.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
-                        item.IsEnabled = true;
+                        Apple.transform.position = ReturnHammerButtonTool.transform.position;
+                        Apple.transform.rotation = ReturnHammerButtonTool.transform.rotation;
+                        var item = Apple.GetOrAddComponent<ObjectFreezer>();
+                        if (item != null)
+                        {
+                            item.Capture();
+                            item.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
+                            ModConsole.DebugLog($"Locked {item.gameObject.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
             }
         }
 

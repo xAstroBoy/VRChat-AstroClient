@@ -786,20 +786,31 @@
         #region Override Methods
 
 
-        internal void Override_isKinematic(bool isKinematic)
+        internal void Override_isKinematic(bool value) // this Bypasses EditMode
         {
-            Original_isKinematic = isKinematic;
-            this.isKinematic = isKinematic;
-            SyncPhysics.RefreshProperties();
-
+            Original_isKinematic = value;
+            _isKinematic = value; 
+            if (!EditMode)
+            {
+                if (Rigidbody != null)
+                {
+                    Rigidbody.isKinematic = value;
+                    SyncPhysics.RefreshProperties();
+                }
+            }
+            Run_OnRigidBodyPropertyChanged();
         }
 
-        internal void Override_UseGravity(bool useGravity)
+        internal void Override_UseGravity(bool value)  // this Bypasses EditMode
         {
-            Original_useGravity = useGravity;
-            this.useGravity = useGravity;
-            SyncPhysics.RefreshProperties();
-
+            Original_useGravity = value;
+            _useGravity = value;
+            if (Rigidbody != null)
+            {
+                Rigidbody.useGravity = value;
+                SyncPhysics.RefreshProperties();
+            }
+            Run_OnRigidBodyPropertyChanged();
         }
 
         #endregion Random Methods
@@ -807,14 +818,14 @@
 
         #region Rigidbody Methods Reflection
 
-        internal void MovePosition(Vector3 position)
+        internal void MovePosition(Vector3 value)
         {
-            Rigidbody.MovePosition(position);
+            Rigidbody.MovePosition(value);
             SyncPhysics.RefreshProperties();
         }
-        internal void MoveRotation(Quaternion rotation)
+        internal void MoveRotation(Quaternion value)
         {
-            Rigidbody.MoveRotation(rotation);
+            Rigidbody.MoveRotation(value);
             SyncPhysics.RefreshProperties();
         }
 
@@ -826,7 +837,6 @@
         private bool _EditMode;
         private bool isBackupping;
         internal bool RestoreOriginalOnEditModeReset = true;
-        private bool IsActived = false;
 
         internal bool EditMode
         {
