@@ -50,6 +50,7 @@
                 }
                 else
                 {
+                    FreezeItem();
                     Capture();
                 }
             }
@@ -76,6 +77,7 @@
                 }
                 if (value)
                 {
+                    FreezeItem();
                     Capture();
                 }
                 else
@@ -89,14 +91,52 @@
         {
             if (RigidBodyController != null)
             {
-                var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
-                if (!will_it_fall_throught)
-                {
-                    RigidBodyController.Override_isKinematic(false);
-                }
-                RigidBodyController.Override_UseGravity(true);
+                //var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
+                //if (!will_it_fall_throught)
+                //{
+                //    RigidBodyController.Override_isKinematic(false);
+                //}
+                //RigidBodyController.Override_UseGravity(true);
                 RigidBodyController.RigidBody_Remove_All_Constraints();
 
+            }
+        }
+
+        private void FreezeItem()
+        {
+            if (!RigidBodyController.EditMode)
+            {
+                RigidBodyController.EditMode = true;
+            }
+            //if (!RigidBodyController.isKinematic)
+            //{
+            //    RigidBodyController.isKinematic = true;
+            //}
+            //if (RigidBodyController.Rigidbody.isKinematic)
+            //{
+            //    RigidBodyController.Rigidbody.isKinematic = true;
+            //}
+
+            //if (RigidBodyController.useGravity)
+            //{
+            //    RigidBodyController.useGravity = false;
+            //}
+            //if (RigidBodyController.Rigidbody.useGravity)
+            //{
+            //    RigidBodyController.Rigidbody.useGravity = false;
+            //}
+
+            //if (RigidBodyController.Rigidbody.velocity != Vector3.zero)
+            //{
+            //    RigidBodyController.Rigidbody.velocity = Vector3.zero;
+            //}
+            //if (RigidBodyController.Rigidbody.angularVelocity != Vector3.zero)
+            //{
+            //    RigidBodyController.Rigidbody.angularVelocity = Vector3.zero;
+            //}
+            if (!RigidBodyController.constraints.HasFlag(RigidbodyConstraints.FreezeAll))
+            {
+                RigidBodyController.RigidBody_Add_Constraint(RigidbodyConstraints.FreezeAll);
             }
         }
 
@@ -159,41 +199,8 @@
             }
             gameObject.TakeOwnership();
 
-            if (!RigidBodyController.EditMode)
-            {
-                RigidBodyController.EditMode = true;
-            }
-            if (!RigidBodyController.isKinematic)
-            {
-                RigidBodyController.isKinematic = true;
-            }
-            if (RigidBodyController.Rigidbody.isKinematic)
-            {
-                RigidBodyController.Rigidbody.isKinematic = true;
-            }
 
-            if (RigidBodyController.useGravity)
-            {
-                RigidBodyController.useGravity = false;
-            }
-            if (RigidBodyController.Rigidbody.useGravity)
-            {
-                RigidBodyController.Rigidbody.useGravity = false;
-            }
 
-            if (RigidBodyController.Rigidbody.velocity != Vector3.zero)
-            {
-                RigidBodyController.Rigidbody.velocity = Vector3.zero;
-            }
-            if (RigidBodyController.Rigidbody.angularVelocity != Vector3.zero)
-            {
-                RigidBodyController.Rigidbody.angularVelocity = Vector3.zero;
-            }
-
-            if (!RigidBodyController.constraints.HasFlag(RigidbodyConstraints.FreezeAll))
-            {
-                RigidBodyController.RigidBody_Add_Constraint(RigidbodyConstraints.FreezeAll);
-            }
             gameObject.transform.position = FreezePos;
             gameObject.transform.rotation = FreezeRot;
         }
