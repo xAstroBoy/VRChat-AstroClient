@@ -110,15 +110,6 @@
                     ReturnHammerButtonTool = toolshop.transform.Find("ReturnSellTool").gameObject;
                 }
 
-                var ApplesRoot = GameObjectFinder.FindRootSceneObject("Apples");
-                if (ApplesRoot != null)
-                {
-                    Apple1 = ApplesRoot.transform.FindObject("Apple_01").gameObject;
-                    Apple2 = ApplesRoot.transform.FindObject("Apple_01 (1)").gameObject;
-                    Apple3 = ApplesRoot.transform.FindObject("Apple_01 (2)").gameObject;
-                    Apple4 = ApplesRoot.transform.FindObject("Apple_01 (3)").gameObject;
-
-                }
 
                 FixTheTowers(false);
 
@@ -150,10 +141,6 @@
             LoseLifeHammer = false;
             RepairLifeWrenches = false;
             BlockHammerReturnButton = false;
-            Apple1 = null;
-            Apple2 = null;
-            Apple3 = null;
-            Apple4 = null;
         }
 
         
@@ -235,6 +222,25 @@
                         {
                             result.Add(editor);
                         }
+                    }
+                }
+
+                return result;
+            }
+        }
+
+
+
+        private static List<GameObject> WorldApples
+        {
+            get
+            {
+                List<GameObject> result = new List<GameObject>();
+                foreach (var item in WorldUtils.Pickups)
+                {
+                    if (item.name.StartsWith("Apple"))
+                    {
+                        result.Add(item.gameObject);
                     }
                 }
 
@@ -393,18 +399,17 @@
                 {
                     if (value)
                     {
-                        LockAppleOnButton(Apple1);
-                        LockAppleOnButton(Apple2);
-                        LockAppleOnButton(Apple3);
-                        LockAppleOnButton(Apple4);
+                        foreach (var apple in WorldApples)
+                        {
+                            LockAppleOnButton(apple);
+                        }
                     }
                     else
                     {
-                        Apple1.gameObject.Remove_ObjectFreezer();
-                        Apple2.gameObject.Remove_ObjectFreezer();
-                        Apple3.gameObject.Remove_ObjectFreezer();
-                        Apple4.gameObject.Remove_ObjectFreezer();
-
+                        foreach (var apple in WorldApples)
+                        {
+                            apple.Remove_ObjectFreezer();
+                        }
                     }
                 }
             }
@@ -418,7 +423,7 @@
                 if (ReturnHammerButtonTool != null)
                 {
                     Apple.TakeOwnership();
-                    var item = Apple.gameObject.GetOrAddComponent<ObjectFreezer>();
+                    var item = Apple.GetOrAddComponent<ObjectFreezer>();
                     if (item != null)
                     {
                         item.Capture(ReturnHammerButtonTool.transform.position, ReturnHammerButtonTool.transform.rotation);
@@ -508,10 +513,6 @@
         }
 
 
-        private static GameObject Apple1;
-        private static GameObject Apple2;
-        private static GameObject Apple3;
-        private static GameObject Apple4;
 
         internal static QMNestedGridMenu SuperTowerDefensecheatPage { get; set; }
 
