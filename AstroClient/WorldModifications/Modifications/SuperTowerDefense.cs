@@ -142,6 +142,7 @@
             LoseLifeHammer = false;
             RepairLifeWrenches = false;
             BlockHammerReturnButton = false;
+            ReturnHammerButtonTool = null;
         }
 
         
@@ -427,12 +428,13 @@
                 {
                     if (ReturnHammerButtonTool != null)
                     {
+                        Apple.TakeOwnership();
                         Apple.transform.position = ReturnHammerButtonTool.transform.position;
                         Apple.transform.rotation = ReturnHammerButtonTool.transform.rotation;
                         var item = Apple.GetOrAddComponent<ObjectFreezer>();
                         if (item != null)
                         {
-                            item.Capture();
+                            item.Capture(ReturnHammerButtonTool.transform.position, ReturnHammerButtonTool.transform.rotation);
                             item.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
                             ModConsole.DebugLog($"Locked {item.gameObject.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
                         }

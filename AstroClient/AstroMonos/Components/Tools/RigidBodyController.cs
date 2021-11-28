@@ -785,6 +785,9 @@
 
         #region Override Methods
 
+        /// <summary>
+        /// Bypass EditMode and sets Cached values and Rigidbody Kinematic
+        /// </summary>
 
         internal void Override_isKinematic(bool value) // this Bypasses EditMode
         {
@@ -800,6 +803,9 @@
             }
             Run_OnRigidBodyPropertyChanged();
         }
+        /// <summary>
+        /// Bypass EditMode and sets Cached values and Rigidbody gravity
+        /// </summary>
 
         internal void Override_UseGravity(bool value)  // this Bypasses EditMode
         {
@@ -858,8 +864,8 @@
                         }
                     }
 
-                    Run_OnRigidBodyPropertyChanged();
                 }
+                Run_OnRigidBodyPropertyChanged();
 
                 _EditMode = value;
             }

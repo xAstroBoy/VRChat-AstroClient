@@ -33,33 +33,33 @@
 
         private RigidBodyController _RigidBodyController { [HideFromIl2Cpp] get; set; }
 
-        private RigidBodyController RigidBodyController
+        private RigidBodyController CurrentRigidbody
         {
             [HideFromIl2Cpp]
             get
             {
                 if (_RigidBodyController == null)
                 {
-                    _RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
+                    return _RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
                 }
 
                 return _RigidBodyController;
             }
         }
 
-        private PickupController _PickupController { [HideFromIl2Cpp] get; set; }
+        private PickupController _Pickup { [HideFromIl2Cpp] get; set; }
 
-        private PickupController PickupController
+        private PickupController Pickup
         {
             [HideFromIl2Cpp]
             get
             {
-                if (_PickupController == null)
+                if (_Pickup == null)
                 {
-                    _PickupController = gameObject.GetOrAddComponent<PickupController>();
+                    return _Pickup = gameObject.GetOrAddComponent<PickupController>();
                 }
 
-                return _PickupController;
+                return _Pickup;
             }
         }
         private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -74,14 +74,17 @@
             set
             {
                 _isPaused = value;
-                if (value)
+                if (IsEnabled)
                 {
-                    RestoreToOriginal();
-                }
-                else
-                {
-                    FreezeItem();
-                    Capture();
+                    if (value)
+                    {
+                        RestoreToOriginal();
+                    }
+                    else
+                    {
+                        FreezeItem();
+                        Capture();
+                    }
                 }
             }
         }
@@ -98,7 +101,6 @@
             [HideFromIl2Cpp]
             set
             {
-                Capture();
                 _IsEnabled = value;
                 if (VRC_AstroPickup != null)
                 {
@@ -121,23 +123,28 @@
         {
             try
             {
-                HasFrozen = false;
-                if (RigidBodyController != null)
+                if (CurrentRigidbody != null)
                 {
-                    var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
+                    CurrentRigidbody.EditMode = false;
+
+                    var will_it_fall_throught = CurrentRigidbody.RigidBody_Will_It_fall_throught();
                     if (!will_it_fall_throught)
                     {
-                        RigidBodyController.Override_isKinematic(false);
+                        CurrentRigidbody.isKinematic = false;
+                        CurrentRigidbody.Override_isKinematic(false);
                     }
-
-                    RigidBodyController.Override_UseGravity(true);
-                    RigidBodyController.useGravity = true;
-                    RigidBodyController.EditMode = false;
+                    CurrentRigidbody.Override_UseGravity(true);
+                    HasFrozen = false;
+                }
+                else
+                {
+                    HasFrozen = true;
                 }
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
+                HasFrozen = true;
             }
         }
 
@@ -147,14 +154,14 @@
             {
                 if (!HasFrozen)
                 {
-                    if (RigidBodyController != null)
+                    if (CurrentRigidbody != null)
                     {
-                        if (!RigidBodyController.EditMode)
+                        if (!CurrentRigidbody.EditMode)
                         {
-                            RigidBodyController.EditMode = true;
+                            CurrentRigidbody.EditMode = true;
                         }
 
-                        RigidBodyController.isKinematic = true;
+                        CurrentRigidbody.isKinematic = true;
                         HasFrozen = true;
                     }
                     else
@@ -165,6 +172,7 @@
             }
             catch (Exception e)
             {
+                HasFrozen = false;
                 ModConsole.ErrorExc(e);
             }
         }
@@ -174,7 +182,7 @@
         private void Start()
         {
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
-            if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
+            if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = Pickup.UseText;
             if (VRC_AstroPickup != null)
             {
                 VRC_AstroPickup.OnPickup += OnPickup;
@@ -184,6 +192,11 @@
                 else VRC_AstroPickup.UseText = "Toggle On Freeze";
             }
 
+            if (IsEnabled)
+            {
+                FreezeItem();
+                Capture();
+            }
         }
 
         /// <summary>
@@ -199,15 +212,15 @@
         {
             if (!LockPosition)
             {
-                if (RigidBodyController == null)
+                if (CurrentRigidbody == null)
                 {
                     FreezePos = gameObject.transform.position;
                     FreezeRot = gameObject.transform.rotation;
                 }
                 else
                 {
-                    FreezePos = RigidBodyController.position;
-                    FreezeRot = RigidBodyController.rotation;
+                    FreezePos = CurrentRigidbody.position;
+                    FreezeRot = CurrentRigidbody.rotation;
                 }
             }
             HasCaptured = true;
@@ -246,19 +259,16 @@
             if (HasCaptured)
             {
                 gameObject.TakeOwnership();
-                if (!HasFrozen)
+
+                if (CurrentRigidbody.position != FreezePos)
                 {
-                    FreezeItem(); // Freeze!
-                }
-                if (RigidBodyController.position != FreezePos)
-                {
-                    RigidBodyController.position = FreezePos;
+                    CurrentRigidbody.position = FreezePos;
                    // RigidBodyController.MovePosition(FreezePos);
                 }
 
-                if (RigidBodyController.rotation != FreezeRot)
+                if (CurrentRigidbody.rotation != FreezeRot)
                 {
-                    RigidBodyController.rotation = FreezeRot;
+                    CurrentRigidbody.rotation = FreezeRot;
                     //RigidBodyController.MoveRotation(FreezeRot);
                 }
             }
@@ -271,10 +281,11 @@
                 RestoreToOriginal();
                 if (gameObject.IsOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
-                PickupController.UseText = OriginalText_Use;
+                Pickup.UseText = OriginalText_Use;
             }
-            catch
+            catch (Exception e)
             {
+                ModConsole.ErrorExc(e);
             }
         }
 
