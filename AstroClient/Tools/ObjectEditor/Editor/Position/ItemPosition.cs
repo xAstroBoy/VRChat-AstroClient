@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Tools.ObjectEditor.Editor.Position
 {
+    using AstroMonos.Components.Tools;
     using Extensions;
     using Online;
     using UnityEngine;
@@ -16,7 +17,16 @@
                 if (bonepos != null)
                 {
                     OnlineEditor.TakeObjectOwnership(obj);
-                    obj.transform.position = bonepos.Value;
+                    var controller = obj.GetComponent<RigidBodyController>();
+                    if (controller != null)
+                    {
+                        controller.position = bonepos.Value;
+
+                    }
+                    else
+                    {
+                        obj.transform.position = bonepos.Value;
+                    }
                     obj.KillCustomComponents(ResetRigidBody, ResetPickupProperties);
                     obj.KillForces(true);
                 }
@@ -31,7 +41,16 @@
                 if (bonepos != null)
                 {
                     OnlineEditor.TakeObjectOwnership(obj);
-                    obj.transform.position = bonepos.Value;
+                    var controller = obj.GetComponent<RigidBodyController>();
+                    if (controller != null)
+                    {
+                        controller.position = bonepos.Value;
+
+                    }
+                    else
+                    {
+                        obj.transform.position = bonepos.Value;
+                    }
                     obj.KillCustomComponents(true);
                     obj.KillForces(true);
                 }
@@ -46,7 +65,17 @@
                 if (bonepos != null)
                 {
                     OnlineEditor.TakeObjectOwnership(obj);
-                    obj.transform.position = bonepos.Value;
+                    var controller = obj.GetComponent<RigidBodyController>();
+                    if (controller != null)
+                    {
+                        controller.position = bonepos.Value;
+
+                    }
+                    else
+                    {
+                        obj.transform.position = bonepos.Value;
+                    }
+
                     if (KillcustomScripts)
                     {
                         obj.KillCustomComponents(true);
@@ -66,8 +95,18 @@
                 if (bone != null)
                 {
                     OnlineEditor.TakeObjectOwnership(obj);
-                    obj.transform.position = bone.position;
-                    obj.transform.rotation = bone.rotation;
+                    var controller = obj.GetComponent<RigidBodyController>();
+                    if (controller != null)
+                    {
+                        controller.position = bone.position;
+                        controller.rotation = bone.rotation;
+
+                    }
+                    else
+                    {
+                        obj.transform.position = bone.position;
+                        obj.transform.rotation = bone.rotation;
+                    }
                     if (KillcustomScripts)
                     {
                         obj.KillCustomComponents(true);
