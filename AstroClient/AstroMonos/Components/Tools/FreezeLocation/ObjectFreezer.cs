@@ -91,14 +91,15 @@
         {
             if (RigidBodyController != null)
             {
-                //var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
-                //if (!will_it_fall_throught)
-                //{
-                //    RigidBodyController.Override_isKinematic(false);
-                //}
-                //RigidBodyController.Override_UseGravity(true);
-                RigidBodyController.RigidBody_Remove_All_Constraints();
+                var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
+                if (!will_it_fall_throught)
+                {
+                    RigidBodyController.Override_isKinematic(false);
+                }
+                RigidBodyController.Override_UseGravity(true);
 
+                RigidBodyController.RigidBody_Remove_All_Constraints();
+                RigidBodyController.EditMode = false;
             }
         }
 
@@ -108,32 +109,10 @@
             {
                 RigidBodyController.EditMode = true;
             }
-            //if (!RigidBodyController.isKinematic)
-            //{
-            //    RigidBodyController.isKinematic = true;
-            //}
-            //if (RigidBodyController.Rigidbody.isKinematic)
-            //{
-            //    RigidBodyController.Rigidbody.isKinematic = true;
-            //}
-
-            //if (RigidBodyController.useGravity)
-            //{
-            //    RigidBodyController.useGravity = false;
-            //}
-            //if (RigidBodyController.Rigidbody.useGravity)
-            //{
-            //    RigidBodyController.Rigidbody.useGravity = false;
-            //}
-
-            //if (RigidBodyController.Rigidbody.velocity != Vector3.zero)
-            //{
-            //    RigidBodyController.Rigidbody.velocity = Vector3.zero;
-            //}
-            //if (RigidBodyController.Rigidbody.angularVelocity != Vector3.zero)
-            //{
-            //    RigidBodyController.Rigidbody.angularVelocity = Vector3.zero;
-            //}
+            if (!RigidBodyController.isKinematic)
+            {
+                RigidBodyController.isKinematic = true;
+            }
             if (!RigidBodyController.constraints.HasFlag(RigidbodyConstraints.FreezeAll))
             {
                 RigidBodyController.RigidBody_Add_Constraint(RigidbodyConstraints.FreezeAll);
@@ -172,8 +151,16 @@
         {
             if (!LockPosition)
             {
-                FreezePos = gameObject.transform.position;
-                FreezeRot = gameObject.transform.rotation;
+                FreezePos = RigidBodyController.position;
+                FreezeRot = RigidBodyController.rotation;
+            }
+        }
+        internal void Capture(Vector3 Position, Quaternion Rotation)
+        {
+            if (!LockPosition)
+            {
+                FreezePos = Position;
+                FreezeRot = Rotation;
             }
         }
 
@@ -191,7 +178,7 @@
             isPaused = false;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!IsEnabled || isPaused)
             {
@@ -199,17 +186,21 @@
             }
             gameObject.TakeOwnership();
 
-
-
-            gameObject.transform.position = FreezePos;
-            gameObject.transform.rotation = FreezeRot;
+            if (RigidBodyController.position != FreezePos)
+            {
+                RigidBodyController.MovePosition(FreezePos);
+            }
+            if (RigidBodyController.rotation != FreezeRot)
+            {
+                RigidBodyController.MoveRotation(FreezeRot);
+            }
         }
 
         private void OnDestroy()
         {
             try
             {
-                RigidBodyController.RestoreOriginalBody();
+                RestoreToOriginal();
                 if (gameObject.IsOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
                 PickupController.UseText = OriginalText_Use;

@@ -113,14 +113,14 @@
                 var ApplesRoot = GameObjectFinder.FindRootSceneObject("Apples");
                 if (ApplesRoot != null)
                 {
-                    Apple1 = ApplesRoot.transform.Find("Apple_01").gameObject;
-                    Apple2 = ApplesRoot.transform.Find("Apple_01 (1)").gameObject;
-                    Apple3 = ApplesRoot.transform.Find("Apple_01 (2)").gameObject;
-                    Apple4 = ApplesRoot.transform.Find("Apple_01 (3)").gameObject;
+                    Apple1 = ApplesRoot.transform.FindObject("Apple_01").gameObject;
+                    Apple2 = ApplesRoot.transform.FindObject("Apple_01 (1)").gameObject;
+                    Apple3 = ApplesRoot.transform.FindObject("Apple_01 (2)").gameObject;
+                    Apple4 = ApplesRoot.transform.FindObject("Apple_01 (3)").gameObject;
 
                 }
 
-                FixTheTowers();
+                FixTheTowers(false);
 
             }
             else
@@ -156,14 +156,18 @@
             Apple4 = null;
         }
 
-
-        private static void FixTheTowers()
+        
+        private static void FixTheTowers(bool RespawnTowers)
         {
             foreach (var item in WorldUtils.Pickups)
             {
                 if (item.gameObject.name.ToLower().StartsWith("tower"))
                 {
                     item.gameObject.Pickup_Set_Pickupable(true); // Override and fix potential Tower Bugs.
+                    if (RespawnTowers)
+                    {
+                        item.GetComponent<SyncPhysics>().RespawnItem();
+                    }
                 }
             }
         }
@@ -202,7 +206,7 @@
             AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage,  "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
             AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
 
-            new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers();}, "Fix Towers Being unpickable bug ", Color.green);
+            new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers(true);}, "Fix Towers Being unpickable bug ", Color.green);
             FreezeHammerToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Add a Protection Shield to the hammer!");
             BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
 
@@ -414,12 +418,10 @@
                 if (ReturnHammerButtonTool != null)
                 {
                     Apple.TakeOwnership();
-                    Apple.transform.position = ReturnHammerButtonTool.transform.position;
-                    Apple.transform.rotation = ReturnHammerButtonTool.transform.rotation;
                     var item = Apple.gameObject.GetOrAddComponent<ObjectFreezer>();
                     if (item != null)
                     {
-                        item.Capture();
+                        item.Capture(ReturnHammerButtonTool.transform.position, ReturnHammerButtonTool.transform.rotation);
                         item.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
                         item.IsEnabled = true;
                     }

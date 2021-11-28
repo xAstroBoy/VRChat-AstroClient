@@ -621,6 +621,36 @@
                 Run_OnRigidBodyPropertyChanged();
             }
         }
+        internal Vector3 position
+        {
+            [HideFromIl2Cpp]
+            get => Rigidbody.position;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Rigidbody != null)
+                {
+                    Rigidbody.position = value;
+                    SyncPhysics.RefreshProperties();
+                }
+
+            }
+        }
+
+        internal Quaternion rotation
+        {
+            [HideFromIl2Cpp]
+            get => Rigidbody.rotation;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Rigidbody != null)
+                {
+                    Rigidbody.rotation = value;
+                    SyncPhysics.RefreshProperties();
+                }
+            }
+        }
 
         internal float sleepAngularVelocity
         {
@@ -760,22 +790,42 @@
         {
             Original_isKinematic = isKinematic;
             this.isKinematic = isKinematic;
+            SyncPhysics.RefreshProperties();
+
         }
+
         internal void Override_UseGravity(bool useGravity)
         {
             Original_useGravity = useGravity;
             this.useGravity = useGravity;
+            SyncPhysics.RefreshProperties();
+
         }
 
         #endregion Random Methods
 
+
+        #region Rigidbody Methods Reflection
+
+        internal void MovePosition(Vector3 position)
+        {
+            Rigidbody.MovePosition(position);
+            SyncPhysics.RefreshProperties();
+        }
+        internal void MoveRotation(Quaternion rotation)
+        {
+            Rigidbody.MoveRotation(rotation);
+            SyncPhysics.RefreshProperties();
+        }
+
+        #endregion
         #region Essential Variables.
 
         internal Rigidbody Rigidbody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal SyncPhysics SyncPhysics { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         private bool _EditMode;
         private bool isBackupping;
-
+        internal bool RestoreOriginalOnEditModeReset = true;
         private bool IsActived = false;
 
         internal bool EditMode
@@ -788,7 +838,14 @@
                 {
                     if (!value)
                     {
-                        RestoreOriginalBody();
+                        if (RestoreOriginalOnEditModeReset)
+                        {
+                            RestoreOriginalBody();
+                        }
+                        else
+                        {
+                            RestoreOriginalOnEditModeReset = true;
+                        }
                     }
 
                     Run_OnRigidBodyPropertyChanged();
