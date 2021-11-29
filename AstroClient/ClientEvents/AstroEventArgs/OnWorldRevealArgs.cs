@@ -5,12 +5,12 @@
 
     internal class OnWorldRevealArgs : EventArgs
     {
+        internal string AssetUrl;
+        internal string AuthorName;
         internal string ID;
         internal string Name;
         internal List<string> WorldTags;
-        internal string AuthorName;
-        internal string AssetUrl;
-        
+
 
         internal OnWorldRevealArgs(string ID, string Name, List<string> WorldTags, string AuthorName, string AssetUrl)
         {

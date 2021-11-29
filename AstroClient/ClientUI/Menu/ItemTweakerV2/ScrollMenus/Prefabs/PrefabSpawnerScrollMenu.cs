@@ -1,13 +1,11 @@
 ﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Prefabs
 {
     using System.Collections.Generic;
-    using AstroMonos.Components.Tools.Listeners;
     using Selector;
     using Submenus.Spawner;
     using UnityEngine;
     using VRC.SDKBase;
     using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.AstroButtonAPI.WingsAPI;
@@ -17,37 +15,27 @@
     {
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
-        private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
-
+        private static List<QMSingleButton> GeneratedButtons = new();
 
 
         private static bool CleanOnRoomLeave { get; } = true;
         private static bool DestroyOnMenuClose { get; } = true;
 
-        private static bool HasGenerated { get; set; } = false;
+        private static bool HasGenerated { get; set; }
         private static bool isOpen { get; set; }
 
 
         internal override void OnRoomLeft()
         {
-            if (CleanOnRoomLeave)
-            {
-                DestroyGeneratedButtons();
-            }
+            if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
 
 
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Spawn Prefabs", "Spawn World Prefabs");
-            CurrentScrollMenu.SetBackButtonAction(menu, () =>
-            {
-                OnCloseMenu();
-            });
-            CurrentScrollMenu.AddOpenAction(() =>
-            {
-                OnOpenMenu();
-            });
+            CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
+            CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
             InitWingPage();
         }
 
@@ -57,7 +45,7 @@
             {
                 foreach (var prefab in WorldUtils.Prefabs)
                 {
-                    var btn = new QMSingleButton(CurrentScrollMenu, 0, 0, $"Spawn {prefab.name}", () => 
+                    var btn = new QMSingleButton(CurrentScrollMenu, 0, 0, $"Spawn {prefab.name}", () =>
                     {
                         var broadcast = VRC_EventHandler.VrcBroadcastType.Always;
                         var prefabinfo = prefab.name;
@@ -76,6 +64,7 @@
                     }, $"Spawn {prefab.name}");
                     GeneratedButtons.Add(btn);
                 }
+
                 HasGenerated = true;
             }
         }
@@ -84,10 +73,8 @@
         {
             HasGenerated = false;
             if (GeneratedButtons.Count != 0)
-            {
-                foreach (var item in GeneratedButtons) item.DestroyMe();
-            }
-
+                foreach (var item in GeneratedButtons)
+                    item.DestroyMe();
         }
 
         internal override void OnQuickMenuClose()
@@ -97,17 +84,14 @@
 
         private static void OnCloseMenu()
         {
-            if (DestroyOnMenuClose)
-            {
-                DestroyGeneratedButtons();
-            }
+            if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
-            isOpen = false;
 
+            isOpen = false;
         }
 
         private static void OnOpenMenu()
@@ -118,21 +102,19 @@
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
+
             Regenerate();
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle)
+        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 
             if (Page != null)
-            {
                 if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))
-                {
                     OnCloseMenu();
-                }
-            }
         }
+
         private static void InitWingPage()
         {
             WingMenu = new QMWings(1013, true, "Tweaker Prefabs", "Prefabs Menu");
@@ -143,6 +125,5 @@
             }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
-
     }
 }

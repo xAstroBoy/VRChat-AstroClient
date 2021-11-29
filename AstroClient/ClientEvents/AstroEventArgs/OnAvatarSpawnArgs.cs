@@ -7,11 +7,6 @@
 
     internal class OnAvatarSpawnArgs : EventArgs
     {
-        internal Player Player { get; set; }
-        internal GameObject Avatar { get; set; }
-        internal VRCAvatarManager VRCAvatarManager { get; set; }
-        internal VRC_AvatarDescriptor VRC_AvatarDescriptor { get; set; }
-
         internal OnAvatarSpawnArgs(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
             this.Player = Player;
@@ -19,5 +14,10 @@
             this.VRCAvatarManager = VRCAvatarManager;
             this.VRC_AvatarDescriptor = VRC_AvatarDescriptor;
         }
+
+        internal Player Player { get; set; }
+        internal GameObject Avatar { get; set; }
+        internal VRCAvatarManager VRCAvatarManager { get; set; }
+        internal VRC_AvatarDescriptor VRC_AvatarDescriptor { get; set; }
     }
 }

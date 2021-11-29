@@ -171,7 +171,7 @@
 
         private void Internal_OnUiPageToggled(object sender, OnUiPageEventArgs e)
         {
-            OnUiPageToggled(e.Page, e.Toggle);
+            OnUiPageToggled(e.Page, e.Toggle,  e.TransitionType);
         }
 
         private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
@@ -367,7 +367,7 @@
         {
         }
 
-        internal virtual void OnUiPageToggled(UIPage Page, bool Toggle)
+        internal virtual void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
         }
 

@@ -8,6 +8,7 @@
     using AstroMonos.Components.Malicious;
     using AstroMonos.Components.Malicious.Orbit;
     using AstroMonos.Components.Tools;
+    using AstroMonos.Components.Tools.FreezeLocation;
     using Constants;
     using ObjectEditor;
     using Target;

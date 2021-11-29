@@ -13,26 +13,23 @@
     {
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
-        private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
+        private static List<QMSingleButton> GeneratedButtons = new();
 
         //private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
         private static QMWingSingleButton ExportSkybox;
 
-        private static bool HasExportedSkybox { get; set; } = false;
+        private static bool HasExportedSkybox { get; set; }
 
-        private static bool HasThrownException { get; set; } = false;
+        private static bool HasThrownException { get; set; }
         private static bool CleanOnRoomLeave { get; } = false;
         private static bool DestroyOnMenuClose { get; } = false;
 
-        private static bool HasGenerated { get; set; } = false;
+        private static bool HasGenerated { get; set; }
         private static bool isOpen { get; set; }
 
         internal override void OnRoomLeft()
         {
-            if (CleanOnRoomLeave)
-            {
-                DestroyGeneratedButtons();
-            }
+            if (CleanOnRoomLeave) DestroyGeneratedButtons();
 
             HasExportedSkybox = false;
         }
@@ -40,14 +37,8 @@
         internal static void InitButtons(QMGridTab menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Skybox Options", "Edit Current Skybox");
-            CurrentScrollMenu.SetBackButtonAction(menu, () =>
-            {
-                OnCloseMenu();
-            });
-            CurrentScrollMenu.AddOpenAction(() =>
-            {
-                OnOpenMenu();
-            });
+            CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
+            CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
             InitWingPage();
         }
 
@@ -60,28 +51,20 @@
                     if (SkyboxEditor.LoadedSkyboxesBundles.Count() != 0)
                     {
                         foreach (var skybox in SkyboxEditor.LoadedSkyboxesBundles)
-                        {
                             if (skybox != null)
                             {
                                 var btn = new QMSingleButton(CurrentScrollMenu, skybox.SkyboxName, () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.SkyboxName} as map Skybox.");
                                 if (!skybox.isCubeMap)
                                 {
                                     if (skybox.content.Front != null)
-                                    {
                                         btn.SetButtonImage(skybox.content.Front);
-                                    }
                                     else if (skybox.content.Left != null)
-                                    {
                                         btn.SetButtonImage(skybox.content.Left);
-                                    }
-                                    else if (skybox.content.Back != null)
-                                    {
-                                        btn.SetButtonImage(skybox.content.Back);
-                                    }
+                                    else if (skybox.content.Back != null) btn.SetButtonImage(skybox.content.Back);
                                 }
+
                                 GeneratedButtons.Add(btn);
                             }
-                        }
                     }
                     else
                     {
@@ -103,9 +86,8 @@
         {
             HasGenerated = false;
             if (GeneratedButtons.Count != 0)
-            {
-                foreach (var item in GeneratedButtons) item.DestroyMe();
-            }
+                foreach (var item in GeneratedButtons)
+                    item.DestroyMe();
             //if (Listeners.Count != 0)
             //{
             //    foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
@@ -119,15 +101,13 @@
 
         private static void OnCloseMenu()
         {
-            if (DestroyOnMenuClose || HasThrownException)
-            {
-                DestroyGeneratedButtons();
-            }
+            if (DestroyOnMenuClose || HasThrownException) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
+
             isOpen = false;
         }
 
@@ -143,41 +123,29 @@
                 {
                     if (!HasExportedSkybox)
                     {
-                        if (ExportSkybox != null)
-                        {
-                            ExportSkybox.SetActive(true);
-                        }
+                        if (ExportSkybox != null) ExportSkybox.SetActive(true);
                     }
                     else
                     {
-                        if (ExportSkybox != null)
-                        {
-                            ExportSkybox.SetActive(false);
-                        }
+                        if (ExportSkybox != null) ExportSkybox.SetActive(false);
                     }
                 }
                 else
                 {
-                    if (ExportSkybox != null)
-                    {
-                        ExportSkybox.SetActive(false);
-                    }
+                    if (ExportSkybox != null) ExportSkybox.SetActive(false);
                 }
             }
+
             Regenerate();
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle)
+        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 
             if (Page != null)
-            {
                 if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))
-                {
                     OnCloseMenu();
-                }
-            }
         }
 
         private static void InitWingPage()
@@ -189,23 +157,19 @@
                 DestroyGeneratedButtons();
                 Regenerate();
             }, "Find New Skyboxes");
-            new QMWingSingleButton(WingMenu, "Reset Skybox", () =>
-            {
-                SkyboxEditor.SetRenderSettingSkybox(SkyboxEditor.OriginalSkybox);
-            }, "Restore Original Skybox.");
+            new QMWingSingleButton(WingMenu, "Reset Skybox", () => { SkyboxEditor.SetRenderSettingSkybox(SkyboxEditor.OriginalSkybox); }, "Restore Original Skybox.");
             ExportSkybox = new QMWingSingleButton(WingMenu, "Export Skybox", () =>
-             {
-                 if (!HasExportedSkybox)
-                 {
-                     SkyboxEditor.ExportSixSidedSkybox();
-                     SkyboxEditor.FindAndLoadSkyboxes();
-                     ExportSkybox.SetActive(false);
-                     HasExportedSkybox = true;
-                     DestroyGeneratedButtons();
-                     Regenerate();
-
-                 }
-             }, "Attempts to Export Skybox and save it. (WIP).");
+            {
+                if (!HasExportedSkybox)
+                {
+                    SkyboxEditor.ExportSixSidedSkybox();
+                    SkyboxEditor.FindAndLoadSkyboxes();
+                    ExportSkybox.SetActive(false);
+                    HasExportedSkybox = true;
+                    DestroyGeneratedButtons();
+                    Regenerate();
+                }
+            }, "Attempts to Export Skybox and save it. (WIP).");
 
             WingMenu.SetActive(false);
         }

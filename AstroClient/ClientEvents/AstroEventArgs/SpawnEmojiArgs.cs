@@ -4,14 +4,13 @@
 
     internal class SpawnEmojiArgs : EventArgs
     {
-        internal VRCPlayer player;
-
         internal int Emoji;
+        internal VRCPlayer player;
 
         internal SpawnEmojiArgs(VRCPlayer player, int emoji)
         {
             this.player = player;
-            this.Emoji = emoji;
+            Emoji = emoji;
         }
     }
 }

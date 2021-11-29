@@ -84,7 +84,7 @@
                 var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
-                backbuttonObject = CurrentPage.gameObject.FindObject("Button_Back");
+                backbuttonObject = CurrentPage.transform.FindObject("WngHeader_H1/LeftItemContainer/Button_Back").gameObject;
                 BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
@@ -132,9 +132,8 @@
                 var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
-                backbuttonObject = CurrentPage.gameObject.FindObject("Button_Back");
+                backbuttonObject = CurrentPage.transform.FindObject("WngHeader_H1/LeftItemContainer/Button_Back").gameObject;
                 BackButton = backbuttonObject.GetComponent<Button>();
-
                 //PushPage
                 SetAction(() => { QuickMenuTools.Wing_Right.ShowQuickmenuPage(btnQMLoc); });
             }

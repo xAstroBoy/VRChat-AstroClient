@@ -1,10 +1,9 @@
-﻿namespace AstroClient.AstroMonos.Components.Custom.Random
+﻿namespace AstroClient.AstroMonos.Components.Tools.FreezeLocation
 {
     using System;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.Extensions.Components_exts;
     using AstroClient.Tools.ObjectEditor.Online;
-    using AstroClient.xAstroBoy.Utility;
     using AstroUdons;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
@@ -12,6 +11,7 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using xAstroBoy.Extensions;
+    using xAstroBoy.Utility;
 
     [RegisterComponent]
     public class ObjectFreezer : AstroMonoBehaviour

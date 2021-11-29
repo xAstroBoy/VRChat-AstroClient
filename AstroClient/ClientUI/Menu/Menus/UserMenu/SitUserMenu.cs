@@ -2,13 +2,11 @@
 {
     using AstroMonos.Components.Player;
     using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
 
     internal class SitUserMenu : AstroEvents
     {
-
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             var submenu = new QMNestedGridMenu(menu, "Sit", "Sit on selected player");

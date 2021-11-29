@@ -123,7 +123,8 @@
 
                 MethodInfo _placeUiAfterPause = typeof(QuickMenu).GetNestedTypes().First(type => type.Name.Contains("IEnumerator")).GetMethod("MoveNext");
 
-                new AstroPatch(typeof(UIPage).GetMethod("Method_Public_Void_Boolean_TransitionType_0"), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUIPageToggle), BindingFlags.NonPublic | BindingFlags.Static)));
+                new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUIPageToggle), BindingFlags.NonPublic | BindingFlags.Static)));
+                new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_0)), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUIPageToggle), BindingFlags.NonPublic | BindingFlags.Static)));
                 new AstroPatch(_openBigMenu, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnBigMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
                 new AstroPatch(_closeBigMenu, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnBigMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
                 new AstroPatch(_placeUiAfterPause, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnPlaceUiAfterPause), BindingFlags.NonPublic | BindingFlags.Static)));
@@ -278,9 +279,9 @@
 
         private static void OnQuickMenuClose_Event() => Event_OnQuickMenuClose.SafetyRaise();
 
-        private static void OnUIPageToggle(UIPage __instance, bool __0)
+        private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
         {
-            Event_OnUiPageToggled.SafetyRaise(new OnUiPageEventArgs(__instance, __0));
+            Event_OnUiPageToggled.SafetyRaise(new OnUiPageEventArgs(__instance, __0, __1));
         }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)

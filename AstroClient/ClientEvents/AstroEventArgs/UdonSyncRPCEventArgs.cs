@@ -6,9 +6,9 @@
 
     internal class UdonSyncRPCEventArgs : EventArgs
     {
-        internal Player sender;
-        internal GameObject obj;
         internal string action;
+        internal GameObject obj;
+        internal Player sender;
 
         internal UdonSyncRPCEventArgs(Player sender, GameObject obj, string action)
         {

@@ -6,6 +6,7 @@
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using AstroMonos.Components.Custom.Random;
+    using AstroMonos.Components.Tools.FreezeLocation;
     using CheetoLibrary;
     using MelonLoader;
     using Tools.Extensions;

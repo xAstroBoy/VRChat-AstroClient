@@ -304,7 +304,7 @@
 
         private void Internal_OnUiPageToggled(object sender, OnUiPageEventArgs e)
         {
-            OnUiPageToggled(e.Page, e.Toggle);
+            OnUiPageToggled(e.Page, e.Toggle, e.TransitionType);
         }
 
         internal virtual void onUserInfoMenuOpen()
@@ -315,7 +315,7 @@
         {
         }
 
-        internal virtual void OnUiPageToggled(UIPage Page, bool Toggle)
+        internal virtual void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
         }
 

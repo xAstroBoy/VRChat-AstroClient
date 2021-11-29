@@ -5,10 +5,10 @@
     using AstroMonos.Components.Tools.Listeners;
     using Selector;
     using Tools.Extensions;
+    using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.AstroButtonAPI.WingsAPI;
@@ -17,34 +17,27 @@
     {
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
-        private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
-        private static List<QMNestedGridMenu> GeneratedPages = new List<QMNestedGridMenu>();
+        private static List<ScrollMenuListener> Listeners = new();
+        private static List<QMNestedGridMenu> GeneratedPages = new();
+
+        private static QMWingSingleButton CurrentUnboxBehaviourToConsole;
 
         private static bool CleanOnRoomLeave { get; } = true;
         private static bool DestroyOnMenuClose { get; } = true;
 
-        private static bool HasGenerated { get; set; } = false;
+        private static bool HasGenerated { get; set; }
         private static bool isOpen { get; set; }
 
         internal override void OnRoomLeft()
         {
-            if (CleanOnRoomLeave)
-            {
-                DestroyGeneratedButtons();
-            }
+            if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal Udon Events", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
-            CurrentScrollMenu.SetBackButtonAction(menu, () =>
-            {
-                OnCloseMenu();
-            });
-            CurrentScrollMenu.AddOpenAction(() =>
-            {
-                OnOpenMenu();
-            });
+            CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
+            CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
             InitWingPage();
         }
 
@@ -54,10 +47,9 @@
             {
                 var udonevents = Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours();
                 if (udonevents != null && udonevents.Count() != 0)
-                {
-                    for (int i = 0; i < udonevents.Count; i++)
+                    for (var i = 0; i < udonevents.Count; i++)
                     {
-                        VRC.Udon.UdonBehaviour action = udonevents[i];
+                        var action = udonevents[i];
                         if (action._eventTable.Count != 0)
                         {
                             var udon = new QMNestedGridMenu(CurrentScrollMenu, action.gameObject.name, "Open Events of " + action.gameObject.name);
@@ -78,8 +70,8 @@
                             {
                                 if (CurrentUnboxBehaviourToConsole != null)
                                 {
-                                    CurrentUnboxBehaviourToConsole.SetButtonText($"Unavailable");
-                                    CurrentUnboxBehaviourToConsole.setButtonToolTip($"Unavailable");
+                                    CurrentUnboxBehaviourToConsole.SetButtonText("Unavailable");
+                                    CurrentUnboxBehaviourToConsole.setButtonToolTip("Unavailable");
                                     CurrentUnboxBehaviourToConsole.setAction(() => { });
                                     CurrentUnboxBehaviourToConsole.SetActive(false);
                                 }
@@ -93,7 +85,7 @@
                             }
                         }
                     }
-                }
+
                 HasGenerated = true;
             }
         }
@@ -101,19 +93,13 @@
         private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action)
         {
             foreach (var subaction in action._eventTable)
-            {
                 new QMSingleButton(menu, subaction.Key, () =>
                 {
                     if (subaction.key.StartsWith("_"))
-                    {
                         action.SendCustomEvent(subaction.Key);
-                    }
                     else
-                    {
                         action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                    }
                 }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
-            }
         }
 
         internal static void DestroyGeneratedButtons()
@@ -121,13 +107,11 @@
             HasGenerated = false;
 
             if (GeneratedPages.Count != 0)
-            {
-                foreach (var item in GeneratedPages) item.DestroyMe();
-            }
+                foreach (var item in GeneratedPages)
+                    item.DestroyMe();
             if (Listeners.Count != 0)
-            {
-                foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
-            }
+                foreach (var item in Listeners)
+                    Object.DestroyImmediate(item);
         }
 
         internal override void OnQuickMenuClose()
@@ -137,17 +121,14 @@
 
         private static void OnCloseMenu()
         {
-            if (DestroyOnMenuClose)
-            {
-                DestroyGeneratedButtons();
-            }
+            if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
-            isOpen = false;
 
+            isOpen = false;
         }
 
         private static void OnOpenMenu()
@@ -158,26 +139,23 @@
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
+
             Regenerate();
             if (CurrentUnboxBehaviourToConsole != null)
             {
-                CurrentUnboxBehaviourToConsole.SetButtonText($"Unavailable");
-                CurrentUnboxBehaviourToConsole.setButtonToolTip($"Unavailable");
+                CurrentUnboxBehaviourToConsole.SetButtonText("Unavailable");
+                CurrentUnboxBehaviourToConsole.setButtonToolTip("Unavailable");
                 CurrentUnboxBehaviourToConsole.setAction(() => { });
                 CurrentUnboxBehaviourToConsole.SetActive(false);
             }
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle)
+        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
             if (Page != null)
-            {
                 if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(GeneratedPages) && !Page.ContainsPage(WingMenu.CurrentPage))
-                {
                     OnCloseMenu();
-                }
-            }
         }
 
         private static void InitWingPage()
@@ -187,9 +165,5 @@
             CurrentUnboxBehaviourToConsole.SetActive(false);
             WingMenu.SetActive(false);
         }
-
-        private static QMWingSingleButton CurrentUnboxBehaviourToConsole;
-
-        
     }
 }

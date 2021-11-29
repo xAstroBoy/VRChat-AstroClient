@@ -1,12 +1,13 @@
 ﻿namespace AstroClient.AstroEventArgs
 {
     using System;
+    using UnityEngine;
 
     internal class ColorEventArgs : EventArgs
     {
-        internal UnityEngine.Color Color;
+        internal Color Color;
 
-        internal ColorEventArgs(UnityEngine.Color Color)
+        internal ColorEventArgs(Color Color)
         {
             this.Color = Color;
         }

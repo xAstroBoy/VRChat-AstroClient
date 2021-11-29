@@ -10,10 +10,7 @@
         {
             get
             {
-                if (_Larry3D == null)
-                {
-                    return _Larry3D = FigletFont.LoadFromAssembly("Larry3D.flf");
-                }
+                if (_Larry3D == null) return _Larry3D = FigletFont.LoadFromAssembly("Larry3D.flf");
                 return _Larry3D;
             }
         }

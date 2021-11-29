@@ -257,7 +257,7 @@
             }
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle)
+                internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
             if (Page != null)

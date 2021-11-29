@@ -1,12 +1,13 @@
 ﻿namespace AstroClient.AstroEventArgs
 {
     using System;
+    using VRC;
 
     internal class VRCPlayerEventArgs : EventArgs
     {
-        internal VRC.Player player;
+        internal Player player;
 
-        internal VRCPlayerEventArgs(VRC.Player player)
+        internal VRCPlayerEventArgs(Player player)
         {
             this.player = player;
         }

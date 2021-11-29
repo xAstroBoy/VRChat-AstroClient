@@ -5,11 +5,11 @@
 
     internal class VRC_EventDispatcherRFC_TriggerEventArgs : EventArgs
     {
-        internal VRC_EventHandler VRC_EventHandler;
-        internal VRC_EventHandler.VrcEvent VrcEvent;
-        internal VRC_EventHandler.VrcBroadcastType VrcBroadcastType;
-        internal int UnknownInt;
         internal float UnknownFloat;
+        internal int UnknownInt;
+        internal VRC_EventHandler VRC_EventHandler;
+        internal VRC_EventHandler.VrcBroadcastType VrcBroadcastType;
+        internal VRC_EventHandler.VrcEvent VrcEvent;
 
         internal VRC_EventDispatcherRFC_TriggerEventArgs(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
         {
