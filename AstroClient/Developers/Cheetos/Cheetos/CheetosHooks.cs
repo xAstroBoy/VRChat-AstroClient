@@ -16,6 +16,7 @@
     using Newtonsoft.Json;
     using Photon.Realtime;
     using Tools.Extensions;
+    using Tools.Regexes;
     using UnityEngine;
     using VRC;
     using VRC.Core;
@@ -39,9 +40,6 @@
         internal static EventHandler<EventArgs> Event_OnRoomJoined { get; set; }
         internal static EventHandler<EventArgs> Event_OnFriended { get; set; }
         internal static EventHandler<EventArgs> Event_OnUnfriended { get; set; }
-        internal static EventHandler<EventArgs> Event_OnAvatarPageOpen { get; set; }
-        internal static EventHandler<EventArgs> Event_OnQuickMenuOpen { get; set; }
-        internal static EventHandler<EventArgs> Event_OnQuickMenuClose { get; set; }
 
         [ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -172,14 +170,6 @@
 
         private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
         {
-            var worldId = __0;
-
-            if (!worldId.StartsWith("wrld_"))
-            {
-                ModConsole.Log("Blocking Bad Portal Spawn: Bad World ID");
-                PopupUtils.QueHudMessage("Blocking Bad Portal Spawn: Bad World ID");
-                return false;
-            }
 
             ModConsole.Log($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
             PopupUtils.QueHudMessage($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");

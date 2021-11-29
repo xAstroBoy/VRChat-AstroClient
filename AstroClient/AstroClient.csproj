@@ -177,6 +177,7 @@
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuType.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\VRCList.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\VRCMenuAPI.cs" />
+    <Compile Include="Developers\xAstroBoy\AstroLibrary\MenuMethods\NewMenuXrefsSystem.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\TaskHelper\TaskHandler.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\TaskHelper\AwaitProvider.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\TaskHelper\TaskUtilities.cs" />

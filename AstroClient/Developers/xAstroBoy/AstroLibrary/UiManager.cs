@@ -1,15 +1,13 @@
 ﻿namespace AstroClient.xAstroBoy
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
     using AstroEventArgs;
     using Cheetos;
+    using Developers.xAstroBoy.AstroLibrary.MenuXrefs;
     using HarmonyLib;
-    using Tools;
+    using System;
+    using System.Linq;
+    using System.Reflection;
     using Tools.Extensions;
-    using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.Core;
@@ -21,6 +19,8 @@
     /// <summary>
     /// A UiManager that contains many utilites pertaining to VRChat's UI.
     /// </summary>
+    ///
+    [ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class UiManager : AstroEvents
     {
         internal static EventHandler Event_OnQuickMenuOpen { get; set; }
@@ -34,67 +34,15 @@
 
         internal static EventHandler<OnUiPageEventArgs> Event_OnUiPageToggled { get; set; }
 
-        private static MethodInfo _popupV2;
-        private static MethodInfo _popupV2Small;
-
-
-        private static MethodInfo _closeBigMenu;
-        private static MethodBase _openBigMenu;
         private static bool _shouldSkipPlaceUiAfterPause;
         private static bool _shouldChangeScreenStackValue;
         private static bool _newScreenStackValue;
 
-        /// <summary>
-        /// The type of the enum that is used for the big menu index.
-        /// </summary>
-        internal static Type BigMenuIndexEnum { get; private set; }
-
-        /// <summary>
-        /// A table that will convert the big menu index to the path of the page.
-        /// </summary>
-        internal static Dictionary<int, string> BigMenuIndexToPathTable { get => _bigMenuIndexToPathTable; }
-
-        private static readonly Dictionary<int, string> _bigMenuIndexToPathTable = new Dictionary<int, string>()
+        [ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
         {
-            { -1, "" },
-            { 0, "UserInterface/MenuContent/Screens/WorldInfo" },
-            { 1, "UserInterface/MenuContent/Screens/Avatar" },
-            { 2, "UserInterface/MenuContent/Screens/Social" },
-            { 3, "UserInterface/MenuContent/Screens/Settings" },
-            { 4, "UserInterface/MenuContent/Screens/UserInfo" },
-            { 5, "UserInterface/MenuContent/Screens/ImageDetails" },
-            { 6, "UserInterface/MenuContent/Screens/Settings_Safety" },
-            { 7, "UserInterface/MenuContent/Screens/Playlists" },
-            { 8, "UserInterface/MenuContent/Screens/Playlists" },
-            { 9, "UserInterface/MenuContent/Screens/VRC+" },
-            { 10, "UserInterface/MenuContent/Screens/Gallery" },
-        };
-
-
-        internal static object _selectedUserManagerObject;
-        private static MethodInfo _selectUserMethod;
-        internal static MethodInfo _pushPageMethod;
-        internal static MethodInfo _removePageMethod;
-
-        private static MethodInfo _openQuickMenuPageMethod;
-        private static MethodInfo _openQuickMenuMethod;
-
-        private static MethodInfo _closeMenuMethod;
-        private static MethodInfo _closeQuickMenuMethod;
-
-        private static PropertyInfo _quickMenuEnumProperty;
-
-        /// <summary>
-        /// The type of the enum that is used for the QuickMenu index.
-        /// </summary>
-        internal static Type QuickMenuIndexEnum { get; private set; }
-
-        internal static Transform tempUIParent;
-
-        /// <summary>
-        /// The QuickMenu MenuStateController used by VRChat
-        /// </summary>
-        internal static MenuStateController QMStateController { get; private set; }
+            return new HarmonyMethod(typeof(UiManager).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
 
         internal override void ExecutePriorityPatches()
         {
@@ -108,81 +56,29 @@
 
         internal static void Init()
         {
-            try
+            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
+            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
+            new AstroPatch(NewMenuXrefsSystem.openBigMenu, null, GetPatch(nameof(OnBigMenuOpen_Event)));
+            new AstroPatch(NewMenuXrefsSystem.closeBigMenu, null, GetPatch(nameof(OnBigMenuClose_Event)));
+            //new AstroPatch(NewMenuXrefsSystem.placeUiAfterPause, GetPatch(nameof(OnPlaceUiAfterPause)));
+            new AstroPatch(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Boolean_0)), GetPatch(nameof(OnShowScreen)));
+
+            foreach (MethodInfo method in typeof(MenuController).GetMethods().Where(mi => mi.Name.StartsWith("Method_Public_Void_APIUser_") && !mi.Name.Contains("_PDM_")))
             {
-                List<Type> quickMenuNestedEnums = typeof(QuickMenu).GetNestedTypes().Where(type => type.IsEnum).ToList();
-                _quickMenuEnumProperty = typeof(QuickMenu).GetProperties()
-                    .First(pi => pi.PropertyType.IsEnum && quickMenuNestedEnums.Contains(pi.PropertyType));
-                QuickMenuIndexEnum = _quickMenuEnumProperty.PropertyType;
-
-                BigMenuIndexEnum = quickMenuNestedEnums.First(type => type.IsEnum && type != QuickMenuIndexEnum);
-                _closeBigMenu = typeof(VRCUiManager).GetMethods()
-                    .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") && !mb.Name.Contains("_PDM_") && XrefUtils.CheckUsedBy(mb, "ChangeToSelectedAvatar"));
-                _openBigMenu = typeof(VRCUiManager).GetMethods()
-                    .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") && !mb.Name.Contains("_PDM_") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Backdrop/Backdrop"));
-
-                MethodInfo _placeUiAfterPause = typeof(QuickMenu).GetNestedTypes().First(type => type.Name.Contains("IEnumerator")).GetMethod("MoveNext");
-
-                new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUIPageToggle), BindingFlags.NonPublic | BindingFlags.Static)));
-                new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_0)), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUIPageToggle), BindingFlags.NonPublic | BindingFlags.Static)));
-                new AstroPatch(_openBigMenu, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnBigMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
-                new AstroPatch(_closeBigMenu, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnBigMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
-                new AstroPatch(_placeUiAfterPause, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnPlaceUiAfterPause), BindingFlags.NonPublic | BindingFlags.Static)));
-                new AstroPatch(typeof(VRCUiManager).GetMethod("Method_Public_Void_String_Boolean_0"), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnShowScreen), BindingFlags.NonPublic | BindingFlags.Static)));
-
-                foreach (MethodInfo method in typeof(MenuController).GetMethods().Where(mi => mi.Name.StartsWith("Method_Public_Void_APIUser_") && !mi.Name.Contains("_PDM_")))
-                    new AstroPatch(method, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUserInfoOpen_event), BindingFlags.NonPublic | BindingFlags.Static)));
-                new AstroPatch(AccessTools.Method(typeof(PageUserInfo), "Back"), null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnUserInfoClose), BindingFlags.NonPublic | BindingFlags.Static)));
-
-                _closeMenuMethod = typeof(UIManagerImpl).GetMethods()
-                    .First(method => method.Name.StartsWith("Method_Public_Virtual_Final_New_Void_") && XrefScanner.XrefScan(method).Count() == 2);
-                _closeQuickMenuMethod = typeof(UIManagerImpl).GetMethods()
-                    .First(method => method.Name.StartsWith("Method_Public_Void_Boolean_") && XrefUtils.CheckUsedBy(method, _closeMenuMethod.Name));
-                new AstroPatch(_closeQuickMenuMethod, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
-
-                _openQuickMenuMethod = typeof(UIManagerImpl).GetMethods()
-                    .First(method => method.Name.StartsWith("Method_Public_Void_Boolean_") && method.Name.Length <= 29 && XrefUtils.CheckUsing(method, "Method_Private_Void_"));
-                _openQuickMenuPageMethod = typeof(UIManagerImpl).GetMethods()
-                    .First(method => method.Name.StartsWith("Method_Public_Virtual_Final_New_Void_String_") && XrefUtils.CheckUsing(method, _openQuickMenuMethod.Name, _openQuickMenuMethod.DeclaringType));
-
-                // Patching the other method doesn't work for some reason you have to patch this
-                MethodInfo _onQuickMenuOpenedMethod = typeof(UIManagerImpl).GetMethods()
-                    .First(method => method.Name.StartsWith("Method_Private_Void_Boolean_") && !method.Name.Contains("_PDM_") && XrefUtils.CheckUsedBy(method, _openQuickMenuMethod.Name));
-                new AstroPatch(_onQuickMenuOpenedMethod, null, new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
-
-                _popupV2Small = typeof(VRCUiPopupManager).GetMethods()
-                    .First(mb => mb.Name.StartsWith("Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_") && !mb.Name.Contains("PDM") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Popups/StandardPopupV2") && XrefUtils.CheckUsedBy(mb, "OpenSaveSearchPopup"));
-                _popupV2 = typeof(VRCUiPopupManager).GetMethods()
-                    .First(mb => mb.Name.StartsWith("Method_Public_Void_String_String_String_Action_String_Action_Action_1_VRCUiPopup_") && !mb.Name.Contains("PDM") && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Popups/StandardPopupV2"));
+                new AstroPatch(method, null, GetPatch(nameof(OnUserInfoOpen_event)));
             }
-            catch (Exception e)
-            {
-                ModConsole.ErrorExc(e);
-            }
+
+            new AstroPatch(AccessTools.Method(typeof(PageUserInfo), "Back"), null, GetPatch(nameof(OnUserInfoClose)));
+
+            new AstroPatch(NewMenuXrefsSystem.closeQuickMenuMethod, null, GetPatch(nameof(OnQuickMenuClose_Event)));
+
+            new AstroPatch(NewMenuXrefsSystem.onQuickMenuOpenedMethod, null, GetPatch(nameof(OnQuickMenuOpen_Event)));
         }
 
         internal static void UiInit()
         {
-            tempUIParent = new GameObject("AstroClientTempUIParent").transform;
-            GameObject.DontDestroyOnLoad(tempUIParent.gameObject);
-
-            QMStateController = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)").GetComponent<MenuStateController>();
-
-            // index 0 works because transform doesn't inherit from monobehavior
-            _selectedUserManagerObject = GameObject.Find("_Application/UIManager/SelectedUserManager").GetComponent<UserSelectionManager>();
-
-            _selectUserMethod = typeof(UserSelectionManager).GetMethods()
-                .First(method => method.Name.StartsWith("Method_Public_Void_APIUser_") && !method.Name.Contains("_PDM_") && XrefUtils.CheckUsedBy(method, "Method_Public_Virtual_Final_New_Void_IUser_"));
-
-            MethodInfo[] pageMethods = typeof(UIPage).GetMethods()
-                .Where(method => method.Name.StartsWith("Method_Public_Void_UIPage_") && !method.Name.Contains("_PDM_"))
-                .ToArray();
-            _pushPageMethod = pageMethods.First(method => XrefUtils.CheckUsing(method, "Add"));
-            _removePageMethod = pageMethods.First(method => method != _pushPageMethod);
-
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuOpen_Event), BindingFlags.NonPublic | BindingFlags.Static)));
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), new HarmonyMethod(typeof(UiManager).GetMethod(nameof(OnQuickMenuClose_Event), BindingFlags.NonPublic | BindingFlags.Static)));
-
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), GetPatch(nameof(OnQuickMenuOpen_Event)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), GetPatch(nameof(OnQuickMenuClose_Event)));
         }
 
         private static void OnBigMenuOpen_Event() => Event_OnBigMenuOpen.SafetyRaise();
@@ -243,7 +139,7 @@
             _shouldSkipPlaceUiAfterPause = !rePlaceUi;
             if (openUi)
                 OpenBigMenu(false);
-            VRCUiManager.field_Private_Static_VRCUiManager_0.Method_Public_Void_String_Boolean_0(_bigMenuIndexToPathTable[index]);
+            VRCUiManager.field_Private_Static_VRCUiManager_0.Method_Public_Void_String_Boolean_0(NewMenuXrefsSystem.BigMenuIndexToPathTable[index]);
         }
 
         /// <summary>
@@ -258,7 +154,7 @@
         /// <summary>
         /// Closes the big menu.
         /// </summary>
-        internal static void CloseBigMenu() => _closeBigMenu.Invoke(VRCUiManager.prop_VRCUiManager_0, new object[2] { true, false });
+        internal static void CloseBigMenu() => NewMenuXrefsSystem.closeBigMenu.Invoke(VRCUiManager.prop_VRCUiManager_0, new object[2] { true, false });
 
         /// <summary>
         /// Opens the big menu.
@@ -269,7 +165,7 @@
         /// Opens the big menu
         /// </summary>
         /// <param name="showDefaultScreen">Whether to show the world menu after opening the big menu</param>
-        internal static void OpenBigMenu(bool showDefaultScreen) => _openBigMenu.Invoke(VRCUiManager.prop_VRCUiManager_0, new object[2] { showDefaultScreen, true });
+        internal static void OpenBigMenu(bool showDefaultScreen) => NewMenuXrefsSystem.openBigMenu.Invoke(VRCUiManager.prop_VRCUiManager_0, new object[2] { showDefaultScreen, true });
 
         private static void OnUserInfoOpen_event() => Event_OnUserInfoMenuOpen.SafetyRaise();
 
@@ -301,23 +197,23 @@
         {
             if (playerToSelect == null)
                 throw new ArgumentNullException("Given APIUser was null.");
-            _selectUserMethod.Invoke(UserSelectionManager.prop_UserSelectionManager_0, new object[1] { playerToSelect });
+            NewMenuXrefsSystem.selectUserMethod.Invoke(UserSelectionManager.prop_UserSelectionManager_0, new object[1] { playerToSelect });
         }
 
         /// <summary>
         /// Opens the QuickMenu.
         /// </summary>
-        internal static void OpenQuickMenu() => _openQuickMenuMethod?.Invoke(UIManagerImpl.prop_UIManagerImpl_0, null);
+        internal static void OpenQuickMenu() => NewMenuXrefsSystem.openQuickMenuMethod?.Invoke(UIManagerImpl.prop_UIManagerImpl_0, null);
 
         /// <summary>
         /// Closes the QuickMenu.
         /// </summary>
-        internal static void CloseQuickMenu() => _closeQuickMenuMethod?.Invoke(UIManagerImpl.prop_UIManagerImpl_0, new object[1] { false });
+        internal static void CloseQuickMenu() => NewMenuXrefsSystem.closeQuickMenuMethod?.Invoke(UIManagerImpl.prop_UIManagerImpl_0, new object[1] { false });
 
         /// <summary>
         /// Closes all open menus.
         /// </summary>
-        internal static void CloseMenu() => _closeMenuMethod?.Invoke(UIManagerImpl.prop_UIManagerImpl_0, null);
+        internal static void CloseMenu() => NewMenuXrefsSystem.closeMenuMethod?.Invoke(UIManagerImpl.prop_UIManagerImpl_0, null);
 
         /// <summary>
         /// Closes the current open popup
@@ -332,7 +228,7 @@
         /// <param name="buttonText">The text of the center button</param>
         /// <param name="onButtonClick">The onClick of the center button</param>
         /// <param name="additionalSetup">A callback called when the popup is initialized</param>
-        internal static void OpenSmallPopup(string title, string description, string buttonText, Action onButtonClick, Action<VRCUiPopup> additionalSetup = null) => _popupV2Small.Invoke(VRCUiPopupManager.prop_VRCUiPopupManager_0, new object[5] { title, description, buttonText, (Il2CppSystem.Action)onButtonClick, (Il2CppSystem.Action<VRCUiPopup>)additionalSetup });
+        internal static void OpenSmallPopup(string title, string description, string buttonText, Action onButtonClick, Action<VRCUiPopup> additionalSetup = null) => NewMenuXrefsSystem.popupV2Small.Invoke(VRCUiPopupManager.prop_VRCUiPopupManager_0, new object[5] { title, description, buttonText, (Il2CppSystem.Action)onButtonClick, (Il2CppSystem.Action<VRCUiPopup>)additionalSetup });
 
         /// <summary>
         /// Opens a small popup v2 with the title "Error!".
@@ -356,7 +252,7 @@
         /// <param name="rightButtonText">The text of the right button</param>
         /// <param name="rightButtonClick">The onClick of the right button</param>
         /// <param name="additionalSetup">A callback called when the popup is initialized</param>
-        internal static void OpenPopup(string title, string description, string leftButtonText, Action leftButtonClick, string rightButtonText, Action rightButtonClick, Action<VRCUiPopup> additionalSetup = null) => _popupV2.Invoke(VRCUiPopupManager.prop_VRCUiPopupManager_0, new object[7] { title, description, leftButtonText, (Il2CppSystem.Action)leftButtonClick, rightButtonText, (Il2CppSystem.Action)rightButtonClick, (Il2CppSystem.Action<VRCUiPopup>)additionalSetup });
+        internal static void OpenPopup(string title, string description, string leftButtonText, Action leftButtonClick, string rightButtonText, Action rightButtonClick, Action<VRCUiPopup> additionalSetup = null) => NewMenuXrefsSystem.popupV2.Invoke(VRCUiPopupManager.prop_VRCUiPopupManager_0, new object[7] { title, description, leftButtonText, (Il2CppSystem.Action)leftButtonClick, rightButtonText, (Il2CppSystem.Action)rightButtonClick, (Il2CppSystem.Action<VRCUiPopup>)additionalSetup });
 
         ///// <summary>
         ///// Adds a button to an existing group of buttons.
