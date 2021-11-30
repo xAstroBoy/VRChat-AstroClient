@@ -1,8 +1,11 @@
 ﻿namespace AstroClient.Constants
 {
+    using System;
     using System.Collections.Generic;
     using UnityEngine;
     using VRC.Udon;
+    using VRC.Udon.Common.Interfaces;
+    using xAstroBoy.Extensions;
 
     internal class CustomLists : AstroEvents
     {
@@ -23,6 +26,24 @@
             {
                 UdonBehaviour = udonBehaviour;
                 EventKey = eventKey;
+            }
+
+            internal void InvokeBehaviour()
+            {
+                if (UdonBehaviour != null)
+                {
+                    if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
+                    {
+                        if (EventKey.StartsWith("_"))
+                        {
+                            UdonBehaviour.SendCustomEvent(EventKey);
+                        }
+                        else
+                        {
+                            UdonBehaviour.SendCustomNetworkEvent(NetworkEventTarget.All, EventKey);
+                        }
+                    }
+                }
             }
         }
 

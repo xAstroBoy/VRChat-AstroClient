@@ -77,16 +77,16 @@
                     switch (CurrentHealth.Value)
                     {
                         case 3:
-                            ResetHealth.ExecuteUdonEvent();
+                            ResetHealth.InvokeBehaviour();
                             break;
                         case 2:
-                            ResetHealth.ExecuteUdonEvent();
+                            ResetHealth.InvokeBehaviour();
                             break;
                         case 1:
-                            ResetHealth.ExecuteUdonEvent();
+                            ResetHealth.InvokeBehaviour();
                             break;
                         case 0:
-                            ResetHealth.ExecuteUdonEvent();
+                            ResetHealth.InvokeBehaviour();
                             break;
                     }
         }

@@ -33,10 +33,10 @@
                 }
 
                 ModConsole.Log($"Recognized {Name}, Cheats available.");
-                var one = UdonSearch.FindUdonEvent("Bank", "Restart").UdonBehaviour.gameObject;
-                if (one != null)
+                ResetBalance = UdonSearch.FindUdonEvent("Bank", "Restart");
+                if (ResetBalance != null)
                 {
-                    BankEditor = one.GetOrAddComponent<SuperTowerDefense_BankEditor>();
+                    BankEditor = ResetBalance.UdonBehaviour.GetOrAddComponent<SuperTowerDefense_BankEditor>();
                 }
                 var revive = UdonSearch.FindUdonEvent("HealthController", "Revive");
                 if (revive != null)
@@ -66,7 +66,7 @@
                     if (RedWrenchPickup != null)
                     {
                         RedWrenchPickup.OnPickupUseUp = null;
-                        RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.ExecuteUdonEvent(); });
+                        RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.InvokeBehaviour(); });
                         RedWrenchPickup.enabled = false;
                     }
                 }
@@ -76,7 +76,7 @@
                     if (BlueWrenchPickup != null)
                     {
                         BlueWrenchPickup.OnPickupUseUp = null;
-                        BlueWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.ExecuteUdonEvent(); });
+                        BlueWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.InvokeBehaviour(); });
                         BlueWrenchPickup.enabled = false;
                     }
                 }
@@ -86,7 +86,7 @@
                     if (HammerPickup != null)
                     {
                         HammerPickup.OnPickupUseUp = null;
-                        HammerPickup.OnPickupUseUp += new System.Action(() => { LoseHealth.ExecuteUdonEvent(); });
+                        HammerPickup.OnPickupUseUp += new System.Action(() => { LoseHealth.InvokeBehaviour(); });
                         HammerPickup.enabled = false;
                     }
                 }
@@ -146,8 +146,8 @@
             ReturnHammerButtonTool = null;
         }
 
-        
-        private static void FixTheTowers(bool RespawnTowers)
+
+        internal static void FixTheTowers(bool RespawnTowers)
         {
             foreach (var item in WorldUtils.Pickups)
             {
@@ -156,7 +156,8 @@
                     item.gameObject.Pickup_Set_Pickupable(true); // Override and fix potential Tower Bugs.
                     if (RespawnTowers)
                     {
-                        item.GetComponent<SyncPhysics>().RespawnItem();
+                        item.gameObject.TakeOwnership();
+                        item.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
                     }
                 }
             }
@@ -277,7 +278,7 @@
 
         private static bool _RepairLifeWrenches;
 
-        private static bool RepairLifeWrenches
+        internal static bool RepairLifeWrenches
         {
             get
             {
@@ -319,7 +320,7 @@
 
         private static bool _LoseLifeHammer;
 
-        private static bool LoseLifeHammer
+        internal static bool LoseLifeHammer
         {
             get
             {
@@ -351,7 +352,7 @@
 
         private static bool _FreezeHammer;
 
-        private static bool FreezeHammer
+        internal static bool FreezeHammer
         {
             get
             {
@@ -386,7 +387,7 @@
         }
         private static bool _BlockHammerReturn;
 
-        private static bool BlockHammerReturnButton
+        internal static bool BlockHammerReturnButton
         {
             get
             {
@@ -413,7 +414,9 @@
                     {
                         foreach (var apple in WorldApples)
                         {
+                            apple.TakeOwnership();
                             apple.Remove_ObjectFreezer();
+                            apple.gameObject.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
                         }
                     }
                 }
@@ -452,7 +455,7 @@
 
         private static bool _AutomaticWaveStart = false;
 
-        private static bool AutomaticWaveStart
+        internal static bool AutomaticWaveStart
         {
             get
             {
@@ -492,14 +495,14 @@
                 yield return new WaitForSeconds(1);
                 if (WaveEvent != null)
                 {
-                    WaveEvent.ExecuteUdonEvent();
+                    WaveEvent.InvokeBehaviour();
                 }
                 yield return null;
             }
             yield return null;
         }
 
-        private static bool? GodMode
+        internal static bool? GodMode
         {
             get
             {
@@ -551,10 +554,14 @@
 
         private static GameObject ReturnHammerButtonTool { get; set; }
 
-        private static UdonBehaviour_Cached ResetHealth { get; set; }
+        internal static UdonBehaviour_Cached ResetHealth { get; private set; }
 
-        private static UdonBehaviour_Cached LoseHealth { get; set; }
+        internal static UdonBehaviour_Cached LoseHealth { get; private set; }
 
-        private static UdonBehaviour_Cached WaveEvent { get; set; }
+        internal static UdonBehaviour_Cached WaveEvent { get; private set; }
+
+
+        internal static UdonBehaviour_Cached ResetBalance { get; private set; }
+
     }
 }

@@ -156,7 +156,7 @@
                 var subaction_btn = new QMSingleButton(menu, "Sabotage All Doors", null, "Sabotage All Doors");
                 subaction_btn.SetAction(new Action(() =>
                 {
-                    CachedDoorsEvents.ExecuteUdonEvent();
+                    CachedDoorsEvents.InvokeBehaviour();
                 }));
                 subaction_btn.SetTextColor(Color.red);
                 GeneratedButtons.Add(subaction_btn);

@@ -135,7 +135,7 @@
                                     if (PatronSkinEvent != null)
                                     {
                                         IgnoreEventReceiver = true;
-                                        PatronSkinEvent.ExecuteUdonEvent();
+                                        PatronSkinEvent.InvokeBehaviour();
                                         IgnoreEventReceiver = false;
                                     }
                                 });
@@ -148,7 +148,7 @@
                                         if (PatronSkinEvent != null)
                                         {
                                             IgnoreEventReceiver = true;
-                                            PatronSkinEvent.ExecuteUdonEvent();
+                                            PatronSkinEvent.InvokeBehaviour();
                                             IgnoreEventReceiver = false;
                                         }
                                     });
@@ -174,7 +174,7 @@
             if (PatronSkinEvent != null)
             {
                 IgnoreEventReceiver = true;
-                PatronSkinEvent.ExecuteUdonEvent();
+                PatronSkinEvent.InvokeBehaviour();
                 IgnoreEventReceiver = false;
             }
         }
@@ -184,7 +184,7 @@
             if (PatronSkinEvent != null)
             {
                 IgnoreEventReceiver = true;
-                NonPatronSkinEvent.ExecuteUdonEvent();
+                NonPatronSkinEvent.InvokeBehaviour();
                 IgnoreEventReceiver = false;
             }
         }
@@ -197,7 +197,7 @@
                         if (PatronSkinEvent != null)
                         {
                             IgnoreEventReceiver = true;
-                            PatronSkinEvent.ExecuteUdonEvent();
+                            PatronSkinEvent.InvokeBehaviour();
                             IgnoreEventReceiver = false;
                         }
         }

@@ -223,12 +223,12 @@
             //    if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
             //    {
             //        PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-            //        patronCheckFool.ExecuteUdonEvent();
+            //        patronCheckFool.Invoke();
             //        PlayerSpooferUtils.SpoofAsWorldAuthor = false;
             //    }
             //    else
             //    {
-            //        patronCheckFool.ExecuteUdonEvent();
+            //        patronCheckFool.Invoke();
             //    }
             //}
             item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
@@ -562,32 +562,32 @@
             _ = new QMSingleButton(MurderItemTeleporter, "Shotgun!", () =>
             {
                 item_Shotgun.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.ExecuteUdonEvent();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
             }, "Shotgun Gun Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Detective Gun!", () =>
             {
                 item_DetectiveRevolver.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.ExecuteUdonEvent();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
             }, "Detective Gun Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Silenced Gun 1!", () =>
             {
                 item_Silenced_Revolver_0.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.ExecuteUdonEvent();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
             }, "Silenced Gun Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Silenced Gun 2!", () =>
             {
                 item_Silenced_Revolver_1.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.ExecuteUdonEvent();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
             }, "Silenced Gun Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Grenade!", () =>
             {
                 item_Grenade.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.ExecuteUdonEvent();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
             }, "Grenade Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Traps!", () =>
             {
                 BearTraps.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.ExecuteUdonEvent();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
             }, "Silenced Gun Teleporter!");
             PresentTeleporter = new QMSingleButton(MurderItemTeleporter, 1, 2, "Present!", () => { Clue_Present.TeleportToMe(); }, "Clue Teleporter!");
 
@@ -767,10 +767,10 @@
             Murder4_UnfilteredNodes.InitButtons(Cheats);
             Murder4_RoleSwapper.InitButtons(Cheats);
 
-            GameAbortbtn = new QMSingleButton(Cheats, "Abort Game", () => { AbortGameEvent.ExecuteUdonEvent(); }, "Force Abort Game Event", Color.Red);
-            GameVictoryBystanderBtn = new QMSingleButton(Cheats, "Victory Bystander", () => { VictoryBystanderEvent.ExecuteUdonEvent(); }, "Force Victory Bystander Event", Color.Red);
-            GameVictoryMurdererBtn = new QMSingleButton(Cheats, "Victory Murderer", () => { VictoryMurdererEvent.ExecuteUdonEvent(); }, "Force Victory Murderer Event", Color.Red);
-            GameStartbtn = new QMSingleButton(Cheats, "Start Game", () => { StartGameEvent.ExecuteUdonEvent(); }, "Force Start Game Event", Color.GreenYellow);
+            GameAbortbtn = new QMSingleButton(Cheats, "Abort Game", () => { AbortGameEvent.InvokeBehaviour(); }, "Force Abort Game Event", Color.Red);
+            GameVictoryBystanderBtn = new QMSingleButton(Cheats, "Victory Bystander", () => { VictoryBystanderEvent.InvokeBehaviour(); }, "Force Victory Bystander Event", Color.Red);
+            GameVictoryMurdererBtn = new QMSingleButton(Cheats, "Victory Murderer", () => { VictoryMurdererEvent.InvokeBehaviour(); }, "Force Victory Murderer Event", Color.Red);
+            GameStartbtn = new QMSingleButton(Cheats, "Start Game", () => { StartGameEvent.InvokeBehaviour(); }, "Force Start Game Event", Color.GreenYellow);
         }
 
         internal static void ToggleKnifesGrab(bool Pickupable)

@@ -63,7 +63,7 @@
                                 UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_temp_StringArray, List3.ToArray(), true);
                             }
 
-                            PickupSync_SPH_SFB_SACBehaviour.ExecuteUdonEvent();
+                            PickupSync_SPH_SFB_SACBehaviour.InvokeBehaviour();
                         }
                     }
 
@@ -84,7 +84,7 @@
                                 }
 
                             }
-                            PanelBehaviour.ExecuteUdonEvent();
+                            PanelBehaviour.InvokeBehaviour();
 
                         }
 

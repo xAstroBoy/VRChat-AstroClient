@@ -168,7 +168,7 @@
             }
             if (ClearPensUdonEvents.Count() != 0)
             {
-                ClearPensUdonEvents.ExecuteUdonEvent();
+                ClearPensUdonEvents.InvokeBehaviour();
             }
 
             stopwatch.Stop();

@@ -41,33 +41,8 @@
             return UdonSearch.FindUdonEvent(obj, subaction);
         }
 
-        internal static void ExecuteUdonEvent(this UdonBehaviour_Cached udonvar)
-        {
-            if (udonvar != null)
-            {
-                InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey);
-            }
-        }
 
-        private static void InvokeEvent(UdonBehaviour behaviour, string EventKey)
-        {
-            if (behaviour != null)
-            {
-                if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
-                {
-                    if (EventKey.StartsWith("_"))
-                    {
-                        behaviour.SendCustomEvent(EventKey);
-                    }
-                    else
-                    {
-                        behaviour.SendCustomNetworkEvent(NetworkEventTarget.All, EventKey);
-                    }
-                }
-            }
-        }
-
-        internal static void ExecuteUdonEvent(this List<UdonBehaviour_Cached> udonlist)
+        internal static void InvokeBehaviour(this List<UdonBehaviour_Cached> udonlist)
         {
             if (udonlist == null || udonlist.Count() == 0)
             {
@@ -75,7 +50,7 @@
             }
             foreach (var udonvar in udonlist)
             {
-                udonvar.ExecuteUdonEvent();
+                udonvar.InvokeBehaviour();
             }
         }
     }

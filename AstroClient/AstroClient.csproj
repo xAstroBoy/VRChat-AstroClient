@@ -110,6 +110,7 @@
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\OrbitUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\PickupProtector.cs" />

@@ -49,10 +49,6 @@
             Init();
         }
 
-        internal override void VRChat_OnQuickMenuInit()
-        {
-            UiInit();
-        }
 
         internal static void Init()
         {
@@ -71,15 +67,13 @@
             new AstroPatch(AccessTools.Method(typeof(PageUserInfo), "Back"), null, GetPatch(nameof(OnUserInfoClose)));
 
             new AstroPatch(NewMenuXrefsSystem.closeQuickMenuMethod, null, GetPatch(nameof(OnQuickMenuClose_Event)));
-
             new AstroPatch(NewMenuXrefsSystem.onQuickMenuOpenedMethod, null, GetPatch(nameof(OnQuickMenuOpen_Event)));
+
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), null, GetPatch(nameof(OnQuickMenuOpen_Event)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null,  GetPatch(nameof(OnQuickMenuClose_Event)));
+
         }
 
-        internal static void UiInit()
-        {
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), GetPatch(nameof(OnQuickMenuOpen_Event)));
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), GetPatch(nameof(OnQuickMenuClose_Event)));
-        }
 
         private static void OnBigMenuOpen_Event() => Event_OnBigMenuOpen.SafetyRaise();
 

@@ -287,18 +287,18 @@
             {
                 case AmongUs_Roles.Crewmate:
                     {
-                        GetCrewmateEvent?.ExecuteUdonEvent();
+                        GetCrewmateEvent?.InvokeBehaviour();
                         break;
                     }
                 case AmongUs_Roles.Impostor:
                     {
-                        GetImpostorEvent?.ExecuteUdonEvent();
+                        GetImpostorEvent?.InvokeBehaviour();
                         break;
                     }
                 case AmongUs_Roles.None:
                     if (CurrentRole == AmongUs_Roles.Impostor || CurrentRole == AmongUs_Roles.Crewmate)
                     {
-                        GetKillEvent?.ExecuteUdonEvent();
+                        GetKillEvent?.InvokeBehaviour();
                     }
 
                     break;

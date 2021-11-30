@@ -393,7 +393,7 @@
                 SetTableSkin(value);
                 if (UpdateColorScheme_Table != null)
                 {
-                    UpdateColorScheme_Table.ExecuteUdonEvent();
+                    UpdateColorScheme_Table.InvokeBehaviour();
                 }
             }
         }

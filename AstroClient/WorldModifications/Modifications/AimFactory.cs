@@ -148,13 +148,13 @@
                         if (udonevent1 != null)
                         {
                             ModConsole.DebugLog($"Sent Hit Event on {RandomTarget.name}");
-                            udonevent1.ExecuteUdonEvent();
+                            udonevent1.InvokeBehaviour();
                         }
                         var udonevent = UdonSearch.FindUdonEvent(RandomTarget, "AllwaysHit");
                         if (udonevent != null)
                         {
                             ModConsole.DebugLog($"Sent AllwaysHit Event on {RandomTarget.name}");
-                            udonevent.ExecuteUdonEvent();
+                            udonevent.InvokeBehaviour();
                         }
                     }
                 }

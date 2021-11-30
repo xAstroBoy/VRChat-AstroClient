@@ -220,13 +220,13 @@ namespace AstroClient.WorldModifications.Modifications
 
         private static void LockDoor(int doorID)
         {
-            UdonSearch.FindUdonEvent($"Room {doorID} main script", "OnToggle").ExecuteUdonEvent();
+            UdonSearch.FindUdonEvent($"Room {doorID} main script", "OnToggle").InvokeBehaviour();
             //RefreshButtons();
         }
 
         private static void UnlockDoor(int doorID)
         {
-            UdonSearch.FindUdonEvent($"Room {doorID} main script", "OffToggle").ExecuteUdonEvent();
+            UdonSearch.FindUdonEvent($"Room {doorID} main script", "OffToggle").InvokeBehaviour();
             //RefreshButtons();
         }
 

@@ -226,22 +226,22 @@
             {
                 case Murder4_Roles.Bystander:
                     {
-                        GetBystanderEvent?.ExecuteUdonEvent();
+                        GetBystanderEvent?.InvokeBehaviour();
                         break;
                     }
                 case Murder4_Roles.Detective:
                     {
-                        GetDetectiveEvent?.ExecuteUdonEvent();
+                        GetDetectiveEvent?.InvokeBehaviour();
                         break;
                     }
                 case Murder4_Roles.Murderer:
                     {
-                        GetMurdererEvent?.ExecuteUdonEvent();
+                        GetMurdererEvent?.InvokeBehaviour();
                         break;
                     }
                 case Murder4_Roles.None:
                     if (CurrentRole == Murder4_Roles.Detective || CurrentRole == Murder4_Roles.Murderer || CurrentRole == Murder4_Roles.Bystander)
-                        GetKillEvent?.ExecuteUdonEvent();
+                        GetKillEvent?.InvokeBehaviour();
                     break;
 
                 default:

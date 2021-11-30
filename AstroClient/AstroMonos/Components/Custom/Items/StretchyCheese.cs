@@ -29,7 +29,7 @@
             if (ExtendCheese != null)
             {
                 var PickupBehaviour = gameObject.AddComponent<VRC_AstroPickup>();
-                if (PickupBehaviour != null) PickupBehaviour.OnPickupUseUp += () => { ExtendCheese.ExecuteUdonEvent(); };
+                if (PickupBehaviour != null) PickupBehaviour.OnPickupUseUp += () => { ExtendCheese.InvokeBehaviour(); };
             }
             else
             {

@@ -306,7 +306,7 @@
 
                 foreach (var udon in ColorActions)
                 {
-                    udon?.ExecuteUdonEvent();
+                    udon?.InvokeBehaviour();
                     yield return new WaitForSeconds(0.05f);
                 }
 
@@ -346,7 +346,7 @@
                     yield break;
                 }
 
-                UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt")?.ExecuteUdonEvent();
+                UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt")?.InvokeBehaviour();
                 ModConsole.Log("Moan Bitch!");
 
                 if (IsMoanSpamEnabled)
@@ -438,7 +438,7 @@
 
                 foreach (var bell in _bells)
                 {
-                    bell?.ExecuteUdonEvent();
+                    bell?.InvokeBehaviour();
                     yield return new WaitForSeconds(0.1f);
                 }
 
@@ -485,7 +485,7 @@
 
                 foreach (var chair in _chairs)
                 {
-                    chair?.ExecuteUdonEvent();
+                    chair?.InvokeBehaviour();
                     yield return new WaitForSeconds(0.001f);
                 }
 
@@ -504,11 +504,11 @@
         {
             if (doorID <= 6)
             {
-                UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}")?.ExecuteUdonEvent();
+                UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}")?.InvokeBehaviour();
             }
             else if (doorID == 7)
             {
-                UdonSearch.FindUdonEvent("Patreon", $"_ToggleLockVip")?.ExecuteUdonEvent();
+                UdonSearch.FindUdonEvent("Patreon", $"_ToggleLockVip")?.InvokeBehaviour();
             }
         }
 
@@ -876,7 +876,7 @@
                             clone.AddCollider();
 
                             var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
-                            void action() { udonEvent.ExecuteUdonEvent(); }
+                            void action() { udonEvent.InvokeBehaviour(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
@@ -927,7 +927,7 @@
                             clone.RenameObject($"Lock {doorID}");
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}");
-                            void action() { udonEvent.ExecuteUdonEvent(); }
+                            void action() { udonEvent.InvokeBehaviour(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
@@ -977,7 +977,7 @@
                             clone.RenameObject($"Looking {doorID}");
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLooking{doorID}");
-                            void action() { udonEvent.ExecuteUdonEvent(); }
+                            void action() { udonEvent.InvokeBehaviour(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
@@ -1029,7 +1029,7 @@
                             clone.AddCollider();
 
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleAnon{doorID}");
-                            void action() { udonEvent.ExecuteUdonEvent(); }
+                            void action() { udonEvent.InvokeBehaviour(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
@@ -1080,7 +1080,7 @@
                             clone.RenameObject($"Do Not Disturb {doorID}");
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleDoorbell{doorID}");
-                            void action() { udonEvent.ExecuteUdonEvent(); }
+                            void action() { udonEvent.InvokeBehaviour(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {

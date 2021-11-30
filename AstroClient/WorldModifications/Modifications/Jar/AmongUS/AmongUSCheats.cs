@@ -8,6 +8,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using Constants;
     using MelonLoader;
     using Tools.Extensions;
     using Tools.Player.Movement.Exploit;
@@ -16,6 +17,7 @@
     using UdonCheats;
     using UnityEngine;
     using VRC;
+    using VRC.Udon.Common.Interfaces;
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI;
@@ -29,7 +31,6 @@
 
         internal static bool _RoleSwapper_GetImpostorRole;
 
-        private static List<Transform> BodyOutlines = new();
         private static Vector3 SerializerPos;
         private static Quaternion SerializerRot;
 
@@ -50,9 +51,26 @@
 
         internal static UdonBehaviour_Cached StartGameEvent;
         internal static UdonBehaviour_Cached AbortGameEvent;
+        internal static UdonBehaviour_Cached EmergencyMeetingEvent;
 
         internal static UdonBehaviour_Cached VictoryCrewmateEvent;
         internal static UdonBehaviour_Cached VictoryImpostorEvent;
+
+        internal static UdonBehaviour_Cached EmptyGarbage_Storage_A;
+        internal static UdonBehaviour_Cached EmptyGarbage_Storage_B;
+
+        internal static UdonBehaviour_Cached EmptyGarbage_Oxygen_A;
+        internal static UdonBehaviour_Cached EmptyGarbage_Oxygen_B;
+
+        internal static UdonBehaviour_Cached EmptyGarbage_Cafeteria_A;
+        internal static UdonBehaviour_Cached EmptyGarbage_Cafeteria_B;
+
+        internal static UdonBehaviour_Cached CancelAllSabotages;
+        internal static UdonBehaviour_Cached SabotageLights;
+
+        internal static UdonBehaviour_Cached SubmitScanTask;
+
+        internal static List<UdonBehaviour_Cached> SabotageAllDoors = new();
 
         internal static bool RoleSwapper_GetImpostorRole
         {
@@ -65,8 +83,12 @@
             }
         }
 
-        private static bool AmongUsSerializer
+        internal static bool AmongUsSerializer
         {
+            get
+            {
+                return MovementSerializer.SerializerActivated;
+            }
             set
             {
                 if (value)
@@ -95,8 +117,7 @@
                 if (value)
                     foreach (var item in BodyOutlines)
                     {
-                        var ESP = item.gameObject.GetComponent<ESP_VRCInteractable>();
-                        if (ESP == null) ESP = item.gameObject.AddComponent<ESP_VRCInteractable>();
+                        var ESP = item.gameObject.GetOrAddComponent<ESP_VRCInteractable>();
                         if (ESP != null) MiscUtils.DelayFunction(0.4f, () => { ESP.ChangeColor(Color.yellow); });
                     }
                 else
@@ -111,6 +132,23 @@
             }
         }
 
+        private static List<Transform> BodyOutlines
+        {
+            get
+            {
+                var result = new List<Transform>();
+                if (JarRoleController.JarRoleLinks.Count() != 0)
+                    foreach (var item in JarRoleController.JarRoleLinks)
+                    {
+                        var corpse = item.Node.FindObject("Corpse");
+                        if (corpse != null)
+                            result.Add(corpse);
+                    }
+
+                return result;
+            }
+        }
+
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             StartGameEvent = null;
@@ -122,8 +160,20 @@
             SerializerRot = new Quaternion(0, 0, 0, 0);
             SerializerPos = Vector3.zero;
             if (ToggleSerializerShortcut != null) ToggleSerializerShortcut.SetToggleState(false);
-            BodyOutlines.Clear();
+            EmptyGarbage_Storage_A = null;
+            EmptyGarbage_Storage_B = null;
+
+            EmptyGarbage_Oxygen_A = null;
+            EmptyGarbage_Oxygen_B = null;
+
+            EmptyGarbage_Cafeteria_A = null;
+            EmptyGarbage_Cafeteria_B = null;
+            CancelAllSabotages = null;
+            EmergencyMeetingEvent = null;
             BodyESPs = false;
+            SabotageLights = null;
+            SabotageAllDoors.Clear();
+            SubmitScanTask = null;
         }
 
         internal static void FindAmongUsObjects()
@@ -137,40 +187,40 @@
             if (invisiblewall != null) invisiblewall.DestroyMeLocal();
             if (invisiblewall_1 != null) invisiblewall_1.DestroyMeLocal();
 
-            foreach (var action in UdonParser.WorldBehaviours)
-                if (action.gameObject.name == "Game Logic")
-                    foreach (var subaction in action._eventTable)
+
+            StartGameEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncStart");
+            AbortGameEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncAbort");
+            VictoryCrewmateEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncVictoryB");
+            VictoryImpostorEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncVictoryM");
+            EmergencyMeetingEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncEmergencyMeeting");
+            CancelAllSabotages = UdonSearch.FindUdonEvent("Game Logic", "CancelAllSabotage");
+            SabotageLights = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageLights");
+
+
+            EmptyGarbage_Storage_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Storage)", "SyncConfirmAnimation");
+            EmptyGarbage_Storage_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Storage)", "SyncConfirmAnimation");
+
+            EmptyGarbage_Oxygen_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Oxygen)", "SyncConfirmAnimation");
+            EmptyGarbage_Oxygen_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Oxygen)", "SyncConfirmAnimation");
+
+            EmptyGarbage_Cafeteria_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Cafeteria)", "SyncConfirmAnimation");
+            EmptyGarbage_Cafeteria_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Cafeteria)", "SyncConfirmAnimation");
+            SubmitScanTask = UdonSearch.FindUdonEvent("Task Submit Scan", "SyncStartScan");
+
+            foreach (var subaction in VictoryCrewmateEvent.UdonBehaviour._eventTable)
+            {
+                if (subaction.Key.StartsWith("SyncDoSabotage"))
+                {
+                    if (subaction.key.Contains("Doors"))
                     {
-                        if (subaction.key == "SyncStart")
+                        var tmp = new CustomLists.UdonBehaviour_Cached(VictoryCrewmateEvent.UdonBehaviour, subaction.key);
+                        if (!SabotageAllDoors.Contains(tmp))
                         {
-                            StartGameEvent = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Start Game Event.");
-                        }
-
-                        if (subaction.key == "SyncAbort")
-                        {
-                            AbortGameEvent = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Abort Game Event.");
-                        }
-
-                        if (subaction.key == "SyncVictoryB")
-                        {
-                            VictoryCrewmateEvent = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Victory Crewmate Event.");
-                        }
-
-                        if (subaction.key == "SyncVictoryM")
-                        {
-                            VictoryImpostorEvent = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Victory Impostor Event.");
-                        }
-
-                        if (StartGameEvent != null && AbortGameEvent != null && VictoryCrewmateEvent != null && VictoryImpostorEvent != null)
-                        {
-                            ModConsole.DebugLog("Finished Finding all Udon Events!");
-                            break;
+                            SabotageAllDoors.Add(tmp);
                         }
                     }
+                }
+            }
 
             if (GameStartbtn != null)
             {
@@ -196,14 +246,6 @@
                 GameVictoryImpostorBtn.SetIntractable(VictoryImpostorEvent.IsNotNull());
             }
 
-            if (JarRoleController.JarRoleLinks.Count() != 0)
-                foreach (var item in JarRoleController.JarRoleLinks)
-                {
-                    var corpse = item.Node.FindObject("Corpse");
-                    if (corpse != null)
-                        if (!BodyOutlines.Contains(corpse))
-                            BodyOutlines.Add(corpse);
-                }
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -219,12 +261,12 @@
                     if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
                     {
                         PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                        patronCheckFool.ExecuteUdonEvent();
+                        patronCheckFool.InvokeBehaviour();
                         PlayerSpooferUtils.SpoofAsWorldAuthor = false;
                     }
                     else
                     {
-                        patronCheckFool.ExecuteUdonEvent();
+                        patronCheckFool.InvokeBehaviour();
                     }
                 }
 
@@ -270,11 +312,11 @@
             ToggleSerializerShortcut = new QMToggleButton(AmongUsCheatsPage, "Toggle Serializer", () => { AmongUsSerializer = true; }, "Toggle Serializer", () => { AmongUsSerializer = false; }, "Serialize For Stealth or to frame someone else!");
             GameBodyESPBtn = new QMToggleButton(AmongUsCheatsPage, "Body ESP", () => { BodyESPs = true; }, "Body ESP", () => { BodyESPs = false; }, "Makes Impostor Kills Visible (Yellow)!");
 
-            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, "Start Game", () => { StartGameEvent.ExecuteUdonEvent(); }, "Force Start Game Event", Color.green);
-            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, "Abort Game", () => { AbortGameEvent.ExecuteUdonEvent(); }, "Force Abort Game Event", Color.green);
+            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, "Start Game", () => { StartGameEvent.InvokeBehaviour(); }, "Force Start Game Event", Color.green);
+            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, "Abort Game", () => { AbortGameEvent.InvokeBehaviour(); }, "Force Abort Game Event", Color.green);
 
-            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Crewmate", () => { VictoryCrewmateEvent.ExecuteUdonEvent(); }, "Force Victory Crewmate Event", Color.green);
-            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Impostor", () => { VictoryImpostorEvent.ExecuteUdonEvent(); }, "Force Victory Impostor Event", Color.red);
+            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Crewmate", () => { VictoryCrewmateEvent.InvokeBehaviour(); }, "Force Victory Crewmate Event", Color.green);
+            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Impostor", () => { VictoryImpostorEvent.InvokeBehaviour(); }, "Force Victory Impostor Event", Color.red);
         }
 
         internal static AmongUS_ESP FindNodeWithRole(AmongUs_Roles role)
@@ -306,6 +348,17 @@
                             if (CancellationToken == null)
                             {
                                 MelonCoroutines.Start(SwapRole(AmongUs_Roles.Impostor));
+                            }
+                        }
+                    }
+
+                    if (action.isMatch("SyncBodyFound") || action.isMatch("SyncEmergencyMeeting"))
+                    {
+                        if (JarRoleController.CurrentPlayer_AmongUS_ESP != null)
+                        {
+                            if (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole != AmongUs_Roles.None)
+                            {
+                                AmongUsSerializer = false;
                             }
                         }
                     }

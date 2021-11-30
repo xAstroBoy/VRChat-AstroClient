@@ -197,42 +197,42 @@
                 {
                     if (ShootBomb0 != null)
                     {
-                        ShootBomb0.ExecuteUdonEvent();
+                        ShootBomb0.InvokeBehaviour();
                     }
                 }
                 else if (Override_ShootBomb_1_Toggle)
                 {
                     if (ShootBomb1 != null)
                     {
-                        ShootBomb1.ExecuteUdonEvent();
+                        ShootBomb1.InvokeBehaviour();
                     }
                 }
                 else if (Override_ShootBomb_2_Toggle)
                 {
                     if (ShootBomb2 != null)
                     {
-                        ShootBomb2.ExecuteUdonEvent();
+                        ShootBomb2.InvokeBehaviour();
                     }
                 }
                 else if (Override_ShootBomb_3_Toggle)
                 {
                     if (ShootBomb3 != null)
                     {
-                        ShootBomb3.ExecuteUdonEvent();
+                        ShootBomb3.InvokeBehaviour();
                     }
                 }
                 else if (Override_ShootBomb_4_Toggle)
                 {
                     if (ShootBomb4 != null)
                     {
-                        ShootBomb4.ExecuteUdonEvent();
+                        ShootBomb4.InvokeBehaviour();
                     }
                 }
                 else if (Override_ShootBomb_5_Toggle)
                 {
                     if (ShootBombEx != null)
                     {
-                        ShootBombEx.ExecuteUdonEvent();
+                        ShootBombEx.InvokeBehaviour();
                     }
                 }
             }
