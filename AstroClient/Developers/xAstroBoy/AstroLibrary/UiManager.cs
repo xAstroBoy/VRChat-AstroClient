@@ -52,22 +52,31 @@
 
         internal static void Init()
         {
+
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), null, GetPatch(nameof(OnQuickMenuOpen_Event)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null, GetPatch(nameof(OnQuickMenuClose_Event)));
+
             new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
             new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
+
+
             new AstroPatch(NewMenuXrefsSystem.openBigMenu, null, GetPatch(nameof(OnBigMenuOpen_Event)));
             new AstroPatch(NewMenuXrefsSystem.closeBigMenu, null, GetPatch(nameof(OnBigMenuClose_Event)));
-            //new AstroPatch(NewMenuXrefsSystem.placeUiAfterPause, GetPatch(nameof(OnPlaceUiAfterPause)));
-            new AstroPatch(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Boolean_0)), GetPatch(nameof(OnShowScreen)));
 
             foreach (MethodInfo method in typeof(MenuController).GetMethods().Where(mi => mi.Name.StartsWith("Method_Public_Void_APIUser_") && !mi.Name.Contains("_PDM_")))
             {
                 new AstroPatch(method, null, GetPatch(nameof(OnUserInfoOpen_event)));
             }
+            new AstroPatch(typeof(PageUserInfo).GetMethod(nameof(PageUserInfo.Back)), null, GetPatch(nameof(OnUserInfoClose)));
 
-            new AstroPatch(AccessTools.Method(typeof(PageUserInfo), "Back"), null, GetPatch(nameof(OnUserInfoClose)));
 
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), null, GetPatch(nameof(OnQuickMenuOpen_Event)));
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null, GetPatch(nameof(OnQuickMenuClose_Event)));
+
+
+            //new AstroPatch(NewMenuXrefsSystem.placeUiAfterPause, GetPatch(nameof(OnPlaceUiAfterPause)));
+
+
+            new AstroPatch(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Boolean_0)), GetPatch(nameof(OnShowScreen)));
+
 
             //new AstroPatch(NewMenuXrefsSystem.closeQuickMenuMethod, null, GetPatch(nameof(OnQuickMenuClose_Event)));
             //new AstroPatch(NewMenuXrefsSystem.onQuickMenuOpenedMethod, null, GetPatch(nameof(OnQuickMenuOpen_Event)));
