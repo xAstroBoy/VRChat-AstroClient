@@ -70,7 +70,7 @@
             }
         }
 
-        private void LateUpdate()
+        private void Update()
         {
             if (ResetHealth != null && GodMode)
                 if (CurrentHealth.HasValue)

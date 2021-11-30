@@ -225,13 +225,14 @@
             }
             HasCaptured = true;
         }
-        internal void Capture(Vector3 Position, Quaternion Rotation)
+
+        /// <summary>
+        /// Use This to Override LockPosition and Put a custom Position.
+        /// </summary>
+        internal void OverrideCapture(Vector3 Position, Quaternion Rotation)
         {
-            if (!LockPosition)
-            {
-                FreezePos = Position;
-                FreezeRot = Rotation;
-            }
+            FreezePos = Position;
+            FreezeRot = Rotation;
             HasCaptured = true;
         }
 
@@ -279,7 +280,6 @@
             try
             {
                 RestoreToOriginal();
-                if (gameObject.IsOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
                 Pickup.UseText = OriginalText_Use;
             }

@@ -2,11 +2,11 @@
 {
     using AstroEventArgs;
     using Cheetos;
-    using Developers.xAstroBoy.AstroLibrary.MenuXrefs;
     using HarmonyLib;
     using System;
     using System.Linq;
     using System.Reflection;
+    using MenuMethods;
     using Tools.Extensions;
     using UnityEngine;
     using UnityEngine.UI;

@@ -1,11 +1,8 @@
-namespace AstroClient.ClientUI.ActionMenu
+namespace AstroClient.ClientUI.ActionMenu.WorldModule
 {
-    using System.Collections.Generic;
     using System.Drawing;
     using Gompoc.ActionMenuAPI.Api;
-    using Spawnables.Enderpearl;
     using Tools.Extensions;
-    using Tools.Player.Movement.Exploit;
     using WorldModifications.Modifications;
     using WorldModifications.Modifications.Jar.AmongUS;
     using WorldModifications.WorldsIds;
@@ -44,6 +41,8 @@ namespace AstroClient.ClientUI.ActionMenu
                             CustomSubMenu.AddButton("Remove a Life", () => { SuperTowerDefense.LoseHealth?.InvokeBehaviour(); });
                             CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
                             CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
+                            CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
+
                         }, null, false, null);
 
                     }, null, false, null);

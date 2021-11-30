@@ -1,11 +1,9 @@
-﻿namespace AstroClient.Developers.xAstroBoy.AstroLibrary.MenuXrefs
+﻿namespace AstroClient.xAstroBoy.MenuMethods
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
     using Tools;
     using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;

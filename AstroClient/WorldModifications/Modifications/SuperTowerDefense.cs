@@ -197,6 +197,8 @@
             Tower_Radar = null;
             Tower_Minigun = null;
             Tower_Lance = null;
+            BlockWrenchReturnButton = false;
+            FreezeTowers = false;
 
         }
 
@@ -419,7 +421,7 @@
             if (Tower != null)
             {
                 Tower.gameObject.TakeOwnership();
-                Tower.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
+                Tower.GetComponentInChildren<SyncPhysics>(true).RespawnItem();
                 var item = Tower.gameObject.GetOrAddComponent<ObjectFreezer>();
                 if (item != null)
                 {
@@ -458,12 +460,12 @@
                 }
                 else
                 {
-                    Tower_RocketLauncher.Remove_ObjectFreezer();
-                    Tower_Slower.Remove_ObjectFreezer();
-                    Tower_Cannon.Remove_ObjectFreezer();
-                    Tower_Radar.Remove_ObjectFreezer();
-                    Tower_Minigun.Remove_ObjectFreezer();
-                    Tower_Lance.Remove_ObjectFreezer();
+                    RemoveLockOnItem(Tower_RocketLauncher);
+                    RemoveLockOnItem(Tower_Slower);
+                    RemoveLockOnItem(Tower_Cannon);
+                    RemoveLockOnItem(Tower_Radar);
+                    RemoveLockOnItem(Tower_Minigun);
+                    RemoveLockOnItem(Tower_Lance);
                 }
             }
         }
@@ -521,27 +523,35 @@
 
                 if (value)
                 {
-                    LockAppleOnTarget(Apple_1, ReturnHammerButtonTool);
-                    LockAppleOnTarget(Apple_2, ReturnHammerButtonTool);
+                    LockOnTarget(Apple_1, ReturnHammerButtonTool);
+                    LockOnTarget(Apple_2, ReturnHammerButtonTool);
+                    if (!BlockWrenchReturnButton)
+                    {
+                        LockOnTarget(Apple_3, ReturnHammerButtonTool);
+                        LockOnTarget(Apple_4, ReturnHammerButtonTool);
+                    }
                 }
                 else
                 {
-                    RemoveLockOnApple(Apple_1);
-                    RemoveLockOnApple(Apple_2);
-
+                    if (BlockWrenchReturnButton)
+                    {
+                        LockOnTarget(Apple_1, ReturnRedWrenchButton);
+                        LockOnTarget(Apple_2, ReturnBlueWrenchButton);
+                    }
+                    else
+                    {
+                        RemoveLockOnItem(Apple_1);
+                        RemoveLockOnItem(Apple_2);
+                        if (!BlockWrenchReturnButton)
+                        {
+                            RemoveLockOnItem(Apple_3);
+                            RemoveLockOnItem(Apple_4);
+                        }
+                    }
                 }
             }
         }
 
-        private static void RemoveLockOnApple(GameObject apple)
-        {
-            if (apple != null)
-            {
-                apple.TakeOwnership();
-                apple.Remove_ObjectFreezer();
-                apple.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
-            }
-        }
 
         private static bool _BlockWrenchReturn;
         internal static bool BlockWrenchReturnButton
@@ -560,35 +570,65 @@
 
                 if (value)
                 {
-                    LockAppleOnTarget(Apple_3, ReturnRedWrenchButton);
-                    LockAppleOnTarget(Apple_4, ReturnBlueWrenchButton);
+                    LockOnTarget(Apple_3, ReturnRedWrenchButton);
+                    LockOnTarget(Apple_4, ReturnBlueWrenchButton);
+                    if (!BlockHammerReturnButton)
+                    {
+                        LockOnTarget(Apple_1, ReturnRedWrenchButton);
+                        LockOnTarget(Apple_2, ReturnBlueWrenchButton);
+                    }
 
                 }
                 else
                 {
-                    RemoveLockOnApple(Apple_3);
-                    RemoveLockOnApple(Apple_4);
+                    if (BlockHammerReturnButton)
+                    {
+                        LockOnTarget(Apple_3, ReturnHammerButtonTool);
+                        LockOnTarget(Apple_4, ReturnHammerButtonTool);
+                    }
+                    else
+                    {
+                        RemoveLockOnItem(Apple_3);
+                        RemoveLockOnItem(Apple_4);
+                        if (!BlockHammerReturnButton)
+                        {
+                            RemoveLockOnItem(Apple_1);
+                            RemoveLockOnItem(Apple_2);
+                        }
+                    }
                 }
             }
         }
 
-        private static void LockAppleOnTarget(GameObject Apple, GameObject target)
+
+        private static void RemoveLockOnItem(GameObject item)
+        {
+            if (item != null)
+            {
+                item.Remove_ObjectFreezer();
+                item.GetComponentInChildren<SyncPhysics>(true).RespawnItem(true);
+            }
+        }
+
+
+
+        private static void LockOnTarget(GameObject item, GameObject target)
         {
             try
             {
-                if (Apple != null)
+                if (item != null)
                 {
                     if (target != null)
                     {
-                        Apple.TakeOwnership();
-                        Apple.transform.position = target.transform.position;
-                        Apple.transform.rotation = target.transform.rotation;
-                        var item = Apple.GetOrAddComponent<ObjectFreezer>();
-                        if (item != null)
+                        item.TakeOwnership();
+                        item.transform.position = target.transform.position;
+                        item.transform.rotation = target.transform.rotation;
+                        var Freezer = item.GetOrAddComponent<ObjectFreezer>();
+                        if (Freezer != null)
                         {
-                            item.Capture(target.transform.position, target.transform.rotation);
-                            item.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
-                            ModConsole.DebugLog($"Locked {item.gameObject.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                            Freezer.OverrideCapture(target.transform.position, target.transform.rotation);
+                            Freezer.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
+                            ModConsole.DebugLog($"Locked {Freezer.gameObject.name} to pos ${Freezer.FreezePos.ToString()} and Rotation {Freezer.FreezeRot.ToString()}");
                         }
                     }
                 }
