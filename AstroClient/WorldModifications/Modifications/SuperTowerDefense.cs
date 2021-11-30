@@ -109,10 +109,19 @@
                 var toolshop = GameObjectFinder.FindRootSceneObject("ToolShop");
                 if (toolshop != null)
                 {
-                    ReturnHammerButtonTool = toolshop.transform.Find("ReturnSellTool/SM_Switch_Button_Button_02").gameObject;
-                    ReturnBlueWrenchButton = toolshop.transform.Find("ReturnUpgradeTool1/SM_Switch_Button_Button_02").gameObject;
-                    ReturnRedWrenchButton = toolshop.transform.Find("ReturnUpgradeTool0/SM_Switch_Button_Button_02").gameObject;
+                    // Button is SM_Switch_Button_Button_02
+                    ReturnHammerButtonTool = toolshop.transform.FindObject("ReturnSellTool").gameObject;
+                    ReturnBlueWrenchButton = toolshop.transform.FindObject("ReturnUpgradeTool1").gameObject;
+                    ReturnRedWrenchButton = toolshop.transform.FindObject("ReturnUpgradeTool0").gameObject;
                 }
+
+
+                Tower_RocketLauncher = GameObjectFinder.Find("TowerRocketLauncher1Grabbable (0)");
+                Tower_Slower = GameObjectFinder.Find("TowerSlower1Grabbable (0)");
+                Tower_Cannon = GameObjectFinder.Find("TowerCannon1Grabbable (0)");
+                Tower_Radar = GameObjectFinder.Find("TowerRadar1Grabbable (0)");
+                Tower_Minigun = GameObjectFinder.Find("TowerMiniGun1Grabbable (0)");
+                Tower_Lance = GameObjectFinder.Find("TowerLance1Grabbable (0)");
 
 
                 FixTheTowers(false);
@@ -140,6 +149,8 @@
                     }
 
                 }
+
+
             }
             else
             {
@@ -180,25 +191,40 @@
             ReturnBlueWrenchButton = null;
             ReturnRedWrenchButton = null;
 
+            Tower_RocketLauncher = null;
+            Tower_Slower = null;
+            Tower_Cannon = null;
+            Tower_Radar = null;
+            Tower_Minigun = null;
+            Tower_Lance = null;
+
         }
 
 
-        internal static void FixTheTowers(bool RespawnTowers)
+        internal static void FixTheTowers(bool RespawnTower)
         {
-            foreach (var item in WorldUtils.Pickups)
+            FixTower(Tower_RocketLauncher, RespawnTower);
+            FixTower(Tower_Slower, RespawnTower);
+            FixTower(Tower_Cannon, RespawnTower);
+            FixTower(Tower_Radar, RespawnTower);
+            FixTower(Tower_Minigun, RespawnTower);
+            FixTower(Tower_Lance, RespawnTower);
+
+        }
+
+
+        private static void FixTower(GameObject tower, bool RespawnTowers)
+        {
+            if (tower != null)
             {
-                if (item.gameObject.name.ToLower().StartsWith("tower"))
+                tower.Pickup_Set_Pickupable(true); // Override and fix potential Tower Bugs.
+                if (RespawnTowers)
                 {
-                    item.gameObject.Pickup_Set_Pickupable(true); // Override and fix potential Tower Bugs.
-                    if (RespawnTowers)
-                    {
-                        item.gameObject.TakeOwnership();
-                        item.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
-                    }
+                    tower.TakeOwnership();
+                    tower.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
                 }
             }
         }
-
 
         internal static void InitButtons(QMGridTab main)
         {
@@ -238,7 +264,7 @@
             FreezeTowersToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Towers", () => { FreezeTowers = true; }, () => { FreezeTowers = false; }, "Freeze Towers In place (Fight against trolls!)");
 
             BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
-            BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Wrenchs Returns", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
+            BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Wrenchs Returns", () => { BlockWrenchReturnButton = true; }, () => { BlockWrenchReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
 
         }
 
@@ -388,6 +414,23 @@
         }
 
 
+        private static void LockTowerInPlace(GameObject Tower)
+        {
+            if (Tower != null)
+            {
+                Tower.gameObject.TakeOwnership();
+                Tower.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
+                var item = Tower.gameObject.GetOrAddComponent<ObjectFreezer>();
+                if (item != null)
+                {
+                    item.IsEnabled = true;
+                    item.Capture();
+                    item.LockPosition = true;
+                    ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                }
+            }
+        }
+
         private static bool _FreezeTowers;
 
         internal static bool FreezeTowers
@@ -406,30 +449,21 @@
 
                 if (value)
                 {
-                    foreach (var tower in GetCurrentEditors)
-                    {
-                       var item = tower.gameObject.GetOrAddComponent<ObjectFreezer>();
-                        if (item != null)
-                        {
-                            item.IsEnabled = true;
-                            item.LockPosition = true;
-                            item.Capture();
-                            ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
-
-                        }
-                    }
+                    LockTowerInPlace(Tower_RocketLauncher);
+                    LockTowerInPlace(Tower_Slower);
+                    LockTowerInPlace(Tower_Cannon);
+                    LockTowerInPlace(Tower_Radar);
+                    LockTowerInPlace(Tower_Minigun);
+                    LockTowerInPlace(Tower_Lance);
                 }
                 else
                 {
-                    foreach (var tower in GetCurrentEditors)
-                    {
-                        var item = tower.gameObject.GetComponent<ObjectFreezer>();
-                        if (item != null)
-                        {
-                            tower.gameObject.Remove_ObjectFreezer();
-                        }
-                    }
-
+                    Tower_RocketLauncher.Remove_ObjectFreezer();
+                    Tower_Slower.Remove_ObjectFreezer();
+                    Tower_Cannon.Remove_ObjectFreezer();
+                    Tower_Radar.Remove_ObjectFreezer();
+                    Tower_Minigun.Remove_ObjectFreezer();
+                    Tower_Lance.Remove_ObjectFreezer();
                 }
             }
         }
@@ -492,9 +526,9 @@
                 }
                 else
                 {
-                    foreach (var apple in WorldApples)
-                    {
-                    }
+                    RemoveLockOnApple(Apple_1);
+                    RemoveLockOnApple(Apple_2);
+
                 }
             }
         }
@@ -532,14 +566,9 @@
                 }
                 else
                 {
-                    foreach (var apple in WorldApples)
-                    {
-                        apple.TakeOwnership();
-                        apple.Remove_ObjectFreezer();
-                        apple.gameObject.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
-                    }
+                    RemoveLockOnApple(Apple_3);
+                    RemoveLockOnApple(Apple_4);
                 }
-
             }
         }
 
@@ -648,6 +677,12 @@
             }
         }
 
+        internal static GameObject Tower_RocketLauncher{ get; set; }
+        internal static GameObject Tower_Slower { get; set; }
+        internal static GameObject Tower_Cannon { get; set; }
+        internal static GameObject Tower_Radar { get; set; }
+        internal static GameObject Tower_Minigun { get; set; }
+        internal static GameObject Tower_Lance { get; set; }
 
         internal static GameObject Apple_1 { get; set; }
         internal static GameObject Apple_2 { get; set; }
