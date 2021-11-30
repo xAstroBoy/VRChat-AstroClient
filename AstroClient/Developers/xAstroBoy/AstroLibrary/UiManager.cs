@@ -66,11 +66,12 @@
 
             new AstroPatch(AccessTools.Method(typeof(PageUserInfo), "Back"), null, GetPatch(nameof(OnUserInfoClose)));
 
-            new AstroPatch(NewMenuXrefsSystem.closeQuickMenuMethod, null, GetPatch(nameof(OnQuickMenuClose_Event)));
-            new AstroPatch(NewMenuXrefsSystem.onQuickMenuOpenedMethod, null, GetPatch(nameof(OnQuickMenuOpen_Event)));
-
             new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), null, GetPatch(nameof(OnQuickMenuOpen_Event)));
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null,  GetPatch(nameof(OnQuickMenuClose_Event)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null, GetPatch(nameof(OnQuickMenuClose_Event)));
+
+            //new AstroPatch(NewMenuXrefsSystem.closeQuickMenuMethod, null, GetPatch(nameof(OnQuickMenuClose_Event)));
+            //new AstroPatch(NewMenuXrefsSystem.onQuickMenuOpenedMethod, null, GetPatch(nameof(OnQuickMenuOpen_Event)));
+
 
         }
 
