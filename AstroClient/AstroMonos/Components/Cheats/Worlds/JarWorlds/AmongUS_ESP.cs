@@ -19,6 +19,7 @@
     using VRC;
     using VRC.Core;
     using VRC.Udon.Common.Interfaces;
+    using WorldModifications.Modifications.Jar.AmongUS;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;
@@ -564,6 +565,10 @@
                     }
                     else
                     {
+                        if (IsSelf)
+                        {
+                            AmongUSCheats.AmongUsSerializer = false;
+                        }
                         if (GameRoleTag != null)
                         {
                             if (GameRoleTag.Text != NoRoles)

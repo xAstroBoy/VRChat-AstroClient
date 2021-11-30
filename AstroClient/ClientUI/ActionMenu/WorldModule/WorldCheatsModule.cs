@@ -26,7 +26,11 @@ namespace AstroClient.ClientUI.ActionMenu
                         CustomSubMenu.AddSubMenu("Protections", () =>
                         {
                             CustomSubMenu.AddToggle("Block hammer Return Button", SuperTowerDefense.BlockHammerReturnButton, ToggleValue => { SuperTowerDefense.BlockHammerReturnButton = ToggleValue; });
+                            CustomSubMenu.AddToggle("Block Wrenchs Return Buttons", SuperTowerDefense.BlockWrenchReturnButton, ToggleValue => { SuperTowerDefense.BlockWrenchReturnButton = ToggleValue; });
+                           
                             CustomSubMenu.AddToggle("Freeze hammer", SuperTowerDefense.FreezeHammer, ToggleValue => { SuperTowerDefense.FreezeHammer = ToggleValue; });
+                            CustomSubMenu.AddToggle("Freeze Towers", SuperTowerDefense.FreezeTowers, ToggleValue => { SuperTowerDefense.FreezeTowers = ToggleValue; });
+
                         });
                         CustomSubMenu.AddSubMenu("Tool Mods", () =>
                         {

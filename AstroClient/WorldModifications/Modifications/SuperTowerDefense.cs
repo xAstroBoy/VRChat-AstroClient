@@ -109,12 +109,37 @@
                 var toolshop = GameObjectFinder.FindRootSceneObject("ToolShop");
                 if (toolshop != null)
                 {
-                    ReturnHammerButtonTool = toolshop.transform.Find("ReturnSellTool").gameObject;
+                    ReturnHammerButtonTool = toolshop.transform.Find("ReturnSellTool/SM_Switch_Button_Button_02").gameObject;
+                    ReturnBlueWrenchButton = toolshop.transform.Find("ReturnUpgradeTool1/SM_Switch_Button_Button_02").gameObject;
+                    ReturnRedWrenchButton = toolshop.transform.Find("ReturnUpgradeTool0/SM_Switch_Button_Button_02").gameObject;
                 }
 
 
                 FixTheTowers(false);
+                foreach (var apple in WorldApples)
+                {
+                    if (Apple_1 == null)
+                    {
+                        Apple_1 = apple;
+                        continue;
+                    }
+                    if (Apple_2 == null)
+                    {
+                        Apple_2 = apple;
+                        continue;
+                    }
+                    if (Apple_3 == null)
+                    {
+                        Apple_3 = apple;
+                        continue;
+                    }
+                    if (Apple_4 == null)
+                    {
+                        Apple_4 = apple;
+                        continue;
+                    }
 
+                }
             }
             else
             {
@@ -144,6 +169,17 @@
             RepairLifeWrenches = false;
             BlockHammerReturnButton = false;
             ReturnHammerButtonTool = null;
+
+            Apple_1 = null;
+            Apple_2 = null;
+
+
+            Apple_3 = null;
+            Apple_4 = null;
+
+            ReturnBlueWrenchButton = null;
+            ReturnRedWrenchButton = null;
+
         }
 
 
@@ -199,7 +235,10 @@
 
             new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers(true);}, "Fix Towers Being unpickable bug ", Color.green);
             FreezeHammerToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Add a Protection Shield to the hammer!");
+            FreezeTowersToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Towers", () => { FreezeTowers = true; }, () => { FreezeTowers = false; }, "Freeze Towers In place (Fight against trolls!)");
+
             BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
+            BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Wrenchs Returns", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
 
         }
 
@@ -349,6 +388,52 @@
         }
 
 
+        private static bool _FreezeTowers;
+
+        internal static bool FreezeTowers
+        {
+            get
+            {
+                return _FreezeTowers;
+            }
+            set
+            {
+                if (FreezeTowersToolBtn != null)
+                {
+                    FreezeTowersToolBtn.SetToggleState(value);
+                }
+                _FreezeTowers = value;
+
+                if (value)
+                {
+                    foreach (var tower in GetCurrentEditors)
+                    {
+                       var item = tower.gameObject.GetOrAddComponent<ObjectFreezer>();
+                        if (item != null)
+                        {
+                            item.IsEnabled = true;
+                            item.LockPosition = true;
+                            item.Capture();
+                            ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var tower in GetCurrentEditors)
+                    {
+                        var item = tower.gameObject.GetComponent<ObjectFreezer>();
+                        if (item != null)
+                        {
+                            tower.gameObject.Remove_ObjectFreezer();
+                        }
+                    }
+
+                }
+            }
+        }
+
 
         private static bool _FreezeHammer;
 
@@ -386,7 +471,6 @@
             }
         }
         private static bool _BlockHammerReturn;
-
         internal static bool BlockHammerReturnButton
         {
             get
@@ -401,44 +485,79 @@
                 }
                 _BlockHammerReturn = value;
 
-                if (ReturnHammerButtonTool != null)
+                if (value)
                 {
-                    if (value)
+                    LockAppleOnTarget(Apple_1, ReturnHammerButtonTool);
+                    LockAppleOnTarget(Apple_2, ReturnHammerButtonTool);
+                }
+                else
+                {
+                    foreach (var apple in WorldApples)
                     {
-                        foreach (var apple in WorldApples)
-                        {
-                            LockAppleOnButton(apple);
-                        }
-                    }
-                    else
-                    {
-                        foreach (var apple in WorldApples)
-                        {
-                            apple.TakeOwnership();
-                            apple.Remove_ObjectFreezer();
-                            apple.gameObject.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
-                        }
                     }
                 }
             }
         }
 
+        private static void RemoveLockOnApple(GameObject apple)
+        {
+            if (apple != null)
+            {
+                apple.TakeOwnership();
+                apple.Remove_ObjectFreezer();
+                apple.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
+            }
+        }
 
-        private static void LockAppleOnButton(GameObject Apple)
+        private static bool _BlockWrenchReturn;
+        internal static bool BlockWrenchReturnButton
+        {
+            get
+            {
+                return _BlockWrenchReturn;
+            }
+            set
+            {
+                if (BlockWrenchReturnToolBtn != null)
+                {
+                    BlockWrenchReturnToolBtn.SetToggleState(value);
+                }
+                _BlockWrenchReturn = value;
+
+                if (value)
+                {
+                    LockAppleOnTarget(Apple_3, ReturnRedWrenchButton);
+                    LockAppleOnTarget(Apple_4, ReturnBlueWrenchButton);
+
+                }
+                else
+                {
+                    foreach (var apple in WorldApples)
+                    {
+                        apple.TakeOwnership();
+                        apple.Remove_ObjectFreezer();
+                        apple.gameObject.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
+                    }
+                }
+
+            }
+        }
+
+        private static void LockAppleOnTarget(GameObject Apple, GameObject target)
         {
             try
             {
                 if (Apple != null)
                 {
-                    if (ReturnHammerButtonTool != null)
+                    if (target != null)
                     {
                         Apple.TakeOwnership();
-                        Apple.transform.position = ReturnHammerButtonTool.transform.position;
-                        Apple.transform.rotation = ReturnHammerButtonTool.transform.rotation;
+                        Apple.transform.position = target.transform.position;
+                        Apple.transform.rotation = target.transform.rotation;
                         var item = Apple.GetOrAddComponent<ObjectFreezer>();
                         if (item != null)
                         {
-                            item.Capture(ReturnHammerButtonTool.transform.position, ReturnHammerButtonTool.transform.rotation);
+                            item.Capture(target.transform.position, target.transform.rotation);
                             item.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
                             ModConsole.DebugLog($"Locked {item.gameObject.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
                         }
@@ -530,6 +649,16 @@
         }
 
 
+        internal static GameObject Apple_1 { get; set; }
+        internal static GameObject Apple_2 { get; set; }
+
+
+        internal static GameObject Apple_3 { get; set; }
+        internal static GameObject Apple_4  { get; set; }
+
+        private static GameObject ReturnHammerButtonTool { get; set; }
+        private static GameObject ReturnBlueWrenchButton { get; set; }
+        private static GameObject ReturnRedWrenchButton { get; set; }
 
         internal static QMNestedGridMenu SuperTowerDefensecheatPage { get; set; }
 
@@ -542,6 +671,9 @@
         private static QMToggleButton FreezeHammerToolBtn { get; set; }
         private static QMToggleButton BlockHammerReturnToolBtn { get; set; }
 
+        private static QMToggleButton BlockWrenchReturnToolBtn { get; set; }
+        private static QMToggleButton FreezeTowersToolBtn { get; set; }
+
         private static QMToggleButton AutomaticWaveBtn { get; set; }
 
         private static QMToggleButton AutomaticGodModebnt { get; set; }
@@ -552,7 +684,6 @@
         private static VRC_AstroPickup BlueWrenchPickup { get; set; }
         private static VRC_AstroPickup HammerPickup { get; set; }
 
-        private static GameObject ReturnHammerButtonTool { get; set; }
 
         internal static UdonBehaviour_Cached ResetHealth { get; private set; }
 
