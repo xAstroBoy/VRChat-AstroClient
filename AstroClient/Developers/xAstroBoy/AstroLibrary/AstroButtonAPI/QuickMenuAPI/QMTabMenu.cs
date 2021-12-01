@@ -31,7 +31,8 @@
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             Object.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
-
+            Object.Destroy(NestedPart.FindObject("Panel_Info"));
+            Object.Destroy(NestedPart.FindObject("Button_PhotosFolder"));
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = btnToolTip;

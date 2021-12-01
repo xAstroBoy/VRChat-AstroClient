@@ -95,6 +95,8 @@
             ButtonsMenu = NestedPart.FindObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+            Object.Destroy(NestedPart.FindObject("Panel_Info"));
+            Object.Destroy(NestedPart.FindObject("Button_PhotosFolder"));
             //UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
 
             page = NestedPart.GenerateQuickMenuPage(menuName);
