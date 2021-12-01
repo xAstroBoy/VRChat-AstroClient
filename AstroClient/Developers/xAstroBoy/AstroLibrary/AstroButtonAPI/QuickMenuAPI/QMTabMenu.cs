@@ -5,7 +5,7 @@
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
-
+    using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
     internal class QMTabMenu
     {
         protected QMSingleButton backButton;

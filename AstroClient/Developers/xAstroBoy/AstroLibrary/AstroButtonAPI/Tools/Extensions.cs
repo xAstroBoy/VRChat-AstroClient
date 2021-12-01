@@ -196,7 +196,7 @@
             parent.GetComponentInChildren<Image>().enabled = true;
             parent.GetComponentInChildren<TextMeshProUGUI>(true).enabled = true;
             parent.GetComponent<UiTooltip>().enabled = true;
-            UnityEngine.Object.Destroy(parent.GetComponent<MuteUserButton>());
+            UnityEngine.Object.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37Vo12St37VoUnique>());
 
             //foreach (var component in parent.GetComponents<Component>())
             //{

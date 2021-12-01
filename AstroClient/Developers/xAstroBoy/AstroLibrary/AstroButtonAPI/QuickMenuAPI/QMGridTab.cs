@@ -4,6 +4,7 @@
     using Tools;
     using UnityEngine;
     using VRC.UI.Elements;
+    using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
 
     internal class QMGridTab
     {

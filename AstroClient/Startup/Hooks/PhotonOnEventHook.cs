@@ -266,6 +266,12 @@
 
                                     //case EventCode.interest: // Interest - Interested in events
                                     //    break;
+                                    //case EventCode.Master_allowing_player_to_join:
+                                    //{
+
+                                    //    Currentaction = HookAction.Reset;
+                                    //    break;
+                                    //}
 
                                     case EventCode.Moderations: // Moderations
 
@@ -281,6 +287,7 @@
                                                 {
                                                     prefix.Append($"{moderationeventname} ");
                                                 }
+
                                                 switch (moderationevent)
                                                 {
                                                     case ModerationCode.Warning: // Warnings.
@@ -316,36 +323,37 @@
                                                                     switch (blocked)
                                                                     {
                                                                         case true:
-                                                                            {
-                                                                                PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
-                                                                                ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false);
-                                                                                Currentaction = HookAction.Patch;
-                                                                                break;
-                                                                            }
+                                                                        {
+                                                                            PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
+                                                                            ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false);
+                                                                            Currentaction = HookAction.Patch;
+                                                                            break;
+                                                                        }
                                                                         case false:
-                                                                            {
-                                                                                PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
-                                                                                break;
-                                                                            }
+                                                                        {
+                                                                            PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
+                                                                            break;
+                                                                        }
                                                                         default:
                                                                             break;
                                                                     }
                                                                 }
+
                                                                 if (ConvertedToNormalDict.ContainsKey(mutebyte))
                                                                 {
                                                                     bool muted = ConvertedToNormalDict[mutebyte].Unpack_Boolean().Value;
                                                                     switch (muted)
                                                                     {
                                                                         case true:
-                                                                            {
-                                                                                PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
-                                                                                break;
-                                                                            }
+                                                                        {
+                                                                            PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
+                                                                            break;
+                                                                        }
                                                                         case false:
-                                                                            {
-                                                                                PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
-                                                                                break;
-                                                                            }
+                                                                        {
+                                                                            PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
+                                                                            break;
+                                                                        }
                                                                         default:
                                                                             break;
                                                                     }
@@ -374,12 +382,14 @@
                                                                                 PhotonModerationHandler.OnPlayerBlockedYou_Invoker(blockedplayers);
                                                                                 BlockedPlayersArray[i] = -1;
                                                                             }
+
                                                                             ConvertedToNormalDict[blockbyte] = new Il2CppSystem.Object(BlockedPlayersArray.Pointer);
                                                                             Currentaction = HookAction.Patch;
                                                                         }
                                                                     }
                                                                 }
                                                             }
+
                                                             // Muted List
                                                             if (ConvertedToNormalDict.ContainsKey(mutebyte))
                                                             {
@@ -439,7 +449,8 @@
                                     //case EventCode.Custom_Properties: // I think this is avatar switching related
                                     //    break;
 
-                                    default:
+
+                                default:
                                         break;
                                 }
                             }

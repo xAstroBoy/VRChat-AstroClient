@@ -8,6 +8,7 @@
     using UnityEngine.UI;
     using VRC.UI.Elements;
     using Object = UnityEngine.Object;
+    using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
 
     internal class QMNestedButton
     {

@@ -2,14 +2,25 @@
 {
     using AstroClient.Tools.UdonEditor;
     using AstroClient.Tools.UdonSearcher;
+    using AstroClient.AstroMonos.Components.Tools;
+    using UnityEngine;
+    using AstroClient.xAstroBoy.Utility;
+    using Tools.Extensions;
+    using AstroClient.Tools.ObjectEditor.Editor.Position;
+
     internal class BullshitTest : AstroEvents
     {
         internal override void OnApplicationStart()
 		{
 
+            foreach (Transform item in GameObject.Find("MAP/mechanics/Stasis/Balls").GetComponents<Transform>())
+            {
+                if (item != null)
+                {
+                    ItemPosition.TeleportObject(item.gameObject);
+                }
+            }
 
-
-            UdonHeapEditor.PatchHeap(UdonUnpacker_Utils.DisassembleUdonBehaviour(UdonSearch.FindUdonEvent("1", "update", true).UdonBehaviour), "__value_1", System.Int64.MaxValue);
 
         }
 

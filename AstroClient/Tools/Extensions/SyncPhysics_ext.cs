@@ -24,7 +24,7 @@
                 {
                     instance.gameObject.TakeOwnership();
                 }
-                instance.Method_Public_Void_PDM_4();
+                instance.Method_Public_Void_PDM_1();
             }
         }
 
