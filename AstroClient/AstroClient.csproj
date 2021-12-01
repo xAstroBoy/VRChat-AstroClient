@@ -146,6 +146,9 @@
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Types\ActionMenuPageType.cs" />
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Types\Insertion.cs" />
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Types\PedalType.cs" />
+    <Compile Include="Developers\Unreal\openvr_api.cs" />
+    <Compile Include="Developers\Unreal\SteamVR_Controller.cs" />
+    <Compile Include="Developers\Unreal\SteamVR_Utils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\MenuAPI_New.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\PageGenerators\UIPageGenerator.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMScrollMenu.cs" />
