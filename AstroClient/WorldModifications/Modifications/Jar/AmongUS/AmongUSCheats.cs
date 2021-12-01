@@ -8,6 +8,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using CheetoLibrary.Utility;
     using Constants;
     using MelonLoader;
     using Tools.Extensions;
@@ -356,18 +357,13 @@
 
                     if (action.isMatch("SyncBodyFound") || action.isMatch("SyncEmergencyMeeting"))
                     {
-                        if (JarRoleController.CurrentPlayer_AmongUS_ESP != null)
-                        {
-                            if (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole != AmongUs_Roles.None)
-                            {
-                                AmongUsSerializer = false;
-                            }
-                        }
+                        AmongUsSerializer = false;
                     }
                 }
             }
-            catch 
+            catch(Exception e)
             {
+                ModConsole.DebugErrorExc(e);
             }
         }
         private static object CancellationToken;

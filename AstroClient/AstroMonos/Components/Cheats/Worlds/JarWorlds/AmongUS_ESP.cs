@@ -421,6 +421,10 @@
                             case "SyncKill":
                             case "SyncVotedOut":
                                 {
+                                    if (IsSelf)
+                                    {
+                                        AmongUSCheats.AmongUsSerializer = false;
+                                    }
                                     CurrentRole = AmongUs_Roles.None;
                                     HasVoted = false;
                                     break;
@@ -481,6 +485,11 @@
                     case "SyncVictoryM":
                     case "SyncStart":
                         {
+                            if (IsSelf)
+                            {
+                                AmongUSCheats.AmongUsSerializer = false;
+                            }
+
                             if (GameRoleTag != null)
                             {
                                 GameRoleTag.Text = NoRoles;
@@ -504,10 +513,6 @@
             }
         }
 
-        private string GetCurrentSingleTagText()
-        {
-            return GameRoleTag.Text;
-        }
 
 
         internal override void OnViewRolesPropertyChanged(bool value)
@@ -555,7 +560,7 @@
                     if (HasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
                     if (role != AmongUs_Roles.None)
                     {
-                        if (GetCurrentSingleTagText() != role.ToString())
+                        if (GameRoleTag.Text != role.ToString())
 
                             if (RoleToColor != null && RoleToColor.HasValue)
                             {
@@ -571,10 +576,6 @@
                     }
                     else
                     {
-                        if (IsSelf)
-                        {
-                            AmongUSCheats.AmongUsSerializer = false;
-                        }
                         if (GameRoleTag != null)
                         {
                             if (GameRoleTag.Text != NoRoles)
@@ -592,7 +593,7 @@
                 else
                 {
                         AmongUSVoteRevealTag.ShowTag = false;
-                    if (GetCurrentSingleTagText() != HiddenRole)
+                    if (GameRoleTag.Text != HiddenRole)
                     {
                         if (GameRoleTag != null)
                         {
