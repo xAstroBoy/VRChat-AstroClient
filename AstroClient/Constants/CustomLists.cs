@@ -13,7 +13,6 @@
         {
             RendererSaverIndex.Clear();
             ColliderCheck.Clear();
-            RigidBodyCheck.Clear();
             ScaleCheck.Clear();
         }
 
@@ -59,18 +58,6 @@
             }
         }
 
-        internal class RigidBodyChecker
-        {
-            internal GameObject TargetObj { get; set; }
-            internal bool HasRigidBodyReplaced { get; set; }
-
-            internal RigidBodyChecker(GameObject obj, bool RigidBody)
-            {
-                TargetObj = obj;
-                HasRigidBodyReplaced = RigidBody;
-            }
-        }
-
         internal class GameObjScales
         {
             internal GameObject TargetObj { get; set; }
@@ -103,7 +90,6 @@
 
         internal static List<RendererSaver> RendererSaverIndex = new List<RendererSaver>();
         internal static List<ColliderChecker> ColliderCheck = new List<ColliderChecker>();
-        internal static List<RigidBodyChecker> RigidBodyCheck = new List<RigidBodyChecker>();
         internal static List<GameObjScales> ScaleCheck = new List<GameObjScales>();
     }
 }

@@ -9,20 +9,11 @@
         internal static void RemoveObjFromCustomLists(this GameObject obj)
         {
             var objectcollider = ColliderCheck.FirstOrDefault(item => item.TargetObj == obj);
-            var objectRigidBody = RigidBodyCheck.FirstOrDefault(item => item.TargetObj == obj);
             if (objectcollider != null)
             {
                 if (ColliderCheck.Contains(objectcollider))
                 {
                     _ = ColliderCheck.Remove(objectcollider);
-                }
-            }
-
-            if (objectRigidBody != null)
-            {
-                if (RigidBodyCheck.Contains(objectRigidBody))
-                {
-                    _ = RigidBodyCheck.Remove(objectRigidBody);
                 }
             }
         }

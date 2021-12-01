@@ -1,7 +1,7 @@
 namespace AstroClient.ClientUI.ActionMenu.WorldModule
 {
-    using System.Drawing;
     using Gompoc.ActionMenuAPI.Api;
+    using System.Drawing;
     using Tools.Extensions;
     using WorldModifications.Modifications;
     using WorldModifications.Modifications.Jar.AmongUS;
@@ -15,25 +15,24 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
             AMUtils.AddToModsFolder("World Modules", () =>
             {
                 #region Super Tower Defense
+
                 if (WorldUtils.WorldID == WorldIds.Super_Tower_defense)
                 {
                     CustomSubMenu.AddSubMenu("Super Tower Defense", () =>
                     {
-                        CustomSubMenu.AddButton("Fix Towers", () => { SuperTowerDefense.FixTheTowers(true);});
+                        CustomSubMenu.AddButton("Fix Towers", () => { SuperTowerDefense.FixTheTowers(true); });
                         CustomSubMenu.AddSubMenu("Protections", () =>
                         {
                             CustomSubMenu.AddToggle("Block hammer Return Button", SuperTowerDefense.BlockHammerReturnButton, ToggleValue => { SuperTowerDefense.BlockHammerReturnButton = ToggleValue; });
                             CustomSubMenu.AddToggle("Block Wrenchs Return Buttons", SuperTowerDefense.BlockWrenchReturnButton, ToggleValue => { SuperTowerDefense.BlockWrenchReturnButton = ToggleValue; });
-                           
+
                             CustomSubMenu.AddToggle("Freeze hammer", SuperTowerDefense.FreezeHammer, ToggleValue => { SuperTowerDefense.FreezeHammer = ToggleValue; });
                             CustomSubMenu.AddToggle("Freeze Towers", SuperTowerDefense.FreezeTowers, ToggleValue => { SuperTowerDefense.FreezeTowers = ToggleValue; });
-
                         });
                         CustomSubMenu.AddSubMenu("Tool Mods", () =>
                         {
                             CustomSubMenu.AddToggle("Repair Life Wrenches", SuperTowerDefense.RepairLifeWrenches, ToggleValue => { SuperTowerDefense.RepairLifeWrenches = ToggleValue; });
                             CustomSubMenu.AddToggle("Lose Life Hammer", SuperTowerDefense.LoseLifeHammer, ToggleValue => { SuperTowerDefense.LoseLifeHammer = ToggleValue; });
-
                         }, null, false, null);
                         CustomSubMenu.AddSubMenu("Cheats", () =>
                         {
@@ -42,56 +41,64 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                             CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
                             CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
                             CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
-
                         }, null, false, null);
-
                     }, null, false, null);
                 }
-            #endregion
 
-            #region AmongUS
+                #endregion Super Tower Defense
 
-            if (WorldUtils.WorldID == WorldIds.AmongUS)
-            {
-                CustomSubMenu.AddSubMenu("Among US", () =>
+                #region AmongUS
+
+                if (WorldUtils.WorldID == WorldIds.AmongUS)
                 {
-                    CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
-
-                    CustomSubMenu.AddSubMenu("Game Events", () =>
+                    CustomSubMenu.AddSubMenu("Among US", () =>
                     {
-                        CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour(); });
-                    });
+                        CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
 
-                    CustomSubMenu.AddSubMenu("Sabotage & Repair", () =>
-                    {
-                        CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUSCheats.CancelAllSabotages?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUSCheats.SabotageLights?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Sabotage Doors", () => { AmongUSCheats.SabotageAllDoors.InvokeBehaviour(); });
-                    });
+                        CustomSubMenu.AddSubMenu("Game Events", () => { CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour(); }); });
 
-                    CustomSubMenu.AddSubMenu("Task Faker", () =>
-                    {
-                        CustomSubMenu.AddButton("Submit Scan", () => { AmongUSCheats.SubmitScanTask?.InvokeBehaviour(); });
-                        CustomSubMenu.AddSubMenu("Garbage", () =>
+                        CustomSubMenu.AddSubMenu("Sabotage & Repair", () =>
                         {
-                            CustomSubMenu.AddButton("Cafeteria A", () => { AmongUSCheats.EmptyGarbage_Cafeteria_A?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Cafeteria B", () => { AmongUSCheats.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Oxygen A", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Oxygen B", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Storage A", () => { AmongUSCheats.EmptyGarbage_Storage_A?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Storage B", () => { AmongUSCheats.EmptyGarbage_Storage_B?.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUSCheats.CancelAllSabotages?.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUSCheats.SabotageLights?.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Sabotage Doors", () => { AmongUSCheats.SabotageAllDoors.InvokeBehaviour(); });
+                        });
 
+                        CustomSubMenu.AddSubMenu("Task Faker", () =>
+                        {
+                            CustomSubMenu.AddButton("Submit Scan", () => { AmongUSCheats.SubmitScanTask?.InvokeBehaviour(); });
+                            CustomSubMenu.AddSubMenu("Garbage", () =>
+                            {
+                                CustomSubMenu.AddButton("Cafeteria A", () => { AmongUSCheats.EmptyGarbage_Cafeteria_A?.InvokeBehaviour(); });
+                                CustomSubMenu.AddButton("Cafeteria B", () => { AmongUSCheats.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
+                                CustomSubMenu.AddButton("Oxygen A", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
+                                CustomSubMenu.AddButton("Oxygen B", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
+                                CustomSubMenu.AddButton("Storage A", () => { AmongUSCheats.EmptyGarbage_Storage_A?.InvokeBehaviour(); });
+                                CustomSubMenu.AddButton("Storage B", () => { AmongUSCheats.EmptyGarbage_Storage_B?.InvokeBehaviour(); });
+                            }, null, false, null);
                         }, null, false, null);
-                    }, null, false, null);
+                    });
+                }
 
-                });
-            }
+                #endregion AmongUS
 
-            #endregion
-            }, ClientResources.Loaders.Icons.thief);
+                #region  ClickerGame
+
+                if (WorldUtils.WorldID == WorldIds.Clicker_Game)
+                {
+                    CustomSubMenu.AddSubMenu("Clicker Game", () =>
+                    {
+
+                        CustomSubMenu.AddToggle("AutoClicker", ClickerGame.CubeAutoClicker, ToggleValue => { ClickerGame.CubeAutoClicker = ToggleValue; });
+
+                    });
+                }
+
+
+                #endregion
+                }, ClientResources.Loaders.Icons.thief);
 
             ModConsole.Log("World Module is ready!", Color.Green);
         }
-
     }
 }

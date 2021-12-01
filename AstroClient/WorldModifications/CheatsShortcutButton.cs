@@ -163,7 +163,19 @@
                     SetButtonColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
+
             }
+            else if (id == WorldIds.Clicker_Game)
+            {
+                if (ClickerGame.ClickerGameCheats != null)
+                {
+                    SetButtonText("Clicker Game AutoClicker", "Manage Clicker Game Cheats.");
+                    SetButtonShortcut(ClickerGame.ClickerGameCheats);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
+
             else
             {
                 SetButtonColor(Color.red);

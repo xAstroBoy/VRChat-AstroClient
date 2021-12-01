@@ -563,6 +563,7 @@
     <Compile Include="Constants\CustomLists.cs" />
     <Compile Include="Constants\GlobalLists.cs" />
     <Compile Include="Constants\InstanceBuilder.cs" />
+    <Compile Include="WorldModifications\Modifications\ClickerGame.cs" />
     <Compile Include="WorldModifications\Modifications\PoolParlor.cs" />
     <Compile Include="WorldModifications\Modifications\UdonTycoon.cs" />
     <Compile Include="WorldModifications\Modifications\SuperTowerDefense.cs" />

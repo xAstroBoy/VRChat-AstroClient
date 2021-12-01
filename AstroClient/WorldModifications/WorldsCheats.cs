@@ -32,6 +32,7 @@
             SuperTowerDefense.InitButtons(WorldCheats);
             PoolParlor.InitButtons(WorldCheats);
             UdonTycoon.InitButtons(WorldCheats);
+            ClickerGame.InitButtons(WorldCheats);
         }
     }
 }
