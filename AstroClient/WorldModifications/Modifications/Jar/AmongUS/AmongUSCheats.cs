@@ -91,21 +91,23 @@
             }
             set
             {
-                if (value)
+                if (MovementSerializer.SerializerActivated != value)
                 {
-                    SerializerPos = GameInstances.CurrentUser.transform.position;
-                    SerializerRot = GameInstances.CurrentUser.transform.rotation;
-                }
-                else
-                {
-                    GameInstances.CurrentUser.transform.position = SerializerPos;
-                    GameInstances.CurrentUser.transform.rotation = SerializerRot;
+                    if (value)
+                    {
+                        SerializerPos = GameInstances.CurrentUser.transform.position;
+                        SerializerRot = GameInstances.CurrentUser.transform.rotation;
+                    }
+                    else
+                    {
+                        GameInstances.CurrentUser.transform.position = SerializerPos;
+                        GameInstances.CurrentUser.transform.rotation = SerializerRot;
 
-                    SerializerRot = new Quaternion(0, 0, 0, 0);
-                    SerializerPos = Vector3.zero;
+                        SerializerRot = new Quaternion(0, 0, 0, 0);
+                        SerializerPos = Vector3.zero;
+                    }
+                    MovementSerializer.SerializerActivated = value;
                 }
-
-                MovementSerializer.SerializerActivated = value;
             }
         }
 
@@ -118,7 +120,7 @@
                     foreach (var item in BodyOutlines)
                     {
                         var ESP = item.gameObject.GetOrAddComponent<ESP_VRCInteractable>();
-                        if (ESP != null) MiscUtils.DelayFunction(0.4f, () => { ESP.ChangeColor(Color.yellow); });
+                        if (ESP != null) MiscUtils.DelayFunction(0.4f, () => { ESP.ChangeColor(System.Drawing.Color.Orange.ToUnityEngineColor()); });
                     }
                 else
                     foreach (var item in BodyOutlines)

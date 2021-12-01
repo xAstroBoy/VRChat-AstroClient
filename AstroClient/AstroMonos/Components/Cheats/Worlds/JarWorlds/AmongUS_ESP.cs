@@ -518,35 +518,41 @@
 
         private void ResetESPColor()
         {
-            if (ESP != null)
+            if (!IsSelf)
             {
-                ESP.ResetColor();
+                if (ESP != null)
+                {
+                    ESP.ResetColor();
+                }
             }
         }
 
 
         private void UpdateESP()
         {
-            if (ESP != null)
+            try
             {
-                ESP.UseCustomColor = ViewRoles;
-                if (ESP.UseCustomColor)
+                if (IsSelf) return;
+                if (ESP != null)
                 {
-                    ESP.ChangeColor(RoleToColor.GetValueOrDefault(Player.FriendStateToColor()));
+                    ESP.UseCustomColor = ViewRoles;
+                    if (ESP.UseCustomColor)
+                    {
+                        ESP.ChangeColor(RoleToColor.GetValueOrDefault(Player.FriendStateToColor()));
+                    }
                 }
             }
+            catch { }
         }
 
- 
+
         private void UpdateAmongUSRole(AmongUs_Roles role)
         {
             if (LinkedNode != null)
-            {
-                if (ESP != null) ESP.UseCustomColor = ViewRoles;
+            { 
                 if (ViewRoles)
                 {
                     if (HasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
-
                     if (role != AmongUs_Roles.None)
                     {
                         if (GetCurrentSingleTagText() != role.ToString())
