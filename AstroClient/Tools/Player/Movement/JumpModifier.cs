@@ -53,20 +53,6 @@
             }
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
-        {
-            if (Networking.LocalPlayer != null)
-            {
-                if (Networking.LocalPlayer.GetJumpImpulse() == 0f)
-                {
-                    ModConsole.Warning("This World has Jump disabled by default.");
-                    PopupUtils.QueHudMessage($"This World has Jump disabled by default!");
-
-                    Networking.LocalPlayer.SetJumpImpulse(4);
-                }
-            }
-        }
-
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             IsJumpOverriden = false;

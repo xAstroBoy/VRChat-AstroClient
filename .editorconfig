@@ -43,6 +43,12 @@ dotnet_diagnostic.IDE0002.severity = none
 # CS0618: Type or member is obsolete
 dotnet_diagnostic.CS0618.severity = none
 
+# CS0436: Il tipo è in conflitto con il tipo importato
+dotnet_diagnostic.CS0436.severity = none
+
+# CS0108: Il membro nasconde il membro ereditato. Manca la parola chiave new
+dotnet_diagnostic.CS0108.severity = none
+
 [*.{cs,vb}]
 indent_style=space
 dotnet_diagnostic.CA2215.severity=suggestion

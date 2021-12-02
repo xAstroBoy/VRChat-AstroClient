@@ -105,6 +105,9 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerSkipCollider.cs" />
+    <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
     <Compile Include="AstroMonos\Components\Tools\FreezeLocation\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
@@ -1411,6 +1414,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AstroMonos\Components\Player\Fly\" />
     <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

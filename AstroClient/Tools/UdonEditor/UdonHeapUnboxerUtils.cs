@@ -499,7 +499,7 @@
 
                                     foreach (var item in list)
                                     {
-                                        listoutput.AppendLine(item.GetType().FullName.ToString());
+                                        listoutput.AppendLine(item.name);
 
                                     }
                                     return listoutput.ToString();

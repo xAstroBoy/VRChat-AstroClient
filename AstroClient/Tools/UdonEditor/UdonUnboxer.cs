@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Tools.UdonEditor
 {
     using System;
+    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -13,11 +14,14 @@
         {
             if (udonnode != null)
             {
+                StringBuilder builder = new StringBuilder();
+
                 var unpackedudon = udonnode.DisassembleUdonBehaviour();
                 if (unpackedudon != null)
                 {
                     System.Console.Clear();
-                    ModConsole.Log($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..", System.Drawing.Color.Orange);
+                    builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
+                    builder.AppendLine();
                     foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
                     {
                         if (symbol != null)
@@ -28,10 +32,12 @@
                             {
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
                                 var unpackedsymbol = UdonHeapUnboxerUtils.UnboxUdonHeap(UnboxVariable);
-                                ModConsole.Log($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}", System.Drawing.Color.Gold);
+                                builder.AppendLine($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
                             }
                         }
                     }
+                    ModConsole.Log(builder.ToString(), System.Drawing.Color.Gold);
+                    builder.Clear();
                 }
             }
         }

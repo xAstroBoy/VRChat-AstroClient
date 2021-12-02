@@ -17,6 +17,7 @@
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static Constants.CustomLists;
 
@@ -123,6 +124,20 @@
                 Tower_Minigun = GameObjectFinder.Find("TowerMiniGun1Grabbable (0)");
                 Tower_Lance = GameObjectFinder.Find("TowerLance1Grabbable (0)");
 
+                //foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
+                //{
+                //    if (item != null)
+                //    {
+                //        if (item.name.isMatch("NearbyCollider"))
+                //        {
+                //            var colliderman = item.GetOrAddComponent<SuperTowerDefense_NearbyCollider>();
+                //            if (colliderman != null)
+                //            {
+                //                NearbyCollidersManager.Add(colliderman);
+                //            }
+                //        }
+                //    }
+                //}
 
                 FixTheTowers(false);
                 foreach (var apple in WorldApples)
@@ -199,7 +214,8 @@
             Tower_Lance = null;
             BlockWrenchReturnButton = false;
             FreezeTowers = false;
-
+            IgnoreTowersCollidersPlacement = false;
+            //NearbyCollidersManager.Clear();
         }
 
 
@@ -264,6 +280,7 @@
             new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers(true);}, "Fix Towers Being unpickable bug ", Color.green);
             FreezeHammerToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Add a Protection Shield to the hammer!");
             FreezeTowersToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Towers", () => { FreezeTowers = true; }, () => { FreezeTowers = false; }, "Freeze Towers In place (Fight against trolls!)");
+            IgnoreTowersCollidersPlacementToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Bypass Tower Collider", () => { IgnoreTowersCollidersPlacement = true; }, () => { IgnoreTowersCollidersPlacement = false; }, "Allow Overlapping Towers!");
 
             BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
             BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Wrenchs Returns", () => { BlockWrenchReturnButton = true; }, () => { BlockWrenchReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
@@ -466,6 +483,43 @@
                     RemoveLockOnItem(Tower_Radar);
                     RemoveLockOnItem(Tower_Minigun);
                     RemoveLockOnItem(Tower_Lance);
+                }
+            }
+        }
+        private static bool _IgnoreTowersCollidersPlacement;
+
+        internal static bool IgnoreTowersCollidersPlacement
+        {
+            get
+            {
+                return _IgnoreTowersCollidersPlacement;
+            }
+            set
+            {
+                if (IgnoreTowersCollidersPlacementToolBtn != null)
+                {
+                    IgnoreTowersCollidersPlacementToolBtn.SetToggleState(value);
+                }
+                _IgnoreTowersCollidersPlacement = value;
+
+                if (value)
+                {
+                    Tower_RocketLauncher.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Slower.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Cannon.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Radar.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Minigun.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Lance.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+
+                }
+                else
+                {
+                    Tower_RocketLauncher.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Slower.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Cannon.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Radar.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Minigun.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+                    Tower_Lance.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
                 }
             }
         }
@@ -731,6 +785,7 @@
         internal static GameObject Apple_3 { get; set; }
         internal static GameObject Apple_4  { get; set; }
 
+        //internal static List<SuperTowerDefense_NearbyCollider> NearbyCollidersManager = new();
         private static GameObject ReturnHammerButtonTool { get; set; }
         private static GameObject ReturnBlueWrenchButton { get; set; }
         private static GameObject ReturnRedWrenchButton { get; set; }
@@ -748,6 +803,7 @@
 
         private static QMToggleButton BlockWrenchReturnToolBtn { get; set; }
         private static QMToggleButton FreezeTowersToolBtn { get; set; }
+        private static QMToggleButton IgnoreTowersCollidersPlacementToolBtn { get; set; }
 
         private static QMToggleButton AutomaticWaveBtn { get; set; }
 
