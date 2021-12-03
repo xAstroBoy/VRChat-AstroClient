@@ -11,7 +11,7 @@
         internal GameObject QuickActions { get; set; }
         internal string menuName { get; set; }
         internal TextMeshProUGUI HeaderText { get; set; }
-
+        internal GameObject VerticalLayoutGroup { get; set; }
         internal QmQuickActions(int Index, string Menu, string Title, Color32 TextColor)
         {
             initButton(Index, Menu, Title, TextColor);

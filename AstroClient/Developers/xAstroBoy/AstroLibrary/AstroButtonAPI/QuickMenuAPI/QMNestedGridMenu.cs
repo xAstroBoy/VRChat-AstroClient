@@ -9,7 +9,7 @@
     using Object = UnityEngine.Object;
     using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
 
-    internal class QMNestedGridMenu
+    internal class QMNestedGridMenu : QMButtonBase
     {
         internal QMNestedGridMenu(QMNestedGridMenu btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {

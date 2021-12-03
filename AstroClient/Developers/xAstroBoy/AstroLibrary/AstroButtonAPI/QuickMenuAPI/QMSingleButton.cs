@@ -64,7 +64,7 @@
 
             if (isUserPage)
             {
-                ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Remote.QuickActions.transform, true);
+                //ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Remote.QuickActions.transform, true);
                 ButtonObject.EnableComponents();
                 ButtonObject.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                 ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
@@ -359,25 +359,18 @@
         {
             // This zeroifies the position.
             ButtonRect.anchoredPosition = QuickMenuTools.SingleButtonTemplatePos;
-
             ButtonRect.anchoredPosition += Vector2.right * (420 / 2 * buttonXLoc);
             ButtonRect.anchoredPosition += Vector2.down * (420 / 2 * buttonYLoc);
-
-            //button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 / 2 * (buttonXLoc + initShift[0]));
-            //button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 / 2 * (buttonYLoc + initShift[1]));
-            //btnTag = "(" + buttonXLoc + "," + buttonYLoc + ")";
-            //button.name = btnQMLoc + "/" + btnType + btnTag;
-            //button.GetComponent<Button>().name = btnType + btnTag;
         }
 
         internal void SetButtonShortcut(QMNestedButton btn)
         {
-           SetAction(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); });
+            SetAction(() => { QuickMenuTools.ShowQuickmenuPage(btn.GetMenuName()); ; });
         }
 
         internal void SetButtonShortcut(QMNestedGridMenu btn)
         {
-            SetAction(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); });
+            SetAction(() => { QuickMenuTools.ShowQuickmenuPage(btn.GetMenuName()); ; });
         }
 
         internal void SetButtonShortcut(QMSingleButton btn)

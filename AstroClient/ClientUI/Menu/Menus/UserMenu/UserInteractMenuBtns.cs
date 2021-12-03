@@ -33,8 +33,6 @@
         internal static void Init_UserMenu()
         {
             var menu = new QMNestedGridMenu(MenuAPI_New.QA_SelectedUser_Remote, 1, 0, "AstroClient User Options", "AstroClient User Options", Color.white, true);
-            var Shortcut = new QMSingleButton(MenuAPI_New.QA_SelectedUser_Local, 1, 0,"AstroClient User Options", null, "AstroClient User Options", true);
-            Shortcut.SetButtonShortcut(menu);
             PickupProtector.InitButtons(menu);
             OrbitUserMenu.InitButtons(menu);
             AttackerUserMenu.InitButtons(menu);
@@ -52,7 +50,11 @@
                     ObjectMiscOptions.RemoveAllWatchersPlayer();
                 }
                 , "Removes everything bound to this player.");
+
+            var Shortcut = new QMSingleButton(MenuAPI_New.QA_SelectedUser_Local, 1, 0, "AstroClient User Options", null, "AstroClient User Options", true);
+            Shortcut.SetButtonShortcut(menu);
+
         }
-        
+
     }
 }

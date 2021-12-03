@@ -168,7 +168,6 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\WingsAPI\QMWingSingleButton.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMSingleButton.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMSingleToggle.cs" />
-    <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMTabBase.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMTabButton.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMTabMenu.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMToggleButton.cs" />
