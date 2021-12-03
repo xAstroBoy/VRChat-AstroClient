@@ -20,6 +20,7 @@
         internal string btnType { get; set; }
         internal Button Button {get; set;}
         internal UiTooltip ButtonToolTip { get; set; }
+        internal string ToolTipText { get; set; }
         internal RectTransform ButtonRect { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
         internal string BtnText { get; set; }
@@ -178,7 +179,7 @@
             }
         }
 
-        internal QMSingleButton(string btnQMloc, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", string TextColor = null, bool btnHalf = false)
+        internal  QMSingleButton(string btnQMloc, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", string TextColor = null, bool btnHalf = false)
         {
 
             btnQMLoc = btnQMloc;
@@ -261,9 +262,7 @@
             }
             SetButtonText(btnText);
             SetToolTip(btnToolTip);
-
             SetAction(btnAction);
-
             ButtonObject.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
             Background = ButtonObject.transform.Find("Background").gameObject;
             if (Background != null)
@@ -319,11 +318,12 @@
 
         internal void SetToolTip(string text)
         {
+            ToolTipText = text;
             ButtonToolTip.SetButtonToolTip(text);
         }
 
 
-        internal void SetIntractable(bool isIntractable)
+        internal void SetInteractable(bool isIntractable)
         {
             ButtonObject.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
@@ -363,20 +363,24 @@
             ButtonRect.anchoredPosition += Vector2.down * (420 / 2 * buttonYLoc);
         }
 
+
         internal void SetButtonShortcut(QMNestedButton btn)
         {
-            SetAction(() => { QuickMenuTools.ShowQuickmenuPage(btn.GetMenuName()); ; });
+            SetButtonShortcut(btn.GetMainButton());
         }
 
         internal void SetButtonShortcut(QMNestedGridMenu btn)
         {
-            SetAction(() => { QuickMenuTools.ShowQuickmenuPage(btn.GetMenuName()); ; });
+            SetButtonShortcut(btn.GetMainButton());
         }
 
         internal void SetButtonShortcut(QMSingleButton btn)
         {
-          SetAction(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); });
+            SetToolTip(btn.ToolTipText);
+            SetButtonText(btn.BtnText);
+            SetAction(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); });
         }
+
 
     }
 }

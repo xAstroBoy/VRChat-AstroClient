@@ -75,6 +75,7 @@
         internal GameObject ButtonsMenu { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
         internal UiTooltip ButtonToolTip { get; set; }
+        internal string ToolTipText { get; set; }
 
         private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool defaultstate = false, bool btnHalf = false)
         {
@@ -155,6 +156,7 @@
         }
         internal void SetToolTip(string text)
         {
+            ToolTipText = text;
             ButtonToolTip.SetButtonToolTip(text);
         }
 

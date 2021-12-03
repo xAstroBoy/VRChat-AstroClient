@@ -35,7 +35,7 @@
             {
                 if (JustHPartyMenu != null)
                 {
-                    JustHPartyMenu.SetIntractable(true);
+                    JustHPartyMenu.SetInteractable(true);
                     JustHPartyMenu.SetTextColor(Color.green);
                 }
                 GameObjectFinder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
@@ -44,7 +44,7 @@
             {
                 if (JustHPartyMenu != null)
                 {
-                    JustHPartyMenu.SetIntractable(false);
+                    JustHPartyMenu.SetInteractable(false);
                     JustHPartyMenu.SetTextColor(Color.red);
                 }
             }

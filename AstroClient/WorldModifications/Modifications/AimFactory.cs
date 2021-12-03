@@ -94,7 +94,7 @@
                 IsAimFactory = true;
                 if (AimFactoryCheatPage != null)
                 {
-                    AimFactoryCheatPage.GetMainButton().SetIntractable(true);
+                    AimFactoryCheatPage.GetMainButton().SetInteractable(true);
                     AimFactoryCheatPage.GetMainButton().SetTextColor(Color.green);
                 }
 
@@ -124,7 +124,7 @@
                 IsAimFactory = false;
                 if (AimFactoryCheatPage != null)
                 {
-                    AimFactoryCheatPage.GetMainButton().SetIntractable(false);
+                    AimFactoryCheatPage.GetMainButton().SetInteractable(false);
                     AimFactoryCheatPage.GetMainButton().SetTextColor(Color.red);
                 }
             }

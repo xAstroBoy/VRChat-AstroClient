@@ -595,7 +595,7 @@
             {
                 if (BClubExploitsPage != null)
                 {
-                    BClubExploitsPage.SetIntractable(true);
+                    BClubExploitsPage.SetInteractable(true);
                     BClubExploitsPage.SetTextColor(Color.green);
                 }
                 isCurrentWorld = true;
@@ -722,7 +722,7 @@
                 isCurrentWorld = false;
                 if (BClubExploitsPage != null)
                 {
-                    BClubExploitsPage.SetIntractable(false);
+                    BClubExploitsPage.SetInteractable(false);
                     BClubExploitsPage.SetTextColor(Color.red);
                 }
             }

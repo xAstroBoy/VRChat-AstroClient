@@ -27,7 +27,7 @@
             {
                 if (VoidClubMenu != null)
                 {
-                    VoidClubMenu.SetIntractable(true);
+                    VoidClubMenu.SetInteractable(true);
                     VoidClubMenu.SetTextColor(Color.green);
                 }
             }
@@ -35,7 +35,7 @@
             {
                 if (VoidClubMenu != null)
                 {
-                    VoidClubMenu.SetIntractable(false);
+                    VoidClubMenu.SetInteractable(false);
                     VoidClubMenu.SetTextColor(Color.red);
                 }
             }

@@ -134,7 +134,7 @@
                 if (Murder2CheatPage != null)
                 {
                     ModConsole.Log($"Recognized {Name} World, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
-                    Murder2CheatPage.GetMainButton().SetIntractable(true);
+                    Murder2CheatPage.GetMainButton().SetInteractable(true);
                     Murder2CheatPage.GetMainButton().SetTextColor(Color.green);
                 }
                 FindGameMurderObjects();
@@ -143,7 +143,7 @@
             {
                 if (Murder2CheatPage != null)
                 {
-                    Murder2CheatPage.GetMainButton().SetIntractable(false);
+                    Murder2CheatPage.GetMainButton().SetInteractable(false);
                     Murder2CheatPage.GetMainButton().SetTextColor(Color.red);
                 }
             }

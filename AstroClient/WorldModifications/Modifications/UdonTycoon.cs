@@ -18,7 +18,7 @@
             {
                 if (udonTycoonCheatPage != null)
                 {
-                    udonTycoonCheatPage.SetIntractable(true);
+                    udonTycoonCheatPage.SetInteractable(true);
                     udonTycoonCheatPage.SetTextColor(Color.green);
                 }
 
@@ -38,7 +38,7 @@
             {
                 if (udonTycoonCheatPage != null)
                 {
-                    udonTycoonCheatPage.SetIntractable(false);
+                    udonTycoonCheatPage.SetInteractable(false);
                     udonTycoonCheatPage.SetTextColor(Color.red);
                 }
             }

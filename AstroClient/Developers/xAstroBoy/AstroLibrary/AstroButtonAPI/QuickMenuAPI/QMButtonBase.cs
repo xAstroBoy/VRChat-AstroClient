@@ -35,7 +35,7 @@
         }
 
 
-        //internal void SetIntractable(bool isIntractable)
+        //internal void SetInteractable(bool isIntractable)
         //{
         //    ButtonObject.gameObject.GetComponent<Button>().interactable = isIntractable;
         //}

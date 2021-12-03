@@ -105,10 +105,8 @@
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
             string TextColorHTML = null;
-            if (btnTextColor.HasValue)
-                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
-            else
-                TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(System.Drawing.Color.White.ToUnityEngineColor());
+            TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.GetValueOrDefault(System.Drawing.Color.White.ToUnityEngineColor()));
+
             if (Parent != null)
             {
                 mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf);
@@ -133,6 +131,10 @@
         internal void SetTextColor(Color buttonTextColor)
         {
             mainButton.SetTextColor(buttonTextColor);
+        }
+        internal void SetText(string Text)
+        {
+            mainButton.SetButtonText(Text);
         }
 
         internal void SetBackButtonAction(Action back)
@@ -200,9 +202,9 @@
             return menuName;
         }
 
-        internal void SetIntractable(bool Interactable)
+        internal void SetInteractable(bool Interactable)
         {
-            mainButton.SetIntractable(Interactable);
+            mainButton.SetInteractable(Interactable);
         }
 
         internal QMSingleButton GetMainButton()

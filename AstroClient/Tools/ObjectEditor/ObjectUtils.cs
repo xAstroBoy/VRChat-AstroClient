@@ -219,7 +219,7 @@
 
         internal static void GrabbableGameObjDumper()
         {
-            GrabGameObjDumper.SetIntractable(false);
+            GrabGameObjDumper.SetInteractable(false);
             new Thread(() =>
             {
                 string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_VRCPickups.txt");
@@ -250,7 +250,7 @@
 
         internal static void GameObjectDumper()
         {
-            GameObjDumper.SetIntractable(false);
+            GameObjDumper.SetInteractable(false);
             new Thread(() =>
             {
                 string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects.txt");
@@ -303,7 +303,7 @@
 
         internal static void GameObjDumperWithComponents()
         {
-            ObjDumperWithComponentsBtn.SetIntractable(false);
+            ObjDumperWithComponentsBtn.SetInteractable(false);
             string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects_With_components.txt");
             var listg = Resources.FindObjectsOfTypeAll<GameObject>();
             using (var txtFile = File.AppendText(path))
@@ -422,16 +422,16 @@
             Mirrors.Clear();
             if (GameObjDumper != null)
             {
-                GameObjDumper.SetIntractable(true);
+                GameObjDumper.SetInteractable(true);
             }
             if (GrabGameObjDumper != null)
             {
-                GrabGameObjDumper.SetIntractable(true);
+                GrabGameObjDumper.SetInteractable(true);
             }
 
             if (ObjDumperWithComponentsBtn != null)
             {
-                ObjDumperWithComponentsBtn.SetIntractable(true);
+                ObjDumperWithComponentsBtn.SetInteractable(true);
             }
         }
 

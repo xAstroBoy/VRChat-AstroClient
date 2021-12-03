@@ -59,7 +59,7 @@
                                 if (CurrentUnboxBehaviourToConsole != null)
                                 {
                                     CurrentUnboxBehaviourToConsole.SetButtonText($"Unbox {action.gameObject.name}");
-                                    CurrentUnboxBehaviourToConsole.setButtonToolTip($"Attempts to unbox  {action.gameObject.name} in console");
+                                    CurrentUnboxBehaviourToConsole.SetToolTip($"Attempts to unbox  {action.gameObject.name} in console");
                                     CurrentUnboxBehaviourToConsole.setAction(() => { action.UnboxUdonEventToConsole(); });
                                     CurrentUnboxBehaviourToConsole.SetActive(true);
                                 }
@@ -71,7 +71,7 @@
                                 if (CurrentUnboxBehaviourToConsole != null)
                                 {
                                     CurrentUnboxBehaviourToConsole.SetButtonText("Unavailable");
-                                    CurrentUnboxBehaviourToConsole.setButtonToolTip("Unavailable");
+                                    CurrentUnboxBehaviourToConsole.SetToolTip("Unavailable");
                                     CurrentUnboxBehaviourToConsole.setAction(() => { });
                                     CurrentUnboxBehaviourToConsole.SetActive(false);
                                 }
@@ -144,7 +144,7 @@
             if (CurrentUnboxBehaviourToConsole != null)
             {
                 CurrentUnboxBehaviourToConsole.SetButtonText("Unavailable");
-                CurrentUnboxBehaviourToConsole.setButtonToolTip("Unavailable");
+                CurrentUnboxBehaviourToConsole.SetToolTip("Unavailable");
                 CurrentUnboxBehaviourToConsole.setAction(() => { });
                 CurrentUnboxBehaviourToConsole.SetActive(false);
             }

@@ -16,6 +16,7 @@
         internal string btnType { get; set; }
         internal GameObject ButtonObject { get; set; }
         internal UiTooltip ButtonToolTip { get; set; }
+        internal string ToolTipText { get; set; }
 
 
         internal QMTabButton(int Index, Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Sprite LoadSprite = null)
@@ -55,6 +56,7 @@
         }
         internal void SetToolTip(string text)
         {
+            ToolTipText = text;
             ButtonToolTip.SetButtonToolTip(text);
         }
 

@@ -29,6 +29,8 @@
         internal MenuStateController CurrentController { get; set; }
         internal bool isLeftWing { get; set; }
         internal UiTooltip ButtonToolTip { get; set; }
+        internal string ToolTipText { get; set; }
+
         internal string CurrentBtnColor { get; set; }
         internal string BtnText { get; set; }
 
@@ -277,6 +279,7 @@
         }
         internal void SetToolTip(string text)
         {
+            ToolTipText = text;
             ButtonToolTip.SetButtonToolTip(text);
         }
 
@@ -293,24 +296,32 @@
         }
         internal void SetButtonShortcut(QMNestedButton btn)
         {
-            SetAction(new Action(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
+            SetButtonShortcut(btn.GetMainButton());
         }
 
         internal void SetButtonShortcut(QMNestedGridMenu btn)
         {
-            SetAction(new Action(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
+            SetButtonShortcut(btn.GetMainButton());
         }
 
         internal void SetButtonShortcut(QMSingleButton btn)
         {
-            SetAction(new Action(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
+            ModConsole.DebugLog("Setting ToolTip");
+            SetToolTip(btn.ToolTipText);
+            ModConsole.DebugLog($"Set Tooltip as {btn.ToolTipText}");
+            ModConsole.DebugLog("Setting Button Text");
+            SetButtonText(btn.BtnText);
+            ModConsole.DebugLog($"Set Button Text as {btn.BtnText}");
+            ModConsole.DebugLog($"Setting Action...");
+            SetAction(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); });
+            ModConsole.DebugLog($"Done Setting Action!");
         }
         internal void ClickMe()
         {
             ButtonObject.GetComponent<Button>().onClick.Invoke();
         }
 
-        internal void SetIntractable(bool isIntractable)
+        internal void SetInteractable(bool isIntractable)
         {
             ButtonObject.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
@@ -334,14 +345,14 @@
             if (buttonTextColor.IsNotNullOrEmptyOrWhiteSpace())
             {
                 CurrentBtnColor = buttonTextColor;
-                var NewText = $"<color={buttonTextColor}>{MenuName}</color>";
+                var NewText = $"<color={buttonTextColor}>{BtnText}</color>";
                 ButtonText.text = NewText;
             }
         }
         internal void SetButtonText(string text)
         {
             BtnText = text;
-            var NewText = $"<color={CurrentBtnColor}>{MenuName}</color>";
+            var NewText = $"<color={CurrentBtnColor}>{text}</color>";
             ButtonText.text = NewText;
         }
 

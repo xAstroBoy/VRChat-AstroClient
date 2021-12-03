@@ -151,6 +151,8 @@
         internal string ButtonText_On { get; set; }
         internal string ButtonText_Off { get; set; }
         internal UiTooltip ButtonToolTip { get; set; }
+        internal string ToolTipText { get; set; }
+
         internal TextMeshProUGUI ButtonTitleMesh { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
 
@@ -220,6 +222,7 @@
 
         internal void SetToolTip(string text)
         {
+            ToolTipText = text;
             ButtonToolTip.SetButtonToolTip(text);
         }
 

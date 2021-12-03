@@ -200,9 +200,9 @@
             return page;
         }
 
-        internal void SetIntractable(bool Interactable)
+        internal void SetInteractable(bool Interactable)
         {
-            mainButton.SetIntractable(Interactable);
+            mainButton.SetInteractable(Interactable);
         }
 
         internal GameObject GetBackButton()

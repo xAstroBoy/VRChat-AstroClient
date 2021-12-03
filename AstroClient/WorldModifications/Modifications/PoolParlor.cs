@@ -38,7 +38,7 @@
             {
                 if (PoolParlorCheats != null)
                 {
-                    PoolParlorCheats.SetIntractable(true);
+                    PoolParlorCheats.SetInteractable(true);
                     PoolParlorCheats.SetTextColor(Color.green);
                 }
 
@@ -89,7 +89,7 @@
             {
                 if (PoolParlorCheats != null)
                 {
-                    PoolParlorCheats.SetIntractable(false);
+                    PoolParlorCheats.SetInteractable(false);
                     PoolParlorCheats.SetTextColor(Color.red);
                 }
             }

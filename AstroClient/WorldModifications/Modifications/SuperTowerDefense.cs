@@ -29,7 +29,7 @@
             {
                 if (SuperTowerDefensecheatPage != null)
                 {
-                    SuperTowerDefensecheatPage.SetIntractable(true);
+                    SuperTowerDefensecheatPage.SetInteractable(true);
                     SuperTowerDefensecheatPage.SetTextColor(Color.green);
                 }
 
@@ -171,7 +171,7 @@
             {
                 if (SuperTowerDefensecheatPage != null)
                 {
-                    SuperTowerDefensecheatPage.SetIntractable(false);
+                    SuperTowerDefensecheatPage.SetInteractable(false);
                     SuperTowerDefensecheatPage.SetTextColor(Color.red);
                 }
             }

@@ -63,7 +63,7 @@ namespace AstroClient.WorldModifications.Modifications
             {
                 if (FBTExploitsPage != null)
                 {
-                    FBTExploitsPage.SetIntractable(true);
+                    FBTExploitsPage.SetInteractable(true);
                     FBTExploitsPage.SetTextColor(Color.green);
                 }
 
@@ -178,7 +178,7 @@ namespace AstroClient.WorldModifications.Modifications
             {
                 if (FBTExploitsPage != null)
                 {
-                    FBTExploitsPage.SetIntractable(false);
+                    FBTExploitsPage.SetInteractable(false);
                     FBTExploitsPage.SetTextColor(Color.red);
                 }
             }

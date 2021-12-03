@@ -305,25 +305,25 @@
             if (GameStartbtn != null)
             {
                 GameStartbtn.SetActive(StartGameEvent.IsNotNull());
-                GameStartbtn.SetIntractable(StartGameEvent.IsNotNull());
+                GameStartbtn.SetInteractable(StartGameEvent.IsNotNull());
             }
 
             if (GameAbortbtn != null)
             {
                 GameAbortbtn.SetActive(AbortGameEvent.IsNotNull());
-                GameAbortbtn.SetIntractable(AbortGameEvent.IsNotNull());
+                GameAbortbtn.SetInteractable(AbortGameEvent.IsNotNull());
             }
 
             if (GameVictoryBystanderBtn != null)
             {
                 GameVictoryBystanderBtn.SetActive(VictoryBystanderEvent.IsNotNull());
-                GameVictoryBystanderBtn.SetIntractable(VictoryBystanderEvent.IsNotNull());
+                GameVictoryBystanderBtn.SetInteractable(VictoryBystanderEvent.IsNotNull());
             }
 
             if (GameVictoryMurdererBtn != null)
             {
                 GameVictoryMurdererBtn.SetActive(VictoryMurdererEvent.IsNotNull());
-                GameVictoryMurdererBtn.SetIntractable(VictoryMurdererEvent.IsNotNull());
+                GameVictoryMurdererBtn.SetInteractable(VictoryMurdererEvent.IsNotNull());
             }
 
             item_Grenade.RenameObject("Grenade");
@@ -440,7 +440,7 @@
                 if (Murder4CheatPage != null)
                 {
                     ModConsole.Log($"Recognized {Name} World, Unlocking Murder 4 cheats menu!", Color.Green);
-                    Murder4CheatPage.GetMainButton().SetIntractable(true);
+                    Murder4CheatPage.GetMainButton().SetInteractable(true);
                     Murder4CheatPage.GetMainButton().SetTextColor(UnityEngine.Color.green);
                 }
 
@@ -451,7 +451,7 @@
                 HasMurder4WorldLoaded = false;
                 if (Murder4CheatPage != null)
                 {
-                    Murder4CheatPage.GetMainButton().SetIntractable(false);
+                    Murder4CheatPage.GetMainButton().SetInteractable(false);
                     Murder4CheatPage.GetMainButton().SetTextColor(UnityEngine.Color.red);
                 }
             }

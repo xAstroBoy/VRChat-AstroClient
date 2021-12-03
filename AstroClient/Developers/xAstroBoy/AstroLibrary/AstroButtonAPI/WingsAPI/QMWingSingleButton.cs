@@ -21,7 +21,8 @@
         internal string CurrentButtonColor { get; set; }
         internal string CurrentButtonText { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
-        internal UiTooltip ToolTip { get; set; }
+        internal UiTooltip ButtonToolTip { get; set; }
+        internal string ToolTipText { get; set; }
         internal string btnQMLoc { get; set; }
         internal string btnTag { get; set; }
         internal string btnType { get; set; }
@@ -41,7 +42,7 @@
             ButtonObject.SetActive(true);
             ButtonObject.GetComponentInChildren<TextMeshProUGUI>().fontSize = 35;
             ButtonObject.GetComponentInChildren<TextMeshProUGUI>().autoSizeTextContainer = true;
-            ToolTip = ButtonObject.AddComponent<UiTooltip>();
+            ButtonToolTip = ButtonObject.AddComponent<UiTooltip>();
             SetToolTip(btnToolTip);
             ButtonObject.GetComponent<RectTransform>().sizeDelta = new Vector2(350, 120);
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -50,7 +51,8 @@
         }
         internal void SetToolTip(string text)
         {
-            ToolTip.SetButtonToolTip(text);
+            ToolTipText = text;
+            ButtonToolTip.SetButtonToolTip(text);
         }
 
         internal void SetButtonText(string buttonText)
@@ -60,10 +62,6 @@
             ButtonText.text = CurrentButtonText;
         }
 
-        internal void setButtonToolTip(string ButtonToolTip)
-        {
-            ToolTip.field_Public_String_0 = ButtonToolTip;
-        }
 
         internal void setAction(Action buttonAction)
         {
@@ -90,7 +88,7 @@
             {
             }
         }
-        internal void SetIntractable(bool isIntractable)
+        internal void SetInteractable(bool isIntractable)
         {
             ButtonObject.gameObject.GetComponent<Button>().interactable = isIntractable;
         }

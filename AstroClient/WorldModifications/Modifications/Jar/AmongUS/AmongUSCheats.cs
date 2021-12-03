@@ -228,25 +228,25 @@
             if (GameStartbtn != null)
             {
                 GameStartbtn.SetActive(StartGameEvent.IsNotNull());
-                GameStartbtn.SetIntractable(StartGameEvent.IsNotNull());
+                GameStartbtn.SetInteractable(StartGameEvent.IsNotNull());
             }
 
             if (GameAbortbtn != null)
             {
                 GameAbortbtn.SetActive(AbortGameEvent.IsNotNull());
-                GameAbortbtn.SetIntractable(AbortGameEvent.IsNotNull());
+                GameAbortbtn.SetInteractable(AbortGameEvent.IsNotNull());
             }
 
             if (GameVictoryCrewmateBtn != null)
             {
                 GameVictoryCrewmateBtn.SetActive(VictoryCrewmateEvent.IsNotNull());
-                GameVictoryCrewmateBtn.SetIntractable(VictoryCrewmateEvent.IsNotNull());
+                GameVictoryCrewmateBtn.SetInteractable(VictoryCrewmateEvent.IsNotNull());
             }
 
             if (GameVictoryImpostorBtn != null)
             {
                 GameVictoryImpostorBtn.SetActive(VictoryImpostorEvent.IsNotNull());
-                GameVictoryImpostorBtn.SetIntractable(VictoryImpostorEvent.IsNotNull());
+                GameVictoryImpostorBtn.SetInteractable(VictoryImpostorEvent.IsNotNull());
             }
 
         }
@@ -276,7 +276,7 @@
                 if (AmongUsCheatsPage != null)
                 {
                     ModConsole.Log($"Recognized {Name} World, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
-                    AmongUsCheatsPage.GetMainButton().SetIntractable(true);
+                    AmongUsCheatsPage.GetMainButton().SetInteractable(true);
                     AmongUsCheatsPage.GetMainButton().SetTextColor(Color.green);
                 }
 
@@ -287,7 +287,7 @@
                 HasAmongUsWorldLoaded = false;
                 if (AmongUsCheatsPage != null)
                 {
-                    AmongUsCheatsPage.GetMainButton().SetIntractable(false);
+                    AmongUsCheatsPage.GetMainButton().SetInteractable(false);
                     AmongUsCheatsPage.GetMainButton().SetTextColor(Color.red);
                 }
             }

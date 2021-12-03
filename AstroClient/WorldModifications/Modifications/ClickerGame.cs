@@ -26,7 +26,7 @@
             {
                 if (ClickerGameCheats != null)
                 {
-                    ClickerGameCheats.SetIntractable(true);
+                    ClickerGameCheats.SetInteractable(true);
                     ClickerGameCheats.SetTextColor(Color.green);
                 }
                 ModConsole.Log($"Recognized {Name} World, AutoClicker Available!....");
@@ -36,7 +36,7 @@
             {
                 if (ClickerGameCheats != null)
                 {
-                    ClickerGameCheats.SetIntractable(false);
+                    ClickerGameCheats.SetInteractable(false);
                     ClickerGameCheats.SetTextColor(Color.red);
                 }
             }

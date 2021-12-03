@@ -132,7 +132,7 @@
                 if (VRChat_Hub_Addons != null)
                 {
                     ModConsole.Log($"Recognized {Name} World, revealing Hub Addons Submenu Button!", System.Drawing.Color.Green);
-                    VRChat_Hub_Addons.GetMainButton().SetIntractable(true);
+                    VRChat_Hub_Addons.GetMainButton().SetInteractable(true);
                     VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.green);
                     isHubWorldLoaded = true;
                     FindHubButtons();
@@ -142,7 +142,7 @@
             {
                 if (VRChat_Hub_Addons != null)
                 {
-                    VRChat_Hub_Addons.GetMainButton().SetIntractable(false);
+                    VRChat_Hub_Addons.GetMainButton().SetInteractable(false);
                     VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.red);
                     isHubWorldLoaded = false;
                 }

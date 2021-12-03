@@ -49,7 +49,7 @@
             {
                 if (BOMBERioCheatsPage != null)
                 {
-                    BOMBERioCheatsPage.SetIntractable(true);
+                    BOMBERioCheatsPage.SetInteractable(true);
                     BOMBERioCheatsPage.SetTextColor(Color.green);
                 }
                 ModConsole.Log($"Recognized {Name} World, Enabling Gun Projectile Hijacker..");
@@ -59,7 +59,7 @@
             {
                 if (BOMBERioCheatsPage != null)
                 {
-                    BOMBERioCheatsPage.SetIntractable(false);
+                    BOMBERioCheatsPage.SetInteractable(false);
                     BOMBERioCheatsPage.SetTextColor(Color.red);
                 }
 
