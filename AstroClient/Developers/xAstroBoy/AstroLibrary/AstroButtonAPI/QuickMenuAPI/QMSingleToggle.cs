@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
+    using Extensions;
     using TMPro;
     using Tools;
     using UnityEngine;
@@ -61,15 +62,19 @@
             if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
-
-        private bool State { get; set; }
-        private string OnText { get; set; }
-        private string OffText { get; set; }
-        private Color OffColor { get; set; }
-        private Color OnColor { get; set; }
-        private Action OffAction { get; set; }
-        private Action OnAction { get; set; }
-        private GameObject ButtonsMenu { get; set; }
+        internal string btnQMLoc { get; set; }
+        internal string btnTag { get; set; }
+        internal string btnType { get; set; }
+        internal bool State { get; set; }
+        internal string OnText { get; set; }
+        internal string OffText { get; set; }
+        internal Color OffColor { get; set; }
+        internal Color OnColor { get; set; }
+        internal Action OffAction { get; set; }
+        internal Action OnAction { get; set; }
+        internal GameObject ButtonsMenu { get; set; }
+        internal TextMeshProUGUI ButtonText { get; set; }
+        internal UiTooltip ButtonToolTip { get; set; }
 
         private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool defaultstate = false, bool btnHalf = false)
         {
@@ -77,8 +82,8 @@
             switch (btnQMLoc)
             {
                 case "Dashboard":
-                    button = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection, true);
-                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
+                    ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection, true);
+                    ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     break;
 
                 //case "QA_MainMenu":
@@ -100,15 +105,15 @@
                         ButtonsMenu = Part1.FindObject("Buttons");
                     }
 
-                    button = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
-                    button.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
-                    initShift[0] = -1;
-                    initShift[1] = -3;
+                    ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
+                    ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     SetLocation(btnXLocation, btnYLocation);
                     break;
             }
 
-            button.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
+            ButtonObject.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
+            ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
+            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>();
             SetButtonText(defaultstate ? btnONText : btnOffText);
             OnText = btnONText;
             OffText = btnOffText;
@@ -129,17 +134,35 @@
             if (btnHalf) SetSize(new Vector2(200, 88));
             //QMButtonAPI.allSingleToggleButtons.Add(this);
         }
+        internal void SetActive(bool isActive)
+        {
+            ButtonObject.gameObject.SetActive(isActive);
+        }
+        internal void DestroyMe()
+        {
+            try
+            {
+                Object.Destroy(ButtonObject);
+            }
+            catch
+            {
+            }
+        }
 
         internal void SetButtonText(string buttonText)
         {
-            button.GetComponentInChildren<TextMeshProUGUI>().text = buttonText;
+            ButtonText.text = buttonText;
+        }
+        internal void SetToolTip(string text)
+        {
+            ButtonToolTip.SetButtonToolTip(text);
         }
 
         internal void SetAction(Action buttonONAction, Action buttonOFFAction)
         {
-            button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+            ButtonObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonONAction != null && buttonOFFAction != null)
-                button.GetComponent<Button>().onClick.AddListener(new Action(() =>
+                ButtonObject.GetComponent<Button>().onClick.AddListener(new Action(() =>
                 {
                     State = !State;
                     if (State)
@@ -148,15 +171,16 @@
                         SetToggleState(false, true);
                 }));
         }
-
-        internal override void SetBackgroundColor(Color buttonBackgroundColor)
+        internal void SetLocation(float buttonXLoc, float buttonYLoc)
         {
-            //button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
-            //if (save)
-            //    OrigBackground = buttonBackgroundColor;
-            //UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
-            //foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
-            button.GetComponentInChildren<Button>().colors = new ColorBlock
+            ButtonObject.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplatePos;
+            ButtonObject.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 / 2 * buttonXLoc);
+            ButtonObject.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 / 2 * buttonYLoc);
+        }
+
+        internal void SetBackgroundColor(Color buttonBackgroundColor)
+        {
+            ButtonObject.GetComponentInChildren<Button>().colors = new ColorBlock
             {
                 colorMultiplier = 1f,
                 disabledColor = Color.grey,
@@ -166,21 +190,21 @@
             };
         }
 
-        internal override void SetTextColorOff(Color buttonTextColorOff)
+        internal void SetTextColorOff(Color buttonTextColorOff)
         {
             OffColor = buttonTextColorOff;
             SetTextColor(buttonTextColorOff);
         }
 
-        internal override void SetTextColorOn(Color buttonTextColorOn)
+        internal void SetTextColorOn(Color buttonTextColorOn)
         {
             OnColor = buttonTextColorOn;
             SetTextColor(buttonTextColorOn);
         }
 
-        internal override void SetTextColor(Color buttonTextColor)
+        internal void SetTextColor(Color buttonTextColor)
         {
-            button.GetComponentInChildren<TextMeshProUGUI>().color = buttonTextColor;
+            ButtonText.color = buttonTextColor;
             //if (save)
             //OrigText = (Color)buttonTextColor;
         }
@@ -210,13 +234,13 @@
             if (size == null)
             {
                 // Standart Size
-                button.GetComponent<RectTransform>().sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
+                ButtonObject.GetComponent<RectTransform>().sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             }
             else
             {
                 // New Size
                 var Size = (Vector2)size;
-                button.GetComponent<RectTransform>().sizeDelta = Size;
+                ButtonObject.GetComponent<RectTransform>().sizeDelta = Size;
             }
         }
     }

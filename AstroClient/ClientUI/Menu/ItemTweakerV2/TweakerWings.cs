@@ -40,7 +40,7 @@
 
         internal static void InitTweakerWings()
         {
-            TweakerMainWings = new QMWings(1011, true, "Tweaker", "Item Tweaker", null, Icons.box_sprite);
+            TweakerMainWings = new QMWings(1011, true, "Tweaker", "Item Tweaker",  Icons.box_sprite);
             Pickup_CurrentObjectOwner = new QMWingSingleButton(TweakerMainWings, "Current Owner : null", () => { }, "Who is the current object owner,", null);
             Pickup_IsHeldStatus = new QMWingSingleButton(TweakerMainWings, "", () => { }, "Held : No.", null);
             Pickup_CurrentObjectHolder = new QMWingSingleButton(TweakerMainWings, "Current holder : null", () => { }, "Who is the Holding the object", null);

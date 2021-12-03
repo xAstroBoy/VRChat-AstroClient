@@ -14,10 +14,13 @@
         }
         internal static void RemoveComponent<T>(this GameObject obj) where T : Component
         {
-            var existing = obj.GetComponent<T>();
-            if (existing)
+            if (obj != null)
             {
-                existing.DestroyMeLocal();
+                var existing = obj.GetComponent<T>();
+                if (existing)
+                {
+                    existing.DestroyMeLocal();
+                }
             }
         }
         public static void RemoveComponent<T>(this Transform obj) where T : Component
@@ -43,10 +46,13 @@
 
         internal static void RemoveComponent<T>(this Component c) where T : Component
         {
-            var existing = c.GetComponent<T>();
-            if (existing)
+            if (c != null)
             {
-                existing.DestroyMeLocal();
+                var existing = c.GetComponent<T>();
+                if (existing)
+                {
+                    existing.DestroyMeLocal();
+                }
             }
         }
 

@@ -1,7 +1,9 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
+    using AstroClient.Tools.Extensions;
     using ClientResources.Loaders;
+    using Extensions;
     using TMPro;
     using Tools;
     using UnityEngine;
@@ -10,8 +12,6 @@
 
     internal class QMToggleButton : QMButtonBase
     {
-        private TextMeshProUGUI TextMesh;
-
         public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -132,24 +132,27 @@
 
         internal GameObject btnOn { get; set; }
         internal GameObject btnOff { get; set; }
-        private bool State { get; set; }
-        internal GameObject ButtonsPageNestedButton { get; set; }
-        private string BtnType { get; set; }
-        private GameObject ButtonsMenu { get; set; }
-        private string CurrentButtonText { get; set; }
+        internal RectTransform btnOn_Rect { get; set; }
+        internal RectTransform btnOff_Rect { get; set; }
+        internal Image btnOn_Image { get; set; }
+        internal Image btnOff_Image { get; set; }
 
-        private Action btnOnAction { get; set; }
-        private Action btnOffAction { get; set; }
-
-        private Toggle ButtonToggle { get; set; }
-        private Color OffColor { get; set; }
-        private Color OnColor { get; set; }
-
-        private string CurrentColor { get; set; }
-        private TextMeshProUGUI ButtonText { get; set; }
-
-        private string ButtonText_On { get; set; }
-        private string ButtonText_Off { get; set; }
+        internal bool State { get; set; }
+        internal string BtnType { get; set; }
+        internal GameObject ButtonsMenu { get; set; }
+        internal string CurrentButtonText { get; set; }
+        internal string btnQMLoc { get; set; }
+        internal Action btnOnAction { get; set; }
+        internal Action btnOffAction { get; set; }
+        internal Toggle ButtonToggle { get; set; }
+        internal Color OffColor { get; set; }
+        internal Color OnColor { get; set; }
+        internal string CurrentColor { get; set; }
+        internal string ButtonText_On { get; set; }
+        internal string ButtonText_Off { get; set; }
+        internal UiTooltip ButtonToolTip { get; set; }
+        internal TextMeshProUGUI ButtonTitleMesh { get; set; }
+        internal TextMeshProUGUI ButtonText { get; set; }
 
         internal void initButton(float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = "", bool DefaultState = false)
         {
@@ -161,42 +164,35 @@
                 if (Part1 != null) ButtonsMenu = Part1.FindObject("Buttons");
             }
 
-            button = Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
-            Extensions.NewText(button, "Text_H4").text = Title;
-            button.name = id;
-            ButtonText = button.GetComponentInChildren<TextMeshProUGUI>();
-            btnOn = button.FindObject("Icon_On");
-            btnOff = button.FindObject("Icon_Off");
+            ButtonObject = Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
+            ButtonTitleMesh = Extensions.NewText(ButtonObject, "Text_H4");
+            ButtonTitleMesh.text = Title;
+            ButtonObject.name = id;
+            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>();
+            ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
+            ButtonToggle = ButtonObject.GetComponentInChildren<Toggle>();
+            btnOn = ButtonObject.FindObject("Icon_On");
+            btnOff = ButtonObject.FindObject("Icon_Off");
             btnOff.SetActive(true);
             btnOn.SetActive(false);
-            if (btnOnColor.HasValue)
-                OnColor = btnOnColor.Value;
-            else
-                OnColor = Color.green;
-            if (btnOffColor.HasValue)
-                OffColor = btnOffColor.Value;
-            else
-                OffColor = Color.red;
+            btnOff_Rect = btnOff.GetComponentInChildren<RectTransform>();
+            btnOn_Rect = btnOn.GetComponentInChildren<RectTransform>();
+            btnOff_Image = btnOff.GetComponentInChildren<Image>();
+            btnOn_Image = btnOn.GetComponentInChildren<Image>();
 
+
+            OnColor = btnOffColor.GetValueOrDefault(System.Drawing.Color.GreenYellow.ToUnityEngineColor());
+            OffColor = btnOffColor.GetValueOrDefault(System.Drawing.Color.Red.ToUnityEngineColor());
             ButtonText_On = btnTextOn;
             ButtonText_Off = btnTextOff;
-            //string TextColorHTML = null;
-            //if (btnTextColor.HasValue)
-            //{
-            //    TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
-            //}
-            //else
-            //{
-            //}
             setTextColorHTML("#red");
-            ButtonToggle = button.GetComponentInChildren<Toggle>();
             SetLocation(btnXLocation, btnYLocation);
-            btnOn.GetComponentInChildren<RectTransform>().anchoredPosition -= new Vector2(50, 0);
-            btnOff.GetComponentInChildren<RectTransform>().anchoredPosition += new Vector2(50, 0);
+            btnOn_Rect.anchoredPosition -= new Vector2(50, 0);
+            btnOff_Rect.anchoredPosition += new Vector2(50, 0);
 
-            btnOn.GetComponentInChildren<Image>().overrideSprite = Icons.check_sprite;
+            btnOn_Image.overrideSprite = Icons.check_sprite;
 
-            btnOff.GetComponentInChildren<Image>().overrideSprite = Icons.cancel_sprite;
+            btnOff_Image.overrideSprite = Icons.cancel_sprite;
 
             SetToolTip(btnToolTip);
             SetAction(btnActionOn, btnActionOff);
@@ -210,10 +206,33 @@
             ButtonText.text = NewText;
         }
 
+        internal void DestroyMe()
+        {
+            try
+            {
+                Object.Destroy(ButtonObject);
+            }
+            catch
+            {
+            }
+        }
+
+
+        internal void SetToolTip(string text)
+        {
+            ButtonToolTip.SetButtonToolTip(text);
+        }
+
         internal void SetOffButtonText(string Text)
         {
             ButtonText_Off = Text;
             if (!State) SetButtonText(ButtonText_Off);
+        }
+        internal void SetLocation(float buttonXLoc, float buttonYLoc)
+        {
+            ButtonObject.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplatePos;
+            ButtonObject.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 / 2 * buttonXLoc);
+            ButtonObject.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 / 2 * buttonYLoc);
         }
 
         internal void SetOnButtonText(string Text)
@@ -269,7 +288,7 @@
             }));
         }
 
-        internal override void SetTextColor(Color color)
+        internal void SetTextColor(Color color)
         {
             setTextColorHTML("#" + ColorUtility.ToHtmlStringRGB(color));
         }

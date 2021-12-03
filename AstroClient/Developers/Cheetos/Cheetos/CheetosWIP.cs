@@ -24,7 +24,7 @@
 
         internal static void InitCheetosWIPMenu(QMGridTab menu)
         {
-            MainButton = new QMNestedGridMenu(menu, 5, 4, "Cheetos WIP Menu", "Cheetos WIP Features", null, Color.cyan, null, null, false);
+            MainButton = new QMNestedGridMenu(menu, 5, 4, "Cheetos WIP Menu", "Cheetos WIP Features", null, Color.white, null, null, false);
 
             //var actions = new Action[4];
             //var labels = new string[4];

@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 {
     using System;
+    using Extensions;
     using Il2CppSystem.Collections.Generic;
-    using MongoDB.Entities;
     using QuickMenuAPI;
     using TMPro;
     using Tools;
@@ -11,11 +11,11 @@
     using UnityEngine.Events;
     using UnityEngine.UI;
     using VRC.UI.Elements;
-    using VRC.UI.Elements.Tooltips;
     using Object = UnityEngine.Object;
 
-    internal class QMWings : QMButtonBase
+    internal class QMWings
     {
+        internal GameObject ButtonObject { get; set; }
         internal Button BackButton { get; set; }
         internal GameObject backbuttonObject { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
@@ -23,38 +23,38 @@
         internal UIPage CurrentPage { get; set; }
         internal string MenuName { get; set; }
         internal Transform WingPageTransform { get; set; }
-
+        internal string btnQMLoc { get; set; }
         internal GameObject VerticalLayoutGroup { get; set; }
-
-
+        internal string btnType { get; set; } = "WingPage";
         internal MenuStateController CurrentController { get; set; }
-
-        internal UiTooltip ToolTip { get; set; }
         internal bool isLeftWing { get; set; }
+        internal UiTooltip ButtonToolTip { get; set; }
+        internal string CurrentBtnColor { get; set; }
+        internal string BtnText { get; set; }
 
-        internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, Sprite icon = null)
+        internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip,  Sprite icon = null)
         {
             btnQMLoc = "WingPage" + MenuName;
-            initButton(Index, LeftWing, MenuName, btnToolTip, btnBackgroundColor, icon);
+            initButton(Index, LeftWing, MenuName, btnToolTip, icon);
         }
 
 
         // TODO : Cleanup and make it prettier and better!
-        internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip, Color? btnBackgroundColor = null, Sprite icon = null)
+        internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip,  Sprite icon = null)
         {
             if (LeftWing)
             {
                 isLeftWing = true;
                 btnQMLoc += $"_LEFT_{Guid.NewGuid().ToString()} ";
-                button = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, QuickMenuTools.Wing_Left.gameObject.FindObject("VerticalLayoutGroup").transform, true);
-                button.name = QMButtonAPI.identifier + btnType + Index;
+                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, QuickMenuTools.Wing_Left.gameObject.FindObject("VerticalLayoutGroup").transform, true);
+                ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
-                ButtonText = button.NewText("Text_QM_H3");
+                ButtonText = ButtonObject.NewText("Text_QM_H3");
                 ButtonText.text = MenuName;
                 CurrentController = QuickMenuTools.WingMenuStateControllerLeft;
-
+                ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
                 SetToolTip(btnToolTip);
-                button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
+                ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
                 var Page = QuickMenuTools.UIPageTemplate_Left;
                 CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
                 WingPageTransform = CurrentPage.transform;
@@ -94,15 +94,16 @@
             {
                 isLeftWing = false;
                 btnQMLoc += $"_RIGHT_{Guid.NewGuid().ToString()} ";
-                button = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, QuickMenuTools.Wing_Right.gameObject.FindObject("VerticalLayoutGroup").transform, true);
-                button.name = QMButtonAPI.identifier + btnType + Index;
+                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, QuickMenuTools.Wing_Right.gameObject.FindObject("VerticalLayoutGroup").transform, true);
+                ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
-                ButtonText = button.NewText("Text_QM_H3");
+                ButtonText = ButtonObject.NewText("Text_QM_H3");
                 ButtonText.text = MenuName;
                 CurrentController = QuickMenuTools.WingMenuStateControllerRight;
 
+                ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
                 SetToolTip(btnToolTip);
-                button.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
+                ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
                 var Page = QuickMenuTools.UIPageTemplate_Right;
                 CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
                 WingPageTransform = CurrentPage.transform;
@@ -138,19 +139,19 @@
                 SetAction(() => { QuickMenuTools.Wing_Right.ShowQuickmenuPage(btnQMLoc); });
             }
             
-            button.LoadSprite(icon, "Icon");
+            ButtonObject.LoadSprite(icon, "Icon");
             SetActive(true);
         }
 
 
-        internal QMWings(QMWings menu, string MenuName, string btnToolTip, Color? btnBackgroundColor = null, Sprite icon = null)
+        internal QMWings(QMWings menu, string MenuName, string btnToolTip, Sprite icon = null)
         {
             btnQMLoc = "WingSubPage" + MenuName;
-            initButton(menu, MenuName, btnToolTip, btnBackgroundColor, icon);
+            initButton(menu, MenuName, btnToolTip, icon);
         }
 
 
-        internal void initButton(QMWings menu, string AssignedMenu, string btnToolTip, Color? btnBackgroundColor = null, Sprite icon = null)
+        internal void initButton(QMWings menu, string AssignedMenu, string btnToolTip, Sprite icon = null)
         {
             btnType = "WingSubPage";
             
@@ -158,13 +159,14 @@
                 {
                     isLeftWing = true;
                     btnQMLoc += $"_LEFT_{Guid.NewGuid().ToString()} ";
-                    button = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, menu.VerticalLayoutGroup.transform, true);
-                    button.name = QMButtonAPI.identifier + btnType;
+                    ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, menu.VerticalLayoutGroup.transform, true);
+                    ButtonObject.name = QMButtonAPI.identifier + btnType;
                     MenuName = AssignedMenu;
-                    ButtonText = button.NewText("Text_QM_H3");
+                    ButtonText = ButtonObject.NewText("Text_QM_H3");
                     ButtonText.text = MenuName;
                     CurrentController = QuickMenuTools.WingMenuStateControllerLeft;
 
+                    ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
                     SetToolTip(btnToolTip);
                     var Page = QuickMenuTools.UIPageTemplate_Left;
                     CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
@@ -205,9 +207,9 @@
                 {
                     isLeftWing = false;
                     btnQMLoc += $"_RIGHT_{Guid.NewGuid().ToString()} ";
-                    button = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, menu.VerticalLayoutGroup.transform, true);
+                    ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, menu.VerticalLayoutGroup.transform, true);
                     MenuName = AssignedMenu;
-                    ButtonText = button.NewText("Text_QM_H3");
+                    ButtonText = ButtonObject.NewText("Text_QM_H3");
                     ButtonText.text = MenuName;
                     CurrentController = QuickMenuTools.WingMenuStateControllerRight;
 
@@ -248,7 +250,7 @@
                     SetAction(() => { QuickMenuTools.Wing_Right.ShowQuickmenuPage(btnQMLoc); });
                 }
 
-                button.LoadSprite(icon, "Icon");
+                ButtonObject.LoadSprite(icon, "Icon");
                 SetActive(true);
             }
 
@@ -268,26 +270,86 @@
             ButtonText_Title.text = text;
         }
 
-        internal void SetButtonText(string text)
-        {
-            ButtonText.text = text;
-        }
 
         internal void LoadIcon(Sprite icon)
+        { 
+            ButtonObject.LoadSprite(icon, "Icon");
+        }
+        internal void SetToolTip(string text)
         {
-                button.LoadSprite(icon, "Icon");
+            ButtonToolTip.SetButtonToolTip(text);
+        }
+
+
+
+        internal void SetActive(bool isActive)
+        {
+            ButtonObject.gameObject.SetActive(isActive);
         }
 
         internal void ClickBackButton()
         {
             BackButton.onClick.Invoke();
         }
+        internal void SetButtonShortcut(QMNestedButton btn)
+        {
+            SetAction(new Action(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
+        }
+
+        internal void SetButtonShortcut(QMNestedGridMenu btn)
+        {
+            SetAction(new Action(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
+        }
+
+        internal void SetButtonShortcut(QMSingleButton btn)
+        {
+            SetAction(new Action(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
+        }
+        internal void ClickMe()
+        {
+            ButtonObject.GetComponent<Button>().onClick.Invoke();
+        }
+
+        internal void SetIntractable(bool isIntractable)
+        {
+            ButtonObject.gameObject.GetComponent<Button>().interactable = isIntractable;
+        }
+
+        internal void DestroyMe()
+        {
+            try
+            {
+                Object.Destroy(ButtonObject);
+            }
+            catch
+            {
+            }
+        }
+        internal void SetTextColor(Color buttonTextColor)
+        {
+            setTextColorHTML($"#{ColorUtility.ToHtmlStringRGB(buttonTextColor)}");
+        }
+        internal void setTextColorHTML(string buttonTextColor)
+        {
+            if (buttonTextColor.IsNotNullOrEmptyOrWhiteSpace())
+            {
+                CurrentBtnColor = buttonTextColor;
+                var NewText = $"<color={buttonTextColor}>{MenuName}</color>";
+                ButtonText.text = NewText;
+            }
+        }
+        internal void SetButtonText(string text)
+        {
+            BtnText = text;
+            var NewText = $"<color={CurrentBtnColor}>{MenuName}</color>";
+            ButtonText.text = NewText;
+        }
 
         internal void SetAction(Action buttonAction)
         {
-            button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+            ButtonObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonAction != null)
-                button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
+                ButtonObject.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
         }
     }
 }

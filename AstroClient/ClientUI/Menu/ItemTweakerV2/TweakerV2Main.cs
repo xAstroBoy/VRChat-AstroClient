@@ -54,7 +54,7 @@
             ComponentSubMenu.Init_ComponentSubMenu(menu, 4, 1.5f, true);
             SpawnerSubmenu.Init_SpawnerSubmenu(menu, 4, 2f, true);
 
-            _ = new QMSingleButton(menu, 1, -0.5f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TryTakeOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
+            _ = new QMSingleButton(menu, 1, -0.5f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TryTakeOwnership(); }), "Make Whatever Player, drop the object.", null, Color.white, true);
             AntiTheftInteractor = new QMSingleToggleButton(menu, 1, 0.5f, "AntiTheft ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(true); }, "AntiTheft OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(false); }, "Toggles PickupController WIP antitheft", Color.green, Color.red, null, false, true);
             ProtectionInteractor = new QMSingleToggleButton(menu, 1, 1, "Interaction block ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, "Interaction block OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object", Color.green, Color.red, null, false, true);
             ObjectActiveToggle = new QMSingleToggleButton(menu, 1, 1.5f, "Enabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(true); }, "Disabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(false); }, "Toggles SetActive", Color.green, Color.red, null, false, true);

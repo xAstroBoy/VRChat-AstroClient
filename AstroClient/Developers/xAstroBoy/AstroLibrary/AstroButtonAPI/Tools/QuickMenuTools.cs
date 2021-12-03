@@ -40,7 +40,13 @@
         internal static VRCUiManager vrcuimInstance = null; // Dead
         private static GameObject shortcutMenu = null;
         private static GameObject userInteractMenu = null;
-        private static Transform _SelectedUserPage = null;
+        private static Transform _SelectedUserPage_Remote = null;
+        private static Transform _SelectedUserPage_Local = null;
+
+        private static Transform _SelectedUserPage_Remote_VerticalLayoutGroup = null;
+        private static Transform _SelectedUserPage_Local_VerticalLayoutGroup = null;
+        private static Transform _MenuDashboard_VerticalLayoutGroup = null;
+
         private static UIPage _UIPageTemplate_Right;
         private static UIPage _UIPageTemplate_Left;
         private static Wing WingmenuInstance = null;
@@ -280,6 +286,21 @@
                 return _MenuDashboard;
             }
         }
+
+        internal static Transform MenuDashboard_VerticalLayoutGroup
+        {
+            get
+            {
+                if (QuickMenuTransform == null) return null;
+                if (_MenuDashboard_VerticalLayoutGroup == null)
+                {
+                    return _MenuDashboard_VerticalLayoutGroup = MenuDashboard.FindObject("ScrollRect/Viewport/VerticalLayoutGroup");
+                }
+
+                return _MenuDashboard_VerticalLayoutGroup;
+            }
+        }
+
 
         internal static Transform NestedPages
         {
@@ -553,25 +574,73 @@
                 return _WingButtonTemplate_Left;
             }
         }
-
-        internal static Transform SelectedUserPage
+        internal static Transform SelectedUserPage_Remote_VerticalLayoutGroup
         {
             get
             {
-                if (_SelectedUserPage == null)
+                if (_SelectedUserPage_Remote_VerticalLayoutGroup == null)
+                {
+                   return _SelectedUserPage_Remote_VerticalLayoutGroup = SelectedUserPage_Remote.FindObject("ScrollRect/Viewport/VerticalLayoutGroup");
+                }
+
+                return _SelectedUserPage_Remote_VerticalLayoutGroup;
+            }
+        }
+
+
+
+        internal static Transform SelectedUserPage_Local_VerticalLayoutGroup
+        {
+            get
+            {
+                if (_SelectedUserPage_Local_VerticalLayoutGroup == null)
+                {
+                    return _SelectedUserPage_Local_VerticalLayoutGroup = SelectedUserPage_Local.FindObject("ScrollRect/Viewport/VerticalLayoutGroup");
+                }
+
+                return _SelectedUserPage_Local_VerticalLayoutGroup;
+            }
+        }
+
+        internal static Transform SelectedUserPage_Remote
+        {
+            get
+            {
+                if (_SelectedUserPage_Remote == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
                     foreach (var button in Buttons)
-                        if (button.name == "Header_UserActions")
+                        if (button.name == "Menu_SelectedUser_Remote")
                         {
-                            _SelectedUserPage = button;
+                            _SelectedUserPage_Remote = button;
                             break;
                         }
                 }
 
-                return _SelectedUserPage;
+                return _SelectedUserPage_Remote;
             }
         }
+
+
+        internal static Transform SelectedUserPage_Local
+        {
+            get
+            {
+                if (_SelectedUserPage_Local == null)
+                {
+                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
+                    foreach (var button in Buttons)
+                        if (button.name == "Menu_SelectedUser_Local")
+                        {
+                            _SelectedUserPage_Local = button;
+                            break;
+                        }
+                }
+
+                return _SelectedUserPage_Local;
+            }
+        }
+
 
         internal static Transform SelectedUserPage_ButtonsSection
         {

@@ -26,7 +26,7 @@
             _ = new QMSingleButton(JustHPartyMenu, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
             _ = new QMSingleButton(JustHPartyMenu, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
 
-            _ = new QMSingleButton(JustHPartyMenu, 1, 2.5f, "Go To Rooms", () => { GoToRooms(); }, "Go To Rooms", null, Color.cyan, true);
+            _ = new QMSingleButton(JustHPartyMenu, 1, 2.5f, "Go To Rooms", () => { GoToRooms(); }, "Go To Rooms", null, Color.white, true);
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)

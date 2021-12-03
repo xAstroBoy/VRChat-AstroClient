@@ -32,7 +32,9 @@
 
         internal static void Init_UserMenu()
         {
-            var menu = new QMNestedGridMenu(MenuAPI_New.QA_SelectedUser, 1, 0, "AstroClient User Options", "AstroClient User Options", Color.cyan, true);
+            var menu = new QMNestedGridMenu(MenuAPI_New.QA_SelectedUser_Remote, 1, 0, "AstroClient User Options", "AstroClient User Options", Color.white, true);
+            var Shortcut = new QMSingleButton(MenuAPI_New.QA_SelectedUser_Local, 1, 0,"AstroClient User Options", null, "AstroClient User Options", true);
+            Shortcut.SetButtonShortcut(menu);
             PickupProtector.InitButtons(menu);
             OrbitUserMenu.InitButtons(menu);
             AttackerUserMenu.InitButtons(menu);
@@ -51,5 +53,6 @@
                 }
                 , "Removes everything bound to this player.");
         }
+        
     }
 }

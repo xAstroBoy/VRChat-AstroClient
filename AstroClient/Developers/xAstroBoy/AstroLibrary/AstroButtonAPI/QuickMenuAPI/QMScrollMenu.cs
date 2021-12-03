@@ -34,9 +34,9 @@
         {
             foreach (var item in QMButtons)
                 if (item.Index == MenuIndex)
-                    item.ButtonBase?.SetActive(true);
+                    item.ButtonBase?.QMButtonBase_SetActive(true);
                 else
-                    item.ButtonBase?.SetActive(false);
+                    item.ButtonBase?.QMButtonBase_SetActive(false);
             currentMenuIndex = MenuIndex;
         }
 
@@ -69,7 +69,7 @@
 
         internal void DestroyMe()
         {
-            foreach (var item in QMButtons) Object.Destroy(item.ButtonBase.GetGameObject());
+            foreach (var item in QMButtons) Object.Destroy(item.ButtonBase.QMButtonBase_GetGameObject());
             QMButtons.Clear();
             if (BaseMenu.GetBackButton() != null)
                 Object.Destroy(BaseMenu.GetBackButton());
@@ -79,7 +79,7 @@
         {
             try
             {
-                foreach (var item in QMButtons) Object.Destroy(item.ButtonBase.GetGameObject());
+                foreach (var item in QMButtons) Object.Destroy(item.ButtonBase.QMButtonBase_GetGameObject());
                 QMButtons.Clear();
                 Posx = 0;
                 Posy = 0;
@@ -103,8 +103,8 @@
             }
 
             if (ShouldChangePos)
-                Button.SetLocation(Posx, Posy);
-            Button.SetActive(false);
+                Button.QMButtonBase_SetLocation(Posx, Posy);
+            Button.QMButtonBase_SetActive(false);
             QMButtons.Add(new ScrollObject
             {
                 ButtonBase = Button
@@ -113,8 +113,8 @@
 
         internal void Add(QMButtonBase Button, int Page, float POSX = 0, float POSY = 0)
         {
-            Button.SetLocation(POSX, POSY);
-            Button.SetActive(false);
+            Button.QMButtonBase_SetLocation(POSX, POSY);
+            Button.QMButtonBase_SetActive(false);
             QMButtons.Add(new ScrollObject
             {
                 ButtonBase = Button,

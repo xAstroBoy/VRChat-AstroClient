@@ -14,7 +14,7 @@
         {
             // Main Settings Menu
             QMNestedGridMenu sub = new QMNestedGridMenu(menu, "Settings", "Settings");
-            sub.GetMainButton().SetTextColor(Color.cyan);
+            sub.GetMainButton().SetTextColor(Color.white);
 
 
             Settings_LogsMenu.InitButtons(sub);

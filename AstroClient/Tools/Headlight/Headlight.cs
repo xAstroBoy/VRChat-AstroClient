@@ -73,7 +73,7 @@
 
         private static void InitWings()
         {
-            WingMenu = new QMWings(1012, true, "Headlight", "Headlight Options", null, null);
+            WingMenu = new QMWings(1012, true, "Headlight", "Headlight Options");
             VRHeadlightBtn = new QMWingToggleButton(WingMenu, "VR headlight", () => { VRHeadLightBool = true; }, () => { VRHeadLightBool = false; }, "Toggle VR Headlight");
             DesktopHeadlightBtn = new QMWingToggleButton(WingMenu, "Desktop Headlight", () => { DesktopHeadlightBool = true; }, () => { DesktopHeadlightBool = false; }, "Toggle Desktop Headlight");
             WingMenu.SetActive(false);

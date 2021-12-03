@@ -21,7 +21,7 @@
 
         internal static void Init_Cheats_ShortcutBtn()
         {
-            WorldCheatsShortcut = new QMWings(1020, true, "World Cheats", "This Opens Compatible World cheats", null, Icons.thief_sprite);
+            WorldCheatsShortcut = new QMWings(1020, true, "World Cheats", "This Opens Compatible World cheats", Icons.thief_sprite);
             ToggleButtonVisibilityAndInteractivity(false);
         }
 
@@ -30,8 +30,8 @@
             if (id == WorldIds.VRChatDefaultHub)
             {
                 SetButtonText("Hub Mods", "Control HUB World.");
-                SetButtonShortcut(VRChatHub.VRChat_Hub_Addons);
-                SetButtonColor(Color.green);
+                WorldCheatsShortcut.SetButtonShortcut(VRChatHub.VRChat_Hub_Addons);
+                WorldCheatsShortcut.SetTextColor(Color.green);
                 ToggleButtonVisibilityAndInteractivity(true);
             }
             else if (id == WorldIds.AmongUS)
@@ -39,8 +39,8 @@
                 if (AmongUSCheats.AmongUsCheatsPage != null)
                 {
                     SetButtonText("Among US Cheats", "Manage Among Us Cheats");
-                    SetButtonShortcut(AmongUSCheats.AmongUsCheatsPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(AmongUSCheats.AmongUsCheatsPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -49,8 +49,8 @@
                 if (Murder2Cheats.Murder2CheatPage != null)
                 {
                     SetButtonText("Murder 2 Cheats", "Manage Murder 2 Cheats");
-                    SetButtonShortcut(Murder2Cheats.Murder2CheatPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(Murder2Cheats.Murder2CheatPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -59,8 +59,8 @@
                 if (Murder4Cheats.Murder4CheatPage != null)
                 {
                     SetButtonText("Murder 4 Cheats", "Manage Murder 4 Cheats");
-                    SetButtonShortcut(Murder4Cheats.Murder4CheatPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(Murder4Cheats.Murder4CheatPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -79,8 +79,8 @@
                 if (BClubWorld.BClubExploitsPage != null)
                 {
                     SetButtonText("BClub Exploits", "Manage BClub Exploits");
-                    SetButtonShortcut(BClubWorld.BClubExploitsPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(BClubWorld.BClubExploitsPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -89,8 +89,8 @@
                 if (FBTHeaven.FBTExploitsPage != null)
                 {
                     SetButtonText("FBTHeaven Exploits", "Manage FBTHeaven Exploits");
-                    SetButtonShortcut(FBTHeaven.FBTExploitsPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(FBTHeaven.FBTExploitsPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -99,8 +99,8 @@
                 if (JustHParty.JustHPartyMenu != null)
                 {
                     SetButtonText("JustHParty Exploits", "Manage JustHParty Exploits");
-                    SetButtonShortcut(JustHParty.JustHPartyMenu);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(JustHParty.JustHPartyMenu);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -109,8 +109,8 @@
                 if (VoidClub.VoidClubMenu != null)
                 {
                     SetButtonText("VoidClub Exploits", "Manage VoidClub Exploits");
-                    SetButtonShortcut(VoidClub.VoidClubMenu);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(VoidClub.VoidClubMenu);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -119,8 +119,8 @@
                 if (AimFactory.AimFactoryCheatPage != null)
                 {
                     SetButtonText("Aim Factory Cheats", "Manage Aim Factory Cheats");
-                    SetButtonShortcut(AimFactory.AimFactoryCheatPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(AimFactory.AimFactoryCheatPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -129,8 +129,8 @@
                 if (BOMBERio.BOMBERioCheatsPage != null)
                 {
                     SetButtonText("BOMBERio Cheats", "Manage BOMBERio Cheats");
-                    SetButtonShortcut(BOMBERio.BOMBERioCheatsPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(BOMBERio.BOMBERioCheatsPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -139,8 +139,8 @@
                 if (SuperTowerDefense.SuperTowerDefensecheatPage != null)
                 {
                     SetButtonText("Super Tower Defense Cheats", "Manage Super Tower Defense Cheats");
-                    SetButtonShortcut(SuperTowerDefense.SuperTowerDefensecheatPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(SuperTowerDefense.SuperTowerDefensecheatPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -149,8 +149,8 @@
                 if (PoolParlor.PoolParlorCheats != null)
                 {
                     SetButtonText("Pool Parlor Skins", "Manage Pool Parlor Customizations.");
-                    SetButtonShortcut(PoolParlor.PoolParlorCheats);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(PoolParlor.PoolParlorCheats);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
@@ -159,8 +159,8 @@
                 if (UdonTycoon.udonTycoonCheatPage != null)
                 {
                     SetButtonText("Pool Udon Tycoon", "Manage Udon Tycoon Cheats.");
-                    SetButtonShortcut(UdonTycoon.udonTycoonCheatPage);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(UdonTycoon.udonTycoonCheatPage);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
 
@@ -170,15 +170,15 @@
                 if (ClickerGame.ClickerGameCheats != null)
                 {
                     SetButtonText("Clicker Game AutoClicker", "Manage Clicker Game Cheats.");
-                    SetButtonShortcut(ClickerGame.ClickerGameCheats);
-                    SetButtonColor(Color.green);
+                    WorldCheatsShortcut.SetButtonShortcut(ClickerGame.ClickerGameCheats);
+                    WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
 
             else
             {
-                SetButtonColor(Color.red);
+                WorldCheatsShortcut.SetTextColor(Color.red);
                 ClearButtonAction();
                 SetButtonText("This Button Should be hidden...");
                 ToggleButtonVisibilityAndInteractivity(false);
@@ -203,37 +203,7 @@
             }
         }
 
-        internal static void SetButtonColor(Color color)
-        {
-            if (WorldCheatsShortcut != null)
-            {
-                WorldCheatsShortcut.SetTextColor(color);
-            }
-        }
 
-        internal static void SetButtonShortcut(QMNestedButton btn)
-        {
-            if (WorldCheatsShortcut != null)
-            {
-                WorldCheatsShortcut.SetAction(new Action(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
-            }
-        }
-
-        internal static void SetButtonShortcut(QMNestedGridMenu btn)
-        {
-            if (WorldCheatsShortcut != null)
-            {
-                WorldCheatsShortcut.SetAction(new Action(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
-            }
-        }
-
-        internal static void SetButtonShortcut(QMSingleButton btn)
-        {
-            if (WorldCheatsShortcut != null)
-            {
-                WorldCheatsShortcut.SetAction(new Action(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
-            }
-        }
 
         internal static void ClearButtonAction()
         {

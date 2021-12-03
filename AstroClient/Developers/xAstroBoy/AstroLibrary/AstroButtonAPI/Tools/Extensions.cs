@@ -221,8 +221,6 @@
 
         public static void CleanButtonsQuickActions(this GameObject Parent)
         {
-            var text = new TextMeshProUGUI();
-
             var Buttons = Parent.GetComponentsInChildren<Transform>(true);
             foreach (var button in Buttons)
                 if (button.name.Contains("Button_") || button.name == "SitStandCalibrateButton" || button.name == "Buttons_AvatarDetails"

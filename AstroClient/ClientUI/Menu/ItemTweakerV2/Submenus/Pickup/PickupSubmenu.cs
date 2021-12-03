@@ -233,7 +233,7 @@
 
         internal static void InitWings(QMWings main)
         {
-            PickupEditorWings = new QMWings(main, "Pickup Modifier", "Modify Pickup Properties", null, null);
+            PickupEditorWings = new QMWings(main, "Pickup Modifier", "Modify Pickup Properties", null);
 
             HasPickupComponent = new QMWingSingleButton(PickupEditorWings, "Force Pickup Component", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_ForceComponent(); }), "Forces Pickup component in case there's none.");
             Pickup_IsEditMode = new QMWingSingleButton(PickupEditorWings, "Edit Mode", null, "Shows if Pickup properties are currently being overriden.");
