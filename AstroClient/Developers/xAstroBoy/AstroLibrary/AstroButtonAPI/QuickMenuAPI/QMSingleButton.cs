@@ -21,6 +21,12 @@
         internal Button Button {get; set;}
         internal UiTooltip ButtonToolTip { get; set; }
         internal RectTransform ButtonRect { get; set; }
+        internal TextMeshProUGUI ButtonText { get; set; }
+        internal string BtnText { get; set; }
+        internal string CurrentBtnColor { get; set; }
+        private GameObject ButtonsMenu { get; set; }
+        internal GameObject Background { get; set; }
+        internal Image BackgroundImage { get; set; }
 
         internal QMSingleButton(string baseMenu, int btnXLocation, int btnYLocation, string btnText, Action btnAction, string btnToolTip, bool btnHalf = false)
         {
@@ -202,14 +208,6 @@
         }
 
 
-        internal TextMeshProUGUI ButtonText { get; set; }
-        internal string BtnText { get; set; }
-        internal string CurrentBtnColor { get; set; }
-        private GameObject ButtonsMenu { get; set; }
-
-        internal GameObject Background { get; set; }
-        internal Image BackgroundImage { get; set; }
-        internal RectTransform buttonRect { get; set; }
 
         //Creates a button for VRC Menus
         protected void initButton(float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, string TextColor = null)
@@ -250,13 +248,17 @@
                     }
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
+                    ButtonRect = ButtonObject.GetComponent<RectTransform>();
                     SetLocation(btnXLocation, btnYLocation);
                     break;
             }
 
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>(true);
             ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
-            ButtonRect = ButtonObject.GetComponent<RectTransform>();
+            if (ButtonRect == null)
+            {
+                ButtonRect = ButtonObject.GetComponent<RectTransform>();
+            }
             SetButtonText(btnText);
             SetToolTip(btnToolTip);
 
