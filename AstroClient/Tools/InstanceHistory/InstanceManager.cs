@@ -3,12 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Reflection;
     using AstroClient;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using VRC.Core;
     using xAstroBoy.Utility;
     using ConfigManager = Config.ConfigManager;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     internal class InstanceManager : AstroEvents
     {
@@ -50,21 +51,23 @@
             ModConsole.DebugLog("Instances Loaded!");
         }
 
-        internal override void OnApplicationQuit()
-        {
-            File.WriteAllText(ConfigManager.AstroInstances, JsonConvert.SerializeObject(instances, Formatting.Indented));
-        }
 
         internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
-            instances.Insert(0, new WorldInstance(world.name, world.id, instance.instanceId));
-            File.WriteAllText(ConfigManager.AstroInstances, JsonConvert.SerializeObject(instances, Formatting.Indented));
+            var item = new WorldInstance(world.name, world.id, instance.instanceId);
+            instances.Insert(0, item);
+            var JsonConverted = JsonConvert.SerializeObject(item, Formatting.Indented);
+            File.AppendAllText(ConfigManager.AstroInstances, JsonConverted);
         }
+
 
         internal struct WorldInstance
         {
+            [JsonProperty]
             internal string worldName;
+            [JsonProperty]
             internal string worldId;
+            [JsonProperty]
             internal string instanceId;
 
             internal WorldInstance(string worldName, string worldId, string instanceId)

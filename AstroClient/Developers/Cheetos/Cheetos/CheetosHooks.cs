@@ -110,10 +110,7 @@
                 __0 = false;
             }
         }
-        private static void OnEnterWorld(ApiWorld __0, ApiWorldInstance __1)
-        {
-                Event_OnEnterWorld.SafetyRaise(new OnEnterWorldEventArgs(__0, __1));
-        }
+        private static void OnEnterWorld(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaise(new OnEnterWorldEventArgs(__0, __1));
 
         private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(new PhotonPlayerEventArgs(__0));
 
