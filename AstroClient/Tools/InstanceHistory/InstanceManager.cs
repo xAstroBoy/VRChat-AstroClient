@@ -12,25 +12,23 @@
 
     internal class InstanceManager : AstroEvents
     {
-        public static List<WorldInstance> instances = new List<WorldInstance>();
-        private static string instanceDatabasePath { get; } = ConfigManager.AstroInstances;
-
+        internal static List<WorldInstance> instances = new List<WorldInstance>();
 
         internal override void OnApplicationStart()
         {
             ModConsole.DebugLog("Loading Instances...");
 
-            if (!File.Exists(instanceDatabasePath))
+            if (!File.Exists(ConfigManager.AstroInstances))
             {
-                File.WriteAllText(instanceDatabasePath, "[]");
+                File.WriteAllText(ConfigManager.AstroInstances, "[]");
                 ModConsole.DebugLog("AstroInstances.json not found. Creating new one...");
             }
             else
             {
-                string text = File.ReadAllText(instanceDatabasePath);
+                string text = File.ReadAllText(ConfigManager.AstroInstances);
                 if (string.IsNullOrWhiteSpace(text))
                 {
-                    File.WriteAllText(instanceDatabasePath, "[]");
+                    File.WriteAllText(ConfigManager.AstroInstances, "[]");
                     text = "[]";
                     ModConsole.DebugLog("AstroInstances.json is empty. Creating new one...");
                 }
@@ -43,7 +41,7 @@
                 }
                 catch (Exception ex)
                 {
-                    ModConsole.Error($"Something went wrong while parsing the json file.\nIt is likely that your AstroInstances.json file is corrupted and will need to be manually deleted. Find it in the {instanceDatabasePath} folder.\nFor debug purposes in case this is not the case, here is the error:");
+                    ModConsole.Error($"Something went wrong while parsing the json file.\nIt is likely that your AstroInstances.json file is corrupted and will need to be manually deleted. Find it in the {ConfigManager.AstroInstances} folder.\nFor debug purposes in case this is not the case, here is the error:");
                     ModConsole.ErrorExc(ex);
                     return;
                 }
@@ -52,14 +50,18 @@
             ModConsole.DebugLog("Instances Loaded!");
         }
 
+        internal override void OnApplicationQuit()
+        {
+            File.WriteAllText(ConfigManager.AstroInstances, JsonConvert.SerializeObject(instances, Formatting.Indented));
+        }
+
         internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             instances.Insert(0, new WorldInstance(world.name, world.id, instance.instanceId));
-            File.WriteAllText(instanceDatabasePath, JsonConvert.SerializeObject(instances, Formatting.Indented));
-
+            File.WriteAllText(ConfigManager.AstroInstances, JsonConvert.SerializeObject(instances, Formatting.Indented));
         }
 
-        public struct WorldInstance
+        internal struct WorldInstance
         {
             internal string worldName;
             internal string worldId;
