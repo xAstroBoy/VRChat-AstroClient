@@ -31,7 +31,7 @@
             ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
             ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
             SetToolTip(btnToolTip);
-            setAction(btnAction);
+            SetAction(btnAction);
             ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
             if (LoadSprite != null)
@@ -60,7 +60,7 @@
             ButtonToolTip.SetButtonToolTip(text);
         }
 
-        internal void setAction(Action buttonAction)
+        internal void SetAction(Action buttonAction)
         {
             ButtonObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonAction != null)

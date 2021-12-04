@@ -4,6 +4,7 @@
 
     using System;
     using System.Collections;
+    using System.Linq;
     using System.Reflection;
     using AstroEventArgs;
     using AstroNetworkingLibrary;
@@ -16,6 +17,7 @@
     using Newtonsoft.Json;
     using Photon.Realtime;
     using Tools.Extensions;
+    using Tools.InstanceHistory;
     using Tools.Regexes;
     using UnityEngine;
     using VRC;
@@ -40,6 +42,7 @@
         internal static EventHandler<EventArgs> Event_OnRoomJoined { get; set; }
         internal static EventHandler<EventArgs> Event_OnFriended { get; set; }
         internal static EventHandler<EventArgs> Event_OnUnfriended { get; set; }
+        internal static EventHandler<OnEnterWorldEventArgs> Event_OnEnterWorld { get; set; }
 
         [ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -86,6 +89,11 @@
                 new AstroPatch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
                 new AstroPatch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)));
                 new AstroPatch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
+
+
+                typeof(RoomManager).GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    .Where(m => m.Name.StartsWith("Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_"))
+                    .ToList().ForEach(m => new AstroPatch(m, GetPatch(nameof(OnEnterWorld))));
             }
             catch (Exception e)
             {
@@ -101,6 +109,10 @@
             {
                 __0 = false;
             }
+        }
+        private static void OnEnterWorld(ApiWorld __0, ApiWorldInstance __1)
+        {
+                Event_OnEnterWorld.SafetyRaise(new OnEnterWorldEventArgs(__0, __1));
         }
 
         private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(new PhotonPlayerEventArgs(__0));

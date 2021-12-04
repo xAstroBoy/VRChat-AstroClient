@@ -69,7 +69,7 @@
             // Tabs.
             ExploitsMenu.InitButtons(TabIndexs.Exploits);
             WorldsCheats.InitButtons(TabIndexs.Cheats);
-            HistoryMenu.InitButtons(TabIndexs.History);
+            InstanceHistoryMenu.InitButtons(TabIndexs.History);
             AdminMenu.InitButtons(TabIndexs.Admin);
             DevMenu.InitButtons(TabIndexs.Dev);
 

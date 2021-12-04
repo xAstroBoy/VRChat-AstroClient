@@ -1,20 +1,23 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
+    using System;
+    using AstroClient.Tools.Extensions;
     using PageGenerators;
     using Tools;
     using UnityEngine;
     using VRC.UI.Elements;
     using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
+    using Object = UnityEngine.Object;
 
     internal class QMGridTab
     {
-        protected QMSingleButton backButton;
-        protected string btnQMLoc;
-        protected string btnType;
-        protected GameObject ButtonsMenu;
-        protected QMTabButton mainButton;
-        protected string menuName;
-        protected UIPage page;
+        internal GameObject backButton { get; set; }
+        internal string btnQMLoc { get; set; }
+        internal string btnType { get; set; }
+        internal GameObject ButtonsMenu { get; set; }
+        internal QMTabButton mainButton { get; set; }
+        internal string menuName { get; set; }
+        internal UIPage page { get; set; }
 
 
         internal QMGridTab(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
@@ -40,6 +43,22 @@
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
             mainButton = new QMTabButton(index, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, icon);
+            backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
+        }
+        internal void SetBackButtonAction(Action back)
+        {
+            if (backButton == null) return;
+            backButton.SetBackButtonAction(back);
+        }
+
+        internal void AddOpenAction(Action onOpenAction)
+        {
+            if (mainButton == null) return;
+            mainButton.SetAction(() =>
+            {
+                QuickMenuTools.ShowQuickmenuPage(menuName);
+                if (onOpenAction != null) onOpenAction();
+            });
         }
 
         internal string GetMenuName()
@@ -52,7 +71,7 @@
             return mainButton;
         }
 
-        internal QMSingleButton GetBackButton()
+        internal GameObject GetBackButton()
         {
             return backButton;
         }
@@ -70,7 +89,7 @@
         internal void DestroyMe()
         {
             mainButton.DestroyMe();
-            backButton.DestroyMe();
+            backButton.DestroyMeLocal();
         }
 
         internal void OpenMe()

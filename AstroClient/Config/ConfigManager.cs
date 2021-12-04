@@ -26,23 +26,25 @@
 
         #region Paths
 
-        private static string ConfigFolder = Environment.CurrentDirectory + @"\AstroClient";
+        internal static string ConfigFolder { get; } = Environment.CurrentDirectory + @"\AstroClient";
 
-        internal static string ConfigTempFolder = ConfigFolder + @"\Temp";
+        internal static string ConfigTempFolder { get; } = ConfigFolder + @"\Temp";
 
-        private static string ConfigPath = ConfigFolder + @"\Config.json";
+        internal static string ConfigPath { get; }  = ConfigFolder + @"\Config.json";
 
-        private static string ConfigUIPath = ConfigFolder + @"\ConfigUI.json";
+        internal static string ConfigUIPath { get; }  = ConfigFolder + @"\ConfigUI.json";
 
-        private static string ConfigESPPath = ConfigFolder + @"\ConfigESP.json";
+        internal static string ConfigESPPath { get; } = ConfigFolder + @"\ConfigESP.json";
 
-        private static string ConfigFlightPath = ConfigFolder + @"\ConfigFlight.json";
+        internal static string ConfigFlightPath { get; } = ConfigFolder + @"\ConfigFlight.json";
 
-        private static string ConfigMovementPath = ConfigFolder + @"\ConfigMovement.json";
+        internal static string ConfigMovementPath { get; } = ConfigFolder + @"\ConfigMovement.json";
 
-        private static string ConfigFavoritesPath = ConfigFolder + @"\ConfigFavorites.json";
+        internal static string ConfigFavoritesPath { get; }  = ConfigFolder + @"\ConfigFavorites.json";
 
-        private static string ConfigPerformancePath = ConfigFolder + @"\ConfigPerformance.json";
+        internal static string ConfigPerformancePath { get; }  = ConfigFolder + @"\ConfigPerformance.json";
+
+        internal static string AstroInstances { get; } = ConfigFolder + @"\AstroInstances.json";
 
         #endregion Paths
 

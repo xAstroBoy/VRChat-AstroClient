@@ -1,13 +1,8 @@
-﻿namespace AstroClient.AstroMonos.Components.Player.Movement
+﻿namespace AstroClient.AstroMonos.Components.Player.InstanceBuilder
 {
-    using System;
-    using System.Collections.Generic;
     using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Constants;
-    using Spoofer;
+    using Movement;
 
     class MovementManagerInstance : AstroEvents
     {

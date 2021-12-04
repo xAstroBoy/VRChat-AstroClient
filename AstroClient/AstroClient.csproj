@@ -111,10 +111,12 @@
     <Compile Include="AstroMonos\Components\Tools\FreezeLocation\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
+    <Compile Include="ClientEvents\AstroEventArgs\OnEnterWorldEventArgs.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\InstanceHistoryMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\OrbitUserMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\PickupProtector.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\WatcherUserMenu.cs" />
@@ -271,7 +273,6 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\WorldUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\UIObjects.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\XrefTesting.cs" />
-    <Compile Include="ClientUI\Menu\Menus\Quickmenu\HistoryMenu.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Extensions.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Utility\CheetoUtils.cs" />
     <Compile Include="Developers\Cheetos\CheetosConsole\Console.cs" />
@@ -346,6 +347,8 @@
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Tools\Extensions\Texture_Ext.cs" />
     <Compile Include="Tools\Input\InputUtils.cs" />
+    <Compile Include="Tools\InstanceHistory\InstanceManager.cs" />
+    <Compile Include="Tools\InstanceHistory\WorldManager.cs" />
     <Compile Include="Tools\Player\PlayerFriendStateExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexUtils.cs" />

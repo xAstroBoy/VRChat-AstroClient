@@ -13,6 +13,7 @@
     using Target;
     using UnityEngine;
     using VRC;
+    using VRC.Core;
     using VRC.SDKBase;
     using VRC.UI.Elements;
     using xAstroBoy;
@@ -60,7 +61,7 @@
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
             CheetosHooks.Event_OnFriended += Internal_OnFriended;
             CheetosHooks.Event_OnUnfriended += Internal_OnUnfriended;
-
+            CheetosHooks.Event_OnEnterWorld += Internal_OnEnterWorld;
             QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
@@ -170,6 +171,10 @@
         private void Internal_OnUnfriended(object sender, EventArgs e)
         {
             OnUnfriended();
+        }
+        private void Internal_OnEnterWorld(object sender, OnEnterWorldEventArgs e)
+        {
+            OnEnterWorld(e.ApiWorld, e.ApiWorldInstance);
         }
 
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
@@ -390,6 +395,9 @@
         }
 
         internal virtual void OnUnfriended()
+        {
+        }
+        internal virtual void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
         }
 

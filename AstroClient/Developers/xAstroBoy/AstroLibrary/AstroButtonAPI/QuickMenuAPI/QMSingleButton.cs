@@ -110,6 +110,18 @@
                 ButtonObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
+        internal QMSingleButton(QMGridTab Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null)
+        {
+            btnQMLoc = Parent.GetMenuName();
+            ButtonsMenu = Parent.GetButtonsMenu();
+            initButton(0, 0, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
+        }
+        internal QMSingleButton(QMGridTab Parent, string btnText, Action btnAction, string btnToolTip = "", System.Drawing.Color? TextColor = null)
+        {
+            btnQMLoc = Parent.GetMenuName();
+            ButtonsMenu = Parent.GetButtonsMenu();
+            initButton(0, 0, btnText, btnAction, btnToolTip, ColorUtils.ColorToHex(TextColor.GetValueOrDefault(System.Drawing.Color.White)));
+        }
 
         internal QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null)
         {
