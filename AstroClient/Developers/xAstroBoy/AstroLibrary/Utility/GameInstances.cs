@@ -29,6 +29,7 @@ namespace AstroClient.xAstroBoy.Utility
         public static PlayerManager PlayerManager => PlayerManager.field_Private_Static_PlayerManager_0;
 
         public static VRCPlayer CurrentUser => VRCPlayer.field_Internal_Static_VRCPlayer_0;
+        public static VRC.Player CurrentPlayer => CurrentUser.GetPlayer();
 
         public static VRCPlayerApi LocalPlayer => Networking.LocalPlayer;
 

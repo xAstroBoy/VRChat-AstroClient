@@ -400,6 +400,7 @@
                     {
                         Rigidbody.useGravity = value;
                         SyncPhysics.RefreshProperties();
+                        SyncPhysics.SetGravity(value);
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -526,6 +527,7 @@
                     {
                         Rigidbody.isKinematic = value;
                         SyncPhysics.RefreshProperties();
+                        SyncPhysics.SetKinematic(value);
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -791,14 +793,12 @@
         internal void Override_isKinematic(bool value) // this Bypasses EditMode
         {
             Original_isKinematic = value;
-            _isKinematic = value; 
-            if (!EditMode)
+            _isKinematic = value;
+            if (Rigidbody != null)
             {
-                if (Rigidbody != null)
-                {
-                    Rigidbody.isKinematic = value;
-                    SyncPhysics.RefreshProperties();
-                }
+                Rigidbody.isKinematic = value;
+                SyncPhysics.RefreshProperties();
+                SyncPhysics.SetKinematic(value);
             }
             Run_OnRigidBodyPropertyChanged();
         }
@@ -814,6 +814,7 @@
             {
                 Rigidbody.useGravity = value;
                 SyncPhysics.RefreshProperties();
+                SyncPhysics.SetGravity(value);
             }
             Run_OnRigidBodyPropertyChanged();
         }

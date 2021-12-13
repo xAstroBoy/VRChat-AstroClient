@@ -93,7 +93,7 @@
 
                 typeof(RoomManager).GetMethods(BindingFlags.Public | BindingFlags.Static)
                     .Where(m => m.Name.StartsWith("Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_"))
-                    .ToList().ForEach(m => new AstroPatch(m, GetPatch(nameof(OnEnterWorld))));
+                    .ToList().ForEach(m => new AstroPatch(m, GetPatch(nameof(OnEnterWorldEvent))));
             }
             catch (Exception e)
             {
@@ -110,7 +110,7 @@
                 __0 = false;
             }
         }
-        private static void OnEnterWorld(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaise(new OnEnterWorldEventArgs(__0, __1));
+        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaise(new OnEnterWorldEventArgs(__0, __1));
 
         private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(new PhotonPlayerEventArgs(__0));
 
