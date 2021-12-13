@@ -191,7 +191,6 @@
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
         {
             var gameobjects = UdonParser.WorldBehaviours;
-
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)
             {

@@ -44,7 +44,7 @@
                     HealthEditor = revive.UdonBehaviour.GetOrAddComponent<SuperTowerDefense_HealthEditor>();
                 }
 
-                var Round = UdonSearch.FindUdonEvent("NewWaveButton", "TryStartNewWave");
+                var Round = UdonSearch.FindUdonEvent("NewWaveInteract", "_interact");
                 if (Round != null)
                 {
                     WaveEvent = Round;
@@ -253,6 +253,16 @@
             _ = new QMSingleButton(WaveMods, "Wave -1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 1; } }, "Edit Current Round!");
             _ = new QMSingleButton(WaveMods, "Wave -10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 10; } }, "Edit Current Round!");
             _ = new QMSingleButton(WaveMods, "Wave -100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 100; } }, "Edit Current Round!");
+
+            var LifeMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Health Mods", "Modify Current Healths");
+
+            _ = new QMSingleButton(LifeMods, "Life +1", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 1; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life +10", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 10; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life +100", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 100; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life -1", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 1; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life -10", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 10; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life -100", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 100; } }, "Edit Current Health!");
+
 
             var TowerMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Towers Mods", "Make Towers SuperPowerful");
 
@@ -810,5 +820,8 @@
         internal static UdonBehaviour_Cached WaveEvent { get; private set; }
 
         internal static UdonBehaviour_Cached ResetBalance { get; private set; }
+
+        internal static UdonBehaviour_Cached SpawnAutoStart { get; private set; }
+
     }
 }
