@@ -44,6 +44,21 @@
                 ItemPosition.TeleportObject(obj);
             }
         }
+        internal static void SetPosition(this GameObject obj, Vector3 position, bool TakeOwnership = false)
+        {
+            if (obj != null)
+            {
+                ItemPosition.SetPosition(obj, position, TakeOwnership);
+            }
+        }
+        internal static void SetRotation(this GameObject obj, Quaternion rotation, bool TakeOwnership = false)
+        {
+            if (obj != null)
+            {
+                ItemPosition.SetRotation(obj, rotation, TakeOwnership);
+            }
+        }
+
 
         internal static void TeleportToMe(this GameObject obj, bool ResetRigidBody = false, bool ResetPickupProperties = false)
         {

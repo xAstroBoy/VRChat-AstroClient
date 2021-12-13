@@ -49,12 +49,12 @@
                     {
                         var broadcast = VRC_EventHandler.VrcBroadcastType.Always;
                         var prefabinfo = prefab.name;
-                        var position = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Position(HumanBodyBones.RightHand);
+                        var position = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.RightHand).position;
                         var Rotation = prefab.transform.rotation;
 
                         if (position != null)
                         {
-                            var newprefab = Networking.Instantiate(broadcast, prefabinfo, position.Value, Rotation);
+                            var newprefab = Networking.Instantiate(broadcast, prefabinfo, position, Rotation);
                             if (newprefab != null)
                             {
                                 SpawnerSubmenu.RegisterPrefab(newprefab);

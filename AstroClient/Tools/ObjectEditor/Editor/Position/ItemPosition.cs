@@ -13,23 +13,100 @@
         {
             if (obj != null && GameInstances.LocalPlayer != null)
             {
-                var bonepos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Position(HumanBodyBones.RightHand);
+                var bonepos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.RightHand);
                 if (bonepos != null)
                 {
-                    OnlineEditor.TakeObjectOwnership(obj);
-                    var controller = obj.GetComponent<RigidBodyController>();
-                    if (controller != null)
-                    {
-                        controller.position = bonepos.Value;
-
-                    }
-                    else
-                    {
-                        obj.transform.position = bonepos.Value;
-                    }
+                    SetPosition(obj, bonepos.position, true);
                     obj.KillCustomComponents(ResetRigidBody, ResetPickupProperties);
                     obj.KillForces(true);
                 }
+            }
+        }
+
+        internal static Vector3 GetPosition(GameObject obj)
+        { 
+            var controller = obj.GetComponent<RigidBodyController>();
+            if (controller != null)
+            {
+                if (controller.Rigidbody != null)
+                {
+                    return controller.position;
+                }
+                else
+                {
+                    return obj.transform.position;
+                }
+            }
+            else
+            {
+               return obj.transform.position;
+            }
+        }
+
+        internal static Quaternion GetRotation(GameObject obj)
+        {
+            var controller = obj.GetComponent<RigidBodyController>();
+            if (controller != null)
+            {
+                if (controller.Rigidbody != null)
+                {
+                    return controller.rotation;
+                }
+                else
+                {
+                    return obj.transform.rotation;
+                }
+            }
+            else
+            {
+                return obj.transform.rotation;
+            }
+        }
+
+        internal static void SetPosition(GameObject obj, Vector3 Position, bool TakeOwnership = false)
+        {
+            if (TakeOwnership)
+            {
+                OnlineEditor.TakeObjectOwnership(obj);
+            }
+            var controller = obj.GetComponent<RigidBodyController>();
+            if (controller != null)
+            {
+                if (controller.Rigidbody != null)
+                {
+                    controller.position = Position;
+                }
+                else
+                {
+                    obj.transform.position = Position;
+                }
+            }
+            else
+            {
+                obj.transform.position = Position;
+            }
+        }
+        internal static void SetRotation(GameObject obj, Quaternion Rotation, bool TakeOwnership = false)
+        {
+            if (TakeOwnership)
+            {
+                OnlineEditor.TakeObjectOwnership(obj);
+            }
+            var controller = obj.GetComponent<RigidBodyController>();
+            if (controller != null)
+            {
+                if (controller.Rigidbody != null)
+                {
+                    controller.rotation = Rotation;
+                }
+                else
+                {
+                    obj.transform.rotation = Rotation;
+                }
+            }
+            else
+            {
+                obj.transform.rotation = Rotation;
             }
         }
 
@@ -37,20 +114,10 @@
         {
             if (obj != null && GameInstances.LocalPlayer != null)
             {
-                var bonepos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Position(HumanBodyBones.RightHand);
+                var bonepos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.RightHand);
                 if (bonepos != null)
                 {
-                    OnlineEditor.TakeObjectOwnership(obj);
-                    var controller = obj.GetComponent<RigidBodyController>();
-                    if (controller != null)
-                    {
-                        controller.position = bonepos.Value;
-
-                    }
-                    else
-                    {
-                        obj.transform.position = bonepos.Value;
-                    }
+                    SetPosition(obj, bonepos.position, true);
                     obj.KillCustomComponents(true);
                     obj.KillForces(true);
                 }
@@ -61,21 +128,10 @@
         {
             if (obj != null && GameInstances.LocalPlayer != null)
             {
-                var bonepos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Position(SelfBones);
+                var bonepos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(SelfBones).position;
                 if (bonepos != null)
                 {
-                    OnlineEditor.TakeObjectOwnership(obj);
-                    var controller = obj.GetComponent<RigidBodyController>();
-                    if (controller != null)
-                    {
-                        controller.position = bonepos.Value;
-
-                    }
-                    else
-                    {
-                        obj.transform.position = bonepos.Value;
-                    }
-
+                    SetPosition(obj, bonepos, true);
                     if (KillcustomScripts)
                     {
                         obj.KillCustomComponents(true);
@@ -94,19 +150,8 @@
                 var bone = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(SelfBones);
                 if (bone != null)
                 {
-                    OnlineEditor.TakeObjectOwnership(obj);
-                    var controller = obj.GetComponent<RigidBodyController>();
-                    if (controller != null)
-                    {
-                        controller.position = bone.position;
-                        controller.rotation = bone.rotation;
-
-                    }
-                    else
-                    {
-                        obj.transform.position = bone.position;
-                        obj.transform.rotation = bone.rotation;
-                    }
+                    SetPosition(obj, bone.position, true);
+                    SetRotation(obj, bone.rotation, true);
                     if (KillcustomScripts)
                     {
                         obj.KillCustomComponents(true);
@@ -121,14 +166,13 @@
 
         internal static void TeleportObject(GameObject obj, Vector3 NewPos, bool SkipKillScripts = false)
         {
-            if (obj != null && GameInstances.LocalPlayer != null)
+            if (obj != null)
             {
-                OnlineEditor.TakeObjectOwnership(obj);
                 if (SkipKillScripts)
                 {
                     obj.KillCustomComponents(true);
                 }
-                obj.transform.position = NewPos;
+                SetPosition(obj, NewPos, true);
             }
         }
 
@@ -136,7 +180,7 @@
         {
             if (obj != null && player != null)
             {
-                var bonepos = player.Get_Player_Bone_Position(targetbone);
+                var bonepos = player.Get_Player_Bone_Transform(targetbone);
                 if (bonepos != null)
                 {
                     OnlineEditor.TakeObjectOwnership(obj);
@@ -145,7 +189,7 @@
                         obj.KillCustomComponents(true);
                     }
 
-                    obj.transform.position = bonepos.Value;
+                    SetPosition(obj, bonepos.position, true);
                     OnlineEditor.RemoveOwnerShip(obj);
                 }
             }

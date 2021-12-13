@@ -1,23 +1,20 @@
 ﻿namespace AstroClient.WorldModifications.Modifications
 {
+    using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
+    using AstroMonos.Components.Tools;
+    using AstroMonos.Components.Tools.FreezeLocation;
+    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using AstroMonos.AstroUdons;
-    using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
-    using AstroMonos.Components.Custom.Random;
-    using AstroMonos.Components.Tools.FreezeLocation;
-    using CheetoLibrary;
-    using MelonLoader;
     using Tools.Extensions;
     using Tools.Extensions.Components_exts;
     using Tools.UdonSearcher;
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static Constants.CustomLists;
 
@@ -116,7 +113,6 @@
                     ReturnRedWrenchButton = toolshop.transform.FindObject("ReturnUpgradeTool0").gameObject;
                 }
 
-
                 Tower_RocketLauncher = GameObjectFinder.Find("TowerRocketLauncher1Grabbable (0)");
                 Tower_Slower = GameObjectFinder.Find("TowerSlower1Grabbable (0)");
                 Tower_Cannon = GameObjectFinder.Find("TowerCannon1Grabbable (0)");
@@ -162,10 +158,7 @@
                         Apple_4 = apple;
                         continue;
                     }
-
                 }
-
-
             }
             else
             {
@@ -199,7 +192,6 @@
             Apple_1 = null;
             Apple_2 = null;
 
-
             Apple_3 = null;
             Apple_4 = null;
 
@@ -218,7 +210,6 @@
             //NearbyCollidersManager.Clear();
         }
 
-
         internal static void FixTheTowers(bool RespawnTower)
         {
             FixTower(Tower_RocketLauncher, RespawnTower);
@@ -227,9 +218,7 @@
             FixTower(Tower_Radar, RespawnTower);
             FixTower(Tower_Minigun, RespawnTower);
             FixTower(Tower_Lance, RespawnTower);
-
         }
-
 
         private static void FixTower(GameObject tower, bool RespawnTowers)
         {
@@ -250,20 +239,20 @@
 
             var bankmods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Bank Mods", "Modify Current Bank Balance");
             _ = new QMSingleButton(bankmods, "Set 0 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 0; } }, "Edit Current Balance!");
-            _ = new QMSingleButton(bankmods,  "Add 10000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!");
-            _ = new QMSingleButton(bankmods,  "Add 100000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!");
+            _ = new QMSingleButton(bankmods, "Add 10000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!");
+            _ = new QMSingleButton(bankmods, "Add 100000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!");
             _ = new QMSingleButton(bankmods, "Add 1000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 1000000; } }, "Edit Current Balance!");
-            _ = new QMSingleButton(bankmods,  "Add 10000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!");
+            _ = new QMSingleButton(bankmods, "Add 10000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!");
             _ = new QMSingleButton(bankmods, "Set 999999999 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 999999999; } }, "Edit Current Balance!");
 
             var WaveMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Wave Mods", "Modify Current Rounds");
 
-            _ = new QMSingleButton(WaveMods,  "Wave +1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 1; } }, "Edit Current Round!");
-            _ = new QMSingleButton(WaveMods,  "Wave +10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 10; } }, "Edit Current Round!");
-            _ = new QMSingleButton(WaveMods,  "Wave +100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 100; } }, "Edit Current Round!");
-            _ = new QMSingleButton(WaveMods,  "Wave -1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 1; } }, "Edit Current Round!");
-            _ = new QMSingleButton(WaveMods,  "Wave -10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 10; } }, "Edit Current Round!");
-            _ = new QMSingleButton(WaveMods,  "Wave -100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 100; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods, "Wave +1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 1; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods, "Wave +10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 10; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods, "Wave +100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 100; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods, "Wave -1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 1; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods, "Wave -10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 10; } }, "Edit Current Round!");
+            _ = new QMSingleButton(WaveMods, "Wave -100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 100; } }, "Edit Current Round!");
 
             var TowerMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Towers Mods", "Make Towers SuperPowerful");
 
@@ -272,19 +261,18 @@
 
             var ToolMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Tool Mods", "Enable Extra Tools");
             RepairLifeWrenchToolsButton = new QMToggleButton(ToolMods, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
-            LoseLifeHammerToolBtn = new QMToggleButton(ToolMods, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; },  () => { LoseLifeHammer = false; }, "Hammer = Lose health (useful to troll)!");
+            LoseLifeHammerToolBtn = new QMToggleButton(ToolMods, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, () => { LoseLifeHammer = false; }, "Hammer = Lose health (useful to troll)!");
 
-            AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage,  "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
+            AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
             AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
 
-            new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers(true);}, "Fix Towers Being unpickable bug ", Color.green);
+            new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers(true); }, "Fix Towers Being unpickable bug ", Color.green);
             FreezeHammerToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Add a Protection Shield to the hammer!");
             FreezeTowersToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Towers", () => { FreezeTowers = true; }, () => { FreezeTowers = false; }, "Freeze Towers In place (Fight against trolls!)");
             IgnoreTowersCollidersPlacementToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Bypass Tower Collider", () => { IgnoreTowersCollidersPlacement = true; }, () => { IgnoreTowersCollidersPlacement = false; }, "Allow Overlapping Towers!");
 
             BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
             BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Wrenchs Returns", () => { BlockWrenchReturnButton = true; }, () => { BlockWrenchReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
-
         }
 
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
@@ -316,8 +304,6 @@
                 return result;
             }
         }
-
-
 
         private static List<GameObject> WorldApples
         {
@@ -432,7 +418,6 @@
             }
         }
 
-
         private static void LockTowerInPlace(GameObject Tower)
         {
             if (Tower != null)
@@ -486,6 +471,7 @@
                 }
             }
         }
+
         private static bool _IgnoreTowersCollidersPlacement;
 
         internal static bool IgnoreTowersCollidersPlacement
@@ -510,7 +496,6 @@
                     Tower_Radar.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
                     Tower_Minigun.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
                     Tower_Lance.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
-
                 }
                 else
                 {
@@ -523,7 +508,6 @@
                 }
             }
         }
-
 
         private static bool _FreezeHammer;
 
@@ -545,12 +529,11 @@
                 {
                     if (value)
                     {
-                       var item = HammerPickup.gameObject.GetOrAddComponent<ObjectFreezer>();
-                       if (item != null)
-                       {
-                           item.IsEnabled = true;
-                           ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
-
+                        var item = HammerPickup.gameObject.GetOrAddComponent<ObjectFreezer>();
+                        if (item != null)
+                        {
+                            item.IsEnabled = true;
+                            ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
                         }
                     }
                     else
@@ -560,7 +543,9 @@
                 }
             }
         }
+
         private static bool _BlockHammerReturn;
+
         internal static bool BlockHammerReturnButton
         {
             get
@@ -606,8 +591,8 @@
             }
         }
 
-
         private static bool _BlockWrenchReturn;
+
         internal static bool BlockWrenchReturnButton
         {
             get
@@ -631,7 +616,6 @@
                         LockOnTarget(Apple_1, ReturnRedWrenchButton);
                         LockOnTarget(Apple_2, ReturnBlueWrenchButton);
                     }
-
                 }
                 else
                 {
@@ -654,7 +638,6 @@
             }
         }
 
-
         private static void RemoveLockOnItem(GameObject item)
         {
             if (item != null)
@@ -663,8 +646,6 @@
                 item.GetComponentInChildren<SyncPhysics>(true).RespawnItem(true);
             }
         }
-
-
 
         private static void LockOnTarget(GameObject item, GameObject target)
         {
@@ -675,8 +656,17 @@
                     if (target != null)
                     {
                         item.TakeOwnership();
-                        item.transform.position = target.transform.position;
-                        item.transform.rotation = target.transform.rotation;
+                        var body = item.GetOrAddComponent<RigidBodyController>();
+                        if (body != null)
+                        {
+                            body.position = target.transform.position;
+                            body.rotation = target.transform.rotation;
+                        }
+                        else
+                        {
+                            item.transform.position = target.transform.position;
+                            item.transform.rotation = target.transform.rotation;
+                        }
                         var Freezer = item.GetOrAddComponent<ObjectFreezer>();
                         if (Freezer != null)
                         {
@@ -692,8 +682,6 @@
                 ModConsole.ErrorExc(e);
             }
         }
-
-
 
         private static bool _AutomaticWaveStart = false;
 
@@ -771,7 +759,7 @@
             }
         }
 
-        internal static GameObject Tower_RocketLauncher{ get; set; }
+        internal static GameObject Tower_RocketLauncher { get; set; }
         internal static GameObject Tower_Slower { get; set; }
         internal static GameObject Tower_Cannon { get; set; }
         internal static GameObject Tower_Radar { get; set; }
@@ -781,12 +769,12 @@
         internal static GameObject Apple_1 { get; set; }
         internal static GameObject Apple_2 { get; set; }
 
-
         internal static GameObject Apple_3 { get; set; }
-        internal static GameObject Apple_4  { get; set; }
+        internal static GameObject Apple_4 { get; set; }
 
         //internal static List<SuperTowerDefense_NearbyCollider> NearbyCollidersManager = new();
         private static GameObject ReturnHammerButtonTool { get; set; }
+
         private static GameObject ReturnBlueWrenchButton { get; set; }
         private static GameObject ReturnRedWrenchButton { get; set; }
 
@@ -815,15 +803,12 @@
         private static VRC_AstroPickup BlueWrenchPickup { get; set; }
         private static VRC_AstroPickup HammerPickup { get; set; }
 
-
         internal static UdonBehaviour_Cached ResetHealth { get; private set; }
 
         internal static UdonBehaviour_Cached LoseHealth { get; private set; }
 
         internal static UdonBehaviour_Cached WaveEvent { get; private set; }
 
-
         internal static UdonBehaviour_Cached ResetBalance { get; private set; }
-
     }
 }

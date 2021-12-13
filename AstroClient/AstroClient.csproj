@@ -347,8 +347,8 @@
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Tools\Extensions\Texture_Ext.cs" />
     <Compile Include="Tools\Input\InputUtils.cs" />
-    <Compile Include="Tools\InstanceHistory\InstanceManager.cs" />
-    <Compile Include="Tools\InstanceHistory\WorldManager.cs" />
+    <Compile Include="Tools\Instance\History\InstanceManager.cs" />
+    <Compile Include="Tools\Instance\History\WorldManager.cs" />
     <Compile Include="Tools\Player\PlayerFriendStateExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexUtils.cs" />

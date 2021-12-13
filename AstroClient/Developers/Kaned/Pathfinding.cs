@@ -89,7 +89,7 @@
                     //        }
                     //    }, new object[] { i }, coarseness, maxMSPerFrame);
                     //}
-                    new Pathfinder().MultiGetPath(hunters.Select(x => x.pickup.transform.position).ToArray(), hunters.Select(x => (Vector3)targetedPlayer.Get_Player_Bone_Position(HumanBodyBones.Chest)).ToArray(), (x, a) =>
+                    new Pathfinder().MultiGetPath(hunters.Select(x => x.pickup.transform.position).ToArray(), hunters.Select(x => (Vector3)targetedPlayer.Get_Player_Bone_Transform(HumanBodyBones.Chest).position).ToArray(), (x, a) =>
                     {
                         //indicators
                         //foreach (var p in x.points)

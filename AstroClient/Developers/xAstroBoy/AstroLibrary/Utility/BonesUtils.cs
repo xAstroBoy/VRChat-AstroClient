@@ -3,9 +3,9 @@
     using UnityEngine;
     using VRC;
 
-    public static class BonesUtils
+    internal static class BonesUtils
     {
-        public static Transform Get_Player_Bone_Transform(this Player player, HumanBodyBones bone)
+        internal static Transform Get_Player_Bone_Transform(this Player player, HumanBodyBones bone)
         {
             if (player != null)
             {
@@ -18,16 +18,24 @@
             return null;
         }
 
-        public static Vector3? Get_Player_Bone_Position(this Player player, HumanBodyBones bone) => player != null ? player.Get_Player_Bone_Transform(bone).position : null;
 
-        public static Vector3? Get_Center_Of_Player(this Player player)
+        internal static Vector3? Get_Center_Of_Player(this Player player)
         {
             Vector3 center = player.transform.position;
-            var headPos = player.Get_Player_Bone_Position(HumanBodyBones.Head);
-            var lFootPos = player.Get_Player_Bone_Position(HumanBodyBones.LeftFoot);
+            Vector3? headPos = player.Get_Player_Bone_Transform(HumanBodyBones.Head).position;
+            Vector3? lFootPos = player.Get_Player_Bone_Transform(HumanBodyBones.LeftFoot).position;
             return headPos != null && lFootPos != null
                 ? new Vector3(center.x, headPos.Value.y - Vector3.Distance(headPos.Value, lFootPos.Value) / 2f, center.z)
                 : null;
+        }
+
+        internal static Vector3? Get_Player_Bone_Position(this Player player, HumanBodyBones bone)
+        {
+            if (player != null)
+            {
+                return player.Get_Player_Bone_Transform(bone).position;
+            }
+            return null;
         }
     }
 }

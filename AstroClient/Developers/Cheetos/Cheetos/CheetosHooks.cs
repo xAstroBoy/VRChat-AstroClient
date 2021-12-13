@@ -72,8 +72,8 @@
                 new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnMasterClientSwitched)), GetPatch(nameof(OnMasterClientSwitchedPatch)));
                 new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), GetPatch(nameof(OnRoomLeftPatch)));
                 new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), GetPatch(nameof(OnRoomJoinedPatch)));
-                new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftLobby)), GetPatch(nameof(OnLobbyLeftPatch)));
-                new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedLobby)), GetPatch(nameof(OnLobbyJoinedPatch)));
+                //new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftLobby)), GetPatch(nameof(OnLobbyLeftPatch)));
+                //new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedLobby)), GetPatch(nameof(OnLobbyJoinedPatch)));
                 new AstroPatch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new AstroPatch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
                 new AstroPatch(typeof(PlayerNameplate).GetMethod(nameof(PlayerNameplate.Method_Private_Void_1)), GetPatch(nameof(NameplatePatch)));
@@ -118,9 +118,9 @@
 
         private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaise(new EventArgs());
 
-        private static void OnLobbyLeftPatch() => ModConsole.Log("Lobby Left.");
+        //private static void OnLobbyLeftPatch() => ModConsole.Log("Lobby Left.");
 
-        private static void OnLobbyJoinedPatch() => ModConsole.Log("Lobby Joined.");
+        //private static void OnLobbyJoinedPatch() => ModConsole.Log("Lobby Joined.");
 
         private static void OnRoomLeftPatch() => Event_OnRoomLeft?.SafetyRaise(new EventArgs());
 

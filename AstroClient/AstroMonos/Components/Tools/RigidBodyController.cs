@@ -633,7 +633,6 @@
                     Rigidbody.position = value;
                     SyncPhysics.RefreshProperties();
                 }
-
             }
         }
 

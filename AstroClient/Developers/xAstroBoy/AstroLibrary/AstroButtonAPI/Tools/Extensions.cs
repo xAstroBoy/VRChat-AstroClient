@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using AstroClient.Tools.Extensions;
+    using OVR.OpenVR;
     using QuickMenuAPI;
     using TMPro;
     using UnityEngine;
@@ -186,6 +188,20 @@
             return null;
         }
 
+        private static List<string> ComponentsToNotDelete { get; } = new List<string>()
+        {
+            typeof(Button).FullName,
+            typeof(LayoutElement).FullName,
+            typeof(StyleElement).FullName,
+            typeof(CanvasGroup).FullName,
+            typeof(Image).FullName,
+            typeof(TextMeshProUGUI).FullName,
+            typeof(UiTooltip).FullName,
+            typeof(RectTransform).FullName,
+            typeof(CanvasRenderer).FullName,
+            typeof(VRC.UI.Core.Styles.StyleElement).FullName,
+        };
+
         public static void EnableComponents(this GameObject parent)
         {
             parent.GetComponent<Button>().enabled = true;
@@ -196,15 +212,16 @@
             parent.GetComponentInChildren<Image>().enabled = true;
             parent.GetComponentInChildren<TextMeshProUGUI>(true).enabled = true;
             parent.GetComponent<UiTooltip>().enabled = true;
-            UnityEngine.Object.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37Vo12St37VoUnique>());
-
-            //foreach (var component in parent.GetComponents<Component>())
-            //{
-            //    if (component is Button or LayoutElement or CanvasGroup or Image or TextMeshProUGUI or Transform) return;
-            //    UnityEngine.Object.Destroy(component);
-
-            //}
-
+            foreach (var item in parent.GetComponents<Component>())
+            {
+                var name = item.GetIl2CppType().FullName;
+                //ModConsole.DebugLog($"Found {name}");
+                if (!ComponentsToNotDelete.Contains(name))
+                {
+                    UnityEngine.Object.Destroy(item);
+                }
+            }
+            //UnityEngine.Object.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37StVo1237VoUnique>());  
         }
 
         public static TextMeshProUGUI NewText(this GameObject Parent, string search)

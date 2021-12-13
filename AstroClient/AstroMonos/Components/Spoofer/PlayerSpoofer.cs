@@ -32,7 +32,7 @@
                 }
                 else
                 {
-                    ModConsole.DebugLog($"Spoofer : Failed To [HideFromIl2Cpp] get Current DisplayName!");
+                    ModConsole.DebugLog($"Spoofer : Failed To  get Current DisplayName!");
                 }
             }));
         }

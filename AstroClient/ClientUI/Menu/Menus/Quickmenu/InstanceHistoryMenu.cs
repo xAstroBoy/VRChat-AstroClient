@@ -21,8 +21,6 @@
         private static List<QMSingleButton> GeneratedButtons = new();
         private static QMGridTab TabMenu { get; set; }
 
-        //private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
-
         private static bool HasThrownException { get; set; }
         private static bool CleanOnRoomLeave { get; } = false;
         private static bool DestroyOnMenuClose { get; } = true;
@@ -37,7 +35,7 @@
 
         internal static void InitButtons(int index)
         {
-            TabMenu = new QMGridTab(index, "History Menu", null, null, null, Icons.history_sprite);
+            TabMenu = new QMGridTab(index, "Instance History", null, null, null, Icons.history_sprite);
             TabMenu.SetBackButtonAction(() => { OnCloseMenu(); });
             TabMenu.AddOpenAction(() => { OnOpenMenu(); });
             InitWingPage();
@@ -130,7 +128,6 @@
             WingMenu = new QMWings(1037, true, "Instance Options", "Manage Instance Options");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
-                SkyboxEditor.FindAndLoadSkyboxes();
                 DestroyGeneratedButtons();
                 Regenerate();
             }, "Refresh Instance History");

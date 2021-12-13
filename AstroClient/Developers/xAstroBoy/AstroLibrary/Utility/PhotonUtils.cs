@@ -72,14 +72,17 @@ namespace AstroClient.xAstroBoy.Utility
         public static Photon.Realtime.Player GetPhotonPlayer(this Photon.Realtime.LoadBalancingClient Instance, int photonID)
         {
             List<Photon.Realtime.Player> list = Instance.GetAllPhotonPlayers();
-            for (int i = 0; i < list.Count; i++)
+            if (list.Count != 0)
             {
-                Photon.Realtime.Player player = list[i];
-                if (player != null)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    if(player.GetPhotonID() == photonID)
+                    Photon.Realtime.Player player = list[i];
+                    if (player != null)
                     {
-                        return player;
+                        if (player.GetPhotonID() == photonID)
+                        {
+                            return player;
+                        }
                     }
                 }
             }
