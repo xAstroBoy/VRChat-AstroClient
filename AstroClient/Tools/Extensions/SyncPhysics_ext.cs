@@ -62,6 +62,39 @@
                 }
             }
         }
+
+        internal static void SetGravityForEveryone(this SyncPhysics instance, bool useGravity)
+        {
+            if (instance != null)
+            {
+
+                foreach (var player in WorldUtils.Players)
+                {
+                    try
+                    {
+                        SetGravityFor(instance, player, useGravity);
+                    }
+                    catch{}
+                }
+            }
+        }
+
+        internal static void SetKinematicForEveryone(this SyncPhysics instance, bool isKinematic)
+        {
+            if (instance != null)
+            {
+
+                foreach (var player in WorldUtils.Players)
+                {
+                    try
+                    {
+                        SetKinematicFor(instance, player, isKinematic);
+                    }
+                    catch { }
+                }
+            }
+        }
+
         internal static void SetGravityFor(this SyncPhysics instance, VRC.Player player, bool useGravity, bool TakeOwnership = false)
         {
             if (instance != null && player != null)

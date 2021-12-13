@@ -282,7 +282,7 @@
             IgnoreTowersCollidersPlacementToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Bypass Tower Collider", () => { IgnoreTowersCollidersPlacement = true; }, () => { IgnoreTowersCollidersPlacement = false; }, "Allow Overlapping Towers!");
 
             BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
-            BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Wrenchs Returns", () => { BlockWrenchReturnButton = true; }, () => { BlockWrenchReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
+            BlockWrenchReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Wrenchs Returns", () => { BlockWrenchReturnButton = true; }, () => { BlockWrenchReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
         }
 
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.

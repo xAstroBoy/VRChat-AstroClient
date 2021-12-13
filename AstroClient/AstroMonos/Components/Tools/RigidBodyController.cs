@@ -6,6 +6,7 @@
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
+    using xAstroBoy.Utility;
 
 
     // TODO : Fix this Crap Again ( Backupping mechanism doesn't work!)
@@ -50,45 +51,45 @@
                 if (gameObject.active && isActiveAndEnabled)
                     if (isBackupping)
                         return;
-                    if (!EditMode)
-                    {
-                        // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
-                        Run_OnRigidbodyControllerOnUpdate();
+            if (!EditMode)
+            {
+                // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
+                Run_OnRigidbodyControllerOnUpdate();
 
-                        // Makes sure if EditMode is OFF. As long is off it keeps updating the properties.
-                        if (Rigidbody != null)
-                        {
-                            solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
-                            inertiaTensor = Rigidbody.inertiaTensor;
-                            inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
-                            centerOfMass = Rigidbody.centerOfMass;
-                            collisionDetectionMode = Rigidbody.collisionDetectionMode;
-                            constraints = Rigidbody.constraints;
-                            freezeRotation = Rigidbody.freezeRotation;
-                            maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
-                            detectCollisions = Rigidbody.detectCollisions;
-                            useGravity = Rigidbody.useGravity;
-                            mass = Rigidbody.mass;
-                            solverIterationCount = Rigidbody.solverIterationCount;
-                            angularDrag = Rigidbody.angularDrag;
-                            drag = Rigidbody.drag;
-                            angularVelocity = Rigidbody.angularVelocity;
-                            velocity = Rigidbody.velocity;
-                            isKinematic = Rigidbody.isKinematic;
-                            sleepVelocity = Rigidbody.sleepVelocity;
-                            sleepThreshold = Rigidbody.sleepThreshold;
-                            maxAngularVelocity = Rigidbody.maxAngularVelocity;
-                            solverVelocityIterations = Rigidbody.solverVelocityIterations;
-                            interpolation = Rigidbody.interpolation;
-                            sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
-                            useConeFriction = Rigidbody.useConeFriction;
-                            solverIterations = Rigidbody.solverIterations;
-                        }
-                    }
+                // Makes sure if EditMode is OFF. As long is off it keeps updating the properties.
+                if (Rigidbody != null)
+                {
+                    solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
+                    inertiaTensor = Rigidbody.inertiaTensor;
+                    inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
+                    centerOfMass = Rigidbody.centerOfMass;
+                    collisionDetectionMode = Rigidbody.collisionDetectionMode;
+                    constraints = Rigidbody.constraints;
+                    freezeRotation = Rigidbody.freezeRotation;
+                    maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
+                    detectCollisions = Rigidbody.detectCollisions;
+                    useGravity = Rigidbody.useGravity;
+                    mass = Rigidbody.mass;
+                    solverIterationCount = Rigidbody.solverIterationCount;
+                    angularDrag = Rigidbody.angularDrag;
+                    drag = Rigidbody.drag;
+                    angularVelocity = Rigidbody.angularVelocity;
+                    velocity = Rigidbody.velocity;
+                    isKinematic = Rigidbody.isKinematic;
+                    sleepVelocity = Rigidbody.sleepVelocity;
+                    sleepThreshold = Rigidbody.sleepThreshold;
+                    maxAngularVelocity = Rigidbody.maxAngularVelocity;
+                    solverVelocityIterations = Rigidbody.solverVelocityIterations;
+                    interpolation = Rigidbody.interpolation;
+                    sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
+                    useConeFriction = Rigidbody.useConeFriction;
+                    solverIterations = Rigidbody.solverIterations;
+                }
+            }
         }
 
         internal void BackupBasicBody()
-        { 
+        {
             _EditMode = true; // To be sure to backup the original properties without writing them .
             isBackupping = true;
             ModConsole.DebugLog($"Backupping from RigidBody properties for object  {gameObject.name}");
@@ -176,7 +177,7 @@
             useConeFriction = Original_useConeFriction;
             solverIterations = Original_solverIterations;
 
-           _EditMode = false;
+            _EditMode = false;
         }
 
         #region Forced Rigidbody Method
@@ -207,7 +208,7 @@
         private bool _freezeRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private float _maxDepenetrationVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool _detectCollisions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool _useGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }  = true;
+        private bool _useGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
         private float _mass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private int _solverIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private float _angularDrag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -400,7 +401,14 @@
                     {
                         Rigidbody.useGravity = value;
                         SyncPhysics.RefreshProperties();
-                        SyncPhysics.SetGravity(value);
+                        if (!isPublic)
+                        {
+                            SyncPhysics.SetGravity(value);
+                        }
+                        else
+                        {
+                            SyncPhysics.SetGravityForEveryone(value);
+                        }
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -527,9 +535,15 @@
                     {
                         Rigidbody.isKinematic = value;
                         SyncPhysics.RefreshProperties();
-                        SyncPhysics.SetKinematic(value);
+                        if (!isPublic)
+                        {
+                            SyncPhysics.SetKinematic(value);
+                        }
+                        else
+                        {
+                            SyncPhysics.SetKinematicForEveryone(value);
+                        }
                     }
-
                 Run_OnRigidBodyPropertyChanged();
             }
         }
@@ -623,10 +637,10 @@
                 Run_OnRigidBodyPropertyChanged();
             }
         }
+
         internal Vector3 position
         {
-            [HideFromIl2Cpp]
-            get => Rigidbody.position;
+            [HideFromIl2Cpp] get => Rigidbody.position;
             [HideFromIl2Cpp]
             set
             {
@@ -640,8 +654,7 @@
 
         internal Quaternion rotation
         {
-            [HideFromIl2Cpp]
-            get => Rigidbody.rotation;
+            [HideFromIl2Cpp] get => Rigidbody.rotation;
             [HideFromIl2Cpp]
             set
             {
@@ -731,7 +744,7 @@
         private bool Original_freezeRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private float Original_maxDepenetrationVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool Original_detectCollisions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool Original_useGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }  = true;
+        private bool Original_useGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
         private float Original_mass { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private int Original_solverIterationCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private float Original_angularDrag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -798,15 +811,25 @@
             {
                 Rigidbody.isKinematic = value;
                 SyncPhysics.RefreshProperties();
-                SyncPhysics.SetKinematic(value);
+                if (!isPublic)
+                {
+                    SyncPhysics.SetKinematic(value);
+                }
+                else
+                {
+                    SyncPhysics.SetKinematicForEveryone(value);
+                }
+
             }
+
             Run_OnRigidBodyPropertyChanged();
         }
+
         /// <summary>
         /// Bypass EditMode and sets Cached values and Rigidbody gravity
         /// </summary>
 
-        internal void Override_UseGravity(bool value)  // this Bypasses EditMode
+        internal void Override_UseGravity(bool value) // this Bypasses EditMode
         {
             Original_useGravity = value;
             _useGravity = value;
@@ -814,8 +837,16 @@
             {
                 Rigidbody.useGravity = value;
                 SyncPhysics.RefreshProperties();
-                SyncPhysics.SetGravity(value);
+                if (!isPublic)
+                {
+                    SyncPhysics.SetGravity(value);
+                }
+                else
+                {
+                    SyncPhysics.SetGravityForEveryone(value);
+                }
             }
+
             Run_OnRigidBodyPropertyChanged();
         }
 
@@ -829,6 +860,7 @@
             Rigidbody.MovePosition(value);
             SyncPhysics.RefreshProperties();
         }
+
         internal void MoveRotation(Quaternion value)
         {
             Rigidbody.MoveRotation(value);
@@ -836,6 +868,7 @@
         }
 
         #endregion
+
         #region Essential Variables.
 
         internal Rigidbody Rigidbody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
@@ -865,6 +898,7 @@
                     }
 
                 }
+
                 Run_OnRigidBodyPropertyChanged();
 
                 _EditMode = value;
@@ -890,6 +924,26 @@
                 else
                 {
                     if (_Forced_RigidBody) return;
+                }
+            }
+        }
+
+
+        private bool _isPublic = false;
+
+        internal bool isPublic
+        {
+            get
+            {
+                return _isPublic;
+            }
+            set
+            {
+                _isPublic = value;
+                if (value)
+                {
+                    SyncPhysics.SetKinematicForEveryone(_isKinematic);
+                    SyncPhysics.SetGravityForEveryone(_useGravity);
                 }
             }
         }

@@ -53,6 +53,18 @@
                 control.isKinematic = isKinematic;
             }
         }
+        internal static void RigidBody_Set_isPublic(this RigidBodyController control, bool isPublic)
+        {
+            if (control != null)
+            {
+                if (!control.EditMode)
+                {
+                    control.EditMode = true;
+                }
+
+                control.isPublic = isPublic;
+            }
+        }
 
         internal static void RigidBody_Remove_Constraint(this RigidBodyController control, RigidbodyConstraints constraint)
         {
@@ -153,6 +165,10 @@
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Set_isKinematic(isKinematic);
         }
+        internal static void RigidBody_Set_isPublic(this GameObject obj, bool isKinematic)
+        {
+            obj.GetOrAddComponent<RigidBodyController>().RigidBody_Set_isPublic(isKinematic);
+        }
 
         internal static void RigidBody_Remove_Constraint(this GameObject obj, RigidbodyConstraints constraint)
         {
@@ -215,6 +231,16 @@
                 if (obj != null)
                 {
                     obj.RigidBody_Set_isKinematic(isKinematic);
+                }
+            }
+        }
+        internal static void RigidBody_Set_isPublic(this List<GameObject> items, bool isPublic)
+        {
+            foreach (var obj in items)
+            {
+                if (obj != null)
+                {
+                    obj.RigidBody_Set_isPublic(isPublic);
                 }
             }
         }
