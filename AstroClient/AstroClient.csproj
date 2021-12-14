@@ -105,8 +105,8 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_AutoStarter.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerSkipCollider.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
     <Compile Include="AstroMonos\Components\Tools\FreezeLocation\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
@@ -350,6 +350,7 @@
     <Compile Include="Tools\Input\InputUtils.cs" />
     <Compile Include="Tools\Instance\History\InstanceManager.cs" />
     <Compile Include="Tools\Instance\History\WorldManager.cs" />
+    <Compile Include="Tools\AvatarPreviewer.cs" />
     <Compile Include="Tools\Player\PlayerFriendStateExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexUtils.cs" />

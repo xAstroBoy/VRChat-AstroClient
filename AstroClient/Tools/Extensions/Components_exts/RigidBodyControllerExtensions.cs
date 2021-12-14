@@ -40,6 +40,20 @@
                 control.detectCollisions = DetectCollisions;
             }
         }
+        internal static void RigidBody_Override_isKinematic(this RigidBodyController control, bool isKinematic)
+        {
+            if (control != null)
+            {
+                control.Override_isKinematic(isKinematic);
+            }
+        }
+        internal static void RigidBody_Override_useGravity(this RigidBodyController control, bool UseGravity)
+        {
+            if (control != null)
+            {
+                control.Override_UseGravity(UseGravity);
+            }
+        }
 
         internal static void RigidBody_Set_isKinematic(this RigidBodyController control, bool isKinematic)
         {
@@ -155,6 +169,10 @@
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Set_Gravity(useGravity);
         }
+        internal static void RigidBody_Override_useGravity(this GameObject obj, bool useGravity)
+        {
+            obj.GetOrAddComponent<RigidBodyController>().RigidBody_Override_useGravity(useGravity);
+        }
 
         internal static void RigidBody_Set_DetectCollisions(this GameObject obj, bool DetectCollisions)
         {
@@ -165,6 +183,12 @@
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Set_isKinematic(isKinematic);
         }
+
+        internal static void RigidBody_Override_isKinematic(this GameObject obj, bool isKinematic)
+        {
+            obj.GetOrAddComponent<RigidBodyController>().RigidBody_Override_isKinematic(isKinematic);
+        }
+
         internal static void RigidBody_Set_isPublic(this GameObject obj, bool isKinematic)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Set_isPublic(isKinematic);
@@ -234,6 +258,27 @@
                 }
             }
         }
+        internal static void RigidBody_Override_isKinematic(this List<GameObject> items, bool isKinematic)
+        {
+            foreach (var obj in items)
+            {
+                if (obj != null)
+                {
+                    obj.RigidBody_Override_isKinematic(isKinematic);
+                }
+            }
+        }
+        internal static void RigidBody_Override_useGravity(this List<GameObject> items, bool useGravity)
+        {
+            foreach (var obj in items)
+            {
+                if (obj != null)
+                {
+                    obj.RigidBody_Override_useGravity(useGravity);
+                }
+            }
+        }
+
         internal static void RigidBody_Set_isPublic(this List<GameObject> items, bool isPublic)
         {
             foreach (var obj in items)

@@ -47,15 +47,17 @@
             {
                 foreach (var item in WorldObjects)
                 {
-                    var btn = new QMSingleButton(CurrentScrollMenu, $"Select {item.name}", () => { Tweaker_Object.SetObjectToEdit(item); }, $"Select {item.name}", item.Get_GameObject_Active_ToColor());
+                    if (item != null)
+                    {
+                        var btn = new QMSingleButton(CurrentScrollMenu, $"Select {item.name}", () => { Tweaker_Object.SetObjectToEdit(item); }, $"Select {item.name}", item.Get_GameObject_Active_ToColor());
 
-                    var listener = item.GetOrAddComponent<ScrollMenuListener>();
-                    if (listener != null) listener.SingleButton = btn;
-                    Listeners.Add(listener);
+                        var listener = item.GetOrAddComponent<ScrollMenuListener>();
+                        if (listener != null) listener.SingleButton = btn;
+                        Listeners.Add(listener);
 
-                    GeneratedButtons.Add(btn);
+                        GeneratedButtons.Add(btn);
+                    }
                 }
-
 
                 HasGenerated = true;
             }

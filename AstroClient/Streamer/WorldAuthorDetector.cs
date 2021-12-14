@@ -30,31 +30,6 @@
                 }
             }
         }
-
-        internal override void OnPlayerLeft(Player player)
-        {
-            if (!Bools.IsDeveloper)
-            {
-                return;
-            }
-
-            if (player != null)
-            {
-                var apiuser = player.GetAPIUser();
-                if (apiuser != null)
-                {
-                    if (apiuser.IsWorldCreator())
-                    {
-                        PopupUtils.QueHudMessage($"World Author : {apiuser.displayName} Left!");
-                        ModConsole.Warning($"World Author : {apiuser.displayName} Left!");
-                    }
-                }
-            }
-        }
-
-
-
-
     }
 }
 

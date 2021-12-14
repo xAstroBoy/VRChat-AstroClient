@@ -55,6 +55,23 @@
                     WaveEditor = wavecontrol.UdonBehaviour.gameObject.AddComponent<SuperTowerDefense_WaveEditor>();
                 }
 
+                var AutoStarter_PlaceEvent = UdonSearch.FindUdonEvent("AutoStarter", "Place");
+                if (AutoStarter_PlaceEvent != null)
+                {
+                    AutoStarterReader = AutoStarter_PlaceEvent.UdonBehaviour.gameObject.AddComponent<SuperTowerDefense_AutoStarter>();
+                    AutoStarter_Place = AutoStarter_PlaceEvent;
+                }
+                var AutoStarter_InactiveEvent = UdonSearch.FindUdonEvent("AutoStarter", "SetInactive");
+                if (AutoStarter_InactiveEvent != null)
+                {
+                    AutoStarter_SetInactive = AutoStarter_InactiveEvent;
+                }
+                var AutoStarter_ActiveEvent = UdonSearch.FindUdonEvent("AutoStarter", "SetActive");
+                if (AutoStarter_ActiveEvent != null)
+                {
+                    AutoStarter_SetActive = AutoStarter_ActiveEvent;
+                }
+
                 var RedWrench = GameObjectFinder.Find("UpgradeTool0");
                 var BlueWrench = GameObjectFinder.Find("UpgradeTool1");
                 var Hammer = GameObjectFinder.Find("SellTool");
@@ -64,7 +81,10 @@
                     if (RedWrenchPickup != null)
                     {
                         RedWrenchPickup.OnPickupUseUp = null;
-                        RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.InvokeBehaviour(); });
+                        RedWrenchPickup.OnPickupUseUp += new System.Action(() =>
+                        {
+                            if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 1; HealthEditor.TimesBoughtLives = HealthEditor.TimesBoughtLives.Value + 1; }
+                        });
                         RedWrenchPickup.enabled = false;
                     }
                 }
@@ -74,7 +94,10 @@
                     if (BlueWrenchPickup != null)
                     {
                         BlueWrenchPickup.OnPickupUseUp = null;
-                        BlueWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.InvokeBehaviour(); });
+                        BlueWrenchPickup.OnPickupUseUp += new System.Action(() =>
+                        {
+                            if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 1; HealthEditor.TimesBoughtLives = HealthEditor.TimesBoughtLives.Value + 1; }
+                        });
                         BlueWrenchPickup.enabled = false;
                     }
                 }
@@ -88,21 +111,21 @@
                         HammerPickup.enabled = false;
                     }
                 }
-                var CanvasesObj = GameObjectFinder.Find("WaveInteractables/SM_Bld_Portable_Office_01 (1)/WavePaper");
-                if (CanvasesObj != null)
-                {
-                    foreach (var text in CanvasesObj.GetComponentsInChildren<UnityEngine.UI.Text>(true))
-                    {
-                        if (text != null)
-                        {
-                            if (!text.text.ToLower().Equals("wave"))
-                            {
-                                text.resizeTextForBestFit = true;
-                                ModConsole.DebugLog($"Fixed Canvas : {text.gameObject.name}");
-                            }
-                        }
-                    }
-                }
+                //var CanvasesObj = GameObjectFinder.Find("WaveInteractables/SM_Bld_Portable_Office_01 (1)/WavePaper");
+                //if (CanvasesObj != null)
+                //{
+                //    foreach (var text in CanvasesObj.GetComponentsInChildren<UnityEngine.UI.Text>(true))
+                //    {
+                //        if (text != null)
+                //        {
+                //            if (!text.text.ToLower().Equals("wave"))
+                //            {
+                //                text.resizeTextForBestFit = true;
+                //                ModConsole.DebugLog($"Fixed Canvas : {text.gameObject.name}");
+                //            }
+                //        }
+                //    }
+                //}
 
                 var toolshop = GameObjectFinder.FindRootSceneObject("ToolShop");
                 if (toolshop != null)
@@ -206,7 +229,13 @@
             Tower_Lance = null;
             BlockWrenchReturnButton = false;
             FreezeTowers = false;
-            IgnoreTowersCollidersPlacement = false;
+            KeepAutoStarterActive = false;
+            KeepAutoStarterInactive = false;
+            AutoStarter_Place = null;
+            AutoStarter_SetInactive = null;
+            AutoStarter_SetActive = null;
+            AutoStarterReader = null;
+            //IgnoreTowersCollidersPlacement = false;
             //NearbyCollidersManager.Clear();
         }
 
@@ -256,12 +285,12 @@
 
             var LifeMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Health Mods", "Modify Current Healths");
 
-            _ = new QMSingleButton(LifeMods, "Life +1", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 1; } }, "Edit Current Health!");
-            _ = new QMSingleButton(LifeMods, "Life +10", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 10; } }, "Edit Current Health!");
-            _ = new QMSingleButton(LifeMods, "Life +100", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 100; } }, "Edit Current Health!");
-            _ = new QMSingleButton(LifeMods, "Life -1", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 1; } }, "Edit Current Health!");
-            _ = new QMSingleButton(LifeMods, "Life -10", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 10; } }, "Edit Current Health!");
-            _ = new QMSingleButton(LifeMods, "Life -100", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 100; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life +1", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 1; HealthEditor.TimesBoughtLives = HealthEditor.TimesBoughtLives.Value + 1; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life +10", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 10; HealthEditor.TimesBoughtLives = HealthEditor.TimesBoughtLives.Value + 10; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life +100", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value + 100; HealthEditor.TimesBoughtLives = HealthEditor.TimesBoughtLives.Value + 100; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life -1", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 1; HealthEditor.TimesBoughtLives = HealthEditor.TimesBoughtLives.Value - 1; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life -10", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 10; HealthEditor.TimesBoughtLives = HealthEditor.TimesBoughtLives.Value - 10; } }, "Edit Current Health!");
+            _ = new QMSingleButton(LifeMods, "Life -100", () => { if (HealthEditor != null && HealthEditor.CurrentHealth.HasValue) { HealthEditor.CurrentHealth = HealthEditor.CurrentHealth.Value - 100; HealthEditor.TimesBoughtLives = HealthEditor.TimesBoughtLives.Value - 100; } }, "Edit Current Health!");
 
 
             var TowerMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Towers Mods", "Make Towers SuperPowerful");
@@ -273,16 +302,24 @@
             RepairLifeWrenchToolsButton = new QMToggleButton(ToolMods, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
             LoseLifeHammerToolBtn = new QMToggleButton(ToolMods, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, () => { LoseLifeHammer = false; }, "Hammer = Lose health (useful to troll)!");
 
-            AutomaticWaveBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
-            AutomaticGodModebnt = new QMToggleButton(SuperTowerDefensecheatPage, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
+            var AutoStarterManagement = new QMNestedGridMenu(SuperTowerDefensecheatPage, "AutoStarter Control", "Control Map AutoStarter");
+            new QMSingleButton(AutoStarterManagement, "Place AutoStarter", () => { AutoStarter_Place?.InvokeBehaviour(); }, "Spawn AutoStarter");
+            new QMSingleButton(AutoStarterManagement, "Activate AutoStarter", () => { AutoStarter_SetActive?.InvokeBehaviour(); }, "Activate AutoStarter");
+            new QMSingleButton(AutoStarterManagement, "Deactivate AutoStarter", () => { AutoStarter_SetInactive?.InvokeBehaviour(); }, "Deactivate AutoStarter");
+            AutoStartKeepActiveBtn = new QMToggleButton(AutoStarterManagement, "Keep AutoStart ON", () => { KeepAutoStarterActive = true; }, () => { KeepAutoStarterActive = false; }, "Locks AutoStarter on Active Status!");
+            AutoStartKeepInactiveBtn = new QMToggleButton(AutoStarterManagement, "Keep AutoStart OFF", () => { KeepAutoStarterInactive = true; }, () => { KeepAutoStarterInactive = false; }, "Locks AutoStarter on Inactive Status!");
 
-            new QMSingleButton(SuperTowerDefensecheatPage, "Fix towers", () => { FixTheTowers(true); }, "Fix Towers Being unpickable bug ", Color.green);
-            FreezeHammerToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Add a Protection Shield to the hammer!");
-            FreezeTowersToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Freeze Towers", () => { FreezeTowers = true; }, () => { FreezeTowers = false; }, "Freeze Towers In place (Fight against trolls!)");
-            IgnoreTowersCollidersPlacementToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Bypass Tower Collider", () => { IgnoreTowersCollidersPlacement = true; }, () => { IgnoreTowersCollidersPlacement = false; }, "Allow Overlapping Towers!");
+            var RandomFeatures = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Random Features", "More Random Features");
+            AutomaticWaveBtn = new QMToggleButton(RandomFeatures, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
+            AutomaticGodModebnt = new QMToggleButton(RandomFeatures, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
+            new QMSingleButton(RandomFeatures, "Fix towers", () => { FixTheTowers(true); }, "Fix Towers Being unpickable bug ", Color.green);
 
-            BlockHammerReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
-            BlockWrenchReturnToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Block Wrenchs Returns", () => { BlockWrenchReturnButton = true; }, () => { BlockWrenchReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
+            //IgnoreTowersCollidersPlacementToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Bypass Tower Collider", () => { IgnoreTowersCollidersPlacement = true; }, () => { IgnoreTowersCollidersPlacement = false; }, "Allow Overlapping Towers!");
+            var ProtectionsMenu = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Protections", "Protections");
+            FreezeHammerToolBtn = new QMToggleButton(ProtectionsMenu, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Add a Protection Shield to the hammer!");
+            FreezeTowersToolBtn = new QMToggleButton(ProtectionsMenu, "Freeze Towers", () => { FreezeTowers = true; }, () => { FreezeTowers = false; }, "Freeze Towers In place (Fight against trolls!)");
+            BlockHammerReturnToolBtn = new QMToggleButton(ProtectionsMenu, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
+            BlockWrenchReturnToolBtn = new QMToggleButton(ProtectionsMenu, "Block Wrenchs Returns", () => { BlockWrenchReturnButton = true; }, () => { BlockWrenchReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
         }
 
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
@@ -482,42 +519,42 @@
             }
         }
 
-        private static bool _IgnoreTowersCollidersPlacement;
+        //private static bool _IgnoreTowersCollidersPlacement;
 
-        internal static bool IgnoreTowersCollidersPlacement
-        {
-            get
-            {
-                return _IgnoreTowersCollidersPlacement;
-            }
-            set
-            {
-                if (IgnoreTowersCollidersPlacementToolBtn != null)
-                {
-                    IgnoreTowersCollidersPlacementToolBtn.SetToggleState(value);
-                }
-                _IgnoreTowersCollidersPlacement = value;
+        //internal static bool IgnoreTowersCollidersPlacement
+        //{
+        //    get
+        //    {
+        //        return _IgnoreTowersCollidersPlacement;
+        //    }
+        //    set
+        //    {
+        //        if (IgnoreTowersCollidersPlacementToolBtn != null)
+        //        {
+        //            IgnoreTowersCollidersPlacementToolBtn.SetToggleState(value);
+        //        }
+        //        _IgnoreTowersCollidersPlacement = value;
 
-                if (value)
-                {
-                    Tower_RocketLauncher.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Slower.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Cannon.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Radar.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Minigun.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Lance.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
-                }
-                else
-                {
-                    Tower_RocketLauncher.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Slower.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Cannon.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Radar.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Minigun.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
-                    Tower_Lance.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
-                }
-            }
-        }
+        //        if (value)
+        //        {
+        //            Tower_RocketLauncher.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Slower.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Cannon.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Radar.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Minigun.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Lance.GetOrAddComponent<SuperTowerDefense_TowerSkipCollider>();
+        //        }
+        //        else
+        //        {
+        //            Tower_RocketLauncher.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Slower.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Cannon.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Radar.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Minigun.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+        //            Tower_Lance.RemoveComponent<SuperTowerDefense_TowerSkipCollider>();
+        //        }
+        //    }
+        //}
 
         private static bool _FreezeHammer;
 
@@ -769,6 +806,9 @@
             }
         }
 
+
+
+
         internal static GameObject Tower_RocketLauncher { get; set; }
         internal static GameObject Tower_Slower { get; set; }
         internal static GameObject Tower_Cannon { get; set; }
@@ -794,6 +834,13 @@
         internal static SuperTowerDefense_HealthEditor HealthEditor { get; set; }
         internal static SuperTowerDefense_BankEditor BankEditor { get; set; }
 
+        internal static SuperTowerDefense_AutoStarter AutoStarterReader { get; set; }
+        private static QMSingleButton CurrentLifes { get; set; }
+        private static QMSingleButton TimesBoughtLifesAmount { get; set; }
+
+        private static QMSingleButton CurrentWave { get; set; }
+
+
         private static QMToggleButton RepairLifeWrenchToolsButton { get; set; }
         private static QMToggleButton LoseLifeHammerToolBtn { get; set; }
         private static QMToggleButton FreezeHammerToolBtn { get; set; }
@@ -801,9 +848,10 @@
 
         private static QMToggleButton BlockWrenchReturnToolBtn { get; set; }
         private static QMToggleButton FreezeTowersToolBtn { get; set; }
-        private static QMToggleButton IgnoreTowersCollidersPlacementToolBtn { get; set; }
 
         private static QMToggleButton AutomaticWaveBtn { get; set; }
+        private static QMToggleButton AutoStartKeepActiveBtn { get; set; }
+        private static QMToggleButton AutoStartKeepInactiveBtn { get; set; }
 
         private static QMToggleButton AutomaticGodModebnt { get; set; }
 
@@ -821,7 +869,49 @@
 
         internal static UdonBehaviour_Cached ResetBalance { get; private set; }
 
-        internal static UdonBehaviour_Cached SpawnAutoStart { get; private set; }
+        internal static UdonBehaviour_Cached AutoStarter_Place { get; private set; }
+        internal static UdonBehaviour_Cached AutoStarter_SetActive { get; private set; }
+        internal static UdonBehaviour_Cached AutoStarter_SetInactive { get; private set; }
+
+        internal static bool? KeepAutoStarterActive
+        {
+            get
+            {
+                if (AutoStarterReader != null)
+                {
+                    return AutoStarterReader.KeepAutoStarterActive;
+                }
+
+                return null;
+            }
+            set
+            {
+                if (AutoStarterReader != null)
+                {
+                    AutoStarterReader.KeepAutoStarterActive = value.GetValueOrDefault(false);
+                }
+            }
+        }
+
+        internal static bool? KeepAutoStarterInactive
+        {
+            get
+            {
+                if (AutoStarterReader != null)
+                {
+                    return AutoStarterReader.KeepAutoStarterInactive;
+                }
+
+                return null;
+            }
+            set
+            {
+                if (AutoStarterReader != null)
+                {
+                    AutoStarterReader.KeepAutoStarterInactive = value.GetValueOrDefault(false);
+                }
+            }
+        }
 
     }
 }

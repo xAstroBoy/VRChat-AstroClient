@@ -43,8 +43,28 @@
             }
         }
 
-        private string Lives { [HideFromIl2Cpp] get; } = "Lives";
 
+
+        internal int? TimesBoughtLives
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (HealthController != null) return UdonHeapParser.Udon_Parse_Int32(HealthController, BoughtLives);
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (HealthController != null)
+                    if (value.HasValue)
+                        UdonHeapEditor.PatchHeap(HealthController, BoughtLives, Math.Abs(value.Value));
+            }
+        }
+
+
+        private string Lives { [HideFromIl2Cpp] get; } = "Lives";
+        private string BoughtLives { [HideFromIl2Cpp] get; } = "TimesBoughtLives";
         internal bool GodMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
         internal DisassembledUdonBehaviour HealthController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }

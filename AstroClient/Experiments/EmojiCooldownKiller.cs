@@ -11,7 +11,7 @@
         {
 
 
-            MiscUtils.DelayFunction(1f, () =>
+            MiscUtils.DelayFunction(3f, () =>
             {
                 if (player != null)
                 {

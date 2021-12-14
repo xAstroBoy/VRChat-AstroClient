@@ -45,7 +45,7 @@
                 }
                 else
                 {
-                    if (CurrentRenderers == null && CurrentRenderers.Count() == 0)
+                    if (CurrentRenderer == null )
                     {
                         ModConsole.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
                         Destroy(this);
@@ -57,13 +57,10 @@
                         {
                             HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
                         }
-                        for (int i = 0; i < CurrentRenderers.Count; i++)
+
+                        if (CurrentRenderer != null)
                         {
-                            var ObjRenderer = CurrentRenderers[i];
-                            if (ObjRenderer != null)
-                            {
-                                HighLightOptions.SetHighlighter(ObjRenderer, true);
-                            }
+                            HighLightOptions.SetHighlighter(CurrentRenderer, true);
                         }
                     }
                 }
@@ -267,16 +264,21 @@
             }
         }
 
-        private List<MeshRenderer> CurrentRenderers
+        private MeshRenderer _CurrentRenderer;
+        private MeshRenderer CurrentRenderer
         {
             [HideFromIl2Cpp]
             get
             {
-                if (SelectRegion != null)
+                if (_CurrentRenderer == null)
                 {
-                    return SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToArray().ToList();
+                    if (SelectRegion != null)
+                    {
+                        return _CurrentRenderer = SelectRegion.GetComponentInChildren<MeshRenderer>();
+                    }
                 }
-                return null;
+
+                return _CurrentRenderer;
             }
         }
         internal override void OnRoomLeft()

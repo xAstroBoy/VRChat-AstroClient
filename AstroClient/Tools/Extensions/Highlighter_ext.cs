@@ -76,10 +76,7 @@
             var item = obj.AddComponent<HighlightsFXStandalone>();
             if (item != null)
             {
-                if (!EspHelper.SpawnedESPsHolders.Contains(item))
-                {
-                    EspHelper.SpawnedESPsHolders.Add(item);
-                }
+                EspHelper.SpawnedESPsHolders.Add(item);
             }
 
             return item;

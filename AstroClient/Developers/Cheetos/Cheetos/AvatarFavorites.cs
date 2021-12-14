@@ -8,6 +8,7 @@
     using CheetoLibrary;
     using CheetoLibrary.Menu.MenuApi;
     using Il2CppSystem.Collections.Generic;
+    using Tools.AvatarPreviewUtils;
     using UnityEngine;
     using VRC.Core;
     using xAstroBoy;
@@ -47,6 +48,10 @@
             publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 
             list = new VRCList(publicAvatarList.transform.parent, "Astro Favorites");
+
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Spawn Preview Avatar", 921f, 170f, delegate { AvatarPreviewer.ClonePreviewAvatar(); }, 1.45f, 1f);
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Remove Preview Avatars", 921f, 110f, delegate { AvatarPreviewer.DeleteAllClonedAvatars(); }, 1.45f, 1f);
+
         }
 
         internal override void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
