@@ -11,13 +11,15 @@ namespace AstroClient.xAstroBoy.Utility
         {
             if (player != null)
             {
-                if (player.GetRawHashtable() != null)
+                var RawHashtable = player.GetRawHashtable();
+                if (RawHashtable != null)
                 {
-                    if (player.GetRawHashtable().ContainsKey("user"))
+                    if (RawHashtable.ContainsKey("user"))
                     {
-                        if (player.GetHashtable()["user"] != null)
+                        var UserHashTable = player.GetHashtable()["user"];
+                        if (UserHashTable != null)
                         {
-                            if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
+                            if (UserHashTable is Dictionary<string, object> dict)
                             {
                                 return  (string)dict["id"];
                             }
@@ -30,18 +32,26 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static string GetDisplayName(this Photon.Realtime.Player player)
         {
-            if (player != null && player.GetRawHashtable() != null && player.GetRawHashtable().ContainsKey("user") && player.GetHashtable()["user"] != null)
-            {
-                if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
-                {
-                    return (string)dict["displayName"];
-
-                }
-            }
             if (player != null)
             {
-                return $"Photon ID : {player.GetPhotonID()}";
+                var RawHashtable = player.GetRawHashtable();
+                if (RawHashtable != null && RawHashtable.ContainsKey("user"))
+                {
+                    var UserHashTable = player.GetHashtable()["user"];
+                    if (UserHashTable != null)
+                    {
+                        if (UserHashTable is Dictionary<string, object> dict)
+                        {
+                            return (string)dict["displayName"];
+                        }
+                    }
+                }
+                else
+                {
+                    return $"Photon ID : {player.GetPhotonID()}";
+                }
             }
+
             return "Unknown Player";
         }
 

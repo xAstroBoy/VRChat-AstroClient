@@ -40,8 +40,8 @@
 
             AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
 
-            NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
-            NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
+            PlayerJoinAndLeaveHook.Event_OnPlayerJoin += Internal_OnPlayerJoined;
+            PlayerJoinAndLeaveHook.Event_OnPlayerLeft += Internal_OnPlayerLeft;
 
             CheetosHooks.Event_OnMasterClientSwitched += Internal_OnMasterClientSwitched;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
