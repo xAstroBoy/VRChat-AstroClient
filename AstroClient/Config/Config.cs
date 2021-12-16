@@ -111,4 +111,16 @@
 
         public bool UnlimitedFrames = false;
     }
+
+
+    [Serializable, Obfuscation]
+    public class ConfigLoadingScreen
+    {
+        public bool ShowLoadingMessages = false;
+        public bool WarpTunnel = true;
+        public bool VrcLogo = true;
+        public bool ModSounds = true;
+        public bool SecretMeme = false;
+    }
+
 }

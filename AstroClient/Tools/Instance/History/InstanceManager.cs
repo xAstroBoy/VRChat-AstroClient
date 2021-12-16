@@ -1,15 +1,13 @@
-﻿namespace AstroClient.Tools.InstanceHistory
+﻿namespace AstroClient.Tools.Instance.History
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Reflection;
     using AstroClient;
-    using VRC.Core;
-    using xAstroBoy.Utility;
-    using ConfigManager = Config.ConfigManager;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using VRC.Core;
+    using ConfigManager = Config.ConfigManager;
 
     internal class InstanceManager : AstroEvents
     {

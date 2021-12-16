@@ -17,7 +17,6 @@
     using Newtonsoft.Json;
     using Photon.Realtime;
     using Tools.Extensions;
-    using Tools.InstanceHistory;
     using Tools.Regexes;
     using UnityEngine;
     using VRC;

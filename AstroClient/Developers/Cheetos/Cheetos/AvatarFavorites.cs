@@ -8,7 +8,7 @@
     using CheetoLibrary;
     using CheetoLibrary.Menu.MenuApi;
     using Il2CppSystem.Collections.Generic;
-    using Tools.AvatarPreviewUtils;
+    using Tools;
     using UnityEngine;
     using VRC.Core;
     using xAstroBoy;

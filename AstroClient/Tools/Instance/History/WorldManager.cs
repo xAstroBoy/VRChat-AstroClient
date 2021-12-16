@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Tools.InstanceHistory
+﻿namespace AstroClient.Tools.Instance.History
 {
     using System;
     using System.Linq;

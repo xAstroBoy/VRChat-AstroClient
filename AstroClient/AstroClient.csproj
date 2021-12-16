@@ -112,9 +112,16 @@
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnEnterWorldEventArgs.cs" />
+    <Compile Include="ClientResources\Loaders\Bundles.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
+    <Compile Include="ClientUI\LoadingScreen\Assets\LoginScreenAssets.cs" />
+    <Compile Include="ClientUI\LoadingScreen\Assets\LoadingScreenAssets.cs" />
+    <Compile Include="ClientUI\LoadingScreen\Prefabs\LoadScreenPrefabs.cs" />
+    <Compile Include="ClientUI\LoadingScreen\BetterLoadingScreen.cs" />
+    <Compile Include="ClientUI\LoadingScreen\Settings\BetterLoadingScreenSettings.cs" />
+    <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\InstanceHistoryMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\UserMenu\OrbitUserMenu.cs" />
@@ -1336,6 +1343,8 @@
     <EmbeddedResource Include="ClientResources\FigletsArchive\Larry3D.flf" />
     <None Include="app.config" />
     <Compile Include="AstroMonos\Components\Tools\RigidBodyController.cs" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\OldLoadingScreen.assetbundle" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

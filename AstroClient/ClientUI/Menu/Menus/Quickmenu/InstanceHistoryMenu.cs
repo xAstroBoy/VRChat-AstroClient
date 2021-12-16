@@ -6,7 +6,7 @@
     using ActionMenu.AvatarParametersModule.Menu;
     using ClientResources.Loaders;
     using Tools.Extensions;
-    using Tools.InstanceHistory;
+    using Tools.Instance.History;
     using Tools.Skybox;
     using UnityEngine;
     using VRC.UI.Elements;

@@ -1,19 +1,15 @@
-﻿namespace AstroClient.Tools.AvatarPreviewUtils
+﻿namespace AstroClient.Tools
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using AstroMonos.Components.Tools;
     using Extensions;
     using Extensions.Components_exts;
     using UnityEngine;
     using UnityStandardAssets.Utility;
-    using VRC;
     using VRC.Core;
     using VRC.SDK3.Avatars.Components;
     using VRC.SDKBase;
-    using xAstroBoy;
     using xAstroBoy.UIPaths;
     using xAstroBoy.Utility;
     using Object = UnityEngine.Object;
