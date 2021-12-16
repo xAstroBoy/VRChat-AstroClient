@@ -4,6 +4,7 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
 {
     using Assets;
     using AstroMonos.Components.Tools;
+    using Menu.SettingsMenu;
     using xAstroBoy.UIPaths;
     using xAstroBoy.Utility;
     using ConfigManager = Config.ConfigManager;
@@ -19,6 +20,10 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
             set
             {
                 ConfigManager.LoadingScreen.ModSounds = value;
+                if (Settings_LoadingScreen.ModSoundsToggleBtn != null)
+                {
+                    Settings_LoadingScreen.ModSoundsToggleBtn.SetToggleState(value);
+                }
                 if (LoadingScreenAssets.LoadScreenMod_MenuMusic != null)
                 {
                     LoadingScreenAssets.LoadScreenMod_MenuMusic.SetActive(value);
@@ -62,6 +67,10 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
             set
             {
                 ConfigManager.LoadingScreen.WarpTunnel = value;
+                if (Settings_LoadingScreen.WarpTunnelToggleBtn != null)
+                {
+                    Settings_LoadingScreen.WarpTunnelToggleBtn.SetToggleState(value);
+                }
                 if (LoadingScreenAssets.LoadScreenMod_Tunnel != null)
                 {
                     LoadingScreenAssets.LoadScreenMod_Tunnel.SetActive(value);
@@ -79,6 +88,10 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
             set
             {
                 ConfigManager.LoadingScreen.ShowLoadingMessages = value;
+                if (Settings_LoadingScreen.ShowLoadingMessagesToggleBtn != null)
+                {
+                    Settings_LoadingScreen.ShowLoadingMessagesToggleBtn.SetToggleState(value);
+                }
 
                 if (VRChat_LoadingScreenObjects.VRChat_InfoPanel != null)
                 {
@@ -115,6 +128,11 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
             set
             {
                 ConfigManager.LoadingScreen.VrcLogo = value;
+                if (Settings_LoadingScreen.VRCLogoToggleBtn != null)
+                {
+                    Settings_LoadingScreen.VRCLogoToggleBtn.SetToggleState(value);
+                }
+
                 if (LoadingScreenAssets.LoadScreenMod_VRCLogo != null)
                 {
                     LoadingScreenAssets.LoadScreenMod_VRCLogo.SetActive(value);
@@ -131,6 +149,10 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
             set
             {
                 ConfigManager.LoadingScreen.SecretMeme = value;
+                if (Settings_LoadingScreen.SecretMemeToggleBtn != null)
+                {
+                    Settings_LoadingScreen.SecretMemeToggleBtn.SetToggleState(value);
+                }
                 if (LoadingScreenAssets.LoadScreenMod_AprilFools != null)
                 {
                     LoadingScreenAssets.LoadScreenMod_AprilFools.SetActive(value);

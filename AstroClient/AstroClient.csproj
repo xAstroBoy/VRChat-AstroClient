@@ -121,6 +121,7 @@
     <Compile Include="ClientUI\LoadingScreen\Prefabs\LoadScreenPrefabs.cs" />
     <Compile Include="ClientUI\LoadingScreen\BetterLoadingScreen.cs" />
     <Compile Include="ClientUI\LoadingScreen\Settings\BetterLoadingScreenSettings.cs" />
+    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_LoadingScreen.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\InstanceHistoryMenu.cs" />
