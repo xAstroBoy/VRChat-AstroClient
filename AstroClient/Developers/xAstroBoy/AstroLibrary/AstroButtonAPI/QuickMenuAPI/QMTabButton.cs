@@ -15,9 +15,28 @@
         internal string btnTag { get; set; }
         internal string btnType { get; set; }
         internal GameObject ButtonObject { get; set; }
-        internal UiTooltip ButtonToolTip { get; set; }
-        internal string ToolTipText { get; set; }
+        private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
+        internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
+        {
+            get
+            {
+                if (_ButtonToolTip == null)
+                {
+                    var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
+                    }
+                    if (attempt1 != null)
+                    {
+                        return _ButtonToolTip = attempt1;
+                    }
+                }
 
+                return _ButtonToolTip;
+            }
+        }
+        internal string ToolTipText { get; set; }
 
         internal QMTabButton(int Index, Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Sprite LoadSprite = null)
         {
@@ -29,7 +48,6 @@
             btnType = "_QMTabButton_";
             ButtonObject = Object.Instantiate(QuickMenuTools.TabButtonTemplate.gameObject, QuickMenuTools.TabButtonTemplate.parent, true);
             ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
-            ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
             SetToolTip(btnToolTip);
             SetAction(btnAction);
             ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);

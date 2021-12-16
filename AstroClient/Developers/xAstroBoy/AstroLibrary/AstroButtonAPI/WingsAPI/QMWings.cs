@@ -28,7 +28,6 @@
         internal string btnType { get; set; } = "WingPage";
         internal MenuStateController CurrentController { get; set; }
         internal bool isLeftWing { get; set; }
-        internal UiTooltip ButtonToolTip { get; set; }
         internal string ToolTipText { get; set; }
 
         internal string CurrentBtnColor { get; set; }
@@ -54,7 +53,6 @@
                 ButtonText = ButtonObject.NewText("Text_QM_H3");
                 ButtonText.text = MenuName;
                 CurrentController = QuickMenuTools.WingMenuStateControllerLeft;
-                ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
                 SetToolTip(btnToolTip);
                 ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
                 var Page = QuickMenuTools.UIPageTemplate_Left;
@@ -103,7 +101,6 @@
                 ButtonText.text = MenuName;
                 CurrentController = QuickMenuTools.WingMenuStateControllerRight;
 
-                ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
                 SetToolTip(btnToolTip);
                 ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
                 var Page = QuickMenuTools.UIPageTemplate_Right;
@@ -152,6 +149,36 @@
             initButton(menu, MenuName, btnToolTip, icon);
         }
 
+        private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
+
+        internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
+        {
+            get
+            {
+                if (_ButtonToolTip == null)
+                {
+                    var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
+                    }
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInParent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                    }
+
+                    if (attempt1 != null)
+                    {
+                        return _ButtonToolTip = attempt1;
+                    }
+                }
+
+                return _ButtonToolTip;
+            }
+        }
+
+
+
 
         internal void initButton(QMWings menu, string AssignedMenu, string btnToolTip, Sprite icon = null)
         {
@@ -168,7 +195,6 @@
                     ButtonText.text = MenuName;
                     CurrentController = QuickMenuTools.WingMenuStateControllerLeft;
 
-                    ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
                     SetToolTip(btnToolTip);
                     var Page = QuickMenuTools.UIPageTemplate_Left;
                     CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);

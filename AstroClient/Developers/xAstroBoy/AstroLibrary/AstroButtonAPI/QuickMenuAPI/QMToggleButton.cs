@@ -8,7 +8,9 @@
     using Tools;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC.UI.Elements.Tooltips;
     using Object = UnityEngine.Object;
+    using UiTooltip = UiTooltip;
 
     internal class QMToggleButton : QMButtonBase
     {
@@ -150,7 +152,33 @@
         internal string CurrentColor { get; set; }
         internal string ButtonText_On { get; set; }
         internal string ButtonText_Off { get; set; }
-        internal UiTooltip ButtonToolTip { get; set; }
+        private UiToggleTooltip _ButtonToolTip;
+
+        internal UiToggleTooltip ButtonToolTip
+        {
+            get
+            {
+                if (_ButtonToolTip == null)
+                {
+                    var attempt1 = ButtonObject.GetComponent<UiToggleTooltip>();
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInChildren<UiToggleTooltip>(true);
+                    }
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInParent<UiToggleTooltip>();
+                    }
+
+                    if (attempt1 != null)
+                    {
+                        return _ButtonToolTip = attempt1;
+                    }
+                }
+
+                return _ButtonToolTip;
+            }
+        }
         internal string ToolTipText { get; set; }
 
         internal TextMeshProUGUI ButtonTitleMesh { get; set; }
@@ -171,7 +199,6 @@
             ButtonTitleMesh.text = Title;
             ButtonObject.name = id;
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>();
-            ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
             ButtonToggle = ButtonObject.GetComponentInChildren<Toggle>();
             btnOn = ButtonObject.FindObject("Icon_On");
             btnOff = ButtonObject.FindObject("Icon_Off");

@@ -19,7 +19,29 @@
         internal string btnQMLoc { get; set; }
         internal string btnType { get; set; }
         internal Button Button {get; set;}
-        internal UiTooltip ButtonToolTip { get; set; }
+        private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
+
+        internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
+        {
+            get
+            {
+                if (_ButtonToolTip == null)
+                {
+                    var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
+                    }
+
+                    if (attempt1 != null)
+                    {
+                        return _ButtonToolTip = attempt1;
+                    }
+                }
+
+                return _ButtonToolTip;
+            }
+        }
         internal string ToolTipText { get; set; }
         internal RectTransform ButtonRect { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
@@ -267,7 +289,6 @@
             }
 
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>(true);
-            ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
             if (ButtonRect == null)
             {
                 ButtonRect = ButtonObject.GetComponent<RectTransform>();

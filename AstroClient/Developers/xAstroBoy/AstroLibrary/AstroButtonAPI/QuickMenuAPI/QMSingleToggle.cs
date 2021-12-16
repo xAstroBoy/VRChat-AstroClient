@@ -74,7 +74,28 @@
         internal Action OnAction { get; set; }
         internal GameObject ButtonsMenu { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
-        internal UiTooltip ButtonToolTip { get; set; }
+        private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
+
+        internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
+        {
+            get
+            {
+                if (_ButtonToolTip == null)
+                {
+                    var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
+                    }
+                    if (attempt1 != null)
+                    {
+                        return _ButtonToolTip = attempt1;
+                    }
+                }
+
+                return _ButtonToolTip;
+            }
+        }
         internal string ToolTipText { get; set; }
 
         private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool defaultstate = false, bool btnHalf = false)
@@ -113,7 +134,6 @@
             }
 
             ButtonObject.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
-            ButtonToolTip = ButtonObject.GetComponentInChildren<UiTooltip>(true);
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>();
             SetButtonText(defaultstate ? btnONText : btnOffText);
             OnText = btnONText;

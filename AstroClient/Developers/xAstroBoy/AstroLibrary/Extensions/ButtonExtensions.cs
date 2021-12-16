@@ -5,6 +5,8 @@
     using UnityEngine;
     using UnityEngine.UI;
     using Utility;
+    using VRC.UI.Elements.Tooltips;
+    using UiTooltip = UiTooltip;
 
     internal static class ButtonExtensions
     {
@@ -14,12 +16,22 @@
 
         internal static void ToggleBtnImage(this QMSingleButton btn, bool enabled) => btn.GetGameObject().GetComponentInChildren<Image>(true).enabled = enabled;
 
-        internal static void SetButtonToolTip(this UiTooltip tooltip, string text)
+        internal static void SetButtonToolTip(this VRC.UI.Elements.Tooltips.UiTooltip tooltip, string text)
         {
             if (tooltip != null)
             {
                 tooltip.field_Public_String_0 = text;
+                tooltip.field_Public_String_1 = text;
             }
         }
+        internal static void SetButtonToolTip(this UiToggleTooltip tooltip, string text)
+        {
+            if (tooltip != null)
+            {
+                tooltip.field_Public_String_0 = text;
+                tooltip.field_Public_String_1 = text;
+            }
+        }
+
     }
 }
