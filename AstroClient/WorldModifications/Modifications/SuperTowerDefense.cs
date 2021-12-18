@@ -143,6 +143,13 @@
                 Tower_Minigun = GameObjectFinder.Find("TowerMiniGun1Grabbable (0)");
                 Tower_Lance = GameObjectFinder.Find("TowerLance1Grabbable (0)");
 
+                Tower_RocketLauncher_1 = GameObjectFinder.Find("TowerRocketLauncher1Grabbable (1)");
+                Tower_Slower_1 = GameObjectFinder.Find("TowerSlower1Grabbable (1)");
+                Tower_Cannon_1 = GameObjectFinder.Find("TowerCannon1Grabbable (1)");
+                Tower_Radar_1 = GameObjectFinder.Find("TowerRadar1Grabbable (1)");
+                Tower_Minigun_1 = GameObjectFinder.Find("TowerMiniGun1Grabbable (1)");
+                Tower_Lance_1 = GameObjectFinder.Find("TowerLance1Grabbable (1)");
+
                 //foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
                 //{
                 //    if (item != null)
@@ -227,6 +234,14 @@
             Tower_Radar = null;
             Tower_Minigun = null;
             Tower_Lance = null;
+
+            Tower_RocketLauncher_1 = null;
+            Tower_Slower_1 = null;
+            Tower_Cannon_1 = null;
+            Tower_Radar_1 = null;
+            Tower_Minigun_1 = null;
+            Tower_Lance_1 = null;
+
             BlockWrenchReturnButton = false;
             FreezeTowers = false;
             KeepAutoStarterActive = false;
@@ -247,6 +262,14 @@
             FixTower(Tower_Radar, RespawnTower);
             FixTower(Tower_Minigun, RespawnTower);
             FixTower(Tower_Lance, RespawnTower);
+
+            FixTower(Tower_RocketLauncher_1, RespawnTower);
+            FixTower(Tower_Slower_1, RespawnTower);
+            FixTower(Tower_Cannon_1, RespawnTower);
+            FixTower(Tower_Radar_1, RespawnTower);
+            FixTower(Tower_Minigun_1, RespawnTower);
+            FixTower(Tower_Lance_1, RespawnTower);
+
         }
 
         private static void FixTower(GameObject tower, bool RespawnTowers)
@@ -506,6 +529,14 @@
                     LockTowerInPlace(Tower_Radar);
                     LockTowerInPlace(Tower_Minigun);
                     LockTowerInPlace(Tower_Lance);
+
+                    LockTowerInPlace(Tower_RocketLauncher_1);
+                    LockTowerInPlace(Tower_Slower_1);
+                    LockTowerInPlace(Tower_Cannon_1);
+                    LockTowerInPlace(Tower_Radar_1);
+                    LockTowerInPlace(Tower_Minigun_1);
+                    LockTowerInPlace(Tower_Lance_1);
+
                 }
                 else
                 {
@@ -515,6 +546,14 @@
                     RemoveLockOnItem(Tower_Radar);
                     RemoveLockOnItem(Tower_Minigun);
                     RemoveLockOnItem(Tower_Lance);
+
+                    RemoveLockOnItem(Tower_RocketLauncher_1);
+                    RemoveLockOnItem(Tower_Slower_1);
+                    RemoveLockOnItem(Tower_Cannon_1);
+                    RemoveLockOnItem(Tower_Radar_1);
+                    RemoveLockOnItem(Tower_Minigun_1);
+                    RemoveLockOnItem(Tower_Lance_1);
+
                 }
             }
         }
@@ -815,6 +854,13 @@
         internal static GameObject Tower_Radar { get; set; }
         internal static GameObject Tower_Minigun { get; set; }
         internal static GameObject Tower_Lance { get; set; }
+
+        internal static GameObject Tower_RocketLauncher_1 { get; set; }
+        internal static GameObject Tower_Slower_1 { get; set; }
+        internal static GameObject Tower_Cannon_1 { get; set; }
+        internal static GameObject Tower_Radar_1 { get; set; }
+        internal static GameObject Tower_Minigun_1 { get; set; }
+        internal static GameObject Tower_Lance_1 { get; set; }
 
         internal static GameObject Apple_1 { get; set; }
         internal static GameObject Apple_2 { get; set; }
