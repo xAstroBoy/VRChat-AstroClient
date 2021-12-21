@@ -111,7 +111,7 @@
 
         public bool UnlimitedFrames = false;
 
-        public bool AllowPerformanceScanner = false;
+        public bool AllowPerformanceScanner = true;
     }
 
 
