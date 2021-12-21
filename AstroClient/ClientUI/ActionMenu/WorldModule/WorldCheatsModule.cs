@@ -36,8 +36,8 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                         }, null, false, null);
                         CustomSubMenu.AddSubMenu("Cheats", () =>
                         {
-                            CustomSubMenu.AddButton("Reset Life", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Remove a Life", () => { SuperTowerDefense.LoseHealth?.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Remove a Heart", () => { SuperTowerDefense.LoseHealth?.InvokeBehaviour(); });
                             CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
                             CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
                             CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
@@ -70,7 +70,6 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
 
 
                         }, null, false, null);
-
                         CustomSubMenu.AddSubMenu("Auto Starter Control", () =>
                         {
                             CustomSubMenu.AddButton("Place AutoStarter", () => { SuperTowerDefense.AutoStarter_Place?.InvokeBehaviour(); });
@@ -79,6 +78,27 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                             CustomSubMenu.AddToggle("Keep AutoStart ON", SuperTowerDefense.KeepAutoStarterActive.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.KeepAutoStarterActive = ToggleValue; });
                             CustomSubMenu.AddToggle("Keep AutoStart OFF", SuperTowerDefense.KeepAutoStarterInactive.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.KeepAutoStarterInactive = ToggleValue; });
                         }, null, false, null);
+                        CustomSubMenu.AddSubMenu("Bank Mods", () =>
+                        {
+                            CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Set 0 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = 0; } });
+                            CustomSubMenu.AddButton("Add 10000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = SuperTowerDefense.BankEditor.CurrentBankBalance.Value + 10000; } });
+                            CustomSubMenu.AddButton("Add 100000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = SuperTowerDefense.BankEditor.CurrentBankBalance.Value + 100000; } });
+                            CustomSubMenu.AddButton("Add 1000000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = SuperTowerDefense.BankEditor.CurrentBankBalance.Value + 1000000; } });
+                            CustomSubMenu.AddButton("Add 10000000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = SuperTowerDefense.BankEditor.CurrentBankBalance.Value + 10000000; } });
+                            CustomSubMenu.AddButton("Set 999999999 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = 999999999; } });
+                        });
+                        CustomSubMenu.AddSubMenu("Health Mods", () =>
+                        {
+                            CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Heart +1", () => { if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue) { SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 1; SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 1; } });
+                            CustomSubMenu.AddButton("Heart +10", () => { if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue) { SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 10; SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 10; } });
+                            CustomSubMenu.AddButton("Heart +100", () => { if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue) { SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 100; SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 100; } });
+                            CustomSubMenu.AddButton("Heart -1", () => { if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue) { SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 1; SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 1; } });
+                            CustomSubMenu.AddButton("Heart -10", () => { if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue) { SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 10; SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 10; } });
+                            CustomSubMenu.AddButton("Heart -100", () => { if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue) { SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 100; SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 100; } });
+
+                        });
 
                     }, null, false, null);
                 }
