@@ -318,6 +318,7 @@
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealer.cs" />
     <Compile Include="Startup\Fixes\DashboardFix.cs" />
     <Compile Include="Startup\Hooks\PlayerJoinAndLeaveHook.cs" />
+    <Compile Include="Startup\Hooks\PerformanceScannerHook.cs" />
     <Compile Include="Streamer\WorldAuthorDetector.cs" />
     <Compile Include="Tools\Exploits\ExploitUtils.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />

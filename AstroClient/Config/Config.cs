@@ -110,6 +110,8 @@
         public bool HighPriority = false;
 
         public bool UnlimitedFrames = false;
+
+        public bool AllowPerformanceScanner = false;
     }
 
 

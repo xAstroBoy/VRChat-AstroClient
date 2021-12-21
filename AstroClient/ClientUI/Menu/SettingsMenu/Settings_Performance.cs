@@ -3,6 +3,7 @@
     #region Imports
 
     using Cheetos;
+    using Config;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
@@ -17,11 +18,15 @@
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Performance", "Performance Settings");
 
-            QMToggleButton highPriorityToggle = new QMToggleButton(sub, 1, 0f, "Priority High", () => { HighPriority.IsEnabled = true; }, "Priority Normal", () => { HighPriority.IsEnabled = false; }, "Sets the process priority");
+            QMToggleButton highPriorityToggle = new QMToggleButton(sub, "Priority High", () => { HighPriority.IsEnabled = true; }, "Priority Normal", () => { HighPriority.IsEnabled = false; }, "Sets the process priority");
             highPriorityToggle.SetToggleState(HighPriority.IsEnabled, false);
 
-            QMToggleButton frameUnlimiterToggle = new QMToggleButton(sub, 2, 0f, "FrameUnlimiter\nOn", () => { FrameUnlimiter.IsEnabled = true; }, "FrameUnlimiter\nOff", () => { FrameUnlimiter.IsEnabled = false; }, "Unlimit the games framerate");
+            QMToggleButton frameUnlimiterToggle = new QMToggleButton(sub,  "FrameUnlimiter", () => { FrameUnlimiter.IsEnabled = true; }, () => { FrameUnlimiter.IsEnabled = false; }, "Unlimit the games framerate");
             frameUnlimiterToggle.SetToggleState(FrameUnlimiter.IsEnabled, false);
+
+            QMToggleButton AllowPerformanceScanner = new QMToggleButton(sub, "Performance Scanner", () => { ConfigManager.Performance.AllowPerformanceScanner = true; }, () => { ConfigManager.Performance.AllowPerformanceScanner = false; }, "Disable VRChat Avatar Scanning.");
+            AllowPerformanceScanner.SetToggleState(ConfigManager.Performance.AllowPerformanceScanner, false);
+
         }
     }
 }

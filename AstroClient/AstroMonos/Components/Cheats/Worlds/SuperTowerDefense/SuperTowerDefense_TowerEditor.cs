@@ -20,6 +20,7 @@
         {
             AntiGarbageCollection.Add(this);
         }
+
         internal override void OnRoomLeft()
         {
             Destroy(this);
@@ -34,13 +35,47 @@
                 return null;
             }
             [HideFromIl2Cpp]
-            set
+            private set
             {
                 if (CurrentTower != null)
+                {
                     if (value.HasValue)
-                        UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, Math.Abs(value.Value), true);
+                    {
+                        var fixedvalue = Math.Abs(value.GetValueOrDefault(0));
+                        if (fixedvalue != 0)
+                        {
+                            UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, fixedvalue, true);
+                        }
+                    }
+                }
             }
         }
+
+        internal void BackupAndModifyRange(float value)
+        {
+            if (Range.HasValue)
+            {
+                if (!HasModifiedRange)
+                {
+                    OriginalRange = Range.Value;
+                    HasModifiedRange = true;
+                }
+            }
+            Range = value;
+        }
+
+        internal void RestoreRange()
+        {
+            if (HasModifiedRange)
+            {
+                Range = OriginalRange;
+                HasModifiedRange = false;
+            }
+        }
+
+
+        private bool HasModifiedRange { get; set; }
+        private float OriginalRange { get; set; }
 
         internal float? SpeedMultiplier
         {
@@ -51,13 +86,48 @@
                 return null;
             }
             [HideFromIl2Cpp]
-            set
+
+            private set
             {
                 if (CurrentTower != null)
+                {
                     if (value.HasValue)
-                        UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, Math.Abs(value.Value), true);
+                    {
+                        var fixedvalue = Math.Abs(value.GetValueOrDefault(0));
+                        if (fixedvalue != 0)
+                        {
+                            UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, Math.Abs(value.Value), true);
+                        }
+                    }
+                }
             }
         }
+        internal void BackupAndModifySpeedMultiplier(float value)
+        {
+            if (SpeedMultiplier.HasValue)
+            {
+                if (!HasModifiedSpeedMultiplier)
+                {
+                    OriginalSpeedMultiplier = SpeedMultiplier.Value;
+                    HasModifiedSpeedMultiplier = true;
+                }
+            }
+            SpeedMultiplier = value;
+        }
+
+        internal void RestoreSpeedMultiplier()
+        {
+            if (HasModifiedSpeedMultiplier)
+            {
+                SpeedMultiplier = OriginalSpeedMultiplier;
+                HasModifiedSpeedMultiplier = false;
+            }
+        }
+
+
+        private bool HasModifiedSpeedMultiplier { get; set; }
+        private float OriginalSpeedMultiplier { get; set; }
+
 
         private string SpeedMultiplierAddress { [HideFromIl2Cpp] get; } = "SpeedMultiplier";
         private string RangeAddress { [HideFromIl2Cpp] get; } = "Range";

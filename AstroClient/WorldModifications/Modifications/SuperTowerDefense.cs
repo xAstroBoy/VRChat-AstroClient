@@ -317,9 +317,23 @@
 
 
             var TowerMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Towers Mods", "Make Towers SuperPowerful");
+            _ = new QMSingleButton(TowerMods, "+0.5f Tower Range", () => { AddTowerRange(0.5f); }, "Add +0.5f Towers Range!");
+            _ = new QMSingleButton(TowerMods, "+1f Tower Range", () => { AddTowerRange(1f); }, "Add +1f Towers Range!");
+            _ = new QMSingleButton(TowerMods, "-0.5f Tower Range", () => { RemoveTowerRange(0.5f); }, "Remove 0.5f Towers Range!");
+            _ = new QMSingleButton(TowerMods, "-1f Tower Range", () => { RemoveTowerRange(1f); }, "Remove 1f Towers Range!");
+            _ = new QMSingleButton(TowerMods, "Restore Tower Range", () => { RestoreTowerRange(); }, "Revert Any Edits if Any to Towers Range Settings!");
 
-            _ = new QMSingleButton(TowerMods, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!");
-            _ = new QMSingleButton(TowerMods, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!");
+
+            _ = new QMSingleButton(TowerMods, "+0.5f Tower Speed", () => { AddTowerSpeed(0.5f); }, "Add +0.5f Towers Speed!");
+            _ = new QMSingleButton(TowerMods, "+1f Tower Speed", () => { AddTowerSpeed(1f); }, "Add +1f Towers Speed!");
+            _ = new QMSingleButton(TowerMods, "-0.5f Tower Speed", () => { RemoveTowerSpeed(0.5f); }, "Remove 0.5f Towers Speed!");
+            _ = new QMSingleButton(TowerMods, "-1f Tower Speed", () => { RemoveTowerSpeed(1f); }, "Remove 1f Towers Speed!");
+
+            _ = new QMSingleButton(TowerMods, "Restore Tower Speed", () => { RestoreTowerSpeed(); }, "Revert Any Edits if Any to Towers Speed Settings!");
+
+            _ = new QMSingleButton(TowerMods, "9999 Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!");
+            _ = new QMSingleButton(TowerMods, "9999 Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!");
+
 
             var ToolMods = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Tool Mods", "Enable Extra Tools");
             RepairLifeWrenchToolsButton = new QMToggleButton(ToolMods, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!");
@@ -392,29 +406,93 @@
             }
         }
 
-        private static void SetTowersRange(float value)
+        internal static void SetTowersRange(float value)
         {
             foreach (var tower in GetCurrentEditors)
             {
                 if (tower != null)
                 {
-                    tower.Range = value;
+                    tower.BackupAndModifyRange(value);
+                }
+            }
+        }
+        internal static void AddTowerRange(float value)
+        {
+            foreach (var tower in GetCurrentEditors)
+            {
+                if (tower != null)
+                {
+                    tower.BackupAndModifyRange(tower.Range.Value + value);
+                }
+            }
+        }
+        internal static void RemoveTowerRange(float value)
+        {
+            foreach (var tower in GetCurrentEditors)
+            {
+                if (tower != null)
+                {
+                    tower.BackupAndModifyRange(tower.Range.Value - value);
+                }
+            }
+        }
+        internal static void RestoreTowerRange()
+        {
+            foreach (var tower in GetCurrentEditors)
+            {
+                if (tower != null)
+                {
+                    tower.RestoreRange();
                 }
             }
         }
 
-        private static void SetTowerSpeed(float value)
+        internal static void SetTowerSpeed(float value)
         {
             foreach (var tower in GetCurrentEditors)
             {
                 if (tower != null)
                 {
                     if (tower.name.Contains("RocketLauncher")) continue; // Ignore due to Lag reasons.
-
-                    tower.SpeedMultiplier = value;
+                    tower.BackupAndModifySpeedMultiplier(value);
                 }
             }
         }
+        internal static void AddTowerSpeed(float value)
+        {
+            foreach (var tower in GetCurrentEditors)
+            {
+                if (tower != null)
+                {
+                    if (tower.name.Contains("RocketLauncher")) continue; // Ignore due to Lag reasons.
+                    tower.BackupAndModifySpeedMultiplier(tower.SpeedMultiplier.Value + value);
+                }
+            }
+        }
+        internal static void RemoveTowerSpeed(float value)
+        {
+            foreach (var tower in GetCurrentEditors)
+            {
+                if (tower != null)
+                {
+                    if (tower.name.Contains("RocketLauncher")) continue; // Ignore due to Lag reasons.
+                    tower.BackupAndModifySpeedMultiplier(tower.SpeedMultiplier.Value - value);
+                }
+            }
+        }
+
+        internal static void RestoreTowerSpeed()
+        {
+            foreach (var tower in GetCurrentEditors)
+            {
+                if (tower != null)
+                {
+                    if (tower.name.Contains("RocketLauncher")) continue; // Ignore due to Lag reasons.
+                    tower.RestoreSpeedMultiplier();
+                }
+            }
+        }
+
 
         private static bool _RepairLifeWrenches;
 

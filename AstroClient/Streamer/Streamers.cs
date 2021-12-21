@@ -29,5 +29,7 @@
         public const string TehFuzziest = "usr_54b3614e-6f68-4da2-a983-1a941dc0bae8";
         public const string DarrenZeus = "usr_880a77b6-b167-40be-8e5f-d1fab64f662f";
         public const string PharoZar = "usr_fd0dee56-407e-487f-8ebb-abb5d87e1d44";
+        public const string WingManDraws = "usr_dc65e8a0-4fd2-419a-8766-fba5e417ae48";
+
     }
 }

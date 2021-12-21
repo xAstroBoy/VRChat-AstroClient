@@ -24,23 +24,23 @@
 
             var GunModifier = new QMNestedGridMenu(BOMBERioCheatsPage, "Gun Modifier", "Modify Projectiles");
 
-            Always_ShootBomb_0_Toggle = new QMToggleButton(GunModifier, 1, 0, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = true; }, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = false; }, "Always Shoot A Specified Projectile");
-            Always_ShootBomb_1_Toggle = new QMToggleButton(GunModifier, 1, 0.5f, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = true; }, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = false; }, "Always Shoot A Specified Projectile");
-            Always_ShootBomb_2_Toggle = new QMToggleButton(GunModifier, 1, 1, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = true; }, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = false; }, "Always Shoot A Specified Projectile");
-            Always_ShootBomb_3_Toggle = new QMToggleButton(GunModifier, 1, 1.5f, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = true; }, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = false; }, "Always Shoot A Specified Projectile");
-            Always_ShootBomb_4_Toggle = new QMToggleButton(GunModifier, 1, 2, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = true; }, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = false; }, "Always Shoot A Specified Projectile");
-            Always_ShootBomb_5_Toggle = new QMToggleButton(GunModifier, 1, 2.5f, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = true; }, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = false; }, "Always Shoot A Specified Projectile");
+            Always_ShootBomb_0_Toggle = new QMToggleButton(GunModifier, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = true; }, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = false; }, "Always Shoot A Specified Projectile");
+            Always_ShootBomb_1_Toggle = new QMToggleButton(GunModifier, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = true; }, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = false; }, "Always Shoot A Specified Projectile");
+            Always_ShootBomb_2_Toggle = new QMToggleButton(GunModifier, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = true; }, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = false; }, "Always Shoot A Specified Projectile");
+            Always_ShootBomb_3_Toggle = new QMToggleButton(GunModifier, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = true; }, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = false; }, "Always Shoot A Specified Projectile");
+            Always_ShootBomb_4_Toggle = new QMToggleButton(GunModifier, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = true; }, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = false; }, "Always Shoot A Specified Projectile");
+            Always_ShootBomb_5_Toggle = new QMToggleButton(GunModifier, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = true; }, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = false; }, "Always Shoot A Specified Projectile");
 
             var Harvester = new QMNestedGridMenu(BOMBERioCheatsPage, "Crystal Harvester", "Harvest Crystals To boost circle area");
 
-            _ = new QMSingleButton(Harvester, 2, 0f, "Harvest 10 Crystals", () => { HarvestQuads(10); }, "Harvest some Quads!", null, null, true);
-            _ = new QMSingleButton(Harvester, 2, 0.5f, "Harvest 20 Crystals", () => { HarvestQuads(20); }, "Harvest some Quads!", null, null, true);
-            _ = new QMSingleButton(Harvester, 2, 1, "Harvest 50 Crystals", () => { HarvestQuads(50); }, "Harvest some Quads!", null, null, true);
-            _ = new QMSingleButton(Harvester, 2, 1.5f, "Harvest 100 Crystals", () => { HarvestQuads(100); }, "Harvest some Quads!", null, null, true);
-            _ = new QMSingleButton(Harvester, 2, 2f, "Harvest 500 Crystals", () => { HarvestQuads(500); }, "Harvest some Quads!", null, null, true);
-            _ = new QMSingleButton(Harvester, 2, 2.5f, "Harvest 1000 Crystals", () => { HarvestQuads(1000); }, "Harvest some Quads!", null, null, true);
+            _ = new QMSingleButton(Harvester, "Harvest 10 Crystals", () => { HarvestQuads(10); }, "Harvest some Quads!");
+            _ = new QMSingleButton(Harvester, "Harvest 20 Crystals", () => { HarvestQuads(20); }, "Harvest some Quads!");
+            _ = new QMSingleButton(Harvester, "Harvest 50 Crystals", () => { HarvestQuads(50); }, "Harvest some Quads!");
+            _ = new QMSingleButton(Harvester, "Harvest 100 Crystals", () => { HarvestQuads(100); }, "Harvest some Quads!");
+            _ = new QMSingleButton(Harvester, "Harvest 500 Crystals", () => { HarvestQuads(500); }, "Harvest some Quads!");
+            _ = new QMSingleButton(Harvester, "Harvest 1000 Crystals", () => { HarvestQuads(1000); }, "Harvest some Quads!");
 
-            Bypass_Outside_Circle_speed_Toggle = new QMToggleButton(BOMBERioCheatsPage, 4, 0, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = false; }, "Always Shoot A Specified Projectile");
+            Bypass_Outside_Circle_speed_Toggle = new QMToggleButton(BOMBERioCheatsPage, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, () => { BypassOutsideCircleSpeed = false; }, "Remove Outside Circle Speed Reducer!");
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -381,7 +381,7 @@
 
         private static bool _BypassOutsideCircleSpeed;
 
-        private static bool BypassOutsideCircleSpeed
+        internal static bool BypassOutsideCircleSpeed
         {
             get
             {
@@ -391,10 +391,6 @@
             {
                 if (HasUnboxedDefaultSpeeds)
                 {
-                    if (value == _BypassOutsideCircleSpeed)
-                    {
-                        return;
-                    }
                     _BypassOutsideCircleSpeed = value;
                     if (Bypass_Outside_Circle_speed_Toggle != null)
                     {
@@ -421,7 +417,7 @@
 
         private static bool _Override_ShootBomb_0_Toggle;
 
-        private static bool Override_ShootBomb_0_Toggle
+        internal static bool Override_ShootBomb_0_Toggle
         {
             get
             {
@@ -454,7 +450,7 @@
 
         private static bool _Override_ShootBomb_1_Toggle;
 
-        private static bool Override_ShootBomb_1_Toggle
+        internal static bool Override_ShootBomb_1_Toggle
         {
             get
             {
@@ -487,7 +483,7 @@
 
         private static bool _Override_ShootBomb_2_Toggle;
 
-        private static bool Override_ShootBomb_2_Toggle
+        internal static bool Override_ShootBomb_2_Toggle
         {
             get
             {
@@ -520,7 +516,7 @@
 
         private static bool _Override_ShootBomb_3_Toggle;
 
-        private static bool Override_ShootBomb_3_Toggle
+        internal static bool Override_ShootBomb_3_Toggle
         {
             get
             {
@@ -553,7 +549,7 @@
 
         private static bool _Override_ShootBomb_4_Toggle;
 
-        private static bool Override_ShootBomb_4_Toggle
+        internal static bool Override_ShootBomb_4_Toggle
         {
             get
             {
@@ -586,7 +582,7 @@
 
         private static bool _Override_ShootBomb_5_Toggle;
 
-        private static bool Override_ShootBomb_5_Toggle
+        internal static bool Override_ShootBomb_5_Toggle
         {
             get
             {

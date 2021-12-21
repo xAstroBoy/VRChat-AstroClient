@@ -27,11 +27,12 @@
                         case Streamers.StarNovaKitty:
                             player.AddSingleTag(Color.Pink,  "A Sweet Kitty"); ;
                             break;
-
+                        case Streamers.minikatttttt:
+                            player.AddSingleTag(Color.DeepSkyBlue, "A Sensible Cutie!"); ;
+                            break;
                         case Streamers.Cambly:
                             player.AddSingleTag(Color.Turquoise,  "A Clumsy Cute Birb ");
                             break;
-
                         case Streamers.Lolathon:
                             player.AddSingleTag(Color.OrangeRed,  "Clown & Prankster");
                             break;
@@ -42,7 +43,7 @@
                             player.AddSingleTag(Color.Red,  "Official Psycho And cutie!");
                             break;
                         case Streamers.Thor_ChanVR:
-                            player.AddSingleTag(Color.Gold,  "Official VRChat goddess!");
+                            player.AddSingleTag(Color.Gold,  "Official VRChat God!");
                             break;
                         case Streamers.Pud_Pud:
                             player.AddSingleTag(Color.ForestGreen,  "Sensible Squeaky panda and Cute!");
@@ -53,7 +54,6 @@
                         case Streamers.Nifty:
                             player.AddSingleTag(Color.Gold,  "The Legendary Pan Bonker! (Give Her Hugs tho)");
                             break;
-
                         default:
                             break;
                     }
