@@ -15,6 +15,7 @@
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static Constants.CustomLists;
 
@@ -150,6 +151,20 @@
                 Tower_Minigun_1 = GameObjectFinder.Find("TowerMiniGun1Grabbable (1)");
                 Tower_Lance_1 = GameObjectFinder.Find("TowerLance1Grabbable (1)");
 
+
+                TowersObjects.AddGameObject(Tower_RocketLauncher);
+                TowersObjects.AddGameObject(Tower_Slower);
+                TowersObjects.AddGameObject(Tower_Cannon);
+                TowersObjects.AddGameObject(Tower_Radar);
+                TowersObjects.AddGameObject(Tower_Minigun);
+                TowersObjects.AddGameObject(Tower_Lance);
+                TowersObjects.AddGameObject(Tower_RocketLauncher_1);
+                TowersObjects.AddGameObject(Tower_Slower_1);
+                TowersObjects.AddGameObject(Tower_Cannon_1);
+                TowersObjects.AddGameObject(Tower_Radar_1);
+                TowersObjects.AddGameObject(Tower_Minigun_1);
+                TowersObjects.AddGameObject(Tower_Lance_1);
+
                 //foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
                 //{
                 //    if (item != null)
@@ -164,6 +179,33 @@
                 //        }
                 //    }
                 //}
+
+                if (TowersObjects.Count != 0) // Fix Some collider problems with towers!
+                {
+                    foreach (var tower in TowersObjects)
+                    {
+                        if (tower != null)
+                        {
+                            foreach (var Tower2 in TowersObjects)
+                            {
+                                if (tower == Tower2)
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    var collider1 = tower.GetComponent<Collider>();
+                                    var collider2 = Tower2.GetComponent<Collider>();
+                                    if (collider1 != null && collider2 != null)
+                                    {
+                                        Physics.IgnoreCollision(collider1, collider2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
 
                 FixTheTowers(false);
                 foreach (var apple in WorldApples)
@@ -200,6 +242,8 @@
             }
         }
 
+
+        private static List<GameObject> TowersObjects = new List<GameObject>();
         internal override void OnRoomLeft()
         {
             WaveEditor = null;
@@ -250,6 +294,7 @@
             AutoStarter_SetInactive = null;
             AutoStarter_SetActive = null;
             AutoStarterReader = null;
+            TowersObjects.Clear();
             //IgnoreTowersCollidersPlacement = false;
             //NearbyCollidersManager.Clear();
         }
