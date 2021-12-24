@@ -73,8 +73,8 @@
                     AutoStarter_SetActive = AutoStarter_ActiveEvent;
                 }
 
-                var RedWrench = GameObjectFinder.Find("UpgradeTool0");
-                var BlueWrench = GameObjectFinder.Find("UpgradeTool1");
+                RedWrench = GameObjectFinder.Find("UpgradeTool0");
+                BlueWrench = GameObjectFinder.Find("UpgradeTool1");
                 var Hammer = GameObjectFinder.Find("SellTool");
                 if (RedWrench != null)
                 {
@@ -180,33 +180,7 @@
                 //    }
                 //}
 
-                if (TowersObjects.Count != 0) // Fix Some collider problems with towers!
-                {
-                    foreach (var tower in TowersObjects)
-                    {
-                        if (tower != null)
-                        {
-                            foreach (var Tower2 in TowersObjects)
-                            {
-                                if (tower == Tower2)
-                                {
-                                    continue;
-                                }
-                                else
-                                {
-                                    var collider1 = tower.GetComponent<Collider>();
-                                    var collider2 = Tower2.GetComponent<Collider>();
-                                    if (collider1 != null && collider2 != null)
-                                    {
-                                        Physics.IgnoreCollision(collider1, collider2);
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-
+                FixTowerColliders();
                 FixTheTowers(false);
                 foreach (var apple in WorldApples)
                 {
@@ -242,6 +216,47 @@
             }
         }
 
+
+        internal static void FixTowerColliders()
+        {
+            if (TowersObjects.Count != 0) // Fix Some collider problems with towers!
+            {
+                foreach (var tower in TowersObjects)
+                {
+                    if (tower != null)
+                    {
+                        foreach (var Tower2 in TowersObjects)
+                        {
+                            if (tower == Tower2)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                var colliders1 = tower.GetComponentsInChildren<Collider>(true);
+                                var colliders2 = tower.GetComponentsInChildren<Collider>(true);
+                                foreach (var item in colliders1)
+                                {
+                                    if (item != null)
+                                    {
+                                        foreach (var item2 in colliders2)
+                                        {
+                                            if (item2 == item) continue;
+                                            if (item2 != null)
+                                            {
+                                                Physics.IgnoreCollision(item, item2, true);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
 
         private static List<GameObject> TowersObjects = new List<GameObject>();
         internal override void OnRoomLeft()
@@ -285,9 +300,18 @@
             Tower_Radar_1 = null;
             Tower_Minigun_1 = null;
             Tower_Lance_1 = null;
-
+            BlueWrench = null;
+            RedWrench = null;
+            FreezeRedWrench = false;
+            FreezeBlueWrench = false;
             BlockWrenchReturnButton = false;
-            FreezeTowers = false;
+            FreezeLanceTower = false;
+            FreezeMinigunTower = false;
+            FreezeRadarTower = false;
+            FreezeCannonTower = false;
+            FreezeSlowerTower = false;
+            FreezeRocketLauncherTower = false;
+            FreezeAllTowers = false;
             KeepAutoStarterActive = false;
             KeepAutoStarterInactive = false;
             AutoStarter_Place = null;
@@ -395,13 +419,33 @@
             AutomaticWaveBtn = new QMToggleButton(RandomFeatures, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!");
             AutomaticGodModebnt = new QMToggleButton(RandomFeatures, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!");
             new QMSingleButton(RandomFeatures, "Fix towers", () => { FixTheTowers(true); }, "Fix Towers Being unpickable bug ", Color.green);
+            new QMSingleButton(RandomFeatures, "Fix towers colliders", () => { FixTowerColliders(); }, "Fix Towers Being Weird bug ", Color.green);
 
             //IgnoreTowersCollidersPlacementToolBtn = new QMToggleButton(SuperTowerDefensecheatPage, "Bypass Tower Collider", () => { IgnoreTowersCollidersPlacement = true; }, () => { IgnoreTowersCollidersPlacement = false; }, "Allow Overlapping Towers!");
             var ProtectionsMenu = new QMNestedGridMenu(SuperTowerDefensecheatPage, "Protections", "Protections");
+
+
             FreezeHammerToolBtn = new QMToggleButton(ProtectionsMenu, "Freeze Hammer", () => { FreezeHammer = true; }, () => { FreezeHammer = false; }, "Add a Protection Shield to the hammer!");
-            FreezeTowersToolBtn = new QMToggleButton(ProtectionsMenu, "Freeze Towers", () => { FreezeTowers = true; }, () => { FreezeTowers = false; }, "Freeze Towers In place (Fight against trolls!)");
+
+            FreezeBlueWrenchToolBtn = new QMToggleButton(ProtectionsMenu, "Freeze Blue Wrench", () => { FreezeBlueWrench = true; }, () => { FreezeBlueWrench = false; }, "Add a Protection Shield to Blue Wrench!");
+            FreezeRedWrenchToolBtn = new QMToggleButton(ProtectionsMenu, "Freeze Red Wrench", () => { FreezeRedWrench = true; }, () => { FreezeRedWrench = false; }, "Add a Protection Shield to Red Wrench!");
+
+
             BlockHammerReturnToolBtn = new QMToggleButton(ProtectionsMenu, "Block Hammer Return", () => { BlockHammerReturnButton = true; }, () => { BlockHammerReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
             BlockWrenchReturnToolBtn = new QMToggleButton(ProtectionsMenu, "Block Wrenchs Returns", () => { BlockWrenchReturnButton = true; }, () => { BlockWrenchReturnButton = false; }, "Add a Protection Shield to the hammer Return Button using Two Apples!");
+
+            var FreezeTowerMenu = new QMNestedGridMenu(ProtectionsMenu, "Towers Freeze Options", "Freeze Towers Menu");
+
+            FreezeCannonTowerToolBtn  = new QMToggleButton(FreezeTowerMenu, "Freeze Cannon Tower", () => { FreezeCannonTower = true; }, () => { FreezeCannonTower = false; }, "Add a Protection Shield to the Cannon Tower!");
+             FreezeRadarTowerToolBtn  = new QMToggleButton(FreezeTowerMenu, "Freeze Radar Tower", () => { FreezeRadarTower = true; }, () => { FreezeRadarTower = false; }, "Add a Protection Shield to the Radar Tower!");
+             FreezeLanceTowerToolBtn = new QMToggleButton(FreezeTowerMenu, "Freeze Lance Tower", () => { FreezeLanceTower = true; }, () => { FreezeLanceTower = false; }, "Add a Protection Shield to the Lance Tower!");
+            FreezeSlowerTowerToolBtn = new QMToggleButton(FreezeTowerMenu, "Freeze Slower Tower", () => { FreezeSlowerTower = true; }, () => { FreezeSlowerTower = false; }, "Add a Protection Shield to the Slower Tower!");
+            FreezeRocketLauncherTowerToolBtn = new QMToggleButton(FreezeTowerMenu, "Freeze Rocket Launcher Tower", () => { FreezeRocketLauncherTower = true; }, () => { FreezeRocketLauncherTower = false; }, "Add a Protection Shield to the Rocket Launcher Tower!");
+           FreezeMinigunTowerToolBtn  = new QMToggleButton(FreezeTowerMenu, "Freeze Minigun Tower", () => { FreezeMinigunTower = true; }, () => { FreezeMinigunTower = false; }, "Add a Protection Shield to the Minigun Tower!");
+
+            FreezeAllTowersToolBtn = new QMToggleButton(FreezeTowerMenu, "Freeze All Towers", () => { FreezeAllTowers = true; }, () => { FreezeAllTowers = false; }, "Add a Protection Shield to All Towers!");
+
+
         }
 
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
@@ -627,57 +671,236 @@
                 }
             }
         }
+        private static bool _FreezeRocketLauncherTower;
 
-        private static bool _FreezeTowers;
-
-        internal static bool FreezeTowers
+        internal static bool FreezeRocketLauncherTower
         {
             get
             {
-                return _FreezeTowers;
+                return _FreezeRocketLauncherTower;
             }
             set
             {
-                if (FreezeTowersToolBtn != null)
+                if (FreezeRocketLauncherTowerToolBtn != null)
                 {
-                    FreezeTowersToolBtn.SetToggleState(value);
+                    FreezeRocketLauncherTowerToolBtn.SetToggleState(value);
                 }
-                _FreezeTowers = value;
+                _FreezeRocketLauncherTower = value;
 
                 if (value)
                 {
                     LockTowerInPlace(Tower_RocketLauncher);
-                    LockTowerInPlace(Tower_Slower);
-                    LockTowerInPlace(Tower_Cannon);
-                    LockTowerInPlace(Tower_Radar);
-                    LockTowerInPlace(Tower_Minigun);
-                    LockTowerInPlace(Tower_Lance);
-
                     LockTowerInPlace(Tower_RocketLauncher_1);
-                    LockTowerInPlace(Tower_Slower_1);
-                    LockTowerInPlace(Tower_Cannon_1);
-                    LockTowerInPlace(Tower_Radar_1);
-                    LockTowerInPlace(Tower_Minigun_1);
-                    LockTowerInPlace(Tower_Lance_1);
 
                 }
                 else
                 {
                     RemoveLockOnItem(Tower_RocketLauncher);
-                    RemoveLockOnItem(Tower_Slower);
-                    RemoveLockOnItem(Tower_Cannon);
-                    RemoveLockOnItem(Tower_Radar);
-                    RemoveLockOnItem(Tower_Minigun);
-                    RemoveLockOnItem(Tower_Lance);
-
                     RemoveLockOnItem(Tower_RocketLauncher_1);
-                    RemoveLockOnItem(Tower_Slower_1);
-                    RemoveLockOnItem(Tower_Cannon_1);
-                    RemoveLockOnItem(Tower_Radar_1);
-                    RemoveLockOnItem(Tower_Minigun_1);
-                    RemoveLockOnItem(Tower_Lance_1);
 
                 }
+
+                CheckForAllTowersFreezeStatus();
+            }
+        }
+        private static bool _FreezeSlowerTower;
+
+        internal static bool FreezeSlowerTower
+        {
+            get
+            {
+                return _FreezeSlowerTower;
+            }
+            set
+            {
+                if (FreezeSlowerTowerToolBtn != null)
+                {
+                    FreezeSlowerTowerToolBtn.SetToggleState(value);
+                }
+                _FreezeSlowerTower = value;
+
+                if (value)
+                {
+                    LockTowerInPlace(Tower_Slower);
+                    LockTowerInPlace(Tower_Slower_1);
+
+                }
+                else
+                {
+                    RemoveLockOnItem(Tower_Slower);
+                    RemoveLockOnItem(Tower_Slower_1);
+
+                }
+                CheckForAllTowersFreezeStatus();
+            }
+        }
+
+
+        private static bool _FreezeCannonTower;
+
+        internal static bool FreezeCannonTower
+        {
+            get
+            {
+                return _FreezeCannonTower;
+            }
+            set
+            {
+                if (FreezeCannonTowerToolBtn != null)
+                {
+                    FreezeCannonTowerToolBtn.SetToggleState(value);
+                }
+                _FreezeCannonTower = value;
+
+                if (value)
+                {
+                    LockTowerInPlace(Tower_Cannon);
+                    LockTowerInPlace(Tower_Cannon_1);
+
+                }
+                else
+                {
+                    RemoveLockOnItem(Tower_Cannon);
+                    RemoveLockOnItem(Tower_Cannon_1);
+                }
+                CheckForAllTowersFreezeStatus();
+            }
+        }
+
+
+        private static bool _FreezeRadarTower;
+
+        internal static bool FreezeRadarTower
+        {
+            get
+            {
+                return _FreezeRadarTower;
+            }
+            set
+            {
+                if (FreezeRadarTowerToolBtn != null)
+                {
+                    FreezeRadarTowerToolBtn.SetToggleState(value);
+                }
+                _FreezeRadarTower = value;
+
+                if (value)
+                {
+                    LockTowerInPlace(Tower_Radar);
+                    LockTowerInPlace(Tower_Radar_1);
+
+                }
+                else
+                {
+                    RemoveLockOnItem(Tower_Radar);
+                    RemoveLockOnItem(Tower_Radar_1);
+                }
+                CheckForAllTowersFreezeStatus();
+            }
+        }
+        private static bool _FreezeMinigunTower;
+
+        internal static bool FreezeMinigunTower
+        {
+            get
+            {
+                return _FreezeMinigunTower;
+            }
+            set
+            {
+                if (FreezeMinigunTowerToolBtn != null)
+                {
+                    FreezeMinigunTowerToolBtn.SetToggleState(value);
+                }
+                _FreezeMinigunTower = value;
+
+                if (value)
+                {
+                    LockTowerInPlace(Tower_Minigun);
+                    LockTowerInPlace(Tower_Minigun_1);
+
+                }
+                else
+                {
+                    RemoveLockOnItem(Tower_Minigun);
+                    RemoveLockOnItem(Tower_Minigun_1);
+                }
+                CheckForAllTowersFreezeStatus();
+            }
+        }
+
+        private static bool _FreezeLanceTower;
+
+        internal static bool FreezeLanceTower
+        {
+            get
+            {
+                return _FreezeLanceTower;
+            }
+            set
+            {
+                if (FreezeLanceTowerToolBtn != null)
+                {
+                    FreezeLanceTowerToolBtn.SetToggleState(value);
+                }
+                _FreezeLanceTower = value;
+
+                if (value)
+                {
+                    LockTowerInPlace(Tower_Lance);
+                    LockTowerInPlace(Tower_Lance_1);
+
+                }
+                else
+                {
+                    RemoveLockOnItem(Tower_Lance);
+                    RemoveLockOnItem(Tower_Lance_1);
+                }
+
+                CheckForAllTowersFreezeStatus();
+            }
+        }
+        private static bool _FreezeAllTowers;
+
+        internal static bool FreezeAllTowers
+        {
+            get
+            {
+                return _FreezeAllTowers;
+            }
+            set
+            {
+                if (FreezeAllTowersToolBtn != null)
+                {
+                    FreezeAllTowersToolBtn.SetToggleState(value);
+                }
+                _FreezeAllTowers = value;
+                FreezeLanceTower = value;
+                FreezeMinigunTower = value;
+                FreezeRadarTower = value;
+                FreezeCannonTower = value;
+                FreezeSlowerTower = value;
+                FreezeRocketLauncherTower = value;
+            }
+        }
+
+        private static void CheckForAllTowersFreezeStatus()
+        {
+            if (FreezeLanceTower && FreezeMinigunTower && FreezeRadarTower && FreezeCannonTower && FreezeSlowerTower && FreezeRocketLauncherTower)
+            {
+                if (FreezeAllTowersToolBtn != null)
+                {
+                    FreezeAllTowersToolBtn.SetToggleState(true);
+                }
+                _FreezeAllTowers = true;
+            }
+            else
+            {
+                if (FreezeAllTowersToolBtn != null)
+                {
+                    FreezeAllTowersToolBtn.SetToggleState(false);
+                }
+                _FreezeAllTowers = false;
             }
         }
 
@@ -748,6 +971,76 @@
                     else
                     {
                         HammerPickup.gameObject.Remove_ObjectFreezer();
+                    }
+                }
+            }
+        }
+
+        private static bool _FreezeRedWrench;
+
+        internal static bool FreezeRedWrench
+        {
+            get
+            {
+                return _FreezeRedWrench;
+            }
+            set
+            {
+                if (FreezeRedWrenchToolBtn != null)
+                {
+                    FreezeRedWrenchToolBtn.SetToggleState(value);
+                }
+                _FreezeRedWrench = value;
+
+                if (RedWrenchPickup != null)
+                {
+                    if (value)
+                    {
+                        var item = RedWrenchPickup.gameObject.GetOrAddComponent<ObjectFreezer>();
+                        if (item != null)
+                        {
+                            item.IsEnabled = true;
+                            ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                        }
+                    }
+                    else
+                    {
+                        RedWrenchPickup.gameObject.Remove_ObjectFreezer();
+                    }
+                }
+            }
+        }
+
+
+        private static bool _FreezeBlueWrench;
+        internal static bool FreezeBlueWrench
+        {
+            get
+            {
+                return _FreezeBlueWrench;
+            }
+            set
+            {
+                if (FreezeBlueWrenchToolBtn != null)
+                {
+                    FreezeBlueWrenchToolBtn.SetToggleState(value);
+                }
+                _FreezeBlueWrench = value;
+
+                if (BlueWrenchPickup != null)
+                {
+                    if (value)
+                    {
+                        var item = BlueWrenchPickup.gameObject.GetOrAddComponent<ObjectFreezer>();
+                        if (item != null)
+                        {
+                            item.IsEnabled = true;
+                            ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                        }
+                    }
+                    else
+                    {
+                        BlueWrenchPickup.gameObject.Remove_ObjectFreezer();
                     }
                 }
             }
@@ -990,6 +1283,8 @@
 
         internal static GameObject Apple_3 { get; set; }
         internal static GameObject Apple_4 { get; set; }
+        internal static GameObject BlueWrench { get; set; }
+        internal static GameObject RedWrench { get; set; }
 
         //internal static List<SuperTowerDefense_NearbyCollider> NearbyCollidersManager = new();
         private static GameObject ReturnHammerButtonTool { get; set; }
@@ -1013,10 +1308,19 @@
         private static QMToggleButton RepairLifeWrenchToolsButton { get; set; }
         private static QMToggleButton LoseLifeHammerToolBtn { get; set; }
         private static QMToggleButton FreezeHammerToolBtn { get; set; }
+        private static QMToggleButton FreezeBlueWrenchToolBtn { get; set; }
+        private static QMToggleButton FreezeRedWrenchToolBtn { get; set; }
+
         private static QMToggleButton BlockHammerReturnToolBtn { get; set; }
 
         private static QMToggleButton BlockWrenchReturnToolBtn { get; set; }
-        private static QMToggleButton FreezeTowersToolBtn { get; set; }
+        private static QMToggleButton FreezeRocketLauncherTowerToolBtn { get; set; }
+        private static QMToggleButton FreezeSlowerTowerToolBtn { get; set; }
+        private static QMToggleButton FreezeCannonTowerToolBtn { get; set; }
+        private static QMToggleButton FreezeRadarTowerToolBtn { get; set; }
+        private static QMToggleButton FreezeMinigunTowerToolBtn { get; set; }
+        private static QMToggleButton FreezeLanceTowerToolBtn { get; set; }
+        private static QMToggleButton FreezeAllTowersToolBtn { get; set; }
 
         private static QMToggleButton AutomaticWaveBtn { get; set; }
         private static QMToggleButton AutoStartKeepActiveBtn { get; set; }

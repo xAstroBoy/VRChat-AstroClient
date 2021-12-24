@@ -7,10 +7,13 @@
     using AstroMonos.Components.Spoofer;
     using Constants;
     using Photon.Realtime;
+    using Tools.Extensions;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC.Core;
     using WebSocketSharp;
     using xAstroBoy;
+    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
 
     #endregion Imports
@@ -95,6 +98,7 @@
         //    //Helper().Start();
         //}
 
+
         internal override void OnMasterClientSwitched(Player player)
         {
             if (!WorldUtils.IsInWorld) return;
@@ -106,12 +110,18 @@
                 {
                     PopupUtils.QueHudMessage(
                         $"'{PlayerSpooferUtils.SpooferInstance.Original_DisplayName}' is now the room master.");
-                    return;
                 }
             }
+            else
+            {
+                PopupUtils.QueHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
+            }
 
-            PopupUtils.QueHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
+            player.GetVRCPlayer().AddSingleTag(System.Drawing.Color.OrangeRed, "Instance Master");
+
         }
+
+
 
         internal override void OnRoomJoined()
         {
@@ -140,6 +150,8 @@
                 PopupUtils.QueHudMessage("Developer Mode!");
                 DoOnce = true;
             }
+
+            WorldUtils.InstanceMaster.GetPlayer().AddSingleTag(System.Drawing.Color.OrangeRed, "Instance Master");
         }
     }
 }

@@ -90,7 +90,7 @@
                     PreviewedAvatar.gameObject.RigidBody_Override_isKinematic(true);
                     PreviewedAvatar.gameObject.Pickup_Set_ForceComponent(true);
                     PreviewedAvatar.gameObject.Pickup_Set_Pickupable(true);
-                    var coll = PreviewedAvatar.GetOrAddComponent<SphereCollider>();
+                    var coll = PreviewedAvatar.GetOrAddComponent<CapsuleCollider>();
                     Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), coll);
 
                 }
