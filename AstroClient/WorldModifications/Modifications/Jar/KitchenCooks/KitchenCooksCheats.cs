@@ -108,7 +108,7 @@
             {
                 _OnlySelfHasPatreonPerk = value;
                 if (GetSelfPatreonKnifesBtn != null) GetSelfPatreonKnifesBtn.SetToggleState(value);
-                if (GoldenKnife0 != null) GoldenKnife1.OnlySelfHasPatreonPerk = value;
+                if (GoldenKnife0 != null) GoldenKnife0.OnlySelfHasPatreonPerk = value;
                 if (GoldenKnife1 != null) GoldenKnife1.OnlySelfHasPatreonPerk = value;
             }
         }
@@ -120,7 +120,7 @@
             {
                 _EveryoneHasPatreonPerk = value;
                 if (GetEveryonePatreonKnifesBtn != null) GetEveryonePatreonKnifesBtn.SetToggleState(value);
-                if (GoldenKnife0 != null) GoldenKnife1.EveryoneHasPatreonPerk = value;
+                if (GoldenKnife0 != null) GoldenKnife0.EveryoneHasPatreonPerk = value;
                 if (GoldenKnife1 != null) GoldenKnife1.EveryoneHasPatreonPerk = value;
             }
         }
