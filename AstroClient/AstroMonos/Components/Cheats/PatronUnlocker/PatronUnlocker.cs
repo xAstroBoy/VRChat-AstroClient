@@ -57,12 +57,14 @@
 
         private System.Collections.Generic.List<string> GetPatronSkinEventNames { [HideFromIl2Cpp] get; } = new()
         {
-            "PatronSkin"
+            "PatronSkin",
+            "Patron",
         };
 
         private System.Collections.Generic.List<string> GetNonPatronSkinEventNames { [HideFromIl2Cpp] get; } = new()
         {
-            "NonPatronSkin"
+            "NonPatronSkin",
+            "NonPatron",
         };
 
         internal VRC_AstroPickup CustomPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }

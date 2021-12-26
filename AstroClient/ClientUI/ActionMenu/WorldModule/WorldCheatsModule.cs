@@ -5,6 +5,7 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
     using Tools.Extensions;
     using WorldModifications.Modifications;
     using WorldModifications.Modifications.Jar.AmongUS;
+    using WorldModifications.Modifications.Jar.Murder4;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
 
@@ -199,6 +200,28 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                         });
 
                         CustomSubMenu.AddToggle("Bypass Outside Circle Speed", BOMBERio.BypassOutsideCircleSpeed, ToggleValue => { BOMBERio.BypassOutsideCircleSpeed = ToggleValue; });
+
+                    });
+                }
+
+
+                #endregion
+                #region  Kitchen Cooks
+
+                if (WorldUtils.WorldID == WorldIds.KitchenCooks)
+                {
+                    CustomSubMenu.AddSubMenu("Kitchen Cooks", () =>
+                    {
+
+                        CustomSubMenu.AddToggle("Private Golden Knifes", KitchenCooksCheats.OnlySelfHasPatreonPerk, ToggleValue => {
+                            KitchenCooksCheats.OnlySelfHasPatreonPerk = ToggleValue;
+                            KitchenCooksCheats.EveryoneHasPatreonPerk = false;
+                        });
+                        CustomSubMenu.AddToggle("Public Golden Knifes", KitchenCooksCheats.EveryoneHasPatreonPerk, ToggleValue => {
+                            KitchenCooksCheats.OnlySelfHasPatreonPerk = false;
+                            KitchenCooksCheats.EveryoneHasPatreonPerk = ToggleValue;
+                            ;
+                        });
 
                     });
                 }

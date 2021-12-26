@@ -9,6 +9,7 @@
     using System.Reflection;
     using AstroEventArgs;
     using CheetosConsole;
+    using ClientNetworking;
     using ClientResources.Loaders;
     using ClientUI.Menu.ItemTweakerV2.Selector;
     using ClientUI.Menu.Menus;
@@ -16,7 +17,6 @@
     using Config;
     using Constants;
     using MelonLoader;
-    using Networking;
     using Tools.Extensions;
     using UnhollowerBaseLib;
     using UnityEngine;

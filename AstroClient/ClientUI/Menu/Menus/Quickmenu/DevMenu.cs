@@ -2,10 +2,10 @@
 {
     #region Imports
 
+    using ClientNetworking;
     using ClientResources;
     using ClientResources.Loaders;
     using Constants;
-    using Networking;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 

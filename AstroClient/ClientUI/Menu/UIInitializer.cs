@@ -2,13 +2,13 @@
 {
     using AstroMonos;
     using Cheetos;
+    using ClientNetworking;
     using ClientResources.Loaders;
     using Constants;
     using Experiments;
     using ItemTweakerV2;
     using Menus;
     using Menus.Quickmenu;
-    using Networking;
     using RandomSubmenus;
     using Tabs;
     using Tools.Headlight;

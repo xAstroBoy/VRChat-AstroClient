@@ -5,10 +5,10 @@
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
     using CheetoLibrary.Utility;
+    using ClientNetworking;
     using ClientResources;
     using ClientResources.Loaders;
     using Constants;
-    using Networking;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 

@@ -9,11 +9,11 @@
     using AstroEventArgs;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
+    using ClientNetworking;
     using Constants;
     using ExitGames.Client.Photon;
     using Harmony;
     using MelonLoader;
-    using Networking;
     using Newtonsoft.Json;
     using Photon.Realtime;
     using Tools.Extensions;

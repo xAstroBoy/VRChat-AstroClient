@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Networking
+﻿namespace AstroClient.ClientNetworking
 {
     #region Imports
 

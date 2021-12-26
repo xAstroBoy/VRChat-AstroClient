@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Networking
+﻿namespace AstroClient.ClientNetworking
 {
     using System;
     using System.Net.Sockets;

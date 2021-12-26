@@ -115,12 +115,14 @@
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="ClientUI\ActionMenu\TrollDefenseModule.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoginScreenAssets.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoadingScreenAssets.cs" />
     <Compile Include="ClientUI\LoadingScreen\Prefabs\LoadScreenPrefabs.cs" />
     <Compile Include="ClientUI\LoadingScreen\BetterLoadingScreen.cs" />
     <Compile Include="ClientUI\LoadingScreen\Settings\BetterLoadingScreenSettings.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\TrollDefenseSubMenu.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_LoadingScreen.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
@@ -355,7 +357,7 @@
     <Compile Include="Tools\Extensions\ModerationExtensions.cs" />
     <Compile Include="ClientEvents\Moderation\ModerationNotifier.cs" />
     <Compile Include="ClientEvents\Moderation\PhotonModerationHandler.cs" />
-    <Compile Include="Networking\HandleClient.cs" />
+    <Compile Include="ClientNetworking\HandleClient.cs" />
     <Compile Include="Tools\Extensions\Texture_Ext.cs" />
     <Compile Include="Tools\Input\InputUtils.cs" />
     <Compile Include="Tools\Instance\History\InstanceManager.cs" />
@@ -407,6 +409,7 @@
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_Utils.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_GameLogic.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_RoleSwapper.cs" />
+    <Compile Include="WorldModifications\Modifications\Jar\KitchenCooks\KitchenCooksCheats.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\Murder4\UdonCheats\Murder4_RoleSwapper.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\Murder4\UdonCheats\Murder4_UnfilteredNodes.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\Murder4\UdonCheats\Murder4_FilteredNodes.cs" />
@@ -538,9 +541,9 @@
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\LightControlMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\MovementMenu.cs" />
-    <Compile Include="Networking\AstroNetworkClient.cs" />
-    <Compile Include="Networking\KeyManager.cs" />
-    <Compile Include="Networking\NetworkingManager.cs" />
+    <Compile Include="ClientNetworking\AstroNetworkClient.cs" />
+    <Compile Include="ClientNetworking\KeyManager.cs" />
+    <Compile Include="ClientNetworking\NetworkingManager.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnSceneLoadedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />

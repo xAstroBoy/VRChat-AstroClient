@@ -10,10 +10,10 @@
     using CheetoLibrary;
     using CheetoLibrary.Menu.MenuApi;
     using CheetoLibrary.Utility;
+    using ClientNetworking;
     using Constants;
     using Il2CppSystem.Collections.Generic;
     using MelonLoader;
-    using Networking;
     using Newtonsoft.Json;
     using Tools.World;
     using UnityEngine;

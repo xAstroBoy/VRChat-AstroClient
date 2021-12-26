@@ -31,5 +31,6 @@
         public const string Super_Tower_defense = "wrld_9a51b365-d6cc-42e6-901a-54ceb46b94ef";
         public const string Udon_Tycoon = "wrld_257ce0c9-35cc-45ce-a8fc-9d703067c58a";
         public const string Clicker_Game = "wrld_986c0468-f64e-494f-97e4-9e3fdc8dcecb";
+        public const string KitchenCooks = "wrld_df2776a3-8c84-45e3-bbf1-30ac8422911b";
     }
 }
