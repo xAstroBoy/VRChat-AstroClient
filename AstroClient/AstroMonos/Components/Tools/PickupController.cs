@@ -171,12 +171,12 @@
                 if (PickupBlocker.blockeduserids != null && PickupBlocker.blockeduserids.Count() != 0)
                 {
                     var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
-                    if (PickupBlocker.blockeduserids.Contains(id))
+                    if (PickupBlocker.IsPickupBlockedUser(id))
                     {
                         ModConsole.DebugLog($"Prevented {gameObject.name} from being used from Blacklisted user {CurrentHolderDisplayName}");
                         OnlineEditor.TakeObjectOwnership(gameObject);
-                        gameObject.transform.position = gameObject.transform.position;
-                        gameObject.transform.rotation = gameObject.transform.rotation;
+                        gameObject.SetPosition(gameObject.transform.position);
+                        gameObject.SetRotation(gameObject.transform.rotation);
                     }
                 }
             }
@@ -185,8 +185,9 @@
                 if (!CurrentHolder.isLocal)
                     if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
                         OnlineEditor.TakeObjectOwnership(gameObject);
-                        gameObject.transform.position = gameObject.transform.position;
-                        gameObject.transform.rotation = gameObject.transform.rotation;
+                gameObject.SetPosition(gameObject.transform.position);
+                gameObject.SetRotation(gameObject.transform.rotation);
+
 
             }
         }
@@ -256,7 +257,6 @@
 
                 // Sync Properties as well
 
-                currentlyHeldBy = SDKBase_Pickup.currentlyHeldBy;
                 UseDownEventName = SDKBase_Pickup.UseDownEventName;
                 currentLocalPlayer = SDKBase_Pickup.currentLocalPlayer;
                 ThrowVelocityBoostScale = SDKBase_Pickup.ThrowVelocityBoostScale;
@@ -304,7 +304,6 @@
 
                 // Sync Properties as well
 
-                currentlyHeldBy = SDK2_Pickup.currentlyHeldBy;
                 UseDownEventName = SDK2_Pickup.UseDownEventName;
                 currentLocalPlayer = SDK2_Pickup.currentLocalPlayer;
                 ThrowVelocityBoostScale = SDK2_Pickup.ThrowVelocityBoostScale;
@@ -352,7 +351,6 @@
 
                 // Sync Properties as well
 
-                currentlyHeldBy = SDK3_Pickup.currentlyHeldBy;
                 UseDownEventName = SDK3_Pickup.UseDownEventName;
                 currentLocalPlayer = SDK3_Pickup.currentLocalPlayer;
                 ThrowVelocityBoostScale = SDK3_Pickup.ThrowVelocityBoostScale;
@@ -380,7 +378,6 @@
         {
             if (_EditMode)
             {
-                currentlyHeldBy = Original_currentlyHeldBy;
                 UseDownEventName = Original_UseDownEventName;
                 currentLocalPlayer = Original_currentLocalPlayer;
                 ThrowVelocityBoostScale = Original_ThrowVelocityBoostScale;
@@ -409,7 +406,6 @@
 
         #region Internal Reflection (Do Not edit these values)
 
-        private Component _currentlyHeldBy;
         private string _UseDownEventName;
         private VRCPlayerApi _currentLocalPlayer;
         private float _ThrowVelocityBoostScale;
@@ -461,20 +457,24 @@
 
         #region Reflected Values
 
-        internal Component currentlyHeldBy
+        internal VRCHandGrasper currentlyHeldBy
         {
-            [HideFromIl2Cpp] get => _currentlyHeldBy;
+            [HideFromIl2Cpp]
+            get
+            {
+                if (SDKBase_Pickup != null) return SDKBase_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
+                else if (SDK2_Pickup != null) return SDK2_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
+                else if (SDK3_Pickup != null) return SDK3_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
+                else return null;
+            }
             [HideFromIl2Cpp]
             set
             {
-                _currentlyHeldBy = value;
-                if (EditMode)
-                {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.currentlyHeldBy = value;
-                    if (SDK2_Pickup != null) SDK2_Pickup.currentlyHeldBy = value;
-                    if (SDK3_Pickup != null) SDK3_Pickup.currentlyHeldBy = value;
-                    Run_OnOnPickupPropertyChanged();
-                }
+                if (SDKBase_Pickup != null) SDKBase_Pickup.currentlyHeldBy = value;
+                else if (SDK2_Pickup != null) SDK2_Pickup.currentlyHeldBy = value;
+                else if (SDK3_Pickup != null) SDK3_Pickup.currentlyHeldBy = value;
+                Run_OnOnPickupPropertyChanged();
+
             }
         }
 

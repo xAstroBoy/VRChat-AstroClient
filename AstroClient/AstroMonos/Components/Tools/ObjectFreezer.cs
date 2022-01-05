@@ -263,13 +263,13 @@
 
                 if (CurrentRigidbody.position != FreezePos)
                 {
-                    CurrentRigidbody.position = FreezePos;
+                    gameObject.SetPosition(FreezePos);
                    // RigidBodyController.MovePosition(FreezePos);
                 }
 
                 if (CurrentRigidbody.rotation != FreezeRot)
                 {
-                    CurrentRigidbody.rotation = FreezeRot;
+                    gameObject.SetRotation(FreezeRot);
                     //RigidBodyController.MoveRotation(FreezeRot);
                 }
             }

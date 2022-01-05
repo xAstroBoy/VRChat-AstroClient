@@ -793,7 +793,7 @@
             if (VIPButton == null) VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
             if (VIPButton != null)
             {
-                VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
+                VIPButton.gameObject.SetPosition(new Vector3(60.7236f, 63.1298f, -1.7349f));
             }
             else
             {

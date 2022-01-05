@@ -8,6 +8,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using AstroMonos.Components.Custom.Random;
     using Tools.Extensions;
     using Tools.Extensions.Components_exts;
     using Tools.UdonSearcher;
@@ -293,7 +294,8 @@
             Tower_Radar = null;
             Tower_Minigun = null;
             Tower_Lance = null;
-
+            CrazyHammer = false;
+            Hammer_AntiTheft = false;
             Tower_RocketLauncher_1 = null;
             Tower_Slower_1 = null;
             Tower_Cannon_1 = null;
@@ -940,6 +942,55 @@
         //        }
         //    }
         //}
+        private static bool _CrazyHammer = false;
+
+        internal static bool CrazyHammer
+        {
+            get
+            {
+                return _CrazyHammer;
+            }
+            set
+            {
+                _CrazyHammer = value;
+                if (HammerPickup != null)
+                {
+                    if (value)
+                    {
+                        var beh = HammerPickup.GetOrAddComponent<CrazyBehaviour>();
+                        if (beh != null)
+                        {
+                            beh.IsEnabled = true;
+                            beh.UseGravity = true;
+                        }
+                        else
+                        {
+                            HammerPickup.RemoveComponent<CrazyBehaviour>();
+                        }
+                    }
+                }
+            }
+        }
+
+        internal static bool Hammer_AntiTheft
+        {
+            get
+            {
+                if (HammerPickup != null)
+                {
+                    return HammerPickup.GetOrAddComponent<PickupController>().AntiTheft;
+                }
+                return false;
+            }
+            set
+            {
+                var beh = HammerPickup.GetOrAddComponent<PickupController>();
+                if (beh != null)
+                {
+                    beh.AntiTheft = value;
+                }
+            }
+        }
 
         private static bool _FreezeHammer;
 

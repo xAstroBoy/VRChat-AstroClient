@@ -108,7 +108,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_AutoStarter.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
-    <Compile Include="AstroMonos\Components\Tools\FreezeLocation\ObjectFreezer.cs" />
+    <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnEnterWorldEventArgs.cs" />
@@ -308,7 +308,7 @@
     <Compile Include="AstroMonos\Components\Spoofer\PlayerSpooferUtils.cs" />
     <Compile Include="AstroMonos\Components\Spoofer\PlayerSpoofer.cs" />
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
-    <Compile Include="AstroMonos\Components\Tools\KeycodeRevealer\KeypadRevealer.cs" />
+    <Compile Include="AstroMonos\Components\Tools\KeypadRevealer.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Watcher.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Spinner.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\UiListener.cs" />
