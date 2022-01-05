@@ -13,6 +13,7 @@
     using Tools.Extensions.Components_exts;
     using Tools.UdonSearcher;
     using UnityEngine;
+    using UnityEngine.UI;
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
@@ -960,8 +961,11 @@
                         var beh = HammerPickup.GetOrAddComponent<CrazyBehaviour>();
                         if (beh != null)
                         {
-                            beh.IsEnabled = true;
-                            beh.UseGravity = true;
+                            MiscUtils.DelayFunction(0.3f, () =>
+                            {
+                                beh.IsEnabled = true;
+                                beh.UseGravity = true;
+                            });
                         }
                         else
                         {
