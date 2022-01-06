@@ -77,7 +77,7 @@
 
                 RedWrench = GameObjectFinder.Find("UpgradeTool0");
                 BlueWrench = GameObjectFinder.Find("UpgradeTool1");
-                var Hammer = GameObjectFinder.Find("SellTool");
+                Hammer = GameObjectFinder.Find("SellTool");
                 if (RedWrench != null)
                 {
                     RedWrenchPickup = RedWrench.GetOrAddComponent<VRC_AstroPickup>();
@@ -286,6 +286,7 @@
             Apple_3 = null;
             Apple_4 = null;
 
+            Hammer = null;
             ReturnBlueWrenchButton = null;
             ReturnRedWrenchButton = null;
 
@@ -296,6 +297,7 @@
             Tower_Minigun = null;
             Tower_Lance = null;
             CrazyHammer = false;
+            HammerCrazyBehaviour = null;
             Hammer_AntiTheft = false;
             Tower_RocketLauncher_1 = null;
             Tower_Slower_1 = null;
@@ -944,7 +946,7 @@
         //    }
         //}
         private static bool _CrazyHammer = false;
-
+        private static CrazyBehaviour HammerCrazyBehaviour = null;
         internal static bool CrazyHammer
         {
             get
@@ -954,23 +956,24 @@
             set
             {
                 _CrazyHammer = value;
-                if (HammerPickup != null)
+                if (Hammer != null)
                 {
                     if (value)
                     {
-                        var beh = HammerPickup.GetOrAddComponent<CrazyBehaviour>();
-                        if (beh != null)
+                        Hammer.TakeOwnership();
+                        if (HammerCrazyBehaviour == null)
                         {
-                            MiscUtils.DelayFunction(0.3f, () =>
-                            {
-                                beh.IsEnabled = true;
-                                beh.UseGravity = true;
-                            });
+                            HammerCrazyBehaviour = Hammer.GetOrAddComponent<CrazyBehaviour>();
                         }
-                        else
+                        if (HammerCrazyBehaviour != null)
                         {
-                            HammerPickup.RemoveComponent<CrazyBehaviour>();
+                            HammerCrazyBehaviour.IsEnabled = true;
+                            HammerCrazyBehaviour.UseGravity = true;
                         }
+                    }
+                    else
+                    {
+                        HammerCrazyBehaviour.DestroyMeLocal();
                     }
                 }
             }
@@ -1339,6 +1342,8 @@
         internal static GameObject Apple_3 { get; set; }
         internal static GameObject Apple_4 { get; set; }
         internal static GameObject BlueWrench { get; set; }
+        
+        internal static GameObject Hammer { get; set; }
         internal static GameObject RedWrench { get; set; }
 
         //internal static List<SuperTowerDefense_NearbyCollider> NearbyCollidersManager = new();

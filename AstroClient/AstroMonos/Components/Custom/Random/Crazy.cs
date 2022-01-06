@@ -17,7 +17,7 @@
     public class CrazyBehaviour : AstroMonoBehaviour
     {
         private bool _HasRequiredSettings;
-        private bool _IsEnabled = true;
+        private bool _IsEnabled = false;
         public List<AstroMonoBehaviour> AntiGcList;
 
         private bool isPaused;
@@ -140,18 +140,22 @@
             set
             {
                 _IsEnabled = value;
-                if (VRC_AstroPickup != null)
-                {
-                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
-
-                    if (value)
-                        VRC_AstroPickup.UseText = "Toggle Off Crazy Object";
-                    else
-                        VRC_AstroPickup.UseText = "Toggle On Crazy Object";
-                }
+                SetEnabledText(value);
             }
         }
 
+        private void SetEnabledText(bool value)
+        {
+            if (VRC_AstroPickup != null)
+            {
+                if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
+
+                if (value)
+                    VRC_AstroPickup.UseText = "Toggle Off Crazy Object";
+                else
+                    VRC_AstroPickup.UseText = "Toggle On Crazy Object";
+            }
+        }
         private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
@@ -213,8 +217,7 @@
                 VRC_AstroPickup.OnPickupUseDown += () => { IsEnabled = !IsEnabled; };
                 VRC_AstroPickup.OnDrop += () => { isPaused = false; };
             }
-
-            IsEnabled = false;
+            SetEnabledText(IsEnabled);
         }
 
         private void Update()
