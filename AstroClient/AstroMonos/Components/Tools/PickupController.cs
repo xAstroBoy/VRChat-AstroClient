@@ -45,7 +45,6 @@
             PickupProtection();
         }
 
-
         internal override void OnRoomLeft()
         {
             Destroy(this);
@@ -91,7 +90,6 @@
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
                             {
-                                DisallowTheft = true;
                                 if (SDKBase_Pickup != null)
                                 {
                                     PlayerHands.SetPickupInRightHand(SDKBase_Pickup);
@@ -130,10 +128,9 @@
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == null)
                             {
-                                DisallowTheft = true;
                                 if (SDKBase_Pickup != null)
                                 {
-                                    PlayerHands.SetPickupLeftHand(SDKBase_Pickup);;
+                                    PlayerHands.SetPickupLeftHand(SDKBase_Pickup);
 
                                     return;
                                 }
@@ -148,9 +145,9 @@
                                     PlayerHands.SetPickupLeftHand(SDK3_Pickup);
                                     return;
                                 }
-
                             }
-                        //gameObject.TeleportToMeWithRot(HumanBodyBones.LeftHand, false);
+                        //gameObject.TeleportToMeWithRot(HumanBodyBones.RightHand, false);
+
                     }
                     catch
                     {
@@ -188,7 +185,6 @@
                 gameObject.SetPosition(gameObject.transform.position);
                 gameObject.SetRotation(gameObject.transform.rotation);
 
-
             }
         }
 
@@ -215,7 +211,8 @@
 
         internal bool AllowOnlySelfToGrab
         {
-            [HideFromIl2Cpp] get => _PreventOthersFromGrabbing;
+            [HideFromIl2Cpp]
+            get => _PreventOthersFromGrabbing;
             [HideFromIl2Cpp]
             set
             {
@@ -480,7 +477,8 @@
 
         internal string UseDownEventName
         {
-            [HideFromIl2Cpp] get => _UseDownEventName;
+            [HideFromIl2Cpp]
+            get => _UseDownEventName;
             [HideFromIl2Cpp]
             set
             {
@@ -497,7 +495,8 @@
 
         internal VRCPlayerApi currentLocalPlayer
         {
-            [HideFromIl2Cpp] get => _currentLocalPlayer;
+            [HideFromIl2Cpp]
+            get => _currentLocalPlayer;
             [HideFromIl2Cpp]
             set
             {
@@ -514,7 +513,8 @@
 
         internal float ThrowVelocityBoostScale
         {
-            [HideFromIl2Cpp] get => _ThrowVelocityBoostScale;
+            [HideFromIl2Cpp]
+            get => _ThrowVelocityBoostScale;
             [HideFromIl2Cpp]
             set
             {
@@ -531,7 +531,8 @@
 
         internal float ThrowVelocityBoostMinSpeed
         {
-            [HideFromIl2Cpp] get => _ThrowVelocityBoostMinSpeed;
+            [HideFromIl2Cpp]
+            get => _ThrowVelocityBoostMinSpeed;
             [HideFromIl2Cpp]
             set
             {
@@ -548,7 +549,8 @@
 
         internal string DropEventName
         {
-            [HideFromIl2Cpp] get => _DropEventName;
+            [HideFromIl2Cpp]
+            get => _DropEventName;
             [HideFromIl2Cpp]
             set
             {
@@ -565,7 +567,8 @@
 
         internal string PickupEventName
         {
-            [HideFromIl2Cpp] get => _PickupEventName;
+            [HideFromIl2Cpp]
+            get => _PickupEventName;
             [HideFromIl2Cpp]
             set
             {
@@ -582,7 +585,8 @@
 
         internal bool pickupable
         {
-            [HideFromIl2Cpp] get => _pickupable;
+            [HideFromIl2Cpp]
+            get => _pickupable;
             [HideFromIl2Cpp]
             set
             {
@@ -599,7 +603,8 @@
 
         internal string UseUpEventName
         {
-            [HideFromIl2Cpp] get => _UseUpEventName;
+            [HideFromIl2Cpp]
+            get => _UseUpEventName;
             [HideFromIl2Cpp]
             set
             {
@@ -616,7 +621,8 @@
 
         internal VRC_EventHandler.VrcBroadcastType useEventBroadcastType
         {
-            [HideFromIl2Cpp] get => _useEventBroadcastType;
+            [HideFromIl2Cpp]
+            get => _useEventBroadcastType;
             [HideFromIl2Cpp]
             set
             {
@@ -633,7 +639,8 @@
 
         internal VRC_Pickup.PickupOrientation orientation
         {
-            [HideFromIl2Cpp] get => _orientation;
+            [HideFromIl2Cpp]
+            get => _orientation;
             [HideFromIl2Cpp]
             set
             {
@@ -650,7 +657,8 @@
 
         internal string InteractionText
         {
-            [HideFromIl2Cpp] get => _InteractionText;
+            [HideFromIl2Cpp]
+            get => _InteractionText;
             [HideFromIl2Cpp]
             set
             {
@@ -664,7 +672,8 @@
 
         internal VRC_Pickup.AutoHoldMode AutoHold
         {
-            [HideFromIl2Cpp] get => _AutoHold;
+            [HideFromIl2Cpp]
+            get => _AutoHold;
             [HideFromIl2Cpp]
             set
             {
@@ -678,7 +687,8 @@
 
         internal float proximity
         {
-            [HideFromIl2Cpp] get => _proximity;
+            [HideFromIl2Cpp]
+            get => _proximity;
             [HideFromIl2Cpp]
             set
             {
@@ -695,7 +705,8 @@
 
         internal bool allowManipulationWhenEquipped
         {
-            [HideFromIl2Cpp] get => _allowManipulationWhenEquipped;
+            [HideFromIl2Cpp]
+            get => _allowManipulationWhenEquipped;
             [HideFromIl2Cpp]
             set
             {
@@ -712,7 +723,8 @@
 
         internal Transform ExactGrip
         {
-            [HideFromIl2Cpp] get => _ExactGrip;
+            [HideFromIl2Cpp]
+            get => _ExactGrip;
             [HideFromIl2Cpp]
             set
             {
@@ -729,7 +741,8 @@
 
         internal Transform ExactGun
         {
-            [HideFromIl2Cpp] get => _ExactGun;
+            [HideFromIl2Cpp]
+            get => _ExactGun;
             [HideFromIl2Cpp]
             set
             {
@@ -746,7 +759,8 @@
 
         internal bool DisallowTheft
         {
-            [HideFromIl2Cpp] get => _DisallowTheft;
+            [HideFromIl2Cpp]
+            get => _DisallowTheft;
             [HideFromIl2Cpp]
             set
             {
@@ -763,7 +777,8 @@
 
         internal ForceMode MomentumTransferMethod
         {
-            [HideFromIl2Cpp] get => _MomentumTransferMethod;
+            [HideFromIl2Cpp]
+            get => _MomentumTransferMethod;
             [HideFromIl2Cpp]
             set
             {
@@ -780,7 +795,8 @@
 
         internal string UseText
         {
-            [HideFromIl2Cpp] get => _UseText;
+            [HideFromIl2Cpp]
+            get => _UseText;
             [HideFromIl2Cpp]
             set
             {
@@ -794,7 +810,8 @@
 
         internal VRC_EventHandler.VrcBroadcastType pickupDropEventBroadcastType
         {
-            [HideFromIl2Cpp] get => _pickupDropEventBroadcastType;
+            [HideFromIl2Cpp]
+            get => _pickupDropEventBroadcastType;
             [HideFromIl2Cpp]
             set
             {
@@ -1124,7 +1141,8 @@
 
         internal bool ForceComponent
         {
-            [HideFromIl2Cpp] get => _ForceComponent;
+            [HideFromIl2Cpp]
+            get => _ForceComponent;
             [HideFromIl2Cpp]
             set
             {
@@ -1151,7 +1169,8 @@
                 if (_SDKBase_Pickup == null) return _SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
                 return _SDKBase_Pickup;
             }
-            [HideFromIl2Cpp] private set => _SDKBase_Pickup = value;
+            [HideFromIl2Cpp]
+            private set => _SDKBase_Pickup = value;
         }
 
         private VRCSDK2.VRC_Pickup _SDK2_Pickup;
@@ -1164,7 +1183,8 @@
                 if (_SDK2_Pickup == null) return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
                 return _SDK2_Pickup;
             }
-            [HideFromIl2Cpp] private set => _SDK2_Pickup = value;
+            [HideFromIl2Cpp]
+            private set => _SDK2_Pickup = value;
         }
 
         private VRCPickup _SDK3_Pickup;
@@ -1177,7 +1197,8 @@
                 if (_SDK3_Pickup == null) return _SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
                 return _SDK3_Pickup;
             }
-            [HideFromIl2Cpp] private set => _SDK3_Pickup = value;
+            [HideFromIl2Cpp]
+            private set => _SDK3_Pickup = value;
         }
 
         internal RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
@@ -1186,7 +1207,8 @@
 
         internal bool EditMode
         {
-            [HideFromIl2Cpp] get => _EditMode;
+            [HideFromIl2Cpp]
+            get => _EditMode;
             [HideFromIl2Cpp]
             set
             {

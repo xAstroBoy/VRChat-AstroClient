@@ -62,6 +62,7 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                             CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
                             CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
                             CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
+                            CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
                             //CustomSubMenu.AddToggle("Bypass Tower Collider", SuperTowerDefense.IgnoreTowersCollidersPlacement, ToggleValue => { SuperTowerDefense.IgnoreTowersCollidersPlacement = ToggleValue; });
 
                         }, null, false, null);
@@ -88,8 +89,6 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                                 CustomSubMenu.AddButton("Reset Speed", () => { SuperTowerDefense.RestoreTowerSpeed(); });
                             }, null, false, null);
 
-
-
                         }, null, false, null);
                         CustomSubMenu.AddSubMenu("Auto Starter Control", () =>
                         {
@@ -102,12 +101,15 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                         CustomSubMenu.AddSubMenu("Bank Mods", () =>
                         {
                             CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Set 0 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = 0; } });
-                            CustomSubMenu.AddButton("Add 10000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = SuperTowerDefense.BankEditor.CurrentBankBalance.Value + 10000; } });
-                            CustomSubMenu.AddButton("Add 100000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = SuperTowerDefense.BankEditor.CurrentBankBalance.Value + 100000; } });
-                            CustomSubMenu.AddButton("Add 1000000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = SuperTowerDefense.BankEditor.CurrentBankBalance.Value + 1000000; } });
-                            CustomSubMenu.AddButton("Add 10000000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = SuperTowerDefense.BankEditor.CurrentBankBalance.Value + 10000000; } });
-                            CustomSubMenu.AddButton("Set 999999999 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.CurrentBankBalance.HasValue) { SuperTowerDefense.BankEditor.CurrentBankBalance = 999999999; } });
+                            CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
+                            CustomSubMenu.AddToggle("Anti-negative Balance", SuperTowerDefense.FixBalanceNegative.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FixBalanceNegative = ToggleValue; });
+
+                            CustomSubMenu.AddButton("Set 0 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = 0; } });
+                            CustomSubMenu.AddButton("Add 10000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 10000; } });
+                            CustomSubMenu.AddButton("Add 100000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 100000; } });
+                            CustomSubMenu.AddButton("Add 1000000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 1000000; } });
+                            CustomSubMenu.AddButton("Add 10000000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 10000000; } });
+                            CustomSubMenu.AddButton("Set 999999999 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = 999999999; } });
                         });
                         CustomSubMenu.AddSubMenu("Health Mods", () =>
                         {
@@ -173,7 +175,6 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                     });
                 }
 
-
                 #endregion
 
                 #region  BOMBERio
@@ -207,7 +208,6 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                     });
                 }
 
-
                 #endregion
                 #region  Kitchen Cooks
 
@@ -216,11 +216,13 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                     CustomSubMenu.AddSubMenu("Kitchen Cooks", () =>
                     {
 
-                        CustomSubMenu.AddToggle("Private Golden Knifes", KitchenCooksCheats.OnlySelfHasPatreonPerk, ToggleValue => {
+                        CustomSubMenu.AddToggle("Private Golden Knifes", KitchenCooksCheats.OnlySelfHasPatreonPerk, ToggleValue =>
+                        {
                             KitchenCooksCheats.OnlySelfHasPatreonPerk = ToggleValue;
                             KitchenCooksCheats.EveryoneHasPatreonPerk = false;
                         });
-                        CustomSubMenu.AddToggle("Public Golden Knifes", KitchenCooksCheats.EveryoneHasPatreonPerk, ToggleValue => {
+                        CustomSubMenu.AddToggle("Public Golden Knifes", KitchenCooksCheats.EveryoneHasPatreonPerk, ToggleValue =>
+                        {
                             KitchenCooksCheats.OnlySelfHasPatreonPerk = false;
                             KitchenCooksCheats.EveryoneHasPatreonPerk = ToggleValue;
                             ;
@@ -229,9 +231,7 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                     });
                 }
 
-
                 #endregion
-
 
             }, ClientResources.Loaders.Icons.thief);
 

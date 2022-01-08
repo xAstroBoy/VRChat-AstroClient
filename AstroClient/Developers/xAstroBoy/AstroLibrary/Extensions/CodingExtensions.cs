@@ -35,6 +35,15 @@
             return string.Join("", str.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries));
         }
 
+        internal static bool IsPositive(this int number)
+        {
+            return number > 0;
+        }
+
+        internal static bool IsNegative(this int number)
+        {
+            return number < 0;
+        }
 
     }
 }

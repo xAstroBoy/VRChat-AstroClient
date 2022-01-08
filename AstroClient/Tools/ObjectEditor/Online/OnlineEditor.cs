@@ -10,7 +10,7 @@
     {
         internal static void TakeObjectOwnership(GameObject obj)
         {
-            Networking.SetOwner(VRC.Player.prop_Player_0.field_Private_VRCPlayerApi_0, obj);
+            Networking.SetOwner(GameInstances.LocalPlayer, obj);
         }
 
         internal static void RemoveOwnerShip(GameObject obj)
@@ -20,7 +20,7 @@
 
         internal static bool IsLocalPlayerOwner(GameObject obj)
         {
-            return Networking.IsOwner(VRC.Player.prop_Player_0.field_Private_VRCPlayerApi_0, obj);
+            return Networking.IsOwner(GameInstances.LocalPlayer, obj);
         }
 
         internal static void ReturnObjectOwner(GameObject obj)

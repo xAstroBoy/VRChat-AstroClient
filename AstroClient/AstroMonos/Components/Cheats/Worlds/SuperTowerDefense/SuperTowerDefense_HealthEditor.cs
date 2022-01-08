@@ -43,8 +43,6 @@
             }
         }
 
-
-
         internal int? TimesBoughtLives
         {
             [HideFromIl2Cpp]
@@ -61,7 +59,6 @@
                         UdonHeapEditor.PatchHeap(HealthController, BoughtLives, Math.Abs(value.Value));
             }
         }
-
 
         private string Lives { [HideFromIl2Cpp] get; } = "Lives";
         private string BoughtLives { [HideFromIl2Cpp] get; } = "TimesBoughtLives";
@@ -100,17 +97,25 @@
                 if (CurrentHealth.HasValue)
                     switch (CurrentHealth.Value)
                     {
+                        case 4:
                         case 3:
-                            ResetHealth.InvokeBehaviour();
-                            break;
                         case 2:
-                            ResetHealth.InvokeBehaviour();
-                            break;
                         case 1:
-                            ResetHealth.InvokeBehaviour();
-                            break;
                         case 0:
-                            ResetHealth.InvokeBehaviour();
+                            if (GameInstances.LocalPlayer.IsInstanceMaster())
+                            {
+                                CurrentHealth++;
+                            }
+                            else
+                            {
+                                if (ResetHealth != null)
+                                {
+                                    ResetHealth.InvokeBehaviour();
+                                }
+                            }
+
+                            break;
+                        default:
                             break;
                     }
         }

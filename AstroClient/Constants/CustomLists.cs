@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Tools.Extensions;
     using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
@@ -31,6 +32,7 @@
             {
                 if (UdonBehaviour != null)
                 {
+                    UdonBehaviour.gameObject.TakeOwnership();
                     if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         if (EventKey.StartsWith("_"))
