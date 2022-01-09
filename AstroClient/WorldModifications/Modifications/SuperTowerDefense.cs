@@ -9,6 +9,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Policy;
     using AstroMonos.Components.Custom.Random;
     using Tools.Extensions;
     using Tools.Extensions.Components_exts;
@@ -167,21 +168,6 @@
                 TowersObjects.AddGameObject(Tower_Minigun_1);
                 TowersObjects.AddGameObject(Tower_Lance_1);
 
-                //foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
-                //{
-                //    if (item != null)
-                //    {
-                //        if (item.name.isMatch("NearbyCollider"))
-                //        {
-                //            var colliderman = item.GetOrAddComponent<SuperTowerDefense_NearbyCollider>();
-                //            if (colliderman != null)
-                //            {
-                //                NearbyCollidersManager.Add(colliderman);
-                //            }
-                //        }
-                //    }
-                //}
-
                 FixTowerColliders();
                 FixTheTowers(false);
             }
@@ -197,44 +183,37 @@
 
         internal static void FixTowerColliders()
         {
-            if (TowersObjects.Count != 0) // Fix Some collider problems with towers!
+            try
             {
-                foreach (var tower in TowersObjects)
+                if (TowersObjects.Count != 0) // Fix Some collider problems with towers!
                 {
-                    if (tower != null)
+                    foreach (var Tower1 in TowersObjects)
                     {
-                        foreach (var Tower2 in TowersObjects)
+                        if (Tower1 != null)
                         {
-                            if (tower == Tower2)
+                            foreach (var Tower2 in TowersObjects)
                             {
-                                continue;
-                            }
-                            else
-                            {
-                                var colliders1 = tower.GetComponentsInChildren<Collider>(true);
-                                var Parent_colliders1 = tower.GetComponentsInParent<Collider>(true);
+                                if (Tower1.Equals(Tower2)) continue;
 
-                                var colliders2 = Tower2.GetComponentsInChildren<Collider>(true);
-                                var Parent_colliders2 = Tower2.GetComponentsInParent<Collider>(true);
+                                var Col1 = Tower1.GetComponents<Collider>();
+                                var Col2 = Tower2.GetComponents<Collider>();
 
-                                var alltowerCollider1 = colliders1.Union(Parent_colliders1).ToList();
-                                var alltowerCollider2 = colliders2.Union(Parent_colliders2).ToList();
-
-                                foreach (var item in alltowerCollider1)
+                                foreach (var Tower1_col in Col1)
                                 {
-                                    if (item != null)
+                                    foreach (var Tower2_col in Col2)
                                     {
-                                        foreach (var item2 in alltowerCollider2)
-                                        {
-                                            Physics.IgnoreCollision(item, item2, true);
-                                        }
+                                        Physics.IgnoreCollision(Tower1_col, Tower2_col, true);
                                     }
                                 }
                             }
                         }
                     }
-                }
 
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
             }
 
         }
@@ -462,7 +441,6 @@
                 return result;
             }
         }
-
 
         internal static void SetTowersRange(float value)
         {
