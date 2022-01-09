@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
+    using System.Collections.Generic;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
     using AstroUdons;
     using ClientAttributes;
-    using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using WorldModifications.Modifications;
@@ -18,7 +18,7 @@
     [RegisterComponent]
     public class SuperTowerDefense_TowerCollisionFixer : AstroMonoBehaviour
     {
-        private List<Object> AntiGarbageCollection = new();
+        private Il2CppSystem.Collections.Generic.List<Object> AntiGarbageCollection = new();
 
         public SuperTowerDefense_TowerCollisionFixer(IntPtr ptr) : base(ptr)
         {
@@ -52,21 +52,12 @@
             }
         }
 
+        private List<string> CollidersNamesToIgnore { get; } = new List<string> { "InterTowerCollider" };
+
         private void OnCollisionEnter(Collision other)
         {
-            if (other.collider.name.StartsWith("TowerMiniGun") && other.collider.name.EndsWith("Grabbable (0)") ||
-                other.collider.name.StartsWith("TowerRocketLauncher") && other.collider.name.EndsWith("Grabbable (0)") ||
-                other.collider.name.StartsWith("TowerSlow") && other.collider.name.EndsWith("Grabbable (0)") ||
-                other.collider.name.StartsWith("TowerLance") && other.collider.name.EndsWith("Grabbable (0)") ||
-                other.collider.name.StartsWith("TowerRadar") && other.collider.name.EndsWith("Grabbable (0)") ||
-                other.collider.name.StartsWith("TowerCannon") && other.collider.name.EndsWith("Grabbable (0)") ||
-
-                other.collider.name.StartsWith("TowerMiniGun") && other.collider.name.EndsWith("Grabbable (1)") ||
-                other.collider.name.StartsWith("TowerRocketLauncher") && other.collider.name.EndsWith("Grabbable (1)") ||
-                other.collider.name.StartsWith("TowerSlow") && other.collider.name.EndsWith("Grabbable (1)") ||
-                other.collider.name.StartsWith("TowerLance") && other.collider.name.EndsWith("Grabbable (1)") ||
-                other.collider.name.StartsWith("TowerRadar") && other.collider.name.EndsWith("Grabbable (1)") ||
-                other.collider.name.StartsWith("TowerCannon") && other.collider.name.EndsWith("Grabbable (1)"))
+            //ModConsole.DebugLog($"Detected A collision between {this.gameObject.name} and {other.collider.gameObject.name} with collider name  {other.collider.name}");
+            if (CollidersNamesToIgnore.Contains(other.collider.name))
             {
                 foreach (var collider in CurrentColliders)
                 {

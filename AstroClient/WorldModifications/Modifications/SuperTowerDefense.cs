@@ -29,6 +29,7 @@
         {
             if (id == WorldIds.Super_Tower_defense)
             {
+                IsTowerDefenseWorld = true;
                 if (SuperTowerDefensecheatPage != null)
                 {
                     SuperTowerDefensecheatPage.SetInteractable(true);
@@ -178,9 +179,12 @@
                     SuperTowerDefensecheatPage.SetInteractable(false);
                     SuperTowerDefensecheatPage.SetTextColor(Color.red);
                 }
+
+                IsTowerDefenseWorld = false;
             }
         }
 
+        private static bool IsTowerDefenseWorld = false;
         internal override void OnRoomLeft()
         {
             WaveEditor = null;
@@ -244,6 +248,7 @@
             AutoStarter_SetInactive = null;
             AutoStarter_SetActive = null;
             AutoStarterReader = null;
+            IsTowerDefenseWorld = false;
             //IgnoreTowersCollidersPlacement = false;
             //NearbyCollidersManager.Clear();
         }
@@ -1285,6 +1290,7 @@
         {
             get
             {
+                if (!IsTowerDefenseWorld) return null;
                 if (Obj_Apple_1 == null)
                 {
                     return Obj_Apple_1 = GameObjectFinder.Find("Apples/Apple_01");
@@ -1298,6 +1304,8 @@
         {
             get
             {
+                if (!IsTowerDefenseWorld) return null;
+
                 if (Obj_Apple_2 == null)
                 {
                     return Obj_Apple_2 = GameObjectFinder.Find("Apples/Apple_01 (1)");
@@ -1312,6 +1320,8 @@
         {
             get
             {
+                if (!IsTowerDefenseWorld) return null;
+
                 if (Obj_Apple_3 == null)
                 {
                     return Obj_Apple_3 = GameObjectFinder.Find("Apples/Apple_01 (2)");
@@ -1325,6 +1335,8 @@
         {
             get
             {
+                if (!IsTowerDefenseWorld) return null;
+
                 if (Obj_Apple_4 == null)
                 {
                     return Obj_Apple_4 = GameObjectFinder.Find("Apples/Apple_01 (3)");
