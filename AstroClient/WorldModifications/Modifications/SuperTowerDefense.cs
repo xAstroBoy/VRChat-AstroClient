@@ -463,22 +463,6 @@
             }
         }
 
-        private static List<GameObject> WorldApples
-        {
-            get
-            {
-                List<GameObject> result = new List<GameObject>();
-                foreach (var item in WorldUtils.Pickups)
-                {
-                    if (item.name.StartsWith("Apple"))
-                    {
-                        result.Add(item.gameObject);
-                    }
-                }
-
-                return result;
-            }
-        }
 
         internal static void SetTowersRange(float value)
         {
