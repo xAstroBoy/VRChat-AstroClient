@@ -155,20 +155,20 @@
                 Tower_Minigun_1 = GameObjectFinder.Find("TowerMiniGun1Grabbable (1)");
                 Tower_Lance_1 = GameObjectFinder.Find("TowerLance1Grabbable (1)");
 
-                TowersObjects.AddGameObject(Tower_RocketLauncher);
-                TowersObjects.AddGameObject(Tower_Slower);
-                TowersObjects.AddGameObject(Tower_Cannon);
-                TowersObjects.AddGameObject(Tower_Radar);
-                TowersObjects.AddGameObject(Tower_Minigun);
-                TowersObjects.AddGameObject(Tower_Lance);
-                TowersObjects.AddGameObject(Tower_RocketLauncher_1);
-                TowersObjects.AddGameObject(Tower_Slower_1);
-                TowersObjects.AddGameObject(Tower_Cannon_1);
-                TowersObjects.AddGameObject(Tower_Radar_1);
-                TowersObjects.AddGameObject(Tower_Minigun_1);
-                TowersObjects.AddGameObject(Tower_Lance_1);
+                Tower_RocketLauncher.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Slower.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Cannon.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Radar.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Minigun.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Lance.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
 
-                FixTowerColliders();
+                Tower_RocketLauncher_1.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Slower_1.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Cannon_1.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Radar_1.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Minigun_1.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+                Tower_Lance_1.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
+
                 FixTheTowers(false);
             }
             else
@@ -180,45 +180,6 @@
                 }
             }
         }
-
-        internal static void FixTowerColliders()
-        {
-            try
-            {
-                if (TowersObjects.Count != 0) // Fix Some collider problems with towers!
-                {
-                    foreach (var Tower1 in TowersObjects)
-                    {
-                        if (Tower1 != null)
-                        {
-                            foreach (var Tower2 in TowersObjects)
-                            {
-                                if (Tower1.Equals(Tower2)) continue;
-
-                                var Col1 = Tower1.GetComponents<Collider>();
-                                var Col2 = Tower2.GetComponents<Collider>();
-
-                                foreach (var Tower1_col in Col1)
-                                {
-                                    foreach (var Tower2_col in Col2)
-                                    {
-                                        Physics.IgnoreCollision(Tower1_col, Tower2_col, true);
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
-            catch (Exception e)
-            {
-                ModConsole.ErrorExc(e);
-            }
-
-        }
-
-        private static List<GameObject> TowersObjects = new List<GameObject>();
 
         internal override void OnRoomLeft()
         {
@@ -283,7 +244,6 @@
             AutoStarter_SetInactive = null;
             AutoStarter_SetActive = null;
             AutoStarterReader = null;
-            TowersObjects.Clear();
             //IgnoreTowersCollidersPlacement = false;
             //NearbyCollidersManager.Clear();
         }
@@ -384,7 +344,6 @@
             AutomaticWaveBtn = new QMToggleButton(RandomFeatures, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, () => { AutomaticWaveStart = false; }, "Spam the event to start the round!");
             AutomaticGodModebnt = new QMToggleButton(RandomFeatures, "Toggle Automatic \n GodMode", () => { GodMode = true; }, () => { GodMode = false; }, "Enable Healths God Mode!");
             new QMSingleButton(RandomFeatures, "Fix towers", () => { FixTheTowers(true); }, "Fix Towers Being unpickable bug ", Color.green);
-            new QMSingleButton(RandomFeatures, "Fix towers colliders", () => { FixTowerColliders(); }, "Fix Towers Being Weird bug ", Color.green);
             FreezeMoneyBtn = new QMToggleButton(RandomFeatures, "Freeze Current Money Balance!", () => { FreezeMoney = true; }, () => { FreezeMoney = false; }, "Keep the money balance frozen!");
             FixBalanceNegativeBtn = new QMToggleButton(RandomFeatures, "No Negative Balance Money!", () => { FixBalanceNegative = true; }, () => { FixBalanceNegative = false; }, "Checks if the money goes negative, if so it resets to StartMoney Amount!");
 

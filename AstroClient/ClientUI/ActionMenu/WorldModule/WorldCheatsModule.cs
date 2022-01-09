@@ -25,7 +25,6 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                         {
                             CustomSubMenu.AddButton("Fix Towers And Respawn", () => { SuperTowerDefense.FixTheTowers(true); });
                             CustomSubMenu.AddButton("Fix Towers No Respawn", () => { SuperTowerDefense.FixTheTowers(false); });
-                            CustomSubMenu.AddButton("Fix Towers Colliders", () => { SuperTowerDefense.FixTowerColliders(); });
                         }, null, false, null);
 
                         CustomSubMenu.AddSubMenu("Protections", () =>

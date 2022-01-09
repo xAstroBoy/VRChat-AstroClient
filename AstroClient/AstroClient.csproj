@@ -106,6 +106,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_AutoStarter.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerCollisionFixer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />

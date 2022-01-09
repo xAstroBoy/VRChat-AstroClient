@@ -7,6 +7,7 @@
     {
         public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
         {
+            if (obj == null) return null;
             var result = obj.GetComponent<T>();
             if (result == null)
                 result = obj.AddComponent<T>();
@@ -24,7 +25,7 @@
             }
         }
         public static void RemoveComponent<T>(this Transform obj) where T : Component
-        { 
+        {
             obj.gameObject.RemoveComponent<T>();
         }
 
@@ -39,6 +40,7 @@
 
         internal static T GetOrAddComponent<T>(this Component c) where T : Component
         {
+            if (c == null) return null;
             var existing = c.GetComponent<T>();
             if (existing) return existing;
             return c.gameObject.AddComponent<T>();
