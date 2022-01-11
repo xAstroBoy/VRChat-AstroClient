@@ -7,6 +7,7 @@
     using AstroClient.Tools.ObjectEditor.Online;
     using AstroClient.Tools.Player;
     using ClientAttributes;
+    using ClientUI.Menu.SettingsMenu;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -172,8 +173,26 @@
                     {
                         ModConsole.DebugLog($"Prevented {gameObject.name} from being used from Blacklisted user {CurrentHolderDisplayName}");
                         OnlineEditor.TakeObjectOwnership(gameObject);
-                        gameObject.SetPosition(gameObject.transform.position);
-                        gameObject.SetRotation(gameObject.transform.rotation);
+                        if (!Settings_PickupProtector.RespawnPickupToDefaultPos)
+                        {
+                            gameObject.SetPosition(gameObject.transform.position);
+                            gameObject.SetRotation(gameObject.transform.rotation);
+                        }
+                        else
+                        {
+                            if (RigidBodyController != null)
+                            {
+                                if (RigidBodyController.SyncPhysics != null)
+                                {
+                                    RigidBodyController.SyncPhysics.RespawnItem(true);
+                                }
+                                else
+                                {
+                                    gameObject.SetPosition(gameObject.transform.position);
+                                    gameObject.SetRotation(gameObject.transform.rotation);
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -109,7 +109,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerCollisionFixer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
-    <Compile Include="AstroMonos\Components\Tools\Enabler - Copy.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Command_SetToTweaker.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
@@ -127,6 +127,7 @@
     <Compile Include="ClientUI\LoadingScreen\Settings\BetterLoadingScreenSettings.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\TrollDefenseSubMenu.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_LoadingScreen.cs" />
+    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_PickupProtector.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\InstanceHistoryMenu.cs" />

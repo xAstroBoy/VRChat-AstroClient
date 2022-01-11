@@ -16,11 +16,11 @@
             QMNestedGridMenu sub = new QMNestedGridMenu(menu, "Settings", "Settings");
             sub.GetMainButton().SetTextColor(Color.white);
 
-
             Settings_LogsMenu.InitButtons(sub);
             //QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
             //playerListToggle.SetToggleState(ConfigManager.UI.ShowPlayersMenu, false);
 
+            Settings_PickupProtector.InitButtons(sub);
             // Performance Menu
 
             Settings_Performance.InitButtons(sub);
@@ -47,15 +47,9 @@
             var toggleKeyBinds = new QMToggleButton(sub, "KeyBinds", () => { ConfigManager.General.KeyBinds = true; }, () => { ConfigManager.General.KeyBinds = false; }, "KeyBinds");
             toggleKeyBinds.SetToggleState(ConfigManager.General.KeyBinds, false);
 
-           
             QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Save Config", () => { ConfigManager.SaveAll(); }, "Save Config", Color.magenta, null, true);
 
-
         }
-
-
-
-
 
     }
 }
