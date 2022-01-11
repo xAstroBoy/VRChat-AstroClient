@@ -27,31 +27,32 @@
 
     #endregion Imports
 
+    // TODO : REWRITE!
     internal class BClubWorld : AstroEvents
     {
-        internal static GameObject BedroomVIProot;
-        internal static GameObject VIPRoom;
-        internal static GameObject VIPInsideDoor;
-        internal static GameObject VIPButton;
-        internal static GameObject VIPControls;
-        internal static GameObject FlairBtnTablet;
-        internal static GameObject ElevatorFlairBtn;
-        private static GameObject PenthouseRoot;
-        internal static GameObject GlobalUdon;
-        internal static GameObject LobbyRoot;
+        internal static GameObject BedroomVIProot { get; set; }
+        internal static GameObject VIPRoom { get; set; }
+        internal static GameObject VIPInsideDoor { get; set; }
+        internal static GameObject VIPButton { get; set; }
+        internal static GameObject VIPControls { get; set; }
+        internal static GameObject FlairBtnTablet { get; set; }
+        internal static GameObject ElevatorFlairBtn { get; set; }
+        private static GameObject PenthouseRoot { get; set; }
+        internal static GameObject GlobalUdon { get; set; }
+        internal static GameObject LobbyRoot { get; set; }
 
-        internal static QMNestedGridMenu BClubExploitsPage;
+        internal static QMNestedGridMenu BClubExploitsPage { get; set; }
 
-        private static QMToggleButton FreezeLockedToggle;
-        private static QMToggleButton FreezeUnlockedToggle;
-        private static QMToggleButton BlueChairToggle;
+        private static QMToggleButton FreezeLockedToggle { get; set; }
+        private static QMToggleButton FreezeUnlockedToggle { get; set; }
+        private static QMToggleButton BlueChairToggle { get; set; }
 
-        private static bool _isFreezeLockEnabed;
-        private static bool _isFreezeUnlockEnabed;
-        private static bool _isRainbowEnabled;
-        private static bool _isMoanSpamEnabled;
+        private static bool _isFreezeLockEnabed { get; set; }
+        private static bool _isFreezeUnlockEnabed { get; set; }
+        private static bool _isRainbowEnabled { get; set; }
+        private static bool _isMoanSpamEnabled { get; set; }
 
-        private static bool isCurrentWorld;
+        private static bool isCurrentWorld { get; set; }
 
         private static object Rainbow_CancellationToken { get; set; }
         private static object MoanSpam_CancellationToken { get; set; }
@@ -728,8 +729,8 @@
                 ModConsole.Log("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
                 _ = MelonCoroutines.Start(BypassElevator());
-                _ = MelonCoroutines.Start(EnableElevatorFlairBtn());
-                _ = MelonCoroutines.Start(EnableTabletFlairBtn());
+                //_ = MelonCoroutines.Start(EnableElevatorFlairBtn());
+                //_ = MelonCoroutines.Start(EnableTabletFlairBtn());
                 _ = MelonCoroutines.Start(UpdateLoop());
             }
             else
@@ -1156,161 +1157,5 @@
             return null;
         }
 
-        private static void PatchPatreonList()
-        {
-            try
-            {
-                var patreonlist = GameObjectFinder.Find("/Udon/Patreon Lists");
-                if (patreonlist != null)
-                {
-                    var node = patreonlist.GetComponent<UdonBehaviour>();
-                    var disassembled = node.ToRawUdonBehaviour();
-                    if (disassembled != null)
-                    {
-                        var obj_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("localPatrons"));
-                        if (obj_List != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "localPatrons", GameInstances.LocalPlayer.displayName, true);
-                        }
-
-                        var localVipsPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("localVips"));
-                        if (localVipsPatch != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "localVips", GameInstances.LocalPlayer.displayName, true);
-                        }
-
-                        var obj_List2 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_intnl_interpolatedStr_String"));
-                        if (obj_List2 != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "__0_intnl_interpolatedStr_String", GameInstances.LocalPlayer.displayName, true);
-                        }
-
-                        var obj_List3 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("syncedVips"));
-                        if (obj_List3 != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "syncedVips", GameInstances.LocalPlayer.displayName, true);
-                        }
-
-                        var obj_List4 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_mp_liveVips_String"));
-                        if (obj_List4 != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "__0_mp_liveVips_String", GameInstances.LocalPlayer.displayName, true);
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                ModConsole.ErrorExc(e);
-            }
-        }
-
-        private static void PatchPatreonNode()
-        {
-            var patreonlist = GameObjectFinder.Find("Udon/Patreon");
-            if (patreonlist != null)
-            {
-                var node = patreonlist.GetComponent<UdonBehaviour>();
-                var disassembled = node.ToRawUdonBehaviour();
-                if (disassembled != null)
-                {
-                    try
-                    {
-                        var isEliteBoolPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_isElite_Boolean"));
-                        if (isEliteBoolPatch != null)
-                        {
-                            var extract = isEliteBoolPatch.Unpack_Boolean();
-                            if (extract.HasValue)
-                            {
-                                if (!extract.Value)
-                                {
-                                    UdonHeapEditor.PatchHeap(disassembled, "__0_isElite_Boolean", true, true);
-                                }
-                            }
-                        }
-
-                        var vipOnlyPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("vipOnly"));
-                        if (vipOnlyPatch != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "vipOnly", false, true);
-                        }
-
-                        var vipOnlyLocalPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("vipOnlyLocal"));
-                        if (vipOnlyLocalPatch != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "vipOnlyLocal", false, true);
-                        }
-
-                        var patronPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_isPatron_Boolean"));
-                        if (patronPatch != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "__0_isPatron_Boolean", true, true);
-                        }
-
-                        var obj_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_mp_patronsToProcess_String"));
-                        if (obj_List != null)
-                        {
-                            UdonHeapEditor.PatchHeap(disassembled, "__0_mp_patronsToProcess_String", GameInstances.LocalPlayer.displayName, true);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        ModConsole.ErrorExc(e);
-                    }
-                }
-                try
-                {
-                    var Elite_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("elitesInInstance"));
-                    if (Elite_List != null)
-                    {
-                        var list = Elite_List.Unpack_Array_VRCPlayerApi().ToList();
-                        if (list.Count() != 0)
-                        {
-                            if (!list.Contains(GameInstances.LocalPlayer))
-                            {
-                                list.Add(GameInstances.LocalPlayer);
-                            }
-                        }
-                        else
-                        {
-                            list = new List<VRC.SDKBase.VRCPlayerApi>
-                            {
-                                GameInstances.LocalPlayer
-                            };
-                        }
-
-                        UdonHeapEditor.PatchHeap(disassembled, "elitesInInstance", list.ToArray(), true);
-                    }
-
-                    var Patron_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("vipsInInstance"));
-                    if (Patron_List != null)
-                    {
-                        var list = Patron_List.Unpack_Array_VRCPlayerApi().ToList();
-                        if (list.Count() != 0)
-                        {
-                            if (!list.Contains(GameInstances.LocalPlayer))
-                            {
-                                list.Add(GameInstances.LocalPlayer);
-                            }
-                        }
-                        else
-                        {
-                            list = new List<VRC.SDKBase.VRCPlayerApi>
-                            {
-                                GameInstances.LocalPlayer
-                            };
-                        }
-
-                        UdonHeapEditor.PatchHeap(disassembled, "vipsInInstance", list.ToArray(), true);
-                    }
-                    node.InitializeUdonContent();
-                    node.Start();
-                }
-                catch (Exception e)
-                {
-                    ModConsole.ErrorExc(e);
-                }
-            }
-        }
     }
 }
