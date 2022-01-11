@@ -29,6 +29,7 @@
 
     internal class BClubWorld : AstroEvents
     {
+        internal static GameObject BedroomVIProot;
         internal static GameObject VIPRoom;
         internal static GameObject VIPInsideDoor;
         internal static GameObject VIPButton;
@@ -533,7 +534,7 @@
                 _bells.Clear();
                 _chairs.Clear();
                 ColorActions.Clear();
-
+                BedroomVIProot = null;
                 ModConsole.Log("Done unloading B Club..");
             }
         }
@@ -710,6 +711,20 @@
                     ModConsole.DebugErrorExc(e);
                 }
 
+                try
+                {
+                    BedroomVIProot = GameObjectFinder.Find("Bedroom VIP");
+                    if (BedroomVIProot == null)
+                    {
+                        ModConsole.Error("VIP Bedroom Root was not found!");
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    ModConsole.DebugErrorExc(e);
+                }
+
                 ModConsole.Log("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
                 _ = MelonCoroutines.Start(BypassElevator());
@@ -790,7 +805,7 @@
         private static void RestoreVIPButton()
         {
             // Restore VIP button
-            if (VIPButton == null) VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
+            if (VIPButton == null) VIPButton = BedroomVIProot.transform.FindObject("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
             if (VIPButton != null)
             {
                 VIPButton.gameObject.SetPosition(new Vector3(60.7236f, 63.1298f, -1.7349f));
