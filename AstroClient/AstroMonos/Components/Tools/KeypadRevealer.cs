@@ -95,7 +95,7 @@
 
         internal bool isInvalidPasscode(string value)
         {
-            return value == "_" || value == "-" || value == "False";
+            return /*value == "_" || value == "-" ||*/ !value.isDigitsOnly();
         }
 
         [HideFromIl2Cpp]

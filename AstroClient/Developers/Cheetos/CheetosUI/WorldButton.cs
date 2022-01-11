@@ -104,6 +104,14 @@
             front_text.enableAutoSizing = true;
             front_text.fontSizeMin = 0f;
             front_text.fontSizeMax = 72f;
+
+            // Avoid button repelling you like bruh
+
+            Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), ButtonObject.GetComponent<Collider>());
+            Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), Front.GetComponent<Collider>());
+            Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), front_canvas.GetComponent<Collider>());
+            Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), textObject.GetComponent<Collider>());
+
         }
     }
 }

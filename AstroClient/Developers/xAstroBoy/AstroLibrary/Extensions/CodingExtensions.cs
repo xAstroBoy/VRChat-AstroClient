@@ -39,6 +39,17 @@
         {
             return number > 0;
         }
+        internal static bool isDigitsOnly(this string s)
+        {
+            int len = s.Length;
+            for (int i = 0; i < len; ++i)
+            {
+                char c = s[i];
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
+        }
 
         internal static bool IsNegative(this int number)
         {
