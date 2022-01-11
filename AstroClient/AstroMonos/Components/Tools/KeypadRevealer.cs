@@ -106,9 +106,11 @@
             if (buttonRotation != null && buttonRotation != null)
             {
                 var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, password, null);
-                btn.ButtonObject.Pickup_Set_ForceComponent();
-                btn.ButtonObject.Pickup_Set_Pickupable(true);
-                btn.ButtonObject.AddToWorldUtilsMenu();
+                if (btn != null)
+                {
+                    btn.MakePickupable();
+                    btn.RegisterToWorldMenu();
+                }
                 return btn;
             }
 

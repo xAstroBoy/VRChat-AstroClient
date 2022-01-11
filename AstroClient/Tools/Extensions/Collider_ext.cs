@@ -26,7 +26,10 @@
         {
             if (obj != null)
             {
-                foreach (var c in obj.GetComponents<Collider>())
+                var colliders = obj.GetComponents<Collider>();
+                ModConsole.DebugLog($"Destroyed {colliders.Count} Colliders in {obj.name}");
+
+                foreach (var c in colliders)
                 {
                     Object.DestroyImmediate(c);
                 }
@@ -37,7 +40,9 @@
         {
             if (obj != null)
             {
-                foreach (var c in obj.GetComponentsInChildren<Collider>(true))
+                var colliders = obj.GetComponentsInChildren<Collider>(true);
+                ModConsole.DebugLog($"Destroyed {colliders.Count} Colliders in {obj.name}");
+                foreach (var c in colliders)
                 {
                     Object.DestroyImmediate(c);
                 }
@@ -48,7 +53,10 @@
         {
             if (obj != null)
             {
-                foreach (var c in obj.GetComponents<Collider>())
+                var colliders = obj.GetComponents<Collider>();
+                ModConsole.DebugLog($"Disabled {colliders.Count} Colliders in {obj.name}");
+
+                foreach (var c in colliders)
                 {
                     c.enabled = false;
                 }
@@ -59,19 +67,26 @@
         {
             if (obj != null)
             {
-                foreach (var c in obj.GetComponents<Collider>())
+                var colliders = obj.GetComponents<Collider>();
+                ModConsole.DebugLog($"set IsTrigger {isTrigger} to {colliders.Count} Colliders in {obj.name}");
+
+                foreach (var c in colliders)
+
                 {
                     c.isTrigger = isTrigger;
                 }
             }
         }
 
-
         internal static void DisableAllColliders(this GameObject obj)
         {
             if (obj != null)
             {
-                foreach (var c in obj.GetComponentsInChildren<Collider>(true))
+                var colliders = obj.GetComponentsInChildren<Collider>(true);
+                ModConsole.DebugLog($"Disabled {colliders.Count} Colliders in {obj.name}");
+
+                foreach (var c in colliders)
+
                 {
                     c.enabled = false;
                 }
@@ -82,12 +97,18 @@
         {
             if (obj != null)
             {
-                foreach (var c in obj.GetComponentsInChildren<Collider>(true))
+                var colliders = obj.GetComponentsInChildren<Collider>(true);
+                ModConsole.DebugLog($"Enabled {colliders.Count} Colliders in {obj.name}");
+
+                foreach (var c in colliders)
+
                 {
                     c.enabled = true;
                 }
 
-                foreach (var c in obj.GetComponentsInChildren<MeshCollider>(true))
+                var meshcolliders = obj.GetComponentsInChildren<MeshCollider>(true);
+                ModConsole.DebugLog($"Enabled {colliders.Count} MeshColliders in {obj.name}");
+                foreach (var c in meshcolliders)
                 {
                     c.enabled = true;
                     c.convex = true;

@@ -5,6 +5,7 @@
     using ClientResources.Loaders;
     using TMPro;
     using Tools.Extensions;
+    using Tools.Extensions.Components_exts;
     using UnityEngine;
     using UnityEngine.UI;
     using xAstroBoy.Utility;
@@ -36,6 +37,19 @@
             if (front_text != null) front_text.DestroyMeLocal();
             if (front_canvas != null) front_canvas.DestroyMeLocal();
         }
+
+        internal void RegisterToWorldMenu()
+        {
+            ButtonObject.AddToWorldUtilsMenu();
+        }
+
+        internal void MakePickupable()
+        {
+            ButtonObject.Pickup_Set_ForceComponent();
+            ButtonObject.Pickup_Set_Pickupable(true);
+
+        }
+
         internal WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
         {
             ButtonObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -105,12 +119,9 @@
             front_text.fontSizeMin = 0f;
             front_text.fontSizeMax = 72f;
 
-            // Avoid button repelling you like bruh
-
-            Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), ButtonObject.GetComponent<Collider>());
-            Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), Front.GetComponent<Collider>());
-            Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), front_canvas.GetComponent<Collider>());
-            Physics.IgnoreCollision(GameInstances.LocalPlayer.gameObject.GetComponent<Collider>(), textObject.GetComponent<Collider>());
+            Front.Set_Colliders_isTrigger(true);
+            front_canvas.RemoveAllColliders();
+            textObject.RemoveAllColliders();
 
         }
     }
