@@ -45,7 +45,9 @@
 
         internal void MakePickupable()
         {
+            ButtonObject.IgnoreLocalPlayerCollision();
             ButtonObject.Pickup_Set_ForceComponent();
+            ButtonObject.RigidBody_Override_isKinematic(true);
             ButtonObject.Pickup_Set_Pickupable(true);
 
         }
@@ -112,7 +114,7 @@
             textObject.Set_Colliders_isTrigger(true);
             front_text = textObject.AddComponent<TextMeshPro>();
             front_text.color = Color.black;
-            front_text.text = label;
+            front_text.text = Environment.NewLine + label + Environment.NewLine;
             front_text.richText = true;
             front_text.alignment = TextAlignmentOptions.Center;
             front_text.enableAutoSizing = true;

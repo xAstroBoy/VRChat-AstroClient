@@ -31,6 +31,8 @@ namespace AstroClient.xAstroBoy.Utility
         public static VRCPlayer CurrentUser => VRCPlayer.field_Internal_Static_VRCPlayer_0;
         public static VRC.Player CurrentPlayer => CurrentUser.GetPlayer();
 
+        public static GameObject CurrentAvatar => CurrentPlayer.GetAvatarObject();
+
         public static VRCPlayerApi LocalPlayer => Networking.LocalPlayer;
 
         public static UserInteractMenu UserInteractMenu => Resources.FindObjectsOfTypeAll<UserInteractMenu>()[0];

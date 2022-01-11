@@ -36,7 +36,6 @@
             }
         }
 
-
         internal static void ClonePreviewAvatar()
         {
             if (CurrentPreviewedAvatar != null)
@@ -54,7 +53,7 @@
                     PreviewedAvatar.gameObject.AddToWorldUtilsMenu(); // In case I want to mess with it in the tweaker :)
                     SpawnedPreviewAvatars.Add(PreviewedAvatar);
 
-                    foreach (var item in PreviewedAvatar.Get_All_Childs()) 
+                    foreach (var item in PreviewedAvatar.Get_All_Childs())
                     {
                         item.gameObject.layer = 0; // Fix and remove The Layer Override, then Attempt to fix the unload mechanism when switching to a different avatar.
                         //foreach (var mat in item.GetComponentsInChildren<Material>(true))
@@ -87,6 +86,7 @@
                     }
 
                     PreviewedAvatar.GetOrAddComponent<RigidBodyController>().Forced_Rigidbody = true;
+                    PreviewedAvatar.gameObject.RemoveAllColliders();
                     PreviewedAvatar.gameObject.RigidBody_Override_isKinematic(true);
                     PreviewedAvatar.gameObject.Pickup_Set_ForceComponent(true);
                     PreviewedAvatar.gameObject.Pickup_Set_Pickupable(true);

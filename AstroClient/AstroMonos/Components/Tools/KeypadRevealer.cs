@@ -75,7 +75,7 @@
                         if (HasFailedUnpacking(heaptostring) || isInvalidPasscode(cleaned)) continue;
 
                         // At this point it should contain the keycode password.
-                        GeneratedButton = GenerateButtonWithPassword(Environment.NewLine + cleaned + Environment.NewLine);
+                        GeneratedButton = GenerateButtonWithPassword(cleaned);
                         return true;
                     }
                 }

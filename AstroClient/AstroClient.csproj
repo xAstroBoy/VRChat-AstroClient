@@ -109,6 +109,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerCollisionFixer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Enabler - Copy.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />

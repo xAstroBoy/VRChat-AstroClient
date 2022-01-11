@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using ObjectEditor.Editor.Colliders;
     using UnityEngine;
+    using xAstroBoy.Utility;
 
     internal static class Collider_ext
     {
@@ -116,6 +117,34 @@
             }
         }
 
+        internal static void IgnoreLocalPlayerCollision(this GameObject obj, bool ignore = true)
+        {
+            var localcollider = GameInstances.LocalPlayer.gameObject.GetComponent<Collider>();
+            if (localcollider != null)
+            {
+
+                var colliders = obj.GetComponentsInChildren<Collider>(true);
+                if (ignore)
+                {
+                    ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To ignore Current Player Collisions");
+                }
+                else
+                {
+                    ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To Interact Current Player Collisions");
+
+                }
+
+                foreach (var c in colliders)
+                {
+                    Physics.IgnoreCollision(c, localcollider);
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable to Fix Player collision as Local Collider is null!");
+            }
+
+        }
         internal static void RegisterCustomCollider(this GameObject obj, bool HasColliderAdded)
         {
             if (obj != null)
