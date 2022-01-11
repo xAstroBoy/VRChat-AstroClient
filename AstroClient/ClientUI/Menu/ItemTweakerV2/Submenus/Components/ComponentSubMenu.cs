@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components
 {
     using System.Drawing;
-    using AstroMonos.Components.Tools.KeycodeRevealer;
+    using AstroMonos.Components.Tools;
     using Bouncer;
     using Crazy;
     using Freezer;

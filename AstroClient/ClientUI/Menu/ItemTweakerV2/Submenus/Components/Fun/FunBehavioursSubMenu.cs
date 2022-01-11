@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Fun
 {
     using AstroMonos.Components.Custom.Items;
-    using AstroMonos.Components.Tools.KeycodeRevealer;
     using Selector;
     using Tools.Extensions;
     using xAstroBoy.AstroButtonAPI;

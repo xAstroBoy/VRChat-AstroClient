@@ -3,7 +3,6 @@
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using AstroMonos.Components.Tools;
-    using AstroMonos.Components.Tools.FreezeLocation;
     using MelonLoader;
     using System;
     using System.Collections;

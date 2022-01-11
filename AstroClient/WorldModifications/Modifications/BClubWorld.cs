@@ -285,9 +285,9 @@
             // Spamming
             if (Bools.IsDeveloper)
             {
-                BlueChairToggle = new QMToggleButton(Exploits, 5, -1, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, "", () => IsBlueChairEnabled = false, "BlueChair Everyone", Color.green, Color.red);
+                BlueChairToggle = new QMToggleButton(Exploits, 5, -1, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, () => IsBlueChairEnabled = false, "BlueChair Everyone", Color.green, Color.red);
             }
-            SpamDoorbellsToggle = new QMToggleButton(Exploits, 5, 0, "Spam Doorbells", () => IsDoorbellSpamEnabled = true, "", () => IsDoorbellSpamEnabled = false, "Toggle Doorbell Spam");
+            SpamDoorbellsToggle = new QMToggleButton(Exploits, 5, 0, "Spam Doorbells", () => IsDoorbellSpamEnabled = true, () => IsDoorbellSpamEnabled = false, "Toggle Doorbell Spam");
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
         }
 
@@ -729,8 +729,8 @@
                 ModConsole.Log("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
                 _ = MelonCoroutines.Start(BypassElevator());
-                //_ = MelonCoroutines.Start(EnableElevatorFlairBtn());
-                //_ = MelonCoroutines.Start(EnableTabletFlairBtn());
+                _ = MelonCoroutines.Start(EnableElevatorFlairBtn());
+                _ = MelonCoroutines.Start(EnableTabletFlairBtn());
                 _ = MelonCoroutines.Start(UpdateLoop());
             }
             else

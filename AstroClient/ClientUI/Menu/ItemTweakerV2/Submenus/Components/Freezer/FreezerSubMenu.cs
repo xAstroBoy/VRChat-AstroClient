@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Freezer
 {
-    using AstroMonos.Components.Tools.FreezeLocation;
+    using AstroMonos.Components.Tools;
     using Selector;
     using Tools.Extensions.Components_exts;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;

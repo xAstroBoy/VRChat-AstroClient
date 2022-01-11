@@ -6,14 +6,18 @@ namespace AstroClient.AstroMonos.Components.Tools
     using UnityEngine;
 
     [RegisterComponent]
-    public class Enabler : MonoBehaviour
+    public class Enabler : AstroMonoBehaviour
     {
-        public List<MonoBehaviour> AntiGcList;
+        public List<AstroMonoBehaviour> AntiGcList;
 
         public Enabler(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<MonoBehaviour>(1);
+            AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
+        }
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
         }
 
         private void Start()
@@ -29,7 +33,7 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         private void CustomUpdate()
         {
-            if (gameObject != null && !gameObject.active && isActiveAndEnabled) gameObject.SetActive(true);
+            if (gameObject != null && !gameObject.active) gameObject.SetActive(true);
         }
     }
 }

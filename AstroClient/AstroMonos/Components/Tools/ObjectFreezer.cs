@@ -1,13 +1,11 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools.FreezeLocation
+﻿namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.Extensions.Components_exts;
-    using AstroClient.Tools.ObjectEditor.Online;
     using AstroUdons;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
-    using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using xAstroBoy.Extensions;

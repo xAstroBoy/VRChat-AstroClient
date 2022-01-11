@@ -6,6 +6,7 @@
     using ClientResources.Loaders;
     using Modifications;
     using Modifications.Jar.AmongUS;
+    using Modifications.Jar.KitchenCooks;
     using Modifications.Jar.Murder2;
     using Modifications.Jar.Murder4;
     using xAstroBoy.AstroButtonAPI;

@@ -1,8 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools.KeycodeRevealer
+﻿namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
     using AstroClient.Tools.Extensions;
-    using AstroClient.Tools.Extensions.Components_exts;
     using CheetosUI;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;

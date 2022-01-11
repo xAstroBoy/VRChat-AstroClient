@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Custom.Random;
-    using AstroMonos.Components.Tools.FreezeLocation;
+    using AstroMonos.Components.Tools;
     using UnityEngine;
     using xAstroBoy.Utility;
 

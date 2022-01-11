@@ -5,6 +5,7 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
     using Tools.Extensions;
     using WorldModifications.Modifications;
     using WorldModifications.Modifications.Jar.AmongUS;
+    using WorldModifications.Modifications.Jar.KitchenCooks;
     using WorldModifications.Modifications.Jar.Murder4;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;

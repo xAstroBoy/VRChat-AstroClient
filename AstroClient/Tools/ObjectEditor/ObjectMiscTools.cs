@@ -7,6 +7,7 @@
     using AstroMonos.Components.Tools;
     using Editor.Position;
     using Extensions;
+    using Extensions.Components_exts;
     using Target;
     using UnityEngine;
     using World;
@@ -100,7 +101,7 @@
                             if (item != null)
                             {
                                 var itemtwo = item.GetOrAddComponent<PlayerAttacker>();
-                                    if(itemtwo != null)
+                                if (itemtwo != null)
                                 {
                                     itemtwo.TargetPlayer = targetuser;
                                 }
@@ -286,7 +287,7 @@
                 var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
-                    foreach(var pickup in WorldUtils_Old.Get_Pickups())
+                    foreach (var pickup in WorldUtils_Old.Get_Pickups())
                     {
                         var item = pickup.GetComponent<PlayerWatcher>();
                         if (item != null)
@@ -319,6 +320,10 @@
             catch (Exception) { }
         }
 
+        internal static void SetGravityOnWorldPickups(bool useGravity)
+        {
+            WorldUtils_Old.Get_Pickups().RigidBody_Set_Gravity(useGravity);
+        }
         internal static void DisablePickupKinematic(bool useGravity)
         {
             System.Collections.Generic.List<GameObject> list = WorldUtils_Old.Get_Pickups();
