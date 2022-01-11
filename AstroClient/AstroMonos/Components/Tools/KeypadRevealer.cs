@@ -21,6 +21,7 @@
             AntiGcList.Add(this);
         }
 
+        private WorldButton GeneratedButton { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private System.Collections.Generic.List<string> PasswordsVariables { [HideFromIl2Cpp] get; } = new()
         {
             "password",
@@ -51,6 +52,14 @@
             Destroy(this);
         }
 
+        internal void OnDestroy()
+        {
+            if (GeneratedButton != null)
+            {
+                GeneratedButton.DestroyMe();
+            }
+        }
+
         private bool FindAndRevealPassword()
         {
             foreach (var item in PasswordsVariables)
@@ -65,7 +74,7 @@
                         if (HasFailedUnpacking(heaptostring) || isInvalidPasscode(cleaned)) continue;
 
                         // At this point it should contain the keycode password.
-                        GenerateButtonWithPassword(Environment.NewLine + cleaned + Environment.NewLine);
+                        GeneratedButton = GenerateButtonWithPassword(Environment.NewLine + cleaned + Environment.NewLine);
                         return true;
                     }
                 }
@@ -85,20 +94,24 @@
 
         internal bool isInvalidPasscode(string value)
         {
-            return value == "_" || value == "-";
+            return value == "_" || value == "-" || value == "False";
         }
 
-        internal void GenerateButtonWithPassword(string password)
+        [HideFromIl2Cpp]
+        private WorldButton GenerateButtonWithPassword(string password)
         {
             Vector3? buttonPosition = gameObject.transform.position + new Vector3(0, 0.5f, 0);
             Quaternion? buttonRotation = gameObject.transform.rotation;
             if (buttonRotation != null && buttonRotation != null)
             {
                 var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, password, null);
-                btn.gameObject.Pickup_Set_ForceComponent();
-                btn.gameObject.Pickup_Set_Pickupable(true);
-                btn.gameObject.AddToWorldUtilsMenu();
+                btn.ButtonObject.Pickup_Set_ForceComponent();
+                btn.ButtonObject.Pickup_Set_Pickupable(true);
+                btn.ButtonObject.AddToWorldUtilsMenu();
+                return btn;
             }
+
+            return null;
         }
     }
 }

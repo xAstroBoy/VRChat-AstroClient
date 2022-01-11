@@ -1,14 +1,7 @@
 ﻿namespace AstroClient.Tools.UdonEditor
 {
-    using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System;
     using MelonLoader;
-    using UnityEngine.SceneManagement;
     using VRC.Udon;
     using xAstroBoy.Utility;
 

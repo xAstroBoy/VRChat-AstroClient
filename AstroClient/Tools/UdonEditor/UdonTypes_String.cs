@@ -16,18 +16,14 @@
         internal const string System_Int64  = "System.Int64";
         internal const string System_Int64_Array  = "System.Int64[]";
 
-
         internal const string System_Char  = "System.Char";
         internal const string System_Char_Array  = "System.Char[]";
-
 
         internal const string System_Single  = "System.Single";
         internal const string System_Single_Array  = "System.Single[]";
 
-
         internal const string System_Boolean  = "System.Boolean";
         internal const string System_Boolean_Array  = "System.Boolean[]";
-
 
         internal const string System_Byte = "System.Byte";
         internal const string System_Byte_Array = "System.Byte[]";
@@ -51,13 +47,11 @@
         internal const string UnityEngine_Color  = "UnityEngine.Color";
         internal const string UnityEngine_Color_Array  = "UnityEngine.Color[]";
 
-
         internal const string UnityEngine_Material  = "UnityEngine.Material";
         internal const string UnityEngine_Material_Array  = "UnityEngine.Material[]";
 
         internal const string UnityEngine_MeshRenderer  = "UnityEngine.MeshRenderer";
         internal const string UnityEngine_MeshRenderer_Array  = "UnityEngine.MeshRenderer[]";
-
 
         internal const string UnityEngine_ParticleSystem  = "UnityEngine.ParticleSystem";
         internal const string UnityEngine_ParticleSystem_Array  = "UnityEngine.ParticleSystem[]";
@@ -71,14 +65,11 @@
         internal const string UnityEngine_AudioClip  = "UnityEngine.AudioClip";
         internal const string UnityEngine_AudioClip_Array  = "UnityEngine.AudioClip[]";
 
-
         internal const string UnityEngine_Vector3  = "UnityEngine.Vector3";
         internal const string UnityEngine_Vector3_Array  = "UnityEngine.Vector3[]";
 
-
         internal const string UnityEngine_Quaternion  = "UnityEngine.Quaternion";
         internal const string UnityEngine_Quaternion_Array  = "UnityEngine.Quaternion[]";
-
 
         internal const string UnityEngine_AudioSource  = "UnityEngine.AudioSource";
         internal const string UnityEngine_AudioSource_Array  = "UnityEngine.AudioSource[]";
@@ -89,10 +80,8 @@
         internal const string UnityEngine_UI_Text  = "UnityEngine.UI.Text";
         internal const string UnityEngine_UI_Text_Array  = "UnityEngine.UI.Text[]";
 
-
         internal const string UnityEngine_Component = "UnityEngine.Component";
         internal const string UnityEngine_Component_Array = "UnityEngine.Component[]";
-
 
         internal const string UnityEngine_BoxCollider = "UnityEngine.BoxCollider";
         internal const string UnityEngine_BoxCollider_Array = "UnityEngine.BoxCollider[]";
@@ -157,14 +146,8 @@
         internal const string UnityEngine_RenderTexture = "UnityEngine.RenderTexture";
         internal const string UnityEngine_RenderTexture_Array = "UnityEngine.RenderTexture[]";
 
-
         internal const string UnityEngine_TextAsset = "UnityEngine.TextAsset";
         internal const string UnityEngine_TextAsset_Array = "UnityEngine.TextAsset[]";
-
-
-
-
-
 
         internal const string UnityEngine_AI_NavMeshAgent = "UnityEngine.AI.NavMeshAgent";
         internal const string UnityEngine_AI_NavMeshAgent_Array = "UnityEngine.AI.NavMeshAgent[]";
@@ -181,18 +164,14 @@
         internal const string UnityEngine_UI_InputField = "UnityEngine.UI.InputField";
         internal const string UnityEngine_UI_InputField_Array = "UnityEngine.UI.InputField[]";
 
-
         internal const string UnityEngine_UI_Toggle = "UnityEngine.UI.Toggle";
         internal const string UnityEngine_UI_Toggle_Array = "UnityEngine.UI.Toggle[]";
-
 
         internal const string UnityEngine_UI_Image = "UnityEngine.UI.Image";
         internal const string UnityEngine_UI_Image_Array = "UnityEngine.UI.Image[]";
 
-
         internal const string UnityEngine_UI_Button = "UnityEngine.UI.Button";
         internal const string UnityEngine_UI_Button_Array = "UnityEngine.UI.Button[]";
-
 
         internal const string UnityEngine_UI_RawImage = "UnityEngine.UI.RawImage";
         internal const string UnityEngine_UI_RawImage_Array = "UnityEngine.UI.RawImage[]";
@@ -200,7 +179,6 @@
         #endregion
 
         #region VRChat
-
 
         internal const string VRC_Udon_Common_SerializationResult = "VRC.Udon.Common.SerializationResult";
         internal const string VRC_Udon_Common_SerializationResult_Array = "VRC.Udon.Common.SerializationResult[]";
@@ -220,14 +198,11 @@
         internal const string VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer = "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer";
         internal const string VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array = "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]";
 
-
         internal const string VRC_SDKBase_VRCPlayerApi  = "VRC.SDKBase.VRCPlayerApi";
         internal const string VRC_SDKBase_VRCPlayerApi_Array  = "VRC.SDKBase.VRCPlayerApi[]";
 
-
         internal const string VRC_Udon_UdonBehaviour  = "VRC.Udon.UdonBehaviour";
         internal const string VRC_Udon_UdonBehaviour_Array  = "VRC.Udon.UdonBehaviour[]";
-
 
         internal const string VRC_Udon_Common_Interfaces_NetworkEventTarget  = "VRC.Udon.Common.Interfaces.NetworkEventTarget";
         internal const string VRC_Udon_Common_Interfaces_NetworkEventTarget_Array  = "VRC.Udon.Common.Interfaces.NetworkEventTarget[]";
@@ -244,12 +219,10 @@
         internal const string TMPro_TextMeshPro  = "TMPro.TextMeshPro";
         internal const string TMPro_TextMeshPro_Array  = "TMPro.TextMeshPro[]";
 
-
         internal const string TMPro_TextMeshProUGUI  = "TMPro.TextMeshProUGUI";
         internal const string TMPro_TextMeshProUGUI_Array  = "TMPro.TextMeshProUGUI[]";
 
         #endregion
-
 
         #region Unboxables
 
@@ -280,16 +253,8 @@
 
         #region Unity
 
-
         #endregion
         #endregion
-
-
-
-
-
-
-
 
     }
 }

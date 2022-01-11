@@ -179,7 +179,7 @@
                 }
                 //else
                 //{
-                //    ModConsole.DebugLog($"Unable to Find PickupController on Object : {controller.gameObject.name}");
+                //    ModConsole.DebugLog($"Unable to Find PickupController on Object : {controller.ButtonObject.name}");
                 //}
             }
 

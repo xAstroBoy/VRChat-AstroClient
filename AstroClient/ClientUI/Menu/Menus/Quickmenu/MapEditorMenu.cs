@@ -22,11 +22,11 @@
                   if (buttonPosition.HasValue && buttonRotation.HasValue)
                   {
                       var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, "Template Test", null);
-                      btn.gameObject.Pickup_Set_ForceComponent();
-                      btn.gameObject.Pickup_Set_Pickupable(true);
-                      btn.gameObject.RigidBody_Set_isKinematic(true);
-                      btn.gameObject.Set_As_Object_To_Edit();
-                      btn.gameObject.AddToWorldUtilsMenu();
+                      btn.ButtonObject.Pickup_Set_ForceComponent();
+                      btn.ButtonObject.Pickup_Set_Pickupable(true);
+                      btn.ButtonObject.RigidBody_Set_isKinematic(true);
+                      btn.ButtonObject.Set_As_Object_To_Edit();
+                      btn.ButtonObject.AddToWorldUtilsMenu();
                   }
               }), "Spawn Preset Button", null, null, true);
             _ = new QMSingleButton(menu, 2, 0, "Toggles all Map Items Active", () => { EnableAllObjects(); }, "Sets Map objects active, will Break Instance Locally..", null, Color.red, true);
