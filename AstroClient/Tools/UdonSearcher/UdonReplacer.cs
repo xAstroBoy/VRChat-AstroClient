@@ -23,7 +23,7 @@
             {
                 foreach (var udonnode in udons)
                 {
-                    var unpackedudon = udonnode.DisassembleUdonBehaviour();
+                    var unpackedudon = udonnode.ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
                         foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())

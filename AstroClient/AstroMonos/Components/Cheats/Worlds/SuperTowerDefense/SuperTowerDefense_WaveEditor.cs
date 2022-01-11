@@ -44,7 +44,7 @@
 
         private string Wave { [HideFromIl2Cpp] get; } = "Wave";
 
-        private DisassembledUdonBehaviour WaveController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RawUdonBehaviour WaveController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // Use this for initialization
         internal void Start()
@@ -54,7 +54,7 @@
                 var obj = gameObject.FindUdonEvent("AskForNewWave");
                 if (obj != null)
                 {
-                    WaveController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                    WaveController = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
                 {

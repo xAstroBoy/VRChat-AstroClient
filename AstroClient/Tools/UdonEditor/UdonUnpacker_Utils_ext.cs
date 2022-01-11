@@ -4,9 +4,9 @@
 
     internal static class UdonUnpacker_Utils_ext
     {
-        internal static DisassembledUdonBehaviour DisassembleUdonBehaviour(this UdonBehaviour udon)
+        internal static RawUdonBehaviour ToRawUdonBehaviour(this UdonBehaviour udon)
         {
-            return UdonUnpacker_Utils.DisassembleUdonBehaviour(udon);
+            return UdonUnpacker_Utils.ToRawUdonBehaviour(udon);
         }
     }
 }

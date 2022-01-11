@@ -27,6 +27,7 @@
             "solution",
             "code",
             "PassCode",
+            "passcodes",
             "correctCodes",
             "PinCode"
         };

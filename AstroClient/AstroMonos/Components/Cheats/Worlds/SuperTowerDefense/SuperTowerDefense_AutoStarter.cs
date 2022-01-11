@@ -40,7 +40,7 @@
         internal CustomLists.UdonBehaviour_Cached AutoStarter_SetActive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal CustomLists.UdonBehaviour_Cached AutoStarter_SetInactive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        internal DisassembledUdonBehaviour AutoStarterController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal RawUdonBehaviour AutoStarterController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         // Use this for initialization
         internal void Start()
@@ -52,7 +52,7 @@
                 {
                     AutoStarter_SetInactive = obj;
                     AutoStarter_SetActive = gameObject.FindUdonEvent("SetActive");
-                    AutoStarterController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                    AutoStarterController = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
                 {

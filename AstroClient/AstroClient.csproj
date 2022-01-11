@@ -116,6 +116,7 @@
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="ClientUI\ActionMenu\WorldExploitsModule.cs" />
     <Compile Include="ClientUI\ActionMenu\TrollDefenseModule.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoginScreenAssets.cs" />
@@ -401,6 +402,8 @@
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
     <Compile Include="Tools\Skybox\CubemapTools\CubeMapAndTexture2D.cs" />
+    <Compile Include="Tools\UdonEditor\Disassembler.cs" />
+    <Compile Include="Tools\UdonEditor\UdonDisassembler.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_ForceEjectPlayer.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\AmongUS\UdonCheats\AmongUS_ForceVotePlayer.cs" />
@@ -415,7 +418,7 @@
     <Compile Include="WorldModifications\Modifications\Jar\Murder4\UdonCheats\Murder4_UnfilteredNodes.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\Murder4\UdonCheats\Murder4_FilteredNodes.cs" />
     <Compile Include="WorldModifications\Modifications\Jar\Murder4\UdonCheats\Murder4_GameLogic.cs" />
-    <Compile Include="UdonExploits\Global\GlobalUdonExploits.cs" />
+    <Compile Include="ClientUI\Menu\RandomSubmenus\GlobalUdonExploits.cs" />
     <Compile Include="Tools\Decompiler\DecompilerUtils.cs" />
     <Compile Include="Tools\Decompiler\IL2CPPDecompiler.cs" />
     <Compile Include="Tools\Decompiler\MethodsTools\ParameterInfoTools.cs" />
@@ -433,7 +436,7 @@
     <Compile Include="Tools\UdonEditor\UdonTypes_String.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnpacker_Utils_ext.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnpacker_Utils.cs" />
-    <Compile Include="Tools\UdonEditor\DisassembledUdonBehaviour.cs" />
+    <Compile Include="Tools\UdonEditor\RawUdonBehaviour.cs" />
     <Compile Include="Tools\Colors\SystemColors.cs" />
     <Compile Include="Tools\Holders\SpawnedItemsHolder.cs" />
     <Compile Include="Tools\Serialization.cs" />

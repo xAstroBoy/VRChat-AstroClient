@@ -55,29 +55,29 @@
                 for (int i = 0; i < module1.Count; i++)
                 {
                     UdonBehaviour_Cached modules = module1[i];
-                    BilliardsModules.Add(modules.UdonBehaviour.DisassembleUdonBehaviour()); // WTF
+                    BilliardsModules.Add(modules.UdonBehaviour.ToRawUdonBehaviour()); // WTF
                 }
                 var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "_start");
                 if (cue_0_unpacked != null)
                 {
-                    Cue_0 = cue_0_unpacked.UdonBehaviour.DisassembleUdonBehaviour();
+                    Cue_0 = cue_0_unpacked.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "_start");
                 if (cue_1_unpacked != null)
                 {
-                    Cue_1 = cue_1_unpacked.UdonBehaviour.DisassembleUdonBehaviour();
+                    Cue_1 = cue_1_unpacked.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 var module2 = UdonSearch.FindAllUdonEvents("NetworkingManager", "_OnGameReset");
                 for (int i = 0; i < module2.Count; i++)
                 {
                     UdonBehaviour_Cached modules = module2[i];
-                    NetworkingManagers.Add(modules.UdonBehaviour.DisassembleUdonBehaviour()); // WTF
+                    NetworkingManagers.Add(modules.UdonBehaviour.ToRawUdonBehaviour()); // WTF
                 }
 
                 var PoolParlorModule_unpacked = UdonSearch.FindUdonEvent("PoolParlorModule", "_GetSAOMenu");
                 if (PoolParlorModule_unpacked != null)
                 {
-                    PoolParlorModule = PoolParlorModule_unpacked.UdonBehaviour.DisassembleUdonBehaviour();
+                    PoolParlorModule = PoolParlorModule_unpacked.UdonBehaviour.ToRawUdonBehaviour();
                 }
 
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
@@ -100,7 +100,7 @@
             int currentskin = 0;
             for (int i = 0; i < NetworkingManagers.Count; i++)
             {
-                DisassembledUdonBehaviour module = NetworkingManagers[i];
+                RawUdonBehaviour module = NetworkingManagers[i];
                 var result = UdonHeapParser.Udon_Parse_Byte(module, "tableSkinSynced");
                 if (result != null && result.HasValue)
                 {
@@ -361,14 +361,14 @@
 
         internal static UdonBehaviour_Cached UpdateColorScheme_Table { get; private set; }
 
-        internal static DisassembledUdonBehaviour Cue_0 { get; private set; }
-        internal static DisassembledUdonBehaviour Cue_1 { get; private set; }
+        internal static RawUdonBehaviour Cue_0 { get; private set; }
+        internal static RawUdonBehaviour Cue_1 { get; private set; }
 
-        internal static DisassembledUdonBehaviour PoolParlorModule { get; private set; }
+        internal static RawUdonBehaviour PoolParlorModule { get; private set; }
 
-        internal static List<DisassembledUdonBehaviour> NetworkingManagers { get; private set; } = new List<DisassembledUdonBehaviour>();
+        internal static List<RawUdonBehaviour> NetworkingManagers { get; private set; } = new List<RawUdonBehaviour>();
 
-        internal static List<DisassembledUdonBehaviour> BilliardsModules { get; private set; } = new List<DisassembledUdonBehaviour>();
+        internal static List<RawUdonBehaviour> BilliardsModules { get; private set; } = new List<RawUdonBehaviour>();
         internal static QMNestedButton PoolParlorCheats { get; set; }
 
         private static TableSkins _CurrentTableSkin;

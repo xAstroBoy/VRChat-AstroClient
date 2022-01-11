@@ -6,7 +6,7 @@
 
     internal static class UdonHeapParser
     {
-        internal static object? Udon_Parse_System_object(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static object? Udon_Parse_System_object(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -19,7 +19,7 @@
             return null;
         }
 
-        internal static List<object> Udon_Parse_System_Object_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<object> Udon_Parse_System_Object_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -32,7 +32,7 @@
             return null;
         }
 
-        internal static object[] Udon_Parse_System_Object_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static object[] Udon_Parse_System_Object_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -45,7 +45,7 @@
             return null;
         }
 
-        internal static bool? Udon_Parse_Boolean(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static bool? Udon_Parse_Boolean(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -58,7 +58,7 @@
             return null;
         }
 
-        internal static List<bool> Udon_Parse_Boolean_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<bool> Udon_Parse_Boolean_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -71,7 +71,7 @@
             return null;
         }
 
-        internal static bool[] Udon_Parse_Boolean_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static bool[] Udon_Parse_Boolean_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -84,7 +84,7 @@
             return null;
         }
 
-        internal static float? Udon_Parse_single(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static float? Udon_Parse_single(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -97,7 +97,7 @@
             return null;
         }
 
-        internal static List<float> Udon_Parse_single_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<float> Udon_Parse_single_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -110,7 +110,7 @@
             return null;
         }
 
-        internal static float[] Udon_Parse_single_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static float[] Udon_Parse_single_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -123,7 +123,7 @@
             return null;
         }
 
-        internal static string Udon_Parse_string(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static string Udon_Parse_string(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -136,7 +136,7 @@
             return null;
         }
 
-        internal static List<string> Udon_Parse_string_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<string> Udon_Parse_string_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -149,7 +149,7 @@
             return null;
         }
 
-        internal static string[] Udon_Parse_string_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static string[] Udon_Parse_string_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -162,7 +162,7 @@
             return null;
         }
 
-        internal static uint? Udon_Parse_UInt32(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static uint? Udon_Parse_UInt32(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -175,7 +175,7 @@
             return null;
         }
 
-        internal static List<uint> Udon_Parse_UInt32_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<uint> Udon_Parse_UInt32_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -188,7 +188,7 @@
             return null;
         }
 
-        internal static uint[] Udon_Parse_UInt32_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static uint[] Udon_Parse_UInt32_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -201,7 +201,7 @@
             return null;
         }
 
-        internal static int? Udon_Parse_Int32(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static int? Udon_Parse_Int32(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -214,7 +214,7 @@
             return null;
         }
 
-        internal static List<int> Udon_Parse_Int32_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<int> Udon_Parse_Int32_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -227,7 +227,7 @@
             return null;
         }
 
-        internal static int[] Udon_Parse_Int32_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static int[] Udon_Parse_Int32_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -240,7 +240,7 @@
             return null;
         }
 
-        internal static long? Udon_Parse_Int64(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static long? Udon_Parse_Int64(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -253,7 +253,7 @@
             return null;
         }
 
-        internal static List<long> Udon_Parse_Int64_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<long> Udon_Parse_Int64_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -266,7 +266,7 @@
             return null;
         }
 
-        internal static long[] Udon_Parse_Int64_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static long[] Udon_Parse_Int64_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -279,7 +279,7 @@
             return null;
         }
 
-        internal static char? Udon_Parse_Char(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static char? Udon_Parse_Char(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -292,7 +292,7 @@
             return null;
         }
 
-        internal static List<char> Udon_Parse_Char_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<char> Udon_Parse_Char_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -305,7 +305,7 @@
             return null;
         }
 
-        internal static char[] Udon_Parse_Char_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static char[] Udon_Parse_Char_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -318,7 +318,7 @@
             return null;
         }
 
-        internal static byte? Udon_Parse_Byte(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static byte? Udon_Parse_Byte(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -331,7 +331,7 @@
             return null;
         }
 
-        internal static List<byte> Udon_Parse_Byte_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<byte> Udon_Parse_Byte_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -344,7 +344,7 @@
             return null;
         }
 
-        internal static byte[] Udon_Parse_Byte_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static byte[] Udon_Parse_Byte_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -358,7 +358,7 @@
         }
 
 
-        internal static uint? Udon_Parse_uint(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static uint? Udon_Parse_uint(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -371,7 +371,7 @@
             return null;
         }
 
-        internal static List<uint> Udon_Parse_uint_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<uint> Udon_Parse_uint_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -384,7 +384,7 @@
             return null;
         }
 
-        internal static uint[] Udon_Parse_uint_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static uint[] Udon_Parse_uint_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -397,7 +397,7 @@
             return null;
         }
 
-        internal static UnityEngine.Color? Udon_Parse_Color(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Color? Udon_Parse_Color(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -410,7 +410,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Color> Udon_Parse_Color_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Color> Udon_Parse_Color_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -423,7 +423,7 @@
             return null;
         }
 
-        internal static UnityEngine.Color[] Udon_Parse_Color_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Color[] Udon_Parse_Color_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -436,7 +436,7 @@
             return null;
         }
 
-        internal static UnityEngine.Material Udon_Parse_Material(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Material Udon_Parse_Material(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -449,7 +449,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Material> Udon_Parse_Material_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Material> Udon_Parse_Material_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -462,7 +462,7 @@
             return null;
         }
 
-        internal static UnityEngine.Material[] Udon_Parse_Material_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Material[] Udon_Parse_Material_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -475,7 +475,7 @@
             return null;
         }
 
-        internal static UnityEngine.MeshRenderer Udon_Parse_MeshRenderer(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.MeshRenderer Udon_Parse_MeshRenderer(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -488,7 +488,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.MeshRenderer> Udon_Parse_MeshRenderer_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.MeshRenderer> Udon_Parse_MeshRenderer_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -501,7 +501,7 @@
             return null;
         }
 
-        internal static UnityEngine.MeshRenderer[] Udon_Parse_MeshRenderer_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.MeshRenderer[] Udon_Parse_MeshRenderer_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -514,7 +514,7 @@
             return null;
         }
 
-        internal static UnityEngine.Component Udon_Parse_Component(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Component Udon_Parse_Component(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -527,7 +527,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Component> Udon_Parse_Component_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Component> Udon_Parse_Component_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -540,7 +540,7 @@
             return null;
         }
 
-        internal static UnityEngine.Component[] Udon_Parse_Component_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Component[] Udon_Parse_Component_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -553,7 +553,7 @@
             return null;
         }
 
-        internal static UnityEngine.Sprite Udon_Parse_Sprite(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Sprite Udon_Parse_Sprite(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -566,7 +566,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Sprite> Udon_Parse_Sprite_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Sprite> Udon_Parse_Sprite_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -579,7 +579,7 @@
             return null;
         }
 
-        internal static UnityEngine.Sprite[] Udon_Parse_Sprite_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Sprite[] Udon_Parse_Sprite_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -592,7 +592,7 @@
             return null;
         }
 
-        internal static UnityEngine.Rigidbody Udon_Parse_Rigidbody(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Rigidbody Udon_Parse_Rigidbody(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -605,7 +605,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Rigidbody> Udon_Parse_Rigidbody_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Rigidbody> Udon_Parse_Rigidbody_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -618,7 +618,7 @@
             return null;
         }
 
-        internal static UnityEngine.Rigidbody[] Udon_Parse_Rigidbody_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Rigidbody[] Udon_Parse_Rigidbody_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -633,7 +633,7 @@
 
 
 
-        internal static UnityEngine.ParticleSystem Udon_Parse_ParticleSystem(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.ParticleSystem Udon_Parse_ParticleSystem(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -648,7 +648,7 @@
 
 
 
-        internal static List<UnityEngine.ParticleSystem> Udon_Parse_ParticleSystem_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.ParticleSystem> Udon_Parse_ParticleSystem_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -661,7 +661,7 @@
             return null;
         }
 
-        internal static UnityEngine.ParticleSystem[] Udon_Parse_ParticleSystem_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.ParticleSystem[] Udon_Parse_ParticleSystem_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -674,7 +674,7 @@
             return null;
         }
 
-        internal static UnityEngine.BoxCollider Udon_Parse_BoxCollider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.BoxCollider Udon_Parse_BoxCollider(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -687,7 +687,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.BoxCollider> Udon_Parse_BoxCollider_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.BoxCollider> Udon_Parse_BoxCollider_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -700,7 +700,7 @@
             return null;
         }
 
-        internal static UnityEngine.BoxCollider[] Udon_Parse_BoxCollider_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.BoxCollider[] Udon_Parse_BoxCollider_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -714,7 +714,7 @@
         }
 
 
-        internal static UnityEngine.Transform Udon_Parse_Transform(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Transform Udon_Parse_Transform(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -727,7 +727,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Transform> Udon_Parse_Transform_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Transform> Udon_Parse_Transform_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -740,7 +740,7 @@
             return null;
         }
 
-        internal static UnityEngine.Transform[] Udon_Parse_Transform_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Transform[] Udon_Parse_Transform_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -753,7 +753,7 @@
             return null;
         }
 
-        internal static UnityEngine.GameObject Udon_Parse_GameObject(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.GameObject Udon_Parse_GameObject(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -766,7 +766,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.GameObject> Udon_Parse_GameObject_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.GameObject> Udon_Parse_GameObject_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -779,7 +779,7 @@
             return null;
         }
 
-        internal static UnityEngine.GameObject[] Udon_Parse_GameObject_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.GameObject[] Udon_Parse_GameObject_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -792,7 +792,7 @@
             return null;
         }
 
-        internal static UnityEngine.Vector3? Udon_Parse_Vector3(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Vector3? Udon_Parse_Vector3(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -805,7 +805,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Vector3> Udon_Parse_Vector3_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Vector3> Udon_Parse_Vector3_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -818,7 +818,7 @@
             return null;
         }
 
-        internal static UnityEngine.Vector3[] Udon_Parse_Vector3_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Vector3[] Udon_Parse_Vector3_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -831,7 +831,7 @@
             return null;
         }
 
-        internal static UnityEngine.Quaternion? Udon_Parse_Quaternion(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Quaternion? Udon_Parse_Quaternion(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -844,7 +844,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Quaternion> Udon_Parse_Quaternion_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Quaternion> Udon_Parse_Quaternion_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -857,7 +857,7 @@
             return null;
         }
 
-        internal static UnityEngine.Quaternion[] Udon_Parse_Quaternion_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Quaternion[] Udon_Parse_Quaternion_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -870,7 +870,7 @@
             return null;
         }
 
-        internal static UnityEngine.AudioSource Udon_Parse_AudioSource(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.AudioSource Udon_Parse_AudioSource(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -883,7 +883,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.AudioSource> Udon_Parse_AudioSource_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.AudioSource> Udon_Parse_AudioSource_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -896,7 +896,7 @@
             return null;
         }
 
-        internal static UnityEngine.AudioSource[] Udon_Parse_AudioSource_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.AudioSource[] Udon_Parse_AudioSource_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -909,7 +909,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.Text Udon_Parse_UnityEngine_UI_Text(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Text Udon_Parse_UnityEngine_UI_Text(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -922,7 +922,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.UI.Text> Udon_Parse_UnityEngine_UI_Text_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.UI.Text> Udon_Parse_UnityEngine_UI_Text_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -935,7 +935,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.Text[] Udon_Parse_UnityEngine_UI_Text_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Text[] Udon_Parse_UnityEngine_UI_Text_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -948,7 +948,7 @@
             return null;
         }
 
-        internal static UnityEngine.AudioClip Udon_Parse_AudioClip(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.AudioClip Udon_Parse_AudioClip(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -961,7 +961,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.AudioClip> Udon_Parse_AudioClip_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.AudioClip> Udon_Parse_AudioClip_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -974,7 +974,7 @@
             return null;
         }
 
-        internal static UnityEngine.AudioClip[] Udon_Parse_AudioClip_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.AudioClip[] Udon_Parse_AudioClip_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -987,7 +987,7 @@
             return null;
         }
 
-        internal static UnityEngine.HumanBodyBones? Udon_Parse_HumanBodyBones(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.HumanBodyBones? Udon_Parse_HumanBodyBones(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1000,7 +1000,7 @@
             return null;
         }
 
-        internal static VRC.SDKBase.VRCPlayerApi Udon_Parse_VRCPlayerApi(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDKBase.VRCPlayerApi Udon_Parse_VRCPlayerApi(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1013,7 +1013,7 @@
             return null;
         }
 
-        internal static List<VRC.SDKBase.VRCPlayerApi> Udon_Parse_VRCPlayerApi_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.SDKBase.VRCPlayerApi> Udon_Parse_VRCPlayerApi_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1026,7 +1026,7 @@
             return null;
         }
 
-        internal static VRC.SDKBase.VRCPlayerApi[] Udon_Parse_VRCPlayerApi_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDKBase.VRCPlayerApi[] Udon_Parse_VRCPlayerApi_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1039,7 +1039,7 @@
             return null;
         }
 
-        internal static VRC.Udon.UdonBehaviour Udon_Parse_UdonBehaviour(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.Udon.UdonBehaviour Udon_Parse_UdonBehaviour(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1052,7 +1052,7 @@
             return null;
         }
 
-        internal static VRC.Udon.Common.Interfaces.NetworkEventTarget? Udon_Parse_NetworkEventTarget(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.Udon.Common.Interfaces.NetworkEventTarget? Udon_Parse_NetworkEventTarget(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1065,7 +1065,7 @@
             return null;
         }
 
-        internal static TMPro.TextMeshPro Udon_Parse_TextMeshPro(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static TMPro.TextMeshPro Udon_Parse_TextMeshPro(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1078,7 +1078,7 @@
             return null;
         }
 
-        internal static TMPro.TextMeshProUGUI Udon_Parse_TextMeshProUGUI(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static TMPro.TextMeshProUGUI Udon_Parse_TextMeshProUGUI(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1091,7 +1091,7 @@
             return null;
         }
 
-        internal static List<TMPro.TextMeshProUGUI> Udon_Parse_TextMeshProUGUI_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<TMPro.TextMeshProUGUI> Udon_Parse_TextMeshProUGUI_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1104,7 +1104,7 @@
             return null;
         }
 
-        internal static TMPro.TextMeshProUGUI[] Udon_Parse_TextMeshProUGUI_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static TMPro.TextMeshProUGUI[] Udon_Parse_TextMeshProUGUI_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1117,7 +1117,7 @@
             return null;
         }
 
-        internal static UnityEngine.CapsuleCollider Udon_Parse_CapsuleCollider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.CapsuleCollider Udon_Parse_CapsuleCollider(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1130,7 +1130,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.CapsuleCollider> Udon_Parse_CapsuleCollider_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.CapsuleCollider> Udon_Parse_CapsuleCollider_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1143,7 +1143,7 @@
             return null;
         }
 
-        internal static UnityEngine.CapsuleCollider[] Udon_Parse_CapsuleCollider_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.CapsuleCollider[] Udon_Parse_CapsuleCollider_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1155,7 +1155,7 @@
             }
             return null;
         }
-        internal static UnityEngine.SphereCollider Udon_Parse_SphereCollider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.SphereCollider Udon_Parse_SphereCollider(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1168,7 +1168,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.SphereCollider> Udon_Parse_SphereCollider_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.SphereCollider> Udon_Parse_SphereCollider_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1181,7 +1181,7 @@
             return null;
         }
 
-        internal static UnityEngine.SphereCollider[] Udon_Parse_SphereCollider_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.SphereCollider[] Udon_Parse_SphereCollider_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1195,7 +1195,7 @@
         }
 
 
-        internal static UnityEngine.Collider Udon_Parse_Collider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Collider Udon_Parse_Collider(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1208,7 +1208,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Collider> Udon_Parse_Collider_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Collider> Udon_Parse_Collider_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1221,7 +1221,7 @@
             return null;
         }
 
-        internal static UnityEngine.Collider[] Udon_Parse_Collider_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Collider[] Udon_Parse_Collider_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1235,7 +1235,7 @@
         }
 
 
-        internal static UnityEngine.MeshCollider Udon_Parse_MeshCollider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.MeshCollider Udon_Parse_MeshCollider(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1248,7 +1248,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.MeshCollider> Udon_Parse_MeshCollider_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.MeshCollider> Udon_Parse_MeshCollider_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1261,7 +1261,7 @@
             return null;
         }
 
-        internal static UnityEngine.MeshCollider[] Udon_Parse_MeshCollider_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.MeshCollider[] Udon_Parse_MeshCollider_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1274,7 +1274,7 @@
             return null;
         }
 
-        internal static UnityEngine.Animator Udon_Parse_Animator(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Animator Udon_Parse_Animator(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1287,7 +1287,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Animator> Udon_Parse_Animator_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Animator> Udon_Parse_Animator_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1300,7 +1300,7 @@
             return null;
         }
 
-        internal static UnityEngine.Animator[] Udon_Parse_Animator_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Animator[] Udon_Parse_Animator_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1312,7 +1312,7 @@
             }
             return null;
         }
-        internal static UnityEngine.LineRenderer Udon_Parse_LineRenderer(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.LineRenderer Udon_Parse_LineRenderer(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1325,7 +1325,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.LineRenderer> Udon_Parse_LineRenderer_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.LineRenderer> Udon_Parse_LineRenderer_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1338,7 +1338,7 @@
             return null;
         }
 
-        internal static UnityEngine.LineRenderer[] Udon_Parse_LineRenderer_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.LineRenderer[] Udon_Parse_LineRenderer_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1352,7 +1352,7 @@
         }
 
 
-        internal static UnityEngine.RaycastHit? Udon_Parse_RaycastHit(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.RaycastHit? Udon_Parse_RaycastHit(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1365,7 +1365,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.RaycastHit> Udon_Parse_RaycastHit_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.RaycastHit> Udon_Parse_RaycastHit_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1378,7 +1378,7 @@
             return null;
         }
 
-        internal static UnityEngine.RaycastHit[] Udon_Parse_RaycastHit_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.RaycastHit[] Udon_Parse_RaycastHit_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1391,7 +1391,7 @@
             return null;
         }
 
-        internal static UnityEngine.RectTransform Udon_Parse_RectTransform(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.RectTransform Udon_Parse_RectTransform(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1404,7 +1404,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.RectTransform> Udon_Parse_RectTransform_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.RectTransform> Udon_Parse_RectTransform_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1417,7 +1417,7 @@
             return null;
         }
 
-        internal static UnityEngine.RectTransform[] Udon_Parse_RectTransform_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.RectTransform[] Udon_Parse_RectTransform_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1430,7 +1430,7 @@
             return null;
         }
 
-        internal static UnityEngine.Camera Udon_Parse_Camera(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Camera Udon_Parse_Camera(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1443,7 +1443,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Camera> Udon_Parse_Camera_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Camera> Udon_Parse_Camera_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1456,7 +1456,7 @@
             return null;
         }
 
-        internal static UnityEngine.Camera[] Udon_Parse_Camera_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Camera[] Udon_Parse_Camera_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1468,7 +1468,7 @@
             }
             return null;
         }
-        internal static UnityEngine.KeyCode? Udon_Parse_KeyCode(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.KeyCode? Udon_Parse_KeyCode(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1481,7 +1481,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.KeyCode> Udon_Parse_KeyCode_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.KeyCode> Udon_Parse_KeyCode_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1494,7 +1494,7 @@
             return null;
         }
 
-        internal static UnityEngine.KeyCode[] Udon_Parse_KeyCode_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.KeyCode[] Udon_Parse_KeyCode_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1507,7 +1507,7 @@
             return null;
         }
 
-        internal static UnityEngine.Rect? Udon_Parse_Rect(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Rect? Udon_Parse_Rect(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1520,7 +1520,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Rect> Udon_Parse_Rect_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Rect> Udon_Parse_Rect_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1533,7 +1533,7 @@
             return null;
         }
 
-        internal static UnityEngine.Rect[] Udon_Parse_Rect_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Rect[] Udon_Parse_Rect_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1546,7 +1546,7 @@
             return null;
         }
 
-        internal static UnityEngine.Texture2D Udon_Parse_Texture2D(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Texture2D Udon_Parse_Texture2D(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1559,7 +1559,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Texture2D> Udon_Parse_Texture2D_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Texture2D> Udon_Parse_Texture2D_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1572,7 +1572,7 @@
             return null;
         }
 
-        internal static UnityEngine.Texture2D[] Udon_Parse_Texture2D_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Texture2D[] Udon_Parse_Texture2D_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1585,7 +1585,7 @@
             return null;
         }
 
-        internal static UnityEngine.AI.NavMeshAgent Udon_Parse_UnityEngine_AI_NavMeshAgent(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.AI.NavMeshAgent Udon_Parse_UnityEngine_AI_NavMeshAgent(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1598,7 +1598,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.AI.NavMeshAgent> Udon_Parse_UnityEngine_AI_NavMeshAgent_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.AI.NavMeshAgent> Udon_Parse_UnityEngine_AI_NavMeshAgent_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1611,7 +1611,7 @@
             return null;
         }
 
-        internal static UnityEngine.AI.NavMeshAgent[] Udon_Parse_UnityEngine_AI_NavMeshAgent_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.AI.NavMeshAgent[] Udon_Parse_UnityEngine_AI_NavMeshAgent_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1624,7 +1624,7 @@
             return null;
         }
 
-        internal static UnityEngine.AI.NavMeshHit? Udon_Parse_UnityEngine_AI_NavMeshHit(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.AI.NavMeshHit? Udon_Parse_UnityEngine_AI_NavMeshHit(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1637,7 +1637,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.AI.NavMeshHit> Udon_Parse_UnityEngine_AI_NavMeshHit_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.AI.NavMeshHit> Udon_Parse_UnityEngine_AI_NavMeshHit_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1650,7 +1650,7 @@
             return null;
         }
 
-        internal static UnityEngine.AI.NavMeshHit[] Udon_Parse_UnityEngine_AI_NavMeshHit_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.AI.NavMeshHit[] Udon_Parse_UnityEngine_AI_NavMeshHit_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1663,7 +1663,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.Toggle Udon_Parse_UnityEngine_UI_Toggle(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Toggle Udon_Parse_UnityEngine_UI_Toggle(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1676,7 +1676,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.UI.Toggle> Udon_Parse_UnityEngine_UI_Toggle_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.UI.Toggle> Udon_Parse_UnityEngine_UI_Toggle_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1689,7 +1689,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.Toggle[] Udon_Parse_UnityEngine_UI_Toggle_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Toggle[] Udon_Parse_UnityEngine_UI_Toggle_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1701,7 +1701,7 @@
             }
             return null;
         }
-        internal static UnityEngine.UI.Image Udon_Parse_UnityEngine_UI_Image(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Image Udon_Parse_UnityEngine_UI_Image(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1714,7 +1714,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.UI.Image> Udon_Parse_UnityEngine_UI_Image_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.UI.Image> Udon_Parse_UnityEngine_UI_Image_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1727,7 +1727,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.Image[] Udon_Parse_UnityEngine_UI_Image_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Image[] Udon_Parse_UnityEngine_UI_Image_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1740,7 +1740,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.Button Udon_Parse_UnityEngine_UI_Button(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Button Udon_Parse_UnityEngine_UI_Button(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1753,7 +1753,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.UI.Button> Udon_Parse_UnityEngine_UI_Button_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.UI.Button> Udon_Parse_UnityEngine_UI_Button_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1766,7 +1766,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.Button[] Udon_Parse_UnityEngine_UI_Button_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Button[] Udon_Parse_UnityEngine_UI_Button_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1778,7 +1778,7 @@
             }
             return null;
         }
-        internal static VRC.SDK3.Components.VRCAvatarPedestal Udon_Parse_VRC_SDK3_Components_VRCAvatarPedestal(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Components.VRCAvatarPedestal Udon_Parse_VRC_SDK3_Components_VRCAvatarPedestal(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1791,7 +1791,7 @@
             return null;
         }
 
-        internal static List<VRC.SDK3.Components.VRCAvatarPedestal> Udon_Parse_VRC_SDK3_Components_VRCAvatarPedestal_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.SDK3.Components.VRCAvatarPedestal> Udon_Parse_VRC_SDK3_Components_VRCAvatarPedestal_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1804,7 +1804,7 @@
             return null;
         }
 
-        internal static VRC.SDK3.Components.VRCAvatarPedestal[] Udon_Parse_VRC_SDK3_Components_VRCAvatarPedestal_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Components.VRCAvatarPedestal[] Udon_Parse_VRC_SDK3_Components_VRCAvatarPedestal_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1816,7 +1816,7 @@
             }
             return null;
         }
-        internal static VRC.SDK3.Components.VRCPickup Udon_Parse_VRC_SDK3_Components_VRCPickup(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Components.VRCPickup Udon_Parse_VRC_SDK3_Components_VRCPickup(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1829,7 +1829,7 @@
             return null;
         }
 
-        internal static List<VRC.SDK3.Components.VRCPickup> Udon_Parse_VRC_SDK3_Components_VRCPickup_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.SDK3.Components.VRCPickup> Udon_Parse_VRC_SDK3_Components_VRCPickup_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1842,7 +1842,7 @@
             return null;
         }
 
-        internal static VRC.SDK3.Components.VRCPickup[] Udon_Parse_VRC_SDK3_Components_VRCPickup_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Components.VRCPickup[] Udon_Parse_VRC_SDK3_Components_VRCPickup_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1855,7 +1855,7 @@
             return null;
         }
 
-        internal static double? Udon_Parse_double(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static double? Udon_Parse_double(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1868,7 +1868,7 @@
             return null;
         }
 
-        internal static List<double> Udon_Parse_double_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<double> Udon_Parse_double_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1881,7 +1881,7 @@
             return null;
         }
 
-        internal static double[] Udon_Parse_double_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static double[] Udon_Parse_double_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1894,7 +1894,7 @@
             return null;
         }
 
-        internal static System.TimeSpan? Udon_Parse_TimeSpan(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static System.TimeSpan? Udon_Parse_TimeSpan(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1907,7 +1907,7 @@
             return null;
         }
 
-        internal static List<System.TimeSpan> Udon_Parse_TimeSpan_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<System.TimeSpan> Udon_Parse_TimeSpan_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1920,7 +1920,7 @@
             return null;
         }
 
-        internal static System.TimeSpan[] Udon_Parse_TimeSpan_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static System.TimeSpan[] Udon_Parse_TimeSpan_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1933,7 +1933,7 @@
             return null;
         }
 
-        internal static UnityEngine.Mesh Udon_Parse_Mesh(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Mesh Udon_Parse_Mesh(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1946,7 +1946,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Mesh> Udon_Parse_Mesh_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Mesh> Udon_Parse_Mesh_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1959,7 +1959,7 @@
             return null;
         }
 
-        internal static UnityEngine.Mesh[] Udon_Parse_Mesh_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Mesh[] Udon_Parse_Mesh_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1972,7 +1972,7 @@
             return null;
         }
 
-        internal static UnityEngine.Texture Udon_Parse_Texture(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Texture Udon_Parse_Texture(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1985,7 +1985,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Texture> Udon_Parse_Texture_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Texture> Udon_Parse_Texture_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1998,7 +1998,7 @@
             return null;
         }
 
-        internal static UnityEngine.Texture[] Udon_Parse_Texture_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Texture[] Udon_Parse_Texture_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2011,7 +2011,7 @@
             return null;
         }
 
-        internal static UnityEngine.ReflectionProbe Udon_Parse_ReflectionProbe(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.ReflectionProbe Udon_Parse_ReflectionProbe(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2024,7 +2024,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.ReflectionProbe> Udon_Parse_ReflectionProbe_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.ReflectionProbe> Udon_Parse_ReflectionProbe_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2037,7 +2037,7 @@
             return null;
         }
 
-        internal static UnityEngine.ReflectionProbe[] Udon_Parse_ReflectionProbe_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.ReflectionProbe[] Udon_Parse_ReflectionProbe_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2050,7 +2050,7 @@
             return null;
         }
 
-        internal static UnityEngine.TextAsset Udon_Parse_TextAsset(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.TextAsset Udon_Parse_TextAsset(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2063,7 +2063,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.TextAsset> Udon_Parse_TextAsset_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.TextAsset> Udon_Parse_TextAsset_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2076,7 +2076,7 @@
             return null;
         }
 
-        internal static UnityEngine.TextAsset[] Udon_Parse_TextAsset_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.TextAsset[] Udon_Parse_TextAsset_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2091,7 +2091,7 @@
 
 
 
-        internal static UnityEngine.UI.Slider Udon_Parse_UnityEngine_UI_Slider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Slider Udon_Parse_UnityEngine_UI_Slider(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2104,7 +2104,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.UI.Slider> Udon_Parse_UnityEngine_UI_Slider_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.UI.Slider> Udon_Parse_UnityEngine_UI_Slider_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2117,7 +2117,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.Slider[] Udon_Parse_UnityEngine_UI_Slider_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.Slider[] Udon_Parse_UnityEngine_UI_Slider_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2132,7 +2132,7 @@
 
 
 
-        internal static UnityEngine.UI.ScrollRect Udon_Parse_UnityEngine_UI_ScrollRect(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.ScrollRect Udon_Parse_UnityEngine_UI_ScrollRect(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2145,7 +2145,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.UI.ScrollRect> Udon_Parse_UnityEngine_UI_ScrollRect_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.UI.ScrollRect> Udon_Parse_UnityEngine_UI_ScrollRect_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2158,7 +2158,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.ScrollRect[] Udon_Parse_UnityEngine_UI_ScrollRect_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.ScrollRect[] Udon_Parse_UnityEngine_UI_ScrollRect_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2172,7 +2172,7 @@
         }
 
 
-        internal static UnityEngine.UI.InputField Udon_Parse_UnityEngine_UI_InputField(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.InputField Udon_Parse_UnityEngine_UI_InputField(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2185,7 +2185,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.UI.InputField> Udon_Parse_UnityEngine_UI_InputField_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.UI.InputField> Udon_Parse_UnityEngine_UI_InputField_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2198,7 +2198,7 @@
             return null;
         }
 
-        internal static UnityEngine.UI.InputField[] Udon_Parse_UnityEngine_UI_InputField_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.UI.InputField[] Udon_Parse_UnityEngine_UI_InputField_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2212,7 +2212,7 @@
         }
 
 
-        internal static VRC.Udon.Common.SerializationResult? Udon_Parse_VRC_Udon_Common_SerializationResult(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.Udon.Common.SerializationResult? Udon_Parse_VRC_Udon_Common_SerializationResult(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2225,7 +2225,7 @@
             return null;
         }
 
-        internal static List<VRC.Udon.Common.SerializationResult> Udon_Parse_VRC_Udon_Common_SerializationResult_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.Udon.Common.SerializationResult> Udon_Parse_VRC_Udon_Common_SerializationResult_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2238,7 +2238,7 @@
             return null;
         }
 
-        internal static VRC.Udon.Common.SerializationResult[] Udon_Parse_VRC_Udon_Common_SerializationResult_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.Udon.Common.SerializationResult[] Udon_Parse_VRC_Udon_Common_SerializationResult_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2252,7 +2252,7 @@
         }
 
 
-        internal static VRC.SDKBase.VRCUrl Udon_Parse_VRC_SDKBase_VRCUrl(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDKBase.VRCUrl Udon_Parse_VRC_SDKBase_VRCUrl(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2265,7 +2265,7 @@
             return null;
         }
 
-        internal static List<VRC.SDKBase.VRCUrl> Udon_Parse_VRC_SDKBase_VRCUrl_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.SDKBase.VRCUrl> Udon_Parse_VRC_SDKBase_VRCUrl_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2278,7 +2278,7 @@
             return null;
         }
 
-        internal static VRC.SDKBase.VRCUrl[] Udon_Parse_VRC_SDKBase_VRCUrl_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDKBase.VRCUrl[] Udon_Parse_VRC_SDKBase_VRCUrl_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2292,7 +2292,7 @@
         }
 
 
-        internal static VRC.SDK3.Components.Video.VideoError? Udon_Parse_VRC_SDK3_Components_Video_VideoError(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Components.Video.VideoError? Udon_Parse_VRC_SDK3_Components_Video_VideoError(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2305,7 +2305,7 @@
             return null;
         }
 
-        internal static List<VRC.SDK3.Components.Video.VideoError> Udon_Parse_VRC_SDK3_Components_Video_VideoError_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.SDK3.Components.Video.VideoError> Udon_Parse_VRC_SDK3_Components_Video_VideoError_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2318,7 +2318,7 @@
             return null;
         }
 
-        internal static VRC.SDK3.Components.Video.VideoError[] Udon_Parse_VRC_SDK3_Components_Video_VideoError_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Components.Video.VideoError[] Udon_Parse_VRC_SDK3_Components_Video_VideoError_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2333,7 +2333,7 @@
 
 
 
-        internal static VRC.SDK3.Components.VRCUrlInputField VRC_SDK3_Components_VRCUrlInputField(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Components.VRCUrlInputField VRC_SDK3_Components_VRCUrlInputField(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2346,7 +2346,7 @@
             return null;
         }
 
-        internal static List<VRC.SDK3.Components.VRCUrlInputField> VRC_SDK3_Components_VRCUrlInputField_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.SDK3.Components.VRCUrlInputField> VRC_SDK3_Components_VRCUrlInputField_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2359,7 +2359,7 @@
             return null;
         }
 
-        internal static VRC.SDK3.Components.VRCUrlInputField[] VRC_SDK3_Components_VRCUrlInputField_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Components.VRCUrlInputField[] VRC_SDK3_Components_VRCUrlInputField_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2374,7 +2374,7 @@
 
 
 
-        internal static VRC.SDK3.Video.Components.VRCUnityVideoPlayer VRC_SDK3_Video_Components_VRCUnityVideoPlayer(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Video.Components.VRCUnityVideoPlayer VRC_SDK3_Video_Components_VRCUnityVideoPlayer(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2387,7 +2387,7 @@
             return null;
         }
 
-        internal static List<VRC.SDK3.Video.Components.VRCUnityVideoPlayer> VRC_SDK3_Video_Components_VRCUnityVideoPlayer_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.SDK3.Video.Components.VRCUnityVideoPlayer> VRC_SDK3_Video_Components_VRCUnityVideoPlayer_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2400,7 +2400,7 @@
             return null;
         }
 
-        internal static VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2414,7 +2414,7 @@
         }
 
 
-        internal static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2427,7 +2427,7 @@
             return null;
         }
 
-        internal static List<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer> VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer> VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2440,7 +2440,7 @@
             return null;
         }
 
-        internal static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -3146,7 +3146,7 @@
         }
 
 
-        internal static UnityEngine.RenderTexture Udon_Parse_RenderTexture(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.RenderTexture Udon_Parse_RenderTexture(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -3159,7 +3159,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.RenderTexture> Udon_Parse_RenderTexture_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.RenderTexture> Udon_Parse_RenderTexture_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -3172,7 +3172,7 @@
             return null;
         }
 
-        internal static UnityEngine.RenderTexture[] Udon_Parse_RenderTexture_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.RenderTexture[] Udon_Parse_RenderTexture_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -3702,7 +3702,7 @@
 
 
 
-        internal static ushort? Udon_Parse_System_UInt16(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static ushort? Udon_Parse_System_UInt16(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -3715,7 +3715,7 @@
             return null;
         }
 
-        internal static List<ushort> Udon_Parse_System_UInt16_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<ushort> Udon_Parse_System_UInt16_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -3728,7 +3728,7 @@
             return null;
         }
 
-        internal static ushort[] Udon_Parse_System_UInt16_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static ushort[] Udon_Parse_System_UInt16_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -4528,7 +4528,7 @@
 
 
 
-        internal static UnityEngine.LayerMask? Udon_Parse_LayerMask(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.LayerMask? Udon_Parse_LayerMask(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -4541,7 +4541,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.LayerMask> Udon_Parse_LayerMask_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.LayerMask> Udon_Parse_LayerMask_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -4554,7 +4554,7 @@
             return null;
         }
 
-        internal static UnityEngine.LayerMask[] Udon_Parse_LayerMask_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.LayerMask[] Udon_Parse_LayerMask_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -4746,7 +4746,7 @@
 
 
 
-        internal static UnityEngine.Bounds? Udon_Parse_Bounds(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Bounds? Udon_Parse_Bounds(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -4759,7 +4759,7 @@
             return null;
         }
 
-        internal static List<UnityEngine.Bounds> Udon_Parse_Bounds_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static List<UnityEngine.Bounds> Udon_Parse_Bounds_List(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -4772,7 +4772,7 @@
             return null;
         }
 
-        internal static UnityEngine.Bounds[] Udon_Parse_Bounds_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        internal static UnityEngine.Bounds[] Udon_Parse_Bounds_Array(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
             {

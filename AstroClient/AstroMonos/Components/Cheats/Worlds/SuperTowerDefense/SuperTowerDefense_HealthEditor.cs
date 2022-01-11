@@ -64,7 +64,7 @@
         private string BoughtLives { [HideFromIl2Cpp] get; } = "TimesBoughtLives";
         internal bool GodMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
-        internal DisassembledUdonBehaviour HealthController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal RawUdonBehaviour HealthController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal static CustomLists.UdonBehaviour_Cached ResetHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
@@ -77,7 +77,7 @@
                 if (obj != null)
                 {
                     ResetHealth = obj;
-                    HealthController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                    HealthController = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
                 {

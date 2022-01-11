@@ -102,7 +102,7 @@
             }
         }
 
-        private static DisassembledUdonBehaviour BankController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private static RawUdonBehaviour BankController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // Use this for initialization
         internal void Start()
@@ -112,7 +112,7 @@
                 var obj = gameObject.FindUdonEvent("Restart");
                 if (obj != null)
                 {
-                    BankController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                    BankController = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
                 {

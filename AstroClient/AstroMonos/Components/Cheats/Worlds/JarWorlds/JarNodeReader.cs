@@ -24,9 +24,9 @@
             [HideFromIl2Cpp]
             get
             {
-                if (DisassembledNode != null)
+                if (RawNode != null)
                 {
-                    var player = UdonHeapParser.Udon_Parse_VRCPlayerApi(DisassembledNode, "playerApi");
+                    var player = UdonHeapParser.Udon_Parse_VRCPlayerApi(RawNode, "playerApi");
                     if (player != null) return player;
                 }
 
@@ -35,13 +35,13 @@
         }
 
         internal UdonBehaviour Node { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        internal DisassembledUdonBehaviour DisassembledNode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal RawUdonBehaviour RawNode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         // Use this for initialization
         internal void Start()
         {
             Node = gameObject.GetComponent<UdonBehaviour>();
-            if (Node != null) DisassembledNode = Node.DisassembleUdonBehaviour();
+            if (Node != null) RawNode = Node.ToRawUdonBehaviour();
         }
 
         internal override void OnRoomLeft()

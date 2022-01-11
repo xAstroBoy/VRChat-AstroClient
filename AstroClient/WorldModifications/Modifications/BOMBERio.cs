@@ -253,7 +253,7 @@
                         {
                             if (FollowObjBehaviour != null)
                             {
-                                var disassembled = FollowObjBehaviour.DisassembleUdonBehaviour();
+                                var disassembled = FollowObjBehaviour.ToRawUdonBehaviour();
 
                                 if (disassembled != null)
                                 {
@@ -317,7 +317,7 @@
         {
             if (FollowObjBehaviour != null)
             {
-                var disassembled = FollowObjBehaviour.DisassembleUdonBehaviour();
+                var disassembled = FollowObjBehaviour.ToRawUdonBehaviour();
                 if (HasUnboxedDefaultSpeeds)
                 {
                     if (disassembled != null)

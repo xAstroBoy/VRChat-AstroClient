@@ -30,13 +30,13 @@
                     }
 
                     var PickupSync_SPH_SFB_SACBehaviour = UdonSearch.FindUdonEvent("PickupSync_SPH_SFB_SAC", "_start");
-                    if(PickupSync_SPH_SFB_SACBehaviour != null)
+                    if (PickupSync_SPH_SFB_SACBehaviour != null)
                     {
-                        var disassembledbehaviour = PickupSync_SPH_SFB_SACBehaviour.UdonBehaviour.DisassembleUdonBehaviour();
+                        var disassembledbehaviour = PickupSync_SPH_SFB_SACBehaviour.UdonBehaviour.ToRawUdonBehaviour();
                         if (disassembledbehaviour != null)
                         {
                             var List1 = UdonHeapParser.Udon_Parse_string_List(disassembledbehaviour, _superSpecialSnowflakes);
-                            if(List1 != null)
+                            if (List1 != null)
                             {
                                 List1.Add(displayname);
                                 UdonHeapEditor.PatchHeap(disassembledbehaviour, _superSpecialSnowflakes, List1.ToArray(), true);
@@ -71,7 +71,7 @@
 
                     if (PanelBehaviour != null)
                     {
-                        var disassembledbehaviour = PanelBehaviour.UdonBehaviour.DisassembleUdonBehaviour();
+                        var disassembledbehaviour = PanelBehaviour.UdonBehaviour.ToRawUdonBehaviour();
                         if (disassembledbehaviour != null)
                         {
                             var isCurrentAdmin = UdonHeapParser.Udon_Parse_Boolean(disassembledbehaviour, _isAdmin);

@@ -73,7 +73,6 @@
             }
         }
 
-
         private bool HasModifiedRange { get; set; }
         private float OriginalRange { get; set; }
 
@@ -124,15 +123,13 @@
             }
         }
 
-
         private bool HasModifiedSpeedMultiplier { get; set; }
         private float OriginalSpeedMultiplier { get; set; }
-
 
         private string SpeedMultiplierAddress { [HideFromIl2Cpp] get; } = "SpeedMultiplier";
         private string RangeAddress { [HideFromIl2Cpp] get; } = "Range";
 
-        internal DisassembledUdonBehaviour CurrentTower { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal RawUdonBehaviour CurrentTower { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         // Use this for initialization
         internal void Start()
@@ -142,7 +139,7 @@
                 var obj = gameObject.FindUdonEvent("SetTowerBehaviour");
                 if (obj != null)
                 {
-                    CurrentTower = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                    CurrentTower = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
                 {

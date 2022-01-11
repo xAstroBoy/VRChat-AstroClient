@@ -16,7 +16,7 @@
             {
                 StringBuilder builder = new StringBuilder();
 
-                var unpackedudon = udonnode.DisassembleUdonBehaviour();
+                var unpackedudon = udonnode.ToRawUdonBehaviour();
                 if (unpackedudon != null)
                 {
                     System.Console.Clear();
@@ -42,7 +42,6 @@
             }
         }
 
-
         internal static void DumpUdonUnsupportedTypes()
         {
             if (UdonHeapUnboxerUtils.UnsupportedTypes.Count() != 0)
@@ -59,14 +58,12 @@
             }
         }
 
-
-
         internal static string UnboxUdonToString(UdonBehaviour udonnode)
         {
             if (udonnode != null)
             {
                 StringBuilder builder = new StringBuilder();
-                var unpackedudon = udonnode.DisassembleUdonBehaviour();
+                var unpackedudon = udonnode.ToRawUdonBehaviour();
                 if (unpackedudon != null)
                 {
                     _ = builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
@@ -89,8 +86,6 @@
             }
             return null;
         }
-
-        
 
     }
 }

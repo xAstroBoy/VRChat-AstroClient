@@ -26,7 +26,6 @@
             Destroy(this);
         }
 
-
         internal bool? __0_validPlacement_Boolean
         {
             [HideFromIl2Cpp]
@@ -60,7 +59,6 @@
                         UdonHeapEditor.PatchHeap(CurrentTower, "previouslyValidPlacement", value.Value);
             }
         }
-
 
         internal bool? __70_intnl_SystemBoolean
         {
@@ -114,9 +112,7 @@
             }
         }
 
-
-
-        internal DisassembledUdonBehaviour CurrentTower { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal RawUdonBehaviour CurrentTower { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         // Use this for initialization
         internal void Start()
@@ -126,7 +122,7 @@
                 var obj = gameObject.FindUdonEvent("_onPickup");
                 if (obj != null)
                 {
-                    CurrentTower = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                    CurrentTower = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
                 {

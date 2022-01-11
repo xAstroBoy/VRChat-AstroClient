@@ -1149,7 +1149,7 @@
                 if (patreonlist != null)
                 {
                     var node = patreonlist.GetComponent<UdonBehaviour>();
-                    var disassembled = node.DisassembleUdonBehaviour();
+                    var disassembled = node.ToRawUdonBehaviour();
                     if (disassembled != null)
                     {
                         var obj_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("localPatrons"));
@@ -1196,7 +1196,7 @@
             if (patreonlist != null)
             {
                 var node = patreonlist.GetComponent<UdonBehaviour>();
-                var disassembled = node.DisassembleUdonBehaviour();
+                var disassembled = node.ToRawUdonBehaviour();
                 if (disassembled != null)
                 {
                     try

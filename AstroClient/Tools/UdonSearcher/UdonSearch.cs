@@ -53,8 +53,6 @@
             return null;
         }
 
-
-
         internal static List<GameObject> FindAllUdonEvents(List<string> GameObjectNames, List<string> TermsToWhitelist, List<string> TermsToAvoid, bool Debug = false)
         {
             List<GameObject> SearchResult = new List<GameObject>();
@@ -165,8 +163,6 @@
                             }
                         }
 
-
-
                         if (HasWhiteListedKey)
                         {
                             SearchResult.Add(behaviour.gameObject);
@@ -269,7 +265,6 @@
             return null;
         }
 
-
         internal static Il2CppSystem.Object FindUdonVariable(GameObject obj, string SymbolName)
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
@@ -277,7 +272,7 @@
             {
                 foreach (var behaviour in actionObjects)
                 {
-                    var unpackedudon = behaviour.DisassembleUdonBehaviour();
+                    var unpackedudon = behaviour.ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
                         if (unpackedudon == null || unpackedudon == null)
@@ -314,8 +309,6 @@
             return null;
         }
 
-
-
         internal static List<string> FindUdonAvatarPedestrals()
         {
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
@@ -324,7 +317,7 @@
             {
                 foreach (var behaviour in udons)
                 {
-                    var unpackedudon = behaviour.DisassembleUdonBehaviour();
+                    var unpackedudon = behaviour.ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
                         if (unpackedudon == null || unpackedudon == null)

@@ -41,7 +41,6 @@
             }
         }
 
-
         internal int? PolyCounter2
         {
             [HideFromIl2Cpp]
@@ -59,7 +58,6 @@
             }
         }
 
-
         internal string PolyCounter3
         {
             [HideFromIl2Cpp]
@@ -76,8 +74,7 @@
             }
         }
 
-
-        private static DisassembledUdonBehaviour LevelController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private static RawUdonBehaviour LevelController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // Use this for initialization
         internal void Start()
@@ -87,7 +84,7 @@
                 var obj = gameObject.FindUdonEvent("_ConfirmAllPartsPlaced");
                 if (obj != null)
                 {
-                    LevelController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                    LevelController = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
                 {

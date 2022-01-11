@@ -44,7 +44,7 @@
 
         private string Counter { [HideFromIl2Cpp] get; } = "_currentCounter";
 
-        private static DisassembledUdonBehaviour PolyCollector { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private static RawUdonBehaviour PolyCollector { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // Use this for initialization
         internal void Start()
@@ -54,7 +54,7 @@
                 var obj = gameObject.FindUdonEvent("_UpdateCounter");
                 if (obj != null)
                 {
-                    PolyCollector = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                    PolyCollector = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
                 {

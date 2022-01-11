@@ -5,7 +5,7 @@
 
     internal class UdonUnpacker_Utils
     {
-        internal static DisassembledUdonBehaviour DisassembleUdonBehaviour(UdonBehaviour udon)
+        internal static RawUdonBehaviour ToRawUdonBehaviour(UdonBehaviour udon)
         {
             if (udon != null)
             {
@@ -32,7 +32,7 @@
                         }
                         if (program != null && symbol_table != null && heap != null)
                         {
-                            return new DisassembledUdonBehaviour(program, symbol_table, heap);
+                            return new RawUdonBehaviour(program, symbol_table, heap);
                         }
                     }
                     else

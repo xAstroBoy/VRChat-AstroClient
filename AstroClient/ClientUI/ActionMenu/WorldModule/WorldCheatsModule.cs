@@ -109,6 +109,8 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                             CustomSubMenu.AddButton("Add 1000000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 1000000; } });
                             CustomSubMenu.AddButton("Add 10000000 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 10000000; } });
                             CustomSubMenu.AddButton("Set 999999999 Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = 999999999; } });
+                            CustomSubMenu.AddButton($"Set {int.MaxValue} Money", () => { if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) { SuperTowerDefense.BankEditor.Money = int.MaxValue; } });
+
                         });
                         CustomSubMenu.AddSubMenu("Health Mods", () =>
                         {
