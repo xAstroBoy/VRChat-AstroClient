@@ -112,7 +112,7 @@
                 if (RighthandGrasper != null)
                 {
                     if (RighthandGrasper.Method_Public_VRC_Pickup_0() != null) return;
-                    pickup.gameObject.TeleportToMeWithRot(HumanBodyBones.RightHand, false);
+                    pickup.gameObject.TeleportToMeWithRot(HumanBodyBones.RightIndexProximal, false);
                 }
             }
         }
@@ -124,7 +124,8 @@
                 if (LefthandGrasper != null)
                 {
                     if (LefthandGrasper.Method_Public_VRC_Pickup_0() != null) return;
-                    pickup.gameObject.TeleportToMeWithRot(HumanBodyBones.LeftHand, false);
+                    pickup.gameObject.TakeOwnership();
+                    pickup.gameObject.TeleportToMeWithRot(HumanBodyBones.LeftIndexProximal, false);
                 }
             }
         }
@@ -146,7 +147,6 @@
                 return _RightHandGrasper;
             }
         }
-
 
         private static VRCHandGrasper _LeftHandGrasper;
 

@@ -234,7 +234,18 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                 }
 
                 #endregion
+                #region  PuttPuttPond
 
+                if (WorldUtils.WorldID == WorldIds.PuttPuttPond)
+                {
+                    CustomSubMenu.AddSubMenu("Putt Putt Pond", () =>
+                    {
+                        CustomSubMenu.AddToggle("Patron Mode", PuttPuttPond.isPatron.GetValueOrDefault(false), ToggleValue => { PuttPuttPond.isPatron = ToggleValue; });
+
+                    });
+                }
+
+                #endregion
             }, ClientResources.Loaders.Icons.thief);
 
             ModConsole.Log("World Module is ready!", Color.Green);

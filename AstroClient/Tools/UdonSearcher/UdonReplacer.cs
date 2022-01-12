@@ -7,6 +7,7 @@
     using Il2CppSystem.Text.RegularExpressions;
     using TMPro;
     using UdonEditor;
+    using UnityEngine;
     using VRC.Udon;
     using xAstroBoy;
     using xAstroBoy.Extensions;
@@ -18,6 +19,7 @@
             if (!find.IsNotNullOrEmptyOrWhiteSpace() || !replacement.IsNotNullOrEmptyOrWhiteSpace()) return;
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             int result = 0;
+            int unsupported = 0;
             var reg = new Regex();
             if (udons.Count() != 0)
             {
@@ -143,9 +145,10 @@
                                                     {
                                                         if (item.text.isMatch(find))
                                                         {
-                                                            var patchedstr = item.text.ReplaceWholeWord(find, replacement);
-                                                            result++;
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedstr, true);
+                                                            unsupported++;
+                                                            //var patchedstr = item.text.ReplaceWholeWord(find, replacement);
+                                                            //result++;
+                                                            //UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedstr, true);
 
                                                         }
                                                     }
@@ -154,10 +157,11 @@
                                                 }
                                             case UdonTypes_String.UnityEngine_TextAsset_Array:
                                                 {
+
                                                     var list = UnboxVariable.Unpack_List_TextAsset();
                                                     if (list.Count() != 0)
                                                     {
-                                                        var patchedlist = new List<string>();
+                                                        var patchedlist = new List<TextAsset>();
                                                         bool modified = false;
                                                         foreach (var item in list)
                                                         {
@@ -166,22 +170,22 @@
                                                             {
                                                                 if (item.text.isMatch(find))
                                                                 {
-                                                                    result++;
-                                                                    var patchedstr = item.text.ReplaceWholeWord(find, replacement);
-                                                                    patchedlist.Add(patchedstr);
-                                                                    modified = true;
-                                                                }
-                                                                else
-                                                                {
-                                                                    patchedlist.Add(item.text);
+                                                                    unsupported++;
+                                                                    //    var patchedstr = item.text.ReplaceWholeWord(find, replacement);
+                                                                    //    patchedlist.Add(patchedstr);
+                                                                    //    modified = true;
+                                                                    //}
+                                                                    //else
+                                                                    //{
+                                                                    //    patchedlist.Add(item.text);
                                                                 }
                                                             }
                                                         }
 
-                                                        if (modified)
-                                                        {
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
-                                                        }
+                                                        //if (modified)
+                                                        //{
+                                                        //    UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
+                                                        //}
                                                     }
 
                                                     break;
@@ -199,7 +203,7 @@
                         }
                     }
                 }
-                ModConsole.DebugLog($"Found and replaced {result}, containing {find} with {replacement}");
+                ModConsole.DebugLog($"Found and replaced {result}, containing {find} with {replacement}, Unsupported Types containing Match : {unsupported}");
             }
         }
     }

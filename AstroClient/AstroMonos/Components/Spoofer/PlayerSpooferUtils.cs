@@ -31,7 +31,6 @@
             }
         }
 
-
         private static PlayerSpoofer Instance;
 
         internal static PlayerSpoofer SpooferInstance
@@ -49,6 +48,11 @@
         {
             get => Instance.SpoofedName;
             set => Instance.SpoofedName = value;
+        }
+
+        internal static string Original_DisplayName
+        {
+            get => Instance.Original_DisplayName;
         }
 
         private static bool _SpoofASWorldAuthor;

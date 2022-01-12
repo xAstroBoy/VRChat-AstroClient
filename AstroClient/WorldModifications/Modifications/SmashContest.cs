@@ -11,7 +11,7 @@
         {
             if (id == WorldIds.SmashContest)
             {
-                ModConsole.DebugLog("Recognized Smash Contest, Searching For Sandbag");
+                ModConsole.DebugLog($"Recognized {Name} World, Searching For Sandbag");
                 var sandbag = GameObjectFinder.Find("SandBag");
                 if (sandbag != null)
                 {

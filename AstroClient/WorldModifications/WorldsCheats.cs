@@ -35,6 +35,7 @@
             PoolParlor.InitButtons(WorldCheats);
             UdonTycoon.InitButtons(WorldCheats);
             ClickerGame.InitButtons(WorldCheats);
+            PuttPuttPond.InitButtons(WorldCheats);
         }
     }
 }

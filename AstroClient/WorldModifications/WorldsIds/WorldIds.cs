@@ -32,5 +32,6 @@
         public const string Udon_Tycoon = "wrld_257ce0c9-35cc-45ce-a8fc-9d703067c58a";
         public const string Clicker_Game = "wrld_986c0468-f64e-494f-97e4-9e3fdc8dcecb";
         public const string KitchenCooks = "wrld_df2776a3-8c84-45e3-bbf1-30ac8422911b";
+        public const string PuttPuttPond = "wrld_ab68f896-a21f-4d72-a016-5a0a42c3158f";
     }
 }
