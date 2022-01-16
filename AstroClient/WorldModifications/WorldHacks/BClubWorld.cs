@@ -47,6 +47,8 @@
         private static QMToggleButton FreezeUnlockedToggle { get; set; }
         private static QMToggleButton BlueChairToggle { get; set; }
 
+        private static UdonBehaviour_Cached MoanSpamBehaviour { get; set; }
+
         private static bool _isFreezeLockEnabed { get; set; }
         private static bool _isFreezeUnlockEnabed { get; set; }
         private static bool _isRainbowEnabled { get; set; }
@@ -187,7 +189,7 @@
             {
                 if (value)
                 {
-                    if (Rainbow_CancellationToken == null)
+                    if (MoanSpam_CancellationToken == null)
                     {
                         ModConsole.Log("Moan Spam Enabled!");
                         MoanSpam();
@@ -237,13 +239,17 @@
             if (Object != null)
             {
                 var listener = Object.GetOrAddComponent<GameObjectListener>();
-                if (listener != null)
+                MiscUtils.DelayFunction(1f, () =>
                 {
-                    listener.OnEnabled += OnEnabled;
-                    listener.OnDisabled += OnDisabled;
-                    listener.OnDestroyed += OnDestroy;
-                    return listener;
-                }
+                    if (listener != null)
+                    {
+                        listener.OnEnabled += OnEnabled;
+                        listener.OnDisabled += OnDisabled;
+                        listener.OnDestroyed += OnDestroy;
+                    }
+
+                });
+                return listener;
             }
             return null;
         }
@@ -255,26 +261,26 @@
             var DoorController = new QMNestedGridMenu(BClubExploitsPage, "Private Rooms Door", "Control B Club Doors ");
 
             // Locks
-            LockButton1 = new QMToggleButton(DoorController, 1, 0, "Unlock 1", () => { ToggleDoor(1); }, "Lock 1", () => { ToggleDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton2 = new QMToggleButton(DoorController, 2, 0, "Unlock 2", () => { ToggleDoor(2); }, "Lock 2", () => { ToggleDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton3 = new QMToggleButton(DoorController, 3, 0, "Unlock 3", () => { ToggleDoor(3); }, "Lock 3", () => { ToggleDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton4 = new QMToggleButton(DoorController, 1, 1, "Unlock 4", () => { ToggleDoor(4); }, "Lock 4", () => { ToggleDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton5 = new QMToggleButton(DoorController, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton6 = new QMToggleButton(DoorController, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton7 = new QMToggleButton(DoorController, 4, 0, "Unlock 7", () => { ToggleDoor(7); }, "Lock 7", () => { ToggleDoor(7); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton1 = new QMToggleButton(DoorController, "Unlock 1", () => { ToggleDoor(1); }, "Lock 1", () => { ToggleDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton2 = new QMToggleButton(DoorController, "Unlock 2", () => { ToggleDoor(2); }, "Lock 2", () => { ToggleDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton3 = new QMToggleButton(DoorController, "Unlock 3", () => { ToggleDoor(3); }, "Lock 3", () => { ToggleDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton4 = new QMToggleButton(DoorController, "Unlock 4", () => { ToggleDoor(4); }, "Lock 4", () => { ToggleDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton5 = new QMToggleButton(DoorController, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton6 = new QMToggleButton(DoorController, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton7 = new QMToggleButton(DoorController, "Unlock 7", () => { ToggleDoor(7); }, "Lock 7", () => { ToggleDoor(7); }, "Toggle Door Lock", Color.green, Color.red);
 
             // Freeze Locks
-            FreezeLockedToggle = new QMToggleButton(DoorController, -1, 1, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, () => { IsFreezeLockEnabed = false; }, "Door Freezer", Color.green, Color.red);
-            FreezeUnlockedToggle = new QMToggleButton(DoorController, -1, 2, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, () => { IsFreezeUnlockEnabed = false; }, "Door Freezer", Color.green, Color.red);
+            FreezeLockedToggle = new QMToggleButton(DoorController, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, () => { IsFreezeLockEnabed = false; }, "Door Freezer", Color.green, Color.red);
+            FreezeUnlockedToggle = new QMToggleButton(DoorController, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, () => { IsFreezeUnlockEnabed = false; }, "Door Freezer", Color.green, Color.red);
             FreezeLockedToggle.SetToggleState(IsFreezeLockEnabed, false);
             FreezeUnlockedToggle.SetToggleState(IsFreezeUnlockEnabed, false);
 
             var MapFun = new QMNestedGridMenu(BClubExploitsPage, "World Fun", "Some Random Fun things");
 
             // Rainbow
-            ToggleRainbowBtn = new QMToggleButton(MapFun, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, "Rainbow", () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
+            ToggleRainbowBtn = new QMToggleButton(MapFun, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
             ToggleRainbowBtn.SetToggleState(IsRainbowEnabled, false);
-            ToggleMoanSpamBtn = new QMToggleButton(MapFun, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, "Moan Spam", () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
+            ToggleMoanSpamBtn = new QMToggleButton(MapFun, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
 
             // VIP
             SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 6, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", Color.green, Color.red);
@@ -348,16 +354,14 @@
                     yield break;
                 }
 
-                UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt")?.InvokeBehaviour();
-                ModConsole.Log("Moan Bitch!");
+                MoanSpamBehaviour?.InvokeBehaviour();
 
                 if (IsMoanSpamEnabled)
                 {
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.001f);
                 }
                 else
                 {
-                    ModConsole.Error($"DAMN IT {IsMoanSpamEnabled}");
                     yield break;
                 }
             }
@@ -593,7 +597,7 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (id == WorldIds.BClub)
+            if (id == WorldIds.JustBClub)
             {
                 if (BClubExploitsPage != null)
                 {
@@ -725,6 +729,8 @@
                 {
                     ModConsole.DebugErrorExc(e);
                 }
+
+                MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
 
                 ModConsole.Log("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());

@@ -320,6 +320,11 @@
         {
         }
 
+        internal virtual void OnWorldCheatsActionMenuOpen()
+        {
+
+        }
+
         internal virtual void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
         }
@@ -348,11 +353,9 @@
         {
         }
 
-
         internal virtual void OnGUI()
         {
         }
-
 
         internal virtual void OnApplicationQuit()
         {

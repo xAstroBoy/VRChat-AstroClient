@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.ClientUI.Menu.Menus.UserMenu
 {
     using System.Collections;
+    using AstroMonos.Components.Spoofer;
     using AstroMonos.Components.Tools;
     using Cheetos;
     using Target;
@@ -40,10 +41,11 @@
             SitUserMenu.InitButtons(menu);
             new QMSingleButton(menu, "AstroClient : Set Target.", TargetSelector.MarkPlayerAsTarget, "Mark this player as target.");
             new QMSingleButton(menu, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar");
-            _ = new QMSingleButton(menu, 1, 0, "Teleport All\nPickups\nTo\nplayer.", ObjectMiscOptions.TeleportAllWorldPickupsToPlayer, "Teleport World Pickups To Player.");
+            new QMSingleButton(menu, "Spoof As Selected Player", () => { PlayerSpooferUtils.SpoofAs(QuickMenuUtils.SelectedPlayer.GetDisplayName()); }, "Spoof as this player ! ");
+            _ = new QMSingleButton(menu, "Teleport All\nPickups\nTo\nplayer.", ObjectMiscOptions.TeleportAllWorldPickupsToPlayer, "Teleport World Pickups To Player.");
             ;
-            _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.SelectedPlayer.transform.position; }, "Teleport To Player");
-            _ = new QMSingleButton(menu, 4, 2, "Remove\n Everything", () =>
+            _ = new QMSingleButton(menu, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.SelectedPlayer.transform.position; }, "Teleport To Player");
+            _ = new QMSingleButton(menu, "Remove\n Everything", () =>
                 {
                     ObjectMiscOptions.RemoveAllAttackPlayer();
                     ObjectMiscOptions.RemoveAllOrbitPlayer();

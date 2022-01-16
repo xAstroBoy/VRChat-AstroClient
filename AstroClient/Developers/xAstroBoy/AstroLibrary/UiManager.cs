@@ -8,12 +8,20 @@
     using System.Reflection;
     using MenuMethods;
     using Tools.Extensions;
+    using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.Core;
     using VRC.DataModel;
     using VRC.UI;
     using VRC.UI.Elements;
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using Il2CppSystem.Collections.Generic;
+    using UnhollowerRuntimeLib.XrefScans;
+    using UnityEngine;
+    using UnityEngine.UI;
 
     // This "Button API", if you can it that, is based off of RubyButtonAPI, by DubyaDude (dooba lol) (https://github.com/DubyaDude)
     /// <summary>
@@ -49,7 +57,6 @@
             Init();
         }
 
-
         internal static void Init()
         {
 
@@ -58,7 +65,6 @@
 
             new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
             new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
-
 
             new AstroPatch(NewMenuXrefsSystem.openBigMenu, null, GetPatch(nameof(OnBigMenuOpen_Event)));
             new AstroPatch(NewMenuXrefsSystem.closeBigMenu, null, GetPatch(nameof(OnBigMenuClose_Event)));
@@ -69,21 +75,14 @@
             }
             new AstroPatch(typeof(PageUserInfo).GetMethod(nameof(PageUserInfo.Back)), null, GetPatch(nameof(OnUserInfoClose)));
 
-
-
-
             //new AstroPatch(NewMenuXrefsSystem.placeUiAfterPause, GetPatch(nameof(OnPlaceUiAfterPause)));
 
-
             new AstroPatch(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Boolean_0)), GetPatch(nameof(OnShowScreen)));
-
 
             //new AstroPatch(NewMenuXrefsSystem.closeQuickMenuMethod, null, GetPatch(nameof(OnQuickMenuClose_Event)));
             //new AstroPatch(NewMenuXrefsSystem.onQuickMenuOpenedMethod, null, GetPatch(nameof(OnQuickMenuOpen_Event)));
 
-
         }
-
 
         private static void OnBigMenuOpen_Event() => Event_OnBigMenuOpen.SafetyRaise();
 
@@ -292,5 +291,39 @@
             scrollbar.gameObject.SetActive(active);
             scrollRect.verticalScrollbar = scrollbar;
         }
+
+        internal delegate void ShowUiInputPopupAction(string title, string initialText, InputField.InputType inputType,
+    bool isNumeric, string confirmButtonText, Il2CppSystem.Action<string, List<KeyCode>, Text> onComplete,
+    Il2CppSystem.Action onCancel, string placeholderText = "Enter text...", bool closeAfterInput = true,
+    Il2CppSystem.Action<VRCUiPopup> onPopupShown = null, bool bUnknown = false, int charLimit = 0);
+
+        private static ShowUiInputPopupAction ourShowUiInputPopupAction;
+
+        internal static ShowUiInputPopupAction ShowUiInputPopup
+        {
+            get
+            {
+                if (ourShowUiInputPopupAction != null) return ourShowUiInputPopupAction;
+
+                var candidates = typeof(VRCUiPopupManager)
+                    .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly).Where(it =>
+                        it.Name.StartsWith("Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_")
+                        && !it.Name.EndsWith("_PDM"))
+                    .ToList();
+
+                var targetMethod = candidates.SingleOrDefault(it => XrefScanner.XrefScan(it).Any(jt =>
+                    jt.Type == XrefType.Global &&
+                    jt.ReadAsObject()?.ToString() == "UserInterface/MenuContent/Popups/InputPopup"));
+
+                if (targetMethod == null)
+                    targetMethod = typeof(VRCUiPopupManager).GetMethod(nameof(VRCUiPopupManager.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_0),
+                    BindingFlags.Instance | BindingFlags.Public);
+
+                ourShowUiInputPopupAction = (ShowUiInputPopupAction)Delegate.CreateDelegate(typeof(ShowUiInputPopupAction), VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0, targetMethod);
+
+                return ourShowUiInputPopupAction;
+            }
+        }
+
     }
 }

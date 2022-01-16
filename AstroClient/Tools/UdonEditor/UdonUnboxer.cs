@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
     using VRC.Udon;
 
     internal static class UdonUnboxer
@@ -36,7 +37,8 @@
                             }
                         }
                     }
-                    ModConsole.Log(builder.ToString(), System.Drawing.Color.Gold);
+                    var resultString = Regex.Replace(builder.ToString(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline); // This will fix and remove Useless empty lines. (but from file it can be kept)
+                    ModConsole.Log(resultString, System.Drawing.Color.Gold);
                     builder.Clear();
                 }
             }

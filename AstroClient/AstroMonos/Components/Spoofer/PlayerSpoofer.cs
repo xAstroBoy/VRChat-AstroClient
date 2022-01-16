@@ -68,7 +68,7 @@
 
         internal void LateUpdate()
         {
-            if (IsSpooferActive && isSecondJoin && user != null && DisplayName != SpoofedName)
+            if (IsSpooferActive && /*isSecondJoin &&*/ user != null && DisplayName != SpoofedName)
             {
                 DisplayName = SpoofedName;
             }
@@ -76,13 +76,16 @@
 
         internal override void OnRoomLeft()
         {
-            SafetyCheck();
-            IsSpooferActive = false;
+            //SafetyCheck();
+            if (!KeepSpoofingOnWorldChange)
+            {
+                IsSpooferActive = false;
+            }
         }
 
         internal override void OnRoomJoined()
         {
-            SafetyCheck();
+            //SafetyCheck();
             if (PlayerSpooferUtils.SpoofAsWorldAuthor)
             {
                 IsSpooferActive = true;
@@ -121,27 +124,29 @@
             }
         }
 
-        private void SafetyCheck()
-        {
-            if (isSecondJoin && isFistJoin)
-            {
-                return;
-            }
+        //private void SafetyCheck()
+        //{
+        //    if (isSecondJoin && isFistJoin)
+        //    {
+        //        return;
+        //    }
 
-            if (!isFistJoin)
-            {
-                isFistJoin = true;
-                return;
-            }
-            else
+        //    if (!isFistJoin)
+        //    {
+        //        isFistJoin = true;
+        //        return;
+        //    }
+        //    else
 
-            {
-                if (isFistJoin && !isSecondJoin)
-                {
-                    isSecondJoin = true;
-                }
-            }
-        }
+        //    {
+        //        if (isFistJoin && !isSecondJoin)
+        //        {
+        //            isSecondJoin = true;
+        //        }
+        //    }
+        //}
+
+        internal bool KeepSpoofingOnWorldChange { get; set; } = false;
 
         internal APIUser user
         {
@@ -164,10 +169,10 @@
             [HideFromIl2Cpp]
             set
             {
-                if (!isSecondJoin)
-                {
-                    value = false;
-                }
+                //if (!isSecondJoin)
+                //{
+                //    value = false;
+                //}
                 _IsSpooferActive = value;
                 if (value)
                 {
@@ -190,9 +195,9 @@
             }
         }
 
-        private bool isFistJoin = false;
+        //private bool isFistJoin = false;
 
-        private bool isSecondJoin = false;
+        //private bool isSecondJoin = false;
 
         private string _SpoofedName = string.Empty;
 

@@ -6,8 +6,11 @@
     using System.IO;
     using System.Reflection;
     using BestHTTP.SecureProtocol.Org.BouncyCastle.Math.Raw;
+    using Il2CppSystem.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC.UI.Core;
+    using xAstroBoy;
 
     //using VRC.UI.Elements;
 
@@ -110,25 +113,34 @@
             return null;
         }
 
-        public static void PopupCall(string title, string confirm, string placeholder, bool IsNumpad, Action<string> OnAccept, Action OnCancel = null)
+        public static void PopupCall(string title, string confirmButtonText, string placeholderText, bool IsNumpad, Action<string> OnAccept, Action OnCancel = null)
         {
-            VRCUiPopupManager
-                .prop_VRCUiPopupManager_0
-                .Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_0(
-                    title,
-                    "",
-                    InputField.InputType.Standard,
-                    IsNumpad,
-                    confirm,
-                    UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>>(new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>((a, b, c) =>
-                    {
-                        OnAccept?.Invoke(a);
-                    })),
-                    UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<Il2CppSystem.Action>(OnCancel),
-                    placeholder,
-                    true,
-                    null
-                    );
+            UiManager.ShowUiInputPopup(
+
+                title,
+                "",
+                InputField.InputType.Standard,
+                IsNumpad,
+                confirmButtonText,
+                UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>>(new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>((a, b, c) => { OnAccept?.Invoke(a); })),
+                UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<Il2CppSystem.Action>(OnCancel),
+                placeholderText,
+                true,
+                null,
+                false,
+                0
+        );
         }
+
+        //internal static void PopupCall(string title, string initialText, InputField.InputType inputType, bool isNumeric, string confirmButtonText, Action<string, List<KeyCode>, Text> onComplete, Action onCancel, string placeholderText, bool closeAfterInput, Action<VRCUiPopup> onPopupShown)
+        //{
+        //    UiManager.ShowUiInputPopup(title, initialText, inputType, isNumeric, confirmButtonText, onComplete, onCancel, placeholderText, closeAfterInput, onPopupShown, false, 0);
+        //}
+
+        //internal static void PopupCall(string title, string initialText, InputField.InputType inputType, bool isNumeric, string confirmButtonText, Action<string, List<KeyCode>, Text> onComplete, Action onCancel = null, string placeholderText = "Enter text...", bool closeAfterInput = true, Action<VRCUiPopup> onPopupShown = null, bool showLimitLabel = false, int textLengthLimit = 0)
+        //{
+        //    UiManager.ShowUiInputPopup(title, initialText, inputType, isNumeric, confirmButtonText, onComplete, onCancel, placeholderText, closeAfterInput, onPopupShown, showLimitLabel, textLengthLimit);
+        //}
+
     }
 }

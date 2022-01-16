@@ -241,6 +241,7 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                     CustomSubMenu.AddSubMenu("Putt Putt Pond", () =>
                     {
                         CustomSubMenu.AddToggle("Patron Mode", PuttPuttPond.isPatron.GetValueOrDefault(false), ToggleValue => { PuttPuttPond.isPatron = ToggleValue; });
+                        CustomSubMenu.AddToggle("Rainbow Golf ball", PuttPuttPond.RainbowBall, ToggleValue => { PuttPuttPond.RainbowBall = ToggleValue; });
 
                     });
                 }

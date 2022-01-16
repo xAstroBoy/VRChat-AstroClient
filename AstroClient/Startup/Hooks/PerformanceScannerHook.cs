@@ -153,7 +153,7 @@
                     try
                     {
 
-                        if (WorldUtils.WorldID.Equals(WorldIds.BClub) && __1.ParameterObject.name.Contains("Blue") && actiontext.Contains("Sit"))
+                        if (WorldUtils.WorldID.Equals(WorldIds.JustBClub) && __1.ParameterObject.name.Contains("Blue") && actiontext.Contains("Sit"))
                         {
                             if (!PlayerUtils.DisplayName().Equals(sender))
                             {

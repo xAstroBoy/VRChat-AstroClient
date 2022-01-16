@@ -70,7 +70,7 @@
             //        ToggleButtonVisibilityAndInteractivity(true);
             //    }
             //}
-            else if (id == WorldIds.BClub)
+            else if (id == WorldIds.JustBClub)
             {
                 if (BClubWorld.BClubExploitsPage != null)
                 {

@@ -16,7 +16,7 @@
         public const string FBTHeaven = "wrld_d319c58a-dcec-47de-b5fc-21200116462c";
         public const string TheGreatPug = "wrld_6caf5200-70e1-46c2-b043-e3c4abe69e0f";
         public const string FreezeTag = "wrld_7487d91a-3ef4-44c6-ad6d-9bdc7dee5efd";
-        public const string BClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
+        public const string JustBClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
         public const string JustHParty = "wrld_e5c30b56-efa8-42d5-a8d4-a2cca2bf3403";
         public const string VoidClub = "wrld_7e10376a-29b6-43af-ac5d-6eb72732e90c";
         public const string AimFactory = "wrld_97a21a21-9e5e-4152-b1c6-bc899a041d3f";

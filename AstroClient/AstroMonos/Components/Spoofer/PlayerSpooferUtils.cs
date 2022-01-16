@@ -31,6 +31,12 @@
             }
         }
 
+        internal static void SpoofAs(string name)
+        {
+            IsSpooferActive = true;
+            SpoofedName = name;
+        }
+
         private static PlayerSpoofer Instance;
 
         internal static PlayerSpoofer SpooferInstance
@@ -48,6 +54,11 @@
         {
             get => Instance.SpoofedName;
             set => Instance.SpoofedName = value;
+        }
+        internal static bool KeepNameActivatedOnWorldChange
+        {
+            get => Instance.KeepSpoofingOnWorldChange;
+            set => Instance.KeepSpoofingOnWorldChange = value;
         }
 
         internal static string Original_DisplayName
