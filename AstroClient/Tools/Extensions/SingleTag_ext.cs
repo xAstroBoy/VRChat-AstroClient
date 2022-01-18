@@ -73,9 +73,13 @@
             return null;
         }
 
+        internal static SingleTag AddSingleTag(this Player player)
+        {
+            if (player == null) return null;
+            return player.AddComponent<SingleTag>();
+        }
 
-
-        internal static SingleTag AddSingleTag(this Player player, System.Drawing.Color BackGround,  string Text)
+        internal static SingleTag AddSingleTag(this Player player, System.Drawing.Color BackGround, string Text)
         {
             if (player == null) return null;
             var tag = player.AddComponent<SingleTag>();

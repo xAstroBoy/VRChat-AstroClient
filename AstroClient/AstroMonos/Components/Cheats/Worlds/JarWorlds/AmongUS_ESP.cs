@@ -29,11 +29,11 @@
     [RegisterComponent]
     public class AmongUS_ESP : AstroMonoBehaviour
     {
-        private AmongUs_Roles _CurrentRole = AmongUs_Roles.None;
+        private AmongUs_Roles _CurrentRole { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; } = AmongUs_Roles.None;
 
-        private PlayerESP _ESP;
-        private LinkedNodes _LinkedNode;
-        private bool _ViewRoles;
+        private PlayerESP _ESP { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
+        private LinkedNodes _LinkedNode { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
+        private bool _ViewRoles { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
 
         private List<Object> AntiGarbageCollection = new();
 
@@ -92,8 +92,7 @@
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-
-        private APIUser _APIUser;
+        private APIUser _APIUser { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
         internal APIUser APIUser
         {
             [HideFromIl2Cpp]
@@ -111,17 +110,18 @@
         {
             [HideFromIl2Cpp]
             get
-            { 
+            {
                 return APIUser.IsSelf;
             }
         }
 
-        private SingleTag _GameRoleTag;
+        private SingleTag _GameRoleTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
         internal SingleTag GameRoleTag
         {
             [HideFromIl2Cpp]
             get
             {
+                if (Player == null) return null;
                 if (_GameRoleTag == null)
                 {
                     return _GameRoleTag = Player.gameObject.AddComponent<SingleTag>();
@@ -130,12 +130,13 @@
                 return _GameRoleTag;
             }
         }
-        private SingleTag _AmongUSVoteRevealTag;
+        private SingleTag _AmongUSVoteRevealTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
         internal SingleTag AmongUSVoteRevealTag
         {
             [HideFromIl2Cpp]
             get
             {
+                if (Player == null) return null;
                 if (_AmongUSVoteRevealTag == null)
                 {
                     return _AmongUSVoteRevealTag = Player.gameObject.AddComponent<SingleTag>();
@@ -247,7 +248,6 @@
                 AmongUSVoteRevealTag.ShowTag = false;
             }
 
-
             HasVoted = false;
             if (ViewRoles)
             {
@@ -304,7 +304,7 @@
 
                     break;
 
-                    default:
+                default:
                     break;
             }
         }
@@ -363,7 +363,7 @@
                 yield return null;
             while (GetCrewmateEvent == null)
                 yield return null;
-            while (GetImpostorEvent  == null)
+            while (GetImpostorEvent == null)
                 yield return null;
 
             ModConsole.DebugLog($"Found all the required Events and Node!");
@@ -392,7 +392,6 @@
                 Destroy(this);
             }
         }
-
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
@@ -508,18 +507,15 @@
                         }
                 }
             }
-            catch 
+            catch
             {
             }
         }
-
-
 
         internal override void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
         }
-
 
         private void ResetESPColor()
         {
@@ -531,7 +527,6 @@
                 }
             }
         }
-
 
         private void UpdateESP()
         {
@@ -550,14 +545,17 @@
             catch { }
         }
 
-
         private void UpdateAmongUSRole(AmongUs_Roles role)
         {
             if (LinkedNode != null)
-            { 
+            {
                 if (ViewRoles)
                 {
-                    if (HasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
+                    if (AmongUSVoteRevealTag != null)
+                    {
+                        if (HasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
+
+                    }
                     if (role != AmongUs_Roles.None)
                     {
                         if (GameRoleTag.Text != role.ToString())
@@ -592,7 +590,13 @@
                 }
                 else
                 {
+                    if (AmongUSVoteRevealTag != null)
+                    {
+
                         AmongUSVoteRevealTag.ShowTag = false;
+
+                    }
+
                     if (GameRoleTag.Text != HiddenRole)
                     {
                         if (GameRoleTag != null)

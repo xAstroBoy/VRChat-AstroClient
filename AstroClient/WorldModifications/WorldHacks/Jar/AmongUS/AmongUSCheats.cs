@@ -61,9 +61,7 @@
         internal static UdonBehaviour_Cached EmptyGarbage_Storage_B;
 
         internal static UdonBehaviour_Cached EmptyGarbage_Oxygen_A;
-        internal static UdonBehaviour_Cached EmptyGarbage_Oxygen_B;
 
-        internal static UdonBehaviour_Cached EmptyGarbage_Cafeteria_A;
         internal static UdonBehaviour_Cached EmptyGarbage_Cafeteria_B;
 
         internal static UdonBehaviour_Cached CancelAllSabotages;
@@ -167,9 +165,6 @@
             EmptyGarbage_Storage_B = null;
 
             EmptyGarbage_Oxygen_A = null;
-            EmptyGarbage_Oxygen_B = null;
-
-            EmptyGarbage_Cafeteria_A = null;
             EmptyGarbage_Cafeteria_B = null;
             CancelAllSabotages = null;
             EmergencyMeetingEvent = null;
@@ -190,23 +185,18 @@
             if (invisiblewall != null) invisiblewall.DestroyMeLocal();
             if (invisiblewall_1 != null) invisiblewall_1.DestroyMeLocal();
 
-
             StartGameEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncStart");
             AbortGameEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncAbort");
-            VictoryCrewmateEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncVictoryB");
-            VictoryImpostorEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncVictoryM");
+            VictoryCrewmateEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncVictoryC");
+            VictoryImpostorEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncVictoryI");
             EmergencyMeetingEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncEmergencyMeeting");
             CancelAllSabotages = UdonSearch.FindUdonEvent("Game Logic", "CancelAllSabotage");
             SabotageLights = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageLights");
-
 
             EmptyGarbage_Storage_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Storage)", "SyncConfirmAnimation");
             EmptyGarbage_Storage_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Storage)", "SyncConfirmAnimation");
 
             EmptyGarbage_Oxygen_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Oxygen)", "SyncConfirmAnimation");
-            EmptyGarbage_Oxygen_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Oxygen)", "SyncConfirmAnimation");
-
-            EmptyGarbage_Cafeteria_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Cafeteria)", "SyncConfirmAnimation");
             EmptyGarbage_Cafeteria_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Cafeteria)", "SyncConfirmAnimation");
             SubmitScanTask = UdonSearch.FindUdonEvent("Task Submit Scan", "SyncStartScan");
 
@@ -335,7 +325,6 @@
             return null;
         }
 
-
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             try
@@ -361,7 +350,7 @@
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.DebugErrorExc(e);
             }
@@ -407,9 +396,6 @@
             if (JarRoleController.CurrentPlayer_AmongUS_ESP != null) JarRoleController.CurrentPlayer_AmongUS_ESP.SetRole(AssignedTargetRole);
             ModConsole.DebugLog($"Executed Role Swapping!, {TargetESP.Player.DisplayName()} Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
         }
-
-
-
 
     }
 }

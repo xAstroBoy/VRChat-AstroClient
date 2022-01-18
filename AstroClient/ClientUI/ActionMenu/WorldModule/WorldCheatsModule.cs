@@ -138,7 +138,14 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                     {
                         CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
 
-                        CustomSubMenu.AddSubMenu("Game Events", () => { CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour(); }); });
+                        CustomSubMenu.AddSubMenu("Game Events", () =>
+                        {
+                            CustomSubMenu.AddButton("Emergency Meeting", () =>
+                            {
+                                AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour();
+
+                            });
+                        });
 
                         CustomSubMenu.AddSubMenu("Sabotage & Repair", () =>
                         {
@@ -152,10 +159,8 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                             CustomSubMenu.AddButton("Submit Scan", () => { AmongUSCheats.SubmitScanTask?.InvokeBehaviour(); });
                             CustomSubMenu.AddSubMenu("Garbage", () =>
                             {
-                                CustomSubMenu.AddButton("Cafeteria A", () => { AmongUSCheats.EmptyGarbage_Cafeteria_A?.InvokeBehaviour(); });
-                                CustomSubMenu.AddButton("Cafeteria B", () => { AmongUSCheats.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
-                                CustomSubMenu.AddButton("Oxygen A", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
-                                CustomSubMenu.AddButton("Oxygen B", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
+                                CustomSubMenu.AddButton("Cafeteria", () => { AmongUSCheats.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
+                                CustomSubMenu.AddButton("Oxygen", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
                                 CustomSubMenu.AddButton("Storage A", () => { AmongUSCheats.EmptyGarbage_Storage_A?.InvokeBehaviour(); });
                                 CustomSubMenu.AddButton("Storage B", () => { AmongUSCheats.EmptyGarbage_Storage_B?.InvokeBehaviour(); });
                             }, null, false, null);

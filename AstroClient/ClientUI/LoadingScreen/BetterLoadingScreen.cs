@@ -17,8 +17,7 @@ namespace AstroClient.ClientUI.LoadingScreen
     using Object = UnityEngine.Object;
 
     internal class BetterLoadingScreen : AstroEvents
-	{
-
+    {
 
         internal override void VRChat_OnUiManagerInit()
         {
@@ -41,7 +40,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 {
                     ModConsole.DebugLog("Disabling Default SkyCube");
 
-                    VRChat_LoadingScreenObjects.VRChat_SkyCube.AddComponent<Disabler>();
+                    VRChat_LoadingScreenObjects.VRChat_SkyCube.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_SkyCube.active = false;
                 }
                 else
@@ -54,7 +53,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 {
                     ModConsole.DebugLog("Disabling Bubbles");
 
-                    VRChat_LoadingScreenObjects.VRChat_bubbles.AddComponent<Disabler>();
+                    VRChat_LoadingScreenObjects.VRChat_bubbles.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_bubbles.active = false;
                 }
                 else
@@ -66,7 +65,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 {
                     ModConsole.DebugLog("Disabling Original Loading Audio");
 
-                    VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.AddComponent<Disabler>();
+                    VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.active = false;
                 }
                 else
@@ -75,7 +74,6 @@ namespace AstroClient.ClientUI.LoadingScreen
                 }
 
                 step = 6;
-
 
                 // Disable original objects from login screen
                 if (VRChat_LoadingScreenObjects.VRChat_originalStartScreenAudio != null)
@@ -132,7 +130,6 @@ namespace AstroClient.ClientUI.LoadingScreen
                 ModConsole.ErrorExc(e);
             }
         }
-
 
         private GameObject CreateGameObject(GameObject obj, Vector3 scale, string rootDest, string parent)
         {

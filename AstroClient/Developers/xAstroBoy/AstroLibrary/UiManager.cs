@@ -15,13 +15,7 @@
     using VRC.DataModel;
     using VRC.UI;
     using VRC.UI.Elements;
-    using System;
-    using System.Linq;
-    using System.Reflection;
     using Il2CppSystem.Collections.Generic;
-    using UnhollowerRuntimeLib.XrefScans;
-    using UnityEngine;
-    using UnityEngine.UI;
 
     // This "Button API", if you can it that, is based off of RubyButtonAPI, by DubyaDude (dooba lol) (https://github.com/DubyaDude)
     /// <summary>
