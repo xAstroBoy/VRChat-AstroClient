@@ -6,7 +6,7 @@
         internal static string FigletsPath { get; } = "AstroClient.ClientResources.Figlets.";
         internal static string BundlesPath { get; } = "AstroClient.ClientResources.BundlesArchive.";
 
-
+        internal static string ProgramsPath { get; } = "AstroClient.ClientResources.BundlesArchive.";
 
     }
 }
