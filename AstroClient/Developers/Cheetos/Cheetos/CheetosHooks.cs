@@ -9,7 +9,6 @@
     using AstroEventArgs;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
-    using ClientNetworking;
     using Constants;
     using ExitGames.Client.Photon;
     using Harmony;
@@ -64,7 +63,7 @@
         {
             try
             {
-                new AstroPatch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
+                //new AstroPatch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
                 new AstroPatch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
                 new AstroPatch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
                 new AstroPatch(typeof(VRCUiManager).GetMethod(XrefTesting.ShowScreenMethod.Name), GetPatch(nameof(OnShowScreenPatch)));
@@ -88,7 +87,6 @@
                 new AstroPatch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
                 new AstroPatch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)));
                 new AstroPatch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
-
 
                 typeof(RoomManager).GetMethods(BindingFlags.Public | BindingFlags.Static)
                     .Where(m => m.Name.StartsWith("Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_"))
@@ -156,7 +154,6 @@
             }
         }
 
-
         private static void APIUserBypassTrue(APIUser __instance, ref bool __result)
         {
             if (__instance.IsSelf)
@@ -174,7 +171,6 @@
 
             return true;
         }
-
 
         private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
         {
@@ -241,41 +237,41 @@
             }
         }
 
-        private static bool OnAvatarDownload(ref ApiAvatar __0)
-        {
-            try
-            {
-                if (__0 != null)
-                {
-                    var avatarData = new AvatarData
-                    {
-                        AssetURL = __0.assetUrl,
-                        AuthorID = __0.authorId,
-                        AuthorName = __0.authorName,
-                        Description = __0.description,
-                        AvatarID = __0.id,
-                        ImageURL = __0.imageUrl,
-                        ThumbnailURL = __0.thumbnailImageUrl,
-                        Name = __0.name,
-                        ReleaseStatus = __0.releaseStatus,
-                        Version = __0.version,
-                        SupportedPlatforms = __0.supportedPlatforms.ToString()
-                    };
+        //private static bool OnAvatarDownload(ref ApiAvatar __0)
+        //{
+        //    try
+        //    {
+        //        if (__0 != null)
+        //        {
+        //            var avatarData = new AvatarData
+        //            {
+        //                AssetURL = __0.assetUrl,
+        //                AuthorID = __0.authorId,
+        //                AuthorName = __0.authorName,
+        //                Description = __0.description,
+        //                AvatarID = __0.id,
+        //                ImageURL = __0.imageUrl,
+        //                ThumbnailURL = __0.thumbnailImageUrl,
+        //                Name = __0.name,
+        //                ReleaseStatus = __0.releaseStatus,
+        //                Version = __0.version,
+        //                SupportedPlatforms = __0.supportedPlatforms.ToString()
+        //            };
 
-                    if (avatarData != null)
-                    {
-                        var json = JsonConvert.SerializeObject(avatarData);
-                        AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
-                        //ModConsole.Log(json);
-                    }
-                }
-            }
-            catch
-            {
-            }
+        //            if (avatarData != null)
+        //            {
+        //                var json = JsonConvert.SerializeObject(avatarData);
+        //                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+        //                //ModConsole.Log(json);
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private static void OnPhotonPlayerJoin(ref Player __0)
         {

@@ -27,8 +27,6 @@
             Destroy(this);
         }
 
-
-
         private RigidBodyController _RigidBodyController { [HideFromIl2Cpp] get; set; }
 
         private RigidBodyController CurrentRigidbody
@@ -67,7 +65,8 @@
         private bool _isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
         private bool isPaused
         {
-            [HideFromIl2Cpp] get => _isPaused;
+            [HideFromIl2Cpp]
+            get => _isPaused;
             [HideFromIl2Cpp]
             set
             {
@@ -90,12 +89,11 @@
         internal Vector3 FreezePos { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal Quaternion FreezeRot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-
-
         private bool _IsEnabled = true;
         internal bool IsEnabled
         {
-            [HideFromIl2Cpp] get => _IsEnabled;
+            [HideFromIl2Cpp]
+            get => _IsEnabled;
             [HideFromIl2Cpp]
             set
             {
@@ -175,7 +173,6 @@
             }
         }
 
-
         // Use this for initialization
         private void Start()
         {
@@ -189,7 +186,7 @@
                 if (IsEnabled) VRC_AstroPickup.UseText = "Toggle Off Freeze";
                 else VRC_AstroPickup.UseText = "Toggle On Freeze";
             }
-
+            InvokeRepeating(nameof(FreezeUpdate), 0.1f, 0.1f);
             if (IsEnabled)
             {
                 FreezeItem();
@@ -202,7 +199,6 @@
         /// </summary>
         internal bool LockPosition { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-
         /// <summary>
         /// Calling this will Refresh Position/rotation capture of the current gameobject
         /// </summary>
@@ -210,16 +206,8 @@
         {
             if (!LockPosition)
             {
-                if (CurrentRigidbody == null)
-                {
-                    FreezePos = gameObject.transform.position;
-                    FreezeRot = gameObject.transform.rotation;
-                }
-                else
-                {
-                    FreezePos = CurrentRigidbody.position;
-                    FreezeRot = CurrentRigidbody.rotation;
-                }
+                FreezePos = Position;
+                FreezeRot = Rotation;
             }
             HasCaptured = true;
         }
@@ -248,7 +236,7 @@
             isPaused = false;
         }
 
-        private void Update()
+        private void FreezeUpdate()
         {
             if (!IsEnabled || isPaused)
             {
@@ -257,18 +245,101 @@
 
             if (HasCaptured)
             {
-                gameObject.TakeOwnership();
 
-                if (CurrentRigidbody.position != FreezePos)
+                if (Position != FreezePos)
                 {
-                    gameObject.SetPosition(FreezePos);
-                   // RigidBodyController.MovePosition(FreezePos);
+                    Position = FreezePos;
                 }
 
-                if (CurrentRigidbody.rotation != FreezeRot)
+                if (Rotation != FreezeRot)
                 {
-                    gameObject.SetRotation(FreezeRot);
-                    //RigidBodyController.MoveRotation(FreezeRot);
+                    Rotation = FreezeRot;
+                }
+            }
+        }
+
+        private Vector3 Position
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (CurrentRigidbody != null)
+                {
+                    if (CurrentRigidbody.Rigidbody != null)
+                    {
+                        return CurrentRigidbody.position;
+                    }
+                    else
+                    {
+                        return gameObject.transform.position;
+                    }
+                }
+                else
+                {
+                    return gameObject.transform.position;
+                }
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                gameObject.TakeOwnership();
+                if (CurrentRigidbody != null)
+                {
+                    if (CurrentRigidbody.Rigidbody != null)
+                    {
+                        CurrentRigidbody.position = value;
+                    }
+                    else
+                    {
+                        gameObject.transform.position = value;
+                    }
+                }
+                else
+                {
+                    transform.position = value;
+                }
+            }
+        }
+
+        private Quaternion Rotation
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (CurrentRigidbody != null)
+                {
+                    if (CurrentRigidbody.Rigidbody != null)
+                    {
+                        return CurrentRigidbody.rotation;
+                    }
+                    else
+                    {
+                        return gameObject.transform.rotation;
+                    }
+                }
+                else
+                {
+                    return gameObject.transform.rotation;
+                }
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                gameObject.TakeOwnership();
+                if (CurrentRigidbody != null)
+                {
+                    if (CurrentRigidbody.Rigidbody != null)
+                    {
+                        CurrentRigidbody.rotation = value;
+                    }
+                    else
+                    {
+                        gameObject.transform.rotation = value;
+                    }
+                }
+                else
+                {
+                    transform.rotation = value;
                 }
             }
         }

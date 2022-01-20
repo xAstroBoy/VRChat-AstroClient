@@ -10,7 +10,6 @@
     using CheetoLibrary;
     using CheetoLibrary.Menu.MenuApi;
     using CheetoLibrary.Utility;
-    using ClientNetworking;
     using Constants;
     using Il2CppSystem.Collections.Generic;
     using MelonLoader;
@@ -69,40 +68,28 @@
         {
             inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
-            // Avatar Search
-            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", 921f, 470f, delegate { CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate(string text) { Search(SearchType, text); }); }, 1.45f, 1f);
+            //// Avatar Search
+            //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", 921f, 470f, delegate { CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text) { Search(SearchType, text); }); }, 1.45f, 1f);
 
-            searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", 921f, 410f, delegate
-            {
-                if (SearchType == SearchTypes.ALL)
-                {
-                    SearchType = SearchTypes.PRIVATE;
-                }
-                else if (SearchType == SearchTypes.PRIVATE)
-                {
-                    SearchType = SearchTypes.PUBLIC;
-                }
-                else if (SearchType == SearchTypes.PUBLIC)
-                {
-                    SearchType = SearchTypes.ALL;
-                }
+            //searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", 921f, 410f, delegate
+            //{
+            //    if (SearchType == SearchTypes.ALL)
+            //    {
+            //        SearchType = SearchTypes.PRIVATE;
+            //    }
+            //    else if (SearchType == SearchTypes.PRIVATE)
+            //    {
+            //        SearchType = SearchTypes.PUBLIC;
+            //    }
+            //    else if (SearchType == SearchTypes.PUBLIC)
+            //    {
+            //        SearchType = SearchTypes.ALL;
+            //    }
 
-                UpdateButtons();
-            }, 1.45f, 1f);
-
-            if (Bools.IsDeveloper)
-            {
-                deleteButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Delete From Database", 921f, 350f, delegate
-                {
-                    ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
-                    AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
-                }, 1.45f, 1f);
-            }
+            //    UpdateButtons();
+            //}, 1.45f, 1f);
 
             publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
-
-            searchList = new VRCList(publicAvatarList.transform.parent, "Astro Search Results", 1);
-            searchList.Text.supportRichText = true;
 
             worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 2);
             worldList.Text.supportRichText = true;
@@ -142,7 +129,6 @@
 
                 // Refresh UI
                 foundAvatars.Clear();
-                NetworkingManager.AvatarSearch(searchType, query);
 
                 IsSearching = true;
                 _ = MelonCoroutines.Start(SearchLoop());
@@ -151,7 +137,7 @@
 
         internal static IEnumerator SearchLoop()
         {
-            for (;;)
+            for (; ; )
             {
                 yield return new WaitForSeconds(0.025f);
                 if (!IsSearching)
@@ -176,34 +162,6 @@
                 {
                     ApiAvatar avatar = avatars[i];
                     worldAvatars.Add(avatar);
-                    if (AstroNetworkClient.Client != null)
-                    {
-                        if (AstroNetworkClient.Client.IsConnected)
-                        {
-                            if (avatar != null)
-                            {
-                                var avatarData = new AvatarData
-                                {
-                                    AssetURL = avatar.assetUrl,
-                                    AuthorID = avatar.authorId,
-                                    AuthorName = avatar.authorName,
-                                    Description = avatar.description,
-                                    AvatarID = avatar.id,
-                                    ImageURL = avatar.imageUrl,
-                                    ThumbnailURL = avatar.thumbnailImageUrl,
-                                    Name = avatar.name,
-                                    ReleaseStatus = avatar.releaseStatus,
-                                    Version = avatar.version,
-                                    SupportedPlatforms = avatar.supportedPlatforms.ToString()
-                                };
-                                if (avatarData != null)
-                                {
-                                    var json = JsonConvert.SerializeObject(avatarData);
-                                    AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
-                                }
-                            }
-                        }
-                    }
                 }
             }
 

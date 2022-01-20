@@ -9,7 +9,6 @@
     using System.Reflection;
     using AstroEventArgs;
     using CheetosConsole;
-    using ClientNetworking;
     using ClientResources.Loaders;
     using ClientUI.Menu.ItemTweakerV2.Selector;
     using ClientUI.Menu.Menus;
@@ -51,7 +50,6 @@
 
         #endregion EventHandlers
 
-
         private static List<AstroEvents> GameEvents { get; set; } = new List<AstroEvents>();
 
         private static List<Tweaker_Events> Tweaker_Overridables { get; set; } = new List<Tweaker_Events>();
@@ -71,45 +69,22 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-#if OFFLINE
-            KeyManager.IsAuthed = true;
             Bools.IsDeveloper = true;
-#else
-            for (; !NetworkingManager.IsReady;)
-            {
-            }
-#endif
+            InitializeOverridables();
+            DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
+            DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
+            DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
 
-            stopwatch.Stop();
-            ModConsole.DebugLog($"Client Connected: Took {stopwatch.ElapsedMilliseconds}ms");
-
-            if (!KeyManager.IsAuthed)
-            {
-                ModConsole.Error("Authentication Failed!");
-                ModConsole.OpenLatestLogFile();
-                Application.Quit();
-                Process.GetCurrentProcess().Close();
-                Environment.Exit(0);
-            }
-            else
-            {
-                InitializeOverridables();
-                DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
-                DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
-                DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
-            }
         }
 
         public override void OnUpdate()
         {
-            if (KeyManager.IsAuthed)
-                Event_OnUpdate?.SafetyRaise();
+            Event_OnUpdate?.SafetyRaise();
         }
 
         public override void OnLateUpdate()
         {
-            if (KeyManager.IsAuthed)
-                Event_LateUpdate?.SafetyRaise();
+            Event_LateUpdate?.SafetyRaise();
         }
 
         private IEnumerator WaitForActionMenuInit()
@@ -125,20 +100,17 @@
 
         public override void OnApplicationLateStart()
         {
-            if (!KeyManager.IsAuthed) return;
             Event_OnApplicationLateStart?.SafetyRaise();
         }
 
         public override void OnApplicationQuit()
         {
-            if (!KeyManager.IsAuthed) return;
             Event_OnApplicationQuit?.SafetyRaise();
             ConfigManager.SaveAll();
         }
 
         public override void OnPreferencesSaved()
         {
-            if (!KeyManager.IsAuthed) return;
             ConfigManager.SaveAll();
         }
 
@@ -163,8 +135,6 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            if (!KeyManager.IsAuthed)
-                return;
             Type[] array = Assembly.GetExecutingAssembly().GetTypes();
             for (int i = 0; i < array.Length; i++)
             {
@@ -209,7 +179,6 @@
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
-            if (!KeyManager.IsAuthed) return;
             switch (buildIndex)
             {
                 case 0: // app
@@ -224,13 +193,11 @@
 
         protected void DoAfterUserInteractMenuInit(Action code)
         {
-            if (!KeyManager.IsAuthed) return;
             _ = MelonCoroutines.Start(OnUserInteractMenuInitCoro(code));
         }
 
         protected void DoAfterActionMenuInit(Action code)
         {
-            if (!KeyManager.IsAuthed) return;
             _ = MelonCoroutines.Start(OnActionMenuInitCoro(code));
         }
 
@@ -252,13 +219,11 @@
 
         protected void DoAfterUiManagerInit(Action code)
         {
-            if (!KeyManager.IsAuthed) return;
             _ = MelonCoroutines.Start(OnUiManagerInitCoro(code));
         }
 
         protected void DoAfterQuickMenuInit(Action code)
         {
-            if (!KeyManager.IsAuthed) return;
             _ = MelonCoroutines.Start(OnQuickMenuInitCoro(code));
         }
         private IEnumerator OnQuickMenuInitCoro(Action code)
@@ -267,7 +232,7 @@
                 yield return null;
 
             code();
-        } 
+        }
         protected IEnumerator OnUiManagerInitCoro(Action code)
         {
             while (VRCUiManager.prop_VRCUiManager_0 == null)
@@ -282,12 +247,6 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            if (!KeyManager.IsAuthed)
-            {
-                stopwatch.Stop();
-                return;
-            }
-
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
 
             DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
@@ -300,12 +259,6 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            if (!KeyManager.IsAuthed)
-            {
-                stopwatch.Stop();
-                return;
-            }
-
             Event_VRChat_OnActionMenuInit?.SafetyRaise();
             stopwatch.Stop();
             ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
@@ -315,12 +268,6 @@
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-
-            if (!KeyManager.IsAuthed)
-            {
-                stopwatch.Stop();
-                return;
-            }
 
             UserInteractMenuBtns.InitUserButtons(); //UserMenu Main Button
             stopwatch.Stop();
@@ -337,7 +284,6 @@
             stopwatch.Stop();
             ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
         }
-
 
     }
 }

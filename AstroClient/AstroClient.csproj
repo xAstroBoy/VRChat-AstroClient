@@ -365,7 +365,6 @@
     <Compile Include="Tools\Extensions\ModerationExtensions.cs" />
     <Compile Include="ClientEvents\Moderation\ModerationNotifier.cs" />
     <Compile Include="ClientEvents\Moderation\PhotonModerationHandler.cs" />
-    <Compile Include="ClientNetworking\HandleClient.cs" />
     <Compile Include="Tools\Extensions\Texture_Ext.cs" />
     <Compile Include="Tools\Input\InputUtils.cs" />
     <Compile Include="Tools\Instance\History\InstanceManager.cs" />
@@ -551,9 +550,6 @@
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\LightControlMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\MovementMenu.cs" />
-    <Compile Include="ClientNetworking\AstroNetworkClient.cs" />
-    <Compile Include="ClientNetworking\KeyManager.cs" />
-    <Compile Include="ClientNetworking\NetworkingManager.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnSceneLoadedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />

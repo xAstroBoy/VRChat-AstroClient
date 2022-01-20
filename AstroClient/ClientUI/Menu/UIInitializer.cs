@@ -2,7 +2,6 @@
 {
     using AstroMonos;
     using Cheetos;
-    using ClientNetworking;
     using ClientResources.Loaders;
     using Constants;
     using Experiments;
@@ -38,7 +37,6 @@
 
         internal static void InitMainsButtons()
         {
-            if (!KeyManager.IsAuthed) return;
             QMGridTab AstroClient = new QMGridTab(TabIndexs.Main, "AstroClient Menu", null, null, null, Icons.planet_sprite);
             MainClientWings.InitMainWing();
             GameProcessMenu.InitButtons(AstroClient);
@@ -65,7 +63,6 @@
             ToggleDebugInfo = new QMToggleButton(AstroClient, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", null, null, null, Bools.IsDebugMode);
             ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
 
-
             // Tabs.
             ExploitsMenu.InitButtons(TabIndexs.Exploits);
             WorldsCheats.InitButtons(TabIndexs.Cheats);
@@ -84,8 +81,6 @@
             //    GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke();
             //}, "Advanced GameObject Toggler", null, null, true);
         }
-
-
 
     }
 }

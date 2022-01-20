@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using ClientNetworking;
     using ClientResources;
     using ClientResources.Loaders;
     using Constants;
@@ -34,8 +33,8 @@
             {
                 SubMenu = new QMTabMenu(index, "Developer Menu", null, null, null, Icons.repair_sprite);
 
-                DisconectButton = new QMSingleButton(SubMenu, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
-                ReconnectButton = new QMSingleButton(SubMenu, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");
+                //DisconectButton = new QMSingleButton(SubMenu, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
+                //ReconnectButton = new QMSingleButton(SubMenu, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");
             }
         }
     }
