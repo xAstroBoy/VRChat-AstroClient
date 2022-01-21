@@ -4,7 +4,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
     using AstroClient.Tools.Extensions;
     using AstroUdons;
     using ClientAttributes;
+    using ClientResources.Loaders;
     using Il2CppSystem.Collections.Generic;
+    using Spawnables.Enderpearl;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -21,7 +23,6 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             AntiGcList.Add(this);
         }
 
-
         internal PickupController pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal VRC_AstroPickup PickupEvents { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
@@ -31,7 +32,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         internal BoxCollider collider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal MeshRenderer renderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal static bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        private static Color Ender { [HideFromIl2Cpp] get; } = new(0f, 2f, 0f, 0.4f);
+        //private static Color Ender { [HideFromIl2Cpp] get; } = new(0f, 2f, 0f, 0.4f);
 
         private void Start()
         {
@@ -47,8 +48,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                     collider.size = new Vector3(1f, 1f, 1f);
                     collider.isTrigger = true;
                 }
-
-                if (renderer != null) renderer.material.color = Ender;
+                this.gameObject.IgnoreLocalPlayerCollision();
+                if (renderer != null) renderer.material = SelectedMat;
 
                 if (body != null)
                 {
@@ -109,12 +110,38 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             ModConsole.DebugLog("No longer in contact with " + other.transform.name);
         }
 
-
         private void OnDrop()
         {
             Held = false;
         }
 
+        private Material SelectedMat
+        {
+            get
+            {
+                if (AstroEnderPearl.isStrawberryMatOn)
+                {
+                    return Materials.strawberry;
+                }
+
+                if (AstroEnderPearl.isCoralMatOn)
+                {
+                    return Materials.coral_001;
+                }
+
+                if (AstroEnderPearl.isChocolateMatOn)
+                {
+                    return Materials.chocolate;
+                }
+
+                if (AstroEnderPearl.isCrystalMatOn)
+                {
+                    return Materials.crystal_003;
+                }
+
+                return Materials.crystal_003;
+            }
+        }
         private void OnPickup()
         {
             if (pickup.RigidBodyController != null)

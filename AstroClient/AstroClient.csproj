@@ -118,6 +118,7 @@
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnEnterWorldEventArgs.cs" />
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
+    <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Programs.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
@@ -1360,6 +1361,10 @@
     <Compile Include="AstroMonos\Components\Tools\RigidBodyController.cs" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\OldLoadingScreen.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\chocolate.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\crystal_003.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\coral_001.assetbundle" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1445,6 +1450,9 @@
     <Folder Include="AstroMonos\Components\Player\Fly\" />
     <Folder Include="ClientResources\ProgramsArchive\" />
     <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\ImageArchive\EnderPearl.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

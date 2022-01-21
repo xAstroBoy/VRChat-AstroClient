@@ -8,7 +8,6 @@
     using UnityEngine;
     using xAstroBoy.Utility;
 
-
     // TODO : Fix this Crap Again ( Backupping mechanism doesn't work!)
     [RegisterComponent]
     public class RigidBodyController : AstroMonoBehaviour
@@ -47,14 +46,15 @@
 
         private void BodyUpdate()
         {
+
             if (gameObject != null)
-                if (gameObject.active && isActiveAndEnabled)
-                    if (isBackupping)
-                        return;
+                Run_OnRigidbodyControllerOnUpdate();
+            if (gameObject.active && isActiveAndEnabled)
+                if (isBackupping)
+                    return;
             if (!EditMode)
             {
                 // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
-                Run_OnRigidbodyControllerOnUpdate();
 
                 // Makes sure if EditMode is OFF. As long is off it keeps updating the properties.
                 if (Rigidbody != null)
@@ -229,7 +229,8 @@
 
         internal int solverVelocityIterationCount
         {
-            [HideFromIl2Cpp] get => _solverVelocityIterationCount;
+            [HideFromIl2Cpp]
+            get => _solverVelocityIterationCount;
             [HideFromIl2Cpp]
             set
             {
@@ -247,7 +248,8 @@
 
         internal Vector3 inertiaTensor
         {
-            [HideFromIl2Cpp] get => _inertiaTensor;
+            [HideFromIl2Cpp]
+            get => _inertiaTensor;
             [HideFromIl2Cpp]
             set
             {
@@ -265,7 +267,8 @@
 
         internal Quaternion inertiaTensorRotation
         {
-            [HideFromIl2Cpp] get => _inertiaTensorRotation;
+            [HideFromIl2Cpp]
+            get => _inertiaTensorRotation;
             [HideFromIl2Cpp]
             set
             {
@@ -283,7 +286,8 @@
 
         internal Vector3 centerOfMass
         {
-            [HideFromIl2Cpp] get => _centerOfMass;
+            [HideFromIl2Cpp]
+            get => _centerOfMass;
             [HideFromIl2Cpp]
             set
             {
@@ -301,7 +305,8 @@
 
         internal CollisionDetectionMode collisionDetectionMode
         {
-            [HideFromIl2Cpp] get => _collisionDetectionMode;
+            [HideFromIl2Cpp]
+            get => _collisionDetectionMode;
             [HideFromIl2Cpp]
             set
             {
@@ -319,7 +324,8 @@
 
         internal RigidbodyConstraints constraints
         {
-            [HideFromIl2Cpp] get => _constraints;
+            [HideFromIl2Cpp]
+            get => _constraints;
             [HideFromIl2Cpp]
             set
             {
@@ -337,7 +343,8 @@
 
         internal bool freezeRotation
         {
-            [HideFromIl2Cpp] get => _freezeRotation;
+            [HideFromIl2Cpp]
+            get => _freezeRotation;
             [HideFromIl2Cpp]
             set
             {
@@ -355,7 +362,8 @@
 
         internal float maxDepenetrationVelocity
         {
-            [HideFromIl2Cpp] get => _maxDepenetrationVelocity;
+            [HideFromIl2Cpp]
+            get => _maxDepenetrationVelocity;
             [HideFromIl2Cpp]
             set
             {
@@ -373,7 +381,8 @@
 
         internal bool detectCollisions
         {
-            [HideFromIl2Cpp] get => _detectCollisions;
+            [HideFromIl2Cpp]
+            get => _detectCollisions;
             [HideFromIl2Cpp]
             set
             {
@@ -391,7 +400,8 @@
 
         internal bool useGravity
         {
-            [HideFromIl2Cpp] get => _useGravity;
+            [HideFromIl2Cpp]
+            get => _useGravity;
             [HideFromIl2Cpp]
             set
             {
@@ -417,7 +427,8 @@
 
         internal float mass
         {
-            [HideFromIl2Cpp] get => _mass;
+            [HideFromIl2Cpp]
+            get => _mass;
             [HideFromIl2Cpp]
             set
             {
@@ -435,7 +446,8 @@
 
         internal int solverIterationCount
         {
-            [HideFromIl2Cpp] get => _solverIterationCount;
+            [HideFromIl2Cpp]
+            get => _solverIterationCount;
             [HideFromIl2Cpp]
             set
             {
@@ -453,7 +465,8 @@
 
         internal float angularDrag
         {
-            [HideFromIl2Cpp] get => _angularDrag;
+            [HideFromIl2Cpp]
+            get => _angularDrag;
             [HideFromIl2Cpp]
             set
             {
@@ -471,7 +484,8 @@
 
         internal float drag
         {
-            [HideFromIl2Cpp] get => _drag;
+            [HideFromIl2Cpp]
+            get => _drag;
             [HideFromIl2Cpp]
             set
             {
@@ -489,7 +503,8 @@
 
         internal Vector3 angularVelocity
         {
-            [HideFromIl2Cpp] get => _angularVelocity;
+            [HideFromIl2Cpp]
+            get => _angularVelocity;
             [HideFromIl2Cpp]
             set
             {
@@ -507,7 +522,8 @@
 
         internal Vector3 velocity
         {
-            [HideFromIl2Cpp] get => _velocity;
+            [HideFromIl2Cpp]
+            get => _velocity;
             [HideFromIl2Cpp]
             set
             {
@@ -525,7 +541,8 @@
 
         internal bool isKinematic
         {
-            [HideFromIl2Cpp] get => _isKinematic;
+            [HideFromIl2Cpp]
+            get => _isKinematic;
             [HideFromIl2Cpp]
             set
             {
@@ -550,7 +567,8 @@
 
         internal float sleepVelocity
         {
-            [HideFromIl2Cpp] get => _sleepVelocity;
+            [HideFromIl2Cpp]
+            get => _sleepVelocity;
             [HideFromIl2Cpp]
             set
             {
@@ -568,7 +586,8 @@
 
         internal float sleepThreshold
         {
-            [HideFromIl2Cpp] get => _sleepThreshold;
+            [HideFromIl2Cpp]
+            get => _sleepThreshold;
             [HideFromIl2Cpp]
             set
             {
@@ -586,7 +605,8 @@
 
         internal float maxAngularVelocity
         {
-            [HideFromIl2Cpp] get => _maxAngularVelocity;
+            [HideFromIl2Cpp]
+            get => _maxAngularVelocity;
             [HideFromIl2Cpp]
             set
             {
@@ -604,7 +624,8 @@
 
         internal int solverVelocityIterations
         {
-            [HideFromIl2Cpp] get => _solverVelocityIterations;
+            [HideFromIl2Cpp]
+            get => _solverVelocityIterations;
             [HideFromIl2Cpp]
             set
             {
@@ -622,7 +643,8 @@
 
         internal RigidbodyInterpolation interpolation
         {
-            [HideFromIl2Cpp] get => _interpolation;
+            [HideFromIl2Cpp]
+            get => _interpolation;
             [HideFromIl2Cpp]
             set
             {
@@ -640,7 +662,8 @@
 
         internal Vector3 position
         {
-            [HideFromIl2Cpp] get => Rigidbody.position;
+            [HideFromIl2Cpp]
+            get => Rigidbody.position;
             [HideFromIl2Cpp]
             set
             {
@@ -654,7 +677,8 @@
 
         internal Quaternion rotation
         {
-            [HideFromIl2Cpp] get => Rigidbody.rotation;
+            [HideFromIl2Cpp]
+            get => Rigidbody.rotation;
             [HideFromIl2Cpp]
             set
             {
@@ -668,7 +692,8 @@
 
         internal float sleepAngularVelocity
         {
-            [HideFromIl2Cpp] get => _sleepAngularVelocity;
+            [HideFromIl2Cpp]
+            get => _sleepAngularVelocity;
             [HideFromIl2Cpp]
             set
             {
@@ -686,7 +711,8 @@
 
         internal bool useConeFriction
         {
-            [HideFromIl2Cpp] get => _useConeFriction;
+            [HideFromIl2Cpp]
+            get => _useConeFriction;
             [HideFromIl2Cpp]
             set
             {
@@ -704,7 +730,8 @@
 
         internal int solverIterations
         {
-            [HideFromIl2Cpp] get => _solverIterations;
+            [HideFromIl2Cpp]
+            get => _solverIterations;
             [HideFromIl2Cpp]
             set
             {
@@ -852,7 +879,6 @@
 
         #endregion Random Methods
 
-
         #region Rigidbody Methods Reflection
 
         internal void MovePosition(Vector3 value)
@@ -879,7 +905,8 @@
 
         internal bool EditMode
         {
-            [HideFromIl2Cpp] get => _EditMode;
+            [HideFromIl2Cpp]
+            get => _EditMode;
             [HideFromIl2Cpp]
             set
             {
@@ -909,7 +936,8 @@
 
         internal bool Forced_Rigidbody
         {
-            [HideFromIl2Cpp] get => _Forced_RigidBody;
+            [HideFromIl2Cpp]
+            get => _Forced_RigidBody;
             [HideFromIl2Cpp]
             set
             {
@@ -927,7 +955,6 @@
                 }
             }
         }
-
 
         private bool _isPublic = false;
 

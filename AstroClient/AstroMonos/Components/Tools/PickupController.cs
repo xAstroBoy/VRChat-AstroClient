@@ -73,10 +73,11 @@
 
         private void PickupUpdate()
         {
-            if (gameObject != null && gameObject.active && isActiveAndEnabled)
+            if (gameObject != null)
             {
                 Run_onPickupUpdate();
-                if (!EditMode) SyncProperties(true);
+                if (!EditMode)
+                    SyncProperties(true);
             }
         }
 
