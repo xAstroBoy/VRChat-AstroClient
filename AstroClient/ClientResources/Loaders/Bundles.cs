@@ -8,6 +8,7 @@
 
     internal static class Bundles
     {
+
         private static AssetBundle _NewLoadingScreen;
 
         internal static AssetBundle NewLoadingScreen
@@ -79,6 +80,20 @@
                 return _strawberry;
             }
         }
+        private static AssetBundle _strawberry_milshake_foam;
+
+        internal static AssetBundle strawberry_milshake_foam
+        {
+            get
+            {
+                if (_strawberry_milshake_foam == null)
+                {
+                    _strawberry_milshake_foam = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}strawberry_milkshake_foam.assetbundle"), 0u);
+                    _strawberry_milshake_foam.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _strawberry_milshake_foam;
+            }
+        }
 
         private static AssetBundle _coral_001;
 
@@ -92,6 +107,78 @@
                     _coral_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                 }
                 return _coral_001;
+            }
+        }
+
+        private static AssetBundle _coffee_grains_001;
+
+        internal static AssetBundle coffee_grains_001
+        {
+            get
+            {
+                if (_coffee_grains_001 == null)
+                {
+                    _coffee_grains_001 = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}coffee_grains_001.assetbundle"), 0u);
+                    _coffee_grains_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _coffee_grains_001;
+            }
+        }
+
+        private static AssetBundle _coin_stack_001;
+
+        internal static AssetBundle coin_stack_001
+        {
+            get
+            {
+                if (_coin_stack_001 == null)
+                {
+                    _coin_stack_001 = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}coin_stack_001.assetbundle"), 0u);
+                    _coin_stack_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _coin_stack_001;
+            }
+        }
+        private static AssetBundle _fabric_padded_005;
+
+        internal static AssetBundle fabric_padded_005
+        {
+            get
+            {
+                if (_fabric_padded_005 == null)
+                {
+                    _fabric_padded_005 = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}fabric_padded_005.assetbundle"), 0u);
+                    _fabric_padded_005.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _fabric_padded_005;
+            }
+        }
+        private static AssetBundle _metal_gold_001;
+
+        internal static AssetBundle metal_gold_001
+        {
+            get
+            {
+                if (_metal_gold_001 == null)
+                {
+                    _metal_gold_001 = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}metal_gold_001.assetbundle"), 0u);
+                    _metal_gold_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _metal_gold_001;
+            }
+        }
+
+        private static AssetBundle _flashlights;
+        internal static AssetBundle flashlights
+        {
+            get
+            {
+                if (_flashlights == null)
+                {
+                    _flashlights = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}flashlights.assetbundle"), 0u);
+                    _flashlights.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _flashlights;
             }
         }
 

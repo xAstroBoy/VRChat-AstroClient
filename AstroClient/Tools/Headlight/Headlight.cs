@@ -221,6 +221,7 @@
                 DesktopLight.range = LightRange;
                 DesktopLight.spotAngle = LightAngle;
                 DesktopLight.intensity = LightIntensity;
+                DesktopLight.attenuate = false;
             }
             if (VRLight != null)
             {
@@ -230,6 +231,7 @@
                 VRLight.range = LightRange;
                 VRLight.spotAngle = LightAngle;
                 VRLight.intensity = LightIntensity;
+                VRLight.attenuate = false;
             }
         }
 

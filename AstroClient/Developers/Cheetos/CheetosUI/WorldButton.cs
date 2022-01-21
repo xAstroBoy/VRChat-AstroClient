@@ -56,7 +56,7 @@
         {
             ButtonObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             ButtonObject.name = $"AstroWorldButton: {label}";
-
+            ButtonObject.GetComponent<Renderer>().material = Materials.fabric_padded_005;
             ButtonObject.transform.position = position;
             ButtonObject.transform.rotation = rotation;
             ButtonObject.transform.localScale = new Vector3(0.25f, 0.1f, 0.1f);

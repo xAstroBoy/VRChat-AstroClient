@@ -31,7 +31,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
         internal BoxCollider collider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal MeshRenderer renderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        internal static bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
+        internal static bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = true;
         //private static Color Ender { [HideFromIl2Cpp] get; } = new(0f, 2f, 0f, 0.4f);
 
         private void Start()
@@ -124,6 +125,10 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                     return Materials.strawberry;
                 }
 
+                if (AstroEnderPearl.isStrawberryMilshakeFoamMatOn)
+                {
+                    return Materials.strawberry_milshake_foam;
+                }
                 if (AstroEnderPearl.isCoralMatOn)
                 {
                     return Materials.coral_001;
@@ -137,6 +142,11 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 if (AstroEnderPearl.isCrystalMatOn)
                 {
                     return Materials.crystal_003;
+                }
+
+                if (AstroEnderPearl.isCoffeeMatOn)
+                {
+                    return Materials.coffee_grains_001;
                 }
 
                 return Materials.crystal_003;

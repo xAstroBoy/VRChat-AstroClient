@@ -116,6 +116,30 @@
                 }
             }
         }
+        internal static void IgnoreLocalPlayerCollision(this Collider obj, bool ignore = true)
+        {
+            var localcollider = GameInstances.LocalPlayer.gameObject.GetComponent<Collider>();
+            if (localcollider != null)
+            {
+
+                if (ignore)
+                {
+                    ModConsole.DebugLog($"Fixing Collider {obj.name} To ignore Current Player Collisions");
+                }
+                else
+                {
+                    ModConsole.DebugLog($"Fixing Collider {obj.name} To Interact Current Player Collisions");
+
+                }
+
+                Physics.IgnoreCollision(obj, localcollider, ignore);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable to Fix Player collision as Local Collider is null!");
+            }
+
+        }
 
         internal static void IgnoreLocalPlayerCollision(this GameObject obj, bool ignore = true)
         {
@@ -136,7 +160,7 @@
 
                 foreach (var c in colliders)
                 {
-                    Physics.IgnoreCollision(c, localcollider);
+                    Physics.IgnoreCollision(c, localcollider, ignore);
                 }
             }
             else

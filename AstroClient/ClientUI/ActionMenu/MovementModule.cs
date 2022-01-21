@@ -19,7 +19,9 @@ namespace AstroClient.ClientUI.ActionMenu
                     CustomSubMenu.AddToggle("Crystal Skin", AstroEnderPearl.isCrystalMatOn, (value) => { AstroEnderPearl.isCrystalMatOn = value; });
                     CustomSubMenu.AddToggle("Coral Skin", AstroEnderPearl.isCoralMatOn, (value) => { AstroEnderPearl.isCoralMatOn = value; });
                     CustomSubMenu.AddToggle("Strawberry Skin", AstroEnderPearl.isStrawberryMatOn, (value) => { AstroEnderPearl.isStrawberryMatOn = value; });
+                    CustomSubMenu.AddToggle("Strawberry Milkshake foam Skin", AstroEnderPearl.isStrawberryMilshakeFoamMatOn, (value) => { AstroEnderPearl.isStrawberryMilshakeFoamMatOn = value; });
                     CustomSubMenu.AddToggle("Chocolate Skin", AstroEnderPearl.isChocolateMatOn, (value) => { AstroEnderPearl.isChocolateMatOn = value; });
+                    CustomSubMenu.AddToggle("Coffee Skin", AstroEnderPearl.isCoffeeMatOn, (value) => { AstroEnderPearl.isCoffeeMatOn = value; });
 
                 });
             });

@@ -25,44 +25,44 @@
 
     internal class AvatarSearch : AstroEvents
     {
-        internal static SearchTypes SearchType = SearchTypes.ALL;
+        //internal static SearchTypes SearchType = SearchTypes.ALL;
 
-        internal static bool IsSearching;
+        //internal static bool IsSearching;
 
         internal static bool IsDumping = false;
 
         private static GameObject publicAvatarList;
 
-        private static List<ApiAvatar> foundAvatars = new List<ApiAvatar>();
+        //private static List<ApiAvatar> foundAvatars = new List<ApiAvatar>();
 
         private static List<ApiAvatar> worldAvatars = new List<ApiAvatar>();
 
-        private static VRCList searchList;
+        //private static VRCList searchList;
 
         private static VRCList worldList;
 
-        private static Stopwatch stopwatch = new Stopwatch();
+        //private static Stopwatch stopwatch = new Stopwatch();
 
         private static Stopwatch stopwatch2 = new Stopwatch();
 
-        private static MenuButton searchTypeButton;
+        //private static MenuButton searchTypeButton;
 
-        private static MenuButton deleteButton;
+        //private static MenuButton deleteButton;
 
         private static VRCStandaloneInputModule inputModule;
 
-        private static string selectedID;
+        //private static string selectedID;
 
-        private static string lastSearchQuery;
+        //private static string lastSearchQuery;
 
-        private static SearchTypes lastSearchType;
+        //private static SearchTypes lastSearchType;
 
-        internal enum SearchTypes
-        {
-            ALL,
-            PUBLIC,
-            PRIVATE
-        }
+        //internal enum SearchTypes
+        //{
+        //    ALL,
+        //    PUBLIC,
+        //    PRIVATE
+        //}
 
         internal override void VRChat_OnQuickMenuInit()
         {
@@ -91,62 +91,62 @@
 
             publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 
-            worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 2);
+            worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 1);
             worldList.Text.supportRichText = true;
         }
 
         internal override void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
         {
-            MiscUtils.DelayFunction(0.5f, () => { PedestalDump(); });
+            MiscUtils.DelayFunction(0.1f, () => { PedestalDump(); });
         }
 
-        internal static void OnSelect()
-        {
-            // Add a check here later
-            var selected = inputModule.field_Public_Selectable_0;
-            if (selected != null)
-            {
-                var comp = selected.gameObject.GetComponent<VRCUiContentButton>();
-                if (comp != null)
-                {
-                    var id = comp.field_Public_String_0;
-                    if (id != string.Empty)
-                    {
-                        selectedID = inputModule.field_Public_Selectable_0.gameObject.GetComponent<VRCUiContentButton>().field_Public_String_0;
-                    }
-                }
-            }
-        }
+        //internal static void OnSelect()
+        //{
+        //    // Add a check here later
+        //    var selected = inputModule.field_Public_Selectable_0;
+        //    if (selected != null)
+        //    {
+        //        var comp = selected.gameObject.GetComponent<VRCUiContentButton>();
+        //        if (comp != null)
+        //        {
+        //            var id = comp.field_Public_String_0;
+        //            if (id != string.Empty)
+        //            {
+        //                selectedID = inputModule.field_Public_Selectable_0.gameObject.GetComponent<VRCUiContentButton>().field_Public_String_0;
+        //            }
+        //        }
+        //    }
+        //}
 
-        internal static void Search(SearchTypes searchType, string query)
-        {
-            if (!IsSearching)
-            {
-                stopwatch.Start();
+        //internal static void Search(SearchTypes searchType, string query)
+        //{
+        //    if (!IsSearching)
+        //    {
+        //        stopwatch.Start();
 
-                lastSearchQuery = query;
-                lastSearchType = searchType;
+        //        lastSearchQuery = query;
+        //        lastSearchType = searchType;
 
-                // Refresh UI
-                foundAvatars.Clear();
+        //        // Refresh UI
+        //        foundAvatars.Clear();
 
-                IsSearching = true;
-                _ = MelonCoroutines.Start(SearchLoop());
-            }
-        }
+        //        IsSearching = true;
+        //        _ = MelonCoroutines.Start(SearchLoop());
+        //    }
+        //}
 
-        internal static IEnumerator SearchLoop()
-        {
-            for (; ; )
-            {
-                yield return new WaitForSeconds(0.025f);
-                if (!IsSearching)
-                {
-                    SearchDone();
-                    yield break;
-                }
-            }
-        }
+        //internal static IEnumerator SearchLoop()
+        //{
+        //    for (; ; )
+        //    {
+        //        yield return new WaitForSeconds(0.025f);
+        //        if (!IsSearching)
+        //        {
+        //            SearchDone();
+        //            yield break;
+        //        }
+        //    }
+        //}
 
         internal static void PedestalDump()
         {
@@ -182,36 +182,36 @@
             worldList.Text.text = $"<color=cyan>Astro Pedestal</color> Found: <color=yellow>{worldAvatars.Count}</color>";
         }
 
-        internal static void SearchDone()
-        {
-            IsSearching = false;
-            stopwatch.Stop();
-            searchList.Text.supportRichText = true;
-            searchList.UiVRCList.expandedHeight *= 2f;
-            searchList.UiVRCList.extendRows = 4;
-            searchList.UiVRCList.startExpanded = false;
-            //Utils.VRCUiManager.ShowScreen(currPageAvatar);
+        //internal static void SearchDone()
+        //{
+        //    IsSearching = false;
+        //    stopwatch.Stop();
+        //    searchList.Text.supportRichText = true;
+        //    searchList.UiVRCList.expandedHeight *= 2f;
+        //    searchList.UiVRCList.extendRows = 4;
+        //    searchList.UiVRCList.startExpanded = false;
+        //    //Utils.VRCUiManager.ShowScreen(currPageAvatar);
 
-            for (int i = 0; i < foundAvatars.Count; i++)
-            {
-                var avatar = foundAvatars[i];
-                if (avatar != null && avatar.releaseStatus.ToLower().Equals("private")) avatar.name = $"<color=red>[P]</color> {avatar.name}";
-            }
+        //    for (int i = 0; i < foundAvatars.Count; i++)
+        //    {
+        //        var avatar = foundAvatars[i];
+        //        if (avatar != null && avatar.releaseStatus.ToLower().Equals("private")) avatar.name = $"<color=red>[P]</color> {avatar.name}";
+        //    }
 
-            searchList.RenderElement(foundAvatars);
+        //    searchList.RenderElement(foundAvatars);
 
-            searchList.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
-            ModConsole.DebugLog($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
-        }
+        //    searchList.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
+        //    ModConsole.DebugLog($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
+        //}
 
-        internal static void AddAvatar(AvatarData avatarData)
-        {
-            foundAvatars.Add(avatarData.ToApiAvatar());
-        }
+        //internal static void AddAvatar(AvatarData avatarData)
+        //{
+        //    foundAvatars.Add(avatarData.ToApiAvatar());
+        //}
 
-        private static void UpdateButtons()
-        {
-            searchTypeButton.SetText(Enum.GetName(typeof(SearchTypes), SearchType).ToLower().ToUppercaseFirstCharacterOnly());
-        }
+        //private static void UpdateButtons()
+        //{
+        //    searchTypeButton.SetText(Enum.GetName(typeof(SearchTypes), SearchType).ToLower().ToUppercaseFirstCharacterOnly());
+        //}
     }
 }

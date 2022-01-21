@@ -96,6 +96,8 @@
                     RenderSettings.sun.type = LightType.Directional;
                     RenderSettings.sun.color = Color.white;
                     RenderSettings.sun.intensity = 1f;
+                    RenderSettings.sun.attenuate = false;
+
                 }
                 else
                 {
@@ -110,6 +112,7 @@
                         NewSun.shadows = LightShadows.None;
                         NewSun.color = Color.white;
                         NewSun.intensity = 1f;
+                        NewSun.attenuate = false;
                     }
                     ModConsole.DebugLog("Attempting to Set Sun to RenderSettings.Sun");
                     NewSun.transform.SetParent(RenderSettings.sun.transform);
@@ -323,6 +326,7 @@
                         FullBrightLight.range = 999f;
                         FullBrightLight.spotAngle = float.MaxValue;
                         FullBrightLight.color = Color.white;
+                        FullBrightLight.attenuate = false;
                         ModConsole.DebugLog("Fullbright Enabled!");
                     }
                     else

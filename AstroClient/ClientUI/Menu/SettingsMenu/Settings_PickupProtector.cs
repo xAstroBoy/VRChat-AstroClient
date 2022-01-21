@@ -20,10 +20,10 @@
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Pickup Protector", "Pickup Protector Options");
 
             ToggleRespawnPickupOnPlayerDenied = new QMToggleButton(sub, "Respawn Pickup On Blocked Grab", () => { RespawnPickupToDefaultPos = true; }, () => { RespawnPickupToDefaultPos = false; }, "Make PickupProtector Respawn the Pickup instead of temporarily freeze in position");
-
+            ToggleRespawnPickupOnPlayerDenied.SetToggleState(RespawnPickupToDefaultPos);
         }
 
-        internal static bool _RespawnPickupToDefaultPos = false;
+        internal static bool _RespawnPickupToDefaultPos = true;
 
         internal static bool RespawnPickupToDefaultPos
         {

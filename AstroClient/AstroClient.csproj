@@ -118,8 +118,9 @@
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnEnterWorldEventArgs.cs" />
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
+    <Compile Include="ClientResources\Loaders\Prefabs.cs" />
+    <Compile Include="ClientResources\Startup\EventResourceLoader.cs" />
     <Compile Include="ClientResources\Loaders\Materials.cs" />
-    <Compile Include="ClientResources\Loaders\Programs.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
@@ -1365,6 +1366,12 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\crystal_003.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\coral_001.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\coffee_grains_001.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\coin_stack_001.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\fabric_padded_005.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\metal_gold_001.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry_milkshake_foam.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\flashlights.assetbundle" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

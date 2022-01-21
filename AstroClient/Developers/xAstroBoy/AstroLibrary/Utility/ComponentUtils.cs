@@ -5,6 +5,18 @@
 
     public static class ComponentUtils
     {
+
+        public static T GetGetInChildrens_OrAddComponent<T>(this GameObject obj) where T : Component
+        {
+            if (obj == null) return null;
+            var result = obj.GetComponent<T>();
+            if (result == null)
+                result = obj.GetComponentInChildren<T>(true);
+            if (result == null)
+                result = obj.AddComponent<T>();
+            return result;
+        }
+
         public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
         {
             if (obj == null) return null;

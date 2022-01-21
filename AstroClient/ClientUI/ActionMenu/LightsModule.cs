@@ -18,6 +18,7 @@ namespace AstroClient.ClientUI.ActionMenu
                 CustomSubMenu.AddToggle("Toggle RenderSettings Fog", RenderSettings.fog, ToggleValue => { LightControlMenu.ToggleFog(ToggleValue); }, null, false);
                 CustomSubMenu.AddToggle("Toggle Fullbright (Head)", LightControlMenu.IsHeadLightActive, ToggleValue => { LightControlMenu.IsHeadLightActive = ToggleValue; }, null, false);
                 CustomSubMenu.AddButton("Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, null, false);
+                CustomSubMenu.AddToggle("Flashlight Golden Skin", Astro_Flashlight.isGoldenFlashlight, ToggleValue => { Astro_Flashlight.isGoldenFlashlight = ToggleValue; }, null, false);
                 CustomSubMenu.AddButton("Destroy Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, null, false);
             });
 
