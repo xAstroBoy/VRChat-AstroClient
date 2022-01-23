@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Drawing;
     using System.Linq;
     using System.Reflection;
     using System.Text;
@@ -29,13 +30,28 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             ModConsole.DebugLog($"Loading Resources from {classtype.FullName}");
+            int fails = 0;
             foreach (var item in classtype.GetProperties(BindingFlags.NonPublic | BindingFlags.Static))
             {
                 if (item != null)
                 {
-                    ModConsole.DebugLog($"Loading {item.Name}");
-                    _ = item.GetValue(classtype);
+                    //ModConsole.DebugLog($"Loading {item.Name}");
+                    var result = item.GetValue(classtype);
+                    if (result != null)
+                    {
+                        ModConsole.DebugLog($"Loaded {item.Name}", Color.GreenYellow);
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"Failed to load {item.Name}", Color.OrangeRed);
+                        fails++;
+                    }
+
                 }
+            }
+            if (fails != 0)
+            {
+                ModConsole.DebugError($"Failed to load {fails} resources in {classtype.FullName}! It might affect the Client!");
             }
             stopwatch.Stop();
             ModConsole.DebugLog($"Done Loading Resources from {classtype.FullName}, took {stopwatch.ElapsedMilliseconds}ms");

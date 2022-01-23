@@ -66,6 +66,12 @@ namespace AstroClient.Spawnables.Flashlight
                     FlashLight_Light.color = Color.white;
                     FlashLight_Light.type = LightType.Spot;
                     FlashLight_Light.range = 1000f;
+                    if (FlashLight_Light.cookie != null)
+                    {
+                        FlashLight_Light.cookie.DestroyMeLocal();
+                        FlashLight_Light.cookie = null;
+                        FlashLight_Light.cookieSize = 0;
+                    }
                     //FlashLight_Light.attenuate = false;
                 }
                 var behaviour = flashlight.AddComponent<FlashlightBehaviour>();

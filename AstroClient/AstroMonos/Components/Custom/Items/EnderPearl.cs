@@ -124,7 +124,6 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 {
                     return Materials.strawberry;
                 }
-
                 if (AstroEnderPearl.isStrawberryMilshakeFoamMatOn)
                 {
                     return Materials.strawberry_milshake_foam;
@@ -147,6 +146,11 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 if (AstroEnderPearl.isCoffeeMatOn)
                 {
                     return Materials.coffee_grains_001;
+                }
+
+                if (AstroEnderPearl.UnusedBool)
+                {
+                    return Materials.crystal_003;
                 }
 
                 return Materials.crystal_003;

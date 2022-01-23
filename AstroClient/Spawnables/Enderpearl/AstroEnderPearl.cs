@@ -15,6 +15,7 @@ namespace AstroClient.Spawnables.Enderpearl
         private static bool _isStrawberryMatOn;
         private static bool _isStrawberryMilshakeFoamMatOn;
         private static bool _isCoffeeMatOn;
+        private static bool _UnusedBool;
         private static bool _isCoralMatOn;
         private static bool _isCrystalMatOn = true;
 
@@ -34,6 +35,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCoffeeMatOn = false;
                     isCrystalMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
+                    UnusedBool = false;
                 }
 
             }
@@ -54,6 +56,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCrystalMatOn = false;
                     isCoffeeMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
+                    UnusedBool = false;
                 }
 
             }
@@ -75,6 +78,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCrystalMatOn = false;
                     isCoffeeMatOn = false;
                     isStrawberryMatOn = false;
+                    UnusedBool = false;
                 }
 
             }
@@ -96,6 +100,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCrystalMatOn = false;
                     isCoffeeMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
+                    UnusedBool = false;
                 }
 
             }
@@ -117,6 +122,8 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCoralMatOn = false;
                     isCoffeeMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
+                    UnusedBool = false;
+
                 }
 
             }
@@ -138,6 +145,28 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCoralMatOn = false;
                     isCrystalMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
+                    UnusedBool = false;
+                }
+
+            }
+        }
+        internal static bool UnusedBool
+        {
+            get
+            {
+                return _UnusedBool;
+            }
+            set
+            {
+                _UnusedBool = value;
+                if (value)
+                {
+                    isChocolateMatOn = false;
+                    isStrawberryMatOn = false;
+                    isCoralMatOn = false;
+                    isCrystalMatOn = false;
+                    isStrawberryMilshakeFoamMatOn = false;
+                    isCoffeeMatOn = false;
                 }
 
             }
