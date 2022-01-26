@@ -24,13 +24,9 @@
             {
                 if (_crystal_003 == null)
                 {
-                    foreach (var paths in Bundles.crystal_003.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _crystal_003 = Bundles.crystal_003.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _crystal_003.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return crystal_003;
-                    }
+                    _crystal_003 = Bundles.crystal_003.LoadAsset_Internal("assets/gems/crystal_003.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _crystal_003.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _crystal_003;
                 }
 
                 return _crystal_003;
@@ -51,13 +47,9 @@
             {
                 if (_strawberry == null)
                 {
-                    foreach (var paths in Bundles.strawberry.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _strawberry = Bundles.strawberry.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _strawberry.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return strawberry;
-                    }
+                    _strawberry = Bundles.strawberry.LoadAsset_Internal("assets/gems/strawberry.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _strawberry.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _strawberry;
                 }
 
                 return _strawberry;
@@ -78,13 +70,9 @@
             {
                 if (_strawberry_milshake_foam == null)
                 {
-                    foreach (var paths in Bundles.strawberry_milshake_foam.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _strawberry_milshake_foam = Bundles.strawberry_milshake_foam.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _strawberry_milshake_foam.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return strawberry_milshake_foam;
-                    }
+                    _strawberry_milshake_foam = Bundles.strawberry_milshake_foam.LoadAsset_Internal("assets/material generator/strawberry_milkshake_foam.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _strawberry_milshake_foam.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _strawberry_milshake_foam;
                 }
 
                 return _strawberry_milshake_foam;
@@ -106,13 +94,9 @@
             {
                 if (_chocolate == null)
                 {
-                    foreach (var paths in Bundles.chocolate.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _chocolate = Bundles.chocolate.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _chocolate.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return chocolate;
-                    }
+                    _chocolate = Bundles.chocolate.LoadAsset_Internal("assets/gems/chocolate.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _chocolate.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return chocolate;
                 }
 
                 return _chocolate;
@@ -134,13 +118,9 @@
             {
                 if (_coral_001 == null)
                 {
-                    foreach (var paths in Bundles.coral_001.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _coral_001 = Bundles.coral_001.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _coral_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return coral_001;
-                    }
+                    _coral_001 = Bundles.coral_001.LoadAsset_Internal("assets/gems/coral_001.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _coral_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _coral_001;
                 }
 
                 return _coral_001;
@@ -161,15 +141,10 @@
             {
                 if (_coffee_grains_001 == null)
                 {
-                    foreach (var paths in Bundles.coffee_grains_001.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _coffee_grains_001 = Bundles.coffee_grains_001.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _coffee_grains_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return coffee_grains_001;
-                    }
+                    _coffee_grains_001 = Bundles.coffee_grains_001.LoadAsset_Internal("assets/gems/coffee_grains_001.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _coffee_grains_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _coffee_grains_001;
                 }
-
                 return _coffee_grains_001;
             }
         }
@@ -188,13 +163,9 @@
             {
                 if (_coin_stack_001 == null)
                 {
-                    foreach (var paths in Bundles.coin_stack_001.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _coin_stack_001 = Bundles.coin_stack_001.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _coin_stack_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return coin_stack_001;
-                    }
+                    _coin_stack_001 = Bundles.coin_stack_001.LoadAsset_Internal("assets/gems/coin_stack_001.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _coin_stack_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _coin_stack_001;
                 }
 
                 return _coin_stack_001;
@@ -216,13 +187,9 @@
             {
                 if (_fabric_padded_005 == null)
                 {
-                    foreach (var paths in Bundles.fabric_padded_005.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _fabric_padded_005 = Bundles.fabric_padded_005.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _fabric_padded_005.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return fabric_padded_005;
-                    }
+                    _fabric_padded_005 = Bundles.fabric_padded_005.LoadAsset_Internal("assets/gems/fabric_padded_005.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _fabric_padded_005.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _fabric_padded_005;
                 }
 
                 return _fabric_padded_005;
@@ -244,13 +211,9 @@
             {
                 if (_metal_gold_001 == null)
                 {
-                    foreach (var paths in Bundles.metal_gold_001.GetAllAssetNames())
-                    {
-                        if (!paths.ToLower().EndsWith(".mat")) continue;
-                        _metal_gold_001 = Bundles.metal_gold_001.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                        _metal_gold_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        return metal_gold_001;
-                    }
+                    _metal_gold_001 = Bundles.metal_gold_001.LoadAsset_Internal("assets/gems/metal_gold_001.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _metal_gold_001.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _metal_gold_001;
                 }
 
                 return _metal_gold_001;
@@ -258,6 +221,29 @@
         }
 
         #endregion metal_gold_001
+        #region waffle
+
+        private static Material _waffle;
+
+        /// <summary>
+        ///     Loads waffle bundle in resources as Material
+        /// </summary>
+        internal static Material waffle
+        {
+            get
+            {
+                if (_waffle == null)
+                {
+                    _waffle = Bundles.waffle.LoadAsset_Internal("assets/Texture/waffle.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _waffle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _waffle;
+                }
+
+                return _waffle;
+            }
+        }
+
+        #endregion waffle
 
     }
 }

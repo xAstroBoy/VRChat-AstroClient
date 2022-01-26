@@ -32,7 +32,6 @@
             {
                 if (UdonBehaviour != null)
                 {
-                    UdonBehaviour.gameObject.TakeOwnership();
                     if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         if (EventKey.StartsWith("_"))

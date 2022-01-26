@@ -14,10 +14,10 @@ namespace AstroClient.Spawnables.Enderpearl
         private static bool _isChocolateMatOn;
         private static bool _isStrawberryMatOn;
         private static bool _isStrawberryMilshakeFoamMatOn;
-        private static bool _isCoffeeMatOn;
-        private static bool _UnusedBool;
+        private static bool _isCoffeeMatOn = true;
+        private static bool _isWaffleMatOn;
         private static bool _isCoralMatOn;
-        private static bool _isCrystalMatOn = true;
+        private static bool _isCrystalMatOn;
 
         internal static bool isChocolateMatOn
         {
@@ -35,7 +35,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCoffeeMatOn = false;
                     isCrystalMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
-                    UnusedBool = false;
+                    isWaffleMatOn = false;
                 }
 
             }
@@ -56,7 +56,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCrystalMatOn = false;
                     isCoffeeMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
-                    UnusedBool = false;
+                    isWaffleMatOn = false;
                 }
 
             }
@@ -78,7 +78,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCrystalMatOn = false;
                     isCoffeeMatOn = false;
                     isStrawberryMatOn = false;
-                    UnusedBool = false;
+                    isWaffleMatOn = false;
                 }
 
             }
@@ -100,7 +100,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCrystalMatOn = false;
                     isCoffeeMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
-                    UnusedBool = false;
+                    isWaffleMatOn = false;
                 }
 
             }
@@ -122,7 +122,7 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCoralMatOn = false;
                     isCoffeeMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
-                    UnusedBool = false;
+                    isWaffleMatOn = false;
 
                 }
 
@@ -145,20 +145,20 @@ namespace AstroClient.Spawnables.Enderpearl
                     isCoralMatOn = false;
                     isCrystalMatOn = false;
                     isStrawberryMilshakeFoamMatOn = false;
-                    UnusedBool = false;
+                    isWaffleMatOn = false;
                 }
 
             }
         }
-        internal static bool UnusedBool
+        internal static bool isWaffleMatOn
         {
             get
             {
-                return _UnusedBool;
+                return _isWaffleMatOn;
             }
             set
             {
-                _UnusedBool = value;
+                _isWaffleMatOn = value;
                 if (value)
                 {
                     isChocolateMatOn = false;

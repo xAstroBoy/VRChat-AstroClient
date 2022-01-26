@@ -595,6 +595,7 @@
     <Compile Include="Constants\InstanceBuilder.cs" />
     <Compile Include="WorldModifications\WorldHacks\ClickerGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\PoolParlor.cs" />
+    <Compile Include="WorldModifications\WorldHacks\GhostGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\PuttPuttPond.cs" />
     <Compile Include="WorldModifications\WorldHacks\UdonTycoon.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
@@ -1372,6 +1373,7 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\metal_gold_001.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry_milkshake_foam.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\flashlights.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\waffle.assetbundle" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

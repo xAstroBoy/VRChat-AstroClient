@@ -167,6 +167,20 @@
                 return _metal_gold_001;
             }
         }
+        private static AssetBundle _waffle;
+
+        internal static AssetBundle waffle
+        {
+            get
+            {
+                if (_waffle == null)
+                {
+                    _waffle = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}waffle.assetbundle"), 0u);
+                    _waffle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _waffle;
+            }
+        }
 
         private static AssetBundle _flashlights;
         internal static AssetBundle flashlights

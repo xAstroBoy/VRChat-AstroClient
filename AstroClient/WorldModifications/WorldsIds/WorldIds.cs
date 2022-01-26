@@ -33,5 +33,6 @@
         public const string Clicker_Game = "wrld_986c0468-f64e-494f-97e4-9e3fdc8dcecb";
         public const string KitchenCooks = "wrld_df2776a3-8c84-45e3-bbf1-30ac8422911b";
         public const string PuttPuttPond = "wrld_ab68f896-a21f-4d72-a016-5a0a42c3158f";
+        public const string GhostGame = "wrld_0ec97c4f-1e84-4a3a-9e3a-fa3075b6c56d";
     }
 }

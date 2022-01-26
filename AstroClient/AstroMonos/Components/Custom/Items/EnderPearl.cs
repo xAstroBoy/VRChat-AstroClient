@@ -148,12 +148,12 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                     return Materials.coffee_grains_001;
                 }
 
-                if (AstroEnderPearl.UnusedBool)
+                if (AstroEnderPearl.isWaffleMatOn)
                 {
-                    return Materials.crystal_003;
+                    return Materials.waffle;
                 }
 
-                return Materials.crystal_003;
+                return Materials.coffee_grains_001;
             }
         }
         private void OnPickup()

@@ -252,6 +252,21 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                 }
 
                 #endregion
+                #region  Ghost Game
+
+                if (WorldUtils.WorldID == WorldIds.GhostGame)
+                {
+                    CustomSubMenu.AddSubMenu("Ghost Game", () =>
+                    {
+                        CustomSubMenu.AddButton("Toggle Lobby Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_1.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Toggle Mailbox Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_2.InvokeBehaviour(); });
+                        CustomSubMenu.AddToggle("Turn Off Mirrors Troll (Spams Mirror Off event to piss Mirror zombies!)", GhostGame.FuckOffMirrorZombies, value => { GhostGame.FuckOffMirrorZombies = value; });
+
+                    });
+                }
+
+                #endregion
+
             }, ClientResources.Loaders.Icons.thief);
 
             ModConsole.Log("World Module is ready!", Color.Green);

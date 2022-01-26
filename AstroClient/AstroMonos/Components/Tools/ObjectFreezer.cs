@@ -186,7 +186,7 @@
                 if (IsEnabled) VRC_AstroPickup.UseText = "Toggle Off Freeze";
                 else VRC_AstroPickup.UseText = "Toggle On Freeze";
             }
-            InvokeRepeating(nameof(FreezeUpdate), 0.1f, 0.1f);
+            InvokeRepeating(nameof(FreezeUpdate), 0, 0.3f);
             if (IsEnabled)
             {
                 FreezeItem();

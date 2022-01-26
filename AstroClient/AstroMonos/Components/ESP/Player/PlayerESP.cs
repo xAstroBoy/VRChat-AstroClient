@@ -45,7 +45,7 @@
                 }
                 else
                 {
-                    if (CurrentRenderer == null )
+                    if (CurrentRenderer == null)
                     {
                         ModConsole.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
                         Destroy(this);
@@ -160,6 +160,11 @@
         internal void ChangeColor(Color newcolor)
         {
             HighLightOptions.SetHighlighterColor(newcolor);
+        }
+
+        internal void ChangeColor(System.Drawing.Color newcolor)
+        {
+            HighLightOptions.SetHighlighterColor(newcolor.ToUnityEngineColor());
         }
 
         internal void ResetColor()

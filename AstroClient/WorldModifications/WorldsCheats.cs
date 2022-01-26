@@ -36,6 +36,7 @@
             UdonTycoon.InitButtons(WorldCheats);
             ClickerGame.InitButtons(WorldCheats);
             PuttPuttPond.InitButtons(WorldCheats);
+            GhostGame.InitButtons(WorldCheats);
         }
     }
 }

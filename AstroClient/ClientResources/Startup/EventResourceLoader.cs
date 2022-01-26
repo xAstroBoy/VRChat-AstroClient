@@ -35,16 +35,25 @@
             {
                 if (item != null)
                 {
-                    //ModConsole.DebugLog($"Loading {item.Name}");
-                    var result = item.GetValue(classtype);
-                    if (result != null)
+                    try
                     {
-                        ModConsole.DebugLog($"Loaded {item.Name}", Color.GreenYellow);
+                        //ModConsole.DebugLog($"Loading {item.Name}");
+                        var result = item.GetValue(classtype);
+                        if (result != null)
+                        {
+                            ModConsole.DebugLog($"Loaded {item.Name}", Color.GreenYellow);
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog($"Failed to load {item.Name}", Color.OrangeRed);
+                            fails++;
+                        }
                     }
-                    else
+                    catch
                     {
-                        ModConsole.DebugLog($"Failed to load {item.Name}", Color.OrangeRed);
+                        ModConsole.DebugLog($"Failed loading {item.Name}", Color.OrangeRed);
                         fails++;
+
                     }
 
                 }
