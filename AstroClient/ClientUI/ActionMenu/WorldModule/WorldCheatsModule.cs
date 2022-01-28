@@ -1,14 +1,15 @@
 namespace AstroClient.ClientUI.ActionMenu.WorldModule
 {
     using Gompoc.ActionMenuAPI.Api;
-    using System.Drawing;
     using Tools.Extensions;
+    using UnityEngine;
     using WorldModifications.Modifications;
     using WorldModifications.Modifications.Jar.AmongUS;
     using WorldModifications.Modifications.Jar.KitchenCooks;
     using WorldModifications.Modifications.Jar.Murder4;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
+    using Color = System.Drawing.Color;
 
     internal class WorldCheatsModule : AstroEvents
     {
@@ -63,9 +64,9 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                             CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
                             CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
                             CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
-                            //CustomSubMenu.AddToggle("Bypass Tower Collider", SuperTowerDefense.IgnoreTowersCollidersPlacement, ToggleValue => { SuperTowerDefense.IgnoreTowersCollidersPlacement = ToggleValue; });
+                        //CustomSubMenu.AddToggle("Bypass Tower Collider", SuperTowerDefense.IgnoreTowersCollidersPlacement, ToggleValue => { SuperTowerDefense.IgnoreTowersCollidersPlacement = ToggleValue; });
 
-                        }, null, false, null);
+                    }, null, false, null);
                         CustomSubMenu.AddSubMenu("Towers Editor", () =>
                         {
 
@@ -261,7 +262,10 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                         CustomSubMenu.AddButton("Toggle Lobby Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_1.InvokeBehaviour(); });
                         CustomSubMenu.AddButton("Toggle Mailbox Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_2.InvokeBehaviour(); });
                         CustomSubMenu.AddToggle("Turn Off Mirrors Troll (Spams Mirror Off event to piss Mirror zombies!)", GhostGame.FuckOffMirrorZombies, value => { GhostGame.FuckOffMirrorZombies = value; });
-
+                        CustomSubMenu.AddButton("Teleport To Patron Zone", () =>
+                        {
+                            GameInstances.LocalPlayer.gameObject.transform.position = new Vector3(40.171f, 5.7125f, 544.726f);
+                        });
                     });
                 }
 

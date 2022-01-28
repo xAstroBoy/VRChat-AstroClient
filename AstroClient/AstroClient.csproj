@@ -330,7 +330,7 @@
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealer.cs" />
     <Compile Include="Startup\Fixes\DashboardFix.cs" />
     <Compile Include="Startup\Hooks\PlayerJoinAndLeaveHook.cs" />
-    <Compile Include="Startup\Hooks\PerformanceScannerHook.cs" />
+    <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Streamer\WorldAuthorDetector.cs" />
     <Compile Include="Tools\Exploits\ExploitUtils.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />
@@ -400,7 +400,7 @@
     <Compile Include="Startup\Welcome.cs" />
     <Compile Include="Startup\Hooks\PhotonOnEventHook.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
-    <Compile Include="Startup\Hooks\RPCEventHook.cs" />
+    <Compile Include="Startup\Hooks\PerformanceScannerHook.cs" />
     <Compile Include="Startup\Patches\InputPatches.cs" />
     <Compile Include="Startup\Patches\SerializerPatches.cs" />
     <Compile Include="Startup\UiModifier.cs" />
