@@ -340,7 +340,6 @@
     <Compile Include="Developers\Cheetos\CheetosUI\WorldButton.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AvatarFavorites.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\FrameUnlimiter.cs" />
-    <Compile Include="AstroMonos\Components\UI\NamePlates\CheetoNameplate.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\ScrollMenuListener.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\GameObjectListener.cs" />
     <Compile Include="AstroMonos\Components\Player\SitOnPlayer.cs" />
@@ -688,6 +687,10 @@
     <Reference Include="Facepunch.Steamworks.Win64">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="FavCat-merged, Version=1.1.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\VRCMods-Unchained\Output\Debug\FavCat-merged.dll</HintPath>
     </Reference>
     <Reference Include="I18N">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\I18N.dll</HintPath>

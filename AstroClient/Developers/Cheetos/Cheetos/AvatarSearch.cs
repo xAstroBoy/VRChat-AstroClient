@@ -11,6 +11,9 @@
     using CheetoLibrary.Menu.MenuApi;
     using CheetoLibrary.Utility;
     using Constants;
+    using FavCat;
+    using FavCat.Database.Stored;
+    using FavCat.Modules;
     using Il2CppSystem.Collections.Generic;
     using MelonLoader;
     using Newtonsoft.Json;
@@ -35,11 +38,11 @@
 
         //private static List<ApiAvatar> foundAvatars = new List<ApiAvatar>();
 
-        private static List<ApiAvatar> worldAvatars = new List<ApiAvatar>();
+        private static List<string> worldAvatarsids = new List<string>();
 
         //private static VRCList searchList;
 
-        private static VRCList worldList;
+        //private static VRCList worldList;
 
         //private static Stopwatch stopwatch = new Stopwatch();
 
@@ -49,7 +52,7 @@
 
         //private static MenuButton deleteButton;
 
-        private static VRCStandaloneInputModule inputModule;
+        //private static VRCStandaloneInputModule inputModule;
 
         //private static string selectedID;
 
@@ -66,33 +69,38 @@
 
         internal override void VRChat_OnQuickMenuInit()
         {
-            inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
+            //inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
-            //// Avatar Search
-            //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", 921f, 470f, delegate { CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text) { Search(SearchType, text); }); }, 1.45f, 1f);
+            ////// Avatar Search
+            ////_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", 921f, 470f, delegate { CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text) { Search(SearchType, text); }); }, 1.45f, 1f);
 
-            //searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", 921f, 410f, delegate
+            ////searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", 921f, 410f, delegate
+            ////{
+            ////    if (SearchType == SearchTypes.ALL)
+            ////    {
+            ////        SearchType = SearchTypes.PRIVATE;
+            ////    }
+            ////    else if (SearchType == SearchTypes.PRIVATE)
+            ////    {
+            ////        SearchType = SearchTypes.PUBLIC;
+            ////    }
+            ////    else if (SearchType == SearchTypes.PUBLIC)
+            ////    {
+            ////        SearchType = SearchTypes.ALL;
+            ////    }
+
+            ////    UpdateButtons();
+            ////}, 1.45f, 1f);
+
+            //publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
+
+            //worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 0);
+            //worldList.Text.supportRichText = true;
+            //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Get World Avatars", 921f, 470f, delegate
             //{
-            //    if (SearchType == SearchTypes.ALL)
-            //    {
-            //        SearchType = SearchTypes.PRIVATE;
-            //    }
-            //    else if (SearchType == SearchTypes.PRIVATE)
-            //    {
-            //        SearchType = SearchTypes.PUBLIC;
-            //    }
-            //    else if (SearchType == SearchTypes.PUBLIC)
-            //    {
-            //        SearchType = SearchTypes.ALL;
-            //    }
+            //    ShowAvatarsOnFavcat();
+            //});
 
-            //    UpdateButtons();
-            //}, 1.45f, 1f);
-
-            publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
-
-            worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 1);
-            worldList.Text.supportRichText = true;
         }
 
         internal override void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
@@ -147,71 +155,94 @@
         //        }
         //    }
         //}
+        internal override void OnShowScreen(VRCUiPage page)
+        {
+            if (page.name == "Avatar")
+            {
+                MiscUtils.DelayFunction(0.1f, () =>
+                {
+                    AvatarSearch.ShowAvatarsOnFavcat(); // Refresh Avatar Pedestal Dump (and highlight it)
+                    ModConsole.DebugLog("Refreshed Avatar Lists");
+                });
+            }
+        }
 
         internal static void PedestalDump()
         {
             stopwatch2.Start();
 
             // Refresh UI
-            worldAvatars.Clear();
+            worldAvatarsids.Clear();
 
             var avatars = WorldUtils_Old.GetAvatarsFromPedestals();
             if (avatars != null && avatars.AnyAndNotNull())
             {
                 for (int i = 0; i < avatars.Count; i++)
                 {
-                    ApiAvatar avatar = avatars[i];
-                    worldAvatars.Add(avatar);
+                    string id = avatars[i];
+                    worldAvatarsids.Add(id);
                 }
             }
 
-            DumpDone();
-        }
-
-        internal static void DumpDone()
-        {
-            worldList.Text.supportRichText = true;
-            worldList.UiVRCList.expandedHeight *= 2f;
-            worldList.UiVRCList.extendRows = 4;
-            worldList.UiVRCList.startExpanded = false;
-
-            worldList.RenderElement(worldAvatars);
-
             stopwatch2.Stop();
-            ModConsole.DebugLog($"Avatar Pedestals Completed: found {worldAvatars.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
-            worldList.Text.text = $"<color=cyan>Astro Pedestal</color> Found: <color=yellow>{worldAvatars.Count}</color>";
+            ModConsole.DebugLog($"Avatar Pedestals Completed: found {worldAvatarsids.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
+
         }
 
-        //internal static void SearchDone()
-        //{
-        //    IsSearching = false;
-        //    stopwatch.Stop();
-        //    searchList.Text.supportRichText = true;
-        //    searchList.UiVRCList.expandedHeight *= 2f;
-        //    searchList.UiVRCList.extendRows = 4;
-        //    searchList.UiVRCList.startExpanded = false;
-        //    //Utils.VRCUiManager.ShowScreen(currPageAvatar);
+        internal override void OnRoomLeft()
+        {
+            _WorldPedestralAvatars.Clear();
+        }
 
-        //    for (int i = 0; i < foundAvatars.Count; i++)
+        private static System.Collections.Generic.List<StoredAvatar> _WorldPedestralAvatars = new System.Collections.Generic.List<StoredAvatar>();
+        internal static System.Collections.Generic.List<StoredAvatar> WorldPedestralAvatars
+        {
+            get
+            {
+                if (_WorldPedestralAvatars.Count == 0)
+                {
+                    foreach (var item in worldAvatarsids)
+                    {
+                        AvatarModule.GetStoredFromID(item, (avatar) =>
+                        {
+                            if (avatar != null)
+                            {
+                                _WorldPedestralAvatars.Add(avatar);
+                            }
+                        });
+
+                    }
+                    return _WorldPedestralAvatars;
+                }
+
+                return _WorldPedestralAvatars;
+
+            }
+        }
+
+        //private StoredCategory _WorldPedestralCategory;
+        //private StoredCategory WorldPedestralCategory
+        //{
+        //    get
         //    {
-        //        var avatar = foundAvatars[i];
-        //        if (avatar != null && avatar.releaseStatus.ToLower().Equals("private")) avatar.name = $"<color=red>[P]</color> {avatar.name}";
+        //        if (_WorldPedestralCategory == null)
+        //        {
+        //            _WorldPedestralCategory = AvatarModule.GetOrCreateCustomCategory("World Pedestal (AstroClient)");
+
+        //        }
+
+        //        return WorldPedestralCategory;
         //    }
-
-        //    searchList.RenderElement(foundAvatars);
-
-        //    searchList.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
-        //    ModConsole.DebugLog($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
         //}
 
-        //internal static void AddAvatar(AvatarData avatarData)
-        //{
-        //    foundAvatars.Add(avatarData.ToApiAvatar());
-        //}
+        static void ShowAvatarsOnFavcat()
+        {
 
-        //private static void UpdateButtons()
-        //{
-        //    searchTypeButton.SetText(Enum.GetName(typeof(SearchTypes), SearchType).ToLower().ToUppercaseFirstCharacterOnly());
-        //}
+            // TODO : make Favcat have custom categories that can be controlled from here.
+            AvatarModule.AcceptRemoteResults(WorldPedestralAvatars);
+            AvatarModule.SetSearchHeaderText($"<color=#E0E300>World Pedestal (AstroClient)</color>");
+
+        }
+
     }
 }

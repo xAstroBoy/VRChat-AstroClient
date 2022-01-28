@@ -145,11 +145,30 @@
                                                     {
                                                         if (item.text.isMatch(find))
                                                         {
-                                                            unsupported++;
-                                                            //var patchedstr = item.text.ReplaceWholeWord(find, replacement);
-                                                            //result++;
-                                                            //UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedstr, true);
+                                                            //unsupported++;
+                                                            try
+                                                            {
+                                                                var patchedstr = item.text.ReplaceWholeWord(find, replacement);
+                                                                //var RebuiltTextAsset = new TextAsset(TextAsset.CreateOptions.CreateNativeObject, patchedstr);
+                                                                //result++;
+                                                                //UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, RebuiltTextAsset, true);
+                                                                TextAsset.Internal_CreateInstance(item, patchedstr);
+                                                                if (item.text.Equals(patchedstr))
+                                                                {
+                                                                    result++;
+                                                                    ModConsole.DebugLog("Patched TextAsset!");
+                                                                }
+                                                                else
+                                                                {
+                                                                    ModConsole.DebugLog("Failed to Patch TextAsset");
+                                                                    unsupported++;
+                                                                }
 
+                                                            }
+                                                            catch (Exception e)
+                                                            {
+                                                                ModConsole.ErrorExc(e);
+                                                            }
                                                         }
                                                     }
 
@@ -161,8 +180,6 @@
                                                     var list = UnboxVariable.Unpack_List_TextAsset();
                                                     if (list.Count() != 0)
                                                     {
-                                                        var patchedlist = new List<TextAsset>();
-                                                        bool modified = false;
                                                         foreach (var item in list)
                                                         {
                                                             if (item.text != null &&
@@ -170,22 +187,35 @@
                                                             {
                                                                 if (item.text.isMatch(find))
                                                                 {
-                                                                    unsupported++;
-                                                                    //    var patchedstr = item.text.ReplaceWholeWord(find, replacement);
-                                                                    //    patchedlist.Add(patchedstr);
-                                                                    //    modified = true;
-                                                                    //}
-                                                                    //else
-                                                                    //{
-                                                                    //    patchedlist.Add(item.text);
+
+                                                                    try
+                                                                    {
+                                                                        var patchedstr = item.text.ReplaceWholeWord(find, replacement);
+                                                                        TextAsset.Internal_CreateInstance(item, patchedstr);
+                                                                        if (item.text.Equals(patchedstr))
+                                                                        {
+                                                                            result++;
+                                                                            ModConsole.DebugLog("Patched TextAsset!");
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            ModConsole.DebugLog("Failed to Patch TextAsset");
+                                                                            unsupported++;
+                                                                        }
+
+                                                                        //var RebuiltTextAsset = new TextAsset(TextAsset.CreateOptions.CreateNativeObject, patchedstr);
+                                                                        //patchedlist.Add(RebuiltTextAsset);
+                                                                        //result++;
+                                                                        //modified = true;
+                                                                    }
+
+                                                                    catch (Exception e)
+                                                                    {
+                                                                        ModConsole.ErrorExc(e);
+                                                                    }
                                                                 }
                                                             }
                                                         }
-
-                                                        //if (modified)
-                                                        //{
-                                                        //    UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
-                                                        //}
                                                     }
 
                                                     break;

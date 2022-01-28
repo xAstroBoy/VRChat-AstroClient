@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Experiments;
+    using FavCat.Database.Stored;
     using UdonSearcher;
     using UnityEngine;
     using VRC;
@@ -264,9 +265,9 @@
             return ids.Distinct().ToList();
         }
 
-        internal static List<ApiAvatar> GetAvatarsFromPedestals()
+        internal static List<string> GetAvatarsFromPedestals()
         {
-            List<ApiAvatar> avatars = new List<ApiAvatar>();
+            List<string> avatars = new List<string>();
 
             var SDK_VRC_AvatarPedestrals = Get_SDKBase_VRC_AvatarPedestal();
             var VRC_AvatarPedestal = Get_VRC_AvatarPedestal();
@@ -281,12 +282,13 @@
                     VRC.SDKBase.VRC_AvatarPedestal pedestal = SDK_VRC_AvatarPedestrals[i];
                     if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+                        AddAvatar(pedestal.blueprintId);
+                        //var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
 
-                        if (avatar != null)
-                        {
-                            AddAvatar(avatar);
-                        }
+                        //if (avatar != null)
+                        //{
+                        //    AddAvatar(avatar);
+                        //}
                     }
                 }
             }
@@ -298,12 +300,13 @@
                     VRCSDK2.VRC_AvatarPedestal pedestal = VRC_AvatarPedestal[i];
                     if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+                        AddAvatar(pedestal.blueprintId);
+                        //var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
 
-                        if (avatar != null)
-                        {
-                            AddAvatar(avatar);
-                        }
+                        //if (avatar != null)
+                        //{
+                        //    AddAvatar(avatar);
+                        //}
                     }
                 }
             }
@@ -316,12 +319,14 @@
 
                     if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+                        AddAvatar(pedestal.blueprintId);
 
-                        if (avatar != null)
-                        {
-                            AddAvatar(avatar);
-                        }
+                        //var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+
+                        //if (avatar != null)
+                        //{
+                        //    AddAvatar(avatar);
+                        //}
                     }
                 }
             }
@@ -331,7 +336,7 @@
                 for (int i = 0; i < SimpleAvatarPedestrals.Count; i++)
                 {
                     SimpleAvatarPedestal pedestal = SimpleAvatarPedestrals[i];
-                    AddAvatar(pedestal.field_Internal_ApiAvatar_0);
+                    AddAvatar(pedestal.field_Internal_ApiAvatar_0.id);
                 }
             }
 
@@ -340,7 +345,7 @@
                 for (int i = 0; i < AvatarPedestals.Count; i++)
                 {
                     AvatarPedestal pedestal = AvatarPedestals[i];
-                    AddAvatar(pedestal.field_Private_ApiAvatar_0);
+                    AddAvatar(pedestal.field_Private_ApiAvatar_0.id);
                 }
             }
             if (EmbededUdonPedestrals.AnyAndNotNull())
@@ -350,19 +355,24 @@
                     string avatarid = EmbededUdonPedestrals[i];
                     if (avatarid.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        var avatar = AvatarUtils.GetApiAvatar(avatarid);
-                        if (avatar != null)
-                        {
-                            AddAvatar(avatar);
-                        }
+                        AddAvatar(avatarid);
+
+                        //var avatar = AvatarUtils.GetApiAvatar(avatarid);
+                        //if (avatar != null)
+                        //{
+                        //    AddAvatar(avatar);
+                        //}
                     }
                 }
             }
 
-            void AddAvatar(ApiAvatar avatar)
+            void AddAvatar(string avatarid)
             {
-                if (avatars.Where(other => other.id.Equals(avatar.id)).Any()) return;
-                avatars.Add(avatar);
+                if (!avatars.Contains(avatarid))
+                {
+                    avatars.Add(avatarid);
+                }
+
             }
 
             return avatars;
@@ -373,11 +383,11 @@
             try
             {
                 var list = GameObjectFinder.GetRootGameObjectsComponents<VRCAvatarPedestal>();
-                if(list.Count() != 0)
+                if (list.Count() != 0)
                 {
-                    foreach(var item in list)
+                    foreach (var item in list)
                     {
-                        if(!item.grantBlueprintAccess)
+                        if (!item.grantBlueprintAccess)
                         {
                             item.grantBlueprintAccess = true;
                         }
@@ -511,12 +521,12 @@
         {
             try
             {
-                var list =GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>();
+                var list = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>();
                 if (list.Count() != 0)
                 {
                     foreach (var item in list)
                     {
-                        if (item!= null)
+                        if (item != null)
                         {
                             if (!item.grantBlueprintAccess)
                             {
