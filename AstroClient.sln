@@ -11,19 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ErrorCodes.txt = ErrorCodes.txt
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroServer", "AstroServer\AstroServer.csproj", "{06B82A0F-106E-42DA-9614-BB95F2CB2741}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DontTouchMyClient", "DontTouchMyClient\DontTouchMyClient.csproj", "{F41EC84C-6465-4449-B2F6-79535171265B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInjector", "AstroInjector\AstroInjector.csproj", "{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroNetworkingLibrary", "AstroNetworkingLibrary\AstroNetworkingLibrary.csproj", "{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDumper", "MonoDumper\MonoDumper.csproj", "{B29C09FF-1FCC-4302-8AB4-8FE673693845}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheetoClient", "CheetoClient\CheetoClient.csproj", "{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroInstaller", "AstroInstaller\AstroInstaller.csproj", "{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,38 +26,12 @@ Global
 		{6506F83F-9665-4EC9-9D7F-6F88E1652BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6506F83F-9665-4EC9-9D7F-6F88E1652BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6506F83F-9665-4EC9-9D7F-6F88E1652BBA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
-		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F41EC84C-6465-4449-B2F6-79535171265B}.Debug_Offline|Any CPU.ActiveCfg = Release|Any CPU
-		{F41EC84C-6465-4449-B2F6-79535171265B}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{F41EC84C-6465-4449-B2F6-79535171265B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F41EC84C-6465-4449-B2F6-79535171265B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}.Debug_Offline|Any CPU.ActiveCfg = Debug_Offline|Any CPU
 		{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}.Debug_Offline|Any CPU.Build.0 = Debug_Offline|Any CPU
 		{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
-		{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
-		{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
-		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
-		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
