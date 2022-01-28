@@ -2,26 +2,13 @@
 {
     #region Imports
 
-    using System;
-    using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
-    using AstroNetworkingLibrary;
-    using AstroNetworkingLibrary.Serializable;
-    using CheetoLibrary;
     using CheetoLibrary.Menu.MenuApi;
-    using CheetoLibrary.Utility;
-    using Constants;
-    using FavCat;
     using FavCat.Database.Stored;
     using FavCat.Modules;
-    using Il2CppSystem.Collections.Generic;
-    using MelonLoader;
-    using Newtonsoft.Json;
     using Tools.World;
     using UnityEngine;
-    using VRC.Core;
-    using xAstroBoy;
-    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
 
     #endregion Imports
@@ -96,10 +83,12 @@
 
             //worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 0);
             //worldList.Text.supportRichText = true;
-            //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Get World Avatars", 921f, 470f, delegate
-            //{
-            //    ShowAvatarsOnFavcat();
-            //});
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Refresh World Avatars", 921f, 470f, delegate
+            {
+                _WorldPedestralAvatars.Clear();
+                PedestalDump();
+                ShowAvatarsOnFavcat();
+            });
 
         }
 
@@ -174,15 +163,7 @@
             // Refresh UI
             worldAvatarsids.Clear();
 
-            var avatars = WorldUtils_Old.GetAvatarsFromPedestals();
-            if (avatars != null && avatars.AnyAndNotNull())
-            {
-                for (int i = 0; i < avatars.Count; i++)
-                {
-                    string id = avatars[i];
-                    worldAvatarsids.Add(id);
-                }
-            }
+            worldAvatarsids = WorldUtils_Old.GetAvatarsFromPedestals();
 
             stopwatch2.Stop();
             ModConsole.DebugLog($"Avatar Pedestals Completed: found {worldAvatarsids.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
@@ -192,6 +173,7 @@
         internal override void OnRoomLeft()
         {
             _WorldPedestralAvatars.Clear();
+
         }
 
         private static System.Collections.Generic.List<StoredAvatar> _WorldPedestralAvatars = new System.Collections.Generic.List<StoredAvatar>();
@@ -205,10 +187,7 @@
                     {
                         AvatarModule.GetStoredFromID(item, (avatar) =>
                         {
-                            if (avatar != null)
-                            {
-                                _WorldPedestralAvatars.Add(avatar);
-                            }
+                            _WorldPedestralAvatars.Add(avatar);
                         });
 
                     }
