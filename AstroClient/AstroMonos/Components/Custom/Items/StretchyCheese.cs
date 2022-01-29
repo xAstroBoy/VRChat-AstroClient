@@ -7,6 +7,7 @@
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
+    using WorldModifications.Modifications;
     using static Constants.CustomLists;
 
     [RegisterComponent]

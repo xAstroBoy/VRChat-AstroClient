@@ -586,6 +586,7 @@
     <Compile Include="WorldModifications\WorldHacks\PoolParlor.cs" />
     <Compile Include="WorldModifications\WorldHacks\GhostGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\PuttPuttPond.cs" />
+    <Compile Include="CustomClasses\UdonBehaviour_Cached.cs" />
     <Compile Include="WorldModifications\WorldHacks\UdonTycoon.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldsIds\WorldIds.cs" />

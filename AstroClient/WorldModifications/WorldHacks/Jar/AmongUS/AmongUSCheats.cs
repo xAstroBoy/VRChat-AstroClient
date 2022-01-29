@@ -206,7 +206,7 @@
                 {
                     if (subaction.key.Contains("Doors"))
                     {
-                        var tmp = new CustomLists.UdonBehaviour_Cached(VictoryCrewmateEvent.UdonBehaviour, subaction.key);
+                        var tmp = new UdonBehaviour_Cached(VictoryCrewmateEvent.UdonBehaviour, subaction.key);
                         if (!SabotageAllDoors.Contains(tmp))
                         {
                             SabotageAllDoors.Add(tmp);

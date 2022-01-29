@@ -335,7 +335,6 @@
 
         internal void DestroyMe()
         {
-            ButtonsMenu.DestroyMeLocal(true);
             Background.DestroyMeLocal(true);
             BackgroundImage.DestroyMeLocal(true);
             Button.DestroyMeLocal(true);

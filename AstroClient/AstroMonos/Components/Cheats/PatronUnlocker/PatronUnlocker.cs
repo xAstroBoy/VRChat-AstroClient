@@ -10,6 +10,7 @@
     using UnityEngine;
     using VRC;
     using VRC.Udon;
+    using WorldModifications.Modifications;
     using xAstroBoy.Utility;
     using static Constants.CustomLists;
 
@@ -35,7 +36,8 @@
 
         internal bool EveryoneHasPatreonPerk
         {
-            [HideFromIl2Cpp] get => _EveryoneHasPatreonPerk;
+            [HideFromIl2Cpp]
+            get => _EveryoneHasPatreonPerk;
             [HideFromIl2Cpp]
             set
             {
@@ -46,7 +48,8 @@
 
         internal bool OnlySelfHasPatreonPerk
         {
-            [HideFromIl2Cpp] get => _OnlySelfHasPatreonPerk;
+            [HideFromIl2Cpp]
+            get => _OnlySelfHasPatreonPerk;
             [HideFromIl2Cpp]
             set
             {

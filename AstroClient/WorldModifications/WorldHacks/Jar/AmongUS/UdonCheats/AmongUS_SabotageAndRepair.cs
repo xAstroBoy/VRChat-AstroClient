@@ -16,7 +16,7 @@
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
         //private static List<QMNestedGridMenu> GeneratedPages = new List<QMNestedGridMenu>();
-        private static List<CustomLists.UdonBehaviour_Cached> CachedDoorsEvents = new List<CustomLists.UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> CachedDoorsEvents = new List<UdonBehaviour_Cached>();
 
         private static bool isGenerating { get; set; }
         private static bool CleanOnRoomLeave { get; } = true;
@@ -78,7 +78,6 @@
                     GeneratedButtons.Add(btnerror);
                 }
 
-
                 HasGenerated = true;
                 isGenerating = false;
             }
@@ -97,7 +96,8 @@
 
                     var subaction_btn = new QMSingleButton(sabotagepage, "Sabotage " + cleanedstr, null, action.gameObject?.ToString() + " Sabotage " + cleanedstr);
                     subaction_btn.SetTextColor(Color.red);
-                    subaction_btn.SetAction(new Action(() => {
+                    subaction_btn.SetAction(new Action(() =>
+                    {
                         if (subaction.key.StartsWith("_"))
                         {
                             action.SendCustomEvent(subaction.Key);
@@ -110,7 +110,7 @@
                     GeneratedButtons.Add(subaction_btn);
                     if (subaction.key.Contains("Doors"))
                     {
-                        var tmp = new CustomLists.UdonBehaviour_Cached(action, subaction.key);
+                        var tmp = new UdonBehaviour_Cached(action, subaction.key);
                         if (!CachedDoorsEvents.Contains(tmp))
                         {
                             CachedDoorsEvents.Add(tmp);
@@ -120,7 +120,8 @@
                 else if (subaction.Key.StartsWith("CancelAllSabotage"))
                 {
                     var subaction_btn = new QMSingleButton(menu, "Cancel All Sabotages ", null, action.gameObject?.ToString() + "Cancel All Sabotages");
-                    subaction_btn.SetAction(new Action(() => {
+                    subaction_btn.SetAction(new Action(() =>
+                    {
                         if (subaction.key.StartsWith("_"))
                         {
                             action.SendCustomEvent(subaction.Key);
@@ -137,7 +138,8 @@
                 {
                     var cleanedstr = subaction.key.Replace("SyncRepair", string.Empty).Replace(" ", string.Empty);
                     var subaction_btn = new QMSingleButton(RepairsPage, "Repair " + cleanedstr, null, action.gameObject?.ToString() + " Repair " + cleanedstr);
-                    subaction_btn.SetAction(new Action(() => {
+                    subaction_btn.SetAction(new Action(() =>
+                    {
                         if (subaction.key.StartsWith("_"))
                         {
                             action.SendCustomEvent(subaction.Key);
@@ -206,7 +208,6 @@
                 Regenerate();
             }
         }
-
 
     }
 }

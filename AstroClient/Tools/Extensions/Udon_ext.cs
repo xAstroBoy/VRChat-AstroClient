@@ -7,6 +7,7 @@
     using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
+    using WorldModifications.Modifications;
     using xAstroBoy.Extensions;
     using static Constants.CustomLists;
 
@@ -40,7 +41,6 @@
         {
             return UdonSearch.FindUdonEvent(obj, subaction);
         }
-
 
         internal static void InvokeBehaviour(this List<UdonBehaviour_Cached> udonlist)
         {

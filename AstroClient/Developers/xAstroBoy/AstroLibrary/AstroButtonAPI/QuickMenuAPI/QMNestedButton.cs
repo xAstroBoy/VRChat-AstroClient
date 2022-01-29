@@ -215,9 +215,7 @@
             NestedPart.DestroyMeLocal(true);
             backButton.DestroyMeLocal(true);
             ButtonsMenu.DestroyMeLocal(true);
-            Parent.DestroyMeLocal(true);
             page.DestroyMeLocal(true);
-
             mainButton.DestroyMe();
         }
     }

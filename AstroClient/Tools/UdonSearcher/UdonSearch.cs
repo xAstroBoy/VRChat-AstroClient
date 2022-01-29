@@ -8,6 +8,7 @@
     using UdonEditor;
     using UnityEngine;
     using VRC.Udon;
+    using WorldModifications.Modifications;
     using xAstroBoy;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;

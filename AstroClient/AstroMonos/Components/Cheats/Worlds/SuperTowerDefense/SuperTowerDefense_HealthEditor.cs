@@ -7,6 +7,7 @@
     using Il2CppSystem;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
+    using WorldModifications.Modifications;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
@@ -66,7 +67,7 @@
 
         internal RawUdonBehaviour HealthController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        internal static CustomLists.UdonBehaviour_Cached ResetHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal static UdonBehaviour_Cached ResetHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         // Use this for initialization
         internal void Start()

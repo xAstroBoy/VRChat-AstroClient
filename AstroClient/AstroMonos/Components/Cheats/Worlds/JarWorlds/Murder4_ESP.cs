@@ -17,6 +17,7 @@
     using UnityEngine;
     using VRC;
     using VRC.Core;
+    using WorldModifications.Modifications;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;
@@ -113,7 +114,6 @@
 
         internal Color DetectiveColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.Navy.ToUnityEngineColor();
 
-
         private PlayerESP ESP
         {
             [HideFromIl2Cpp]
@@ -204,7 +204,6 @@
                     GameRoleTag.ShowTag = false;
                 }
             }
-
 
             ResetESPColor();
             CurrentRole = Murder4_Roles.None;
@@ -332,9 +331,9 @@
             }
         }
 
-        private CustomLists.UdonBehaviour_Cached _GetBystanderEvent;
+        private UdonBehaviour_Cached _GetBystanderEvent;
 
-        private CustomLists.UdonBehaviour_Cached GetBystanderEvent
+        private UdonBehaviour_Cached GetBystanderEvent
         {
             [HideFromIl2Cpp]
             get
@@ -348,9 +347,9 @@
             }
         }
 
-        private CustomLists.UdonBehaviour_Cached _GetMurdererEvent;
+        private UdonBehaviour_Cached _GetMurdererEvent;
 
-        private CustomLists.UdonBehaviour_Cached GetMurdererEvent
+        private UdonBehaviour_Cached GetMurdererEvent
         {
             [HideFromIl2Cpp]
             get
@@ -364,9 +363,9 @@
             }
         }
 
-        private CustomLists.UdonBehaviour_Cached _GetKillEvent;
+        private UdonBehaviour_Cached _GetKillEvent;
 
-        private CustomLists.UdonBehaviour_Cached GetKillEvent
+        private UdonBehaviour_Cached GetKillEvent
         {
             [HideFromIl2Cpp]
             get
@@ -380,9 +379,9 @@
             }
         }
 
-        private CustomLists.UdonBehaviour_Cached _GetDetectiveEvent;
+        private UdonBehaviour_Cached _GetDetectiveEvent;
 
-        private CustomLists.UdonBehaviour_Cached GetDetectiveEvent
+        private UdonBehaviour_Cached GetDetectiveEvent
         {
             [HideFromIl2Cpp]
             get
@@ -415,7 +414,6 @@
             }
         }
 
-
         private void UpdateESP()
         {
             try
@@ -430,7 +428,7 @@
                     }
                 }
             }
-            catch{}
+            catch { }
         }
 
         private void UpdateMurder4Role(Murder4_Roles role)
@@ -486,7 +484,7 @@
                     }
                 }
             }
-            catch{}
+            catch { }
         }
     }
 }

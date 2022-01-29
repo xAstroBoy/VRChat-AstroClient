@@ -484,7 +484,7 @@
         internal static QMToggleButton ActivatePatronModeToggle { get; set; }
         internal static QMToggleButton ActivateRainbowBallToggle { get; set; }
 
-        private static List<CustomLists.UdonBehaviour_Cached> ColorActions = new List<CustomLists.UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
 
     }
 }

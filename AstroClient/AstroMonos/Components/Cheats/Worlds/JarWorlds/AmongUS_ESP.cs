@@ -19,6 +19,7 @@
     using VRC;
     using VRC.Core;
     using VRC.Udon.Common.Interfaces;
+    using WorldModifications.Modifications;
     using WorldModifications.Modifications.Jar.AmongUS;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
@@ -309,8 +310,8 @@
             }
         }
 
-        private CustomLists.UdonBehaviour_Cached _GetCrewmateEvent;
-        private CustomLists.UdonBehaviour_Cached GetCrewmateEvent
+        private UdonBehaviour_Cached _GetCrewmateEvent;
+        private UdonBehaviour_Cached GetCrewmateEvent
         {
             [HideFromIl2Cpp]
             get
@@ -323,8 +324,8 @@
                 return _GetCrewmateEvent;
             }
         }
-        private CustomLists.UdonBehaviour_Cached _GetImpostorEvent;
-        private CustomLists.UdonBehaviour_Cached GetImpostorEvent
+        private UdonBehaviour_Cached _GetImpostorEvent;
+        private UdonBehaviour_Cached GetImpostorEvent
         {
             [HideFromIl2Cpp]
 
@@ -339,8 +340,8 @@
             }
         }
 
-        private CustomLists.UdonBehaviour_Cached _GetKillEvent;
-        private CustomLists.UdonBehaviour_Cached GetKillEvent
+        private UdonBehaviour_Cached _GetKillEvent;
+        private UdonBehaviour_Cached GetKillEvent
         {
             [HideFromIl2Cpp]
 

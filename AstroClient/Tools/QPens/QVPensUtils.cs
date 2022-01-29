@@ -5,6 +5,7 @@
     using System.Linq;
     using Extensions;
     using UnityEngine;
+    using WorldModifications.Modifications;
     using xAstroBoy.Utility;
     using static Constants.CustomLists;
 

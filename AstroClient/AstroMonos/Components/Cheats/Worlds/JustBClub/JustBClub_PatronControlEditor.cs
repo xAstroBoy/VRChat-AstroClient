@@ -8,6 +8,7 @@ using Il2CppSystem;
 using Il2CppSystem.Collections.Generic;
 using Spoofer;
 using UnhollowerBaseLib.Attributes;
+using WorldModifications.Modifications;
 using WorldModifications.WorldsIds;
 using xAstroBoy.Extensions;
 using xAstroBoy.Utility;
@@ -155,8 +156,8 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
     }
 
     private RawUdonBehaviour PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-    private CustomLists.UdonBehaviour_Cached isPatron_Check { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-    private CustomLists.UdonBehaviour_Cached isElite_Check { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+    private UdonBehaviour_Cached isPatron_Check { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+    private UdonBehaviour_Cached isElite_Check { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     private string ReplaceWith { [HideFromIl2Cpp] get => $"{PlayerSpooferUtils.Original_DisplayName}\r\n" + $"{WorldUtils.AuthorName}"; }
 
     internal override void OnRoomLeft()

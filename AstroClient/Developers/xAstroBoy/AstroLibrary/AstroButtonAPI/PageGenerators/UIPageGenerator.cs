@@ -22,13 +22,45 @@
                     result.field_Private_Boolean_1 = true;
                     result.field_Private_List_1_UIPage_0 = new List<UIPage>();
                     result.field_Private_List_1_UIPage_0.Add(result);
-                    QuickMenuTools.QuickMenuController.field_Private_Dictionary_2_String_UIPage_0.Add(menuName, result);
+                    QuickMenuPageDictionary.Add(menuName, result);
                 }
             }
 
             return result;
         }
 
-        
+        internal static void RemovePage(this UIPage page)
+        {
+            if (page != null)
+            {
+                foreach (var item in QuickMenuPageDictionary)
+                {
+                    if (item != null)
+                    {
+                        if (item.Value != null)
+                        {
+                            if (item.Value.Equals(page))
+                            {
+                                QuickMenuPageDictionary.Remove(item.Key);
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            QuickMenuPageDictionary.Remove(item.Key);
+                        }
+                    }
+                }
+            }
+        }
+
+        private static Dictionary<string, UIPage> QuickMenuPageDictionary
+        {
+            get
+            {
+                return QuickMenuTools.QuickMenuController.field_Private_Dictionary_2_String_UIPage_0;
+            }
+        }
+
     }
 }

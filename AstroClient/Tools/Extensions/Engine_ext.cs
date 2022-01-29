@@ -12,6 +12,7 @@
     using VRC.SDK3.Components;
     using VRC.SDKBase;
     using xAstroBoy;
+    using xAstroBoy.AstroButtonAPI.PageGenerators;
     using xAstroBoy.Utility;
     using Color = System.Drawing.Color;
 
@@ -245,6 +246,31 @@
 
                     return;
                 }
+                else if (obj is VRC.UI.Elements.UIPage)
+                {
+                    var item = obj as VRC.UI.Elements.UIPage;
+                    if (item != null) // Special destroy system.
+                    {
+                        item.RemovePage();
+                        Object.Destroy(item);
+                    }
+
+                    MiscUtils.DelayFunction(0.5f, () =>
+                    {
+                        if (item != null)
+                        {
+                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                        }
+                        else
+                        {
+                            if (!Silent)
+                            {
+                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            }
+                        }
+                    });
+                }
+
                 else if (obj is GameObject)
                 {
                     var item = obj as GameObject;

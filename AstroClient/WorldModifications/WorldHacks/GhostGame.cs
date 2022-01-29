@@ -44,6 +44,7 @@
             ArmoryDoor_CloseDoor_Clockwise = null;
             ArmoryDoor_CloseDoor_CounterClockwise = null;
             ArmoryDoor_ResetDoor = null;
+            Armory_GetMoneyReward = null;
 
         }
 
@@ -59,31 +60,40 @@
             TurnOffMirror_1.UdonBehaviour.gameObject.AddToWorldUtilsMenu();
             TurnOffMirror_2.UdonBehaviour.gameObject.AddToWorldUtilsMenu();
 
-            if (ArmoryDoorObject != null)
+            if (ArmoryObject != null)
             {
-                ArmoryDoor_LockDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "LockDoor", "Local_ResetLock");
-                ArmoryDoor_AddKeyOnDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "LockDoor", "Local_AddOneMoreKey");
-
-                ArmoryDoor_OpenDoor_Clockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_OpenClockwise");
-                ArmoryDoor_OpenDoor_CounterClockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_OpenCounterClockwise");
-
-                ArmoryDoor_CloseDoor_Clockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_CloseClockwise");
-                ArmoryDoor_CloseDoor_CounterClockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_CloseCounterClockwise");
-
-                ArmoryDoor_ResetDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_ResetDoor");
-            }
-
-            if (WeaponsWorkshopObject != null)
-            {
-                if (Armory_Craft_Sniper != null)
+                if (ArmoryMoneyRewardObject != null)
                 {
-                    Armory_CraftSniper = UdonSearch.FindUdonEvent(Armory_Craft_Sniper, "CraftBtn", "_interact");
-                }
-                if (Armory_Craft_Gun != null)
-                {
-                    Armory_CraftGun = UdonSearch.FindUdonEvent(Armory_Craft_Gun, "CraftBtn", "_interact");
+                    Armory_GetMoneyReward = UdonSearch.FindUdonEvent(ArmoryMoneyRewardObject, "_interact");
                 }
 
+                if (ArmoryDoorObject != null)
+                {
+                    ArmoryDoor_LockDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "LockDoor", "Local_ResetLock");
+                    ArmoryDoor_AddKeyOnDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "LockDoor", "Local_AddOneMoreKey");
+
+                    ArmoryDoor_OpenDoor_Clockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_OpenClockwise");
+                    ArmoryDoor_OpenDoor_CounterClockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_OpenCounterClockwise");
+
+                    ArmoryDoor_CloseDoor_Clockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_CloseClockwise");
+                    ArmoryDoor_CloseDoor_CounterClockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_CloseCounterClockwise");
+
+                    ArmoryDoor_ResetDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_ResetDoor");
+                }
+
+                if (WeaponsWorkshopObject != null)
+                {
+                    if (Armory_Craft_Sniper != null)
+                    {
+                        Armory_CraftSniper = UdonSearch.FindUdonEvent(Armory_Craft_Sniper, "CraftBtn", "_interact");
+                    }
+
+                    if (Armory_Craft_Gun != null)
+                    {
+                        Armory_CraftGun = UdonSearch.FindUdonEvent(Armory_Craft_Gun, "CraftBtn", "_interact");
+                    }
+
+                }
             }
         }
 
@@ -172,15 +182,45 @@
             }
         }
 
+        private static GameObject _ArmoryObject;
+        private static GameObject ArmoryObject
+        {
+            get
+            {
+                if (!isGhostGameWorld) return null;
+                if (_ArmoryObject == null)
+                {
+                    return _ArmoryObject = GameObjectFinder.Find("/PoliceStation_A/RoomParts/1F/ArmoryRoom");
+                }
+                return _ArmoryObject;
+            }
+        }
+
+        private static GameObject _ArmoryMoneyRewardObject;
+        private static GameObject ArmoryMoneyRewardObject
+        {
+            get
+            {
+                if (!isGhostGameWorld) return null;
+                if (ArmoryObject == null) return null;
+                if (_ArmoryMoneyRewardObject == null)
+                {
+                    return _ArmoryMoneyRewardObject = ArmoryObject.transform.FindObject("Cabinets/Closet_A (5)/LootBoxSystem/Rewards/Reward_FallBack/FallBackReward/MoneyPack/Pickup (2)").gameObject;
+                }
+                return _ArmoryMoneyRewardObject;
+            }
+        }
+
         private static GameObject _ArmoryDoorObject;
         private static GameObject ArmoryDoorObject
         {
             get
             {
                 if (!isGhostGameWorld) return null;
+                if (ArmoryObject == null) return null;
                 if (_ArmoryDoorObject == null)
                 {
-                    return _ArmoryDoorObject = GameObjectFinder.Find("/PoliceStation_A/RoomParts/1F/ArmoryRoom/LockDoor");
+                    return _ArmoryDoorObject = ArmoryObject.transform.FindObject("LockDoor").gameObject;
                 }
                 return _ArmoryDoorObject;
             }
@@ -230,22 +270,23 @@
             }
         }
 
-        internal static CustomLists.UdonBehaviour_Cached ToggleMirrors_1 { get; set; } // Fuck the mirrors.
-        internal static CustomLists.UdonBehaviour_Cached ToggleMirrors_2 { get; set; } // Fuck the mirrors.
+        internal static UdonBehaviour_Cached ToggleMirrors_1 { get; set; } // Fuck the mirrors.
+        internal static UdonBehaviour_Cached ToggleMirrors_2 { get; set; } // Fuck the mirrors.
 
-        internal static CustomLists.UdonBehaviour_Cached TurnOffMirror_1 { get; set; } // Fuck the mirrors.
-        internal static CustomLists.UdonBehaviour_Cached TurnOffMirror_2 { get; set; } // Fuck the mirrors.
+        internal static UdonBehaviour_Cached TurnOffMirror_1 { get; set; } // Fuck the mirrors.
+        internal static UdonBehaviour_Cached TurnOffMirror_2 { get; set; } // Fuck the mirrors.
 
-        internal static CustomLists.UdonBehaviour_Cached ArmoryDoor_LockDoor { get; set; }
-        internal static CustomLists.UdonBehaviour_Cached ArmoryDoor_AddKeyOnDoor { get; set; }
-        internal static CustomLists.UdonBehaviour_Cached ArmoryDoor_OpenDoor_Clockwise { get; set; }
-        internal static CustomLists.UdonBehaviour_Cached ArmoryDoor_OpenDoor_CounterClockwise { get; set; }
-        internal static CustomLists.UdonBehaviour_Cached ArmoryDoor_CloseDoor_Clockwise { get; set; }
-        internal static CustomLists.UdonBehaviour_Cached ArmoryDoor_CloseDoor_CounterClockwise { get; set; }
-        internal static CustomLists.UdonBehaviour_Cached ArmoryDoor_ResetDoor { get; set; }
+        internal static UdonBehaviour_Cached ArmoryDoor_LockDoor { get; set; }
+        internal static UdonBehaviour_Cached ArmoryDoor_AddKeyOnDoor { get; set; }
+        internal static UdonBehaviour_Cached ArmoryDoor_OpenDoor_Clockwise { get; set; }
+        internal static UdonBehaviour_Cached ArmoryDoor_OpenDoor_CounterClockwise { get; set; }
+        internal static UdonBehaviour_Cached ArmoryDoor_CloseDoor_Clockwise { get; set; }
+        internal static UdonBehaviour_Cached ArmoryDoor_CloseDoor_CounterClockwise { get; set; }
+        internal static UdonBehaviour_Cached ArmoryDoor_ResetDoor { get; set; }
 
-        internal static CustomLists.UdonBehaviour_Cached Armory_CraftSniper { get; set; }
-        internal static CustomLists.UdonBehaviour_Cached Armory_CraftGun { get; set; }
+        internal static UdonBehaviour_Cached Armory_CraftSniper { get; set; }
+        internal static UdonBehaviour_Cached Armory_CraftGun { get; set; }
+        internal static UdonBehaviour_Cached Armory_GetMoneyReward { get; set; }
 
         internal static QMToggleButton TrollMirrorZombiesBtn { get; set; }
         internal static QMNestedGridMenu GhostGameMenu { get; set; }

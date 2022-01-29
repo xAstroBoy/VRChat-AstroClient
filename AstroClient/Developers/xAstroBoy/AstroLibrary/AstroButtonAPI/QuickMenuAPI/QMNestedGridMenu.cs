@@ -220,7 +220,6 @@
             mainButton.DestroyMe();
             backButton.DestroyMeLocal(true);
             ButtonsMenu.DestroyMeLocal(true);
-            Parent.DestroyMeLocal(true);
             page.DestroyMeLocal(true);
         }
 

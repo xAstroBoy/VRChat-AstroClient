@@ -20,60 +20,6 @@
             ScaleCheck.Clear();
         }
 
-        internal class UdonBehaviour_Cached
-        {
-            internal UdonBehaviour UdonBehaviour { get; set; }
-            internal string EventKey { get; set; }
-            internal object InvokeBehaviourRepeater { get; set; }
-            internal UdonBehaviour_Cached(UdonBehaviour udonBehaviour, string eventKey)
-            {
-                UdonBehaviour = udonBehaviour;
-                EventKey = eventKey;
-            }
-
-            internal void InvokeBehaviour()
-            {
-                if (UdonBehaviour != null)
-                {
-                    if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
-                    {
-                        if (EventKey.StartsWith("_"))
-                        {
-                            UdonBehaviour.SendCustomEvent(EventKey);
-                        }
-                        else
-                        {
-                            UdonBehaviour.SendCustomNetworkEvent(NetworkEventTarget.All, EventKey);
-                        }
-                    }
-                }
-            }
-
-            internal object RepeatInvokeBehaviour(int amount)
-            {
-                // Avoid To spam the same routine.
-                if (InvokeBehaviourRepeater == null)
-                {
-                    return InvokeBehaviourRepeater = MelonCoroutines.Start(RepeatInvokeBehaviourRoutine(amount));
-                }
-
-                return null;
-            }
-
-            private IEnumerator RepeatInvokeBehaviourRoutine(int amount)
-            {
-                for (int i = 0; i < amount; i++)
-                {
-                    InvokeBehaviour();
-                    yield return new WaitForSeconds(0.05f);
-                }
-
-                InvokeBehaviourRepeater = null;
-                yield return null;
-            }
-
-        }
-
         internal class ColliderChecker
         {
             internal GameObject TargetObj { get; set; }

@@ -7,6 +7,7 @@
     using Il2CppSystem;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
+    using WorldModifications.Modifications;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
@@ -37,8 +38,8 @@
         }
 
         internal string ToggleStatusString { get; } = "ToggledOn";
-        internal CustomLists.UdonBehaviour_Cached AutoStarter_SetActive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        internal CustomLists.UdonBehaviour_Cached AutoStarter_SetInactive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal UdonBehaviour_Cached AutoStarter_SetActive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal UdonBehaviour_Cached AutoStarter_SetInactive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal RawUdonBehaviour AutoStarterController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
@@ -77,7 +78,7 @@
                 {
                     KeepAutoStarterInactive = false;
                 }
-               
+
             }
         }
 

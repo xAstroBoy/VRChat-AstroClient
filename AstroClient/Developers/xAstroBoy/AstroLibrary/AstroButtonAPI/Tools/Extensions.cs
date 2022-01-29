@@ -69,21 +69,22 @@
             return false;
         }
 
-
         internal static bool ContainsPage(this UIPage page, List<QMNestedGridMenu> menus)
         {
-            if (menus != null)
-                if (menus.Count != 0)
-                    foreach (var item in menus)
-                        if (item != null)
-                            if (ContainsPage(page, item.GetPage()))
-                                return true;
+            if (page != null)
+                if (menus != null)
+                    if (menus.Count != 0)
+                        foreach (var item in menus)
+                            if (item != null)
+                                if (ContainsPage(page, item.GetPage()))
+                                    return true;
+
             return false;
         }
 
         internal static bool ContainsPage(this UIPage page, UIPage TargetPage)
         {
-            if (page != null)
+            if (page != null && TargetPage != null)
             {
                 if (page.name.Equals(TargetPage.name)) return true;
                 if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
@@ -112,7 +113,6 @@
                     }
                 }
         }
-
 
         //public void LoadSprite(byte[] data)
         //{
@@ -292,7 +292,6 @@
                 QuickMenuTools.Wing_Right.ShowQuickmenuPage(pagename.GetMenuName());
             }
         }
-
 
         internal static GameObject CreateMainBackButton(this GameObject NestedPart)
         {

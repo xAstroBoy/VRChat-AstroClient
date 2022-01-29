@@ -9,6 +9,7 @@
     using JetBrains.Annotations;
     using Spoofer;
     using UnhollowerBaseLib.Attributes;
+    using WorldModifications.Modifications;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
@@ -104,7 +105,7 @@
         private string HiddenTier_Address { [HideFromIl2Cpp] get; } = "__0_hiddenList_StringArray";
 
         private static RawUdonBehaviour PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private static CustomLists.UdonBehaviour_Cached RefreshPatronList { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private static UdonBehaviour_Cached RefreshPatronList { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         // Use this for initialization
         internal void Start()
         {
