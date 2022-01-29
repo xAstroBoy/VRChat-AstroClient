@@ -7,7 +7,7 @@
 
     internal class ObjectCloner : AstroEvents
     {
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             _holder = null;
             SpawnerSubmenu.ClonedObjects.Clear();

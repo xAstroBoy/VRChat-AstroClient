@@ -25,7 +25,7 @@
             SpawnedPrefabsCounter = new QMSingleButton(main, GetSpawnedPrefabText, null, GetSpawnedPrefabText);
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             SpawnedPrefabs.Clear();
             ClonedObjects.Clear();

@@ -6,7 +6,7 @@
 
     internal class EspHelper : AstroEvents
     {
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             foreach (var item in SpawnedESPsHolders)
             {

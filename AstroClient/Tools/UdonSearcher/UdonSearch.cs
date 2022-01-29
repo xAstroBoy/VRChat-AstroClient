@@ -216,6 +216,38 @@
             return null;
         }
 
+        internal static UdonBehaviour_Cached FindUdonEvent(GameObject parent, string action, string subaction, bool Debug = false)
+        {
+            var gameobjects = parent.GetComponentsInChildren<UdonBehaviour>(true);
+            var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
+            if (behaviour != null)
+            {
+                if (behaviour._eventTable.count != 0)
+                {
+                    if (Debug)
+                    {
+                        ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                    }
+
+                    foreach (var actionkeys in behaviour._eventTable)
+                    {
+                        if (actionkeys.key == subaction)
+                        {
+                            if (Debug)
+                            {
+                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                            }
+
+                            return new UdonBehaviour_Cached(behaviour, actionkeys.key);
+                        }
+                    }
+                }
+            }
+
+            ModConsole.Error($"Failed to Find {action} Having SubKey {subaction}");
+            return null;
+        }
+
         internal static UdonBehaviour_Cached FindUdonEvent(UdonBehaviour obj, string subaction, bool Debug = false)
         {
             if (obj != null)

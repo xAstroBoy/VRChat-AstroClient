@@ -7,6 +7,6 @@
     {
         internal static List<Renderer> RenderObjects { get; } = new List<Renderer>();
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName) => RenderObjects.Clear();
+        internal override void OnRoomLeft() => RenderObjects.Clear();
     }
 }

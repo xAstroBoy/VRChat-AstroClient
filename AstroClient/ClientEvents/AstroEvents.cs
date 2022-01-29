@@ -25,7 +25,6 @@
     {
         public AstroEvents()
         {
-            // ML Events
             Main.Event_OnApplicationLateStart += Internal_OnApplicationLateStart;
 
             Main.Event_OnUpdate += Internal_OnUpdate;
@@ -39,9 +38,6 @@
             Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
             Main.Event_OnApplicationQuit += Internal_OnApplicationQuit;
 
-            // PATCHES
-
-            // HOOKS
             OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
             SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
             TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;

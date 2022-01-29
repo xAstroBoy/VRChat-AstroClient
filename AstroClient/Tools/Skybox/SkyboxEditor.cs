@@ -58,8 +58,7 @@
 
         internal static Material OriginalSkybox { get; private set; }
 
-
-        internal static bool isSupportedSkybox { get; private set; }= false;
+        internal static bool isSupportedSkybox { get; private set; } = false;
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -94,14 +93,10 @@
             }
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
-        {
-            OriginalSkybox = null;
-        }
-
         internal override void OnRoomLeft()
         {
             isSupportedSkybox = false;
+            OriginalSkybox = null;
         }
 
         internal static bool IsBundleAlreadyRegistered(string filename)
@@ -368,7 +363,6 @@
             //    break;
             //}
 
-
             var savepath = Path.Combine(YoinkedSkyboxesPath, $"{SkyboxType}_" + OriginalSkybox.name);
             if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
 
@@ -389,7 +383,6 @@
 
             return true;
         }
-
 
         private static Material BuildSixSidedMaterial(Texture2D Up, Texture2D Down, Texture2D Back, Texture2D Front, Texture2D Left, Texture2D Right)
         {
@@ -427,7 +420,6 @@
 
             return null;
         }
-
 
         internal static void SetRenderSettingSkybox(Material mat)
         {

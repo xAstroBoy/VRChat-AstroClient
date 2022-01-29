@@ -64,9 +64,9 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                             CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
                             CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
                             CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
-                        //CustomSubMenu.AddToggle("Bypass Tower Collider", SuperTowerDefense.IgnoreTowersCollidersPlacement, ToggleValue => { SuperTowerDefense.IgnoreTowersCollidersPlacement = ToggleValue; });
+                            //CustomSubMenu.AddToggle("Bypass Tower Collider", SuperTowerDefense.IgnoreTowersCollidersPlacement, ToggleValue => { SuperTowerDefense.IgnoreTowersCollidersPlacement = ToggleValue; });
 
-                    }, null, false, null);
+                        }, null, false, null);
                         CustomSubMenu.AddSubMenu("Towers Editor", () =>
                         {
 
@@ -259,13 +259,42 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
                 {
                     CustomSubMenu.AddSubMenu("Ghost Game", () =>
                     {
-                        CustomSubMenu.AddButton("Toggle Lobby Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_1.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Toggle Mailbox Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_2.InvokeBehaviour(); });
-                        CustomSubMenu.AddToggle("Turn Off Mirrors Troll (Spams Mirror Off event to piss Mirror zombies!)", GhostGame.FuckOffMirrorZombies, value => { GhostGame.FuckOffMirrorZombies = value; });
-                        CustomSubMenu.AddButton("Teleport To Patron Zone", () =>
+                        CustomSubMenu.AddSubMenu("Mirror Control", () =>
                         {
-                            GameInstances.LocalPlayer.gameObject.transform.position = new Vector3(40.171f, 5.7125f, 544.726f);
+                            CustomSubMenu.AddButton("Toggle Lobby Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_1.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Toggle Mailbox Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_2.InvokeBehaviour(); });
+                            CustomSubMenu.AddToggle("Turn Off Mirrors Troll (Spams Mirror Off event to piss Mirror zombies!)", GhostGame.FuckOffMirrorZombies, value => { GhostGame.FuckOffMirrorZombies = value; });
                         });
+
+                        CustomSubMenu.AddSubMenu("Armory Control", () =>
+                        {
+                            CustomSubMenu.AddButton("Teleport To Armory Zone", () =>
+                            {
+                                GameInstances.LocalPlayer.gameObject.transform.position = new Vector3(40.171f, 5.7125f, 544.726f);
+                            });
+                            CustomSubMenu.AddButton("Disable Lock & Craft Everything", () =>
+                         {
+                             GhostGame.Armory_CraftGun.InvokeBehaviour();
+                             GhostGame.Armory_CraftSniper.InvokeBehaviour();
+                             GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5);
+                         });
+
+                            CustomSubMenu.AddButton("Disable Lock (Clicks it 5 times!)", () => { GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5); });
+                            CustomSubMenu.AddButton("Start Armory Weapons crafting.", () =>
+                            {
+                                GhostGame.Armory_CraftGun.InvokeBehaviour();
+                                GhostGame.Armory_CraftSniper.InvokeBehaviour();
+                            });
+
+                            CustomSubMenu.AddButton("Relock Armory Door", () => { GhostGame.ArmoryDoor_LockDoor.InvokeBehaviour(); });
+
+                            CustomSubMenu.AddButton("Open Armory Door Clockwise", () => { GhostGame.ArmoryDoor_OpenDoor_Clockwise.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Open Armory Door CounterClockWise", () => { GhostGame.ArmoryDoor_OpenDoor_CounterClockwise.InvokeBehaviour(); });
+
+                            CustomSubMenu.AddButton("Close Armory Door Clockwise", () => { GhostGame.ArmoryDoor_CloseDoor_Clockwise.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Close Armory Door CounterClockWise", () => { GhostGame.ArmoryDoor_CloseDoor_CounterClockwise.InvokeBehaviour(); });
+                        });
+
                     });
                 }
 

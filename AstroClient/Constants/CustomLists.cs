@@ -1,16 +1,19 @@
 ﻿namespace AstroClient.Constants
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using MelonLoader;
     using Tools.Extensions;
     using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using xAstroBoy.Extensions;
+    using Object = System.Object;
 
     internal class CustomLists : AstroEvents
     {
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             RendererSaverIndex.Clear();
             ColliderCheck.Clear();
@@ -21,7 +24,7 @@
         {
             internal UdonBehaviour UdonBehaviour { get; set; }
             internal string EventKey { get; set; }
-
+            internal object InvokeBehaviourRepeater { get; set; }
             internal UdonBehaviour_Cached(UdonBehaviour udonBehaviour, string eventKey)
             {
                 UdonBehaviour = udonBehaviour;
@@ -45,6 +48,30 @@
                     }
                 }
             }
+
+            internal object RepeatInvokeBehaviour(int amount)
+            {
+                // Avoid To spam the same routine.
+                if (InvokeBehaviourRepeater == null)
+                {
+                    return InvokeBehaviourRepeater = MelonCoroutines.Start(RepeatInvokeBehaviourRoutine(amount));
+                }
+
+                return null;
+            }
+
+            private IEnumerator RepeatInvokeBehaviourRoutine(int amount)
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    InvokeBehaviour();
+                    yield return new WaitForSeconds(0.05f);
+                }
+
+                InvokeBehaviourRepeater = null;
+                yield return null;
+            }
+
         }
 
         internal class ColliderChecker

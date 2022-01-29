@@ -57,7 +57,7 @@
             }
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             DesktopHeadlightBool = false;
             VRHeadLightBool = false;

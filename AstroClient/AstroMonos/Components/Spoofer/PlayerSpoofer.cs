@@ -83,6 +83,19 @@
             }
         }
 
+        internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
+        {
+            if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+            {
+                if (world != null)
+                {
+                    IsSpooferActive = true;
+                    SpoofedName = world.authorName;
+
+                }
+            }
+        }
+
         internal override void OnRoomJoined()
         {
             //SafetyCheck();

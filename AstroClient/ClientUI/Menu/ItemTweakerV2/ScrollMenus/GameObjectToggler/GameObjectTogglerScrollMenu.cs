@@ -20,7 +20,7 @@
 
     internal class GameObjMenu : AstroEvents
     {
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             CurrentSelection.Clear();
             Current = null;

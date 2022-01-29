@@ -11,7 +11,7 @@ namespace AstroClient.Spawnables.Flashlight
 
     internal class Astro_Flashlight : AstroEvents
     {
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             DestroyAllFlashLights();
         }

@@ -88,7 +88,7 @@
             Reset();
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             Reset();
         }

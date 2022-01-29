@@ -10,7 +10,7 @@
 
     internal class QMFreeze : AstroEvents
     {
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             Frozen = false;
             hasBackuppedGravity = false;
@@ -18,7 +18,7 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if(!hasBackuppedGravity)
+            if (!hasBackuppedGravity)
             {
                 originalGravity = Physics.gravity;
             }
@@ -87,7 +87,6 @@
                 }
             }
         }
-
 
         internal override void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
         {

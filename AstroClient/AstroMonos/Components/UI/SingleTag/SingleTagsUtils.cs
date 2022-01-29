@@ -14,7 +14,7 @@
 
     internal class SingleTagsUtils : AstroEvents
     {
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             TagStackingMechanism.Clear();
         }
@@ -33,7 +33,6 @@
             return TagStackingMechanism.Where(x => x.Player == player).DefaultIfEmpty(null).First();
         }
 
-
         private static readonly bool DebugMode = false;
         internal static void Debug(string msg)
         {
@@ -44,8 +43,6 @@
         }
         // TODO : MERGE THIS IN THE STARTING PROCESS OF SINGLETAG AND MAKE IT EASIER AS .AddComponent<SINGLETAG>() instead of using this!
 
-
-
         internal static List<TagStacker> TagStackingMechanism { get; } = new List<TagStacker>();
 
         internal static void RemoveCounter(TagStacker entry)
@@ -55,8 +52,6 @@
                 if (TagStackingMechanism.Contains(entry)) _ = TagStackingMechanism.Remove(entry);
             }
         }
-
-
 
     }
 }

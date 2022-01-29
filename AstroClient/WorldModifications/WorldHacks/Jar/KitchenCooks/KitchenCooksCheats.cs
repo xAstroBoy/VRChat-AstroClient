@@ -55,7 +55,6 @@
             }
         }
 
-
         private static void FindKnifes()
         {
             Knife0 = GameObjectFinder.Find("/APPLIANCES/Cutting board (0)/Knife zone/Knife");
@@ -70,11 +69,10 @@
             }
         }
 
-
         private static GameObject Knife1 { get; set; }
         private static GameObject Knife0 { get; set; }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             EveryoneHasPatreonPerk = false;
             OnlySelfHasPatreonPerk = false;
@@ -107,8 +105,6 @@
             }
         }
 
-
-
         internal static void InitCheatsMenu(QMGridTab submenu)
         {
             KitchenCooksCheatPage = new QMNestedGridMenu(submenu, "Kitchen Cooks Cheats", "Manage Kitchen Cooks Cheats");
@@ -124,9 +120,7 @@
                 OnlySelfHasPatreonPerk = false;
             }, "Public Golden Knifes", () => { EveryoneHasPatreonPerk = false; }, "Unlocks The Patreon Perks (Golden Knifes) For Everyone!");
 
-            
         }
 
- 
     }
 }

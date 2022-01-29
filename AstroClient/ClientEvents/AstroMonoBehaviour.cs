@@ -6,7 +6,6 @@
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using Cheetos;
     using ClientUI.Menu.ESP;
-    using Config;
     using Moderation;
     using Photon.Realtime;
     using Startup.Hooks;
@@ -14,9 +13,11 @@
     using Streamer;
     using Target;
     using UnityEngine;
+    using VRC.Core;
     using VRC.SDKBase;
     using VRC.UI.Elements;
     using xAstroBoy;
+    using ConfigManager = Config.ConfigManager;
 
     public class AstroMonoBehaviour : MonoBehaviour
     {
@@ -24,14 +25,9 @@
 
         public AstroMonoBehaviour(IntPtr obj0) : base(obj0)
         {
-            // ML Events
-            //Main.Event_OnApplicationStart += Internal_OnApplicationStart;
 
             Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
 
-            // PATCHES
-
-            // HOOKS
             OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
             SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
             TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
@@ -44,20 +40,14 @@
             PlayerJoinAndLeaveHook.Event_OnPlayerLeft += Internal_OnPlayerLeft;
 
             CheetosHooks.Event_OnMasterClientSwitched += Internal_OnMasterClientSwitched;
+            CheetosHooks.Event_OnShowScreen += Internal_OnShowScreen;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
-            UiManager.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
-            UiManager.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
-            UiManager.Event_OnBigMenuOpen += Internal_OnBigMenuOpen;
-            UiManager.Event_OnBigMenuClose += Internal_OnBigMenuClose;
-            UiManager.Event_OnUserInfoMenuOpen += Internal_OnUserInfoMenuOpen;
-            UiManager.Event_OnUserInfoMenuClose += Internal_OnUserInfoMenuClose;
-            UiManager.Event_OnUiPageToggled += Internal_OnUiPageToggled;
             CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
             CheetosHooks.Event_OnFriended += Internal_OnFriended;
             CheetosHooks.Event_OnUnfriended += Internal_OnUnfriended;
-
+            CheetosHooks.Event_OnEnterWorld += Internal_OnEnterWorld;
             QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
@@ -69,6 +59,14 @@
             PhotonModerationHandler.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
             PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
             PhotonModerationHandler.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
+
+            UiManager.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
+            UiManager.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
+            UiManager.Event_OnBigMenuOpen += Internal_OnBigMenuOpen;
+            UiManager.Event_OnBigMenuClose += Internal_OnBigMenuClose;
+            UiManager.Event_OnUserInfoMenuOpen += Internal_OnUserInfoMenuOpen;
+            UiManager.Event_OnUserInfoMenuClose += Internal_OnUserInfoMenuClose;
+            UiManager.Event_OnUiPageToggled += Internal_OnUiPageToggled;
 
             InputPatches.Event_OnInput_Jump += Internal_OnInput_Jump;
             InputPatches.Event_OnInput_UseLeft += Internal_OnInput_UseLeft;
@@ -83,6 +81,15 @@
             ConfigManager.Event_OnFriendESPColorChanged += Internal_OnFriendESPColorChanged;
             ConfigManager.Event_OnBlockedESPColorChanged += Internal_OnBlockedESPColorChanged;
 
+        }
+        private void Internal_OnEnterWorld(object sender, OnEnterWorldEventArgs e)
+        {
+            OnEnterWorld(e.ApiWorld, e.ApiWorldInstance);
+        }
+
+        private void Internal_OnShowScreen(object sender, ScreenEventArgs e)
+        {
+            OnShowScreen(e.page);
         }
 
         private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
@@ -171,7 +178,7 @@
 
         private void Internal_OnUiPageToggled(object sender, OnUiPageEventArgs e)
         {
-            OnUiPageToggled(e.Page, e.Toggle,  e.TransitionType);
+            OnUiPageToggled(e.Page, e.Toggle, e.TransitionType);
         }
 
         private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
@@ -209,24 +216,20 @@
             OnPlayerBlockedYou(e.player);
         }
 
-
         private void Internal_OnPlayerUnblockedYou(object sender, PhotonPlayerEventArgs e)
         {
             OnPlayerUnblockedYou(e.player);
         }
-
 
         private void Internal_OnPlayerMutedYou(object sender, PhotonPlayerEventArgs e)
         {
             OnPlayerMutedYou(e.player);
         }
 
-
         private void Internal_OnPlayerUnmutedYou(object sender, PhotonPlayerEventArgs e)
         {
             OnPlayerUnmutedYou(e.player);
         }
-
 
         private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
         {
@@ -403,16 +406,13 @@
         {
         }
 
-
         internal virtual void OnPlayerUnblockedYou(Player player)
         {
         }
 
-
         internal virtual void OnPlayerMutedYou(Player player)
         {
         }
-
 
         internal virtual void OnPlayerUnmutedYou(Player player)
         {
@@ -424,11 +424,9 @@
 
         internal virtual void OnPlayerESPPropertyChanged(bool value) { }
 
-
         internal virtual void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
         {
         }
-
 
         internal virtual void OnInput_UseLeft(bool isClicked, bool isDown, bool isUp)
         {
@@ -443,6 +441,13 @@
         }
 
         internal virtual void OnInput_GrabRight(bool isClicked, bool isDown, bool isUp)
+        {
+        }
+
+        internal virtual void OnShowScreen(VRCUiPage page)
+        {
+        }
+        internal virtual void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
         }
         #endregion

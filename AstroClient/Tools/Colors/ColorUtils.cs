@@ -20,9 +20,6 @@
             return new UnityEngine.Color(r, g, b);
         }
 
-
-
-
         internal static string ColorToHex(System.Drawing.Color color)
         {
             return ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(color.ToArgb()));
@@ -32,7 +29,6 @@
         {
             return HexToColor(ColorToHex(color));
         }
-
 
         internal static UnityEngine.Color GenerateHSVColor()
         {
@@ -51,7 +47,7 @@
             return color;
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             GeneratedColors.Clear();
         }

@@ -126,13 +126,7 @@
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
     <Compile Include="ClientUI\ActionMenu\TrollDefenseModule.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
-    <Compile Include="ClientUI\LoadingScreen\Assets\LoginScreenAssets.cs" />
-    <Compile Include="ClientUI\LoadingScreen\Assets\LoadingScreenAssets.cs" />
-    <Compile Include="ClientUI\LoadingScreen\Prefabs\LoadScreenPrefabs.cs" />
-    <Compile Include="ClientUI\LoadingScreen\BetterLoadingScreen.cs" />
-    <Compile Include="ClientUI\LoadingScreen\Settings\BetterLoadingScreenSettings.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\TrollDefenseSubMenu.cs" />
-    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_LoadingScreen.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_PickupProtector.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
@@ -326,6 +320,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_HealthEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_WaveEditor.cs" />
+    <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Experiments\EmojiCooldownKiller.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealer.cs" />
     <Compile Include="Startup\Fixes\DashboardFix.cs" />
@@ -377,7 +372,6 @@
     <Compile Include="ClientAttributes\RegisterComponent.cs" />
     <Compile Include="Spawnables\Enderpearl\AstroEnderPearl.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\EnderPearl.cs" />
-    <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Tools\Exploits\Exploit_Exts\Teleport_Ext.cs" />
     <Compile Include="Tools\Exploits\TeleportExploit.cs" />
     <Compile Include="Tools\Extensions\Click_ext.cs" />
@@ -1364,8 +1358,6 @@
     <EmbeddedResource Include="ClientResources\FigletsArchive\Larry3D.flf" />
     <None Include="app.config" />
     <Compile Include="AstroMonos\Components\Tools\RigidBodyController.cs" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\OldLoadingScreen.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\chocolate.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\crystal_003.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry.assetbundle" />

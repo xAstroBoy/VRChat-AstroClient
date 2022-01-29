@@ -41,7 +41,6 @@
 
         private static PatronUnlocker DetectiveGunPerkUnlocker;
 
-
         // MAP GameObjects Required for control.
         internal static QMToggleButton Murder4ESPtoggler;
 
@@ -457,7 +456,7 @@
             }
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             if (KnifesGrabbableToggle != null) KnifesGrabbableToggle.SetToggleState(false);
             item_Knife_0 = null;
@@ -593,7 +592,7 @@
 
             #endregion Item Teleporter
 
-            var MurderItemTweaker = new QMNestedGridMenu(Murder4CheatPage,  "Item Tweaker", "Item Tweaks!");
+            var MurderItemTweaker = new QMNestedGridMenu(Murder4CheatPage, "Item Tweaker", "Item Tweaks!");
 
             #region Item Tweaker
 
@@ -650,7 +649,7 @@
 
             if (Bools.AllowAttackerComponent)
             {
-                var MurderItemAttackerMenu = new QMNestedGridMenu(Murder4CheatPage,  "Followers", "Murder item Followers!");
+                var MurderItemAttackerMenu = new QMNestedGridMenu(Murder4CheatPage, "Followers", "Murder item Followers!");
 
                 #region Followers
 
@@ -675,7 +674,7 @@
 
             if (Bools.AllowOrbitComponent)
             {
-                var MurderItemOrbiterMenu = new QMNestedGridMenu(Murder4CheatPage,  "Orbiters", "Murder item Orbits!");
+                var MurderItemOrbiterMenu = new QMNestedGridMenu(Murder4CheatPage, "Orbiters", "Murder item Orbits!");
 
                 #region orbiters
 
@@ -735,7 +734,7 @@
 
             #endregion Watchers
 
-            var Cheats = new QMNestedGridMenu(Murder4CheatPage,  "World Cheats", "Some Powerful cheats!");
+            var Cheats = new QMNestedGridMenu(Murder4CheatPage, "World Cheats", "Some Powerful cheats!");
 
             GetSelfPatreonGunBtn = new QMToggleButton(Cheats, "Private Golden Gun", () =>
             {
@@ -804,7 +803,6 @@
 
             return null;
         }
-
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {

@@ -77,12 +77,12 @@
                 switch (_CurrentPlayer_AmongUS_ESP)
                 {
                     case null:
-                            var item = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<AmongUS_ESP>();
-                            if (!AmongUS_ESPs.Contains(item))
-                            {
-                                AmongUS_ESPs.Add(item);
-                            }
-                            return _CurrentPlayer_AmongUS_ESP = item;
+                        var item = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<AmongUS_ESP>();
+                        if (!AmongUS_ESPs.Contains(item))
+                        {
+                            AmongUS_ESPs.Add(item);
+                        }
+                        return _CurrentPlayer_AmongUS_ESP = item;
                     default:
                         return _CurrentPlayer_AmongUS_ESP;
                 }
@@ -118,7 +118,7 @@
             return AmongUS_ESPs.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             JarRoleLinks.Clear();
             Murder4_ESPs.Clear();

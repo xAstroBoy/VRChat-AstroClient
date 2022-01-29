@@ -50,7 +50,7 @@
 
             Headlight.HeadlightButtonInit(AstroClient);
 
-            CameraTweaker.InitQMMenu(AstroClient);
+            //CameraTweaker.InitQMMenu(AstroClient);
 
             SettingsMenuBtn.InitButtons(AstroClient);
             if (Bools.IsDeveloper)

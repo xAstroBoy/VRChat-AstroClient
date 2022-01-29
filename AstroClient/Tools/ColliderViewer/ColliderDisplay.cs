@@ -61,7 +61,7 @@
             }
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             ToggleDisplays(false);
             if (ToggleColliderDisplayBtn != null)

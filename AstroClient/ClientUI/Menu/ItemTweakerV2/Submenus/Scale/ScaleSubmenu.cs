@@ -37,7 +37,7 @@
             ScaleEditZ = new QMSingleToggleButton(ScaleEditor, 2, 2, "Edit Z", new Action(() => { EditVectorZ = true; }), "Ignore Z", new Action(() => { EditVectorZ = false; }), "Make Inflater Edit Z", Color.green, Color.red, null, false, true);
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             if (CurrentScaleButton != null)
             {
@@ -87,9 +87,6 @@
                 CurrentScaleButton.SetButtonText("Object 's scale : " + Vector3.zero.ToString());
             }
         }
-
-
-
 
         //internal static QMSlider ScaleSlider;
 

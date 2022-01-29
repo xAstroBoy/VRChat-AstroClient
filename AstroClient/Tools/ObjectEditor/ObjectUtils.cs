@@ -417,7 +417,7 @@
             }
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             Mirrors.Clear();
             if (GameObjDumper != null)
@@ -433,6 +433,7 @@
             {
                 ObjDumperWithComponentsBtn.SetInteractable(true);
             }
+
         }
 
         internal static void DumpHoldingGameObjComponent()

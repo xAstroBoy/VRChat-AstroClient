@@ -32,11 +32,6 @@ namespace AstroClient.WorldModifications.Modifications
         private static QMToggleButton LockButton4;
         private static GameObject LockIndicator4;
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
-        {
-            TrashToDelete.Clear();
-        }
-
         internal static void InitButtons(QMGridTab main)
         {
             FBTExploitsPage = new QMNestedGridMenu(main, "FBTHeaven Exploits", "FBTHeaven Exploits");
@@ -187,6 +182,7 @@ namespace AstroClient.WorldModifications.Modifications
         internal override void OnRoomLeft()
         {
             isCurrentWorld = false;
+            TrashToDelete.Clear();
         }
 
         private static void AddLockPickButton(GameObject HandleSign, int doorID)

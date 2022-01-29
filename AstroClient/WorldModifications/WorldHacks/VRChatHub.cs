@@ -48,7 +48,7 @@
             Emulate_table_roleplay_props_click();
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             Status_Mirror_Props = VrcBooleanOp.Unused;
             Status_BeachBalls_Props = VrcBooleanOp.Unused;

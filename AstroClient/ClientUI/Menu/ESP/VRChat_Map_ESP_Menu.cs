@@ -28,7 +28,7 @@
         private static QMToggleButton TriggerESPToggleBtn;
         private static QMToggleButton UdonBehaviourESPToggleBtn;
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnRoomLeft()
         {
             Toggle_VRCInteractable_ESP = false;
             Toggle_Trigger_ESP = false;
