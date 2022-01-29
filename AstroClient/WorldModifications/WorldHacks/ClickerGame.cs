@@ -1,13 +1,13 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
-    using MelonLoader;
     using System.Collections;
     using System.Collections.Generic;
+    using CustomClasses;
+    using MelonLoader;
     using Tools.UdonSearcher;
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using static Constants.CustomLists;
 
     internal class ClickerGame : AstroEvents
     {

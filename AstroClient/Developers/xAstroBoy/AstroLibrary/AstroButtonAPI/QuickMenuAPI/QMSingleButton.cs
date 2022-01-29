@@ -16,7 +16,6 @@
 
     internal class QMSingleButton
     {
-
         internal string btnQMLoc { get; set; }
         internal string btnType { get; set; }
         private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
@@ -42,6 +41,7 @@
                 return _ButtonToolTip;
             }
         }
+
         private GameObject ButtonsMenu { get; set; }
         internal GameObject Background { get; set; }
         internal Image BackgroundImage { get; set; }
@@ -74,7 +74,6 @@
 
             if (btnHalf)
             {
-
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
                 ButtonObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
@@ -104,7 +103,6 @@
 
             if (btnHalf)
             {
-
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
                 ButtonObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
@@ -126,18 +124,19 @@
 
             if (btnHalf)
             {
-
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
                 ButtonObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
+
         internal QMSingleButton(QMGridTab Parent, string btnText, Action btnAction, string btnToolTip = "", Color? TextColor = null)
         {
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
             initButton(0, 0, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
         }
+
         internal QMSingleButton(QMGridTab Parent, string btnText, Action btnAction, string btnToolTip = "", System.Drawing.Color? TextColor = null)
         {
             btnQMLoc = Parent.GetMenuName();
@@ -151,6 +150,7 @@
             ButtonsMenu = Parent.GetButtonsMenu();
             initButton(0, 0, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
         }
+
         internal QMSingleButton(QMNestedGridMenu Parent, string btnText, Action btnAction, string btnToolTip = "", System.Drawing.Color? TextColor = null)
         {
             btnQMLoc = Parent.GetMenuName();
@@ -166,7 +166,6 @@
 
             if (btnHalf)
             {
-
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
                 ButtonObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
@@ -197,7 +196,6 @@
 
         internal QMSingleButton(QMTabMenu Parent, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", Color? BackgroundColor = null, Color? TextColor = null, bool btnHalf = false)
         {
-
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
@@ -213,12 +211,10 @@
 
         internal QMSingleButton(string btnQMloc, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", string TextColor = null, bool btnHalf = false)
         {
-
             btnQMLoc = btnQMloc;
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
             if (btnHalf)
             {
-
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
                 ButtonObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
@@ -232,7 +228,6 @@
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
             if (btnHalf)
             {
-
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
                 ButtonObject.GetComponentInChildren<TextMeshProUGUI>().rectTransform.anchoredPosition -= new Vector2(0, 50);
@@ -308,6 +303,7 @@
             SetActive(true);
             //QMButtonAPI.allSingleButtons.Add(this);
         }
+
         internal void SetActive(bool isActive)
         {
             ButtonObject.gameObject.SetActive(isActive);
@@ -319,10 +315,12 @@
             var NewText = $"<color={CurrentBtnColor}>{BtnText}</color>";
             ButtonText.text = NewText;
         }
+
         internal void SetTextColor(Color buttonTextColor)
         {
             setTextColorHTML($"#{ColorUtility.ToHtmlStringRGB(buttonTextColor)}");
         }
+
         internal void setTextColorHTML(string buttonTextColor)
         {
             if (buttonTextColor.IsNotNullOrEmptyOrWhiteSpace())
@@ -405,6 +403,5 @@
             SetButtonText(btn.BtnText);
             SetAction(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); });
         }
-
     }
 }

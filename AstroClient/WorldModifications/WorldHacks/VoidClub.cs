@@ -1,11 +1,10 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.UI;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     internal class VoidClub : AstroEvents

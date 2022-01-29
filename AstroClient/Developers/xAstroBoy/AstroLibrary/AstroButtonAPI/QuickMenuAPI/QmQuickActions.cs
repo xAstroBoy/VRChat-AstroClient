@@ -32,6 +32,7 @@
         {
             initButton(Index, Menu, Title, TextColor.HexToColor());
         }
+
         internal string GetMenuName()
         {
             return menuName;
@@ -91,7 +92,6 @@
                     QuickActions.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index + 1);
                     QuickActions.name = QMButtonAPI.identifier + btnType + Title + "_Buttons";
                     break;
-
             }
         }
     }

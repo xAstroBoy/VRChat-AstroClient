@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.Murder4.UdonCheats
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -6,13 +6,10 @@
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
     using AstroMonos.Components.Tools.Listeners;
-    using Tools.Extensions;
-    using Tools.UdonSearcher;
     using UnhollowerBaseLib;
     using UnityEngine;
     using VRC.Udon;
     using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.AstroButtonAPI.WingsAPI;

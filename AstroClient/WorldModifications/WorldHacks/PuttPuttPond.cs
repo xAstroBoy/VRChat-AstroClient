@@ -1,12 +1,11 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
     using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
-    using Constants;
+    using CustomClasses;
     using MelonLoader;
     using Tools.Extensions;
-    using Tools.UdonSearcher;
     using Tools.World;
     using UnityEngine;
     using WorldsIds;

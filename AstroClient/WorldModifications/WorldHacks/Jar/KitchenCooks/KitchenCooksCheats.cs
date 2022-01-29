@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.KitchenCooks
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks
 {
     #region Imports
 

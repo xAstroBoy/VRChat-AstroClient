@@ -1,17 +1,17 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.Murder4
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4
 {
     #region Imports
 
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
     using AstroMonos.Components.Cheats.PatronUnlocker;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
     using AstroMonos.Components.ESP.Pickup;
     using ClientUI.Menu.ESP;
     using Constants;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
+    using CustomClasses;
     using MelonLoader;
     using Tools.Extensions;
     using Tools.Extensions.Components_exts;
@@ -22,11 +22,9 @@
     using VRC.SDKBase;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-    using static Constants.CustomLists;
     using Color = System.Drawing.Color;
 
     #endregion Imports

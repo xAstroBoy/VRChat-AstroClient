@@ -3,12 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using CustomClasses;
     using Extensions;
     using Regexes;
     using UdonEditor;
     using UnityEngine;
     using VRC.Udon;
-    using WorldModifications.Modifications;
     using xAstroBoy;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;

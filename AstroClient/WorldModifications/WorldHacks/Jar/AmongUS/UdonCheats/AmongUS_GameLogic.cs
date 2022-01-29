@@ -1,11 +1,10 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.AmongUS.UdonCheats
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
     using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     internal class AmongUS_GameLogic : AstroEvents

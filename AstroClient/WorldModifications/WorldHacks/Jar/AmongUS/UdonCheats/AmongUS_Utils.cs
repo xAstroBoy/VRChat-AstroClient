@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.AmongUS.UdonCheats
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System.Linq;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;

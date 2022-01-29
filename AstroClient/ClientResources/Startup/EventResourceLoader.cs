@@ -1,15 +1,10 @@
-﻿namespace AstroClient.ClientResources.Loaders
+﻿namespace AstroClient.ClientResources.Startup
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
-    using System.Linq;
     using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
-    using CheetoLibrary.Misc;
-    using ClientAttributes;
+    using Loaders;
     using xAstroBoy.Utility;
 
     internal class EventResourceLoader : AstroEvents

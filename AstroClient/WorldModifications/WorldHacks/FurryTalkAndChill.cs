@@ -1,9 +1,8 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Spoofer;
     using Constants;
-    using Tools.Extensions;
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
     using WorldsIds;

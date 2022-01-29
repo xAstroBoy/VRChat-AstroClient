@@ -1,31 +1,26 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.AmongUS
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 {
-    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
-    using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
-    using AstroMonos.Components.ESP.VRCInteractable;
-    using AstroMonos.Components.Spoofer;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using CheetoLibrary.Utility;
-    using Constants;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
+    using AstroMonos.Components.ESP.VRCInteractable;
+    using AstroMonos.Components.Spoofer;
+    using CustomClasses;
     using MelonLoader;
     using Tools.Extensions;
     using Tools.Player.Movement.Exploit;
-    using Tools.UdonEditor;
     using Tools.UdonSearcher;
     using UdonCheats;
     using UnityEngine;
     using VRC;
-    using VRC.Udon.Common.Interfaces;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-    using static Constants.CustomLists;
 
     internal class AmongUSCheats : AstroEvents
     {

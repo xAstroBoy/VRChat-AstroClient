@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.Murder2
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder2
 {
     #region Imports
 
@@ -12,7 +12,6 @@
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;

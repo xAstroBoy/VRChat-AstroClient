@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using ClientResources;
     using ClientResources.Loaders;
-    using Modifications;
-    using Modifications.Jar.AmongUS;
-    using Modifications.Jar.Murder2;
-    using Modifications.Jar.Murder4;
     using UnityEngine;
     using UnityEngine.UI;
+    using WorldHacks;
+    using WorldHacks.Jar.AmongUS;
+    using WorldHacks.Jar.Murder2;
+    using WorldHacks.Jar.Murder4;
     using WorldsIds;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;

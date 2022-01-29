@@ -4,10 +4,10 @@
     using AstroClient.Tools.UdonEditor;
     using ClientAttributes;
     using Constants;
+    using CustomClasses;
     using Il2CppSystem;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
-    using WorldModifications.Modifications;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;

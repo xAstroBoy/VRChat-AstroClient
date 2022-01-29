@@ -1,26 +1,22 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
-    using AstroMonos.AstroUdons;
-    using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
-    using AstroMonos.Components.Tools;
-    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Security.Policy;
+    using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using AstroMonos.Components.Custom.Random;
+    using AstroMonos.Components.Tools;
+    using CustomClasses;
+    using MelonLoader;
     using Tools.Extensions;
     using Tools.Extensions.Components_exts;
     using Tools.UdonSearcher;
     using UnityEngine;
-    using UnityEngine.UI;
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-    using static Constants.CustomLists;
 
     internal class SuperTowerDefense : AstroEvents
     {

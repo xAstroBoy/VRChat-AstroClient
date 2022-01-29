@@ -1,16 +1,15 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using ClientResources.Loaders;
     using Extensions;
+    using System;
     using TMPro;
     using Tools;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements.Tooltips;
     using Object = UnityEngine.Object;
-    using UiTooltip = UiTooltip;
 
     internal class QMToggleButton
     {
@@ -154,6 +153,7 @@
         internal string ButtonText_Off { get; set; }
         private UiToggleTooltip _ButtonToolTip;
         internal GameObject ButtonObject { get; set; }
+
         internal UiToggleTooltip ButtonToolTip
         {
             get
@@ -179,6 +179,7 @@
                 return _ButtonToolTip;
             }
         }
+
         internal string ToolTipText { get; set; }
 
         internal TextMeshProUGUI ButtonTitleMesh { get; set; }
@@ -260,6 +261,7 @@
             ButtonText_Off = Text;
             if (!State) SetButtonText(ButtonText_Off);
         }
+
         internal void SetLocation(float buttonXLoc, float buttonYLoc)
         {
             ButtonObject.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplatePos;
@@ -319,6 +321,7 @@
                 }
             }));
         }
+
         internal void SetActive(bool isActive)
         {
             ButtonObject.gameObject.SetActive(isActive);

@@ -13,14 +13,14 @@
     using AstroClient.Tools.Player;
     using AstroClient.Tools.UdonSearcher;
     using Constants;
+    using CustomClasses;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
     using VRC.Core;
     using VRC.Udon.Common.Interfaces;
-    using WorldModifications.Modifications;
-    using WorldModifications.Modifications.Jar.AmongUS;
+    using WorldModifications.WorldHacks.Jar.AmongUS;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;

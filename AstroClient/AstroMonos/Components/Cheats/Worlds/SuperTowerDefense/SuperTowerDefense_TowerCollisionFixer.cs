@@ -7,7 +7,6 @@
     using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
-    using WorldModifications.Modifications;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;

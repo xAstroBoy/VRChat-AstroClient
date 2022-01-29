@@ -1,8 +1,9 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
     using AstroMonos.AstroUdons;
+    using CustomClasses;
     using Tools.Extensions;
     using Tools.UdonEditor;
     using UnityEngine;
@@ -10,11 +11,9 @@
     using VRC.Udon;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-    using static Constants.CustomLists;
 
     internal class BOMBERio : AstroEvents
     {

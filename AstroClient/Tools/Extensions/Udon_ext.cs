@@ -2,12 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using CustomClasses;
     using UdonEditor;
     using UdonSearcher;
     using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
-    using WorldModifications.Modifications;
     using xAstroBoy.Extensions;
     using static Constants.CustomLists;
 

@@ -4,13 +4,13 @@
     using AstroClient.Tools.Extensions;
     using AstroUdons;
     using ClientAttributes;
+    using CustomClasses;
     using Il2CppSystem.Collections.Generic;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
     using VRC.Udon;
-    using WorldModifications.Modifications;
     using xAstroBoy.Utility;
     using static Constants.CustomLists;
 

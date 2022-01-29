@@ -1,18 +1,16 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     using System;
     using System.Collections.Generic;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Spoofer;
-    using Tools.Extensions;
+    using CustomClasses;
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using static Constants.CustomLists;
 
     internal class PoolParlor : AstroEvents
     {

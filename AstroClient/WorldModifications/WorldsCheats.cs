@@ -4,11 +4,11 @@
 
     using ClientResources;
     using ClientResources.Loaders;
-    using Modifications;
-    using Modifications.Jar.AmongUS;
-    using Modifications.Jar.KitchenCooks;
-    using Modifications.Jar.Murder2;
-    using Modifications.Jar.Murder4;
+    using WorldHacks;
+    using WorldHacks.Jar.AmongUS;
+    using WorldHacks.Jar.KitchenCooks;
+    using WorldHacks.Jar.Murder2;
+    using WorldHacks.Jar.Murder4;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 

@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.AmongUS.UdonCheats
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,6 @@
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.AstroButtonAPI.WingsAPI;

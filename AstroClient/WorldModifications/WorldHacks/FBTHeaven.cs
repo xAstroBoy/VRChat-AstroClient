@@ -1,6 +1,6 @@
 ﻿#pragma warning disable 649
 
-namespace AstroClient.WorldModifications.Modifications
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -12,7 +12,6 @@ namespace AstroClient.WorldModifications.Modifications
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;

@@ -5,9 +5,9 @@
     using AstroClient.Tools.UdonSearcher;
     using AstroUdons;
     using ClientAttributes;
+    using CustomClasses;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
-    using WorldModifications.Modifications;
     using static Constants.CustomLists;
 
     [RegisterComponent]

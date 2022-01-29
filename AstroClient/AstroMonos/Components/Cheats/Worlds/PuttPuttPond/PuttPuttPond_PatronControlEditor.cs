@@ -6,10 +6,10 @@
     using Il2CppSystem;
     using System.Collections.Generic;
     using Constants;
+    using CustomClasses;
     using JetBrains.Annotations;
     using Spoofer;
     using UnhollowerBaseLib.Attributes;
-    using WorldModifications.Modifications;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;

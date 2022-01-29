@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     #region Imports
 
@@ -12,6 +12,7 @@
     using AstroMonos.Components.Tools.Listeners;
     using CheetosUI;
     using Constants;
+    using CustomClasses;
     using MelonLoader;
     using Tools.Extensions;
     using Tools.UdonEditor;
@@ -20,10 +21,8 @@
     using VRC.Udon;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
-    using static Constants.CustomLists;
 
     #endregion Imports
 

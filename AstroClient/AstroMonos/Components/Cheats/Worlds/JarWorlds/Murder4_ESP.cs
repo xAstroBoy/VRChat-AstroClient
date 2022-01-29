@@ -12,12 +12,12 @@
     using System.Collections;
     using System.Linq;
     using AstroClient.Tools.Player;
+    using CustomClasses;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
     using VRC.Core;
-    using WorldModifications.Modifications;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using static JarRoleController;

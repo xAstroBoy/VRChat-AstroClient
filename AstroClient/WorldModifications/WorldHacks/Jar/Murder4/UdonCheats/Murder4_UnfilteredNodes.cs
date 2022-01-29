@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldModifications.Modifications.Jar.Murder4.UdonCheats
+﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,6 @@
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.AstroButtonAPI.WingsAPI;

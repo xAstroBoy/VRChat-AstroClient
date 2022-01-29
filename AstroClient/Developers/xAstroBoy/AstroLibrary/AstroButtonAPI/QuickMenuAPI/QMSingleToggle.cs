@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using Extensions;
+    using System;
     using TMPro;
     using Tools;
     using UnityEngine;
@@ -56,6 +56,7 @@
             if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
+
         internal QMSingleToggleButton(GameObject parent, string btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu;
@@ -63,6 +64,7 @@
             if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
+
         internal string btnQMLoc { get; set; }
         internal string btnTag { get; set; }
         internal string btnType { get; set; }
@@ -99,6 +101,7 @@
                 return _ButtonToolTip;
             }
         }
+
         internal string ToolTipText { get; set; }
 
         private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool defaultstate = false, bool btnHalf = false)
@@ -158,10 +161,12 @@
             if (btnHalf) SetSize(new Vector2(200, 88));
             //QMButtonAPI.allSingleToggleButtons.Add(this);
         }
+
         internal void SetActive(bool isActive)
         {
             ButtonObject.gameObject.SetActive(isActive);
         }
+
         internal void DestroyMe()
         {
             ButtonObject.DestroyMeLocal(true);
@@ -171,6 +176,7 @@
         {
             ButtonText.text = buttonText;
         }
+
         internal void SetToolTip(string text)
         {
             ToolTipText = text;
@@ -190,6 +196,7 @@
                         SetToggleState(false, true);
                 }));
         }
+
         internal void SetLocation(float buttonXLoc, float buttonYLoc)
         {
             ButtonObject.GetComponent<RectTransform>().anchoredPosition = QuickMenuTools.SingleButtonTemplatePos;

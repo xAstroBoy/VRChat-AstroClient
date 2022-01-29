@@ -17,6 +17,7 @@
         internal string btnType { get; set; }
         internal GameObject ButtonObject { get; set; }
         private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
+
         internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
         {
             get
@@ -37,6 +38,7 @@
                 return _ButtonToolTip;
             }
         }
+
         internal string ToolTipText { get; set; }
 
         internal QMTabButton(int Index, Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Sprite LoadSprite = null)
@@ -58,6 +60,7 @@
 
             SetActive(true);
         }
+
         internal void SetActive(bool isActive)
         {
             ButtonObject.gameObject.SetActive(isActive);

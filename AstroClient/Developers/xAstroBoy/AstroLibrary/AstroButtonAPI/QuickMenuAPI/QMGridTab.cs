@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using PageGenerators;
+    using System;
     using Tools;
     using UnityEngine;
     using VRC.UI.Elements;
@@ -44,6 +44,7 @@
             mainButton = new QMTabButton(index, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, icon);
             backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
         }
+
         internal void SetBackButtonAction(Action back)
         {
             if (backButton == null) return;

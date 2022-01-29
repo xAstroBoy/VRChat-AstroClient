@@ -1,11 +1,10 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
     using Tools.UdonSearcher;
     using UnityEngine;
     using WorldsIds;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;

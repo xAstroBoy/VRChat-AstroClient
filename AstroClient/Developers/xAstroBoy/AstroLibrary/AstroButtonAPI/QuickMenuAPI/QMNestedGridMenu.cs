@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using PageGenerators;
+    using System;
     using Tools;
     using UnityEngine;
     using VRC.UI.Elements;
-    using Object = UnityEngine.Object;
     using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
+    using Object = UnityEngine.Object;
 
     internal class QMNestedGridMenu
     {
@@ -79,6 +79,7 @@
             btnQMLoc = btnMenu;
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
+
         internal QMNestedGridMenu(string btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null)
         {
             btnQMLoc = btnMenu;
@@ -131,6 +132,7 @@
         {
             mainButton.SetTextColor(buttonTextColor);
         }
+
         internal void SetText(string Text)
         {
             mainButton.SetButtonText(Text);
@@ -215,6 +217,7 @@
         {
             return backButton;
         }
+
         internal void DestroyMe()
         {
             mainButton.DestroyMe();
@@ -222,6 +225,5 @@
             ButtonsMenu.DestroyMeLocal(true);
             page.DestroyMeLocal(true);
         }
-
     }
 }

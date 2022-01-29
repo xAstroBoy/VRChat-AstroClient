@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using PageGenerators;
+    using System;
     using Tools;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
-    using Object = UnityEngine.Object;
     using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
+    using Object = UnityEngine.Object;
 
     internal class QMNestedButton
     {

@@ -1,4 +1,4 @@
-﻿namespace AstroClient.WorldModifications.Modifications
+﻿namespace AstroClient.WorldModifications.WorldHacks
 
 {
     using System;
@@ -7,7 +7,6 @@
     using VRC.SDKBase;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
     using static VRC.SDKBase.VRC_EventHandler;

@@ -3,10 +3,9 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule
     using Gompoc.ActionMenuAPI.Api;
     using Tools.Extensions;
     using UnityEngine;
-    using WorldModifications.Modifications;
-    using WorldModifications.Modifications.Jar.AmongUS;
-    using WorldModifications.Modifications.Jar.KitchenCooks;
-    using WorldModifications.Modifications.Jar.Murder4;
+    using WorldModifications.WorldHacks;
+    using WorldModifications.WorldHacks.Jar.AmongUS;
+    using WorldModifications.WorldHacks.Jar.KitchenCooks;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using Color = System.Drawing.Color;
