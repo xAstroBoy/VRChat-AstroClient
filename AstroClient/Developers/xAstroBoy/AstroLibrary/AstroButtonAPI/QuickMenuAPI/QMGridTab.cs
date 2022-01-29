@@ -11,6 +11,7 @@
 
     internal class QMGridTab
     {
+        internal GameObject NestedPart { get; set; }
         internal GameObject backButton { get; set; }
         internal string btnQMLoc { get; set; }
         internal string btnType { get; set; }
@@ -19,19 +20,17 @@
         internal string menuName { get; set; }
         internal UIPage page { get; set; }
 
-
         internal QMGridTab(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
         {
             InitButton(index, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, icon);
         }
-
 
         internal void InitButton(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
         {
             btnType = "QMTabMenu";
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
 
-            var NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
+            NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
@@ -89,7 +88,12 @@
         internal void DestroyMe()
         {
             mainButton.DestroyMe();
-            backButton.DestroyMeLocal();
+
+            page.DestroyMeLocal(true);
+
+            NestedPart.DestroyMeLocal(true);
+            backButton.DestroyMeLocal(true);
+            ButtonsMenu.DestroyMeLocal(true);
         }
 
         internal void OpenMe()

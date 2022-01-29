@@ -19,8 +19,6 @@
 
         internal static QMTabMenu SubMenu { get; private set; }
 
-        internal static QMScrollMenu MainScroller { get; private set; }
-
         internal static QMSingleButton DisconectButton { get; private set; }
 
         internal static QMSingleButton ReconnectButton { get; private set; }

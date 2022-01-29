@@ -170,9 +170,6 @@
     <Compile Include="Developers\Unreal\SteamVR_Utils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\MenuAPI_New.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\PageGenerators\UIPageGenerator.cs" />
-    <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMButtonBase.cs" />
-    <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMScrollMenu.cs" />
-    <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMHalfScroll.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\Tools\Extensions.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMButtonAPI.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMNestedButton.cs" />
@@ -517,7 +514,6 @@
     <Compile Include="Tools\ObjectEditor\Editor\Scale\ScaleEditor.cs" />
     <Compile Include="Tools\ObjectEditor\ObjectMiscTools.cs" />
     <Compile Include="Tools\ObjectEditor\Online\OnlineEditor.cs" />
-    <Compile Include="ClientUI\Menu\ItemTweakerV2\ScrollMenus\GameObjectToggler\GameObjectTogglerScrollMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\MapEditorMenu.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\EspHandler.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\ListenerHandler.cs" />
@@ -1453,6 +1449,7 @@
   <ItemGroup>
     <Folder Include="AstroMonos\Components\Player\Fly\" />
     <Folder Include="ClientResources\ProgramsArchive\" />
+    <Folder Include="ClientUI\Menu\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />
     <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
   </ItemGroup>
   <ItemGroup>

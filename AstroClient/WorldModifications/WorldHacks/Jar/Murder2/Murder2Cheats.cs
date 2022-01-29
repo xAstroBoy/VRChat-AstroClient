@@ -75,14 +75,14 @@
             if (Death != null)
             {
                 ModConsole.Log("Found Death Gameobject, God Mode is available!", System.Drawing.Color.Green);
-                GodModeMurder2.QMButtonBase_SetActive(true);
+                GodModeMurder2.SetActive(true);
             }
             else
             {
                 ModConsole.Log("Death Gameobject is Unknown, God Mode is unavailable!", System.Drawing.Color.Red);
                 if (GodModeMurder2 != null)
                 {
-                    GodModeMurder2.QMButtonBase_SetActive(false);
+                    GodModeMurder2.SetActive(false);
                 }
             }
         }

@@ -6,7 +6,6 @@
     using ClientResources.Loaders;
     using Constants;
     using Handlers;
-    using ScrollMenus.GameObjectToggler;
     using ScrollMenus.Pickup;
     using ScrollMenus.Udon;
     using ScrollMenus.VRC_Interactable;
@@ -38,7 +37,7 @@
             PickupSubmenu.Init_PickupSubMenu(menu, 2, 0.5f, true);
             ScaleSubmenu.Init_ScaleSubMenu(menu, 2, 1.5f, true);
 
-            GameObjMenu.InitTogglerMenu(menu, 3, 0f, true);
+            //GameObjMenu.InitTogglerMenu(menu, 3, 0f, true); // TODO : Make a better one!
             ObjectInfoSubMenu.Init_ObjectInfoSubMenu(menu, 3, 0.5f, true);
             _ = new QMSingleButton(menu, 3, 1f, "Teleport to Object", new Action(() => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
             _ = new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { GameObjectMenu.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
@@ -90,10 +89,10 @@
             {
                 ObjectToEditBtn.SetTextColor(Color.green);
             }
-            if (GameObjMenu.GameObjMenuObjectToEdit != null)
-            {
-                GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(Color.green);
-            }
+            //if (GameObjMenu.GameObjMenuObjectToEdit != null)
+            //{
+            //    GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(Color.green);
+            //}
         }
 
         internal override void OnSelectedObject_Disabled()
@@ -103,10 +102,10 @@
             {
                 ObjectToEditBtn.SetTextColor(Color.red);
             }
-            if (GameObjMenu.GameObjMenuObjectToEdit != null)
-            {
-                GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(Color.red);
-            }
+            //if (GameObjMenu.GameObjMenuObjectToEdit != null)
+            //{
+            //    GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(Color.red);
+            //}
         }
 
         internal override void OnSelectedObject_Destroyed()
@@ -134,11 +133,11 @@
                     ObjectToEditBtn.SetButtonText("Editing: " + obj.name);
                     ObjectToEditBtn.SetToolTip("Editing: " + obj.name);
                 }
-                if (GameObjMenu.GameObjMenuObjectToEdit != null)
-                {
-                    GameObjMenu.GameObjMenuObjectToEdit.SetButtonText("Editing: " + obj.name);
-                    GameObjMenu.GameObjMenuObjectToEdit.SetToolTip("Editing: " + obj.name);
-                }
+                //if (GameObjMenu.GameObjMenuObjectToEdit != null)
+                //{
+                //    GameObjMenu.GameObjMenuObjectToEdit.SetButtonText("Editing: " + obj.name);
+                //    GameObjMenu.GameObjMenuObjectToEdit.SetToolTip("Editing: " + obj.name);
+                //}
             }
             else
             {
@@ -148,12 +147,12 @@
                     ObjectToEditBtn.SetToolTip("Pick a Gameobject to start!");
                     ObjectToEditBtn.SetTextColor(Color.white);
                 }
-                if (GameObjMenu.GameObjMenuObjectToEdit != null)
-                {
-                    GameObjMenu.GameObjMenuObjectToEdit.SetButtonText("Pick a Gameobject to start!");
-                    GameObjMenu.GameObjMenuObjectToEdit.SetToolTip("Pick a Gameobject to start!");
-                    GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(Color.white);
-                }
+                //if (GameObjMenu.GameObjMenuObjectToEdit != null)
+                //{
+                //    GameObjMenu.GameObjMenuObjectToEdit.SetButtonText("Pick a Gameobject to start!");
+                //    GameObjMenu.GameObjMenuObjectToEdit.SetToolTip("Pick a Gameobject to start!");
+                //    GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(Color.white);
+                //}
             }
         }
 

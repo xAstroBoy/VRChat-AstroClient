@@ -12,6 +12,21 @@
 
     internal class QMNestedButton
     {
+        internal GameObject NestedPart { get; set; }
+
+        internal GameObject backButton { get; set; }
+        internal GameObject ButtonsMenu { get; set; }
+        internal GameObject Parent { get; set; }
+        internal UIPage page { get; set; }
+
+        internal QMSingleButton mainButton { get; set; }
+
+        internal string menuName { get; set; }
+
+        internal string btnQMLoc { get; set; }
+
+        internal string btnType { get; set; }
+
         internal QMNestedButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -67,27 +82,12 @@
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
 
-        internal GameObject Parent { get; set; }
-        internal QMSingleButton mainButton { get; set; }
-
-        internal GameObject backButton { get; set; }
-
-        internal GameObject ButtonsMenu { get; set; }
-
-        internal string menuName { get; set; }
-
-        internal string btnQMLoc { get; set; }
-
-        internal string btnType { get; set; }
-
-        internal UIPage page { get; set; }
-
         internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = "", Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnType = QMButtonAPI.identifier + "_Nested_Menu_";
             menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}_{btnToolTip}_{Guid.NewGuid().ToString()}";
 
-            var NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
+            NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             Object.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
@@ -212,6 +212,12 @@
 
         internal void DestroyMe()
         {
+            NestedPart.DestroyMeLocal(true);
+            backButton.DestroyMeLocal(true);
+            ButtonsMenu.DestroyMeLocal(true);
+            Parent.DestroyMeLocal(true);
+            page.DestroyMeLocal(true);
+
             mainButton.DestroyMe();
         }
     }

@@ -43,7 +43,6 @@
             }
         }
 
-        
         internal static string GetPath(this GameObject obj)
         {
             if (obj != null)
@@ -213,7 +212,7 @@
             }
         }
 
-        internal static void DestroyMeLocal(this Object obj)
+        internal static void DestroyMeLocal(this Object obj, bool Silent = false)
         {
             if (obj != null)
             {
@@ -227,15 +226,20 @@
                     {
                         Object.Destroy(item);
                     }
+
                     MiscUtils.DelayFunction(0.5f, () =>
                     {
                         if (item != null)
                         {
+
                             ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
                         }
                         else
                         {
-                            ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            if (!Silent)
+                            {
+                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            }
                         }
                     });
 
@@ -248,6 +252,7 @@
                     {
                         Object.Destroy(item);
                     }
+
                     MiscUtils.DelayFunction(0.5f, () =>
                     {
                         if (item != null)
@@ -256,7 +261,10 @@
                         }
                         else
                         {
-                            ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            if (!Silent)
+                            {
+                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            }
                         }
                     });
                 }
@@ -275,7 +283,10 @@
                         }
                         else
                         {
-                            ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            if (!Silent)
+                            {
+                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            }
                         }
                     });
                 }
@@ -294,7 +305,10 @@
                         }
                         else
                         {
-                            ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            if (!Silent)
+                            {
+                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                            }
                         }
                     });
                 }

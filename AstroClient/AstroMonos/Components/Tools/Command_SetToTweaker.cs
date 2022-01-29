@@ -1,6 +1,7 @@
 namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
+    using AstroClient.Tools.Extensions;
     using ClientAttributes;
     using ClientUI.Menu.ItemTweakerV2.Selector;
     using Il2CppSystem.Collections.Generic;
@@ -21,6 +22,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         private void Start()
         {
             Tweaker_Object.SetObjectToEdit(gameObject);
+            gameObject.AddToWorldUtilsMenu();
             Destroy(this);
         }
 

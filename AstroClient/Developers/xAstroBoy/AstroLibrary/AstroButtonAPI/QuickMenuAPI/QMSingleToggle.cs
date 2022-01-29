@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
+    using AstroClient.Tools.Extensions;
     using Extensions;
     using TMPro;
     using Tools;
@@ -9,7 +10,7 @@
     using Object = UnityEngine.Object;
 
     [Obsolete("Use GridNestedMenu and new QMSingleToggles instead, this class will be removed In future!")]
-    internal class QMSingleToggleButton : QMButtonBase
+    internal class QMSingleToggleButton
     {
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
@@ -74,6 +75,8 @@
         internal Action OnAction { get; set; }
         internal GameObject ButtonsMenu { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
+        internal GameObject ButtonObject { get; set; }
+
         private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
 
         internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
@@ -161,13 +164,7 @@
         }
         internal void DestroyMe()
         {
-            try
-            {
-                Object.Destroy(ButtonObject);
-            }
-            catch
-            {
-            }
+            ButtonObject.DestroyMeLocal(true);
         }
 
         internal void SetButtonText(string buttonText)

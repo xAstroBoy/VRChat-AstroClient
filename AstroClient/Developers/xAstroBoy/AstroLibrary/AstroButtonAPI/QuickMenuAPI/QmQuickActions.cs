@@ -1,17 +1,28 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
+    using AstroClient.Tools.Extensions;
     using TMPro;
     using Tools;
     using UnityEngine;
 
     internal class QmQuickActions
     {
-        internal string btnType { get; set; }
         internal GameObject Header { get; set; }
         internal GameObject QuickActions { get; set; }
-        internal string menuName { get; set; }
         internal TextMeshProUGUI HeaderText { get; set; }
         internal GameObject VerticalLayoutGroup { get; set; }
+
+        internal string menuName { get; set; }
+        internal string btnType { get; set; }
+
+        internal void DestroyMe()
+        {
+            Header.DestroyMeLocal(true);
+            QuickActions.DestroyMeLocal(true);
+            HeaderText.DestroyMeLocal(true);
+            VerticalLayoutGroup.DestroyMeLocal(true);
+        }
+
         internal QmQuickActions(int Index, string Menu, string Title, Color32 TextColor)
         {
             initButton(Index, Menu, Title, TextColor);
@@ -26,12 +37,10 @@
             return menuName;
         }
 
-
         internal GameObject GetButtonsMenu()
         {
             return QuickActions;
         }
-
 
         internal void initButton(int Index, string Menu, string Title, Color32 TextColor)
         {

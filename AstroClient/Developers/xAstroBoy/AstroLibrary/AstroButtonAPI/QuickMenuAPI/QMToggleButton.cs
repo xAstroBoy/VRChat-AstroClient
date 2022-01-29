@@ -12,7 +12,7 @@
     using Object = UnityEngine.Object;
     using UiTooltip = UiTooltip;
 
-    internal class QMToggleButton : QMButtonBase
+    internal class QMToggleButton
     {
         public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
@@ -153,7 +153,7 @@
         internal string ButtonText_On { get; set; }
         internal string ButtonText_Off { get; set; }
         private UiToggleTooltip _ButtonToolTip;
-
+        internal GameObject ButtonObject { get; set; }
         internal UiToggleTooltip ButtonToolTip
         {
             get
@@ -209,7 +209,6 @@
             btnOff_Image = btnOff.GetComponentInChildren<Image>();
             btnOn_Image = btnOn.GetComponentInChildren<Image>();
 
-
             OnColor = btnOffColor.GetValueOrDefault(System.Drawing.Color.GreenYellow.ToUnityEngineColor());
             OffColor = btnOffColor.GetValueOrDefault(System.Drawing.Color.Red.ToUnityEngineColor());
             ButtonText_On = btnTextOn;
@@ -237,15 +236,19 @@
 
         internal void DestroyMe()
         {
-            try
-            {
-                Object.Destroy(ButtonObject);
-            }
-            catch
-            {
-            }
+            btnOn.DestroyMeLocal(true);
+            btnOff.DestroyMeLocal(true);
+            btnOn_Rect.DestroyMeLocal(true);
+            btnOff_Rect.DestroyMeLocal(true);
+            btnOn_Image.DestroyMeLocal(true);
+            btnOff_Image.DestroyMeLocal(true);
+            ButtonsMenu.DestroyMeLocal(true);
+            ButtonToggle.DestroyMeLocal(true);
+            _ButtonToolTip.DestroyMeLocal(true);
+            ButtonObject.DestroyMeLocal(true);
+            ButtonTitleMesh.DestroyMeLocal(true);
+            ButtonText.DestroyMeLocal(true);
         }
-
 
         internal void SetToolTip(string text)
         {
@@ -316,6 +319,10 @@
                     btnOffAction.Invoke();
                 }
             }));
+        }
+        internal void SetActive(bool isActive)
+        {
+            ButtonObject.gameObject.SetActive(isActive);
         }
 
         internal void SetTextColor(Color color)

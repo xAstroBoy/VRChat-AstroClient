@@ -59,13 +59,7 @@
 
         internal void DestroyMe()
         {
-            try
-            {
-                Object.Destroy(button);
-            }
-            catch
-            {
-            }
+            button.DestroyMeLocal(true);
         }
 
         internal void LoadSprite(Sprite sprite)

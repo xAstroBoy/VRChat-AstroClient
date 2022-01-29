@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
+    using AstroClient.Tools.Extensions;
     using Extensions;
     using Tools;
     using UnhollowerRuntimeLib;
@@ -9,7 +10,7 @@
     using UnityEngine.UI;
     using Object = UnityEngine.Object;
 
-    internal class QMTabButton 
+    internal class QMTabButton
     {
         internal string btnQMLoc { get; set; }
         internal string btnTag { get; set; }
@@ -64,14 +65,9 @@
 
         internal void DestroyMe()
         {
-            try
-            {
-                Object.Destroy(ButtonObject);
-            }
-            catch
-            {
-            }
+            ButtonObject.DestroyMeLocal(true);
         }
+
         internal void SetToolTip(string text)
         {
             ToolTipText = text;

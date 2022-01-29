@@ -9,8 +9,23 @@
     using Object = UnityEngine.Object;
     using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
 
-    internal class QMNestedGridMenu : QMButtonBase
+    internal class QMNestedGridMenu
     {
+        internal QMSingleButton mainButton { get; set; }
+
+        internal GameObject backButton { get; set; }
+
+        internal GameObject ButtonsMenu { get; set; }
+
+        internal GameObject Parent { get; set; }
+
+        internal UIPage page { get; set; }
+
+        internal string menuName { get; set; }
+
+        internal string btnQMLoc { get; set; }
+        internal string btnType { get; set; }
+
         internal QMNestedGridMenu(QMNestedGridMenu btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
@@ -25,7 +40,7 @@
             InitButton(0, 0, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
 
-        internal QMNestedGridMenu(QmQuickActions btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnTextColor = null,  bool isUserPage = false)
+        internal QMNestedGridMenu(QmQuickActions btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnTextColor = null, bool isUserPage = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             Parent = btnMenu.GetButtonsMenu();
@@ -69,22 +84,6 @@
             btnQMLoc = btnMenu;
             InitButton(0, 0, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor);
         }
-
-        internal QMSingleButton mainButton { get; set; }
-
-        internal GameObject backButton { get; set; }
-
-        internal GameObject ButtonsMenu { get; set; }
-
-        internal string menuName { get; set; }
-
-        internal string btnQMLoc { get; set; }
-
-        internal GameObject Parent { get; set; }
-
-        internal string btnType { get; set; }
-
-        internal UIPage page { get; set; }
 
         internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = "", Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
@@ -216,10 +215,14 @@
         {
             return backButton;
         }
-
         internal void DestroyMe()
         {
             mainButton.DestroyMe();
+            backButton.DestroyMeLocal(true);
+            ButtonsMenu.DestroyMeLocal(true);
+            Parent.DestroyMeLocal(true);
+            page.DestroyMeLocal(true);
         }
+
     }
 }
