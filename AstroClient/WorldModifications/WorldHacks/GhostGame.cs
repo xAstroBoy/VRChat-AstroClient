@@ -55,7 +55,7 @@
             TurnOffMirror_1.UdonBehaviour.gameObject.AddToWorldUtilsMenu();
             TurnOffMirror_2.UdonBehaviour.gameObject.AddToWorldUtilsMenu();
 
-            if (ArmoryObject != null)
+            if (ArmoryRoom != null)
             {
                 if (ArmoryMoneyRewardObject != null)
                 {
@@ -88,6 +88,26 @@
                         Armory_CraftGun = UdonSearch.FindUdonEvent(Armory_Craft_Gun, "CraftBtn", "_interact");
                     }
 
+                    if (Armory_Craft_Clue != null)
+                    {
+                        Armory_CraftClue = UdonSearch.FindUdonEvent(Armory_Craft_Clue, "CraftBtn", "_interact");
+
+                    }
+
+                }
+
+                if (ArmoryCabinets != null)
+                {
+                    if (Cabinet_1_lock != null)
+                    {
+                        Armory_OpenCabinet_1 = UdonSearch.FindUdonEvent(Cabinet_1_lock, "_interact");
+
+                    }
+
+                    if (Cabinet_2_lock != null)
+                    {
+                        Armory_OpenCabinet_2 = UdonSearch.FindUdonEvent(Cabinet_2_lock, "_interact");
+                    }
                 }
             }
         }
@@ -177,17 +197,17 @@
             }
         }
 
-        private static GameObject _ArmoryObject;
-        private static GameObject ArmoryObject
+        private static GameObject _ArmoryRoom;
+        private static GameObject ArmoryRoom
         {
             get
             {
                 if (!isGhostGameWorld) return null;
-                if (_ArmoryObject == null)
+                if (_ArmoryRoom == null)
                 {
-                    return _ArmoryObject = GameObjectFinder.Find("/PoliceStation_A/RoomParts/1F/ArmoryRoom");
+                    return _ArmoryRoom = GameObjectFinder.Find("/PoliceStation_A/RoomParts/1F/ArmoryRoom");
                 }
-                return _ArmoryObject;
+                return _ArmoryRoom;
             }
         }
 
@@ -197,12 +217,57 @@
             get
             {
                 if (!isGhostGameWorld) return null;
-                if (ArmoryObject == null) return null;
+                if (ArmoryRoom == null) return null;
                 if (_ArmoryMoneyRewardObject == null)
                 {
-                    return _ArmoryMoneyRewardObject = ArmoryObject.transform.FindObject("Cabinets/Closet_A (5)/LootBoxSystem/Rewards/Reward_FallBack/FallBackReward/MoneyPack/Pickup (2)").gameObject;
+                    return _ArmoryMoneyRewardObject = ArmoryRoom.transform.FindObject("Cabinets/Closet_A (5)/LootBoxSystem/Rewards/Reward_FallBack/FallBackReward/MoneyPack/Pickup (2)").gameObject;
                 }
                 return _ArmoryMoneyRewardObject;
+            }
+        }
+        private static GameObject _ArmoryCabinets;
+        private static GameObject ArmoryCabinets
+        {
+            get
+            {
+                if (!isGhostGameWorld) return null;
+                if (ArmoryRoom == null) return null;
+                if (_ArmoryCabinets == null)
+                {
+                    return _ArmoryCabinets = ArmoryRoom.transform.FindObject("Cabinets").gameObject;
+                }
+                return _ArmoryCabinets;
+            }
+        }
+        private static GameObject _Cabinet_1_lock;
+        private static GameObject Cabinet_1_lock
+        {
+            get
+            {
+                if (!isGhostGameWorld) return null;
+                if (ArmoryRoom == null) return null;
+                if (ArmoryCabinets == null) return null;
+                if (_Cabinet_1_lock == null)
+                {
+                    return _Cabinet_1_lock = ArmoryCabinets.transform.FindObject("Closet_A (5)/LootBoxSystem/Lock").gameObject;
+                }
+                return _Cabinet_1_lock;
+            }
+        }
+
+        private static GameObject _Cabinet_2_lock;
+        private static GameObject Cabinet_2_lock
+        {
+            get
+            {
+                if (!isGhostGameWorld) return null;
+                if (ArmoryRoom == null) return null;
+                if (ArmoryCabinets == null) return null;
+                if (_Cabinet_2_lock == null)
+                {
+                    return _Cabinet_2_lock = ArmoryCabinets.transform.FindObject("Closet_A (4)/LootBoxSystem/Lock").gameObject;
+                }
+                return _Cabinet_2_lock;
             }
         }
 
@@ -212,10 +277,10 @@
             get
             {
                 if (!isGhostGameWorld) return null;
-                if (ArmoryObject == null) return null;
+                if (ArmoryRoom == null) return null;
                 if (_ArmoryDoorObject == null)
                 {
-                    return _ArmoryDoorObject = ArmoryObject.transform.FindObject("LockDoor").gameObject;
+                    return _ArmoryDoorObject = ArmoryRoom.transform.FindObject("LockDoor").gameObject;
                 }
                 return _ArmoryDoorObject;
             }
@@ -264,6 +329,20 @@
                 return _Armory_Craft_Gun;
             }
         }
+        private static GameObject _Armory_Craft_Clue;
+        private static GameObject Armory_Craft_Clue
+        {
+            get
+            {
+                if (!isGhostGameWorld) return null;
+                if (WeaponsWorkshopObject == null) return null;
+                if (_Armory_Craft_Clue == null)
+                {
+                    return _Armory_Craft_Clue = WeaponsWorkshopObject.transform.FindObject("ClueFileGenerator (2)").gameObject;
+                }
+                return _Armory_Craft_Clue;
+            }
+        }
 
         internal static UdonBehaviour_Cached ToggleMirrors_1 { get; set; } // Fuck the mirrors.
         internal static UdonBehaviour_Cached ToggleMirrors_2 { get; set; } // Fuck the mirrors.
@@ -281,7 +360,11 @@
 
         internal static UdonBehaviour_Cached Armory_CraftSniper { get; set; }
         internal static UdonBehaviour_Cached Armory_CraftGun { get; set; }
+        internal static UdonBehaviour_Cached Armory_CraftClue { get; set; }
+
         internal static UdonBehaviour_Cached Armory_GetMoneyReward { get; set; }
+        internal static UdonBehaviour_Cached Armory_OpenCabinet_1 { get; set; }
+        internal static UdonBehaviour_Cached Armory_OpenCabinet_2 { get; set; }
 
         internal static QMToggleButton TrollMirrorZombiesBtn { get; set; }
         internal static QMNestedGridMenu GhostGameMenu { get; set; }

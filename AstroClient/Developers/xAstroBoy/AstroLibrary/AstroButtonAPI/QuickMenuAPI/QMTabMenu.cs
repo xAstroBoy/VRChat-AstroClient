@@ -71,7 +71,7 @@
 
         internal void DestroyMe()
         {
-            page.DestroyMeLocal(true);
+            //page.DestroyMeLocal(true);
             ButtonsMenu.DestroyMeLocal(true);
             NestedPart.DestroyMeLocal(true);
 

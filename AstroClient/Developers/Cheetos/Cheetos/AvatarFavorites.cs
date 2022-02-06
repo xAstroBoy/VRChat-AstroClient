@@ -9,9 +9,12 @@
     using CheetoLibrary.Menu.MenuApi;
     using Il2CppSystem.Collections.Generic;
     using Tools;
+    using Tools.Player;
     using UnityEngine;
+    using VRC;
     using VRC.Core;
     using xAstroBoy;
+    using xAstroBoy.UIPaths;
     using xAstroBoy.Utility;
     using ConfigManager = Config.ConfigManager;
 
@@ -37,7 +40,7 @@
             //}, 1.45f, 1f);
 
             //// Avatar Unfavorite
-            //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Unfavorite", 921f, 230f, delegate { DeleteFromFavorites(selectedID); }, 1.45f, 1f);
+            //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Local clone Avatar", 921f, 230f, delegate { UserInterfaceObjects.AvatarPreviewBase_MainAvatar.GetComponentInChildren<SimpleAvatarPedestal>().field_Internal_ApiAvatar_0.CloneLocalAvatar(); }, 1.45f, 1f);
 
             _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Spawn Preview Avatar", 921f, 170f, delegate { AvatarPreviewer.ClonePreviewAvatar(); }, 1.45f, 1f);
             _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Remove Preview Avatars", 921f, 110f, delegate { AvatarPreviewer.DeleteAllClonedAvatars(); }, 1.45f, 1f);

@@ -18,16 +18,6 @@
                 {
                     ModConsole.Log($"Recognized {Name} World, Hacking Admin Panel Behaviour..");
 
-                    string displayname = string.Empty;
-                    if (PlayerSpooferUtils.SpooferInstance.IsSpooferActive)
-                    {
-                        displayname = PlayerSpooferUtils.SpooferInstance.Original_DisplayName;
-                    }
-                    else
-                    {
-                        displayname = PlayerUtils.GetAPIUser().displayName;
-                    }
-
                     var PickupSync_SPH_SFB_SACBehaviour = UdonSearch.FindUdonEvent("PickupSync_SPH_SFB_SAC", "_start");
                     if (PickupSync_SPH_SFB_SACBehaviour != null)
                     {
@@ -37,7 +27,7 @@
                             var List1 = UdonHeapParser.Udon_Parse_string_List(disassembledbehaviour, _superSpecialSnowflakes);
                             if (List1 != null)
                             {
-                                List1.Add(displayname);
+                                List1.Add(PlayerSpooferUtils.Original_DisplayName);
                                 UdonHeapEditor.PatchHeap(disassembledbehaviour, _superSpecialSnowflakes, List1.ToArray(), true);
                             }
                             UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_mp_isAdmin_Boolean, true, true);
@@ -47,9 +37,9 @@
                             var List2 = UdonHeapParser.Udon_Parse_string_List(disassembledbehaviour, _permaBannedPlayers);
                             if (List2 != null)
                             {
-                                if (List2.Contains(displayname))
+                                if (List2.Contains(PlayerSpooferUtils.Original_DisplayName))
                                 {
-                                    List2.Remove(displayname);
+                                    List2.Remove(PlayerSpooferUtils.Original_DisplayName);
                                     ModConsole.Log("Removed Self from Current world Permanent Banned list...");
                                     UdonHeapEditor.PatchHeap(disassembledbehaviour, _permaBannedPlayers, List2.ToArray(), true);
                                 }
@@ -58,7 +48,7 @@
                             var List3 = UdonHeapParser.Udon_Parse_string_List(disassembledbehaviour, __0_temp_StringArray);
                             if (List3 != null)
                             {
-                                List3.Add(displayname);
+                                List3.Add(PlayerSpooferUtils.Original_DisplayName);
                                 UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_temp_StringArray, List3.ToArray(), true);
                             }
 

@@ -174,6 +174,7 @@
 
         private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
         {
+            if (__instance == null) return;
             Event_OnUiPageToggled.SafetyRaise(new OnUiPageEventArgs(__instance, __0, __1));
         }
 

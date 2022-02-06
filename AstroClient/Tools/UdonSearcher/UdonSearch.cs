@@ -217,6 +217,11 @@
             return null;
         }
 
+        internal static UdonBehaviour_Cached FindUdonEvent(Transform parent, string action, string subaction, bool Debug = false)
+        {
+            return FindUdonEvent(parent.gameObject, action, subaction, Debug);
+        }
+
         internal static UdonBehaviour_Cached FindUdonEvent(GameObject parent, string action, string subaction, bool Debug = false)
         {
             var gameobjects = parent.GetComponentsInChildren<UdonBehaviour>(true);
@@ -293,6 +298,37 @@
                         }
                     }
                 }
+            }
+
+            return null;
+        }
+        internal static List<UdonBehaviour_Cached> FindUdonEvents(GameObject obj, string subaction, bool Debug = false)
+        {
+            var result = new List<UdonBehaviour_Cached>();
+            var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
+
+            for (int i = 0; i < actionObjects.Count; i++)
+            {
+                UdonBehaviour actionobject = actionObjects[i];
+                if (actionobject != null)
+                {
+                    foreach (var actionkeys in actionobject._eventTable)
+                    {
+                        if (actionkeys.key == subaction)
+                        {
+                            if (Debug)
+                            {
+                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                            }
+                            result.Add(new UdonBehaviour_Cached(actionobject, actionkeys.key));
+                        }
+                    }
+                }
+            }
+
+            if (result.Count != 0)
+            {
+                return result;
             }
 
             return null;

@@ -1,10 +1,13 @@
 ﻿namespace AstroClient.Tools.UdonSearcher
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using Extensions;
     using Il2CppSystem.Text.RegularExpressions;
+    using MelonLoader;
     using TMPro;
     using UdonEditor;
     using UnityEngine;
@@ -14,12 +17,22 @@
 
     internal static class UdonReplacer
     {
+
         internal static void ReplaceString(string find, string replacement)
         {
-            if (!find.IsNotNullOrEmptyOrWhiteSpace() || !replacement.IsNotNullOrEmptyOrWhiteSpace()) return;
+            MelonCoroutines.Start(ReplaceString_Routine(find, replacement));
+        }
+
+        private static IEnumerator ReplaceString_Routine(string find, string replacement)
+        {
+
+            if (!find.IsNotNullOrEmptyOrWhiteSpace() || !replacement.IsNotNullOrEmptyOrWhiteSpace()) yield return null;
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             int result = 0;
-            int unsupported = 0;
+            int Failed = 0;
             var reg = new Regex();
             if (udons.Count() != 0)
             {
@@ -161,7 +174,7 @@
                                                                 else
                                                                 {
                                                                     ModConsole.DebugLog("Failed to Patch TextAsset");
-                                                                    unsupported++;
+                                                                    Failed++;
                                                                 }
 
                                                             }
@@ -200,7 +213,7 @@
                                                                         else
                                                                         {
                                                                             ModConsole.DebugLog("Failed to Patch TextAsset");
-                                                                            unsupported++;
+                                                                            Failed++;
                                                                         }
 
                                                                         //var RebuiltTextAsset = new TextAsset(TextAsset.CreateOptions.CreateNativeObject, patchedstr);
@@ -233,8 +246,11 @@
                         }
                     }
                 }
-                ModConsole.DebugLog($"Found and replaced {result}, containing {find} with {replacement}, Unsupported Types containing Match : {unsupported}");
+                stopwatch.Stop();
+                ModConsole.DebugLog($"Found and replaced {result}, containing {find} with {replacement}, Failed : {Failed}, Took : {stopwatch.ElapsedMilliseconds}ms");
             }
+
+            yield return null;
         }
     }
 }

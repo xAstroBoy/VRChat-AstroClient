@@ -5,8 +5,8 @@
 
     internal class UdonPrograms
     {
-        private static string InteractTriggerIdentifier = "VRC_AstroInteract";
-        private static string PickupIdentifier = "VRC_AstroPickup";
+        private static string InteractTriggerIdentifier { get; } = "VRC_AstroInteract";
+        private static string PickupIdentifier { get; } = "VRC_AstroPickup";
 
         // Good For buttons and such.
         private static SerializedUdonProgramAsset _InteractProgram { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -16,11 +16,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (_InteractProgram != null)
-                {
-                    return _InteractProgram;
-                }
-                else
+                if (_InteractProgram == null)
                 {
                     var program = new SerializedUdonProgramAsset();
                     if (program != null)
@@ -30,11 +26,10 @@
                         program.serializationDataFormat = VRC.Udon.Serialization.OdinSerializer.DataFormat.Binary;
                         program.programUnityEngineObjects = new Il2CppSystem.Collections.Generic.List<UnityEngine.Object>();
                         program.hideFlags = UnityEngine.HideFlags.DontUnloadUnusedAsset;
-                        _InteractProgram = program;
-                        return program;
+                        return _InteractProgram = program;
                     }
                 }
-                return null;
+                return _InteractProgram;
             }
         }
 
@@ -45,11 +40,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (_PickupProgram != null)
-                {
-                    return _PickupProgram;
-                }
-                else
+                if (_PickupProgram == null)
                 {
                     var program = new SerializedUdonProgramAsset();
                     if (program != null)
@@ -59,11 +50,12 @@
                         program.serializationDataFormat = VRC.Udon.Serialization.OdinSerializer.DataFormat.Binary;
                         program.programUnityEngineObjects = new Il2CppSystem.Collections.Generic.List<UnityEngine.Object>();
                         program.hideFlags = UnityEngine.HideFlags.DontUnloadUnusedAsset;
-                        _PickupProgram = program;
-                        return program;
+                        return _PickupProgram = program;
                     }
                 }
-                return null;
+
+                return _PickupProgram;
+
             }
         }
     }

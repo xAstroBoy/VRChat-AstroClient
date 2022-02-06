@@ -34,5 +34,7 @@
         public const string KitchenCooks = "wrld_df2776a3-8c84-45e3-bbf1-30ac8422911b";
         public const string PuttPuttPond = "wrld_ab68f896-a21f-4d72-a016-5a0a42c3158f";
         public const string GhostGame = "wrld_0ec97c4f-1e84-4a3a-9e3a-fa3075b6c56d";
+        public const string BeyondDarkness = "wrld_b606cba5-f90a-4d71-af61-94623113e01e";
+        public const string FrameOfReference = "wrld_3d3d87b3-3e78-4a7e-858d-e3a8a50d58ce";
     }
 }

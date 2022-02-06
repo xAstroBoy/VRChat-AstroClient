@@ -4,23 +4,29 @@
     using System.Diagnostics;
     using System.Drawing;
     using System.Reflection;
+    using System.Threading.Tasks;
+    using Il2CppSystem.Collections;
     using Loaders;
+    using MelonLoader;
     using xAstroBoy.Utility;
+    using IEnumerator = System.Collections.IEnumerator;
 
     internal class EventResourceLoader : AstroEvents
     {
         internal override void OnApplicationStart()
         {
-            MiscUtils.DelayFunction(0, () =>
-            {
-                LoadClassResources(typeof(Bundles));
-                LoadClassResources(typeof(Materials));
-                LoadClassResources(typeof(Prefabs));
-                LoadClassResources(typeof(Icons));
-            });
+            LoadClassResources(typeof(Bundles));
+            LoadClassResources(typeof(Materials));
+            LoadClassResources(typeof(Prefabs));
+            LoadClassResources(typeof(Icons));
         }
 
         private void LoadClassResources(Type classtype)
+        {
+            MelonCoroutines.Start(LoadClassResourcesCoroutine(classtype));
+        }
+
+        private IEnumerator LoadClassResourcesCoroutine(Type classtype)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -59,6 +65,7 @@
             }
             stopwatch.Stop();
             ModConsole.DebugLog($"Done Loading Resources from {classtype.FullName}, took {stopwatch.ElapsedMilliseconds}ms");
+            yield return null;
         }
     }
 }

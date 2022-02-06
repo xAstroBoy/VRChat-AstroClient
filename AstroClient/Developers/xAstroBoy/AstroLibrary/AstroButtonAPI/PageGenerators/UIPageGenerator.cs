@@ -42,7 +42,6 @@
                             if (item.Value.Equals(page))
                             {
                                 QuickMenuPageDictionary.Remove(item.Key);
-                                break;
                             }
                         }
                         else

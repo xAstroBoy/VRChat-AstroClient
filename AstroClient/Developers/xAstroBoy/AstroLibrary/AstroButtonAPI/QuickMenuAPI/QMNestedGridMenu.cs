@@ -223,7 +223,7 @@
             mainButton.DestroyMe();
             backButton.DestroyMeLocal(true);
             ButtonsMenu.DestroyMeLocal(true);
-            page.DestroyMeLocal(true);
+           // page.DestroyMeLocal(true);
         }
     }
 }

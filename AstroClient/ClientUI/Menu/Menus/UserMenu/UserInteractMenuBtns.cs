@@ -4,6 +4,7 @@
     using AstroMonos.Components.Spoofer;
     using AstroMonos.Components.Tools;
     using Cheetos;
+    using Startup.Hooks;
     using Target;
     using Tools.ObjectEditor;
     using UnityEngine;
@@ -13,15 +14,6 @@
 
     internal class UserInteractMenuBtns : AstroEvents
     {
-        private static IEnumerator WaitForCloneBtnInit()
-        {
-            while (VRChatObjects.UICloneAvatarButton == null)
-                yield return new WaitForSeconds(0.001f);
-            if (VRChatObjects.UICloneAvatarButton != null) VRChatObjects.UICloneAvatarButton.GetOrAddComponent<Disabler>();
-
-            yield return null;
-        }
-
         internal static void InitUserButtons()
         {
             //MelonCoroutines.Start(WaitForCloneBtnInit());
@@ -40,6 +32,7 @@
             WatcherUserMenu.InitButtons(menu);
             SitUserMenu.InitButtons(menu);
             new QMSingleButton(menu, "AstroClient : Set Target.", TargetSelector.MarkPlayerAsTarget, "Mark this player as target.");
+            new QMSingleButton(menu, "Local Clone", () => { SoftCloneHook.LocalCloneAvatarPlayer(QuickMenuUtils.SelectedPlayer.GetAPIUser()); }, "Locally Clone Clone This Player's Avatar");
             new QMSingleButton(menu, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar");
             new QMSingleButton(menu, "Spoof As Selected Player", () => { PlayerSpooferUtils.SpoofAs(QuickMenuUtils.SelectedPlayer.GetDisplayName()); }, "Spoof as this player ! ");
             _ = new QMSingleButton(menu, "Teleport All\nPickups\nTo\nplayer.", ObjectMiscOptions.TeleportAllWorldPickupsToPlayer, "Teleport World Pickups To Player.");

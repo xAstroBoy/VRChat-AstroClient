@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text.RegularExpressions;
 
     public static class CodingExtensions
@@ -54,6 +55,10 @@
         internal static bool IsNegative(this int number)
         {
             return number < 0;
+        }
+        internal static string ConvertToString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
+        {
+            return "{" + string.Join(",", dictionary.Select(kv => kv.Key + "=" + kv.Value).ToArray()) + "}";
         }
 
     }

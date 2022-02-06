@@ -323,6 +323,8 @@
     <Compile Include="Startup\Fixes\DashboardFix.cs" />
     <Compile Include="Startup\Hooks\PlayerJoinAndLeaveHook.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
+    <Compile Include="Startup\Hooks\SoftCloneHook.cs" />
+    <Compile Include="Startup\Hooks\UIAvatarListHooks.cs" />
     <Compile Include="Streamer\WorldAuthorDetector.cs" />
     <Compile Include="Tools\Exploits\ExploitUtils.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />
@@ -401,6 +403,7 @@
     <Compile Include="Tools\Skybox\CubemapTools\CubeMapAndTexture2D.cs" />
     <Compile Include="Tools\UdonEditor\Disassembler.cs" />
     <Compile Include="Tools\UdonEditor\UdonDisassembler.cs" />
+    <Compile Include="WorldModifications\WorldHacks\BeyondDarkness.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceEjectPlayer.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceVotePlayer.cs" />
@@ -587,6 +590,7 @@
     <Compile Include="WorldModifications\WorldHacks\GhostGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\PuttPuttPond.cs" />
     <Compile Include="CustomClasses\UdonBehaviour_Cached.cs" />
+    <Compile Include="WorldModifications\WorldHacks\FrameOfReference.cs" />
     <Compile Include="WorldModifications\WorldHacks\UdonTycoon.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldsIds\WorldIds.cs" />

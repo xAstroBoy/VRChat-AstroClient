@@ -35,7 +35,6 @@
             yield break;
         }
 
-
         private void InitPatch()
         {
             try
@@ -50,7 +49,6 @@
         {
             Event_OnPlayerSelected.SafetyRaise(new VRCPlayerEventArgs(__0));
         }
-
 
     }
 }

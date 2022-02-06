@@ -85,7 +85,9 @@
             OnFinish = action;
         }
 
-        // Not needed really, but to be safe lol
+        /// <summary>
+        /// Cleans and halts any Coroutine running.
+        /// </summary>
         private void Cleanup()
         {
             if (InvokeOnLoop) InvokeOnLoop = false;
@@ -102,10 +104,10 @@
             if (UdonBehaviour != null)
             {
                 // Empty the behaviour as everything is null now!
-
                 UdonBehaviour = null;
-                EventKey = null;
             }
+            EventKey = null;
+
         }
 
         /// <summary>

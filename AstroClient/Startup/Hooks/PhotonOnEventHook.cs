@@ -21,6 +21,7 @@
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class PhotonOnEventHook : AstroEvents
     {
+
         internal override void ExecutePriorityPatches()
         {
             HookPhotonOnEvent();
@@ -81,7 +82,7 @@
             internal const byte Block_Or_Mute = 21;
         }
 
-    private static string TranslateModerationEvent(byte moderationEvent)
+        private static string TranslateModerationEvent(byte moderationEvent)
         {
             switch (moderationEvent)
             {
@@ -137,7 +138,7 @@
             {
                 case EventCode.OpRemoveCache_etc: return false;
                 case EventCode.USpeaker_Voice_Data: return false;
-                case EventCode.Disconnect_Message: return false;
+                case EventCode.Disconnect_Message: return true;
                 case EventCode.Cached_Events: return false;
                 case EventCode.Master_allowing_player_to_join: return true;
                 case EventCode.RPC: return false;
@@ -162,7 +163,7 @@
                 case EventCode.Leaving_World: return false;
                 case EventCode.Joining_World: return false;
                 default:
-                    return true;
+                    return false;
             }
         }
         private enum HookAction
@@ -176,19 +177,18 @@
 
         private static string HookActionToString(HookAction action)
         {
-            switch(action)
+            switch (action)
             {
                 case HookAction.Patch: return "PATCHED ";
                 case HookAction.Block: return "BLOCKED ";
                 case HookAction.Empty: return "EMPTIED ";
                 case HookAction.Reset: return "RESET ";
                 default:
-                    return string.Empty;    
+                    return string.Empty;
             }
         }
 
-
-    private unsafe static bool OnEventPatch(ref EventData __0)
+        private unsafe static bool OnEventPatch(ref EventData __0)
         {
             HookAction Currentaction = HookAction.Nothing;
             try
@@ -257,9 +257,9 @@
                                     case EventCode.Motion: // I believe this is motion, key 245 appears to be base64
                                         break;
 
-                                    //case EventCode.Disconnect_Message: // Kick Message?
-                                    //    string kickMessage = (Serialization.FromIL2CPPToManaged<object>(__0.Parameters) as Dictionary<byte, object>)[245].ToString();
-                                    //    break;
+                                    case EventCode.Disconnect_Message: // Kick Message?
+                                        // TODO : Intercept the kick message, if is a votekick, force the game to go to the home world to avoid a bug.
+                                        break;
 
                                     //case EventCode.RPC:
                                     //    break;
@@ -272,6 +272,11 @@
                                     //    Currentaction = HookAction.Reset;
                                     //    break;
                                     //}
+                                    case EventCode.Custom_Properties:
+                                        {
+
+                                            break;
+                                        }
 
                                     case EventCode.Moderations: // Moderations
 
@@ -300,9 +305,12 @@
                                                         break;
 
                                                     case ModerationCode.VoteKick: // VoteKick
+
+                                                        PopupUtils.QueHudMessage($"<color=#FFA500>A Votekick has Been started (Check console!)</color>");
+                                                        ModConsole.DebugWarning("VOTEKICK DETECTED : ");
                                                         break;
 
-                                                    case (byte)ModerationCode.Block_Or_Mute:
+                                                    case ModerationCode.Block_Or_Mute:
 
                                                         #region Blocking and Muting Events.
 
@@ -323,17 +331,17 @@
                                                                     switch (blocked)
                                                                     {
                                                                         case true:
-                                                                        {
-                                                                            PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
-                                                                            ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false);
-                                                                            Currentaction = HookAction.Patch;
-                                                                            break;
-                                                                        }
+                                                                            {
+                                                                                PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
+                                                                                ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false);
+                                                                                Currentaction = HookAction.Patch;
+                                                                                break;
+                                                                            }
                                                                         case false:
-                                                                        {
-                                                                            PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
-                                                                            break;
-                                                                        }
+                                                                            {
+                                                                                PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
+                                                                                break;
+                                                                            }
                                                                         default:
                                                                             break;
                                                                     }
@@ -345,15 +353,15 @@
                                                                     switch (muted)
                                                                     {
                                                                         case true:
-                                                                        {
-                                                                            PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
-                                                                            break;
-                                                                        }
+                                                                            {
+                                                                                PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
+                                                                                break;
+                                                                            }
                                                                         case false:
-                                                                        {
-                                                                            PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
-                                                                            break;
-                                                                        }
+                                                                            {
+                                                                                PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
+                                                                                break;
+                                                                            }
                                                                         default:
                                                                             break;
                                                                     }
@@ -435,7 +443,6 @@
                                         #endregion Moderation Handler
 
                                         break;
-
                                     //case EventCode.Destroy: // Destroy
                                     //    log = true;
                                     //    break;
@@ -449,8 +456,7 @@
                                     //case EventCode.Custom_Properties: // I think this is avatar switching related
                                     //    break;
 
-
-                                default:
+                                    default:
                                         break;
                                 }
                             }
@@ -518,10 +524,13 @@
                         default:
                             break;
                     }
-                    if (EventCodeToLog(__0.Code) && ConfigManager.General.LogEvents && __0.Parameters != null)
+                    if (ConfigManager.General.LogEvents)
                     {
-                        line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(__0.Parameters), Newtonsoft.Json.Formatting.Indented)}");
-                        ModConsole.Log($"{HookActionToString(Currentaction)}{prefix.ToString()}{line.ToString()}");
+                        if (EventCodeToLog(__0.Code) && __0.Parameters != null)
+                        {
+                            line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(__0.Parameters), Newtonsoft.Json.Formatting.Indented)}");
+                            ModConsole.Log($"{HookActionToString(Currentaction)}{prefix.ToString()}{line.ToString()}");
+                        }
                     }
                     line.Clear();
                 }

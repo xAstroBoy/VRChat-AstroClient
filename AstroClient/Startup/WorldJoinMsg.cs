@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
+    using UnityEngine.Playables;
     using xAstroBoy.Utility;
 
     internal class WorldJoinMsg : AstroEvents
@@ -14,22 +16,22 @@
                 if (tags.Count() != 0)
                 {
                     bool isFirst = true;
-                    string printtag = string.Empty;
+                    StringBuilder printtag = new StringBuilder();
                     for (int i = 0; i < tags.Count; i++)
                     {
                         string tag = tags[i];
                         if (isFirst)
                         {
-                            printtag += $"[ {tag} ]";
+                            printtag.Append($"[ {tag} ]");
                             isFirst = false;
                         }
                         else
                         {
-                            printtag += $",[ {tag} ]";
+                            printtag.Append($",[ {tag} ]");
                         }
                     }
 
-                    ModConsole.Log("World Tags : " + printtag, System.Drawing.Color.Goldenrod);
+                    ModConsole.Log("World Tags : " + printtag.ToString(), System.Drawing.Color.Goldenrod);
                 }
             }
             ModConsole.Log("World ID : " + id, System.Drawing.Color.Goldenrod);

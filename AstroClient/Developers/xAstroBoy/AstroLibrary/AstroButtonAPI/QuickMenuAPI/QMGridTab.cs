@@ -90,7 +90,7 @@
         {
             mainButton.DestroyMe();
 
-            page.DestroyMeLocal(true);
+            // page.DestroyMeLocal(true);
 
             NestedPart.DestroyMeLocal(true);
             backButton.DestroyMeLocal(true);
