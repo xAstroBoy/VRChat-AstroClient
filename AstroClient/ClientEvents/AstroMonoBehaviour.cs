@@ -29,7 +29,7 @@
             Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
 
             OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
-            SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
+            //SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
             TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
 
             RPCEventHook.Event_OnUdonSyncRPC += Internal_OnUdonSyncRPCEvent;

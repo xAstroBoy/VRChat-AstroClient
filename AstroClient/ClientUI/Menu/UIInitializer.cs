@@ -57,7 +57,7 @@
             {
                 MapEditorMenu.InitButtons(AstroClient);
                 Kaned.Pathfinding.InitMenu(AstroClient);
-                CheetosWIP.InitCheetosWIPMenu(AstroClient);
+                //CheetosWIP.InitCheetosWIPMenu(AstroClient);
             }
 
             ToggleDebugInfo = new QMToggleButton(AstroClient, "Debug Console", () => { Bools.IsDebugMode = true; }, () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", null, null, null, Bools.IsDebugMode);

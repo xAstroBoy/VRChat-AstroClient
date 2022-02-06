@@ -34,6 +34,13 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
         internal static bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = true;
         //private static Color Ender { [HideFromIl2Cpp] get; } = new(0f, 2f, 0f, 0.4f);
+        void Update()
+        {
+            // Animates main texture scale in a funky way!
+            float scaleX = Mathf.Cos(Time.time) * 0.5f + 1;
+            float scaleY = Mathf.Sin(Time.time) * 0.5f + 1;
+            renderer.material.SetTextureScale("_MainTex", new Vector2(scaleX, scaleY));
+        }
 
         private void Start()
         {
@@ -101,14 +108,10 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 ModConsole.DebugLog(contact.point.ToString() + "Point To Teleport To");
                 var position = new Vector3(contact.point.x, contact.point.y, contact.point.z);
                 GameInstances.CurrentUser.gameObject.transform.position = position;
+
                 gameObject.DestroyMeLocal();
                 break;
             }
-        }
-
-        private void OnCollisionExit(Collision other)
-        {
-            ModConsole.DebugLog("No longer in contact with " + other.transform.name);
         }
 
         private void OnDrop()

@@ -91,18 +91,15 @@
         //    //ModConsole.Log($"[API] {e.Data}");
         //}
 
-
         //private static void OnOpened(object sender, EventArgs e)
         //{
         //    ModConsole.Log("[API] Connected To WebSocket!");
         //    //Helper().Start();
         //}
 
-
         internal override void OnMasterClientSwitched(Player player)
         {
             if (!WorldUtils.IsInWorld) return;
-
 
             if (player.GetPhotonPlayer().GetAPIUser().IsSelf)
             {
@@ -120,8 +117,6 @@
             player.GetVRCPlayer().AddSingleTag(System.Drawing.Color.OrangeRed, "Instance Master");
 
         }
-
-
 
         internal override void OnRoomJoined()
         {
@@ -142,8 +137,8 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            VRC.Player player = PlayerUtils.GetPlayer();
-            if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();
+            //VRC.Player player = PlayerUtils.GetPlayer();
+            //if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();
 
             if (Bools.IsDeveloper && !DoOnce)
             {

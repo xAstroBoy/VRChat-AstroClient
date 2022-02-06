@@ -529,6 +529,7 @@
                         if (EventCodeToLog(__0.Code) && __0.Parameters != null)
                         {
                             line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(__0.Parameters), Newtonsoft.Json.Formatting.Indented)}");
+
                             ModConsole.Log($"{HookActionToString(Currentaction)}{prefix.ToString()}{line.ToString()}");
                         }
                     }

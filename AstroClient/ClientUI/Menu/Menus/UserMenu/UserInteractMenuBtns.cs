@@ -26,11 +26,13 @@
         internal static void Init_UserMenu()
         {
             var menu = new QMNestedGridMenu(MenuAPI_New.QA_SelectedUser_Remote, 1, 0, "AstroClient User Options", "AstroClient User Options", Color.white, true);
+            new QMSingleButton(MenuAPI_New.QA_SelectedUser_Remote, 2, 0, "Local Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar");
+
             PickupProtector.InitButtons(menu);
             OrbitUserMenu.InitButtons(menu);
             AttackerUserMenu.InitButtons(menu);
             WatcherUserMenu.InitButtons(menu);
-            SitUserMenu.InitButtons(menu);
+            //SitUserMenu.InitButtons(menu);
             new QMSingleButton(menu, "AstroClient : Set Target.", TargetSelector.MarkPlayerAsTarget, "Mark this player as target.");
             new QMSingleButton(menu, "Local Clone", () => { SoftCloneHook.LocalCloneAvatarPlayer(QuickMenuUtils.SelectedPlayer.GetAPIUser()); }, "Locally Clone Clone This Player's Avatar");
             new QMSingleButton(menu, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar");
@@ -48,6 +50,7 @@
 
             var Shortcut = new QMSingleButton(MenuAPI_New.QA_SelectedUser_Local, 1, 0, "AstroClient User Options", null, "AstroClient User Options", true);
             Shortcut.SetButtonShortcut(menu);
+            new QMSingleButton(MenuAPI_New.QA_SelectedUser_Local, 2, 0, "Local Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar");
 
         }
 
