@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.xAstroBoy.UIPaths
 {
+    using AstroButtonAPI.Tools;
     using UnityEngine;
     using xAstroBoy;
 
     internal class VRChat_LoadingScreenObjects
     {
-
 
         private static GameObject _VRChat_UIRoot;
         internal static GameObject VRChat_UIRoot
@@ -20,15 +20,15 @@
             }
         }
 
-
         private static GameObject _VRChat_SkyCube;
         internal static GameObject VRChat_SkyCube
         {
             get
             {
+                if (VRChat_UIRoot == null) return null;
                 if (_VRChat_SkyCube == null)
                 {
-                    return _VRChat_SkyCube = GameObjectFinder.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient/SkyCube_Baked");
+                    return _VRChat_SkyCube = VRChat_UIRoot.transform.FindObject("3DElements/LoadingBackground_TealGradient/SkyCube_Baked").gameObject;
                 }
                 return _VRChat_SkyCube;
             }
@@ -39,9 +39,11 @@
         {
             get
             {
+                if (VRChat_UIRoot == null) return null;
+
                 if (_VRChat_bubbles == null)
                 {
-                    return _VRChat_bubbles = GameObjectFinder.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient/_FX_ParticleBubbles");
+                    return _VRChat_bubbles = VRChat_UIRoot.transform.FindObject("3DElements/LoadingBackground_TealGradient/_FX_ParticleBubbles").gameObject;
                 }
                 return _VRChat_bubbles;
             }
@@ -73,7 +75,6 @@
             }
         }
 
-
         private static GameObject _VRChat_originalStartScreenAudio;
         internal static GameObject VRChat_originalStartScreenAudio
         {
@@ -100,15 +101,16 @@
             }
         }
 
-
         private static GameObject _VRChat_LoadingBackground;
         internal static GameObject VRChat_LoadingBackground
         {
             get
             {
+                if (VRChat_UIRoot == null) return null;
+
                 if (_VRChat_LoadingBackground == null)
                 {
-                    return _VRChat_LoadingBackground = GameObjectFinder.Find("UserInterface/MenuContent/Popups/LoadingPopup/LoadingBackground(Clone)");
+                    return _VRChat_LoadingBackground = VRChat_UIRoot.transform.FindObject("LoadingBackground(Clone)").gameObject;
                 }
                 return _VRChat_LoadingBackground;
             }
@@ -118,9 +120,11 @@
         {
             get
             {
+                if (VRChat_UIRoot == null) return null;
+
                 if (_VRChat_InfoPanel == null)
                 {
-                    return _VRChat_InfoPanel = GameObjectFinder.Find("UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingInfoPanel");
+                    return _VRChat_InfoPanel = VRChat_UIRoot.transform.FindObject("3DElements/LoadingInfoPanel").gameObject;
                 }
                 return _VRChat_InfoPanel;
             }
@@ -131,14 +135,15 @@
         {
             get
             {
+                if (VRChat_UIRoot == null) return null;
+
                 if (_VRChat_originalLoadingAudio == null)
                 {
-                    return _VRChat_originalLoadingAudio = GameObjectFinder.Find("UserInterface/MenuContent/Popups/LoadingPopup/LoadingSound");
+                    return _VRChat_originalLoadingAudio = VRChat_UIRoot.transform.FindObject("LoadingSound").gameObject;
                 }
                 return _VRChat_originalLoadingAudio;
             }
         }
-
 
     }
 }

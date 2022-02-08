@@ -232,7 +232,6 @@
                     {
                         if (item != null)
                         {
-
                             ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
                         }
                         else
@@ -246,18 +245,17 @@
 
                     return;
                 }
-                else if (obj is VRC.UI.Elements.UIPage)
+                else if (obj is VRC.UI.Elements.UIPage page)
                 {
-                    var item = obj as VRC.UI.Elements.UIPage;
-                    if (item != null) // Special destroy system.
+                    if (page != null) // Special destroy system.
                     {
-                        item.RemovePage();
-                        Object.Destroy(item);
+                        page.RemovePage();
+                        Object.Destroy(page);
                     }
 
                     MiscUtils.DelayFunction(0.5f, () =>
                     {
-                        if (item != null)
+                        if (page != null)
                         {
                             ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
                         }
@@ -271,17 +269,16 @@
                     });
                 }
 
-                else if (obj is GameObject)
+                else if (obj is GameObject o)
                 {
-                    var item = obj as GameObject;
-                    if (item != null)
+                    if (o != null)
                     {
-                        Object.Destroy(item);
+                        Object.Destroy(o);
                     }
 
                     MiscUtils.DelayFunction(0.5f, () =>
                     {
-                        if (item != null)
+                        if (o != null)
                         {
                             ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
                         }
@@ -294,9 +291,8 @@
                         }
                     });
                 }
-                else if (obj is Transform)
+                else if (obj is Transform item)
                 {
-                    var item = obj as Transform;
                     if (item != null)
                     {
                         Object.Destroy(item.gameObject);

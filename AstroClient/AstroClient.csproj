@@ -128,7 +128,13 @@
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
     <Compile Include="ClientUI\ActionMenu\TrollDefenseModule.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
+    <Compile Include="ClientUI\LoadingScreen\Assets\LoadingScreenAssets.cs" />
+    <Compile Include="ClientUI\LoadingScreen\Assets\LoginScreenAssets.cs" />
+    <Compile Include="ClientUI\LoadingScreen\BetterLoadingScreen.cs" />
+    <Compile Include="ClientUI\LoadingScreen\Prefabs\LoadScreenPrefabs.cs" />
+    <Compile Include="ClientUI\LoadingScreen\Settings\BetterLoadingScreenSettings.cs" />
     <Compile Include="ClientUI\Menu\RandomSubmenus\TrollDefenseSubMenu.cs" />
+    <Compile Include="ClientUI\Menu\SettingsMenu\Settings_LoadingScreen.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_PickupProtector.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
@@ -396,7 +402,7 @@
     <Compile Include="Startup\Patches\InputPatches.cs" />
     <Compile Include="Startup\Patches\SerializerPatches.cs" />
     <Compile Include="Startup\UiModifier.cs" />
-    <Compile Include="Streamer\StreamerNotifier.cs" />
+    <Compile Include="Developers\Cheetos\Cheetos\JoinLeaveNotifierVRC.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
     <Compile Include="Tools\Skybox\CubemapTools\CubeMapAndTexture2D.cs" />
@@ -495,8 +501,7 @@
     <Compile Include="ClientEvents\AstroEvents.cs" />
     <Compile Include="ClientEvents\AstroMonoBehaviour.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\CameraStuff\FOV.cs" />
-    <Compile Include="Developers\Cheetos\Cheetos\JoinLeaveNotifier.cs" />
-    <Compile Include="Streamer\StreamerProtector.cs" />
+    <Compile Include="Streamer\StreamerIdentifier.cs" />
     <Compile Include="Tools\ObjectEditor\Cloner\ObjectCloner.cs" />
     <Compile Include="AstroMonos\ComponentsBtn.cs" />
     <Compile Include="AstroMonos\Components\ESP\EspHelper.cs" />
@@ -1367,6 +1372,8 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry_milkshake_foam.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\flashlights.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\waffle.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\OldLoadingScreen.assetbundle" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

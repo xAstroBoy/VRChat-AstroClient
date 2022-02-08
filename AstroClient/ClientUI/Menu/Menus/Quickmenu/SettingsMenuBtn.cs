@@ -37,7 +37,7 @@
             //FlightMenu.InitButtons(sub, 1f, 1.5f, true);
             PlayerESPMenu.InitButtons(sub);
 
-            //Settings_LoadingScreen.InitButtons(sub);
+            Settings_LoadingScreen.InitButtons(sub);
 
             // Nameplate Toggle
             var toggleNameplates = new QMToggleButton(sub, "Nameplates", () => { ConfigManager.UI.NamePlates = true; }, () => { ConfigManager.UI.NamePlates = false; }, "Nameplates");

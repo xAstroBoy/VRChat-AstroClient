@@ -123,15 +123,11 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             if (collision.transform.name.Contains("VRCPlayer")) return;
             if (collision == null) return;
             if (collision.collider == null) return;
-            if (!ColliderSuppresserSphere.DisabledCollisions.Contains(collision.transform))
-            {
-                ModConsole.DebugLog($"Deactivated Collider {collision.collider.name} from blocking Player collision!");
-                PopupUtils.QueHudMessage($"<color=#FFA500>Deactivated Collider {collision.collider.name}</color>");
-                collision.collider.transform.IgnoreLocalPlayerCollision();
-                ColliderSuppresserSphere.DisabledCollisions.Add(collision.collider.transform);
-                Activated = false;
+            if (!ColliderSuppresserSphere.DeactivateCollision(collision.transform)) return;
+            ModConsole.DebugLog($"Deactivated Collider {collision.transform.gameObject.name} from blocking Player collision!");
+            PopupUtils.QueHudMessage($"<color=#FFA500>Deactivated Collider {collision.transform.gameObject.name}</color>");
+            Activated = false;
 
-            }
         }
 
         private void OnDrop()

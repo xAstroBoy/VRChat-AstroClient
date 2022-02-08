@@ -10,7 +10,7 @@ namespace AstroClient.Spawnables.Enderpearl
 
     internal class ColliderSuppresserSphere : AstroEvents
     {
-        private static GameObject CubeColliderDisabler;
+        private static GameObject SphereColliderDisabler;
 
         internal override void OnRoomLeft()
         {
@@ -19,10 +19,10 @@ namespace AstroClient.Spawnables.Enderpearl
 
         internal static void SpawnSphere()
         {
-            if (CubeColliderDisabler != null)
+            if (SphereColliderDisabler != null)
             {
-                UnityEngine.Object.Destroy(CubeColliderDisabler);
-                CubeColliderDisabler = null;
+                UnityEngine.Object.Destroy(SphereColliderDisabler);
+                SphereColliderDisabler = null;
                 return;
             }
             Vector3 bonePosition = Networking.LocalPlayer.GetBonePosition(HumanBodyBones.RightHand);
@@ -39,11 +39,62 @@ namespace AstroClient.Spawnables.Enderpearl
                 body.useGravity = false;
             }
             Cube.IgnoreLocalPlayerCollision();
+            if (DisabledCollisions.Count != 0)
+            {
+                foreach (var item in DisabledCollisions)
+                {
+                    Cube.IgnoreObjectCollision(item); // Make sure the sphere is the same as the despawned one
+                }
+            }
             Cube.GetOrAddComponent<ColliderSuppresserBehaviour>();
-            CubeColliderDisabler = Cube;
+            SphereColliderDisabler = Cube;
         }
 
-        internal static List<Transform> DisabledCollisions = new List<Transform>();
+        internal static bool DeactivateCollision(Transform collider)
+        {
+            if (collider != null)
+            {
+
+                // Register collision.
+                if (!DisabledCollisions.Contains(collider))
+                {
+                    DisabledCollisions.Add(collider);
+
+                    // Process it.
+
+                    collider.IgnoreLocalPlayerCollision();
+
+                    // Disable Collider as well on Sphere ..
+                    SphereColliderDisabler.IgnoreObjectCollision(collider);
+                    return true;
+                }
+                return false;
+
+            }
+            return false;
+        }
+
+        internal static void ActivateCollision(Transform collider)
+        {
+            if (collider != null)
+            {
+
+                // Deregister collision.
+                if (DisabledCollisions.Contains(collider))
+                {
+                    DisabledCollisions.Remove(collider);
+
+                    // Process it.
+
+                    collider.IgnoreLocalPlayerCollision(false);
+
+                    // Enable Collider as well on Sphere ..
+                    SphereColliderDisabler.IgnoreObjectCollision(collider, false);
+                }
+            }
+        }
+
+        private static List<Transform> DisabledCollisions = new List<Transform>();
 
         internal static void FixAndRevertColliderEdits()
         {
@@ -51,7 +102,7 @@ namespace AstroClient.Spawnables.Enderpearl
             {
                 foreach (var item in DisabledCollisions)
                 {
-                    item.gameObject.IgnoreLocalPlayerCollision(false);
+                    ActivateCollision(item);
                 }
                 DisabledCollisions.Clear();
             }

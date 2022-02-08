@@ -40,7 +40,7 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static void QueHudMessage(string message)
         {
-            ModConsole.Log($"[HudMessage] {message}");
+            //ModConsole.Log($"[HudMessage] {message}");
             if (!WorldUtils.IsInWorld) return;
             var manager = GameInstances.VRCUiManager;
             if (true)

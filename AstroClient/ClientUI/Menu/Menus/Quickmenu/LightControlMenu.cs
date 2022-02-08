@@ -327,6 +327,7 @@
                         FullBrightLight.spotAngle = float.MaxValue;
                         FullBrightLight.color = Color.white;
                         FullBrightLight.attenuate = false;
+                        FullBrightLight.renderMode = LightRenderMode.ForcePixel;
                         ModConsole.DebugLog("Fullbright Enabled!");
                     }
                     else

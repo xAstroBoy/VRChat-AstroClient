@@ -10,6 +10,7 @@ namespace AstroClient.ClientUI.LoadingScreen
     using Mono.CSharp;
     using Prefabs;
     using Settings;
+    using Tools.Extensions;
     using UnityEngine;
     using xAstroBoy;
     using xAstroBoy.UIPaths;
@@ -32,45 +33,41 @@ namespace AstroClient.ClientUI.LoadingScreen
                 LoginScreenAssets.CurrentLoginScreen = CreateGameObject(LoadScreenPrefabs.loginPrefab, new Vector3(0.5f, 0.5f, 0.5f), "UserInterface/", "LoadingBackground_TealGradient_Music");
                 // newCube = CreateGameObject(newCube, new Vector3(0.5f, 0.5f, 0.5f), "UserInterface/", "LoadingBackground_TealGradient_Music");
 
-                ModConsole.DebugLog("Disabling original GameObjects");
+                ModConsole.DebugLog("Destroying original GameObjects");
 
                 // Disable original objects from loading screen
                 step = 3;
                 if (VRChat_LoadingScreenObjects.VRChat_SkyCube != null)
                 {
-                    ModConsole.DebugLog("Disabling Default SkyCube");
-
-                    VRChat_LoadingScreenObjects.VRChat_SkyCube.GetOrAddComponent<Disabler>();
-                    VRChat_LoadingScreenObjects.VRChat_SkyCube.active = false;
+                    ModConsole.DebugLog("Destroying Default SkyCube");
+                    VRChat_LoadingScreenObjects.VRChat_SkyCube.DestroyMeLocal(false);
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_SkyCube  is Null! Can't Toggle it");
+                    ModConsole.DebugError($"VRChat_SkyCube  is Null! Can't Destroy it");
                 }
 
                 step = 4;
                 if (VRChat_LoadingScreenObjects.VRChat_bubbles != null)
                 {
-                    ModConsole.DebugLog("Disabling Bubbles");
+                    ModConsole.DebugLog("Destroying Bubbles");
 
-                    VRChat_LoadingScreenObjects.VRChat_bubbles.GetOrAddComponent<Disabler>();
-                    VRChat_LoadingScreenObjects.VRChat_bubbles.active = false;
+                    VRChat_LoadingScreenObjects.VRChat_bubbles.DestroyMeLocal(false);
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_bubbles  is Null! Can't Toggle it");
+                    ModConsole.DebugError($"VRChat_bubbles  is Null! Can't Destroy it");
                 }
                 step = 5;
                 if (VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio != null)
                 {
-                    ModConsole.DebugLog("Disabling Original Loading Audio");
+                    ModConsole.DebugLog("Destroying Original Loading Audio");
 
-                    VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.GetOrAddComponent<Disabler>();
-                    VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.active = false;
+                    VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.DestroyMeLocal(false);
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_originalLoadingAudio  is Null! Can't Toggle it");
+                    ModConsole.DebugError($"VRChat_originalLoadingAudio  is Null! Can't Destroy it");
                 }
 
                 step = 6;
@@ -78,39 +75,36 @@ namespace AstroClient.ClientUI.LoadingScreen
                 // Disable original objects from login screen
                 if (VRChat_LoadingScreenObjects.VRChat_originalStartScreenAudio != null)
                 {
-                    ModConsole.DebugLog("Disabling Original Start Screen Audio");
+                    ModConsole.DebugLog("Destroying Original Start Screen Audio");
 
-                    VRChat_LoadingScreenObjects.VRChat_originalStartScreenAudio.GetOrAddComponent<Disabler>();
-                    VRChat_LoadingScreenObjects.VRChat_originalStartScreenAudio.active = false;
+                    VRChat_LoadingScreenObjects.VRChat_originalStartScreenAudio.DestroyMeLocal(false);
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_originalStartScreenAudio  is Null! Can't Toggle it");
+                    ModConsole.DebugError($"VRChat_originalStartScreenAudio  is Null! Can't Destroy it");
                 }
 
                 step = 7;
                 if (VRChat_LoadingScreenObjects.VRChat_originalStartScreenSkyCube != null)
                 {
-                    ModConsole.DebugLog("Disabling Original Start Screen Skycube");
+                    ModConsole.DebugLog("Destroying Original Start Screen Skycube");
+                    VRChat_LoadingScreenObjects.VRChat_originalStartScreenSkyCube.DestroyMeLocal(false);
 
-                    VRChat_LoadingScreenObjects.VRChat_originalStartScreenSkyCube.GetOrAddComponent<Disabler>();
-                    VRChat_LoadingScreenObjects.VRChat_originalStartScreenSkyCube.active = false;
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_originalStartScreenSkyCube  is Null! Can't Toggle it");
+                    ModConsole.DebugError($"VRChat_originalStartScreenSkyCube  is Null! Can't Destroy it");
                 }
 
                 step = 8;
                 if (VRChat_LoadingScreenObjects.VRChat_loginBubbles != null)
                 {
-                    ModConsole.DebugLog("Disabling Login Bubbles");
-                    VRChat_LoadingScreenObjects.VRChat_loginBubbles.GetOrAddComponent<Disabler>();
-                    VRChat_LoadingScreenObjects.VRChat_loginBubbles.active = false;
+                    ModConsole.DebugLog("Destroying Login Bubbles");
+                    VRChat_LoadingScreenObjects.VRChat_loginBubbles.DestroyMeLocal(false);
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_loginBubbles  is Null! Can't Toggle it");
+                    ModConsole.DebugError($"VRChat_loginBubbles  is Null! Can't Destroy it");
                 }
 
                 step = 9;

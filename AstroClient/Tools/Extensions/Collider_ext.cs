@@ -168,6 +168,19 @@
             }
 
         }
+        internal static void IgnoreObjectCollision(this GameObject obj, Transform item, bool ignore = true)
+        {
+            var colliders = obj.GetComponents<Collider>();
+            var colliders2 = item.GetComponents<Collider>();
+            foreach (var c in colliders)
+            {
+                foreach (var c2 in colliders2)
+                {
+                    Physics.IgnoreCollision(c, c2, ignore);
+                }
+            }
+
+        }
 
         internal static void IgnoreLocalPlayerCollision(this GameObject obj, bool ignore = true)
         {

@@ -52,9 +52,6 @@
 
             TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
 
-            StreamerProtector.Event_OnStreamerJoined += Internal_OnStreamerJoined;
-            StreamerProtector.Event_OnStreamerLeft += Internal_OnStreamerLeft;
-
             PhotonModerationHandler.Event_OnPlayerBlockedYou += Internal_OnPlayerBlockedYou;
             PhotonModerationHandler.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
             PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
@@ -90,16 +87,6 @@
         private void Internal_OnShowScreen(object sender, ScreenEventArgs e)
         {
             OnShowScreen(e.page);
-        }
-
-        private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
-        {
-            OnStreamerJoined(e.player);
-        }
-
-        private void Internal_OnStreamerLeft(object sender, PlayerEventArgs e)
-        {
-            OnStreamerLeft(e.player);
         }
 
         private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
@@ -328,14 +315,6 @@
         }
 
         internal virtual void OnPlayerJoined(VRC.Player player)
-        {
-        }
-
-        internal virtual void OnStreamerLeft(VRC.Player player)
-        {
-        }
-
-        internal virtual void OnStreamerJoined(VRC.Player player)
         {
         }
 
