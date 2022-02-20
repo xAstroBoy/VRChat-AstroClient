@@ -15,11 +15,6 @@
             {
                 if (_loadScreenPrefab == null)
                 {
-                    foreach (var paths in SelectedBundle.GetAllAssetNames())
-                    {
-                        ModConsole.DebugLog($"Found {paths}");
-                    }
-
                     _loadScreenPrefab = SelectedBundle.LoadAsset_Internal("Assets/Bundle/LoadingBackground.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
                     _loadScreenPrefab.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                 }
@@ -41,7 +36,6 @@
                 return _loginPrefab;
             }
         }
-
 
     }
 }

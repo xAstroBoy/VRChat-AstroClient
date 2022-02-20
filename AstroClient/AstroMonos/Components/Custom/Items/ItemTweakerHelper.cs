@@ -118,6 +118,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         {
             if (!Activated) return;
             if (collision.transform.name.Contains("VRCPlayer")) return;
+            if (collision.transform.root.name.Contains("VRCPlayer")) return;
             if (collision == null) return;
             if (collision.collider == null) return;
             collision.transform.gameObject.Set_As_Object_To_Edit();

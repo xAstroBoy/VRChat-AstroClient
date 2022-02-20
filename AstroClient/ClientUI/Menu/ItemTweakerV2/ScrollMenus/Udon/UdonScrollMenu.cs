@@ -1,9 +1,14 @@
 ﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
 {
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using AstroMonos.Components.Tools.Listeners;
-    using Selector;
+    using CustomClasses;
+    using ItemTweakerV2.Selector;
+    using MelonLoader;
     using Tools.Extensions;
     using Tools.UdonEditor;
     using UnityEngine;
@@ -13,29 +18,68 @@
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.AstroButtonAPI.WingsAPI;
+    using xAstroBoy.Utility;
 
     internal class UdonScrollMenu : AstroEvents
     {
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
-        private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
         private static List<QMNestedGridMenu> GeneratedPages = new List<QMNestedGridMenu>();
 
         private static bool isGenerating { get; set; }
         private static bool CleanOnRoomLeave { get; } = true;
-        private static bool DestroyOnMenuClose { get; } = true;
+        private static bool DestroyOnMenuClose { get; } = true; // Due to Performance reasons, destroy it and purge the residual buttons to kill any possible lag // TODO : Make it still a option tho.
 
+        private static bool _SpamSelectedEvent = false;
+        private static bool SpamSelectedEvent
+        {
+            get
+            {
+                return _SpamSelectedEvent;
+            }
+            set
+            {
+                _SpamSelectedEvent = value;
+                if (SpamUdonBehaviourEvent != null)
+                {
+                    SpamUdonBehaviourEvent.SetToggleState(value);
+                }
+            }
+        }
+
+        internal static int ActiveSpammers
+        {
+            get
+            {
+                return Active_Spammers.Count;
+            }
+        }
+
+        private static UdonBehaviour_Cached Generated_Spammer { get; set; }
+        private static List<UdonBehaviour_Cached> Active_Spammers = new List<UdonBehaviour_Cached>();
         private static bool HasGenerated { get; set; } = false;
         private static bool isOpen { get; set; }
 
+        internal static void StopSpammers()
+        {
+            if (Active_Spammers.Count != 0)
+            {
+                foreach (var item in Active_Spammers)
+                {
+                    item.InvokeOnLoop = false;
+                    item.Cleanup();
+                }
+            }
+            Active_Spammers.Clear();
+        }
         internal override void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
             {
                 DestroyGeneratedButtons();
             }
-
             isGenerating = false;
+            StopSpammers();
         }
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
@@ -55,7 +99,6 @@
                 ModConsole.DebugLog(msg);
             }
         }
-
         private static void Regenerate()
         {
             if (!HasGenerated)
@@ -80,7 +123,6 @@
                                     CurrentUnboxBehaviourToConsole.setAction(() => { action.UnboxUdonEventToConsole(); });
                                     CurrentUnboxBehaviourToConsole.SetActive(true);
                                 }
-
                                 if (DisassembleUdonBehaviourProgram != null)
                                 {
                                     DisassembleUdonBehaviourProgram.SetButtonText($"Disassemble  {action.gameObject.name} Program");
@@ -99,7 +141,6 @@
                                     CurrentUnboxBehaviourToConsole.setAction(() => { });
                                     CurrentUnboxBehaviourToConsole.SetActive(false);
                                 }
-
                                 if (DisassembleUdonBehaviourProgram != null)
                                 {
                                     DisassembleUdonBehaviourProgram.SetButtonText($"Unavailable");
@@ -109,17 +150,10 @@
                                 }
 
                             });
-                            var listener = action.gameObject.AddComponent<ScrollMenuListener>();
-                            if (listener != null)
-                            {
-                                listener.NestedGridButton = udon;
-                                Listeners.Add(listener);
-                            }
 
                         }
                     }
                 }
-
                 HasGenerated = true;
                 isGenerating = false;
             }
@@ -129,17 +163,56 @@
         {
             foreach (var subaction in action._eventTable)
             {
-                new QMSingleButton(menu, subaction.Key, () =>
+                var btn = new QMSingleButton(menu, subaction.Key, null, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
+                if (Active_Spammers != null)
                 {
-                    if (subaction.key.StartsWith("_"))
+                    if (Active_Spammers.Count != 0)
                     {
-                        action.SendCustomEvent(subaction.Key);
+                        if (Active_Spammers.FirstOrDefault(x => x.UdonBehaviour.Equals(action) && x.EventKey.Equals(subaction.key)) != null)
+                        {
+                            btn.setTextColorHTML("#FFA500");
+                        }
+                        else
+                        {
+                            btn.SetTextColor(Color.white);
+                        }
+                    }
+                }
+                btn.SetAction(() =>
+                {
+                    if (!SpamSelectedEvent)
+                    {
+                        if (subaction.key.StartsWith("_"))
+                        {
+                            action.SendCustomEvent(subaction.Key);
+                        }
+                        else
+                        {
+                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                        }
                     }
                     else
                     {
-                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                        Generated_Spammer = new UdonBehaviour_Cached(action, subaction.key);
+                        if (!Active_Spammers.Contains(Generated_Spammer))
+                        {
+                            ModConsole.DebugLog($"Spamming Event in {action.name}, {subaction.key}");
+                            PopupUtils.QueHudMessage($"<color=#FFA500>Spamming Udon Event in {action.name}, {subaction.key}</color>");
+                            Active_Spammers.Add(Generated_Spammer);
+                            btn.setTextColorHTML("#FFA500");
+                            Generated_Spammer.InvokeOnLoop = true;
+                            SpamSelectedEvent = false;
+                        }
+                        else
+                        {
+                            Generated_Spammer.Cleanup();
+                            Active_Spammers.Remove(Generated_Spammer);
+                            btn.SetTextColor(Color.white);
+                        }
+
                     }
-                }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
+
+                });
             }
         }
 
@@ -150,11 +223,6 @@
             if (GeneratedPages.Count != 0)
             {
                 foreach (var item in GeneratedPages) item.DestroyMe();
-            }
-
-            if (Listeners.Count != 0)
-            {
-                foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
             }
         }
 
@@ -169,13 +237,11 @@
             {
                 DestroyGeneratedButtons();
             }
-
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
-
             isOpen = false;
 
         }
@@ -196,7 +262,6 @@
                 CurrentUnboxBehaviourToConsole.setAction(() => { });
                 CurrentUnboxBehaviourToConsole.SetActive(false);
             }
-
             if (DisassembleUdonBehaviourProgram != null)
             {
                 DisassembleUdonBehaviourProgram.SetButtonText($"Unavailable");
@@ -233,6 +298,10 @@
             }, "Refresh and force menu to regenerate");
             CurrentUnboxBehaviourToConsole = new QMWingSingleButton(WingMenu, "Unbox null", () => { }, "Attempts to unbox null in console..");
             DisassembleUdonBehaviourProgram = new QMWingSingleButton(WingMenu, "Disassemble null Program", () => { }, "Attempts to Disassemble null Program to file..");
+            SpamUdonBehaviourEvent = new QMWingToggleButton(WingMenu, "Spam Udon Behaviour Event", () => { SpamSelectedEvent = true; }, () => { SpamSelectedEvent = false; }, "Repeatedly Invokes selected event.");
+            new QMWingSingleButton(WingMenu, "Stop Generated Udon Event Spammer..", () => { Generated_Spammer.InvokeOnLoop = false; }, "Halt The Current Generated Udon spammer!");
+            new QMWingSingleButton(WingMenu, "Stop All Generated Udon Event Spammer..", () => { StopSpammers(); }, "Halt The Current Generated Udon spammer!");
+
             DisassembleUdonBehaviourProgram.SetActive(false);
             CurrentUnboxBehaviourToConsole.SetActive(false);
             WingMenu.SetActive(false);
@@ -240,6 +309,7 @@
 
         private static QMWingSingleButton CurrentUnboxBehaviourToConsole;
         private static QMWingSingleButton DisassembleUdonBehaviourProgram;
+        private static QMWingToggleButton SpamUdonBehaviourEvent;
 
     }
 }

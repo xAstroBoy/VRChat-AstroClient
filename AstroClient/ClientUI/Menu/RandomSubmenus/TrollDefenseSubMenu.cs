@@ -19,7 +19,7 @@
         internal static void InitButtons(QMGridTab tab)
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Anti-Troll Section", "Use This only if you are attacked by Game Trolls");
-            TeleportCrashCoordRektbtn = new QMToggleButton(sub, "Crash Sit Troll", () => { SerializerTroll = true;}, () => { SerializerTroll = false;}, "Use in case a troll is sitting on you.");
+            TeleportCrashCoordRektbtn = new QMToggleButton(sub, "Crash Sit Troll", () => { SerializerTroll = true; }, () => { SerializerTroll = false; }, "Use in case a troll is sitting on you.");
 
         }
         internal static void RejoinInstance()
@@ -30,7 +30,6 @@
 
         private static QMToggleButton TeleportCrashCoordRektbtn { get; set; }
         private static QMToggleButton CrashSitTrollRejoinInstanceBtn { get; set; }
-
 
         private static bool _SerializerTrollRejoinInstanceOption;
 
@@ -46,7 +45,6 @@
                 }
             }
         }
-
 
         private static bool _SerializerTroll;
 
@@ -68,7 +66,7 @@
                     {
                         var originalcoords = player.transform.position;
                         // Teleport To a crashing coordinate (To make the troll crash)
-                        player.transform.position = Vector3.negativeInfinity;
+                        player.transform.position = Vector3.positiveInfinity;
                         MovementSerializer.SerializerActivated = true;
                         // Then Fast Teleport back where you are.
                         player.transform.position = originalcoords;

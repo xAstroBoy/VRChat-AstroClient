@@ -98,6 +98,10 @@
             Object.Destroy(NestedPart.FindObject("Panel_Info"));
             Object.Destroy(NestedPart.FindObject("Button_PhotosFolder"));
             //UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
+            foreach (var item in ButtonsMenu.transform.Get_Childs())
+            {
+                item.DestroyMeLocal(true);
+            }
 
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;
@@ -223,7 +227,7 @@
             mainButton.DestroyMe();
             backButton.DestroyMeLocal(true);
             ButtonsMenu.DestroyMeLocal(true);
-           // page.DestroyMeLocal(true);
+            // page.DestroyMeLocal(true);
         }
     }
 }

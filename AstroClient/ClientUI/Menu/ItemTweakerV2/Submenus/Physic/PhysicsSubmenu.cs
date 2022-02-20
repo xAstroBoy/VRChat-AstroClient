@@ -18,7 +18,7 @@
             GravityToggler = new QMToggleButton(main, "Use Gravity", () => { Modified_SetGravity(true); }, "No Gravity", () => { Modified_SetGravity(false); }, "Toggle Object Gravity");
             KinematicToggler = new QMToggleButton(main, "Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(true); }, "Not Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(false); }, "Toggle Object Kinematic");
             PublicEditsToggler = new QMToggleButton(main, "Public", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isPublic(true); }, "Local", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isPublic(false); }, "Switch between only self Edits or Everyone (WIP) (Gravity/Kinematic)");
-            SmartKinematicToggler = new QMToggleButton(main,"Smart Kinematic Toggler", () => { SmartKinematicEnabled = true; }, () => { SmartKinematicEnabled = false; }, "Toggle Smart Kinematic Toggler (Check if Object won't fall throught before toggling kinematic with gravity !)");
+            SmartKinematicToggler = new QMToggleButton(main, "Smart Kinematic Toggler", () => { SmartKinematicEnabled = true; }, () => { SmartKinematicEnabled = false; }, "Toggle Smart Kinematic Toggler (Check if Object won't fall throught before toggling kinematic with gravity !)");
             CollisionsToggler = new QMToggleButton(main, "Use Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(true); }, "No Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(false); }, "Toggle Object Collisions");
             ConstraintsSubmenu.Init_ConstraintsSubmenu(main);
             new QMSingleButton(main, "Restore Rigidbody", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_RestoreOriginalBody(); }, "Restore Default RigidBody Config.");
@@ -28,7 +28,7 @@
             ForcesSubmenu.Init_ForceSubMenu(main, 4, 0, true);
         }
 
-        private static void Modified_SetGravity(bool useGravity)
+        internal static void Modified_SetGravity(bool useGravity)
         {
             var item = Tweaker_Object.GetGameObjectToEdit();
             if (item != null)

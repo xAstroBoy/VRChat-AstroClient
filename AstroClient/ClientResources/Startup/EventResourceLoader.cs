@@ -5,6 +5,7 @@
     using System.Drawing;
     using System.Reflection;
     using System.Threading.Tasks;
+    using ClientUI.LoadingScreen.Prefabs;
     using Il2CppSystem.Collections;
     using Loaders;
     using MelonLoader;
@@ -13,11 +14,13 @@
 
     internal class EventResourceLoader : AstroEvents
     {
-        internal override void OnApplicationStart()
+
+        internal override void StartPreloadResources()
         {
             LoadClassResources(typeof(Bundles));
             LoadClassResources(typeof(Materials));
             LoadClassResources(typeof(Prefabs));
+            LoadClassResources(typeof(LoadScreenPrefabs));
             LoadClassResources(typeof(Icons));
         }
 

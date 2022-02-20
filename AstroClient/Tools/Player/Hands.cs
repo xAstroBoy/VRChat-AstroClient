@@ -34,7 +34,7 @@
             }
         }
 
-        internal static GameObject GetHoldTransform()
+        internal static GameObject GetHeldPickup()
         {
             if (GameInstances.LocalPlayer.GetPlayer().GetVRCPlayerApi() != null)
             {

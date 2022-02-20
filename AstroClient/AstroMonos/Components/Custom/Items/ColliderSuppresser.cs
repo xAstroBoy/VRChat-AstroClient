@@ -6,6 +6,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
     using ClientAttributes;
     using ClientResources.Loaders;
     using Il2CppSystem.Collections.Generic;
+    using Spawnables.ColliderSuppresserCube;
     using Spawnables.Enderpearl;
     using Tools;
     using UnhollowerBaseLib.Attributes;
@@ -120,8 +121,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         private void OnCollisionEnter(Collision collision)
         {
             if (!Activated) return;
-            if (collision.transform.name.Contains("VRCPlayer")) return;
             if (collision == null) return;
+            if (collision.transform.name.Contains("VRCPlayer")) return;
+            if (collision.transform.root.name.Contains("VRCPlayer")) return;
             if (collision.collider == null) return;
             if (!ColliderSuppresserSphere.DeactivateCollision(collision.transform)) return;
             ModConsole.DebugLog($"Deactivated Collider {collision.transform.gameObject.name} from blocking Player collision!");

@@ -1,44 +1,55 @@
 namespace AstroClient.Spawnables.Flashlight
 {
+    using System;
     using System.Collections.Generic;
     using AstroMonos.Components.Custom.Items;
     using ClientResources.Loaders;
     using Tools.Extensions;
     using Tools.Holders;
+    using Tools.Player;
     using UnityEngine;
+    using VRC.SDK.Internal.Tutorial;
+    using xAstroBoy;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
+    using Object = UnityEngine.Object;
 
     internal class Astro_Flashlight : AstroEvents
     {
         internal override void OnRoomLeft()
         {
             DestroyAllFlashLights();
+            CurrentLightTemplate = null;
         }
 
         internal static void DestroyAllFlashLights()
         {
             flashlights.DestroyAndClearList();
         }
+        internal static Light CurrentLightTemplate { get; set; }
 
         internal static bool isGoldenFlashlight { get; set; } = false;
-
+        internal static bool UseExistingLightAsTemplate { get; set; } = false;
         internal static void SpawnFlashlight()
         {
             GameObject flashlight = null;
+            Transform LightChild = null;
             if (isGoldenFlashlight)
             {
                 flashlight = Object.Instantiate(Prefabs.Flashlight_gold);
+                flashlight.name = "Gold Flashlight (AstroClient)";
+                LightChild = flashlight.transform.FindObject("YellowLight");
             }
             else
             {
                 flashlight = Object.Instantiate(Prefabs.Flashlight_normal);
+                flashlight.name = "Black Flashlight (AstroClient)";
+                LightChild = flashlight.transform.FindObject("WhiteLight");
             }
 
             if (flashlight != null)
             {
                 flashlight.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
-                flashlight.name = "Flashlight (AstroClient)";
                 var collider = flashlight.AddComponent<MeshCollider>();
                 if (collider != null)
                 {
@@ -52,6 +63,9 @@ namespace AstroClient.Spawnables.Flashlight
                     rigidbody.isKinematic = true;
 
                 }
+                flashlight.IgnoreLocalPlayerCollision();
+                flashlight.transform.position = GameInstances.CurrentUser.transform.position + new Vector3(0f, 1f, 0f);
+                flashlights.AddGameObject(flashlight);
 
                 var pickup = flashlight.AddComponent<VRCSDK2.VRC_Pickup>();
                 if (pickup != null)
@@ -60,98 +74,92 @@ namespace AstroClient.Spawnables.Flashlight
                     pickup.pickupable = true;
                 }
 
-                var FlashLight_Light = flashlight.GetGetInChildrens_OrAddComponent<Light>();
-                if (FlashLight_Light != null)
-                {
-                    FlashLight_Light.color = Color.white;
-                    FlashLight_Light.type = LightType.Spot;
-                    FlashLight_Light.range = 1000f;
-                    if (FlashLight_Light.cookie != null)
-                    {
-                        FlashLight_Light.cookie.DestroyMeLocal();
-                        FlashLight_Light.cookie = null;
-                        FlashLight_Light.cookieSize = 0;
-                    }
-                    //FlashLight_Light.attenuate = false;
-                }
                 var behaviour = flashlight.AddComponent<FlashlightBehaviour>();
                 if (behaviour != null)
                 {
                     behaviour.FlashLight_Base = flashlight;
-                    behaviour.FlashLight_Light = FlashLight_Light;
+                    behaviour.FlashLight_Light = CreateAndSetLight(LightChild); ;
                     behaviour.InitiateLight();
+                }
+
+            }
+
+        }
+        private static Light CreateAndSetLight(Transform LightObject)
+        {
+            ModConsole.DebugLog($"Current Light Holder is : {LightObject.name}");
+            if (LightObject == null) return null;
+            Light Result = LightObject.GetComponent<Light>();
+            if (Result != null)
+            {
+                ModConsole.DebugLog("Setting Flashlight Light Settings ");
+
+                if (CurrentLightTemplate != null)
+                {
+
+                    // before copying let's backup the prefab Properties!
+                    ModConsole.DebugLog("Backupping SpotAngle.");
+                    var spotAngle = Result.spotAngle;
+                    ModConsole.DebugLog("Backupping innerSpotAngle.");
+                    var innerSpotAngle = Result.innerSpotAngle;
+
+                    Result.CopyFromLight(CurrentLightTemplate);
+
+                    ModConsole.DebugLog("Restoring Prefab Spot Angle Settings.");
+                    Result.innerSpotAngle = innerSpotAngle;
+                    ModConsole.DebugLog($"Restoring innerSpotAngle: {Result.spotAngle}.");
+                    Result.spotAngle = spotAngle;
+                    ModConsole.DebugLog($"Restoring spotAngle : {Result.spotAngle}.");
 
                 }
 
-                flashlight.IgnoreLocalPlayerCollision();
-                flashlight.transform.position = GameInstances.CurrentUser.transform.position + new Vector3(0f, 1f, 0f);
-                flashlights.AddGameObject(flashlight);
+                if (CurrentLightTemplate == null)
+                {
+                    Result.intensity = 1;
+                }
+
+                Result.useColorTemperature = false;
+                Result.shadows = LightShadows.None;
+                Result.color = Color.white;
+                Result.type = LightType.Spot;
+                Result.range = 1000f;
+                //Result.attenuate = false;
+                if (Result.cookie != null)
+                {
+                    Result.cookie.DestroyMeLocal();
+                    Result.cookie = null;
+                    Result.cookieSize = 0;
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Result is empty!");
+            }
+            return Result;
+        }
+
+        internal static void GetLightTemplate()
+        {
+            ModConsole.DebugLog("Finding Pickup...");
+            var pickup = PlayerHands.GetHeldPickup();
+            if (pickup != null)
+            {
+                ModConsole.DebugLog($"Found Held Pickup : {pickup.name}, Getting Light template...");
+
+                var light = pickup.GetComponentInChildren<Light>(); // Get the active Light.
+                if (light != null)
+                {
+                    ModConsole.DebugLog("Found a template light!");
+                    PopupUtils.QueHudMessage($"<color=#FFA500>Using Light from {pickup.name} as template!</color>");
+                    CurrentLightTemplate = light;
+                }
 
             }
-            //GameObject FlashLight_Body = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-
-            //FlashLight_Body.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
-            //FlashLight_Body.name = "Flashlight (AstroClient)";
-            //FlashLight_Body.GetComponent<Renderer>().material = Materials.metal_gold_001;
-            //FlashLight_Body.GetComponent<Collider>().DestroyMeLocal();
-
-            //FlashLight_Body.AddComponent<BoxCollider>().isTrigger = true;
-
-            //FlashLight_Body.transform.localScale = new Vector3(0.05f, 0.125f, 0.05f);
-            //FlashLight_Body.transform.position = GameInstances.CurrentUser.transform.position + new Vector3(0f, 1f, 0f);
-
-            //var body = FlashLight_Body.AddComponent<Rigidbody>();
-            //if (body != null)
-            //{
-            //    body.useGravity = false;
-            //    body.isKinematic = true;
-            //}
-            //var pickup = FlashLight_Body.AddComponent<VRCSDK2.VRC_Pickup>();
-            //if (pickup != null)
-            //{
-            //    pickup.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
-            //    pickup.pickupable = true;
-            //}
-
-            //GameObject FlashLight_Base = new GameObject("Base");
-            //if (FlashLight_Base != null)
-            //{
-            //    FlashLight_Base.transform.SetParent(FlashLight_Body.transform);
-            //    FlashLight_Base.transform.localPosition = Vector3.zero;
-            //    FlashLight_Base.transform.Rotate(90f, 0f, 0f);
-            //    FlashLight_Base.GetComponent<Collider>().DestroyMeLocal();
-            //}
-
-            //GameObject FlashLight_Head = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            //FlashLight_Head.name = "Head";
-            //FlashLight_Head.GetComponent<Renderer>().material = Materials.metal_gold_001;
-            //FlashLight_Head.transform.SetParent(FlashLight_Body.transform);
-            //FlashLight_Head.transform.localPosition = new Vector3(0f, -0.75f, 0f);
-            //FlashLight_Head.transform.localScale = new Vector3(1.5f, 0.25f, 1.5f);
-            //FlashLight_Head.GetComponent<Collider>().DestroyMeLocal();
-            //FlashLight_Body.transform.Rotate(90f, 0f, 0f);
-
-            //var FlashLight_Light = FlashLight_Head.AddComponent<Light>();
-            //if (FlashLight_Light != null)
-            //{
-            //    FlashLight_Light.color = Color.white;
-            //    FlashLight_Light.type = LightType.Spot;
-            //    FlashLight_Light.range = 1000f;
-            //    FlashLight_Light.attenuate = false;
-            //    FlashLight_Light.shadows = LightShadows.None;
-            //}
-
-            //var behaviour = FlashLight_Body.AddComponent<FlashlightBehaviour>();
-            //if (behaviour != null)
-            //{
-            //    behaviour.FlashLight_Base = FlashLight_Base;
-            //    behaviour.FlashLight_Head = FlashLight_Head;
-            //    behaviour.FlashLight_Body = FlashLight_Body;
-            //    behaviour.FlashLight_Light = FlashLight_Light;
-            //    behaviour.InitiateLight();
-            //}
-
-            //FlashLight_Body.IgnoreLocalPlayerCollision();
+        }
+        internal static void ClearTemplate()
+        {
+            CurrentLightTemplate = null;
+            PopupUtils.QueHudMessage($"<color=#FFA500>Cleared Light Template!</color>");
         }
 
         private static List<GameObject> flashlights = new List<GameObject>();

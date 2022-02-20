@@ -56,6 +56,12 @@
 
         public override void OnApplicationStart()
         {
+            MelonCoroutines.Start(InitializeClient());
+        }
+
+        private IEnumerator InitializeClient()
+        {
+
             LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
             ModConsole.Initialize("AstroClient");
             WriteBanner();
@@ -70,11 +76,12 @@
             stopwatch.Start();
 
             Bools.IsDeveloper = true;
-            InitializeOverridables();
+            MelonCoroutines.Start(InitializeOverridables());
             DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
             DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
             DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
 
+            yield return null;
         }
 
         public override void OnUpdate()
@@ -130,7 +137,7 @@
             }
         }
 
-        internal static void InitializeOverridables()
+        private IEnumerator InitializeOverridables()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -154,6 +161,16 @@
                         {
                             ModConsole.ErrorExc(e);
                         }
+
+                        try
+                        {
+                            component.StartPreloadResources(); // NEEDED TO PRELOAD RESOURCES BEFORE CLIENT INITIATES
+                        }
+                        catch (System.Exception e)
+                        {
+                            ModConsole.ErrorExc(e);
+                        }
+
                         try
                         {
                             component.OnApplicationStart();
@@ -175,6 +192,7 @@
 
             stopwatch.Stop();
             ModConsole.DebugLog($"Initialized {GameEvents.Count} GameEvents: Took {stopwatch.ElapsedMilliseconds}ms");
+            yield return null;
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)

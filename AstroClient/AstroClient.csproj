@@ -119,14 +119,15 @@
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnEnterWorldEventArgs.cs" />
+    <Compile Include="ClientEvents\AstroEventArgs\OnRawAudioEventArgs.cs" />
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
     <Compile Include="ClientResources\Loaders\Prefabs.cs" />
     <Compile Include="ClientResources\Startup\EventResourceLoader.cs" />
     <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="ClientUI\ActionMenu\ItemTweakerModule.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
-    <Compile Include="ClientUI\ActionMenu\TrollDefenseModule.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoadingScreenAssets.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoginScreenAssets.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="ClientUI\Menu\RandomSubmenus\TrollDefenseSubMenu.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_LoadingScreen.cs" />
     <Compile Include="ClientUI\Menu\SettingsMenu\Settings_PickupProtector.cs" />
+    <Compile Include="CustomClasses\KeypadBruteforcer.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\InstanceHistoryMenu.cs" />
@@ -326,12 +328,15 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_WaveEditor.cs" />
     <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealer.cs" />
+    <Compile Include="ModsDetector\NotoriousPatcher.cs" />
     <Compile Include="Spawnables\ColliderSuppresserCube\TweakerSphere.cs" />
     <Compile Include="Spawnables\ColliderSuppresserCube\ColliderSuppresserSphere.cs" />
     <Compile Include="Startup\Fixes\DashboardFix.cs" />
     <Compile Include="Startup\Hooks\PlayerJoinAndLeaveHook.cs" />
+    <Compile Include="Startup\Hooks\USpeakHook.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SoftCloneHook.cs" />
+    <Compile Include="Startup\Hooks\RiskyFunctionHook.cs" />
     <Compile Include="Streamer\WorldAuthorDetector.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />
     <Compile Include="Tools\Extensions\Components_exts\BouncerExtensions.cs" />
@@ -1463,6 +1468,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientResources\ImageArchive\EnderPearl.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\LiveCaptions.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

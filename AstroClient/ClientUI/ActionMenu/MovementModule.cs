@@ -2,6 +2,7 @@ namespace AstroClient.ClientUI.ActionMenu
 {
     using System.Drawing;
     using Gompoc.ActionMenuAPI.Api;
+    using Menu.RandomSubmenus;
     using Spawnables.Enderpearl;
     using Tools.Player.Movement.Exploit;
 
@@ -13,6 +14,7 @@ namespace AstroClient.ClientUI.ActionMenu
             {
                 // TODO: Add Textures!
                 CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
+                CustomSubMenu.AddToggle("Crash Sit Troll", TrollDefenseSubMenu.SerializerTroll, ToggleValue => { TrollDefenseSubMenu.SerializerTroll = ToggleValue; }, null, false);
                 CustomSubMenu.AddButton("Spawn EnderPearl", () => { AstroEnderPearl.SpawnEnderPearl(); }, null, false);
                 CustomSubMenu.AddSubMenu("Enderpearl skins", () =>
                 {

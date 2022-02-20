@@ -27,7 +27,6 @@
         {
             var menu = new QMNestedGridMenu(MenuAPI_New.QA_SelectedUser_Remote, 1, 0, "AstroClient User Options", "AstroClient User Options", Color.white, true);
             new QMSingleButton(MenuAPI_New.QA_SelectedUser_Remote, 2, 0, "Local Clone", () => { SoftCloneHook.LocalCloneAvatarPlayer(QuickMenuUtils.SelectedPlayer.GetAPIUser()); }, "Force Clone This Player's Avatar");
-
             PickupProtector.InitButtons(menu);
             OrbitUserMenu.InitButtons(menu);
             AttackerUserMenu.InitButtons(menu);

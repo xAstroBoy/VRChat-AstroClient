@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using AstroMonos.AstroUdons;
     using CustomClasses;
     using MelonLoader;
     using Tools.Extensions;
@@ -10,6 +11,7 @@
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+    using xAstroBoy.Utility;
 
     internal class BeyondDarkness : AstroEvents
     {
@@ -175,6 +177,26 @@
 
             }
 
+            if (Scene_Battle != null)
+            {
+                var gun = Scene_Battle.FindObject("Props/BattlePistol");
+                if (gun != null)
+                {
+                    OnBulletPickup = UdonSearch.FindUdonEvent(gun, "BattlePistol", "OnBulletPickup");
+                    if (OnBulletPickup != null)
+                    {
+                        var pickupsystem = gun.AddComponent<VRC_AstroPickup>();
+                        if (pickupsystem != null)
+                        {
+                            pickupsystem.OnPickupUseDown += () =>
+                            {
+                                OnBulletPickup?.InvokeBehaviour();
+                            };
+                            pickupsystem.InteractionText = "Force Reload & Shoot";
+                        }
+                    }
+                }
+            }
         }
 
         private static Transform _CurrentWorldRoot;
@@ -225,12 +247,27 @@
                 return _Scene_Room;
             }
         }
+        private static Transform _Scene_Battle;
+        internal static Transform Scene_Battle
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (CurrentWorldRoot == null) return null;
+                if (_Scene_Battle == null)
+                {
+                    return _Scene_Battle = CurrentWorldRoot.FindObject("Scene_Battle");
+                }
+
+                return _Scene_Battle;
+            }
+        }
 
         internal static List<UdonBehaviour_Cached> Bed_interact { get; set; } = new List<UdonBehaviour_Cached>();
         internal static List<UdonBehaviour_Cached> Mirror_interact { get; set; } = new List<UdonBehaviour_Cached>();
         internal static List<UdonBehaviour_Cached> Laptop_interact { get; set; } = new List<UdonBehaviour_Cached>();
         internal static List<UdonBehaviour_Cached> Door_interact { get; set; } = new List<UdonBehaviour_Cached>();
-
+        internal static UdonBehaviour_Cached OnBulletPickup { get; set; }
         internal static bool isCurrentWorld = false;
     }
 }

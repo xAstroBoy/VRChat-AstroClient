@@ -213,6 +213,51 @@
             }
         }
 
+        internal static void CopyFromLight(this Light NewLight, Light OriginalLight)
+        {
+            if (NewLight == null) return;
+            if (OriginalLight == null) return;
+            NewLight.type = OriginalLight.type;
+            NewLight.shape = OriginalLight.shape;
+            NewLight.spotAngle = OriginalLight.spotAngle;
+            NewLight.innerSpotAngle = OriginalLight.innerSpotAngle;
+            NewLight.color = OriginalLight.color;
+            NewLight.colorTemperature = OriginalLight.colorTemperature;
+            NewLight.useColorTemperature = OriginalLight.useColorTemperature;
+            NewLight.intensity = OriginalLight.intensity;
+            NewLight.bounceIntensity = OriginalLight.bounceIntensity;
+            NewLight.useBoundingSphereOverride = OriginalLight.useBoundingSphereOverride;
+            NewLight.boundingSphereOverride = OriginalLight.boundingSphereOverride;
+            NewLight.shadowCustomResolution = OriginalLight.shadowCustomResolution;
+            NewLight.shadowBias = OriginalLight.shadowBias;
+            NewLight.shadowNormalBias = OriginalLight.shadowNormalBias;
+            NewLight.shadowNearPlane = OriginalLight.shadowNearPlane;
+            NewLight.useShadowMatrixOverride = OriginalLight.useShadowMatrixOverride;
+            NewLight.shadowMatrixOverride = OriginalLight.shadowMatrixOverride;
+            NewLight.range = OriginalLight.range;
+            NewLight.flare = OriginalLight.flare;
+            NewLight.bakingOutput = OriginalLight.bakingOutput;
+            NewLight.cullingMask = OriginalLight.cullingMask;
+            NewLight.renderingLayerMask = OriginalLight.renderingLayerMask;
+            NewLight.lightShadowCasterMode = OriginalLight.lightShadowCasterMode;
+            NewLight.shadows = OriginalLight.shadows;
+            NewLight.shadowStrength = OriginalLight.shadowStrength;
+            NewLight.shadowResolution = OriginalLight.shadowResolution;
+            NewLight.shadowSoftness = OriginalLight.shadowSoftness;
+            NewLight.shadowSoftnessFade = OriginalLight.shadowSoftnessFade;
+            NewLight.layerShadowCullDistances = OriginalLight.layerShadowCullDistances;
+            NewLight.cookieSize = OriginalLight.cookieSize;
+            NewLight.cookie = OriginalLight.cookie;
+            NewLight.renderMode = OriginalLight.renderMode;
+            NewLight.bakedIndex = OriginalLight.bakedIndex;
+            NewLight.shadowConstantBias = OriginalLight.shadowConstantBias;
+            NewLight.shadowObjectSizeBias = OriginalLight.shadowObjectSizeBias;
+            NewLight.attenuate = OriginalLight.attenuate;
+            NewLight.m_BakedIndex = OriginalLight.m_BakedIndex;
+            ModConsole.DebugLog($"Copied all Properties in {NewLight.name} from {OriginalLight.name}");
+
+        }
+
         internal static void DestroyMeLocal(this Object obj, bool Silent = false)
         {
             if (obj != null)

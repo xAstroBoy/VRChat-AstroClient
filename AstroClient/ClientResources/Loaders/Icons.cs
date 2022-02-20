@@ -891,5 +891,48 @@
         }
 
         #endregion unlocked.png
+
+        #region LiveCaptions.png
+
+        private static Texture2D _LiveCaptions;
+        private static Sprite _LiveCaptions_sprite;
+
+        /// <summary>
+        ///     Loads LiveCaptions.png in resources as Texture2D
+        /// </summary>
+        internal static Texture2D LiveCaptions
+        {
+            get
+            {
+                if (_LiveCaptions == null)
+                {
+                    _LiveCaptions = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}LiveCaptions.png"));
+                    _LiveCaptions.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _LiveCaptions;
+                }
+
+                return _LiveCaptions;
+            }
+        }
+
+        /// <summary>
+        ///     Loads LiveCaptions.png in resources as sprite
+        /// </summary>
+        internal static Sprite LiveCaptions_sprite
+        {
+            get
+            {
+                if (_LiveCaptions_sprite == null)
+                {
+                    _LiveCaptions_sprite = LiveCaptions.ToSprite(true);
+                    return _LiveCaptions_sprite;
+                }
+
+                return _LiveCaptions_sprite;
+            }
+        }
+
+        #endregion LiveCaptions.png
+
     }
 }

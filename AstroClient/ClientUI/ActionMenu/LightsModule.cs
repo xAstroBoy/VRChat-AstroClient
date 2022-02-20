@@ -14,9 +14,13 @@ namespace AstroClient.ClientUI.ActionMenu
             AMUtils.AddToModsFolder("Lights Option", () =>
             {
                 // TODO: Add Textures!
+                CustomSubMenu.AddButton("Clear Light source template", () => { Astro_Flashlight.ClearTemplate(); }, null, false);
+                CustomSubMenu.AddButton("Get Light source template", () => { Astro_Flashlight.GetLightTemplate(); }, null, false);
+
                 CustomSubMenu.AddToggle("Toggle Fullbright (RenderSettings)", LightControlMenu.FullbrightByRender, ToggleValue => { LightControlMenu.FullbrightByRender = ToggleValue; }, null, false);
                 CustomSubMenu.AddToggle("Toggle RenderSettings Fog", RenderSettings.fog, ToggleValue => { LightControlMenu.ToggleFog(ToggleValue); }, null, false);
                 CustomSubMenu.AddToggle("Toggle Fullbright (Head)", LightControlMenu.IsHeadLightActive, ToggleValue => { LightControlMenu.IsHeadLightActive = ToggleValue; }, null, false);
+
                 CustomSubMenu.AddButton("Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, null, false);
                 CustomSubMenu.AddToggle("Flashlight Golden Skin", Astro_Flashlight.isGoldenFlashlight, ToggleValue => { Astro_Flashlight.isGoldenFlashlight = ToggleValue; }, null, false);
                 CustomSubMenu.AddButton("Destroy Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, null, false);

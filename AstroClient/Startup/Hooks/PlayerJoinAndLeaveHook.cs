@@ -14,7 +14,6 @@
 
         internal static EventHandler<PlayerEventArgs> Event_OnPlayerLeft;
 
-
         internal override void VRChat_OnUiManagerInit()
         {
             var field0 = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_0;

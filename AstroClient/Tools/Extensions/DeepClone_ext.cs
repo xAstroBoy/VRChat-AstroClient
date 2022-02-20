@@ -25,7 +25,13 @@
             if (comp == null) return null;
             if (other.GetType() == null) return null;
             Type type = comp.GetType();
-            if (type != other.GetType()) return null; // type mis-match
+
+            if (type != other.GetType())
+            {
+                ModConsole.DebugError("Type Mis-match");
+                return null; // type mis-match
+            }
+
             DebugGetCopyOf("GetCopyOf 1");
             List<Type> derivedTypes = new List<Type>();
             Type derived = type.BaseType;

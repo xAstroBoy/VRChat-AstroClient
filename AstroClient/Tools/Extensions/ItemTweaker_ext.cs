@@ -40,7 +40,7 @@
         {
             if (obj != null)
             {
-                return obj.Equals(Tweaker_Object.CurrentObjectToEdit);
+                return obj.Equals(Tweaker_Selector.SelectedObject);
             }
             return false;
         }
@@ -49,7 +49,7 @@
         {
             if (obj != null)
             {
-                return obj.gameObject.Equals(Tweaker_Object.CurrentObjectToEdit);
+                return obj.gameObject.Equals(Tweaker_Selector.SelectedObject);
             }
             return false;
         }

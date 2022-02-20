@@ -53,9 +53,15 @@
         private bool _InvokeOnLoop { get; set; }
         private object InvokeOnLoopObject { get; set; }
 
+        /// <summary>
+        /// Generate By providing a UdonBehaviour and a working EventKey
+        /// </summary>
+
         internal UdonBehaviour_Cached(UdonBehaviour udonBehaviour, string eventKey)
         {
             UdonBehaviour = udonBehaviour;
+
+            // TODO: Make a EventKey Verifier (Default is on, but Make it disable the verify if is being added from UdonSearch class)
             EventKey = eventKey;
         }
 
@@ -86,9 +92,10 @@
         }
 
         /// <summary>
-        /// Cleans and halts any Coroutine running.
+        /// Cleans and halts any Coroutine running
+        /// This will Nullify Everything as well!
         /// </summary>
-        private void Cleanup()
+        internal void Cleanup()
         {
             if (InvokeOnLoop) InvokeOnLoop = false;
             if (InvokeOnLoopObject != null)
@@ -125,7 +132,7 @@
                 _InvokeOnLoop = value;
                 if (value)
                 {
-                    StopRepeatingBehaviourInvoking();
+                    Stop_RepeatInvokeBehaviour();
                     if (InvokeOnLoopObject == null)
                     {
                         InvokeOnLoopObject = MelonCoroutines.Start(InvokeOnLoopRoutine());
@@ -137,6 +144,8 @@
                     {
                         MelonCoroutines.Stop(InvokeOnLoopObject);
                     }
+
+                    InvokeOnLoopObject = null;
                 }
             }
         }
@@ -166,11 +175,26 @@
                 Cleanup();
             }
         }
+
         /// <summary>
-        /// Halts RepeatInvokeBehaviour.
+        /// Halts InvokeOnLoop Routine.
         /// </summary>
 
-        internal void StopRepeatingBehaviourInvoking()
+        internal void Stop_InvokeOnLoopRoutine()
+        {
+            if (InvokeOnLoopObject != null)
+            {
+                MelonCoroutines.Stop(InvokeOnLoopObject);
+            }
+
+            InvokeOnLoopObject = null;
+        }
+
+        /// <summary>
+        /// Halts RepeatInvokeBehaviour Routine.
+        /// </summary>
+
+        internal void Stop_RepeatInvokeBehaviour()
         {
             if (InvokeBehaviourRepeater != null)
             {
@@ -191,7 +215,7 @@
             {
                 return InvokeBehaviourRepeater = MelonCoroutines.Start(RepeatInvokeBehaviourRoutine(amount));
             }
-            return null;
+            return InvokeBehaviourRepeater;
         }
 
         private IEnumerator InvokeOnLoopRoutine()

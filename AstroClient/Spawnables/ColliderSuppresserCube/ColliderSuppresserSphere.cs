@@ -1,7 +1,7 @@
-namespace AstroClient.Spawnables.Enderpearl
+namespace AstroClient.Spawnables.ColliderSuppresserCube
 {
-    using AstroMonos.Components.Custom.Items;
     using System.Collections.Generic;
+    using AstroMonos.Components.Custom.Items;
     using Tools.Extensions;
     using Tools.Holders;
     using UnityEngine;

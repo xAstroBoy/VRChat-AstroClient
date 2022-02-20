@@ -56,6 +56,7 @@
 
         internal override void OnPlayerJoined(Player player)
         {
+            if (blockeduserids.Count == 0) return;
             var id = player.GetAPIUser().GetUserID();
             if (id != null)
             {
@@ -72,6 +73,7 @@
 
         internal override void OnPlayerLeft(Player player)
         {
+            if (blockeduserids.Count == 0) return;
             var id = player.GetAPIUser().GetUserID();
             if (id != null)
             {
@@ -89,6 +91,7 @@
 
         internal static BlockedUsersFromPickups GetBlockedUser(string UserID)
         {
+            if (blockeduserids.Count == 0) return null;
             if (blockeduserids.Count != 0)
             {
                 foreach (var entry in blockeduserids)

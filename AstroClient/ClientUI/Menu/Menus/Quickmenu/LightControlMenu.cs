@@ -10,6 +10,7 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.UIPaths;
+    using xAstroBoy.Utility;
     using static Constants.CustomLists;
     using static Constants.GlobalLists;
 
@@ -294,6 +295,40 @@
         }
 
         private static bool _isHeadLightActive;
+        private static Light CreateAndSetLight()
+        {
+            if (PlayerCameraEditor.PlayerCamera == null) return null;
+
+            Light Result = PlayerCameraEditor.PlayerCamera.GetOrAddComponent<Light>();
+            if (Result != null)
+            {
+
+                if (Astro_Flashlight.CurrentLightTemplate != null)
+                {
+                    Result.CopyFromLight(Astro_Flashlight.CurrentLightTemplate);
+                }
+
+                Result.enabled = true;
+                Result.shadows = LightShadows.None;
+                Result.type = LightType.Spot;
+                if (Astro_Flashlight.CurrentLightTemplate == null)
+                {
+                    Result.intensity = 1f;
+                }
+                Result.range = 999f;
+                Result.spotAngle = float.MaxValue;
+                Result.color = Color.white;
+                Result.attenuate = false;
+                if (Result.cookie != null)
+                {
+                    Result.cookie.DestroyMeLocal();
+                    Result.cookie = null;
+                    Result.cookieSize = 0;
+                }
+            }
+
+            return Result;
+        }
 
         internal static bool IsHeadLightActive
         {
@@ -313,21 +348,9 @@
                     {
                         if (FullBrightLight == null)
                         {
-                            if (FullBrightLight == null)
-                            {
-                                FullBrightLight = PlayerCameraEditor.PlayerCamera.gameObject.AddComponent<Light>();
-                            }
+                            FullBrightLight = CreateAndSetLight();
                         }
 
-                        FullBrightLight.enabled = true;
-                        FullBrightLight.shadows = LightShadows.None;
-                        FullBrightLight.type = LightType.Spot;
-                        FullBrightLight.intensity = 1f;
-                        FullBrightLight.range = 999f;
-                        FullBrightLight.spotAngle = float.MaxValue;
-                        FullBrightLight.color = Color.white;
-                        FullBrightLight.attenuate = false;
-                        FullBrightLight.renderMode = LightRenderMode.ForcePixel;
                         ModConsole.DebugLog("Fullbright Enabled!");
                     }
                     else
@@ -383,12 +406,14 @@
         {
             var temp = new QMNestedGridMenu(menu, "Light Menu", "Control Avatar & World Lights!");
 
-            ToggleFullbright = new QMToggleButton(temp, 0, 0, "Player Headlight", () => { IsHeadLightActive = true; }, "Player Headlight", () => { IsHeadLightActive = false; }, "Spawns a Light in Player Camera (makes the entire map visible)", Color.green, Color.red);
-            RenderFullbrightToggle = new QMToggleButton(temp, 0, 0, "Render Fullbright", () => { FullbrightByRender = true; }, "Render Fullbright", () => { FullbrightByRender = false; }, "Attempts to edit RenderSettings to show the entire map (WIP)", Color.green, Color.red);
-            FogSwitch = new QMToggleButton(temp, 0, 0, "Fog", () => { ToggleFog(true); }, "Fog", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog", Color.green, Color.red);
+            ToggleFullbright = new QMToggleButton(temp, "Player Headlight", () => { IsHeadLightActive = true; }, "Player Headlight", () => { IsHeadLightActive = false; }, "Spawns a Light in Player Camera (makes the entire map visible)", Color.green, Color.red);
+            RenderFullbrightToggle = new QMToggleButton(temp, "Render Fullbright", () => { FullbrightByRender = true; }, "Render Fullbright", () => { FullbrightByRender = false; }, "Attempts to edit RenderSettings to show the entire map (WIP)", Color.green, Color.red);
+            FogSwitch = new QMToggleButton(temp, "Fog", () => { ToggleFog(true); }, "Fog", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog", Color.green, Color.red);
 
-            _ = new QMSingleButton(temp, 2, 0, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight", null, null, true);
-            _ = new QMSingleButton(temp, 2, 0.5f, "Destroy Spawned Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, "Kill Spawned Flashlights", null, null, true);
+            _ = new QMSingleButton(temp, "Clear Light source template", () => { Astro_Flashlight.ClearTemplate(); }, "Remove Captured Light Template !");
+            _ = new QMSingleButton(temp, "Get Light source template", () => { Astro_Flashlight.GetLightTemplate(); }, "Get Light Template from a held pickup (Useful in certain worlds with flashlights!) , use in case the Client flashlight doesn't shine enought !");
+            _ = new QMSingleButton(temp, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight, it uses a existing light template if registered!.");
+            _ = new QMSingleButton(temp, "Destroy Spawned Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, "Kill Spawned Flashlights");
 
             // TODO : make it less laggy and able to toggle em on/off without breaking itself.
             //ToggleLightmaps = new QMSingleToggleButton(temp, 1, 1f, "Baked Lightings: ON", () => { ToggleLightMaps(true); }, "Baked Lightings: OFF", () => { ToggleLightMaps(false); }, "Tries to toggle on/off LightMaps but is broken and buggy.", Color.green, Color.red, null, false, true);

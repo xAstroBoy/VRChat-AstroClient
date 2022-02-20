@@ -36,7 +36,7 @@
             {
                 if (!LockItem)
                 {
-                    var item = PlayerHands.GetHoldTransform();
+                    var item = PlayerHands.GetHeldPickup();
                     if (item != null)
                     {
                         Tweaker_Selector.SelectedObject = item;
@@ -76,20 +76,5 @@
             }
         }
 
-        internal static GameObject CurrentObjectToEdit
-        {
-            get
-            {
-                return Tweaker_Selector.SelectedObject;
-            }
-        }
-
-        internal static string GetObjectToEditName
-        {
-            get
-            {
-                return Tweaker_Selector.SelectedObject.name;
-            }
-        }
     }
 }

@@ -42,20 +42,12 @@ namespace AstroClient.xAstroBoy.Utility
         {
             //ModConsole.Log($"[HudMessage] {message}");
             if (!WorldUtils.IsInWorld) return;
-            var manager = GameInstances.VRCUiManager;
-            if (true)
+            if (HudMessage1 == null)
             {
-                if (HudMessage1 == null)
-                {
-                    HudMessage1 = CreateTextNear(CreateImage("yes", 100f), 110f, TextAnchor.LowerCenter);
-                    HudMessage1.supportRichText = true;
-                }
-                MelonCoroutines.Start(ShowMessage(HudMessage1, MessagesList, message));
+                HudMessage1 = CreateTextNear(CreateImage("yes", 100f), 110f, TextAnchor.LowerCenter);
+                HudMessage1.supportRichText = true;
             }
-            else
-            {
-                manager.field_Private_List_1_String_0.Add(message);
-            }
+            MelonCoroutines.Start(ShowMessage(HudMessage1, MessagesList, message));
         }
 
         public static void ClearHudMessages(this VRCUiManager instance)

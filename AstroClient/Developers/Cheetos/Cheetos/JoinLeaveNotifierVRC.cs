@@ -1,13 +1,11 @@
-﻿namespace AstroClient.Streamer
+﻿namespace AstroClient.Cheetos
 {
-    using Constants;
-    using VRC;
-    using xAstroBoy.Utility;
     using System.Collections.Generic;
-    using Config;
-    using xAstroBoy.Utility;
     using System.Text;
+    using Streamer;
+    using VRC;
     using VRC.Core;
+    using xAstroBoy.Utility;
     using ConfigManager = Config.ConfigManager;
 
     internal class JoinLeaveNotifierVRC : AstroEvents

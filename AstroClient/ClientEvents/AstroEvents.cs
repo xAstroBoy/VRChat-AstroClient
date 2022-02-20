@@ -80,6 +80,8 @@
             InputPatches.Event_OnInput_UseRight += Internal_OnInput_UseRight;
             InputPatches.Event_OnInput_GrabLeft += Internal_OnInput_GrabLeft;
             InputPatches.Event_OnInput_GrabRight += Internal_OnInput_GrabRight;
+
+            USpeakHook.Event_OnRawAudio += Internal_OnRawAudio;
         }
 
         private void Internal_OnShowScreen(object sender, ScreenEventArgs e)
@@ -294,7 +296,19 @@
         {
             OnUiPageToggled(e.Page, e.Toggle, e.TransitionType);
         }
+        private void Internal_OnRawAudio(object sender, OnRawAudioEventArgs e)
+        {
+            OnRawAudio(e.player, e.RawAudio, e.sample_rate);
+        }
+        internal virtual void OnRawAudio(VRCPlayer player, float[] RawAudio, int sample_rate)
+        {
 
+        }
+
+        internal virtual void StartPreloadResources()
+        {
+
+        }
         internal virtual void onUserInfoMenuOpen()
         {
         }

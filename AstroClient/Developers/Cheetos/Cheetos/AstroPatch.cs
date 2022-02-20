@@ -3,22 +3,24 @@
     #region Imports
 
     using System;
+    using System.Drawing;
     using System.Reflection;
     using System.Text;
     using Constants;
     using HarmonyLib;
+    using MelonLoader;
 
     #endregion Imports
 
     internal class AstroPatch
     {
-        private Type type;
 
+        private Type type { get; set; }
         private string PatchIdentifier { get; } = "AstroPatch";
         internal MethodInfo TargetMethod_MethodInfo { get; set; }
 
         internal MethodBase TargetMethod_MethodBase { get; set; }
-
+        internal string HarmonyInstanceID { get; set; }
         internal HarmonyMethod Prefix { get; set; }
         internal HarmonyMethod PostFix { get; set; }
         internal HarmonyMethod Transpiler { get; set; }
@@ -26,12 +28,13 @@
 
         internal HarmonyMethod IlManipulator { get; set; }
         internal Harmony Instance { get; set; }
-        private static bool HasThrownException { get; set; } = false;
-        private static bool ShowErrorOnConsole { get; set; } = true;
+        private bool HasThrownException { get; set; } = false;
+        private bool ShowErrorOnConsole { get; set; } = true;
+        private bool isActivePatch { get; set; } = false;
+        private bool isMethodInfoPatch { get; set; } = false;
 
         internal string TargetPath_MethodInfo => $"{TargetMethod_MethodInfo?.DeclaringType?.FullName}.{TargetMethod_MethodInfo?.Name}";
         internal string TargetPath_base => $"{TargetMethod_MethodInfo?.DeclaringType?.FullName}.{TargetMethod_MethodBase.Name}";
-
         internal string PatchType
         {
             get
@@ -39,7 +42,7 @@
                 StringBuilder patchtype = new StringBuilder();
                 if (PostFix != null)
                 {
-                    string patch = $"PostFix Patch : {PostFix.method?.DeclaringType?.FullName}.{PostFix.method?.Name}";
+                    string patch = $"PostFix Patch : {PostFix.method?.DeclaringType?.FullName}.{PostFix.method?.Name} ";
                     if (patchtype.Length != 0)
                     {
                         patchtype.AppendLine(patch);
@@ -52,7 +55,7 @@
 
                 if (Prefix != null)
                 {
-                    string patch = $"Prefix Patch : {Prefix.method?.DeclaringType?.FullName}.{Prefix.method?.Name}";
+                    string patch = $"Prefix Patch : {Prefix.method?.DeclaringType?.FullName}.{Prefix.method?.Name} ";
                     if (patchtype.Length != 0)
                     {
                         patchtype.AppendLine(patch);
@@ -65,7 +68,7 @@
 
                 if (Transpiler != null)
                 {
-                    string patch = $"Transpiler Patch : {Transpiler.method?.DeclaringType?.FullName}.{Transpiler.method?.Name}";
+                    string patch = $"Transpiler Patch : {Transpiler.method?.DeclaringType?.FullName}.{Transpiler.method?.Name} ";
                     if (patchtype.Length != 0)
                     {
                         patchtype.AppendLine(patch);
@@ -78,7 +81,7 @@
 
                 if (Finalizer != null)
                 {
-                    string patch = $"Finalizer Patch : {Finalizer.method?.DeclaringType?.FullName}.{Finalizer.method?.Name}";
+                    string patch = $"Finalizer Patch : {Finalizer.method?.DeclaringType?.FullName}.{Finalizer.method?.Name} ";
                     if (patchtype.Length != 0)
                     {
                         patchtype.AppendLine(patch);
@@ -91,7 +94,7 @@
 
                 if (IlManipulator != null)
                 {
-                    string patch = $"IlManipulator Patch : {IlManipulator.method?.DeclaringType?.FullName}.{IlManipulator.method?.Name}";
+                    string patch = $"IlManipulator Patch : {IlManipulator.method?.DeclaringType?.FullName}.{IlManipulator.method?.Name} ";
                     if (patchtype.Length != 0)
                     {
                         patchtype.AppendLine(patch);
@@ -206,9 +209,11 @@
             this.Transpiler = Transpiler;
             this.Finalizer = Finalizer;
             this.IlManipulator = ILmanipulator;
-            ShowErrorOnConsole = showErrorOnConsole;
-            Instance = new Harmony($"{PatchIdentifier}: {TargetPath_MethodInfo}, {PatchType}");
-            DoPatch_info(this);
+            this.ShowErrorOnConsole = showErrorOnConsole;
+            this.HarmonyInstanceID = $"{PatchIdentifier}: {TargetPath_MethodInfo}, {PatchType}";
+            this.isMethodInfoPatch = true;
+            this.Instance = new Harmony(HarmonyInstanceID);
+            this.DoPatch_info(this);
         }
 
         internal AstroPatch(MethodBase TargetMethod, HarmonyMethod Prefix = null, HarmonyMethod PostFix = null, HarmonyMethod Transpiler = null, HarmonyMethod Finalizer = null, HarmonyMethod ILmanipulator = null, bool showErrorOnConsole = true)
@@ -306,12 +311,14 @@
             this.Transpiler = Transpiler;
             this.Finalizer = Finalizer;
             this.IlManipulator = ILmanipulator;
-            ShowErrorOnConsole = showErrorOnConsole;
-            this.Instance = new Harmony($"{PatchIdentifier}: {TargetPath_base}, {PatchType}");
+            this.ShowErrorOnConsole = showErrorOnConsole;
+            this.HarmonyInstanceID = $"{PatchIdentifier}: {TargetPath_MethodInfo}, {PatchType}";
+            this.isMethodInfoPatch = false;
+            this.Instance = new Harmony(HarmonyInstanceID);
             DoPatch_base(this);
         }
 
-        private static void DoPatch_info(AstroPatch patch)
+        private void DoPatch_info(AstroPatch patch)
         {
             try
             {
@@ -329,6 +336,7 @@
             {
                 if (!HasThrownException)
                 {
+                    isActivePatch = true;
                     if (Bools.IsDeveloper)
                     {
                         ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
@@ -340,6 +348,7 @@
                 }
                 else
                 {
+                    isActivePatch = false;
                     if (Bools.IsDeveloper)
                     {
                         ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
@@ -351,7 +360,7 @@
                 }
             }
         }
-        private static void DoPatch_base(AstroPatch patch)
+        private void DoPatch_base(AstroPatch patch)
         {
             try
             {
@@ -369,9 +378,10 @@
             {
                 if (!HasThrownException)
                 {
+                    isActivePatch = true;
                     if (Bools.IsDeveloper)
                     {
-                        ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodBase} | with {patch.PatchType}");
+                        ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_base} | with {patch.PatchType}");
                     }
                     else
                     {
@@ -380,14 +390,64 @@
                 }
                 else
                 {
+                    isActivePatch = false;
                     if (Bools.IsDeveloper)
                     {
-                        ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodBase} | with {patch.PatchType}");
+                        ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_base} | with {patch.PatchType}");
                     }
                     else
                     {
                         ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodBase?.Name}");
                     }
+
+                }
+            }
+        }
+
+        internal void Unpatch()
+        {
+            if (isActivePatch)
+            {
+                Instance.UnpatchSelf();
+                if (!isMethodInfoPatch)
+                {
+                    if (Bools.IsDeveloper)
+                    {
+                        ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_base} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodBase?.Name}", Color.OrangeRed);
+                    }
+                }
+                else
+                {
+                    if (Bools.IsDeveloper)
+                    {
+                        ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_MethodInfo} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodInfo?.Name}", Color.OrangeRed);
+                    }
+
+                }
+                isActivePatch = false;
+            }
+
+        }
+
+        internal void Patch()
+        {
+            if (!isActivePatch)
+            {
+                if (isMethodInfoPatch)
+                {
+                    DoPatch_info(this);
+                }
+                else
+                {
+                    DoPatch_base(this);
                 }
             }
         }

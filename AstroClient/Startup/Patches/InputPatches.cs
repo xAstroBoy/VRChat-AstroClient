@@ -9,14 +9,13 @@
     using Harmony;
     using Tools.Extensions;
     using Tools.Input;
+    using UnityEngine.Events;
 
     #endregion Imports
-
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class InputPatches : AstroEvents
     {
-
 
         internal static EventHandler<VRCInputArgs> Event_OnInput_Jump { get; set; }
         internal static EventHandler<VRCInputArgs> Event_OnInput_UseLeft { get; set; }
@@ -29,7 +28,6 @@
         {
             return new HarmonyMethod(typeof(InputPatches).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
-
 
         internal override void ExecutePriorityPatches()
         {
@@ -49,7 +47,6 @@
 
         private void InitPatch()
         {
-
 
             //new AstroPatch(typeof(VRCInput).GetMethod(nameof(VRCInput.Method_Public_Boolean_0)), null, GetPatch(nameof(MovementListener)));
             //new AstroPatch(typeof(VRCInput).GetMethod(nameof(VRCInput.Method_Public_Boolean_1)), null, GetPatch(nameof(MovementListener)));
@@ -100,7 +97,7 @@
 
                 case InputTypes.GrabLeft:
                     {
-                        Event_OnInput_GrabLeft.SafetyRaise(new VRCInputArgs(__instance.isClicked(), __instance.isDown(), __instance.isUp()));  
+                        Event_OnInput_GrabLeft.SafetyRaise(new VRCInputArgs(__instance.isClicked(), __instance.isDown(), __instance.isUp()));
                         EnableListener = true;
                         break;
                     }
@@ -119,7 +116,6 @@
 
         }
 
-
         private static void InputListener_two(VRCInput __instance, float __0)
         {
             try
@@ -137,7 +133,6 @@
                 ModConsole.ErrorExc(ex);
             }
         }
-
 
         private static void ConvertToString(VRCInput input)
         {
@@ -172,10 +167,7 @@
 
         }
 
-
         private static bool isDumping = false;
-
-
 
     }
 }

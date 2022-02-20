@@ -19,7 +19,7 @@
 
             if (!File.Exists(ConfigManager.AstroInstances))
             {
-                File.WriteAllText(ConfigManager.AstroInstances, "[]");
+                File.Create(ConfigManager.AstroInstances);
                 ModConsole.DebugLog("AstroInstances.json not found. Creating new one...");
             }
             else
@@ -27,9 +27,7 @@
                 string text = File.ReadAllText(ConfigManager.AstroInstances);
                 if (string.IsNullOrWhiteSpace(text))
                 {
-                    File.WriteAllText(ConfigManager.AstroInstances, "[]");
-                    text = "[]";
-                    ModConsole.DebugLog("AstroInstances.json is empty. Creating new one...");
+                    return;
                 }
 
                 try
@@ -46,18 +44,20 @@
                 }
             }
 
-            ModConsole.DebugLog("Instances Loaded!");
+            ModConsole.DebugLog($"{instances.Count} Instances Loaded!");
         }
-
 
         internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
+            if (world == null) return;
+            if (instance == null) return;
+
             var item = new WorldInstance(world.name, world.id, instance.instanceId);
             instances.Insert(0, item);
-            var JsonConverted = JsonConvert.SerializeObject(item, Formatting.Indented);
-            File.AppendAllText(ConfigManager.AstroInstances, JsonConverted);
-        }
 
+            var JsonConverted = JsonConvert.SerializeObject(instances, Formatting.Indented);
+            File.WriteAllText(ConfigManager.AstroInstances, JsonConverted);
+        }
 
         internal struct WorldInstance
         {

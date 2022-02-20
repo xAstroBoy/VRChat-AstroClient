@@ -15,15 +15,10 @@ namespace AstroClient.AstroMonos.Components.Tools
             AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
-        {
-            Destroy(this);
-        }
 
         private void Start()
         {
             gameObject.SetActive(false);
-            InvokeRepeating(nameof(CustomUpdate), 0.1f, 0.3f);
         }
 
         private void OnEnable()
@@ -31,9 +26,5 @@ namespace AstroClient.AstroMonos.Components.Tools
             gameObject.SetActive(false);
         }
 
-        private void CustomUpdate()
-        {
-            if (gameObject != null && !gameObject.active) gameObject.SetActive(false);
-        }
     }
 }

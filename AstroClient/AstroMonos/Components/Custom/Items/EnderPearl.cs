@@ -103,6 +103,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         {
             if (Held) return;
             if (collision.transform.name.Contains("VRCPlayer")) return;
+            if (collision.transform.root.name.Contains("VRCPlayer")) return;
             foreach (var contact in collision.contacts)
             {
                 ModConsole.DebugLog(contact.point.ToString() + "Point To Teleport To");
