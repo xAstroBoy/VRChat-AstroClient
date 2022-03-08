@@ -2,13 +2,12 @@
 /* Note: While loading a 400KiB string isn't really a    */
 /*       problem, trying to render that to a texture is. */
 
-namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu {
-    internal static class ZipBombExtend {
-        internal static string Truncate(this string value, int max_length) {
-            if (!string.IsNullOrEmpty(value) && value.Length > max_length)
-                return value.Substring(0, max_length) + "…";
-            return value;
-        }
+namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
+{
+    using xAstroBoy.Extensions;
+
+    internal static class ZipBombExtend
+    {
 
         internal static string TrucatedName(this VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters.Parameter param)
             => param.name.Truncate(32);

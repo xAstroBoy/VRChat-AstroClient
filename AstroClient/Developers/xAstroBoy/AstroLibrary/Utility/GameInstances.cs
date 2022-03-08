@@ -6,7 +6,7 @@ namespace AstroClient.xAstroBoy.Utility
     using VRC;
     using VRC.SDKBase;
     using VRC.UserCamera;
-    using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
+    using PhotonHandler = Photon.Pun.PhotonHandler;
 
     public static class GameInstances
     {
@@ -20,11 +20,9 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static Photon.Realtime.LoadBalancingClient LoadBalancingPeer => PhotonHandler.prop_LoadBalancingClient_0;
 
-        public static PhotonHandler PhotonHandler => PhotonHandler.field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0;
+        public static PhotonHandler PhotonHandler => PhotonHandler.field_Internal_Static_PhotonHandler_0;
 
         public static NotificationManager NotificationManager => NotificationManager.field_Private_Static_NotificationManager_0;
-
-        public static VRCWebSocketsManager VRCWebSocketsManager => VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0;
 
         public static PlayerManager PlayerManager => PlayerManager.field_Private_Static_PlayerManager_0;
 

@@ -24,45 +24,31 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
         internal override void OnApplicationStart()
         {
             /* Hook into setter for parameter properties */
+            /* Hook into setter for parameter properties */
             unsafe
             {
-                var param_prop_bool_set = (IntPtr)typeof(AvatarParameter)
-                    .GetField("NativeMethodInfoPtr_Method_Public_set_Void_Boolean_0",
-                        BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
-                MelonUtils.NativeHookAttach(param_prop_bool_set,
-                    new Action<IntPtr, bool>(Parameters.BoolPropertySetter).Method.MethodHandle.GetFunctionPointer());
-                Parameters._boolPropertySetterDelegate =
-                    Marshal.GetDelegateForFunctionPointer<Parameters.BoolPropertySetterDelegate>(
-                        *(IntPtr*)(void*)param_prop_bool_set);
+                var param_prop_bool_set = (IntPtr)typeof(AvatarParameter).GetField("NativeMethodInfoPtr_Method_Public_Virtual_Final_New_set_Void_Boolean_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                MelonUtils.NativeHookAttach(param_prop_bool_set, new Action<IntPtr, bool>(Parameters.BoolPropertySetter).Method.MethodHandle.GetFunctionPointer());
+                Parameters._boolPropertySetterDelegate = Marshal.GetDelegateForFunctionPointer<Parameters.BoolPropertySetterDelegate>(*(IntPtr*)(void*)param_prop_bool_set);
 
-                var param_prop_int_set = (IntPtr)typeof(AvatarParameter)
-                    .GetField("NativeMethodInfoPtr_Method_Public_set_Void_Int32_0",
-                        BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
-                MelonUtils.NativeHookAttach(param_prop_int_set,
-                    new Action<IntPtr, int>(Parameters.IntPropertySetter).Method.MethodHandle.GetFunctionPointer());
-                Parameters._intPropertySetterDelegate =
-                    Marshal.GetDelegateForFunctionPointer<Parameters.IntPropertySetterDelegate>(
-                        *(IntPtr*)(void*)param_prop_int_set);
+                var param_prop_int_set = (IntPtr)typeof(AvatarParameter).GetField("NativeMethodInfoPtr_Method_Public_Virtual_Final_New_set_Void_Int32_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                MelonUtils.NativeHookAttach(param_prop_int_set, new Action<IntPtr, int>(Parameters.IntPropertySetter).Method.MethodHandle.GetFunctionPointer());
+                Parameters._intPropertySetterDelegate = Marshal.GetDelegateForFunctionPointer<Parameters.IntPropertySetterDelegate>(*(IntPtr*)(void*)param_prop_int_set);
 
-                var param_prop_float_set = (IntPtr)typeof(AvatarParameter)
-                    .GetField("NativeMethodInfoPtr_Method_Public_set_Void_Single_0",
-                        BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
-                MelonUtils.NativeHookAttach(param_prop_float_set,
-                    new Action<IntPtr, float>(Parameters.FloatPropertySetter).Method.MethodHandle.GetFunctionPointer());
-                Parameters._floatPropertySetterDelegate =
-                    Marshal.GetDelegateForFunctionPointer<Parameters.FloatPropertySetterDelegate>(
-                        *(IntPtr*)(void*)param_prop_float_set);
+                var param_prop_float_set = (IntPtr)typeof(AvatarParameter).GetField("NativeMethodInfoPtr_Method_Public_Virtual_Final_New_set_Void_Single_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                MelonUtils.NativeHookAttach(param_prop_float_set, new Action<IntPtr, float>(Parameters.FloatPropertySetter).Method.MethodHandle.GetFunctionPointer());
+                Parameters._floatPropertySetterDelegate = Marshal.GetDelegateForFunctionPointer<Parameters.FloatPropertySetterDelegate>(*(IntPtr*)(void*)param_prop_float_set);
             }
 
-            AMUtils.AddToModsFolder("Avatar Toggles", () =>
+            AMUtils.AddToModsFolder("Players Avatars Toggles", () =>
             {
                 /* Filter inactive avatar objects */
                 s_PlayerList = s_PlayerList.Where(o => o.Value).ToDictionary(o => o.Key, o => o.Value);
 
                 /* Order by physical distance to camera */
                 var query = from player in s_PlayerList
-                    orderby Vector3.Distance(player.Value.transform.position, Camera.main.transform.position)
-                    select player;
+                            orderby Vector3.Distance(player.Value.transform.position, Camera.main.transform.position)
+                            select player;
 
                 /* Only allow a max of 10 players there at once */
                 /* TODO: Consider adding multiple pages */
@@ -92,8 +78,8 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                         var filtered = Parameters.FilterDefaultParameters(parameters);
                         var avatar_descriptor = manager.prop_VRCAvatarDescriptor_0;
 
-                        CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked), (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); }, Icons.locked);
-                        CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager), Icons.save);
+                        CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked), (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); }, icon: ClientResources.Loaders.Icons.locked);
+                        CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager), icon: ClientResources.Loaders.Icons.save);
 
                         AvatarParameter FindParameter(string name)
                         {
@@ -113,7 +99,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                                 CustomSubMenu.AddFourAxisPuppet(
                                     control.TruncatedName(),
                                     callback,
-                                    control.icon ?? default_expression,
+                                    icon: control.icon ?? default_expression,
                                     topButtonText: control.labels[0]?.TruncatedName() ?? "Up",
                                     rightButtonText: control.labels[1]?.TruncatedName() ?? "Right",
                                     downButtonText: control.labels[2]?.TruncatedName() ?? "Down",
@@ -121,6 +107,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                             }
 
                             foreach (var control in expressions_menu.controls)
+                            {
                                 try
                                 {
                                     switch (control.type)
@@ -130,84 +117,73 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                                         /*       that set on press and revert on release.   */
                                         /* TODO: Add proper implementation.                 */
                                         case VRCExpressionsMenu.Control.ControlType.Toggle:
-                                        {
-                                            var param = FindParameter(control.parameter.name);
-                                            var current_value = param.GetValue();
-                                            var default_value = avatar_descriptor.expressionParameters
-                                                .FindParameter(control.parameter.name)?.defaultValue ?? 0f;
-                                            var target_value = control.value;
-
-                                            void SetIntFloat(bool state)
                                             {
-                                                param.SetValue(state ? target_value : default_value);
-                                            }
+                                                var param = FindParameter(control.parameter.name);
+                                                var current_value = param.GetValue();
+                                                var default_value = avatar_descriptor.expressionParameters.FindParameter(control.parameter.name)?.defaultValue ?? 0f;
+                                                var target_value = control.value;
+                                                void SetIntFloat(bool state) => param.SetValue(state ? target_value : default_value);
+                                                void SetBool(bool state) => param.SetValue(state ? 1f : 0f);
 
-                                            void SetBool(bool state)
-                                            {
-                                                param.SetValue(state ? 1f : 0f);
+                                                CustomSubMenu.AddToggle(
+                                                    control.TruncatedName(),
+                                                    current_value == target_value,
+                                                    param.prop_ParameterType_0 == AvatarParameter.ParameterType.Bool ? SetBool : SetIntFloat,
+                                                    icon: control.icon ?? default_expression);
+                                                break;
                                             }
-
-                                            CustomSubMenu.AddToggle(
-                                                control.TruncatedName(),
-                                                current_value == target_value,
-                                                param.prop_ParameterType_0 == AvatarParameter.ParameterType.Bool ? SetBool : SetIntFloat,
-                                                icon: control.icon ?? default_expression);
-                                            break;
-                                        }
 
                                         case VRCExpressionsMenu.Control.ControlType.SubMenu:
-                                        {
-                                            CustomSubMenu.AddSubMenu(control.TruncatedName(),
-                                                () => ExpressionSubmenu(control.subMenu),
-                                                control.icon ?? default_expression);
-                                            break;
-                                        }
+                                            {
+                                                CustomSubMenu.AddSubMenu(control.TruncatedName(), () => ExpressionSubmenu(control.subMenu), icon: control.icon ?? default_expression);
+                                                break;
+                                            }
 
                                         case VRCExpressionsMenu.Control.ControlType.TwoAxisPuppet:
-                                        {
-                                            var horizontal = FindParameter(control.subParameters[0]?.name);
-                                            var vertical = FindParameter(control.subParameters[1]?.name);
-                                            FourAxisControl(control, (value) =>
                                             {
-                                                horizontal.SetFloatProperty(value.x);
-                                                vertical.SetFloatProperty(value.y);
-                                            });
-                                            break;
-                                        }
+                                                var horizontal = FindParameter(control.subParameters[0]?.name);
+                                                var vertical = FindParameter(control.subParameters[1]?.name);
+                                                FourAxisControl(control, (value) =>
+                                                {
+                                                    horizontal.SetFloatProperty(value.x);
+                                                    vertical.SetFloatProperty(value.y);
+                                                });
+                                                break;
+                                            }
 
                                         case VRCExpressionsMenu.Control.ControlType.FourAxisPuppet:
-                                        {
-                                            var up = FindParameter(control.subParameters[0]?.name);
-                                            var down = FindParameter(control.subParameters[1]?.name);
-                                            var left = FindParameter(control.subParameters[2]?.name);
-                                            var right = FindParameter(control.subParameters[3]?.name);
-                                            FourAxisControl(control, (value) =>
                                             {
-                                                up.SetFloatProperty(Math.Max(0, value.y));
-                                                down.SetFloatProperty(-Math.Min(0, value.y));
-                                                left.SetFloatProperty(Math.Max(0, value.x));
-                                                right.SetFloatProperty(-Math.Min(0, value.x));
-                                            });
-                                            break;
-                                        }
+                                                var up = FindParameter(control.subParameters[0]?.name);
+                                                var down = FindParameter(control.subParameters[1]?.name);
+                                                var left = FindParameter(control.subParameters[2]?.name);
+                                                var right = FindParameter(control.subParameters[3]?.name);
+                                                FourAxisControl(control, (value) =>
+                                                {
+                                                    up.SetFloatProperty(Math.Max(0, value.y));
+                                                    down.SetFloatProperty(-Math.Min(0, value.y));
+                                                    left.SetFloatProperty(Math.Max(0, value.x));
+                                                    right.SetFloatProperty(-Math.Min(0, value.x));
+                                                });
+                                                break;
+                                            }
 
                                         case VRCExpressionsMenu.Control.ControlType.RadialPuppet:
-                                        {
-                                            var param = FindParameter(control.subParameters[0]?.name);
-                                            CustomSubMenu.AddRestrictedRadialPuppet(control.TruncatedName(),
-                                                param.SetValue, param.GetValue(), control.icon ?? default_expression);
-                                            break;
-                                        }
+                                            {
+                                                var param = FindParameter(control.subParameters[0]?.name);
+                                                CustomSubMenu.AddRestrictedRadialPuppet(control.TruncatedName(), param.SetValue, startingValue: param.GetValue(), icon: control.icon ?? default_expression);
+                                                break;
+                                            }
                                     }
                                 }
                                 catch (Exception e)
                                 {
-                                    ModConsole.ErrorExc(e);
+                                    MelonLogger.Error(e.StackTrace);
                                 }
+                            }
                         }
 
                         ExpressionSubmenu(avatar_descriptor.expressionsMenu);
-                    }, user_icon);
+                    }, icon: user_icon);
 
                     if (--remaining_count == 0)
                         break;
@@ -229,32 +205,32 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             s_Portraits = null;
         }
 
-
-        private GameObject PreviewCaptureCamera => ParametersEditorResources.AstroPreviewCamera;
-
         internal override void OnAvatarSpawn(Player player, GameObject Avatar, VRCAvatarManager VRCAvatarManager,
             VRC_AvatarDescriptor descriptor)
         {
-            var player_name = Avatar.transform.root.GetComponentInChildren<VRCPlayer>().prop_String_1;
+            var manager = player._vrcplayer.prop_VRCAvatarManager_0;
+            var player_name = player._vrcplayer.prop_String_1;
+            if (player_name == null) return;
             s_PlayerList[player_name] = Avatar;
-            Parameters.ApplyParameters(VRCAvatarManager);
+
+            Parameters.ApplyParameters(manager);
+
             var avatar_id = Avatar.GetComponent<VRC.Core.PipelineManager>().blueprintId;
-            var destroy_listener = Avatar.AddComponent<GameObjectListener>();
-            var parameters = VRCAvatarManager.GetAvatarParameters().ToArray();
+
+            var destroy_listener = Avatar.AddComponent<AstroMonos.Components.Tools.Listeners.GameObjectListener>();
+            var parameters = manager.GetAvatarParameters().ToArray();
             destroy_listener.OnDestroyed += () =>
             {
                 /* Unlock expression parameters */
                 foreach (var parameter in parameters) parameter.Unlock();
 
                 /* Decrement ref count on avatar portrait */
-                if (s_Portraits.ContainsKey(avatar_id))
-                    if (s_Portraits[avatar_id].Decrement())
-                        s_Portraits.Remove(avatar_id);
+                if (s_Portraits.ContainsKey(avatar_id)) if (s_Portraits[avatar_id].Decrement()) s_Portraits.Remove(avatar_id);
             };
 
             /* Take preview image for action menu */
             /* Note: in this state, everyone should be t-posing and your own head is still there */
-            if (VRCAvatarManager.HasCustomExpressions())
+            if (manager.HasCustomExpressions())
             {
                 if (s_Portraits.ContainsKey(avatar_id))
                 {
@@ -263,25 +239,40 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                 else
                 {
                     /* Enable camera */
-                    PreviewCaptureCamera.SetActive(true);
+                    ParametersEditorResources.AstroPreviewCamera.SetActive(true);
 
                     /* Move camera infront of head */
                     var head_height = descriptor.ViewPosition.y;
                     var head = Avatar.transform.position + new Vector3(0, head_height, 0);
                     var target = head + Avatar.transform.forward * 0.3f;
-                    var camera = PreviewCaptureCamera.GetComponent<Camera>();
+                    var camera = ParametersEditorResources.AstroPreviewCamera.GetComponent<Camera>();
                     camera.transform.position = target;
                     camera.transform.LookAt(head);
                     camera.cullingMask = 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("PlayerLocal");
                     camera.orthographicSize = head_height / 8;
-                    var image = camera.ToTexture2D($"AstroPortrait {avatar_id}");
+
+                    /* Set render target */
+                    var currentRT = RenderTexture.active;
+                    RenderTexture.active = camera.targetTexture;
+
+                    /* Render the camera's view */
+                    camera.Render();
+
+                    /* Make a new texture and read the active Render Texture into it */
+                    var image = new Texture2D(camera.targetTexture.width, camera.targetTexture.height, TextureFormat.RGBA32, false, true);
+                    image.name = $"{avatar_id} portrait";
+                    image.ReadPixels(new Rect(0, 0, camera.targetTexture.width, camera.targetTexture.height), 0, 0);
+                    image.Apply();
                     image.hideFlags = HideFlags.DontUnloadUnusedAsset;
+
+                    /* Replace the original active Render Texture */
+                    RenderTexture.active = currentRT;
 
                     /* Store image */
                     s_Portraits.Add(avatar_id, new RefCountedObject<Texture2D>(image));
 
                     /* Disable camera again */
-                    PreviewCaptureCamera.SetActive(false);
+                    ParametersEditorResources.AstroPreviewCamera.SetActive(false);
                 }
             }
         }

@@ -6,7 +6,7 @@
     using Tools;
     using UnityEngine;
     using VRC.UI.Elements;
-    using CameraMenu = MonoBehaviour1PublicBuToBuGaBuGaBuGaBuGaUnique;
+    using CameraMenu = MonoBehaviour1PublicBuToBuGaTMBuGaBuGaBuUnique;
     using Object = UnityEngine.Object;
 
     internal class QMNestedGridMenu

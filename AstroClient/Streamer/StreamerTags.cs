@@ -27,7 +27,7 @@
                     if (StreamerIdentifier.IsAStreamer(apiuser.id))
                     {
 
-                        player.AddSingleTag(Color.FromArgb(117, 82, 32), "Streamer");
+                        player.AddSingleTag(Color.FromArgb(222, 157, 67), "Streamer");
                         switch (apiuser.id)
                         {
                             case Streamers.StarNovaKitty:
@@ -58,7 +58,7 @@
                                 player.AddSingleTag(Color.FromArgb(255, 202, 66), "Golden Toast Protector!");
                                 break;
                             case Streamers.Ratchet232:
-                                player.AddSingleTag(Color.FromArgb(84, 8, 8), "Psycho And cutie!");
+                                player.AddSingleTag(Color.FromArgb(140, 35, 35), "Psycho And cutie!");
                                 break;
                             case Streamers.Thor_ChanVR:
                                 player.AddSingleTag(Color.FromArgb(194, 138, 17), "VRChat God!");

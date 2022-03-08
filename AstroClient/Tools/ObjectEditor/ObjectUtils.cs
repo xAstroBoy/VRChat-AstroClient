@@ -164,7 +164,7 @@
             if (obj != null)
             {
                 obj.TryTakeOwnership();
-                var control = obj.GetComponent<RigidBodyController>();
+                var control = obj.GetOrAddComponent<RigidBodyController>();
 
                 if (control != null)
                 {
@@ -181,9 +181,17 @@
                 else
                 {
                     var SyncPhysic = obj.GetComponent<SyncPhysics>();
+                    if (SyncPhysic == null)
+                    {
+                        SyncPhysic = obj.GetComponentInChildren<SyncPhysics>(true);
+                    }
                     if (SyncPhysic != null)
                     {
                         SyncPhysic.RespawnItem();
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"");
                     }
                 }
             }

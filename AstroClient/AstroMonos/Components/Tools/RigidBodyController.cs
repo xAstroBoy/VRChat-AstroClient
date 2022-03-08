@@ -23,7 +23,7 @@
         // Use this for initialization
         internal void Start()
         {
-            SyncPhysics = gameObject.GetComponent<SyncPhysics>();
+            SyncPhysics = gameObject.GetGetInChildrens<SyncPhysics> ();
             if (SyncPhysics == null)
             {
                 Rigidbody = gameObject.GetComponent<Rigidbody>();

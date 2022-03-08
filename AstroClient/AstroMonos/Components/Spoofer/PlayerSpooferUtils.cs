@@ -77,7 +77,7 @@
                 {
                     SpoofAsInstanceMaster = false;
                     IsSpooferActive = true;
-                    if (!WorldUtils.IsInWorld)
+                    if (WorldUtils.IsInWorld)
                     {
                         SpoofedName = WorldUtils.AuthorName;
                     }

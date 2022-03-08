@@ -17,7 +17,7 @@
                 if (result != null)
                 {
                     result.name = menuName;
-                    result.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController;
+                    result.field_Protected_MenuStateController_0 = QuickMenuTools.QuickMenuController;
                     result.field_Public_String_0 = menuName;
                     result.field_Private_Boolean_1 = true;
                     result.field_Private_List_1_UIPage_0 = new List<UIPage>();

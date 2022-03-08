@@ -38,7 +38,7 @@
             unsafe
             {
                 ModConsole.DebugLog("Hooking FadeTo");
-                var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_0))).GetValue(null);
+                var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_1))).GetValue(null);
                 MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), GetPointerPatch(nameof(FadeToPatch)));
                 _fadeToDelegate = Marshal.GetDelegateForFunctionPointer<FadeToDelegate>(originalMethod);
                 if (_fadeToDelegate != null)

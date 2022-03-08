@@ -7,10 +7,14 @@
     using Tools.Extensions;
     using System.Collections.Generic;
     using System.Net;
+    using VRC.Core;
+    using xAstroBoy.Utility;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class RiskyFunctionHook : AstroEvents
     {
+        internal static bool IsWorldTagPatched { get; private set; } = false;
+        internal static List<string> OriginalWorldTags { get; private set; } = new List<string>();
 
         private static string AllowedResponse { get; } = "https://raw.githubusercontent.com/xKiraiChan/xKiraiChan/master/allowed.txt";
         internal override void ExecutePriorityPatches()
@@ -23,6 +27,12 @@
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(RiskyFunctionHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+        internal override void OnRoomLeft()
+        {
+            IsWorldTagPatched = false;
+            OriginalWorldTags.Clear();
         }
 
         private static void DownloadStringPatch(ref string __0)
@@ -41,12 +51,6 @@
                 ModConsole.DebugWarning($"A Mod is Checking for Integrity Checks, Redirecting URL : {__0.AbsoluteUri}, to : {AllowedResponse}");
                 __0 = new Uri(AllowedResponse);
             }
-        }
-        // TODO : Download emm trash and check what tags to remove out before world loads (To skip all the checks lmao)
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
-        {
-            // Patch and remove certain tags.
-
         }
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
@@ -72,6 +76,26 @@
             {
                 ModConsole.DebugLog("Found UniversalRiskyFuncDisable, Destroying!");
                 UniversalDisabler.DestroyMeLocal();
+            }
+
+            // Hopefully this works!
+            if (WorldUtils.World != null)
+            {
+                if (WorldUtils.World.tags != null)
+                {
+                    foreach (string text in WorldUtils.World.tags)
+                    {
+                        if (text.ToLower().Contains("game") || text.ToLower().Contains("club"))
+                        {
+                            IsWorldTagPatched = true;
+                            ModConsole.DebugLog($"Removed Tag : {text} in ApiWorld to bypass RiskyFunction Detection");
+                            WorldUtils.World.tags.Remove(text);
+                        }
+
+                        OriginalWorldTags.Add(text);
+                    }
+
+                }
             }
 
         }

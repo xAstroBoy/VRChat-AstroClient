@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Reflection;
     using System.Text;
@@ -17,6 +18,7 @@
     using UnhollowerRuntimeLib;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
+    using Object = Il2CppSystem.Object;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class PhotonOnEventHook : AstroEvents
@@ -24,7 +26,7 @@
 
         internal override void ExecutePriorityPatches()
         {
-            HookPhotonOnEvent();
+            //HookPhotonOnEvent();
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
@@ -78,7 +80,7 @@
             internal const byte Mod_Mute = 8;
             internal const byte Friend_State = 10;
             internal const byte VoteKick = 13;
-            internal const byte Unknown = 20;  // Unknown, seems affecting users on reset
+            internal const byte Unknown = 20; // Unknown, seems affecting users on reset
             internal const byte Block_Or_Mute = 21;
         }
 
@@ -166,13 +168,26 @@
                     return false;
             }
         }
+
+        /// <summary>
+        /// Actions that the hook Needs to do.
+        /// </summary
         private enum HookAction
         {
+            /// <summary>Do Nothing</summary>
             Nothing,
-            Patch, // Flag this if you modify the event. (it will replace the event data)
-            Block, // Flag this if needed to make the event not continue
-            Empty,// Flag this if you want to modify the event with a empty key.
-            Reset, // Flag this if you need to clear the event entirely (might break something!)
+
+            /// <summary>Applies any edit you put in the Reflected HashTable/Dictionary in the current parameterDict</summary>
+            Patch,
+
+            /// <summary>Empties the ParameterDictionary with a empty Dictionary/Hashtable Content (Might break some stuff)</summary>
+            Empty,
+
+            /// <summary>Block the Event completely (Will break some stuff)</summary>
+            Block,
+
+            /// <summary>Resets the EventData (Breaks Every event that you reset!)</summary>
+            Reset,
         }
 
         private static string HookActionToString(HookAction action)
@@ -188,18 +203,26 @@
             }
         }
 
+        // Current Targeted Byte 
+        private static byte CustomDataByte => 245;
+
         private unsafe static bool OnEventPatch(ref EventData __0)
         {
             HookAction Currentaction = HookAction.Nothing;
+            bool isHashtableData = false;
             try
             {
-                Dictionary<byte, Il2CppSystem.Object> ConvertedToNormalDict = new Dictionary<byte, Il2CppSystem.Object>();
+                System.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> ConvertedToNormalDict = new System.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                System.Collections.Hashtable ConvertedToNormalTable = new System.Collections.Hashtable();
+
                 if (__0 != null)
                 {
                     var PhotonSender = GameInstances.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
                     var PhotonID = __0.sender;
                     StringBuilder line = new StringBuilder();
                     StringBuilder prefix = new StringBuilder();
+                    StringBuilder ContainerType = new StringBuilder();
+
                     string translated = TranslateEventData(__0.Code);
                     if (translated.IsNotNullOrEmptyOrWhiteSpace())
                     {
@@ -209,6 +232,7 @@
                     {
                         prefix.Append($"[Event ({__0.Code})] ");
                     }
+
                     line.Append($"from: ({__0.Sender}) ");
                     if (WorldUtils.IsInWorld && PhotonSender != null)
                     {
@@ -218,323 +242,366 @@
                     {
                         line.Append($"'NULL' ");
                     }
-                    if (__0.Parameters != null && __0.Parameters.ContainsKey(245))
+
+                    if (__0.Parameters.ContainsKey(CustomDataByte) && __0.Parameters.paramDict != null && __0.Parameters.paramDict.ContainsKey(CustomDataByte))
                     {
-                        var customdataobj = __0.Parameters[245];
+                        var customdataobj = __0.Parameters[CustomDataByte];
+                        if (customdataobj == null)
+                        {
+                            return true; // There's no need to continue to read and translate.
+                        }
+
                         if (customdataobj != null)
                         {
+                            #region Dictionary Parsing
+
                             if (customdataobj.GetIl2CppType().Equals(Il2CppType.Of<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>()))
                             {
+                                isHashtableData = false;
+                                ContainerType.Append($"[Dictionary] : ");
                                 try
                                 {
                                     var originaldict = customdataobj.Cast<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>();
                                     if (originaldict != null && originaldict.Count != 0)
                                     {
-                                        foreach (var key in originaldict.Keys)
+                                        foreach (byte key in originaldict.Keys)
                                         {
                                             ConvertedToNormalDict.Add(key, originaldict[key]);
                                         }
                                     }
+
                                 }
                                 catch (Exception e)
                                 {
-                                    ModConsole.DebugError("Failed to Cast event !");
+                                    ModConsole.DebugError("Failed to Cast Dictionary !");
                                     ModConsole.DebugErrorExc(e);
                                 }
-                            }
-                            if (customdataobj == null)
-                            {
-                                return true; // There's no need to continue to read and translate.
-                            }
-                            if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
-                            {
-                                switch (__0.Code)
+
+                                #endregion
+
+                                #region Dictionary Patching
+
+                                if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
                                 {
-                                    //case EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
-                                    //    log = true;
-                                    //    break;
+                                    switch (__0.Code)
+                                    {
+                                        //case EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
+                                        //    log = true;
+                                        //    break;
 
-                                    case EventCode.Motion: // I believe this is motion, key 245 appears to be base64
-                                        break;
-
-                                    case EventCode.Disconnect_Message: // Kick Message?
-                                        // TODO : Intercept the kick message, if is a votekick, force the game to go to the home world to avoid a bug.
-                                        break;
-
-                                    //case EventCode.RPC:
-                                    //    break;
-
-                                    //case EventCode.interest: // Interest - Interested in events
-                                    //    break;
-                                    //case EventCode.Master_allowing_player_to_join:
-                                    //{
-
-                                    //    Currentaction = HookAction.Reset;
-                                    //    break;
-                                    //}
-                                    case EventCode.Custom_Properties:
-                                        {
-
+                                        case EventCode.Motion: // I believe this is motion, key 245 appears to be base64
                                             break;
-                                        }
 
-                                    case EventCode.Moderations: // Moderations
+                                        case EventCode.Disconnect_Message: // Kick Message?
+                                            // TODO : Intercept the kick message, if is a votekick, force the game to go to the home world to avoid a bug.
+                                            break;
 
-                                        #region Moderation Handler
+                                        //case EventCode.RPC:
+                                        //    break;
 
-                                        try
-                                        {
-                                            if (ConvertedToNormalDict.ContainsKey(0))
+                                        //case EventCode.interest: // Interest - Interested in events
+                                        //    break;
+                                        //case EventCode.Master_allowing_player_to_join:
+                                        //{
+
+                                        //    Currentaction = HookAction.Reset;
+                                        //    break;
+                                        //}
+                                        case EventCode.Custom_Properties:
                                             {
-                                                byte moderationevent = ConvertedToNormalDict[0].Unpack_Byte().Value;
-                                                var moderationeventname = TranslateModerationEvent(moderationevent);
-                                                if (moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
+
+                                                break;
+                                            }
+
+                                        case EventCode.Moderations: // Moderations
+
+                                            #region Moderation Handler
+
+                                            try
+                                            {
+                                                if (ConvertedToNormalDict.ContainsKey(0))
                                                 {
-                                                    prefix.Append($"{moderationeventname} ");
-                                                }
+                                                    byte moderationevent = ConvertedToNormalDict[0].Unpack_Byte().Value;
+                                                    var moderationeventname = TranslateModerationEvent(moderationevent);
+                                                    if (moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
+                                                    {
+                                                        prefix.Append($"{moderationeventname} ");
+                                                    }
 
-                                                switch (moderationevent)
-                                                {
-                                                    case ModerationCode.Warning: // Warnings.
-                                                        break;
+                                                    switch (moderationevent)
+                                                    {
+                                                        case ModerationCode.Warning: // Warnings.
+                                                            break;
 
-                                                    case ModerationCode.Mod_Mute: // Mod Mute
-                                                        break;
+                                                        case ModerationCode.Mod_Mute: // Mod Mute
+                                                            break;
 
-                                                    case ModerationCode.Friend_State: // Friend State
-                                                        break;
+                                                        case ModerationCode.Friend_State: // Friend State
+                                                            break;
 
-                                                    case ModerationCode.VoteKick: // VoteKick
+                                                        case ModerationCode.VoteKick: // VoteKick
 
-                                                        PopupUtils.QueHudMessage($"<color=#FFA500>A Votekick has Been started (Check console!)</color>");
-                                                        ModConsole.DebugWarning("VOTEKICK DETECTED : ");
-                                                        break;
+                                                            PopupUtils.QueHudMessage($"<color=#FFA500>A Votekick has Been started (Check console!)</color>");
+                                                            ModConsole.DebugWarning("VOTEKICK DETECTED : ");
+                                                            break;
 
-                                                    case ModerationCode.Block_Or_Mute:
+                                                        case ModerationCode.Block_Or_Mute:
 
-                                                        #region Blocking and Muting Events.
+                                                            #region Blocking and Muting Events.
 
-                                                        byte photonid = 1;
-                                                        byte blockbyte = 10;
-                                                        byte mutebyte = 11;
+                                                            byte photonid = 1;
+                                                            byte blockbyte = 10;
+                                                            byte mutebyte = 11;
 
-                                                        // Single Moderation Event (one player)
-                                                        if (ConvertedToNormalDict.Count == 4)
-                                                        {
-                                                            if (ConvertedToNormalDict.ContainsKey(photonid))
+                                                            // Single Moderation Event (one player)
+                                                            if (ConvertedToNormalDict.Count == 4)
                                                             {
-                                                                int RemoteModerationPhotonID = ConvertedToNormalDict[photonid].Unpack_Int32().Value;
-                                                                var PhotonPlayer = GameInstances.LoadBalancingPeer.GetPhotonPlayer(RemoteModerationPhotonID);
+                                                                if (ConvertedToNormalDict.ContainsKey(photonid))
+                                                                {
+                                                                    int RemoteModerationPhotonID = ConvertedToNormalDict[photonid].Unpack_Int32().Value;
+                                                                    var PhotonPlayer = GameInstances.LoadBalancingPeer.GetPhotonPlayer(RemoteModerationPhotonID);
+                                                                    if (ConvertedToNormalDict.ContainsKey(blockbyte))
+                                                                    {
+                                                                        bool blocked = ConvertedToNormalDict[blockbyte].Unpack_Boolean().Value;
+                                                                        switch (blocked)
+                                                                        {
+                                                                            case true:
+                                                                                {
+                                                                                    PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
+                                                                                    ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false);
+                                                                                    Currentaction = HookAction.Patch;
+                                                                                    break;
+                                                                                }
+                                                                            case false:
+                                                                                {
+                                                                                    PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
+                                                                                    break;
+                                                                                }
+                                                                            default:
+                                                                                break;
+                                                                        }
+                                                                    }
+
+                                                                    if (ConvertedToNormalDict.ContainsKey(mutebyte))
+                                                                    {
+                                                                        bool muted = ConvertedToNormalDict[mutebyte].Unpack_Boolean().Value;
+                                                                        switch (muted)
+                                                                        {
+                                                                            case true:
+                                                                                {
+                                                                                    PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
+                                                                                    break;
+                                                                                }
+                                                                            case false:
+                                                                                {
+                                                                                    PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
+                                                                                    break;
+                                                                                }
+                                                                            default:
+                                                                                break;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            // Multiple Moderation Events (Usually happens when you enter the room)
+                                                            else if (ConvertedToNormalDict.Count == 3)
+                                                            {
+                                                                // Blocked List
                                                                 if (ConvertedToNormalDict.ContainsKey(blockbyte))
                                                                 {
-                                                                    bool blocked = ConvertedToNormalDict[blockbyte].Unpack_Boolean().Value;
-                                                                    switch (blocked)
+                                                                    var blockedlistObject = ConvertedToNormalDict[blockbyte];
+                                                                    if (blockedlistObject != null)
                                                                     {
-                                                                        case true:
+                                                                        Il2CppStructArray<int> BlockedPlayersArray = blockedlistObject.Cast<Il2CppStructArray<int>>();
+                                                                        if (BlockedPlayersArray != null)
+                                                                        {
+                                                                            if (BlockedPlayersArray.Count != 0)
                                                                             {
-                                                                                PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
-                                                                                ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false);
+                                                                                int count = BlockedPlayersArray.Count;
+                                                                                for (int i = 0; i < count; i++)
+                                                                                {
+                                                                                    var blockedplayers = GameInstances.LoadBalancingPeer.GetPhotonPlayer(BlockedPlayersArray[i]);
+                                                                                    PhotonModerationHandler.OnPlayerBlockedYou_Invoker(blockedplayers);
+                                                                                    BlockedPlayersArray[i] = -1;
+                                                                                }
+
+                                                                                ConvertedToNormalDict[blockbyte] = new Il2CppSystem.Object(BlockedPlayersArray.Pointer);
                                                                                 Currentaction = HookAction.Patch;
-                                                                                break;
                                                                             }
-                                                                        case false:
-                                                                            {
-                                                                                PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
-                                                                                break;
-                                                                            }
-                                                                        default:
-                                                                            break;
+                                                                        }
                                                                     }
                                                                 }
 
+                                                                // Muted List
                                                                 if (ConvertedToNormalDict.ContainsKey(mutebyte))
                                                                 {
-                                                                    bool muted = ConvertedToNormalDict[mutebyte].Unpack_Boolean().Value;
-                                                                    switch (muted)
+                                                                    var MutedlistObject = ConvertedToNormalDict[mutebyte];
+                                                                    if (MutedlistObject != null)
                                                                     {
-                                                                        case true:
-                                                                            {
-                                                                                PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
-                                                                                break;
-                                                                            }
-                                                                        case false:
-                                                                            {
-                                                                                PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
-                                                                                break;
-                                                                            }
-                                                                        default:
-                                                                            break;
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-
-                                                        // Multiple Moderation Events (Usually happens when you enter the room)
-                                                        else if (ConvertedToNormalDict.Count == 3)
-                                                        {
-                                                            // Blocked List
-                                                            if (ConvertedToNormalDict.ContainsKey(blockbyte))
-                                                            {
-                                                                var blockedlistObject = ConvertedToNormalDict[blockbyte];
-                                                                if (blockedlistObject != null)
-                                                                {
-                                                                    Il2CppStructArray<int> BlockedPlayersArray = blockedlistObject.Cast<Il2CppStructArray<int>>();
-                                                                    if (BlockedPlayersArray != null)
-                                                                    {
-                                                                        if (BlockedPlayersArray.Count != 0)
+                                                                        Il2CppStructArray<int> MutePlayersArray = MutedlistObject.Cast<Il2CppStructArray<int>>();
+                                                                        if (MutePlayersArray != null)
                                                                         {
-                                                                            int count = BlockedPlayersArray.Count;
-                                                                            for (int i = 0; i < count; i++)
+                                                                            if (MutePlayersArray.Count != 0)
                                                                             {
-                                                                                var blockedplayers = GameInstances.LoadBalancingPeer.GetPhotonPlayer(BlockedPlayersArray[i]);
-                                                                                PhotonModerationHandler.OnPlayerBlockedYou_Invoker(blockedplayers);
-                                                                                BlockedPlayersArray[i] = -1;
+                                                                                int count = MutePlayersArray.Count;
+                                                                                for (int i = 0; i < count; i++)
+                                                                                {
+                                                                                    var MutePlayer = GameInstances.LoadBalancingPeer.GetPhotonPlayer(MutePlayersArray[i]);
+                                                                                    PhotonModerationHandler.OnPlayerMutedYou_Invoker(MutePlayer);
+                                                                                }
                                                                             }
-
-                                                                            ConvertedToNormalDict[blockbyte] = new Il2CppSystem.Object(BlockedPlayersArray.Pointer);
-                                                                            Currentaction = HookAction.Patch;
                                                                         }
                                                                     }
                                                                 }
                                                             }
 
-                                                            // Muted List
-                                                            if (ConvertedToNormalDict.ContainsKey(mutebyte))
-                                                            {
-                                                                var MutedlistObject = ConvertedToNormalDict[mutebyte];
-                                                                if (MutedlistObject != null)
-                                                                {
-                                                                    Il2CppStructArray<int> MutePlayersArray = MutedlistObject.Cast<Il2CppStructArray<int>>();
-                                                                    if (MutePlayersArray != null)
-                                                                    {
-                                                                        if (MutePlayersArray.Count != 0)
-                                                                        {
-                                                                            int count = MutePlayersArray.Count;
-                                                                            for (int i = 0; i < count; i++)
-                                                                            {
-                                                                                var MutePlayer = GameInstances.LoadBalancingPeer.GetPhotonPlayer(MutePlayersArray[i]);
-                                                                                PhotonModerationHandler.OnPlayerMutedYou_Invoker(MutePlayer);
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
+                                                            #endregion Blocking and Muting Events.
 
-                                                        #endregion Blocking and Muting Events.
+                                                            break;
 
-                                                        break;
+                                                        case (byte)ModerationCode.Unknown: // Unknown, seems affecting users on reset
+                                                            break;
 
-                                                    case (byte)ModerationCode.Unknown: // Unknown, seems affecting users on reset
-                                                        break;
-
-                                                    default:
-                                                        prefix.Append($"Unregistered Event {moderationevent}:");
-                                                        break;
+                                                        default:
+                                                            prefix.Append($"Unregistered Event {moderationevent}:");
+                                                            break;
+                                                    }
                                                 }
                                             }
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            ModConsole.DebugError("Exception in OnEvent Moderation Handler");
-                                            ModConsole.ErrorExc(e);
-                                        }
+                                            catch (Exception e)
+                                            {
+                                                ModConsole.DebugError("Exception in OnEvent Moderation Handler");
+                                                ModConsole.ErrorExc(e);
+                                            }
 
-                                        #endregion Moderation Handler
+                                            #endregion Moderation Handler
 
-                                        break;
-                                    //case EventCode.Destroy: // Destroy
-                                    //    log = true;
-                                    //    break;
+                                            break;
+                                        //case EventCode.Destroy: // Destroy
+                                        //    log = true;
+                                        //    break;
 
-                                    //case EventCode.Transfer_Ownership:
-                                    //    break;
+                                        //case EventCode.Transfer_Ownership:
+                                        //    break;
 
-                                    //case EventCode.UploadAvatar: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
-                                    //    break;
+                                        //case EventCode.UploadAvatar: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
+                                        //    break;
 
-                                    //case EventCode.Custom_Properties: // I think this is avatar switching related
-                                    //    break;
+                                        //case EventCode.Custom_Properties: // I think this is avatar switching related
+                                        //    break;
 
-                                    default:
-                                        break;
+                                        default:
+                                            break;
+                                    }
+                                }
+
+                                #endregion
+
+                            }
+                            else if (customdataobj.GetIl2CppType().Equals(Il2CppType.Of<Il2CppSystem.Collections.Hashtable>()))
+                            {
+                                isHashtableData = true;
+                                ContainerType.Append($"[Hashtable]");
+                                try
+                                {
+                                    var castedhashtable = __0.Parameters.paramDict[CustomDataByte].Cast<Il2CppSystem.Collections.Hashtable>();
+                                    if (castedhashtable != null && castedhashtable.Count != 0)
+                                    {
+                                        // Use serialization since hashtable is serializable.
+                                        ConvertedToNormalTable = Serialization.FromIL2CPPToManaged<System.Collections.Hashtable>(castedhashtable);
+                                    }
+
+                                }
+                                catch (Exception e)
+                                {
+                                    ModConsole.DebugError("Failed to Cast Hashtable !");
+                                    ModConsole.DebugErrorExc(e);
                                 }
                             }
                         }
                     }
+
                     switch (Currentaction)
                     {
                         case HookAction.Patch:
                             {
-                                if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
+                                try
                                 {
-                                    var ModifiedEvent = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                                    foreach (var key in ConvertedToNormalDict.Keys)
+                                    if (!isHashtableData)
                                     {
-                                        ModifiedEvent.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), ConvertedToNormalDict[key]);
+                                        ReplaceParameterData_Dictionary(ref __0, ConvertedToNormalDict);
+                                    }
+                                    else
+                                    {
+                                        ReplaceParameterData_Hashtable(ref __0, ConvertedToNormalTable);
                                     }
 
-                                    var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
-                                    foreach (var key in __0.Parameters.Keys)
-                                    {
-                                        if (key != 245)
-                                        {
-                                            modifiedparams.Add(key, __0.Parameters[key]);
-                                        }
-                                        else
-                                        {
-                                            modifiedparams.Add(key, ModifiedEvent);
-                                        }
-                                    }
-
-                                    __0.Parameters.Clear();
-                                    __0.Parameters = null;
-                                    __0.Parameters = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                                    foreach (var key in modifiedparams.Keys)
-                                    {
-                                        __0.Parameters.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), modifiedparams[key]);
-                                    }
                                 }
+                                catch (Exception e)
+                                {
+                                    ModConsole.DebugError($"Exception in Patching OnEvent {ContainerType} Parameters");
+                                    ModConsole.ErrorExc(e);
+                                    return true;
+                                }
+
                                 break;
                             }
                         case HookAction.Empty:
                             {
-                                var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
-                                foreach (var key in __0.Parameters.Keys)
+                                try
                                 {
-                                    if (key != 245)
+
+                                    if (!isHashtableData)
                                     {
-                                        modifiedparams.Add(key, __0.Parameters[key]);
+                                        ReplaceParameterData_Dictionary(ref __0, new Dictionary<byte, Object>());
                                     }
                                     else
                                     {
-                                        modifiedparams.Add(key, new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>());
+                                        ReplaceParameterData_Hashtable(ref __0, new Hashtable());
                                     }
                                 }
-
-                                __0.Parameters.Clear();
-                                __0.Parameters = null;
-                                __0.Parameters = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                                foreach (var key in modifiedparams.Keys)
+                                catch (Exception e)
                                 {
-                                    __0.Parameters.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), modifiedparams[key]);
+                                    ModConsole.DebugError($"Exception in Emptying OnEvent {ContainerType} Parameters");
+                                    ModConsole.ErrorExc(e);
+                                    return true;
                                 }
+
                                 break;
                             }
                         default:
                             break;
                     }
+
                     if (ConfigManager.General.LogEvents)
                     {
-                        if (EventCodeToLog(__0.Code) && __0.Parameters != null)
+                        if (EventCodeToLog(__0.Code) && __0.Parameters.paramDict != null)
                         {
-                            line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(__0.Parameters), Newtonsoft.Json.Formatting.Indented)}");
+                            var CustomData = __0.Parameters.paramDict[CustomDataByte];
+                            if (CustomData != null)
+                            {
+                                if (!isHashtableData)
+                                {
+                                    line.AppendLine();
+                                    line.AppendLine(Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(CustomData.Cast<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>()), Newtonsoft.Json.Formatting.Indented));
+                                }
+                                else
+                                {
+                                    line.AppendLine();
+                                    line.AppendLine(Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(CustomData.Cast<Il2CppSystem.Collections.Hashtable>()), Newtonsoft.Json.Formatting.Indented));
 
-                            ModConsole.Log($"{HookActionToString(Currentaction)}{prefix.ToString()}{line.ToString()}");
+                                }
+
+                            }
+
+                            ModConsole.Log($"{HookActionToString(Currentaction)}{ContainerType.ToString()}{prefix.ToString()}{line.ToString()}");
                         }
                     }
+
                     line.Clear();
                 }
+
                 switch (Currentaction)
                 {
                     case HookAction.Block:
@@ -555,7 +622,140 @@
                 ModConsole.ErrorExc(e);
                 return true;
             }
+
             return true;
         }
+
+        private static void ReplaceParameterData_Dictionary(ref EventData __0, Dictionary<byte, Il2CppSystem.Object> ConvertedToNormalDict)
+        {
+            try
+            {
+                if (__0.Parameters[CustomDataByte].GetIl2CppType().Equals(Il2CppType.Of<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>()))
+                {
+                    var ModifiedEvent = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                    // Fills it if not empty!
+                    if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
+                    {
+                        foreach (byte key in ConvertedToNormalDict.Keys)
+                        {
+                            ModifiedEvent.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), ConvertedToNormalDict[key]);
+                        }
+                    }
+
+                    var rebuiltparams = new NonAllocDictionary<byte, Object>();
+                    for (byte i = 0; i <= byte.MaxValue; i++)
+                    {
+                        if (__0.Parameters.paramDict.ContainsKey(i))
+                        {
+                            // Replace here
+                            if (i == CustomDataByte)
+                            {
+                                rebuiltparams.Add(i, ModifiedEvent);
+                            }
+                            else
+                            {
+                                __0.Parameters.TryGetValue(i, out var value);
+                                if (value != null)
+                                {
+                                    rebuiltparams.Add(i, value);
+                                }
+
+                            }
+                        }
+                    }
+
+                    // Clear parameters Dict
+                    __0.Parameters.paramDict.Clear();
+                    __0.Parameters.paramDict = null;
+                    __0.Parameters.paramDict = new NonAllocDictionary<byte, Object>();
+                    // Fill back everything
+                    for (byte i = 0; i <= byte.MaxValue; i++)
+                    {
+                        if (rebuiltparams.ContainsKey(i))
+                        {
+                            if (!__0.Parameters.paramDict.ContainsKey(i))
+                            {
+                                rebuiltparams.TryGetValue(i, out var value);
+                                if (value != null)
+                                {
+                                    __0.Parameters.paramDict.Add(i, value);
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                ModConsole.DebugErrorExc(e);
+            }
+        }
+
+        private static void ReplaceParameterData_Hashtable(ref EventData __0, System.Collections.Hashtable ConvertedToNormalTable)
+        {
+            try
+            {
+                if (__0.Parameters[CustomDataByte].GetIl2CppType().Equals(Il2CppType.Of<Il2CppSystem.Collections.Hashtable>()))
+                {
+                    var ModifiedEvent = new Il2CppSystem.Collections.Hashtable();
+                    // Fills it if not empty!
+                    foreach (byte key in ConvertedToNormalTable.Keys)
+                    {
+                        ModifiedEvent.Add(Il2CppConverter.Generate_Il2CPPObject(key), Serialization.FromManagedToIL2CPP<Il2CppSystem.Object>(ConvertedToNormalTable[key]));
+                    }
+
+                    var rebuiltparams = new NonAllocDictionary<byte, Object>();
+                    for (byte i = 0; i <= byte.MaxValue; i++)
+                    {
+                        if (__0.Parameters.paramDict.ContainsKey(i))
+                        {
+                            // Replace here
+                            if (i == CustomDataByte)
+                            {
+                                rebuiltparams.Add(i, ModifiedEvent);
+                            }
+                            else
+                            {
+                                __0.Parameters.TryGetValue(i, out var value);
+                                if (value != null)
+                                {
+                                    rebuiltparams.Add(i, value);
+                                }
+
+                            }
+                        }
+                    }
+
+                    // Clear parameters Dict
+                    __0.Parameters.paramDict.Clear();
+                    __0.Parameters.paramDict = null;
+                    __0.Parameters.paramDict = new NonAllocDictionary<byte, Object>();
+                    // Fill back everything
+                    for (byte i = 0; i <= byte.MaxValue; i++)
+                    {
+                        if (rebuiltparams.ContainsKey(i))
+                        {
+                            if (!__0.Parameters.paramDict.ContainsKey(i))
+                            {
+                                rebuiltparams.TryGetValue(i, out var value);
+                                if (value != null)
+                                {
+                                    __0.Parameters.paramDict.Add(i, value);
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.DebugErrorExc(e);
+            }
+        }
+
     }
 }

@@ -17,6 +17,15 @@
             return result;
         }
 
+        public static T GetGetInChildrens<T>(this GameObject obj) where T : Component
+        {
+            if (obj == null) return null;
+            var result = obj.GetComponent<T>();
+            if (result == null)
+                result = obj.GetComponentInChildren<T>(true);
+            return result;
+        }
+
         public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
         {
             if (obj == null) return null;

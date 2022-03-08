@@ -318,6 +318,8 @@
 
         public static void SendInvite(string Message, string WorldID, string worldname, string playerID)
         {
+            return;
+            ;
             try
             {
                 NotificationDetails notificationDetails = new NotificationDetails();
@@ -327,7 +329,7 @@
                 //notificationDetails.Add("imageUrl", (Il2CppSystem.String)APIUser.CurrentUser.currentAvatarThumbnailImageUrl);
                 Notification xx = Notification.Create(playerID, "invite", "",
                     notificationDetails);
-                VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
+                //VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
                 ModConsole.Log("Send Invite to: " + playerID);
             }
             catch
@@ -338,6 +340,8 @@
 
         public static void SendRequestMessage(string Message, string playerID)
         {
+            return;
+            ;
             try
             {
                 NotificationDetails notificationDetails = new NotificationDetails();
@@ -345,7 +349,7 @@
                 notificationDetails.Add("imageUrl", (Il2CppSystem.String)APIUser.CurrentUser.currentAvatarThumbnailImageUrl);
                 Notification xx = Notification.Create(playerID, Notification.NotificationType.Requestinvite, "",
                     notificationDetails);
-                VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
+                // VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
                 //VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(Invite.Create(playerID, WorldName, new Location(WorldName, new Instance("", playerID, "", "", "", false)), WorldName));
                 // Utils.NotificationManager.SendNotification(playerID, "invite", WorldName, notificationDetails);
                 ModConsole.Log("Send Invite to: " + playerID);

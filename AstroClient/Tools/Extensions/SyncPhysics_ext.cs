@@ -13,7 +13,7 @@
                 {
                     instance.gameObject.TakeOwnership();
                 }
-                instance.Method_Public_Void_PDM_2();
+                instance.Method_Public_Void_0();
             }
         }
 
@@ -74,7 +74,7 @@
                     {
                         SetGravityFor(instance, player, useGravity);
                     }
-                    catch{}
+                    catch { }
                 }
             }
         }
@@ -114,7 +114,6 @@
                 }
             }
         }
-
 
         internal static Rigidbody GetRigidBody(this SyncPhysics instance)
         {

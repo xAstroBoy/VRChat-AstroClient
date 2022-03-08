@@ -6,7 +6,7 @@ namespace AstroClient.xAstroBoy.Utility
     using ExitGames.Client.Photon;
     using UnityEngine;
     using VRC.SDKBase;
-    using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
+    using PhotonHandler = Photon.Pun.PhotonHandler;
 
     public static class NetworkingUtils
     {
@@ -27,7 +27,7 @@ namespace AstroClient.xAstroBoy.Utility
         public static void OpRaiseEvent(byte code, Il2CppSystem.Object customObject, Photon.Realtime.RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
         {
             PhotonHandler.
-                field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0.prop_LoadBalancingClient_0.
+                field_Internal_Static_PhotonHandler_0.prop_LoadBalancingClient_0.
              Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0
             (code,
              customObject,

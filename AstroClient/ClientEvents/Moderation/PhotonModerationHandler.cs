@@ -3,8 +3,10 @@
     #region Imports
 
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using AstroEventArgs;
+    using MelonLoader;
     using Photon.Realtime;
     using Tools.Extensions;
     using xAstroBoy.Utility;
@@ -18,7 +20,6 @@
             if (player != null)
             {
                 var photonuserid = player.GetUserID();
-
 
                 if (!BlockedYouPlayers.Contains(photonuserid))
                 {
@@ -89,11 +90,17 @@
 
         internal override void OnPhotonLeft(Player player)
         {
+            MelonCoroutines.Start(PlayerLeft(player));
+        }
+
+        private static IEnumerator PlayerLeft(Player player)
+        {
+            if (player == null) yield break;
             var photonuserid = player.GetUserID();
             if (BlockedYouPlayers.Contains(photonuserid)) BlockedYouPlayers.Remove(photonuserid);
             if (MutedYouPlayers.Contains(photonuserid)) MutedYouPlayers.Remove(photonuserid);
+            yield return null;
         }
-
 
         internal static List<string> BlockedYouPlayers { get; } = new();
 

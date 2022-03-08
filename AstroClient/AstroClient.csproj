@@ -219,12 +219,6 @@
     <Compile Include="AstroMonos\Components\Tools\Enabler.cs" />
     <Compile Include="ClientUI\ActionMenu\ESPModule.cs" />
     <Compile Include="ClientUI\ActionMenu\MovementModule.cs" />
-    <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Avatar.cs" />
-    <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\AvatarParametersMenu.cs" />
-    <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\CameraUtils.cs" />
-    <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\RefCountedObject.cs" />
-    <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
-    <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\GameProcessMenu.cs" />
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\ProtectionsMenu.cs" />
@@ -331,9 +325,7 @@
     <Compile Include="ModsDetector\NotoriousPatcher.cs" />
     <Compile Include="Spawnables\ColliderSuppresserCube\TweakerSphere.cs" />
     <Compile Include="Spawnables\ColliderSuppresserCube\ColliderSuppresserSphere.cs" />
-    <Compile Include="Startup\Fixes\DashboardFix.cs" />
     <Compile Include="Startup\Hooks\PlayerJoinAndLeaveHook.cs" />
-    <Compile Include="Startup\Hooks\USpeakHook.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SoftCloneHook.cs" />
     <Compile Include="Startup\Hooks\RiskyFunctionHook.cs" />
@@ -1465,6 +1457,7 @@
     <Folder Include="ClientResources\ProgramsArchive\" />
     <Folder Include="ClientUI\Menu\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />
     <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
+    <Folder Include="Startup\Fixes\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientResources\ImageArchive\EnderPearl.jpg" />

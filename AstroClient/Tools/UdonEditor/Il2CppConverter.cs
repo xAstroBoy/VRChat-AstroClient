@@ -7,6 +7,7 @@
 
     internal static class Il2CppConverter
     {
+
         internal static Il2CppSystem.Object Generate_Il2CPPObject(string[] item)
         {
             Il2CppStringArray array2 = new Il2CppStringArray(item);

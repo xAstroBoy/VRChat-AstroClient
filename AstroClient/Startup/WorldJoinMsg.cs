@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Hooks;
     using UnityEngine.Playables;
     using xAstroBoy.Utility;
 
@@ -13,31 +14,45 @@
             ModConsole.Log("Joined World : " + Name, System.Drawing.Color.Goldenrod);
             if (tags != null)
             {
-                if (tags.Count() != 0)
+                if (!RiskyFunctionHook.IsWorldTagPatched)
                 {
-                    bool isFirst = true;
-                    StringBuilder printtag = new StringBuilder();
-                    for (int i = 0; i < tags.Count; i++)
-                    {
-                        string tag = tags[i];
-                        if (isFirst)
-                        {
-                            printtag.Append($"[ {tag} ]");
-                            isFirst = false;
-                        }
-                        else
-                        {
-                            printtag.Append($",[ {tag} ]");
-                        }
-                    }
-
-                    ModConsole.Log("World Tags : " + printtag.ToString(), System.Drawing.Color.Goldenrod);
+                    ModConsole.Log("World Tags : " + CurrentWorldTags(tags), System.Drawing.Color.Goldenrod);
+                }
+                else
+                {
+                    ModConsole.Log("[P]: World Tags : " + CurrentWorldTags(RiskyFunctionHook.OriginalWorldTags), System.Drawing.Color.Goldenrod);
                 }
             }
             ModConsole.Log("World ID : " + id, System.Drawing.Color.Goldenrod);
             ModConsole.Log("World author : " + AuthorName, System.Drawing.Color.Goldenrod);
             ModConsole.Log("World Asset URL : " + AssetURL, System.Drawing.Color.Goldenrod);
             ModConsole.Log("Instance ID : " + WorldUtils.FullID, System.Drawing.Color.Goldenrod);
+        }
+
+        private string CurrentWorldTags(List<string> Tags)
+        {
+            if (Tags.Count() != 0)
+            {
+                bool isFirst = true;
+                StringBuilder printtag = new StringBuilder();
+                for (int i = 0; i < Tags.Count; i++)
+                {
+                    string tag = Tags[i];
+                    if (isFirst)
+                    {
+                        printtag.Append($"[ {tag} ]");
+                        isFirst = false;
+                    }
+                    else
+                    {
+                        printtag.Append($",[ {tag} ]");
+                    }
+                }
+
+                return printtag.ToString();
+            }
+
+            return null;
         }
     }
 }

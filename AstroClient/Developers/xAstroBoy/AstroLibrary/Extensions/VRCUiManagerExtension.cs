@@ -22,7 +22,6 @@ namespace AstroClient.xAstroBoy.Extensions
             return Instance.GetMenuContent().GetComponentInChildren<PageUserInfo>().GetUser();
         }
 
-
         //TODO : FIX
         public static void SelectAPIUser(this VRCUiManager instance, APIUser user)
         {
@@ -148,7 +147,7 @@ namespace AstroClient.xAstroBoy.Extensions
                     PageUserInfo pageUserInfo = GameInstances.VRCUiManager.GetMenuContent().GetComponentInChildren<PageUserInfo>();
                     if (pageUserInfo != null)
                     {
-                        pageUserInfo.Method_Private_Void_APIUser_PDM_0(userapi);
+                        pageUserInfo.Method_Public_Void_APIUser_PDM_0(userapi);
 
                         ModConsole.Log("Refreshed user: " + userapi.id);
                     }

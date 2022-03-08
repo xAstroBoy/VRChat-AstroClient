@@ -81,7 +81,7 @@
             InputPatches.Event_OnInput_GrabLeft += Internal_OnInput_GrabLeft;
             InputPatches.Event_OnInput_GrabRight += Internal_OnInput_GrabRight;
 
-            USpeakHook.Event_OnRawAudio += Internal_OnRawAudio;
+            //USpeakHook.Event_OnRawAudio += Internal_OnRawAudio;
         }
 
         private void Internal_OnShowScreen(object sender, ScreenEventArgs e)

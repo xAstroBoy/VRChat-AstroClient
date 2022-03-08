@@ -8,8 +8,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
 
     internal static class Parameters
     {
-        internal static readonly string[] DefaultParameterNames = new string[]
-        {
+        public static readonly string[] DefaultParameterNames = new string[] {
             "Viseme",
             "GestureLeft",
             "GestureLeftWeight",
@@ -31,27 +30,22 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             "AvatarVersion",
             "VRCEmote",
             "VRCFaceBlendH",
-            "VRCFaceBlendV"
+            "VRCFaceBlendV",
         };
 
-        internal static List<AvatarParameter> FilterDefaultParameters(IEnumerable<AvatarParameter> src)
-        {
-            return src.Where(param => !DefaultParameterNames.Contains(param.field_Private_String_0)).ToList();
-        }
+        public static List<AvatarParameter> FilterDefaultParameters(IEnumerable<AvatarParameter> src)
+            => src.Where(param => !DefaultParameterNames.Contains(param.field_Private_String_0)).ToList();
 
-        private class Parameter
+        class Parameter
         {
-            internal Parameter()
-            {
-            }
-
-            internal Parameter(AvatarParameter src)
+            public Parameter() { }
+            public Parameter(AvatarParameter src)
             {
                 type = src.field_Private_ParameterType_0;
                 switch (type)
                 {
                     case AvatarParameter.ParameterType.Bool:
-                        val_bool = src.prop_Boolean_0;
+                        val_bool = src.prop_Boolean_1;
                         break;
 
                     case AvatarParameter.ParameterType.Int:
@@ -63,8 +57,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                         break;
                 }
             }
-
-            internal void Apply(AvatarParameter dst)
+            public void Apply(AvatarParameter dst)
             {
                 switch (type)
                 {
@@ -83,27 +76,26 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
 
                 dst.Lock();
             }
-
-            internal AvatarParameter.ParameterType type;
-            internal int val_int = 0;
-            internal float val_float = 0.0f;
-            internal bool val_bool = false;
+            public AvatarParameter.ParameterType type;
+            public int val_int = 0;
+            public float val_float = 0.0f;
+            public bool val_bool = false;
         };
 
-        private class AvatarSettings
+        class AvatarSettings
         {
-            internal string name;
-            internal int version;
-            internal Dictionary<string, Parameter> parameters;
-            internal List<bool> renderers;
+            public string name;
+            public int version;
+            public Dictionary<string, Parameter> parameters;
+            public List<bool> renderers;
         }
 
-        private static Dictionary<string, AvatarSettings> settings = new Dictionary<string, AvatarSettings>();
+        static private Dictionary<string, AvatarSettings> settings;
 
-        internal static IEnumerable<AvatarParameter> GetAllAvatarParameters(this VRCAvatarManager manager)
+        public static IEnumerable<AvatarParameter> GetAllAvatarParameters(this VRCAvatarManager manager)
         {
             var parameters = manager.field_Private_AvatarPlayableController_0?
-                .field_Private_Dictionary_2_Int32_AvatarParameter_0;
+                                    .field_Private_Dictionary_2_Int32_AvatarParameter_0;
 
             if (parameters == null)
                 yield break;
@@ -112,12 +104,10 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                 yield return param.value;
         }
 
-        internal static List<AvatarParameter> GetAvatarParameters(this VRCAvatarManager manager)
-        {
-            return FilterDefaultParameters(manager.GetAllAvatarParameters());
-        }
+        public static List<AvatarParameter> GetAvatarParameters(this VRCAvatarManager manager)
+            => FilterDefaultParameters(manager.GetAllAvatarParameters());
 
-        internal static bool HasCustomExpressions(this VRCAvatarManager manager)
+        public static bool HasCustomExpressions(this VRCAvatarManager manager)
         {
             return manager &&
                    manager.field_Private_AvatarPlayableController_0 != null &&
@@ -131,12 +121,12 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                    manager.prop_VRCAvatarDescriptor_0.expressionsMenu.controls.Count > 0;
         }
 
-        internal static IEnumerable<Renderer> GetAvatarRenderers(this VRCAvatarManager manager)
+        public static IEnumerable<Renderer> GetAvatarRenderers(this VRCAvatarManager manager)
         {
             return manager.field_Private_ArrayOf_Renderer_0;
         }
 
-        internal static void ApplyParameters(VRCAvatarManager manager)
+        public static void ApplyParameters(VRCAvatarManager manager)
         {
             var api_avatar = manager?.prop_ApiAvatar_0;
             if (api_avatar == null)
@@ -151,13 +141,12 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             /* Check version */
             if (config.version != api_avatar.version)
             {
-                ModConsole.Log(
-                    $"Avatar {api_avatar.name} version missmatch ({config.version} != {api_avatar.version}). Removing");
+                ModConsole.DebugLog($"Avatar {api_avatar.name} version missmatch ({config.version} != {api_avatar.version}). Removing");
                 settings.Remove(key);
                 return;
             }
 
-            ModConsole.Log($"Applying avatar state to {api_avatar.name}");
+            ModConsole.DebugLog($"Applying avatar state to {api_avatar.name}");
 
             /* Apply parameters */
             if (config.parameters != null)
@@ -166,40 +155,42 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
 
             /* Apply Meshes */
             if (config.renderers != null)
-                foreach (var element in Enumerable.Zip(config.renderers, manager.GetAvatarRenderers(),
-                    (state, renderer) => new { state, renderer }))
+                foreach (var element in Enumerable.Zip(config.renderers, manager.GetAvatarRenderers(), (state, renderer) => new { state, renderer }))
                     element.renderer.gameObject.active = element.renderer.enabled = element.state;
         }
 
-        internal static void StoreParameters(VRCAvatarManager manager)
+        public static void StoreParameters(VRCAvatarManager manager)
         {
             var api_avatar = manager?.prop_ApiAvatar_0;
             if (api_avatar == null)
                 return;
 
-            ModConsole.Log($"Storing avatar state for {api_avatar.name}");
+            ModConsole.DebugLog($"Storing avatar state for {api_avatar.name}");
 
             var config = new AvatarSettings
             {
                 name = api_avatar.name,
                 version = api_avatar.version,
-                parameters = manager.GetAvatarParameters()
-                    ?.ToDictionary(o => o.field_Private_String_0, o => new Parameter(o)),
-                renderers = manager.GetAvatarRenderers().Select(o => o.gameObject.active && o.enabled).ToList()
+                parameters = manager.GetAvatarParameters()?.ToDictionary(o => o.field_Private_String_0, o => new Parameter(o)),
+                renderers = manager.GetAvatarRenderers().Select(o => o.gameObject.active && o.enabled).ToList(),
             };
 
             var key = api_avatar.id;
             if (settings.ContainsKey(key))
+            {
                 settings[key] = config;
+            }
             else
+            {
                 settings.Add(key, config);
+            }
 
             /* Prevent override of changed parameters */
             foreach (var parameter in manager.GetAvatarParameters())
                 parameter.Lock();
         }
 
-        internal static void SetValue(this AvatarParameter parameter, float value)
+        public static void SetValue(this AvatarParameter parameter, float value)
         {
             if (parameter == null) return;
             /* Call original delegate to avoid self MITM */
@@ -219,37 +210,37 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             }
         }
 
-        internal static float GetValue(this AvatarParameter parameter)
+        public static float GetValue(this AvatarParameter parameter)
         {
             if (parameter == null) return 0f;
             return parameter.field_Private_ParameterType_0 switch
             {
-                AvatarParameter.ParameterType.Bool => parameter.prop_Boolean_0 ? 1f : 0f,
+                AvatarParameter.ParameterType.Bool => parameter.prop_Boolean_1 ? 1f : 0f,
                 AvatarParameter.ParameterType.Int => parameter.prop_Int32_1,
                 AvatarParameter.ParameterType.Float => parameter.prop_Single_0,
-                _ => 0f
+                _ => 0f,
             };
         }
 
-        internal static void SetBoolProperty(this AvatarParameter parameter, bool value)
+        public static void SetBoolProperty(this AvatarParameter parameter, bool value)
         {
             if (parameter == null) return;
             _boolPropertySetterDelegate(parameter.Pointer, value);
         }
 
-        internal static void SetIntProperty(this AvatarParameter parameter, int value)
+        public static void SetIntProperty(this AvatarParameter parameter, int value)
         {
             if (parameter == null) return;
             _intPropertySetterDelegate(parameter.Pointer, value);
         }
 
-        internal static void SetFloatProperty(this AvatarParameter parameter, float value)
+        public static void SetFloatProperty(this AvatarParameter parameter, float value)
         {
             if (parameter == null) return;
             _floatPropertySetterDelegate(parameter.Pointer, value);
         }
 
-        internal static void ResetParameters(VRCAvatarManager manager)
+        public static void ResetParameters(VRCAvatarManager manager)
         {
             var api_avatar = manager?.prop_ApiAvatar_0;
             if (api_avatar == null)
@@ -261,7 +252,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                 settings.Remove(key);
 
             var defaults = manager.prop_VRCAvatarDescriptor_0?
-                .expressionParameters;
+                                  .expressionParameters;
             foreach (var parameter in manager.GetAvatarParameters())
             {
                 parameter.SetValue(defaults.FindParameter(parameter.field_Private_String_0).defaultValue);
@@ -269,29 +260,28 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             }
         }
 
-        private static readonly HashSet<IntPtr> s_ParameterOverrideList = new HashSet<IntPtr>();
+        private static readonly HashSet<IntPtr> s_ParameterOverrideList = new();
 
-        internal static void Unlock(this AvatarParameter parameter)
+        public static void Unlock(this AvatarParameter parameter)
         {
             /* Reenable parameter override */
             if (parameter.IsLocked())
                 s_ParameterOverrideList.Remove(parameter.Pointer);
         }
 
-        internal static void Lock(this AvatarParameter parameter)
+        public static void Lock(this AvatarParameter parameter)
         {
             /* Disable override parameters */
             if (!parameter.IsLocked())
                 s_ParameterOverrideList.Add(parameter.Pointer);
         }
 
-        internal static bool IsLocked(this AvatarParameter parameter)
+        public static bool IsLocked(this AvatarParameter parameter)
         {
             return s_ParameterOverrideList.Contains(parameter.Pointer);
         }
 
         internal delegate void BoolPropertySetterDelegate(IntPtr @this, bool value);
-
         internal static BoolPropertySetterDelegate _boolPropertySetterDelegate;
 
         internal static void BoolPropertySetter(IntPtr @this, bool value)
@@ -306,7 +296,6 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
         }
 
         internal delegate void IntPropertySetterDelegate(IntPtr @this, int value);
-
         internal static IntPropertySetterDelegate _intPropertySetterDelegate;
 
         internal static void IntPropertySetter(IntPtr @this, int value)
@@ -321,7 +310,6 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
         }
 
         internal delegate void FloatPropertySetterDelegate(IntPtr @this, float value);
-
         internal static FloatPropertySetterDelegate _floatPropertySetterDelegate;
 
         internal static void FloatPropertySetter(IntPtr @this, float value)

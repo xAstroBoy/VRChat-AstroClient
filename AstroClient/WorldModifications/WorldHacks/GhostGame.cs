@@ -67,13 +67,13 @@
                     ArmoryDoor_LockDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "LockDoor", "Local_ResetLock");
                     ArmoryDoor_AddKeyOnDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "LockDoor", "Local_AddOneMoreKey");
 
-                    ArmoryDoor_OpenDoor_Clockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_OpenClockwise");
-                    ArmoryDoor_OpenDoor_CounterClockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_OpenCounterClockwise");
+                    ArmoryDoor_OpenDoor_Clockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "DoorParent", "Local_OpenClockwise");
+                    ArmoryDoor_OpenDoor_CounterClockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "DoorParent", "Local_OpenCounterClockwise");
 
-                    ArmoryDoor_CloseDoor_Clockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_CloseClockwise");
-                    ArmoryDoor_CloseDoor_CounterClockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_CloseCounterClockwise");
+                    ArmoryDoor_CloseDoor_Clockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "DoorParent", "Local_CloseClockwise");
+                    ArmoryDoor_CloseDoor_CounterClockwise = UdonSearch.FindUdonEvent(ArmoryDoorObject, "DoorParent", "Local_CloseCounterClockwise");
 
-                    ArmoryDoor_ResetDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "Door_Metal_Gray_mesh (1)", "Local_ResetDoor");
+                    ArmoryDoor_ResetDoor = UdonSearch.FindUdonEvent(ArmoryDoorObject, "DoorParent", "Local_ResetDoor");
                 }
 
                 if (WeaponsWorkshopObject != null)

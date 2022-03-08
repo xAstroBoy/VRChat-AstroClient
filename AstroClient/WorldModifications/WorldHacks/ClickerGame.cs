@@ -253,16 +253,55 @@
                 }
                 else
                 {
-                    MelonCoroutines.Stop(CancellationToken_1);
-                    MelonCoroutines.Stop(CancellationToken_2);
-                    MelonCoroutines.Stop(CancellationToken_3);
-                    MelonCoroutines.Stop(CancellationToken_4);
-                    MelonCoroutines.Stop(CancellationToken_5);
-                    MelonCoroutines.Stop(CancellationToken_6);
-                    MelonCoroutines.Stop(CancellationToken_7);
-                    MelonCoroutines.Stop(CancellationToken_8);
-                    MelonCoroutines.Stop(CancellationToken_9);
-                    MelonCoroutines.Stop(CancellationToken_10);
+                    if (CancellationToken_1 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_1);
+                    }
+
+                    if (CancellationToken_2 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_2);
+                    }
+
+                    if (CancellationToken_3 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_3);
+                    }
+
+                    if (CancellationToken_4 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_4);
+                    }
+
+                    if (CancellationToken_5 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_5);
+                    }
+
+                    if (CancellationToken_6 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_6);
+                    }
+
+                    if (CancellationToken_7 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_7);
+                    }
+
+                    if (CancellationToken_8 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_8);
+                    }
+
+                    if (CancellationToken_9 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_9);
+                    }
+
+                    if (CancellationToken_10 != null)
+                    {
+                        MelonCoroutines.Stop(CancellationToken_10);
+                    }
 
                     CancellationToken_1 = null;
                     CancellationToken_2 = null;

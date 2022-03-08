@@ -8,10 +8,7 @@
     {
         internal override void VRChat_OnUiManagerInit()
         {
-            if (ConfigManager.Performance.HighPriority)
-            {
-                SetPriority(ProcessPriorityClass.High);
-            }
+            SetPriority(ProcessPriorityClass.High);
         }
 
         internal static bool IsEnabled

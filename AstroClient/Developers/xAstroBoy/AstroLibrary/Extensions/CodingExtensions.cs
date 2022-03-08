@@ -56,6 +56,14 @@
         {
             return number < 0;
         }
+
+        internal static string Truncate(this string value, int max_length)
+        {
+            if (!string.IsNullOrEmpty(value) && value.Length > max_length)
+                return value.Substring(0, max_length) + "…";
+            return value;
+        }
+
         internal static string ConvertToString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
         {
             return "{" + string.Join(",", dictionary.Select(kv => kv.Key + "=" + kv.Value).ToArray()) + "}";

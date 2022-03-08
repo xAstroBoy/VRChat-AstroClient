@@ -56,7 +56,7 @@
         private bool isEnabled;
         private bool isLooping;
         private Transform centerPoint = null;
-        private List<PickupController> pickups = new List<PickupController>();
+        private List<VRC.SDKBase.VRC_Pickup> pickups = new List<VRC.SDKBase.VRC_Pickup>();
 
         internal static bool IsEnabled
         {
@@ -79,13 +79,7 @@
             for (int i = 0; i < list.Count; i++)
             {
                 var found = list[i];
-                var body = found.GetComponent<Rigidbody>();
-                var controller = GetComponent<PickupController>();
-                var obj = body.gameObject;
-
-                controller ??= obj.AddComponent<PickupController>();
-
-                pickups.Add(controller);
+                pickups.Add(found);
             }
             ModConsole.Log($"[OrbitManager] Refreshed: {pickups.Count} pickups found");
         }
@@ -133,8 +127,8 @@
 
             for (int i = 0; i < Instance.pickups.Count; i++)
             {
-                PickupController pickup = Instance.pickups[i];
-                pickup.RestoreProperties();
+                var pickup = Instance.pickups[i];
+                pickup.gameObject.Pickup_RestoreOriginalProperties();
                 GameObjectMenu.RestoreOriginalLocation(pickup.gameObject, true);
                 OnlineEditor.RemoveOwnerShip(pickup.gameObject);
             }
@@ -155,7 +149,7 @@
 
                 for (int i = 0; i < Instance.pickups.Count; i++)
                 {
-                    PickupController pickup = Instance.pickups[i];
+                    var pickup = Instance.pickups[i];
                     if (!pickup.gameObject.IsOwner())
                     {
                         pickup.gameObject.TryTakeOwnership();

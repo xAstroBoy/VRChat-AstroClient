@@ -11,7 +11,7 @@ namespace AstroClient.xAstroBoy.Utility
     using VRC;
     using VRC.Core;
     using VRC.SDKBase;
-    using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
+    using PhotonHandler = Photon.Pun.PhotonHandler;
 
     public static class PlayerUtils
     {
@@ -79,7 +79,7 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static Photon.Realtime.LoadBalancingClient GetLoadBalancingPeer() => GetPhotonHandler().prop_LoadBalancingClient_0;
 
-        public static PhotonHandler GetPhotonHandler() => PhotonHandler.field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0;
+        public static PhotonHandler GetPhotonHandler() => PhotonHandler.field_Internal_Static_PhotonHandler_0;
 
         public static PhotonView GetPhotonView(this VRCPlayer instance) => instance.prop_PhotonView_0;
 

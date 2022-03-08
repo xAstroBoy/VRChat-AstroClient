@@ -1,14 +1,15 @@
 namespace AstroClient.ClientUI.ActionMenu.WorldModule;
 
-using System.Drawing;
 using ClientResources.Loaders;
 using Gompoc.ActionMenuAPI.Api;
 using Tools.Extensions;
+using UnityEngine;
 using WorldModifications.WorldHacks;
 using WorldModifications.WorldHacks.Jar.AmongUS;
 using WorldModifications.WorldHacks.Jar.KitchenCooks;
 using WorldModifications.WorldsIds;
 using xAstroBoy.Utility;
+using Color = System.Drawing.Color;
 
 internal class WorldCheatsModule : AstroEvents
 {
@@ -295,44 +296,43 @@ internal class WorldCheatsModule : AstroEvents
                         CustomSubMenu.AddToggle("Turn Off Mirrors Troll (Spams Mirror Off event to piss Mirror zombies!)", GhostGame.FuckOffMirrorZombies, value => { GhostGame.FuckOffMirrorZombies = value; });
                     });
 
-                    // DEAD Since the Author has set "Haunted House"
-                    //CustomSubMenu.AddSubMenu("Cheats", () =>
-                    //{
-                    //    CustomSubMenu.AddButton("Teleport To Armory Zone", () => { GameInstances.LocalPlayer.gameObject.transform.position = new Vector3(40.171f, 5.7125f, 544.726f); });
-                    //    CustomSubMenu.AddButton("Armory Disable Lock & Unlock Everything", () =>
-                    //    {
-                    //        GhostGame.Armory_CraftGun.InvokeBehaviour();
-                    //        GhostGame.Armory_CraftSniper.InvokeBehaviour();
-                    //        GhostGame.Armory_CraftClue.InvokeBehaviour();
-                    //        GhostGame.Armory_OpenCabinet_1.InvokeBehaviour();
-                    //        GhostGame.Armory_OpenCabinet_2.InvokeBehaviour();
-                    //        GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5);
-                    //        GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(15);
-                    //    });
+                    CustomSubMenu.AddSubMenu("Cheats", () =>
+                    {
+                        CustomSubMenu.AddButton("Teleport To Armory Zone", () => { GameInstances.LocalPlayer.gameObject.transform.position = new Vector3(40.171f, 5.7125f, 544.726f); });
+                        CustomSubMenu.AddButton("Armory Disable Lock & Unlock Everything", () =>
+                        {
+                            GhostGame.Armory_CraftGun.InvokeBehaviour();
+                            GhostGame.Armory_CraftSniper.InvokeBehaviour();
+                            GhostGame.Armory_CraftClue.InvokeBehaviour();
+                            GhostGame.Armory_OpenCabinet_1.InvokeBehaviour();
+                            GhostGame.Armory_OpenCabinet_2.InvokeBehaviour();
+                            GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5);
+                            GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(15);
+                        });
 
-                    //    CustomSubMenu.AddButton("Click Money Reward 40 times", () =>
-                    //    {
-                    //        GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(40);
-                    //    });
+                        CustomSubMenu.AddButton("Click Money Reward 40 times", () =>
+                        {
+                            GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(40);
+                        });
 
-                    //    CustomSubMenu.AddSubMenu("Armory Manual Control", () =>
-                    //    {
+                        CustomSubMenu.AddSubMenu("Armory Manual Control", () =>
+                        {
 
-                    //        CustomSubMenu.AddButton("Disable Lock (Clicks it 5 times!)", () => { GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5); });
-                    //        CustomSubMenu.AddButton("Start Armory Weapons crafting.", () =>
-                    //        {
-                    //            GhostGame.Armory_CraftGun.InvokeBehaviour();
-                    //            GhostGame.Armory_CraftSniper.InvokeBehaviour();
-                    //        });
-                    //        CustomSubMenu.AddButton("Relock Armory Door", () => { GhostGame.ArmoryDoor_LockDoor.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Disable Lock (Clicks it 5 times!)", () => { GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5); });
+                            CustomSubMenu.AddButton("Start Armory Weapons crafting.", () =>
+                            {
+                                GhostGame.Armory_CraftGun.InvokeBehaviour();
+                                GhostGame.Armory_CraftSniper.InvokeBehaviour();
+                            });
+                            CustomSubMenu.AddButton("Relock Armory Door", () => { GhostGame.ArmoryDoor_LockDoor.InvokeBehaviour(); });
 
-                    //        CustomSubMenu.AddButton("Open Armory Door Clockwise", () => { GhostGame.ArmoryDoor_OpenDoor_Clockwise.InvokeBehaviour(); });
-                    //        CustomSubMenu.AddButton("Open Armory Door CounterClockWise", () => { GhostGame.ArmoryDoor_OpenDoor_CounterClockwise.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Open Armory Door Clockwise", () => { GhostGame.ArmoryDoor_OpenDoor_Clockwise.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Open Armory Door CounterClockWise", () => { GhostGame.ArmoryDoor_OpenDoor_CounterClockwise.InvokeBehaviour(); });
 
-                    //        CustomSubMenu.AddButton("Close Armory Door Clockwise", () => { GhostGame.ArmoryDoor_CloseDoor_Clockwise.InvokeBehaviour(); });
-                    //        CustomSubMenu.AddButton("Close Armory Door CounterClockWise", () => { GhostGame.ArmoryDoor_CloseDoor_CounterClockwise.InvokeBehaviour(); });
-                    //    });
-                    //});
+                            CustomSubMenu.AddButton("Close Armory Door Clockwise", () => { GhostGame.ArmoryDoor_CloseDoor_Clockwise.InvokeBehaviour(); });
+                            CustomSubMenu.AddButton("Close Armory Door CounterClockWise", () => { GhostGame.ArmoryDoor_CloseDoor_CounterClockwise.InvokeBehaviour(); });
+                        });
+                    });
                 });
 
             #endregion

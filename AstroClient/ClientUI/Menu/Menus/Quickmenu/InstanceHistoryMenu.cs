@@ -3,16 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ActionMenu.AvatarParametersModule.Menu;
     using ClientResources.Loaders;
-    using Tools.Extensions;
     using Tools.Instance.History;
-    using Tools.Skybox;
-    using UnityEngine;
     using VRC.UI.Elements;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.AstroButtonAPI.WingsAPI;
+    using xAstroBoy.Extensions;
     using Color = System.Drawing.Color;
 
     internal class InstanceHistoryMenu : AstroEvents
