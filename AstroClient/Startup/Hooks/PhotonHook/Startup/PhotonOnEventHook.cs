@@ -71,8 +71,8 @@ internal class PhotonOnEventHook : AstroEvents
                             // Copy all the stuff contained into The System Dictionary!
                             foreach (var item in casted)
                             {
-                                ModConsole.DebugLog($"Copying Item Key {item.Key}");
-
+                                //ModConsole.DebugLog($"Copying Item Key {item.Key}");
+								
                                 // Copy using only the Existing keys!
                                 Dictionary_EditableCopy.Add(item.Key, casted[item.Key]);
                             }
