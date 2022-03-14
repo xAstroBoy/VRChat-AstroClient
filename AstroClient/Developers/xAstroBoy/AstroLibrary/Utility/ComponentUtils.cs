@@ -5,24 +5,25 @@
 
     public static class ComponentUtils
     {
+        #region  GameObject
 
-        public static T GetGetInChildrens_OrAddComponent<T>(this GameObject obj) where T : Component
+        public static T GetGetInChildrens_OrAddComponent<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
         {
             if (obj == null) return null;
             var result = obj.GetComponent<T>();
             if (result == null)
-                result = obj.GetComponentInChildren<T>(true);
+                result = obj.GetComponentInChildren<T>(IncludeInactive);
             if (result == null)
                 result = obj.AddComponent<T>();
             return result;
         }
 
-        public static T GetGetInChildrens<T>(this GameObject obj) where T : Component
+        public static T GetGetInChildrens<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
         {
             if (obj == null) return null;
             var result = obj.GetComponent<T>();
             if (result == null)
-                result = obj.GetComponentInChildren<T>(true);
+                result = obj.GetComponentInChildren<T>(IncludeInactive);
             return result;
         }
 
@@ -45,15 +46,33 @@
                 }
             }
         }
-        public static void RemoveComponent<T>(this Transform obj) where T : Component
+
+        #endregion
+
+        #region  Transform
+        public static T GetGetInChildrens_OrAddComponent<T>(this Transform obj, bool IncludeInactive = false) where T : Component
         {
-            obj.gameObject.RemoveComponent<T>();
+            return obj.gameObject.GetGetInChildrens_OrAddComponent<T>(IncludeInactive);
+        }
+
+        public static T GetGetInChildrens<T>(this Transform obj, bool IncludeInactive = false) where T : Component
+        {
+            return obj.gameObject.GetGetInChildrens<T>(IncludeInactive);
         }
 
         public static T GetOrAddComponent<T>(this Transform obj) where T : Component
         {
             return obj.gameObject.GetOrAddComponent<T>();
         }
+        internal static void RemoveComponent<T>(this Transform obj) where T : Component
+        {
+            obj.gameObject.RemoveComponent<T>();
+        }
+
+        #endregion
+
+        #region  component
+
         internal static T AddComponent<T>(this Component c) where T : Component
         {
             return c.gameObject.AddComponent<T>();
@@ -78,6 +97,7 @@
                 }
             }
         }
+        #endregion 
 
     }
 }

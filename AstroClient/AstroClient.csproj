@@ -325,6 +325,16 @@
     <Compile Include="ModsDetector\NotoriousPatcher.cs" />
     <Compile Include="Spawnables\ColliderSuppresserCube\TweakerSphere.cs" />
     <Compile Include="Spawnables\ColliderSuppresserCube\ColliderSuppresserSphere.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\PhotonHandlers\Photon_PlayerModerationHandler.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Structs\ModerationStructures\PlayerModerationCode.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Structs\HookAction.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Structs\ModerationStructures\ModerationCode.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Structs\PhotonBytes\Photon_OnEventBytes.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Structs\PhotonBytes\VRChat_Photon_Events.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Tools\PhotonLogger\PhotonLogger.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Tools\Replacers\Photon_HashtableEditor.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Tools\Replacers\Photon_DictionaryEditor.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Tools\Translators\Photon_StructToString.cs" />
     <Compile Include="Startup\Hooks\PlayerJoinAndLeaveHook.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SoftCloneHook.cs" />
@@ -393,7 +403,7 @@
     <Compile Include="ClientEvents\AstroEventArgs\VRCInputArgs.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\ScreenEventArgs.cs" />
     <Compile Include="Startup\Welcome.cs" />
-    <Compile Include="Startup\Hooks\PhotonOnEventHook.cs" />
+    <Compile Include="Startup\Hooks\PhotonHook\Startup\PhotonOnEventHook.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
     <Compile Include="Startup\Hooks\PerformanceScannerHook.cs" />
     <Compile Include="Startup\Patches\InputPatches.cs" />

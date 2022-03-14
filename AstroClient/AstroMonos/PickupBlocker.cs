@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
+    using Components.Tools;
     using Components.UI.SingleTag;
     using Tools.Extensions;
     using VRC;
@@ -10,9 +11,25 @@
 
     internal class PickupBlocker : AstroEvents
     {
+        private static bool HasPickupControllerBeenAdded = false;
+
+        private static void StartPickupBlockerSystem()
+        {
+            if (!HasPickupControllerBeenAdded)
+            {
+                foreach (var item in WorldUtils.Pickups)
+                {
+                    item.GetOrAddComponent<PickupController>();
+                }
+
+                HasPickupControllerBeenAdded = true;
+            }
+
+        }
 
         internal static void RegisterPlayer(Player player)
         {
+            StartPickupBlockerSystem(); // Add everything only if we need to prevent trolls from accessing pickup interaction
             var id = player.GetAPIUser().GetUserID();
             if (id != null)
             {
@@ -46,6 +63,7 @@
 
         internal override void OnRoomLeft()
         {
+            HasPickupControllerBeenAdded = false;
             blockeduserids.Clear();
         }
 
