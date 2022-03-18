@@ -3,6 +3,7 @@ namespace AstroClient.ClientUI.ActionMenu.WorldModule;
 using ClientResources.Loaders;
 using Gompoc.ActionMenuAPI.Api;
 using Tools.Extensions;
+using Tools.Player.Movement.Exploit;
 using UnityEngine;
 using WorldModifications.WorldHacks;
 using WorldModifications.WorldHacks.Jar.AmongUS;
@@ -20,9 +21,8 @@ internal class WorldCheatsModule : AstroEvents
             #region Super Tower Defense
 
             if (WorldUtils.WorldID == WorldIds.Super_Tower_defense)
-                CustomSubMenu.AddSubMenu("Super Tower Defense", () =>
-                {
-                    CustomSubMenu.AddSubMenu("Fixes", () =>
+            {  
+                CustomSubMenu.AddSubMenu("Fixes", () =>
                     {
                         CustomSubMenu.AddButton("Fix Towers And Respawn", () => { SuperTowerDefense.FixTheTowers(true); });
                         CustomSubMenu.AddButton("Fix Towers No Respawn", () => { SuperTowerDefense.FixTheTowers(false); });
@@ -181,166 +181,214 @@ internal class WorldCheatsModule : AstroEvents
                             }
                         });
                     });
-                });
-
+            }
             #endregion Super Tower Defense
 
             #region AmongUS
 
             if (WorldUtils.WorldID == WorldIds.AmongUS)
-                CustomSubMenu.AddSubMenu("Among US", () =>
+            {
+                CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
+
+                CustomSubMenu.AddSubMenu("Game Events", () => { CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour(); }); });
+
+                CustomSubMenu.AddSubMenu("Sabotage & Repair", () =>
                 {
-                    CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
+                    CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUSCheats.CancelAllSabotages?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUSCheats.SabotageLights?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Doors", () => { AmongUSCheats.SabotageAllDoors.InvokeBehaviour(); });
+                });
 
-                    CustomSubMenu.AddSubMenu("Game Events", () => { CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour(); }); });
-
-                    CustomSubMenu.AddSubMenu("Sabotage & Repair", () =>
+                CustomSubMenu.AddSubMenu("Task Faker", () =>
+                {
+                    CustomSubMenu.AddButton("Submit Scan", () => { AmongUSCheats.SubmitScanTask?.InvokeBehaviour(); });
+                    CustomSubMenu.AddSubMenu("Garbage", () =>
                     {
-                        CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUSCheats.CancelAllSabotages?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUSCheats.SabotageLights?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Sabotage Doors", () => { AmongUSCheats.SabotageAllDoors.InvokeBehaviour(); });
-                    });
-
-                    CustomSubMenu.AddSubMenu("Task Faker", () =>
-                    {
-                        CustomSubMenu.AddButton("Submit Scan", () => { AmongUSCheats.SubmitScanTask?.InvokeBehaviour(); });
-                        CustomSubMenu.AddSubMenu("Garbage", () =>
-                        {
-                            CustomSubMenu.AddButton("Cafeteria", () => { AmongUSCheats.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Oxygen", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Storage A", () => { AmongUSCheats.EmptyGarbage_Storage_A?.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Storage B", () => { AmongUSCheats.EmptyGarbage_Storage_B?.InvokeBehaviour(); });
-                        });
+                        CustomSubMenu.AddButton("Cafeteria", () => { AmongUSCheats.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Oxygen", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Storage A", () => { AmongUSCheats.EmptyGarbage_Storage_A?.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Storage B", () => { AmongUSCheats.EmptyGarbage_Storage_B?.InvokeBehaviour(); });
                     });
                 });
+            }
 
             #endregion AmongUS
 
             #region ClickerGame
 
             if (WorldUtils.WorldID == WorldIds.Clicker_Game)
-                CustomSubMenu.AddSubMenu("Clicker Game", () => { CustomSubMenu.AddToggle("AutoClicker", ClickerGame.CubeAutoClicker, ToggleValue => { ClickerGame.CubeAutoClicker = ToggleValue; }); });
+            {
+                CustomSubMenu.AddToggle("AutoClicker", ClickerGame.CubeAutoClicker,
+                    ToggleValue => { ClickerGame.CubeAutoClicker = ToggleValue; });
+            }
 
             #endregion
 
             #region BOMBERio
 
             if (WorldUtils.WorldID == WorldIds.BOMBERio)
-                CustomSubMenu.AddSubMenu("BOMBERio", () =>
+            {
+                CustomSubMenu.AddSubMenu("Gun Modifier", () =>
                 {
-                    CustomSubMenu.AddSubMenu("Gun Modifier", () =>
-                    {
-                        CustomSubMenu.AddToggle("Shoot Bomb 0", BOMBERio.Override_ShootBomb_0_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_0_Toggle = ToggleValue; });
-                        CustomSubMenu.AddToggle("Shoot Bomb 1", BOMBERio.Override_ShootBomb_1_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_1_Toggle = ToggleValue; });
-                        CustomSubMenu.AddToggle("Shoot Bomb 2", BOMBERio.Override_ShootBomb_2_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_2_Toggle = ToggleValue; });
-                        CustomSubMenu.AddToggle("Shoot Bomb 3", BOMBERio.Override_ShootBomb_3_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_3_Toggle = ToggleValue; });
-                        CustomSubMenu.AddToggle("Shoot First Player Bomb", BOMBERio.Override_ShootBomb_4_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_4_Toggle = ToggleValue; });
-                        CustomSubMenu.AddToggle("Shoot Rocket", BOMBERio.Override_ShootBomb_5_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_5_Toggle = ToggleValue; });
-                    });
-
-                    CustomSubMenu.AddSubMenu("Crystal Harvester", () =>
-                    {
-                        CustomSubMenu.AddButton("Harvest 10 Crystals", () => { BOMBERio.HarvestQuads(10); });
-                        CustomSubMenu.AddButton("Harvest 20 Crystals", () => { BOMBERio.HarvestQuads(20); });
-                        CustomSubMenu.AddButton("Harvest 50 Crystals", () => { BOMBERio.HarvestQuads(50); });
-                        CustomSubMenu.AddButton("Harvest 100 Crystals", () => { BOMBERio.HarvestQuads(100); });
-                        CustomSubMenu.AddButton("Harvest 500 Crystals", () => { BOMBERio.HarvestQuads(500); });
-                        CustomSubMenu.AddButton("Harvest 1000 Crystals", () => { BOMBERio.HarvestQuads(1000); });
-                    });
-
-                    CustomSubMenu.AddToggle("Bypass Outside Circle Speed", BOMBERio.BypassOutsideCircleSpeed, ToggleValue => { BOMBERio.BypassOutsideCircleSpeed = ToggleValue; });
+                    CustomSubMenu.AddToggle("Shoot Bomb 0", BOMBERio.Override_ShootBomb_0_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_0_Toggle = ToggleValue; });
+                    CustomSubMenu.AddToggle("Shoot Bomb 1", BOMBERio.Override_ShootBomb_1_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_1_Toggle = ToggleValue; });
+                    CustomSubMenu.AddToggle("Shoot Bomb 2", BOMBERio.Override_ShootBomb_2_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_2_Toggle = ToggleValue; });
+                    CustomSubMenu.AddToggle("Shoot Bomb 3", BOMBERio.Override_ShootBomb_3_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_3_Toggle = ToggleValue; });
+                    CustomSubMenu.AddToggle("Shoot First Player Bomb", BOMBERio.Override_ShootBomb_4_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_4_Toggle = ToggleValue; });
+                    CustomSubMenu.AddToggle("Shoot Rocket", BOMBERio.Override_ShootBomb_5_Toggle, ToggleValue => { BOMBERio.Override_ShootBomb_5_Toggle = ToggleValue; });
                 });
+
+                CustomSubMenu.AddSubMenu("Crystal Harvester", () =>
+                {
+                    CustomSubMenu.AddButton("Harvest 10 Crystals", () => { BOMBERio.HarvestQuads(10); });
+                    CustomSubMenu.AddButton("Harvest 20 Crystals", () => { BOMBERio.HarvestQuads(20); });
+                    CustomSubMenu.AddButton("Harvest 50 Crystals", () => { BOMBERio.HarvestQuads(50); });
+                    CustomSubMenu.AddButton("Harvest 100 Crystals", () => { BOMBERio.HarvestQuads(100); });
+                    CustomSubMenu.AddButton("Harvest 500 Crystals", () => { BOMBERio.HarvestQuads(500); });
+                    CustomSubMenu.AddButton("Harvest 1000 Crystals", () => { BOMBERio.HarvestQuads(1000); });
+                });
+
+                CustomSubMenu.AddToggle("Bypass Outside Circle Speed", BOMBERio.BypassOutsideCircleSpeed, ToggleValue => { BOMBERio.BypassOutsideCircleSpeed = ToggleValue; });
+
+            }
 
             #endregion
 
             #region Kitchen Cooks
 
             if (WorldUtils.WorldID == WorldIds.KitchenCooks)
-                CustomSubMenu.AddSubMenu("Kitchen Cooks", () =>
+            {
+                CustomSubMenu.AddToggle("Private Golden Knifes", KitchenCooksCheats.OnlySelfHasPatreonPerk, ToggleValue =>
                 {
-                    CustomSubMenu.AddToggle("Private Golden Knifes", KitchenCooksCheats.OnlySelfHasPatreonPerk, ToggleValue =>
-                    {
-                        KitchenCooksCheats.OnlySelfHasPatreonPerk = ToggleValue;
-                        KitchenCooksCheats.EveryoneHasPatreonPerk = false;
-                    });
-                    CustomSubMenu.AddToggle("Public Golden Knifes", KitchenCooksCheats.EveryoneHasPatreonPerk, ToggleValue =>
-                    {
-                        KitchenCooksCheats.OnlySelfHasPatreonPerk = false;
-                        KitchenCooksCheats.EveryoneHasPatreonPerk = ToggleValue;
-                        ;
-                    });
+                    KitchenCooksCheats.OnlySelfHasPatreonPerk = ToggleValue;
+                    KitchenCooksCheats.EveryoneHasPatreonPerk = false;
+                });
+                CustomSubMenu.AddToggle("Public Golden Knifes", KitchenCooksCheats.EveryoneHasPatreonPerk, ToggleValue =>
+                {
+                    KitchenCooksCheats.OnlySelfHasPatreonPerk = false;
+                    KitchenCooksCheats.EveryoneHasPatreonPerk = ToggleValue;
+                    
                 });
 
+            }
+
+            
             #endregion
 
             #region PuttPuttPond
 
             if (WorldUtils.WorldID == WorldIds.PuttPuttPond)
-                CustomSubMenu.AddSubMenu("Putt Putt Pond", () =>
-                {
-                    CustomSubMenu.AddToggle("Patron Mode", PuttPuttPond.isPatron.GetValueOrDefault(false), ToggleValue => { PuttPuttPond.isPatron = ToggleValue; });
-                    CustomSubMenu.AddToggle("Rainbow Golf ball", PuttPuttPond.RainbowBall, ToggleValue => { PuttPuttPond.RainbowBall = ToggleValue; });
-                });
+            {
+                CustomSubMenu.AddToggle("Patron Mode", PuttPuttPond.isPatron.GetValueOrDefault(false),
+                    ToggleValue => { PuttPuttPond.isPatron = ToggleValue; });
+                CustomSubMenu.AddToggle("Rainbow Golf ball", PuttPuttPond.RainbowBall,
+                    ToggleValue => { PuttPuttPond.RainbowBall = ToggleValue; });
+            }
 
             #endregion
 
             #region Ghost Game
 
             if (WorldUtils.WorldID == WorldIds.GhostGame)
-                CustomSubMenu.AddSubMenu("Ghost Game", () =>
+            {
+                CustomSubMenu.AddSubMenu("Mirror Control", () =>
                 {
-                    CustomSubMenu.AddSubMenu("Mirror Control", () =>
+                    CustomSubMenu.AddButton("Toggle Lobby Mirrors (Fuck the Mirror zombies !)",
+                        () => { GhostGame.ToggleMirrors_1.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Toggle Mailbox Mirrors (Fuck the Mirror zombies !)",
+                        () => { GhostGame.ToggleMirrors_2.InvokeBehaviour(); });
+                    CustomSubMenu.AddToggle("Turn Off Mirrors Troll (Spams Mirror Off event to piss Mirror zombies!)",
+                        GhostGame.FuckOffMirrorZombies, value => { GhostGame.FuckOffMirrorZombies = value; });
+                });
+
+                CustomSubMenu.AddSubMenu("Cheats", () =>
+                {
+                    CustomSubMenu.AddButton("Teleport To Armory Zone",
+                        () =>
+                        {
+                            GameInstances.LocalPlayer.gameObject.transform.position =
+                                new Vector3(40.171f, 5.7125f, 544.726f);
+                        });
+                    CustomSubMenu.AddButton("Armory Disable Lock & Unlock Everything", () =>
                     {
-                        CustomSubMenu.AddButton("Toggle Lobby Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_1.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Toggle Mailbox Mirrors (Fuck the Mirror zombies !)", () => { GhostGame.ToggleMirrors_2.InvokeBehaviour(); });
-                        CustomSubMenu.AddToggle("Turn Off Mirrors Troll (Spams Mirror Off event to piss Mirror zombies!)", GhostGame.FuckOffMirrorZombies, value => { GhostGame.FuckOffMirrorZombies = value; });
+                        GhostGame.Armory_CraftGun.InvokeBehaviour();
+                        GhostGame.Armory_CraftSniper.InvokeBehaviour();
+                        GhostGame.Armory_CraftClue.InvokeBehaviour();
+                        GhostGame.Armory_OpenCabinet_1.InvokeBehaviour();
+                        GhostGame.Armory_OpenCabinet_2.InvokeBehaviour();
+                        GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5);
+                        GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(15);
                     });
 
-                    CustomSubMenu.AddSubMenu("Cheats", () =>
+                    CustomSubMenu.AddButton("Click Money Reward 40 times",
+                        () => { GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(40); });
+
+                    CustomSubMenu.AddSubMenu("Armory Manual Control", () =>
                     {
-                        CustomSubMenu.AddButton("Teleport To Armory Zone", () => { GameInstances.LocalPlayer.gameObject.transform.position = new Vector3(40.171f, 5.7125f, 544.726f); });
-                        CustomSubMenu.AddButton("Armory Disable Lock & Unlock Everything", () =>
+
+                        CustomSubMenu.AddButton("Disable Lock (Clicks it 5 times!)",
+                            () => { GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5); });
+                        CustomSubMenu.AddButton("Start Armory Weapons crafting.", () =>
                         {
                             GhostGame.Armory_CraftGun.InvokeBehaviour();
                             GhostGame.Armory_CraftSniper.InvokeBehaviour();
-                            GhostGame.Armory_CraftClue.InvokeBehaviour();
-                            GhostGame.Armory_OpenCabinet_1.InvokeBehaviour();
-                            GhostGame.Armory_OpenCabinet_2.InvokeBehaviour();
-                            GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5);
-                            GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(15);
                         });
+                        CustomSubMenu.AddButton("Relock Armory Door",
+                            () => { GhostGame.ArmoryDoor_LockDoor.InvokeBehaviour(); });
 
-                        CustomSubMenu.AddButton("Click Money Reward 40 times", () =>
-                        {
-                            GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(40);
-                        });
+                        CustomSubMenu.AddButton("Open Armory Door Clockwise",
+                            () => { GhostGame.ArmoryDoor_OpenDoor_Clockwise.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Open Armory Door CounterClockWise",
+                            () => { GhostGame.ArmoryDoor_OpenDoor_CounterClockwise.InvokeBehaviour(); });
 
-                        CustomSubMenu.AddSubMenu("Armory Manual Control", () =>
-                        {
-
-                            CustomSubMenu.AddButton("Disable Lock (Clicks it 5 times!)", () => { GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5); });
-                            CustomSubMenu.AddButton("Start Armory Weapons crafting.", () =>
-                            {
-                                GhostGame.Armory_CraftGun.InvokeBehaviour();
-                                GhostGame.Armory_CraftSniper.InvokeBehaviour();
-                            });
-                            CustomSubMenu.AddButton("Relock Armory Door", () => { GhostGame.ArmoryDoor_LockDoor.InvokeBehaviour(); });
-
-                            CustomSubMenu.AddButton("Open Armory Door Clockwise", () => { GhostGame.ArmoryDoor_OpenDoor_Clockwise.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Open Armory Door CounterClockWise", () => { GhostGame.ArmoryDoor_OpenDoor_CounterClockwise.InvokeBehaviour(); });
-
-                            CustomSubMenu.AddButton("Close Armory Door Clockwise", () => { GhostGame.ArmoryDoor_CloseDoor_Clockwise.InvokeBehaviour(); });
-                            CustomSubMenu.AddButton("Close Armory Door CounterClockWise", () => { GhostGame.ArmoryDoor_CloseDoor_CounterClockwise.InvokeBehaviour(); });
-                        });
+                        CustomSubMenu.AddButton("Close Armory Door Clockwise",
+                            () => { GhostGame.ArmoryDoor_CloseDoor_Clockwise.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Close Armory Door CounterClockWise",
+                            () => { GhostGame.ArmoryDoor_CloseDoor_CounterClockwise.InvokeBehaviour(); });
                     });
                 });
+            }
 
             #endregion
 
             #region BeyondDarkness
 
             if (WorldUtils.WorldID == WorldIds.BeyondDarkness)
-                CustomSubMenu.AddSubMenu("Beyond Darkness", () => { CustomSubMenu.AddToggle("Skip Bedroom Puzzle", BeyondDarkness.SkipBedroomPuzzle, ToggleValue => { BeyondDarkness.SkipBedroomPuzzle = ToggleValue; }); });
+            {
+                CustomSubMenu.AddToggle("Skip Bedroom Puzzle", BeyondDarkness.SkipBedroomPuzzle, ToggleValue => { BeyondDarkness.SkipBedroomPuzzle = ToggleValue; });
+            }
+
+            #endregion
+
+            #region  Prison Escape
+
+            if (WorldUtils.WorldID == WorldIds.PrisonEscape)
+            {
+                CustomSubMenu.AddButton("Get Money", () => { PrisonEscape.MoneyInteraction.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Get Money x30", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(30); });
+                CustomSubMenu.AddButton("Get Money x50", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(50); });
+                CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
+                CustomSubMenu.AddButton("Click Gate Button", () => { PrisonEscape.GateInteraction.InvokeBehaviour(); });
+                CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
+                CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.LargeCrateESP, ToggleValue => { PrisonEscape.LargeCrateESP = ToggleValue; });
+                CustomSubMenu.AddSubMenu("Patreon System Control", () =>
+                {
+                    CustomSubMenu.AddToggle("Patron Mode", PrisonEscape.isPatron.GetValueOrDefault(false), ToggleValue => { PrisonEscape.isPatron = ToggleValue; });
+                    CustomSubMenu.AddButton("Toggle Patron Guns", () => { PrisonEscape.TogglePatronGuns.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Toggle Double Points", () => { PrisonEscape.ToggleDoublePoints.InvokeBehaviour(); });
+                });
+
+
+            }
+            #endregion
+
+            #region  PuttPuttQuest & PuttPuttQuest Night
+
+            if (WorldUtils.WorldID == WorldIds.PuttPuttQuest || WorldUtils.WorldID == WorldIds.PuttPuttQuest_Night)
+            {
+                CustomSubMenu.AddToggle("Patron Mode", PuttPuttQuest.isPatron.GetValueOrDefault(false), ToggleValue => { PuttPuttQuest.isPatron = ToggleValue; });
+                CustomSubMenu.AddToggle("Rainbow Golf ball", PuttPuttPond.RainbowBall, ToggleValue => { PuttPuttQuest.RainbowBall = ToggleValue; });
+            }
 
             #endregion
         }, Icons.thief);

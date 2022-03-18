@@ -31,11 +31,11 @@
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
 
             NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
-            ButtonsMenu = NestedPart.FindObject("Buttons");
+            ButtonsMenu = NestedPart.FindUIObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
-            Object.Destroy(NestedPart.FindObject("Panel_Info"));
-            Object.Destroy(NestedPart.FindObject("Button_PhotosFolder"));
+            Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
+            Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
             foreach (var item in ButtonsMenu.transform.Get_Childs())
             {
                 item.DestroyMeLocal(true);

@@ -39,7 +39,7 @@
         {
             if (__0.ToLower().Contains("riskyfuncs"))
             {
-                ModConsole.DebugWarning($"A Mod is Checking for Integrity Checks, Redirecting URL : {__0}, to : {AllowedResponse}");
+                ModConsole.DebugWarning($"A Mod is Checking for Risky Function Checks, Redirecting URL : {__0}, to : {AllowedResponse}");
                 __0 = AllowedResponse;
             }
         }
@@ -48,7 +48,7 @@
         {
             if (__0.AbsoluteUri.ToLower().Contains("riskyfuncs"))
             {
-                ModConsole.DebugWarning($"A Mod is Checking for Integrity Checks, Redirecting URL : {__0.AbsoluteUri}, to : {AllowedResponse}");
+                ModConsole.DebugWarning($"A Mod is Checking for Risky Function Checks, Redirecting URL : {__0.AbsoluteUri}, to : {AllowedResponse}");
                 __0 = new Uri(AllowedResponse);
             }
         }

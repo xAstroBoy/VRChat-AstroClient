@@ -25,13 +25,6 @@
             return new HarmonyMethod(typeof(TeoPatcher).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        internal static T GetAssemblyAttribute<T>(System.Reflection.Assembly ass) where T : Attribute
-        {
-            object[] attributes = ass.GetCustomAttributes(typeof(T), false);
-            if (attributes == null || attributes.Length == 0)
-                return null;
-            return attributes.OfType<T>().SingleOrDefault();
-        }
 
         private static Assembly _TeoClientAssembly = null;
         private static Assembly TeoClientAssembly

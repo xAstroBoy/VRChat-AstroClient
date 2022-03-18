@@ -83,7 +83,7 @@
             if (c == null) return null;
             var existing = c.GetComponent<T>();
             if (existing) return existing;
-            return c.gameObject.AddComponent<T>();
+            return c.transform.AddComponent<T>();
         }
 
         internal static void RemoveComponent<T>(this Component c) where T : Component

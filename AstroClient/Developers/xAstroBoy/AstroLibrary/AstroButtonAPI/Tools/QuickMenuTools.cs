@@ -326,7 +326,7 @@
         {
             get
             {
-                if (_SelectedUserMenuQM == null) _SelectedUserMenuQM = QuickMenuTransform.gameObject.FindObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
+                if (_SelectedUserMenuQM == null) _SelectedUserMenuQM = QuickMenuTransform.gameObject.FindUIObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
                 return _SelectedUserMenuQM;
             }
         }

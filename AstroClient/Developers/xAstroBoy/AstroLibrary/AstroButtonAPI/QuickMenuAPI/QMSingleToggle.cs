@@ -129,8 +129,8 @@
                 default:
                     if (ButtonsMenu == null)
                     {
-                        var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-                        ButtonsMenu = Part1.FindObject("Buttons");
+                        var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindUIObject(btnQMLoc);
+                        ButtonsMenu = Part1.FindUIObject("Buttons");
                     }
 
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);

@@ -56,5 +56,55 @@
         }
 
         #endregion Flashlight_gold
+
+        #region PlayerListMod
+
+        private static GameObject _PlayerListMod;
+
+        /// <summary>
+        ///     Loads PlayerListMod bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject PlayerListMod
+        {
+            get
+            {
+                if (_PlayerListMod == null)
+                {
+                    _PlayerListMod = Bundles.playerlistmod.LoadAsset_Internal("Assets/Prefabs/PlayerListMod.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _PlayerListMod.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return PlayerListMod;
+                }
+
+                return _PlayerListMod;
+            }
+        }
+
+        #endregion PlayerListMod
+
+
+        #region PlayerListMenuButton
+
+        private static GameObject _PlayerListMenuButton;
+
+        /// <summary>
+        ///     Loads PlayerListMenuButton bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject PlayerListMenuButton
+        {
+            get
+            {
+                if (_PlayerListMenuButton == null)
+                {
+                    _PlayerListMenuButton = Bundles.playerlistmod.LoadAsset_Internal("Assets/Prefabs/PlayerListMenuButton.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _PlayerListMenuButton.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return PlayerListMenuButton;
+                }
+
+                return _PlayerListMenuButton;
+            }
+        }
+
+        #endregion PlayerListMenuButton
+
     }
 }

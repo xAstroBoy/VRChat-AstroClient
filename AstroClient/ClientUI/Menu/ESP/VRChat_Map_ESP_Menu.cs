@@ -7,6 +7,7 @@
     using AstroMonos.Components.ESP.VRCInteractable;
     using Tools.Extensions;
     using Tools.World;
+    using UnityEngine;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
@@ -72,7 +73,15 @@
             {
                 if (item != null)
                 {
-                    _ = item.GetOrAddComponent<ESP_VRCInteractable>();
+                    var renderer = item.GetGetInChildrens<Renderer>(true);
+                    if (renderer != null)
+                    {
+                        renderer.GetOrAddComponent<ESP_VRCInteractable>();
+                    }
+                    else
+                    {
+                        item.GetOrAddComponent<ESP_VRCInteractable>();
+                    }
                 }
             }
         }
@@ -128,7 +137,15 @@
             {
                 if (item != null)
                 {
-                    _ = item.GetOrAddComponent<ESP_Pickup>();
+                    var renderer = item.GetGetInChildrens<Renderer>(true);
+                    if (renderer != null)
+                    {
+                        renderer.GetOrAddComponent<ESP_Pickup>();
+                    }
+                    else
+                    {
+                        item.GetOrAddComponent<ESP_Pickup>();
+                    }
                 }
             }
         }
@@ -184,7 +201,17 @@
             {
                 if (item != null)
                 {
-                    var triggeresp = item.GetOrAddComponent<ESP_Trigger>();
+                    ESP_Trigger triggeresp = null;
+                    var renderer = item.GetGetInChildrens<Renderer>(true);
+                    if (renderer != null)
+                    {
+                       triggeresp = renderer.GetOrAddComponent<ESP_Trigger>();
+                    }
+                    else
+                    {
+                      triggeresp =  item.GetOrAddComponent<ESP_Trigger>();
+                    }
+
                     if (triggeresp != null)
                     {
                         var trigger1 = item.GetComponent<VRC.SDKBase.VRC_Trigger>();
@@ -260,7 +287,15 @@
                 {
                     if (item != null)
                     {
-                        _ = item.gameObject.GetOrAddComponent<ESP_UdonBehaviour>();
+                        var renderer = item.gameObject.GetComponent<Renderer>();
+                        if (renderer != null)
+                        {
+                            renderer.GetOrAddComponent<ESP_UdonBehaviour>();
+                        }
+                        else
+                        {
+                            item.gameObject.GetOrAddComponent<ESP_UdonBehaviour>();
+                        }
                     }
                 }
             }

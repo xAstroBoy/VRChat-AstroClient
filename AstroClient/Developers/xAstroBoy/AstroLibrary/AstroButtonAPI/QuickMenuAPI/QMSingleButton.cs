@@ -90,7 +90,7 @@
             {
                 //ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Remote.QuickActions.transform, true);
                 ButtonObject.EnableComponents();
-                ButtonObject.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                 ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
             }
         }
@@ -254,22 +254,22 @@
                 case "SelectedUser_Remote":
                     ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Remote.QuickActions.transform, true);
                     ButtonObject.EnableComponents();
-                    ButtonObject.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                    ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 
                 case "SelectedUser_Local":
                     ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Local.QuickActions.transform, true);
                     ButtonObject.EnableComponents();
-                    ButtonObject.FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                    ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     break;
 
                 default:
                     if (ButtonsMenu == null)
                     {
-                        var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-                        ButtonsMenu = Part1.FindObject("Buttons");
+                        var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindUIObject(btnQMLoc);
+                        ButtonsMenu = Part1.FindUIObject("Buttons");
                     }
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;

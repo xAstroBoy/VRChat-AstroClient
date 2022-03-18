@@ -2,6 +2,7 @@
 {
     #region Imports
 
+    using System;
     using ExitGames.Client.Photon;
     using MelonLoader;
     using System.Reflection;
@@ -14,8 +15,16 @@
     using CheetoLibrary.Utility;
     using Cheetos;
     using HarmonyLib;
+    using Il2CppSystem.Collections;
+    using Newtonsoft.Json;
+    using PhotonHook.Structs;
+    using PhotonHook.Structs.PhotonBytes;
+    using PhotonHook.Tools.Ext;
+    using PhotonHook.Tools.PhotonLogger;
+    using PhotonHook.Tools.Translators;
     using Tools;
     using Tools.Player;
+    using UnhollowerRuntimeLib;
     using UnhollowerRuntimeLib.XrefScans;
     using VRC;
     using VRC.Udon;
@@ -30,7 +39,7 @@
         private static bool isSoftCloneActive = false;
         private static Il2CppSystem.Object AvatarDictCache { get; set; }
         private static MethodInfo _loadAvatarMethod;
-        private static int PacketMaxLimit { get; set; } = 2;
+        private static int PacketMaxLimit { get; set; } = 3;
 
         private static int _PacketCounter = 0;
         private static int PacketCounter
@@ -42,6 +51,12 @@
             set
             {
                 _PacketCounter = value;
+                //if (isSoftCloneActive)
+                //{
+                //    ModConsole.DebugLog($"Patched {value} Events");
+                //    PopupUtils.QueHudMessage($"Patched {value} Events");
+
+                //}
                 if (value == PacketMaxLimit)
                 {
                     _PacketCounter = 0;
@@ -61,10 +76,7 @@
 
         internal override void ExecutePriorityPatches()
         {
-            MiscUtils.DelayFunction(1f, new System.Action(() =>
-            {
-                InitPatches();
-            }));
+            InitPatches();
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
@@ -76,7 +88,7 @@
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
-            new AstroPatch(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent)), GetPatch(nameof(Detour)));
+            new AstroPatch(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent)), GetPatch(nameof(SoftCloneOnEvent)));
 
             _loadAvatarMethod =
     typeof(VRCPlayer).GetMethods()
@@ -98,7 +110,7 @@
                 AvatarDictCache = PlayerManager.prop_PlayerManager_0
                     .field_Private_List_1_Player_0
                     .ToArray()
-                    .FirstOrDefault(a => a.field_Private_APIUser_0.id == user.id)
+                    .FirstOrDefault(a => a.GetAPIUser().id == user.id)
                     ?.prop_Player_1.field_Private_Hashtable_0["avatarDict"];
                 if (AvatarDictCache != null)
                 {
@@ -142,20 +154,32 @@
             return true;
         }
 
-        private static void Detour(ref EventData __0)
+        private static void SoftCloneOnEvent(ref EventData __0)
         {
-            if (!isSoftCloneActive) return;
-            if (AvatarDictCache == null) return;
             if (__0 == null) return;
-            if (__0.Code == null) return;
-            if (__0.Sender == null) return;
-
-            if (__0.Code == 253 && __0.Sender == GameInstances.LocalPlayer.playerId)
+            if (GameInstances.LocalPlayer == null) return;
+            if (__0.Code == VRChat_Photon_Events.Custom_Properties)
             {
-                if (AvatarDictCache != null)
+                var casted = __0.Parameters[251].Cast<Il2CppSystem.Collections.Hashtable>();
+                
+                if (casted.IsLocalUser())
                 {
-                    __0.Parameters[251].Cast<Il2CppSystem.Collections.Hashtable>()["avatarDict"] = AvatarDictCache; // Hopefully it works!
-                    PacketCounter++;
+                   // ModConsole.DebugLog("Hey im Being called right now!");
+
+
+                    if (!isSoftCloneActive) return;
+                    if (AvatarDictCache == null) return;
+                    if (AvatarDictCache != null)
+                    {
+                        // Hopefully it works!
+                        if (casted != null)
+                        {
+                            ModConsole.DebugLog("Swapping AvatarDict...");
+                            casted["avatarDict"] = AvatarDictCache;
+                            PacketCounter++;
+                        }
+
+                    }
                 }
             }
         }

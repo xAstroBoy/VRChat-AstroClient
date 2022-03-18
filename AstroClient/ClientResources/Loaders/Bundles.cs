@@ -8,6 +8,22 @@
 
     internal static class Bundles
     {
+        private static AssetBundle _playerlistmod;
+
+        internal static AssetBundle playerlistmod
+        {
+            get
+            {
+                if (_playerlistmod == null)
+                {
+                    _playerlistmod = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}playerlistmod.assetbundle"), 0u);
+                    _playerlistmod.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _playerlistmod;
+            }
+        }
+
+
 
         private static AssetBundle _NewLoadingScreen;
 

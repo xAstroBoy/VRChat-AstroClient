@@ -36,5 +36,10 @@
         public const string GhostGame = "wrld_0ec97c4f-1e84-4a3a-9e3a-fa3075b6c56d";
         public const string BeyondDarkness = "wrld_b606cba5-f90a-4d71-af61-94623113e01e";
         public const string FrameOfReference = "wrld_3d3d87b3-3e78-4a7e-858d-e3a8a50d58ce";
+        public const string PrisonEscape = "wrld_14750dd6-26a1-4edb-ae67-cac5bcd9ed6a";
+        public const string PuttPuttQuest = "wrld_70353369-ba69-46ab-a20b-f6112c82adba";
+        public const string PuttPuttQuest_Night = "wrld_0e813689-822d-4537-8e36-ce2f6e5db4d5";
+
+
     }
 }

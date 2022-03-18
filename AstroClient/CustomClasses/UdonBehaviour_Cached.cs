@@ -3,6 +3,7 @@
     using MelonLoader;
     using System;
     using System.Collections;
+    using Tools.UdonEditor;
     using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
@@ -114,7 +115,7 @@
                 UdonBehaviour = null;
             }
             EventKey = null;
-
+            _RawItem = null;
         }
 
         /// <summary>
@@ -175,7 +176,57 @@
                 Cleanup();
             }
         }
+        /// <summary>
+        /// Returns The UdonBehaviour GameObject
+        /// </summary>
 
+        internal GameObject gameObject
+        {
+            get
+            {
+                return UdonBehaviour.gameObject;
+            }
+        }
+
+        /// <summary>
+        /// Returns The UdonBehaviour Transform
+        /// </summary>
+
+        internal Transform transform
+        {
+            get
+            {
+                return UdonBehaviour.transform;
+            }
+        }
+        /// <summary>
+        /// Returns The UdonBehaviour name
+        /// </summary>
+
+        internal string name
+        {
+            get
+            {
+                return UdonBehaviour.name;
+            }
+        }
+
+        private RawUdonBehaviour _RawItem;
+
+        /// <summary>
+        /// Returns The Raw UdonBehaviour (needed to do Heap patching)
+        /// </summary>
+        internal RawUdonBehaviour RawItem
+        {
+            get
+            {
+                if (_RawItem == null)
+                {
+                    _RawItem = UdonBehaviour.ToRawUdonBehaviour();
+                }
+                return _RawItem;
+            }
+        }
         /// <summary>
         /// Halts InvokeOnLoop Routine.
         /// </summary>

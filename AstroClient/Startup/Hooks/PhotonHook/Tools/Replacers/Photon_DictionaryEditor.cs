@@ -12,7 +12,7 @@ using Exception = System.Exception;
 internal class Photon_DictionaryEditor
 {
 
-    internal static void ReplaceData(ref EventData PhotonData, bool isDictionary, bool isHashTable, System.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> EditableDictionary)
+    internal static void ReplaceCustomData(ref EventData PhotonData, bool isDictionary, bool isHashTable, System.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> EditableDictionary)
     {
         try
         {

@@ -4,6 +4,7 @@ using System.Text;
 using AstroClient.Tools;
 using Config;
 using ExitGames.Client.Photon;
+using Ext;
 using Il2CppSystem;
 using Il2CppSystem.Collections;
 using Il2CppSystem.Collections.Generic;
@@ -12,6 +13,7 @@ using Structs;
 using Structs.ModerationStructures;
 using Structs.PhotonBytes;
 using Translators;
+using UnhollowerRuntimeLib;
 using xAstroBoy.Extensions;
 using xAstroBoy.Utility;
 using Exception = System.Exception;
@@ -46,7 +48,7 @@ internal class PhotonLogger
             case VRChat_Photon_Events.Transfer_Ownership: return false;
             case VRChat_Photon_Events.VacantViewIds: return false;
             case VRChat_Photon_Events.UploadAvatar: return false;
-            case VRChat_Photon_Events.Custom_Properties: return true;
+            case VRChat_Photon_Events.Custom_Properties: return false;
             case VRChat_Photon_Events.Leaving_World: return false;
             case VRChat_Photon_Events.Joining_World: return false;
             default:
@@ -54,7 +56,7 @@ internal class PhotonLogger
         }
     }
 
-    internal static void PrintEvent(ref EventData PhotonData, HookAction HookAction, bool isDictionary, bool isHashtable, bool isUnknownType)
+    internal static void PrintEvent(ref EventData PhotonData, HookAction HookAction, bool SkipBlock = false)
     {
         if (ConfigManager.General.LogEvents)
         {
@@ -63,7 +65,7 @@ internal class PhotonLogger
             StringBuilder ContainerType = new StringBuilder();
             try
             {
-                if (EventCodeToLog(PhotonData.Code))
+                if (EventCodeToLog(PhotonData.Code) || SkipBlock)
                 {
                     var PhotonSender = GameInstances.LoadBalancingPeer.GetPhotonPlayer(PhotonData.sender);
                     var translated = Photon_StructToString.TranslateEventData(PhotonData.Code);
@@ -78,54 +80,67 @@ internal class PhotonLogger
                     else
                         line.Append("'NULL' ");
 
-                    if (PhotonData.CustomData != null)
+                    if (PhotonData.GetCustomData() != null)
                     {
-
-                        if (isDictionary)
-                        {
-                            ContainerType.Append($"[Dictionary] : ");
-
-                            var casteddict = PhotonData.CustomData.Cast<Dictionary<byte, Object>>();
-                            if (casteddict != null)
-                            {
-                                // If Is a moderation event, get the moderation Type name 
-                                if (PhotonData.Code == VRChat_Photon_Events.Moderations)
-                                {
-                                    var moderationevent = casteddict[ModerationCode.EventCode].Unbox<byte>();
-                                    var moderationeventname = Photon_StructToString.TranslateModerationEvent(moderationevent);
-                                    if (moderationeventname.IsNotNullOrEmptyOrWhiteSpace()) prefix.Append($"{moderationeventname} ");
-                                }
-
-                                line.AppendLine();
-                                line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(casteddict), Formatting.Indented));
-                            }
-                        }
-
-                        if (isHashtable)
-                        {
-                            ContainerType.Append("[Hashtable] : ");
-                            var CastedHashtable = PhotonData.CustomData.Cast<Hashtable>();
-                            if (CastedHashtable != null)
-                            {
-                                line.AppendLine();
-                                line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(CastedHashtable), Formatting.Indented));
-                            }
-                        }
-
-                        if (isUnknownType)
-                        {
-                            ModConsole.DebugWarning($"Unknown Type Detected : {PhotonData.CustomData.GetIl2CppType().FullName}");
-                            return;
-                        }
+                        ModConsole.DebugLog("Parsing From CustomData...");
+                        ConvertEventDataToString(PhotonData.Code, PhotonData.GetCustomData(), ref line, ref prefix,
+                            ref ContainerType);
+                    }
+                    else if (PhotonData.GetParameterData() != null)
+                    {
+                        ModConsole.DebugLog("Parsing From Parameters...");
+                        ConvertEventDataToString(PhotonData.Code, PhotonData.GetParameterData(), ref line, ref prefix,
+                            ref ContainerType);
                     }
 
                     ModConsole.Log($"{Photon_StructToString.HookActionToString(HookAction)}{ContainerType}{prefix}{line}");
+
                 }
             }
             catch (Exception e)
             {
                 ModConsole.DebugErrorExc(e);
             }
+        }
+    }
+
+    private static void ConvertEventDataToString(byte code, Il2CppSystem.Object Data, ref StringBuilder line, ref StringBuilder prefix, ref StringBuilder ContainerType)
+    {
+        if (Data == null) return;
+
+        if (Data.GetIl2CppType().Equals(Il2CppType.Of<Dictionary<byte, Object>>()))
+        {
+            ContainerType.Append($"[Dictionary] : ");
+            var casteddict = Data.Cast<Dictionary<byte, Object>>();
+            if (casteddict != null)
+            {
+                // If Is a moderation event, get the moderation Type name 
+                if (code == VRChat_Photon_Events.Moderations)
+                {
+                    var moderationevent = casteddict[ModerationCode.EventCode].Unbox<byte>();
+                    var moderationeventname = Photon_StructToString.TranslateModerationEvent(moderationevent);
+                    if (moderationeventname.IsNotNullOrEmptyOrWhiteSpace()) prefix.Append($"{moderationeventname} ");
+                }
+
+                line.AppendLine();
+                line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(casteddict), Formatting.Indented));
+            }
+        }
+
+        else if (Data.GetIl2CppType().Equals(Il2CppType.Of<Hashtable>()))
+        {
+            ContainerType.Append("[Hashtable] : ");
+            var CastedHashtable = Data.Cast<Hashtable>();
+            if (CastedHashtable != null)
+            {
+                line.AppendLine();
+                line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(CastedHashtable), Formatting.Indented));
+            }
+        }
+        else
+        {
+            ModConsole.DebugWarning($"Unknown Type Detected : {Data.GetIl2CppType().FullName}");
+            return;
         }
     }
 }

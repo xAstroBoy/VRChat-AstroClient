@@ -133,15 +133,15 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (id == WorldIds.PoolParlor)
-            {
-                if (PoolParlor.PoolParlorCheats != null)
-                {
-                    WorldCheatsShortcut.SetButtonShortcut(PoolParlor.PoolParlorCheats);
-                    WorldCheatsShortcut.SetTextColor(Color.green);
-                    ToggleButtonVisibilityAndInteractivity(true);
-                }
-            }
+            //else if (id == WorldIds.PoolParlor)
+            //{
+            //    if (PoolParlor.PoolParlorCheats != null)
+            //    {
+            //        WorldCheatsShortcut.SetButtonShortcut(PoolParlor.PoolParlorCheats);
+            //        WorldCheatsShortcut.SetTextColor(Color.green);
+            //        ToggleButtonVisibilityAndInteractivity(true);
+            //    }
+            //`}
             else if (id == WorldIds.Udon_Tycoon)
             {
                 if (UdonTycoon.udonTycoonCheatPage != null)

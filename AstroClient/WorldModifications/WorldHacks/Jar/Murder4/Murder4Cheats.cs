@@ -510,10 +510,10 @@
             {
                 foreach (var item in Clues)
                 {
-                    var esp = item.GetOrAddComponent<ESP_Pickup>();
+                    item.GetGetInChildrens<Renderer>(true).GetOrAddComponent<ESP_Pickup>();
                 }
 
-                Snake_Crate.GetOrAddComponent<ESP_Pickup>();
+                Snake_Crate.GetGetInChildrens<Renderer>(true).GetOrAddComponent<ESP_Pickup>();
 
                 MiscUtils.DelayFunction(1, () =>
                 {
@@ -531,11 +531,11 @@
             {
                 foreach (var item in Clues)
                 {
-                    var esp = item.GetComponent<ESP_Pickup>();
+                    var esp = item.GetGetInChildrens<Renderer>(true).GetComponent<ESP_Pickup>();
                     if (esp != null) esp.DestroyMeLocal();
                 }
 
-                var Snake_Crate_ESP = Snake_Crate.GetComponent<ESP_Pickup>();
+                var Snake_Crate_ESP = Snake_Crate.GetGetInChildrens<Renderer>(true).GetComponent<ESP_Pickup>();
                 if (Snake_Crate_ESP != null) Snake_Crate_ESP.DestroyMeLocal();
             }
         }

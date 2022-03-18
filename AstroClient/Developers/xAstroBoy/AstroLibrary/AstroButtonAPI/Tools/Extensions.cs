@@ -178,7 +178,7 @@
             return false;
         }
 
-        public static GameObject FindObject(this GameObject parent, string name)
+        internal static GameObject FindUIObject(this GameObject parent, string name)
         {
             if (parent == null) return null;
             Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
@@ -295,7 +295,7 @@
 
         internal static GameObject CreateMainBackButton(this GameObject NestedPart)
         {
-            var btn = NestedPart.FindObject("Button_Back");
+            var btn = NestedPart.FindUIObject("Button_Back");
             btn.SetActive(true);
             btn.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
@@ -308,7 +308,7 @@
 
         internal static GameObject CreateBackButton(this GameObject NestedPart, string menuName)
         {
-            var btn = NestedPart.FindObject("Button_Back");
+            var btn = NestedPart.FindUIObject("Button_Back");
             btn.SetActive(true);
             btn.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>

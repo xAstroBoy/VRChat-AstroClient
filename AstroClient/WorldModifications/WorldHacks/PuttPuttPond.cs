@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using AstroMonos.Components.Cheats.Worlds.PatronCrackers;
     using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
     using CustomClasses;
     using MelonLoader;
@@ -54,7 +55,7 @@
                         {
                             if (item.name.Equals("Patron Control"))
                             {
-                                PatronController = item.gameObject.GetOrAddComponent<PuttPuttPond_PatronControlEditor>();
+                                PatronController = item.gameObject.GetOrAddComponent<Ostinyo_World_PatronCracker>();
                             }
                         }
                         // TODO : Make the golf balls shoot fireworks on command.
@@ -412,6 +413,7 @@
         {
             PatronController = null;
             RainbowBall = false;
+            ColorActions.Clear();
         }
 
         private static IEnumerator RainbowBallLoop()
@@ -477,7 +479,7 @@
             }
         }
 
-        internal static PuttPuttPond_PatronControlEditor PatronController { get; set; }
+        internal static Ostinyo_World_PatronCracker PatronController { get; set; }
 
         internal static QMNestedGridMenu PuttPuttPondMenu { get; set; }
         internal static QMToggleButton ActivatePatronModeToggle { get; set; }

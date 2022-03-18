@@ -91,6 +91,13 @@
             return null;
         }
 
+
+        public static GameObject FindObject(this GameObject obj, string path)
+        {
+            return obj.transform.FindObject(path).gameObject;
+        }
+
+
         public static Transform FindObject(this Transform transform, string path)
         {
             Transform obj = transform.Find(path);

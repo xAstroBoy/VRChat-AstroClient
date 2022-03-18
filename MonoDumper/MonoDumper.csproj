@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>D:\Steam Library\steamapps\common\VRChat\debug\</OutputPath>
+    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MelonLoader">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />

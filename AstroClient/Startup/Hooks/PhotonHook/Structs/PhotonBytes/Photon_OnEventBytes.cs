@@ -3,4 +3,7 @@
 internal struct Photon_OnEventBytes
 {
     internal const byte CustomData = 245;
+
+    internal const byte Hashtables = 251;
+
 }

@@ -191,8 +191,8 @@
             var id = $"{QMButtonAPI.identifier}_{BtnType}_{Title}_{btnTextOff}_{btnTextOn}";
             if (ButtonsMenu == null)
             {
-                var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindObject(btnQMLoc);
-                if (Part1 != null) ButtonsMenu = Part1.FindObject("Buttons");
+                var Part1 = QuickMenuTools.QuickMenuInstance.gameObject.FindUIObject(btnQMLoc);
+                if (Part1 != null) ButtonsMenu = Part1.FindUIObject("Buttons");
             }
 
             ButtonObject = Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
@@ -201,8 +201,8 @@
             ButtonObject.name = id;
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>();
             ButtonToggle = ButtonObject.GetComponentInChildren<Toggle>();
-            btnOn = ButtonObject.FindObject("Icon_On");
-            btnOff = ButtonObject.FindObject("Icon_Off");
+            btnOn = ButtonObject.FindUIObject("Icon_On");
+            btnOff = ButtonObject.FindUIObject("Icon_Off");
             btnOff.SetActive(true);
             btnOn.SetActive(false);
             btnOff_Rect = btnOff.GetComponentInChildren<RectTransform>();

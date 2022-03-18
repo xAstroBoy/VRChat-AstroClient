@@ -46,7 +46,7 @@
             {
                 isLeftWing = true;
                 btnQMLoc += $"_LEFT_{Guid.NewGuid().ToString()} ";
-                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, QuickMenuTools.Wing_Left.gameObject.FindObject("VerticalLayoutGroup").transform, true);
+                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, QuickMenuTools.Wing_Left.gameObject.FindUIObject("VerticalLayoutGroup").transform, true);
                 ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
                 ButtonText = ButtonObject.NewText("Text_QM_H3");
@@ -76,11 +76,11 @@
                 VLGC.childControlHeight = false;
                 VLGC.childControlWidth = false;
 
-                VerticalLayoutGroup = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
+                VerticalLayoutGroup = CurrentPage.gameObject.FindUIObject("VerticalLayoutGroup");
                 VerticalLayoutGroup.transform.FindChild("VerticalLayoutGroup").gameObject.SetActive(false);
                 VerticalLayoutGroup.transform.FindChild("Header_Wing_H3").gameObject.SetActive(false);
-                CurrentPage.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
-                var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
+                CurrentPage.gameObject.FindUIObject("Cell_Wing_Toolbar").SetActive(false);
+                var Rect = CurrentPage.gameObject.FindUIObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
                 backbuttonObject = CurrentPage.transform.FindObject("WngHeader_H1/LeftItemContainer/Button_Back").gameObject;
@@ -93,7 +93,7 @@
             {
                 isLeftWing = false;
                 btnQMLoc += $"_RIGHT_{Guid.NewGuid().ToString()} ";
-                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, QuickMenuTools.Wing_Right.gameObject.FindObject("VerticalLayoutGroup").transform, true);
+                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, QuickMenuTools.Wing_Right.gameObject.FindUIObject("VerticalLayoutGroup").transform, true);
                 ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
                 ButtonText = ButtonObject.NewText("Text_QM_H3");
@@ -124,11 +124,11 @@
                 VLGC.childControlHeight = false;
                 VLGC.childControlWidth = false;
 
-                VerticalLayoutGroup = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
+                VerticalLayoutGroup = CurrentPage.gameObject.FindUIObject("VerticalLayoutGroup");
                 VerticalLayoutGroup.transform.FindChild("VerticalLayoutGroup").gameObject.SetActive(false);
                 VerticalLayoutGroup.transform.FindChild("Header_Wing_H3").gameObject.SetActive(false);
-                CurrentPage.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
-                var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
+                CurrentPage.gameObject.FindUIObject("Cell_Wing_Toolbar").SetActive(false);
+                var Rect = CurrentPage.gameObject.FindUIObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
                 backbuttonObject = CurrentPage.transform.FindObject("WngHeader_H1/LeftItemContainer/Button_Back").gameObject;
@@ -213,14 +213,14 @@
                 VLGC.childControlHeight = false;
                 VLGC.childControlWidth = false;
 
-                VerticalLayoutGroup = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
+                VerticalLayoutGroup = CurrentPage.gameObject.FindUIObject("VerticalLayoutGroup");
                 VerticalLayoutGroup.transform.FindChild("VerticalLayoutGroup").gameObject.SetActive(false);
                 VerticalLayoutGroup.transform.FindChild("Header_Wing_H3").gameObject.SetActive(false);
-                CurrentPage.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
-                var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
+                CurrentPage.gameObject.FindUIObject("Cell_Wing_Toolbar").SetActive(false);
+                var Rect = CurrentPage.gameObject.FindUIObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
-                backbuttonObject = CurrentPage.gameObject.FindObject("Button_Back");
+                backbuttonObject = CurrentPage.gameObject.FindUIObject("Button_Back");
                 BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
@@ -259,14 +259,14 @@
                 VLGC.childControlHeight = false;
                 VLGC.childControlWidth = false;
 
-                VerticalLayoutGroup = CurrentPage.gameObject.FindObject("VerticalLayoutGroup");
+                VerticalLayoutGroup = CurrentPage.gameObject.FindUIObject("VerticalLayoutGroup");
                 VerticalLayoutGroup.transform.FindChild("VerticalLayoutGroup").gameObject.SetActive(false);
                 VerticalLayoutGroup.transform.FindChild("Header_Wing_H3").gameObject.SetActive(false);
-                CurrentPage.gameObject.FindObject("Cell_Wing_Toolbar").SetActive(false);
-                var Rect = CurrentPage.gameObject.FindObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
+                CurrentPage.gameObject.FindUIObject("Cell_Wing_Toolbar").SetActive(false);
+                var Rect = CurrentPage.gameObject.FindUIObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
-                backbuttonObject = CurrentPage.gameObject.FindObject("Button_Back");
+                backbuttonObject = CurrentPage.gameObject.FindUIObject("Button_Back");
                 BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage

@@ -49,7 +49,7 @@
             if (isUserPage)
             {
                 mainButton.GetGameObject().EnableComponents();
-                mainButton.GetGameObject().FindObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                mainButton.GetGameObject().FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
             }
         }
 
@@ -92,11 +92,11 @@
             menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}_{btnToolTip}_{Guid.NewGuid().ToString()}";
 
             var NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
-            ButtonsMenu = NestedPart.FindObject("Buttons");
+            ButtonsMenu = NestedPart.FindUIObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
-            Object.Destroy(NestedPart.FindObject("Panel_Info"));
-            Object.Destroy(NestedPart.FindObject("Button_PhotosFolder"));
+            Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
+            Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
             //UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             foreach (var item in ButtonsMenu.transform.Get_Childs())
             {
