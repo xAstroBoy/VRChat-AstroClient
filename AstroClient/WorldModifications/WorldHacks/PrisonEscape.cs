@@ -10,6 +10,7 @@
     using Tools.UdonEditor;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC.Udon;
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
@@ -78,6 +79,31 @@
                     }
                 }
 
+
+                if (item.name.Contains("Knife"))
+                {
+                    var knife = item.FindUdonEvent("PlayMeleeEffects");
+                    if (knife != null)
+                    {
+                        if (!Knifes.Contains(knife))
+                        {
+                            Knifes.Add(knife);
+                        }
+                    }
+                }
+
+                if (item.name.Contains("VentMesh"))
+                {
+                    var ventmesh = item.FindUdonEvent("_interact");
+                    if (ventmesh != null)
+                    {
+                        if (!VentsMeshes.Contains(ventmesh))
+                        {
+                            VentsMeshes.Add(ventmesh);
+                        }
+                    }
+                }
+
                 if (item.name.Equals("Patron Control"))
                 {
                    PatronController = item.GetOrAddComponent<Ostinyo_World_PatronCracker>(); // Fuck u Ostinyo 
@@ -86,10 +112,70 @@
 
                 }
             }
-
-
         }
 
+        private static List<UdonBehaviour_Cached> Knifes = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> VentsMeshes = new List<UdonBehaviour_Cached>();
+
+
+        private static bool _DropKnifeAfterKill = true;
+
+        internal static bool DropKnifeAfterKill
+        {
+            get
+            {
+                return _DropKnifeAfterKill;
+            }
+            set
+            {
+                if (Knifes == null || Knifes.Count == 0)
+                {
+                    value = false;
+                }
+                _DropKnifeAfterKill = value;
+                if (Knifes != null)
+                {
+                    if (Knifes.Count != 0)
+                    {
+                        foreach (var knife in Knifes)
+                        {
+                            SetDropOnUse(knife, value);
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+        private static bool _GuardsAreAllowedToUseVents = false;
+
+        internal static bool GuardsAreAllowedToUseVents
+        {
+            get
+            {
+                return _GuardsAreAllowedToUseVents;
+            }
+            set
+            {
+                if (VentsMeshes == null || VentsMeshes.Count == 0)
+                {
+                    value = false;
+                }
+                _GuardsAreAllowedToUseVents = value;
+                if (VentsMeshes != null)
+                {
+                    if (VentsMeshes.Count != 0)
+                    {
+                        foreach (var ventmesh in VentsMeshes)
+                        {
+                            SetGuardsCanUse(ventmesh, value);
+                        }
+                    }
+                }
+
+            }
+        }
 
         internal static bool? isPatron
         {
@@ -143,7 +229,8 @@
             GetRedCard = null;
             RedCardBehaviour = null;
             GateInteraction = null;
-
+            _GuardsAreAllowedToUseVents = false;
+            _DropKnifeAfterKill = true;
             PatronController = null;            
             ToggleDoublePoints = null;
             TogglePatronGuns = null;
@@ -157,8 +244,45 @@
             }
             LargeCrateESP = false;
             Crates.Clear();
+            Knifes.Clear();
+            VentsMeshes.Clear();
         }
+        private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
+        {
+            if (item != null)
+            {
+                try
+                {
 
+                    ModConsole.DebugLog($"Setting {item.name} guardsCanUse to {CanUse}");
+                    if (item.RawItem != null)
+                    {
+                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", CanUse, true);
+                    }
+                }
+                catch
+                {
+                }
+            }
+        }
+        private static void SetDropOnUse(UdonBehaviour_Cached item, bool dropOnUse)
+        {
+            if (item != null)
+            {
+                try
+                {
+
+                    ModConsole.DebugLog($"Setting {item.name} dropOnUse to {dropOnUse}");
+                    if (item.RawItem != null)
+                    {
+                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", dropOnUse, true);
+                    }
+                }
+                catch
+                {
+                }
+            }
+        }
 
         private static void Remove_MaxPickupDist(UdonBehaviour_Cached item)
         {
@@ -167,7 +291,7 @@
                 try
                 {
 
-                    ModConsole.DebugLog($"Setting {item.gameObject.name} maxPickupDist to 999999999");
+                    ModConsole.DebugLog($"Setting {item.name} maxPickupDist to 999999999");
                     if (item.RawItem != null)
                     {
                         UdonHeapEditor.PatchHeap(item.RawItem, "maxPickupDist", 999999999f, true);
@@ -185,7 +309,7 @@
             {
                 try
                 {
-                    ModConsole.DebugLog($"Setting {item.gameObject.name} maxUseDist to 999999999");
+                    ModConsole.DebugLog($"Setting {item.name} maxUseDist to 999999999");
                     if (item.RawItem != null)
                     {
                         UdonHeapEditor.PatchHeap(item.RawItem, "maxUseDist", 999999999f, true);
