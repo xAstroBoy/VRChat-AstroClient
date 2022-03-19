@@ -277,6 +277,27 @@
             return null;
         }
 
+
+        internal static bool HasUdonEvent(UdonBehaviour obj, string subaction)
+        {
+            if (obj != null)
+            {
+                if (obj._eventTable.count != 0)
+                {
+                    foreach (var actionkeys in obj._eventTable)
+                    {
+                        if (actionkeys.key == subaction)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
         internal static UdonBehaviour_Cached FindUdonEvent(GameObject obj, string subaction, bool Debug = false)
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);

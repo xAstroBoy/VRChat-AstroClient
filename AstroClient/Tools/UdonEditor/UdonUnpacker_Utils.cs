@@ -32,7 +32,7 @@
                         }
                         if (program != null && symbol_table != null && heap != null)
                         {
-                            return new RawUdonBehaviour(program, symbol_table, heap);
+                            return new RawUdonBehaviour(program, symbol_table, heap, udon.transform);
                         }
                     }
                     else

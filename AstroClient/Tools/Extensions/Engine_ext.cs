@@ -392,6 +392,12 @@
             }
         }
 
+
+        internal static List<Transform> Get_Childs(this GameObject obj)
+        {
+            return obj.transform.Get_Childs();
+        }
+
         internal static List<Transform> Get_Childs(this Transform obj)
         {
             List<Transform> childs = new List<Transform>();

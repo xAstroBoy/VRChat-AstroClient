@@ -1,15 +1,20 @@
 ﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.Cheats.Worlds.PatronCrackers;
     using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
+    using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
     using AstroMonos.Components.ESP;
     using AstroMonos.Components.ESP.UdonBehaviour;
     using CustomClasses;
+    using Gompoc.ActionMenuAPI.Helpers;
     using Tools.Extensions;
     using Tools.UdonEditor;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC;
     using VRC.Udon;
     using WorldsIds;
     using xAstroBoy;
@@ -30,6 +35,9 @@
 
         internal static void FindEverything()
         {
+
+
+
             if (MoneyPile != null)
             {
                 MoneyInteraction = MoneyPile.FindUdonEvent("_interact");
@@ -71,6 +79,18 @@
 
             foreach (var item in WorldUtils.UdonScripts)
             {
+                if (item.name.StartsWith("PlayerData"))
+                {
+                    if (item.HasUdonEvent("_SetWantedSynced"))
+                    {
+                        var read = item.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                        if (read != null)
+                        {
+                            CurrentReaders.Add(read);
+                        }
+                    }
+                }
+
                 if (item.name.Contains("Crate"))
                 {
                     if (item.name.Contains("Crate Large"))
@@ -78,6 +98,7 @@
                         Crates.AddGameObject(item.gameObject); 
                     }
                 }
+
 
 
                 if (item.name.Contains("Knife"))
@@ -112,12 +133,76 @@
 
                 }
             }
+
+            foreach (var item in Player_Object_Pool.transform.Get_All_Childs())
+            {
+                item.gameObject.SetActiveRecursively(true);
+            }
+                ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!");
+
+
+
         }
+
+
+
+        internal override void OnPlayerJoined(Player player)
+        {
+          if (isCurrentWorld)
+          {
+              MiscUtils.DelayFunction(0.5f, () =>
+              {
+                  player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
+         
+              });
+          }
+        }
+
+        private static List<PrisonEscape_PlayerDataReader> CurrentReaders { get; set; } = new();
+
+
+        internal static PrisonEscape_PlayerDataReader FindAssignedUser(Player player)
+        {
+            foreach (var item in CurrentReaders)
+            {
+                item.gameObject?.SetActiveRecursively(true);
+                item.gameObject.FindObject("Player Hitbox")?.SetActiveRecursively(true);
+                if (item.RemotePlayer != null)
+                {
+                    if (item.RemotePlayer.displayName.Equals(player.GetDisplayName()))
+                    {
+                        ModConsole.DebugLog($"Found {item.RemotePlayer.GetDisplayName()} player Data Reader!");
+                        return item;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        internal static PrisonEscape_PlayerDataReader GetLocalReader()
+        {
+            foreach (var item in CurrentReaders)
+            {
+                item.gameObject?.SetActiveRecursively(true);
+                item.gameObject.FindObject("Player Hitbox")?.SetActiveRecursively(true);
+                if (item.isLocal)
+                {
+                    ModConsole.DebugLog($"Found Local player Data Reader!");
+                    return item;
+                }
+            }
+            return null;
+        }
+
+
+
 
         private static List<UdonBehaviour_Cached> Knifes = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> VentsMeshes = new List<UdonBehaviour_Cached>();
 
-
+        private static PrisonEscape_PlayerDataReader _LocalPlayerData;
+        
         private static bool _DropKnifeAfterKill = true;
 
         internal static bool DropKnifeAfterKill
@@ -246,6 +331,8 @@
             Crates.Clear();
             Knifes.Clear();
             VentsMeshes.Clear();
+            _LocalPlayerData = null;
+            CurrentReaders.Clear();
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
         {
@@ -390,6 +477,45 @@
 
         private static UdonBehaviour_Cached GetRedCard = null;
         private static List<GameObject> Crates = new List<GameObject>();
+
+
+
+        private static GameObject _Scripts;
+
+        internal static GameObject Scripts
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Scripts == null)
+                    {
+                        return _Scripts = GameObjectFinder.FindRootSceneObject("Scripts");
+                    }
+                    return _Scripts;
+                }
+
+                return null;
+            }
+        }
+
+        private static GameObject _Player_Object_Pool;
+        internal static GameObject Player_Object_Pool
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Player_Object_Pool == null)
+                    {
+                        return _Player_Object_Pool = Scripts.FindObject("Player Object Pool");
+                    }
+                    return _Player_Object_Pool;
+                }
+
+                return null;
+            }
+        }
 
 
 

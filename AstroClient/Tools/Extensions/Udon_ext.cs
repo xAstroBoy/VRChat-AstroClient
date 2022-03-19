@@ -41,6 +41,10 @@
         {
             return UdonSearch.FindUdonEvent(obj, subaction);
         }
+        internal static bool HasUdonEvent(this UdonBehaviour obj, string subaction)
+        {
+            return UdonSearch.HasUdonEvent(obj, subaction);
+        }
 
         internal static void InvokeBehaviour(this List<UdonBehaviour_Cached> udonlist)
         {
