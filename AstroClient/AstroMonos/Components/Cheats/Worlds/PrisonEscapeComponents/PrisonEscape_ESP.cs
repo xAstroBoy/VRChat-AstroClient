@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
+    using AstroClient.Tools.Colors;
     using AstroClient.Tools.Extensions;
     using Boo.Lang.Compiler.Ast;
     using ClientAttributes;
@@ -95,10 +96,6 @@
 
 
 
-        internal Color PrisonerColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.Orange.ToUnityEngineColor();
-        internal Color GuardColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.RoyalBlue.ToUnityEngineColor();
-        internal Color EnemyColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.Red.ToUnityEngineColor();
-
 
 
 
@@ -137,18 +134,22 @@
                 WantedTag.ShowTag = false;
                 WantedTag.BackGroundColor = Color.red;
             }
-            // Invoke first
+            InvokeRepeating(nameof(UpdatePlayerDataReaders), 0f, 0.3f);
+            InvokeRepeating(nameof(HealthTagUpdate), 0.1f, 0.1f);
+            InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
 
-            UpdatePlayerDataReaders();
 
-            InvokeRepeating(nameof(UpdatePlayerDataReaders), 0.2f, 0.2f);
-            InvokeRepeating(nameof(EspAndTagUpdater), 0.1f, 0.1f);
 
-            if (RemoteUserData != null)
+
+
+        }
+
+        internal void Update()
+        {
+            if (RemoteUserData == null)
             {
-                ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.");
+                UpdatePlayerDataReaders();
             }
-
         }
 
         internal void OnDestroy()
@@ -158,12 +159,13 @@
         }
 
 
-
+        private bool SaidFoundMessage;
         internal void UpdatePlayerDataReaders()
         {
             if (!isActiveAndEnabled) return;
             if (RemoteUserData != null)
             {
+                RemoteUserData.gameObject.RemoveFromWorldUtilsMenu();
                 if (RemoteUserData.playerName != Player.DisplayName())
                 {
                     ModConsole.DebugLog($"User : {Player.DisplayName()}, PlayerData Changed, Researching!", System.Drawing.Color.DarkSeaGreen);
@@ -173,74 +175,94 @@
             if (RemoteUserData == null)
             {
                 RemoteUserData = PrisonEscape.FindAssignedUser(Player);
+                if (RemoteUserData != null)
+                {
+                    if (!SaidFoundMessage)
+                    {
+                        ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.");
+                        SaidFoundMessage = true;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugLog($"Could not Find {gameObject.name} - {Player.DisplayName()} Player Data, Retrying!");
+                }
             }
             LocalUserData = PrisonEscape.GetLocalReader();
         }
 
 
 
+        internal void HealthTagUpdate()
+        {
+            if (!isActiveAndEnabled) return;
+            if (IsSelf) return;
+            if (RemoteUserData == null) return;
+            if (!RemoteUserData.isPlaying.GetValueOrDefault(false)) return;
+            if (!LocalUserData.isPlaying.GetValueOrDefault(false)) return;
+            if (!RemoteUserData.isDead.GetValueOrDefault(false))
+            {
+                healthTag.ShowTag = true;
+                healthTag.Text = $"Health : {RemoteUserData.health}";
+            }
+            else
+            {
+                healthTag.ShowTag = false;
+                ToggleWantedTag(false);
+                ResetESPColor();
+            }
+        }
 
-        
 
 
 
 
-    internal void EspAndTagUpdater()
-    {
-        if (!isActiveAndEnabled) return;
-
-
+        internal void ESPUpdater()
+        {
+            if (!isActiveAndEnabled) return;
+            if (IsSelf) return;
+            if (RemoteUserData == null) return;
+            if (LocalUserData == null) return;
             if (!RemoteUserData.isPlaying.GetValueOrDefault(false)) return;
             if (!LocalUserData.isPlaying.GetValueOrDefault(false)) return;
 
 
-            if (RemoteUserData != null)
+            if (RemoteUserData.isDead.GetValueOrDefault(false)) return;
+            if (RemoteUserData.isGuard.GetValueOrDefault(false) && LocalUserData.isGuard.GetValueOrDefault(false)) // Remote & Local Users are Guard role.
             {
-                if (!RemoteUserData.isDead.GetValueOrDefault(false))
+                ESPColor = SystemColors.DodgerBlue;
+            }
+            else if (RemoteUserData.isGuard.GetValueOrDefault(false) && !LocalUserData.isGuard.GetValueOrDefault(false)) // Remote User is Guard & Local is Prisoner
+            {
+                ESPColor = SystemColors.DodgerBlue;
+            }
+            else if (!RemoteUserData.isGuard.GetValueOrDefault(false) && LocalUserData.isGuard.GetValueOrDefault(false)) // Remote User is Prisoner & Local is Guard
+            {
+                if (!RemoteUserData.isWanted.GetValueOrDefault(false))
                 {
-                    healthTag.ShowTag = true;
-                    healthTag.Text = $"Health : {RemoteUserData.health}";
+                    ToggleWantedTag(false);
+                    ESPColor = SystemColors.Orange;;
                 }
                 else
                 {
-                    healthTag.ShowTag = false;
-                    WantedTag.ShowTag = false;
-                    ResetESPColor();
-                    return;
-                }
-
-                // Remote User is Prisoner
-                if (!RemoteUserData.isGuard.GetValueOrDefault(false)) // Remote User is Prisoner
-                {
-                    if (LocalUserData.isGuard.GetValueOrDefault()) // Local User is Guard
-                    {
-                        if (RemoteUserData.isWanted.GetValueOrDefault(false))
-                        {
-                            ToggleWantedTag(true);
-                            ESPColor = EnemyColor;
-                        }
-                        else
-                        {
-                            ToggleWantedTag(false);
-                            ESPColor = PrisonerColor;
-                        }
-                    }
-                    else // Local User is Prisoner
-                    {
-                        ToggleWantedTag(false);
-                        ESPColor = PrisonerColor;
-                    }
-                }
-                else // Remote User is Guard
-                {
-                    if (!LocalUserData.isGuard.GetValueOrDefault()) // Local User is Prisoner
-                    {
-                        ToggleWantedTag(true);
-                    }
-
-                    ESPColor = GuardColor;
+                    ToggleWantedTag(true);
+                    ESPColor = SystemColors.OrangeRed;
                 }
             }
+            else if (!RemoteUserData.isGuard.GetValueOrDefault(false) && !LocalUserData.isGuard.GetValueOrDefault(false)) // Remote & Local Prisoners
+            {
+                if (!RemoteUserData.isWanted.GetValueOrDefault(false))
+                {
+                    ToggleWantedTag(false);
+                    ESPColor = SystemColors.Orange;;
+                }
+                else
+                {
+                    ToggleWantedTag(true);
+                    ESPColor = SystemColors.Orange;
+                }
+            }
+
         }
 
 
@@ -253,19 +275,14 @@
             [HideFromIl2Cpp]
             set
             {
-                if (!IsSelf)
+                if (ESP != null)
                 {
                     if (!ESP.UseCustomColor)
                     {
                         ESP.UseCustomColor = true;
                     }
-
-                    if (_ESPColor != value)
-                    {
-                        _ESPColor = value;
-                        ESP.ChangeColor(value);
-
-                    }
+                    _ESPColor = value;
+                    ESP.ChangeColor(value);
                 }
             }
         }

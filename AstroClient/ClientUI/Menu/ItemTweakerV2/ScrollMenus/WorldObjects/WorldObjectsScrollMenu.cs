@@ -116,6 +116,10 @@
         {
             if (obj != null) WorldObjects.Add(obj);
         }
+        internal static void RemoveFromoWorldUtilsMenu(GameObject obj)
+        {
+            if (obj != null) WorldObjects.Remove(obj);
+        }
 
         private static void InitWingPage()
         {

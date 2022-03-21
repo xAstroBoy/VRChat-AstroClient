@@ -211,7 +211,7 @@
                 var actualreader = GetCorrectReader(item);
                 if (actualreader != null)
                 {
-                    if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
+                    //if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
                     if (actualreader.playerName == player.GetAPIUser().displayName)
                     {
                         ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader!", System.Drawing.Color.GreenYellow );
@@ -242,7 +242,7 @@
                     if (actualreader != null)
                     {
 
-                        if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
+                       // if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
 
                         if (actualreader.isLocal)
                         {
@@ -252,7 +252,7 @@
                     }
                 }
             }
-
+            LocalReader.gameObject.RemoveFromWorldUtilsMenu();
             return LocalReader;
         }
 
@@ -273,7 +273,6 @@
                     }
                 }
             }
-
             return null;
         }
 
@@ -413,6 +412,7 @@
             VentsMeshes.Clear();
             _LocalPlayerData = null;
             CurrentReaders.Clear();
+            LocalReader = null;
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
         {

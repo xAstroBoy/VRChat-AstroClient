@@ -16,8 +16,26 @@
                 WorldObjectsScrollMenu.AddToWorldUtilsMenu(obj);
             }
         }
+        internal static void RemoveFromWorldUtilsMenu(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                WorldObjectsScrollMenu.RemoveFromoWorldUtilsMenu(obj);
+            }
+        }
+
 
         internal static void AddToWorldUtilsMenu(this List<GameObject> list)
+        {
+            foreach (var obj in list)
+            {
+                if (obj != null)
+                {
+                    WorldObjectsScrollMenu.AddToWorldUtilsMenu(obj);
+                }
+            }
+        }
+        internal static void RemoveFromWorldUtilsMenu(this List<GameObject> list)
         {
             foreach (var obj in list)
             {
