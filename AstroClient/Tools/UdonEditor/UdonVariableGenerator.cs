@@ -35,7 +35,7 @@
                         var UnboxVariable = behaviour.IUdonHeap.GetHeapVariable(address);
                         if (UnboxVariable != null)
                         {
-                            builder.AppendLine(GetSet(symbol, UnboxVariable));
+                            builder.AppendLine(GetterBuilder(CurrentBehaviourTemplateName, symbol, UnboxVariable));
                         }
                     }
                 }
@@ -43,6 +43,10 @@
                 ModConsole.DebugLog("Generated Reader File!");
             }
         }
+
+
+
+
 
         private static string CorrectType(string name)
         {
@@ -71,17 +75,16 @@
                 case UdonTypes_String.UnityEngine_Vector3: return "UnityEngine.Vector3?";
                 case UdonTypes_String.UnityEngine_Quaternion: return "UnityEngine.Quaternion?";
                 case UdonTypes_String.UnityEngine_Color: return "UnityEngine.Color?";
-
                 case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget: return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
                 default: return name;
             }
 
         }
 
-        private static string GetSet(string Symbol, Il2CppSystem.Object obj)
+        internal static string GetterBuilder(string templatename, string Symbol, Il2CppSystem.Object obj)
         {
             var getter = new StringBuilder();
-            var methodtounpack = MethodToParse(obj);
+            var methodtounpack = GetMethodToParse(obj);
             if (methodtounpack != null)
             {
                 getter.AppendLine();
@@ -90,7 +93,7 @@
                 getter.AppendLine("            [HideFromIl2Cpp]");
                 getter.AppendLine("            get");
                 getter.AppendLine("            {");
-                getter.AppendLine($"                if ({CurrentBehaviourTemplateName} != null) return UdonHeapParser.{methodtounpack}(RenameMePlease, \"{Symbol}\");");
+                getter.AppendLine($"                if ({templatename} != null) return UdonHeapParser.{methodtounpack}({templatename}, \"{Symbol}\");");
                 getter.AppendLine("                return null;");
                 getter.AppendLine("            }");
                 getter.AppendLine("        }");
@@ -106,8 +109,8 @@
 
             return getter.ToString();
         }
-
-                private static string MethodToParse(Il2CppSystem.Object obj)
+        
+        private static string GetMethodToParse(Il2CppSystem.Object obj)
         {
             try
             {

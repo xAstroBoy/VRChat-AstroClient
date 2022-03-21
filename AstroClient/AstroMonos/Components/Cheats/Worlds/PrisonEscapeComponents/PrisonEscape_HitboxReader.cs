@@ -1,4 +1,4 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscape
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
@@ -38,6 +38,19 @@
                     return _Root = HitBox.transform.FindObject("Root").gameObject;
                 }
                 return _Root;
+            }
+        }
+        private GameObject _Visual;
+
+        internal GameObject Visual
+        {
+            get
+            {
+                if (_Visual == null)
+                {
+                    return _Visual = Root.FindObject("Visual").gameObject;
+                }
+                return _Visual;
             }
         }
 
@@ -1202,8 +1215,22 @@
             }
         }
 
+        private bool _EnableVisual { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-
+        internal bool EnableDebugVisual
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return _EnableVisual;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                _EnableVisual = value;
+                Visual.SetActive(value);
+            }
+        }
 
         void OnDisable()
         {
@@ -1212,7 +1239,14 @@
 
         void OnEnable()
         {
-
+            if (EnableDebugVisual)
+            {
+                Visual.SetActive(true);
+            }
+            else
+            {
+                Visual.SetActive(false);
+            }
         }
 
 

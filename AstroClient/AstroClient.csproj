@@ -102,10 +102,10 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscape\PrisonEscape_ESP.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscape\PrisonEscape_GameManagerReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscape\PrisonEscape_HitboxReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscape\PrisonEscape_PlayerDataReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_GameManagerReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PlayerDataReader.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_HighlightItem.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
@@ -122,6 +122,8 @@
     <Compile Include="AstroMonos\Components\Tools\Command_SetToTweaker.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
+    <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonDumper.cs" />
+    <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientAttributes\RegisterType.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnEnterWorldEventArgs.cs" />

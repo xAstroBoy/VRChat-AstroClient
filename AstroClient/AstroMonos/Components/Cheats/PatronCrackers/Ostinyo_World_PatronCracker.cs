@@ -1,4 +1,4 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PatronCrackers;
+﻿namespace AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;

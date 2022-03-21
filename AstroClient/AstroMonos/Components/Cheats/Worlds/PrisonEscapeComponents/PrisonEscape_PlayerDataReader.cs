@@ -1,23 +1,17 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
     using AstroClient.Tools.UdonSearcher;
     using ClientAttributes;
-    using CustomClasses;
     using Il2CppSystem;
-    using Il2CppSystem.Collections;
     using Il2CppSystem.Collections.Generic;
-    using Spoofer;
-    using Transmtn;
     using UnhollowerBaseLib.Attributes;
-    using VRC;
-    using VRC.SDKBase;
     using VRC.Udon;
+    using WorldModifications.WorldHacks;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
-    using Math = System.Math;
 
     [RegisterComponent]
     public class PrisonEscape_PlayerDataReader : AstroMonoBehaviour
@@ -39,7 +33,7 @@
                 var obj = gameObject.FindUdonEvent("_SetWantedSynced");
                 if (obj != null)
                 {
-                    PlayerData = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    PlayerData = obj.RawItem;
                 }
                 else
                 {
@@ -62,169 +56,92 @@
             }
         }
 
-        internal bool? isWanted
+        [HideFromIl2Cpp]
+        private bool isNotPoolOrThisBehaviour(UdonBehaviour behaviour)
         {
-            [HideFromIl2Cpp]
-            get
+            if (behaviour != null && behaviour != PlayerData.udonBehaviour)
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isWanted");
-
-                return null;
+                if (behaviour.gameObject != PrisonEscape.Player_Object_Pool)
+                {
+                    return true;
+                }
             }
-            [HideFromIl2Cpp]
-            set
-            {
-                if(value.HasValue)
-                if (PlayerData != null) UdonHeapEditor.PatchHeap(PlayerData, "isWanted", value.Value);
-            }
+            return false;
         }
 
-
-        internal int? health
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "health");
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                    if (PlayerData != null) UdonHeapEditor.PatchHeap(PlayerData, "health", value.Value);
-            }
-        }
-        internal float? healthRegenDelay
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "healthRegenDelay");
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                    if (PlayerData != null) UdonHeapEditor.PatchHeap(PlayerData, "healthRegenDelay", value.Value);
-            }
-        }
-        internal int? healthRegenAmt
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "healthRegenAmt");
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                    if (PlayerData != null) UdonHeapEditor.PatchHeap(PlayerData, "healthRegenAmt", value.Value);
-            }
-        }
-
-        internal bool? isDead
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isDead");
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                    if (PlayerData != null) UdonHeapEditor.PatchHeap(PlayerData, "isDead", value.Value);
-            }
-        }
-
-        internal bool? isGuard
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isGuard");
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                    if (PlayerData != null) UdonHeapEditor.PatchHeap(PlayerData, "isGuard", value.Value);
-            }
-        }
-
-
-        internal string playerName
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "playerName");
-
-                return null;
-            }
-        }
-
-        internal PrisonEscape_PlayerDataReader GetActualDataReader
-        {
+        internal PrisonEscape_PlayerDataReader GetActualDataReader 
+                {
             get
             {
                 //if (!HitBoxReader.Root.active) return null; // do this to allow more accuracy and get the correct ones!
 
-                if (__0_intnl_PlayerData != null && __0_intnl_PlayerData != PlayerData.udonBehaviour)
+                if (isNotPoolOrThisBehaviour(__0_this_intnl_PlayerData))
                 {
-                    return  __0_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __0_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__1_intnl_PlayerData != null && __1_intnl_PlayerData != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__0_this_intnl_PlayerData))
                 {
-                    return  __1_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __0_this_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__2_intnl_PlayerData != null && __2_intnl_PlayerData != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__1_intnl_PlayerData))
                 {
-                    return  __2_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __1_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__0_this_intnl_PlayerData != null && __0_this_intnl_PlayerData != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__2_intnl_PlayerData))
                 {
-                    return  __0_this_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __2_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__4_intnl_PlayerData != null && __4_intnl_PlayerData != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__3_intnl_PlayerData))
                 {
-                    return  __4_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __3_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__5_intnl_PlayerData != null && __5_intnl_PlayerData != PlayerData.udonBehaviour)
+
+                else if (isNotPoolOrThisBehaviour(__4_intnl_PlayerData))
                 {
-                    return  __5_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __4_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__1_intnl_SystemObject != null && __1_intnl_SystemObject != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__5_intnl_PlayerData))
                 {
-                    return  __1_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __5_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__10_intnl_SystemObject != null && __10_intnl_SystemObject != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__1_intnl_SystemObject))
                 {
-                    return  __10_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __1_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__12_intnl_SystemObject != null && __12_intnl_SystemObject != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__10_intnl_SystemObject))
                 {
-                    return  __12_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __10_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__23_intnl_SystemObject != null && __23_intnl_SystemObject != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__12_intnl_SystemObject))
                 {
-                    return  __23_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __12_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
-                else if (__30_intnl_SystemObject != null && __30_intnl_SystemObject != PlayerData.udonBehaviour)
+                else if (isNotPoolOrThisBehaviour(__19_intnl_SystemObject))
                 {
-                    return  __30_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __19_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
                 }
+
+                else if (isNotPoolOrThisBehaviour(__22_intnl_SystemObject))
+                {
+                    return __22_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                }
+
+                else if (isNotPoolOrThisBehaviour(__23_intnl_SystemObject))
+                {
+                    return __23_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                }
+                else if (isNotPoolOrThisBehaviour(__29_intnl_SystemObject))
+                {
+                    return __29_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                }
+
+                else if (isNotPoolOrThisBehaviour(__30_intnl_SystemObject))
+                {
+                    return __30_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                }
+
+
+
                 return this;
             }
         }
@@ -242,6 +159,26 @@
             }
         }
 
+
+        internal bool EnableHitboxDebugVisual
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return HitBoxReader.EnableDebugVisual;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                HitBoxReader.EnableDebugVisual = value;
+            }
+        }
+        
+        internal RawUdonBehaviour PlayerData {[HideFromIl2Cpp] get; [HideFromIl2Cpp] set;} =  null;
+
+
+        #region  Generated Getters
+
         
         internal int? __18_const_intnl_SystemInt32
         {
@@ -249,6 +186,17 @@
             get
             {
                 if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__18_const_intnl_SystemInt32");
+                return null;
+            }
+        }
+
+
+        internal bool? isWanted
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isWanted");
                 return null;
             }
         }
@@ -1193,6 +1141,27 @@
         }
 
 
+        internal int? health
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "health");
+                return null;
+            }
+        }
+
+
+        internal float? healthRegenDelay
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "healthRegenDelay");
+                return null;
+            }
+        }
+
 
         internal VRC.Udon.UdonBehaviour __0_intnl_SystemObject
         {
@@ -1654,6 +1623,15 @@
                 return null;
             }
         }
+        internal VRC.Udon.UdonBehaviour __3_intnl_PlayerData
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__3_intnl_PlayerData");
+                return null;
+            }
+        }
 
 
         internal bool? __67_intnl_SystemBoolean
@@ -1821,6 +1799,16 @@
         }
 
 
+        internal bool? isGuard
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isGuard");
+                return null;
+            }
+        }
+
 
         internal string __12_const_intnl_SystemString
         {
@@ -1960,6 +1948,17 @@
             get
             {
                 if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__36_const_intnl_SystemInt32");
+                return null;
+            }
+        }
+
+
+        internal string cachedPlayerName
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "cachedPlayerName");
                 return null;
             }
         }
@@ -2317,17 +2316,6 @@
         }
 
 
-        internal VRC.Udon.UdonBehaviour __19_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__19_intnl_SystemObject");
-                return null;
-            }
-        }
-
-
         internal uint? __36_const_intnl_exitJumpLoc_UInt32
         {
             [HideFromIl2Cpp]
@@ -2603,6 +2591,7 @@
         }
 
 
+
         internal VRC.Udon.UdonBehaviour __12_intnl_SystemObject
         {
             [HideFromIl2Cpp]
@@ -2613,6 +2602,15 @@
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __19_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__19_intnl_SystemObject");
+                return null;
+            }
+        }
 
         internal string __24_const_intnl_SystemString
         {
@@ -3120,6 +3118,15 @@
         }
 
 
+        internal int? healthRegenAmt
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "healthRegenAmt");
+                return null;
+            }
+        }
 
 
         internal uint? __32_const_intnl_exitJumpLoc_UInt32
@@ -3298,6 +3305,15 @@
         }
 
 
+        internal bool? isDead
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isDead");
+                return null;
+            }
+        }
 
 
         internal uint? __18_const_intnl_exitJumpLoc_UInt32
@@ -3509,14 +3525,12 @@
         }
 
 
-
-
-        internal VRC.Udon.UdonBehaviour __3_intnl_PlayerObjectPool
+        internal string playerName
         {
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__3_intnl_PlayerObjectPool");
+                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "playerName");
                 return null;
             }
         }
@@ -3689,10 +3703,10 @@
 
 
 
-        internal static RawUdonBehaviour PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+        #endregion
 
 
         internal static PrisonEscape_HitboxReader HitBoxReader   { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        // Use this for initialization
     }
 }

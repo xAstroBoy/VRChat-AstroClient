@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using AstroMonos.Components.Cheats.PatronCrackers;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
-    using AstroMonos.Components.Cheats.Worlds.PatronCrackers;
-    using AstroMonos.Components.Cheats.Worlds.PrisonEscape;
+    using AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
     using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
     using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
     using AstroMonos.Components.ESP;
@@ -80,19 +80,28 @@
                 }
             }
 
-            foreach (var item in WorldUtils.UdonScripts)
+            foreach (var item in Player_Object_Pool.transform.Get_UdonBehaviours())
             {
-                if (item.name.StartsWith("PlayerData"))
+
+                var obj = item.FindUdonEvent("_SetWantedSynced");
+                if (obj != null)
                 {
-                    if (item.HasUdonEvent("_SetWantedSynced"))
+                    var reader = obj.transform.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    if (reader != null)
                     {
-                        var read = item.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
-                        if (read != null)
+                        if (!CurrentReaders.Contains(reader))
                         {
-                            CurrentReaders.Add(read);
+                            ModConsole.DebugLog($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
+                            CurrentReaders.Add(reader);
                         }
                     }
                 }
+            }
+
+
+
+            foreach (var item in WorldUtils.UdonScripts)
+            {
 
                 if (item.name.Contains("Crate"))
                 {
@@ -138,7 +147,7 @@
             }
 
 
-            ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!");
+            ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
 
 
 
@@ -150,7 +159,8 @@
         {
             if (isCurrentWorld)
             {
-                MiscUtils.DelayFunction(0.5f, () => { player.gameObject.GetOrAddComponent<PrisonEscape_ESP>(); });
+                player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
+
             }
         }
 
@@ -191,19 +201,21 @@
 
     
 
-    private static List<PrisonEscape_PlayerDataReader> CurrentReaders { get; set; } = new();
+        private static List<PrisonEscape_PlayerDataReader> CurrentReaders { get; set; } = new();
 
 
         internal static PrisonEscape_PlayerDataReader FindAssignedUser(Player player)
         {
             foreach (var item in CurrentReaders)
             {
-                if (item.GetActualDataReader != null)
+                var actualreader = GetCorrectReader(item);
+                if (actualreader != null)
                 {
-                    if (item.GetActualDataReader.playerName == player.GetAPIUser().displayName)
+                    if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
+                    if (actualreader.playerName == player.GetAPIUser().displayName)
                     {
                         ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader!", System.Drawing.Color.GreenYellow );
-                        return GetCorrectReader(item.GetActualDataReader);
+                        return actualreader;
                     }
                 }
             }
@@ -213,16 +225,35 @@
         private static PrisonEscape_PlayerDataReader LocalReader { get; set; }
         internal static PrisonEscape_PlayerDataReader GetLocalReader()
         {
-            foreach (var item in CurrentReaders)
+            if (LocalReader != null)
             {
-                if (item.GetActualDataReader.isLocal)
+                if (!LocalReader.isLocal)
                 {
-                    ModConsole.DebugLog($"Found Local player Data Reader!", System.Drawing.Color.GreenYellow);
-                    return LocalReader = GetCorrectReader(item.GetActualDataReader);
+                    ModConsole.DebugLog($"Local Reader Changed, Resetting!");
+                    LocalReader = null;
                 }
             }
 
-            return null;
+            if (LocalReader == null)
+            {
+                foreach (var item in CurrentReaders)
+                {
+                    var actualreader = GetCorrectReader(item);
+                    if (actualreader != null)
+                    {
+
+                        if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
+
+                        if (actualreader.isLocal)
+                        {
+                            ModConsole.DebugLog($"Found Local player Data Reader!", System.Drawing.Color.GreenYellow);
+                            return LocalReader = actualreader;
+                        }
+                    }
+                }
+            }
+
+            return LocalReader;
         }
 
 
@@ -234,7 +265,7 @@
                 {
                     if (reader != reader.GetActualDataReader)
                     {
-                        return reader.GetActualDataReader;
+                        return GetCorrectReader(reader.GetActualDataReader);
                     }
                     else
                     {

@@ -2,7 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-    using AstroMonos.Components.Cheats.Worlds.PatronCrackers;
+    using AstroMonos.Components.Cheats.PatronCrackers;
     using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
     using CustomClasses;
     using MelonLoader;

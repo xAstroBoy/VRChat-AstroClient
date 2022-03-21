@@ -1,4 +1,4 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscape
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
