@@ -22,6 +22,15 @@
             }
         }
 
+        internal static void GenerateGettersForThisUdonBehaviour(this UdonBehaviour obj)
+        {
+            if (obj != null)
+            {
+                UdonUnboxer.GenerateGettersReaders(obj);
+
+            }
+        }
+
         internal static string UnboxUdonHeap(this Il2CppSystem.Object obj)
         {
             return UdonHeapUnboxerUtils.UnboxUdonHeap(obj);

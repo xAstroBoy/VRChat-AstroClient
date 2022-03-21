@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using Extensions;
     using FavCat.Modules;
     using Il2CppSystem;
@@ -79,22 +80,23 @@
             if (avatar == null) return;
             ModConsole.DebugLog("Getting ApiContainer Data...");
             Get_ApiContainerData(avatar, (ContainerData) =>
-           {
-               if (ContainerData != null)
-               {
-                   ModConsole.DebugLog("Got Converted ApiContainer!");
-                   ModConsole.DebugLog("Generating AvatarDict Object...");
-                   ToAvatarDict(ContainerData, (avatardata) =>
-                   {
-                       ModConsole.DebugLog("Generated AvatarDict!");
-                       avatardict(avatardata);
-                   });
-               }
+            {
+                if (ContainerData != null)
+                {
+                    ModConsole.DebugLog("Got Converted ApiContainer!");
+                    ModConsole.DebugLog("Generating AvatarDict Object...");
+                    ToAvatarDict(ContainerData, (avatardata) =>
+                    {
+                        ModConsole.DebugLog("Generated AvatarDict!");
+                        avatardict(avatardata);
+                    });
+                }
 
-           });
+            });
         }
 
-        private static void Get_ApiContainerData(ApiAvatar avtr, System.Action<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>> callback)
+        private static void Get_ApiContainerData(ApiAvatar avtr,
+            System.Action<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>> callback)
         {
             if (avtr == null)
                 return; // or throw exception
@@ -112,7 +114,9 @@
                     ModConsole.DebugLog("ApiContainer Data is null (Failed!)");
                     return; // you may want to call the callback but with null
                 }
-                var data = container.Data.Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
+
+                var data =
+                    container.Data.Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
                 if (data == null)
                 {
                     ModConsole.DebugLog("ApiContainer Data is null (Failed!)");
@@ -138,7 +142,9 @@
                     ModConsole.DebugLog("ApiContainer Data is null (Failed!)");
                     return; // you may want to call the callback but with null
                 }
-                var data2 = container2.Data.Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
+
+                var data2 = container2.Data
+                    .Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
                 if (data2 == null)
                 {
                     ModConsole.DebugLog("ApiContainer Data is null (Failed!)");
@@ -149,14 +155,21 @@
                     ModConsole.DebugLog("ApiContainer Data Has been Converted !");
                     try
                     {
-                        ModConsole.DebugLog($"OnFailure Converted Data : \n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(container2.Data), Newtonsoft.Json.Formatting.Indented)}");
+                        ModConsole.DebugLog(
+                            $"OnFailure Converted Data : \n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(container2.Data), Newtonsoft.Json.Formatting.Indented)}");
                     }
-                    catch { }
+                    catch
+                    {
+                    }
+
                     callback(data2);
                 }
             }), null, false);
         }
-        private static void ToAvatarDict(Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object> container, System.Action<Il2CppSystem.Object> callback)
+
+        private static void ToAvatarDict(
+            Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object> container,
+            System.Action<Il2CppSystem.Object> callback)
         {
             if (container != null)
             {
@@ -200,7 +213,27 @@
                     yield return new WaitForSeconds(0.001f);
                 }
             }
+
             yield break;
+        }
+
+        internal static List<Collider> GetAllCollidersOnPlayer(Player player)
+        {
+            var region = player.transform.Find("SelectRegion");
+            if (region != null)
+            {
+                var regioncapsule = player.GetComponent<CapsuleCollider>();
+                if (regioncapsule != null)
+                {
+                    Vector3 pos0 = regioncapsule.transform.position + regioncapsule.transform.up * ((regioncapsule.height / 2) - 2 * regioncapsule.radius);
+                    Vector3 pos1 = regioncapsule.transform.position + regioncapsule.transform.up * ((regioncapsule.height / 2) - 2 * regioncapsule.radius) * -1;
+                    float radius = regioncapsule.radius;
+                    return Physics.OverlapCapsule(pos0, pos1, radius).ToList();
+                }
+
+            }
+
+            return null;
         }
     }
 }

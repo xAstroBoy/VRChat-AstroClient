@@ -2171,6 +2171,18 @@
             return null;
         }
 
+        internal static VRC.SDK3.Components.VRCObjectPool Udon_Parse_VRC3_SDK3_VRCObjectPool(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC3_SDK3_VRCObjectPool(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
 
         internal static UnityEngine.UI.InputField Udon_Parse_UnityEngine_UI_InputField(RawUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
@@ -6777,6 +6789,26 @@
                 if (value != null)
                 {
                     var result = value.Unpack_Array_TextMeshProUGUI();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+        internal static VRC.SDK3.Components.VRCObjectPool Udon_Parse_VRC3_SDK3_VRCObjectPool(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_SDK3_VRCObjectPool();
                     if (result != null)
                     {
                         return result;

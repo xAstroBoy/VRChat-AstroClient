@@ -1509,6 +1509,21 @@
             return null;
         }
 
+        internal static VRC.SDK3.Components.VRCObjectPool Unpack_SDK3_VRCObjectPool(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCObjectPool)
+                {
+                    return obj.Cast<VRC.SDK3.Components.VRCObjectPool>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
 
         internal static Rigidbody Unpack_Rigidbody(this Il2CppSystem.Object obj)
         {

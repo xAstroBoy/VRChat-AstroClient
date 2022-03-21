@@ -1,33 +1,17 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscape
 {
-    using AstroClient.Tools.Colors;
+    using AstroClient.Tools.Extensions;
     using ClientAttributes;
     using ESP.Player;
     using Il2CppSystem.Collections.Generic;
-    using MelonLoader;
-    using Roles;
-    using System;
-    using System.Collections;
-    using System.Linq;
-    using AstroClient.Tools.Extensions;
-    using AstroClient.Tools.Player;
-    using AstroClient.Tools.UdonSearcher;
-    using Constants;
-    using CustomClasses;
-    using UdonTycoon;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
     using VRC.Core;
-    using VRC.Udon.Common.Interfaces;
     using WorldModifications.WorldHacks;
-    using WorldModifications.WorldHacks.Jar.AmongUS;
-    using WorldModifications.WorldsIds;
-    using xAstroBoy;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-    using static JarRoleController;
     using IntPtr = System.IntPtr;
     using Object = Il2CppSystem.Object;
 
@@ -43,21 +27,9 @@
 
         private PlayerESP _ESP { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
 
-
-
-
         private PrisonEscape_PlayerDataReader RemoteUserData {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
 
         internal PrisonEscape_PlayerDataReader LocalUserData {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
-
-
-
-
-
-
-
-
-
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
@@ -164,6 +136,22 @@
                 WantedTag.ShowTag = false;
                 WantedTag.BackGroundColor = Color.red;
             }
+            var data = PrisonEscape.FindAssignedUser(Player);
+            if (data != null)
+            {
+                if (data.GetActualDataReader != null)
+                {
+                    if (data != data.GetActualDataReader)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+
 
             if (RemoteUserData != null)
             {
@@ -179,11 +167,14 @@
 
 
 
+
+
+
         internal void Update()
         {
+            
             if (RemoteUserData == null)
             {
-                RemoteUserData = PrisonEscape.FindAssignedUser(Player);
             }
             if (LocalUserData == null)
             {
@@ -192,10 +183,10 @@
 
             if (RemoteUserData != null)
             {
-                if (!RemoteUserData.isDead.GetValueOrDefault(false))
+                if (!RemoteUserData.GetActualDataReader.isDead.GetValueOrDefault(false))
                 {
                     healthTag.ShowTag = true;
-                    healthTag.Text = $"Health : {RemoteUserData.health}";
+                    healthTag.Text = $"Health : {RemoteUserData.GetActualDataReader.health}";
                 }
                 else
                 {
@@ -206,11 +197,11 @@
                 }
 
                 // Remote User is Prisoner
-                if (!RemoteUserData.isGuard.GetValueOrDefault(false))  // Remote User is Prisoner
+                if (!RemoteUserData.GetActualDataReader.isGuard.GetValueOrDefault(false))  // Remote User is Prisoner
                 {
-                    if (LocalUserData.isGuard.GetValueOrDefault()) // Local User is Guard
+                    if (LocalUserData.GetActualDataReader.isGuard.GetValueOrDefault()) // Local User is Guard
                     {
-                        if (RemoteUserData.isWanted.GetValueOrDefault(false))
+                        if (RemoteUserData.GetActualDataReader.isWanted.GetValueOrDefault(false))
                         {
                             ToggleWantedTag(true);
                             if (!IsSelf)
@@ -241,7 +232,7 @@
                 }
                 else // Remote User is Guard
                 {
-                    if (!LocalUserData.isGuard.GetValueOrDefault()) // Local User is Prisoner
+                    if (!LocalUserData.GetActualDataReader.isGuard.GetValueOrDefault()) // Local User is Prisoner
                     {
                         ToggleWantedTag(true);
                     }

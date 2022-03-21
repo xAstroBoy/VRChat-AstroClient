@@ -213,6 +213,9 @@
         internal const string VRC_SDK3_Components_VRCAvatarPedestal = "VRC.SDK3.Components.VRCAvatarPedestal";
         internal const string VRC_SDK3_Components_VRCAvatarPedestal_Array = "VRC.SDK3.Components.VRCAvatarPedestal[]";
 
+        internal const string VRC_SDK3_Components_VRCObjectPool = "VRC.SDK3.Components.VRCObjectPool";
+
+
         #endregion
 
         #region TMPRO

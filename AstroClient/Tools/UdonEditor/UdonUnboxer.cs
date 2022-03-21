@@ -89,5 +89,10 @@
             return null;
         }
 
+        internal  static  void GenerateGettersReaders(UdonBehaviour node)
+        {
+            UdonVariableGenerator.HeapGetterGenerator(node.ToRawUdonBehaviour());
+        }
+
     }
 }

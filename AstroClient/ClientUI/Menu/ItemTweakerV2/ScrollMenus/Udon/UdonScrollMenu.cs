@@ -123,6 +123,14 @@
                                     CurrentUnboxBehaviourToConsole.setAction(() => { action.UnboxUdonEventToConsole(); });
                                     CurrentUnboxBehaviourToConsole.SetActive(true);
                                 }
+                                if (GenerateGettersForThisUdon != null)
+                                {
+                                    GenerateGettersForThisUdon.SetButtonText($"Generate Getters for  {action.gameObject.name} Heap");
+                                    GenerateGettersForThisUdon.SetToolTip($"Attempts to Generate Getters for  {action.gameObject.name}  Heap to file");
+                                    GenerateGettersForThisUdon.setAction(() => { action.GenerateGettersForThisUdonBehaviour(); });
+                                    GenerateGettersForThisUdon.SetActive(true);
+                                }
+
                                 if (DisassembleUdonBehaviourProgram != null)
                                 {
                                     DisassembleUdonBehaviourProgram.SetButtonText($"Disassemble  {action.gameObject.name} Program");
@@ -134,21 +142,7 @@
                             });
                             udon.SetBackButtonAction(CurrentScrollMenu, () =>
                             {
-                                if (CurrentUnboxBehaviourToConsole != null)
-                                {
-                                    CurrentUnboxBehaviourToConsole.SetButtonText($"Unavailable");
-                                    CurrentUnboxBehaviourToConsole.SetToolTip($"Unavailable");
-                                    CurrentUnboxBehaviourToConsole.setAction(() => { });
-                                    CurrentUnboxBehaviourToConsole.SetActive(false);
-                                }
-                                if (DisassembleUdonBehaviourProgram != null)
-                                {
-                                    DisassembleUdonBehaviourProgram.SetButtonText($"Unavailable");
-                                    DisassembleUdonBehaviourProgram.SetToolTip($"Unavailable");
-                                    DisassembleUdonBehaviourProgram.setAction(() => { });
-                                    DisassembleUdonBehaviourProgram.SetActive(false);
-                                }
-
+                                MakeSingleUdonButtonsUnavailable();
                             });
 
                         }
@@ -255,6 +249,16 @@
                 WingMenu.ShowWingsPage();
             }
 
+            MakeSingleUdonButtonsUnavailable();
+
+            if (!isGenerating)
+            {
+                Regenerate();
+            }
+        }
+
+        private static void MakeSingleUdonButtonsUnavailable()
+        {
             if (CurrentUnboxBehaviourToConsole != null)
             {
                 CurrentUnboxBehaviourToConsole.SetButtonText($"Unavailable");
@@ -262,6 +266,14 @@
                 CurrentUnboxBehaviourToConsole.setAction(() => { });
                 CurrentUnboxBehaviourToConsole.SetActive(false);
             }
+            if (GenerateGettersForThisUdon != null)
+            {
+                GenerateGettersForThisUdon.SetButtonText($"Unavailable");
+                GenerateGettersForThisUdon.SetToolTip($"Unavailable");
+                GenerateGettersForThisUdon.setAction(() => { });
+                GenerateGettersForThisUdon.SetActive(false);
+            }
+
             if (DisassembleUdonBehaviourProgram != null)
             {
                 DisassembleUdonBehaviourProgram.SetButtonText($"Unavailable");
@@ -270,11 +282,8 @@
                 DisassembleUdonBehaviourProgram.SetActive(false);
             }
 
-            if (!isGenerating)
-            {
-                Regenerate();
-            }
         }
+
 
         internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
@@ -297,6 +306,8 @@
                 Regenerate();
             }, "Refresh and force menu to regenerate");
             CurrentUnboxBehaviourToConsole = new QMWingSingleButton(WingMenu, "Unbox null", () => { }, "Attempts to unbox null in console..");
+            GenerateGettersForThisUdon = new QMWingSingleButton(WingMenu, "Generate Getters for null", () => { }, "Attempts to Generate Getters for null in File..");
+
             DisassembleUdonBehaviourProgram = new QMWingSingleButton(WingMenu, "Disassemble null Program", () => { }, "Attempts to Disassemble null Program to file..");
             SpamUdonBehaviourEvent = new QMWingToggleButton(WingMenu, "Spam Udon Behaviour Event", () => { SpamSelectedEvent = true; }, () => { SpamSelectedEvent = false; }, "Repeatedly Invokes selected event.");
             new QMWingSingleButton(WingMenu, "Stop Generated Udon Event Spammer..", () => { Generated_Spammer.InvokeOnLoop = false; }, "Halt The Current Generated Udon spammer!");
@@ -304,12 +315,14 @@
 
             DisassembleUdonBehaviourProgram.SetActive(false);
             CurrentUnboxBehaviourToConsole.SetActive(false);
+            GenerateGettersForThisUdon.SetActive(false);
             WingMenu.SetActive(false);
         }
 
-        private static QMWingSingleButton CurrentUnboxBehaviourToConsole;
-        private static QMWingSingleButton DisassembleUdonBehaviourProgram;
-        private static QMWingToggleButton SpamUdonBehaviourEvent;
+        private static QMWingSingleButton CurrentUnboxBehaviourToConsole { get; set; }
+        private static QMWingSingleButton DisassembleUdonBehaviourProgram { get; set; }
+        private static QMWingToggleButton SpamUdonBehaviourEvent { get; set; }
+        private static QMWingSingleButton GenerateGettersForThisUdon { get; set; }
 
     }
 }

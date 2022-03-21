@@ -102,8 +102,10 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
-    <Compile Include="AstroMonos\Components\Cheats\PrisonEscape\PrisonEscape_ESP.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\PrisonEscape\PrisonEscape_PlayerDataReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscape\PrisonEscape_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscape\PrisonEscape_GameManagerReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscape\PrisonEscape_HitboxReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscape\PrisonEscape_PlayerDataReader.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_HighlightItem.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
@@ -113,7 +115,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_AutoStarter.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerCollisionFixer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\ItemTweakerHelper.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\ColliderSuppresser.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
@@ -449,6 +451,7 @@
     <Compile Include="Tools\Skybox\CubemapTools\CubeMapAndTexture2D.cs" />
     <Compile Include="Tools\UdonEditor\Disassembler.cs" />
     <Compile Include="Tools\UdonEditor\UdonDisassembler.cs" />
+    <Compile Include="Tools\UdonEditor\UdonVariableGenerator.cs" />
     <Compile Include="WorldModifications\WorldHacks\BeyondDarkness.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceEjectPlayer.cs" />

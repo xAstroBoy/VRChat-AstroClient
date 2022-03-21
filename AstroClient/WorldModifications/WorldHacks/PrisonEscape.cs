@@ -4,6 +4,7 @@
     using System.Linq;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.Cheats.Worlds.PatronCrackers;
+    using AstroMonos.Components.Cheats.Worlds.PrisonEscape;
     using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
     using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
     using AstroMonos.Components.ESP;
@@ -22,11 +23,13 @@
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
+    using AvatarUtils = Tools.Player.AvatarUtils;
 
     internal class PrisonEscape : AstroEvents
     {
         internal static QMNestedGridMenu CurrentMenu;
         internal static bool isCurrentWorld = false;
+
         internal static void InitButtons(QMGridTab main)
         {
             CurrentMenu = new QMNestedGridMenu(main, "Prison Escape Cheats", "Prison Escape Cheats");
@@ -95,7 +98,7 @@
                 {
                     if (item.name.Contains("Crate Large"))
                     {
-                        Crates.AddGameObject(item.gameObject); 
+                        Crates.AddGameObject(item.gameObject);
                     }
                 }
 
@@ -127,18 +130,15 @@
 
                 if (item.name.Equals("Patron Control"))
                 {
-                   PatronController = item.GetOrAddComponent<Ostinyo_World_PatronCracker>(); // Fuck u Ostinyo 
+                    PatronController = item.GetOrAddComponent<Ostinyo_World_PatronCracker>(); // Fuck u Ostinyo 
                     TogglePatronGuns = item.FindUdonEvent("_TogglePatronGuns");
                     ToggleDoublePoints = item.FindUdonEvent("_ToggleDoublePoints");
 
                 }
             }
 
-            foreach (var item in Player_Object_Pool.transform.Get_All_Childs())
-            {
-                item.gameObject.SetActiveRecursively(true);
-            }
-                ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!");
+
+            ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!");
 
 
 
@@ -148,54 +148,103 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-          if (isCurrentWorld)
-          {
-              MiscUtils.DelayFunction(0.5f, () =>
-              {
-                  player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
-         
-              });
-          }
+            if (isCurrentWorld)
+            {
+                MiscUtils.DelayFunction(0.5f, () => { player.gameObject.GetOrAddComponent<PrisonEscape_ESP>(); });
+            }
         }
 
-        private static List<PrisonEscape_PlayerDataReader> CurrentReaders { get; set; } = new();
+        //internal override void OnUpdate()
+        //{
+        //    if (isCurrentWorld)
+        //    {
+        //        try
+        //        {
+        //            foreach (var player in WorldUtils.Players)
+        //            {
+        //                if (player != null)
+        //                {
+        //                    var colliders = AvatarUtils.GetAllCollidersOnPlayer(player);
+        //                    if (colliders != null)
+        //                    {
+
+        //                        if (colliders.Count != 0)
+        //                        {
+        //                            foreach (var item in colliders)
+        //                            {
+        //                                if (item != null)
+        //                                {
+        //                                    ModConsole.DebugLog(
+        //                                        $"Found Collider {item.gameObject.name}, with Parent {item.gameObject.transform.parent?.name}, and root {item.gameObject.transform.root?.name}",
+        //                                        System.Drawing.Color.Chartreuse);
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //        catch{}
+        //    }
+        //}
+
+    
+
+    private static List<PrisonEscape_PlayerDataReader> CurrentReaders { get; set; } = new();
 
 
         internal static PrisonEscape_PlayerDataReader FindAssignedUser(Player player)
         {
             foreach (var item in CurrentReaders)
             {
-                item.gameObject?.SetActiveRecursively(true);
-                item.gameObject.FindObject("Player Hitbox")?.SetActiveRecursively(true);
-                if (item.RemotePlayer != null)
+                if (item.GetActualDataReader != null)
                 {
-                    if (item.RemotePlayer.displayName.Equals(player.GetDisplayName()))
+                    if (item.GetActualDataReader.playerName == player.GetAPIUser().displayName)
                     {
-                        ModConsole.DebugLog($"Found {item.RemotePlayer.GetDisplayName()} player Data Reader!");
-                        return item;
+                        ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader!", System.Drawing.Color.GreenYellow );
+                        return GetCorrectReader(item.GetActualDataReader);
                     }
                 }
             }
 
             return null;
         }
-
+        private static PrisonEscape_PlayerDataReader LocalReader { get; set; }
         internal static PrisonEscape_PlayerDataReader GetLocalReader()
         {
             foreach (var item in CurrentReaders)
             {
-                item.gameObject?.SetActiveRecursively(true);
-                item.gameObject.FindObject("Player Hitbox")?.SetActiveRecursively(true);
-                if (item.isLocal)
+                if (item.GetActualDataReader.isLocal)
                 {
-                    ModConsole.DebugLog($"Found Local player Data Reader!");
-                    return item;
+                    ModConsole.DebugLog($"Found Local player Data Reader!", System.Drawing.Color.GreenYellow);
+                    return LocalReader = GetCorrectReader(item.GetActualDataReader);
                 }
             }
+
             return null;
         }
 
 
+        internal static PrisonEscape_PlayerDataReader GetCorrectReader(PrisonEscape_PlayerDataReader reader)
+        {
+            if (reader != null)
+            {
+                if (reader.GetActualDataReader != null)
+                {
+                    if (reader != reader.GetActualDataReader)
+                    {
+                        return reader.GetActualDataReader;
+                    }
+                    else
+                    {
+                        return reader;
+                    }
+                }
+            }
+
+            return null;
+        }
 
 
         private static List<UdonBehaviour_Cached> Knifes = new List<UdonBehaviour_Cached>();
