@@ -14,11 +14,11 @@
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]
-    public class PrisonEscape_PlayerDataReader : AstroMonoBehaviour
+    public class PrisonEscape_PoolDataReader : AstroMonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
-        public PrisonEscape_PlayerDataReader(IntPtr ptr) : base(ptr)
+        public PrisonEscape_PoolDataReader(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
@@ -39,7 +39,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("Can't Find Player Data behaviour, Unable to Add Reader Component, did the author update the world?");
+                    ModConsole.Error($"Can't Find Player Data behaviour, Unable to Add Reader on  {gameObject.name} GameObject, did the author update the world?");
                     Destroy(this);
                 }
 
@@ -63,7 +63,7 @@
         {
             try
             {
-                if (behaviour != null && behaviour != PlayerData.udonBehaviour)
+                if (behaviour != null && behaviour != PlayerData.udonBehaviour && behaviour.name.Contains("Player"))
                 {
                     if (behaviour.gameObject != PrisonEscape.Player_Object_Pool)
                     {
@@ -79,7 +79,7 @@
             return false;
         }
 
-        internal PrisonEscape_PlayerDataReader GetActualDataReader
+        internal PrisonEscape_PoolDataReader GetActualDataReader
         {
             get
             {
@@ -89,91 +89,91 @@
 
                 if (isNotPoolOrThisBehaviour(__0_this_intnl_PlayerData))
                 {
-                    return __0_this_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __0_this_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__0_intnl_PlayerData))
                 {
-                    return __0_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __0_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__1_intnl_PlayerData))
                 {
-                    return __1_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __1_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__2_intnl_PlayerData))
                 {
-                    return __2_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __2_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__3_intnl_PlayerData))
                 {
-                    return __3_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __3_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__4_intnl_PlayerData))
                 {
-                    return __4_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __4_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__5_intnl_PlayerData))
                 {
-                    return __5_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __5_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__6_intnl_PlayerData))
                 {
-                    return __6_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __6_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__7_intnl_PlayerData))
                 {
-                    return __7_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __7_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__8_intnl_PlayerData))
                 {
-                    return __8_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __8_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__9_intnl_PlayerData))
                 {
-                    return __9_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __9_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__10_intnl_PlayerData))
                 {
-                    return __10_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __10_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__11_intnl_PlayerData))
                 {
-                    return __11_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __11_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__12_intnl_PlayerData))
                 {
-                    return __12_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __12_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__13_intnl_PlayerData))
                 {
-                    return __13_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __13_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__14_intnl_PlayerData))
                 {
-                    return __14_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __14_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__15_intnl_PlayerData))
                 {
-                    return __15_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __15_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__16_intnl_PlayerData))
                 {
-                    return __16_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __16_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__17_intnl_PlayerData))
                 {
-                    return __17_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __17_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__18_intnl_PlayerData))
                 {
-                    return __18_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __18_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__19_intnl_PlayerData))
                 {
-                    return __19_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __19_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__20_intnl_PlayerData))
                 {
-                    return __20_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __20_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
 
                 #endregion PlayerData Zone
@@ -182,91 +182,91 @@
 
                 else if (isNotPoolOrThisBehaviour(__0_intnl_SystemObject))
                 {
-                    return __0_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __0_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__1_intnl_SystemObject))
                 {
-                    return __1_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __1_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__5_intnl_SystemObject))
                 {
-                    return __5_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __5_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__7_intnl_SystemObject))
                 {
-                    return __7_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __7_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__9_intnl_SystemObject))
                 {
-                    return __9_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __9_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__10_intnl_SystemObject))
                 {
-                    return __10_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __10_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__11_intnl_SystemObject))
                 {
-                    return __11_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __11_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__12_intnl_SystemObject))
                 {
-                    return __12_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __12_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__13_intnl_SystemObject))
                 {
-                    return __13_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __13_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__14_intnl_SystemObject))
                 {
-                    return __14_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __14_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__15_intnl_SystemObject))
                 {
-                    return __15_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __15_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__16_intnl_SystemObject))
                 {
-                    return __16_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __16_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__17_intnl_SystemObject))
                 {
-                    return __17_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __17_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__18_intnl_SystemObject))
                 {
-                    return __18_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __18_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__19_intnl_SystemObject))
                 {
-                    return __19_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __19_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__20_intnl_SystemObject))
                 {
-                    return __20_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __20_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__22_intnl_SystemObject))
                 {
-                    return __22_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __22_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__23_intnl_SystemObject))
                 {
-                    return __23_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __23_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__25_intnl_SystemObject))
                 {
-                    return __25_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __25_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__29_intnl_SystemObject))
                 {
-                    return __29_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __29_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__30_intnl_SystemObject))
                 {
-                    return __30_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __30_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
                 else if (isNotPoolOrThisBehaviour(__31_intnl_SystemObject))
                 {
-                    return __31_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    return __31_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
 
                 #endregion SystemObject Zone
@@ -319,6 +319,11 @@
             {
                 if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isWanted");
                 return null;
+            }
+            set
+            {
+                 UdonHeapEditor.PatchHeap(PlayerData, "isWanted", value.GetValueOrDefault());
+
             }
         }
 
@@ -4060,6 +4065,6 @@
 
         #endregion Generated Getters
 
-        internal static PrisonEscape_HitboxReader HitBoxReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal PrisonEscape_HitboxReader HitBoxReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

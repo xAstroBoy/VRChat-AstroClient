@@ -105,7 +105,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_GameManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PlayerDataReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PoolDataReader.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_HighlightItem.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
@@ -665,6 +665,10 @@
     <Compile Include="WorldModifications\WorldsCheats.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Accessibility" />
     <Reference Include="Assembly-CSharp">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
@@ -672,6 +676,14 @@
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AssetRipper.VersionUtilities">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetRipper.VersionUtilities.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AssetsTools.NET">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetsTools.NET.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang">
@@ -872,6 +884,23 @@
       <HintPath>..\packages\MongoDB.Libmongocrypt.1.2.3\lib\net472\MongoDB.Libmongocrypt.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Mdb.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Pdb.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Rocks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Mono.CompilerServices.SymbolWriter">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.CompilerServices.SymbolWriter.dll</HintPath>
       <Private>False</Private>
@@ -902,6 +931,16 @@
     </Reference>
     <Reference Include="Mono.WebBrowser">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.WebBrowser.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour, Version=20.1.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.RuntimeDetour.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoMod.Utils, Version=20.1.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -1107,6 +1146,10 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="SystemWebTestShim">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\SystemWebTestShim.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Tomlet">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Tomlet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Transmtn">

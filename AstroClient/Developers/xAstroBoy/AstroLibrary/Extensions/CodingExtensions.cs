@@ -56,6 +56,10 @@
         {
             return number < 0;
         }
+       internal static bool CheckRange(this float num, float min, float max)
+        {
+            return num > min && num < max;
+        }
 
         internal static string Truncate(this string value, int max_length)
         {

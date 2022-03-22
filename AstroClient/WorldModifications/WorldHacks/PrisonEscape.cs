@@ -11,7 +11,9 @@
     using AstroMonos.Components.ESP.UdonBehaviour;
     using CustomClasses;
     using Gompoc.ActionMenuAPI.Helpers;
+    using Mono.CSharp;
     using Tools.Extensions;
+    using Tools.Holders;
     using Tools.UdonEditor;
     using UnityEngine;
     using UnityEngine.UI;
@@ -86,7 +88,7 @@
                 var obj = item.FindUdonEvent("_SetWantedSynced");
                 if (obj != null)
                 {
-                    var reader = obj.transform.GetOrAddComponent<PrisonEscape_PlayerDataReader>();
+                    var reader = obj.transform.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                     if (reader != null)
                     {
                         if (!CurrentReaders.Contains(reader))
@@ -146,13 +148,45 @@
                 }
             }
 
+            foreach (var item in Prisoner_Spawns.Get_Childs())
+            {
+                SpawnPoints_Prisoners.Add(item.position);
+            }
+
+            foreach (var item in Guard_Spawns.Get_Childs())
+            {
+                SpawnPoints_Guards.Add(item.position);
+            }
+
+            // DEBUG REASONS
+
+            
 
             ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
 
-
+            ModConsole.DebugLog($"Registered {SpawnPoints_Guards.Count} Guard SpawnPoints!", System.Drawing.Color.Chartreuse);
+            ModConsole.DebugLog($"Registered {SpawnPoints_Prisoners.Count} Prisoner SpawnPoints!", System.Drawing.Color.Chartreuse);
+            SpawnTestSphere(SpawnPoints_Guards);
+            SpawnTestSphere(SpawnPoints_Prisoners);
 
         }
 
+
+        private static void SpawnTestSphere(List<Vector3> positions)
+        {
+            foreach (var pos in positions)
+            {
+                GameObject pearl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                pearl.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
+                pearl.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+                pearl.transform.position = pos;
+                pearl.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                pearl.GetComponent<Renderer>().material = ClientResources.Loaders.Materials.metal_gold_001;
+                pearl.DisableAllColliders();
+                pearl.IgnoreLocalPlayerCollision();
+                //pearl.GetComponent<Renderer>().material = ClientResources.Loaders.Materials.waffle;
+            }
+        }
 
 
         internal override void OnPlayerJoined(Player player)
@@ -198,32 +232,188 @@
         //        catch{}
         //    }
         //}
-
-    
-
-        private static List<PrisonEscape_PlayerDataReader> CurrentReaders { get; set; } = new();
-
-
-        internal static PrisonEscape_PlayerDataReader FindAssignedUser(Player player)
+        internal enum PrisonEscape_Roles
         {
+            None = 0,
+            Guard= 1,
+            Prisoner = 2,
+        }
+
+        internal static List<Vector3> SpawnPoints_Guards = new List<Vector3>();
+        internal static List<Vector3> SpawnPoints_Prisoners = new List<Vector3>();
+
+
+        internal static PrisonEscape_Roles GetRoleFromPos(Vector3 pos)
+        {
+            if (IsPrisoner(pos))
+            {
+                return PrisonEscape_Roles.Prisoner;
+            }
+
+            if (isGuard(pos))
+            {
+                return PrisonEscape_Roles.Guard;
+            }
+            return PrisonEscape_Roles.None;
+        }
+
+
+        internal static bool IsPrisoner(Vector3 position)
+        {
+            if (SpawnPoints_Prisoners != null)
+            {
+                if (SpawnPoints_Prisoners.Count != 0)
+                {
+                    foreach (var pos in SpawnPoints_Prisoners)
+                    {
+                        var dist = Vector3.Distance(pos, position);
+                        //ModConsole.DebugLog($"Calculated Distance is {dist}");
+                        if (dist.CheckRange(1, 30f))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        internal static bool isGuard(Vector3 position)
+        {
+            if (SpawnPoints_Guards != null)
+            {
+                if (SpawnPoints_Guards.Count != 0)
+                {
+                    foreach (var pos in SpawnPoints_Guards)
+                    {
+                        var dist = Vector3.Distance(pos, position);
+                       // ModConsole.DebugLog($"Calculated Distance is {dist}");
+                        if (dist.CheckRange(1, 30f))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+
+            return false;
+        }
+
+        private static List<PrisonEscape_PoolDataReader> CurrentReaders { get; set; } = new();
+
+
+        internal static PrisonEscape_PoolDataReader FindAssignedUser(Player player, bool SuppressLogs = false, PrisonEscape_Roles TargetRole = PrisonEscape_Roles.None)
+        {
+
             foreach (var item in CurrentReaders)
             {
                 var actualreader = GetCorrectReader(item);
                 if (actualreader != null)
                 {
+
                     //if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
                     if (actualreader.playerName == player.GetAPIUser().displayName)
                     {
-                        ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader!", System.Drawing.Color.GreenYellow );
-                        return actualreader;
+
+                        switch (TargetRole)
+                        {
+                            case PrisonEscape_Roles.Prisoner:
+                            {
+                                if (!actualreader.isGuard.GetValueOrDefault(false))
+                                {
+                                    if (!SuppressLogs)
+                                    {
+                                        ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                    }
+
+                                    return actualreader;
+                                }
+
+                                break;
+                            }
+
+                            case PrisonEscape_Roles.Guard:
+                            {
+                                if (actualreader.isGuard.GetValueOrDefault(false))
+                                {
+                                    if (!SuppressLogs)
+                                    {
+                                        ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                    }
+
+                                    return actualreader;
+                                }
+
+                                break;
+                            }
+                            case PrisonEscape_Roles.None:
+                            {
+                                if (!SuppressLogs)
+                                {
+                                    ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                }
+
+                                return actualreader;
+                            }
+                        }
+
+                    }
+                    else if (item.playerName == player.GetAPIUser().displayName)
+                    {
+
+                        switch (TargetRole)
+                        {
+                            case PrisonEscape_Roles.Prisoner:
+                            {
+                                if (!item.isGuard.GetValueOrDefault(false))
+                                {
+                                    if (!SuppressLogs)
+                                    {
+                                        ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                    }
+
+                                    return item;
+                                }
+
+                                break;
+                            }
+
+                            case PrisonEscape_Roles.Guard:
+                            {
+                                if (item.isGuard.GetValueOrDefault(false))
+                                {
+                                    if (!SuppressLogs)
+                                    {
+                                            ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                    }
+
+                                    return item;
+                                }
+
+                                break;
+                            }
+                            case PrisonEscape_Roles.None:
+                            {
+                                if (!SuppressLogs)
+                                {
+                                    ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                }
+
+                                return item;
+                            }
+                        }
                     }
                 }
             }
 
             return null;
         }
-        private static PrisonEscape_PlayerDataReader LocalReader { get; set; }
-        internal static PrisonEscape_PlayerDataReader GetLocalReader()
+
+        private static PrisonEscape_PoolDataReader LocalReader { get; set; }
+        internal static PrisonEscape_PoolDataReader GetLocalReader()
         {
             if (LocalReader != null)
             {
@@ -246,18 +436,23 @@
 
                         if (actualreader.isLocal)
                         {
-                            ModConsole.DebugLog($"Found Local player Data Reader!", System.Drawing.Color.GreenYellow);
+                            ModConsole.DebugLog($"Found Local player Data Reader : {actualreader.gameObject.name} !", System.Drawing.Color.GreenYellow);
                             return LocalReader = actualreader;
                         }
+                        else if (item.isLocal)
+                        {
+                            ModConsole.DebugLog($"Found Local player Data Reader : {item.gameObject.name} !", System.Drawing.Color.GreenYellow);
+                            return LocalReader = actualreader;
+                        }
+
                     }
                 }
             }
-            LocalReader.gameObject.RemoveFromWorldUtilsMenu();
             return LocalReader;
         }
 
 
-        internal static PrisonEscape_PlayerDataReader GetCorrectReader(PrisonEscape_PlayerDataReader reader)
+        internal static PrisonEscape_PoolDataReader GetCorrectReader(PrisonEscape_PoolDataReader reader)
         {
             if (reader != null)
             {
@@ -280,7 +475,7 @@
         private static List<UdonBehaviour_Cached> Knifes = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> VentsMeshes = new List<UdonBehaviour_Cached>();
 
-        private static PrisonEscape_PlayerDataReader _LocalPlayerData;
+        private static PrisonEscape_PoolDataReader _LocalPlayerData;
         
         private static bool _DropKnifeAfterKill = true;
 
@@ -413,6 +608,8 @@
             _LocalPlayerData = null;
             CurrentReaders.Clear();
             LocalReader = null;
+            SpawnPoints_Prisoners.Clear();
+            SpawnPoints_Guards.Clear();
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
         {
@@ -712,6 +909,65 @@
                 return null;
             }
         }
+        private static GameObject _Spawn_Points;
+        internal static GameObject Spawn_Points
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (Prison == null) return null;
+                    if (_Spawn_Points == null)
+                    {
+                        return _Spawn_Points = Prison.FindObject("Spawn Points");
+                    }
+                    return _Spawn_Points;
+                }
+
+                return null;
+            }
+        }
+
+        private static GameObject _Prisoner_Spawns;
+        internal static GameObject Prisoner_Spawns
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (Prison == null) return null;
+                    if (_Prisoner_Spawns == null)
+                    {
+                        return _Prisoner_Spawns = Spawn_Points.FindObject("Prisoner Spawns");
+                    }
+                    return _Prisoner_Spawns;
+                }
+
+                return null;
+            }
+        }
+
+
+        private static GameObject _Guard_Spawns;
+        internal static GameObject Guard_Spawns
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (Prison == null) return null;
+                    if (_Guard_Spawns == null)
+                    {
+                        return _Guard_Spawns = Spawn_Points.FindObject("Guard Spawns");
+                    }
+                    return _Guard_Spawns;
+                }
+
+                return null;
+            }
+        }
+
+
 
 
         private static GameObject _ITEMS;

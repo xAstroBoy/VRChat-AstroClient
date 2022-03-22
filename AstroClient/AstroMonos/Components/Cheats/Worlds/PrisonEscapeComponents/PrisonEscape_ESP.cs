@@ -6,6 +6,7 @@
     using ClientAttributes;
     using ESP.Player;
     using Il2CppSystem.Collections.Generic;
+    using Tools.Listeners;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -29,9 +30,9 @@
 
         private PlayerESP _ESP { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
 
-        private PrisonEscape_PlayerDataReader RemoteUserData {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
+        private PrisonEscape_PoolDataReader RemoteUserData {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
 
-        internal PrisonEscape_PlayerDataReader LocalUserData {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
+        internal PrisonEscape_PoolDataReader LocalUserData {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
@@ -134,22 +135,53 @@
                 WantedTag.ShowTag = false;
                 WantedTag.BackGroundColor = Color.red;
             }
+            InvokeRepeating(nameof(ScrambleCheck), 1f, 3.5f);
             InvokeRepeating(nameof(UpdatePlayerDataReaders), 0f, 0.3f);
             InvokeRepeating(nameof(HealthTagUpdate), 0.1f, 0.1f);
             InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
-
+            InvokeRepeating(nameof(OnHitboxActive),0.5f, 2f);
 
 
 
 
         }
 
-        internal void Update()
+        private bool HasAppliedListenerOnHitbox = false;
+        internal void OnHitboxActive()
         {
-            if (RemoteUserData == null)
+            if (!isActiveAndEnabled) return;
+            if (HasAppliedListenerOnHitbox) return;
+            if (RemoteUserData != null)
             {
-                UpdatePlayerDataReaders();
+                if (RemoteUserData.hitbox != null )
+                {
+                    var listener = RemoteUserData.hitbox.GetOrAddComponent<GameObjectListener>();
+                    if (listener != null)
+                    {
+                        listener.OnEnabled += OnHitboxEnable;
+                        listener.OnDisabled += OnHitboxDisable;
+                        HasAppliedListenerOnHitbox = true;
+                    }
+                }
             }
+        }
+
+        private PrisonEscape.PrisonEscape_Roles CurrentDetectedRole = PrisonEscape.PrisonEscape_Roles.None;
+
+
+        private void OnHitboxEnable()
+        {
+            MiscUtils.DelayFunction(0.3f, () => { 
+            CurrentDetectedRole = PrisonEscape.GetRoleFromPos(RemoteUserData.HitBoxReader.__0_pos_Vector3.GetValueOrDefault(Vector3.zero));
+            ModConsole.DebugLog($"Hitbox Assigned Role on Player {Player.DisplayName()} is {CurrentDetectedRole.ToString()}");
+
+            });
+        }
+
+        private void OnHitboxDisable()
+        {
+            CurrentDetectedRole = PrisonEscape.PrisonEscape_Roles.None;
+
         }
 
         internal void OnDestroy()
@@ -159,34 +191,43 @@
         }
 
 
+
         private bool SaidFoundMessage;
-        internal void UpdatePlayerDataReaders()
+
+        internal void ScrambleCheck()
         {
             if (!isActiveAndEnabled) return;
             if (RemoteUserData != null)
             {
-                RemoteUserData.gameObject.RemoveFromWorldUtilsMenu();
-                if (RemoteUserData.playerName != Player.DisplayName())
+                var search = PrisonEscape.FindAssignedUser(Player, true, CurrentDetectedRole);
+                if (search != RemoteUserData)
                 {
-                    ModConsole.DebugLog($"User : {Player.DisplayName()}, PlayerData Changed, Researching!", System.Drawing.Color.DarkSeaGreen);
-                    RemoteUserData = null;
+                    RemoteUserData = search;
+                    ModConsole.DebugLog($"User : {Player.DisplayName()}, PlayerData Changed To {search.gameObject.name}!", System.Drawing.Color.DarkSeaGreen);
                 }
             }
+        }
+
+        internal void UpdatePlayerDataReaders()
+        {
+            if (!isActiveAndEnabled) return;
             if (RemoteUserData == null)
             {
-                RemoteUserData = PrisonEscape.FindAssignedUser(Player);
+                RemoteUserData = PrisonEscape.FindAssignedUser(Player, false, CurrentDetectedRole);
                 if (RemoteUserData != null)
                 {
                     if (!SaidFoundMessage)
                     {
-                        ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.");
+                        ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.", System.Drawing.Color.GreenYellow);
                         SaidFoundMessage = true;
                     }
+                    ESPUpdater();
+                    HealthTagUpdate();
                 }
-                else
-                {
-                    ModConsole.DebugLog($"Could not Find {gameObject.name} - {Player.DisplayName()} Player Data, Retrying!");
-                }
+                //else
+                //{
+                //    ModConsole.DebugLog($"Could not Find {gameObject.name} - {Player.DisplayName()} Player Data, Retrying!");
+                //}
             }
             LocalUserData = PrisonEscape.GetLocalReader();
         }
