@@ -36,6 +36,7 @@
                 if (obj != null)
                 {
                     PlayerData = obj.RawItem;
+                    Initialize_PlayerData();
                 }
                 else
                 {
@@ -56,6 +57,11 @@
             {
                 Destroy(this);
             }
+        }
+
+        private void OnDestroy()
+        {
+            Cleanup_PlayerData();
         }
 
         [HideFromIl2Cpp]
@@ -115,66 +121,66 @@
                 {
                     return __5_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
-                else if (isNotPoolOrThisBehaviour(__6_intnl_PlayerData))
-                {
-                    return __6_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__7_intnl_PlayerData))
-                {
-                    return __7_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__8_intnl_PlayerData))
-                {
-                    return __8_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__9_intnl_PlayerData))
-                {
-                    return __9_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__10_intnl_PlayerData))
-                {
-                    return __10_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__11_intnl_PlayerData))
-                {
-                    return __11_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__12_intnl_PlayerData))
-                {
-                    return __12_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__13_intnl_PlayerData))
-                {
-                    return __13_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__14_intnl_PlayerData))
-                {
-                    return __14_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__15_intnl_PlayerData))
-                {
-                    return __15_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__16_intnl_PlayerData))
-                {
-                    return __16_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__17_intnl_PlayerData))
-                {
-                    return __17_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__18_intnl_PlayerData))
-                {
-                    return __18_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__19_intnl_PlayerData))
-                {
-                    return __19_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__20_intnl_PlayerData))
-                {
-                    return __20_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
+                //else if (isNotPoolOrThisBehaviour(__6_intnl_PlayerData))
+                //{
+                //    return __6_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__7_intnl_PlayerData))
+                //{
+                //    return __7_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__8_intnl_PlayerData))
+                //{
+                //    return __8_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__9_intnl_PlayerData))
+                //{
+                //    return __9_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__10_intnl_PlayerData))
+                //{
+                //    return __10_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__11_intnl_PlayerData))
+                //{
+                //    return __11_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__12_intnl_PlayerData))
+                //{
+                //    return __12_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__13_intnl_PlayerData))
+                //{
+                //    return __13_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__14_intnl_PlayerData))
+                //{
+                //    return __14_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__15_intnl_PlayerData))
+                //{
+                //    return __15_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__16_intnl_PlayerData))
+                //{
+                //    return __16_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__17_intnl_PlayerData))
+                //{
+                //    return __17_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__18_intnl_PlayerData))
+                //{
+                //    return __18_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__19_intnl_PlayerData))
+                //{
+                //    return __19_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__20_intnl_PlayerData))
+                //{
+                //    return __20_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
 
                 #endregion PlayerData Zone
 
@@ -298,17 +304,34 @@
             }
         }
 
-        internal RawUdonBehaviour PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private static RawUdonBehaviour PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
-        #region Generated Getters
+        internal PrisonEscape_HitboxReader HitBoxReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+        #region Getter / Setters UdonVariables  of PlayerData
 
         internal int? __18_const_intnl_SystemInt32
         {
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__18_const_intnl_SystemInt32");
+                if (Private___18_const_intnl_SystemInt32 != null)
+                {
+                    return Private___18_const_intnl_SystemInt32.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___18_const_intnl_SystemInt32 != null)
+                    {
+                        Private___18_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -317,13 +340,23 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isWanted");
+                if (Private_isWanted != null)
+                {
+                    return Private_isWanted.Value;
+                }
+
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
-                 UdonHeapEditor.PatchHeap(PlayerData, "isWanted", value.GetValueOrDefault());
-
+                if (value.HasValue)
+                {
+                    if (Private_isWanted != null)
+                    {
+                        Private_isWanted.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -332,8 +365,23 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__43_const_intnl_exitJumpLoc_UInt32");
+                if (Private___43_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___43_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___43_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___43_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -342,8 +390,20 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__33_const_intnl_SystemString");
+                if (Private___33_const_intnl_SystemString != null)
+                {
+                    return Private___33_const_intnl_SystemString.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___33_const_intnl_SystemString != null)
+                {
+                    Private___33_const_intnl_SystemString.Value = value;
+                }
             }
         }
 
@@ -352,8 +412,23 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__20_const_intnl_SystemInt32");
+                if (Private___20_const_intnl_SystemInt32 != null)
+                {
+                    return Private___20_const_intnl_SystemInt32.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___20_const_intnl_SystemInt32 != null)
+                    {
+                        Private___20_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -362,8 +437,23 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__23_intnl_SystemBoolean");
+                if (Private___23_intnl_SystemBoolean != null)
+                {
+                    return Private___23_intnl_SystemBoolean.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___23_intnl_SystemBoolean != null)
+                    {
+                        Private___23_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -372,8 +462,20 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_GameObject(PlayerData, "__1_intnl_UnityEngineGameObject");
+                if (Private___1_intnl_UnityEngineGameObject != null)
+                {
+                    return Private___1_intnl_UnityEngineGameObject.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_UnityEngineGameObject != null)
+                {
+                    Private___1_intnl_UnityEngineGameObject.Value = value;
+                }
             }
         }
 
@@ -382,8 +484,23 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__21_const_intnl_exitJumpLoc_UInt32");
+                if (Private___21_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___21_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___21_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___21_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -392,8 +509,23 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__52_intnl_SystemBoolean");
+                if (Private___52_intnl_SystemBoolean != null)
+                {
+                    return Private___52_intnl_SystemBoolean.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___52_intnl_SystemBoolean != null)
+                    {
+                        Private___52_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -402,8 +534,20 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__3_const_intnl_SystemString");
+                if (Private___3_const_intnl_SystemString != null)
+                {
+                    return Private___3_const_intnl_SystemString.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_const_intnl_SystemString != null)
+                {
+                    Private___3_const_intnl_SystemString.Value = value;
+                }
             }
         }
 
@@ -412,3346 +556,23 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__6_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __3_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__3_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __26_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__26_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __0_const_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__0_const_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __41_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__41_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Transform __1_intnl_UnityEngineTransform
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Transform(PlayerData, "__1_intnl_UnityEngineTransform");
-                return null;
-            }
-        }
-
-        internal int? __1_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__1_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_PlayerObjectPool
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_PlayerObjectPool");
-                return null;
-            }
-        }
-
-        internal int? __1_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__1_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __16_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__16_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Transform __2_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Transform(PlayerData, "__2_intnl_SystemObject");
-                return null;
-            }
-        }
-
-        // ERROR : FAILED TO Generate getter for __0_const_intnl_VRCUdonCommonEnumsEventTiming With Type VRC.Udon.Common.Enums.EventTiming
-
-        internal uint? __35_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__35_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __39_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__39_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? doublePoints
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "doublePoints");
-                return null;
-            }
-        }
-
-        internal string __0_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__0_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal uint? __56_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__56_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __42_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__42_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal float? __0_const_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__0_const_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal bool? __29_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__29_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal float? __1_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__1_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal int? __7_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__7_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __5_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__5_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal float? tagHeightScalar
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "tagHeightScalar");
-                return null;
-            }
-        }
-
-        internal uint? __46_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__46_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __35_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__35_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour hitbox
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "hitbox");
-                return null;
-            }
-        }
-
-        internal uint? __10_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__10_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __11_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__11_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __0_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__0_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __2_intnl_PlayerObjectPool
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__2_intnl_PlayerObjectPool");
-                return null;
-            }
-        }
-
-        internal bool? __15_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__15_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __24_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__24_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __34_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__34_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __28_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__28_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Transform __2_intnl_UnityEngineTransform
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Transform(PlayerData, "__2_intnl_UnityEngineTransform");
-                return null;
-            }
-        }
-
-        internal uint? __28_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__28_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? maxHealth
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "maxHealth");
-                return null;
-            }
-        }
-
-        internal string __6_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__6_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __21_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__21_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? cachedIsWanted
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "cachedIsWanted");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __5_intnl_PlayerObjectPool
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__5_intnl_PlayerObjectPool");
-                return null;
-            }
-        }
-
-        internal uint? __5_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__5_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __13_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__13_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __50_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__50_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string __1_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__1_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal int? __4_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__4_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __64_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__64_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __40_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__40_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal string __29_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__29_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal float? __1_const_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__1_const_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal uint? __23_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__23_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal float? __5_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__5_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal int? __25_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__25_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __40_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__40_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __2_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__2_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __16_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__16_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? goldGuns
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "goldGuns");
-                return null;
-            }
-        }
-
-        internal string __14_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__14_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal int? __1_mp_hp_Int32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__1_mp_hp_Int32");
-                return null;
-            }
-        }
-
-        internal bool? __7_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__7_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __22_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__22_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __38_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__38_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __7_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__7_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __37_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__37_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string __7_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__7_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal string __15_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__15_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __4_intnl_PlayerObjectPool
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__4_intnl_PlayerObjectPool");
-                return null;
-            }
-        }
-
-        internal bool? __0_mp_playing_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__0_mp_playing_Boolean");
-                return null;
-            }
-        }
-
-        internal int? __5_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__5_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal long? __refl_const_intnl_udonTypeID
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int64(PlayerData, "__refl_const_intnl_udonTypeID");
-                return null;
-            }
-        }
-
-        internal bool? __4_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__4_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __16_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__16_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __19_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__19_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __refl_const_intnl_udonTypeName
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__refl_const_intnl_udonTypeName");
-                return null;
-            }
-        }
-
-        internal int? health
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "health");
-                return null;
-            }
-        }
-
-        internal float? healthRegenDelay
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "healthRegenDelay");
-                return null;
-            }
-        }
-
-        internal bool? __1_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__1_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __38_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__38_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __12_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__12_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string __34_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__34_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal string __17_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__17_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal int? __28_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__28_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal int? __17_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__17_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __26_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__26_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string __4_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__4_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal uint? __31_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__31_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __68_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__68_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __20_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__20_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal string __35_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__35_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __11_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__11_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __2_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__2_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal int? __8_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__8_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __52_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__52_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __4_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__4_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __30_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__30_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __0_mp_wanted_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__0_mp_wanted_Boolean");
-                return null;
-            }
-        }
-
-        internal bool? __54_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__54_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __21_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__21_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal string __26_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__26_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal uint? __42_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__42_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __71_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__71_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __31_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__31_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Transform __4_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Transform(PlayerData, "__4_intnl_SystemObject");
-                return null;
-            }
-        }
-
-        internal uint? __9_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__9_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __60_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__60_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __37_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__37_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __20_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__20_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string __37_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__37_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal float? __2_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__2_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal string __5_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__5_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __3_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__3_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __12_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__12_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __6_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__6_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __67_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__67_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __23_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__23_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Vector3? __5_intnl_UnityEngineVector3
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Vector3(PlayerData, "__5_intnl_UnityEngineVector3");
-                return null;
-            }
-        }
-
-        internal int? __14_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__14_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal int? __9_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__9_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __44_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__44_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __72_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__72_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __19_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__19_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __0_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__0_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __34_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__34_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Vector3? __4_intnl_UnityEngineVector3
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Vector3(PlayerData, "__4_intnl_UnityEngineVector3");
-                return null;
-            }
-        }
-
-        internal float? __9_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__9_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal int? __21_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__21_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? cachedIsDead
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "cachedIsDead");
-                return null;
-            }
-        }
-
-        internal bool? isGuard
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isGuard");
-                return null;
-            }
-        }
-
-        internal string __12_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__12_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal uint? __38_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__38_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal UnityEngine.GameObject __0_this_intnl_UnityEngineGameObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_GameObject(PlayerData, "__0_this_intnl_UnityEngineGameObject");
-                return null;
-            }
-        }
-
-        internal float? __3_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__3_intnl_SystemObject");
-                return null;
-            }
-        }
-
-        internal UnityEngine.GameObject __0_intnl_UnityEngineGameObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_GameObject(PlayerData, "__0_intnl_UnityEngineGameObject");
-                return null;
-            }
-        }
-
-        internal string __8_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__8_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal float? __6_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__6_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal uint? __33_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__33_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __58_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__58_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __15_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__15_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __36_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__36_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal string cachedPlayerName
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "cachedPlayerName");
-                return null;
-            }
-        }
-
-        internal uint? __19_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__19_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __12_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__12_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal string __32_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__32_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal float? __0_tagHeight_Single
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__0_tagHeight_Single");
-                return null;
-            }
-        }
-
-        internal bool? __35_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__35_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __8_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__8_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __37_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__37_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __50_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__50_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __0_mp_hp_Int32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__0_mp_hp_Int32");
-                return null;
-            }
-        }
-
-        internal uint? __55_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__55_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __22_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__22_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __24_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__24_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __9_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__9_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal int? __13_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__13_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal int? __0_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__0_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __0_intnl_returnTarget_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__0_intnl_returnTarget_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __48_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__48_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __59_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__59_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __45_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__45_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __65_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__65_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __0_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__0_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __33_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__33_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __57_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__57_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __26_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__26_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal UnityEngine.GameObject __3_intnl_UnityEngineGameObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_GameObject(PlayerData, "__3_intnl_UnityEngineGameObject");
-                return null;
-            }
-        }
-
-        internal uint? __49_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__49_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __0_const_intnl_SystemUInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__0_const_intnl_SystemUInt32");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour scorecard
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "scorecard");
-                return null;
-            }
-        }
-
-        internal int? cachedHealth
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "cachedHealth");
-                return null;
-            }
-        }
-
-        internal bool? __9_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__9_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __36_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__36_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __63_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__63_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __36_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__36_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal float? __0_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__0_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal int? __27_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__27_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __40_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__40_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Camera spectateCamera
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Camera(PlayerData, "spectateCamera");
-                return null;
-            }
-        }
-
-        internal string __18_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__18_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal float? lastDamageTime
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "lastDamageTime");
-                return null;
-            }
-        }
-
-        internal bool? killedByLocal
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "killedByLocal");
-                return null;
-            }
-        }
-
-        internal bool? __66_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__66_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __0_mp_damage_Int32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__0_mp_damage_Int32");
-                return null;
-            }
-        }
-
-        internal bool? isPlaying
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isPlaying");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Vector3? __3_intnl_UnityEngineVector3
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Vector3(PlayerData, "__3_intnl_UnityEngineVector3");
-                return null;
-            }
-        }
-
-        internal bool? __47_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__47_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __34_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__34_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Transform __4_intnl_UnityEngineTransform
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Transform(PlayerData, "__4_intnl_UnityEngineTransform");
-                return null;
-            }
-        }
-
-        internal int? __10_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__10_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal string __19_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__19_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal uint? __17_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__17_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __30_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__30_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __39_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__39_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __28_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__28_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __6_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__6_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal float? __4_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__4_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal string __24_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__24_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __69_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__69_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __57_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__57_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string __38_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__38_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __14_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__14_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? cachedIsPlaying
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "cachedIsPlaying");
-                return null;
-            }
-        }
-
-        internal int? __24_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__24_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? cachedHasKeycard
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "cachedHasKeycard");
-                return null;
-            }
-        }
-
-        internal uint? __47_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__47_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __3_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__3_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __31_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__31_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __55_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__55_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __25_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__25_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal int? __29_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__29_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __11_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__11_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __8_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__8_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __20_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__20_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Vector3? __2_intnl_UnityEngineVector3
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Vector3(PlayerData, "__2_intnl_UnityEngineVector3");
-                return null;
-            }
-        }
-
-        internal string __39_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__39_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __0_mp_enabled_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__0_mp_enabled_Boolean");
-                return null;
-            }
-        }
-
-        internal uint? __25_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__25_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __32_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__32_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __61_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__61_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __29_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__29_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Vector3? __1_intnl_UnityEngineVector3
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Vector3(PlayerData, "__1_intnl_UnityEngineVector3");
-                return null;
-            }
-        }
-
-        internal bool? __53_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__53_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __27_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__27_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __0_mp_dead_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__0_mp_dead_Boolean");
-                return null;
-            }
-        }
-
-        internal uint? __51_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__51_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __2_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__2_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal float? __3_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__3_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal int? __33_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__33_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal string __27_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__27_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Vector3? __0_intnl_UnityEngineVector3
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Vector3(PlayerData, "__0_intnl_UnityEngineVector3");
-                return null;
-            }
-        }
-
-        internal string __10_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__10_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __32_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__32_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __56_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__56_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __41_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__41_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __45_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__45_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __1_const_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__1_const_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __22_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__22_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __62_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__62_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __11_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__11_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal string __16_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__16_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal int? healthRegenAmt
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "healthRegenAmt");
-                return null;
-            }
-        }
-
-        internal uint? __32_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__32_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __43_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__43_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __15_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__15_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? __18_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__18_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __0_mp_t_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__0_mp_t_Boolean");
-                return null;
-            }
-        }
-
-        internal bool? __2_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__2_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal float? __10_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__10_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal int? __1_mp_damage_Int32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__1_mp_damage_Int32");
-                return null;
-            }
-        }
-
-        internal uint? __14_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__14_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal int? __23_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__23_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal bool? joinedRound
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "joinedRound");
-                return null;
-            }
-        }
-
-        internal int? __3_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__3_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal float? __7_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__7_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal float? tagHeightMin
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "tagHeightMin");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.Common.Interfaces.NetworkEventTarget? __0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_NetworkEventTarget(PlayerData, "__0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget");
-                return null;
-            }
-        }
-
-        internal bool? __59_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__59_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? isDead
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "isDead");
-                return null;
-            }
-        }
-
-        internal uint? __18_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__18_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __46_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__46_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __30_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__30_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour gameManager
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "gameManager");
-                return null;
-            }
-        }
-
-        internal string __13_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__13_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal bool? __0_mp_guard_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__0_mp_guard_Boolean");
-                return null;
-            }
-        }
-
-        internal UnityEngine.Vector3? deathLoc
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Vector3(PlayerData, "deathLoc");
-                return null;
-            }
-        }
-
-        internal int? __30_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__30_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal uint? __54_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__54_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __13_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__13_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal UnityEngine.GameObject __2_intnl_UnityEngineGameObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_GameObject(PlayerData, "__2_intnl_UnityEngineGameObject");
-                return null;
-            }
-        }
-
-        internal bool? __10_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__10_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal string __2_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__2_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal string __31_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__31_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal uint? __27_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__27_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string __36_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__36_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal uint? __58_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__58_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal uint? __44_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__44_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string playerName
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "playerName");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __3_intnl_PlayerObjectPool
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__3_intnl_PlayerObjectPool");
-                return null;
-            }
-        }
-
-        internal bool? __51_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__51_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal int? __0_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__0_const_intnl_SystemInt32");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __1_intnl_PlayerObjectPool
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__1_intnl_PlayerObjectPool");
-                return null;
-            }
-        }
-
-        internal uint? __1_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__1_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? __25_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__25_intnl_SystemBoolean");
-                return null;
-            }
-        }
+                if (Private___6_const_intnl_SystemInt32 != null)
+                {
+                    return Private___6_const_intnl_SystemInt32.Value;
+                }
 
-        internal uint? __48_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__48_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal string __22_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__22_const_intnl_SystemString");
-                return null;
-            }
-        }
-
-        internal float? __8_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_single(PlayerData, "__8_intnl_SystemSingle");
-                return null;
-            }
-        }
-
-        internal string __0_mp_newName_String
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_string(PlayerData, "__0_mp_newName_String");
-                return null;
-            }
-        }
-
-        internal bool? __70_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__70_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour teamTag
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "teamTag");
-                return null;
-            }
-        }
-
-        internal bool? __17_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__17_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal bool? __49_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__49_intnl_SystemBoolean");
-                return null;
-            }
-        }
-
-        internal uint? __53_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UInt32(PlayerData, "__53_const_intnl_exitJumpLoc_UInt32");
-                return null;
-            }
-        }
-
-        internal bool? hasKeycard
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "hasKeycard");
-                return null;
-            }
-        }
-
-        internal int? __28_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Int32(PlayerData, "__28_intnl_SystemObject");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __3_intnl_GameEffects
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__3_intnl_GameEffects");
-                return null;
-            }
-        }
-
-        internal UnityEngine.UI.Slider __3_intnl_UnityEngineUISlider
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UnityEngine_UI_Slider(PlayerData, "__3_intnl_UnityEngineUISlider");
-                return null;
-            }
-        }
-
-        internal UnityEngine.UI.Slider __32_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UnityEngine_UI_Slider(PlayerData, "__32_intnl_SystemObject");
-                return null;
-            }
-        }
-
-        internal VRC.SDKBase.VRCPlayerApi __1_intnl_VRCSDKBaseVRCPlayerApi
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_VRCPlayerApi(PlayerData, "__1_intnl_VRCSDKBaseVRCPlayerApi");
-                return null;
-            }
-        }
-
-        internal bool? __6_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__6_intnl_SystemObject");
-                return null;
-            }
-        }
-
-        internal UnityEngine.GameObject __4_intnl_UnityEngineGameObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_GameObject(PlayerData, "__4_intnl_UnityEngineGameObject");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_ItemControl
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_ItemControl");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_GameJoinTrigger
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_GameJoinTrigger");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __1_intnl_GameEffects
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__1_intnl_GameEffects");
-                return null;
-            }
-        }
-
-        internal bool? __24_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__24_intnl_SystemObject");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __5_intnl_GameEffects
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__5_intnl_GameEffects");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_ScoreboardDisplay
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_ScoreboardDisplay");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_PatronControl
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_PatronControl");
-                return null;
-            }
-        }
-
-        internal bool? __8_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_Boolean(PlayerData, "__8_intnl_SystemObject");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __1_intnl_PatronControl
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__1_intnl_PatronControl");
-                return null;
-            }
-        }
-
-        internal VRC.SDKBase.VRCPlayerApi __4_intnl_VRCSDKBaseVRCPlayerApi
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_VRCPlayerApi(PlayerData, "__4_intnl_VRCSDKBaseVRCPlayerApi");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_GameEffects
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_GameEffects");
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_AFKDetector
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_AFKDetector");
-                return null;
-            }
-        }
-
-        #region System Objects
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __1_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__1_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __5_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__5_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __7_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__7_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __9_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__9_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __10_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__10_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __11_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__11_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __12_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__12_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __13_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__13_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __14_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__14_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __15_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__15_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __16_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__16_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __17_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__17_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __18_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__18_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __19_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__19_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __20_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__20_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __22_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__22_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __23_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__23_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __25_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__25_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __29_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__29_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __30_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__30_intnl_SystemObject"); } catch { }
                 return null;
             }
-        }
-
-        internal VRC.Udon.UdonBehaviour __31_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try { if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__31_intnl_SystemObject"); } catch { }
-                return null;
-            }
-        }
-
-        #endregion System Objects
-
-        #region PlayerDatasVars
-
-        internal VRC.Udon.UdonBehaviour __0_this_intnl_PlayerData
-        {
             [HideFromIl2Cpp]
-            get
+            set
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_this_intnl_PlayerData");
-                return null;
+                if (value.HasValue)
+                {
+                    if (Private___6_const_intnl_SystemInt32 != null)
+                    {
+                        Private___6_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -3760,23 +581,2871 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__0_intnl_PlayerData");
+                if (Private___0_intnl_PlayerData != null)
+                {
+                    return Private___0_intnl_PlayerData.Value;
+                }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_PlayerData != null)
+                {
+                    Private___0_intnl_PlayerData.Value = value;
+                }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __1_intnl_PlayerData
+        internal uint? __3_const_intnl_exitJumpLoc_UInt32
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___3_const_intnl_exitJumpLoc_UInt32 != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__1_intnl_PlayerData");
+                    return Private___3_const_intnl_exitJumpLoc_UInt32.Value;
                 }
-                catch { }
 
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___3_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___3_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __26_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___26_intnl_SystemBoolean != null)
+                {
+                    return Private___26_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___26_intnl_SystemBoolean != null)
+                    {
+                        Private___26_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __0_const_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_const_intnl_SystemBoolean != null)
+                {
+                    return Private___0_const_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_const_intnl_SystemBoolean != null)
+                    {
+                        Private___0_const_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __41_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___41_intnl_SystemBoolean != null)
+                {
+                    return Private___41_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___41_intnl_SystemBoolean != null)
+                    {
+                        Private___41_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Transform __1_intnl_UnityEngineTransform
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_UnityEngineTransform != null)
+                {
+                    return Private___1_intnl_UnityEngineTransform.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_UnityEngineTransform != null)
+                {
+                    Private___1_intnl_UnityEngineTransform.Value = value;
+                }
+            }
+        }
+
+        internal int? __1_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_const_intnl_SystemInt32 != null)
+                {
+                    return Private___1_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_const_intnl_SystemInt32 != null)
+                    {
+                        Private___1_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_PlayerObjectPool
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_PlayerObjectPool != null)
+                {
+                    return Private___0_intnl_PlayerObjectPool.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_PlayerObjectPool != null)
+                {
+                    Private___0_intnl_PlayerObjectPool.Value = value;
+                }
+            }
+        }
+
+        internal int? __1_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_SystemInt32 != null)
+                {
+                    return Private___1_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_intnl_SystemInt32 != null)
+                    {
+                        Private___1_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __16_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___16_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___16_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___16_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___16_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Transform __2_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_SystemObject != null)
+                {
+                    return Private___2_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_intnl_SystemObject != null)
+                {
+                    Private___2_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.Common.Enums.EventTiming? __0_const_intnl_VRCUdonCommonEnumsEventTiming
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_const_intnl_VRCUdonCommonEnumsEventTiming != null)
+                {
+                    return Private___0_const_intnl_VRCUdonCommonEnumsEventTiming.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_const_intnl_VRCUdonCommonEnumsEventTiming != null)
+                    {
+                        Private___0_const_intnl_VRCUdonCommonEnumsEventTiming.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __35_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___35_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___35_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___35_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___35_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __39_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___39_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___39_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___39_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___39_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? doublePoints
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_doublePoints != null)
+                {
+                    return Private_doublePoints.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_doublePoints != null)
+                    {
+                        Private_doublePoints.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __0_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_const_intnl_SystemString != null)
+                {
+                    return Private___0_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_const_intnl_SystemString != null)
+                {
+                    Private___0_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal uint? __56_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___56_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___56_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___56_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___56_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __42_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___42_intnl_SystemBoolean != null)
+                {
+                    return Private___42_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___42_intnl_SystemBoolean != null)
+                    {
+                        Private___42_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __0_const_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_const_intnl_SystemSingle != null)
+                {
+                    return Private___0_const_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_const_intnl_SystemSingle != null)
+                    {
+                        Private___0_const_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __29_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___29_intnl_SystemBoolean != null)
+                {
+                    return Private___29_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___29_intnl_SystemBoolean != null)
+                    {
+                        Private___29_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __1_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_SystemSingle != null)
+                {
+                    return Private___1_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_intnl_SystemSingle != null)
+                    {
+                        Private___1_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __7_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___7_const_intnl_SystemInt32 != null)
+                {
+                    return Private___7_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___7_const_intnl_SystemInt32 != null)
+                    {
+                        Private___7_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __9_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___9_intnl_SystemObject != null)
+                {
+                    return Private___9_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___9_intnl_SystemObject != null)
+                {
+                    Private___9_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal bool? __5_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_intnl_SystemBoolean != null)
+                {
+                    return Private___5_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___5_intnl_SystemBoolean != null)
+                    {
+                        Private___5_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? tagHeightScalar
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_tagHeightScalar != null)
+                {
+                    return Private_tagHeightScalar.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_tagHeightScalar != null)
+                    {
+                        Private_tagHeightScalar.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __46_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___46_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___46_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___46_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___46_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __35_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___35_const_intnl_SystemInt32 != null)
+                {
+                    return Private___35_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___35_const_intnl_SystemInt32 != null)
+                    {
+                        Private___35_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour hitbox
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_hitbox != null)
+                {
+                    return Private_hitbox.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_hitbox != null)
+                {
+                    Private_hitbox.Value = value;
+                }
+            }
+        }
+
+        internal uint? __10_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___10_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___10_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___10_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___10_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __11_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___11_const_intnl_SystemInt32 != null)
+                {
+                    return Private___11_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___11_const_intnl_SystemInt32 != null)
+                    {
+                        Private___11_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __0_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___0_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___0_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __2_intnl_PlayerObjectPool
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_PlayerObjectPool != null)
+                {
+                    return Private___2_intnl_PlayerObjectPool.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_intnl_PlayerObjectPool != null)
+                {
+                    Private___2_intnl_PlayerObjectPool.Value = value;
+                }
+            }
+        }
+
+        internal bool? __15_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___15_intnl_SystemBoolean != null)
+                {
+                    return Private___15_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___15_intnl_SystemBoolean != null)
+                    {
+                        Private___15_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __24_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___24_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___24_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___24_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___24_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __34_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___34_intnl_SystemBoolean != null)
+                {
+                    return Private___34_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___34_intnl_SystemBoolean != null)
+                    {
+                        Private___34_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __28_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___28_const_intnl_SystemString != null)
+                {
+                    return Private___28_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___28_const_intnl_SystemString != null)
+                {
+                    Private___28_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.Transform __2_intnl_UnityEngineTransform
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_UnityEngineTransform != null)
+                {
+                    return Private___2_intnl_UnityEngineTransform.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_intnl_UnityEngineTransform != null)
+                {
+                    Private___2_intnl_UnityEngineTransform.Value = value;
+                }
+            }
+        }
+
+        internal uint? __28_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___28_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___28_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___28_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___28_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? maxHealth
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_maxHealth != null)
+                {
+                    return Private_maxHealth.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_maxHealth != null)
+                    {
+                        Private_maxHealth.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __6_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___6_const_intnl_SystemString != null)
+                {
+                    return Private___6_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___6_const_intnl_SystemString != null)
+                {
+                    Private___6_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal bool? __21_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___21_intnl_SystemBoolean != null)
+                {
+                    return Private___21_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___21_intnl_SystemBoolean != null)
+                    {
+                        Private___21_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? cachedIsWanted
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedIsWanted != null)
+                {
+                    return Private_cachedIsWanted.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_cachedIsWanted != null)
+                    {
+                        Private_cachedIsWanted.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __5_intnl_PlayerObjectPool
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_intnl_PlayerObjectPool != null)
+                {
+                    return Private___5_intnl_PlayerObjectPool.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___5_intnl_PlayerObjectPool != null)
+                {
+                    Private___5_intnl_PlayerObjectPool.Value = value;
+                }
+            }
+        }
+
+        internal uint? __5_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___5_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___5_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___5_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __13_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___13_intnl_SystemBoolean != null)
+                {
+                    return Private___13_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___13_intnl_SystemBoolean != null)
+                    {
+                        Private___13_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __50_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___50_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___50_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___50_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___50_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __1_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_const_intnl_SystemString != null)
+                {
+                    return Private___1_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_const_intnl_SystemString != null)
+                {
+                    Private___1_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal int? __4_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_const_intnl_SystemInt32 != null)
+                {
+                    return Private___4_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___4_const_intnl_SystemInt32 != null)
+                    {
+                        Private___4_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __64_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___64_intnl_SystemBoolean != null)
+                {
+                    return Private___64_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___64_intnl_SystemBoolean != null)
+                    {
+                        Private___64_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __40_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___40_const_intnl_SystemString != null)
+                {
+                    return Private___40_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___40_const_intnl_SystemString != null)
+                {
+                    Private___40_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal string __29_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___29_const_intnl_SystemString != null)
+                {
+                    return Private___29_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___29_const_intnl_SystemString != null)
+                {
+                    Private___29_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal float? __1_const_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_const_intnl_SystemSingle != null)
+                {
+                    return Private___1_const_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_const_intnl_SystemSingle != null)
+                    {
+                        Private___1_const_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __23_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___23_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___23_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___23_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___23_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __5_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_intnl_SystemSingle != null)
+                {
+                    return Private___5_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___5_intnl_SystemSingle != null)
+                    {
+                        Private___5_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __25_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___25_const_intnl_SystemInt32 != null)
+                {
+                    return Private___25_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___25_const_intnl_SystemInt32 != null)
+                    {
+                        Private___25_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __40_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___40_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___40_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___40_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___40_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __2_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___2_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___2_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___2_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __16_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___16_intnl_SystemBoolean != null)
+                {
+                    return Private___16_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___16_intnl_SystemBoolean != null)
+                    {
+                        Private___16_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? goldGuns
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_goldGuns != null)
+                {
+                    return Private_goldGuns.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_goldGuns != null)
+                    {
+                        Private_goldGuns.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __14_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___14_const_intnl_SystemString != null)
+                {
+                    return Private___14_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___14_const_intnl_SystemString != null)
+                {
+                    Private___14_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal int? __1_mp_hp_Int32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_mp_hp_Int32 != null)
+                {
+                    return Private___1_mp_hp_Int32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_mp_hp_Int32 != null)
+                    {
+                        Private___1_mp_hp_Int32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __7_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___7_intnl_SystemBoolean != null)
+                {
+                    return Private___7_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___7_intnl_SystemBoolean != null)
+                    {
+                        Private___7_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __22_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___22_intnl_SystemBoolean != null)
+                {
+                    return Private___22_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___22_intnl_SystemBoolean != null)
+                    {
+                        Private___22_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __38_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___38_const_intnl_SystemInt32 != null)
+                {
+                    return Private___38_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___38_const_intnl_SystemInt32 != null)
+                    {
+                        Private___38_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __20_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___20_intnl_SystemObject != null)
+                {
+                    return Private___20_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___20_intnl_SystemObject != null)
+                {
+                    Private___20_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal uint? __7_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___7_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___7_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___7_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___7_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __37_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___37_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___37_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___37_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___37_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __7_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___7_const_intnl_SystemString != null)
+                {
+                    return Private___7_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___7_const_intnl_SystemString != null)
+                {
+                    Private___7_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal string __15_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___15_const_intnl_SystemString != null)
+                {
+                    return Private___15_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___15_const_intnl_SystemString != null)
+                {
+                    Private___15_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __4_intnl_PlayerObjectPool
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_PlayerObjectPool != null)
+                {
+                    return Private___4_intnl_PlayerObjectPool.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_intnl_PlayerObjectPool != null)
+                {
+                    Private___4_intnl_PlayerObjectPool.Value = value;
+                }
+            }
+        }
+
+        internal bool? __0_mp_playing_Boolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_playing_Boolean != null)
+                {
+                    return Private___0_mp_playing_Boolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_mp_playing_Boolean != null)
+                    {
+                        Private___0_mp_playing_Boolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __5_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_const_intnl_SystemInt32 != null)
+                {
+                    return Private___5_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___5_const_intnl_SystemInt32 != null)
+                    {
+                        Private___5_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal long? __refl_const_intnl_udonTypeID
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___refl_const_intnl_udonTypeID != null)
+                {
+                    return Private___refl_const_intnl_udonTypeID.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___refl_const_intnl_udonTypeID != null)
+                    {
+                        Private___refl_const_intnl_udonTypeID.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __4_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_SystemBoolean != null)
+                {
+                    return Private___4_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___4_intnl_SystemBoolean != null)
+                    {
+                        Private___4_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __16_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___16_const_intnl_SystemInt32 != null)
+                {
+                    return Private___16_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___16_const_intnl_SystemInt32 != null)
+                    {
+                        Private___16_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __19_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___19_intnl_SystemBoolean != null)
+                {
+                    return Private___19_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___19_intnl_SystemBoolean != null)
+                    {
+                        Private___19_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __refl_const_intnl_udonTypeName
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___refl_const_intnl_udonTypeName != null)
+                {
+                    return Private___refl_const_intnl_udonTypeName.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___refl_const_intnl_udonTypeName != null)
+                {
+                    Private___refl_const_intnl_udonTypeName.Value = value;
+                }
+            }
+        }
+
+        internal int? health
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_health != null)
+                {
+                    return Private_health.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_health != null)
+                    {
+                        Private_health.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? healthRegenDelay
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_healthRegenDelay != null)
+                {
+                    return Private_healthRegenDelay.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_healthRegenDelay != null)
+                    {
+                        Private_healthRegenDelay.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_SystemObject != null)
+                {
+                    return Private___0_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_SystemObject != null)
+                {
+                    Private___0_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal bool? __1_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_SystemBoolean != null)
+                {
+                    return Private___1_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_intnl_SystemBoolean != null)
+                    {
+                        Private___1_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __38_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___38_intnl_SystemBoolean != null)
+                {
+                    return Private___38_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___38_intnl_SystemBoolean != null)
+                    {
+                        Private___38_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __12_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___12_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___12_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___12_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___12_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __34_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___34_const_intnl_SystemString != null)
+                {
+                    return Private___34_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___34_const_intnl_SystemString != null)
+                {
+                    Private___34_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal string __17_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___17_const_intnl_SystemString != null)
+                {
+                    return Private___17_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___17_const_intnl_SystemString != null)
+                {
+                    Private___17_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal int? __28_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___28_const_intnl_SystemInt32 != null)
+                {
+                    return Private___28_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___28_const_intnl_SystemInt32 != null)
+                    {
+                        Private___28_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __17_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___17_const_intnl_SystemInt32 != null)
+                {
+                    return Private___17_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___17_const_intnl_SystemInt32 != null)
+                    {
+                        Private___17_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __26_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___26_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___26_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___26_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___26_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __4_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_const_intnl_SystemString != null)
+                {
+                    return Private___4_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_const_intnl_SystemString != null)
+                {
+                    Private___4_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal uint? __31_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___31_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___31_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___31_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___31_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __68_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___68_intnl_SystemBoolean != null)
+                {
+                    return Private___68_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___68_intnl_SystemBoolean != null)
+                    {
+                        Private___68_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __20_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___20_const_intnl_SystemString != null)
+                {
+                    return Private___20_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___20_const_intnl_SystemString != null)
+                {
+                    Private___20_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal string __35_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___35_const_intnl_SystemString != null)
+                {
+                    return Private___35_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___35_const_intnl_SystemString != null)
+                {
+                    Private___35_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal bool? __11_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___11_intnl_SystemBoolean != null)
+                {
+                    return Private___11_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___11_intnl_SystemBoolean != null)
+                    {
+                        Private___11_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __2_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_SystemInt32 != null)
+                {
+                    return Private___2_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___2_intnl_SystemInt32 != null)
+                    {
+                        Private___2_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __8_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___8_const_intnl_SystemInt32 != null)
+                {
+                    return Private___8_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___8_const_intnl_SystemInt32 != null)
+                    {
+                        Private___8_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __52_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___52_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___52_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___52_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___52_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __4_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___4_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___4_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___4_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __30_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___30_intnl_SystemBoolean != null)
+                {
+                    return Private___30_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___30_intnl_SystemBoolean != null)
+                    {
+                        Private___30_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __0_mp_wanted_Boolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_wanted_Boolean != null)
+                {
+                    return Private___0_mp_wanted_Boolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_mp_wanted_Boolean != null)
+                    {
+                        Private___0_mp_wanted_Boolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __54_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___54_intnl_SystemBoolean != null)
+                {
+                    return Private___54_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___54_intnl_SystemBoolean != null)
+                    {
+                        Private___54_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __21_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___21_const_intnl_SystemString != null)
+                {
+                    return Private___21_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___21_const_intnl_SystemString != null)
+                {
+                    Private___21_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal string __26_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___26_const_intnl_SystemString != null)
+                {
+                    return Private___26_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___26_const_intnl_SystemString != null)
+                {
+                    Private___26_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal uint? __42_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___42_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___42_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___42_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___42_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __71_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___71_intnl_SystemBoolean != null)
+                {
+                    return Private___71_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___71_intnl_SystemBoolean != null)
+                    {
+                        Private___71_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __31_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___31_const_intnl_SystemInt32 != null)
+                {
+                    return Private___31_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___31_const_intnl_SystemInt32 != null)
+                    {
+                        Private___31_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Transform __4_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_SystemObject != null)
+                {
+                    return Private___4_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_intnl_SystemObject != null)
+                {
+                    Private___4_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal uint? __9_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___9_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___9_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___9_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___9_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __60_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___60_intnl_SystemBoolean != null)
+                {
+                    return Private___60_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___60_intnl_SystemBoolean != null)
+                    {
+                        Private___60_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __37_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___37_intnl_SystemBoolean != null)
+                {
+                    return Private___37_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___37_intnl_SystemBoolean != null)
+                    {
+                        Private___37_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __20_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___20_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___20_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___20_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___20_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __37_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___37_const_intnl_SystemString != null)
+                {
+                    return Private___37_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___37_const_intnl_SystemString != null)
+                {
+                    Private___37_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal float? __2_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_SystemSingle != null)
+                {
+                    return Private___2_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___2_intnl_SystemSingle != null)
+                    {
+                        Private___2_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_this_intnl_PlayerData
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_this_intnl_PlayerData != null)
+                {
+                    return Private___0_this_intnl_PlayerData.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_this_intnl_PlayerData != null)
+                {
+                    Private___0_this_intnl_PlayerData.Value = value;
+                }
+            }
+        }
+
+        internal string __5_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_const_intnl_SystemString != null)
+                {
+                    return Private___5_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___5_const_intnl_SystemString != null)
+                {
+                    Private___5_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal bool? __3_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_SystemBoolean != null)
+                {
+                    return Private___3_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___3_intnl_SystemBoolean != null)
+                    {
+                        Private___3_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __12_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___12_intnl_SystemBoolean != null)
+                {
+                    return Private___12_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___12_intnl_SystemBoolean != null)
+                    {
+                        Private___12_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __10_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___10_intnl_SystemObject != null)
+                {
+                    return Private___10_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___10_intnl_SystemObject != null)
+                {
+                    Private___10_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal uint? __6_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___6_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___6_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___6_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___6_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -3785,13 +3454,3208 @@
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___2_intnl_PlayerData != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__2_intnl_PlayerData");
+                    return Private___2_intnl_PlayerData.Value;
                 }
-                catch { }
 
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_intnl_PlayerData != null)
+                {
+                    Private___2_intnl_PlayerData.Value = value;
+                }
+            }
+        }
+
+        internal bool? __67_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___67_intnl_SystemBoolean != null)
+                {
+                    return Private___67_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___67_intnl_SystemBoolean != null)
+                    {
+                        Private___67_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __23_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___23_const_intnl_SystemString != null)
+                {
+                    return Private___23_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___23_const_intnl_SystemString != null)
+                {
+                    Private___23_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __5_intnl_UnityEngineVector3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_intnl_UnityEngineVector3 != null)
+                {
+                    return Private___5_intnl_UnityEngineVector3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___5_intnl_UnityEngineVector3 != null)
+                    {
+                        Private___5_intnl_UnityEngineVector3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __14_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___14_const_intnl_SystemInt32 != null)
+                {
+                    return Private___14_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___14_const_intnl_SystemInt32 != null)
+                    {
+                        Private___14_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __9_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___9_const_intnl_SystemInt32 != null)
+                {
+                    return Private___9_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___9_const_intnl_SystemInt32 != null)
+                    {
+                        Private___9_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __44_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___44_intnl_SystemBoolean != null)
+                {
+                    return Private___44_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___44_intnl_SystemBoolean != null)
+                    {
+                        Private___44_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __29_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___29_intnl_SystemObject != null)
+                {
+                    return Private___29_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___29_intnl_SystemObject != null)
+                {
+                    Private___29_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal bool? __72_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___72_intnl_SystemBoolean != null)
+                {
+                    return Private___72_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___72_intnl_SystemBoolean != null)
+                    {
+                        Private___72_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __19_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___19_const_intnl_SystemInt32 != null)
+                {
+                    return Private___19_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___19_const_intnl_SystemInt32 != null)
+                    {
+                        Private___19_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __0_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_SystemBoolean != null)
+                {
+                    return Private___0_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_intnl_SystemBoolean != null)
+                    {
+                        Private___0_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __34_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___34_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___34_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___34_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___34_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __4_intnl_UnityEngineVector3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_UnityEngineVector3 != null)
+                {
+                    return Private___4_intnl_UnityEngineVector3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___4_intnl_UnityEngineVector3 != null)
+                    {
+                        Private___4_intnl_UnityEngineVector3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __9_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___9_intnl_SystemSingle != null)
+                {
+                    return Private___9_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___9_intnl_SystemSingle != null)
+                    {
+                        Private___9_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __21_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___21_const_intnl_SystemInt32 != null)
+                {
+                    return Private___21_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___21_const_intnl_SystemInt32 != null)
+                    {
+                        Private___21_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? cachedIsDead
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedIsDead != null)
+                {
+                    return Private_cachedIsDead.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_cachedIsDead != null)
+                    {
+                        Private_cachedIsDead.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? isGuard
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_isGuard != null)
+                {
+                    return Private_isGuard.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_isGuard != null)
+                    {
+                        Private_isGuard.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __12_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___12_const_intnl_SystemString != null)
+                {
+                    return Private___12_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___12_const_intnl_SystemString != null)
+                {
+                    Private___12_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal uint? __38_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___38_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___38_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___38_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___38_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __1_intnl_PlayerData
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_PlayerData != null)
+                {
+                    return Private___1_intnl_PlayerData.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_PlayerData != null)
+                {
+                    Private___1_intnl_PlayerData.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __0_this_intnl_UnityEngineGameObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_this_intnl_UnityEngineGameObject != null)
+                {
+                    return Private___0_this_intnl_UnityEngineGameObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_this_intnl_UnityEngineGameObject != null)
+                {
+                    Private___0_this_intnl_UnityEngineGameObject.Value = value;
+                }
+            }
+        }
+
+        internal float? __3_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_SystemObject != null)
+                {
+                    return Private___3_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___3_intnl_SystemObject != null)
+                    {
+                        Private___3_intnl_SystemObject.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __0_intnl_UnityEngineGameObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_UnityEngineGameObject != null)
+                {
+                    return Private___0_intnl_UnityEngineGameObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_UnityEngineGameObject != null)
+                {
+                    Private___0_intnl_UnityEngineGameObject.Value = value;
+                }
+            }
+        }
+
+        internal string __8_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___8_const_intnl_SystemString != null)
+                {
+                    return Private___8_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___8_const_intnl_SystemString != null)
+                {
+                    Private___8_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal float? __6_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___6_intnl_SystemSingle != null)
+                {
+                    return Private___6_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___6_intnl_SystemSingle != null)
+                    {
+                        Private___6_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __33_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___33_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___33_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___33_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___33_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __58_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___58_intnl_SystemBoolean != null)
+                {
+                    return Private___58_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___58_intnl_SystemBoolean != null)
+                    {
+                        Private___58_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __15_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___15_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___15_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___15_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___15_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __36_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___36_const_intnl_SystemInt32 != null)
+                {
+                    return Private___36_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___36_const_intnl_SystemInt32 != null)
+                    {
+                        Private___36_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string cachedPlayerName
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedPlayerName != null)
+                {
+                    return Private_cachedPlayerName.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_cachedPlayerName != null)
+                {
+                    Private_cachedPlayerName.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __11_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___11_intnl_SystemObject != null)
+                {
+                    return Private___11_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___11_intnl_SystemObject != null)
+                {
+                    Private___11_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal uint? __19_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___19_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___19_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___19_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___19_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __12_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___12_const_intnl_SystemInt32 != null)
+                {
+                    return Private___12_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___12_const_intnl_SystemInt32 != null)
+                    {
+                        Private___12_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __22_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___22_intnl_SystemObject != null)
+                {
+                    return Private___22_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___22_intnl_SystemObject != null)
+                {
+                    Private___22_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal string __32_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___32_const_intnl_SystemString != null)
+                {
+                    return Private___32_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___32_const_intnl_SystemString != null)
+                {
+                    Private___32_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal float? __0_tagHeight_Single
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_tagHeight_Single != null)
+                {
+                    return Private___0_tagHeight_Single.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_tagHeight_Single != null)
+                    {
+                        Private___0_tagHeight_Single.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __35_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___35_intnl_SystemBoolean != null)
+                {
+                    return Private___35_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___35_intnl_SystemBoolean != null)
+                    {
+                        Private___35_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __8_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___8_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___8_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___8_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___8_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __37_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___37_const_intnl_SystemInt32 != null)
+                {
+                    return Private___37_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___37_const_intnl_SystemInt32 != null)
+                    {
+                        Private___37_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __50_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___50_intnl_SystemBoolean != null)
+                {
+                    return Private___50_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___50_intnl_SystemBoolean != null)
+                    {
+                        Private___50_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __0_mp_hp_Int32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_hp_Int32 != null)
+                {
+                    return Private___0_mp_hp_Int32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_mp_hp_Int32 != null)
+                    {
+                        Private___0_mp_hp_Int32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __55_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___55_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___55_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___55_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___55_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __22_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___22_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___22_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___22_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___22_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __24_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___24_intnl_SystemBoolean != null)
+                {
+                    return Private___24_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___24_intnl_SystemBoolean != null)
+                    {
+                        Private___24_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __9_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___9_const_intnl_SystemString != null)
+                {
+                    return Private___9_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___9_const_intnl_SystemString != null)
+                {
+                    Private___9_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal int? __13_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___13_const_intnl_SystemInt32 != null)
+                {
+                    return Private___13_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___13_const_intnl_SystemInt32 != null)
+                    {
+                        Private___13_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __0_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_SystemInt32 != null)
+                {
+                    return Private___0_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_intnl_SystemInt32 != null)
+                    {
+                        Private___0_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __0_intnl_returnTarget_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_returnTarget_UInt32 != null)
+                {
+                    return Private___0_intnl_returnTarget_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_intnl_returnTarget_UInt32 != null)
+                    {
+                        Private___0_intnl_returnTarget_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __48_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___48_intnl_SystemBoolean != null)
+                {
+                    return Private___48_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___48_intnl_SystemBoolean != null)
+                    {
+                        Private___48_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __59_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___59_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___59_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___59_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___59_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __45_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___45_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___45_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___45_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___45_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __65_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___65_intnl_SystemBoolean != null)
+                {
+                    return Private___65_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___65_intnl_SystemBoolean != null)
+                    {
+                        Private___65_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __0_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_SystemString != null)
+                {
+                    return Private___0_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_SystemString != null)
+                {
+                    Private___0_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal bool? __33_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___33_intnl_SystemBoolean != null)
+                {
+                    return Private___33_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___33_intnl_SystemBoolean != null)
+                    {
+                        Private___33_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __57_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___57_intnl_SystemBoolean != null)
+                {
+                    return Private___57_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___57_intnl_SystemBoolean != null)
+                    {
+                        Private___57_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __26_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___26_const_intnl_SystemInt32 != null)
+                {
+                    return Private___26_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___26_const_intnl_SystemInt32 != null)
+                    {
+                        Private___26_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __3_intnl_UnityEngineGameObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_UnityEngineGameObject != null)
+                {
+                    return Private___3_intnl_UnityEngineGameObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_UnityEngineGameObject != null)
+                {
+                    Private___3_intnl_UnityEngineGameObject.Value = value;
+                }
+            }
+        }
+
+        internal uint? __49_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___49_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___49_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___49_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___49_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __0_const_intnl_SystemUInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_const_intnl_SystemUInt32 != null)
+                {
+                    return Private___0_const_intnl_SystemUInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_const_intnl_SystemUInt32 != null)
+                    {
+                        Private___0_const_intnl_SystemUInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour scorecard
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_scorecard != null)
+                {
+                    return Private_scorecard.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_scorecard != null)
+                {
+                    Private_scorecard.Value = value;
+                }
+            }
+        }
+
+        internal int? cachedHealth
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedHealth != null)
+                {
+                    return Private_cachedHealth.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_cachedHealth != null)
+                    {
+                        Private_cachedHealth.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __9_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___9_intnl_SystemBoolean != null)
+                {
+                    return Private___9_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___9_intnl_SystemBoolean != null)
+                    {
+                        Private___9_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __19_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___19_intnl_SystemObject != null)
+                {
+                    return Private___19_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___19_intnl_SystemObject != null)
+                {
+                    Private___19_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal uint? __36_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___36_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___36_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___36_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___36_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __63_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___63_intnl_SystemBoolean != null)
+                {
+                    return Private___63_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___63_intnl_SystemBoolean != null)
+                    {
+                        Private___63_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __36_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___36_intnl_SystemBoolean != null)
+                {
+                    return Private___36_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___36_intnl_SystemBoolean != null)
+                    {
+                        Private___36_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __0_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_SystemSingle != null)
+                {
+                    return Private___0_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_intnl_SystemSingle != null)
+                    {
+                        Private___0_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __27_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___27_const_intnl_SystemInt32 != null)
+                {
+                    return Private___27_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___27_const_intnl_SystemInt32 != null)
+                    {
+                        Private___27_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __40_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___40_intnl_SystemBoolean != null)
+                {
+                    return Private___40_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___40_intnl_SystemBoolean != null)
+                    {
+                        Private___40_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Camera spectateCamera
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_spectateCamera != null)
+                {
+                    return Private_spectateCamera.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_spectateCamera != null)
+                {
+                    Private_spectateCamera.Value = value;
+                }
+            }
+        }
+
+        internal string __18_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___18_const_intnl_SystemString != null)
+                {
+                    return Private___18_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___18_const_intnl_SystemString != null)
+                {
+                    Private___18_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal float? lastDamageTime
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_lastDamageTime != null)
+                {
+                    return Private_lastDamageTime.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_lastDamageTime != null)
+                    {
+                        Private_lastDamageTime.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? killedByLocal
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_killedByLocal != null)
+                {
+                    return Private_killedByLocal.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_killedByLocal != null)
+                    {
+                        Private_killedByLocal.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __66_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___66_intnl_SystemBoolean != null)
+                {
+                    return Private___66_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___66_intnl_SystemBoolean != null)
+                    {
+                        Private___66_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __0_mp_damage_Int32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_damage_Int32 != null)
+                {
+                    return Private___0_mp_damage_Int32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_mp_damage_Int32 != null)
+                    {
+                        Private___0_mp_damage_Int32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? isPlaying
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_isPlaying != null)
+                {
+                    return Private_isPlaying.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_isPlaying != null)
+                    {
+                        Private_isPlaying.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __3_intnl_UnityEngineVector3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_UnityEngineVector3 != null)
+                {
+                    return Private___3_intnl_UnityEngineVector3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___3_intnl_UnityEngineVector3 != null)
+                    {
+                        Private___3_intnl_UnityEngineVector3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __47_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___47_intnl_SystemBoolean != null)
+                {
+                    return Private___47_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___47_intnl_SystemBoolean != null)
+                    {
+                        Private___47_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __34_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___34_const_intnl_SystemInt32 != null)
+                {
+                    return Private___34_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___34_const_intnl_SystemInt32 != null)
+                    {
+                        Private___34_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Transform __4_intnl_UnityEngineTransform
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_UnityEngineTransform != null)
+                {
+                    return Private___4_intnl_UnityEngineTransform.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_intnl_UnityEngineTransform != null)
+                {
+                    Private___4_intnl_UnityEngineTransform.Value = value;
+                }
+            }
+        }
+
+        internal int? __10_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___10_const_intnl_SystemInt32 != null)
+                {
+                    return Private___10_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___10_const_intnl_SystemInt32 != null)
+                    {
+                        Private___10_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __19_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___19_const_intnl_SystemString != null)
+                {
+                    return Private___19_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___19_const_intnl_SystemString != null)
+                {
+                    Private___19_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal uint? __17_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___17_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___17_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___17_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___17_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __30_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___30_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___30_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___30_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___30_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __39_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___39_intnl_SystemBoolean != null)
+                {
+                    return Private___39_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___39_intnl_SystemBoolean != null)
+                    {
+                        Private___39_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __28_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___28_intnl_SystemBoolean != null)
+                {
+                    return Private___28_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___28_intnl_SystemBoolean != null)
+                    {
+                        Private___28_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __6_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___6_intnl_SystemBoolean != null)
+                {
+                    return Private___6_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___6_intnl_SystemBoolean != null)
+                    {
+                        Private___6_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __4_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_SystemSingle != null)
+                {
+                    return Private___4_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___4_intnl_SystemSingle != null)
+                    {
+                        Private___4_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __12_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___12_intnl_SystemObject != null)
+                {
+                    return Private___12_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___12_intnl_SystemObject != null)
+                {
+                    Private___12_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal string __24_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___24_const_intnl_SystemString != null)
+                {
+                    return Private___24_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___24_const_intnl_SystemString != null)
+                {
+                    Private___24_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal bool? __69_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___69_intnl_SystemBoolean != null)
+                {
+                    return Private___69_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___69_intnl_SystemBoolean != null)
+                    {
+                        Private___69_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __57_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___57_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___57_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___57_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___57_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __38_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___38_const_intnl_SystemString != null)
+                {
+                    return Private___38_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___38_const_intnl_SystemString != null)
+                {
+                    Private___38_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal bool? __14_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___14_intnl_SystemBoolean != null)
+                {
+                    return Private___14_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___14_intnl_SystemBoolean != null)
+                    {
+                        Private___14_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? cachedIsPlaying
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedIsPlaying != null)
+                {
+                    return Private_cachedIsPlaying.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_cachedIsPlaying != null)
+                    {
+                        Private_cachedIsPlaying.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __24_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___24_const_intnl_SystemInt32 != null)
+                {
+                    return Private___24_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___24_const_intnl_SystemInt32 != null)
+                    {
+                        Private___24_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? cachedHasKeycard
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedHasKeycard != null)
+                {
+                    return Private_cachedHasKeycard.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_cachedHasKeycard != null)
+                    {
+                        Private_cachedHasKeycard.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __47_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___47_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___47_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___47_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___47_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __3_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_SystemInt32 != null)
+                {
+                    return Private___3_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___3_intnl_SystemInt32 != null)
+                    {
+                        Private___3_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __31_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___31_intnl_SystemBoolean != null)
+                {
+                    return Private___31_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___31_intnl_SystemBoolean != null)
+                    {
+                        Private___31_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __55_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___55_intnl_SystemBoolean != null)
+                {
+                    return Private___55_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___55_intnl_SystemBoolean != null)
+                    {
+                        Private___55_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __25_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___25_const_intnl_SystemString != null)
+                {
+                    return Private___25_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___25_const_intnl_SystemString != null)
+                {
+                    Private___25_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal int? __29_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___29_const_intnl_SystemInt32 != null)
+                {
+                    return Private___29_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___29_const_intnl_SystemInt32 != null)
+                    {
+                        Private___29_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __11_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___11_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___11_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___11_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___11_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __8_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___8_intnl_SystemBoolean != null)
+                {
+                    return Private___8_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___8_intnl_SystemBoolean != null)
+                    {
+                        Private___8_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __20_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___20_intnl_SystemBoolean != null)
+                {
+                    return Private___20_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___20_intnl_SystemBoolean != null)
+                    {
+                        Private___20_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __2_intnl_UnityEngineVector3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_UnityEngineVector3 != null)
+                {
+                    return Private___2_intnl_UnityEngineVector3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___2_intnl_UnityEngineVector3 != null)
+                    {
+                        Private___2_intnl_UnityEngineVector3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __39_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___39_const_intnl_SystemString != null)
+                {
+                    return Private___39_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___39_const_intnl_SystemString != null)
+                {
+                    Private___39_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __1_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_SystemObject != null)
+                {
+                    return Private___1_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_SystemObject != null)
+                {
+                    Private___1_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal bool? __0_mp_enabled_Boolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_enabled_Boolean != null)
+                {
+                    return Private___0_mp_enabled_Boolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_mp_enabled_Boolean != null)
+                    {
+                        Private___0_mp_enabled_Boolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __25_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___25_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___25_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___25_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___25_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __32_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___32_const_intnl_SystemInt32 != null)
+                {
+                    return Private___32_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___32_const_intnl_SystemInt32 != null)
+                    {
+                        Private___32_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __61_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___61_intnl_SystemBoolean != null)
+                {
+                    return Private___61_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___61_intnl_SystemBoolean != null)
+                    {
+                        Private___61_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __29_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___29_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___29_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___29_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___29_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __1_intnl_UnityEngineVector3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_UnityEngineVector3 != null)
+                {
+                    return Private___1_intnl_UnityEngineVector3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_intnl_UnityEngineVector3 != null)
+                    {
+                        Private___1_intnl_UnityEngineVector3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __53_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___53_intnl_SystemBoolean != null)
+                {
+                    return Private___53_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___53_intnl_SystemBoolean != null)
+                    {
+                        Private___53_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __27_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___27_intnl_SystemBoolean != null)
+                {
+                    return Private___27_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___27_intnl_SystemBoolean != null)
+                    {
+                        Private___27_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __0_mp_dead_Boolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_dead_Boolean != null)
+                {
+                    return Private___0_mp_dead_Boolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_mp_dead_Boolean != null)
+                    {
+                        Private___0_mp_dead_Boolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __51_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___51_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___51_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___51_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___51_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __2_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_const_intnl_SystemInt32 != null)
+                {
+                    return Private___2_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___2_const_intnl_SystemInt32 != null)
+                    {
+                        Private___2_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __3_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_SystemSingle != null)
+                {
+                    return Private___3_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___3_intnl_SystemSingle != null)
+                    {
+                        Private___3_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __33_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___33_const_intnl_SystemInt32 != null)
+                {
+                    return Private___33_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___33_const_intnl_SystemInt32 != null)
+                    {
+                        Private___33_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __27_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___27_const_intnl_SystemString != null)
+                {
+                    return Private___27_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___27_const_intnl_SystemString != null)
+                {
+                    Private___27_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __0_intnl_UnityEngineVector3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_UnityEngineVector3 != null)
+                {
+                    return Private___0_intnl_UnityEngineVector3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_intnl_UnityEngineVector3 != null)
+                    {
+                        Private___0_intnl_UnityEngineVector3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __10_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___10_const_intnl_SystemString != null)
+                {
+                    return Private___10_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___10_const_intnl_SystemString != null)
+                {
+                    Private___10_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal bool? __32_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___32_intnl_SystemBoolean != null)
+                {
+                    return Private___32_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___32_intnl_SystemBoolean != null)
+                    {
+                        Private___32_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __30_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___30_intnl_SystemObject != null)
+                {
+                    return Private___30_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___30_intnl_SystemObject != null)
+                {
+                    Private___30_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal bool? __56_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___56_intnl_SystemBoolean != null)
+                {
+                    return Private___56_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___56_intnl_SystemBoolean != null)
+                    {
+                        Private___56_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __41_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___41_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___41_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___41_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___41_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __45_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___45_intnl_SystemBoolean != null)
+                {
+                    return Private___45_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___45_intnl_SystemBoolean != null)
+                    {
+                        Private___45_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __1_const_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_const_intnl_SystemBoolean != null)
+                {
+                    return Private___1_const_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_const_intnl_SystemBoolean != null)
+                    {
+                        Private___1_const_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __22_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___22_const_intnl_SystemInt32 != null)
+                {
+                    return Private___22_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___22_const_intnl_SystemInt32 != null)
+                    {
+                        Private___22_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -3800,28 +6664,968 @@
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___3_intnl_PlayerData != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__3_intnl_PlayerData");
+                    return Private___3_intnl_PlayerData.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_PlayerData != null)
+                {
+                    Private___3_intnl_PlayerData.Value = value;
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __4_intnl_PlayerData
+        internal bool? __62_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___62_intnl_SystemBoolean != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__4_intnl_PlayerData");
+                    return Private___62_intnl_SystemBoolean.Value;
                 }
-                catch { }
 
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___62_intnl_SystemBoolean != null)
+                    {
+                        Private___62_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __11_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___11_const_intnl_SystemString != null)
+                {
+                    return Private___11_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___11_const_intnl_SystemString != null)
+                {
+                    Private___11_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal string __16_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___16_const_intnl_SystemString != null)
+                {
+                    return Private___16_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___16_const_intnl_SystemString != null)
+                {
+                    Private___16_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal int? healthRegenAmt
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_healthRegenAmt != null)
+                {
+                    return Private_healthRegenAmt.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_healthRegenAmt != null)
+                    {
+                        Private_healthRegenAmt.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __32_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___32_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___32_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___32_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___32_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __43_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___43_intnl_SystemBoolean != null)
+                {
+                    return Private___43_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___43_intnl_SystemBoolean != null)
+                    {
+                        Private___43_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __15_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___15_const_intnl_SystemInt32 != null)
+                {
+                    return Private___15_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___15_const_intnl_SystemInt32 != null)
+                    {
+                        Private___15_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __18_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___18_intnl_SystemBoolean != null)
+                {
+                    return Private___18_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___18_intnl_SystemBoolean != null)
+                    {
+                        Private___18_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __0_mp_t_Boolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_t_Boolean != null)
+                {
+                    return Private___0_mp_t_Boolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_mp_t_Boolean != null)
+                    {
+                        Private___0_mp_t_Boolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __2_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_SystemBoolean != null)
+                {
+                    return Private___2_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___2_intnl_SystemBoolean != null)
+                    {
+                        Private___2_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __10_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___10_intnl_SystemSingle != null)
+                {
+                    return Private___10_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___10_intnl_SystemSingle != null)
+                    {
+                        Private___10_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __1_mp_damage_Int32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_mp_damage_Int32 != null)
+                {
+                    return Private___1_mp_damage_Int32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_mp_damage_Int32 != null)
+                    {
+                        Private___1_mp_damage_Int32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __14_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___14_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___14_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___14_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___14_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __23_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___23_const_intnl_SystemInt32 != null)
+                {
+                    return Private___23_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___23_const_intnl_SystemInt32 != null)
+                    {
+                        Private___23_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? joinedRound
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_joinedRound != null)
+                {
+                    return Private_joinedRound.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_joinedRound != null)
+                    {
+                        Private_joinedRound.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __3_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_const_intnl_SystemInt32 != null)
+                {
+                    return Private___3_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___3_const_intnl_SystemInt32 != null)
+                    {
+                        Private___3_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __7_intnl_SystemSingle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___7_intnl_SystemSingle != null)
+                {
+                    return Private___7_intnl_SystemSingle.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___7_intnl_SystemSingle != null)
+                    {
+                        Private___7_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? tagHeightMin
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_tagHeightMin != null)
+                {
+                    return Private_tagHeightMin.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_tagHeightMin != null)
+                    {
+                        Private_tagHeightMin.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.Common.Interfaces.NetworkEventTarget? __0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget != null)
+                {
+                    return Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget != null)
+                    {
+                        Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __59_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___59_intnl_SystemBoolean != null)
+                {
+                    return Private___59_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___59_intnl_SystemBoolean != null)
+                    {
+                        Private___59_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? isDead
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_isDead != null)
+                {
+                    return Private_isDead.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_isDead != null)
+                    {
+                        Private_isDead.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __18_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___18_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___18_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___18_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___18_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __46_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___46_intnl_SystemBoolean != null)
+                {
+                    return Private___46_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___46_intnl_SystemBoolean != null)
+                    {
+                        Private___46_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __30_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___30_const_intnl_SystemString != null)
+                {
+                    return Private___30_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___30_const_intnl_SystemString != null)
+                {
+                    Private___30_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour gameManager
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_gameManager != null)
+                {
+                    return Private_gameManager.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_gameManager != null)
+                {
+                    Private_gameManager.Value = value;
+                }
+            }
+        }
+
+        internal string __13_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___13_const_intnl_SystemString != null)
+                {
+                    return Private___13_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___13_const_intnl_SystemString != null)
+                {
+                    Private___13_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal bool? __0_mp_guard_Boolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_guard_Boolean != null)
+                {
+                    return Private___0_mp_guard_Boolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_mp_guard_Boolean != null)
+                    {
+                        Private___0_mp_guard_Boolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? deathLoc
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_deathLoc != null)
+                {
+                    return Private_deathLoc.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_deathLoc != null)
+                    {
+                        Private_deathLoc.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __30_const_intnl_SystemInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___30_const_intnl_SystemInt32 != null)
+                {
+                    return Private___30_const_intnl_SystemInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___30_const_intnl_SystemInt32 != null)
+                    {
+                        Private___30_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __54_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___54_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___54_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___54_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___54_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __13_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___13_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___13_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___13_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___13_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __2_intnl_UnityEngineGameObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_UnityEngineGameObject != null)
+                {
+                    return Private___2_intnl_UnityEngineGameObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_intnl_UnityEngineGameObject != null)
+                {
+                    Private___2_intnl_UnityEngineGameObject.Value = value;
+                }
+            }
+        }
+
+        internal bool? __10_intnl_SystemBoolean
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___10_intnl_SystemBoolean != null)
+                {
+                    return Private___10_intnl_SystemBoolean.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___10_intnl_SystemBoolean != null)
+                    {
+                        Private___10_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __2_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_const_intnl_SystemString != null)
+                {
+                    return Private___2_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_const_intnl_SystemString != null)
+                {
+                    Private___2_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal string __31_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___31_const_intnl_SystemString != null)
+                {
+                    return Private___31_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___31_const_intnl_SystemString != null)
+                {
+                    Private___31_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal uint? __27_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___27_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___27_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___27_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___27_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __36_const_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___36_const_intnl_SystemString != null)
+                {
+                    return Private___36_const_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___36_const_intnl_SystemString != null)
+                {
+                    Private___36_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal uint? __58_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___58_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___58_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___58_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___58_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __44_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___44_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___44_const_intnl_exitJumpLoc_UInt32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___44_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___44_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
             }
         }
 
@@ -3830,241 +7634,2192 @@
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___5_intnl_PlayerData != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__5_intnl_PlayerData");
+                    return Private___5_intnl_PlayerData.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___5_intnl_PlayerData != null)
+                {
+                    Private___5_intnl_PlayerData.Value = value;
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __6_intnl_PlayerData
+        internal string playerName
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private_playerName != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__6_intnl_PlayerData");
+                    return Private_playerName.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_playerName != null)
+                {
+                    Private_playerName.Value = value;
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __7_intnl_PlayerData
+        internal VRC.Udon.UdonBehaviour __3_intnl_PlayerObjectPool
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___3_intnl_PlayerObjectPool != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__7_intnl_PlayerData");
+                    return Private___3_intnl_PlayerObjectPool.Value;
                 }
-                catch { }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_PlayerObjectPool != null)
+                {
+                    Private___3_intnl_PlayerObjectPool.Value = value;
+                }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __8_intnl_PlayerData
+        internal bool? __51_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___51_intnl_SystemBoolean != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__8_intnl_PlayerData");
+                    return Private___51_intnl_SystemBoolean.Value;
                 }
-                catch { }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___51_intnl_SystemBoolean != null)
+                    {
+                        Private___51_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __9_intnl_PlayerData
+        internal int? __0_const_intnl_SystemInt32
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___0_const_intnl_SystemInt32 != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__9_intnl_PlayerData");
+                    return Private___0_const_intnl_SystemInt32.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_const_intnl_SystemInt32 != null)
+                    {
+                        Private___0_const_intnl_SystemInt32.Value = value.Value;
+                    }
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __10_intnl_PlayerData
+        internal VRC.Udon.UdonBehaviour __1_intnl_PlayerObjectPool
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___1_intnl_PlayerObjectPool != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__10_intnl_PlayerData");
+                    return Private___1_intnl_PlayerObjectPool.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_PlayerObjectPool != null)
+                {
+                    Private___1_intnl_PlayerObjectPool.Value = value;
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __11_intnl_PlayerData
+        internal uint? __1_const_intnl_exitJumpLoc_UInt32
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___1_const_intnl_exitJumpLoc_UInt32 != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__11_intnl_PlayerData");
+                    return Private___1_const_intnl_exitJumpLoc_UInt32.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___1_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___1_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __12_intnl_PlayerData
+        internal bool? __25_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___25_intnl_SystemBoolean != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__12_intnl_PlayerData");
+                    return Private___25_intnl_SystemBoolean.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___25_intnl_SystemBoolean != null)
+                    {
+                        Private___25_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __13_intnl_PlayerData
+        internal uint? __48_const_intnl_exitJumpLoc_UInt32
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___48_const_intnl_exitJumpLoc_UInt32 != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__13_intnl_PlayerData");
+                    return Private___48_const_intnl_exitJumpLoc_UInt32.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___48_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___48_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __14_intnl_PlayerData
+        internal string __22_const_intnl_SystemString
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___22_const_intnl_SystemString != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__14_intnl_PlayerData");
+                    return Private___22_const_intnl_SystemString.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___22_const_intnl_SystemString != null)
+                {
+                    Private___22_const_intnl_SystemString.Value = value;
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __15_intnl_PlayerData
+        internal float? __8_intnl_SystemSingle
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___8_intnl_SystemSingle != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__15_intnl_PlayerData");
+                    return Private___8_intnl_SystemSingle.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___8_intnl_SystemSingle != null)
+                    {
+                        Private___8_intnl_SystemSingle.Value = value.Value;
+                    }
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __16_intnl_PlayerData
+        internal string __0_mp_newName_String
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___0_mp_newName_String != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__16_intnl_PlayerData");
+                    return Private___0_mp_newName_String.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_mp_newName_String != null)
+                {
+                    Private___0_mp_newName_String.Value = value;
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __17_intnl_PlayerData
+        internal bool? __70_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___70_intnl_SystemBoolean != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__17_intnl_PlayerData");
+                    return Private___70_intnl_SystemBoolean.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___70_intnl_SystemBoolean != null)
+                    {
+                        Private___70_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __18_intnl_PlayerData
+        internal VRC.Udon.UdonBehaviour teamTag
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private_teamTag != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__18_intnl_PlayerData");
+                    return Private_teamTag.Value;
                 }
-                catch { }
 
                 return null;
             }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_teamTag != null)
+                {
+                    Private_teamTag.Value = value;
+                }
+            }
         }
 
-        internal VRC.Udon.UdonBehaviour __19_intnl_PlayerData
+        internal bool? __17_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___17_intnl_SystemBoolean != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__19_intnl_PlayerData");
+                    return Private___17_intnl_SystemBoolean.Value;
                 }
-                catch { }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___17_intnl_SystemBoolean != null)
+                    {
+                        Private___17_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __20_intnl_PlayerData
+        internal bool? __49_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
             get
             {
-                try
+                if (Private___49_intnl_SystemBoolean != null)
                 {
-                    if (PlayerData != null) return UdonHeapParser.Udon_Parse_UdonBehaviour(PlayerData, "__20_intnl_PlayerData");
+                    return Private___49_intnl_SystemBoolean.Value;
                 }
-                catch { }
+
                 return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___49_intnl_SystemBoolean != null)
+                    {
+                        Private___49_intnl_SystemBoolean.Value = value.Value;
+                    }
+                }
             }
         }
 
-        #endregion PlayerDatasVars
+        internal uint? __53_const_intnl_exitJumpLoc_UInt32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___53_const_intnl_exitJumpLoc_UInt32 != null)
+                {
+                    return Private___53_const_intnl_exitJumpLoc_UInt32.Value;
+                }
 
-        #endregion Generated Getters
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___53_const_intnl_exitJumpLoc_UInt32 != null)
+                    {
+                        Private___53_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    }
+                }
+            }
+        }
 
-        internal PrisonEscape_HitboxReader HitBoxReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool? hasKeycard
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_hasKeycard != null)
+                {
+                    return Private_hasKeycard.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_hasKeycard != null)
+                    {
+                        Private_hasKeycard.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __23_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___23_intnl_SystemObject != null)
+                {
+                    return Private___23_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___23_intnl_SystemObject != null)
+                {
+                    Private___23_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __4_intnl_PlayerData
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_PlayerData != null)
+                {
+                    return Private___4_intnl_PlayerData.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_intnl_PlayerData != null)
+                {
+                    Private___4_intnl_PlayerData.Value = value;
+                }
+            }
+        }
+
+        internal int? __28_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___28_intnl_SystemObject != null)
+                {
+                    return Private___28_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___28_intnl_SystemObject != null)
+                    {
+                        Private___28_intnl_SystemObject.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __3_intnl_GameEffects
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_GameEffects != null)
+                {
+                    return Private___3_intnl_GameEffects.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_GameEffects != null)
+                {
+                    Private___3_intnl_GameEffects.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Slider __3_intnl_UnityEngineUISlider
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_UnityEngineUISlider != null)
+                {
+                    return Private___3_intnl_UnityEngineUISlider.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_UnityEngineUISlider != null)
+                {
+                    Private___3_intnl_UnityEngineUISlider.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Slider __32_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___32_intnl_SystemObject != null)
+                {
+                    return Private___32_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___32_intnl_SystemObject != null)
+                {
+                    Private___32_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.SDKBase.VRCPlayerApi __1_intnl_VRCSDKBaseVRCPlayerApi
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    return Private___1_intnl_VRCSDKBaseVRCPlayerApi.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    Private___1_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
+                }
+            }
+        }
+
+        internal bool? __6_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___6_intnl_SystemObject != null)
+                {
+                    return Private___6_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___6_intnl_SystemObject != null)
+                    {
+                        Private___6_intnl_SystemObject.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __4_intnl_UnityEngineGameObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_UnityEngineGameObject != null)
+                {
+                    return Private___4_intnl_UnityEngineGameObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_intnl_UnityEngineGameObject != null)
+                {
+                    Private___4_intnl_UnityEngineGameObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_ItemControl
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_ItemControl != null)
+                {
+                    return Private___0_intnl_ItemControl.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_ItemControl != null)
+                {
+                    Private___0_intnl_ItemControl.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_GameJoinTrigger
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_GameJoinTrigger != null)
+                {
+                    return Private___0_intnl_GameJoinTrigger.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_GameJoinTrigger != null)
+                {
+                    Private___0_intnl_GameJoinTrigger.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __1_intnl_GameEffects
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_GameEffects != null)
+                {
+                    return Private___1_intnl_GameEffects.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_GameEffects != null)
+                {
+                    Private___1_intnl_GameEffects.Value = value;
+                }
+            }
+        }
+
+        internal bool? __24_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___24_intnl_SystemObject != null)
+                {
+                    return Private___24_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___24_intnl_SystemObject != null)
+                    {
+                        Private___24_intnl_SystemObject.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __5_intnl_GameEffects
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_intnl_GameEffects != null)
+                {
+                    return Private___5_intnl_GameEffects.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___5_intnl_GameEffects != null)
+                {
+                    Private___5_intnl_GameEffects.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __13_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___13_intnl_SystemObject != null)
+                {
+                    return Private___13_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___13_intnl_SystemObject != null)
+                {
+                    Private___13_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_ScoreboardDisplay
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_ScoreboardDisplay != null)
+                {
+                    return Private___0_intnl_ScoreboardDisplay.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_ScoreboardDisplay != null)
+                {
+                    Private___0_intnl_ScoreboardDisplay.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __25_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___25_intnl_SystemObject != null)
+                {
+                    return Private___25_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___25_intnl_SystemObject != null)
+                {
+                    Private___25_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __17_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___17_intnl_SystemObject != null)
+                {
+                    return Private___17_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___17_intnl_SystemObject != null)
+                {
+                    Private___17_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __18_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___18_intnl_SystemObject != null)
+                {
+                    return Private___18_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___18_intnl_SystemObject != null)
+                {
+                    Private___18_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __14_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___14_intnl_SystemObject != null)
+                {
+                    return Private___14_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___14_intnl_SystemObject != null)
+                {
+                    Private___14_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __7_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___7_intnl_SystemObject != null)
+                {
+                    return Private___7_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___7_intnl_SystemObject != null)
+                {
+                    Private___7_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_PatronControl
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_PatronControl != null)
+                {
+                    return Private___0_intnl_PatronControl.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_PatronControl != null)
+                {
+                    Private___0_intnl_PatronControl.Value = value;
+                }
+            }
+        }
+
+        internal bool? __8_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___8_intnl_SystemObject != null)
+                {
+                    return Private___8_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___8_intnl_SystemObject != null)
+                    {
+                        Private___8_intnl_SystemObject.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __15_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___15_intnl_SystemObject != null)
+                {
+                    return Private___15_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___15_intnl_SystemObject != null)
+                {
+                    Private___15_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __1_intnl_PatronControl
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_PatronControl != null)
+                {
+                    return Private___1_intnl_PatronControl.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_PatronControl != null)
+                {
+                    Private___1_intnl_PatronControl.Value = value;
+                }
+            }
+        }
+
+        internal VRC.SDKBase.VRCPlayerApi __4_intnl_VRCSDKBaseVRCPlayerApi
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    return Private___4_intnl_VRCSDKBaseVRCPlayerApi.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    Private___4_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __16_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___16_intnl_SystemObject != null)
+                {
+                    return Private___16_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___16_intnl_SystemObject != null)
+                {
+                    Private___16_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __5_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___5_intnl_SystemObject != null)
+                {
+                    return Private___5_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___5_intnl_SystemObject != null)
+                {
+                    Private___5_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_GameEffects
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_GameEffects != null)
+                {
+                    return Private___0_intnl_GameEffects.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_GameEffects != null)
+                {
+                    Private___0_intnl_GameEffects.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_AFKDetector
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_AFKDetector != null)
+                {
+                    return Private___0_intnl_AFKDetector.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_AFKDetector != null)
+                {
+                    Private___0_intnl_AFKDetector.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __31_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___31_intnl_SystemObject != null)
+                {
+                    return Private___31_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___31_intnl_SystemObject != null)
+                {
+                    Private___31_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
+        #endregion Getter / Setters UdonVariables  of PlayerData
+
+
+
+        internal void Initialize_PlayerData()
+        {
+            Private___18_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__18_const_intnl_SystemInt32");
+            Private_isWanted = new UdonVariable<bool>(PlayerData, "isWanted");
+            Private___43_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__43_const_intnl_exitJumpLoc_UInt32");
+            Private___33_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__33_const_intnl_SystemString");
+            Private___20_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__20_const_intnl_SystemInt32");
+            Private___23_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__23_intnl_SystemBoolean");
+            Private___1_intnl_UnityEngineGameObject = new UdonVariable<UnityEngine.GameObject>(PlayerData, "__1_intnl_UnityEngineGameObject");
+            Private___21_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__21_const_intnl_exitJumpLoc_UInt32");
+            Private___52_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__52_intnl_SystemBoolean");
+            Private___3_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__3_const_intnl_SystemString");
+            Private___6_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__6_const_intnl_SystemInt32");
+            Private___0_intnl_PlayerData = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_PlayerData");
+            Private___3_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__3_const_intnl_exitJumpLoc_UInt32");
+            Private___26_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__26_intnl_SystemBoolean");
+            Private___0_const_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__0_const_intnl_SystemBoolean");
+            Private___41_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__41_intnl_SystemBoolean");
+            Private___1_intnl_UnityEngineTransform = new UdonVariable<UnityEngine.Transform>(PlayerData, "__1_intnl_UnityEngineTransform");
+            Private___1_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__1_const_intnl_SystemInt32");
+            Private___0_intnl_PlayerObjectPool = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_PlayerObjectPool");
+            Private___1_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__1_intnl_SystemInt32");
+            Private___16_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__16_const_intnl_exitJumpLoc_UInt32");
+            Private___2_intnl_SystemObject = new UdonVariable<UnityEngine.Transform>(PlayerData, "__2_intnl_SystemObject");
+            Private___0_const_intnl_VRCUdonCommonEnumsEventTiming = new UdonVariable<VRC.Udon.Common.Enums.EventTiming>(PlayerData, "__0_const_intnl_VRCUdonCommonEnumsEventTiming");
+            Private___35_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__35_const_intnl_exitJumpLoc_UInt32");
+            Private___39_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__39_const_intnl_exitJumpLoc_UInt32");
+            Private_doublePoints = new UdonVariable<bool>(PlayerData, "doublePoints");
+            Private___0_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__0_const_intnl_SystemString");
+            Private___56_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__56_const_intnl_exitJumpLoc_UInt32");
+            Private___42_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__42_intnl_SystemBoolean");
+            Private___0_const_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__0_const_intnl_SystemSingle");
+            Private___29_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__29_intnl_SystemBoolean");
+            Private___1_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__1_intnl_SystemSingle");
+            Private___7_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__7_const_intnl_SystemInt32");
+            Private___9_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__9_intnl_SystemObject");
+            Private___5_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__5_intnl_SystemBoolean");
+            Private_tagHeightScalar = new UdonVariable<float>(PlayerData, "tagHeightScalar");
+            Private___46_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__46_const_intnl_exitJumpLoc_UInt32");
+            Private___35_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__35_const_intnl_SystemInt32");
+            Private_hitbox = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "hitbox");
+            Private___10_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__10_const_intnl_exitJumpLoc_UInt32");
+            Private___11_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__11_const_intnl_SystemInt32");
+            Private___0_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__0_const_intnl_exitJumpLoc_UInt32");
+            Private___2_intnl_PlayerObjectPool = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__2_intnl_PlayerObjectPool");
+            Private___15_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__15_intnl_SystemBoolean");
+            Private___24_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__24_const_intnl_exitJumpLoc_UInt32");
+            Private___34_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__34_intnl_SystemBoolean");
+            Private___28_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__28_const_intnl_SystemString");
+            Private___2_intnl_UnityEngineTransform = new UdonVariable<UnityEngine.Transform>(PlayerData, "__2_intnl_UnityEngineTransform");
+            Private___28_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__28_const_intnl_exitJumpLoc_UInt32");
+            Private_maxHealth = new UdonVariable<int>(PlayerData, "maxHealth");
+            Private___6_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__6_const_intnl_SystemString");
+            Private___21_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__21_intnl_SystemBoolean");
+            Private_cachedIsWanted = new UdonVariable<bool>(PlayerData, "cachedIsWanted");
+            Private___5_intnl_PlayerObjectPool = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_PlayerObjectPool");
+            Private___5_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__5_const_intnl_exitJumpLoc_UInt32");
+            Private___13_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__13_intnl_SystemBoolean");
+            Private___50_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__50_const_intnl_exitJumpLoc_UInt32");
+            Private___1_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__1_const_intnl_SystemString");
+            Private___4_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__4_const_intnl_SystemInt32");
+            Private___64_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__64_intnl_SystemBoolean");
+            Private___40_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__40_const_intnl_SystemString");
+            Private___29_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__29_const_intnl_SystemString");
+            Private___1_const_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__1_const_intnl_SystemSingle");
+            Private___23_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__23_const_intnl_exitJumpLoc_UInt32");
+            Private___5_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__5_intnl_SystemSingle");
+            Private___25_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__25_const_intnl_SystemInt32");
+            Private___40_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__40_const_intnl_exitJumpLoc_UInt32");
+            Private___2_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__2_const_intnl_exitJumpLoc_UInt32");
+            Private___16_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__16_intnl_SystemBoolean");
+            Private_goldGuns = new UdonVariable<bool>(PlayerData, "goldGuns");
+            Private___14_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__14_const_intnl_SystemString");
+            Private___1_mp_hp_Int32 = new UdonVariable<int>(PlayerData, "__1_mp_hp_Int32");
+            Private___7_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__7_intnl_SystemBoolean");
+            Private___22_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__22_intnl_SystemBoolean");
+            Private___38_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__38_const_intnl_SystemInt32");
+            Private___20_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__20_intnl_SystemObject");
+            Private___7_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__7_const_intnl_exitJumpLoc_UInt32");
+            Private___37_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__37_const_intnl_exitJumpLoc_UInt32");
+            Private___7_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__7_const_intnl_SystemString");
+            Private___15_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__15_const_intnl_SystemString");
+            Private___4_intnl_PlayerObjectPool = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__4_intnl_PlayerObjectPool");
+            Private___0_mp_playing_Boolean = new UdonVariable<bool>(PlayerData, "__0_mp_playing_Boolean");
+            Private___5_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__5_const_intnl_SystemInt32");
+            Private___refl_const_intnl_udonTypeID = new UdonVariable<long>(PlayerData, "__refl_const_intnl_udonTypeID");
+            Private___4_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__4_intnl_SystemBoolean");
+            Private___16_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__16_const_intnl_SystemInt32");
+            Private___19_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__19_intnl_SystemBoolean");
+            Private___refl_const_intnl_udonTypeName = new UdonVariable<string>(PlayerData, "__refl_const_intnl_udonTypeName");
+            Private_health = new UdonVariable<int>(PlayerData, "health");
+            Private_healthRegenDelay = new UdonVariable<float>(PlayerData, "healthRegenDelay");
+            Private___0_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_SystemObject");
+            Private___1_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__1_intnl_SystemBoolean");
+            Private___38_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__38_intnl_SystemBoolean");
+            Private___12_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__12_const_intnl_exitJumpLoc_UInt32");
+            Private___34_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__34_const_intnl_SystemString");
+            Private___17_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__17_const_intnl_SystemString");
+            Private___28_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__28_const_intnl_SystemInt32");
+            Private___17_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__17_const_intnl_SystemInt32");
+            Private___26_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__26_const_intnl_exitJumpLoc_UInt32");
+            Private___4_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__4_const_intnl_SystemString");
+            Private___31_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__31_const_intnl_exitJumpLoc_UInt32");
+            Private___68_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__68_intnl_SystemBoolean");
+            Private___20_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__20_const_intnl_SystemString");
+            Private___35_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__35_const_intnl_SystemString");
+            Private___11_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__11_intnl_SystemBoolean");
+            Private___2_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__2_intnl_SystemInt32");
+            Private___8_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__8_const_intnl_SystemInt32");
+            Private___52_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__52_const_intnl_exitJumpLoc_UInt32");
+            Private___4_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__4_const_intnl_exitJumpLoc_UInt32");
+            Private___30_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__30_intnl_SystemBoolean");
+            Private___0_mp_wanted_Boolean = new UdonVariable<bool>(PlayerData, "__0_mp_wanted_Boolean");
+            Private___54_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__54_intnl_SystemBoolean");
+            Private___21_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__21_const_intnl_SystemString");
+            Private___26_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__26_const_intnl_SystemString");
+            Private___42_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__42_const_intnl_exitJumpLoc_UInt32");
+            Private___71_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__71_intnl_SystemBoolean");
+            Private___31_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__31_const_intnl_SystemInt32");
+            Private___4_intnl_SystemObject = new UdonVariable<UnityEngine.Transform>(PlayerData, "__4_intnl_SystemObject");
+            Private___9_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__9_const_intnl_exitJumpLoc_UInt32");
+            Private___60_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__60_intnl_SystemBoolean");
+            Private___37_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__37_intnl_SystemBoolean");
+            Private___20_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__20_const_intnl_exitJumpLoc_UInt32");
+            Private___37_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__37_const_intnl_SystemString");
+            Private___2_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__2_intnl_SystemSingle");
+            Private___0_this_intnl_PlayerData = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_this_intnl_PlayerData");
+            Private___5_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__5_const_intnl_SystemString");
+            Private___3_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__3_intnl_SystemBoolean");
+            Private___12_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__12_intnl_SystemBoolean");
+            Private___10_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__10_intnl_SystemObject");
+            Private___6_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__6_const_intnl_exitJumpLoc_UInt32");
+            Private___2_intnl_PlayerData = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__2_intnl_PlayerData");
+            Private___67_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__67_intnl_SystemBoolean");
+            Private___23_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__23_const_intnl_SystemString");
+            Private___5_intnl_UnityEngineVector3 = new UdonVariable<UnityEngine.Vector3>(PlayerData, "__5_intnl_UnityEngineVector3");
+            Private___14_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__14_const_intnl_SystemInt32");
+            Private___9_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__9_const_intnl_SystemInt32");
+            Private___44_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__44_intnl_SystemBoolean");
+            Private___29_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__29_intnl_SystemObject");
+            Private___72_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__72_intnl_SystemBoolean");
+            Private___19_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__19_const_intnl_SystemInt32");
+            Private___0_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__0_intnl_SystemBoolean");
+            Private___34_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__34_const_intnl_exitJumpLoc_UInt32");
+            Private___4_intnl_UnityEngineVector3 = new UdonVariable<UnityEngine.Vector3>(PlayerData, "__4_intnl_UnityEngineVector3");
+            Private___9_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__9_intnl_SystemSingle");
+            Private___21_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__21_const_intnl_SystemInt32");
+            Private_cachedIsDead = new UdonVariable<bool>(PlayerData, "cachedIsDead");
+            Private_isGuard = new UdonVariable<bool>(PlayerData, "isGuard");
+            Private___12_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__12_const_intnl_SystemString");
+            Private___38_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__38_const_intnl_exitJumpLoc_UInt32");
+            Private___1_intnl_PlayerData = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_PlayerData");
+            Private___0_this_intnl_UnityEngineGameObject = new UdonVariable<UnityEngine.GameObject>(PlayerData, "__0_this_intnl_UnityEngineGameObject");
+            Private___3_intnl_SystemObject = new UdonVariable<float>(PlayerData, "__3_intnl_SystemObject");
+            Private___0_intnl_UnityEngineGameObject = new UdonVariable<UnityEngine.GameObject>(PlayerData, "__0_intnl_UnityEngineGameObject");
+            Private___8_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__8_const_intnl_SystemString");
+            Private___6_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__6_intnl_SystemSingle");
+            Private___33_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__33_const_intnl_exitJumpLoc_UInt32");
+            Private___58_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__58_intnl_SystemBoolean");
+            Private___15_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__15_const_intnl_exitJumpLoc_UInt32");
+            Private___36_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__36_const_intnl_SystemInt32");
+            Private_cachedPlayerName = new UdonVariable<string>(PlayerData, "cachedPlayerName");
+            Private___11_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__11_intnl_SystemObject");
+            Private___19_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__19_const_intnl_exitJumpLoc_UInt32");
+            Private___12_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__12_const_intnl_SystemInt32");
+            Private___22_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__22_intnl_SystemObject");
+            Private___32_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__32_const_intnl_SystemString");
+            Private___0_tagHeight_Single = new UdonVariable<float>(PlayerData, "__0_tagHeight_Single");
+            Private___35_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__35_intnl_SystemBoolean");
+            Private___8_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__8_const_intnl_exitJumpLoc_UInt32");
+            Private___37_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__37_const_intnl_SystemInt32");
+            Private___50_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__50_intnl_SystemBoolean");
+            Private___0_mp_hp_Int32 = new UdonVariable<int>(PlayerData, "__0_mp_hp_Int32");
+            Private___55_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__55_const_intnl_exitJumpLoc_UInt32");
+            Private___22_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__22_const_intnl_exitJumpLoc_UInt32");
+            Private___24_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__24_intnl_SystemBoolean");
+            Private___9_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__9_const_intnl_SystemString");
+            Private___13_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__13_const_intnl_SystemInt32");
+            Private___0_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__0_intnl_SystemInt32");
+            Private___0_intnl_returnTarget_UInt32 = new UdonVariable<uint>(PlayerData, "__0_intnl_returnTarget_UInt32");
+            Private___48_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__48_intnl_SystemBoolean");
+            Private___59_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__59_const_intnl_exitJumpLoc_UInt32");
+            Private___45_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__45_const_intnl_exitJumpLoc_UInt32");
+            Private___65_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__65_intnl_SystemBoolean");
+            Private___0_intnl_SystemString = new UdonVariable<string>(PlayerData, "__0_intnl_SystemString");
+            Private___33_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__33_intnl_SystemBoolean");
+            Private___57_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__57_intnl_SystemBoolean");
+            Private___26_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__26_const_intnl_SystemInt32");
+            Private___3_intnl_UnityEngineGameObject = new UdonVariable<UnityEngine.GameObject>(PlayerData, "__3_intnl_UnityEngineGameObject");
+            Private___49_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__49_const_intnl_exitJumpLoc_UInt32");
+            Private___0_const_intnl_SystemUInt32 = new UdonVariable<uint>(PlayerData, "__0_const_intnl_SystemUInt32");
+            Private_scorecard = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "scorecard");
+            Private_cachedHealth = new UdonVariable<int>(PlayerData, "cachedHealth");
+            Private___9_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__9_intnl_SystemBoolean");
+            Private___19_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__19_intnl_SystemObject");
+            Private___36_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__36_const_intnl_exitJumpLoc_UInt32");
+            Private___63_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__63_intnl_SystemBoolean");
+            Private___36_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__36_intnl_SystemBoolean");
+            Private___0_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__0_intnl_SystemSingle");
+            Private___27_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__27_const_intnl_SystemInt32");
+            Private___40_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__40_intnl_SystemBoolean");
+            Private_spectateCamera = new UdonVariable<UnityEngine.Camera>(PlayerData, "spectateCamera");
+            Private___18_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__18_const_intnl_SystemString");
+            Private_lastDamageTime = new UdonVariable<float>(PlayerData, "lastDamageTime");
+            Private_killedByLocal = new UdonVariable<bool>(PlayerData, "killedByLocal");
+            Private___66_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__66_intnl_SystemBoolean");
+            Private___0_mp_damage_Int32 = new UdonVariable<int>(PlayerData, "__0_mp_damage_Int32");
+            Private_isPlaying = new UdonVariable<bool>(PlayerData, "isPlaying");
+            Private___3_intnl_UnityEngineVector3 = new UdonVariable<UnityEngine.Vector3>(PlayerData, "__3_intnl_UnityEngineVector3");
+            Private___47_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__47_intnl_SystemBoolean");
+            Private___34_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__34_const_intnl_SystemInt32");
+            Private___4_intnl_UnityEngineTransform = new UdonVariable<UnityEngine.Transform>(PlayerData, "__4_intnl_UnityEngineTransform");
+            Private___10_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__10_const_intnl_SystemInt32");
+            Private___19_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__19_const_intnl_SystemString");
+            Private___17_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__17_const_intnl_exitJumpLoc_UInt32");
+            Private___30_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__30_const_intnl_exitJumpLoc_UInt32");
+            Private___39_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__39_intnl_SystemBoolean");
+            Private___28_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__28_intnl_SystemBoolean");
+            Private___6_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__6_intnl_SystemBoolean");
+            Private___4_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__4_intnl_SystemSingle");
+            Private___12_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__12_intnl_SystemObject");
+            Private___24_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__24_const_intnl_SystemString");
+            Private___69_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__69_intnl_SystemBoolean");
+            Private___57_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__57_const_intnl_exitJumpLoc_UInt32");
+            Private___38_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__38_const_intnl_SystemString");
+            Private___14_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__14_intnl_SystemBoolean");
+            Private_cachedIsPlaying = new UdonVariable<bool>(PlayerData, "cachedIsPlaying");
+            Private___24_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__24_const_intnl_SystemInt32");
+            Private_cachedHasKeycard = new UdonVariable<bool>(PlayerData, "cachedHasKeycard");
+            Private___47_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__47_const_intnl_exitJumpLoc_UInt32");
+            Private___3_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__3_intnl_SystemInt32");
+            Private___31_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__31_intnl_SystemBoolean");
+            Private___55_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__55_intnl_SystemBoolean");
+            Private___25_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__25_const_intnl_SystemString");
+            Private___29_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__29_const_intnl_SystemInt32");
+            Private___11_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__11_const_intnl_exitJumpLoc_UInt32");
+            Private___8_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__8_intnl_SystemBoolean");
+            Private___20_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__20_intnl_SystemBoolean");
+            Private___2_intnl_UnityEngineVector3 = new UdonVariable<UnityEngine.Vector3>(PlayerData, "__2_intnl_UnityEngineVector3");
+            Private___39_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__39_const_intnl_SystemString");
+            Private___1_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_SystemObject");
+            Private___0_mp_enabled_Boolean = new UdonVariable<bool>(PlayerData, "__0_mp_enabled_Boolean");
+            Private___25_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__25_const_intnl_exitJumpLoc_UInt32");
+            Private___32_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__32_const_intnl_SystemInt32");
+            Private___61_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__61_intnl_SystemBoolean");
+            Private___29_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__29_const_intnl_exitJumpLoc_UInt32");
+            Private___1_intnl_UnityEngineVector3 = new UdonVariable<UnityEngine.Vector3>(PlayerData, "__1_intnl_UnityEngineVector3");
+            Private___53_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__53_intnl_SystemBoolean");
+            Private___27_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__27_intnl_SystemBoolean");
+            Private___0_mp_dead_Boolean = new UdonVariable<bool>(PlayerData, "__0_mp_dead_Boolean");
+            Private___51_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__51_const_intnl_exitJumpLoc_UInt32");
+            Private___2_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__2_const_intnl_SystemInt32");
+            Private___3_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__3_intnl_SystemSingle");
+            Private___33_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__33_const_intnl_SystemInt32");
+            Private___27_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__27_const_intnl_SystemString");
+            Private___0_intnl_UnityEngineVector3 = new UdonVariable<UnityEngine.Vector3>(PlayerData, "__0_intnl_UnityEngineVector3");
+            Private___10_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__10_const_intnl_SystemString");
+            Private___32_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__32_intnl_SystemBoolean");
+            Private___30_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__30_intnl_SystemObject");
+            Private___56_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__56_intnl_SystemBoolean");
+            Private___41_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__41_const_intnl_exitJumpLoc_UInt32");
+            Private___45_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__45_intnl_SystemBoolean");
+            Private___1_const_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__1_const_intnl_SystemBoolean");
+            Private___22_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__22_const_intnl_SystemInt32");
+            Private___3_intnl_PlayerData = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__3_intnl_PlayerData");
+            Private___62_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__62_intnl_SystemBoolean");
+            Private___11_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__11_const_intnl_SystemString");
+            Private___16_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__16_const_intnl_SystemString");
+            Private_healthRegenAmt = new UdonVariable<int>(PlayerData, "healthRegenAmt");
+            Private___32_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__32_const_intnl_exitJumpLoc_UInt32");
+            Private___43_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__43_intnl_SystemBoolean");
+            Private___15_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__15_const_intnl_SystemInt32");
+            Private___18_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__18_intnl_SystemBoolean");
+            Private___0_mp_t_Boolean = new UdonVariable<bool>(PlayerData, "__0_mp_t_Boolean");
+            Private___2_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__2_intnl_SystemBoolean");
+            Private___10_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__10_intnl_SystemSingle");
+            Private___1_mp_damage_Int32 = new UdonVariable<int>(PlayerData, "__1_mp_damage_Int32");
+            Private___14_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__14_const_intnl_exitJumpLoc_UInt32");
+            Private___23_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__23_const_intnl_SystemInt32");
+            Private_joinedRound = new UdonVariable<bool>(PlayerData, "joinedRound");
+            Private___3_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__3_const_intnl_SystemInt32");
+            Private___7_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__7_intnl_SystemSingle");
+            Private_tagHeightMin = new UdonVariable<float>(PlayerData, "tagHeightMin");
+            Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget = new UdonVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget>(PlayerData, "__0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget");
+            Private___59_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__59_intnl_SystemBoolean");
+            Private_isDead = new UdonVariable<bool>(PlayerData, "isDead");
+            Private___18_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__18_const_intnl_exitJumpLoc_UInt32");
+            Private___46_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__46_intnl_SystemBoolean");
+            Private___30_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__30_const_intnl_SystemString");
+            Private_gameManager = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "gameManager");
+            Private___13_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__13_const_intnl_SystemString");
+            Private___0_mp_guard_Boolean = new UdonVariable<bool>(PlayerData, "__0_mp_guard_Boolean");
+            Private_deathLoc = new UdonVariable<UnityEngine.Vector3>(PlayerData, "deathLoc");
+            Private___30_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__30_const_intnl_SystemInt32");
+            Private___54_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__54_const_intnl_exitJumpLoc_UInt32");
+            Private___13_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__13_const_intnl_exitJumpLoc_UInt32");
+            Private___2_intnl_UnityEngineGameObject = new UdonVariable<UnityEngine.GameObject>(PlayerData, "__2_intnl_UnityEngineGameObject");
+            Private___10_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__10_intnl_SystemBoolean");
+            Private___2_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__2_const_intnl_SystemString");
+            Private___31_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__31_const_intnl_SystemString");
+            Private___27_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__27_const_intnl_exitJumpLoc_UInt32");
+            Private___36_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__36_const_intnl_SystemString");
+            Private___58_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__58_const_intnl_exitJumpLoc_UInt32");
+            Private___44_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__44_const_intnl_exitJumpLoc_UInt32");
+            Private___5_intnl_PlayerData = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_PlayerData");
+            Private_playerName = new UdonVariable<string>(PlayerData, "playerName");
+            Private___3_intnl_PlayerObjectPool = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__3_intnl_PlayerObjectPool");
+            Private___51_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__51_intnl_SystemBoolean");
+            Private___0_const_intnl_SystemInt32 = new UdonVariable<int>(PlayerData, "__0_const_intnl_SystemInt32");
+            Private___1_intnl_PlayerObjectPool = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_PlayerObjectPool");
+            Private___1_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__1_const_intnl_exitJumpLoc_UInt32");
+            Private___25_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__25_intnl_SystemBoolean");
+            Private___48_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__48_const_intnl_exitJumpLoc_UInt32");
+            Private___22_const_intnl_SystemString = new UdonVariable<string>(PlayerData, "__22_const_intnl_SystemString");
+            Private___8_intnl_SystemSingle = new UdonVariable<float>(PlayerData, "__8_intnl_SystemSingle");
+            Private___0_mp_newName_String = new UdonVariable<string>(PlayerData, "__0_mp_newName_String");
+            Private___70_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__70_intnl_SystemBoolean");
+            Private_teamTag = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "teamTag");
+            Private___17_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__17_intnl_SystemBoolean");
+            Private___49_intnl_SystemBoolean = new UdonVariable<bool>(PlayerData, "__49_intnl_SystemBoolean");
+            Private___53_const_intnl_exitJumpLoc_UInt32 = new UdonVariable<uint>(PlayerData, "__53_const_intnl_exitJumpLoc_UInt32");
+            Private_hasKeycard = new UdonVariable<bool>(PlayerData, "hasKeycard");
+            Private___23_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__23_intnl_SystemObject");
+            Private___4_intnl_PlayerData = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__4_intnl_PlayerData");
+            Private___28_intnl_SystemObject = new UdonVariable<int>(PlayerData, "__28_intnl_SystemObject");
+            Private___3_intnl_GameEffects = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__3_intnl_GameEffects");
+            Private___3_intnl_UnityEngineUISlider = new UdonVariable<UnityEngine.UI.Slider>(PlayerData, "__3_intnl_UnityEngineUISlider");
+            Private___32_intnl_SystemObject = new UdonVariable<UnityEngine.UI.Slider>(PlayerData, "__32_intnl_SystemObject");
+            Private___1_intnl_VRCSDKBaseVRCPlayerApi = new UdonVariable<VRC.SDKBase.VRCPlayerApi>(PlayerData, "__1_intnl_VRCSDKBaseVRCPlayerApi");
+            Private___6_intnl_SystemObject = new UdonVariable<bool>(PlayerData, "__6_intnl_SystemObject");
+            Private___4_intnl_UnityEngineGameObject = new UdonVariable<UnityEngine.GameObject>(PlayerData, "__4_intnl_UnityEngineGameObject");
+            Private___0_intnl_ItemControl = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_ItemControl");
+            Private___0_intnl_GameJoinTrigger = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_GameJoinTrigger");
+            Private___1_intnl_GameEffects = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_GameEffects");
+            Private___24_intnl_SystemObject = new UdonVariable<bool>(PlayerData, "__24_intnl_SystemObject");
+            Private___5_intnl_GameEffects = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_GameEffects");
+            Private___13_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__13_intnl_SystemObject");
+            Private___0_intnl_ScoreboardDisplay = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_ScoreboardDisplay");
+            Private___25_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__25_intnl_SystemObject");
+            Private___17_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__17_intnl_SystemObject");
+            Private___18_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__18_intnl_SystemObject");
+            Private___14_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__14_intnl_SystemObject");
+            Private___7_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__7_intnl_SystemObject");
+            Private___0_intnl_PatronControl = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_PatronControl");
+            Private___8_intnl_SystemObject = new UdonVariable<bool>(PlayerData, "__8_intnl_SystemObject");
+            Private___15_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__15_intnl_SystemObject");
+            Private___1_intnl_PatronControl = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_PatronControl");
+            Private___4_intnl_VRCSDKBaseVRCPlayerApi = new UdonVariable<VRC.SDKBase.VRCPlayerApi>(PlayerData, "__4_intnl_VRCSDKBaseVRCPlayerApi");
+            Private___16_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__16_intnl_SystemObject");
+            Private___5_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_SystemObject");
+            Private___0_intnl_GameEffects = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_GameEffects");
+            Private___0_intnl_AFKDetector = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_AFKDetector");
+            Private___31_intnl_SystemObject = new UdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__31_intnl_SystemObject");
+        }
+
+        internal void Cleanup_PlayerData()
+        {
+            Private___18_const_intnl_SystemInt32 = null;
+            Private_isWanted = null;
+            Private___43_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___33_const_intnl_SystemString = null;
+            Private___20_const_intnl_SystemInt32 = null;
+            Private___23_intnl_SystemBoolean = null;
+            Private___1_intnl_UnityEngineGameObject = null;
+            Private___21_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___52_intnl_SystemBoolean = null;
+            Private___3_const_intnl_SystemString = null;
+            Private___6_const_intnl_SystemInt32 = null;
+            Private___0_intnl_PlayerData = null;
+            Private___3_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___26_intnl_SystemBoolean = null;
+            Private___0_const_intnl_SystemBoolean = null;
+            Private___41_intnl_SystemBoolean = null;
+            Private___1_intnl_UnityEngineTransform = null;
+            Private___1_const_intnl_SystemInt32 = null;
+            Private___0_intnl_PlayerObjectPool = null;
+            Private___1_intnl_SystemInt32 = null;
+            Private___16_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___2_intnl_SystemObject = null;
+            Private___0_const_intnl_VRCUdonCommonEnumsEventTiming = null;
+            Private___35_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___39_const_intnl_exitJumpLoc_UInt32 = null;
+            Private_doublePoints = null;
+            Private___0_const_intnl_SystemString = null;
+            Private___56_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___42_intnl_SystemBoolean = null;
+            Private___0_const_intnl_SystemSingle = null;
+            Private___29_intnl_SystemBoolean = null;
+            Private___1_intnl_SystemSingle = null;
+            Private___7_const_intnl_SystemInt32 = null;
+            Private___9_intnl_SystemObject = null;
+            Private___5_intnl_SystemBoolean = null;
+            Private_tagHeightScalar = null;
+            Private___46_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___35_const_intnl_SystemInt32 = null;
+            Private_hitbox = null;
+            Private___10_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___11_const_intnl_SystemInt32 = null;
+            Private___0_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___2_intnl_PlayerObjectPool = null;
+            Private___15_intnl_SystemBoolean = null;
+            Private___24_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___34_intnl_SystemBoolean = null;
+            Private___28_const_intnl_SystemString = null;
+            Private___2_intnl_UnityEngineTransform = null;
+            Private___28_const_intnl_exitJumpLoc_UInt32 = null;
+            Private_maxHealth = null;
+            Private___6_const_intnl_SystemString = null;
+            Private___21_intnl_SystemBoolean = null;
+            Private_cachedIsWanted = null;
+            Private___5_intnl_PlayerObjectPool = null;
+            Private___5_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___13_intnl_SystemBoolean = null;
+            Private___50_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___1_const_intnl_SystemString = null;
+            Private___4_const_intnl_SystemInt32 = null;
+            Private___64_intnl_SystemBoolean = null;
+            Private___40_const_intnl_SystemString = null;
+            Private___29_const_intnl_SystemString = null;
+            Private___1_const_intnl_SystemSingle = null;
+            Private___23_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___5_intnl_SystemSingle = null;
+            Private___25_const_intnl_SystemInt32 = null;
+            Private___40_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___2_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___16_intnl_SystemBoolean = null;
+            Private_goldGuns = null;
+            Private___14_const_intnl_SystemString = null;
+            Private___1_mp_hp_Int32 = null;
+            Private___7_intnl_SystemBoolean = null;
+            Private___22_intnl_SystemBoolean = null;
+            Private___38_const_intnl_SystemInt32 = null;
+            Private___20_intnl_SystemObject = null;
+            Private___7_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___37_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___7_const_intnl_SystemString = null;
+            Private___15_const_intnl_SystemString = null;
+            Private___4_intnl_PlayerObjectPool = null;
+            Private___0_mp_playing_Boolean = null;
+            Private___5_const_intnl_SystemInt32 = null;
+            Private___refl_const_intnl_udonTypeID = null;
+            Private___4_intnl_SystemBoolean = null;
+            Private___16_const_intnl_SystemInt32 = null;
+            Private___19_intnl_SystemBoolean = null;
+            Private___refl_const_intnl_udonTypeName = null;
+            Private_health = null;
+            Private_healthRegenDelay = null;
+            Private___0_intnl_SystemObject = null;
+            Private___1_intnl_SystemBoolean = null;
+            Private___38_intnl_SystemBoolean = null;
+            Private___12_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___34_const_intnl_SystemString = null;
+            Private___17_const_intnl_SystemString = null;
+            Private___28_const_intnl_SystemInt32 = null;
+            Private___17_const_intnl_SystemInt32 = null;
+            Private___26_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___4_const_intnl_SystemString = null;
+            Private___31_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___68_intnl_SystemBoolean = null;
+            Private___20_const_intnl_SystemString = null;
+            Private___35_const_intnl_SystemString = null;
+            Private___11_intnl_SystemBoolean = null;
+            Private___2_intnl_SystemInt32 = null;
+            Private___8_const_intnl_SystemInt32 = null;
+            Private___52_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___4_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___30_intnl_SystemBoolean = null;
+            Private___0_mp_wanted_Boolean = null;
+            Private___54_intnl_SystemBoolean = null;
+            Private___21_const_intnl_SystemString = null;
+            Private___26_const_intnl_SystemString = null;
+            Private___42_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___71_intnl_SystemBoolean = null;
+            Private___31_const_intnl_SystemInt32 = null;
+            Private___4_intnl_SystemObject = null;
+            Private___9_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___60_intnl_SystemBoolean = null;
+            Private___37_intnl_SystemBoolean = null;
+            Private___20_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___37_const_intnl_SystemString = null;
+            Private___2_intnl_SystemSingle = null;
+            Private___0_this_intnl_PlayerData = null;
+            Private___5_const_intnl_SystemString = null;
+            Private___3_intnl_SystemBoolean = null;
+            Private___12_intnl_SystemBoolean = null;
+            Private___10_intnl_SystemObject = null;
+            Private___6_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___2_intnl_PlayerData = null;
+            Private___67_intnl_SystemBoolean = null;
+            Private___23_const_intnl_SystemString = null;
+            Private___5_intnl_UnityEngineVector3 = null;
+            Private___14_const_intnl_SystemInt32 = null;
+            Private___9_const_intnl_SystemInt32 = null;
+            Private___44_intnl_SystemBoolean = null;
+            Private___29_intnl_SystemObject = null;
+            Private___72_intnl_SystemBoolean = null;
+            Private___19_const_intnl_SystemInt32 = null;
+            Private___0_intnl_SystemBoolean = null;
+            Private___34_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___4_intnl_UnityEngineVector3 = null;
+            Private___9_intnl_SystemSingle = null;
+            Private___21_const_intnl_SystemInt32 = null;
+            Private_cachedIsDead = null;
+            Private_isGuard = null;
+            Private___12_const_intnl_SystemString = null;
+            Private___38_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___1_intnl_PlayerData = null;
+            Private___0_this_intnl_UnityEngineGameObject = null;
+            Private___3_intnl_SystemObject = null;
+            Private___0_intnl_UnityEngineGameObject = null;
+            Private___8_const_intnl_SystemString = null;
+            Private___6_intnl_SystemSingle = null;
+            Private___33_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___58_intnl_SystemBoolean = null;
+            Private___15_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___36_const_intnl_SystemInt32 = null;
+            Private_cachedPlayerName = null;
+            Private___11_intnl_SystemObject = null;
+            Private___19_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___12_const_intnl_SystemInt32 = null;
+            Private___22_intnl_SystemObject = null;
+            Private___32_const_intnl_SystemString = null;
+            Private___0_tagHeight_Single = null;
+            Private___35_intnl_SystemBoolean = null;
+            Private___8_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___37_const_intnl_SystemInt32 = null;
+            Private___50_intnl_SystemBoolean = null;
+            Private___0_mp_hp_Int32 = null;
+            Private___55_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___22_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___24_intnl_SystemBoolean = null;
+            Private___9_const_intnl_SystemString = null;
+            Private___13_const_intnl_SystemInt32 = null;
+            Private___0_intnl_SystemInt32 = null;
+            Private___0_intnl_returnTarget_UInt32 = null;
+            Private___48_intnl_SystemBoolean = null;
+            Private___59_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___45_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___65_intnl_SystemBoolean = null;
+            Private___0_intnl_SystemString = null;
+            Private___33_intnl_SystemBoolean = null;
+            Private___57_intnl_SystemBoolean = null;
+            Private___26_const_intnl_SystemInt32 = null;
+            Private___3_intnl_UnityEngineGameObject = null;
+            Private___49_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___0_const_intnl_SystemUInt32 = null;
+            Private_scorecard = null;
+            Private_cachedHealth = null;
+            Private___9_intnl_SystemBoolean = null;
+            Private___19_intnl_SystemObject = null;
+            Private___36_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___63_intnl_SystemBoolean = null;
+            Private___36_intnl_SystemBoolean = null;
+            Private___0_intnl_SystemSingle = null;
+            Private___27_const_intnl_SystemInt32 = null;
+            Private___40_intnl_SystemBoolean = null;
+            Private_spectateCamera = null;
+            Private___18_const_intnl_SystemString = null;
+            Private_lastDamageTime = null;
+            Private_killedByLocal = null;
+            Private___66_intnl_SystemBoolean = null;
+            Private___0_mp_damage_Int32 = null;
+            Private_isPlaying = null;
+            Private___3_intnl_UnityEngineVector3 = null;
+            Private___47_intnl_SystemBoolean = null;
+            Private___34_const_intnl_SystemInt32 = null;
+            Private___4_intnl_UnityEngineTransform = null;
+            Private___10_const_intnl_SystemInt32 = null;
+            Private___19_const_intnl_SystemString = null;
+            Private___17_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___30_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___39_intnl_SystemBoolean = null;
+            Private___28_intnl_SystemBoolean = null;
+            Private___6_intnl_SystemBoolean = null;
+            Private___4_intnl_SystemSingle = null;
+            Private___12_intnl_SystemObject = null;
+            Private___24_const_intnl_SystemString = null;
+            Private___69_intnl_SystemBoolean = null;
+            Private___57_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___38_const_intnl_SystemString = null;
+            Private___14_intnl_SystemBoolean = null;
+            Private_cachedIsPlaying = null;
+            Private___24_const_intnl_SystemInt32 = null;
+            Private_cachedHasKeycard = null;
+            Private___47_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___3_intnl_SystemInt32 = null;
+            Private___31_intnl_SystemBoolean = null;
+            Private___55_intnl_SystemBoolean = null;
+            Private___25_const_intnl_SystemString = null;
+            Private___29_const_intnl_SystemInt32 = null;
+            Private___11_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___8_intnl_SystemBoolean = null;
+            Private___20_intnl_SystemBoolean = null;
+            Private___2_intnl_UnityEngineVector3 = null;
+            Private___39_const_intnl_SystemString = null;
+            Private___1_intnl_SystemObject = null;
+            Private___0_mp_enabled_Boolean = null;
+            Private___25_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___32_const_intnl_SystemInt32 = null;
+            Private___61_intnl_SystemBoolean = null;
+            Private___29_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___1_intnl_UnityEngineVector3 = null;
+            Private___53_intnl_SystemBoolean = null;
+            Private___27_intnl_SystemBoolean = null;
+            Private___0_mp_dead_Boolean = null;
+            Private___51_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___2_const_intnl_SystemInt32 = null;
+            Private___3_intnl_SystemSingle = null;
+            Private___33_const_intnl_SystemInt32 = null;
+            Private___27_const_intnl_SystemString = null;
+            Private___0_intnl_UnityEngineVector3 = null;
+            Private___10_const_intnl_SystemString = null;
+            Private___32_intnl_SystemBoolean = null;
+            Private___30_intnl_SystemObject = null;
+            Private___56_intnl_SystemBoolean = null;
+            Private___41_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___45_intnl_SystemBoolean = null;
+            Private___1_const_intnl_SystemBoolean = null;
+            Private___22_const_intnl_SystemInt32 = null;
+            Private___3_intnl_PlayerData = null;
+            Private___62_intnl_SystemBoolean = null;
+            Private___11_const_intnl_SystemString = null;
+            Private___16_const_intnl_SystemString = null;
+            Private_healthRegenAmt = null;
+            Private___32_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___43_intnl_SystemBoolean = null;
+            Private___15_const_intnl_SystemInt32 = null;
+            Private___18_intnl_SystemBoolean = null;
+            Private___0_mp_t_Boolean = null;
+            Private___2_intnl_SystemBoolean = null;
+            Private___10_intnl_SystemSingle = null;
+            Private___1_mp_damage_Int32 = null;
+            Private___14_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___23_const_intnl_SystemInt32 = null;
+            Private_joinedRound = null;
+            Private___3_const_intnl_SystemInt32 = null;
+            Private___7_intnl_SystemSingle = null;
+            Private_tagHeightMin = null;
+            Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget = null;
+            Private___59_intnl_SystemBoolean = null;
+            Private_isDead = null;
+            Private___18_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___46_intnl_SystemBoolean = null;
+            Private___30_const_intnl_SystemString = null;
+            Private_gameManager = null;
+            Private___13_const_intnl_SystemString = null;
+            Private___0_mp_guard_Boolean = null;
+            Private_deathLoc = null;
+            Private___30_const_intnl_SystemInt32 = null;
+            Private___54_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___13_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___2_intnl_UnityEngineGameObject = null;
+            Private___10_intnl_SystemBoolean = null;
+            Private___2_const_intnl_SystemString = null;
+            Private___31_const_intnl_SystemString = null;
+            Private___27_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___36_const_intnl_SystemString = null;
+            Private___58_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___44_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___5_intnl_PlayerData = null;
+            Private_playerName = null;
+            Private___3_intnl_PlayerObjectPool = null;
+            Private___51_intnl_SystemBoolean = null;
+            Private___0_const_intnl_SystemInt32 = null;
+            Private___1_intnl_PlayerObjectPool = null;
+            Private___1_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___25_intnl_SystemBoolean = null;
+            Private___48_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___22_const_intnl_SystemString = null;
+            Private___8_intnl_SystemSingle = null;
+            Private___0_mp_newName_String = null;
+            Private___70_intnl_SystemBoolean = null;
+            Private_teamTag = null;
+            Private___17_intnl_SystemBoolean = null;
+            Private___49_intnl_SystemBoolean = null;
+            Private___53_const_intnl_exitJumpLoc_UInt32 = null;
+            Private_hasKeycard = null;
+            Private___23_intnl_SystemObject = null;
+            Private___4_intnl_PlayerData = null;
+            Private___28_intnl_SystemObject = null;
+            Private___3_intnl_GameEffects = null;
+            Private___3_intnl_UnityEngineUISlider = null;
+            Private___32_intnl_SystemObject = null;
+            Private___1_intnl_VRCSDKBaseVRCPlayerApi = null;
+            Private___6_intnl_SystemObject = null;
+            Private___4_intnl_UnityEngineGameObject = null;
+            Private___0_intnl_ItemControl = null;
+            Private___0_intnl_GameJoinTrigger = null;
+            Private___1_intnl_GameEffects = null;
+            Private___24_intnl_SystemObject = null;
+            Private___5_intnl_GameEffects = null;
+            Private___13_intnl_SystemObject = null;
+            Private___0_intnl_ScoreboardDisplay = null;
+            Private___25_intnl_SystemObject = null;
+            Private___17_intnl_SystemObject = null;
+            Private___18_intnl_SystemObject = null;
+            Private___14_intnl_SystemObject = null;
+            Private___7_intnl_SystemObject = null;
+            Private___0_intnl_PatronControl = null;
+            Private___8_intnl_SystemObject = null;
+            Private___15_intnl_SystemObject = null;
+            Private___1_intnl_PatronControl = null;
+            Private___4_intnl_VRCSDKBaseVRCPlayerApi = null;
+            Private___16_intnl_SystemObject = null;
+            Private___5_intnl_SystemObject = null;
+            Private___0_intnl_GameEffects = null;
+            Private___0_intnl_AFKDetector = null;
+            Private___31_intnl_SystemObject = null;
+        }
+
+        #region UdonVariables  of PlayerData
+
+        private UdonVariable<int> Private___18_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_isWanted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___43_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___33_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___20_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___23_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.GameObject> Private___1_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___21_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___52_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___3_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___6_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___3_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___26_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___0_const_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___41_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Transform> Private___1_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___1_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___1_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___16_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Transform> Private___2_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.Common.Enums.EventTiming> Private___0_const_intnl_VRCUdonCommonEnumsEventTiming { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___35_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___39_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_doublePoints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___0_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___56_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___42_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___0_const_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___29_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___1_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___7_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___9_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___5_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private_tagHeightScalar { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___46_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___35_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private_hitbox { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___10_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___11_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___0_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___2_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___15_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___24_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___34_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___28_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Transform> Private___2_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___28_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private_maxHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___6_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___21_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_cachedIsWanted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___5_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___13_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___50_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___1_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___4_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___64_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___40_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___29_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___1_const_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___23_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___5_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___25_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___40_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___2_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___16_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_goldGuns { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___14_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___1_mp_hp_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___7_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___22_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___38_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___20_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___7_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___37_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___7_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___15_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___4_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___0_mp_playing_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___5_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<long> Private___refl_const_intnl_udonTypeID { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___4_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___16_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___19_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___refl_const_intnl_udonTypeName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private_health { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private_healthRegenDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___1_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___38_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___12_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___34_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___17_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___28_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___17_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___26_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___4_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___31_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___68_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___20_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___35_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___11_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___2_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___8_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___52_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___4_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___30_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___0_mp_wanted_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___54_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___21_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___26_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___42_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___71_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___31_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Transform> Private___4_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___9_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___60_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___37_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___20_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___37_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___2_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_this_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___5_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___3_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___12_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___10_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___6_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___2_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___67_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___23_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Vector3> Private___5_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___14_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___9_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___44_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___29_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___72_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___19_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___0_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___34_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Vector3> Private___4_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___9_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___21_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_cachedIsDead { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_isGuard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___12_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___38_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.GameObject> Private___0_this_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___3_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.GameObject> Private___0_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___8_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___6_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___33_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___58_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___15_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___36_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private_cachedPlayerName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___11_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___19_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___12_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___22_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___32_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___0_tagHeight_Single { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___35_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___8_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___37_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___50_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___0_mp_hp_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___55_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___22_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___24_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___9_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___13_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___0_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___0_intnl_returnTarget_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___48_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___59_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___45_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___65_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___0_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___33_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___57_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___26_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.GameObject> Private___3_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___49_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___0_const_intnl_SystemUInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private_scorecard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private_cachedHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___9_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___19_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___36_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___63_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___36_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___0_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___27_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___40_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Camera> Private_spectateCamera { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___18_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private_lastDamageTime { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_killedByLocal { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___66_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___0_mp_damage_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_isPlaying { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Vector3> Private___3_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___47_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___34_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Transform> Private___4_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___10_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___19_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___17_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___30_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___39_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___28_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___6_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___4_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___12_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___24_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___69_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___57_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___38_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___14_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_cachedIsPlaying { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___24_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_cachedHasKeycard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___47_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___3_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___31_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___55_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___25_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___29_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___11_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___8_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___20_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Vector3> Private___2_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___39_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___0_mp_enabled_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___25_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___32_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___61_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___29_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Vector3> Private___1_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___53_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___27_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___0_mp_dead_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___51_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___2_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___3_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___33_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___27_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Vector3> Private___0_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___10_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___32_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___30_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___56_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___41_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___45_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___1_const_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___22_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___62_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___11_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___16_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private_healthRegenAmt { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___32_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___43_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___15_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___18_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___0_mp_t_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___2_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___10_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___1_mp_damage_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___14_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___23_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_joinedRound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___3_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___7_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private_tagHeightMin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget> Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___59_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_isDead { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___18_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___46_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___30_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private_gameManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___13_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___0_mp_guard_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.Vector3> Private_deathLoc { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___30_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___54_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___13_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.GameObject> Private___2_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___10_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___2_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___31_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___27_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___36_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___58_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___44_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private_playerName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___51_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___0_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___1_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___25_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___48_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___22_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<float> Private___8_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<string> Private___0_mp_newName_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___70_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private_teamTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___17_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___49_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<uint> Private___53_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private_hasKeycard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___23_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___4_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<int> Private___28_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.UI.Slider> Private___3_intnl_UnityEngineUISlider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.UI.Slider> Private___32_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.SDKBase.VRCPlayerApi> Private___1_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___6_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<UnityEngine.GameObject> Private___4_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_ItemControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_GameJoinTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___24_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___13_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_ScoreboardDisplay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___25_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___17_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___18_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___14_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___7_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<bool> Private___8_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___15_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.SDKBase.VRCPlayerApi> Private___4_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___16_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_AFKDetector { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonVariable<VRC.Udon.UdonBehaviour> Private___31_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        #endregion UdonVariables  of PlayerData
+
     }
 }

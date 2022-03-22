@@ -102,6 +102,7 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_GameManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
@@ -453,6 +454,9 @@
     <Compile Include="Tools\Skybox\CubemapTools\CubeMapAndTexture2D.cs" />
     <Compile Include="Tools\UdonEditor\Disassembler.cs" />
     <Compile Include="Tools\UdonEditor\UdonDisassembler.cs" />
+    <Compile Include="Tools\UdonEditor\UdonHeapEditor.cs" />
+    <Compile Include="Tools\UdonEditor\UdonHeapParser.cs" />
+    <Compile Include="Tools\UdonEditor\UdonVariable.cs" />
     <Compile Include="Tools\UdonEditor\UdonVariableGenerator.cs" />
     <Compile Include="WorldModifications\WorldHacks\BeyondDarkness.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
@@ -481,8 +485,6 @@
     <Compile Include="Tools\UdonSearcher\UdonReplacer.cs" />
     <Compile Include="Tools\UdonEditor\Il2CppConverter.cs" />
     <Compile Include="Tools\UdonEditor\UdonHeapUnboxerUtils.cs" />
-    <Compile Include="Tools\UdonEditor\UdonHeapParser.cs" />
-    <Compile Include="Tools\UdonEditor\UdonHeapEditor.cs" />
     <Compile Include="Tools\UdonEditor\UdonParser.cs" />
     <Compile Include="Tools\UdonEditor\UdonTypes_String.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnpacker_Utils_ext.cs" />

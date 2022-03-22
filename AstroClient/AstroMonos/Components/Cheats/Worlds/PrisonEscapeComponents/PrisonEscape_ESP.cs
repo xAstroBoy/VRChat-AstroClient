@@ -135,7 +135,7 @@
                 WantedTag.ShowTag = false;
                 WantedTag.BackGroundColor = Color.red;
             }
-            InvokeRepeating(nameof(ScrambleCheck), 1f, 3.5f);
+           // InvokeRepeating(nameof(ScrambleCheck), 1f, 3.5f);
             InvokeRepeating(nameof(UpdatePlayerDataReaders), 0f, 0.3f);
             InvokeRepeating(nameof(HealthTagUpdate), 0.1f, 0.1f);
             InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
@@ -147,6 +147,11 @@
         }
 
         private bool HasAppliedListenerOnHitbox = false;
+        private bool HasRoleBeenUpdatedfromCollider = false;
+
+
+
+
         internal void OnHitboxActive()
         {
             if (!isActiveAndEnabled) return;
@@ -158,7 +163,7 @@
                     var listener = RemoteUserData.hitbox.GetOrAddComponent<GameObjectListener>();
                     if (listener != null)
                     {
-                        listener.OnEnabled += OnHitboxEnable;
+                        //listener.OnEnabled += OnHitboxEnable;
                         listener.OnDisabled += OnHitboxDisable;
                         HasAppliedListenerOnHitbox = true;
                     }
@@ -166,24 +171,57 @@
             }
         }
 
-        private PrisonEscape.PrisonEscape_Roles CurrentDetectedRole = PrisonEscape.PrisonEscape_Roles.None;
-
-
-        private void OnHitboxEnable()
+        internal void UpdateRoleFromCollider(PrisonEscape.PrisonEscape_Roles role)
         {
-            MiscUtils.DelayFunction(0.3f, () => { 
-            CurrentDetectedRole = PrisonEscape.GetRoleFromPos(RemoteUserData.HitBoxReader.__0_pos_Vector3.GetValueOrDefault(Vector3.zero));
-            ModConsole.DebugLog($"Hitbox Assigned Role on Player {Player.DisplayName()} is {CurrentDetectedRole.ToString()}");
+            if (!HasRoleBeenUpdatedfromCollider)
+            {
+                SetRole(role);
 
-            });
+                ModConsole.DebugLog($"Collider Assigned Role on Player {Player.DisplayName()} is {CurrentDetectedRole.ToString()}");
+                HasRoleBeenUpdatedfromCollider = true;
+            }
+
         }
+
+        private PrisonEscape.PrisonEscape_Roles CurrentDetectedRole = PrisonEscape.PrisonEscape_Roles.None;
+        
+
+        //private void OnHitboxEnable()
+        //{
+        //    if (HasRoleBeenUpdatedfromCollider) return;
+        //    MiscUtils.DelayFunction(0.3f, () => { 
+        //    CurrentDetectedRole = PrisonEscape.GetRoleFromPos(RemoteUserData.HitBoxReader.__0_pos_Vector3.GetValueOrDefault(Vector3.zero));
+        //    ModConsole.DebugLog($"Hitbox Assigned Role on Player {Player.DisplayName()} is {CurrentDetectedRole.ToString()}");
+
+        //    });
+        //}
 
         private void OnHitboxDisable()
         {
             CurrentDetectedRole = PrisonEscape.PrisonEscape_Roles.None;
-
+            HasRoleBeenUpdatedfromCollider = false;
         }
 
+        // TODO : CHANGE UDON SYSTEM FOR THIS
+
+        private void SetRole(PrisonEscape.PrisonEscape_Roles role)
+        {
+            if (RemoteUserData != null)
+            {
+                CurrentDetectedRole = role;
+                switch (role)
+                {
+                    case PrisonEscape.PrisonEscape_Roles.Guard:
+                        RemoteUserData.isGuard = true;
+                        break;
+                    case PrisonEscape.PrisonEscape_Roles.Prisoner:
+                        RemoteUserData.isGuard = false;
+                        break;
+                    default:                        
+                        break;
+                }
+            }
+        }
         internal void OnDestroy()
         {
             if (healthTag != null) Destroy(healthTag);

@@ -1,8 +1,12 @@
 ﻿namespace AstroClient.Tools.UdonEditor
 {
+    using System;
     using System.Collections.Generic;
     using Extensions;
     using VRC.Udon.Common.Interfaces;
+
+
+    [Obsolete("Switch to UdonVariable System Or enchance RawUdonBehaviour as well to support it!")]
 
     internal static class UdonHeapParser
     {

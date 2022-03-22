@@ -166,37 +166,44 @@
 
             ModConsole.DebugLog($"Registered {SpawnPoints_Guards.Count} Guard SpawnPoints!", System.Drawing.Color.Chartreuse);
             ModConsole.DebugLog($"Registered {SpawnPoints_Prisoners.Count} Prisoner SpawnPoints!", System.Drawing.Color.Chartreuse);
-            SpawnTestSphere(SpawnPoints_Guards);
-            SpawnTestSphere(SpawnPoints_Prisoners);
+            SpawnTestSphere(SpawnPoints_Guards, PrisonEscape_Roles.Guard);
+            SpawnTestSphere(SpawnPoints_Prisoners, PrisonEscape_Roles.Prisoner);
 
         }
 
 
-        private static void SpawnTestSphere(List<Vector3> positions)
+        private static void SpawnTestSphere(List<Vector3> positions, PrisonEscape_Roles AssignedRole)
         {
             foreach (var pos in positions)
             {
-                GameObject pearl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                pearl.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
-                pearl.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-                pearl.transform.position = pos;
-                pearl.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-                pearl.GetComponent<Renderer>().material = ClientResources.Loaders.Materials.metal_gold_001;
-                pearl.DisableAllColliders();
-                pearl.IgnoreLocalPlayerCollision();
+                GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                sphere.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
+                sphere.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+                sphere.transform.position = pos;
+                sphere.transform.localScale = new Vector3(4f, 4f, 4f);
+                sphere.GetComponent<Renderer>().DestroyMeLocal();
+                var setup = sphere.GetOrAddComponent<PrisonEscape_CollisionDetector>();
+                MiscUtils.DelayFunction(0.5f, () => {
+                if (setup != null)
+                {
+                    setup.AssignedColliderRole = AssignedRole;
+                }
+
+                });
+                //pearl.IgnoreLocalPlayerCollision();
                 //pearl.GetComponent<Renderer>().material = ClientResources.Loaders.Materials.waffle;
             }
         }
 
 
-        internal override void OnPlayerJoined(Player player)
-        {
-            if (isCurrentWorld)
-            {
-                player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
+        //internal override void OnPlayerJoined(Player player)
+        //{
+        //    if (isCurrentWorld)
+        //    {
+        //        player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
 
-            }
-        }
+        //    }
+        //}
 
         //internal override void OnUpdate()
         //{
@@ -243,64 +250,64 @@
         internal static List<Vector3> SpawnPoints_Prisoners = new List<Vector3>();
 
 
-        internal static PrisonEscape_Roles GetRoleFromPos(Vector3 pos)
-        {
-            if (IsPrisoner(pos))
-            {
-                return PrisonEscape_Roles.Prisoner;
-            }
+        //internal static PrisonEscape_Roles GetRoleFromPos(Vector3 pos)
+        //{
+        //    if (IsPrisoner(pos))
+        //    {
+        //        return PrisonEscape_Roles.Prisoner;
+        //    }
 
-            if (isGuard(pos))
-            {
-                return PrisonEscape_Roles.Guard;
-            }
-            return PrisonEscape_Roles.None;
-        }
+        //    if (isGuard(pos))
+        //    {
+        //        return PrisonEscape_Roles.Guard;
+        //    }
+        //    return PrisonEscape_Roles.None;
+        //}
 
 
-        internal static bool IsPrisoner(Vector3 position)
-        {
-            if (SpawnPoints_Prisoners != null)
-            {
-                if (SpawnPoints_Prisoners.Count != 0)
-                {
-                    foreach (var pos in SpawnPoints_Prisoners)
-                    {
-                        var dist = Vector3.Distance(pos, position);
-                        //ModConsole.DebugLog($"Calculated Distance is {dist}");
-                        if (dist.CheckRange(1, 30f))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
+        //internal static bool IsPrisoner(Vector3 position)
+        //{
+        //    if (SpawnPoints_Prisoners != null)
+        //    {
+        //        if (SpawnPoints_Prisoners.Count != 0)
+        //        {
+        //            foreach (var pos in SpawnPoints_Prisoners)
+        //            {
+        //                var dist = Vector3.Distance(pos, position);
+        //                //ModConsole.DebugLog($"Calculated Distance is {dist}");
+        //                if (dist.CheckRange(1, 30f))
+        //                {
+        //                    return true;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
-        internal static bool isGuard(Vector3 position)
-        {
-            if (SpawnPoints_Guards != null)
-            {
-                if (SpawnPoints_Guards.Count != 0)
-                {
-                    foreach (var pos in SpawnPoints_Guards)
-                    {
-                        var dist = Vector3.Distance(pos, position);
-                       // ModConsole.DebugLog($"Calculated Distance is {dist}");
-                        if (dist.CheckRange(1, 30f))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
+        //internal static bool isGuard(Vector3 position)
+        //{
+        //    if (SpawnPoints_Guards != null)
+        //    {
+        //        if (SpawnPoints_Guards.Count != 0)
+        //        {
+        //            foreach (var pos in SpawnPoints_Guards)
+        //            {
+        //                var dist = Vector3.Distance(pos, position);
+        //               // ModConsole.DebugLog($"Calculated Distance is {dist}");
+        //                if (dist.CheckRange(1, 30f))
+        //                {
+        //                    return true;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            return false;
+        //    return false;
 
-            return false;
-        }
+        //    return false;
+        //}
 
         private static List<PrisonEscape_PoolDataReader> CurrentReaders { get; set; } = new();
 
