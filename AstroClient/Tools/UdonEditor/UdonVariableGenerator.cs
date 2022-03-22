@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.UdonEditor
+﻿using AstroClient.xAstroBoy.Extensions;
+
+namespace AstroClient.Tools.UdonEditor
 {
     using System;
     using System.Collections.Generic;
@@ -45,6 +47,9 @@
                         var UnboxVariable = behaviour.IUdonHeap.GetHeapVariable(address);
                         if (UnboxVariable != null)
                         {
+                            if (UnboxVariable.GetIl2CppType().FullName == UdonTypes_String.System_RuntimeType) continue;
+                            if (UnboxVariable.GetIl2CppType().GetIl2CppType().FullName == UdonTypes_String.System_RuntimeType_Array) continue;
+
                             builder.AppendLine(GetterBuilder(CurrentBehaviourTemplateName, symbol, UnboxVariable));
                         }
                     }
@@ -105,7 +110,12 @@
                 case UdonTypes_String.UnityEngine_Quaternion: return "UnityEngine.Quaternion?";
                 case UdonTypes_String.UnityEngine_Color: return "UnityEngine.Color?";
                 case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget: return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
-                default: return name;
+                default:
+                    if (name.Contains("+"))
+                    {
+                        return name.Replace("+", ".") + "?".RemoveWhitespace(); //More likely a enum, so let's add ? as well to make it nullable.
+                    }
+                    return name;
             }
 
         }
@@ -128,7 +138,12 @@
                 case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget:
                     return true;
 
-                default: return false;
+                default:
+                    if(name.Contains("+"))
+                    {
+                        return true;
+                    }
+                    return false;
             }
 
         }

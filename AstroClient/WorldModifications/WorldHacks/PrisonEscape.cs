@@ -196,14 +196,14 @@
         }
 
 
-        //internal override void OnPlayerJoined(Player player)
-        //{
-        //    if (isCurrentWorld)
-        //    {
-        //        player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
+        internal override void OnPlayerJoined(Player player)
+        {
+            if (isCurrentWorld)
+            {
+                player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
 
-        //    }
-        //}
+            }
+        }
 
         //internal override void OnUpdate()
         //{

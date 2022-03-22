@@ -371,6 +371,12 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddButton("Click Gate Button", () => { PrisonEscape.GateInteraction.InvokeBehaviour(); });
                 CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
                 CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.LargeCrateESP, ToggleValue => { PrisonEscape.LargeCrateESP = ToggleValue; });
+                var localreader = PrisonEscape.GetLocalReader();
+                if (localreader != null)
+                {
+                    CustomSubMenu.AddToggle("Semi-GodMode", localreader.SemiGodMode, ToggleValue => { localreader.SemiGodMode = ToggleValue; });
+
+                }
                 CustomSubMenu.AddSubMenu("Patreon System Control", () =>
                 {
                     CustomSubMenu.AddToggle("Patron Mode", PrisonEscape.isPatron.GetValueOrDefault(false), ToggleValue => { PrisonEscape.isPatron = ToggleValue; });

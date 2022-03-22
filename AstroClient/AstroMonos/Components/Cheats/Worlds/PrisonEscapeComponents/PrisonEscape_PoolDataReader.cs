@@ -281,6 +281,42 @@
             }
         }
 
+        private bool _isSemiGodMode { get; set; }
+
+        private bool BackupRegenStuff { get; set; }
+
+        private int OriginalRegenAmt { get; set; }
+        private float OriginalRegenDelay { get; set; }
+
+        internal bool SemiGodMode
+        {
+            get
+            {
+                return _isSemiGodMode;
+            }
+            set
+            {
+                _isSemiGodMode = value;
+                if(value)
+                {
+                    if(!BackupRegenStuff)
+                    {
+                        OriginalRegenAmt = healthRegenAmt.GetValueOrDefault(0);
+                        OriginalRegenDelay = healthRegenDelay.GetValueOrDefault(0f);
+                        BackupRegenStuff = true;
+                    }
+                    healthRegenAmt = 100;
+                    healthRegenDelay = 0;
+                }
+                else
+                {
+                    healthRegenAmt = OriginalRegenAmt;
+                    healthRegenDelay = OriginalRegenDelay;
+
+                }
+            }
+        }
+
         internal bool isLocal
         {
             get

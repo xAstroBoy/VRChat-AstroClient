@@ -1,7 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools.UdonDumper
+﻿using AstroClient.xAstroBoy.Extensions;
+
+namespace AstroClient.AstroMonos.Components.Tools.UdonDumper
 {
-    using System.IO;
-    using System.Text;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
     using ClientAttributes;
@@ -9,8 +9,9 @@
     using Il2CppSystem;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
+    using System.Text;
     using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
@@ -26,31 +27,35 @@
         {
             AntiGarbageCollection.Add(this);
         }
+
         internal override void OnRoomLeft()
         {
             Destroy(this);
         }
-        private static List<string> initializeUdonVarList  {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; } = new List<string>();
-        private static List<string> CleanupSystemUdonVarList  {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; } = new List<string>();
 
-        private static List<string> RegionPrivateVars {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; } = new List<string>();
+        private static List<string> initializeUdonVarList { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new List<string>();
+        private static List<string> CleanupSystemUdonVarList { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new List<string>();
 
-        internal System.Collections.Generic.List<UdonBehaviour_Cached> TargetedUdons { [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; } = new System.Collections.Generic.List<UdonBehaviour_Cached>();
+        private static List<string> RegionPrivateVars { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new List<string>();
+
+        internal System.Collections.Generic.List<UdonBehaviour_Cached> TargetedUdons { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new System.Collections.Generic.List<UdonBehaviour_Cached>();
+
         internal void Start()
         {
             if (WorldUtils.WorldID.Equals(WorldIds.PrisonEscape))
             {
                 foreach (var item in gameObject.transform.Get_UdonBehaviours())
                 {
-
-                    var obj = item.FindUdonEvent("_SetWantedSynced");
-                    if (obj != null)
+                    if (item.gameObject.name == "Player Hitbox")
                     {
-                        if (!TargetedUdons.Contains(obj))
+                        var obj = item.FindUdonEvent("_GetHeight");
+                        if (obj != null)
                         {
-                            ModConsole.DebugLog(
-                                $"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
-                            TargetedUdons.Add(obj);
+                            if (!TargetedUdons.Contains(obj))
+                            {
+                                ModConsole.DebugLog($"Found Behaviour with name {obj.gameObject.name}, having Event _GetHeight");
+                                TargetedUdons.Add(obj);
+                            }
                         }
                     }
                 }
@@ -62,9 +67,9 @@
             }
         }
 
-        internal System.Collections.Generic.List<UdonSymbolsAndTypes> AllSymbolsAndTypes {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; }= new System.Collections.Generic.List<UdonSymbolsAndTypes>();
+        internal System.Collections.Generic.List<UdonSymbolsAndTypes> AllSymbolsAndTypes { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new System.Collections.Generic.List<UdonSymbolsAndTypes>();
 
-         [HideFromIl2Cpp]
+        [HideFromIl2Cpp]
         private bool ContainsSymbol(string Symbol)
         {
             if (AllSymbolsAndTypes.Count != 0)
@@ -80,8 +85,8 @@
 
             return false;
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         internal static string GenerateMethod(List<string> content, string methodname)
         {
             var Result = new StringBuilder();
@@ -126,36 +131,46 @@
                 case UdonTypes_String.UnityEngine_Quaternion: return "UnityEngine.Quaternion?";
                 case UdonTypes_String.UnityEngine_Color: return "UnityEngine.Color?";
                 case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget: return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
-                default: return name;
+                default:
+                    if (name.Contains("+"))
+                    {
+                        return name.Replace("+", ".") + "?".RemoveWhitespace(); //More likely a enum, so let's add ? as well to make it nullable.
+                    }
+                    return name;
             }
 
         }
-
         private static bool DoIAddNullCharBool(string name)
         {
             switch (name)
             {
-                case UdonTypes_String.System_Uint32: 
-                case UdonTypes_String.System_Int32: 
-                case UdonTypes_String.System_Int64: 
-                case UdonTypes_String.System_Char: 
-                case UdonTypes_String.System_Single: 
-                case UdonTypes_String.System_Boolean: 
-                case UdonTypes_String.System_Byte: 
-                case UdonTypes_String.System_UInt16: 
+                case UdonTypes_String.System_Uint32:
+                case UdonTypes_String.System_Int32:
+                case UdonTypes_String.System_Int64:
+                case UdonTypes_String.System_Char:
+                case UdonTypes_String.System_Single:
+                case UdonTypes_String.System_Boolean:
+                case UdonTypes_String.System_Byte:
+                case UdonTypes_String.System_UInt16:
                 case UdonTypes_String.System_Double:
-                case UdonTypes_String.UnityEngine_Vector3: 
+                case UdonTypes_String.UnityEngine_Vector3:
                 case UdonTypes_String.UnityEngine_Quaternion:
                 case UdonTypes_String.UnityEngine_Color:
                 case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget:
                     return true;
 
-                default: return false;
+                default:
+                    if (name.Contains("+"))
+                    {
+                        return true;
+                    }
+                    return false;
             }
-
         }
 
-        internal static string GetterBuilder(string templatename, string Symbol, Il2CppSystem.Object obj)
+
+
+            internal static string GetterBuilder(string templatename, string Symbol, Il2CppSystem.Object obj)
         {
             var getter = new StringBuilder();
             var ActualType = obj.GetIl2CppType().FullName;
@@ -177,49 +192,46 @@
                 initializeUdonVarList.Add(InitializationInstance);
             }
 
-
             var CleanupVariableInstance = $"{PrivateVar} = null;";
             if (!CleanupSystemUdonVarList.Contains(CleanupVariableInstance))
             {
                 CleanupSystemUdonVarList.Add(CleanupVariableInstance);
             }
 
-
-            #endregion
-
+            #endregion Methods Filler (Creates Initiator, Variable and Cleanup content)
 
             // Then Generate the getter/setter to make life easier
-                             getter.AppendLine("                                                                                                                                                                              ");
-                             getter.AppendLine($"        internal {CorrectedType} {Symbol}                                                                                                                                    ");
-                             getter.AppendLine("        {                                                                                                                                                                     ");
-                             getter.AppendLine("            [HideFromIl2Cpp]                                                                                                                                                  ");
-                             getter.AppendLine("            get                                                                                                                                                               ");
-                             getter.AppendLine("            {                                                                                                                                                                 ");
-                             getter.AppendLine($"                if ({PrivateVar} != null)                                                                                                                                    ");
-                             getter.AppendLine("                {                                                                                                                                                             ");
-                             getter.AppendLine($"                    return {PrivateVar}.Value;                                                                                                                               ");
-                             getter.AppendLine("                }                                                                                                                                                             ");
-                             getter.AppendLine("                                                                                                                                                                              ");
-                             getter.AppendLine("                return null;                                                                                                                                                  ");
-                             getter.AppendLine("            }                                                                                                                                                                 ");
-                             getter.AppendLine("            [HideFromIl2Cpp]                                                                                                                                                  ");
-                             getter.AppendLine("            set                                                                                                                                                               ");
-                             getter.AppendLine("            {                                                                                                                                                                 ");
-if(DoIAddNullChar)           getter.AppendLine("                if (value.HasValue)                                                                                                                                           ");
-if(DoIAddNullChar)           getter.AppendLine("                {                                                                                                                                                             ");
-                             getter.AppendLine($"                    if ({PrivateVar} != null)                                                                                                                                ");
-                             getter.AppendLine("                    {                                                                                                                                                         ");
-if(DoIAddNullChar)           getter.AppendLine($"                        {PrivateVar}.Value = value.Value;                                                                                                                    ");
-else                         getter.AppendLine($"                        {PrivateVar}.Value = value;                                                                                                                    ");
-                             getter.AppendLine("                    }                                                                                                                                                         ");
-if(DoIAddNullChar)           getter.AppendLine("                }                                                                                                                                                             ");
-                             getter.AppendLine("            }                                                                                                                                                                 ");
-                             getter.AppendLine("        }                                                                                                                                                                     ");
-                             getter.AppendLine("                                                                                                                                                                              ");
-
+            getter.AppendLine("                                                                                                                                                                              ");
+            getter.AppendLine($"        internal {CorrectedType} {Symbol}                                                                                                                                    ");
+            getter.AppendLine("        {                                                                                                                                                                     ");
+            getter.AppendLine("            [HideFromIl2Cpp]                                                                                                                                                  ");
+            getter.AppendLine("            get                                                                                                                                                               ");
+            getter.AppendLine("            {                                                                                                                                                                 ");
+            getter.AppendLine($"                if ({PrivateVar} != null)                                                                                                                                    ");
+            getter.AppendLine("                {                                                                                                                                                             ");
+            getter.AppendLine($"                    return {PrivateVar}.Value;                                                                                                                               ");
+            getter.AppendLine("                }                                                                                                                                                             ");
+            getter.AppendLine("                                                                                                                                                                              ");
+            getter.AppendLine("                return null;                                                                                                                                                  ");
+            getter.AppendLine("            }                                                                                                                                                                 ");
+            getter.AppendLine("            [HideFromIl2Cpp]                                                                                                                                                  ");
+            getter.AppendLine("            set                                                                                                                                                               ");
+            getter.AppendLine("            {                                                                                                                                                                 ");
+            if (DoIAddNullChar) getter.AppendLine("                if (value.HasValue)                                                                                                                                           ");
+            if (DoIAddNullChar) getter.AppendLine("                {                                                                                                                                                             ");
+            getter.AppendLine($"                    if ({PrivateVar} != null)                                                                                                                                ");
+            getter.AppendLine("                    {                                                                                                                                                         ");
+            if (DoIAddNullChar) getter.AppendLine($"                        {PrivateVar}.Value = value.Value;                                                                                                                    ");
+            else getter.AppendLine($"                        {PrivateVar}.Value = value;                                                                                                                    ");
+            getter.AppendLine("                    }                                                                                                                                                         ");
+            if (DoIAddNullChar) getter.AppendLine("                }                                                                                                                                                             ");
+            getter.AppendLine("            }                                                                                                                                                                 ");
+            getter.AppendLine("        }                                                                                                                                                                     ");
+            getter.AppendLine("                                                                                                                                                                              ");
 
             return getter.ToString();
         }
+
         [HideFromIl2Cpp]
         internal void GenerateFile()
         {
@@ -251,8 +263,6 @@ if(DoIAddNullChar)           getter.AppendLine("                }               
 
             var builder = new StringBuilder();
 
-
-
             string GeneratedBehaviour = "RenameMePlease";
             builder.AppendLine("        // TODO: Bind UdonBehaviour with this section");
             builder.AppendLine("        // TODO: I HIGHLY RECCOMEND TO RENAME THIS VARIABLE BEFORE PASTING!");
@@ -264,10 +274,12 @@ if(DoIAddNullChar)           getter.AppendLine("                }               
             {
                 if (item != null)
                 {
+                    if(item.Type.GetIl2CppType().FullName == UdonTypes_String.System_RuntimeType) continue;
+                    if (item.Type.GetIl2CppType().FullName == UdonTypes_String.System_RuntimeType_Array) continue;
+
                     builder.AppendLine(GetterBuilder(GeneratedBehaviour, item.Symbol, item.Type));
                 }
             }
-
 
             builder.AppendLine($"     #endregion Getter / Setters UdonVariables  of {GeneratedBehaviour}                                                                                                                                        ");
 
@@ -287,8 +299,8 @@ if(DoIAddNullChar)           getter.AppendLine("                }               
             File.WriteAllText(path, builder.ToString());
             ModConsole.DebugLog("Generated Reader File!");
             Process.Start(path);
-
         }
+
         // Use this for initialization
     }
 }
