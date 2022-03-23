@@ -168,10 +168,10 @@ namespace AstroClient.AstroMonos.AstroUdons
             Private_Get_OnDrop = null;
         }
 
-        internal AstroUdonVariable<bool> Private_Get_OnPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        internal AstroUdonVariable<bool> Private_Get_OnPickupUseUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        internal AstroUdonVariable<bool> Private_Get_OnPickupUseDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        internal AstroUdonVariable<bool> Private_Get_OnDrop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_Get_OnPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_Get_OnPickupUseUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_Get_OnPickupUseDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_Get_OnDrop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         private bool Get_OnPickup
         {

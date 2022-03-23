@@ -75,7 +75,7 @@ namespace AstroClient.AstroMonos.AstroUdons
             }
         }
 
-        internal AstroUdonVariable<bool> Private_Get_OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_Get_OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         internal void Initialize_InteractVars()
         {
