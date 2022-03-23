@@ -64,21 +64,36 @@ internal static class PhotonExts
 
     internal static void DumpKeys(this EventData data)
     {
-        for (byte i = 0; i < byte.MaxValue; i++)
+        try
         {
-            if (data.Parameters.ContainsKey(i))
+            if (data != null)
             {
-                ModConsole.DebugLog($"Parameter Contains key {i}, with Type {data.Parameters[i].GetIl2CppType().FullName}");
+                if (data.Parameters != null)
+                {
+                    ModConsole.DebugLog($"Current Event Code : {data.Code}");
+                    for (byte i = 0; i < byte.MaxValue; i++)
+                    {
+                        if (data.Parameters.ContainsKey(i))
+                        {
+                            ModConsole.DebugLog($"Parameter Contains key {i}, with Type {data.Parameters[i].GetIl2CppType().FullName}");
+                        }
+                    }
+                }
+                else if (data.Parameters.paramDict != null)
+                {
+                    ModConsole.DebugLog($"Current Event Code : {data.Code}");
+                    for (byte i = 0; i < byte.MaxValue; i++)
+                    {
+                        if (data.Parameters.paramDict.ContainsKey(i))
+                        {
+                            ModConsole.DebugLog($"paramDict Contains key {i}, with Type {data.Parameters.paramDict[i].GetIl2CppType().FullName}");
+                        }
+                    }
+                }
+
             }
         }
-
-        for (byte i = 0; i < byte.MaxValue; i++)
-        {
-            if (data.Parameters.paramDict.ContainsKey(i))
-            {
-                ModConsole.DebugLog($"paramDict Contains key {i}, with Type {data.Parameters.paramDict[i].GetIl2CppType().FullName}");
-            }
-        }
-
+        catch{} // SHUT THE FUCK UP
+        
     }
 }

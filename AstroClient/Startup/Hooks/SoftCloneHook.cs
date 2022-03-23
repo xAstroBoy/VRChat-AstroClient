@@ -157,10 +157,12 @@
         private static void SoftCloneOnEvent(ref EventData __0)
         {
             if (__0 == null) return;
+            //__0.DumpKeys();
             if (GameInstances.LocalPlayer == null) return;
-            if (__0.Code == VRChat_Photon_Events.Custom_Properties)
+            if (__0.Code == 42)
+
             {
-                var casted = __0.Parameters[251].Cast<Il2CppSystem.Collections.Hashtable>();
+                var casted = __0.Parameters[245].Cast<Il2CppSystem.Collections.Hashtable>();
                 
                 if (casted.IsLocalUser())
                 {
