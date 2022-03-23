@@ -5,7 +5,7 @@
     using VRC.Udon.Common.Interfaces;
 
 
-    [Obsolete("Switch to UdonVariable System Or enchance RawUdonBehaviour as well to support it!")]
+    [Obsolete("Switch to AstroUdonVariable System Or enchance RawUdonBehaviour as well to support it!")]
     internal static class UdonHeapEditor
     {
         internal static void PatchHeap(RawUdonBehaviour UnpackedUdonBehaviour, string symbol, bool value, bool verify = false)

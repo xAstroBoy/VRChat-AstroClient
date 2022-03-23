@@ -124,7 +124,6 @@
     <Compile Include="AstroMonos\Components\Tools\Command_SetToTweaker.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
-    <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonDumper.cs" />
     <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientAttributes\RegisterType.cs" />

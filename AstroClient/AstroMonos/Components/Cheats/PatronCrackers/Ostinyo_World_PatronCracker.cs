@@ -28,28 +28,23 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
     internal void Initiate_UdonVariablePatron()
     {
         Private_isPatron = new AstroUdonVariable<bool>(PatronControl, isPatron_address);
-        Private_HiddenPatrons = new AstroUdonVariable<string[]>(PatronControl, HiddenTier_Address);
-        Private_HiddenPatrons_2 = new AstroUdonVariable<string[]>(PatronControl, HiddenTier_Address_2);
+        Private___0_hiddenList_StringArray = new AstroUdonVariable<string[]>(PatronControl, "__0_hiddenList_StringArray");
+        Private___4_intnl_SystemStringArray = new AstroUdonVariable<string[]>(PatronControl, "__4_intnl_SystemStringArray");
 
     }
 
     internal void Clean_UdonVariablePatron()
     {
         Private_isPatron = null;
-        Private_HiddenPatrons = null;
-        Private_HiddenPatrons_2 = null;
-
+        Private___0_hiddenList_StringArray = null;
+        Private___4_intnl_SystemStringArray = null;
     }
-
-    private string HiddenTier_Address { [HideFromIl2Cpp] get; } = "__0_hiddenList_StringArray";
-    private string HiddenTier_Address_2 { [HideFromIl2Cpp] get; } = "__0_hiddenList_StringArray";
 
     private string isPatron_address { [HideFromIl2Cpp] get; } = "isPatron";
 
     internal AstroUdonVariable<bool> Private_isPatron {  [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-    internal AstroUdonVariable<string[]> Private_HiddenPatrons {  [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    internal AstroUdonVariable<string[]> Private_HiddenPatrons_2 {  [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }  = null;
+    private AstroUdonVariable<string[]> Private___0_hiddenList_StringArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string[]> Private___4_intnl_SystemStringArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
     private static RawUdonBehaviour PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     private static UdonBehaviour_Cached RefreshPatronList { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -71,33 +66,48 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
         }
     }
 
-    internal System.Collections.Generic.List<string> HiddenPatrons
+    internal string[] __0_hiddenList_StringArray
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private_HiddenPatrons != null) return Private_HiddenPatrons.Value.ToList();
+            if (Private___0_hiddenList_StringArray != null)
+            {
+                return Private___0_hiddenList_StringArray.Value;
+            }
+
             return null;
         }
+        [HideFromIl2Cpp]
         set
         {
-            if (Private_HiddenPatrons != null) Private_HiddenPatrons.Value = value.ToArray();
-
+            if (Private___0_hiddenList_StringArray != null)
+            {
+                Private___0_hiddenList_StringArray.Value = value;
+            }
         }
-
     }
 
-    internal System.Collections.Generic.List<string> HiddenPatrons_2
+
+    internal string[] __4_intnl_SystemStringArray
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private_HiddenPatrons_2 != null) return Private_HiddenPatrons_2.Value?.ToList();
+            if (Private___4_intnl_SystemStringArray != null)
+            {
+                return Private___4_intnl_SystemStringArray.Value;
+            }
+
             return null;
         }
+        [HideFromIl2Cpp]
         set
         {
-            if (Private_HiddenPatrons_2 != null) Private_HiddenPatrons_2.Value = value.ToArray();
+            if (Private___4_intnl_SystemStringArray != null)
+            {
+                Private___4_intnl_SystemStringArray.Value = value;
+            }
         }
     }
 
@@ -112,42 +122,63 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
         Clean_UdonVariablePatron();
     }
 
-    internal void SetPatronList(AstroUdonVariable<string[]> patronlist, bool isPatron)
+    internal string[] SetPatronList(string[] patronlist, bool isPatron)
     {
         if (patronlist != null)
         {
-            if (patronlist.Value != null)
+            if (patronlist != null)
             {
-                var list = patronlist.Value.ToList();
-                if (list.Count != 0)
+                var result = patronlist.ToList();
+                if (result.Count != 0)
                 {
                     var name = PlayerSpooferUtils.Original_DisplayName;
-                    if (!list.Contains(name))
+                    if (!result.Contains(name))
                     {
                         if(isPatron)
                         {
-                            list.Add(name);
+                            result.Add(name);
                         }
                     }
                     else
                     {
                         if (!isPatron)
                         {
-                            list.Remove(name);
+                            result.Remove(name);
                         }
                     }
                 }
-
-                patronlist.Value = list.ToArray();
+                return result.ToArray();
             }
         }
+        return null;
     }
 
     [HideFromIl2Cpp]
     internal void SetAsPatron(bool isPatron)
     {
-        SetPatronList(Private_HiddenPatrons, isPatron);
-        SetPatronList(Private_HiddenPatrons_2, isPatron);
+        try
+        {
+            var modified = SetPatronList(__0_hiddenList_StringArray, isPatron);
+            if(modified != null)
+            {
+                __0_hiddenList_StringArray = modified;
+            }
+
+        }
+        catch {}
+        try
+        {
+            var modified = SetPatronList(__4_intnl_SystemStringArray, isPatron);
+            if (modified != null)
+            {
+                __4_intnl_SystemStringArray = modified;
+            }
+
+        }
+        catch{}
+
+
+
         this.isPatron = isPatron;
         RefreshPatronList?.InvokeBehaviour();
     }
@@ -160,7 +191,7 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
             RefreshPatronList = gameObject.FindUdonEvent("_UpdatePatronList");
             if (RefreshPatronList != null)
             {
-                PatronControl = RefreshPatronList.UdonBehaviour.ToRawUdonBehaviour();
+                PatronControl = RefreshPatronList.RawItem;
                 Initiate_UdonVariablePatron();
                 ModConsole.DebugLog("Added Patron Cracker to This Patron System Successfully!");
             }

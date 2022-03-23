@@ -37,7 +37,6 @@
             CurrentMenu = new QMNestedGridMenu(main, "Prison Escape Cheats", "Prison Escape Cheats");
         }
 
-
         internal static void FindEverything()
         {
 
