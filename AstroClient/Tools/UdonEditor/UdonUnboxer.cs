@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.Tools.UdonEditor
 {
     using System;
-    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -10,7 +9,6 @@
 
     internal static class UdonUnboxer
     {
-
         internal static void UnboxUdonToConsole(UdonBehaviour udonnode)
         {
             if (udonnode != null)
@@ -56,7 +54,6 @@
                     builder.AppendLine(value);
                 }
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, @"AstroClient\Dumper\Unsupported_UdonTypes.txt"), builder.ToString());
-
             }
         }
 
@@ -89,10 +86,9 @@
             return null;
         }
 
-        internal  static  void GenerateGettersReaders(UdonBehaviour node)
+        internal static void GenerateGettersReaders(UdonBehaviour node)
         {
             UdonVariableGenerator.HeapGetterGenerator(node.ToRawUdonBehaviour());
         }
-
     }
 }

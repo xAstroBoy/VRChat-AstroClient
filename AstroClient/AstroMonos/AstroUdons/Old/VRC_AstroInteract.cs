@@ -1,5 +1,3 @@
-using AstroClient.Tools.UdonEditor;
-
 namespace AstroClient.AstroMonos.AstroUdons
 {
     using System;
@@ -40,7 +38,6 @@ namespace AstroClient.AstroMonos.AstroUdons
             }
 
             DoChecks();
-            Initialize_InteractVars();
         }
 
         private void DoChecks()
@@ -61,12 +58,20 @@ namespace AstroClient.AstroMonos.AstroUdons
                     UdonBehaviour.InitializeUdonContent();
                     UdonBehaviour.Start();
                 }
+
+                if (UdonBehaviour != null && UdonBehaviour._udonVM != null)
+                {
+                    if (IUdonHeap == null)
+                    {
+                        IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
+                    }
+                }
             }
         }
 
         internal void FixedUpdate()
         {
-            if (RawItem != null)
+            if (IUdonHeap != null)
             {
                 if (Get_OnInteract)
                 {
@@ -75,44 +80,27 @@ namespace AstroClient.AstroMonos.AstroUdons
             }
         }
 
-        internal AstroUdonVariable<bool> Private_Get_OnInteract { get; set; } = null;
-
-        internal void Initialize_InteractVars()
-        {
-            Private_Get_OnInteract = new AstroUdonVariable<bool>(RawItem, 2u);
-
-        }
-
-        internal void Destroy_InteractVars()
-        {
-            Private_Get_OnInteract = null;
-        }
-
-
         private bool Get_OnInteract
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private_Get_OnInteract != null)
+                var result = IUdonHeap.GetHeapVariable(2u).Unbox<bool>();
+                if (result)
                 {
-                    var result = Private_Get_OnInteract.Value;
-                    if (result)
-                    {
-                        Private_Get_OnInteract.Value = false;
-                    }
-                    return result;
+                    IUdonHeap.CopyHeapVariable(3u, 2u);
                 }
-                return false;
+
+                return result;
             }
         }
+
         internal void OnDestroy()
         {
             if (UdonBehaviour != null)
             {
                 Destroy(UdonBehaviour);
             }
-            Destroy_InteractVars();
         }
 
         private void OnDisable()
@@ -170,6 +158,6 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         internal Action OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private RawUdonBehaviour RawItem { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private IUdonHeap IUdonHeap { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

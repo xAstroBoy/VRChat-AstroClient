@@ -1,6 +1,3 @@
-using AstroClient.Tools.UdonEditor;
-using VRC.Udon.Common;
-
 namespace AstroClient.AstroMonos.AstroUdons
 {
     using System;
@@ -44,19 +41,9 @@ namespace AstroClient.AstroMonos.AstroUdons
                 UdonBehaviour.enabled = true;
             }
             DoChecks();
-            RawItem = UdonBehaviour.ToRawUdonBehaviour();
-            Initialize_PickupVars();
-            if (PickupController != null)
-            {
-                if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
-                {
-                    OriginalMode = PickupController.AutoHold;
-                    PickupController.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
-                }
-            }
-
             UseText = _UseText;
         }
+
         private void DoChecks()
         {
             if (UdonBehaviour == null)
@@ -76,6 +63,13 @@ namespace AstroClient.AstroMonos.AstroUdons
                 }
             }
 
+            if (UdonBehaviour != null && UdonBehaviour._udonVM != null)
+            {
+                if (IUdonHeap == null)
+                {
+                    IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
+                }
+            }
             if (PickupController != null)
             {
                 if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
@@ -86,10 +80,9 @@ namespace AstroClient.AstroMonos.AstroUdons
             }
         }
 
-
         private void FixedUpdate()
         {
-            if (RawItem != null)
+            if (IUdonHeap != null)
             {
                 if (Get_OnPickup)
                 {
@@ -120,7 +113,6 @@ namespace AstroClient.AstroMonos.AstroUdons
             {
                 PickupController.AutoHold = OriginalMode;
             }
-            Destroy_PickupVars();
         }
 
         private void OnDisable()
@@ -141,53 +133,26 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         // needed since the program is currently programmed to set the bools only to true.
         // This will edit and set the values to false hence how the Custom trigger works, by listening to these booleans.
-        //private void SetBackToFalse(uint one)
-        //{
-        //    if (IUdonHeap == null)
-        //    {
-        //        IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
-        //    }
-        //    IUdonHeap.CopyHeapVariable(8u, one);
-        //}
-
-
-        internal void Initialize_PickupVars()
+        private void SetBackToFalse(uint one)
         {
-            Private_Get_OnPickup = new AstroUdonVariable<bool>(RawItem, Addresses.OnPickup);
-            Private_Get_OnPickupUseUp = new AstroUdonVariable<bool>(RawItem, Addresses.OnPickupUseUp);
-            Private_Get_OnPickupUseDown = new AstroUdonVariable<bool>(RawItem, Addresses.OnPickupUseDown);
-            Private_Get_OnDrop = new AstroUdonVariable<bool>(RawItem, Addresses.OnDrop);
-
+            if (IUdonHeap == null)
+            {
+                IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
+            }
+            IUdonHeap.CopyHeapVariable(8u, one);
         }
-
-        internal void Destroy_PickupVars()
-        {
-            Private_Get_OnPickup = null;
-            Private_Get_OnPickupUseUp = null;
-            Private_Get_OnPickupUseDown = null;
-            Private_Get_OnDrop = null;
-        }
-
-        internal AstroUdonVariable<bool> Private_Get_OnPickup { get; set; } = null;
-        internal AstroUdonVariable<bool> Private_Get_OnPickupUseUp { get; set; } = null;
-        internal AstroUdonVariable<bool> Private_Get_OnPickupUseDown { get; set; } = null;
-        internal AstroUdonVariable<bool> Private_Get_OnDrop { get; set; } = null;
 
         private bool Get_OnPickup
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private_Get_OnPickup != null)
+                var result = IUdonHeap.GetHeapVariable(Addresses.OnPickup).Unbox<bool>();
+                if (result)
                 {
-                    var result = Private_Get_OnPickup.Value;
-                    if(result)
-                    {
-                        Private_Get_OnPickup.Value = false;
-                    }
-                    return result;
+                    SetBackToFalse(Addresses.OnPickup);
                 }
-                return false;
+                return result;
             }
         }
 
@@ -196,35 +161,26 @@ namespace AstroClient.AstroMonos.AstroUdons
             [HideFromIl2Cpp]
             get
             {
-                if (Private_Get_OnPickupUseUp != null)
+                var result = IUdonHeap.GetHeapVariable(Addresses.OnPickupUseUp).Unbox<bool>();
+                if (result)
                 {
-                    var result = Private_Get_OnPickupUseUp.Value;
-                    if (result)
-                    {
-                        Private_Get_OnPickupUseUp.Value = false;
-                    }
-                    return result;
+                    SetBackToFalse(Addresses.OnPickupUseUp);
                 }
-                return false;
+                return result;
             }
         }
-
 
         private bool Get_OnPickupUseDown
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private_Get_OnPickupUseDown != null)
+                var result = IUdonHeap.GetHeapVariable(Addresses.OnPickupUseDown).Unbox<bool>();
+                if (result)
                 {
-                    var result = Private_Get_OnPickupUseDown.Value;
-                    if (result)
-                    {
-                        Private_Get_OnPickupUseDown.Value = false;
-                    }
-                    return result;
+                    SetBackToFalse(Addresses.OnPickupUseDown);
                 }
-                return false;
+                return result;
             }
         }
 
@@ -233,16 +189,12 @@ namespace AstroClient.AstroMonos.AstroUdons
             [HideFromIl2Cpp]
             get
             {
-                if (Private_Get_OnDrop != null)
+                var result = IUdonHeap.GetHeapVariable(Addresses.OnDrop).Unbox<bool>();
+                if (result)
                 {
-                    var result = Private_Get_OnDrop.Value;
-                    if (result)
-                    {
-                        Private_Get_OnDrop.Value = false;
-                    }
-                    return result;
+                    SetBackToFalse(Addresses.OnDrop);
                 }
-                return false;
+                return result;
             }
         }
 
@@ -350,6 +302,6 @@ namespace AstroClient.AstroMonos.AstroUdons
 
 
         private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private RawUdonBehaviour RawItem { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private IUdonHeap IUdonHeap { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

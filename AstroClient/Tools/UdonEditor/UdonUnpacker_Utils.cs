@@ -5,7 +5,7 @@
 
     internal class UdonUnpacker_Utils
     {
-        internal static RawUdonBehaviour ToRawUdonBehaviour(UdonBehaviour udon)
+        internal static RawUdonBehaviour ToRawUdonBehaviour(UdonBehaviour udon, bool IgnoreProgramNull = false)
         {
             if (udon != null)
             {

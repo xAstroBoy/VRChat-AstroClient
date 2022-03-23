@@ -37,7 +37,7 @@ namespace AstroClient.Tools.UdonEditor
                 builder.AppendLine("        // TODO: I HIGHLY RECCOMEND TO RENAME THIS VARIABLE BEFORE PASTING!");
                 builder.AppendLine("         private RawUdonBehaviour "+ CurrentBehaviourTemplateName +" {[HideFromIl2Cpp] get; [HideFromIl2Cpp] set;} =  null;");
 
-                builder.AppendLine($"       #region Getter / Setters UdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
+                builder.AppendLine($"       #region Getter / Setters AstroUdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
 
                 foreach (var symbol in behaviour.IUdonSymbolTable.GetSymbols())
                 {
@@ -54,19 +54,19 @@ namespace AstroClient.Tools.UdonEditor
                         }
                     }
                 }
-                builder.AppendLine($"     #endregion Getter / Setters UdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
+                builder.AppendLine($"     #endregion Getter / Setters AstroUdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
 
                 builder.AppendLine(GenerateMethod(initializeUdonVarList, $"Initialize_{CurrentBehaviourTemplateName}"));
                 builder.AppendLine(GenerateMethod(initializeUdonVarList, $"Cleanup_{CurrentBehaviourTemplateName}"));
 
-                builder.AppendLine($"       #region  UdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
+                builder.AppendLine($"       #region  AstroUdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
 
                 foreach (var item in RegionPrivateVars)
                 {
                     builder.AppendLine(item);
                 }
 
-                builder.AppendLine($"     #endregion UdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
+                builder.AppendLine($"     #endregion AstroUdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
 
 
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, @"AstroClient\GeneratedPropertyReader.cs"), builder.ToString());
@@ -158,13 +158,13 @@ namespace AstroClient.Tools.UdonEditor
 
             #region Methods Filler (Creates Initiator, Variable and Cleanup content)
 
-            var NullVariableInstance = $"private UdonVariable<{CorrectedType.Replace("?", String.Empty)}>  {PrivateVar} {{  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; }} = null;";
+            var NullVariableInstance = $"private AstroUdonVariable<{CorrectedType.Replace("?", String.Empty)}>  {PrivateVar} {{  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; }} = null;";
             if (!RegionPrivateVars.Contains(NullVariableInstance))
             {
                 RegionPrivateVars.Add(NullVariableInstance);
             }
 
-            var InitializationInstance = $"{PrivateVar} = new UdonVariable<{CorrectedType.Replace("?", String.Empty)}>({templatename},  \"{Symbol}\");";
+            var InitializationInstance = $"{PrivateVar} = new AstroAstroUdonVariable<{CorrectedType.Replace("?", String.Empty)}>({templatename},  \"{Symbol}\");";
             if (!initializeUdonVarList.Contains(InitializationInstance))
             {
                 initializeUdonVarList.Add(InitializationInstance);
