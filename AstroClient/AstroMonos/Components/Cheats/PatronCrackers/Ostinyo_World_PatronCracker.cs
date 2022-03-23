@@ -22,51 +22,75 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
         AntiGarbageCollection.Add(this);
     }
 
+
+    internal void Initiate_UdonVariablePatron()
+    {
+        Private_isPatron = new UdonVariable<bool>(PatronControl, isPatron_address);
+        Private_HiddenPatrons = new UdonVariable<string[]>(PatronControl, HiddenTier_Address);
+        Private_HiddenPatrons_2 = new UdonVariable<string[]>(PatronControl, HiddenTier_Address_2);
+
+    }
+    private string HiddenTier_Address { [HideFromIl2Cpp] get; } = "__0_hiddenList_StringArray";
+    private string HiddenTier_Address_2 { [HideFromIl2Cpp] get; } = "__0_hiddenList_StringArray";
+
     private string isPatron_address { [HideFromIl2Cpp] get; } = "isPatron";
+
+    internal UdonVariable<bool> Private_isPatron {  [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+    internal UdonVariable<string[]> Private_HiddenPatrons {  [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    internal UdonVariable<string[]> Private_HiddenPatrons_2 {  [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }  = null;
+
+    private static RawUdonBehaviour PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+    private static UdonBehaviour_Cached RefreshPatronList { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
     internal bool? isPatron
     {
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_Boolean(PatronControl, isPatron_address);
+            if (Private_isPatron != null) return Private_isPatron.Value;
             return null;
         }
         [HideFromIl2Cpp]
         set
         {
-            if (PatronControl != null)
+            if (Private_isPatron != null)
                 if (value.HasValue)
-                    UdonHeapEditor.PatchHeap(PatronControl, isPatron_address, value.Value);
+                    Private_isPatron.Value = value.Value;
         }
     }
 
-    internal System.Collections.Generic.List<string> HiddenPatrons
+    internal string[] HiddenPatrons
     {
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string_List(PatronControl, HiddenTier_Address);
+            if (Private_HiddenPatrons != null) return Private_HiddenPatrons.Value;
             return null;
         }
+        set
+        {
+            if (Private_HiddenPatrons != null) Private_HiddenPatrons.Value = value;
+
+        }
+
     }
 
-    internal System.Collections.Generic.List<string> HiddenPatrons_2
+    internal string[] HiddenPatrons_2
     {
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null)
-                return UdonHeapParser.Udon_Parse_string_List(PatronControl, HiddenTier_Address_2);
+            if (Private_HiddenPatrons_2 != null) return Private_HiddenPatrons_2.Value;
             return null;
+        }
+        set
+        {
+            if (Private_HiddenPatrons_2 != null) Private_HiddenPatrons_2.Value = value;
+
         }
     }
 
-    private string HiddenTier_Address { [HideFromIl2Cpp] get; } = "__0_hiddenList_StringArray";
-    private string HiddenTier_Address_2 { [HideFromIl2Cpp] get; } = "__0_hiddenList_StringArray";
-
-    private static RawUdonBehaviour PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-    private static UdonBehaviour_Cached RefreshPatronList { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
     internal override void OnRoomLeft()
     {
