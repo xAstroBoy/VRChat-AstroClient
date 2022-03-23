@@ -107,11 +107,19 @@
         {
             if (user != null)
             {
-                AvatarDictCache = PlayerManager.prop_PlayerManager_0
-                    .field_Private_List_1_Player_0
-                    .ToArray()
-                    .FirstOrDefault(a => a.GetAPIUser().id == user.id)
-                    ?.prop_Player_1.field_Private_Hashtable_0["avatarDict"];
+                AvatarDictCache = null;
+                //AvatarDictCache = PlayerManager.prop_PlayerManager_0
+                //    .field_Private_List_1_Player_0
+                //    .ToArray()
+                //    .FirstOrDefault(a => a.GetAPIUser().GetUserID() == user.GetUserID())
+                var hashtable = user.GetPlayer().prop_Player_1.field_Private_Hashtable_0;
+                if (hashtable != null)
+                {
+                    if (hashtable.ContainsKey("avatarDict"))
+                    {
+                        AvatarDictCache = hashtable["avatarDict"];
+                    }
+                }
                 if (AvatarDictCache != null)
                 {
                     isSoftCloneActive = true;

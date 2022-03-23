@@ -481,6 +481,7 @@
         private static List<UdonBehaviour_Cached> Knifes = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> VentsMeshes = new List<UdonBehaviour_Cached>();
 
+
         private static PrisonEscape_PoolDataReader _LocalPlayerData;
         
         private static bool _DropKnifeAfterKill = true;
@@ -561,6 +562,20 @@
         }
 
 
+        private static bool _EveryoneHasGoldenGuns { get; set; }
+        internal static bool EveryoneHasGoldenGuns
+        {
+            get
+            {
+                return _EveryoneHasGoldenGuns;
+            }
+            set
+            {
+                _EveryoneHasGoldenGuns = value;
+                Set_GoldGun(value);
+
+            }
+        }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -616,6 +631,8 @@
             LocalReader = null;
             SpawnPoints_Prisoners.Clear();
             SpawnPoints_Guards.Clear();
+            _EveryoneHasGoldenGuns = false;
+            _EveryoneHasdoublePoints = false;
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
         {
@@ -635,6 +652,62 @@
                 }
             }
         }
+        private static void Set_GoldGun(bool goldGuns)
+        {
+            try
+            {
+                foreach (var item in CurrentReaders)
+                {
+                    if (item != null)
+                    {
+                        if (item.isLocal) continue;
+                        item.goldGuns = goldGuns;
+                    }
+                }
+
+            }
+            catch
+            {
+            }
+        }
+
+        private static bool _EveryoneHasdoublePoints { get; set; }
+        internal static bool EveryoneHasdoublePoints
+        {
+            get
+            {
+                return _EveryoneHasdoublePoints;
+            }
+            set
+            {
+                _EveryoneHasdoublePoints = value;
+                Set_doublePoints(value);
+
+            }
+        }
+
+
+
+        private static void Set_doublePoints(bool doublePoints)
+        {
+            try
+            {
+                foreach (var item in CurrentReaders)
+                {
+                    if (item != null)
+                    {
+                        if (item.isLocal) continue;
+                        item.doublePoints = doublePoints;
+                    }
+                }
+
+            }
+            catch
+            {
+            }
+        }
+
+
         private static void SetDropOnUse(UdonBehaviour_Cached item, bool dropOnUse)
         {
             if (item != null)

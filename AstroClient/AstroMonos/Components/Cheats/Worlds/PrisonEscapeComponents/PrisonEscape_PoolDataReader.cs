@@ -37,6 +37,7 @@
                 {
                     PlayerData = obj.RawItem;
                     Initialize_PlayerData();
+                    InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
                 }
                 else
                 {
@@ -62,6 +63,15 @@
         private void OnDestroy()
         {
             Cleanup_PlayerData();
+        }
+
+        private void GodModeOn()
+        {
+            if(SemiGodMode)
+            {
+                health = int.MaxValue; // Freeze it here <3
+            }
+
         }
 
         [HideFromIl2Cpp]

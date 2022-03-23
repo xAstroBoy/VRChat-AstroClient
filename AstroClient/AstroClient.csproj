@@ -137,7 +137,7 @@
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
     <Compile Include="ClientUI\ActionMenu\ItemTweakerModule.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
-    <Compile Include="ClientUI\ActionMenu\WorldModule\WorldCheatsModule.cs" />
+    <Compile Include="ClientUI\ActionMenu\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoadingScreenAssets.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoginScreenAssets.cs" />
     <Compile Include="ClientUI\LoadingScreen\BetterLoadingScreen.cs" />
