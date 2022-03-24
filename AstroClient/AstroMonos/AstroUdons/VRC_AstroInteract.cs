@@ -40,6 +40,7 @@ namespace AstroClient.AstroMonos.AstroUdons
             }
 
             DoChecks();
+            RawItem = UdonBehaviour.ToRawUdonBehaviour();
             Initialize_InteractVars();
         }
 

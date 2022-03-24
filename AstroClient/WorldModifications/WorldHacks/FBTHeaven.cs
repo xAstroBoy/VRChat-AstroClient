@@ -1,4 +1,6 @@
-﻿#pragma warning disable 649
+﻿using AstroClient.CustomClasses;
+
+#pragma warning disable 649
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -87,6 +89,17 @@ namespace AstroClient.WorldModifications.WorldHacks
                     ModConsole.Log("Logger found, this is sus...");
                     TrashToDelete.AddGameObject(logger);
                 }
+
+                Lock_Door_1 =UdonSearch.FindUdonEvent($"Room 1 main script", "OnToggle");
+                Lock_Door_2 =UdonSearch.FindUdonEvent($"Room 2 main script", "OnToggle");
+                Lock_Door_3 =UdonSearch.FindUdonEvent($"Room 3 main script", "OnToggle");
+                Lock_Door_4 = UdonSearch.FindUdonEvent($"Room 4 main script", "OnToggle");
+
+                Unlock_Door_1 = UdonSearch.FindUdonEvent($"Room 1 main script", "OffToggle");
+                Unlock_Door_2 = UdonSearch.FindUdonEvent($"Room 2 main script", "OffToggle");
+                Unlock_Door_3 = UdonSearch.FindUdonEvent($"Room 3 main script", "OffToggle");
+                Unlock_Door_4 = UdonSearch.FindUdonEvent($"Room 4 main script", "OffToggle");
+
                 if (SkyboxEditor.SetSkyboxByFileName("dark_coalsack"))
                 {
                     ModConsole.DebugLog("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
@@ -175,6 +188,17 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             isCurrentWorld = false;
             TrashToDelete.Clear();
+            Unlock_Door_1 = null;
+            Unlock_Door_2 = null;
+            Unlock_Door_3 = null;
+            Unlock_Door_4 = null;
+
+            Lock_Door_1 = null;
+            Lock_Door_2 = null;
+            Lock_Door_3 = null;
+            Lock_Door_4 = null;
+
+
         }
 
         private static void AddLockPickButton(GameObject HandleSign, int doorID)
@@ -208,16 +232,57 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void LockDoor(int doorID)
         {
-            UdonSearch.FindUdonEvent($"Room {doorID} main script", "OnToggle").InvokeBehaviour();
-            //RefreshButtons();
+            switch(doorID)
+            {
+                case 1:
+                    Lock_Door_1.InvokeBehaviour();
+                    break;
+                case 2:
+                    Lock_Door_2.InvokeBehaviour();
+                    break;
+                case 3:
+                    Lock_Door_2.InvokeBehaviour();
+                    break;
+                case 4:
+                    Lock_Door_2.InvokeBehaviour();
+                    break;
+                default: 
+                    return;
+            }
+
         }
 
         private static void UnlockDoor(int doorID)
         {
-            UdonSearch.FindUdonEvent($"Room {doorID} main script", "OffToggle").InvokeBehaviour();
-            //RefreshButtons();
+            switch (doorID)
+            {
+                case 1:
+                    Unlock_Door_1.InvokeBehaviour();
+                    break;
+                case 2:
+                    Unlock_Door_2.InvokeBehaviour();
+                    break;
+                case 3:
+                    Unlock_Door_2.InvokeBehaviour();
+                    break;
+                case 4:
+                    Unlock_Door_2.InvokeBehaviour();
+                    break;
+                default:
+                    return;
+            }
         }
 
+
+        private static UdonBehaviour_Cached Unlock_Door_1 { get; set; } = null;
+        private static UdonBehaviour_Cached Unlock_Door_2 { get; set; } = null;
+        private static UdonBehaviour_Cached Unlock_Door_3 { get; set; } = null;
+        private static UdonBehaviour_Cached Unlock_Door_4 { get; set; } = null;
+
+        private static UdonBehaviour_Cached Lock_Door_1 { get; set; } = null;
+        private static UdonBehaviour_Cached Lock_Door_2 { get; set; } = null;
+        private static UdonBehaviour_Cached Lock_Door_3 { get; set; } = null;
+        private static UdonBehaviour_Cached Lock_Door_4 { get; set; } = null;
         private static void RefreshButtons()
         {
             if (LockIndicator1.active)
