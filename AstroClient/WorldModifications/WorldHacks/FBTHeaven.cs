@@ -70,21 +70,32 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
                 else
                 {
-                    ModConsole.Error("World Blinders and Divivers not found...");
+                    ModConsole.Error("World Blinders and Dividers not found...");
+                }
+                var OcclusionWalls = GameObjectFinder.Find("Occlusion Walls");
+                if (OcclusionWalls != null)
+                {
+                    OcclusionWalls.DestroyMeLocal();
+                }
+                else
+                {
+                    ModConsole.Error("World Occlusion Walls not found...");
+                }
+                var logger = GameObjectFinder.Find("Logger");
+                if (logger != null)
+                {
+                    ModConsole.Log("Logger found, this is sus...");
+                    TrashToDelete.AddGameObject(logger);
+                }
+                if (SkyboxEditor.SetSkyboxByFileName("dark_coalsack"))
+                {
+                    ModConsole.DebugLog("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                 }
 
-                var rootObject = GameObjectFinder.FindRootSceneObject("Drag me");
+                var rootObject = GameObjectFinder.FindRootSceneObject("FBT");
                 if (rootObject != null)
                 {
                     // Fuck the useless blinders.
-                    var trashblinder_0 = rootObject.transform.FindObject("Main_area-Private_rooms");
-                    var trashblinder_1 = rootObject.transform.FindObject("Main_area-Private_rooms_1");
-                    var trashblinder_2 = rootObject.transform.FindObject("Main_area-Private_rooms (1)");
-                    var trashblinder_3 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (1)");
-                    var trashblinder_4 = rootObject.transform.FindObject("Main_area-Private_rooms (2)");
-                    var trashblinder_5 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (2)");
-                    var trashblinder_6 = rootObject.transform.FindObject("Main_area-Private_rooms (3)");
-                    var trashblinder_7 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (3)");
 
                     var trashblinder_8 = rootObject.transform.FindObject("Blindbox");
                     var trashblinder_9 = rootObject.transform.FindObject("Blindbox (1)");
@@ -92,21 +103,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var trashblinder_11 = rootObject.transform.FindObject("Blindbox (3)");
                     var trashblinder_12 = rootObject.transform.FindObject("FBT_Heaven_Occluder");
 
-                    var logger = GameObjectFinder.Find("Logger");
-                    if (logger != null)
-                    {
-                        ModConsole.Log("Logger found, this is sus...");
-                        TrashToDelete.AddGameObject(logger);
-                    }
 
-                    TrashToDelete.AddGameObject(trashblinder_0.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_1.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_2.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_3.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_4.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_5.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_6.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_7.gameObject);
                     TrashToDelete.AddGameObject(trashblinder_8.gameObject);
                     TrashToDelete.AddGameObject(trashblinder_9.gameObject);
                     TrashToDelete.AddGameObject(trashblinder_10.gameObject);
@@ -138,10 +135,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                         }
                     }
 
-                    if (SkyboxEditor.SetSkyboxByFileName("dark_coalsack"))
-                    {
-                        ModConsole.DebugLog("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
-                    }
 
                     var outsidebutton1 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_1/Door_Handle_Sign_1").gameObject;
                     var outsidebutton2 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_2/Door_Handle_Sign_2").gameObject;

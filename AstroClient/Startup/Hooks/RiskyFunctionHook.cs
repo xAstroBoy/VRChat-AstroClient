@@ -19,7 +19,9 @@
         private static string AllowedResponse { get; } = "https://raw.githubusercontent.com/xKiraiChan/xKiraiChan/master/allowed.txt";
         internal override void ExecutePriorityPatches()
         {
-            new AstroPatch(typeof(WebRequest).GetMethod(nameof(WebRequest.CreateHttp), new Type[1] { typeof(Uri) }), GetPatch(nameof(CreateHTTPPatch)));
+            new AstroPatch(typeof(WebRequest).GetMethod(nameof(WebRequest.CreateHttp), new Type[1] { typeof(Uri) }), GetPatch(nameof(CreateHTTPPatch_Uri)));
+            new AstroPatch(typeof(WebRequest).GetMethod(nameof(WebRequest.CreateHttp), new Type[1] { typeof(string) }), GetPatch(nameof(CreateHTTPPatch_String)));
+
             new AstroPatch(typeof(WebClient).GetMethod(nameof(WebClient.DownloadString), new Type[1] { typeof(string) }), GetPatch(nameof(DownloadStringPatch)));
         }
 
@@ -44,7 +46,7 @@
             }
         }
 
-        private static void CreateHTTPPatch(ref Uri __0)
+        private static void CreateHTTPPatch_Uri(ref Uri __0)
         {
             if (__0.AbsoluteUri.ToLower().Contains("riskyfuncs"))
             {
@@ -52,7 +54,14 @@
                 __0 = new Uri(AllowedResponse);
             }
         }
-
+        private static void CreateHTTPPatch_String(ref string __0)
+        {
+            if (__0.ToLower().Contains("riskyfuncs"))
+            {
+                ModConsole.DebugWarning($"A Mod is Checking for Risky Function Checks, Redirecting URL : {__0}, to : {AllowedResponse}");
+                __0 = AllowedResponse;
+            }
+        }
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (UnityEngine.GameObject.Find("eVRCRiskFuncEnable") == null)

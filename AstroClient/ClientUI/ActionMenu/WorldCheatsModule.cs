@@ -1,15 +1,16 @@
-namespace AstroClient.ClientUI.ActionMenu.WorldModule;
-
-using ClientResources.Loaders;
-using Gompoc.ActionMenuAPI.Api;
-using Tools.Extensions;
-using Tools.Player.Movement.Exploit;
+using AstroClient.ClientResources.Loaders;
+using AstroClient.Gompoc.ActionMenuAPI.Api;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Player.Movement.Exploit;
+using AstroClient.WorldModifications.WorldHacks;
+using AstroClient.WorldModifications.WorldHacks.Jar.AmongUS;
+using AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
-using WorldModifications.WorldHacks;
-using WorldModifications.WorldHacks.Jar.AmongUS;
-using WorldModifications.WorldHacks.Jar.KitchenCooks;
-using WorldModifications.WorldsIds;
-using xAstroBoy.Utility;
+
+namespace AstroClient.ClientUI.ActionMenu;
+
 using Color = System.Drawing.Color;
 
 internal class WorldCheatsModule : AstroEvents

@@ -103,11 +103,13 @@
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_GameManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PoolDataReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_CustomizationReader.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_HighlightItem.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
@@ -636,6 +638,7 @@
     <Compile Include="Constants\InstanceBuilder.cs" />
     <Compile Include="WorldModifications\WorldHacks\ClickerGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\GhostGame.cs" />
+    <Compile Include="WorldModifications\WorldHacks\GeoLocator.cs" />
     <Compile Include="WorldModifications\WorldHacks\PuttPuttQuest.cs" />
     <Compile Include="WorldModifications\WorldHacks\PuttPuttPond.cs" />
     <Compile Include="CustomClasses\UdonBehaviour_Cached.cs" />
