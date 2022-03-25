@@ -244,7 +244,7 @@
             btnOn_Image.DestroyMeLocal(true);
             btnOff_Image.DestroyMeLocal(true);
             ButtonToggle.DestroyMeLocal(true);
-            _ButtonToolTip.DestroyMeLocal(true);
+            ButtonToolTip.DestroyMeLocal(true);
             ButtonObject.DestroyMeLocal(true);
             ButtonTitleMesh.DestroyMeLocal(true);
             ButtonText.DestroyMeLocal(true);

@@ -200,7 +200,7 @@
 
                     foreach (var actionkeys in behaviour._eventTable)
                     {
-                        if (actionkeys.key == subaction)
+                        if (actionkeys.key.Equals(subaction))
                         {
                             if (Debug)
                             {

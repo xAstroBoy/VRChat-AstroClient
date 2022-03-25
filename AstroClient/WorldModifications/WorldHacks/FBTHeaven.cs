@@ -1,16 +1,15 @@
-﻿using AstroClient.CustomClasses;
+﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.CustomClasses;
 
 #pragma warning disable 649
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
-    using System.Collections;
+    using AstroMonos.AstroUdons;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroMonos.AstroUdons;
     using Tools.Extensions;
     using Tools.Skybox;
-    using Tools.UdonSearcher;
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
@@ -25,32 +24,28 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static List<GameObject> TrashToDelete = new List<GameObject>();
         private static bool isCurrentWorld;
         private static QMToggleButton LockButton1;
-        private static GameObject LockIndicator1;
         private static QMToggleButton LockButton2;
-        private static GameObject LockIndicator2;
         private static QMToggleButton LockButton3;
-        private static GameObject LockIndicator3;
         private static QMToggleButton LockButton4;
-        private static GameObject LockIndicator4;
 
         internal static void InitButtons(QMGridTab main)
         {
             FBTExploitsPage = new QMNestedGridMenu(main, "FBTHeaven Exploits", "FBTHeaven Exploits");
 
-            _ = new QMSingleButton(FBTExploitsPage, 1, 0, "Unlock Door\n1", () => { UnlockDoor(1); }, "Unlock Door 1");
-            _ = new QMSingleButton(FBTExploitsPage, 2, 0, "Unlock Door\n2", () => { UnlockDoor(2); }, "Unlock Door 2");
-            _ = new QMSingleButton(FBTExploitsPage, 3, 0, "Unlock Door\n3", () => { UnlockDoor(3); }, "Unlock Door 3");
-            _ = new QMSingleButton(FBTExploitsPage, 4, 0, "Unlock Door\n4", () => { UnlockDoor(4); }, "Unlock Door 4");
+            _ = new QMSingleButton(FBTExploitsPage, "Unlock Door\n1", () => { UnlockDoor(1); }, "Unlock Door 1");
+            _ = new QMSingleButton(FBTExploitsPage, "Unlock Door\n2", () => { UnlockDoor(2); }, "Unlock Door 2");
+            _ = new QMSingleButton(FBTExploitsPage, "Unlock Door\n3", () => { UnlockDoor(3); }, "Unlock Door 3");
+            _ = new QMSingleButton(FBTExploitsPage, "Unlock Door\n4", () => { UnlockDoor(4); }, "Unlock Door 4");
 
-            _ = new QMSingleButton(FBTExploitsPage, 1, 1, "Lock Door\n1", () => { LockDoor(1); }, "Lock Door 1");
-            _ = new QMSingleButton(FBTExploitsPage, 2, 1, "Lock Door\n2", () => { LockDoor(2); }, "Lock Door 2");
-            _ = new QMSingleButton(FBTExploitsPage, 3, 1, "Lock Door\n3", () => { LockDoor(3); }, "Lock Door 3");
-            _ = new QMSingleButton(FBTExploitsPage, 4, 1, "Lock Door\n4", () => { LockDoor(4); }, "Lock Door 4");
+            _ = new QMSingleButton(FBTExploitsPage, "Lock Door\n1", () => { LockDoor(1); }, "Lock Door 1");
+            _ = new QMSingleButton(FBTExploitsPage, "Lock Door\n2", () => { LockDoor(2); }, "Lock Door 2");
+            _ = new QMSingleButton(FBTExploitsPage, "Lock Door\n3", () => { LockDoor(3); }, "Lock Door 3");
+            _ = new QMSingleButton(FBTExploitsPage, "Lock Door\n4", () => { LockDoor(4); }, "Lock Door 4");
 
-            LockButton1 = new QMToggleButton(FBTExploitsPage, 1, 4, "Unlock 1", () => { UnlockDoor(1); }, "Lock 1", () => { LockDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton2 = new QMToggleButton(FBTExploitsPage, 2, 4, "Unlock 2", () => { UnlockDoor(2); }, "Lock 2", () => { LockDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton3 = new QMToggleButton(FBTExploitsPage, 3, 4, "Unlock 3", () => { UnlockDoor(3); }, "Lock 3", () => { LockDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton4 = new QMToggleButton(FBTExploitsPage, 4, 4, "Unlock 4", () => { UnlockDoor(4); }, "Lock 4", () => { LockDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton1 = new QMToggleButton(FBTExploitsPage,  "Lock 1", () => { LockDoor(1); }, "Unlock 1", () => { UnlockDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton2 = new QMToggleButton(FBTExploitsPage,  "Lock 2", () => { LockDoor(2); }, "Unlock 2", () => { UnlockDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton3 = new QMToggleButton(FBTExploitsPage,  "Lock 3", () => { LockDoor(3); }, "Unlock 3", () => { UnlockDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
+            LockButton4 = new QMToggleButton(FBTExploitsPage,  "Lock 4", () => { LockDoor(4); }, "Unlock 4", () => { UnlockDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -83,24 +78,47 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     ModConsole.Error("World Occlusion Walls not found...");
                 }
-                var logger = GameObjectFinder.Find("Logger");
+                var logger = GameObjectFinder.FindRootSceneObject("Logger");
                 if (logger != null)
                 {
                     ModConsole.Log("Logger found, this is sus...");
                     TrashToDelete.AddGameObject(logger);
                 }
 
-                Lock_Door_1 =UdonSearch.FindUdonEvent($"Room 1 main script", "OnToggle");
-                Lock_Door_2 =UdonSearch.FindUdonEvent($"Room 2 main script", "OnToggle");
-                Lock_Door_3 =UdonSearch.FindUdonEvent($"Room 3 main script", "OnToggle");
-                Lock_Door_4 = UdonSearch.FindUdonEvent($"Room 4 main script", "OnToggle");
+                if (Room_1_main_script != null)
+                {
+                    Lock_Door_1 = Room_1_main_script.FindUdonEvent("OnToggle");
+                    if (Lock_Door_1 != null)
+                    {
+                        Unlock_Door_1 = Lock_Door_1.UdonBehaviour.FindUdonEvent("OffToggle");
+                    }
+                }
 
-                Unlock_Door_1 = UdonSearch.FindUdonEvent($"Room 1 main script", "OffToggle");
-                Unlock_Door_2 = UdonSearch.FindUdonEvent($"Room 2 main script", "OffToggle");
-                Unlock_Door_3 = UdonSearch.FindUdonEvent($"Room 3 main script", "OffToggle");
-                Unlock_Door_4 = UdonSearch.FindUdonEvent($"Room 4 main script", "OffToggle");
-
-                if (SkyboxEditor.SetSkyboxByFileName("dark_coalsack"))
+                if (Room_2_main_script != null)
+                {
+                    Lock_Door_2 = Room_2_main_script.FindUdonEvent("OnToggle");
+                    if (Lock_Door_2 != null)
+                    {
+                        Unlock_Door_2 = Lock_Door_2.UdonBehaviour.FindUdonEvent("OffToggle");
+                    }
+                }
+                if (Room_3_main_script != null)
+                {
+                    Lock_Door_3 = Room_3_main_script.FindUdonEvent("OnToggle");
+                    if (Lock_Door_3 != null)
+                    {
+                        Unlock_Door_3 = Lock_Door_3.UdonBehaviour.FindUdonEvent("OffToggle");
+                    }
+                }
+                if (Room_4_main_script != null)
+                {
+                    Lock_Door_4 = Room_4_main_script.FindUdonEvent("OnToggle");
+                    if (Lock_Door_4 != null)
+                    {
+                        Unlock_Door_4 = Lock_Door_4.UdonBehaviour.FindUdonEvent("OffToggle");
+                    }
+                }
+                if (SkyboxEditor.SetSkyboxByFileName("Skybox_Hong Kong Skybox"))
                 {
                     ModConsole.DebugLog("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                 }
@@ -115,13 +133,14 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var trashblinder_10 = rootObject.transform.FindObject("Blindbox (2)");
                     var trashblinder_11 = rootObject.transform.FindObject("Blindbox (3)");
                     var trashblinder_12 = rootObject.transform.FindObject("FBT_Heaven_Occluder");
-
+                    var trashblinder_13 = rootObject.transform.FindObject("[OCCLUSION]");
 
                     TrashToDelete.AddGameObject(trashblinder_8.gameObject);
                     TrashToDelete.AddGameObject(trashblinder_9.gameObject);
                     TrashToDelete.AddGameObject(trashblinder_10.gameObject);
                     TrashToDelete.AddGameObject(trashblinder_11.gameObject);
                     TrashToDelete.AddGameObject(trashblinder_12.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_13.gameObject);
 
                     if (TrashToDelete.Count() != 0)
                     {
@@ -148,7 +167,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                         }
                     }
 
-
                     var outsidebutton1 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_1/Door_Handle_Sign_1").gameObject;
                     var outsidebutton2 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_2/Door_Handle_Sign_2").gameObject;
                     var outsidebutton3 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_3/Door_Handle_Sign_3").gameObject;
@@ -159,20 +177,15 @@ namespace AstroClient.WorldModifications.WorldHacks
                     AddLockPickButton(outsidebutton3, 3);
                     AddLockPickButton(outsidebutton4, 4);
 
-                    if (LockIndicator1 == null || LockIndicator2 == null || LockIndicator3 == null || LockIndicator4 == null)
-                    {
-                        ModConsole.Error("Could not find a lock indicator!");
-                    }
+                    AttachListener(outsidebutton1, () => { isRoom1Locked = true; }, () => { isRoom1Locked = false; });
+                    AttachListener(outsidebutton2, () => { isRoom2Locked = true; }, () => { isRoom2Locked = false; });
+                    AttachListener(outsidebutton3, () => { isRoom3Locked = true; }, () => { isRoom3Locked = false; });
+                    AttachListener(outsidebutton4, () => { isRoom4Locked = true; }, () => { isRoom4Locked = false; });
                 }
                 else
                 {
                     ModConsole.Error("Could not find rootObject!");
                 }
-
-                // USE UDON RPC OR USE THE LISTENERS For Enable or Ondisable in the outside buttons, easy!
-
-                // I'll fix this later..
-                //MelonCoroutines.Start(UpdateButtonsLoop());
             }
             else
             {
@@ -180,6 +193,28 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     FBTExploitsPage.SetInteractable(false);
                     FBTExploitsPage.SetTextColor(Color.red);
+                }
+            }
+        }
+
+        private static void AttachListener(GameObject button, System.Action OnEnable, System.Action OnDisable)
+        {
+            var rend = button.GetComponentInChildren<Renderer>(true);
+            if (rend != null) // Attach preferrably where the renderer is to increase accuracy!
+            {
+                var listener = rend.gameObject.GetOrAddComponent<GameObjectListener>();
+                if (listener != null)
+                {
+                    listener.OnEnabled += OnEnable;
+                    listener.OnDisabled += OnDisable;
+                    if (rend.gameObject.active)
+                    {
+                        OnEnable?.Invoke();
+                    }
+                    else
+                    {
+                        OnDisable?.Invoke();
+                    }
                 }
             }
         }
@@ -197,8 +232,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             Lock_Door_2 = null;
             Lock_Door_3 = null;
             Lock_Door_4 = null;
-
-
         }
 
         private static void AddLockPickButton(GameObject HandleSign, int doorID)
@@ -220,59 +253,156 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        private static IEnumerator UpdateButtonsLoop()
+        internal static void LockDoor(int doorID)
         {
-            for (; ; )
-            {
-                if (!isCurrentWorld) yield break;
-                RefreshButtons();
-                yield return new WaitForSeconds(0.25f);
-            }
-        }
-
-        private static void LockDoor(int doorID)
-        {
-            switch(doorID)
+            switch (doorID)
             {
                 case 1:
                     Lock_Door_1.InvokeBehaviour();
                     break;
+
                 case 2:
                     Lock_Door_2.InvokeBehaviour();
                     break;
+
                 case 3:
-                    Lock_Door_2.InvokeBehaviour();
+                    Lock_Door_3.InvokeBehaviour();
                     break;
+
                 case 4:
-                    Lock_Door_2.InvokeBehaviour();
+                    Lock_Door_4.InvokeBehaviour();
                     break;
-                default: 
+
+                default:
                     return;
             }
-
         }
 
-        private static void UnlockDoor(int doorID)
+        internal static void UnlockDoor(int doorID)
         {
             switch (doorID)
             {
                 case 1:
                     Unlock_Door_1.InvokeBehaviour();
                     break;
+
                 case 2:
                     Unlock_Door_2.InvokeBehaviour();
                     break;
+
                 case 3:
-                    Unlock_Door_2.InvokeBehaviour();
+                    Unlock_Door_3.InvokeBehaviour();
                     break;
+
                 case 4:
-                    Unlock_Door_2.InvokeBehaviour();
+                    Unlock_Door_4.InvokeBehaviour();
                     break;
+
                 default:
                     return;
             }
         }
 
+        private static GameObject _Scripts;
+
+        internal static GameObject Scripts
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Scripts == null)
+                {
+                    return _Scripts = GameObjectFinder.FindRootSceneObject("Scripts");
+                }
+
+                return _Scripts;
+            }
+        }
+
+        private static GameObject _Room_Scripts;
+
+        internal static GameObject Room_Scripts
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Scripts == null) return null;
+                if (_Room_Scripts == null)
+                {
+                    return _Room_Scripts = Scripts.FindObject("Room Scripts");
+                }
+
+                return _Room_Scripts;
+            }
+        }
+
+        private static GameObject _Room_1_main_script;
+
+        internal static GameObject Room_1_main_script
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Room_Scripts == null) return null;
+                if (_Room_1_main_script == null)
+                {
+                    return _Room_1_main_script = Room_Scripts.FindObject("Room 1 main script");
+                }
+
+                return _Room_1_main_script;
+            }
+        }
+
+        private static GameObject _Room_2_main_script;
+
+        internal static GameObject Room_2_main_script
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Room_Scripts == null) return null;
+                if (_Room_2_main_script == null)
+                {
+                    return _Room_2_main_script = Room_Scripts.FindObject("Room 2 main script");
+                }
+
+                return _Room_2_main_script;
+            }
+        }
+
+        private static GameObject _Room_3_main_script;
+
+        internal static GameObject Room_3_main_script
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Room_Scripts == null) return null;
+                if (_Room_3_main_script == null)
+                {
+                    return _Room_3_main_script = Room_Scripts.FindObject("Room 3 main script");
+                }
+
+                return _Room_3_main_script;
+            }
+        }
+
+        private static GameObject _Room_4_main_script;
+
+        internal static GameObject Room_4_main_script
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Room_Scripts == null) return null;
+                if (_Room_4_main_script == null)
+                {
+                    return _Room_4_main_script = Room_Scripts.FindObject("Room 4 main script");
+                }
+
+                return _Room_4_main_script;
+            }
+        }
 
         private static UdonBehaviour_Cached Unlock_Door_1 { get; set; } = null;
         private static UdonBehaviour_Cached Unlock_Door_2 { get; set; } = null;
@@ -283,42 +413,76 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static UdonBehaviour_Cached Lock_Door_2 { get; set; } = null;
         private static UdonBehaviour_Cached Lock_Door_3 { get; set; } = null;
         private static UdonBehaviour_Cached Lock_Door_4 { get; set; } = null;
-        private static void RefreshButtons()
+
+        private static bool _IsRoom1Locked { get; set; } = false;
+
+        private static bool isRoom1Locked
         {
-            if (LockIndicator1.active)
+            get
             {
-                LockButton1.SetToggleState(true);
+                return _IsRoom1Locked;
             }
-            else
+            set
             {
-                LockButton1.SetToggleState(false);
+                _IsRoom1Locked = value;
+                if (LockButton1 != null)
+                {
+                    LockButton1.SetToggleState(value);
+                }
             }
+        }
 
-            if (LockIndicator2.active)
-            {
-                LockButton2.SetToggleState(true);
-            }
-            else
-            {
-                LockButton2.SetToggleState(false);
-            }
+        private static bool _IsRoom2Locked { get; set; } = false;
 
-            if (LockIndicator3.active)
+        private static bool isRoom2Locked
+        {
+            get
             {
-                LockButton3.SetToggleState(true);
+                return _IsRoom2Locked;
             }
-            else
+            set
             {
-                LockButton3.SetToggleState(false);
+                _IsRoom2Locked = value;
+                if (LockButton2 != null)
+                {
+                    LockButton2.SetToggleState(value);
+                }
             }
+        }
 
-            if (LockIndicator4.active)
+        private static bool _IsRoom3Locked { get; set; } = false;
+
+        private static bool isRoom3Locked
+        {
+            get
             {
-                LockButton4.SetToggleState(true);
+                return _IsRoom3Locked;
             }
-            else
+            set
             {
-                LockButton4.SetToggleState(false);
+                _IsRoom3Locked = value;
+                if (LockButton3 != null)
+                {
+                    LockButton3.SetToggleState(value);
+                }
+            }
+        }
+
+        private static bool _IsRoom4Locked { get; set; } = false;
+
+        private static bool isRoom4Locked
+        {
+            get
+            {
+                return _IsRoom4Locked;
+            }
+            set
+            {
+                _IsRoom4Locked = value;
+                if (LockButton4 != null)
+                {
+                    LockButton4.SetToggleState(value);
+                }
             }
         }
     }

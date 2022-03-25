@@ -406,6 +406,28 @@ internal class WorldCheatsModule : AstroEvents
             }
 
             #endregion
+
+            #region FBT Heaven
+            if (WorldUtils.WorldID == WorldIds.FBTHeaven)
+            {
+                CustomSubMenu.AddButton("Lock Room 1", () => { FBTHeaven.LockDoor(1); });
+                CustomSubMenu.AddButton("Unlock Room 1", () => { FBTHeaven.UnlockDoor(1); });
+
+                CustomSubMenu.AddButton("Lock Room 2", () => { FBTHeaven.LockDoor(2); });
+                CustomSubMenu.AddButton("Unlock Room 2", () => { FBTHeaven.UnlockDoor(2); });
+
+                CustomSubMenu.AddButton("Lock Room 3", () => { FBTHeaven.LockDoor(3); });
+                CustomSubMenu.AddButton("Unlock Room 3", () => { FBTHeaven.UnlockDoor(3); });
+
+                CustomSubMenu.AddButton("Lock Room 4", () => { FBTHeaven.LockDoor(4); });
+                CustomSubMenu.AddButton("Unlock Room 4", () => { FBTHeaven.UnlockDoor(4); });
+
+
+            }
+
+
+
+            #endregion
         }, Icons.thief);
 
         ModConsole.Log("World Module is ready!", Color.Green);
