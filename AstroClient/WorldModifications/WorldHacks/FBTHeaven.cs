@@ -1,8 +1,5 @@
 ﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
 using AstroClient.CustomClasses;
-
-#pragma warning disable 649
-
 namespace AstroClient.WorldModifications.WorldHacks
 {
     using AstroMonos.AstroUdons;
@@ -21,7 +18,6 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
         internal static QMNestedGridMenu FBTExploitsPage;
         internal static float ButtonUpdateTime = 0f;
-        private static List<GameObject> TrashToDelete = new List<GameObject>();
         private static bool isCurrentWorld;
         private static QMToggleButton LockButton1;
         private static QMToggleButton LockButton2;
@@ -42,10 +38,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             _ = new QMSingleButton(FBTExploitsPage, "Lock Door\n3", () => { LockDoor(3); }, "Lock Door 3");
             _ = new QMSingleButton(FBTExploitsPage, "Lock Door\n4", () => { LockDoor(4); }, "Lock Door 4");
 
-            LockButton1 = new QMToggleButton(FBTExploitsPage,  "Lock 1", () => { LockDoor(1); }, "Unlock 1", () => { UnlockDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton2 = new QMToggleButton(FBTExploitsPage,  "Lock 2", () => { LockDoor(2); }, "Unlock 2", () => { UnlockDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton3 = new QMToggleButton(FBTExploitsPage,  "Lock 3", () => { LockDoor(3); }, "Unlock 3", () => { UnlockDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
-            LockButton4 = new QMToggleButton(FBTExploitsPage,  "Lock 4", () => { LockDoor(4); }, "Unlock 4", () => { UnlockDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
+           //LockButton1 = new QMToggleButton(FBTExploitsPage,  "Lock 1", () => { LockDoor(1); }, "Unlock 1", () => { UnlockDoor(1); }, "Toggle Door Lock", Color.green, Color.red);
+           //LockButton2 = new QMToggleButton(FBTExploitsPage,  "Lock 2", () => { LockDoor(2); }, "Unlock 2", () => { UnlockDoor(2); }, "Toggle Door Lock", Color.green, Color.red);
+           //LockButton3 = new QMToggleButton(FBTExploitsPage,  "Lock 3", () => { LockDoor(3); }, "Unlock 3", () => { UnlockDoor(3); }, "Toggle Door Lock", Color.green, Color.red);
+           //LockButton4 = new QMToggleButton(FBTExploitsPage,  "Lock 4", () => { LockDoor(4); }, "Unlock 4", () => { UnlockDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -82,7 +78,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (logger != null)
                 {
                     ModConsole.Log("Logger found, this is sus...");
-                    TrashToDelete.AddGameObject(logger);
+                    logger.DestroyMeLocal();
                 }
 
                 if (Room_1_main_script != null)
@@ -128,28 +124,14 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     // Fuck the useless blinders.
 
-                    var trashblinder_8 = rootObject.transform.FindObject("Blindbox");
-                    var trashblinder_9 = rootObject.transform.FindObject("Blindbox (1)");
-                    var trashblinder_10 = rootObject.transform.FindObject("Blindbox (2)");
-                    var trashblinder_11 = rootObject.transform.FindObject("Blindbox (3)");
-                    var trashblinder_12 = rootObject.transform.FindObject("FBT_Heaven_Occluder");
-                    var trashblinder_13 = rootObject.transform.FindObject("[OCCLUSION]");
+                    rootObject.transform.FindObject("Blindbox").DestroyMeLocal();
+                    rootObject.transform.FindObject("Blindbox (1)").DestroyMeLocal();
+                    rootObject.transform.FindObject("Blindbox (2)").DestroyMeLocal();
+                    rootObject.transform.FindObject("Blindbox (3)").DestroyMeLocal();
+                    rootObject.transform.FindObject("FBT_Heaven_Occluder").DestroyMeLocal();
+                    rootObject.transform.FindObject("[OCCLUSION]").DestroyMeLocal();
 
-                    TrashToDelete.AddGameObject(trashblinder_8.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_9.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_10.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_11.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_12.gameObject);
-                    TrashToDelete.AddGameObject(trashblinder_13.gameObject);
 
-                    if (TrashToDelete.Count() != 0)
-                    {
-                        for (int i = 0; i < TrashToDelete.Count; i++)
-                        {
-                            GameObject trash = TrashToDelete[i];
-                            trash.DestroyMeLocal();
-                        }
-                    }
 
                     var doorinvisibleplane = rootObject.transform.FindObject("Plane");
                     if (doorinvisibleplane != null)
@@ -177,10 +159,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                     AddLockPickButton(outsidebutton3, 3);
                     AddLockPickButton(outsidebutton4, 4);
 
-                    AttachListener(outsidebutton1, () => { isRoom1Locked = true; }, () => { isRoom1Locked = false; });
-                    AttachListener(outsidebutton2, () => { isRoom2Locked = true; }, () => { isRoom2Locked = false; });
-                    AttachListener(outsidebutton3, () => { isRoom3Locked = true; }, () => { isRoom3Locked = false; });
-                    AttachListener(outsidebutton4, () => { isRoom4Locked = true; }, () => { isRoom4Locked = false; });
+                    //AttachListener(outsidebutton1, () => { isRoom1Locked = true; }, () => { isRoom1Locked = false; });
+                    //AttachListener(outsidebutton2, () => { isRoom2Locked = true; }, () => { isRoom2Locked = false; });
+                    //AttachListener(outsidebutton3, () => { isRoom3Locked = true; }, () => { isRoom3Locked = false; });
+                    //AttachListener(outsidebutton4, () => { isRoom4Locked = true; }, () => { isRoom4Locked = false; });
                 }
                 else
                 {
@@ -222,7 +204,6 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal override void OnRoomLeft()
         {
             isCurrentWorld = false;
-            TrashToDelete.Clear();
             Unlock_Door_1 = null;
             Unlock_Door_2 = null;
             Unlock_Door_3 = null;

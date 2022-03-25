@@ -1,5 +1,6 @@
 ﻿using AstroClient.xAstroBoy.Extensions;
 using System.Diagnostics;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.Tools.UdonEditor
 {
@@ -90,14 +91,14 @@ namespace AstroClient.Tools.UdonEditor
                 }
 
                 builder.AppendLine($"     #endregion AstroUdonVariables  of {CurrentBehaviourTemplateName}                                                                                                                                        ");
-                var path = Path.Combine(Environment.CurrentDirectory, @$"AstroClient\GeneratedReaders");
+                var path = Path.Combine(Environment.CurrentDirectory, @$"AstroClient\GeneratedReaders\{WorldUtils.WorldName}");
 
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
 
-                var completepath = Path.Combine(Environment.CurrentDirectory, $"{behaviour.udonBehaviour.name}.cs");
+                var completepath = Path.Combine(path, $"{behaviour.udonBehaviour.name}.cs");
 
                 File.WriteAllText(completepath, builder.ToString());
                 Process.Start(completepath);

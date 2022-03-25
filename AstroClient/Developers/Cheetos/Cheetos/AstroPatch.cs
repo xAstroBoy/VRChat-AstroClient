@@ -8,14 +8,12 @@
     using System.Text;
     using Constants;
     using HarmonyLib;
-    using MelonLoader;
 
     #endregion Imports
 
     internal class AstroPatch
     {
-
-        private Type type { get; set; }
+        private bool isDevMode { get; } = Bools.IsDeveloper;
         private string PatchIdentifier { get; } = "AstroPatch";
         internal MethodInfo TargetMethod_MethodInfo { get; set; }
 
@@ -190,7 +188,7 @@
                 }
                 else
                 {
-                    if (Bools.IsDeveloper)
+                    if (isDevMode)
                     {
                         ModConsole.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.DeclaringType?.FullName}.{TargetMethod?.Name} because {FailureReason}.");
                     }
@@ -292,7 +290,7 @@
                 }
                 else
                 {
-                    if (Bools.IsDeveloper)
+                    if (isDevMode)
                     {
                         ModConsole.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.DeclaringType?.FullName}.{TargetMethod?.Name} because {FailureReason}.");
                     }
@@ -337,7 +335,7 @@
                 if (!HasThrownException)
                 {
                     isActivePatch = true;
-                    if (Bools.IsDeveloper)
+                    if (isDevMode)
                     {
                         ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
                     }
@@ -349,7 +347,7 @@
                 else
                 {
                     isActivePatch = false;
-                    if (Bools.IsDeveloper)
+                    if (isDevMode)
                     {
                         ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
                     }
@@ -379,7 +377,7 @@
                 if (!HasThrownException)
                 {
                     isActivePatch = true;
-                    if (Bools.IsDeveloper)
+                    if (isDevMode)
                     {
                         ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_base} | with {patch.PatchType}");
                     }
@@ -391,7 +389,7 @@
                 else
                 {
                     isActivePatch = false;
-                    if (Bools.IsDeveloper)
+                    if (isDevMode)
                     {
                         ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_base} | with {patch.PatchType}");
                     }
@@ -411,7 +409,7 @@
                 Instance.UnpatchSelf();
                 if (!isMethodInfoPatch)
                 {
-                    if (Bools.IsDeveloper)
+                    if (isDevMode)
                     {
                         ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_base} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
                     }
@@ -422,7 +420,7 @@
                 }
                 else
                 {
-                    if (Bools.IsDeveloper)
+                    if (isDevMode)
                     {
                         ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_MethodInfo} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
                     }
