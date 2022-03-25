@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\TierLand_CreditsReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_GameManagerReader.cs" />
@@ -643,6 +644,7 @@
     <Compile Include="WorldModifications\WorldHacks\PuttPuttPond.cs" />
     <Compile Include="CustomClasses\UdonBehaviour_Cached.cs" />
     <Compile Include="WorldModifications\WorldHacks\FrameOfReference.cs" />
+    <Compile Include="WorldModifications\WorldHacks\TierLand.cs" />
     <Compile Include="WorldModifications\WorldHacks\UdonTycoon.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldHacks\PrisonEscape.cs" />

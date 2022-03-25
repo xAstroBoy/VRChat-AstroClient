@@ -40,6 +40,6 @@
         public const string PuttPuttQuest = "wrld_70353369-ba69-46ab-a20b-f6112c82adba";
         public const string PuttPuttQuest_Night = "wrld_0e813689-822d-4537-8e36-ce2f6e5db4d5";
         public const string GeoLocator = "wrld_c349f354-a368-4282-969a-4b179038217b";
-
+        public const string TierLand = "wrld_db8505a0-4dd9-4344-9d13-208ced35931e";
     }
 }
