@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using AstroClient.AstroMonos.Components.Spoofer;
+﻿using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.ClientAttributes;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
@@ -8,6 +7,7 @@ using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem;
 using Il2CppSystem.Collections.Generic;
+using System.Linq;
 using UnhollowerBaseLib.Attributes;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
@@ -40,10 +40,12 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         {
             RetrySystem = gameObject.FindUdonEvent("_Retry");
             PatronCredits = RetrySystem.RawItem;
-
-            Initialize_PatronCredits();
-            ForcePatronMode();
-            RetrySystem.InvokeBehaviour();
+            this.gameObject.Set_As_Object_To_Edit(); // TO TEST
+            MiscUtils.DelayFunction(3f, () =>
+            {
+                Initialize_PatronCredits();
+                ForcePatronMode();
+            });
             if (RetrySystem == null)
             {
                 ModConsole.Error("Can't Find PatronControl behaviour, Unable to Add Reader Component, did the author update the world?");
@@ -61,14 +63,8 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Cleanup_PatronCredits();
     }
 
-
-
     internal void ForcePatronMode()
     {
-        if (Private_localPlayerIsPatron != null)
-        {
-            localPlayerIsPatron = true;
-        }
         try
         {
             if (__2_intnl_SystemStringArray != null)
@@ -84,88 +80,117 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
                 __2_intnl_SystemStringArray = fixedArray.ToArray();
             }
         }
-        catch{}
+        catch { }
         try
         {
-
             if (__0_intnl_SystemStringArray != null)
-        {
-            var fixedArray = __0_intnl_SystemStringArray.ToList();
-            if (fixedArray != null)
             {
-                if (!fixedArray.Contains(PlayerSpooferUtils.Original_DisplayName))
+                var fixedArray = __0_intnl_SystemStringArray.ToList();
+                if (fixedArray != null)
                 {
-                    fixedArray.Add(PlayerSpooferUtils.Original_DisplayName);
+                    if (!fixedArray.Contains(PlayerSpooferUtils.Original_DisplayName))
+                    {
+                        fixedArray.Add(PlayerSpooferUtils.Original_DisplayName);
+                    }
                 }
+                __0_intnl_SystemStringArray = fixedArray.ToArray();
             }
-            __0_intnl_SystemStringArray = fixedArray.ToArray();
         }
-    }
-        catch{}
-        try
-        {
-
-            if (__4_intnl_SystemStringArray != null)
-        {
-            var fixedArray = __4_intnl_SystemStringArray.ToList();
-            if (fixedArray != null)
-            {
-                if (!fixedArray.Contains(PlayerSpooferUtils.Original_DisplayName))
-                {
-                    fixedArray.Add(PlayerSpooferUtils.Original_DisplayName);
-                }
-            }
-            __4_intnl_SystemStringArray = fixedArray.ToArray();
-        }        }
         catch { }
+       // try
+       // {
+       //     if (__4_intnl_SystemStringArray != null)
+       //     {
+       //         var fixedArray = __4_intnl_SystemStringArray.ToList();
+       //         if (fixedArray != null)
+       //         {
+       //             if (!fixedArray.Contains(PlayerSpooferUtils.Original_DisplayName))
+       //             {
+       //                 fixedArray.Add(PlayerSpooferUtils.Original_DisplayName);
+       //             }
+       //         }
+       //         __4_intnl_SystemStringArray = fixedArray.ToArray();
+       //     }
+       // }
+       // catch { }
+       // try
+       // {
+       //     if (__3_intnl_SystemStringArray != null)
+       //     {
+       //         var fixedArray = __3_intnl_SystemStringArray.ToList();
+       //         if (fixedArray != null)
+       //         {
+       //             if (!fixedArray.Contains(PlayerSpooferUtils.Original_DisplayName))
+       //             {
+       //                 fixedArray.Add(PlayerSpooferUtils.Original_DisplayName);
+       //             }
+       //         }
+       //         __3_intnl_SystemStringArray = fixedArray.ToArray();
+       //     }
+       // }
+       // catch { }
         try
         {
-
-            if (__3_intnl_SystemStringArray != null)
-        {
-            var fixedArray = __3_intnl_SystemStringArray.ToList();
-            if (fixedArray != null)
-            {
-                if (!fixedArray.Contains(PlayerSpooferUtils.Original_DisplayName))
-                {
-                    fixedArray.Add(PlayerSpooferUtils.Original_DisplayName);
-                }
-            }
-            __3_intnl_SystemStringArray = fixedArray.ToArray();
-}        }
-        catch { }
-        try
-        {
-
             if (__1_intnl_SystemStringArray != null)
-        {
-            var fixedArray = __1_intnl_SystemStringArray.ToList();
-            if (fixedArray != null)
             {
-                if (!fixedArray.Contains(PlayerSpooferUtils.Original_DisplayName))
+                var fixedArray = __1_intnl_SystemStringArray.ToList();
+                if (fixedArray != null)
                 {
-                    fixedArray.Add(PlayerSpooferUtils.Original_DisplayName);
+                    if (!fixedArray.Contains(PlayerSpooferUtils.Original_DisplayName))
+                    {
+                        fixedArray.Add(PlayerSpooferUtils.Original_DisplayName);
+                    }
                 }
+                __1_intnl_SystemStringArray = fixedArray.ToArray();
             }
-            __1_intnl_SystemStringArray = fixedArray.ToArray();
-}
-
         }
         catch { }
 
+        localPlayerIsPatron = true;
         __0_isPresent_Boolean = true;
         __0_presentPatronCount_Int32 = 1;
         __0_patronsPresent_Boolean = true;
         __0_newTier_Int32 = 3;
         __0_success_Boolean = true;
-        __0_tier_Int32 = 4;
+        __0_tier_Int32 = 3;
         currentPortraitTier = 3;
+        __1_intnl_SystemBoolean = true;
+        __30_intnl_SystemBoolean = false;
+        __31_intnl_SystemBoolean = false;
+        __32_intnl_SystemBoolean = false;
+        __33_intnl_SystemBoolean = false;
+        __34_intnl_SystemBoolean = true;
+        __35_intnl_SystemBoolean = false;
+        __36_intnl_SystemBoolean = false;
+        __37_intnl_SystemBoolean = true;
+        __38_intnl_SystemBoolean = false;
+        __39_intnl_SystemBoolean = true;
+        __40_intnl_SystemBoolean = true;
+        __41_intnl_SystemBoolean = false;
+        __42_intnl_SystemBoolean = false;
+        __43_intnl_SystemBoolean = true;
+        __44_intnl_SystemBoolean = true;
+        __45_intnl_SystemBoolean = true;
+        __46_intnl_SystemBoolean = true;
+        __47_intnl_SystemBoolean = false;
+        __48_intnl_SystemBoolean = false;
+        __49_intnl_SystemBoolean = false;
+        __50_intnl_SystemBoolean = true;
+        __51_intnl_SystemBoolean = false;
+        __52_intnl_SystemBoolean = false;
+        __53_intnl_SystemBoolean = true;
+        __54_intnl_SystemBoolean = true;
+        __55_intnl_SystemBoolean = true;
 
+        RetrySystem.InvokeBehaviour();
     }
+
+    
 
     private void Initialize_PatronCredits()
     {
         Private_retries = new AstroUdonVariable<int>(PatronCredits, "retries");
+        Private___6_intnl_UnityEngineTransform = new AstroUdonVariable<UnityEngine.Transform>(PatronCredits, "__6_intnl_UnityEngineTransform");
         Private___23_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__23_intnl_SystemBoolean");
         Private___0_const_intnl_VRCSDKBaseVRCPlayerApiTrackingDataType = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi.TrackingDataType>(PatronCredits, "__0_const_intnl_VRCSDKBaseVRCPlayerApiTrackingDataType");
         Private___15_intnl_SystemInt32 = new AstroUdonVariable<int>(PatronCredits, "__15_intnl_SystemInt32");
@@ -243,7 +268,6 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private_portraitCamera = new AstroUdonVariable<UnityEngine.Camera>(PatronCredits, "portraitCamera");
         Private___7_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__7_intnl_SystemBoolean");
         Private___20_intnl_SystemInt32 = new AstroUdonVariable<int>(PatronCredits, "__20_intnl_SystemInt32");
-        Private___3_intnl_SystemStringArray = new AstroUdonVariable<string[]>(PatronCredits, "__3_intnl_SystemStringArray");
         Private_loadingObjects = new AstroUdonVariable<UnityEngine.GameObject>(PatronCredits, "loadingObjects");
         Private___22_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__22_intnl_SystemBoolean");
         Private___7_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PatronCredits, "__7_const_intnl_exitJumpLoc_UInt32");
@@ -269,6 +293,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private___4_const_intnl_SystemString = new AstroUdonVariable<string>(PatronCredits, "__4_const_intnl_SystemString");
         Private___0_byte0_Byte = new AstroUdonVariable<byte>(PatronCredits, "__0_byte0_Byte");
         Private___0_byte1_Byte = new AstroUdonVariable<byte>(PatronCredits, "__0_byte1_Byte");
+        Private___10_intnl_SystemString = new AstroUdonVariable<string>(PatronCredits, "__10_intnl_SystemString");
         Private_localPlayerIsPatron = new AstroUdonVariable<bool>(PatronCredits, "localPlayerIsPatron");
         Private___11_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__11_intnl_SystemBoolean");
         Private___2_intnl_SystemInt32 = new AstroUdonVariable<int>(PatronCredits, "__2_intnl_SystemInt32");
@@ -303,6 +328,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private___0_patronName_String = new AstroUdonVariable<string>(PatronCredits, "__0_patronName_String");
         Private___0_newTier_Int32 = new AstroUdonVariable<int>(PatronCredits, "__0_newTier_Int32");
         Private___9_intnl_SystemSingle = new AstroUdonVariable<float>(PatronCredits, "__9_intnl_SystemSingle");
+        Private___3_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PatronCredits, "__3_intnl_VRCSDKBaseVRCPlayerApi");
         Private___12_const_intnl_SystemString = new AstroUdonVariable<string>(PatronCredits, "__12_const_intnl_SystemString");
         Private___0_mp_input_String = new AstroUdonVariable<string>(PatronCredits, "__0_mp_input_String");
         Private___0_outputString_String = new AstroUdonVariable<string>(PatronCredits, "__0_outputString_String");
@@ -340,11 +366,11 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private___0_currentTier_Int32 = new AstroUdonVariable<int>(PatronCredits, "__0_currentTier_Int32");
         Private___40_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__40_intnl_SystemBoolean");
         Private___25_intnl_SystemInt32 = new AstroUdonVariable<int>(PatronCredits, "__25_intnl_SystemInt32");
-        Private___4_intnl_SystemStringArray = new AstroUdonVariable<string[]>(PatronCredits, "__4_intnl_SystemStringArray");
         Private___13_intnl_SystemSingle = new AstroUdonVariable<float>(PatronCredits, "__13_intnl_SystemSingle");
         Private___22_intnl_SystemInt32 = new AstroUdonVariable<int>(PatronCredits, "__22_intnl_SystemInt32");
         Private___0_mp_player_VRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PatronCredits, "__0_mp_player_VRCPlayerApi");
         Private___4_intnl_SystemInt32 = new AstroUdonVariable<int>(PatronCredits, "__4_intnl_SystemInt32");
+        Private_currentPortraitPlayer = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PatronCredits, "currentPortraitPlayer");
         Private___14_intnl_SystemSingle = new AstroUdonVariable<float>(PatronCredits, "__14_intnl_SystemSingle");
         Private___3_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PatronCredits, "__3_intnl_UnityEngineVector3");
         Private___47_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__47_intnl_SystemBoolean");
@@ -354,10 +380,13 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private_textureTransferInput = new AstroUdonVariable<UnityEngine.UI.RawImage>(PatronCredits, "textureTransferInput");
         Private___28_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__28_intnl_SystemBoolean");
         Private___6_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__6_intnl_SystemBoolean");
+        Private___0_player_VRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PatronCredits, "__0_player_VRCPlayerApi");
         Private___4_intnl_SystemSingle = new AstroUdonVariable<float>(PatronCredits, "__4_intnl_SystemSingle");
         Private___0_patronRows_StringArray = new AstroUdonVariable<string[]>(PatronCredits, "__0_patronRows_StringArray");
         Private___11_intnl_SystemString = new AstroUdonVariable<string>(PatronCredits, "__11_intnl_SystemString");
         Private___16_intnl_SystemInt32 = new AstroUdonVariable<int>(PatronCredits, "__16_intnl_SystemInt32");
+        Private___0_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PatronCredits, "__0_intnl_VRCSDKBaseVRCPlayerApi");
+        Private___4_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PatronCredits, "__4_intnl_VRCSDKBaseVRCPlayerApi");
         Private_patronTierText = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PatronCredits, "patronTierText");
         Private___12_intnl_SystemSingle = new AstroUdonVariable<float>(PatronCredits, "__12_intnl_SystemSingle");
         Private___0_tierStrings_StringArray = new AstroUdonVariable<string[]>(PatronCredits, "__0_tierStrings_StringArray");
@@ -373,6 +402,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private___20_intnl_SystemBoolean = new AstroUdonVariable<bool>(PatronCredits, "__20_intnl_SystemBoolean");
         Private___2_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PatronCredits, "__2_intnl_UnityEngineVector3");
         Private___3_intnl_SystemString = new AstroUdonVariable<string>(PatronCredits, "__3_intnl_SystemString");
+        Private___7_intnl_UnityEngineTransform = new AstroUdonVariable<UnityEngine.Transform>(PatronCredits, "__7_intnl_UnityEngineTransform");
         Private___0_intnl_SystemByte = new AstroUdonVariable<byte>(PatronCredits, "__0_intnl_SystemByte");
         Private___1_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PatronCredits, "__1_intnl_UnityEngineVector3");
         Private___2_const_intnl_SystemChar = new AstroUdonVariable<char>(PatronCredits, "__2_const_intnl_SystemChar");
@@ -441,6 +471,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
     private void Cleanup_PatronCredits()
     {
         Private_retries = null;
+        Private___6_intnl_UnityEngineTransform = null;
         Private___23_intnl_SystemBoolean = null;
         Private___0_const_intnl_VRCSDKBaseVRCPlayerApiTrackingDataType = null;
         Private___15_intnl_SystemInt32 = null;
@@ -518,7 +549,6 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private_portraitCamera = null;
         Private___7_intnl_SystemBoolean = null;
         Private___20_intnl_SystemInt32 = null;
-        Private___3_intnl_SystemStringArray = null;
         Private_loadingObjects = null;
         Private___22_intnl_SystemBoolean = null;
         Private___7_const_intnl_exitJumpLoc_UInt32 = null;
@@ -544,6 +574,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private___4_const_intnl_SystemString = null;
         Private___0_byte0_Byte = null;
         Private___0_byte1_Byte = null;
+        Private___10_intnl_SystemString = null;
         Private_localPlayerIsPatron = null;
         Private___11_intnl_SystemBoolean = null;
         Private___2_intnl_SystemInt32 = null;
@@ -578,6 +609,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private___0_patronName_String = null;
         Private___0_newTier_Int32 = null;
         Private___9_intnl_SystemSingle = null;
+        Private___3_intnl_VRCSDKBaseVRCPlayerApi = null;
         Private___12_const_intnl_SystemString = null;
         Private___0_mp_input_String = null;
         Private___0_outputString_String = null;
@@ -615,11 +647,11 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private___0_currentTier_Int32 = null;
         Private___40_intnl_SystemBoolean = null;
         Private___25_intnl_SystemInt32 = null;
-        Private___4_intnl_SystemStringArray = null;
         Private___13_intnl_SystemSingle = null;
         Private___22_intnl_SystemInt32 = null;
         Private___0_mp_player_VRCPlayerApi = null;
         Private___4_intnl_SystemInt32 = null;
+        Private_currentPortraitPlayer = null;
         Private___14_intnl_SystemSingle = null;
         Private___3_intnl_UnityEngineVector3 = null;
         Private___47_intnl_SystemBoolean = null;
@@ -629,10 +661,13 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private_textureTransferInput = null;
         Private___28_intnl_SystemBoolean = null;
         Private___6_intnl_SystemBoolean = null;
+        Private___0_player_VRCPlayerApi = null;
         Private___4_intnl_SystemSingle = null;
         Private___0_patronRows_StringArray = null;
         Private___11_intnl_SystemString = null;
         Private___16_intnl_SystemInt32 = null;
+        Private___0_intnl_VRCSDKBaseVRCPlayerApi = null;
+        Private___4_intnl_VRCSDKBaseVRCPlayerApi = null;
         Private_patronTierText = null;
         Private___12_intnl_SystemSingle = null;
         Private___0_tierStrings_StringArray = null;
@@ -648,6 +683,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         Private___20_intnl_SystemBoolean = null;
         Private___2_intnl_UnityEngineVector3 = null;
         Private___3_intnl_SystemString = null;
+        Private___7_intnl_UnityEngineTransform = null;
         Private___0_intnl_SystemByte = null;
         Private___1_intnl_UnityEngineVector3 = null;
         Private___2_const_intnl_SystemChar = null;
@@ -736,6 +772,28 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
                 {
                     Private_retries.Value = value.Value;
                 }
+            }
+        }
+    }
+
+    internal UnityEngine.Transform __6_intnl_UnityEngineTransform
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___6_intnl_UnityEngineTransform != null)
+            {
+                return Private___6_intnl_UnityEngineTransform.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___6_intnl_UnityEngineTransform != null)
+            {
+                Private___6_intnl_UnityEngineTransform.Value = value;
             }
         }
     }
@@ -2600,28 +2658,6 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         }
     }
 
-    internal string[] __3_intnl_SystemStringArray
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___3_intnl_SystemStringArray != null)
-            {
-                return Private___3_intnl_SystemStringArray.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___3_intnl_SystemStringArray != null)
-            {
-                Private___3_intnl_SystemStringArray.Value = value;
-            }
-        }
-    }
-
     internal UnityEngine.GameObject loadingObjects
     {
         [HideFromIl2Cpp]
@@ -3222,6 +3258,28 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
                 {
                     Private___0_byte1_Byte.Value = value.Value;
                 }
+            }
+        }
+    }
+
+    internal string __10_intnl_SystemString
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___10_intnl_SystemString != null)
+            {
+                return Private___10_intnl_SystemString.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___10_intnl_SystemString != null)
+            {
+                Private___10_intnl_SystemString.Value = value;
             }
         }
     }
@@ -4042,6 +4100,28 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
                 {
                     Private___9_intnl_SystemSingle.Value = value.Value;
                 }
+            }
+        }
+    }
+
+    internal VRC.SDKBase.VRCPlayerApi __3_intnl_VRCSDKBaseVRCPlayerApi
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___3_intnl_VRCSDKBaseVRCPlayerApi != null)
+            {
+                return Private___3_intnl_VRCSDKBaseVRCPlayerApi.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___3_intnl_VRCSDKBaseVRCPlayerApi != null)
+            {
+                Private___3_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
             }
         }
     }
@@ -4923,28 +5003,6 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         }
     }
 
-    internal string[] __4_intnl_SystemStringArray
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___4_intnl_SystemStringArray != null)
-            {
-                return Private___4_intnl_SystemStringArray.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___4_intnl_SystemStringArray != null)
-            {
-                Private___4_intnl_SystemStringArray.Value = value;
-            }
-        }
-    }
-
     internal float? __13_intnl_SystemSingle
     {
         [HideFromIl2Cpp]
@@ -5038,6 +5096,28 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
                 {
                     Private___4_intnl_SystemInt32.Value = value.Value;
                 }
+            }
+        }
+    }
+
+    internal VRC.SDKBase.VRCPlayerApi currentPortraitPlayer
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_currentPortraitPlayer != null)
+            {
+                return Private_currentPortraitPlayer.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_currentPortraitPlayer != null)
+            {
+                Private_currentPortraitPlayer.Value = value;
             }
         }
     }
@@ -5258,6 +5338,28 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
         }
     }
 
+    internal VRC.SDKBase.VRCPlayerApi __0_player_VRCPlayerApi
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___0_player_VRCPlayerApi != null)
+            {
+                return Private___0_player_VRCPlayerApi.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___0_player_VRCPlayerApi != null)
+            {
+                Private___0_player_VRCPlayerApi.Value = value;
+            }
+        }
+    }
+
     internal float? __4_intnl_SystemSingle
     {
         [HideFromIl2Cpp]
@@ -5348,6 +5450,50 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
                 {
                     Private___16_intnl_SystemInt32.Value = value.Value;
                 }
+            }
+        }
+    }
+
+    internal VRC.SDKBase.VRCPlayerApi __0_intnl_VRCSDKBaseVRCPlayerApi
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___0_intnl_VRCSDKBaseVRCPlayerApi != null)
+            {
+                return Private___0_intnl_VRCSDKBaseVRCPlayerApi.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___0_intnl_VRCSDKBaseVRCPlayerApi != null)
+            {
+                Private___0_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
+            }
+        }
+    }
+
+    internal VRC.SDKBase.VRCPlayerApi __4_intnl_VRCSDKBaseVRCPlayerApi
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___4_intnl_VRCSDKBaseVRCPlayerApi != null)
+            {
+                return Private___4_intnl_VRCSDKBaseVRCPlayerApi.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___4_intnl_VRCSDKBaseVRCPlayerApi != null)
+            {
+                Private___4_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
             }
         }
     }
@@ -5705,6 +5851,28 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
             if (Private___3_intnl_SystemString != null)
             {
                 Private___3_intnl_SystemString.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.Transform __7_intnl_UnityEngineTransform
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___7_intnl_UnityEngineTransform != null)
+            {
+                return Private___7_intnl_UnityEngineTransform.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___7_intnl_UnityEngineTransform != null)
+            {
+                Private___7_intnl_UnityEngineTransform.Value = value;
             }
         }
     }
@@ -7238,6 +7406,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
     #region AstroUdonVariables  of PatronCredits
 
     private AstroUdonVariable<int> Private_retries { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Transform> Private___6_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private___23_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi.TrackingDataType> Private___0_const_intnl_VRCSDKBaseVRCPlayerApiTrackingDataType { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private___15_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -7315,7 +7484,6 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
     private AstroUdonVariable<UnityEngine.Camera> Private_portraitCamera { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private___7_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private___20_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string[]> Private___3_intnl_SystemStringArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<UnityEngine.GameObject> Private_loadingObjects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private___22_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<uint> Private___7_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -7341,6 +7509,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
     private AstroUdonVariable<string> Private___4_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<byte> Private___0_byte0_Byte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<byte> Private___0_byte1_Byte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___10_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private_localPlayerIsPatron { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private___11_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private___2_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -7375,6 +7544,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
     private AstroUdonVariable<string> Private___0_patronName_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private___0_newTier_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<float> Private___9_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___3_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string> Private___12_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string> Private___0_mp_input_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string> Private___0_outputString_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -7412,11 +7582,11 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
     private AstroUdonVariable<int> Private___0_currentTier_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private___40_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private___25_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string[]> Private___4_intnl_SystemStringArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<float> Private___13_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private___22_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___0_mp_player_VRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private___4_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private_currentPortraitPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<float> Private___14_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<UnityEngine.Vector3> Private___3_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private___47_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -7426,10 +7596,13 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
     private AstroUdonVariable<UnityEngine.UI.RawImage> Private_textureTransferInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private___28_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private___6_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___0_player_VRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<float> Private___4_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string[]> Private___0_patronRows_StringArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string> Private___11_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private___16_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___0_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___4_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_patronTierText { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<float> Private___12_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string[]> Private___0_tierStrings_StringArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -7445,6 +7618,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
     private AstroUdonVariable<bool> Private___20_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<UnityEngine.Vector3> Private___2_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string> Private___3_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Transform> Private___7_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<byte> Private___0_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<UnityEngine.Vector3> Private___1_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<char> Private___2_const_intnl_SystemChar { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;

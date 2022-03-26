@@ -16,13 +16,8 @@
         [HideFromIl2Cpp]
         public override string Name => "Instance Master";
 
-        [HideFromIl2Cpp]
-        public override void Init(object[] parameters = null)
-        {
-            NetworkEvents.OnPlayerJoined += OnPlayerJoined;
-            NetworkEvents.OnMasterChanged += OnMasterChanged;
-        }
-        public void OnPlayerJoined(VRC.Player player)
+
+        internal override void OnPlayerJoined(VRC.Player player)
         {
             // This will handle getting the master on instance join
             if (player.prop_VRCPlayerApi_0 != null && player.prop_VRCPlayerApi_0.isMaster)
@@ -31,7 +26,7 @@
             }
         }
 
-        private void OnMasterChanged(Player player)
+        internal override void OnMasterClientSwitched(Player player)
         {
             MelonCoroutines.Start(GetOnMasterChanged(player));
         }

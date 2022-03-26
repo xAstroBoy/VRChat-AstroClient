@@ -125,6 +125,7 @@
     <Compile Include="AstroMonos\Components\Custom\Items\ColliderSuppresser.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
     <Compile Include="AstroMonos\Components\Tools\Command_SetToTweaker.cs" />
+    <Compile Include="AstroMonos\Components\Tools\PedestralReader.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
@@ -418,6 +419,8 @@
     <Compile Include="Tools\Instance\History\InstanceManager.cs" />
     <Compile Include="Tools\Instance\History\WorldManager.cs" />
     <Compile Include="Tools\AvatarPreviewer.cs" />
+    <Compile Include="Tools\PedestralImageEditor\AvatarImageEncoder.cs" />
+    <Compile Include="Tools\PedestralImageEditor\ReadPedestralTexture.cs" />
     <Compile Include="Tools\Player\PlayerFriendStateExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexUtils.cs" />

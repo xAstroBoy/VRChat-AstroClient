@@ -19,10 +19,10 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static QMNestedGridMenu FBTExploitsPage;
         internal static float ButtonUpdateTime = 0f;
         private static bool isCurrentWorld;
-        private static QMToggleButton LockButton1;
-        private static QMToggleButton LockButton2;
-        private static QMToggleButton LockButton3;
-        private static QMToggleButton LockButton4;
+       // private static QMToggleButton LockButton1;
+       // private static QMToggleButton LockButton2;
+       // private static QMToggleButton LockButton3;
+       // private static QMToggleButton LockButton4;
 
         internal static void InitButtons(QMGridTab main)
         {
@@ -406,10 +406,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             set
             {
                 _IsRoom1Locked = value;
-                if (LockButton1 != null)
-                {
-                    LockButton1.SetToggleState(value);
-                }
+                //if (LockButton1 != null)
+                //{
+                //    LockButton1.SetToggleState(value);
+                //}
             }
         }
 
@@ -424,10 +424,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             set
             {
                 _IsRoom2Locked = value;
-                if (LockButton2 != null)
-                {
-                    LockButton2.SetToggleState(value);
-                }
+              // if (LockButton2 != null)
+              // {
+              //     LockButton2.SetToggleState(value);
+              // }
             }
         }
 
@@ -442,10 +442,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             set
             {
                 _IsRoom3Locked = value;
-                if (LockButton3 != null)
-                {
-                    LockButton3.SetToggleState(value);
-                }
+               // if (LockButton3 != null)
+               // {
+               //     LockButton3.SetToggleState(value);
+               // }
             }
         }
 
@@ -460,10 +460,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             set
             {
                 _IsRoom4Locked = value;
-                if (LockButton4 != null)
-                {
-                    LockButton4.SetToggleState(value);
-                }
+               // if (LockButton4 != null)
+               // {
+               //     LockButton4.SetToggleState(value);
+               // }
             }
         }
     }
