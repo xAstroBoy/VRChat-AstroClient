@@ -32,7 +32,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (AutoStarterController != null) return UdonHeapParser.Udon_Parse_Boolean(AutoStarterController, ToggleStatusString);
+                if (AutoStarterController != null) return UdonHeapParser.Udon_Parse<bool>(AutoStarterController, ToggleStatusString);
                 return null;
             }
         }

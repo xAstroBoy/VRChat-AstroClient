@@ -334,6 +334,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_WaveEditor.cs" />
     <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealer.cs" />
+    <Compile Include="Experiments\PatronFooler.cs" />
     <Compile Include="ModsDetector\NotoriousPatcher.cs" />
     <Compile Include="PlayerList\Config\EntryWrapper.cs" />
     <Compile Include="PlayerList\Config\PlayerListConfig.cs" />
@@ -420,7 +421,8 @@
     <Compile Include="Tools\Instance\History\WorldManager.cs" />
     <Compile Include="Tools\AvatarPreviewer.cs" />
     <Compile Include="Tools\PedestralImageEditor\AvatarImageEncoder.cs" />
-    <Compile Include="Tools\PedestralImageEditor\ReadPedestralTexture.cs" />
+    <Compile Include="Tools\PedestralImageEditor\ReadRenderTextureAlpha.cs" />
+    <Compile Include="Tools\PedestralImageEditor\ReadRenderTextureNonAlpha.cs" />
     <Compile Include="Tools\Player\PlayerFriendStateExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexUtils.cs" />

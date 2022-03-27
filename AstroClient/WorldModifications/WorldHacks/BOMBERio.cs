@@ -321,8 +321,8 @@
                 {
                     if (disassembled != null)
                     {
-                        UdonHeapEditor.PatchHeap(disassembled, Outside_RunSpeedSymbol, Run_Speed, true);
-                        UdonHeapEditor.PatchHeap(disassembled, Outside_WalkAndStrafeSpeedSymbol, Walk_And_Strafe_Speed, true);
+                        UdonHeapEditor.PatchHeap(disassembled, Outside_RunSpeedSymbol, Run_Speed);
+                        UdonHeapEditor.PatchHeap(disassembled, Outside_WalkAndStrafeSpeedSymbol, Walk_And_Strafe_Speed);
                     }
                 }
             }

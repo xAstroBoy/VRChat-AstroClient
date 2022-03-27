@@ -31,7 +31,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_Boolean(CurrentTower, "__0_validPlacement_Boolean");
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<bool>(CurrentTower, "__0_validPlacement_Boolean");
                 return null;
             }
             [HideFromIl2Cpp]
@@ -48,7 +48,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_Boolean(CurrentTower, "previouslyValidPlacement");
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<bool>(CurrentTower, "previouslyValidPlacement");
                 return null;
             }
             [HideFromIl2Cpp]
@@ -65,7 +65,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_Boolean(CurrentTower, "__70_intnl_SystemBoolean");
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<bool>(CurrentTower, "__70_intnl_SystemBoolean");
                 return null;
             }
             [HideFromIl2Cpp]
@@ -83,7 +83,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_Boolean(CurrentTower, "__0_intnl_returnValSymbol_Boolean");
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<bool>(CurrentTower, "__0_intnl_returnValSymbol_Boolean");
                 return null;
             }
             [HideFromIl2Cpp]
@@ -100,7 +100,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_Boolean(CurrentTower, "__3_intnl_SystemBoolean");
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<bool>(CurrentTower, "__3_intnl_SystemBoolean");
                 return null;
             }
             [HideFromIl2Cpp]

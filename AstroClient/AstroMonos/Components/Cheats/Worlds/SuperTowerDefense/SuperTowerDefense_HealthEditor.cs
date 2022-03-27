@@ -32,7 +32,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (HealthController != null) return UdonHeapParser.Udon_Parse_Int32(HealthController, Lives);
+                if (HealthController != null) return UdonHeapParser.Udon_Parse<int>(HealthController, Lives);
                 return null;
             }
             [HideFromIl2Cpp]
@@ -49,7 +49,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (HealthController != null) return UdonHeapParser.Udon_Parse_Int32(HealthController, BoughtLives);
+                if (HealthController != null) return UdonHeapParser.Udon_Parse<int>(HealthController, BoughtLives);
                 return null;
             }
             [HideFromIl2Cpp]

@@ -34,7 +34,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (BankController != null) return UdonHeapParser.Udon_Parse_Int32(BankController, CurrentMoney_Address);
+                if (BankController != null) return UdonHeapParser.Udon_Parse<int>(BankController, CurrentMoney_Address);
                 return null;
             }
             [HideFromIl2Cpp]
@@ -65,7 +65,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (BankController != null) return UdonHeapParser.Udon_Parse_Int32(BankController, StartMoney_Address);
+                if (BankController != null) return UdonHeapParser.Udon_Parse<int>(BankController, StartMoney_Address);
                 return null;
             }
             [HideFromIl2Cpp]

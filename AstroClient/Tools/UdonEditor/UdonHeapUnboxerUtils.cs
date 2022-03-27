@@ -8,6 +8,7 @@
     internal static class UdonHeapUnboxerUtils
     {
         internal static List<string> UnsupportedTypes = new List<string>();
+        // TODO : make something to get any Type (Convert them back to system types if Il2cppSystem ones, and Convert them to string!)
 
         internal static string UnboxUdonHeap(Il2CppSystem.Object obj)
         {

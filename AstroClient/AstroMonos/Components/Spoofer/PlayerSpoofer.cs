@@ -68,7 +68,7 @@
 
         internal void LateUpdate()
         {
-            if (IsSpooferActive && /*isSecondJoin &&*/ user != null && DisplayName != SpoofedName)
+            if (IsSpooferActive && isSecondJoin && user != null && DisplayName != SpoofedName)
             {
                 DisplayName = SpoofedName;
             }
@@ -76,7 +76,7 @@
 
         internal override void OnRoomLeft()
         {
-            //SafetyCheck();
+            SafetyCheck();
             if (!KeepSpoofingOnWorldChange)
             {
                 IsSpooferActive = false;
@@ -137,29 +137,29 @@
             }
         }
 
-        //private void SafetyCheck()
-        //{
-        //    if (isSecondJoin && isFistJoin)
-        //    {
-        //        return;
-        //    }
+        private void SafetyCheck()
+        {
+            if (isSecondJoin && isFistJoin)
+            {
+                return;
+            }
 
-        //    if (!isFistJoin)
-        //    {
-        //        isFistJoin = true;
-        //        return;
-        //    }
-        //    else
+            if (!isFistJoin)
+            {
+                isFistJoin = true;
+                return;
+            }
+            else
 
-        //    {
-        //        if (isFistJoin && !isSecondJoin)
-        //        {
-        //            isSecondJoin = true;
-        //        }
-        //    }
-        //}
+            {
+                if (isFistJoin && !isSecondJoin)
+                {
+                    isSecondJoin = true;
+                }
+            }
+        }
 
-        internal bool KeepSpoofingOnWorldChange { get; set; } = false;
+        internal bool KeepSpoofingOnWorldChange { [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; } = false;
 
         internal APIUser user
         {
@@ -208,11 +208,11 @@
             }
         }
 
-        //private bool isFistJoin = false;
+        private bool isFistJoin { [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; } = false;
 
-        //private bool isSecondJoin = false;
+        private bool isSecondJoin { [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; } = false;
 
-        private string _SpoofedName = string.Empty;
+        private string _SpoofedName { [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; } = string.Empty;
 
         internal string SpoofedName
         {

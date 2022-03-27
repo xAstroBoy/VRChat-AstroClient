@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JustBClub;
+﻿using System.Linq;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JustBClub;
 
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
@@ -51,7 +53,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string(PatronControl, AnotherPatronList4_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string>(PatronControl, AnotherPatronList4_Address);
             return null;
         }
     }
@@ -63,7 +65,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string(PatronControl, AnotherPatronGroup_3_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string>(PatronControl, AnotherPatronGroup_3_Address);
             return null;
         }
     }
@@ -75,7 +77,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string_List(PatronControl, AnotherPatronList5_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string[]>(PatronControl, AnotherPatronList5_Address).ToList();
             return null;
         }
     }
@@ -88,7 +90,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string_List(PatronControl, patrons_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string[]>(PatronControl, patrons_Address).ToList();;
             return null;
         }
     }
@@ -100,7 +102,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string_List(PatronControl, AnotherPatronList_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string[]>(PatronControl, AnotherPatronList_Address).ToList();;
             return null;
         }
     }
@@ -112,7 +114,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string_List(PatronControl, CurrentPatronsTiers_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string[]>(PatronControl, CurrentPatronsTiers_Address).ToList();;
             return null;
         }
     }
@@ -122,7 +124,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string_List(PatronControl, CurrentElites_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string[]>(PatronControl, CurrentElites_Address).ToList();;
             return null;
         }
     }
@@ -134,7 +136,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string(PatronControl, PatronsToProcess_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string>(PatronControl, PatronsToProcess_Address);
             return null;
         }
     }
@@ -150,7 +152,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         [HideFromIl2Cpp]
         get
         {
-            if (PatronControl != null) return UdonHeapParser.Udon_Parse_string_List(PatronControl, elites_Address);
+            if (PatronControl != null) return UdonHeapParser.Udon_Parse<string[]>(PatronControl, elites_Address).ToList();;
             return null;
         }
     }
@@ -195,7 +197,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
 
                 if (isModified)
                 {
-                    UdonHeapEditor.PatchHeap(PatronControl, listaddress, modifiedlist.ToArray(), true);
+                    UdonHeapEditor.PatchHeap(PatronControl, listaddress, modifiedlist.ToArray());
                     if (!Delete)
                         ModConsole.DebugLog($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron list");
                     else
@@ -237,7 +239,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
 
                 if (isModified)
                 {
-                    UdonHeapEditor.PatchHeap(PatronControl, GroupAddress, ModifiedGroup, true);
+                    UdonHeapEditor.PatchHeap(PatronControl, GroupAddress, ModifiedGroup);
                     if (!Delete)
                         ModConsole.DebugLog($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron string Group list");
                     else
@@ -290,7 +292,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
 
                 if (isModified)
                 {
-                    UdonHeapEditor.PatchHeap(PatronControl, listaddress, EditedList.ToArray(), true);
+                    UdonHeapEditor.PatchHeap(PatronControl, listaddress, EditedList.ToArray());
                     if (!Delete)
                         ModConsole.DebugLog($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron Group list");
                     else

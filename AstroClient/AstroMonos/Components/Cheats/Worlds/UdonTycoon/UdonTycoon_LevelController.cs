@@ -30,7 +30,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (LevelController != null) return UdonHeapParser.Udon_Parse_string(LevelController, "__78_intnl_SystemString");
+                if (LevelController != null) return UdonHeapParser.Udon_Parse<string>(LevelController, "__78_intnl_SystemString");
 
                 return null;
             }
@@ -46,7 +46,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (LevelController != null) return UdonHeapParser.Udon_Parse_Int32(LevelController, "_currentPolyCount");
+                if (LevelController != null) return UdonHeapParser.Udon_Parse<int>(LevelController, "_currentPolyCount");
                 return null;
             }
             [HideFromIl2Cpp]
@@ -63,7 +63,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (LevelController != null) return UdonHeapParser.Udon_Parse_string(LevelController, "__7_intnl_SystemString");
+                if (LevelController != null) return UdonHeapParser.Udon_Parse<string>(LevelController, "__7_intnl_SystemString");
 
                 return null;
             }

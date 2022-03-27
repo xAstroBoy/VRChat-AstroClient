@@ -31,7 +31,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_single(CurrentTower, RangeAddress);
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<float>(CurrentTower, RangeAddress);
                 return null;
             }
             [HideFromIl2Cpp]
@@ -44,7 +44,7 @@
                         var fixedvalue = Math.Abs(value.GetValueOrDefault(0));
                         if (fixedvalue != 0)
                         {
-                            UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, fixedvalue, true);
+                            UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, fixedvalue);
                         }
                     }
                 }
@@ -81,7 +81,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_single(CurrentTower, SpeedMultiplierAddress);
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<float>(CurrentTower, SpeedMultiplierAddress);
                 return null;
             }
             [HideFromIl2Cpp]
@@ -95,7 +95,7 @@
                         var fixedvalue = Math.Abs(value.GetValueOrDefault(0));
                         if (fixedvalue != 0)
                         {
-                            UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, Math.Abs(value.Value), true);
+                            UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, Math.Abs(value.Value));
                         }
                     }
                 }

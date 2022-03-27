@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using System.Linq;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Spoofer;
@@ -24,32 +26,32 @@
                         var disassembledbehaviour = PickupSync_SPH_SFB_SACBehaviour.UdonBehaviour.ToRawUdonBehaviour();
                         if (disassembledbehaviour != null)
                         {
-                            var List1 = UdonHeapParser.Udon_Parse_string_List(disassembledbehaviour, _superSpecialSnowflakes);
+                            var List1 = UdonHeapParser.Udon_Parse<string[]>(disassembledbehaviour, _superSpecialSnowflakes).ToList();
                             if (List1 != null)
                             {
                                 List1.Add(PlayerSpooferUtils.Original_DisplayName);
-                                UdonHeapEditor.PatchHeap(disassembledbehaviour, _superSpecialSnowflakes, List1.ToArray(), true);
+                                UdonHeapEditor.PatchHeap(disassembledbehaviour, _superSpecialSnowflakes, List1.ToArray());
                             }
-                            UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_mp_isAdmin_Boolean, true, true);
-                            UdonHeapEditor.PatchHeap(disassembledbehaviour, _isAdmin, true, true);
-                            UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_ownerAndAdmin_Boolean, true, true);
+                            UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_mp_isAdmin_Boolean, true);
+                            UdonHeapEditor.PatchHeap(disassembledbehaviour, _isAdmin, true);
+                            UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_ownerAndAdmin_Boolean, true);
 
-                            var List2 = UdonHeapParser.Udon_Parse_string_List(disassembledbehaviour, _permaBannedPlayers);
+                            var List2 = UdonHeapParser.Udon_Parse<string[]>(disassembledbehaviour, _permaBannedPlayers).ToList();;
                             if (List2 != null)
                             {
                                 if (List2.Contains(PlayerSpooferUtils.Original_DisplayName))
                                 {
                                     List2.Remove(PlayerSpooferUtils.Original_DisplayName);
                                     ModConsole.Log("Removed Self from Current world Permanent Banned list...");
-                                    UdonHeapEditor.PatchHeap(disassembledbehaviour, _permaBannedPlayers, List2.ToArray(), true);
+                                    UdonHeapEditor.PatchHeap(disassembledbehaviour, _permaBannedPlayers, List2.ToArray());
                                 }
                             }
 
-                            var List3 = UdonHeapParser.Udon_Parse_string_List(disassembledbehaviour, __0_temp_StringArray);
+                            var List3 = UdonHeapParser.Udon_Parse<string[]>(disassembledbehaviour, __0_temp_StringArray).ToList();;
                             if (List3 != null)
                             {
                                 List3.Add(PlayerSpooferUtils.Original_DisplayName);
-                                UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_temp_StringArray, List3.ToArray(), true);
+                                UdonHeapEditor.PatchHeap(disassembledbehaviour, __0_temp_StringArray, List3.ToArray());
                             }
 
                             PickupSync_SPH_SFB_SACBehaviour.InvokeBehaviour();
@@ -63,12 +65,12 @@
                         var disassembledbehaviour = PanelBehaviour.UdonBehaviour.ToRawUdonBehaviour();
                         if (disassembledbehaviour != null)
                         {
-                            var isCurrentAdmin = UdonHeapParser.Udon_Parse_Boolean(disassembledbehaviour, _isAdmin);
+                            var isCurrentAdmin = UdonHeapParser.Udon_Parse<bool>(disassembledbehaviour, _isAdmin);
                             if (isCurrentAdmin != null)
                             {
-                                if (!isCurrentAdmin.Value)
+                                if (!isCurrentAdmin)
                                 {
-                                    UdonHeapEditor.PatchHeap(disassembledbehaviour, _isAdmin, true, true);
+                                    UdonHeapEditor.PatchHeap(disassembledbehaviour, _isAdmin, true);
 
                                 }
 

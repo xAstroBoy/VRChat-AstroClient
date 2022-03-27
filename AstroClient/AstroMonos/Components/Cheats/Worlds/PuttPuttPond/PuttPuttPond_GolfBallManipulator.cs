@@ -34,7 +34,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (GolfBallFireworks != null) return UdonHeapParser.Udon_Parse_UnityEngine_UI_Text(GolfBallFireworks, playerName_address).text;
+                if (GolfBallFireworks != null) return UdonHeapParser.Udon_Parse<UnityEngine.UI.Text>(GolfBallFireworks, playerName_address).text;
                 return null;
             }
         }

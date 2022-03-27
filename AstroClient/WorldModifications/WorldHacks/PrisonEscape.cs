@@ -644,7 +644,7 @@
                     ModConsole.DebugLog($"Setting {item.name} guardsCanUse to {CanUse}");
                     if (item.RawItem != null)
                     {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", CanUse, true);
+                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", CanUse);
                     }
                 }
                 catch
@@ -718,7 +718,7 @@
                     ModConsole.DebugLog($"Setting {item.name} dropOnUse to {dropOnUse}");
                     if (item.RawItem != null)
                     {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", dropOnUse, true);
+                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", dropOnUse);
                     }
                 }
                 catch
@@ -737,7 +737,7 @@
                     ModConsole.DebugLog($"Setting {item.name} maxPickupDist to 999999999");
                     if (item.RawItem != null)
                     {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "maxPickupDist", 999999999f, true);
+                        UdonHeapEditor.PatchHeap(item.RawItem, "maxPickupDist", 999999999f);
                     }
                 }
                 catch
@@ -755,7 +755,7 @@
                     ModConsole.DebugLog($"Setting {item.name} maxUseDist to 999999999");
                     if (item.RawItem != null)
                     {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "maxUseDist", 999999999f, true);
+                        UdonHeapEditor.PatchHeap(item.RawItem, "maxUseDist", 999999999f);
                     }
                 }
                 catch{}
@@ -809,10 +809,10 @@
 
                 if (RedCardBehaviour != null)
                 {
-                    var isTaken = UdonHeapParser.Udon_Parse_Boolean(RedCardBehaviour, "taken");
-                    if (isTaken.GetValueOrDefault(false))
+                    var isTaken = UdonHeapParser.Udon_Parse<bool>(RedCardBehaviour, "taken");
+                    if (isTaken)
                     {
-                        UdonHeapEditor.PatchHeap(RedCardBehaviour, "taken", false, true);
+                        UdonHeapEditor.PatchHeap(RedCardBehaviour, "taken", false);
                     }
                 }
 

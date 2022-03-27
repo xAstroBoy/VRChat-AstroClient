@@ -1,4 +1,7 @@
-﻿namespace AstroClient.Tools.UdonSearcher
+﻿using System.Windows.Forms.DataVisualization.Charting;
+#pragma warning disable CS0168
+
+namespace AstroClient.Tools.UdonSearcher
 {
     using System;
     using System.Collections;
@@ -23,16 +26,18 @@
             MelonCoroutines.Start(ReplaceString_Routine(find, replacement));
         }
 
+
+
+
         private static IEnumerator ReplaceString_Routine(string find, string replacement)
         {
 
             if (!find.IsNotNullOrEmptyOrWhiteSpace() || !replacement.IsNotNullOrEmptyOrWhiteSpace()) yield return null;
-
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
+        int success = 0;
+       int Failed  = 0;
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
-            int result = 0;
-            int Failed = 0;
             var reg = new Regex();
             if (udons.Count() != 0)
             {
@@ -55,15 +60,14 @@
                                         {
                                             case UdonTypes_String.System_String:
                                                 {
-                                                    var item = UnboxVariable.Unpack_String();
+                                                    var item = unpackedudon.IUdonHeap.GetHeapVariable<string>(address);
                                                     if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
                                                         if (item.isMatch(find))
                                                         {
-                                                            result++;
                                                             var modifiedstring = item.ReplaceWholeWord(find, replacement);
                                                             //ModConsole.DebugLog($"Modified a String , Original : {item}, Modified : {modifiedstring}");
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, modifiedstring, true);
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, modifiedstring, () => { success++; }, () => { Failed++; });
                                                         }
                                                     }
 
@@ -71,7 +75,7 @@
                                                 }
                                             case UdonTypes_String.System_String_Array:
                                                 {
-                                                    var list = UnboxVariable.Unpack_List_String();
+                                                    var list = unpackedudon.IUdonHeap.GetHeapVariable<string[]>(address).ToList();
                                                     if (list.Count() != 0)
                                                     {
                                                         var patchedlist = new List<string>();
@@ -82,7 +86,6 @@
                                                             {
                                                                 if (item.Equals(find, StringComparison.InvariantCultureIgnoreCase))
                                                                 {
-                                                                    result++;
                                                                     var modifiedstring = item.ReplaceWholeWord(find, replacement);
                                                                     //ModConsole.DebugLog($"Modified String in Array , Original : {item}, Modified : {modifiedstring}");
                                                                     patchedlist.Add(modifiedstring);
@@ -94,7 +97,7 @@
                                                         }
                                                         if (modified)
                                                         {
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), () => { success++; }, () => { Failed++; });
                                                         }
                                                     }
 
@@ -102,17 +105,16 @@
                                                 }
                                             case UdonTypes_String.TMPro_TextMeshPro:
                                                 {
-                                                    var item = UnboxVariable.Unpack_TextMeshPro();
+                                                    var item = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshPro>(address);
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
                                                         if (item.text.isMatch(find))
                                                         {
-                                                            result++;
                                                             var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
                                                             //ModConsole.DebugLog($"Modified String in TextMeshPro , Original : {item}, Modified : {modifiedstring}");
 
                                                             item.text = modifiedstring;
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, true);
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, () => { success++; }, () => { Failed++; });
                                                         }
                                                     }
 
@@ -120,7 +122,7 @@
                                                 }
                                             case UdonTypes_String.TMPro_TextMeshPro_Array:
                                                 {
-                                                    var list = UnboxVariable.Unpack_List_TextMeshPro();
+                                                    var list = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshPro[]>(address).ToList();
                                                     if (list.Count() != 0)
                                                     {
                                                         var patchedlist = new List<TextMeshPro>();
@@ -131,7 +133,6 @@
                                                             {
                                                                 if (item.text.isMatch(find))
                                                                 {
-                                                                    result++;
                                                                     var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
                                                                     //ModConsole.DebugLog($"Modified String in TextMeshPro Array , Original : {item}, Modified : {modifiedstring}");
                                                                     item.text = modifiedstring;
@@ -144,7 +145,7 @@
                                                         }
                                                         if (modified)
                                                         {
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), () => { success++; }, () => { Failed++; });
                                                         }
                                                     }
 
@@ -153,7 +154,7 @@
                                             // TODO: Figure how to edit it .
                                             case UdonTypes_String.UnityEngine_TextAsset:
                                                 {
-                                                    var item = UnboxVariable.Unpack_TextAsset();
+                                                    var item = unpackedudon.IUdonHeap.GetHeapVariable<TextAsset>(address);
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
                                                         if (item.text.isMatch(find))
@@ -168,7 +169,7 @@
                                                                 TextAsset.Internal_CreateInstance(item, patchedstr);
                                                                 if (item.text.Equals(patchedstr))
                                                                 {
-                                                                    result++;
+                                                                    success++;
                                                                     ModConsole.DebugLog("Patched TextAsset!");
                                                                 }
                                                                 else
@@ -189,8 +190,12 @@
                                                 }
                                             case UdonTypes_String.UnityEngine_TextAsset_Array:
                                                 {
-
-                                                    var list = UnboxVariable.Unpack_List_TextAsset();
+                                                    var list = unpackedudon.IUdonHeap.GetHeapVariable<TextAsset[]>(address).ToList();
+                                                    if (list == null)
+                                                    {
+                                                        Failed++;
+                                                        break;
+                                                    }
                                                     if (list.Count() != 0)
                                                     {
                                                         foreach (var item in list)
@@ -207,7 +212,7 @@
                                                                         TextAsset.Internal_CreateInstance(item, patchedstr);
                                                                         if (item.text.Equals(patchedstr))
                                                                         {
-                                                                            result++;
+                                                                            success++;
                                                                             ModConsole.DebugLog("Patched TextAsset!");
                                                                         }
                                                                         else
@@ -237,9 +242,11 @@
                                                 continue;
                                         }
                                     }
-                                    catch (System.Exception e)
+                                    // TODO : Make a better parser using the same approach (WIP)
+                                    catch (Exception e)
                                     {
-                                        ModConsole.DebugErrorExc(e);
+                                        Failed++;
+                                        //ModConsole.DebugErrorExc(e);
                                     }
                                 }
                             }
@@ -247,7 +254,7 @@
                     }
                 }
                 stopwatch.Stop();
-                ModConsole.DebugLog($"Found and replaced {result}, containing {find} with {replacement}, Failed : {Failed}, Took : {stopwatch.ElapsedMilliseconds}ms");
+                ModConsole.DebugLog($"Found and replaced {success}, containing {find} with {replacement}, Failed : {Failed}, Took : {stopwatch.ElapsedMilliseconds}ms");
             }
 
             yield return null;

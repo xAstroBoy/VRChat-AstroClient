@@ -30,7 +30,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (PolyCollector != null) return UdonHeapParser.Udon_Parse_Int32(PolyCollector, Counter);
+                if (PolyCollector != null) return UdonHeapParser.Udon_Parse<int>(PolyCollector, Counter);
                 return null;
             }
             [HideFromIl2Cpp]

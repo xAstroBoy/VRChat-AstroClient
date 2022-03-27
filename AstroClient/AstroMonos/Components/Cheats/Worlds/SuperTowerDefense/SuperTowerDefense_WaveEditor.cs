@@ -30,7 +30,7 @@
             [HideFromIl2Cpp]
             get
             {
-                if (WaveController != null) return UdonHeapParser.Udon_Parse_Int32(WaveController, Wave);
+                if (WaveController != null) return UdonHeapParser.Udon_Parse<int>(WaveController, Wave);
                 return null;
             }
             [HideFromIl2Cpp]
@@ -38,7 +38,7 @@
             {
                 if (WaveController != null)
                     if (value.HasValue)
-                        UdonHeapEditor.PatchHeap(WaveController, Wave, Math.Abs(value.Value), true);
+                        UdonHeapEditor.PatchHeap(WaveController, Wave, Math.Abs(value.Value));
             }
         }
 
