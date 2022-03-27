@@ -1,4 +1,5 @@
-﻿namespace AstroClient.Tools.UdonEditor
+﻿#nullable enable
+namespace AstroClient.Tools.UdonEditor
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +12,7 @@
 
     internal static class UdonHeapParser
     {
-        internal static T Udon_Parse<T>(RawUdonBehaviour UnpackedUdonBehaviour, string symbol) 
+        internal static T? Udon_Parse<T>(RawUdonBehaviour UnpackedUdonBehaviour, string symbol) 
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -21,10 +22,10 @@
             {
                 ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
             }
-            return default(T);
+            return null;
         }
 
-        internal static T Udon_Parse<T>(IUdonHeap heap, uint address)
+        internal static T? Udon_Parse<T>(IUdonHeap heap, uint address)
         {
             if (heap != null)
             {
@@ -38,7 +39,7 @@
             {
                 ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
             }
-            return default(T);
+            return null;
         }
 
     }
