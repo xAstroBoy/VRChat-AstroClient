@@ -1,4 +1,3 @@
-using AvatarImageReader;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
@@ -34,12 +33,12 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         internal void ReadCameraTexture()
         {
-            if (PedestralCamera != null)
-            {
-                Result = ReadPedestralTexture.ReadCameraTexture(PedestralCamera);
-
-                ModConsole.DebugLog($"Camera returned : {Result}");
-            }
+           // if (PedestralCamera != null)
+           // {
+           //     Result = ReadPedestralTexture.ReadCameraTexture(PedestralCamera);
+           //
+           //     ModConsole.DebugLog($"Camera returned : {Result}");
+           // }
         }
         
 

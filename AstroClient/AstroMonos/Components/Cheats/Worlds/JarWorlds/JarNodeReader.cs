@@ -26,7 +26,7 @@
             {
                 if (RawNode != null)
                 {
-                    var player = UdonHeapParser.Udon_Parse_VRCPlayerApi(RawNode, "playerApi");
+                    var player = UdonHeapParser.Udon_Parse<VRCPlayerApi>(RawNode, "playerApi");
                     if (player != null) return player;
                 }
 

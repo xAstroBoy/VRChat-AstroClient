@@ -18,7 +18,7 @@
                 var unpackedudon = udonnode.ToRawUdonBehaviour();
                 if (unpackedudon != null)
                 {
-                    System.Console.Clear();
+                    Console.Clear();
                     builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
                     builder.AppendLine();
                     foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
@@ -56,6 +56,7 @@
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, @"AstroClient\Dumper\Unsupported_UdonTypes.txt"), builder.ToString());
             }
         }
+
 
         internal static string UnboxUdonToString(UdonBehaviour udonnode)
         {
