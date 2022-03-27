@@ -22,7 +22,7 @@ namespace AstroClient.Tools.UdonEditor
             {
                 ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
             }
-            return null;
+            return default(T);;
         }
 
         internal static T? Udon_Parse<T>(IUdonHeap heap, uint address)
@@ -39,7 +39,7 @@ namespace AstroClient.Tools.UdonEditor
             {
                 ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
             }
-            return null;
+            return default(T);
         }
 
     }

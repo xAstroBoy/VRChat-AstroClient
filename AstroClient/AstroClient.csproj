@@ -460,6 +460,7 @@
     <Compile Include="Streamer\StreamerTags.cs" />
     <Compile Include="Tools\Skybox\CubemapTools\CubeMapAndTexture2D.cs" />
     <Compile Include="Tools\UdonEditor\Disassembler.cs" />
+    <Compile Include="Tools\UdonEditor\TypeFinder.cs" />
     <Compile Include="Tools\UdonEditor\UdonDisassembler.cs" />
     <Compile Include="Tools\UdonEditor\UdonHeapEditor.cs" />
     <Compile Include="Tools\UdonEditor\UdonHeapParser.cs" />
