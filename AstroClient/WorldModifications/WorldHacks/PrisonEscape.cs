@@ -58,7 +58,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 AdjustGuardTowerBorders(guardtower);
             }
-            var guardtower_1 = Yard.FindObject("GuardTower (1)//Colliders");
+            var guardtower_1 = Yard.FindObject("GuardTower (1)/Colliders");
             if (guardtower_1 != null)
             {
                 AdjustGuardTowerBorders(guardtower_1);
