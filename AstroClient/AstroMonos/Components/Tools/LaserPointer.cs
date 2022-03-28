@@ -1,4 +1,5 @@
 ﻿using AstroClient.xAstroBoy.UIPaths;
+using BestHTTP.Extensions;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
@@ -31,10 +32,23 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         }
 
         private LineRenderer Laser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private Vector3 origin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Vector3 endPoint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-
         internal bool ReportHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        internal bool UseRaycast { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
+        internal Color Defaultcolor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.Orange;
+        internal Color ColliderHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.OrangeRed;
+
+        internal Color PlayerHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.Red;
+
+
+        internal void SetLaserColor(Color color)
+        {
+            Laser.startColor = color;
+            Laser.endColor = color;
+
+        }
+
+        internal bool ChangeOnPlayerHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
         void Start()
         {
@@ -42,11 +56,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             if(Laser != null)
             {
                 Laser.material = new Material(Shader.Find("Sprites/Default"));
-                Laser.startWidth = 0.1f;
-                Laser.endWidth = 0.1f;
-                Laser.widthMultiplier = 0.3f;
-                Laser.startColor = Color.red;
-                Laser.endColor = Color.red;
+                Laser.startWidth = 0.01f;
+                Laser.endWidth = 0.01f;
+                Laser.widthMultiplier = 0.2f;
+                Laser.startColor = Defaultcolor;
+                Laser.endColor = Defaultcolor;
             }
         }
 
@@ -60,16 +74,40 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             if(Laser != null)
             {
-                // Are we hitting any colliders?
-                RaycastHit hit;
-                if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, float.MaxValue))
+                if (UseRaycast)
                 {
-                    // If yes, then set endpoint to hit-point.
-                    endPoint = hit.point;
-                    if (ReportHit)
+                    // Are we hitting any colliders?
+                    RaycastHit hit;
+                    if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, float.MaxValue, ~0, QueryTriggerInteraction.Ignore))
                     {
-                        ModConsole.DebugLog($"Laser is Hitting {hit.collider.name} in GameObject {hit.collider.gameObject.name} in Root {hit.collider.gameObject.transform.root.name}");
+                        // If yes, then set endpoint to hit-point.
+                        endPoint = hit.point;
+                        if (hit.collider.transform.root.GetComponentInChildren<Player>() != null)
+                        {
+                            if (ChangeOnPlayerHit)
+                            {
+                                SetLaserColor(PlayerHit);
+                            }
+                        }
+                        else
+                        {
+                            SetLaserColor(ColliderHit);
+                        }
+                        if (ReportHit)
+                        {
+                            ModConsole.DebugLog($"Laser is Hitting GameObject {hit.collider.gameObject.name} in Root {hit.collider.gameObject.transform.root.name}");
+                        }
                     }
+                    else
+                    {
+                        SetLaserColor(Defaultcolor);
+                        endPoint = this.transform.position + this.transform.forward * 6000f; // This should Make the laser not have a stuck effect when Raycast doesn't touch anything.
+                    }
+                }
+                else
+                {
+                    SetLaserColor(Defaultcolor);
+                    endPoint = this.transform.position + this.transform.forward * 6000f; // This should Make the laser not have a stuck effect when Raycast doesn't touch anything.
                 }
 
                 // Set end point of laser.

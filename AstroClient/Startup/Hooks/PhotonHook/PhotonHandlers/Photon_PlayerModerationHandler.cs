@@ -64,6 +64,7 @@ internal class Photon_PlayerModerationHandler
                                         case false:
                                             {
                                                 PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
+                                                result = HookAction.Nothing;
                                                 break;
                                             }
                                     }
@@ -77,11 +78,13 @@ internal class Photon_PlayerModerationHandler
                                         case true:
                                             {
                                                 PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
+                                                result = HookAction.Nothing;
                                                 break;
                                             }
                                         case false:
                                             {
                                                 PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
+                                                result = HookAction.Nothing;
                                                 break;
                                             }
                                     }
@@ -122,13 +125,19 @@ internal class Photon_PlayerModerationHandler
                                 if (MutedlistObject != null)
                                 {
                                     var MutePlayersArray = MutedlistObject.Cast<Il2CppStructArray<int>>();
-                                    if (MutePlayersArray != null)
-                                        if (MutePlayersArray.Count != ModerationCode.EventCode)
-                                            for (var i = 0; i < MutePlayersArray.Count; i++)
+                                    {
+                                        if (MutePlayersArray != null)
+                                        {
+                                            if (MutePlayersArray.Count != ModerationCode.EventCode)
                                             {
-                                                var MutePlayer = GameInstances.LoadBalancingPeer.GetPhotonPlayer(MutePlayersArray[i]);
-                                                PhotonModerationHandler.OnPlayerMutedYou_Invoker(MutePlayer);
+                                                for (var i = 0; i < MutePlayersArray.Count; i++)
+                                                {
+                                                    var MutePlayer = GameInstances.LoadBalancingPeer.GetPhotonPlayer(MutePlayersArray[i]);
+                                                    PhotonModerationHandler.OnPlayerMutedYou_Invoker(MutePlayer);
+                                                }
                                             }
+                                        }
+                                    }
                                 }
                             }
                         }

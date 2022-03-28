@@ -245,7 +245,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var MuzzlePos = item.transform.FindObject("Mesh/Muzzle Loc");
                     if (MuzzlePos != null)
                     {
-                        MuzzlePos.AddComponent<LaserPointer>();
+                        var laser = MuzzlePos.AddComponent<LaserPointer>();
+                        if (laser != null)
+                        {
+                            laser.ChangeOnPlayerHit = true;
+                        }
                     }
                 }
 
@@ -254,7 +258,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var MuzzlePos = item.transform.FindObject("Rocket");
                     if (MuzzlePos != null)
                     {
-                        MuzzlePos.AddComponent<LaserPointer>();
+                        var laser = MuzzlePos.AddComponent<LaserPointer>();
+                        if (laser != null)
+                        {
+                            laser.ChangeOnPlayerHit = true;
+                        }
                     }
                 }
             }
