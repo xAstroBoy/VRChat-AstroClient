@@ -74,7 +74,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     FixbaseballFence(fence);
                 }
                 // Fix Fence Collider height 
-                var fence1 = Prison.FindObject("Building/Basketball Court/Colliders/Collider");
+                var fence1 = Prison.FindObject("Building/Basketball Court/Colliders/Collider (1)");
                 if (fence1 != null)
                 {
                     FixbaseballFence(fence1);
@@ -270,6 +270,11 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         }
 
+        /// <summary>
+        ///  This will shrink the border colliders on The guard tower and Adjust their position to allow the player to jump out of the tower!
+
+        /// </summary>
+        /// <param name="tower"></param>
         private static void AdjustGuardTowerBorders(GameObject tower)
         {
             foreach(var item in tower.GetComponentsInChildren<BoxCollider>())
@@ -286,6 +291,11 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="fence"></param>
         
         private static void FixbaseballFence(GameObject fence)
         {
@@ -320,7 +330,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
-                sphere.name = AssignedRole.ToString() + " SpawnPoint";
+                sphere.name = AssignedRole.ToString() + " SpawnPoint Detector";
                 sphere.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
                 sphere.transform.position = pos;
                 sphere.transform.localScale = new Vector3(4f, 4f, 4f);

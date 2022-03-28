@@ -21,7 +21,6 @@
 
         public List<AstroMonoBehaviour> AntiGcList;
 
-        private bool DebugMode = true;
 
         public GlobalPatronUnlocker(IntPtr obj0) : base(obj0)
         {
@@ -67,7 +66,7 @@
         // Use this for initialization
         internal void Start()
         {
-            Debug($"Finding Skin Events for pickup {gameObject.name}");
+            ModConsole.DebugLog($"Finding Skin Events for pickup {gameObject.name}");
 
             foreach (var item in gameObject.GetComponentsInChildren<UdonBehaviour>(true))
             {
@@ -86,7 +85,7 @@
 
                 if (PatronSkinEvent != null && NonPatronSkinEvent != null)
                 {
-                    Debug("Found all The required Events!");
+                    ModConsole.DebugLog("Found all The required Events!");
                     break;
                 }
             }
@@ -99,11 +98,6 @@
         }
 
 
-        [HideFromIl2Cpp]
-        private void Debug(string msg)
-        {
-            if (DebugMode) ModConsole.DebugLog($"[Patron Item Debug] : {msg}");
-        }
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
