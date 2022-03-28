@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.AstroMonos.Components.Cheats.PatronUnlocker;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -39,7 +41,71 @@
 
         internal static void FindEverything()
         {
+            var occluder = GameObjectFinder.FindRootSceneObject("Occlusion");
+            
+            if(occluder != null)
+            {
+                occluder.DestroyMeLocal();
+            }
+            if (Yard != null)
+            {
+                Yard.FindObject("Colliders/Collider").DestroyMeLocal(); // Remove roof collider only
 
+            }
+
+            var guardtower = Yard.FindObject("GuardTower/Colliders");
+            if(guardtower != null)
+            {
+                AdjustGuardTowerBorders(guardtower);
+            }
+            var guardtower_1 = Yard.FindObject("GuardTower (1)//Colliders");
+            if (guardtower_1 != null)
+            {
+                AdjustGuardTowerBorders(guardtower_1);
+            }
+
+
+            if (Prison != null)
+            {
+                // Fix Fence Collider height 
+                var fence = Prison.FindObject("Building/Basketball Court/Colliders/Collider");
+                if(fence != null)
+                {
+                    FixbaseballFence(fence);
+                }
+                // Fix Fence Collider height 
+                var fence1 = Prison.FindObject("Building/Basketball Court/Colliders/Collider");
+                if (fence1 != null)
+                {
+                    FixbaseballFence(fence1);
+                }
+
+                // Remove roof & other useless colliders
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (2)").DestroyMeLocal();
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (3)").DestroyMeLocal();
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (4)").DestroyMeLocal();
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (5)").DestroyMeLocal();
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (6)").DestroyMeLocal();
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (7)").DestroyMeLocal();
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (8)").DestroyMeLocal();
+
+
+                var fence3 = Prison.FindObject("Building/Back Area/Colliders/Collider");
+                if (fence3 != null)
+                {
+                    FixBackAreaFence(fence1);
+                }
+                var fence4 = Prison.FindObject("Building/Back Area/Colliders/Collider (1)");
+                if (fence4 != null)
+                {
+                    FixBackAreaFence(fence1);
+                }
+
+                // Kitchen Roof
+                Prison.FindObject("Building/Back Area/Colliders/Collider (2)").DestroyMeLocal();
+
+                
+            }
 
 
             if (MoneyPile != null)
@@ -99,6 +165,21 @@
                 }
             }
 
+            foreach (var item in WorldUtils.Pickups)
+            {
+                var patronshit = item.GetOrAddComponent<GlobalPatronUnlocker>();
+                MiscUtils.DelayFunction(1f, () =>
+                {
+                    if (patronshit != null)
+                    {
+                        if (!FreeGoldenSkin.Contains(patronshit))
+                        {
+                            FreeGoldenSkin.Add(patronshit);
+                        }
+                    }
+
+                });
+            }
 
 
             foreach (var item in WorldUtils.UdonScripts)
@@ -157,7 +238,26 @@
                 SpawnPoints_Guards.Add(item.position);
             }
 
-            // DEBUG REASONS
+            foreach(var item in WorldUtils.Pickups)
+            {
+                if (item.name.Contains("Sniper"))
+                {
+                    var MuzzlePos = item.transform.FindObject("Mesh/Muzzle Loc");
+                    if (MuzzlePos != null)
+                    {
+                        MuzzlePos.AddComponent<LaserPointer>();
+                    }
+                }
+
+                if (item.name.Contains("RPG"))
+                {
+                    var MuzzlePos = item.transform.FindObject("Rocket");
+                    if (MuzzlePos != null)
+                    {
+                        MuzzlePos.AddComponent<LaserPointer>();
+                    }
+                }
+            }
 
             
 
@@ -165,18 +265,62 @@
 
             ModConsole.DebugLog($"Registered {SpawnPoints_Guards.Count} Guard SpawnPoints!", System.Drawing.Color.Chartreuse);
             ModConsole.DebugLog($"Registered {SpawnPoints_Prisoners.Count} Prisoner SpawnPoints!", System.Drawing.Color.Chartreuse);
-            SpawnTestSphere(SpawnPoints_Guards, PrisonEscape_Roles.Guard);
-            SpawnTestSphere(SpawnPoints_Prisoners, PrisonEscape_Roles.Prisoner);
+            SpawnDetector(SpawnPoints_Guards, PrisonEscape_Roles.Guard);
+            SpawnDetector(SpawnPoints_Prisoners, PrisonEscape_Roles.Prisoner);
 
         }
 
+        private static void AdjustGuardTowerBorders(GameObject tower)
+        {
+            foreach(var item in tower.GetComponentsInChildren<BoxCollider>())
+            {
+                if (item != null)
+                {
+                    if (item != null)
+                    {
+                        item.extents = new Vector3(item.extents.x, 0.2f, item.extents.z);
+                        item.transform.localPosition = new Vector3(item.transform.localPosition.x, 10.9f, item.transform.localPosition.z);
+                    }
+                }
 
-        private static void SpawnTestSphere(List<Vector3> positions, PrisonEscape_Roles AssignedRole)
+            }
+        }
+
+        
+        private static void FixbaseballFence(GameObject fence)
+        {
+            if (fence != null)
+            {
+                var box = fence.GetComponent<BoxCollider>();
+                if (box != null)
+                {
+                    box.extents = new Vector3(box.extents.x, 0.3f, box.extents.z);
+                    box.transform.localPosition = new Vector3(box.transform.localPosition.x, 2f, box.transform.localPosition.z);
+                }
+            }
+
+        }
+
+        private static void FixBackAreaFence(GameObject fence)
+        {
+            if (fence != null)
+            {
+                var box = fence.GetComponent<BoxCollider>();
+                if (box != null)
+                {
+                    box.extents = new Vector3(box.extents.x, 0.4f, box.extents.z);
+                    box.transform.localPosition = new Vector3(box.transform.localPosition.x, 2f, box.transform.localPosition.z);
+                }
+            }
+
+        }
+        private static void SpawnDetector(List<Vector3> positions, PrisonEscape_Roles AssignedRole)
         {
             foreach (var pos in positions)
             {
                 GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 sphere.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
+                sphere.name = AssignedRole.ToString() + " SpawnPoint";
                 sphere.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
                 sphere.transform.position = pos;
                 sphere.transform.localScale = new Vector3(4f, 4f, 4f);
@@ -193,6 +337,8 @@
                 //pearl.GetComponent<Renderer>().material = ClientResources.Loaders.Materials.waffle;
             }
         }
+
+
 
 
         internal override void OnPlayerJoined(Player player)
@@ -310,6 +456,7 @@
 
         private static List<PrisonEscape_PoolDataReader> CurrentReaders { get; set; } = new();
 
+        private static List<GlobalPatronUnlocker> FreeGoldenSkin { get; set; } = new();
 
         internal static PrisonEscape_PoolDataReader FindAssignedUser(Player player, bool SuppressLogs = false, PrisonEscape_Roles TargetRole = PrisonEscape_Roles.None)
         {
@@ -572,7 +719,13 @@
             set
             {
                 _EveryoneHasGoldenGuns = value;
-                Set_GoldGun(value);
+                foreach(var item in FreeGoldenSkin)
+                {
+                    if(item != null)
+                    {
+                        item.EveryoneHasPatreonPerk = value;
+                    }
+                }
 
             }
         }
@@ -633,6 +786,7 @@
             SpawnPoints_Guards.Clear();
             _EveryoneHasGoldenGuns = false;
             _EveryoneHasdoublePoints = false;
+            FreeGoldenSkin.Clear(); 
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
         {
@@ -650,24 +804,6 @@
                 catch
                 {
                 }
-            }
-        }
-        private static void Set_GoldGun(bool goldGuns)
-        {
-            try
-            {
-                foreach (var item in CurrentReaders)
-                {
-                    if (item != null)
-                    {
-                        if (item.isLocal) continue;
-                        item.goldGuns = goldGuns;
-                    }
-                }
-
-            }
-            catch
-            {
             }
         }
 
@@ -988,6 +1124,8 @@
                 return null;
             }
         }
+
+
         private static GameObject _Spawn_Points;
         internal static GameObject Spawn_Points
         {

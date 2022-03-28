@@ -188,7 +188,7 @@
             int num = 0;
             for (int i = colliders.Count - 1; i >= 0; i--)
             {
-                if (colliders[i] == null || !colliders[i].enabled)
+                if (colliders[i] == null)
                 {
                     colliders.RemoveAt(i);
                     cache[colliders.Count].Enabled = false;
@@ -276,7 +276,15 @@
                 Vector3 position = transform.TransformPoint(collider.center);
                 _transform.localScale = Vector3.one * num;
                 _transform.position = position;
-                _renderer.sharedMaterial = collider.isTrigger ? _triggerMaterial : _solidMaterial;
+                if (collider.enabled && collider.gameObject.active)
+                {
+                    _renderer.enabled = true;
+                    _renderer.sharedMaterial = collider.isTrigger ? _triggerMaterial : _solidMaterial;
+                }
+                else
+                {
+                    _renderer.enabled = false;
+                }
             }
 
             private readonly Transform _transform;
@@ -314,7 +322,15 @@
                 _transform.localScale = Vector3.Scale(transform.lossyScale, collider.size);
                 _transform.position = transform.TransformPoint(collider.center);
                 _transform.rotation = transform.rotation;
-                _renderer.sharedMaterial = collider.isTrigger ? _triggerMaterial : _solidMaterial;
+                if (collider.enabled && collider.gameObject.active)
+                {
+                    _renderer.enabled = true;
+                    _renderer.sharedMaterial = collider.isTrigger ? _triggerMaterial : _solidMaterial;
+                }
+                else
+                {
+                    _renderer.enabled = false;
+                }
             }
 
             private readonly Transform _transform;

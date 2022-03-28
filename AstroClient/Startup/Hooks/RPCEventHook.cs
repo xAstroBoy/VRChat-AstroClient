@@ -45,10 +45,11 @@
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
-            //Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_1
             new AstroPatch(HarmonyLib.AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent)));
 
         }
+
+        // TODO : Clean and reorganize the entire event system 
 
         private static bool OnRPCEvent(ref VRC.Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
         {
