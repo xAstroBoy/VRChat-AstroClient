@@ -43,6 +43,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             if (Yard != null)
             {
                 Yard.FindObject("Colliders/Collider").DestroyMeLocal(true); // Remove roof collider only
+                Yard.FindObject("Colliders/Collider (1)").DestroyMeLocal(true); // Remove roof collider only
 
             }
 
@@ -326,9 +327,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             ModConsole.DebugLog($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
 
 
-            AddSpawnDetector(SpawnPoints_Guards, PrisonEscape_Roles.Guard);
-            AddSpawnDetector(SpawnPoints_Prisoners, PrisonEscape_Roles.Prisoner);
-            AddSpawnDetector(SpawnPoints_Spawn, PrisonEscape_Roles.Dead);
+            AddSpawnDetector(SpawnPoints_Guards, PrimitiveType.Sphere, 5, PrisonEscape_Roles.Guard);
+            AddSpawnDetector(SpawnPoints_Prisoners, PrimitiveType.Cube, 6f, PrisonEscape_Roles.Prisoner);
+            AddSpawnDetector(SpawnPoints_Spawn, PrimitiveType.Cube, 7f, PrisonEscape_Roles.Dead);
             if (Game_Join_Trigger != null)
             {
                 BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
@@ -419,16 +420,16 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         ///  This will add a Trigger collider to assign a role once a player hits it!
         /// </summary>
 
-        private static void AddSpawnDetector(List<Vector3> positions, PrisonEscape_Roles AssignedRole)
+        private static void AddSpawnDetector(List<Vector3> positions, PrimitiveType detectorshape, float scale,  PrisonEscape_Roles AssignedRole)
         {
             foreach (var pos in positions)
             {
-                GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                GameObject sphere = GameObject.CreatePrimitive(detectorshape);
                 sphere.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
                 sphere.name = AssignedRole.ToString() + " SpawnPoint Detector";
                 sphere.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
                 sphere.transform.position = pos;
-                sphere.transform.localScale = new Vector3(4f, 4f, 4f);
+                sphere.transform.localScale = new Vector3(scale, scale, scale);
                 foreach (var col in sphere.GetComponents<Collider>())
                 {
                     col.isTrigger = true;

@@ -169,12 +169,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         
         internal void UpdateRoleFromCollider(PrisonEscape_Roles role)
         {
+            if (role == CurrentRole) return; // Dont Do anything because is already set 
             if (role == PrisonEscape_Roles.Dead)
             {
+                ToggleWantedTag(false);
                 LockRole = false;
             }
 
-            if (role == CurrentRole) return; // Dont Do anything because is already set 
             if (!LockRole)
             {
                 if (role == PrisonEscape_Roles.Dead)
@@ -278,18 +279,17 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         internal void HealthTagUpdate()
         {
             if (!isActiveAndEnabled) return;
-            if (IsSelf) return;
             if (AssignedReader == null) return;
-            if (CurrentRole != PrisonEscape_Roles.Dead)
-            {
-                healthTag.ShowTag = true;
-                healthTag.Text = $"Health : {AssignedReader.health}";
-            }
-            else
+            if (CurrentRole == PrisonEscape_Roles.Dead)
             {
                 healthTag.ShowTag = false;
                 ToggleWantedTag(false);
                 ResetESPColor();
+            }
+            else
+            {
+                healthTag.ShowTag = true;
+                healthTag.Text = $"Health : {AssignedReader.health}";
             }
         }
 
