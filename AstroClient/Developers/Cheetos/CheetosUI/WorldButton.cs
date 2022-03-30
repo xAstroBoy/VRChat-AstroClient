@@ -45,11 +45,17 @@
 
         internal void MakePickupable()
         {
-            ButtonObject.IgnoreLocalPlayerCollision();
+            FixPlayercollisions();
             ButtonObject.Pickup_Set_ForceComponent();
             ButtonObject.RigidBody_Override_isKinematic(true);
             ButtonObject.Pickup_Set_Pickupable(true);
 
+        }
+
+        internal void FixPlayercollisions()
+        {
+            ButtonObject.IgnoreLocalPlayerCollision(true, true);
+            Front.IgnoreLocalPlayerCollision(true, true);
         }
 
         internal WorldButton(Vector3 position, Quaternion rotation, string label, Action action)

@@ -1,7 +1,4 @@
-﻿using System;
-using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
-
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Colors;
     using AstroClient.Tools.Extensions;
@@ -22,38 +19,35 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class PrisonEscape_CollisionDetector : AstroMonoBehaviour
+    public class PrisonEscape_WantedDetector : AstroMonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
-        public PrisonEscape_CollisionDetector(IntPtr ptr) : base(ptr)
+        public PrisonEscape_WantedDetector(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
 
         void Start()
         {
-
-            // This will act as Collider to detect where the assigned player is spawned and correct the ESP system.
         }
 
 
         private void OnTriggerEnter(Collider other)
         {
-            OnColliderHit(other);
+            OnTriggerEnterEvent(other);
         }
 
         void OnTriggerExit(Collider other)
         {
-            OnColliderHit(other);
+            OnTriggerExitEvent(other);
         }
 
-        internal PrisonEscape_Roles AssignedRole { get; set; }  = PrisonEscape_Roles.Dead;
 
 
         
 
-        private void OnColliderHit(Collider col)
+        private void OnTriggerEnterEvent(Collider col)
         {
             if (col != null)
             {
@@ -66,7 +60,26 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                         var PrisonESP = player.gameObject.GetComponent<PrisonEscape_ESP>();
                         if (PrisonESP != null)
                         {
-                            PrisonESP.UpdateRoleFromCollider(AssignedRole);
+                            PrisonESP.isWanted = true;
+                        }
+                    }
+                }
+            }
+        }
+        private void OnTriggerExitEvent(Collider col)
+        {
+            if (col != null)
+            {
+                var root = col.transform.root;
+                if (root.name.Contains("VRCPlayer"))
+                {
+                    var player = root.GetComponent<Player>();
+                    if (player != null)
+                    {
+                        var PrisonESP = player.gameObject.GetComponent<PrisonEscape_ESP>();
+                        if (PrisonESP != null)
+                        {
+                            PrisonESP.isWanted = true;
                         }
                     }
                 }

@@ -5,6 +5,7 @@ using AstroClient.Tools.Player.Movement.Exploit;
 using AstroClient.WorldModifications.WorldHacks;
 using AstroClient.WorldModifications.WorldHacks.Jar.AmongUS;
 using AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks;
+using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
@@ -375,7 +376,7 @@ internal class WorldCheatsModule : AstroEvents
                 var localreader = PrisonEscape.GetLocalReader();
                 if (localreader != null)
                 {
-                    CustomSubMenu.AddToggle("Semi-GodMode", localreader.SemiGodMode, ToggleValue => { localreader.SemiGodMode = ToggleValue; });
+                    CustomSubMenu.AddToggle("GodMode", localreader.SemiGodMode, ToggleValue => { localreader.SemiGodMode = ToggleValue; });
 
                 }
                 CustomSubMenu.AddSubMenu("Patreon System Control", () =>

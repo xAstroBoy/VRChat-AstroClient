@@ -1,34 +1,27 @@
-﻿using AstroClient.AstroMonos.Components.Cheats.PatronUnlocker;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+using AstroClient.AstroMonos.Components.Cheats.PatronUnlocker;
+using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
+using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.CheetosUI;
+using AstroClient.CustomClasses;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Holders;
+using AstroClient.Tools.UdonEditor;
+using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC;
+using VRC.SDKBase;
+using VRC.Udon;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
-    using AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
-    using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
-    using AstroMonos.Components.Cheats.Worlds.UdonTycoon;
-    using AstroMonos.Components.ESP;
-    using AstroMonos.Components.ESP.UdonBehaviour;
-    using CustomClasses;
-    using Gompoc.ActionMenuAPI.Helpers;
-    using Mono.CSharp;
-    using Tools.Extensions;
-    using Tools.Holders;
-    using Tools.UdonEditor;
-    using UnityEngine;
-    using UnityEngine.UI;
-    using VRC;
-    using VRC.Udon;
-    using WorldsIds;
-    using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.Extensions;
-    using xAstroBoy.Utility;
-    using AvatarUtils = Tools.Player.AvatarUtils;
-
     internal class PrisonEscape : AstroEvents
     {
         internal static QMNestedGridMenu CurrentMenu;
@@ -45,11 +38,11 @@ namespace AstroClient.WorldModifications.WorldHacks
             
             if(occluder != null)
             {
-                occluder.DestroyMeLocal();
+                occluder.DestroyMeLocal(true);
             }
             if (Yard != null)
             {
-                Yard.FindObject("Colliders/Collider").DestroyMeLocal(); // Remove roof collider only
+                Yard.FindObject("Colliders/Collider").DestroyMeLocal(true); // Remove roof collider only
 
             }
 
@@ -81,13 +74,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 // Remove roof & other useless colliders
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (2)").DestroyMeLocal();
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (3)").DestroyMeLocal();
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (4)").DestroyMeLocal();
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (5)").DestroyMeLocal();
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (6)").DestroyMeLocal();
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (7)").DestroyMeLocal();
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (8)").DestroyMeLocal();
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (2)").DestroyMeLocal(true);
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (3)").DestroyMeLocal(true);
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (4)").DestroyMeLocal(true);
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (5)").DestroyMeLocal(true);
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (6)").DestroyMeLocal(true);
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (7)").DestroyMeLocal(true);
+                Prison.FindObject("Building/Basketball Court/Colliders/Collider (8)").DestroyMeLocal(true);
 
 
                 var fence3 = Prison.FindObject("Building/Back Area/Colliders/Collider");
@@ -102,7 +95,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 // Kitchen Roof
-                Prison.FindObject("Building/Back Area/Colliders/Collider (2)").DestroyMeLocal();
+                Prison.FindObject("Building/Back Area/Colliders/Collider (2)").DestroyMeLocal(true);
 
                 
             }
@@ -181,6 +174,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 });
             }
 
+            int WantedTriggersRegistered = 0;
 
             foreach (var item in WorldUtils.UdonScripts)
             {
@@ -190,10 +184,23 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (item.name.Contains("Crate Large"))
                     {
                         Crates.AddGameObject(item.gameObject);
+                        CreateSpawnItemButton(item);
+                    }
+
+                    if(item.name.Contains("Crate Small"))
+                    {
+                        CreateSpawnItemButton(item);
                     }
                 }
 
-
+                if(item.name.StartsWith("Wanted Trigger"))
+                {
+                    var WantedDetector = item.GetOrAddComponent<PrisonEscape_WantedDetector>();
+                    if(WantedDetector != null)
+                    {
+                        WantedTriggersRegistered++;
+                    }
+                }
 
                 if (item.name.Contains("Knife"))
                 {
@@ -230,15 +237,54 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             foreach (var item in Prisoner_Spawns.Get_Childs())
             {
-                SpawnPoints_Prisoners.Add(item.position);
+                if (!SpawnPoints_Prisoners.Contains(item.position))
+                {
+                    SpawnPoints_Prisoners.Add(item.position);
+                }
             }
 
             foreach (var item in Guard_Spawns.Get_Childs())
             {
-                SpawnPoints_Guards.Add(item.position);
+                if (!SpawnPoints_Guards.Contains(item.position))
+                {
+                    SpawnPoints_Guards.Add(item.position);
+                }
+            }
+            foreach (var item in Respawn_Points.Get_Childs())
+            {
+                if (!SpawnPoints_Spawn.Contains(item.position))
+                {
+                    SpawnPoints_Spawn.Add(item.position);
+                }
             }
 
-            foreach(var item in WorldUtils.Pickups)
+            foreach (var item in Resources.FindObjectsOfTypeAll<VRC_SceneDescriptor>())
+            {
+                if (item != null)
+                {
+                    foreach (var spawn in item.spawns)
+                    {
+                        if (!SpawnPoints_Spawn.Contains(spawn.position))
+                        {
+                            SpawnPoints_Spawn.Add(spawn.position);
+                        }
+                    }
+                    if (!SpawnPoints_Spawn.Contains(item.SpawnPosition))
+                    {
+                        SpawnPoints_Spawn.Add(item.SpawnPosition);
+                    }
+
+
+                    if (item.SpawnLocation != null)
+                    {
+                        if (!SpawnPoints_Spawn.Contains(item.SpawnLocation.position))
+                        {
+                            SpawnPoints_Spawn.Add(item.SpawnLocation.position);
+                        }
+                    }
+                }
+            }
+            foreach (var item in WorldUtils.Pickups)
             {
                 if (item.name.Contains("Sniper"))
                 {
@@ -249,6 +295,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         if (laser != null)
                         {
                             laser.ChangeOnPlayerHit = true;
+                            laser.ShowEndPointSphere = true;
                         }
                     }
                 }
@@ -262,19 +309,51 @@ namespace AstroClient.WorldModifications.WorldHacks
                         if (laser != null)
                         {
                             laser.ChangeOnPlayerHit = true;
+                            laser.ShowEndPointSphere = true;
+                            laser.SphereSize = 5f;
                         }
                     }
                 }
             }
 
-            
+
 
             ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
 
-            ModConsole.DebugLog($"Registered {SpawnPoints_Guards.Count} Guard SpawnPoints!", System.Drawing.Color.Chartreuse);
-            ModConsole.DebugLog($"Registered {SpawnPoints_Prisoners.Count} Prisoner SpawnPoints!", System.Drawing.Color.Chartreuse);
-            SpawnDetector(SpawnPoints_Guards, PrisonEscape_Roles.Guard);
-            SpawnDetector(SpawnPoints_Prisoners, PrisonEscape_Roles.Prisoner);
+            ModConsole.DebugLog($"Registered {SpawnPoints_Spawn.Count} Spawn Area Positions!", System.Drawing.Color.Chartreuse);
+            ModConsole.DebugLog($"Registered {SpawnPoints_Guards.Count} Guard Spawn Positions!", System.Drawing.Color.Chartreuse);
+            ModConsole.DebugLog($"Registered {SpawnPoints_Prisoners.Count} Prisoner Spawn Positions!", System.Drawing.Color.Chartreuse);
+            ModConsole.DebugLog($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
+
+
+            AddSpawnDetector(SpawnPoints_Guards, PrisonEscape_Roles.Guard);
+            AddSpawnDetector(SpawnPoints_Prisoners, PrisonEscape_Roles.Prisoner);
+            AddSpawnDetector(SpawnPoints_Spawn, PrisonEscape_Roles.Dead);
+            if (Game_Join_Trigger != null)
+            {
+                BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
+            }
+        }
+
+        private static void CreateSpawnItemButton(UdonBehaviour item)
+        {
+            var udonevent = item.FindUdonEvent("_SpawnItem");
+            if (udonevent != null)
+            {
+                var btn = new WorldButton(item.transform.position + new Vector3(-1, 1f, 0), item.transform.rotation, "Spawn Weapon", () => { udonevent.InvokeBehaviour(); });
+                if (btn != null)
+                {
+                    btn.FixPlayercollisions();
+                    var rend = udonevent.gameObject.GetGetInChildrens<Renderer>(true);;
+                    if (rend != null)
+                    {
+                        btn.ButtonObject.transform.parent = rend.transform;
+
+                        // Flip Button On the other side.
+                        btn.ButtonObject.transform.FlipTransformRotation();
+                    }
+                }
+            }
 
         }
 
@@ -301,7 +380,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
 
         /// <summary>
-        ///  
+        ///  This will shrink the border colliders on The guard tower and Adjust their position to allow the player to jump out of the Fence!
         /// </summary>
         /// <param name="fence"></param>
         
@@ -318,6 +397,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
 
         }
+        /// <summary>
+        ///  This will shrink the border colliders on The guard tower and Adjust their position to allow the player to jump out of the Fence!
+        /// </summary>
+        /// <param name="fence"></param>
 
         private static void FixBackAreaFence(GameObject fence)
         {
@@ -331,8 +414,12 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-        }
-        private static void SpawnDetector(List<Vector3> positions, PrisonEscape_Roles AssignedRole)
+        }        
+        /// <summary>
+        ///  This will add a Trigger collider to assign a role once a player hits it!
+        /// </summary>
+
+        private static void AddSpawnDetector(List<Vector3> positions, PrisonEscape_Roles AssignedRole)
         {
             foreach (var pos in positions)
             {
@@ -342,17 +429,24 @@ namespace AstroClient.WorldModifications.WorldHacks
                 sphere.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
                 sphere.transform.position = pos;
                 sphere.transform.localScale = new Vector3(4f, 4f, 4f);
-                sphere.GetComponent<Renderer>().DestroyMeLocal();
-                var setup = sphere.GetOrAddComponent<PrisonEscape_CollisionDetector>();
-                MiscUtils.DelayFunction(0.5f, () => {
-                if (setup != null)
+                foreach (var col in sphere.GetComponents<Collider>())
                 {
-                    setup.AssignedColliderRole = AssignedRole;
+                    col.isTrigger = true;
                 }
+                foreach (var ren in sphere.GetComponents<Renderer>())
+                {
+                    ren.DestroyMeLocal(true);
+                }
+                BindRoleToCollider(sphere, AssignedRole);
+            }
+        }
 
-                });
-                //pearl.IgnoreLocalPlayerCollision();
-                //pearl.GetComponent<Renderer>().material = ClientResources.Loaders.Materials.waffle;
+        private static void BindRoleToCollider(GameObject obj, PrisonEscape_Roles AssignedRole)
+        {
+            var setup = ComponentUtils.GetOrAddComponent<PrisonEscape_CollisionDetector>(obj);
+            if (setup != null)
+            {
+                setup.AssignedRole = AssignedRole;
             }
         }
 
@@ -363,54 +457,16 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (isCurrentWorld)
             {
-                player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
+                ComponentUtils.GetOrAddComponent<PrisonEscape_ESP>(player.gameObject);
 
             }
         }
 
-        //internal override void OnUpdate()
-        //{
-        //    if (isCurrentWorld)
-        //    {
-        //        try
-        //        {
-        //            foreach (var player in WorldUtils.Players)
-        //            {
-        //                if (player != null)
-        //                {
-        //                    var colliders = AvatarUtils.GetAllCollidersOnPlayer(player);
-        //                    if (colliders != null)
-        //                    {
 
-        //                        if (colliders.Count != 0)
-        //                        {
-        //                            foreach (var item in colliders)
-        //                            {
-        //                                if (item != null)
-        //                                {
-        //                                    ModConsole.DebugLog(
-        //                                        $"Found Collider {item.gameObject.name}, with Parent {item.gameObject.transform.parent?.name}, and root {item.gameObject.transform.root?.name}",
-        //                                        System.Drawing.Color.Chartreuse);
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                }
-
-        //            }
-        //        }
-        //        catch{}
-        //    }
-        //}
-        internal enum PrisonEscape_Roles
-        {
-            None = 0,
-            Guard= 1,
-            Prisoner = 2,
-        }
 
         internal static List<Vector3> SpawnPoints_Guards = new List<Vector3>();
         internal static List<Vector3> SpawnPoints_Prisoners = new List<Vector3>();
+        internal static List<Vector3> SpawnPoints_Spawn = new List<Vector3>();
 
 
         //internal static PrisonEscape_Roles GetRoleFromPos(Vector3 pos)
@@ -476,7 +532,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static List<GlobalPatronUnlocker> FreeGoldenSkin { get; set; } = new();
 
-        internal static PrisonEscape_PoolDataReader FindAssignedUser(Player player, bool SuppressLogs = false, PrisonEscape_Roles TargetRole = PrisonEscape_Roles.None)
+        internal static PrisonEscape_PoolDataReader FindAssignedUser(Player player, bool SuppressLogs = false, PrisonEscape_Roles TargetRole = PrisonEscape_Roles.Dead)
         {
 
             foreach (var item in CurrentReaders)
@@ -520,15 +576,19 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                                 break;
                             }
-                            case PrisonEscape_Roles.None:
-                            {
-                                if (!SuppressLogs)
+                            case PrisonEscape_Roles.Dead:
                                 {
-                                    ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
-                                }
+                                    if (item.isDead.GetValueOrDefault(false))
+                                    {
+                                        if (!SuppressLogs)
+                                        {
+                                            ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        }
 
-                                return actualreader;
-                            }
+                                        return item;
+                                    }
+                                    break;
+                                }
                         }
 
                     }
@@ -566,15 +626,19 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                                 break;
                             }
-                            case PrisonEscape_Roles.None:
-                            {
-                                if (!SuppressLogs)
+                            case PrisonEscape_Roles.Dead:
                                 {
-                                    ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
-                                }
+                                    if (item.isDead.GetValueOrDefault(false))
+                                    {
+                                        if (!SuppressLogs)
+                                        {
+                                            ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        }
 
-                                return item;
-                            }
+                                        return item;
+                                    }
+                                    break;
+                                }
                         }
                     }
                 }
@@ -602,8 +666,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var actualreader = GetCorrectReader(item);
                     if (actualreader != null)
                     {
-
-                       // if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
 
                         if (actualreader.isLocal)
                         {
@@ -805,6 +867,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             _EveryoneHasGoldenGuns = false;
             _EveryoneHasdoublePoints = false;
             FreeGoldenSkin.Clear(); 
+            SpawnPoints_Spawn.Clear();
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
         {
@@ -986,9 +1049,65 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static UdonBehaviour_Cached ToggleDoublePoints = null;
 
         private static UdonBehaviour_Cached GetRedCard = null;
-        private static List<GameObject> Crates = new List<GameObject>();
+        private static List<GameObject> Crates { get; set; } = new List<GameObject>();
 
 
+        private static GameObject _Spawn_Area;
+
+        internal static GameObject Spawn_Area
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Spawn_Area == null)
+                    {
+                        return _Spawn_Area = GameObjectFinder.FindRootSceneObject("Spawn Area");
+                    }
+                    return _Spawn_Area;
+                }
+
+                return null;
+            }
+        }
+
+
+        private static GameObject _Respawn_Points;
+        internal static GameObject Respawn_Points
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Respawn_Points == null)
+                    {
+                        return _Respawn_Points = Spawn_Area.FindObject("Respawn Points");
+                    }
+                    return _Respawn_Points;
+                }
+
+                return null;
+            }
+        }
+
+
+        private static GameObject _Game_Join_Trigger;
+        internal static GameObject Game_Join_Trigger
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Game_Join_Trigger == null)
+                    {
+                        return _Game_Join_Trigger = Spawn_Area.FindObject("Game Join Trigger");
+                    }
+                    return _Game_Join_Trigger;
+                }
+
+                return null;
+            }
+        }
 
         private static GameObject _Scripts;
 
@@ -1162,6 +1281,27 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return null;
             }
         }
+
+        private static GameObject _Cells_Closed_Objects;
+        internal static GameObject Cells_Closed_Objects
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (Prison == null) return null;
+                    if (_Cells_Closed_Objects == null)
+                    {
+                        return _Cells_Closed_Objects = Prison.FindObject("Cells Closed Objects");
+                    }
+                    return _Cells_Closed_Objects;
+                }
+
+                return null;
+            }
+        }
+
+
 
         private static GameObject _Prisoner_Spawns;
         internal static GameObject Prisoner_Spawns

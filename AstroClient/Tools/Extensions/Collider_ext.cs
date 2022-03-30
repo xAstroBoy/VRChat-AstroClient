@@ -23,12 +23,15 @@
             }
         }
 
-        internal static void RemoveColliders(this GameObject obj)
+        internal static void RemoveColliders(this GameObject obj, bool Silent = false)
         {
             if (obj != null)
             {
                 var colliders = obj.GetComponents<Collider>();
-                ModConsole.DebugLog($"Destroyed {colliders.Count} Colliders in {obj.name}");
+                if (!Silent)
+                {
+                    ModConsole.DebugLog($"Destroyed {colliders.Count} Colliders in {obj.name}");
+                }
 
                 foreach (var c in colliders)
                 {
@@ -37,12 +40,16 @@
             }
         }
 
-        internal static void RemoveAllColliders(this GameObject obj)
+        internal static void RemoveAllColliders(this GameObject obj, bool Silent = false)
         {
             if (obj != null)
             {
                 var colliders = obj.GetComponentsInChildren<Collider>(true);
-                ModConsole.DebugLog($"Destroyed {colliders.Count} Colliders in {obj.name}");
+                if (!Silent)
+                {
+                    ModConsole.DebugLog($"Destroyed {colliders.Count} Colliders in {obj.name}");
+                }
+
                 foreach (var c in colliders)
                 {
                     Object.DestroyImmediate(c);
@@ -182,7 +189,7 @@
 
         }
 
-        internal static void IgnoreLocalPlayerCollision(this GameObject obj, bool ignore = true)
+        internal static void IgnoreLocalPlayerCollision(this GameObject obj, bool ignore = true, bool IncludeTriggers = true)
         {
             var localcollider = GameInstances.LocalPlayer.gameObject.GetComponent<Collider>();
             if (localcollider != null)
@@ -201,7 +208,17 @@
 
                 foreach (var c in colliders)
                 {
+                    if (c.isTrigger)
+                    {
+                        if (IncludeTriggers)
+                        {
+                            Physics.IgnoreCollision(c, localcollider, ignore);
+                        }
+                    }
+                    else
+                    {
                     Physics.IgnoreCollision(c, localcollider, ignore);
+                    }
                 }
             }
             else

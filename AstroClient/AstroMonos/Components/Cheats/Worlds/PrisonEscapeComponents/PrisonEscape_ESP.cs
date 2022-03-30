@@ -1,4 +1,8 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
+﻿using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
+using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Colors;
     using AstroClient.Tools.Extensions;
@@ -30,9 +34,21 @@
 
         private PlayerESP _ESP { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
 
-        private PrisonEscape_PoolDataReader RemoteUserData {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
+        internal PrisonEscape_PoolDataReader AssignedReader {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] private set;}
 
-        internal PrisonEscape_PoolDataReader LocalUserData {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
+        private PrisonEscape_ESP _LocalUserData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal PrisonEscape_ESP LocalUserData
+        {
+            [HideFromIl2Cpp] get
+            {
+                if (_LocalUserData == null)
+                {
+                   return _LocalUserData = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
+                }
+                return _LocalUserData;
+
+            }
+        }
 
         internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
@@ -135,93 +151,69 @@
                 WantedTag.ShowTag = false;
                 WantedTag.BackGroundColor = Color.red;
             }
-           // InvokeRepeating(nameof(ScrambleCheck), 1f, 3.5f);
+
+            // TODO REMOVE THESE TWO (once Ostinyo decides to implement a Health Tag system)
+            // TODO: This is required just for the health tag system (singletag)
             InvokeRepeating(nameof(UpdatePlayerDataReaders), 0f, 0.3f);
             InvokeRepeating(nameof(HealthTagUpdate), 0.1f, 0.1f);
+
+
             InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
-            InvokeRepeating(nameof(OnHitboxActive),0.5f, 2f);
 
 
 
 
         }
 
-        private bool HasAppliedListenerOnHitbox = false;
-        private bool HasRoleBeenUpdatedfromCollider = false;
-
-
-
-
-        internal void OnHitboxActive()
+        private bool LockRole { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        
+        internal void UpdateRoleFromCollider(PrisonEscape_Roles role)
         {
-            if (!isActiveAndEnabled) return;
-            if (HasAppliedListenerOnHitbox) return;
-            if (RemoteUserData != null)
+            if (role == PrisonEscape_Roles.Dead)
             {
-                if (RemoteUserData.hitbox != null )
+                LockRole = false;
+            }
+
+            if (role == CurrentRole) return; // Dont Do anything because is already set 
+            if (!LockRole)
+            {
+                if (role == PrisonEscape_Roles.Dead)
                 {
-                    var listener = RemoteUserData.hitbox.GetOrAddComponent<GameObjectListener>();
-                    if (listener != null)
+                    if (!Player.GetAPIUser().IsSelf)
                     {
-                        //listener.OnEnabled += OnHitboxEnable;
-                        listener.OnDisabled += OnHitboxDisable;
-                        HasAppliedListenerOnHitbox = true;
+                        ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Is Dead!", System.Drawing.Color.Green);
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"Player {PlayerSpooferUtils.Original_DisplayName} Is Dead!", System.Drawing.Color.Green);
                     }
                 }
-            }
-        }
-
-        internal void UpdateRoleFromCollider(PrisonEscape.PrisonEscape_Roles role)
-        {
-            if (!HasRoleBeenUpdatedfromCollider)
-            {
-                SetRole(role);
-
-                ModConsole.DebugLog($"Collider Assigned Role on Player {Player.DisplayName()} is {CurrentDetectedRole.ToString()}");
-                HasRoleBeenUpdatedfromCollider = true;
-            }
-
-        }
-
-        private PrisonEscape.PrisonEscape_Roles CurrentDetectedRole = PrisonEscape.PrisonEscape_Roles.None;
-        
-
-        //private void OnHitboxEnable()
-        //{
-        //    if (HasRoleBeenUpdatedfromCollider) return;
-        //    MiscUtils.DelayFunction(0.3f, () => { 
-        //    CurrentDetectedRole = PrisonEscape.GetRoleFromPos(RemoteUserData.HitBoxReader.__0_pos_Vector3.GetValueOrDefault(Vector3.zero));
-        //    ModConsole.DebugLog($"Hitbox Assigned Role on Player {Player.DisplayName()} is {CurrentDetectedRole.ToString()}");
-
-        //    });
-        //}
-
-        private void OnHitboxDisable()
-        {
-            CurrentDetectedRole = PrisonEscape.PrisonEscape_Roles.None;
-            HasRoleBeenUpdatedfromCollider = false;
-        }
-
-        // TODO : CHANGE UDON SYSTEM FOR THIS
-
-        private void SetRole(PrisonEscape.PrisonEscape_Roles role)
-        {
-            if (RemoteUserData != null)
-            {
-                CurrentDetectedRole = role;
-                switch (role)
+                else
                 {
-                    case PrisonEscape.PrisonEscape_Roles.Guard:
-                        RemoteUserData.isGuard = true;
-                        break;
-                    case PrisonEscape.PrisonEscape_Roles.Prisoner:
-                        RemoteUserData.isGuard = false;
-                        break;
-                    default:                        
-                        break;
+                    if (!Player.GetAPIUser().IsSelf)
+                    {
+                        ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Got Role {role}!", System.Drawing.Color.Green);
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"Player {PlayerSpooferUtils.Original_DisplayName} Got Role {role}!", System.Drawing.Color.Green);
+                    }
+
+                }
+                if (role != PrisonEscape_Roles.Dead)
+                {
+                    CurrentRole = role;
+                    LockRole = true;
                 }
             }
+
         }
+
+        internal PrisonEscape_Roles CurrentRole { [HideFromIl2Cpp] get;  [HideFromIl2Cpp] private set; } = PrisonEscape_Roles.Dead;
+        
+
+
+
         internal void OnDestroy()
         {
             if (healthTag != null) Destroy(healthTag);
@@ -230,36 +222,48 @@
 
 
 
-        private bool SaidFoundMessage;
+        private bool SaidFoundMessage { [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; }
 
-        internal void ScrambleCheck()
+        private bool _isWanted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        internal bool isWanted
         {
-            if (!isActiveAndEnabled) return;
-            if (RemoteUserData != null)
+            [HideFromIl2Cpp]
+            get
             {
-                var search = PrisonEscape.FindAssignedUser(Player, true, CurrentDetectedRole);
-                if (search != RemoteUserData)
+                return _isWanted;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (WantedTag != null)
                 {
-                    RemoteUserData = search;
-                    ModConsole.DebugLog($"User : {Player.DisplayName()}, PlayerData Changed To {search.gameObject.name}!", System.Drawing.Color.DarkSeaGreen);
+                    if (CurrentRole == PrisonEscape_Roles.Guard || CurrentRole == PrisonEscape_Roles.Dead)
+                    {
+                        value = false;
+                        ToggleWantedTag(false);
+                    }
+                    if (CurrentRole == PrisonEscape_Roles.Prisoner)
+                    {
+                        ToggleWantedTag(value);
+                    }
                 }
+                _isWanted = value;
             }
         }
 
         internal void UpdatePlayerDataReaders()
         {
             if (!isActiveAndEnabled) return;
-            if (RemoteUserData == null)
+            if (AssignedReader == null)
             {
-                RemoteUserData = PrisonEscape.FindAssignedUser(Player, false, CurrentDetectedRole);
-                if (RemoteUserData != null)
+                AssignedReader = PrisonEscape.FindAssignedUser(Player, false, CurrentRole);
+                if (AssignedReader != null)
                 {
                     if (!SaidFoundMessage)
                     {
                         ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.", System.Drawing.Color.GreenYellow);
                         SaidFoundMessage = true;
                     }
-                    ESPUpdater();
                     HealthTagUpdate();
                 }
                 //else
@@ -267,7 +271,6 @@
                 //    ModConsole.DebugLog($"Could not Find {gameObject.name} - {Player.DisplayName()} Player Data, Retrying!");
                 //}
             }
-            LocalUserData = PrisonEscape.GetLocalReader();
         }
 
 
@@ -276,13 +279,11 @@
         {
             if (!isActiveAndEnabled) return;
             if (IsSelf) return;
-            if (RemoteUserData == null) return;
-            if (!RemoteUserData.isPlaying.GetValueOrDefault(false)) return;
-            if (!LocalUserData.isPlaying.GetValueOrDefault(false)) return;
-            if (!RemoteUserData.isDead.GetValueOrDefault(false))
+            if (AssignedReader == null) return;
+            if (CurrentRole != PrisonEscape_Roles.Dead)
             {
                 healthTag.ShowTag = true;
-                healthTag.Text = $"Health : {RemoteUserData.health}";
+                healthTag.Text = $"Health : {AssignedReader.health}";
             }
             else
             {
@@ -300,46 +301,31 @@
         {
             if (!isActiveAndEnabled) return;
             if (IsSelf) return;
-            if (RemoteUserData == null) return;
+            if (AssignedReader == null) return;
             if (LocalUserData == null) return;
-            if (!RemoteUserData.isPlaying.GetValueOrDefault(false)) return;
-            if (!LocalUserData.isPlaying.GetValueOrDefault(false)) return;
-
-
-            if (RemoteUserData.isDead.GetValueOrDefault(false)) return;
-            if (RemoteUserData.isGuard.GetValueOrDefault(false) && LocalUserData.isGuard.GetValueOrDefault(false)) // Remote & Local Users are Guard role.
+            if (CurrentRole == PrisonEscape_Roles.Dead) return;
+            if (CurrentRole == PrisonEscape_Roles.Guard && LocalUserData.CurrentRole == PrisonEscape_Roles.Guard) // Remote & Local Users are Guard role.
             {
                 ESPColor = SystemColors.DodgerBlue;
             }
-            else if (RemoteUserData.isGuard.GetValueOrDefault(false) && !LocalUserData.isGuard.GetValueOrDefault(false)) // Remote User is Guard & Local is Prisoner
+            else if (CurrentRole == PrisonEscape_Roles.Guard && LocalUserData.CurrentRole == PrisonEscape_Roles.Prisoner) // Remote User is Guard & Local is Prisoner
             {
                 ESPColor = SystemColors.DodgerBlue;
             }
-            else if (!RemoteUserData.isGuard.GetValueOrDefault(false) && LocalUserData.isGuard.GetValueOrDefault(false)) // Remote User is Prisoner & Local is Guard
+            else if (CurrentRole == PrisonEscape_Roles.Prisoner && LocalUserData.CurrentRole == PrisonEscape_Roles.Guard) // Remote User is Prisoner & Local is Guard
             {
-                if (!RemoteUserData.isWanted.GetValueOrDefault(false))
+                if (isWanted)
                 {
-                    ToggleWantedTag(false);
-                    ESPColor = SystemColors.Orange;;
+                    ESPColor = SystemColors.Orange; 
                 }
                 else
                 {
-                    ToggleWantedTag(true);
                     ESPColor = SystemColors.OrangeRed;
                 }
             }
-            else if (!RemoteUserData.isGuard.GetValueOrDefault(false) && !LocalUserData.isGuard.GetValueOrDefault(false)) // Remote & Local Prisoners
+            else if (CurrentRole == PrisonEscape_Roles.Prisoner && LocalUserData.CurrentRole == PrisonEscape_Roles.Prisoner) // Remote & Local Prisoners
             {
-                if (!RemoteUserData.isWanted.GetValueOrDefault(false))
-                {
-                    ToggleWantedTag(false);
-                    ESPColor = SystemColors.Orange;;
-                }
-                else
-                {
-                    ToggleWantedTag(true);
-                    ESPColor = SystemColors.Orange;
-                }
+                ESPColor = SystemColors.Orange;
             }
 
         }
