@@ -25,6 +25,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using IntPtr = System.IntPtr;
     using Object = Il2CppSystem.Object;
 
+
+    // BUG : Figure what's breaking the Pickup System (not respawning / Desyncing )
     [RegisterComponent]
     public class PrisonEscape_AimAssister : AstroMonoBehaviour
     {
@@ -43,7 +45,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         private LaserPointer Laser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private VRC_AstroPickup PickupSystem  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
-        private Player TargetPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private PrisonEscape_ESP _LocalUserData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal PrisonEscape_ESP LocalUserData
         {
@@ -64,7 +65,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             // This will work along with the laser component
             ShootInteraction = gameObject.FindUdonEvent("_onPickupUseDown");
             if (ShootInteraction != null)
-
             {
                 if (PickupSystem == null)
                 {
@@ -90,95 +90,75 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal static bool IsDebugMode { get; set; } = false;
-
+        internal static bool IsDebugMode {  [HideFromIl2Cpp]get; [HideFromIl2Cpp] set; } = false;
+        [HideFromIl2Cpp]
         void OnPlayerHit(Player player)
         {
             if (isAimAssisterOn || IsDebugMode)
             {
-                var ESP = player.GetComponent<PrisonEscape_ESP>();
-                if (ESP != null)
+
+                if (player != null)
                 {
-                    if (!IsDebugMode)
+                    var ESP = player.GetComponent<PrisonEscape_ESP>();
+                    if (ESP != null)
                     {
-                        if (player.GetAPIUser().IsSelf) return;
-                        if (ESP.CurrentRole == PrisonEscape_Roles.Prisoner && LocalUserData.CurrentRole == PrisonEscape_Roles.Guard)
+                        if (!IsDebugMode)
                         {
-                            if (ESP.isWanted)
+                            if (player.GetAPIUser().IsSelf) return;
+                            if (ESP.CurrentRole == PrisonEscape_Roles.Prisoner && LocalUserData.CurrentRole == PrisonEscape_Roles.Guard)
+                            {
+                                if (ESP.isWanted)
+                                {
+                                    ShootInteraction.InvokeBehaviour();
+                                }
+                            }
+                            else if (ESP.CurrentRole == PrisonEscape_Roles.Guard && LocalUserData.CurrentRole == PrisonEscape_Roles.Prisoner)
                             {
                                 ShootInteraction.InvokeBehaviour();
-                                return;
                             }
                         }
-                        else if (ESP.CurrentRole == PrisonEscape_Roles.Guard && LocalUserData.CurrentRole == PrisonEscape_Roles.Prisoner)
+                        else
                         {
                             ShootInteraction.InvokeBehaviour();
-                            return;
                         }
-                    }
-                    else
-                    {
-                        ShootInteraction.InvokeBehaviour();
                     }
                 }
             }
         }
 
-
+         [HideFromIl2Cpp]
         void OnPickupUseDown()
         {
             isAimAssisterOn = true;
         }
-
+         [HideFromIl2Cpp]
         void OnPickupUseUp()
         {
             isAimAssisterOn = false;
         }
-        //internal float Shift_X { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0f;
-        //internal float Shift_Y { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 90f;
-        //internal float Shift_Z { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0f;
-
-
-        //void Update()
-        //{
-        //    if (isAimAssisterOn || IsDebugMode)
-        //    {
-        //        if (TargetPlayer != null)
-        //        {
-        //            var center = TargetPlayer.Get_Center_Of_Player();
-        //            Vector3 relativePos = center - transform.position;
-
-        //            // the second argument, upwards, defaults to Vector3.up
-        //            Quaternion rotation = Quaternion.LookRotation(relativePos, new Vector3(0, 1, 0));
-        //            transform.rotation = rotation * Quaternion.Euler(Shift_X, Shift_Y, Shift_Z);
-
-
-        //        }
-        //    }
-        //}
 
         private bool isAimAssisterOn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
 
-
+         [HideFromIl2Cpp]
         void OnDrop()
         {
             isAimAssisterOn = false;
-            TargetPlayer = null;
         }
-
+         [HideFromIl2Cpp]
         void OnEnable()
         {
             PickupSystem.enabled = true;
-            TargetPlayer = null;
-
         }
-
+         [HideFromIl2Cpp]
         void OnDisable()
         {
             PickupSystem.enabled = false;
-            TargetPlayer = null;
+        }
 
+        void OnDestroy()
+        {
+            PickupSystem.DestroyMeLocal(true);
         }
     }
 }

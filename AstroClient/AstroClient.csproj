@@ -1558,6 +1558,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AstroMonos\AstroUdons\Possibly Broken\" />
     <Folder Include="AstroMonos\Components\Player\Fly\" />
     <Folder Include="ClientResources\ProgramsArchive\" />
     <Folder Include="ClientUI\Menu\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />

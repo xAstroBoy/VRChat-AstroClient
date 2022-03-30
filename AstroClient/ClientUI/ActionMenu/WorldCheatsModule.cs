@@ -384,8 +384,9 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddToggle("Patron Mode", PrisonEscape.isPatron.GetValueOrDefault(false), ToggleValue => { PrisonEscape.isPatron = ToggleValue; });
                     CustomSubMenu.AddButton("Toggle Patron Guns", () => { PrisonEscape.TogglePatronGuns.InvokeBehaviour(); });
                     CustomSubMenu.AddButton("Toggle Double Points", () => { PrisonEscape.ToggleDoublePoints.InvokeBehaviour(); });
-                    CustomSubMenu.AddToggle("Everyone Has Gold Gun", PrisonEscape.EveryoneHasGoldenGuns, ToggleValue => { PrisonEscape.EveryoneHasGoldenGuns = ToggleValue; });
-                   // CustomSubMenu.AddToggle("Everyone Has Double Points", PrisonEscape.EveryoneHasdoublePoints, ToggleValue => { PrisonEscape.EveryoneHasdoublePoints = ToggleValue; });
+                    //CustomSubMenu.AddToggle("Everyone Has Gold Gun", PrisonEscape.EveryoneHasGoldenGuns, ToggleValue => { PrisonEscape.EveryoneHasGoldenGuns = ToggleValue; });
+                    // CustomSubMenu.AddToggle("Everyone Has Double Points", PrisonEscape.EveryoneHasdoublePoints, ToggleValue => { PrisonEscape.EveryoneHasdoublePoints = ToggleValue; });
+                    CustomSubMenu.AddButton("Give Everyone Gold Guns", () => { PrisonEscape.EnableGoldenCamos.InvokeBehaviour(); });
 
                 });
                 CustomSubMenu.AddSubMenu("Game Hacks", () =>

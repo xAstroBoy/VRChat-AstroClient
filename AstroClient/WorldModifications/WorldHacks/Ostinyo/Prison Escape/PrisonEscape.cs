@@ -161,18 +161,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
             foreach (var item in WorldUtils.Pickups)
             {
-                var patronshit = item.GetOrAddComponent<GlobalPatronUnlocker>();
-                MiscUtils.DelayFunction(1f, () =>
+                var beh = item.gameObject.FindUdonEvent("EnablePatronEffects");
+                if(beh != null)
                 {
-                    if (patronshit != null)
-                    {
-                        if (!FreeGoldenSkin.Contains(patronshit))
-                        {
-                            FreeGoldenSkin.Add(patronshit);
-                        }
-                    }
-
-                });
+                    EnableGoldenCamos.Add(beh);
+                }
             }
 
             int WantedTriggersRegistered = 0;
@@ -300,7 +293,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             laser.ShowEndPointSphere = true;
                         }
                     }
-                    item.AddComponent<PrisonEscape_AimAssister>();
+                    // item.AddComponent<PrisonEscape_AimAssister>();
                 }
 
                 if (item.name.Contains("RPG"))
@@ -477,6 +470,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static List<Vector3> SpawnPoints_Prisoners = new List<Vector3>();
         internal static List<Vector3> SpawnPoints_Spawn = new List<Vector3>();
 
+        internal static List<UdonBehaviour_Cached> EnableGoldenCamos = new List<UdonBehaviour_Cached>();
 
         //internal static PrisonEscape_Roles GetRoleFromPos(Vector3 pos)
         //{
@@ -539,7 +533,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static List<PrisonEscape_PoolDataReader> CurrentReaders { get; set; } = new();
 
-        private static List<GlobalPatronUnlocker> FreeGoldenSkin { get; set; } = new();
 
         internal static PrisonEscape_PoolDataReader FindAssignedUser(Player player, bool SuppressLogs = false, PrisonEscape_Roles TargetRole = PrisonEscape_Roles.Dead)
         {
@@ -798,26 +791,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        private static bool _EveryoneHasGoldenGuns { get; set; }
-        internal static bool EveryoneHasGoldenGuns
-        {
-            get
-            {
-                return _EveryoneHasGoldenGuns;
-            }
-            set
-            {
-                _EveryoneHasGoldenGuns = value;
-                foreach(var item in FreeGoldenSkin)
-                {
-                    if(item != null)
-                    {
-                        item.EveryoneHasPatreonPerk = value;
-                    }
-                }
-
-            }
-        }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -873,10 +846,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             LocalReader = null;
             SpawnPoints_Prisoners.Clear();
             SpawnPoints_Guards.Clear();
-            _EveryoneHasGoldenGuns = false;
             _EveryoneHasdoublePoints = false;
-            FreeGoldenSkin.Clear(); 
             SpawnPoints_Spawn.Clear();
+            EnableGoldenCamos.Clear();
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
         {

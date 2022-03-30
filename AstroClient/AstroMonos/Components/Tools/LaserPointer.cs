@@ -6,6 +6,7 @@ using Il2CppSystem.Collections.Generic;
 using JetBrains.Annotations;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
+using VRChatUtilityKit.Utilities;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
@@ -112,6 +113,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         /// Change LineRenderer Color (including EndPoint sphere)
         /// </summary>
         /// <param name="color"></param>
+        [HideFromIl2Cpp]
         internal void SetLaserColor(Color color)
         {
             Laser.startColor = color;
@@ -129,6 +131,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         /// <summary>
         /// Spawn a EndPoint sphere
         /// </summary>
+        [HideFromIl2Cpp]
         private void SpawnEndPointSphere()
         {
             if (EndPointSphere == null)
@@ -205,6 +208,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         /// </summary>
         /// <param name="hit"></param>
         /// <returns></returns>
+        [HideFromIl2Cpp]
         private bool isPlayer(Collider hit)
         {
             if (hit != null)
@@ -219,7 +223,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             }
             return false;
         }
-
+        [HideFromIl2Cpp]
         private VRC.Player GetPlayer(Collider hit)
         {
             VRC.Player result = null;
@@ -240,6 +244,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         /// </summary>
         /// <param name="LayerName"></param>
         /// <returns></returns>
+        [HideFromIl2Cpp]
         private bool LayerExists(string LayerName)
         {
             var newLayer = LayerMask.NameToLayer(LayerName);
@@ -255,6 +260,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         /// <param name="hit"></param>
         /// <param name="LayerName"></param>
         /// <returns></returns>
+        [HideFromIl2Cpp]
         private bool isLayer(Collider hit, string LayerName)
         {
             if (LayerExists(LayerName))
@@ -279,6 +285,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         /// Spammy, used only for debug purposes, but it reports Layer, Collider is Trigger  and collider and root Transforms name
         /// </summary>
         /// <param name="collider"></param>
+     [HideFromIl2Cpp]
         private void ReportHitResult(Collider collider)
         {
             if (ReportHit)
@@ -297,11 +304,12 @@ namespace AstroClient.AstroMonos.Components.Tools
         /// Used for Setting Endpoint Vector
         /// </summary>
         /// <param name="hit"></param>
+        [HideFromIl2Cpp]
         private void SetEndPoint(RaycastHit hit)
         {
             if (isPlayer(hit.collider))
             {
-                
+
                 if (ChangeOnPlayerHit)
                 {
                     SetLaserColor(PlayerHit);
@@ -311,7 +319,8 @@ namespace AstroClient.AstroMonos.Components.Tools
                 {
                     EndPointSphere.transform.position = hit.point;
                 }
-                OnPlayerHit(GetPlayer(hit.collider));
+
+                OnPlayerHit.SafetyRaise(GetPlayer(hit.collider));
             }
             else
             {
@@ -341,8 +350,8 @@ namespace AstroClient.AstroMonos.Components.Tools
                         if (IgnoreTriggerColliders)
                         {
                             SetLaserColor(Defaultcolor);
-                            endPoint = DefaultEndPoint; 
-                            if(EndPointSphere != null)
+                            endPoint = DefaultEndPoint;
+                            if (EndPointSphere != null)
                             {
                                 EndPointSphere.transform.position = DefaultEndPoint;
                             }
@@ -375,7 +384,7 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         }
 
-
+        [HideFromIl2Cpp]
         private void CheckLaser()
         {
             if (Laser != null)
