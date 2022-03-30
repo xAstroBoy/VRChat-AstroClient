@@ -28,26 +28,17 @@
             AntiGarbageCollection.Add(this);
         }
 
-        void Start()
-        {
-        }
-
-
         private void OnTriggerEnter(Collider other)
         {
-            OnTriggerEnterEvent(other);
+            OnTriggerEvent(other);
         }
 
-        void OnTriggerExit(Collider other)
-        {
-            OnTriggerExitEvent(other);
-        }
 
 
 
         
 
-        private void OnTriggerEnterEvent(Collider col)
+        private void OnTriggerEvent(Collider col)
         {
             if (col != null)
             {
@@ -66,25 +57,7 @@
                 }
             }
         }
-        private void OnTriggerExitEvent(Collider col)
-        {
-            if (col != null)
-            {
-                var root = col.transform.root;
-                if (root.name.Contains("VRCPlayer"))
-                {
-                    var player = root.GetComponent<Player>();
-                    if (player != null)
-                    {
-                        var PrisonESP = player.gameObject.GetComponent<PrisonEscape_ESP>();
-                        if (PrisonESP != null)
-                        {
-                            PrisonESP.isWanted = true;
-                        }
-                    }
-                }
-            }
-        }
+  
 
     }
 }

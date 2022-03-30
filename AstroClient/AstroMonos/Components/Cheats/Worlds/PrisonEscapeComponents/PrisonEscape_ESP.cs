@@ -156,8 +156,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             // TODO: This is required just for the health tag system (singletag)
             InvokeRepeating(nameof(UpdatePlayerDataReaders), 0f, 0.3f);
             InvokeRepeating(nameof(HealthTagUpdate), 0.1f, 0.1f);
-
-
             InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
 
 
@@ -172,40 +170,36 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             if (role == CurrentRole) return; // Dont Do anything because is already set 
             if (role == PrisonEscape_Roles.Dead)
             {
-                ToggleWantedTag(false);
                 LockRole = false;
+                CurrentRole = role;
+                ToggleWantedTag(false);
+                if(healthTag != null)
+                {
+                    healthTag.ShowTag = false;
+                }
+                if (!Player.GetAPIUser().IsSelf)
+                {
+                    ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Is Dead!", System.Drawing.Color.Green);
+                }
+                else
+                {
+                    ModConsole.DebugLog($"Player {PlayerSpooferUtils.Original_DisplayName} Is Dead!", System.Drawing.Color.Green);
+                }
+                return;
             }
 
             if (!LockRole)
             {
-                if (role == PrisonEscape_Roles.Dead)
+                CurrentRole = role;
+                if (!Player.GetAPIUser().IsSelf)
                 {
-                    if (!Player.GetAPIUser().IsSelf)
-                    {
-                        ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Is Dead!", System.Drawing.Color.Green);
-                    }
-                    else
-                    {
-                        ModConsole.DebugLog($"Player {PlayerSpooferUtils.Original_DisplayName} Is Dead!", System.Drawing.Color.Green);
-                    }
+                    ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Got Role {role}!", System.Drawing.Color.Green);
                 }
                 else
                 {
-                    if (!Player.GetAPIUser().IsSelf)
-                    {
-                        ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Got Role {role}!", System.Drawing.Color.Green);
-                    }
-                    else
-                    {
-                        ModConsole.DebugLog($"Player {PlayerSpooferUtils.Original_DisplayName} Got Role {role}!", System.Drawing.Color.Green);
-                    }
-
+                    ModConsole.DebugLog($"Player {PlayerSpooferUtils.Original_DisplayName} Got Role {role}!", System.Drawing.Color.Green);
                 }
-                if (role != PrisonEscape_Roles.Dead)
-                {
-                    CurrentRole = role;
-                    LockRole = true;
-                }
+                LockRole = true;
             }
 
         }
@@ -236,18 +230,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (WantedTag != null)
+                if (CurrentRole == PrisonEscape_Roles.Guard || CurrentRole == PrisonEscape_Roles.Dead)
                 {
-                    if (CurrentRole == PrisonEscape_Roles.Guard || CurrentRole == PrisonEscape_Roles.Dead)
-                    {
-                        value = false;
-                        ToggleWantedTag(false);
-                    }
-                    if (CurrentRole == PrisonEscape_Roles.Prisoner)
-                    {
-                        ToggleWantedTag(value);
-                    }
+                    ToggleWantedTag(false);
                 }
+                if (CurrentRole == PrisonEscape_Roles.Prisoner)
+                {
+                    ToggleWantedTag(value);
+                }
+
                 _isWanted = value;
             }
         }
@@ -265,7 +256,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                         ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.", System.Drawing.Color.GreenYellow);
                         SaidFoundMessage = true;
                     }
-                    HealthTagUpdate();
                 }
                 //else
                 //{
@@ -316,16 +306,16 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (isWanted)
                 {
-                    ESPColor = SystemColors.Orange; 
+                    ESPColor = SystemColors.OrangeRed; 
                 }
                 else
                 {
-                    ESPColor = SystemColors.OrangeRed;
+                    ESPColor = SystemColors.YellowGreen;
                 }
             }
             else if (CurrentRole == PrisonEscape_Roles.Prisoner && LocalUserData.CurrentRole == PrisonEscape_Roles.Prisoner) // Remote & Local Prisoners
             {
-                ESPColor = SystemColors.Orange;
+                ESPColor = SystemColors.YellowGreen;
             }
 
         }

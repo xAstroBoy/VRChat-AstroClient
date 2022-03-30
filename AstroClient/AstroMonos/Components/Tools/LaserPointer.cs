@@ -1,7 +1,9 @@
-﻿using AstroClient.ClientAttributes;
+﻿using System;
+using AstroClient.ClientAttributes;
 using AstroClient.Tools.Colors;
 using AstroClient.Tools.Extensions;
 using Il2CppSystem.Collections.Generic;
+using JetBrains.Annotations;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 
@@ -19,6 +21,9 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             AntiGarbageCollection.Add(this);
         }
+
+
+        internal Action<VRC.Player> OnPlayerHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         /// <summary>
         /// Current Used Line Renderer.
@@ -215,6 +220,20 @@ namespace AstroClient.AstroMonos.Components.Tools
             return false;
         }
 
+        private VRC.Player GetPlayer(Collider hit)
+        {
+            VRC.Player result = null;
+            if (hit != null)
+            {
+                result = hit.transform.root.GetComponentInChildren<VRC.Player>();
+                if(result == null)
+                {
+                    result = hit.gameObject.GetComponentInChildren<VRC.Player>();
+                }
+                return result;
+            }
+            return null;
+        }
 
         /// <summary>
         /// Small utility to check if the Layer exists.
@@ -282,6 +301,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             if (isPlayer(hit.collider))
             {
+                
                 if (ChangeOnPlayerHit)
                 {
                     SetLaserColor(PlayerHit);
@@ -291,6 +311,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 {
                     EndPointSphere.transform.position = hit.point;
                 }
+                OnPlayerHit(GetPlayer(hit.collider));
             }
             else
             {
@@ -364,7 +385,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     // Are we hitting any colliders?
                     RaycastHit hit;
                     //Debug.DrawRay(this.transform.position, this.transform.forward, Color.green);
-                    if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, float.MaxValue,  ~(1 << LayerMask.NameToLayer("MirrorReflection") | 1 << LayerMask.NameToLayer("UI"))))
+                    if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, float.MaxValue,  ~(1 << LayerMask.NameToLayer("MirrorReflection"))))
                     {
                         ReportHitResult(hit.collider);
                         SetEndPoint(hit);
