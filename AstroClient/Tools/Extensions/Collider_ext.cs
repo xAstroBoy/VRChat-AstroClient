@@ -40,7 +40,7 @@
             }
         }
 
-        internal static void RemoveAllColliders(this GameObject obj, bool Silent = false)
+        internal static void RemoveAllColliders(this GameObject obj, bool Silent = true)
         {
             if (obj != null)
             {
@@ -71,13 +71,16 @@
             }
         }
 
-        internal static void Set_Colliders_isTrigger(this GameObject obj, bool isTrigger)
+        internal static void Set_Colliders_isTrigger(this GameObject obj, bool isTrigger, bool Quiet = true)
         {
             if (obj != null)
             {
                 var colliders = obj.GetComponents<Collider>();
-                ModConsole.DebugLog($"set IsTrigger {isTrigger} to {colliders.Count} Colliders in {obj.name}");
+                if (!Quiet)
+                {
+                    ModConsole.DebugLog($"set IsTrigger {isTrigger} to {colliders.Count} Colliders in {obj.name}");
 
+                }
                 foreach (var c in colliders)
 
                 {
@@ -189,21 +192,25 @@
 
         }
 
-        internal static void IgnoreLocalPlayerCollision(this GameObject obj, bool ignore = true, bool IncludeTriggers = true)
+        internal static void IgnoreLocalPlayerCollision(this GameObject obj, bool ignore = true, bool IncludeTriggers = true, bool Quiet = true)
         {
             var localcollider = GameInstances.LocalPlayer.gameObject.GetComponent<Collider>();
             if (localcollider != null)
             {
 
                 var colliders = obj.GetComponents<Collider>();
-                if (ignore)
+                if (!Quiet)
                 {
-                    ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To ignore Current Player Collisions");
-                }
-                else
-                {
-                    ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To Interact Current Player Collisions");
+                    if (ignore)
+                    {
 
+                        ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To ignore Current Player Collisions");
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To Interact Current Player Collisions");
+
+                    }
                 }
 
                 foreach (var c in colliders)
@@ -217,7 +224,7 @@
                     }
                     else
                     {
-                    Physics.IgnoreCollision(c, localcollider, ignore);
+                        Physics.IgnoreCollision(c, localcollider, ignore);
                     }
                 }
             }

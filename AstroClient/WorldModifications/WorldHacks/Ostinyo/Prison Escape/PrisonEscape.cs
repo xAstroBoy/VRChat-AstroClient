@@ -152,7 +152,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         if (!CurrentReaders.Contains(reader))
                         {
-                            ModConsole.DebugLog($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
+                           // ModConsole.DebugLog($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
                             CurrentReaders.Add(reader);
                         }
                     }
@@ -193,15 +193,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         CreateSpawnItemButton(item);
                     }
                 }
-
-                if(item.name.StartsWith("Wanted Trigger"))
-                {
-                    var WantedDetector = item.GetOrAddComponent<PrisonEscape_WantedDetector>();
-                    if(WantedDetector != null)
-                    {
-                        WantedTriggersRegistered++;
-                    }
-                }
+                // Not Reliable.
+                //if(item.name.StartsWith("Wanted Trigger"))
+                //{
+                //    var WantedDetector = item.GetOrAddComponent<PrisonEscape_WantedDetector>();
+                //    if(WantedDetector != null)
+                //    {
+                //        WantedTriggersRegistered++;
+                //    }
+                //}
 
                 if (item.name.Contains("Knife"))
                 {
@@ -274,6 +274,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         SpawnPoints_Spawn.Add(item.SpawnPosition);
                     }
+                    AddSpawnPointDetector(item.SpawnPosition, PrimitiveType.Sphere, 50f, PrisonEscape_Roles.Dead);
 
 
                     if (item.SpawnLocation != null)
@@ -328,13 +329,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             ModConsole.DebugLog($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
 
 
-            AddSpawnDetector(SpawnPoints_Guards, PrimitiveType.Sphere, 5, PrisonEscape_Roles.Guard);
-            AddSpawnDetector(SpawnPoints_Prisoners, PrimitiveType.Cube, 6f, PrisonEscape_Roles.Prisoner);
-            AddSpawnDetector(SpawnPoints_Spawn, PrimitiveType.Cube, 7f, PrisonEscape_Roles.Dead);
-            if (Game_Join_Trigger != null)
-            {
-                BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
-            }
+            AddSpawnDetector(SpawnPoints_Guards, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Guard);
+            AddSpawnDetector(SpawnPoints_Prisoners, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Prisoner);
+            //AddSpawnDetector(SpawnPoints_Spawn, PrimitiveType.Cube, 10f, PrisonEscape_Roles.Dead);
+            //if (Game_Join_Trigger != null)
+            //{
+            //    BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
+            //}
         }
 
         private static void CreateSpawnItemButton(UdonBehaviour item)
@@ -350,9 +351,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     if (rend != null)
                     {
                         btn.ButtonObject.transform.parent = rend.transform;
-
                         // Flip Button On the other side.
-                        btn.ButtonObject.transform.FlipTransformRotation();
+
+                        Vector3 rot = btn.ButtonObject.transform.rotation.eulerAngles;
+                        rot = new Vector3(rot.x, rot.y + 180, rot.z);
+                        btn.ButtonObject.transform.rotation = Quaternion.Euler(rot);
+
                     }
                 }
             }
@@ -425,21 +429,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             foreach (var pos in positions)
             {
-                GameObject sphere = GameObject.CreatePrimitive(detectorshape);
-                sphere.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
-                sphere.name = AssignedRole.ToString() + " SpawnPoint Detector";
-                sphere.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-                sphere.transform.position = pos;
-                sphere.transform.localScale = new Vector3(scale, scale, scale);
-                foreach (var col in sphere.GetComponents<Collider>())
-                {
-                    col.isTrigger = true;
-                }
-                foreach (var ren in sphere.GetComponents<Renderer>())
-                {
-                    ren.DestroyMeLocal(true);
-                }
-                BindRoleToCollider(sphere, AssignedRole);
+                AddSpawnPointDetector(pos, detectorshape, scale, AssignedRole);
             }
         }
 
@@ -452,7 +442,24 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
+        private static void AddSpawnPointDetector(Vector3 position, PrimitiveType detectorshape, float scale , PrisonEscape_Roles AssignedRole)
+        {
+            GameObject sphere = GameObject.CreatePrimitive(detectorshape);
+            sphere.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
+            sphere.name = AssignedRole.ToString() + " SpawnPoint Detector";
+            sphere.transform.position = position;
+            sphere.transform.localScale = new Vector3(scale, scale, scale);
+            foreach (var col in sphere.GetComponents<Collider>())
+            {
+                col.isTrigger = true;
+            }
+            foreach (var ren in sphere.GetComponents<Renderer>())
+            {
+                ren.DestroyMeLocal(true);
+            }
+            BindRoleToCollider(sphere, AssignedRole);
 
+        }
 
 
         internal override void OnPlayerJoined(Player player)

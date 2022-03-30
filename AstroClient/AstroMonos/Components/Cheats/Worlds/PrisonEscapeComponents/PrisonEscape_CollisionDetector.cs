@@ -37,17 +37,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             // This will act as Collider to detect where the assigned player is spawned and correct the ESP system.
         }
 
+        internal override void OnRoomLeft()
+        {
+            Destroy(this);
+        }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerStay(Collider other)
         {
             OnColliderHit(other);
         }
-
-        void OnTriggerExit(Collider other)
-        {
-            OnColliderHit(other);
-        }
-
         internal PrisonEscape_Roles AssignedRole { get; set; }  = PrisonEscape_Roles.Dead;
 
 
@@ -63,10 +61,23 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     var player = root.GetComponent<Player>();
                     if (player != null)
                     {
-                        var PrisonESP = player.gameObject.GetComponent<PrisonEscape_ESP>();
+                        var PrisonESP = player.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
                         if (PrisonESP != null)
                         {
                             PrisonESP.UpdateRoleFromCollider(AssignedRole);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach(var item in col.GetComponents<Collider>())
+                    {
+                        if (item != null)
+                        {
+                            foreach (var col2 in gameObject.GetComponents<Collider>())
+                            {
+                                Physics.IgnoreCollision(item, col, true);
+                            }
                         }
                     }
                 }

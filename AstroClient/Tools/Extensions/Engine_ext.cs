@@ -44,7 +44,7 @@
             }
         }
 
-        internal static void FlipTransformRotation(this Transform transform)
+        internal static void FlipTransformRotation(this  Transform transform)
         {
             Vector3 rot = transform.rotation.eulerAngles;
             rot = new Vector3(rot.x, rot.y + 180, rot.z);

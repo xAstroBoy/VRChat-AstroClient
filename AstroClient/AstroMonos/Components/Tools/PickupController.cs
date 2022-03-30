@@ -41,10 +41,10 @@
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
         }
 
-        private void Update()
-        {
-            PickupProtection();
-        }
+        //private void Update()
+        //{
+        //    PickupProtection();
+        //}
 
         internal override void OnRoomLeft()
         {

@@ -155,7 +155,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             // TODO REMOVE THESE TWO (once Ostinyo decides to implement a Health Tag system)
             // TODO: This is required just for the health tag system (singletag)
             InvokeRepeating(nameof(UpdatePlayerDataReaders), 0f, 0.3f);
-            InvokeRepeating(nameof(HealthTagUpdate), 0.1f, 0.1f);
+            InvokeRepeating(nameof(TagsUpdater), 0.1f, 0.1f);
             InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
 
 
@@ -266,7 +266,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
 
 
-        internal void HealthTagUpdate()
+        internal void TagsUpdater()
         {
             if (!isActiveAndEnabled) return;
             if (AssignedReader == null) return;
@@ -275,9 +275,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 healthTag.ShowTag = false;
                 ToggleWantedTag(false);
                 ResetESPColor();
+                isWanted = false;
             }
             else
             {
+                if(AssignedReader.isWanted.GetValueOrDefault(false))
+                {
+                    isWanted = true;
+                }
                 healthTag.ShowTag = true;
                 healthTag.Text = $"Health : {AssignedReader.health}";
             }
@@ -306,7 +311,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (isWanted)
                 {
-                    ESPColor = SystemColors.OrangeRed; 
+                    ESPColor = SystemColors.Red; 
                 }
                 else
                 {
