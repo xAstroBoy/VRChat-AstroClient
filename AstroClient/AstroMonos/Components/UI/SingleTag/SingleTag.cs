@@ -27,12 +27,6 @@
             AntiGcList.Add(this);
         }
 
-        private bool DebugMode = false;
-
-        private void Debug(string msg)
-        {
-            if (DebugMode) ModConsole.DebugLog($"[SingleTag Debug] : {msg}");
-        }
 
         // Use this for initialization
         internal void Start()
@@ -243,45 +237,48 @@
             DestroyImmediate(this);
         }
 
-        private bool isAllocatedTagExisting(int value)
+        private int FindUnassignedStack(int value)
         {
-            foreach (var tag in StackerEntry.AssignedTags)
+            if (StackerEntry.AssignedTags != null)
             {
-                if (tag != null)
+                if (StackerEntry.AssignedTags.Count != 0)
                 {
-                    if (tag.TagName.Equals($"SingleTag:{value}"))
+                    foreach (var tag in StackerEntry.AssignedTags)
                     {
-                        return true;
+                        if (tag != null)
+                        {
+                            if (!tag.Equals(this))
+                            {
+                                if (tag.TagName.Equals($"SingleTag:{value}"))
+                                { 
+                                    return FindUnassignedStack(value -1);
+                                }
+                            }
+                        }
                     }
                 }
             }
-
-            return false;
+            return value;
         }
 
         private void CorrectTagStacking()
         {
             try
             {
-                foreach (SingleTag item in StackerEntry.AssignedTags)
+                if (StackerEntry.AssignedTags != null && StackerEntry.AssignedTags.Count != 0)
                 {
-                    if (item != null)
+                    foreach (SingleTag item in StackerEntry.AssignedTags)
                     {
-                        try
+                        if (item != null)
                         {
-                            var assignedstack = item.AllocatedStack;
-
-                        CheckAgain:
-                            var result = assignedstack -1;
-                            if (isAllocatedTagExisting(result))
+                            try
                             {
-                                goto CheckAgain;
+                                item.AllocatedStack = FindUnassignedStack(item.AllocatedStack - 1);
                             }
-                            item.AllocatedStack = result;
-                        }
-                        catch (Exception e)
-                        {
-                            ModConsole.ErrorExc(e);
+                            catch (Exception e)
+                            {
+                                ModConsole.ErrorExc(e);
+                            }
                         }
                     }
                 }
@@ -308,36 +305,6 @@
         }
 
 
-        // TODO : Rewrite (suspicions of Taking performance) !!!
-        //// Update is called once per frame
-        //internal void Update()
-        //{
-        //    try
-        //    {
-        //        //if (InternalStack != AllocatedStack)
-        //        //{
-        //        //    AllocatedStack = InternalStack;
-        //        //}
-        //        if (SpawnedTag != null)
-        //        {
-        //            if (SpawnedTag.gameObject.active != ShowTag) 
-
-        //            if (TagText != null)
-        //            {
-        //                if (TagText.text != Label_Text) TagText.text = Label_Text;
-        //                if (TagText.color != Label_TextColor) TagText.color = Label_TextColor;
-        //            }
-        //            if (SpawnedStatsImage != null)
-        //            {
-        //                if (SpawnedStatsImage.color != Tag_Color)  = Tag_Color;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ModConsole.DebugError($"SingleTag Exception in Update Event : " + e);
-        //    }
-        //}
 
         private string _Text = "";
         internal string Text
@@ -420,7 +387,7 @@
                         //Debug($"updating {SpawnedTag.name} LocalPosition to follow Index from {value} , New LocalPosition is  {NewLocalPosition.ToString()}");
                         SpawnedTag.localPosition = NewLocalPosition;
                         SpawnedTag.name = TagName;
-                        if (DebugMode)
+                        if (SingleTagsUtils.isDebugModeStack)
                         {
                             Text = TagName;
                         }

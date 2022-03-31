@@ -33,7 +33,7 @@
             return TagStackingMechanism.Where(x => x.Player == player).DefaultIfEmpty(null).First();
         }
 
-        private static readonly bool DebugMode = false;
+        internal static bool isDebugModeStack = false;
         internal static void Debug(string msg)
         {
             if (DebugMode)
