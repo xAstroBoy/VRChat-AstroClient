@@ -236,6 +236,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 }
                 if (CurrentRole == PrisonEscape_Roles.Prisoner)
                 {
+                    if(Player.GetAPIUser().IsSelf)
+                    {
+                        if(PrisonEscape.TakeKeyCardOnWanted)
+                        {
+                            PrisonEscape.TakeKeyCard();
+                        }
+                    }
                     ToggleWantedTag(value);
                 }
 
@@ -275,13 +282,19 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 healthTag.ShowTag = false;
                 ToggleWantedTag(false);
                 ResetESPColor();
-                isWanted = false;
+                if (isWanted)
+                {
+                    isWanted = false;
+                }
             }
             else
             {
-                if(AssignedReader.isWanted.GetValueOrDefault(false))
+                if (AssignedReader.isWanted.GetValueOrDefault(false))
                 {
-                    isWanted = true;
+                    if (!isWanted)
+                    {
+                        isWanted = true;
+                    }
                 }
                 healthTag.ShowTag = true;
                 healthTag.Text = $"Health : {AssignedReader.health}";

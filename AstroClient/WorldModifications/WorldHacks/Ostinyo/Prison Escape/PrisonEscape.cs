@@ -713,6 +713,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static PrisonEscape_PoolDataReader _LocalPlayerData;
         
+
+        internal static bool TakeKeyCardOnWanted { get; set; }
         private static bool _DropKnifeAfterKill = true;
 
         internal static bool DropKnifeAfterKill
@@ -849,6 +851,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             _EveryoneHasdoublePoints = false;
             SpawnPoints_Spawn.Clear();
             EnableGoldenCamos.Clear();
+            TakeKeyCardOnWanted = false;
+            
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
         {

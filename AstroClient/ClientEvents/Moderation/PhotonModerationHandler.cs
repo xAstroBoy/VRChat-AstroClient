@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Moderation
+﻿using System.Collections.Concurrent;
+
+namespace AstroClient.Moderation
 {
     #region Imports
 
@@ -15,16 +17,37 @@
 
     internal class PhotonModerationHandler : AstroEvents
     {
+        private static void RegisterPlayer(string id)
+        {
+            if (!PlayerModerations.ContainsKey(id))
+            {
+                PlayerModerations.TryAdd(id, new ModerationData());
+            }
+        }
+
+
+        private static void RemovePlayer(string id)
+        {
+            if (!PlayerModerations.ContainsKey(id))
+            {
+                PlayerModerations.TryRemove(id, out _);
+            }
+
+        }
+
         internal static void OnPlayerBlockedYou_Invoker(Player player)
         {
             if (player != null)
             {
                 var photonuserid = player.GetUserID();
-
-                if (!BlockedYouPlayers.Contains(photonuserid))
+                RegisterPlayer(photonuserid);
+                if (PlayerModerations.ContainsKey(photonuserid))
                 {
-                    BlockedYouPlayers.Add(photonuserid);
-                    Event_OnPlayerBlockedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                    if (!PlayerModerations[photonuserid].Blocked)
+                    {
+                        PlayerModerations[photonuserid].Blocked = true;
+                        Event_OnPlayerBlockedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                    }
                 }
             }
         }
@@ -34,11 +57,14 @@
             if (player != null)
             {
                 var photonuserid = player.GetUserID();
-
-                if (BlockedYouPlayers.Contains(photonuserid))
+                RegisterPlayer(photonuserid);
+                if (PlayerModerations.ContainsKey(photonuserid))
                 {
-                    BlockedYouPlayers.Remove(photonuserid);
-                    Event_OnPlayerUnblockedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                    if (PlayerModerations[photonuserid].Blocked)
+                    {
+                        PlayerModerations[photonuserid].Blocked = false;
+                        Event_OnPlayerUnblockedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                    }
                 }
             }
         }
@@ -48,11 +74,14 @@
             if (player != null)
             {
                 var photonuserid = player.GetUserID();
-
-                if (!MutedYouPlayers.Contains(photonuserid))
+                RegisterPlayer(photonuserid);
+                if (PlayerModerations.ContainsKey(photonuserid))
                 {
-                    MutedYouPlayers.Add(photonuserid);
-                    Event_OnPlayerMutedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                    if (!PlayerModerations[photonuserid].Muted)
+                    {
+                        PlayerModerations[photonuserid].Muted = true;
+                        Event_OnPlayerMutedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                    }
                 }
             }
         }
@@ -62,11 +91,14 @@
             if (player != null)
             {
                 var photonuserid = player.GetUserID();
-
-                if (MutedYouPlayers.Contains(photonuserid))
+                RegisterPlayer(photonuserid);
+                if (PlayerModerations.ContainsKey(photonuserid))
                 {
-                    MutedYouPlayers.Remove(photonuserid);
-                    Event_OnPlayerUnmutedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                    if (PlayerModerations[photonuserid].Muted)
+                    {
+                        PlayerModerations[photonuserid].Muted= false;
+                        Event_OnPlayerUnmutedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                    }
                 }
             }
         }
@@ -84,8 +116,7 @@
 
         internal override void OnRoomLeft()
         {
-            BlockedYouPlayers.Clear();
-            MutedYouPlayers.Clear();
+            PlayerModerations.Clear();
         }
 
         internal override void OnPhotonLeft(Player player)
@@ -97,14 +128,24 @@
         {
             if (player == null) yield break;
             var photonuserid = player.GetUserID();
-            if (BlockedYouPlayers.Contains(photonuserid)) BlockedYouPlayers.Remove(photonuserid);
-            if (MutedYouPlayers.Contains(photonuserid)) MutedYouPlayers.Remove(photonuserid);
+            RemovePlayer(photonuserid);
             yield return null;
         }
 
-        internal static List<string> BlockedYouPlayers { get; } = new();
 
-        internal static List<string> MutedYouPlayers { get; } = new();
+        internal static ConcurrentDictionary<string, ModerationData> PlayerModerations = new ConcurrentDictionary<string, ModerationData>();
+
+        internal class ModerationData
+        {
+            internal bool Blocked { get; set; } = false;
+            internal bool Muted { get; set; } = false;
+
+            internal ModerationData(bool Blocked = false, bool Muted = false)
+            {
+                this.Blocked = Blocked;
+                this.Muted = Muted;
+            }
+        }
 
         #endregion PlayerModerations
     }

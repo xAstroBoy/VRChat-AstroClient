@@ -8,37 +8,24 @@
     {
         internal static bool HasBlockedYou(this APIUser user)
         {
-            if (PhotonModerationHandler.BlockedYouPlayers.Count != 0)
+            if (PhotonModerationHandler.PlayerModerations != null)
             {
-                for (int i = 0; i < PhotonModerationHandler.BlockedYouPlayers.Count; i++)
+                if (PhotonModerationHandler.PlayerModerations.ContainsKey(user.id))
                 {
-                    string playerid = PhotonModerationHandler.BlockedYouPlayers[i];
-                    if (playerid != null)
-                    {
-                        if (PlayerUtils.GetUserID(user).Equals(playerid))
-                        {
-                            return true;
-                        }
-                    }
+                    return PhotonModerationHandler.PlayerModerations[user.id].Blocked;
                 }
             }
             return false;
+
         }
 
         internal static bool HasMutedYou(this APIUser user)
         {
-            if (PhotonModerationHandler.MutedYouPlayers.Count != 0)
+            if(PhotonModerationHandler.PlayerModerations != null)
             {
-                for (int i = 0; i < PhotonModerationHandler.MutedYouPlayers.Count; i++)
+                if(PhotonModerationHandler.PlayerModerations.ContainsKey(user.id))
                 {
-                    string playerid = PhotonModerationHandler.MutedYouPlayers[i];
-                    if (playerid != null)
-                    {
-                        if (PlayerUtils.GetUserID(user).Equals(playerid))
-                        {
-                            return true;
-                        }
-                    }
+                    return PhotonModerationHandler.PlayerModerations[user.id].Muted;
                 }
             }
             return false;

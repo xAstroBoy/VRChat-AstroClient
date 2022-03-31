@@ -1,4 +1,7 @@
-﻿namespace AstroClient.AstroMonos
+﻿using System.Collections.Concurrent;
+using Il2CppSystem.Xml;
+
+namespace AstroClient.AstroMonos
 {
     using System.Collections.Generic;
     using System.Drawing;
@@ -29,16 +32,27 @@
 
         internal static void RegisterPlayer(Player player)
         {
+            // TODO : Get Rid of PickupController dependency for PickupBlocker System
+
+            // We might not need that anymore as We are testing the Owner detection system from PlayerList Hook.
+
             StartPickupBlockerSystem(); // Add everything only if we need to prevent trolls from accessing pickup interaction
+            
+            // For now let's leave it temporarily 
+
             var id = player.GetAPIUser().GetUserID();
             if (id != null)
             {
-                if (!IsPickupBlockedUser(id))
+                if (blockeduserids.ContainsKey(id))
                 {
-                    ModConsole.DebugLog($"Added Block for Player {player.GetDisplayName()}  from using Pickups.");
-                    var tag = player.AddSingleTag(Color.Orange, "Pickup Blocked");
-                    var newentry = new BlockedUsersFromPickups(id, tag);
-                    blockeduserids.Add(newentry);
+                    if (blockeduserids.ContainsKey(id))
+                    {
+                        if (!blockeduserids[id].Blocked)
+                        {
+                            ModConsole.DebugLog($"Added Block for Player {player.GetDisplayName()}  from using Pickups.");
+                            blockeduserids[id].Blocked = true;
+                        }
+                    }
                 }
             }
         }
@@ -48,15 +62,16 @@
             var id = player.GetAPIUser().GetUserID();
             if (id != null)
             {
-                var entry = GetBlockedUser(id);
-                if (entry != null)
+                if (blockeduserids.ContainsKey(id))
                 {
-                    ModConsole.DebugLog($"Removed Block for Player {player.GetDisplayName()}  from using Pickups.");
-                    if (entry.BlockedUserTag != null)
+                    if (blockeduserids.ContainsKey(id))
                     {
-                        entry.BlockedUserTag.DestroyMeLocal();
+                        if (blockeduserids[id].Blocked)
+                        {
+                            ModConsole.DebugLog($"Removed Block for Player {player.GetDisplayName()}  from using Pickups.");
+                            blockeduserids[id].Blocked = false;
+                        }
                     }
-                    blockeduserids.Remove(entry);
                 }
             }
         }
@@ -69,21 +84,34 @@
 
         internal static bool IsPickupBlockedUser(string UserID)
         {
-            return GetBlockedUser(UserID) != null;
+            if(blockeduserids != null)
+            {
+                if(blockeduserids.ContainsKey(UserID))
+                {
+                    return blockeduserids[UserID].Blocked;
+                }
+            }
+            return false;
         }
 
         internal override void OnPlayerJoined(Player player)
         {
-            if (blockeduserids.Count == 0) return;
             var id = player.GetAPIUser().GetUserID();
             if (id != null)
             {
-                var entry = GetBlockedUser(id);
-                if (entry != null)
+                if (!blockeduserids.ContainsKey(id))
                 {
-                    if (entry.BlockedUserTag == null)
+                    blockeduserids.TryAdd(id, new PickupBlockerData(player));
+                }
+                else
+                {
+                    if (blockeduserids.ContainsKey(id))
                     {
-                        entry.BlockedUserTag = player.AddSingleTag(Color.Orange, "Pickup Blocked");
+                        blockeduserids[id].player = player;
+                        if(blockeduserids[id].Blocked)
+                        {
+                            blockeduserids[id].SpawnTag();
+                        }
                     }
                 }
             }
@@ -91,50 +119,66 @@
 
         internal override void OnPlayerLeft(Player player)
         {
-            if (blockeduserids.Count == 0) return;
             var id = player.GetAPIUser().GetUserID();
             if (id != null)
             {
-                var entry = GetBlockedUser(id);
-                if (entry != null)
+                if (blockeduserids.ContainsKey(id))
                 {
-                    if (entry.BlockedUserTag != null)
-                    {
-                        entry.BlockedUserTag.DestroyMeLocal();
-                        entry.BlockedUserTag = null;
-                    }
+                    blockeduserids[id].player = null;
                 }
             }
         }
 
-        internal static BlockedUsersFromPickups GetBlockedUser(string UserID)
+
+        internal static ConcurrentDictionary<string, PickupBlockerData> blockeduserids = new ConcurrentDictionary<string, PickupBlockerData>();
+
+        internal class PickupBlockerData
         {
-            if (blockeduserids.Count == 0) return null;
-            if (blockeduserids.Count != 0)
+            
+            internal Player player { get; set; }
+            private SingleTag BlockedTag { get; set; }
+            private bool _Blocked { get; set; }
+            internal bool Blocked
             {
-                foreach (var entry in blockeduserids)
+                get => _Blocked;
+                set
                 {
-                    if (entry.UserID.Equals(UserID))
+                    _Blocked = value;
+                    if (value)
                     {
-                        return entry;
+                        SpawnTag();
+                    }
+                    else
+                    {
+                        DestroyTag();
                     }
                 }
             }
 
-            return null;
-        }
-
-        internal static List<BlockedUsersFromPickups> blockeduserids { get; private set; } = new List<BlockedUsersFromPickups>();
-
-        internal class BlockedUsersFromPickups
-        {
-            internal SingleTag BlockedUserTag { get; set; }
-            internal string UserID { get; set; }
-
-            internal BlockedUsersFromPickups(string UserID, SingleTag Tag)
+            internal void SpawnTag()
             {
-                this.UserID = UserID;
-                this.BlockedUserTag = Tag;
+                if (player != null)
+                {
+                    if (BlockedTag == null)
+                    {
+                        BlockedTag = player.AddSingleTag(Color.Orange, "Pickup Blocked");
+                    }
+
+                }
+            }
+
+            internal void DestroyTag()
+            {
+                if (BlockedTag != null)
+                {
+                    BlockedTag.DestroyMeLocal(true);
+                }
+            }
+
+            internal PickupBlockerData(Player player, bool Blocked = false)
+            {
+                this.player = player;
+                this.Blocked = Blocked;
             }
         }
     }

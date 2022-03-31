@@ -69,7 +69,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         private void GodModeOn()
         {
-            if(SemiGodMode)
+            if(GodMode)
             {
                 health = int.MaxValue; // Freeze it here <3
             }
@@ -293,22 +293,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        private bool _isSemiGodMode { get; set; }
+        private bool _GodMode { get; set; }
 
         private bool BackupRegenStuff { get; set; }
 
         private int OriginalRegenAmt { get; set; }
         private float OriginalRegenDelay { get; set; }
 
-        internal bool SemiGodMode
+        internal bool GodMode
         {
             get
             {
-                return _isSemiGodMode;
+                return _GodMode;
             }
             set
             {
-                _isSemiGodMode = value;
+                _GodMode = value;
                 if(value)
                 {
                     if(!BackupRegenStuff)

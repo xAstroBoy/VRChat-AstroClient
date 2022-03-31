@@ -1,4 +1,7 @@
-﻿namespace AstroClient.PlayerList.Entries
+﻿using AstroClient.AstroMonos;
+using AstroClient.Tools.Extensions;
+
+namespace AstroClient.PlayerList.Entries
 {
     using System;
     using System.Collections.Generic;
@@ -416,6 +419,23 @@
                 if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(__0))
                     newOwner = room.field_Private_Dictionary_2_Int32_Player_0[__0].field_Public_Player_0?.prop_APIUser_0?.id;
 
+                if (PickupBlocker.blockeduserids != null)
+                {
+                    if (PickupBlocker.blockeduserids.Count != 0)
+                    {
+                        if (PickupBlocker.IsPickupBlockedUser(newOwner))
+                        {
+                            var pickup = __instance.GetComponent<VRC_Pickup>();
+                            if(pickup  != null)
+                            {
+                                pickup.gameObject.TakeOwnership();
+                                ModConsole.DebugLog($"Blocked User {room.field_Private_Dictionary_2_Int32_Player_0[__0].field_Public_Player_0?.prop_APIUser_0?.displayName} from Using Pickup {pickup.gameObject.name}");
+                                return;
+                            }
+                        }
+                    }
+                }
+                
                 int highestOwnedObjects = 0;
                 totalObjects = 0;
                 foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
