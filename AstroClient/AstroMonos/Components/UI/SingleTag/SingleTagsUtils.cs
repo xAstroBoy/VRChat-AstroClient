@@ -34,14 +34,6 @@
         }
 
         internal static bool isDebugModeStack = false;
-        internal static void Debug(string msg)
-        {
-            if (DebugMode)
-            {
-                ModConsole.DebugLog($"SingleTagsUtils Debug : {msg}");
-            }
-        }
-        // TODO : MERGE THIS IN THE STARTING PROCESS OF SINGLETAG AND MAKE IT EASIER AS .AddComponent<SINGLETAG>() instead of using this!
 
         internal static List<TagStacker> TagStackingMechanism { get; } = new List<TagStacker>();
 

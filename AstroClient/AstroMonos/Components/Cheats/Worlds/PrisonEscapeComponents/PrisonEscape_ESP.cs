@@ -107,7 +107,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-
+        
 
 
 
@@ -157,14 +157,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             InvokeRepeating(nameof(UpdatePlayerDataReaders), 0f, 0.3f);
             InvokeRepeating(nameof(TagsUpdater), 0.1f, 0.1f);
             InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
-
+            InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.5f);
 
 
 
         }
 
         private bool LockRole { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        
+        private bool HasTakenKeyCardAutomatically { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
         internal void UpdateRoleFromCollider(PrisonEscape_Roles role)
         {
             if (role == CurrentRole) return; // Dont Do anything because is already set 
@@ -177,6 +177,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     healthTag.ShowTag = false;
                 }
+                isWanted = false;
+                HasTakenKeyCardAutomatically = false;
                 if (!Player.GetAPIUser().IsSelf)
                 {
                     ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Is Dead!", System.Drawing.Color.Green);
@@ -205,8 +207,27 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         }
 
         internal PrisonEscape_Roles CurrentRole { [HideFromIl2Cpp] get;  [HideFromIl2Cpp] private set; } = PrisonEscape_Roles.Dead;
-        
 
+
+        internal void KeyCardTaker()
+        {
+            if (!isActiveAndEnabled) return;
+            if (!IsSelf) return;
+            if (!PrisonEscape.TakeKeyCardOnWanted) return;
+            if (CurrentRole == PrisonEscape_Roles.Prisoner)
+            {
+                if (!HasTakenKeyCardAutomatically)
+                {
+                    if (AssignedReader.isWanted.GetValueOrDefault(false))
+                    {
+                        PrisonEscape.TakeKeyCard();
+                        HasTakenKeyCardAutomatically = true;
+                    }
+                }
+
+            }
+
+        }
 
 
         internal void OnDestroy()
@@ -232,17 +253,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (CurrentRole == PrisonEscape_Roles.Guard || CurrentRole == PrisonEscape_Roles.Dead)
                 {
+                    value = false;
+                    _isWanted = false;
                     ToggleWantedTag(false);
                 }
                 if (CurrentRole == PrisonEscape_Roles.Prisoner)
                 {
-                    if(Player.GetAPIUser().IsSelf)
-                    {
-                        if(PrisonEscape.TakeKeyCardOnWanted)
-                        {
-                            PrisonEscape.TakeKeyCard();
-                        }
-                    }
                     ToggleWantedTag(value);
                 }
 
@@ -282,22 +298,17 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 healthTag.ShowTag = false;
                 ToggleWantedTag(false);
                 ResetESPColor();
-                if (isWanted)
-                {
-                    isWanted = false;
-                }
+                isWanted = false;
             }
             else
             {
                 if (AssignedReader.isWanted.GetValueOrDefault(false))
                 {
-                    if (!isWanted)
-                    {
-                        isWanted = true;
-                    }
+                    isWanted = true;
                 }
                 healthTag.ShowTag = true;
                 healthTag.Text = $"Health : {AssignedReader.health}";
+
             }
         }
 

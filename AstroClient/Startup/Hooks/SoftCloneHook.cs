@@ -108,10 +108,6 @@
             if (user != null)
             {
                 AvatarDictCache = null;
-                //AvatarDictCache = PlayerManager.prop_PlayerManager_0
-                //    .field_Private_List_1_Player_0
-                //    .ToArray()
-                //    .FirstOrDefault(a => a.GetAPIUser().GetUserID() == user.GetUserID())
                 var hashtable = user.GetPlayer().prop_Player_1.field_Private_Hashtable_0;
                 if (hashtable != null)
                 {
@@ -127,6 +123,24 @@
                     _loadAvatarMethod.Invoke(GameInstances.CurrentUser, new object[] { true }); // Invoke refresh and Hook should locally clone it!
                     ModConsole.DebugLog("Local Clone Avatar");
                     PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
+                }
+            }
+        }
+
+
+        internal static void PrintCurrentAvatarHashtable(APIUser user)
+        {
+            if (user != null)
+            {
+                AvatarDictCache = null;
+                var hashtable = user.GetPlayer().prop_Player_1.field_Private_Hashtable_0;
+                if (hashtable != null)
+                {
+                    if (hashtable.ContainsKey("avatarDict"))
+                    {
+                        ModConsole.DebugLog(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(hashtable["avatarDict"]), Formatting.Indented));
+
+                    }
                 }
             }
         }

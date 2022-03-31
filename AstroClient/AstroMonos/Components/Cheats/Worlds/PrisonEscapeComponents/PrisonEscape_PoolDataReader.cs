@@ -71,7 +71,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             if(GodMode)
             {
-                health = int.MaxValue; // Freeze it here <3
+                health = 250; // Freeze it here <3
             }
 
         }

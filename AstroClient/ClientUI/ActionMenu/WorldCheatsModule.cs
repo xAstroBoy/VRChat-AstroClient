@@ -390,12 +390,12 @@ internal class WorldCheatsModule : AstroEvents
                     if (localreader != null)
                     {
                         CustomSubMenu.AddToggle("GodMode", localreader.GodMode, ToggleValue => { localreader.GodMode = ToggleValue; });
-                        CustomSubMenu.AddToggle("Take Keycard On Wanted", localreader.GodMode, ToggleValue => { localreader.GodMode = ToggleValue; });
                         if(!localreader.hasKeycard.GetValueOrDefault(false))
                         {
                             CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
                         }
                     }
+                    CustomSubMenu.AddToggle("Take Keycard On Wanted", PrisonEscape.TakeKeyCardOnWanted, ToggleValue => { PrisonEscape.TakeKeyCardOnWanted = ToggleValue; });
                     CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
                     CustomSubMenu.AddButton("Click Gate Button", () => { PrisonEscape.GateInteraction.InvokeBehaviour(); });
                     
