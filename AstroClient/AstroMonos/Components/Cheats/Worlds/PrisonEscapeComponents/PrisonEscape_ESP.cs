@@ -158,10 +158,77 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             InvokeRepeating(nameof(TagsUpdater), 0.1f, 0.1f);
             InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
             InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.5f);
+            InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
 
 
 
         }
+
+        private void GodModeOn()
+        {
+            if (!isActiveAndEnabled) return;
+            if (!IsSelf) return;
+            if (AssignedReader == null) return; 
+            if (GodMode)
+            {
+                if(IsSelf)
+                {
+                    switch(CurrentRole)
+                    {
+                        case PrisonEscape_Roles.Dead:
+                            return;
+                            break;
+                        case PrisonEscape_Roles.Guard:
+                            AssignedReader.health = 180; // Freeze it here <3 
+                            break;
+                        case PrisonEscape_Roles.Prisoner:
+                           AssignedReader.health = 120; // Freeze it here <3 
+                            break;
+                    }
+                } 
+
+            }
+
+        }
+
+
+        private bool _GodMode { get; set; }
+
+        private bool BackupRegenStuff { get; set; }
+
+        private int OriginalRegenAmt { get; set; }
+        private float OriginalRegenDelay { get; set; }
+
+        internal bool GodMode
+        {
+            get
+            {
+                return _GodMode;
+            }
+            set
+            {
+                if (AssignedReader == null) return;
+                _GodMode = value;
+                if (value)
+                {
+                    if (!BackupRegenStuff)
+                    {
+                        OriginalRegenAmt = AssignedReader.healthRegenAmt.GetValueOrDefault(0);
+                        OriginalRegenDelay = AssignedReader.healthRegenDelay.GetValueOrDefault(0f);
+                        BackupRegenStuff = true;
+                    }
+                    AssignedReader.healthRegenAmt = 100;
+                    AssignedReader.healthRegenDelay = 0;
+                }
+                else
+                {
+                    AssignedReader.healthRegenAmt = OriginalRegenAmt;
+                    AssignedReader.healthRegenDelay = OriginalRegenDelay;
+
+                }
+            }
+        }
+
 
         private bool LockRole { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
         private bool HasTakenKeyCardAutomatically { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;

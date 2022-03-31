@@ -712,7 +712,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
 
         private static PrisonEscape_PoolDataReader _LocalPlayerData;
-        
+
+        internal static bool GodModeActive { get; set; }
 
         internal static bool TakeKeyCardOnWanted { get; set; }
         private static bool _DropKnifeAfterKill = true;

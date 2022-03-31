@@ -1,3 +1,4 @@
+using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
 using AstroClient.ClientResources.Loaders;
 using AstroClient.ClientUI.Menu.ESP;
 using AstroClient.Gompoc.ActionMenuAPI.Api;
@@ -9,6 +10,7 @@ using AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
+using Steamworks;
 using UnityEngine;
 
 namespace AstroClient.ClientUI.ActionMenu;
@@ -389,12 +391,18 @@ internal class WorldCheatsModule : AstroEvents
                     var localreader = PrisonEscape.GetLocalReader();
                     if (localreader != null)
                     {
-                        CustomSubMenu.AddToggle("GodMode", localreader.GodMode, ToggleValue => { localreader.GodMode = ToggleValue; });
                         if(!localreader.hasKeycard.GetValueOrDefault(false))
                         {
                             CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
                         }
                     }
+                    var ESP = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
+                    if (ESP != null)
+                    {
+                        CustomSubMenu.AddToggle("GodMode", ESP.GodMode, ToggleValue => { ESP.GodMode = ToggleValue; });
+
+                    }
+
                     CustomSubMenu.AddToggle("Take Keycard On Wanted", PrisonEscape.TakeKeyCardOnWanted, ToggleValue => { PrisonEscape.TakeKeyCardOnWanted = ToggleValue; });
                     CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
                     CustomSubMenu.AddButton("Click Gate Button", () => { PrisonEscape.GateInteraction.InvokeBehaviour(); });

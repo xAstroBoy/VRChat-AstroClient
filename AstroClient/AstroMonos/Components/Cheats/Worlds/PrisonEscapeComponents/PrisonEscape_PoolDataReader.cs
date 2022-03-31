@@ -39,7 +39,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     PlayerData = obj.RawItem;
                     Initialize_PlayerData();
-                    InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
                 }
                 else
                 {
@@ -67,14 +66,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             Cleanup_PlayerData();
         }
 
-        private void GodModeOn()
-        {
-            if(GodMode)
-            {
-                health = 250; // Freeze it here <3
-            }
 
-        }
+
 
         [HideFromIl2Cpp]
         private bool isNotPoolOrThisBehaviour(UdonBehaviour behaviour)
@@ -293,41 +286,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        private bool _GodMode { get; set; }
-
-        private bool BackupRegenStuff { get; set; }
-
-        private int OriginalRegenAmt { get; set; }
-        private float OriginalRegenDelay { get; set; }
-
-        internal bool GodMode
-        {
-            get
-            {
-                return _GodMode;
-            }
-            set
-            {
-                _GodMode = value;
-                if(value)
-                {
-                    if(!BackupRegenStuff)
-                    {
-                        OriginalRegenAmt = healthRegenAmt.GetValueOrDefault(0);
-                        OriginalRegenDelay = healthRegenDelay.GetValueOrDefault(0f);
-                        BackupRegenStuff = true;
-                    }
-                    healthRegenAmt = 100;
-                    healthRegenDelay = 0;
-                }
-                else
-                {
-                    healthRegenAmt = OriginalRegenAmt;
-                    healthRegenDelay = OriginalRegenDelay;
-
-                }
-            }
-        }
 
         internal bool isLocal
         {
