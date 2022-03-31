@@ -293,7 +293,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             laser.ShowEndPointSphere = true;
                         }
                     }
-                    // item.AddComponent<PrisonEscape_AimAssister>();
+                     item.AddComponent<PrisonEscape_AimAssister>();
                 }
 
                 if (item.name.Contains("RPG"))

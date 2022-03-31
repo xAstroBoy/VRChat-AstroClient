@@ -1,4 +1,6 @@
-﻿namespace AstroClient
+﻿using VRC.Udon;
+
+namespace AstroClient
 {
     using System;
     using System.Collections.Generic;
@@ -77,6 +79,11 @@
             ConfigManager.Event_OnPublicESPColorChanged += Internal_OnPublicESPColorChanged;
             ConfigManager.Event_OnFriendESPColorChanged += Internal_OnFriendESPColorChanged;
             ConfigManager.Event_OnBlockedESPColorChanged += Internal_OnBlockedESPColorChanged;
+
+            UdonEvents.Event_Udon_OnPickup += Internal_UdonBehaviour_Event_OnPickup;
+            UdonEvents.Event_Udon_OnPickupUseUp += Internal_UdonBehaviour_Event_OnPickupUseUp;
+            UdonEvents.Event_Udon_OnPickupUseDown += Internal_UdonBehaviour_Event_OnPickupUseDown;
+            UdonEvents.Event_Udon_OnDrop += Internal_UdonBehaviour_Event_OnDrop;
 
         }
         private void Internal_OnEnterWorld(object sender, OnEnterWorldEventArgs e)
@@ -271,6 +278,25 @@
             OnFriendESPColorChanged(e.Color);
         }
 
+        private void Internal_UdonBehaviour_Event_OnPickup(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnPickup(e.UdonBehaviour);
+        }
+        private void Internal_UdonBehaviour_Event_OnPickupUseUp(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnPickupUseUp(e.UdonBehaviour);
+
+        }
+        private void Internal_UdonBehaviour_Event_OnPickupUseDown(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnPickupUseDown(e.UdonBehaviour);
+
+        }
+        private void Internal_UdonBehaviour_Event_OnDrop(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnDrop(e.UdonBehaviour);
+        }
+
         internal virtual void OnPublicESPColorChanged(UnityEngine.Color color)
         {
         }
@@ -429,6 +455,20 @@
         internal virtual void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
         }
+
+        internal virtual void UdonBehaviour_Event_OnPickup(UdonBehaviour item)
+        {
+        }
+        internal virtual void UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour item)
+        {
+        }
+        internal virtual void UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour item)
+        {
+        }
+        internal virtual void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
+        {
+        }
+
         #endregion
     }
 }

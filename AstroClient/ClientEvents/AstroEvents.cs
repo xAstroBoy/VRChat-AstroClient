@@ -1,4 +1,6 @@
-﻿namespace AstroClient
+﻿using VRC.Udon;
+
+namespace AstroClient
 {
     #region Imports
 
@@ -82,6 +84,12 @@
             InputPatches.Event_OnInput_GrabRight += Internal_OnInput_GrabRight;
 
             //USpeakHook.Event_OnRawAudio += Internal_OnRawAudio;
+
+            UdonEvents.Event_Udon_OnPickup += Internal_UdonBehaviour_Event_OnPickup;
+            UdonEvents.Event_Udon_OnPickupUseUp += Internal_UdonBehaviour_Event_OnPickupUseUp;
+            UdonEvents.Event_Udon_OnPickupUseDown += Internal_UdonBehaviour_Event_OnPickupUseDown;
+            UdonEvents.Event_Udon_OnDrop += Internal_UdonBehaviour_Event_OnDrop;
+
         }
 
         private void Internal_OnShowScreen(object sender, ScreenEventArgs e)
@@ -277,9 +285,31 @@
             OnInput_GrabLeft(e.isClicked, e.isDown, e.isUp);
         }
 
+
         private void Internal_OnInput_GrabRight(object sender, VRCInputArgs e)
         {
             OnInput_GrabRight(e.isClicked, e.isDown, e.isUp);
+        }
+
+
+        private void Internal_UdonBehaviour_Event_OnPickup(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnPickup(e.UdonBehaviour);
+        }
+        private void Internal_UdonBehaviour_Event_OnPickupUseUp(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnPickupUseUp(e.UdonBehaviour);
+
+        }
+        private void Internal_UdonBehaviour_Event_OnPickupUseDown(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnPickupUseDown(e.UdonBehaviour);
+
+        }
+        private void Internal_UdonBehaviour_Event_OnDrop(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnDrop(e.UdonBehaviour);
+
         }
 
         private void Internal_OnUserInfoMenuOpen(object sender, EventArgs e)
@@ -496,5 +526,19 @@
         internal virtual void OnInput_GrabRight(bool isClicked, bool isDown, bool isUp)
         {
         }
+
+        internal virtual void UdonBehaviour_Event_OnPickup(UdonBehaviour item)
+        {
+        }
+        internal virtual void UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour item)
+        {
+        }
+        internal virtual void UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour item)
+        {
+        }
+        internal virtual void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
+        {
+        }
+
     }
 }

@@ -4,6 +4,7 @@ using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.UdonSearcher;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
+using VRC.Udon;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
@@ -43,7 +44,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         private UdonBehaviour_Cached ShootInteraction { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private LaserPointer Laser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private VRC_AstroPickup PickupSystem  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         private PrisonEscape_ESP _LocalUserData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal PrisonEscape_ESP LocalUserData
@@ -66,18 +66,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             ShootInteraction = gameObject.FindUdonEvent("_onPickupUseDown");
             if (ShootInteraction != null)
             {
-                if (PickupSystem == null)
-                {
-                    PickupSystem = gameObject.AddComponent<VRC_AstroPickup>();
-                }
-
-                if (PickupSystem != null)
-                {
-                    PickupSystem.OnPickupUseDown += OnPickupUseDown;
-                    PickupSystem.OnPickupUseUp += OnPickupUseUp;
-                    PickupSystem.OnDrop += OnDrop;
-                }
-
                 if (Laser == null)
                 {
                     Laser = gameObject.GetGetInChildrens<LaserPointer>(true);
@@ -126,15 +114,29 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-         [HideFromIl2Cpp]
-        void OnPickupUseDown()
+        [HideFromIl2Cpp]
+        internal override void UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour item)
         {
-            isAimAssisterOn = true;
+            if (item.Equals(ShootInteraction.UdonBehaviour))
+            {
+                isAimAssisterOn = true;
+            }
         }
-         [HideFromIl2Cpp]
-        void OnPickupUseUp()
+
+        [HideFromIl2Cpp]
+        internal override void UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour item)
         {
-            isAimAssisterOn = false;
+            if (item.Equals(ShootInteraction.UdonBehaviour))
+            {
+                isAimAssisterOn = false;
+            }
+        }
+        internal override void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
+        {
+            if (item.Equals(ShootInteraction.UdonBehaviour))
+            {
+                isAimAssisterOn = false;
+            }
         }
 
         private bool isAimAssisterOn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
@@ -145,20 +147,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             isAimAssisterOn = false;
         }
-         [HideFromIl2Cpp]
-        void OnEnable()
-        {
-            PickupSystem.enabled = true;
-        }
-         [HideFromIl2Cpp]
-        void OnDisable()
-        {
-            PickupSystem.enabled = false;
-        }
 
-        void OnDestroy()
-        {
-            PickupSystem.DestroyMeLocal(true);
-        }
+
+
     }
 }
