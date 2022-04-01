@@ -25,7 +25,7 @@
                 {
                     _Flashlight_normal = Bundles.flashlights.LoadAsset_Internal("assets/flashlight/flashlight_gold/flashlight_normal.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
                     _Flashlight_normal.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    return Flashlight_normal;
+                    return _Flashlight_normal;
                 }
 
                 return _Flashlight_normal;
@@ -48,7 +48,7 @@
                 {
                     _Flashlight_gold = Bundles.flashlights.LoadAsset_Internal("assets/flashlight/flashlight_gold/flashlight_gold.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
                     _Flashlight_gold.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    return Flashlight_gold;
+                    return _Flashlight_gold;
                 }
 
                 return _Flashlight_gold;
@@ -97,7 +97,7 @@
                 {
                     _PlayerListMenuButton = Bundles.playerlistmod.LoadAsset_Internal("Assets/Prefabs/PlayerListMenuButton.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
                     _PlayerListMenuButton.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    return PlayerListMenuButton;
+                    return _PlayerListMenuButton;
                 }
 
                 return _PlayerListMenuButton;
@@ -105,6 +105,29 @@
         }
 
         #endregion PlayerListMenuButton
+
+
+
+        private static GameObject _WorldButton;
+
+        /// <summary>
+        ///     Loads WorldButton bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject WorldButton
+        {
+            get
+            {
+                if (_WorldButton == null)
+                {
+                    _WorldButton = Bundles.WorldButton.LoadAsset_Internal("assets/buttonprefab/button.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _WorldButton.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _WorldButton;
+                }
+
+                return _WorldButton;
+            }
+        }
+
 
     }
 }

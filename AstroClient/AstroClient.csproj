@@ -1476,6 +1476,7 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\waffle.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\OldLoadingScreen.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\WorldButton.assetbundle" />
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
     <None Include="PlayerList\PlayerListUI.unitypackage" />

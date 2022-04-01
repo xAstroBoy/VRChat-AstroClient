@@ -442,7 +442,7 @@
             {
                 if (_button == null)
                 {
-                    _button = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}button.png"));
+                    _button = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}e"));
                     _button.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _button;
                 }

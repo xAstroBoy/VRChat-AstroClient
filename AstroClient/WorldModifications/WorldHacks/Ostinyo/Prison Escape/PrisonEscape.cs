@@ -411,15 +411,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             // label parameter is only for debug reasons.
 
             string defaultlabel = "<color=red>ESCAPE!</color>";
-            var btn = new WorldButton(Position, new Quaternion(), defaultlabel, action);
+            var btn = new WorldButton(Position, new Quaternion(0, rotation, 0, 0), defaultlabel, action);
             
             MiscUtils.DelayFunction(2f,() =>
             {
                 //btn.MakePickupable();
-                btn.ButtonObject.name = label;
+                btn.ButtonBody.name = label;
                 if (btn != null)
                 {
-                    btn.ButtonObject.transform.eulerAngles = new Vector3(0, rotation, 0);
+                    btn.ButtonBody.transform.eulerAngles = new Vector3(0, rotation, 0);
                 }
             });
         }
@@ -458,12 +458,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var rend = udonevent.gameObject.GetGetInChildrens<Renderer>(true);;
                     if (rend != null)
                     {
-                        btn.ButtonObject.transform.parent = rend.transform;
+                        btn.ButtonBody.transform.parent = rend.transform;
                         // Flip Button On the other side.
 
-                        Vector3 rot = btn.ButtonObject.transform.rotation.eulerAngles;
+                        Vector3 rot = btn.ButtonBody.transform.rotation.eulerAngles;
                         rot = new Vector3(rot.x, rot.y + 180, rot.z);
-                        btn.ButtonObject.transform.rotation = Quaternion.Euler(rot);
+                        btn.ButtonBody.transform.rotation = Quaternion.Euler(rot);
 
                     }
                 }
