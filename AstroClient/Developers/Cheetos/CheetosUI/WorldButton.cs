@@ -1,4 +1,5 @@
 ﻿using AstroClient.xAstroBoy;
+using Mono.Security.X509;
 
 namespace AstroClient.CheetosUI
 {
@@ -52,21 +53,43 @@ namespace AstroClient.CheetosUI
             Text.IgnoreLocalPlayerCollision(true, true);
         }
 
+        internal WorldButton(Vector3 position, Vector3 rotation, string label, Action action)
+        {
+            ButtonBody = GameObject.Instantiate(Prefabs.WorldButton, position, Quaternion.Euler(rotation));
+            InitializeButton(label, action);
+        }
         internal WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
         {
             ButtonBody = GameObject.Instantiate(Prefabs.WorldButton, position, rotation);
-            ButtonBody.name = $"AstroWorldButton: {label}";
+            InitializeButton(label, action);
+        }
 
+
+        internal WorldButton(Vector3 position, Vector3 rotation, Transform parent, string label, Action action)
+        {
+            ButtonBody = GameObject.Instantiate(Prefabs.WorldButton, position, Quaternion.Euler(rotation), parent);
+            InitializeButton(label, action);
+
+        }
+        internal WorldButton(Vector3 position, Quaternion rotation, Transform parent, string label, Action action)
+        {
+            ButtonBody = GameObject.Instantiate(Prefabs.WorldButton, position, rotation, parent);
+            InitializeButton(label, action);
+        }
+        internal void RotateButton(float Rotate)
+        {
+            ButtonBody.transform.eulerAngles = new Vector3(0, Rotate, 0);
+        }
+
+        private void InitializeButton(string label, Action action)
+        {
+            ButtonBody.name = $"AstroWorldButton: {label}";
             ButtonBody.transform.localScale = new Vector3(0.15f, 0.1f, 0.3f);
             ButtonBody.GetComponent<Renderer>().material = Materials.fabric_padded_005;
-
             Front = ButtonBody.FindObject("Front");
             Canvas = Front.FindObject("Canvas");
             Text = Canvas.FindObject("Text");
-
             TextMesh = Text.GetComponent<TextMeshPro>();
-
-
             if (Front != null)
             {
                 MiscUtils.DelayFunction(0.2f, () =>
@@ -80,14 +103,16 @@ namespace AstroClient.CheetosUI
                 });
             }
 
-            if(TextMesh != null)
+            if (TextMesh != null)
             {
                 TextMesh.color = Color.black;
-                TextMesh.text =  label;
+                TextMesh.text = label;
                 TextMesh.richText = true;
             }
-            FixPlayercollisions(); 
+            FixPlayercollisions();
 
         }
+
+
     }
 }

@@ -107,6 +107,7 @@
                 var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, password, null);
                 if (btn != null)
                 {
+                    btn.RotateButton(90f);
                     btn.MakePickupable();
                     btn.RegisterToWorldMenu();
                 }

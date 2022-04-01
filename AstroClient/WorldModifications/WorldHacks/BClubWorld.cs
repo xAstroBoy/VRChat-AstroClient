@@ -708,7 +708,7 @@
                         ModConsole.Error("VIP Bedroom was not found!");
                     }
 
-                    CreateVIPUnlockButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
+                    CreateVIPUnlockButton(new Vector3(-80.4f, 16.0598f, -1.695f), new Vector3(0f, 0, 0f));
                 }
                 catch (Exception e)
                 {
@@ -822,7 +822,7 @@
             }
         }
 
-        private static void CreateVIPUnlockButton(Vector3 position, Quaternion rotation)
+        private static void CreateVIPUnlockButton(Vector3 position, Vector3 rotation)
         {
             VIPInsideDoor = VIPRoom.transform.FindObject("Door001 (1)").gameObject;
 

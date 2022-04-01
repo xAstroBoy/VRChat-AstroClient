@@ -35,9 +35,45 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         internal static void FindEverything()
         {
+
+            var AprilFoolsPatcher = GameObjectFinder.FindRootSceneObject("April Fools");
+            if(AprilFoolsPatcher != null)
+            {
+                var colliders = AprilFoolsPatcher.FindObject("Meeting Signs");
+                if(colliders != null)
+                {
+                    var sign = colliders.FindObject("Meeting Sign");
+                    if (sign != null)
+                    {
+                        sign.IgnoreLocalPlayerCollision(true, true, false);
+                    }
+
+                    var sign1 = colliders.FindObject("Meeting Sign (1)");
+                    if(sign1 != null)
+                    {
+                        sign1.IgnoreLocalPlayerCollision(true, true, false);
+                    }
+                    var sign2 = colliders.FindObject("Meeting Sign (2)");
+                    if (sign2 != null)
+                    {
+                        sign2.IgnoreLocalPlayerCollision(true, true, false);
+                    }
+                    var sign3 = colliders.FindObject("Meeting Sign (3)");
+                    if (sign3 != null)
+                    {
+                        sign3.IgnoreLocalPlayerCollision(true, true, false);
+                    }
+                    var sign4 = colliders.FindObject("Meeting Sign (4)");
+                    if (sign4 != null)
+                    {
+                        sign4.IgnoreLocalPlayerCollision(true, true, false);
+                    }
+
+                }
+            }
             var occluder = GameObjectFinder.FindRootSceneObject("Occlusion");
-            
-            if(occluder != null)
+
+            if (occluder != null)
             {
                 occluder.DestroyMeLocal(true);
             }
@@ -49,7 +85,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
 
             var guardtower = Yard.FindObject("GuardTower/Colliders");
-            if(guardtower != null)
+            if (guardtower != null)
             {
                 AdjustGuardTowerBorders(guardtower);
             }
@@ -64,7 +100,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 // Fix Fence Collider height 
                 var fence = Prison.FindObject("Building/Basketball Court/Colliders/Collider");
-                if(fence != null)
+                if (fence != null)
                 {
                     FixbaseballFence(fence);
                 }
@@ -99,7 +135,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 // Kitchen Roof
                 Prison.FindObject("Building/Back Area/Colliders/Collider (2)").DestroyMeLocal(true);
 
-                
+
             }
 
 
@@ -161,7 +197,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         if (!CurrentReaders.Contains(reader))
                         {
-                           // ModConsole.DebugLog($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
+                            // ModConsole.DebugLog($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
                             CurrentReaders.Add(reader);
                         }
                     }
@@ -172,7 +208,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
 
                 var beh = item.gameObject.FindUdonEvent("EnablePatronEffects");
-                if(beh != null)
+                if (beh != null)
                 {
                     EnableGoldenCamos.Add(beh);
                 }
@@ -188,12 +224,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     if (item.name.Contains("Crate Large"))
                     {
                         Crates.AddGameObject(item.gameObject);
-                        CreateSpawnItemButton(item);
+                        //CreateSpawnItemButton(item, false);
                     }
 
-                    if(item.name.Contains("Crate Small"))
+                    if (item.name.Contains("Crate Small"))
                     {
-                        CreateSpawnItemButton(item);
+                        //CreateSpawnItemButton(item, true);
                     }
                 }
                 // Not Reliable.
@@ -206,11 +242,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 //    }
                 //}
 
-                if(item.name.ToLower().Contains("door"))
+                if (item.name.ToLower().Contains("door"))
                 {
                     // Check if The door first contains the same System
                     var unlock = item.FindUdonEvent("_UnlockDoorSynced");
-                    if(unlock != null)
+                    if (unlock != null)
                     {
                         // If the unlock is present, add this to bypass the keypad interaction .
                         unlock.gameObject.GetOrAddComponent<PrisonEscape_DoorAssister>();
@@ -324,7 +360,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             laser.ShowEndPointSphere = true;
                         }
                     }
-                     item.AddComponent<PrisonEscape_AimAssister>();
+                    item.AddComponent<PrisonEscape_AimAssister>();
                 }
 
                 if (item.name.Contains("RPG"))
@@ -361,27 +397,27 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             //    BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
             //}
 
-            CreateEscapeButton(new Vector3(7.9167f, 1.2052f, 293.6856f), 90.4799f, "ESCAPE 1",() => { InteractWithVent("Openable Vent"); });
-            CreateEscapeButton(new Vector3(4.0886f, 1.3629f, 294.0434f), 266.7798f, "ESCAPE 2",() => { InteractWithVent("Openable Vent (1)"); });
+            CreateEscapeButton(new Vector3(7.9167f, 1.2052f, 293.6856f), 0, "ESCAPE 1", () => { InteractWithVent("Openable Vent"); });
+            CreateEscapeButton(new Vector3(4.0886f, 1.3629f, 294.0434f), 180, "ESCAPE 2", () => { InteractWithVent("Openable Vent (1)"); });
 
-            CreateEscapeButton(new Vector3(-0.0995f, 1.3373f, 293.8687f), 91, "ESCAPE 3",() => { InteractWithVent("Openable Vent (1)"); });
-            CreateEscapeButton(new Vector3(-3.9086f, 1.3534f, 294.1103f), 270, "ESCAPE 4",() => { InteractWithFloorVent("Floor Vent"); });
+            CreateEscapeButton(new Vector3(-0.0995f, 1.3373f, 293.8687f), 0, "ESCAPE 3", () => { InteractWithVent("Openable Vent (1)"); });
+            CreateEscapeButton(new Vector3(-3.9086f, 1.3534f, 294.1103f), 180, "ESCAPE 4", () => { InteractWithFloorVent("Floor Vent"); });
 
-            CreateEscapeButton(new Vector3(-4.0806f, 1.1905f, 306.1707f), 89.5f, "ESCAPE 5",() => { InteractWithVent("Openable Vent (2)"); });
+            CreateEscapeButton(new Vector3(-4.0806f, 1.1905f, 306.1707f), 0, "ESCAPE 5", () => { InteractWithVent("Openable Vent (2)"); });
 
-            CreateEscapeButton(new Vector3(4.8376f, 1.1809f, 306.921f), 0, "ESCAPE 6",() => { InteractWithVent("Openable Vent (5)"); });
+            CreateEscapeButton(new Vector3(4.8376f, 1.1809f, 306.921f), 270, "ESCAPE 6", () => { InteractWithVent("Openable Vent (5)"); });
 
         }
 
         private static void InteractWithVent(string VentName)
         {
-            if(Vents != null)
+            if (Vents != null)
             {
                 var trigger = Vents.FindObject($"{VentName}/Teleport Trigger/Trigger");
-                if(trigger != null)
+                if (trigger != null)
                 {
                     var interact = trigger.FindUdonEvent("_interact");
-                    if(interact != null)
+                    if (interact != null)
                     {
                         interact.InvokeBehaviour();
                     }
@@ -406,29 +442,29 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        private static void CreateEscapeButton(Vector3 Position, float rotation,string label, System.Action action)
+        private static void CreateEscapeButton(Vector3 Position, float rotation, string label, System.Action action)
         {
             // label parameter is only for debug reasons.
 
             string defaultlabel = "<color=red>ESCAPE!</color>";
-            var btn = new WorldButton(Position, new Quaternion(0, rotation, 0, 0), defaultlabel, action);
-            
-            MiscUtils.DelayFunction(2f,() =>
-            {
+            var btn = new WorldButton(Position, new Vector3(0, rotation, 0), defaultlabel, action);
+
+            MiscUtils.DelayFunction(2f, () =>
+             {
                 //btn.MakePickupable();
                 btn.ButtonBody.name = label;
-                if (btn != null)
-                {
-                    btn.ButtonBody.transform.eulerAngles = new Vector3(0, rotation, 0);
-                }
-            });
+                 if (btn != null)
+                 {
+                     btn.ButtonBody.transform.eulerAngles = new Vector3(0, rotation, 0);
+                 }
+             });
         }
 
         internal static bool? MasterLocked
         {
             get
             {
-                if(GameManager != null)
+                if (GameManager != null)
                 {
                     GameManager.masterStart.GetValueOrDefault(false);
                 }
@@ -436,9 +472,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
             set
             {
-                if(value.HasValue)
+                if (value.HasValue)
                 {
-                    if(GameManager.masterStart != null)
+                    if (GameManager.masterStart != null)
                     {
                         GameManager.masterStart = value.Value;
                     }
@@ -446,30 +482,32 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-        private static void CreateSpawnItemButton(UdonBehaviour item)
+        private static void CreateSpawnItemButton(UdonBehaviour item, bool flip)
         {
             var udonevent = item.FindUdonEvent("_SpawnItem");
             if (udonevent != null)
             {
-                var btn = new WorldButton(item.transform.position + new Vector3(-1, 1f, 0), item.transform.rotation, "Spawn Weapon", () => { udonevent.InvokeBehaviour(); });
-                if (btn != null)
+                var rend = udonevent.gameObject.GetGetInChildrens<Renderer>(true); ;
+                if (rend != null)
                 {
-                    btn.FixPlayercollisions();
-                    var rend = udonevent.gameObject.GetGetInChildrens<Renderer>(true);;
-                    if (rend != null)
+                    var btn = new WorldButton(item.transform.position + new Vector3(-0.5f, 1f, 0), Vector3.zero, rend.transform, "Spawn Weapon", () => { udonevent.InvokeBehaviour(); });
+
+                    //btn.ButtonBody.transform.parent = rend.transform;
+                    //// Flip Button On the other side.
+                    if (!flip)
                     {
-                        btn.ButtonBody.transform.parent = rend.transform;
-                        // Flip Button On the other side.
-
-                        Vector3 rot = btn.ButtonBody.transform.rotation.eulerAngles;
-                        rot = new Vector3(rot.x, rot.y + 180, rot.z);
-                        btn.ButtonBody.transform.rotation = Quaternion.Euler(rot);
-
+                        btn.RotateButton(90f);
+                    }
+                    else
+                    {
+                        btn.RotateButton(180f);
                     }
                 }
+
             }
 
         }
+    
 
         /// <summary>
         ///  This will shrink the border colliders on The guard tower and Adjust their position to allow the player to jump out of the tower!
