@@ -104,7 +104,7 @@
             front_canvas.transform.position = Front.transform.position;
             front_canvas.transform.localPosition -= new Vector3(0f, 0f, 0.001f);
             front_canvas.transform.rotation = Front.transform.rotation;
-            front_canvas.layer = LayerMask.NameToLayer("UI");
+            //front_canvas.layer = LayerMask.NameToLayer("UI");
             _ = front_canvas.AddComponent<Canvas>();
             _ = front_canvas.AddComponent<CanvasScaler>();
             front_canvas.Set_Colliders_isTrigger(true);
@@ -115,7 +115,7 @@
             textObject.transform.position = front_canvas.transform.position;
             textObject.transform.rotation = front_canvas.transform.rotation;
             textObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.004f);
-            textObject.layer = LayerMask.NameToLayer("UI");
+            //textObject.layer = LayerMask.NameToLayer("UI");
             _ = textObject.AddComponent<CanvasRenderer>();
             textObject.Set_Colliders_isTrigger(true);
             front_text = textObject.AddComponent<TextMeshPro>();
@@ -130,7 +130,7 @@
             Front.Set_Colliders_isTrigger(true);
             front_canvas.RemoveAllColliders();
             textObject.RemoveAllColliders();
-
+            FixPlayercollisions();
         }
     }
 }

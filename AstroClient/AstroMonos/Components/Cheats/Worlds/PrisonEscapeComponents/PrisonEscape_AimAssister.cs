@@ -4,6 +4,7 @@ using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.UdonSearcher;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
+using AstroClient.WorldModifications.WorldsIds;
 using VRC.Udon;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
@@ -62,6 +63,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         void Start()
         {
+            if (!WorldUtils.WorldID.Equals(WorldIds.PrisonEscape)) Destroy(this);
+
             // This will work along with the laser component
             ShootInteraction = gameObject.FindUdonEvent("_onPickupUseDown");
             if (ShootInteraction != null)

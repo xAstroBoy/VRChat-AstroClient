@@ -1,6 +1,7 @@
 ﻿using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
+using AstroClient.WorldModifications.WorldsIds;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
@@ -133,7 +134,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         // Use this for initialization
         internal void Start()
         {
-            var p = GetComponent<Player>();
+            if (!WorldUtils.WorldID.Equals(WorldIds.PrisonEscape)) Destroy(this);
+
+                var p = GetComponent<Player>();
             if (p != null)
                 Player = p;
             else
@@ -163,6 +166,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
 
         }
+        
+        [HideFromIl2Cpp]
+        private int GetHealthDefaults()
+        {
+            switch (CurrentRole)
+            {
+                case PrisonEscape_Roles.Guard:
+                    return 150; 
+                    break;
+                case PrisonEscape_Roles.Prisoner:
+                    return 100; 
+                    break;
+            }
+            return 0;
+        }
 
         private void GodModeOn()
         {
@@ -178,11 +196,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                         case PrisonEscape_Roles.Dead:
                             return;
                             break;
-                        case PrisonEscape_Roles.Guard:
-                            AssignedReader.health = 180; // Freeze it here <3 
-                            break;
-                        case PrisonEscape_Roles.Prisoner:
-                           AssignedReader.health = 120; // Freeze it here <3 
+                        default:
+                            AssignedReader.health = int.MaxValue;
                             break;
                     }
                 } 
@@ -224,7 +239,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     AssignedReader.healthRegenAmt = OriginalRegenAmt;
                     AssignedReader.healthRegenDelay = OriginalRegenDelay;
-
+                    AssignedReader.health = GetHealthDefaults();
                 }
             }
         }

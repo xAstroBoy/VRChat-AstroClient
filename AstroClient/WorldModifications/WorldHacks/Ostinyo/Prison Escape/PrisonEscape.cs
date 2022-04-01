@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 using AstroClient.AstroMonos.Components.Cheats.PatronUnlocker;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
@@ -133,10 +134,18 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var interactevent = triggervent.FindUdonEvent("_interact");
                     if (interactevent != null)
                     {
-                        if (interactevent.name.Equals("Trigger"))
-                        {
-                            Remove_maxUseDist(interactevent);
-                        }
+                        Remove_maxUseDist(interactevent);
+                    }
+                }
+            }
+            if (Floor_Vents != null)
+            {
+                foreach (var triggervent in Floor_Vents.Get_UdonBehaviours())
+                {
+                    var interactevent = triggervent.FindUdonEvent("_interact");
+                    if (interactevent != null)
+                    {
+                        Remove_maxUseDist(interactevent);
                     }
                 }
             }
@@ -161,6 +170,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
             foreach (var item in WorldUtils.Pickups)
             {
+
                 var beh = item.gameObject.FindUdonEvent("EnablePatronEffects");
                 if(beh != null)
                 {
@@ -196,6 +206,17 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 //    }
                 //}
 
+                if(item.name.ToLower().Contains("door"))
+                {
+                    // Check if The door first contains the same System
+                    var unlock = item.FindUdonEvent("_UnlockDoorSynced");
+                    if(unlock != null)
+                    {
+                        // If the unlock is present, add this to bypass the keypad interaction .
+                        unlock.gameObject.GetOrAddComponent<PrisonEscape_DoorAssister>();
+                    }
+
+                }
                 if (item.name.Contains("Knife"))
                 {
                     var knife = item.FindUdonEvent("PlayMeleeEffects");
@@ -207,6 +228,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         }
                     }
                 }
+                if (item.name.Contains("Game Manager"))
+                {
+                    var manager = item.FindUdonEvent("_AbortGame");
+                    if (manager != null)
+                    {
+                        GameManager = manager.UdonBehaviour.gameObject.GetOrAddComponent<PrisonEscape_GameManagerReader>();
+                    }
+                }
+
 
                 if (item.name.Contains("VentMesh"))
                 {
@@ -281,6 +311,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
             foreach (var item in WorldUtils.Pickups)
             {
+                Patch_canDualWield(item.gameObject);
                 if (item.name.Contains("Sniper"))
                 {
                     var MuzzlePos = item.transform.FindObject("Mesh/Muzzle Loc");
@@ -319,7 +350,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             ModConsole.DebugLog($"Registered {SpawnPoints_Spawn.Count} Spawn Area Positions!", System.Drawing.Color.Chartreuse);
             ModConsole.DebugLog($"Registered {SpawnPoints_Guards.Count} Guard Spawn Positions!", System.Drawing.Color.Chartreuse);
             ModConsole.DebugLog($"Registered {SpawnPoints_Prisoners.Count} Prisoner Spawn Positions!", System.Drawing.Color.Chartreuse);
-            ModConsole.DebugLog($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
+            //ModConsole.DebugLog($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
 
 
             AddSpawnDetector(SpawnPoints_Guards, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Guard);
@@ -329,6 +360,90 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             //{
             //    BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
             //}
+
+            CreateEscapeButton(new Vector3(7.9167f, 1.2052f, 293.6856f), 90.4799f, "ESCAPE 1",() => { InteractWithVent("Openable Vent"); });
+            CreateEscapeButton(new Vector3(4.0886f, 1.3629f, 294.0434f), 266.7798f, "ESCAPE 2",() => { InteractWithVent("Openable Vent (1)"); });
+
+            CreateEscapeButton(new Vector3(-0.0995f, 1.3373f, 293.8687f), 91, "ESCAPE 3",() => { InteractWithVent("Openable Vent (1)"); });
+            CreateEscapeButton(new Vector3(-3.9086f, 1.3534f, 294.1103f), 270, "ESCAPE 4",() => { InteractWithFloorVent("Floor Vent"); });
+
+            CreateEscapeButton(new Vector3(-4.0806f, 1.1905f, 306.1707f), 89.5f, "ESCAPE 5",() => { InteractWithVent("Openable Vent (2)"); });
+
+            CreateEscapeButton(new Vector3(4.8376f, 1.1809f, 306.921f), 0, "ESCAPE 6",() => { InteractWithVent("Openable Vent (5)"); });
+
+        }
+
+        private static void InteractWithVent(string VentName)
+        {
+            if(Vents != null)
+            {
+                var trigger = Vents.FindObject($"{VentName}/Teleport Trigger/Trigger");
+                if(trigger != null)
+                {
+                    var interact = trigger.FindUdonEvent("_interact");
+                    if(interact != null)
+                    {
+                        interact.InvokeBehaviour();
+                    }
+                }
+            }
+        }
+
+        private static void InteractWithFloorVent(string VentName)
+        {
+            if (Vents != null)
+            {
+                var trigger = Floor_Vents.FindObject($"{VentName}/Vent Enter/VentMesh");
+                if (trigger != null)
+                {
+                    var interact = trigger.FindUdonEvent("_interact");
+                    if (interact != null)
+                    {
+                        interact.InvokeBehaviour();
+                    }
+                }
+            }
+        }
+
+
+        private static void CreateEscapeButton(Vector3 Position, float rotation,string label, System.Action action)
+        {
+            // label parameter is only for debug reasons.
+
+            string defaultlabel = "<color=red>ESCAPE!</color>";
+            var btn = new WorldButton(Position, new Quaternion(), defaultlabel, action);
+            
+            MiscUtils.DelayFunction(2f,() =>
+            {
+                //btn.MakePickupable();
+                btn.ButtonObject.name = label;
+                if (btn != null)
+                {
+                    btn.ButtonObject.transform.eulerAngles = new Vector3(0, rotation, 0);
+                }
+            });
+        }
+
+        internal static bool? MasterLocked
+        {
+            get
+            {
+                if(GameManager != null)
+                {
+                    GameManager.masterStart.GetValueOrDefault(false);
+                }
+                return null;
+            }
+            set
+            {
+                if(value.HasValue)
+                {
+                    if(GameManager.masterStart != null)
+                    {
+                        GameManager.masterStart = value.Value;
+                    }
+                }
+            }
         }
 
         private static void CreateSpawnItemButton(UdonBehaviour item)
@@ -709,7 +824,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static List<UdonBehaviour_Cached> Knifes = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> VentsMeshes = new List<UdonBehaviour_Cached>();
-
+        private static List<UdonBehaviour_Cached> PrisonDoors_Open = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> PrisonDoors_Close = new List<UdonBehaviour_Cached>();
 
         private static PrisonEscape_PoolDataReader _LocalPlayerData;
 
@@ -853,19 +969,23 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             SpawnPoints_Spawn.Clear();
             EnableGoldenCamos.Clear();
             TakeKeyCardOnWanted = false;
-            
+            PrisonDoors_Open.Clear();
+            PrisonDoors_Close.Clear();
+            GameManager = null;
         }
-        private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool CanUse)
+        private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool guardsCanUse)
         {
             if (item != null)
             {
                 try
                 {
 
-                    ModConsole.DebugLog($"Setting {item.name} guardsCanUse to {CanUse}");
                     if (item.RawItem != null)
                     {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", CanUse);
+                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", guardsCanUse, () =>
+                        {
+                            ModConsole.DebugLog($"Setting {item.name} guardsCanUse to {guardsCanUse}");
+                        });
                     }
                 }
                 catch
@@ -917,13 +1037,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 try
                 {
-
-                    ModConsole.DebugLog($"Setting {item.name} dropOnUse to {dropOnUse}");
                     if (item.RawItem != null)
                     {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", dropOnUse);
+                       UdonHeapEditor.PatchHeap(item.RawItem, "dropOnUse", dropOnUse, () =>
+                       {
+                           ModConsole.DebugLog($"Setting {item.name} dropOnUse to {dropOnUse}");
+                       });
                     }
                 }
+                
                 catch
                 {
                 }
@@ -937,14 +1059,40 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 try
                 {
 
-                    ModConsole.DebugLog($"Setting {item.name} maxPickupDist to 999999999");
                     if (item.RawItem != null)
                     {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "maxPickupDist", 999999999f);
+                        UdonHeapEditor.PatchHeap(item.RawItem, "maxPickupDist", 999999999f, () =>
+                        {
+                            ModConsole.DebugLog($"Setting {item.name} maxPickupDist to 999999999");
+                        });
+
                     }
                 }
                 catch
                 {
+                }
+            }
+        }
+        private static void Patch_canDualWield(GameObject item)
+        {
+
+            foreach (var udon in item.GetComponentsInChildren<UdonBehaviour>(true))
+            {
+                if (udon != null)
+                {
+                    try
+                    {
+                        var rawitem = udon.ToRawUdonBehaviour();
+                        if (rawitem != null)
+                        {
+
+                            UdonHeapEditor.PatchHeap(rawitem, "canDualWield", true, () =>
+                            {
+                                ModConsole.DebugLog($"Setting {item.name} canDualWield to true");
+                            });
+                        }
+                    }
+                    catch { }
                 }
             }
         }
@@ -955,10 +1103,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 try
                 {
-                    ModConsole.DebugLog($"Setting {item.name} maxUseDist to 999999999");
                     if (item.RawItem != null)
                     {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "maxUseDist", 999999999f);
+                        UdonHeapEditor.PatchHeap(item.RawItem, "maxUseDist", 999999999f, () =>
+                        {
+                            ModConsole.DebugLog($"Setting {item.name} maxUseDist to 999999999f");
+                        });
                     }
                 }
                 catch{}
@@ -1030,6 +1180,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         private static RawUdonBehaviour RedCardBehaviour = null;
         internal static UdonBehaviour_Cached MoneyInteraction = null;
         internal static UdonBehaviour_Cached GateInteraction = null;
+        internal static PrisonEscape_GameManagerReader GameManager = null;
 
         internal static UdonBehaviour_Cached TogglePatronGuns = null;
         internal static UdonBehaviour_Cached ToggleDoublePoints = null;
@@ -1171,6 +1322,26 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+
+
+        private static GameObject _Floor_Vents;
+        internal static GameObject Floor_Vents
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Floor_Vents == null)
+                    {
+                        return _Floor_Vents = Openables.FindObject("Floor Vent");
+                    }
+                    return _Floor_Vents;
+                }
+
+                return null;
+            }
+        }
+
 
         private static GameObject _Prison;
 

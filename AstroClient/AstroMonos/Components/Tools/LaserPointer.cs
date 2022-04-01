@@ -26,6 +26,8 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         internal Action<VRC.Player> OnPlayerHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
+        internal Action<Collider> OnColliderHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
         /// <summary>
         /// Current Used Line Renderer.
         /// </summary>
@@ -71,6 +73,22 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         private float _SphereSize { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.2f;
 
+        internal bool UseCustomTargetLayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
+        internal int TargetLayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+        internal int CurrentTargetLayer { [HideFromIl2Cpp]
+            get
+            {
+                if (!UseCustomTargetLayer)
+                {
+                    return ~(1 << LayerMask.NameToLayer("MirrorReflection"));
+
+                }
+                return TargetLayer;
+            }
+
+        }
         /// <summary>
         /// Change the Endpoint Sphere Size.
         /// </summary>
@@ -394,7 +412,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     // Are we hitting any colliders?
                     RaycastHit hit;
                     //Debug.DrawRay(this.transform.position, this.transform.forward, Color.green);
-                    if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, float.MaxValue,  ~(1 << LayerMask.NameToLayer("MirrorReflection"))))
+                    if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, float.MaxValue,  CurrentTargetLayer))
                     {
                         ReportHitResult(hit.collider);
                         SetEndPoint(hit);

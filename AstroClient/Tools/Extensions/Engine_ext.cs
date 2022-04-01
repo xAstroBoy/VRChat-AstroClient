@@ -265,6 +265,20 @@
 
         }
 
+        internal static void DestroyMeLocal<T>(this List<T> items, bool Silent = false) where T : Object
+        {
+            if(items != null && items.Count != 0)
+            {
+                foreach(var item in items)
+                {
+                    if(item != null)
+                    {
+                        item.DestroyMeLocal(Silent);
+                    }
+                }
+            }
+        }
+
         internal static void DestroyMeLocal(this Object obj, bool Silent = false)
         {
             if (obj != null)

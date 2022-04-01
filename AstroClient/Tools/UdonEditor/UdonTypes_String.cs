@@ -207,6 +207,10 @@
         internal const string VRC_Udon_Common_Interfaces_NetworkEventTarget  = "VRC.Udon.Common.Interfaces.NetworkEventTarget";
         internal const string VRC_Udon_Common_Interfaces_NetworkEventTarget_Array  = "VRC.Udon.Common.Interfaces.NetworkEventTarget[]";
 
+        internal const string VRC_Udon_Common_Enums_EventTiming = "VRC.Udon.Common.Enums.EventTiming";
+        internal const string VRC_Udon_Common_Enums_EventTiming_Array = "VRC.Udon.Common.Enums.EventTiming[]";
+
+
         internal const string VRC_SDK3_Components_VRCPickup = "VRC.SDK3.Components.VRCPickup";
         internal const string VRC_SDK3_Components_VRCPickup_Array = "VRC.SDK3.Components.VRCPickup[]";
 

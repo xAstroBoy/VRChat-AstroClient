@@ -144,6 +144,7 @@ namespace AstroClient.Tools.UdonEditor
                 case UdonTypes_String.UnityEngine_Quaternion: return "UnityEngine.Quaternion?";
                 case UdonTypes_String.UnityEngine_Color: return "UnityEngine.Color?";
                 case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget: return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
+                case UdonTypes_String.VRC_Udon_Common_Enums_EventTiming: return "VRC.Udon.Common.Enums.EventTiming?";
                 default:
                     if (name.Contains("+"))
                     {
@@ -170,6 +171,7 @@ namespace AstroClient.Tools.UdonEditor
                 case UdonTypes_String.UnityEngine_Quaternion:
                 case UdonTypes_String.UnityEngine_Color:
                 case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget:
+                case UdonTypes_String.VRC_Udon_Common_Enums_EventTiming:
                     return true;
 
                 default:

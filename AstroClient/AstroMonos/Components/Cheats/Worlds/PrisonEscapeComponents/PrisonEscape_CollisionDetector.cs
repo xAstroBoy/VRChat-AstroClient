@@ -1,5 +1,6 @@
 ﻿using System;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
+using AstroClient.WorldModifications.WorldsIds;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
@@ -33,6 +34,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         void Start()
         {
+            if (!WorldUtils.WorldID.Equals(WorldIds.PrisonEscape)) Destroy(this);
 
             // This will act as Collider to detect where the assigned player is spawned and correct the ESP system.
         }

@@ -40,6 +40,10 @@
         {
             return UdonSearch.FindUdonEvent(obj, subaction);
         }
+        internal static UdonBehaviour_Cached FindUdonEvent(this GameObject obj, string action, string subaction, bool ShowError = true)
+        {
+            return UdonSearch.FindUdonEvent(obj, action, subaction, ShowError);
+        }
 
         internal static Il2CppSystem.Object FindUdonVariable(this GameObject obj, string SymbolName)
         {
@@ -51,6 +55,10 @@
             return UdonSearch.FindUdonEvent(obj, subaction);
         }
         internal static bool HasUdonEvent(this UdonBehaviour obj, string subaction)
+        {
+            return UdonSearch.HasUdonEvent(obj, subaction);
+        }
+        internal static bool HasUdonEvent(this GameObject obj, string subaction)
         {
             return UdonSearch.HasUdonEvent(obj, subaction);
         }

@@ -217,12 +217,12 @@
             return null;
         }
 
-        internal static UdonBehaviour_Cached FindUdonEvent(Transform parent, string action, string subaction, bool Debug = false)
+        internal static UdonBehaviour_Cached FindUdonEvent(Transform parent, string action, string subaction, bool Debug = false, bool ShowError = false)
         {
             return FindUdonEvent(parent.gameObject, action, subaction, Debug);
         }
 
-        internal static UdonBehaviour_Cached FindUdonEvent(GameObject parent, string action, string subaction, bool Debug = false)
+        internal static UdonBehaviour_Cached FindUdonEvent(GameObject parent, string action, string subaction, bool Debug = false, bool ShowError = false)
         {
             var gameobjects = parent.GetComponentsInChildren<UdonBehaviour>(true);
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
@@ -249,8 +249,10 @@
                     }
                 }
             }
-
-            ModConsole.Error($"Failed to Find {action} Having SubKey {subaction}");
+            if (ShowError)
+            {
+                ModConsole.DebugError($"Failed to Find {action} Having SubKey {subaction}");
+            }
             return null;
         }
 
@@ -285,6 +287,27 @@
                 if (obj._eventTable.count != 0)
                 {
                     foreach (var actionkeys in obj._eventTable)
+                    {
+                        if (actionkeys.key == subaction)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+        internal static bool HasUdonEvent(GameObject obj, string subaction)
+        {
+            var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
+
+            for (int i = 0; i < actionObjects.Count; i++)
+            {
+                UdonBehaviour actionobject = actionObjects[i];
+                if (actionobject != null)
+                {
+                    foreach (var actionkeys in actionobject._eventTable)
                     {
                         if (actionkeys.key == subaction)
                         {

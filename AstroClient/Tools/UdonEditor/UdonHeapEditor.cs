@@ -10,11 +10,11 @@
 
 
 
-        internal static void PatchHeap<T>(RawUdonBehaviour UnpackedUdonBehaviour, string symbol, T value, Action OnSuccess = null, Action onFailure = null)
+        internal static void PatchHeap<T>(RawUdonBehaviour UnpackedUdonBehaviour, string symbol, T value, Action OnSuccess = null, Action onFailure = null, bool ShowPatchStatus = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, OnSuccess, onFailure);
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, OnSuccess, onFailure, ShowPatchStatus);
             }
             else
             {
@@ -23,7 +23,7 @@
         }
 
 
-        internal static void PatchHeap<T>(IUdonHeap heap, uint address, T value, Action OnSuccess = null, Action onFailure = null)
+        internal static void PatchHeap<T>(IUdonHeap heap, uint address, T value, Action OnSuccess = null, Action onFailure = null, bool ShowPatchStatus = false)
         {
             if (heap != null && value != null && address != null)
             {
@@ -33,18 +33,27 @@
                     var result = heap.GetHeapVariable<T>(address);
                     if (result.Equals(value))
                     {
-                        ModConsole.DebugLog($"Heap Patch Applied.");
+                        if (ShowPatchStatus)
+                        {
+                            ModConsole.DebugLog($"Heap Patch Applied.");
+                        }
                         if (OnSuccess != null) OnSuccess();
                     }
                     else
                     {
-                        ModConsole.DebugLog($"Heap Patch Failed.");
+                        if (ShowPatchStatus)
+                        {
+                            ModConsole.DebugLog($"Heap Patch Failed.");
+                        }
                         if (onFailure != null) onFailure();
                     }
                 }
                 catch
                 {
-                    ModConsole.DebugLog($"Heap Patch Failed.");
+                    if (ShowPatchStatus)
+                    {
+                        ModConsole.DebugLog($"Heap Patch Failed.");
+                    }
                     if (onFailure != null) onFailure();
                 }
             }
