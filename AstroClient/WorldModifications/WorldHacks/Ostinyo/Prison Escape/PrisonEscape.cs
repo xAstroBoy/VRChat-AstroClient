@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms.DataVisualization.Charting;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 using AstroClient.AstroMonos.Components.Cheats.PatronUnlocker;
@@ -17,6 +18,7 @@ using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
+using UnityEngine.UI;
 using VRC;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -37,10 +39,10 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
 
             var AprilFoolsPatcher = GameObjectFinder.FindRootSceneObject("April Fools");
-            if(AprilFoolsPatcher != null)
+            if (AprilFoolsPatcher != null)
             {
                 var colliders = AprilFoolsPatcher.FindObject("Meeting Signs");
-                if(colliders != null)
+                if (colliders != null)
                 {
                     var sign = colliders.FindObject("Meeting Sign");
                     if (sign != null)
@@ -49,7 +51,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     }
 
                     var sign1 = colliders.FindObject("Meeting Sign (1)");
-                    if(sign1 != null)
+                    if (sign1 != null)
                     {
                         sign1.IgnoreLocalPlayerCollision(true, true, false);
                     }
@@ -271,6 +273,16 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         GameManager = manager.UdonBehaviour.gameObject.GetOrAddComponent<PrisonEscape_GameManagerReader>();
                     }
+                    var startgame = manager.UdonBehaviour.FindUdonEvent("StartGameCountdown");
+                    if(startgame != null)
+                    {
+                        var btn = new WorldButton(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game</color> \n <color=yellow>Bypass Master Lock!</color> ", () =>
+                        {
+                            startgame.InvokeBehaviour();
+                        });
+                        btn.SetScale(new Vector3(0.15f, 0.24f, 0.3f));
+                    }
+                    manager.gameObject.AddToWorldUtilsMenu();
                 }
 
 
@@ -378,7 +390,35 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     }
                 }
             }
+            
+            foreach (var item in GameObjectFinder.GetRootGameObjectsComponents<Toggle>(true))
+            {
+                if(item.name.Equals("Toggle Patron Guns"))
+                {
+                    WorldSettings_GoldenGuns_Toggle = item;
+                }
+                if(item.name.Equals("Toggle Double Points"))
+                {
+                    WorldSettings_DoublePoints_Toggle = item;
+                }
+                if (item.name.Equals("Toggle Visual Hitboxes"))
+                {
+                    WorldSettings_VisualHitBoxes_Toggle = item;
+                }
+                if (item.name.Equals("Toggle Avatars"))
+                {
+                    WorldSettings_Avatars_Toggle = item;
+                }
+                if (item.name.Equals("Toggle Music"))
+                {
+                    WorldSettings_Music_Toggle = item;
+                }
 
+                if (WorldSettings_DoublePoints_Toggle != null && WorldSettings_GoldenGuns_Toggle != null && WorldSettings_VisualHitBoxes_Toggle != null && WorldSettings_Avatars_Toggle != null && WorldSettings_Music_Toggle != null)
+                {
+                    break;
+                }
+            }
 
 
             ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
@@ -859,13 +899,133 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             return null;
         }
 
+        #region  Getter/setters From WorldSettings Menu
+        internal static bool? WorldSettings_Avatars
+        {
+            get
+            {
+                if (WorldSettings_Avatars_Toggle != null)
+                {
+                    return WorldSettings_Avatars_Toggle.isOn;
+                }
+                return null;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (WorldSettings_Avatars_Toggle != null)
+                    {
+                        WorldSettings_Avatars_Toggle.isOn = value.Value;
+                    }
+                }
+            }
+        }
 
-        private static List<UdonBehaviour_Cached> Knifes = new List<UdonBehaviour_Cached>();
-        private static List<UdonBehaviour_Cached> VentsMeshes = new List<UdonBehaviour_Cached>();
-        private static List<UdonBehaviour_Cached> PrisonDoors_Open = new List<UdonBehaviour_Cached>();
-        private static List<UdonBehaviour_Cached> PrisonDoors_Close = new List<UdonBehaviour_Cached>();
+        internal static bool? WorldSettings_Music
+        {
+            get
+            {
+                if (WorldSettings_Music_Toggle != null)
+                {
+                    return WorldSettings_Music_Toggle.isOn;
+                }
+                return null;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (WorldSettings_Music_Toggle != null)
+                    {
+                        WorldSettings_Music_Toggle.isOn = value.Value;
+                    }
+                }
+            }
+        }
 
-        private static PrisonEscape_PoolDataReader _LocalPlayerData;
+
+
+        internal static bool? WorldSettings_VisualHitBoxes
+        {
+            get
+            {
+                if (WorldSettings_VisualHitBoxes_Toggle != null)
+                {
+                    return WorldSettings_VisualHitBoxes_Toggle.isOn;
+                }
+                return null;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (WorldSettings_VisualHitBoxes_Toggle != null)
+                    {
+                        WorldSettings_VisualHitBoxes_Toggle.isOn = value.Value;
+                    }
+                }
+            }
+        }
+
+
+
+        internal static bool? WorldSettings_GoldenGuns
+        {
+            get
+            {
+                if (WorldSettings_GoldenGuns_Toggle != null)
+                {
+                    return WorldSettings_GoldenGuns_Toggle.isOn;
+                }
+                return null;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    // before setting this , let's force patron mode to be on
+                    if (!isPatron.GetValueOrDefault(false))
+                    {
+                        isPatron = true;
+                    }
+                    if (WorldSettings_GoldenGuns_Toggle != null)
+                    {
+                        WorldSettings_GoldenGuns_Toggle.isOn = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal static bool? WorldSettings_DoublePoints
+        {
+            get
+            {
+                if (WorldSettings_DoublePoints_Toggle != null)
+                {
+                    return WorldSettings_DoublePoints_Toggle.isOn;
+                }
+                return null;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    // before setting this , let's force patron mode to be on
+                    if (!isPatron.GetValueOrDefault(false))
+                    {
+                        isPatron = true;
+                    }
+                    if (WorldSettings_DoublePoints_Toggle != null)
+                    {
+                        WorldSettings_DoublePoints_Toggle.isOn = value.Value;
+                    }
+                }
+            }
+        }
+
+
+        #endregion
 
         internal static bool GodModeActive { get; set; }
 
@@ -943,10 +1103,27 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     PatronController.SetAsPatron(newvalue);
                 }
-
+                ResyncPatronSettings();
             }
         }
 
+
+        private static void ResyncPatronSettings()
+        {
+            var reader = GetLocalReader();
+            if (reader != null)
+            {
+                if (WorldSettings_DoublePoints_Toggle != null)
+                {
+                    WorldSettings_DoublePoints_Toggle.SetIsOnWithoutNotify(reader.doublePoints.GetValueOrDefault(false));
+                }
+                if (WorldSettings_GoldenGuns_Toggle != null)
+                {
+                    WorldSettings_GoldenGuns_Toggle.SetIsOnWithoutNotify(reader.goldGuns.GetValueOrDefault(false));
+                }
+
+            }
+        }
 
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -998,7 +1175,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             Crates.Clear();
             Knifes.Clear();
             VentsMeshes.Clear();
-            _LocalPlayerData = null;
             CurrentReaders.Clear();
             LocalReader = null;
             SpawnPoints_Prisoners.Clear();
@@ -1010,6 +1186,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             PrisonDoors_Open.Clear();
             PrisonDoors_Close.Clear();
             GameManager = null;
+            WorldSettings_DoublePoints_Toggle = null;
+            WorldSettings_GoldenGuns_Toggle = null;
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool guardsCanUse)
         {
@@ -1215,16 +1393,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         internal static Ostinyo_World_PatronCracker PatronController { get; set; }
 
-        private static RawUdonBehaviour RedCardBehaviour = null;
-        internal static UdonBehaviour_Cached MoneyInteraction = null;
-        internal static UdonBehaviour_Cached GateInteraction = null;
-        internal static PrisonEscape_GameManagerReader GameManager = null;
 
-        internal static UdonBehaviour_Cached TogglePatronGuns = null;
-        internal static UdonBehaviour_Cached ToggleDoublePoints = null;
-
-        private static UdonBehaviour_Cached GetRedCard = null;
-        private static List<GameObject> Crates { get; set; } = new List<GameObject>();
 
 
         private static GameObject _Spawn_Area;
@@ -1638,6 +1807,26 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+
+        private static RawUdonBehaviour RedCardBehaviour { get; set; } = null;
+        internal static UdonBehaviour_Cached MoneyInteraction { get; set; } = null;
+        internal static UdonBehaviour_Cached GateInteraction { get; set; } = null;
+        internal static PrisonEscape_GameManagerReader GameManager { get; set; } = null;
+
+        internal static UdonBehaviour_Cached TogglePatronGuns { get; set; } = null;
+        internal static UdonBehaviour_Cached ToggleDoublePoints { get; set; } = null;
+
+        private static UdonBehaviour_Cached GetRedCard { get; set; } = null;
+        private static List<GameObject> Crates { get; set; } = new List<GameObject>();
+        private static List<UdonBehaviour_Cached> Knifes { get; set; } = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> VentsMeshes { get; set; } = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> PrisonDoors_Open { get; set; } = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> PrisonDoors_Close { get; set; } = new List<UdonBehaviour_Cached>();
+        internal static Toggle WorldSettings_GoldenGuns_Toggle { get; set; } = null;
+        internal static Toggle WorldSettings_DoublePoints_Toggle { get; set; } = null;
+        internal static Toggle WorldSettings_VisualHitBoxes_Toggle { get; set; } = null;
+        internal static Toggle WorldSettings_Music_Toggle { get; set; } = null;
+        internal static Toggle WorldSettings_Avatars_Toggle { get; set; } = null;
 
 
     }

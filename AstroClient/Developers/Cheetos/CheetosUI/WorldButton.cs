@@ -80,6 +80,10 @@ namespace AstroClient.CheetosUI
         {
             ButtonBody.transform.eulerAngles = new Vector3(0, Rotate, 0);
         }
+        internal void SetScale(Vector3 Scale)
+        {
+            ButtonBody.transform.localScale = Scale;
+        }
 
         private void InitializeButton(string label, Action action)
         {

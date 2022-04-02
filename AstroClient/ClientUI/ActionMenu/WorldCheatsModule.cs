@@ -372,8 +372,37 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddSubMenu("Money Hacks", () =>
                 {
                     CustomSubMenu.AddButton("Get Money", () => { PrisonEscape.MoneyInteraction.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Get Money x10", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(10); });
+                    CustomSubMenu.AddButton("Get Money x20", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(20); });
                     CustomSubMenu.AddButton("Get Money x30", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(30); });
+                    CustomSubMenu.AddButton("Get Money x40", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(40); });
                     CustomSubMenu.AddButton("Get Money x50", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(50); });
+                    CustomSubMenu.AddButton("Get Money x100", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(100); });
+                });
+                CustomSubMenu.AddSubMenu("World Settings", () =>
+                {
+                    if (PrisonEscape.WorldSettings_Avatars_Toggle != null)
+                    {
+                        CustomSubMenu.AddToggle("Toggle Avatars", PrisonEscape.WorldSettings_Avatars.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_Avatars = ToggleValue; });
+                    }
+                    if (PrisonEscape.WorldSettings_Music_Toggle != null)
+                    {
+
+                        CustomSubMenu.AddToggle("Toggle Music", PrisonEscape.WorldSettings_Music.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_Music = ToggleValue; });
+                    }
+                    if (PrisonEscape.WorldSettings_VisualHitBoxes_Toggle != null)
+                    {
+
+                        CustomSubMenu.AddToggle("Toggle Visual Hitbox", PrisonEscape.WorldSettings_VisualHitBoxes.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_VisualHitBoxes = ToggleValue; });
+                    }
+                    if (PrisonEscape.WorldSettings_GoldenGuns_Toggle != null)
+                    {
+                        CustomSubMenu.AddToggle("Toggle Golden Guns", PrisonEscape.WorldSettings_GoldenGuns.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_GoldenGuns = ToggleValue; });
+                    }
+                    if (PrisonEscape.WorldSettings_DoublePoints_Toggle != null)
+                    {
+                        CustomSubMenu.AddToggle("Toggle Double Points", PrisonEscape.WorldSettings_DoublePoints.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_DoublePoints = ToggleValue; });
+                    }
                 });
 
                 CustomSubMenu.AddSubMenu("Patreon System Control", () =>
