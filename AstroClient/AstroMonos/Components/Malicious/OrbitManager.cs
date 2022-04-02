@@ -150,7 +150,7 @@
                 for (int i = 0; i < Instance.pickups.Count; i++)
                 {
                     var pickup = Instance.pickups[i];
-                    if (!pickup.gameObject.IsOwner())
+                    if (!pickup.gameObject.isLocalPlayerOwner())
                     {
                         pickup.gameObject.TryTakeOwnership();
                         pickup.gameObject.RigidBody_Set_Gravity(false);

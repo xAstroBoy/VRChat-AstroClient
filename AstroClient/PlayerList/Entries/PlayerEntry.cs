@@ -340,29 +340,21 @@ namespace AstroClient.PlayerList.Entries
         }
         private static void AddDistance(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
-            if (VRCUtils.AreRiskyFunctionsAllowed)
+            if (entry.distance < 100)
             {
-                if (entry.distance < 100)
-                {
-                    tempString.Append(entry.distance.ToString("N1").PadRight(4) + "m");
-                }
-                else if (entry.distance < 10000)
-                {
-                    tempString.Append((entry.distance / 1000).ToString("N1").PadRight(3) + "km");
-                }
-                else if (entry.distance < 999900)
-                {
-                    tempString.Append((entry.distance / 1000).ToString("N0").PadRight(3) + "km");
-                }
-                else
-                {
-                    tempString.Append((entry.distance / 9.461e+15).ToString("N2").PadRight(3) + "ly"); // If its too large for kilometers ***just convert to light years***
-                }
+                tempString.Append(entry.distance.ToString("N1").PadRight(4) + "m");
+            }
+            else if (entry.distance < 10000)
+            {
+                tempString.Append((entry.distance / 1000).ToString("N1").PadRight(3) + "km");
+            }
+            else if (entry.distance < 999900)
+            {
+                tempString.Append((entry.distance / 1000).ToString("N0").PadRight(3) + "km");
             }
             else
             {
-                entry.distance = 0;
-                tempString.Append("0.0 m");
+                tempString.Append((entry.distance / 9.461e+15).ToString("N2").PadRight(3) + "ly"); // If its too large for kilometers ***just convert to light years***
             }
             tempString.Append(separator);
         }
@@ -399,9 +391,10 @@ namespace AstroClient.PlayerList.Entries
                     entry.isFriend = false;
         }
 
-        private static void OnOwnerShipTransferred(PhotonView __instance, int __0)
+
+        internal override void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
         {
-            if (__instance.GetComponent<VRC_Pickup>() == null)
+            if (instance.GetComponent<VRC_Pickup>() == null)
                 return;
 
             // Its really important that this actually fires so everything in try catch
@@ -413,29 +406,13 @@ namespace AstroClient.PlayerList.Entries
 
                 // something is up with the  photon player constructor that makes me have to not use trygetvalue
                 string oldOwner = null;
-                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(__instance.field_Private_Int32_0))
-                    oldOwner = room.field_Private_Dictionary_2_Int32_Player_0[__instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
+                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(instance.field_Private_Int32_0))
+                    oldOwner = room.field_Private_Dictionary_2_Int32_Player_0[instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
                 string newOwner = null;
-                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(__0))
-                    newOwner = room.field_Private_Dictionary_2_Int32_Player_0[__0].field_Public_Player_0?.prop_APIUser_0?.id;
+                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(PhotonID))
+                    newOwner = room.field_Private_Dictionary_2_Int32_Player_0[PhotonID].field_Public_Player_0?.prop_APIUser_0?.id;
 
-                if (PickupBlocker.blockeduserids != null)
-                {
-                    if (PickupBlocker.blockeduserids.Count != 0)
-                    {
-                        if (PickupBlocker.IsPickupBlockedUser(newOwner))
-                        {
-                            var pickup = __instance.GetComponent<VRC_Pickup>();
-                            if(pickup  != null)
-                            {
-                                pickup.gameObject.TakeOwnership();
-                                ModConsole.DebugLog($"Blocked User {room.field_Private_Dictionary_2_Int32_Player_0[__0].field_Public_Player_0?.prop_APIUser_0?.displayName} from Using Pickup {pickup.gameObject.name}");
-                                return;
-                            }
-                        }
-                    }
-                }
-                
+
                 int highestOwnedObjects = 0;
                 totalObjects = 0;
                 foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
@@ -456,10 +433,8 @@ namespace AstroClient.PlayerList.Entries
                     totalObjects += entry.playerEntry.ownedObjects;
                 }
 
-                if (highestOwnedObjects > (int)(totalObjects * 0.75) || VRCUtils.AreRiskyFunctionsAllowed)
+                if (highestOwnedObjects > (int)(totalObjects * 0.75))
                     highestOwnedObjectsLength = highestOwnedObjects.ToString().Length;
-                else
-                    highestOwnedObjectsLength = 1;
             }
             catch (Exception ex)
             {

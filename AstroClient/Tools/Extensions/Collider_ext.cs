@@ -126,6 +126,16 @@
                 }
             }
         }
+
+        internal static void SetMesh_IsConvex(this GameObject obj, bool isConvex)
+        {
+            foreach(var col in obj.GetComponentsInChildren<MeshCollider>())
+            {
+                col.convex = isConvex;
+            }
+
+        }
+
         internal static void IgnoreLocalPlayerCollision(this Collider obj, bool ignore = true)
         {
             var localcollider = GameInstances.LocalPlayer.gameObject.GetComponent<Collider>();
@@ -194,6 +204,7 @@
 
         internal static void IgnoreLocalPlayerCollision(this GameObject obj, bool ignore = true, bool IncludeTriggers = true, bool Quiet = true)
         {
+            if (obj == null) return;
             var localcollider = GameInstances.LocalPlayer.gameObject.GetComponent<Collider>();
             if (localcollider != null)
             {

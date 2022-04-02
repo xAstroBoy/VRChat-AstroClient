@@ -38,41 +38,41 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static void FindEverything()
         {
 
-            var AprilFoolsPatcher = GameObjectFinder.FindRootSceneObject("April Fools");
-            if (AprilFoolsPatcher != null)
-            {
-                var colliders = AprilFoolsPatcher.FindObject("Meeting Signs");
-                if (colliders != null)
-                {
-                    var sign = colliders.FindObject("Meeting Sign");
-                    if (sign != null)
-                    {
-                        sign.IgnoreLocalPlayerCollision(true, true, false);
-                    }
+            //var AprilFoolsPatcher = GameObjectFinder.FindRootSceneObject("April Fools");
+            //if (AprilFoolsPatcher != null)
+            //{
+            //    var colliders = AprilFoolsPatcher.FindObject("Meeting Signs");
+            //    if (colliders != null)
+            //    {
+            //        var sign = colliders.FindObject("Meeting Sign");
+            //        if (sign != null)
+            //        {
+            //            sign.IgnoreLocalPlayerCollision(true, true, false);
+            //        }
 
-                    var sign1 = colliders.FindObject("Meeting Sign (1)");
-                    if (sign1 != null)
-                    {
-                        sign1.IgnoreLocalPlayerCollision(true, true, false);
-                    }
-                    var sign2 = colliders.FindObject("Meeting Sign (2)");
-                    if (sign2 != null)
-                    {
-                        sign2.IgnoreLocalPlayerCollision(true, true, false);
-                    }
-                    var sign3 = colliders.FindObject("Meeting Sign (3)");
-                    if (sign3 != null)
-                    {
-                        sign3.IgnoreLocalPlayerCollision(true, true, false);
-                    }
-                    var sign4 = colliders.FindObject("Meeting Sign (4)");
-                    if (sign4 != null)
-                    {
-                        sign4.IgnoreLocalPlayerCollision(true, true, false);
-                    }
+            //        var sign1 = colliders.FindObject("Meeting Sign (1)");
+            //        if (sign1 != null)
+            //        {
+            //            sign1.IgnoreLocalPlayerCollision(true, true, false);
+            //        }
+            //        var sign2 = colliders.FindObject("Meeting Sign (2)");
+            //        if (sign2 != null)
+            //        {
+            //            sign2.IgnoreLocalPlayerCollision(true, true, false);
+            //        }
+            //        var sign3 = colliders.FindObject("Meeting Sign (3)");
+            //        if (sign3 != null)
+            //        {
+            //            sign3.IgnoreLocalPlayerCollision(true, true, false);
+            //        }
+            //        var sign4 = colliders.FindObject("Meeting Sign (4)");
+            //        if (sign4 != null)
+            //        {
+            //            sign4.IgnoreLocalPlayerCollision(true, true, false);
+            //        }
 
-                }
-            }
+            //    }
+            //}
             var occluder = GameObjectFinder.FindRootSceneObject("Occlusion");
 
             if (occluder != null)
@@ -112,6 +112,14 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     FixbaseballFence(fence1);
                 }
+                Prison.FindObject("Guard Objects/Guard Blocker").IgnoreLocalPlayerCollision(true, true, false);
+                Prison.FindObject("Guard Objects/Guard Blocker (1)").IgnoreLocalPlayerCollision(true, true, false);
+                Prison.FindObject("Guard Objects/Guard Blocker (2)").IgnoreLocalPlayerCollision(true, true, false);
+                Prison.FindObject("Guard Objects/Guard Blocker (3)").IgnoreLocalPlayerCollision(true, true, false);
+                Prison.FindObject("Guard Objects/Guard Blocker (4)").IgnoreLocalPlayerCollision(true, true, false);
+                Prison.FindObject("Guard Objects/Guard Blocker (5)").IgnoreLocalPlayerCollision(true, true, false);
+                Prison.FindObject("Guard Objects/Guard Blocker (6)").IgnoreLocalPlayerCollision(true, true, false);
+
 
                 // Remove roof & other useless colliders
                 Prison.FindObject("Building/Basketball Court/Colliders/Collider (2)").DestroyMeLocal(true);
@@ -276,7 +284,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var startgame = manager.UdonBehaviour.FindUdonEvent("StartGameCountdown");
                     if(startgame != null)
                     {
-                        var btn = new WorldButton(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game</color> \n <color=yellow>Bypass Master Lock!</color> ", () =>
+                        var btn = new WorldButton(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game</color> \n <color=orange>Bypass Master Lock!</color> ", () =>
                         {
                             startgame.InvokeBehaviour();
                         });

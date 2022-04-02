@@ -125,7 +125,7 @@
             try
             {
                 RigidBodyController.RestoreOriginalBody();
-                if (gameObject.IsOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
+                if (gameObject.isLocalPlayerOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
                 if (!isHeld) GameObjectMenu.RestoreOriginalLocation(gameObject, false);
             }

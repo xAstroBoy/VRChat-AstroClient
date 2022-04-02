@@ -39,6 +39,8 @@
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
             isUsingUI = false;
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
+            InvokeRepeating(nameof(PickupProtection), 0.1f, 0.1f);
+
         }
 
         //private void Update()
@@ -162,6 +164,7 @@
         private void PickupProtection()
         {
             // Add a Shield for the Local User.
+            if (!isActiveAndEnabled) return;
             if (!IsHeld) return;
             if (CurrentHolder == null) return;
             if (CurrentHolder.isLocal) return;

@@ -44,6 +44,10 @@ namespace AstroClient.CheetosUI
             ButtonBody.RigidBody_Override_isKinematic(true);
             ButtonBody.Pickup_Set_Pickupable(true);
 
+            ButtonBody.SetMesh_IsConvex(true);
+            Front.SetMesh_IsConvex(false);
+            Text.SetMesh_IsConvex(false);
+
         }
 
         internal void FixPlayercollisions()
@@ -51,6 +55,9 @@ namespace AstroClient.CheetosUI
             ButtonBody.IgnoreLocalPlayerCollision(true, true);
             Front.IgnoreLocalPlayerCollision(true, true);
             Text.IgnoreLocalPlayerCollision(true, true);
+            ButtonBody.SetMesh_IsConvex(false);
+            Front.SetMesh_IsConvex(false);
+            Text.SetMesh_IsConvex(false);
         }
 
         internal WorldButton(Vector3 position, Vector3 rotation, string label, Action action)

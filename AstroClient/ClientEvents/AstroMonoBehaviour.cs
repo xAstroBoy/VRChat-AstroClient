@@ -1,4 +1,5 @@
-﻿using VRC.Udon;
+﻿using Photon.Pun;
+using VRC.Udon;
 
 namespace AstroClient
 {
@@ -79,6 +80,8 @@ namespace AstroClient
             ConfigManager.Event_OnPublicESPColorChanged += Internal_OnPublicESPColorChanged;
             ConfigManager.Event_OnFriendESPColorChanged += Internal_OnFriendESPColorChanged;
             ConfigManager.Event_OnBlockedESPColorChanged += Internal_OnBlockedESPColorChanged;
+
+            OnOwnerShipTransferredHook.Event_OnOwnerShipTranferred += Internal_OnOwnerShipTransferred;
 
             UdonEvents.Event_Udon_OnPickup += Internal_UdonBehaviour_Event_OnPickup;
             UdonEvents.Event_Udon_OnPickupUseUp += Internal_UdonBehaviour_Event_OnPickupUseUp;
@@ -295,6 +298,14 @@ namespace AstroClient
         private void Internal_UdonBehaviour_Event_OnDrop(object sender, UdonBehaviourEvent e)
         {
             UdonBehaviour_Event_OnDrop(e.UdonBehaviour);
+        }
+        private void Internal_OnOwnerShipTransferred(object sender, OnOwnerShipTransferredEventArgs e)
+        {
+            OnOwnerShipTransferred(e.instance, e.PhotonID);
+        }
+
+        internal virtual void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
+        {
         }
 
         internal virtual void OnPublicESPColorChanged(UnityEngine.Color color)

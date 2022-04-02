@@ -130,7 +130,7 @@
 
                 if (!pickup.IsHeld && !pickup.IsHeld)
                 {
-                    if (!gameObject.IsOwner())
+                    if (!gameObject.isLocalPlayerOwner())
                     {
                         gameObject.TakeOwnership();
                     }

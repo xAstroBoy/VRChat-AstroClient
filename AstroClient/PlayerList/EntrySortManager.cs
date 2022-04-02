@@ -108,10 +108,7 @@
                     currentBaseComparison = jeffSort;
                     break;
                 case SortType.Distance:
-                    if (VRCUtils.AreRiskyFunctionsAllowed)
-                        currentBaseComparison = distanceSort;
-                    else
-                        currentBaseComparison = null;
+                    currentBaseComparison = distanceSort;
                     break;
                 case SortType.Friends:
                     currentBaseComparison = friendsSort;
@@ -142,10 +139,7 @@
                     currentUpperComparison = jeffSort;
                     break;
                 case SortType.Distance:
-                    if (VRCUtils.AreRiskyFunctionsAllowed)
-                        currentUpperComparison = distanceSort;
-                    else
-                        currentUpperComparison = null;
+                    currentUpperComparison = distanceSort;
                     break;
                 case SortType.Friends:
                     currentUpperComparison = friendsSort;
@@ -176,10 +170,7 @@
                     currentHighestComparison = jeffSort;
                     break;
                 case SortType.Distance:
-                    if (VRCUtils.AreRiskyFunctionsAllowed)
-                        currentHighestComparison = distanceSort;
-                    else
-                        currentHighestComparison = null;
+                    currentHighestComparison = distanceSort;
                     break;
                 case SortType.Friends:
                     currentHighestComparison = friendsSort;

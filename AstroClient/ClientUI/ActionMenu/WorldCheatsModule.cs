@@ -412,19 +412,20 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddButton("Toggle Double Points", () => { PrisonEscape.ToggleDoublePoints.InvokeBehaviour(); });
                     //CustomSubMenu.AddToggle("Everyone Has Gold Gun", PrisonEscape.EveryoneHasGoldenGuns, ToggleValue => { PrisonEscape.EveryoneHasGoldenGuns = ToggleValue; });
                     // CustomSubMenu.AddToggle("Everyone Has Double Points", PrisonEscape.EveryoneHasdoublePoints, ToggleValue => { PrisonEscape.EveryoneHasdoublePoints = ToggleValue; });
-                    CustomSubMenu.AddButton("Give Everyone Gold Guns", () => { PrisonEscape.EnableGoldenCamos.InvokeBehaviour(); });
 
                 });
+                CustomSubMenu.AddSubMenu("Game Settings", () =>
+                {
+                
+                    CustomSubMenu.AddToggle("Drop Knifes after kill", PrisonEscape.DropKnifeAfterKill, ToggleValue => { PrisonEscape.DropKnifeAfterKill = ToggleValue; });
+                    CustomSubMenu.AddToggle("Allow guard Role to use vents", PrisonEscape.GuardsAreAllowedToUseVents, ToggleValue => { PrisonEscape.GuardsAreAllowedToUseVents = ToggleValue; });
+                    CustomSubMenu.AddToggle("Game Start Master Lock", PrisonEscape.MasterLocked.GetValueOrDefault(false), ToggleValue => { PrisonEscape.MasterLocked = ToggleValue; });
+                });
+
                 CustomSubMenu.AddSubMenu("Game Hacks", () =>
                 {
-                    var localreader = PrisonEscape.GetLocalReader();
-                    if (localreader != null)
-                    {
-                        if(!localreader.hasKeycard.GetValueOrDefault(false))
-                        {
-                            CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
-                        }
-                    }
+                    CustomSubMenu.AddButton("Give Everyone Gold Guns", () => { PrisonEscape.EnableGoldenCamos.InvokeBehaviour(); });
+
                     var ESP = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
                     if (ESP != null)
                     {
@@ -432,18 +433,25 @@ internal class WorldCheatsModule : AstroEvents
 
                     }
 
+
                     CustomSubMenu.AddToggle("Take Keycard On Wanted", PrisonEscape.TakeKeyCardOnWanted, ToggleValue => { PrisonEscape.TakeKeyCardOnWanted = ToggleValue; });
-                    CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
                     CustomSubMenu.AddButton("Click Gate Button", () => { PrisonEscape.GateInteraction.InvokeBehaviour(); });
                     
-                    CustomSubMenu.AddToggle("Drop Knifes after kill", PrisonEscape.DropKnifeAfterKill, ToggleValue => { PrisonEscape.DropKnifeAfterKill = ToggleValue; });
-                    CustomSubMenu.AddToggle("Allow guard Role to use vents", PrisonEscape.GuardsAreAllowedToUseVents, ToggleValue => { PrisonEscape.GuardsAreAllowedToUseVents = ToggleValue; });
-                    CustomSubMenu.AddToggle("Game Start Master Lock", PrisonEscape.MasterLocked.GetValueOrDefault(false), ToggleValue => { PrisonEscape.MasterLocked = ToggleValue; });
+                  
 
 
                     CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.LargeCrateESP, ToggleValue => { PrisonEscape.LargeCrateESP = ToggleValue; });
                     CustomSubMenu.AddToggle("Toggle Pickup ESP", VRChat_Map_ESP_Menu.Toggle_Pickup_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = ToggleValue; }, null, false);
+                    CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
 
+                    var localreader = PrisonEscape.GetLocalReader();
+                    if (localreader != null)
+                    {
+                        if (!localreader.hasKeycard.GetValueOrDefault(false))
+                        {
+                            CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
+                        }
+                    }
 
                 });
 

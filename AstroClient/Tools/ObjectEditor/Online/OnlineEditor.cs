@@ -22,7 +22,10 @@
         {
             return Networking.IsOwner(GameInstances.LocalPlayer, obj);
         }
-
+        internal static bool isOwner(VRC.Player player, GameObject obj)
+        {
+            return Networking.GetOwner(obj).Equals(player.GetVRCPlayerApi());
+        }
         internal static void ReturnObjectOwner(GameObject obj)
         {
             ModConsole.Warning($"Current Owner : {Networking.GetOwner(obj).displayName}");

@@ -10,9 +10,9 @@
         /// </summary>
         internal static bool TryTakeOwnership(this GameObject obj)
         {
-            if (obj.IsOwner()) return true;
+            if (obj.isLocalPlayerOwner()) return true;
             OnlineEditor.TakeObjectOwnership(obj);
-            return obj.IsOwner();
+            return obj.isLocalPlayerOwner();
         }
 
         internal static void TakeOwnership(this GameObject obj)
@@ -25,9 +25,14 @@
             OnlineEditor.RemoveOwnerShip(obj);
         }
 
-        internal static bool IsOwner(this GameObject obj)
+        internal static bool isLocalPlayerOwner(this GameObject obj)
         {
             return OnlineEditor.IsLocalPlayerOwner(obj);
+        }
+
+        internal static bool isOwner(this VRC.Player player, GameObject obj)
+        {
+            return OnlineEditor.isOwner(player, obj);
         }
     }
 }

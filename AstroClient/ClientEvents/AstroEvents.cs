@@ -1,4 +1,5 @@
-﻿using VRC.Udon;
+﻿using Photon.Pun;
+using VRC.Udon;
 
 namespace AstroClient
 {
@@ -84,6 +85,8 @@ namespace AstroClient
             InputPatches.Event_OnInput_GrabRight += Internal_OnInput_GrabRight;
 
             //USpeakHook.Event_OnRawAudio += Internal_OnRawAudio;
+            OnOwnerShipTransferredHook.Event_OnOwnerShipTranferred += Internal_OnOwnerShipTransferred;
+
 
             UdonEvents.Event_Udon_OnPickup += Internal_UdonBehaviour_Event_OnPickup;
             UdonEvents.Event_Udon_OnPickupUseUp += Internal_UdonBehaviour_Event_OnPickupUseUp;
@@ -96,7 +99,10 @@ namespace AstroClient
         {
             OnShowScreen(e.page);
         }
-
+        private void Internal_OnOwnerShipTransferred(object sender, OnOwnerShipTransferredEventArgs e)
+        {
+            OnOwnerShipTransferred(e.instance, e.PhotonID);
+        }
         private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
         {
             OnMasterClientSwitched(e.player);
@@ -405,6 +411,9 @@ namespace AstroClient
         }
 
         internal virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
+        {
+        }
+        internal virtual void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
         {
         }
 
