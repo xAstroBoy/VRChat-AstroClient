@@ -12,7 +12,7 @@
 
     internal class SpawnEmojiRPCHook : AstroEvents
     {
-        internal static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
+        internal static event Action<SpawnEmojiArgs> Event_SpawnEmojiRPC;
 
         internal override void ExecutePriorityPatches()
         {

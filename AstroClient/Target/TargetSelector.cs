@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Target
+﻿using AstroClient.Tools.Extensions;
+
+namespace AstroClient.Target
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +10,7 @@
 
     internal class TargetSelector : AstroEvents
     {
-        internal static event EventHandler<VRCPlayerEventArgs> Event_OnTargetSet;
+        internal static event Action<Player> Event_OnTargetSet;
 
         internal override void OnPlayerLeft(Player player)
         {
@@ -81,7 +83,7 @@
             set
             {
                 _CurrentTarget = value;
-                Event_OnTargetSet.Invoke(null, new VRCPlayerEventArgs(value));
+                Event_OnTargetSet.SafetyRaise(value);
             }
         }
     }

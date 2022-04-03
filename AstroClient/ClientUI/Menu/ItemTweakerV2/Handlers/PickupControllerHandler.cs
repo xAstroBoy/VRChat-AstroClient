@@ -4,17 +4,16 @@
     using AstroMonos.Components.Tools;
     using Selector;
     using Tools.Extensions;
-    using TweakerEventArgs;
     using UnityEngine;
     using xAstroBoy.Utility;
 
     internal class PickupControllerHandler : Tweaker_Events
     {
-        internal static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
+        internal static event Action<PickupController> Event_OnPickupControllerSelected;
 
-        internal static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerPropertyChanged;
+        internal static event Action<PickupController> Event_OnPickupControllerPropertyChanged;
 
-        internal static event EventHandler<OnPickupControllerArgs> Event_OnPickupController_OnUpdate;
+        internal static event Action<PickupController> Event_OnPickupController_OnUpdate;
 
         internal override void On_New_GameObject_Selected(GameObject obj)
         {
@@ -23,16 +22,16 @@
                 var PickupController = obj.GetOrAddComponent<PickupController>();
                 if (PickupController != null)
                 {
-                    Event_OnPickupControllerSelected.SafetyRaise(new OnPickupControllerArgs(PickupController));
+                    Event_OnPickupControllerSelected.SafetyRaise(PickupController);
 
                     PickupController.SetOnPickupPropertyChanged(() =>
                     {
-                        Event_OnPickupControllerPropertyChanged.SafetyRaise(new OnPickupControllerArgs(PickupController)); // Dunno if it works.
+                        Event_OnPickupControllerPropertyChanged.SafetyRaise(PickupController); // Dunno if it works.
                     });
 
                     PickupController.SetOnPickup_OnUpdate(() =>
                     {
-                        Event_OnPickupController_OnUpdate.SafetyRaise(new OnPickupControllerArgs(PickupController)); // Dunno if it works.
+                        Event_OnPickupController_OnUpdate.SafetyRaise(PickupController); // Dunno if it works.
                     });
                 }
             }

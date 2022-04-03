@@ -10,7 +10,7 @@
 
     internal class AvatarManagerHook : AstroEvents
     {
-        internal static event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
+        internal static event Action<Player, GameObject, VRCAvatarManager, VRC_AvatarDescriptor> Event_OnAvatarSpawn;
 
         internal override void OnApplicationStart() => HookAvatarManager();
 
@@ -32,7 +32,7 @@
 
         private static void OnAvatarInstantiate(Player player, GameObject avatar, VRC_AvatarDescriptor descriptor)
         {
-            Event_OnAvatarSpawn.SafetyRaise(new OnAvatarSpawnArgs(player, avatar, player.GetVRCPlayer().field_Private_VRCAvatarManager_0, descriptor));
+            Event_OnAvatarSpawn.SafetyRaise(player, avatar, player.GetVRCPlayer().field_Private_VRCAvatarManager_0, descriptor);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks
+﻿using System.Collections.Generic;
+
+namespace AstroClient.Startup.Hooks
 {
     using System;
     using System.Reflection;
@@ -14,7 +16,7 @@
 
     internal class OnWorldRevealHook : AstroEvents
     {
-        internal static event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
+        internal static event Action<string, string, List<string>, string, string> Event_OnWorldReveal;
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -68,7 +70,7 @@
                     if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
                         RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                     {
-                        Event_OnWorldReveal.SafetyRaise(new OnWorldRevealArgs(WorldUtils.WorldID, WorldUtils.WorldName, WorldUtils.WorldTags, WorldUtils.AuthorName, WorldUtils.AssetURL));
+                        Event_OnWorldReveal.SafetyRaise(WorldUtils.WorldID, WorldUtils.WorldName, WorldUtils.WorldTags, WorldUtils.AuthorName, WorldUtils.AssetURL);
                     }
                 }
             }

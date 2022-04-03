@@ -16,7 +16,7 @@
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class QuickMenuHooks : AstroEvents
     {
-        internal static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
+        internal static event Action<VRC.Player> Event_OnPlayerSelected;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -47,7 +47,7 @@
 
         private static void OnSelectedPlayerPatch(ref VRC.Player __0)
         {
-            Event_OnPlayerSelected.SafetyRaise(new VRCPlayerEventArgs(__0));
+            Event_OnPlayerSelected.SafetyRaise(__0);
         }
 
     }

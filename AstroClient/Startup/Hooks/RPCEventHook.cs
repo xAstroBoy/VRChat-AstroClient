@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks
+﻿using VRC;
+
+namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
@@ -23,7 +25,7 @@
     internal class RPCEventHook : AstroEvents
     {
 
-        internal static event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
+        internal static event System.Action<Player, GameObject, string> Event_OnUdonSyncRPC;
 
         //internal static 
         private HarmonyLib.Harmony harmony;
@@ -171,7 +173,7 @@
 
                 if (parameter.Equals("UdonSyncRunProgramAsRPC"))
                 {
-                    Event_OnUdonSyncRPC?.SafetyRaise(new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
+                    Event_OnUdonSyncRPC?.SafetyRaise(__0, __1.ParameterObject, actiontext);
 
                     try
                     {

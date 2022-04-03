@@ -15,7 +15,7 @@
 
     internal class PlayerESPMenu : AstroEvents
     {
-        internal static EventHandler<BoolEventsArgs> Event_OnPlayerESPPropertyChanged;
+        internal static Action<bool> Event_OnPlayerESPPropertyChanged;
 
         internal static void InitButtons(QMNestedGridMenu menu)
         {
@@ -55,7 +55,7 @@
                 {
                     PlayerESPToggleBtn.SetToggleState(value);
                 }
-                Event_OnPlayerESPPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
+                Event_OnPlayerESPPropertyChanged.SafetyRaise(value);
             }
         }
 

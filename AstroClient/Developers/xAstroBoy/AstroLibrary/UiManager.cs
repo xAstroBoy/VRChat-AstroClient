@@ -25,16 +25,16 @@
     [ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class UiManager : AstroEvents
     {
-        internal static EventHandler Event_OnQuickMenuOpen { get; set; }
-        internal static EventHandler Event_OnQuickMenuClose { get; set; }
+        internal static Action Event_OnQuickMenuOpen { get; set; }
+        internal static Action Event_OnQuickMenuClose { get; set; }
 
-        internal static EventHandler Event_OnBigMenuOpen { get; set; }
-        internal static EventHandler Event_OnBigMenuClose { get; set; }
+        internal static Action Event_OnBigMenuOpen { get; set; }
+        internal static Action Event_OnBigMenuClose { get; set; }
 
-        internal static EventHandler Event_OnUserInfoMenuOpen { get; set; }
-        internal static EventHandler Event_OnUserInfoMenuClose { get; set; }
+        internal static Action Event_OnUserInfoMenuOpen { get; set; }
+        internal static Action Event_OnUserInfoMenuClose { get; set; }
 
-        internal static EventHandler<OnUiPageEventArgs> Event_OnUiPageToggled { get; set; }
+        internal static Action<UIPage, bool, UIPage.TransitionType> Event_OnUiPageToggled { get; set; }
 
         private static bool _shouldSkipPlaceUiAfterPause;
         private static bool _shouldChangeScreenStackValue;
@@ -175,7 +175,7 @@
         private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
         {
             if (__instance == null) return;
-            Event_OnUiPageToggled.SafetyRaise(new OnUiPageEventArgs(__instance, __0, __1));
+            Event_OnUiPageToggled.SafetyRaise(__instance, __0, __1);
         }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)

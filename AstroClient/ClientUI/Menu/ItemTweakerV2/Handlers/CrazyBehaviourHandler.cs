@@ -4,14 +4,13 @@
     using AstroMonos.Components.Custom.Random;
     using Selector;
     using Tools.Extensions;
-    using TweakerEventArgs;
     using UnityEngine;
 
     internal class CrazyBehaviourHandler : Tweaker_Events
     {
         internal override void OnSelectedObject_Destroyed()
         {
-            Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(new OnCrazyBehaviourArgs(null)); // Dunno if it works.
+            Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(null); // Dunno if it works.
             instance = null;
         }
 
@@ -29,7 +28,7 @@
                             instance = newinstance;
                             newinstance.SetOnCrazyPropertyChanged(() =>
                             {
-                                Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(new OnCrazyBehaviourArgs(newinstance)); // Dunno if it works.
+                                Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -42,7 +41,7 @@
                     instance = newinstance;
                     newinstance.SetOnCrazyPropertyChanged(() =>
                     {
-                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(new OnCrazyBehaviourArgs(newinstance)); // Dunno if it works.
+                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -51,7 +50,7 @@
 
         
 
-        internal static event EventHandler<OnCrazyBehaviourArgs> Event_OnCrazyBehaviourPropertyChanged;
+        internal static event Action<CrazyBehaviour> Event_OnCrazyBehaviourPropertyChanged;
         internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
@@ -62,7 +61,7 @@
                     instance = CrazyBehaviour; 
                     CrazyBehaviour.SetOnCrazyPropertyChanged(() =>
                     {
-                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(new OnCrazyBehaviourArgs(CrazyBehaviour)); // Dunno if it works.
+                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(CrazyBehaviour); // Dunno if it works.
                     });
                 }
             }

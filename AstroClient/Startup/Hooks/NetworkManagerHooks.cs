@@ -17,9 +17,9 @@
 
         internal static event Action<Player> OnLeave;
 
-        internal static EventHandler<PlayerEventArgs> Event_OnPlayerJoin;
+        internal static Action<PlayerEventArgs> Event_OnPlayerJoin;
 
-        internal static EventHandler<PlayerEventArgs> Event_OnPlayerLeft;
+        internal static Action<PlayerEventArgs> Event_OnPlayerLeft;
 
         internal override void ExecutePriorityPatches()
         {

@@ -30,23 +30,23 @@
     {
         #region EventHandlers
 
-        internal static event EventHandler Event_OnApplicationLateStart;
+        internal static event Action Event_OnApplicationLateStart;
 
-        internal static event EventHandler Event_OnUpdate;
+        internal static event Action Event_OnUpdate;
 
-        internal static event EventHandler Event_LateUpdate;
+        internal static event Action Event_LateUpdate;
 
-        internal static event EventHandler Event_OnGui;
+        internal static event Action Event_OnGui;
 
-        internal static event EventHandler Event_VRChat_OnUiManagerInit;
+        internal static event Action Event_VRChat_OnUiManagerInit;
 
-        internal static event EventHandler Event_VRChat_OnQuickMenuInit;
+        internal static event Action Event_VRChat_OnQuickMenuInit;
 
-        internal static event EventHandler Event_VRChat_OnActionMenuInit;
+        internal static event Action Event_VRChat_OnActionMenuInit;
 
-        internal static event EventHandler<OnSceneLoadedEventArgs> Event_OnSceneLoaded;
+        internal static event Action<int,string> Event_OnSceneLoaded;
 
-        internal static event EventHandler Event_OnApplicationQuit;
+        internal static event Action Event_OnApplicationQuit;
 
         #endregion EventHandlers
 
@@ -204,7 +204,7 @@
                     break;
 
                 default:
-                    Event_OnSceneLoaded.SafetyRaise(new OnSceneLoadedEventArgs(buildIndex, sceneName));
+                    Event_OnSceneLoaded.SafetyRaise(buildIndex, sceneName);
                     break;
             }
         }

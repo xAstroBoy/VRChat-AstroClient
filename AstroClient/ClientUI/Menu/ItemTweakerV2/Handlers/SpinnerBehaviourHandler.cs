@@ -4,14 +4,15 @@
     using AstroMonos.Components.Custom.Random;
     using Selector;
     using Tools.Extensions;
-    using TweakerEventArgs;
     using UnityEngine;
 
     internal class SpinnerBehaviourHandler : Tweaker_Events
     {
+        internal static event Action<SpinnerBehaviour> Event_OnSpinnerBehaviourPropertyChanged;
+
         internal override void OnSelectedObject_Destroyed()
         {
-            Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(new OnSpinnerBehaviourArgs(null)) ; // Dunno if it works.
+            Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(null) ; // Dunno if it works.
 
             instance = null;
         }
@@ -30,7 +31,7 @@
                             instance = newinstance;
                             newinstance.SetOnSpinnerPropertyChanged(() =>
                             {
-                                Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(new OnSpinnerBehaviourArgs(newinstance)); // Dunno if it works.
+                                Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -43,7 +44,7 @@
                     instance = newinstance;
                     newinstance.SetOnSpinnerPropertyChanged(() =>
                     {
-                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(new OnSpinnerBehaviourArgs(newinstance)); // Dunno if it works.
+                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -52,7 +53,6 @@
 
         
 
-        internal static event EventHandler<OnSpinnerBehaviourArgs> Event_OnSpinnerBehaviourPropertyChanged;
         internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
@@ -63,7 +63,7 @@
                     instance = SpinnerBehaviour; 
                     SpinnerBehaviour.SetOnSpinnerPropertyChanged(() =>
                     {
-                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(new OnSpinnerBehaviourArgs(SpinnerBehaviour)); // Dunno if it works.
+                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(SpinnerBehaviour); // Dunno if it works.
                     });
                 }
             }

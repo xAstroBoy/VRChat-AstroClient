@@ -18,9 +18,9 @@
         private static Mutex SaveMutex = new Mutex();
 
         #region ESPEVents
-        internal static event EventHandler<ColorEventArgs> Event_OnPublicESPColorChanged;
-        internal static event EventHandler<ColorEventArgs> Event_OnBlockedESPColorChanged;
-        internal static event EventHandler<ColorEventArgs> Event_OnFriendESPColorChanged;
+        internal static event Action<Color> Event_OnPublicESPColorChanged;
+        internal static event Action<Color> Event_OnBlockedESPColorChanged;
+        internal static event Action<Color> Event_OnFriendESPColorChanged;
 
         #endregion
 
@@ -82,7 +82,7 @@
                 ESP.PublicESPColor[1] = value.g;
                 ESP.PublicESPColor[2] = value.b;
                 ESP.PublicESPColor[3] = value.a;
-                Event_OnPublicESPColorChanged.SafetyRaise(new ColorEventArgs(value));
+                Event_OnPublicESPColorChanged.SafetyRaise(value);
             }
         }
 
@@ -98,7 +98,7 @@
                 ESP.ESPFriendColor[1] = value.g;
                 ESP.ESPFriendColor[2] = value.b;
                 ESP.ESPFriendColor[3] = value.a;
-                Event_OnFriendESPColorChanged.SafetyRaise(new ColorEventArgs(value));
+                Event_OnFriendESPColorChanged.SafetyRaise(value);
             }
         }
 
@@ -114,7 +114,7 @@
                 ESP.ESPBlockedColor[1] = value.g;
                 ESP.ESPBlockedColor[2] = value.b;
                 ESP.ESPBlockedColor[3] = value.a;
-                Event_OnBlockedESPColorChanged.SafetyRaise(new ColorEventArgs(value));
+                Event_OnBlockedESPColorChanged.SafetyRaise(value);
             }
         }
 

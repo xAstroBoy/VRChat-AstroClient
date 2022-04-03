@@ -19,7 +19,7 @@
     {
         private static bool _ViewRoles;
 
-        internal static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
+        internal static Action<bool> Event_OnViewRolesPropertyChanged;
 
         private static Murder4_ESP _CurrentPlayer_Murder4ESP;
         private static AmongUS_ESP _CurrentPlayer_AmongUS_ESP;
@@ -41,7 +41,7 @@
 
                 if (IsAmongUsWorld || IsMurder4World)
                 {
-                    Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
+                    Event_OnViewRolesPropertyChanged.SafetyRaise(value);
                 }
             }
         }

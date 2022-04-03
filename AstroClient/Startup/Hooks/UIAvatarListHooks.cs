@@ -15,7 +15,7 @@
     internal class UIAvatarListHooks : AstroEvents
     {
 
-        internal static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
+        internal static event Action<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
 
         internal override void ExecutePriorityPatches()
         {

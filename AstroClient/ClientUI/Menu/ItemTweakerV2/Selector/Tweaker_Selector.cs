@@ -2,14 +2,13 @@
 {
     using System;
     using Tools.Extensions;
-    using TweakerEventArgs;
     using UnityEngine;
 
     internal class Tweaker_Selector : Tweaker_Events
     {
-        internal static event EventHandler<SelectedObjectArgs> Event_On_New_GameObject_Selected;
+        internal static event Action<GameObject> Event_On_New_GameObject_Selected;
 
-        internal static event EventHandler<SelectedObjectArgs> Event_On_Old_GameObject_Removed;
+        internal static event Action<GameObject> Event_On_Old_GameObject_Removed;
 
         private static GameObject _SelectedObject;
 
@@ -27,17 +26,17 @@
                 }
                 if (value == null)
                 {
-                    Event_On_Old_GameObject_Removed.SafetyRaise(new SelectedObjectArgs(null));
-                    Event_On_New_GameObject_Selected.SafetyRaise(new SelectedObjectArgs(null));
+                    Event_On_Old_GameObject_Removed.SafetyRaise(null);
+                    Event_On_New_GameObject_Selected.SafetyRaise(null);
                 }
                 else if (_SelectedObject != null)
                 {
                     if (_SelectedObject != value)
                     {
-                        Event_On_Old_GameObject_Removed.SafetyRaise(new SelectedObjectArgs(_SelectedObject));
+                        Event_On_Old_GameObject_Removed.SafetyRaise(_SelectedObject);
                     }
                 }
-                Event_On_New_GameObject_Selected.SafetyRaise(new SelectedObjectArgs(value));
+                Event_On_New_GameObject_Selected.SafetyRaise(value);
                 _SelectedObject = value;
             }
         }

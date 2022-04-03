@@ -17,11 +17,11 @@
     internal class InputPatches : AstroEvents
     {
 
-        internal static EventHandler<VRCInputArgs> Event_OnInput_Jump { get; set; }
-        internal static EventHandler<VRCInputArgs> Event_OnInput_UseLeft { get; set; }
-        internal static EventHandler<VRCInputArgs> Event_OnInput_UseRight { get; set; }
-        internal static EventHandler<VRCInputArgs> Event_OnInput_GrabLeft { get; set; }
-        internal static EventHandler<VRCInputArgs> Event_OnInput_GrabRight { get; set; }
+        internal static Action<bool, bool, bool> Event_OnInput_Jump { get; set; }
+        internal static Action<bool, bool, bool> Event_OnInput_UseLeft { get; set; }
+        internal static Action<bool, bool, bool> Event_OnInput_UseRight { get; set; }
+        internal static Action<bool, bool, bool> Event_OnInput_GrabLeft { get; set; }
+        internal static Action<bool, bool, bool> Event_OnInput_GrabRight { get; set; }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -77,34 +77,34 @@
             {
                 case InputTypes.Jump:
                     {
-                        Event_OnInput_Jump.SafetyRaise(new VRCInputArgs(__instance.isClicked(), __instance.isDown(), __instance.isUp()));
+                        Event_OnInput_Jump.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
                 case InputTypes.UseLeft:
                     {
-                        Event_OnInput_UseLeft.SafetyRaise(new VRCInputArgs(__instance.isClicked(), __instance.isDown(), __instance.isUp()));
+                        Event_OnInput_UseLeft.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.UseRight:
                     {
-                        Event_OnInput_UseRight.SafetyRaise(new VRCInputArgs(__instance.isClicked(), __instance.isDown(), __instance.isUp()));
+                        Event_OnInput_UseRight.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.GrabLeft:
                     {
-                        Event_OnInput_GrabLeft.SafetyRaise(new VRCInputArgs(__instance.isClicked(), __instance.isDown(), __instance.isUp()));
+                        Event_OnInput_GrabLeft.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.GrabRight:
                     {
-                        Event_OnInput_GrabRight.SafetyRaise(new VRCInputArgs(__instance.isClicked(), __instance.isDown(), __instance.isUp()));
+                        Event_OnInput_GrabRight.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }

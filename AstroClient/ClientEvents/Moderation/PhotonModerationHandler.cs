@@ -46,7 +46,7 @@ namespace AstroClient.Moderation
                     if (!PlayerModerations[photonuserid].Blocked)
                     {
                         PlayerModerations[photonuserid].Blocked = true;
-                        Event_OnPlayerBlockedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                        Event_OnPlayerBlockedYou?.SafetyRaise(player);
                     }
                 }
             }
@@ -63,7 +63,7 @@ namespace AstroClient.Moderation
                     if (PlayerModerations[photonuserid].Blocked)
                     {
                         PlayerModerations[photonuserid].Blocked = false;
-                        Event_OnPlayerUnblockedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                        Event_OnPlayerUnblockedYou?.SafetyRaise(player);
                     }
                 }
             }
@@ -80,7 +80,7 @@ namespace AstroClient.Moderation
                     if (!PlayerModerations[photonuserid].Muted)
                     {
                         PlayerModerations[photonuserid].Muted = true;
-                        Event_OnPlayerMutedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                        Event_OnPlayerMutedYou?.SafetyRaise(player);
                     }
                 }
             }
@@ -97,7 +97,7 @@ namespace AstroClient.Moderation
                     if (PlayerModerations[photonuserid].Muted)
                     {
                         PlayerModerations[photonuserid].Muted= false;
-                        Event_OnPlayerUnmutedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                        Event_OnPlayerUnmutedYou?.SafetyRaise(player);
                     }
                 }
             }
@@ -105,10 +105,10 @@ namespace AstroClient.Moderation
 
         #region EventHandlers
 
-        internal static event EventHandler<PhotonPlayerEventArgs> Event_OnPlayerBlockedYou;
-        internal static event EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnblockedYou;
-        internal static event EventHandler<PhotonPlayerEventArgs> Event_OnPlayerMutedYou;
-        internal static event EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
+        internal static event Action<Player> Event_OnPlayerBlockedYou;
+        internal static event Action<Player> Event_OnPlayerUnblockedYou;
+        internal static event Action<Player> Event_OnPlayerMutedYou;
+        internal static event Action<Player> Event_OnPlayerUnmutedYou;
 
         #endregion
 
@@ -119,7 +119,7 @@ namespace AstroClient.Moderation
             PlayerModerations.Clear();
         }
 
-        internal override void OnPhotonLeft(Player player)
+        internal override void OnPhotonPlayerLeft(Player player)
         {
             MelonCoroutines.Start(PlayerLeft(player));
         }

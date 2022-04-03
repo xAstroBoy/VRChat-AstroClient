@@ -4,7 +4,6 @@
     using AstroMonos.Components.Custom.Random;
     using Selector;
     using Tools.Extensions;
-    using TweakerEventArgs;
     using UnityEngine;
 
     internal class RocketBehaviourHandler : Tweaker_Events
@@ -12,7 +11,7 @@
 
         internal override void OnSelectedObject_Destroyed()
         {
-            Event_OnRocketBehaviourPropertyChanged.SafetyRaise(new OnRocketBehaviourArgs(null)); // Dunno if it works.
+            Event_OnRocketBehaviourPropertyChanged.SafetyRaise(null); // Dunno if it works.
             instance = null;
         }
 
@@ -30,7 +29,7 @@
                             instance = newinstance;
                             newinstance.SetOnRocketPropertyChanged(() =>
                             {
-                                Event_OnRocketBehaviourPropertyChanged.SafetyRaise(new OnRocketBehaviourArgs(newinstance)); // Dunno if it works.
+                                Event_OnRocketBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -43,7 +42,7 @@
                     instance = newinstance;
                     newinstance.SetOnRocketPropertyChanged(() =>
                     {
-                        Event_OnRocketBehaviourPropertyChanged.SafetyRaise(new OnRocketBehaviourArgs(newinstance)); // Dunno if it works.
+                        Event_OnRocketBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -52,7 +51,7 @@
 
         
 
-        internal static event EventHandler<OnRocketBehaviourArgs> Event_OnRocketBehaviourPropertyChanged;
+        internal static event Action<RocketBehaviour> Event_OnRocketBehaviourPropertyChanged;
         internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
@@ -63,7 +62,7 @@
                     instance = RocketBehaviour; 
                     RocketBehaviour.SetOnRocketPropertyChanged(() =>
                     {
-                        Event_OnRocketBehaviourPropertyChanged.SafetyRaise(new OnRocketBehaviourArgs(RocketBehaviour)); // Dunno if it works.
+                        Event_OnRocketBehaviourPropertyChanged.SafetyRaise(RocketBehaviour); // Dunno if it works.
                     });
                 }
             }

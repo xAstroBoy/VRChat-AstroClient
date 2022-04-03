@@ -29,356 +29,135 @@ namespace AstroClient
         public AstroMonoBehaviour(IntPtr obj0) : base(obj0)
         {
 
-            Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
+            Main.Event_OnSceneLoaded += OnSceneLoaded;
 
-            OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
-            //SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
-            TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
+            OnWorldRevealHook.Event_OnWorldReveal += OnWorldReveal;
+            //SpawnEmojiRPCHook.Event_SpawnEmojiRPC += SpawnEmojiRPC;
+            TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += VRC_EventDispatcherRFC_triggerEvent;
 
-            RPCEventHook.Event_OnUdonSyncRPC += Internal_OnUdonSyncRPCEvent;
+            RPCEventHook.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
 
-            AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
+            AvatarManagerHook.Event_OnAvatarSpawn += OnAvatarSpawn;
 
-            PlayerJoinAndLeaveHook.Event_OnPlayerJoin += Internal_OnPlayerJoined;
-            PlayerJoinAndLeaveHook.Event_OnPlayerLeft += Internal_OnPlayerLeft;
+            PlayerJoinAndLeaveHook.Event_OnPlayerJoin += OnPlayerJoined;
+            PlayerJoinAndLeaveHook.Event_OnPlayerLeft += OnPlayerLeft;
 
-            CheetosHooks.Event_OnMasterClientSwitched += Internal_OnMasterClientSwitched;
-            CheetosHooks.Event_OnShowScreen += Internal_OnShowScreen;
-            CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
-            CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
-            CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
-            CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
-            CheetosHooks.Event_OnFriended += Internal_OnFriended;
-            CheetosHooks.Event_OnUnfriended += Internal_OnUnfriended;
-            CheetosHooks.Event_OnEnterWorld += Internal_OnEnterWorld;
-            QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
+            CheetosHooks.Event_OnMasterClientSwitched += OnMasterClientSwitched;
+            CheetosHooks.Event_OnShowScreen += OnShowScreen;
+            CheetosHooks.Event_OnPhotonPlayerJoined += OnPhotonJoin;
+            CheetosHooks.Event_OnPhotonPlayerLeft += OnPhotonLeft;
+            CheetosHooks.Event_OnRoomLeft += OnRoomLeft;
+            CheetosHooks.Event_OnRoomJoined += OnRoomJoined;
+            CheetosHooks.Event_OnFriended += OnFriended;
+            CheetosHooks.Event_OnUnfriended += OnUnfriended;
+            CheetosHooks.Event_OnEnterWorld += OnEnterWorld;
+            QuickMenuHooks.Event_OnPlayerSelected += OnPlayerSelected;
 
-            TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
+            TargetSelector.Event_OnTargetSet += OnTargetSet;
 
-            PhotonModerationHandler.Event_OnPlayerBlockedYou += Internal_OnPlayerBlockedYou;
-            PhotonModerationHandler.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
-            PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
-            PhotonModerationHandler.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
+            PhotonModerationHandler.Event_OnPlayerBlockedYou += OnPlayerBlockedYou;
+            PhotonModerationHandler.Event_OnPlayerUnblockedYou += OnPlayerUnblockedYou;
+            PhotonModerationHandler.Event_OnPlayerMutedYou += OnPlayerMutedYou;
+            PhotonModerationHandler.Event_OnPlayerUnmutedYou += OnPlayerUnmutedYou;
 
-            UiManager.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
-            UiManager.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
-            UiManager.Event_OnBigMenuOpen += Internal_OnBigMenuOpen;
-            UiManager.Event_OnBigMenuClose += Internal_OnBigMenuClose;
-            UiManager.Event_OnUserInfoMenuOpen += Internal_OnUserInfoMenuOpen;
-            UiManager.Event_OnUserInfoMenuClose += Internal_OnUserInfoMenuClose;
-            UiManager.Event_OnUiPageToggled += Internal_OnUiPageToggled;
+            UiManager.Event_OnQuickMenuOpen += OnQuickMenuOpen;
+            UiManager.Event_OnQuickMenuClose += OnQuickMenuClose;
+            UiManager.Event_OnBigMenuOpen += OnBigMenuOpen;
+            UiManager.Event_OnBigMenuClose += OnBigMenuClose;
+            UiManager.Event_OnUserInfoMenuOpen += OnUserInfoMenuOpen;
+            UiManager.Event_OnUserInfoMenuClose += OnUserInfoMenuClose;
+            UiManager.Event_OnUiPageToggled += OnUiPageToggled;
 
-            InputPatches.Event_OnInput_Jump += Internal_OnInput_Jump;
-            InputPatches.Event_OnInput_UseLeft += Internal_OnInput_UseLeft;
-            InputPatches.Event_OnInput_UseRight += Internal_OnInput_UseRight;
-            InputPatches.Event_OnInput_GrabLeft += Internal_OnInput_GrabLeft;
-            InputPatches.Event_OnInput_GrabRight += Internal_OnInput_GrabRight;
+            InputPatches.Event_OnInput_Jump += OnInput_Jump;
+            InputPatches.Event_OnInput_UseLeft += OnInput_UseLeft;
+            InputPatches.Event_OnInput_UseRight += OnInput_UseRight;
+            InputPatches.Event_OnInput_GrabLeft += OnInput_GrabLeft;
+            InputPatches.Event_OnInput_GrabRight += OnInput_GrabRight;
 
-            JarRoleController.Event_OnViewRolesPropertyChanged += Internal_OnViewRolesPropertyChanged;
-            PlayerESPMenu.Event_OnPlayerESPPropertyChanged += Internal_OnPlayerESPPropertyChanged;
+            JarRoleController.Event_OnViewRolesPropertyChanged += OnViewRolesPropertyChanged;
+            PlayerESPMenu.Event_OnPlayerESPPropertyChanged += OnPlayerESPPropertyChanged;
 
-            ConfigManager.Event_OnPublicESPColorChanged += Internal_OnPublicESPColorChanged;
-            ConfigManager.Event_OnFriendESPColorChanged += Internal_OnFriendESPColorChanged;
-            ConfigManager.Event_OnBlockedESPColorChanged += Internal_OnBlockedESPColorChanged;
+            ConfigManager.Event_OnPublicESPColorChanged += OnPublicESPColorChanged;
+            ConfigManager.Event_OnFriendESPColorChanged += OnFriendESPColorChanged;
+            ConfigManager.Event_OnBlockedESPColorChanged += OnBlockedESPColorChanged;
 
-            OnOwnerShipTransferredHook.Event_OnOwnerShipTranferred += Internal_OnOwnerShipTransferred;
+            OnOwnerShipTransferredHook.Event_OnOwnerShipTranferred += OnOwnerShipTransferred;
 
-            UdonEventsHook.Event_Udon_OnPickup += Internal_UdonBehaviour_Event_OnPickup;
-            UdonEventsHook.Event_Udon_OnPickupUseUp += Internal_UdonBehaviour_Event_OnPickupUseUp;
-            UdonEventsHook.Event_Udon_OnPickupUseDown += Internal_UdonBehaviour_Event_OnPickupUseDown;
-            UdonEventsHook.Event_Udon_OnDrop += Internal_UdonBehaviour_Event_OnDrop;
-            UdonEventsHook.Event_Udon_OnInteract += Internal_UdonBehaviour_Event_OnInteract;
-            UdonEventsHook.Event_Udon_SendCustomEvent += Internal_UdonBehaviour_Event_SendCustomEvent;
+            UdonEventsHook.Event_Udon_OnPickup += UdonBehaviour_Event_OnPickup;
+            UdonEventsHook.Event_Udon_OnPickupUseUp += UdonBehaviour_Event_OnPickupUseUp;
+            UdonEventsHook.Event_Udon_OnPickupUseDown += UdonBehaviour_Event_OnPickupUseDown;
+            UdonEventsHook.Event_Udon_OnDrop += UdonBehaviour_Event_OnDrop;
+            UdonEventsHook.Event_Udon_OnInteract += UdonBehaviour_Event_OnInteract;
+            UdonEventsHook.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
 
 
         }
 
         void OnDestroy()
         {
-            Main.Event_OnSceneLoaded -= Internal_OnSceneLoaded;
+            Main.Event_OnSceneLoaded -= OnSceneLoaded;
 
-            OnWorldRevealHook.Event_OnWorldReveal -= Internal_OnWorldReveal;
-            //SpawnEmojiRPCHook.Event_SpawnEmojiRPC -= Internal_SpawnEmojiRPC;
-            TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent -= Internal_VRC_EventDispatcherRFC_triggerEvent;
+            OnWorldRevealHook.Event_OnWorldReveal -= OnWorldReveal;
+            //SpawnEmojiRPCHook.Event_SpawnEmojiRPC -= SpawnEmojiRPC;
+            TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent -= VRC_EventDispatcherRFC_triggerEvent;
 
-            RPCEventHook.Event_OnUdonSyncRPC -= Internal_OnUdonSyncRPCEvent;
+            RPCEventHook.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
 
-            AvatarManagerHook.Event_OnAvatarSpawn -= Internal_OnAvatarSpawn;
+            AvatarManagerHook.Event_OnAvatarSpawn -= OnAvatarSpawn;
 
-            PlayerJoinAndLeaveHook.Event_OnPlayerJoin -= Internal_OnPlayerJoined;
-            PlayerJoinAndLeaveHook.Event_OnPlayerLeft -= Internal_OnPlayerLeft;
+            PlayerJoinAndLeaveHook.Event_OnPlayerJoin -= OnPlayerJoined;
+            PlayerJoinAndLeaveHook.Event_OnPlayerLeft -= OnPlayerLeft;
 
-            CheetosHooks.Event_OnMasterClientSwitched -= Internal_OnMasterClientSwitched;
-            CheetosHooks.Event_OnShowScreen -= Internal_OnShowScreen;
-            CheetosHooks.Event_OnPhotonJoin -= Internal_OnPhotonPlayerJoined;
-            CheetosHooks.Event_OnPhotonLeft -= Internal_OnPhotonPlayerLeft;
-            CheetosHooks.Event_OnRoomLeft -= Internal_OnRoomLeft;
-            CheetosHooks.Event_OnRoomJoined -= Internal_OnRoomJoined;
-            CheetosHooks.Event_OnFriended -= Internal_OnFriended;
-            CheetosHooks.Event_OnUnfriended -= Internal_OnUnfriended;
-            CheetosHooks.Event_OnEnterWorld -= Internal_OnEnterWorld;
-            QuickMenuHooks.Event_OnPlayerSelected -= Internal_OnPlayerSelected;
+            CheetosHooks.Event_OnMasterClientSwitched -= OnMasterClientSwitched;
+            CheetosHooks.Event_OnShowScreen -= OnShowScreen;
+            CheetosHooks.Event_OnPhotonPlayerJoined -= OnPhotonJoin;
+            CheetosHooks.Event_OnPhotonPlayerLeft -= OnPhotonLeft;
+            CheetosHooks.Event_OnRoomLeft -= OnRoomLeft;
+            CheetosHooks.Event_OnRoomJoined -= OnRoomJoined;
+            CheetosHooks.Event_OnFriended -= OnFriended;
+            CheetosHooks.Event_OnUnfriended -= OnUnfriended;
+            CheetosHooks.Event_OnEnterWorld -= OnEnterWorld;
+            QuickMenuHooks.Event_OnPlayerSelected -= OnPlayerSelected;
 
-            TargetSelector.Event_OnTargetSet -= Internal_OnTargetSet;
+            TargetSelector.Event_OnTargetSet -= OnTargetSet;
 
-            PhotonModerationHandler.Event_OnPlayerBlockedYou -= Internal_OnPlayerBlockedYou;
-            PhotonModerationHandler.Event_OnPlayerUnblockedYou -= Internal_OnPlayerUnblockedYou;
-            PhotonModerationHandler.Event_OnPlayerMutedYou -= Internal_OnPlayerMutedYou;
-            PhotonModerationHandler.Event_OnPlayerUnmutedYou -= Internal_OnPlayerUnmutedYou;
+            PhotonModerationHandler.Event_OnPlayerBlockedYou -= OnPlayerBlockedYou;
+            PhotonModerationHandler.Event_OnPlayerUnblockedYou -= OnPlayerUnblockedYou;
+            PhotonModerationHandler.Event_OnPlayerMutedYou -= OnPlayerMutedYou;
+            PhotonModerationHandler.Event_OnPlayerUnmutedYou -= OnPlayerUnmutedYou;
 
-            UiManager.Event_OnQuickMenuOpen -= Internal_OnQuickMenuOpen;
-            UiManager.Event_OnQuickMenuClose -= Internal_OnQuickMenuClose;
-            UiManager.Event_OnBigMenuOpen -= Internal_OnBigMenuOpen;
-            UiManager.Event_OnBigMenuClose -= Internal_OnBigMenuClose;
-            UiManager.Event_OnUserInfoMenuOpen -= Internal_OnUserInfoMenuOpen;
-            UiManager.Event_OnUserInfoMenuClose -= Internal_OnUserInfoMenuClose;
-            UiManager.Event_OnUiPageToggled -= Internal_OnUiPageToggled;
+            UiManager.Event_OnQuickMenuOpen -= OnQuickMenuOpen;
+            UiManager.Event_OnQuickMenuClose -= OnQuickMenuClose;
+            UiManager.Event_OnBigMenuOpen -= OnBigMenuOpen;
+            UiManager.Event_OnBigMenuClose -= OnBigMenuClose;
+            UiManager.Event_OnUserInfoMenuOpen -= OnUserInfoMenuOpen;
+            UiManager.Event_OnUserInfoMenuClose -= OnUserInfoMenuClose;
+            UiManager.Event_OnUiPageToggled -= OnUiPageToggled;
 
-            InputPatches.Event_OnInput_Jump -= Internal_OnInput_Jump;
-            InputPatches.Event_OnInput_UseLeft -= Internal_OnInput_UseLeft;
-            InputPatches.Event_OnInput_UseRight -= Internal_OnInput_UseRight;
-            InputPatches.Event_OnInput_GrabLeft -= Internal_OnInput_GrabLeft;
-            InputPatches.Event_OnInput_GrabRight -= Internal_OnInput_GrabRight;
+            InputPatches.Event_OnInput_Jump -= OnInput_Jump;
+            InputPatches.Event_OnInput_UseLeft -= OnInput_UseLeft;
+            InputPatches.Event_OnInput_UseRight -= OnInput_UseRight;
+            InputPatches.Event_OnInput_GrabLeft -= OnInput_GrabLeft;
+            InputPatches.Event_OnInput_GrabRight -= OnInput_GrabRight;
 
-            JarRoleController.Event_OnViewRolesPropertyChanged -= Internal_OnViewRolesPropertyChanged;
-            PlayerESPMenu.Event_OnPlayerESPPropertyChanged -= Internal_OnPlayerESPPropertyChanged;
+            JarRoleController.Event_OnViewRolesPropertyChanged -= OnViewRolesPropertyChanged;
+            PlayerESPMenu.Event_OnPlayerESPPropertyChanged -= OnPlayerESPPropertyChanged;
 
-            ConfigManager.Event_OnPublicESPColorChanged -= Internal_OnPublicESPColorChanged;
-            ConfigManager.Event_OnFriendESPColorChanged -= Internal_OnFriendESPColorChanged;
-            ConfigManager.Event_OnBlockedESPColorChanged -= Internal_OnBlockedESPColorChanged;
+            ConfigManager.Event_OnPublicESPColorChanged -= OnPublicESPColorChanged;
+            ConfigManager.Event_OnFriendESPColorChanged -= OnFriendESPColorChanged;
+            ConfigManager.Event_OnBlockedESPColorChanged -= OnBlockedESPColorChanged;
 
-            OnOwnerShipTransferredHook.Event_OnOwnerShipTranferred -= Internal_OnOwnerShipTransferred;
+            OnOwnerShipTransferredHook.Event_OnOwnerShipTranferred -= OnOwnerShipTransferred;
 
-            UdonEventsHook.Event_Udon_OnPickup -= Internal_UdonBehaviour_Event_OnPickup;
-            UdonEventsHook.Event_Udon_OnPickupUseUp -= Internal_UdonBehaviour_Event_OnPickupUseUp;
-            UdonEventsHook.Event_Udon_OnPickupUseDown -= Internal_UdonBehaviour_Event_OnPickupUseDown;
-            UdonEventsHook.Event_Udon_OnDrop -= Internal_UdonBehaviour_Event_OnDrop;
-            UdonEventsHook.Event_Udon_OnInteract -= Internal_UdonBehaviour_Event_OnInteract;
-            UdonEventsHook.Event_Udon_SendCustomEvent -= Internal_UdonBehaviour_Event_SendCustomEvent;
+            UdonEventsHook.Event_Udon_OnPickup -= UdonBehaviour_Event_OnPickup;
+            UdonEventsHook.Event_Udon_OnPickupUseUp -= UdonBehaviour_Event_OnPickupUseUp;
+            UdonEventsHook.Event_Udon_OnPickupUseDown -= UdonBehaviour_Event_OnPickupUseDown;
+            UdonEventsHook.Event_Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
+            UdonEventsHook.Event_Udon_OnInteract -= UdonBehaviour_Event_OnInteract;
+            UdonEventsHook.Event_Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
             //ModConsole.DebugLog($"Deregistered a AstroMonoBehaviour from EventHandlers and Destroying it!");
         }
-        private void Internal_OnEnterWorld(object sender, OnEnterWorldEventArgs e)
-        {
-            OnEnterWorld(e.ApiWorld, e.ApiWorldInstance);
-        }
 
-        private void Internal_OnShowScreen(object sender, ScreenEventArgs e)
-        {
-            OnShowScreen(e.page);
-        }
-
-        private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
-        {
-            OnMasterClientSwitched(e.player);
-        }
-
-        private void Internal_VRChat_OnUiManagerInit(object sender, EventArgs e)
-        {
-            VRChat_OnUiManagerInit();
-        }
-
-        private void Internal_OnSceneLoaded(object sender, OnSceneLoadedEventArgs e)
-        {
-            OnSceneLoaded(e.BuildIndex, e.SceneName);
-        }
-
-        private void Internal_OnRoomLeft(object sender, EventArgs e)
-        {
-            OnRoomLeft();
-        }
-
-        private void Internal_OnRoomJoined(object sender, EventArgs e)
-        {
-            OnRoomJoined();
-        }
-
-        private void Internal_OnFriended(object sender, EventArgs e)
-        {
-            OnFriended();
-        }
-
-        private void Internal_OnUnfriended(object sender, EventArgs e)
-        {
-            OnUnfriended();
-        }
-
-        private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
-        {
-            OnPlayerLeft(e.player);
-        }
-
-        private void Internal_OnPlayerJoined(object sender, PlayerEventArgs e)
-        {
-            OnPlayerJoined(e.player);
-        }
-
-        private void Internal_OnQuickMenuOpen(object sender, EventArgs e)
-        {
-            OnQuickMenuOpen();
-        }
-
-        private void Internal_OnQuickMenuClose(object sender, EventArgs e)
-        {
-            OnQuickMenuClose();
-        }
-
-        private void Internal_OnBigMenuOpen(object sender, EventArgs e)
-        {
-            OnBigMenuOpen();
-        }
-
-        private void Internal_OnBigMenuClose(object sender, EventArgs e)
-        {
-            OnBigMenuClose();
-        }
-        private void Internal_OnUserInfoMenuOpen(object sender, EventArgs e)
-        {
-            onUserInfoMenuOpen();
-        }
-
-        private void Internal_OnUserInfoMenuClose(object sender, EventArgs e)
-        {
-            onUserInfoMenuClose();
-        }
-
-        private void Internal_OnUiPageToggled(object sender, OnUiPageEventArgs e)
-        {
-            OnUiPageToggled(e.Page, e.Toggle, e.TransitionType);
-        }
-
-        private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
-        {
-            OnPhotonLeft(e.player);
-        }
-
-        private void Internal_OnPhotonPlayerJoined(object sender, PhotonPlayerEventArgs e)
-        {
-            OnPhotonJoined(e.player);
-        }
-
-        private void Internal_SpawnEmojiRPC(object sender, SpawnEmojiArgs e)
-        {
-            SpawnEmojiRPC(e.player, e.Emoji);
-        }
-
-        private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
-        {
-            OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl, e.AuthorName);
-        }
-
-        private void Internal_OnPlayerSelected(object sender, VRCPlayerEventArgs e)
-        {
-            OnPlayerSelected(e.player);
-        }
-
-        private void Internal_OnTargetSet(object sender, VRCPlayerEventArgs e)
-        {
-            OnTargetSet(e.player);
-        }
-
-        private void Internal_OnPlayerBlockedYou(object sender, PhotonPlayerEventArgs e)
-        {
-            OnPlayerBlockedYou(e.player);
-        }
-
-        private void Internal_OnPlayerUnblockedYou(object sender, PhotonPlayerEventArgs e)
-        {
-            OnPlayerUnblockedYou(e.player);
-        }
-
-        private void Internal_OnPlayerMutedYou(object sender, PhotonPlayerEventArgs e)
-        {
-            OnPlayerMutedYou(e.player);
-        }
-
-        private void Internal_OnPlayerUnmutedYou(object sender, PhotonPlayerEventArgs e)
-        {
-            OnPlayerUnmutedYou(e.player);
-        }
-
-        private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
-        {
-            VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
-        }
-
-        private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
-        {
-            OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
-        }
-
-        private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
-        {
-            OnAvatarSpawn(e.Player, e.Avatar, e.VRCAvatarManager, e.VRC_AvatarDescriptor);
-        }
-
-        private void Internal_OnInput_Jump(object sender, VRCInputArgs e)
-        {
-            OnInput_Jump(e.isClicked, e.isDown, e.isUp);
-        }
-        private void Internal_OnInput_UseLeft(object sender, VRCInputArgs e)
-        {
-            OnInput_UseLeft(e.isClicked, e.isDown, e.isUp);
-        }
-        private void Internal_OnInput_UseRight(object sender, VRCInputArgs e)
-        {
-            OnInput_UseRight(e.isClicked, e.isDown, e.isUp);
-        }
-        private void Internal_OnInput_GrabLeft(object sender, VRCInputArgs e)
-        {
-            OnInput_GrabLeft(e.isClicked, e.isDown, e.isUp);
-        }
-        private void Internal_OnInput_GrabRight(object sender, VRCInputArgs e)
-        {
-            OnInput_GrabRight(e.isClicked, e.isDown, e.isUp);
-        }
-        private void Internal_OnViewRolesPropertyChanged(object sender, BoolEventsArgs e) => OnViewRolesPropertyChanged(e.value);
-
-        private void Internal_OnPlayerESPPropertyChanged(object sender, BoolEventsArgs e) => OnPlayerESPPropertyChanged(e.value);
-        private void Internal_OnPublicESPColorChanged(object sender, ColorEventArgs e)
-        {
-            OnPublicESPColorChanged(e.Color);
-        }
-
-        private void Internal_OnBlockedESPColorChanged(object sender, ColorEventArgs e)
-        {
-            OnBlockedESPColorChanged(e.Color);
-        }
-
-        private void Internal_OnFriendESPColorChanged(object sender, ColorEventArgs e)
-        {
-            OnFriendESPColorChanged(e.Color);
-        }
-
-        private void Internal_UdonBehaviour_Event_OnPickup(object sender, UdonBehaviourEvent e)
-        {
-            UdonBehaviour_Event_OnPickup(e.UdonBehaviour);
-        }
-        private void Internal_UdonBehaviour_Event_OnPickupUseUp(object sender, UdonBehaviourEvent e)
-        {
-            UdonBehaviour_Event_OnPickupUseUp(e.UdonBehaviour);
-
-        }
-        private void Internal_UdonBehaviour_Event_OnPickupUseDown(object sender, UdonBehaviourEvent e)
-        {
-            UdonBehaviour_Event_OnPickupUseDown(e.UdonBehaviour);
-
-        }
-        private void Internal_UdonBehaviour_Event_OnDrop(object sender, UdonBehaviourEvent e)
-        {
-            UdonBehaviour_Event_OnDrop(e.UdonBehaviour);
-        }
-        private void Internal_UdonBehaviour_Event_OnInteract(object sender, UdonBehaviourEvent e)
-        {
-            UdonBehaviour_Event_OnInteract(e.UdonBehaviour);
-        }
-        private void Internal_UdonBehaviour_Event_SendCustomEvent(object sender, UdonBehaviourCustomEvent e)
-        {
-            UdonBehaviour_Event_SendCustomEvent(e.UdonBehaviour, e.EventName);
-        }
-        private void Internal_OnOwnerShipTransferred(object sender, OnOwnerShipTransferredEventArgs e)
-        {
-            OnOwnerShipTransferred(e.instance, e.PhotonID);
-        }
 
         internal virtual void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
         {
@@ -435,7 +214,7 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnPhotonJoined(Player player)
+        internal virtual void OnPhotonJoin(Player player)
         {
         }
 
@@ -454,11 +233,11 @@ namespace AstroClient
         internal virtual void OnBigMenuClose()
         {
         }
-        internal virtual void onUserInfoMenuOpen()
+        internal virtual void OnUserInfoMenuOpen()
         {
         }
 
-        internal virtual void onUserInfoMenuClose()
+        internal virtual void OnUserInfoMenuClose()
         {
         }
 

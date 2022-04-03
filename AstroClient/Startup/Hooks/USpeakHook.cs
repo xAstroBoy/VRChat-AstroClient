@@ -17,7 +17,7 @@
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class USpeakHook : AstroEvents
     {
-        internal static event EventHandler<OnRawAudioEventArgs> Event_OnRawAudio;
+        internal static event Action<OnRawAudioEventArgs> Event_OnRawAudio;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)

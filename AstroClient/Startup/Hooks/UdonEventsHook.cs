@@ -19,12 +19,12 @@ namespace AstroClient.Startup.Hooks
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class UdonEventsHook : AstroEvents
     {
-        internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnPickup;
-        internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnPickupUseUp;
-        internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnPickupUseDown;
-        internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnDrop;
-        internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnInteract;
-        internal static event EventHandler<UdonBehaviourCustomEvent> Event_Udon_SendCustomEvent;
+        internal static event Action<UdonBehaviour> Event_Udon_OnPickup;
+        internal static event Action<UdonBehaviour> Event_Udon_OnPickupUseUp;
+        internal static event Action<UdonBehaviour> Event_Udon_OnPickupUseDown;
+        internal static event Action<UdonBehaviour> Event_Udon_OnDrop;
+        internal static event Action<UdonBehaviour> Event_Udon_OnInteract;
+        internal static event Action<UdonBehaviour, string> Event_Udon_SendCustomEvent;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -56,32 +56,32 @@ namespace AstroClient.Startup.Hooks
 
         private static void Hook_UdonBehaviour_Event_OnPickup(UdonBehaviour __instance)
         {
-            Event_Udon_OnPickup.SafetyRaise(new UdonBehaviourEvent(__instance));
+            Event_Udon_OnPickup.SafetyRaise(__instance);
 
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour __instance)
         {
-            Event_Udon_OnPickupUseUp.SafetyRaise(new UdonBehaviourEvent(__instance));
+            Event_Udon_OnPickupUseUp.SafetyRaise(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour __instance)
         {
-            Event_Udon_OnPickupUseDown.SafetyRaise(new UdonBehaviourEvent(__instance));
+            Event_Udon_OnPickupUseDown.SafetyRaise(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnDrop(UdonBehaviour __instance)
         {
-            Event_Udon_OnDrop.SafetyRaise(new UdonBehaviourEvent(__instance));
+            Event_Udon_OnDrop.SafetyRaise(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnInteract(UdonBehaviour __instance)
         {
-            Event_Udon_OnInteract.SafetyRaise(new UdonBehaviourEvent(__instance));
+            Event_Udon_OnInteract.SafetyRaise(__instance);
         }
         private static void Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {
-            Event_Udon_SendCustomEvent.SafetyRaise(new UdonBehaviourCustomEvent(__instance, __0));
+            Event_Udon_SendCustomEvent.SafetyRaise(__instance, __0);
         }
 
 

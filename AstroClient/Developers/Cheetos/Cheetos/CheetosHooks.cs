@@ -32,15 +32,15 @@
     [ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class CheetosHooks : AstroEvents
     {
-        internal static EventHandler<ScreenEventArgs> Event_OnShowScreen { get; set; }
-        internal static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin { get; set; }
-        internal static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft { get; set; }
-        internal static EventHandler<PhotonPlayerEventArgs> Event_OnMasterClientSwitched { get; set; }
-        internal static EventHandler<EventArgs> Event_OnRoomLeft { get; set; }
-        internal static EventHandler<EventArgs> Event_OnRoomJoined { get; set; }
-        internal static EventHandler<EventArgs> Event_OnFriended { get; set; }
-        internal static EventHandler<EventArgs> Event_OnUnfriended { get; set; }
-        internal static EventHandler<OnEnterWorldEventArgs> Event_OnEnterWorld { get; set; }
+        internal static event System.Action<VRCUiPage> Event_OnShowScreen;
+        internal static event System.Action<Player> Event_OnPhotonPlayerJoined;
+        internal static event System.Action<Player> Event_OnPhotonPlayerLeft;
+        internal static event System.Action<Player> Event_OnMasterClientSwitched;
+        internal static event System.Action Event_OnRoomLeft;
+        internal static event System.Action Event_OnRoomJoined;
+        internal static event System.Action Event_OnFriended;
+        internal static event System.Action Event_OnUnfriended;
+        internal static event System.Action<ApiWorld, ApiWorldInstance> Event_OnEnterWorld;
 
         [ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -110,21 +110,21 @@
                 __0 = false;
             }
         }
-        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaise(new OnEnterWorldEventArgs(__0, __1));
+        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaise(__0, __1);
 
-        private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(new PhotonPlayerEventArgs(__0));
+        private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(__0);
 
-        private static void OnFriended(ref APIUser __0) => Event_OnFriended?.SafetyRaise(new EventArgs());
+        private static void OnFriended(ref APIUser __0) => Event_OnFriended?.SafetyRaise();
 
-        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaise(new EventArgs());
+        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaise();
 
         //private static void OnLobbyLeftPatch() => ModConsole.Log("Lobby Left.");
 
         //private static void OnLobbyJoinedPatch() => ModConsole.Log("Lobby Joined.");
 
-        private static void OnRoomLeftPatch() => Event_OnRoomLeft?.SafetyRaise(new EventArgs());
+        private static void OnRoomLeftPatch() => Event_OnRoomLeft?.SafetyRaise();
 
-        private static void OnRoomJoinedPatch() => Event_OnRoomJoined?.SafetyRaise(new EventArgs());
+        private static void OnRoomJoinedPatch() => Event_OnRoomJoined?.SafetyRaise();
 
         private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
         {
@@ -169,7 +169,7 @@
         {
             if (__0 != null)
             {
-                Event_OnShowScreen?.SafetyRaise(new ScreenEventArgs(__0));
+                Event_OnShowScreen?.SafetyRaise(__0);
             }
 
             return true;
@@ -278,12 +278,12 @@
 
         private static void OnPhotonPlayerJoin(ref Player __0)
         {
-            Event_OnPhotonJoin?.SafetyRaise(new PhotonPlayerEventArgs(__0));
+            Event_OnPhotonPlayerJoined?.SafetyRaise(__0);
         }
 
         private static void OnPhotonPlayerLeft(ref Player __0)
         {
-            Event_OnPhotonLeft?.SafetyRaise(new PhotonPlayerEventArgs(__0));
+            Event_OnPhotonPlayerLeft?.SafetyRaise(__0);
         }
     }
 }
