@@ -36,7 +36,7 @@ namespace AstroClient
             Main.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
             Main.Event_VRChat_OnQuickMenuInit += VRChat_OnQuickMenuInit;
             Main.Event_VRChat_OnActionMenuInit += VRChat_OnActionMenuInit;
-            Main.Event_OnGui += OnGUI;
+           // Main.Event_OnGui += OnGUI;
 
             Main.Event_OnSceneLoaded += OnSceneLoaded;
             Main.Event_OnApplicationQuit += OnApplicationQuit;
@@ -148,9 +148,9 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnGUI()
-        {
-        }
+        //internal virtual void OnGUI()
+        //{
+        //}
 
         internal virtual void OnApplicationQuit()
         {

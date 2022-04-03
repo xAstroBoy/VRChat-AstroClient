@@ -36,7 +36,7 @@
 
         internal static event Action Event_LateUpdate;
 
-        internal static event Action Event_OnGui;
+        //internal static event Action Event_OnGui;
 
         internal static event Action Event_VRChat_OnUiManagerInit;
 
@@ -100,10 +100,10 @@
                 yield return null;
         }
 
-        public override void OnGUI()
-        {
-            Event_OnGui?.SafetyRaise();
-        }
+        //public override void OnGUI()
+        //{
+        //    Event_OnGui?.SafetyRaise();
+        //}
 
         public override void OnApplicationLateStart()
         {
