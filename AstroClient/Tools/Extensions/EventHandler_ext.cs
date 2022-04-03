@@ -12,7 +12,7 @@
 
     internal static class Eventhandler_ext
     {
-
+        internal static bool IgnoreGarbageCollectionMessages { get; set; } = true;
         internal static void SafetyRaise(this EventHandler eh) => MelonCoroutines.Start(SafetyRaiseInternal(eh));
         internal static void SafetyRaiseDebug(this EventHandler eh) => MelonCoroutines.Start(SafetyRaiseInternalDebug(eh));
 
@@ -39,11 +39,26 @@
                         }
                         catch (TargetInvocationException invokeexc)
                         {
+                            if (IgnoreGarbageCollectionMessages)
+                            {
+                                if (invokeexc.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue; // Nobody cares!
+                                }
+                            }
+
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(invokeexc.InnerException);
                         }
                         catch (Exception exc)
                         {
+                            if (IgnoreGarbageCollectionMessages)
+                            {
+                                if (exc.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue; // Nobody cares!
+                                }
+                            }
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(exc);
                         }
@@ -78,11 +93,26 @@
                         }
                         catch (TargetInvocationException invokeexc)
                         {
+                            if (IgnoreGarbageCollectionMessages)
+                            {
+                                if (invokeexc.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue; // Nobody cares!
+                                }
+                            }
+
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(invokeexc.InnerException);
                         }
                         catch (Exception exc)
                         {
+                            if (IgnoreGarbageCollectionMessages)
+                            {
+                                if (exc.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue; // Nobody cares!
+                                }
+                            }
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(exc);
                         }
@@ -116,11 +146,26 @@
                         }
                         catch (TargetInvocationException invokeexc)
                         {
+                            if (IgnoreGarbageCollectionMessages)
+                            {
+                                if (invokeexc.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue; // Nobody cares!
+                                }
+                            }
+
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(invokeexc.InnerException);
                         }
                         catch (Exception exc)
                         {
+                            if (IgnoreGarbageCollectionMessages)
+                            {
+                                if (exc.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue; // Nobody cares!
+                                }
+                            }
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(exc);
                         }
@@ -159,12 +204,27 @@
                             }
                             catch (TargetInvocationException invokeexc)
                             {
-                                ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");
+                                if (IgnoreGarbageCollectionMessages)
+                                {
+                                    if (invokeexc.Message.Contains("Object was garbage collected"))
+                                    {
+                                        return; // Nobody cares!
+                                    }
+                                }
+
+                                ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 ModConsole.ErrorExc(invokeexc.InnerException);
                             }
                             catch (Exception exc)
                             {
-                                ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");
+                                if (IgnoreGarbageCollectionMessages)
+                                {
+                                    if (exc.Message.Contains("Object was garbage collected"))
+                                    {
+                                        return; // Nobody cares!
+                                    }
+                                }
+                                ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 ModConsole.ErrorExc(exc);
                             }
                         }));
@@ -203,12 +263,27 @@
                             }
                             catch (TargetInvocationException invokeexc)
                             {
-                                ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");
+                                if (IgnoreGarbageCollectionMessages)
+                                {
+                                    if (invokeexc.Message.Contains("Object was garbage collected"))
+                                    {
+                                        return; // Nobody cares!
+                                    }
+                                }
+
+                                ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 ModConsole.ErrorExc(invokeexc.InnerException);
                             }
                             catch (Exception exc)
                             {
-                                ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");
+                                if (IgnoreGarbageCollectionMessages)
+                                {
+                                    if (exc.Message.Contains("Object was garbage collected"))
+                                    {
+                                        return; // Nobody cares!
+                                    }
+                                }
+                                ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 ModConsole.ErrorExc(exc);
                             }
                         }));

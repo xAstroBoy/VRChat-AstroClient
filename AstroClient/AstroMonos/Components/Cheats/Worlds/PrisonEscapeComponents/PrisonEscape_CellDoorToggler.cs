@@ -33,11 +33,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     [RegisterComponent]
     public class PrisonEscape_CellDoorToggler : AstroMonoBehaviour
     {
-        private List<Object> AntiGarbageCollection = new();
 
         public PrisonEscape_CellDoorToggler(IntPtr ptr) : base(ptr)
         {
-            AntiGarbageCollection.Add(this);
         }
         internal override void OnRoomLeft()
         {
@@ -66,17 +64,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                         Trigger.OnInteract += OnInteract;
                     }
                 }
-
-
-
-
             }
             // This will work along with the laser component
 
 
         }
 
-
+        [HideFromIl2Cpp]
         internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
         {
             if (OpenCell != null && CloseCell != null && Trigger != null)
