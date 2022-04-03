@@ -285,6 +285,11 @@
                             }
                         }));
                     }
+                    else
+                    {
+                        Delegate.Remove(eh, handler);
+
+                    }
                 }
             }
             catch (Exception e)
