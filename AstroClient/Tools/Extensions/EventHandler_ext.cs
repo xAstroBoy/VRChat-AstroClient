@@ -12,7 +12,6 @@
 
     internal static class Eventhandler_ext
     {
-        internal static bool IgnoreGarbageCollectionMessages { get; set; } = true;
         internal static void SafetyRaise(this EventHandler eh) => MelonCoroutines.Start(SafetyRaiseInternal(eh));
         internal static void SafetyRaiseDebug(this EventHandler eh) => MelonCoroutines.Start(SafetyRaiseInternalDebug(eh));
 
@@ -39,12 +38,10 @@
                         }
                         catch (TargetInvocationException invokeexc)
                         {
-                            if (IgnoreGarbageCollectionMessages)
+                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
                             {
-                                if (invokeexc.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue; // Nobody cares!
-                                }
+                                Delegate.Remove(eh, handler);
+                                continue;
                             }
 
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
@@ -52,16 +49,18 @@
                         }
                         catch (Exception exc)
                         {
-                            if (IgnoreGarbageCollectionMessages)
+                            if (exc.Message.Contains("Object was garbage collected"))
                             {
-                                if (exc.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue; // Nobody cares!
-                                }
+                                Delegate.Remove(eh, handler);
+                                continue;
                             }
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(exc);
                         }
+                    }
+                    else
+                    {
+                        Delegate.Remove(eh, handler);
                     }
                 }
             }
@@ -93,12 +92,10 @@
                         }
                         catch (TargetInvocationException invokeexc)
                         {
-                            if (IgnoreGarbageCollectionMessages)
+                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
                             {
-                                if (invokeexc.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue; // Nobody cares!
-                                }
+                                Delegate.Remove(eh, handler);
+                                continue;
                             }
 
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
@@ -106,16 +103,18 @@
                         }
                         catch (Exception exc)
                         {
-                            if (IgnoreGarbageCollectionMessages)
+                            if (exc.Message.Contains("Object was garbage collected"))
                             {
-                                if (exc.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue; // Nobody cares!
-                                }
+                                Delegate.Remove(eh, handler);
+                                continue;
                             }
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(exc);
                         }
+                    }
+                    else
+                    {
+                        Delegate.Remove(eh, handler);
                     }
                 }
             }
@@ -142,16 +141,15 @@
                     {
                         try
                         {
-                            _ = handler.DynamicInvoke(handler, args);
+                            _ = handler.DynamicInvoke(handler,args);
                         }
                         catch (TargetInvocationException invokeexc)
                         {
-                            if (IgnoreGarbageCollectionMessages)
+                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
                             {
-                                if (invokeexc.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue; // Nobody cares!
-                                }
+                                Delegate.Remove(eh, handler);
+                                
+                                continue;
                             }
 
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
@@ -159,16 +157,18 @@
                         }
                         catch (Exception exc)
                         {
-                            if (IgnoreGarbageCollectionMessages)
+                            if (exc.Message.Contains("Object was garbage collected"))
                             {
-                                if (exc.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue; // Nobody cares!
-                                }
+                                Delegate.Remove(eh, handler);
+                                continue;
                             }
                             ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                             ModConsole.ErrorExc(exc);
                         }
+                    }
+                    else
+                    {
+                        Delegate.Remove(eh, handler);
                     }
                 }
             }
@@ -192,6 +192,7 @@
                 for (int i = 0; i < array.Length; i++)
                 {
                     Delegate handler = array[i];
+
                     if (handler != null)
                     {
                         var fullName = handler.Method.DeclaringType.FullName + "." + handler.Method.Name;
@@ -200,16 +201,14 @@
                             try
                             {
                                 _ = handler.DynamicInvoke(handler, args);
-
                             }
                             catch (TargetInvocationException invokeexc)
                             {
-                                if (IgnoreGarbageCollectionMessages)
+                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
                                 {
-                                    if (invokeexc.Message.Contains("Object was garbage collected"))
-                                    {
-                                        return; // Nobody cares!
-                                    }
+                                    Delegate.Remove(eh, handler);
+
+                                    return;
                                 }
 
                                 ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
@@ -217,17 +216,19 @@
                             }
                             catch (Exception exc)
                             {
-                                if (IgnoreGarbageCollectionMessages)
+                                if (exc.Message.Contains("Object was garbage collected"))
                                 {
-                                    if (exc.Message.Contains("Object was garbage collected"))
-                                    {
-                                        return; // Nobody cares!
-                                    }
+                                    Delegate.Remove(eh, handler);
+                                    return;
                                 }
                                 ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 ModConsole.ErrorExc(exc);
                             }
                         }));
+                    }
+                    else
+                    {
+                        Delegate.Remove(eh, handler);
                     }
                 }
             }
@@ -259,16 +260,14 @@
                             try
                             {
                                 _ = handler.DynamicInvoke(handler, null);
-
                             }
                             catch (TargetInvocationException invokeexc)
                             {
-                                if (IgnoreGarbageCollectionMessages)
+                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
                                 {
-                                    if (invokeexc.Message.Contains("Object was garbage collected"))
-                                    {
-                                        return; // Nobody cares!
-                                    }
+                                    Delegate.Remove(eh, handler);
+
+                                    return;
                                 }
 
                                 ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
@@ -276,12 +275,10 @@
                             }
                             catch (Exception exc)
                             {
-                                if (IgnoreGarbageCollectionMessages)
+                                if (exc.Message.Contains("Object was garbage collected"))
                                 {
-                                    if (exc.Message.Contains("Object was garbage collected"))
-                                    {
-                                        return; // Nobody cares!
-                                    }
+                                    Delegate.Remove(eh, handler);
+                                    return;
                                 }
                                 ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 ModConsole.ErrorExc(exc);
