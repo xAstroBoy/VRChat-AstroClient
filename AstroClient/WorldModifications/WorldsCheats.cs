@@ -23,7 +23,7 @@
             Murder4Cheats.Murder4CheatsButtons(WorldCheats);
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats);
             KitchenCooksCheats.InitCheatsMenu(WorldCheats);
-            VRChatHub.InitButtons(WorldCheats);
+            //VRChatHub.InitButtons(WorldCheats);
             //FreezeTag.InitButtons(WorldCheats, 1, 2, true);
             AimFactory.InitButtons(WorldCheats);
             BOMBERio.InitButtons(WorldCheats);

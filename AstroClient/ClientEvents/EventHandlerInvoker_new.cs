@@ -21,7 +21,7 @@ namespace AstroClient.Tools.Extensions
 
         private static List<string> Results = new List<string>();
         private static bool _PerformanceTest = false;
-        private static bool CheckForFPS = true;
+        private static bool _CheckForFPS = true;
         internal static bool PerformanceTest 
         {
             get
@@ -34,10 +34,23 @@ namespace AstroClient.Tools.Extensions
                 Results.Clear(); 
             }
         }
+        internal static bool CheckForFPS
+        {
+            get
+            {
+                return _CheckForFPS;
+            }
+            set
+            {
+                _CheckForFPS = value;
+                Results.Clear();
+            }
+        }
+
 
         internal static int GetCurrentFPS()
         {
-            return (int)(1.0f / Time.smoothDeltaTime);
+           return Mathf.Clamp((int)(1f / Time.deltaTime), -99, 999);
         }
 
 
@@ -61,10 +74,14 @@ namespace AstroClient.Tools.Extensions
                             _ = handler.DynamicInvoke(args);
                             if (CheckForFPS)
                             {
-                                var FPS = GetCurrentFPS();
-                                if (Enumerable.Range(1, 20).Contains(FPS))
+                                if (Enumerable.Range(1, 12).Contains(GetCurrentFPS()))
                                 {
-                                    ModConsole.DebugWarning($"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Possibly Lowered your FPS : {FPS}");
+                                    var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Possibly Lowered your FPS : {GetCurrentFPS()}";
+                                    if (!Results.Contains(result))
+                                    {
+                                        ModConsole.DebugLog(result);
+                                        Results.Add(result);
+                                    }
                                 }
                             }
                         }

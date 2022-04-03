@@ -27,13 +27,14 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (id == WorldIds.VRChatDefaultHub)
-            {
-                WorldCheatsShortcut.SetButtonShortcut(VRChatHub.VRChat_Hub_Addons);
-                WorldCheatsShortcut.SetTextColor(Color.green);
-                ToggleButtonVisibilityAndInteractivity(true);
-            }
-            else if (id == WorldIds.AmongUS)
+            //if (id == WorldIds.VRChatDefaultHub)
+            //{
+            //    WorldCheatsShortcut.SetButtonShortcut(VRChatHub.VRChat_Hub_Addons);
+            //    WorldCheatsShortcut.SetTextColor(Color.green);
+            //    ToggleButtonVisibilityAndInteractivity(true);
+            //}
+            //else
+            if (id == WorldIds.AmongUS)
             {
                 if (AmongUSCheats.AmongUsCheatsPage != null)
                 {

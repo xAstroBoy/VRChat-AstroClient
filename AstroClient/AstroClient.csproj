@@ -651,7 +651,6 @@
     <Compile Include="WorldModifications\WorldHacks\SmashContest.cs" />
     <Compile Include="WorldModifications\WorldHacks\ClubMisfitAfterParty.cs" />
     <Compile Include="WorldModifications\WorldHacks\TheGreatPug.cs" />
-    <Compile Include="WorldModifications\WorldHacks\VRChatHub.cs" />
     <Compile Include="WorldModifications\WorldsCheats.cs" />
   </ItemGroup>
   <ItemGroup>
