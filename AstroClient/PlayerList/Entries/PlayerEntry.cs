@@ -86,7 +86,6 @@ namespace AstroClient.PlayerList.Entries
             NetworkEvents.OnSetupFlagsReceived += OnSetupFlagsReceived;
             VRCUtils.OnEmmWorldCheckCompleted += (allowed) => OnStaticConfigChanged();
 
-            new AstroPatch(typeof(PhotonView).GetMethods().First(mb => mb.Name.StartsWith("Method_FamOrAssem_set_Void_Int32_")), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnOwnerShipTransferred), BindingFlags.NonPublic | BindingFlags.Static)));
             new AstroPatch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
         }
 

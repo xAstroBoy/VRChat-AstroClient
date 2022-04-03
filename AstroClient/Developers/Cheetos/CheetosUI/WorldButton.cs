@@ -92,6 +92,16 @@ namespace AstroClient.CheetosUI
             ButtonBody.transform.localScale = Scale;
         }
 
+        internal void SetText(string text)
+        {
+            TextMesh.text = text;
+        }
+
+        internal void SetTextColor(Color color)
+        {
+            TextMesh.color = color;
+        }
+
         private void InitializeButton(string label, Action action)
         {
             ButtonBody.name = $"AstroWorldButton: {label}";
@@ -103,15 +113,12 @@ namespace AstroClient.CheetosUI
             TextMesh = Text.GetComponent<TextMeshPro>();
             if (Front != null)
             {
-                MiscUtils.DelayFunction(0.2f, () =>
+                AstroTrigger = Front.AddComponent<VRC_AstroInteract>();
+                if (AstroTrigger != null)
                 {
-                    AstroTrigger = Front.AddComponent<VRC_AstroInteract>();
-                    if (AstroTrigger != null)
-                    {
-                        AstroTrigger.interactText = label;
-                        AstroTrigger.OnInteract = action;
-                    }
-                });
+                    AstroTrigger.interactText = label;
+                    AstroTrigger.OnInteract = action;
+                }
             }
 
             if (TextMesh != null)

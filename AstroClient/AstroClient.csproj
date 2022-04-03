@@ -106,13 +106,14 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\GlobalPatronUnlocker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\TierLand_CreditsReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CellDoorToggler.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_DoorAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
     <Compile Include="AstroMonos\Components\Tools\LaserPointer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_GameManagerReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PoolDataReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_CustomizationReader.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_HighlightItem.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="ClientAttributes\RegisterType.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnEnterWorldEventArgs.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnRawAudioEventArgs.cs" />
+    <Compile Include="ClientEvents\AstroEventArgs\UdonBehaviourCustomEvent.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\UdonBehaviourEvent.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnOwnerShipTransferredEventArgs.cs" />
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
@@ -383,7 +385,7 @@
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Translators\Photon_StructToString.cs" />
     <Compile Include="Startup\Hooks\PlayerJoinAndLeaveHook.cs" />
     <Compile Include="Startup\Hooks\OnOwnerShipTransferredHook.cs" />
-    <Compile Include="Startup\Hooks\UdonEvents.cs" />
+    <Compile Include="Startup\Hooks\UdonEventsHook.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SoftCloneHook.cs" />
     <Compile Include="Startup\Hooks\RiskyFunctionHook.cs" />

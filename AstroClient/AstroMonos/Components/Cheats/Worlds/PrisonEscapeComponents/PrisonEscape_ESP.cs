@@ -35,7 +35,27 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         private PlayerESP _ESP { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
 
-        internal PrisonEscape_PoolDataReader AssignedReader {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] private set;}
+        private PrisonEscape_PoolDataReader _AssignedReader {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
+        
+        internal PrisonEscape_PoolDataReader AssignedReader
+        {
+            get
+            {
+                if (_AssignedReader == null)
+                {
+                    _AssignedReader = PrisonEscape.FindAssignedUser(Player, false, CurrentRole);
+                    if (_AssignedReader != null)
+                    {
+                        if (!SaidFoundMessage)
+                        {
+                            ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.", System.Drawing.Color.GreenYellow);
+                            SaidFoundMessage = true;
+                        }
+                    }
+                }
+                return _AssignedReader;
+            }
+        }
 
         private PrisonEscape_ESP _LocalUserData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal PrisonEscape_ESP LocalUserData
@@ -142,7 +162,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             else
                 Destroy(this);
 
-            // Find the Listener before Initiating.
             if (healthTag != null)
             {
                 healthTag.ShowTag = false;
@@ -155,14 +174,16 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 WantedTag.BackGroundColor = Color.red;
             }
 
-            // TODO REMOVE THESE TWO (once Ostinyo decides to implement a Health Tag system)
-            // TODO: This is required just for the health tag system (singletag)
-            InvokeRepeating(nameof(UpdatePlayerDataReaders), 0f, 0.3f);
+
             InvokeRepeating(nameof(TagsUpdater), 0.1f, 0.1f);
             InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
-            InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.5f);
-            InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
 
+            // Those are only for Local Player.
+            if (Player.GetAPIUser().IsSelf)
+            {
+                InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.5f);
+                InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
+            }
 
 
         }
@@ -348,26 +369,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal void UpdatePlayerDataReaders()
-        {
-            if (!isActiveAndEnabled) return;
-            if (AssignedReader == null)
-            {
-                AssignedReader = PrisonEscape.FindAssignedUser(Player, false, CurrentRole);
-                if (AssignedReader != null)
-                {
-                    if (!SaidFoundMessage)
-                    {
-                        ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.", System.Drawing.Color.GreenYellow);
-                        SaidFoundMessage = true;
-                    }
-                }
-                //else
-                //{
-                //    ModConsole.DebugLog($"Could not Find {gameObject.name} - {Player.DisplayName()} Player Data, Retrying!");
-                //}
-            }
-        }
 
 
 

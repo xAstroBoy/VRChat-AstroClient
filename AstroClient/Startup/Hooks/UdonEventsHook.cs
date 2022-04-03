@@ -16,17 +16,19 @@ namespace AstroClient.Startup.Hooks
     #endregion Imports
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    internal class UdonEvents : AstroEvents
+    internal class UdonEventsHook : AstroEvents
     {
         internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnPickup;
         internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnPickupUseUp;
         internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnPickupUseDown;
         internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnDrop;
+        internal static event EventHandler<UdonBehaviourEvent> Event_Udon_OnInteract;
+        internal static event EventHandler<UdonBehaviourCustomEvent> Event_Udon_SendCustomEvent;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
-            return new HarmonyMethod(typeof(UdonEvents).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+            return new HarmonyMethod(typeof(UdonEventsHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
         internal override void ExecutePriorityPatches()
@@ -46,6 +48,9 @@ namespace AstroClient.Startup.Hooks
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.OnPickupUseUp)), GetPatch(nameof(Hook_UdonBehaviour_Event_OnPickupUseUp)));
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.OnPickupUseDown)), GetPatch(nameof(Hook_UdonBehaviour_Event_OnPickupUseDown)));
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.OnDrop)), GetPatch(nameof(Hook_UdonBehaviour_Event_OnDrop)));
+            new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.Interact)), GetPatch(nameof(Hook_UdonBehaviour_Event_OnInteract)));
+            new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.SendCustomEvent)), GetPatch(nameof(Hook_UdonBehaviour_Event_SendCustomEvent)));
+
         }
 
         private static void Hook_UdonBehaviour_Event_OnPickup(UdonBehaviour __instance)
@@ -69,6 +74,19 @@ namespace AstroClient.Startup.Hooks
             Event_Udon_OnDrop.SafetyRaise(new UdonBehaviourEvent(__instance));
 
         }
+        private static void Hook_UdonBehaviour_Event_OnInteract(UdonBehaviour __instance)
+        {
+            Event_Udon_OnInteract.SafetyRaise(new UdonBehaviourEvent(__instance));
+        }
+        private static void Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
+        {
+
+            // TODO: Make a Logger Settings (This is quite spammy!)
+            //ModConsole.DebugLog($"{__instance.name} Sent Event {__0}");
+            Event_Udon_SendCustomEvent.SafetyRaise(new UdonBehaviourCustomEvent(__instance, __0));
+
+        }
+
 
     }
 }

@@ -229,6 +229,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             foreach (var item in WorldUtils.UdonScripts)
             {
 
+
                 if (item.name.Contains("Crate"))
                 {
                     if (item.name.Contains("Crate Large"))
@@ -273,6 +274,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             Knifes.Add(knife);
                         }
                     }
+                }
+
+                if(item.name.Equals("Cell Door"))
+                {
+                    item.GetOrAddComponent<PrisonEscape_CellDoorToggler>();
                 }
                 if (item.name.Contains("Game Manager"))
                 {

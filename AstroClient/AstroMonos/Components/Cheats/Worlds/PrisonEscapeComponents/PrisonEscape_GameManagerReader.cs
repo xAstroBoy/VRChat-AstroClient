@@ -84,7 +84,6 @@
             Private___6_const_intnl_SystemInt32 = new AstroUdonVariable<int>(GameData, "__6_const_intnl_SystemInt32");
             Private___3_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameData, "__3_const_intnl_exitJumpLoc_UInt32");
             Private_guardSpawns = new AstroUdonVariable<UnityEngine.Transform[]>(GameData, "guardSpawns");
-            Private___93_const_intnl_SystemString = new AstroUdonVariable<string>(GameData, "__93_const_intnl_SystemString");
             Private___26_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__26_intnl_SystemBoolean");
             Private___0_const_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__0_const_intnl_SystemBoolean");
             Private___1_intnl_UnityEngineQuaternion = new AstroUdonVariable<UnityEngine.Quaternion>(GameData, "__1_intnl_UnityEngineQuaternion");
@@ -190,7 +189,6 @@
             Private___139_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__139_intnl_SystemBoolean");
             Private___99_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__99_intnl_SystemBoolean");
             Private___38_intnl_SystemInt32 = new AstroUdonVariable<int>(GameData, "__38_intnl_SystemInt32");
-            Private___242_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__242_intnl_SystemBoolean");
             Private_versionError = new AstroUdonVariable<bool>(GameData, "versionError");
             Private___86_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__86_intnl_SystemBoolean");
             Private___29_const_intnl_SystemString = new AstroUdonVariable<string>(GameData, "__29_const_intnl_SystemString");
@@ -240,7 +238,6 @@
             Private___65_const_intnl_SystemString = new AstroUdonVariable<string>(GameData, "__65_const_intnl_SystemString");
             Private___4_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__4_intnl_SystemBoolean");
             Private_playerCount = new AstroUdonVariable<int>(GameData, "playerCount");
-            Private_emergencyMeetingControl = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameData, "emergencyMeetingControl");
             Private_gameJoinTrigger = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameData, "gameJoinTrigger");
             Private___11_intnl_SystemSingle = new AstroUdonVariable<float>(GameData, "__11_intnl_SystemSingle");
             Private___106_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__106_intnl_SystemBoolean");
@@ -563,7 +560,6 @@
             Private___53_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__53_intnl_SystemBoolean");
             Private___4_intnl_interpolatedStr_String = new AstroUdonVariable<string>(GameData, "__4_intnl_interpolatedStr_String");
             Private___80_const_intnl_SystemString = new AstroUdonVariable<string>(GameData, "__80_const_intnl_SystemString");
-            Private___243_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__243_intnl_SystemBoolean");
             Private___27_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameData, "__27_intnl_SystemBoolean");
             Private___19_intnl_SystemString = new AstroUdonVariable<string>(GameData, "__19_intnl_SystemString");
             Private___51_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameData, "__51_const_intnl_exitJumpLoc_UInt32");
@@ -729,7 +725,6 @@
             Private___6_const_intnl_SystemInt32 = null;
             Private___3_const_intnl_exitJumpLoc_UInt32 = null;
             Private_guardSpawns = null;
-            Private___93_const_intnl_SystemString = null;
             Private___26_intnl_SystemBoolean = null;
             Private___0_const_intnl_SystemBoolean = null;
             Private___1_intnl_UnityEngineQuaternion = null;
@@ -835,7 +830,6 @@
             Private___139_intnl_SystemBoolean = null;
             Private___99_intnl_SystemBoolean = null;
             Private___38_intnl_SystemInt32 = null;
-            Private___242_intnl_SystemBoolean = null;
             Private_versionError = null;
             Private___86_intnl_SystemBoolean = null;
             Private___29_const_intnl_SystemString = null;
@@ -885,7 +879,6 @@
             Private___65_const_intnl_SystemString = null;
             Private___4_intnl_SystemBoolean = null;
             Private_playerCount = null;
-            Private_emergencyMeetingControl = null;
             Private_gameJoinTrigger = null;
             Private___11_intnl_SystemSingle = null;
             Private___106_intnl_SystemBoolean = null;
@@ -1208,7 +1201,6 @@
             Private___53_intnl_SystemBoolean = null;
             Private___4_intnl_interpolatedStr_String = null;
             Private___80_const_intnl_SystemString = null;
-            Private___243_intnl_SystemBoolean = null;
             Private___27_intnl_SystemBoolean = null;
             Private___19_intnl_SystemString = null;
             Private___51_const_intnl_exitJumpLoc_UInt32 = null;
@@ -2021,28 +2013,6 @@
                 if (Private_guardSpawns != null)
                 {
                     Private_guardSpawns.Value = value;
-                }
-            }
-        }
-
-        internal string __93_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___93_const_intnl_SystemString != null)
-                {
-                    return Private___93_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___93_const_intnl_SystemString != null)
-                {
-                    Private___93_const_intnl_SystemString.Value = value;
                 }
             }
         }
@@ -4603,31 +4573,6 @@
             }
         }
 
-        internal bool? __242_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___242_intnl_SystemBoolean != null)
-                {
-                    return Private___242_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___242_intnl_SystemBoolean != null)
-                    {
-                        Private___242_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
         internal bool? versionError
         {
             [HideFromIl2Cpp]
@@ -5798,28 +5743,6 @@
                     {
                         Private_playerCount.Value = value.Value;
                     }
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour emergencyMeetingControl
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private_emergencyMeetingControl != null)
-                {
-                    return Private_emergencyMeetingControl.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private_emergencyMeetingControl != null)
-                {
-                    Private_emergencyMeetingControl.Value = value;
                 }
             }
         }
@@ -13577,31 +13500,6 @@
             }
         }
 
-        internal bool? __243_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___243_intnl_SystemBoolean != null)
-                {
-                    return Private___243_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___243_intnl_SystemBoolean != null)
-                    {
-                        Private___243_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
         internal bool? __27_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
@@ -16839,7 +16737,6 @@
         private AstroUdonVariable<int> Private___6_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___3_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Transform[]> Private_guardSpawns { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___93_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___26_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___0_const_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Quaternion> Private___1_intnl_UnityEngineQuaternion { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16945,7 +16842,6 @@
         private AstroUdonVariable<bool> Private___139_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___99_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___38_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___242_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_versionError { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___86_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___29_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16995,7 +16891,6 @@
         private AstroUdonVariable<string> Private___65_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___4_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_playerCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_emergencyMeetingControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_gameJoinTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___11_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___106_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -17318,7 +17213,6 @@
         private AstroUdonVariable<bool> Private___53_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___4_intnl_interpolatedStr_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___80_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___243_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___27_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___19_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___51_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;

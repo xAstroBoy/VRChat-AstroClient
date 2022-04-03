@@ -83,10 +83,13 @@ namespace AstroClient
 
             OnOwnerShipTransferredHook.Event_OnOwnerShipTranferred += Internal_OnOwnerShipTransferred;
 
-            UdonEvents.Event_Udon_OnPickup += Internal_UdonBehaviour_Event_OnPickup;
-            UdonEvents.Event_Udon_OnPickupUseUp += Internal_UdonBehaviour_Event_OnPickupUseUp;
-            UdonEvents.Event_Udon_OnPickupUseDown += Internal_UdonBehaviour_Event_OnPickupUseDown;
-            UdonEvents.Event_Udon_OnDrop += Internal_UdonBehaviour_Event_OnDrop;
+            UdonEventsHook.Event_Udon_OnPickup += Internal_UdonBehaviour_Event_OnPickup;
+            UdonEventsHook.Event_Udon_OnPickupUseUp += Internal_UdonBehaviour_Event_OnPickupUseUp;
+            UdonEventsHook.Event_Udon_OnPickupUseDown += Internal_UdonBehaviour_Event_OnPickupUseDown;
+            UdonEventsHook.Event_Udon_OnDrop += Internal_UdonBehaviour_Event_OnDrop;
+            UdonEventsHook.Event_Udon_OnInteract += Internal_UdonBehaviour_Event_OnInteract;
+            UdonEventsHook.Event_Udon_SendCustomEvent += Internal_UdonBehaviour_Event_SendCustomEvent;
+
 
         }
         private void Internal_OnEnterWorld(object sender, OnEnterWorldEventArgs e)
@@ -299,6 +302,14 @@ namespace AstroClient
         {
             UdonBehaviour_Event_OnDrop(e.UdonBehaviour);
         }
+        private void Internal_UdonBehaviour_Event_OnInteract(object sender, UdonBehaviourEvent e)
+        {
+            UdonBehaviour_Event_OnInteract(e.UdonBehaviour);
+        }
+        private void Internal_UdonBehaviour_Event_SendCustomEvent(object sender, UdonBehaviourCustomEvent e)
+        {
+            UdonBehaviour_Event_SendCustomEvent(e.UdonBehaviour, e.EventName);
+        }
         private void Internal_OnOwnerShipTransferred(object sender, OnOwnerShipTransferredEventArgs e)
         {
             OnOwnerShipTransferred(e.instance, e.PhotonID);
@@ -477,6 +488,12 @@ namespace AstroClient
         {
         }
         internal virtual void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
+        {
+        }
+        internal virtual void UdonBehaviour_Event_OnInteract(UdonBehaviour item)
+        {
+        }
+        internal virtual void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
         {
         }
 

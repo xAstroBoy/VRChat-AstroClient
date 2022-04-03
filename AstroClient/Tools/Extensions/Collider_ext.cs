@@ -129,7 +129,7 @@
 
         internal static void SetMesh_IsConvex(this GameObject obj, bool isConvex)
         {
-            foreach(var col in obj.GetComponentsInChildren<MeshCollider>())
+            foreach(var col in obj.GetComponents<MeshCollider>())
             {
                 col.convex = isConvex;
             }
