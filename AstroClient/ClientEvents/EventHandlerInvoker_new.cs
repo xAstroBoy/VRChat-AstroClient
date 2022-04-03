@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace AstroClient.Tools.Extensions
 
         private static List<string> Results = new List<string>();
         private static bool _PerformanceTest = false;
-
+        private static bool CheckForFPS = true;
         internal static bool PerformanceTest 
         {
             get
@@ -34,6 +35,13 @@ namespace AstroClient.Tools.Extensions
             }
         }
 
+        internal static int GetCurrentFPS()
+        {
+            return (int)(1.0f / Time.smoothDeltaTime);
+        }
+
+
+        
         internal static void SafetyRaise(this Delegate eh, params object[] args) => SafetyRaiseInternal(eh, args);
 
         private static void SafetyRaiseInternal(Delegate eh, params object[] args)
@@ -51,6 +59,14 @@ namespace AstroClient.Tools.Extensions
                         try
                         {
                             _ = handler.DynamicInvoke(args);
+                            if (CheckForFPS)
+                            {
+                                var FPS = GetCurrentFPS();
+                                if (Enumerable.Range(1, 20).Contains(FPS))
+                                {
+                                    ModConsole.DebugWarning($"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Possibly Lowered your FPS : {FPS}");
+                                }
+                            }
                         }
                         catch (TargetInvocationException invokeexc)
                         {
@@ -84,7 +100,7 @@ namespace AstroClient.Tools.Extensions
                             ModConsole.ErrorExc(invokeexc.InnerException);
                         }
                         sw.Stop();
-                        var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}";
+                        var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}, FPS : {GetCurrentFPS()}";
                         if(!Results.Contains(result))
                         {
                             ModConsole.DebugLog(result);
