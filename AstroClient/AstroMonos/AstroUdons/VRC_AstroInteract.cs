@@ -15,11 +15,9 @@ namespace AstroClient.AstroMonos.AstroUdons
     [RegisterComponent]
     public class VRC_AstroInteract : AstroMonoBehaviour
     {
-        private Il2CppSystem.Collections.Generic.List<Object> AntiGarbageCollection = new();
 
         public VRC_AstroInteract(IntPtr ptr) : base(ptr)
         {
-            AntiGarbageCollection.Add(this);
         }
 
         private SerializedUdonProgramAsset AssignedProgram { [HideFromIl2Cpp] get; } = UdonPrograms.InteractProgram;

@@ -17,11 +17,9 @@ namespace AstroClient.AstroMonos.AstroUdons
     [RegisterComponent]
     public class VRC_AstroPickup : MonoBehaviour
     {
-        private Il2CppSystem.Collections.Generic.List<System.Object> AntiGarbageCollection = new();
 
         public VRC_AstroPickup(IntPtr ptr) : base(ptr)
         {
-            AntiGarbageCollection.Add(this);
         }
 
         private SerializedUdonProgramAsset AssignedProgram { [HideFromIl2Cpp] get; } = UdonPrograms.PickupProgram;
