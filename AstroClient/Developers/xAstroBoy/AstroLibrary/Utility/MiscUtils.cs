@@ -135,6 +135,21 @@ namespace AstroClient.xAstroBoy.Utility
             }
             MelonCoroutines.Start(Delay(del, action));
         }
+        public static void ActionAsCoroutine(Action action)
+        {
+            if (action == null)
+            {
+                ModConsole.Error("ActionAsCoroutine: action was null");
+                return;
+            }
+            MelonCoroutines.Start(Action(action));
+        }
+
+        private static IEnumerator Action( Action action) {
+            action.Invoke();
+            yield break;
+        }
+
 
         private static IEnumerator Delay(float del, Action action)
         {

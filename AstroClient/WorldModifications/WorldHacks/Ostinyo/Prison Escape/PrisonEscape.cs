@@ -479,6 +479,36 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
+        internal static void MarkPrisonersAsWanted()
+        {
+            foreach(var player in WorldUtils.Players)
+            {
+                if(player != null)
+                {
+                    if (player.GetAPIUser().IsSelf) continue; // OFC ignore ourself.
+
+                    var ESP = player.GetComponent<PrisonEscape_ESP>();
+                    if(ESP != null)
+                    {
+                        // Check if is still Prisoner role.
+                        if(ESP.CurrentRole == PrisonEscape_Roles.Prisoner) // Ignore Dead and Guard roles.
+                        {
+                            
+                            // IF is prisoner, get the reader and check if is wanted
+                            if(ESP.AssignedReader != null)
+                            {
+                                if(!ESP.AssignedReader.isWanted.GetValueOrDefault(false))
+                                {
+                                    ESP.AssignedReader.isWanted = true; // Mark it as Wanted, allowing to be killable.
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
         private static void InteractWithFloorVent(string VentName)
         {
             if (Vents != null)

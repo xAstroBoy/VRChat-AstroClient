@@ -10,7 +10,7 @@
 
     #endregion Imports
 
-    internal static class Eventhandler_ext
+    internal static class EventHandlerInvoker
     {
         internal static void SafetyRaise(this EventHandler eh) => MelonCoroutines.Start(SafetyRaiseInternal(eh));
         internal static void SafetyRaiseDebug(this EventHandler eh) => MelonCoroutines.Start(SafetyRaiseInternalDebug(eh));

@@ -141,6 +141,7 @@
     <Compile Include="ClientEvents\AstroEventArgs\UdonBehaviourCustomEvent.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\UdonBehaviourEvent.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\OnOwnerShipTransferredEventArgs.cs" />
+    <Compile Include="ClientEvents\EventHandlerInvoker_new.cs" />
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
     <Compile Include="ClientResources\Loaders\Prefabs.cs" />
     <Compile Include="ClientResources\Startup\EventResourceLoader.cs" />
@@ -449,7 +450,6 @@
     <Compile Include="Tools\Extensions\DeepClone_ext.cs" />
     <Compile Include="Tools\Extensions\Components_exts\PickupControllerExtensions.cs" />
     <Compile Include="Tools\Extensions\Components_exts\RigidBodyControllerExtensions.cs" />
-    <Compile Include="Tools\Extensions\EventHandler_ext.cs" />
     <Compile Include="Startup\ModDetector\FindMods.cs" />
     <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
     <Compile Include="ClientEvents\AstroEventArgs\BoolEventsArgs.cs" />

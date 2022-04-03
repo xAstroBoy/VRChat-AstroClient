@@ -92,6 +92,71 @@ namespace AstroClient
 
 
         }
+
+        void OnDestroy()
+        {
+            Main.Event_OnSceneLoaded -= Internal_OnSceneLoaded;
+
+            OnWorldRevealHook.Event_OnWorldReveal -= Internal_OnWorldReveal;
+            //SpawnEmojiRPCHook.Event_SpawnEmojiRPC -= Internal_SpawnEmojiRPC;
+            TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent -= Internal_VRC_EventDispatcherRFC_triggerEvent;
+
+            RPCEventHook.Event_OnUdonSyncRPC -= Internal_OnUdonSyncRPCEvent;
+
+            AvatarManagerHook.Event_OnAvatarSpawn -= Internal_OnAvatarSpawn;
+
+            PlayerJoinAndLeaveHook.Event_OnPlayerJoin -= Internal_OnPlayerJoined;
+            PlayerJoinAndLeaveHook.Event_OnPlayerLeft -= Internal_OnPlayerLeft;
+
+            CheetosHooks.Event_OnMasterClientSwitched -= Internal_OnMasterClientSwitched;
+            CheetosHooks.Event_OnShowScreen -= Internal_OnShowScreen;
+            CheetosHooks.Event_OnPhotonJoin -= Internal_OnPhotonPlayerJoined;
+            CheetosHooks.Event_OnPhotonLeft -= Internal_OnPhotonPlayerLeft;
+            CheetosHooks.Event_OnRoomLeft -= Internal_OnRoomLeft;
+            CheetosHooks.Event_OnRoomJoined -= Internal_OnRoomJoined;
+            CheetosHooks.Event_OnFriended -= Internal_OnFriended;
+            CheetosHooks.Event_OnUnfriended -= Internal_OnUnfriended;
+            CheetosHooks.Event_OnEnterWorld -= Internal_OnEnterWorld;
+            QuickMenuHooks.Event_OnPlayerSelected -= Internal_OnPlayerSelected;
+
+            TargetSelector.Event_OnTargetSet -= Internal_OnTargetSet;
+
+            PhotonModerationHandler.Event_OnPlayerBlockedYou -= Internal_OnPlayerBlockedYou;
+            PhotonModerationHandler.Event_OnPlayerUnblockedYou -= Internal_OnPlayerUnblockedYou;
+            PhotonModerationHandler.Event_OnPlayerMutedYou -= Internal_OnPlayerMutedYou;
+            PhotonModerationHandler.Event_OnPlayerUnmutedYou -= Internal_OnPlayerUnmutedYou;
+
+            UiManager.Event_OnQuickMenuOpen -= Internal_OnQuickMenuOpen;
+            UiManager.Event_OnQuickMenuClose -= Internal_OnQuickMenuClose;
+            UiManager.Event_OnBigMenuOpen -= Internal_OnBigMenuOpen;
+            UiManager.Event_OnBigMenuClose -= Internal_OnBigMenuClose;
+            UiManager.Event_OnUserInfoMenuOpen -= Internal_OnUserInfoMenuOpen;
+            UiManager.Event_OnUserInfoMenuClose -= Internal_OnUserInfoMenuClose;
+            UiManager.Event_OnUiPageToggled -= Internal_OnUiPageToggled;
+
+            InputPatches.Event_OnInput_Jump -= Internal_OnInput_Jump;
+            InputPatches.Event_OnInput_UseLeft -= Internal_OnInput_UseLeft;
+            InputPatches.Event_OnInput_UseRight -= Internal_OnInput_UseRight;
+            InputPatches.Event_OnInput_GrabLeft -= Internal_OnInput_GrabLeft;
+            InputPatches.Event_OnInput_GrabRight -= Internal_OnInput_GrabRight;
+
+            JarRoleController.Event_OnViewRolesPropertyChanged -= Internal_OnViewRolesPropertyChanged;
+            PlayerESPMenu.Event_OnPlayerESPPropertyChanged -= Internal_OnPlayerESPPropertyChanged;
+
+            ConfigManager.Event_OnPublicESPColorChanged -= Internal_OnPublicESPColorChanged;
+            ConfigManager.Event_OnFriendESPColorChanged -= Internal_OnFriendESPColorChanged;
+            ConfigManager.Event_OnBlockedESPColorChanged -= Internal_OnBlockedESPColorChanged;
+
+            OnOwnerShipTransferredHook.Event_OnOwnerShipTranferred -= Internal_OnOwnerShipTransferred;
+
+            UdonEventsHook.Event_Udon_OnPickup -= Internal_UdonBehaviour_Event_OnPickup;
+            UdonEventsHook.Event_Udon_OnPickupUseUp -= Internal_UdonBehaviour_Event_OnPickupUseUp;
+            UdonEventsHook.Event_Udon_OnPickupUseDown -= Internal_UdonBehaviour_Event_OnPickupUseDown;
+            UdonEventsHook.Event_Udon_OnDrop -= Internal_UdonBehaviour_Event_OnDrop;
+            UdonEventsHook.Event_Udon_OnInteract -= Internal_UdonBehaviour_Event_OnInteract;
+            UdonEventsHook.Event_Udon_SendCustomEvent -= Internal_UdonBehaviour_Event_SendCustomEvent;
+            //ModConsole.DebugLog($"Deregistered a AstroMonoBehaviour from EventHandlers and Destroying it!");
+        }
         private void Internal_OnEnterWorld(object sender, OnEnterWorldEventArgs e)
         {
             OnEnterWorld(e.ApiWorld, e.ApiWorldInstance);

@@ -425,6 +425,7 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddSubMenu("Game Hacks", () =>
                 {
                     CustomSubMenu.AddButton("Give Everyone Gold Guns", () => { PrisonEscape.EnableGoldenCamos.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Make Prisoners Wanted", () => { PrisonEscape.MarkPrisonersAsWanted(); });
 
                     var ESP = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
                     if (ESP != null)
