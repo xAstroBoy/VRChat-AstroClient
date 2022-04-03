@@ -51,6 +51,8 @@
 
         public bool LogEvents = true;
 
+        public bool LogUdonCustomEvents = true;
+
         public float FOV = 61f;
 
         public bool SpoofPing = false;

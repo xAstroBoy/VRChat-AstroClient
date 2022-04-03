@@ -1,4 +1,5 @@
-﻿using VRC.Udon;
+﻿using AstroClient.Config;
+using VRC.Udon;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -80,11 +81,7 @@ namespace AstroClient.Startup.Hooks
         }
         private static void Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {
-
-            // TODO: Make a Logger Settings (This is quite spammy!)
-            //ModConsole.DebugLog($"{__instance.name} Sent Event {__0}");
             Event_Udon_SendCustomEvent.SafetyRaise(new UdonBehaviourCustomEvent(__instance, __0));
-
         }
 
 
