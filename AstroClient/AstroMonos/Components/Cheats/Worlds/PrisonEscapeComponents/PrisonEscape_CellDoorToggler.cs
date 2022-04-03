@@ -81,23 +81,26 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             if (OpenCell != null && CloseCell != null && Trigger != null)
             {
-                // We need just one lol
-                if (item.Equals(OpenCell.UdonBehaviour))
+                if (OpenCell.UdonBehaviour != null)
                 {
-                    if (EventName.Equals("_Open"))
+                    // We need just one lol
+                    if (item.Equals(OpenCell.UdonBehaviour))
                     {
-                        if (!_IsOpen)
+                        if (EventName.Equals("_Open"))
                         {
-                            _IsOpen = true;
-                            Trigger.interactText = "<color=orange>Close Cell</color>";
+                            if (!_IsOpen)
+                            {
+                                _IsOpen = true;
+                                Trigger.interactText = "<color=orange>Close Cell</color>";
+                            }
                         }
-                    }
-                    if(EventName.Equals("_Close"))
-                    {
-                        if (_IsOpen)
+                        if (EventName.Equals("_Close"))
                         {
-                            _IsOpen = false;
-                            Trigger.interactText = "<color=red>Open Cell</color>";
+                            if (_IsOpen)
+                            {
+                                _IsOpen = false;
+                                Trigger.interactText = "<color=red>Open Cell</color>";
+                            }
                         }
                     }
                 }
@@ -105,13 +108,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         }
 
 
-        private bool _IsOpen { get; set; }
+        private bool _IsOpen {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp]set; }
         internal bool isOpen
-        {
+        { [HideFromIl2Cpp]
             get
             {
                 return _IsOpen;
-            }
+            } [HideFromIl2Cpp]
             set
             {
                 _IsOpen = value;
