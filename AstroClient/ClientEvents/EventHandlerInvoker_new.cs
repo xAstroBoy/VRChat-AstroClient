@@ -1,18 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AstroClient.xAstroBoy.Utility;
+using System.Reflection;
 using UnityEngine;
 
-namespace AstroClient.Tools.Extensions
+namespace AstroClient
 {
     #region Imports
-
-    using System;
-    using System.Reflection;
-    using System.Collections;
-    using MelonLoader;
-    using xAstroBoy.CodeDebugTools;
 
     #endregion Imports
 
