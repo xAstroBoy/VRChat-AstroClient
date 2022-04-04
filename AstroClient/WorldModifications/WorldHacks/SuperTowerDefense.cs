@@ -1099,8 +1099,17 @@
         {
             if (item != null)
             {
-                item.Remove_ObjectFreezer();
-                item.GetComponentInChildren<SyncPhysics>(true).RespawnItem(true);
+                var Freeze = item.GetComponent<ObjectFreezer>();
+                if(Freeze != null)
+                {
+                    Freeze.DestroyMeLocal(true);
+                    var sync = item.GetComponentInChildren<SyncPhysics>(true);
+                    if(sync != null)
+                    {
+                        sync.RespawnItem(true);
+                    }
+
+                }
             }
         }
 
