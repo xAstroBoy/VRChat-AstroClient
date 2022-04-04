@@ -7,6 +7,7 @@ using AstroClient.Tools.Player.Movement.Exploit;
 using AstroClient.WorldModifications.WorldHacks;
 using AstroClient.WorldModifications.WorldHacks.Jar.AmongUS;
 using AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks;
+using AstroClient.WorldModifications.WorldHacks.Ostinyo;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications
+﻿using AstroClient.WorldModifications.WorldHacks.Ostinyo;
+
+namespace AstroClient.WorldModifications
 {
     #region Imports
 

@@ -1,20 +1,18 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
-{
-    using System.Collections;
-    using System.Collections.Generic;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
-    using CustomClasses;
-    using MelonLoader;
-    using Tools.Extensions;
-    using Tools.World;
-    using UnityEngine;
-    using WorldsIds;
-    using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.Utility;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+using AstroClient.CustomClasses;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.World;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
+using MelonLoader;
+using UnityEngine;
 
+namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
+{
     internal class PuttPuttPond : AstroEvents
     {
 
@@ -55,7 +53,7 @@
                         {
                             if (item.name.Equals("Patron Control"))
                             {
-                                PatronController = item.gameObject.GetOrAddComponent<Ostinyo_World_PatronCracker>();
+                                PatronController = ComponentUtils.GetOrAddComponent<Ostinyo_World_PatronCracker>(item.gameObject);
                             }
                         }
                         // TODO : Make the golf balls shoot fireworks on command.
