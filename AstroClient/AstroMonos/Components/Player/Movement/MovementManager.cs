@@ -52,8 +52,11 @@
 
         internal void Restore_GravityStrength()
         {
-            GravityStrength = Original_GravityStrength;
-            HasModified_GravityStrength = false;
+            if (HasModified_GravityStrength)
+            {
+                GravityStrength = Original_GravityStrength;
+                HasModified_GravityStrength = false;
+            }
         }
 
 
@@ -85,8 +88,11 @@
 
         internal void Restore_JumpImpulse()
         {
-            JumpImpulse = Original_JumpImpulse;
-            HasModified_JumpImpulse = false;
+            if (HasModified_JumpImpulse)
+            {
+                JumpImpulse = Original_JumpImpulse;
+                HasModified_JumpImpulse = false;
+            }
         }
 
 
@@ -118,8 +124,11 @@
 
         internal void Restore_RunSpeed()
         {
-            RunSpeed = Original_RunSpeed;
-            HasModified_RunSpeed = false;
+            if (HasModified_RunSpeed)
+            {
+                RunSpeed = Original_RunSpeed;
+                HasModified_RunSpeed = false;
+            }
         }
 
 
@@ -151,8 +160,11 @@
 
         internal void Restore_StrafeSpeed()
         {
-            StrafeSpeed = Original_StrafeSpeed;
-            HasModified_StrafeSpeed = false;
+            if (HasModified_StrafeSpeed)
+            {
+                StrafeSpeed = Original_StrafeSpeed;
+                HasModified_StrafeSpeed = false;
+            }
         }
 
 
@@ -184,8 +196,11 @@
 
         internal void Restore_WalkSpeed()
         {
-            WalkSpeed = Original_WalkSpeed;
-            HasModified_WalkSpeed = false;
+            if (HasModified_WalkSpeed)
+            {
+                WalkSpeed = Original_WalkSpeed;
+                HasModified_WalkSpeed = false;
+            }
         }
 
 
