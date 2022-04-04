@@ -12,11 +12,12 @@
     {
         internal override void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
         {
+            if (GameInstances.LocalPlayer == null) return;
             if (isDown)
             {
                 if (!IsRocketJumpActive)
                 {
-                    if (LocalPlayer.IsPlayerGrounded())
+                    if (GameInstances.LocalPlayer.IsPlayerGrounded())
                     {
                         if (IsJumpOverriden)
                         {
@@ -38,20 +39,6 @@
             }
         }
 
-        private VRCPlayerApi _LocalPlayer;
-
-        private VRCPlayerApi LocalPlayer
-        {
-            get
-            {
-                if (_LocalPlayer == null)
-                {
-                    return _LocalPlayer = GameInstances.LocalPlayer;
-                }
-
-                return _LocalPlayer;
-            }
-        }
 
         internal override void OnRoomLeft()
         {
