@@ -21,7 +21,7 @@ namespace AstroClient.Tools.Extensions
 
         private static List<string> Results = new List<string>();
         private static bool _PerformanceTest = false;
-        private static bool _CheckForFPS = true;
+        private static bool _CheckForFPS = false;
         internal static bool PerformanceTest 
         {
             get
