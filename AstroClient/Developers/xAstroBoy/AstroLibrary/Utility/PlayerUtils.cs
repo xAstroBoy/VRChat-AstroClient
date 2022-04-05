@@ -85,7 +85,9 @@ namespace AstroClient.xAstroBoy.Utility
 
         private static int GetPhotonID(this PhotonView instance) => instance.field_Private_Int32_0;
 
-        public static Player GetPlayerIDPhoton(this PlayerManager Instance, int playerID) => Instance.AllPlayers().Where(x => x.GetVRCPlayer() != null).Where(x => x.GetVRCPlayer().GetPhotonView() != null).Where(x => x.GetVRCPlayer().GetPhotonView().GetPhotonID() == playerID).FirstOrDefault(null);
+        //public static Player GetPlayerIDPhoton(this PlayerManager Instance, int playerID) => Instance.AllPlayers()
+        //    .Where(x => x.GetVRCPlayer() != null).Where(x => x.GetVRCPlayer().GetPhotonView() != null)
+        //    .Where(x => x.GetVRCPlayer().GetPhotonView().GetPhotonID() == playerID).FirstOrDefault(null);
 
         public static List<Player> GetAllPlayers(this PlayerManager instance) => instance.AllPlayers();
 

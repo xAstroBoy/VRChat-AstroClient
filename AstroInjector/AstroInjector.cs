@@ -63,41 +63,41 @@
             return;
 #endif
 
-            KeyManager.ReadKey();
+            //KeyManager.ReadKey();
 
-            AstroNetworkLoader.Initialize();
+            //AstroNetworkLoader.Initialize();
 
-            while (!AstroNetworkLoader.IsReady)
-            {
-            }
+            //while (!AstroNetworkLoader.IsReady)
+            //{
+            //}
 
-            if (AstroNetworkLoader.LibraryFiles.Count > 0)
-            {
-                for (int i = 0; i < AstroNetworkLoader.LibraryFiles.Count; i++)
-                {
-                    byte[] bytes = AstroNetworkLoader.LibraryFiles[i];
-                    Assembly.Load(bytes);
-                }
-            }
+            //if (AstroNetworkLoader.LibraryFiles.Count > 0)
+            //{
+            //    for (int i = 0; i < AstroNetworkLoader.LibraryFiles.Count; i++)
+            //    {
+            //        byte[] bytes = AstroNetworkLoader.LibraryFiles[i];
+            //        Assembly.Load(bytes);
+            //    }
+            //}
 
-            if (AstroNetworkLoader.MelonFiles.Count > 0)
-            {
-                for (int i = 0; i < AstroNetworkLoader.MelonFiles.Count; i++)
-                {
-                    byte[] bytes = AstroNetworkLoader.MelonFiles[i];
-                    var dll = Assembly.Load(bytes);
-                    MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroInjector.dll");
-                }
-            }
+            //if (AstroNetworkLoader.MelonFiles.Count > 0)
+            //{
+            //    for (int i = 0; i < AstroNetworkLoader.MelonFiles.Count; i++)
+            //    {
+            //        byte[] bytes = AstroNetworkLoader.MelonFiles[i];
+            //        var dll = Assembly.Load(bytes);
+            //        MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroInjector.dll");
+            //    }
+            //}
 
-            if (AstroNetworkLoader.ModuleFiles.Count > 0)
-            {
-                for (int i = 0; i < AstroNetworkLoader.ModuleFiles.Count; i++)
-                {
-                    byte[] bytes = AstroNetworkLoader.ModuleFiles[i];
-                    Assembly.Load(bytes);
-                }
-            }
+            //if (AstroNetworkLoader.ModuleFiles.Count > 0)
+            //{
+            //    for (int i = 0; i < AstroNetworkLoader.ModuleFiles.Count; i++)
+            //    {
+            //        byte[] bytes = AstroNetworkLoader.ModuleFiles[i];
+            //        Assembly.Load(bytes);
+            //    }
+            //}
         }
 
         internal void LoadEmbeddedLibraries()

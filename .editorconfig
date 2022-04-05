@@ -58,3 +58,6 @@ dotnet_analyzer_diagnostic.severity = none
 
 # CS8032: Non è possibile creare un'istanza dell'analizzatore Microsoft.CodeAnalysis.UseExplicitTupleName.UseExplicitTupleNameDiagnosticAnalyzer da C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk\codestyle\cs\Microsoft.CodeAnalysis.CodeStyle.dll : Non è stato possibile caricare il file o l'assembly 'Microsoft.CodeAnalysis, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' o una delle relative dipendenze. Impossibile trovare il file specificato..
 dotnet_diagnostic.CS8032.severity = none
+
+# CS1705: Assembly 'MelonLoader' with identity 'MelonLoader, Version=0.5.4.0, Culture=neutral, PublicKeyToken=null' uses 'System.Runtime, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' which has a higher version than referenced assembly 'System.Runtime' with identity 'System.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+dotnet_diagnostic.CS1705.severity = none

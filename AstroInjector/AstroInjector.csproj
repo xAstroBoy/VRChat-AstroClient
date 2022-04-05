@@ -11,6 +11,7 @@
     <RootNamespace>AstroInjector</RootNamespace>
     <AssemblyName>AstroInjector</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+		<TargetFramework>net6</TargetFramework>
     <LangVersion>9.0</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -59,15 +60,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MelonLoader">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\net6\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />

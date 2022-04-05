@@ -11,7 +11,6 @@
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.Core;
-    using WebSocketSharp;
     using xAstroBoy;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
@@ -21,7 +20,7 @@
     internal class CheetosTestStuff : AstroEvents
     {
         private static bool DoOnce;
-        private static WebSocket ws;
+        //private static WebSocket ws;
 
         //internal override void VRChat_OnQuickMenuInit()
         //{

@@ -6,7 +6,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using Experiments;
-    using FavCat.Database.Stored;
     using UdonSearcher;
     using UnityEngine;
     using VRC;
