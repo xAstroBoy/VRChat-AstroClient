@@ -38,7 +38,6 @@ namespace AstroClient.Tools.UdonSearcher
         var stopwatch = new Stopwatch();
         stopwatch.Start();
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
-            var reg = new Regex();
             if (udons.Count() != 0)
             {
                 foreach (var udonnode in udons)
@@ -67,7 +66,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                         {
                                                             var modifiedstring = item.ReplaceWholeWord(find, replacement);
                                                             //ModConsole.DebugLog($"Modified a String , Original : {item}, Modified : {modifiedstring}");
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, modifiedstring, () => { success++; }, () => { Failed++; });
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, modifiedstring, () => { success++; }, () => { Failed++; }, false, true);
                                                         }
                                                     }
 
@@ -97,7 +96,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                         }
                                                         if (modified)
                                                         {
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), () => { success++; }, () => { Failed++; });
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), () => { success++; }, () => { Failed++; }, false, true);
                                                         }
                                                     }
 
@@ -114,7 +113,21 @@ namespace AstroClient.Tools.UdonSearcher
                                                             //ModConsole.DebugLog($"Modified String in TextMeshPro , Original : {item}, Modified : {modifiedstring}");
 
                                                             item.text = modifiedstring;
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, () => { success++; }, () => { Failed++; });
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, () => { success++; }, () =>
+                                                            {
+                                                                var item = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshProUGUI>(address);
+                                                                if (item != null)
+                                                                {
+                                                                    if (item.text.Equals(modifiedstring))
+                                                                    {
+                                                                        success++;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        Failed++;
+                                                                    }
+                                                                }
+                                                            }, false, true);
                                                         }
                                                     }
 
@@ -145,12 +158,76 @@ namespace AstroClient.Tools.UdonSearcher
                                                         }
                                                         if (modified)
                                                         {
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), () => { success++; }, () => { Failed++; });
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), () => { success++; }, () => { Failed++; }, false, true);
                                                         }
                                                     }
 
                                                     break;
                                                 }
+
+                                            case UdonTypes_String.TMPro_TextMeshProUGUI:
+                                                {
+                                                    var item = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshProUGUI>(address);
+                                                    if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
+                                                    {
+                                                        if (item.text.isMatch(find))
+                                                        {
+                                                            var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
+                                                            //ModConsole.DebugLog($"Modified String in TextMeshProUGUI , Original : {item}, Modified : {modifiedstring}");
+
+                                                            item.text = modifiedstring;
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, () => { success++; }, () =>
+                                                            {
+                                                                var item = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshProUGUI>(address);
+                                                                if(item != null)
+                                                                {
+                                                                    if(item.text.Equals(modifiedstring))
+                                                                    {
+                                                                        success++;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        Failed++;
+                                                                    }
+                                                                }
+                                                            }, false, true);
+                                                        }
+                                                    }
+
+                                                    break;
+                                                }
+                                            case UdonTypes_String.TMPro_TextMeshProUGUI_Array:
+                                                {
+                                                    var list = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshProUGUI[]>(address).ToList();
+                                                    if (list.Count() != 0)
+                                                    {
+                                                        var patchedlist = new List<TextMeshProUGUI>();
+                                                        bool modified = false;
+                                                        foreach (var item in list)
+                                                        {
+                                                            if (item.text != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
+                                                            {
+                                                                if (item.text.isMatch(find))
+                                                                {
+                                                                    var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
+                                                                    //ModConsole.DebugLog($"Modified String in TextMeshProUGUI Array , Original : {item}, Modified : {modifiedstring}");
+                                                                    item.text = modifiedstring;
+                                                                    patchedlist.Add(item);
+                                                                    modified = true;
+                                                                    continue;
+                                                                }
+                                                            }
+                                                            patchedlist.Add(item);
+                                                        }
+                                                        if (modified)
+                                                        {
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), () => { success++; }, () => { Failed++; }, false, true);
+                                                        }
+                                                    }
+
+                                                    break;
+                                                }
+
                                             // TODO: Figure how to edit it .
                                             case UdonTypes_String.UnityEngine_TextAsset:
                                                 {

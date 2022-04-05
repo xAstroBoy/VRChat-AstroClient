@@ -33,6 +33,8 @@ namespace AstroClient.xAstroBoy.Utility
             WorldCameraQuaternion *= Quaternion.Inverse(worldCameraQuaternion) * quaternion * worldCameraQuaternion;
         }
 
+
+
         public static void TakePicture(int timer)
         {
             UserCameraController userCameraController = GameInstances.UserCameraController;

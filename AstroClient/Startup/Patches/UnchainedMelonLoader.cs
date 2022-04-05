@@ -9,17 +9,22 @@
     using HarmonyLib.Public.Patching;
     using MelonLoader;
 
-    internal class PatchShieldKiller : AstroEvents
+    internal class UnchainedMelonLoader : AstroEvents
     {
 
         private static bool IsfirstScene { get; set; }
-        internal static bool isPatchShieldArmed = true;
+        internal static bool AreProtectionsArmed = true;
 
         private static BindingFlags CurrentFlags { get; } = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance;
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
-            if (isPatchShieldArmed)
+            KillVRCMGProtections();
+        }
+
+        private void KillVRCMGProtections()
+        {
+            if (AreProtectionsArmed)
             {
                 if (CoreHarmonyInstanceObject == null)
                 {
@@ -69,8 +74,8 @@
                 if (MelonLoaderCoreInstance != null)
                 {
                     ModConsole.DebugLog("We Got Access to ML Core HarmonyInstance");
-                    FuckOffPatchShield(MelonLoaderCoreInstance);
-                    isPatchShieldArmed = false;
+                    FuckOffVRCMGShit(MelonLoaderCoreInstance);
+                    AreProtectionsArmed = false;
                     ModConsole.DebugLog("PatchShield should be removed now!");
                 }
                 DumpMelonHarmonyPatches(MelonLoaderCoreInstance);
@@ -79,7 +84,6 @@
 
         }
 
-
         private static Object CoreHarmonyInstanceObject { get; set; }
         private static Type HarmonyLib_PatchFunctionsType { get; set; }
         private static Type PatchManagerType { get; set; }
@@ -87,8 +91,10 @@
 
 
 
-        internal void FuckOffPatchShield(Harmony instance)
+        internal void FuckOffVRCMGShit(Harmony instance)
         {
+            int KnahBonks = 0;
+            int RinLovesYouBonks = 0;
             foreach (MethodBase methodBase in instance.GetPatchedMethods().ToList<MethodBase>())
             {
                 Patches info = PatchProcessor.GetPatchInfo(methodBase);
@@ -99,7 +105,17 @@
                     {
                         if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.PatchShield"))
                         {
-                            ModConsole.DebugLog($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            KnahBonks++;
+
+                            ModConsole.DebugLog($"Bonking Knah For his PatchShield x{KnahBonks}", Color.Gold);
+                            //ModConsole.DebugLog($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
+                        }
+                        if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.Utils.AssemblyVerifier"))
+                        {
+                            RinLovesYouBonks++;
+                            //ModConsole.DebugLog($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            ModConsole.DebugLog($"Bonking RinLovesYou For his AssemblyVerifier x{RinLovesYouBonks}", Color.Gold);
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
 
@@ -108,7 +124,18 @@
                     {
                         if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.PatchShield"))
                         {
-                            ModConsole.DebugLog($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            KnahBonks++;
+
+                            ModConsole.DebugLog($"Bonking Knah For his PatchShield x{KnahBonks}", Color.Gold);
+
+                            //ModConsole.DebugLog($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
+                        }
+                        if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.Utils.AssemblyVerifier"))
+                        {
+                            RinLovesYouBonks++;
+                            //ModConsole.DebugLog($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            ModConsole.DebugLog($"Bonking RinLovesYou For his AssemblyVerifier x{RinLovesYouBonks}", Color.Gold);
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
 

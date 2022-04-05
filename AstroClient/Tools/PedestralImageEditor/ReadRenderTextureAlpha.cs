@@ -16,10 +16,12 @@ namespace AstroClient.Tools.PedestralImageEditor
         //internal
         private Color[] colors = Array.Empty<Color>();
         private System.Diagnostics.Stopwatch stopwatch = new();
+        private event Action<string> OnReadingDone;
 
-        public ReadRenderTextureAlpha(Bitmap input)
+        public ReadRenderTextureAlpha(Bitmap input, Action<string> OnReadingFinished)
         {
             donorInput = input;
+            this.OnReadingDone += OnReadingFinished;
         }
 
         public string RUN()
@@ -27,7 +29,7 @@ namespace AstroClient.Tools.PedestralImageEditor
             stopwatch.Reset();
             stopwatch.Start();
 
-            Log("ReadRenderTexture: Starting");
+            ModConsole.DebugLog("ReadRenderTexture: Starting");
 
             // All code inside should be called only ONCE (initialization)
             //SETUP
@@ -36,20 +38,16 @@ namespace AstroClient.Tools.PedestralImageEditor
             //copy the first texture over so it can be read
             StartReadPicture(donorInput);
 
-            Log("ReadRenderTexture: Writing Information");
+            ModConsole.DebugLog("ReadRenderTexture: Writing Information");
             return outputString;
         }
 
 
-        private static void Log(string text)
-        {
-            Console.WriteLine(text);
-        }
 
         private void StartReadPicture(Bitmap picture)
         {
-            Log("Starting Read");
-            Log($"Input: {picture.Width} x {picture.Height} [{picture.PixelFormat}]");
+            ModConsole.DebugLog("Starting Read");
+            ModConsole.DebugLog($"Input: {picture.Width} x {picture.Height} [{picture.PixelFormat}]");
 
             colors = new Color[picture.Width * picture.Height];
             for (int y = 0; y < picture.Height; y++)
@@ -65,8 +63,8 @@ namespace AstroClient.Tools.PedestralImageEditor
             Color color = colors[0];
             dataLength = color.R << 16 | color.G << 8 | color.B;
 
-            Log("Decoding header");
-            Log($"Data length: {dataLength} bytes");
+            ModConsole.DebugLog("Decoding header");
+            ModConsole.DebugLog($"Data length: {dataLength} bytes");
 
             nextAvatar = "";
             for (int i = 1; i < 6; i++)
@@ -80,7 +78,7 @@ namespace AstroClient.Tools.PedestralImageEditor
 
             nextAvatar = $"avtr_{nextAvatar.Substring(0,8)}-{nextAvatar.Substring(8, 4)}-{nextAvatar.Substring(12, 4)}-{nextAvatar.Substring(16, 4)}-{nextAvatar.Substring(20, 12)}";
 
-            Log($"AVATAR FOUND - {nextAvatar}");
+            ModConsole.DebugLog($"AVATAR FOUND - {nextAvatar}");
 
             index = 5;
             byteIndex = 16;
@@ -95,7 +93,7 @@ namespace AstroClient.Tools.PedestralImageEditor
 
         public void ReadPictureStep()
         {
-            //Log($"Reading step {index}\n");
+            //ModConsole.DebugLog($"Reading step {index}\n");
 
             string tempString = "";
 
@@ -110,7 +108,7 @@ namespace AstroClient.Tools.PedestralImageEditor
 
                 if (byteIndex >= dataLength)
                 {
-                    Log($"Reached data length: {dataLength}; byteIndex: {byteIndex}");
+                    ModConsole.DebugLog($"Reached data length: {dataLength}; byteIndex: {byteIndex}");
                     if ((byteIndex - dataLength) % 4 == 2)
                     {
                         outputString += tempString.Substring(0, tempString.Length - 1);
@@ -140,16 +138,20 @@ namespace AstroClient.Tools.PedestralImageEditor
         {
             if (nextAvatar != "avtr_ffffffff-ffff-ffff-ffff-ffffffffffff")
             {
-                Log($"Loading of current pedestal took: {stopwatch.ElapsedMilliseconds} ms");
+                ModConsole.DebugLog($"Loading of current pedestal took: {stopwatch.ElapsedMilliseconds} ms");
 
                 return;
             }
 
-            Log($"Output string: {outputString}");
+            //ModConsole.DebugLog($"Output string: {outputString}");
             stopwatch.Stop();
-            Log($"Took: {stopwatch.ElapsedMilliseconds} ms");
+            ModConsole.DebugLog($"Took: {stopwatch.ElapsedMilliseconds} ms");
 
-            Console.WriteLine(outputString);
+            //Console.WriteLine(outputString);
+            if(OnReadingDone != null)
+            {
+                OnReadingDone(outputString);
+            }
         }
         private static char ConvertBytesToUTF16(byte byte1, byte byte2) => (char) (byte1 | (byte2 << 8));
     }

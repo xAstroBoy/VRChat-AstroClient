@@ -133,6 +133,7 @@
     <Compile Include="AstroMonos\Components\Tools\PedestralReader.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\RenderCameraHijacker.cs" />
     <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientAttributes\RegisterType.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="Tools\UnityCameraUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\ItemTweakerModule.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldCheatsModule.cs" />
@@ -382,7 +384,7 @@
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SoftCloneHook.cs" />
     <Compile Include="Startup\Hooks\RiskyFunctionHook.cs" />
-    <Compile Include="Startup\Patches\PatchShieldKiller.cs" />
+    <Compile Include="Startup\Patches\UnchainedMelonLoader.cs" />
     <Compile Include="Streamer\WorldAuthorDetector.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />
     <Compile Include="Tools\Extensions\Components_exts\BouncerExtensions.cs" />

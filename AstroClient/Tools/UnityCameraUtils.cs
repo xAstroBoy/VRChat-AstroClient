@@ -1,12 +1,12 @@
-/* Note: This is also an issue with the official menu    */
-/* Note: While loading a 400KiB string isn't really a    */
-/*       problem, trying to render that to a texture is. */
+
+using System.Drawing;
+using System.IO;
 
 namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu {
     using Mono.WebBrowser;
     using UnityEngine;
 
-    internal static class CameraUtils {
+    internal static class UnityCameraUtils {
         internal static Texture2D ToTexture2D(this UnityEngine.Camera camera, string texturename)
         {
             var currentRT = RenderTexture.active;
@@ -49,6 +49,32 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu {
             }
             RenderTexture.active = currentRT;
             return result;
+        }
+
+        internal static Texture2D toTexture2D(this RenderTexture rTex)
+        {
+            Texture2D tex = new Texture2D(rTex.width, rTex.height, TextureFormat.RGBA32, false);
+            var old_rt = RenderTexture.active;
+            RenderTexture.active = rTex;
+
+            tex.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, 0);
+            tex.Apply();
+
+            RenderTexture.active = old_rt;
+            return tex;
+        }
+
+        internal static Bitmap ToBitMap(this UnityEngine.Camera camera)
+        {
+            var texture = camera.activeTexture.toTexture2D();
+            byte[] buffer = ImageConversion.EncodeToPNG(texture);
+            Object.Destroy(texture);
+            Bitmap bitmap;
+            using (MemoryStream stream = new MemoryStream(buffer))
+            {
+                bitmap = new Bitmap(stream);
+            }
+            return bitmap;
         }
     }
 }

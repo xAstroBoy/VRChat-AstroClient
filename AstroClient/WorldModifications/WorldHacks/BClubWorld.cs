@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     #region Imports
 
@@ -606,6 +608,11 @@
                 isCurrentWorld = true;
                 UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
+                var pedestralreader = UdonSearch.FindUdonEvent("RenderCamera", "_onPostRender");
+                if(pedestralreader != null)
+                {
+                    pedestralreader.gameObject.GetOrAddComponent<RenderCameraHijacker>();
+                }
 
                 PenthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");
                 if (PenthouseRoot != null)
@@ -730,7 +737,6 @@
                 }
 
                 MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
-
                 ModConsole.Log("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
                 _ = MelonCoroutines.Start(BypassElevator());
