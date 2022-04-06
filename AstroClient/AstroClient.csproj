@@ -276,7 +276,6 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Extensions\VRCUiManagerExtension.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Extensions\VRInput.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\GameObjectFinder.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\Assets.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\AssetsManager.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\ConversionManager.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\CustomJsonTypes.cs" />

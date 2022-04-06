@@ -58,7 +58,36 @@ public static class Log
         Write($"{ex.GetType()}", LogLevel.ERROR);
         Write($"CallerName: {name}", LogLevel.ERROR);
         Write($"CallerLine: {line}", LogLevel.ERROR);
-        Write($"{ex.Message}", LogLevel.ERROR);
+        if ((ex as Exception) != null)
+        {
+            var message = (ex as Exception).Message;
+            var stackTrace = (ex as Exception).StackTrace;
+            var targetSite = (ex as Exception).TargetSite;
+            var source = (ex as Exception).Source;
+            if (message != null)
+            {
+                Write($"Exception Message: {message}", LogLevel.ERROR);
+            }
+
+            if (stackTrace != null)
+            {
+                Write($"Exception StackTrace: {stackTrace}", LogLevel.ERROR);
+            }
+
+            if (targetSite != null)
+            {
+                Write($"Exception TargetSite: {targetSite}", LogLevel.ERROR);
+            }
+
+            if (source != null)
+            {
+                Write($"Exception Source: {source}", LogLevel.ERROR);
+            }
+        }
+        else
+        {
+            Write($"Exception Was Null!", LogLevel.ERROR);
+        }
     }
 
     /// <summary>
