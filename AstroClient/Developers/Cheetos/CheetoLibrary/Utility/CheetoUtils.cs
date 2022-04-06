@@ -18,19 +18,13 @@
 
     public static class CheetoUtils
     {
-        //public static MenuStateController GetMenuStateController()
-        //{
-        //    return GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)").GetComponent<MenuStateController>();
-        //}
-
         public static void TryRun(Action[] actions)
         {
             for (int i = 0; i < actions.Length; i++)
             {
-                Action action = actions[i];
                 try
                 {
-                    action();
+                    actions[i].Invoke();
                 }
                 catch (Exception e)
                 {
@@ -131,16 +125,5 @@
                 0
         );
         }
-
-        //internal static void PopupCall(string title, string initialText, InputField.InputType inputType, bool isNumeric, string confirmButtonText, Action<string, List<KeyCode>, Text> onComplete, Action onCancel, string placeholderText, bool closeAfterInput, Action<VRCUiPopup> onPopupShown)
-        //{
-        //    UiManager.ShowUiInputPopup(title, initialText, inputType, isNumeric, confirmButtonText, onComplete, onCancel, placeholderText, closeAfterInput, onPopupShown, false, 0);
-        //}
-
-        //internal static void PopupCall(string title, string initialText, InputField.InputType inputType, bool isNumeric, string confirmButtonText, Action<string, List<KeyCode>, Text> onComplete, Action onCancel = null, string placeholderText = "Enter text...", bool closeAfterInput = true, Action<VRCUiPopup> onPopupShown = null, bool showLimitLabel = false, int textLengthLimit = 0)
-        //{
-        //    UiManager.ShowUiInputPopup(title, initialText, inputType, isNumeric, confirmButtonText, onComplete, onCancel, placeholderText, closeAfterInput, onPopupShown, showLimitLabel, textLengthLimit);
-        //}
-
     }
 }

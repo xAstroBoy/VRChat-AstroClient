@@ -35,17 +35,19 @@
 
         internal static void KillAttackers()
         {
-            foreach (var item in Resources.FindObjectsOfTypeAll<PlayerAttacker>())
+            UnhollowerBaseLib.Il2CppArrayBase<PlayerAttacker> list = Resources.FindObjectsOfTypeAll<PlayerAttacker>();
+            for (int i = 0; i < list.Count; i++)
             {
-                item.DestroyMeLocal();
+                list[i].DestroyMeLocal();
             }
         }
 
         internal static void KillWatchers()
         {
-            foreach (var item in Resources.FindObjectsOfTypeAll<PlayerWatcher>())
+            UnhollowerBaseLib.Il2CppArrayBase<PlayerWatcher> list = Resources.FindObjectsOfTypeAll<PlayerWatcher>();
+            for (int i = 0; i < list.Count; i++)
             {
-                item.DestroyMeLocal();
+                list[i].DestroyMeLocal();
             }
         }
     }

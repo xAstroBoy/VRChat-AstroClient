@@ -24,9 +24,9 @@ namespace AstroClient.AstroMonos
         {
             if (!HasPickupControllerBeenAdded)
             {
-                foreach (var item in WorldUtils.Pickups)
+                for (int i = 0; i < WorldUtils.Pickups.Count; i++)
                 {
-                    item.GetOrAddComponent<PickupController>();
+                    WorldUtils.Pickups[i].GetOrAddComponent<PickupController>();
                 }
 
                 HasPickupControllerBeenAdded = true;
@@ -45,38 +45,20 @@ namespace AstroClient.AstroMonos
             // For now let's leave it temporarily 
 
             var id = player.GetAPIUser().GetUserID();
-            if (id != null)
+            if (id != null && blockeduserids.ContainsKey(id) && !blockeduserids[id].Blocked)
             {
-                if (blockeduserids.ContainsKey(id))
-                {
-                    if (blockeduserids.ContainsKey(id))
-                    {
-                        if (!blockeduserids[id].Blocked)
-                        {
-                            Log.Debug($"Added Block for Player {player.GetDisplayName()}  from using Pickups.");
-                            blockeduserids[id].Blocked = true;
-                        }
-                    }
-                }
+                Log.Debug($"Added Block for Player {player.GetDisplayName()}  from using Pickups.");
+                blockeduserids[id].Blocked = true;
             }
         }
 
         internal static void RemovePlayer(Player player)
         {
             var id = player.GetAPIUser().GetUserID();
-            if (id != null)
+            if (id != null && blockeduserids.ContainsKey(id) && blockeduserids[id].Blocked)
             {
-                if (blockeduserids.ContainsKey(id))
-                {
-                    if (blockeduserids.ContainsKey(id))
-                    {
-                        if (blockeduserids[id].Blocked)
-                        {
-                            Log.Debug($"Removed Block for Player {player.GetDisplayName()}  from using Pickups.");
-                            blockeduserids[id].Blocked = false;
-                        }
-                    }
-                }
+                Log.Debug($"Removed Block for Player {player.GetDisplayName()}  from using Pickups.");
+                blockeduserids[id].Blocked = false;
             }
         }
 
@@ -88,12 +70,9 @@ namespace AstroClient.AstroMonos
 
         internal static bool IsPickupBlockedUser(string UserID)
         {
-            if(blockeduserids != null)
+            if (blockeduserids != null && blockeduserids.ContainsKey(UserID))
             {
-                if(blockeduserids.ContainsKey(UserID))
-                {
-                    return blockeduserids[UserID].Blocked;
-                }
+                return blockeduserids[UserID].Blocked;
             }
             return false;
         }
@@ -124,12 +103,9 @@ namespace AstroClient.AstroMonos
         internal override void OnPlayerLeft(Player player)
         {
             var id = player.GetAPIUser().GetUserID();
-            if (id != null)
+            if (id != null && blockeduserids.ContainsKey(id))
             {
-                if (blockeduserids.ContainsKey(id))
-                {
-                    blockeduserids[id].player = null;
-                }
+                blockeduserids[id].player = null;
             }
         }
 

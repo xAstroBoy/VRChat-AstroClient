@@ -85,14 +85,11 @@
 
         internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
-            if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+            if (PlayerSpooferUtils.SpoofAsWorldAuthor && world != null)
             {
-                if (world != null)
-                {
-                    IsSpooferActive = true;
-                    SpoofedName = world.authorName;
+                IsSpooferActive = true;
+                SpoofedName = world.authorName;
 
-                }
             }
         }
 
@@ -149,13 +146,9 @@
                 isFistJoin = true;
                 return;
             }
-            else
-
+            else if (isFistJoin && !isSecondJoin)
             {
-                if (isFistJoin && !isSecondJoin)
-                {
-                    isSecondJoin = true;
-                }
+                isSecondJoin = true;
             }
         }
 

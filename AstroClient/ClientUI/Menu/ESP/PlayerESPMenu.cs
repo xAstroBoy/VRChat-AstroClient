@@ -63,12 +63,9 @@
         {
             MiscUtils.DelayFunction(1, () =>
             {
-                if (Toggle_Player_ESP)
+                if (Toggle_Player_ESP && player != null && !player.GetAPIUser().IsSelf)
                 {
-                    if (player != null && !player.GetAPIUser().IsSelf)
-                    {
-                        player.gameObject.GetOrAddComponent<PlayerESP>();
-                    }
+                    player.gameObject.GetOrAddComponent<PlayerESP>();
                 }
             });
 
@@ -76,22 +73,21 @@
 
         private static void AddESPToAllPlayers()
         {
-            foreach (var item in WorldUtils.Players)
+            for (int i = 0; i < WorldUtils.Players.Count; i++)
             {
-                if (item != GameInstances.LocalPlayer.GetPlayer())
+                Player item = WorldUtils.Players[i];
+                if (item != GameInstances.LocalPlayer.GetPlayer() && !item.gameObject.GetComponent<PlayerESP>())
                 {
-                    if (!item.gameObject.GetComponent<PlayerESP>())
-                    {
-                        _ = item.gameObject.AddComponent<PlayerESP>();
-                    }
+                    _ = item.gameObject.AddComponent<PlayerESP>();
                 }
             }
         }
 
         private static void RemoveAllActivePlayerESPs()
         {
-            foreach (var player in WorldUtils.Players)
+            for (int i = 0; i < WorldUtils.Players.Count; i++)
             {
+                Player player = WorldUtils.Players[i];
                 var esp = player.gameObject.GetComponent<PlayerESP>();
                 if (esp != null)
                 {

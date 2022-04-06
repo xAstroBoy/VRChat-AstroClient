@@ -24,7 +24,6 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
         AntiGarbageCollection.Add(this);
     }
 
-
     internal void Initiate_UdonVariablePatron()
     {
         Private_isPatron = new AstroUdonVariable<bool>(PatronControl, isPatron_address);
