@@ -30,7 +30,8 @@ public static class Log
     private static readonly string _logPath = _dataPath + @"\latest.log";
     private static readonly string _oldLogPath = $"{_folderPath}{$@"\old_{(DateTime.Now - DateTime.MinValue).TotalMilliseconds}.log"}";
 
-    private static readonly List<string> _buffer = new();
+    private static readonly List<string> _fileBuffer = new();
+    private static readonly List<string> _consoleBuffer = new();
 
     /// <summary>
     /// Opens the latest log file in Notepad
@@ -202,13 +203,10 @@ public static class Log
         if (!_initialized)
         {
             Initialize();
-        }
-
-        ConsoleUtils.SetColor(ConsoleUtils.ColorType.FOREGROUND, color);
-        _buffer.Add(message);
-        Console.Write(message);
+        };
+        _consoleBuffer.Add($"{ConsoleUtils.ForegroundColor(color)}{message}");
+        _fileBuffer.Add(message);
         _isDirty = true;
-        ConsoleUtils.SetColor(ConsoleUtils.ColorType.FOREGROUND, Color.White);
     }
 
     private static void Initialize()
@@ -224,26 +222,42 @@ public static class Log
             while (_isRunning)
             {
                 Update();
-                Thread.Sleep(100);
+                Thread.Sleep(1);
             }
         });
     }
 
+    private static DateTime _lastCheck = DateTime.Now;
+    private static DateTime _nextCheck = DateTime.Now;
+
     private static void Update()
     {
-        if (_isDirty)
+        if (DateTime.Now > _nextCheck)
         {
-            lock (_buffer)
+            var sb = new StringBuilder();
+            for (int i = 0; i < _consoleBuffer.Count; i++)
             {
-                var sb = new StringBuilder();
-                for (int i = 0; i < _buffer.Count; i++)
+                var message = _consoleBuffer[i];
+                sb.Append(message);
+            }
+            _consoleBuffer.Clear();
+            Console.Write(sb.ToString());
+            _nextCheck = DateTime.Now.AddSeconds(1);
+            _lastCheck = DateTime.Now;
+            if (_isDirty)
+            {
+                lock (_fileBuffer)
                 {
-                    string line = _buffer[i];
-                    sb.Append(line);
+                    var sb2 = new StringBuilder();
+                    for (int i = 0; i < _fileBuffer.Count; i++)
+                    {
+                        string line = _fileBuffer[i];
+                        sb2.Append(line);
+                    }
+                    File.AppendAllText(_logPath, sb2.ToString());
+                    _fileBuffer.Clear();
+                    _isDirty = false;
                 }
-                File.AppendAllText(_logPath, sb.ToString());
-                _buffer.Clear();
-                _isDirty = false;
             }
         }
     }
