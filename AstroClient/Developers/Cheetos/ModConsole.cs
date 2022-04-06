@@ -95,13 +95,6 @@
             DEBUG_WARNING,
             DEBUG_ERROR,
             ANTI_CRASH,
-            CHEETOS_LOG
-        }
-
-        public static void LogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
-        {
-            PrintCallerTag(callerName, callerLine);
-            Exception(e as Exception, LogTypes.LOG);
         }
 
         public static void WarningExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
@@ -132,16 +125,6 @@
         {
             PrintCallerTag(callerName, callerLine);
             Exception(e as Exception, LogTypes.DEBUG_ERROR);
-        }
-
-        public static void Log(string msg, Color? textcolor = null)
-        {
-            if (textcolor == null)
-            {
-                textcolor = Color.PapayaWhip;
-            }
-            PrintTags(LogTypes.LOG);
-            PrintLine(msg, textcolor.Value);
         }
 
         public static void Warning(string msg, Color? textcolor = null)

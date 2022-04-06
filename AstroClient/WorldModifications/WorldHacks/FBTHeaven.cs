@@ -63,7 +63,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
                 else
                 {
-                    ModConsole.Error("World Blinders and Dividers not found...");
+                    Log.Error("World Blinders and Dividers not found...");
                 }
                 var OcclusionWalls = GameObjectFinder.Find("Occlusion Walls");
                 if (OcclusionWalls != null)
@@ -72,7 +72,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
                 else
                 {
-                    ModConsole.Error("World Occlusion Walls not found...");
+                    Log.Error("World Occlusion Walls not found...");
                 }
                 var logger = GameObjectFinder.FindRootSceneObject("Logger");
                 if (logger != null)

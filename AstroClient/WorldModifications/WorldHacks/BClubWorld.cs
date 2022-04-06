@@ -1158,11 +1158,11 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (Penthouse == null)
                 {
-                    ModConsole.Error("Failed to Find Penthouse!");
+                    Log.Error("Failed to Find Penthouse!");
                 }
                 if (Bedrooms == null)
                 {
-                    ModConsole.Error("Failed to Find Bedrooms!");
+                    Log.Error("Failed to Find Bedrooms!");
                 }
             }
             return null;
