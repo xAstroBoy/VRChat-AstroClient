@@ -145,6 +145,7 @@
     <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="ClientUI\Menu\Menus\Quickmenu\CheetosMenu.cs" />
     <Compile Include="Developers\Cheetos\Color.cs" />
     <Compile Include="Developers\Cheetos\ConsoleUtils.cs" />
     <Compile Include="Developers\Cheetos\Log.cs" />
@@ -536,7 +537,6 @@
     <Compile Include="ClientUI\Menu\Menus\Quickmenu\DevMenu.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AstroInput.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AvatarHider.cs" />
-    <Compile Include="ClientUI\Menu\Menus\Quickmenu\AdminMenu.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\ForceClone.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\VRCPlusHider.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\CheetosTestStuff.cs" />
@@ -1551,6 +1551,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientResources\IconsArchive\LiveCaptions.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\cheetos.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
