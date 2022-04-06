@@ -110,6 +110,17 @@ public static class Log
     {
         Write(message, Color.White, level);
     }
+    
+    /// <summary>
+    /// Writes a line to the logger, with a specific <see cref="System.Drawing.Color"/>.
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="color"></param>
+    /// <param name="level"></param>
+    public static void Write(string message, System.Drawing.Color color, LogLevel level = LogLevel.INFO)
+    {
+        Write(message, new Color(color.R, color.G, color.B), level);
+    }
 
     /// <summary>
     /// Writes a line to the logger, with a specific <see cref="Color"/>.
@@ -126,8 +137,8 @@ public static class Log
         }
         if (Level >= level)
         {
-            InternalWrite($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}] ", Color.Crayola.Present.BlueBell);
-            InternalWrite($"[AstroClient] ", Cheetah.Color.HTML.Blue);
+            InternalWrite($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}] ", Color.Crayola.Present.BananaMania);
+            InternalWrite($"[AstroClient] ", Color.Crayola.Present.Bluetiful);
             InternalWrite($"[{Enum.GetName(typeof(LogLevel), level)}] ", lcolor);
             InternalWriteLine(message, color);
         }
