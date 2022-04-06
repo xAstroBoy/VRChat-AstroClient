@@ -110,8 +110,10 @@
 
         public static void OnConfigChanged()
         {
-            foreach (EntryBase entry in entries)
-                entry.OnConfigChanged();
+            for (int i = 0; i < entries.Count; i++)
+            {
+                entries[i].OnConfigChanged();
+            }
         }
         public static void OnAvatarInstantiated(VRCAvatarManager player, ApiAvatar avatar, GameObject gameObject)
         {
@@ -144,16 +146,16 @@
         }
         public static void OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercent, long fileSize)
         {
-            foreach (EntryBase entry in playerEntries)
-                entry.OnAvatarDownloadProgressed(loadingBar, downloadPercent, fileSize);
+            for (int i = 0; i < playerEntries.Count; i++)
+            {
+                playerEntries[i].OnAvatarDownloadProgressed(loadingBar, downloadPercent, fileSize);
+            }
             localPlayerEntry?.OnAvatarDownloadProgressed(loadingBar, downloadPercent, fileSize);
         }
 
-
-
-    internal override void OnPlayerJoined(Player player)
-    {
-        if (player.name.Contains("Local") && player.prop_APIUser_0 == null)
+        internal override void OnPlayerJoined(Player player)
+        {
+            if (player.name.Contains("Local") && player.prop_APIUser_0 == null)
                 player.prop_APIUser_0 = APIUser.CurrentUser;
 
             if (idToEntryTable.ContainsKey(player.prop_APIUser_0.id))
@@ -182,6 +184,7 @@
             }
             //ProcessAvatarInstantiateBacklog();
         }
+
         public static void ProcessAvatarInstantiateBacklog()
         {
             if (AvInstBacklog.Count != 0)
@@ -189,9 +192,9 @@
                 Log.Debug("Addressing Backlog. Size: " + AvInstBacklog.Count.ToString());
                 var keys = new string[AvInstBacklog.Count];
                 AvInstBacklog.Keys.CopyTo(keys, 0);
-                foreach (var key in keys)
+                for (int i = 0; i < keys.Length; i++)
                 {
-                    
+                    string key = keys[i];
                     if (idToEntryTable.TryGetValue(key, out PlayerLeftPairEntry e))
                     {
                         try
@@ -219,10 +222,12 @@
                 //AvInstBacklog.Clear();
             }
         }
+
         public static void CleanUpHungAOI()
         {
-            foreach (PlayerEntry entry in playerEntries)
+            for (int i = 0; i < playerEntries.Count; i++)
             {
+                PlayerEntry entry = playerEntries[i];
                 if ((entry.perf == AvatarPerformanceRating.None) && ((entry.perfString == "100% ") || (entry.perfString == "?¿?¿?")))
                 {
                     AvInstBacklog.Add(entry.userId, new deferredAvInstantiate(null, null, null));
@@ -287,6 +292,7 @@
                 entry.textComponent.fontSize = PlayerListConfig.fontSize.Value;
             entries.Add(entry);
         }
+
         public static void AddPlayerLeftPairEntry(PlayerLeftPairEntry entry)
         {
             playerLeftPairsEntries.Add(entry);
@@ -302,31 +308,47 @@
 
             RefreshLeftPlayerEntries(0, 0, true);
         }
+
         public static void AddGeneralInfoEntry(EntryBase entry)
         {
             AddEntry(entry);
             generalInfoEntries.Add(entry);
         }
+
         public static void RefreshLeftPlayerEntries(int oldCount, int newCount, bool bypassCount = false)
         {
             // If new digit reached (like 9 - 10)
             if (oldCount.ToString().Length != newCount.ToString().Length || bypassCount)
-                foreach (PlayerLeftPairEntry playerLeftPairEntry in playerLeftPairsEntries)
+            {
+                for (int i = 0; i < playerLeftPairsEntries.Count; i++)
+                {
+                    PlayerLeftPairEntry playerLeftPairEntry = playerLeftPairsEntries[i];
                     playerLeftPairEntry.leftSidePlayerEntry.CalculateLeftPart();
+                }
+            }
         }
+
         public static void RefreshPlayerEntries(bool bypassActive = false)
         {
             if (RoomManager.field_Internal_Static_ApiWorld_0 == null || Player.prop_Player_0 == null || Player.prop_Player_0.gameObject == null || Player.prop_Player_0.prop_VRCPlayerApi_0 == null || (!MenuManager.playerList.active && !bypassActive)) return;
 
-            foreach (PlayerEntry entry in playerEntries)
+            for (int i = 0; i < playerEntries.Count; i++)
+            {
+                PlayerEntry entry = playerEntries[i];
                 PlayerEntry.UpdateEntry(entry.player.prop_PlayerNet_0, entry, bypassActive);
+            }
+
             localPlayerEntry.Refresh();
         }
+
         public static void RefreshGeneralInfoEntries()
         {
-            foreach (EntryBase entry in generalInfoEntries)
-                entry.Refresh();
+            for (int i = 0; i < generalInfoEntries.Count; i++)
+            {
+                generalInfoEntries[i].Refresh();
+            }
         }
+
         public static void RefreshAllEntries()
         {            
             // Dont refresh if the local player gameobject has been deleted or if the playerlist is hidden
@@ -339,9 +361,12 @@
         public static void SetFontSize(int fontSize)
         {
             MenuManager.fontSizeLabel.TextComponent.text = $"{fontSize}";
-            foreach (EntryBase entry in entries)
+            for (int i = 0; i < entries.Count; i++)
+            {
+                EntryBase entry = entries[i];
                 if (entry.textComponent != null)
                     entry.textComponent.fontSize = fontSize;
+            }
         }
     }
 }

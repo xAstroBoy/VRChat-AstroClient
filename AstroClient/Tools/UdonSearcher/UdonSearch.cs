@@ -183,26 +183,16 @@
         {
             var gameobjects = UdonParser.WorldBehaviours;
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
-            if (behaviour != null)
+            if (behaviour != null && behaviour._eventTable.count != 0)
             {
-                if (behaviour._eventTable.count != 0)
+                Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
                 {
-                    if (Debug)
+                    var actionkeys = behaviour._eventTable.entries[i];
+                    if (actionkeys.key.Equals(subaction))
                     {
-                        Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
-                    }
-
-                    foreach (var actionkeys in behaviour._eventTable)
-                    {
-                        if (actionkeys.key.Equals(subaction))
-                        {
-                            if (Debug)
-                            {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
-                            }
-
-                            return new UdonBehaviour_Cached(behaviour, actionkeys.key);
-                        }
+                        Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                        return new UdonBehaviour_Cached(behaviour, actionkeys.key);
                     }
                 }
             }
@@ -220,23 +210,16 @@
         {
             var gameobjects = parent.GetComponentsInChildren<UdonBehaviour>(true);
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
-            if (behaviour != null)
+            if (behaviour != null && behaviour._eventTable.count != 0)
             {
-                if (behaviour._eventTable.count != 0)
+                Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
                 {
-                    if (Debug)
+                    var actionkeys = behaviour._eventTable.entries[i];
+                    if (actionkeys.key == subaction)
                     {
-                        Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
-                    }
-
-                    for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
-                    {
-                        var actionkeys = behaviour._eventTable.entries[i];
-                        if (actionkeys.key == subaction)
-                        {
-                            Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
-                            return new UdonBehaviour_Cached(behaviour, actionkeys.key);
-                        }
+                        Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                        return new UdonBehaviour_Cached(behaviour, actionkeys.key);
                     }
                 }
             }
