@@ -185,7 +185,7 @@ namespace AstroClient.xAstroBoy.Utility
         {
             if (!fullID.ToLower().StartsWith("wrld_") || !fullID.ToLower().Contains('#'))
             {
-                ModConsole.Error("INVALID JOIN ID!");
+                Log.Error("INVALID JOIN ID!");
                 GameInstances.VRCUiPopupManager.Alert("INVALID JOIN ID!", "The world ID you entered was invalid", "Ok", () => { });
                 return;
             }
@@ -199,7 +199,7 @@ namespace AstroClient.xAstroBoy.Utility
         {
             if (!worldID.ToLower().StartsWith("wrld_"))
             {
-                ModConsole.Error("INVALID WORLD ID!");
+                Log.Error("INVALID WORLD ID!");
                 return;
             }
             else
@@ -237,8 +237,8 @@ namespace AstroClient.xAstroBoy.Utility
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error("Error parsing World Prefabs");
-                    ModConsole.ErrorExc(e);
+                    Log.Error("Error parsing World Prefabs");
+                    Log.Exception(e);
                     return new List<GameObject>();
                 }
                 return new List<GameObject>();

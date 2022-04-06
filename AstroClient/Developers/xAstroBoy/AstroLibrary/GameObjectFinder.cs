@@ -19,7 +19,7 @@
             }
             else
             {
-                Log.DebugWarn($"[WARNING (Find) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
+                Log.Warn($"[WARNING (Find) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
                 return null;
             }
         }
@@ -68,8 +68,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing Components from Root Objects");
-                ModConsole.Exception(e);
+                Log.Error("Error parsing Components from Root Objects");
+                Log.Exception(e);
                 return null;
             }
             return null;
@@ -87,7 +87,7 @@
                     return obj;
                 }
             }
-            Log.DebugWarn($"[WARNING (FindRootSceneObject) ]  Root Gameobject name [ {name} ]  is Invalid, No Object Found!");
+            Log.Warn($"[WARNING (FindRootSceneObject) ]  Root Gameobject name [ {name} ]  is Invalid, No Object Found!");
             return null;
         }
 
@@ -104,7 +104,7 @@
 
             if (obj == null)
             {
-                Log.DebugWarn($"[WARNING (FindObject) ]  Transform {transform.name} Doesnt have a object in path [ {path} ] !");
+                Log.Warn($"[WARNING (FindObject) ]  Transform {transform.name} Doesnt have a object in path [ {path} ] !");
             }
 
             return obj;
@@ -127,7 +127,7 @@
             }
             else
             {
-                Log.DebugWarn($"[WARNING (ListFind) ] Gameobject on path [ {path} ]  is Invalid, No Object Found!");
+                Log.Warn($"[WARNING (ListFind) ] Gameobject on path [ {path} ]  is Invalid, No Object Found!");
                 return list;
             }
         }
@@ -143,7 +143,7 @@
 
             if (obj == null)
             {
-                Log.DebugWarn($"[WARNING (InactiveFind) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
+                Log.Warn($"[WARNING (InactiveFind) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
             }
             return obj;
         }

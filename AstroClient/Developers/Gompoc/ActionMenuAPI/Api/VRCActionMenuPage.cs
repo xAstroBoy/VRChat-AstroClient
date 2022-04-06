@@ -180,7 +180,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
                     else if (insertion == Insertion.Post) AstroActionMenuPatches.menuOpacityPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.MenuSize:
-                    ModConsole.Warning(
+                    Log.Warn(
                         "Adding to the MenuSize page hasn't been implemented yet. Please use a different page");
                     return;
                     if (insertion == Insertion.Pre) AstroActionMenuPatches.menuSizePagePre.Add(customPedal);
@@ -195,7 +195,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
                     else if (insertion == Insertion.Post) AstroActionMenuPatches.nameplatesOpacityPagePost.Add(customPedal);
                     return;
                 case ActionMenuPage.NameplatesSize:
-                    ModConsole.Warning(
+                    Log.Warn(
                         "Adding to the Nameplates size page isn't supported currently. Please use a different page");
                     return;
                     if (insertion == Insertion.Pre) AstroActionMenuPatches.nameplatesSizePagePre.Add(customPedal);

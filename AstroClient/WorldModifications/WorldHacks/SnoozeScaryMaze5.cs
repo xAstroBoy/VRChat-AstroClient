@@ -54,7 +54,7 @@
                 //}
                 //else
                 //{
-                //    ModConsole.Warning("Failed to find Snooze Tools!");
+                //    Log.Warn("Failed to find Snooze Tools!");
                 //}
             }
         }

@@ -203,18 +203,18 @@
                             }
                             else
                             {
-                                ModConsole.Error($"Unable to Generate Material For {Path.GetFileName(dir)}");
+                                Log.Error($"Unable to Generate Material For {Path.GetFileName(dir)}");
                             }
 
                             yield return new WaitForSeconds(0.001f);
                         }
                         else
                         {
-                            ModConsole.Warning("Skipping Registered Yoinked Skybox :" + Path.GetFileName(dir));
+                            Log.Warn("Skipping Registered Yoinked Skybox :" + Path.GetFileName(dir));
                         }
                     }
                 else
-                    ModConsole.Warning("No Skyboxes Found here : " + YoinkedSkyboxesPath);
+                    Log.Warn("No Skyboxes Found here : " + YoinkedSkyboxesPath);
             }
             else
             {
@@ -315,14 +315,14 @@
                         }
                         else
                         {
-                            ModConsole.Warning("Skipping Registered Skybox :" + Path.GetFileName(file));
+                            Log.Warn("Skipping Registered Skybox :" + Path.GetFileName(file));
                         }
                     }
             }
             else
             {
                 Directory.CreateDirectory(BundlesPath);
-                ModConsole.Warning("To Add custom Skyboxes , import the skyboxes assetbundles here : " + BundlesPath);
+                Log.Warn("To Add custom Skyboxes , import the skyboxes assetbundles here : " + BundlesPath);
             }
 
             yield return null;
@@ -377,7 +377,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
                 return false;
             }
 
@@ -435,13 +435,13 @@
         {
             if (!name.IsNotNullOrEmptyOrWhiteSpace())
             {
-                ModConsole.DebugError("Set a valid Skybox Name , Got " + name);
+                Log.Error("Set a valid Skybox Name , Got " + name);
                 return false;
             }
 
             if (LoadedSkyboxesBundles.IsEmpty())
             {
-                ModConsole.Error("There are no skybox Registered, unable to set a custom skybox.");
+                Log.Error("There are no skybox Registered, unable to set a custom skybox.");
                 return false;
             }
 

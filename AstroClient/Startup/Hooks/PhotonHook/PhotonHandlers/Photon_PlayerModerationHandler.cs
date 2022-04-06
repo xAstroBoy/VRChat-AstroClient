@@ -35,7 +35,7 @@ internal class Photon_PlayerModerationHandler
                     case ModerationCode.VoteKick: // VoteKick
 
                         PopupUtils.QueHudMessage("<color=#FFA5F>A Votekick has Been started (Check console!)</color>");
-                        Log.DebugWarn("VOTEKICK DETECTED : ");
+                        Log.Warn("VOTEKICK DETECTED : ");
                         break;
 
                     case ModerationCode.Block_Or_Mute:
@@ -155,8 +155,8 @@ internal class Photon_PlayerModerationHandler
         }
         catch (Exception e)
         {
-            ModConsole.DebugError("Exception in OnEvent Moderation Handler");
-            ModConsole.ErrorExc(e);
+            Log.Error("Exception in OnEvent Moderation Handler");
+            Log.Exception(e);
         }
 
         return HookAction.Nothing;

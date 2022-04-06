@@ -46,7 +46,7 @@
         {
             if (UdonHeapUnboxerUtils.UnsupportedTypes.Count() != 0)
             {
-                ModConsole.Warning($"[Udon Unboxer] : Found {UdonHeapUnboxerUtils.UnsupportedTypes.Count} Unsupported Types. \n Please send the Generated File Unsupported_UdonTypes.txt to the developer for further Udon Unpacking support!");
+                Log.Warn($"[Udon Unboxer] : Found {UdonHeapUnboxerUtils.UnsupportedTypes.Count} Unsupported Types. \n Please send the Generated File Unsupported_UdonTypes.txt to the developer for further Udon Unpacking support!");
                 StringBuilder builder = new StringBuilder();
 
                 foreach (var value in UdonHeapUnboxerUtils.UnsupportedTypes)

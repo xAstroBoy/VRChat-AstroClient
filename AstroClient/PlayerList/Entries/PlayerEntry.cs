@@ -290,8 +290,8 @@ namespace AstroClient.PlayerList.Entries
             }
             catch (Exception ex)
             {
-                ModConsole.Error($"Errored while updating {entry.apiUser.displayName}'s entry:");
-            ModConsole.ErrorExc(ex);
+                Log.Error($"Errored while updating {entry.apiUser.displayName}'s entry:");
+            Log.Exception(ex);
 			}
 
             entry.textComponent.text = entry.TrimExtra(tempString.ToString());
@@ -437,7 +437,7 @@ namespace AstroClient.PlayerList.Entries
             }
             catch (Exception ex)
             {
-                ModConsole.ErrorExc(ex);
+                Log.Exception(ex);
             }
         }
 

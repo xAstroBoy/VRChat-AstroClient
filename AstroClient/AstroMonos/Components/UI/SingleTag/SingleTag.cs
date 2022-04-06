@@ -40,7 +40,7 @@
             }
             else
             {
-                //ModConsole.Error($"Failed to Generate a SingleTag for Player {Player.DisplayName()}");
+                //Log.Error($"Failed to Generate a SingleTag for Player {Player.DisplayName()}");
                 Destroy(this);
             }
 
@@ -67,7 +67,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
 
 
@@ -277,7 +277,7 @@
                             }
                             catch (Exception e)
                             {
-                                ModConsole.ErrorExc(e);
+                                Log.Exception(e);
                             }
                         }
                     }
@@ -285,7 +285,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
         }
 
@@ -395,7 +395,7 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.DebugErrorExc(e);
+                    Log.Exception(e);
                 }
 
             }

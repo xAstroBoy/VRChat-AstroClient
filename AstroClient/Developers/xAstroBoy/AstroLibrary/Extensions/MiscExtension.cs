@@ -64,7 +64,7 @@ namespace AstroClient.xAstroBoy.Extensions
                                 ignoreCase
                                     ? StringComparison.OrdinalIgnoreCase
                                     : StringComparison.Ordinal) >= 0);
-            ModConsole.Error($"XRefScanForGlobal \"{methodBase}\" has an empty searchTerm. Returning false");
+            Log.Error($"XRefScanForGlobal \"{methodBase}\" has an empty searchTerm. Returning false");
             return false;
         }
 
@@ -99,7 +99,7 @@ namespace AstroClient.xAstroBoy.Extensions
 
                         return found;
                     });
-            ModConsole.Error($"XRefScanForMethod \"{methodBase}\" has all null/empty parameters. Returning false");
+            Log.Error($"XRefScanForMethod \"{methodBase}\" has all null/empty parameters. Returning false");
             return false;
         }
 
@@ -134,7 +134,7 @@ namespace AstroClient.xAstroBoy.Extensions
 
                         return found;
                     });
-            ModConsole.Error($"XRefScanMethodCount \"{methodBase}\" has all null/empty parameters. Returning -1");
+            Log.Error($"XRefScanMethodCount \"{methodBase}\" has all null/empty parameters. Returning -1");
             return -1;
         }
 

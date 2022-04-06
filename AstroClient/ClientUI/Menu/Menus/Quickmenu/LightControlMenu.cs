@@ -126,7 +126,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"Exception : {e.Message}");
+                Log.Error($"Exception : {e.Message}");
             }
         }
 
@@ -355,7 +355,7 @@
                     }
                     else
                     {
-                        ModConsole.DebugError("[Player Fullbright] : I Can't find Player Camera's GameObject!");
+                        Log.Error("[Player Fullbright] : I Can't find Player Camera's GameObject!");
                         value = false;
                     }
                 }

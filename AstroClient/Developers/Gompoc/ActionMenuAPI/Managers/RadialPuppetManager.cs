@@ -139,7 +139,7 @@
             catch (Exception e)
             {
                 MelonLogger.Error($"Exception caught in onUpdate action passed to Radial Puppet:");
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
         }
 

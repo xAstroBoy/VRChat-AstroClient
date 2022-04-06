@@ -74,7 +74,7 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.ErrorExc(e);
+                    Log.Exception(e);
                     HasThrownException = true;
                 }
 

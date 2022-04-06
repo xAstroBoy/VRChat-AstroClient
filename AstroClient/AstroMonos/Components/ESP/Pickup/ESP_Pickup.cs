@@ -42,7 +42,7 @@
             ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
             if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
             {
-                ModConsole.DebugError($"Unable to add ESP_Pickup to  {gameObject.name} due to MeshRenderer Being null or empty");
+                Log.Error($"Unable to add ESP_Pickup to  {gameObject.name} due to MeshRenderer Being null or empty");
                 Destroy(this);
                 return;
             }

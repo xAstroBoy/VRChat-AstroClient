@@ -43,7 +43,7 @@
             }
             else
             {
-                ModConsole.Error("Unable to Instantiate a Avatar Capsule due to VRCPlayer being null.");
+                Log.Error("Unable to Instantiate a Avatar Capsule due to VRCPlayer being null.");
             }
             return null;
         }

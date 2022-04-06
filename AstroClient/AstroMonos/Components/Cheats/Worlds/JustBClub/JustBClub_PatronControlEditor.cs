@@ -207,7 +207,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         }
         catch (Exception e)
         {
-            ModConsole.DebugErrorExc(e);
+            Log.Exception(e);
         }
     }
 
@@ -249,7 +249,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         }
         catch (Exception e)
         {
-            ModConsole.DebugErrorExc(e);
+            Log.Exception(e);
         }
     }
 
@@ -302,7 +302,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
         }
         catch (Exception e)
         {
-            ModConsole.DebugErrorExc(e);
+            Log.Exception(e);
         }
     }
 
@@ -340,7 +340,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
             }
             else
             {
-                ModConsole.Error("Can't Find PatronControl behaviour, Unable to Add Reader Component, did the author update the world?");
+                Log.Error("Can't Find PatronControl behaviour, Unable to Add Reader Component, did the author update the world?");
                 Destroy(this);
             }
         }

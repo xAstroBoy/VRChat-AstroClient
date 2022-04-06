@@ -202,7 +202,7 @@
                 }
                 catch (Exception)
                 {
-                    ModConsole.Error("Error: [Invalid Hex Code]");
+                    Log.Error("Error: [Invalid Hex Code]");
                 }
             }, "Changes Headlight Color");
             InitWings();
@@ -287,7 +287,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("[Headlight] : Unable to Find Main Camera Transform.");
+                    Log.Error("[Headlight] : Unable to Find Main Camera Transform.");
                     if (DesktopHeadlightBtn != null)
                     {
                         DesktopHeadlightBtn.SetToggleState(false);
@@ -296,7 +296,7 @@
             }
             else
             {
-                ModConsole.Error("[Headlight] : Unable to Find Main Camera.");
+                Log.Error("[Headlight] : Unable to Find Main Camera.");
                 if (DesktopHeadlightBtn != null)
                 {
                     DesktopHeadlightBtn.SetToggleState(false);

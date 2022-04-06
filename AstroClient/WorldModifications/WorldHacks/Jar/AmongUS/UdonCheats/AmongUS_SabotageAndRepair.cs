@@ -71,8 +71,8 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error($"[AMONG US]: Error in Sabotage & Repair Exploits Button!");
-                    ModConsole.ErrorExc(e);
+                    Log.Error($"[AMONG US]: Error in Sabotage & Repair Exploits Button!");
+                    Log.Exception(e);
                     var btnerror = new QMSingleButton(CurrentScrollMenu, "ERROR, SEE CONSOLE", null, "ERROR, SEE CONSOLE", Color.red);
                     GeneratedButtons.Add(btnerror);
                 }

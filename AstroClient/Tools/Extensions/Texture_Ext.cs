@@ -72,7 +72,7 @@
             catch (Exception e)
             {
                 RenderTexture.active = currentRT;
-                ModConsole.Error($"Exception on ForceReadTexture: {e.ToString()}");
+                Log.Error($"Exception on ForceReadTexture: {e.ToString()}");
                 return default;
             }
         }
@@ -95,7 +95,7 @@
             catch (Exception e)
             {
                 RenderTexture.active = currentRT;
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
             RenderTexture.active = currentRT;
             return null;
@@ -127,7 +127,7 @@
             data = ImageConversion.EncodeToPNG(tex);
 
             if (data == null || !data.Any())
-                ModConsole.Error("Couldn't get any data for the texture!");
+                Log.Error("Couldn't get any data for the texture!");
             else
                 File.WriteAllBytes(savepath, data);
             Log.Debug("Exported Texture in Path: " + savepath);

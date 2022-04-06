@@ -233,7 +233,7 @@
         {
             if (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
             {
-                Log.DebugWarn("Refresh called before driver init");
+                Log.Warn("Refresh called before driver init");
                 return;
             }
 
@@ -247,7 +247,7 @@
         {
             if (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
             {
-                Log.DebugWarn("Reset called before driver init");
+                Log.Warn("Reset called before driver init");
                 return;
             }
 

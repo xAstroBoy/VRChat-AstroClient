@@ -245,7 +245,7 @@
             }
             if (ShowError)
             {
-                ModConsole.DebugError($"Failed to Find {action} Having SubKey {subaction}");
+                Log.Error($"Failed to Find {action} Having SubKey {subaction}");
             }
             return null;
         }
@@ -403,7 +403,7 @@
                                         }
                                         catch (Exception e)
                                         {
-                                            ModConsole.DebugErrorExc(e);
+                                            Log.Exception(e);
                                         }
                                     }
                                 }

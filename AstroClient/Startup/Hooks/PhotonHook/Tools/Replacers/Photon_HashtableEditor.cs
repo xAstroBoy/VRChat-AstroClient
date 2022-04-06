@@ -53,7 +53,7 @@ internal class Photon_HashtableEditor
         }
         catch (Exception e)
         {
-            ModConsole.DebugErrorExc(e);
+            Log.Exception(e);
         }
     }
 }

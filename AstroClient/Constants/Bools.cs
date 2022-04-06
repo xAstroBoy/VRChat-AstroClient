@@ -32,7 +32,7 @@
             }
             set
             {
-                ModConsole.DebugMode = value;
+                Log.DebugMode = value;
                 ConfigManager.General.DebugLog = value;
                 if (UIInitializer.ToggleDebugInfo != null)
                 {

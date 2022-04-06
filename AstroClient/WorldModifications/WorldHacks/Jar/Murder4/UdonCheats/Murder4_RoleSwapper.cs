@@ -134,8 +134,8 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error("[MURDER 4]: Error in Role Swapper Button!");
-                    ModConsole.ErrorExc(e);
+                    Log.Error("[MURDER 4]: Error in Role Swapper Button!");
+                    Log.Exception(e);
                     var btnerror = new QMSingleButton(CurrentScrollMenu, "ERROR, SEE CONSOLE", null, "ERROR, SEE CONSOLE", Color.red);
                     Generated.Add(btnerror);
                 }

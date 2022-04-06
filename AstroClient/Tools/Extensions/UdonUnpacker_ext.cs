@@ -21,7 +21,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -41,7 +41,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -57,7 +57,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -73,7 +73,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -93,7 +93,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -109,7 +109,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -125,7 +125,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -145,7 +145,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -161,7 +161,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -177,7 +177,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -197,7 +197,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -213,7 +213,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -229,7 +229,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -249,7 +249,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -265,7 +265,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -281,7 +281,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -301,7 +301,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -317,7 +317,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -333,7 +333,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -353,7 +353,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -369,7 +369,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -385,7 +385,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -405,7 +405,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -421,7 +421,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -437,7 +437,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -457,7 +457,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -473,7 +473,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -489,7 +489,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -509,7 +509,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -525,7 +525,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -541,7 +541,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -561,7 +561,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -577,7 +577,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -593,7 +593,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -613,7 +613,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -629,7 +629,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -645,7 +645,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -665,7 +665,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -681,7 +681,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -697,7 +697,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -713,7 +713,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -729,7 +729,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -749,7 +749,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -765,7 +765,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -781,7 +781,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -801,7 +801,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -817,7 +817,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -833,7 +833,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -853,7 +853,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -869,7 +869,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -885,7 +885,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -905,7 +905,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -921,7 +921,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -937,7 +937,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -957,7 +957,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -973,7 +973,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -989,7 +989,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1009,7 +1009,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1025,7 +1025,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1045,7 +1045,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1065,7 +1065,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1081,7 +1081,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1097,7 +1097,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1117,7 +1117,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1133,7 +1133,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1149,7 +1149,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1169,7 +1169,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1185,7 +1185,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1201,7 +1201,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1221,7 +1221,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1237,7 +1237,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1253,7 +1253,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1273,7 +1273,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1289,7 +1289,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1305,7 +1305,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1325,7 +1325,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1341,7 +1341,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1357,7 +1357,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1377,7 +1377,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1393,7 +1393,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1409,7 +1409,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1429,7 +1429,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1445,7 +1445,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1461,7 +1461,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1481,7 +1481,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1497,7 +1497,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1513,7 +1513,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1529,7 +1529,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1549,7 +1549,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1565,7 +1565,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1581,7 +1581,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1601,7 +1601,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1617,7 +1617,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1633,7 +1633,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1653,7 +1653,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1669,7 +1669,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1685,7 +1685,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1701,7 +1701,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1721,7 +1721,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1737,7 +1737,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1757,7 +1757,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1773,7 +1773,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1789,7 +1789,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1809,7 +1809,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1825,7 +1825,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1841,7 +1841,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1861,7 +1861,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1877,7 +1877,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1893,7 +1893,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1913,7 +1913,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1929,7 +1929,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1945,7 +1945,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1965,7 +1965,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1981,7 +1981,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -1997,7 +1997,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2017,7 +2017,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2033,7 +2033,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2049,7 +2049,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2069,7 +2069,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2085,7 +2085,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2101,7 +2101,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2121,7 +2121,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2137,7 +2137,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2153,7 +2153,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2173,7 +2173,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2189,7 +2189,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2205,7 +2205,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2225,7 +2225,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2241,7 +2241,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2257,7 +2257,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2277,7 +2277,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2293,7 +2293,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2309,7 +2309,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2329,7 +2329,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2345,7 +2345,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2361,7 +2361,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2381,7 +2381,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2397,7 +2397,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2413,7 +2413,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2433,7 +2433,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2449,7 +2449,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2465,7 +2465,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2485,7 +2485,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2501,7 +2501,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2517,7 +2517,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2537,7 +2537,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2553,7 +2553,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2573,7 +2573,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2589,7 +2589,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2609,7 +2609,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2625,7 +2625,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2641,7 +2641,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2661,7 +2661,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2677,7 +2677,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2693,7 +2693,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2713,7 +2713,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2729,7 +2729,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2745,7 +2745,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2765,7 +2765,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2781,7 +2781,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2797,7 +2797,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2817,7 +2817,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2833,7 +2833,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2849,7 +2849,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2869,7 +2869,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2885,7 +2885,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2901,7 +2901,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2921,7 +2921,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2937,7 +2937,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2957,7 +2957,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2973,7 +2973,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -2989,7 +2989,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3009,7 +3009,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3025,7 +3025,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3041,7 +3041,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3061,7 +3061,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3077,7 +3077,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3093,7 +3093,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3113,7 +3113,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3129,7 +3129,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3145,7 +3145,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3165,7 +3165,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3181,7 +3181,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3197,7 +3197,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3217,7 +3217,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3233,7 +3233,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3249,7 +3249,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3265,7 +3265,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3285,7 +3285,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3301,7 +3301,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3317,7 +3317,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3337,7 +3337,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3353,7 +3353,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3369,7 +3369,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3389,7 +3389,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3405,7 +3405,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3421,7 +3421,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3441,7 +3441,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3457,7 +3457,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3473,7 +3473,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3493,7 +3493,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3509,7 +3509,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3525,7 +3525,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3545,7 +3545,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3561,7 +3561,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3577,7 +3577,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3597,7 +3597,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;
@@ -3613,7 +3613,7 @@
                 }
                 else
                 {
-                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.Warn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;

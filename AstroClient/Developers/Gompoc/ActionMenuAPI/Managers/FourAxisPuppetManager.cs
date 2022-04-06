@@ -136,8 +136,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"Exception caught in onUpdate action passed to Four Axis Puppet:");
-                ModConsole.ErrorExc(e);
+                Log.Error($"Exception caught in onUpdate action passed to Four Axis Puppet:");
+                Log.Exception(e);
             }
         }
 

@@ -46,7 +46,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_SkyCube  is Null! Can't Toggle it");
+                    Log.Error($"VRChat_SkyCube  is Null! Can't Toggle it");
                 }
 
                 step = 4;
@@ -59,7 +59,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_bubbles  is Null! Can't Toggle it");
+                    Log.Error($"VRChat_bubbles  is Null! Can't Toggle it");
                 }
                 step = 5;
                 if (VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio != null)
@@ -71,7 +71,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_originalLoadingAudio  is Null! Can't Toggle it");
+                    Log.Error($"VRChat_originalLoadingAudio  is Null! Can't Toggle it");
                 }
 
                 step = 6;
@@ -86,7 +86,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_originalStartScreenAudio  is Null! Can't Toggle it");
+                    Log.Error($"VRChat_originalStartScreenAudio  is Null! Can't Toggle it");
                 }
 
                 step = 7;
@@ -99,7 +99,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_originalStartScreenSkyCube  is Null! Can't Toggle it");
+                    Log.Error($"VRChat_originalStartScreenSkyCube  is Null! Can't Toggle it");
                 }
 
                 step = 8;
@@ -111,7 +111,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_loginBubbles  is Null! Can't Toggle it");
+                    Log.Error($"VRChat_loginBubbles  is Null! Can't Toggle it");
                 }
                 step = 9;
                 BetterLoadingScreenSettings.ModSounds = ConfigManager.LoadingScreen.ModSounds;
@@ -126,8 +126,8 @@ namespace AstroClient.ClientUI.LoadingScreen
             }
             catch (Exception e)
             {
-                ModConsole.DebugError($"Failed At step {step}");
-                ModConsole.ErrorExc(e);
+                Log.Error($"Failed At step {step}");
+                Log.Exception(e);
             }
         }
 
@@ -160,19 +160,19 @@ namespace AstroClient.ClientUI.LoadingScreen
                     }
                     else
                     {
-                        ModConsole.Error($"Failed to Find Parent : {parent}");
+                        Log.Error($"Failed to Find Parent : {parent}");
                     }
                 }
                 else
                 {
-                    ModConsole.Error($"Failed to Find Root : {rootDest}");
+                    Log.Error($"Failed to Find Root : {rootDest}");
                 }
 
             }
             catch (Exception e)
             {
-                ModConsole.DebugError($"Failed At step {step}");
-                ModConsole.ErrorExc(e);
+                Log.Error($"Failed At step {step}");
+                Log.Exception(e);
             }
             return null;
         }

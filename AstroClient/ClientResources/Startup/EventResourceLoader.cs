@@ -64,7 +64,7 @@
             }
             if (fails != 0)
             {
-                ModConsole.DebugError($"Failed to load {fails} resources in {classtype.FullName}! It might affect the Client!");
+                Log.Error($"Failed to load {fails} resources in {classtype.FullName}! It might affect the Client!");
             }
             stopwatch.Stop();
             Log.Debug($"Done Loading Resources from {classtype.FullName}, took {stopwatch.ElapsedMilliseconds}ms");

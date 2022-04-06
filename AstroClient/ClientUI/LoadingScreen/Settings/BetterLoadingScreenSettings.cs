@@ -53,7 +53,7 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_originalLoadingAudio  is Null! Can't Toggle it");
+                    Log.Error($"VRChat_originalLoadingAudio  is Null! Can't Toggle it");
                 }
             }
         }
@@ -113,7 +113,7 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
                 }
                 else
                 {
-                    ModConsole.DebugError($"VRChat_InfoPanel  is Null! Can't Toggle it");
+                    Log.Error($"VRChat_InfoPanel  is Null! Can't Toggle it");
                 }
             }
         }

@@ -347,7 +347,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.DebugErrorExc(e);
+                Log.Exception(e);
             }
         }
         private static object CancellationToken;

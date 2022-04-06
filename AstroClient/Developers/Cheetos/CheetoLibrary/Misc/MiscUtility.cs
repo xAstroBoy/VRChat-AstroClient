@@ -131,7 +131,7 @@
         {
             if (obj == null)
             {
-                ModConsole.Error("DestroyDelayed: obj was null!");
+                Log.Error("DestroyDelayed: obj was null!");
                 yield break;
             }
             yield return new WaitForSeconds(seconds);

@@ -38,8 +38,8 @@
                 }
                 catch (Exception ex)
                 {
-                    ModConsole.Error($"Something went wrong while parsing the json file.\nIt is likely that your AstroInstances.json file is corrupted and will need to be manually deleted. Find it in the {ConfigManager.AstroInstances} folder.\nFor debug purposes in case this is not the case, here is the error:");
-                    ModConsole.ErrorExc(ex);
+                    Log.Error($"Something went wrong while parsing the json file.\nIt is likely that your AstroInstances.json file is corrupted and will need to be manually deleted. Find it in the {ConfigManager.AstroInstances} folder.\nFor debug purposes in case this is not the case, here is the error:");
+                    Log.Exception(ex);
                     return;
                 }
             }

@@ -47,7 +47,7 @@
                         UnityEngine.Object.Destroy(btnEnum.gameObject);
                 }
             }
-            catch (Exception e) { ModConsole.Error($"VRCMenu Error: {e}"); }
+            catch (Exception e) { Log.Error($"VRCMenu Error: {e}"); }
             try
             {
                 //ScreenPath = MiscUtility.GetPath(Page);
@@ -63,7 +63,7 @@
                     }
                 }));
             }
-            catch (Exception e) { ModConsole.Error($"VRCMenu 2 Error: {e}"); }
+            catch (Exception e) { Log.Error($"VRCMenu 2 Error: {e}"); }
         }
 
         public VRCMenu(string name, Action OnPageShown = null, Action OnPageClose = null)
@@ -103,7 +103,7 @@
                         UnityEngine.Object.Destroy(btnEnum.gameObject);
                 }
             }
-            catch (Exception e) { ModConsole.Error($"VRCMenu Error: {e}"); }
+            catch (Exception e) { Log.Error($"VRCMenu Error: {e}"); }
         }
 
         public string ScreenPath { get; set; }
@@ -138,7 +138,7 @@
                 }
                 //  UnityEngine.Object.Destroy(Panel.GetComponent<UIDeviceSelector>());
             }
-            catch (Exception e) { ModConsole.Error($"VRCPanel Error: {e}"); }
+            catch (Exception e) { Log.Error($"VRCPanel Error: {e}"); }
         }
 
         //unused -- Might be used in the future for closing content of a panel
@@ -176,7 +176,7 @@
                 }
                 //UnityEngine.Object.Destroy(Panel.GetComponent<UIDeviceSelector>());
             }
-            catch (Exception e) { ModConsole.Error($"VRCPanel Error: {e}"); }
+            catch (Exception e) { Log.Error($"VRCPanel Error: {e}"); }
         }
 
         public static MenuCheckbox DefaultActiveToggle;

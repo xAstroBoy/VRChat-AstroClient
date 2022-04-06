@@ -125,7 +125,7 @@
             if (!Directory.Exists(ConfigFolder))
             {
                 _ = Directory.CreateDirectory(ConfigFolder);
-                Log.DebugWarn($"Config Folder Created: {ConfigFolder}");
+                Log.Warn($"Config Folder Created: {ConfigFolder}");
             }
 
             if (!File.Exists(ConfigPath))
@@ -133,7 +133,7 @@
                 FileStream fs = new FileStream(ConfigPath, FileMode.Create);
                 fs.Dispose();
                 Save_General();
-                Log.DebugWarn($"Config File Created: {ConfigPath}");
+                Log.Warn($"Config File Created: {ConfigPath}");
             }
 
             if (!File.Exists(ConfigUIPath))
@@ -141,7 +141,7 @@
                 FileStream fs = new FileStream(ConfigUIPath, FileMode.Create);
                 fs.Dispose();
                 Save_UI();
-                Log.DebugWarn($"ConfigUI File Created: {ConfigUIPath}");
+                Log.Warn($"ConfigUI File Created: {ConfigUIPath}");
             }
 
             if (!File.Exists(ConfigESPPath))
@@ -149,48 +149,48 @@
                 FileStream fs = new FileStream(ConfigESPPath, FileMode.Create);
                 fs.Dispose();
                 Save_ESP();
-                Log.DebugWarn($"ConfigESP File Created: {ConfigESPPath}");
+                Log.Warn($"ConfigESP File Created: {ConfigESPPath}");
             }
             if (!File.Exists(ConfigFlightPath))
             {
                 FileStream fs = new FileStream(ConfigFlightPath, FileMode.Create);
                 fs.Dispose();
                 Save_Flight();
-                Log.DebugWarn($"ConfigFlight File Created: {ConfigFlightPath}");
+                Log.Warn($"ConfigFlight File Created: {ConfigFlightPath}");
             }
             if (!File.Exists(ConfigMovementPath))
             {
                 FileStream fs = new FileStream(ConfigMovementPath, FileMode.Create);
                 fs.Dispose();
                 Save_Movement();
-                Log.DebugWarn($"ConfigMovement File Created: {ConfigMovementPath}");
+                Log.Warn($"ConfigMovement File Created: {ConfigMovementPath}");
             }
             if (!File.Exists(ConfigFavoritesPath))
             {
                 FileStream fs = new FileStream(ConfigFavoritesPath, FileMode.Create);
                 fs.Dispose();
                 Save_Favorites();
-                Log.DebugWarn($"ConfigFavorites File Created: {ConfigFavoritesPath}");
+                Log.Warn($"ConfigFavorites File Created: {ConfigFavoritesPath}");
             }
             if (!File.Exists(ConfigPerformancePath))
             {
                 FileStream fs = new FileStream(ConfigPerformancePath, FileMode.Create);
                 fs.Dispose();
                 Save_Performance();
-                Log.DebugWarn($"ConfigPerformance File Created: {ConfigPerformancePath}");
+                Log.Warn($"ConfigPerformance File Created: {ConfigPerformancePath}");
             }
             if (!File.Exists(ConfigLoadingScreenPath))
             {
                 FileStream fs = new FileStream(ConfigLoadingScreenPath, FileMode.Create);
                 fs.Dispose();
                 Save_LoadingScreen();
-                Log.DebugWarn($"ConfigLoadingScreen File Created: {ConfigLoadingScreenPath}");
+                Log.Warn($"ConfigLoadingScreen File Created: {ConfigLoadingScreenPath}");
             }
 
             if (!Directory.Exists(ConfigTempFolder))
             {
                 _ = Directory.CreateDirectory(ConfigTempFolder);
-                Log.DebugWarn($"ConfigTempFolder File Created: {ConfigTempFolder}");
+                Log.Warn($"ConfigTempFolder File Created: {ConfigTempFolder}");
             }
 
             SaveMutex.ReleaseMutex();

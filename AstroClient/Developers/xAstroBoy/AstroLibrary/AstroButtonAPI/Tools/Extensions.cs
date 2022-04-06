@@ -51,7 +51,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.DebugErrorExc(e);
+                Log.Exception(e);
             }
         }
 

@@ -75,12 +75,12 @@ namespace AstroClient.xAstroBoy.Extensions
                 vrcuiPage = gameObject.GetComponent<VRCUiPage>();
                 if (vrcuiPage == null)
                 {
-                    ModConsole.Error("Screen Not Found - " + screenPath);
+                    Log.Error("Screen Not Found - " + screenPath);
                 }
             }
             else
             {
-                ModConsole.Warning("Screen Not Found - " + screenPath);
+                Log.Warn("Screen Not Found - " + screenPath);
             }
             return vrcuiPage;
         }

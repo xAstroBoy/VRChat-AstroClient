@@ -116,7 +116,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("Can't Find BankController behaviour, Unable to Add Reader Component, did the author update the world?");
+                    Log.Error("Can't Find BankController behaviour, Unable to Add Reader Component, did the author update the world?");
                     Destroy(this);
                 }
             }

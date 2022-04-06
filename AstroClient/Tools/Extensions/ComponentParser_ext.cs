@@ -37,8 +37,8 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error("Error parsing Pickup VRC Interactables");
-                    ModConsole.ErrorExc(e);
+                    Log.Error("Error parsing Pickup VRC Interactables");
+                    Log.Exception(e);
                     return new List<GameObject>();
                 }
             }
@@ -66,8 +66,8 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error("Error parsing World Triggers");
-                    ModConsole.ErrorExc(e);
+                    Log.Error("Error parsing World Triggers");
+                    Log.Exception(e);
                     return new List<GameObject>();
                 }
             }

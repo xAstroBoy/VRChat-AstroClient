@@ -139,7 +139,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
                 HasFrozen = true;
             }
         }
@@ -169,7 +169,7 @@
             catch (Exception e)
             {
                 HasFrozen = false;
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
         }
 
@@ -354,7 +354,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
         }
 

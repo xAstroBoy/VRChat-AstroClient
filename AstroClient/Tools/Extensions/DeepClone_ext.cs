@@ -14,7 +14,7 @@
         {
             if (GetCopyOfDebugMode)
             {
-                Log.DebugWarn("GetCopyOf Debug :" + msg);
+                Log.Warn("GetCopyOf Debug :" + msg);
             }
         }
 
@@ -28,7 +28,7 @@
 
             if (type != other.GetType())
             {
-                ModConsole.DebugError("Type Mis-match");
+                Log.Error("Type Mis-match");
                 return null; // type mis-match
             }
 

@@ -619,7 +619,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
                         }
                         catch (Exception e)
                         {
-                            ModConsole.WarningExc(e);
+                            Log.Exception(e);
                         }
                 }
                 catch
@@ -642,7 +642,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
                         }
                         catch (Exception e)
                         {
-                            ModConsole.WarningExc(e);
+                            Log.Exception(e);
                         }
                 }
                 catch
@@ -664,7 +664,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
                         }
                         catch (Exception e)
                         {
-                            ModConsole.WarningExc(e);
+                            Log.Exception(e);
                         }
                 }
                 catch

@@ -48,7 +48,7 @@ public class TierLand_CreditsReader : AstroMonoBehaviour
             });
             if (RetrySystem == null)
             {
-                ModConsole.Error("Can't Find PatronControl behaviour, Unable to Add Reader Component, did the author update the world?");
+                Log.Error("Can't Find PatronControl behaviour, Unable to Add Reader Component, did the author update the world?");
                 Destroy(this);
             }
         }

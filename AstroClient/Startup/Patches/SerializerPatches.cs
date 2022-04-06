@@ -34,7 +34,7 @@
             {
                 new AstroPatch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
             }
-            catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
+            catch (Exception e) { Log.Error("Error in applying patches : " + e); }
             finally { }
         }
 

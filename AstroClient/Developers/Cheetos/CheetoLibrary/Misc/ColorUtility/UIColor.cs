@@ -250,7 +250,7 @@
         //		}
         //		catch (Exception ex2)
         //		{
-        //			ModConsole.Error(ex2.ToString());
+        //			Log.Error(ex2.ToString());
         //		}
         //		try
         //		{

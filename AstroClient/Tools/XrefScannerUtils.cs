@@ -66,7 +66,7 @@ namespace AstroClient.Tools
 
                         return found;
                     });
-            ModConsole.Error($"XRefScanForMethod \"{methodBase}\" has all null/empty parameters. Returning false");
+            Log.Error($"XRefScanForMethod \"{methodBase}\" has all null/empty parameters. Returning false");
             return false;
         }
 
@@ -101,7 +101,7 @@ namespace AstroClient.Tools
 
                         return found;
                     });
-            ModConsole.Error($"XRefScanMethodCount \"{methodBase}\" has all null/empty parameters. Returning -1");
+            Log.Error($"XRefScanMethodCount \"{methodBase}\" has all null/empty parameters. Returning -1");
             return -1;
         }
     }

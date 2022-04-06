@@ -28,7 +28,7 @@
         }
         internal static void ReturnObjectOwner(GameObject obj)
         {
-            ModConsole.Warning($"Current Owner : {Networking.GetOwner(obj).displayName}");
+            Log.Warn($"Current Owner : {Networking.GetOwner(obj).displayName}");
         }
 
         private static VRCPlayerApi GetInstanceMaster()

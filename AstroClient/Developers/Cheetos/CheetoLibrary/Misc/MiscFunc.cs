@@ -99,7 +99,7 @@
             }
             if (cached == null)
             {
-                ModConsole.Warning("Failed to find Murder Logic 3 Death trigger.");
+                Log.Warn("Failed to find Murder Logic 3 Death trigger.");
                 return;
             }
             cached.gameObject.SetActive(!state);
@@ -165,7 +165,7 @@
         //        }
         //        else
         //        {
-        //            ModConsole.Error("[Friends] Skipping " + id);
+        //            Log.Error("[Friends] Skipping " + id);
         //        }
         //        Log.Write($"[Friends] {(float)requests * 100 / Friends.Length:0.00}%");
         //    }
@@ -373,7 +373,7 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error("Request Invite Failed, Exception | " + e);
+                    Log.Error("Request Invite Failed, Exception | " + e);
                     GameInstances.VRCUiPopupManager.Alert("Request Invite Failed", "Please report this to Love#3000", "Okay",
                         new Action(() => { GameInstances.VRCUiPopupManager.HideCurrentPopUp(); }));
                 }
@@ -456,8 +456,8 @@
         //    }
         //    catch (Exception e)
         //    {
-        //        ModConsole.Error("[VRCA]Download Error");
-        //        ModConsole.ErrorExc(e);
+        //        Log.Error("[VRCA]Download Error");
+        //        Log.Exception(e);
         //    }
         //}
 
@@ -564,7 +564,7 @@
             }
             catch (Exception)
             {
-                ModConsole.Error("[Utils] Failed to clear your cache");
+                Log.Error("[Utils] Failed to clear your cache");
             }
         }
 

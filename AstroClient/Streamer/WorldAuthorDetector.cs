@@ -25,7 +25,7 @@
                     {
                         player.AddSingleTag(Color.DarkOrange, "World Author");
                         PopupUtils.QueHudMessage($"World Author : {apiuser.displayName} Joined!");
-                        ModConsole.Warning($"World Author : {apiuser.displayName} Joined!");
+                        Log.Warn($"World Author : {apiuser.displayName} Joined!");
                     }
                 }
             }

@@ -24,13 +24,13 @@
         //{
         //    if (QuickMenuUtils.QuickMenu.Notification() == null)
         //    {
-        //        ModConsole.Error("Could not accept notif bc notif is null");
+        //        Log.Error("Could not accept notif bc notif is null");
         //        return;
         //    }
         //    Log.Write("AcceptNotification for notification");
         //    if (QuickMenuUtils.QuickMenu.Notification().details == null && QuickMenuUtils.QuickMenu.Notification().notificationType != "friendRequest")
         //    {
-        //        ModConsole.Error("Could not accept notif bc notif details is null");
+        //        Log.Error("Could not accept notif bc notif details is null");
         //        return;
         //    }
         //    string text = QuickMenuUtils.QuickMenu.Notification().notificationType.ToLower();
@@ -63,7 +63,7 @@
         //    {
         //        var AcceptButton = GameObject.Find("UserInterface/QuickMenu/NotificationInteractMenu/AcceptButton").GetComponent<Button>();
         //        AcceptButton.Press();
-        //        ModConsole.Error("AcceptNotification for unknown notification");
+        //        Log.Error("AcceptNotification for unknown notification");
         //    }
         //    Utils.VRCWebSocketsManager.DismissNotification(notification);
         //}

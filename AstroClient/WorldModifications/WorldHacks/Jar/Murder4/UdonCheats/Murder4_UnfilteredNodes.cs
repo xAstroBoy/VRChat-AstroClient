@@ -112,8 +112,8 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error("[MURDER 4]: Error in Unfiltered Nodes Button!");
-                    ModConsole.ErrorExc(e);
+                    Log.Error("[MURDER 4]: Error in Unfiltered Nodes Button!");
+                    Log.Exception(e);
                     var errorbtn = new QMSingleButton(CurrentScrollMenu, "ERROR, SEE CONSOLE", null, "ERROR, SEE CONSOLE");
                     generatedButtons.Add(errorbtn);
                 }

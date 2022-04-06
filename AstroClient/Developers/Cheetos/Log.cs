@@ -76,19 +76,6 @@ public static class Log
     /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
     /// </summary>
     /// <param name="line"></param>
-    public static void DebugWarn(string line)
-    {
-        if (DebugMode || Level >= LogLevel.DEBUG)
-        {
-            Write($"[WARN] ", Color.HTML.Red);
-            Write($"{line}", Color.White, LogLevel.DEBUG);
-        }
-    }
-
-    /// <summary>
-    /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
-    /// </summary>
-    /// <param name="line"></param>
     public static void Debug(string line)
     {
         if (DebugMode || Level >= LogLevel.DEBUG)

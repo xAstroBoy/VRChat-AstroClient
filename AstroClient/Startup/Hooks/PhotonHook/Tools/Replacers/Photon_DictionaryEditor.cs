@@ -32,7 +32,7 @@ internal class Photon_DictionaryEditor
         }
         catch (Exception e)
         {
-            ModConsole.DebugErrorExc(e);
+            Log.Exception(e);
         }
     }
 }

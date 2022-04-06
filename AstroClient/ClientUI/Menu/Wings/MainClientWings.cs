@@ -26,7 +26,7 @@
             {
                 string text = Clipboard.GetText();
                 if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar();
-                else ModConsole.Error("Clipboard does not contains Avatar ID!");
+                else Log.Error("Clipboard does not contains Avatar ID!");
             }, "Allows you to change into a public avatar with its id.");
             new QMWingSingleButton(menu, "Reload Avatars", () => { MelonCoroutines.Start(AvatarUtils.ReloadAllAvatars()); }, "Reloads All Avatars.");
 

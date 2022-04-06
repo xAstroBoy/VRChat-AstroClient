@@ -34,7 +34,7 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Exception(e);
+                    Log.Exception(e);
                 }
             }
         }
@@ -49,7 +49,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
                 return null;
             }
 
@@ -65,7 +65,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
                 return null;
             }
         }
@@ -81,7 +81,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
                 return null;
             }
         }
@@ -107,8 +107,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"Failed to extract resource: {filename}");
-                ModConsole.Exception(e);
+                Log.Error($"Failed to extract resource: {filename}");
+                Log.Exception(e);
             }
             return null;
         }

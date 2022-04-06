@@ -97,7 +97,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"[Cheetos Patches] Error in applying patches : {e}");
+                Log.Error($"[Cheetos Patches] Error in applying patches : {e}");
             }
         }
 

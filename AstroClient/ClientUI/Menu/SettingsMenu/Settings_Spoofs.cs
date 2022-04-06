@@ -40,7 +40,7 @@
                     }
                     catch
                     {
-                        ModConsole.Error("Input value must be a float value!");
+                        Log.Error("Input value must be a float value!");
                     }
                     finally
                     {
@@ -61,7 +61,7 @@
                     }
                     catch
                     {
-                        ModConsole.Error("Input value must be a short value!");
+                        Log.Error("Input value must be a short value!");
                     }
                     finally
                     {

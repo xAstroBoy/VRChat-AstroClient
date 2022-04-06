@@ -117,7 +117,7 @@
             }
             else
             {
-                ModConsole.Error("[OrbitManager] Orbit Failed!");
+                Log.Error("[OrbitManager] Orbit Failed!");
             }
         }
 

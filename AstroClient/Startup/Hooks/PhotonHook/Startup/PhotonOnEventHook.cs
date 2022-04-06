@@ -196,8 +196,8 @@ internal class PhotonOnEventHook : AstroEvents
         }
         catch (Exception e)
         {
-            ModConsole.DebugError("Exception in OnEvent");
-            ModConsole.ErrorExc(e);
+            Log.Error("Exception in OnEvent");
+            Log.Exception(e);
             return true;
         }
         return true;

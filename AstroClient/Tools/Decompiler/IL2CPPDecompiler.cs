@@ -52,8 +52,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"[IL2CPP Decompiler] Error :");
-                ModConsole.ErrorExc(e);
+                Log.Error($"[IL2CPP Decompiler] Error :");
+                Log.Exception(e);
             }
 
             return null;
@@ -72,8 +72,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"[Method] Failed At Method: ");
-                ModConsole.ErrorExc(e);
+                Log.Error($"[Method] Failed At Method: ");
+                Log.Exception(e);
             }
 
             return "";
@@ -102,8 +102,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"[Method] Failed At Method Code: ");
-                ModConsole.ErrorExc(e);
+                Log.Error($"[Method] Failed At Method Code: ");
+                Log.Exception(e);
             }
 
             return "";
@@ -194,8 +194,8 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error($"Failed to Parse CodeLine from method");
-                    ModConsole.ErrorExc(e);
+                    Log.Error($"Failed to Parse CodeLine from method");
+                    Log.Exception(e);
                 }
             }
 

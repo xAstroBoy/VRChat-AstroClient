@@ -41,7 +41,7 @@
             {
                 new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
             }
-            catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
+            catch (Exception e) { Log.Error("Error in applying patches : " + e); }
             finally { }
         }
 

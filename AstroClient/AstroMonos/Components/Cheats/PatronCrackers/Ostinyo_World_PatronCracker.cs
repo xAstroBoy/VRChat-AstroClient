@@ -88,7 +88,6 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
         }
     }
 
-
     internal string[] __4_intnl_SystemStringArray
     {
         [HideFromIl2Cpp]
@@ -110,7 +109,6 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
             }
         }
     }
-
 
     internal override void OnRoomLeft()
     {
@@ -197,8 +195,7 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
             }
             else
             {
-                ModConsole.Error(
-                    "Can't Find PatronControl behaviour, Unable to Add Reader Component, did the author update the world?");
+                Log.Error("Can't Find PatronControl behaviour, Unable to Add Reader Component, did the author update the world?");
                 Destroy(this);
             }
         }

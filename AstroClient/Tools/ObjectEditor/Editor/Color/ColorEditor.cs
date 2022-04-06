@@ -17,7 +17,7 @@
                 }
                 else
                 {
-                    ModConsole.Warning($"Unable to get {obj.name} Renderer component.");
+                    Log.Warn($"Unable to get {obj.name} Renderer component.");
                 }
             }
         }

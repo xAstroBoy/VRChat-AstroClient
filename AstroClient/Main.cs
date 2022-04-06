@@ -71,14 +71,14 @@
             ConsoleUtils.SetColor(ConsoleUtils.ColorType.FOREGROUND, Cheetah.Color.White);
             Log.Write("Initializing...");
 
-            ModConsole.Initialize("AstroClient");
-            WriteBanner();
+            //ModConsole.Initialize("AstroClient");
+            //WriteBanner();
             ConfigManager.Validate();
             ConfigManager.Load();
-            if (ModConsole.DebugMode != ConfigManager.General.DebugLog)
-            {
-                ModConsole.DebugMode = ConfigManager.General.DebugLog;
-            }
+            //if (ModConsole.DebugMode != ConfigManager.General.DebugLog)
+            //{
+            //    ModConsole.DebugMode = ConfigManager.General.DebugLog;
+            //}
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();

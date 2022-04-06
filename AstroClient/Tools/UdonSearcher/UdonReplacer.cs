@@ -312,7 +312,7 @@ namespace AstroClient.Tools.UdonSearcher
                                     catch (Exception e)
                                     {
                                         Failed++;
-                                        //ModConsole.DebugErrorExc(e);
+                                        //Log.Exception(e);
                                     }
                                 }
                             }

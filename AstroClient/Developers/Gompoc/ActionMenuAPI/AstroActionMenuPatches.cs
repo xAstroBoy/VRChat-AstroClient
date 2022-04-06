@@ -20,7 +20,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.DebugError($"Patching failed with exception: {e.Message}");
+                Log.Error($"Patching failed with exception: {e.Message}");
             }
         }
     }

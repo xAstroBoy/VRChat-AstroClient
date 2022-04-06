@@ -34,7 +34,7 @@
             }
             else
             {
-                ModConsole.DebugError($"{gameObject.name} : Failed to Bind StretcyCheese Component because there's no Extend behaviour!");
+                Log.Debug($"{gameObject.name} : Failed to Bind StretcyCheese Component because there's no Extend behaviour!");
                 Destroy(this);
             }
         }

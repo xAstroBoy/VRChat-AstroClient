@@ -88,8 +88,8 @@ namespace AstroClient
                                 continue;
                             }
 
-                            ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
-                            ModConsole.ErrorExc(invokeexc.InnerException);
+                            Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
+                            Log.Exception(invokeexc.InnerException);
                         }
 
                     }
@@ -108,8 +108,8 @@ namespace AstroClient
                                 continue;
                             }
 
-                            ModConsole.DebugError($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
-                            ModConsole.ErrorExc(invokeexc.InnerException);
+                            Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
+                            Log.Exception(invokeexc.InnerException);
                         }
                         sw.Stop();
                         var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}, FPS : {GetCurrentFPS()}";

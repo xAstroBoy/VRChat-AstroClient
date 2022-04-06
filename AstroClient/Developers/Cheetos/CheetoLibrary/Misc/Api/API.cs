@@ -40,7 +40,7 @@
                 }
                 catch (Exception)
                 {
-                    ModConsole.Error("[Avatar Search] Didn't Find Password need to enter");
+                    Log.Error("[Avatar Search] Didn't Find Password need to enter");
                 }
             }
             catch (Exception)

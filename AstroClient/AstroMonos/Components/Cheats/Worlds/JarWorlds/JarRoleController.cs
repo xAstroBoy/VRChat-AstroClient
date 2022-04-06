@@ -186,7 +186,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("PlayerEntries Returned Null, Ignored Finding Nodes & Entries");
+                    Log.Error("PlayerEntries Returned Null, Ignored Finding Nodes & Entries");
                     return;
                 }
 
@@ -196,7 +196,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("GameNodes Returned Null, Ignored Finding Nodes & Entries");
+                    Log.Error("GameNodes Returned Null, Ignored Finding Nodes & Entries");
                     return;
                 }
 
@@ -257,8 +257,8 @@
                 }
                 else
                 {
-                    if (IsMurder4World) ModConsole.Error("Player List Group Path in Murder 4 Changed! Unable to Reveal Roles!");
-                    if (IsAmongUsWorld) ModConsole.Error("Player List Group Path in Among us Changed! Unable to Reveal Roles!");
+                    if (IsMurder4World) Log.Error("Player List Group Path in Murder 4 Changed! Unable to Reveal Roles!");
+                    if (IsAmongUsWorld) Log.Error("Player List Group Path in Among us Changed! Unable to Reveal Roles!");
                 }
             }
         }

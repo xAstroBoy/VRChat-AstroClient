@@ -32,8 +32,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"Failed to Register: {type.FullName}");
-                ModConsole.ErrorExc(e);
+                Log.Error($"Failed to Register: {type.FullName}");
+                Log.Exception(e);
             }
         }
 

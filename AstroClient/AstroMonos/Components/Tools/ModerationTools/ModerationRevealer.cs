@@ -105,8 +105,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"Error at debug {debug}");
-                ModConsole.ErrorExc(e);
+                Log.Error($"Error at debug {debug}");
+                Log.Exception(e);
             }
         }
 

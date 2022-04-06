@@ -228,7 +228,7 @@ namespace AstroClient.Startup.Hooks
             }
             catch (Exception e)
             {
-                ModConsole.DebugErrorExc(e);
+                Log.Exception(e);
                 return true;
             }
 

@@ -95,7 +95,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             }
             catch (Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
         }
 

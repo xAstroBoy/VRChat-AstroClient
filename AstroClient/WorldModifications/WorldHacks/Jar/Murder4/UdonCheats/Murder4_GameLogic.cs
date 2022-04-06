@@ -66,8 +66,8 @@
                 }
                 catch (Exception e)
                 {
-                    ModConsole.Error("[MURDER 4]: Error in Game Controller Button!");
-                    ModConsole.ErrorExc(e);
+                    Log.Error("[MURDER 4]: Error in Game Controller Button!");
+                    Log.Exception(e);
                     var btnerror = new QMSingleButton(CurrentScrollMenu, "ERROR, SEE CONSOLE", null, "ERROR, SEE CONSOLE", Color.red);
                     Generated.Add(btnerror);
                 }

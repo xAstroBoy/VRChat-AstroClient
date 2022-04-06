@@ -184,17 +184,17 @@
 
                 if (TargetMethod != null)
                 {
-                    ModConsole.Error($"[{PatchIdentifier}] TargetMethod is NULL");
+                    Log.Error($"[{PatchIdentifier}] TargetMethod is NULL");
                 }
                 else
                 {
                     if (isDevMode)
                     {
-                        ModConsole.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.DeclaringType?.FullName}.{TargetMethod?.Name} because {FailureReason}.");
+                        Log.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.DeclaringType?.FullName}.{TargetMethod?.Name} because {FailureReason}.");
                     }
                     else
                     {
-                        ModConsole.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.Name}");
+                        Log.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.Name}");
                     }
                 }
 
@@ -286,17 +286,17 @@
 
                 if (TargetMethod != null)
                 {
-                    ModConsole.Error($"[{PatchIdentifier}] TargetMethod is NULL");
+                    Log.Error($"[{PatchIdentifier}] TargetMethod is NULL");
                 }
                 else
                 {
                     if (isDevMode)
                     {
-                        ModConsole.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.DeclaringType?.FullName}.{TargetMethod?.Name} because {FailureReason}.");
+                        Log.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.DeclaringType?.FullName}.{TargetMethod?.Name} because {FailureReason}.");
                     }
                     else
                     {
-                        ModConsole.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.Name}");
+                        Log.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.Name}");
                     }
                 }
 
@@ -327,7 +327,7 @@
                 HasThrownException = true;
                 if (ShowErrorOnConsole)
                 {
-                    ModConsole.ErrorExc(e);
+                    Log.Exception(e);
                 }
             }
             finally
@@ -349,11 +349,11 @@
                     isActivePatch = false;
                     if (isDevMode)
                     {
-                        ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
+                        Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
                     }
                     else
                     {
-                        ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodInfo?.Name}");
+                        Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodInfo?.Name}");
                     }
                 }
             }
@@ -369,7 +369,7 @@
                 HasThrownException = true;
                 if (ShowErrorOnConsole)
                 {
-                    ModConsole.ErrorExc(e);
+                    Log.Exception(e);
                 }
             }
             finally
@@ -391,11 +391,11 @@
                     isActivePatch = false;
                     if (isDevMode)
                     {
-                        ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_base} | with {patch.PatchType}");
+                        Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_base} | with {patch.PatchType}");
                     }
                     else
                     {
-                        ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodBase?.Name}");
+                        Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodBase?.Name}");
                     }
 
                 }

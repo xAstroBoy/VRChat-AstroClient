@@ -85,7 +85,7 @@
                 }
                 catch (Exception ex)
                 {
-                    ModConsole.ErrorExc(ex);
+                    Log.Exception(ex);
                 }
 
                 yield return null;
@@ -237,7 +237,7 @@
         {
             if (player.prop_APIUser_0 == null)
             {
-                ModConsole.Error("Null Player Left!");
+                Log.Error("Null Player Left!");
                 return;
             }
             if (player.prop_APIUser_0.IsSelf)
@@ -276,7 +276,7 @@
             }
             catch(Exception e)
             {
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
         }
         

@@ -190,7 +190,7 @@
                     }
                     if (_destroyportal == null)
                     {
-                        ModConsole.Error($"[Debug] Didnt Find Destroy Portal Method!");
+                        Log.Error($"[Debug] Didnt Find Destroy Portal Method!");
                     }
                 }
                 return _destroyportal;
@@ -231,7 +231,7 @@
                         }));
                         if (_openquickmenu == null)
                         {
-                            ModConsole.Error($"[Debug] Didnt Find OpenQuickMenu Method!");
+                            Log.Error($"[Debug] Didnt Find OpenQuickMenu Method!");
                         }
                     }
                     catch
@@ -276,7 +276,7 @@
                         }));
                         if (_closequickmenu == null)
                         {
-                            ModConsole.Error($"[Debug] Didnt Find Close QuickMenu Method!");
+                            Log.Error($"[Debug] Didnt Find Close QuickMenu Method!");
                         }
                     }
                     catch
@@ -320,7 +320,7 @@
                         }));
                         if (_SetupQuickmenuForDesktopOrHMD == null)
                         {
-                            ModConsole.Error($"[Debug] Didnt Find Setup QuickMenu Method!");
+                            Log.Error($"[Debug] Didnt Find Setup QuickMenu Method!");
                         }
                     }
                     catch

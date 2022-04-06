@@ -134,8 +134,8 @@
             }
             catch (Exception ex)
             {
-                ModConsole.Error($"Failed while dumping {method.Name}:");
-                ModConsole.ErrorExc(ex);
+                Log.Error($"Failed while dumping {method.Name}:");
+                Log.Exception(ex);
             }
         }
 

@@ -43,8 +43,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World Prefabs");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World Prefabs");
+                Log.Exception(e);
                 return new List<GameObject>();
             }
             return new List<GameObject>();
@@ -59,7 +59,7 @@
                 return zero;
             }
 
-            ModConsole.Warning("GetPlayerById Failed to find A Player from ID.");
+            Log.Warn("GetPlayerById Failed to find A Player from ID.");
             return null;
         }
 
@@ -114,8 +114,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World Pickups");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World Pickups");
+                Log.Exception(e);
                 return new List<GameObject>();
             }
             return new List<GameObject>();
@@ -149,8 +149,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World VRC Interactables");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World VRC Interactables");
+                Log.Exception(e);
                 return new List<GameObject>();
             }
             return new List<GameObject>();
@@ -176,8 +176,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World Triggers");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World Triggers");
+                Log.Exception(e);
                 return new List<GameObject>();
             }
             return new List<GameObject>();
@@ -191,8 +191,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World Triggers");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World Triggers");
+                Log.Exception(e);
                 return new List<AudioSource>();
             }
             return new List<AudioSource>();
@@ -406,8 +406,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+                Log.Exception(e);
                 return new List<VRCAvatarPedestal>();
             }
             return new List<VRCAvatarPedestal>();
@@ -435,8 +435,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World SimpleAvatarPedestal");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World SimpleAvatarPedestal");
+                Log.Exception(e);
                 return new List<SimpleAvatarPedestal>();
             }
             return new List<SimpleAvatarPedestal>();
@@ -475,8 +475,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World SDKBase VRC_AvatarPedestal");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World SDKBase VRC_AvatarPedestal");
+                Log.Exception(e);
                 return new List<AvatarPedestal>();
             }
             return new List<AvatarPedestal>();
@@ -510,8 +510,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+                Log.Exception(e);
                 return new List<VRC.SDKBase.VRC_AvatarPedestal>();
             }
             return new List<VRC.SDKBase.VRC_AvatarPedestal>();
@@ -547,8 +547,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
-                ModConsole.ErrorExc(e);
+                Log.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+                Log.Exception(e);
                 return new List<VRCSDK2.VRC_AvatarPedestal>();
             }
             return new List<VRCSDK2.VRC_AvatarPedestal>();

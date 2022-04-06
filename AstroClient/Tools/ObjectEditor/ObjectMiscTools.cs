@@ -115,7 +115,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("Error : ApiUser is null");
+                    Log.Error("Error : ApiUser is null");
                 }
             }
             catch (Exception) { }
@@ -150,7 +150,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("Error : ApiUser is null");
+                    Log.Error("Error : ApiUser is null");
                 }
             }
             catch (Exception) { }
@@ -274,7 +274,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("[ORBIT] Cant find Target ");
+                    Log.Error("[ORBIT] Cant find Target ");
                 }
             }
             catch (Exception) { }
