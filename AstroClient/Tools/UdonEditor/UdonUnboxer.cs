@@ -30,7 +30,7 @@
                             if (UnboxVariable != null)
                             {
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
-                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxUdonHeap(UnboxVariable);
+                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(unpackedudon.IUdonHeap, address, UnboxVariable);
                                 builder.AppendLine($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
                             }
                         }
@@ -76,7 +76,7 @@
                             if (UnboxVariable != null)
                             {
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
-                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxUdonHeap(UnboxVariable);
+                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(unpackedudon.IUdonHeap, address, UnboxVariable);
                                 _ = builder.AppendLine($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
                             }
                         }

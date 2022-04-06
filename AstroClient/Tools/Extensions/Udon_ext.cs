@@ -31,9 +31,9 @@
             }
         }
 
-        internal static string UnboxUdonHeap(this Il2CppSystem.Object obj)
+        internal static string UnboxAsString(this RawUdonBehaviour obj, string SymbolName)
         {
-            return UdonHeapUnboxerUtils.UnboxUdonHeap(obj);
+            return UdonHeapUnboxerUtils.UnboxAsString(obj, SymbolName);
         }
 
         internal static UdonBehaviour_Cached FindUdonEvent(this GameObject obj, string subaction)
@@ -45,7 +45,7 @@
             return UdonSearch.FindUdonEvent(obj, action, subaction, ShowError);
         }
 
-        internal static Il2CppSystem.Object FindUdonVariable(this GameObject obj, string SymbolName)
+        internal static RawUdonBehaviour FindUdonVariable(this GameObject obj, string SymbolName)
         {
             return UdonSearch.FindUdonVariable(obj, SymbolName);
         }

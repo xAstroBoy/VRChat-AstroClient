@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using UdonEditor;
     using UnhollowerBaseLib;
     using UnityEngine;
 
@@ -12,7 +11,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_String)
+                if (obj.GetIl2CppType().FullName == "System.String")
                 {
                     var result = Serialization.FromIL2CPPToManaged<string>(obj);
                     if (!string.IsNullOrEmpty(result) && !string.IsNullOrWhiteSpace(result))
@@ -32,7 +31,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_String_Array)
+                if (obj.GetIl2CppType().FullName == "System.String[]")
                 {
                     var array = Serialization.FromIL2CPPToManaged<string[]>(obj);
                     if (array != null && array.Count() != 0)
@@ -52,7 +51,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_String_Array)
+                if (obj.GetIl2CppType().FullName == "System.String[]")
                 {
                     return obj.Unpack_Array_String()?.ToList();
                 }
@@ -68,7 +67,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Boolean)
+                if (obj.GetIl2CppType().FullName == "System.Boolean")
                 {
                     return obj.Unbox<bool>();
                 }
@@ -84,7 +83,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Boolean_Array)
+                if (obj.GetIl2CppType().FullName == "System.Boolean[]")
                 {
                     var array = Il2CppArrayBase<bool>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -104,7 +103,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Boolean_Array)
+                if (obj.GetIl2CppType().FullName == "System.Boolean[]")
                 {
                     return obj.Unpack_Array_Boolean()?.ToList();
                 }
@@ -120,7 +119,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Single)
+                if (obj.GetIl2CppType().FullName == "System.Single")
                 {
                     return obj.Unbox<float>();
                 }
@@ -136,7 +135,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Single_Array)
+                if (obj.GetIl2CppType().FullName == "System.Single[]")
                 {
                     var array = Il2CppArrayBase<float>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -156,7 +155,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Single_Array)
+                if (obj.GetIl2CppType().FullName == "System.Single[]")
                 {
                     return obj.Unpack_Array_Single()?.ToList();
                 }
@@ -172,7 +171,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_UInt16)
+                if (obj.GetIl2CppType().FullName == "System.UInt16")
                 {
                     return obj.Unbox<ushort>();
                 }
@@ -188,7 +187,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_UInt16_Array)
+                if (obj.GetIl2CppType().FullName == "System.UInt16[]")
                 {
                     var array = Il2CppArrayBase<ushort>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -208,7 +207,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_UInt16_Array)
+                if (obj.GetIl2CppType().FullName == "System.UInt16[]")
                 {
                     return obj.Unpack_Array_UInt16()?.ToList();
                 }
@@ -220,12 +219,11 @@
             return null;
         }
 
-
         internal static System.TimeSpan? Unpack_TimeSpan(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_TimeSpan)
+                if (obj.GetIl2CppType().FullName == "System.TimeSpan")
                 {
                     return obj.Unbox<System.TimeSpan>();
                 }
@@ -241,7 +239,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_TimeSpan_Array)
+                if (obj.GetIl2CppType().FullName == "System.TimeSpan[]")
                 {
                     var array = Il2CppArrayBase<System.TimeSpan>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -261,7 +259,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_TimeSpan_Array)
+                if (obj.GetIl2CppType().FullName == "System.TimeSpan[]")
                 {
                     return obj.Unpack_Array_TimeSpan()?.ToList();
                 }
@@ -277,7 +275,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Double)
+                if (obj.GetIl2CppType().FullName == "System.Double")
                 {
                     return obj.Unbox<double>();
                 }
@@ -293,7 +291,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Double_Array)
+                if (obj.GetIl2CppType().FullName == "System.Double[]")
                 {
                     var array = Il2CppArrayBase<double>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -313,7 +311,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Double_Array)
+                if (obj.GetIl2CppType().FullName == "System.Double[]")
                 {
                     return obj.Unpack_Array_Double()?.ToList();
                 }
@@ -325,13 +323,11 @@
             return null;
         }
 
-
-
         internal static char? Unpack_Char(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Char)
+                if (obj.GetIl2CppType().FullName == "System.Char")
                 {
                     return obj.Unbox<char>();
                 }
@@ -347,7 +343,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Char_Array)
+                if (obj.GetIl2CppType().FullName == "System.Char[]")
                 {
                     var array = Il2CppArrayBase<char>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -367,7 +363,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Char_Array)
+                if (obj.GetIl2CppType().FullName == "System.Char[]")
                 {
                     return obj.Unpack_Array_Char()?.ToList();
                 }
@@ -383,7 +379,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Byte)
+                if (obj.GetIl2CppType().FullName == "System.Byte")
                 {
                     return obj.Unbox<byte>();
                 }
@@ -399,7 +395,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Byte_Array)
+                if (obj.GetIl2CppType().FullName == "System.Byte[]")
                 {
                     var array = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -419,7 +415,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Byte_Array)
+                if (obj.GetIl2CppType().FullName == "System.Byte[]")
                 {
                     return obj.Unpack_Array_Byte()?.ToList();
                 }
@@ -435,7 +431,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Int64)
+                if (obj.GetIl2CppType().FullName == "System.Int64")
                 {
                     return obj.Unbox<long>();
                 }
@@ -451,7 +447,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Int64_Array)
+                if (obj.GetIl2CppType().FullName == "System.Int64[]")
                 {
                     var array = Il2CppArrayBase<long>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -471,7 +467,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Int64_Array)
+                if (obj.GetIl2CppType().FullName == "System.Int64[]")
                 {
                     return obj.Unpack_Array_Int64()?.ToList();
                 }
@@ -487,7 +483,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Uint32)
+                if (obj.GetIl2CppType().FullName == "System.UInt32")
                 {
                     return obj.Unbox<uint>();
                 }
@@ -503,7 +499,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Uint32_Array)
+                if (obj.GetIl2CppType().FullName == "System.UInt32[]")
                 {
                     var array = Il2CppArrayBase<uint>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -523,7 +519,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Uint32_Array)
+                if (obj.GetIl2CppType().FullName == "System.UInt32[]")
                 {
                     return obj.Unpack_Array_UInt32()?.ToList();
                 }
@@ -539,7 +535,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Int32)
+                if (obj.GetIl2CppType().FullName == "System.Int32")
                 {
                     return obj.Unbox<int>();
                 }
@@ -555,7 +551,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Int32_Array)
+                if (obj.GetIl2CppType().FullName == "System.Int32[]")
                 {
                     var array = Il2CppArrayBase<int>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -575,7 +571,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Int32_Array)
+                if (obj.GetIl2CppType().FullName == "System.Int32[]")
                 {
                     return obj.Unpack_Array_Int32()?.ToList();
                 }
@@ -591,7 +587,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Color)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Color")
                 {
                     return obj.Unbox<UnityEngine.Color>();
                 }
@@ -607,7 +603,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Color_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Color[]")
                 {
                     var array = Il2CppArrayBase<Color>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -627,7 +623,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Color_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Color[]")
                 {
                     return obj.Unpack_Array_Color()?.ToList();
                 }
@@ -643,7 +639,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Transform)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Transform")
                 {
                     return obj.Cast<UnityEngine.Transform>();
                 }
@@ -659,7 +655,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Transform_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Transform[]")
                 {
                     var array = Il2CppArrayBase<Transform>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -679,7 +675,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Transform_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Transform[]")
                 {
                     return obj.Unpack_Array_Transform()?.ToList();
                 }
@@ -695,7 +691,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_GameObject)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.GameObject")
                 {
                     return obj.Cast<GameObject>();
                 }
@@ -711,7 +707,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDKBase_VRCPlayerApi)
+                if (obj.GetIl2CppType().FullName == "VRC.SDKBase.VRCPlayerApi")
                 {
                     return obj.Cast<VRC.SDKBase.VRCPlayerApi>();
                 }
@@ -727,7 +723,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_UdonBehaviour)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.UdonBehaviour")
                 {
                     return obj.Cast<VRC.Udon.UdonBehaviour>();
                 }
@@ -743,7 +739,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_UdonBehaviour_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.UdonBehaviour[]")
                 {
                     var array = Il2CppArrayBase<VRC.Udon.UdonBehaviour>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -763,7 +759,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_UdonBehaviour_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.UdonBehaviour[]")
                 {
                     return obj.Unpack_Array_UdonBehaviour()?.ToList();
                 }
@@ -779,7 +775,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Material)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Material")
                 {
                     return obj.Cast<UnityEngine.Material>();
                 }
@@ -795,7 +791,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Material_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Material[]")
                 {
                     var array = Il2CppArrayBase<Material>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -815,7 +811,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Material_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Material[]")
                 {
                     return obj.Unpack_Array_Material()?.ToList();
                 }
@@ -831,7 +827,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Vector3)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Vector3")
                 {
                     return obj.Unbox<UnityEngine.Vector3>();
                 }
@@ -847,7 +843,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Vector3_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Vector3[]")
                 {
                     var array = Il2CppArrayBase<Vector3>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -867,7 +863,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Vector3_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Vector3[]")
                 {
                     return obj.Unpack_Array_Vector3()?.ToList();
                 }
@@ -883,7 +879,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Quaternion)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Quaternion")
                 {
                     return obj.Unbox<UnityEngine.Quaternion>();
                 }
@@ -899,7 +895,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Quaternion_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Quaternion[]")
                 {
                     var array = Il2CppArrayBase<Quaternion>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -919,7 +915,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Quaternion_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Quaternion[]")
                 {
                     return obj.Unpack_Array_Quaternion()?.ToList();
                 }
@@ -935,7 +931,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_HumanBodyBones)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.HumanBodyBones")
                 {
                     return obj.Unbox<UnityEngine.HumanBodyBones>();
                 }
@@ -951,7 +947,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_HumanBodyBones_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.HumanBodyBones[]")
                 {
                     var array = Il2CppArrayBase<HumanBodyBones>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -971,7 +967,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_HumanBodyBones_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.HumanBodyBones[]")
                 {
                     return obj.Unpack_Array_HumanBodyBones()?.ToList();
                 }
@@ -987,7 +983,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.Common.Interfaces.NetworkEventTarget")
                 {
                     return obj.Unbox<VRC.Udon.Common.Interfaces.NetworkEventTarget>();
                 }
@@ -1003,7 +999,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.Common.Interfaces.NetworkEventTarget[]")
                 {
                     var array = Il2CppArrayBase<VRC.Udon.Common.Interfaces.NetworkEventTarget>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1023,7 +1019,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.Common.Interfaces.NetworkEventTarget[]")
                 {
                     return obj.Unpack_Array_NetworkEventTarget()?.ToList();
                 }
@@ -1035,13 +1031,11 @@
             return null;
         }
 
-
-
         internal static object Unpack_System_Object(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Object)
+                if (obj.GetIl2CppType().FullName == "System.Object")
                 {
                     var result = Serialization.FromIL2CPPToManaged<object>(obj);
                     if (result != null)
@@ -1061,7 +1055,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Object_Array)
+                if (obj.GetIl2CppType().FullName == "System.Object[]")
                 {
                     var array = Serialization.FromIL2CPPToManaged<object[]>(obj);
                     if (array != null && array.Count() != 0)
@@ -1081,7 +1075,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Object_Array)
+                if (obj.GetIl2CppType().FullName == "System.Object[]")
                 {
                     return obj.Unpack_Array_System_Object()?.ToList();
                 }
@@ -1097,7 +1091,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.TMPro_TextMeshPro)
+                if (obj.GetIl2CppType().FullName == "TMPro.TextMeshPro")
                 {
                     return obj.Cast<TMPro.TextMeshPro>();
                 }
@@ -1113,7 +1107,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.TMPro_TextMeshPro_Array)
+                if (obj.GetIl2CppType().FullName == "TMPro.TextMeshPro[]")
                 {
                     var array = Il2CppArrayBase<TMPro.TextMeshPro>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1133,7 +1127,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.TMPro_TextMeshPro_Array)
+                if (obj.GetIl2CppType().FullName == "TMPro.TextMeshPro[]")
                 {
                     return obj.Unpack_Array_TextMeshPro()?.ToList();
                 }
@@ -1149,7 +1143,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AudioSource)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AudioSource")
                 {
                     return obj.Cast<UnityEngine.AudioSource>();
                 }
@@ -1165,7 +1159,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AudioSource_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AudioSource[]")
                 {
                     var array = Il2CppArrayBase<AudioSource>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1185,7 +1179,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AudioSource_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AudioSource[]")
                 {
                     return obj.Unpack_Array_AudioSource()?.ToList();
                 }
@@ -1201,7 +1195,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Text)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Text")
                 {
                     return obj.Cast<UnityEngine.UI.Text>();
                 }
@@ -1217,7 +1211,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Text_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Text[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.UI.Text>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1237,7 +1231,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Text_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Text[]")
                 {
                     return obj.Unpack_Array_UnityEngine_UI_Text()?.ToList();
                 }
@@ -1269,7 +1263,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.TMPro_TextMeshProUGUI_Array)
+                if (obj.GetIl2CppType().FullName == "TMPro.TextMeshProUGUI[]")
                 {
                     var array = Il2CppArrayBase<TMPro.TextMeshProUGUI>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1289,7 +1283,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.TMPro_TextMeshProUGUI_Array)
+                if (obj.GetIl2CppType().FullName == "TMPro.TextMeshProUGUI[]")
                 {
                     return obj.Unpack_Array_TextMeshProUGUI()?.ToList();
                 }
@@ -1305,7 +1299,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshRenderer)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.MeshRenderer")
                 {
                     return obj.Cast<UnityEngine.MeshRenderer>();
                 }
@@ -1321,7 +1315,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshRenderer_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.MeshRenderer[]")
                 {
                     var array = Il2CppArrayBase<MeshRenderer>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1341,7 +1335,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshRenderer_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.MeshRenderer[]")
                 {
                     return obj.Unpack_Array_MeshRenderer()?.ToList();
                 }
@@ -1353,12 +1347,11 @@
             return null;
         }
 
-
         internal static BoxCollider Unpack_BoxCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_BoxCollider)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.BoxCollider")
                 {
                     return obj.Cast<UnityEngine.BoxCollider>();
                 }
@@ -1374,7 +1367,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_BoxCollider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.BoxCollider[]")
                 {
                     var array = Il2CppArrayBase<BoxCollider>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1394,7 +1387,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_BoxCollider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.BoxCollider[]")
                 {
                     return obj.Unpack_Array_BoxCollider()?.ToList();
                 }
@@ -1405,11 +1398,12 @@
             }
             return null;
         }
+
         internal static Sprite Unpack_Sprite(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Sprite)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Sprite")
                 {
                     return obj.Cast<UnityEngine.Sprite>();
                 }
@@ -1425,7 +1419,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Sprite_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Sprite[]")
                 {
                     var array = Il2CppArrayBase<Sprite>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1445,7 +1439,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Sprite_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Sprite[]")
                 {
                     return obj.Unpack_Array_Sprite()?.ToList();
                 }
@@ -1461,7 +1455,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Component)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Component")
                 {
                     return obj.Cast<UnityEngine.Component>();
                 }
@@ -1477,7 +1471,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Component_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Component[]")
                 {
                     var array = Il2CppArrayBase<Component>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1497,7 +1491,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Component_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Component[]")
                 {
                     return obj.Unpack_Array_Component()?.ToList();
                 }
@@ -1513,7 +1507,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCObjectPool)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCObjectPool")
                 {
                     return obj.Cast<VRC.SDK3.Components.VRCObjectPool>();
                 }
@@ -1529,7 +1523,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rigidbody)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Rigidbody")
                 {
                     return obj.Cast<UnityEngine.Rigidbody>();
                 }
@@ -1545,7 +1539,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rigidbody_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Rigidbody[]")
                 {
                     var array = Il2CppArrayBase<Rigidbody>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1565,7 +1559,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rigidbody_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Rigidbody[]")
                 {
                     return obj.Unpack_Array_Rigidbody()?.ToList();
                 }
@@ -1581,7 +1575,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_CapsuleCollider)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.CapsuleCollider")
                 {
                     return obj.Cast<UnityEngine.CapsuleCollider>();
                 }
@@ -1597,7 +1591,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_CapsuleCollider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.CapsuleCollider[]")
                 {
                     var array = Il2CppArrayBase<CapsuleCollider>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1617,7 +1611,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_CapsuleCollider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.CapsuleCollider[]")
                 {
                     return obj.Unpack_Array_CapsuleCollider()?.ToList();
                 }
@@ -1633,7 +1627,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_SphereCollider)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.SphereCollider")
                 {
                     return obj.Cast<UnityEngine.SphereCollider>();
                 }
@@ -1649,7 +1643,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_SphereCollider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.SphereCollider[]")
                 {
                     var array = Il2CppArrayBase<SphereCollider>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1669,7 +1663,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_SphereCollider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.SphereCollider[]")
                 {
                     return obj.Unpack_Array_SphereCollider()?.ToList();
                 }
@@ -1680,11 +1674,12 @@
             }
             return null;
         }
+
         internal static MeshCollider Unpack_MeshCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshCollider)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.MeshCollider")
                 {
                     return obj.Cast<UnityEngine.MeshCollider>();
                 }
@@ -1700,7 +1695,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Collider)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Collider")
                 {
                     return obj.Cast<UnityEngine.Collider>();
                 }
@@ -1712,12 +1707,11 @@
             return null;
         }
 
-
         internal static Collider[] Unpack_Array_Collider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Collider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Collider[]")
                 {
                     var array = Il2CppArrayBase<Collider>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1737,7 +1731,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Collider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Collider[]")
                 {
                     return obj.Unpack_Array_Collider()?.ToList();
                 }
@@ -1749,12 +1743,11 @@
             return null;
         }
 
-
         internal static MeshCollider[] Unpack_Array_MeshCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshCollider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.MeshCollider[]")
                 {
                     var array = Il2CppArrayBase<MeshCollider>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1774,7 +1767,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshCollider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.MeshCollider[]")
                 {
                     return obj.Unpack_Array_MeshCollider()?.ToList();
                 }
@@ -1790,7 +1783,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Texture)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Texture")
                 {
                     return obj.Cast<UnityEngine.Texture>();
                 }
@@ -1806,7 +1799,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Texture_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Texture[]")
                 {
                     var array = Il2CppArrayBase<Texture>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1826,7 +1819,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Texture_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Texture[]")
                 {
                     return obj.Unpack_Array_Texture()?.ToList();
                 }
@@ -1837,11 +1830,12 @@
             }
             return null;
         }
+
         internal static ReflectionProbe Unpack_ReflectionProbe(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_ReflectionProbe)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.ReflectionProbe")
                 {
                     return obj.Cast<UnityEngine.ReflectionProbe>();
                 }
@@ -1857,7 +1851,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_ReflectionProbe_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.ReflectionProbe[]")
                 {
                     var array = Il2CppArrayBase<ReflectionProbe>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1877,7 +1871,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_ReflectionProbe_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.ReflectionProbe[]")
                 {
                     return obj.Unpack_Array_ReflectionProbe()?.ToList();
                 }
@@ -1893,7 +1887,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RenderTexture)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RenderTexture")
                 {
                     return obj.Cast<UnityEngine.RenderTexture>();
                 }
@@ -1909,7 +1903,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RenderTexture_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RenderTexture[]")
                 {
                     var array = Il2CppArrayBase<RenderTexture>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1929,7 +1923,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RenderTexture_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RenderTexture[]")
                 {
                     return obj.Unpack_Array_RenderTexture()?.ToList();
                 }
@@ -1941,13 +1935,11 @@
             return null;
         }
 
-
-
         internal static TextAsset Unpack_TextAsset(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_TextAsset)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.TextAsset")
                 {
                     return obj.Cast<UnityEngine.TextAsset>();
                 }
@@ -1963,7 +1955,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_TextAsset_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.TextAsset[]")
                 {
                     var array = Il2CppArrayBase<TextAsset>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -1983,7 +1975,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_TextAsset_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.TextAsset[]")
                 {
                     return obj.Unpack_Array_TextAsset()?.ToList();
                 }
@@ -1995,13 +1987,11 @@
             return null;
         }
 
-
-
         internal static Mesh Unpack_Mesh(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Mesh)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Mesh")
                 {
                     return obj.Cast<UnityEngine.Mesh>();
                 }
@@ -2017,7 +2007,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Mesh_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Mesh[]")
                 {
                     var array = Il2CppArrayBase<Mesh>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2037,7 +2027,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Mesh_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Mesh[]")
                 {
                     return obj.Unpack_Array_Mesh()?.ToList();
                 }
@@ -2049,12 +2039,11 @@
             return null;
         }
 
-
         internal static Animator Unpack_Animator(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Animator)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Animator")
                 {
                     return obj.Cast<UnityEngine.Animator>();
                 }
@@ -2070,7 +2059,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Animator_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Animator[]")
                 {
                     var array = Il2CppArrayBase<Animator>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2090,7 +2079,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Animator_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Animator[]")
                 {
                     return obj.Unpack_Array_Animator()?.ToList();
                 }
@@ -2106,7 +2095,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LineRenderer)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.LineRenderer")
                 {
                     return obj.Cast<UnityEngine.LineRenderer>();
                 }
@@ -2122,7 +2111,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LineRenderer_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.LineRenderer[]")
                 {
                     var array = Il2CppArrayBase<LineRenderer>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2142,7 +2131,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LineRenderer_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.LineRenderer[]")
                 {
                     return obj.Unpack_Array_LineRenderer()?.ToList();
                 }
@@ -2158,7 +2147,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_KeyCode)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.KeyCode")
                 {
                     return obj.Unbox<UnityEngine.KeyCode>();
                 }
@@ -2174,7 +2163,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_KeyCode_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.KeyCode[]")
                 {
                     var array = Il2CppArrayBase<KeyCode>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2194,7 +2183,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_KeyCode_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.KeyCode[]")
                 {
                     return obj.Unpack_Array_KeyCode()?.ToList();
                 }
@@ -2210,7 +2199,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Texture2D)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Texture2D")
                 {
                     return obj.Cast<UnityEngine.Texture2D>();
                 }
@@ -2226,7 +2215,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Texture2D_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Texture2D[]")
                 {
                     var array = Il2CppArrayBase<Texture2D>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2246,7 +2235,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Texture2D_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Texture2D[]")
                 {
                     return obj.Unpack_Array_Texture2D()?.ToList();
                 }
@@ -2262,7 +2251,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rect)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Rect")
                 {
                     return obj.Unbox<UnityEngine.Rect>();
                 }
@@ -2278,7 +2267,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rect_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Rect[]")
                 {
                     var array = Il2CppArrayBase<Rect>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2298,7 +2287,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rect_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Rect[]")
                 {
                     return obj.Unpack_Array_Rect()?.ToList();
                 }
@@ -2310,12 +2299,11 @@
             return null;
         }
 
-
         internal static Camera Unpack_Camera(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Camera)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Camera")
                 {
                     return obj.Cast<UnityEngine.Camera>();
                 }
@@ -2331,7 +2319,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Camera_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Camera[]")
                 {
                     var array = Il2CppArrayBase<Camera>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2351,7 +2339,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Camera_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Camera[]")
                 {
                     return obj.Unpack_Array_Camera()?.ToList();
                 }
@@ -2363,12 +2351,11 @@
             return null;
         }
 
-
         internal static RectTransform Unpack_RectTransform(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RectTransform)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RectTransform")
                 {
                     return obj.Cast<UnityEngine.RectTransform>();
                 }
@@ -2384,7 +2371,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RectTransform_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RectTransform[]")
                 {
                     var array = Il2CppArrayBase<RectTransform>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2404,7 +2391,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RectTransform_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RectTransform[]")
                 {
                     return obj.Unpack_Array_RectTransform()?.ToList();
                 }
@@ -2416,12 +2403,11 @@
             return null;
         }
 
-
         internal static RaycastHit? Unpack_RaycastHit(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RaycastHit)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RaycastHit")
                 {
                     return obj.Unbox<UnityEngine.RaycastHit>();
                 }
@@ -2437,7 +2423,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RaycastHit_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RaycastHit[]")
                 {
                     var array = Il2CppArrayBase<RaycastHit>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2457,7 +2443,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RaycastHit_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.RaycastHit[]")
                 {
                     return obj.Unpack_Array_RaycastHit()?.ToList();
                 }
@@ -2469,12 +2455,11 @@
             return null;
         }
 
-
         internal static LayerMask? Unpack_LayerMask(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LayerMask)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.LayerMask")
                 {
                     return obj.Unbox<UnityEngine.LayerMask>();
                 }
@@ -2490,7 +2475,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LayerMask_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.LayerMask[]")
                 {
                     var array = Il2CppArrayBase<LayerMask>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2510,7 +2495,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LayerMask_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.LayerMask[]")
                 {
                     return obj.Unpack_Array_LayerMask()?.ToList();
                 }
@@ -2522,12 +2507,11 @@
             return null;
         }
 
-
         internal static Bounds? Unpack_Bounds(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Bounds)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Bounds")
                 {
                     return obj.Unbox<UnityEngine.Bounds>();
                 }
@@ -2539,13 +2523,11 @@
             return null;
         }
 
-
-
         internal static Bounds[] Unpack_Array_Bounds(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Bounds_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Bounds[]")
                 {
                     var array = Il2CppArrayBase<Bounds>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2565,7 +2547,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Bounds_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.Bounds[]")
                 {
                     return obj.Unpack_Array_Bounds()?.ToList();
                 }
@@ -2576,11 +2558,12 @@
             }
             return null;
         }
+
         internal static GameObject[] Unpack_Array_GameObject(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_GameObject_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.GameObject[]")
                 {
                     var array = Il2CppArrayBase<GameObject>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2600,7 +2583,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_GameObject_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.GameObject[]")
                 {
                     return obj.Unpack_Array_GameObject()?.ToList();
                 }
@@ -2616,7 +2599,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDKBase_VRCPlayerApi_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDKBase.VRCPlayerApi[]")
                 {
                     var array = Il2CppArrayBase<VRC.SDKBase.VRCPlayerApi>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2636,7 +2619,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDKBase_VRCPlayerApi_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDKBase.VRCPlayerApi[]")
                 {
                     return obj.Unpack_Array_VRCPlayerApi()?.ToList();
                 }
@@ -2652,7 +2635,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AudioClip)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AudioClip")
                 {
                     return obj.Cast<UnityEngine.AudioClip>();
                 }
@@ -2668,7 +2651,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AudioClip_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AudioClip[]")
                 {
                     var array = Il2CppArrayBase<AudioClip>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2688,7 +2671,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AudioClip_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AudioClip[]")
                 {
                     return obj.Unpack_Array_AudioClip()?.ToList();
                 }
@@ -2704,7 +2687,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_ParticleSystem)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.ParticleSystem")
                 {
                     return obj.Cast<UnityEngine.ParticleSystem>();
                 }
@@ -2720,7 +2703,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_ParticleSystem_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.ParticleSystem[]")
                 {
                     var array = Il2CppArrayBase<ParticleSystem>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2740,7 +2723,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_ParticleSystem_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.ParticleSystem[]")
                 {
                     return obj.Unpack_Array_ParticleSystem()?.ToList();
                 }
@@ -2752,12 +2735,11 @@
             return null;
         }
 
-
         internal static UnityEngine.AI.NavMeshAgent Unpack_UnityEngine_AI_NavMeshAgent(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AI_NavMeshAgent)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AI.NavMeshAgent")
                 {
                     return obj.Cast<UnityEngine.AI.NavMeshAgent>();
                 }
@@ -2773,7 +2755,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AI_NavMeshAgent_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AI.NavMeshAgent[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.AI.NavMeshAgent>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2793,7 +2775,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AI_NavMeshAgent_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AI.NavMeshAgent[]")
                 {
                     return obj.Unpack_Array_UnityEngine_AI_NavMeshAgent()?.ToList();
                 }
@@ -2804,11 +2786,12 @@
             }
             return null;
         }
+
         internal static UnityEngine.AI.NavMeshHit? Unpack_UnityEngine_AI_NavMeshHit(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AI_NavMeshHit)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AI.NavMeshHit")
                 {
                     return obj.Unbox<UnityEngine.AI.NavMeshHit>();
                 }
@@ -2824,7 +2807,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AI_NavMeshHit_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AI.NavMeshHit[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.AI.NavMeshHit>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2844,7 +2827,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_AI_NavMeshHit_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.AI.NavMeshHit[]")
                 {
                     return obj.Unpack_Array_UnityEngine_AI_NavMeshHit()?.ToList();
                 }
@@ -2856,12 +2839,11 @@
             return null;
         }
 
-
         internal static UnityEngine.UI.ScrollRect Unpack_UnityEngine_UI_ScrollRect(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_ScrollRect)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.ScrollRect")
                 {
                     return obj.Cast<UnityEngine.UI.ScrollRect>();
                 }
@@ -2877,7 +2859,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_ScrollRect_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.ScrollRect[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.UI.ScrollRect>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2897,7 +2879,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_ScrollRect_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.ScrollRect[]")
                 {
                     return obj.Unpack_Array_UnityEngine_UI_ScrollRect()?.ToList();
                 }
@@ -2913,7 +2895,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_InputField)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.InputField")
                 {
                     return obj.Cast<UnityEngine.UI.InputField>();
                 }
@@ -2929,7 +2911,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_InputField_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.InputField[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.UI.InputField>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2949,7 +2931,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDKBase_VRCUrl)
+                if (obj.GetIl2CppType().FullName == "VRC.SDKBase.VRCUrl")
                 {
                     return obj.Cast<VRC.SDKBase.VRCUrl>();
                 }
@@ -2965,7 +2947,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDKBase_VRCUrl_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDKBase.VRCUrl[]")
                 {
                     var array = Il2CppArrayBase<VRC.SDKBase.VRCUrl>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -2985,7 +2967,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDKBase_VRCUrl_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDKBase.VRCUrl[]")
                 {
                     return obj.Unpack_Array_VRC_SDKBase_VRCUrl()?.ToList();
                 }
@@ -2997,12 +2979,11 @@
             return null;
         }
 
-
         internal static VRC.SDK3.Video.Components.VRCUnityVideoPlayer Unpack_VRC_SDK3_Video_Components_VRCUnityVideoPlayer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Video_Components_VRCUnityVideoPlayer)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Video.Components.VRCUnityVideoPlayer")
                 {
                     return obj.Cast<VRC.SDK3.Video.Components.VRCUnityVideoPlayer>();
                 }
@@ -3018,7 +2999,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]")
                 {
                     var array = Il2CppArrayBase<VRC.SDK3.Video.Components.VRCUnityVideoPlayer>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3038,7 +3019,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]")
                 {
                     return obj.Unpack_Array_VRC_SDK3_Video_Components_VRCUnityVideoPlayer()?.ToList();
                 }
@@ -3054,7 +3035,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer")
                 {
                     return obj.Cast<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer>();
                 }
@@ -3070,7 +3051,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]")
                 {
                     var array = Il2CppArrayBase<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3090,7 +3071,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]")
                 {
                     return obj.Unpack_Array_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer()?.ToList();
                 }
@@ -3106,7 +3087,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCUrlInputField)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCUrlInputField")
                 {
                     return obj.Cast<VRC.SDK3.Components.VRCUrlInputField>();
                 }
@@ -3122,7 +3103,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCUrlInputField_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCUrlInputField[]")
                 {
                     var array = Il2CppArrayBase<VRC.SDK3.Components.VRCUrlInputField>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3142,7 +3123,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCUrlInputField_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCUrlInputField[]")
                 {
                     return obj.Unpack_Array_VRC_SDK3_Components_VRCUrlInputField()?.ToList();
                 }
@@ -3158,7 +3139,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_Video_VideoError)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.Video.VideoError")
                 {
                     return obj.Unbox<VRC.SDK3.Components.Video.VideoError>();
                 }
@@ -3170,13 +3151,11 @@
             return null;
         }
 
-
-
         internal static VRC.SDK3.Components.Video.VideoError[] Unpack_Array_VRC_SDK3_Components_Video_VideoError(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_Video_VideoError_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.Video.VideoError[]")
                 {
                     var array = Il2CppArrayBase<VRC.SDK3.Components.Video.VideoError>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3196,7 +3175,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_Video_VideoError_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.Video.VideoError[]")
                 {
                     return obj.Unpack_Array_VRC_SDK3_Components_Video_VideoError()?.ToList();
                 }
@@ -3208,13 +3187,11 @@
             return null;
         }
 
-
-
         internal static VRC.Udon.Common.SerializationResult? Unpack_VRC_Udon_Common_SerializationResult(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_Common_SerializationResult)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.Common.SerializationResult")
                 {
                     return obj.Unbox<VRC.Udon.Common.SerializationResult>();
                 }
@@ -3230,7 +3207,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_Common_SerializationResult_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.Common.SerializationResult[]")
                 {
                     var array = Il2CppArrayBase<VRC.Udon.Common.SerializationResult>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3250,7 +3227,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_Udon_Common_SerializationResult_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.Udon.Common.SerializationResult[]")
                 {
                     return obj.Unpack_Array_VRC_Udon_Common_SerializationResult()?.ToList();
                 }
@@ -3262,12 +3239,11 @@
             return null;
         }
 
-
         internal static List<UnityEngine.UI.InputField> Unpack_List_UnityEngine_UI_InputField(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_InputField_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.InputField[]")
                 {
                     return obj.Unpack_Array_UnityEngine_UI_InputField()?.ToList();
                 }
@@ -3278,11 +3254,12 @@
             }
             return null;
         }
+
         internal static UnityEngine.UI.Slider Unpack_UnityEngine_UI_Slider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Slider)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Slider")
                 {
                     return obj.Cast<UnityEngine.UI.Slider>();
                 }
@@ -3298,7 +3275,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Slider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Slider[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.UI.Slider>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3318,7 +3295,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Slider_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Slider[]")
                 {
                     return obj.Unpack_Array_UnityEngine_UI_Slider()?.ToList();
                 }
@@ -3329,11 +3306,12 @@
             }
             return null;
         }
+
         internal static UnityEngine.UI.Toggle Unpack_UnityEngine_UI_Toggle(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Toggle)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Toggle")
                 {
                     return obj.Cast<UnityEngine.UI.Toggle>();
                 }
@@ -3349,7 +3327,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Toggle_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Toggle[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.UI.Toggle>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3369,7 +3347,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Toggle_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Toggle[]")
                 {
                     return obj.Unpack_Array_UnityEngine_UI_Toggle()?.ToList();
                 }
@@ -3385,7 +3363,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Image)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Image")
                 {
                     return obj.Cast<UnityEngine.UI.Image>();
                 }
@@ -3401,7 +3379,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Image_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Image[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.UI.Image>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3421,7 +3399,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Image_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Image[]")
                 {
                     return obj.Unpack_Array_UnityEngine_UI_Image()?.ToList();
                 }
@@ -3437,7 +3415,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Button)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Button")
                 {
                     return obj.Cast<UnityEngine.UI.Button>();
                 }
@@ -3453,7 +3431,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Button_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Button[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.UI.Button>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3473,7 +3451,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_Button_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.Button[]")
                 {
                     return obj.Unpack_Array_UnityEngine_UI_Button()?.ToList();
                 }
@@ -3484,11 +3462,12 @@
             }
             return null;
         }
+
         internal static UnityEngine.UI.RawImage Unpack_UnityEngine_UI_RawImage(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_RawImage)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.RawImage")
                 {
                     return obj.Cast<UnityEngine.UI.RawImage>();
                 }
@@ -3504,7 +3483,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_RawImage_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.RawImage[]")
                 {
                     var array = Il2CppArrayBase<UnityEngine.UI.RawImage>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3524,7 +3503,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_UI_RawImage_Array)
+                if (obj.GetIl2CppType().FullName == "UnityEngine.UI.RawImage[]")
                 {
                     return obj.Unpack_Array_UnityEngine_UI_RawImage()?.ToList();
                 }
@@ -3540,7 +3519,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCAvatarPedestal")
                 {
                     return obj.Cast<VRC.SDK3.Components.VRCAvatarPedestal>();
                 }
@@ -3556,7 +3535,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCAvatarPedestal[]")
                 {
                     var array = Il2CppArrayBase<VRC.SDK3.Components.VRCAvatarPedestal>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3576,7 +3555,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCAvatarPedestal[]")
                 {
                     return obj.Unpack_Array_VRC_SDK3_Components_VRCAvatarPedestal()?.ToList();
                 }
@@ -3592,7 +3571,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCPickup)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCPickup")
                 {
                     return obj.Cast<VRC.SDK3.Components.VRCPickup>();
                 }
@@ -3608,7 +3587,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCPickup_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCPickup[]")
                 {
                     var array = Il2CppArrayBase<VRC.SDK3.Components.VRCPickup>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
@@ -3628,7 +3607,7 @@
         {
             if (obj != null)
             {
-                if (obj.GetIl2CppType().FullName == UdonTypes_String.VRC_SDK3_Components_VRCPickup_Array)
+                if (obj.GetIl2CppType().FullName == "VRC.SDK3.Components.VRCPickup[]")
                 {
                     return obj.Unpack_Array_VRC_SDK3_Components_VRCPickup()?.ToList();
                 }
@@ -3639,7 +3618,5 @@
             }
             return null;
         }
-
-
     }
 }

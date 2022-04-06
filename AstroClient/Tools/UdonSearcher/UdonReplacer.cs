@@ -1,16 +1,13 @@
-﻿using System.Windows.Forms.DataVisualization.Charting;
-#pragma warning disable CS0168
+﻿#pragma warning disable CS0168
 
 namespace AstroClient.Tools.UdonSearcher
 {
+    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using Extensions;
-    using Il2CppSystem.Text.RegularExpressions;
-    using MelonLoader;
     using TMPro;
     using UdonEditor;
     using UnityEngine;
@@ -20,23 +17,18 @@ namespace AstroClient.Tools.UdonSearcher
 
     internal static class UdonReplacer
     {
-
         internal static void ReplaceString(string find, string replacement)
         {
             MelonCoroutines.Start(ReplaceString_Routine(find, replacement));
         }
 
-
-
-
         private static IEnumerator ReplaceString_Routine(string find, string replacement)
         {
-
             if (!find.IsNotNullOrEmptyOrWhiteSpace() || !replacement.IsNotNullOrEmptyOrWhiteSpace()) yield return null;
-        int success = 0;
-       int Failed  = 0;
-        var stopwatch = new Stopwatch();
-        stopwatch.Start();
+            int success = 0;
+            int Failed = 0;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             if (udons.Count() != 0)
             {
@@ -57,7 +49,7 @@ namespace AstroClient.Tools.UdonSearcher
                                     {
                                         switch (UnboxVariable.GetIl2CppType().FullName)
                                         {
-                                            case UdonTypes_String.System_String:
+                                            case "System.String":
                                                 {
                                                     var item = unpackedudon.IUdonHeap.GetHeapVariable<string>(address);
                                                     if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
@@ -72,7 +64,7 @@ namespace AstroClient.Tools.UdonSearcher
 
                                                     break;
                                                 }
-                                            case UdonTypes_String.System_String_Array:
+                                            case "System.String[]":
                                                 {
                                                     var list = unpackedudon.IUdonHeap.GetHeapVariable<string[]>(address).ToList();
                                                     if (list.Count() != 0)
@@ -102,7 +94,7 @@ namespace AstroClient.Tools.UdonSearcher
 
                                                     break;
                                                 }
-                                            case UdonTypes_String.TMPro_TextMeshPro:
+                                            case "TMPro.TextMeshPro":
                                                 {
                                                     var item = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshPro>(address);
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
@@ -133,7 +125,7 @@ namespace AstroClient.Tools.UdonSearcher
 
                                                     break;
                                                 }
-                                            case UdonTypes_String.TMPro_TextMeshPro_Array:
+                                            case "TMPro.TextMeshPro[]":
                                                 {
                                                     var list = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshPro[]>(address).ToList();
                                                     if (list.Count() != 0)
@@ -165,7 +157,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                     break;
                                                 }
 
-                                            case UdonTypes_String.TMPro_TextMeshProUGUI:
+                                            case "TMPro.TextMeshProUGUI":
                                                 {
                                                     var item = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshProUGUI>(address);
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
@@ -179,9 +171,9 @@ namespace AstroClient.Tools.UdonSearcher
                                                             UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, () => { success++; }, () =>
                                                             {
                                                                 var item = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshProUGUI>(address);
-                                                                if(item != null)
+                                                                if (item != null)
                                                                 {
-                                                                    if(item.text.Equals(modifiedstring))
+                                                                    if (item.text.Equals(modifiedstring))
                                                                     {
                                                                         success++;
                                                                     }
@@ -196,7 +188,7 @@ namespace AstroClient.Tools.UdonSearcher
 
                                                     break;
                                                 }
-                                            case UdonTypes_String.TMPro_TextMeshProUGUI_Array:
+                                            case "TMPro.TextMeshProUGUI[]":
                                                 {
                                                     var list = unpackedudon.IUdonHeap.GetHeapVariable<TextMeshProUGUI[]>(address).ToList();
                                                     if (list.Count() != 0)
@@ -229,7 +221,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                 }
 
                                             // TODO: Figure how to edit it .
-                                            case UdonTypes_String.UnityEngine_TextAsset:
+                                            case "UnityEngine.TextAsset":
                                                 {
                                                     var item = unpackedudon.IUdonHeap.GetHeapVariable<TextAsset>(address);
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
@@ -254,7 +246,6 @@ namespace AstroClient.Tools.UdonSearcher
                                                                     Log.Debug("Failed to Patch TextAsset");
                                                                     Failed++;
                                                                 }
-
                                                             }
                                                             catch (Exception e)
                                                             {
@@ -265,7 +256,7 @@ namespace AstroClient.Tools.UdonSearcher
 
                                                     break;
                                                 }
-                                            case UdonTypes_String.UnityEngine_TextAsset_Array:
+                                            case "UnityEngine.TextAsset[]":
                                                 {
                                                     var list = unpackedudon.IUdonHeap.GetHeapVariable<TextAsset[]>(address).ToList();
                                                     if (list == null)
@@ -282,7 +273,6 @@ namespace AstroClient.Tools.UdonSearcher
                                                             {
                                                                 if (item.text.isMatch(find))
                                                                 {
-
                                                                     try
                                                                     {
                                                                         var patchedstr = item.text.ReplaceWholeWord(find, replacement);
@@ -303,7 +293,6 @@ namespace AstroClient.Tools.UdonSearcher
                                                                         //result++;
                                                                         //modified = true;
                                                                     }
-
                                                                     catch (Exception e)
                                                                     {
                                                                         Log.Exception(e);

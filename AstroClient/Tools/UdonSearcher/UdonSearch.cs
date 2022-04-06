@@ -1,18 +1,16 @@
 ﻿namespace AstroClient.Tools.UdonSearcher
 {
+    using CustomClasses;
+    using Regexes;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using CustomClasses;
-    using Extensions;
-    using Regexes;
     using UdonEditor;
     using UnityEngine;
     using VRC.Udon;
     using xAstroBoy;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-    using static Constants.CustomLists;
 
     internal static class UdonSearch
     {
@@ -71,7 +69,6 @@
                             AllBehavioursToAnalyze.Add(item);
                         }
                     }
-
                 }
             }
             if (TermsToWhitelist.IsNotEmpty())
@@ -84,7 +81,6 @@
                     {
                         if (item._eventTable.count != 0)
                         {
-
                             if (item != null)
                             {
                                 foreach (var subkey in item._eventTable)
@@ -177,9 +173,7 @@
                             continue;
                         }
                     }
-
                 }
-
             }
 
             return SearchResult;
@@ -279,7 +273,6 @@
             return null;
         }
 
-
         internal static bool HasUdonEvent(UdonBehaviour obj, string subaction)
         {
             if (obj != null)
@@ -298,6 +291,7 @@
 
             return false;
         }
+
         internal static bool HasUdonEvent(GameObject obj, string subaction)
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
@@ -319,7 +313,6 @@
 
             return false;
         }
-
 
         internal static UdonBehaviour_Cached FindUdonEvent(GameObject obj, string subaction, bool Debug = false)
         {
@@ -346,6 +339,7 @@
 
             return null;
         }
+
         internal static List<UdonBehaviour_Cached> FindUdonEvents(GameObject obj, string subaction, bool Debug = false)
         {
             var result = new List<UdonBehaviour_Cached>();
@@ -378,7 +372,7 @@
             return null;
         }
 
-        internal static Il2CppSystem.Object FindUdonVariable(GameObject obj, string SymbolName)
+        internal static RawUdonBehaviour FindUdonVariable(GameObject obj, string SymbolName)
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
             if (actionObjects.Count() != 0)
@@ -405,7 +399,7 @@
                                     {
                                         try
                                         {
-                                            return UnboxVariable;
+                                            return unpackedudon;
                                         }
                                         catch (Exception e)
                                         {
@@ -452,9 +446,9 @@
                                     {
                                         switch (FullName)
                                         {
-                                            case UdonTypes_String.System_String:
+                                            case "System.String":
                                                 {
-                                                    var item = UnboxVariable.Unpack_String();
+                                                    var item = unpackedudon.IUdonHeap.GetHeapVariable<string>(address);
                                                     if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
                                                         if (item.IsAvatarID())
@@ -482,9 +476,9 @@
 
                                                     break;
                                                 }
-                                            case UdonTypes_String.System_String_Array:
+                                            case "System.String[]":
                                                 {
-                                                    var list = UnboxVariable.Unpack_List_String();
+                                                    var list = unpackedudon.IUdonHeap.GetHeapVariable<string[]>(address);
                                                     if (list.Count() != 0)
                                                         foreach (var value in list)
                                                         {
@@ -516,10 +510,9 @@
 
                                                     break;
                                                 }
-                                            case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal:
+                                            case "VRC.SDK3.Components.VRCAvatarPedestal":
                                                 {
-                                                    var pedestral = UnboxVariable
-                                                        .Unpack_VRC_SDK3_Components_VRCAvatarPedestal();
+                                                    var pedestral = unpackedudon.IUdonHeap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal>(address);
                                                     if (pedestral != null)
                                                     {
                                                         if (!pedestral.grantBlueprintAccess)
@@ -536,11 +529,10 @@
 
                                                     break;
                                                 }
-                                            case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal_Array:
+                                            case "VRC.SDK3.Components.VRCAvatarPedestal[]":
                                                 {
-                                                    var list = UnboxVariable
-                                                        .Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal();
-                                                    if (list != null && list.Count != 0)
+                                                    var list = unpackedudon.IUdonHeap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal[]>(address);
+                                                    if (list != null && list.Count() != 0)
                                                     {
                                                         foreach (var pedestral in list)
                                                         {

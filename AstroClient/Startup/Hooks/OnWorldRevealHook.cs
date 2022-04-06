@@ -2,85 +2,64 @@
 
 namespace AstroClient.Startup.Hooks
 {
+    #region Imports
+
     using System;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using AstroEventArgs;
+    using Cheetos;
+    using Config;
     using Constants;
-    using MelonLoader;
     using Tools.Extensions;
-    using UnhollowerBaseLib;
+    using UnityEngine;
+    using VRC.SDKBase;
+    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
+    using HarmonyLib;
+    using VRC.SDKBase.Validation.Performance;
+    using WorldModifications.WorldsIds;
 
+    #endregion Imports
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 
     internal class OnWorldRevealHook : AstroEvents
     {
         internal static event Action<string, string, List<string>, string, string> Event_OnWorldReveal;
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
-        {
-            if (Bools.IsDeveloper)
-                Log.Debug($"Scene Name: {sceneName}");
-        }
+
+        //internal static 
 
         internal override void ExecutePriorityPatches()
         {
-            HookFadeTo();
+            InitPatches();
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
-        private static IntPtr GetPointerPatch(string patch)
+        private static HarmonyLib.HarmonyMethod GetPatch(string name)
         {
-            return typeof(OnWorldRevealHook).GetMethod(patch, BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer();
+            return new HarmonyLib.HarmonyMethod(typeof(OnWorldRevealHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        private static void HookFadeTo()
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
+        internal void InitPatches()
         {
-            unsafe
-            {
-                Log.Debug("Hooking FadeTo");
-                var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_1))).GetValue(null);
-                MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), GetPointerPatch(nameof(FadeToPatch)));
-                _fadeToDelegate = Marshal.GetDelegateForFunctionPointer<FadeToDelegate>(originalMethod);
-                if (_fadeToDelegate != null)
-                {
-                    Log.Debug("Hooked OnFadeTo");
-                }
-                else
-                {
-                    Log.Error("Failed to hook OnFadeTo!");
-                }
-            }
+            new AstroPatch(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_1)), GetPatch(nameof(OnFadeEvent)));
+
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        internal delegate void FadeToDelegate(IntPtr thisPtr, IntPtr fadeTypePtr, float duration, IntPtr action);
-
-        private static FadeToDelegate _fadeToDelegate;
-
-        private static void FadeToPatch(IntPtr thisPtr, IntPtr fadeTypePtr, float duration, IntPtr action)
+        private static void OnFadeEvent(string __0, float __1, Il2CppSystem.Action __2)
         {
-            try
+            string fadeType = __0;
+            float duration = __1;
+
+            ModConsole.DebugLog("FadeType Called : " + fadeType + " With duration : " + duration);
+            if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
+                RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
             {
-                if (thisPtr != IntPtr.Zero && fadeTypePtr != IntPtr.Zero)
-                {
-                    string fadeType = IL2CPP.Il2CppStringToManaged(fadeTypePtr);
-                    Log.Debug($"FadeType Called : {fadeType} With duration : {duration}");
-                    if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
-                        RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
-                    {
-                        Event_OnWorldReveal.SafetyRaise(WorldUtils.WorldID, WorldUtils.WorldName, WorldUtils.WorldTags, WorldUtils.AuthorName, WorldUtils.AssetURL);
-                    }
-                }
+                Event_OnWorldReveal.SafetyRaise(WorldUtils.WorldID, WorldUtils.WorldName, WorldUtils.WorldTags, WorldUtils.AuthorName, WorldUtils.AssetURL);
             }
-            catch
-            {
-            }
-            finally
-            {
-                _fadeToDelegate(thisPtr, fadeTypePtr, duration, action);
-            }
+
         }
+
     }
 }

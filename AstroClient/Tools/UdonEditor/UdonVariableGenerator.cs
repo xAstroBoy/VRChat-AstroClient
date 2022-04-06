@@ -46,16 +46,8 @@ namespace AstroClient.Tools.UdonEditor
                         var UnboxVariable = behaviour.IUdonHeap.GetHeapVariable(address);
                         if (UnboxVariable != null)
                         {
-                            if (UnboxVariable.GetIl2CppType().FullName == UdonTypes_String.System_RuntimeType)
+                            if (UnboxVariable.GetIl2CppType().FullName == "System.RuntimeType" || UnboxVariable.GetIl2CppType().FullName == "System.RuntimeType[]")
 
-                            {
-                                if (!UsedSymbols.Contains(symbol))
-                                {
-                                    UsedSymbols.Add(symbol);
-                                }
-                                continue;
-                            }
-                            if (UnboxVariable.GetIl2CppType().GetIl2CppType().FullName == UdonTypes_String.System_RuntimeType_Array)
                             {
                                 if (!UsedSymbols.Contains(symbol))
                                 {
@@ -120,31 +112,6 @@ namespace AstroClient.Tools.UdonEditor
         {
             switch (name)
             {
-                case UdonTypes_String.System_String: return "string";
-                case UdonTypes_String.System_String_Array: return "string[]";
-                case UdonTypes_String.System_Uint32: return "uint?";
-                case UdonTypes_String.System_Uint32_Array: return "uint[]";
-                case UdonTypes_String.System_Int32: return "int?";
-                case UdonTypes_String.System_Int32_Array: return "int[]";
-                case UdonTypes_String.System_Int64: return "long?";
-                case UdonTypes_String.System_Int64_Array: return "long[]";
-                case UdonTypes_String.System_Char: return "char?";
-                case UdonTypes_String.System_Char_Array: return "char[]";
-                case UdonTypes_String.System_Single: return "float?";
-                case UdonTypes_String.System_Single_Array: return "float[]";
-                case UdonTypes_String.System_Boolean: return "bool?";
-                case UdonTypes_String.System_Boolean_Array: return "bool[]";
-                case UdonTypes_String.System_Byte: return "byte?";
-                case UdonTypes_String.System_Byte_Array: return "byte[]";
-                case UdonTypes_String.System_UInt16: return "ushort?";
-                case UdonTypes_String.System_UInt16_Array: return "ushort[]";
-                case UdonTypes_String.System_Double: return "double?";
-                case UdonTypes_String.System_Double_Array: return "double[]";
-                case UdonTypes_String.UnityEngine_Vector3: return "UnityEngine.Vector3?";
-                case UdonTypes_String.UnityEngine_Quaternion: return "UnityEngine.Quaternion?";
-                case UdonTypes_String.UnityEngine_Color: return "UnityEngine.Color?";
-                case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget: return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
-                case UdonTypes_String.VRC_Udon_Common_Enums_EventTiming: return "VRC.Udon.Common.Enums.EventTiming?";
                 default:
                     if (name.Contains("+"))
                     {
@@ -158,20 +125,20 @@ namespace AstroClient.Tools.UdonEditor
         {
             switch (name)
             {
-                case UdonTypes_String.System_Uint32:
-                case UdonTypes_String.System_Int32:
-                case UdonTypes_String.System_Int64:
-                case UdonTypes_String.System_Char:
-                case UdonTypes_String.System_Single:
-                case UdonTypes_String.System_Boolean:
-                case UdonTypes_String.System_Byte:
-                case UdonTypes_String.System_UInt16:
-                case UdonTypes_String.System_Double:
-                case UdonTypes_String.UnityEngine_Vector3:
-                case UdonTypes_String.UnityEngine_Quaternion:
-                case UdonTypes_String.UnityEngine_Color:
-                case UdonTypes_String.VRC_Udon_Common_Interfaces_NetworkEventTarget:
-                case UdonTypes_String.VRC_Udon_Common_Enums_EventTiming:
+case "System.UInt32":
+case "System.Int32":
+case "System.Int64":
+case "System.Char":
+case "System.Single":
+case "System.Boolean":
+case "System.Byte":
+case "System.UInt16":
+case "System.Double":
+case "UnityEngine.Vector3":
+case "UnityEngine.Quaternion":
+case "UnityEngine.Color":
+case "VRC.Udon.Common.Interfaces.NetworkEventTarget":
+case "VRC.Udon.Common.Enums.EventTiming":
                     return true;
 
                 default:
