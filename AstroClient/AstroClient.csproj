@@ -145,6 +145,13 @@
     <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="Developers\Cheetos\Color.cs" />
+    <Compile Include="Developers\Cheetos\ConsoleUtils.cs" />
+    <Compile Include="Developers\Cheetos\Log.cs" />
+    <Compile Include="Developers\Cheetos\LogLevel.cs" />
+    <Compile Include="Developers\Cheetos\Mathf.cs" />
+    <Compile Include="Developers\Cheetos\Randomizer.cs" />
+    <Compile Include="Developers\Cheetos\WindowsUtils.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />
