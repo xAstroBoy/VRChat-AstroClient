@@ -36,9 +36,10 @@
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
             Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
             Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
-            foreach (var item in ButtonsMenu.transform.Get_Childs())
+            System.Collections.Generic.List<Transform> list = ButtonsMenu.transform.Get_Childs();
+            for (int i = 0; i < list.Count; i++)
             {
-                item.DestroyMeLocal(true);
+                list[i].DestroyMeLocal(true);
             }
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;

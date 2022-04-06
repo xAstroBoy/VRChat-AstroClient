@@ -212,13 +212,14 @@
             parent.GetComponentInChildren<Image>().enabled = true;
             parent.GetComponentInChildren<TextMeshProUGUI>(true).enabled = true;
             parent.GetComponent<UiTooltip>().enabled = true;
-            foreach (var item in parent.GetComponents<Component>())
+            UnhollowerBaseLib.Il2CppArrayBase<Component> list = parent.GetComponents<Component>();
+            for (int i = 0; i < list.Count; i++)
             {
-                var name = item.GetIl2CppType().FullName;
+                var name = list[i].GetIl2CppType().FullName;
                 //Log.Debug($"Found {name}");
                 if (!ComponentsToNotDelete.Contains(name))
                 {
-                    UnityEngine.Object.Destroy(item);
+                    UnityEngine.Object.Destroy(list[i]);
                 }
             }
             //UnityEngine.Object.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37StVo1237VoUnique>());  
@@ -229,9 +230,12 @@
             var text = new TextMeshProUGUI();
 
             var TextTop = Parent.GetComponentsInChildren<TextMeshProUGUI>();
-            foreach (var texto in TextTop)
+            for (int i = 0; i < TextTop.Count; i++)
+            {
+                TextMeshProUGUI texto = TextTop[i];
                 if (texto.name == search)
                     text = texto;
+            }
 
             return text;
         }
@@ -239,24 +243,33 @@
         public static void CleanButtonsQuickActions(this GameObject Parent)
         {
             var Buttons = Parent.GetComponentsInChildren<Transform>(true);
-            foreach (var button in Buttons)
+            for (int i = 0; i < Buttons.Count; i++)
+            {
+                Transform button = Buttons[i];
                 if (button.name.Contains("Button_") || button.name == "SitStandCalibrateButton" || button.name == "Buttons_AvatarDetails"
                     || button.name == "Buttons_AvatarAuthor")
                     UnityEngine.Object.Destroy(button.gameObject);
+            }
         }
 
         public static void CleanButtonsNestedMenu(this GameObject Parent)
         {
             var ButtonToDelete = Parent.GetComponentsInChildren<Button>(true);
-            foreach (var Button in ButtonToDelete)
+            for (int i = 0; i < ButtonToDelete.Count; i++)
+            {
+                Button Button = ButtonToDelete[i];
                 if (Button.name.Contains("Camera") || Button.name == "Button_Panorama" || Button.name == "Button_Screenshot"
                     || Button.name == "Button_VrChivePano" || Button.name == "Button_DynamicLight")
                     UnityEngine.Object.Destroy(Button.gameObject);
+            }
 
             var ButtonToDelete2 = Parent.GetComponentsInChildren<Toggle>(true);
-            foreach (var Button in ButtonToDelete2)
+            for (int i1 = 0; i1 < ButtonToDelete2.Count; i1++)
+            {
+                Toggle Button = ButtonToDelete2[i1];
                 if (Button.name == "Button_Steadycam")
                     UnityEngine.Object.Destroy(Button.gameObject);
+            }
         }
 
         public static void CleanButtonsWingMenu(this GameObject Parent)
