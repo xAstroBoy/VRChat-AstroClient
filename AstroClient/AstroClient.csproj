@@ -30,7 +30,7 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <OutputPath>C:\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
+    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
@@ -43,7 +43,7 @@
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Offline|AnyCPU'">
-    <OutputPath>C:\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
+    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;OFFLINE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
@@ -53,7 +53,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
-    <OutputPath>C:\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
+    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CHEETOS</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
@@ -663,198 +663,198 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Accessibility" />
     <Reference Include="Assembly-CSharp">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp-firstpass.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AssetRipper.VersionUtilities">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetRipper.VersionUtilities.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetRipper.VersionUtilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AssetsTools.NET">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetsTools.NET.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetsTools.NET.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang.Compiler">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Compiler.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Compiler.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang.Extensions">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Extensions.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang.Parser">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Parser.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Parser.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang.PatternMatching">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.PatternMatching.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.PatternMatching.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang.Useful">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Useful.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Useful.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Cinemachine">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Cinemachine.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Cinemachine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Collections.Pooled">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Collections.Pooled.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Collections.Pooled.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Commons.Xml.Relaxng">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Commons.Xml.Relaxng.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Commons.Xml.Relaxng.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="cscompmgd, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\cscompmgd.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\cscompmgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="CustomMarshalers" />
     <Reference Include="DataModel">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DataModel.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DataModel.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DOTween.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DOTween.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DOTween.Modules">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DOTween.Modules.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DOTween.Modules.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Facepunch.Steamworks.Win64">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FavCat-merged, Version=1.1.11.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\Mods\FavCat-merged.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\FavCat-merged.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N.CJK">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.CJK.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.CJK.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N.MidEast">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.MidEast.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.MidEast.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N.Other">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.Other.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.Other.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N.Rare">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.Rare.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.Rare.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N.West">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.West.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.West.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="IBM.Data.DB2">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\IBM.Data.DB2.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\IBM.Data.DB2.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Iced">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Iced.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Iced.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppMono.Security">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppMono.Security.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppMono.Security.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Buffers">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Buffers.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Buffers.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Collections.Immutable">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Collections.Immutable.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Collections.Immutable.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Configuration">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Configuration.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Configuration.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Core">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Diagnostics.StackTrace">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Diagnostics.StackTrace.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Diagnostics.StackTrace.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Globalization.Extensions">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Globalization.Extensions.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Globalization.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.IO.Compression">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.IO.Compression.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.IO.Compression.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Memory">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Memory.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Memory.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Runtime">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Runtime.CompilerServices.Unsafe">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Runtime.Serialization">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.ValueTuple">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.ValueTuple.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.ValueTuple.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Xml">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Xml.Linq">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.Linq.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.Linq.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MelonLoader">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Microsoft.Web.Infrastructure.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Win32.Registry, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -883,61 +883,61 @@
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Pdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Rocks.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.CompilerServices.SymbolWriter">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.CompilerServices.SymbolWriter.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.CompilerServices.SymbolWriter.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.CSharp">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.CSharp.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Data.Sqlite">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Data.Sqlite.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Data.Sqlite.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Data.Tds">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Data.Tds.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Data.Tds.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Messaging">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Messaging.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Messaging.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Posix">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Posix.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Posix.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Security">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Security.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Security.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.WebBrowser">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.WebBrowser.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.WebBrowser.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour, Version=20.1.1.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.RuntimeDetour.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MonoMod.Utils, Version=20.1.1.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.Utils.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -949,19 +949,19 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Novell.Directory.Ldap">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Novell.Directory.Ldap.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Novell.Directory.Ldap.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Oculus.Platform">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.Platform.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.Platform.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Oculus.VR">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.VR.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.VR.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Photon-DotNet">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Photon-DotNet.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Photon-DotNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SharpCompress, Version=0.30.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
@@ -970,7 +970,7 @@
     </Reference>
     <Reference Include="SMDiagnostics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\SMDiagnostics.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\SMDiagnostics.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -1005,7 +1005,7 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Json">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Json.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Management" />
@@ -1080,7 +1080,7 @@
     <Reference Include="System.ServiceModel.Discovery" />
     <Reference Include="System.ServiceModel.Internals, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.ServiceModel.Internals.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.ServiceModel.Internals.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.ServiceModel.Routing" />
@@ -1102,38 +1102,38 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Extensions.Design" />
     <Reference Include="System.Web.Http">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Http.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Http.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.Http.SelfHost">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Http.SelfHost.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Http.SelfHost.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Http.WebHost.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Http.WebHost.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.Mvc">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Mvc.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.Razor">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Razor.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.Razor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.RegularExpressions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Web.WebPages">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.WebPages.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.WebPages.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.WebPages.Deployment.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.WebPages.Deployment.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.WebPages.Razor.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Web.WebPages.Razor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Windows.Forms" />
@@ -1142,291 +1142,291 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="SystemWebTestShim">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\SystemWebTestShim.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\SystemWebTestShim.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Tomlet">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Tomlet.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Tomlet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Transmtn">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Transmtn.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Transmtn.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UIExpansionKit">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\Mods\UIExpansionKit.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\UIExpansionKit.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnhollowerBaseLib">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnhollowerRuntimeLib">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AIModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AudioModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ClothModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ClothModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CrashReportingModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CrashReportingModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CrashReportingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.DirectorModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.DirectorModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.GridModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.GridModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.GridModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Il2CppAssetBundleManager">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.Il2CppAssetBundleManager.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.Il2CppAssetBundleManager.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Il2CppImageConversionManager">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.Il2CppImageConversionManager.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.Il2CppImageConversionManager.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.Physics2DModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SharedInternalsModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SpriteMaskModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TerrainModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TerrainModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TerrainModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TerrainPhysicsModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TerrainPhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextCoreModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TextCoreModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TextCoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TilemapModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TilemapModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TilemapModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UIElementsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UIModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityAnalyticsModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestTextureModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VehiclesModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.VehiclesModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.VehiclesModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VFXModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.VFXModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.VFXModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VideoModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.VideoModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.VideoModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VRModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.VRModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.VRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.WindModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.WindModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.WindModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.XRModule">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.XRModule.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ValueTupleBridge">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\ValueTupleBridge.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\ValueTupleBridge.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.SDKBase.Editor.BuildPipeline">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.SDKBase.Editor.BuildPipeline.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.SDKBase.Editor.BuildPipeline.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.ClientBindings">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.ClientBindings.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.ClientBindings.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.Common">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Common.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.Security">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Security.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Security.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.Serialization.AOT">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Serialization.AOT.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Serialization.AOT.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.Serialization.OdinSerializer">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Serialization.OdinSerializer.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Serialization.OdinSerializer.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.VM">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.VM.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.VM.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.VRCWrapperModules">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.VRCWrapperModules.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.VRCWrapperModules.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Udon.Wrapper">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Wrapper.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Wrapper.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.UI.Core">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.UI.Elements">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.UI.Shared">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Shared.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Shared.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.Utility">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Utility.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Utility.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCCore-Editor">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCCore-Standalone">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRChatUtilityKit">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\Mods\VRChatUtilityKit.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\VRChatUtilityKit.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCLog">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCLog.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCLog.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCSDK2">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK2.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK2.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCSDK3">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK3.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK3.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCSDK3A">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK3A.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDK3A.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCSDKBase">
-      <HintPath>C:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
