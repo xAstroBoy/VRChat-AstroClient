@@ -258,7 +258,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                             }
                                                             catch (Exception e)
                                                             {
-                                                                ModConsole.ErrorExc(e);
+                                                                Log.Exception(e);
                                                             }
                                                         }
                                                     }
@@ -306,7 +306,7 @@ namespace AstroClient.Tools.UdonSearcher
 
                                                                     catch (Exception e)
                                                                     {
-                                                                        ModConsole.ErrorExc(e);
+                                                                        Log.Exception(e);
                                                                     }
                                                                 }
                                                             }

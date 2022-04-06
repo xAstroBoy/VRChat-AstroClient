@@ -271,7 +271,7 @@
             }
             catch
             {
-                ModConsole.Error("Failed to load General config, creating a new one..");
+                Log.Error("Failed to load General config, creating a new one..");
             }
 
             try
@@ -280,7 +280,7 @@
             }
             catch
             {
-                ModConsole.Error("Failed to load UI config, creating a new one..");
+                Log.Error("Failed to load UI config, creating a new one..");
             }
 
             try
@@ -289,7 +289,7 @@
             }
             catch
             {
-                ModConsole.Error("Failed to load ESP config, creating a new one..");
+                Log.Error("Failed to load ESP config, creating a new one..");
             }
 
             try
@@ -298,7 +298,7 @@
             }
             catch
             {
-                ModConsole.Error("Failed to load Flight config, creating a new one..");
+                Log.Error("Failed to load Flight config, creating a new one..");
             }
 
             try
@@ -307,7 +307,7 @@
             }
             catch
             {
-                ModConsole.Error("Failed to load Movement config, creating a new one..");
+                Log.Error("Failed to load Movement config, creating a new one..");
             }
 
             try
@@ -316,7 +316,7 @@
             }
             catch
             {
-                ModConsole.Error("Failed to load Favorites config, creating a new one..");
+                Log.Error("Failed to load Favorites config, creating a new one..");
             }
 
             try
@@ -325,7 +325,7 @@
             }
             catch
             {
-                ModConsole.Error("Failed to load Performance config, creating a new one..");
+                Log.Error("Failed to load Performance config, creating a new one..");
             }
 
             try
@@ -334,7 +334,7 @@
             }
             catch
             {
-                ModConsole.Error("Failed to load Loading Screen config, creating a new one..");
+                Log.Error("Failed to load Loading Screen config, creating a new one..");
             }
 
             stopwatch.Stop();

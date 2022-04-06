@@ -17,21 +17,20 @@
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
 
-        private static bool isGenerating { get; set; }
-        private static bool CleanOnRoomLeave { get; } = true;
-        private static bool DestroyOnMenuClose { get; } = true;
-
-        private static bool HasGenerated { get; set; } = false;
-        private static bool isOpen { get; set; }
+        private static bool _isGenerating { get; set; }
+        private static bool _cleanOnRoomLeave { get; } = true;
+        private static bool _destroyOnMenuClose { get; } = true;
+        private static bool _hasGenerated { get; set; } = false;
+        private static bool _isOpen { get; set; }
+        private static bool _isDebugging { get; set; } = true;
 
         internal override void OnRoomLeft()
         {
-            if (CleanOnRoomLeave)
+            if (_cleanOnRoomLeave)
             {
                 DestroyGeneratedButtons();
             }
-
-            isGenerating = false;
+            _isGenerating = false;
         }
 
         internal static void InitButtons(QMNestedGridMenu menu)
@@ -48,12 +47,10 @@
             InitWingPage();
         }
 
-        private static bool isDebugging = true;
-
 
         private static void Debug(string msg)
         {
-            if (isDebugging)
+            if (_isDebugging)
             {
                 Log.Debug(msg);
             }
@@ -61,7 +58,7 @@
 
         private static void Regenerate()
         {
-            if (!HasGenerated)
+            if (!_hasGenerated)
             {
                 if (JarRoleController.AmongUS_ESPs.Count() != 0)
                 {
@@ -126,24 +123,21 @@
                     }
                     catch (Exception e)
                     {
-                        ModConsole.Error($"[AMONG US]: Error in Eject Nodes Button!");
-                        ModConsole.ErrorExc(e);
+                        Log.Error($"[AMONG US]: Error in Eject Nodes Button!");
+                        Log.Exception(e);
                         var btnerror = new QMSingleButton(CurrentScrollMenu,  "ERROR, SEE CONSOLE", null, "ERROR, SEE CONSOLE");
                         GeneratedButtons.Add(btnerror);
                     }
-
-
-
-                    HasGenerated = true;
-                    isGenerating = false;
+                    
+                    _hasGenerated = true;
+                    _isGenerating = false;
                 }
             }
         }
 
-
         internal static void DestroyGeneratedButtons()
         {
-            HasGenerated = false;
+            _hasGenerated = false;
 
             if (GeneratedButtons.Count != 0)
             {
@@ -160,7 +154,7 @@
 
         private static void OnCloseMenu()
         {
-            if (DestroyOnMenuClose)
+            if (_destroyOnMenuClose)
             {
                 DestroyGeneratedButtons();
             }
@@ -169,28 +163,28 @@
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
-            isOpen = false;
+            _isOpen = false;
 
         }
 
         private static void OnOpenMenu()
         {
-            isOpen = true;
+            _isOpen = true;
             if (WingMenu != null)
             {
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
 
-            if (!isGenerating)
+            if (!_isGenerating)
             {
                 Regenerate();
             }
         }
 
-                internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
-            if (!isOpen) return;
+            if (!_isOpen) return;
             if (Page != null)
             {
                 if (!Page.ContainsPage(CurrentScrollMenu.page)  && !Page.ContainsPage(WingMenu.CurrentPage))
@@ -210,6 +204,5 @@
             }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
-
     }
 }

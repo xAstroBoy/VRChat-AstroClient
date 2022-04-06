@@ -116,8 +116,8 @@
                     }
                     catch (Exception e)
                     {
-                        ModConsole.Error($"[AMONG US]: Error in Filtered Nodes Button!");
-                        ModConsole.ErrorExc(e);
+                        Log.Error($"[AMONG US]: Error in Filtered Nodes Button!");
+                        Log.Exception(e);
                         var btnerror = new QMSingleButton(CurrentScrollMenu,  "ERROR, SEE CONSOLE", null, "ERROR, SEE CONSOLE");
                         GeneratedButtons.Add(btnerror);
                     }

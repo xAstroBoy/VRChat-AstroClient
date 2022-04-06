@@ -130,7 +130,7 @@ namespace AstroClient.xAstroBoy.Utility
         {
             if (action == null)
             {
-                ModConsole.Error("DelayFunction: action was null");
+                Log.Error("DelayFunction: action was null");
                 return;
             }
             MelonCoroutines.Start(Delay(del, action));
@@ -139,7 +139,7 @@ namespace AstroClient.xAstroBoy.Utility
         {
             if (action == null)
             {
-                ModConsole.Error("ActionAsCoroutine: action was null");
+                Log.Error("ActionAsCoroutine: action was null");
                 return;
             }
             MelonCoroutines.Start(Action(action));
@@ -187,7 +187,7 @@ namespace AstroClient.xAstroBoy.Utility
             {
                 ChangeAvatar(instance.id);
             }
-            catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
+            catch { Log.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
         public static void ChangeAvatar(this Player instance)
@@ -196,7 +196,7 @@ namespace AstroClient.xAstroBoy.Utility
             {
                 ChangeAvatar((string)instance.prop_ApiAvatar_0.id);
             }
-            catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
+            catch { Log.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
         public static void ChangeAvatar(this VRCPlayer instance)
@@ -205,7 +205,7 @@ namespace AstroClient.xAstroBoy.Utility
             {
                 ChangeAvatar((string)instance.prop_ApiAvatar_0.id);
             }
-            catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
+            catch { Log.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
         public static void ChangeAvatar(string id)
@@ -219,7 +219,7 @@ namespace AstroClient.xAstroBoy.Utility
                 };
                 component.ChangeToSelectedAvatar();
             }
-            catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
+            catch { Log.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
         public static Player GetPlayerByUserId(string userId)

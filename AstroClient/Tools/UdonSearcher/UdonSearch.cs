@@ -213,7 +213,7 @@
                 }
             }
 
-            ModConsole.Error($"Failed to Find {action} Having SubKey {subaction}");
+            Log.Error($"Failed to Find {action} Having SubKey {subaction}");
             return null;
         }
 
