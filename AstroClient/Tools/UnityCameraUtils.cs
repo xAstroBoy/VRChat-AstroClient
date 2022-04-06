@@ -31,13 +31,13 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu {
 
                     if (camera == null)
                     {
-                        ModConsole.DebugLog("Failed to Generate a texture due to Camera being null;");
+                        Log.Debug("Failed to Generate a texture due to Camera being null;");
                     }
                     else
                     {
                         if (camera.targetTexture == null)
                         {
-                            ModConsole.DebugLog("Failed to generate a texture due to Camera TargetTexture being null.");
+                            Log.Debug("Failed to generate a texture due to Camera TargetTexture being null.");
                         }
                     }
                 }
@@ -45,7 +45,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu {
             catch (Exception e)
             {
                 RenderTexture.active = currentRT;
-                ModConsole.ErrorExc(e);
+                Log.Exception(e);
             }
             RenderTexture.active = currentRT;
             return result;

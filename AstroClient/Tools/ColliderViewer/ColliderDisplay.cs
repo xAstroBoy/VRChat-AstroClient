@@ -23,7 +23,7 @@
             bool flag = shader2 == null;
             if (flag)
             {
-                ModConsole.Log("Failed to find shader with name " + ShaderName + ". Valid shaders:\n" +
+                Log.Error("Failed to find shader with name " + ShaderName + ". Valid shaders:\n" +
                                string.Join("\n", from shader in source
                                                  select shader.name));
                 shader2 = source.FirstOrDefault((Shader shader) =>
@@ -33,12 +33,12 @@
             bool flag2 = shader2 == null;
             if (flag2)
             {
-                ModConsole.Log("Failed to find transparent shader for colliders");
+                Log.Error("Failed to find transparent shader for colliders");
                 shader2 = source.FirstOrDefault();
             }
             else
             {
-                ModConsole.Log("Creating material with shader " + shader2.name);
+                Log.Write("Creating material with shader " + shader2.name);
             }
 
             _triggerMaterial = new Material(shader2);

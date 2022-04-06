@@ -23,7 +23,7 @@ namespace AstroClient.Tools
                         ignoreCase
                             ? StringComparison.OrdinalIgnoreCase
                             : StringComparison.Ordinal) >= 0);
-            ModConsole.Error($"XRefScanForGlobal \"{methodBase}\" has an empty searchTerm. Returning false");
+            Log.Error($"XRefScanForGlobal \"{methodBase}\" has an empty searchTerm. Returning false");
             return false;
         }
 
