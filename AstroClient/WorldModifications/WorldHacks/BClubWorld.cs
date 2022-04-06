@@ -934,7 +934,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                Log.DebugWarnExc(e);
+                                ModConsole.DebugWarningExc(e);
                             }
                         }
                     }
@@ -984,7 +984,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                Log.DebugWarnExc(e);
+                                ModConsole.DebugWarningExc(e);
                             }
                         }
                     }
@@ -1035,7 +1035,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                Log.DebugWarnExc(e);
+                                ModConsole.DebugWarningExc(e);
                             }
                         }
                     }
@@ -1087,7 +1087,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                Log.DebugWarnExc(e);
+                                ModConsole.DebugWarningExc(e);
                             }
                         }
                         else
@@ -1137,7 +1137,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                Log.DebugWarnExc(e);
+                                ModConsole.DebugWarningExc(e);
                             }
                         }
                     }

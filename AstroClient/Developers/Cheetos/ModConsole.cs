@@ -305,10 +305,6 @@
                 case LogTypes.ANTI_CRASH:
                     PrintAntiCrashTag();
                     break;
-
-                case LogTypes.CHEETOS_LOG:
-                    PrintAntiCrashTag();
-                    break;
             }
         }
 
