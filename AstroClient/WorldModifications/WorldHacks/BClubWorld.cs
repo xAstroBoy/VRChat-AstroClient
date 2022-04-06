@@ -57,7 +57,6 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static bool isCurrentWorld { get; set; }
 
-        private static object Rainbow_CancellationToken { get; set; }
         private static object MoanSpam_CancellationToken { get; set; }
         private static object DoorLockFreeze_CancellationToken { get; set; }
         private static object DoorUnlockFreeze_CancellationToken { get; set; }
@@ -166,16 +165,12 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (value)
                 {
-                    if (Rainbow_CancellationToken == null)
-                    {
-                        Log.Write("Rainbow Enabled!");
-                        Rainbow();
-                    }
+                    Log.Write("Rainbow Enabled!");
+                    Rainbow();
                 }
                 else
                 {
                     Log.Write("Rainbow Disabled.");
-                    Rainbow_CancellationToken = null;
                 }
                 _isRainbowEnabled = value;
             }
@@ -282,6 +277,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             ToggleRainbowBtn = new QMToggleButton(MapFun, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
             ToggleRainbowBtn.SetToggleState(IsRainbowEnabled, false);
             ToggleMoanSpamBtn = new QMToggleButton(MapFun, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
+            ToggleMoanSpamBtn.SetToggleState(IsMoanSpamEnabled, false);
 
             // VIP
             SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 6, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", Color.green, Color.red);
@@ -300,7 +296,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void Rainbow()
         {
-            Rainbow_CancellationToken = MelonCoroutines.Start(RainbowLoop());
+            MelonCoroutines.Start(RainbowLoop());
         }
 
         private static IEnumerator RainbowLoop()
@@ -313,10 +309,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield break;
                 }
 
-                foreach (var udon in ColorActions)
+                for (int i = 0; i < ColorActions.Count; i++)
                 {
-                    udon?.InvokeBehaviour();
-                    yield return new WaitForSeconds(0.05f);
+                    ColorActions[i]?.InvokeBehaviour();
+                    yield return new WaitForSeconds(0.1f);
                 }
 
                 if (IsRainbowEnabled)
@@ -465,12 +461,13 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static void BlueChairSpam()
         {
             var temp = UdonParser.WorldBehaviours.Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToList();
-            foreach (var chair in temp)
+            for (int i = 0; i < temp.Count; i++)
             {
+                UdonBehaviour chair = temp[i];
                 if (chair.name.Contains("Chair") || chair.name.Contains("Seat"))
                 {
                     var action = chair.FindUdonEvent("Sit");
-                    if (action != null && _chairs.Contains(action))
+                    if (action != null && !_chairs.Contains(action))
                     {
                         _chairs.Add(action);
                     }
@@ -482,7 +479,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static IEnumerator DoBlueChairSpam()
         {
-            if (_chairs.Count <= 0)
+            if (!_chairs.Any())
             {
                 Log.Error("No bluechairs found!");
                 yield break;
@@ -537,7 +534,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (IsMoanSpamEnabled) IsMoanSpamEnabled = false;
                 if (IsRainbowEnabled) IsRainbowEnabled = false;
 
-                Rainbow_CancellationToken = null;
                 MoanSpam_CancellationToken = null;
                 DoorLockFreeze_CancellationToken = null;
                 DoorUnlockFreeze_CancellationToken = null;

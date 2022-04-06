@@ -131,9 +131,9 @@
                         {
                             if (TermsToWhitelist.Count() != 0)
                             {
-                                foreach (var actionkeys in behaviour._eventTable)
+                                for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
                                 {
-                                    if (TermsToWhitelist.Contains(actionkeys.key))
+                                    if (TermsToWhitelist.Contains(behaviour._eventTable.entries[i].key))
                                     {
                                         HasWhiteListedKey = true;
                                         break;
@@ -148,9 +148,9 @@
                             {
                                 if (TermsToAvoid.Count() != 0)
                                 {
-                                    foreach (var actionkeys in behaviour._eventTable)
+                                    for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
                                     {
-                                        if (TermsToAvoid.Contains(actionkeys.key))
+                                        if (TermsToAvoid.Contains(behaviour._eventTable.entries[i].key))
                                         {
                                             HasAvoidTermKey = true;
                                             break;
@@ -229,15 +229,12 @@
                         Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
                     }
 
-                    foreach (var actionkeys in behaviour._eventTable)
+                    for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
                     {
+                        var actionkeys = behaviour._eventTable.entries[i];
                         if (actionkeys.key == subaction)
                         {
-                            if (Debug)
-                            {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
-                            }
-
+                            Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
                             return new UdonBehaviour_Cached(behaviour, actionkeys.key);
                         }
                     }
@@ -256,14 +253,12 @@
             {
                 if (obj._eventTable.count != 0)
                 {
-                    foreach (var actionkeys in obj._eventTable)
+                    for (int i = 0; i < obj._eventTable.entries.Count; i++)
                     {
+                        var actionkeys = obj._eventTable.entries[i];
                         if (actionkeys.key == subaction)
                         {
-                            if (Debug)
-                            {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
-                            }
+                            Log.Debug($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
                             return new UdonBehaviour_Cached(obj, actionkeys.key);
                         }
                     }
@@ -279,8 +274,9 @@
             {
                 if (obj._eventTable.count != 0)
                 {
-                    foreach (var actionkeys in obj._eventTable)
+                    for (int i = 0; i < obj._eventTable.entries.Count; i++)
                     {
+                        var actionkeys = obj._eventTable.entries[i];
                         if (actionkeys.key == subaction)
                         {
                             return true;
@@ -301,8 +297,9 @@
                 UdonBehaviour actionobject = actionObjects[i];
                 if (actionobject != null)
                 {
-                    foreach (var actionkeys in actionobject._eventTable)
+                    for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
                     {
+                        var actionkeys = actionobject._eventTable.entries[i1];
                         if (actionkeys.key == subaction)
                         {
                             return true;
@@ -323,14 +320,12 @@
                 UdonBehaviour actionobject = actionObjects[i];
                 if (actionobject != null)
                 {
-                    foreach (var actionkeys in actionobject._eventTable)
+                    for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
                     {
+                        var actionkeys = actionobject._eventTable.entries[i1];
                         if (actionkeys.key == subaction)
                         {
-                            if (Debug)
-                            {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
-                            }
+                            Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
                             return new UdonBehaviour_Cached(actionobject, actionkeys.key);
                         }
                     }
@@ -350,14 +345,12 @@
                 UdonBehaviour actionobject = actionObjects[i];
                 if (actionobject != null)
                 {
-                    foreach (var actionkeys in actionobject._eventTable)
+                    for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
                     {
+                        var actionkeys = actionobject._eventTable.entries[i1];
                         if (actionkeys.key == subaction)
                         {
-                            if (Debug)
-                            {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
-                            }
+                            Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
                             result.Add(new UdonBehaviour_Cached(actionobject, actionkeys.key));
                         }
                     }
@@ -377,9 +370,9 @@
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
             if (actionObjects.Count() != 0)
             {
-                foreach (var behaviour in actionObjects)
+                for (int i = 0; i < actionObjects.Count; i++)
                 {
-                    var unpackedudon = behaviour.ToRawUdonBehaviour();
+                    var unpackedudon = actionObjects[i].ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
                         if (unpackedudon == null || unpackedudon == null)
@@ -387,24 +380,22 @@
                             continue;
                         }
 
-                        foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
+                        for (int i1 = 0; i1 < unpackedudon.IUdonSymbolTable.GetSymbols().array.Count; i1++)
                         {
-                            if (symbol != null)
+                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols().array[i1];
+                            if (symbol != null && symbol.isMatch(SymbolName))
                             {
-                                if (symbol.isMatch(SymbolName))
+                                var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
+                                var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
+                                if (UnboxVariable != null)
                                 {
-                                    var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
-                                    var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
-                                    if (UnboxVariable != null)
+                                    try
                                     {
-                                        try
-                                        {
-                                            return unpackedudon;
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            Log.Exception(e);
-                                        }
+                                        return unpackedudon;
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Log.Exception(e);
                                     }
                                 }
                             }
@@ -422,9 +413,9 @@
             var result = new List<string>();
             if (udons.Count() != 0)
             {
-                foreach (var behaviour in udons)
+                for (int i3 = 0; i3 < udons.Count; i3++)
                 {
-                    var unpackedudon = behaviour.ToRawUdonBehaviour();
+                    var unpackedudon = udons[i3].ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
                         if (unpackedudon == null || unpackedudon == null)
@@ -432,8 +423,9 @@
                             continue;
                         }
 
-                        foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
+                        for (int i2 = 0; i2 < unpackedudon.IUdonSymbolTable.GetSymbols().array.Count; i2++)
                         {
+                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols().array[i2];
                             if (symbol != null)
                             {
                                 var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
@@ -462,8 +454,9 @@
                                                             {
                                                                 if (ids.Count() != 0)
                                                                 {
-                                                                    foreach (var id in ids)
+                                                                    for (int i = 0; i < ids.Count; i++)
                                                                     {
+                                                                        string id = ids[i];
                                                                         if (id != null)
                                                                         {
                                                                             result.Add(id);
@@ -480,27 +473,26 @@
                                                 {
                                                     var list = unpackedudon.IUdonHeap.GetHeapVariable<string[]>(address);
                                                     if (list.Count() != 0)
-                                                        foreach (var value in list)
+                                                        for (int i = 0; i < list.Length; i++)
                                                         {
+                                                            string value = list[i];
+                                                            if (value != null && value.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
-                                                                if (value != null &&
-                                                                    value.IsNotNullOrEmptyOrWhiteSpace())
+                                                                if (value.IsAvatarID())
                                                                 {
-                                                                    if (value.IsAvatarID())
+                                                                    result.Add(value);
+                                                                }
+                                                                else
+                                                                {
+                                                                    var ids = value.GetAllAvatarIDs();
+                                                                    if (ids.Count() != 0)
                                                                     {
-                                                                        result.Add(value);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        var ids = value.GetAllAvatarIDs();
-                                                                        if (ids.Count() != 0)
+                                                                        for (int i1 = 0; i1 < ids.Count; i1++)
                                                                         {
-                                                                            foreach (var id in ids)
+                                                                            string id = ids[i1];
+                                                                            if (id != null)
                                                                             {
-                                                                                if (id != null)
-                                                                                {
-                                                                                    result.Add(id);
-                                                                                }
+                                                                                result.Add(id);
                                                                             }
                                                                         }
                                                                     }
@@ -534,8 +526,9 @@
                                                     var list = unpackedudon.IUdonHeap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal[]>(address);
                                                     if (list != null && list.Count() != 0)
                                                     {
-                                                        foreach (var pedestral in list)
+                                                        for (int i = 0; i < list.Length; i++)
                                                         {
+                                                            var pedestral = list[i];
                                                             if (pedestral != null)
                                                             {
                                                                 if (!pedestral.grantBlueprintAccess)
