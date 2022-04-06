@@ -71,7 +71,7 @@
                         {
                             if (CurrentSelection.Contains(item))
                             {
-                                ModConsole.DebugWarning("A Null item was found and removed from CurrentSelection!");
+                                Log.DebugWarn("A Null item was found and removed from CurrentSelection!");
                                 _ = CurrentSelection.Remove(item);
                                 MainScroll.Refresh();
                                 subscroll.Refresh();
@@ -466,11 +466,11 @@
         {
             if (Parent != null)
             {
-                ModConsole.DebugWarning($"SetCurrentParent Fired with Object : {Parent.name}");
+                Log.DebugWarn($"SetCurrentParent Fired with Object : {Parent.name}");
             }
             else
             {
-                ModConsole.DebugWarning($"SetCurrentParent Fired with Null Object");
+                Log.DebugWarn($"SetCurrentParent Fired with Null Object");
             }
             if (Current != null)
             {
@@ -478,7 +478,7 @@
                 {
                     if (Current == Parent)
                     {
-                        ModConsole.DebugWarning($"SetCurrentParent Refused obj {Parent.name} As is the same as CurrentParent {Current.name}");
+                        Log.DebugWarn($"SetCurrentParent Refused obj {Parent.name} As is the same as CurrentParent {Current.name}");
                         return false;
                     }
                 }
@@ -510,12 +510,12 @@
                     var res = SceneManager.GetActiveScene().GetRootGameObjects().ToList().Where(x => x.transform == obj).DefaultIfEmpty(null).First();
                     if (res != null)
                     {
-                        ModConsole.DebugWarning($"IsARootObject Determined that {obj.name} is a root Object!");
+                        Log.DebugWarn($"IsARootObject Determined that {obj.name} is a root Object!");
                         return true;
                     }
                     else
                     {
-                        ModConsole.DebugWarning($"IsARootObject Determined that {obj.name} is not a root Object!");
+                        Log.DebugWarn($"IsARootObject Determined that {obj.name} is not a root Object!");
                         return false;
                     }
                 }

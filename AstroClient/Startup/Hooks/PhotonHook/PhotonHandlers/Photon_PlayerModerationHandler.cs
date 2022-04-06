@@ -35,7 +35,7 @@ internal class Photon_PlayerModerationHandler
                     case ModerationCode.VoteKick: // VoteKick
 
                         PopupUtils.QueHudMessage("<color=#FFA5F>A Votekick has Been started (Check console!)</color>");
-                        ModConsole.DebugWarning("VOTEKICK DETECTED : ");
+                        Log.DebugWarn("VOTEKICK DETECTED : ");
                         break;
 
                     case ModerationCode.Block_Or_Mute:

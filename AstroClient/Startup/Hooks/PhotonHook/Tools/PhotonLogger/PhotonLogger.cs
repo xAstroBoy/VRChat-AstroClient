@@ -139,7 +139,7 @@ internal class PhotonLogger
         }
         else
         {
-            ModConsole.DebugWarning($"Unknown Type Detected : {Data.GetIl2CppType().FullName}");
+            Log.DebugWarn($"Unknown Type Detected : {Data.GetIl2CppType().FullName}");
             return;
         }
     }

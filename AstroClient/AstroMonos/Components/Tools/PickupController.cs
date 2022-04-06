@@ -1144,7 +1144,7 @@
 
                 if (!hasRequiredComponentBeenAdded && HasTriedWithSDKBase_Pickup && HasTriedWithSDK2_Pickup && HasTriedWithSDK3_Pickup)
                 {
-                    ModConsole.DebugWarning("Failed to add A Pickup Component to the object : " + gameObject.name);
+                    Log.DebugWarn("Failed to add A Pickup Component to the object : " + gameObject.name);
                     ForceComponent = false;
                     HasTriedWithSDKBase_Pickup = false;
                     HasTriedWithSDK2_Pickup = false;
