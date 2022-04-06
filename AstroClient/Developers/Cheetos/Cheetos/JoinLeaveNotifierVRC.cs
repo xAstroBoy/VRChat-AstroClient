@@ -61,7 +61,7 @@
                     var consoletag = GenerateTags(apiuser, false);
                     {
                         PopupUtils.QueHudMessage($"{HudTag} {player.GetDisplayName()} <color=green>Joined</color>!");
-                        ModConsole.Log($"{consoletag} {player.GetDisplayName()} Joined!");
+                        Log.Write($"{consoletag} {player.GetDisplayName()} Joined!");
                     }
                 }
             }
@@ -90,7 +90,7 @@
                     var HudTag = GenerateTags(apiuser, true);
                     var consoletag = GenerateTags(apiuser, false);
                     PopupUtils.QueHudMessage($"{HudTag} {player.GetDisplayName()} <color=red>Left</color>!");
-                    ModConsole.Log($"{consoletag} {player.GetDisplayName()} Left!");
+                    Log.Write($"{consoletag} {player.GetDisplayName()} Left!");
                 }
             }
         }

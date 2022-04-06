@@ -26,7 +26,7 @@ namespace AstroClient.ClientUI.ActionMenu
                 CustomSubMenu.AddButton("Destroy Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, null, false);
             });
 
-            ModConsole.Log("Lights Module Editor is ready!", Color.Green);
+            Log.Write("Lights Module Editor is ready!", Color.Green);
         }
     }
 }

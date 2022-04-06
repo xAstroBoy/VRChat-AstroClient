@@ -9,6 +9,7 @@
     using System.Threading.Tasks;
     using Console = CheetosConsole.Console;
 
+    [Obsolete]
     public class ModConsole
     {
         public static string ModName { get; private set; } = string.Empty;
@@ -160,27 +161,6 @@
                 textcolor = Color.Red;
             }
             PrintTags(LogTypes.ERROR);
-            PrintLine(msg, textcolor.Value);
-        }
-
-        /// <summary>
-        /// I did this because I can trace the references easier, as I tend to do a lot of console spam during development.
-        /// I know you'll never understand me :3
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="textcolor"></param>
-        public static void CheetoLog(string msg, Color? textcolor = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
-        {
-            if (!DebugMode)
-            {
-                return;
-            }
-            if (textcolor == null)
-            {
-                textcolor = Color.PapayaWhip;
-            }
-            PrintTags(LogTypes.CHEETOS_LOG);
-            PrintCallerTag(callerName, callerLine);
             PrintLine(msg, textcolor.Value);
         }
 

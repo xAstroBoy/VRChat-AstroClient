@@ -26,10 +26,10 @@ namespace AstroClient.AstroMonos.AstroUdons
         {
             if (AssignedProgram == null)
             {
-                ModConsole.Error("Custom Trigger Can't Load as Program Asset is null!");
+                Log.Error("Custom Trigger Can't Load as Program Asset is null!");
                 Destroy(this);
             }
-
+            
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if (UdonBehaviour != null)
             {

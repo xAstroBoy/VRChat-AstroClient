@@ -39,7 +39,7 @@
                 string path = GameObjectFinder.GetGameObjectPath(obj);
                 if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
                 {
-                    ModConsole.Log($"{obj.name} Path is : {path}");
+                    Log.Write($"{obj.name} Path is : {path}");
                 }
             }
         }
@@ -127,8 +127,8 @@
                 string path = GameObjectFinder.GetGameObjectPath(obj);
                 if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
                 {
-                    ModConsole.Log($"{obj.name} Path is : {path}");
-                    ModConsole.Log($"The Path has been copied on the clipboard.");
+                    Log.Write($"{obj.name} Path is : {path}");
+                    Log.Write($"The Path has been copied on the clipboard.");
                     Clipboard.SetText(path);
                 }
             }
@@ -138,8 +138,8 @@
         {
             if (obj != null)
             {
-                ModConsole.Log($"{obj.name} rotation is : new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
-                ModConsole.Log($"The rotation has been copied on the clipboard.");
+                Log.Write($"{obj.name} rotation is : new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
+                Log.Write($"The rotation has been copied on the clipboard.");
                 Clipboard.SetText($"new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
             }
         }
@@ -148,8 +148,8 @@
         {
             if (obj != null)
             {
-                ModConsole.Log($"{obj.name} position is : new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
-                ModConsole.Log($"The Position has been copied on the clipboard.");
+                Log.Write($"{obj.name} position is : new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
+                Log.Write($"The Position has been copied on the clipboard.");
                 Clipboard.SetText($"new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
             }
         }
@@ -158,8 +158,8 @@
         {
             if (obj != null)
             {
-                ModConsole.Log($"{obj.name} Local position is : new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
-                ModConsole.Log($"The Local Position has been copied on the clipboard.");
+                Log.Write($"{obj.name} Local position is : new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
+                Log.Write($"The Local Position has been copied on the clipboard.");
                 Clipboard.SetText($"new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
             }
         }
@@ -168,8 +168,8 @@
         {
             if (obj != null)
             {
-                ModConsole.Log($"{obj.name} localRotation is : new Quaternion({obj.transform.localRotation.x}f, {obj.transform.localRotation.y}f, {obj.transform.localRotation.z}f, {obj.transform.localRotation.w}f)");
-                ModConsole.Log($"The localRotation has been copied on the clipboard.");
+                Log.Write($"{obj.name} localRotation is : new Quaternion({obj.transform.localRotation.x}f, {obj.transform.localRotation.y}f, {obj.transform.localRotation.z}f, {obj.transform.localRotation.w}f)");
+                Log.Write($"The localRotation has been copied on the clipboard.");
                 Clipboard.SetText($"new Quaternion({obj.transform.localRotation.x}f, {obj.transform.localRotation.y}f, {obj.transform.localRotation.z}f, {obj.transform.localRotation.w}f)");
             }
         }
@@ -210,12 +210,12 @@
             }
             if (obj != null)
             {
-                ModConsole.Log("Failed To Destroy Server-side  Object :  " + obj.name, Color.Red);
+                Log.Write("Failed To Destroy Server-side  Object :  " + obj.name, Color.Red);
                 return false;
             }
             else
             {
-                ModConsole.Log("Destroyed Server-side Object : " + name, Color.Green);
+                Log.Write("Destroyed Server-side Object : " + name, Color.Green);
                 return true;
             }
         }
@@ -261,7 +261,7 @@
             NewLight.shadowObjectSizeBias = OriginalLight.shadowObjectSizeBias;
             NewLight.attenuate = OriginalLight.attenuate;
             NewLight.m_BakedIndex = OriginalLight.m_BakedIndex;
-            ModConsole.DebugLog($"Copied all Properties in {NewLight.name} from {OriginalLight.name}");
+            Log.Debug($"Copied all Properties in {NewLight.name} from {OriginalLight.name}");
 
         }
 
@@ -298,13 +298,13 @@
                     {
                         if (item != null)
                         {
-                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                            Log.Debug($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
                         }
                         else
                         {
                             if (!Silent)
                             {
-                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                                Log.Debug($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
                             }
                         }
                     });
@@ -323,13 +323,13 @@
                     {
                         if (page != null)
                         {
-                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                            Log.Debug($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
                         }
                         else
                         {
                             if (!Silent)
                             {
-                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                                Log.Debug($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
                             }
                         }
                     });
@@ -346,13 +346,13 @@
                     {
                         if (o != null)
                         {
-                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                            Log.Debug($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
                         }
                         else
                         {
                             if (!Silent)
                             {
-                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                                Log.Debug($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
                             }
                         }
                     });
@@ -367,13 +367,13 @@
                     {
                         if (item != null)
                         {
-                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                            Log.Debug($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
                         }
                         else
                         {
                             if (!Silent)
                             {
-                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                                Log.Debug($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
                             }
                         }
                     });
@@ -388,14 +388,14 @@
                     {
                         if (obj != null)
                         {
-                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
-                            ModConsole.DebugLog("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
+                            Log.Debug($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                            Log.Debug("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
                         }
                         else
                         {
                             if (!Silent)
                             {
-                                ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                                Log.Debug($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
                             }
                         }
                     });
@@ -408,7 +408,7 @@
             if (obj != null)
             {
                 var oldname = obj.name;
-                ModConsole.DebugLog("Renamed object : " + oldname + " to " + newname);
+                Log.Debug("Renamed object : " + oldname + " to " + newname);
                 obj.name = newname;
             }
         }
@@ -446,10 +446,10 @@
         {
             _Transforms = new List<Transform>();
 
-            //MelonLoader.MelonLogger.ModConsole.Log("Debug: Start CheckTransform Recursive Checker");
+            //MelonLoader.MelonLogger.Log.Write("Debug: Start CheckTransform Recursive Checker");
             if (transform == null)
             {
-                ModConsole.Log("Debug: CheckTransform transform is null");
+                Log.Write("Debug: CheckTransform transform is null");
                 return;
             }
 
@@ -458,7 +458,7 @@
 
         private static void GetChildren(Transform transform)
         {
-            //MelonLogger.ModConsole.Log("Debug: GetChildren current transform: " + transform.gameObject.name);
+            //MelonLogger.Log.Write("Debug: GetChildren current transform: " + transform.gameObject.name);
 
             if (!_Transforms.Contains(transform))
             {

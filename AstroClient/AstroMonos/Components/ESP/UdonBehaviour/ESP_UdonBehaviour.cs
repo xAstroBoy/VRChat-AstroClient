@@ -25,7 +25,7 @@
         {
             if (DebugMode)
             {
-                ModConsole.DebugLog($"[ESP_UdonBehaviour Debug] : {msg}");
+                Log.Debug($"[ESP_UdonBehaviour Debug] : {msg}");
             }
         }
 

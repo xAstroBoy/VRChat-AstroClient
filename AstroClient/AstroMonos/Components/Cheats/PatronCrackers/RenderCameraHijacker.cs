@@ -71,7 +71,7 @@ public class RenderCameraHijacker : AstroMonoBehaviour
         {
             if (renderCamera != null)
             {
-                ModConsole.DebugLog("Reading RenderTexture from Camera...");
+                Log.Debug("Reading RenderTexture from Camera...");
                 var cam = gameObject.GetComponent<Camera>();
                 if (cam != null)
                 {
@@ -91,7 +91,7 @@ public class RenderCameraHijacker : AstroMonoBehaviour
         {
             return;
         }
-       ModConsole.DebugLog($"Result is : {result}");
+       Log.Debug($"Result is : {result}");
     }
     
     

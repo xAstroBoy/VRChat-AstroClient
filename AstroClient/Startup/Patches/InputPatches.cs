@@ -130,7 +130,7 @@
             }
             catch (System.Exception ex)
             {
-                ModConsole.ErrorExc(ex);
+                Log.Exception(ex);
             }
         }
 
@@ -144,24 +144,24 @@
                     isDumping = true;
                 }
                 Console.Clear();
-                ModConsole.DebugLog($"Input Name : {input.Name()}");
+                Log.Debug($"Input Name : {input.Name()}");
 
-                ModConsole.Log($"field_Private_Boolean_0 {input.field_Private_Boolean_0.ToString()}");
-                ModConsole.Log($"field_Private_Boolean_1 {input.field_Private_Boolean_1.ToString()}");
-                ModConsole.Log($"prop_Boolean_0 {input.prop_Boolean_0.ToString()}");
-                ModConsole.Log($"prop_Boolean_1 {input.prop_Boolean_1.ToString()}");
-                ModConsole.Log($"prop_Boolean_2 {input.prop_Boolean_2.ToString()}");
-                ModConsole.Log($"prop_Boolean_3 {input.prop_Boolean_3.ToString()}");
-                ModConsole.Log($"prop_Boolean_4 {input.prop_Boolean_4.ToString()}");
-                ModConsole.Log($"field_Private_Single_0 {input.field_Private_Single_0}");
-                ModConsole.Log($"field_Private_Single_1 {input.field_Private_Single_1}");
-                ModConsole.Log($"field_Private_Single_2 {input.field_Private_Single_2}");
-                ModConsole.Log($"field_Private_Single_3 {input.field_Private_Single_3}");
-                ModConsole.Log($"field_Private_Single_4 {input.field_Private_Single_4}");
-                ModConsole.Log($"field_Private_Single_5 {input.field_Private_Single_5}");
-                ModConsole.Log($"field_Public_Single_0 {input.field_Public_Single_0}");
-                ModConsole.Log($"prop_Single_0 {input.prop_Single_0}");
-                ModConsole.Log($"prop_Single_1 {input.prop_Single_1}");
+                Log.Debug($"field_Private_Boolean_0 {input.field_Private_Boolean_0.ToString()}");
+                Log.Debug($"field_Private_Boolean_1 {input.field_Private_Boolean_1.ToString()}");
+                Log.Debug($"prop_Boolean_0 {input.prop_Boolean_0.ToString()}");
+                Log.Debug($"prop_Boolean_1 {input.prop_Boolean_1.ToString()}");
+                Log.Debug($"prop_Boolean_2 {input.prop_Boolean_2.ToString()}");
+                Log.Debug($"prop_Boolean_3 {input.prop_Boolean_3.ToString()}");
+                Log.Debug($"prop_Boolean_4 {input.prop_Boolean_4.ToString()}");
+                Log.Debug($"field_Private_Single_0 {input.field_Private_Single_0}");
+                Log.Debug($"field_Private_Single_1 {input.field_Private_Single_1}");
+                Log.Debug($"field_Private_Single_2 {input.field_Private_Single_2}");
+                Log.Debug($"field_Private_Single_3 {input.field_Private_Single_3}");
+                Log.Debug($"field_Private_Single_4 {input.field_Private_Single_4}");
+                Log.Debug($"field_Private_Single_5 {input.field_Private_Single_5}");
+                Log.Debug($"field_Public_Single_0 {input.field_Public_Single_0}");
+                Log.Debug($"prop_Single_0 {input.prop_Single_0}");
+                Log.Debug($"prop_Single_1 {input.prop_Single_1}");
                 isDumping = false;
             }
 

@@ -75,7 +75,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
 
             MiscUtils.DelayFunction(2f, () =>
             {
-                ModConsole.DebugLog("Rainbow Ball Exploit!");
+                Log.Debug("Rainbow Ball Exploit!");
 
                 RegisterBallColor(Button_Ball_White);
                 RegisterBallColor(Button_Ball_Black);
@@ -105,12 +105,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
                 var colorinteractor = ballbutton.FindUdonEvent("_interact");
                 if (colorinteractor != null)
                 {
-                    ModConsole.DebugLog($"Registered Interaction in {ballbutton.name} for rainbow golf ball!");
+                    Log.Debug($"Registered Interaction in {ballbutton.name} for rainbow golf ball!");
                     ColorActions.Add(colorinteractor);
                 }
                 else
                 {
-                    ModConsole.DebugLog($"Failed to find Interaction event in {ballbutton.name} for rainbow golf ball!");
+                    Log.Debug($"Failed to find Interaction event in {ballbutton.name} for rainbow golf ball!");
                 }
             }
         }
@@ -120,7 +120,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
             if (id == WorldIds.PuttPuttPond)
             {
 
-                ModConsole.Log($"Recognized {Name} World, Patching Udon....");
+                Log.Write($"Recognized {Name} World, Patching Udon....");
                 isPuttPuttPond = true;
                 if (PuttPuttPondMenu != null)
                 {

@@ -38,7 +38,7 @@ namespace AstroClient.ClientUI.ActionMenu
                 // TODO: Add Textures!
             }, Icons.box);
 
-            ModConsole.Log("Item Tweaker Module is ready!", Color.Green);
+            Log.Write("Item Tweaker Module is ready!", Color.Green);
         }
     }
 }

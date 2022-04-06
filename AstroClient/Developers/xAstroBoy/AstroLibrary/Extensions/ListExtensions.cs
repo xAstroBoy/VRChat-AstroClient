@@ -37,7 +37,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log($"Error, failed to add string {text} because {nameof(list).ToString()} is null.");
+                    Log.Write($"Error, failed to add string {text} because {nameof(list).ToString()} is null.");
                     return;
                 }
                 if (string.IsNullOrEmpty(text))
@@ -60,7 +60,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log($"Error, failed to remove string {text} because {nameof(list).ToString()} is null.");
+                    Log.Write($"Error, failed to remove string {text} because {nameof(list).ToString()} is null.");
                     return;
                 }
                 if (string.IsNullOrEmpty(text))
@@ -83,7 +83,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log($"Error, failed to add gameobject {obj.name} because {nameof(list).ToString()} is null.");
+                    Log.Write($"Error, failed to add gameobject {obj.name} because {nameof(list).ToString()} is null.");
                     return;
                 }
                 if (obj == null)
@@ -106,7 +106,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log($"Error, failed to remove gameobject {obj.name} because {nameof(list).ToString()} is null.");
+                    Log.Write($"Error, failed to remove gameobject {obj.name} because {nameof(list).ToString()} is null.");
                 }
                 if (obj == null)
                 {
@@ -136,7 +136,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log($"Error, failed to Destroy gameobjects  in {nameof(list).ToString()} is null.");
+                    Log.Write($"Error, failed to Destroy gameobjects  in {nameof(list).ToString()} is null.");
                     return;
                 }
             }

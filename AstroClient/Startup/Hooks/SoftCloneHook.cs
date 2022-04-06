@@ -53,7 +53,7 @@
                 _PacketCounter = value;
                 //if (isSoftCloneActive)
                 //{
-                //    ModConsole.DebugLog($"Patched {value} Events");
+                //    Log.Debug($"Patched {value} Events");
                 //    PopupUtils.QueHudMessage($"Patched {value} Events");
 
                 //}
@@ -121,7 +121,7 @@
                     isSoftCloneActive = true;
                     PacketCounter = 0;
                     _loadAvatarMethod.Invoke(GameInstances.CurrentUser, new object[] { true }); // Invoke refresh and Hook should locally clone it!
-                    ModConsole.DebugLog("Local Clone Avatar");
+                    Log.Debug("Local Clone Avatar");
                     PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
                 }
             }
@@ -138,7 +138,7 @@
                 {
                     if (hashtable.ContainsKey("avatarDict"))
                     {
-                        ModConsole.DebugLog(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(hashtable["avatarDict"]), Formatting.Indented));
+                        Log.Debug(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(hashtable["avatarDict"]), Formatting.Indented));
 
                     }
                 }
@@ -157,7 +157,7 @@
         //                isSoftCloneActive = true;
         //                PacketCounter = 0;
         //                _loadAvatarMethod.Invoke(VRCPlayer.field_Internal_Static_VRCPlayer_0, new object[] { true }); // Invoke refresh and Hook should locally clone it!
-        //                ModConsole.DebugLog("Local Clone Avatar");
+        //                Log.Debug("Local Clone Avatar");
         //                PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
 
         //            }
@@ -188,7 +188,7 @@
                 
                 if (casted.IsLocalUser())
                 {
-                   // ModConsole.DebugLog("Hey im Being called right now!");
+                   // Log.Debug("Hey im Being called right now!");
 
 
                     if (!isSoftCloneActive) return;
@@ -198,7 +198,7 @@
                         // Hopefully it works!
                         if (casted != null)
                         {
-                            ModConsole.DebugLog("Swapping AvatarDict...");
+                            Log.Debug("Swapping AvatarDict...");
                             casted["avatarDict"] = AvatarDictCache;
                             PacketCounter++;
                         }

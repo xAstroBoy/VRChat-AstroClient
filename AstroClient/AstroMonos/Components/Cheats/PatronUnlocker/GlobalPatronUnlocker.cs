@@ -66,7 +66,7 @@
         // Use this for initialization
         internal void Start()
         {
-            ModConsole.DebugLog($"Finding Skin Events for pickup {gameObject.name}");
+            Log.Debug($"Finding Skin Events for pickup {gameObject.name}");
 
             foreach (var item in gameObject.GetComponentsInChildren<UdonBehaviour>(true))
             {
@@ -85,13 +85,13 @@
 
                 if (PatronSkinEvent != null && NonPatronSkinEvent != null)
                 {
-                    ModConsole.DebugLog("Found all The required Events!");
+                    Log.Debug("Found all The required Events!");
                     break;
                 }
             }
             if (PatronSkinEvent == null && NonPatronSkinEvent == null)
             {
-                ModConsole.DebugLog("Failed to Find all the required Events, destroying!");
+                Log.Debug("Failed to Find all the required Events, destroying!");
                 Destroy(this);
             }
 

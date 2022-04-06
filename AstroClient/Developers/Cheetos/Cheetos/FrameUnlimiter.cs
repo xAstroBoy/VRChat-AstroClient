@@ -26,7 +26,7 @@
         private static void Unlock(bool unlocked)
         {
             Application.targetFrameRate = unlocked ? int.MaxValue : Default;
-            ModConsole.DebugLog($"Frame Unlimiter: {unlocked}");
+            Log.Debug($"Frame Unlimiter: {unlocked}");
         }
     }
 }

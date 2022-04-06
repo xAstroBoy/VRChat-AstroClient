@@ -15,7 +15,7 @@
         {
             if (path != null)
             {
-                ModConsole.Log("Loading assets from File. . . \n" + path);
+                Log.Write("Loading assets from File. . . \n" + path);
                 AssetBundleCreateRequest dlBundle = AssetBundle.LoadFromFileAsync(path);
                 while (!dlBundle.isDone)
                 {
@@ -25,7 +25,7 @@
             }
             if (url != null)
             {
-                ModConsole.Log("Loading assets from url. . . \n" + url);
+                Log.Write("Loading assets from url. . . \n" + url);
                 UnityWebRequest assetBundleRequest;
                 assetBundleRequest = UnityWebRequest.Get(url);
 
@@ -58,8 +58,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"ERROR LOADING SPRITE: {sprite}");
-                ModConsole.Exception(e);
+                Log.Error($"ERROR LOADING SPRITE: {sprite}");
+                Log.Exception(e);
                 throw;
             }
         }
@@ -74,8 +74,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("ERROR LOADING GAME OBJECT");
-                ModConsole.Exception(e);
+                Log.Error("ERROR LOADING GAME OBJECT");
+                Log.Exception(e);
                 throw;
             }
         }
@@ -90,8 +90,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"ERROR LOADING AUDIO CLIP: {audio}");
-                ModConsole.Exception(e);
+                Log.Error($"ERROR LOADING AUDIO CLIP: {audio}");
+                Log.Exception(e);
                 throw;
             }
         }

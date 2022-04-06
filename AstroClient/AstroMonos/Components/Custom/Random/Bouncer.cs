@@ -105,7 +105,7 @@
 
         private void Debug(string msg)
         {
-            if (DebugMode) ModConsole.DebugLog($"[Bouncer Debug] : {msg}");
+            if (DebugMode) Log.Debug($"[Bouncer Debug] : {msg}");
         }
 
         private void Bounce(Vector3 collisionNormal)

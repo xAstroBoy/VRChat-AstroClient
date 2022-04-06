@@ -17,9 +17,9 @@
                     Directory.CreateDirectory(path);
                 }
 
-                ModConsole.Log($"Dumping {classname} Code.");
+                Log.Write($"Dumping {classname} Code.");
                 File.WriteAllText(Path.Combine(path, $"{classname}.txt"), IL2CPPDecompiler.GetClass<T>(PrintInConsole));
-                ModConsole.Log($"Done Dumping {classname} Code.");
+                Log.Write($"Done Dumping {classname} Code.");
 
             }
         }

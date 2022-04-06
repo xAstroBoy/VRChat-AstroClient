@@ -15,12 +15,12 @@
 
         internal override void OnApplicationStart()
         {
-            ModConsole.DebugLog("Loading Instances...");
+            Log.Debug("Loading Instances...");
 
             if (!File.Exists(ConfigManager.AstroInstances))
             {
                 File.Create(ConfigManager.AstroInstances);
-                ModConsole.DebugLog("AstroInstances.json not found. Creating new one...");
+                Log.Debug("AstroInstances.json not found. Creating new one...");
             }
             else
             {
@@ -44,7 +44,7 @@
                 }
             }
 
-            ModConsole.DebugLog($"{instances.Count} Instances Loaded!");
+            Log.Debug($"{instances.Count} Instances Loaded!");
         }
 
         internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)

@@ -11,40 +11,40 @@
                 var body = obj.GetComponent<Rigidbody>();
                 if (body != null)
                 {
-                    ModConsole.Log(obj.name + " Rigidbody Details");
-                    ModConsole.Log("{");
-                    ModConsole.Log("velocity " + body.velocity.ToString() + ",");
-                    ModConsole.Log("angularVelocity " + body.angularVelocity.ToString() + ",");
-                    ModConsole.Log("drag " + body.drag.ToString() + ",");
-                    ModConsole.Log("angularDrag " + body.angularDrag.ToString() + ",");
-                    ModConsole.Log("mass " + body.mass.ToString() + ",");
-                    ModConsole.Log("useGravity " + body.useGravity.ToString() + ",");
-                    ModConsole.Log("maxDepenetrationVelocity " + body.maxDepenetrationVelocity.ToString() + ",");
-                    ModConsole.Log("isKinematic " + body.isKinematic.ToString() + ",");
-                    ModConsole.Log("freezeRotation " + body.freezeRotation.ToString() + ",");
-                    ModConsole.Log("constraints " + body.constraints.ToString() + ",");
-                    ModConsole.Log("collisionDetectionMode " + body.collisionDetectionMode.ToString() + ",");
-                    ModConsole.Log("centerOfMass " + body.centerOfMass.ToString() + ",");
-                    ModConsole.Log("inertiaTensor " + body.inertiaTensor.ToString() + ",");
-                    ModConsole.Log("detectCollisions " + body.detectCollisions.ToString() + ",");
-                    ModConsole.Log("position " + body.position.ToString() + ",");
-                    ModConsole.Log("rotation " + body.rotation.ToString() + ",");
-                    ModConsole.Log("interpolation " + body.interpolation.ToString() + ",");
-                    ModConsole.Log("solverIterations " + body.solverIterations.ToString() + ",");
-                    ModConsole.Log("sleepThreshold " + body.sleepThreshold.ToString() + ",");
-                    ModConsole.Log("maxAngularVelocity " + body.maxAngularVelocity.ToString() + ",");
-                    ModConsole.Log("solverVelocityIterations " + body.solverVelocityIterations.ToString() + ",");
-                    ModConsole.Log("sleepVelocity " + body.sleepVelocity.ToString() + ",");
-                    ModConsole.Log("sleepAngularVelocity " + body.sleepAngularVelocity.ToString() + ",");
-                    ModConsole.Log("useConeFriction " + body.useConeFriction.ToString() + ",");
-                    ModConsole.Log("inertiaTensorRotation " + body.inertiaTensorRotation.ToString() + ",");
-                    ModConsole.Log("solverIterationCount " + body.solverIterationCount.ToString() + ",");
-                    ModConsole.Log("solverVelocityIterationCount " + body.solverVelocityIterationCount.ToString() + ",");
-                    ModConsole.Log("}");
+                    Log.Write(obj.name + " Rigidbody Details");
+                    Log.Write("{");
+                    Log.Write("velocity " + body.velocity.ToString() + ",");
+                    Log.Write("angularVelocity " + body.angularVelocity.ToString() + ",");
+                    Log.Write("drag " + body.drag.ToString() + ",");
+                    Log.Write("angularDrag " + body.angularDrag.ToString() + ",");
+                    Log.Write("mass " + body.mass.ToString() + ",");
+                    Log.Write("useGravity " + body.useGravity.ToString() + ",");
+                    Log.Write("maxDepenetrationVelocity " + body.maxDepenetrationVelocity.ToString() + ",");
+                    Log.Write("isKinematic " + body.isKinematic.ToString() + ",");
+                    Log.Write("freezeRotation " + body.freezeRotation.ToString() + ",");
+                    Log.Write("constraints " + body.constraints.ToString() + ",");
+                    Log.Write("collisionDetectionMode " + body.collisionDetectionMode.ToString() + ",");
+                    Log.Write("centerOfMass " + body.centerOfMass.ToString() + ",");
+                    Log.Write("inertiaTensor " + body.inertiaTensor.ToString() + ",");
+                    Log.Write("detectCollisions " + body.detectCollisions.ToString() + ",");
+                    Log.Write("position " + body.position.ToString() + ",");
+                    Log.Write("rotation " + body.rotation.ToString() + ",");
+                    Log.Write("interpolation " + body.interpolation.ToString() + ",");
+                    Log.Write("solverIterations " + body.solverIterations.ToString() + ",");
+                    Log.Write("sleepThreshold " + body.sleepThreshold.ToString() + ",");
+                    Log.Write("maxAngularVelocity " + body.maxAngularVelocity.ToString() + ",");
+                    Log.Write("solverVelocityIterations " + body.solverVelocityIterations.ToString() + ",");
+                    Log.Write("sleepVelocity " + body.sleepVelocity.ToString() + ",");
+                    Log.Write("sleepAngularVelocity " + body.sleepAngularVelocity.ToString() + ",");
+                    Log.Write("useConeFriction " + body.useConeFriction.ToString() + ",");
+                    Log.Write("inertiaTensorRotation " + body.inertiaTensorRotation.ToString() + ",");
+                    Log.Write("solverIterationCount " + body.solverIterationCount.ToString() + ",");
+                    Log.Write("solverVelocityIterationCount " + body.solverVelocityIterationCount.ToString() + ",");
+                    Log.Write("}");
                 }
                 else
                 {
-                    ModConsole.Log("Does " + obj.name + "have a rigidbody?");
+                    Log.Write("Does " + obj.name + "have a rigidbody?");
                 }
             }
         }

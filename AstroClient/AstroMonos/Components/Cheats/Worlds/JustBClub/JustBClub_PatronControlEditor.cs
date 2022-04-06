@@ -199,9 +199,9 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
                 {
                     UdonHeapEditor.PatchHeap(PatronControl, listaddress, modifiedlist.ToArray());
                     if (!Delete)
-                        ModConsole.DebugLog($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron list");
+                        Log.Debug($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron list");
                     else
-                        ModConsole.DebugLog($"Removed {PlayerSpooferUtils.Original_DisplayName} from Patron list");
+                        Log.Debug($"Removed {PlayerSpooferUtils.Original_DisplayName} from Patron list");
                 }
             }
         }
@@ -241,9 +241,9 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
                 {
                     UdonHeapEditor.PatchHeap(PatronControl, GroupAddress, ModifiedGroup);
                     if (!Delete)
-                        ModConsole.DebugLog($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron string Group list");
+                        Log.Debug($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron string Group list");
                     else
-                        ModConsole.DebugLog($"Removed {PlayerSpooferUtils.Original_DisplayName} from Patron string Group list");
+                        Log.Debug($"Removed {PlayerSpooferUtils.Original_DisplayName} from Patron string Group list");
                 }
             }
         }
@@ -294,9 +294,9 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
                 {
                     UdonHeapEditor.PatchHeap(PatronControl, listaddress, EditedList.ToArray());
                     if (!Delete)
-                        ModConsole.DebugLog($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron Group list");
+                        Log.Debug($"Added {PlayerSpooferUtils.Original_DisplayName} from Patron Group list");
                     else
-                        ModConsole.DebugLog($"Removed {PlayerSpooferUtils.Original_DisplayName} from Patron Group list");
+                        Log.Debug($"Removed {PlayerSpooferUtils.Original_DisplayName} from Patron Group list");
                 }
             }
         }
@@ -336,7 +336,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
             if (isPatron_Check != null && isElite_Check != null)
             {
                 PatronControl = isPatron_Check.UdonBehaviour.ToRawUdonBehaviour();
-                ModConsole.DebugLog("Added PatronControlEditor to World Patron System Successfully!");
+                Log.Debug("Added PatronControlEditor to World Patron System Successfully!");
             }
             else
             {

@@ -9,7 +9,7 @@
         {
             if (player != null)
             {
-                ModConsole.Log($"{PhotonUtils.GetDisplayName(player)} blocked you!");
+                Log.Write($"{PhotonUtils.GetDisplayName(player)} blocked you!");
                 PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} blocked you!");
             }
         }
@@ -18,7 +18,7 @@
         {
             if (player != null)
             {
-                ModConsole.Log($"{PhotonUtils.GetDisplayName(player)} unblocked you!");
+                Log.Write($"{PhotonUtils.GetDisplayName(player)} unblocked you!");
                 PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} unblocked you!");
             }
         }
@@ -27,7 +27,7 @@
         {
             if (player != null)
             {
-                ModConsole.Log($"{PhotonUtils.GetDisplayName(player)} muted you!");
+                Log.Write($"{PhotonUtils.GetDisplayName(player)} muted you!");
                 PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} muted you!");
             }
         }
@@ -36,7 +36,7 @@
         {
             if (player != null)
             {
-                ModConsole.Log($"{PhotonUtils.GetDisplayName(player)} unmuted you!");
+                Log.Write($"{PhotonUtils.GetDisplayName(player)} unmuted you!");
                 PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} unmuted you!");
             }
         }

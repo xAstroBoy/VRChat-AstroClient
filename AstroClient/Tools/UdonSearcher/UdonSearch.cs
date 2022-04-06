@@ -28,7 +28,7 @@
                     {
                         if (Debug)
                         {
-                            ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                            Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
                         }
 
                         foreach (var actionkeys in behaviour._eventTable)
@@ -37,7 +37,7 @@
                             {
                                 if (Debug)
                                 {
-                                    ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                                    Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
                                 }
 
                                 foundEvents.Add(new UdonBehaviour_Cached(behaviour, actionkeys.key));
@@ -116,7 +116,7 @@
                     {
                         if (Debug)
                         {
-                            ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                            Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
                         }
 
                         if (SearchResult.Contains(behaviour.gameObject))
@@ -189,7 +189,7 @@
                 {
                     if (Debug)
                     {
-                        ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                        Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
                     }
 
                     foreach (var actionkeys in behaviour._eventTable)
@@ -198,7 +198,7 @@
                         {
                             if (Debug)
                             {
-                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                                Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
                             }
 
                             return new UdonBehaviour_Cached(behaviour, actionkeys.key);
@@ -226,7 +226,7 @@
                 {
                     if (Debug)
                     {
-                        ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                        Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
                     }
 
                     foreach (var actionkeys in behaviour._eventTable)
@@ -235,7 +235,7 @@
                         {
                             if (Debug)
                             {
-                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                                Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
                             }
 
                             return new UdonBehaviour_Cached(behaviour, actionkeys.key);
@@ -262,7 +262,7 @@
                         {
                             if (Debug)
                             {
-                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
+                                Log.Debug($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
                             }
                             return new UdonBehaviour_Cached(obj, actionkeys.key);
                         }
@@ -329,7 +329,7 @@
                         {
                             if (Debug)
                             {
-                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                                Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
                             }
                             return new UdonBehaviour_Cached(actionobject, actionkeys.key);
                         }
@@ -356,7 +356,7 @@
                         {
                             if (Debug)
                             {
-                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                                Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
                             }
                             result.Add(new UdonBehaviour_Cached(actionobject, actionkeys.key));
                         }

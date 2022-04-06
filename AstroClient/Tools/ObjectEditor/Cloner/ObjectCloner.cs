@@ -49,7 +49,7 @@
 
         internal static void CloneGameObject(GameObject GameObject)
         {
-            ModConsole.DebugLog($"Found A Target GameObject  :{GameObject.name}");
+            Log.Debug($"Found A Target GameObject  :{GameObject.name}");
             var obj = Object.Instantiate(GameObject);
             if (obj != null)
             {
@@ -63,12 +63,12 @@
                     SpawnerSubmenu.ClonedObjects.Add(obj);
                     SpawnerSubmenu.UpdateSpawnedPickupsBtn();
                 }
-                ModConsole.Log($"Spawned A Copy Successfully!, cloned {obj.name}");
+                Log.Write($"Spawned A Copy Successfully!, cloned {obj.name}");
                 Tweaker_Object.SetObjectToEdit(obj);
             }
             else
             {
-                ModConsole.Log("Failed to clone object, is null!");
+                Log.Write("Failed to clone object, is null!");
             }
         }
     }

@@ -29,7 +29,7 @@
                     ClickerGameCheats.SetInteractable(true);
                     ClickerGameCheats.SetTextColor(Color.green);
                 }
-                ModConsole.Log($"Recognized {Name} World, AutoClicker Available!....");
+                Log.Write($"Recognized {Name} World, AutoClicker Available!....");
                 CubeClicker = UdonSearch.FindUdonEvent("MainButton", "_interact");
             }
             else

@@ -66,34 +66,34 @@
         //    switch (type)
         //    {
         //        case "friend-online":
-        //            ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Came Online");
+        //            Log.Write($"[Friends] '{WebSocketData.user.displayName}' -> Came Online");
         //            break;
         //        case "friend-active":
-        //            ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Status: {WebSocketData.user.state} - '{WebSocketData.user.status}'");
+        //            Log.Write($"[Friends] '{WebSocketData.user.displayName}' -> Status: {WebSocketData.user.state} - '{WebSocketData.user.status}'");
         //            break;
         //        case "friend-location":
         //            if (WebSocketData.location.Equals("private"))
         //            {
-        //                ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went to a private location");
+        //                Log.Write($"[Friends] '{WebSocketData.user.displayName}' -> Went to a private location");
         //            }
         //            else
         //            {
-        //                ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went to {WebSocketData.world.name} - {WebSocketData.location}");
+        //                Log.Write($"[Friends] '{WebSocketData.user.displayName}' -> Went to {WebSocketData.world.name} - {WebSocketData.location}");
         //            }
         //            break;
         //        case "user-location":
         //            break;
         //        default:
-        //            ModConsole.Log($"[API] Unhandled Type: {type}");
+        //            Log.Write($"[API] Unhandled Type: {type}");
         //            break;
         //    }
 
-        //    //ModConsole.Log($"[API] {e.Data}");
+        //    //Log.Write($"[API] {e.Data}");
         //}
 
         //private static void OnOpened(object sender, EventArgs e)
         //{
-        //    ModConsole.Log("[API] Connected To WebSocket!");
+        //    Log.Write("[API] Connected To WebSocket!");
         //    //Helper().Start();
         //}
 
@@ -120,12 +120,12 @@
 
         internal override void OnRoomJoined()
         {
-            ModConsole.Log("You joined a room.");
+            Log.Write("You joined a room.");
         }
 
         internal override void OnRoomLeft()
         {
-            ModConsole.Log("You left a room.");
+            Log.Write("You left a room.");
         }
 
         //internal override void OnPlayerJoined(Player player)

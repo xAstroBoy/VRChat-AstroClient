@@ -59,7 +59,7 @@
         {
             if (isDebugging)
             {
-                ModConsole.DebugLog(msg);
+                Log.Debug(msg);
             }
         }
         // TODO : Make a mechanism to prevent people who already voted so it doesn't make duplicate votes on instances lol

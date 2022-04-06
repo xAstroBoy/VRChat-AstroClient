@@ -27,7 +27,7 @@
             bool flag = mutableRendererCollection.Count != 0;
             if (flag)
             {
-                ModConsole.Log(string.Format("Setting {0} renderers back to {1}", mutableRendererCollection.Count, toggleEnabled));
+                Log.Write(string.Format("Setting {0} renderers back to {1}", mutableRendererCollection.Count, toggleEnabled));
                 foreach (Renderer renderer in mutableRendererCollection.Values)
                 {
                     bool flag2 = renderer == null;
@@ -64,7 +64,7 @@
                         }
                     }
                 }
-                ModConsole.Log(string.Format("Toggled {0} {1} renderers", num, arg));
+                Log.Write(string.Format("Toggled {0} {1} renderers", num, arg));
             }
         }
 

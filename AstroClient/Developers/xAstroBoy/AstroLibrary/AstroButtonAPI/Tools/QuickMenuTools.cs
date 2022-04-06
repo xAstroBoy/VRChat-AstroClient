@@ -81,7 +81,7 @@
                 if (_QuickMenuInstance == null)
                 {
                     var test = UnityUtils.FindInactiveObjectInActiveRoot("UserInterface/Canvas_QuickMenu(Clone)")?.GetComponent<QuickMenu>();
-                    if (test != null) ModConsole.DebugLog("Found QuickMenu Instance!", Color.Chartreuse);
+                    if (test != null) Log.Debug("Found QuickMenu Instance!", Color.Chartreuse);
 
                     return _QuickMenuInstance = test;
                 }
@@ -162,7 +162,7 @@
                     foreach (var button in Buttons)
                         if (button.name == "Page_Settings")
                         {
-                            ModConsole.DebugLog("Found Tab Settings!", Color.Chartreuse);
+                            Log.Debug("Found Tab Settings!", Color.Chartreuse);
                             return _TabButtonTemplate = button.transform;
                         }
                 }
@@ -181,7 +181,7 @@
                     foreach (var button in Buttons)
                         if (button.name == "Page_Buttons_QM")
                         {
-                            ModConsole.DebugLog("Found Tab Menu!", Color.Chartreuse);
+                            Log.Debug("Found Tab Menu!", Color.Chartreuse);
                             return _TabMenu = button.transform;
                         }
                 }
@@ -200,7 +200,7 @@
                     foreach (var button in Buttons)
                         if (button.name == "ToolTipPanel")
                         {
-                            ModConsole.DebugLog("Found ToolTip Panel!", Color.Chartreuse);
+                            Log.Debug("Found ToolTip Panel!", Color.Chartreuse);
                             return _ToolTipPanel = button.transform;
                         }
                 }
@@ -219,7 +219,7 @@
                     foreach (var button in Buttons)
                         if (button.name == "VolumeSlider_Master")
                         {
-                            ModConsole.DebugLog("Found Slider Template!", Color.Chartreuse);
+                            Log.Debug("Found Slider Template!", Color.Chartreuse);
                             return _SliderTemplate = button;
                         }
                 }
@@ -238,7 +238,7 @@
                     foreach (var button in Buttons)
                         if (button.name == "Button_ToggleTooltips")
                         {
-                            ModConsole.DebugLog("Found ToolTips button!", Color.Chartreuse);
+                            Log.Debug("Found ToolTips button!", Color.Chartreuse);
                             return _ToggleButtonTemplate = button;
                         }
                 }
@@ -258,7 +258,7 @@
                     foreach (var button in Buttons)
                         if (button.name == "Menu_Camera")
                         {
-                            ModConsole.DebugLog("Found Camera Page!", Color.Chartreuse);
+                            Log.Debug("Found Camera Page!", Color.Chartreuse);
                             return _NestedMenuTemplate = button;
                         }
                 }
@@ -278,7 +278,7 @@
                     foreach (var button in Buttons)
                         if (button.name == "Menu_Dashboard")
                         {
-                            ModConsole.DebugLog("Found Dashboard Page!", Color.Chartreuse);
+                            Log.Debug("Found Dashboard Page!", Color.Chartreuse);
                             return _MenuDashboard = button;
                         }
                 }

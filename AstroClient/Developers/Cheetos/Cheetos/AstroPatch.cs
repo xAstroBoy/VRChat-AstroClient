@@ -337,11 +337,11 @@
                     isActivePatch = true;
                     if (isDevMode)
                     {
-                        ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
+                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
                     }
                     else
                     {
-                        ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodInfo?.Name}");
+                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodInfo?.Name}");
                     }
                 }
                 else
@@ -379,11 +379,11 @@
                     isActivePatch = true;
                     if (isDevMode)
                     {
-                        ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_base} | with {patch.PatchType}");
+                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_base} | with {patch.PatchType}");
                     }
                     else
                     {
-                        ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodBase?.Name}");
+                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodBase?.Name}");
                     }
                 }
                 else
@@ -411,22 +411,22 @@
                 {
                     if (isDevMode)
                     {
-                        ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_base} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
+                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_base} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
                     }
                     else
                     {
-                        ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodBase?.Name}", Color.OrangeRed);
+                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodBase?.Name}", Color.OrangeRed);
                     }
                 }
                 else
                 {
                     if (isDevMode)
                     {
-                        ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_MethodInfo} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
+                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_MethodInfo} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
                     }
                     else
                     {
-                        ModConsole.DebugLog($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodInfo?.Name}", Color.OrangeRed);
+                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodInfo?.Name}", Color.OrangeRed);
                     }
 
                 }

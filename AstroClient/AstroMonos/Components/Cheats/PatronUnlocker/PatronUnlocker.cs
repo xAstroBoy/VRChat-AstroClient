@@ -113,7 +113,7 @@
             }
             if (PatronSkinEvent == null && NonPatronSkinEvent == null)
             {
-                ModConsole.DebugLog("Failed to Find all the required Events, destroying!");
+                Log.Debug("Failed to Find all the required Events, destroying!");
                 Destroy(this);
             }
 
@@ -127,7 +127,7 @@
         [HideFromIl2Cpp]
         private void Debug(string msg)
         {
-            if (DebugMode) ModConsole.DebugLog($"[Patron Item Debug] : {msg}");
+            if (DebugMode) Log.Debug($"[Patron Item Debug] : {msg}");
         }
 
         internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)

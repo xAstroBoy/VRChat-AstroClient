@@ -106,7 +106,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             if (collision.transform.root.name.Contains("VRCPlayer")) return;
             foreach (var contact in collision.contacts)
             {
-                ModConsole.DebugLog(contact.point.ToString() + "Point To Teleport To");
+                Log.Debug(contact.point.ToString() + "Point To Teleport To");
                 var position = new Vector3(contact.point.x, contact.point.y, contact.point.z);
                 GameInstances.CurrentUser.gameObject.transform.position = position;
 

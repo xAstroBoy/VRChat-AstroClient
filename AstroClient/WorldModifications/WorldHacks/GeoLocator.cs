@@ -44,7 +44,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (id == WorldIds.GeoLocator)
             {
 
-                ModConsole.Log($"Recognized {Name} World, Patching Patron System....");
+                Log.Write($"Recognized {Name} World, Patching Patron System....");
                 isCurrentWorld = true;
                 if (CurrentMenu != null)
                 {

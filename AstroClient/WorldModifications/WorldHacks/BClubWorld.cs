@@ -71,12 +71,12 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (value)
                 {
-                    ModConsole.Log("BlueChair Enabled!");
+                    Log.Write("BlueChair Enabled!");
                     BlueChairSpam();
                 }
                 else
                 {
-                    ModConsole.Log("BlueChair Disabled!");
+                    Log.Write("BlueChair Disabled!");
                 }
                 _isBlueChairEnabed = value;
             }
@@ -97,13 +97,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (DoorUnlockFreeze_CancellationToken == null)
                     {
-                        ModConsole.Log("Doorbell Spam Enabled!");
+                        Log.Write("Doorbell Spam Enabled!");
                         SpamDoorbells();
                     }
                 }
                 else
                 {
-                    ModConsole.Log("Doorbell Spam Disabled!");
+                    Log.Write("Doorbell Spam Disabled!");
                     DoorUnlockFreeze_CancellationToken = null;
                 }
                 _isDoorBellSpamEnabled = value;
@@ -123,13 +123,13 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (value)
                 {
-                    ModConsole.Log("Door Locks Frozen: Locked");
+                    Log.Write("Door Locks Frozen: Locked");
                     if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
                     DoorLockFreeze();
                 }
                 else
                 {
-                    ModConsole.Log("Door Locks Unfrozen");
+                    Log.Write("Door Locks Unfrozen");
                     DoorLockFreeze_CancellationToken = null;
                 }
                 _isFreezeLockEnabed = value;
@@ -145,14 +145,14 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (DoorUnlockFreeze_CancellationToken == null)
                     {
-                        ModConsole.Log("Door Locks Frozen: Unlocked");
+                        Log.Write("Door Locks Frozen: Unlocked");
                         if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
                         DoorUnlockFreeze();
                     }
                 }
                 else
                 {
-                    ModConsole.Log("Door Locks Unfrozen");
+                    Log.Write("Door Locks Unfrozen");
                     DoorUnlockFreeze_CancellationToken = null;
                 }
                 _isFreezeUnlockEnabed = value;
@@ -168,13 +168,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (Rainbow_CancellationToken == null)
                     {
-                        ModConsole.Log("Rainbow Enabled!");
+                        Log.Write("Rainbow Enabled!");
                         Rainbow();
                     }
                 }
                 else
                 {
-                    ModConsole.Log("Rainbow Disabled.");
+                    Log.Write("Rainbow Disabled.");
                     Rainbow_CancellationToken = null;
                 }
                 _isRainbowEnabled = value;
@@ -192,13 +192,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (MoanSpam_CancellationToken == null)
                     {
-                        ModConsole.Log("Moan Spam Enabled!");
+                        Log.Write("Moan Spam Enabled!");
                         MoanSpam();
                     }
                 }
                 else
                 {
-                    ModConsole.Log("Moan Spam Disabled.");
+                    Log.Write("Moan Spam Disabled.");
                     MoanSpam_CancellationToken = null;
                 }
                 _isMoanSpamEnabled = value;
@@ -476,7 +476,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     }
                 }
             }
-            ModConsole.Log($"Blue Chairs: {_chairs.Count} found.");
+            Log.Write($"Blue Chairs: {_chairs.Count} found.");
             _ = MelonCoroutines.Start(DoBlueChairSpam());
         }
 
@@ -541,7 +541,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 _chairs.Clear();
                 ColorActions.Clear();
                 BedroomVIProot = null;
-                ModConsole.Log("Done unloading B Club..");
+                Log.Write("Done unloading B Club..");
             }
         }
 
@@ -566,7 +566,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static IEnumerator BypassElevator()
         {
-            ModConsole.DebugLog("Elevator Bypass Started", System.Drawing.Color.Aquamarine);
+            Log.Debug("Elevator Bypass Started", System.Drawing.Color.Aquamarine);
             var elevator = LobbyRoot.transform.FindObject("New Part/Udon/Warning");
 
             while (elevator == null) yield return new WaitForSeconds(0.001f);
@@ -583,12 +583,12 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (!elevator.gameObject.active)
                 {
-                    ModConsole.DebugLog("Unable to Bypass Elevator Warning.", System.Drawing.Color.Aquamarine);
+                    Log.Debug("Unable to Bypass Elevator Warning.", System.Drawing.Color.Aquamarine);
                     yield return new WaitForSeconds(0.5f);
                 }
                 else
                 {
-                    ModConsole.DebugLog("Bypassed Elevator Warning!", System.Drawing.Color.Aquamarine);
+                    Log.Debug("Bypassed Elevator Warning!", System.Drawing.Color.Aquamarine);
                     yield break;
                 }
             }
@@ -607,7 +607,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
                 isCurrentWorld = true;
                 UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
-                ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
+                Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
                 var pedestralreader = UdonSearch.FindUdonEvent("RenderCamera", "_onPostRender");
                 if(pedestralreader != null)
                 {
@@ -640,7 +640,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 MiscUtils.DelayFunction(2f, () =>
                 {
-                    ModConsole.DebugLog("Rainbow Exploit!");
+                    Log.Debug("Rainbow Exploit!");
 
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Red"));
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Red"));
@@ -700,7 +700,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
                 try
                 {
-                    ModConsole.DebugLog("Searching for Private Rooms Exteriors...");
+                    Log.Debug("Searching for Private Rooms Exteriors...");
                     _ = CreateButtonGroup(1, new Vector3(-111.00629f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
                     _ = CreateButtonGroup(2, new Vector3(-109.28977f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
                     _ = CreateButtonGroup(3, new Vector3(-103.00354f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
@@ -737,7 +737,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
-                ModConsole.Log("Starting Update Loop");
+                Log.Write("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
                 _ = MelonCoroutines.Start(BypassElevator());
                 _ = MelonCoroutines.Start(EnableElevatorFlairBtn());
@@ -763,7 +763,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 yield return null;
             }
 
-            ModConsole.Log("Room Privacies Removed..");
+            Log.Write("Room Privacies Removed..");
             yield break;
         }
 

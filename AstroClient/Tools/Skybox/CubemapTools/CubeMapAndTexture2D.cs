@@ -240,12 +240,12 @@
             {
                 try
                 {
-                    ModConsole.DebugLog($"Generating Texture of {face}");
+                    Log.Debug($"Generating Texture of {face}");
                     Text.SetPixels(cubemap.GetPixels(face));
-                    ModConsole.DebugLog("Saving Texture...");
+                    Log.Debug("Saving Texture...");
                     File.WriteAllBytes(path + "/" + cubemap.name + "_" + face.ToString() + ".png",
                         ImageConversion.EncodeToPNG(Text));
-                    ModConsole.DebugLog($"Saved {cubemap.name} {face.ToString()}");
+                    Log.Debug($"Saved {cubemap.name} {face.ToString()}");
                 }
                 catch (Exception e)
                 {

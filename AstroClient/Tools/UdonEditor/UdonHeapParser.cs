@@ -20,7 +20,7 @@ namespace AstroClient.Tools.UdonEditor
             }
             else
             {
-                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+                Log.Debug("Unable To Parse Udon Heap value as Heap is null!");
             }
             return default(T);;
         }
@@ -37,7 +37,7 @@ namespace AstroClient.Tools.UdonEditor
             }
             else
             {
-                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+                Log.Debug("Unable To Parse Udon Heap value as Heap is null!");
             }
             return default(T);
         }

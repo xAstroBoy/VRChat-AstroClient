@@ -63,22 +63,22 @@
 
         public override void Remove()
         {
-            //ModConsole.DebugLog("PLPE: Removing " + _playerEntry.apiUser.displayName);
+            //Log.Debug("PLPE: Removing " + _playerEntry.apiUser.displayName);
             /*try
             {
                 if (_playerEntry.player != null)
                 {
-                    ModConsole.DebugLog("PLAYER MAY STILL EXIST! Aborting.");
+                    Log.Debug("PLAYER MAY STILL EXIST! Aborting.");
                     //return;
                 }
                 else
                 {
-                    ModConsole.DebugLog("Player is probably gone. Removing.");
+                    Log.Debug("Player is probably gone. Removing.");
                 }
             }
             catch
             {
-                ModConsole.DebugLog("Player is probably gone. Removing.");
+                Log.Debug("Player is probably gone. Removing.");
             }*/
             EntryManager.playerLeftPairsEntries.Remove(this);
             EntryManager.idToEntryTable.Remove(playerEntry.userId);

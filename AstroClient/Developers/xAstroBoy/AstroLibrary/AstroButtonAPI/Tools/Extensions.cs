@@ -215,7 +215,7 @@
             foreach (var item in parent.GetComponents<Component>())
             {
                 var name = item.GetIl2CppType().FullName;
-                //ModConsole.DebugLog($"Found {name}");
+                //Log.Debug($"Found {name}");
                 if (!ComponentsToNotDelete.Contains(name))
                 {
                     UnityEngine.Object.Destroy(item);

@@ -155,7 +155,7 @@ namespace AstroClient
             UdonEventsHook.Event_Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
             UdonEventsHook.Event_Udon_OnInteract -= UdonBehaviour_Event_OnInteract;
             UdonEventsHook.Event_Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
-            //ModConsole.DebugLog($"Deregistered a AstroMonoBehaviour from EventHandlers and Destroying it!");
+            //Log.Debug($"Deregistered a AstroMonoBehaviour from EventHandlers and Destroying it!");
         }
 
 

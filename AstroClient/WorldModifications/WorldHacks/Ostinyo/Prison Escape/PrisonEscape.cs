@@ -207,7 +207,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         if (!CurrentReaders.Contains(reader))
                         {
-                            // ModConsole.DebugLog($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
+                            // Log.Debug($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
                             CurrentReaders.Add(reader);
                         }
                     }
@@ -435,12 +435,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
 
 
-            ModConsole.DebugLog($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
+            Log.Debug($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
 
-            ModConsole.DebugLog($"Registered {SpawnPoints_Spawn.Count} Spawn Area Positions!", System.Drawing.Color.Chartreuse);
-            ModConsole.DebugLog($"Registered {SpawnPoints_Guards.Count} Guard Spawn Positions!", System.Drawing.Color.Chartreuse);
-            ModConsole.DebugLog($"Registered {SpawnPoints_Prisoners.Count} Prisoner Spawn Positions!", System.Drawing.Color.Chartreuse);
-            //ModConsole.DebugLog($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
+            Log.Debug($"Registered {SpawnPoints_Spawn.Count} Spawn Area Positions!", System.Drawing.Color.Chartreuse);
+            Log.Debug($"Registered {SpawnPoints_Guards.Count} Guard Spawn Positions!", System.Drawing.Color.Chartreuse);
+            Log.Debug($"Registered {SpawnPoints_Prisoners.Count} Prisoner Spawn Positions!", System.Drawing.Color.Chartreuse);
+            //Log.Debug($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
 
 
             AddSpawnDetector(SpawnPoints_Guards, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Guard);
@@ -733,7 +733,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         //            foreach (var pos in SpawnPoints_Prisoners)
         //            {
         //                var dist = Vector3.Distance(pos, position);
-        //                //ModConsole.DebugLog($"Calculated Distance is {dist}");
+        //                //Log.Debug($"Calculated Distance is {dist}");
         //                if (dist.CheckRange(1, 30f))
         //                {
         //                    return true;
@@ -754,7 +754,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         //            foreach (var pos in SpawnPoints_Guards)
         //            {
         //                var dist = Vector3.Distance(pos, position);
-        //               // ModConsole.DebugLog($"Calculated Distance is {dist}");
+        //               // Log.Debug($"Calculated Distance is {dist}");
         //                if (dist.CheckRange(1, 30f))
         //                {
         //                    return true;
@@ -792,7 +792,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                 {
                                     if (!SuppressLogs)
                                     {
-                                        ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
                                     }
 
                                     return actualreader;
@@ -807,7 +807,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                 {
                                     if (!SuppressLogs)
                                     {
-                                        ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
                                     }
 
                                     return actualreader;
@@ -821,7 +821,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                     {
                                         if (!SuppressLogs)
                                         {
-                                            ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                            Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
                                         }
 
                                         return item;
@@ -842,7 +842,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                 {
                                     if (!SuppressLogs)
                                     {
-                                        ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
                                     }
 
                                     return item;
@@ -857,7 +857,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                 {
                                     if (!SuppressLogs)
                                     {
-                                            ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                            Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
                                     }
 
                                     return item;
@@ -871,7 +871,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                     {
                                         if (!SuppressLogs)
                                         {
-                                            ModConsole.DebugLog($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                            Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
                                         }
 
                                         return item;
@@ -893,7 +893,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 if (!LocalReader.isLocal)
                 {
-                    ModConsole.DebugLog($"Local Reader Changed, Resetting!");
+                    Log.Debug($"Local Reader Changed, Resetting!");
                     LocalReader = null;
                 }
             }
@@ -908,12 +908,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                         if (actualreader.isLocal)
                         {
-                            ModConsole.DebugLog($"Found Local player Data Reader : {actualreader.gameObject.name} !", System.Drawing.Color.GreenYellow);
+                            Log.Debug($"Found Local player Data Reader : {actualreader.gameObject.name} !", System.Drawing.Color.GreenYellow);
                             return LocalReader = actualreader;
                         }
                         else if (item.isLocal)
                         {
-                            ModConsole.DebugLog($"Found Local player Data Reader : {item.gameObject.name} !", System.Drawing.Color.GreenYellow);
+                            Log.Debug($"Found Local player Data Reader : {item.gameObject.name} !", System.Drawing.Color.GreenYellow);
                             return LocalReader = actualreader;
                         }
 
@@ -1244,7 +1244,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", guardsCanUse, () =>
                         {
-                            ModConsole.DebugLog($"Setting {item.name} guardsCanUse to {guardsCanUse}");
+                            Log.Debug($"Setting {item.name} guardsCanUse to {guardsCanUse}");
                         });
                     }
                 }
@@ -1301,7 +1301,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                        UdonHeapEditor.PatchHeap(item.RawItem, "dropOnUse", dropOnUse, () =>
                        {
-                           ModConsole.DebugLog($"Setting {item.name} dropOnUse to {dropOnUse}");
+                           Log.Debug($"Setting {item.name} dropOnUse to {dropOnUse}");
                        });
                     }
                 }
@@ -1323,7 +1323,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         UdonHeapEditor.PatchHeap(item.RawItem, "maxPickupDist", 999999999f, () =>
                         {
-                            ModConsole.DebugLog($"Setting {item.name} maxPickupDist to 999999999");
+                            Log.Debug($"Setting {item.name} maxPickupDist to 999999999");
                         });
 
                     }
@@ -1348,7 +1348,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                             UdonHeapEditor.PatchHeap(rawitem, "canDualWield", true, () =>
                             {
-                                ModConsole.DebugLog($"Setting {item.name} canDualWield to true");
+                                Log.Debug($"Setting {item.name} canDualWield to true");
                             });
                         }
                     }
@@ -1367,7 +1367,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         UdonHeapEditor.PatchHeap(item.RawItem, "maxUseDist", 999999999f, () =>
                         {
-                            ModConsole.DebugLog($"Setting {item.name} maxUseDist to 999999999f");
+                            Log.Debug($"Setting {item.name} maxUseDist to 999999999f");
                         });
                     }
                 }

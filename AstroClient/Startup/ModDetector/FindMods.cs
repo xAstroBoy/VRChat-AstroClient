@@ -9,7 +9,7 @@
         {
             if (MelonHandler.Mods.Any(m => m.Info.Name == "Notorious"))
             {
-                ModConsole.Log("Notorious Detected! Compatibility Initialized.");
+                Log.Write("Notorious Detected! Compatibility Initialized.", Cheetah.Color.HTML.Yellow);
                 IsNotoriousPresent = true;
             }
         }

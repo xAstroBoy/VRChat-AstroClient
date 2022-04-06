@@ -255,7 +255,7 @@
             {
                 if (JumpImpulse == 0f)
                 {
-                    ModConsole.Warning("This World has Jump disabled by default.");
+                    Log.Warn("This World has Jump disabled by default.");
                     PopupUtils.QueHudMessage($"This World has Jump disabled by default!");
                     JumpImpulse = 4f;
                 }

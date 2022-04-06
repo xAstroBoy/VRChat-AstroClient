@@ -66,19 +66,19 @@
             item_knife_7.RegisterCustomCollider(true);
             item_knife_8.RegisterCustomCollider(true);
 
-            ModConsole.Log("Found Tot Clues : " + Clues.Count());
-            ModConsole.Log("Found Tot Detective Guns : " + DetectiveGuns.Count());
-            ModConsole.Log("Found Tot Silenced Guns  : " + SilencedGuns.Count());
-            ModConsole.Log("Found Tot Knifes : " + Knifes.Count());
+            Log.Write("Found Tot Clues : " + Clues.Count());
+            Log.Write("Found Tot Detective Guns : " + DetectiveGuns.Count());
+            Log.Write("Found Tot Silenced Guns  : " + SilencedGuns.Count());
+            Log.Write("Found Tot Knifes : " + Knifes.Count());
 
             if (Death != null)
             {
-                ModConsole.Log("Found Death Gameobject, God Mode is available!", System.Drawing.Color.Green);
+                Log.Write("Found Death Gameobject, God Mode is available!", System.Drawing.Color.Green);
                 GodModeMurder2.SetActive(true);
             }
             else
             {
-                ModConsole.Log("Death Gameobject is Unknown, God Mode is unavailable!", System.Drawing.Color.Red);
+                Log.Write("Death Gameobject is Unknown, God Mode is unavailable!", System.Drawing.Color.Red);
                 if (GodModeMurder2 != null)
                 {
                     GodModeMurder2.SetActive(false);
@@ -132,7 +132,7 @@
             {
                 if (Murder2CheatPage != null)
                 {
-                    ModConsole.Log($"Recognized {Name} World, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
+                    Log.Write($"Recognized {Name} World, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
                     Murder2CheatPage.GetMainButton().SetInteractable(true);
                     Murder2CheatPage.GetMainButton().SetTextColor(Color.green);
                 }

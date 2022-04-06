@@ -199,48 +199,48 @@
         public static void Save_General()
         {
             JSonWriter.WriteToJsonFile(ConfigPath, General);
-            ModConsole.DebugLog("General Config Saved.");
+            Log.Debug("General Config Saved.");
         }
 
         public static void Save_UI()
         {
             JSonWriter.WriteToJsonFile(ConfigUIPath, UI);
-            ModConsole.DebugLog("UI Config Saved.");
+            Log.Debug("UI Config Saved.");
         }
 
         public static void Save_ESP()
         {
             JSonWriter.WriteToJsonFile(ConfigESPPath, ESP);
-            ModConsole.DebugLog("ESP Config Saved.");
+            Log.Debug("ESP Config Saved.");
         }
 
         public static void Save_Flight()
         {
             JSonWriter.WriteToJsonFile(ConfigFlightPath, Flight);
-            ModConsole.DebugLog("Flight Config Saved.");
+            Log.Debug("Flight Config Saved.");
         }
 
         public static void Save_Movement()
         {
             JSonWriter.WriteToJsonFile(ConfigMovementPath, Movement);
-            ModConsole.DebugLog("Movement Config Saved.");
+            Log.Debug("Movement Config Saved.");
         }
 
         public static void Save_Favorites()
         {
             JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
-            ModConsole.DebugLog("Favorites Config Saved.");
+            Log.Debug("Favorites Config Saved.");
         }
 
         public static void Save_Performance()
         {
             JSonWriter.WriteToJsonFile(ConfigPerformancePath, Performance);
-            ModConsole.DebugLog("Performance Config Saved.");
+            Log.Debug("Performance Config Saved.");
         }
         public static void Save_LoadingScreen()
         {
             JSonWriter.WriteToJsonFile(ConfigLoadingScreenPath, LoadingScreen);
-            ModConsole.DebugLog("Loading Screen Config Saved.");
+            Log.Debug("Loading Screen Config Saved.");
         }
 
         public static void SaveAll()
@@ -257,7 +257,7 @@
             Save_Performance();
             Save_LoadingScreen();
             stopwatch.Stop();
-            ModConsole.Log($"Finished Saving Configuration Files: {stopwatch.ElapsedMilliseconds}ms");
+            Log.Write($"Finished Saving Configuration Files: {stopwatch.ElapsedMilliseconds}ms");
             SaveMutex.ReleaseMutex();
         }
 
@@ -338,7 +338,7 @@
             }
 
             stopwatch.Stop();
-            ModConsole.DebugLog($"Finished Loading Configuration Files: {stopwatch.ElapsedMilliseconds}ms");
+            Log.Debug($"Finished Loading Configuration Files: {stopwatch.ElapsedMilliseconds}ms");
             SaveAll();
         }
     }

@@ -31,7 +31,7 @@
                                 {
                                     if (@object.ToString().Contains("Enter"))
                                     {
-                                        ModConsole.DebugLog($"[Debug] Found [JOIN] Method! [{it.Name} with {@object.ToString()}]");
+                                        Log.Debug($"[Debug] Found [JOIN] Method! [{it.Name} with {@object.ToString()}]");
                                         _OnPhotonPlayerJoinMethod = it;
                                         return true;
                                     }
@@ -70,7 +70,7 @@
                                 {
                                     if (@object.ToString().Contains("Left"))
                                     {
-                                        ModConsole.DebugLog($"[Debug] Found [Left] Method! [{it.Name} with {@object.ToString()}]");
+                                        Log.Debug($"[Debug] Found [Left] Method! [{it.Name} with {@object.ToString()}]");
                                         _OnPhotonPlayerLeftMethod = it;
                                         return true;
                                     }
@@ -136,7 +136,7 @@
                             && !jt.TryResolve().IsStatic
                             )
                             {
-                                ModConsole.Log($"[Debug] Found IsRoomAuthor Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
+                                Log.Write($"[Debug] Found IsRoomAuthor Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
                                 _IsRoomAuthor = it;
                             }
                             return false;
@@ -176,7 +176,7 @@
                                    )
                                    {
                                        _destroyportal = it;
-                                       ModConsole.Log($"[Debug] Found Destroy Portal Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
+                                       Log.Write($"[Debug] Found Destroy Portal Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
                                        return true;
                                    }
                                    return false;
@@ -220,7 +220,7 @@
                                     && jt.TryResolve().IsStatic == true
                                     )
                                     {
-                                        ModConsole.DebugLog($"[Debug] Found Open QuickMenu Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
+                                        Log.Debug($"[Debug] Found Open QuickMenu Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
                                         _openquickmenu = it;
                                         //return true;
                                     }
@@ -265,7 +265,7 @@
                                     && jt.TryResolve().IsStatic == false
                                     )
                                     {
-                                        ModConsole.DebugLog($"[Debug] Found Close QuickMenu Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
+                                        Log.Debug($"[Debug] Found Close QuickMenu Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
                                         _closequickmenu = it;
                                         //return true;
                                     }
@@ -309,7 +309,7 @@
                                     && jt.TryResolve().GetParameters()[0].ParameterType == typeof(Vector3)
                                     )
                                     {
-                                        ModConsole.DebugLog($"[Debug] Found Setup QuickMenu Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
+                                        Log.Debug($"[Debug] Found Setup QuickMenu Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
                                         _SetupQuickmenuForDesktopOrHMD = it;
                                         //return true;
                                     }
@@ -348,7 +348,7 @@
                                 x.TryResolve().GetParameters().Length == 1 &&
                                 x.TryResolve().GetParameters()[0].ParameterType == typeof(bool))
                             {
-                                ModConsole.DebugLog($"[Debug] Found PlaceUI Method! [{x.TryResolve().DeclaringType.Name}.{x.TryResolve().Name}] in [{nameof(VRCUiManager.LateUpdate)}");
+                                Log.Debug($"[Debug] Found PlaceUI Method! [{x.TryResolve().DeclaringType.Name}.{x.TryResolve().Name}] in [{nameof(VRCUiManager.LateUpdate)}");
                                 _placeUi = (MethodInfo)x.TryResolve();
                                 break;
                             }
@@ -433,7 +433,7 @@
                 && jt.TryResolve().GetParameters()[0].ParameterType == typeof(bool)
                 && jt.TryResolve().ReflectedType == typeof(IkController)
                 ));
-                ModConsole.Log($"[Debug] Found RagDoll Method! {method.Name}");
+                Log.Write($"[Debug] Found RagDoll Method! {method.Name}");
                 ourRagDollAction = (RagDollAction)Delegate.CreateDelegate(typeof(RagdollController), method);
                 return ourRagDollAction;
             }
@@ -463,7 +463,7 @@
                 && jt.TryResolve().GetParameters().Length == 0
                 && jt.TryResolve().ReflectedType == typeof(IkController)
                 ));
-                ModConsole.Log($"[Debug] Found EndRagDoll Method! {method.Name}");
+                Log.Write($"[Debug] Found EndRagDoll Method! {method.Name}");
                 ourEndRagDollAction = (EndRagDollAction)Delegate.CreateDelegate(typeof(RagdollController), method);
                 return ourEndRagDollAction;
             }

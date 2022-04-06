@@ -18,7 +18,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (Bools.IsDeveloper)
                 {
-                    ModConsole.Log($"Recognized {Name} World, Hacking Admin Panel Behaviour..");
+                    Log.Write($"Recognized {Name} World, Hacking Admin Panel Behaviour..");
 
                     var PickupSync_SPH_SFB_SACBehaviour = UdonSearch.FindUdonEvent("PickupSync_SPH_SFB_SAC", "_start");
                     if (PickupSync_SPH_SFB_SACBehaviour != null)
@@ -42,7 +42,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                                 if (List2.Contains(PlayerSpooferUtils.Original_DisplayName))
                                 {
                                     List2.Remove(PlayerSpooferUtils.Original_DisplayName);
-                                    ModConsole.Log("Removed Self from Current world Permanent Banned list...");
+                                    Log.Write("Removed Self from Current world Permanent Banned list...");
                                     UdonHeapEditor.PatchHeap(disassembledbehaviour, _permaBannedPlayers, List2.ToArray());
                                 }
                             }

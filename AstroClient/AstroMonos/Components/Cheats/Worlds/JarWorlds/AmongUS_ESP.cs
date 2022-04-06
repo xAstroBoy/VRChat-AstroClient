@@ -270,7 +270,7 @@
             }
 
             CurrentRole = AmongUs_Roles.None;
-            ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Among US Role ESP.");
+            Log.Debug("Registered " + Player.DisplayName() + " On Among US Role ESP.");
             MelonCoroutines.Start(FindEverything());
         }
 
@@ -367,7 +367,7 @@
             while (GetImpostorEvent == null)
                 yield return null;
 
-            ModConsole.DebugLog($"Found all the required Events and Node!");
+            Log.Debug($"Found all the required Events and Node!");
         }
 
         internal override void OnRoomLeft()

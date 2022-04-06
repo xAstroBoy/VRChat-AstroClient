@@ -76,7 +76,7 @@
                 if (obj != null)
                 {
                     GolfBallFireworks = obj.UdonBehaviour.ToRawUdonBehaviour();
-                    ModConsole.DebugLog("Added GolfBallManipulator to Golf Ball Successfully!");
+                    Log.Debug("Added GolfBallManipulator to Golf Ball Successfully!");
                 }
                 else
                 {

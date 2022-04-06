@@ -77,7 +77,7 @@
                                         {
                                             if (ExtractedNode.Player.DisplayName() == VictimComponent.Player.DisplayName())
                                             {
-                                                //ModConsole.DebugLog($"Executing Udon Event {action.name} with subaction {subaction.key} That Contains Player : {ExtractedNode.apiuser.displayName}");
+                                                //Log.Debug($"Executing Udon Event {action.name} with subaction {subaction.key} That Contains Player : {ExtractedNode.apiuser.displayName}");
                                                 if (ActiveNode.AmongUSCanVote)
                                                 {
                                                     action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);

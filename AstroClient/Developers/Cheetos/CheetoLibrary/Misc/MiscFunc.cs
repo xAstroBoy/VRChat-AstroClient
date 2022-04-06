@@ -111,7 +111,7 @@
         //    foreach (string line in APIUser.CurrentUser.friendIDs)
         //        if (!Friends.Contains(line))
         //        {
-        //            ModConsole.Log("[Friends] Added: " + line);
+        //            Log.Write("[Friends] Added: " + line);
         //            File.AppendAllText(FileManager.PathFriends, $"{line},{null},{null}" + Environment.NewLine);
         //        }
         //}
@@ -151,7 +151,7 @@
         //        if (!APIUser.IsFriendsWith(id))
         //        {
         //            yield return new WaitForSeconds(5);
-        //            ModConsole.Log("[Friends] send a Request to " + id);
+        //            Log.Write("[Friends] send a Request to " + id);
         //            Notification xx = FriendRequest.Create(id);
         //            Utils.VRCWebSocketsManager.SendNotification(xx);
         //            i++;
@@ -159,7 +159,7 @@
         //            if (i >= 20)
         //            {
         //                i = 0;
-        //                ModConsole.Log("[Friends] Waiting to not get rate limited!");
+        //                Log.Write("[Friends] Waiting to not get rate limited!");
         //                yield return new WaitForSeconds(75);
         //            }
         //        }
@@ -167,7 +167,7 @@
         //        {
         //            ModConsole.Error("[Friends] Skipping " + id);
         //        }
-        //        ModConsole.Log($"[Friends] {(float)requests * 100 / Friends.Length:0.00}%");
+        //        Log.Write($"[Friends] {(float)requests * 100 / Friends.Length:0.00}%");
         //    }
 
         //    stopwatch.Stop();
@@ -181,14 +181,14 @@
         {
             if (Networking.GoToRoom(roomID))
             {
-                ModConsole.Log("[Join] Success");
-                ModConsole.DebugLog("<color=#59D365>[Join] Success</color>");
+                Log.Write("[Join] Success");
+                Log.Debug("<color=#59D365>[Join] Success</color>");
             }
             else
             {
                 new PortalInternal().EnterPortal(roomID.Split(':')[0], roomID.Split(':')[1]);
-                ModConsole.Log("[Join] Failure Using Backup");
-                ModConsole.DebugLog("<color=red>[Join] Failure Using Backup</color>");
+                Log.Write("[Join] Failure Using Backup");
+                Log.Debug("<color=red>[Join] Failure Using Backup</color>");
             }
         }
 
@@ -330,7 +330,7 @@
                 Notification xx = Notification.Create(playerID, "invite", "",
                     notificationDetails);
                 //VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-                ModConsole.Log("Send Invite to: " + playerID);
+                Log.Write("Send Invite to: " + playerID);
             }
             catch
             {
@@ -352,11 +352,11 @@
                 // VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
                 //VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(Invite.Create(playerID, WorldName, new Location(WorldName, new Instance("", playerID, "", "", "", false)), WorldName));
                 // Utils.NotificationManager.SendNotification(playerID, "invite", WorldName, notificationDetails);
-                ModConsole.Log("Send Invite to: " + playerID);
+                Log.Write("Send Invite to: " + playerID);
             }
             catch
             {
-                ModConsole.Log("Invite Failed");
+                Log.Write("Invite Failed");
             }
         }
 
@@ -379,8 +379,8 @@
                 }
             }
 
-            ModConsole.Log("Sent " + NumOfTimes + " request invites to " + UserID);
-            ModConsole.DebugLog("<color=#59D365>Succesfully sent</color> <color=yellow>" + NumOfTimes +
+            Log.Write("Sent " + NumOfTimes + " request invites to " + UserID);
+            Log.Debug("<color=#59D365>Succesfully sent</color> <color=yellow>" + NumOfTimes +
                                 "</color> <color=#59D365>request invites</color>");
         }
 
@@ -450,8 +450,8 @@
         //                FileManager.VRCAPath + '\\' + avatar.name + ".png");
         //        }
 
-        //        ModConsole.Log("[VRCA] Downloaded " + avatar.name);
-        //        ModConsole.DebugLog(
+        //        Log.Write("[VRCA] Downloaded " + avatar.name);
+        //        Log.Debug(
         //            "<color=#59D365>VRCA Downloaded</color> <color=yellow>(" + avatar.name + ")</color>");
         //    }
         //    catch (Exception e)
@@ -539,11 +539,11 @@
                 var filePath = Environment.ExpandEnvironmentVariables(pathWithEnv);
                 if (Directory.Exists(filePath))
                 {
-                    ModConsole.Log("[Utils] Checking your Cache size...");
+                    Log.Write("[Utils] Checking your Cache size...");
                     DirectoryInfo fi = new DirectoryInfo(filePath);
                     if (fi.GetFiles().Length >= 1800000)
                     {
-                        ModConsole.Log("[Utils] Your Cache could potentially cause lag... Cleaning...");
+                        Log.Write("[Utils] Your Cache could potentially cause lag... Cleaning...");
                         foreach (FileInfo file in fi.GetFiles())
                         {
                             file.Delete();
@@ -554,11 +554,11 @@
                             dir.Delete(true);
                         }
 
-                        ModConsole.Log("[Utils] Cache cleaned!");
+                        Log.Write("[Utils] Cache cleaned!");
                     }
                     else
                     {
-                        ModConsole.Log("[Utils] Checked your Cache and its fine :)");
+                        Log.Write("[Utils] Checked your Cache and its fine :)");
                     }
                 }
             }

@@ -25,7 +25,7 @@
         {
             if (DebugMode)
             {
-                ModConsole.DebugLog($"[ESP_Tweaker Debug] : {msg}");
+                Log.Debug($"[ESP_Tweaker Debug] : {msg}");
             }
         }
 

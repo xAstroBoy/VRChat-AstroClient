@@ -12,7 +12,7 @@
         {
             if (id == WorldIds.ChuckECheeseEsperience)
             {
-                ModConsole.Log($"Recognized {Name} World, Removing Showtime Collider..");
+                Log.Write($"Recognized {Name} World, Removing Showtime Collider..");
 
                 var showtimeobj = GameObjectFinder.Find("Stages Resize/Road Stage/Road Stage/Cube");
                 if (showtimeobj != null)

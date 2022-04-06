@@ -105,7 +105,7 @@
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePre")),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePost"))
             );*/
-            ModConsole.Log("Patches Applied");
+            Log.Write("Patches Applied");
         }
 
         public static void OpenConfigPagePre(ActionMenu __instance)
@@ -243,7 +243,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.Warning($"Failed to Patch Method: {e}");
+                Log.Warn($"Failed to Patch Method: {e}");
             }
         }
     }

@@ -27,7 +27,7 @@
         //        ModConsole.Error("Could not accept notif bc notif is null");
         //        return;
         //    }
-        //    ModConsole.Log("AcceptNotification for notification");
+        //    Log.Write("AcceptNotification for notification");
         //    if (QuickMenuUtils.QuickMenu.Notification().details == null && QuickMenuUtils.QuickMenu.Notification().notificationType != "friendRequest")
         //    {
         //        ModConsole.Error("Could not accept notif bc notif details is null");

@@ -16,7 +16,7 @@
         public async Task<Misc.Api.Object.AvatarObject> GetAvatar(string AvtrID)
         {
             var avatar = JsonConvert.DeserializeObject<Misc.Api.Object.AvatarObject>(await Variables.SendRequest(Variables.HTTPMethods.GET, API.AvatarCommand + AvtrID, null));
-            ModConsole.Log($"[API] Avatar returned Ok! [Avatar:{avatar.name}|ID:{avatar.id}]");
+            Log.Write($"[API] Avatar returned Ok! [Avatar:{avatar.name}|ID:{avatar.id}]");
             return avatar;
         }
 

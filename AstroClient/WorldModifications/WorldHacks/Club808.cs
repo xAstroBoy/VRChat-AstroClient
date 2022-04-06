@@ -11,7 +11,7 @@
         {
             if (id == WorldIds.Club808)
             {
-                ModConsole.DebugLog($"Recognized {Name} World, Showing Door Codes..");
+                Log.Debug($"Recognized {Name} World, Showing Door Codes..");
 
                 Text StaffRoom = GameObject.Find("Lobby/Security Door Keypad (Change PIN Here) (1)/keyboard/background/dynamic string/Placeholder").GetComponent<Text>();
 

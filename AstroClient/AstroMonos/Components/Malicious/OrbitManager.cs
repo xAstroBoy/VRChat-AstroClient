@@ -69,7 +69,7 @@
         internal void Start()
         {
             Instance = this;
-            ModConsole.Log($"[OrbitManager] Initialized");
+            Log.Write($"[OrbitManager] Initialized");
         }
 
         internal void RefreshPickups()
@@ -81,7 +81,7 @@
                 var found = list[i];
                 pickups.Add(found);
             }
-            ModConsole.Log($"[OrbitManager] Refreshed: {pickups.Count} pickups found");
+            Log.Write($"[OrbitManager] Refreshed: {pickups.Count} pickups found");
         }
 
         internal static void MakeInstance()
@@ -92,8 +92,8 @@
                 var gameobj = GetInstanceHolder(name);
                 Instance = gameobj.AddComponent<OrbitManager>();
                 DontDestroyOnLoad(gameobj);
-                if (Instance != null) ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", System.Drawing.Color.LawnGreen);
-                else ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", System.Drawing.Color.OrangeRed);
+                if (Instance != null) Log.Debug("[ " + name.ToUpper() + " STATUS ] : READY", System.Drawing.Color.LawnGreen);
+                else Log.Debug("[ " + name.ToUpper() + " STATUS ] : ERROR", System.Drawing.Color.OrangeRed);
             }
         }
 
@@ -113,7 +113,7 @@
 
                 _ = MelonCoroutines.Start(LoopPickups());
 
-                ModConsole.Log($"[OrbitManager] Orbiting Player: {Instance.target.DisplayName()}");
+                Log.Write($"[OrbitManager] Orbiting Player: {Instance.target.DisplayName()}");
             }
             else
             {
@@ -134,7 +134,7 @@
             }
             Instance.target = null;
             Instance.isEnabled = false;
-            ModConsole.Log($"[OrbitManager] Orbit Disabled");
+            Log.Write($"[OrbitManager] Orbit Disabled");
         }
 
         internal static IEnumerator LoopPickups()

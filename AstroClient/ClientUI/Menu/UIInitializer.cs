@@ -74,7 +74,7 @@
             TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
             CheatsShortcutButton.Init_Cheats_ShortcutBtn();
 
-            ModConsole.DebugLog("Main UI Created!.");
+            Log.Debug("Main UI Created!.");
             //_ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>
             //{
             //    GameObjMenu.ReturnToRoot();

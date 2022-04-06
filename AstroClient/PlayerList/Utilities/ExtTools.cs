@@ -14,12 +14,12 @@
         {
             if (list == null)
             {
-                ModConsole.DebugLog("Failed to add button, list is null!");
+                Log.Debug("Failed to add button, list is null!");
             }
 
             if (button == null)
             {
-                ModConsole.DebugLog("Failed to Add button to list, Button is null!");
+                Log.Debug("Failed to Add button to list, Button is null!");
             }
 
             list.Add(button);

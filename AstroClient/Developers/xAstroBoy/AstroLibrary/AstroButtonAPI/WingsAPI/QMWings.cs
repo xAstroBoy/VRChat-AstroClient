@@ -323,15 +323,15 @@
 
         internal void SetButtonShortcut(QMSingleButton btn)
         {
-            ModConsole.DebugLog("Setting ToolTip");
+            Log.Debug("Setting ToolTip");
             SetToolTip(btn.ToolTipText);
-            ModConsole.DebugLog($"Set Tooltip as {btn.ToolTipText}");
-            ModConsole.DebugLog("Setting Button Text");
+            Log.Debug($"Set Tooltip as {btn.ToolTipText}");
+            Log.Debug("Setting Button Text");
             SetButtonText(btn.BtnText);
-            ModConsole.DebugLog($"Set Button Text as {btn.BtnText}");
-            ModConsole.DebugLog($"Setting Action...");
+            Log.Debug($"Set Button Text as {btn.BtnText}");
+            Log.Debug($"Setting Action...");
             SetAction(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); });
-            ModConsole.DebugLog($"Done Setting Action!");
+            Log.Debug($"Done Setting Action!");
         }
         internal void ClickMe()
         {

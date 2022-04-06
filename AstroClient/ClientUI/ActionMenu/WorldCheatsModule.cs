@@ -494,6 +494,6 @@ internal class WorldCheatsModule : AstroEvents
             #endregion
         }, Icons.thief);
 
-        ModConsole.Log("World Module is ready!", Color.Green);
+        Log.Write("World Module is ready!", Color.Green);
     }
 }

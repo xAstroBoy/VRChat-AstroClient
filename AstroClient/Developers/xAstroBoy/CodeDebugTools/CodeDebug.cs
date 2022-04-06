@@ -11,7 +11,7 @@
             stopwatch.Start();
             Action();
             stopwatch.Stop();
-            ModConsole.DebugLog($"{name} Took {stopwatch.Elapsed} ms");
+            Log.Debug($"{name} Took {stopwatch.Elapsed} ms");
 
         }
 

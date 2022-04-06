@@ -21,7 +21,7 @@ namespace AstroClient.ClientUI.ActionMenu
                 }, null, false, null);
             });
 
-            ModConsole.Log("ESP Module is ready!", Color.Green);
+            Log.Write("ESP Module is ready!", Color.Green);
         }
     }
 }

@@ -53,7 +53,7 @@
             {
                 return null;
             }
-            ModConsole.DebugLog($"Filtered {MapTargets.Count()} Objects, only {FilteredLists.Count()} are Active.");
+            Log.Debug($"Filtered {MapTargets.Count()} Objects, only {FilteredLists.Count()} are Active.");
             var obj = FilteredLists[r.Next(FilteredLists.Count())];
             if (prevtarget != null)
             {
@@ -112,7 +112,7 @@
                         Transform target = list[i];
                         if (target.name.ToLower().StartsWith("target") && !MapTargets.Contains(target.gameObject))
                         {
-                            ModConsole.DebugLog($"Registered Obj {target.name} in target list.");
+                            Log.Debug($"Registered Obj {target.name} in target list.");
                             MapTargets.Add(target.gameObject);
                         }
                     }
@@ -146,13 +146,13 @@
                         var udonevent1 = UdonSearch.FindUdonEvent(RandomTarget, "Hit");
                         if (udonevent1 != null)
                         {
-                            ModConsole.DebugLog($"Sent Hit Event on {RandomTarget.name}");
+                            Log.Debug($"Sent Hit Event on {RandomTarget.name}");
                             udonevent1.InvokeBehaviour();
                         }
                         var udonevent = UdonSearch.FindUdonEvent(RandomTarget, "AllwaysHit");
                         if (udonevent != null)
                         {
-                            ModConsole.DebugLog($"Sent AllwaysHit Event on {RandomTarget.name}");
+                            Log.Debug($"Sent AllwaysHit Event on {RandomTarget.name}");
                             udonevent.InvokeBehaviour();
                         }
                     }

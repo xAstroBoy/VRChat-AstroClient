@@ -193,7 +193,7 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
             {
                 PatronControl = RefreshPatronList.RawItem;
                 Initiate_UdonVariablePatron();
-                ModConsole.DebugLog("Added Patron Cracker to This Patron System Successfully!");
+                Log.Debug("Added Patron Cracker to This Patron System Successfully!");
             }
             else
             {

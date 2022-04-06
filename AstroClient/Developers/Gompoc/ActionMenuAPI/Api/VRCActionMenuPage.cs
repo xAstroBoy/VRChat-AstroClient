@@ -151,7 +151,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
 
         internal static void AddPedalToList(ActionMenuPage pageType, PedalStruct customPedal, Insertion insertion)
         {
-            ModConsole.DebugLog(
+            Log.Debug(
                 $"Adding to page: {pageType.ToString()}, Text: {customPedal.text}, Locked: {customPedal.locked}");
             switch (pageType)
             {

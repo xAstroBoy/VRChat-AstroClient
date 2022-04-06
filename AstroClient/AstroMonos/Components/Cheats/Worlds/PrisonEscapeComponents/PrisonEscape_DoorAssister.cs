@@ -76,11 +76,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 }
                 if(Triggers.Count != 0)
                 {
-                    ModConsole.DebugLog($"Registered {Triggers.Count} On GameObject {gameObject.name}");
+                    Log.Debug($"Registered {Triggers.Count} On GameObject {gameObject.name}");
                 }
                 else
                 {
-                    ModConsole.DebugLog($"Failed to Find Any Triggers On GameObject {gameObject.name}");
+                    Log.Debug($"Failed to Find Any Triggers On GameObject {gameObject.name}");
                     Destroy(this);
                 }
 

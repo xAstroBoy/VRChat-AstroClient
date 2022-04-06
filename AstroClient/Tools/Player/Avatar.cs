@@ -78,16 +78,16 @@
         internal static void ToAvatarDict(this ApiAvatar avatar, System.Action<Il2CppSystem.Object> avatardict)
         {
             if (avatar == null) return;
-            ModConsole.DebugLog("Getting ApiContainer Data...");
+            Log.Debug("Getting ApiContainer Data...");
             Get_ApiContainerData(avatar, (ContainerData) =>
             {
                 if (ContainerData != null)
                 {
-                    ModConsole.DebugLog("Got Converted ApiContainer!");
-                    ModConsole.DebugLog("Generating AvatarDict Object...");
+                    Log.Debug("Got Converted ApiContainer!");
+                    Log.Debug("Generating AvatarDict Object...");
                     ToAvatarDict(ContainerData, (avatardata) =>
                     {
-                        ModConsole.DebugLog("Generated AvatarDict!");
+                        Log.Debug("Generated AvatarDict!");
                         avatardict(avatardata);
                     });
                 }
@@ -102,16 +102,16 @@
                 return; // or throw exception
             avtr.Get(true, new System.Action<ApiContainer>(container =>
             {
-                ModConsole.DebugLog("OnSuccess ApiContainer action.");
+                Log.Debug("OnSuccess ApiContainer action.");
                 if (container == null)
                 {
-                    ModConsole.DebugLog("ApiContainer is null (Failed!)");
+                    Log.Debug("ApiContainer is null (Failed!)");
                     return;
                 }
 
                 if (container.Data == null)
                 {
-                    ModConsole.DebugLog("ApiContainer Data is null (Failed!)");
+                    Log.Debug("ApiContainer Data is null (Failed!)");
                     return; // you may want to call the callback but with null
                 }
 
@@ -119,27 +119,27 @@
                     container.Data.Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
                 if (data == null)
                 {
-                    ModConsole.DebugLog("ApiContainer Data is null (Failed!)");
+                    Log.Debug("ApiContainer Data is null (Failed!)");
                     return;
                 }
                 else
                 {
-                    ModConsole.DebugLog("ApiContainer Data Has been Converted !");
+                    Log.Debug("ApiContainer Data Has been Converted !");
                     callback(data);
                 }
 
             }), new System.Action<ApiContainer>(container2 =>
             {
-                ModConsole.DebugLog("OnFailure ApiContainer action.");
+                Log.Debug("OnFailure ApiContainer action.");
                 if (container2 == null)
                 {
-                    ModConsole.DebugLog("ApiContainer is null (Failed!)");
+                    Log.Debug("ApiContainer is null (Failed!)");
                     return;
                 }
 
                 if (container2.Data == null)
                 {
-                    ModConsole.DebugLog("ApiContainer Data is null (Failed!)");
+                    Log.Debug("ApiContainer Data is null (Failed!)");
                     return; // you may want to call the callback but with null
                 }
 
@@ -147,15 +147,15 @@
                     .Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
                 if (data2 == null)
                 {
-                    ModConsole.DebugLog("ApiContainer Data is null (Failed!)");
+                    Log.Debug("ApiContainer Data is null (Failed!)");
                     return;
                 }
                 else
                 {
-                    ModConsole.DebugLog("ApiContainer Data Has been Converted !");
+                    Log.Debug("ApiContainer Data Has been Converted !");
                     try
                     {
-                        ModConsole.DebugLog(
+                        Log.Debug(
                             $"OnFailure Converted Data : \n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(container2.Data), Newtonsoft.Json.Formatting.Indented)}");
                     }
                     catch
@@ -173,11 +173,11 @@
         {
             if (container != null)
             {
-                ModConsole.DebugLog("Got ApiContainer Data! Generating AvatarDict!");
+                Log.Debug("Got ApiContainer Data! Generating AvatarDict!");
             }
             else
             {
-                ModConsole.DebugLog("Got a Empty ApiContainer Data! Failed!");
+                Log.Debug("Got a Empty ApiContainer Data! Failed!");
                 return;
             }
 
@@ -198,7 +198,7 @@
                 result.System_Collections_IDictionary_Add("version", container["version"]);
                 result.System_Collections_IDictionary_Add("tags", container["tags"]);
                 result.System_Collections_IDictionary_Add("unityPackages", container["unityPackages"]);
-                //    //ModConsole.DebugLog($"Generated AvatarDict \n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(result), Newtonsoft.Json.Formatting.Indented)}");
+                //    //Log.Debug($"Generated AvatarDict \n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(result), Newtonsoft.Json.Formatting.Indented)}");
                 callback(result);
             }
         }
