@@ -18,7 +18,7 @@
                 StreamerIDs.Add(field.GetValue(structValue).ToString());
             }
 
-            ModConsole.Log($"Registered {StreamerIDs.Count()} Streamers.");
+            Log.Write($"Registered {StreamerIDs.Count()} Streamers.");
         }
 
         private static List<string> StreamerIDs { get; } = new List<string>();

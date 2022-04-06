@@ -36,7 +36,7 @@
                         }
                     }
                     var resultString = Regex.Replace(builder.ToString(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline); // This will fix and remove Useless empty lines. (but from file it can be kept)
-                    ModConsole.Log(resultString, System.Drawing.Color.Gold);
+                    Log.Write(resultString, System.Drawing.Color.Gold);
                     builder.Clear();
                 }
             }

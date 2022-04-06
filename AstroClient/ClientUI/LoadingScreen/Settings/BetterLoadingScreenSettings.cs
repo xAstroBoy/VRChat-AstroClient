@@ -38,14 +38,14 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
                 {
                     if (!value)
                     {
-                        ModConsole.DebugLog("Activating Original Loading Audio");
+                        Log.Debug("Activating Original Loading Audio");
 
                         VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.RemoveComponent<Disabler>();
                         VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.SetActive(true);
                     }
                     else
                     {
-                        ModConsole.DebugLog("Disabling Original Loading Audio");
+                        Log.Debug("Disabling Original Loading Audio");
                         VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.GetOrAddComponent<Disabler>();
                         VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.SetActive(false);
 
@@ -97,7 +97,7 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
                 {
                     if (value)
                     {
-                        ModConsole.DebugLog("Enabling Loading Screen InfoPanel ");
+                        Log.Debug("Enabling Loading Screen InfoPanel ");
 
                         VRChat_LoadingScreenObjects.VRChat_InfoPanel.RemoveComponent<Disabler>();
                         VRChat_LoadingScreenObjects.VRChat_InfoPanel.SetActive(true);
@@ -105,7 +105,7 @@ namespace AstroClient.ClientUI.LoadingScreen.Settings
                     }
                     else
                     {
-                        ModConsole.DebugLog("Disabling Loading Screen InfoPanel ");
+                        Log.Debug("Disabling Loading Screen InfoPanel ");
 
                         VRChat_LoadingScreenObjects.VRChat_InfoPanel.GetOrAddComponent<Disabler>();
                         VRChat_LoadingScreenObjects.VRChat_InfoPanel.SetActive(false);

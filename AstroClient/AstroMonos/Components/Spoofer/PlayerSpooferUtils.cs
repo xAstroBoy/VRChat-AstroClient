@@ -26,8 +26,8 @@
                 var gameobj = InstanceBuilder.GetInstanceHolder(name);
                 Instance = gameobj.AddComponent<PlayerSpoofer>();
                 UnityEngine.Object.DontDestroyOnLoad(gameobj);
-                if (Instance != null) ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
-                else ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
+                if (Instance != null) Log.Debug("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
+                else Log.Debug("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
             }
         }
 

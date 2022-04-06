@@ -37,7 +37,7 @@ namespace AstroClient.AstroMonos.Components.Tools
            // {
            //     Result = ReadPedestralTexture.ReadCameraTexture(PedestralCamera);
            //
-           //     ModConsole.DebugLog($"Camera returned : {Result}");
+           //     Log.Debug($"Camera returned : {Result}");
            // }
         }
         

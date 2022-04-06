@@ -149,12 +149,12 @@ namespace AstroClient.xAstroBoy.Extensions
                     {
                         pageUserInfo.Method_Public_Void_APIUser_PDM_0(userapi);
 
-                        ModConsole.Log("Refreshed user: " + userapi.id);
+                        Log.Write("Refreshed user: " + userapi.id);
                     }
                 }),
                 new Action<string>((Error) =>
                 {
-                    ModConsole.Log("Error Couldnt Fetch User\n" + Error);
+                    Log.Write("Error Couldnt Fetch User\n" + Error);
                 }));
         }
 
@@ -173,7 +173,7 @@ namespace AstroClient.xAstroBoy.Extensions
 
             static void OnSuccess(APIUser user)
             {
-                ModConsole.Log($"Found Author: {user.id}");
+                Log.Write($"Found Author: {user.id}");
                 GameInstances.VRCUiManager.SelectAPIUser(user);
             }
             if (avatarLink == null) return;
@@ -185,7 +185,7 @@ namespace AstroClient.xAstroBoy.Extensions
                 JObject jsonData = (JObject)JsonSerializer.CreateDefault().Deserialize(streamReader, typeof(JObject));
 
                 var requestedData = jsonData.ToObject<ImageFile>();
-                //ModConsole.Log(JsonConvert.SerializeObject(jsonData, Formatting.Indented));
+                //Log.Write(JsonConvert.SerializeObject(jsonData, Formatting.Indented));
                 APIUser.FetchUser(requestedData.ownerId, new Action<APIUser>(OnSuccess), new Action<string>((thing) => { }));
             }
 
@@ -202,7 +202,7 @@ namespace AstroClient.xAstroBoy.Extensions
                 userList.Method_Public_Void_1();
                 //userList.Method_Public_Void_2();
             }
-            ModConsole.Log("Refreshed social lists!");
+            Log.Write("Refreshed social lists!");
         }
 
         public static GameObject GetMenuContent(this VRCUiManager Instance)

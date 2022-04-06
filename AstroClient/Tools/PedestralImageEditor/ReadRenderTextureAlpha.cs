@@ -29,7 +29,7 @@ namespace AstroClient.Tools.PedestralImageEditor
             stopwatch.Reset();
             stopwatch.Start();
 
-            ModConsole.DebugLog("ReadRenderTexture: Starting");
+            Log.Debug("ReadRenderTexture: Starting");
 
             // All code inside should be called only ONCE (initialization)
             //SETUP
@@ -38,7 +38,7 @@ namespace AstroClient.Tools.PedestralImageEditor
             //copy the first texture over so it can be read
             StartReadPicture(donorInput);
 
-            ModConsole.DebugLog("ReadRenderTexture: Writing Information");
+            Log.Debug("ReadRenderTexture: Writing Information");
             return outputString;
         }
 
@@ -46,8 +46,8 @@ namespace AstroClient.Tools.PedestralImageEditor
 
         private void StartReadPicture(Bitmap picture)
         {
-            ModConsole.DebugLog("Starting Read");
-            ModConsole.DebugLog($"Input: {picture.Width} x {picture.Height} [{picture.PixelFormat}]");
+            Log.Debug("Starting Read");
+            Log.Debug($"Input: {picture.Width} x {picture.Height} [{picture.PixelFormat}]");
 
             colors = new Color[picture.Width * picture.Height];
             for (int y = 0; y < picture.Height; y++)
@@ -63,8 +63,8 @@ namespace AstroClient.Tools.PedestralImageEditor
             Color color = colors[0];
             dataLength = color.R << 16 | color.G << 8 | color.B;
 
-            ModConsole.DebugLog("Decoding header");
-            ModConsole.DebugLog($"Data length: {dataLength} bytes");
+            Log.Debug("Decoding header");
+            Log.Debug($"Data length: {dataLength} bytes");
 
             nextAvatar = "";
             for (int i = 1; i < 6; i++)
@@ -78,7 +78,7 @@ namespace AstroClient.Tools.PedestralImageEditor
 
             nextAvatar = $"avtr_{nextAvatar.Substring(0,8)}-{nextAvatar.Substring(8, 4)}-{nextAvatar.Substring(12, 4)}-{nextAvatar.Substring(16, 4)}-{nextAvatar.Substring(20, 12)}";
 
-            ModConsole.DebugLog($"AVATAR FOUND - {nextAvatar}");
+            Log.Debug($"AVATAR FOUND - {nextAvatar}");
 
             index = 5;
             byteIndex = 16;
@@ -93,7 +93,7 @@ namespace AstroClient.Tools.PedestralImageEditor
 
         public void ReadPictureStep()
         {
-            //ModConsole.DebugLog($"Reading step {index}\n");
+            //Log.Debug($"Reading step {index}\n");
 
             string tempString = "";
 
@@ -108,7 +108,7 @@ namespace AstroClient.Tools.PedestralImageEditor
 
                 if (byteIndex >= dataLength)
                 {
-                    ModConsole.DebugLog($"Reached data length: {dataLength}; byteIndex: {byteIndex}");
+                    Log.Debug($"Reached data length: {dataLength}; byteIndex: {byteIndex}");
                     if ((byteIndex - dataLength) % 4 == 2)
                     {
                         outputString += tempString.Substring(0, tempString.Length - 1);
@@ -138,14 +138,14 @@ namespace AstroClient.Tools.PedestralImageEditor
         {
             if (nextAvatar != "avtr_ffffffff-ffff-ffff-ffff-ffffffffffff")
             {
-                ModConsole.DebugLog($"Loading of current pedestal took: {stopwatch.ElapsedMilliseconds} ms");
+                Log.Debug($"Loading of current pedestal took: {stopwatch.ElapsedMilliseconds} ms");
 
                 return;
             }
 
-            //ModConsole.DebugLog($"Output string: {outputString}");
+            //Log.Debug($"Output string: {outputString}");
             stopwatch.Stop();
-            ModConsole.DebugLog($"Took: {stopwatch.ElapsedMilliseconds} ms");
+            Log.Debug($"Took: {stopwatch.ElapsedMilliseconds} ms");
 
             //Console.WriteLine(outputString);
             if(OnReadingDone != null)

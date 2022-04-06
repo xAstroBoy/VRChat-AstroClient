@@ -10,7 +10,7 @@
         {
             if (id == WorldIds.LPD)
             {
-                ModConsole.Log($"Recognized {Name} World, Enabling doors..");
+                Log.Write($"Recognized {Name} World, Enabling doors..");
 
                 var ToOffice = GameObjectFinder.Find("Waiting Room/Teleporters/ToOffice/Teleporter");
 

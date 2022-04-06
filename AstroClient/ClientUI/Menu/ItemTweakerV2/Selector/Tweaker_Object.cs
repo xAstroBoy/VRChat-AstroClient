@@ -11,7 +11,7 @@
             var obj = GameObjectFinder.Find(objpath);
             if (obj != null)
             {
-                ModConsole.Log("Path is valid, Found Gameobject obj : " + obj.name + "Using path " + objpath);
+                Log.Write("Path is valid, Found Gameobject obj : " + obj.name + "Using path " + objpath);
                 Tweaker_Selector.SelectedObject = obj;
                 return obj;
             }

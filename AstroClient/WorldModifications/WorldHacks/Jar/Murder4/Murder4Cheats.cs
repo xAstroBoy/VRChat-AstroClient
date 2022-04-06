@@ -209,14 +209,14 @@
 
         internal static void FindGameMurderObjects()
         {
-            ModConsole.Log("Removing Anti-Peek Protection...");
+            Log.Write("Removing Anti-Peek Protection...");
 
             var occlusion = GameObjectFinder.Find("Environment/Occlusion");
             if (occlusion != null) occlusion.DestroyMeLocal();
             //var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start"); //  Not working.
             //if (patronCheckFool != null)
             //{
-            //    ModConsole.Log("Unlocking Patron Perks.");
+            //    Log.Write("Unlocking Patron Perks.");
             //    if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
             //    {
             //        PlayerSpooferUtils.SpoofAsWorldAuthor = true;
@@ -241,7 +241,7 @@
                 if (Clue_Present != null)
                     IsChristmasMode = true;
                 else
-                    ModConsole.Log("Could Not Find The Present Clue!");
+                    Log.Write("Could Not Find The Present Clue!");
             }
 
             item_Knife_0 = GameObjectFinder.Find("Game Logic/Weapons/Knife (0)");
@@ -265,36 +265,36 @@
                         if (subaction.key == "SyncStart")
                         {
                             StartGameEvent = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Start Game Event.");
+                            Log.Write("Found Start Game Event.");
                         }
 
                         if (subaction.key == "SyncAbort")
                         {
                             AbortGameEvent = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Abort Game Event.");
+                            Log.Write("Found Abort Game Event.");
                         }
 
                         if (subaction.key == "SyncVictoryB")
                         {
                             VictoryBystanderEvent = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Victory Bystander Event.");
+                            Log.Write("Found Victory Bystander Event.");
                         }
 
                         if (subaction.key == "SyncVictoryM")
                         {
                             VictoryMurdererEvent = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Victory Murderer Event.");
+                            Log.Write("Found Victory Murderer Event.");
                         }
 
                         if (subaction.key == "OnPlayerUnlockedClues")
                         {
                             OnPlayerUnlockedClues = new UdonBehaviour_Cached(action, subaction.key);
-                            ModConsole.Log("Found Unlocked Clues Sound.");
+                            Log.Write("Found Unlocked Clues Sound.");
                         }
 
                         if (StartGameEvent != null && AbortGameEvent != null && VictoryBystanderEvent != null && VictoryMurdererEvent != null && OnPlayerUnlockedClues != null)
                         {
-                            ModConsole.DebugLog("Finished Finding all Udon Events!");
+                            Log.Debug("Finished Finding all Udon Events!");
                             break;
                         }
                     }
@@ -359,13 +359,13 @@
 
             Clues.AddToWorldUtilsMenu();
 
-            ModConsole.Log("Found Tot Clues : " + Clues.Count());
-            ModConsole.Log("Found Tot Detective Guns : " + DetectiveGuns.Count());
-            ModConsole.Log("Found Tot Silenced Guns  : " + SilencedGuns.Count());
-            ModConsole.Log("Found Tot ShotGuns : " + ShotGuns.Count());
-            ModConsole.Log("Found Tot Bear Traps : " + BearTraps.Count());
-            ModConsole.Log("Found Tot Grenades : " + Grenades.Count());
-            ModConsole.Log("Found Tot Knifes : " + Knifes.Count());
+            Log.Write("Found Tot Clues : " + Clues.Count());
+            Log.Write("Found Tot Detective Guns : " + DetectiveGuns.Count());
+            Log.Write("Found Tot Silenced Guns  : " + SilencedGuns.Count());
+            Log.Write("Found Tot ShotGuns : " + ShotGuns.Count());
+            Log.Write("Found Tot Bear Traps : " + BearTraps.Count());
+            Log.Write("Found Tot Grenades : " + Grenades.Count());
+            Log.Write("Found Tot Knifes : " + Knifes.Count());
         }
 
         internal static void AllowTheft()
@@ -436,7 +436,7 @@
                 HasMurder4WorldLoaded = true;
                 if (Murder4CheatPage != null)
                 {
-                    ModConsole.Log($"Recognized {Name} World, Unlocking Murder 4 cheats menu!", Color.Green);
+                    Log.Write($"Recognized {Name} World, Unlocking Murder 4 cheats menu!", Color.Green);
                     Murder4CheatPage.GetMainButton().SetInteractable(true);
                     Murder4CheatPage.GetMainButton().SetTextColor(UnityEngine.Color.green);
                 }
@@ -827,7 +827,7 @@
                         if (RoleSwapper_GetDetectiveRole)
                         {
                             RoleSwapper_GetDetectiveRole = false;
-                            ModConsole.DebugLog("Starting Swapping for Detective Role!");
+                            Log.Debug("Starting Swapping for Detective Role!");
                             if (CancellationToken == null)
                             {
                                 CancellationToken = MelonCoroutines.Start(SwapRole(Murder4_Roles.Detective));
@@ -836,7 +836,7 @@
                         if (RoleSwapper_GetMurdererRole)
                         {
                             RoleSwapper_GetMurdererRole = false;
-                            ModConsole.DebugLog("Starting Swapping for Murderer role!");
+                            Log.Debug("Starting Swapping for Murderer role!");
                             if (CancellationToken == null)
                             {
                                 CancellationToken = MelonCoroutines.Start(SwapRole(Murder4_Roles.Murderer));
@@ -857,7 +857,7 @@
                 yield return new WaitForEndOfFrame();
             while (FindNodeWithRole(Selectedrole) == null)
                 yield return new WaitForEndOfFrame();
-            ModConsole.DebugLog("Initiating Swap!");
+            Log.Debug("Initiating Swap!");
             var TargetNode = FindNodeWithRole(Selectedrole);
             if (TargetNode != null)
             {
@@ -873,13 +873,13 @@
             var AssignedTargetRole = TargetESP.CurrentRole;
             if (JarRoleController.CurrentPlayer_Murder4ESP == TargetESP)
             {
-                ModConsole.DebugLog("Target Node and SelfNode are the same!");
+                Log.Debug("Target Node and SelfNode are the same!");
                 return;
             }
 
             if (AssignedTargetRole == JarRoleController.CurrentPlayer_Murder4ESP.CurrentRole)
             {
-                ModConsole.DebugLog("Target Role  and Self Role  are the same!");
+                Log.Debug("Target Role  and Self Role  are the same!");
                 return;
             }
 
@@ -889,7 +889,7 @@
 
             if (TargetESP != null) TargetESP.SetRole(AssignedSelfRole);
             if (JarRoleController.CurrentPlayer_Murder4ESP != null) JarRoleController.CurrentPlayer_Murder4ESP.SetRole(AssignedTargetRole);
-            ModConsole.DebugLog($"Executed Role Swapping!, {TargetESP.Player.DisplayName()} Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
+            Log.Debug($"Executed Role Swapping!, {TargetESP.Player.DisplayName()} Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
         }
     }
 }

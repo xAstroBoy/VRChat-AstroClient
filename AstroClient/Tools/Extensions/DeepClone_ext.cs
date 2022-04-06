@@ -123,11 +123,11 @@
         {
             if (go == null)
             {
-                ModConsole.Log("CopyComponent GameObject Go is null");
+                Log.Write("CopyComponent GameObject Go is null");
             }
             if (toAdd == null)
             {
-                ModConsole.Log("CopyComponent toAdd is null");
+                Log.Write("CopyComponent toAdd is null");
             }
             return go.AddComponent<T>().GetCopyOf(toAdd);
         }

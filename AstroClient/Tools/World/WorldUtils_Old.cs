@@ -55,7 +55,7 @@
             var zero = PlayerManager.Method_Public_Static_Player_String_0(id);
             if (zero != null)
             {
-                ModConsole.DebugLog("returned Method_Public_Static_Player_String_PDM_0");
+                Log.Debug("returned Method_Public_Static_Player_String_PDM_0");
                 return zero;
             }
 
@@ -65,7 +65,7 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            ModConsole.Log("This instance has " + WorldUtils.Players.Count() + " Players.", Color.Gold);
+            Log.Write("This instance has " + WorldUtils.Players.Count() + " Players.", Color.Gold);
         }
 
         internal static List<GameObject> Get_Pickups()

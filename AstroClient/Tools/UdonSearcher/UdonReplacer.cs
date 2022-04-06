@@ -65,7 +65,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                         if (item.isMatch(find))
                                                         {
                                                             var modifiedstring = item.ReplaceWholeWord(find, replacement);
-                                                            //ModConsole.DebugLog($"Modified a String , Original : {item}, Modified : {modifiedstring}");
+                                                            //Log.Debug($"Modified a String , Original : {item}, Modified : {modifiedstring}");
                                                             UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, modifiedstring, () => { success++; }, () => { Failed++; }, false, true);
                                                         }
                                                     }
@@ -86,7 +86,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                                 if (item.Equals(find, StringComparison.InvariantCultureIgnoreCase))
                                                                 {
                                                                     var modifiedstring = item.ReplaceWholeWord(find, replacement);
-                                                                    //ModConsole.DebugLog($"Modified String in Array , Original : {item}, Modified : {modifiedstring}");
+                                                                    //Log.Debug($"Modified String in Array , Original : {item}, Modified : {modifiedstring}");
                                                                     patchedlist.Add(modifiedstring);
                                                                     modified = true;
                                                                     continue;
@@ -110,7 +110,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                         if (item.text.isMatch(find))
                                                         {
                                                             var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
-                                                            //ModConsole.DebugLog($"Modified String in TextMeshPro , Original : {item}, Modified : {modifiedstring}");
+                                                            //Log.Debug($"Modified String in TextMeshPro , Original : {item}, Modified : {modifiedstring}");
 
                                                             item.text = modifiedstring;
                                                             UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, () => { success++; }, () =>
@@ -147,7 +147,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                                 if (item.text.isMatch(find))
                                                                 {
                                                                     var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
-                                                                    //ModConsole.DebugLog($"Modified String in TextMeshPro Array , Original : {item}, Modified : {modifiedstring}");
+                                                                    //Log.Debug($"Modified String in TextMeshPro Array , Original : {item}, Modified : {modifiedstring}");
                                                                     item.text = modifiedstring;
                                                                     patchedlist.Add(item);
                                                                     modified = true;
@@ -173,7 +173,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                         if (item.text.isMatch(find))
                                                         {
                                                             var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
-                                                            //ModConsole.DebugLog($"Modified String in TextMeshProUGUI , Original : {item}, Modified : {modifiedstring}");
+                                                            //Log.Debug($"Modified String in TextMeshProUGUI , Original : {item}, Modified : {modifiedstring}");
 
                                                             item.text = modifiedstring;
                                                             UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, () => { success++; }, () =>
@@ -210,7 +210,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                                 if (item.text.isMatch(find))
                                                                 {
                                                                     var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
-                                                                    //ModConsole.DebugLog($"Modified String in TextMeshProUGUI Array , Original : {item}, Modified : {modifiedstring}");
+                                                                    //Log.Debug($"Modified String in TextMeshProUGUI Array , Original : {item}, Modified : {modifiedstring}");
                                                                     item.text = modifiedstring;
                                                                     patchedlist.Add(item);
                                                                     modified = true;
@@ -247,11 +247,11 @@ namespace AstroClient.Tools.UdonSearcher
                                                                 if (item.text.Equals(patchedstr))
                                                                 {
                                                                     success++;
-                                                                    ModConsole.DebugLog("Patched TextAsset!");
+                                                                    Log.Debug("Patched TextAsset!");
                                                                 }
                                                                 else
                                                                 {
-                                                                    ModConsole.DebugLog("Failed to Patch TextAsset");
+                                                                    Log.Debug("Failed to Patch TextAsset");
                                                                     Failed++;
                                                                 }
 
@@ -290,11 +290,11 @@ namespace AstroClient.Tools.UdonSearcher
                                                                         if (item.text.Equals(patchedstr))
                                                                         {
                                                                             success++;
-                                                                            ModConsole.DebugLog("Patched TextAsset!");
+                                                                            Log.Debug("Patched TextAsset!");
                                                                         }
                                                                         else
                                                                         {
-                                                                            ModConsole.DebugLog("Failed to Patch TextAsset");
+                                                                            Log.Debug("Failed to Patch TextAsset");
                                                                             Failed++;
                                                                         }
 
@@ -331,7 +331,7 @@ namespace AstroClient.Tools.UdonSearcher
                     }
                 }
                 stopwatch.Stop();
-                ModConsole.DebugLog($"Found and replaced {success}, containing {find} with {replacement}, Failed : {Failed}, Took : {stopwatch.ElapsedMilliseconds}ms");
+                Log.Debug($"Found and replaced {success}, containing {find} with {replacement}, Failed : {Failed}, Took : {stopwatch.ElapsedMilliseconds}ms");
             }
 
             yield return null;

@@ -9,7 +9,7 @@
 
         internal static void BuildInstanceContainer()
         {
-            ModConsole.Log("Generating Instance Holder", Color.LimeGreen);
+            Log.Write("Generating Instance Holder", Color.LimeGreen);
             InstanceHolder = new GameObject
             {
                 name = "Instance Holder " + BuildInfo.Name
@@ -23,7 +23,7 @@
             {
                 if (instancename != "INSTANCE_OBJECT_ADDED")
                 {
-                    ModConsole.Log($"{instancename} is now Added!", Color.Orange);
+                    Log.Write($"{instancename} is now Added!", Color.Orange);
                 }
                 Object.DontDestroyOnLoad(InstanceHolder);
                 return InstanceHolder;

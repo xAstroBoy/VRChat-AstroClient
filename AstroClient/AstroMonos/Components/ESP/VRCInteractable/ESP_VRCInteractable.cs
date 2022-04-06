@@ -25,7 +25,7 @@
         {
             if (DebugMode)
             {
-                ModConsole.DebugLog($"[ESP_VRCInteractable Debug] : {msg}");
+                Log.Debug($"[ESP_VRCInteractable Debug] : {msg}");
             }
         }
 

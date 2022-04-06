@@ -44,7 +44,7 @@ namespace AstroClient.ClientUI.Menu.SettingsMenu
             {
                 if (ConfigManager.General.LogUdonCustomEvents)
                 {
-                    ModConsole.DebugLog($"{item.name} Sent Event {EventName}");
+                    Log.Debug($"{item.name} Sent Event {EventName}");
                 }
             }
 

@@ -171,10 +171,10 @@
 
         internal static void FindAmongUsObjects()
         {
-            ModConsole.Log("Removing Anti-Peek Protection...");
+            Log.Write("Removing Anti-Peek Protection...");
             var occlusion = GameObjectFinder.Find("Environment/skeld occ");
             if (occlusion != null) occlusion.DestroyMeLocal();
-            ModConsole.Log("Removing Invisible Walls");
+            Log.Write("Removing Invisible Walls");
             var invisiblewall = GameObjectFinder.Find("Environment/Invisible wall");
             var invisiblewall_1 = GameObjectFinder.Find("Environment/Invisible wall (1)");
             if (invisiblewall != null) invisiblewall.DestroyMeLocal();
@@ -245,7 +245,7 @@
                 var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start");
                 if (patronCheckFool != null)
                 {
-                    ModConsole.Log("Unlocking Patron Perks.");
+                    Log.Write("Unlocking Patron Perks.");
                     if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
                     {
                         PlayerSpooferUtils.SpoofAsWorldAuthor = true;
@@ -260,7 +260,7 @@
 
                 if (AmongUsCheatsPage != null)
                 {
-                    ModConsole.Log($"Recognized {Name} World, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
+                    Log.Write($"Recognized {Name} World, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
                     AmongUsCheatsPage.GetMainButton().SetInteractable(true);
                     AmongUsCheatsPage.GetMainButton().SetTextColor(Color.green);
                 }
@@ -357,7 +357,7 @@
                 yield return new WaitForEndOfFrame();
             while (FindNodeWithRole(Selectedrole) == null)
                 yield return new WaitForEndOfFrame();
-            ModConsole.DebugLog("Initiating Swap!");
+            Log.Debug("Initiating Swap!");
             var TargetNode = FindNodeWithRole(Selectedrole);
             if (TargetNode != null)
             {
@@ -373,13 +373,13 @@
             var AssignedTargetRole = TargetESP.CurrentRole;
             if (JarRoleController.CurrentPlayer_AmongUS_ESP == TargetESP)
             {
-                ModConsole.DebugLog("Target Node and SelfNode are the same!");
+                Log.Debug("Target Node and SelfNode are the same!");
                 return;
             }
 
             if (AssignedTargetRole == AssignedSelfRole)
             {
-                ModConsole.DebugLog("Target Role  and Self Role  are the same!");
+                Log.Debug("Target Role  and Self Role  are the same!");
                 return;
             }
 
@@ -389,7 +389,7 @@
 
             if (TargetESP != null) TargetESP.SetRole(AssignedSelfRole);
             if (JarRoleController.CurrentPlayer_AmongUS_ESP != null) JarRoleController.CurrentPlayer_AmongUS_ESP.SetRole(AssignedTargetRole);
-            ModConsole.DebugLog($"Executed Role Swapping!, {TargetESP.Player.DisplayName()} Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
+            Log.Debug($"Executed Role Swapping!, {TargetESP.Player.DisplayName()} Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
         }
 
     }

@@ -115,7 +115,7 @@
         }
         public static void OnAvatarInstantiated(VRCAvatarManager player, ApiAvatar avatar, GameObject gameObject)
         {
-            //ModConsole.DebugLog("EM: OnAvInst");
+            //Log.Debug("EM: OnAvInst");
             /*foreach (EntryBase entry in playerEntries)
                 entry.OnAvatarInstantiated(player, avatar, gameObject);
             localPlayerEntry?.OnAvatarInstantiated(player, avatar, gameObject);*/
@@ -125,7 +125,7 @@
             string playerid = player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id;
             if (!idToEntryTable.TryGetValue(player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id, out PlayerLeftPairEntry entry))
             {
-                //ModConsole.DebugLog("EM: Key not found in dict: " + player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.displayName);
+                //Log.Debug("EM: Key not found in dict: " + player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.displayName);
                 if (!AvInstBacklog.ContainsKey(playerid))
                     AvInstBacklog.Add(playerid,  new deferredAvInstantiate(player, avatar, gameObject));
                 return;
@@ -186,7 +186,7 @@
         {
             if (AvInstBacklog.Count != 0)
             {
-                ModConsole.DebugLog("Addressing Backlog. Size: " + AvInstBacklog.Count.ToString());
+                Log.Debug("Addressing Backlog. Size: " + AvInstBacklog.Count.ToString());
                 var keys = new string[AvInstBacklog.Count];
                 AvInstBacklog.Keys.CopyTo(keys, 0);
                 foreach (var key in keys)
@@ -201,7 +201,7 @@
                         }
                         catch
                         {
-                            //ModConsole.DebugLog("OAI Failed!");
+                            //Log.Debug("OAI Failed!");
                             AvInstBacklog[key].numAttempts++;
                         }
                     }
@@ -211,7 +211,7 @@
 
                         if (AvInstBacklog[key].numAttempts > 2)
                         {
-                            ModConsole.DebugLog("Max attempts exceeded for backlog entry");
+                            Log.Debug("Max attempts exceeded for backlog entry");
                             AvInstBacklog.Remove(key);
                         }
                     }
@@ -242,7 +242,7 @@
             }
             if (player.prop_APIUser_0.IsSelf)
                 return;
-            //ModConsole.DebugLog("OPL: Removing " + player.field_Private_APIUser_0.displayName);
+            //Log.Debug("OPL: Removing " + player.field_Private_APIUser_0.displayName);
             if (!idToEntryTable.TryGetValue(player.prop_APIUser_0.id, out PlayerLeftPairEntry entry))
                 return;
 
@@ -261,7 +261,7 @@
         {
             try
             {
-            ModConsole.DebugLog("Adding List Entries...");
+            Log.Debug("Adding List Entries...");
             AddGeneralInfoEntry(EntryBase.CreateInstance<PlayerListHeaderEntry>(PlayerList_Constants.playerListLayout.transform.Find("Header").gameObject, includeConfig: true));
             AddGeneralInfoEntry(EntryBase.CreateInstance<RoomTimeEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("RoomTime").gameObject, includeConfig: true));
             AddGeneralInfoEntry(EntryBase.CreateInstance<SystemTime12HrEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("SystemTime12Hr").gameObject, includeConfig: true));

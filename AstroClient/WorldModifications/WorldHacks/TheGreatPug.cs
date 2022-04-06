@@ -11,7 +11,7 @@
         {
             if (id == WorldIds.TheGreatPug)
             {
-                ModConsole.Log($"Recognized {Name} World, Removing Basement Door & Kitchen Door.");
+                Log.Write($"Recognized {Name} World, Removing Basement Door & Kitchen Door.");
                 var BasementDoor = GameObjectFinder.Find(" - Props/Props (Static) - Hallways - First Floor/door-private");
                 var Kitchen1 = GameObjectFinder.Find("great_pug/kitchen_door");
                 var kitchen2 = GameObjectFinder.Find("great_pug/kitchen_door_chrome");

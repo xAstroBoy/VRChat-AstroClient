@@ -26,20 +26,20 @@ namespace AstroClient.ClientUI.LoadingScreen
             try
             {
 
-                ModConsole.DebugLog("Creating new Loading Screen!");
+                Log.Debug("Creating new Loading Screen!");
                 step = 1;
                 LoadingScreenAssets.CurrentLoadingScreen = CreateGameObject(LoadScreenPrefabs.loadScreenPrefab, new Vector3(400, 400, 400), "UserInterface/MenuContent/Popups/", "LoadingPopup");
                 step = 2;
                 LoginScreenAssets.CurrentLoginScreen = CreateGameObject(LoadScreenPrefabs.loginPrefab, new Vector3(0.5f, 0.5f, 0.5f), "UserInterface/", "LoadingBackground_TealGradient_Music");
                 // newCube = CreateGameObject(newCube, new Vector3(0.5f, 0.5f, 0.5f), "UserInterface/", "LoadingBackground_TealGradient_Music");
 
-                ModConsole.DebugLog("Disabling original GameObjects");
+                Log.Debug("Disabling original GameObjects");
 
                 // Disable original objects from loading screen
                 step = 3;
                 if (VRChat_LoadingScreenObjects.VRChat_SkyCube != null)
                 {
-                    ModConsole.DebugLog("Disabling Default SkyCube");
+                    Log.Debug("Disabling Default SkyCube");
 
                     VRChat_LoadingScreenObjects.VRChat_SkyCube.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_SkyCube.active = false;
@@ -52,7 +52,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 step = 4;
                 if (VRChat_LoadingScreenObjects.VRChat_bubbles != null)
                 {
-                    ModConsole.DebugLog("Disabling Bubbles");
+                    Log.Debug("Disabling Bubbles");
 
                     VRChat_LoadingScreenObjects.VRChat_bubbles.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_bubbles.active = false;
@@ -64,7 +64,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 step = 5;
                 if (VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio != null)
                 {
-                    ModConsole.DebugLog("Disabling Original Loading Audio");
+                    Log.Debug("Disabling Original Loading Audio");
 
                     VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_originalLoadingAudio.active = false;
@@ -79,7 +79,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 // Disable original objects from login screen
                 if (VRChat_LoadingScreenObjects.VRChat_originalStartScreenAudio != null)
                 {
-                    ModConsole.DebugLog("Disabling Original Start Screen Audio");
+                    Log.Debug("Disabling Original Start Screen Audio");
 
                     VRChat_LoadingScreenObjects.VRChat_originalStartScreenAudio.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_originalStartScreenAudio.active = false;
@@ -92,7 +92,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 step = 7;
                 if (VRChat_LoadingScreenObjects.VRChat_originalStartScreenSkyCube != null)
                 {
-                    ModConsole.DebugLog("Disabling Original Start Screen Skycube");
+                    Log.Debug("Disabling Original Start Screen Skycube");
 
                     VRChat_LoadingScreenObjects.VRChat_originalStartScreenSkyCube.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_originalStartScreenSkyCube.active = false;
@@ -105,7 +105,7 @@ namespace AstroClient.ClientUI.LoadingScreen
                 step = 8;
                 if (VRChat_LoadingScreenObjects.VRChat_loginBubbles != null)
                 {
-                    ModConsole.DebugLog("Disabling Login Bubbles");
+                    Log.Debug("Disabling Login Bubbles");
                     VRChat_LoadingScreenObjects.VRChat_loginBubbles.GetOrAddComponent<Disabler>();
                     VRChat_LoadingScreenObjects.VRChat_loginBubbles.active = false;
                 }
@@ -136,23 +136,23 @@ namespace AstroClient.ClientUI.LoadingScreen
             int step = 0;
             try
             {
-                ModConsole.DebugLog("Creating " + obj.name);
+                Log.Debug("Creating " + obj.name);
                 step = 1;
                 var UIRoot = GameObjectFinder.Find(rootDest);
                 if (UIRoot != null)
                 {
-                    ModConsole.DebugLog($"Found Root : {rootDest}");
+                    Log.Debug($"Found Root : {rootDest}");
                     step = 2;
                     var requestedParent = UIRoot.transform.Find(parent);
                     if (requestedParent != null)
                     {
                         step = 3;
-                        ModConsole.DebugLog($"Found Parent :  {parent}");
+                        Log.Debug($"Found Parent :  {parent}");
                         var newObject = Object.Instantiate(obj, requestedParent, false).Cast<GameObject>();
                         if (newObject != null)
                         {
                             step = 4;
-                            ModConsole.DebugLog($"Spawned Object!");
+                            Log.Debug($"Spawned Object!");
                             newObject.transform.parent = requestedParent;
                             newObject.transform.localScale = scale;
                             return newObject;

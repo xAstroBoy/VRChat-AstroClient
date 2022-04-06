@@ -14,7 +14,7 @@
             if (id == WorldIds.FrameOfReference)
             {
                 isCurrentWorld = true;
-                ModConsole.DebugLog($"Recognized {Name} World, Removing Door Collider!");
+                Log.Debug($"Recognized {Name} World, Removing Door Collider!");
                 MainDoorCollider.IgnoreLocalPlayerCollision();
                 MainDoorCollider.AddToWorldUtilsMenu();
             }

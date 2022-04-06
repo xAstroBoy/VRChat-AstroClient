@@ -82,18 +82,18 @@ internal class PhotonLogger
 
                     if (PhotonData.GetCustomData() != null)
                     {
-                        ModConsole.DebugLog("Parsing From CustomData...");
+                        Log.Debug("Parsing From CustomData...");
                         ConvertEventDataToString(PhotonData.Code, PhotonData.GetCustomData(), ref line, ref prefix,
                             ref ContainerType);
                     }
                     else if (PhotonData.GetParameterData() != null)
                     {
-                        ModConsole.DebugLog("Parsing From Parameters...");
+                        Log.Debug("Parsing From Parameters...");
                         ConvertEventDataToString(PhotonData.Code, PhotonData.GetParameterData(), ref line, ref prefix,
                             ref ContainerType);
                     }
 
-                    ModConsole.Log($"{Photon_StructToString.HookActionToString(HookAction)}{ContainerType}{prefix}{line}");
+                    Log.Write($"{Photon_StructToString.HookActionToString(HookAction)}{ContainerType}{prefix}{line}");
 
                 }
             }

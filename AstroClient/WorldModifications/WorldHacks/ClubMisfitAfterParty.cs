@@ -11,7 +11,7 @@
         {
             if (id == WorldIds.ClubMisfitAfterParty)
             {
-                ModConsole.Log($"Recognized {Name} World, Removing Anti-Client user mechanism And Blacklist.");
+                Log.Write($"Recognized {Name} World, Removing Anti-Client user mechanism And Blacklist.");
                 var avatar = GameObjectFinder.Find("Godseye");
                 if (avatar != null)
                 {

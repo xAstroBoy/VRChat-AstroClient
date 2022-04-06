@@ -102,7 +102,7 @@
                 }
                 else
                 {
-                    ModConsole.DebugLog("Spawning a new sun!");
+                    Log.Debug("Spawning a new sun!");
                     NewSun = new Light();
                     IsUsingASpawnedSun = true;
                     if (NewSun != null)
@@ -115,7 +115,7 @@
                         NewSun.intensity = 1f;
                         NewSun.attenuate = false;
                     }
-                    ModConsole.DebugLog("Attempting to Set Sun to RenderSettings.Sun");
+                    Log.Debug("Attempting to Set Sun to RenderSettings.Sun");
                     NewSun.transform.SetParent(RenderSettings.sun.transform);
                     NewSun.transform.rotation = RenderSettings.sun.transform.rotation;
                 }
@@ -215,11 +215,11 @@
                     UnityEngine.Object.DestroyImmediate(NewSun);
                     if (NewSun == null)
                     {
-                        ModConsole.DebugLog($"The Generated Sun has been destroyed  : {NewSun.ToString()}");
+                        Log.Debug($"The Generated Sun has been destroyed  : {NewSun.ToString()}");
                     }
                     else
                     {
-                        ModConsole.DebugLog("Something went wrong while destroying the Generated Sun!");
+                        Log.Debug("Something went wrong while destroying the Generated Sun!");
                     }
                     IsUsingASpawnedSun = false;
                 }
@@ -241,12 +241,12 @@
             if (!AreLightMapsEnabled)
             {
                 DisableLightMaps();
-                ModConsole.DebugLog("Lightmaps should be deactivated");
+                Log.Debug("Lightmaps should be deactivated");
             }
             else
             {
                 EnableLightMaps();
-                ModConsole.DebugLog("Lightmaps should be Enabled");
+                Log.Debug("Lightmaps should be Enabled");
             }
         }
 
@@ -351,7 +351,7 @@
                             FullBrightLight = CreateAndSetLight();
                         }
 
-                        ModConsole.DebugLog("Fullbright Enabled!");
+                        Log.Debug("Fullbright Enabled!");
                     }
                     else
                     {
@@ -364,7 +364,7 @@
                     if (FullBrightLight != null)
                     {
                         FullBrightLight.DestroyMeLocal();
-                        ModConsole.DebugLog("Fullbright Deactivated!");
+                        Log.Debug("Fullbright Deactivated!");
                     }
                 }
 

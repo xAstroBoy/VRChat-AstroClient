@@ -25,7 +25,7 @@
         {
             if (DebugMode)
             {
-                ModConsole.DebugLog($"[ESP_HighlightItem Debug] : {msg}");
+                Log.Debug($"[ESP_HighlightItem Debug] : {msg}");
             }
         }
 

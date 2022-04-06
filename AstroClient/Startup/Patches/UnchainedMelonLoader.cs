@@ -31,7 +31,7 @@
                     var Assembly = typeof(PatchShield).Assembly;
                     if (Assembly != null)
                     {
-                        ModConsole.DebugLog($"Found PatchShield Assembly {Assembly.FullName}");
+                        Log.Debug($"Found PatchShield Assembly {Assembly.FullName}");
                         // Let's target ML Core
 
                         foreach (var type in Assembly.GetTypes())
@@ -41,10 +41,10 @@
                                 Log.Debug("Found MelonLoader Core!", Color.Green);
                                 foreach (var field in type.GetFields(CurrentFlags))
                                 {
-                                    ModConsole.DebugLog($"Found Field : {field.Name}");
+                                    Log.Debug($"Found Field : {field.Name}");
                                     if (field.Name == "HarmonyInstance")
                                     {
-                                        ModConsole.DebugLog("Found MelonLoader Core HarmonyInstance!");
+                                        Log.Debug("Found MelonLoader Core HarmonyInstance!");
                                         CoreHarmonyInstanceObject = field.GetValue(null);
                                     }
                                 }
@@ -73,10 +73,10 @@
 
                 if (MelonLoaderCoreInstance != null)
                 {
-                    ModConsole.DebugLog("We Got Access to ML Core HarmonyInstance");
+                    Log.Debug("We Got Access to ML Core HarmonyInstance");
                     FuckOffVRCMGShit(MelonLoaderCoreInstance);
                     AreProtectionsArmed = false;
-                    ModConsole.DebugLog("PatchShield should be removed now!");
+                    Log.Debug("PatchShield should be removed now!");
                 }
                 DumpMelonHarmonyPatches(MelonLoaderCoreInstance);
 
@@ -107,15 +107,15 @@
                         {
                             KnahBonks++;
 
-                            ModConsole.DebugLog($"Bonking Knah For his PatchShield x{KnahBonks}", Color.Gold);
-                            //ModConsole.DebugLog($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            Log.Debug($"Bonking Knah For his PatchShield x{KnahBonks}", Color.Gold);
+                            //Log.Debug($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
                         if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.Utils.AssemblyVerifier"))
                         {
                             RinLovesYouBonks++;
-                            //ModConsole.DebugLog($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
-                            ModConsole.DebugLog($"Bonking RinLovesYou For his AssemblyVerifier x{RinLovesYouBonks}", Color.Gold);
+                            //Log.Debug($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            Log.Debug($"Bonking RinLovesYou For his AssemblyVerifier x{RinLovesYouBonks}", Color.Gold);
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
 
@@ -126,16 +126,16 @@
                         {
                             KnahBonks++;
 
-                            ModConsole.DebugLog($"Bonking Knah For his PatchShield x{KnahBonks}", Color.Gold);
+                            Log.Debug($"Bonking Knah For his PatchShield x{KnahBonks}", Color.Gold);
 
-                            //ModConsole.DebugLog($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            //Log.Debug($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
                         if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.Utils.AssemblyVerifier"))
                         {
                             RinLovesYouBonks++;
-                            //ModConsole.DebugLog($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
-                            ModConsole.DebugLog($"Bonking RinLovesYou For his AssemblyVerifier x{RinLovesYouBonks}", Color.Gold);
+                            //Log.Debug($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                            Log.Debug($"Bonking RinLovesYou For his AssemblyVerifier x{RinLovesYouBonks}", Color.Gold);
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
 
@@ -208,11 +208,11 @@
                 {
                     info.Postfixes.DoIf((Patch _) => true, delegate (Patch patchInfo)
                     {
-                        ModConsole.DebugLog($"Found a PostFix Patch patching : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                        Log.Debug($"Found a PostFix Patch patching : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
                     });
                     info.Prefixes.DoIf((Patch _) => true, delegate (Patch patchInfo)
                     {
-                        ModConsole.DebugLog($"Found a Prefix Patch patching : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
+                        Log.Debug($"Found a Prefix Patch patching : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
                     });
                 }
             }

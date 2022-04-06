@@ -51,7 +51,7 @@
                     BOMBERioCheatsPage.SetInteractable(true);
                     BOMBERioCheatsPage.SetTextColor(Color.green);
                 }
-                ModConsole.Log($"Recognized {Name} World, Enabling Gun Projectile Hijacker..");
+                Log.Write($"Recognized {Name} World, Enabling Gun Projectile Hijacker..");
                 isBomberIO = true;
             }
             else
@@ -74,7 +74,7 @@
             for (int i = 0; i < list.Count; i++)
             {
                 Transform item = list[i];
-                ModConsole.DebugLog($"Grabbed Quad : {item.name}");
+                Log.Debug($"Grabbed Quad : {item.name}");
                 return item.gameObject;
             }
             return null;

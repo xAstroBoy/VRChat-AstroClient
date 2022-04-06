@@ -48,7 +48,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     {
                         if (!SaidFoundMessage)
                         {
-                            ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.", System.Drawing.Color.GreenYellow);
+                            Log.Debug("Registered " + Player.DisplayName() + " On Prison Escape Role ESP.", System.Drawing.Color.GreenYellow);
                             SaidFoundMessage = true;
                         }
                     }
@@ -284,11 +284,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 HasTakenKeyCardAutomatically = false;
                 if (!Player.GetAPIUser().IsSelf)
                 {
-                    ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Is Dead!", System.Drawing.Color.Green);
+                    Log.Debug($"Player {Player.GetAPIUser().GetDisplayName()} Is Dead!", System.Drawing.Color.Green);
                 }
                 else
                 {
-                    ModConsole.DebugLog($"Player {PlayerSpooferUtils.Original_DisplayName} Is Dead!", System.Drawing.Color.Green);
+                    Log.Debug($"Player {PlayerSpooferUtils.Original_DisplayName} Is Dead!", System.Drawing.Color.Green);
                 }
                 return;
             }
@@ -298,11 +298,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 CurrentRole = role;
                 if (!Player.GetAPIUser().IsSelf)
                 {
-                    ModConsole.DebugLog($"Player {Player.GetAPIUser().GetDisplayName()} Got Role {role}!", System.Drawing.Color.Green);
+                    Log.Debug($"Player {Player.GetAPIUser().GetDisplayName()} Got Role {role}!", System.Drawing.Color.Green);
                 }
                 else
                 {
-                    ModConsole.DebugLog($"Player {PlayerSpooferUtils.Original_DisplayName} Got Role {role}!", System.Drawing.Color.Green);
+                    Log.Debug($"Player {PlayerSpooferUtils.Original_DisplayName} Got Role {role}!", System.Drawing.Color.Green);
                 }
                 LockRole = true;
             }

@@ -55,7 +55,7 @@
         //    {
         //        //WorldArray = File.ReadAllLines(FileManager.ClientPath + "\\Worlds.txt");
         //    }
-        //    ModConsole.Log($"[World Travel] Start!");
+        //    Log.Write($"[World Travel] Start!");
         //    for (; ; )
         //    {
         //        string World = WorldArray[new System.Random().Next(0, WorldArray.Length - 1)];
@@ -64,7 +64,7 @@
 
         //        yield return new WaitForSeconds(0.1f);
         //    }
-        //    ModConsole.Log($"[World Travel] Stop!");
+        //    Log.Write($"[World Travel] Stop!");
         //    yield break;
         //}
 
@@ -113,7 +113,7 @@
                     }
                     else
                     {
-                        ModConsole.Log($"[Search] Api Returned in {RecursiveWatchTime.ElapsedMilliseconds} MS and returned " + list.Count);
+                        Log.Write($"[Search] Api Returned in {RecursiveWatchTime.ElapsedMilliseconds} MS and returned " + list.Count);
                         RecursiveWatchTime.Stop();
                     }
                 }),

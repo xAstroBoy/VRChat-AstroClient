@@ -194,7 +194,7 @@
                     if (instance.Type == XrefType.Global && instance.ReadAsObject() != null)
                         try
                         {
-                            ModConsole.Log($"   Found String: {instance.ReadAsObject().ToString()}");
+                            Log.Write($"   Found String: {instance.ReadAsObject().ToString()}");
                         }
                         catch
                         {
@@ -202,7 +202,7 @@
                     else if (instance.Type == XrefType.Method && instance.TryResolve() != null)
                         try
                         {
-                            ModConsole.Log($"   Found Method: {instance.TryResolve().FullDescription()}");
+                            Log.Write($"   Found Method: {instance.TryResolve().FullDescription()}");
                         }
                         catch
                         {
@@ -218,7 +218,7 @@
                     if (instance.Type == XrefType.Method && instance.TryResolve() != null)
                         try
                         {
-                            ModConsole.Log($"   Found Used By Method: {instance.TryResolve().FullDescription()}");
+                            Log.Write($"   Found Used By Method: {instance.TryResolve().FullDescription()}");
                         }
                         catch
                         {

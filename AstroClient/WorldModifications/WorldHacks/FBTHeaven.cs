@@ -55,7 +55,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 isCurrentWorld = true;
-                ModConsole.DebugLog($"Recognized {Name} World,  Removing Blinders and Dividers...");
+                Log.Debug($"Recognized {Name} World,  Removing Blinders and Dividers...");
                 var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
                 if (blinders != null)
                 {
@@ -77,7 +77,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var logger = GameObjectFinder.FindRootSceneObject("Logger");
                 if (logger != null)
                 {
-                    ModConsole.Log("Logger found, this is sus...");
+                    Log.Write("Logger found, this is sus...");
                     logger.DestroyMeLocal();
                 }
 
@@ -116,7 +116,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
                 if (SkyboxEditor.SetSkyboxByFileName("Skybox_Hong Kong Skybox"))
                 {
-                    ModConsole.DebugLog("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
+                    Log.Debug("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                 }
 
                 var rootObject = GameObjectFinder.FindRootSceneObject("FBT");

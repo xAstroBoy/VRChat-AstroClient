@@ -27,7 +27,7 @@
             if (Cloned_trigger != null)
             {
                 DisplayObj.AddCollider();
-                ModConsole.Log($"Added Successfully {InteractText}");
+                Log.Write($"Added Successfully {InteractText}");
             }
         }
     }

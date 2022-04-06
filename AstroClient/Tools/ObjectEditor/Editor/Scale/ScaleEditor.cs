@@ -161,7 +161,7 @@
             }
             else
             {
-                ModConsole.Log($"I Dont have the original Scale stored for Object {obj.gameObject.name}");
+                Log.Write($"I Dont have the original Scale stored for Object {obj.gameObject.name}");
             }
         }
     }

@@ -27,7 +27,7 @@
             try
             {
                 ClassInjector.RegisterTypeInIl2Cpp(type, true);
-                ModConsole.DebugLog($"Registered: {type}");
+                Log.Debug($"Registered: {type}");
                 if (!RegisteredComponentsTypes.Contains(type)) RegisteredComponentsTypes.Add(type);
             }
             catch (Exception e)

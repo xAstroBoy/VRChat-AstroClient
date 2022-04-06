@@ -140,7 +140,7 @@
                             var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayerAPI;
                             if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer))
                             {
-                                ModConsole.DebugLog($"Found Assigned Linked Node in Player {InternalNodeAssignedPlayer.displayName}");
+                                Log.Debug($"Found Assigned Linked Node in Player {InternalNodeAssignedPlayer.displayName}");
                                 return _LinkedNode = item;
                             }
                         }
@@ -207,7 +207,7 @@
 
             ResetESPColor();
             CurrentRole = Murder4_Roles.None;
-            ModConsole.DebugLog("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
+            Log.Debug("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
             MelonCoroutines.Start(FindEverything());
         }
 
@@ -261,7 +261,7 @@
             while (GetMurdererEvent == null)
                 yield return null;
 
-            ModConsole.DebugLog($"Found all the required Events and Node!");
+            Log.Debug($"Found all the required Events and Node!");
         }
 
         internal override void OnRoomLeft()

@@ -45,10 +45,10 @@
                     hunters.Add(new Hunter() { pickup = pu });
                 }
                 //hunters.Add(new Hunter() { pickup = WorldUtils.Pickups[2] });
-                ModConsole.Log("Pickups located");
+                Log.Write("Pickups located");
                 for (int i = 0; i < hunters.Count; i++)
                 {
-                    ModConsole.Log($"{i,-2}, {hunters[i].pickup.name}");
+                    Log.Write($"{i,-2}, {hunters[i].pickup.name}");
                 }
                 RefreshInfo();
             }, "", btnHalf: true);
@@ -81,7 +81,7 @@
                     //        //    indicators.Add(obj);
                     //        //}
                     //        int index = (int)a[0];
-                    //        ModConsole.Log(index.ToString());
+                    //        Log.Write(index.ToString());
                     //        hunters[index].path = x.points;
                     //        if (followingState)
                     //        {
@@ -102,7 +102,7 @@
                         //    indicators.Add(obj);
                         //}
                         int index = (int)a[0];
-                        ModConsole.Log(index.ToString());
+                        Log.Write(index.ToString());
                         hunters[index].path = x.points;
                         if (followingState)
                         {
@@ -147,19 +147,19 @@
             {
                 //for (int i = 0; i < 32; i++)
                 //{
-                //    ModConsole.Log($"Number: {i}, Name: {LayerMask.LayerToName(i)}");
+                //    Log.Write($"Number: {i}, Name: {LayerMask.LayerToName(i)}");
                 //}
-                //ModConsole.Log("------------------------------------------------------------");
+                //Log.Write("------------------------------------------------------------");
                 //var players = Utils.PlayerManager.AllPlayers();
                 //foreach (var p in players)
                 //{
-                //    ModConsole.Log($"PName: {p.GetDisplayName()}, Layer: {p.gameObject.layer}");
+                //    Log.Write($"PName: {p.GetDisplayName()}, Layer: {p.gameObject.layer}");
                 //}
                 var pickups = WorldUtils.Pickups;
                 int num = 0;
                 foreach (var o in pickups)
                 {
-                    ModConsole.Log($"{num,3} - {o.name}");
+                    Log.Write($"{num,3} - {o.name}");
                     num++;
                 }
             }, "");
@@ -246,7 +246,7 @@
                 {
                     if (path == null)
                     {
-                        //ModConsole.Log("PATH IS FUCKED");
+                        //Log.Write("PATH IS FUCKED");
                         yield break;
                     }
                     if (t >= 1)

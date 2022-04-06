@@ -25,16 +25,16 @@ namespace AstroClient.Tools.PedestralImageEditor
         /// <exception cref="Exception"></exception>
         public static Texture2D[] EncodeUTF16Text(string input, string[] availableAvatars, int width, int height)
         {
-            ModConsole.DebugLog($"Starting Multi Avatar Image Encoder");
-            ModConsole.DebugLog($"Input character count: {input.Length}");
+            Log.Debug($"Starting Multi Avatar Image Encoder");
+            Log.Debug($"Input character count: {input.Length}");
             
             int imageByteCount = (width * height * 4) - headerSize;
-            ModConsole.DebugLog($"Image byte count: {imageByteCount}");
+            Log.Debug($"Image byte count: {imageByteCount}");
             int imageCharCount = imageByteCount / 2;
-            ModConsole.DebugLog($"Image char count: {imageCharCount}");
+            Log.Debug($"Image char count: {imageCharCount}");
             int outputImageCount = (int)Math.Ceiling((float)input.Length / imageCharCount);
             if (outputImageCount == 0) outputImageCount = 1;
-            ModConsole.DebugLog($"Output Image count: {outputImageCount}");
+            Log.Debug($"Output Image count: {outputImageCount}");
 
             if (outputImageCount - 1 <= availableAvatars.Length)
             {
@@ -51,7 +51,7 @@ namespace AstroClient.Tools.PedestralImageEditor
                     outputStrings[i] = input.Substring(startIndex, length);
                     
                     string snippet = outputStrings[i].Length > 30 ? "..." + outputStrings[i].Substring(0, 30) + "..." : "string too short to get snippet";
-                    ModConsole.DebugLog($"Encoding Image {i+1} / {outputImageCount}: Offset {startIndex}; Length {length}; Header Avatar: {availableAvatars[i]}; String snippet: {snippet}");
+                    Log.Debug($"Encoding Image {i+1} / {outputImageCount}: Offset {startIndex}; Length {length}; Header Avatar: {availableAvatars[i]}; String snippet: {snippet}");
                     
                     outTex[i] = EncodeUTF16Text(outputStrings[i], availableAvatars[i], inputTexture);
                 }
@@ -129,7 +129,7 @@ namespace AstroClient.Tools.PedestralImageEditor
             var index = 0;
             foreach (var x in textbyteArray)
             {
-                //ModConsole.DebugLog($"{index} : {x}");
+                //Log.Debug($"{index} : {x}");
                 index += 1;
             }
 
@@ -155,8 +155,8 @@ namespace AstroClient.Tools.PedestralImageEditor
             // gen.py:25-27
             var oppositePosition = 0;
             img.SetPixel(img.width - 1, img.height - 1 - oppositePosition, new Color(BtF(totalBytes[0]), BtF(totalBytes[1]), BtF(totalBytes[2])));
-            //ModConsole.DebugLog($"A{textbyteList.Length} {PythonStr(totalBytes)}");
-            //ModConsole.DebugLog($"B{PythonStr(new[] {totalBytes[0], totalBytes[1], totalBytes[2]})}");
+            //Log.Debug($"A{textbyteList.Length} {PythonStr(totalBytes)}");
+            //Log.Debug($"B{PythonStr(new[] {totalBytes[0], totalBytes[1], totalBytes[2]})}");
 
             // gen.py:29
             var rangeLower = 1;

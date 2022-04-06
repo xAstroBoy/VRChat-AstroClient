@@ -16,7 +16,7 @@
         //			var result = item.Unbox<UnityEngine.Object>();
         //			if(result != null)
         //			{
-        //				ModConsole.DebugLog($"Casted Object :  {result.GetType().FullName}, from item : {item.GetIl2CppType().FullName}");
+        //				Log.Debug($"Casted Object :  {result.GetType().FullName}, from item : {item.GetIl2CppType().FullName}");
         //				items.Add(result);
         //			}
         //		}

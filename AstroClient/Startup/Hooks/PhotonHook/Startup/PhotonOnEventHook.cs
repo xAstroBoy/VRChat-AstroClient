@@ -38,7 +38,7 @@ internal class PhotonOnEventHook : AstroEvents
 
     private static void HookPhotonOnEvent()
     {
-        ModConsole.DebugLog("Hooking Photon OnEvent");
+        Log.Debug("Hooking Photon OnEvent");
         new AstroPatch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetPatch(nameof(OnEventPatch)));
     }
 
@@ -68,7 +68,7 @@ internal class PhotonOnEventHook : AstroEvents
                 if (__0.CustomData != null)
                 {
                     isCustomData = true;
-                    //ModConsole.DebugLog($"Received CustomData with Type : {__0.CustomData}");
+                    //Log.Debug($"Received CustomData with Type : {__0.CustomData}");
                     if (__0.CustomData.GetIl2CppType().Equals(Il2CppType.Of<Dictionary<byte, Object>>()))
                     {
                         // Flag and convert the item that needs to be processed into a Editable copy .
@@ -82,7 +82,7 @@ internal class PhotonOnEventHook : AstroEvents
                             // Copy all the stuff contained into The System Dictionary!
                             foreach (var item in casted)
                             {
-                                //ModConsole.DebugLog($"Copying Item Key {item.Key}");
+                                //Log.Debug($"Copying Item Key {item.Key}");
 								
                                 // Copy using only the Existing keys!
                                 Dictionary_EditableCopy.Add(item.Key, casted[item.Key]);
@@ -103,7 +103,7 @@ internal class PhotonOnEventHook : AstroEvents
                 else if (__0.GetParameterData() != null)
                 {
                     isParameterData = true;
-                    //ModConsole.DebugLog($"Received CustomData with Type : {__0.CustomData}");
+                    //Log.Debug($"Received CustomData with Type : {__0.CustomData}");
                     if (__0.GetParameterData().GetIl2CppType().Equals(Il2CppType.Of<Dictionary<byte, Object>>()))
                     {
                         // Flag and convert the item that needs to be processed into a Editable copy .
@@ -117,7 +117,7 @@ internal class PhotonOnEventHook : AstroEvents
                             // Copy all the stuff contained into The System Dictionary!
                             foreach (var item in casted)
                             {
-                                //ModConsole.DebugLog($"Copying Item Key {item.Key}");
+                                //Log.Debug($"Copying Item Key {item.Key}");
 
                                 // Copy using only the Existing keys!
                                 Dictionary_EditableCopy.Add(item.Key, casted[item.Key]);

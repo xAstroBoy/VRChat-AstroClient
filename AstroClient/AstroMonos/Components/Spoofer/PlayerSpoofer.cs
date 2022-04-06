@@ -28,11 +28,11 @@
             {
                 if (Original_DisplayName != null)
                 {
-                    ModConsole.DebugLog($"Spoofer : Got Current DisplayName {Original_DisplayName}");
+                    Log.Debug($"Spoofer : Got Current DisplayName {Original_DisplayName}");
                 }
                 else
                 {
-                    ModConsole.DebugLog($"Spoofer : Failed To  get Current DisplayName!");
+                    Log.Debug($"Spoofer : Failed To  get Current DisplayName!");
                 }
             }));
         }
@@ -201,7 +201,7 @@
                         DisplayName = Original_DisplayName;
                         if (SpoofedName.IsNotNullOrEmptyOrWhiteSpace())
                         {
-                            ModConsole.DebugLog($"[PlayerSpoofer] : No Longer Spoofing As {SpoofedName}, Restored : {Original_DisplayName}");
+                            Log.Debug($"[PlayerSpoofer] : No Longer Spoofing As {SpoofedName}, Restored : {Original_DisplayName}");
                         }
                     }
                 }
@@ -228,7 +228,7 @@
                 if (IsSpooferActive)
                 {
                     DisplayName = value;
-                    ModConsole.DebugLog($"[PlayerSpoofer] : Spoofing As {value}");
+                    Log.Debug($"[PlayerSpoofer] : Spoofing As {value}");
                 }
             }
         }

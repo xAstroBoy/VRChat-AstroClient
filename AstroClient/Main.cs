@@ -200,7 +200,7 @@
             }
 
             stopwatch.Stop();
-            ModConsole.DebugLog($"Initialized {GameEvents.Count} GameEvents: Took {stopwatch.ElapsedMilliseconds}ms");
+            Log.Debug($"Initialized {GameEvents.Count} GameEvents: Took {stopwatch.ElapsedMilliseconds}ms");
             yield return null;
         }
 
@@ -295,7 +295,7 @@
         {
             var sw = Stopwatch.StartNew();
             Event_VRChat_OnUiManagerInit?.SafetyRaise();
-            sw.Stop(); ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {sw.ElapsedMilliseconds}ms");
+            sw.Stop(); Log.Debug($"Start_VRChat_OnUiManagerInit: Took {sw.ElapsedMilliseconds}ms");
         }
 
     }

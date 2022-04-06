@@ -45,11 +45,11 @@
                 }
                 if (value)
                 {
-                    ModConsole.Log("Debug Info Enabled", System.Drawing.Color.Green);
+                    Log.Write("Debug Info Enabled", System.Drawing.Color.Green);
                 }
                 else
                 {
-                    ModConsole.Log("Debug Info disabled", System.Drawing.Color.Red);
+                    Log.Write("Debug Info disabled", System.Drawing.Color.Red);
                 }
             }
         }

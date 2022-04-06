@@ -26,7 +26,7 @@
                 }
                 catch
                 {
-                    ModConsole.DebugLog($"{rawUdonBehaviour.udonBehaviour.name} Does not contain symbol {symbol}!");
+                    Log.Debug($"{rawUdonBehaviour.udonBehaviour.name} Does not contain symbol {symbol}!");
                     this.rawUdonBehaviour = null;
                     this.address = 0;
                 }

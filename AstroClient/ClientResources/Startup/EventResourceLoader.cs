@@ -33,7 +33,7 @@
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            ModConsole.DebugLog($"Loading Resources from {classtype.FullName}");
+            Log.Debug($"Loading Resources from {classtype.FullName}");
             int fails = 0;
             foreach (var item in classtype.GetProperties(BindingFlags.NonPublic | BindingFlags.Static))
             {
@@ -41,21 +41,21 @@
                 {
                     try
                     {
-                        //ModConsole.DebugLog($"Loading {item.Name}");
+                        //Log.Debug($"Loading {item.Name}");
                         var result = item.GetValue(classtype);
                         if (result != null)
                         {
-                            ModConsole.DebugLog($"Loaded {item.Name}", Color.GreenYellow);
+                            Log.Debug($"Loaded {item.Name}", Color.GreenYellow);
                         }
                         else
                         {
-                            ModConsole.DebugLog($"Failed to load {item.Name}", Color.OrangeRed);
+                            Log.Debug($"Failed to load {item.Name}", Color.OrangeRed);
                             fails++;
                         }
                     }
                     catch
                     {
-                        ModConsole.DebugLog($"Failed loading {item.Name}", Color.OrangeRed);
+                        Log.Debug($"Failed loading {item.Name}", Color.OrangeRed);
                         fails++;
 
                     }
@@ -67,7 +67,7 @@
                 ModConsole.DebugError($"Failed to load {fails} resources in {classtype.FullName}! It might affect the Client!");
             }
             stopwatch.Stop();
-            ModConsole.DebugLog($"Done Loading Resources from {classtype.FullName}, took {stopwatch.ElapsedMilliseconds}ms");
+            Log.Debug($"Done Loading Resources from {classtype.FullName}, took {stopwatch.ElapsedMilliseconds}ms");
             yield return null;
         }
     }

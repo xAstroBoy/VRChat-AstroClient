@@ -123,7 +123,7 @@
             }
             else
             {
-                ModConsole.DebugLog($"Failed to Create EntryBase Instance {typeof(T).Name}");
+                Log.Debug($"Failed to Create EntryBase Instance {typeof(T).Name}");
             }
 
             return null;

@@ -12,29 +12,29 @@
         {
             if (id == WorldIds.Meroom)
             {
-                ModConsole.Log($"Recognized {Name} World, Spawning Lockpick Trigger.");
+                Log.Write($"Recognized {Name} World, Spawning Lockpick Trigger.");
 
                 var PrivateRoomSwitchTrigger = GameObjectFinder.Find("Private room/Switch/Lock switch");
                 var DisplaySwitchTrigger = GameObjectFinder.Find("Living/Switch/switch");
                 if (PrivateRoomSwitchTrigger == null)
                 {
-                    ModConsole.Log("Failed to Find Private Room Switch, Has MeRoom World updated?", Color.Red);
+                    Log.Write("Failed to Find Private Room Switch, Has MeRoom World updated?", Color.Red);
                 }
                 else
                 {
-                    ModConsole.Log("Found Private room Switch!", Color.Green);
+                    Log.Write("Found Private room Switch!", Color.Green);
                 }
                 if (DisplaySwitchTrigger == null)
                 {
-                    ModConsole.Log("Failed to Find Living Room Display Switch, Has MeRoom World updated?", Color.Red);
+                    Log.Write("Failed to Find Living Room Display Switch, Has MeRoom World updated?", Color.Red);
                 }
                 else
                 {
-                    ModConsole.Log("Found Living Room Display Switch!", Color.Green);
+                    Log.Write("Found Living Room Display Switch!", Color.Green);
                 }
                 if (PrivateRoomSwitchTrigger == null || DisplaySwitchTrigger == null)
                 {
-                    ModConsole.Log("Aborted LockPick Button Generation.", Color.Yellow);
+                    Log.Write("Aborted LockPick Button Generation.", Color.Yellow);
                     return;
                 }
 

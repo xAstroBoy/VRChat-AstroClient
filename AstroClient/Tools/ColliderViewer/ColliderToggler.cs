@@ -23,7 +23,7 @@
                 }
             }
             ToggledColliders.Clear();
-            ModConsole.Log(string.Format("Reenabled {0} colliders, skipped {1} colliders", num, num2));
+            Log.Write(string.Format("Reenabled {0} colliders, skipped {1} colliders", num, num2));
         }
 
         private static void ToggleCollider(Collider collider)
@@ -34,7 +34,7 @@
                 collider.enabled = false;
                 ToggledColliders.Add(collider);
                 string colliderName = GetColliderName(collider);
-                ModConsole.Log("Toggled collider " + colliderName);
+                Log.Write("Toggled collider " + colliderName);
             }
         }
 

@@ -75,7 +75,7 @@
 
         private void Debug(string msg)
         {
-            if (DebugMode) ModConsole.DebugLog($"[ESP_Pickup Debug] : {msg}");
+            if (DebugMode) Log.Debug($"[ESP_Pickup Debug] : {msg}");
         }
 
         private void SetupHighlighter()

@@ -27,9 +27,9 @@
         public static HarmonyMethod PrintMethod => _printMethod;
         private static void Print(MethodInfo __originalMethod)
         {
-            ModConsole.Log(__originalMethod.Name);
-            ModConsole.Log(__originalMethod.DeclaringType.FullName);
-            ModConsole.Log("");
+            Log.Write(__originalMethod.Name);
+            Log.Write(__originalMethod.DeclaringType.FullName);
+            Log.Write("");
         }
 
         /// <summary>
@@ -124,12 +124,12 @@
         {
             try
             {
-                ModConsole.Log($"Scanning {method.Name}");
+                Log.Write($"Scanning {method.Name}");
 
-                ModConsole.Log($"Checking UsedBy");
+                Log.Write($"Checking UsedBy");
                 DumpScan(XrefScanner.UsedBy(method));
 
-                ModConsole.Log("Checking Using");
+                Log.Write("Checking Using");
                 DumpScan(XrefScanner.XrefScan(method));
             }
             catch (Exception ex)
@@ -145,9 +145,9 @@
             {
                 if (instance.Type == XrefType.Global)
                 {
-                    ModConsole.Log(instance.Type.ToString());
-                    ModConsole.Log(instance.ReadAsObject().ToString());
-                    ModConsole.Log("");
+                    Log.Write(instance.Type.ToString());
+                    Log.Write(instance.ReadAsObject().ToString());
+                    Log.Write("");
                     continue;
                 }
 
@@ -156,16 +156,16 @@
                 {
                     if (resolvedMethod == null)
                     {
-                        ModConsole.Log("null");
-                        ModConsole.Log("null");
+                        Log.Write("null");
+                        Log.Write("null");
                     }
                     else
                     {
-                        ModConsole.Log(resolvedMethod.Name);
-                        ModConsole.Log(resolvedMethod.DeclaringType.FullName);
+                        Log.Write(resolvedMethod.Name);
+                        Log.Write(resolvedMethod.DeclaringType.FullName);
                     }
 
-                    ModConsole.Log("");
+                    Log.Write("");
                 }
             }
         }

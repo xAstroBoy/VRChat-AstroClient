@@ -102,7 +102,7 @@ namespace AstroClient.Tools.UdonEditor
 
                 File.WriteAllText(completepath, builder.ToString());
                 Process.Start(completepath);
-                ModConsole.DebugLog($"Generated Reader File for {behaviour.udonBehaviour.name}!");
+                Log.Debug($"Generated Reader File for {behaviour.udonBehaviour.name}!");
                 ClearLists();
             }
         }

@@ -87,29 +87,29 @@ namespace AstroClient.Spawnables.Flashlight
         }
         private static Light CreateAndSetLight(Transform LightObject)
         {
-            ModConsole.DebugLog($"Current Light Holder is : {LightObject.name}");
+            Log.Debug($"Current Light Holder is : {LightObject.name}");
             if (LightObject == null) return null;
             Light Result = LightObject.GetComponent<Light>();
             if (Result != null)
             {
-                ModConsole.DebugLog("Setting Flashlight Light Settings ");
+                Log.Debug("Setting Flashlight Light Settings ");
 
                 if (CurrentLightTemplate != null)
                 {
 
                     // before copying let's backup the prefab Properties!
-                    ModConsole.DebugLog("Backupping SpotAngle.");
+                    Log.Debug("Backupping SpotAngle.");
                     var spotAngle = Result.spotAngle;
-                    ModConsole.DebugLog("Backupping innerSpotAngle.");
+                    Log.Debug("Backupping innerSpotAngle.");
                     var innerSpotAngle = Result.innerSpotAngle;
 
                     Result.CopyFromLight(CurrentLightTemplate);
 
-                    ModConsole.DebugLog("Restoring Prefab Spot Angle Settings.");
+                    Log.Debug("Restoring Prefab Spot Angle Settings.");
                     Result.innerSpotAngle = innerSpotAngle;
-                    ModConsole.DebugLog($"Restoring innerSpotAngle: {Result.spotAngle}.");
+                    Log.Debug($"Restoring innerSpotAngle: {Result.spotAngle}.");
                     Result.spotAngle = spotAngle;
-                    ModConsole.DebugLog($"Restoring spotAngle : {Result.spotAngle}.");
+                    Log.Debug($"Restoring spotAngle : {Result.spotAngle}.");
 
                 }
 
@@ -133,23 +133,23 @@ namespace AstroClient.Spawnables.Flashlight
             }
             else
             {
-                ModConsole.DebugLog("Result is empty!");
+                Log.Debug("Result is empty!");
             }
             return Result;
         }
 
         internal static void GetLightTemplate()
         {
-            ModConsole.DebugLog("Finding Pickup...");
+            Log.Debug("Finding Pickup...");
             var pickup = PlayerHands.GetHeldPickup();
             if (pickup != null)
             {
-                ModConsole.DebugLog($"Found Held Pickup : {pickup.name}, Getting Light template...");
+                Log.Debug($"Found Held Pickup : {pickup.name}, Getting Light template...");
 
                 var light = pickup.GetComponentInChildren<Light>(); // Get the active Light.
                 if (light != null)
                 {
-                    ModConsole.DebugLog("Found a template light!");
+                    Log.Debug("Found a template light!");
                     PopupUtils.QueHudMessage($"<color=#FFA500>Using Light from {pickup.name} as template!</color>");
                     CurrentLightTemplate = light;
                 }

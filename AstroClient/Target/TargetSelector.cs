@@ -65,7 +65,7 @@ namespace AstroClient.Target
                     }
                     else
                     {
-                        ModConsole.Log("[TargetPlayer] Cant find user : " + apiuser.displayName);
+                        Log.Write("[TargetPlayer] Cant find user : " + apiuser.displayName);
                     }
                 }
             }

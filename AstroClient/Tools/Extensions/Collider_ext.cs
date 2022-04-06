@@ -30,7 +30,7 @@
                 var colliders = obj.GetComponents<Collider>();
                 if (!Silent)
                 {
-                    ModConsole.DebugLog($"Destroyed {colliders.Count} Colliders in {obj.name}");
+                    Log.Debug($"Destroyed {colliders.Count} Colliders in {obj.name}");
                 }
 
                 foreach (var c in colliders)
@@ -47,7 +47,7 @@
                 var colliders = obj.GetComponentsInChildren<Collider>(true);
                 if (!Silent)
                 {
-                    ModConsole.DebugLog($"Destroyed {colliders.Count} Colliders in {obj.name}");
+                    Log.Debug($"Destroyed {colliders.Count} Colliders in {obj.name}");
                 }
 
                 foreach (var c in colliders)
@@ -62,7 +62,7 @@
             if (obj != null)
             {
                 var colliders = obj.GetComponents<Collider>();
-                ModConsole.DebugLog($"Disabled {colliders.Count} Colliders in {obj.name}");
+                Log.Debug($"Disabled {colliders.Count} Colliders in {obj.name}");
 
                 foreach (var c in colliders)
                 {
@@ -78,7 +78,7 @@
                 var colliders = obj.GetComponents<Collider>();
                 if (!Quiet)
                 {
-                    ModConsole.DebugLog($"set IsTrigger {isTrigger} to {colliders.Count} Colliders in {obj.name}");
+                    Log.Debug($"set IsTrigger {isTrigger} to {colliders.Count} Colliders in {obj.name}");
 
                 }
                 foreach (var c in colliders)
@@ -94,7 +94,7 @@
             if (obj != null)
             {
                 var colliders = obj.GetComponentsInChildren<Collider>(true);
-                ModConsole.DebugLog($"Disabled {colliders.Count} Colliders in {obj.name}");
+                Log.Debug($"Disabled {colliders.Count} Colliders in {obj.name}");
 
                 foreach (var c in colliders)
 
@@ -109,7 +109,7 @@
             if (obj != null)
             {
                 var colliders = obj.GetComponentsInChildren<Collider>(true);
-                ModConsole.DebugLog($"Enabled {colliders.Count} Colliders in {obj.name}");
+                Log.Debug($"Enabled {colliders.Count} Colliders in {obj.name}");
 
                 foreach (var c in colliders)
 
@@ -118,7 +118,7 @@
                 }
 
                 var meshcolliders = obj.GetComponentsInChildren<MeshCollider>(true);
-                ModConsole.DebugLog($"Enabled {colliders.Count} MeshColliders in {obj.name}");
+                Log.Debug($"Enabled {colliders.Count} MeshColliders in {obj.name}");
                 foreach (var c in meshcolliders)
                 {
                     c.enabled = true;
@@ -144,11 +144,11 @@
 
                 if (ignore)
                 {
-                    ModConsole.DebugLog($"Fixing Collider {obj.name} To ignore Current Player Collisions");
+                    Log.Debug($"Fixing Collider {obj.name} To ignore Current Player Collisions");
                 }
                 else
                 {
-                    ModConsole.DebugLog($"Fixing Collider {obj.name} To Interact Current Player Collisions");
+                    Log.Debug($"Fixing Collider {obj.name} To Interact Current Player Collisions");
 
                 }
 
@@ -156,7 +156,7 @@
             }
             else
             {
-                ModConsole.DebugLog("Unable to Fix Player collision as Local Collider is null!");
+                Log.Debug("Unable to Fix Player collision as Local Collider is null!");
             }
 
         }
@@ -169,11 +169,11 @@
                 var colliders = obj.GetComponents<Collider>();
                 if (ignore)
                 {
-                    ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To ignore Current Player Collisions");
+                    Log.Debug($"Fixing {colliders.Count} Colliders {obj.name} To ignore Current Player Collisions");
                 }
                 else
                 {
-                    ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To Interact Current Player Collisions");
+                    Log.Debug($"Fixing {colliders.Count} Colliders {obj.name} To Interact Current Player Collisions");
 
                 }
 
@@ -184,7 +184,7 @@
             }
             else
             {
-                ModConsole.DebugLog("Unable to Fix Player collision as Local Collider is null!");
+                Log.Debug("Unable to Fix Player collision as Local Collider is null!");
             }
 
         }
@@ -215,11 +215,11 @@
                     if (ignore)
                     {
 
-                        ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To ignore Current Player Collisions");
+                        Log.Debug($"Fixing {colliders.Count} Colliders {obj.name} To ignore Current Player Collisions");
                     }
                     else
                     {
-                        ModConsole.DebugLog($"Fixing {colliders.Count} Colliders {obj.name} To Interact Current Player Collisions");
+                        Log.Debug($"Fixing {colliders.Count} Colliders {obj.name} To Interact Current Player Collisions");
 
                     }
                 }
@@ -241,7 +241,7 @@
             }
             else
             {
-                ModConsole.DebugLog("Unable to Fix Player collision as Local Collider is null!");
+                Log.Debug("Unable to Fix Player collision as Local Collider is null!");
             }
 
         }

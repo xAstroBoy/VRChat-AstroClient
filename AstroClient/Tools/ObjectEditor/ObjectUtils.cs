@@ -59,7 +59,7 @@
                     {
                         if (video != null)
                         {
-                            ModConsole.Log("VideoPlayer URL Found :" + video.URL);
+                            Log.Write("VideoPlayer URL Found :" + video.URL);
                         }
                     }
                 }
@@ -91,7 +91,7 @@
                     for (int i = 0; i < components.Count; i++)
                     {
                         Component OriginalComponent = components[i];
-                        ModConsole.Log(Obj.name + " component : " + OriginalComponent.ToString());
+                        Log.Write(Obj.name + " component : " + OriginalComponent.ToString());
                     }
                 }
             }
@@ -108,7 +108,7 @@
                     for (int i = 0; i < components.Count; i++)
                     {
                         Component OriginalComponent = components[i];
-                        ModConsole.Log(Obj.name + " component : " + OriginalComponent.ToString());
+                        Log.Write(Obj.name + " component : " + OriginalComponent.ToString());
                     }
                 }
             }
@@ -191,7 +191,7 @@
                     }
                     else
                     {
-                        ModConsole.DebugLog($"");
+                        Log.Debug($"");
                     }
                 }
             }
@@ -252,7 +252,7 @@
                     }
                     txtFile.Close();
                 }
-                ModConsole.Log("Done Dumping GameObjects, Check The Path");
+                Log.Write("Done Dumping GameObjects, Check The Path");
             }).Start();
         }
 
@@ -283,7 +283,7 @@
                     }
                     txtFile.Close();
                 }
-                ModConsole.Log("Done Dumping GameObjects, Check The Path");
+                Log.Write("Done Dumping GameObjects, Check The Path");
             }).Start();
         }
 
@@ -302,7 +302,7 @@
                         var player = PlayerManager.Method_Public_Static_Player_Int32_0(ownerid);
                         if (player != null)
                         {
-                            ModConsole.Log("Player : " + player.prop_APIUser_0.displayName + " is controlling object : " + item.name, Color.GreenYellow);
+                            Log.Write("Player : " + player.prop_APIUser_0.displayName + " is controlling object : " + item.name, Color.GreenYellow);
                         }
                     }
                 }
@@ -339,7 +339,7 @@
                 }
                 txtFile.Close();
             }
-            ModConsole.Log("Done Dumping GameObjects, Check The Path");
+            Log.Write("Done Dumping GameObjects, Check The Path");
         }
 
         internal static List<GameObject> GetAllPickupObjects()
@@ -376,7 +376,7 @@
                 if (!Mirrors.Contains(item.gameObject))
                 {
                     Mirrors.Add(item.gameObject);
-                    ModConsole.Log("Added " + item.gameObject.name + " To the Mirrors List!");
+                    Log.Write("Added " + item.gameObject.name + " To the Mirrors List!");
                 }
             }
             for (int i = 0; i < Mir2.Count; i++)
@@ -385,7 +385,7 @@
                 if (!Mirrors.Contains(item.gameObject))
                 {
                     Mirrors.Add(item.gameObject);
-                    ModConsole.Log("Added " + item.gameObject.name + " To the Mirrors List!");
+                    Log.Write("Added " + item.gameObject.name + " To the Mirrors List!");
                 }
             }
             for (int i = 0; i < Mir3.Count; i++)
@@ -394,7 +394,7 @@
                 if (!Mirrors.Contains(item.gameObject))
                 {
                     Mirrors.Add(item.gameObject);
-                    ModConsole.Log("Added " + item.gameObject.name + " To the Mirrors List!");
+                    Log.Write("Added " + item.gameObject.name + " To the Mirrors List!");
                 }
             }
             for (int i = 0; i < Mir4.Count; i++)
@@ -403,11 +403,11 @@
                 if (!Mirrors.Contains(item.gameObject))
                 {
                     Mirrors.Add(item.gameObject);
-                    ModConsole.Log("Added " + item.gameObject.name + " To the Mirrors List!");
+                    Log.Write("Added " + item.gameObject.name + " To the Mirrors List!");
                 }
             }
 
-            ModConsole.Log("Mirrors Found : " + Mirrors.Count());
+            Log.Write("Mirrors Found : " + Mirrors.Count());
         }
 
         internal static void DestroyMirrors()
@@ -417,7 +417,7 @@
                 GameObject item = Mirrors[i];
                 if (item != null)
                 {
-                    ModConsole.Log("Killed Mirror : " + item.name);
+                    Log.Write("Killed Mirror : " + item.name);
                     OnlineEditor.TakeObjectOwnership(item);
                     Networking.Destroy(item);
                     UnityEngine.Object.DestroyImmediate(item);

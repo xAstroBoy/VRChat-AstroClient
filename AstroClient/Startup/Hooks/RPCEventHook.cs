@@ -65,11 +65,11 @@ namespace AstroClient.Startup.Hooks
                 {
                     if (__0 != null)
                     {
-                        ModConsole.Log($"Blocked Malicious RPC: {__0.DisplayName()}");
+                        Log.Write($"Blocked Malicious RPC: {__0.DisplayName()}");
                     }
                     else
                     {
-                        ModConsole.Log($"Blocked Malicious RPC: NULL");
+                        Log.Write($"Blocked Malicious RPC: NULL");
                     }
 
                     blocked = true;
@@ -155,11 +155,11 @@ namespace AstroClient.Startup.Hooks
                         {
                             if (message != null)
                             {
-                                ModConsole.Log($"RPC: {sender}, {name}, {parameter}, [Position : {message.Position.ToString()}, Rotation : {message.Rotation.ToString()}, SpawnOrientation : {message.SpawnOrientation}], {eventtype}, {broadcasttype}");
+                                Log.Write($"RPC: {sender}, {name}, {parameter}, [Position : {message.Position.ToString()}, Rotation : {message.Rotation.ToString()}, SpawnOrientation : {message.SpawnOrientation}], {eventtype}, {broadcasttype}");
                             }
                             else
                             {
-                                ModConsole.Log("Couldn't Cast TeleportRPC as message is null!");
+                                Log.Write("Couldn't Cast TeleportRPC as message is null!");
                             }
                         }
                         catch
@@ -182,7 +182,7 @@ namespace AstroClient.Startup.Hooks
                         {
                             if (!PlayerUtils.DisplayName().Equals(sender))
                             {
-                                ModConsole.Log($"BLOCKED Blue Chair: {sender}");
+                                Log.Write($"BLOCKED Blue Chair: {sender}");
                                 return false;
                             }
                         }
@@ -191,12 +191,12 @@ namespace AstroClient.Startup.Hooks
                         {
                             if (Bools.BlockUdon)
                             {
-                                ModConsole.Log($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+                                Log.Write($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
                                 return false;
                             }
                             else
                             {
-                                ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+                                Log.Write($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
                             }
                         }
                     }
@@ -214,12 +214,12 @@ namespace AstroClient.Startup.Hooks
                     {
                         if (blocked)
                         {
-                            ModConsole.Log($"BLOCKED RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+                            Log.Write($"BLOCKED RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
                             return false;
                         }
                         else
                         {
-                            ModConsole.Log($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+                            Log.Write($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
                         }
                     }
                 }

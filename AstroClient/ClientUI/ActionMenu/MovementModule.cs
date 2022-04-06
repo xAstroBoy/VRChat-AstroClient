@@ -29,7 +29,7 @@ namespace AstroClient.ClientUI.ActionMenu
                 });
             });
 
-            ModConsole.Log("Movement Module is ready!", Color.Green);
+            Log.Write("Movement Module is ready!", Color.Green);
         }
     }
 }

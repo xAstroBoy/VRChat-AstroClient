@@ -55,7 +55,7 @@
 
         private void OnCollisionEnter(Collision other)
         {
-            //ModConsole.DebugLog($"Detected A collision between {this.gameObject.name} and {other.collider.gameObject.name} with collider name  {other.collider.name}");
+            //Log.Debug($"Detected A collision between {this.gameObject.name} and {other.collider.gameObject.name} with collider name  {other.collider.name}");
             if (CollidersNamesToIgnore.Contains(other.collider.name))
             {
                 foreach (var collider in CurrentColliders)

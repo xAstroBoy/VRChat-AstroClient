@@ -70,23 +70,23 @@ internal static class PhotonExts
             {
                 if (data.Parameters != null)
                 {
-                    ModConsole.DebugLog($"Current Event Code : {data.Code}");
+                    Log.Debug($"Current Event Code : {data.Code}");
                     for (byte i = 0; i < byte.MaxValue; i++)
                     {
                         if (data.Parameters.ContainsKey(i))
                         {
-                            ModConsole.DebugLog($"Parameter Contains key {i}, with Type {data.Parameters[i].GetIl2CppType().FullName}");
+                            Log.Debug($"Parameter Contains key {i}, with Type {data.Parameters[i].GetIl2CppType().FullName}");
                         }
                     }
                 }
                 else if (data.Parameters.paramDict != null)
                 {
-                    ModConsole.DebugLog($"Current Event Code : {data.Code}");
+                    Log.Debug($"Current Event Code : {data.Code}");
                     for (byte i = 0; i < byte.MaxValue; i++)
                     {
                         if (data.Parameters.paramDict.ContainsKey(i))
                         {
-                            ModConsole.DebugLog($"paramDict Contains key {i}, with Type {data.Parameters.paramDict[i].GetIl2CppType().FullName}");
+                            Log.Debug($"paramDict Contains key {i}, with Type {data.Parameters.paramDict[i].GetIl2CppType().FullName}");
                         }
                     }
                 }

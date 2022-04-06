@@ -125,7 +125,7 @@
                     var results = UdonSearch.FindUdonEvents(bedobj.gameObject, "_interact");
                     if (results != null && results.Count != 0)
                     {
-                        ModConsole.DebugLog($"Found Scene_Room Bed {results.Count} interacts!");
+                        Log.Debug($"Found Scene_Room Bed {results.Count} interacts!");
                         foreach (var item in results)
                         {
                             Bed_interact.Add(item);
@@ -139,7 +139,7 @@
                     var results = UdonSearch.FindUdonEvents(Mirrorobj.gameObject, "_interact");
                     if (results != null && results.Count != 0)
                     {
-                        ModConsole.DebugLog($"Found Scene_Room Mirror {results.Count} interacts!");
+                        Log.Debug($"Found Scene_Room Mirror {results.Count} interacts!");
                         foreach (var item in results)
                         {
                             Mirror_interact.Add(item);
@@ -153,7 +153,7 @@
                     var results = UdonSearch.FindUdonEvents(LaptopObj.gameObject, "_interact");
                     if (results != null && results.Count != 0)
                     {
-                        ModConsole.DebugLog($"Found Scene_Room Laptop {results.Count} interacts!");
+                        Log.Debug($"Found Scene_Room Laptop {results.Count} interacts!");
                         foreach (var item in results)
                         {
                             Laptop_interact.Add(item);
@@ -167,7 +167,7 @@
                     var results = UdonSearch.FindUdonEvents(Doorobj.gameObject, "_interact");
                     if (results != null && results.Count != 0)
                     {
-                        ModConsole.DebugLog($"Found Scene_Room Door {results.Count} interacts!");
+                        Log.Debug($"Found Scene_Room Door {results.Count} interacts!");
                         foreach (var item in results)
                         {
                             Door_interact.Add(item);

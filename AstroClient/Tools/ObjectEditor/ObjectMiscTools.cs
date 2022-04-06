@@ -38,7 +38,7 @@
                     }
                     else
                     {
-                        ModConsole.Log($"[Orbit] Cant find user : {apiuser.displayName}");
+                        Log.Write($"[Orbit] Cant find user : {apiuser.displayName}");
                     }
                 }
             }
@@ -72,12 +72,12 @@
                     }
                     else
                     {
-                        ModConsole.Log($"[Teleport] Cant find user : {apiuser.displayName}");
+                        Log.Write($"[Teleport] Cant find user : {apiuser.displayName}");
                     }
                 }
                 else
                 {
-                    ModConsole.Log("ApiUser is null.");
+                    Log.Write("ApiUser is null.");
                 }
             }
             catch (Exception) { }
@@ -110,7 +110,7 @@
                     }
                     else
                     {
-                        ModConsole.Log($"[Attacker] Cant find user : {apiuser.displayName}");
+                        Log.Write($"[Attacker] Cant find user : {apiuser.displayName}");
                     }
                 }
                 else
@@ -145,7 +145,7 @@
                     }
                     else
                     {
-                        ModConsole.Log($"[Watcher] Cant find user : {apiuser.displayName}");
+                        Log.Write($"[Watcher] Cant find user : {apiuser.displayName}");
                     }
                 }
                 else
@@ -206,7 +206,7 @@
                 }
                 else
                 {
-                    ModConsole.Log("[Attacker] Cant find Last Target ");
+                    Log.Write("[Attacker] Cant find Last Target ");
                 }
             }
             catch (Exception) { }
@@ -230,7 +230,7 @@
                 }
                 else
                 {
-                    ModConsole.Log("[Attacker] Cant find Last Target ");
+                    Log.Write("[Attacker] Cant find Last Target ");
                 }
             }
             catch (Exception) { }
@@ -254,7 +254,7 @@
                 }
                 else
                 {
-                    ModConsole.Log("[Watcher] Cant find Last Target ");
+                    Log.Write("[Watcher] Cant find Last Target ");
                 }
             }
             catch (Exception) { }
@@ -337,12 +337,12 @@
                     {
                         if (control.Rigidbody != null)
                         {
-                            ModConsole.DebugLog($"Analyzing Rigidbody Property of {item.name}");
+                            Log.Debug($"Analyzing Rigidbody Property of {item.name}");
 
                             bool hasWorkingCollider = false;
                             if (control.Rigidbody.isKinematic)
                             {
-                                ModConsole.DebugLog($"Checking If a Non-trigger collider is present in {item.name}");
+                                Log.Debug($"Checking If a Non-trigger collider is present in {item.name}");
 
                                 var meshcolliders = control.gameObject.GetComponentsInChildren<MeshCollider>(true);
                                 if (meshcolliders.Count != 0)
@@ -352,7 +352,7 @@
                                         MeshCollider c = meshcolliders[i];
                                         if (c.enabled && c.convex)
                                         {
-                                            ModConsole.DebugLog($"Found Working MeshCollider for {item.name}");
+                                            Log.Debug($"Found Working MeshCollider for {item.name}");
 
                                             if (!hasWorkingCollider)
                                             {
@@ -373,7 +373,7 @@
                                             {
                                                 if (!collider.isTrigger && collider.enabled)
                                                 {
-                                                    ModConsole.DebugLog($"Found Working Collider for {item.name}");
+                                                    Log.Debug($"Found Working Collider for {item.name}");
                                                     if (!hasWorkingCollider)
                                                     {
                                                         hasWorkingCollider = true;

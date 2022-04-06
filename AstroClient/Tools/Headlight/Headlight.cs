@@ -259,7 +259,7 @@
                     }
                 }
             }
-            else { ModConsole.DebugLog("[Headlight] I Can't find Player's GameObject, try again!"); }
+            else { Log.Debug("[Headlight] I Can't find Player's GameObject, try again!"); }
         }
 
         private static void DesktopHeadLight(bool state)

@@ -41,7 +41,7 @@
             }
             catch (Exception)
             {
-                ModConsole.DebugLog("[<color=#FF0000>Error</color>] <color=#59D365>Error Occurred in Checkbox API</color>");
+                Log.Debug("[<color=#FF0000>Error</color>] <color=#59D365>Error Occurred in Checkbox API</color>");
             }
         }
 

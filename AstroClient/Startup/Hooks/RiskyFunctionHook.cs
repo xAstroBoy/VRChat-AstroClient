@@ -65,25 +65,25 @@
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (UnityEngine.GameObject.Find("eVRCRiskFuncEnable") == null)
-                ModConsole.DebugLog("Spawned EmmVRC Risky Function Enabler!");
+                Log.Debug("Spawned EmmVRC Risky Function Enabler!");
             UnityEngine.Object.DontDestroyOnLoad(new UnityEngine.GameObject("eVRCRiskFuncEnable"));
 
             if (UnityEngine.GameObject.Find("UniversalRiskyFuncEnable") == null)
             {
-                ModConsole.DebugLog("Spawned Universal Risky Function Enabler!");
+                Log.Debug("Spawned Universal Risky Function Enabler!");
                 UnityEngine.Object.DontDestroyOnLoad(new UnityEngine.GameObject("UniversalRiskyFuncEnable"));
             }
 
             var EmmVRCDisabler = UnityEngine.GameObject.Find("eVRCRiskFuncDisable");
             if (EmmVRCDisabler != null)
             {
-                ModConsole.DebugLog("Found eVRCRiskFuncDisable, Destroying!");
+                Log.Debug("Found eVRCRiskFuncDisable, Destroying!");
                 EmmVRCDisabler.DestroyMeLocal();
             }
             var UniversalDisabler = UnityEngine.GameObject.Find("UniversalRiskyFuncDisable");
             if (UniversalDisabler != null)
             {
-                ModConsole.DebugLog("Found UniversalRiskyFuncDisable, Destroying!");
+                Log.Debug("Found UniversalRiskyFuncDisable, Destroying!");
                 UniversalDisabler.DestroyMeLocal();
             }
 
@@ -97,7 +97,7 @@
                         if (text.ToLower().Contains("game") || text.ToLower().Contains("club"))
                         {
                             IsWorldTagPatched = true;
-                            ModConsole.DebugLog($"Removed Tag : {text} in ApiWorld to bypass RiskyFunction Detection");
+                            Log.Debug($"Removed Tag : {text} in ApiWorld to bypass RiskyFunction Detection");
                             WorldUtils.World.tags.Remove(text);
                         }
 

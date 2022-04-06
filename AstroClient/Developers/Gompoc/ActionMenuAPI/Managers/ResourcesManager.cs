@@ -26,7 +26,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
             lockPrefab.active = false;
             lockPrefab.gameObject.name = Constants.LOCKED_PEDAL_OVERLAY_GAMEOBJECT_NAME;
             lockPrefab.GetComponent<RawImage>().texture = Icons.locked;
-            ModConsole.DebugLog("Created lock gameobject");
+            Log.Debug("Created lock gameobject");
         }
 
         public static Texture2D GetPageIcon(int pageIndex)

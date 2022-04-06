@@ -11,11 +11,11 @@
         {
             if (id == WorldIds.SmashContest)
             {
-                ModConsole.DebugLog($"Recognized {Name} World, Searching For Sandbag");
+                Log.Debug($"Recognized {Name} World, Searching For Sandbag");
                 var sandbag = GameObjectFinder.Find("SandBag");
                 if (sandbag != null)
                 {
-                    ModConsole.Log("Registered Sandbag To World objects!");
+                    Log.Write("Registered Sandbag To World objects!");
                     sandbag.AddToWorldUtilsMenu();
                 }
             }

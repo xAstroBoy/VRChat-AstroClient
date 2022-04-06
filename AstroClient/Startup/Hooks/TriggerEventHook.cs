@@ -29,7 +29,7 @@
 
         private void HookTriggerEvent()
         {
-            ModConsole.DebugLog("Hooking TriggerEvent");
+            Log.Debug("Hooking TriggerEvent");
             var xrefs = XrefScanner.XrefScan(typeof(VRC_EventDispatcherRFC).GetMethod(nameof(VRC_EventDispatcherRFC.TriggerEvent)));
             foreach (var x in xrefs)
             {
@@ -56,7 +56,7 @@
 
                     if (!vrcevent.ToLower().Equals("uspeak")) // Ignore USPEAK.
                     {
-                        ModConsole.DebugLog($"Event : VRC_EventHandler : {eventhandler}, VrcEvent : {vrcevent}, VrcBroadcastType : {__2}, UnknownInt : {__3}, UnknownFloat : {__4}");
+                        Log.Debug($"Event : VRC_EventHandler : {eventhandler}, VrcEvent : {vrcevent}, VrcBroadcastType : {__2}, UnknownInt : {__3}, UnknownFloat : {__4}");
                     }
                 }
 

@@ -46,7 +46,7 @@
 
                 if (PrintInConsole)
                 {
-                    ModConsole.Log(result.ToString());
+                    Log.Write(result.ToString());
                 }
                 return result.ToString();
             }

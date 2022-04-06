@@ -51,7 +51,7 @@
 
 
             PlayerListConfig.OnConfigChange(false);
-            ModConsole.DebugLog("PlayerList UI Initialized!");
+            Log.Debug("PlayerList UI Initialized!");
         }
 
 

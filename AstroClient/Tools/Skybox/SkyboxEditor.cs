@@ -64,7 +64,7 @@
         {
             if (!HasLoadedCachedSkyboxes)
             {
-                ModConsole.DebugLog("[Skybox Loader] : This will Probably take awhile...");
+                Log.Debug("[Skybox Loader] : This will Probably take awhile...");
                 FindAndLoadSkyboxes();
                 HasLoadedCachedSkyboxes = true;
             }
@@ -72,14 +72,14 @@
             OriginalSkybox = RenderSettings.skybox;
             if (OriginalSkybox != null)
             {
-                ModConsole.DebugLog("[Skybox INFO] : Material name : " + OriginalSkybox.name);
-                ModConsole.DebugLog("[Skybox INFO] : Material Shader : " + OriginalSkybox.shader.name);
+                Log.Debug("[Skybox INFO] : Material name : " + OriginalSkybox.name);
+                Log.Debug("[Skybox INFO] : Material Shader : " + OriginalSkybox.shader.name);
                 var textureIDs = OriginalSkybox.GetTexturePropertyNames().ToList();
-                foreach (var TextureName in textureIDs) ModConsole.DebugLog("[Skybox INFO] : Texture name : " + TextureName);
+                foreach (var TextureName in textureIDs) Log.Debug("[Skybox INFO] : Texture name : " + TextureName);
                 if (textureIDs.Contains("_UpTex") && textureIDs.Contains("_DownTex") && textureIDs.Contains("_BackTex") &&
                     textureIDs.Contains("_FrontTex") && textureIDs.Contains("_LeftTex") && textureIDs.Contains("_RightTex"))
                 {
-                    ModConsole.DebugLog("This Skybox can be Yoinked!");
+                    Log.Debug("This Skybox can be Yoinked!");
                     if (Bools.IsDeveloper)
                     {
                         PopupUtils.QueHudMessage("This Skybox can Be Yoinked!");
@@ -125,7 +125,7 @@
                             Texture2D Right = null;
                             foreach (var imagepaths in images)
                             {
-                                //ModConsole.DebugLog("Found File in " + imagepaths);
+                                //Log.Debug("Found File in " + imagepaths);
                                 if (Up == null && imagepaths.EndsWith(Side_Up + ".png"))
                                 {
                                     Up = CheetoUtils.LoadPNGFromDir(imagepaths);
@@ -308,7 +308,7 @@
                             }
                             else
                             {
-                                ModConsole.DebugLog("Failed to parse " + file + ", Due to Material being null!");
+                                Log.Debug("Failed to parse " + file + ", Due to Material being null!");
                             }
 
                             yield return new WaitForSeconds(0.001f);
@@ -332,7 +332,7 @@
         {
             MelonCoroutines.Start(LoadBundleSkyboxes());
             MelonCoroutines.Start(LoadPNGsSkyboxes());
-            ModConsole.Log("Done checking for skyboxes.");
+            Log.Write("Done checking for skyboxes.");
         }
 
         internal static bool ExportSixSidedSkybox()
@@ -353,11 +353,11 @@
             //}
             //if (TextureName.isMatch("_Tex") && MaterialTexture != null)
             //{
-            //    ModConsole.DebugLog("This is a cubemap Texture!");
+            //    Log.Debug("This is a cubemap Texture!");
             //    var cubemap = MaterialTexture.TryCast<Texture>().CreateReadableCopy();
             //    if (cubemap != null)
             //    {
-            //        ModConsole.DebugLog($"Created Copy of {cubemap.name}");
+            //        Log.Debug($"Created Copy of {cubemap.name}");
             //        SaveTexture(cubemap.ToTexture2D(), savepath, Texture_Name_Cubemap);
             //    }
             //    break;
@@ -395,7 +395,7 @@
             if (Right == null) reason.AppendLine("Right Texture is missing!");
             if (Up == null || Down == null || Back == null || Front == null || Left == null || Right == null)
             {
-                ModConsole.DebugLog("Failed Material Generation " + reason.ToString());
+                Log.Debug("Failed Material Generation " + reason.ToString());
                 reason.Clear();
                 return null;
             }

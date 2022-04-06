@@ -27,7 +27,7 @@
             if (HideAvatar && Player.GetAPIUser().IsSelf)
             {
                 DestroyAvatar(Avatar);
-                ModConsole.DebugLog("Your avatar was hidden.");
+                Log.Debug("Your avatar was hidden.");
             }
         }
     }

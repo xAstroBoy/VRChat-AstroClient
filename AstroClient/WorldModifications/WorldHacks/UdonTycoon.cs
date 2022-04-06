@@ -21,7 +21,7 @@
                     udonTycoonCheatPage.SetTextColor(Color.green);
                 }
 
-                ModConsole.Log($"Recognized {Name}, Cheats available.");
+                Log.Write($"Recognized {Name}, Cheats available.");
                 var one = UdonSearch.FindUdonEvent("_polyCollector", "_UpdateCounter").UdonBehaviour.gameObject;
                 if (one != null)
                 {

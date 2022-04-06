@@ -18,7 +18,7 @@
             }
             else
             {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+                Log.Debug("Unable To Patch Udon Heap as is null!");
             }
         }
 
@@ -35,7 +35,7 @@
                     {
                         if (ShowSuccessMessages)
                         {
-                            ModConsole.DebugLog($"Heap Patch Applied.");
+                            Log.Debug($"Heap Patch Applied.");
                         }
                         if (OnSuccess != null) OnSuccess();
                     }
@@ -43,7 +43,7 @@
                     {
                         if (ShowFailedMessages)
                         {
-                            ModConsole.DebugLog($"Heap Patch Failed : {typeof(T).FullName}");
+                            Log.Debug($"Heap Patch Failed : {typeof(T).FullName}");
                         }
                         if (onFailure != null) onFailure();
                     }
@@ -52,14 +52,14 @@
                 {
                     if (ShowFailedMessages)
                     {
-                        ModConsole.DebugLog($"Exception Heap Patch Failed : {typeof(T).FullName}");
+                        Log.Debug($"Exception Heap Patch Failed : {typeof(T).FullName}");
                     }
                     if (onFailure != null) onFailure();
                 }
             }
             else
             {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+                Log.Debug("Unable To Patch Udon Heap as is null!");
                 if (onFailure != null) onFailure();
             }
 

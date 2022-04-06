@@ -130,7 +130,7 @@
                 ModConsole.Error("Couldn't get any data for the texture!");
             else
                 File.WriteAllBytes(savepath, data);
-            ModConsole.DebugLog("Exported Texture in Path: " + savepath);
+            Log.Debug("Exported Texture in Path: " + savepath);
         }
 
         // Converts DTXnm-format Normal Map to RGBA-format Normal Map.

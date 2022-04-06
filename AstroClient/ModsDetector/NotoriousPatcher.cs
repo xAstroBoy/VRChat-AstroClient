@@ -48,7 +48,7 @@
                                 {
                                     if (CopyrightAttrib.Copyright.Equals("Created by Meap & Unreal"))
                                     {
-                                        ModConsole.DebugLog("Found Notorious Loader!");
+                                        Log.Debug("Found Notorious Loader!");
                                         return _NotoriousLoader = item;
                                     }
                                 }
@@ -62,7 +62,7 @@
 
         private static bool Fuck_Notorious_Console_Clear_On_Start()
         {
-            ModConsole.DebugLog("Console.Clear has Been Blocked!");
+            Log.Debug("Console.Clear has Been Blocked!");
             ConsoleClearPatch?.Unpatch();
             return false; // FUCK YOU UNREAL <3.
         }
@@ -71,7 +71,7 @@
         {
 
             while (NotoriousLoader == null) yield return null;
-            ModConsole.DebugLog("Notorious Client has Been Loaded, Starting Patcher!");
+            Log.Debug("Notorious Client has Been Loaded, Starting Patcher!");
             ConsoleClearPatch = new AstroPatch(typeof(Console).GetMethod(nameof(Console.Clear)), GetPatch(nameof(Fuck_Notorious_Console_Clear_On_Start)));
             yield return null;
         }

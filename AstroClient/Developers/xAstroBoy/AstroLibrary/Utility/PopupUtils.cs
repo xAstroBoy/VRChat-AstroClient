@@ -40,7 +40,7 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static void QueHudMessage(string message)
         {
-            //ModConsole.Log($"[HudMessage] {message}");
+            //Log.Write($"[HudMessage] {message}");
             if (!WorldUtils.IsInWorld) return;
             if (HudMessage1 == null)
             {

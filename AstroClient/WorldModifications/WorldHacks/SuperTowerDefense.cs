@@ -31,7 +31,7 @@
                     SuperTowerDefensecheatPage.SetTextColor(Color.green);
                 }
 
-                ModConsole.Log($"Recognized {Name}, Cheats available.");
+                Log.Write($"Recognized {Name}, Cheats available.");
                 ResetBalance = UdonSearch.FindUdonEvent("Bank", "Restart");
                 if (ResetBalance != null)
                 {
@@ -122,7 +122,7 @@
                 //            if (!text.text.ToLower().Equals("wave"))
                 //            {
                 //                text.resizeTextForBestFit = true;
-                //                ModConsole.DebugLog($"Fixed Canvas : {text.gameObject.name}");
+                //                Log.Debug($"Fixed Canvas : {text.gameObject.name}");
                 //            }
                 //        }
                 //    }
@@ -572,7 +572,7 @@
                     item.IsEnabled = true;
                     item.Capture();
                     item.LockPosition = true;
-                    ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                    Log.Debug($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
                 }
             }
         }
@@ -921,7 +921,7 @@
                         if (item != null)
                         {
                             item.IsEnabled = true;
-                            ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                            Log.Debug($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
                         }
                     }
                     else
@@ -956,7 +956,7 @@
                         if (item != null)
                         {
                             item.IsEnabled = true;
-                            ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                            Log.Debug($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
                         }
                     }
                     else
@@ -990,7 +990,7 @@
                         if (item != null)
                         {
                             item.IsEnabled = true;
-                            ModConsole.DebugLog($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
+                            Log.Debug($"Locked {item.name} to pos ${item.FreezePos.ToString()} and Rotation {item.FreezeRot.ToString()}");
                         }
                     }
                     else
@@ -1138,7 +1138,7 @@
                         {
                             Freezer.OverrideCapture(target.transform.position, target.transform.rotation);
                             Freezer.LockPosition = true; // Prevent Re-capturing To Fully freeze and protect the button !
-                            ModConsole.DebugLog($"Locked {Freezer.gameObject.name} to pos ${Freezer.FreezePos.ToString()} and Rotation {Freezer.FreezeRot.ToString()}");
+                            Log.Debug($"Locked {Freezer.gameObject.name} to pos ${Freezer.FreezePos.ToString()} and Rotation {Freezer.FreezeRot.ToString()}");
                         }
                     }
                 }

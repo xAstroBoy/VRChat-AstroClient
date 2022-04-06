@@ -74,7 +74,7 @@ namespace AstroClient
                                     var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Possibly Lowered your FPS : {GetCurrentFPS()}";
                                     if (!Results.Contains(result))
                                     {
-                                        ModConsole.DebugLog(result);
+                                        Log.Debug(result);
                                         Results.Add(result);
                                     }
                                 }
@@ -115,7 +115,7 @@ namespace AstroClient
                         var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}, FPS : {GetCurrentFPS()}";
                         if(!Results.Contains(result))
                         {
-                            ModConsole.DebugLog(result);
+                            Log.Debug(result);
 
                             Results.Add(result);
                         }

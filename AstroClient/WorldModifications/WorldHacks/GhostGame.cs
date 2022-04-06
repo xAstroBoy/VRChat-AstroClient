@@ -176,7 +176,7 @@
             if (id == WorldIds.GhostGame)
             {
 
-                ModConsole.Log($"Recognized {Name} World, mirror toggle exploit available....");
+                Log.Write($"Recognized {Name} World, mirror toggle exploit available....");
                 isGhostGameWorld = true;
                 if (GhostGameMenu != null)
                 {

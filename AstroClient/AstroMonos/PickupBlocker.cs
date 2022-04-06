@@ -53,7 +53,7 @@ namespace AstroClient.AstroMonos
                     {
                         if (!blockeduserids[id].Blocked)
                         {
-                            ModConsole.DebugLog($"Added Block for Player {player.GetDisplayName()}  from using Pickups.");
+                            Log.Debug($"Added Block for Player {player.GetDisplayName()}  from using Pickups.");
                             blockeduserids[id].Blocked = true;
                         }
                     }
@@ -72,7 +72,7 @@ namespace AstroClient.AstroMonos
                     {
                         if (blockeduserids[id].Blocked)
                         {
-                            ModConsole.DebugLog($"Removed Block for Player {player.GetDisplayName()}  from using Pickups.");
+                            Log.Debug($"Removed Block for Player {player.GetDisplayName()}  from using Pickups.");
                             blockeduserids[id].Blocked = false;
                         }
                     }
@@ -172,7 +172,7 @@ namespace AstroClient.AstroMonos
                                             if (PickupBlocker.IsPickupBlockedUser(apiuser.id))
                                             {
                                                 instance.gameObject.TakeOwnership();
-                                                ModConsole.DebugLog($"Blocked User {apiuser.displayName} from Using Pickup {instance.gameObject.name}");
+                                                Log.Debug($"Blocked User {apiuser.displayName} from Using Pickup {instance.gameObject.name}");
                                             }
                                         }
                                     }

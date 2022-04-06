@@ -43,7 +43,7 @@
         //    {
         //        if (UserCamera.parent != userCameraParent)
         //        {
-        //            ModConsole.DebugLog("Reset Camera parent to avoid Borkage.");
+        //            Log.Debug("Reset Camera parent to avoid Borkage.");
         //            UserCamera.parent = userCameraParent;
         //        }
         //        if (ViewFinder != null)
@@ -72,14 +72,14 @@
         //        {
         //            if (UserCamera.parent != null)
         //            {
-        //                ModConsole.DebugLog("Removing Parent from Camera as isCameraFree is toggled on...");
+        //                Log.Debug("Removing Parent from Camera as isCameraFree is toggled on...");
         //                UserCamera.parent = null;
         //            }
         //        }
         //    }
         //    if (RespawnCameraOnLevelLoad)
         //    {
-        //        ModConsole.DebugLog("Resetting Camera Position...");
+        //        Log.Debug("Resetting Camera Position...");
         //        ViewFinder.gameObject.TeleportToMe(HumanBodyBones.RightHand, true, true);
         //    }
         //}

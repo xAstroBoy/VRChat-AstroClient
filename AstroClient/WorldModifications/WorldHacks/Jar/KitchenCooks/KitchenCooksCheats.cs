@@ -37,7 +37,7 @@
                 KitchenCooksWorldLoaded = true;
                 if (KitchenCooksCheatPage != null)
                 {
-                    ModConsole.Log($"Recognized {Name} World, Unlocking cheats menu!", Color.Green);
+                    Log.Write($"Recognized {Name} World, Unlocking cheats menu!", Color.Green);
                     KitchenCooksCheatPage.GetMainButton().SetInteractable(true);
                     KitchenCooksCheatPage.GetMainButton().SetTextColor(UnityEngine.Color.green);
                 }

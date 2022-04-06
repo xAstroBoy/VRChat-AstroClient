@@ -118,9 +118,9 @@
 
         private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaise();
 
-        //private static void OnLobbyLeftPatch() => ModConsole.Log("Lobby Left.");
+        //private static void OnLobbyLeftPatch() => Log.Write("Lobby Left.");
 
-        //private static void OnLobbyJoinedPatch() => ModConsole.Log("Lobby Joined.");
+        //private static void OnLobbyJoinedPatch() => Log.Write("Lobby Joined.");
 
         private static void OnRoomLeftPatch() => Event_OnRoomLeft?.SafetyRaise();
 
@@ -133,11 +133,11 @@
             {
                 string str = text;
                 object obj = __1;
-                ModConsole.DebugLog($"{str}{obj}, {__2.ToString()}");
+                Log.Debug($"{str}{obj}, {__2.ToString()}");
             }
             else
             {
-                ModConsole.DebugLog($"{text}null, {__2.ToString()}");
+                Log.Debug($"{text}null, {__2.ToString()}");
             }
 
             return true;
@@ -178,7 +178,7 @@
         private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
         {
 
-            ModConsole.Log($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
+            Log.Write($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
             PopupUtils.QueHudMessage($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
             return true;
         }
@@ -187,11 +187,11 @@
         {
             if (Bools.AntiPortal)
             {
-                ModConsole.Log($"{__instance.name}: Portal Entry Blocked!");
+                Log.Write($"{__instance.name}: Portal Entry Blocked!");
                 return false;
             }
 
-            ModConsole.Log($"{__instance.name}: Portal Entered");
+            Log.Write($"{__instance.name}: Portal Entered");
             return true;
         }
 
@@ -206,7 +206,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.LogExc(e);
+                Log.Exception(e);
             }
         }
 
@@ -265,7 +265,7 @@
         //            {
         //                var json = JsonConvert.SerializeObject(avatarData);
         //                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
-        //                //ModConsole.Log(json);
+        //                //Log.Write(json);
         //            }
         //        }
         //    }

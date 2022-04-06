@@ -113,7 +113,7 @@
                     if (playerEntry.userID == moderation.targetUserId)
                     { 
                         playerEntry.youBlocked = true;
-                        MelonLoader.ModConsole.DebugLog($"You have blocked {moderation.targetDisplayName}");
+                        MelonLoader.Log.Debug($"You have blocked {moderation.targetDisplayName}");
                         break;
                     }
                 }

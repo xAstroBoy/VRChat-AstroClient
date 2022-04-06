@@ -36,7 +36,7 @@
             SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             SyncProperties(true);
-            ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
+            Log.Debug("Attacked Successfully PickupController to object " + gameObject.name);
             isUsingUI = false;
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
             InvokeRepeating(nameof(PickupProtection), 0.1f, 0.1f);
@@ -175,7 +175,7 @@
                     var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
                     if (PickupBlocker.IsPickupBlockedUser(id))
                     {
-                        ModConsole.DebugLog($"Prevented {gameObject.name} from being used from Blacklisted user {CurrentHolderDisplayName}");
+                        Log.Debug($"Prevented {gameObject.name} from being used from Blacklisted user {CurrentHolderDisplayName}");
                         OnlineEditor.TakeObjectOwnership(gameObject);
                         if (!Settings_PickupProtector.RespawnPickupToDefaultPos)
                         {
@@ -1052,26 +1052,26 @@
                 if (!HasTriedWithSDKBase_Pickup)
                     if (SDKBase_Pickup == null)
                     {
-                        ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                        Log.Debug("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
                         SDKBase_Pickup = gameObject.AddComponent<VRC_Pickup>();
                         if (SDKBase_Pickup == null)
                         {
-                            ModConsole.DebugLog("PickupController : Failed to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                            Log.Debug("PickupController : Failed to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
                             HasTriedWithSDKBase_Pickup = true;
                         }
                         else
                         {
-                            ModConsole.DebugLog("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                            Log.Debug("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
                             if (SDKBase_Pickup.ExactGrip == null)
                             {
                                 SDKBase_Pickup.ExactGrip = gameObject.transform;
-                                ModConsole.DebugLog("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + gameObject.name);
+                                Log.Debug("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + gameObject.name);
                             }
 
                             if (SDKBase_Pickup.ExactGun == null)
                             {
                                 SDKBase_Pickup.ExactGun = gameObject.transform;
-                                ModConsole.DebugLog("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGun to object transform " + gameObject.name);
+                                Log.Debug("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGun to object transform " + gameObject.name);
                             }
 
                             hasRequiredComponentBeenAdded = true;
@@ -1083,26 +1083,26 @@
                 if (!HasTriedWithSDK2_Pickup)
                     if (SDK2_Pickup == null)
                     {
-                        ModConsole.DebugLog("PickupController : Attempting to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                        Log.Debug("PickupController : Attempting to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
                         SDK2_Pickup = gameObject.AddComponent<VRCSDK2.VRC_Pickup>();
                         if (SDK2_Pickup == null)
                         {
-                            ModConsole.DebugLog("PickupController : Failed to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                            Log.Debug("PickupController : Failed to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
                             HasTriedWithSDK2_Pickup = true;
                         }
                         else
                         {
-                            ModConsole.DebugLog("PickupController : Added VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                            Log.Debug("PickupController : Added VRCSDK2.VRC_Pickup to object " + gameObject.name);
                             if (SDK2_Pickup.ExactGrip == null)
                             {
                                 SDK2_Pickup.ExactGrip = gameObject.transform;
-                                ModConsole.DebugLog("PickupController : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + gameObject.name);
+                                Log.Debug("PickupController : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + gameObject.name);
                             }
 
                             if (SDK2_Pickup.ExactGun == null)
                             {
                                 SDK2_Pickup.ExactGun = gameObject.transform;
-                                ModConsole.DebugLog("PickupController : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + gameObject.name);
+                                Log.Debug("PickupController : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + gameObject.name);
                             }
 
                             hasRequiredComponentBeenAdded = true;
@@ -1114,26 +1114,26 @@
                 if (!HasTriedWithSDK3_Pickup)
                     if (SDK3_Pickup == null)
                     {
-                        ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                        Log.Debug("PickupController : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
                         SDK3_Pickup = gameObject.AddComponent<VRCPickup>();
                         if (SDK3_Pickup == null)
                         {
-                            ModConsole.DebugLog("PickupController : Failed to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                            Log.Debug("PickupController : Failed to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
                             HasTriedWithSDK3_Pickup = true;
                         }
                         else
                         {
-                            ModConsole.DebugLog("PickupController : Added VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                            Log.Debug("PickupController : Added VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
                             if (SDK3_Pickup.ExactGrip == null)
                             {
                                 SDK3_Pickup.ExactGrip = gameObject.transform;
-                                ModConsole.DebugLog("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + gameObject.name);
+                                Log.Debug("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + gameObject.name);
                             }
 
                             if (SDK3_Pickup.ExactGun == null)
                             {
                                 SDK3_Pickup.ExactGun = gameObject.transform;
-                                ModConsole.DebugLog("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGun to object transform " + gameObject.name);
+                                Log.Debug("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGun to object transform " + gameObject.name);
                             }
 
                             hasRequiredComponentBeenAdded = true;

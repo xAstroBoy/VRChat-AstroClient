@@ -55,7 +55,7 @@
         {
             if (isDebugging)
             {
-                ModConsole.DebugLog(msg);
+                Log.Debug(msg);
             }
         }
 

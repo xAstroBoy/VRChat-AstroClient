@@ -308,7 +308,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             if (ReportHit)
             {
-                ModConsole.DebugLog(
+                Log.Debug(
                     $"Laser is Hitting GameObject {collider.gameObject.name}  in Root {collider.gameObject.transform.root.name}\n" + 
                         $"Collider is Trigger : {collider.isTrigger}\n"+
                         $"Gameobject with layer {collider.gameObject.layer}, having name {LayerMask.LayerToName(collider.gameObject.layer)} \n" +

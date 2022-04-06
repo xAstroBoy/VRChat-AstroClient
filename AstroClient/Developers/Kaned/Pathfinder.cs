@@ -145,7 +145,7 @@
                         yield return new WaitForEndOfFrame();
                     }
                 }
-                //ModConsole.Log("Failed to find path");
+                //Log.Write("Failed to find path");
                 complete = true;
 
                 List<PathingTile> GetWalkableTiles(PathingTile ct, PathingTile targetTile)

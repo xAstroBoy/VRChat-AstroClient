@@ -38,11 +38,11 @@
         {
             if (FindAndRevealPassword())
             {
-                ModConsole.DebugLog("Found KeyCode password!");
+                Log.Debug("Found KeyCode password!");
             }
             else
             {
-                ModConsole.DebugLog("Failed to find Keycode password.");
+                Log.Debug("Failed to find Keycode password.");
                 Destroy(this);
             }
         }

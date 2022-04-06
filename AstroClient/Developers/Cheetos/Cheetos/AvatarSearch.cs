@@ -151,7 +151,7 @@
                 MiscUtils.DelayFunction(0.1f, () =>
                 {
                     AvatarSearch.ShowAvatarsOnFavcat(); // Refresh Avatar Pedestal Dump (and highlight it)
-                    ModConsole.DebugLog("Refreshed Avatar Lists");
+                    Log.Debug("Refreshed Avatar Lists");
                 });
             }
         }
@@ -166,7 +166,7 @@
             worldAvatarsids = WorldUtils_Old.GetAvatarsFromPedestals();
 
             stopwatch2.Stop();
-            ModConsole.DebugLog($"Avatar Pedestals Completed: found {worldAvatarsids.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
+            Log.Debug($"Avatar Pedestals Completed: found {worldAvatarsids.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
 
         }
 

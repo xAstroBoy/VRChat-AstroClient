@@ -15,7 +15,7 @@
             if (entry == null) return false;
             foreach (var tag in entry.AssignedTags)
             {
-                ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
+                Log.Debug($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
                 if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
@@ -31,10 +31,10 @@
             if (entry == null) return;
             foreach (var tag in entry.AssignedTags)
             {
-                ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
+                Log.Debug($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
                 if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
                 {
-                    ModConsole.DebugLog($"Destroying...");
+                    Log.Debug($"Destroying...");
 
                     UnityEngine.Object.Destroy(tag);
                 }
@@ -48,7 +48,7 @@
             if (entry == null) return null;
             foreach (var tag in entry.AssignedTags)
             {
-                ModConsole.DebugLog($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
+                Log.Debug($"Found Singletag with text : {tag.Text} , With Search {searchtext}");
                 if (tag.Text.Equals(searchtext, System.StringComparison.OrdinalIgnoreCase))
                 {
                     FoundTags.Add(tag);

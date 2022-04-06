@@ -111,7 +111,7 @@
             Regenerate(CapsuleCache, count3, CapsuleColliders);
             if (!isOnUpdate)
             {
-                ModConsole.Log(string.Format("Showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", SphereColliders.Count, BoxColliders.Count, CapsuleColliders.Count));
+                Log.Write(string.Format("Showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", SphereColliders.Count, BoxColliders.Count, CapsuleColliders.Count));
             }
         }
 
@@ -211,7 +211,7 @@
             Regenerate(SphereCache, count, SphereColliders);
             Regenerate(CubeCache, count2, BoxColliders);
             Regenerate(CapsuleCache, count3, CapsuleColliders);
-            ModConsole.DebugLog(string.Format("No longer showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", count, count2, count3));
+            Log.Debug(string.Format("No longer showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", count, count2, count3));
         }
 
         internal static readonly HashSet<int> MyRenderers = new HashSet<int>();

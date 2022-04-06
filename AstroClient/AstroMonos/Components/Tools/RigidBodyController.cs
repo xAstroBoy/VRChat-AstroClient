@@ -34,7 +34,7 @@
                 if (Rigidbody == null) Rigidbody = gameObject.GetComponent<Rigidbody>();
             }
 
-            ModConsole.DebugLog("Attacked Successfully RigidBodyController to object " + gameObject.name);
+            Log.Debug("Attacked Successfully RigidBodyController to object " + gameObject.name);
             BackupBasicBody();
             InvokeRepeating(nameof(BodyUpdate), 0.1f, 0.3f);
         }
@@ -92,7 +92,7 @@
         {
             _EditMode = true; // To be sure to backup the original properties without writing them .
             isBackupping = true;
-            ModConsole.DebugLog($"Backupping from RigidBody properties for object  {gameObject.name}");
+            Log.Debug($"Backupping from RigidBody properties for object  {gameObject.name}");
             solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
             inertiaTensor = Rigidbody.inertiaTensor;
             inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
@@ -186,7 +186,7 @@
         {
             if (gameObject.GetComponent<Rigidbody>() == null && Rigidbody == null)
             {
-                ModConsole.DebugLog($"RigidBodyController : Object {gameObject.name} Spawned Rigidbody..");
+                Log.Debug($"RigidBodyController : Object {gameObject.name} Spawned Rigidbody..");
                 Rigidbody = gameObject.AddComponent<Rigidbody>();
                 isKinematic = true;
                 Original_isKinematic = true;

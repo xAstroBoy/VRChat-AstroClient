@@ -143,7 +143,7 @@
         public static void LoadAssetBundle()
         {
             // Stolen from UIExpansionKit (https://github.com/knah/VRCMods/blob/master/UIExpansionKit) #Imnotaskidiswear
-            ModConsole.DebugLog("Loading List UI...");
+            Log.Debug("Loading List UI...");
 
             _ = playerList;
             _ = menuButton;
@@ -177,7 +177,7 @@
         // TODO : port this shit to RubyButtonAPI 
         //public static void CreateMainSubMenu()
         //{
-        //    ModConsole.DebugLog("Initializing Menu...");
+        //    Log.Debug("Initializing Menu...");
         //    var Buttons = new List<IButtonGroupElement>();
 
         //    //playerListMenus.AddButton(new SubMenu("UserInterface/QuickMenu", "PlayerListMenuPage1");
@@ -276,7 +276,7 @@
                 {
                     if (page != null)
                     {
-                        //ModConsole.DebugLog("Page: " + page.name + " State: " + state.ToString());
+                        //Log.Debug("Page: " + page.name + " State: " + state.ToString());
 
                         if (page == PlayerList_Constants.qmDashboard)
                         {

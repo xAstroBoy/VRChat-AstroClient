@@ -161,7 +161,7 @@ namespace AstroClient.PlayerList.Entries
             userId = apiUser.id;
             /*if (manager.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
             {
-                ModConsole.DebugLog("PE: OnAvInst: Bailed due to userId mismatch");
+                Log.Debug("PE: OnAvInst: Bailed due to userId mismatch");
                 return;
             }*/
                 
