@@ -1937,7 +1937,7 @@ namespace AstroClient.Tools.UdonEditor
                                     return $"empty {FullName}";
                                 }
                             }
-                        case "UnityEngine.ParticleSystem.EmissionModule":
+                        case "UnityEngine.ParticleSystem+EmissionModule":
                             {
                                 var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.EmissionModule>(address);
                                 if (result != null)
@@ -1946,7 +1946,7 @@ namespace AstroClient.Tools.UdonEditor
                                 }
                                 return $"empty {FullName}";
                             }
-                        case "UnityEngine.ParticleSystem.EmissionModule[]":
+                        case "UnityEngine.ParticleSystem_EmissionModule[]":
                             {
                                 var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.EmissionModule[]>(address);
                                 if (result != null && result.Length != 0)
@@ -1964,7 +1964,7 @@ namespace AstroClient.Tools.UdonEditor
                                     return $"empty {FullName}";
                                 }
                             }
-                        case "UnityEngine.ParticleSystem.MinMaxCurve":
+                        case "UnityEngine.ParticleSystem+MinMaxCurve":
                             {
                                 var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.MinMaxCurve>(address);
                                 if (result != null)
@@ -1973,7 +1973,7 @@ namespace AstroClient.Tools.UdonEditor
                                 }
                                 return $"empty {FullName}";
                             }
-                        case "UnityEngine.ParticleSystem.MinMaxCurve[]":
+                        case "UnityEngine.ParticleSystem+MinMaxCurve[]":
                             {
                                 var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.MinMaxCurve[]>(address);
                                 if (result != null && result.Length != 0)
@@ -2227,12 +2227,12 @@ namespace AstroClient.Tools.UdonEditor
                                     return $"empty {FullName}";
                                 }
                             }
-                        case "VRC.SDKBase.VRCPlayerApi.TrackingData":
+                        case "VRC.SDKBase.VRCPlayerApi+TrackingData":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi.TrackingData>(address);
                                 return result.ToString();
                             }
-                        case "VRC.SDKBase.VRCPlayerApi.TrackingData[]":
+                        case "VRC.SDKBase.VRCPlayerApi+TrackingData[]":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi.TrackingData[]>(address);
                                 if (result != null && result.Length != 0)
@@ -2250,12 +2250,12 @@ namespace AstroClient.Tools.UdonEditor
                                     return $"empty {FullName}";
                                 }
                             }
-                        case "VRC.SDKBase.VRCPlayerApi.TrackingDataType":
+                        case "VRC.SDKBase.VRCPlayerApi+TrackingDataType":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi.TrackingDataType>(address);
                                 return result.ToString();
                             }
-                        case "VRC.SDKBase.VRCPlayerApi.TrackingDataType[]":
+                        case "VRC.SDKBase.VRCPlayerApi+TrackingDataType[]":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi.TrackingDataType[]>(address);
                                 if (result != null && result.Length != 0)
@@ -2273,12 +2273,12 @@ namespace AstroClient.Tools.UdonEditor
                                     return $"empty {FullName}";
                                 }
                             }
-                        case "VRC.SDKBase.VRC_Pickup.PickupHand":
+                        case "VRC.SDKBase.VRC_Pickup+PickupHand":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRC_Pickup.PickupHand>(address);
                                 return result.ToString();
                             }
-                        case "VRC.SDKBase.VRC_Pickup.PickupHand[]":
+                        case "VRC.SDKBase.VRC_Pickup+PickupHand[]":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRC_Pickup.PickupHand[]>(address);
                                 if (result != null && result.Length != 0)
@@ -2296,12 +2296,12 @@ namespace AstroClient.Tools.UdonEditor
                                     return $"empty {FullName}";
                                 }
                             }
-                        case "VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation":
+                        case "VRC.SDKBase.VRC_SceneDescriptor+SpawnOrientation":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation>(address);
                                 return result.ToString();
                             }
-                        case "VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation[]":
+                        case "VRC.SDKBase.VRC_SceneDescriptor+SpawnOrientation[]":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation[]>(address);
                                 if (result != null && result.Length != 0)
@@ -2320,7 +2320,7 @@ namespace AstroClient.Tools.UdonEditor
                                 }
                             }
 
-                        case "UnityEngine.VRC.SDKBase.VRCUrl":
+                        case "VRC.SDKBase.VRCUrl":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRCUrl>(address);
                                 if (result != null)
@@ -2329,7 +2329,7 @@ namespace AstroClient.Tools.UdonEditor
                                 }
                                 return $"empty {FullName}";
                             }
-                        case "UnityEngine.VRC.SDKBase.VRCUrl[]":
+                        case "VRC.SDKBase.VRCUrl[]":
                             {
                                 var result = heap.GetHeapVariable<VRC.SDKBase.VRCUrl[]>(address);
                                 if (result != null && result.Length != 0)
@@ -2816,7 +2816,7 @@ namespace AstroClient.Tools.UdonEditor
             }
             catch (Exception e)
             {
-                Log.Exception(e);
+                //Log.Exception(e);
                 return $"Error Unboxing {obj.GetIl2CppType().FullName}";
             }
         }

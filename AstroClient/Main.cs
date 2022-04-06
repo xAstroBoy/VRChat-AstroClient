@@ -65,6 +65,9 @@
             LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
 
             // New Cheetah Console/Log Stuff
+            WriteBanner();
+            ConfigManager.Validate();
+            ConfigManager.Load();
             Log.Level = ConfigManager.General.DebugLog == true ? LogLevel.DEBUG : LogLevel.INFO;
             WindowsUtils.ShowConsole(true);
             WindowsUtils.Initialize(); // Tell the console to support Windows Anniversary Update colors
@@ -72,9 +75,6 @@
             Log.Write("Initializing...");
 
             //ModConsole.Initialize("AstroClient");
-            //WriteBanner();
-            ConfigManager.Validate();
-            ConfigManager.Load();
             //if (ModConsole.DebugMode != ConfigManager.General.DebugLog)
             //{
             //    ModConsole.DebugMode = ConfigManager.General.DebugLog;
