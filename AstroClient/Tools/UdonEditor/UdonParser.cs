@@ -13,8 +13,9 @@
         {
             var result = new List<UdonBehaviour>();
             var currentlist = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
-            foreach (var item in currentlist)
+            for (int i = 0; i < currentlist.Count; i++)
             {
+                UdonBehaviour item = currentlist[i];
                 if (item.serializedProgramAsset != null)
                 {
                     if (item.serializedProgramAsset.Equals(UdonPrograms.InteractProgram) ||

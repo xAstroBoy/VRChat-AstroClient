@@ -80,11 +80,10 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
-
                                     return listoutput.ToString();
                                 }
                                 else
@@ -327,9 +326,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -354,9 +353,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -381,9 +380,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -409,9 +408,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.GetType().FullName + " ,");
+                                        listoutput.AppendLine(result[i].GetType().FullName + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -464,9 +463,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -491,9 +490,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -519,9 +518,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -547,9 +546,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -574,9 +573,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -601,9 +600,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -629,9 +628,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.GetType().FullName + " ,");
+                                        listoutput.AppendLine(result[i].GetType().FullName + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -656,9 +655,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -683,9 +682,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -710,9 +709,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -737,9 +736,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();
@@ -764,9 +763,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();

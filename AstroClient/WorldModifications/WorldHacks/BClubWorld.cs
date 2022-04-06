@@ -470,7 +470,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (chair.name.Contains("Chair") || chair.name.Contains("Seat"))
                 {
                     var action = chair.FindUdonEvent("Sit");
-                    if (action != null && !_chairs.Contains(action))
+                    if (action != null && _chairs.Contains(action))
                     {
                         _chairs.Add(action);
                     }
@@ -482,6 +482,11 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static IEnumerator DoBlueChairSpam()
         {
+            if (_chairs.Count <= 0)
+            {
+                Log.Error("No bluechairs found!");
+                yield break;
+            }
             for (; ; )
             {
                 if (!isCurrentWorld)

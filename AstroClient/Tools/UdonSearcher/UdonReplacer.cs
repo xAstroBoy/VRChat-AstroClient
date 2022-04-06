@@ -32,13 +32,15 @@ namespace AstroClient.Tools.UdonSearcher
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             if (udons.Count() != 0)
             {
-                foreach (var udonnode in udons)
+                for (int i1 = 0; i1 < udons.Count; i1++)
                 {
+                    UdonBehaviour udonnode = udons[i1];
                     var unpackedudon = udonnode.ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
-                        foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
+                        for (int i2 = 0; i2 < unpackedudon.IUdonSymbolTable.GetSymbols().array.Count; i2++)
                         {
+                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols().array[i2];
                             if (symbol != null)
                             {
                                 var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
@@ -71,8 +73,9 @@ namespace AstroClient.Tools.UdonSearcher
                                                     {
                                                         var patchedlist = new List<string>();
                                                         bool modified = false;
-                                                        foreach (var item in list)
+                                                        for (int i = 0; i < list.Count; i++)
                                                         {
+                                                            string item = list[i];
                                                             if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
                                                                 if (item.Equals(find, StringComparison.InvariantCultureIgnoreCase))
@@ -132,8 +135,9 @@ namespace AstroClient.Tools.UdonSearcher
                                                     {
                                                         var patchedlist = new List<TextMeshPro>();
                                                         bool modified = false;
-                                                        foreach (var item in list)
+                                                        for (int i = 0; i < list.Count; i++)
                                                         {
+                                                            TextMeshPro item = list[i];
                                                             if (item.text != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
                                                                 if (item.text.isMatch(find))
@@ -195,8 +199,9 @@ namespace AstroClient.Tools.UdonSearcher
                                                     {
                                                         var patchedlist = new List<TextMeshProUGUI>();
                                                         bool modified = false;
-                                                        foreach (var item in list)
+                                                        for (int i = 0; i < list.Count; i++)
                                                         {
+                                                            TextMeshProUGUI item = list[i];
                                                             if (item.text != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
                                                                 if (item.text.isMatch(find))
@@ -266,8 +271,9 @@ namespace AstroClient.Tools.UdonSearcher
                                                     }
                                                     if (list.Count() != 0)
                                                     {
-                                                        foreach (var item in list)
+                                                        for (int i = 0; i < list.Count; i++)
                                                         {
+                                                            TextAsset item = list[i];
                                                             if (item.text != null &&
                                                                 item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                             {

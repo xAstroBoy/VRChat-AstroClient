@@ -30,8 +30,11 @@
 
         private static string RemoveInvalid(string str)
         {
-            foreach (char c in Path.GetInvalidFileNameChars())
-                str = str.Replace(c, '_');
+            char[] array = Path.GetInvalidFileNameChars();
+            for (int i = 0; i < array.Length; i++)
+            {
+                str = str.Replace(array[i], '_');
+            }
             return str;
         }
 
