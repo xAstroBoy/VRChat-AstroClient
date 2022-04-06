@@ -78,9 +78,21 @@ public static class Log
     /// <param name="line"></param>
     public static void Debug(string line)
     {
-        if (DebugMode)
+        if (DebugMode || Level >= LogLevel.DEBUG)
         {
-            Write($"{line}", LogLevel.DEGUG);
+            Write($"{line}", Color.White, LogLevel.DEBUG);
+        }
+    }
+
+    /// <summary>
+    /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
+    /// </summary>
+    /// <param name="line"></param>
+    public static void Debug(string line, Color color)
+    {
+        if (DebugMode || Level >= LogLevel.DEBUG)
+        {
+            Write($"{line}", color, LogLevel.DEBUG);
         }
     }
 
@@ -131,7 +143,7 @@ public static class Log
     public static void Write(string message, Color color, LogLevel level = LogLevel.INFO)
     {
         var lcolor = Color.White;
-        if (level == LogLevel.DEGUG)
+        if (level == LogLevel.DEBUG)
         {
             lcolor = Color.HTML.Yellow;
         }
@@ -165,7 +177,7 @@ public static class Log
 
     private static void Initialize()
     {
-        if (Bools.IsDebugMode) { Level = LogLevel.DEGUG; }
+        if (Bools.IsDebugMode) { Level = LogLevel.DEBUG; }
         if (!Directory.Exists(_folderPath)) { Directory.CreateDirectory(_folderPath); }
         if (File.Exists(_logPath)) { File.Move(_logPath, _oldLogPath); }
         _initialized = true;

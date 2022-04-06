@@ -38,7 +38,7 @@
                         {
                             if (type.FullName == "MelonLoader.Core")
                             {
-                                ModConsole.DebugLog("Found MelonLoader Core!", Color.Green);
+                                Log.Debug("Found MelonLoader Core!", Color.Green);
                                 foreach (var field in type.GetFields(CurrentFlags))
                                 {
                                     ModConsole.DebugLog($"Found Field : {field.Name}");

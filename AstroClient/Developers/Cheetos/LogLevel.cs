@@ -6,6 +6,6 @@
         ERROR,
         WARNING,
         INFO,
-        DEGUG,
+        DEBUG,
     }
 }
