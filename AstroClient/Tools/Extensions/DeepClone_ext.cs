@@ -14,7 +14,7 @@
         {
             if (GetCopyOfDebugMode)
             {
-                ModConsole.DebugWarning("GetCopyOf Debug :" + msg);
+                Log.DebugWarn("GetCopyOf Debug :" + msg);
             }
         }
 

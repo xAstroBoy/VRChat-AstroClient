@@ -934,13 +934,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                ModConsole.DebugWarningExc(e);
+                                Log.DebugWarnExc(e);
                             }
                         }
                     }
                     else
                     {
-                        ModConsole.DebugWarning("Failed to find Bedroom Preview Button!");
+                        Log.DebugWarn("Failed to find Bedroom Preview Button!");
                     }
 
                     if (room_ToggleLock != null)
@@ -984,13 +984,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                ModConsole.DebugWarningExc(e);
+                                Log.DebugWarnExc(e);
                             }
                         }
                     }
                     else
                     {
-                        ModConsole.DebugWarning("Failed to find Bedroom Toggle Lock Button!");
+                        Log.DebugWarn("Failed to find Bedroom Toggle Lock Button!");
                     }
 
                     if (room_ToggleLooking != null)
@@ -1035,13 +1035,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                ModConsole.DebugWarningExc(e);
+                                Log.DebugWarnExc(e);
                             }
                         }
                     }
                     else
                     {
-                        ModConsole.DebugWarning("Failed to find Bedroom Toggle Looking Button!");
+                        Log.DebugWarn("Failed to find Bedroom Toggle Looking Button!");
                     }
 
                     if (room_ToggleIncognito != null)
@@ -1087,12 +1087,12 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                ModConsole.DebugWarningExc(e);
+                                Log.DebugWarnExc(e);
                             }
                         }
                         else
                         {
-                            ModConsole.DebugWarning("Failed to find Bedroom Incognito Button!");
+                            Log.DebugWarn("Failed to find Bedroom Incognito Button!");
                         }
                     }
                     if (room_DND != null)
@@ -1137,13 +1137,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             catch (Exception e)
                             {
-                                ModConsole.DebugWarningExc(e);
+                                Log.DebugWarnExc(e);
                             }
                         }
                     }
                     else
                     {
-                        ModConsole.DebugWarning("Failed to find  Bedroom Toggle Do Not Disturb Button!");
+                        Log.DebugWarn("Failed to find  Bedroom Toggle Do Not Disturb Button!");
                     }
                 }
 

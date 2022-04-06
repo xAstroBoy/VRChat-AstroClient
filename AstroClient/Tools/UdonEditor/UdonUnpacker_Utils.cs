@@ -27,7 +27,7 @@
                         }
                         else
                         {
-                            ModConsole.DebugWarning($"Can't Unpack Udon Behaviour {udon.name}, IUdonHeap is Null!");
+                            Log.DebugWarn($"Can't Unpack Udon Behaviour {udon.name}, IUdonHeap is Null!");
                             return null;
                         }
                         if (program != null && symbol_table != null && heap != null)
@@ -37,13 +37,13 @@
                     }
                     else
                     {
-                        ModConsole.DebugWarning($"Can't Unpack Udon Behaviour {udon.name}, IUdonSymbolTable is Null!");
+                        Log.DebugWarn($"Can't Unpack Udon Behaviour {udon.name}, IUdonSymbolTable is Null!");
                         return null;
                     }
                 }
                 else
                 {
-                    ModConsole.DebugWarning($"Can't Unpack Udon Behaviour {udon.name}, IUdonProgram is Null!");
+                    Log.DebugWarn($"Can't Unpack Udon Behaviour {udon.name}, IUdonProgram is Null!");
 
                     return null;
                 }
