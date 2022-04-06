@@ -35,8 +35,10 @@
             stopwatch.Start();
             Log.Debug($"Loading Resources from {classtype.FullName}");
             int fails = 0;
-            foreach (var item in classtype.GetProperties(BindingFlags.NonPublic | BindingFlags.Static))
+            PropertyInfo[] array = classtype.GetProperties(BindingFlags.NonPublic | BindingFlags.Static);
+            for (int i = 0; i < array.Length; i++)
             {
+                PropertyInfo item = array[i];
                 if (item != null)
                 {
                     try

@@ -344,6 +344,48 @@
 
         #endregion badge.png
 
+        #region cheetos.png
+
+        private static Texture2D _cheetos;
+        private static Sprite _cheetos_sprite;
+
+        /// <summary>
+        ///     Loads badge.png in resources as Texture2D
+        /// </summary>
+        internal static Texture2D cheetos
+        {
+            get
+            {
+                if (_cheetos == null)
+                {
+                    _cheetos = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}cheetos.png"));
+                    _cheetos.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _cheetos;
+                }
+
+                return _cheetos;
+            }
+        }
+
+        /// <summary>
+        ///     Loads badge.png in resources as sprite
+        /// </summary>
+        internal static Sprite cheetos_sprite
+        {
+            get
+            {
+                if (_cheetos_sprite == null)
+                {
+                    _cheetos_sprite = cheetos.ToSprite(true);
+                    return _cheetos_sprite;
+                }
+
+                return _cheetos_sprite;
+            }
+        }
+
+        #endregion badge.png
+
         #region blank.png
 
         private static Texture2D _blank;

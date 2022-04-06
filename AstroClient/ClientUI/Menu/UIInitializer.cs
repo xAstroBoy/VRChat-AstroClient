@@ -67,7 +67,7 @@
             ExploitsMenu.InitButtons(TabIndexs.Exploits);
             WorldsCheats.InitButtons(TabIndexs.Cheats);
             InstanceHistoryMenu.InitButtons(TabIndexs.History);
-            AdminMenu.InitButtons(TabIndexs.Admin);
+            CheetosMenu.InitButtons(TabIndexs.Cheetos);
             DevMenu.InitButtons(TabIndexs.Dev);
 
             // Misc
