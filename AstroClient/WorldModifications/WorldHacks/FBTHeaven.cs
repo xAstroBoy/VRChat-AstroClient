@@ -166,7 +166,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
                 else
                 {
-                    ModConsole.Error("Could not find rootObject!");
+                    Log.Error("Could not find rootObject!");
                 }
             }
             else

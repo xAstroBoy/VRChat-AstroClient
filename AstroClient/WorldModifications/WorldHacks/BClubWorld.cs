@@ -635,7 +635,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
                 else
                 {
-                    ModConsole.Error("Failed to find Penthouse!");
+                    Log.Error("Failed to find Penthouse!");
                 }
 
                 MiscUtils.DelayFunction(2f, () =>
@@ -712,7 +712,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     VIPRoom = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP").gameObject;
                     if (VIPRoom == null)
                     {
-                        ModConsole.Error("VIP Bedroom was not found!");
+                        Log.Error("VIP Bedroom was not found!");
                     }
 
                     CreateVIPUnlockButton(new Vector3(-80.4f, 16.0598f, -1.695f), new Vector3(0f, 0, 0f));
@@ -727,7 +727,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     BedroomVIProot = GameObjectFinder.Find("Bedroom VIP");
                     if (BedroomVIProot == null)
                     {
-                        ModConsole.Error("VIP Bedroom Root was not found!");
+                        Log.Error("VIP Bedroom Root was not found!");
                     }
 
                 }
@@ -824,7 +824,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             else
             {
-                ModConsole.Error("VIP Button not found!");
+                Log.Error("VIP Button not found!");
             }
         }
 
