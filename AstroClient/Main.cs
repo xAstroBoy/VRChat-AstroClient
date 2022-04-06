@@ -8,6 +8,7 @@
     using System.Diagnostics;
     using System.Reflection;
     using AstroEventArgs;
+    using Cheetah;
     using CheetosConsole;
     using ClientResources.Loaders;
     using ClientUI.Menu.ItemTweakerV2.Selector;
@@ -61,8 +62,15 @@
 
         private IEnumerator InitializeClient()
         {
-
             LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
+
+            // New Cheetah Console/Log Stuff
+            Log.Level = ConfigManager.General.DebugLog == true ? LogLevel.DEGUG : LogLevel.INFO;
+            WindowsUtils.ShowConsole(true);
+            WindowsUtils.Initialize(); // Tell the console to support Windows Anniversary Update colors
+            ConsoleUtils.SetColor(ConsoleUtils.ColorType.FOREGROUND, Cheetah.Color.White);
+            Log.Write("Initializing...");
+
             ModConsole.Initialize("AstroClient");
             WriteBanner();
             ConfigManager.Validate();
@@ -81,6 +89,7 @@
             DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
             DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
 
+            Log.Write("Initialization complete!", Cheetah.Color.Green);
             yield return null;
         }
 
@@ -132,8 +141,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
-                ModConsole.ErrorExc(e);
+                Log.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
+                Log.Exception(e);
             }
         }
 
@@ -159,7 +168,7 @@
                         }
                         catch (System.Exception e)
                         {
-                            ModConsole.ErrorExc(e);
+                            Log.Exception(e);
                         }
 
                         try
@@ -168,7 +177,7 @@
                         }
                         catch (System.Exception e)
                         {
-                            ModConsole.ErrorExc(e);
+                            Log.Exception(e);
                         }
 
                         try
@@ -177,7 +186,7 @@
                         }
                         catch (System.Exception e)
                         {
-                            ModConsole.ErrorExc(e);
+                            Log.Exception(e);
                         }
                         GameEvents.Add(component);
                     }
@@ -262,45 +271,31 @@
 
         private void Start_VRChat_OnQuickMenuInit()
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
+            var sw = Stopwatch.StartNew();
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
-
             DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
-            stopwatch.Stop();
-            ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
+            sw.Stop(); Log.Debug($"QuickMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
 
         private void Start_VRChat_OnActionMenuInit()
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
+            var sw = Stopwatch.StartNew();
             Event_VRChat_OnActionMenuInit?.SafetyRaise();
-            stopwatch.Stop();
-            ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
+            sw.Stop(); Log.Debug($"ActionMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
 
         private void Start_VRChat_OnUserInteractMenuInit()
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
+            var sw = Stopwatch.StartNew();
             UserInteractMenuBtns.InitUserButtons(); //UserMenu Main Button
-            stopwatch.Stop();
-            ModConsole.DebugLog($"UserInteractMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
+            sw.Stop(); Log.Debug($"UserInteractMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
 
         private void Start_VRChat_OnUiManagerInit()
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
+            var sw = Stopwatch.StartNew();
             Event_VRChat_OnUiManagerInit?.SafetyRaise();
-
-            stopwatch.Stop();
-            ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
+            sw.Stop(); ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {sw.ElapsedMilliseconds}ms");
         }
 
     }

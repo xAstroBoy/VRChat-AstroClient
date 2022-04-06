@@ -9,6 +9,9 @@
     using System.Threading.Tasks;
     using Console = CheetosConsole.Console;
 
+    /// <summary>
+    /// About to be deprecated
+    /// </summary>
     public class ModConsole
     {
         public static string ModName { get; private set; } = string.Empty;
