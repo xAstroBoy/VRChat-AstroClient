@@ -1,8 +1,6 @@
-﻿using System.Collections.Concurrent;
-
-namespace AstroClient.Moderation
+﻿namespace AstroClient.Moderation
 {
-    #region Imports
+    #region Usings
 
     using System;
     using System.Collections;
@@ -12,6 +10,7 @@ namespace AstroClient.Moderation
     using Photon.Realtime;
     using Tools.Extensions;
     using xAstroBoy.Utility;
+    using System.Collections.Concurrent;
 
     #endregion
 

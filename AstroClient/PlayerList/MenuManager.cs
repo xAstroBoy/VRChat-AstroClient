@@ -92,7 +92,7 @@
             curMenuState = new menuStates( false, false, false, false, false );
         }
 
-        //TODO : port this shit to AstroButtonAPI
+        // : port this shit to AstroButtonAPI
 
         //public static void OnUiManagerInit()
         //{
@@ -174,7 +174,7 @@
         }
 
 
-        // TODO : port this shit to RubyButtonAPI 
+        // : port this shit to RubyButtonAPI 
         //public static void CreateMainSubMenu()
         //{
         //    Log.Debug("Initializing Menu...");

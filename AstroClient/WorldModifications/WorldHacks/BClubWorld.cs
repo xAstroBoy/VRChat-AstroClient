@@ -359,7 +359,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (IsMoanSpamEnabled)
                 {
-                    yield return new WaitForSeconds(0.001f);
+                    yield return new WaitForSeconds(0.1f);
                 }
                 else
                 {
@@ -388,7 +388,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (IsFreezeLockEnabed)
                 {
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(1f);
                 }
                 else
                 {
@@ -417,7 +417,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (IsFreezeUnlockEnabed)
                 {
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(1f);
                 }
                 else
                 {
@@ -443,9 +443,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield break;
                 }
 
-                foreach (var bell in _bells)
+                for (int i = 0; i < _bells.Count; i++)
                 {
-                    bell?.InvokeBehaviour();
+                    _bells[i]?.InvokeBehaviour();
                     yield return new WaitForSeconds(0.1f);
                 }
 

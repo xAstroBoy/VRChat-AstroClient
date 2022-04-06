@@ -100,7 +100,6 @@
             }
 
             return false;
-            // #Attn Look in to this maybe
             //bool flag2 = ModerationAgainstMe.ToArray().ToList().Exists((ApiPlayerModeration m)
             //	=> m.moderationType == ApiPlayerModeration.ModerationType.Unmute && m.sourceUserId == UserID);
             //if (flag2)
@@ -157,7 +156,6 @@
         [Obsolete("Currently Borked, needs fixed")]
         public static void FetchModeration(this VRC.Management.ModerationManager instance)
         {
-            // #Attn FIX
             //ApiModeration.LocalFetchAll(new System.Action<Il2CppSystem.Collections.Generic.IEnumerable<ApiModeration>>((mods) =>
             //{
             //	var newlist = new Il2CppSystem.Collections.Generic.Dictionary<string, List<ApiModeration>>();

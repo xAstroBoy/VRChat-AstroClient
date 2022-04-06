@@ -9,6 +9,7 @@
     using AstroEventArgs;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
+    using Cheetah;
     using Constants;
     using ExitGames.Client.Photon;
     using Harmony;
@@ -97,7 +98,11 @@
             }
             catch (Exception e)
             {
-                Log.Error($"[Cheetos Patches] Error in applying patches : {e}");
+                Log.Error($"{ConsoleUtils.ForegroundColor(Cheetah.Color.HTML.Yellow)}[Cheetos Patches]{ConsoleUtils.ForegroundColor(Cheetah.Color.HTML.Red)} Error in applying patches : {e}");
+            }
+            finally
+            {
+                Log.Debug($"{ConsoleUtils.ForegroundColor(Cheetah.Color.HTML.Yellow)}[Cheetos' Patches]{ConsoleUtils.ForegroundColor(Cheetah.Color.HTML.Green)} Patches applied!");
             }
         }
 

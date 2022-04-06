@@ -46,8 +46,9 @@
                 {
                     if (InstanceManager.instances.Count() != 0)
                     {
-                        foreach (var instance in InstanceManager.instances)
+                        for (int i = 0; i < InstanceManager.instances.Count; i++)
                         {
+                            InstanceManager.WorldInstance instance = InstanceManager.instances[i];
                             var buttonText = (instance.worldName + ": " + instance.instanceId.Split('~')[0]).Truncate(60);
                             var Tooltip = instance.worldName + ": " + instance.instanceId.Split('~')[0];
                             var btn = new QMSingleButton(TabMenu, buttonText, () => WorldManager.EnterWorld(instance.worldId + ":" + instance.instanceId), Tooltip, System.Drawing.Color.White);
@@ -74,8 +75,10 @@
         {
             HasGenerated = false;
             if (GeneratedButtons.Count != 0)
-                foreach (var item in GeneratedButtons)
-                    item.DestroyMe();
+                for (int i = 0; i < GeneratedButtons.Count; i++)
+                {
+                    GeneratedButtons[i].DestroyMe();
+                }
             //if (Listeners.Count != 0)
             //{
             //    foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
