@@ -27,7 +27,7 @@
                     VRCAvatarManager.field_Private_Static_Action_3_Player_GameObject_VRC_AvatarDescriptor_0)
                     .Cast<Il2CppSystem.Action<Player, GameObject, VRC.SDKBase.VRC_AvatarDescriptor>>();
 
-            ModConsole.DebugLog("Hooked VRCAvatarManager");
+            Log.Debug("Hooked VRCAvatarManager");
         }
 
         private static void OnAvatarInstantiate(Player player, GameObject avatar, VRC_AvatarDescriptor descriptor)

@@ -21,7 +21,7 @@ namespace AstroClient.Startup.Hooks
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (Bools.IsDeveloper)
-                ModConsole.DebugLog($"Scene Name: {sceneName}");
+                Log.Debug($"Scene Name: {sceneName}");
         }
 
         internal override void ExecutePriorityPatches()
@@ -39,17 +39,17 @@ namespace AstroClient.Startup.Hooks
         {
             unsafe
             {
-                ModConsole.DebugLog("Hooking FadeTo");
+                Log.Debug("Hooking FadeTo");
                 var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_1))).GetValue(null);
                 MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), GetPointerPatch(nameof(FadeToPatch)));
                 _fadeToDelegate = Marshal.GetDelegateForFunctionPointer<FadeToDelegate>(originalMethod);
                 if (_fadeToDelegate != null)
                 {
-                    ModConsole.DebugLog("Hooked OnFadeTo");
+                    Log.Debug("Hooked OnFadeTo");
                 }
                 else
                 {
-                    ModConsole.Error("Failed to hook OnFadeTo!");
+                    Log.Error("Failed to hook OnFadeTo!");
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace AstroClient.Startup.Hooks
                 if (thisPtr != IntPtr.Zero && fadeTypePtr != IntPtr.Zero)
                 {
                     string fadeType = IL2CPP.Il2CppStringToManaged(fadeTypePtr);
-                    ModConsole.DebugLog("FadeType Called : " + fadeType + " With duration : " + duration);
+                    Log.Debug($"FadeType Called : {fadeType} With duration : {duration}");
                     if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
                         RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                     {
