@@ -22,7 +22,7 @@
                 }
                 else
                 {
-                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                    Log.DebugWarn($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
                 }
             }
             return null;

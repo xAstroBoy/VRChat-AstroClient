@@ -28,7 +28,7 @@ namespace AstroClient.AstroMonos.AstroUdons
         {
             if (AssignedProgram == null)
             {
-                ModConsole.Error("Custom Pickup Events Can't Load as Program Asset is null!");
+                Log.Error("Custom Pickup Events Can't Load as Program Asset is null!");
                 Destroy(this);
             }
 
