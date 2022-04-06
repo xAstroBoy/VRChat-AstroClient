@@ -1,10 +1,9 @@
-﻿using Photon.Pun;
-using VRC.Udon;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
-    #region Imports
+    #region Usings
 
+    using Photon.Pun;
+    using VRC.Udon;
     using System;
     using System.Collections.Generic;
     using AstroEventArgs;
@@ -96,7 +95,6 @@ namespace AstroClient
             UdonEventsHook.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
 
         }
-
         
         internal virtual void OnRawAudio(VRCPlayer player, float[] RawAudio, int sample_rate)
         {
