@@ -60,6 +60,8 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static object MoanSpam_CancellationToken { get; set; }
         private static object DoorLockFreeze_CancellationToken { get; set; }
         private static object DoorUnlockFreeze_CancellationToken { get; set; }
+        private static object BlueChairSpam_CancellationToken { get; set; }
+        private static object RainbowSpam_CancellationToken { get; set; }
 
         #region BlueChairSpam
 
@@ -94,7 +96,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (value)
                 {
-                    if (DoorUnlockFreeze_CancellationToken == null)
+                    if (DoorbellSpam_CancellationToken == null)
                     {
                         Log.Write("Doorbell Spam Enabled!");
                         SpamDoorbells();
@@ -103,7 +105,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                 else
                 {
                     Log.Write("Doorbell Spam Disabled!");
-                    DoorUnlockFreeze_CancellationToken = null;
+                    MelonCoroutines.Stop(DoorbellSpam_CancellationToken);
+                    DoorbellSpam_CancellationToken = null;
                 }
                 _isDoorBellSpamEnabled = value;
             }
@@ -129,6 +132,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 else
                 {
                     Log.Write("Door Locks Unfrozen");
+                    MelonCoroutines.Stop(DoorLockFreeze_CancellationToken);
                     DoorLockFreeze_CancellationToken = null;
                 }
                 _isFreezeLockEnabed = value;
@@ -152,6 +156,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 else
                 {
                     Log.Write("Door Locks Unfrozen");
+                    MelonCoroutines.Stop(DoorUnlockFreeze_CancellationToken);
                     DoorUnlockFreeze_CancellationToken = null;
                 }
                 _isFreezeUnlockEnabed = value;
@@ -171,6 +176,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                 else
                 {
                     Log.Write("Rainbow Disabled.");
+                    MelonCoroutines.Stop(RainbowSpam_CancellationToken);
+                    RainbowSpam_CancellationToken = null;
                 }
                 _isRainbowEnabled = value;
             }
@@ -194,6 +201,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 else
                 {
                     Log.Write("Moan Spam Disabled.");
+                    MelonCoroutines.Stop(MoanSpam_CancellationToken);
                     MoanSpam_CancellationToken = null;
                 }
                 _isMoanSpamEnabled = value;
@@ -296,7 +304,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void Rainbow()
         {
-            MelonCoroutines.Start(RainbowLoop());
+            RainbowSpam_CancellationToken = MelonCoroutines.Start(RainbowLoop());
         }
 
         private static IEnumerator RainbowLoop()
@@ -315,14 +323,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield return new WaitForSeconds(0.1f);
                 }
 
-                if (IsRainbowEnabled)
-                {
-                    yield return new WaitForSeconds(0.001f);
-                }
-                else
-                {
-                    yield break;
-                }
+                yield return null;
             }
         }
 
@@ -352,15 +353,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 MoanSpamBehaviour?.InvokeBehaviour();
-
-                if (IsMoanSpamEnabled)
-                {
-                    yield return new WaitForSeconds(0.1f);
-                }
-                else
-                {
-                    yield break;
-                }
+                yield return new WaitForSeconds(0.1f);
             }
         }
 
@@ -382,14 +375,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (LockIndicator6.active != true) ToggleDoor(6);
                 if (LockIndicator7.active != true) ToggleDoor(7);
 
-                if (IsFreezeLockEnabed)
-                {
-                    yield return new WaitForSeconds(1f);
-                }
-                else
-                {
-                    yield break;
-                }
+                yield return new WaitForSeconds(1f);
             }
         }
 
@@ -411,14 +397,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (LockIndicator6.active != false) ToggleDoor(6);
                 if (LockIndicator7.active != false) ToggleDoor(7);
 
-                if (IsFreezeUnlockEnabed)
-                {
-                    yield return new WaitForSeconds(1f);
-                }
-                else
-                {
-                    yield break;
-                }
+                yield return new WaitForSeconds(1f);
             }
         }
 
@@ -445,14 +424,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield return new WaitForSeconds(0.1f);
                 }
 
-                if (IsDoorbellSpamEnabled)
-                {
-                    yield return new WaitForSeconds(0.001f);
-                }
-                else
-                {
-                    yield break;
-                }
+                yield return new WaitForSeconds(0.001f);
             }
         }
 
@@ -492,20 +464,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield break;
                 }
 
-                foreach (var chair in _chairs)
+                for (int i = 0; i < _chairs.Count; i++)
                 {
-                    chair?.InvokeBehaviour();
+                    _chairs[i]?.InvokeBehaviour();
                     yield return new WaitForSeconds(0.001f);
                 }
 
-                if (IsBlueChairEnabled)
-                {
-                    yield return new WaitForSeconds(0.001f);
-                }
-                else
-                {
-                    yield break;
-                }
+                yield return null;
             }
         }
 
