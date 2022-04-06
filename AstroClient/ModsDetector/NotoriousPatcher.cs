@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using Cheetos;
@@ -39,8 +40,9 @@
                     Assembly[] LoadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
                     if (LoadedAssemblies != null)
                     {
-                        foreach (var item in LoadedAssemblies)
+                        for (int i = 0; i < LoadedAssemblies.Length; i++)
                         {
+                            Assembly item = LoadedAssemblies[i];
                             var CopyrightAttrib = GetAssemblyAttribute<AssemblyCopyrightAttribute>(item);
                             if (item.FullName.Contains("Notorious-Loader"))
                             {

@@ -7,5 +7,6 @@
         WARNING,
         INFO,
         DEBUG,
+        FINE,
     }
 }

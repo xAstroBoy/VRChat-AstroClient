@@ -73,6 +73,18 @@ public static class Log
     }
 
     /// <summary>
+    /// Writes a line to the logger as <see cref="LogLevel.FINE"/>
+    /// </summary>
+    /// <param name="line"></param>
+    public static void Fine(string line)
+    {
+        if (DebugMode || Level >= LogLevel.FINE)
+        {
+            Write($"{line}", Color.White, LogLevel.FINE);
+        }
+    }
+
+    /// <summary>
     /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
     /// </summary>
     /// <param name="line"></param>
@@ -155,9 +167,21 @@ public static class Log
     public static void Write(string message, Color color, LogLevel level = LogLevel.INFO)
     {
         var lcolor = Color.White;
+        if (level == LogLevel.INFO)
+        {
+            lcolor = Color.HTML.Gray;
+        }
         if (level == LogLevel.DEBUG)
         {
-            lcolor = Color.HTML.Yellow;
+            lcolor = Color.Crayola.Original.Orange;
+        }
+        if (level == LogLevel.WARNING)
+        {
+            lcolor = Color.Crayola.Original.Yellow;
+        }
+        if (level == LogLevel.ERROR)
+        {
+            lcolor = Color.Crayola.Original.Red;
         }
         if (Level >= level)
         {
