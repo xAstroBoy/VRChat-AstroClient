@@ -10,16 +10,18 @@
         public static void CleanButtonsNestedMenu(this GameObject Parent)
         {
             var ButtonToDelete = Parent.GetComponentsInChildren<UnityEngine.UI.Button>(true);
-            foreach (var Button in ButtonToDelete)
+            for (int i = 0; i < ButtonToDelete.Count; i++)
             {
+                UnityEngine.UI.Button Button = ButtonToDelete[i];
                 if (Button.name.Contains("Camera") || Button.name == "Button_Panorama" || Button.name == "Button_Screenshot"
                     || Button.name == "Button_VrChivePano" || Button.name == "Button_DynamicLight")
                     UnityEngine.Object.Destroy(Button.gameObject);
             }
 
             var ButtonToDelete2 = Parent.GetComponentsInChildren<UnityEngine.UI.Toggle>(true);
-            foreach (var Button in ButtonToDelete2)
+            for (int i = 0; i < ButtonToDelete2.Count; i++)
             {
+                UnityEngine.UI.Toggle Button = ButtonToDelete2[i];
                 if (Button.name == "Button_Steadycam")
                     UnityEngine.Object.Destroy(Button.gameObject);
             }
@@ -30,8 +32,9 @@
             TMPro.TextMeshProUGUI text = new TMPro.TextMeshProUGUI();
 
             var TextTop = Parent.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
-            foreach (TMPro.TextMeshProUGUI texto in TextTop)
+            for (int i = 0; i < TextTop.Count; i++)
             {
+                TMPro.TextMeshProUGUI texto = TextTop[i];
                 if (texto.name == search)
                     text = texto;
             }
