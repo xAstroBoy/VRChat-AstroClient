@@ -187,12 +187,13 @@
                 }
             }
 
-            foreach (var subaction in action._eventTable)
+            for (int i = 0; i < action._eventTable.entries.Count; i++)
             {
-                new QMSingleButton(menu, subaction.Key, () =>
+                var subaction = action._eventTable.entries[i];
+                new QMSingleButton(menu, subaction.key, () =>
                 {
 
-                }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
+                }, $"Invoke Event {subaction.key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
             }
         }
 
@@ -202,17 +203,25 @@
 
             if (GeneratedPages.Count != 0)
             {
-                foreach (var item in GeneratedPages) item.DestroyMe();
+                for (int i = 0; i < GeneratedPages.Count; i++)
+                {
+                    GeneratedPages[i].DestroyMe();
+                }
             }
 
             if (GeneratedButtons.Count != 0)
             {
-                foreach (var item in GeneratedButtons) item.DestroyMe();
-
+                for (int i = 0; i < GeneratedButtons.Count; i++)
+                {
+                    GeneratedButtons[i].DestroyMe();
+                }
             }
             if (Listeners.Count != 0)
             {
-                foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
+                for (int i = 0; i < Listeners.Count; i++)
+                {
+                    UnityEngine.Object.DestroyImmediate(Listeners[i]);
+                }
             }
             
         }

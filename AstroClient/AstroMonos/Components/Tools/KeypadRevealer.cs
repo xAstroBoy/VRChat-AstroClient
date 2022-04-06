@@ -62,8 +62,9 @@
 
         private bool FindAndRevealPassword()
         {
-            foreach (var item in PasswordsVariables)
+            for (int i = 0; i < PasswordsVariables.Count; i++)
             {
+                string item = PasswordsVariables[i];
                 var UdonObj = gameObject.FindUdonVariable(item);
                 if (UdonObj != null)
                 {

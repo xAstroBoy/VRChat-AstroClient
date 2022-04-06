@@ -111,15 +111,15 @@
             set
             {
                 if (value)
-                    foreach (var item in BodyOutlines)
+                    for (int i = 0; i < BodyOutlines.Count; i++)
                     {
-                        var ESP = item.gameObject.GetOrAddComponent<ESP_VRCInteractable>();
+                        var ESP = BodyOutlines[i].gameObject.GetOrAddComponent<ESP_VRCInteractable>();
                         if (ESP != null) MiscUtils.DelayFunction(0.4f, () => { ESP.ChangeColor(System.Drawing.Color.Orange.ToUnityEngineColor()); });
                     }
                 else
-                    foreach (var item in BodyOutlines)
+                    for (int i = 0; i < BodyOutlines.Count; i++)
                     {
-                        var ESP = item.gameObject.GetComponent<ESP_VRCInteractable>();
+                        var ESP = BodyOutlines[i].gameObject.GetComponent<ESP_VRCInteractable>();
                         if (ESP != null) ESP.DestroyMeLocal();
                     }
 
@@ -134,9 +134,9 @@
             {
                 var result = new List<Transform>();
                 if (JarRoleController.JarRoleLinks.Count() != 0)
-                    foreach (var item in JarRoleController.JarRoleLinks)
+                    for (int i = 0; i < JarRoleController.JarRoleLinks.Count; i++)
                     {
-                        var corpse = item.Node.FindObject("Corpse");
+                        var corpse = JarRoleController.JarRoleLinks[i].Node.FindObject("Corpse");
                         if (corpse != null)
                             result.Add(corpse);
                     }
@@ -195,9 +195,10 @@
             EmptyGarbage_Cafeteria_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Cafeteria)", "SyncConfirmAnimation");
             SubmitScanTask = UdonSearch.FindUdonEvent("Task Submit Scan", "SyncStartScan");
 
-            foreach (var subaction in VictoryCrewmateEvent.UdonBehaviour._eventTable)
+            for (int i = 0; i < VictoryCrewmateEvent.UdonBehaviour._eventTable.entries.Count; i++)
             {
-                if (subaction.Key.StartsWith("SyncDoSabotage"))
+                var subaction = VictoryCrewmateEvent.UdonBehaviour._eventTable.entries[i];
+                if (subaction.key.StartsWith("SyncDoSabotage"))
                 {
                     if (subaction.key.Contains("Doors"))
                     {
