@@ -88,6 +88,18 @@ public static class Log
     /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
     /// </summary>
     /// <param name="line"></param>
+    public static void Debug(string line, System.Drawing.Color color)
+    {
+        if (DebugMode || Level >= LogLevel.DEBUG)
+        {
+            Write($"{line}", new Color(color.R, color.G, color.B), LogLevel.DEBUG);
+        }
+    }
+
+    /// <summary>
+    /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
+    /// </summary>
+    /// <param name="line"></param>
     public static void Debug(string line, Color color)
     {
         if (DebugMode || Level >= LogLevel.DEBUG)

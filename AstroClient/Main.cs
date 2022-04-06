@@ -65,7 +65,7 @@
             LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
 
             // New Cheetah Console/Log Stuff
-            Log.Level = ConfigManager.General.DebugLog == true ? LogLevel.DEGUG : LogLevel.INFO;
+            Log.Level = ConfigManager.General.DebugLog == true ? LogLevel.DEBUG : LogLevel.INFO;
             WindowsUtils.ShowConsole(true);
             WindowsUtils.Initialize(); // Tell the console to support Windows Anniversary Update colors
             ConsoleUtils.SetColor(ConsoleUtils.ColorType.FOREGROUND, Cheetah.Color.White);
