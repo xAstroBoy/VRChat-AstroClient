@@ -145,6 +145,8 @@
     <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
+    <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\ItemTweakerModule.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
@@ -488,14 +490,12 @@
     <Compile Include="Tools\UdonEditor\Il2CppConverter.cs" />
     <Compile Include="Tools\UdonEditor\UdonHeapUnboxerUtils.cs" />
     <Compile Include="Tools\UdonEditor\UdonParser.cs" />
-    <Compile Include="Tools\UdonEditor\UdonTypes_String.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnpacker_Utils_ext.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnpacker_Utils.cs" />
     <Compile Include="Tools\UdonEditor\RawUdonBehaviour.cs" />
     <Compile Include="Tools\Colors\SystemColors.cs" />
     <Compile Include="Tools\Holders\SpawnedItemsHolder.cs" />
     <Compile Include="Tools\Serialization.cs" />
-    <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\Extensions\VRCPlayer_Emoji_Ext.cs" />
     <Compile Include="Tools\Extensions\Il2Cpp_ext.cs" />
     <Compile Include="Tools\Extensions\Esp_ext.cs" />
@@ -599,7 +599,6 @@
     <Compile Include="Tools\Skybox\SkyboxEditor.cs" />
     <Compile Include="AstroMonos\ComponentHelper.cs" />
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
-    <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
     <Compile Include="Target\TargetSelector.cs" />

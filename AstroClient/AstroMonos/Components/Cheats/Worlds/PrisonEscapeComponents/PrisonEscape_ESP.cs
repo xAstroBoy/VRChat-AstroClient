@@ -354,6 +354,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
+                
                 if (CurrentRole == PrisonEscape_Roles.Guard || CurrentRole == PrisonEscape_Roles.Dead)
                 {
                     value = false;
@@ -385,10 +386,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
             else
             {
-                if (AssignedReader.isWanted.GetValueOrDefault(false))
-                {
-                    isWanted = true;
-                }
+                isWanted = AssignedReader.isWanted.GetValueOrDefault(false);
                 healthTag.ShowTag = true;
                 healthTag.Text = $"Health : {AssignedReader.health}";
 

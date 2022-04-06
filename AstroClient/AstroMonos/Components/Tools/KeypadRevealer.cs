@@ -67,7 +67,7 @@
                 var UdonObj = gameObject.FindUdonVariable(item);
                 if (UdonObj != null)
                 {
-                    var heaptostring = UdonObj.UnboxUdonHeap();
+                    var heaptostring = UdonObj.UnboxAsString(item);
                     if (heaptostring.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         var cleaned = heaptostring.RemoveWhitespace();

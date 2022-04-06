@@ -237,6 +237,7 @@
             }
         }
 
+
         internal static void FindEverything(GameObject obj)
         {
             if (obj != null)
