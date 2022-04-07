@@ -44,8 +44,10 @@
         {
             if (!HasGenerated)
             {
-                foreach (var obj in Tweaker_Object.GetGameObjectToEdit().Get_Triggers())
+                List<GameObject> list = Tweaker_Object.GetGameObjectToEdit().Get_Triggers();
+                for (int i = 0; i < list.Count; i++)
                 {
+                    GameObject obj = list[i];
                     var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () => { obj.TriggerClick(); }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
                     var listener = obj.gameObject.GetOrAddComponent<ScrollMenuListener>();
                     if (listener != null) listener.SingleButton = btn;
@@ -61,11 +63,20 @@
         {
             HasGenerated = false;
             if (GeneratedButtons.Count != 0)
-                foreach (var item in GeneratedButtons)
-                    item.DestroyMe();
-            if (Listeners.Count != 0)
-                foreach (var item in Listeners)
-                    Object.DestroyImmediate(item);
+            {
+                for (int i = 0; i < GeneratedButtons.Count; i++)
+                {
+                    GeneratedButtons[i].DestroyMe();
+                }
+
+                if (Listeners.Count != 0)
+                {
+                    for (int i1 = 0; i1 < Listeners.Count; i1++)
+                    {
+                        Object.DestroyImmediate(Listeners[i1]);
+                    }
+                }
+            }
         }
 
         internal override void OnQuickMenuClose()

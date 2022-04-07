@@ -176,7 +176,11 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
             {
                 var isModified = false;
                 var modifiedlist = new System.Collections.Generic.List<string>();
-                foreach (var item in currentlist) modifiedlist.Add(item);
+                for (int i = 0; i < currentlist.Count; i++)
+                {
+                    string item = currentlist[i];
+                    modifiedlist.Add(item);
+                }
 
                 if (!Delete)
                 {
@@ -262,11 +266,17 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
             {
                 var isModified = false;
                 var ListClone = new System.Collections.Generic.List<string>();
-                foreach (var item in currentlist) ListClone.Add(item);
+                for (int i2 = 0; i2 < currentlist.Count; i2++)
+                {
+                    string item = currentlist[i2];
+                    ListClone.Add(item);
+                }
 
                 var EditedList = new System.Collections.Generic.List<string>();
                 if (!Delete)
-                    foreach (var group in ListClone)
+                    for (int i = 0; i < ListClone.Count; i++)
+                    {
+                        string group = ListClone[i];
                         if (@group.isMatch(WorldUtils.AuthorName))
                         {
                             var result = @group.Replace(WorldUtils.AuthorName, ReplaceWith);
@@ -277,8 +287,11 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
                         {
                             EditedList.Add(@group);
                         }
+                    }
                 else
-                    foreach (var group in ListClone)
+                    for (int i1 = 0; i1 < ListClone.Count; i1++)
+                    {
+                        string group = ListClone[i1];
                         if (@group.isMatch(ReplaceWith))
                         {
                             var result = @group.Replace(ReplaceWith, WorldUtils.AuthorName);
@@ -289,6 +302,7 @@ public class JustBClub_PatronControlEditor : AstroMonoBehaviour
                         {
                             EditedList.Add(@group);
                         }
+                    }
 
                 if (isModified)
                 {

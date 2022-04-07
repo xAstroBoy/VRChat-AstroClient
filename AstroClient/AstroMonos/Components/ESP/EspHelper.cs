@@ -8,9 +8,9 @@
     {
         internal override void OnRoomLeft()
         {
-            foreach (var item in SpawnedESPsHolders)
+            for (int i = 0; i < SpawnedESPsHolders.Count; i++)
             {
-                Object.DestroyImmediate(item);
+                Object.DestroyImmediate(SpawnedESPsHolders[i]);
             }
             SpawnedESPsHolders.Clear();
         }

@@ -111,9 +111,12 @@
                 if (_SingleButtonTemplate == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Button button = Buttons[i];
                         if (button.name == "Button_VoteKick")
                             _SingleButtonTemplate = button.transform;
+                    }
                 }
 
                 return _SingleButtonTemplate;

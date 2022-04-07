@@ -68,10 +68,13 @@
         {
             Log.Debug($"Finding Skin Events for pickup {gameObject.name}");
 
-            foreach (var item in gameObject.GetComponentsInChildren<UdonBehaviour>(true))
+            var list = gameObject.GetComponentsInChildren<UdonBehaviour>(true);
+            for (int i1 = 0; i1 < list.Count; i1++)
             {
-                foreach (var item2 in item._eventTable)
+                UdonBehaviour item = list[i1];
+                for (int i = 0; i < item._eventTable.entries.Count; i++)
                 {
+                    Dictionary<string, List<uint>>.Entry item2 = item._eventTable.entries[i];
                     if (NonPatronSkinEvent == null)
                         if (GetNonPatronSkinEventNames.Contains(item2.key))
                             NonPatronSkinEvent = new UdonBehaviour_Cached(item, item2.key);

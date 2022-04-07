@@ -1246,9 +1246,9 @@ namespace AstroClient.Tools.UdonEditor
                                 if (result != null && result.Length != 0)
                                 {
                                     listoutput.AppendLine();
-                                    foreach (var item in result)
+                                    for (int i = 0; i < result.Length; i++)
                                     {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
+                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
                                     }
 
                                     return listoutput.ToString();

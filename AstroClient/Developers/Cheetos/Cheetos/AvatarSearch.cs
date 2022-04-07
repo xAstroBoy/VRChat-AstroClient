@@ -183,9 +183,9 @@
             {
                 if (_WorldPedestralAvatars.Count == 0)
                 {
-                    foreach (var item in worldAvatarsids)
+                    for (int i = 0; i < worldAvatarsids.Count; i++)
                     {
-                        AvatarModule.GetStoredFromID(item, (avatar) =>
+                        AvatarModule.GetStoredFromID(worldAvatarsids[i], (avatar) =>
                         {
                             _WorldPedestralAvatars.Add(avatar);
                         });

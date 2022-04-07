@@ -75,7 +75,11 @@
                 Log.Debug("[Skybox INFO] : Material name : " + OriginalSkybox.name);
                 Log.Debug("[Skybox INFO] : Material Shader : " + OriginalSkybox.shader.name);
                 var textureIDs = OriginalSkybox.GetTexturePropertyNames().ToList();
-                foreach (var TextureName in textureIDs) Log.Debug("[Skybox INFO] : Texture name : " + TextureName);
+                for (int i = 0; i < textureIDs.Count; i++)
+                {
+                    Log.Debug("[Skybox INFO] : Texture name : " + textureIDs[i]);
+                }
+
                 if (textureIDs.Contains("_UpTex") && textureIDs.Contains("_DownTex") && textureIDs.Contains("_BackTex") &&
                     textureIDs.Contains("_FrontTex") && textureIDs.Contains("_LeftTex") && textureIDs.Contains("_RightTex"))
                 {
@@ -247,8 +251,10 @@
                             Texture2D CubeMapToTexture = null;
                             var isCubeMap = false;
                             Material Material = null;
-                            foreach (var paths in bundle.GetAllAssetNames())
+                            UnhollowerBaseLib.Il2CppStringArray list = bundle.GetAllAssetNames();
+                            for (int i = 0; i < list.Count; i++)
                             {
+                                string paths = list[i];
                                 if (!paths.ToLower().EndsWith(".mat") || !(Material == null)) continue;
                                 Material = bundle.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
                                 if (!(Material != null)) continue;
@@ -445,12 +451,15 @@
                 return false;
             }
 
-            foreach (var skybox in LoadedSkyboxesBundles)
+            for (int i = 0; i < LoadedSkyboxesBundles.Count; i++)
+            {
+                AssetBundleSkyboxes skybox = LoadedSkyboxesBundles[i];
                 if (skybox != null && skybox.SkyboxName.ToLower().Equals(name.ToLower()))
                 {
                     SetRenderSettingSkybox(skybox);
                     return true;
                 }
+            }
 
             return false;
         }

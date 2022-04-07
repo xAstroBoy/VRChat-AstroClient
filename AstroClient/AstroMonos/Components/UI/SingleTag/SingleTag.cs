@@ -243,8 +243,9 @@
             {
                 if (StackerEntry.AssignedTags.Count != 0)
                 {
-                    foreach (var tag in StackerEntry.AssignedTags)
+                    for (int i = 0; i < StackerEntry.AssignedTags.Count; i++)
                     {
+                        SingleTag tag = StackerEntry.AssignedTags[i];
                         if (tag != null)
                         {
                             if (!tag.Equals(this))
@@ -267,8 +268,9 @@
             {
                 if (StackerEntry.AssignedTags != null && StackerEntry.AssignedTags.Count != 0)
                 {
-                    foreach (SingleTag item in StackerEntry.AssignedTags)
+                    for (int i = 0; i < StackerEntry.AssignedTags.Count; i++)
                     {
+                        SingleTag item = StackerEntry.AssignedTags[i];
                         if (item != null)
                         {
                             try

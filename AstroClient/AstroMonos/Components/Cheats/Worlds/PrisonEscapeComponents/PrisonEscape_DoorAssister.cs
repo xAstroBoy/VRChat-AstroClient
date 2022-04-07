@@ -59,9 +59,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
             if (KeypadDoorEvent != null || KeypadDoorEvent_1 != null || KeypadDoorEvent_2 != null)
             {
-                foreach(var col in gameObject.GetComponentsInChildren<UdonBehaviour>(true))
+                var list = gameObject.GetComponentsInChildren<UdonBehaviour>(true);
+                for (int i = 0; i < list.Count; i++)
                 {
-                    if(col.name.Contains("Mesh"))
+                    UdonBehaviour col = list[i];
+                    if (col.name.Contains("Mesh"))
                     {
                         var trigger = col.gameObject.GetOrAddComponent<VRC_AstroInteract>();
                         if (trigger != null)

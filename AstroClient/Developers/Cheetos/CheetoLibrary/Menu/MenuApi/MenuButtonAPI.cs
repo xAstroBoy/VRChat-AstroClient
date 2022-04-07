@@ -95,9 +95,10 @@
             }
 
             // this.Button.GetComponentInChildren<Image>().gameObject.active = false;
-            foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
+            Il2CppArrayBase<Text> list = Button.GetComponentsInChildren<Text>(true);
+            for (int i = 0; i < list.Count; i++)
             {
-                text2.text = "";
+                list[i].text = "";
             }
             Button.GetComponentInChildren<Text>().text = text;
             Button.name = text + BuildInfo.Name;
@@ -187,9 +188,10 @@
             }
 
             // this.Button.GetComponentInChildren<Image>().gameObject.active = false;
-            foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
+            Il2CppArrayBase<Text> list = Button.GetComponentsInChildren<Text>(true);
+            for (int i = 0; i < list.Count; i++)
             {
-                text2.text = "";
+                list[i].text = "";
             }
             Button.GetComponentInChildren<Text>().text = text;
             Button.name = text + BuildInfo.Name;
@@ -230,9 +232,10 @@
                 }
                 Button.transform.SetParent(Parent);
                 Button.name = text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
-                foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
+                Il2CppArrayBase<Text> list = Button.GetComponentsInChildren<Text>(true);
+                for (int i = 0; i < list.Count; i++)
                 {
-                    text2.text = "";
+                    list[i].text = "";
                 }
                 Button.GetComponentInChildren<Text>().text = text;
                 Button.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
@@ -275,9 +278,10 @@
                         break;
                 }
                 Button.transform.SetParent(Parent);
-                foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
+                Il2CppArrayBase<Text> list = Button.GetComponentsInChildren<Text>(true);
+                for (int i = 0; i < list.Count; i++)
                 {
-                    text2.text = "";
+                    list[i].text = "";
                 }
                 Button.GetComponentInChildren<Text>().text = text;
                 Button.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
@@ -323,9 +327,10 @@
                 }
                 Button.transform.SetParent(Parent);
                 Button.name = text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
-                foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
+                Il2CppArrayBase<Text> list = Button.GetComponentsInChildren<Text>(true);
+                for (int i = 0; i < list.Count; i++)
                 {
-                    text2.text = "";
+                    list[i].text = "";
                 }
                 Button.GetComponentInChildren<Text>().text = text;
                 Button.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();

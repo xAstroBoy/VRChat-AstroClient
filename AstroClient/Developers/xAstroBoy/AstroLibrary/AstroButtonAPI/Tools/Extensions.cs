@@ -74,9 +74,9 @@
             if (page != null)
                 if (menus != null)
                     if (menus.Count != 0)
-                        foreach (var item in menus)
-                            if (item != null)
-                                if (ContainsPage(page, item.GetPage()))
+                        for (int i = 0; i < menus.Count; i++)
+                            if (menus[i] != null)
+                                if (ContainsPage(page, menus[i].GetPage()))
                                     return true;
 
             return false;
@@ -98,7 +98,10 @@
 
         internal static void LoadSprite(this GameObject Parent, Sprite sprite, string name)
         {
-            foreach (var image in Parent.GetComponentsInChildren<Image>(true))
+            var list = Parent.GetComponentsInChildren<Image>(true);
+            for (int i = 0; i < list.Count; i++)
+            {
+                Image image = list[i];
                 if (image.name == name) // allows background image change
                 {
                     if (sprite != null)
@@ -112,6 +115,7 @@
                         image.overrideSprite = null;
                     }
                 }
+            }
         }
 
         //public void LoadSprite(byte[] data)

@@ -75,10 +75,12 @@
         {
             HasGenerated = false;
             if (GeneratedButtons.Count != 0)
+            {
                 for (int i = 0; i < GeneratedButtons.Count; i++)
                 {
                     GeneratedButtons[i].DestroyMe();
                 }
+            }
             //if (Listeners.Count != 0)
             //{
             //    foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);

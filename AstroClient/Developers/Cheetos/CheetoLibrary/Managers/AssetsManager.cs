@@ -41,9 +41,10 @@
                 }
                 assetBundle = dlBundle.assetBundle;
             }
-            foreach (var item in assetBundle.AllAssetNames().ToArray())
+            string[] array = assetBundle.AllAssetNames().ToArray();
+            for (int i = 0; i < array.Length; i++)
             {
-                Console.WriteLine($"[{assetBundle.name}] Asset: {item}");
+                Console.WriteLine($"[{assetBundle.name}] Asset: {array[i]}");
             }
             yield break;
         }

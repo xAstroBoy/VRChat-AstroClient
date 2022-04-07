@@ -44,8 +44,10 @@
         {
             if (!HasGenerated)
             {
-                foreach (var pickup in WorldUtils_Old.Get_Pickups())
+                List<GameObject> list = WorldUtils_Old.Get_Pickups();
+                for (int i = 0; i < list.Count; i++)
                 {
+                    GameObject pickup = list[i];
                     var btn = new QMSingleButton(CurrentScrollMenu, $"Select {pickup.name}", () => { Tweaker_Object.SetObjectToEdit(pickup); }, $"Select {pickup.name}", pickup.Get_GameObject_Active_ToColor());
 
                     var listener = pickup.AddComponent<ScrollMenuListener>();
@@ -63,11 +65,16 @@
         {
             HasGenerated = false;
             if (GeneratedButtons.Count != 0)
-                foreach (var item in GeneratedButtons)
-                    item.DestroyMe();
+                for (int i = 0; i < GeneratedButtons.Count; i++)
+                {
+                    GeneratedButtons[i].DestroyMe();
+                }
+
             if (Listeners.Count != 0)
-                foreach (var item in Listeners)
-                    Object.DestroyImmediate(item);
+                for (int i1 = 0; i1 < Listeners.Count; i1++)
+                {
+                    Object.DestroyImmediate(Listeners[i1]);
+                }
         }
 
         internal override void OnQuickMenuClose()

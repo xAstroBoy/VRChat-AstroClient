@@ -64,8 +64,9 @@
         {
             if (Active_Spammers.Count != 0)
             {
-                foreach (var item in Active_Spammers)
+                for (int i = 0; i < Active_Spammers.Count; i++)
                 {
+                    UdonBehaviour_Cached item = Active_Spammers[i];
                     item.InvokeOnLoop = false;
                     item.Cleanup();
                 }
@@ -155,9 +156,10 @@
 
         private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action)
         {
-            foreach (var subaction in action._eventTable)
+            for (int i = 0; i < action._eventTable.entries.Count; i++)
             {
-                var btn = new QMSingleButton(menu, subaction.Key, null, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
+                var subaction = action._eventTable.entries[i];
+                var btn = new QMSingleButton(menu, subaction.key, null, $"Invoke Event {subaction.key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
                 if (Active_Spammers != null)
                 {
                     if (Active_Spammers.Count != 0)
@@ -178,11 +180,11 @@
                     {
                         if (subaction.key.StartsWith("_"))
                         {
-                            action.SendCustomEvent(subaction.Key);
+                            action.SendCustomEvent(subaction.key);
                         }
                         else
                         {
-                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.key);
                         }
                     }
                     else
@@ -216,7 +218,10 @@
 
             if (GeneratedPages.Count != 0)
             {
-                foreach (var item in GeneratedPages) item.DestroyMe();
+                for (int i = 0; i < GeneratedPages.Count; i++)
+                {
+                    GeneratedPages[i].DestroyMe();
+                }
             }
         }
 

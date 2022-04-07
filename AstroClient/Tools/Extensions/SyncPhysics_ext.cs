@@ -67,12 +67,11 @@
         {
             if (instance != null)
             {
-
-                foreach (var player in WorldUtils.Players)
+                for (int i = 0; i < WorldUtils.Players.Count; i++)
                 {
                     try
                     {
-                        SetGravityFor(instance, player, useGravity);
+                        SetGravityFor(instance, WorldUtils.Players[i], useGravity);
                     }
                     catch { }
                 }
@@ -83,12 +82,11 @@
         {
             if (instance != null)
             {
-
-                foreach (var player in WorldUtils.Players)
+                for (int i = 0; i < WorldUtils.Players.Count; i++)
                 {
                     try
                     {
-                        SetKinematicFor(instance, player, isKinematic);
+                        SetKinematicFor(instance, WorldUtils.Players[i], isKinematic);
                     }
                     catch { }
                 }
