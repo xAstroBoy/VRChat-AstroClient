@@ -69,9 +69,9 @@
             {
                 return;
             }
-            foreach (var udonvar in udonlist)
+            for (int i = 0; i < udonlist.Count; i++)
             {
-                udonvar.InvokeBehaviour();
+                udonlist[i].InvokeBehaviour();
             }
         }
     }

@@ -78,6 +78,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                 else
                 {
                     Log.Write("BlueChair Disabled!");
+                    MelonCoroutines.Stop(BlueChairSpam_CancellationToken);
+                    BlueChairSpam_CancellationToken = null;
                 }
                 _isBlueChairEnabed = value;
             }
@@ -146,12 +148,9 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (value)
                 {
-                    if (DoorUnlockFreeze_CancellationToken == null)
-                    {
-                        Log.Write("Door Locks Frozen: Unlocked");
-                        if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
-                        DoorUnlockFreeze();
-                    }
+                    Log.Write("Door Locks Frozen: Unlocked");
+                    if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
+                    DoorUnlockFreeze();
                 }
                 else
                 {
@@ -353,7 +352,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 MoanSpamBehaviour?.InvokeBehaviour();
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
@@ -424,7 +423,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield return new WaitForSeconds(0.1f);
                 }
 
-                yield return new WaitForSeconds(0.001f);
+                yield return null;
             }
         }
 
@@ -446,7 +445,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
             Log.Write($"Blue Chairs: {_chairs.Count} found.");
-            _ = MelonCoroutines.Start(DoBlueChairSpam());
+            BlueChairSpam_CancellationToken = MelonCoroutines.Start(DoBlueChairSpam());
         }
 
         private static IEnumerator DoBlueChairSpam()
@@ -467,7 +466,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 for (int i = 0; i < _chairs.Count; i++)
                 {
                     _chairs[i]?.InvokeBehaviour();
-                    yield return new WaitForSeconds(0.001f);
+                    yield return new WaitForSeconds(0.1f);
                 }
 
                 yield return null;
@@ -539,8 +538,9 @@ namespace AstroClient.WorldModifications.WorldHacks
             while (elevator.gameObject.active)
             {
                 var udons = elevator.GetComponentsInChildren<UdonBehaviour>();
-                foreach (var udon in udons)
+                for (int i = 0; i < udons.Count; i++)
                 {
+                    UdonBehaviour udon = udons[i];
                     if (udon != null)
                     {
                         udon.Interact();
@@ -705,7 +705,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
                 Log.Write("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
-                _ = MelonCoroutines.Start(BypassElevator());
+                //_ = MelonCoroutines.Start(BypassElevator());
                 _ = MelonCoroutines.Start(EnableElevatorFlairBtn());
                 _ = MelonCoroutines.Start(EnableTabletFlairBtn());
                 _ = MelonCoroutines.Start(UpdateLoop());
@@ -873,9 +873,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
-                                foreach (var e in behaviourevent)
+                                for (int i = 0; i < behaviourevent.Count; i++)
                                 {
-                                    UnityEngine.Object.DestroyImmediate(e);
+                                    UnityEngine.Object.DestroyImmediate(behaviourevent[i]);
                                 }
                             }
                             clone.AddToWorldUtilsMenu();
@@ -924,9 +924,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
-                                foreach (var e in behaviourevent)
+                                for (int i = 0; i < behaviourevent.Count; i++)
                                 {
-                                    UnityEngine.Object.DestroyImmediate(e);
+                                    UnityEngine.Object.DestroyImmediate(behaviourevent[i]);
                                 }
                             }
                             clone.AddToWorldUtilsMenu();
@@ -974,9 +974,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
-                                foreach (var e in behaviourevent)
+                                for (int i = 0; i < behaviourevent.Count; i++)
                                 {
-                                    UnityEngine.Object.DestroyImmediate(e);
+                                    UnityEngine.Object.DestroyImmediate(behaviourevent[i]);
                                 }
                             }
                             clone.AddToWorldUtilsMenu();
@@ -1026,9 +1026,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
-                                foreach (var e in behaviourevent)
+                                for (int i = 0; i < behaviourevent.Count; i++)
                                 {
-                                    UnityEngine.Object.DestroyImmediate(e);
+                                    UnityEngine.Object.DestroyImmediate(behaviourevent[i]);
                                 }
                             }
 
@@ -1077,9 +1077,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
-                                foreach (var e in behaviourevent)
+                                for (int i = 0; i < behaviourevent.Count; i++)
                                 {
-                                    UnityEngine.Object.DestroyImmediate(e);
+                                    UnityEngine.Object.DestroyImmediate(behaviourevent[i]);
                                 }
                             }
                             clone.AddToWorldUtilsMenu();
@@ -1109,7 +1109,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     }
                     else
                     {
-                        Log.Warn("Failed to find  Bedroom Toggle Do Not Disturb Button!");
+                        Log.Warn("Failed to find Bedroom Toggle Do Not Disturb Button!");
                     }
                 }
 

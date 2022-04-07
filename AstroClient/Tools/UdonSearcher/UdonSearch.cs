@@ -31,8 +31,9 @@
                             Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
                         }
 
-                        foreach (var actionkeys in behaviour._eventTable)
+                        for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
                         {
+                            var actionkeys = behaviour._eventTable.entries[i];
                             if (actionkeys.key == subaction)
                             {
                                 if (Debug)
@@ -62,8 +63,9 @@
                 var NameSearched = UdonParser.WorldBehaviours.Where(x => x.gameObject.name.isMatch(name)).ToList();
                 if (NameSearched.IsNotNull() && NameSearched.IsNotEmpty())
                 {
-                    foreach (var item in NameSearched)
+                    for (int i = 0; i < NameSearched.Count; i++)
                     {
+                        UdonBehaviour item = NameSearched[i];
                         if (!AllBehavioursToAnalyze.Contains(item))
                         {
                             AllBehavioursToAnalyze.Add(item);
