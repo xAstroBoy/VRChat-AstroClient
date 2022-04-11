@@ -20,100 +20,26 @@ namespace AstroClient.AstroMonos.AstroUdons
         {
         }
 
-        private SerializedUdonProgramAsset AssignedProgram { [HideFromIl2Cpp] get; } = UdonPrograms.InteractProgram;
 
         private void Start()
         {
-            if (AssignedProgram == null)
-            {
-                Log.Error("Custom Trigger Can't Load as Program Asset is null!");
-                Destroy(this);
-            }
             
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
-            if (UdonBehaviour != null)
-            {
-                UdonBehaviour.serializedProgramAsset = AssignedProgram;
-                UdonBehaviour.InitializeUdonContent();
-                UdonBehaviour.Start();
-                UdonBehaviour.interactText = interactText;
-            }
 
-            DoChecks();
-            RawItem = UdonBehaviour.ToRawUdonBehaviour();
-            Initialize_InteractVars();
         }
 
-        private void DoChecks()
+        internal override void UdonBehaviour_Event_OnInteract(UdonBehaviour item)
         {
-            if (UdonBehaviour == null)
-            {
-                UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
-                UdonBehaviour.serializedProgramAsset = AssignedProgram;
-                UdonBehaviour.InitializeUdonContent();
-                UdonBehaviour.Start();
-                UdonBehaviour.interactText = interactText;
-            }
-            else
-            {
-                if (UdonBehaviour.serializedProgramAsset == null)
-                {
-                    UdonBehaviour.serializedProgramAsset = AssignedProgram;
-                    UdonBehaviour.InitializeUdonContent();
-                    UdonBehaviour.Start();
-                }
-            }
-        }
-
-        internal void FixedUpdate()
-        {
-            if (RawItem != null)
-            {
-                if (Get_OnInteract)
-                {
-                    OnInteract();
-                }
-            }
-        }
-
-        private AstroUdonVariable<bool> Private_Get_OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        internal void Initialize_InteractVars()
-        {
-            Private_Get_OnInteract = new AstroUdonVariable<bool>(RawItem, 2u);
+            if (item.Equals(UdonBehaviour)) OnInteract.SafetyRaise();
 
         }
 
-        internal void Destroy_InteractVars()
-        {
-            Private_Get_OnInteract = null;
-        }
-
-
-        private bool Get_OnInteract
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private_Get_OnInteract != null)
-                {
-                    var result = Private_Get_OnInteract.Value;
-                    if (result)
-                    {
-                        Private_Get_OnInteract.Value = false;
-                    }
-                    return result;
-                }
-                return false;
-            }
-        }
         internal void OnDestroy()
         {
             if (UdonBehaviour != null)
             {
                 Destroy(UdonBehaviour);
             }
-            Destroy_InteractVars();
         }
 
         private void OnDisable()
@@ -171,6 +97,5 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         internal Action OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private RawUdonBehaviour RawItem { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }
