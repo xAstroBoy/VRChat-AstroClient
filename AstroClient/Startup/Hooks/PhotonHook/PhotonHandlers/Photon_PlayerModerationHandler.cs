@@ -64,7 +64,6 @@ internal class Photon_PlayerModerationHandler
                                         case false:
                                             {
                                                 PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
-                                                result = HookAction.Nothing;
                                                 break;
                                             }
                                     }
@@ -78,13 +77,11 @@ internal class Photon_PlayerModerationHandler
                                         case true:
                                             {
                                                 PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
-                                                result = HookAction.Nothing;
                                                 break;
                                             }
                                         case false:
                                             {
                                                 PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
-                                                result = HookAction.Nothing;
                                                 break;
                                             }
                                     }
