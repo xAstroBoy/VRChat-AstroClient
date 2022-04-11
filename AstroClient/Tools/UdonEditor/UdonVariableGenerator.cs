@@ -112,6 +112,32 @@ namespace AstroClient.Tools.UdonEditor
         {
             switch (name)
             {
+                case "System.String": return "string";
+                case "System.String[]": return "string[]";
+                case "System.Uint32": return "uint?";
+                case "System.Uint32[]": return "uint[]";
+                case "System.Int32": return "int?";
+                case "System.Int32[]": return "int[]";
+                case "System.Int64": return "long?";
+                case "System.Int64[]": return "long[]";
+                case "System.Char": return "char?";
+                case "System.Char[]": return "char[]";
+                case "System.Single": return "float?";
+                case "System.Single[]": return "float[]";
+                case "System.Boolean": return "bool?";
+                case "System.Boolean[]": return "bool[]";
+                case "System.Byte": return "byte?";
+                case "System.Byte[]": return "byte[]";
+                case "System.UInt16": return "ushort?";
+                case "System.UInt16[]": return "ushort[]";
+                case "System.Double": return "double?";
+                case "System.Double[]": return "double[]";
+                case "UnityEngine.Vector3": return "UnityEngine.Vector3?";
+                case "UnityEngine.Quaternion": return "UnityEngine.Quaternion?";
+                case "UnityEngine.Color": return "UnityEngine.Color?";
+                case "VRC.Udon.Common.Interfaces.NetworkEventTarget": return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
+                case "VRC.Udon.Common.Enums.EventTiming": return "VRC.Udon.Common.Enums.EventTiming?";
+
                 default:
                     if (name.Contains("+"))
                     {
