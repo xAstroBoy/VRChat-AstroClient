@@ -148,11 +148,93 @@ namespace AstroClient
             }
         }
 
-        
-        
 
-        
-        
+
+
+
+        internal static void SafetyRaise(this Delegate eh) => SafetyRaiseInternal(eh);
+
+        private static void SafetyRaiseInternal(Delegate eh)
+        {
+            if (eh == null) return;
+            bool hasParameters = false;
+
+            Delegate[] array = eh.GetInvocationList();
+            for (int i = 0; i < array.Length; i++)
+            {
+                Delegate handler = array[i];
+                if (handler != null)
+                {
+                    if (!PerformanceTest)
+                    {
+                        try
+                        {
+                            _ = handler.DynamicInvoke();
+
+                            if (CheckForFPS)
+                            {
+                                if (Enumerable.Range(1, 12).Contains(GetCurrentFPS()))
+                                {
+                                    var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Possibly Lowered your FPS : {GetCurrentFPS()}";
+                                    if (!Results.Contains(result))
+                                    {
+                                        Log.Debug(result);
+                                        Results.Add(result);
+                                    }
+                                }
+                            }
+                        }
+                        catch (TargetInvocationException invokeexc)
+                        {
+                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                            {
+                                Delegate.Remove(eh, handler);
+                                continue;
+                            }
+
+                            Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
+                            Log.Exception(invokeexc.InnerException);
+                        }
+
+                    }
+                    else
+                    {
+                        Stopwatch sw = Stopwatch.StartNew();
+                        try
+                        {
+                            _ = handler.DynamicInvoke();
+                        }
+                        catch (TargetInvocationException invokeexc)
+                        {
+                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                            {
+                                Delegate.Remove(eh, handler);
+                                continue;
+                            }
+
+                            Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
+                            Log.Exception(invokeexc.InnerException);
+                        }
+                        sw.Stop();
+                        var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}, FPS : {GetCurrentFPS()}";
+                        if (!Results.Contains(result))
+                        {
+                            Log.Debug(result);
+
+                            Results.Add(result);
+                        }
+
+
+
+                    }
+                }
+                else
+                {
+                    Delegate.Remove(eh, handler);
+                }
+            }
+        }
+
 
     }
 }

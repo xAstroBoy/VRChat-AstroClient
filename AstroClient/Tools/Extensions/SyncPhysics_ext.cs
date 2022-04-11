@@ -13,7 +13,7 @@
                 {
                     instance.gameObject.TakeOwnership();
                 }
-                instance.Method_Public_Void_2();
+                //instance.Method_Public_Void_();
             }
         }
 
