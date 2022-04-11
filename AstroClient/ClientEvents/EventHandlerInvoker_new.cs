@@ -55,9 +55,7 @@ namespace AstroClient
         private static void SafetyRaiseInternal(Delegate eh, params object[] args)
         {
             if (eh == null) return;
-            bool hasParameters = false;
             
-            hasParameters = args != null && args.Length != 0;
             Delegate[] array = eh.GetInvocationList();
             for (int i = 0; i < array.Length; i++)
             {
@@ -68,14 +66,7 @@ namespace AstroClient
                     {
                         try
                         {
-                            if (hasParameters)
-                            {
-                                _ = handler.DynamicInvoke(args);
-                            }
-                            else
-                            {
-                                _ = handler.DynamicInvoke();
-                            }
+                            _ = handler.DynamicInvoke(args);
 
                             if (CheckForFPS)
                             {
@@ -108,14 +99,7 @@ namespace AstroClient
                         Stopwatch sw = Stopwatch.StartNew();
                         try
                         {
-                            if (hasParameters)
-                            {
-                                _ = handler.DynamicInvoke(args);
-                            }
-                            else
-                            {
-                                _ = handler.DynamicInvoke();
-                            }
+                            _ = handler.DynamicInvoke(args);
                         }
                         catch (TargetInvocationException invokeexc)
                         {
@@ -157,8 +141,6 @@ namespace AstroClient
         private static void SafetyRaiseInternal(Delegate eh)
         {
             if (eh == null) return;
-            bool hasParameters = false;
-
             Delegate[] array = eh.GetInvocationList();
             for (int i = 0; i < array.Length; i++)
             {
