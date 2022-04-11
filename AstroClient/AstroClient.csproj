@@ -103,6 +103,7 @@
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\JustBClub_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\GlobalPatronUnlocker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
