@@ -103,6 +103,7 @@
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\GlobalPatronUnlocker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\TierLand_CreditsReader.cs" />
@@ -125,7 +126,6 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_AutoStarter.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerCollisionFixer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\ItemTweakerHelper.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\ColliderSuppresser.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
@@ -133,7 +133,6 @@
     <Compile Include="AstroMonos\Components\Tools\PedestralReader.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\RenderCameraHijacker.cs" />
     <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientAttributes\RegisterType.cs" />

@@ -574,10 +574,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                 isCurrentWorld = true;
                 UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
-                var pedestralreader = UdonSearch.FindUdonEvent("RenderCamera", "_onPostRender");
+                var pedestralreader = UdonSearch.FindUdonEvent("Patron", "isElite");
                 if(pedestralreader != null)
                 {
-                    pedestralreader.gameObject.GetOrAddComponent<RenderCameraHijacker>();
+                    pedestralreader.gameObject.Set_As_Object_To_Edit();
                 }
 
                 PenthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");
