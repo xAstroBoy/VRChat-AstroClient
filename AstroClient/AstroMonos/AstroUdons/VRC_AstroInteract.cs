@@ -25,7 +25,10 @@ namespace AstroClient.AstroMonos.AstroUdons
         {
             
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
-
+            if(UdonBehaviour != null)
+            {
+                UdonBehaviour._hasInteractiveEvents = true; // This way it activates the trigger system in the behaviour
+            }
         }
 
         internal override void UdonBehaviour_Event_OnInteract(UdonBehaviour item)

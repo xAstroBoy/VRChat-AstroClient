@@ -57,7 +57,6 @@ namespace AstroClient.Startup.Hooks
         private static void Hook_UdonBehaviour_Event_OnPickup(UdonBehaviour __instance)
         {
             Event_Udon_OnPickup.SafetyRaise(__instance);
-            Log.Debug($"Pickup UdonBehaviour Grabbed {__instance.name}");
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour __instance)
