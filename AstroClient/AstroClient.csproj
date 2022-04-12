@@ -403,7 +403,6 @@
     <Compile Include="Developers\Cheetos\Cheetos\FrameUnlimiter.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\ScrollMenuListener.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\GameObjectListener.cs" />
-    <Compile Include="AstroMonos\AstroUdons\Programs\UdonPrograms.cs" />
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroInteract.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\CrazyBehaviourHandler.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\InflaterBehaviourHandler.cs" />

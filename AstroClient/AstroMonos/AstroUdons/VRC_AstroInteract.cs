@@ -27,7 +27,7 @@ namespace AstroClient.AstroMonos.AstroUdons
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if(UdonBehaviour != null)
             {
-                UdonBehaviour._hasInteractiveEvents = true; // This way it activates the trigger system in the behaviour
+                UdonBehaviour._hasInteractiveEvents = true; // This way it activates the interact system in the behaviour
             }
         }
 
