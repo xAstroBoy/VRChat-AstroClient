@@ -15,7 +15,12 @@ namespace AstroClient
     {
 
         private static List<string> Results = new List<string>();
+#if CHEETOS
+        private static bool _PerformanceTest = true;
+#else
         private static bool _PerformanceTest = false;
+#endif
+
         private static bool _CheckForFPS = false;
         internal static bool PerformanceTest 
         {
@@ -113,16 +118,15 @@ namespace AstroClient
                             Log.Exception(invokeexc.InnerException);
                         }
                         sw.Stop();
-                        var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}, FPS : {GetCurrentFPS()}";
-                        if(!Results.Contains(result))
+                        if (sw.ElapsedMilliseconds > 100)
                         {
-                            Log.Debug(result);
-
-                            Results.Add(result);
+                            var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Elapsed Milliseconds : {sw.ElapsedMilliseconds}";
+                            if (!Results.Contains(result))
+                            {
+                                Log.Warn(result);
+                                Results.Add(result);
+                            }
                         }
-
-                        
-
                     }
                 }
                 else
@@ -131,11 +135,7 @@ namespace AstroClient
                 }
             }
         }
-
-
-
-
-
+        
         internal static void SafetyRaise(this Delegate eh) => SafetyRaiseInternal(eh);
 
         private static void SafetyRaiseInternal(Delegate eh)
@@ -198,16 +198,15 @@ namespace AstroClient
                             Log.Exception(invokeexc.InnerException);
                         }
                         sw.Stop();
-                        var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}, FPS : {GetCurrentFPS()}";
-                        if (!Results.Contains(result))
+                        if (sw.ElapsedMilliseconds > 100)
                         {
-                            Log.Debug(result);
-
-                            Results.Add(result);
+                            var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}, FPS : {GetCurrentFPS()}";
+                            if (!Results.Contains(result))
+                            {
+                                Log.Warn(result);
+                                Results.Add(result);
+                            }
                         }
-
-
-
                     }
                 }
                 else
