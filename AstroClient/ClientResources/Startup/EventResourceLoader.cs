@@ -14,6 +14,7 @@
 
     internal class EventResourceLoader : AstroEvents
     {
+        // Cheetos TODO - Parralell loading of resources.
 
         internal override void StartPreloadResources()
         {
@@ -31,8 +32,7 @@
 
         private IEnumerator LoadClassResourcesCoroutine(Type classtype)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            Stopwatch stopwatch = Stopwatch.StartNew();
             Log.Debug($"Loading Resources from {classtype.FullName}");
             int fails = 0;
             PropertyInfo[] array = classtype.GetProperties(BindingFlags.NonPublic | BindingFlags.Static);
@@ -63,6 +63,7 @@
                     }
 
                 }
+                yield return null;
             }
             if (fails != 0)
             {
@@ -70,7 +71,7 @@
             }
             stopwatch.Stop();
             Log.Debug($"Done Loading Resources from {classtype.FullName}, took {stopwatch.ElapsedMilliseconds}ms");
-            yield return null;
+            yield break;
         }
     }
 }
