@@ -141,6 +141,7 @@
     <Compile Include="ClientEvents\EventHandlerInvoker_new.cs" />
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
     <Compile Include="ClientResources\Loaders\Prefabs.cs" />
+    <Compile Include="ClientResources\Startup\EventResourceLoader.cs" />
     <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
@@ -1539,7 +1540,6 @@
   <ItemGroup>
     <Folder Include="AstroMonos\Components\Player\Fly\" />
     <Folder Include="ClientResources\ProgramsArchive\" />
-    <Folder Include="ClientResources\Startup\" />
     <Folder Include="ClientUI\Menu\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />
     <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
     <Folder Include="Startup\Fixes\" />

@@ -173,6 +173,15 @@
 
                         try
                         {
+                            component.StartPreloadResources(); // NEEDED TO PRELOAD RESOURCES BEFORE CLIENT INITIATES
+                        }
+                        catch (System.Exception e)
+                        {
+                            Log.Exception(e);
+                        }
+
+                        try
+                        {
                             component.OnApplicationStart();
                         }
                         catch (System.Exception e)
