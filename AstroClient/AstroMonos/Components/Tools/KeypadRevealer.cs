@@ -113,7 +113,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, password, null);
                 if (btn != null)
                 {
-                    btn.RotateButton(45f);
+                    btn.RotateButton(357);
                     btn.MakePickupable();
                     btn.RegisterToWorldMenu();
                 }
