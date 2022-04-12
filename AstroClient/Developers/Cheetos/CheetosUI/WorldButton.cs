@@ -1,5 +1,6 @@
 ﻿using AstroClient.xAstroBoy;
 using Mono.Security.X509;
+using VRC.SDKBase;
 
 namespace AstroClient.CheetosUI
 {
@@ -41,6 +42,7 @@ namespace AstroClient.CheetosUI
         {
             FixPlayercollisions();
             ButtonBody.Pickup_Set_ForceComponent();
+            ButtonBody.Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.Yes);
             ButtonBody.RigidBody_Override_isKinematic(true);
             ButtonBody.Pickup_Set_Pickupable(true);
 

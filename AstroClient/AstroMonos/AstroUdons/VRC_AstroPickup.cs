@@ -1,4 +1,5 @@
 using AstroClient.Tools.UdonEditor;
+using VRC.SDKBase;
 using VRC.Udon.Common;
 
 namespace AstroClient.AstroMonos.AstroUdons
@@ -28,9 +29,17 @@ namespace AstroClient.AstroMonos.AstroUdons
             if (PickupController != null)
             {
                 UseText = _UseText;
+                // Required To 
+                if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
+                {
+                    OriginalMode = PickupController.AutoHold;
+                    PickupController.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
+                }
             }
 
         }
+
+        private VRC_Pickup.AutoHoldMode OriginalMode {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; }
 
         internal override void UdonBehaviour_Event_OnPickup(UdonBehaviour item)
         {
@@ -60,6 +69,7 @@ namespace AstroClient.AstroMonos.AstroUdons
             {
                 Destroy(UdonBehaviour);
             }
+             PickupController.AutoHold = OriginalMode;
         }
 
         private void OnDisable()
@@ -161,6 +171,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 {
                     if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
                     {
+                        OriginalMode = PickupController.AutoHold;
                         PickupController.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
                     }
                 }
