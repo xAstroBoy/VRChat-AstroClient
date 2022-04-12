@@ -215,7 +215,7 @@
 
         internal static UdonBehaviour_Cached FindUdonEvent(Transform parent, string action, string subaction, bool Debug = false, bool ShowError = false)
         {
-            return FindUdonEvent(parent.gameObject, action, subaction, Debug);
+            return FindUdonEvent(parent.gameObject, action, subaction, Debug, ShowError);
         }
 
         internal static UdonBehaviour_Cached FindUdonEvent(GameObject parent, string action, string subaction, bool Debug = false, bool ShowError = false)
@@ -260,8 +260,11 @@
                         var actionkeys = obj._eventTable.entries[i];
                         if (actionkeys.key == subaction)
                         {
-                            Log.Debug($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
-                            return new UdonBehaviour_Cached(obj, actionkeys.key);
+                            if (Debug)
+                            {
+                                Log.Debug($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
+                            }
+                           return new UdonBehaviour_Cached(obj, actionkeys.key);
                         }
                     }
                 }
@@ -327,7 +330,10 @@
                         var actionkeys = actionobject._eventTable.entries[i1];
                         if (actionkeys.key == subaction)
                         {
-                            Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                            if (Debug)
+                            {
+                                Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                            }
                             return new UdonBehaviour_Cached(actionobject, actionkeys.key);
                         }
                     }
@@ -352,7 +358,10 @@
                         var actionkeys = actionobject._eventTable.entries[i1];
                         if (actionkeys.key == subaction)
                         {
-                            Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                            if (Debug)
+                            {
+                                Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                            }  
                             result.Add(new UdonBehaviour_Cached(actionobject, actionkeys.key));
                         }
                     }
