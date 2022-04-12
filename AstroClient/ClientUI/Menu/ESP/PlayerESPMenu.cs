@@ -55,7 +55,7 @@
                 {
                     PlayerESPToggleBtn.SetToggleState(value);
                 }
-                Event_OnPlayerESPPropertyChanged.SafetyRaise(value);
+                Event_OnPlayerESPPropertyChanged.SafetyRaiseWithParams(value);
             }
         }
 

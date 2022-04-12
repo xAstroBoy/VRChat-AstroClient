@@ -12,7 +12,7 @@
 
         internal override void OnSelectedObject_Destroyed()
         {
-            Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(null) ; // Dunno if it works.
+            Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(null) ; // Dunno if it works.
 
             instance = null;
         }
@@ -31,7 +31,7 @@
                             instance = newinstance;
                             newinstance.SetOnSpinnerPropertyChanged(() =>
                             {
-                                Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
+                                Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -44,7 +44,7 @@
                     instance = newinstance;
                     newinstance.SetOnSpinnerPropertyChanged(() =>
                     {
-                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
+                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -63,7 +63,7 @@
                     instance = SpinnerBehaviour; 
                     SpinnerBehaviour.SetOnSpinnerPropertyChanged(() =>
                     {
-                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaise(SpinnerBehaviour); // Dunno if it works.
+                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(SpinnerBehaviour); // Dunno if it works.
                     });
                 }
             }

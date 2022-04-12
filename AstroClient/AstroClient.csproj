@@ -155,6 +155,7 @@
     <Compile Include="Developers\Cheetos\WindowsUtils.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
+    <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\ItemTweakerModule.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />

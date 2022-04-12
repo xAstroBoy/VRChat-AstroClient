@@ -11,7 +11,7 @@
 
         internal override void OnSelectedObject_Destroyed()
         {
-            Event_OnRocketBehaviourPropertyChanged.SafetyRaise(null); // Dunno if it works.
+            Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
             instance = null;
         }
 
@@ -29,7 +29,7 @@
                             instance = newinstance;
                             newinstance.SetOnRocketPropertyChanged(() =>
                             {
-                                Event_OnRocketBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
+                                Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -42,7 +42,7 @@
                     instance = newinstance;
                     newinstance.SetOnRocketPropertyChanged(() =>
                     {
-                        Event_OnRocketBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
+                        Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -62,7 +62,7 @@
                     instance = RocketBehaviour; 
                     RocketBehaviour.SetOnRocketPropertyChanged(() =>
                     {
-                        Event_OnRocketBehaviourPropertyChanged.SafetyRaise(RocketBehaviour); // Dunno if it works.
+                        Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(RocketBehaviour); // Dunno if it works.
                     });
                 }
             }

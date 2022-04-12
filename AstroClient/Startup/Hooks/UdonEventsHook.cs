@@ -56,31 +56,31 @@ namespace AstroClient.Startup.Hooks
 
         private static void Hook_UdonBehaviour_Event_OnPickup(UdonBehaviour __instance)
         {
-            Event_Udon_OnPickup.SafetyRaise(__instance);
+            Event_Udon_OnPickup.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour __instance)
         {
-            Event_Udon_OnPickupUseUp.SafetyRaise(__instance);
+            Event_Udon_OnPickupUseUp.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour __instance)
         {
-            Event_Udon_OnPickupUseDown.SafetyRaise(__instance);
+            Event_Udon_OnPickupUseDown.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnDrop(UdonBehaviour __instance)
         {
-            Event_Udon_OnDrop.SafetyRaise(__instance);
+            Event_Udon_OnDrop.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnInteract(UdonBehaviour __instance)
         {
-            Event_Udon_OnInteract.SafetyRaise(__instance);
+            Event_Udon_OnInteract.SafetyRaiseWithParams(__instance);
         }
         private static void Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {
-            Event_Udon_SendCustomEvent.SafetyRaise(__instance, __0);
+            Event_Udon_SendCustomEvent.SafetyRaiseWithParams(__instance, __0);
         }
 
 

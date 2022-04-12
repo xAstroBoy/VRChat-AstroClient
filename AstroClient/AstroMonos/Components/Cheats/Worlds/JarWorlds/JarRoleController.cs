@@ -41,7 +41,7 @@
 
                 if (IsAmongUsWorld || IsMurder4World)
                 {
-                    Event_OnViewRolesPropertyChanged.SafetyRaise(value);
+                    Event_OnViewRolesPropertyChanged.SafetyRaiseWithParams(value);
                 }
             }
         }

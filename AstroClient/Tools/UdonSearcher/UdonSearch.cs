@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.UdonSearcher
+﻿using AstroClient.Tools.Extensions;
+
+namespace AstroClient.Tools.UdonSearcher
 {
     using CustomClasses;
     using Regexes;
@@ -51,6 +53,57 @@
             }
 
             return null;
+        }
+
+        internal static List<GameObject> FindAllUdonsContainingSymbols(List<string> HeapSymbols, bool Debug = false)
+        {
+            return FindAllUdonsContainingSymbols(HeapSymbols.ToArray(), Debug);
+        }
+
+        internal static List<GameObject> FindAllUdonsContainingSymbols(string[] HeapSymbols, bool Debug = false)
+        {
+            List<GameObject> SearchResult = new List<GameObject>();
+            var udons = WorldUtils.UdonScripts;
+            for (var UdonItem = 0; UdonItem < udons.Length; UdonItem++)
+            {
+                var udon = udons[UdonItem];
+                if (udon != null)
+                {
+                    var rawitem = udon.ToRawUdonBehaviour();
+                    if (rawitem != null)
+                    {
+                        bool HasFoundMatch = false;
+                        var symbolarray = rawitem.IUdonSymbolTable.GetSymbols().array;
+                        if (symbolarray.Count != 0)
+                        {
+                            for (var SymbolIndex = 0; SymbolIndex < HeapSymbols.Length; SymbolIndex++)
+                            {
+                                var searchedsymbol = HeapSymbols[SymbolIndex];
+                                
+                                for (var heapsymbols = 0; heapsymbols < symbolarray.Count; heapsymbols++)
+                                {
+                                    var containedsymbols = symbolarray[heapsymbols];
+                                    if (containedsymbols.isMatch(searchedsymbol))
+                                    {
+                                        if (!SearchResult.Contains(udon.gameObject))
+                                        {
+                                            SearchResult.Add(udon.gameObject);
+                                            HasFoundMatch = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (HasFoundMatch)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            return SearchResult;
         }
 
         internal static List<GameObject> FindAllUdonEvents(List<string> GameObjectNames, List<string> TermsToWhitelist, List<string> TermsToAvoid, bool Debug = false)
@@ -264,7 +317,7 @@
                             {
                                 Log.Debug($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
                             }
-                           return new UdonBehaviour_Cached(obj, actionkeys.key);
+                            return new UdonBehaviour_Cached(obj, actionkeys.key);
                         }
                     }
                 }
@@ -361,7 +414,7 @@
                             if (Debug)
                             {
                                 Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
-                            }  
+                            }
                             result.Add(new UdonBehaviour_Cached(actionobject, actionkeys.key));
                         }
                     }
@@ -376,14 +429,22 @@
             return null;
         }
 
-        internal static RawUdonBehaviour FindUdonVariable(GameObject obj, string SymbolName)
+        internal static RawUdonBehaviour FindUdonVariable(GameObject obj, string SymbolName, bool IncludeChildrens = true)
         {
-            var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
-            if (actionObjects.Count() != 0)
+            List<UdonBehaviour> searchObjects = null;
+            if (IncludeChildrens)
             {
-                for (int i = 0; i < actionObjects.Count; i++)
+                 searchObjects = obj.GetComponentsInChildren<UdonBehaviour>(true).ToList();
+            }
+            else
+            {
+                searchObjects = obj.GetComponents<UdonBehaviour>().ToList();
+            }
+            if (searchObjects.Count() != 0)
+            {
+                for (int i = 0; i < searchObjects.Count; i++)
                 {
-                    var unpackedudon = actionObjects[i].ToRawUdonBehaviour();
+                    var unpackedudon = searchObjects[i].ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
                         if (unpackedudon == null || unpackedudon == null)

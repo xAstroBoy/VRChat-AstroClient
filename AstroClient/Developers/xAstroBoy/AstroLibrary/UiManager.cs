@@ -175,7 +175,7 @@
         private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
         {
             if (__instance == null) return;
-            Event_OnUiPageToggled.SafetyRaise(__instance, __0, __1);
+            Event_OnUiPageToggled.SafetyRaiseWithParams(__instance, __0, __1);
         }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)

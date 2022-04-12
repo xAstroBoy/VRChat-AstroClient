@@ -111,7 +111,7 @@
 
         //public override void OnGUI()
         //{
-        //    Event_OnGui?.SafetyRaise();
+        //    Event_OnGui?.SafetyRaiseWithParams();
         //}
 
         public override void OnApplicationLateStart()
@@ -216,7 +216,7 @@
                     break;
 
                 default:
-                    Event_OnSceneLoaded.SafetyRaise(buildIndex, sceneName);
+                    Event_OnSceneLoaded.SafetyRaiseWithParams(buildIndex, sceneName);
                     break;
             }
         }

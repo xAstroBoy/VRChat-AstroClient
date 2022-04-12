@@ -337,7 +337,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 {
                     EndPointSphere.transform.position = hit.point;
                 }
-                OnPlayerHit.SafetyRaise(GetPlayer(hit.collider));
+                OnPlayerHit.SafetyRaiseWithParams(GetPlayer(hit.collider));
             }
             else
             {

@@ -82,7 +82,7 @@
                 ESP.PublicESPColor[1] = value.g;
                 ESP.PublicESPColor[2] = value.b;
                 ESP.PublicESPColor[3] = value.a;
-                Event_OnPublicESPColorChanged.SafetyRaise(value);
+                Event_OnPublicESPColorChanged.SafetyRaiseWithParams(value);
             }
         }
 
@@ -98,7 +98,7 @@
                 ESP.ESPFriendColor[1] = value.g;
                 ESP.ESPFriendColor[2] = value.b;
                 ESP.ESPFriendColor[3] = value.a;
-                Event_OnFriendESPColorChanged.SafetyRaise(value);
+                Event_OnFriendESPColorChanged.SafetyRaiseWithParams(value);
             }
         }
 
@@ -114,7 +114,7 @@
                 ESP.ESPBlockedColor[1] = value.g;
                 ESP.ESPBlockedColor[2] = value.b;
                 ESP.ESPBlockedColor[3] = value.a;
-                Event_OnBlockedESPColorChanged.SafetyRaise(value);
+                Event_OnBlockedESPColorChanged.SafetyRaiseWithParams(value);
             }
         }
 

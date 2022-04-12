@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools
+﻿using AstroClient.Tools.Keypads;
+
+namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -18,32 +20,22 @@
         {
             AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
+
         }
 
-        private WorldButton GeneratedButton { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private System.Collections.Generic.List<string> PasswordsVariables { [HideFromIl2Cpp] get; } = new()
-        {
-            "password",
-            "solution",
-            "code",
-            "PassCode",
-            "passcodes",
-            "correctCodes",
-            "answer",
-            "PinCode"
-        };
 
+
+
+        private WorldButton GeneratedButton { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool Success  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
         // Use this for initialization
         private void Start()
         {
+            KeypadRevealerHelper.DestroyAllFailedFinds += OnDestroyFailedSearch;
             if (FindAndRevealPassword())
             {
+                Success = true;
                 Log.Debug("Found KeyCode password!");
-            }
-            else
-            {
-                Log.Debug("Failed to find Keycode password.");
-                Destroy(this);
             }
         }
 
@@ -58,14 +50,24 @@
             {
                 GeneratedButton.DestroyMe();
             }
+            KeypadRevealerHelper.DestroyAllFailedFinds -= OnDestroyFailedSearch;
+        }
+
+
+        private void OnDestroyFailedSearch()
+        {
+            if(!Success)
+            {
+                DestroyImmediate(this);
+            }
         }
 
         private bool FindAndRevealPassword()
         {
-            for (int i = 0; i < PasswordsVariables.Count; i++)
+            for (int i = 0; i < KeypadRevealerHelper.PasswordsVariables.Length; i++)
             {
-                string item = PasswordsVariables[i];
-                var UdonObj = gameObject.FindUdonVariable(item);
+                string item = KeypadRevealerHelper.PasswordsVariables[i];
+                var UdonObj = gameObject.FindUdonVariable(item, false);
                 if (UdonObj != null)
                 {
                     var heaptostring = UdonObj.UnboxAsString(item);

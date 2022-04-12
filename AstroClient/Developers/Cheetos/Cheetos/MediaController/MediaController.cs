@@ -57,7 +57,7 @@
 //				{
 //					MediaSession mediaSession = new MediaSession(session);
 //					CurrentMediaSessions[session.SourceAppUserModelId] = mediaSession;
-//					OnNewSource.SafetyRaise(mediaSession);
+//					OnNewSource.SafetyRaiseWithParams(mediaSession);
 //					mediaSession.OnSongChange(session);
 //				}
 //			}
@@ -66,7 +66,7 @@
 //		private static void RemoveSession(MediaSession mediaSession)
 //		{
 //			CurrentMediaSessions.Remove(mediaSession.ControlSession.SourceAppUserModelId);
-//			OnRemovedSource.SafetyRaise(mediaSession);
+//			OnRemovedSource.SafetyRaiseWithParams(mediaSession);
 //		}
 
 //		internal class MediaSession
@@ -92,7 +92,7 @@
 //				}
 //				else
 //				{
-//					OnPlaybackStateChanged.SafetyRaise(this, props);
+//					OnPlaybackStateChanged.SafetyRaiseWithParams(this, props);
 //				}
 //			}
 
@@ -105,7 +105,7 @@
 //				if (LastSong != song && !(String.IsNullOrWhiteSpace(props.Title) && String.IsNullOrWhiteSpace(props.Artist)))
 //				{
 //					LastSong = song;
-//					OnSongChanged.SafetyRaise(this, props);
+//					OnSongChanged.SafetyRaiseWithParams(this, props);
 //				}
 //			}
 //		}

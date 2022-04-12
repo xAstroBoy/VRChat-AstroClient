@@ -26,17 +26,17 @@
                 }
                 if (value == null)
                 {
-                    Event_On_Old_GameObject_Removed.SafetyRaise(null);
-                    Event_On_New_GameObject_Selected.SafetyRaise(null);
+                    Event_On_Old_GameObject_Removed.SafetyRaiseWithParams(null);
+                    Event_On_New_GameObject_Selected.SafetyRaiseWithParams(null);
                 }
                 else if (_SelectedObject != null)
                 {
                     if (_SelectedObject != value)
                     {
-                        Event_On_Old_GameObject_Removed.SafetyRaise(_SelectedObject);
+                        Event_On_Old_GameObject_Removed.SafetyRaiseWithParams(_SelectedObject);
                     }
                 }
-                Event_On_New_GameObject_Selected.SafetyRaise(value);
+                Event_On_New_GameObject_Selected.SafetyRaiseWithParams(value);
                 _SelectedObject = value;
             }
         }

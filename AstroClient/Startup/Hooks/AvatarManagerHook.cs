@@ -32,7 +32,7 @@
 
         private static void OnAvatarInstantiate(Player player, GameObject avatar, VRC_AvatarDescriptor descriptor)
         {
-            Event_OnAvatarSpawn.SafetyRaise(player, avatar, player.GetVRCPlayer().field_Private_VRCAvatarManager_0, descriptor);
+            Event_OnAvatarSpawn.SafetyRaiseWithParams(player, avatar, player.GetVRCPlayer().field_Private_VRCAvatarManager_0, descriptor);
         }
     }
 }

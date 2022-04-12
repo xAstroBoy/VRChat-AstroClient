@@ -173,7 +173,7 @@ namespace AstroClient.Startup.Hooks
 
                 if (parameter.Equals("UdonSyncRunProgramAsRPC"))
                 {
-                    Event_OnUdonSyncRPC?.SafetyRaise(__0, __1.ParameterObject, actiontext);
+                    Event_OnUdonSyncRPC?.SafetyRaiseWithParams(__0, __1.ParameterObject, actiontext);
 
                     try
                     {

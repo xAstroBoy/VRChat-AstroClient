@@ -83,7 +83,7 @@ namespace AstroClient.Target
             set
             {
                 _CurrentTarget = value;
-                Event_OnTargetSet.SafetyRaise(value);
+                Event_OnTargetSet.SafetyRaiseWithParams(value);
             }
         }
     }

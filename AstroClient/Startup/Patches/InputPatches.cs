@@ -77,34 +77,34 @@
             {
                 case InputTypes.Jump:
                     {
-                        Event_OnInput_Jump.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        Event_OnInput_Jump.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
                 case InputTypes.UseLeft:
                     {
-                        Event_OnInput_UseLeft.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        Event_OnInput_UseLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.UseRight:
                     {
-                        Event_OnInput_UseRight.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        Event_OnInput_UseRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.GrabLeft:
                     {
-                        Event_OnInput_GrabLeft.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        Event_OnInput_GrabLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.GrabRight:
                     {
-                        Event_OnInput_GrabRight.SafetyRaise(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        Event_OnInput_GrabRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }

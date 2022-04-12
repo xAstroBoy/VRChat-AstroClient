@@ -10,7 +10,7 @@
     {
         internal override void OnSelectedObject_Destroyed()
         {
-            Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(null); // Dunno if it works.
+            Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
             instance = null;
         }
 
@@ -28,7 +28,7 @@
                             instance = newinstance;
                             newinstance.SetOnCrazyPropertyChanged(() =>
                             {
-                                Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
+                                Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -41,7 +41,7 @@
                     instance = newinstance;
                     newinstance.SetOnCrazyPropertyChanged(() =>
                     {
-                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
+                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -61,7 +61,7 @@
                     instance = CrazyBehaviour; 
                     CrazyBehaviour.SetOnCrazyPropertyChanged(() =>
                     {
-                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaise(CrazyBehaviour); // Dunno if it works.
+                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(CrazyBehaviour); // Dunno if it works.
                     });
                 }
             }

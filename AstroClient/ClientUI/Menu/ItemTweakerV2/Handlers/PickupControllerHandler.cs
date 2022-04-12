@@ -22,16 +22,16 @@
                 var PickupController = obj.GetOrAddComponent<PickupController>();
                 if (PickupController != null)
                 {
-                    Event_OnPickupControllerSelected.SafetyRaise(PickupController);
+                    Event_OnPickupControllerSelected.SafetyRaiseWithParams(PickupController);
 
                     PickupController.SetOnPickupPropertyChanged(() =>
                     {
-                        Event_OnPickupControllerPropertyChanged.SafetyRaise(PickupController); // Dunno if it works.
+                        Event_OnPickupControllerPropertyChanged.SafetyRaiseWithParams(PickupController); // Dunno if it works.
                     });
 
                     PickupController.SetOnPickup_OnUpdate(() =>
                     {
-                        Event_OnPickupController_OnUpdate.SafetyRaise(PickupController); // Dunno if it works.
+                        Event_OnPickupController_OnUpdate.SafetyRaiseWithParams(PickupController); // Dunno if it works.
                     });
                 }
             }

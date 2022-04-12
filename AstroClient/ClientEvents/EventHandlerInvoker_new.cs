@@ -50,9 +50,9 @@ namespace AstroClient
 
 
         
-        internal static void SafetyRaise(this Delegate eh, params object[] args) => SafetyRaiseInternal(eh, args);
+        internal static void SafetyRaiseWithParams(this Delegate eh, params object[] args) => SafetyRaiseWithParamsInternal(eh, args);
 
-        private static void SafetyRaiseInternal(Delegate eh, params object[] args)
+        private static void SafetyRaiseWithParamsInternal(Delegate eh, params object[] args)
         {
             if (eh == null) return;
             

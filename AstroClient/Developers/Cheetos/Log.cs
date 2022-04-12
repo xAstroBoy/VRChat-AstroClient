@@ -118,11 +118,11 @@ public static class Log
     /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
     /// </summary>
     /// <param name="line"></param>
-    public static void Debug(string line)
+    public static void Debug(string line, [CallerMemberName] string CallerName = "", [CallerLineNumber] int CallerLine = -1)
     {
         if (DebugMode || Level >= LogLevel.DEBUG)
         {
-            Write($"{line}", Color.White, LogLevel.DEBUG);
+            WriteWithCallerLine($"{line}", $"{CallerName}:{CallerLine}", Color.White, LogLevel.DEBUG);
         }
     }
 
@@ -130,11 +130,12 @@ public static class Log
     /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
     /// </summary>
     /// <param name="line"></param>
-    public static void Debug(string line, System.Drawing.Color color)
+    public static void Debug(string line,  System.Drawing.Color color, [CallerMemberName] string CallerName = "", [CallerLineNumber] int CallerLine = -1)
     {
         if (DebugMode || Level >= LogLevel.DEBUG)
         {
-            Write($"{line}", new Color(color.R, color.G, color.B), LogLevel.DEBUG);
+
+            WriteWithCallerLine($"{line}",$"{CallerName}:{CallerLine}", new Color(color.R, color.G, color.B), LogLevel.DEBUG);
         }
     }
 
@@ -142,7 +143,7 @@ public static class Log
     /// Writes a line to the logger as <see cref="LogLevel.DEGUG"/>
     /// </summary>
     /// <param name="line"></param>
-    public static void Debug(string line, Color color)
+    public static void Debug(string line, Color color, [CallerMemberName] string CallerName = "", [CallerLineNumber] int CallerLine = -1)
     {
         if (DebugMode || Level >= LogLevel.DEBUG)
         {
@@ -218,6 +219,34 @@ public static class Log
             InternalWrite($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}] ", Color.Crayola.Present.BananaMania);
             InternalWrite($"[AstroClient] ", Color.Crayola.Present.Bluetiful);
             InternalWrite($"[{Enum.GetName(typeof(LogLevel), level)}] ", lcolor);
+            InternalWriteLine(message, color);
+        }
+    }
+    public static void WriteWithCallerLine(string message, string CallerLine, Color color, LogLevel level = LogLevel.INFO)
+    {
+        var lcolor = Color.White;
+        if (level == LogLevel.INFO)
+        {
+            lcolor = Color.HTML.Gray;
+        }
+        if (level == LogLevel.DEBUG)
+        {
+            lcolor = Color.Crayola.Original.Orange;
+        }
+        if (level == LogLevel.WARNING)
+        {
+            lcolor = Color.Crayola.Original.Yellow;
+        }
+        if (level == LogLevel.ERROR)
+        {
+            lcolor = Color.Crayola.Original.Red;
+        }
+        if (Level >= level)
+        {
+            InternalWrite($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}] ", Color.Crayola.Present.BananaMania);
+            InternalWrite($"[AstroClient] ", Color.Crayola.Present.Bluetiful);
+            InternalWrite($"[{Enum.GetName(typeof(LogLevel), level)}] ", lcolor);
+            InternalWrite($"[{CallerLine}] ", Color.Crayola.Present.CottonCandy);
             InternalWriteLine(message, color);
         }
     }

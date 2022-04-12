@@ -10,7 +10,7 @@
     {
         internal override void OnSelectedObject_Destroyed()
         {
-            Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(null); // Dunno if it works.
+            Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
             instance = null;
         }
 
@@ -28,11 +28,11 @@
                             instance = newinstance;
                             newinstance.SetOnInflaterPropertyChanged(() =>
                             {
-                                Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
+                                Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                             newinstance.SetOnInflaterUpdate(() =>
                             {
-                                Event_OnInflaterBehaviourUpdate.SafetyRaise(newinstance); // Dunno if it works.
+                                Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -45,11 +45,11 @@
                     instance = newinstance;
                     newinstance.SetOnInflaterPropertyChanged(() =>
                     {
-                        Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(newinstance); // Dunno if it works.
+                        Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                     newinstance.SetOnInflaterUpdate(() =>
                     {
-                        Event_OnInflaterBehaviourUpdate.SafetyRaise(newinstance); // Dunno if it works.
+                        Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
             }
@@ -69,11 +69,11 @@
                     instance = InflaterBehaviour;
                     InflaterBehaviour.SetOnInflaterPropertyChanged(() =>
                     {
-                        Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(InflaterBehaviour); // Dunno if it works.
+                        Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
                     });
                     InflaterBehaviour.SetOnInflaterUpdate(() =>
                     {
-                        Event_OnInflaterBehaviourUpdate.SafetyRaise(InflaterBehaviour); // Dunno if it works.
+                        Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
                     });
                 }
             }

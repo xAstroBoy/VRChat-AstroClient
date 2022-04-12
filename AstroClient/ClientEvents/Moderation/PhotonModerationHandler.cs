@@ -45,7 +45,7 @@
                     if (!PlayerModerations[photonuserid].Blocked)
                     {
                         PlayerModerations[photonuserid].Blocked = true;
-                        Event_OnPlayerBlockedYou?.SafetyRaise(player);
+                        Event_OnPlayerBlockedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -62,7 +62,7 @@
                     if (PlayerModerations[photonuserid].Blocked)
                     {
                         PlayerModerations[photonuserid].Blocked = false;
-                        Event_OnPlayerUnblockedYou?.SafetyRaise(player);
+                        Event_OnPlayerUnblockedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -79,7 +79,7 @@
                     if (!PlayerModerations[photonuserid].Muted)
                     {
                         PlayerModerations[photonuserid].Muted = true;
-                        Event_OnPlayerMutedYou?.SafetyRaise(player);
+                        Event_OnPlayerMutedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -96,7 +96,7 @@
                     if (PlayerModerations[photonuserid].Muted)
                     {
                         PlayerModerations[photonuserid].Muted= false;
-                        Event_OnPlayerUnmutedYou?.SafetyRaise(player);
+                        Event_OnPlayerUnmutedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }

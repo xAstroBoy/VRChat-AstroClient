@@ -60,7 +60,7 @@
                     }
                 }
 
-                Event_VRC_EventDispatcherRFC_triggerEvent.SafetyRaise(__0, __1, __2, __3, __4);
+                Event_VRC_EventDispatcherRFC_triggerEvent.SafetyRaiseWithParams(__0, __1, __2, __3, __4);
                 return true;
             }
             catch { }

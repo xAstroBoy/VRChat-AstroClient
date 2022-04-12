@@ -47,7 +47,7 @@
 
         private static void OnSelectedPlayerPatch(ref VRC.Player __0)
         {
-            Event_OnPlayerSelected.SafetyRaise(__0);
+            Event_OnPlayerSelected.SafetyRaiseWithParams(__0);
         }
 
     }

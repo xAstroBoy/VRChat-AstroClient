@@ -115,9 +115,9 @@
                 __0 = false;
             }
         }
-        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaise(__0, __1);
+        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaiseWithParams(__0, __1);
 
-        private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(__0);
+        private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaiseWithParams(__0);
 
         private static void OnFriended(ref APIUser __0) => Event_OnFriended?.SafetyRaise();
 
@@ -174,7 +174,7 @@
         {
             if (__0 != null)
             {
-                Event_OnShowScreen?.SafetyRaise(__0);
+                Event_OnShowScreen?.SafetyRaiseWithParams(__0);
             }
 
             return true;
@@ -283,12 +283,12 @@
 
         private static void OnPhotonPlayerJoin(ref Player __0)
         {
-            Event_OnPhotonPlayerJoined?.SafetyRaise(__0);
+            Event_OnPhotonPlayerJoined?.SafetyRaiseWithParams(__0);
         }
 
         private static void OnPhotonPlayerLeft(ref Player __0)
         {
-            Event_OnPhotonPlayerLeft?.SafetyRaise(__0);
+            Event_OnPhotonPlayerLeft?.SafetyRaiseWithParams(__0);
         }
     }
 }
