@@ -49,19 +49,27 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static QMToggleButton BlueChairToggle { get; set; }
 
         private static UdonBehaviour_Cached MoanSpamBehaviour { get; set; }
+        private static UdonBehaviour_Cached FallSpamBehaviour { get; set; }
 
         private static bool _isFreezeLockEnabed { get; set; }
         private static bool _isFreezeUnlockEnabed { get; set; }
         private static bool _isRainbowEnabled { get; set; }
         private static bool _isMoanSpamEnabled { get; set; }
+        private static bool _isFallSpamEnabled { get; set; }
 
         private static bool isCurrentWorld { get; set; }
 
         private static object MoanSpam_CancellationToken { get; set; }
+        private static object FallSpam_CancellationToken { get; set; }
+
         private static object DoorLockFreeze_CancellationToken { get; set; }
         private static object DoorUnlockFreeze_CancellationToken { get; set; }
         private static object BlueChairSpam_CancellationToken { get; set; }
         private static object RainbowSpam_CancellationToken { get; set; }
+        private static QMToggleButton SpamDoorbellsToggle { get; set; }
+        private static bool _isDoorBellSpamEnabled { get; set; }
+        private static object DoorbellSpam_CancellationToken { get; set; }
+        private static bool _isBlueChairEnabed { get; set; }
 
         #region BlueChairSpam
 
@@ -81,11 +89,15 @@ namespace AstroClient.WorldModifications.WorldHacks
                     MelonCoroutines.Stop(BlueChairSpam_CancellationToken);
                     BlueChairSpam_CancellationToken = null;
                 }
+                if (BlueChairToggle != null)
+                {
+                    BlueChairToggle.SetToggleState(value, false);
+                }
+
                 _isBlueChairEnabed = value;
             }
         }
 
-        private static bool _isBlueChairEnabed;
 
         #endregion BlueChairSpam
 
@@ -110,13 +122,15 @@ namespace AstroClient.WorldModifications.WorldHacks
                     MelonCoroutines.Stop(DoorbellSpam_CancellationToken);
                     DoorbellSpam_CancellationToken = null;
                 }
+                if (SpamDoorbellsToggle != null)
+                {
+                    SpamDoorbellsToggle.SetToggleState(value, false);
+                }
+
                 _isDoorBellSpamEnabled = value;
             }
         }
 
-        private static QMToggleButton SpamDoorbellsToggle;
-        private static bool _isDoorBellSpamEnabled;
-        private static object DoorbellSpam_CancellationToken;
 
         #endregion DoorbellSpam
 
@@ -137,6 +151,12 @@ namespace AstroClient.WorldModifications.WorldHacks
                     MelonCoroutines.Stop(DoorLockFreeze_CancellationToken);
                     DoorLockFreeze_CancellationToken = null;
                 }
+                if (FreezeUnlockedToggle != null)
+                {
+                    FreezeUnlockedToggle.SetToggleState(value, false);
+                }
+
+
                 _isFreezeLockEnabed = value;
             }
         }
@@ -158,6 +178,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                     MelonCoroutines.Stop(DoorUnlockFreeze_CancellationToken);
                     DoorUnlockFreeze_CancellationToken = null;
                 }
+                if (FreezeUnlockedToggle != null)
+                {
+                    FreezeUnlockedToggle.SetToggleState(value, false);
+                }
+
                 _isFreezeUnlockEnabed = value;
             }
         }
@@ -178,6 +203,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                     MelonCoroutines.Stop(RainbowSpam_CancellationToken);
                     RainbowSpam_CancellationToken = null;
                 }
+                if(ToggleRainbowBtn != null)
+                {
+                    ToggleRainbowBtn.SetToggleState(value, false);
+                }
                 _isRainbowEnabled = value;
             }
         }
@@ -189,6 +218,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             get => _isMoanSpamEnabled;
             set
             {
+
                 if (value)
                 {
                     if (MoanSpam_CancellationToken == null)
@@ -203,39 +233,75 @@ namespace AstroClient.WorldModifications.WorldHacks
                     MelonCoroutines.Stop(MoanSpam_CancellationToken);
                     MoanSpam_CancellationToken = null;
                 }
+                if (ToggleMoanSpamBtn != null)
+                {
+                    ToggleMoanSpamBtn.SetToggleState(value, false);
+                }
                 _isMoanSpamEnabled = value;
             }
         }
 
         #endregion MoanSpam
+        #region FallSpam
 
-        private static GameObject LockIndicator1;
-        private static GameObject LockIndicator2;
-        private static GameObject LockIndicator3;
-        private static GameObject LockIndicator4;
-        private static GameObject LockIndicator5;
-        private static GameObject LockIndicator6;
-        private static GameObject LockIndicator7;
+        internal static bool IsFallSpamEnabled
+        {
+            get => _isFallSpamEnabled;
+            set
+            {
 
-        private static GameObjectListener LockIndicator1_Listener;
-        private static GameObjectListener LockIndicator2_Listener;
-        private static GameObjectListener LockIndicator3_Listener;
-        private static GameObjectListener LockIndicator4_Listener;
-        private static GameObjectListener LockIndicator5_Listener;
-        private static GameObjectListener LockIndicator6_Listener;
-        private static GameObjectListener LockIndicator7_Listener;
+                if (value)
+                {
+                    if (FallSpam_CancellationToken == null)
+                    {
+                        Log.Write("Fall Spam Enabled!");
+                        FallSpam();
+                    }
+                }
+                else
+                {
+                    Log.Write("Fall Spam Disabled.");
+                    MelonCoroutines.Stop(FallSpam_CancellationToken);
+                    FallSpam_CancellationToken = null;
+                }
+                if (ToggleFallSpamBtn != null)
+                {
+                    ToggleFallSpamBtn.SetToggleState(value, false);
+                }
+                _isFallSpamEnabled = value;
+            }
+        }
 
-        private static QMToggleButton LockButton1;
-        private static QMToggleButton LockButton2;
-        private static QMToggleButton LockButton3;
-        private static QMToggleButton LockButton4;
-        private static QMToggleButton LockButton5;
-        private static QMToggleButton LockButton6;
-        private static QMToggleButton LockButton7;
+        #endregion FallSpam
 
-        private static QMToggleButton SpoofAsWorldAuthorBtn;
-        private static QMToggleButton ToggleRainbowBtn;
-        private static QMToggleButton ToggleMoanSpamBtn;
+        private static GameObject LockIndicator1 { get; set; }
+        private static GameObject LockIndicator2 { get; set; }
+        private static GameObject LockIndicator3 { get; set; }
+        private static GameObject LockIndicator4 { get; set; }
+        private static GameObject LockIndicator5 { get; set; }
+        private static GameObject LockIndicator6 { get; set; }
+        private static GameObject LockIndicator7 { get; set; }
+
+        private static GameObjectListener LockIndicator1_Listener { get; set; }
+        private static GameObjectListener LockIndicator2_Listener{ get; set; }
+        private static GameObjectListener LockIndicator3_Listener{ get; set; }
+        private static GameObjectListener LockIndicator4_Listener{ get; set; }
+        private static GameObjectListener LockIndicator5_Listener{ get; set; }
+        private static GameObjectListener LockIndicator6_Listener{ get; set; }
+        private static GameObjectListener LockIndicator7_Listener{ get; set; }
+
+        private static QMToggleButton LockButton1 { get; set; }
+        private static QMToggleButton LockButton2{ get; set; }
+        private static QMToggleButton LockButton3{ get; set; }
+        private static QMToggleButton LockButton4{ get; set; }
+        private static QMToggleButton LockButton5{ get; set; }
+        private static QMToggleButton LockButton6{ get; set; }
+        private static QMToggleButton LockButton7{ get; set; }
+
+        private static QMToggleButton SpoofAsWorldAuthorBtn { get; set; }
+        private static QMToggleButton ToggleRainbowBtn { get; set; }
+        private static QMToggleButton ToggleMoanSpamBtn { get; set; }
+        private static QMToggleButton ToggleFallSpamBtn { get; set; }
 
         internal static GameObjectListener RegisterListener(GameObject Object, Action OnEnabled, Action OnDisabled, Action OnDestroy)
         {
@@ -330,6 +396,11 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             MoanSpam_CancellationToken = MelonCoroutines.Start(MoanSpamLoop());
         }
+        private static void FallSpam()
+        {
+            FallSpam_CancellationToken = MelonCoroutines.Start(FallSpamLoop());
+        }
+
 
         private static void DoorLockFreeze()
         {
@@ -352,6 +423,20 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 MoanSpamBehaviour?.InvokeBehaviour();
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+        private static IEnumerator FallSpamLoop()
+        {
+            for (; ; )
+            {
+                if (!isCurrentWorld)
+                {
+                    IsFallSpamEnabled = false;
+                    yield break;
+                }
+
+                FallSpamBehaviour?.InvokeBehaviour();
                 yield return new WaitForSeconds(0.5f);
             }
         }
@@ -703,6 +788,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
+                FallSpamBehaviour = UdonSearch.FindUdonEvent("NPC Animations Udon", "PlayFall");
+
                 Log.Write("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
                 //_ = MelonCoroutines.Start(BypassElevator());

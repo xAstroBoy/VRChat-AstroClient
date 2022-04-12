@@ -1,6 +1,7 @@
 using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
 using AstroClient.ClientResources.Loaders;
 using AstroClient.ClientUI.Menu.ESP;
+using AstroClient.Constants;
 using AstroClient.Gompoc.ActionMenuAPI.Api;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Player.Movement.Exploit;
@@ -492,6 +493,28 @@ internal class WorldCheatsModule : AstroEvents
 
 
             #endregion
+
+            #region Just B Club
+            if (WorldUtils.WorldID == WorldIds.JustBClub)
+            {
+                CustomSubMenu.AddToggle("Rainbow Lights", BClubWorld.IsRainbowEnabled, ToggleValue => { BClubWorld.IsRainbowEnabled = ToggleValue; });
+                CustomSubMenu.AddToggle("Doorbell Spam", BClubWorld.IsDoorbellSpamEnabled, ToggleValue => { BClubWorld.IsDoorbellSpamEnabled = ToggleValue; });
+                if (Bools.IsDeveloper)
+                {
+                    CustomSubMenu.AddToggle("BlueChair Everyone", BClubWorld.IsBlueChairEnabled, ToggleValue => { BClubWorld.IsBlueChairEnabled = ToggleValue; });
+                }
+                CustomSubMenu.AddToggle("NPC Moan Spam", BClubWorld.IsMoanSpamEnabled, ToggleValue => { BClubWorld.IsMoanSpamEnabled = ToggleValue; });
+                CustomSubMenu.AddToggle("NPC Fall Spam", BClubWorld.IsFallSpamEnabled, ToggleValue => { BClubWorld.IsFallSpamEnabled = ToggleValue; });
+
+                CustomSubMenu.AddToggle("Freeze Locked Door", BClubWorld.IsFreezeLockEnabed, ToggleValue => { BClubWorld.IsFreezeLockEnabed = ToggleValue; });
+                CustomSubMenu.AddToggle("Freeze Unlocked Door", BClubWorld.IsFreezeUnlockEnabed, ToggleValue => { BClubWorld.IsFreezeUnlockEnabed = ToggleValue; });
+
+            }
+
+
+
+            #endregion
+
         }, Icons.thief);
 
         Log.Write("World Module is ready!", Color.Green);
