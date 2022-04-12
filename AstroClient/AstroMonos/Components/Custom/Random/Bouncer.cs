@@ -29,21 +29,21 @@
             Destroy(this);
         }
 
-        private Vector3 initialVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new(0, 0, 0);
-        private Vector3 lastFrameVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Rigidbody rb { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private float minVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
-
-        // TODO : MAKE PLAYER BOUNCE  BACK SUPPORTED AS WELL
-        private float bias { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.5f;
-
-        private float bounceVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
-
+        internal Vector3 initialVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new(0, 0, 0);
+        internal Vector3 lastFrameVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Rigidbody rb { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float minVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
+        
+        //TODO : MAKE PLAYER BOUNCE  BACK SUPPORTED AS WELL
+        internal float bias { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.5f;
+        
+        internal float bounceVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
+        
         internal bool BounceTowardPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal bool IsEnabled
         {
