@@ -45,9 +45,9 @@
             return UdonSearch.FindUdonEvent(obj, action, subaction, ShowError);
         }
 
-        internal static RawUdonBehaviour FindUdonVariable(this GameObject obj, string SymbolName, bool IncludeChildrens = true)
+        internal static RawUdonBehaviour FindUdonVariable(this GameObject obj, string SymbolName)
         {
-            return UdonSearch.FindUdonVariable(obj, SymbolName, IncludeChildrens);
+            return UdonSearch.FindUdonVariable(obj, SymbolName);
         }
 
         internal static UdonBehaviour_Cached FindUdonEvent(this UdonBehaviour obj, string subaction)

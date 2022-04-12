@@ -38,9 +38,9 @@ namespace AstroClient.Tools.UdonSearcher
                     var unpackedudon = udonnode.ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
-                        for (int i2 = 0; i2 < unpackedudon.IUdonSymbolTable.GetSymbols().array.Count; i2++)
+                        for (int i2 = 0; i2 < unpackedudon.IUdonSymbolTable.GetSymbols().Length; i2++)
                         {
-                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols().array[i2];
+                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols()[i2];
                             if (symbol != null)
                             {
                                 var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
