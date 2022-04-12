@@ -73,14 +73,17 @@ namespace AstroClient.Tools.UdonSearcher
                     if (rawitem != null)
                     {
                         bool HasFoundMatch = false;
-                        var symbolarray = rawitem.IUdonSymbolTable.GetSymbols().array;
-                        if (symbolarray.Count != 0)
+                        var symbolarray = rawitem.IUdonSymbolTable.GetSymbols().array.ToArray();
+                        if (symbolarray.Length != 0)
                         {
                             for (var SymbolIndex = 0; SymbolIndex < HeapSymbols.Length; SymbolIndex++)
                             {
+                                if (HasFoundMatch)
+                                {
+                                    break;
+                                }
                                 var searchedsymbol = HeapSymbols[SymbolIndex];
-                                
-                                for (var heapsymbols = 0; heapsymbols < symbolarray.Count; heapsymbols++)
+                                for (var heapsymbols = 0; heapsymbols < symbolarray.Length; heapsymbols++)
                                 {
                                     var containedsymbols = symbolarray[heapsymbols];
                                     if (containedsymbols.isMatch(searchedsymbol))
@@ -92,10 +95,6 @@ namespace AstroClient.Tools.UdonSearcher
                                             break;
                                         }
                                     }
-                                }
-                                if (HasFoundMatch)
-                                {
-                                    break;
                                 }
                             }
                         }

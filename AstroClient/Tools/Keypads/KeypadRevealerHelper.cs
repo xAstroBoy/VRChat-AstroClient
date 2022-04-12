@@ -28,7 +28,7 @@ namespace AstroClient.Tools.Keypads
             }
             DestroyAllFailedFinds.SafetyRaise();
         }
-        internal static readonly string[] PasswordsVariables = new []
+        internal static  string[] PasswordsVariables =
         {
             "password",
             "solution",

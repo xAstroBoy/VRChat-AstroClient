@@ -58,6 +58,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             if(!Success)
             {
+                KeypadRevealerHelper.DestroyAllFailedFinds -= OnDestroyFailedSearch;
                 DestroyImmediate(this);
             }
         }
