@@ -60,7 +60,14 @@ namespace AstroClient
         private static void SafetyRaiseWithParamsInternal(Delegate eh, params object[] args)
         {
             if (eh == null) return;
-            
+            if(args == null)
+            {
+                args = new object[]
+                {
+                    null,
+                };
+            }
+
             Delegate[] array = eh.GetInvocationList();
             for (int i = 0; i < array.Length; i++)
             {
