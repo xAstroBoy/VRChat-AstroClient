@@ -4,7 +4,6 @@ namespace AstroClient.AstroMonos.AstroUdons
 {
     using System;
     using ClientAttributes;
-    using Programs;
     using UnhollowerBaseLib.Attributes;
     using VRC.SDK3.Components;
     using VRC.Udon;

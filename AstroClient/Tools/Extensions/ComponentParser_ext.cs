@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroMonos.AstroUdons.Programs;
     using UnityEngine;
     using VRC.SDK3.Components;
     using VRC.SDKBase;
@@ -83,15 +82,6 @@
             {
                 foreach (var item in list)
                 {
-                    if (item.serializedProgramAsset != null)
-                    {
-                        if (item.serializedProgramAsset.Equals(UdonPrograms.InteractProgram) ||
-                            item.serializedProgramAsset.Equals(UdonPrograms.PickupProgram))
-                        {
-                            continue;
-                        }
-                    }
-
                     if (item._eventTable.Keys.Count != 0)
                     {
                         UdonBehaviourObjects.Add(item);

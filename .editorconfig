@@ -49,6 +49,9 @@ dotnet_diagnostic.CS0436.severity = none
 # CS0108: Il membro nasconde il membro ereditato. Manca la parola chiave new
 dotnet_diagnostic.CS0108.severity = none
 
+# CS0659: Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
+dotnet_diagnostic.CS0659.severity = none
+
 [*.{cs,vb}]
 indent_style=space
 dotnet_diagnostic.CA2215.severity=suggestion

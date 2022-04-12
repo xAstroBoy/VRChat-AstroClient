@@ -171,13 +171,16 @@
                             Log.Exception(e);
                         }
 
-                        try
+                        if (ConfigManager.General.PreloadClientResources)
                         {
-                            component.StartPreloadResources(); // NEEDED TO PRELOAD RESOURCES BEFORE CLIENT INITIATES
-                        }
-                        catch (System.Exception e)
-                        {
-                            Log.Exception(e);
+                            try
+                            {
+                                component.StartPreloadResources(); // NEEDED TO PRELOAD RESOURCES BEFORE CLIENT INITIATES
+                            }
+                            catch (System.Exception e)
+                            {
+                                Log.Exception(e);
+                            }
                         }
 
                         try

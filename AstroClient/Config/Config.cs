@@ -66,6 +66,8 @@
         public float SpoofedFPS = 60f;
 
         public bool KeyBinds = false;
+
+        public bool PreloadClientResources = false;
     }
 
     [Serializable, Obfuscation]
