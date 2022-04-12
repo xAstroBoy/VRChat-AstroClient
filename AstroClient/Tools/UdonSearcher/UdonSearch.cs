@@ -7,7 +7,6 @@ namespace AstroClient.Tools.UdonSearcher
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using UdonEditor;
     using UnityEngine;
     using VRC.Udon;
@@ -56,54 +55,62 @@ namespace AstroClient.Tools.UdonSearcher
             return null;
         }
 
-        internal static List<GameObject> FindAllUdonsContainingSymbols(List<string> HeapSymbols, bool Debug = false)
+        internal static List<GameObject> FindAllUdonsContainingSymbols(List<string> TargetedSymbols, bool Debug = false)
         {
-            return FindAllUdonsContainingSymbols(HeapSymbols.ToArray(), Debug);
+            return FindAllUdonsContainingSymbols(TargetedSymbols.ToArray(), Debug);
         }
 
-        internal static List<GameObject> FindAllUdonsContainingSymbols(string[] HeapSymbols, bool Debug = false)
+        internal static List<GameObject> FindAllUdonsContainingSymbols(string[] TargetedSymbols, bool Debug = false)
         {
-            List<GameObject> SearchResult = new List<GameObject>();
+            
+            List<GameObject> searchResult = new List<GameObject>();
             var udons = WorldUtils.UdonScripts;
-            for (var UdonItem = 0; UdonItem < udons.Length; UdonItem++)
+            Log.Debug($"Searching for {TargetedSymbols.Length} Symbols in {udons.Length} Behaviours..");
+            foreach(var item in udons)
             {
-                var udon = udons[UdonItem];
-                if (udon != null)
+                if (item != null)
                 {
-                    var rawitem = udon.ToRawUdonBehaviour();
-                    if (rawitem != null)
+                    if (!searchResult.Contains(item.gameObject))
                     {
-                        bool HasFoundMatch = false;
-                        var symbolarray = rawitem.IUdonSymbolTable.GetSymbols().array.ToArray();
-                        if (symbolarray.Length != 0)
+                        if(Debug)
                         {
-                            for (var SymbolIndex = 0; SymbolIndex < HeapSymbols.Length; SymbolIndex++)
+                            Log.Debug($"Inspecting {item.name}...");
+                        }
+                        var rawitem = item.ToRawUdonBehaviour();
+                        if (rawitem != null)
+                        {
+                            if (Debug)
                             {
-                                if (HasFoundMatch)
+                                Log.Debug($"Udon Heap has  {rawitem.SymbolsDictionary.Count} Symbols!");
+                            }
+
+                            foreach (var target in TargetedSymbols)
+                            {
+                                if (Debug)
                                 {
+                                    Log.Debug($"Searching for Symbol {target} in {item.name}!");
+                                }
+
+
+                                if (rawitem.HasSymbol(target))
+                                {
+                                    if (Debug)
+                                    {
+                                        Log.Debug($"Found Symbol {target} in {item.name}!");
+                                    }
+
+                                    searchResult.Add(item.gameObject);
                                     break;
                                 }
-                                var searchedsymbol = HeapSymbols[SymbolIndex];
-                                for (var heapsymbols = 0; heapsymbols < symbolarray.Length; heapsymbols++)
-                                {
-                                    var containedsymbols = symbolarray[heapsymbols];
-                                    if (containedsymbols.isMatch(searchedsymbol, RegexOptions.IgnoreCase))
-                                    {
-                                        if (!SearchResult.Contains(udon.gameObject))
-                                        {
-                                            SearchResult.Add(udon.gameObject);
-                                            HasFoundMatch = true;
-                                            break;
-                                        }
-                                    }
-                                }
                             }
-                        }
 
+                        }
                     }
                 }
+
             }
-            return SearchResult;
+
+            return searchResult;
         }
 
         internal static List<GameObject> FindAllUdonEvents(List<string> GameObjectNames, List<string> TermsToWhitelist, List<string> TermsToAvoid, bool Debug = false)
@@ -429,17 +436,9 @@ namespace AstroClient.Tools.UdonSearcher
             return null;
         }
 
-        internal static RawUdonBehaviour FindUdonVariable(GameObject obj, string SymbolName, bool IncludeChildrens = true)
+        internal static RawUdonBehaviour FindUdonVariableInChildrens(GameObject obj, string SymbolName)
         {
-            List<UdonBehaviour> searchObjects = null;
-            if (IncludeChildrens)
-            {
-                 searchObjects = obj.GetComponentsInChildren<UdonBehaviour>(true).ToList();
-            }
-            else
-            {
-                searchObjects = obj.GetComponents<UdonBehaviour>().ToList();
-            }
+            var searchObjects = obj.GetComponentsInChildren<UdonBehaviour>(true).ToList();
             if (searchObjects.Count() != 0)
             {
                 for (int i = 0; i < searchObjects.Count; i++)
@@ -447,30 +446,31 @@ namespace AstroClient.Tools.UdonSearcher
                     var unpackedudon = searchObjects[i].ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
-                        if (unpackedudon == null || unpackedudon == null)
+                        if(unpackedudon.HasSymbol(SymbolName))
                         {
-                            continue;
+                            return unpackedudon;
                         }
+                        
+                    }
+                }
+            }
 
-                        for (int i1 = 0; i1 < unpackedudon.IUdonSymbolTable.GetSymbols().array.Count; i1++)
+            return null;
+        }
+
+        internal static RawUdonBehaviour FindUdonVariable(GameObject obj, string SymbolName)
+        {
+            var searchObjects = obj.GetComponents<UdonBehaviour>().ToList();
+            if (searchObjects.Count() != 0)
+            {
+                for (int i = 0; i < searchObjects.Count; i++)
+                {
+                    var unpackedudon = searchObjects[i].ToRawUdonBehaviour();
+                    if (unpackedudon != null)
+                    {
+                        if (unpackedudon.HasSymbol(SymbolName))
                         {
-                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols().array[i1];
-                            if (symbol != null && symbol.isMatch(SymbolName))
-                            {
-                                var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
-                                var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
-                                if (UnboxVariable != null)
-                                {
-                                    try
-                                    {
-                                        return unpackedudon;
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        Log.Exception(e);
-                                    }
-                                }
-                            }
+                            return unpackedudon;
                         }
                     }
                 }
@@ -495,9 +495,9 @@ namespace AstroClient.Tools.UdonSearcher
                             continue;
                         }
 
-                        for (int i2 = 0; i2 < unpackedudon.IUdonSymbolTable.GetSymbols().array.Count; i2++)
+                        for (int i2 = 0; i2 < unpackedudon.IUdonSymbolTable.GetSymbols().Length; i2++)
                         {
-                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols().array[i2];
+                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols()[i2];
                             if (symbol != null)
                             {
                                 var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);

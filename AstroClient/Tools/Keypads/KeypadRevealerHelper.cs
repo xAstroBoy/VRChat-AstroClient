@@ -26,9 +26,13 @@ namespace AstroClient.Tools.Keypads
             {
                 finds[i].gameObject.GetOrAddComponent<KeypadRevealer>();
             }
-            DestroyAllFailedFinds.SafetyRaise();
+            // Give time for the component to get the passcode, if it fails after 5s , destroy it
+            MiscUtils.DelayFunction(5f, () =>
+            {
+                DestroyAllFailedFinds.SafetyRaise();
+            });
         }
-        internal static  string[] PasswordsVariables =
+        internal static string[] PasswordsVariables { get; } =
         {
             "password",
             "solution",

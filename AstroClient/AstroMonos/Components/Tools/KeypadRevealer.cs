@@ -1,4 +1,5 @@
 ﻿using AstroClient.Tools.Keypads;
+using UnityEngine.UIElements;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
@@ -20,6 +21,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             AntiGcList = new List<AstroMonoBehaviour>(1);
             AntiGcList.Add(this);
+            KeypadRevealerHelper.DestroyAllFailedFinds += OnDestroyFailedSearch;
 
         }
 
@@ -31,7 +33,6 @@ namespace AstroClient.AstroMonos.Components.Tools
         // Use this for initialization
         private void Start()
         {
-            KeypadRevealerHelper.DestroyAllFailedFinds += OnDestroyFailedSearch;
             if (FindAndRevealPassword())
             {
                 Success = true;
@@ -65,10 +66,11 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         private bool FindAndRevealPassword()
         {
-            for (int i = 0; i < KeypadRevealerHelper.PasswordsVariables.Length; i++)
+            var keys = KeypadRevealerHelper.PasswordsVariables;
+            for (int i = 0; i < keys.Length; i++)
             {
-                string item = KeypadRevealerHelper.PasswordsVariables[i];
-                var UdonObj = gameObject.FindUdonVariable(item, false);
+                string item = keys[i];
+                var UdonObj = gameObject.FindUdonVariable(item);
                 if (UdonObj != null)
                 {
                     var heaptostring = UdonObj.UnboxAsString(item);
