@@ -7,6 +7,7 @@ namespace AstroClient.Tools.UdonSearcher
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using UdonEditor;
     using UnityEngine;
     using VRC.Udon;
@@ -86,7 +87,7 @@ namespace AstroClient.Tools.UdonSearcher
                                 for (var heapsymbols = 0; heapsymbols < symbolarray.Length; heapsymbols++)
                                 {
                                     var containedsymbols = symbolarray[heapsymbols];
-                                    if (containedsymbols.isMatch(searchedsymbol))
+                                    if (containedsymbols.isMatch(searchedsymbol, RegexOptions.IgnoreCase))
                                     {
                                         if (!SearchResult.Contains(udon.gameObject))
                                         {
