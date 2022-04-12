@@ -24,7 +24,7 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         private void Start()
         {
-            UdonBehaviour = base.gameObject.AddComponent<UdonBehaviour>();
+            UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if (PickupController != null)
             {
                 UseText = _UseText;

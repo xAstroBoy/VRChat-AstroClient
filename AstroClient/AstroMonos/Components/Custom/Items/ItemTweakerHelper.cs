@@ -96,6 +96,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
                 if (PickupEvents != null)
                 {
+                    PickupEvents.ForcePickupComponent = true;
                     PickupEvents.OnDrop += OnDrop;
                     PickupEvents.OnPickup += OnPickup;
                     PickupEvents.OnPickupUseDown += OnPickupUseDown;
