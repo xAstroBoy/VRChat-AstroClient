@@ -56,10 +56,10 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        System.Collections.Generic.List<GameObject> list = WorldUtils_Old.Get_Pickups();
-                        for (int i = 0; i < list.Count; i++)
+                        var pickups = WorldUtils.Pickups;
+                        for (int i = 0; i < pickups.Count; i++)
                         {
-                            GameObject item = list[i];
+                            GameObject item = pickups[i].gameObject;
                             try
                             {
                                 if (item != null)

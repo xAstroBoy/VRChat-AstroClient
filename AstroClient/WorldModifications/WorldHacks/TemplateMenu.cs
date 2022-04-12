@@ -33,10 +33,10 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (id == WorldIds.GeoLocator)
+            if (id == WorldIds.ID) 
             {
 
-                ModConsole.Log($"Recognized {Name} World, Patching Patron System....");
+                Log.Write($"Recognized {Name} World, (Your Message goes here)....");
                 isCurrentWorld = true;
                 if (CurrentMenu != null)
                 {

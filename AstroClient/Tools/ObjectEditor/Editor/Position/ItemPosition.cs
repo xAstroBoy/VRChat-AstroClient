@@ -190,7 +190,7 @@
                     }
 
                     SetPosition(obj, bonepos.position, true);
-                    OnlineEditor.RemoveOwnerShip(obj);
+                   // OnlineEditor.RemoveOwnerShip(obj);
                 }
             }
         }

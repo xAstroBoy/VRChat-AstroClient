@@ -41,7 +41,12 @@ namespace AstroClient.Tools.Keypads
             "passcodes",
             "correctCodes",
             "answer",
-            "PinCode"
+            "PinCode",
+            "Code1",
+            "Code2",
+            "Code3",
+            "Code8"
+
         };
 
 
