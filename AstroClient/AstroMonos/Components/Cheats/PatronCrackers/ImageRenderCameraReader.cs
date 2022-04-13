@@ -1,10 +1,5 @@
-﻿using System.Linq;
-using AstroClient.AstroMonos.Components.Spoofer;
-using AstroClient.CustomClasses;
+﻿using AstroClient.CustomClasses;
 using AstroClient.Tools.UdonSearcher;
-using AstroClient.xAstroBoy.Extensions;
-using AstroClient.xAstroBoy.Utility;
-using VRC.Udon;
 using Object = UnityEngine.Object;
 
 namespace AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
@@ -15,11 +10,11 @@ using UnhollowerBaseLib.Attributes;
 using IntPtr = System.IntPtr;
 
 [RegisterComponent]
-public class RenderCameraHijacker : AstroMonoBehaviour
+public class ImageRenderCameraReader : AstroMonoBehaviour
 {
     private readonly Il2CppSystem.Collections.Generic.List<Object> AntiGarbageCollection = new();
 
-    public RenderCameraHijacker(IntPtr ptr) : base(ptr)
+    public ImageRenderCameraReader(IntPtr ptr) : base(ptr)
     {
         AntiGarbageCollection.Add(this);
     }
@@ -31,9 +26,6 @@ public class RenderCameraHijacker : AstroMonoBehaviour
 
     private RawUdonBehaviour RenderCameraEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
-    private UdonBehaviour_Cached ProcessPatronsFromReadRenderTexture { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-
     internal void Start()
     {
         var cam = UdonSearch.FindUdonEvent(this.gameObject, "ReadPictureStep");
@@ -41,7 +33,6 @@ public class RenderCameraHijacker : AstroMonoBehaviour
         {
             RenderCameraEvent = cam.RawItem;
         }
-        ProcessPatronsFromReadRenderTexture = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatronsFromReadRenderTexture");
         if (RenderCameraEvent != null)
         {
             Initialize_RenderCameraEvent();
@@ -52,67 +43,9 @@ public class RenderCameraHijacker : AstroMonoBehaviour
         }
     }
 
-    private void Destroy()
+    private void OnDestroy()
     {
         Cleanup_RenderCameraEvent();
-    }
-
-    internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
-    {
-        if (ProcessPatronsFromReadRenderTexture != null)
-        {
-            if (item.Equals(ProcessPatronsFromReadRenderTexture.UdonBehaviour))
-            {
-                if (EventName.Equals(ProcessPatronsFromReadRenderTexture.EventKey))
-                {
-                    // The Final step has been sent, let's hijack it!
-
-                    // First let's edit the results of the rendercamera.
-
-                    if (currentOutputString.IsNotNullOrEmptyOrWhiteSpace())
-                    {
-                        // Split the results.
-                        bool HasBeenModified = false;
-                        var result = currentOutputString.ReadLines().ToList();
-                        if (result != null && result.Count != 0)
-                        {
-                            if (PlayerSpooferUtils.IsSpooferActive)
-                            {
-                                if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
-                                {
-                                    result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
-                                    HasBeenModified = true;
-                                }
-                            }
-                            else
-                            {
-                                if (!result.Contains(GameInstances.LocalPlayer.displayName))
-                                {
-                                    result.Insert(0, GameInstances.LocalPlayer.displayName);
-                                    HasBeenModified = true;
-
-                                }
-                            }
-
-
-                        }
-
-                        if(HasBeenModified)
-                        {
-
-                            // if that's so, let's force a new reading.
-
-                            // First replace the output with the modified one
-                            currentOutputString = string.Join("\n", result);
-
-
-                            //Secondly invoke again the same event.
-                            ProcessPatronsFromReadRenderTexture.InvokeBehaviour();
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private void Initialize_RenderCameraEvent()
@@ -5063,9 +4996,8 @@ public class RenderCameraHijacker : AstroMonoBehaviour
     private AstroUdonVariable<float> Private___8_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string> Private___16_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<UnityEngine.Camera> Private_renderCamera { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
     #endregion AstroUdonVariables  of RenderCameraEvent
-
-
 
     // Use this for initialization
 }

@@ -1,4 +1,5 @@
 ﻿using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+using AstroClient.xAstroBoy.Extensions;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -70,6 +71,8 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static bool _isDoorBellSpamEnabled { get; set; }
         private static object DoorbellSpam_CancellationToken { get; set; }
         private static bool _isBlueChairEnabed { get; set; }
+        private static UdonBehaviour_Cached ProcessPatronsFromReadRenderTexture {get; set;}
+        private static ImageRenderCameraReader RenderCameraReader { get; set; }
 
         #region BlueChairSpam
 
@@ -647,6 +650,71 @@ namespace AstroClient.WorldModifications.WorldHacks
             yield return null;
         }
 
+
+
+        internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
+        {
+            if (!isCurrentWorld) return;
+
+            if (ProcessPatronsFromReadRenderTexture != null)
+            {
+                if (item.Equals(ProcessPatronsFromReadRenderTexture.UdonBehaviour))
+                {
+                    if (EventName.Equals(ProcessPatronsFromReadRenderTexture.EventKey))
+                    {
+                        // The Final step has been sent, let's hijack it!
+                        ForceEliteTier();
+                    }
+                }
+            }
+        }
+
+
+        internal static void ForceEliteTier()
+        {
+            if (RenderCameraReader == null) return; // Requires RenderCamera Reader to get the results!
+
+            // First let's edit the results of the rendercamera.
+
+            // Split the results.
+            bool HasBeenModified = false;
+            var result = RenderCameraReader.currentOutputString.ReadLines().ToList();
+            if (result != null && result.Count != 0)
+            {
+                if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
+                {
+                    Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
+                    result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
+                    HasBeenModified = true;
+                }
+                if (GameInstances.LocalPlayer != null)
+                {
+                    if (!result.Contains(GameInstances.LocalPlayer.displayName))
+                    {
+                        Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
+                        result.Insert(1, GameInstances.LocalPlayer.displayName);
+                        HasBeenModified = true;
+                    }
+                }
+
+
+            }
+
+            if (HasBeenModified)
+            {
+
+                // if that's so, let's force a new reading.
+
+                // First replace the output with the modified one
+                RenderCameraReader.currentOutputString = string.Join("\n", result);
+
+
+                //Secondly invoke again the Reading event.
+                ProcessPatronsFromReadRenderTexture.InvokeBehaviour();
+            }
+
+        }
+
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.JustBClub)
@@ -659,14 +727,16 @@ namespace AstroClient.WorldModifications.WorldHacks
                 isCurrentWorld = true;
                 UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
-                var patronsystem = UdonSearch.FindUdonEvent("RenderCamera", "ReadPictureStep");
-                if(patronsystem != null)
+                var rendercamera = UdonSearch.FindUdonEvent("RenderCamera", "ReadPictureStep");
+                ProcessPatronsFromReadRenderTexture = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatronsFromReadRenderTexture");
+                if (rendercamera != null)
                 {
-                    // Force it to be on!
-                    patronsystem.gameObject.transform.root.gameObject.SetActive(true);
-                    patronsystem.gameObject.SetActive(true);
+                   RenderCameraReader = rendercamera.gameObject.GetOrAddComponent<ImageRenderCameraReader>();
 
-                    patronsystem.gameObject.GetOrAddComponent<RenderCameraHijacker>();
+                    // Force it to be on!
+                    RenderCameraReader.gameObject.transform.root.gameObject.SetActive(true);
+                    RenderCameraReader.gameObject.SetActive(true);
+
                 }
 
                 PenthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");
