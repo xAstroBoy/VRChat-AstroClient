@@ -1,6 +1,6 @@
 ﻿using AstroClient.xAstroBoy.Extensions;
-using System.Diagnostics;
 using AstroClient.xAstroBoy.Utility;
+using System.Diagnostics;
 
 namespace AstroClient.Tools.UdonEditor
 {
@@ -114,8 +114,8 @@ namespace AstroClient.Tools.UdonEditor
             {
                 case "System.String": return "string";
                 case "System.String[]": return "string[]";
-                case "System.Uint32": return "uint?";
-                case "System.Uint32[]": return "uint[]";
+                case "System.UInt32": return "uint?";
+                case "System.UInt32[]": return "uint[]";
                 case "System.Int32": return "int?";
                 case "System.Int32[]": return "int[]";
                 case "System.Int64": return "long?";
@@ -137,6 +137,7 @@ namespace AstroClient.Tools.UdonEditor
                 case "UnityEngine.Color": return "UnityEngine.Color?";
                 case "VRC.Udon.Common.Interfaces.NetworkEventTarget": return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
                 case "VRC.Udon.Common.Enums.EventTiming": return "VRC.Udon.Common.Enums.EventTiming?";
+                case "UnityEngine.Rect": return "UnityEngine.Rect?";
 
                 default:
                     if (name.Contains("+"))
@@ -151,20 +152,21 @@ namespace AstroClient.Tools.UdonEditor
         {
             switch (name)
             {
-case "System.UInt32":
-case "System.Int32":
-case "System.Int64":
-case "System.Char":
-case "System.Single":
-case "System.Boolean":
-case "System.Byte":
-case "System.UInt16":
-case "System.Double":
-case "UnityEngine.Vector3":
-case "UnityEngine.Quaternion":
-case "UnityEngine.Color":
-case "VRC.Udon.Common.Interfaces.NetworkEventTarget":
-case "VRC.Udon.Common.Enums.EventTiming":
+                case "System.UInt32":
+                case "System.Int32":
+                case "System.Int64":
+                case "System.Char":
+                case "System.Single":
+                case "System.Boolean":
+                case "System.Byte":
+                case "System.UInt16":
+                case "System.Double":
+                case "UnityEngine.Vector3":
+                case "UnityEngine.Quaternion":
+                case "UnityEngine.Color":
+                case "VRC.Udon.Common.Interfaces.NetworkEventTarget":
+                case "VRC.Udon.Common.Enums.EventTiming":
+                case "UnityEngine.Rect":    
                     return true;
 
                 default:
@@ -182,6 +184,10 @@ case "VRC.Udon.Common.Enums.EventTiming":
             var getter = new StringBuilder();
             var ActualType = obj.GetIl2CppType().FullName;
             var CorrectedType = CorrectType(ActualType);
+            if (CorrectedType.Contains("System.UInt32"))
+            {
+                CorrectedType = CorrectedType.Replace("System.UInt32", "uint"); // idk why, but there's this annoying bug where it fails to detect System.UInt32 and replace it with uint..
+            }
             var PrivateVar = $"Private_{Symbol}";
             var DoIAddNullChar = DoIAddNullCharBool(ActualType);
 

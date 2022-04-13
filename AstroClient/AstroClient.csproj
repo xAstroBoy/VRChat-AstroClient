@@ -107,7 +107,7 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\RenderCameraHijacker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\GlobalPatronUnlocker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\TierLand_CreditsReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CellDoorToggler.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_DoorAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />

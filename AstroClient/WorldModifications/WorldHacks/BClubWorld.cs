@@ -662,8 +662,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var patronsystem = UdonSearch.FindUdonEvent("RenderCamera", "ReadPictureStep");
                 if(patronsystem != null)
                 {
-                    patronsystem.gameObject.GetOrAddComponent<RenderCameraHijacker>();
+                    // Force it to be on!
+                    patronsystem.gameObject.transform.root.gameObject.SetActive(true);
+                    patronsystem.gameObject.SetActive(true);
 
+                    patronsystem.gameObject.GetOrAddComponent<RenderCameraHijacker>();
                 }
 
                 PenthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");

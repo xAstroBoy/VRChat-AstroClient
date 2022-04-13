@@ -62,7 +62,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<string[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -107,7 +112,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<uint[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -129,7 +139,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<int[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -150,7 +165,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<long[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -172,7 +192,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<char[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -194,7 +219,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<float[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -216,7 +246,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<bool[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -238,7 +273,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<byte[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -260,7 +300,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<ushort[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -282,7 +327,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<double[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -304,7 +354,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<TimeSpan[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {
@@ -440,7 +495,12 @@ namespace AstroClient.Tools.UdonEditor
                                 var result = heap.GetHeapVariable<UnityEngine.Color[]>(address);
                                 if (result != null && result.Length != 0)
                                 {
-                                    return "\n" + String.Join(",\n", result);
+                                    listoutput.AppendLine();
+                                    for (int i = 0; i < result.Length; i++)
+                                    {
+                                        listoutput.AppendLine(result[i].ToString() + " ,");
+                                    }
+                                    return listoutput.ToString();
                                 }
                                 else
                                 {

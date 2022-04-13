@@ -32,7 +32,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             PatronSystem = UdonSearch.FindUdonEvent("Patreon Credits", "GetPatronTier");
             if(PatronSystem != null)
             {
-                PatronSystem.gameObject.GetOrAddComponent<TierLand_CreditsReader>();
+                PatronSystem.gameObject.GetOrAddComponent<JarCreditReader>();
             }
         }
 
