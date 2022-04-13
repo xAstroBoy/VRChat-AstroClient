@@ -1071,47 +1071,44 @@
             if (CurrentDisplayName.IsNullOrEmptyOrWhiteSpace()) return;
             if (message.Contains("[Patreon]"))
             {
-                if (message.Contains("is a patron"))
+                if (message.Contains(CurrentDisplayName.ToLower()))
                 {
-                    if (message.Contains(CurrentDisplayName.ToLower()))
+
+                    if (message.Contains("is a patron"))
                     {
                         if (!isLocalPlayerPatron)
                         {
                             isLocalPlayerPatron = true;
                         }
+
                     }
-                }
-                if (message.Contains("is not a patron"))
-                {
-                    if (message.Contains(CurrentDisplayName.ToLower()))
+                    if (message.Contains("is not a patron"))
                     {
+                        ForceEliteTier();
                         if (isLocalPlayerPatron)
                         {
                             isLocalPlayerPatron = false;
                         }
-                    }
-                }
 
-                if (message.Contains("is an elite"))
-                {
-                    if (message.Contains(CurrentDisplayName.ToLower()))
+                    }
+
+                    if (message.Contains("is an elite"))
                     {
                         if (!isLocalPlayerElite)
                         {
                             isLocalPlayerElite = true;
                         }
                     }
-                }
-                if (message.Contains("is not an elite"))
-                {
-                    if (message.Contains(CurrentDisplayName.ToLower()))
+                    if (message.Contains("is not an elite"))
                     {
                         ForceEliteTier();
                         if (isLocalPlayerElite)
                         {
                             isLocalPlayerElite = false;
                         }
+
                     }
+
                 }
             }
         }
