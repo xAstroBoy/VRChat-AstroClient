@@ -7,7 +7,7 @@
     using System.Reflection;
     using AstroEventArgs;
     using Cheetos;
-    using Harmony;
+    using HarmonyLib;
     using MelonLoader;
     using Tools.Extensions;
 

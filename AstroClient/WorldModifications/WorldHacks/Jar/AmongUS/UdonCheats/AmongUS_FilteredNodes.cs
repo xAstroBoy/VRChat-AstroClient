@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
+﻿using AstroClient.xAstroBoy.Extensions;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -190,6 +192,7 @@
             for (int i = 0; i < action._eventTable.entries.Count; i++)
             {
                 var subaction = action._eventTable.entries[i];
+                if (subaction.key.IsNullOrEmptyOrWhiteSpace()) continue;
                 new QMSingleButton(menu, subaction.key, () =>
                 {
 

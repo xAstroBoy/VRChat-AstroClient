@@ -32,47 +32,397 @@ namespace AstroClient.WorldModifications.WorldHacks
     // TODO : REWRITE!
     internal class BClubWorld : AstroEvents
     {
-        internal static GameObject BedroomVIProot { get; set; }
-        internal static GameObject VIPRoom { get; set; }
-        internal static GameObject VIPInsideDoor { get; set; }
-        internal static GameObject VIPButton { get; set; }
-        internal static GameObject VIPControls { get; set; }
-        internal static GameObject FlairBtnTablet { get; set; }
-        internal static GameObject ElevatorFlairBtn { get; set; }
-        private static GameObject PenthouseRoot { get; set; }
-        internal static GameObject GlobalUdon { get; set; }
-        internal static GameObject LobbyRoot { get; set; }
 
-        internal static QMNestedGridMenu BClubExploitsPage { get; set; }
 
-        private static QMToggleButton FreezeLockedToggle { get; set; }
-        private static QMToggleButton FreezeUnlockedToggle { get; set; }
-        private static QMToggleButton BlueChairToggle { get; set; }
+        #region  World Paths
+        private static GameObject _Bedroom_VIP;
+        internal static GameObject Bedroom_VIP
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if(_Bedroom_VIP == null)
+                {
+                    return _Bedroom_VIP = GameObjectFinder.Find("Bedroom VIP"); 
+                }
+                return _Bedroom_VIP;
+            }
+        }
 
-        private static UdonBehaviour_Cached MoanSpamBehaviour { get; set; }
-        private static UdonBehaviour_Cached FallSpamBehaviour { get; set; }
+        private static GameObject _Lobby;
+        internal static GameObject Lobby
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Lobby == null)
+                {
+                    return _Lobby = GameObjectFinder.FindRootSceneObject("Lobby");
+                }
+                return _Lobby;
+            }
+        }
+        private static GameObject _Udon;
+        internal static GameObject Udon
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Udon == null)
+                {
+                    return _Udon = GameObjectFinder.FindRootSceneObject("Udon");
+                }
+                return _Udon;
+            }
+        }
+        private static GameObject _VIPRoom;
+        internal static GameObject VIPRoom
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (_VIPRoom == null)
+                {
+                    return _VIPRoom = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP").gameObject;
+                }
+                return _VIPRoom;
+            }
+        }
+        private static GameObject _Penthouse;
+        internal static GameObject Penthouse
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Penthouse == null)
+                {
+                    return _Penthouse = GameObjectFinder.FindRootSceneObject("Penthouse");
+                }
+                return _Penthouse;
+            }
+        }
 
-        private static bool _isFreezeLockEnabed { get; set; }
-        private static bool _isFreezeUnlockEnabed { get; set; }
-        private static bool _isRainbowEnabled { get; set; }
-        private static bool _isMoanSpamEnabled { get; set; }
-        private static bool _isFallSpamEnabled { get; set; }
+        private static GameObject _Bedrooms;
+        internal static GameObject Bedrooms
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Bedrooms == null)
+                {
+                    return _Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
+                }
+                return _Bedrooms;
+            }
+        }
 
-        private static bool isCurrentWorld { get; set; }
+        private static GameObject _VIPButton;
+        internal static GameObject VIPButton
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Bedroom_VIP == null) return null;
+                if (_VIPButton == null)
+                {
+                    return _VIPButton = Bedroom_VIP.transform.FindObject("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
+                }
+                return _VIPButton;
+            }
+        }
 
-        private static object MoanSpam_CancellationToken { get; set; }
-        private static object FallSpam_CancellationToken { get; set; }
+        private static GameObject _LockIndicator_1;
+        internal static GameObject LockIndicator_1
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (_LockIndicator_1 == null)
+                {
+                    return _LockIndicator_1 = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 1/Screen/Canvas/Indicators/Locked").gameObject;
+                }
+                return _LockIndicator_1;
+            }
+        }
+        private static GameObject _LockIndicator_2;
+        internal static GameObject LockIndicator_2
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (_LockIndicator_2 == null)
+                {
+                    return _LockIndicator_2 = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 2/Screen/Canvas/Indicators/Locked").gameObject;
+                }
+                return _LockIndicator_2;
+            }
+        }
+        private static GameObject _LockIndicator_3;
+        internal static GameObject LockIndicator_3
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (_LockIndicator_3 == null)
+                {
+                    return _LockIndicator_3 = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 3/Screen/Canvas/Indicators/Locked").gameObject;
+                }
+                return _LockIndicator_3;
+            }
+        }
+        private static GameObject _LockIndicator_4;
+        internal static GameObject LockIndicator_4
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (_LockIndicator_4 == null)
+                {
+                    return _LockIndicator_4 = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 4/Screen/Canvas/Indicators/Locked").gameObject;
+                }
+                return _LockIndicator_4;
+            }
+        }
+        private static GameObject _LockIndicator_5;
+        internal static GameObject LockIndicator_5
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (_LockIndicator_5 == null)
+                {
+                    return _LockIndicator_5 = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 5/Screen/Canvas/Indicators/Locked").gameObject;
+                }
+                return _LockIndicator_5;
+            }
+        }
+        private static GameObject _LockIndicator_6;
+        internal static GameObject LockIndicator_6
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (_LockIndicator_6 == null)
+                {
+                    return _LockIndicator_6 = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 6/Screen/Canvas/Indicators/Locked").gameObject;
+                }
+                return _LockIndicator_6;
+            }
+        }
+        private static GameObject _LockIndicator_VIP;
+        internal static GameObject LockIndicator_VIP
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (_LockIndicator_VIP == null)
+                {
+                    return _LockIndicator_VIP = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/Screen (1)/Canvas/Indicators/Locked").gameObject;
+                }
+                return _LockIndicator_VIP;
+            }
+        }
 
-        private static object DoorLockFreeze_CancellationToken { get; set; }
-        private static object DoorUnlockFreeze_CancellationToken { get; set; }
-        private static object BlueChairSpam_CancellationToken { get; set; }
-        private static object RainbowSpam_CancellationToken { get; set; }
-        private static QMToggleButton SpamDoorbellsToggle { get; set; }
-        private static bool _isDoorBellSpamEnabled { get; set; }
-        private static object DoorbellSpam_CancellationToken { get; set; }
-        private static bool _isBlueChairEnabed { get; set; }
-        private static UdonBehaviour_Cached ProcessPatronsFromReadRenderTexture {get; set;}
-        private static ImageRenderCameraReader RenderCameraReader { get; set; }
+        private static GameObject _VIPInsideDoor;
+        internal static GameObject VIPInsideDoor
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (VIPRoom == null) return null;
+                if (_VIPInsideDoor == null)
+                {
+                    return _VIPInsideDoor = VIPRoom.transform.FindObject("Door001 (1)").gameObject;
+                }
+                return _VIPInsideDoor;
+            }
+        }
+        private static GameObject _VIPControls;
+        internal static GameObject VIPControls
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Lobby == null) return null;
+                if (_VIPControls == null)
+                {
+                    return _VIPControls = Lobby.transform.FindObject("Udon/MyI Control Panel").gameObject;
+                }
+                return _VIPControls;
+            }
+        }
+        private static GameObject _Cancer_Spawn;
+        internal static GameObject Cancer_Spawn
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Lobby == null) return null;
+                if (_Cancer_Spawn == null)
+                {
+                    return _Cancer_Spawn = Lobby.transform.FindObject("New Part").FindObject("Cancer Spawn").gameObject;
+                }
+                return _Cancer_Spawn;
+            }
+        }
+        private static GameObject _ElevatorFlairBtn;
+        internal static GameObject ElevatorFlairBtn
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Lobby == null) return null;
+                if (_ElevatorFlairBtn == null)
+                {
+                    return _ElevatorFlairBtn = Lobby.transform.FindObject("New Part/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide").gameObject;
+                }
+                return _ElevatorFlairBtn;
+            }
+        }
+        private static GameObject _FlairBtnTablet;
+        internal static GameObject FlairBtnTablet
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Udon == null) return null;
+                if (_FlairBtnTablet == null)
+                {
+                    return _FlairBtnTablet = Udon.transform.FindObject("Main Controls/New Contents/Pages/World/Buttons/Own Flair - BlueButtonWide").gameObject;
+                }
+                return _FlairBtnTablet;
+            }
+        }
+
+        #endregion
+        internal static string CurrentDisplayName
+        {
+            get
+            {
+                return PlayerSpooferUtils.Original_DisplayName;
+            }
+        }
+
+        private static object MoanSpam_CancellationToken;
+        private static object FallSpam_CancellationToken;
+        private static object DoorLockFreeze_CancellationToken;
+        private static object DoorUnlockFreeze_CancellationToken;
+        private static object BlueChairSpam_CancellationToken;
+        private static object RainbowSpam_CancellationToken;
+        private static object DoorbellSpam_CancellationToken;
+
+
+
+
+
+        internal static QMNestedGridMenu BClubExploitsPage;
+
+        private static QMToggleButton FreezeLockedToggle;
+        private static QMToggleButton FreezeUnlockedToggle;
+        private static QMToggleButton BlueChairToggle;
+        private static QMToggleButton LockButton1;
+        private static QMToggleButton LockButton2;
+        private static QMToggleButton LockButton3;
+        private static QMToggleButton LockButton4;
+        private static QMToggleButton LockButton5;
+        private static QMToggleButton LockButton6;
+        private static QMToggleButton LockButton7;
+
+        private static QMToggleButton SpoofAsWorldAuthorBtn;
+        private static QMToggleButton ToggleRainbowBtn;
+        private static QMToggleButton ToggleMoanSpamBtn;
+        private static QMToggleButton ToggleFallSpamBtn;
+
+
+        private static UdonBehaviour_Cached MoanSpamBehaviour;
+        private static UdonBehaviour_Cached FallSpamBehaviour;
+
+        private static bool _isFreezeLockEnabed;
+        private static bool _isFreezeUnlockEnabed;
+        private static bool _isRainbowEnabled;
+        private static bool _isMoanSpamEnabled;
+        private static bool _isFallSpamEnabled;
+        private static bool _isLocalPlayerElite;
+        private static bool _isLocalPlayerPatron;
+        private static bool _isDoorBellSpamEnabled;
+        private static bool _isBlueChairEnabed;
+
+        private static bool isCurrentWorld;
+
+        private static QMToggleButton SpamDoorbellsToggle;
+        private static UdonBehaviour_Cached ProcessPatronsFromReadRenderTexture;
+        private static UdonBehaviour_Cached ReadPictureStep;
+        private static UdonBehaviour_Cached VoiceAction;
+
+        private static ImageRenderCameraReader RenderCameraReader;
+        private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> _bells = new List<UdonBehaviour_Cached>();
+
+        private static List<UdonBehaviour_Cached> _chairs = new List<UdonBehaviour_Cached>();
+
+        private static GameObjectListener LockIndicator1_Listener;
+        private static GameObjectListener LockIndicator2_Listener;
+        private static GameObjectListener LockIndicator3_Listener;
+        private static GameObjectListener LockIndicator4_Listener;
+        private static GameObjectListener LockIndicator5_Listener;
+        private static GameObjectListener LockIndicator6_Listener;
+        private static GameObjectListener LockIndicator7_Listener;
+
+        internal static bool isLocalPlayerElite
+        {
+            get => _isLocalPlayerElite;
+            
+            private set
+            {
+                bool Report = value != _isLocalPlayerElite;
+
+                if (Report)
+                {
+                    if (value)
+                    {
+                        Log.Debug($"{CurrentDisplayName} Gained Elite Access!", System.Drawing.Color.Chartreuse);
+                    }
+                    else
+                    {
+                        Log.Debug($"{CurrentDisplayName} Lost Elite Access!", System.Drawing.Color.Red);
+                    }
+                }
+                _isLocalPlayerElite = value;
+            }
+
+        }
+        internal static bool isLocalPlayerPatron
+        {
+            get => _isLocalPlayerPatron;
+
+            private set
+            {
+                bool Report = value != _isLocalPlayerPatron;
+
+                if (Report)
+                {
+                    if (value)
+                    {
+                        Log.Debug($"{CurrentDisplayName} Gained Patron Access!", System.Drawing.Color.Chartreuse);
+                    }
+                    else
+                    {
+                        Log.Debug($"{CurrentDisplayName} Lost Patron Access!", System.Drawing.Color.Red);
+                    }
+                }
+                _isLocalPlayerPatron = value;
+            }
+
+        }
+
 
         #region BlueChairSpam
 
@@ -277,34 +627,9 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         #endregion FallSpam
 
-        private static GameObject LockIndicator1 { get; set; }
-        private static GameObject LockIndicator2 { get; set; }
-        private static GameObject LockIndicator3 { get; set; }
-        private static GameObject LockIndicator4 { get; set; }
-        private static GameObject LockIndicator5 { get; set; }
-        private static GameObject LockIndicator6 { get; set; }
-        private static GameObject LockIndicator7 { get; set; }
 
-        private static GameObjectListener LockIndicator1_Listener { get; set; }
-        private static GameObjectListener LockIndicator2_Listener{ get; set; }
-        private static GameObjectListener LockIndicator3_Listener{ get; set; }
-        private static GameObjectListener LockIndicator4_Listener{ get; set; }
-        private static GameObjectListener LockIndicator5_Listener{ get; set; }
-        private static GameObjectListener LockIndicator6_Listener{ get; set; }
-        private static GameObjectListener LockIndicator7_Listener{ get; set; }
 
-        private static QMToggleButton LockButton1 { get; set; }
-        private static QMToggleButton LockButton2{ get; set; }
-        private static QMToggleButton LockButton3{ get; set; }
-        private static QMToggleButton LockButton4{ get; set; }
-        private static QMToggleButton LockButton5{ get; set; }
-        private static QMToggleButton LockButton6{ get; set; }
-        private static QMToggleButton LockButton7{ get; set; }
-
-        private static QMToggleButton SpoofAsWorldAuthorBtn { get; set; }
-        private static QMToggleButton ToggleRainbowBtn { get; set; }
-        private static QMToggleButton ToggleMoanSpamBtn { get; set; }
-        private static QMToggleButton ToggleFallSpamBtn { get; set; }
+                                                                 
 
         internal static GameObjectListener RegisterListener(GameObject Object, Action OnEnabled, Action OnDisabled, Action OnDestroy)
         {
@@ -350,10 +675,12 @@ namespace AstroClient.WorldModifications.WorldHacks
             var MapFun = new QMNestedGridMenu(BClubExploitsPage, "World Fun", "Some Random Fun things");
 
             // Rainbow
-            ToggleRainbowBtn = new QMToggleButton(MapFun, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
+            ToggleRainbowBtn = new QMToggleButton(MapFun,  "Rainbow", () => { IsRainbowEnabled = true; }, () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
             ToggleRainbowBtn.SetToggleState(IsRainbowEnabled, false);
-            ToggleMoanSpamBtn = new QMToggleButton(MapFun, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
+            ToggleMoanSpamBtn = new QMToggleButton(MapFun,  "Moan Spam", () => { IsMoanSpamEnabled = true; }, () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
             ToggleMoanSpamBtn.SetToggleState(IsMoanSpamEnabled, false);
+            ToggleFallSpamBtn = new QMToggleButton(MapFun,  "Fall Spam", () => { IsFallSpamEnabled = true; }, () => { IsFallSpamEnabled = false; }, "Fall Spam", Color.green, Color.red);
+            ToggleFallSpamBtn.SetToggleState(IsFallSpamEnabled, false);
 
             // VIP
             SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 6, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", Color.green, Color.red);
@@ -364,10 +691,205 @@ namespace AstroClient.WorldModifications.WorldHacks
             // Spamming
             if (Bools.IsDeveloper)
             {
-                BlueChairToggle = new QMToggleButton(Exploits, 5, -1, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, () => IsBlueChairEnabled = false, "BlueChair Everyone", Color.green, Color.red);
+                BlueChairToggle = new QMToggleButton(Exploits, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, () => IsBlueChairEnabled = false, "BlueChair Everyone", Color.green, Color.red);
             }
-            SpamDoorbellsToggle = new QMToggleButton(Exploits, 5, 0, "Spam Doorbells", () => IsDoorbellSpamEnabled = true, () => IsDoorbellSpamEnabled = false, "Toggle Doorbell Spam");
+            SpamDoorbellsToggle = new QMToggleButton(Exploits, "Spam Doorbells", () => IsDoorbellSpamEnabled = true, () => IsDoorbellSpamEnabled = false, "Toggle Doorbell Spam");
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
+        }
+
+
+                internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            if (id.Equals(WorldIds.JustBClub))
+            {
+                isCurrentWorld = true;
+
+                if (BClubExploitsPage != null)
+                {
+                    BClubExploitsPage.SetInteractable(true);
+                    BClubExploitsPage.SetTextColor(Color.green);
+                }
+
+
+                UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
+                Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
+
+                if (Penthouse != null)
+                {
+                    LockIndicator1_Listener = RegisterListener(LockIndicator_1, () => { LockButton1.SetToggleState(false); }, () => { LockButton1.SetToggleState(true); }, null);
+                    LockIndicator2_Listener = RegisterListener(LockIndicator_2, () => { LockButton2.SetToggleState(false); }, () => { LockButton2.SetToggleState(true); }, null);
+                    LockIndicator3_Listener = RegisterListener(LockIndicator_3, () => { LockButton3.SetToggleState(false); }, () => { LockButton3.SetToggleState(true); }, null);
+                    LockIndicator4_Listener = RegisterListener(LockIndicator_4, () => { LockButton4.SetToggleState(false); }, () => { LockButton4.SetToggleState(true); }, null);
+                    LockIndicator5_Listener = RegisterListener(LockIndicator_5, () => { LockButton5.SetToggleState(false); }, () => { LockButton5.SetToggleState(true); }, null);
+                    LockIndicator6_Listener = RegisterListener(LockIndicator_6, () => { LockButton6.SetToggleState(false); }, () => { LockButton6.SetToggleState(true); }, null);
+                    LockIndicator7_Listener = RegisterListener(LockIndicator_VIP, () => { LockButton7.SetToggleState(false); }, () => { LockButton7.SetToggleState(true); }, null);
+                }
+                else
+                {
+                    Log.Error("Failed to find Penthouse!");
+                }
+
+                MiscUtils.DelayFunction(2f, () =>
+                {
+                    Log.Debug("Rainbow Exploit!");
+
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Red"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Red"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Cyan"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Cyan"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Pink"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Pink"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Purple"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Purple"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Green"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Green"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Blue"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Blue"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Yellow"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Yellow"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Orange"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Orange"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1White"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2White"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
+                });
+
+                if (Lobby != null)
+                {
+                    if (Cancer_Spawn != null)
+                    {
+                        Cancer_Spawn.DestroyMeLocal();
+                    }
+
+                    if (VIPControls != null)
+                    {
+                        VIPControls.SetActive(true);
+                        VIPControls.GetOrAddComponent<Enabler>();
+                    }
+
+                    if (ElevatorFlairBtn != null)
+                    {
+                        ElevatorFlairBtn.SetActive(true);
+                        ElevatorFlairBtn.GetOrAddComponent<Enabler>();
+                    }
+                }
+
+                if (Udon != null)
+                {
+                    if (FlairBtnTablet != null)
+                    {
+                        FlairBtnTablet.SetActive(true);
+                        FlairBtnTablet.GetOrAddComponent<Enabler>();
+                    }
+                }
+                try
+                {
+                    Log.Debug("Searching for Private Rooms Exteriors...");
+                    _ = CreateButtonGroup(1, new Vector3(-111.00629f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    _ = CreateButtonGroup(2, new Vector3(-109.28977f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                    _ = CreateButtonGroup(3, new Vector3(-103.00354f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    _ = CreateButtonGroup(4, new Vector3(-101.28438f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                    _ = CreateButtonGroup(5, new Vector3(-95.01436f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    _ = CreateButtonGroup(6, new Vector3(-93.28891f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+
+                    // VIP Room
+                    if (VIPRoom == null)
+                    {
+                        Log.Error("VIP Bedroom was not found!");
+                    }
+
+                    CreateVIPUnlockButton(new Vector3(-80.4f, 16.0598f, -1.695f), new Vector3(0f, 0, 0f));
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                }
+
+                try
+                {
+                    if (Bedroom_VIP == null)
+                    {
+                        Log.Error("VIP Bedroom Root was not found!");
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                }
+
+                MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
+                FallSpamBehaviour = UdonSearch.FindUdonEvent("NPC Animations Udon", "PlayFall");
+
+                Log.Write("Starting Update Loop");
+                _ = MelonCoroutines.Start(RemovePrivacies());
+                //_ = MelonCoroutines.Start(BypassElevator());
+                _ = MelonCoroutines.Start(EnableElevatorFlairBtn());
+                _ = MelonCoroutines.Start(EnableTabletFlairBtn());
+                _ = MelonCoroutines.Start(UpdateLoop());
+            }
+            else
+            {
+                isCurrentWorld = false;
+                if (BClubExploitsPage != null)
+                {
+                    BClubExploitsPage.SetInteractable(false);
+                    BClubExploitsPage.SetTextColor(Color.red);
+                }
+            }
+        }
+
+
+        internal override void OnUnityLog(string message)
+        {
+            if (!isCurrentWorld) return;
+            if (message.Contains("[Patreon]"))
+            {
+                if (message.Contains("is a patron"))
+                {
+                    if (message.Contains(CurrentDisplayName.ToLower()))
+                    {
+                        if (!isLocalPlayerPatron)
+                        {
+                            isLocalPlayerPatron = true;
+                        }
+                    }
+                }
+                if (message.Contains("is not a patron"))
+                {
+                    if (message.Contains(CurrentDisplayName.ToLower()))
+                    {
+                        if (isLocalPlayerPatron)
+                        {
+                            isLocalPlayerPatron = false;
+                        }
+                    }
+                }
+
+                if (message.Contains("is an elite"))
+                {
+                    if (message.Contains(CurrentDisplayName.ToLower()))
+                    {
+                        if (!isLocalPlayerElite)
+                        {
+                            isLocalPlayerElite = true;
+                        }
+                    }
+                }
+                if (message.Contains("is not an elite"))
+                {
+                    if (message.Contains(CurrentDisplayName.ToLower()))
+                    {
+                        ForceEliteTier();
+                        if (isLocalPlayerElite)
+                        {
+                            isLocalPlayerElite = false;
+
+                        }
+                    }
+                }
+            }
         }
 
         private static void Rainbow()
@@ -454,13 +976,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield break;
                 }
 
-                if (LockIndicator1.active != true) ToggleDoor(1);
-                if (LockIndicator2.active != true) ToggleDoor(2);
-                if (LockIndicator3.active != true) ToggleDoor(3);
-                if (LockIndicator4.active != true) ToggleDoor(4);
-                if (LockIndicator5.active != true) ToggleDoor(5);
-                if (LockIndicator6.active != true) ToggleDoor(6);
-                if (LockIndicator7.active != true) ToggleDoor(7);
+                if (LockIndicator_1.active != true) ToggleDoor(1);
+                if (LockIndicator_2.active != true) ToggleDoor(2);
+                if (LockIndicator_3.active != true) ToggleDoor(3);
+                if (LockIndicator_4.active != true) ToggleDoor(4);
+                if (LockIndicator_5.active != true) ToggleDoor(5);
+                if (LockIndicator_6.active != true) ToggleDoor(6);
+                if (LockIndicator_VIP.active != true) ToggleDoor(7);
 
                 yield return new WaitForSeconds(1f);
             }
@@ -476,19 +998,18 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield break;
                 }
 
-                if (LockIndicator1.active != false) ToggleDoor(1);
-                if (LockIndicator2.active != false) ToggleDoor(2);
-                if (LockIndicator3.active != false) ToggleDoor(3);
-                if (LockIndicator4.active != false) ToggleDoor(4);
-                if (LockIndicator5.active != false) ToggleDoor(5);
-                if (LockIndicator6.active != false) ToggleDoor(6);
-                if (LockIndicator7.active != false) ToggleDoor(7);
+                if (LockIndicator_1.active != false) ToggleDoor(1);
+                if (LockIndicator_2.active != false) ToggleDoor(2);
+                if (LockIndicator_3.active != false) ToggleDoor(3);
+                if (LockIndicator_4.active != false) ToggleDoor(4);
+                if (LockIndicator_5.active != false) ToggleDoor(5);
+                if (LockIndicator_6.active != false) ToggleDoor(6);
+                if (LockIndicator_VIP.active != false) ToggleDoor(7);
 
                 yield return new WaitForSeconds(1f);
             }
         }
 
-        private static List<UdonBehaviour_Cached> _bells = new List<UdonBehaviour_Cached>();
 
         private static void SpamDoorbells()
         {
@@ -514,8 +1035,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 yield return null;
             }
         }
-
-        private static List<UdonBehaviour_Cached> _chairs = new List<UdonBehaviour_Cached>();
 
         private static void BlueChairSpam()
         {
@@ -577,39 +1096,80 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (isCurrentWorld)
             {
-                isCurrentWorld = false;
+                IsBlueChairEnabled = false;
+                IsDoorbellSpamEnabled = false;
+                IsFreezeLockEnabed = false;
+                IsFreezeUnlockEnabed = false;
+                IsRainbowEnabled = false;
+                IsMoanSpamEnabled = false;
+                IsFallSpamEnabled = false;
 
-                if (IsBlueChairEnabled) IsBlueChairEnabled = false;
-                if (IsDoorbellSpamEnabled) IsDoorbellSpamEnabled = false;
-                if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
-                if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
-                if (IsMoanSpamEnabled) IsMoanSpamEnabled = false;
-                if (IsRainbowEnabled) IsRainbowEnabled = false;
+                _Bedroom_VIP = null;
+                _Lobby = null;
+                _Udon = null;
+                _VIPRoom = null;
+                _Penthouse = null;
+                _Bedrooms = null;
+                _VIPButton = null;
+                _LockIndicator_1 = null;
+                _LockIndicator_2 = null;
+                _LockIndicator_3 = null;
+                _LockIndicator_4 = null;
+                _LockIndicator_5 = null;
+                _LockIndicator_6 = null;
+                _LockIndicator_VIP = null;
+                _VIPInsideDoor = null;
+                _VIPControls = null;
+                _Cancer_Spawn = null;
+                _ElevatorFlairBtn = null;
+                _FlairBtnTablet = null;
 
-                MoanSpam_CancellationToken = null;
-                DoorLockFreeze_CancellationToken = null;
-                DoorUnlockFreeze_CancellationToken = null;
+
+                LockIndicator1_Listener.DestroyMeLocal(true);
+                LockIndicator2_Listener.DestroyMeLocal(true);
+                LockIndicator3_Listener.DestroyMeLocal(true);
+                LockIndicator4_Listener.DestroyMeLocal(true);
+                LockIndicator5_Listener.DestroyMeLocal(true);
+                LockIndicator6_Listener.DestroyMeLocal(true);
+                LockIndicator7_Listener.DestroyMeLocal(true);
+
 
                 _bells.Clear();
                 _chairs.Clear();
                 ColorActions.Clear();
-                BedroomVIProot = null;
+
+
+
+                VoiceAction = null;
+                MoanSpamBehaviour = null;
+                FallSpamBehaviour = null;
+                ProcessPatronsFromReadRenderTexture = null;
+                ReadPictureStep = null;
+                RenderCameraReader = null;
+
+                MoanSpam_CancellationToken = null;
+                FallSpam_CancellationToken = null;
+                DoorLockFreeze_CancellationToken = null;
+                DoorUnlockFreeze_CancellationToken = null;
+                BlueChairSpam_CancellationToken = null;
+                RainbowSpam_CancellationToken = null;
+                DoorbellSpam_CancellationToken = null;
+
                 Log.Write("Done unloading B Club..");
             }
         }
 
-        private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
-        private static UdonBehaviour_Cached VoiceAction;
 
         internal static GameObject GetIndicator(int id)
         {
+            if (Penthouse == null) return null;
             if (id <= 6)
             {
-                return PenthouseRoot.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {id}/Screen/Canvas/Indicators/Locked").gameObject;
+                return Penthouse.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {id}/Screen/Canvas/Indicators/Locked").gameObject;
             }
             else if (id == 7)
             {
-                return PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/Screen (1)/Canvas/Indicators/Locked").gameObject;
+                return Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/Screen (1)/Canvas/Indicators/Locked").gameObject;
             }
             else
             {
@@ -620,7 +1180,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static IEnumerator BypassElevator()
         {
             Log.Debug("Elevator Bypass Started", System.Drawing.Color.Aquamarine);
-            var elevator = LobbyRoot.transform.FindObject("New Part/Udon/Warning");
+            var elevator = Lobby.transform.FindObject("New Part/Udon/Warning");
 
             while (elevator == null) yield return new WaitForSeconds(0.001f);
             while (elevator.gameObject.active)
@@ -655,24 +1215,58 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
         {
             if (!isCurrentWorld) return;
-
-            if (ProcessPatronsFromReadRenderTexture != null)
+            if (item == null) return;
+            if (EventName.IsNullOrEmptyOrWhiteSpace()) return;
+            if (item.name.isMatch("RenderCamera") && EventName.isMatch("ReadPictureStep"))
             {
-                if (item.Equals(ProcessPatronsFromReadRenderTexture.UdonBehaviour))
+                if (ReadPictureStep == null)
                 {
-                    if (EventName.Equals(ProcessPatronsFromReadRenderTexture.EventKey))
+                    ReadPictureStep = new UdonBehaviour_Cached(item, EventName);
+                }
+                if (ReadPictureStep != null)
+                {
+                    if (RenderCameraReader == null)
                     {
-                        // The Final step has been sent, let's hijack it!
-                        ForceEliteTier();
+                        RenderCameraReader = ReadPictureStep.gameObject.GetOrAddComponent<ImageRenderCameraReader>();
                     }
                 }
             }
+
+            if (item.name.isMatch("Patreon") && EventName.isMatch("_ProcessPatronsFromReadRenderTexture"))
+            {
+                if (ProcessPatronsFromReadRenderTexture == null)
+                {
+                    ProcessPatronsFromReadRenderTexture = new UdonBehaviour_Cached(item, EventName);
+                }
+                // The Final step has been sent, let's hijack it!
+                ForceEliteTier();
+            }
+
         }
 
 
         internal static void ForceEliteTier()
         {
-            if (RenderCameraReader == null) return; // Requires RenderCamera Reader to get the results!
+            
+            if (RenderCameraReader == null)
+            {
+                RenderCameraReader = UdonSearch.FindUdonEvent("RenderCamera", "ReadPictureStep").gameObject.GetOrAddComponent<ImageRenderCameraReader>();
+            }
+
+            if (ProcessPatronsFromReadRenderTexture == null)
+            {
+                ProcessPatronsFromReadRenderTexture = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatronsFromReadRenderTexture");
+            }
+            if (RenderCameraReader == null)
+            {
+                Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
+                return;
+            }
+            if (ProcessPatronsFromReadRenderTexture == null)
+            {
+                Log.Warn($"Unable to Force Elite Tier due to ProcessPatronsFromReadRenderTexture Event being Null!");
+                return;
+            }
 
             // First let's edit the results of the rendercamera.
 
@@ -715,172 +1309,8 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
-        {
-            if (id == WorldIds.JustBClub)
-            {
-                if (BClubExploitsPage != null)
-                {
-                    BClubExploitsPage.SetInteractable(true);
-                    BClubExploitsPage.SetTextColor(Color.green);
-                }
-                isCurrentWorld = true;
-                UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
-                Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
-                var rendercamera = UdonSearch.FindUdonEvent("RenderCamera", "ReadPictureStep");
-                ProcessPatronsFromReadRenderTexture = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatronsFromReadRenderTexture");
-                if (rendercamera != null)
-                {
-                   RenderCameraReader = rendercamera.gameObject.GetOrAddComponent<ImageRenderCameraReader>();
 
-                    // Force it to be on!
-                    RenderCameraReader.gameObject.transform.root.gameObject.SetActive(true);
-                    RenderCameraReader.gameObject.SetActive(true);
 
-                }
-
-                PenthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");
-                if (PenthouseRoot != null)
-                {
-                    LockIndicator1 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 1/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator2 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 2/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator3 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 3/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator4 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 4/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator5 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 5/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator6 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 6/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator7 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/Screen (1)/Canvas/Indicators/Locked").gameObject;
-
-                    LockIndicator1_Listener = RegisterListener(LockIndicator1, () => { LockButton1.SetToggleState(false); }, () => { LockButton1.SetToggleState(true); }, null);
-                    LockIndicator2_Listener = RegisterListener(LockIndicator2, () => { LockButton2.SetToggleState(false); }, () => { LockButton2.SetToggleState(true); }, null);
-                    LockIndicator3_Listener = RegisterListener(LockIndicator3, () => { LockButton3.SetToggleState(false); }, () => { LockButton3.SetToggleState(true); }, null);
-                    LockIndicator4_Listener = RegisterListener(LockIndicator4, () => { LockButton4.SetToggleState(false); }, () => { LockButton4.SetToggleState(true); }, null);
-                    LockIndicator5_Listener = RegisterListener(LockIndicator5, () => { LockButton5.SetToggleState(false); }, () => { LockButton5.SetToggleState(true); }, null);
-                    LockIndicator6_Listener = RegisterListener(LockIndicator6, () => { LockButton6.SetToggleState(false); }, () => { LockButton6.SetToggleState(true); }, null);
-                    LockIndicator7_Listener = RegisterListener(LockIndicator7, () => { LockButton7.SetToggleState(false); }, () => { LockButton7.SetToggleState(true); }, null);
-                }
-                else
-                {
-                    Log.Error("Failed to find Penthouse!");
-                }
-
-                MiscUtils.DelayFunction(2f, () =>
-                {
-                    Log.Debug("Rainbow Exploit!");
-
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Red"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Red"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Cyan"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Cyan"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Pink"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Pink"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Purple"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Purple"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Green"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Green"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Blue"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Blue"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Yellow"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Yellow"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Orange"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Orange"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1White"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2White"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
-                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
-                });
-
-                LobbyRoot = GameObjectFinder.FindRootSceneObject("Lobby");
-                if (LobbyRoot != null)
-                {
-                    var fuckthiscancer = LobbyRoot.transform.FindObject("New Part").FindObject("Cancer Spawn");
-                    if (fuckthiscancer != null)
-                    {
-                        fuckthiscancer.DestroyMeLocal();
-                    }
-
-                    VIPControls = LobbyRoot.transform.FindObject("Udon/MyI Control Panel").gameObject;
-                    if (VIPControls != null)
-                    {
-                        VIPControls.SetActive(true);
-                        VIPControls.GetOrAddComponent<Enabler>();
-                    }
-
-                    ElevatorFlairBtn = LobbyRoot.transform.FindObject("New Part/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide").gameObject;
-                    if (ElevatorFlairBtn != null)
-                    {
-                        ElevatorFlairBtn.SetActive(true);
-                        ElevatorFlairBtn.GetOrAddComponent<Enabler>();
-                    }
-                }
-
-                GlobalUdon = GameObjectFinder.FindRootSceneObject("Udon");
-                if (GlobalUdon != null)
-                {
-                    FlairBtnTablet = GlobalUdon.transform.FindObject("Main Controls/New Contents/Pages/World/Buttons/Own Flair - BlueButtonWide").gameObject;
-                    if (FlairBtnTablet != null)
-                    {
-                        FlairBtnTablet.SetActive(true);
-                        FlairBtnTablet.GetOrAddComponent<Enabler>();
-                    }
-                }
-                try
-                {
-                    Log.Debug("Searching for Private Rooms Exteriors...");
-                    _ = CreateButtonGroup(1, new Vector3(-111.00629f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                    _ = CreateButtonGroup(2, new Vector3(-109.28977f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-                    _ = CreateButtonGroup(3, new Vector3(-103.00354f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                    _ = CreateButtonGroup(4, new Vector3(-101.28438f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-                    _ = CreateButtonGroup(5, new Vector3(-95.01436f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                    _ = CreateButtonGroup(6, new Vector3(-93.28891f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-
-                    // VIP Room
-                    VIPRoom = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP").gameObject;
-                    if (VIPRoom == null)
-                    {
-                        Log.Error("VIP Bedroom was not found!");
-                    }
-
-                    CreateVIPUnlockButton(new Vector3(-80.4f, 16.0598f, -1.695f), new Vector3(0f, 0, 0f));
-                }
-                catch (Exception e)
-                {
-                    Log.Exception(e);
-                }
-
-                try
-                {
-                    BedroomVIProot = GameObjectFinder.Find("Bedroom VIP");
-                    if (BedroomVIProot == null)
-                    {
-                        Log.Error("VIP Bedroom Root was not found!");
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    Log.Exception(e);
-                }
-
-                MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
-                FallSpamBehaviour = UdonSearch.FindUdonEvent("NPC Animations Udon", "PlayFall");
-
-                Log.Write("Starting Update Loop");
-                _ = MelonCoroutines.Start(RemovePrivacies());
-                //_ = MelonCoroutines.Start(BypassElevator());
-                _ = MelonCoroutines.Start(EnableElevatorFlairBtn());
-                _ = MelonCoroutines.Start(EnableTabletFlairBtn());
-                _ = MelonCoroutines.Start(UpdateLoop());
-            }
-            else
-            {
-                isCurrentWorld = false;
-                if (BClubExploitsPage != null)
-                {
-                    BClubExploitsPage.SetInteractable(false);
-                    BClubExploitsPage.SetTextColor(Color.red);
-                }
-            }
-        }
 
         private static IEnumerator RemovePrivacies()
         {
@@ -944,7 +1374,6 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static void RestoreVIPButton()
         {
             // Restore VIP button
-            if (VIPButton == null) VIPButton = BedroomVIProot.transform.FindObject("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
             if (VIPButton != null)
             {
                 VIPButton.gameObject.SetPosition(new Vector3(60.7236f, 63.1298f, -1.7349f));
@@ -957,11 +1386,9 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void CreateVIPUnlockButton(Vector3 position, Vector3 rotation)
         {
-            VIPInsideDoor = VIPRoom.transform.FindObject("Door001 (1)").gameObject;
-
             if (VIPInsideDoor != null)
             {
-                _ = new WorldButton(position, rotation, Environment.NewLine + "Lock/Unlock\nVIP Room", () =>
+                _ = new WorldButton(position, rotation, "Lock/Unlock\nVIP Room", () =>
                 {
                     ToggleDoor(7);
                 });
@@ -989,9 +1416,6 @@ namespace AstroClient.WorldModifications.WorldHacks
         // TODO : FIX THE UDON EVENT OR MAKE A LOCAL TELEPORT AND ENABLE THE ROOM WITH ONE BUTTON.
         private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
-            GameObject Penthouse = GameObjectFinder.FindRootSceneObject("Penthouse");
-            GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
-
             if (Bedrooms != null)
             {
                 var room = Penthouse.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");

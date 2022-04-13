@@ -6,7 +6,7 @@
     using AstroEventArgs;
     using Cheetos;
     using Config;
-    using Harmony;
+    using HarmonyLib;
     using Tools.Extensions;
     using UnhollowerRuntimeLib.XrefScans;
     using VRC.SDKBase;

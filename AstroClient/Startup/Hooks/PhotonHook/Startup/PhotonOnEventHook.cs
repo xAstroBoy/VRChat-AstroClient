@@ -4,7 +4,7 @@ using System.Reflection;
 using AstroClient.Tools;
 using Cheetos;
 using ExitGames.Client.Photon;
-using Harmony;
+using HarmonyLib;
 using Il2CppSystem;
 using Il2CppSystem.Collections;
 using Il2CppSystem.Collections.Generic;

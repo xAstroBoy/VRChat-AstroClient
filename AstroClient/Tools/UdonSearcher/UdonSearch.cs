@@ -36,6 +36,7 @@ namespace AstroClient.Tools.UdonSearcher
                         for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
                         {
                             var actionkeys = behaviour._eventTable.entries[i];
+                            if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
                             if (actionkeys.key == subaction)
                             {
                                 if (Debug)
@@ -113,133 +114,6 @@ namespace AstroClient.Tools.UdonSearcher
             return searchResult;
         }
 
-        internal static List<GameObject> FindAllUdonEvents(List<string> GameObjectNames, List<string> TermsToWhitelist, List<string> TermsToAvoid, bool Debug = false)
-        {
-            List<GameObject> SearchResult = new List<GameObject>();
-            List<UdonBehaviour> AllBehavioursToAnalyze = new List<UdonBehaviour>();
-
-            foreach (var name in GameObjectNames)
-            {
-                var NameSearched = UdonParser.WorldBehaviours.Where(x => x.gameObject.name.isMatch(name)).ToList();
-                if (NameSearched.IsNotNull() && NameSearched.IsNotEmpty())
-                {
-                    for (int i = 0; i < NameSearched.Count; i++)
-                    {
-                        UdonBehaviour item = NameSearched[i];
-                        if (!AllBehavioursToAnalyze.Contains(item))
-                        {
-                            AllBehavioursToAnalyze.Add(item);
-                        }
-                    }
-                }
-            }
-            if (TermsToWhitelist.IsNotEmpty())
-            {
-                // Required to dig out The Behaviour Whitelisted terms.
-                foreach (var name in TermsToWhitelist)
-                {
-                    var WhitelistedTermresult = new List<UdonBehaviour>();
-                    foreach (var item in UdonParser.WorldBehaviours)
-                    {
-                        if (item._eventTable.count != 0)
-                        {
-                            if (item != null)
-                            {
-                                foreach (var subkey in item._eventTable)
-                                {
-                                    if (subkey.key.isMatch(name))
-                                    {
-                                        WhitelistedTermresult.Add(item);
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if (WhitelistedTermresult.IsNotNull() && WhitelistedTermresult.IsNotEmpty())
-                    {
-                        foreach (var item in WhitelistedTermresult)
-                        {
-                            if (!AllBehavioursToAnalyze.Contains(item))
-                            {
-                                AllBehavioursToAnalyze.Add(item);
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (AllBehavioursToAnalyze.IsNotEmpty())
-            {
-                foreach (var behaviour in AllBehavioursToAnalyze)
-                {
-                    if (behaviour._eventTable.count != 0)
-                    {
-                        if (Debug)
-                        {
-                            Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
-                        }
-
-                        if (SearchResult.Contains(behaviour.gameObject))
-                        {
-                            continue;
-                        }
-
-                        bool HasAvoidTermKey = false;
-                        bool HasWhiteListedKey = false;
-
-                        if (TermsToWhitelist != null)
-                        {
-                            if (TermsToWhitelist.Count() != 0)
-                            {
-                                for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
-                                {
-                                    if (TermsToWhitelist.Contains(behaviour._eventTable.entries[i].key))
-                                    {
-                                        HasWhiteListedKey = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (!HasWhiteListedKey)
-                        {
-                            if (TermsToAvoid != null)
-                            {
-                                if (TermsToAvoid.Count() != 0)
-                                {
-                                    for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
-                                    {
-                                        if (TermsToAvoid.Contains(behaviour._eventTable.entries[i].key))
-                                        {
-                                            HasAvoidTermKey = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if (HasWhiteListedKey)
-                        {
-                            SearchResult.Add(behaviour.gameObject);
-                        }
-                        else if (!HasAvoidTermKey)
-                        {
-                            SearchResult.Add(behaviour.gameObject);
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                }
-            }
-
-            return SearchResult;
-        }
 
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
         {
@@ -256,6 +130,7 @@ namespace AstroClient.Tools.UdonSearcher
 
                     foreach (var actionkeys in behaviour._eventTable)
                     {
+                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
                         if (actionkeys.key.Equals(subaction))
                         {
                             if (Debug)
@@ -294,6 +169,7 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
                     {
                         var actionkeys = behaviour._eventTable.entries[i];
+                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
                         if (actionkeys.key == subaction)
                         {
                             Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
@@ -318,6 +194,7 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int i = 0; i < obj._eventTable.entries.Count; i++)
                     {
                         var actionkeys = obj._eventTable.entries[i];
+                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
                         if (actionkeys.key == subaction)
                         {
                             if (Debug)
@@ -342,6 +219,7 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int i = 0; i < obj._eventTable.entries.Count; i++)
                     {
                         var actionkeys = obj._eventTable.entries[i];
+                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
                         if (actionkeys.key == subaction)
                         {
                             return true;
@@ -365,6 +243,7 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
                     {
                         var actionkeys = actionobject._eventTable.entries[i1];
+                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
                         if (actionkeys.key == subaction)
                         {
                             return true;
@@ -388,6 +267,7 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
                     {
                         var actionkeys = actionobject._eventTable.entries[i1];
+                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
                         if (actionkeys.key == subaction)
                         {
                             if (Debug)
@@ -416,6 +296,8 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
                     {
                         var actionkeys = actionobject._eventTable.entries[i1];
+                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
+
                         if (actionkeys.key == subaction)
                         {
                             if (Debug)

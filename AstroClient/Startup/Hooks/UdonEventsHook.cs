@@ -1,4 +1,5 @@
 ﻿using AstroClient.Config;
+using AstroClient.xAstroBoy.Extensions;
 using VRC.Udon;
 
 namespace AstroClient.Startup.Hooks
@@ -10,7 +11,7 @@ namespace AstroClient.Startup.Hooks
     using System.Reflection;
     using AstroEventArgs;
     using Cheetos;
-    using Harmony;
+    using HarmonyLib;
     using MelonLoader;
     using Tools.Extensions;
 
@@ -45,30 +46,42 @@ namespace AstroClient.Startup.Hooks
 
         private static void Hook_UdonBehaviour_Event_OnPickup(UdonBehaviour __instance)
         {
+            if (__instance == null) return;
             Event_Udon_OnPickup.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour __instance)
         {
+            if (__instance == null) return;
+
             Event_Udon_OnPickupUseUp.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour __instance)
         {
+            if (__instance == null) return;
+
             Event_Udon_OnPickupUseDown.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnDrop(UdonBehaviour __instance)
         {
+            if (__instance == null) return;
+
             Event_Udon_OnDrop.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnInteract(UdonBehaviour __instance)
         {
+            if (__instance == null) return;
+
             Event_Udon_OnInteract.SafetyRaiseWithParams(__instance);
         }
         private static void Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {
+            if (__instance == null) return;
+            if (__0.IsNullOrEmptyOrWhiteSpace()) return;
+
             Event_Udon_SendCustomEvent.SafetyRaiseWithParams(__instance, __0);
         }
 

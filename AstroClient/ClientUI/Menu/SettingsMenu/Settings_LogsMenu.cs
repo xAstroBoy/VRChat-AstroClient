@@ -34,8 +34,14 @@ namespace AstroClient.ClientUI.Menu.SettingsMenu
             QMToggleButton UdonCustomEventsToggle = new QMToggleButton(sub, "Udon Custom Events Log", () => { ConfigManager.General.LogUdonCustomEvents = true; }, () => { ConfigManager.General.LogUdonCustomEvents = false; }, "Log Udon Custom Events to the console");
             UdonCustomEventsToggle.SetToggleState(ConfigManager.General.LogUdonCustomEvents, false);
 
-            QMToggleButton UnityLogsToggle = new QMToggleButton(sub, "Unity Logs", () => { ConfigManager.General.LogUnityMessages = true; }, () => { ConfigManager.General.LogUnityMessages = false; }, "Log Events to the console");
+            QMToggleButton UnityLogsToggle = new QMToggleButton(sub, "Unity Messages", () => { ConfigManager.General.LogUnityMessages = true; }, () => { ConfigManager.General.LogUnityMessages = false; }, "Log Unity Messages to the console");
             UnityLogsToggle.SetToggleState(ConfigManager.General.LogUnityMessages, false);
+
+            QMToggleButton UnityWarningsToggle = new QMToggleButton(sub, "Unity Warnings", () => { ConfigManager.General.LogUnityWarnings = true; }, () => { ConfigManager.General.LogUnityWarnings = false; }, "Log Unity Warnings Messages to the console");
+            UnityWarningsToggle.SetToggleState(ConfigManager.General.LogUnityWarnings, false);
+
+            QMToggleButton UnityErrorsToggle = new QMToggleButton(sub, "Unity Errors", () => { ConfigManager.General.LogUnityErrors = true; }, () => { ConfigManager.General.LogUnityErrors = false; }, "Log Unity Errors Messages to the console");
+            UnityErrorsToggle.SetToggleState(ConfigManager.General.LogUnityErrors, false);
 
             QMToggleButton EventLogToggle = new QMToggleButton(sub,  "Event Log", () => { ConfigManager.General.LogEvents = true; }, () => { ConfigManager.General.LogEvents = false; }, "Log Events to the console");
             EventLogToggle.SetToggleState(ConfigManager.General.LogEvents, false);

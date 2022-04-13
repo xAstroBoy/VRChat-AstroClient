@@ -94,8 +94,12 @@
             UdonEventsHook.Event_Udon_OnInteract += UdonBehaviour_Event_OnInteract;
             UdonEventsHook.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
 
+            UnityMessagesHook.Event_OnUnityLog += OnUnityLog;
+            UnityMessagesHook.Event_OnUnityWarning += OnUnityWarning;
+            UnityMessagesHook.Event_OnUnityError += OnUnityError;
+
         }
-        
+
         internal virtual void OnRawAudio(VRCPlayer player, float[] RawAudio, int sample_rate)
         {
 
@@ -314,5 +318,16 @@
         internal virtual void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
         {
         }
+
+        internal virtual void OnUnityLog(string message)
+        {
+        }
+        internal virtual void OnUnityWarning(string message)
+        {
+        }
+        internal virtual void OnUnityError(string message)
+        {
+        }
+
     }
 }

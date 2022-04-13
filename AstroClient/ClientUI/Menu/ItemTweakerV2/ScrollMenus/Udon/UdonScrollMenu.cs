@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
+﻿using AstroClient.xAstroBoy.Extensions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
 {
     using System;
     using System.Collections;
@@ -159,6 +161,7 @@
             for (int i = 0; i < action._eventTable.entries.Count; i++)
             {
                 var subaction = action._eventTable.entries[i];
+                if (subaction.key.IsNullOrEmptyOrWhiteSpace()) continue;
                 var btn = new QMSingleButton(menu, subaction.key, null, $"Invoke Event {subaction.key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
                 if (Active_Spammers != null)
                 {

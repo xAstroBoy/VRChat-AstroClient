@@ -6,7 +6,7 @@
     using System.Reflection;
     using Cheetos;
     using ExitGames.Client.Photon;
-    using Harmony;
+    using HarmonyLib;
     using Tools.Player.Movement.Exploit;
 
     #endregion Imports

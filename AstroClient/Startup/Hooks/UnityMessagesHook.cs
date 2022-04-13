@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AstroClient.Config;
+using AstroClient.xAstroBoy.Extensions;
 using UnityEngine;
 using VRC.Udon;
 using Color = System.Drawing.Color;
@@ -13,7 +14,7 @@ namespace AstroClient.Startup.Hooks
     using System.Reflection;
     using AstroEventArgs;
     using Cheetos;
-    using Harmony;
+    using HarmonyLib;
     using MelonLoader;
     using Tools.Extensions;
 
@@ -22,6 +23,11 @@ namespace AstroClient.Startup.Hooks
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class UnityMessagesHook : AstroEvents
     {
+
+        internal static event Action<string> Event_OnUnityLog;
+        internal static event Action<string> Event_OnUnityWarning;
+        internal static event Action<string> Event_OnUnityError;
+
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
@@ -35,39 +41,22 @@ namespace AstroClient.Startup.Hooks
             new AstroPatch(typeof(Debug).GetMethods().First(x => x.Name == "LogError" && x.GetParameters().Length == 1), GetPatch(nameof(DebugError)));
         }
 
-        private static void DebugError(ref Il2CppSystem.Object __0)
+        private static void Debug(ref Il2CppSystem.Object __0)
         {
-            if(ConfigManager.General.LogUnityMessages)
-            {
-                Log.InternalWrite($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}] ", Cheetah.Color.Crayola.Present.BananaMania);
-                Log.InternalWrite($"[AstroClient] ", Cheetah.Color.Crayola.Present.Bluetiful);
-                Log.InternalWrite($"[{Enum.GetName(typeof(Cheetah.LogLevel), Cheetah.LogLevel.INFO)}] ", Cheetah.Color.HTML.Gray);
-                Log.InternalWrite($"[Unity Error] ", Cheetah.Color.Crayola.Original.Red);
-                Log.InternalWriteLine(Il2CppSystem.Convert.ToString(__0), Cheetah.Color.HTML.White);
-            }
+            var msg = Il2CppSystem.Convert.ToString(__0);
+            Event_OnUnityLog.SafetyRaiseWithParams(msg);
         }
         private static void DebugWarning(ref Il2CppSystem.Object __0)
         {
-            if (ConfigManager.General.LogUnityMessages)
-            {
-                Log.InternalWrite($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}] ", Cheetah.Color.Crayola.Present.BananaMania);
-                Log.InternalWrite($"[AstroClient] ", Cheetah.Color.Crayola.Present.Bluetiful);
-                Log.InternalWrite($"[{Enum.GetName(typeof(Cheetah.LogLevel), Cheetah.LogLevel.INFO)}] ", Cheetah.Color.HTML.Gray);
-                Log.InternalWrite($"[Unity Warning] ", Cheetah.Color.Crayola.Original.Orange);
-                Log.InternalWriteLine(Il2CppSystem.Convert.ToString(__0), Cheetah.Color.HTML.White);
-            }
+            var msg = Il2CppSystem.Convert.ToString(__0);
+            Event_OnUnityWarning.SafetyRaiseWithParams(msg);
         }
-        private static void Debug(ref Il2CppSystem.Object __0)
-        {
-            if (ConfigManager.General.LogUnityMessages)
-            {
-                Log.InternalWrite($"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}] ", Cheetah.Color.Crayola.Present.BananaMania);
-                Log.InternalWrite($"[AstroClient] ", Cheetah.Color.Crayola.Present.Bluetiful);
-                Log.InternalWrite($"[{Enum.GetName(typeof(Cheetah.LogLevel), Cheetah.LogLevel.INFO)}] ", Cheetah.Color.HTML.Gray);
-                Log.InternalWrite($"[Unity Log] ", Cheetah.Color.Crayola.Original.Gold);
-                Log.InternalWriteLine(Il2CppSystem.Convert.ToString(__0), Cheetah.Color.HTML.White);
 
-            }
+        private static void DebugError(ref Il2CppSystem.Object __0)
+        {
+            var msg = Il2CppSystem.Convert.ToString(__0);
+            Event_OnUnityError.SafetyRaiseWithParams(msg);
+
         }
 
 

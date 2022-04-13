@@ -12,7 +12,7 @@
     using Cheetah;
     using Constants;
     using ExitGames.Client.Photon;
-    using Harmony;
+    using HarmonyLib;
     using MelonLoader;
     using Newtonsoft.Json;
     using Photon.Realtime;

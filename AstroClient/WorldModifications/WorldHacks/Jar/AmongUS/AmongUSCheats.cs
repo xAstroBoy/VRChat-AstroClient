@@ -198,6 +198,8 @@
             for (int i = 0; i < VictoryCrewmateEvent.UdonBehaviour._eventTable.entries.Count; i++)
             {
                 var subaction = VictoryCrewmateEvent.UdonBehaviour._eventTable.entries[i];
+                if (subaction.key.IsNullOrEmptyOrWhiteSpace()) continue;
+
                 if (subaction.key.StartsWith("SyncDoSabotage"))
                 {
                     if (subaction.key.Contains("Doors"))
