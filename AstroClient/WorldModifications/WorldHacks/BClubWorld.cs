@@ -2,11 +2,9 @@
 {
     #region Imports
 
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
+    using AstroClient.xAstroBoy.Extensions;
     using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Cheats.PatronCrackers;
     using AstroMonos.Components.Spoofer;
     using AstroMonos.Components.Tools;
     using AstroMonos.Components.Tools.Listeners;
@@ -14,6 +12,10 @@
     using Constants;
     using CustomClasses;
     using MelonLoader;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
     using Tools.Extensions;
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
@@ -23,30 +25,30 @@
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using AstroClient.xAstroBoy.Extensions;
+
     #endregion Imports
 
     internal class BClubWorld : AstroEvents
     {
+        #region World Paths
 
-
-        #region  World Paths
         private static GameObject _Bedroom_VIP;
+
         internal static GameObject Bedroom_VIP
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if(_Bedroom_VIP == null)
+                if (_Bedroom_VIP == null)
                 {
-                    return _Bedroom_VIP = GameObjectFinder.FindRootSceneObject("Bedroom VIP"); 
+                    return _Bedroom_VIP = GameObjectFinder.FindRootSceneObject("Bedroom VIP");
                 }
                 return _Bedroom_VIP;
             }
         }
 
         private static GameObject _Lobby;
+
         internal static GameObject Lobby
         {
             get
@@ -59,7 +61,9 @@
                 return _Lobby;
             }
         }
+
         private static GameObject _Udon;
+
         internal static GameObject Udon
         {
             get
@@ -72,7 +76,9 @@
                 return _Udon;
             }
         }
+
         private static GameObject _VIPRoom;
+
         internal static GameObject VIPRoom
         {
             get
@@ -86,7 +92,9 @@
                 return _VIPRoom;
             }
         }
+
         private static GameObject _Penthouse;
+
         internal static GameObject Penthouse
         {
             get
@@ -101,6 +109,7 @@
         }
 
         private static GameObject _Bedrooms;
+
         internal static GameObject Bedrooms
         {
             get
@@ -113,7 +122,9 @@
                 return _Bedrooms;
             }
         }
+
         private static GameObject _Decoder_Debug;
+
         internal static GameObject Decoder_Debug
         {
             get
@@ -126,7 +137,9 @@
                 return _Decoder_Debug;
             }
         }
+
         private static GameObject _RenderCamera;
+
         internal static GameObject RenderCamera
         {
             get
@@ -140,7 +153,9 @@
                 return _RenderCamera;
             }
         }
+
         private static GameObject _VIPButton;
+
         internal static GameObject VIPButton
         {
             get
@@ -156,6 +171,7 @@
         }
 
         private static GameObject _LockIndicator_1;
+
         internal static GameObject LockIndicator_1
         {
             get
@@ -169,7 +185,9 @@
                 return _LockIndicator_1;
             }
         }
+
         private static GameObject _LockIndicator_2;
+
         internal static GameObject LockIndicator_2
         {
             get
@@ -183,7 +201,9 @@
                 return _LockIndicator_2;
             }
         }
+
         private static GameObject _LockIndicator_3;
+
         internal static GameObject LockIndicator_3
         {
             get
@@ -197,7 +217,9 @@
                 return _LockIndicator_3;
             }
         }
+
         private static GameObject _LockIndicator_4;
+
         internal static GameObject LockIndicator_4
         {
             get
@@ -211,7 +233,9 @@
                 return _LockIndicator_4;
             }
         }
+
         private static GameObject _LockIndicator_5;
+
         internal static GameObject LockIndicator_5
         {
             get
@@ -225,7 +249,9 @@
                 return _LockIndicator_5;
             }
         }
+
         private static GameObject _LockIndicator_6;
+
         internal static GameObject LockIndicator_6
         {
             get
@@ -239,7 +265,9 @@
                 return _LockIndicator_6;
             }
         }
+
         private static GameObject _LockIndicator_VIP;
+
         internal static GameObject LockIndicator_VIP
         {
             get
@@ -255,6 +283,7 @@
         }
 
         private static GameObject _VIPInsideDoor;
+
         internal static GameObject VIPInsideDoor
         {
             get
@@ -268,7 +297,9 @@
                 return _VIPInsideDoor;
             }
         }
+
         private static GameObject _VIPControls;
+
         internal static GameObject VIPControls
         {
             get
@@ -282,7 +313,9 @@
                 return _VIPControls;
             }
         }
+
         private static GameObject _Cancer_Spawn;
+
         internal static GameObject Cancer_Spawn
         {
             get
@@ -296,7 +329,9 @@
                 return _Cancer_Spawn;
             }
         }
+
         private static GameObject _ElevatorFlairBtn;
+
         internal static GameObject ElevatorFlairBtn
         {
             get
@@ -310,7 +345,9 @@
                 return _ElevatorFlairBtn;
             }
         }
+
         private static GameObject _FlairBtnTablet;
+
         internal static GameObject FlairBtnTablet
         {
             get
@@ -325,10 +362,12 @@
             }
         }
 
-        #endregion
+        #endregion World Paths
 
-        #region  Udon Behaviours Cached and other random stuff
+        #region Udon Behaviours Cached and other random stuff
+
         private static UdonBehaviour_Cached _MoanSpamBehaviour;
+
         internal static UdonBehaviour_Cached MoanSpamBehaviour
         {
             get
@@ -343,6 +382,7 @@
         }
 
         private static UdonBehaviour_Cached _FallSpamBehaviour;
+
         internal static UdonBehaviour_Cached FallSpamBehaviour
         {
             get
@@ -357,6 +397,7 @@
         }
 
         private static UdonBehaviour_Cached _ProcessPatronsFromReadRenderTexture;
+
         internal static UdonBehaviour_Cached ProcessPatronsFromReadRenderTexture
         {
             get
@@ -369,7 +410,9 @@
                 return _ProcessPatronsFromReadRenderTexture;
             }
         }
+
         private static UdonBehaviour_Cached _ReadPictureStep;
+
         internal static UdonBehaviour_Cached ReadPictureStep
         {
             get
@@ -383,8 +426,8 @@
             }
         }
 
-
         private static ImageRenderCameraReader _RenderCameraReader;
+
         internal static ImageRenderCameraReader RenderCameraReader
         {
             get
@@ -409,9 +452,8 @@
             }
         }
 
+        #endregion Udon Behaviours Cached and other random stuff
 
-
-        #endregion
         internal static string CurrentDisplayName
         {
             get
@@ -427,10 +469,6 @@
         private static object BlueChairSpam_CancellationToken;
         private static object RainbowSpam_CancellationToken;
         private static object DoorbellSpam_CancellationToken;
-
-
-
-
 
         internal static QMNestedGridMenu BClubExploitsPage;
 
@@ -450,8 +488,6 @@
         private static QMToggleButton ToggleMoanSpamBtn;
         private static QMToggleButton ToggleFallSpamBtn;
 
-
-
         private static bool _isFreezeLockEnabed;
         private static bool _isFreezeUnlockEnabed;
         private static bool _isRainbowEnabled;
@@ -463,13 +499,14 @@
         private static bool _isBlueChairEnabed;
 
         private static bool _isCurrentWorld;
+
         private static bool isCurrentWorld
         {
             get => _isCurrentWorld;
             set
             {
                 _isCurrentWorld = value;
-                if(!value)
+                if (!value)
                 {
                     IsBlueChairEnabled = false;
                     IsDoorbellSpamEnabled = false;
@@ -478,6 +515,9 @@
                     IsRainbowEnabled = false;
                     IsMoanSpamEnabled = false;
                     IsFallSpamEnabled = false;
+                    _isLocalPlayerElite = false;
+                    _isLocalPlayerPatron = false;
+
                     Bells.Clear();
                     Chairs.Clear();
                     ColorActions.Clear();
@@ -501,7 +541,8 @@
                     _Cancer_Spawn = null;
                     _ElevatorFlairBtn = null;
                     _FlairBtnTablet = null;
-
+                    _Decoder_Debug = null;
+                    _RenderCamera = null;
 
                     LockIndicator1_Listener = null;
                     LockIndicator2_Listener = null;
@@ -510,10 +551,6 @@
                     LockIndicator5_Listener = null;
                     LockIndicator6_Listener = null;
                     LockIndicator7_Listener = null;
-
-
-
-
 
                     _MoanSpamBehaviour = null;
                     _FallSpamBehaviour = null;
@@ -528,9 +565,9 @@
                     RainbowSpam_CancellationToken = null;
                     DoorbellSpam_CancellationToken = null;
                 }
-
             }
         }
+
         private static QMToggleButton SpamDoorbellsToggle;
 
         private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
@@ -549,7 +586,7 @@
         internal static bool isLocalPlayerElite
         {
             get => _isLocalPlayerElite;
-            
+
             private set
             {
                 if (value)
@@ -562,8 +599,8 @@
                 }
                 _isLocalPlayerElite = value;
             }
-
         }
+
         internal static bool isLocalPlayerPatron
         {
             get => _isLocalPlayerPatron;
@@ -580,9 +617,7 @@
                 }
                 _isLocalPlayerPatron = value;
             }
-
         }
-
 
         #region BlueChairSpam
 
@@ -593,14 +628,21 @@
             {
                 if (value)
                 {
-                    Log.Write("BlueChair Enabled!");
-                    BlueChairSpam();
+                    if (DoorbellSpam_CancellationToken == null)
+                    {
+                        Log.Write("BlueChair Enabled!");
+                        BlueChairSpam();
+                    }
+
                 }
                 else
                 {
-                    Log.Write("BlueChair Disabled!");
-                    MelonCoroutines.Stop(BlueChairSpam_CancellationToken);
-                    BlueChairSpam_CancellationToken = null;
+                    if (BlueChairSpam_CancellationToken != null)
+                    {
+                        Log.Write("BlueChair Disabled!");
+                        MelonCoroutines.Stop(BlueChairSpam_CancellationToken);
+                        BlueChairSpam_CancellationToken = null;
+                    }
                 }
                 if (BlueChairToggle != null)
                 {
@@ -610,7 +652,6 @@
                 _isBlueChairEnabed = value;
             }
         }
-
 
         #endregion BlueChairSpam
 
@@ -631,9 +672,12 @@
                 }
                 else
                 {
-                    Log.Write("Doorbell Spam Disabled!");
-                    MelonCoroutines.Stop(DoorbellSpam_CancellationToken);
-                    DoorbellSpam_CancellationToken = null;
+                    if (DoorbellSpam_CancellationToken != null)
+                    {
+                        Log.Write("Doorbell Spam Disabled!");
+                        MelonCoroutines.Stop(DoorbellSpam_CancellationToken);
+                        DoorbellSpam_CancellationToken = null;
+                    }
                 }
                 if (SpamDoorbellsToggle != null)
                 {
@@ -644,7 +688,6 @@
             }
         }
 
-
         #endregion DoorbellSpam
 
         internal static bool IsFreezeLockEnabed
@@ -654,21 +697,26 @@
             {
                 if (value)
                 {
-                    Log.Write("Door Locks Frozen: Locked");
-                    if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
-                    DoorLockFreeze();
+                    if (DoorLockFreeze_CancellationToken == null)
+                    {
+                        Log.Write("Door Locks Frozen: Locked");
+                        if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
+                        DoorLockFreeze();
+                    }
                 }
                 else
                 {
-                    Log.Write("Door Locks Unfrozen");
-                    MelonCoroutines.Stop(DoorLockFreeze_CancellationToken);
-                    DoorLockFreeze_CancellationToken = null;
+                    if (DoorLockFreeze_CancellationToken != null)
+                    {
+                        Log.Write("Door Locks Unfrozen");
+                        MelonCoroutines.Stop(DoorLockFreeze_CancellationToken);
+                        DoorLockFreeze_CancellationToken = null;
+                    }
                 }
                 if (FreezeUnlockedToggle != null)
                 {
                     FreezeUnlockedToggle.SetToggleState(value, false);
                 }
-
 
                 _isFreezeLockEnabed = value;
             }
@@ -681,15 +729,21 @@
             {
                 if (value)
                 {
-                    Log.Write("Door Locks Frozen: Unlocked");
-                    if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
-                    DoorUnlockFreeze();
+                    if (DoorUnlockFreeze_CancellationToken == null)
+                    {
+                        Log.Write("Door Locks Frozen: Unlocked");
+                        if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
+                        DoorUnlockFreeze();
+                    }
                 }
                 else
                 {
-                    Log.Write("Door Locks Unfrozen");
-                    MelonCoroutines.Stop(DoorUnlockFreeze_CancellationToken);
-                    DoorUnlockFreeze_CancellationToken = null;
+                    if (DoorUnlockFreeze_CancellationToken != null)
+                    {
+                        Log.Write("Door Locks Unfrozen");
+                        MelonCoroutines.Stop(DoorUnlockFreeze_CancellationToken);
+                        DoorUnlockFreeze_CancellationToken = null;
+                    }
                 }
                 if (FreezeUnlockedToggle != null)
                 {
@@ -707,16 +761,22 @@
             {
                 if (value)
                 {
-                    Log.Write("Rainbow Enabled!");
-                    Rainbow();
+                    if (RainbowSpam_CancellationToken == null)
+                    {
+                        Log.Write("Rainbow Enabled!");
+                        Rainbow();
+                    }
                 }
                 else
                 {
-                    Log.Write("Rainbow Disabled.");
-                    MelonCoroutines.Stop(RainbowSpam_CancellationToken);
-                    RainbowSpam_CancellationToken = null;
+                    if (RainbowSpam_CancellationToken != null)
+                    {
+                        Log.Write("Rainbow Disabled.");
+                        MelonCoroutines.Stop(RainbowSpam_CancellationToken);
+                        RainbowSpam_CancellationToken = null;
+                    }
                 }
-                if(ToggleRainbowBtn != null)
+                if (ToggleRainbowBtn != null)
                 {
                     ToggleRainbowBtn.SetToggleState(value, false);
                 }
@@ -731,7 +791,6 @@
             get => _isMoanSpamEnabled;
             set
             {
-
                 if (value)
                 {
                     if (MoanSpam_CancellationToken == null)
@@ -742,9 +801,12 @@
                 }
                 else
                 {
-                    Log.Write("Moan Spam Disabled.");
-                    MelonCoroutines.Stop(MoanSpam_CancellationToken);
-                    MoanSpam_CancellationToken = null;
+                    if (MoanSpam_CancellationToken != null)
+                    {
+                        Log.Write("Moan Spam Disabled.");
+                        MelonCoroutines.Stop(MoanSpam_CancellationToken);
+                        MoanSpam_CancellationToken = null;
+                    }
                 }
                 if (ToggleMoanSpamBtn != null)
                 {
@@ -755,6 +817,7 @@
         }
 
         #endregion MoanSpam
+
         #region FallSpam
 
         internal static bool IsFallSpamEnabled
@@ -762,7 +825,6 @@
             get => _isFallSpamEnabled;
             set
             {
-
                 if (value)
                 {
                     if (FallSpam_CancellationToken == null)
@@ -773,9 +835,12 @@
                 }
                 else
                 {
-                    Log.Write("Fall Spam Disabled.");
-                    MelonCoroutines.Stop(FallSpam_CancellationToken);
-                    FallSpam_CancellationToken = null;
+                    if (FallSpam_CancellationToken != null)
+                    {
+                        Log.Write("Fall Spam Disabled.");
+                        MelonCoroutines.Stop(FallSpam_CancellationToken);
+                        FallSpam_CancellationToken = null;
+                    }
                 }
                 if (ToggleFallSpamBtn != null)
                 {
@@ -786,10 +851,6 @@
         }
 
         #endregion FallSpam
-
-
-
-                                                                 
 
         internal static GameObjectListener RegisterListener(GameObject Object, Action OnEnabled, Action OnDisabled, Action OnDestroy)
         {
@@ -804,7 +865,6 @@
                         listener.OnDisabled += OnDisabled;
                         listener.OnDestroyed += OnDestroy;
                     }
-
                 });
                 return listener;
             }
@@ -835,11 +895,11 @@
             var MapFun = new QMNestedGridMenu(BClubExploitsPage, "World Fun", "Some Random Fun things");
 
             // Rainbow
-            ToggleRainbowBtn = new QMToggleButton(MapFun,  "Rainbow", () => { IsRainbowEnabled = true; }, () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
+            ToggleRainbowBtn = new QMToggleButton(MapFun, "Rainbow", () => { IsRainbowEnabled = true; }, () => { IsRainbowEnabled = false; }, "Rainbow", Color.green, Color.red);
             ToggleRainbowBtn.SetToggleState(IsRainbowEnabled, false);
-            ToggleMoanSpamBtn = new QMToggleButton(MapFun,  "Moan Spam", () => { IsMoanSpamEnabled = true; }, () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
+            ToggleMoanSpamBtn = new QMToggleButton(MapFun, "Moan Spam", () => { IsMoanSpamEnabled = true; }, () => { IsMoanSpamEnabled = false; }, "Moan Spam", Color.green, Color.red);
             ToggleMoanSpamBtn.SetToggleState(IsMoanSpamEnabled, false);
-            ToggleFallSpamBtn = new QMToggleButton(MapFun,  "Fall Spam", () => { IsFallSpamEnabled = true; }, () => { IsFallSpamEnabled = false; }, "Fall Spam", Color.green, Color.red);
+            ToggleFallSpamBtn = new QMToggleButton(MapFun, "Fall Spam", () => { IsFallSpamEnabled = true; }, () => { IsFallSpamEnabled = false; }, "Fall Spam", Color.green, Color.red);
             ToggleFallSpamBtn.SetToggleState(IsFallSpamEnabled, false);
 
             // VIP
@@ -857,12 +917,12 @@
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
         }
 
-
-                internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id.Equals(WorldIds.JustBClub))
             {
                 isCurrentWorld = true;
+                _ = MelonCoroutines.Start(ForceEnableRenderCamera());
 
                 if (BClubExploitsPage != null)
                 {
@@ -870,9 +930,8 @@
                     BClubExploitsPage.SetTextColor(Color.green);
                 }
 
-
                 // Activate both parent and root to Start the reader!
-                if(Decoder_Debug != null)
+                if (Decoder_Debug != null)
                 {
                     Decoder_Debug.SetActive(true);
                 }
@@ -982,13 +1041,11 @@
                     {
                         Log.Error("VIP Bedroom Root was not found!");
                     }
-
                 }
                 catch (Exception e)
                 {
                     Log.Exception(e);
                 }
-
 
                 Log.Write("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
@@ -1008,11 +1065,10 @@
             }
         }
 
-
         internal override void OnUnityLog(string message)
         {
             if (!isCurrentWorld) return;
-            if (CurrentDisplayName.IsNullOrEmptyOrWhiteSpace()) return; 
+            if (CurrentDisplayName.IsNullOrEmptyOrWhiteSpace()) return;
             if (message.Contains("[Patreon]"))
             {
                 if (message.Contains("is a patron"))
@@ -1054,7 +1110,6 @@
                         if (isLocalPlayerElite)
                         {
                             isLocalPlayerElite = false;
-
                         }
                     }
                 }
@@ -1090,11 +1145,11 @@
         {
             MoanSpam_CancellationToken = MelonCoroutines.Start(MoanSpamLoop());
         }
+
         private static void FallSpam()
         {
             FallSpam_CancellationToken = MelonCoroutines.Start(FallSpamLoop());
         }
-
 
         private static void DoorLockFreeze()
         {
@@ -1120,6 +1175,7 @@
                 yield return new WaitForSeconds(0.5f);
             }
         }
+
         private static IEnumerator FallSpamLoop()
         {
             for (; ; )
@@ -1178,7 +1234,6 @@
                 yield return new WaitForSeconds(1f);
             }
         }
-
 
         private static void SpamDoorbells()
         {
@@ -1265,12 +1320,11 @@
         {
             if (isCurrentWorld)
             {
-
+                isCurrentWorld = false;
 
                 Log.Write("Done unloading B Club..");
             }
         }
-
 
         internal static GameObject GetIndicator(int id)
         {
@@ -1322,8 +1376,6 @@
             yield return null;
         }
 
-
-
         internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
         {
             if (!isCurrentWorld) return;
@@ -1334,9 +1386,7 @@
                 // The Final step has been sent, let's hijack it!
                 ForceEliteTier();
             }
-
         }
-
 
         internal static void ForceEliteTier()
         {
@@ -1352,7 +1402,6 @@
                     Log.Warn($"Unable to Force Elite Tier due to ProcessPatronsFromReadRenderTexture Event being Null!");
                     return;
                 }
-
 
                 // First let's edit the results of the rendercamera.
 
@@ -1376,29 +1425,21 @@
                             HasBeenModified = true;
                         }
                     }
-
-
                 }
 
                 if (HasBeenModified)
                 {
-
                     // if that's so, let's force a new reading.
 
                     // First replace the output with the modified one
                     RenderCameraReader.currentOutputString = string.Join("\n", result);
 
-
                     //Secondly invoke again the Reading event.
                     ProcessPatronsFromReadRenderTexture.InvokeBehaviour();
                 }
-
             }
             catch { } // SHUT UP
         }
-
-
-
 
         private static IEnumerator RemovePrivacies()
         {
@@ -1440,6 +1481,13 @@
                 yield return new WaitForSeconds(5f);
             }
 
+            yield break;
+        }
+
+        private static IEnumerator ForceEnableRenderCamera()
+        {
+            while (RenderCameraReader == null) yield return null;
+            Log.Debug("RenderCamera Reader Installed!");
             yield break;
         }
 
@@ -1805,6 +1853,5 @@
             }
             return null;
         }
-
     }
 }
