@@ -15,7 +15,6 @@
     using static Constants.CustomLists;
 
 
-    // TODO : FIGURE WHY THIS IS BROKEN (Once added, you are unable to see who grabbed the pickup)
     [RegisterComponent]
     public class PatronUnlocker : AstroMonoBehaviour
     {

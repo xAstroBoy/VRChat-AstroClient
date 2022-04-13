@@ -220,7 +220,18 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 var beh = item.gameObject.FindUdonEvent("EnablePatronEffects");
                 if (beh != null)
                 {
-                    EnableGoldenCamos.Add(beh);
+                    var unlocker = item.GetOrAddComponent<PatronUnlocker>();
+                    MiscUtils.DelayFunction(5f, () =>
+                    {
+                        if (unlocker != null)
+                        {
+                            if (!EnableGoldenCamos.Contains(unlocker))
+                            {
+                                EnableGoldenCamos.Add(unlocker);
+                            }
+                        }
+
+                    });
                 }
             }
 
@@ -707,7 +718,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static List<Vector3> SpawnPoints_Prisoners = new List<Vector3>();
         internal static List<Vector3> SpawnPoints_Spawn = new List<Vector3>();
 
-        internal static List<UdonBehaviour_Cached> EnableGoldenCamos = new List<UdonBehaviour_Cached>();
+        internal static List<PatronUnlocker> EnableGoldenCamos = new List<PatronUnlocker>();
 
         //internal static PrisonEscape_Roles GetRoleFromPos(Vector3 pos)
         //{
@@ -1223,7 +1234,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             LocalReader = null;
             SpawnPoints_Prisoners.Clear();
             SpawnPoints_Guards.Clear();
-            _EveryoneHasdoublePoints = false;
+            _EveryoneHasGoldenGunCamos = false;
             SpawnPoints_Spawn.Clear();
             EnableGoldenCamos.Clear();
             TakeKeyCardOnWanted = false;
@@ -1254,39 +1265,33 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-        private static bool _EveryoneHasdoublePoints { get; set; }
-        internal static bool EveryoneHasdoublePoints
+        private static bool _EveryoneHasGoldenGunCamos { get; set; }
+        internal static bool EveryoneHasGoldenGunCamos
         {
             get
             {
-                return _EveryoneHasdoublePoints;
+                return _EveryoneHasGoldenGunCamos;
             }
             set
             {
-                _EveryoneHasdoublePoints = value;
-                Set_doublePoints(value);
+                _EveryoneHasGoldenGunCamos = value;
+                Set_GoldenGunsUnlocker(value);
 
             }
         }
 
 
 
-        private static void Set_doublePoints(bool doublePoints)
+        private static void Set_GoldenGunsUnlocker(bool EveryoneHasPatreonPerk)
         {
-            try
+            foreach (var item in EnableGoldenCamos)
             {
-                foreach (var item in CurrentReaders)
+
+                if (item != null)
                 {
-                    if (item != null)
-                    {
-                        if (item.isLocal) continue;
-                        item.doublePoints = doublePoints;
-                    }
+                    item.EveryoneHasPatreonPerk = EveryoneHasPatreonPerk;
                 }
 
-            }
-            catch
-            {
             }
         }
 

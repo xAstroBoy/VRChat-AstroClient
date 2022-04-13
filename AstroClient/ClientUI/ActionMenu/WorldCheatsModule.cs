@@ -413,7 +413,7 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddButton("Toggle Patron Guns", () => { PrisonEscape.TogglePatronGuns.InvokeBehaviour(); });
                     CustomSubMenu.AddButton("Toggle Double Points", () => { PrisonEscape.ToggleDoublePoints.InvokeBehaviour(); });
                     //CustomSubMenu.AddToggle("Everyone Has Gold Gun", PrisonEscape.EveryoneHasGoldenGuns, ToggleValue => { PrisonEscape.EveryoneHasGoldenGuns = ToggleValue; });
-                    // CustomSubMenu.AddToggle("Everyone Has Double Points", PrisonEscape.EveryoneHasdoublePoints, ToggleValue => { PrisonEscape.EveryoneHasdoublePoints = ToggleValue; });
+                    // CustomSubMenu.AddToggle("Everyone Has Double Points", PrisonEscape.EveryoneHasGoldenGunCamos, ToggleValue => { PrisonEscape.EveryoneHasGoldenGunCamos = ToggleValue; });
 
                 });
                 CustomSubMenu.AddSubMenu("Game Settings", () =>
@@ -426,7 +426,8 @@ internal class WorldCheatsModule : AstroEvents
 
                 CustomSubMenu.AddSubMenu("Game Hacks", () =>
                 {
-                    CustomSubMenu.AddButton("Give Everyone Gold Guns", () => { PrisonEscape.EnableGoldenCamos.InvokeBehaviour(); });
+                    CustomSubMenu.AddToggle("Everyone Has Gold Guns", PrisonEscape.EveryoneHasGoldenGunCamos, ToggleValue => { PrisonEscape.EveryoneHasGoldenGunCamos = ToggleValue; });
+
                     CustomSubMenu.AddButton("Make Prisoners Wanted", () => { PrisonEscape.MarkPrisonersAsWanted(); });
 
                     var ESP = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
