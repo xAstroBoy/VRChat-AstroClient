@@ -1,7 +1,4 @@
-﻿using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
-using AstroClient.xAstroBoy.Extensions;
-
-namespace AstroClient.WorldModifications.WorldHacks
+﻿namespace AstroClient.WorldModifications.WorldHacks
 {
     #region Imports
 
@@ -26,10 +23,10 @@ namespace AstroClient.WorldModifications.WorldHacks
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
-
+    using AstroMonos.Components.Cheats.PatronCrackers;
+    using AstroClient.xAstroBoy.Extensions;
     #endregion Imports
 
-    // TODO : REWRITE!
     internal class BClubWorld : AstroEvents
     {
 
@@ -43,7 +40,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if(_Bedroom_VIP == null)
                 {
-                    return _Bedroom_VIP = GameObjectFinder.Find("Bedroom VIP"); 
+                    return _Bedroom_VIP = GameObjectFinder.FindRootSceneObject("Bedroom VIP"); 
                 }
                 return _Bedroom_VIP;
             }
@@ -116,7 +113,33 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _Bedrooms;
             }
         }
-
+        private static GameObject _Decoder_Debug;
+        internal static GameObject Decoder_Debug
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Decoder_Debug == null)
+                {
+                    return _Decoder_Debug = GameObjectFinder.FindRootSceneObject("Decoder_Debug");
+                }
+                return _Decoder_Debug;
+            }
+        }
+        private static GameObject _RenderCamera;
+        internal static GameObject RenderCamera
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Decoder_Debug == null) return null;
+                if (_RenderCamera == null)
+                {
+                    return _RenderCamera = Decoder_Debug.transform.FindObject("RenderCamera").gameObject;
+                }
+                return _RenderCamera;
+            }
+        }
         private static GameObject _VIPButton;
         internal static GameObject VIPButton
         {
@@ -367,10 +390,20 @@ namespace AstroClient.WorldModifications.WorldHacks
             get
             {
                 if (!isCurrentWorld) return null;
-                if (ReadPictureStep == null) return null;
+                if (Decoder_Debug == null) return null;
+                else
+                {
+                    Decoder_Debug.SetActive(true);
+                }
+                if (RenderCamera == null) return null;
+                else
+                {
+                    RenderCamera.SetActive(true);
+                }
+
                 if (_RenderCameraReader == null)
                 {
-                    return _RenderCameraReader = ReadPictureStep.gameObject.GetOrAddComponent<ImageRenderCameraReader>();
+                    return _RenderCameraReader = RenderCamera.GetOrAddComponent<ImageRenderCameraReader>();
                 }
                 return _RenderCameraReader;
             }
@@ -429,8 +462,75 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static bool _isDoorBellSpamEnabled;
         private static bool _isBlueChairEnabed;
 
-        private static bool isCurrentWorld;
+        private static bool _isCurrentWorld;
+        private static bool isCurrentWorld
+        {
+            get => _isCurrentWorld;
+            set
+            {
+                _isCurrentWorld = value;
+                if(!value)
+                {
+                    IsBlueChairEnabled = false;
+                    IsDoorbellSpamEnabled = false;
+                    IsFreezeLockEnabed = false;
+                    IsFreezeUnlockEnabed = false;
+                    IsRainbowEnabled = false;
+                    IsMoanSpamEnabled = false;
+                    IsFallSpamEnabled = false;
+                    Bells.Clear();
+                    Chairs.Clear();
+                    ColorActions.Clear();
 
+                    _Bedroom_VIP = null;
+                    _Lobby = null;
+                    _Udon = null;
+                    _VIPRoom = null;
+                    _Penthouse = null;
+                    _Bedrooms = null;
+                    _VIPButton = null;
+                    _LockIndicator_1 = null;
+                    _LockIndicator_2 = null;
+                    _LockIndicator_3 = null;
+                    _LockIndicator_4 = null;
+                    _LockIndicator_5 = null;
+                    _LockIndicator_6 = null;
+                    _LockIndicator_VIP = null;
+                    _VIPInsideDoor = null;
+                    _VIPControls = null;
+                    _Cancer_Spawn = null;
+                    _ElevatorFlairBtn = null;
+                    _FlairBtnTablet = null;
+
+
+                    LockIndicator1_Listener = null;
+                    LockIndicator2_Listener = null;
+                    LockIndicator3_Listener = null;
+                    LockIndicator4_Listener = null;
+                    LockIndicator5_Listener = null;
+                    LockIndicator6_Listener = null;
+                    LockIndicator7_Listener = null;
+
+
+
+
+
+                    _MoanSpamBehaviour = null;
+                    _FallSpamBehaviour = null;
+                    _ProcessPatronsFromReadRenderTexture = null;
+                    _ReadPictureStep = null;
+                    _RenderCameraReader = null;
+                    MoanSpam_CancellationToken = null;
+                    FallSpam_CancellationToken = null;
+                    DoorLockFreeze_CancellationToken = null;
+                    DoorUnlockFreeze_CancellationToken = null;
+                    BlueChairSpam_CancellationToken = null;
+                    RainbowSpam_CancellationToken = null;
+                    DoorbellSpam_CancellationToken = null;
+                }
+
+            }
+        }
         private static QMToggleButton SpamDoorbellsToggle;
 
         private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
@@ -452,18 +552,13 @@ namespace AstroClient.WorldModifications.WorldHacks
             
             private set
             {
-                bool Report = value != _isLocalPlayerElite;
-
-                if (Report)
+                if (value)
                 {
-                    if (value)
-                    {
-                        Log.Debug($"{CurrentDisplayName} Gained Elite Access!", System.Drawing.Color.Chartreuse);
-                    }
-                    else
-                    {
-                        Log.Debug($"{CurrentDisplayName} Lost Elite Access!", System.Drawing.Color.Red);
-                    }
+                    Log.Debug($"{CurrentDisplayName} Gained Elite Access!", System.Drawing.Color.Chartreuse);
+                }
+                else
+                {
+                    Log.Debug($"{CurrentDisplayName} Lost Elite Access!", System.Drawing.Color.Red);
                 }
                 _isLocalPlayerElite = value;
             }
@@ -475,18 +570,13 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             private set
             {
-                bool Report = value != _isLocalPlayerPatron;
-
-                if (Report)
+                if (value)
                 {
-                    if (value)
-                    {
-                        Log.Debug($"{CurrentDisplayName} Gained Patron Access!", System.Drawing.Color.Chartreuse);
-                    }
-                    else
-                    {
-                        Log.Debug($"{CurrentDisplayName} Lost Patron Access!", System.Drawing.Color.Red);
-                    }
+                    Log.Debug($"{CurrentDisplayName} Gained Patron Access!", System.Drawing.Color.Chartreuse);
+                }
+                else
+                {
+                    Log.Debug($"{CurrentDisplayName} Lost Patron Access!", System.Drawing.Color.Red);
                 }
                 _isLocalPlayerPatron = value;
             }
@@ -781,6 +871,16 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
 
+                // Activate both parent and root to Start the reader!
+                if(Decoder_Debug != null)
+                {
+                    Decoder_Debug.SetActive(true);
+                }
+                if (RenderCamera != null)
+                {
+                    RenderCamera.SetActive(true);
+                }
+
                 UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => Bells.Add(s.FindUdonEvent("DingDong")));
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
@@ -912,6 +1012,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal override void OnUnityLog(string message)
         {
             if (!isCurrentWorld) return;
+            if (CurrentDisplayName.IsNullOrEmptyOrWhiteSpace()) return; 
             if (message.Contains("[Patreon]"))
             {
                 if (message.Contains("is a patron"))
@@ -1164,63 +1265,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (isCurrentWorld)
             {
-                IsBlueChairEnabled = false;
-                IsDoorbellSpamEnabled = false;
-                IsFreezeLockEnabed = false;
-                IsFreezeUnlockEnabed = false;
-                IsRainbowEnabled = false;
-                IsMoanSpamEnabled = false;
-                IsFallSpamEnabled = false;
 
-                _Bedroom_VIP = null;
-                _Lobby = null;
-                _Udon = null;
-                _VIPRoom = null;
-                _Penthouse = null;
-                _Bedrooms = null;
-                _VIPButton = null;
-                _LockIndicator_1 = null;
-                _LockIndicator_2 = null;
-                _LockIndicator_3 = null;
-                _LockIndicator_4 = null;
-                _LockIndicator_5 = null;
-                _LockIndicator_6 = null;
-                _LockIndicator_VIP = null;
-                _VIPInsideDoor = null;
-                _VIPControls = null;
-                _Cancer_Spawn = null;
-                _ElevatorFlairBtn = null;
-                _FlairBtnTablet = null;
-
-
-                LockIndicator1_Listener.DestroyMeLocal(true);
-                LockIndicator2_Listener.DestroyMeLocal(true);
-                LockIndicator3_Listener.DestroyMeLocal(true);
-                LockIndicator4_Listener.DestroyMeLocal(true);
-                LockIndicator5_Listener.DestroyMeLocal(true);
-                LockIndicator6_Listener.DestroyMeLocal(true);
-                LockIndicator7_Listener.DestroyMeLocal(true);
-
-
-                Bells.Clear();
-                Chairs.Clear();
-                ColorActions.Clear();
-
-
-
-                _MoanSpamBehaviour = null;
-                _FallSpamBehaviour = null;
-                _ProcessPatronsFromReadRenderTexture = null;
-                _ReadPictureStep = null;
-                _RenderCameraReader = null;
-                isCurrentWorld = false;
-                MoanSpam_CancellationToken = null;
-                FallSpam_CancellationToken = null;
-                DoorLockFreeze_CancellationToken = null;
-                DoorUnlockFreeze_CancellationToken = null;
-                BlueChairSpam_CancellationToken = null;
-                RainbowSpam_CancellationToken = null;
-                DoorbellSpam_CancellationToken = null;
 
                 Log.Write("Done unloading B Club..");
             }
@@ -1295,57 +1340,61 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         internal static void ForceEliteTier()
         {
-            
-            if (RenderCameraReader == null)
+            try
             {
-                Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
-                return;
-            }
-            if (ProcessPatronsFromReadRenderTexture == null)
-            {
-                Log.Warn($"Unable to Force Elite Tier due to ProcessPatronsFromReadRenderTexture Event being Null!");
-                return;
-            }
-
-            // First let's edit the results of the rendercamera.
-
-            // Split the results.
-            bool HasBeenModified = false;
-            var result = RenderCameraReader.currentOutputString.ReadLines().ToList();
-            if (result != null && result.Count != 0)
-            {
-                if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
+                if (RenderCameraReader == null)
                 {
-                    Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
-                    result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
-                    HasBeenModified = true;
+                    Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
+                    return;
                 }
-                if (GameInstances.LocalPlayer != null)
+                if (ProcessPatronsFromReadRenderTexture == null)
                 {
-                    if (!result.Contains(GameInstances.LocalPlayer.displayName))
+                    Log.Warn($"Unable to Force Elite Tier due to ProcessPatronsFromReadRenderTexture Event being Null!");
+                    return;
+                }
+
+
+                // First let's edit the results of the rendercamera.
+
+                // Split the results.
+                bool HasBeenModified = false;
+                var result = RenderCameraReader.currentOutputString.ReadLines().ToList();
+                if (result != null && result.Count != 0)
+                {
+                    if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
                     {
                         Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
-                        result.Insert(1, GameInstances.LocalPlayer.displayName);
+                        result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
                         HasBeenModified = true;
                     }
+                    if (GameInstances.LocalPlayer != null)
+                    {
+                        if (!result.Contains(GameInstances.LocalPlayer.displayName))
+                        {
+                            Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
+                            result.Insert(1, GameInstances.LocalPlayer.displayName);
+                            HasBeenModified = true;
+                        }
+                    }
+
+
                 }
 
+                if (HasBeenModified)
+                {
+
+                    // if that's so, let's force a new reading.
+
+                    // First replace the output with the modified one
+                    RenderCameraReader.currentOutputString = string.Join("\n", result);
+
+
+                    //Secondly invoke again the Reading event.
+                    ProcessPatronsFromReadRenderTexture.InvokeBehaviour();
+                }
 
             }
-
-            if (HasBeenModified)
-            {
-
-                // if that's so, let's force a new reading.
-
-                // First replace the output with the modified one
-                RenderCameraReader.currentOutputString = string.Join("\n", result);
-
-
-                //Secondly invoke again the Reading event.
-                ProcessPatronsFromReadRenderTexture.InvokeBehaviour();
-            }
-
+            catch { } // SHUT UP
         }
 
 
@@ -1436,7 +1485,6 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void RemovePrivacyBlocksOnRooms(int roomid)
         {
-            GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
             if (Bedrooms != null)
             {
                 var cover = Bedrooms.transform.FindObject($"Bedroom {roomid}/Black Covers");

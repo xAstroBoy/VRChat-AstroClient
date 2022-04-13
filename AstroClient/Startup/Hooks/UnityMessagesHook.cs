@@ -1,22 +1,15 @@
-﻿using System.Linq;
-using AstroClient.Config;
-using AstroClient.xAstroBoy.Extensions;
-using UnityEngine;
-using VRC.Udon;
-using Color = System.Drawing.Color;
-
+﻿
 namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
     using System;
-    using System.Collections;
     using System.Reflection;
-    using AstroEventArgs;
     using Cheetos;
     using HarmonyLib;
-    using MelonLoader;
-    using Tools.Extensions;
+    using System.Linq;
+    using AstroClient.xAstroBoy.Extensions;
+    using UnityEngine;
 
     #endregion Imports
 
@@ -43,18 +36,24 @@ namespace AstroClient.Startup.Hooks
 
         private static void Debug(ref Il2CppSystem.Object __0)
         {
+            if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
+            if (msg.IsNullOrEmptyOrWhiteSpace()) return;
             Event_OnUnityLog.SafetyRaiseWithParams(msg);
         }
         private static void DebugWarning(ref Il2CppSystem.Object __0)
         {
+            if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
+            if (msg.IsNullOrEmptyOrWhiteSpace()) return;
             Event_OnUnityWarning.SafetyRaiseWithParams(msg);
         }
 
         private static void DebugError(ref Il2CppSystem.Object __0)
         {
+            if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
+            if (msg.IsNullOrEmptyOrWhiteSpace()) return;
             Event_OnUnityError.SafetyRaiseWithParams(msg);
 
         }
