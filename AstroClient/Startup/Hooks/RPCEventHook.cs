@@ -32,10 +32,7 @@ namespace AstroClient.Startup.Hooks
 
         internal override void ExecutePriorityPatches()
         {
-            MiscUtils.DelayFunction(1f, new System.Action(() =>
-            {
-                InitPatches();
-            }));
+            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent)));
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
@@ -44,12 +41,6 @@ namespace AstroClient.Startup.Hooks
             return new HarmonyLib.HarmonyMethod(typeof(RPCEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
-        internal void InitPatches()
-        {
-            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_1)), GetPatch(nameof(OnRPCEvent)));
-
-        }
 
         // TODO : Clean and reorganize the entire event system 
 

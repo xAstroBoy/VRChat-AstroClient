@@ -76,18 +76,6 @@
 
         internal override void ExecutePriorityPatches()
         {
-            InitPatches();
-        }
-
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
-        private static HarmonyLib.HarmonyMethod GetPatch(string name)
-        {
-            return new HarmonyLib.HarmonyMethod(typeof(SoftCloneHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
-        }
-
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
-        internal void InitPatches()
-        {
             new AstroPatch(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent)), GetPatch(nameof(SoftCloneOnEvent)));
 
             _loadAvatarMethod =
@@ -100,8 +88,14 @@
             .Any(instance => instance.Type == XrefType.Method
                 && instance.TryResolve() != null
                 && instance.TryResolve().Name == "ReloadAvatarNetworkedRPC"));
-
         }
+
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyLib.HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyLib.HarmonyMethod(typeof(SoftCloneHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
 
         internal static void LocalCloneAvatarPlayer(APIUser user)
         {

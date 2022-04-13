@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.Extensions
+﻿using System.IO;
+
+namespace AstroClient.xAstroBoy.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -36,6 +38,15 @@
         {
             return string.Join("", str.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries));
         }
+
+        internal static IEnumerable<string> ReadLines(this string s)
+        {
+            string line;
+            using (var sr = new StringReader(s))
+                while ((line = sr.ReadLine()) != null)
+                    yield return line;
+        }
+
 
         internal static bool IsPositive(this int number)
         {

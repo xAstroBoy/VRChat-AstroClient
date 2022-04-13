@@ -29,10 +29,7 @@
 
         internal override void ExecutePriorityPatches()
         {
-            MiscUtils.DelayFunction(1f, new System.Action(() =>
-            {
-                InitPatches();
-            }));
+            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(PerformanceScannerSet), nameof(PerformanceScannerSet.Method_Public_IEnumerator_GameObject_AvatarPerformanceStats_MulticastDelegateNPublicSealedBoCoUnique_0)), GetPatch(nameof(CalculatePerformance)));
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
@@ -41,12 +38,6 @@
             return new HarmonyLib.HarmonyMethod(typeof(PerformanceScannerHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
-        internal void InitPatches()
-        {
-            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(PerformanceScannerSet), nameof(PerformanceScannerSet.Method_Public_IEnumerator_GameObject_AvatarPerformanceStats_MulticastDelegateNPublicSealedBoCoUnique_0)), GetPatch(nameof(CalculatePerformance)));
-            
-        }
 
         private static bool CalculatePerformance()
         {

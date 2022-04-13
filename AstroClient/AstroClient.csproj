@@ -103,8 +103,8 @@
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\JustBClub_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\RenderCameraHijacker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\GlobalPatronUnlocker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\TierLand_CreditsReader.cs" />
@@ -154,6 +154,7 @@
     <Compile Include="Developers\Cheetos\Randomizer.cs" />
     <Compile Include="Developers\Cheetos\WindowsUtils.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
+    <Compile Include="Startup\Hooks\UnityMessagesHook.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />

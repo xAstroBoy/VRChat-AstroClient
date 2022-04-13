@@ -26,24 +26,9 @@
 
         internal override void ExecutePriorityPatches()
         {
-            MelonCoroutines.Start(Init());
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
         }
 
-        private IEnumerator Init()
-        {
-            InitPatch();
-            yield break;
-        }
-
-        private void InitPatch()
-        {
-            try
-            {
-                new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
-            }
-            catch (Exception e) { Log.Error("Error in applying patches : " + e); }
-            finally { }
-        }
 
         private static void OnSelectedPlayerPatch(ref VRC.Player __0)
         {

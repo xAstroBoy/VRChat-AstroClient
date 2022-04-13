@@ -34,8 +34,13 @@ namespace AstroClient.ClientUI.Menu.SettingsMenu
             QMToggleButton UdonCustomEventsToggle = new QMToggleButton(sub, "Udon Custom Events Log", () => { ConfigManager.General.LogUdonCustomEvents = true; }, () => { ConfigManager.General.LogUdonCustomEvents = false; }, "Log Udon Custom Events to the console");
             UdonCustomEventsToggle.SetToggleState(ConfigManager.General.LogUdonCustomEvents, false);
 
-            QMToggleButton eventLogTottle = new QMToggleButton(sub,  "Event Log", () => { ConfigManager.General.LogEvents = true; }, () => { ConfigManager.General.LogEvents = false; }, "Log Events to the console");
-            eventLogTottle.SetToggleState(ConfigManager.General.LogEvents, false);
+            QMToggleButton UnityLogsToggle = new QMToggleButton(sub, "Unity Logs", () => { ConfigManager.General.LogUnityMessages = true; }, () => { ConfigManager.General.LogUnityMessages = false; }, "Log Events to the console");
+            UnityLogsToggle.SetToggleState(ConfigManager.General.LogUnityMessages, false);
+
+            QMToggleButton EventLogToggle = new QMToggleButton(sub,  "Event Log", () => { ConfigManager.General.LogEvents = true; }, () => { ConfigManager.General.LogEvents = false; }, "Log Events to the console");
+            EventLogToggle.SetToggleState(ConfigManager.General.LogEvents, false);
+
+
         }
 
         internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)

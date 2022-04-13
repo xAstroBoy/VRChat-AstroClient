@@ -53,6 +53,8 @@
 
         public bool LogUdonCustomEvents = true;
 
+        public bool LogUnityMessages = true;
+
         public float FOV = 61f;
 
         public bool SpoofPing = false;
