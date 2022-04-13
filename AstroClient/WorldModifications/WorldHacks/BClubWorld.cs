@@ -303,6 +303,82 @@ namespace AstroClient.WorldModifications.WorldHacks
         }
 
         #endregion
+
+        #region  Udon Behaviours Cached and other random stuff
+        private static UdonBehaviour_Cached _MoanSpamBehaviour;
+        internal static UdonBehaviour_Cached MoanSpamBehaviour
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_MoanSpamBehaviour == null)
+                {
+                    return _MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
+                }
+                return _MoanSpamBehaviour;
+            }
+        }
+
+        private static UdonBehaviour_Cached _FallSpamBehaviour;
+        internal static UdonBehaviour_Cached FallSpamBehaviour
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_FallSpamBehaviour == null)
+                {
+                    return _FallSpamBehaviour = UdonSearch.FindUdonEvent("NPC Animations Udon", "PlayFall");
+                }
+                return _FallSpamBehaviour;
+            }
+        }
+
+        private static UdonBehaviour_Cached _ProcessPatronsFromReadRenderTexture;
+        internal static UdonBehaviour_Cached ProcessPatronsFromReadRenderTexture
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_ProcessPatronsFromReadRenderTexture == null)
+                {
+                    return _ProcessPatronsFromReadRenderTexture = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatronsFromReadRenderTexture");
+                }
+                return _ProcessPatronsFromReadRenderTexture;
+            }
+        }
+        private static UdonBehaviour_Cached _ReadPictureStep;
+        internal static UdonBehaviour_Cached ReadPictureStep
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_ReadPictureStep == null)
+                {
+                    return _ReadPictureStep = UdonSearch.FindUdonEvent("RenderCamera", "ReadPictureStep");
+                }
+                return _ReadPictureStep;
+            }
+        }
+
+
+        private static ImageRenderCameraReader _RenderCameraReader;
+        internal static ImageRenderCameraReader RenderCameraReader
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (ReadPictureStep == null) return null;
+                if (_RenderCameraReader == null)
+                {
+                    return _RenderCameraReader = ReadPictureStep.gameObject.GetOrAddComponent<ImageRenderCameraReader>();
+                }
+                return _RenderCameraReader;
+            }
+        }
+
+
+
+        #endregion
         internal static string CurrentDisplayName
         {
             get
@@ -342,8 +418,6 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static QMToggleButton ToggleFallSpamBtn;
 
 
-        private static UdonBehaviour_Cached MoanSpamBehaviour;
-        private static UdonBehaviour_Cached FallSpamBehaviour;
 
         private static bool _isFreezeLockEnabed;
         private static bool _isFreezeUnlockEnabed;
@@ -358,15 +432,11 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static bool isCurrentWorld;
 
         private static QMToggleButton SpamDoorbellsToggle;
-        private static UdonBehaviour_Cached ProcessPatronsFromReadRenderTexture;
-        private static UdonBehaviour_Cached ReadPictureStep;
-        private static UdonBehaviour_Cached VoiceAction;
 
-        private static ImageRenderCameraReader RenderCameraReader;
         private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
-        private static List<UdonBehaviour_Cached> _bells = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> Bells = new List<UdonBehaviour_Cached>();
 
-        private static List<UdonBehaviour_Cached> _chairs = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> Chairs = new List<UdonBehaviour_Cached>();
 
         private static GameObjectListener LockIndicator1_Listener;
         private static GameObjectListener LockIndicator2_Listener;
@@ -711,7 +781,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
 
-                UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
+                UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => Bells.Add(s.FindUdonEvent("DingDong")));
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
                 if (Penthouse != null)
@@ -819,8 +889,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                     Log.Exception(e);
                 }
 
-                MoanSpamBehaviour = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
-                FallSpamBehaviour = UdonSearch.FindUdonEvent("NPC Animations Udon", "PlayFall");
 
                 Log.Write("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
@@ -1026,9 +1094,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield break;
                 }
 
-                for (int i = 0; i < _bells.Count; i++)
+                for (int i = 0; i < Bells.Count; i++)
                 {
-                    _bells[i]?.InvokeBehaviour();
+                    Bells[i]?.InvokeBehaviour();
                     yield return new WaitForSeconds(0.1f);
                 }
 
@@ -1045,19 +1113,19 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (chair.name.Contains("Chair") || chair.name.Contains("Seat"))
                 {
                     var action = chair.FindUdonEvent("Sit");
-                    if (action != null && !_chairs.Contains(action))
+                    if (action != null && !Chairs.Contains(action))
                     {
-                        _chairs.Add(action);
+                        Chairs.Add(action);
                     }
                 }
             }
-            Log.Write($"Blue Chairs: {_chairs.Count} found.");
+            Log.Write($"Blue Chairs: {Chairs.Count} found.");
             BlueChairSpam_CancellationToken = MelonCoroutines.Start(DoBlueChairSpam());
         }
 
         private static IEnumerator DoBlueChairSpam()
         {
-            if (!_chairs.Any())
+            if (!Chairs.Any())
             {
                 Log.Error("No bluechairs found!");
                 yield break;
@@ -1070,9 +1138,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                     yield break;
                 }
 
-                for (int i = 0; i < _chairs.Count; i++)
+                for (int i = 0; i < Chairs.Count; i++)
                 {
-                    _chairs[i]?.InvokeBehaviour();
+                    Chairs[i]?.InvokeBehaviour();
                     yield return new WaitForSeconds(0.1f);
                 }
 
@@ -1134,19 +1202,18 @@ namespace AstroClient.WorldModifications.WorldHacks
                 LockIndicator7_Listener.DestroyMeLocal(true);
 
 
-                _bells.Clear();
-                _chairs.Clear();
+                Bells.Clear();
+                Chairs.Clear();
                 ColorActions.Clear();
 
 
 
-                VoiceAction = null;
-                MoanSpamBehaviour = null;
-                FallSpamBehaviour = null;
-                ProcessPatronsFromReadRenderTexture = null;
-                ReadPictureStep = null;
-                RenderCameraReader = null;
-
+                _MoanSpamBehaviour = null;
+                _FallSpamBehaviour = null;
+                _ProcessPatronsFromReadRenderTexture = null;
+                _ReadPictureStep = null;
+                _RenderCameraReader = null;
+                isCurrentWorld = false;
                 MoanSpam_CancellationToken = null;
                 FallSpam_CancellationToken = null;
                 DoorLockFreeze_CancellationToken = null;
@@ -1217,27 +1284,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (!isCurrentWorld) return;
             if (item == null) return;
             if (EventName.IsNullOrEmptyOrWhiteSpace()) return;
-            if (item.name.isMatch("RenderCamera") && EventName.isMatch("ReadPictureStep"))
-            {
-                if (ReadPictureStep == null)
-                {
-                    ReadPictureStep = new UdonBehaviour_Cached(item, EventName);
-                }
-                if (ReadPictureStep != null)
-                {
-                    if (RenderCameraReader == null)
-                    {
-                        RenderCameraReader = ReadPictureStep.gameObject.GetOrAddComponent<ImageRenderCameraReader>();
-                    }
-                }
-            }
-
             if (item.name.isMatch("Patreon") && EventName.isMatch("_ProcessPatronsFromReadRenderTexture"))
             {
-                if (ProcessPatronsFromReadRenderTexture == null)
-                {
-                    ProcessPatronsFromReadRenderTexture = new UdonBehaviour_Cached(item, EventName);
-                }
                 // The Final step has been sent, let's hijack it!
                 ForceEliteTier();
             }
@@ -1248,15 +1296,6 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static void ForceEliteTier()
         {
             
-            if (RenderCameraReader == null)
-            {
-                RenderCameraReader = UdonSearch.FindUdonEvent("RenderCamera", "ReadPictureStep").gameObject.GetOrAddComponent<ImageRenderCameraReader>();
-            }
-
-            if (ProcessPatronsFromReadRenderTexture == null)
-            {
-                ProcessPatronsFromReadRenderTexture = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatronsFromReadRenderTexture");
-            }
             if (RenderCameraReader == null)
             {
                 Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
