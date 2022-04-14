@@ -1,6 +1,8 @@
 ﻿using AstroClient.Config;
+using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
 using VRC.Udon;
 
 namespace AstroClient.Startup.Hooks
@@ -26,7 +28,6 @@ namespace AstroClient.Startup.Hooks
         internal static event Action<UdonBehaviour> Event_Udon_OnPickupUseDown;
         internal static event Action<UdonBehaviour> Event_Udon_OnDrop;
         internal static event Action<UdonBehaviour> Event_Udon_OnInteract;
-        internal static event Action<UdonBehaviour, string> Event_Udon_SendCustomEvent;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -82,13 +83,7 @@ namespace AstroClient.Startup.Hooks
         {
             if (__instance == null) return true;
             if (__0.IsNullOrEmptyOrWhiteSpace()) return true;
-
-            Event_Udon_SendCustomEvent.SafetyRaiseWithParams(__instance, __0);
-            //if(GameObject_RPC_Firewall.isRPCEventBlocked(null, __instance.transform, __0))
-            //{
-            //    return false;
-            //}
-            return true;
+            return EventDispatcher_HandleUdonEvent.Handle_UdonEvent_CustomEvent(__instance, __0);
 
         }
 

@@ -95,7 +95,7 @@ namespace AstroClient
             UdonEventsHook.Event_Udon_OnPickupUseDown += UdonBehaviour_Event_OnPickupUseDown;
             UdonEventsHook.Event_Udon_OnDrop += UdonBehaviour_Event_OnDrop;
             UdonEventsHook.Event_Udon_OnInteract += UdonBehaviour_Event_OnInteract;
-            UdonEventsHook.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
+            EventDispatcher_HandleUdonEvent.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
 
             UnityMessagesHook.Event_OnUnityLog += OnUnityLog;
             UnityMessagesHook.Event_OnUnityWarning += OnUnityWarning;

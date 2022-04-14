@@ -62,9 +62,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
 
                 if (parameter.Equals("UdonSyncRunProgramAsRPC"))
                 {
-                    var result = EventDispatcher_HandleUdonEvent.Handle_UdonEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText());
-                    Log.Debug($"RPC Should Be Blocked? : {!result}");
-                    return result;
+                    return EventDispatcher_HandleUdonEvent.Handle_UdonEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText());;
                 }
                 if (!parameter.Equals("UdonSyncRunProgramAsRPC"))
                 {

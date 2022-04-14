@@ -49,16 +49,5 @@ namespace AstroClient.ClientUI.Menu.SettingsMenu
 
         }
 
-        internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
-        {
-            if (item != null)
-            {
-                if (ConfigManager.General.LogUdonCustomEvents)
-                {
-                    Log.Debug($"{item.name} Sent Event {EventName}");
-                }
-            }
-
-        }
     }
 }

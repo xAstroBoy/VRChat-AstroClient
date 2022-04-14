@@ -1,5 +1,6 @@
 
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
+using VRC.Udon;
 
 namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 {
@@ -26,6 +27,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
     internal static class EventDispatcher_HandleUdonEvent
     {
         internal static event System.Action<Player, GameObject, string> Event_OnUdonSyncRPC;
+        internal static event Action<UdonBehaviour, string> Event_Udon_SendCustomEvent;
 
         internal static bool Handle_UdonEvent(VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject gameObject, string EventKey)
         {
@@ -46,7 +48,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (isBlocked)
                     {
-                        Log.Write($"[UDON RPC Firewall] : BLOCKED RPC: Sender : {sender.Get_SenderName()} , GameObject : {gameObject.name}, EventKey : {EventKey}", System.Drawing.Color.Orange);
+                        Log.Write($"[UDON RPC Firewall] BLOCKED RPC: Sender : {sender.Get_SenderName()} , GameObject : {gameObject.name}, EventKey : {EventKey}", System.Drawing.Color.Orange);
                     }
                     else
                     {
@@ -64,6 +66,42 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 
         }
 
+        internal static bool Handle_UdonEvent_CustomEvent(UdonBehaviour UdonEvent, string EventKey)
+        {
+            try
+            {
+                Event_Udon_SendCustomEvent?.SafetyRaiseWithParams(UdonEvent, EventKey);
+            }
+            catch { }
+
+
+            bool isBlocked = Bools.BlockUdon;
+            try
+            {
+
+                isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(GameInstances.CurrentPlayer, UdonEvent.gameObject, EventKey);
+
+                if (ConfigManager.General.LogUdonCustomEvents)
+                {
+                    if (isBlocked)
+                    {
+                        Log.Write($"[UDON RPC Firewall] BLOCKED RPC: Sender : {GameInstances.CurrentPlayer.Get_SenderName()} , Event : {UdonEvent.gameObject.name}, EventKey : {EventKey}", System.Drawing.Color.Orange);
+                    }
+                    else
+                    {
+                        Log.Write($"Udon RPC: Sender : {GameInstances.CurrentPlayer.Get_SenderName()} , Event : {UdonEvent.gameObject.name}, EventKey : {EventKey}");
+                    }
+                }
+                return !isBlocked;
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+            }
+            return !isBlocked;
+
+
+        }
 
     }
 }

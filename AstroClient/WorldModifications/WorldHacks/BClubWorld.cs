@@ -469,6 +469,20 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _PlayLeaveBedroom7;
             }
         }
+        private static UdonBehaviour_Cached _TeleportToBedroomOutside7;
+
+        internal static UdonBehaviour_Cached TeleportToBedroomOutside7
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_TeleportToBedroomOutside7 == null)
+                {
+                    return _TeleportToBedroomOutside7 = UdonSearch.FindUdonEvent("Teleports", "_TeleportToBedroomOutside7");
+                }
+                return _TeleportToBedroomOutside7;
+            }
+        }
 
         private static ImageRenderCameraReader _RenderCameraReader;
 
@@ -1099,16 +1113,19 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 // This should be the one ejecting you when someone presses the "Eject Non-VIP" button 
 
-                if (EjectSelfIfNotVip != null)
-                {
-                    EjectSelfIfNotVip.Add_UdonFirewall_Rule(false, false, true);
-                }
-                if (PlayLeaveBedroom7 != null)
-                {
-                    PlayLeaveBedroom7.Add_UdonFirewall_Rule(false, false, true);
-                }
+                //if (EjectSelfIfNotVip != null)
+                //{
+                //    EjectSelfIfNotVip.Add_UdonFirewall_Rule(false, false, true);
+                //}
+                //if (PlayLeaveBedroom7 != null)
+                //{
+                //    PlayLeaveBedroom7.Add_UdonFirewall_Rule(false, false, true);
+                //}
 
-
+                if(TeleportToBedroomOutside7 != null)
+                {
+                    TeleportToBedroomOutside7.Add_UdonFirewall_Rule(false, false, true);
+                }
 
                 Log.Write("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
