@@ -91,6 +91,11 @@ namespace AstroClient.Startup.Hooks
                 string eventtype = __1.EventType != null ? __1.EventType.ToString() : "null";
                 string broadcasttype = __2 != null ? __2.ToString() : "Null";
 
+                if (__0.DisplayName() == "SysNetr")
+                {
+                    blocked = true;
+                }
+
                 if (name.Equals("USpeak"))
                 {
                     log = false;
