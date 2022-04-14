@@ -46,11 +46,11 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (sender.Get_SenderAPIUser().IsSelf)
                     {
-                        isBlocked = GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action);
+                        isBlocked = !GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action);
                     }
                     else
                     {
-                        isBlocked = GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, Action);
+                        isBlocked = !GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, Action);
 
                     }
                 }
@@ -60,11 +60,11 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (isBlocked)
                     {
-                        Log.Write($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {TargetObject.name}, Action : {Action}");
+                        Log.Write($"BLOCKED Udon RPC: Sender : {sender.Get_SenderName()} , GameObject : {TargetObject.name}, Action : {Action}");
                     }
                     else
                     {
-                        Log.Write($"Udon RPC: Sender : {sender} , GameObject : {TargetObject.name}, Action : {Action}");
+                        Log.Write($"Udon RPC: Sender : {sender.Get_SenderName()} , GameObject : {TargetObject.name}, Action : {Action}");
                     }
                 }
                 return !isBlocked;

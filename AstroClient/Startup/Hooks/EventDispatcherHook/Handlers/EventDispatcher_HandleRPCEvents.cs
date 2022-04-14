@@ -42,11 +42,11 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (sender.Get_SenderAPIUser().IsSelf)
                     {
-                        isBlocked = GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, actionText);
+                        isBlocked = !GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, actionText);
                     }
                     else
                     {
-                        isBlocked = GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, actionText);
+                        isBlocked = !GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, actionText);
 
                     }
                 }
