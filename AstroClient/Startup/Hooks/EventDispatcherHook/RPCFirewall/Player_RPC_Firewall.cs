@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
+﻿using System.Collections.Concurrent;
+
+namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 {
     using AstroClient.AstroMonos.Components.UI.SingleTag;
     using AstroClient.Config;
@@ -12,21 +14,29 @@
     using System.Threading.Tasks;
     using VRC;
 
-    internal class SenderBlocker : AstroEvents
+    internal class Player_RPC_Firewall : AstroEvents
     {
-        public Dictionary<Player, SingleTag> CurrentTags = new Dictionary<Player, SingleTag>();
+        internal static ConcurrentDictionary<Player, SingleTag> CurrentTags = new ConcurrentDictionary<Player, SingleTag>();
 
-        internal void AddPlayer(Player player)
+        internal override void OnRoomLeft()
+        {
+            CurrentTags.Clear(); 
+        }
+
+        internal static void AddPlayer(Player player)
         {
             var id = player.GetAPIUser().id;
             if (!ConfigManager.BlockedRPCPlayers.BlockedRPCPlayersList.Contains(id))
             {
                 ConfigManager.BlockedRPCPlayers.BlockedRPCPlayersList.Add(id);
-                CurrentTags.Add(player, player.AddSingleTag(Color.Crayola.Present.Razzmatazz, "RPC Blocked"));
+                if (!CurrentTags.ContainsKey(player))
+                {
+                    CurrentTags.TryAdd(player, player.AddSingleTag(Color.Crayola.Present.Razzmatazz, "RPC Blocked"));
+                }
             }
         }
 
-        internal void RemovePlayer(Player player)
+        internal static void RemovePlayer(Player player)
         {
             var id = player.GetAPIUser().id;
             if (ConfigManager.BlockedRPCPlayers.BlockedRPCPlayersList.Contains(id))
@@ -34,11 +44,11 @@
                 ConfigManager.BlockedRPCPlayers.BlockedRPCPlayersList.Remove(id);
                 var tag = CurrentTags[player];
                 tag.DestroyMeLocal();
-                CurrentTags.Remove(player);
+                CurrentTags.TryRemove(player, out _);
             }
         }
 
-        internal bool IsBlocked(Player player)
+        internal static bool IsBlocked(Player player)
         {
             var id = player.GetAPIUser().id;
             return ConfigManager.BlockedRPCPlayers.BlockedRPCPlayersList.Contains(id);
@@ -48,7 +58,10 @@
         {
             if (IsBlocked(player))
             {
-                CurrentTags.Add(player, player.AddSingleTag(Color.Crayola.Present.Razzmatazz, "RPC Blocked"));
+                if (!CurrentTags.ContainsKey(player))
+                {
+                    CurrentTags.TryAdd(player, player.AddSingleTag(Color.Crayola.Present.Razzmatazz, "RPC Blocked"));
+                }
             }
         }
 
@@ -58,7 +71,7 @@
             {
                 var tag = CurrentTags[player];
                 tag.DestroyMeLocal();
-                CurrentTags.Remove(player);
+                CurrentTags.TryRemove(player, out _);
             }
         }
     }

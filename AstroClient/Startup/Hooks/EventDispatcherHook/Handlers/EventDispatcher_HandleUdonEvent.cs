@@ -36,10 +36,16 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             bool isBlocked = Bools.BlockUdon;
             try
             {
-
-
-
-                // TODO: ADD SENDER FIREWALL SUPPORT
+                bool isPlayerBlocked = false;
+                isPlayerBlocked = Player_RPC_Firewall.IsBlocked(sender);
+                if(isPlayerBlocked)
+                {
+                    isBlocked = true;
+                }
+                else
+                {
+                    isBlocked = GameObject_RPC_Firewall.HasBlockedEvent(TargetObject, Action);
+                }
 
                 // First let's check the sender 
 
@@ -48,14 +54,12 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 
                 // Then let's check if the behaviour and it's event is in the Udon firewall 
 
-                isBlocked = GameObject_RPC_Firewall.HasBlockedEvent(TargetObject, Action);
 
                 if (ConfigManager.General.LogUdonEvents)
                 {
                     if (isBlocked)
                     {
                         Log.Write($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {TargetObject.name}, Action : {Action}");
-                        return false;
                     }
                     else
                     {

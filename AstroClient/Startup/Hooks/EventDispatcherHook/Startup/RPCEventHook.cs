@@ -57,22 +57,19 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
 
                 if (parameter.Equals("TeleportRPC"))
                 {
-                    return EventDispatcher_HandleTeleportRPC.HandleTeleportRPC(ref __1, __0, __1.Get_Parameter_GameObject(), __1.Get_parameterString(), __1.Get_EventType(), __2.Get_VrcBroadcastType());
+                    return EventDispatcher_HandleTeleportRPC.HandleTeleportRPC(ref __1, __0, __1.Get_Parameter_GameObject(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
                 }
-                else if (parameter.Equals("UdonSyncRunProgramAsRPC"))
+
+                if (parameter.Equals("UdonSyncRunProgramAsRPC"))
                 {
                     return EventDispatcher_HandleUdonEvent.Handle_UdonEvent(ref __1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText());
                 }
-                else
-                {
-                    return EventDispatcher_HandleRPCEvents.Handle_OtherRPCEvent(ref __1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());   
-                }
-                return true;
+
+                return EventDispatcher_HandleRPCEvents.Handle_OtherRPCEvent(ref __1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
             }
             catch (Exception e)
             {
                 Log.Exception(e);
-                return true;
             }
 
             return true;

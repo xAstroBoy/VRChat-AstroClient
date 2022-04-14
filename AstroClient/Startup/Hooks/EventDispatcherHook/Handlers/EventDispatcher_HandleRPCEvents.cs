@@ -1,4 +1,5 @@
-﻿using VRC;
+﻿using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
+using VRC;
 
 namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 {
@@ -27,19 +28,25 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
         internal static bool Handle_OtherRPCEvent(ref VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject TargetObject, string actionText, string parameter, string eventtype, string broadcasttype)
         {
             bool isBlocked = Bools.BlockRPC;
-
-
             try
             {
 
-                // TODO: ADD SENDER FIREWALL SUPPORT
+                bool isPlayerBlocked = false;
+                isPlayerBlocked = Player_RPC_Firewall.IsBlocked(sender);
+                if (isPlayerBlocked)
+                {
+                    isBlocked = true;
+                }
+                else
+                {
+                    isBlocked = GameObject_RPC_Firewall.HasBlockedEvent(TargetObject, actionText);
+                }
 
                 if (ConfigManager.General.LogRPCEvents)
                 {
                     if (isBlocked)
                     {
                         Log.Write($"BLOCKED RPC: {sender}, {TargetObject.name}, {parameter}, [{actionText}], {eventtype}, {broadcasttype}");
-                        return false;
                     }
                     else
                     {
