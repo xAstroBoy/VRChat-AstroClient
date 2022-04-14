@@ -1,4 +1,6 @@
-﻿namespace AstroClient
+﻿using AstroClient.Startup.Hooks.EventDispatcherHook.Startup;
+
+namespace AstroClient
 {
     #region Usings
 

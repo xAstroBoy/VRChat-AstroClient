@@ -1,11 +1,9 @@
-
 using System.Drawing;
 using System.IO;
+using Mono.WebBrowser;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu {
-    using Mono.WebBrowser;
-    using UnityEngine;
-
+namespace AstroClient.Tools {
     internal static class UnityCameraUtils {
         internal static Texture2D ToTexture2D(this UnityEngine.Camera camera, string texturename)
         {

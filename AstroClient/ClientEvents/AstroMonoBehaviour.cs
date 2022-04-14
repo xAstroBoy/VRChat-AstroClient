@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using AstroClient.Startup.Hooks.EventDispatcherHook.Startup;
+using Photon.Pun;
 using VRC.Udon;
 
 namespace AstroClient

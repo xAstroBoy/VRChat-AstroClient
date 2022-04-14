@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.ModDetector
+﻿using Cheetah;
+
+namespace AstroClient.Startup.ModDetector
 {
     using System.Linq;
     using MelonLoader;
@@ -9,7 +11,7 @@
         {
             if (MelonHandler.Mods.Any(m => m.Info.Name == "Notorious"))
             {
-                Log.Write("Notorious Detected! Compatibility Initialized.", Cheetah.Color.HTML.Yellow);
+                Log.Write("Notorious Detected! Compatibility Initialized.", Color.HTML.Yellow);
                 IsNotoriousPresent = true;
             }
         }
