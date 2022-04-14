@@ -120,11 +120,11 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
         {
             if (item != null)
             {
-                Add_UdonFirewall_Rule(item.UdonBehaviour, item.EventKey);
+                Add_UdonFirewall_Rule(item.UdonBehaviour, item.EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
             }
         }
 
-        internal static void Remove_UdonFirewall_Rule(UdonBehaviour_Cached item, bool AllowLocalSender = true, bool AllowRemoteSender = false, bool PrintRuleChanges = false)
+        internal static void Remove_UdonFirewall_Rule(UdonBehaviour_Cached item)
         {
             if (item != null)
             {
@@ -137,12 +137,12 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             {
                 if (udon.isEventKeyValid(EventKey))
                 {
-                    EditRule(udon.gameObject, EventKey, false);
+                    EditRule(udon.gameObject, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
                 }
             }
         }
 
-        internal static void Remove_UdonFirewall_Rule(UdonBehaviour udon, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = false, bool PrintRuleChanges = false)
+        internal static void Remove_UdonFirewall_Rule(UdonBehaviour udon, string EventKey)
         {
             if (udon != null)
             {
