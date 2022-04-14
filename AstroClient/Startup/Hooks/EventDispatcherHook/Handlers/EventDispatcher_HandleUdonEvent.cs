@@ -40,8 +40,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             try
             {
 
-                isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(sender, gameObject.transform, EventKey);
-                Log.Debug($"isBlocked : {isBlocked}");
+                isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(sender, gameObject, EventKey);
 
                 if (ConfigManager.General.LogUdonEvents)
                 {
@@ -54,19 +53,13 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                         Log.Write($"Udon RPC: Sender : {sender.Get_SenderName()} , GameObject : {gameObject.name}, Action : {EventKey}");
                     }
                 }
+                return !isBlocked;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Log.Exception(e);
             }
-            if (isBlocked)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !isBlocked;
 
 
         }

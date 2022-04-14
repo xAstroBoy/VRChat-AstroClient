@@ -13,29 +13,43 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
     internal class RPCFirewallEnforcer
     {
 
-        internal static FirewallRule GetTheGoddamnFirewallRule(Transform transform, string EventKey)
+        internal static FirewallRule GetTheGoddamnFirewallRule(GameObject gameObject, string EventKey)
         {
-            foreach(var FirewallRulesDict in GameObject_RPC_Firewall.BlockedGameObjectRPCEvents)
+            
+            if(GameObject_RPC_Firewall.BlockedGameObjectRPCEvents.ContainsKey(gameObject.name))
             {
-                if (FirewallRulesDict.Key != null)
+                var EventRules = GameObject_RPC_Firewall.BlockedGameObjectRPCEvents[gameObject.name];
+                if(EventRules != null)
                 {
-                    if (FirewallRulesDict.Key.Equals(transform))
+                    if(EventRules.ContainsKey(EventKey))
                     {
-                        foreach(var EventRules in FirewallRulesDict.Value)
-                        {
-                            if(EventRules.Key.Equals(EventKey))
-                            {
-                                return EventRules.Value;
-                            }
-                        }
+                        return EventRules[EventKey];
                     }
                 }
             }
+
+
+            //foreach(var FirewallRulesDict in GameObject_RPC_Firewall.BlockedGameObjectRPCEvents)
+            //{
+            //    if (FirewallRulesDict.Key != null)
+            //    {
+            //        if (FirewallRulesDict.Key.Equals(transform))
+            //        {
+            //            foreach(var EventRules in FirewallRulesDict.Value)
+            //            {
+            //                if(EventRules.Key.Equals(EventKey))
+            //                {
+            //                    return EventRules.Value;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
             return null;
         }
 
 
-        internal static bool isRPCEventBlocked(Player sender, Transform transform, string EventKey)
+        internal static bool isRPCEventBlocked(Player sender, GameObject gameObject, string EventKey)
         {
             var Rules = GameObject_RPC_Firewall.BlockedGameObjectRPCEvents;
             if (Rules != null)
@@ -43,14 +57,14 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
                 if (Rules.Count != 0) // Skip all Events if is empty!
                 {
 
-                    var EventRule = GetTheGoddamnFirewallRule(transform, EventKey);
+                    var EventRule = GetTheGoddamnFirewallRule(gameObject, EventKey);
                     if (EventRule != null)
                     {
-                        Log.Write("Got Rule Container!");
+                        //Log.Write("Got Rule Container!");
 
                         if (sender != null)
                         {
-                            Log.Write("Checking Player Rules...!");
+                           // Log.Write("Checking Player Rules...!");
 
                             var user = sender.GetVRCPlayerApi();
                             if (user != null)
@@ -80,7 +94,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
                     }
                     else
                     {
-                        Log.Write("Firewall Rule is null!");
+                        //Log.Write("Firewall Rule is null!");
 
                     }
 

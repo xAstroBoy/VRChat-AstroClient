@@ -19,10 +19,10 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
     {
         internal static bool Handle_OtherRPCEvent(VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject gameObject, string EventKey, string parameter, string eventtype, string broadcasttype)
         {
-            bool isBlocked = Bools.BlockUdon;
+            bool isBlocked = Bools.BlockRPC;
             try
             {
-                isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(sender, gameObject.transform, EventKey);
+                isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(sender, gameObject, EventKey);
                 if (ConfigManager.General.LogRPCEvents)
                 {
                     if (isBlocked)
@@ -34,17 +34,14 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                         Log.Write($"RPC: {sender.Get_SenderName()}, {gameObject.name}, {parameter}, [{EventKey}], {eventtype}, {broadcasttype}");
                     }
                 }
+                return !isBlocked;
             }
             catch (Exception e)
             {
                 Log.Exception(e);
             }
 
-            if (isBlocked)
-            {
-                return false;
-            }
-            return true;
+            return !isBlocked;
         }
     }
 }
