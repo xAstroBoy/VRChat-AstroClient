@@ -46,14 +46,27 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                     isBlocked = true;
                 }
 
-                if(!isBlocked)
+                if (!isBlocked)
                 {
-                    if (sender.Get_SenderAPIUser().IsSelf)
+                    var user = sender.GetVRCPlayerApi();
+                    if (user != null)
                     {
-                        if (!GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action))
+                        if (user.isLocal)
                         {
-                            isBlocked = true;
+                            if (!GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action))
+                            {
+                                isBlocked = true;
+                            }
                         }
+                        else
+                        {
+                            if (!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, Action))
+                            {
+                                isBlocked = true;
+                            }
+
+                        }
+
                     }
                     else
                     {
@@ -63,6 +76,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                         }
 
                     }
+                    
                 }
 
 

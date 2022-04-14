@@ -39,23 +39,35 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 
                 if (!isBlocked)
                 {
-                    if (sender.Get_SenderAPIUser().IsSelf)
+                    var user = sender.GetVRCPlayerApi();
+                    if (user != null)
                     {
-                        if (!GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, EventKey))
+                        if (user.isLocal)
                         {
-                            Log.Debug("Firewall Should block Local Sender event...");
-                            isBlocked = true;
+                            if (!GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, EventKey))
+                            {
+                                isBlocked = true;
+                            }
                         }
+                        else
+                        {
+                            if (!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, EventKey))
+                            {
+                                isBlocked = true;
+                            }
+
+                        }
+
                     }
                     else
                     {
                         if (!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, EventKey))
                         {
-                            Log.Debug("Firewall Should block Remote Sender event...");
                             isBlocked = true;
                         }
 
                     }
+
                 }
                 if (ConfigManager.General.LogRPCEvents)
                 {

@@ -78,23 +78,13 @@ internal static class RPCExtensions
 
     }
 
-    internal static APIUser Get_SenderAPIUser(this Player player)
-    {
-        if (player != null)
-        {
-            return player.GetAPIUser();
-
-        }
-        return null;
-    }
-
 
     internal static string Get_SenderName(this Player player)
     {
-        var sender = player.Get_SenderAPIUser();
+        var sender = player.GetVRCPlayerApi();
         if (sender != null)
         {
-            if (sender.IsSelf)
+            if (sender.isLocal)
             {
                 if (PlayerSpooferUtils.IsSpooferActive)
                 {
