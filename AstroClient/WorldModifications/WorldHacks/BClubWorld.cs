@@ -79,21 +79,39 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        private static GameObject _VIPRoom;
+        private static GameObject _VIPRoomEntrance;
 
-        internal static GameObject VIPRoom
+        internal static GameObject VIPRoomEntrance
         {
             get
             {
                 if (!isCurrentWorld) return null;
                 if (Penthouse == null) return null;
-                if (_VIPRoom == null)
+                if (_VIPRoomEntrance == null)
                 {
-                    return _VIPRoom = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP").gameObject;
+                    return _VIPRoomEntrance = Penthouse.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP").gameObject;
                 }
-                return _VIPRoom;
+                return _VIPRoomEntrance;
             }
         }
+
+        private static GameObject _VIPRoom_OutsideDoor;
+
+        internal static GameObject VIPRoom_OutsideDoor
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Penthouse == null) return null;
+                if (VIPRoomEntrance == null) return null;
+                if (_VIPRoom_OutsideDoor == null)
+                {
+                    return _VIPRoom_OutsideDoor = VIPRoomEntrance.transform.FindObject("Door001 (1)").gameObject;
+                }
+                return _VIPRoom_OutsideDoor;
+            }
+        }
+
 
         private static GameObject _Penthouse;
 
@@ -169,6 +187,23 @@ namespace AstroClient.WorldModifications.WorldHacks
                     return _VIPButton = Bedroom_VIP.transform.FindObject("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
                 }
                 return _VIPButton;
+            }
+        }
+
+
+        private static GameObject _VIPRoom_Internal_Door;
+
+        internal static GameObject VIPRoom_Internal_Door
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Bedroom_VIP == null) return null;
+                if (_VIPRoom_Internal_Door == null)
+                {
+                    return _VIPRoom_Internal_Door = Bedroom_VIP.transform.FindObject("BedroomUdon/Door Tablet/Door Inside/Door").gameObject;
+                }
+                return _VIPRoom_Internal_Door;
             }
         }
 
@@ -284,19 +319,19 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        private static GameObject _VIPInsideDoor;
+        private static GameObject _VIP_Outside_Door_Entrance;
 
-        internal static GameObject VIPInsideDoor
+        internal static GameObject VIP_Outside_Door_Entrance
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (VIPRoom == null) return null;
-                if (_VIPInsideDoor == null)
+                if (VIPRoomEntrance == null) return null;
+                if (_VIP_Outside_Door_Entrance == null)
                 {
-                    return _VIPInsideDoor = VIPRoom.transform.FindObject("Door001 (1)").gameObject;
+                    return _VIP_Outside_Door_Entrance = VIPRoomEntrance.transform.FindObject("Door001 (1)").gameObject;
                 }
-                return _VIPInsideDoor;
+                return _VIP_Outside_Door_Entrance;
             }
         }
 
@@ -510,6 +545,31 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+        internal static bool _BlockVIPRoom_Kick = false;
+
+        internal static bool BlockVIPRoom_Kick
+        {
+            get => _BlockVIPRoom_Kick;
+            set
+            {
+                if(TeleportToBedroomOutside7 != null)
+                {
+                    if(value)
+                    {
+                        TeleportToBedroomOutside7.Add_UdonFirewall_Rule(false, false, true);
+                    }
+                    else
+                    {
+                        TeleportToBedroomOutside7.Remove_UdonFirewall_Rule();
+                    }
+
+
+                    _BlockVIPRoom_Kick = value;
+                }
+            }
+        }
+        
+
         #endregion Udon Behaviours Cached and other random stuff
 
         internal static string CurrentDisplayName
@@ -575,6 +635,12 @@ namespace AstroClient.WorldModifications.WorldHacks
                     IsFallSpamEnabled = false;
                     _isLocalPlayerElite = false;
                     _isLocalPlayerPatron = false;
+                    _BlockVIPRoom_Kick = false;
+                    _PlayLeaveBedroom7 = null;
+                    _TeleportToBedroomOutside7 = null;
+                    _EjectSelfIfNotVip = null;
+                    _VIPRoom_Internal_Door = null;
+                    _VIP_Outside_Door_Entrance = null;
 
                     Bells.Clear();
                     Chairs.Clear();
@@ -583,7 +649,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     _Bedroom_VIP = null;
                     _Lobby = null;
                     _Udon = null;
-                    _VIPRoom = null;
+                    _VIPRoomEntrance = null;
                     _Penthouse = null;
                     _Bedrooms = null;
                     _VIPButton = null;
@@ -594,7 +660,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     _LockIndicator_5 = null;
                     _LockIndicator_6 = null;
                     _LockIndicator_VIP = null;
-                    _VIPInsideDoor = null;
+                    _VIP_Outside_Door_Entrance = null;
                     _VIPControls = null;
                     _Cancer_Spawn = null;
                     _ElevatorFlairBtn = null;
@@ -1072,6 +1138,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                         FlairBtnTablet.GetOrAddComponent<Enabler>();
                     }
                 }
+
+
+
                 try
                 {
                     Log.Debug("Searching for Private Rooms Exteriors...");
@@ -1083,7 +1152,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     _ = CreateButtonGroup(6, new Vector3(-93.28891f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
 
                     // VIP Room
-                    if (VIPRoom == null)
+                    if (VIPRoomEntrance == null)
                     {
                         Log.Error("VIP Bedroom was not found!");
                     }
@@ -1122,9 +1191,29 @@ namespace AstroClient.WorldModifications.WorldHacks
                 //    PlayLeaveBedroom7.Add_UdonFirewall_Rule(false, false, true);
                 //}
 
-                if(TeleportToBedroomOutside7 != null)
+                if(VIP_Outside_Door_Entrance != null)
                 {
-                    TeleportToBedroomOutside7.Add_UdonFirewall_Rule(false, false, true);
+                    var trigger = VIP_Outside_Door_Entrance.GetOrAddComponent<VRC_AstroInteract>();
+                    if(trigger != null)
+                    {
+                        trigger.OnInteract = () =>
+                        {
+                            BlockVIPRoom_Kick = true;
+                        };
+                    }
+                }
+
+
+                if (VIPRoom_Internal_Door != null)
+                {
+                    var Trigger = VIPRoom_Internal_Door.GetOrAddComponent<VRC_AstroInteract>();
+                    if (Trigger != null)
+                    {
+                        Trigger.OnInteract = () =>
+                        {
+                            BlockVIPRoom_Kick = false;
+                        };
+                    }
                 }
 
                 Log.Write("Starting Update Loop");
@@ -1599,7 +1688,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void CreateVIPUnlockButton(Vector3 position, Vector3 rotation)
         {
-            if (VIPInsideDoor != null)
+            if (VIP_Outside_Door_Entrance != null)
             {
                 _ = new WorldButton(position, rotation, "Lock/Unlock\nVIP Room", () =>
                 {
