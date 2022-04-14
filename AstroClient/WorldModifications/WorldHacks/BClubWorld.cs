@@ -455,6 +455,20 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _EjectSelfIfNotVip;
             }
         }
+        private static UdonBehaviour_Cached _PlayLeaveBedroom7;
+
+        internal static UdonBehaviour_Cached PlayLeaveBedroom7
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_PlayLeaveBedroom7 == null)
+                {
+                    return _PlayLeaveBedroom7 = UdonSearch.FindUdonEvent("Teleports", "PlayLeaveBedroom7");
+                }
+                return _PlayLeaveBedroom7;
+            }
+        }
 
         private static ImageRenderCameraReader _RenderCameraReader;
 
@@ -1087,7 +1101,11 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (EjectSelfIfNotVip != null)
                 {
-                    EjectSelfIfNotVip.Add_UdonFirewall_Rule(true, false, true);
+                    EjectSelfIfNotVip.Add_UdonFirewall_Rule(false, false, true);
+                }
+                if (PlayLeaveBedroom7 != null)
+                {
+                    PlayLeaveBedroom7.Add_UdonFirewall_Rule(false, false, true);
                 }
 
 

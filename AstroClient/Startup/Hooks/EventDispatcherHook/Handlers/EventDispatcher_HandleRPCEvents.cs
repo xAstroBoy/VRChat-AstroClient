@@ -32,18 +32,18 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             try
             {
 
-                bool isPlayerBlocked = false;
-                isPlayerBlocked = Player_RPC_Firewall.IsBlocked(sender);
-                if (isPlayerBlocked)
+                if (Player_RPC_Firewall.IsBlocked(sender))
                 {
                     isBlocked = true;
                 }
-                else
+
+                if (!isBlocked)
                 {
                     if (sender.Get_SenderAPIUser().IsSelf)
                     {
                         if (!GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, EventKey))
                         {
+                            Log.Debug("Firewall Should block Local Sender event...");
                             isBlocked = true;
                         }
                     }
@@ -51,12 +51,12 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                     {
                         if (!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, EventKey))
                         {
+                            Log.Debug("Firewall Should block Remote Sender event...");
                             isBlocked = true;
                         }
 
                     }
                 }
-
                 if (ConfigManager.General.LogRPCEvents)
                 {
                     if (isBlocked)

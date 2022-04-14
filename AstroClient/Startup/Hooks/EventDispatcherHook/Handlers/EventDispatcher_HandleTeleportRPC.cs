@@ -13,14 +13,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
         internal static bool HandleTeleportRPC(ref VRC_EventHandler.VrcEvent __1, Player sender, GameObject ParameterObject, string parameter, string EventType, string BroadcastType)
         {
 
-            bool isBlocked = false;
-
-            bool isPlayerBlocked = false;
-            isPlayerBlocked = Player_RPC_Firewall.IsBlocked(sender);
-            if (isPlayerBlocked)
-            {
-                isBlocked = true;
-            }
+            bool isBlocked = Player_RPC_Firewall.IsBlocked(sender);
 
             try
             {

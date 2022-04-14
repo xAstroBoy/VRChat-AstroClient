@@ -83,8 +83,6 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
         }
         internal static bool Event_AllowLocalSender(GameObject parent, string EventKey)
         {
-            if (parent == null) return true;
-            if (EventKey.IsNullOrEmptyOrWhiteSpace()) return true;
             if (BlockedGameObjectRPCEvents != null)
             {
                 var rules = GetFirewallRule(parent, EventKey, false);
@@ -100,8 +98,6 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
         internal static bool Event_AllowRemoteSender(GameObject parent, string EventKey)
         {
-            if (parent == null) return true;
-            if (EventKey.IsNullOrEmptyOrWhiteSpace()) return true;
             if (BlockedGameObjectRPCEvents != null)
             {
                 var rules = GetFirewallRule(parent, EventKey, false);

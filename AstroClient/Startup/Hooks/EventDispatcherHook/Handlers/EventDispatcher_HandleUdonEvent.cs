@@ -31,18 +31,22 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
         {
             // Event is Invalid if Sender or TargetObject are both null, so let's just block it.
             if (sender == null || TargetObject == null) return false;
-                
-            Event_OnUdonSyncRPC?.SafetyRaiseWithParams(sender, TargetObject, Action);
+            try
+            {
+                Event_OnUdonSyncRPC?.SafetyRaiseWithParams(sender, TargetObject, Action);
+            }
+            catch{}
+
+
             bool isBlocked = Bools.BlockUdon;
             try
             {
-                bool isPlayerBlocked = false;
-                isPlayerBlocked = Player_RPC_Firewall.IsBlocked(sender);
-                if(isPlayerBlocked)
+                if(Player_RPC_Firewall.IsBlocked(sender))
                 {
                     isBlocked = true;
                 }
-                else
+
+                if(!isBlocked)
                 {
                     if (sender.Get_SenderAPIUser().IsSelf)
                     {
@@ -53,7 +57,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                     }
                     else
                     {
-                        if(!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, Action))
+                        if (!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, Action))
                         {
                             isBlocked = true;
                         }
@@ -73,11 +77,6 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                         Log.Write($"Udon RPC: Sender : {sender.Get_SenderName()} , GameObject : {TargetObject.name}, Action : {Action}");
                     }
                 }
-
-                if(isBlocked)
-                {
-                    return false;
-                }
             }
             catch(Exception e)
             {
@@ -87,8 +86,11 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             {
                 return false;
             }
+            else
+            {
+                return true;
+            }
 
-            return true;
 
         }
 
