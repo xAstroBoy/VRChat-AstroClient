@@ -1212,6 +1212,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         Trigger.OnInteract = () =>
                         {
                             BlockVIPRoom_Kick = false;
+                            TeleportToBedroomOutside7.InvokeBehaviour();
                         };
                     }
                 }
