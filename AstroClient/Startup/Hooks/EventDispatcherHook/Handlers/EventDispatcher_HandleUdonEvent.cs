@@ -44,7 +44,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 }
                 else
                 {
-                    isBlocked = GameObject_RPC_Firewall.HasBlockedEvent(TargetObject, Action);
+                    isBlocked = GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action);
                 }
 
                 // First let's check the sender 

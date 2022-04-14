@@ -156,6 +156,7 @@
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleTeleportRPC.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleUdonEvent.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleUSpeak.cs" />
+    <Compile Include="Startup\Hooks\EventDispatcherHook\RPCFirewall\FirewallRule.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\RPCFirewall\Irregular_RPC_Firewall.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\RPCFirewall\GameObject_RPC_Firewall.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\RPCFirewall\Player_RPC_Firewall.cs" />
