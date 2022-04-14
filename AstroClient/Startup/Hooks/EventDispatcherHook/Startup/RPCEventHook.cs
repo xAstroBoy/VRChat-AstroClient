@@ -21,9 +21,6 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
 
     internal class RPCEventHook : AstroEvents
     {
-
-        internal static event System.Action<Player, GameObject, string> Event_OnUdonSyncRPC;
-
         //internal static 
         private HarmonyLib.Harmony harmony;
 

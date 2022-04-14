@@ -16,11 +16,8 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
     using xAstroBoy.Utility;
     using HarmonyLib;
     using WorldModifications.WorldsIds;
-    using AstroClient.Config;
     using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
-    using UnityEngine;
     using VRC;
-    using VRC.SDKBase;
 
     #endregion Imports
 

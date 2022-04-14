@@ -1,5 +1,4 @@
-﻿using AstroClient.Startup.Hooks.EventDispatcherHook.Startup;
-
+﻿
 namespace AstroClient
 {
     #region Usings
@@ -21,6 +20,7 @@ namespace AstroClient
     using VRC.SDKBase;
     using VRC.UI.Elements;
     using xAstroBoy;
+    using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 
     #endregion Imports
 
@@ -46,7 +46,7 @@ namespace AstroClient
             //SpawnEmojiRPCHook.Event_SpawnEmojiRPC += SpawnEmojiRPC;
             TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += VRC_EventDispatcherRFC_triggerEvent;
 
-            RPCEventHook.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+            EventDispatcher_HandleUdonEvent.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
 
             AvatarManagerHook.Event_OnAvatarSpawn += OnAvatarSpawn;
 

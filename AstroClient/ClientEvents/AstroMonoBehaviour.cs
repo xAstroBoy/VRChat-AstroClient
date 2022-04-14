@@ -1,7 +1,4 @@
-﻿using AstroClient.Startup.Hooks.EventDispatcherHook.Startup;
-using Photon.Pun;
-using VRC.Udon;
-
+﻿
 namespace AstroClient
 {
     using System;
@@ -22,6 +19,10 @@ namespace AstroClient
     using VRC.UI.Elements;
     using xAstroBoy;
     using ConfigManager = Config.ConfigManager;
+    using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
+    using AstroClient.Startup.Hooks.EventDispatcherHook.Startup;
+    using Photon.Pun;
+    using VRC.Udon;
 
     public class AstroMonoBehaviour : MonoBehaviour
     {
@@ -36,7 +37,7 @@ namespace AstroClient
             //SpawnEmojiRPCHook.Event_SpawnEmojiRPC += SpawnEmojiRPC;
             TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += VRC_EventDispatcherRFC_triggerEvent;
 
-            RPCEventHook.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+            EventDispatcher_HandleUdonEvent.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
 
             AvatarManagerHook.Event_OnAvatarSpawn += OnAvatarSpawn;
 
@@ -105,7 +106,7 @@ namespace AstroClient
             //SpawnEmojiRPCHook.Event_SpawnEmojiRPC -= SpawnEmojiRPC;
             TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent -= VRC_EventDispatcherRFC_triggerEvent;
 
-            RPCEventHook.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
+            EventDispatcher_HandleUdonEvent.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
 
             AvatarManagerHook.Event_OnAvatarSpawn -= OnAvatarSpawn;
 

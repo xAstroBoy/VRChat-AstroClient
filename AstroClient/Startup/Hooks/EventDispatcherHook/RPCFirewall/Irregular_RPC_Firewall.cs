@@ -15,6 +15,8 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
         internal static bool isIrregularRPC(ref VRC_EventHandler.VrcEvent VrcEvent, ref VRC.Player Sender)
         {
+            if (VrcEvent == null) return true;
+
             if (VrcEvent.Name.Length >= 100 || VrcEvent.ParameterString.Length >= 100)
             {
                 if (VrcEvent != null)
