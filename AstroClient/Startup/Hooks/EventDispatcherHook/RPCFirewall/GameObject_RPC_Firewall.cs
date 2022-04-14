@@ -29,13 +29,13 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
 
 
-        internal static FirewallRule GetFirewallRule(GameObject gameObject, string EventKey, bool ShouldMake = true)
+        internal static FirewallRule GetFirewallRule(string EventName, string EventKey, bool ShouldMake = true)
         {
             if (BlockedGameObjectRPCEvents != null)
             {
-                if (BlockedGameObjectRPCEvents.ContainsKey(gameObject.name))
+                if (BlockedGameObjectRPCEvents.ContainsKey(EventName))
                 {
-                    var FirewallRules = BlockedGameObjectRPCEvents[gameObject.name];
+                    var FirewallRules = BlockedGameObjectRPCEvents[EventName];
                     if (FirewallRules != null)
                     {
                         if (FirewallRules.ContainsKey(EventKey))
@@ -64,13 +64,13 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
 
 
-        internal static bool RemoveFirewallRule(GameObject gameObject, string EventKey)
+        internal static bool RemoveFirewallRule(string EventName, string EventKey)
         {
             if (BlockedGameObjectRPCEvents != null)
             {
-                if (BlockedGameObjectRPCEvents.ContainsKey(gameObject.name))
+                if (BlockedGameObjectRPCEvents.ContainsKey(EventName))
                 {
-                    var rule = GetFirewallRule(gameObject, EventKey, false);
+                    var rule = GetFirewallRule(EventName, EventKey, false);
                     if (rule != null)
                     {
                         rule.AllowRemoteSender = true;
@@ -122,14 +122,17 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
         }
 
 
-
-
         private static void EditRule(GameObject gameObject, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = true, bool PrintRuleChanges = false)
+        {
+            EditRule(gameObject.name, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
+        }
+
+        private static void EditRule(string EventName, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = true, bool PrintRuleChanges = false)
         {
             if (BlockedGameObjectRPCEvents != null)
             {
                 //  First let's check if the entry exists
-                var FirewallRule = GetFirewallRule(gameObject, EventKey, true);
+                var FirewallRule = GetFirewallRule(EventName, EventKey, true);
                 if(FirewallRule != null)
                 {
                     FirewallRule.AllowLocalSender = AllowLocalSender;
@@ -156,18 +159,18 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
                             AllowOrBlockRemoteSender = "Deny";
                         }
 
-                        Log.Debug($"[RPC Firewall] : Firewall will {AllowOrDenyLocalSender} Local Sender & {AllowOrBlockRemoteSender} Remote Sender Event : {EventKey} on GameObject {gameObject.name}", Color.Orange);
+                        Log.Debug($"[RPC Firewall] : Firewall will {AllowOrDenyLocalSender} Local Sender & {AllowOrBlockRemoteSender} Remote Sender Event : {EventKey} on GameObject {EventName}", Color.Orange);
 
                     }
                 }
                 else
                 {
-                    BlockedGameObjectRPCEvents.TryAdd(gameObject.name, new ConcurrentDictionary<string, FirewallRule>());
+                    BlockedGameObjectRPCEvents.TryAdd(EventName, new ConcurrentDictionary<string, FirewallRule>());
                     if (PrintRuleChanges)
                     {
-                        Log.Debug($"[RPC Firewall] : Created New Rule For  {gameObject.name}!", Color.Orange);
+                        Log.Debug($"[RPC Firewall] : Created New Rule For  {EventName}!", Color.Orange);
                     }
-                    EditRule(gameObject, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
+                    EditRule(EventName, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
                 }
 
             }
@@ -175,13 +178,18 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
         internal static void RemoveRule(GameObject gameObject, string EventKey)
         {
-            if (gameObject != null)
+            RemoveRule(gameObject.name, EventKey);
+        }
+
+        internal static void RemoveRule(string EventName, string EventKey)
+        {
+            if (EventName != null)
             {
                 if (BlockedGameObjectRPCEvents != null)
                 {
-                    if (RemoveFirewallRule(gameObject, EventKey))
+                    if (RemoveFirewallRule(EventName, EventKey))
                     {
-                        Log.Debug($"[RPC Firewall] : Removed Firewall block Event {EventKey} in  {gameObject.name}!", Color.Orange);
+                        Log.Debug($"[RPC Firewall] : Removed Firewall block Event {EventKey} in  {EventName}!", Color.Orange);
                     }
 
                 }
