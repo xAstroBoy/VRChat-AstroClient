@@ -1,4 +1,5 @@
 ﻿using AstroClient.Config;
+using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.xAstroBoy.Extensions;
 using VRC.Udon;
 
@@ -77,12 +78,16 @@ namespace AstroClient.Startup.Hooks
 
             Event_Udon_OnInteract.SafetyRaiseWithParams(__instance);
         }
-        private static void Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
+        private static bool Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {
-            if (__instance == null) return;
-            if (__0.IsNullOrEmptyOrWhiteSpace()) return;
+            if (__instance == null) return true;
+            if (__0.IsNullOrEmptyOrWhiteSpace()) return true;
 
             Event_Udon_SendCustomEvent.SafetyRaiseWithParams(__instance, __0);
+            return GameObject_RPC_Firewall.Event_AllowLocalSender(__instance.gameObject, __0);
+
+            return true;
+
         }
 
 

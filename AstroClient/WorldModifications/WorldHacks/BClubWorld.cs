@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     #region Imports
 
@@ -423,6 +425,34 @@
                     return _ReadPictureStep = UdonSearch.FindUdonEvent("RenderCamera", "ReadPictureStep");
                 }
                 return _ReadPictureStep;
+            }
+        }
+        private static UdonBehaviour_Cached _LocalEjectNonVips;
+
+        internal static UdonBehaviour_Cached LocalEjectNonVips
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_LocalEjectNonVips == null)
+                {
+                    return _LocalEjectNonVips = UdonSearch.FindUdonEvent("Patreon", "_EjectNonVips");
+                }
+                return _LocalEjectNonVips;
+            }
+        }
+        private static UdonBehaviour_Cached _EjectSelfIfNotVip;
+
+        internal static UdonBehaviour_Cached EjectSelfIfNotVip
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_EjectSelfIfNotVip == null)
+                {
+                    return _EjectSelfIfNotVip = UdonSearch.FindUdonEvent("Patreon", "EjectSelfIfNotVip");
+                }
+                return _EjectSelfIfNotVip;
             }
         }
 
@@ -924,6 +954,8 @@
                 isCurrentWorld = true;
                 _ = MelonCoroutines.Start(ForceEnableRenderCamera());
 
+
+                
                 if (BClubExploitsPage != null)
                 {
                     BClubExploitsPage.SetInteractable(true);
@@ -1046,6 +1078,19 @@
                 {
                     Log.Exception(e);
                 }
+
+
+
+                // Firewall Rules
+
+                // This should be the one ejecting you when someone presses the "Eject Non-VIP" button 
+
+                if (EjectSelfIfNotVip != null)
+                {
+                    EjectSelfIfNotVip.Add_UdonFirewall_Rule(true, false, true);
+                }
+
+
 
                 Log.Write("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());

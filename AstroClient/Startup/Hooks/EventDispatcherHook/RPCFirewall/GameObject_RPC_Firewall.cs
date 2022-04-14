@@ -156,12 +156,12 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
 
 
-        internal static void EditRule(GameObject gameObject, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = false, bool PrintRuleChanges = false)
+        private static void EditRule(GameObject gameObject, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = false, bool PrintRuleChanges = false)
         {
             if (BlockedGameObjectRPCEvents != null)
             {
                 //  First let's check if the entry exists
-                var FirewallRule = GetFirewallRule(gameObject, EventKey);
+                var FirewallRule = GetFirewallRule(gameObject, EventKey, true);
                 if(FirewallRule != null)
                 {
                     FirewallRule.AllowLocalSender = AllowLocalSender;
