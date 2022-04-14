@@ -60,7 +60,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (isBlocked)
                     {
-                        Log.Write($"BLOCKED Udon RPC: Sender : {sender.Get_SenderName()} , GameObject : {TargetObject.name}, Action : {Action}");
+                        Log.Debug($"[UDON RPC Firewall] : BLOCKED RPC: Sender : {sender.Get_SenderName()} , GameObject : {TargetObject.name}, Action : {Action}", System.Drawing.Color.Orange);
                     }
                     else
                     {

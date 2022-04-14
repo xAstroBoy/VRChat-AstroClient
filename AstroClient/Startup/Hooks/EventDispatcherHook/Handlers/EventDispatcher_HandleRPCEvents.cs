@@ -55,7 +55,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (isBlocked)
                     {
-                        Log.Write($"BLOCKED RPC: {sender}, {TargetObject.name}, {parameter}, [{actionText}], {eventtype}, {broadcasttype}");
+                        Log.Debug($"[RPC Firewall] Blocked : {sender}, {TargetObject.name}, {parameter}, [{actionText}], {eventtype}, {broadcasttype}", System.Drawing.Color.Orange);
                     }
                     else
                     {

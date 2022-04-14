@@ -95,7 +95,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
                 
             }
 
-            return false;
+            return true;
         }
 
         internal static bool Event_AllowRemoteSender(GameObject parent, string EventKey)
@@ -111,7 +111,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
                 }
             }
 
-            return false;
+            return true;
         }
 
 
