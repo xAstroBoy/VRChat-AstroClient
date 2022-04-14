@@ -462,18 +462,18 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _ReadPictureStep;
             }
         }
-        private static UdonBehaviour_Cached _LocalEjectNonVips;
+        private static UdonBehaviour_Cached _EjectNonVips;
 
-        internal static UdonBehaviour_Cached LocalEjectNonVips
+        internal static UdonBehaviour_Cached EjectNonVips
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (_LocalEjectNonVips == null)
+                if (_EjectNonVips == null)
                 {
-                    return _LocalEjectNonVips = UdonSearch.FindUdonEvent("Patreon", "_EjectNonVips");
+                    return _EjectNonVips = UdonSearch.FindUdonEvent("Patreon", "_EjectNonVips");
                 }
-                return _LocalEjectNonVips;
+                return _EjectNonVips;
             }
         }
         private static UdonBehaviour_Cached _EjectSelfIfNotVip;

@@ -510,6 +510,11 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddToggle("Freeze Locked Door", BClubWorld.IsFreezeLockEnabed, ToggleValue => { BClubWorld.IsFreezeLockEnabed = ToggleValue; });
                 CustomSubMenu.AddToggle("Freeze Unlocked Door", BClubWorld.IsFreezeUnlockEnabed, ToggleValue => { BClubWorld.IsFreezeUnlockEnabed = ToggleValue; });
 
+                if(BClubWorld.EjectNonVips != null)
+                {
+                    CustomSubMenu.AddButton("Eject Non VIPs (VIP Room)", () => { BClubWorld.EjectNonVips.InvokeBehaviour(); });
+
+                }
             }
 
 
