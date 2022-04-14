@@ -4,100 +4,47 @@ using VRC;
 
 namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 {
-
     #region Imports
 
-    using System;
-    using System.Reflection;
-    using AstroEventArgs;
-    using AstroMonos.Components.Spoofer;
-    using Cheetos;
     using Config;
     using Constants;
+    using System;
     using UnityEngine;
     using VRC.SDKBase;
-    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-    using HarmonyLib;
-    using WorldModifications.WorldsIds;
 
     #endregion Imports
 
     internal static class EventDispatcher_HandleRPCEvents
     {
-
-        internal static bool Handle_OtherRPCEvent(ref VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject TargetObject, string EventKey, string parameter, string eventtype, string broadcasttype)
+        internal static bool Handle_OtherRPCEvent(VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject gameObject, string EventKey, string parameter, string eventtype, string broadcasttype)
         {
-            bool isBlocked = Bools.BlockRPC;
+            bool isBlocked = Bools.BlockUdon;
             try
             {
-
-                if (Player_RPC_Firewall.IsBlocked(sender))
-                {
-                    isBlocked = true;
-                }
-
-                if (!isBlocked)
-                {
-                    var user = sender.GetVRCPlayerApi();
-                    if (user != null)
-                    {
-                        if (user.isLocal)
-                        {
-                            if (!GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, EventKey))
-                            {
-                                isBlocked = true;
-                            }
-                        }
-                        else
-                        {
-                            if (!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, EventKey))
-                            {
-                                isBlocked = true;
-                            }
-
-                        }
-
-                    }
-                    else
-                    {
-                        if (!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, EventKey))
-                        {
-                            isBlocked = true;
-                        }
-
-                    }
-
-                }
+                isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(sender, gameObject.transform, EventKey);
                 if (ConfigManager.General.LogRPCEvents)
                 {
                     if (isBlocked)
                     {
-                        Log.Debug($"[RPC Firewall] Blocked : {sender.Get_SenderName()}, {TargetObject.name}, {parameter}, [{EventKey}], {eventtype}, {broadcasttype}", System.Drawing.Color.Orange);
+                        Log.Debug($"[RPC Firewall] Blocked : {sender.Get_SenderName()}, {gameObject.name}, {parameter}, [{EventKey}], {eventtype}, {broadcasttype}", System.Drawing.Color.Orange);
                     }
                     else
                     {
-                        Log.Write($"RPC: {sender.Get_SenderName()}, {TargetObject.name}, {parameter}, [{EventKey}], {eventtype}, {broadcasttype}");
+                        Log.Write($"RPC: {sender.Get_SenderName()}, {gameObject.name}, {parameter}, [{EventKey}], {eventtype}, {broadcasttype}");
                     }
                 }
-                
-                if(isBlocked)
-                {
-                    return false;
-                }
-
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Log.Exception(e);
             }
 
-            if(isBlocked)
+            if (isBlocked)
             {
                 return false;
             }
             return true;
-
         }
     }
 }

@@ -13,7 +13,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
     {
 
 
-        internal static bool isIrregularRPC(ref VRC_EventHandler.VrcEvent VrcEvent, ref VRC.Player Sender)
+        internal static bool isIrregularRPC(VRC_EventHandler.VrcEvent VrcEvent, VRC.Player Sender)
         {
             if (VrcEvent == null) return true;
 

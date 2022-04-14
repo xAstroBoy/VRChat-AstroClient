@@ -20,7 +20,7 @@ internal static class RPCFirewallExts
         GameObject_RPC_Firewall.Add_UdonFirewall_Rule(item, AllowLocalSender,AllowRemoteSender, PrintRuleChanges);
     }
 
-    internal static void Remove_UdonFirewall_Rule(this UdonBehaviour_Cached item, bool AllowLocalSender = true, bool AllowRemoteSender = false, bool PrintRuleChanges = false)
+    internal static void Remove_UdonFirewall_Rule(this UdonBehaviour_Cached item)
     {
         GameObject_RPC_Firewall.Remove_UdonFirewall_Rule(item);
 
@@ -40,16 +40,5 @@ internal static class RPCFirewallExts
 
 
 
-
-    internal static void RemoveAllRules(this GameObject gameObject)
-    {
-        GameObject_RPC_Firewall.RemoveAllRules(gameObject);
-
-    }
-    internal static void RemoveRule(this GameObject gameObject, string EventKey)
-    {
-        GameObject_RPC_Firewall.RemoveAllRules(gameObject);
-
-    }
 
 }

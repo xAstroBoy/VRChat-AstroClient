@@ -43,7 +43,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
             try
             {
                 // First Check if is a  irregular RPC Being sent.
-                if(Irregular_RPC_Firewall.isIrregularRPC(ref __1, ref __0))
+                if(Irregular_RPC_Firewall.isIrregularRPC(__1, __0))
                 {
                     return false;
                 }
@@ -57,15 +57,18 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
 
                 if (parameter.Equals("TeleportRPC"))
                 {
-                    return EventDispatcher_HandleTeleportRPC.HandleTeleportRPC(ref __1, __0, __1.Get_Parameter_GameObject(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
+                    return EventDispatcher_HandleTeleportRPC.HandleTeleportRPC(__1, __0, __1.Get_Parameter_GameObject(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
                 }
 
                 if (parameter.Equals("UdonSyncRunProgramAsRPC"))
                 {
-                    return EventDispatcher_HandleUdonEvent.Handle_UdonEvent(ref __1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText());
+                    return EventDispatcher_HandleUdonEvent.Handle_UdonEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText());
+                }
+                if (!parameter.Equals("UdonSyncRunProgramAsRPC"))
+                {
+                    return EventDispatcher_HandleRPCEvents.Handle_OtherRPCEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
                 }
 
-                return EventDispatcher_HandleRPCEvents.Handle_OtherRPCEvent(ref __1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
             }
             catch (Exception e)
             {

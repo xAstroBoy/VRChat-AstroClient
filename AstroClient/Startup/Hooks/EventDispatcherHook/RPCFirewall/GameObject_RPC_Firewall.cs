@@ -1,6 +1,11 @@
 ﻿
+using System;
 using System.Drawing;
+using AstroClient.xAstroBoy.Utility;
+using Boo.Lang.Compiler.Ast;
+using VRC;
 using GameObject = UnityEngine.GameObject;
+using Transform = UnityEngine.Transform;
 
 namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 {
@@ -11,18 +16,20 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
     using AstroClient.xAstroBoy.Extensions;
     using VRC.Udon;
 
-    internal partial class GameObject_RPC_Firewall : AstroEvents
+
+    internal class GameObject_RPC_Firewall  : AstroEvents
     {
         internal override void OnRoomLeft()
         {
-            BlockedGameObjectRPCEvents.Clear(); 
+            BlockedGameObjectRPCEvents.Clear();
         }
 
-        internal static ConcurrentDictionary<GameObject, ConcurrentDictionary<string, FirewallRule>> BlockedGameObjectRPCEvents = new ConcurrentDictionary<GameObject, ConcurrentDictionary<string, FirewallRule>>();
+        internal static ConcurrentDictionary<Transform, ConcurrentDictionary<string, FirewallRule>> BlockedGameObjectRPCEvents { get; } = new ConcurrentDictionary<Transform, ConcurrentDictionary<string, FirewallRule>>();
 
 
 
-        internal static FirewallRule GetFirewallRule(GameObject parent, string EventKey, bool AddIfNotExisting = false)
+
+        internal static FirewallRule GetFirewallRule(Transform parent, string EventKey, bool ShouldMake = true)
         {
             if (BlockedGameObjectRPCEvents != null)
             {
@@ -33,17 +40,20 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
                     {
                         if (FirewallRules.ContainsKey(EventKey))
                         {
-                            return FirewallRules[EventKey];
+                            FirewallRules.TryGetValue(EventKey, out var rule);
+                            if (rule != null)
+                            {
+                                return rule;
+                            }
                         }
                         else
                         {
-                            if (AddIfNotExisting)
+                            if (ShouldMake)
                             {
                                 // This spawns a new Firewall Rule for the event.
-                                if (FirewallRules.TryAdd(EventKey, new FirewallRule()))
-                                {
-                                    return FirewallRules[EventKey];
-                                }
+                                var newrule = new FirewallRule();
+                                FirewallRules.TryAdd(EventKey, newrule);
+                                return newrule;
                             }
                         }
                     }
@@ -51,63 +61,25 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             }
             return null;
         }
-        internal static bool RemoveFirewallRule(GameObject parent, string EventKey)
+
+
+
+        internal static bool RemoveFirewallRule(Transform parent, string EventKey)
         {
             if (BlockedGameObjectRPCEvents != null)
             {
                 if (BlockedGameObjectRPCEvents.ContainsKey(parent))
                 {
-                    var FirewallRules = BlockedGameObjectRPCEvents[parent];
-                    if (FirewallRules != null)
+                    var rule = GetFirewallRule(parent, EventKey, false);
+                    if (rule != null)
                     {
-                        if (FirewallRules.ContainsKey(EventKey))
-                        {
-                            return FirewallRules.TryRemove(EventKey, out _);
-                        }
-
+                        rule.AllowRemoteSender = true;
+                        rule.AllowLocalSender = true;
+                        return true;
                     }
                 }
             }
             return false;
-        }
-        internal static ConcurrentDictionary<string, FirewallRule> GetAllFirewallRules(GameObject parent)
-        {
-            if (BlockedGameObjectRPCEvents != null)
-            {
-                if (BlockedGameObjectRPCEvents.ContainsKey(parent))
-                {
-                    return BlockedGameObjectRPCEvents[parent];
-                }
-            }
-            return null;
-        }
-        internal static bool Event_AllowLocalSender(GameObject parent, string EventKey)
-        {
-            if (BlockedGameObjectRPCEvents != null)
-            {
-                var rules = GetFirewallRule(parent, EventKey, false);
-                if(rules != null)
-                {
-                    return rules.AllowLocalSender;
-                }
-                
-            }
-
-            return true;
-        }
-
-        internal static bool Event_AllowRemoteSender(GameObject parent, string EventKey)
-        {
-            if (BlockedGameObjectRPCEvents != null)
-            {
-                var rules = GetFirewallRule(parent, EventKey, false);
-                if (rules != null)
-                {
-                    return rules.AllowRemoteSender;
-                }
-            }
-
-            return true;
         }
 
 
@@ -133,7 +105,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             {
                 if (udon.isEventKeyValid(EventKey))
                 {
-                    EditRule(udon.gameObject, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
+                    EditRule(udon.transform, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
                 }
             }
         }
@@ -144,7 +116,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             {
                 if (udon.isEventKeyValid(EventKey))
                 {
-                    RemoveRule(udon.gameObject, EventKey);
+                    RemoveRule(udon.transform, EventKey);
                 }
             }
         }
@@ -152,12 +124,12 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
 
 
-        private static void EditRule(GameObject gameObject, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = false, bool PrintRuleChanges = false)
+        private static void EditRule(Transform transform, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = true, bool PrintRuleChanges = false)
         {
             if (BlockedGameObjectRPCEvents != null)
             {
                 //  First let's check if the entry exists
-                var FirewallRule = GetFirewallRule(gameObject, EventKey, true);
+                var FirewallRule = GetFirewallRule(transform, EventKey, true);
                 if(FirewallRule != null)
                 {
                     FirewallRule.AllowLocalSender = AllowLocalSender;
@@ -184,47 +156,32 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
                             AllowOrBlockRemoteSender = "Deny";
                         }
 
-                        Log.Debug($"[RPC Firewall] : Firewall will {AllowOrDenyLocalSender} Local Sender & {AllowOrBlockRemoteSender} Remote Sender Event : {EventKey} on GameObject {gameObject.name}", Color.Orange);
+                        Log.Debug($"[RPC Firewall] : Firewall will {AllowOrDenyLocalSender} Local Sender & {AllowOrBlockRemoteSender} Remote Sender Event : {EventKey} on GameObject {transform.name}", Color.Orange);
 
                     }
                 }
                 else
                 {
-                    BlockedGameObjectRPCEvents.TryAdd(gameObject, new ConcurrentDictionary<string, FirewallRule>());
-                    if(PrintRuleChanges)
+                    BlockedGameObjectRPCEvents.TryAdd(transform, new ConcurrentDictionary<string, FirewallRule>());
+                    if (PrintRuleChanges)
                     {
-                        Log.Debug($"[RPC Firewall] : Created New Rule For  {gameObject.name}!", Color.Orange);
+                        Log.Debug($"[RPC Firewall] : Created New Rule For  {transform.name}!", Color.Orange);
                     }
-                    EditRule(gameObject, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
+                    EditRule(transform, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
                 }
-            }
 
+            }
         }
 
-        internal static void RemoveAllRules(GameObject gameObject)
+        internal static void RemoveRule(Transform transform, string EventKey)
         {
-            if (gameObject != null)
+            if (transform != null)
             {
                 if (BlockedGameObjectRPCEvents != null)
                 {
-                    if (BlockedGameObjectRPCEvents.ContainsKey(gameObject))
+                    if (RemoveFirewallRule(transform, EventKey))
                     {
-                        Log.Debug($"[RPC Firewall] : Removed {GetAllFirewallRules(gameObject).Count} Firewall Rules for {gameObject.name}!", Color.Orange);
-                    }
-
-                }
-            }
-
-        }
-        internal static void RemoveRule(GameObject gameObject, string EventKey)
-        {
-            if (gameObject != null)
-            {
-                if (BlockedGameObjectRPCEvents != null)
-                {
-                    if (RemoveFirewallRule(gameObject, EventKey))
-                    {
-                        Log.Debug($"[RPC Firewall] : Removed Firewall block Event {EventKey} in  {gameObject.name}!", Color.Orange);
+                        Log.Debug($"[RPC Firewall] : Removed Firewall block Event {EventKey} in  {transform.name}!", Color.Orange);
                     }
 
                 }
