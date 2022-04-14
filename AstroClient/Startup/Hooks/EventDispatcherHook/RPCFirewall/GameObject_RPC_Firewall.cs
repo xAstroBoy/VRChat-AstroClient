@@ -22,7 +22,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
 
 
-        internal static FirewallRule GetFirewallRules(GameObject parent, string EventKey, bool AddIfNotExisting = false)
+        internal static FirewallRule GetFirewallRule(GameObject parent, string EventKey, bool AddIfNotExisting = false)
         {
             if (BlockedGameObjectRPCEvents != null)
             {
@@ -87,7 +87,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             if (EventKey.IsNullOrEmptyOrWhiteSpace()) return true;
             if (BlockedGameObjectRPCEvents != null)
             {
-                var rules = GetFirewallRules(parent, EventKey, false);
+                var rules = GetFirewallRule(parent, EventKey, false);
                 if(rules != null)
                 {
                     return rules.AllowLocalSender;
@@ -104,7 +104,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             if (EventKey.IsNullOrEmptyOrWhiteSpace()) return true;
             if (BlockedGameObjectRPCEvents != null)
             {
-                var rules = GetFirewallRules(parent, EventKey, false);
+                var rules = GetFirewallRule(parent, EventKey, false);
                 if (rules != null)
                 {
                     return rules.AllowRemoteSender;
@@ -161,7 +161,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             if (BlockedGameObjectRPCEvents != null)
             {
                 //  First let's check if the entry exists
-                var FirewallRule = GetFirewallRules(gameObject, EventKey);
+                var FirewallRule = GetFirewallRule(gameObject, EventKey);
                 if(FirewallRule != null)
                 {
                     FirewallRule.AllowLocalSender = AllowLocalSender;

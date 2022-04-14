@@ -44,15 +44,16 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 }
                 else
                 {
-                    isBlocked = GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action);
+                    if (sender.Get_SenderAPIUser().IsSelf)
+                    {
+                        isBlocked = GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action);
+                    }
+                    else
+                    {
+                        isBlocked = GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, Action);
+
+                    }
                 }
-
-                // First let's check the sender 
-
-                // Missing : Sender Firewall support (WIll skip the firewall step if sender is blocked)
-
-
-                // Then let's check if the behaviour and it's event is in the Udon firewall 
 
 
                 if (ConfigManager.General.LogUdonEvents)

@@ -1,4 +1,5 @@
 ﻿using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
+using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
 using VRC;
 
 namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
@@ -39,7 +40,15 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 }
                 else
                 {
-                    isBlocked = GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, actionText);
+                    if (sender.Get_SenderAPIUser().IsSelf)
+                    {
+                        isBlocked = GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, actionText);
+                    }
+                    else
+                    {
+                        isBlocked = GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, actionText);
+
+                    }
                 }
 
                 if (ConfigManager.General.LogRPCEvents)
