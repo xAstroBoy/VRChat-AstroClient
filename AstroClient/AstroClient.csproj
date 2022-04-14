@@ -160,6 +160,7 @@
     <Compile Include="Startup\Hooks\EventDispatcherHook\RPCFirewall\Irregular_RPC_Firewall.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\RPCFirewall\GameObject_RPC_Firewall.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\RPCFirewall\Player_RPC_Firewall.cs" />
+    <Compile Include="Startup\Hooks\EventDispatcherHook\Tools\Ext\RPCFirewallExts.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Ext\PhotonExts.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Tools\PhotonLogger\PhotonLogger.cs" />
