@@ -84,7 +84,11 @@ namespace AstroClient.Startup.Hooks
             if (__0.IsNullOrEmptyOrWhiteSpace()) return true;
 
             Event_Udon_SendCustomEvent.SafetyRaiseWithParams(__instance, __0);
-            return GameObject_RPC_Firewall.Event_AllowLocalSender(__instance.gameObject, __0);
+            if(!GameObject_RPC_Firewall.Event_AllowLocalSender(__instance.gameObject, __0))
+            {
+                return false;
+            }
+            return true;
 
         }
 

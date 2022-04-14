@@ -46,11 +46,17 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (sender.Get_SenderAPIUser().IsSelf)
                     {
-                        isBlocked = !GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action);
+                        if (!GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, Action))
+                        {
+                            isBlocked = true;
+                        }
                     }
                     else
                     {
-                        isBlocked = !GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, Action);
+                        if(!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, Action))
+                        {
+                            isBlocked = true;
+                        }
 
                     }
                 }
@@ -60,19 +66,29 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (isBlocked)
                     {
-                        Log.Debug($"[UDON RPC Firewall] : BLOCKED RPC: Sender : {sender.Get_SenderName()} , GameObject : {TargetObject.name}, Action : {Action}", System.Drawing.Color.Orange);
+                        Log.Write($"[UDON RPC Firewall] : BLOCKED RPC: Sender : {sender.Get_SenderName()} , GameObject : {TargetObject.name}, Action : {Action}", System.Drawing.Color.Orange);
                     }
                     else
                     {
                         Log.Write($"Udon RPC: Sender : {sender.Get_SenderName()} , GameObject : {TargetObject.name}, Action : {Action}");
                     }
                 }
-                return !isBlocked;
 
+                if(isBlocked)
+                {
+                    return false;
+                }
             }
-            catch { }
+            catch(Exception e)
+            {
+                Log.Exception(e);
+            }
+            if (isBlocked)
+            {
+                return false;
+            }
 
-            return !isBlocked;
+            return true;
 
         }
 

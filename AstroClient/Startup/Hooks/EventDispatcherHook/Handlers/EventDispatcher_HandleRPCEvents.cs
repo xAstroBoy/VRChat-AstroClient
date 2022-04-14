@@ -26,7 +26,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
     internal static class EventDispatcher_HandleRPCEvents
     {
 
-        internal static bool Handle_OtherRPCEvent(ref VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject TargetObject, string actionText, string parameter, string eventtype, string broadcasttype)
+        internal static bool Handle_OtherRPCEvent(ref VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject TargetObject, string EventKey, string parameter, string eventtype, string broadcasttype)
         {
             bool isBlocked = Bools.BlockRPC;
             try
@@ -42,11 +42,17 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (sender.Get_SenderAPIUser().IsSelf)
                     {
-                        isBlocked = !GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, actionText);
+                        if (!GameObject_RPC_Firewall.Event_AllowLocalSender(TargetObject, EventKey))
+                        {
+                            isBlocked = true;
+                        }
                     }
                     else
                     {
-                        isBlocked = !GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, actionText);
+                        if (!GameObject_RPC_Firewall.Event_AllowRemoteSender(TargetObject, EventKey))
+                        {
+                            isBlocked = true;
+                        }
 
                     }
                 }
@@ -55,19 +61,30 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                 {
                     if (isBlocked)
                     {
-                        Log.Debug($"[RPC Firewall] Blocked : {sender}, {TargetObject.name}, {parameter}, [{actionText}], {eventtype}, {broadcasttype}", System.Drawing.Color.Orange);
+                        Log.Debug($"[RPC Firewall] Blocked : {sender.Get_SenderName()}, {TargetObject.name}, {parameter}, [{EventKey}], {eventtype}, {broadcasttype}", System.Drawing.Color.Orange);
                     }
                     else
                     {
-                        Log.Write($"RPC: {sender}, {TargetObject.name}, {parameter}, [{actionText}], {eventtype}, {broadcasttype}");
+                        Log.Write($"RPC: {sender.Get_SenderName()}, {TargetObject.name}, {parameter}, [{EventKey}], {eventtype}, {broadcasttype}");
                     }
                 }
-                return !isBlocked;
+                
+                if(isBlocked)
+                {
+                    return false;
+                }
 
             }
-            catch { }
+            catch(Exception e)
+            {
+                Log.Exception(e);
+            }
 
-            return !isBlocked;
+            if(isBlocked)
+            {
+                return false;
+            }
+            return true;
 
         }
     }

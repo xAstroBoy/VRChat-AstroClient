@@ -82,10 +82,7 @@ internal static class RPCExtensions
     {
         if (player != null)
         {
-            if (player.GetAPIUser() != null)
-            {
-                return player.GetAPIUser();
-            }
+            return player.GetAPIUser();
 
         }
         return null;

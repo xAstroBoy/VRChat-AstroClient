@@ -48,8 +48,11 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             catch
             {
             }
-
-            return !isBlocked;
+            if (isBlocked)
+            {
+                return false;
+            }
+            return true;
 
         }
 
