@@ -1,4 +1,6 @@
 
+using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
+
 namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 {
     #region Imports
@@ -35,8 +37,19 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             try
             {
 
-                // TODO: ADD UDON & SENDER FIREWALL SUPPORT
-                
+
+
+                // TODO: ADD SENDER FIREWALL SUPPORT
+
+                // First let's check the sender 
+
+                // Missing : Sender Firewall support (WIll skip the firewall step if sender is blocked)
+
+
+                // Then let's check if the behaviour and it's event is in the Udon firewall 
+
+                isBlocked = GameObject_RPC_Firewall.HasBlockedEvent(TargetObject, Action);
+
                 if (ConfigManager.General.LogUdonEvents)
                 {
                     if (isBlocked)
