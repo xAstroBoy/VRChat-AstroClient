@@ -74,5 +74,23 @@
                 udonlist[i].InvokeBehaviour();
             }
         }
+
+        internal static bool isEventKeyValid(this UdonBehaviour UdonBehaviour, string EventKey)
+        {
+            if (UdonBehaviour != null)
+            {
+                var entries = UdonBehaviour._eventTable.entries;
+                for (int i = 0; i < entries.Count; i++)
+                {
+                    var actionkeys = entries[i];
+                    if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
+                    if (actionkeys.key == EventKey)
+                        return true;
+
+                }
+            }
+            return false;
+        }
+
     }
 }

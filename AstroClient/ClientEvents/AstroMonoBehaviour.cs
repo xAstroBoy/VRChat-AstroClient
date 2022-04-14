@@ -19,8 +19,7 @@ namespace AstroClient
     using VRC.UI.Elements;
     using xAstroBoy;
     using ConfigManager = Config.ConfigManager;
-    using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
-    using AstroClient.Startup.Hooks.EventDispatcherHook.Startup;
+    using Startup.Hooks.EventDispatcherHook.Handlers;
     using Photon.Pun;
     using VRC.Udon;
 

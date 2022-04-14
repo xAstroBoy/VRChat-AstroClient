@@ -1,26 +1,27 @@
 ﻿
+#region Imports
+
+using System.Collections.Generic;
+using AstroClient.Cheetos;
+using AstroClient.Moderation;
+using AstroClient.Startup.Hooks;
+using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
+using AstroClient.Startup.Patches;
+using AstroClient.Target;
+using AstroClient.xAstroBoy;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine;
+using VRC.Core;
+using VRC.SDKBase;
+using VRC.Udon;
+using VRC.UI.Elements;
+
+#endregion
+
 namespace AstroClient
 {
     #region Usings
-
-    using Photon.Pun;
-    using VRC.Udon;
-    using System;
-    using System.Collections.Generic;
-    using AstroEventArgs;
-    using Cheetos;
-    using Moderation;
-    using Startup.Hooks;
-    using Startup.Patches;
-    using Streamer;
-    using Target;
-    using UnityEngine;
-    using VRC;
-    using VRC.Core;
-    using VRC.SDKBase;
-    using VRC.UI.Elements;
-    using xAstroBoy;
-    using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 
     #endregion Imports
 
@@ -176,7 +177,7 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
+        internal virtual void OnMasterClientSwitched(Player player)
         {
         }
         internal virtual void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
@@ -206,19 +207,19 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnPlayerLeft(Player player)
+        internal virtual void OnPlayerLeft(VRC.Player player)
         {
         }
 
-        internal virtual void OnPlayerJoined(Player player)
+        internal virtual void OnPlayerJoined(VRC.Player player)
         {
         }
 
-        internal virtual void OnPhotonPlayerLeft(Photon.Realtime.Player player)
+        internal virtual void OnPhotonPlayerLeft(Player player)
         {
         }
 
-        internal virtual void OnPhotonPlayerJoined(Photon.Realtime.Player player)
+        internal virtual void OnPhotonPlayerJoined(Player player)
         {
         }
 
@@ -246,11 +247,11 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
+        internal virtual void OnAvatarSpawn(VRC.Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
         }
 
-        internal virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        internal virtual void OnUdonSyncRPCEvent(VRC.Player sender, GameObject obj, string action)
         {
         }
 
@@ -258,27 +259,27 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnPlayerBlockedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerBlockedYou(Player player)
         {
         }
 
-        internal virtual void OnPlayerUnblockedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerUnblockedYou(Player player)
         {
         }
 
-        internal virtual void OnPlayerMutedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerMutedYou(Player player)
         {
         }
 
-        internal virtual void OnPlayerUnmutedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerUnmutedYou(Player player)
         {
         }
 
-        internal virtual void OnPlayerSelected(Player player)
+        internal virtual void OnPlayerSelected(VRC.Player player)
         {
         }
 
-        internal virtual void OnTargetSet(Player player)
+        internal virtual void OnTargetSet(VRC.Player player)
         {
         }
 
