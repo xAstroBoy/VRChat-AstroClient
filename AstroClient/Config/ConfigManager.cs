@@ -48,6 +48,8 @@
 
         internal static string AstroInstances { get; } = ConfigFolder + @"\AstroInstances.json";
 
+        internal static string ConfigBlockedRPCPlayersPath { get; } = ConfigFolder + @"\BlockedRPCPlayers.json";
+
         #endregion Paths
 
         #region Config Classes
@@ -67,6 +69,9 @@
         public static ConfigPerformance Performance { get; set; } = new ConfigPerformance();
 
         public static ConfigLoadingScreen LoadingScreen { get; set; } = new ConfigLoadingScreen();
+
+        public static ConfigBlockedRPCPlayers BlockedRPCPlayers { get; set; } = new ConfigBlockedRPCPlayers();
+
 
         #endregion Config Classes
 
@@ -187,6 +192,14 @@
                 Log.Warn($"ConfigLoadingScreen File Created: {ConfigLoadingScreenPath}");
             }
 
+            if (!File.Exists(ConfigBlockedRPCPlayersPath))
+            {
+                FileStream fs = new FileStream(ConfigBlockedRPCPlayersPath, FileMode.Create);
+                fs.Dispose();
+                Save_BlockedRPCPlayers();
+                Log.Warn($"AstroInstances File Created: {BlockedRPCPlayers}");
+            }
+
             if (!Directory.Exists(ConfigTempFolder))
             {
                 _ = Directory.CreateDirectory(ConfigTempFolder);
@@ -243,6 +256,12 @@
             Log.Debug("Loading Screen Config Saved.");
         }
 
+        public static void Save_BlockedRPCPlayers()
+        {
+            JSonWriter.WriteToJsonFile(ConfigBlockedRPCPlayersPath, BlockedRPCPlayers);
+            Log.Debug("Blocked RPC Players Config Saved.");
+        }
+
         public static void SaveAll()
         {
             _ = SaveMutex.WaitOne();
@@ -256,6 +275,7 @@
             Save_Favorites();
             Save_Performance();
             Save_LoadingScreen();
+            Save_BlockedRPCPlayers();
             stopwatch.Stop();
             Log.Write($"Finished Saving Configuration Files: {stopwatch.ElapsedMilliseconds}ms");
             SaveMutex.ReleaseMutex();
@@ -335,6 +355,15 @@
             catch
             {
                 Log.Error("Failed to load Loading Screen config, creating a new one..");
+            }
+
+            try
+            {
+                BlockedRPCPlayers = JSonWriter.ReadFromJsonFile<ConfigBlockedRPCPlayers>(ConfigBlockedRPCPlayersPath);
+            }
+            catch
+            {
+                Log.Error("Failed to load Blocked RPC Players config, creating a new one..");
             }
 
             stopwatch.Stop();

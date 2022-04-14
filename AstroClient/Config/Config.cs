@@ -135,4 +135,9 @@
         public bool SecretMeme = false;
     }
 
+    [Serializable, Obfuscation]
+    public class ConfigBlockedRPCPlayers
+    {
+        public List<string> BlockedRPCPlayersList = new List<string>();
+    }
 }
