@@ -201,7 +201,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (Bedroom_VIP == null) return null;
                 if (_VIPRoom_Internal_Door == null)
                 {
-                    return _VIPRoom_Internal_Door = Bedroom_VIP.transform.FindObject("BedroomUdon/Door Tablet/Door Inside/Door").gameObject;
+                    return _VIPRoom_Internal_Door = Bedroom_VIP.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
                 }
                 return _VIPRoom_Internal_Door;
             }
