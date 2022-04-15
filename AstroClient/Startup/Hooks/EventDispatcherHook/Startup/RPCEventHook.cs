@@ -68,9 +68,9 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
                 }
 
             }
-            catch (Exception e)
+            catch
             {
-                //Log.Exception(e);
+                // Nobody cares lmao
             }
 
             return true;
