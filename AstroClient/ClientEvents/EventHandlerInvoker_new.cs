@@ -205,9 +205,18 @@ namespace AstroClient
                             Log.Exception(invokeexc.InnerException);
                         }
                         sw.Stop();
-                        if (sw.ElapsedMilliseconds > 100)
+                        if (sw.ElapsedMilliseconds > 1)
                         {
-                            var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}, FPS : {GetCurrentFPS()}";
+                            var target = string.Empty;
+                            if (handler.Target != null)
+                            {
+                                target = handler.Target.ToString();
+                            }
+                            else
+                            {
+                                target = "NULL";
+                            }
+                            var result = $"[{handler.Target.ToString()}] {handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Time: {sw.Elapsed.TotalMilliseconds}ms, FPS : {GetCurrentFPS()}";
                             if (!Results.Contains(result))
                             {
                                 Log.Warn(result);

@@ -20,16 +20,15 @@
         {
             if (!PlayerModerations.ContainsKey(id))
             {
-                PlayerModerations.TryAdd(id, new ModerationData());
+                PlayerModerations.Add(id, new ModerationData());
             }
         }
-
 
         private static void RemovePlayer(string id)
         {
             if (!PlayerModerations.ContainsKey(id))
             {
-                PlayerModerations.TryRemove(id, out _);
+                PlayerModerations.Remove(id);
             }
 
         }
@@ -131,8 +130,7 @@
             yield return null;
         }
 
-
-        internal static ConcurrentDictionary<string, ModerationData> PlayerModerations = new ConcurrentDictionary<string, ModerationData>();
+        internal static Dictionary<string, ModerationData> PlayerModerations = new Dictionary<string, ModerationData>();
 
         internal class ModerationData
         {

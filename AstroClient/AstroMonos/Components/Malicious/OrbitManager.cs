@@ -22,9 +22,11 @@
     {
         #region Internal
 
+        public int MaxItems = 15;
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
         public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public object Toggle;
 
         public OrbitManager(IntPtr obj0) : base(obj0)
         {
@@ -76,7 +78,11 @@
         {
             pickups.Clear();
             var list = WorldUtils.Pickups;
-            for (int i = 0; i < list.Count; i++)
+            if (MaxItems >= list.Count)
+            {
+                MaxItems = list.Count;
+            }
+            for (int i = 0; i < MaxItems; i++)
             {
                 var found = list[i];
                 pickups.Add(found);
@@ -111,7 +117,7 @@
 
                 Instance.centerPoint ??= BonesUtils.Get_Player_Bone_Transform(target, HumanBodyBones.Head);
 
-                _ = MelonCoroutines.Start(LoopPickups());
+                Instance.Toggle = MelonCoroutines.Start(LoopPickups());
 
                 Log.Write($"[OrbitManager] Orbiting Player: {Instance.target.DisplayName()}");
             }
@@ -132,6 +138,8 @@
                 GameObjectMenu.RestoreOriginalLocation(pickup.gameObject, true);
                 OnlineEditor.RemoveOwnerShip(pickup.gameObject);
             }
+            MelonCoroutines.Stop(Instance.Toggle);
+            Instance.pickups.Clear();
             Instance.target = null;
             Instance.isEnabled = false;
             Log.Write($"[OrbitManager] Orbit Disabled");
@@ -141,12 +149,6 @@
         {
             for (; ; )
             {
-                if (!IsEnabled || Instance.target == null)
-                {
-                    DisableOrbit();
-                    yield break;
-                }
-
                 for (int i = 0; i < Instance.pickups.Count; i++)
                 {
                     var pickup = Instance.pickups[i];
