@@ -50,8 +50,15 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
         internal static bool IsBlocked(Player player)
         {
-            var id = player.GetAPIUser().id;
-            return ConfigManager.BlockedRPCPlayers.BlockedRPCPlayersList.Contains(id);
+            if (player != null)
+            {
+                var user = player.GetAPIUser();
+                if (!user.IsSelf)
+                {
+                    return ConfigManager.BlockedRPCPlayers.BlockedRPCPlayersList.Contains(user.id);
+                }
+            }
+            return false;
         }
 
         internal override void OnPlayerJoined(Player player)

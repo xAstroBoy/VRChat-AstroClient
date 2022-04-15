@@ -51,16 +51,9 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
         internal static bool isRPCEventBlocked(Player sender, GameObject gameObject, string EventKey)
         {
-            var user = sender.GetVRCPlayerApi();
-            if(user != null)
+            if (Player_RPC_Firewall.IsBlocked(sender))
             {
-                if (!user.isLocal)
-                {
-                    if(Player_RPC_Firewall.IsBlocked(sender))
-                    {
-                        return false;
-                    }
-                }
+                return false;
             }
             var Rules = GameObject_RPC_Firewall.BlockedGameObjectRPCEvents;
             if (Rules != null)
@@ -75,6 +68,8 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
                         if (sender != null)
                         {
+                            var user = sender.GetVRCPlayerApi();
+
                             // Log.Write("Checking Player Rules...!");
                             if (user.isLocal)
                             {
