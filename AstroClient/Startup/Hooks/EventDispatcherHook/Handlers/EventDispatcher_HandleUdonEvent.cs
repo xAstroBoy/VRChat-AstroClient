@@ -59,7 +59,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             }
             catch (Exception e)
             {
-                Log.Exception(e);
+               // Log.Exception(e);
             }
             return !isBlocked;
 
@@ -96,7 +96,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             }
             catch (Exception e)
             {
-                Log.Exception(e);
+                //Log.Exception(e);
             }
             return !isBlocked;
 

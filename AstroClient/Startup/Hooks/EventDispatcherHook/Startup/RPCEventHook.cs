@@ -36,8 +36,6 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
         }
 
 
-        // TODO : Clean and reorganize the entire event system 
-
         private static bool OnRPCEvent(ref VRC.Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
         {
             try
@@ -72,7 +70,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
             }
             catch (Exception e)
             {
-                Log.Exception(e);
+                //Log.Exception(e);
             }
 
             return true;
