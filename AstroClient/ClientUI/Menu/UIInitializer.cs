@@ -56,7 +56,7 @@
             if (Bools.IsDeveloper)
             {
                 MapEditorMenu.InitButtons(AstroClient);
-                Kaned.Pathfinding.InitMenu(AstroClient);
+                Developers.Kaned.KanedWIP.InitMenu(AstroClient);
                 //CheetosWIP.InitCheetosWIPMenu(AstroClient);
             }
 

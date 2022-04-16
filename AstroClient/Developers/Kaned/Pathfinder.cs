@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Kaned
+﻿namespace AstroClient.Developers.Kaned
 {
     using System;
     using System.Collections;
