@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Interactable
+﻿using AstroClient.Startup.Hooks;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Interactable
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Tools.Listeners;
@@ -62,7 +64,19 @@
                 for (int i = 0; i < list.Count; i++)
                 {
                     GameObject obj = list[i];
-                    var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () => { obj.TriggerClick(isGlobalTrigger); }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
+                    var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () =>
+                    {
+                        if (isGlobalTrigger)
+                        {
+                            WorldTriggerHook.SendTriggerToEveryone = true;
+                            obj.TriggerClick();
+                            WorldTriggerHook.SendTriggerToEveryone = false;
+                        }
+                        else
+                        {
+                            obj.TriggerClick();
+                        }
+                    }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
                     var listener = obj.gameObject.GetOrAddComponent<ScrollMenuListener>();
                     if (listener != null) listener.SingleButton = btn;
                     Listeners.Add(listener);

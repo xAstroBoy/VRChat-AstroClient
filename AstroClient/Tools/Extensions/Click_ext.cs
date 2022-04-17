@@ -1,4 +1,5 @@
 ﻿using AstroClient.Startup.Hooks;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.Tools.Extensions
 {
@@ -120,17 +121,12 @@ namespace AstroClient.Tools.Extensions
             }
         }
 
-        internal static void TriggerClick(this VRC_Trigger obj, bool isGlobalEvent = false)
+        internal static void TriggerClick(this VRC_Trigger obj)
         {
             bool ObjHasBeenActivated = false;
             bool TriggerHasBeenEnabled = false;
             if (obj != null)
             {
-                if (isGlobalEvent)
-                {
-                    WorldTriggerHook.SendTriggerToEveryone = true;
-                }
-
                 OnlineEditor.TakeObjectOwnership(obj.gameObject);
 
                 var SDKbase = obj.GetComponent<VRC_Trigger>();
@@ -180,21 +176,13 @@ namespace AstroClient.Tools.Extensions
                     }
                 }
             }
-            if (isGlobalEvent)
-            {
-                WorldTriggerHook.SendTriggerToEveryone = false;
-            }
 
         }
 
-        internal static void TriggerClick(this GameObject obj , bool isGlobalEvent = false)
+        internal static void TriggerClick(this GameObject obj)
         {
             bool ObjHasBeenActivated = false;
             bool TriggerHasBeenEnabled = false;
-            if (isGlobalEvent)
-            {
-                WorldTriggerHook.SendTriggerToEveryone = true;
-            }
 
             if (obj != null)
             {
@@ -247,10 +235,6 @@ namespace AstroClient.Tools.Extensions
                     }
                 }
 
-            }
-            if (isGlobalEvent)
-            {
-                WorldTriggerHook.SendTriggerToEveryone = false;
             }
 
         }

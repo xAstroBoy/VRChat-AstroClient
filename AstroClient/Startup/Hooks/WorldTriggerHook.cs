@@ -14,7 +14,7 @@
     internal class WorldTriggerHook : AstroEvents
     {
 
-        internal static bool SendTriggerToEveryone = false;
+        internal static bool SendTriggerToEveryone { get; set; } = false;
 
         internal override void ExecutePriorityPatches()
         {

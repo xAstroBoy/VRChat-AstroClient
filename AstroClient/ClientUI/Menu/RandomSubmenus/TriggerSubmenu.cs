@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.RandomSubmenus
+﻿using AstroClient.Startup.Hooks;
+
+namespace AstroClient.ClientUI.Menu.RandomSubmenus
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Tools.Listeners;
@@ -59,7 +61,19 @@
             {
                 foreach (var obj in WorldUtils_Old.Get_Triggers())
                 {
-                    var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () => { obj.TriggerClick(isGlobalTrigger); }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
+                    var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () =>
+                    {
+                        if (isGlobalTrigger)
+                        {
+                            WorldTriggerHook.SendTriggerToEveryone = true;
+                            obj.TriggerClick();
+                            WorldTriggerHook.SendTriggerToEveryone = false;
+                        }
+                        else
+                        {
+                            obj.TriggerClick();
+                        }
+                    }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
                     var listener = obj.gameObject.AddComponent<ScrollMenuListener>();
                     if (listener != null) listener.SingleButton = btn;
                     Listeners.Add(listener);
