@@ -1,5 +1,6 @@
 ﻿using AstroClient.CheetosUI;
 using AstroClient.Startup.Hooks;
+using VRC;
 using VRC.SDKBase;
 
 namespace AstroClient.WorldModifications.WorldHacks
@@ -23,7 +24,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
 
         private static VRC_Trigger AuthorizedTrigger { get; set; }
-
+        internal static bool RemoveBlocksForJoinedPlayers { get; set; } = false;
 
         private static void FindEverything()
         {
@@ -90,6 +91,15 @@ namespace AstroClient.WorldModifications.WorldHacks
                 isCurrentWorld = false;
                 AuthorizedTrigger = null;
             }
+        }
+
+        internal override void OnPlayerJoined(Player player)
+        {
+            if (RemoveBlocksForJoinedPlayers)
+            {
+                BypassKmartRestrictions();  // KEK
+            }
+
         }
 
         internal static bool isCurrentWorld { get; set; } = false;

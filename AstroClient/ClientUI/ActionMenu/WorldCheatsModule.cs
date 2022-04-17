@@ -526,6 +526,15 @@ internal class WorldCheatsModule : AstroEvents
             if (WorldUtils.WorldID == WorldIds.KMartExpress_1)
             {
                 CustomSubMenu.AddButton("Bypass Kmart Lock for Everyone", () => { Kmart.BypassKmartRestrictions(); });
+                CustomSubMenu.AddToggle("Remove Lock for Every new player join", Kmart.RemoveBlocksForJoinedPlayers, ToggleValue =>
+                {
+                    if(ToggleValue)
+                    {
+                        Kmart.BypassKmartRestrictions();
+                    }
+                    Kmart.RemoveBlocksForJoinedPlayers = ToggleValue;
+                });
+
             }
 
 
