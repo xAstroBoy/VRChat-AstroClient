@@ -35,7 +35,7 @@
 
         private static bool OnEventDataSentPatch(ref VRC_EventHandler.VrcBroadcastType __1)
         {
-            if (SendTriggerToEveryone)
+            if (SendTriggerToEveryone && (__1 != VRC_EventHandler.VrcBroadcastType.Always || __1 != VRC_EventHandler.VrcBroadcastType.AlwaysBufferOne || __1 != VRC_EventHandler.VrcBroadcastType.AlwaysUnbuffered))
             {
                 __1 = VRC_EventHandler.VrcBroadcastType.Always;
             }

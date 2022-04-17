@@ -69,9 +69,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if(AuthorizedTrigger != null)
             {
-                WorldTriggerHook.SendTriggerToEveryone = true;
-                AuthorizedTrigger.TriggerClick();
-                WorldTriggerHook.SendTriggerToEveryone = false;
+                AuthorizedTrigger.TriggerClick(true);
             }
         }
 

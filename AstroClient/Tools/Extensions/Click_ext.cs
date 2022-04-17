@@ -124,12 +124,13 @@ namespace AstroClient.Tools.Extensions
         {
             bool ObjHasBeenActivated = false;
             bool TriggerHasBeenEnabled = false;
-            if (isGlobalEvent)
-            {
-                WorldTriggerHook.SendTriggerToEveryone = true;
-            }
             if (obj != null)
             {
+                if (isGlobalEvent)
+                {
+                    WorldTriggerHook.SendTriggerToEveryone = true;
+                }
+
                 OnlineEditor.TakeObjectOwnership(obj.gameObject);
 
                 var SDKbase = obj.GetComponent<VRC_Trigger>();
@@ -178,8 +179,6 @@ namespace AstroClient.Tools.Extensions
                         obj.gameObject.SetActive(false);
                     }
                 }
-
-                OnlineEditor.RemoveOwnerShip(obj.gameObject);
             }
             if (isGlobalEvent)
             {
@@ -248,7 +247,6 @@ namespace AstroClient.Tools.Extensions
                     }
                 }
 
-                OnlineEditor.RemoveOwnerShip(obj);
             }
             if (isGlobalEvent)
             {
