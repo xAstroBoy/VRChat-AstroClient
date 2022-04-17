@@ -8,6 +8,7 @@
     using AstroClient.Tools.Extensions.Components_exts;
     using AstroClient.Tools.ObjectEditor;
     using AstroClient.Tools.ObjectEditor.Online;
+    using Cheetah;
     using MelonLoader;
     using Tools;
     using UnhollowerBaseLib.Attributes;
@@ -22,7 +23,7 @@
     {
         #region Internal
 
-        public int MaxItems = 15;
+        public int MaxItems = 30;
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
         public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
@@ -55,18 +56,8 @@
 
         internal static OrbitManager Instance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Player target;
-        private bool isEnabled;
-        private bool isLooping;
         private Transform centerPoint = null;
         private List<VRC.SDKBase.VRC_Pickup> pickups = new List<VRC.SDKBase.VRC_Pickup>();
-
-        internal static bool IsEnabled
-        {
-            [HideFromIl2Cpp]
-            get => Instance.isEnabled;
-            [HideFromIl2Cpp]
-            set => Instance.isEnabled = value;
-        }
 
         internal void Start()
         {
@@ -78,13 +69,17 @@
         {
             pickups.Clear();
             var list = WorldUtils.Pickups;
-            if (MaxItems >= list.Count)
+            int max = MaxItems;
+            if (max >= list.Count)
             {
-                MaxItems = list.Count;
+                max = list.Count;
             }
-            for (int i = 0; i < MaxItems; i++)
+            for (int i = 0; i < max; i++)
             {
                 var found = list[i];
+                found.gameObject.RigidBody_Set_Gravity(false);
+                found.gameObject.RigidBody_Set_DetectCollisions(true);
+                found.gameObject.RigidBody_Set_isKinematic(false);
                 pickups.Add(found);
             }
             Log.Write($"[OrbitManager] Refreshed: {pickups.Count} pickups found");
@@ -102,23 +97,14 @@
                 else Log.Debug("[ " + name.ToUpper() + " STATUS ] : ERROR", System.Drawing.Color.OrangeRed);
             }
         }
-
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        
+        public static void OrbitPlayer(Player target)
         {
-            RefreshPickups();
-        }
-
-        internal static void OrbitPlayer(Player target)
-        {
-            if (Instance != null && target != null && Instance.target == null)
+            if (Instance != null && target != null)
             {
                 Instance.target = target;
-                Instance.isEnabled = true;
-
-                Instance.centerPoint ??= BonesUtils.Get_Player_Bone_Transform(target, HumanBodyBones.Head);
-
+                Instance.centerPoint = BonesUtils.Get_Player_Bone_Transform(target, HumanBodyBones.Head);
                 Instance.Toggle = MelonCoroutines.Start(LoopPickups());
-
                 Log.Write($"[OrbitManager] Orbiting Player: {Instance.target.DisplayName()}");
             }
             else
@@ -127,42 +113,54 @@
             }
         }
 
-        internal static void DisableOrbit()
+        public static void DisableOrbit()
         {
             if (Instance == null) return;
 
             for (int i = 0; i < Instance.pickups.Count; i++)
             {
-                var pickup = Instance.pickups[i];
-                pickup.gameObject.Pickup_RestoreOriginalProperties();
-                GameObjectMenu.RestoreOriginalLocation(pickup.gameObject, true);
-                OnlineEditor.RemoveOwnerShip(pickup.gameObject);
+                var pickup = Instance.pickups[i].gameObject;
+                pickup.Pickup_RestoreOriginalProperties();
+                GameObjectMenu.RestoreOriginalLocation(pickup, true);
+                OnlineEditor.RemoveOwnerShip(pickup);
             }
             MelonCoroutines.Stop(Instance.Toggle);
             Instance.pickups.Clear();
             Instance.target = null;
-            Instance.isEnabled = false;
             Log.Write($"[OrbitManager] Orbit Disabled");
         }
-
-        internal static IEnumerator LoopPickups()
+        
+        private static IEnumerator LoopPickups()
         {
+            Instance.RefreshPickups();
+            
             for (; ; )
             {
+                if (Instance.target == null)
+                {
+                    Log.Write("[OrbitManager] Target is null, disabling orbit");
+                    MelonCoroutines.Stop(Instance.Toggle);
+                    yield break;
+                }
+                
+                if (Instance.centerPoint == null)
+                {
+                    Log.Write("[OrbitManager] Target Lost, Retrying....");
+                    Instance.centerPoint = BonesUtils.Get_Player_Bone_Transform(Instance.target, HumanBodyBones.Head);
+                    yield return new WaitForSeconds(0.1f);
+                }
+
                 for (int i = 0; i < Instance.pickups.Count; i++)
                 {
                     var pickup = Instance.pickups[i];
                     if (!pickup.gameObject.isLocalPlayerOwner())
                     {
                         pickup.gameObject.TryTakeOwnership();
-                        pickup.gameObject.RigidBody_Set_Gravity(false);
-                        pickup.gameObject.RigidBody_Set_DetectCollisions(true);
-                        pickup.gameObject.RigidBody_Set_isKinematic(false);
                     }
 
-                    pickup.transform.position = Instance.centerPoint.position + (Instance.centerPoint.forward * 0.3f);
+                    pickup.transform.position = Instance.centerPoint.position + (Instance.centerPoint.forward * (0.3f));
                 }
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.01f);
             }
         }
     }

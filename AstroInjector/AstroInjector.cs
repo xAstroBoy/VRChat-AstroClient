@@ -14,19 +14,14 @@
         internal static string[] DebugMelonPaths =
         {
             @"Debug\AstroClient.dll",
-            @"Debug\AstroClientCore.dll",
-			//@"Debug\DontTouchMyClient.dll",
-			//@"Debug\MonoDumper.dll",
 		};
 
         internal static string[] DebugLibraryPaths =
         {
-            @"Debug\Libs\AstroLibrary.dll",
         };
 
         internal static string[] DebugModulePaths =
         {
-            @"Debug\Module\AstroTestModule.dll"
         };
 
 #endif
@@ -40,7 +35,6 @@
 
         internal static string[] EmbededMelonsPaths =
         {
-            @"AstroInjector.Resources.DontTouchMyClient.dll",
         };
 
         public AstroInjector()
@@ -52,8 +46,6 @@
                 return;
             }
             LoadEmbeddedMelons();
-
-
         }
 
         public override void OnApplicationStart()
@@ -212,7 +204,8 @@
                 }
             }
         }
-
+        
 #endif
+        
     }
 }

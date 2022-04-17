@@ -111,6 +111,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_DoorAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
+    <Compile Include="AstroMonos\Components\Malicious\Randomizer.cs" />
     <Compile Include="AstroMonos\Components\Tools\LaserPointer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
@@ -545,7 +546,6 @@
     <Compile Include="Developers\Cheetos\Cheetos\AvatarSearch.cs" />
     <Compile Include="Developers\Cheetos\CheetosUI\CMPage.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\CheetosHooks.cs" />
-    <Compile Include="ClientUI\Menu\Menus\Quickmenu\DevMenu.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AstroInput.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AvatarHider.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\ForceClone.cs" />
