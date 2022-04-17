@@ -14,6 +14,7 @@
     internal class VRC_InteractableScrollMenu : AstroEvents
     {
         private static QMWings WingMenu;
+        private static QMWingToggleButton isGlobalTriggerToggle;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new();
         private static List<ScrollMenuListener> Listeners = new();
@@ -24,7 +25,20 @@
 
         private static bool HasGenerated { get; set; }
         private static bool isOpen { get; set; }
+        private static bool _isGlobalTrigger = false;
 
+        private static bool isGlobalTrigger
+        {
+            get => _isGlobalTrigger;
+            set
+            {
+                _isGlobalTrigger = value;
+                if(isGlobalTriggerToggle != null)
+                {
+                    isGlobalTriggerToggle.SetToggleState(value);
+                }
+            }
+        }
 
         internal override void OnRoomLeft()
         {
@@ -48,7 +62,7 @@
                 for (int i = 0; i < list.Count; i++)
                 {
                     GameObject obj = list[i];
-                    var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () => { obj.TriggerClick(); }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
+                    var btn = new QMSingleButton(CurrentScrollMenu, $"Click {obj.name}", () => { obj.TriggerClick(isGlobalTrigger); }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
                     var listener = obj.gameObject.GetOrAddComponent<ScrollMenuListener>();
                     if (listener != null) listener.SingleButton = btn;
                     Listeners.Add(listener);
@@ -92,7 +106,7 @@
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
-
+            isGlobalTrigger = false;
             isOpen = false;
         }
 
@@ -125,6 +139,7 @@
                 DestroyGeneratedButtons();
                 Regenerate();
             }, "Refresh and force menu to regenerate");
+            isGlobalTriggerToggle = new QMWingToggleButton(WingMenu, "World Trigger", () => { isGlobalTrigger = true; }, () => { isGlobalTrigger = false; }, "Invoke Trigger for everyone");
             WingMenu.SetActive(false);
         }
     }

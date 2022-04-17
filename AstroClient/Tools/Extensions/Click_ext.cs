@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using AstroClient.Startup.Hooks;
+
+namespace AstroClient.Tools.Extensions
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -118,11 +120,14 @@
             }
         }
 
-        internal static void TriggerClick(this VRC_Trigger obj)
+        internal static void TriggerClick(this VRC_Trigger obj, bool isGlobalEvent = false)
         {
             bool ObjHasBeenActivated = false;
             bool TriggerHasBeenEnabled = false;
-
+            if (isGlobalEvent)
+            {
+                WorldTriggerHook.SendTriggerToEveryone = true;
+            }
             if (obj != null)
             {
                 OnlineEditor.TakeObjectOwnership(obj.gameObject);
@@ -176,12 +181,21 @@
 
                 OnlineEditor.RemoveOwnerShip(obj.gameObject);
             }
+            if (isGlobalEvent)
+            {
+                WorldTriggerHook.SendTriggerToEveryone = false;
+            }
+
         }
 
-        internal static void TriggerClick(this GameObject obj)
+        internal static void TriggerClick(this GameObject obj , bool isGlobalEvent = false)
         {
             bool ObjHasBeenActivated = false;
             bool TriggerHasBeenEnabled = false;
+            if (isGlobalEvent)
+            {
+                WorldTriggerHook.SendTriggerToEveryone = true;
+            }
 
             if (obj != null)
             {
@@ -236,6 +250,11 @@
 
                 OnlineEditor.RemoveOwnerShip(obj);
             }
+            if (isGlobalEvent)
+            {
+                WorldTriggerHook.SendTriggerToEveryone = false;
+            }
+
         }
     }
 }
