@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Kaned
+﻿namespace AstroClient.Developers.Kaned
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
 
-    internal class Pathfinding : AstroEvents
+    internal class Pathfinding
     {
         private static float coarseness = 0.2f;
         private static int maxMSPerFrame = 25;
@@ -22,7 +22,7 @@
 
         //List<GameObject> indicators = new List<GameObject>();
 
-        internal static QMNestedGridMenu WIPMenu { get; private set; }
+        internal static QMNestedGridMenu PathMenu;
         internal static QMSingleButton[] buttons;
         internal static QMSingleButton targetInfo;
         internal static QMSingleButton hunterInfo;
@@ -30,11 +30,10 @@
 
         //Get the difference between the current cost and its parent's cost to get the fraction by which to lerp each frame
 
-        internal static void InitMenu(QMGridTab main)
+        internal static void InitMenu(QMNestedGridMenu KWIPMenu)
         {
-            WIPMenu = new QMNestedGridMenu(main, "Khaned WIP", "WIP Features", null, Color.red, null, null, false);
-
-            _ = new QMSingleButton(WIPMenu, 1, 0, "Select Objects", () =>
+            PathMenu = new QMNestedGridMenu(KWIPMenu, "Pathing", "");
+            _ = new QMSingleButton(PathMenu, 1, 0, "Select Objects", () =>
             {
                 hunters.Clear();
                 for (int i = 2; i < WorldUtils.Pickups.Count; i++)
@@ -51,8 +50,8 @@
                     Log.Write($"{i,-2}, {hunters[i].pickup.name}");
                 }
                 RefreshInfo();
-            }, "", btnHalf: true);
-            _ = new QMSingleButton(WIPMenu, 1, 0.5f, "Target Player", () =>
+            }, "");
+            _ = new QMSingleButton(PathMenu, 1, 0.5f, "Target Player", () =>
             {
                 if (TargetSelector.CurrentTarget != null)
                 {
@@ -60,9 +59,9 @@
                     RefreshInfo();
                     //var p = TargetSelector.CurrentTarget.Get_Player_Bone_Position(HumanBodyBones.Chest);
                 }
-            }, "", btnHalf: true);
+            }, "");
 
-            _ = new QMSingleButton(WIPMenu, 2, 0, "Gen Path", () =>
+            _ = new QMSingleButton(PathMenu, 2, 0, "Gen Path", () =>
             {
                 if (targetedPlayer != null && hunters.Count > 0)
                 {
@@ -117,11 +116,11 @@
             //    indicators.ForEach(x => x.DestroyMeLocal());
             //    indicators.Clear();
             //}, "Clears Indicators", btnHalf: true);
-            _ = new QMSingleButton(WIPMenu, 2, 1, "StopPathing", () =>
+            _ = new QMSingleButton(PathMenu, 2, 1, "StopPathing", () =>
             {
 
-            }, "NOT IMPLEMENTED Stops trying to find paths that have yet to be generated", btnHalf: true);
-            _ = new QMToggleButton(WIPMenu, 3, 0, "FollowPath", () =>
+            }, "NOT IMPLEMENTED Stops trying to find paths that have yet to be generated");
+            _ = new QMToggleButton(PathMenu, 3, 0, "FollowPath", () =>
             {
                 followingState = true;
                 foreach (var h in hunters)
@@ -136,14 +135,14 @@
                     h.stopFollow();
                 }
             }, "Makes objects follow their generated paths");
-            _ = new QMToggleButton(WIPMenu, 3, 1, "ActiveTracking", () =>
+            _ = new QMToggleButton(PathMenu, 3, 1, "ActiveTracking", () =>
             {
 
             }, "ActiveTracking", () =>
             {
 
             }, "NOT IMPLEMENTED Automatically update the paths of hunters");
-            _ = new QMSingleButton(WIPMenu, 1, 1.5f, "Test", () =>
+            _ = new QMSingleButton(PathMenu, 1, 1.5f, "Test", () =>
             {
                 //for (int i = 0; i < 32; i++)
                 //{
@@ -163,36 +162,36 @@
                     num++;
                 }
             }, "");
-            targetInfo = new QMSingleButton(WIPMenu, 4, 0, "None", () => { RefreshInfo(); }, "");
-            hunterInfo = new QMSingleButton(WIPMenu, 4, 1, "None", () => { RefreshInfo(); }, "");
+            targetInfo = new QMSingleButton(PathMenu, 4, 0, "None", () => { RefreshInfo(); }, "");
+            hunterInfo = new QMSingleButton(PathMenu, 4, 1, "None", () => { RefreshInfo(); }, "");
             buttons = new QMSingleButton[]
             {
-                new QMSingleButton(WIPMenu, 0, -1, "0.1", () =>
+                new QMSingleButton(PathMenu, 0, -1, "0.1", () =>
                 {
                     coarseness = 0.1f;
                     activateNum(0);
                 }, "", btnHalf: true),
-                new QMSingleButton(WIPMenu, 0, -0.5f, "0.15", () =>
+                new QMSingleButton(PathMenu, 0, -0.5f, "0.15", () =>
                 {
                     coarseness = 0.15f;
                     activateNum(1);
                 }, "", btnHalf: true),
-                new QMSingleButton(WIPMenu, 0, 0, "0.2", () =>
+                new QMSingleButton(PathMenu, 0, 0, "0.2", () =>
                 {
                     coarseness = 0.2f;
                     activateNum(2);
                 }, "", btnHalf: true),
-                new QMSingleButton(WIPMenu, 0, 0.5f, "0.25", () =>
+                new QMSingleButton(PathMenu, 0, 0.5f, "0.25", () =>
                 {
                     coarseness = 0.25f;
                     activateNum(3);
                 }, "", btnHalf: true),
-                new QMSingleButton(WIPMenu, 0, 1, "0.5", () =>
+                new QMSingleButton(PathMenu, 0, 1, "0.5", () =>
                 {
                     coarseness = 0.5f;
                     activateNum(4);
                 }, "", btnHalf: true),
-                new QMSingleButton(WIPMenu, 0, 1.5f, "1", () =>
+                new QMSingleButton(PathMenu, 0, 1.5f, "1", () =>
                 {
                     coarseness = 1;
                     activateNum(5);

@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Kaned
+﻿namespace AstroClient.Developers.Kaned
 {
     using System;
     using System.Collections;
@@ -9,7 +9,7 @@
 
     internal class Pathfinder
     {
-        internal static Dictionary<float, Dictionary<(int x, int y, int z), bool>> fullGridCache = new Dictionary<float, Dictionary<(int x, int y, int z), bool>>();
+        internal static Dictionary<float, Dictionary<Vector3Int, bool>> fullGridCache = new Dictionary<float, Dictionary<Vector3Int, bool>>();
 
         internal Vector3[] points = null;
         internal bool foundPath = false;
@@ -42,14 +42,14 @@
         internal void GetPath(Vector3 startPos, Vector3 endPos, Action<Pathfinder, object[]> onComplete = null, object[] actionArgs = null, float coarseness = 0.2f, int maxMSPerFrame = 16)
         {
             //get the grid cache if it exists and if it doesnt add it
-            Dictionary<(int x, int y, int z), bool> gridCache = null;
+            Dictionary<Vector3Int, bool> gridCache = null;
             if (fullGridCache.TryGetValue(coarseness, out var val))
             {
                 gridCache = val;
             }
             else
             {
-                gridCache = new Dictionary<(int x, int y, int z), bool>();
+                gridCache = new Dictionary<Vector3Int, bool>();
                 fullGridCache.Add(coarseness, gridCache);
             }
             _ = MelonLoader.MelonCoroutines.Start(Pathfind());
@@ -183,7 +183,7 @@
                     };
 
                     possibleTiles.ForEach(tile => tile.SetDistance(targetTile.pos));
-                    return possibleTiles.Where(tile => (gridCache.TryGetValue(((int)tile.pos.x, (int)tile.pos.y, (int)tile.pos.z), out bool state) ? state : !Physics.CheckBox(((Vector3)tile.pos) * coarseness, Vector3.one * (coarseness / 2f), Quaternion.identity, finalmask)) || tile.pos == endPos).ToList();
+                    return possibleTiles.Where(tile => (gridCache.TryGetValue(tile.pos, out bool state) ? state : tile.pos == endPos || !Physics.CheckBox(((Vector3)tile.pos) * coarseness, Vector3.one * (coarseness / 2f), Quaternion.identity, finalmask))).ToList();
                 }
             }
         }
