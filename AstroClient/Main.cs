@@ -62,7 +62,7 @@
 
         private IEnumerator InitializeClient()
         {
-            LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
+            //LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
 
             // New Cheetah Console/Log Stuff
             WriteBanner();

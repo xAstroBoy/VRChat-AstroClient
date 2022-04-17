@@ -22,6 +22,7 @@
 
         internal static T GetCopyOf<T>(this Component comp, T other) where T : Component
         {
+            
             if (comp == null) return null;
             if (other.GetType() == null) return null;
             Type type = comp.GetType();

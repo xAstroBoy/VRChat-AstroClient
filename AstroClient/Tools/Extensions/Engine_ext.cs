@@ -1,4 +1,8 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using AstroClient.PlayerList;
+using AstroClient.xAstroBoy.Extensions;
+using VRC.Udon;
+
+namespace AstroClient.Tools.Extensions
 {
     #region Imports
 
@@ -182,14 +186,73 @@
             }
         }
 
-        internal static GameObject InstantiateObject(this GameObject obj)
+        internal static void CopyExistingComponents<T>(GameObject Original, GameObject Clone) where T : Component
         {
-            return obj != null ? Object.Instantiate(obj) : null;
+            var comp1base = Original.GetComponents<T>();
+            for (var CompResult = 0; CompResult < comp1base.Count; CompResult++)
+            {
+                var result = comp1base[CompResult];
+                Log.Debug($"Deep Cloning {typeof(T).FullName} Component..");
+                Clone.AddComponent<T>().GetCopyOf(result);
+            }
+        }
+
+        internal static void DestroyExistingComponents<T>(GameObject Clone) where T : Component
+        {
+            var comp1base = Clone.GetComponents<T>();
+            for (var CompResult = 0; CompResult < comp1base.Count; CompResult++)
+            {
+                var result = comp1base[CompResult];
+                if(result != null)
+                {
+                    Object.DestroyImmediate(result);
+                }
+            }
+
+        }
+
+
+        internal static void DeepCloneObject(GameObject original, GameObject clone)
+        {
+            // First purge the failed instantiated component clones
+            DestroyExistingComponents<UdonBehaviour>(clone);
+            DestroyExistingComponents<VRC_Pickup>(clone);
+            DestroyExistingComponents<VRC.SDK3.Components.VRCObjectSync>(clone);
+            DestroyExistingComponents<VRC.Networking.UdonSync>(clone);
+            DestroyExistingComponents<VRC_Trigger>(clone);
+            DestroyExistingComponents<VRC_Interactable>(clone);
+
+
+            // Then use our deepcloner to add back the components properly cloned.
+            CopyExistingComponents<UdonBehaviour>(original, clone);
+            CopyExistingComponents<VRC_Pickup>(original, clone);
+            CopyExistingComponents<VRC.SDK3.Components.VRCObjectSync>(original, clone);
+            CopyExistingComponents<VRC.Networking.UdonSync>(original, clone);
+            CopyExistingComponents<VRC_Trigger>(original, clone);
+            CopyExistingComponents<VRC_Interactable>(original, clone);
+
+
+        }
+
+        internal static GameObject InstantiateObject(this GameObject original)
+        {
+            if(original != null)
+            {
+                var clone = Object.Instantiate(original);
+                MiscUtils.DelayFunction(1.5f, () =>
+                {
+                    DeepCloneObject(original, clone);
+
+                });
+                return clone;
+            }
+            return null;
         }
 
         internal static GameObject InstantiateObject(this Transform obj)
         {
-            return obj != null ? Object.Instantiate(obj.gameObject) : null;
+            var result = InstantiateObject(obj.gameObject); ;
+            return result;
         }
 
         internal static void CloneObject(this GameObject obj)
@@ -278,6 +341,9 @@
                 }
             }
         }
+
+
+        
 
         internal static void DestroyMeLocal(this Object obj, bool Silent = false)
         {

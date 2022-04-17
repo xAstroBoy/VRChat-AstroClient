@@ -521,6 +521,16 @@ internal class WorldCheatsModule : AstroEvents
 
             #endregion
 
+            #region  Kmart Express
+
+            if (WorldUtils.WorldID == WorldIds.KMartExpress_1)
+            {
+                CustomSubMenu.AddButton("Bypass Kmart Lock for Everyone", () => { Kmart.BypassKmartRestrictions(); });
+            }
+
+
+
+            #endregion
         }, Icons.thief);
 
         Log.Write("World Module is ready!", Color.Green);

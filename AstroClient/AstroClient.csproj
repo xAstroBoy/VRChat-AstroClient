@@ -170,6 +170,7 @@
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Replacers\Photon_DictionaryEditor.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Replacers\Photon_HashtableEditor.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Translators\Photon_StructToString.cs" />
+    <Compile Include="Startup\Hooks\WorldTriggerHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\Hooks\UnityMessagesHook.cs" />
     <Compile Include="Startup\UnityLogger.cs" />
@@ -1467,7 +1468,6 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\flashlights.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\waffle.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\OldLoadingScreen.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\WorldButton.assetbundle" />
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />

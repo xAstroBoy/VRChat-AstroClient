@@ -17,6 +17,7 @@
     using xAstroBoy.Utility;
     using Object = UnityEngine.Object;
 
+    // TODO : Rewrite and optimize loading system.
     internal class SkyboxEditor : AstroEvents
     {
         private static bool HasLoadedCachedSkyboxes;
@@ -60,6 +61,7 @@
 
         internal static bool isSupportedSkybox { get; private set; } = false;
 
+        internal static List<AssetBundle> FailedLoadedBundles { get; } = new();
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (!HasLoadedCachedSkyboxes)
@@ -228,6 +230,26 @@
             yield return null;
         }
 
+        internal static AssetBundle GetValidBundle(string BundlePath)
+        {
+
+
+            var bundle = AssetBundle.LoadFromFile(BundlePath, 0u);
+            if (bundle != null)
+            {
+                if (bundle.name.IsNotNullOrEmptyOrWhiteSpace())
+                {
+                    if (bundle.GetAllAssetNames().Count != 0)
+                    {
+                        bundle.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                        return bundle;
+                    }
+                }
+            }
+            return null;
+        }
+
+
         private static IEnumerator LoadBundleSkyboxes()
         {
             if (Directory.Exists(BundlesPath))
@@ -239,85 +261,13 @@
                         var file = files[i1];
                         if (!IsBundleAlreadyRegistered(Path.GetFileName(file)))
                         {
-                            var stream = File.ReadAllBytes(file);
-                            var bundle = AssetBundle.LoadFromMemory(stream.ToArray(), 0u);
-                            bundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                            Texture2D Up = null;
-                            Texture2D Down = null;
-                            Texture2D Back = null;
-                            Texture2D Front = null;
-                            Texture2D Left = null;
-                            Texture2D Right = null;
-                            Texture2D CubeMapToTexture = null;
-                            var isCubeMap = false;
-                            Material Material = null;
-                            UnhollowerBaseLib.Il2CppStringArray list = bundle.GetAllAssetNames();
-                            for (int i = 0; i < list.Count; i++)
-                            {
-                                string paths = list[i];
-                                if (!paths.ToLower().EndsWith(".mat") || !(Material == null)) continue;
-                                Material = bundle.LoadAsset_Internal(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                                if (!(Material != null)) continue;
-                                Material.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                foreach (var TextureName in Material.GetTexturePropertyNames())
-                                {
-                                    var MaterialTexture = Material.GetTexture(TextureName);
-                                    if (Up == null && TextureName.isMatch("_UpTex"))
-                                    {
-                                        Up = MaterialTexture.ToTexture2D();
-                                        if (Up != null) Up.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
+                            var bundle = GetValidBundle(file);
 
-                                    if (Down == null && TextureName.isMatch("_DownTex"))
-                                    {
-                                        Down = MaterialTexture.ToTexture2D();
-                                        if (Down != null) Down.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
+                            LoadSkyboxBundle(file, bundle);
 
-                                    if (Back == null && TextureName.isMatch("_BackTex"))
-                                    {
-                                        Back = MaterialTexture.ToTexture2D();
-                                        if (Back != null) Back.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
+                            yield return null;
 
-                                    if (Front == null && TextureName.isMatch("_FrontTex"))
-                                    {
-                                        Front = MaterialTexture.ToTexture2D();
-                                        if (Front != null) Front.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
 
-                                    if (Left == null && TextureName.isMatch("_LeftTex"))
-                                    {
-                                        Left = MaterialTexture.ToTexture2D();
-                                        if (Left != null) Left.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-
-                                    if (Right == null && TextureName.isMatch("_RightTex"))
-                                    {
-                                        Right = MaterialTexture.ToTexture2D();
-                                        if (Right != null) Right.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-
-                                    if (CubeMapToTexture == null && TextureName.isMatch("_Tex"))
-                                    {
-                                        isCubeMap = true;
-                                        //CubeMapToTexture = MaterialTexture.TryCast<Cubemap>().ToTexture2D();
-                                        //if (CubeMapToTexture != null) CubeMapToTexture.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                }
-                            }
-
-                            if (Material != null)
-                            {
-                                var cachedskybox = new AssetBundleSkyboxes(Path.GetFileName(file), new BundleContent(Up, Down, Back, Front, Left, Right, CubeMapToTexture, null, Material), isCubeMap);
-                                if (LoadedSkyboxesBundles != null) LoadedSkyboxesBundles.Add(cachedskybox);
-                            }
-                            else
-                            {
-                                Log.Debug("Failed to parse " + file + ", Due to Material being null!");
-                            }
-
-                            yield return new WaitForSeconds(0.001f);
                         }
                         else
                         {
@@ -331,7 +281,93 @@
                 Log.Warn("To Add custom Skyboxes , import the skyboxes assetbundles here : " + BundlesPath);
             }
 
-            yield return null;
+            yield break;
+        }
+
+
+        private static void LoadSkyboxBundle(string file, AssetBundle bundle)
+        {
+            if(bundle == null)
+            {
+                Log.Warn($"Bundle Is null for File {file}");
+                return;
+            }
+            Texture2D Up = null;
+            Texture2D Down = null;
+            Texture2D Back = null;
+            Texture2D Front = null;
+            Texture2D Left = null;
+            Texture2D Right = null;
+            Texture2D CubeMapToTexture = null;
+            var isCubeMap = false;
+            Material Material = null;
+            foreach(var paths in bundle.GetAllAssetNames())
+            {
+                Log.Write($"Checking {bundle.name} Path {paths}");
+
+
+
+                if (!paths.ToLower().EndsWith(".mat")) continue;
+                Material = bundle.LoadAsset(paths, Il2CppType.Of<Material>()).Cast<Material>();
+                Material.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                foreach (var TextureName in Material.GetTexturePropertyNames())
+                {
+                    var MaterialTexture = Material.GetTexture(TextureName);
+                    if (Up == null && TextureName.isMatch("_UpTex"))
+                    {
+                        Up = MaterialTexture.ToTexture2D();
+                        if (Up != null) Up.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    }
+
+                    if (Down == null && TextureName.isMatch("_DownTex"))
+                    {
+                        Down = MaterialTexture.ToTexture2D();
+                        if (Down != null) Down.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    }
+
+                    if (Back == null && TextureName.isMatch("_BackTex"))
+                    {
+                        Back = MaterialTexture.ToTexture2D();
+                        if (Back != null) Back.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    }
+
+                    if (Front == null && TextureName.isMatch("_FrontTex"))
+                    {
+                        Front = MaterialTexture.ToTexture2D();
+                        if (Front != null) Front.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    }
+
+                    if (Left == null && TextureName.isMatch("_LeftTex"))
+                    {
+                        Left = MaterialTexture.ToTexture2D();
+                        if (Left != null) Left.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    }
+
+                    if (Right == null && TextureName.isMatch("_RightTex"))
+                    {
+                        Right = MaterialTexture.ToTexture2D();
+                        if (Right != null) Right.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    }
+
+                    if (CubeMapToTexture == null && TextureName.isMatch("_Tex"))
+                    {
+                        isCubeMap = true;
+                        //CubeMapToTexture = MaterialTexture.TryCast<Cubemap>().ToTexture2D();
+                        //if (CubeMapToTexture != null) CubeMapToTexture.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    }
+                }
+
+            }
+            if (Material != null)
+            {
+                var cachedskybox = new AssetBundleSkyboxes(Path.GetFileName(file), new BundleContent(Up, Down, Back, Front, Left, Right, CubeMapToTexture, null, Material), isCubeMap);
+                if (LoadedSkyboxesBundles != null) LoadedSkyboxesBundles.Add(cachedskybox);
+            }
+            else
+            {
+                Log.Debug("Failed to parse " + file + ", Due to Material being null!");
+                FailedLoadedBundles.Add(bundle); 
+            }
         }
 
         internal static void FindAndLoadSkyboxes()

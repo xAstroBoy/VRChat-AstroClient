@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.ObjectEditor.Cloner
+﻿using HarmonyLib;
+
+namespace AstroClient.Tools.ObjectEditor.Cloner
 {
     using ClientUI.Menu.ItemTweakerV2.Selector;
     using ClientUI.Menu.ItemTweakerV2.Submenus.Spawner;
@@ -47,10 +49,13 @@
             }
         }
 
+        
+
+
         internal static void CloneGameObject(GameObject GameObject)
         {
             Log.Debug($"Found A Target GameObject  :{GameObject.name}");
-            var obj = Object.Instantiate(GameObject);
+            var obj = GameObject.InstantiateObject();
             if (obj != null)
             {
                 obj.transform.SetParent(GetClonedHolder().transform);

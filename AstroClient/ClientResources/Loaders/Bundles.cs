@@ -40,20 +40,6 @@
             }
         }
 
-        private static AssetBundle _OldLoadingScreen;
-
-        internal static AssetBundle OldLoadingScreen
-        {
-            get
-            {
-                if (_OldLoadingScreen == null)
-                {
-                    _OldLoadingScreen = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}OldLoadingScreen.assetbundle"), 0u);
-                    _OldLoadingScreen.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                }
-                return _OldLoadingScreen;
-            }
-        }
         private static AssetBundle _crystal_003;
 
         internal static AssetBundle crystal_003
