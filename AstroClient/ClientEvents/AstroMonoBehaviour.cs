@@ -55,6 +55,7 @@ namespace AstroClient
             CheetosHooks.Event_OnSetupFlagsReceived += OnSetupFlagsReceived;
             CheetosHooks.Event_OnShowSocialRankChanged += OnShowSocialRankChanged;
             CheetosHooks.Event_OnAvatarDownloadProgress += OnavatarDownloadProgress;
+            CheetosHooks.Event_OnAvatarInstantiated += OnAvatarInstantiated;
 
 
             QuickMenuHooks.Event_OnPlayerSelected += OnPlayerSelected;
@@ -129,6 +130,7 @@ namespace AstroClient
             CheetosHooks.Event_OnSetupFlagsReceived -= OnSetupFlagsReceived;
             CheetosHooks.Event_OnShowSocialRankChanged -= OnShowSocialRankChanged;
             CheetosHooks.Event_OnAvatarDownloadProgress -= OnavatarDownloadProgress;
+            CheetosHooks.Event_OnAvatarInstantiated -= OnAvatarInstantiated;
 
 
             QuickMenuHooks.Event_OnPlayerSelected -= OnPlayerSelected;
@@ -174,6 +176,9 @@ namespace AstroClient
             UnityMessagesHook.Event_OnUnityWarning -= OnUnityWarning;
             UnityMessagesHook.Event_OnUnityError -= OnUnityError;
             //Log.Debug($"Deregistered a AstroMonoBehaviour from EventHandlers and Destroying it!");
+        }
+        internal virtual void OnAvatarInstantiated(VRCAvatarManager manager, ApiAvatar apiAvatar, GameObject avatar)
+        {
         }
 
         internal virtual void OnavatarDownloadProgress(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)

@@ -10,12 +10,12 @@
     using UnityEngine.UI;
     using VRC.Core;
 
-    [RegisterComponent]
+    [RegisterComponent] 
     public class EntryBase : AstroMonoBehaviour
     {
         public EntryBase(IntPtr obj0) : base(obj0) { }
 
-        
+
         [HideFromIl2Cpp]
         public virtual string Name { get; }
 
@@ -77,7 +77,24 @@
         {
         }
 
+        public virtual void OnSceneWasLoaded()
+        {
+        }
+
+        public virtual void OnInstanceChange(ApiWorld world, ApiWorldInstance instance)
+        {
+        }
+
         public virtual void OnConfigChanged()
+        {
+        }
+
+        public virtual void EntryBase_OnAvatarInstantiated(VRCAvatarManager vrcPlayer, ApiAvatar avatar, GameObject gameObject)
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void EntryBase_OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
         }
 
@@ -88,36 +105,24 @@
                 DestroyImmediate(gameObject);
         }
 
-
-
-        public static T CreateInstance<T>(GameObject gameObject, object[] parameters = null, bool includeConfig = false)
-            where T : EntryBase
+        public static T CreateInstance<T>(GameObject gameObject, object[] parameters = null, bool includeConfig = false) where T : EntryBase
         {
             EntryBase entry = gameObject.AddComponent<T>();
-            if (entry != null)
+            entry._identifier = globalIdentifier++;
+            entry.textComponent = gameObject.GetComponent<Text>();
+            if (entry.textComponent != null)
+                entry._originalText = entry.textComponent.text;
+
+            if (includeConfig)
             {
-                entry._identifier = globalIdentifier++;
-                entry.textComponent = gameObject.GetComponent<Text>();
-                if (entry.textComponent != null)
-                    entry._originalText = entry.textComponent.text;
-
-                if (includeConfig)
-                {
-                    entry.prefEntry =
-                        PlayerListConfig.category.CreateEntry(entry.Name.Replace(" ", ""), true, is_hidden: true);
-                    entry.gameObject.SetActive(entry.prefEntry.Value);
-                }
-
-                entry.Init(parameters);
-
-                return (T)entry;
-            }
-            else
-            {
-                Log.Debug($"Failed to Create EntryBase Instance {typeof(T).Name}");
+                entry.prefEntry = PlayerListConfig.category.CreateEntry(entry.Name.Replace(" ", ""), true, is_hidden: true);
+                entry.gameObject.SetActive(entry.prefEntry.Value);
             }
 
-            return null;
+            entry.Init(parameters);
+
+            return (T)entry;
         }
     }
+
 }

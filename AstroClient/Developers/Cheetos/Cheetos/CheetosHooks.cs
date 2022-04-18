@@ -1,7 +1,4 @@
-﻿using AstroClient.Unreal;
-using VRC.UI.Elements;
-
-namespace AstroClient.Cheetos
+﻿namespace AstroClient.Cheetos
 {
     #region Imports
 
@@ -9,27 +6,21 @@ namespace AstroClient.Cheetos
     using System.Collections;
     using System.Linq;
     using System.Reflection;
-    using AstroEventArgs;
-    using AstroNetworkingLibrary;
-    using AstroNetworkingLibrary.Serializable;
     using Cheetah;
     using Constants;
-    using ExitGames.Client.Photon;
     using HarmonyLib;
     using MelonLoader;
-    using Newtonsoft.Json;
     using Photon.Realtime;
-    using Tools.Extensions;
-    using Tools.Regexes;
     using UnityEngine;
-    using VRC;
     using VRC.Core;
     using xAstroBoy;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-    using Action = Il2CppSystem.Action;
     using ConfigManager = Config.ConfigManager;
     using Player = Photon.Realtime.Player;
+    using Il2CppSystem.Collections;
+    using VRC.UI.Elements;
+
 
     #endregion Imports
 
@@ -45,9 +36,10 @@ namespace AstroClient.Cheetos
         internal static event System.Action<APIUser> Event_OnFriended;
         internal static event System.Action<string> Event_OnUnfriended;
         internal static event System.Action<ApiWorld, ApiWorldInstance> Event_OnEnterWorld;
-        internal static event Action<VRCPlayer, Il2CppSystem.Collections.Hashtable> Event_OnSetupFlagsReceived;
+        internal static event System.Action<VRCPlayer, Il2CppSystem.Collections.Hashtable> Event_OnSetupFlagsReceived;
         internal static event System.Action Event_OnShowSocialRankChanged;
-        internal static event Action<AvatarLoadingBar, float, long> Event_OnAvatarDownloadProgress;
+        internal static event System.Action<AvatarLoadingBar, float, long> Event_OnAvatarDownloadProgress;
+        internal static event System.Action<VRCAvatarManager, ApiAvatar, GameObject> Event_OnAvatarInstantiated;
 
 
         [ObfuscationAttribute(Feature = "HarmonyGetPatch")]
@@ -57,17 +49,6 @@ namespace AstroClient.Cheetos
         }
 
         internal override void ExecutePriorityPatches()
-        {
-            MelonCoroutines.Start(Init());
-        }
-
-        private IEnumerator Init()
-        {
-            InitPatch();
-            yield break;
-        }
-
-        internal static async void InitPatch()
         {
             try
             {
@@ -98,22 +79,25 @@ namespace AstroClient.Cheetos
                 //new AstroPatch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)));
 
                 //new AstroPatch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
+                new AstroPatch(typeof(VRCPlayer).GetMethods().First((MethodInfo mb) => mb.Name.StartsWith("Awake")), null, GetPatch(nameof(OnPlayerAwake)));
+
+                new AstroPatch(typeof(APIUser).GetMethod(nameof(APIUser.UnfriendUser)), GetPatch(nameof(OnUnfriended)));
 
                 typeof(RoomManager).GetMethods(BindingFlags.Public | BindingFlags.Static)
                     .Where(m => m.Name.StartsWith("Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_"))
                     .ToList().ForEach(m => new AstroPatch(m, GetPatch(nameof(OnEnterWorldEvent))));
                 MethodInfo SetupFlagsMethod = typeof(VRCPlayer).GetMethods().First((MethodInfo mi) => mi.Name.StartsWith("Method_Public_Void_Hashtable_Boolean_"));
                 new AstroPatch(SetupFlagsMethod, null, GetPatch(nameof(Internal_OnSetupFlagsReceived)));
-                    
+
                 foreach (MethodInfo OnSocialRankChangedMethod in from method in typeof(ProfileWingMenu).GetMethods()
-                                                   where method.Name.StartsWith("Method_Private_Void_Boolean_")
-                                                   select method)
+                                                                 where method.Name.StartsWith("Method_Private_Void_Boolean_")
+                                                                 select method)
                 {
                     new AstroPatch(OnSocialRankChangedMethod, null, GetPatch(nameof(Internal_OnShowSocialRankChanged)));
                 }
                 foreach (MethodInfo OnAvatarDownloadMethod in from mb in typeof(AvatarLoadingBar).GetMethods()
-                                                   where mb.Name.Contains("Method_Public_Void_Single_Int64_")
-                                                   select mb)
+                                                              where mb.Name.Contains("Method_Public_Void_Single_Int64_")
+                                                              select mb)
                 {
                     new AstroPatch(OnAvatarDownloadMethod, GetPatch(nameof(Internal_OnAvatarDownloadProgress)));
 
@@ -129,6 +113,24 @@ namespace AstroClient.Cheetos
                 Log.Debug($"{ConsoleUtils.ForegroundColor(Cheetah.Color.HTML.Yellow)}[Cheetos' Patches]{ConsoleUtils.ForegroundColor(Cheetah.Color.HTML.Green)} Patches applied!");
             }
         }
+
+        private static void OnPlayerAwake(VRCPlayer __instance)
+        {
+            __instance.Method_Public_add_Void_OnAvatarIsReady_0(new Action(()
+                => OnAvatarInstantiate(__instance.prop_VRCAvatarManager_0, __instance.field_Private_ApiAvatar_0, __instance.field_Internal_GameObject_0))
+            );
+        }
+
+
+        private static void OnAvatarInstantiate(VRCAvatarManager manager, ApiAvatar apiAvatar, GameObject avatar)
+        {
+            if (manager == null || apiAvatar == null || avatar == null)
+            {
+                return;
+            }
+            Event_OnAvatarInstantiated.SafetyRaiseWithParams(manager, apiAvatar, avatar);
+        }
+
 
         private static bool NameplatePatch(PlayerNameplate __instance) => false;
 
@@ -164,9 +166,6 @@ namespace AstroClient.Cheetos
 
         private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaiseWithParams(__0);
 
-        //private static void OnLobbyLeftPatch() => Log.Write("Lobby Left.");
-
-        //private static void OnLobbyJoinedPatch() => Log.Write("Lobby Joined.");
 
         private static void OnRoomLeftPatch() => Event_OnRoomLeft?.SafetyRaise();
 

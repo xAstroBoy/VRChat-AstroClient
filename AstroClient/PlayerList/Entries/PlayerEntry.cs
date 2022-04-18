@@ -1,6 +1,8 @@
 ﻿using AstroClient.AstroMonos;
 using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
+using VRC.Utility;
 
 namespace AstroClient.PlayerList.Entries
 {
@@ -77,20 +79,13 @@ namespace AstroClient.PlayerList.Entries
             new AstroPatch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
         }
 
+
         internal override void OnQuickMenuOpen()
         {
             foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
                 entry.playerEntry.GetPlayerColor(false);
             EntrySortManager.SortAllPlayers();
             EntryManager.RefreshPlayerEntries();
-
-        }
-
-        internal override void OnFriended(APIUser User)
-        {
-            foreach (PlayerEntry entry in EntryManager.playerEntries)
-                if (entry.userId == User.id)
-                    entry.isFriend = true;
 
         }
 
@@ -106,7 +101,7 @@ namespace AstroClient.PlayerList.Entries
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
             jeffString = "<color=#FFFF00>Unknown </color>";
             partyFouls = 1;
-            gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => apiUser.OpenUserInQuickMenu()));
+            gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => UiManager.OpenUserInQuickMenu(apiUser)));
 
             isFriend = APIUser.IsFriendsWith(apiUser.id);
             /*GetPlayerColor();
@@ -154,8 +149,7 @@ namespace AstroClient.PlayerList.Entries
                 EntrySortManager.SortPlayer(playerLeftPairEntry);
         }
 
-
-        internal void OnAvatarSpawnEvent(Player player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
+        public override void EntryBase_OnAvatarInstantiated(VRCAvatarManager manager, ApiAvatar avatar, GameObject gameObject)
         {
             //This will throw an exception if it's not initialized, so it's handled where called instead.
             //Vector3 bsize = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Public_Nullable_1_Bounds_0.GetValueOrDefault().m_Extents;
@@ -164,10 +158,10 @@ namespace AstroClient.PlayerList.Entries
             userId = apiUser.id;
             /*if (manager.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
             {
-                Log.Debug("PE: OnAvInst: Bailed due to userId mismatch");
+                MelonLogger.Msg("PE: OnAvInst: Bailed due to userId mismatch");
                 return;
             }*/
-
+                
             //manager
 
             perf = (AvatarPerformanceRating)player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Private_ArrayOf_EnumPublicSealedvaNoExGoMePoVe7v0_0[(int)AvatarPerformanceCategory.Overall];
@@ -197,7 +191,7 @@ namespace AstroClient.PlayerList.Entries
                 failReasons += "Me";
             }
             else failReasons += "  ";
-            if (matcount > PlayerListConfig.matLimit.Value)
+            if (matcount > PlayerListConfig.matLimit.Value) 
             {
                 partyFouls++;
                 failReasons += "Mt";
@@ -210,7 +204,7 @@ namespace AstroClient.PlayerList.Entries
             }
             else failReasons += "  ";
 
-            perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
+            perfString = "<color=#" +  PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
 
             //PyMsMtBd
             if (partyFouls == 0) jeffString = "<color=#00FF00>   OK   </color>";
@@ -223,17 +217,13 @@ namespace AstroClient.PlayerList.Entries
 
             if (player.prop_PlayerNet_0 != null)
                 UpdateEntry(player.prop_PlayerNet_0, this, true);
-
+            
             if (EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.AvatarPerf) || EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.Jeff))
                 EntrySortManager.SortPlayer(playerLeftPairEntry);
-        }
-        internal override void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
-        {
-            OnAvatarSpawnEvent(Player, Avatar, VRCAvatarManager, VRC_AvatarDescriptor);
-        }
 
+        }
         [HideFromIl2Cpp]
-        internal override void OnavatarDownloadProgress(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
+        public override void EntryBase_OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
             if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
                 return;
@@ -267,7 +257,7 @@ namespace AstroClient.PlayerList.Entries
         }
 
         // So apparently if you don't want to name an enum directly in a harmony patch you have to use int as the type... good to know
-        private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
+        internal override void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
         {
             try
             {   //Will occasionally error at EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id]
@@ -278,8 +268,6 @@ namespace AstroClient.PlayerList.Entries
         }
         public static void UpdateEntry(PlayerNet playerNet, PlayerEntry entry, bool bypassActive = false)
         {
-            if (playerNet == null) return;
-            if (entry == null) return;
             entry.timeSinceLastUpdate.Restart();
 
             // Update values but not text even if playerlist not active and before decode
@@ -297,9 +285,10 @@ namespace AstroClient.PlayerList.Entries
             {
                 updateDelegate?.Invoke(playerNet, entry, ref tempString);
             }
-            catch 
+            catch (Exception ex)
             {
-			} // Nobody cares LOL
+                MelonLogger.Error($"Errored while updating {entry.apiUser.displayName}'s entry:\n{ex}");
+            }
 
             entry.textComponent.text = entry.TrimExtra(tempString.ToString());
         }
@@ -384,6 +373,12 @@ namespace AstroClient.PlayerList.Entries
             tempString.Append("<color=" + entry.playerColor + ">" + entry.apiUser.displayName + "</color>" + separator);
         }
 
+        internal override void OnFriended(APIUser user)
+        {
+            foreach (PlayerEntry entry in EntryManager.playerEntries)
+                if (entry.userId == user.id)
+                    entry.isFriend = true;
+        }
         internal override void OnUnfriended(string userId)
         {
             foreach (PlayerEntry entry in EntryManager.playerEntries)
@@ -391,10 +386,9 @@ namespace AstroClient.PlayerList.Entries
                     entry.isFriend = false;
         }
 
-
-        internal override void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
+        internal override void OnOwnerShipTransferred(PhotonView __instance, int __0)
         {
-            if (instance.GetComponent<VRC_Pickup>() == null)
+            if (__instance.GetComponent<VRC_Pickup>() == null)
                 return;
 
             // Its really important that this actually fires so everything in try catch
@@ -406,12 +400,11 @@ namespace AstroClient.PlayerList.Entries
 
                 // something is up with the  photon player constructor that makes me have to not use trygetvalue
                 string oldOwner = null;
-                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(instance.field_Private_Int32_0))
-                    oldOwner = room.field_Private_Dictionary_2_Int32_Player_0[instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
+                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(__instance.field_Private_Int32_0))
+                    oldOwner = room.field_Private_Dictionary_2_Int32_Player_0[__instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
                 string newOwner = null;
-                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(PhotonID))
-                    newOwner = room.field_Private_Dictionary_2_Int32_Player_0[PhotonID].field_Public_Player_0?.prop_APIUser_0?.id;
-
+                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(__0))
+                    newOwner = room.field_Private_Dictionary_2_Int32_Player_0[__0].field_Public_Player_0?.prop_APIUser_0?.id;
 
                 int highestOwnedObjects = 0;
                 totalObjects = 0;
@@ -433,12 +426,11 @@ namespace AstroClient.PlayerList.Entries
                     totalObjects += entry.playerEntry.ownedObjects;
                 }
 
-                if (highestOwnedObjects > (int)(totalObjects * 0.75))
-                    highestOwnedObjectsLength = highestOwnedObjects.ToString().Length;
+                highestOwnedObjectsLength = highestOwnedObjects.ToString().Length;
             }
             catch (Exception ex)
             {
-                Log.Exception(ex);
+                MelonLogger.Error(ex.ToString());
             }
         }
 

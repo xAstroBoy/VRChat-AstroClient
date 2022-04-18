@@ -67,7 +67,7 @@ namespace AstroClient
             CheetosHooks.Event_OnSetupFlagsReceived += OnSetupFlagsReceived;
             CheetosHooks.Event_OnShowSocialRankChanged += OnShowSocialRankChanged;
             CheetosHooks.Event_OnAvatarDownloadProgress += OnavatarDownloadProgress;
-
+            CheetosHooks.Event_OnAvatarInstantiated += OnAvatarInstantiated;
             QuickMenuHooks.Event_OnPlayerSelected += OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet += OnTargetSet;
@@ -107,6 +107,11 @@ namespace AstroClient
             UnityMessagesHook.Event_OnUnityError += OnUnityError;
 
         }
+
+        internal virtual void OnAvatarInstantiated(VRCAvatarManager manager, ApiAvatar apiAvatar, GameObject avatar)
+        {
+        }
+
         internal virtual void OnShowSocialRankChanged()
         {
 
