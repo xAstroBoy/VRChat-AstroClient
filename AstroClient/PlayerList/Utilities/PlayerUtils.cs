@@ -1,4 +1,5 @@
-﻿using VRCUiAvatarStatsPanel = MonoBehaviourPublicStAvSt1AvTeSpBoSpCoUnique;
+﻿using AstroClient.Constants;
+using VRCUiAvatarStatsPanel = MonoBehaviourPublicStAvSt1AvTeSpBoSpCoUnique;
 
 namespace AstroClient.PlayerList.Utilities
 {
@@ -47,6 +48,10 @@ namespace AstroClient.PlayerList.Utilities
         }
         public static string ParsePerformanceText(AvatarPerformanceRating rating)
         {
+            if(!AstroClient.Config.ConfigManager.Performance.AllowPerformanceScanner)
+            {
+                return "SKIP";
+            }
             switch (rating)
             {
                 case AvatarPerformanceRating.VeryPoor:
@@ -67,6 +72,11 @@ namespace AstroClient.PlayerList.Utilities
         }
         public static string GetPerformanceColor(AvatarPerformanceRating rating)
         {
+            if (!AstroClient.Config.ConfigManager.Performance.AllowPerformanceScanner)
+            {
+                return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_0);
+            }
+
             switch (rating)
             {
                 case AvatarPerformanceRating.VeryPoor:

@@ -1,4 +1,5 @@
-﻿using AstroClient.xAstroBoy.Utility;
+﻿using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.PlayerList.Entries
 {
@@ -183,7 +184,15 @@ namespace AstroClient.PlayerList.Entries
         }
         private static void AddDisplayName(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
-            tempString.Append("<color=" + entry.playerColor + ">" + entry.apiUser.displayName + "</color>" + separator);
+            if(entry.apiUser.IsSelf)
+            {
+                if(PlayerSpooferUtils.IsSpooferActive)
+                {
+                    tempString.Append("<color=" + entry.playerColor + ">" + PlayerSpooferUtils.Original_DisplayName + "</color>" + separator);
+                    return;
+                }
+            }
+            tempString.Append("<color=" + entry.playerColor + ">" + entry.apiUser.GetDisplayName() + "</color>" + separator);
         }
 
 
