@@ -24,6 +24,8 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
 
         private static VRC_Trigger AuthorizedTrigger { get; set; }
+        private static VRC_Trigger UnauthorizedTrigger { get; set; }
+
         internal static bool RemoveBlocksForJoinedPlayers { get; set; } = false;
 
         private static void FindEverything()
@@ -37,10 +39,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-            var AuthorizedTriggerLoc = GameObjectFinder.FindRootSceneObject("tf you lookin at").FindObject("Electronics/HTC");
-            if(AuthorizedTriggerLoc != null)
+            var keypadtriggerloc = GameObjectFinder.FindRootSceneObject("tf you lookin at").FindObject("Electronics/HTC");
+            if(keypadtriggerloc != null)
             {
-                foreach(var triggers in AuthorizedTriggerLoc.Get_Triggers())
+                foreach(var triggers in keypadtriggerloc.Get_Triggers())
                 {
                     if(triggers.name.Contains("Authorized"))
                     {
@@ -50,8 +52,17 @@ namespace AstroClient.WorldModifications.WorldHacks
                         {
                             AuthorizedTrigger = IsSDK1;
                         }
-                        break;
                     }
+                    if (triggers.name.Contains("Unauthorized"))
+                    {
+
+                        var IsSDK1 = triggers.GetComponent<VRC_Trigger>();
+                        if (IsSDK1 != null)
+                        {
+                            AuthorizedTrigger = IsSDK1;
+                        }
+                    }
+
                 }
             }
 
@@ -64,6 +75,16 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+        internal static void RestoreKmartRestrictions()
+        {
+            if (UnauthorizedTrigger != null)
+            {
+                RemoveBlocksForJoinedPlayers = false;
+                WorldTriggerHook.SendTriggerToEveryone = true;
+                UnauthorizedTrigger.TriggerClick();
+                WorldTriggerHook.SendTriggerToEveryone = false;
+            }
+        }
 
 
         internal static void BypassKmartRestrictions()
@@ -90,6 +111,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 isCurrentWorld = false;
                 AuthorizedTrigger = null;
+                UnauthorizedTrigger = null;
+                RemoveBlocksForJoinedPlayers = false;
             }
         }
 
