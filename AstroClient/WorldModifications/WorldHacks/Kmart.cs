@@ -59,7 +59,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         var IsSDK1 = triggers.GetComponent<VRC_Trigger>();
                         if (IsSDK1 != null)
                         {
-                            AuthorizedTrigger = IsSDK1;
+                            UnauthorizedTrigger = IsSDK1;
                         }
                     }
 
