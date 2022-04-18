@@ -45,7 +45,7 @@ namespace AstroClient.Cheetos
         internal static event System.Action<APIUser> Event_OnFriended;
         internal static event System.Action<string> Event_OnUnfriended;
         internal static event System.Action<ApiWorld, ApiWorldInstance> Event_OnEnterWorld;
-        internal static event Action<VRCPlayer, Hashtable> Event_OnSetupFlagsReceived;
+        internal static event Action<VRCPlayer, Il2CppSystem.Collections.Hashtable> Event_OnSetupFlagsReceived;
         internal static event System.Action Event_OnShowSocialRankChanged;
         internal static event Action<AvatarLoadingBar, float, long> Event_OnAvatarDownloadProgress;
 
@@ -140,7 +140,7 @@ namespace AstroClient.Cheetos
             }
         }
 
-        private static void Internal_OnSetupFlagsReceived(VRCPlayer __instance, Hashtable __0)
+        private static void Internal_OnSetupFlagsReceived(VRCPlayer __instance, Il2CppSystem.Collections.Hashtable __0)
         {
             if (__0 == null)
             {

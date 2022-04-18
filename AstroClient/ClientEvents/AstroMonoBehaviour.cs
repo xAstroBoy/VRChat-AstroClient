@@ -126,6 +126,11 @@ namespace AstroClient
             CheetosHooks.Event_OnFriended -= OnFriended;
             CheetosHooks.Event_OnUnfriended -= OnUnfriended;
             CheetosHooks.Event_OnEnterWorld -= OnEnterWorld;
+            CheetosHooks.Event_OnSetupFlagsReceived -= OnSetupFlagsReceived;
+            CheetosHooks.Event_OnShowSocialRankChanged -= OnShowSocialRankChanged;
+            CheetosHooks.Event_OnAvatarDownloadProgress -= OnavatarDownloadProgress;
+
+
             QuickMenuHooks.Event_OnPlayerSelected -= OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet -= OnTargetSet;
@@ -164,10 +169,10 @@ namespace AstroClient
             UdonEventsHook.Event_Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
             UdonEventsHook.Event_Udon_OnInteract -= UdonBehaviour_Event_OnInteract;
             EventDispatcher_HandleUdonEvent.Event_Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
+
             UnityMessagesHook.Event_OnUnityLog -= OnUnityLog;
             UnityMessagesHook.Event_OnUnityWarning -= OnUnityWarning;
             UnityMessagesHook.Event_OnUnityError -= OnUnityError;
-
             //Log.Debug($"Deregistered a AstroMonoBehaviour from EventHandlers and Destroying it!");
         }
 
@@ -341,7 +346,7 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnSetupFlagsReceived(VRCPlayer player, System.Collections.Hashtable SetupFlagType)
+        internal virtual void OnSetupFlagsReceived(VRCPlayer player, Il2CppSystem.Collections.Hashtable SetupFlagType)
         {
 
         }

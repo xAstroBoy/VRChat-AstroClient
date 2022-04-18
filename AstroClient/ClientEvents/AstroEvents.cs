@@ -65,7 +65,9 @@ namespace AstroClient
             CheetosHooks.Event_OnUnfriended += OnUnfriended;
             CheetosHooks.Event_OnEnterWorld += OnEnterWorld;
             CheetosHooks.Event_OnSetupFlagsReceived += OnSetupFlagsReceived;
+            CheetosHooks.Event_OnShowSocialRankChanged += OnShowSocialRankChanged;
             CheetosHooks.Event_OnAvatarDownloadProgress += OnavatarDownloadProgress;
+
             QuickMenuHooks.Event_OnPlayerSelected += OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet += OnTargetSet;
@@ -103,6 +105,10 @@ namespace AstroClient
             UnityMessagesHook.Event_OnUnityLog += OnUnityLog;
             UnityMessagesHook.Event_OnUnityWarning += OnUnityWarning;
             UnityMessagesHook.Event_OnUnityError += OnUnityError;
+
+        }
+        internal virtual void OnShowSocialRankChanged()
+        {
 
         }
 
@@ -212,7 +218,7 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnSetupFlagsReceived(VRCPlayer player, System.Collections.Hashtable SetupFlagType)
+        internal virtual void OnSetupFlagsReceived(VRCPlayer player, Il2CppSystem.Collections.Hashtable SetupFlagType)
         {
 
         }
