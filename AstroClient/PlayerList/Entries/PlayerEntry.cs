@@ -142,7 +142,7 @@ namespace AstroClient.PlayerList.Entries
 
             EntryManager.RefreshPlayerEntries();
         }
-        public override void OnConfigChanged()
+        public override void EntryBase_OnConfigChanged()
         {
             GetPlayerColor(false);
             if (EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.Distance))

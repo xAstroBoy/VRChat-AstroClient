@@ -31,13 +31,13 @@ namespace AstroClient.PlayerList
         }
         public static RectTransform playerListRect{ get; set; }
 
-        public static GameObject menuButton
-        {
-            get
-            {
-                return PlayerList_Constants.menuButton;
-            }
-        }
+        //public static GameObject menuButton
+        //{
+        //    get
+        //    {
+        //        return PlayerList_Constants.menuButton;
+        //    }
+        //}
 
 
         private static PropertyInfo entryWrapperValue{ get; set; }
@@ -76,17 +76,18 @@ namespace AstroClient.PlayerList
             Log.Debug("Loading List UI...");
 
             _ = playerList;
-            _ = menuButton;
+            //_ = menuButton;
 
 
-            menuButton.SetLayerRecursive(12);
-            menuButton.transform.localPosition = Converters.ConvertToUnityUnits(new Vector3(4, -1));
-            menuButton.GetComponent<RectTransform>().pivot = new Vector2(0, 0);
-            menuButton.SetActive(!PlayerListConfig.useTabMenu.Value);
+            //menuButton.SetLayerRecursive(12);
+            //menuButton.transform.localPosition = Converters.ConvertToUnityUnits(new Vector3(4, -1));
+            //menuButton.GetComponent<RectTransform>().pivot = new Vector2(0, 0);
+            //menuButton.SetActive(!PlayerListConfig.useTabMenu.Value);
+            //UiTooltip tooltip = menuButton.AddComponent<UiTooltip>();
+            //tooltip.field_Public_String_0 = "Open PlayerList menu";
+            //tooltip.field_Public_String_1 = "Open PlayerList menu";
+            // menuButton.SetActive(true);
 
-            UiTooltip tooltip = menuButton.AddComponent<UiTooltip>();
-            tooltip.field_Public_String_0 = "Open PlayerList menu";
-            tooltip.field_Public_String_1 = "Open PlayerList menu";
 
             playerList.SetLayerRecursive(12);
             playerList.AddComponent<VRC_UiShape>();
@@ -95,10 +96,8 @@ namespace AstroClient.PlayerList
             playerListRect.anchoredPosition = PlayerListConfig.playerListPosition.Value;
             playerListRect.localPosition = playerListRect.localPosition.SetZ(25); // Do this or else it looks off for whatever reason
 
-            //shouldStayHidden = !PlayerListConfig.enabledOnStart.Value;
 
             playerList.SetActive(true);
-            menuButton.SetActive(true);
         }
 
 
@@ -112,14 +111,6 @@ namespace AstroClient.PlayerList
                 {
                     curMenuState.dashboard = Toggle;
                 }
-                //else if (Page == tabButton.SubMenu.uiPage)
-                //{
-                //    curMenuState.plsettings = Toggle;
-                //}
-                //else if (Page == sortMenu.uiPage)
-                //{
-                //    curMenuState.sort = Toggle;
-                //}
                 else if (Page == PlayerList_Constants.selectedUserLocal)
                 {
                     curMenuState.userLocal = Toggle;

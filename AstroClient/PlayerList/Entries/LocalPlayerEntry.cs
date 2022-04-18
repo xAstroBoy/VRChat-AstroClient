@@ -44,7 +44,7 @@ namespace AstroClient.PlayerList.Entries
 
 
             GetPlayerColor();
-            OnConfigChanged();
+            EntryBase_OnConfigChanged();
         }
 
         internal override void OnPlayerJoined(Player player)
@@ -58,7 +58,7 @@ namespace AstroClient.PlayerList.Entries
 
         }
 
-        public override void OnConfigChanged()
+        public override void EntryBase_OnConfigChanged()
         {
             updateDelegate = null;
             if (PlayerListConfig.pingToggle.Value)

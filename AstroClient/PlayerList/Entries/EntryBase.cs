@@ -76,18 +76,22 @@
         protected virtual void ProcessText(object[] parameters = null)
         {
         }
+        [HideFromIl2Cpp]
 
-        public virtual void OnSceneWasLoaded()
+        public virtual void EntryBase_OnSceneWasLoaded()
         {
         }
+        [HideFromIl2Cpp]
 
-        public virtual void OnInstanceChange(ApiWorld world, ApiWorldInstance instance)
+        public virtual void EntryBase_OnInstanceChange(ApiWorld world, ApiWorldInstance instance)
         {
         }
+        [HideFromIl2Cpp]
 
-        public virtual void OnConfigChanged()
+        public virtual void EntryBase_OnConfigChanged()
         {
         }
+        [HideFromIl2Cpp]
 
         public virtual void EntryBase_OnAvatarInstantiated(VRCAvatarManager vrcPlayer, ApiAvatar avatar, GameObject gameObject)
         {

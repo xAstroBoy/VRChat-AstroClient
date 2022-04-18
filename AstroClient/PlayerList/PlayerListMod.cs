@@ -12,8 +12,6 @@
     {
         internal static PlayerListMod Instance { get; private set; }
 
-        internal static bool HasUIX => MelonHandler.Mods.Any(x => x.Info.Name.Equals("UI Expansion Kit"));
-
         internal override void OnApplicationStart()
         {
             Instance = this;
@@ -31,7 +29,8 @@
         {
 
 
-
+            // This is kinda a mess but whatever
+            EntryManager.AddGeneralInfoEntries();
 
             PlayerListConfig.OnConfigChange(false);
             Log.Debug("PlayerList UI Initialized!");

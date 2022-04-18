@@ -127,29 +127,30 @@ namespace AstroClient.PlayerList
         {
             RefreshAllEntries();
         }
-        public static void OnSceneWasLoaded()
+
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             for (int i = playerEntries.Count - 1; i >= 0; i--)
                 playerEntries[i].playerLeftPairEntry.Remove();
-            localPlayerEntry?.OnSceneWasLoaded();
+            localPlayerEntry?.EntryBase_OnSceneWasLoaded();
         }
 
         internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             foreach (EntryBase entry in entries)
-                entry.OnInstanceChange(world, instance);
+                entry.EntryBase_OnInstanceChange(world, instance);
             RefreshLeftPlayerEntries(0, 0, true);
         }
         public static void OnConfigChanged()
         {
             foreach (EntryBase entry in entries)
-                entry.OnConfigChanged();
+                entry.EntryBase_OnConfigChanged();
         }
 
 
         internal override void OnAvatarInstantiated(VRCAvatarManager player, ApiAvatar avatar, GameObject gameObject)
         {
-            //MelonLogger.Msg("EM: OnAvInst");
+            //Log.WriteMsg("EM: OnAvInst");
             /*foreach (EntryBase entry in playerEntries)
                 entry.OnAvatarInstantiated(player, avatar, gameObject);
             localPlayerEntry?.OnAvatarInstantiated(player, avatar, gameObject);*/
@@ -159,7 +160,7 @@ namespace AstroClient.PlayerList
             string playerid = player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id;
             if (!idToEntryTable.TryGetValue(player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id, out PlayerLeftPairEntry entry))
             {
-                //MelonLogger.Msg("EM: Key not found in dict: " + player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.displayName);
+                //Log.WriteMsg("EM: Key not found in dict: " + player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.displayName);
                 if (!AvInstBacklog.ContainsKey(playerid))
                     AvInstBacklog.Add(playerid,  new deferredAvInstantiate(player, avatar, gameObject));
                 return;
@@ -204,7 +205,7 @@ namespace AstroClient.PlayerList
                         }
                         catch
                         {
-                            //MelonLogger.Msg("OAI Failed!");
+                            //Log.WriteMsg("OAI Failed!");
                             AvInstBacklog[key].numAttempts++;
                         }
                     }
@@ -247,7 +248,7 @@ namespace AstroClient.PlayerList
             }
             if (player.prop_APIUser_0.IsSelf)
                 return;
-            //MelonLogger.Msg("OPL: Removing " + player.field_Private_APIUser_0.displayName);
+            //Log.WriteMsg("OPL: Removing " + player.field_Private_APIUser_0.displayName);
             if (!idToEntryTable.TryGetValue(player.prop_APIUser_0.id, out PlayerLeftPairEntry entry))
                 return;
 
@@ -258,7 +259,7 @@ namespace AstroClient.PlayerList
 
         public static void AddGeneralInfoEntries()
         {
-           Log.Write("Adding List Entries...");
+            Log.Write("Adding List Entries...");
             AddGeneralInfoEntry(EntryBase.CreateInstance<PlayerListHeaderEntry>(PlayerList_Constants.playerListLayout.transform.Find("Header").gameObject, includeConfig: true));
             AddGeneralInfoEntry(EntryBase.CreateInstance<RoomTimeEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("RoomTime").gameObject, includeConfig: true));
             AddGeneralInfoEntry(EntryBase.CreateInstance<SystemTime12HrEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("SystemTime12Hr").gameObject, includeConfig: true));

@@ -16,9 +16,9 @@
         [HideFromIl2Cpp]
         public override void Init(object[] parameters = null)
         {
-            OnConfigChanged();
+            EntryBase_OnConfigChanged();
         }
-        public override void OnConfigChanged()
+        public override void EntryBase_OnConfigChanged()
         {
             if (!PlayerListConfig.numberedList.Value)
                 if (!PlayerListConfig.condensedText.Value)
