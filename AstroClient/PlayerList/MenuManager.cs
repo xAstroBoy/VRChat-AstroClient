@@ -1,4 +1,7 @@
-﻿namespace AstroClient.PlayerList
+﻿using AstroClient.Tools;
+using AstroClient.Tools.Extensions;
+
+namespace AstroClient.PlayerList
 {
     using System;
     using System.Collections.Generic;

@@ -372,7 +372,7 @@
 
         internal static void FindAndLoadSkyboxes()
         {
-            MelonCoroutines.Start(LoadBundleSkyboxes());
+            //MelonCoroutines.Start(LoadBundleSkyboxes());
             MelonCoroutines.Start(LoadPNGsSkyboxes());
             Log.Write("Done checking for skyboxes.");
         }

@@ -73,10 +73,6 @@ namespace AstroClient.PlayerList.Entries
         {
 
             PlayerListConfig.OnConfigChanged += OnStaticConfigChanged;
-            NetworkEvents.OnFriended += OnFriended;
-            NetworkEvents.OnUnfriended += OnUnfriended;
-            NetworkEvents.OnSetupFlagsReceived += OnSetupFlagsReceived;
-            VRCUtils.OnEmmWorldCheckCompleted += (allowed) => OnStaticConfigChanged();
 
             new AstroPatch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
         }
@@ -90,10 +86,10 @@ namespace AstroClient.PlayerList.Entries
 
         }
 
-        internal override void OnFriended()
+        internal override void OnFriended(APIUser User)
         {
             foreach (PlayerEntry entry in EntryManager.playerEntries)
-                if (entry.userId == user.id)
+                if (entry.userId == User.id)
                     entry.isFriend = true;
 
         }
@@ -159,8 +155,7 @@ namespace AstroClient.PlayerList.Entries
         }
 
 
-        internal override void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager,
-            VRC_AvatarDescriptor VRC_AvatarDescriptor)
+        internal void OnAvatarSpawnEvent(Player player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
             //This will throw an exception if it's not initialized, so it's handled where called instead.
             //Vector3 bsize = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Public_Nullable_1_Bounds_0.GetValueOrDefault().m_Extents;
@@ -172,7 +167,7 @@ namespace AstroClient.PlayerList.Entries
                 Log.Debug("PE: OnAvInst: Bailed due to userId mismatch");
                 return;
             }*/
-                
+
             //manager
 
             perf = (AvatarPerformanceRating)player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Private_ArrayOf_EnumPublicSealedvaNoExGoMePoVe7v0_0[(int)AvatarPerformanceCategory.Overall];
@@ -202,7 +197,7 @@ namespace AstroClient.PlayerList.Entries
                 failReasons += "Me";
             }
             else failReasons += "  ";
-            if (matcount > PlayerListConfig.matLimit.Value) 
+            if (matcount > PlayerListConfig.matLimit.Value)
             {
                 partyFouls++;
                 failReasons += "Mt";
@@ -215,7 +210,7 @@ namespace AstroClient.PlayerList.Entries
             }
             else failReasons += "  ";
 
-            perfString = "<color=#" +  PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
+            perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
 
             //PyMsMtBd
             if (partyFouls == 0) jeffString = "<color=#00FF00>   OK   </color>";
@@ -228,13 +223,17 @@ namespace AstroClient.PlayerList.Entries
 
             if (player.prop_PlayerNet_0 != null)
                 UpdateEntry(player.prop_PlayerNet_0, this, true);
-            
+
             if (EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.AvatarPerf) || EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.Jeff))
                 EntrySortManager.SortPlayer(playerLeftPairEntry);
-
         }
+        internal override void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
+        {
+            OnAvatarSpawnEvent(Player, Avatar, VRCAvatarManager, VRC_AvatarDescriptor);
+        }
+
         [HideFromIl2Cpp]
-        public override void OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
+        internal override void OnavatarDownloadProgress(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
             if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
                 return;
@@ -385,14 +384,7 @@ namespace AstroClient.PlayerList.Entries
             tempString.Append("<color=" + entry.playerColor + ">" + entry.apiUser.displayName + "</color>" + separator);
         }
 
-        private static void OnFriended(APIUser user)
-        {
-            foreach (PlayerEntry entry in EntryManager.playerEntries)
-                if (entry.userId == user.id)
-                    entry.isFriend = true;
-
-        }
-        private static void OnUnfriended(string userId)
+        internal override void OnUnfriended(string userId)
         {
             foreach (PlayerEntry entry in EntryManager.playerEntries)
                 if (entry.userId == userId)

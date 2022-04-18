@@ -1,4 +1,7 @@
-﻿namespace AstroClient.Cheetos
+﻿using AstroClient.Unreal;
+using VRC.UI.Elements;
+
+namespace AstroClient.Cheetos
 {
     #region Imports
 
@@ -39,9 +42,13 @@
         internal static event System.Action<Player> Event_OnMasterClientSwitched;
         internal static event System.Action Event_OnRoomLeft;
         internal static event System.Action Event_OnRoomJoined;
-        internal static event System.Action Event_OnFriended;
-        internal static event System.Action Event_OnUnfriended;
+        internal static event System.Action<APIUser> Event_OnFriended;
+        internal static event System.Action<string> Event_OnUnfriended;
         internal static event System.Action<ApiWorld, ApiWorldInstance> Event_OnEnterWorld;
+        internal static event Action<VRCPlayer, Hashtable> Event_OnSetupFlagsReceived;
+        internal static event System.Action Event_OnShowSocialRankChanged;
+        internal static event Action<AvatarLoadingBar, float, long> Event_OnAvatarDownloadProgress;
+
 
         [ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -95,6 +102,23 @@
                 typeof(RoomManager).GetMethods(BindingFlags.Public | BindingFlags.Static)
                     .Where(m => m.Name.StartsWith("Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_"))
                     .ToList().ForEach(m => new AstroPatch(m, GetPatch(nameof(OnEnterWorldEvent))));
+                MethodInfo SetupFlagsMethod = typeof(VRCPlayer).GetMethods().First((MethodInfo mi) => mi.Name.StartsWith("Method_Public_Void_Hashtable_Boolean_"));
+                new AstroPatch(SetupFlagsMethod, null, GetPatch(nameof(Internal_OnSetupFlagsReceived)));
+                    
+                foreach (MethodInfo OnSocialRankChangedMethod in from method in typeof(ProfileWingMenu).GetMethods()
+                                                   where method.Name.StartsWith("Method_Private_Void_Boolean_")
+                                                   select method)
+                {
+                    new AstroPatch(OnSocialRankChangedMethod, null, GetPatch(nameof(Internal_OnShowSocialRankChanged)));
+                }
+                foreach (MethodInfo OnAvatarDownloadMethod in from mb in typeof(AvatarLoadingBar).GetMethods()
+                                                   where mb.Name.Contains("Method_Public_Void_Single_Int64_")
+                                                   select mb)
+                {
+                    new AstroPatch(OnAvatarDownloadMethod, GetPatch(nameof(Internal_OnAvatarDownloadProgress)));
+
+                }
+
             }
             catch (Exception e)
             {
@@ -115,13 +139,30 @@
                 __0 = false;
             }
         }
+
+        private static void Internal_OnSetupFlagsReceived(VRCPlayer __instance, Hashtable __0)
+        {
+            if (__0 == null)
+            {
+                return;
+            }
+            Event_OnSetupFlagsReceived.SafetyRaiseWithParams(__instance, __0);
+
+        }
+
+
+        private static void Internal_OnShowSocialRankChanged()
+        {
+            Event_OnShowSocialRankChanged.SafetyRaise();
+        }
+
         private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaiseWithParams(__0, __1);
 
         private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaiseWithParams(__0);
 
-        private static void OnFriended(ref APIUser __0) => Event_OnFriended?.SafetyRaise();
+        private static void OnFriended(ref APIUser __0) => Event_OnFriended?.SafetyRaiseWithParams(__0);
 
-        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaise();
+        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaiseWithParams(__0);
 
         //private static void OnLobbyLeftPatch() => Log.Write("Lobby Left.");
 
@@ -243,6 +284,11 @@
             catch
             {
             }
+        }
+
+        private static void Internal_OnAvatarDownloadProgress(AvatarLoadingBar __instance, float __0, long __1)
+        {
+            Event_OnAvatarDownloadProgress.SafetyRaiseWithParams(__instance, __0, __1);
         }
 
         //private static bool OnAvatarDownload(ref ApiAvatar __0)

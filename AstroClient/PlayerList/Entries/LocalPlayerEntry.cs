@@ -12,8 +12,6 @@ namespace AstroClient.PlayerList.Entries
     using VRC;
     using VRC.Core;
     using VRC.DataModel;
-    using VRChatUtilityKit.Ui;
-    using VRChatUtilityKit.Utilities;
     using VRCSDK2.Validation.Performance;
 
     [RegisterComponent]
@@ -27,10 +25,7 @@ namespace AstroClient.PlayerList.Entries
 
         public new delegate void UpdateEntryDelegate(Player player, LocalPlayerEntry entry, ref StringBuilder tempString);
         public static new UpdateEntryDelegate updateDelegate;
-        public static new void EntryInit()
-        {
-            NetworkEvents.OnShowSocialRankChanged += OnShowSocialRankChange;
-        }
+
         [HideFromIl2Cpp]
         public override void Init(object[] parameters)
         {
@@ -82,10 +77,7 @@ namespace AstroClient.PlayerList.Entries
                 updateDelegate += AddPhotonId;
             if (PlayerListConfig.ownedObjectsToggle.Value)
             {
-                if (VRCUtils.AreRiskyFunctionsAllowed)
-                    updateDelegate += AddOwnedObjects;
-                else
-                    updateDelegate += AddOwnedObjectsSafe;
+                updateDelegate += AddOwnedObjects;
             }
             if (PlayerListConfig.displayNameToggle.Value)
             {
@@ -134,7 +126,6 @@ namespace AstroClient.PlayerList.Entries
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             ownedObjects = 0;
-
         }
 
 
@@ -195,10 +186,12 @@ namespace AstroClient.PlayerList.Entries
             tempString.Append("<color=" + entry.playerColor + ">" + entry.apiUser.displayName + "</color>" + separator);
         }
 
-        private static void OnShowSocialRankChange()
+
+        internal override void OnShowSocialRankChanged()
         {
             EntryManager.localPlayerEntry.GetPlayerColor();
         }
+
         private void GetPlayerColor()
         {
             playerColor = "";

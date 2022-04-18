@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.ESP.Player
+﻿using VRC.Core;
+
+namespace AstroClient.AstroMonos.Components.ESP.Player
 {
     using System;
     using System.Collections.Generic;
@@ -95,19 +97,19 @@
             }
         }
 
-        internal override void OnFriended()
+        internal override void OnFriended(APIUser User)
         {
             if (!CanActuallyEditOnEvent) return;
-            if (AssignedPlayer.GetAPIUser().IsFriend())
+            if (AssignedPlayer.GetAPIUser().Equals(User))
             {
                 CurrentColor = FriendColor;
             }
         }
 
-        internal override void OnUnfriended()
+        internal override void OnUnfriended(string UserID)
         {
             if (!CanActuallyEditOnEvent) return;
-            if (!AssignedPlayer.GetAPIUser().IsFriend())
+            if (AssignedPlayer.GetAPIUser().id.Equals(UserID))
             {
                 CurrentColor = PublicColor;
             }

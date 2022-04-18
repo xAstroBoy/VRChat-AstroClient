@@ -77,14 +77,7 @@
         {
         }
 
-
-
         public virtual void OnConfigChanged()
-        {
-        }
-
-        [HideFromIl2Cpp]
-        public virtual void OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
         }
 
@@ -94,6 +87,8 @@
             if (!WasCollected)
                 DestroyImmediate(gameObject);
         }
+
+
 
         public static T CreateInstance<T>(GameObject gameObject, object[] parameters = null, bool includeConfig = false)
             where T : EntryBase

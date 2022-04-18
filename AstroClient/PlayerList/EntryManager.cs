@@ -12,7 +12,6 @@
     using VRC;
     using VRC.Core;
     using VRC.DataModel;
-    using VRChatUtilityKit.Utilities;
     using Object = UnityEngine.Object;
 
     internal class EntryManager : AstroEvents
@@ -48,9 +47,6 @@
         {
             PlayerListConfig.fontSize.OnValueChanged += (oldValue, newValue) => SetFontSize(newValue);
             PlayerListConfig.OnConfigChanged += OnConfigChanged;
-            NetworkEvents.OnAvatarInstantiated += OnAvatarInstantiated;
-            NetworkEvents.OnAvatarDownloadProgressed += OnAvatarDownloadProgressed;
-
             MelonCoroutines.Start(EntryRefreshEnumerator());
         }
         private static IEnumerator EntryRefreshEnumerator()
@@ -115,43 +111,18 @@
                 entries[i].OnConfigChanged();
             }
         }
-        public static void OnAvatarInstantiated(VRCAvatarManager player, ApiAvatar avatar, GameObject gameObject)
+        public static void CleanUpHungAOI()
         {
-            //Log.Debug("EM: OnAvInst");
-            /*foreach (EntryBase entry in playerEntries)
-                entry.OnAvatarInstantiated(player, avatar, gameObject);
-            localPlayerEntry?.OnAvatarInstantiated(player, avatar, gameObject);*/
+            foreach (PlayerEntry entry in playerEntries)
+            {
+                if ((entry.perf == AvatarPerformanceRating.None) && ((entry.perfString == "100% ") || (entry.perfString == "?¿?¿?")))
+                {
+                    AvInstBacklog.Add(entry.userId, new deferredAvInstantiate(null, null, null));
+                }
 
-            //There's a race condition, sometimes an avatar instantiated event will happen before a player join event.
-            //If the player hasn't been added to the idToEntryTable yet, we'll add the information to a backlog to call when the player has been added.
-            string playerid = player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id;
-            if (!idToEntryTable.TryGetValue(player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id, out PlayerLeftPairEntry entry))
-            {
-                //Log.Debug("EM: Key not found in dict: " + player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.displayName);
-                if (!AvInstBacklog.ContainsKey(playerid))
-                    AvInstBacklog.Add(playerid,  new deferredAvInstantiate(player, avatar, gameObject));
-                return;
             }
-            try
-            {
-                entry.playerEntry.OnAvatarInstantiated(player, avatar, gameObject);
-            }
-            catch
-            {
-                if (!AvInstBacklog.ContainsKey(playerid))
-                    AvInstBacklog.Add(playerid, new deferredAvInstantiate(player, avatar, gameObject));
-                return;
-            }
-            ProcessAvatarInstantiateBacklog();
         }
-        public static void OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercent, long fileSize)
-        {
-            for (int i = 0; i < playerEntries.Count; i++)
-            {
-                playerEntries[i].OnAvatarDownloadProgressed(loadingBar, downloadPercent, fileSize);
-            }
-            localPlayerEntry?.OnAvatarDownloadProgressed(loadingBar, downloadPercent, fileSize);
-        }
+
 
         internal override void OnPlayerJoined(Player player)
         {
@@ -185,58 +156,8 @@
             //ProcessAvatarInstantiateBacklog();
         }
 
-        public static void ProcessAvatarInstantiateBacklog()
-        {
-            if (AvInstBacklog.Count != 0)
-            {
-                Log.Debug("Addressing Backlog. Size: " + AvInstBacklog.Count.ToString());
-                var keys = new string[AvInstBacklog.Count];
-                AvInstBacklog.Keys.CopyTo(keys, 0);
-                for (int i = 0; i < keys.Length; i++)
-                {
-                    string key = keys[i];
-                    if (idToEntryTable.TryGetValue(key, out PlayerLeftPairEntry e))
-                    {
-                        try
-                        {
-                            e.playerEntry.OnAvatarInstantiated(AvInstBacklog[key].player, AvInstBacklog[key].avatar, AvInstBacklog[key].gameObject);
-                            AvInstBacklog.Remove(key);
-                        }
-                        catch
-                        {
-                            //Log.Debug("OAI Failed!");
-                            AvInstBacklog[key].numAttempts++;
-                        }
-                    }
-                    else
-                    {
-                        AvInstBacklog[key].numAttempts++;
 
-                        if (AvInstBacklog[key].numAttempts > 2)
-                        {
-                            Log.Debug("Max attempts exceeded for backlog entry");
-                            AvInstBacklog.Remove(key);
-                        }
-                    }
-                }
-                //AvInstBacklog.Clear();
-            }
-        }
 
-        public static void CleanUpHungAOI()
-        {
-            for (int i = 0; i < playerEntries.Count; i++)
-            {
-                PlayerEntry entry = playerEntries[i];
-                if ((entry.perf == AvatarPerformanceRating.None) && ((entry.perfString == "100% ") || (entry.perfString == "?¿?¿?")))
-                {
-                    AvInstBacklog.Add(entry.userId, new deferredAvInstantiate(null, null, null));
-                }
-                
-            }
-            ProcessAvatarInstantiateBacklog();
-
-        }
 
         internal override void OnPlayerLeft(Player player)
         {
@@ -360,7 +281,7 @@
 
         public static void SetFontSize(int fontSize)
         {
-            MenuManager.fontSizeLabel.TextComponent.text = $"{fontSize}";
+           // MenuManager.fontSizeLabel.TextComponent.text = $"{fontSize}";
             for (int i = 0; i < entries.Count; i++)
             {
                 EntryBase entry = entries[i];

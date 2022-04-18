@@ -45,13 +45,18 @@ namespace AstroClient
 
             CheetosHooks.Event_OnMasterClientSwitched += OnMasterClientSwitched;
             CheetosHooks.Event_OnShowScreen += OnShowScreen;
-            CheetosHooks.Event_OnPhotonPlayerJoined += OnPhotonJoin;
-            CheetosHooks.Event_OnPhotonPlayerLeft += OnPhotonLeft;
+            CheetosHooks.Event_OnPhotonPlayerJoined += OnPhotonPlayerJoined;
+            CheetosHooks.Event_OnPhotonPlayerLeft += OnPhotonPlayerLeft;
             CheetosHooks.Event_OnRoomLeft += OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined += OnRoomJoined;
             CheetosHooks.Event_OnFriended += OnFriended;
             CheetosHooks.Event_OnUnfriended += OnUnfriended;
             CheetosHooks.Event_OnEnterWorld += OnEnterWorld;
+            CheetosHooks.Event_OnSetupFlagsReceived += OnSetupFlagsReceived;
+            CheetosHooks.Event_OnShowSocialRankChanged += OnShowSocialRankChanged;
+            CheetosHooks.Event_OnAvatarDownloadProgress += OnavatarDownloadProgress;
+
+
             QuickMenuHooks.Event_OnPlayerSelected += OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet += OnTargetSet;
@@ -114,8 +119,8 @@ namespace AstroClient
 
             CheetosHooks.Event_OnMasterClientSwitched -= OnMasterClientSwitched;
             CheetosHooks.Event_OnShowScreen -= OnShowScreen;
-            CheetosHooks.Event_OnPhotonPlayerJoined -= OnPhotonJoin;
-            CheetosHooks.Event_OnPhotonPlayerLeft -= OnPhotonLeft;
+            CheetosHooks.Event_OnPhotonPlayerJoined -= OnPhotonPlayerJoined;
+            CheetosHooks.Event_OnPhotonPlayerLeft -= OnPhotonPlayerLeft;
             CheetosHooks.Event_OnRoomLeft -= OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined -= OnRoomJoined;
             CheetosHooks.Event_OnFriended -= OnFriended;
@@ -166,6 +171,15 @@ namespace AstroClient
             //Log.Debug($"Deregistered a AstroMonoBehaviour from EventHandlers and Destroying it!");
         }
 
+        internal virtual void OnavatarDownloadProgress(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
+        {
+
+        }
+
+        internal virtual void OnShowSocialRankChanged()
+        {
+
+        }
 
         internal virtual void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
         {
@@ -202,11 +216,11 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnFriended()
+        internal virtual void OnFriended(APIUser user)
         {
         }
 
-        internal virtual void OnUnfriended()
+        internal virtual void OnUnfriended(string UserID)
         {
         }
 
@@ -218,11 +232,11 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnPhotonLeft(Player player)
+        internal virtual void OnPhotonPlayerLeft(Player player)
         {
         }
 
-        internal virtual void OnPhotonJoin(Player player)
+        internal virtual void OnPhotonPlayerJoined(Player player)
         {
         }
 
@@ -325,6 +339,11 @@ namespace AstroClient
 
         internal virtual void OnShowScreen(VRCUiPage page)
         {
+        }
+
+        internal virtual void OnSetupFlagsReceived(VRCPlayer player, System.Collections.Hashtable SetupFlagType)
+        {
+
         }
         internal virtual void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {

@@ -175,6 +175,7 @@
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\Hooks\UnityMessagesHook.cs" />
     <Compile Include="Startup\UnityLogger.cs" />
+    <Compile Include="Tools\Converters.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />

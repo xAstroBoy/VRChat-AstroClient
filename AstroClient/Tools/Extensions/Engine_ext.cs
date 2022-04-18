@@ -1,5 +1,7 @@
-﻿using AstroClient.PlayerList;
+﻿using System;
+using AstroClient.PlayerList;
 using AstroClient.xAstroBoy.Extensions;
+using UnhollowerBaseLib;
 using VRC.Udon;
 
 namespace AstroClient.Tools.Extensions
@@ -40,13 +42,43 @@ namespace AstroClient.Tools.Extensions
         {
             if (obj != null)
             {
-                string path = GameObjectFinder.GetGameObjectPath(obj);
+                string path = GetPath(obj);
                 if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
                 {
                     Log.Write($"{obj.name} Path is : {path}");
                 }
             }
         }
+        public static string GetPath(this GameObject gameObject)
+        {
+            string path = "/" + gameObject.name;
+            while (gameObject.transform.parent != null)
+            {
+                gameObject = gameObject.transform.parent.gameObject;
+                path = "/" + gameObject.name + path;
+            }
+            return path;
+        }
+
+        public static void SetLayerRecursive(this GameObject gameObject, int layer)
+        {
+            gameObject.layer = layer;
+            foreach (Il2CppObjectBase il2CppObjectBase in gameObject.transform)
+                il2CppObjectBase.Cast<Transform>().gameObject.SetLayerRecursive(layer);
+        }
+
+        public static Vector3 SetZ(this Vector3 vector, float newZ)
+        {
+            vector.Set(vector.x, vector.y, newZ);
+            return vector;
+        }
+
+        public static float RoundAmount(this float i, float nearestFactor) => (float)Math.Round((double)i / (double)nearestFactor) * nearestFactor;
+
+        public static Vector3 RoundAmount(this Vector3 i, float nearestFactor) => new Vector3(i.x.RoundAmount(nearestFactor), i.y.RoundAmount(nearestFactor), i.z.RoundAmount(nearestFactor));
+
+        public static Vector2 RoundAmount(this Vector2 i, float nearestFactor) => new Vector2(i.x.RoundAmount(nearestFactor), i.y.RoundAmount(nearestFactor));
+
 
         internal static void FlipTransformRotation(this  Transform transform)
         {
@@ -54,15 +86,6 @@ namespace AstroClient.Tools.Extensions
             rot = new Vector3(rot.x, rot.y + 180, rot.z);
             transform.rotation = Quaternion.Euler(rot);
 
-        }
-        internal static string GetPath(this GameObject obj)
-        {
-            if (obj != null)
-            {
-                string path = GameObjectFinder.GetGameObjectPath(obj);
-                return !string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path) ? $"{obj.name} Path is : {path}" : "No Path Found";
-            }
-            return "Object is Null";
         }
 
         internal static UnityEngine.Color Get_Transform_Active_ToColor(this Transform obj)

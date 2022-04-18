@@ -9,6 +9,7 @@ using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Patches;
 using AstroClient.Target;
 using AstroClient.xAstroBoy;
+using Il2CppSystem.Collections;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -63,6 +64,8 @@ namespace AstroClient
             CheetosHooks.Event_OnFriended += OnFriended;
             CheetosHooks.Event_OnUnfriended += OnUnfriended;
             CheetosHooks.Event_OnEnterWorld += OnEnterWorld;
+            CheetosHooks.Event_OnSetupFlagsReceived += OnSetupFlagsReceived;
+            CheetosHooks.Event_OnAvatarDownloadProgress += OnavatarDownloadProgress;
             QuickMenuHooks.Event_OnPlayerSelected += OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet += OnTargetSet;
@@ -100,6 +103,11 @@ namespace AstroClient
             UnityMessagesHook.Event_OnUnityLog += OnUnityLog;
             UnityMessagesHook.Event_OnUnityWarning += OnUnityWarning;
             UnityMessagesHook.Event_OnUnityError += OnUnityError;
+
+        }
+
+        internal virtual void OnavatarDownloadProgress(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
+        {
 
         }
 
@@ -196,12 +204,17 @@ namespace AstroClient
         {
         }
 
-        internal virtual void OnFriended()
+        internal virtual void OnFriended(APIUser User)
         {
         }
 
-        internal virtual void OnUnfriended()
+        internal virtual void OnUnfriended(string UserID)
         {
+        }
+
+        internal virtual void OnSetupFlagsReceived(VRCPlayer player, System.Collections.Hashtable SetupFlagType)
+        {
+
         }
         internal virtual void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {

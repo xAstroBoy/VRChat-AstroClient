@@ -103,7 +103,7 @@
                     }
                 });
             }
-            catch (Exception e)
+            catch 
             {
                 //Log.Error($"Error at debug {debug}");
                 //Log.Exception(e);

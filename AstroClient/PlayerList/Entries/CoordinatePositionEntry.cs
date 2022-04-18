@@ -1,4 +1,6 @@
-﻿namespace AstroClient.PlayerList.Entries
+﻿using AstroClient.Tools.Extensions;
+
+namespace AstroClient.PlayerList.Entries
 {
     using System;
     using ClientAttributes;
