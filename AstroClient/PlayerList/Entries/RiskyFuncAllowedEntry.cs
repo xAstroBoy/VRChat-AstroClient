@@ -1,9 +1,10 @@
-﻿namespace AstroClient.PlayerList.Entries
+﻿using System.Collections.Generic;
+
+namespace AstroClient.PlayerList.Entries
 {
     using System;
     using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
-    using VRChatUtilityKit.Utilities;
 
     [RegisterComponent]
     public class RiskyFuncAllowedEntry : EntryBase
@@ -13,11 +14,11 @@
         [HideFromIl2Cpp]
         public override string Name => "Risky Functions Allowed";
 
-        [HideFromIl2Cpp]
-        public override void Init(object[] parameters = null)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            VRCUtils.OnEmmWorldCheckCompleted += OnEmmWorldCheckCompleted;
+            OnEmmWorldCheckCompleted(true);
         }
+
 
         [HideFromIl2Cpp]
         public void OnEmmWorldCheckCompleted(bool areRiskyFuncsAllowed)

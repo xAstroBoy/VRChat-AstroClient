@@ -92,7 +92,10 @@ namespace AstroClient.PlayerList.Entries
 
         internal override void OnFriended()
         {
-            
+            foreach (PlayerEntry entry in EntryManager.playerEntries)
+                if (entry.userId == user.id)
+                    entry.isFriend = true;
+
         }
 
         [HideFromIl2Cpp]
@@ -387,6 +390,7 @@ namespace AstroClient.PlayerList.Entries
             foreach (PlayerEntry entry in EntryManager.playerEntries)
                 if (entry.userId == user.id)
                     entry.isFriend = true;
+
         }
         private static void OnUnfriended(string userId)
         {

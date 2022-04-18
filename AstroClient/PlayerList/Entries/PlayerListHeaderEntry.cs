@@ -4,7 +4,6 @@
     using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
     using VRC;
-    using VRChatUtilityKit.Utilities;
 
     [RegisterComponent]
     public class PlayerListHeaderEntry : EntryBase
@@ -15,12 +14,12 @@
         public override string Name => "PlayerList Header";
 
         [HideFromIl2Cpp]
-        public override void Init(object[] parameters = null)
+        internal override void OnPlayerJoined(Player player)
         {
-            NetworkEvents.OnPlayerJoined += OnPlayerCountChanged;
-            NetworkEvents.OnPlayerLeft += OnPlayerCountChanged;
+            textComponent.text = OriginalText.Replace("{playercount}", PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.Count.ToString());
         }
-        private void OnPlayerCountChanged(Player player)
+
+        internal override void OnPlayerLeft(Player player)
         {
             textComponent.text = OriginalText.Replace("{playercount}", PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.Count.ToString());
         }
