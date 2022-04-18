@@ -161,10 +161,10 @@ namespace AstroClient.PlayerList.Entries
                Log.Write("PE: OnAvInst: Bailed due to userId mismatch");
                 return;
             }*/
-                
+
             //manager
 
-            perf = (AvatarPerformanceRating)player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Private_ArrayOf_EnumPublicSealedvaNoExGoMePoVe7v0_0[(int)AvatarPerformanceCategory.Overall];
+            perf = (AvatarPerformanceRating)player.GetVRCPlayer().GetAvatarManager().prop_AvatarPerformanceStats_0.field_Private_ArrayOf_EnumPublicSealedvaNoExGoMePoVe7v0_0[(int)AvatarPerformanceCategory.Overall];
             List<string> perfdeets = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.ToString().Split('\n').ToList();
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Poly Count")), @"\d+").Value, out int polycount);
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Skinned Mesh Count")), @"\d+").Value, out int skinnedmeshcount);

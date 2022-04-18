@@ -74,7 +74,7 @@ namespace AstroClient.PlayerList.Utilities
         {
             if (!AstroClient.Config.ConfigManager.Performance.AllowPerformanceScanner)
             {
-                return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_0);
+                return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_2);
             }
 
             switch (rating)
