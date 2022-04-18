@@ -117,7 +117,7 @@ namespace AstroClient.PlayerList
                 }
                 catch (Exception ex)
                 {
-                    MelonLogger.Error(ex.ToString());
+                   Log.Error(ex.ToString());
                 }
 
                 yield return null;
@@ -189,7 +189,7 @@ namespace AstroClient.PlayerList
         {
             if (AvInstBacklog.Count != 0)
             {
-                MelonLogger.Msg("Addressing Backlog. Size: " + AvInstBacklog.Count.ToString());
+               Log.Write("Addressing Backlog. Size: " + AvInstBacklog.Count.ToString());
                 var keys = new string[AvInstBacklog.Count];
                 AvInstBacklog.Keys.CopyTo(keys, 0);
                 foreach (var key in keys)
@@ -214,7 +214,7 @@ namespace AstroClient.PlayerList
 
                         if (AvInstBacklog[key].numAttempts > 2)
                         {
-                            MelonLogger.Msg("Max attempts exceeded for backlog entry");
+                           Log.Write("Max attempts exceeded for backlog entry");
                             AvInstBacklog.Remove(key);
                         }
                     }
@@ -242,7 +242,7 @@ namespace AstroClient.PlayerList
 
             if (player.prop_APIUser_0 == null)
             {
-                MelonLogger.Error("Null Player Left!");
+               Log.Error("Null Player Left!");
                 return;
             }
             if (player.prop_APIUser_0.IsSelf)
@@ -258,7 +258,7 @@ namespace AstroClient.PlayerList
 
         public static void AddGeneralInfoEntries()
         {
-            MelonLogger.Msg("Adding List Entries...");
+           Log.Write("Adding List Entries...");
             AddGeneralInfoEntry(EntryBase.CreateInstance<PlayerListHeaderEntry>(PlayerList_Constants.playerListLayout.transform.Find("Header").gameObject, includeConfig: true));
             AddGeneralInfoEntry(EntryBase.CreateInstance<RoomTimeEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("RoomTime").gameObject, includeConfig: true));
             AddGeneralInfoEntry(EntryBase.CreateInstance<SystemTime12HrEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("SystemTime12Hr").gameObject, includeConfig: true));

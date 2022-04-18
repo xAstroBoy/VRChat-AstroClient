@@ -158,7 +158,7 @@ namespace AstroClient.PlayerList.Entries
             userId = apiUser.id;
             /*if (manager.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
             {
-                MelonLogger.Msg("PE: OnAvInst: Bailed due to userId mismatch");
+               Log.Write("PE: OnAvInst: Bailed due to userId mismatch");
                 return;
             }*/
                 
@@ -287,7 +287,7 @@ namespace AstroClient.PlayerList.Entries
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"Errored while updating {entry.apiUser.displayName}'s entry:\n{ex}");
+               Log.Error($"Errored while updating {entry.apiUser.displayName}'s entry:\n{ex}");
             }
 
             entry.textComponent.text = entry.TrimExtra(tempString.ToString());
@@ -430,7 +430,7 @@ namespace AstroClient.PlayerList.Entries
             }
             catch (Exception ex)
             {
-                MelonLogger.Error(ex.ToString());
+               Log.Error(ex.ToString());
             }
         }
 
