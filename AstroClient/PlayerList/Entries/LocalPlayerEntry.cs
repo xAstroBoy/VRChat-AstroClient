@@ -1,4 +1,6 @@
-﻿namespace AstroClient.PlayerList.Entries
+﻿using AstroClient.xAstroBoy.Utility;
+
+namespace AstroClient.PlayerList.Entries
 {
     using System;
     using System.Text;
@@ -28,7 +30,6 @@
         public static new void EntryInit()
         {
             NetworkEvents.OnShowSocialRankChanged += OnShowSocialRankChange;
-            VRCUtils.OnEmmWorldCheckCompleted += (allowed) => OnStaticConfigChanged();
         }
         [HideFromIl2Cpp]
         public override void Init(object[] parameters)
@@ -39,26 +40,29 @@
             apiUser = player.prop_APIUser_0;
             userId = apiUser.id;
 
-            gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => UiManager.OpenUserInQuickMenu(apiUser)));
+            gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => apiUser.OpenUserInQuickMenu()));
 
             platform = PlayerUtils.GetPlatform(player).PadRight(2);
             // Join event runs after avatar instantiation event so perf calculations *should* be finished (also not sure if this will throw null refs so gonna release without a check and hope for the best)
             perf = (AvatarPerformanceRating)player.prop_VRCPlayer_0.prop_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Private_ArrayOf_EnumPublicSealedvaNoExGoMePoVe7v0_0[(int)AvatarPerformanceCategory.Overall];
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
 
-            NetworkEvents.OnPlayerJoined += new Action<Player>((player) =>
-            {
-                int highestId = 0;
-                foreach (int photonId in PlayerManager.prop_PlayerManager_0.field_Private_Dictionary_2_Int32_Player_0.Keys)
-                    if (photonId > highestId)
-                        highestId = photonId;
-
-                highestPhotonIdLength = highestId.ToString().Length;
-            });
 
             GetPlayerColor();
             OnConfigChanged();
         }
+
+        internal override void OnPlayerJoined(Player player)
+        {
+            int highestId = 0;
+            foreach (int photonId in PlayerManager.prop_PlayerManager_0.field_Private_Dictionary_2_Int32_Player_0.Keys)
+                if (photonId > highestId)
+                    highestId = photonId;
+
+            highestPhotonIdLength = highestId.ToString().Length;
+
+        }
+
         public override void OnConfigChanged()
         {
             updateDelegate = null;

@@ -5,7 +5,6 @@
     using Entries;
     using MelonLoader;
     using UnityEngine;
-    using VRChatUtilityKit.Utilities;
 
     public static class PlayerListConfig
     {
@@ -61,7 +60,7 @@
         public static EntryWrapper<float> boundsMagLimit;
 
 
-        public static EntryWrapper<MenuManager.MenuButtonPositionEnum> menuButtonPosition;
+       // public static EntryWrapper<MenuManager.MenuButtonPositionEnum> menuButtonPosition;
 
         public static EntryWrapper<Vector2> playerListPosition;
 
@@ -102,7 +101,7 @@
             matLimit = CreateEntry(nameof(matLimit), 10, is_hidden: false);
             boundsMagLimit = CreateEntry(nameof(boundsMagLimit), 17.3f, is_hidden: false);
 
-            menuButtonPosition = CreateEntry(nameof(menuButtonPosition), MenuManager.MenuButtonPositionEnum.TopRight, is_hidden: false);
+          //  menuButtonPosition = CreateEntry(nameof(menuButtonPosition), MenuManager.MenuButtonPositionEnum.TopRight, is_hidden: false);
 
             playerListPosition = CreateEntry(nameof(playerListPosition), new Vector2(2100, 0), is_hidden: false);
 
@@ -130,13 +129,11 @@
                 MelonPreferences.Save();
                 hasConfigChanged = false;
             }
-
-            ListPositionManager.shouldMove = false;
         }
 
         public static void OnConfigChange(bool shouldSetHasConfigChanged = true)
         {
-            OnConfigChanged?.DelegateSafeInvoke();
+            OnConfigChanged?.SafetyRaise();
             hasConfigChanged = shouldSetHasConfigChanged;
         }
     }

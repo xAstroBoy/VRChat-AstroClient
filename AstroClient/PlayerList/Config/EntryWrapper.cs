@@ -2,13 +2,12 @@
 {
     using System;
     using MelonLoader;
-    using VRChatUtilityKit.Utilities;
 
     public class EntryWrapper
     {
         public event Action OnValueChangedUntyped;
 
-        protected void RunOnValueChangedUntyped() => OnValueChangedUntyped?.DelegateSafeInvoke();
+        protected void RunOnValueChangedUntyped() => OnValueChangedUntyped?.SafetyRaise();
     }
     public class EntryWrapper<T> : EntryWrapper
     {
@@ -21,7 +20,7 @@
             {
                 if (!value.Equals(Value))
                 {
-                    OnValueChanged?.DelegateSafeInvoke(pref.Value, value);
+                    OnValueChanged?.SafetyRaiseWithParams(pref.Value, value);
                     pref.Value = value;
                     RunOnValueChangedUntyped();
                 }

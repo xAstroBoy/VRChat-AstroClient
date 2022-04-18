@@ -83,10 +83,6 @@
         {
         }
 
-        public virtual void OnAvatarInstantiated(VRCAvatarManager vrcPlayer, ApiAvatar avatar, GameObject gameObject)
-        {
-        }
-
         [HideFromIl2Cpp]
         public virtual void OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {

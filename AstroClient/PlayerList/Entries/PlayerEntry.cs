@@ -1,5 +1,6 @@
 ﻿using AstroClient.AstroMonos;
 using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.PlayerList.Entries
 {
@@ -24,8 +25,6 @@ namespace AstroClient.PlayerList.Entries
     using VRC.Core;
     using VRC.DataModel;
     using VRC.SDKBase;
-    using VRChatUtilityKit.Ui;
-    using VRChatUtilityKit.Utilities;
     using VRCSDK2.Validation.Performance;
     using Player = VRC.Player;
 
@@ -72,13 +71,6 @@ namespace AstroClient.PlayerList.Entries
 
         public static void EntryInit()
         {
-            UiManager.OnQuickMenuOpened += new Action(() =>
-            {
-                foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
-                    entry.playerEntry.GetPlayerColor(false);
-                EntrySortManager.SortAllPlayers();
-                EntryManager.RefreshPlayerEntries();
-            });
 
             PlayerListConfig.OnConfigChanged += OnStaticConfigChanged;
             NetworkEvents.OnFriended += OnFriended;
@@ -87,6 +79,20 @@ namespace AstroClient.PlayerList.Entries
             VRCUtils.OnEmmWorldCheckCompleted += (allowed) => OnStaticConfigChanged();
 
             new AstroPatch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
+        }
+
+        internal override void OnQuickMenuOpen()
+        {
+            foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
+                entry.playerEntry.GetPlayerColor(false);
+            EntrySortManager.SortAllPlayers();
+            EntryManager.RefreshPlayerEntries();
+
+        }
+
+        internal override void OnFriended()
+        {
+            
         }
 
         [HideFromIl2Cpp]
@@ -101,7 +107,7 @@ namespace AstroClient.PlayerList.Entries
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
             jeffString = "<color=#FFFF00>Unknown </color>";
             partyFouls = 1;
-            gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => UiManager.OpenUserInQuickMenu(apiUser)));
+            gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => apiUser.OpenUserInQuickMenu()));
 
             isFriend = APIUser.IsFriendsWith(apiUser.id);
             /*GetPlayerColor();
@@ -128,10 +134,7 @@ namespace AstroClient.PlayerList.Entries
                 updateDelegate += AddPhotonId;
             if (PlayerListConfig.ownedObjectsToggle.Value)
             {
-                if (VRCUtils.AreRiskyFunctionsAllowed)
-                    updateDelegate += AddOwnedObjects;
-                else
-                    updateDelegate += AddOwnedObjectsSafe;
+                updateDelegate += AddOwnedObjects;
             }
             if (PlayerListConfig.displayNameToggle.Value)
                 updateDelegate += AddDisplayName;
@@ -152,7 +155,9 @@ namespace AstroClient.PlayerList.Entries
                 EntrySortManager.SortPlayer(playerLeftPairEntry);
         }
 
-        public override void OnAvatarInstantiated(VRCAvatarManager manager, ApiAvatar avatar, GameObject gameObject)
+
+        internal override void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager,
+            VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
             //This will throw an exception if it's not initialized, so it's handled where called instead.
             //Vector3 bsize = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.field_Public_Nullable_1_Bounds_0.GetValueOrDefault().m_Extents;
@@ -271,6 +276,8 @@ namespace AstroClient.PlayerList.Entries
         }
         public static void UpdateEntry(PlayerNet playerNet, PlayerEntry entry, bool bypassActive = false)
         {
+            if (playerNet == null) return;
+            if (entry == null) return;
             entry.timeSinceLastUpdate.Restart();
 
             // Update values but not text even if playerlist not active and before decode
@@ -288,11 +295,9 @@ namespace AstroClient.PlayerList.Entries
             {
                 updateDelegate?.Invoke(playerNet, entry, ref tempString);
             }
-            catch (Exception ex)
+            catch 
             {
-                Log.Error($"Errored while updating {entry.apiUser.displayName}'s entry:");
-            Log.Exception(ex);
-			}
+			} // Nobody cares LOL
 
             entry.textComponent.text = entry.TrimExtra(tempString.ToString());
         }

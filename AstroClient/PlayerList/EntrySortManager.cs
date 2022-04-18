@@ -6,7 +6,6 @@
     using System.Reflection;
     using Config;
     using Entries;
-    using VRChatUtilityKit.Utilities;
 
     public class EntrySortManager
     {
@@ -89,7 +88,6 @@
             highestComparisonProperty = typeof(PlayerListConfig).GetField(nameof(PlayerListConfig.currentHighestSort));
 
             PlayerListConfig.OnConfigChanged += OnStaticConfigChange;
-            VRCUtils.OnEmmWorldCheckCompleted += OnEmmWorldCheckCompleted;
         }
         private static void OnStaticConfigChange()
         {
@@ -215,27 +213,6 @@
 
             SortAllPlayers();
         }
-        private static void OnEmmWorldCheckCompleted(bool areRiskyFuncsAllowed)
-        {
-            if (areRiskyFuncsAllowed)
-            { 
-                if (PlayerListConfig.currentBaseSort.Value == SortType.Distance)
-                    currentBaseComparison = distanceSort;
-                if (PlayerListConfig.currentUpperSort.Value == SortType.Distance)
-                    currentUpperComparison = distanceSort;
-                if (PlayerListConfig.currentHighestSort.Value == SortType.Distance)
-                    currentHighestComparison = distanceSort;
-            }
-            else
-            {
-                if (PlayerListConfig.currentBaseSort.Value == SortType.Distance)
-                    currentBaseComparison = null;
-                if (PlayerListConfig.currentUpperSort.Value == SortType.Distance)
-                    currentUpperComparison = null;
-                if (PlayerListConfig.currentHighestSort.Value == SortType.Distance)
-                    currentHighestComparison = null;
-            }
-        }
 
         public static void SortAllPlayers() // This only runs when sort type is changed and when the qm is opened (takes around 1-2ms in a full BClub)
         {
@@ -263,7 +240,7 @@
         {
             if (IsSortTypeInAllUses(SortType.None) ||
                 (PlayerListConfig.showSelfAtTop.Value && sortEntry.playerEntry.isSelf) ||
-                (PlayerListConfig.freezeSortWhenVisible.Value && MenuManager.playerList.active))
+                (PlayerListConfig.freezeSortWhenVisible.Value))
                 return;
 
             // This method is good like 0.2ms

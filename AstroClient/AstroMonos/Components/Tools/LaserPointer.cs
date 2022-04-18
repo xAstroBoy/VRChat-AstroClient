@@ -6,7 +6,6 @@ using Il2CppSystem.Collections.Generic;
 using JetBrains.Annotations;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
-using VRChatUtilityKit.Utilities;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {

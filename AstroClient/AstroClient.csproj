@@ -154,6 +154,7 @@
     <Compile Include="Developers\Cheetos\WindowsUtils.cs" />
     <Compile Include="Developers\Kaned\KanedWIP.cs" />
     <Compile Include="Developers\Kaned\RotationFix.cs" />
+    <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleTeleportRPC.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleUdonEvent.cs" />
@@ -388,12 +389,9 @@
     <Compile Include="PlayerList\Entries\WorldNameEntry.cs" />
     <Compile Include="PlayerList\EntryManager.cs" />
     <Compile Include="PlayerList\EntrySortManager.cs" />
-    <Compile Include="PlayerList\ListPositionManager.cs" />
-    <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="PlayerList\PlayerListMod.cs" />
     <Compile Include="PlayerList\UIXManager.cs" />
     <Compile Include="PlayerList\Utilities\PlayerList_Constants.cs" />
-    <Compile Include="PlayerList\Utilities\ExtTools.cs" />
     <Compile Include="PlayerList\Utilities\PlayerUtils.cs" />
     <Compile Include="Spawnables\ColliderSuppresserCube\TweakerSphere.cs" />
     <Compile Include="Spawnables\ColliderSuppresserCube\ColliderSuppresserSphere.cs" />
@@ -1417,10 +1415,6 @@
     </Reference>
     <Reference Include="VRCCore-Standalone">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="VRChatUtilityKit">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\VRChatUtilityKit.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCLog">

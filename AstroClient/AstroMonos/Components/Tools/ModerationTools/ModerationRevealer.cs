@@ -105,8 +105,8 @@
             }
             catch (Exception e)
             {
-                Log.Error($"Error at debug {debug}");
-                Log.Exception(e);
+                //Log.Error($"Error at debug {debug}");
+                //Log.Exception(e);
             }
         }
 

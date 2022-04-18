@@ -6,7 +6,6 @@
     using MelonLoader;
     using Photon.Realtime;
     using UnhollowerBaseLib.Attributes;
-    using VRChatUtilityKit.Utilities;
 
     [RegisterComponent]
     public class InstanceMasterEntry : EntryBase

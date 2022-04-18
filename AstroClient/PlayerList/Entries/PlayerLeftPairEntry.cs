@@ -3,7 +3,6 @@
     using System;
     using ClientAttributes;
     using UnhollowerBaseLib.Attributes;
-    using VRChatUtilityKit.Utilities;
 
     [RegisterComponent]
     public class PlayerLeftPairEntry : EntryBase

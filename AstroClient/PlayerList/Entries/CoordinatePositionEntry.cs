@@ -5,7 +5,6 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using VRChatUtilityKit.Utilities;
 
     [RegisterComponent]
     public class CoordinatePositionEntry : EntryBase
