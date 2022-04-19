@@ -40,11 +40,13 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
         {
             try
             {
-                // First Check if is a  irregular RPC Being sent.
-                if(Irregular_RPC_Firewall.isIrregularRPC(__1, __0))
-                {
-                    return false;
-                }
+
+                // Suspicion of breaking other worlds with custom RPC systems, not 100% safe or perfect.
+                //// First Check if is a  irregular RPC Being sent.
+                //if(Irregular_RPC_Firewall.isIrregularRPC(__1, __0))
+                //{
+                //    return false;
+                //}
 
 
                 if (__1.Get_Parameter_GameObject_Name().Equals("USpeak"))
