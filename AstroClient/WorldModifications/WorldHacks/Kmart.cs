@@ -52,6 +52,15 @@ namespace AstroClient.WorldModifications.WorldHacks
                     item.IgnoreLocalPlayerCollision();
                 }
             }
+            var UselessColliders2 = Root.FindObject("Pets/Cube (82)");
+            if (UselessColliders2 != null)
+            {
+                foreach (var item in UselessColliders2.transform.Get_All_Childs())
+                {
+                    item.IgnoreLocalPlayerCollision();
+                }
+            }
+
 
             var keypadtriggerloc = Root.FindObject("Electronics/breakfast_nook");
             if(keypadtriggerloc != null)
