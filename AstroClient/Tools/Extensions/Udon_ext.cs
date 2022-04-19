@@ -17,8 +17,8 @@
         {
             if (obj != null)
             {
-                UdonUnboxer.UnboxUdonToConsole(obj);
-                UdonUnboxer.DumpUdonUnsupportedTypes();
+                UdonDumper.UnboxUdonToConsole(obj);
+                UdonDumper.DumpUdonUnsupportedTypes();
             }
         }
 
@@ -26,7 +26,7 @@
         {
             if (obj != null)
             {
-                UdonUnboxer.GenerateGettersReaders(obj);
+                UdonDumper.GenerateGettersReaders(obj);
 
             }
         }

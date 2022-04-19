@@ -28,7 +28,55 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
     internal class PrisonEscape : AstroEvents
     {
         internal static QMNestedGridMenu CurrentMenu;
-        internal static bool isCurrentWorld = false;
+        private static bool _IsCurrentWorld = false;
+        internal static bool isCurrentWorld
+        {
+            get => _IsCurrentWorld;
+            set
+            {
+                _IsCurrentWorld = value;
+                if (!value)
+                {
+                    MoneyInteraction = null;
+                    GetRedCard = null;
+                    RedCardBehaviour = null;
+                    GateInteraction = null;
+                    _GuardsAreAllowedToUseVents = false;
+                    _DropKnifeAfterKill = true;
+                    PatronController = null;
+                    ToggleDoublePoints = null;
+                    TogglePatronGuns = null;
+                    foreach (var crate in Large_Crates)
+                    {
+                        var renderer = crate.GetGetInChildrens<Renderer>(true);
+                        if (renderer != null)
+                        {
+                            renderer.transform.RemoveComponent<ESP_HighlightItem>();
+                        }
+                    }
+                    LargeCrateESP = false;
+                    Large_Crates.Clear();
+                    Large_Crates_udon.Clear();
+                    Small_Crates_udon.Clear();
+                    Knifes.Clear();
+                    VentsMeshes.Clear();
+                    CurrentReaders.Clear();
+                    LocalReader = null;
+                    SpawnPoints_Prisoners.Clear();
+                    SpawnPoints_Guards.Clear();
+                    _EveryoneHasGoldenGunCamos = false;
+                    SpawnPoints_Spawn.Clear();
+                    EnableGoldenCamos.Clear();
+                    TakeKeyCardOnWanted = false;
+                    PrisonDoors_Open.Clear();
+                    PrisonDoors_Close.Clear();
+                    GameManager = null;
+                    WorldSettings_DoublePoints_Toggle = null;
+                    WorldSettings_GoldenGuns_Toggle = null;
+
+                }
+            }
+        }
 
         internal static void InitButtons(QMGridTab main)
         {
@@ -245,12 +293,29 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (item.name.Contains("Crate Large"))
                     {
-                        Crates.AddGameObject(item.gameObject);
+                        Large_Crates.AddGameObject(item.gameObject);
+                        var crateevent = item.FindUdonEvent("_SpawnItem");
+                        if (crateevent != null)
+                        {
+                            if (!Large_Crates_udon.Contains(crateevent))
+                            {
+                                Large_Crates_udon.Add(crateevent);
+                            }
+                        }
+
                         //CreateSpawnItemButton(item, false);
                     }
 
                     if (item.name.Contains("Crate Small"))
                     {
+                        var crateevent = item.FindUdonEvent("_SpawnItem");
+                        if (crateevent != null)
+                        {
+                            if (!Small_Crates_udon.Contains(crateevent))
+                            {
+                                Small_Crates_udon.Add(crateevent);
+                            }
+                        }
                         //CreateSpawnItemButton(item, true);
                     }
                 }
@@ -1114,6 +1179,60 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
+        private static bool _FreeCratesItems = false;
+
+        internal static bool FreeCratesItems
+        {
+            get
+            {
+                return _FreeCratesItems;
+            }
+            set
+            {
+                _FreeCratesItems = value;
+                if (Small_Crates_udon != null)
+                {
+                    if (Small_Crates_udon.Count != 0)
+                    {
+                        foreach (var crate in Small_Crates_udon)
+                        {
+                            if (crate != null)
+                            {
+                                if (value)
+                                {
+                                    SetunlockPoints(crate, 0);
+                                }
+                                else
+                                {
+                                    SetunlockPoints(crate, 200);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (Large_Crates_udon != null)
+                {
+                    if (Large_Crates_udon.Count != 0)
+                    {
+                        foreach (var crate in Large_Crates_udon)
+                        {
+                            if (crate != null)
+                            {
+                                if (value)
+                                {
+                                    SetunlockPoints(crate, 0);
+                                }
+                                else
+                                {
+                                    SetunlockPoints(crate, 500);
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
 
         private static bool _GuardsAreAllowedToUseVents = false;
 
@@ -1202,47 +1321,19 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     CurrentMenu.SetTextColor(Color.red);
                 }
 
-                isCurrentWorld = false;
+                if (isCurrentWorld)
+                {
+                    isCurrentWorld = false;
+                }
             }
         }
 
         internal override void OnRoomLeft()
         {
-            isCurrentWorld = false;
-            MoneyInteraction = null;
-            GetRedCard = null;
-            RedCardBehaviour = null;
-            GateInteraction = null;
-            _GuardsAreAllowedToUseVents = false;
-            _DropKnifeAfterKill = true;
-            PatronController = null;            
-            ToggleDoublePoints = null;
-            TogglePatronGuns = null;
-            foreach (var crate in Crates)
+            if (isCurrentWorld)
             {
-                var renderer = crate.GetGetInChildrens<Renderer>(true);
-                if (renderer != null)
-                {
-                    renderer.transform.RemoveComponent<ESP_HighlightItem>();
-                }
+                isCurrentWorld = false;
             }
-            LargeCrateESP = false;
-            Crates.Clear();
-            Knifes.Clear();
-            VentsMeshes.Clear();
-            CurrentReaders.Clear();
-            LocalReader = null;
-            SpawnPoints_Prisoners.Clear();
-            SpawnPoints_Guards.Clear();
-            _EveryoneHasGoldenGunCamos = false;
-            SpawnPoints_Spawn.Clear();
-            EnableGoldenCamos.Clear();
-            TakeKeyCardOnWanted = false;
-            PrisonDoors_Open.Clear();
-            PrisonDoors_Close.Clear();
-            GameManager = null;
-            WorldSettings_DoublePoints_Toggle = null;
-            WorldSettings_GoldenGuns_Toggle = null;
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool guardsCanUse)
         {
@@ -1311,6 +1402,26 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     }
                 }
                 
+                catch
+                {
+                }
+            }
+        }
+        private static void SetunlockPoints(UdonBehaviour_Cached item, int UnlockPoints)
+        {
+            if (item != null)
+            {
+                try
+                {
+                    if (item.RawItem != null)
+                    {
+                        UdonHeapEditor.PatchHeap(item.RawItem, "unlockPoints", UnlockPoints, () =>
+                        {
+                            Log.Debug($"Setting {item.name} Price to {UnlockPoints}");
+                        });
+                    }
+                }
+
                 catch
                 {
                 }
@@ -1397,7 +1508,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static void ToggleLargeCrateESP(bool isOn)
         {
-            foreach (var crate in Crates)
+            foreach (var crate in Large_Crates)
             {
                 var renderer = crate.GetGetInChildrens<Renderer>(true);
                 if (renderer != null)
@@ -1866,7 +1977,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static UdonBehaviour_Cached ToggleDoublePoints { get; set; } = null;
 
         private static UdonBehaviour_Cached GetRedCard { get; set; } = null;
-        private static List<GameObject> Crates { get; set; } = new List<GameObject>();
+        private static List<GameObject> Large_Crates { get; set; } = new List<GameObject>();
+
+
+        private static List<UdonBehaviour_Cached> Large_Crates_udon { get; set; } = new List<UdonBehaviour_Cached>();
+        private static List<UdonBehaviour_Cached> Small_Crates_udon { get; set; } = new List<UdonBehaviour_Cached>();
+
         private static List<UdonBehaviour_Cached> Knifes { get; set; } = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> VentsMeshes { get; set; } = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> PrisonDoors_Open { get; set; } = new List<UdonBehaviour_Cached>();

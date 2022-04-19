@@ -178,6 +178,7 @@
     <Compile Include="Tools\Converters.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
+    <Compile Include="Tools\UdonEditor\UdonDumper.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\ItemTweakerModule.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
@@ -621,7 +622,6 @@
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
     <Compile Include="Target\TargetSelector.cs" />
-    <Compile Include="Tools\UdonEditor\UdonUnboxer.cs" />
     <Compile Include="Tools\ColliderViewer\ColliderDisplay.cs" />
     <Compile Include="Tools\ColliderViewer\ColliderToggler.cs" />
     <Compile Include="Tools\ColliderViewer\XRay.cs" />

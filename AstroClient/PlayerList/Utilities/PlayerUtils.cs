@@ -1,4 +1,5 @@
 ﻿using AstroClient.Constants;
+using AstroClient.xAstroBoy.Utility;
 using VRCUiAvatarStatsPanel = MonoBehaviourPublicStAvSt1AvTeSpBoSpCoUnique;
 
 namespace AstroClient.PlayerList.Utilities
@@ -11,7 +12,7 @@ namespace AstroClient.PlayerList.Utilities
     {
         public static string GetPlatform(Player player)
         {
-            if (player.prop_APIUser_0.last_platform == "standalonewindows")
+            if (player.GetAPIUser().last_platform == "standalonewindows")
                 if (player.prop_VRCPlayerApi_0.IsUserInVR())
                     return "VR".PadRight(2);
                 else

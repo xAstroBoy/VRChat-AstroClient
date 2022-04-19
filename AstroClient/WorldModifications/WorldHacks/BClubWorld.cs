@@ -1226,7 +1226,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             else
             {
-                isCurrentWorld = false;
+                if (isCurrentWorld)
+                {
+                    isCurrentWorld = false;
+                }
                 if (BClubExploitsPage != null)
                 {
                     BClubExploitsPage.SetInteractable(false);

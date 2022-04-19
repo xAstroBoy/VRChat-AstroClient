@@ -2873,9 +2873,9 @@ namespace AstroClient.Tools.UdonEditor
 
                 return "Null";
             }
-            catch (Exception e)
+            catch 
             {
-                Log.Exception(e);
+                //Log.Exception(e);
                 return $"Error Unboxing {obj.GetIl2CppType().FullName}";
             }
         }
