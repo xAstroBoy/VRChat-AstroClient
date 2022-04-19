@@ -24,7 +24,7 @@
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
-            return new HarmonyMethod(typeof(TriggerEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+            return new HarmonyMethod(typeof(WorldTriggerHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
         private void HookTriggerEvent()
