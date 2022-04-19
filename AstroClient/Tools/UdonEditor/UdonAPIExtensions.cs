@@ -1,6 +1,7 @@
 ﻿
 
 
+using System.Linq;
 using AstroClient.xAstroBoy.Extensions;
 using VRC.Udon.Common.Interfaces;
 
@@ -25,25 +26,26 @@ namespace AstroClient.Tools.UdonEditor
         {
             if (behaviour != null)
             {
-                var table = behaviour.Get_Entries();
+                var keys = new System.Collections.Generic.List<string>();
+                var table = behaviour.Get_EventTable();
                 if (table != null)
                 {
-                    if (table.Count != 0)
+                    var entries = table.Get_Entries();
+                    if (entries != null)
                     {
-                        var keys = new System.Collections.Generic.List<string>();
-                        for (var entrytable = 0; entrytable < table.Count; entrytable++)
+                        for (var index = 0; index < entries.Count; index++)
                         {
-                            var entry = table[entrytable];
-                            var foundkey = entry.key;
-                            if (foundkey.IsNotNullOrEmptyOrWhiteSpace())
+                            var entry = entries[index];
+                            var key = entry.key;
+                            if (key.IsNotNullOrEmptyOrWhiteSpace())
                             {
-                                if (keys.Contains(entry.key))
+                                if (!keys.Contains(entry.key))
                                 {
                                     keys.Add(entry.key);
                                 }
                             }
                         }
-                        if (keys.Count != 0)
+                        if (keys.Count() != 0)
                         {
                             return keys.ToArray();
                         }
@@ -83,6 +85,17 @@ namespace AstroClient.Tools.UdonEditor
         {
             return behaviour._eventTable;
         }
+
+        /// <summary>
+        /// Shortcut to access Udon EventTable
+        /// </summary>
+        /// <param name="behaviour"></param>
+        /// <returns></returns>
+        internal static Il2CppReferenceArray<Dictionary<string, List<uint>>.Entry> Get_Entries(this Dictionary<string, List<uint>> eventtable)
+        {
+            return eventtable.entries;
+        }
+
         /// <summary>
         /// Shortcut to access Udon Entries
         /// </summary>
@@ -90,7 +103,7 @@ namespace AstroClient.Tools.UdonEditor
         /// <returns></returns>
         internal static Il2CppReferenceArray<Dictionary<string, List<uint>>.Entry> Get_Entries(this UdonBehaviour behaviour)
         {
-            return behaviour.Get_EventTable()?.entries;
+            return behaviour.Get_EventTable().entries;
         }
 
     }
