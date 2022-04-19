@@ -43,6 +43,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     GateInteraction = null;
                     _GuardsAreAllowedToUseVents = false;
                     _DropKnifeAfterKill = true;
+                    _FreeCratesItems = false;
                     PatronController = null;
                     ToggleDoublePoints = null;
                     TogglePatronGuns = null;
