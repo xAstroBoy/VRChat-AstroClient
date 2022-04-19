@@ -23,6 +23,20 @@ namespace AstroClient.WorldModifications.WorldHacks
     internal class Kmart : AstroEvents
     {
 
+        internal static GameObject _Root;
+        internal static GameObject Root
+        {
+            get
+            {
+                if(_Root == null)
+                {
+                    _Root = GameObjectFinder.FindRootSceneObject("Fuck off lmao");
+                }
+                return _Root;
+            }
+        }
+
+
         private static VRC_Trigger AuthorizedTrigger { get; set; }
         private static VRC_Trigger UnauthorizedTrigger { get; set; }
 
@@ -30,7 +44,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void FindEverything()
         {
-            var UselessColliders = GameObjectFinder.FindRootSceneObject("tf you lookin at").FindObject("RoombaBase/instance_1/instance_1_1");
+            var UselessColliders = Root.FindObject("RoombaBase/instance_1/instance_1_1");
             if (UselessColliders != null)
             {
                 foreach(var item in UselessColliders.transform.Get_All_Childs())
@@ -39,7 +53,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-            var keypadtriggerloc = GameObjectFinder.FindRootSceneObject("tf you lookin at").FindObject("Electronics/HTC");
+            var keypadtriggerloc = Root.FindObject("Electronics/breakfast_nook");
             if(keypadtriggerloc != null)
             {
                 foreach(var triggers in keypadtriggerloc.Get_Triggers())
@@ -98,6 +112,18 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+        internal override void OnRoomLeft()
+        {
+            if (isCurrentWorld)
+            {
+                _Root = null;
+                AuthorizedTrigger = null;
+                UnauthorizedTrigger = null;
+                RemoveBlocksForJoinedPlayers = false;
+                isCurrentWorld = false;
+            }
+        }
+
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.KMartExpress_1)
@@ -109,10 +135,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             else
             {
-                isCurrentWorld = false;
-                AuthorizedTrigger = null;
-                UnauthorizedTrigger = null;
-                RemoveBlocksForJoinedPlayers = false;
+                if (isCurrentWorld)
+                {
+                    isCurrentWorld = false;
+                }
             }
         }
 
