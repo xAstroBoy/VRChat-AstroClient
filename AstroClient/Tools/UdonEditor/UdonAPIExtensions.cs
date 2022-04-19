@@ -36,12 +36,15 @@ namespace AstroClient.Tools.UdonEditor
                         for (var index = 0; index < entries.Count; index++)
                         {
                             var entry = entries[index];
-                            var key = entry.key;
-                            if (key.IsNotNullOrEmptyOrWhiteSpace())
+                            if (entry != null)
                             {
-                                if (!keys.Contains(entry.key))
+                                var key = entry.key;
+                                if (key.IsNotNullOrEmptyOrWhiteSpace())
                                 {
-                                    keys.Add(entry.key);
+                                    if (!keys.Contains(entry.key))
+                                    {
+                                        keys.Add(entry.key);
+                                    }
                                 }
                             }
                         }
