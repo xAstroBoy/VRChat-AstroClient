@@ -92,7 +92,7 @@ namespace AstroClient.Tools.UdonEditor
         /// <summary>
         /// Shortcut to access Udon EventTable
         /// </summary>
-        /// <param name="behaviour"></param>
+        /// <param name="eventtable"></param>
         /// <returns></returns>
         internal static Il2CppReferenceArray<Dictionary<string, List<uint>>.Entry> Get_Entries(this Dictionary<string, List<uint>> eventtable)
         {
