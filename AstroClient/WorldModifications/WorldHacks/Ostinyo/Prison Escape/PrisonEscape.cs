@@ -621,27 +621,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
              });
         }
 
-        internal static bool? MasterLocked
-        {
-            get
-            {
-                if (GameManager != null)
-                {
-                    GameManager.masterStart.GetValueOrDefault(false);
-                }
-                return null;
-            }
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (GameManager.masterStart != null)
-                    {
-                        GameManager.masterStart = value.Value;
-                    }
-                }
-            }
-        }
 
         private static void CreateSpawnItemButton(UdonBehaviour item, bool flip)
         {

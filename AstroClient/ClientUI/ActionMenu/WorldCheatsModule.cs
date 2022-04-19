@@ -421,7 +421,7 @@ internal class WorldCheatsModule : AstroEvents
                 
                     CustomSubMenu.AddToggle("Drop Knifes after kill", PrisonEscape.DropKnifeAfterKill, ToggleValue => { PrisonEscape.DropKnifeAfterKill = ToggleValue; });
                     CustomSubMenu.AddToggle("Allow guard Role to use vents", PrisonEscape.GuardsAreAllowedToUseVents, ToggleValue => { PrisonEscape.GuardsAreAllowedToUseVents = ToggleValue; });
-                    CustomSubMenu.AddToggle("Game Start Master Lock", PrisonEscape.MasterLocked.GetValueOrDefault(false), ToggleValue => { PrisonEscape.MasterLocked = ToggleValue; });
+                    CustomSubMenu.AddToggle("Free Crates Items", PrisonEscape.FreeCratesItems, ToggleValue => { PrisonEscape.FreeCratesItems = ToggleValue; });
                 });
 
                 CustomSubMenu.AddSubMenu("Game Hacks", () =>
