@@ -67,7 +67,6 @@
             ExploitsMenu.InitButtons(TabIndexs.Exploits);
             WorldsCheats.InitButtons(TabIndexs.Cheats);
             InstanceHistoryMenu.InitButtons(TabIndexs.History);
-            CheetosMenu.InitButtons(TabIndexs.Cheetos);
 
             // Misc
             TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
