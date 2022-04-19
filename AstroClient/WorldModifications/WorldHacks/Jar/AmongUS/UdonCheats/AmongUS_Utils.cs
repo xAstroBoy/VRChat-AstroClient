@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System.Linq;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
@@ -30,18 +32,23 @@
                         for (int i1 = 0; i1 < list.Count; i1++)
                         {
                             UdonBehaviour action = list[i1];
-                            foreach (var subaction in action._eventTable)
+                            var eventKeys = action.Get_EventKeys();
+                            if (eventKeys == null) continue;
+                            for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                             {
-                                if (subaction.Key.ToLower().StartsWith("syncabstainedvoting"))
+                                var key = eventKeys[UdonKeys];
+
+                                if (key.ToLower().StartsWith("syncabstainedvoting"))
                                 {
                                     if (ActiveNode.AmongUSCanVote)
                                     {
-                                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                                        action.SendUdonEvent(key);
                                     }
                                     HasVoted = true;
                                     break;
                                 }
                             }
+
                             if (HasVoted)
                             {
                                 break;
@@ -68,19 +75,23 @@
                             for (int i1 = 0; i1 < list.Count; i1++)
                             {
                                 UdonBehaviour action = list[i1];
-                                foreach (var subaction in action._eventTable)
+                                var eventKeys = action.Get_EventKeys();
+                                if (eventKeys == null) continue;
+                                for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                                 {
-                                    if (subaction.Key.ToLower().StartsWith("syncvotedfor"))
+                                    var key = eventKeys[UdonKeys];
+
+                                    if (key.ToLower().StartsWith("syncvotedfor"))
                                     {
-                                        var ExtractedNode = JarRoleController.AmongUS_GetLinkedComponent(RemoveSyncVotedForText(subaction.key));
+                                        var ExtractedNode = JarRoleController.AmongUS_GetLinkedComponent(RemoveSyncVotedForText(key));
                                         if (ExtractedNode != null && ExtractedNode.LinkedNode.Node != null && ExtractedNode.CurrentRole != AmongUs_Roles.None)
                                         {
                                             if (ExtractedNode.Player.DisplayName() == VictimComponent.Player.DisplayName())
                                             {
-                                                //Log.Debug($"Executing Udon Event {action.name} with subaction {subaction.key} That Contains Player : {ExtractedNode.apiuser.displayName}");
+                                                //Log.Debug($"Executing Udon Event {action.name} with subaction {key} That Contains Player : {ExtractedNode.apiuser.displayName}");
                                                 if (ActiveNode.AmongUSCanVote)
                                                 {
-                                                    action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                                                    action.SendUdonEvent(key);
                                                 }
                                                 HasVoted = true;
                                                 break;

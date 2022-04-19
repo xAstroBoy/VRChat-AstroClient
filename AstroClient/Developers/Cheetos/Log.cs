@@ -96,9 +96,9 @@ public static class Log
     /// <param name="line"></param>
     public static void Error(string msg, [CallerMemberName] string name = "", [CallerLineNumber] int line = -1)
     {
-        Write($"An Error Occured");
-        Write($"CallerName: {name}", LogLevel.ERROR);
-        Write($"CallerLine: {line}", LogLevel.ERROR);
+       // Write($"An Error Occured");
+       // Write($"CallerName: {name}", LogLevel.ERROR);
+       // Write($"CallerLine: {line}", LogLevel.ERROR);
         Write($"{msg}", LogLevel.ERROR);
     }
 

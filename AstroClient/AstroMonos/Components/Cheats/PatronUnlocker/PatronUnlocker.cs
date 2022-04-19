@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -93,16 +95,18 @@
             for (int i1 = 0; i1 < list.Count; i1++)
             {
                 UdonBehaviour item = list[i1];
-                for (int i = 0; i < item._eventTable.entries.Count; i++)
+                var eventKeys = item.Get_EventKeys();
+                if (eventKeys == null) continue;
+                for (int i = 0; i < eventKeys.Length; i++)
                 {
-                    Dictionary<string, List<uint>>.Entry item2 = item._eventTable.entries[i];
+                    var subaction = eventKeys[i];
                     if (NonPatronSkinEvent == null)
-                        if (GetNonPatronSkinEventNames.Contains(item2.key))
-                            NonPatronSkinEvent = new UdonBehaviour_Cached(item, item2.key);
+                        if (GetNonPatronSkinEventNames.Contains(subaction))
+                            NonPatronSkinEvent = new UdonBehaviour_Cached(item, subaction);
 
                     if (PatronSkinEvent == null)
-                        if (GetPatronSkinEventNames.Contains(item2.key))
-                            PatronSkinEvent = new UdonBehaviour_Cached(item, item2.key);
+                        if (GetPatronSkinEventNames.Contains(subaction))
+                            PatronSkinEvent = new UdonBehaviour_Cached(item, subaction);
 
                     if (PatronSkinEvent != null && NonPatronSkinEvent != null) break;
                 }

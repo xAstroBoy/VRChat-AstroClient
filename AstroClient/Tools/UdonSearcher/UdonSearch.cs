@@ -18,39 +18,39 @@ namespace AstroClient.Tools.UdonSearcher
     {
         internal static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction, bool Debug = false)
         {
-            var gameobjects = UdonParser.WorldBehaviours;
+            var gameobjects = WorldUtils.UdonScripts;
 
             List<UdonBehaviour_Cached> foundEvents = new List<UdonBehaviour_Cached>();
             var behaviours = gameobjects.Where(x => x.gameObject.name == action);
-            if (behaviours.Any())
+            var udonBehaviours = behaviours as UdonBehaviour[] ?? behaviours.ToArray();
+            if (udonBehaviours.Any())
             {
-                foreach (var behaviour in behaviours)
+                for(int events = 0; events < udonBehaviours.Count(); events++)
                 {
-                    if (behaviour._eventTable.count != 0)
+                    var udonevent = udonBehaviours[events];
+                    if(udonevent == null) continue;
+                    if (Debug)
                     {
-                        if (Debug)
-                        {
-                            Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
-                        }
-
-                        for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
-                        {
-                            var actionkeys = behaviour._eventTable.entries[i];
-                            if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                            if (actionkeys.key == subaction)
-                            {
-                                if (Debug)
-                                {
-                                    Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
-                                }
-
-                                foundEvents.Add(new UdonBehaviour_Cached(behaviour, actionkeys.key));
-                            }
-                        }
+                        Log.Debug($"Found Behaviour {udonevent.gameObject.name}, Searching for Action.");
                     }
 
-                    return foundEvents;
+                    var eventkeys = udonevent.Get_EventKeys();
+                    if (eventkeys == null) continue;
+                    for (int eventkey = 0; eventkey < eventkeys.Length; eventkey++)
+                    {
+                        var key = eventkeys[eventkey];
+                        if (key == subaction)
+                        {
+                            if (Debug)
+                            {
+                                Log.Debug($"Found subaction {key} bound in {udonevent.gameObject.name}");
+                            }
+
+                            foundEvents.Add(new UdonBehaviour_Cached(udonevent, key));
+                        }
+                    }
                 }
+                return foundEvents;
             }
 
             return null;
@@ -117,28 +117,28 @@ namespace AstroClient.Tools.UdonSearcher
 
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
         {
-            var gameobjects = UdonParser.WorldBehaviours;
+            var gameobjects = WorldUtils.UdonScripts;
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)
             {
-                if (behaviour._eventTable.count != 0)
+                var eventKeys = behaviour.Get_EventKeys();
+                if (eventKeys != null)
                 {
                     if (Debug)
                     {
                         Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
                     }
-
-                    foreach (var actionkeys in behaviour._eventTable)
+                    for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                     {
-                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                        if (actionkeys.key.Equals(subaction))
+                        var key = eventKeys[UdonKeys];
+
+                        if (key.Equals(subaction))
                         {
                             if (Debug)
                             {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                                Log.Debug($"Found subaction {key} bound in {behaviour.gameObject.name}");
                             }
-
-                            return new UdonBehaviour_Cached(behaviour, actionkeys.key);
+                            return new UdonBehaviour_Cached(behaviour, key);
                         }
                     }
                 }
@@ -159,21 +159,20 @@ namespace AstroClient.Tools.UdonSearcher
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)
             {
-                if (behaviour._eventTable.count != 0)
+                var eventkeys = behaviour.Get_EventKeys();
+                if (eventkeys != null)
                 {
                     if (Debug)
                     {
                         Log.Debug($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
                     }
-
-                    for (int i = 0; i < behaviour._eventTable.entries.Count; i++)
+                    for (int eventkey = 0; eventkey < eventkeys.Length; eventkey++)
                     {
-                        var actionkeys = behaviour._eventTable.entries[i];
-                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                        if (actionkeys.key == subaction)
+                        var key = eventkeys[eventkey];
+                        if (key == subaction)
                         {
-                            Log.Debug($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
-                            return new UdonBehaviour_Cached(behaviour, actionkeys.key);
+                            Log.Debug($"Found subaction {key} bound in {behaviour.gameObject.name}");
+                            return new UdonBehaviour_Cached(behaviour, key);
                         }
                     }
                 }
@@ -189,20 +188,18 @@ namespace AstroClient.Tools.UdonSearcher
         {
             if (obj != null)
             {
-                if (obj._eventTable.count != 0)
+                var eventKeys = obj.Get_EventKeys();
+                if (eventKeys == null) return null;
+                for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                 {
-                    for (int i = 0; i < obj._eventTable.entries.Count; i++)
+                    var key = eventKeys[UdonKeys];
+                    if (key == subaction)
                     {
-                        var actionkeys = obj._eventTable.entries[i];
-                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                        if (actionkeys.key == subaction)
+                        if (Debug)
                         {
-                            if (Debug)
-                            {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
-                            }
-                            return new UdonBehaviour_Cached(obj, actionkeys.key);
+                            Log.Debug($"Found subaction {key} bound in {obj.gameObject.name}");
                         }
+                        return new UdonBehaviour_Cached(obj, key);
                     }
                 }
             }
@@ -214,17 +211,16 @@ namespace AstroClient.Tools.UdonSearcher
         {
             if (obj != null)
             {
-                if (obj._eventTable.count != 0)
+                var eventKeys = obj.Get_EventKeys();
+                if (eventKeys == null) return false;
+                for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                 {
-                    for (int i = 0; i < obj._eventTable.entries.Count; i++)
+                    var key = eventKeys[UdonKeys];
+                    if (key == subaction)
                     {
-                        var actionkeys = obj._eventTable.entries[i];
-                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                        if (actionkeys.key == subaction)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
+
                 }
             }
 
@@ -240,18 +236,19 @@ namespace AstroClient.Tools.UdonSearcher
                 UdonBehaviour actionobject = actionObjects[i];
                 if (actionobject != null)
                 {
-                    for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
+                    var eventKeys = actionobject.Get_EventKeys();
+                    if (eventKeys == null) continue;
+                    for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                     {
-                        var actionkeys = actionobject._eventTable.entries[i1];
-                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                        if (actionkeys.key == subaction)
+                        var key = eventKeys[UdonKeys];
+                        if (key == subaction)
                         {
                             return true;
                         }
+
                     }
                 }
             }
-
             return false;
         }
 
@@ -264,17 +261,18 @@ namespace AstroClient.Tools.UdonSearcher
                 UdonBehaviour actionobject = actionObjects[i];
                 if (actionobject != null)
                 {
-                    for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
+                    var eventKeys = actionobject.Get_EventKeys();
+                    if (eventKeys == null) continue;
+                    for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                     {
-                        var actionkeys = actionobject._eventTable.entries[i1];
-                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                        if (actionkeys.key == subaction)
+                        var key = eventKeys[UdonKeys];
+                        if (key == subaction)
                         {
                             if (Debug)
                             {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                                Log.Debug($"Found subaction {key} bound in {actionobject.gameObject.name}");
                             }
-                            return new UdonBehaviour_Cached(actionobject, actionkeys.key);
+                            return new UdonBehaviour_Cached(actionobject, key);
                         }
                     }
                 }
@@ -293,19 +291,20 @@ namespace AstroClient.Tools.UdonSearcher
                 UdonBehaviour actionobject = actionObjects[i];
                 if (actionobject != null)
                 {
-                    for (int i1 = 0; i1 < actionobject._eventTable.entries.Count; i1++)
+                    var eventKeys = actionobject.Get_EventKeys();
+                    if (eventKeys == null) continue;
+                    for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                     {
-                        var actionkeys = actionobject._eventTable.entries[i1];
-                        if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-
-                        if (actionkeys.key == subaction)
+                        var key = eventKeys[UdonKeys];
+                        if (key == subaction)
                         {
                             if (Debug)
                             {
-                                Log.Debug($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                                Log.Debug($"Found subaction {key} bound in {actionobject.gameObject.name}");
                             }
-                            result.Add(new UdonBehaviour_Cached(actionobject, actionkeys.key));
+                            result.Add(new UdonBehaviour_Cached(actionobject, key));
                         }
+
                     }
                 }
             }

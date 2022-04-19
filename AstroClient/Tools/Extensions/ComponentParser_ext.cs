@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.Tools.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -80,12 +82,13 @@
             var list = obj.GetComponentsInChildren<UdonBehaviour>(true);
             if (list.Count() != 0)
             {
+
                 foreach (var item in list)
                 {
-                    if (item._eventTable.Keys.Count != 0)
-                    {
-                        UdonBehaviourObjects.Add(item);
-                    }
+                    var keys = item.Get_EventKeys();
+                    if (keys == null) continue;
+
+                    UdonBehaviourObjects.Add(item);
                 }
 
                 return UdonBehaviourObjects;

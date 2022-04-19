@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -80,20 +82,18 @@
 
         private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action)
         {
-            foreach (var subaction in action._eventTable)
+            var eventKeys = action.Get_EventKeys();
+            if (eventKeys == null) return;
+            for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
             {
-                var button = new QMSingleButton(menu, subaction.Key, () =>
+                var key = eventKeys[UdonKeys];
+                var button = new QMSingleButton(menu, key, () =>
                 {
-                    if (subaction.key.StartsWith("_"))
-                    {
-                        action.SendCustomEvent(subaction.Key);
-                    }
-                    else
-                    {
-                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                    }
-                }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
+                    action.SendUdonEvent(key);
+
+                }, $"Invoke Event {key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
                 Generated.Add(button);
+
             }
         }
 

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -136,56 +138,66 @@
         {
 
             bool HasAddedEveryoneVoteBtn = false;
-            foreach (var subaction in action._eventTable)
+            var eventkeys = action.Get_EventKeys();
+            if(eventkeys != null)
             {
-                var anothertmplist = new List<string>();
-                // RENAME SyncVotedFor With Node Name.
-                if (subaction.Key.ToLower().StartsWith("syncvotedfor"))
+                for(int eventkey = 0; eventkey < eventkeys.Length; eventkey++)
                 {
-                    var LinkedComponent = JarRoleController.AmongUS_GetLinkedComponent(AmongUS_Utils.RemoveSyncVotedForText(subaction.key));
-                    if (LinkedComponent != null)
+                    var key = eventkeys[eventkey];
+                    var anothertmplist = new List<string>();
+                    // RENAME SyncVotedFor With Node Name.
+                    if (key.ToLower().StartsWith("syncvotedfor"))
                     {
-                        if (LinkedComponent.LinkedNode != null)
+                        var LinkedComponent = JarRoleController.AmongUS_GetLinkedComponent(AmongUS_Utils.RemoveSyncVotedForText(key));
+                        if (LinkedComponent != null)
                         {
-                            if (LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI != null)
+                            if (LinkedComponent.LinkedNode != null)
                             {
-                                var btnactionname = "Vote: " + LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI.displayName;
-                                if (anothertmplist.Contains(btnactionname))
+                                if (LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI != null)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    var SyncVotedForBtn = new QMSingleButton(menu, btnactionname, delegate { if (!Component.HasVoted) { action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key); } }, action.gameObject?.ToString() + " Run " + btnactionname);
-                                    if (LinkedComponent.RoleToColor != null && LinkedComponent.RoleToColor.HasValue)
+                                    var btnactionname = "Vote: " + LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI.displayName;
+                                    if (anothertmplist.Contains(btnactionname))
                                     {
-                                        SyncVotedForBtn.SetTextColor(LinkedComponent.RoleToColor.GetValueOrDefault());
+                                        continue;
                                     }
-                                    if (!anothertmplist.Contains(btnactionname))
+                                    else
                                     {
-                                        anothertmplist.Add(btnactionname);
+                                        var SyncVotedForBtn = new QMSingleButton(menu, btnactionname, delegate { if (!Component.HasVoted) { action.SendUdonEvent(key); } }, action.gameObject?.ToString() + " Run " + btnactionname);
+                                        if (LinkedComponent.RoleToColor != null && LinkedComponent.RoleToColor.HasValue)
+                                        {
+                                            SyncVotedForBtn.SetTextColor(LinkedComponent.RoleToColor.GetValueOrDefault());
+                                        }
+                                        if (!anothertmplist.Contains(btnactionname))
+                                        {
+                                            anothertmplist.Add(btnactionname);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
-                if (!HasAddedEveryoneVoteBtn)
-                {
-                    new QMSingleButton(menu, "Everyone vote : " + NodeTranslated, delegate { AmongUS_Utils.AllVoteFor(Component); }, action.gameObject?.ToString() + "Everyone votes : " + NodeTranslated, Color.green);
-                    HasAddedEveryoneVoteBtn = true;
-                }
-                if (subaction.Key.ToLower().StartsWith("syncabstainedvoting"))
-                {
-                    new QMSingleButton(menu, "Skip Voting", delegate
+                    if (!HasAddedEveryoneVoteBtn)
                     {
-                        if (Component.AmongUSCanVote)
+                        new QMSingleButton(menu, "Everyone vote : " + NodeTranslated, delegate { AmongUS_Utils.AllVoteFor(Component); }, action.gameObject?.ToString() + "Everyone votes : " + NodeTranslated, Color.green);
+                        HasAddedEveryoneVoteBtn = true;
+                    }
+                    if (key.ToLower().StartsWith("syncabstainedvoting"))
+                    {
+                        new QMSingleButton(menu, "Skip Voting", delegate
                         {
-                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                        }
-                    }, action.gameObject?.ToString() + " Run " + "Skip Voting", Color.green);
+                            if (Component.AmongUSCanVote)
+                            {
+                                action.SendUdonEvent(key);
+                            }
+                        }, action.gameObject?.ToString() + " Run " + "Skip Voting", Color.green);
+                    }
+
                 }
+
+
             }
+
+
 
         }
 

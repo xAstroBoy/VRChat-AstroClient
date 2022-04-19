@@ -161,14 +161,7 @@
             {
                 if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
                 {
-                    if (EventKey.StartsWith("_"))
-                    {
-                        UdonBehaviour.SendCustomEvent(EventKey);
-                    }
-                    else
-                    {
-                        UdonBehaviour.SendCustomNetworkEvent(EventTarget, EventKey);
-                    }
+                    UdonBehaviour.SendUdonEvent(EventKey, EventTarget);
                 }
             }
             else

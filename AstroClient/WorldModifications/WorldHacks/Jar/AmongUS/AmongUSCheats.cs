@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 {
     using System;
     using System.Collections;
@@ -195,16 +197,15 @@
             EmptyGarbage_Cafeteria_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Cafeteria)", "SyncConfirmAnimation");
             SubmitScanTask = UdonSearch.FindUdonEvent("Task Submit Scan", "SyncStartScan");
 
-            for (int i = 0; i < VictoryCrewmateEvent.UdonBehaviour._eventTable.entries.Count; i++)
+            var VictoryCrewMateKeys = VictoryCrewmateEvent.UdonBehaviour.Get_EventKeys();
+            for (int i = 0; i < VictoryCrewMateKeys.Length; i++)
             {
-                var subaction = VictoryCrewmateEvent.UdonBehaviour._eventTable.entries[i];
-                if (subaction.key.IsNullOrEmptyOrWhiteSpace()) continue;
-
-                if (subaction.key.StartsWith("SyncDoSabotage"))
+                var subaction = VictoryCrewMateKeys[i];
+                if (subaction.StartsWith("SyncDoSabotage"))
                 {
-                    if (subaction.key.Contains("Doors"))
+                    if (subaction.Contains("Doors"))
                     {
-                        var tmp = new UdonBehaviour_Cached(VictoryCrewmateEvent.UdonBehaviour, subaction.key);
+                        var tmp = new UdonBehaviour_Cached(VictoryCrewmateEvent.UdonBehaviour, subaction);
                         if (!SabotageAllDoors.Contains(tmp))
                         {
                             SabotageAllDoors.Add(tmp);

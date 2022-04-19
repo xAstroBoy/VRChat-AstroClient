@@ -179,6 +179,7 @@
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
     <Compile Include="Tools\UdonEditor\UdonDumper.cs" />
+    <Compile Include="Tools\UdonEditor\UdonAPIExtensions.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\ItemTweakerModule.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
@@ -512,7 +513,6 @@
     <Compile Include="Tools\UdonSearcher\UdonReplacer.cs" />
     <Compile Include="Tools\UdonEditor\Il2CppConverter.cs" />
     <Compile Include="Tools\UdonEditor\UdonHeapUnboxerUtils.cs" />
-    <Compile Include="Tools\UdonEditor\UdonParser.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnpacker_Utils_ext.cs" />
     <Compile Include="Tools\UdonEditor\UdonUnpacker_Utils.cs" />
     <Compile Include="Tools\UdonEditor\RawUdonBehaviour.cs" />

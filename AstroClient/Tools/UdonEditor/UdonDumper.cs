@@ -64,21 +64,15 @@ namespace AstroClient.Tools.UdonEditor
         {
             if (udon != null)
             {
-                if (udon._eventTable != null && udon._eventTable.entries != null)
+                var eventKeys = udon.Get_EventKeys();
+                if (eventKeys == null) return null;
+                StringBuilder builder = new StringBuilder();
+                for (int Key = 0; Key < eventKeys.Length; Key++)
                 {
-                    if (udon._eventTable.entries.Count != 0)
-                    {
-                        StringBuilder builder = new StringBuilder();
-                        foreach (var item in udon._eventTable.entries)
-                        {
-                            if (item.key.IsNotNullOrEmptyOrWhiteSpace())
-                            {
-                                builder.AppendLine($"Key : {item.key}");
-                            }
-                        }
-                        return builder.ToString();
-                    }
+                    var subaction = eventKeys[Key];
+                    builder.AppendLine($"Key : {subaction}");
                 }
+                return builder.ToString();
             }
             return null;
         }

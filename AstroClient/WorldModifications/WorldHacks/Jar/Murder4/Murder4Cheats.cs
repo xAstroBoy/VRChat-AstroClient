@@ -258,47 +258,60 @@
             item_Silenced_Revolver_1 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
             item_Grenade = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
             Snake_Crate = GameObjectFinder.Find("/Game Logic/Snakes/SnakeDispenser");
-            foreach (var action in UdonParser.WorldBehaviours)
+            bool HasFoundLogicEvents = false;
+            foreach (var action in WorldUtils.UdonScripts)
+            {
                 if (action.gameObject.name == "Game Logic")
-                    foreach (var subaction in action._eventTable)
+                {
+                    var eventKeys = action.Get_EventKeys();
+                    if (eventKeys == null) continue;
+                    for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                     {
-                        if (subaction.key == "SyncStart")
+                        var key = eventKeys[UdonKeys];
+                        if (key == "SyncStart")
                         {
-                            StartGameEvent = new UdonBehaviour_Cached(action, subaction.key);
+                            StartGameEvent = new UdonBehaviour_Cached(action, key);
                             Log.Write("Found Start Game Event.");
                         }
 
-                        if (subaction.key == "SyncAbort")
+                        if (key == "SyncAbort")
                         {
-                            AbortGameEvent = new UdonBehaviour_Cached(action, subaction.key);
+                            AbortGameEvent = new UdonBehaviour_Cached(action, key);
                             Log.Write("Found Abort Game Event.");
                         }
 
-                        if (subaction.key == "SyncVictoryB")
+                        if (key == "SyncVictoryB")
                         {
-                            VictoryBystanderEvent = new UdonBehaviour_Cached(action, subaction.key);
+                            VictoryBystanderEvent = new UdonBehaviour_Cached(action, key);
                             Log.Write("Found Victory Bystander Event.");
                         }
 
-                        if (subaction.key == "SyncVictoryM")
+                        if (key == "SyncVictoryM")
                         {
-                            VictoryMurdererEvent = new UdonBehaviour_Cached(action, subaction.key);
+                            VictoryMurdererEvent = new UdonBehaviour_Cached(action, key);
                             Log.Write("Found Victory Murderer Event.");
                         }
 
-                        if (subaction.key == "OnPlayerUnlockedClues")
+                        if (key == "OnPlayerUnlockedClues")
                         {
-                            OnPlayerUnlockedClues = new UdonBehaviour_Cached(action, subaction.key);
+                            OnPlayerUnlockedClues = new UdonBehaviour_Cached(action, key);
                             Log.Write("Found Unlocked Clues Sound.");
                         }
 
                         if (StartGameEvent != null && AbortGameEvent != null && VictoryBystanderEvent != null && VictoryMurdererEvent != null && OnPlayerUnlockedClues != null)
                         {
+                            HasFoundLogicEvents = true;
                             Log.Debug("Finished Finding all Udon Events!");
                             break;
                         }
                     }
 
+                    if (HasFoundLogicEvents)
+                    {
+                        break;
+                    }
+                }
+            }
             if (GameStartbtn != null)
             {
                 GameStartbtn.SetActive(StartGameEvent.IsNotNull());

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -93,18 +95,22 @@
                                                 {
                                                     var KillPlayerBtn = new QMSingleButton(CurrentScrollMenu, "Kill " + NodeName, null, "Kill " + NodeName);
                                                     // FIND THE KILL ACTION
-                                                    foreach (var subaction in action._eventTable)
+                                                    var eventKeys = action.Get_EventKeys();
+                                                    if (eventKeys != null)
                                                     {
-                                                        if (subaction.key == "SyncKill")
+                                                        for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                                                         {
-                                                            KillPlayerBtn.SetAction(new Action(() =>
+                                                            var key = eventKeys[UdonKeys];
+                                                            if (key == "SyncKill")
                                                             {
-                                                                action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                                                            }));
-                                                            break;
+                                                                KillPlayerBtn.SetAction(new Action(() =>
+                                                                {
+                                                                    action.SendUdonEvent(key);
+                                                                }));
+                                                                break;
+                                                            }
                                                         }
                                                     }
-
                                                     if (Component.RoleToColor != null)
                                                     {
                                                         KillPlayerBtn.SetTextColor(Component.RoleToColor.GetValueOrDefault());

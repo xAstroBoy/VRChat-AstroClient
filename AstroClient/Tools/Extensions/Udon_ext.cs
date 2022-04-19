@@ -79,18 +79,18 @@
         {
             if (UdonBehaviour != null)
             {
-                var entries = UdonBehaviour._eventTable.entries;
-                for (int i = 0; i < entries.Count; i++)
+                var eventKeys = UdonBehaviour.Get_EventKeys();
+                if (eventKeys == null) return false;
+                for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                 {
-                    var actionkeys = entries[i];
-                    if (actionkeys.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                    if (actionkeys.key == EventKey)
+                    var key = eventKeys[UdonKeys];
+                    if (key == EventKey)
                         return true;
-
                 }
             }
             return false;
         }
+
 
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -86,70 +88,54 @@
         {
             var sabotagepage = new QMNestedGridMenu(menu, "Sabotage Options", "All Sabotage Options here!", null, Color.red);
             var RepairsPage = new QMNestedGridMenu(menu, "Repairs Options", "All Repairs Options here!", null, Color.green);
-
-            foreach (var subaction in action._eventTable)
+            var eventKeys = action.Get_EventKeys();
+            if (eventKeys != null)
             {
-                if (subaction.Key.StartsWith("SyncDoSabotage"))
+                for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                 {
-                    var cleanedstr = subaction.key.Replace("SyncDoSabotage", string.Empty).Replace(" ", string.Empty);
+                    var key = eventKeys[UdonKeys];
+                    if (key.StartsWith("SyncDoSabotage"))
+                    {
+                        var cleanedstr = key.Replace("SyncDoSabotage", string.Empty).Replace(" ", string.Empty);
 
-                    var subaction_btn = new QMSingleButton(sabotagepage, "Sabotage " + cleanedstr, null, action.gameObject?.ToString() + " Sabotage " + cleanedstr);
-                    subaction_btn.SetTextColor(Color.red);
-                    subaction_btn.SetAction(new Action(() =>
-                    {
-                        if (subaction.key.StartsWith("_"))
+                        var subaction_btn = new QMSingleButton(sabotagepage, "Sabotage " + cleanedstr, null, action.gameObject?.ToString() + " Sabotage " + cleanedstr);
+                        subaction_btn.SetTextColor(Color.red);
+                        subaction_btn.SetAction(new Action(() =>
                         {
-                            action.SendCustomEvent(subaction.Key);
-                        }
-                        else
+                            action.SendUdonEvent(key);
+                        }));
+                        GeneratedButtons.Add(subaction_btn);
+                        if (key.Contains("Doors"))
                         {
-                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                        }
-                    }));
-                    GeneratedButtons.Add(subaction_btn);
-                    if (subaction.key.Contains("Doors"))
-                    {
-                        var tmp = new UdonBehaviour_Cached(action, subaction.key);
-                        if (!CachedDoorsEvents.Contains(tmp))
-                        {
-                            CachedDoorsEvents.Add(tmp);
+                            var tmp = new UdonBehaviour_Cached(action, key);
+                            if (!CachedDoorsEvents.Contains(tmp))
+                            {
+                                CachedDoorsEvents.Add(tmp);
+                            }
                         }
                     }
-                }
-                else if (subaction.Key.StartsWith("CancelAllSabotage"))
-                {
-                    var subaction_btn = new QMSingleButton(menu, "Cancel All Sabotages ", null, action.gameObject?.ToString() + "Cancel All Sabotages");
-                    subaction_btn.SetAction(new Action(() =>
+                    else if (key.StartsWith("CancelAllSabotage"))
                     {
-                        if (subaction.key.StartsWith("_"))
+                        var subaction_btn = new QMSingleButton(menu, "Cancel All Sabotages ", null, action.gameObject?.ToString() + "Cancel All Sabotages");
+                        subaction_btn.SetAction(new Action(() =>
                         {
-                            action.SendCustomEvent(subaction.Key);
-                        }
-                        else
-                        {
-                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                        }
-                    }));
-                    subaction_btn.SetTextColor(Color.green);
-                    GeneratedButtons.Add(subaction_btn);
-                }
-                else if (subaction.Key.StartsWith("SyncRepair"))
-                {
-                    var cleanedstr = subaction.key.Replace("SyncRepair", string.Empty).Replace(" ", string.Empty);
-                    var subaction_btn = new QMSingleButton(RepairsPage, "Repair " + cleanedstr, null, action.gameObject?.ToString() + " Repair " + cleanedstr);
-                    subaction_btn.SetAction(new Action(() =>
+                            action.SendUdonEvent(key);
+                        }));
+                        subaction_btn.SetTextColor(Color.green);
+                        GeneratedButtons.Add(subaction_btn);
+                    }
+                    else if (key.StartsWith("SyncRepair"))
                     {
-                        if (subaction.key.StartsWith("_"))
+                        var cleanedstr = key.Replace("SyncRepair", string.Empty).Replace(" ", string.Empty);
+                        var subaction_btn = new QMSingleButton(RepairsPage, "Repair " + cleanedstr, null, action.gameObject?.ToString() + " Repair " + cleanedstr);
+                        subaction_btn.SetAction(new Action(() =>
                         {
-                            action.SendCustomEvent(subaction.Key);
-                        }
-                        else
-                        {
-                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                        }
-                    }));
-                    subaction_btn.SetTextColor(Color.green);
-                    GeneratedButtons.Add(subaction_btn);
+                            action.SendUdonEvent(key);
+                        }));
+                        subaction_btn.SetTextColor(Color.green);
+                        GeneratedButtons.Add(subaction_btn);
+                    }
+
                 }
             }
             if (CachedDoorsEvents.Count() != 0)

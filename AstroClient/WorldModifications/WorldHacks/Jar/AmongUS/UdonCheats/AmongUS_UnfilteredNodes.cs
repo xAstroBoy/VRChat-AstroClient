@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -125,81 +127,58 @@
 
         private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action)
         {
-            foreach (var subaction in action._eventTable)
+            var eventKeys = action.Get_EventKeys();
+            if (eventKeys != null)
             {
-                var anothertmplist = new List<string>();
-                // RENAME SyncVotedFor With Node Name.
-                if (subaction.Key.ToLower().StartsWith("syncvotedfor"))
+                for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                 {
-                    var LinkedComponent = JarRoleController.AmongUS_GetLinkedComponent(AmongUS_Utils.RemoveSyncVotedForText(subaction.key));
-                    if (LinkedComponent != null && LinkedComponent.LinkedNode != null)
+                    var key = eventKeys[UdonKeys];
+                    var anothertmplist = new List<string>();
+                    // RENAME SyncVotedFor With Node Name.
+                    if (key.ToLower().StartsWith("syncvotedfor"))
                     {
-                        if (LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI != null)
+                        var LinkedComponent = JarRoleController.AmongUS_GetLinkedComponent(AmongUS_Utils.RemoveSyncVotedForText(key));
+                        if (LinkedComponent != null && LinkedComponent.LinkedNode != null)
                         {
-                            var LinkedNodeTranslated = LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI.displayName;
+                            if (LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI != null)
+                            {
+                                var LinkedNodeTranslated = LinkedComponent.LinkedNode.NodeReader.VRCPlayerAPI.displayName;
 
-                            if (anothertmplist.Contains(LinkedNodeTranslated))
-                            {
-                                continue;
-                            }
-                            else
-                            {
-                                var SyncVotedForBtn = new QMSingleButton(menu, 0f, 0f, "Vote: " + LinkedNodeTranslated, delegate
+                                if (anothertmplist.Contains(LinkedNodeTranslated))
                                 {
-                                    if (subaction.key.StartsWith("_"))
-                                    {
-                                        action.SendCustomEvent(subaction.Key);
-                                    }
-                                    else
-                                    {
-                                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                                    }
-                                }, action.gameObject?.ToString() + " Run " + "Vote: " + LinkedNodeTranslated, null, null, true);
-                                if (LinkedComponent.RoleToColor != null && LinkedComponent.RoleToColor.HasValue)
-                                {
-                                    SyncVotedForBtn.SetTextColor(LinkedComponent.RoleToColor.GetValueOrDefault());
-                                }
-
-                                anothertmplist.Add(LinkedNodeTranslated);
-                            }
-                        }
-                        else
-                        {
-                            var SyncVotedForBtn = new QMSingleButton(menu, subaction.Key, delegate
-                            {
-                                if (subaction.key.StartsWith("_"))
-                                {
-                                    action.SendCustomEvent(subaction.Key);
+                                    continue;
                                 }
                                 else
                                 {
-                                    action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                                    var SyncVotedForBtn = new QMSingleButton(menu, 0f, 0f, "Vote: " + LinkedNodeTranslated, delegate
+                                    {
+                                        action.SendUdonEvent(key);
+                                    }, action.gameObject?.ToString() + " Run " + "Vote: " + LinkedNodeTranslated, null, null, true);
+                                    if (LinkedComponent.RoleToColor != null && LinkedComponent.RoleToColor.HasValue)
+                                    {
+                                        SyncVotedForBtn.SetTextColor(LinkedComponent.RoleToColor.GetValueOrDefault());
+                                    }
+
+                                    anothertmplist.Add(LinkedNodeTranslated);
                                 }
-                            }, action.gameObject?.ToString() + " Run " + subaction.Key);
+                            }
+                            else
+                            {
+                                var SyncVotedForBtn = new QMSingleButton(menu, key, delegate
+                                {
+                                    action.SendUdonEvent(key);
+                                }, action.gameObject?.ToString() + " Run " + key);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    new QMSingleButton(menu, subaction.Key, delegate
+                    else
                     {
-                        if (subaction.key.StartsWith("_"))
+                        new QMSingleButton(menu, key, delegate
                         {
-                            action.SendCustomEvent(subaction.Key);
-                        }
-                        else
-                        {
-                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                        }
-                    }, action.gameObject?.ToString() + " Run " + subaction.Key);
+                            action.SendUdonEvent(key);
+                        }, action.gameObject?.ToString() + " Run " + key);
+                    }
                 }
-            }
-
-            foreach (var subaction in action._eventTable)
-            {
-                new QMSingleButton(menu, subaction.Key, () =>
-                {
-                }, $"Invoke Event {subaction.Key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
             }
         }
 

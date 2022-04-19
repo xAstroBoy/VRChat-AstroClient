@@ -1066,7 +1066,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     RenderCamera.SetActive(true);
                 }
 
-                UdonParser.WorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => Bells.Add(s.FindUdonEvent("DingDong")));
+                WorldUtils.UdonScripts.Where(b => b.name == "Doorbell").ToList().ForEach(s => Bells.Add(s.FindUdonEvent("DingDong")));
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
                 if (Penthouse != null)
@@ -1432,7 +1432,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void BlueChairSpam()
         {
-            var temp = UdonParser.WorldBehaviours.Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToList();
+            var temp = WorldUtils.UdonScripts.Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToList();
             for (int i = 0; i < temp.Count; i++)
             {
                 UdonBehaviour chair = temp[i];

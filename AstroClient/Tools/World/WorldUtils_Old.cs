@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.World
+﻿using AstroClient.Tools.UdonEditor;
+
+namespace AstroClient.Tools.World
 {
     #region Imports
 
@@ -563,10 +565,9 @@
                 for (int i = 0; i < list.Count; i++)
                 {
                     UdonBehaviour item = list[i];
-                    if (item._eventTable.Keys.Count != 0)
-                    {
-                        UdonBehaviourObjects.Add(item);
-                    }
+                    var keys = item.Get_EventKeys();
+                    if (keys == null) continue;
+                    UdonBehaviourObjects.Add(item);
                 }
                 return UdonBehaviourObjects;
             }

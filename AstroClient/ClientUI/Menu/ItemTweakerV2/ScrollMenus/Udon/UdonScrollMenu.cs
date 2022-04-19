@@ -112,43 +112,41 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
                     for (var index = 0; index < udonevents.Count; index++)
                     {
                         var action = udonevents[index];
-                        if (action._eventTable.Count != 0)
+                        var keys = action.Get_EventKeys();
+                        if (keys == null) continue;
+                        var udon = new QMNestedGridMenu(CurrentScrollMenu, action.gameObject.name, $"Open Events of {action.gameObject.name}");
+                        GeneratedPages.Add(udon);
+                        GenerateInternal(udon, action);
+                        udon.AddOpenAction(() =>
                         {
-                            var udon = new QMNestedGridMenu(CurrentScrollMenu, action.gameObject.name, $"Open Events of {action.gameObject.name}");
-                            GeneratedPages.Add(udon);
-                            GenerateInternal(udon, action);
-                            udon.AddOpenAction(() =>
+                            if (CurrentUnboxBehaviourToConsole != null)
                             {
-                                if (CurrentUnboxBehaviourToConsole != null)
-                                {
-                                    CurrentUnboxBehaviourToConsole.SetButtonText($"Unbox {action.gameObject.name}");
-                                    CurrentUnboxBehaviourToConsole.SetToolTip($"Attempts to unbox  {action.gameObject.name} in console");
-                                    CurrentUnboxBehaviourToConsole.setAction(() => { action.UnboxUdonEventToConsole(); });
-                                    CurrentUnboxBehaviourToConsole.SetActive(true);
-                                }
-                                if (GenerateGettersForThisUdon != null)
-                                {
-                                    GenerateGettersForThisUdon.SetButtonText($"Generate Getters for  {action.gameObject.name} Heap");
-                                    GenerateGettersForThisUdon.SetToolTip($"Attempts to Generate Getters for  {action.gameObject.name}  Heap to file");
-                                    GenerateGettersForThisUdon.setAction(() => { action.GenerateGettersForThisUdonBehaviour(); });
-                                    GenerateGettersForThisUdon.SetActive(true);
-                                }
-
-                                if (DisassembleUdonBehaviourProgram != null)
-                                {
-                                    DisassembleUdonBehaviourProgram.SetButtonText($"Disassemble  {action.gameObject.name} Program");
-                                    DisassembleUdonBehaviourProgram.SetToolTip($"Attempts to Disassemble  {action.gameObject.name} Program to file");
-                                    DisassembleUdonBehaviourProgram.setAction(() => { action.DumpUdonProgramCode(); });
-                                    DisassembleUdonBehaviourProgram.SetActive(true);
-                                }
-
-                            });
-                            udon.SetBackButtonAction(CurrentScrollMenu, () =>
+                                CurrentUnboxBehaviourToConsole.SetButtonText($"Unbox {action.gameObject.name}");
+                                CurrentUnboxBehaviourToConsole.SetToolTip($"Attempts to unbox  {action.gameObject.name} in console");
+                                CurrentUnboxBehaviourToConsole.setAction(() => { action.UnboxUdonEventToConsole(); });
+                                CurrentUnboxBehaviourToConsole.SetActive(true);
+                            }
+                            if (GenerateGettersForThisUdon != null)
                             {
-                                MakeSingleUdonButtonsUnavailable();
-                            });
+                                GenerateGettersForThisUdon.SetButtonText($"Generate Getters for  {action.gameObject.name} Heap");
+                                GenerateGettersForThisUdon.SetToolTip($"Attempts to Generate Getters for  {action.gameObject.name}  Heap to file");
+                                GenerateGettersForThisUdon.setAction(() => { action.GenerateGettersForThisUdonBehaviour(); });
+                                GenerateGettersForThisUdon.SetActive(true);
+                            }
 
-                        }
+                            if (DisassembleUdonBehaviourProgram != null)
+                            {
+                                DisassembleUdonBehaviourProgram.SetButtonText($"Disassemble  {action.gameObject.name} Program");
+                                DisassembleUdonBehaviourProgram.SetToolTip($"Attempts to Disassemble  {action.gameObject.name} Program to file");
+                                DisassembleUdonBehaviourProgram.setAction(() => { action.DumpUdonProgramCode(); });
+                                DisassembleUdonBehaviourProgram.SetActive(true);
+                            }
+
+                        });
+                        udon.SetBackButtonAction(CurrentScrollMenu, () =>
+                        {
+                            MakeSingleUdonButtonsUnavailable();
+                        });
                     }
                 }
                 HasGenerated = true;
@@ -158,16 +156,17 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
 
         private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action)
         {
-            for (int i = 0; i < action._eventTable.entries.Count; i++)
+            var eventKeys = action.Get_EventKeys();
+            if (eventKeys == null) return;
+            for (int i = 0; i < eventKeys.Length; i++)
             {
-                var subaction = action._eventTable.entries[i];
-                if (subaction.key.IsNullOrEmptyOrWhiteSpace()) continue;
-                var btn = new QMSingleButton(menu, subaction.key, null, $"Invoke Event {subaction.key} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
+                var subaction = eventKeys[i];
+                var btn = new QMSingleButton(menu, subaction, null, $"Invoke Event {subaction} of {action.gameObject?.ToString()} (Interaction : {action.interactText})");
                 if (Active_Spammers != null)
                 {
                     if (Active_Spammers.Count != 0)
                     {
-                        if (Active_Spammers.FirstOrDefault(x => x.UdonBehaviour.Equals(action) && x.EventKey.Equals(subaction.key)) != null)
+                        if (Active_Spammers.FirstOrDefault(x => x.UdonBehaviour.Equals(action) && x.EventKey.Equals(subaction)) != null)
                         {
                             btn.setTextColorHTML("#FFA500");
                         }
@@ -181,22 +180,15 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
                 {
                     if (!SpamSelectedEvent)
                     {
-                        if (subaction.key.StartsWith("_"))
-                        {
-                            action.SendCustomEvent(subaction.key);
-                        }
-                        else
-                        {
-                            action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.key);
-                        }
+                        action.SendUdonEvent(subaction);
                     }
                     else
                     {
-                        Generated_Spammer = new UdonBehaviour_Cached(action, subaction.key);
+                        Generated_Spammer = new UdonBehaviour_Cached(action, subaction);
                         if (!Active_Spammers.Contains(Generated_Spammer))
                         {
-                            Log.Debug($"Spamming Event in {action.name}, {subaction.key}");
-                            PopupUtils.QueHudMessage($"<color=#FFA500>Spamming Udon Event in {action.name}, {subaction.key}</color>");
+                            Log.Debug($"Spamming Event in {action.name}, {subaction}");
+                            PopupUtils.QueHudMessage($"<color=#FFA500>Spamming Udon Event in {action.name}, {subaction}</color>");
                             Active_Spammers.Add(Generated_Spammer);
                             btn.setTextColorHTML("#FFA500");
                             Generated_Spammer.InvokeOnLoop = true;
