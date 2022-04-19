@@ -42,31 +42,35 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
             {
 
                 // Suspicion of breaking other worlds with custom RPC systems, not 100% safe or perfect.
-                //// First Check if is a  irregular RPC Being sent.
-                //if(Irregular_RPC_Firewall.isIrregularRPC(__1, __0))
-                //{
-                //    return false;
-                //}
+
+                if (__0 != null && __1 != null)
+                {
+                    //// First Check if is a  irregular RPC Being sent.
+                    //if(Irregular_RPC_Firewall.isIrregularRPC(__1, __0))
+                    //{
+                    //    return false;
+                    //}
 
 
-                if (__1.Get_Parameter_GameObject_Name().Equals("USpeak"))
-                {
-                    return EventDispatcher_HandleUSpeak.Handle_USpeak(); // TODO: if we need to use Uspeak or filter it, we can edit this handler (for now it just returns true)
-                }
-                var parameter = __1.Get_parameterString();
+                    if (__1.Get_Parameter_GameObject_Name().Equals("USpeak"))
+                    {
+                        return EventDispatcher_HandleUSpeak.Handle_USpeak(); // TODO: if we need to use Uspeak or filter it, we can edit this handler (for now it just returns true)
+                    }
+                    var parameter = __1.Get_parameterString();
 
-                if (parameter.Equals("TeleportRPC"))
-                {
-                    return EventDispatcher_HandleTeleportRPC.HandleTeleportRPC(__1, __0, __1.Get_Parameter_GameObject(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
-                }
+                    if (parameter.Equals("TeleportRPC"))
+                    {
+                        return EventDispatcher_HandleTeleportRPC.HandleTeleportRPC(__1, __0, __1.Get_Parameter_GameObject(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
+                    }
 
-                if (parameter.Equals("UdonSyncRunProgramAsRPC"))
-                {
-                    return EventDispatcher_HandleUdonEvent.Handle_UdonEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText());;
-                }
-                if (!parameter.Equals("UdonSyncRunProgramAsRPC"))
-                {
-                    return EventDispatcher_HandleRPCEvents.Handle_OtherRPCEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
+                    if (parameter.Equals("UdonSyncRunProgramAsRPC"))
+                    {
+                        return EventDispatcher_HandleUdonEvent.Handle_UdonEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText()); ;
+                    }
+                    if (!parameter.Equals("UdonSyncRunProgramAsRPC"))
+                    {
+                        return EventDispatcher_HandleRPCEvents.Handle_OtherRPCEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
+                    }
                 }
 
             }
