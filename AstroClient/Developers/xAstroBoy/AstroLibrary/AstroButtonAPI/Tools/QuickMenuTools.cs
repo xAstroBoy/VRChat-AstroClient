@@ -312,12 +312,15 @@
                 if (_NestedPages == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "QMParent")
                         {
                             return _NestedPages = button;
                             break;
                         }
+                    }
                 }
 
                 return _NestedPages;
@@ -341,12 +344,15 @@
                 if (_UIPageTemplate_Right == null)
                 {
                     var Buttons = Wing_Right.GetComponentsInChildren<UIPage>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        UIPage button = Buttons[i];
                         if (button.name == "Friends")
                         {
                             _UIPageTemplate_Right = button;
                             break;
                         }
+                    }
                 }
 
                 return _UIPageTemplate_Right;
@@ -360,12 +366,15 @@
                 if (_UIPageTemplate_Left == null)
                 {
                     var Buttons = Wing_Left.GetComponentsInChildren<UIPage>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        UIPage button = Buttons[i];
                         if (button.name == "Friends")
                         {
                             _UIPageTemplate_Left = button;
                             break;
                         }
+                    }
                 }
 
                 return _UIPageTemplate_Left;
@@ -379,12 +388,15 @@
                 if (_DebugPanelTemplate == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<DebugInfoPanel>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        DebugInfoPanel button = Buttons[i];
                         if (button.name == "DebugInfoPanel")
                         {
                             _DebugPanelTemplate = button.gameObject;
                             break;
                         }
+                    }
                 }
 
                 return _DebugPanelTemplate;
@@ -398,12 +410,15 @@
                 if (_WingMenuStateControllerRight == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<MenuStateController>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        MenuStateController button = Buttons[i];
                         if (button.name == "Wing_Right")
                         {
                             _WingMenuStateControllerRight = button;
                             break;
                         }
+                    }
                 }
 
                 return _WingMenuStateControllerRight;
@@ -417,12 +432,15 @@
                 if (_WingMenuStateControllerLeft == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<MenuStateController>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        MenuStateController button = Buttons[i];
                         if (button.name == "Wing_Left")
                         {
                             _WingMenuStateControllerLeft = button;
                             break;
                         }
+                    }
                 }
 
                 return _WingMenuStateControllerLeft;

@@ -45,7 +45,7 @@
             NestedPart.NewText("Text_Title").text = btnToolTip;
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
-            mainButton = new QMTabButton(index, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, icon);
+            mainButton = new QMTabButton(index, () => { OpenMe(); }, btnToolTip, btnBackgroundColor, icon);
         }
 
         internal string GetMenuName()
