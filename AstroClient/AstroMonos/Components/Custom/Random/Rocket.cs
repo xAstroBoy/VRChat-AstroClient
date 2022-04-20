@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Custom.Random
+﻿using AstroClient.Tools.Colors;
+
+namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -59,6 +61,10 @@
             set
             {
                 _ShouldBeAlwaysUp = value;
+                //if(Laser != null)
+                //{
+                //    Laser.useWorldSpace = value;
+                //}
                 Run_OnOnRocketPropertyChanged();
             }
         }
@@ -120,6 +126,7 @@
         private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private LineRenderer Laser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
@@ -135,6 +142,7 @@
                     if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
                     if (value) VRC_AstroPickup.UseText = "Toggle Off Rocket";
                     else VRC_AstroPickup.UseText = "Toggle On Rocket";
+                    Laser.enabled = value;
                 }
             }
         }
@@ -154,12 +162,33 @@
                 VRC_AstroPickup.OnPickupUseDown += () => { IsEnabled = !IsEnabled; };
                 VRC_AstroPickup.OnDrop += () => { isPaused = false; };
             }
+            Laser = gameObject.AddComponent<LineRenderer>();
+            if (Laser != null)
+            {
+                Laser.material = new Material(Shader.Find("VRChat/UI/Additive"));
+                Laser.startWidth = 0.01f;
+                Laser.endWidth = 0.01f;
+                Laser.widthMultiplier = 0.4f;
+                Laser.startColor = SystemColors.OrangeRed;
+                Laser.endColor = SystemColors.OrangeRed;
+            }
 
             IsEnabled = false;
         }
 
+ 
+
         private void Update()
         {
+            Laser.SetPosition(0, this.transform.position);
+            if (!ShouldBeAlwaysUp)
+            {
+                Laser.SetPosition(1, this.transform.position + this.transform.up * 10f);
+            }
+            else
+            {
+                Laser.SetPosition(1, this.transform.position + new Vector3(0, 10f, 0) * 10f);
+            }
             if (!IsEnabled || isPaused || isHeld)
             {
                 if (HasRequiredSettings) HasRequiredSettings = false;
@@ -178,10 +207,17 @@
                 if (!HasRequiredSettings) HasRequiredSettings = true;
                 if (isCurrentOwner)
                 {
-                    if (!ShouldBeAlwaysUp) ApplyRelativeForce(gameObject, 0, Random.Range(1f, 10f), 0);
-                    else ApplyForce(gameObject, 0, Random.Range(1f, 10f), 0);
+                    var forceAmount = Random.Range(1f, 10f);
+                    var forcevector = new Vector3(0, forceAmount, 0);
+                    if (!ShouldBeAlwaysUp)
+                    {
+                        RigidBodyController.Rigidbody.AddRelativeForce(forcevector,  ForceMode.Impulse);
+                    }
+                    else
+                    {
+                        RigidBodyController.Rigidbody.AddForce(forcevector, ForceMode.Impulse);
+                    }
                 }
-
                 RocketTimeCheck = Time.time;
             }
         }
@@ -194,6 +230,7 @@
                 if (gameObject.isLocalPlayerOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
                 PickupController.UseText = OriginalText_Use;
+                Laser.DestroyMeLocal(true);
             }
             catch
             {
