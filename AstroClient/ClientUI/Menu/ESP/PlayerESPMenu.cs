@@ -61,11 +61,11 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            MiscUtils.DelayFunction(2, () =>
+            MiscUtils.DelayFunction(1, () =>
             {
-                if (Toggle_Player_ESP && player != null)
+                if (Toggle_Player_ESP && player != null  && player != GameInstances.LocalPlayer.GetPlayer() && !player.gameObject.GetComponent<PlayerESP>())
                 {
-                    player.gameObject.GetOrAddComponent<PlayerESP>();
+                        player.gameObject.GetOrAddComponent<PlayerESP>();
                 }
             });
 
@@ -78,7 +78,7 @@
                 Player item = WorldUtils.Players[i];
                 if (item != GameInstances.LocalPlayer.GetPlayer() && !item.gameObject.GetComponent<PlayerESP>())
                 {
-                    _ = item.gameObject.AddComponent<PlayerESP>();
+                    _ = item.gameObject.GetOrAddComponent<PlayerESP>();
                 }
             }
         }

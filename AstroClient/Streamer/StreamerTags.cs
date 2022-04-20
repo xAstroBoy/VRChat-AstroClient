@@ -44,7 +44,7 @@
 
                                 if (player.GetAPIUser().isFriend) yield return null;
                                 if (player.GetAPIUser().HasBlockedYou()) yield return null;
-                                var esp = player.GetOrAddComponent<PlayerESP>();
+                                var esp = player.GetComponent<PlayerESP>();
                                 if (esp != null)
                                 {
                                     MiscUtils.DelayFunction(0.5f, () =>

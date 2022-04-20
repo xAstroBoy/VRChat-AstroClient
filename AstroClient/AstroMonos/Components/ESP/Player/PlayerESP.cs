@@ -52,7 +52,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
             SetPlayerDefaultESP();
 
-            InvokeRepeating(nameof(ForceActiveESP), 0.5f, 0.5f);
+            InvokeRepeating(nameof(ForceActiveESP), 0.5f, 0.1f);
         }
 
         private IEnumerator ForceHighlightSystem()
@@ -67,9 +67,15 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
 
         private void ForceActiveESP()
         {
-            if(!HighLightOptions.enabled)
+            if (!HighLightOptions.enabled)
             {
                 HighLightOptions.enabled = true;
+            }
+            if (CurrentRenderer != null)
+            {
+                //CurrentRenderer.enabled = true;
+                //CurrentRenderer.gameObject.SetActive(true);
+                HighLightOptions.AddRenderer(CurrentRenderer);
             }
         }
 
@@ -268,8 +274,8 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        private MeshRenderer _CurrentRenderer;
-        private MeshRenderer CurrentRenderer
+        private Renderer _CurrentRenderer;
+        private Renderer CurrentRenderer
         {
             [HideFromIl2Cpp]
             get
@@ -278,10 +284,10 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                 {
                     if (PlayerSelector != null)
                     {
-                        return _CurrentRenderer = PlayerSelector.GetComponent<MeshRenderer>();
+                        return _CurrentRenderer = PlayerSelector.GetComponent<Renderer>();
                     }
                 }
-
+                
                 return _CurrentRenderer;
             }
         }
@@ -300,7 +306,6 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        private bool HasESPBeingSet = false;
 
         internal HighlightsFXStandalone _HighLightOptions;
 
@@ -312,14 +317,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                 if(_HighLightOptions == null)
                 {
                     _HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
-                    HasESPBeingSet = false;
                 }
-                if (!HasESPBeingSet)
-                {
-                    _HighLightOptions.SetHighlighter(CurrentRenderer, true);
-                    HasESPBeingSet = true;
-                }
-                _HighLightOptions.enabled = true;
                 return _HighLightOptions;
             }
         }
