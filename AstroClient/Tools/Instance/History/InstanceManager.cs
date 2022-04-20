@@ -37,7 +37,7 @@
                     {
                         JToken token = array[i];
                         var instance = JObject.Parse(token.ToString()).ToObject<WorldInstance>();
-                        if ((DateTime.Now - instance.entryTime).TotalHours < 6)
+                        if ((instance.entryTime - DateTime.Now).TotalHours < 6)
                         {
                             instances.Add(instance);
                         }
