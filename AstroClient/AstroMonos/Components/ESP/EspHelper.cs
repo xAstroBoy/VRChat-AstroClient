@@ -24,17 +24,10 @@
             {
                 if (_HighlightFXCamera == null)
                 {
-                    var obj = HighlightsFX.prop_HighlightsFX_0.gameObject;
-                    if (obj != null)
-                    {
-                        _HighlightFXCamera = obj;
-                    }
-                    return obj;
+                    return _HighlightFXCamera = HighlightsFX.prop_HighlightsFX_0.gameObject;
                 }
-                else
-                {
-                    return _HighlightFXCamera;
-                }
+                return _HighlightFXCamera;
+
             }
         }
 

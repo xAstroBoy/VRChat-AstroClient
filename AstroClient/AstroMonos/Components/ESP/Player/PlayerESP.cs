@@ -1,4 +1,7 @@
-﻿using VRC.Core;
+﻿
+
+
+using MelonLoader;
 
 namespace AstroClient.AstroMonos.Components.ESP.Player
 {
@@ -13,61 +16,51 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
     using VRC;
     using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
-
+    using System.Collections;
+    using VRC.Core;
     [RegisterComponent]
     public class PlayerESP : AstroMonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        private List<Il2CppSystem.Object> AntiGarbageCollection = new();
 
-        public PlayerESP(IntPtr obj0) : base(obj0)
+        public PlayerESP(IntPtr ptr) : base(ptr)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
-            AntiGcList.Add(this);
+            AntiGarbageCollection.Add(this);
         }
 
         // Use this for initialization
         internal void Start()
         {
-            // FIND ALLOCATED PLAYER
-            var p = gameObject.GetComponent<Player>();
-            if (p != null)
-            {
-                AssignedPlayer = p;
-            }
-            else
+
+            if (PlayerSelector == null)
             {
                 Destroy(this);
             }
-            if (AssignedPlayer != null)
+            else
             {
-                SelectRegion = AssignedPlayer.transform.Find("SelectRegion");
-                if (SelectRegion == null)
+                if (CurrentRenderer == null)
                 {
+                    Log.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
                     Destroy(this);
+                    return;
                 }
                 else
                 {
-                    if (CurrentRenderer == null)
-                    {
-                        Log.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
-                        Destroy(this);
-                        return;
-                    }
-                    else
-                    {
-                        if (HighLightOptions == null)
-                        {
-                            HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
-                        }
 
-                        if (CurrentRenderer != null)
-                        {
-                            HighLightOptions.SetHighlighter(CurrentRenderer, true);
-                        }
-                    }
+                    MelonCoroutines.Start(ForceHighlightSystem()); 
                 }
-                SetPlayerDefaultESP();
             }
+            SetPlayerDefaultESP();
+        }
+
+        private IEnumerator ForceHighlightSystem()
+        {
+            while (HighLightOptions == null)
+                yield return null;
+            while (AssignedPlayer == null)
+                yield return null;
+
+            yield return null;
         }
 
         private Color BlockedColor
@@ -75,7 +68,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             [HideFromIl2Cpp]
             get
             {
-                return ConfigManager.ESPBlockedColor;
+                return Config.ConfigManager.ESPBlockedColor;
             }
         }
 
@@ -84,7 +77,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             [HideFromIl2Cpp]
             get
             {
-                return ConfigManager.ESPFriendColor;
+                return Config.ConfigManager.ESPFriendColor;
             }
         }
 
@@ -93,7 +86,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             [HideFromIl2Cpp]
             get
             {
-                return ConfigManager.PublicESPColor;
+                return Config.ConfigManager.PublicESPColor;
             }
         }
 
@@ -149,15 +142,6 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             HighLightOptions.DestroyHighlighter();
         }
 
-        internal void OnEnable()
-        {
-            HighLightOptions.enabled = true;
-        }
-
-        internal void OnDisable()
-        {
-            HighLightOptions.enabled = false;
-        }
 
         internal void ChangeColor(Color newcolor)
         {
@@ -279,9 +263,9 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             {
                 if (_CurrentRenderer == null)
                 {
-                    if (SelectRegion != null)
+                    if (PlayerSelector != null)
                     {
-                        return _CurrentRenderer = SelectRegion.GetComponentInChildren<MeshRenderer>();
+                        return _CurrentRenderer = PlayerSelector.GetComponent<MeshRenderer>();
                     }
                 }
 
@@ -292,9 +276,39 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
         {
             Destroy(this);
         }
+        private PlayerSelector _PlayerSelector;
+        private PlayerSelector PlayerSelector
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_PlayerSelector == null)
+                {
 
-        private Transform SelectRegion { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+                    return _PlayerSelector = this.GetComponentInChildren<PlayerSelector>(true);
+                }
+                return _PlayerSelector;
+            }
+        }
+
+
+        internal HighlightsFXStandalone _HighLightOptions;
+
+        private HighlightsFXStandalone HighLightOptions
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if(_HighLightOptions == null)
+                {
+                    _HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
+                }
+                _HighLightOptions.SetHighlighter(CurrentRenderer, true);
+                _HighLightOptions.enabled = true;
+                return _HighLightOptions;
+            }
+        }
+
         internal bool _UseCustomColor;
 
         internal bool UseCustomColor
@@ -315,6 +329,18 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        internal Player AssignedPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        private Player _AssignedPlayer;
+        internal Player AssignedPlayer
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if(_AssignedPlayer == null)
+                {
+                    return _AssignedPlayer = GetComponent<Player>();
+                }
+                return _AssignedPlayer;
+            }
+        }
     }
 }

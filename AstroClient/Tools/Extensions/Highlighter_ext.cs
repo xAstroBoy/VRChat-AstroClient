@@ -8,12 +8,40 @@
     {
         private static void RemoveRendFromUnlistedHighlighter(Renderer rend)
         {
-            _ = HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+            if (rend != null)
+            {
+                var propFX = HighlightsFX.prop_HighlightsFX_0;
+                if (propFX != null)
+                {
+                    var hashset = propFX.field_Protected_HashSet_1_Renderer_0;
+                    if (hashset != null)
+                    {
+                        if (hashset.Contains(rend))
+                        {
+                            hashset.Remove(rend);
+                        }
+                    }
+                }
+            }
         }
 
         private static void RemoveRendFromUnlistedHighlighter(MeshRenderer rend)
         {
-            _ = HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+            if (rend != null)
+            {
+                var propFX = HighlightsFX.prop_HighlightsFX_0;
+                if (propFX != null)
+                {
+                    var hashset = propFX.field_Protected_HashSet_1_Renderer_0;
+                    if (hashset != null)
+                    {
+                        if (hashset.Contains(rend))
+                        {
+                            hashset.Remove(rend);
+                        }
+                    }
+                }
+            }
         }
 
         internal static void SetHighlighter(this HighlightsFXStandalone item, Renderer rend, bool status)
@@ -77,9 +105,9 @@
             if (item != null)
             {
                 EspHelper.SpawnedESPsHolders.Add(item);
+                return item;
             }
-
-            return item;
+            return null;
         }
 
         internal static void DestroyHighlighter(this HighlightsFXStandalone item)

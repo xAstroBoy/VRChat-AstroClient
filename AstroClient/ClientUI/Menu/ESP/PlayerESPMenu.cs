@@ -61,9 +61,9 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            MiscUtils.DelayFunction(1, () =>
+            MiscUtils.DelayFunction(2, () =>
             {
-                if (Toggle_Player_ESP && player != null && !player.GetAPIUser().IsSelf)
+                if (Toggle_Player_ESP && player != null)
                 {
                     player.gameObject.GetOrAddComponent<PlayerESP>();
                 }
