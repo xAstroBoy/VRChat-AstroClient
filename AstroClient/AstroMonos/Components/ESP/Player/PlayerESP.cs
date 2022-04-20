@@ -51,6 +51,8 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                 }
             }
             SetPlayerDefaultESP();
+
+            InvokeRepeating(nameof(ForceActiveESP), 0.5f, 0.5f);
         }
 
         private IEnumerator ForceHighlightSystem()
@@ -61,6 +63,14 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                 yield return null;
 
             yield return null;
+        }
+
+        private void ForceActiveESP()
+        {
+            if(!HighLightOptions.enabled)
+            {
+                HighLightOptions.enabled = true;
+            }
         }
 
         private Color BlockedColor
@@ -137,11 +147,11 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
+
         internal void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
         }
-
 
         internal void ChangeColor(Color newcolor)
         {
@@ -222,9 +232,12 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             [HideFromIl2Cpp]
             set
             {
-                if (HighLightOptions != null)
+                if (value.HasValue)
                 {
-                    HighLightOptions.highlightColor = value.Value;
+                    if (HighLightOptions != null)
+                    {
+                        HighLightOptions.highlightColor = value.Value;
+                    }
                 }
             }
         }
@@ -272,10 +285,6 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                 return _CurrentRenderer;
             }
         }
-        internal override void OnRoomLeft()
-        {
-            Destroy(this);
-        }
         private PlayerSelector _PlayerSelector;
         private PlayerSelector PlayerSelector
         {
@@ -291,6 +300,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
+        private bool HasESPBeingSet = false;
 
         internal HighlightsFXStandalone _HighLightOptions;
 
@@ -302,8 +312,13 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                 if(_HighLightOptions == null)
                 {
                     _HighLightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
+                    HasESPBeingSet = false;
                 }
-                _HighLightOptions.SetHighlighter(CurrentRenderer, true);
+                if (!HasESPBeingSet)
+                {
+                    _HighLightOptions.SetHighlighter(CurrentRenderer, true);
+                    HasESPBeingSet = true;
+                }
                 _HighLightOptions.enabled = true;
                 return _HighLightOptions;
             }

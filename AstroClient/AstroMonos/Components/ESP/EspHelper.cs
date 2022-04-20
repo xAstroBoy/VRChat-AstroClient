@@ -6,13 +6,20 @@
 
     internal class EspHelper : AstroEvents
     {
-        internal override void OnRoomLeft()
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
-            for (int i = 0; i < SpawnedESPsHolders.Count; i++)
+            if (SpawnedESPsHolders != null)
             {
-                Object.DestroyImmediate(SpawnedESPsHolders[i]);
+                if (SpawnedESPsHolders.Count != 0)
+                {
+                    for (int i = 0; i < SpawnedESPsHolders.Count; i++)
+                    {
+                        Object.DestroyImmediate(SpawnedESPsHolders[i]);
+                    }
+                    SpawnedESPsHolders.Clear();
+
+                }
             }
-            SpawnedESPsHolders.Clear();
         }
 
         private static GameObject _HighlightFXCamera;
@@ -31,6 +38,6 @@
             }
         }
 
-        internal static List<HighlightsFXStandalone> SpawnedESPsHolders = new List<HighlightsFXStandalone>();
+        internal static List<HighlightsFXStandalone> SpawnedESPsHolders = new ();
     }
 }

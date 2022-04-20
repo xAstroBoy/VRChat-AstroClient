@@ -25,7 +25,7 @@
             }
         }
 
-        private static void RemoveRendFromUnlistedHighlighter(MeshRenderer rend)
+        private static bool UnlistedHighlighter_Contains(Renderer rend)
         {
             if (rend != null)
             {
@@ -35,22 +35,24 @@
                     var hashset = propFX.field_Protected_HashSet_1_Renderer_0;
                     if (hashset != null)
                     {
-                        if (hashset.Contains(rend))
-                        {
-                            hashset.Remove(rend);
-                        }
+                        return hashset.Contains(rend);
                     }
                 }
             }
+            return false;
         }
+
 
         internal static void SetHighlighter(this HighlightsFXStandalone item, Renderer rend, bool status)
         {
             if (item != null)
             {
-                if (status)
+                if(UnlistedHighlighter_Contains(rend))
                 {
                     RemoveRendFromUnlistedHighlighter(rend);
+                }
+                if (status)
+                {
                     _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
                 }
                 else
@@ -62,31 +64,18 @@
             }
         }
 
-        internal static void SetHighlighter(this HighlightsFXStandalone item, MeshRenderer rend, bool status)
-        {
-            if (item != null)
-            {
-                if (status)
-                {
-                    RemoveRendFromUnlistedHighlighter(rend);
-                    _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
-                }
-                else
-                {
-                    _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
-                }
-
-                item.Method_Public_Void_Renderer_Boolean_0(rend, status);
-            }
-        }
 
         internal static void SetHighlighter(this HighlightsFXStandalone item, Renderer rend, Color color, bool status)
         {
             if (item != null)
             {
-                if (status)
+                if (UnlistedHighlighter_Contains(rend))
                 {
                     RemoveRendFromUnlistedHighlighter(rend);
+                }
+
+                if (status)
+                {
                     _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
                 }
                 else
@@ -114,42 +103,19 @@
         {
             if (item != null)
             {
-                if (EspHelper.SpawnedESPsHolders.Contains(item))
+                if (EspHelper.SpawnedESPsHolders != null)
                 {
-                    _ = EspHelper.SpawnedESPsHolders.Remove(item);
+                    if (EspHelper.SpawnedESPsHolders.Contains(item))
+                    { 
+                        EspHelper.SpawnedESPsHolders.Remove(item);
+                    }
                 }
 
                 Object.Destroy(item);
             }
         }
 
-        internal static void SetHighlighter(this HighlightsFXStandalone item, MeshRenderer rend, Color color, bool status)
-        {
-            if (item != null)
-            {
-                RemoveRendFromUnlistedHighlighter(rend);
-                if (status)
-                {
-                    RemoveRendFromUnlistedHighlighter(rend);
-                    _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
-                }
-                else
-                {
-                    _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
-                }
 
-                item.SetHighlighterColor(color);
-                item.Method_Public_Void_Renderer_Boolean_0(rend, status);
-            }
-        }
-
-        internal static void AddRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
-        {
-            if (item != null)
-            {
-                _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
-            }
-        }
 
         internal static void AddRenderer(this HighlightsFXStandalone item, Renderer rend)
         {
@@ -159,13 +125,6 @@
             }
         }
 
-        internal static void RemoveRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
-        {
-            if (item != null)
-            {
-                _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
-            }
-        }
 
         internal static void RemoveRenderer(this HighlightsFXStandalone item, Renderer rend)
         {
@@ -193,7 +152,7 @@
 
         internal static void ResetHighlighterColor(this HighlightsFXStandalone item)
         {
-            if (item != null && item.highlightColor != null)
+            if (item != null)
             {
                 item.highlightColor = new Color(0.5019608f, 0.5019608f, 0.5019608f, 1f);
             }
