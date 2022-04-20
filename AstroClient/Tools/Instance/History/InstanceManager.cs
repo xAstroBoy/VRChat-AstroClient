@@ -33,8 +33,15 @@
                 try
                 {
                     JArray array = JArray.Parse(text);
-                    foreach (JToken token in array)
-                        instances.Add(JObject.Parse(token.ToString()).ToObject<WorldInstance>());
+                    for (int i = 0; i < array.Count; i++)
+                    {
+                        JToken token = array[i];
+                        var instance = JObject.Parse(token.ToString()).ToObject<WorldInstance>();
+                        if ((instance.entryTime - DateTime.Now).TotalHours < 6)
+                        {
+                            instances.Add(instance);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -52,7 +59,7 @@
             if (world == null) return;
             if (instance == null) return;
 
-            var item = new WorldInstance(world.name, world.id, instance.instanceId);
+            var item = new WorldInstance(world.name, world.id, instance.instanceId, DateTime.Now);
             instances.Insert(0, item);
 
             var JsonConverted = JsonConvert.SerializeObject(instances, Formatting.Indented);
@@ -67,12 +74,15 @@
             internal string worldId;
             [JsonProperty]
             internal string instanceId;
+            [JsonProperty]
+            internal DateTime entryTime;
 
-            internal WorldInstance(string worldName, string worldId, string instanceId)
+            internal WorldInstance(string worldName, string worldId, string instanceId, DateTime entryTime)
             {
                 this.worldName = worldName;
                 this.worldId = worldId;
                 this.instanceId = instanceId;
+                this.entryTime = entryTime;
             }
         }
     }

@@ -36,8 +36,10 @@
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
             Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
             Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
-            foreach (var item in ButtonsMenu.transform.Get_Childs())
+            System.Collections.Generic.List<Transform> list = ButtonsMenu.transform.Get_Childs();
+            for (int i = 0; i < list.Count; i++)
             {
+                Transform item = list[i];
                 item.DestroyMeLocal(true);
             }
             page = NestedPart.GenerateQuickMenuPage(menuName);
@@ -45,7 +47,7 @@
             NestedPart.NewText("Text_Title").text = btnToolTip;
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
-            mainButton = new QMTabButton(index, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, icon);
+            mainButton = new QMTabButton(index, () => { OpenMe(); }, btnToolTip, btnBackgroundColor, icon);
         }
 
         internal string GetMenuName()
