@@ -1,12 +1,10 @@
-﻿using AstroClient.Constants;
-using AstroClient.xAstroBoy.Utility;
-using VRCUiAvatarStatsPanel = MonoBehaviourPublicStAvSt1AvTeSpBoSpCoUnique;
-
+﻿
 namespace AstroClient.PlayerList.Utilities
 {
     using UnityEngine;
     using VRC;
-    using VRC.DataModel;
+    using AstroClient.Constants;
+    using AstroClient.xAstroBoy.Utility;
 
     public static class PlayerUtils
     {
@@ -47,7 +45,7 @@ namespace AstroClient.PlayerList.Utilities
             else
                 return "#ff0000";
         }
-        public static string ParsePerformanceText(AvatarPerformanceRating rating)
+        public static string ParsePerformanceText(VRC.SDKBase.Validation.Performance.PerformanceRating rating)
         {
             if(!AstroClient.Config.ConfigManager.Performance.AllowPerformanceScanner)
             {
@@ -55,23 +53,23 @@ namespace AstroClient.PlayerList.Utilities
             }
             switch (rating)
             {
-                case AvatarPerformanceRating.VeryPoor:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.VeryPoor:
                     return "Awful";
-                case AvatarPerformanceRating.Poor:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.Poor:
                     return "Poor".PadRight(5);
-                case AvatarPerformanceRating.Medium:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.Medium:
                     return "Med".PadRight(5);
-                case AvatarPerformanceRating.Good:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.Good:
                     return "Good".PadRight(5);
-                case AvatarPerformanceRating.Excellent:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.Excellent:
                     return "Great";
-                case AvatarPerformanceRating.None:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.None:
                     return "?¿?¿?";
                 default:
                     return rating.ToString().PadRight(5);
             }
         }
-        public static string GetPerformanceColor(AvatarPerformanceRating rating)
+        public static string GetPerformanceColor(VRC.SDKBase.Validation.Performance.PerformanceRating rating)
         {
             if (!AstroClient.Config.ConfigManager.Performance.AllowPerformanceScanner)
             {
@@ -80,17 +78,17 @@ namespace AstroClient.PlayerList.Utilities
 
             switch (rating)
             {
-                case AvatarPerformanceRating.VeryPoor:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.VeryPoor:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_4);
-                case AvatarPerformanceRating.Poor:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.Poor:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_3);
-                case AvatarPerformanceRating.Medium:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.Medium:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_2);
-                case AvatarPerformanceRating.Good:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.Good:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_1);
-                case AvatarPerformanceRating.Excellent:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.Excellent:
                     return ColorUtility.ToHtmlStringRGB(VRCUiAvatarStatsPanel.field_Private_Static_Color_0);
-                case AvatarPerformanceRating.None:
+                case VRC.SDKBase.Validation.Performance.PerformanceRating.None:
                     return "888888";
                 default:
                     return rating.ToString().PadRight(5);

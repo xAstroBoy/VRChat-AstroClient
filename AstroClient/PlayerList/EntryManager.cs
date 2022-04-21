@@ -1,4 +1,5 @@
 ﻿using VRC.SDKBase;
+using VRC.SDKBase.Validation.Performance;
 
 namespace AstroClient.PlayerList
 {
@@ -227,7 +228,7 @@ namespace AstroClient.PlayerList
         {
             foreach (PlayerEntry entry in playerEntries)
             {
-                if ((entry.perf == AvatarPerformanceRating.None) && ((entry.perfString == "100% ") || (entry.perfString == "?¿?¿?")))
+                if ((entry.perf == PerformanceRating.None) && ((entry.perfString == "100% ") || (entry.perfString == "?¿?¿?")))
                 {
                     AvInstBacklog.Add(entry.userId, new deferredAvInstantiate(null, null, null));
                 }

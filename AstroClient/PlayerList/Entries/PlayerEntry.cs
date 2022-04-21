@@ -2,6 +2,7 @@
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
+using VRC.SDKBase.Validation.Performance;
 using VRC.Utility;
 
 namespace AstroClient.PlayerList.Entries
@@ -55,7 +56,7 @@ namespace AstroClient.PlayerList.Entries
         protected static int highestOwnedObjectsLength = 0;
         protected static int totalObjects = 0;
         
-        public AvatarPerformanceRating perf;
+        public VRC.SDKBase.Validation.Performance.PerformanceRating perf;
         public string perfString;
         public string jeffString;
         public int ping;
@@ -97,7 +98,7 @@ namespace AstroClient.PlayerList.Entries
             userId = apiUser.id;
             
             platform = platform = PlayerUtils.GetPlatform(player).PadRight(2);
-            perf = AvatarPerformanceRating.None;
+            perf = VRC.SDKBase.Validation.Performance.PerformanceRating.None;
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
             jeffString = "<color=#FFFF00>Unknown </color>";
             partyFouls = 1;
@@ -164,7 +165,7 @@ namespace AstroClient.PlayerList.Entries
 
             //manager
 
-            perf = (AvatarPerformanceRating)player.GetVRCPlayer().GetAvatarManager().prop_AvatarPerformanceStats_0.field_Private_ArrayOf_EnumPublicSealedvaNoExGoMePoVe7v0_0[(int)AvatarPerformanceCategory.Overall];
+            perf = (VRC.SDKBase.Validation.Performance.PerformanceRating)player.GetVRCPlayer().GetAvatarManager().prop_AvatarPerformanceStats_0._performanceRatingCache[(int)AvatarPerformanceCategory.Overall];
             List<string> perfdeets = player.prop_VRCPlayer_0.field_Private_VRCAvatarManager_0.prop_AvatarPerformanceStats_0.ToString().Split('\n').ToList();
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Poly Count")), @"\d+").Value, out int polycount);
             int.TryParse(Regex.Match(perfdeets.FirstOrDefault(x => x.Contains("Skinned Mesh Count")), @"\d+").Value, out int skinnedmeshcount);
@@ -228,7 +229,7 @@ namespace AstroClient.PlayerList.Entries
             if (loadingBar.field_Public_PlayerNameplate_0.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id != userId)
                 return;
 
-            perf = AvatarPerformanceRating.None;
+            perf = VRC.SDKBase.Validation.Performance.PerformanceRating.None;
 
             if (downloadPercentage < 1)
             {

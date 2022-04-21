@@ -43,7 +43,7 @@ namespace AstroClient.Startup.Hooks
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
-            new AstroPatch(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_1)), GetPatch(nameof(OnFadeEvent)));
+            new AstroPatch(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_0)), GetPatch(nameof(OnFadeEvent)));
 
         }
 

@@ -29,7 +29,7 @@
 
         internal override void ExecutePriorityPatches()
         {
-            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(PerformanceScannerSet), nameof(PerformanceScannerSet.Method_Public_IEnumerator_GameObject_AvatarPerformanceStats_MulticastDelegateNPublicSealedBoCoUnique_0)), GetPatch(nameof(CalculatePerformance)));
+            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(PerformanceScannerSet), nameof(PerformanceScannerSet.RunPerformanceScan)), GetPatch(nameof(CalculatePerformance)));
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
