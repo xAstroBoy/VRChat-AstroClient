@@ -232,5 +232,7 @@ public struct Color
 
     public static implicit operator UnityEngine.Color(Color c) => new UnityEngine.Color(c.R, c.G, c.B, c.A);
 
+    public static implicit operator UnityEngine.Color32(Color c) => new(c.R, c.G, c.B, c.A);
+
     public override string? ToString() => $"rgba({R}, {G}, {B}, {A})";
 }

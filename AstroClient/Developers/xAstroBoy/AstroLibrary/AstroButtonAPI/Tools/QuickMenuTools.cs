@@ -162,12 +162,15 @@
                 if (_TabButtonTemplate == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Button>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Button button = Buttons[i];
                         if (button.name == "Page_Settings")
                         {
                             Log.Debug("Found Tab Settings!", Color.Chartreuse);
                             return _TabButtonTemplate = button.transform;
                         }
+                    }
                 }
 
                 return _TabButtonTemplate;
@@ -181,12 +184,15 @@
                 if (_TabMenu == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "Page_Buttons_QM")
                         {
                             Log.Debug("Found Tab Menu!", Color.Chartreuse);
                             return _TabMenu = button.transform;
                         }
+                    }
                 }
 
                 return _TabMenu;
@@ -200,12 +206,15 @@
                 if (_ToolTipPanel == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "ToolTipPanel")
                         {
                             Log.Debug("Found ToolTip Panel!", Color.Chartreuse);
                             return _ToolTipPanel = button.transform;
                         }
+                    }
                 }
 
                 return _ToolTipPanel;
@@ -219,12 +228,15 @@
                 if (_SliderTemplate == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "VolumeSlider_Master")
                         {
                             Log.Debug("Found Slider Template!", Color.Chartreuse);
                             return _SliderTemplate = button;
                         }
+                    }
                 }
 
                 return _SliderTemplate;
@@ -238,12 +250,15 @@
                 if (_ToggleButtonTemplate == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "Button_ToggleTooltips")
                         {
                             Log.Debug("Found ToolTips button!", Color.Chartreuse);
                             return _ToggleButtonTemplate = button;
                         }
+                    }
                 }
 
                 return _ToggleButtonTemplate;
@@ -258,12 +273,15 @@
                 if (_NestedMenuTemplate == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "Menu_Camera")
                         {
                             Log.Debug("Found Camera Page!", Color.Chartreuse);
                             return _NestedMenuTemplate = button;
                         }
+                    }
                 }
 
                 return _NestedMenuTemplate;
@@ -278,12 +296,15 @@
                 if (_MenuDashboard == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "Menu_Dashboard")
                         {
                             Log.Debug("Found Dashboard Page!", Color.Chartreuse);
                             return _MenuDashboard = button;
                         }
+                    }
                 }
 
                 return _MenuDashboard;
@@ -454,12 +475,15 @@
                 if (_Wing_Left == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Wing>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Wing button = Buttons[i];
                         if (button.name == "Wing_Left")
                         {
                             _Wing_Left = button;
                             break;
                         }
+                    }
                 }
 
                 return _Wing_Left;
@@ -473,12 +497,15 @@
                 if (_Wing_Right == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Wing>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Wing button = Buttons[i];
                         if (button.name == "Wing_Right")
                         {
                             _Wing_Right = button;
                             break;
                         }
+                    }
                 }
 
                 return _Wing_Right;
@@ -492,12 +519,15 @@
                 if (_QuickMenuController == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<MenuStateController>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        MenuStateController button = Buttons[i];
                         if (button.name == "Canvas_QuickMenu(Clone)")
                         {
                             _QuickMenuController = button;
                             break;
                         }
+                    }
                 }
 
                 return _QuickMenuController;
@@ -511,12 +541,15 @@
                 if (_Carousel_Banners == null)
                 {
                     var Transforms = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                    foreach (var transform in Transforms)
+                    for (int i = 0; i < Transforms.Count; i++)
+                    {
+                        Transform transform = Transforms[i];
                         if (transform.name == "Carousel_Banners")
                         {
                             _Carousel_Banners = transform;
                             break;
                         }
+                    }
                 }
 
                 return _Carousel_Banners;
@@ -530,9 +563,12 @@
                 if (_Header_DashboardTemplate == null)
                 {
                     var Transforms = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                    foreach (var transform in Transforms)
+                    for (int i = 0; i < Transforms.Count; i++)
+                    {
+                        Transform transform = Transforms[i];
                         if (transform.name == "Header_QuickLinks")
                             _Header_DashboardTemplate = transform;
+                    }
                 }
 
                 return _Header_DashboardTemplate;
@@ -546,12 +582,15 @@
                 if (_WingPageButtonTemplate == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Button button = Buttons[i];
                         if (button.name == "Button_ActionMenu")
                         {
                             _WingPageButtonTemplate = button.gameObject;
                             break;
                         }
+                    }
                 }
 
                 return _WingPageButtonTemplate;
@@ -565,12 +604,15 @@
                 if (_WingButtonTemplate_Right == null)
                 {
                     var Buttons = Wing_Right.GetComponentsInChildren<Button>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Button button = Buttons[i];
                         if (button.name == "Button_Profile")
                         {
                             _WingButtonTemplate_Right = button.gameObject;
                             break;
                         }
+                    }
                 }
 
                 return _WingButtonTemplate_Right;
@@ -584,12 +626,15 @@
                 if (_WingButtonTemplate_Left == null)
                 {
                     var Buttons = Wing_Left.GetComponentsInChildren<Button>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Button button = Buttons[i];
                         if (button.name == "Button_Profile")
                         {
                             _WingButtonTemplate_Left = button.gameObject;
                             break;
                         }
+                    }
                 }
 
                 return _WingButtonTemplate_Left;
@@ -630,12 +675,15 @@
                 if (_SelectedUserPage_Remote == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "Menu_SelectedUser_Remote")
                         {
                             _SelectedUserPage_Remote = button;
                             break;
                         }
+                    }
                 }
 
                 return _SelectedUserPage_Remote;
@@ -650,12 +698,15 @@
                 if (_SelectedUserPage_Local == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "Menu_SelectedUser_Local")
                         {
                             _SelectedUserPage_Local = button;
                             break;
                         }
+                    }
                 }
 
                 return _SelectedUserPage_Local;
@@ -670,12 +721,15 @@
                 if (_SelectedUserPage_ButtonsSection == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "Buttons_UserActions")
                         {
                             _SelectedUserPage_ButtonsSection = button;
                             break;
                         }
+                    }
                 }
 
                 return _SelectedUserPage_ButtonsSection;
@@ -689,12 +743,15 @@
                 if (_MenuDashboard_ButtonsSection == null)
                 {
                     var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                    foreach (var button in Buttons)
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        Transform button = Buttons[i];
                         if (button.name == "Buttons_QuickActions")
                         {
                             _MenuDashboard_ButtonsSection = button;
                             break;
                         }
+                    }
                 }
 
                 return _MenuDashboard_ButtonsSection;
