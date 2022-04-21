@@ -1,4 +1,4 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.ObjectInfoSubMenu
+﻿ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.ObjectInfoSubMenu
 {
     using AstroMonos.Components.Tools;
     using Selector;
@@ -10,15 +10,15 @@
 
     internal class ObjectInfoSubMenu : Tweaker_Events
     {
-        internal static void Init_ObjectInfoSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_ObjectInfoSubMenu(QMGridTab menu)
         {
-            var main = new QMNestedButton(menu, x, y, "Object info", "Object Info Menu!", null, null, null, null, btnHalf);
+            var main = new QMNestedGridMenu(menu, "Object info", "Object Info Menu!");
 
-            _ = new QMSingleButton(main, 1, 0f, "Copy Position.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPosition(); }, "Copies Object Current Position in clipboard.", null, Color.yellow, true);
-            _ = new QMSingleButton(main, 1, 0.5f, "Copy Rotation.", () => { Tweaker_Object.GetGameObjectToEdit().CopyRotation(); }, "Copies Object Current Rotation in clipboard.", null, Color.yellow, true);
-            _ = new QMSingleButton(main, 1, 1f, "Copy Local Position.", () => { Tweaker_Object.GetGameObjectToEdit().CopyLocalPosition(); }, "Copies Object Current Local Position in clipboard.", null, Color.yellow, true);
-            _ = new QMSingleButton(main, 1, 1.5f, "Copy Local Rotation.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPath(); }, "Copies Object Current Local Rotation in clipboard.", null, Color.yellow, true);
-            _ = new QMSingleButton(main, 1, 2, "Copy Object Path.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPath(); }, "Copies Object Current Path in clipboard.", null, Color.yellow, true);
+            _ = new QMSingleButton(main, "Copy Position.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPosition(); }, "Copies Object Current Position in clipboard.",  Color.yellow);
+            _ = new QMSingleButton(main, "Copy Rotation.", () => { Tweaker_Object.GetGameObjectToEdit().CopyRotation(); }, "Copies Object Current Rotation in clipboard.",  Color.yellow);
+            _ = new QMSingleButton(main, "Copy Local Position.", () => { Tweaker_Object.GetGameObjectToEdit().CopyLocalPosition(); }, "Copies Object Current Local Position in clipboard.",  Color.yellow);
+            _ = new QMSingleButton(main, "Copy Local Rotation.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPath(); }, "Copies Object Current Local Rotation in clipboard.",  Color.yellow);
+            _ = new QMSingleButton(main, "Copy Object Path.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPath(); }, "Copies Object Current Path in clipboard.",  Color.yellow);
 
             float Position = 3f;
             float stretch = 125f;

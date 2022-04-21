@@ -85,9 +85,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
             StopSpammers();
         }
 
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal Udon Events", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, "Internal Udon Events", "Interact with Internal Udon Events", null, null, null, null);
             CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
             CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
             InitWingPage();

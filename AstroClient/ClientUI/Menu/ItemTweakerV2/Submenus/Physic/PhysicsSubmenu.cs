@@ -11,9 +11,9 @@
 
     internal class PhysicsSubmenu : Tweaker_Events
     {
-        internal static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_PhysicSubMenu(QMGridTab menu)
         {
-            var main = new QMNestedGridMenu(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
+            var main = new QMNestedGridMenu(menu, "Physics", "Item Physics Editor Menu!", null, null, null, null);
 
             GravityToggler = new QMToggleButton(main, "Use Gravity", () => { Modified_SetGravity(true); }, "No Gravity", () => { Modified_SetGravity(false); }, "Toggle Object Gravity");
             KinematicToggler = new QMToggleButton(main, "Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(true); }, "Not Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(false); }, "Toggle Object Kinematic");

@@ -12,14 +12,14 @@
 
     internal class SpawnerSubmenu : Tweaker_Events
     {
-        internal static void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_SpawnerSubmenu(QMGridTab menu)
         {
-            var main = new QMNestedGridMenu(menu, x, y, "Spawner", "Spawner Menu!", null, null, null, null, btnHalf);
+            var main = new QMNestedGridMenu(menu, "Spawner", "Spawner Menu!", null, null, null, null);
             _ = new QMSingleButton(main, "Spawn Clone", () => { ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }, "Instantiates a copy of The selected object.");
             _ = new QMSingleButton(main, "Kill Clones", () => { ObjectCloner.ClonedObjectsDeleter(); }, "Removes All Cloned Objects.");
 
             PrefabSpawnerScrollMenu.InitButtons(main);
-            _ = new QMSingleButton(main, 1, 1.5f, "Kill Spawned Prefabs", () => { SpawnerSubmenu.KillSpawnedPrefabs(); }, "Removes All Prefabs Objects.", null, null, true);
+            _ = new QMSingleButton(main,  "Kill Spawned Prefabs", () => { SpawnerSubmenu.KillSpawnedPrefabs(); }, "Removes All Prefabs Objects.");
 
             SpawnedPickupsCounter = new QMSingleButton(main, GetClonesPickupText, null, GetClonesPickupText);
             SpawnedPrefabsCounter = new QMSingleButton(main, GetSpawnedPrefabText, null, GetSpawnedPrefabText);
