@@ -29,38 +29,38 @@
     {
         internal static void Init_TweakerV2Main(int index)
         {
-            QMTabMenu menu = new QMTabMenu(index, "Item Tweaker", null, null, null, Icons.box_sprite);
+            QMGridTab menu = new QMGridTab(index, "Item Tweaker", null, null, null, Icons.box_sprite);
 
             // Outside Area
 
-            PhysicsSubmenu.Init_PhysicSubMenu(menu, 2, 0, true);
-            PickupSubmenu.Init_PickupSubMenu(menu, 2, 0.5f, true);
-            ScaleSubmenu.Init_ScaleSubMenu(menu, 2, 1.5f, true);
+            PhysicsSubmenu.Init_PhysicSubMenu(menu);
+            PickupSubmenu.Init_PickupSubMenu(menu);
+            ScaleSubmenu.Init_ScaleSubMenu(menu);
 
             //GameObjMenu.InitTogglerMenu(menu, 3, 0f, true); // TODO : Make a better one!
-            ObjectInfoSubMenu.Init_ObjectInfoSubMenu(menu, 3, 0.5f, true);
-            _ = new QMSingleButton(menu, 3, 1f, "Teleport to Object", new Action(() => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
-            _ = new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { GameObjectMenu.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
-            PickupSelectionScrollMenu.InitButtons(menu, 3, 2, true);
-            WorldObjectsScrollMenu.InitButtons(menu, 3, 2.5f, true);
-            VRC_TriggersScrollMenu.InitButtons(menu, 4, 0, true);
-            VRC_InteractableScrollMenu.InitButtons(menu, 4, 0.5f, true);
+            ObjectInfoSubMenu.Init_ObjectInfoSubMenu(menu);
+            _ = new QMSingleButton(menu, "Teleport to Object", new Action(() => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", Color.white);
+            _ = new QMSingleButton(menu,  "Respawn Object", new Action(() => { GameObjectMenu.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.",Color.white);
+            PickupSelectionScrollMenu.InitButtons(menu);
+            WorldObjectsScrollMenu.InitButtons(menu);
+            VRC_TriggersScrollMenu.InitButtons(menu);
+            VRC_InteractableScrollMenu.InitButtons(menu);
             if (Bools.IsDeveloper)
             {
-                UdonScrollMenu.InitButtons(menu, 4, 1, true);
+                UdonScrollMenu.InitButtons(menu);
             }
 
-            ComponentSubMenu.Init_ComponentSubMenu(menu, 4, 1.5f, true);
-            SpawnerSubmenu.Init_SpawnerSubmenu(menu, 4, 2f, true);
+            ComponentSubMenu.Init_ComponentSubMenu(menu);
+            SpawnerSubmenu.Init_SpawnerSubmenu(menu);
 
-            _ = new QMSingleButton(menu, 1, -0.5f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TryTakeOwnership(); }), "Make Whatever Player, drop the object.", null, Color.white, true);
-            AntiTheftInteractor = new QMSingleToggleButton(menu, 1, 0.5f, "AntiTheft ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(true); }, "AntiTheft OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(false); }, "Toggles PickupController WIP antitheft", Color.green, Color.red, null, false, true);
-            ProtectionInteractor = new QMSingleToggleButton(menu, 1, 1, "Interaction block ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, "Interaction block OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object", Color.green, Color.red, null, false, true);
-            ObjectActiveToggle = new QMSingleToggleButton(menu, 1, 1.5f, "Enabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(true); }, "Disabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(false); }, "Toggles SetActive", Color.green, Color.red, null, false, true);
-            new QMSingleToggleButton(menu, 2, 1.5f, "Selected Item ESP : ON", () => { EspHandler.TweakerESPEnabled = true; }, "Selected Item ESP : OFF", () => { EspHandler.TweakerESPEnabled = false; }, "Toggles Selected item ESP", Color.green, Color.red, null, false, true);
+            _ = new QMSingleButton(menu,  "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TryTakeOwnership(); }), "Make Whatever Player, drop the object.", Color.white);
+            AntiTheftInteractor = new QMToggleButton(menu, "AntiTheft ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(true); }, "AntiTheft OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(false); }, "Toggles PickupController WIP antitheft");
+            ProtectionInteractor = new QMToggleButton(menu, "Interaction block ON", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(true); }, "Interaction block OFF", () => { Tweaker_Object.GetGameObjectToEdit().Pickup_AllowOnlySelfToGrab(false); }, "Prevents Others from interacting with the object");
+            ObjectActiveToggle = new QMToggleButton(menu,  "Enabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(true); }, "Disabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(false); }, "Toggles SetActive");
+            new QMToggleButton(menu,  "Selected Item ESP : ON", () => { EspHandler.TweakerESPEnabled = true; }, "Selected Item ESP : OFF", () => { EspHandler.TweakerESPEnabled = false; }, "Toggles Selected item ESP");
 
-            LockHoldItem = new QMSingleToggleButton(menu, 2, 2.5f, "Lock ON", () => { Tweaker_Object.LockItem = true; }, "Lock OFF", () => { Tweaker_Object.LockItem = false; }, "Lock the Held object (prevents the mod from grabbing a new holding object)", Color.green, Color.red, null, false, true);
-            ObjectToEditBtn = new QMSingleButton(menu, 1, 2f, "None", new Action(() => { _ = Tweaker_Object.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
+            LockHoldItem = new QMToggleButton(menu, "Lock ON", () => { Tweaker_Object.LockItem = true; }, "Lock OFF", () => { Tweaker_Object.LockItem = false; }, "Lock the Held object (prevents the mod from grabbing a new holding object)");
+            ObjectToEditBtn = new QMSingleButton(menu, "None", new Action(() => { _ = Tweaker_Object.GetGameObjectToEdit(); }), "GameObject To Edit", Color.white);
 
             TweakerWings.InitTweakerWings();
         }
@@ -156,10 +156,10 @@
             }
         }
 
-        internal static QMSingleToggleButton LockHoldItem;
+        internal static QMToggleButton LockHoldItem;
         internal static QMSingleButton ObjectToEditBtn;
-        internal static QMSingleToggleButton ObjectActiveToggle;
-        internal static QMSingleToggleButton ProtectionInteractor;
-        internal static QMSingleToggleButton AntiTheftInteractor;
+        internal static QMToggleButton ObjectActiveToggle;
+        internal static QMToggleButton ProtectionInteractor;
+        internal static QMToggleButton AntiTheftInteractor;
     }
 }

@@ -15,9 +15,9 @@
 
     internal class ComponentSubMenu : Tweaker_Events
     {
-        internal static void Init_ComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_ComponentSubMenu(QMGridTab menu)
         {
-            var main = new QMNestedGridMenu(menu, x, y, "Astro Components", "Custom Component Editor Menu!", null, null, null, null, btnHalf);
+            var main = new QMNestedGridMenu(menu, "Astro Components", "Custom Component Editor Menu!", null, null, null, null);
             RocketComponentSubMenu.Init_RocketComponentSubMenu(main);
             CrazyComponentSubMenu.Init_CrazyComponentSubMenu(main);
             SpinnerSubMenu.Init_SpinnerSubMenu(main);

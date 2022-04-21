@@ -32,9 +32,9 @@
         }
 
 
-        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMGridTab menu)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Select Pickup", "Select World Pickup", null, null, null, null, btnHalf);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, "Select Pickup", "Select World Pickup", null, null, null, null);
             CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
             CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
             InitWingPage();
