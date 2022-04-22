@@ -16,19 +16,19 @@
 
         internal static void Init_SpinnerSubMenu(QMNestedGridMenu menu)
         {
-            var submenu = new QMNestedGridMenu(menu, "Spin Control", "Make them spiiiiin!");
-            _ = new QMSingleButton(submenu,  "+ 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceX(); }), "Add Spin Force to spinner!");
-            _ = new QMSingleButton(submenu,  "+ 1 Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceY(); }), "Add Spin Force to spinner!");
-            _ = new QMSingleButton(submenu,  "+ 1 Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceZ(); }), "Add Spin Force to spinner!");
-            SpinAmountTell = new QMSingleButton(submenu,  "none", null, "Tells What's the spin force of the spinner!");
-            _ = new QMSingleButton(submenu,  "- 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceX(); }), "Subtract Spin Force to spinner!");
-            _ = new QMSingleButton(submenu,  "- 1 Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceY(); }), "Subtract Spin Force to spinner!");
-            _ = new QMSingleButton(submenu,  "- 1 Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceZ(); }), "Subtract Spin Force to spinner!");
-             SpinnerTimerBtn = new QMSingleButton(submenu, "none", null, "Tells What's the spin Speed!");
-            _ = new QMSingleButton(submenu,  "Remove all Spinner Objects", new Action(KillAllSpinners), "Removes all Spinner components from objects!");
-            _ = new QMSingleButton(submenu,  "Remove Spinner from Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_Spinner(); }), "Removes all Spinner components from object!");
-            _ = new QMSingleButton(submenu,  "+1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().IncSpinnerSpeed(); }), "Edits the Spinner Speed");
-            _ = new QMSingleButton(submenu,  "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecSpinnerSpeed(); }), "Edits the Spinner Speed");
+            var submenu = new QMNestedButton(menu, "Spin Control", "Make them spiiiiin!");
+            _ = new QMSingleButton(submenu, 1, 0, "+ 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceX(); }), "Add Spin Force to spinner!", null, null);
+            _ = new QMSingleButton(submenu, 2, 0, "+ 1 Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceY(); }), "Add Spin Force to spinner!", null, null);
+            _ = new QMSingleButton(submenu, 3, 0, "+ 1 Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceZ(); }), "Add Spin Force to spinner!", null, null);
+            SpinAmountTell = new QMSingleButton(submenu, 4, 0, "none", null, "Tells What's the spin force of the spinner!", null, null);
+            _ = new QMSingleButton(submenu, 1, 1, "- 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceX(); }), "Subtract Spin Force to spinner!", null, null);
+            _ = new QMSingleButton(submenu, 2, 1, "- 1 Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceY(); }), "Subtract Spin Force to spinner!", null, null);
+            _ = new QMSingleButton(submenu, 3, 1, "- 1 Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceZ(); }), "Subtract Spin Force to spinner!", null, null);
+             SpinnerTimerBtn = new QMSingleButton(submenu, 4, 1, "none", null, "Tells What's the spin Speed!", null, null);
+            _ = new QMSingleButton(submenu, 2, 2, "Remove all Spinner Objects", new Action(KillAllSpinners), "Removes all Spinner components from objects!", null, null);
+            _ = new QMSingleButton(submenu, 1, 2, "Remove Spinner from Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_Spinner(); }), "Removes all Spinner components from object!", null, null);
+            _ = new QMSingleButton(submenu, 3, 2, "+1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().IncSpinnerSpeed(); }), "Edits the Spinner Speed", null, null);
+            _ = new QMSingleButton(submenu, 4, 2, "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecSpinnerSpeed(); }), "Edits the Spinner Speed", null, null);
         }
 
         internal static void KillAllSpinners()

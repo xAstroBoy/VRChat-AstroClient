@@ -14,9 +14,9 @@
 
     internal class PickupSubmenu : Tweaker_Events
     {
-        internal static void Init_PickupSubMenu(QMGridTab menu)
+        internal static void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var PickupEditor = new QMNestedGridMenu(menu, "Pickup Property", "Pickup Property Editor Menu!");
+            var PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
 
             PickupEditor.SetBackButtonAction(() =>
             {
@@ -38,15 +38,15 @@
             Pickup_AutoHoldMode_prop_AutoDetect = new QMSingleButton(PickupEditor, 2, 0.5f, "AutoDetect", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.AutoDetect); }), "", null, null, true);
             Pickup_AutoHoldMode_prop_Yes = new QMSingleButton(PickupEditor, 2, 1f, "Yes", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.Yes); }), "", null, null, true);
             Pickup_AutoHoldMode_prop_No = new QMSingleButton(PickupEditor, 2, 1.5f, "No", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.No); }), "", null, null, true);
-            InitProximitySliderSubmenu(PickupEditor);
+            InitProximitySliderSubmenu(PickupEditor, 3, 0, true);
             Pickup_allowManipulationWhenEquipped = new QMToggleButton(PickupEditor, 4, 0, "Allow Manipulation Equip", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_allowManipulationWhenEquipped(true); }), "Disallow Manipulation Equip", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_allowManipulationWhenEquipped(false); }), "Control Manipulation Equip property", null, null, null);
             Pickup_pickupable = new QMToggleButton(PickupEditor, 4, 1, "Pickupable", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_Pickupable(true); }), "Not Pickupable", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_Pickupable(false); }), "Control Pickupable Property", null, null, null);
             Pickup_DisallowTheft = new QMToggleButton(PickupEditor, 4, 2, "Block Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(true); }), "Allow Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(false); }), "Control DisallowTheft property", null, null, null);
         }
 
-        internal static void InitProximitySliderSubmenu(QMNestedGridMenu menu)
+        internal static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
-            var slider = new QMNestedGridMenu(menu, "Proximity", "Pickup Proximity Slider Editor!");
+            var slider = new QMNestedButton(menu, x, y, "Proximity", "Pickup Proximity Slider Editor!", null, null, null, null, btnHalf);
             PickupProximitySlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", delegate (float value)
             {
                 Tweaker_Object.GetGameObjectToEdit().Pickup_Set_proximity((int)value);

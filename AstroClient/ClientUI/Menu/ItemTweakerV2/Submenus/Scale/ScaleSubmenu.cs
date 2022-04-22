@@ -11,9 +11,9 @@
 
     internal class ScaleSubmenu : Tweaker_Events
     {
-        internal static void Init_ScaleSubMenu(QMGridTab menu)
+        internal static void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var ScaleEditor = new QMNestedButton(menu, "Scale", "Scale Editor Menu!");
+            var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
 
             //ScaleSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ScaleEditor.GetMenuName()), "Scale:", 250, -720, delegate (float value)
             //{

@@ -33,9 +33,9 @@
         }
 
 
-        internal static void InitButtons(QMGridTab menu)
+        internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            CurrentScrollMenu = new QMNestedGridMenu(menu, "Select W.Objects", "Select World Objects to edit", null, null, null, null);
+            CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Select W.Objects", "Select World Objects to edit", null, null, null, null, btnHalf);
             CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
             CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
             InitWingPage();
