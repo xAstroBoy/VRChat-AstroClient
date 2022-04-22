@@ -213,6 +213,8 @@
         {
             btnQMLoc = btnQMloc;
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
+
+            ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
@@ -223,9 +225,11 @@
 
         internal QMSingleButton(GameObject btnMenu, string btnQMloc, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip = "", string TextColor = null, bool btnHalf = false)
         {
-            ButtonsMenu = btnMenu;
             btnQMLoc = btnQMloc;
+            ButtonsMenu = btnMenu;
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, TextColor);
+
+            ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
@@ -295,7 +299,7 @@
             ButtonText.rectTransform.anchoredPosition += new Vector2(0, 50);
             ButtonText.fontSize = 26;
 
-            if (TextColor != null)
+            if (TextColor.IsNotNullOrEmptyOrWhiteSpace())
                 setTextColorHTML(TextColor);
             else
                 SetTextColor(Color.white);
@@ -339,7 +343,7 @@
             ButtonObject.DestroyMeLocal(true);
             ButtonRect.DestroyMeLocal(true);
             ButtonText.DestroyMeLocal(true);
-            _ButtonToolTip.DestroyMeLocal(true);
+            ButtonToolTip.DestroyMeLocal(true);
         }
 
         internal void SetToolTip(string text)
