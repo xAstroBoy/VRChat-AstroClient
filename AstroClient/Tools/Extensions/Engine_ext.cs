@@ -234,11 +234,27 @@ namespace AstroClient.Tools.Extensions
 
         }
 
+        internal static void DestroyUdonComponents(GameObject Clone)
+        {
+            var comp1base = Clone.GetComponents<UdonBehaviour>();
+            for (var CompResult = 0; CompResult < comp1base.Count; CompResult++)
+            {
+                var result = comp1base[CompResult];
+                if (result != null)
+                {
+                    if (result._program != null)
+                    {
+                        Object.DestroyImmediate(result);
+                    }
+                }
+            }
+
+        }
 
         internal static void DeepCloneObject(GameObject original, GameObject clone)
         {
             // First purge the failed instantiated component clones
-            DestroyExistingComponents<UdonBehaviour>(clone);
+            DestroyUdonComponents(clone);
             DestroyExistingComponents<VRC_Pickup>(clone);
             DestroyExistingComponents<VRC.SDK3.Components.VRCObjectSync>(clone);
             DestroyExistingComponents<VRC.Networking.UdonSync>(clone);
@@ -262,11 +278,7 @@ namespace AstroClient.Tools.Extensions
             if(original != null)
             {
                 var clone = Object.Instantiate(original);
-                MiscUtils.DelayFunction(1.5f, () =>
-                {
-                    DeepCloneObject(original, clone);
-
-                });
+                DeepCloneObject(original, clone);
                 return clone;
             }
             return null;

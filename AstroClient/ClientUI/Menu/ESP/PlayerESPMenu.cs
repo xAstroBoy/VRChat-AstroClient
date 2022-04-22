@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.ClientUI.Menu.ESP
 {
     using System;
-    using AstroEventArgs;
+    
     using AstroMonos.Components.ESP.Player;
     using Config;
     using RandomSubmenus;

@@ -5,7 +5,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using AstroEventArgs;
+    
     using MelonLoader;
     using Photon.Realtime;
     using Tools.Extensions;

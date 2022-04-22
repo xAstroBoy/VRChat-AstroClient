@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using AstroClient.AstroEventArgs;
 using Il2CppSystem.Xml;
 using Photon.Pun;
 using Photon.Realtime;

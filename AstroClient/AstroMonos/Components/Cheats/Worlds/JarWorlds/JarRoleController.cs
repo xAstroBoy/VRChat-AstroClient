@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
     using AstroClient.Tools.Extensions;
-    using AstroEventArgs;
+    
     using System;
     using System.Collections.Generic;
     using System.Linq;

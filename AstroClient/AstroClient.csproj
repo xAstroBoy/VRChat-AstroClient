@@ -136,7 +136,6 @@
     <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientAttributes\RegisterType.cs" />
-    <Compile Include="ClientEvents\AstroEventArgs\OnTeleportRPCArgs.cs" />
     <Compile Include="ClientEvents\EventHandlerInvoker_new.cs" />
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
     <Compile Include="ClientResources\Loaders\Prefabs.cs" />
@@ -154,6 +153,7 @@
     <Compile Include="Developers\Kaned\KanedWIP.cs" />
     <Compile Include="Developers\Kaned\RotationFix.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
+    <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleTeleportRPC.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleUdonEvent.cs" />
@@ -1548,10 +1548,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AstroMonos\Components\Player\Fly\" />
+    <Folder Include="ClientEvents\AstroEventArgs\" />
     <Folder Include="ClientResources\ProgramsArchive\" />
     <Folder Include="ClientUI\Menu\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />
     <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
-    <Folder Include="Startup\Fixes\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientResources\ImageArchive\EnderPearl.jpg" />

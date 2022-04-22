@@ -3,7 +3,7 @@ namespace AstroClient
 {
     using System;
     using System.Collections.Generic;
-    using AstroEventArgs;
+    
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using Cheetos;
     using ClientUI.Menu.ESP;

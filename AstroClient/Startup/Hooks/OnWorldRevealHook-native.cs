@@ -5,7 +5,7 @@ namespace AstroClient.Startup.Hooks
     using System;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using AstroEventArgs;
+    
     using Constants;
     using MelonLoader;
     using Tools.Extensions;

@@ -44,6 +44,7 @@ internal static class Photon_StructToString
             case VRChat_Photon_Events.Cached_Events: return "Cached Events";
             case VRChat_Photon_Events.Master_allowing_player_to_join: return "Master allowing player to join";
             case VRChat_Photon_Events.RPC: return "RPC";
+            case VRChat_Photon_Events.PhysBones: return "PhysBones";
             case VRChat_Photon_Events.Motion: return "Motion";
             case VRChat_Photon_Events.interest: return "Interest";
             case VRChat_Photon_Events.Reliable: return "Reliable";

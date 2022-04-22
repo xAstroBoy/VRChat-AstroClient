@@ -4,7 +4,7 @@ namespace AstroClient.Target
 {
     using System;
     using System.Collections.Generic;
-    using AstroEventArgs;
+    
     using VRC;
     using xAstroBoy.Utility;
 

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Reflection;
-    using AstroEventArgs;
+    
     using Cheetos;
     using Config;
     using HarmonyLib;

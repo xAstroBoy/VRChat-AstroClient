@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.xAstroBoy
 {
-    using AstroEventArgs;
+    
     using Cheetos;
     using HarmonyLib;
     using System;

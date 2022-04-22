@@ -7,7 +7,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
-    using AstroEventArgs;
+    
     using Cheetah;
     using CheetosConsole;
     using ClientResources.Loaders;

@@ -1,10 +1,11 @@
-﻿namespace AstroClient.Startup.Hooks
+﻿using VRC.SDKBase.Validation.Performance.Stats;
+
+namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
     using System;
     using System.Reflection;
-    using AstroEventArgs;
     using Cheetos;
     using Config;
     using Constants;
@@ -30,6 +31,8 @@
         internal override void ExecutePriorityPatches()
         {
             new AstroPatch(HarmonyLib.AccessTools.Method(typeof(PerformanceScannerSet), nameof(PerformanceScannerSet.RunPerformanceScan)), GetPatch(nameof(CalculatePerformance)));
+            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(PerformanceScannerSet), nameof(PerformanceScannerSet.RunPerformanceScanEnumerator)), GetPatch(nameof(CalculatePerformance)));
+
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
@@ -39,9 +42,16 @@
         }
 
 
-        private static bool CalculatePerformance()
+        private static bool CalculatePerformance(AvatarPerformanceStats __1)
         {
-            return ConfigManager.Performance.AllowPerformanceScanner;
+            if(!ConfigManager.Performance.AllowPerformanceScanner)
+            {
+                for(int i = 0; i < __1._performanceRatingCache.Count; i++)
+                {
+                    __1._performanceRatingCache[i] = PerformanceRating.None;
+                }
+            }
+            return true;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks.PhotonHook.Structs.PhotonBytes;
+﻿using Il2CppSystem;
+
+namespace AstroClient.Startup.Hooks.PhotonHook.Structs.PhotonBytes;
 
 internal struct VRChat_Photon_Events
 {
@@ -11,6 +13,7 @@ internal struct VRChat_Photon_Events
     internal const byte Motion = 7;
     internal const byte interest = 8; // Wut
     internal const byte Reliable = 9;
+    internal const byte PhysBones = 60;
     internal const byte Moderations = 33;
     internal const byte OpCleanRpcBuffer = 200; // (int actorNumber)
     internal const byte SendSerialize = 201;
@@ -28,4 +31,5 @@ internal struct VRChat_Photon_Events
     internal const byte Custom_Properties = 253;
     internal const byte Leaving_World = 254;
     internal const byte Joining_World = 255;
+    
 }

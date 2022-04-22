@@ -57,6 +57,7 @@ internal class PhotonOnEventHook : AstroEvents
 
                 bool isHashtable = false;
                 bool isDictionary = false;
+                bool isIntArrayArray = false;
                 bool isUnknownType = false;
 
                 // These two exists For easily edit and rebuild them instead of editing Original data (Unhollower crashes)
@@ -65,11 +66,12 @@ internal class PhotonOnEventHook : AstroEvents
                 // System.Collections.Hashtable Hashtable_EditableCopy = new System.Collections.Hashtable();
 
                 // Identify what Type & Where is the data 
-                if (__0.CustomData != null)
+                var customdata = __0.CustomData;
+                if (customdata != null)
                 {
                     isCustomData = true;
                     //Log.Debug($"Received CustomData with Type : {__0.CustomData}");
-                    if (__0.CustomData.GetIl2CppType().Equals(Il2CppType.Of<Dictionary<byte, Object>>()))
+                    if (customdata.GetIl2CppType().Equals(Il2CppType.Of<Dictionary<byte, Object>>()))
                     {
                         // Flag and convert the item that needs to be processed into a Editable copy .
                         isDictionary = true;
@@ -91,10 +93,14 @@ internal class PhotonOnEventHook : AstroEvents
                         }
                     }
 
-                    else if (__0.CustomData.GetIl2CppType().Equals(Il2CppType.Of<Hashtable>()))
+                    else if (customdata.GetIl2CppType().Equals(Il2CppType.Of<Hashtable>()))
                     {
                         isHashtable = true;
                         // TODO: ADD A CAST SYSTEM TO CONVERT IL2CPP HASHTABLE BACK TO A SYSTEM HASHTABLE (not important unless needed)!
+                    }
+                    else if (customdata.GetIl2CppType().FullName.Equals("System.Int32[][]"))
+                    {
+                        isIntArrayArray = true;
 
                     }
                     else
@@ -130,7 +136,11 @@ internal class PhotonOnEventHook : AstroEvents
 
                 switch (__0.Code)
                 {
+                    case VRChat_Photon_Events.PhysBones:
+                    {
 
+                            break;
+                    }
                     case VRChat_Photon_Events.Moderations:
                     {
                         // Give a safe copy to patch and replace.

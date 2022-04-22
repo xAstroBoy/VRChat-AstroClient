@@ -31,6 +31,7 @@ internal class PhotonLogger
             case VRChat_Photon_Events.Cached_Events: return false;
             case VRChat_Photon_Events.Master_allowing_player_to_join: return true;
             case VRChat_Photon_Events.RPC: return false;
+            case VRChat_Photon_Events.PhysBones: return true;
             case VRChat_Photon_Events.Motion: return false;
             case VRChat_Photon_Events.interest: return false;
             case VRChat_Photon_Events.Reliable: return false;
@@ -125,6 +126,12 @@ internal class PhotonLogger
                 line.AppendLine();
                 line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(casteddict), Formatting.Indented));
             }
+        }
+        else if (Data.GetIl2CppType().FullName.Equals("System.Int32[][]"))
+        {
+            ContainerType.Append($"[Int[][]] : ");
+            line.AppendLine();
+            line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<int[][]>(Data), Formatting.Indented));
         }
 
         else if (Data.GetIl2CppType().Equals(Il2CppType.Of<Hashtable>()))

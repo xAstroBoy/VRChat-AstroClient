@@ -8,7 +8,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 
     using System;
     using System.Reflection;
-    using AstroEventArgs;
+    
     using AstroMonos.Components.Spoofer;
     using Cheetos;
     using Config;

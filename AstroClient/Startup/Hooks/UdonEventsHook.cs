@@ -12,7 +12,7 @@ namespace AstroClient.Startup.Hooks
     using System;
     using System.Collections;
     using System.Reflection;
-    using AstroEventArgs;
+    
     using Cheetos;
     using HarmonyLib;
     using MelonLoader;
