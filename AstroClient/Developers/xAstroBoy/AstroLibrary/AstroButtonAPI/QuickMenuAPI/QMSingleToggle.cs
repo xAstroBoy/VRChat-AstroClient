@@ -259,7 +259,7 @@
         {
             if (size == null)
             {
-                // Standart Size
+                // Standard Size
                 ButtonObject.GetComponent<RectTransform>().sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             }
             else

@@ -14,20 +14,20 @@ namespace AstroClient.Startup.Hooks
     {
 
 
-        internal override void ExecutePriorityPatches()
-        {
-            MiscUtils.DelayFunction(10f, () => {
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_0)), GetPatch(nameof(AntiMute_0)));
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_1)), GetPatch(nameof(AntiMute_1)));
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_2)), GetPatch(nameof(AntiMute_2)));
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_3)), GetPatch(nameof(AntiMute_3)));
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_4)), GetPatch(nameof(AntiMute_4)));
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_5)), GetPatch(nameof(AntiMute_5)));
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_6)), GetPatch(nameof(AntiMute_6)));
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_7)), GetPatch(nameof(AntiMute_7)));
-            new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_8)), GetPatch(nameof(AntiMute_8)));
-                });
-        }
+        //internal override void ExecutePriorityPatches()
+        //{
+        //    MiscUtils.DelayFunction(10f, () => {
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_0)), GetPatch(nameof(AntiMute_0)));
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_1)), GetPatch(nameof(AntiMute_1)));
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_2)), GetPatch(nameof(AntiMute_2)));
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_3)), GetPatch(nameof(AntiMute_3)));
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_4)), GetPatch(nameof(AntiMute_4)));
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_5)), GetPatch(nameof(AntiMute_5)));
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_6)), GetPatch(nameof(AntiMute_6)));
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_7)), GetPatch(nameof(AntiMute_7)));
+        //    new AstroPatch(typeof(USpeakPhotonManager3D).GetMethod(nameof(USpeakPhotonManager3D.Method_Public_Static_Void_Player_PDM_8)), GetPatch(nameof(AntiMute_8)));
+        //        });
+        //}
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)

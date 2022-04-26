@@ -25,9 +25,11 @@ namespace AstroClient.Startup.Hooks
             new AstroPatch(typeof(WebRequest).GetMethod(nameof(WebRequest.CreateHttp), new Type[1] { typeof(string) }), GetPatch(nameof(CreateHTTPPatch_String)));
 
             new AstroPatch(typeof(WebClient).GetMethod(nameof(WebClient.DownloadString), new Type[1] { typeof(string) }), GetPatch(nameof(DownloadStringPatch)));
-
-            new AstroPatch(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Get), new Type[1] { typeof(string) }), GetPatch(nameof(DownloadStringPatch)));
-            new AstroPatch(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Get), new Type[1] { typeof(Uri) }), GetPatch(nameof(CreateHTTPPatch_Uri)));
+            MiscUtils.DelayFunction(10f, () =>
+            {
+                new AstroPatch(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Get), new Type[1] { typeof(string) }), GetPatch(nameof(DownloadStringPatch)));
+                new AstroPatch(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Get), new Type[1] { typeof(Uri) }), GetPatch(nameof(CreateHTTPPatch_Uri)));
+            });
 
         }
 
