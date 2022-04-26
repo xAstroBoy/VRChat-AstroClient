@@ -152,8 +152,10 @@
     <Compile Include="Developers\Cheetos\WindowsUtils.cs" />
     <Compile Include="Developers\Kaned\KanedWIP.cs" />
     <Compile Include="Developers\Kaned\RotationFix.cs" />
+    <Compile Include="ModsDetector\EmmPatcher.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
+    <Compile Include="Startup\Hooks\AntiMuteExperiment.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleTeleportRPC.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleUdonEvent.cs" />

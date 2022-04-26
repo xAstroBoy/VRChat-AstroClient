@@ -71,7 +71,7 @@
             btnQMLoc = baseMenu.GetMenuName();
             ButtonsMenu = baseMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip);
-
+            ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
@@ -100,7 +100,7 @@
             btnQMLoc = baseMenu.GetMenuName();
             ButtonsMenu = baseMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip);
-
+            ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
@@ -121,7 +121,7 @@
             btnQMLoc = baseMenu.GetMenuName();
             ButtonsMenu = baseMenu.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip);
-
+            ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
@@ -163,7 +163,7 @@
             btnQMLoc = Parent.GetMenuName();
             ButtonsMenu = Parent.GetButtonsMenu();
             initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, $"#{ColorUtility.ToHtmlStringRGB(TextColor.GetValueOrDefault(Color.white))}");
-
+            ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             if (btnHalf)
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);

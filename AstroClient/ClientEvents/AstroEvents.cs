@@ -106,10 +106,16 @@ namespace AstroClient
             UnityMessagesHook.Event_OnUnityWarning += OnUnityWarning;
             UnityMessagesHook.Event_OnUnityError += OnUnityError;
 
+            UnchainedMelonLoader.Event_OnPatchShieldRemoved += OnPatchShieldRemoved;
         }
 
         internal virtual void OnAvatarInstantiated(VRCAvatarManager manager, ApiAvatar apiAvatar, GameObject avatar)
         {
+        }
+
+        internal virtual void OnPatchShieldRemoved()
+        {
+
         }
 
         internal virtual void OnShowSocialRankChanged()

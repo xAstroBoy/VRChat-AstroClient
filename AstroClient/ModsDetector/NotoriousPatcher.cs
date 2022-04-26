@@ -1,4 +1,5 @@
-﻿namespace AstroClient.ModsDetector
+﻿
+namespace AstroClient.ModsDetector
 {
     using System;
     using System.Collections;
@@ -9,6 +10,7 @@
     using HarmonyLib;
     using MelonLoader;
     using Attribute = System.Attribute;
+    using AstroClient.Tools.Extensions;
 
     internal class NotoriousPatcher : AstroEvents
     {
@@ -22,13 +24,6 @@
             return new HarmonyMethod(typeof(NotoriousPatcher).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        internal static T GetAssemblyAttribute<T>(System.Reflection.Assembly ass) where T : Attribute
-        {
-            object[] attributes = ass.GetCustomAttributes(typeof(T), false);
-            if (attributes == null || attributes.Length == 0)
-                return null;
-            return attributes.OfType<T>().SingleOrDefault();
-        }
 
         private static Assembly _NotoriousLoader = null;
         private static Assembly NotoriousLoader
@@ -43,7 +38,7 @@
                         for (int i = 0; i < LoadedAssemblies.Length; i++)
                         {
                             Assembly item = LoadedAssemblies[i];
-                            var CopyrightAttrib = GetAssemblyAttribute<AssemblyCopyrightAttribute>(item);
+                            var CopyrightAttrib = item.GetAssemblyAttribute<AssemblyCopyrightAttribute>();
                             if (item.FullName.Contains("Notorious-Loader"))
                             {
                                 if (CopyrightAttrib != null)

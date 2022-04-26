@@ -11,7 +11,7 @@
 
     internal class UnchainedMelonLoader : AstroEvents
     {
-
+        internal static event Action Event_OnPatchShieldRemoved;
         private static bool IsfirstScene { get; set; }
         internal static bool AreProtectionsArmed = true;
 
@@ -93,8 +93,8 @@
 
         internal void FuckOffVRCMGShit(Harmony instance)
         {
-            int KnahBonks = 0;
-            int RinLovesYouBonks = 0;
+            int PatchShield = 0;
+            int AssemblyVerifier = 0;
             foreach (MethodBase methodBase in instance.GetPatchedMethods().ToList<MethodBase>())
             {
                 Patches info = PatchProcessor.GetPatchInfo(methodBase);
@@ -105,17 +105,17 @@
                     {
                         if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.PatchShield"))
                         {
-                            KnahBonks++;
+                            PatchShield++;
 
-                            Log.Debug($"Bonking Knah For his PatchShield x{KnahBonks}", Color.Gold);
+                            Log.Debug($"Bonking Knah For his PatchShield x{PatchShield}", Color.Gold);
                             //Log.Debug($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
                         if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.Utils.AssemblyVerifier"))
                         {
-                            RinLovesYouBonks++;
+                            AssemblyVerifier++;
                             //Log.Debug($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
-                            Log.Debug($"Bonking RinLovesYou For his AssemblyVerifier x{RinLovesYouBonks}", Color.Gold);
+                            Log.Debug($"Bonking Knah For his AssemblyVerifier x{AssemblyVerifier}", Color.Gold);
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
 
@@ -124,23 +124,28 @@
                     {
                         if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.PatchShield"))
                         {
-                            KnahBonks++;
+                            PatchShield++;
 
-                            Log.Debug($"Bonking Knah For his PatchShield x{KnahBonks}", Color.Gold);
+                            Log.Debug($"Bonking Knah For his PatchShield x{PatchShield}", Color.Gold);
 
                             //Log.Debug($"Removing Patchshield Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
                         if (patchInfo.PatchMethod.FullDescription().Contains("MelonLoader.Utils.AssemblyVerifier"))
                         {
-                            RinLovesYouBonks++;
+                            AssemblyVerifier++;
                             //Log.Debug($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
-                            Log.Debug($"Bonking RinLovesYou For his AssemblyVerifier x{RinLovesYouBonks}", Color.Gold);
+                            Log.Debug($"Bonking Knah For his AssemblyVerifier x{AssemblyVerifier}", Color.Gold);
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
 
                     });
                 }
+            }
+
+            if(PatchShield != 0)
+            {
+                Event_OnPatchShieldRemoved.SafetyRaise(); 
             }
 
         }
