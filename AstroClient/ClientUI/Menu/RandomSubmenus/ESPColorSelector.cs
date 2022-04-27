@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.RandomSubmenus
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.RandomSubmenus
 {
     using System.Drawing;
     using Config;
@@ -10,6 +12,12 @@
 
     internal class ESPColorSelector : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
+
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
 
@@ -232,7 +240,7 @@
         }
 
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
@@ -258,7 +266,7 @@
             }
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

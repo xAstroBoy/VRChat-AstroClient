@@ -1,6 +1,7 @@
 ﻿using System;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.UdonSearcher;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
@@ -30,7 +31,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
     // BUG : Figure what's breaking the Pickup System (not respawning / Desyncing )
     [RegisterComponent]
-    public class PrisonEscape_AimAssister : AstroMonoBehaviour
+    public class PrisonEscape_AimAssister : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -38,7 +39,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             AntiGarbageCollection.Add(this);
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -60,6 +61,37 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
             }
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_Udon_OnDrop += UdonBehaviour_Event_OnDrop;
+                        ClientEventActions.Event_Udon_OnPickupUseDown += UdonBehaviour_Event_OnPickupUseDown;
+                        ClientEventActions.Event_Udon_OnPickupUseUp += UdonBehaviour_Event_OnPickupUseUp;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
+                        ClientEventActions.Event_Udon_OnPickupUseDown -= UdonBehaviour_Event_OnPickupUseDown; 
+                        ClientEventActions.Event_Udon_OnPickupUseUp -= UdonBehaviour_Event_OnPickupUseUp;
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
 
         void Start()
         {
@@ -78,12 +110,18 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     Laser.OnPlayerHit += OnPlayerHit;
                 }
+                HasSubscribed = true; 
             }
+        }
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
         }
 
         internal static bool IsDebugMode {  [HideFromIl2Cpp]get; [HideFromIl2Cpp] set; } = false;
         [HideFromIl2Cpp]
-        void OnPlayerHit(Player player)
+        private void OnPlayerHit(Player player)
         {
             if (isAimAssisterOn || IsDebugMode)
             {
@@ -118,7 +156,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         }
 
         [HideFromIl2Cpp]
-        internal override void UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour item)
+        private void UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour item)
         {
             if (item.Equals(ShootInteraction.UdonBehaviour))
             {
@@ -127,14 +165,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         }
 
         [HideFromIl2Cpp]
-        internal override void UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour item)
+        private void UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour item)
         {
             if (item.Equals(ShootInteraction.UdonBehaviour))
             {
                 isAimAssisterOn = false;
             }
         }
-        internal override void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
+        private void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
         {
             if (item.Equals(ShootInteraction.UdonBehaviour))
             {

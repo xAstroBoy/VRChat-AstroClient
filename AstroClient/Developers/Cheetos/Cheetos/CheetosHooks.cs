@@ -1,4 +1,7 @@
-﻿namespace AstroClient.Cheetos
+﻿using AstroClient.ClientActions;
+using Cheetah;
+
+namespace AstroClient.Cheetos
 {
     #region Imports
 
@@ -6,7 +9,6 @@
     using System.Collections;
     using System.Linq;
     using System.Reflection;
-    using Cheetah;
     using Constants;
     using HarmonyLib;
     using MelonLoader;
@@ -27,19 +29,6 @@
     [ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class CheetosHooks : AstroEvents
     {
-        internal static event System.Action<VRCUiPage> Event_OnShowScreen;
-        internal static event System.Action<Player> Event_OnPhotonPlayerJoined;
-        internal static event System.Action<Player> Event_OnPhotonPlayerLeft;
-        internal static event System.Action<Player> Event_OnMasterClientSwitched;
-        internal static event System.Action Event_OnRoomLeft;
-        internal static event System.Action Event_OnRoomJoined;
-        internal static event System.Action<APIUser> Event_OnFriended;
-        internal static event System.Action<string> Event_OnUnfriended;
-        internal static event System.Action<ApiWorld, ApiWorldInstance> Event_OnEnterWorld;
-        internal static event System.Action<VRCPlayer, Il2CppSystem.Collections.Hashtable> Event_OnSetupFlagsReceived;
-        internal static event System.Action Event_OnShowSocialRankChanged;
-        internal static event System.Action<AvatarLoadingBar, float, long> Event_OnAvatarDownloadProgress;
-        internal static event System.Action<VRCAvatarManager, ApiAvatar, GameObject> Event_OnAvatarInstantiated;
 
 
         [ObfuscationAttribute(Feature = "HarmonyGetPatch")]
@@ -128,7 +117,7 @@
             {
                 return;
             }
-            Event_OnAvatarInstantiated.SafetyRaiseWithParams(manager, apiAvatar, avatar);
+            ClientEventActions.Event_OnAvatarInstantiated.SafetyRaiseWithParams(manager, apiAvatar, avatar);
         }
 
 
@@ -148,28 +137,28 @@
             {
                 return;
             }
-            Event_OnSetupFlagsReceived.SafetyRaiseWithParams(__instance, __0);
+            ClientEventActions.Event_OnSetupFlagsReceived.SafetyRaiseWithParams(__instance, __0);
 
         }
 
 
         private static void Internal_OnShowSocialRankChanged()
         {
-            Event_OnShowSocialRankChanged.SafetyRaise();
+            ClientEventActions.Event_OnShowSocialRankChanged.SafetyRaise();
         }
 
-        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => Event_OnEnterWorld.SafetyRaiseWithParams(__0, __1);
+        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => ClientEventActions.Event_OnEnterWorld.SafetyRaiseWithParams(__0, __1);
 
-        private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaiseWithParams(__0);
+        private static void OnMasterClientSwitchedPatch(Player __0) => ClientEventActions.Event_OnMasterClientSwitched?.SafetyRaiseWithParams(__0);
 
-        private static void OnFriended(ref APIUser __0) => Event_OnFriended?.SafetyRaiseWithParams(__0);
+        private static void OnFriended(ref APIUser __0) => ClientEventActions.Event_OnFriended?.SafetyRaiseWithParams(__0);
 
-        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaiseWithParams(__0);
+        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => ClientEventActions.Event_OnUnfriended?.SafetyRaiseWithParams(__0);
 
 
-        private static void OnRoomLeftPatch() => Event_OnRoomLeft?.SafetyRaise();
+        private static void OnRoomLeftPatch() => ClientEventActions.Event_OnRoomLeft?.SafetyRaise();
 
-        private static void OnRoomJoinedPatch() => Event_OnRoomJoined?.SafetyRaise();
+        private static void OnRoomJoinedPatch() => ClientEventActions.Event_OnRoomJoined?.SafetyRaise();
 
         private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
         {
@@ -214,7 +203,7 @@
         {
             if (__0 != null)
             {
-                Event_OnShowScreen?.SafetyRaiseWithParams(__0);
+                ClientEventActions.Event_OnShowScreen?.SafetyRaiseWithParams(__0);
             }
 
             return true;
@@ -287,7 +276,7 @@
 
         private static void Internal_OnAvatarDownloadProgress(AvatarLoadingBar __instance, float __0, long __1)
         {
-            Event_OnAvatarDownloadProgress.SafetyRaiseWithParams(__instance, __0, __1);
+            ClientEventActions.Event_OnAvatarDownloadProgress.SafetyRaiseWithParams(__instance, __0, __1);
         }
 
         //private static bool OnAvatarDownload(ref ApiAvatar __0)
@@ -328,12 +317,12 @@
 
         private static void OnPhotonPlayerJoin(ref Player __0)
         {
-            Event_OnPhotonPlayerJoined?.SafetyRaiseWithParams(__0);
+            ClientEventActions.Event_OnPhotonPlayerJoined?.SafetyRaiseWithParams(__0);
         }
 
         private static void OnPhotonPlayerLeft(ref Player __0)
         {
-            Event_OnPhotonPlayerLeft?.SafetyRaiseWithParams(__0);
+            ClientEventActions.Event_OnPhotonPlayerLeft.SafetyRaiseWithParams(__0);
         }
     }
 }

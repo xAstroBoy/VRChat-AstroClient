@@ -1,4 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
+﻿using AstroClient.ClientActions;
+using UnityEngine;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
     using AstroClient.Tools.UdonEditor;
     using ClientAttributes;
@@ -10,7 +13,7 @@
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]
-    public class JarNodeReader : AstroMonoBehaviour
+    public class JarNodeReader : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -42,9 +45,39 @@
         {
             Node = gameObject.GetComponent<UdonBehaviour>();
             if (Node != null) RawNode = Node.ToRawUdonBehaviour();
+            HasSubscribed = true;
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
 
-        internal override void OnRoomLeft()
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+        }
+        private void OnRoomLeft()
         {
             Destroy(this);
         }

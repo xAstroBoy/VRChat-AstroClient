@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
     using AstroClient.Tools.Colors;
     using ClientAttributes;
@@ -28,7 +30,7 @@
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class AmongUS_ESP : AstroMonoBehaviour
+    public class AmongUS_ESP : MonoBehaviour
     {
         private AmongUs_Roles _CurrentRole { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; } = AmongUs_Roles.None;
 
@@ -273,6 +275,36 @@
             Log.Debug("Registered " + Player.DisplayName() + " On Among US Role ESP.");
             MelonCoroutines.Start(FindEverything());
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPC;
+                        ClientEventActions.Event_OnViewRolesPropertyChanged += OnViewRolesPropertyChanged;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC -= OnUdonSyncRPC;
+                        ClientEventActions.Event_OnViewRolesPropertyChanged -= OnViewRolesPropertyChanged;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
 
         internal void OnDestroy()
         {
@@ -370,7 +402,7 @@
             Log.Debug($"Found all the required Events and Node!");
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -386,7 +418,7 @@
             _ = int.TryParse(removedtext, out var value);
             return value;
         }
-        internal override void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(Player player)
         {
             if (player.Equals(this.Player))
             {
@@ -394,7 +426,7 @@
             }
         }
 
-        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        private void OnUdonSyncRPC(Player sender, GameObject obj, string action)
         {
             try
             {
@@ -513,7 +545,7 @@
             }
         }
 
-        internal override void OnViewRolesPropertyChanged(bool value)
+        private void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
         }

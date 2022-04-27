@@ -1,4 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
+﻿using AstroClient.ClientActions;
+using UnityEngine;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
@@ -12,7 +15,7 @@
     using Math = System.Math;
 
     [RegisterComponent]
-    public class UdonTycoon_LevelController : AstroMonoBehaviour
+    public class UdonTycoon_LevelController : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -20,11 +23,36 @@
         {
             AntiGarbageCollection.Add(this);
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
+        internal void Start()
+        {
+            if (WorldUtils.WorldID.Equals(WorldIds.Udon_Tycoon))
+            {
+                var obj = gameObject.FindUdonEvent("_ConfirmAllPartsPlaced");
+                if (obj != null)
+                {
+                    ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                    LevelController = obj.UdonBehaviour.ToRawUdonBehaviour();
+                }
+                else
+                {
+                    Log.Error("Can't Find LevelController behaviour, Unable to Add Reader Component, did the author update the world?");
+                    Destroy(this);
+                }
+            }
+            else
+            {
+                Destroy(this);
+            }
+        }
 
+        void OnDestroy()
+        {
+            ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+        }
         internal string PolyCounter1
         {
             [HideFromIl2Cpp]
@@ -77,25 +105,5 @@
         private static RawUdonBehaviour LevelController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         // Use this for initialization
-        internal void Start()
-        {
-            if (WorldUtils.WorldID.Equals(WorldIds.Udon_Tycoon))
-            {
-                var obj = gameObject.FindUdonEvent("_ConfirmAllPartsPlaced");
-                if (obj != null)
-                {
-                    LevelController = obj.UdonBehaviour.ToRawUdonBehaviour();
-                }
-                else
-                {
-                    Log.Error("Can't Find LevelController behaviour, Unable to Add Reader Component, did the author update the world?");
-                    Destroy(this);
-                }
-            }
-            else
-            {
-                Destroy(this);
-            }
-        }
     }
 }

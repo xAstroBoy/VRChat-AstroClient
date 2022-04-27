@@ -7,7 +7,7 @@
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
 
-    internal class FunBehavioursSubMenu : Tweaker_Events
+    internal class FunBehavioursSubMenu 
     {
         internal static void Init_FunMenu(QMNestedGridMenu menu)
         {

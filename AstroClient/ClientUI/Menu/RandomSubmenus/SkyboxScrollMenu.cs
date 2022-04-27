@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.RandomSubmenus
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.RandomSubmenus
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +13,13 @@
 
     internal class SkyboxScrollMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
+
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new();
@@ -27,7 +36,7 @@
         private static bool HasGenerated { get; set; }
         private static bool isOpen { get; set; }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
 
@@ -94,7 +103,7 @@
             //}
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
@@ -139,7 +148,7 @@
             Regenerate();
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

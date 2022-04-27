@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.QPens
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.QPens
 {
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -11,13 +13,20 @@
 
     internal class QVPensUtils : AstroEvents
     {
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+        }
+
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             FindQVPenSetTriggers();
             FindUdonPensEvents();
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (PenManagers != null)
             {

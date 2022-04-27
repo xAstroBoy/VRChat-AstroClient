@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications
 {
     using System;
     using System.Collections.Generic;
@@ -17,6 +19,11 @@
 
     internal class CheatsShortcutButton : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
         private static QMWings WorldCheatsShortcut;
 
         internal static void Init_Cheats_ShortcutBtn()
@@ -25,15 +32,8 @@
             ToggleButtonVisibilityAndInteractivity(false);
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            //if (id == WorldIds.VRChatDefaultHub)
-            //{
-            //    WorldCheatsShortcut.SetButtonShortcut(VRChatHub.VRChat_Hub_Addons);
-            //    WorldCheatsShortcut.SetTextColor(Color.green);
-            //    ToggleButtonVisibilityAndInteractivity(true);
-            //}
-            //else
             if (id == WorldIds.AmongUS)
             {
                 if (AmongUSCheats.AmongUsCheatsPage != null)
@@ -61,16 +61,6 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            //else if (id == WorldIds.FreezeTag)
-            //{
-            //    if (FreezeTag.FreezeTagCheatsPage != null)
-            //    {
-            //        SetButtonText("Freeze Tag Cheats", "Manage Freeze Tag Cheats");
-            //        SetButtonShortcut(FreezeTag.FreezeTagCheatsPage);
-            //        SetButtonColor(Color.green);
-            //        ToggleButtonVisibilityAndInteractivity(true);
-            //    }
-            //}
             else if (id == WorldIds.JustBClub)
             {
                 if (BClubWorld.BClubExploitsPage != null)
@@ -133,25 +123,6 @@
                     WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
-            }
-            //else if (id == WorldIds.PoolParlor)
-            //{
-            //    if (PoolParlor.PoolParlorCheats != null)
-            //    {
-            //        WorldCheatsShortcut.SetButtonShortcut(PoolParlor.PoolParlorCheats);
-            //        WorldCheatsShortcut.SetTextColor(Color.green);
-            //        ToggleButtonVisibilityAndInteractivity(true);
-            //    }
-            //`}
-            else if (id == WorldIds.Udon_Tycoon)
-            {
-                if (UdonTycoon.udonTycoonCheatPage != null)
-                {
-                    WorldCheatsShortcut.SetButtonShortcut(UdonTycoon.udonTycoonCheatPage);
-                    WorldCheatsShortcut.SetTextColor(Color.green);
-                    ToggleButtonVisibilityAndInteractivity(true);
-                }
-
             }
             else if (id == WorldIds.Clicker_Game)
             {

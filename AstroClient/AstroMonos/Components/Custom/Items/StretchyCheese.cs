@@ -1,34 +1,62 @@
-﻿namespace AstroClient.AstroMonos.Components.Custom.Items
+﻿using AstroClient.ClientActions;
+using UnityEngine;
+
+namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using System;
-    using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonSearcher;
     using AstroUdons;
     using ClientAttributes;
     using CustomClasses;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
-    using static Constants.CustomLists;
 
     [RegisterComponent]
-    public class StretchyCheeseBehaviour : AstroMonoBehaviour
+    public class StretchyCheeseBehaviour : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public StretchyCheeseBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
         private UdonBehaviour_Cached ExtendCheese { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal VRC_AstroPickup PickupBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
 
         private void Start()
         {
             ExtendCheese = UdonSearch.FindUdonEvent(gameObject, "Extend");
             if (ExtendCheese != null)
             {
+                HasSubscribed = true;
                 var PickupBehaviour = gameObject.AddComponent<VRC_AstroPickup>();
                 if (PickupBehaviour != null) PickupBehaviour.OnPickupUseUp += () => { ExtendCheese.InvokeBehaviour(); };
             }
@@ -38,7 +66,7 @@
                 Destroy(this);
             }
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -56,6 +84,7 @@
         private void OnDestroy()
         {
             if (PickupBehaviour != null) Destroy(PickupBehaviour);
+            HasSubscribed = false;
         }
     }
 }

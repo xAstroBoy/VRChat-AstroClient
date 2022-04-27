@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Cheetos
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Cheetos
 {
     #region Imports
 
@@ -15,6 +17,18 @@
 
     internal class AvatarSearch : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+            ClientEventActions.Event_VRChat_OnQuickMenuInit += VRChat_OnQuickMenuInit;
+
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+
+            ClientEventActions.Event_OnShowScreen += OnShowScreen;
+
+        }
+
         //internal static SearchTypes SearchType = SearchTypes.ALL;
 
         //internal static bool IsSearching;
@@ -54,7 +68,7 @@
         //    PRIVATE
         //}
 
-        internal override void VRChat_OnQuickMenuInit()
+        private void VRChat_OnQuickMenuInit()
         {
             //inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
@@ -92,7 +106,7 @@
 
         }
 
-        internal override void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
         {
             MiscUtils.DelayFunction(0.1f, () => { PedestalDump(); });
         }
@@ -144,7 +158,7 @@
         //        }
         //    }
         //}
-        internal override void OnShowScreen(VRCUiPage page)
+        private void OnShowScreen(VRCUiPage page)
         {
             if (page.name == "Avatar")
             {
@@ -170,7 +184,7 @@
 
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             _WorldPedestralAvatars.Clear();
 

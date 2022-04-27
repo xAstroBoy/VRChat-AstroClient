@@ -1,7 +1,9 @@
 ﻿using System.Collections.Concurrent;
+using AstroClient.ClientActions;
 using Il2CppSystem.Xml;
 using Photon.Pun;
 using Photon.Realtime;
+using UnhollowerBaseLib.Attributes;
 using VRC.SDKBase;
 
 namespace AstroClient.AstroMonos
@@ -27,10 +29,41 @@ namespace AstroClient.AstroMonos
                 {
                     WorldUtils.Pickups[i].GetOrAddComponent<PickupController>();
                 }
-
+                HasSubscribed = true;
                 HasPickupControllerBeenAdded = true;
+                
             }
 
+        }
+        private static bool _HasSubscribed = false;
+        private static bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+                        ClientEventActions.Event_OnOwnerShipTranferred += OnOwnerShipTransferred;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+                        ClientEventActions.Event_OnPlayerLeft -= OnPlayerLeft;
+                        ClientEventActions.Event_OnOwnerShipTranferred -= OnOwnerShipTransferred;
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         internal static void RegisterPlayer(Player player)
@@ -61,10 +94,11 @@ namespace AstroClient.AstroMonos
             }
         }
 
-        internal override void OnRoomLeft()
+        private static void OnRoomLeft()
         {
             HasPickupControllerBeenAdded = false;
             blockeduserids.Clear();
+            HasSubscribed = false;
         }
 
         internal static bool IsPickupBlockedUser(string UserID)
@@ -75,8 +109,7 @@ namespace AstroClient.AstroMonos
             }
             return false;
         }
-
-        internal override void OnPlayerJoined(Player player)
+        private static void OnPlayerJoined(Player player)
         {
             var id = player.GetAPIUser().GetUserID();
             if (id != null)
@@ -99,7 +132,7 @@ namespace AstroClient.AstroMonos
             }
         }
 
-        internal override void OnPlayerLeft(Player player)
+        private static void OnPlayerLeft(Player player)
         {
             var id = player.GetAPIUser().GetUserID();
             if (id != null && blockeduserids.ContainsKey(id))
@@ -108,7 +141,7 @@ namespace AstroClient.AstroMonos
             }
         }
 
-        internal bool isPickup(PhotonView instance)
+        internal static bool isPickup(PhotonView instance)
         {
             if(instance != null)
             {
@@ -119,7 +152,7 @@ namespace AstroClient.AstroMonos
 
 
 
-        internal override void OnOwnerShipTransferred(PhotonView instance, int value)
+        private static void OnOwnerShipTransferred(PhotonView instance, int value)
         {
             if (isPickup(instance))
             {

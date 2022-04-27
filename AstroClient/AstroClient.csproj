@@ -105,6 +105,7 @@
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\ImageRenderCameraReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronEventsLists.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CellDoorToggler.cs" />
@@ -122,7 +123,6 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PuttPuttPond\PuttPuttPond_GolfBallManipulator.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_AutoStarter.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerCollisionFixer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
@@ -136,6 +136,9 @@
     <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
     <Compile Include="ClientAttributes\RegisterType.cs" />
+    <Compile Include="ClientActions\ConfigEventActions.cs" />
+    <Compile Include="ClientActions\TweakerEventActions.cs" />
+    <Compile Include="ClientActions\ClientEventActions.cs" />
     <Compile Include="ClientEvents\EventHandlerInvoker_new.cs" />
     <Compile Include="ClientResources\Loaders\Bundles.cs" />
     <Compile Include="ClientResources\Loaders\Prefabs.cs" />
@@ -155,7 +158,6 @@
     <Compile Include="ModsDetector\EmmPatcher.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
-    <Compile Include="Startup\Hooks\AntiMuteExperiment.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleTeleportRPC.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleUdonEvent.cs" />
@@ -172,6 +174,7 @@
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Replacers\Photon_DictionaryEditor.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Replacers\Photon_HashtableEditor.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Translators\Photon_StructToString.cs" />
+    <Compile Include="Startup\Hooks\VRCPickupHooks.cs" />
     <Compile Include="Startup\Hooks\WorldTriggerHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\Hooks\UnityMessagesHook.cs" />
@@ -322,7 +325,6 @@
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Endpoints\MiscEndpoint.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Utils.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Variables.cs" />
-    <Compile Include="Developers\Cheetos\ModConsole.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\AudioUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\AvatarUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\BonesUtils.cs" />
@@ -365,7 +367,6 @@
     <Compile Include="AstroMonos\Components\Tools\KeypadRevealer.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Watcher.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Spinner.cs" />
-    <Compile Include="AstroMonos\Components\Tools\Listeners\UiListener.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_BankEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_HealthEditor.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerEditor.cs" />
@@ -571,7 +572,6 @@
     <Compile Include="Tools\Player\Movement\JumpModifier.cs" />
     <Compile Include="Tools\Player\Movement\QuickMenu\QMFreeze.cs" />
     <Compile Include="ClientEvents\AstroEvents.cs" />
-    <Compile Include="ClientEvents\AstroMonoBehaviour.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\CameraStuff\FOV.cs" />
     <Compile Include="Streamer\StreamerIdentifier.cs" />
     <Compile Include="Tools\ObjectEditor\Cloner\ObjectCloner.cs" />
@@ -598,7 +598,6 @@
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\PickupControllerHandler.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Handlers\RigidBodyControllerHandler.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Selector\Tweaker_Selector.cs" />
-    <Compile Include="ClientUI\Menu\ItemTweakerV2\Selector\Tweaker_Events.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Selector\Tweaker_Object.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\Submenus\Spawner\SpawnerSubmenu.cs" />
     <Compile Include="ClientUI\Menu\ItemTweakerV2\TweakerV2Main.cs" />
@@ -651,23 +650,19 @@
     <Compile Include="CustomClasses\UdonBehaviour_Cached.cs" />
     <Compile Include="WorldModifications\WorldHacks\FrameOfReference.cs" />
     <Compile Include="WorldModifications\WorldHacks\TierLand.cs" />
-    <Compile Include="WorldModifications\WorldHacks\UdonTycoon.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\PrisonEscape.cs" />
     <Compile Include="WorldModifications\WorldsIds\WorldIds.cs" />
-    <Compile Include="WorldModifications\WorldHacks\FurryTalkAndChill.cs" />
     <Compile Include="WorldModifications\WorldHacks\VoidClub.cs" />
     <Compile Include="WorldModifications\WorldHacks\JustHParty.cs" />
     <Compile Include="WorldModifications\WorldHacks\AimFactory.cs" />
     <Compile Include="WorldModifications\WorldHacks\BClubWorld.cs" />
     <Compile Include="WorldModifications\WorldHacks\BOMBERio.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Club808.cs" />
     <Compile Include="WorldModifications\WorldHacks\FBTHeaven.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\AmongUSCheats.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\Murder2\Murder2Cheats.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\Murder4Cheats.cs" />
     <Compile Include="WorldModifications\WorldHacks\ChuckECheeseExperience.cs" />
-    <Compile Include="WorldModifications\WorldHacks\lpd.cs" />
     <Compile Include="WorldModifications\WorldHacks\Meroom.cs" />
     <Compile Include="WorldModifications\WorldHacks\SnoozeScaryMaze5.cs" />
     <Compile Include="WorldModifications\WorldHacks\SmashContest.cs" />

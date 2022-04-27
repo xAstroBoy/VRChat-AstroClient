@@ -65,10 +65,6 @@ namespace AstroClient.Tools.World
             return null;
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
-        {
-            Log.Write("This instance has " + WorldUtils.Players.Count() + " Players.", Color.Gold);
-        }
 
         internal static List<GameObject> Get_Pickups()
         {

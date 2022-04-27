@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
@@ -35,6 +37,11 @@
 
     internal class SoftCloneHook : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
 
         private static bool isSoftCloneActive = false;
         private static Il2CppSystem.Object AvatarDictCache { get; set; }
@@ -67,7 +74,7 @@
         }
         //internal static 
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             _PacketCounter = 0;
             isSoftCloneActive = false;

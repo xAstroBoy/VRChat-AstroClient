@@ -1,4 +1,5 @@
-﻿using VRC.SDKBase;
+﻿using AstroClient.ClientActions;
+using VRC.SDKBase;
 using VRC.SDKBase.Validation.Performance;
 
 namespace AstroClient.PlayerList
@@ -50,12 +51,18 @@ namespace AstroClient.PlayerList
         public static void Init()
         {
             PlayerListConfig.fontSize.OnValueChanged += (oldValue, newValue) => SetFontSize(newValue);
-            PlayerListConfig.OnConfigChanged += OnConfigChanged;
-
+            ConfigEventActions.OnPlayerListConfigChanged += OnConfigChanged;
+            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.Event_OnUpdate += OnUpdate;
+            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
+            ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
+            ClientEventActions.Event_OnAvatarInstantiated += OnAvatarInstantiated;
+            ClientEventActions.Event_OnAvatarDownloadProgress += OnavatarDownloadProgress;
+            ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
             MelonCoroutines.Start(EntryRefreshEnumerator());
         }
 
-        internal override void OnPlayerJoined(Player player)
+        private static void OnPlayerJoined(Player player)
         {
             if (player.name.Contains("Local") && player.prop_APIUser_0 == null)
                 player.prop_APIUser_0 = APIUser.CurrentUser;
@@ -124,19 +131,19 @@ namespace AstroClient.PlayerList
                 yield return null;
             }
         }
-        internal override void OnUpdate()
+        private static void OnUpdate()
         {
             RefreshAllEntries();
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        private static void OnSceneLoaded(int buildIndex, string sceneName)
         {
             for (int i = playerEntries.Count - 1; i >= 0; i--)
                 playerEntries[i].playerLeftPairEntry.Remove();
             localPlayerEntry?.EntryBase_OnSceneWasLoaded();
         }
 
-        internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
+        private static void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             foreach (EntryBase entry in entries)
                 entry.EntryBase_OnInstanceChange(world, instance);
@@ -149,7 +156,7 @@ namespace AstroClient.PlayerList
         }
 
 
-        internal override void OnAvatarInstantiated(VRCAvatarManager player, ApiAvatar avatar, GameObject gameObject)
+        private static void OnAvatarInstantiated(VRCAvatarManager player, ApiAvatar avatar, GameObject gameObject)
         {
             //Log.WriteMsg("EM: OnAvInst");
             /*foreach (EntryBase entry in playerEntries)
@@ -179,7 +186,7 @@ namespace AstroClient.PlayerList
             ProcessAvatarInstantiateBacklog();
         }
 
-        internal override void OnavatarDownloadProgress(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
+        private static void OnavatarDownloadProgress(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
             foreach (EntryBase entry in playerEntries)
                 entry.EntryBase_OnAvatarDownloadProgressed(loadingBar, downloadPercentage, fileSize);
@@ -238,7 +245,7 @@ namespace AstroClient.PlayerList
 
         }
 
-        internal override void OnPlayerLeft(Player player)
+        private static void OnPlayerLeft(Player player)
         {
             
 

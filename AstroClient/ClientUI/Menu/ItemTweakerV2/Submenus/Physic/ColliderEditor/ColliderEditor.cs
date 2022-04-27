@@ -6,7 +6,7 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class ColliderEditor : Tweaker_Events
+    internal class ColliderEditor 
     {
         internal static void Init_ColliderEditor(QMNestedGridMenu main, bool btnhalf)
         {

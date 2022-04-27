@@ -14,7 +14,7 @@
     using Math = System.Math;
 
     [RegisterComponent]
-    public class PuttPuttPond_PoolObjectEditor : AstroMonoBehaviour
+    public class PuttPuttPond_PoolObjectEditor : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 

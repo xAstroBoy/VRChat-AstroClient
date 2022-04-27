@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Startup
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,7 +11,12 @@
 
     internal class WorldJoinMsg : AstroEvents
     {
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             Log.Write("Joined World : " + Name, System.Drawing.Color.Goldenrod);
             if (tags != null)
@@ -27,6 +34,7 @@
             Log.Write("World author : " + AuthorName, System.Drawing.Color.Goldenrod);
             Log.Write("World Asset URL : " + AssetURL, System.Drawing.Color.Goldenrod);
             Log.Write("Instance ID : " + WorldUtils.FullID, System.Drawing.Color.Goldenrod);
+            Log.Write("This instance has " + WorldUtils.Players.Count() + " Players.", System.Drawing.Color.Goldenrod);
         }
 
         private string CurrentWorldTags(List<string> Tags)

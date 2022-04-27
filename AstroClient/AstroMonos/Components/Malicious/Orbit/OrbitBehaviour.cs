@@ -12,17 +12,17 @@
     using VRC;
     using xAstroBoy.Utility;
 
-    public class Orbit : AstroMonoBehaviour
+    public class Orbit : MonoBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
         public Orbit(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

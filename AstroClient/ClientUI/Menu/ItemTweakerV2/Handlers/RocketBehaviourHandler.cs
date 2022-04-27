@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 {
     using System;
     using AstroMonos.Components.Custom.Random;
@@ -6,12 +8,21 @@
     using Tools.Extensions;
     using UnityEngine;
 
-    internal class RocketBehaviourHandler : Tweaker_Events
+    internal class RocketBehaviourHandler : AstroEvents
     {
-
-        internal override void OnSelectedObject_Destroyed()
+        internal override void RegisterToEvents()
         {
-            Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+
+
+        }
+
+
+        private void OnSelectedObject_Destroyed()
+        {
+            TweakerEventActions.Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
             instance = null;
         }
 
@@ -29,7 +40,7 @@
                             instance = newinstance;
                             newinstance.SetOnRocketPropertyChanged(() =>
                             {
-                                Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -42,7 +53,7 @@
                     instance = newinstance;
                     newinstance.SetOnRocketPropertyChanged(() =>
                     {
-                        Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -51,8 +62,7 @@
 
         
 
-        internal static event Action<RocketBehaviour> Event_OnRocketBehaviourPropertyChanged;
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -62,13 +72,13 @@
                     instance = RocketBehaviour; 
                     RocketBehaviour.SetOnRocketPropertyChanged(() =>
                     {
-                        Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(RocketBehaviour); // Dunno if it works.
+                        TweakerEventActions.Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(RocketBehaviour); // Dunno if it works.
                     });
                 }
             }
         }
 
-        internal override void On_Old_GameObject_Removed(GameObject obj)
+        private void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

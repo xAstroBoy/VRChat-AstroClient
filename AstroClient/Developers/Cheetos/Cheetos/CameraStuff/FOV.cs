@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Cheetos.CameraStuff
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Cheetos.CameraStuff
 {
     using System.Collections.Generic;
     using Config;
@@ -6,6 +8,11 @@
 
     internal class FOV : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
         internal static void Set_Camera_FOV(float v)
         {
             var gameObject = GameObject.Find("Camera (eye)");
@@ -18,7 +25,7 @@
             ConfigManager.General.FOV = v;
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private  void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             Set_Camera_FOV(ConfigManager.General.FOV);
         }

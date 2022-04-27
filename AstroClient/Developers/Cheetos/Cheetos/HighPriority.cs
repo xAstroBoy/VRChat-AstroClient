@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Cheetos
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Cheetos
 {
     using System;
     using System.Diagnostics;
@@ -6,7 +8,11 @@
 
     internal class HighPriority : AstroEvents
     {
-        internal override void VRChat_OnUiManagerInit()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+        }
+        private void VRChat_OnUiManagerInit()
         {
             SetPriority(ProcessPriorityClass.High);
         }

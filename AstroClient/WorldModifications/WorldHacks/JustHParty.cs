@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -12,6 +14,10 @@
 
     internal class JustHParty : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
         internal static QMNestedGridMenu JustHPartyMenu;
 
         internal static void InitButtons(QMGridTab main)
@@ -28,7 +34,7 @@
             _ = new QMSingleButton(JustHPartyMenu, 1, 2.5f, "Go To Rooms", () => { GoToRooms(); }, "Go To Rooms", null, Color.white, true);
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (WorldUtils.WorldID == WorldIds.JustHParty)
             {

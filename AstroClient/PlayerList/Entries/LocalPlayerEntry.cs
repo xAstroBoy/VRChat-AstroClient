@@ -1,4 +1,5 @@
 ﻿using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.ClientActions;
 using AstroClient.xAstroBoy.Utility;
 using VRC.SDKBase.Validation.Performance;
 
@@ -27,6 +28,13 @@ namespace AstroClient.PlayerList.Entries
 
         public new delegate void UpdateEntryDelegate(Player player, LocalPlayerEntry entry, ref StringBuilder tempString);
         public static new UpdateEntryDelegate updateDelegate;
+        void Start()
+        {
+            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
+            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.Event_OnShowSocialRankChanged += OnShowSocialRankChanged;
+
+        }
 
         [HideFromIl2Cpp]
         public override void Init(object[] parameters)
@@ -49,7 +57,7 @@ namespace AstroClient.PlayerList.Entries
             EntryBase_OnConfigChanged();
         }
 
-        internal override void OnPlayerJoined(Player player)
+        private void OnPlayerJoined(Player player)
         {
             int highestId = 0;
             foreach (int photonId in PlayerManager.prop_PlayerManager_0.field_Private_Dictionary_2_Int32_Player_0.Keys)
@@ -125,7 +133,7 @@ namespace AstroClient.PlayerList.Entries
             textComponent.text = TrimExtra(tempString.ToString());
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        private void OnSceneLoaded(int buildIndex, string sceneName)
         {
             ownedObjects = 0;
         }
@@ -197,7 +205,7 @@ namespace AstroClient.PlayerList.Entries
         }
 
 
-        internal override void OnShowSocialRankChanged()
+        private void OnShowSocialRankChanged()
         {
             EntryManager.localPlayerEntry.GetPlayerColor();
         }

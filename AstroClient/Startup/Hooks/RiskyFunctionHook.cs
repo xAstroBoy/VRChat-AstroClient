@@ -1,4 +1,5 @@
-﻿using UnityEngine.Networking;
+﻿using AstroClient.ClientActions;
+using UnityEngine.Networking;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -15,6 +16,12 @@ namespace AstroClient.Startup.Hooks
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class RiskyFunctionHook : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
+        }
+
         internal static bool IsWorldTagPatched { get; private set; } = false;
         internal static List<string> OriginalWorldTags { get; private set; } = new List<string>();
 
@@ -39,7 +46,7 @@ namespace AstroClient.Startup.Hooks
             return new HarmonyMethod(typeof(RiskyFunctionHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             IsWorldTagPatched = false;
             OriginalWorldTags.Clear();
@@ -70,7 +77,7 @@ namespace AstroClient.Startup.Hooks
                 __0 = AllowedResponse;
             }
         }
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        private void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (UnityEngine.GameObject.Find("eVRCRiskFuncEnable") == null)
                 Log.Debug("Spawned EmmVRC Risky Function Enabler!");

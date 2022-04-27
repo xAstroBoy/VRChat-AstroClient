@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System;
     using System.Collections;
@@ -16,20 +18,57 @@
 
     internal class AimFactory : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         internal static void InitButtons(QMGridTab main)
         {
             AimFactoryCheatPage = new QMNestedGridMenu(main, "Aim Factory", "Aim Factory Cheats");
             AlwaysPerfectHitToggle = new QMToggleButton(AimFactoryCheatPage, 1, 0, "Always Hit ON", new Action(() => { IsAlwaysPerfectHit = true; }), "Always Hit OFF", new Action(() => { IsAlwaysPerfectHit = false; }), "Unfreezes you automatically", null, null, null);
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             IsAlwaysPerfectHit = false;
             MapTargets.Clear();
-            IsAimFactory = false;
+            isCurrentWorld = false;
             IsPoppingTarget = false;
             prevtarget = null;
         }
+
+
+        
 
         internal static QMNestedGridMenu AimFactoryCheatPage;
         private static QMToggleButton AlwaysPerfectHitToggle;
@@ -41,6 +80,25 @@
         private static bool _IsAlwaysPerfectHit = false;
 
         private static Random r = new Random();
+
+        private static bool _ActivateEvents = false;
+        private static bool ActivateEvents
+        {
+            get => _ActivateEvents;
+            set
+            {
+                if (_ActivateEvents == value) return;
+                if(value)
+                {
+
+                }
+                else
+                {
+                    
+                }
+            }
+            
+        }
 
         private static GameObject GetRandomtarget()
         {
@@ -83,14 +141,14 @@
             }
         }
 
-        private static bool IsAimFactory = false;
+        private static bool isCurrentWorld = false;
         private static bool IsPoppingTarget = false;
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.AimFactory)
             {
-                IsAimFactory = true;
+                isCurrentWorld = true;
                 if (AimFactoryCheatPage != null)
                 {
                     AimFactoryCheatPage.GetMainButton().SetInteractable(true);
@@ -117,10 +175,12 @@
                         }
                     }
                 }
+                HasSubscribed = true;
             }
             else
             {
-                IsAimFactory = false;
+                isCurrentWorld = false;
+                HasSubscribed = false;
                 if (AimFactoryCheatPage != null)
                 {
                     AimFactoryCheatPage.GetMainButton().SetInteractable(false);
@@ -162,9 +222,9 @@
             yield return null;
         }
 
-        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        private void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            if (IsAimFactory && obj != null && IsAlwaysPerfectHit && sender != null && sender == GameInstances.LocalPlayer.GetPlayer() && obj.name.Equals("Handgun_M1911A (Model)") && action == "AllwaysTrigger" && !IsPoppingTarget)
+            if (isCurrentWorld && obj != null && IsAlwaysPerfectHit && sender != null && sender == GameInstances.LocalPlayer.GetPlayer() && obj.name.Equals("Handgun_M1911A (Model)") && action == "AllwaysTrigger" && !IsPoppingTarget)
             {
                 IsPoppingTarget = true;
                 _ = MelonLoader.MelonCoroutines.Start(PopTarget());

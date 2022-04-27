@@ -1,4 +1,6 @@
 ﻿using System.Collections.Concurrent;
+using AstroClient.ClientActions;
+using Cheetah;
 
 namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 {
@@ -6,7 +8,6 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
     using AstroClient.Config;
     using AstroClient.Tools.Extensions;
     using AstroClient.xAstroBoy.Utility;
-    using Cheetah;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -16,9 +17,17 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
 
     internal class Player_RPC_Firewall : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+
+        }
+
         internal static ConcurrentDictionary<Player, SingleTag> CurrentTags = new ConcurrentDictionary<Player, SingleTag>();
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             CurrentTags.Clear(); 
         }
@@ -61,7 +70,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             return false;
         }
 
-        internal override void OnPlayerJoined(Player player)
+        private void OnPlayerJoined(Player player)
         {
             if (IsBlocked(player))
             {
@@ -72,7 +81,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             }
         }
 
-        internal override void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(Player player)
         {
             if (IsBlocked(player))
             {

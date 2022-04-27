@@ -16,7 +16,7 @@
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class SuperTowerDefense_TowerSkipCollider : AstroMonoBehaviour
+    public class SuperTowerDefense_TowerSkipCollider : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 

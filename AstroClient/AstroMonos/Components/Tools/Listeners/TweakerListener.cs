@@ -1,3 +1,6 @@
+using AstroClient.ClientActions;
+using UnityEngine;
+
 namespace AstroClient.AstroMonos.Components.Tools.Listeners
 {
     using System;
@@ -6,14 +9,19 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
     using UnhollowerBaseLib.Attributes;
 
     [RegisterComponent]
-    public class TweakerListener : AstroMonoBehaviour
+    public class TweakerListener : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public TweakerListener(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
+        }
+
+        void Start()
+        {
+            HasSubscribed = true;
         }
 
         private void OnEnable()
@@ -29,6 +37,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
         private void OnDestroy()
         {
             OnDestroyed?.Invoke();
+            HasSubscribed = false;
         }
 
         [method: HideFromIl2Cpp] internal event Action? OnEnabled;
@@ -37,11 +46,39 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
 
         [method: HideFromIl2Cpp] internal event Action? OnDestroyed;
 
-        internal override void OnRoomLeft()
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         internal void RemoveListener()
         {
             OnDestroyed = null;

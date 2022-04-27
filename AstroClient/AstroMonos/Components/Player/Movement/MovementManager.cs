@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Player.Movement
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Player.Movement
 {
     using System;
     using ClientAttributes;
@@ -10,22 +12,43 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class MovementManager : AstroMonoBehaviour
+    public class MovementManager : MonoBehaviour
     {
         internal VRCPlayerApi CurrentPlayer
         {
             [HideFromIl2Cpp]
             get => Networking.LocalPlayer;
         }
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public MovementManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
         internal bool CheckAndActivateJumpOnWorldJoin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
+
+        void Start()
+        {
+            HasSubscribed = true;
+        }
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+        }
+
+        void OnEnable()
+        {
+            HasSubscribed = true;
+        }
+
+        void OnDisable()
+        {
+            HasSubscribed = false;
+        }
+
 
         #region  GravityStrength
 
@@ -261,7 +284,38 @@
                 }
             }
         }
-        internal override void OnRoomLeft()
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnWorldReveal -= OnWorldReveal;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Restore_GravityStrength();
             Restore_JumpImpulse();
@@ -271,7 +325,7 @@
         }
 
 
-        internal override void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
         {
 
             // Backup Original Values;

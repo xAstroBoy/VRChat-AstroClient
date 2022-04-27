@@ -1,4 +1,5 @@
 ﻿using AstroClient.AstroMonos;
+using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
@@ -71,17 +72,51 @@ namespace AstroClient.PlayerList.Entries
 
         public delegate void UpdateEntryDelegate(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString);
         public static UpdateEntryDelegate updateDelegate;
+        private static bool _HasSubscribed = false;
+        private static bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnSetupFlagsReceived += OnSetupFlagsReceived;
+                        ClientEventActions.Event_OnQuickMenuOpen += OnQuickMenuOpen;
+                        ClientEventActions.Event_OnFriended += OnFriended;
+                        ClientEventActions.Event_OnUnfriended += OnUnfriended;
+                        ClientEventActions.Event_OnOwnerShipTranferred += OnOwnerShipTransferred;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnSetupFlagsReceived -= OnSetupFlagsReceived;
+                        ClientEventActions.Event_OnQuickMenuOpen -= OnQuickMenuOpen;
+                        ClientEventActions.Event_OnFriended -= OnFriended;
+                        ClientEventActions.Event_OnUnfriended -= OnUnfriended;
+                        ClientEventActions.Event_OnOwnerShipTranferred -= OnOwnerShipTransferred;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
 
         public static void EntryInit()
         {
 
-            PlayerListConfig.OnConfigChanged += OnStaticConfigChanged;
-
+            ConfigEventActions.OnPlayerListConfigChanged += OnStaticConfigChanged;
+            HasSubscribed = true;
             new AstroPatch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
         }
 
 
-        internal override void OnQuickMenuOpen()
+        private static void OnQuickMenuOpen()
         {
             foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
                 entry.playerEntry.GetPlayerColor(false);
@@ -258,7 +293,7 @@ namespace AstroClient.PlayerList.Entries
         }
 
         // So apparently if you don't want to name an enum directly in a harmony patch you have to use int as the type... good to know
-        internal override void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
+        private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
         {
             try
             {   //Will occasionally error at EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id]
@@ -374,20 +409,20 @@ namespace AstroClient.PlayerList.Entries
             tempString.Append("<color=" + entry.playerColor + ">" + entry.apiUser.displayName + "</color>" + separator);
         }
 
-        internal override void OnFriended(APIUser user)
+        private static void OnFriended(APIUser user)
         {
             foreach (PlayerEntry entry in EntryManager.playerEntries)
                 if (entry.userId == user.id)
                     entry.isFriend = true;
         }
-        internal override void OnUnfriended(string userId)
+        private static void OnUnfriended(string userId)
         {
             foreach (PlayerEntry entry in EntryManager.playerEntries)
                 if (entry.userId == userId)
                     entry.isFriend = false;
         }
 
-        internal override void OnOwnerShipTransferred(PhotonView __instance, int __0)
+        private static void OnOwnerShipTransferred(PhotonView __instance, int __0)
         {
             if (__instance.GetComponent<VRC_Pickup>() == null)
                 return;

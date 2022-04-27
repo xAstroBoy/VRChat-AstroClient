@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2
 {
     using System;
     using AstroMonos.Components.Tools;
@@ -25,8 +27,17 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class TweakerV2Main : Tweaker_Events
+    internal class TweakerV2Main : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_OnPickupControllerSelected += OnPickupController_Selected;
+            TweakerEventActions.Event_OnSelectedObject_Enabled += OnSelectedObject_Enabled;
+            TweakerEventActions.Event_OnSelectedObject_Disabled += OnSelectedObject_Disabled;
+            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+        }
         internal static void Init_TweakerV2Main(int index)
         {
             QMTabMenu menu = new QMTabMenu(index, "Item Tweaker", null, null, null, Icons.box_sprite);
@@ -65,12 +76,12 @@
             TweakerWings.InitTweakerWings();
         }
 
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             UpdateCapturedObject(obj);
         }
 
-        internal override void OnPickupController_Selected(PickupController control)
+        private void OnPickupController_Selected(PickupController control)
         {
             if (ProtectionInteractor != null)
             {
@@ -82,7 +93,7 @@
             }
         }
 
-        internal override void OnSelectedObject_Enabled()
+        private void OnSelectedObject_Enabled()
         {
             ObjectActiveToggle.SetToggleState(true);
             if (ObjectToEditBtn != null)
@@ -95,7 +106,7 @@
             //}
         }
 
-        internal override void OnSelectedObject_Disabled()
+        private void OnSelectedObject_Disabled()
         {
             ObjectActiveToggle.SetToggleState(false);
             if (ObjectToEditBtn != null)
@@ -108,12 +119,12 @@
             //}
         }
 
-        internal override void OnSelectedObject_Destroyed()
+        private void OnSelectedObject_Destroyed()
         {
             Reset();
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Reset();
         }

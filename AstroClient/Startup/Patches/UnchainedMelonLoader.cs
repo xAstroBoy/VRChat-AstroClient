@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Patches
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Startup.Patches
 {
     using System;
     using System.Collections.Generic;
@@ -11,13 +13,17 @@
 
     internal class UnchainedMelonLoader : AstroEvents
     {
-        internal static event Action Event_OnPatchShieldRemoved;
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
+        }
+
         private static bool IsfirstScene { get; set; }
         internal static bool AreProtectionsArmed = true;
 
         private static BindingFlags CurrentFlags { get; } = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance;
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        private void OnSceneLoaded(int buildIndex, string sceneName)
         {
             KillVRCMGProtections();
         }
@@ -135,7 +141,7 @@
                         {
                             AssemblyVerifier++;
                             //Log.Debug($"Removing AssemblyVerifier Method : {GetOriginalMethodBase(patchProcessor).FullDescription()}, with {patchInfo.PatchMethod.FullDescription()}");
-                            Log.Debug($"Bonking Knah For his AssemblyVerifier x{AssemblyVerifier}", Color.Gold);
+                            Log.Debug($"Bonking Samboy For his AssemblyVerifier port x{AssemblyVerifier}", Color.Gold);
                             ForceUnpatch(patchProcessor, patchInfo.PatchMethod);
                         }
 
@@ -145,7 +151,7 @@
 
             if(PatchShield != 0)
             {
-                Event_OnPatchShieldRemoved.SafetyRaise(); 
+                ClientEventActions.Event_OnPatchShieldRemoved.SafetyRaise(); 
             }
 
         }

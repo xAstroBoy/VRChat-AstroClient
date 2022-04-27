@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System;
     using System.Collections;
@@ -20,11 +22,42 @@
 
     internal class SuperTowerDefense : AstroEvents
     {
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Super_Tower_defense)
             {
-                IsTowerDefenseWorld = true;
+                isCurrentWorld = true;
+                HasSubscribed = true;
                 if (SuperTowerDefensecheatPage != null)
                 {
                     SuperTowerDefensecheatPage.SetInteractable(true);
@@ -166,21 +199,23 @@
                 Tower_Lance_1.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
 
                 FixTheTowers(false);
+                
             }
             else
             {
+                HasSubscribed = false;
                 if (SuperTowerDefensecheatPage != null)
                 {
                     SuperTowerDefensecheatPage.SetInteractable(false);
                     SuperTowerDefensecheatPage.SetTextColor(Color.red);
                 }
 
-                IsTowerDefenseWorld = false;
+                isCurrentWorld = false;
             }
         }
 
-        private static bool IsTowerDefenseWorld = false;
-        internal override void OnRoomLeft()
+        private static bool isCurrentWorld = false;
+        private void OnRoomLeft()
         {
             WaveEditor = null;
             HealthEditor = null;
@@ -243,7 +278,8 @@
             AutoStarter_SetInactive = null;
             AutoStarter_SetActive = null;
             AutoStarterReader = null;
-            IsTowerDefenseWorld = false;
+            isCurrentWorld = false;
+            HasSubscribed = false;
             //IgnoreTowersCollidersPlacement = false;
             //NearbyCollidersManager.Clear();
         }
@@ -1294,7 +1330,7 @@
         {
             get
             {
-                if (!IsTowerDefenseWorld) return null;
+                if (!isCurrentWorld) return null;
                 if (Obj_Apple_1 == null)
                 {
                     return Obj_Apple_1 = GameObjectFinder.Find("Apples/Apple_01");
@@ -1308,7 +1344,7 @@
         {
             get
             {
-                if (!IsTowerDefenseWorld) return null;
+                if (!isCurrentWorld) return null;
 
                 if (Obj_Apple_2 == null)
                 {
@@ -1324,7 +1360,7 @@
         {
             get
             {
-                if (!IsTowerDefenseWorld) return null;
+                if (!isCurrentWorld) return null;
 
                 if (Obj_Apple_3 == null)
                 {
@@ -1339,7 +1375,7 @@
         {
             get
             {
-                if (!IsTowerDefenseWorld) return null;
+                if (!isCurrentWorld) return null;
 
                 if (Obj_Apple_4 == null)
                 {

@@ -1,31 +1,25 @@
 ﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon;
+using AstroClient.ClientActions;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
-    using System.Collections;
     using System.Collections.Generic;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
-    using CustomClasses;
-    using MelonLoader;
-    using Tools.Extensions;
-    using Tools.World;
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.Utility;
 
     internal class GeoLocator : AstroEvents
     {
-
-        internal static void InitButtons(QMGridTab main)
+        internal override void RegisterToEvents()
         {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
         }
 
         
+
+
 
         private static void FindEverything()
         {
@@ -39,7 +33,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
 
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.GeoLocator)
             {

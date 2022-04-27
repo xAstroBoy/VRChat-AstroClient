@@ -1,4 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
+﻿using AstroClient.ClientActions;
+using UnityEngine;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
@@ -12,7 +15,7 @@
     using Math = System.Math;
 
     [RegisterComponent]
-    public class SuperTowerDefense_WaveEditor : AstroMonoBehaviour
+    public class SuperTowerDefense_WaveEditor : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -20,11 +23,42 @@
         {
             AntiGarbageCollection.Add(this);
         }
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         internal int? CurrentRound
         {
             [HideFromIl2Cpp]
@@ -55,6 +89,7 @@
                 if (obj != null)
                 {
                     WaveController = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    HasSubscribed = true;
                 }
                 else
                 {

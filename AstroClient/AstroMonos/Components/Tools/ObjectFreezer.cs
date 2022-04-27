@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -12,21 +14,48 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class ObjectFreezer : AstroMonoBehaviour
+    public class ObjectFreezer : MonoBehaviour
     {
 
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public ObjectFreezer(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         private RigidBodyController _RigidBodyController { [HideFromIl2Cpp] get; set; }
 
         private RigidBodyController CurrentRigidbody
@@ -186,6 +215,7 @@
                 if (IsEnabled) VRC_AstroPickup.UseText = "Toggle Off Freeze";
                 else VRC_AstroPickup.UseText = "Toggle On Freeze";
             }
+            HasSubscribed = true;
             InvokeRepeating(nameof(FreezeUpdate), 0, 0.3f);
             if (IsEnabled)
             {
@@ -348,6 +378,7 @@
         {
             try
             {
+                HasSubscribed = false;
                 RestoreToOriginal();
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
                 Pickup.UseText = OriginalText_Use;

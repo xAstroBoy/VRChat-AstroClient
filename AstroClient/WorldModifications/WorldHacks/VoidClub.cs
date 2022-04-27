@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using UnityEngine;
@@ -9,6 +11,11 @@
 
     internal class VoidClub : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
         internal static QMNestedGridMenu VoidClubMenu;
 
         internal static void InitButtons(QMGridTab main)
@@ -20,7 +27,7 @@
             _ = new QMSingleButton(VoidClubMenu, 1, 2, "Unlock\nForest\n3", () => { UnlockForest(); }, "Unlock Forest 3");
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id.Equals(WorldIds.VoidClub))
             {

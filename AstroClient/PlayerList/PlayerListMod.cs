@@ -1,4 +1,6 @@
-﻿namespace AstroClient.PlayerList
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.PlayerList
 {
     using System.Collections;
     using System.Linq;
@@ -12,7 +14,13 @@
     {
         internal static PlayerListMod Instance { get; private set; }
 
-        internal override void OnApplicationStart()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+        }
+
+        private void OnApplicationStart()
         {
             Instance = this;
             PlayerListConfig.RegisterSettings();
@@ -25,7 +33,7 @@
         }
 
 
-        internal override void VRChat_OnUiManagerInit()
+        private void VRChat_OnUiManagerInit()
         {
 
 

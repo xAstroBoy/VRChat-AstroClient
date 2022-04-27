@@ -1,4 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
+﻿
+using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
@@ -9,18 +12,45 @@
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
+    using UnityEngine;
 
     [RegisterComponent]
-    public class PrisonEscape_GameManagerReader : AstroMonoBehaviour
+    public class PrisonEscape_GameManagerReader : MonoBehaviour
     {
-        private List<Object> AntiGarbageCollection = new();
+        private List<Il2CppSystem.Object> AntiGarbageCollection = new();
 
         public PrisonEscape_GameManagerReader(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
 
-        internal override void OnRoomLeft()
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -33,6 +63,7 @@
                 if (obj != null)
                 {
                     GameData = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    HasSubscribed = true;
                     Initialize_GameData();
                 }
                 else
@@ -52,6 +83,7 @@
         private void OnDestroy()
         {
             Cleanup_GameData();
+            HasSubscribed = false;
         }
 
         private void Initialize_GameData()

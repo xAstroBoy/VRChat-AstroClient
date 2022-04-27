@@ -1,12 +1,12 @@
-﻿namespace AstroClient.Developers.Kaned
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using UnityEngine;
 
+namespace AstroClient.Kaned
+{
     internal class Pathfinder
     {
         internal static Dictionary<float, Dictionary<Vector3Int, bool>> fullGridCache = new Dictionary<float, Dictionary<Vector3Int, bool>>();

@@ -1,4 +1,5 @@
 ﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
+using AstroClient.ClientActions;
 using AstroClient.Tools.UdonSearcher;
 
 namespace AstroClient.WorldModifications.WorldHacks
@@ -6,7 +7,6 @@ namespace AstroClient.WorldModifications.WorldHacks
     using System.Collections;
     using System.Collections.Generic;
     using AstroMonos.Components.Cheats.PatronCrackers;
-    using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
     using CustomClasses;
     using MelonLoader;
     using Tools.Extensions;
@@ -20,6 +20,11 @@ namespace AstroClient.WorldModifications.WorldHacks
 
     internal class TierLand : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
 
         internal static void InitButtons(QMGridTab main)
         {
@@ -39,7 +44,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static UdonBehaviour_Cached PatronSystem { get; set; }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.TierLand)
             {

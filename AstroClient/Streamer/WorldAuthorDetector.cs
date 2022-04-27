@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Streamer
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Streamer
 {
     using System.Drawing;
     using Constants;
@@ -9,7 +11,12 @@
 
     internal class WorldAuthorDetector : AstroEvents
     {
-        internal override void OnPlayerJoined(Player player)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+        }
+
+        private void OnPlayerJoined(Player player)
         {
             if (!Bools.IsDeveloper)
             {

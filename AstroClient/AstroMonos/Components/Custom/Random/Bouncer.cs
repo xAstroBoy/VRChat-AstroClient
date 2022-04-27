@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Custom.Random
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -12,19 +14,46 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class Bouncer : AstroMonoBehaviour
+    public class Bouncer : MonoBehaviour
     {
         private bool _IsEnabled = true;
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         private bool DebugMode = false;
 
         public Bouncer(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -66,6 +95,7 @@
         // Use this for initialization
         internal void Start()
         {
+            HasSubscribed = true;
             rb = GetComponent<Rigidbody>();
             initialVelocity = rb.velocity;
             PickupController = GetComponent<PickupController>();
@@ -89,6 +119,7 @@
         private void OnDestroy()
         {
             gameObject.KillForces();
+            HasSubscribed = false;
             if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
             PickupController.UseText = OriginalText_Use;
         }

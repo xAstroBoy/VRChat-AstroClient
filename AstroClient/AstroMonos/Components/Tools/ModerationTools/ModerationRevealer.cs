@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -10,17 +12,55 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class ModerationRevealer : AstroMonoBehaviour
+    public class ModerationRevealer : MonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
-        internal override void OnRoomLeft()
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+                        ClientEventActions.Event_OnPlayerBlockedYou += OnPlayerBlockedYou;
+                        ClientEventActions.Event_OnPlayerUnblockedYou += OnPlayerUnblockedYou;
+                        ClientEventActions.Event_OnPlayerMutedYou += OnPlayerMutedYou;
+                        ClientEventActions.Event_OnPlayerUnmutedYou += OnPlayerUnmutedYou;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft -= OnPlayerLeft;
+                        ClientEventActions.Event_OnPlayerBlockedYou -= OnPlayerBlockedYou;
+                        ClientEventActions.Event_OnPlayerUnblockedYou -= OnPlayerUnblockedYou;
+                        ClientEventActions.Event_OnPlayerMutedYou -= OnPlayerMutedYou;
+                        ClientEventActions.Event_OnPlayerUnmutedYou -= OnPlayerUnmutedYou;
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
 
         public ModerationRevealer(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
         private Color MutedColor { [HideFromIl2Cpp] get; } = System.Drawing.Color.Orange.ToUnityEngineColor();
@@ -37,7 +77,7 @@
                     Destroy(this);
                 }
             }
-
+            HasSubscribed = true;
             if (AssignedPlayer.GetVRCPlayerApi().isLocal)
             {
                 Destroy(this);
@@ -110,7 +150,7 @@
             }
         }
 
-        internal override void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(Player player)
         {
             if (AssignedPlayer.Equals(player)) Destroy(this);
         }
@@ -128,12 +168,13 @@
                 {
                     Destroy(MutedTag);
                 }
+                HasSubscribed = false;
 
             }
             catch { }
         }
 
-        internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
+        private void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
             if (AssignedPlayer.GetAPIUser().HasBlockedYou())
             {
@@ -141,7 +182,7 @@
             }
 
         }
-        internal override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
+        private void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
             if (!AssignedPlayer.GetAPIUser().HasBlockedYou())
             {
@@ -154,7 +195,7 @@
 
         }
 
-        internal override void OnPlayerMutedYou(Photon.Realtime.Player player)
+        private void OnPlayerMutedYou(Photon.Realtime.Player player)
         {
             if (AssignedPlayer.GetAPIUser().HasMutedYou())
             {
@@ -162,7 +203,7 @@
             }
         }
 
-        internal override void OnPlayerUnmutedYou(Photon.Realtime.Player player)
+        private void OnPlayerUnmutedYou(Photon.Realtime.Player player)
         {
             if (!AssignedPlayer.GetAPIUser().HasMutedYou())
             {

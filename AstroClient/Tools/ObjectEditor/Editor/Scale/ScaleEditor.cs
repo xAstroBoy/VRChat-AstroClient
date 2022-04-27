@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.ObjectEditor.Editor.Scale
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.ObjectEditor.Editor.Scale
 {
     using System.Linq;
     using AstroMonos.Components.Custom.Random;
@@ -10,6 +12,11 @@
 
     internal class ScaleEditor : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
         private static float ModifiedVectorX() => EditVectorX ? ScaleValueToUse : 0;
 
         private static float ModifiedVectorY() => EditVectorY ? ScaleValueToUse : 0;
@@ -125,7 +132,7 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             ScaleCheck.Clear();
         }

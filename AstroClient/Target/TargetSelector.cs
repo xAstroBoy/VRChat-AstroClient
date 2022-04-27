@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.Extensions;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.Extensions;
 
 namespace AstroClient.Target
 {
@@ -10,16 +11,23 @@ namespace AstroClient.Target
 
     internal class TargetSelector : AstroEvents
     {
-        internal static event Action<Player> Event_OnTargetSet;
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
 
-        internal override void OnPlayerLeft(Player player)
+        }
+
+
+        private void OnPlayerLeft(Player player)
         {
 
             if (player != null)
             {
                 if (CurrentTarget != null)
                 {
-                    if (CurrentTarget == player.GetVRCPlayer())
+                    if (CurrentTarget == player)
                     {
                         CurrentTarget = null;
                     }
@@ -28,12 +36,12 @@ namespace AstroClient.Target
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             CurrentTarget = null;
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (CurrentTarget == null)
             {
@@ -83,7 +91,7 @@ namespace AstroClient.Target
             set
             {
                 _CurrentTarget = value;
-                Event_OnTargetSet.SafetyRaiseWithParams(value);
+                ClientEventActions.Event_OnTargetSet.SafetyRaiseWithParams(value);
             }
         }
     }

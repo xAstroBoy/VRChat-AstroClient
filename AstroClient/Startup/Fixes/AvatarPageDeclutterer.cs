@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.Extensions;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 
 namespace AstroClient.Startup.Fixes
@@ -13,6 +14,11 @@ namespace AstroClient.Startup.Fixes
 
     internal class AvatarPageDeclutterer : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnBigMenuOpen += OnBigMenuOpen;
+        }
+
         private static Transform _AvatarPageTransform = null;
         private static Transform AvatarPageTransform
         {
@@ -42,7 +48,7 @@ namespace AstroClient.Startup.Fixes
         private static bool hasDeletedEarlyAccessButton = false;
 
         private static bool HasDeclutteredAvatarPage = false;
-        internal override void OnBigMenuOpen()
+        private void OnBigMenuOpen()
         {
             
             if(!HasDeclutteredAvatarPage)

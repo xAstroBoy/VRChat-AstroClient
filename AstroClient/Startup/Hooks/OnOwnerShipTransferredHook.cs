@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using AstroClient.ClientActions;
 using Photon.Pun;
 using VRC.SDKBase;
 
@@ -20,7 +21,6 @@ namespace AstroClient.Startup.Hooks
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class OnOwnerShipTransferredHook : AstroEvents
     {
-        internal static event Action<PhotonView, int> Event_OnOwnerShipTranferred;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -37,7 +37,7 @@ namespace AstroClient.Startup.Hooks
 
         private static void OnOwnerShipTransferredEvent(PhotonView __instance, int __0)
         {
-            Event_OnOwnerShipTranferred.SafetyRaiseWithParams(__instance, __0);
+            ClientEventActions.Event_OnOwnerShipTranferred.SafetyRaiseWithParams(__instance, __0);
         }
 
     }

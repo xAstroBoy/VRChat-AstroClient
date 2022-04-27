@@ -5,7 +5,12 @@
 
     internal class ModerationNotifier : AstroEvents
     {
-        internal override void OnPlayerBlockedYou(Player player)
+        internal override void RegisterToEvents()
+        {
+            
+        }
+
+        private void OnPlayerBlockedYou(Player player)
         {
             if (player != null)
             {
@@ -14,7 +19,7 @@
             }
         }
 
-        internal override void OnPlayerUnblockedYou(Player player)
+        private void OnPlayerUnblockedYou(Player player)
         {
             if (player != null)
             {
@@ -23,7 +28,7 @@
             }
         }
 
-        internal override void OnPlayerMutedYou(Player player)
+        private void OnPlayerMutedYou(Player player)
         {
             if (player != null)
             {
@@ -32,7 +37,7 @@
             }
         }
 
-        internal override void OnPlayerUnmutedYou(Player player)
+        private void OnPlayerUnmutedYou(Player player)
         {
             if (player != null)
             {

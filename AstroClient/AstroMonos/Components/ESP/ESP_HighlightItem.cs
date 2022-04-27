@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.ESP
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.ESP
 {
     using System;
     using System.Linq;
@@ -9,13 +11,13 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_HighlightItem : AstroMonoBehaviour
+    public class ESP_HighlightItem : MonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
         public ESP_HighlightItem(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -41,6 +43,7 @@
                 return;
             }
             SetupHighlighter();
+            HasSubscribed = true;
             for (int i = 0; i < ObjMeshRenderers.Count; i++)
             {
                 MeshRenderer obj = ObjMeshRenderers[i];
@@ -96,6 +99,7 @@
 
         internal void OnDestroy()
         {
+            HasSubscribed = false;
             HighLightOptions.DestroyHighlighter();
         }
 
@@ -130,7 +134,34 @@
                 return HighLightOptions.highlightColor;
             }
         }
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }

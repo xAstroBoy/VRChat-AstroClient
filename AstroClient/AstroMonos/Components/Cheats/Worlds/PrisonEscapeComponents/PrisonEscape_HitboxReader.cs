@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
@@ -13,7 +15,7 @@
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class PrisonEscape_HitboxReader : AstroMonoBehaviour
+    public class PrisonEscape_HitboxReader : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -22,9 +24,35 @@
             AntiGarbageCollection.Add(this);
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         private GameObject _Root;
@@ -78,6 +106,7 @@
                 {
                     HitBox = obj.UdonBehaviour.ToRawUdonBehaviour();
                     Initialize_HitBox();
+                    HasSubscribed = true;
                 }
                 else
                 {
@@ -92,6 +121,7 @@
         }
         private void OnDestroy()
         {
+            HasSubscribed = false;
             Cleanup_HitBox();
         }
 

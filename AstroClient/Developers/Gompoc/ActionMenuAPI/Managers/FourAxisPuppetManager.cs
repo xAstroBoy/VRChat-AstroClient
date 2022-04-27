@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Gompoc.ActionMenuAPI.Managers
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Gompoc.ActionMenuAPI.Managers
 {
     using System;
     using Helpers;
@@ -8,11 +10,18 @@
 
     internal class FourAxisPuppetManagerEventHandler : AstroEvents
     {
-        internal override void VRChat_OnActionMenuInit()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnUpdate += OnUpdate; 
+            ClientEventActions.Event_VRChat_OnActionMenuInit += VRChat_OnActionMenuInit;
+
+        }
+
+        private void VRChat_OnActionMenuInit()
         {
             FourAxisPuppetManager.Setup();
         }
-        internal override void OnUpdate()
+        private void OnUpdate()
         {
             FourAxisPuppetManager.OnUpdate();
         }

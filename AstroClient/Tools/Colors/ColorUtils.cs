@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Colors
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.Colors
 {
     using System.Collections.Generic;
     using System.Drawing;
@@ -7,6 +9,11 @@
 
     internal class ColorUtils : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
         internal static UnityEngine.Color HexToColor(string hexColor)
         {
             if (hexColor.IndexOf('#') != -1)
@@ -47,7 +54,7 @@
             return color;
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             GeneratedColors.Clear();
         }

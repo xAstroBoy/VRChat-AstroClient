@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AstroClient.ClientActions;
 
 namespace AstroClient.PlayerList.Entries
 {
@@ -13,8 +14,12 @@ namespace AstroClient.PlayerList.Entries
 
         [HideFromIl2Cpp]
         public override string Name => "Risky Functions Allowed";
+        void Start()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             OnEmmWorldCheckCompleted(true);
         }

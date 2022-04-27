@@ -1,12 +1,20 @@
-﻿namespace AstroClient.Constants
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Constants
 {
     using System.Collections.Generic;
     using UnityEngine;
 
     internal class GlobalLists : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
+    
         internal static List<Renderer> RenderObjects { get; } = new List<Renderer>();
 
-        internal override void OnRoomLeft() => RenderObjects.Clear();
+        private void OnRoomLeft() => RenderObjects.Clear();
     }
 }

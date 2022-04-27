@@ -1,3 +1,4 @@
+using AstroClient.ClientActions;
 using AstroClient.Tools.UdonEditor;
 using VRC.SDKBase;
 using VRC.Udon.Common;
@@ -15,16 +16,49 @@ namespace AstroClient.AstroMonos.AstroUdons
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class VRC_AstroPickup : AstroMonoBehaviour
+    public class VRC_AstroPickup : MonoBehaviour
     {
 
         public VRC_AstroPickup(IntPtr ptr) : base(ptr)
         {
         }
 
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_Udon_OnPickup += UdonBehaviour_Event_OnPickup;
+                        ClientEventActions.Event_Udon_OnPickupUseUp += UdonBehaviour_Event_OnPickupUseUp;
+                        ClientEventActions.Event_Udon_OnPickupUseDown += UdonBehaviour_Event_OnPickupUseDown;
+                        ClientEventActions.Event_Udon_OnDrop += UdonBehaviour_Event_OnDrop;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_Udon_OnPickup -= UdonBehaviour_Event_OnPickup;
+                        ClientEventActions.Event_Udon_OnPickupUseUp -= UdonBehaviour_Event_OnPickupUseUp;
+                        ClientEventActions.Event_Udon_OnPickupUseDown -= UdonBehaviour_Event_OnPickupUseDown;
+                        ClientEventActions.Event_Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
 
         private void Start()
         {
+            HasSubscribed = true;
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if (PickupController != null)
             {
@@ -41,23 +75,23 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         private VRC_Pickup.AutoHoldMode OriginalMode {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set; }
 
-        internal override void UdonBehaviour_Event_OnPickup(UdonBehaviour item)
+        private void UdonBehaviour_Event_OnPickup(UdonBehaviour item)
         {
             if(item.Equals(UdonBehaviour)) OnPickup.SafetyRaise();
         }
 
 
-        internal override void UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour item)
+        private void UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour item)
         {
             if (item.Equals(UdonBehaviour)) OnPickupUseUp.SafetyRaise();
         }
-        internal override void UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour item)
+        private void UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour item)
         {
             if (item.Equals(UdonBehaviour)) OnPickupUseDown.SafetyRaise();
 
         }
 
-        internal override void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
+        private void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
         {
             if (item.Equals(UdonBehaviour)) OnDrop.SafetyRaise();
 
@@ -65,6 +99,7 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         private void OnDestroy()
         {
+            HasSubscribed = false;
             if (UdonBehaviour != null)
             {
                 Destroy(UdonBehaviour);
@@ -74,6 +109,7 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         private void OnDisable()
         {
+            HasSubscribed = false;
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.enabled = false;
@@ -82,6 +118,7 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         private void OnEnable()
         {
+            HasSubscribed = true;
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.enabled = true;

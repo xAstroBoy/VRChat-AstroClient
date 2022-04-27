@@ -1,4 +1,7 @@
-﻿namespace AstroClient
+﻿using AstroClient.ClientActions;
+using Cheetah;
+
+namespace AstroClient
 {
     #region Imports
 
@@ -7,8 +10,6 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
-    
-    using Cheetah;
     using CheetosConsole;
     using ClientResources.Loaders;
     using ClientUI.Menu.ItemTweakerV2.Selector;
@@ -29,31 +30,8 @@
 
     public class Main : MelonMod
     {
-        #region EventHandlers
 
-        internal static event Action Event_OnApplicationLateStart;
 
-        internal static event Action Event_OnUpdate;
-
-        internal static event Action Event_LateUpdate;
-
-        //internal static event Action Event_OnGui;
-
-        internal static event Action Event_VRChat_OnUiManagerInit;
-
-        internal static event Action Event_VRChat_OnQuickMenuInit;
-
-        internal static event Action Event_VRChat_OnActionMenuInit;
-
-        internal static event Action<int,string> Event_OnSceneLoaded;
-
-        internal static event Action Event_OnApplicationQuit;
-
-        #endregion EventHandlers
-
-        private static List<AstroEvents> GameEvents { get; set; } = new List<AstroEvents>();
-
-        private static List<Tweaker_Events> Tweaker_Overridables { get; set; } = new List<Tweaker_Events>();
 
         public override void OnApplicationStart()
         {
@@ -80,14 +58,13 @@
             //    ModConsole.DebugMode = ConfigManager.General.DebugLog;
             //}
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
             Bools.IsDeveloper = true;
             MelonCoroutines.Start(InitializeOverridables());
             DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
             DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
             DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
+            ClientEventActions.Event_OnApplicationStart?.SafetyRaise();
 
             Log.Write("Initialization complete!", Cheetah.Color.Green);
             yield return null;
@@ -95,12 +72,12 @@
 
         public override void OnUpdate()
         {
-            Event_OnUpdate?.SafetyRaise();
+            ClientEventActions.Event_OnUpdate?.SafetyRaise();
         }
 
         public override void OnLateUpdate()
         {
-            Event_LateUpdate?.SafetyRaise();
+            ClientEventActions.Event_LateUpdate?.SafetyRaise();
         }
 
         private IEnumerator WaitForActionMenuInit()
@@ -111,17 +88,17 @@
 
         //public override void OnGUI()
         //{
-        //    Event_OnGui?.SafetyRaiseWithParams();
+        //    ClientEventActions.Event_OnGui?.SafetyRaiseWithParams();
         //}
 
         public override void OnApplicationLateStart()
         {
-            Event_OnApplicationLateStart?.SafetyRaise();
+            ClientEventActions.Event_OnApplicationLateStart?.SafetyRaise();
         }
 
         public override void OnApplicationQuit()
         {
-            Event_OnApplicationQuit?.SafetyRaise();
+            ClientEventActions.Event_OnApplicationQuit?.SafetyRaise();
             ConfigManager.SaveAll();
         }
 
@@ -137,7 +114,7 @@
         {
             try
             {
-                Console.WriteFigletWithGradient(Figlets.Larry3D, BuildInfo.Name, Color.LightBlue, Color.MidnightBlue);
+                Console.WriteFigletWithGradient(Figlets.Larry3D, BuildInfo.Name, System.Drawing.Color.SkyBlue, System.Drawing.Color.MidnightBlue);
             }
             catch (Exception e)
             {
@@ -170,40 +147,33 @@
                         {
                             Log.Exception(e);
                         }
-
                         if (ConfigManager.General.PreloadClientResources)
                         {
                             try
                             {
-                                component.StartPreloadResources(); // NEEDED TO PRELOAD RESOURCES BEFORE CLIENT INITIATES
+                                component.StartPreloadResources(); // NEEDED TO DO PATCHING EVENT
                             }
                             catch (System.Exception e)
                             {
                                 Log.Exception(e);
                             }
                         }
-
                         try
                         {
-                            component.OnApplicationStart();
+                            component.RegisterToEvents(); // Register classes to all events to init.
                         }
                         catch (System.Exception e)
                         {
                             Log.Exception(e);
                         }
-                        GameEvents.Add(component);
+                        //GameEvents.Add(component);
                     }
                 }
 
-                if (btype != null && btype.Equals(typeof(Tweaker_Events)))
-                {
-                    Tweaker_Events component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as Tweaker_Events;
-                    Tweaker_Overridables.Add(component);
-                }
             }
 
             stopwatch.Stop();
-            Log.Debug($"Initialized {GameEvents.Count} GameEvents: Took {stopwatch.ElapsedMilliseconds}ms");
+            //Log.Debug($"Initialized {GameEvents.Count} GameEvents: Took {stopwatch.ElapsedMilliseconds}ms");
             yield return null;
         }
 
@@ -216,7 +186,7 @@
                     break;
 
                 default:
-                    Event_OnSceneLoaded.SafetyRaiseWithParams(buildIndex, sceneName);
+                    ClientEventActions.Event_OnSceneLoaded.SafetyRaiseWithParams(buildIndex, sceneName);
                     break;
             }
         }
@@ -275,7 +245,7 @@
         private void Start_VRChat_OnQuickMenuInit()
         {
             var sw = Stopwatch.StartNew();
-            Event_VRChat_OnQuickMenuInit?.SafetyRaise();
+            ClientEventActions.Event_VRChat_OnQuickMenuInit?.SafetyRaise();
             DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
             sw.Stop(); Log.Debug($"QuickMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
@@ -283,7 +253,7 @@
         private void Start_VRChat_OnActionMenuInit()
         {
             var sw = Stopwatch.StartNew();
-            Event_VRChat_OnActionMenuInit?.SafetyRaise();
+            ClientEventActions.Event_VRChat_OnActionMenuInit?.SafetyRaise();
             sw.Stop(); Log.Debug($"ActionMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
 
@@ -297,7 +267,7 @@
         private void Start_VRChat_OnUiManagerInit()
         {
             var sw = Stopwatch.StartNew();
-            Event_VRChat_OnUiManagerInit?.SafetyRaise();
+            ClientEventActions.Event_VRChat_OnUiManagerInit?.SafetyRaise();
             sw.Stop(); Log.Debug($"Start_VRChat_OnUiManagerInit: Took {sw.ElapsedMilliseconds}ms");
         }
 

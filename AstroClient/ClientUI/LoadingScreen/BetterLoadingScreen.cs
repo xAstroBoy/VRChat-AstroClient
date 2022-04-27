@@ -1,5 +1,7 @@
 ﻿//using System.Threading.Tasks;
 
+using AstroClient.ClientActions;
+
 namespace AstroClient.ClientUI.LoadingScreen
 {
     using System;
@@ -19,8 +21,13 @@ namespace AstroClient.ClientUI.LoadingScreen
 
     internal class BetterLoadingScreen : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+        }
 
-        internal override void VRChat_OnUiManagerInit()
+
+        private void VRChat_OnUiManagerInit()
         {
             int step = 0;
             try

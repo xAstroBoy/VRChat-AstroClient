@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 {
     using AstroMonos.Components.ESP.ItemTweaker;
     using Selector;
@@ -6,9 +8,16 @@
     using UnityEngine;
     using xAstroBoy.Utility;
 
-    internal class EspHandler : Tweaker_Events
+    internal class EspHandler : AstroEvents
     {
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+
+
+        }
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -19,7 +28,7 @@
             }
         }
 
-        internal override void On_Old_GameObject_Removed(GameObject obj)
+        private void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

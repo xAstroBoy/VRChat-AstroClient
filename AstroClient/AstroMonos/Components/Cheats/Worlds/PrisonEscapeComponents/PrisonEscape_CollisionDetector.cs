@@ -1,4 +1,5 @@
 ﻿using System;
+using AstroClient.ClientActions;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
 using AstroClient.WorldModifications.WorldsIds;
 
@@ -23,7 +24,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class PrisonEscape_CollisionDetector : AstroMonoBehaviour
+    public class PrisonEscape_CollisionDetector : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -35,15 +36,45 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         void Start()
         {
             if (!WorldUtils.WorldID.Equals(WorldIds.PrisonEscape)) Destroy(this);
-
+            HasSubscribed = true;
             // This will act as Collider to detect where the assigned player is spawned and correct the ESP system.
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
 
-        internal override void OnRoomLeft()
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
 
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+        }
         void OnTriggerStay(Collider other)
         {
             OnColliderHit(other);

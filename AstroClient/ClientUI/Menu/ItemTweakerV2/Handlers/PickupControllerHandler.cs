@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 {
     using System;
     using AstroMonos.Components.Tools;
@@ -7,37 +9,38 @@
     using UnityEngine;
     using xAstroBoy.Utility;
 
-    internal class PickupControllerHandler : Tweaker_Events
+    internal class PickupControllerHandler : AstroEvents
     {
-        internal static event Action<PickupController> Event_OnPickupControllerSelected;
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+        }
+    
 
-        internal static event Action<PickupController> Event_OnPickupControllerPropertyChanged;
-
-        internal static event Action<PickupController> Event_OnPickupController_OnUpdate;
-
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
                 var PickupController = obj.GetOrAddComponent<PickupController>();
                 if (PickupController != null)
                 {
-                    Event_OnPickupControllerSelected.SafetyRaiseWithParams(PickupController);
+                    TweakerEventActions.Event_OnPickupControllerSelected.SafetyRaiseWithParams(PickupController);
 
                     PickupController.SetOnPickupPropertyChanged(() =>
                     {
-                        Event_OnPickupControllerPropertyChanged.SafetyRaiseWithParams(PickupController); // Dunno if it works.
+                        TweakerEventActions.Event_OnPickupControllerPropertyChanged.SafetyRaiseWithParams(PickupController); // Dunno if it works.
                     });
 
                     PickupController.SetOnPickup_OnUpdate(() =>
                     {
-                        Event_OnPickupController_OnUpdate.SafetyRaiseWithParams(PickupController); // Dunno if it works.
+                        TweakerEventActions.Event_OnPickupController_OnUpdate.SafetyRaiseWithParams(PickupController); // Dunno if it works.
                     });
                 }
             }
         }
 
-        internal override void On_Old_GameObject_Removed(GameObject obj)
+        private void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

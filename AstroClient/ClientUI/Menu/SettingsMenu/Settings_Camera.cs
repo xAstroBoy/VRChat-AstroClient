@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.SettingsMenu
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.SettingsMenu
 {
     #region Imports
 
@@ -15,6 +17,11 @@
     /// </summary>
     internal class Settings_Camera : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
         internal static void InitButtons(QMNestedGridMenu tab)
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Camera", "Camera");
@@ -23,7 +30,7 @@
             farClipPlaneSlider = new QMSlider(sub.ButtonsMenu.transform, "FarClipPlane", delegate (float value) { PlayerCameraEditor.PlayerCamera.farClipPlane = value; }, "Adjust Camera FarClipPlane", 999999999, 1, false, true);
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (farClipPlaneSlider != null)
             {

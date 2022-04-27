@@ -1,27 +1,53 @@
 ﻿using AstroClient.CheetosUI;
+using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks;
 using VRC;
 using VRC.SDKBase;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
-    using System.Collections;
     using System.Collections.Generic;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using AstroMonos.Components.Cheats.Worlds.PuttPuttPond;
-    using CustomClasses;
-    using MelonLoader;
     using Tools.Extensions;
-    using Tools.World;
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.Utility;
 
     internal class Kmart : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
 
         internal static GameObject _Root;
         internal static GameObject Root
@@ -121,7 +147,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (isCurrentWorld)
             {
@@ -129,11 +155,12 @@ namespace AstroClient.WorldModifications.WorldHacks
                 AuthorizedTrigger = null;
                 UnauthorizedTrigger = null;
                 RemoveBlocksForJoinedPlayers = false;
+                HasSubscribed = false;
                 isCurrentWorld = false;
             }
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.KMartExpress_1)
             {
@@ -151,7 +178,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        internal override void OnPlayerJoined(Player player)
+        private void OnPlayerJoined(Player player)
         {
             if (RemoveBlocksForJoinedPlayers)
             {

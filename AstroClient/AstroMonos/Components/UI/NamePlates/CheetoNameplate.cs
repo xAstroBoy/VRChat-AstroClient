@@ -19,7 +19,7 @@
     #endregion Imports
 
     [RegisterComponent]
-    public class CheetoNameplate : AstroMonoBehaviour
+    public class CheetoNameplate : MonoBehaviour
     {
         private PlayerNameplate nameplate;
 

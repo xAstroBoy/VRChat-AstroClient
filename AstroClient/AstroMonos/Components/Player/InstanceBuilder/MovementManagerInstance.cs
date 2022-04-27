@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Player.InstanceBuilder
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Player.InstanceBuilder
 {
     using System.Drawing;
     using Constants;
@@ -13,12 +15,19 @@
             get => Instance;
         }
 
-        internal override void OnRoomJoined()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+        }
+
+
+        private void OnRoomJoined()
         {
             TryMakeInstance();
         }
 
-        internal override void VRChat_OnUiManagerInit()
+        private void VRChat_OnUiManagerInit()
         {
             TryMakeInstance();
         }

@@ -1,4 +1,5 @@
-﻿using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
+﻿using AstroClient.ClientActions;
+using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
@@ -14,20 +15,47 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
+    using UnityEngine;
 
     [RegisterComponent]
-    public class PrisonEscape_PoolDataReader : AstroMonoBehaviour
+    public class PrisonEscape_PoolDataReader : MonoBehaviour
     {
-        private List<Object> AntiGarbageCollection = new();
+        private List<Il2CppSystem.Object> AntiGarbageCollection = new();
 
         public PrisonEscape_PoolDataReader(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         internal void Start()
@@ -39,6 +67,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     PlayerData = obj.RawItem;
                     Initialize_PlayerData();
+                    HasSubscribed = true;
                 }
                 else
                 {
@@ -63,6 +92,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         private void OnDestroy()
         {
+            HasSubscribed = false;
             Cleanup_PlayerData();
         }
 

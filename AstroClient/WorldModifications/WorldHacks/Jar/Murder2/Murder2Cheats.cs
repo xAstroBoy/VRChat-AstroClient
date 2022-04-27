@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder2
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder2
 {
     #region Imports
 
@@ -20,6 +22,38 @@
 
     internal class Murder2Cheats : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         internal static void FindGameMurderObjects()
         {
             item_detectiveGun = GameObjectFinder.Find("Murder Logic 3/Weapons/Gun Revolver");
@@ -126,7 +160,7 @@
             }
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Murder2)
             {
@@ -136,6 +170,7 @@
                     Murder2CheatPage.GetMainButton().SetInteractable(true);
                     Murder2CheatPage.GetMainButton().SetTextColor(Color.green);
                 }
+                HasSubscribed = true; 
                 FindGameMurderObjects();
             }
             else
@@ -145,10 +180,11 @@
                     Murder2CheatPage.GetMainButton().SetInteractable(false);
                     Murder2CheatPage.GetMainButton().SetTextColor(Color.red);
                 }
+                HasSubscribed = false;
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Death = null;
             item_detectiveGun = null;

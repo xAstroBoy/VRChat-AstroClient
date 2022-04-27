@@ -1,5 +1,7 @@
 ﻿using System;
 
+namespace AstroClient.AstroMonos.Components.Malicious;
+
 public static class Randomizer
 {
     private static readonly Random _random = new();

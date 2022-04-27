@@ -1,6 +1,4 @@
-﻿
-
-
+﻿using AstroClient.ClientActions;
 using MelonLoader;
 
 namespace AstroClient.AstroMonos.Components.ESP.Player
@@ -19,7 +17,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
     using System.Collections;
     using VRC.Core;
     [RegisterComponent]
-    public class PlayerESP : AstroMonoBehaviour
+    public class PlayerESP : MonoBehaviour
     {
         private List<Il2CppSystem.Object> AntiGarbageCollection = new();
 
@@ -50,6 +48,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                     MelonCoroutines.Start(ForceHighlightSystem()); 
                 }
             }
+            HasSubscribed = true;
             SetPlayerDefaultESP();
 
             InvokeRepeating(nameof(ForceActiveESP), 0.5f, 0.1f);
@@ -76,6 +75,44 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                 //CurrentRenderer.enabled = true;
                 //CurrentRenderer.gameObject.SetActive(true);
                 HighLightOptions.AddRenderer(CurrentRenderer);
+            }
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnFriended += OnFriended;
+                        ClientEventActions.Event_OnUnfriended += OnUnfriended;
+                        ClientEventActions.Event_OnPlayerBlockedYou += OnPlayerBlockedYou;
+                        ClientEventActions.Event_OnPlayerUnblockedYou += OnPlayerUnblockedYou;
+                        ConfigEventActions.Event_ESP_OnPublicColorChange += OnPublicESPColorChanged;
+                        ConfigEventActions.Event_ESP_OnFriendColorChange += OnFriendESPColorChanged;
+                        ConfigEventActions.Event_ESP_OnBlockedColorChange += OnBlockedESPColorChanged;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnFriended -= OnFriended;
+                        ClientEventActions.Event_OnUnfriended -= OnUnfriended;
+                        ClientEventActions.Event_OnPlayerBlockedYou -= OnPlayerBlockedYou;
+                        ClientEventActions.Event_OnPlayerUnblockedYou -= OnPlayerUnblockedYou;
+                        ConfigEventActions.Event_ESP_OnPublicColorChange -= OnPublicESPColorChanged;
+                        ConfigEventActions.Event_ESP_OnFriendColorChange -= OnFriendESPColorChanged;
+                        ConfigEventActions.Event_ESP_OnBlockedColorChange -= OnBlockedESPColorChanged;
+
+                    }
+                }
+                _HasSubscribed = value;
             }
         }
 
@@ -106,7 +143,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        internal override void OnFriended(APIUser User)
+        private  void OnFriended(APIUser User)
         {
             if (!CanActuallyEditOnEvent) return;
             if (AssignedPlayer.GetAPIUser().Equals(User))
@@ -115,7 +152,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        internal override void OnUnfriended(string UserID)
+        private  void OnUnfriended(string UserID)
         {
             if (!CanActuallyEditOnEvent) return;
             if (AssignedPlayer.GetAPIUser().id.Equals(UserID))
@@ -124,7 +161,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
+        private  void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
             if (!CanActuallyEditOnEvent) return;
 
@@ -137,7 +174,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        internal override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
+        private  void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
             if (!CanActuallyEditOnEvent) return;
             if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
@@ -156,6 +193,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
 
         internal void OnDestroy()
         {
+            HasSubscribed = false;
             HighLightOptions.DestroyHighlighter();
         }
 
@@ -174,7 +212,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             SetPlayerDefaultESP();
         }
 
-        internal override void OnPublicESPColorChanged(Color color)
+        private  void OnPublicESPColorChanged(Color color)
         {
             if (!CanActuallyEditOnEvent) return;
             if (!AssignedPlayer.GetAPIUser().IsFriend())
@@ -183,7 +221,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        internal override void OnFriendESPColorChanged(Color color)
+        private  void OnFriendESPColorChanged(Color color)
         {
             if (!CanActuallyEditOnEvent) return;
             if (AssignedPlayer.GetAPIUser().IsFriend())
@@ -192,7 +230,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        internal override void OnBlockedESPColorChanged(Color color)
+        private  void OnBlockedESPColorChanged(Color color)
         {
             if (!CanActuallyEditOnEvent) return;
 

@@ -1,3 +1,5 @@
+using AstroClient.ClientActions;
+
 namespace AstroClient.ClientUI.ActionMenu
 {
     using Gompoc.ActionMenuAPI.Api;
@@ -9,7 +11,12 @@ namespace AstroClient.ClientUI.ActionMenu
 
     internal class ActionLightsMenu : AstroEvents
     {
-        internal override void OnApplicationStart()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+        }
+
+        private void OnApplicationStart()
         {
             AMUtils.AddToModsFolder("Lights Option", () =>
             {

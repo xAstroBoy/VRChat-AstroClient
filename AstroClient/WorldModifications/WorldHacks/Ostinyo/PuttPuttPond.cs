@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.World;
@@ -15,6 +16,38 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
 {
     internal class PuttPuttPond : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
 
         internal static void InitButtons(QMGridTab main)
         {
@@ -115,7 +148,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
             }
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.PuttPuttPond)
             {
@@ -129,6 +162,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
                 }
 
                 FindEverything();
+                HasSubscribed = true;
             }
             else
             {
@@ -138,6 +172,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
                     PuttPuttPondMenu.SetInteractable(false);
                     PuttPuttPondMenu.SetTextColor(Color.red);
                 }
+                HasSubscribed = false;
             }
         }
 
@@ -407,11 +442,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             PatronController = null;
             RainbowBall = false;
             ColorActions.Clear();
+            HasSubscribed = false;
         }
 
         private static IEnumerator RainbowBallLoop()

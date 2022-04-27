@@ -1,4 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools
+﻿using AstroClient.ClientActions;
+using AstroClient.Startup.Hooks;
+
+namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
     using System.Linq;
@@ -16,14 +19,78 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class PickupController : AstroMonoBehaviour
+    public class PickupController : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        internal Action OnPickupHeld;
+        internal Action OnPickupDrop;
+
+        private bool _CurrentHeldStatus = false;
+        private bool CurrentHeldStatus
+        {
+            get => _CurrentHeldStatus;
+            set
+            {
+                if (value != _CurrentHeldStatus)
+                {
+                    if (value)
+                    {
+                        OnPickupHeld?.SafetyRaise();
+                    }
+                    else
+                    {
+                        OnPickupDrop?.SafetyRaise();
+                    }
+                }
+                _CurrentHeldStatus = value;
+            }
+        }
+
+        public List<MonoBehaviour> AntiGcList;
 
         public PickupController(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if(_HasSubscribed != value)
+                {
+                    if(value)
+                    {
+
+                        ClientEventActions.Event_Pickup_isHeld += Pickup_IsHeld;
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+                        ClientEventActions.Event_OnQuickMenuOpen += OnQuickMenuOpen;
+                        ClientEventActions.Event_OnBigMenuOpen += OnBigMenuOpen;
+                        ClientEventActions.Event_OnBigMenuClose += OnBigMenuClose;
+                        ClientEventActions.Event_OnInput_UseRight += OnInput_UseRight;
+                        ClientEventActions.Event_OnInput_UseLeft += OnInput_UseLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_Pickup_isHeld -= Pickup_IsHeld;
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnQuickMenuClose -= OnQuickMenuClose;
+                        ClientEventActions.Event_OnQuickMenuOpen -= OnQuickMenuOpen;
+                        ClientEventActions.Event_OnBigMenuOpen -= OnBigMenuOpen;
+                        ClientEventActions.Event_OnBigMenuClose -= OnBigMenuClose;
+                        ClientEventActions.Event_OnInput_UseRight -= OnInput_UseRight;
+                        ClientEventActions.Event_OnInput_UseLeft -= OnInput_UseLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         private bool isUsingUI { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -35,6 +102,7 @@
             SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
             SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
+            HasSubscribed = true;
             SyncProperties(true);
             Log.Debug("Attacked Successfully PickupController to object " + gameObject.name);
             isUsingUI = false;
@@ -47,32 +115,6 @@
         //{
         //    PickupProtection();
         //}
-
-        internal override void OnRoomLeft()
-        {
-            Destroy(this);
-        }
-
-        internal override void OnQuickMenuClose()
-        {
-            isUsingUI = false;
-        }
-
-        internal override void OnQuickMenuOpen()
-        {
-            isUsingUI = true;
-        }
-
-        internal override void OnBigMenuOpen()
-        {
-            isUsingUI = true;
-        }
-
-        internal override void OnBigMenuClose()
-        {
-            isUsingUI = false;
-        }
-
         private void PickupUpdate()
         {
             if (gameObject != null)
@@ -83,7 +125,33 @@
             }
         }
 
-        internal override void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
+        private  void OnRoomLeft()
+        {
+            Destroy(this);
+        }
+
+        private  void OnQuickMenuClose()
+        {
+            isUsingUI = false;
+        }
+
+        private  void OnQuickMenuOpen()
+        {
+            isUsingUI = true;
+        }
+
+        private  void OnBigMenuOpen()
+        {
+            isUsingUI = true;
+        }
+
+        private  void OnBigMenuClose()
+        {
+            isUsingUI = false;
+        }
+
+
+        private  void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
         {
             if (AntiTheft)
             {
@@ -121,7 +189,7 @@
             }
         }
 
-        internal override void OnInput_UseLeft(bool isClicked, bool isDown, bool isUp)
+        private  void OnInput_UseLeft(bool isClicked, bool isDown, bool isUp)
         {
             if (AntiTheft)
             {
@@ -253,6 +321,7 @@
             if (isFromUpdate && _EditMode) _EditMode = false; // Disable this so it goes on Sync Mode.
             if (SDKBase_Pickup != null)
             {
+                CurrentHeldStatus = SDKBase_Pickup.IsHeld;
                 Original_currentlyHeldBy = SDKBase_Pickup.currentlyHeldBy;
                 Original_UseDownEventName = SDKBase_Pickup.UseDownEventName;
                 Original_currentLocalPlayer = SDKBase_Pickup.currentLocalPlayer;
@@ -300,6 +369,8 @@
             }
             else if (SDK2_Pickup != null)
             {
+                CurrentHeldStatus = SDK2_Pickup.IsHeld;
+
                 Original_currentlyHeldBy = SDK2_Pickup.currentlyHeldBy;
                 Original_UseDownEventName = SDK2_Pickup.UseDownEventName;
                 Original_currentLocalPlayer = SDK2_Pickup.currentLocalPlayer;
@@ -347,6 +418,8 @@
             }
             else if (SDK3_Pickup != null)
             {
+                CurrentHeldStatus = SDK3_Pickup.IsHeld;
+
                 Original_currentlyHeldBy = SDK3_Pickup.currentlyHeldBy;
                 Original_UseDownEventName = SDK3_Pickup.UseDownEventName;
                 Original_currentLocalPlayer = SDK3_Pickup.currentLocalPlayer;
@@ -392,6 +465,22 @@
                 UseText = SDK3_Pickup.UseText;
                 pickupDropEventBroadcastType = SDK3_Pickup.pickupDropEventBroadcastType;
             }
+        }
+
+        internal void Pickup_IsHeld(VRC_Pickup pickup, bool isHeld)
+        {
+            if(pickup != null)
+            {
+                if(pickup.gameObject.Equals(this.gameObject))
+                {
+                    CurrentHeldStatus = isHeld;
+                }
+            }
+
+        }
+        void OnDestroy()
+        {
+            HasSubscribed = false;
         }
 
         internal void RestoreProperties()

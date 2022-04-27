@@ -1,4 +1,6 @@
 ﻿
+using AstroClient.ClientActions;
+
 namespace AstroClient.Startup.Hooks
 {
     #region Imports
@@ -17,9 +19,6 @@ namespace AstroClient.Startup.Hooks
     internal class UnityMessagesHook : AstroEvents
     {
 
-        internal static event Action<string> Event_OnUnityLog;
-        internal static event Action<string> Event_OnUnityWarning;
-        internal static event Action<string> Event_OnUnityError;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -39,14 +38,14 @@ namespace AstroClient.Startup.Hooks
             if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
             if (msg.IsNullOrEmptyOrWhiteSpace()) return;
-            Event_OnUnityLog.SafetyRaiseWithParams(msg);
+            ClientEventActions.Event_OnUnityLog.SafetyRaiseWithParams(msg);
         }
         private static void DebugWarning(ref Il2CppSystem.Object __0)
         {
             if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
             if (msg.IsNullOrEmptyOrWhiteSpace()) return;
-            Event_OnUnityWarning.SafetyRaiseWithParams(msg);
+            ClientEventActions.Event_OnUnityWarning.SafetyRaiseWithParams(msg);
         }
 
         private static void DebugError(ref Il2CppSystem.Object __0)
@@ -54,7 +53,7 @@ namespace AstroClient.Startup.Hooks
             if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
             if (msg.IsNullOrEmptyOrWhiteSpace()) return;
-            Event_OnUnityError.SafetyRaiseWithParams(msg);
+            ClientEventActions.Event_OnUnityError.SafetyRaiseWithParams(msg);
 
         }
 

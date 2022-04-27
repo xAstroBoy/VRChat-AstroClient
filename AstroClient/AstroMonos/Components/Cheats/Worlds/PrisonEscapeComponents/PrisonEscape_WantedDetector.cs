@@ -19,7 +19,7 @@
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class PrisonEscape_WantedDetector : AstroMonoBehaviour
+    public class PrisonEscape_WantedDetector : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 

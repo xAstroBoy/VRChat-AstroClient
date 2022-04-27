@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
 {
     using System;
     using System.Collections.Generic;
@@ -16,9 +18,15 @@
 
     internal class LightControlMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
         // TODO : Rewrite this Light Control Class (Borked ATM).
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             HasOriginalRenderEditSettings = true;
             HasBackuppedRenderSettings = false;
@@ -49,7 +57,7 @@
             }
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (FogSwitch != null)
             {

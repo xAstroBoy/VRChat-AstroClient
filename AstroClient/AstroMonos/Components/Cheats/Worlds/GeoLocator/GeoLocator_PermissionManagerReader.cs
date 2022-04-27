@@ -1,18 +1,20 @@
-﻿using AstroClient.ClientAttributes;
+﻿using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
-using Il2CppSystem;
 using Il2CppSystem.Collections.Generic;
 using UnhollowerBaseLib.Attributes;
+using UnityEngine;
+using Object = Il2CppSystem.Object;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
 {
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]
-    public class GeoLocator_PermissionManagerReader : AstroMonoBehaviour
+    public class GeoLocator_PermissionManagerReader : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -21,9 +23,35 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
             AntiGarbageCollection.Add(this);
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         private RawUdonBehaviour PlayerPermissionManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -37,7 +65,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
                 if (obj != null)
                 {
                     PlayerPermissionManager = obj.UdonBehaviour.ToRawUdonBehaviour();
-
+                    HasSubscribed = true;
                     Initialize_PlayerPermissionManager();
                 }
                 else
@@ -54,6 +82,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
 
         private void OnDestroy()
         {
+            HasSubscribed = false;
             Cleanup_PlayerPermissionManager();
         }
 

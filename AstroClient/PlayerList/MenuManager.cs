@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools;
 using AstroClient.Tools.Extensions;
 
 namespace AstroClient.PlayerList
@@ -20,6 +21,14 @@ namespace AstroClient.PlayerList
 
     internal class MenuManager : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.Event_OnQuickMenuOpen += OnQuickMenuClose;
+
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
         //public static List<SubMenu> playerListMenus { get; set; } = new List<SubMenu>();
 
         public static GameObject playerList
@@ -70,9 +79,8 @@ namespace AstroClient.PlayerList
         }
 
 
-        internal override void VRChat_OnUiManagerInit()
+        private void VRChat_OnUiManagerInit()
         {
-            // Stolen from UIExpansionKit (https://github.com/knah/VRCMods/blob/master/UIExpansionKit) #Imnotaskidiswear
             Log.Debug("Loading List UI...");
 
             _ = playerList;
@@ -101,7 +109,7 @@ namespace AstroClient.PlayerList
         }
 
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (Page != null)
             {
@@ -123,7 +131,7 @@ namespace AstroClient.PlayerList
             }
         }
 
-        internal override void OnQuickMenuOpen()
+        private void OnQuickMenuOpen()
         {
             EntryManager.CleanUpHungAOI();
             curMenuState.dashboard = true;
@@ -133,7 +141,7 @@ namespace AstroClient.PlayerList
             curMenuState.userRemote = false;
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             PlayerListConfig.SaveEntries();
         }

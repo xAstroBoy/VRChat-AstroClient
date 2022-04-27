@@ -1,5 +1,7 @@
-﻿using AstroClient.CustomClasses;
+﻿using AstroClient.ClientActions;
+using AstroClient.CustomClasses;
 using AstroClient.Tools.UdonSearcher;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
@@ -10,7 +12,7 @@ using UnhollowerBaseLib.Attributes;
 using IntPtr = System.IntPtr;
 
 [RegisterComponent]
-public class ImageRenderCameraReader : AstroMonoBehaviour
+public class ImageRenderCameraReader : MonoBehaviour
 {
     private readonly Il2CppSystem.Collections.Generic.List<Object> AntiGarbageCollection = new();
 
@@ -18,8 +20,34 @@ public class ImageRenderCameraReader : AstroMonoBehaviour
     {
         AntiGarbageCollection.Add(this);
     }
+    private bool _HasSubscribed = false;
+    private bool HasSubscribed
+    {
+        [HideFromIl2Cpp]
+        get => _HasSubscribed;
+        [HideFromIl2Cpp]
+        set
+        {
+            if (_HasSubscribed != value)
+            {
+                if (value)
+                {
 
-    internal override void OnRoomLeft()
+                    ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                }
+                else
+                {
+
+                    ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                }
+            }
+            _HasSubscribed = value;
+        }
+    }
+
+    private void OnRoomLeft()
     {
         Destroy(this);
     }
@@ -35,6 +63,7 @@ public class ImageRenderCameraReader : AstroMonoBehaviour
         }
         if (RenderCameraEvent != null)
         {
+            HasSubscribed = true;
             Initialize_RenderCameraEvent();
         }
         if (RenderCameraEvent == null)
@@ -46,6 +75,7 @@ public class ImageRenderCameraReader : AstroMonoBehaviour
     private void OnDestroy()
     {
         Cleanup_RenderCameraEvent();
+        HasSubscribed = false;
     }
 
     private void Initialize_RenderCameraEvent()

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Physic
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Physic
 {
     using AstroMonos.Components.Tools;
     using Constraints;
@@ -9,8 +11,17 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class PhysicsSubmenu : Tweaker_Events
+    internal class PhysicsSubmenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            TweakerEventActions.Event_OnRigidBodyControllerSelected += OnRigidBodyController_Selected;
+            TweakerEventActions.Event_OnRigidBodyController_OnUpdate += OnRigidBodyController_OnUpdate;
+            TweakerEventActions.Event_OnRigidBodyControllerPropertyChanged += OnRigidBodyController_PropertyChanged;
+            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+
+        }
         internal static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedGridMenu(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
@@ -50,17 +61,17 @@
             }
         }
 
-        internal override void OnRigidBodyController_PropertyChanged(RigidBodyController control)
+        private void OnRigidBodyController_PropertyChanged(RigidBodyController control)
         {
             UpdateProperties(control);
         }
 
-        internal override void OnRigidBodyController_Selected(RigidBodyController control)
+        private void OnRigidBodyController_Selected(RigidBodyController control)
         {
             UpdateProperties(control);
         }
 
-        internal override void OnRigidBodyController_OnUpdate(RigidBodyController control)
+        private void OnRigidBodyController_OnUpdate(RigidBodyController control)
         {
             UpdateProperties(control);
         }
@@ -83,12 +94,12 @@
             CollisionsToggler.SetToggleState(false);
         }
 
-        internal override void OnSelectedObject_Destroyed()
+        private void OnSelectedObject_Destroyed()
         {
             Reset();
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Reset();
         }

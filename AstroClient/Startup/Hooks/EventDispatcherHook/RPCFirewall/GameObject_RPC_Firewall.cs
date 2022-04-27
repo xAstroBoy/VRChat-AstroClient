@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Drawing;
+using AstroClient.ClientActions;
 using AstroClient.xAstroBoy.Utility;
 using Boo.Lang.Compiler.Ast;
 using VRC;
@@ -17,9 +18,14 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
     using VRC.Udon;
 
 
-    internal class GameObject_RPC_Firewall  : AstroEvents
+    internal class GameObject_RPC_Firewall : AstroEvents
     {
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
+        private void OnRoomLeft()
         {
             BlockedGameObjectRPCEvents.Clear();
         }

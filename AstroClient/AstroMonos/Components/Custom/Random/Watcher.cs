@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Custom.Random
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -14,17 +16,17 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class PlayerWatcher : AstroMonoBehaviour
+    public class PlayerWatcher : MonoBehaviour
     {
         private bool _HasRequiredSettings;
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public PlayerWatcher(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -87,6 +89,7 @@
         // Use this for initialization
         private void Start()
         {
+            HasSubscribed = true;
             RigidBodyController = GetComponent<RigidBodyController>();
             RigidBodyController ??= gameObject.AddComponent<RigidBodyController>();
 
@@ -145,8 +148,35 @@
             {
             }
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
 
-        internal override void OnPlayerLeft(Player player)
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft -= OnPlayerLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnPlayerLeft(Player player)
         {
             if (TargetPlayer.Equals(player)) Destroy(this);
         }

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
@@ -16,7 +18,6 @@
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class QuickMenuHooks : AstroEvents
     {
-        internal static event Action<VRC.Player> Event_OnPlayerSelected;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -32,7 +33,7 @@
 
         private static void OnSelectedPlayerPatch(ref VRC.Player __0)
         {
-            Event_OnPlayerSelected.SafetyRaiseWithParams(__0);
+            ClientEventActions.Event_OnPlayerSelected.SafetyRaiseWithParams(__0);
         }
 
     }

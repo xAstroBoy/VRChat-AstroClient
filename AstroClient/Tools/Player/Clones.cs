@@ -1,4 +1,7 @@
-﻿namespace AstroClient.Tools.Player
+﻿
+using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.Player
 {
     using System.Collections.Generic;
     using Extensions;
@@ -6,8 +9,13 @@
 
     internal class Clones : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
 
-        internal override void OnRoomLeft() => ClonesCapsules.Clear();
+
+        private void OnRoomLeft() => ClonesCapsules.Clear();
 
         internal static void SpawnClone() => ClonesCapsules.Add(PlayerCloner.CloneLocalPlayerAvatar());
 

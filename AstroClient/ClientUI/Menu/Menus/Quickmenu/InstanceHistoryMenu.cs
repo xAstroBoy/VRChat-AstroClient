@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
 {
     using System;
     using System.Collections.Generic;
@@ -14,6 +16,12 @@
 
     internal class InstanceHistoryMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
         private static QMWings WingMenu;
         private static List<QMSingleButton> GeneratedButtons = new();
         private static QMGridTab TabMenu { get; set; }
@@ -25,7 +33,7 @@
         private static bool HasGenerated { get; set; }
         private static bool isOpen { get; set; }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
@@ -87,7 +95,7 @@
             //}
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
@@ -116,7 +124,7 @@
             Regenerate();
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

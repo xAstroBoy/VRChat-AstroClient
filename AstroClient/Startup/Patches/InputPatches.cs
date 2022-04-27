@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Patches
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Startup.Patches
 {
     #region Imports
 
@@ -16,12 +18,12 @@
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class InputPatches : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
 
-        internal static Action<bool, bool, bool> Event_OnInput_Jump { get; set; }
-        internal static Action<bool, bool, bool> Event_OnInput_UseLeft { get; set; }
-        internal static Action<bool, bool, bool> Event_OnInput_UseRight { get; set; }
-        internal static Action<bool, bool, bool> Event_OnInput_GrabLeft { get; set; }
-        internal static Action<bool, bool, bool> Event_OnInput_GrabRight { get; set; }
+        }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -35,12 +37,12 @@
         }
 
         private static bool EnableListener = false;
-        internal override void OnRoomJoined()
+        private void OnRoomJoined()
         {
             EnableListener = true;
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             EnableListener = false;
         }
@@ -77,34 +79,34 @@
             {
                 case InputTypes.Jump:
                     {
-                        Event_OnInput_Jump.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.Event_OnInput_Jump.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
                 case InputTypes.UseLeft:
                     {
-                        Event_OnInput_UseLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.Event_OnInput_UseLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.UseRight:
                     {
-                        Event_OnInput_UseRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.Event_OnInput_UseRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.GrabLeft:
                     {
-                        Event_OnInput_GrabLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.Event_OnInput_GrabLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.GrabRight:
                     {
-                        Event_OnInput_GrabRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.Event_OnInput_GrabRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }

@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.UdonEditor;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.UdonEditor;
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 {
@@ -26,6 +27,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 
     internal class AmongUSCheats : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
 
         internal static bool _RoleSwapper_GetImpostorRole;
 
@@ -67,6 +73,32 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
         internal static UdonBehaviour_Cached SubmitScanTask;
 
         internal static List<UdonBehaviour_Cached> SabotageAllDoors = new();
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
 
         internal static bool RoleSwapper_GetImpostorRole
         {
@@ -147,7 +179,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             StartGameEvent = null;
             AbortGameEvent = null;
@@ -169,6 +201,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             SabotageLights = null;
             SabotageAllDoors.Clear();
             SubmitScanTask = null;
+            HasSubscribed = false;
         }
 
         internal static void FindAmongUsObjects()
@@ -240,27 +273,27 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.AmongUS)
             {
                 HasAmongUsWorldLoaded = true;
 
-                var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start");
-                if (patronCheckFool != null)
-                {
-                    Log.Write("Unlocking Patron Perks.");
-                    if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
-                    {
-                        PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                        patronCheckFool.InvokeBehaviour();
-                        PlayerSpooferUtils.SpoofAsWorldAuthor = false;
-                    }
-                    else
-                    {
-                        patronCheckFool.InvokeBehaviour();
-                    }
-                }
+                //var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start");
+                //if (patronCheckFool != null)
+                //{
+                //    Log.Write("Unlocking Patron Perks.");
+                //    if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
+                //    {
+                //        PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                //        patronCheckFool.InvokeBehaviour();
+                //        PlayerSpooferUtils.SpoofAsWorldAuthor = false;
+                //    }
+                //    else
+                //    {
+                //        patronCheckFool.InvokeBehaviour();
+                //    }
+                //}
 
                 if (AmongUsCheatsPage != null)
                 {
@@ -270,6 +303,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
                 }
 
                 FindAmongUsObjects();
+                HasSubscribed = true;
             }
             else
             {
@@ -279,6 +313,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
                     AmongUsCheatsPage.GetMainButton().SetInteractable(false);
                     AmongUsCheatsPage.GetMainButton().SetTextColor(Color.red);
                 }
+                HasSubscribed = false;
             }
         }
 
@@ -324,7 +359,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             return null;
         }
 
-        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        private void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             try
             {

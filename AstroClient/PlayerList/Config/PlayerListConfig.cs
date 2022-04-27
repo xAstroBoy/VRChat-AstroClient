@@ -1,4 +1,6 @@
-﻿namespace AstroClient.PlayerList.Config
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.PlayerList.Config
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +10,6 @@
 
     public static class PlayerListConfig
     {
-        public static event Action OnConfigChanged;
         private static bool hasConfigChanged = false;
 
         public static MelonPreferences_Category category = MelonPreferences.CreateCategory("PlayerList Config");
@@ -133,7 +134,7 @@
 
         public static void OnConfigChange(bool shouldSetHasConfigChanged = true)
         {
-            OnConfigChanged?.SafetyRaise();
+            ConfigEventActions.OnPlayerListConfigChanged?.SafetyRaise();
             hasConfigChanged = shouldSetHasConfigChanged;
         }
     }

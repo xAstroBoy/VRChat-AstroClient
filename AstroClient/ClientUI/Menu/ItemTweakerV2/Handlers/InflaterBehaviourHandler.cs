@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 {
     using System;
     using AstroMonos.Components.Custom.Random;
@@ -6,11 +8,19 @@
     using Tools.Extensions;
     using UnityEngine;
 
-    internal class InflaterBehaviourHandler : Tweaker_Events
+    internal class InflaterBehaviourHandler : AstroEvents
     {
-        internal override void OnSelectedObject_Destroyed()
+        internal override void RegisterToEvents()
         {
-            Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
+            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+
+
+        }
+        private void OnSelectedObject_Destroyed()
+        {
+            TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
             instance = null;
         }
 
@@ -28,11 +38,11 @@
                             instance = newinstance;
                             newinstance.SetOnInflaterPropertyChanged(() =>
                             {
-                                Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                             newinstance.SetOnInflaterUpdate(() =>
                             {
-                                Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -45,21 +55,19 @@
                     instance = newinstance;
                     newinstance.SetOnInflaterPropertyChanged(() =>
                     {
-                        Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                     newinstance.SetOnInflaterUpdate(() =>
                     {
-                        Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
             }
         }
 
 
-        internal static event Action<InflaterBehaviour> Event_OnInflaterBehaviourPropertyChanged;
-        internal static event Action<InflaterBehaviour> Event_OnInflaterBehaviourUpdate;
 
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -69,17 +77,17 @@
                     instance = InflaterBehaviour;
                     InflaterBehaviour.SetOnInflaterPropertyChanged(() =>
                     {
-                        Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
+                        TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
                     });
                     InflaterBehaviour.SetOnInflaterUpdate(() =>
                     {
-                        Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
+                        TweakerEventActions.Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
                     });
                 }
             }
         }
 
-        internal override void On_Old_GameObject_Removed(GameObject obj)
+        private void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

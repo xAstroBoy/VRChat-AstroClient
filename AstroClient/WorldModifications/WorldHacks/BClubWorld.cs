@@ -1,4 +1,5 @@
-﻿using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
+﻿using AstroClient.ClientActions;
+using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -32,6 +33,42 @@ namespace AstroClient.WorldModifications.WorldHacks
 
     internal class BClubWorld : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private static bool _HasSubscribed = false;
+        private static bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnUnityLog += OnUnityLog;
+                        ClientEventActions.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnUnityLog -= OnUnityLog;
+                        ClientEventActions.Event_Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         #region World Paths
 
         private static GameObject _Bedroom_VIP;
@@ -688,6 +725,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     BlueChairSpam_CancellationToken = null;
                     RainbowSpam_CancellationToken = null;
                     DoorbellSpam_CancellationToken = null;
+                    HasSubscribed = false;
                 }
             }
         }
@@ -1041,13 +1079,13 @@ namespace AstroClient.WorldModifications.WorldHacks
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id.Equals(WorldIds.JustBClub))
             {
                 isCurrentWorld = true;
                 _ = MelonCoroutines.Start(ForceEnableRenderCamera());
-
+                HasSubscribed = true;
 
                 
                 if (BClubExploitsPage != null)
@@ -1230,6 +1268,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     isCurrentWorld = false;
                 }
+                HasSubscribed = false;
                 if (BClubExploitsPage != null)
                 {
                     BClubExploitsPage.SetInteractable(false);
@@ -1238,7 +1277,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        internal override void OnUnityLog(string message)
+        private static void OnUnityLog(string message)
         {
             if (!isCurrentWorld) return;
             if (CurrentDisplayName.IsNullOrEmptyOrWhiteSpace()) return;
@@ -1486,7 +1525,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        internal override void OnRoomLeft()
+        private static void OnRoomLeft()
         {
             if (isCurrentWorld)
             {
@@ -1546,7 +1585,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             yield return null;
         }
 
-        internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
+        private static void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
         {
             if (!isCurrentWorld) return;
             if (item == null) return;

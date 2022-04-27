@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.ObjectEditor
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.ObjectEditor
 {
     #region Imports
 
@@ -31,6 +33,11 @@
 
     internal class GameObjectMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
         internal static void InitButtons(QMGridTab menu)
         {
             var GameObjectsMenus = new QMNestedGridMenu(menu, "GameObjects DebugMenu", "Find Whatever is in these VRChat GameObjects in console");
@@ -425,7 +432,7 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Mirrors.Clear();
             if (GameObjDumper != null)

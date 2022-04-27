@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +18,12 @@
 
     internal class AvatarPreviewer : AstroEvents
     {
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
+        private void OnRoomLeft()
         {
             SpawnedPreviewAvatars.Clear();
             AvatarsPreviewsHolder.DestroyMeLocal();

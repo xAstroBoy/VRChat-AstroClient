@@ -1,4 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Spoofer
+﻿using AstroClient.ClientActions;
+using UnityEngine;
+
+namespace AstroClient.AstroMonos.Components.Spoofer
 {
     using System;
     using System.Collections;
@@ -12,7 +15,7 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class PlayerSpoofer : AstroMonoBehaviour
+    public class PlayerSpoofer : MonoBehaviour
     {
         public PlayerSpoofer(IntPtr ptr) : base(ptr)
         {
@@ -35,6 +38,7 @@
                     Log.Debug($"Spoofer : Failed To  get Current DisplayName!");
                 }
             }));
+            HasSubscribed = true;
         }
 
         private IEnumerator OnUserInit(Action code)
@@ -66,6 +70,42 @@
             }
         }
 
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
+                        ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+                        ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
+                        ClientEventActions.Event_OnMasterClientSwitched += OnMasterClientSwitched;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnRoomJoined -= OnRoomJoined;
+                        ClientEventActions.Event_OnWorldReveal -= OnWorldReveal;
+                        ClientEventActions.Event_OnEnterWorld -= OnEnterWorld;
+                        ClientEventActions.Event_OnMasterClientSwitched -= OnMasterClientSwitched;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         internal void LateUpdate()
         {
             if (IsSpooferActive && isSecondJoin && user != null && DisplayName != SpoofedName)
@@ -74,7 +114,7 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             SafetyCheck();
             if (!KeepSpoofingOnWorldChange)
@@ -83,7 +123,7 @@
             }
         }
 
-        internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
+        private void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             if (PlayerSpooferUtils.SpoofAsWorldAuthor && world != null)
             {
@@ -93,7 +133,7 @@
             }
         }
 
-        internal override void OnRoomJoined()
+        private void OnRoomJoined()
         {
             //SafetyCheck();
             if (PlayerSpooferUtils.SpoofAsWorldAuthor)
@@ -108,7 +148,7 @@
             }
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (PlayerSpooferUtils.SpoofAsInstanceMaster)
             {
@@ -117,7 +157,7 @@
             }
         }
 
-        internal override void OnMasterClientSwitched(Player player)
+        private void OnMasterClientSwitched(Player player)
         {
             if (!WorldUtils.IsInWorld) return;
 

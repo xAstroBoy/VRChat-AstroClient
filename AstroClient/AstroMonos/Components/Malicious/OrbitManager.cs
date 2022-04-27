@@ -8,7 +8,6 @@
     using AstroClient.Tools.Extensions.Components_exts;
     using AstroClient.Tools.ObjectEditor;
     using AstroClient.Tools.ObjectEditor.Online;
-    using Cheetah;
     using MelonLoader;
     using Tools;
     using UnhollowerBaseLib.Attributes;
@@ -19,19 +18,19 @@
     using xAstroBoy.Utility;
     using static Constants.InstanceBuilder;
 
-    public class OrbitManager : AstroMonoBehaviour
+    public class OrbitManager : MonoBehaviour
     {
         #region Internal
 
         public int MaxItems = 30;
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
         public object Toggle;
 
         public OrbitManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

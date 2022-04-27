@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.ColliderViewer
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.ColliderViewer
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +13,12 @@
 
     internal class ColliderDisplay : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+        }
+
         private static string ShaderName
         {
             get { return "Legacy Shaders/Transparent/VertexLit"; }
@@ -61,7 +69,7 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             ToggleDisplays(false);
             if (ToggleColliderDisplayBtn != null)
@@ -83,10 +91,12 @@
             AutoUpdateColliderList = value;
             if (!value)
             {
+                ClientEventActions.Event_OnUpdate -= OnUpdate;
                 DisableAll();
             }
             else
             {
+                ClientEventActions.Event_OnUpdate += OnUpdate;
                 UpdateColliders(false);
             }
         }
@@ -171,7 +181,7 @@
             }
         }
 
-        internal override void OnUpdate()
+        private static void OnUpdate()
         {
             if (!AutoUpdateColliderList)
             {

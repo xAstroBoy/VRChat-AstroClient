@@ -1,3 +1,7 @@
+using AstroClient.ClientActions;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
+
 namespace AstroClient.AstroMonos.Components.Tools.Listeners
 {
     using System;
@@ -8,17 +12,22 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     [RegisterComponent]
-    public class ScrollMenuListener : AstroMonoBehaviour
+    public class ScrollMenuListener : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
         internal QMNestedGridMenu NestedGridButton;
         internal QMSingleButton SingleButton;
         internal QMToggleButton ToggleButton;
 
         public ScrollMenuListener(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
+        }
+
+        void Start()
+        {
+            HasSubscribed = false;
         }
 
         private void OnEnable()
@@ -44,10 +53,39 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
             SingleButton?.DestroyMe();
             NestedGridButton?.DestroyMe();
             ToggleButton?.DestroyMe();
+            HasSubscribed = false;
             DestroyImmediate(this);
         }
 
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }

@@ -1,4 +1,6 @@
 ﻿
+using AstroClient.ClientActions;
+
 namespace AstroClient.ModsDetector
 {
     using System;
@@ -14,6 +16,11 @@ namespace AstroClient.ModsDetector
 
     internal class EmmPatcher : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnPatchShieldRemoved += OnPatchShieldRemoved;
+        }
+
         private static BindingFlags SelectedFlags => BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static;
 
         private static HarmonyMethod GetPatch(string name)
@@ -21,7 +28,7 @@ namespace AstroClient.ModsDetector
             return new HarmonyMethod(typeof(EmmPatcher).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        internal override void OnPatchShieldRemoved()
+        private void OnPatchShieldRemoved()
         {
             InitEmmPatch();
         }

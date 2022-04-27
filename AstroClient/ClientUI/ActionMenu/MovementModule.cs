@@ -1,3 +1,5 @@
+using AstroClient.ClientActions;
+
 namespace AstroClient.ClientUI.ActionMenu
 {
     using System.Drawing;
@@ -8,7 +10,12 @@ namespace AstroClient.ClientUI.ActionMenu
 
     internal class MovementModule : AstroEvents
     {
-        internal override void OnApplicationStart()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+        }
+
+        private void OnApplicationStart()
         {
             AMUtils.AddToModsFolder("Movement Options", () =>
             {

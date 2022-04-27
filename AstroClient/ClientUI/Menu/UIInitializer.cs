@@ -1,4 +1,7 @@
-﻿namespace AstroClient.ClientUI.Menu
+﻿using AstroClient.ClientActions;
+using AstroClient.Kaned;
+
+namespace AstroClient.ClientUI.Menu
 {
     using AstroMonos;
     using Cheetos;
@@ -19,6 +22,11 @@
 
     internal class UIInitializer : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnQuickMenuInit;
+        }
+
         #region Buttons
 
         internal static QMToggleButton ToggleDebugInfo;
@@ -30,7 +38,7 @@
 
         #endregion Buttons
 
-        internal override void VRChat_OnQuickMenuInit()
+        private void VRChat_OnQuickMenuInit()
         {
             InitMainsButtons();
         }
@@ -56,7 +64,7 @@
             if (Bools.IsDeveloper)
             {
                 MapEditorMenu.InitButtons(AstroClient);
-                Developers.Kaned.KanedWIP.InitMenu(AstroClient);
+                KanedWIP.InitMenu(AstroClient);
                 //CheetosWIP.InitCheetosWIPMenu(AstroClient);
             }
 

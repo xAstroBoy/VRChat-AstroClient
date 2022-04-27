@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Player.Movement
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.Player.Movement
 {
     using System.Collections.Generic;
     using Config;
@@ -10,7 +12,14 @@
 
     internal class JumpModifier : AstroEvents
     {
-        internal override void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnInput_Jump += OnInput_Jump;
+
+        }
+
+        private void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
         {
             if (GameInstances.LocalPlayer == null) return;
             if (isDown)
@@ -40,7 +49,7 @@
         }
 
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             IsJumpOverriden = false;
         }

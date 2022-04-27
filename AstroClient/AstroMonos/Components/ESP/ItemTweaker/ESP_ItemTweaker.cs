@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
 {
     using System;
     using System.Linq;
@@ -9,13 +11,13 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_ItemTweaker : AstroMonoBehaviour
+    public class ESP_ItemTweaker : MonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
         public ESP_ItemTweaker(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -33,14 +35,15 @@
         internal void Start()
         {
             ESPColor = DefaultColor;
-            ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
-            if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
+            ObjRenderers = gameObject.GetComponentsInChildren<Renderer>(true);
+            if (ObjRenderers == null && ObjRenderers.Count() == 0)
             {
-                Log.Error($"Unable to add ESP_Tweaker to  {gameObject.name} due to MeshRenderer Being null or empty");
+                Log.Error($"Unable to add ESP_Tweaker to  {gameObject.name} due to Renderer Being null or empty");
                 Destroy(this);
                 return;
             }
             SetupHighlighter();
+            HasSubscribed = true;
         }
 
         private void SetupHighlighter()
@@ -52,9 +55,9 @@
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighlighterColor(ESPColor);
-                for (int i = 0; i < ObjMeshRenderers.Count; i++)
+                for (int i = 0; i < ObjRenderers.Count; i++)
                 {
-                    MeshRenderer obj = ObjMeshRenderers[i];
+                    Renderer obj = ObjRenderers[i];
                     if (obj != null && obj.gameObject.active)
                     {
                         HighLightOptions.AddRenderer(obj);
@@ -66,8 +69,37 @@
                 }
             }
         }
-        internal override void OnRoomLeft()
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
         {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
+        {
+            HasSubscribed = false;
             Destroy(this);
         }
 
@@ -128,6 +160,6 @@
         internal Color DefaultColor { [HideFromIl2Cpp] get; } = Color.yellow;
 
         internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
+        private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers;
     }
 }

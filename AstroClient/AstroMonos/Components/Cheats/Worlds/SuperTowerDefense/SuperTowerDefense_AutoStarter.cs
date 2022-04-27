@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
@@ -12,17 +14,50 @@
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
     using Math = System.Math;
+    using UnityEngine;
 
     [RegisterComponent]
-    public class SuperTowerDefense_AutoStarter : AstroMonoBehaviour
+    public class SuperTowerDefense_AutoStarter : MonoBehaviour
     {
-        private List<Object> AntiGarbageCollection = new();
+        private List<Il2CppSystem.Object> AntiGarbageCollection = new();
 
         public SuperTowerDefense_AutoStarter(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -51,9 +86,11 @@
                 var obj = gameObject.FindUdonEvent("SetInactive");
                 if (obj != null)
                 {
+
                     AutoStarter_SetInactive = obj;
                     AutoStarter_SetActive = gameObject.FindUdonEvent("SetActive");
                     AutoStarterController = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    HasSubscribed = true;
                 }
                 else
                 {

@@ -1,3 +1,5 @@
+using AstroClient.ClientActions;
+using UnhollowerBaseLib.Attributes;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
@@ -7,29 +9,61 @@ namespace AstroClient.AstroMonos.Components.Tools
     using UnityEngine;
 
     [RegisterComponent]
-    public class PedestralReader : AstroMonoBehaviour
+    public class PedestralReader : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public PedestralReader(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         private Camera PedestralCamera { get; set; } = null;
         internal string Result { get; set; } = null;
 
         private void Start()
         {
             PedestralCamera = this.gameObject.GetComponent<Camera>();
+            HasSubscribed = true;
             ReadCameraTexture();
         }
 
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+        }
 
         internal void ReadCameraTexture()
         {

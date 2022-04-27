@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.UdonEditor;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.UdonEditor;
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
@@ -14,6 +15,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
     internal class AmongUS_SabotageAndRepair : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+        }
+
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new List<QMSingleButton>();
         //private static List<QMNestedGridMenu> GeneratedPages = new List<QMNestedGridMenu>();
@@ -26,7 +33,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         private static bool HasGenerated { get; set; } = false;
         private static bool isOpen { get; set; }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
             {
@@ -169,7 +176,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             GeneratedButtons.Clear();
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }

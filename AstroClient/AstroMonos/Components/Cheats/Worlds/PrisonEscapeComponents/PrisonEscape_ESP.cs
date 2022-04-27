@@ -1,4 +1,5 @@
 ﻿using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.ClientActions;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
 using AstroClient.WorldModifications.WorldsIds;
@@ -24,7 +25,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class PrisonEscape_ESP : AstroMonoBehaviour
+    public class PrisonEscape_ESP : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -468,8 +469,36 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 }
             }
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
 
-        internal override void OnRoomLeft()
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft -= OnPlayerLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -477,7 +506,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
 
 
-        internal override void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(Player player)
         {
             if (player.Equals(this.Player))
             {

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.ESP
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.ESP
 {
     using System.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
@@ -6,7 +8,12 @@
 
     internal class EspHelper : AstroEvents
     {
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (SpawnedESPsHolders != null)
             {

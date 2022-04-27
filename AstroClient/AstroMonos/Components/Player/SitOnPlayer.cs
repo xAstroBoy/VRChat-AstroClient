@@ -8,7 +8,7 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class SitOnPlayer : AstroMonoBehaviour
+    public class SitOnPlayer : MonoBehaviour
     {
         private static Player TargetPlayer;
         private static HumanBodyBones TargetBone;

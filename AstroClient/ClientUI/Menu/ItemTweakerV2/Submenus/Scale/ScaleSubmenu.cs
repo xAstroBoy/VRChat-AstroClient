@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Scale
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Scale
 {
     using System;
     using AstroMonos.Components.Custom.Random;
@@ -9,8 +11,15 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class ScaleSubmenu : Tweaker_Events
+    internal class ScaleSubmenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            TweakerEventActions.Event_OnInflaterBehaviourUpdate += OnInflaterBehaviour_OnUpdate;
+            TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged += OnInflaterBehaviour_PropertyChanged;
+
+        }
         internal static void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
@@ -37,7 +46,7 @@
             ScaleEditZ = new QMSingleToggleButton(ScaleEditor, 2, 2, "Edit Z", new Action(() => { EditVectorZ = true; }), "Ignore Z", new Action(() => { EditVectorZ = false; }), "Make Inflater Edit Z", Color.green, Color.red, null, false, true);
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (CurrentScaleButton != null)
             {
@@ -63,7 +72,7 @@
         {
             ScaleEditor.EditScaleSize(obj, false);
         }
-        internal override void OnInflaterBehaviour_PropertyChanged(InflaterBehaviour inflaterBehaviour)
+        private void OnInflaterBehaviour_PropertyChanged(InflaterBehaviour inflaterBehaviour)
         {
             if (inflaterBehaviour != null)
             {
@@ -76,7 +85,7 @@
 
         }
 
-        internal override void OnInflaterBehaviour_OnUpdate(InflaterBehaviour inflaterBehaviour)
+        private void OnInflaterBehaviour_OnUpdate(InflaterBehaviour inflaterBehaviour)
         {
             if (inflaterBehaviour != null)
             {

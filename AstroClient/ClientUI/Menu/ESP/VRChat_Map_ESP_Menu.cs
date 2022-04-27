@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ESP
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ESP
 {
     using System;
     using AstroMonos.Components.ESP.Pickup;
@@ -14,6 +16,11 @@
 
     internal class VRChat_Map_ESP_Menu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
         internal static void InitButtons(QMGridTab menu)
         {
             var main = new QMNestedGridMenu(menu, "ESP Menu", "ESP Options");
@@ -29,7 +36,7 @@
         private static QMToggleButton TriggerESPToggleBtn;
         private static QMToggleButton UdonBehaviourESPToggleBtn;
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Toggle_VRCInteractable_ESP = false;
             Toggle_Trigger_ESP = false;

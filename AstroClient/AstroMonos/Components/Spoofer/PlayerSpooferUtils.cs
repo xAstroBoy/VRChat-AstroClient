@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Spoofer
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Spoofer
 {
     using System.Drawing;
     using ClientUI.Menu.Menus.Quickmenu;
@@ -8,12 +10,19 @@
 
     internal class PlayerSpooferUtils : AstroEvents
     {
-        internal override void OnRoomJoined()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+
+        }
+
+        private void OnRoomJoined()
         {
             TryMakeInstance();
         }
 
-        internal override void VRChat_OnUiManagerInit()
+        private void VRChat_OnUiManagerInit()
         {
             TryMakeInstance();
         }

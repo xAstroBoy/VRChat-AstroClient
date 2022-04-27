@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonSearcher;
@@ -25,7 +27,7 @@
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class Murder4_ESP : AstroMonoBehaviour
+    public class Murder4_ESP : MonoBehaviour
     {
         private PlayerESP _ESP;
         private LinkedNodes _LinkedNode;
@@ -100,6 +102,36 @@
                 }
 
                 return _GameRoleTag;
+            }
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+                        ClientEventActions.Event_OnViewRolesPropertyChanged += OnViewRolesPropertyChanged;
+
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
             }
         }
 
@@ -209,12 +241,14 @@
             CurrentRole = Murder4_Roles.None;
             Log.Debug("Registered " + Player.DisplayName() + " On Murder 4 Role ESP.");
             MelonCoroutines.Start(FindEverything());
+            HasSubscribed = true;
         }
 
         internal void OnDestroy()
         {
             if (GameRoleTag != null) Destroy(GameRoleTag);
             Murder4_ESPs.Remove(this);
+            HasSubscribed = false;
         }
 
         [HideFromIl2Cpp]
@@ -264,12 +298,12 @@
             Log.Debug($"Found all the required Events and Node!");
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
 
-        internal override void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(Player player)
         {
             if (player.Equals(this.Player))
             {
@@ -277,7 +311,7 @@
             }
         }
 
-        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        private void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             try
             {
@@ -400,7 +434,7 @@
             return GameRoleTag.Text;
         }
 
-        internal override void OnViewRolesPropertyChanged(bool value)
+        private void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
         }

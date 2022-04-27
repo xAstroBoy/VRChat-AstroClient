@@ -1,4 +1,5 @@
-﻿using AstroClient.xAstroBoy.Extensions;
+﻿using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Extensions;
 
 namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
 {
@@ -75,7 +76,14 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
             }
             Active_Spammers.Clear();
         }
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
+
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
             {
@@ -220,7 +228,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
             }
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
@@ -285,7 +293,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
         }
 
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
             if (Page != null)

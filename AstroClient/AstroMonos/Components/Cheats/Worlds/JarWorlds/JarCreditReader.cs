@@ -1,10 +1,12 @@
-﻿using AstroClient.ClientAttributes;
+﻿using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
-using Il2CppSystem;
 using Il2CppSystem.Collections.Generic;
 using UnhollowerBaseLib.Attributes;
+using UnityEngine;
+using Object = Il2CppSystem.Object;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
 
@@ -12,7 +14,7 @@ using IntPtr = System.IntPtr;
 
 // Stupid il2cpp
 [RegisterComponent]
-public class JarCreditReader : AstroMonoBehaviour
+public class JarCreditReader : MonoBehaviour
 {
     private List<Object> AntiGarbageCollection = new();
 
@@ -21,7 +23,7 @@ public class JarCreditReader : AstroMonoBehaviour
         AntiGarbageCollection.Add(this);
     }
 
-    internal override void OnRoomLeft()
+    private void OnRoomLeft()
     {
         Destroy(this);
     }
@@ -33,9 +35,13 @@ public class JarCreditReader : AstroMonoBehaviour
     internal void Start()
     {
         RetrySystem = gameObject.FindUdonEvent("_Retry");
-        PatronCredits = RetrySystem.RawItem;
-        this.gameObject.Set_As_Object_To_Edit(); // TO TEST
-        Initialize_PatronCredits();
+        if (RetrySystem != null)
+        {
+            PatronCredits = RetrySystem.RawItem;
+            this.gameObject.AddToWorldUtilsMenu(); // TO TEST
+            Initialize_PatronCredits();
+            HasSubscribed = true;
+        }
         if (RetrySystem == null)
         {
             Log.Error("Can't Find PatronControl behaviour, Unable to Add Reader Component, did the author update the world?");
@@ -43,8 +49,37 @@ public class JarCreditReader : AstroMonoBehaviour
         }
     }
 
+    private bool _HasSubscribed = false;
+    private bool HasSubscribed
+    {
+        [HideFromIl2Cpp]
+        get => _HasSubscribed;
+        [HideFromIl2Cpp]
+        set
+        {
+            if (_HasSubscribed != value)
+            {
+                if (value)
+                {
+
+                    ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                }
+                else
+                {
+
+                    ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                }
+            }
+            _HasSubscribed = value;
+        }
+    }
+
+
     private void OnDestroy()
     {
+        HasSubscribed = false;
         Cleanup_PatronCredits();
     }
 

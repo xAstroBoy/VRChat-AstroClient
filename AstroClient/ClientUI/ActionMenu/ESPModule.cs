@@ -1,3 +1,5 @@
+using AstroClient.ClientActions;
+
 namespace AstroClient.ClientUI.ActionMenu
 {
     using System.Drawing;
@@ -6,7 +8,12 @@ namespace AstroClient.ClientUI.ActionMenu
 
     internal class ESPModule : AstroEvents
     {
-        internal override void OnApplicationStart()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+        }
+
+        private void OnApplicationStart()
         {
             AMUtils.AddToModsFolder("ESP Options", () =>
             {

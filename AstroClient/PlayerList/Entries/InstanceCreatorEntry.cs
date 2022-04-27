@@ -1,4 +1,6 @@
-﻿namespace AstroClient.PlayerList.Entries
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.PlayerList.Entries
 {
     using System;
     using System.Collections;
@@ -16,7 +18,12 @@
         [HideFromIl2Cpp]
         public override string Name => "Instance Creator";
 
-        internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
+
+        void Start()
+        {
+            ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
+        }
+        private void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             MelonCoroutines.Start(GetInstanceCreator(instance));
         }

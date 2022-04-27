@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -13,6 +15,38 @@
 
     internal class GhostGame : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
 
         internal static void InitButtons(QMGridTab main)
         {
@@ -22,7 +56,7 @@
             TrollMirrorZombiesBtn = new QMToggleButton(GhostGameMenu, "Turn Off Mirror Troll", () => { FuckOffMirrorZombies = true; }, () => { FuckOffMirrorZombies = false; }, "Turn off Mirrors To piss Zombie Mirrors and make them mad!");
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             isGhostGameWorld = false;
             ToggleMirrors_1 = null;
@@ -40,7 +74,7 @@
             ArmoryDoor_CloseDoor_CounterClockwise = null;
             ArmoryDoor_ResetDoor = null;
             Armory_GetMoneyReward = null;
-
+            HasSubscribed = false;
         }
 
         internal static void FindEverything()
@@ -171,7 +205,7 @@
             }
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.GhostGame)
             {
@@ -183,7 +217,7 @@
                     GhostGameMenu.SetInteractable(true);
                     GhostGameMenu.SetTextColor(Color.green);
                 }
-
+                HasSubscribed = true;
                 FindEverything();
             }
             else
@@ -194,6 +228,7 @@
                     GhostGameMenu.SetInteractable(false);
                     GhostGameMenu.SetTextColor(Color.red);
                 }
+                HasSubscribed = false;
             }
         }
 

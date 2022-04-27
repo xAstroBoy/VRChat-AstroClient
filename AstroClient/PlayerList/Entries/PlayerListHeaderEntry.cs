@@ -1,4 +1,6 @@
-﻿namespace AstroClient.PlayerList.Entries
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.PlayerList.Entries
 {
     using System;
     using ClientAttributes;
@@ -12,14 +14,19 @@
 
         [HideFromIl2Cpp]
         public override string Name => "PlayerList Header";
+        void Start()
+        {
+            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+        }
 
         [HideFromIl2Cpp]
-        internal override void OnPlayerJoined(Player player)
+        private void OnPlayerJoined(Player player)
         {
             textComponent.text = OriginalText.Replace("{playercount}", PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.Count.ToString());
         }
 
-        internal override void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(Player player)
         {
             textComponent.text = OriginalText.Replace("{playercount}", PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.Count.ToString());
         }

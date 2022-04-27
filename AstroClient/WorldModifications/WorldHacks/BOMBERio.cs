@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -17,6 +19,40 @@
 
     internal class BOMBERio : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         internal static void InitButtons(QMGridTab main)
         {
             BOMBERioCheatsPage = new QMNestedGridMenu(main, "BOMBERio", "BOMBERio Cheats");
@@ -42,7 +78,7 @@
             Bypass_Outside_Circle_speed_Toggle = new QMToggleButton(BOMBERioCheatsPage, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, () => { BypassOutsideCircleSpeed = false; }, "Remove Outside Circle Speed Reducer!");
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.BOMBERio)
             {
@@ -52,7 +88,8 @@
                     BOMBERioCheatsPage.SetTextColor(Color.green);
                 }
                 Log.Write($"Recognized {Name} World, Enabling Gun Projectile Hijacker..");
-                isBomberIO = true;
+                isCurrentWorld = true;
+                HasSubscribed = true;
             }
             else
             {
@@ -61,12 +98,13 @@
                     BOMBERioCheatsPage.SetInteractable(false);
                     BOMBERioCheatsPage.SetTextColor(Color.red);
                 }
+                HasSubscribed = false;
 
-                isBomberIO = false;
+                isCurrentWorld = false;
             }
         }
 
-        private bool isBomberIO = false;
+        private bool isCurrentWorld = false;
 
         internal static GameObject GetRandomQuad()
         {
@@ -133,9 +171,9 @@
             isInGame = false;
         }
 
-        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        private void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            if (isBomberIO)
+            if (isCurrentWorld)
             {
                 if (sender.DisplayName() == GameInstances.LocalPlayer.GetPlayer().DisplayName())
                 {
@@ -329,7 +367,7 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             AssignedNode = null;
             ShootBomb0 = null;

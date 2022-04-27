@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.UdonEditor;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.UdonEditor;
 
 namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
 {
@@ -18,21 +19,51 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
 
 
     [RegisterComponent]
-    public class PatronUnlocker : AstroMonoBehaviour
+    public class PatronUnlocker : MonoBehaviour
     {
         private bool _EveryoneHasPatreonPerk;
 
         private bool _OnlySelfHasPatreonPerk;
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         private bool DebugMode = true;
 
         public PatronUnlocker(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -61,25 +92,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
             }
         }
 
-        private System.Collections.Generic.List<string> GetPatronSkinEventNames { [HideFromIl2Cpp] get; } = new()
-        {
-            "PatronSkin",
-            "Patron",
-            "EnablePatronEffects",
-        };
-
-        private System.Collections.Generic.List<string> GetNonPatronSkinEventNames { [HideFromIl2Cpp] get; } = new()
-        {
-            "NonPatronSkin",
-            "NonPatron",
-            "DisablePatronEffects",
-        };
 
         internal VRC_AstroPickup CustomPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal bool IgnoreEventReceiver { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal UdonBehaviour_Cached NonPatronSkinEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal UdonBehaviour_Cached PatronSkinEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-
+        internal PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         // Use this for initialization
         internal void Start()
         {
@@ -89,6 +107,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
             {
                 CustomPickup.OnPickup += OnPickup;
                 CustomPickup.OnDrop += onDrop;
+            }
+            PickupController = gameObject.GetOrAddComponent<PickupController>();
+            if (PickupController != null)
+            {
+                PickupController.OnPickupHeld += OnPickupControllerHeld;
+                PickupController.OnPickupDrop += OnPickupControllerDrop;
             }
 
             var list = gameObject.GetComponentsInChildren<UdonBehaviour>(true);
@@ -101,11 +125,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
                 {
                     var subaction = eventKeys[i];
                     if (NonPatronSkinEvent == null)
-                        if (GetNonPatronSkinEventNames.Contains(subaction))
+                        if (PatronEventsLists.GetNonPatronSkinEventNames.Contains(subaction))
                             NonPatronSkinEvent = new UdonBehaviour_Cached(item, subaction);
 
                     if (PatronSkinEvent == null)
-                        if (GetPatronSkinEventNames.Contains(subaction))
+                        if (PatronEventsLists.GetPatronSkinEventNames.Contains(subaction))
                             PatronSkinEvent = new UdonBehaviour_Cached(item, subaction);
 
                     if (PatronSkinEvent != null && NonPatronSkinEvent != null) break;
@@ -114,6 +138,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
                 if (PatronSkinEvent != null && NonPatronSkinEvent != null)
                 {
                     Debug("Found all The required Events!");
+                    HasSubscribed = true;
                     break;
                 }
             }
@@ -128,7 +153,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
         internal void OnDestroy()
         {
             if (CustomPickup != null) CustomPickup.DestroyMeLocal();
+            if(PickupController != null)
+            {
+                PickupController.OnPickupHeld -= OnPickupControllerHeld;
+                PickupController.OnPickupDrop -= OnPickupControllerDrop;
+            }
+            HasSubscribed = false;
         }
+
+        private void OnPickupControllerHeld()
+        {
+            if (EveryoneHasPatreonPerk)
+            {
+                SendPublicPatreonSkinEvent();
+            }
+
+        }
+        private void OnPickupControllerDrop()
+        {
+            if(EveryoneHasPatreonPerk)
+            {
+                SendPublicNonPatreonSkinEvent();
+            }
+        }
+
+
 
         [HideFromIl2Cpp]
         private void Debug(string msg)
@@ -136,7 +185,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
             if (DebugMode) Log.Debug($"[Patron Item Debug] : {msg}");
         }
 
-        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        private void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             try
             {
@@ -175,6 +224,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
             }
         }
 
+        
+
+        
         private void OnPickup()
         {
             if (OnlySelfHasPatreonPerk) SendPublicPatreonSkinEvent();

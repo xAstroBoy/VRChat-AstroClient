@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
     using System;
     using System.Collections.Generic;
@@ -16,6 +18,13 @@
 
     internal class AmongUS_RoleSwapper : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
+
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
@@ -28,7 +37,7 @@
         private static bool HasGenerated { get; set; } = false;
         private static bool isOpen { get; set; }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
             {
@@ -158,7 +167,7 @@
             }
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
@@ -193,7 +202,7 @@
             }
         }
 
-                internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+                private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
             if (Page != null)

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.PlayerList.Entries
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.PlayerList.Entries
 {
     using System;
     using ClientAttributes;
@@ -12,9 +14,13 @@
 
         [HideFromIl2Cpp]
         public override string Name => "World Author";
+        void Start()
+        {
+            ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
+        }
 
         [HideFromIl2Cpp]
-        internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
+        private void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             textComponent.text = OriginalText.Replace("{worldauthor}", world.authorName);
         }

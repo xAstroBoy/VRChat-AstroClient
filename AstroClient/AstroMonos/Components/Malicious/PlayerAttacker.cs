@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Malicious
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Malicious
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -13,17 +15,43 @@
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class PlayerAttacker : AstroMonoBehaviour
+    public class PlayerAttacker : MonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
-        internal override void OnRoomLeft()
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        private void OnRoomLeft()
         {
             Destroy(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerLeft -= OnPlayerLeft;
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         public PlayerAttacker(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -49,6 +77,7 @@
                 VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
                 VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
             }
+            HasSubscribed = true;
         }
 
         private void Update()
@@ -115,7 +144,7 @@
             }
         }
 
-        internal override void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(Player player)
         {
             if (TargetPlayer.Equals(player)) Destroy(this);
         }
@@ -124,6 +153,7 @@
         {
             try
             {
+                HasSubscribed = false;
                 RigidBodyController.RestoreOriginalBody();
                 if (gameObject.isLocalPlayerOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);

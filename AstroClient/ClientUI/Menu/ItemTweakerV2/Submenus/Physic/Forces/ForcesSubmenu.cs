@@ -6,7 +6,7 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class ForcesSubmenu : Tweaker_Events
+    internal class ForcesSubmenu 
     {
         internal static void Init_ForceSubMenu(QMNestedGridMenu menu, float x, float y, bool btnHalf)
         {

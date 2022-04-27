@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Tools
 {
     using System.Collections;
     using CheetoLibrary;
@@ -9,7 +11,12 @@
 
     internal class ModerationRevealerHelper : AstroEvents
     {
-        internal override void OnPlayerJoined(Player player)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+        }
+
+        private void OnPlayerJoined(Player player)
         {
             MelonCoroutines.Start(AddModerationHelper(player));
         }

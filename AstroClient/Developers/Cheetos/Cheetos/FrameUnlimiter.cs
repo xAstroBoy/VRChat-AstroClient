@@ -1,13 +1,20 @@
-﻿namespace AstroClient.Cheetos
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Cheetos
 {
     using Config;
     using UnityEngine;
 
     internal class FrameUnlimiter : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+        }
+
         private static int Default;
 
-        internal override void VRChat_OnUiManagerInit()
+        private void VRChat_OnUiManagerInit()
         {
             Default = Application.targetFrameRate;
 

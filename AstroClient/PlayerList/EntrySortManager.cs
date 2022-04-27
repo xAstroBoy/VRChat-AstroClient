@@ -1,4 +1,6 @@
-﻿namespace AstroClient.PlayerList
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.PlayerList
 {
     using System;
     using System.Collections.Generic;
@@ -87,7 +89,7 @@
             upperComparisonProperty = typeof(PlayerListConfig).GetField(nameof(PlayerListConfig.currentUpperSort));
             highestComparisonProperty = typeof(PlayerListConfig).GetField(nameof(PlayerListConfig.currentHighestSort));
 
-            PlayerListConfig.OnConfigChanged += OnStaticConfigChange;
+            ConfigEventActions.OnPlayerListConfigChanged += OnStaticConfigChange;
         }
         private static void OnStaticConfigChange()
         {

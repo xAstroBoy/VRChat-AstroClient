@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Constants
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Constants
 {
     using System;
     using System.Collections;
@@ -13,7 +15,12 @@
 
     internal class CustomLists : AstroEvents
     {
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
+        private void OnRoomLeft()
         {
             RendererSaverIndex.Clear();
             ColliderCheck.Clear();

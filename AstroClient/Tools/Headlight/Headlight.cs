@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Headlight
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.Headlight
 {
     using System;
     using System.Windows.Forms;
@@ -15,6 +17,11 @@
 
     internal class Headlight : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
         internal static float LightRange = 10f;
         internal static Color LightColor = Color.white;
         internal static float LightIntensity = 1f;
@@ -57,7 +64,7 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             DesktopHeadlightBool = false;
             VRHeadLightBool = false;

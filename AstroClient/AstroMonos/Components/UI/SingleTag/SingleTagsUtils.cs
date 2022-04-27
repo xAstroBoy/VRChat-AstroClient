@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.UI.SingleTag
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.UI.SingleTag
 {
     #region Imports
 
@@ -14,7 +16,12 @@
 
     internal class SingleTagsUtils : AstroEvents
     {
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
+        private void OnRoomLeft()
         {
             TagStackingMechanism.Clear();
         }

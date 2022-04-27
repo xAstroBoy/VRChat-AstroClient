@@ -13,7 +13,7 @@ namespace AstroClient.AstroMonos.Components.Tools
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class LaserPointer : AstroMonoBehaviour
+    public class LaserPointer : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -48,17 +48,17 @@ namespace AstroClient.AstroMonos.Components.Tools
         /// <summary>
         /// Default Color (Used when there's no hits)
         /// </summary>
-        internal Color Defaultcolor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.Orange;
+        internal UnityEngine.Color Defaultcolor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.Orange;
 
         /// <summary>
         /// Only When a collider is hit.
         /// </summary>
-        internal Color ColliderHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.OrangeRed;
+        internal UnityEngine.Color ColliderHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.OrangeRed;
 
         /// <summary>
         /// When a Player is Hit.
         /// </summary>
-        internal Color PlayerHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.Red;
+        internal UnityEngine.Color PlayerHit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = SystemColors.Red;
 
 
         /// <summary>

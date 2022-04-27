@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
     using AstroClient.Tools.Extensions;
     
@@ -17,9 +19,40 @@
 
     internal class JarRoleController : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+
+        }
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         private static bool _ViewRoles;
 
-        internal static Action<bool> Event_OnViewRolesPropertyChanged;
 
         private static Murder4_ESP _CurrentPlayer_Murder4ESP;
         private static AmongUS_ESP _CurrentPlayer_AmongUS_ESP;
@@ -41,7 +74,7 @@
 
                 if (IsAmongUsWorld || IsMurder4World)
                 {
-                    Event_OnViewRolesPropertyChanged.SafetyRaiseWithParams(value);
+                    ClientEventActions.Event_OnViewRolesPropertyChanged.SafetyRaiseWithParams(value);
                 }
             }
         }
@@ -118,7 +151,7 @@
             return AmongUS_ESPs.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             JarRoleLinks.Clear();
             Murder4_ESPs.Clear();
@@ -127,9 +160,10 @@
             ViewRoles = false;
             IsAmongUsWorld = false;
             IsMurder4World = false;
+            HasSubscribed = false;
         }
 
-        internal override void OnPlayerJoined(Player player)
+        private void OnPlayerJoined(Player player)
         {
             if (IsMurder4World)
             {
@@ -168,13 +202,14 @@
             return null;
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             IsAmongUsWorld = id.Equals(WorldIds.AmongUS);
             IsMurder4World = id.Equals(WorldIds.Murder4);
 
             if (IsAmongUsWorld || IsMurder4World)
             {
+                
                 var PlayerEntries = GameObjectFinder.Find("Game Logic/Game Canvas/Game In Progress/Player List/Player List Group"); // SHOULD WORK IN MURDER 4 AND AMONG US.
                 var GameNodes = GameObjectFinder.Find("Game Logic/Player Nodes"); // SHOULD WORK IN MURDER 4 AND AMONG US.
                 Il2CppArrayBase<Transform> EntryChilds;
@@ -199,7 +234,7 @@
                     Log.Error("GameNodes Returned Null, Ignored Finding Nodes & Entries");
                     return;
                 }
-
+                HasSubscribed = true;
                 if (PlayerEntries != null)
                 {
                     for (var i1 = 0; i1 < EntryChilds.Count; i1++)
@@ -260,7 +295,10 @@
                     if (IsMurder4World) Log.Error("Player List Group Path in Murder 4 Changed! Unable to Reveal Roles!");
                     if (IsAmongUsWorld) Log.Error("Player List Group Path in Among us Changed! Unable to Reveal Roles!");
                 }
+                return;
             }
+            HasSubscribed = false;
+
         }
 
         internal class LinkedNodes

@@ -12,7 +12,7 @@
     using Object = UnityEngine.Object;
 
     [RegisterComponent]
-    public class SuperTowerDefense_NearbyCollider : AstroMonoBehaviour
+    public class SuperTowerDefense_NearbyCollider : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 

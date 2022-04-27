@@ -1,3 +1,5 @@
+using AstroClient.ClientActions;
+
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using System;
@@ -8,17 +10,43 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
     using UnityEngine;
 
     [RegisterComponent]
-    public class FlashlightBehaviour : AstroMonoBehaviour
+    public class FlashlightBehaviour : MonoBehaviour
     {
         private bool _IsFlashlightActive;
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public FlashlightBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -40,6 +68,12 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             }
         }
 
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+
+        }
         internal string OnText { [HideFromIl2Cpp] get; } = "Turn On Flashlight";
         internal string OffText { [HideFromIl2Cpp] get; } = "Turn Off Flashlight";
         internal GameObject FlashLight_Base { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -55,6 +89,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                     ToggleLightTrigger = FlashLight_Base.AddComponent<VRC_AstroPickup>();
                     if (ToggleLightTrigger != null)
                     {
+                        HasSubscribed = true;
                         ToggleLightTrigger.OnPickupUseUp += ToggleFlashLight;
                         ToggleLightTrigger.UseText = OnText;
                         ToggleLightTrigger.InteractionText = "Flashlight <3";

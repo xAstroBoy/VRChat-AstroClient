@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 {
     using System;
     using AstroMonos.Components.Custom.Random;
@@ -6,13 +8,19 @@
     using Tools.Extensions;
     using UnityEngine;
 
-    internal class SpinnerBehaviourHandler : Tweaker_Events
+    internal class SpinnerBehaviourHandler : AstroEvents
     {
-        internal static event Action<SpinnerBehaviour> Event_OnSpinnerBehaviourPropertyChanged;
-
-        internal override void OnSelectedObject_Destroyed()
+        internal override void RegisterToEvents()
         {
-            Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(null) ; // Dunno if it works.
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+        }
+         
+
+        private void OnSelectedObject_Destroyed()
+        {
+            TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(null) ; // Dunno if it works.
 
             instance = null;
         }
@@ -31,7 +39,7 @@
                             instance = newinstance;
                             newinstance.SetOnSpinnerPropertyChanged(() =>
                             {
-                                Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -44,7 +52,7 @@
                     instance = newinstance;
                     newinstance.SetOnSpinnerPropertyChanged(() =>
                     {
-                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -53,7 +61,7 @@
 
         
 
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -63,13 +71,13 @@
                     instance = SpinnerBehaviour; 
                     SpinnerBehaviour.SetOnSpinnerPropertyChanged(() =>
                     {
-                        Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(SpinnerBehaviour); // Dunno if it works.
+                        TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(SpinnerBehaviour); // Dunno if it works.
                     });
                 }
             }
         }
 
-        internal override void On_Old_GameObject_Removed(GameObject obj)
+        private void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

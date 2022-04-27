@@ -1,4 +1,5 @@
 ﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -16,6 +17,38 @@ namespace AstroClient.WorldModifications.WorldHacks
 
     internal class FBTHeaven : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         internal static QMNestedGridMenu FBTExploitsPage;
         internal static float ButtonUpdateTime = 0f;
         private static bool isCurrentWorld;
@@ -44,7 +77,7 @@ namespace AstroClient.WorldModifications.WorldHacks
            //LockButton4 = new QMToggleButton(FBTExploitsPage,  "Lock 4", () => { LockDoor(4); }, "Unlock 4", () => { UnlockDoor(4); }, "Toggle Door Lock", Color.green, Color.red);
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.FBTHeaven)
             {
@@ -53,7 +86,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     FBTExploitsPage.SetInteractable(true);
                     FBTExploitsPage.SetTextColor(Color.green);
                 }
-
+                HasSubscribed = true;
                 isCurrentWorld = true;
                 Log.Debug($"Recognized {Name} World,  Removing Blinders and Dividers...");
                 var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
@@ -201,7 +234,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             isCurrentWorld = false;
             Unlock_Door_1 = null;
@@ -213,6 +246,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             Lock_Door_2 = null;
             Lock_Door_3 = null;
             Lock_Door_4 = null;
+            HasSubscribed = false;
         }
 
         private static void AddLockPickButton(GameObject HandleSign, int doorID)

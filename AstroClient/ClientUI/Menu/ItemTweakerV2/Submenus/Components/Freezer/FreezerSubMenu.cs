@@ -6,7 +6,7 @@
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
 
-    internal class FreezerSubMenu : Tweaker_Events
+    internal class FreezerSubMenu 
     {
         internal static void Init_FreezerMenu(QMNestedGridMenu menu)
         {

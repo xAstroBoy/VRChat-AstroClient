@@ -1,4 +1,5 @@
 ﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.Tools.UdonSearcher;
 using AstroClient.xAstroBoy.Utility;
@@ -15,7 +16,6 @@ namespace AstroClient.Tools.Keypads
     internal static class KeypadRevealerHelper
     {
 
-        internal static event Action DestroyAllFailedFinds;
 
         internal static void RevealCodes()
         {
@@ -29,7 +29,7 @@ namespace AstroClient.Tools.Keypads
             // Give time for the component to get the passcode, if it fails after 5s , destroy it
             MiscUtils.DelayFunction(5f, () =>
             {
-                DestroyAllFailedFinds.SafetyRaise();
+                ClientEventActions.Event_Keypad_DestroyFailedFinds.SafetyRaise();
             });
         }
         internal static string[] PasswordsVariables { get; } =

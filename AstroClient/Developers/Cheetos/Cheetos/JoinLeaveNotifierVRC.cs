@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Cheetos
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Cheetos
 {
     using System.Collections.Generic;
     using System.Text;
@@ -10,6 +12,16 @@
 
     internal class JoinLeaveNotifierVRC : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.Event_OnPlayerLeft  += OnPlayerLeft;
+
+            ClientEventActions.Event_OnRoomLeft+= OnRoomLeft;
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+
+
+        }
         private bool isReady = false;
         private const string BracketColor = "yellow";
         private const string StreamerTextColor = "orange";
@@ -46,7 +58,7 @@
             return sb.ToString();
         }
 
-        internal override void OnPlayerJoined(Player player)
+        private void OnPlayerJoined(Player player)
         {
             if (!isReady) return;
             if (!ConfigManager.General.JoinLeave) return;
@@ -67,17 +79,17 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             isReady = false;
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             MiscUtils.DelayFunction(1, () => { isReady = true; });
         }
 
-        internal override void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(Player player)
         {
             if (!isReady) return;
             if (!ConfigManager.General.JoinLeave) return;

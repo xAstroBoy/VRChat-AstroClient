@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
 {
     using System;
     using AstroMonos.Components.Tools;
@@ -12,8 +14,15 @@
     using xAstroBoy.AstroButtonAPI.WingsAPI;
     using xAstroBoy.Utility;
 
-    internal class PickupSubmenu : Tweaker_Events
+    internal class PickupSubmenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_OnPickupControllerSelected += OnPickupController_Selected;
+            TweakerEventActions.Event_OnPickupControllerPropertyChanged += OnPickupController_PropertyChanged;
+            TweakerEventActions.Event_OnPickupController_OnUpdate += OnPickupController_OnUpdate;
+
+        }
         internal static void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
@@ -54,17 +63,17 @@
             PickupProximitySlider.gameObject.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
         }
 
-        internal override void OnPickupController_Selected(PickupController control)
+        private void OnPickupController_Selected(PickupController control)
         {
             UpdatePickupButtons(control);
         }
 
-        internal override void OnPickupController_PropertyChanged(PickupController control)
+        private void OnPickupController_PropertyChanged(PickupController control)
         {
             UpdatePickupButtons(control);
         }
 
-        internal override void OnPickupController_OnUpdate(PickupController control)
+        private void OnPickupController_OnUpdate(PickupController control)
         {
             UpdatePickupButtons(control);
         }

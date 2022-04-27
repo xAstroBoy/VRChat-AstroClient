@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.xAstroBoy
 {
     
     using Cheetos;
@@ -25,16 +27,6 @@
     [ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class UiManager : AstroEvents
     {
-        internal static Action Event_OnQuickMenuOpen { get; set; }
-        internal static Action Event_OnQuickMenuClose { get; set; }
-
-        internal static Action Event_OnBigMenuOpen { get; set; }
-        internal static Action Event_OnBigMenuClose { get; set; }
-
-        internal static Action Event_OnUserInfoMenuOpen { get; set; }
-        internal static Action Event_OnUserInfoMenuClose { get; set; }
-
-        internal static Action<UIPage, bool, UIPage.TransitionType> Event_OnUiPageToggled { get; set; }
 
         private static bool _shouldSkipPlaceUiAfterPause;
         private static bool _shouldChangeScreenStackValue;
@@ -78,9 +70,9 @@
 
         }
 
-        private static void OnBigMenuOpen_Event() => Event_OnBigMenuOpen.SafetyRaise();
+        private static void OnBigMenuOpen_Event() => ClientEventActions.Event_OnBigMenuOpen.SafetyRaise();
 
-        private static void OnBigMenuClose_Event() => Event_OnBigMenuClose.SafetyRaise();
+        private static void OnBigMenuClose_Event() => ClientEventActions.Event_OnBigMenuClose.SafetyRaise();
 
         private static bool OnPlaceUiAfterPause(ref bool __result)
         {
@@ -164,18 +156,18 @@
         /// <param name="showDefaultScreen">Whether to show the world menu after opening the big menu</param>
         internal static void OpenBigMenu(bool showDefaultScreen) => NewMenuXrefsSystem.openBigMenu.Invoke(VRCUiManager.prop_VRCUiManager_0, new object[2] { showDefaultScreen, true });
 
-        private static void OnUserInfoOpen_event() => Event_OnUserInfoMenuOpen.SafetyRaise();
+        private static void OnUserInfoOpen_event() => ClientEventActions.Event_OnUserInfoMenuOpen.SafetyRaise();
 
-        private static void OnUserInfoClose() => Event_OnUserInfoMenuClose.SafetyRaise();
+        private static void OnUserInfoClose() => ClientEventActions.Event_OnUserInfoMenuClose.SafetyRaise();
 
-        private static void OnQuickMenuOpen_Event() => Event_OnQuickMenuOpen.SafetyRaise();
+        private static void OnQuickMenuOpen_Event() => ClientEventActions.Event_OnQuickMenuOpen.SafetyRaise();
 
-        private static void OnQuickMenuClose_Event() => Event_OnQuickMenuClose.SafetyRaise();
+        private static void OnQuickMenuClose_Event() => ClientEventActions.Event_OnQuickMenuClose.SafetyRaise();
 
         private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
         {
             if (__instance == null) return;
-            Event_OnUiPageToggled.SafetyRaiseWithParams(__instance, __0, __1);
+            ClientEventActions.Event_OnUiPageToggled.SafetyRaiseWithParams(__instance, __0, __1);
         }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)

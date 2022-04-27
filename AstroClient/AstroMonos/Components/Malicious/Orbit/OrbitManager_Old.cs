@@ -1,4 +1,7 @@
-﻿namespace AstroClient.AstroMonos.Components.Malicious.Orbit
+﻿using System.ServiceModel.Configuration;
+using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Malicious.Orbit
 {
     using System;
     using System.Collections.Generic;
@@ -13,17 +16,17 @@
     using static Constants.InstanceBuilder;
     using Color = System.Drawing.Color;
 
-    public class OrbitManager_Old : AstroMonoBehaviour
+    public class OrbitManager_Old : MonoBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
         public OrbitManager_Old(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -48,13 +51,40 @@
 
         #region Module
 
-        internal static Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> OrbitBehaviours;
+        internal static Il2CppSystem.Collections.Generic.List<MonoBehaviour> OrbitBehaviours;
         internal static float Offset = 0f;
 
         internal void Start()
         {
-            OrbitBehaviours = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>();
+            OrbitBehaviours = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>();
             Instance = this;
+            HasSubscribed = true;
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         internal static void MakeInstance()
@@ -134,7 +164,7 @@
             }
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+        private void OnRoomLeft()
         {
             ClearList();
             _OrbitObjects.Clear();

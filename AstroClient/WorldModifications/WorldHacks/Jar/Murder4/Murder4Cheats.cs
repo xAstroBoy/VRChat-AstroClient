@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4
 {
     #region Imports
 
@@ -31,6 +33,40 @@
 
     internal class Murder4Cheats : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         private static bool _UseGravity;
 
         private static bool _OnlySelfHasPatreonPerk;
@@ -442,7 +478,7 @@
             ShotGuns.Add_Crazy_Component(false);
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Murder4)
             {
@@ -455,6 +491,7 @@
                 }
 
                 FindGameMurderObjects();
+                HasSubscribed = true;
             }
             else
             {
@@ -464,10 +501,11 @@
                     Murder4CheatPage.GetMainButton().SetInteractable(false);
                     Murder4CheatPage.GetMainButton().SetTextColor(UnityEngine.Color.red);
                 }
+                HasSubscribed = false;
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (KnifesGrabbableToggle != null) KnifesGrabbableToggle.SetToggleState(false);
             item_Knife_0 = null;
@@ -513,6 +551,7 @@
             Snake_Crate = null;
             if (Murder4ESPtoggler != null) Murder4ESPtoggler.SetToggleState(false);
             UseGravity = true;
+            HasSubscribed = false;
         }
 
         internal static void ToggleItemESP(bool value)
@@ -815,7 +854,7 @@
             return null;
         }
 
-        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        private void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             try
             {

@@ -7,6 +7,7 @@ using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
 using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.CheetosUI;
+using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Holders;
@@ -27,6 +28,40 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 {
     internal class PrisonEscape : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         internal static QMNestedGridMenu CurrentMenu;
         private static bool _IsCurrentWorld = false;
         internal static bool isCurrentWorld
@@ -748,7 +783,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        internal override void OnPlayerJoined(Player player)
+        private void OnPlayerJoined(Player player)
         {
             if (isCurrentWorld)
             {
@@ -1280,7 +1315,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id.Equals(WorldIds.PrisonEscape))
             {
@@ -1292,6 +1327,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                 isCurrentWorld = true;
                 FindEverything();
+                HasSubscribed = true;
             }
             else
             {
@@ -1305,15 +1341,17 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     isCurrentWorld = false;
                 }
+                HasSubscribed = false;
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (isCurrentWorld)
             {
                 isCurrentWorld = false;
             }
+            HasSubscribed = false;
         }
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool guardsCanUse)
         {

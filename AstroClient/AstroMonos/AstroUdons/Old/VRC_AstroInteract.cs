@@ -11,7 +11,7 @@ namespace AstroClient.AstroMonos.AstroUdons
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class VRC_AstroInteract : AstroMonoBehaviour
+    public class VRC_AstroInteract : MonoBehaviour
     {
         public VRC_AstroInteract(IntPtr ptr)
             : base(ptr)

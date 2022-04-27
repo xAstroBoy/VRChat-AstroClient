@@ -1,3 +1,6 @@
+using AstroClient.ClientActions;
+using UnhollowerBaseLib.Attributes;
+
 namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
@@ -6,22 +9,51 @@ namespace AstroClient.AstroMonos.Components.Tools
     using UnityEngine;
 
     [RegisterComponent]
-    public class Enabler : AstroMonoBehaviour
+    public class Enabler : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public Enabler(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         private void Start()
         {
+            HasSubscribed = true;
             gameObject.SetActive(true);
             InvokeRepeating(nameof(CustomUpdate), 0.1f, 0.3f);
         }
@@ -34,6 +66,11 @@ namespace AstroClient.AstroMonos.Components.Tools
         private void CustomUpdate()
         {
             if (gameObject != null && !gameObject.active) gameObject.SetActive(true);
+        }
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
         }
     }
 }

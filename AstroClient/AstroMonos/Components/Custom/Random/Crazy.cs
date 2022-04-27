@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Custom.Random
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -14,22 +16,48 @@
     using Random = UnityEngine.Random;
 
     [RegisterComponent]
-    public class CrazyBehaviour : AstroMonoBehaviour
+    public class CrazyBehaviour : MonoBehaviour
     {
         private bool _HasRequiredSettings;
         private bool _IsEnabled = false;
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         private bool isPaused;
 
         public CrazyBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         private float CrazyTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -205,6 +233,7 @@
         // Use this for initialization
         private void Start()
         {
+            HasSubscribed = true;
             RigidBody = GetComponent<Rigidbody>();
             RigidBodyController = GetComponent<RigidBodyController>();
             if (RigidBodyController == null) RigidBodyController = gameObject.AddComponent<RigidBodyController>();
@@ -281,6 +310,7 @@
         {
             try
             {
+                HasSubscribed = false;
                 RigidBodyController.RestoreOriginalBody();
                 if (gameObject.isLocalPlayerOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);

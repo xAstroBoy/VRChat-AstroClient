@@ -1,3 +1,5 @@
+using AstroClient.ClientActions;
+
 namespace AstroClient.Gompoc.ActionMenuAPI.Managers
 {
     using ClientResources;
@@ -8,7 +10,12 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
 
     internal class ResourceManagerEvents : AstroEvents
     {
-        internal override void VRChat_OnActionMenuInit()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_VRChat_OnActionMenuInit += VRChat_OnActionMenuInit;
+
+        }
+        private void VRChat_OnActionMenuInit()
         {
             ResourcesManager.InitLockGameObject();
         }

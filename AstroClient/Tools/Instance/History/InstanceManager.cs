@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Instance.History
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.Instance.History
 {
     using System;
     using System.Collections.Generic;
@@ -11,9 +13,16 @@
 
     internal class InstanceManager : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+            ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
+
+        }
+
         internal static List<WorldInstance> instances = new List<WorldInstance>();
 
-        internal override void OnApplicationStart()
+        private void OnApplicationStart()
         {
             Log.Debug("Loading Instances...");
 
@@ -54,7 +63,7 @@
             Log.Debug($"{instances.Count} Instances Loaded!");
         }
 
-        internal override void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
+        private void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             if (world == null) return;
             if (instance == null) return;

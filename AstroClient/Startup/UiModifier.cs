@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Startup
 {
     using AstroMonos.Components.Tools;
     using Tools.Extensions;
@@ -8,7 +10,12 @@
 
     internal class UiModifier : AstroEvents
     {
-        internal override void VRChat_OnQuickMenuInit()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_VRChat_OnQuickMenuInit += VRChat_OnQuickMenuInit;
+        }
+
+        private void VRChat_OnQuickMenuInit()
         {
             if (UserInterfaceObjects.ScreenFade != null)
             {

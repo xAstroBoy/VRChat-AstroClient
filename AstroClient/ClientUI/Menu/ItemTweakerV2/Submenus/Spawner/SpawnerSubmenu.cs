@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Spawner
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Spawner
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -10,8 +12,13 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class SpawnerSubmenu : Tweaker_Events
+    internal class SpawnerSubmenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+        }
         internal static void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedGridMenu(menu, x, y, "Spawner", "Spawner Menu!", null, null, null, null, btnHalf);
@@ -25,7 +32,7 @@
             SpawnedPrefabsCounter = new QMSingleButton(main, GetSpawnedPrefabText, null, GetSpawnedPrefabText);
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             SpawnedPrefabs.Clear();
             ClonedObjects.Clear();

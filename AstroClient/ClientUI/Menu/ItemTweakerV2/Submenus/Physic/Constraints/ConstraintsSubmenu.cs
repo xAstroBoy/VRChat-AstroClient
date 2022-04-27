@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Physic.Constraints
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Physic.Constraints
 {
     using System;
     using AstroMonos.Components.Tools;
@@ -8,8 +10,16 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class ConstraintsSubmenu : Tweaker_Events
+    internal class ConstraintsSubmenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            TweakerEventActions.Event_OnRigidBodyControllerSelected += OnRigidBodyController_Selected;
+            TweakerEventActions.Event_OnRigidBodyControllerPropertyChanged += OnRigidBodyController_PropertyChanged;
+            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+
+        }
         internal static void Init_ConstraintsSubmenu(QMNestedGridMenu menu)
         {
             var ConstraintMenu = new QMNestedButton(menu, "Constraints", "Item Constraint Editor Menu!");
@@ -25,7 +35,7 @@
             _ = new QMSingleButton(ConstraintMenu, 1, 2, "Remove all Object Constraints", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Remove_All_Constraints(); }), "Delete all object Constraints", null, null);
         }
 
-        internal override void OnRigidBodyController_PropertyChanged(RigidBodyController control)
+        private void OnRigidBodyController_PropertyChanged(RigidBodyController control)
         {
             UpdateButtonsFromController(control);
         }
@@ -52,17 +62,17 @@
             Update_Constraint_Rot_Z_Toggle(false);
         }
 
-        internal override void OnSelectedObject_Destroyed()
+        private void OnSelectedObject_Destroyed()
         {
             Reset();
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Reset();
         }
 
-        internal override void OnRigidBodyController_Selected(RigidBodyController control)
+        private void OnRigidBodyController_Selected(RigidBodyController control)
         {
             UpdateButtonsFromController(control);
         }

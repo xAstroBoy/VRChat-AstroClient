@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Rocket
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Rocket
 {
     using System;
     using System.Linq;
@@ -9,8 +11,12 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class RocketComponentSubMenu : Tweaker_Events
+    internal class RocketComponentSubMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_OnRocketBehaviourPropertyChanged += OnRocketBehaviour_OnPropertyChanged;
+        }
         internal static void Init_RocketComponentSubMenu(QMNestedGridMenu menu)
         {
             var submenu = new QMNestedButton(menu, "Rocket Maker", "Turn Items Into Rockets, Be careful as they will explode on impact!");
@@ -24,7 +30,7 @@
             _ = new QMSingleButton(submenu, 2, 2, "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecRocketSpeed(); }), "Edits the Rocket Speed", null, null);
         }
 
-        internal override void OnRocketBehaviour_OnPropertyChanged(RocketBehaviour RocketBehaviour)
+        private void OnRocketBehaviour_OnPropertyChanged(RocketBehaviour RocketBehaviour)
         {
             if (RocketBehaviour != null)
             {

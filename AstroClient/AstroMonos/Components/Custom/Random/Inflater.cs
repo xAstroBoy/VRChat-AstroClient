@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Custom.Random
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
     using ClientAttributes;
@@ -6,7 +8,7 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class InflaterBehaviour : AstroMonoBehaviour
+    public class InflaterBehaviour : MonoBehaviour
     {
         private Vector3 _NewSize;
         private float InflateTimer = 0.05f;
@@ -19,9 +21,35 @@
         public InflaterBehaviour(IntPtr ptr) : base(ptr)
         {
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         internal Vector3 NewSize
@@ -40,6 +68,7 @@
         {
             NewSize = gameObject.transform.localScale;
             OriginalSize = gameObject.transform.localScale;
+            HasSubscribed = true;
         }
 
         // Update is called once per frame
@@ -61,6 +90,7 @@
 
         private void OnDestroy()
         {
+            HasSubscribed = false;
             gameObject.transform.localScale = OriginalSize;
         }
 

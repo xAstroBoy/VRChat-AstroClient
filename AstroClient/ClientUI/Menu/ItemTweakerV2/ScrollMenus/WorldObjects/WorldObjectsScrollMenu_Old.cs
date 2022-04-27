@@ -10,7 +10,7 @@
     using UnityEngine;
     using VRC;
 
-    internal class WorldObjectsScrollMenu : Tweaker_Events
+    internal class WorldObjectsScrollMenu 
     {
         internal static void Init_WorldObjectScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {

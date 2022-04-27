@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.RandomSubmenus
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.RandomSubmenus
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Tools.Listeners;
@@ -11,6 +13,13 @@
 
     internal class AudioSourceSubMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
+
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMToggleButton> GeneratedButtons = new();
@@ -24,7 +33,7 @@
         private static bool isOpen { get; set; }
 
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
@@ -76,7 +85,7 @@
                     Object.DestroyImmediate(item);
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
@@ -105,7 +114,7 @@
             Regenerate();
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

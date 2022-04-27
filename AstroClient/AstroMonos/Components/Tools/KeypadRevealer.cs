@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.Keypads;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.Keypads;
 using UnityEngine.UIElements;
 
 namespace AstroClient.AstroMonos.Components.Tools
@@ -13,15 +14,15 @@ namespace AstroClient.AstroMonos.Components.Tools
     using xAstroBoy.Extensions;
 
     [RegisterComponent]
-    public class KeypadRevealer : AstroMonoBehaviour
+    public class KeypadRevealer : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public KeypadRevealer(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
-            KeypadRevealerHelper.DestroyAllFailedFinds += OnDestroyFailedSearch;
+            ClientEventActions.Event_Keypad_DestroyFailedFinds += OnDestroyFailedSearch;
 
         }
 
@@ -33,6 +34,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         // Use this for initialization
         private void Start()
         {
+            HasSubscribed = true;
             if (FindAndRevealPassword())
             {
                 Success = true;
@@ -40,24 +42,52 @@ namespace AstroClient.AstroMonos.Components.Tools
             }
         }
 
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         internal void OnDestroy()
         {
             if (GeneratedButton != null)
             {
                 GeneratedButton.DestroyMe();
             }
-            KeypadRevealerHelper.DestroyAllFailedFinds -= OnDestroyFailedSearch;
+            HasSubscribed = false;
+            ClientEventActions.Event_Keypad_DestroyFailedFinds -= OnDestroyFailedSearch;
         }
 
 
         private void OnDestroyFailedSearch()
         {
-            KeypadRevealerHelper.DestroyAllFailedFinds -= OnDestroyFailedSearch;
+            ClientEventActions.Event_Keypad_DestroyFailedFinds -= OnDestroyFailedSearch;
             if (!Success)
             {
                 Destroy(this);

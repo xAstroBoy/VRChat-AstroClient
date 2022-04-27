@@ -6,7 +6,7 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class BouncerSubMenu : Tweaker_Events
+    internal class BouncerSubMenu 
     {
         internal static void Init_BouncerMenu(QMNestedGridMenu main)
         {

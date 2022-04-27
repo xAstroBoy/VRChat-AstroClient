@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Startup.Hooks
 {
     using System;
     
@@ -10,9 +12,14 @@
 
     internal class AvatarManagerHook : AstroEvents
     {
-        internal static event Action<Player, GameObject, VRCAvatarManager, VRC_AvatarDescriptor> Event_OnAvatarSpawn;
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+        }
 
-        internal override void OnApplicationStart() => HookAvatarManager();
+    
+
+        private void OnApplicationStart() => HookAvatarManager();
 
         private void HookAvatarManager()
         {
@@ -32,7 +39,7 @@
 
         private static void OnAvatarInstantiate(Player player, GameObject avatar, VRC_AvatarDescriptor descriptor)
         {
-            Event_OnAvatarSpawn.SafetyRaiseWithParams(player, avatar, player.GetVRCPlayer().field_Private_VRCAvatarManager_0, descriptor);
+            ClientEventActions.Event_OnAvatarSpawn.SafetyRaiseWithParams(player, avatar, player.GetVRCPlayer().field_Private_VRCAvatarManager_0, descriptor);
         }
     }
 }

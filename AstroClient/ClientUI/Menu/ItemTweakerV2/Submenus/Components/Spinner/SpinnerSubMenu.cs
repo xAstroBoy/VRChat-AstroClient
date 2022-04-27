@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Spinner
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Spinner
 {
     using System;
     using System.Linq;
@@ -9,8 +11,12 @@
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class SpinnerSubMenu : Tweaker_Events
+    internal class SpinnerSubMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged += OnSpinnerBehaviour_OnPropertyChanged;
+        }
 
 
 
@@ -41,7 +47,7 @@
             }
         }
 
-        internal override void OnSpinnerBehaviour_OnPropertyChanged(SpinnerBehaviour SpinnerBehaviour)
+        private void OnSpinnerBehaviour_OnPropertyChanged(SpinnerBehaviour SpinnerBehaviour)
         {
             if (SpinnerBehaviour != null)
             {

@@ -6,13 +6,13 @@ namespace AstroClient.AstroMonos.Components.Tools
     using UnityEngine;
 
     [RegisterComponent]
-    public class Disabler : AstroMonoBehaviour
+    public class Disabler : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public Disabler(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 

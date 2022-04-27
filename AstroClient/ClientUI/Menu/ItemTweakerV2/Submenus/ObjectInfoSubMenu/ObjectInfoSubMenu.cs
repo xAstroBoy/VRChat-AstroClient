@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.ObjectInfoSubMenu
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.ObjectInfoSubMenu
 {
     using AstroMonos.Components.Tools;
     using Selector;
@@ -8,8 +10,13 @@
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Extensions;
 
-    internal class ObjectInfoSubMenu : Tweaker_Events
+    internal class ObjectInfoSubMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_OnRigidBodyController_OnUpdate += OnRigidBodyController_OnUpdate;
+        }
         internal static void Init_ObjectInfoSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "Object info", "Object Info Menu!", null, null, null, null, btnHalf);
@@ -49,7 +56,7 @@
         internal static QMSingleButton CurrentObjectLocalRotation;
         internal static QMSingleButton CurrentObjectPath;
 
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -60,7 +67,7 @@
             }
         }
 
-        internal override void OnRigidBodyController_OnUpdate(RigidBodyController control)
+        private void OnRigidBodyController_OnUpdate(RigidBodyController control)
         {
             if (control != null)
             {

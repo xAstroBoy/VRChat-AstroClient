@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Streamer
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Streamer
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +12,12 @@
 
     internal class StreamerIdentifier : AstroEvents
     {
-        internal override void OnApplicationLateStart()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationLateStart += OnApplicationLateStart;
+        }
+
+        private void OnApplicationLateStart()
         {
             Streamers structValue = new Streamers();
             foreach (var field in typeof(Streamers).GetFields())

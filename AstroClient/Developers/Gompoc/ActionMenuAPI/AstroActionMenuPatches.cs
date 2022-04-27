@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Gompoc.ActionMenuAPI
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Gompoc.ActionMenuAPI
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +14,12 @@
 
     internal class AstroActionMenuPatchesEvents : AstroEvents
     {
-        internal override void OnApplicationStart()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+
+        }
+        private void OnApplicationStart()
         {
             try
             {

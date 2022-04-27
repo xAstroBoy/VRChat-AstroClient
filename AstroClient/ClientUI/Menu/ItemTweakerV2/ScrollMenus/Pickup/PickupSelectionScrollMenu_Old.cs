@@ -10,7 +10,7 @@
     using UnityEngine;
     using VRC;
 
-    internal class PickupSelectionScrollMenu : Tweaker_Events
+    internal class PickupSelectionScrollMenu 
     {
         internal static void Init_PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
         {

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
     using System.Collections.Generic;
     using AstroClient.Tools.Extensions;
@@ -15,7 +17,7 @@
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class SuperTowerDefense_TowerCollisionFixer : AstroMonoBehaviour
+    public class SuperTowerDefense_TowerCollisionFixer : MonoBehaviour
     {
         private Il2CppSystem.Collections.Generic.List<Object> AntiGarbageCollection = new();
 
@@ -24,11 +26,42 @@
             AntiGarbageCollection.Add(this);
         }
 
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         private List<Collider> CurrentColliders { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new();
 
         private void Start()
@@ -49,6 +82,7 @@
                     CurrentColliders.Add(collider);
                 }
             }
+            HasSubscribed = true;
         }
 
         private List<string> CollidersNamesToIgnore { get; } = new List<string> { "InterTowerCollider" };

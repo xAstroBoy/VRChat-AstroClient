@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.ESP.Trigger
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.ESP.Trigger
 {
     using System;
     using System.Linq;
@@ -9,13 +11,13 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_Trigger : AstroMonoBehaviour
+    public class ESP_Trigger : MonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
         public ESP_Trigger(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<AstroMonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -33,18 +35,19 @@
         internal void Start()
         {
             ESPColor = DefaultColor;
-            ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
+            ObjMeshRenderers = gameObject.GetComponentsInChildren<Renderer>(true);
             if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
             {
                 Log.Error($"Unable to add ESP_Trigger to  {gameObject.name} due to MeshRenderer Being null or empty");
                 Destroy(this);
                 return;
             }
-            SetupHighlighter();
 
+            SetupHighlighter();
+            HasSubscribed = true;
             for (int i = 0; i < ObjMeshRenderers.Count; i++)
             {
-                MeshRenderer obj = ObjMeshRenderers[i];
+                Renderer obj = ObjMeshRenderers[i];
                 if (obj != null && obj.gameObject.active)
                 {
                     HighLightOptions.AddRenderer(obj);
@@ -69,7 +72,7 @@
                     HighLightOptions.SetHighlighterColor(ESPColor);
                     for (int i = 0; i < ObjMeshRenderers.Count; i++)
                     {
-                        MeshRenderer obj = ObjMeshRenderers[i];
+                        Renderer obj = ObjMeshRenderers[i];
                         if (obj != null && obj.gameObject.active)
                         {
                             HighLightOptions.AddRenderer(obj);
@@ -125,6 +128,7 @@
 
         internal void OnDestroy()
         {
+            HasSubscribed = false;
             HighLightOptions.DestroyHighlighter();
         }
 
@@ -165,10 +169,37 @@
                 return HighLightOptions.highlightColor;
             }
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
 
         internal VRC.SDKBase.VRC_Trigger trigger;
         internal VRCSDK2.VRC_Trigger trigger2;
@@ -178,6 +209,6 @@
         internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("EF2C3F");
 
         internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
+        private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjMeshRenderers;
     }
 }

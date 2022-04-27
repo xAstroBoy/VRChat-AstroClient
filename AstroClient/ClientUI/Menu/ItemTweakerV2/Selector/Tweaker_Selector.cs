@@ -1,14 +1,13 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Selector
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Selector
 {
     using System;
     using Tools.Extensions;
     using UnityEngine;
 
-    internal class Tweaker_Selector : Tweaker_Events
+    internal class Tweaker_Selector 
     {
-        internal static event Action<GameObject> Event_On_New_GameObject_Selected;
-
-        internal static event Action<GameObject> Event_On_Old_GameObject_Removed;
 
         private static GameObject _SelectedObject;
 
@@ -26,17 +25,17 @@
                 }
                 if (value == null)
                 {
-                    Event_On_Old_GameObject_Removed.SafetyRaiseWithParams(null);
-                    Event_On_New_GameObject_Selected.SafetyRaiseWithParams(null);
+                    TweakerEventActions.Event_On_Old_GameObject_Removed.SafetyRaiseWithParams(null);
+                    TweakerEventActions.Event_On_New_GameObject_Selected.SafetyRaiseWithParams(null);
                 }
                 else if (_SelectedObject != null)
                 {
                     if (_SelectedObject != value)
                     {
-                        Event_On_Old_GameObject_Removed.SafetyRaiseWithParams(_SelectedObject);
+                        TweakerEventActions.Event_On_Old_GameObject_Removed.SafetyRaiseWithParams(_SelectedObject);
                     }
                 }
-                Event_On_New_GameObject_Selected.SafetyRaiseWithParams(value);
+                TweakerEventActions.Event_On_New_GameObject_Selected.SafetyRaiseWithParams(value);
                 _SelectedObject = value;
             }
         }

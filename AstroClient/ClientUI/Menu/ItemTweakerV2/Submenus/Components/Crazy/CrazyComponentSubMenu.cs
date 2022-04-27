@@ -1,16 +1,22 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Crazy
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Crazy
 {
-    using System;
-    using System.Linq;
     using AstroMonos.Components.Custom.Random;
     using Selector;
+    using System;
+    using System.Linq;
     using Tools.Extensions;
     using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class CrazyComponentSubMenu : Tweaker_Events
+    internal class CrazyComponentSubMenu : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_OnCrazyBehaviourPropertyChanged += OnCrazyBehaviour_OnPropertyChanged;
+        }
+
         internal static void Init_CrazyComponentSubMenu(QMNestedGridMenu menu)
         {
             var submenu = new QMNestedButton(menu, "Crazy Object", "Make Items fly in random directions lol!");
@@ -22,22 +28,19 @@
             _ = new QMSingleButton(submenu, 2, 1, "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecCrazySpeed(); }), "Edits the CrazyObj Speed", null, null);
         }
 
-
-        internal override void OnCrazyBehaviour_OnPropertyChanged(CrazyBehaviour CrazyBehaviour)
+        private void OnCrazyBehaviour_OnPropertyChanged(CrazyBehaviour CrazyBehaviour)
         {
             if (CrazyBehaviour != null)
             {
                 CrazyTimerBtn.SetButtonText("Timer : " + CrazyBehaviour.CrazyTimer);
             }
-
             else
             {
                 CrazyTimerBtn.SetButtonText("Timer : " + "0");
             }
         }
 
-
-internal static void KillCrazyObjects()
+        internal static void KillCrazyObjects()
         {
             var list = Resources.FindObjectsOfTypeAll<CrazyBehaviour>().ToList();
             for (int i = 0; i < list.Count; i++)
@@ -46,7 +49,6 @@ internal static void KillCrazyObjects()
                 UnityEngine.Object.Destroy(item);
             }
         }
-
 
         private static QMSingleButton CrazyTimerBtn;
     }

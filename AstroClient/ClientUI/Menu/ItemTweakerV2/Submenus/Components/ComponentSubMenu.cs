@@ -13,7 +13,7 @@
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.Utility;
 
-    internal class ComponentSubMenu : Tweaker_Events
+    internal class ComponentSubMenu 
     {
         internal static void Init_ComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {

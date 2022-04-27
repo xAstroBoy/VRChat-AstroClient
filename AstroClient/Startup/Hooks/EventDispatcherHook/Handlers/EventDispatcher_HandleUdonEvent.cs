@@ -1,4 +1,5 @@
 
+using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using VRC.Udon;
 
@@ -26,14 +27,12 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 
     internal static class EventDispatcher_HandleUdonEvent
     {
-        internal static event System.Action<Player, GameObject, string> Event_OnUdonSyncRPC;
-        internal static event Action<UdonBehaviour, string> Event_Udon_SendCustomEvent;
 
         internal static bool Handle_UdonEvent(VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject gameObject, string EventKey)
         {
             try
             {
-                Event_OnUdonSyncRPC?.SafetyRaiseWithParams(sender, gameObject, EventKey);
+                ClientEventActions.Event_OnUdonSyncRPC?.SafetyRaiseWithParams(sender, gameObject, EventKey);
             }
             catch{}
 
@@ -70,7 +69,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
         {
             try
             {
-                Event_Udon_SendCustomEvent?.SafetyRaiseWithParams(UdonEvent, EventKey);
+                ClientEventActions.Event_Udon_SendCustomEvent?.SafetyRaiseWithParams(UdonEvent, EventKey);
             }
             catch { }
 

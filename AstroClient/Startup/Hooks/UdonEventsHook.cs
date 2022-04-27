@@ -1,4 +1,5 @@
-﻿using AstroClient.Config;
+﻿using AstroClient.ClientActions;
+using AstroClient.Config;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.xAstroBoy.Extensions;
@@ -23,11 +24,6 @@ namespace AstroClient.Startup.Hooks
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class UdonEventsHook : AstroEvents
     {
-        internal static event Action<UdonBehaviour> Event_Udon_OnPickup;
-        internal static event Action<UdonBehaviour> Event_Udon_OnPickupUseUp;
-        internal static event Action<UdonBehaviour> Event_Udon_OnPickupUseDown;
-        internal static event Action<UdonBehaviour> Event_Udon_OnDrop;
-        internal static event Action<UdonBehaviour> Event_Udon_OnInteract;
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -49,35 +45,35 @@ namespace AstroClient.Startup.Hooks
         private static void Hook_UdonBehaviour_Event_OnPickup(UdonBehaviour __instance)
         {
             if (__instance == null) return;
-            Event_Udon_OnPickup.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Event_Udon_OnPickup.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour __instance)
         {
             if (__instance == null) return;
 
-            Event_Udon_OnPickupUseUp.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Event_Udon_OnPickupUseUp.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour __instance)
         {
             if (__instance == null) return;
 
-            Event_Udon_OnPickupUseDown.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Event_Udon_OnPickupUseDown.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnDrop(UdonBehaviour __instance)
         {
             if (__instance == null) return;
 
-            Event_Udon_OnDrop.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Event_Udon_OnDrop.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnInteract(UdonBehaviour __instance)
         {
             if (__instance == null) return;
 
-            Event_Udon_OnInteract.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Event_Udon_OnInteract.SafetyRaiseWithParams(__instance);
         }
         private static bool Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {

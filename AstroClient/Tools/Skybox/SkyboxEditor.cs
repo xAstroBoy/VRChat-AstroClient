@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Skybox
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.Skybox
 {
     using CheetoLibrary.Utility;
     using Extensions;
@@ -20,6 +22,13 @@
     // TODO : Rewrite and optimize loading system.
     internal class SkyboxEditor : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+
+        }
+
         private static bool HasLoadedCachedSkyboxes;
 
         private static string Side_Up { get; } = "Up";
@@ -62,7 +71,7 @@
         internal static bool isSupportedSkybox { get; private set; } = false;
 
         internal static List<AssetBundle> FailedLoadedBundles { get; } = new();
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (!HasLoadedCachedSkyboxes)
             {
@@ -99,7 +108,7 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             isSupportedSkybox = false;
             OriginalSkybox = null;

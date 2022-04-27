@@ -1,4 +1,5 @@
-﻿using AstroClient.Startup.Hooks;
+﻿using AstroClient.ClientActions;
+using AstroClient.Startup.Hooks;
 
 namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Triggers
 {
@@ -42,7 +43,14 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Triggers
                 }
             }
         }
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
+
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
@@ -97,7 +105,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Triggers
                     Object.DestroyImmediate(item);
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
@@ -126,7 +134,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Triggers
             Regenerate();
         }
 
-        internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

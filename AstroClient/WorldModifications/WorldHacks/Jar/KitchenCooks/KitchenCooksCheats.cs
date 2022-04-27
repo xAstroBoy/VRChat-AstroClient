@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks
 {
     #region Imports
 
@@ -15,6 +17,36 @@
 
     internal class KitchenCooksCheats : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
 
         private static bool _OnlySelfHasPatreonPerk;
 
@@ -30,7 +62,7 @@
         private static QMToggleButton GetSelfPatreonKnifesBtn { get; set; }
         private static QMToggleButton GetEveryonePatreonKnifesBtn { get; set; }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.KitchenCooks)
             {
@@ -43,6 +75,7 @@
                 }
 
                 FindKnifes();
+                HasSubscribed = true;
             }
             else
             {
@@ -52,6 +85,7 @@
                     KitchenCooksCheatPage.GetMainButton().SetInteractable(false);
                     KitchenCooksCheatPage.GetMainButton().SetTextColor(UnityEngine.Color.red);
                 }
+                HasSubscribed = false;
             }
         }
 
@@ -72,7 +106,7 @@
         private static GameObject Knife1 { get; set; }
         private static GameObject Knife0 { get; set; }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             EveryoneHasPatreonPerk = false;
             OnlySelfHasPatreonPerk = false;
@@ -80,6 +114,7 @@
             Knife0 = null;
             GoldenKnife0 = null;
             GoldenKnife1 = null;
+            HasSubscribed = false;
         }
         internal static bool OnlySelfHasPatreonPerk
         {

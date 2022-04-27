@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Streamer
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Streamer
 {
     using System.Collections;
     using System.Drawing;
@@ -12,7 +14,12 @@
 
     internal class StreamerTags : AstroEvents
     {
-        internal override void OnPlayerJoined(Player player)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+        }
+
+        private void OnPlayerJoined(Player player)
         {
             MelonCoroutines.Start(AddTag(player));
         }

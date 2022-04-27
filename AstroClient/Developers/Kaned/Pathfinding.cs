@@ -1,16 +1,15 @@
-﻿namespace AstroClient.Developers.Kaned
-{
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Target;
-    using UnityEngine;
-    using VRC;
-    using VRC.SDKBase;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using AstroClient.Target;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC;
+using VRC.SDKBase;
 
+namespace AstroClient.Kaned
+{
     internal class Pathfinding
     {
         private static float coarseness = 0.2f;
@@ -205,9 +204,9 @@
             {
                 foreach (var b in buttons)
                 {
-                    b.SetTextColor(Color.red);
+                    b.SetTextColor(UnityEngine.Color.red);
                 }
-                buttons[pos].SetTextColor(Color.green);
+                buttons[pos].SetTextColor(UnityEngine.Color.green);
             }
         }
 

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using Tools.Extensions;
@@ -7,7 +9,12 @@
 
     internal class TheGreatPug : AstroEvents
     {
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.TheGreatPug)
             {
@@ -19,13 +26,13 @@
                 var kitchen4 = GameObjectFinder.Find("great_pug/Cube_022  (GLASS)");
                 var Signs = GameObjectFinder.Find(" - Props/Props (Static) - Global - Udon In Progress");
                 var rope = GameObjectFinder.Find(" - Props/Props (Static) - Hallways - First Floor/Velvet Rope (1)");
-                rope.DestroyMeLocal();
-                Signs.DestroyMeLocal();
-                BasementDoor.DestroyMeLocal();
-                Kitchen1.DestroyMeLocal();
-                kitchen2.DestroyMeLocal();
-                frame.RemoveAllColliders();
-                rope.RemoveAllColliders();
+                rope.IgnoreLocalPlayerCollision();
+                Signs.IgnoreLocalPlayerCollision();
+                BasementDoor.IgnoreLocalPlayerCollision();
+                Kitchen1.IgnoreLocalPlayerCollision();
+                kitchen2.IgnoreLocalPlayerCollision();
+                frame.IgnoreLocalPlayerCollision();
+                rope.IgnoreLocalPlayerCollision();
             }
         }
     }

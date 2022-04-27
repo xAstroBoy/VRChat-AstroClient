@@ -1,3 +1,6 @@
+using AstroClient.ClientActions;
+using UnhollowerBaseLib.Attributes;
+
 namespace AstroClient.Spawnables.ColliderSuppresserCube
 {
     using System.Collections.Generic;
@@ -10,9 +13,14 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
 
     internal class ColliderSuppresserSphere : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
         private static GameObject SphereColliderDisabler;
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             DisabledCollisions.Clear();
         }

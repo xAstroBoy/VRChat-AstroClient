@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AstroClient.ClientActions;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -24,7 +25,6 @@ namespace AstroClient.Startup.Hooks
 
     internal class OnWorldRevealHook : AstroEvents
     {
-        internal static event Action<string, string, List<string>, string, string> Event_OnWorldReveal;
 
 
         //internal static 
@@ -56,7 +56,7 @@ namespace AstroClient.Startup.Hooks
             if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
                 RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
             {
-                Event_OnWorldReveal.SafetyRaiseWithParams(WorldUtils.WorldID, WorldUtils.WorldName, WorldUtils.WorldTags, WorldUtils.AssetURL, WorldUtils.AuthorName);
+                ClientEventActions.Event_OnWorldReveal.SafetyRaiseWithParams(WorldUtils.WorldID, WorldUtils.WorldName, WorldUtils.WorldTags, WorldUtils.AssetURL, WorldUtils.AuthorName);
             }
 
         }

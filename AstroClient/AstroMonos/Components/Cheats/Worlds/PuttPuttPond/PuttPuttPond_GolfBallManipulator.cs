@@ -12,11 +12,12 @@
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
     using Math = System.Math;
+    using UnityEngine;
 
     [RegisterComponent]
-    public class PuttPuttPond_GolfBallManipulator : AstroMonoBehaviour
+    public class PuttPuttPond_GolfBallManipulator : MonoBehaviour
     {
-        private List<Object> AntiGarbageCollection = new();
+        private List<Il2CppSystem.Object> AntiGarbageCollection = new();
 
         public PuttPuttPond_GolfBallManipulator(IntPtr ptr) : base(ptr)
         {

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Cheetos
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Cheetos
 {
     #region Imports
 
@@ -20,6 +22,15 @@
 
     internal class CheetosTestStuff : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnMasterClientSwitched += OnMasterClientSwitched;
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+
+            ClientEventActions.Event_OnRoomLeft += OnRoomJoined;
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
         private static bool DoOnce;
         private static WebSocket ws;
 
@@ -97,7 +108,7 @@
         //    //Helper().Start();
         //}
 
-        internal override void OnMasterClientSwitched(Player player)
+        private void OnMasterClientSwitched(Player player)
         {
             if (!WorldUtils.IsInWorld) return;
 
@@ -118,12 +129,12 @@
 
         }
 
-        internal override void OnRoomJoined()
+        private void OnRoomJoined()
         {
             Log.Write("You joined a room.");
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Log.Write("You left a room.");
         }
@@ -135,7 +146,7 @@
         //    if (player.gameObject.GetComponent<CheetoNameplate>() == null) player.gameObject.AddComponent<CheetoNameplate>();
         //}
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             //VRC.Player player = PlayerUtils.GetPlayer();
             //if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();

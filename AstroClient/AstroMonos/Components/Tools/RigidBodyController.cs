@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Tools
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -10,13 +12,13 @@
 
     // TODO : Fix this Crap Again ( Backupping mechanism doesn't work!)
     [RegisterComponent]
-    public class RigidBodyController : AstroMonoBehaviour
+    public class RigidBodyController : MonoBehaviour
     {
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public RigidBodyController(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -33,17 +35,48 @@
                 Rigidbody = SyncPhysics.GetRigidBody();
                 if (Rigidbody == null) Rigidbody = gameObject.GetComponent<Rigidbody>();
             }
-
+            HasSubscribed = true;
             Log.Debug("Attacked Successfully RigidBodyController to object " + gameObject.name);
             BackupBasicBody();
             InvokeRepeating(nameof(BodyUpdate), 0.1f, 0.3f);
         }
 
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         private void BodyUpdate()
         {
 

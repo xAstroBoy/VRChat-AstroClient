@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Player.Movement.QuickMenu
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Tools.Player.Movement.QuickMenu
 {
     using System.Collections.Generic;
     using Config;
@@ -10,13 +12,23 @@
 
     internal class QMFreeze : AstroEvents
     {
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuOpen += OnQuickMenuOpen;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            //ClientEventActions.Event_OnInput_Jump += OnInput_Jump;
+
+        }
+
+        private void OnRoomLeft()
         {
             Frozen = false;
             hasBackuppedGravity = false;
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (!hasBackuppedGravity)
             {
@@ -24,7 +36,7 @@
             }
         }
 
-        internal override void OnQuickMenuOpen()
+        private void OnQuickMenuOpen()
         {
             if (FreezePlayerOnQMOpen)
             {
@@ -39,7 +51,7 @@
             }
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             if (FreezePlayerOnQMOpen)
             {
@@ -61,11 +73,13 @@
                 Frozen = false;
                 if (Networking.LocalPlayer != null)
                 {
-                    CurrentGravity = originalGravity;
-                    if (RestoreVelocity)
-                    {
-                        Networking.LocalPlayer.SetVelocity(originalVelocity);
-                    }
+                    GameInstances.LocalPlayer.Immobilize(false);
+
+                    //CurrentGravity = originalGravity;
+                    //if (RestoreVelocity)
+                    //{
+                    //    Networking.LocalPlayer.SetVelocity(originalVelocity);
+                    //}
                 }
             }
         }
@@ -77,32 +91,33 @@
                 if (!Frozen)
                 {
                     Frozen = true;
-                    originalVelocity = GameInstances.LocalPlayer.GetVelocity();
-                    if (originalVelocity == Vector3.zero)
-                    {
-                        return;
-                    }
-                    CurrentGravity = Vector3.zero;
-                    Networking.LocalPlayer.SetVelocity(Vector3.zero);
+                    GameInstances.LocalPlayer.Immobilize(true);
+                    //originalVelocity = GameInstances.LocalPlayer.GetVelocity();
+                    //if (originalVelocity == Vector3.zero)
+                    //{
+                    //    return;
+                    //}
+                    //CurrentGravity = Vector3.zero;
+                    //Networking.LocalPlayer.SetVelocity(Vector3.zero);
                 }
             }
         }
 
-        internal override void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
-        {
-            // Prevent Jumping bug.
-            if (Frozen && FreezePlayerOnQMOpen)
-            {
-                if (isClicked)
-                {
-                    if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
-                    {
-                        Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                    }
-                }
-            }
+        //private void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
+        //{
+        //    // Prevent Jumping bug.
+        //    if (Frozen && FreezePlayerOnQMOpen)
+        //    {
+        //        if (isClicked)
+        //        {
+        //            if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
+        //            {
+        //                Networking.LocalPlayer.SetVelocity(Vector3.zero);
+        //            }
+        //        }
+        //    }
 
-        }
+        //}
 
         internal static bool FreezePlayerOnQMOpen
         {

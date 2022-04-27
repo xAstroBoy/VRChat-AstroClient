@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -11,6 +13,38 @@
 
     internal class ClickerGame : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         internal static void InitButtons(QMGridTab main)
         {
             ClickerGameCheats = new QMNestedGridMenu(main, "Clicker Game", "Clicker Game AutoClicker");
@@ -20,7 +54,7 @@
         internal static QMNestedGridMenu ClickerGameCheats { get; set; }
         internal static QMToggleButton AutoClickerButton { get; set; }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Clicker_Game)
             {
@@ -31,6 +65,7 @@
                 }
                 Log.Write($"Recognized {Name} World, AutoClicker Available!....");
                 CubeClicker = UdonSearch.FindUdonEvent("MainButton", "_interact");
+                HasSubscribed = true;
             }
             else
             {
@@ -39,10 +74,11 @@
                     ClickerGameCheats.SetInteractable(false);
                     ClickerGameCheats.SetTextColor(Color.red);
                 }
+                HasSubscribed = false;
             }
         }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             CubeAutoClicker = false;
             CubeClicker = null;

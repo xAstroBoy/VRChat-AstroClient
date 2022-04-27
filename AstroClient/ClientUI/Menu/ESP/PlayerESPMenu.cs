@@ -1,4 +1,7 @@
-﻿namespace AstroClient.ClientUI.Menu.ESP
+﻿using AstroClient.ClientActions;
+using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.ClientUI.Menu.ESP
 {
     using System;
     
@@ -15,7 +18,6 @@
 
     internal class PlayerESPMenu : AstroEvents
     {
-        internal static Action<bool> Event_OnPlayerESPPropertyChanged;
 
         internal static void InitButtons(QMNestedGridMenu menu)
         {
@@ -26,7 +28,31 @@
             ESPColorSelector.InitButtons(main);
         }
 
-        
+
+        private static bool _HasSubscribed = false;
+        private static bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
 
         private static QMToggleButton PlayerESPToggleBtn;
 
@@ -55,11 +81,12 @@
                 {
                     PlayerESPToggleBtn.SetToggleState(value);
                 }
-                Event_OnPlayerESPPropertyChanged.SafetyRaiseWithParams(value);
+                HasSubscribed = value;
+                ConfigEventActions.Event_OnPlayerESPPropertyChanged.SafetyRaiseWithParams(value);
             }
         }
 
-        internal override void OnPlayerJoined(Player player)
+        private static void OnPlayerJoined(Player player)
         {
             MiscUtils.DelayFunction(1, () =>
             {

@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.UdonEditor;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.UdonEditor;
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 {
@@ -17,6 +18,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 
     internal class Murder4_UnfilteredNodes : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+        }
+
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
@@ -30,7 +38,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
         private static bool HasGenerated { get; set; } = false;
         private static bool isOpen { get; set; }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
             {
@@ -157,7 +165,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
             }
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
@@ -192,7 +200,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
             }
         }
 
-                internal override void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+                private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
             if (Page != null)

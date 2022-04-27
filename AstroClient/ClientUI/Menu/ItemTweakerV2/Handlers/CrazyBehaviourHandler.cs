@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 {
     using System;
     using AstroMonos.Components.Custom.Random;
@@ -6,11 +8,20 @@
     using Tools.Extensions;
     using UnityEngine;
 
-    internal class CrazyBehaviourHandler : Tweaker_Events
+    internal class CrazyBehaviourHandler : AstroEvents
     {
-        internal override void OnSelectedObject_Destroyed()
+        internal override  void RegisterToEvents()
         {
-            Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
+            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_On_Old_GameObject_Removed  += On_Old_GameObject_Removed;
+
+
+        }
+
+        private  void OnSelectedObject_Destroyed()
+        {
+            TweakerEventActions.Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
             instance = null;
         }
 
@@ -28,7 +39,7 @@
                             instance = newinstance;
                             newinstance.SetOnCrazyPropertyChanged(() =>
                             {
-                                Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -41,7 +52,7 @@
                     instance = newinstance;
                     newinstance.SetOnCrazyPropertyChanged(() =>
                     {
-                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -50,8 +61,7 @@
 
         
 
-        internal static event Action<CrazyBehaviour> Event_OnCrazyBehaviourPropertyChanged;
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private  void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -61,13 +71,13 @@
                     instance = CrazyBehaviour; 
                     CrazyBehaviour.SetOnCrazyPropertyChanged(() =>
                     {
-                        Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(CrazyBehaviour); // Dunno if it works.
+                        TweakerEventActions.Event_OnCrazyBehaviourPropertyChanged.SafetyRaiseWithParams(CrazyBehaviour); // Dunno if it works.
                     });
                 }
             }
         }
 
-        internal override void On_Old_GameObject_Removed(GameObject obj)
+        private  void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

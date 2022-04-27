@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2
 {
     using AstroMonos.Components.Tools;
     using ClientResources;
@@ -14,8 +16,14 @@
     using xAstroBoy.AstroButtonAPI.WingsAPI;
     using xAstroBoy.Extensions;
 
-    internal class TweakerWings : Tweaker_Events
+    internal class TweakerWings : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_OnPickupController_OnUpdate += OnPickupController_OnUpdate;
+            ClientEventActions.Event_OnTargetSet += OnTargetSet;
+        }
         private static QMWingSingleButton Pickup_IsHeldStatus;
         private static QMWingSingleButton Pickup_CurrentObjectHolder;
         private static QMWingSingleButton Pickup_CurrentObjectOwner;
@@ -58,7 +66,7 @@
             PickupSubmenu.InitWings(TweakerMainWings);
         }
 
-        internal override void OnPickupController_OnUpdate(PickupController control)
+        private void OnPickupController_OnUpdate(PickupController control)
         {
             if (control != null)
             {
@@ -78,7 +86,7 @@
             }
         }
 
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             if (TeleportToTarget != null)
             {
@@ -92,7 +100,7 @@
             }
         }
 
-        internal override void OnTargetSet(Player player)
+        private void OnTargetSet(Player player)
         {
             if (TeleportToTarget != null)
             {

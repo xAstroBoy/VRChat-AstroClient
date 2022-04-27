@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Startup.Hooks
 {
     using System;
     using System.Reflection;
@@ -14,7 +16,6 @@
     internal class TriggerEventHook : AstroEvents
     {
 
-        internal static event Action<VRC_EventHandler, VRC_EventHandler.VrcEvent, VRC_EventHandler.VrcBroadcastType, int, float> Event_VRC_EventDispatcherRFC_triggerEvent;
 
         internal override void ExecutePriorityPatches()
         {
@@ -60,7 +61,7 @@
                     }
                 }
 
-                Event_VRC_EventDispatcherRFC_triggerEvent.SafetyRaiseWithParams(__0, __1, __2, __3, __4);
+                ClientEventActions.Event_VRC_EventDispatcherRFC_triggerEvent.SafetyRaiseWithParams(__0, __1, __2, __3, __4);
                 return true;
             }
             catch { }

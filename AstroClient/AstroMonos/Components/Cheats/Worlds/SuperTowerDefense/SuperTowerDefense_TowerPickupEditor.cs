@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
@@ -10,22 +12,55 @@
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
     using Math = System.Math;
+    using UnityEngine;
 
     [RegisterComponent]
-    public class SuperTowerDefense_TowerPickupEditor : AstroMonoBehaviour
+    public class SuperTowerDefense_TowerPickupEditor : MonoBehaviour
     {
-        private List<Object> AntiGarbageCollection = new();
+        private List<Il2CppSystem.Object> AntiGarbageCollection = new();
 
         public SuperTowerDefense_TowerPickupEditor(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
 
-        internal override void OnRoomLeft()
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        void OnDestroy()
+        {
+            HasSubscribed = false;
+            
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
-
         internal bool? __0_validPlacement_Boolean
         {
             [HideFromIl2Cpp]
@@ -123,6 +158,7 @@
                 if (obj != null)
                 {
                     CurrentTower = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    HasSubscribed = true;
                 }
                 else
                 {

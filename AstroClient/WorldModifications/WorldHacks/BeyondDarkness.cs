@@ -1,4 +1,6 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -15,8 +17,40 @@
 
     internal class BeyondDarkness : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+        }
 
-        internal override void OnRoomLeft()
+
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             isCurrentWorld = false;
             Bed_interact.Clear();
@@ -30,17 +64,20 @@
                 MelonCoroutines.Stop(SkipBedroomPuzzleRoutine);
             }
             SkipBedroomPuzzleRoutine = null;
+            HasSubscribed = false;
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.BeyondDarkness)
             {
                 isCurrentWorld = true;
+                HasSubscribed = true;
                 FindEverything();
             }
             else
             {
+                HasSubscribed = false;
                 isCurrentWorld = false;
             }
         }

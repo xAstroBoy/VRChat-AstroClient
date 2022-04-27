@@ -1,3 +1,5 @@
+using AstroClient.ClientActions;
+
 namespace AstroClient.Spawnables.Flashlight
 {
     using System;
@@ -16,7 +18,12 @@ namespace AstroClient.Spawnables.Flashlight
 
     internal class Astro_Flashlight : AstroEvents
     {
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
+        private void OnRoomLeft()
         {
             DestroyAllFlashLights();
             CurrentLightTemplate = null;

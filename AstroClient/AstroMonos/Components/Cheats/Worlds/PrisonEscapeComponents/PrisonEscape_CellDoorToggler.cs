@@ -1,6 +1,7 @@
 ﻿using System;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.UdonSearcher;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
@@ -31,13 +32,43 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
 
     [RegisterComponent]
-    public class PrisonEscape_CellDoorToggler : AstroMonoBehaviour
+    public class PrisonEscape_CellDoorToggler : MonoBehaviour
     {
 
         public PrisonEscape_CellDoorToggler(IntPtr ptr) : base(ptr)
         {
         }
-        internal override void OnRoomLeft()
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Event_Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -55,6 +86,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             CloseCell = gameObject.FindUdonEvent("_Close");
             if(OpenCell != null && CloseCell != null)
             {
+                HasSubscribed = true;
                 var col = gameObject.GetComponentInChildren<Collider>(true);
                 if (col != null)
                 {
@@ -71,7 +103,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         }
 
         [HideFromIl2Cpp]
-        internal override void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
+        private void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
         {
             if (OpenCell != null && CloseCell != null && Trigger != null)
             {
@@ -158,7 +190,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         void OnDestroy()
         {
             Trigger.DestroyMeLocal(false);
-
+            HasSubscribed = false;
         }
 
     }

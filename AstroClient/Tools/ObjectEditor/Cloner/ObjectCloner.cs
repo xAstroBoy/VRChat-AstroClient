@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using AstroClient.ClientActions;
+using HarmonyLib;
 
 namespace AstroClient.Tools.ObjectEditor.Cloner
 {
@@ -9,7 +10,12 @@ namespace AstroClient.Tools.ObjectEditor.Cloner
 
     internal class ObjectCloner : AstroEvents
     {
-        internal override void OnRoomLeft()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+        }
+
+        private void OnRoomLeft()
         {
             _holder = null;
             SpawnerSubmenu.ClonedObjects.Clear();

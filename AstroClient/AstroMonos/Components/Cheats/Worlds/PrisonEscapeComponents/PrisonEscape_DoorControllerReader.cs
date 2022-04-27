@@ -11,7 +11,7 @@
     using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
-    public class PrisonEscape_DoorControllerReader : AstroMonoBehaviour
+    public class PrisonEscape_DoorControllerReader : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 

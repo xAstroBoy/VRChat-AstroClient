@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Moderation
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Moderation
 {
     #region Usings
 
@@ -16,6 +18,12 @@
 
     internal class PhotonModerationHandler : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnPhotonPlayerLeft += OnPhotonPlayerLeft;
+        }
+
         private static void RegisterPlayer(string id)
         {
             if (!PlayerModerations.ContainsKey(id))
@@ -44,7 +52,7 @@
                     if (!PlayerModerations[photonuserid].Blocked)
                     {
                         PlayerModerations[photonuserid].Blocked = true;
-                        Event_OnPlayerBlockedYou?.SafetyRaiseWithParams(player);
+                        ClientEventActions.Event_OnPlayerBlockedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -61,7 +69,7 @@
                     if (PlayerModerations[photonuserid].Blocked)
                     {
                         PlayerModerations[photonuserid].Blocked = false;
-                        Event_OnPlayerUnblockedYou?.SafetyRaiseWithParams(player);
+                        ClientEventActions.Event_OnPlayerUnblockedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -78,7 +86,7 @@
                     if (!PlayerModerations[photonuserid].Muted)
                     {
                         PlayerModerations[photonuserid].Muted = true;
-                        Event_OnPlayerMutedYou?.SafetyRaiseWithParams(player);
+                        ClientEventActions.Event_OnPlayerMutedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -95,29 +103,21 @@
                     if (PlayerModerations[photonuserid].Muted)
                     {
                         PlayerModerations[photonuserid].Muted= false;
-                        Event_OnPlayerUnmutedYou?.SafetyRaiseWithParams(player);
+                        ClientEventActions.Event_OnPlayerUnmutedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
         }
 
-        #region EventHandlers
-
-        internal static event Action<Player> Event_OnPlayerBlockedYou;
-        internal static event Action<Player> Event_OnPlayerUnblockedYou;
-        internal static event Action<Player> Event_OnPlayerMutedYou;
-        internal static event Action<Player> Event_OnPlayerUnmutedYou;
-
-        #endregion
 
         #region PlayerModerations
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             PlayerModerations.Clear();
         }
 
-        internal override void OnPhotonPlayerLeft(Player player)
+        private void OnPhotonPlayerLeft(Player player)
         {
             MelonCoroutines.Start(PlayerLeft(player));
         }

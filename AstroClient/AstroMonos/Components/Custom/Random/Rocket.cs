@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.Colors;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.Colors;
 
 namespace AstroClient.AstroMonos.Components.Custom.Random
 {
@@ -16,21 +17,47 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
     using Random = UnityEngine.Random;
 
     [RegisterComponent]
-    public class RocketBehaviour : AstroMonoBehaviour
+    public class RocketBehaviour : MonoBehaviour
     {
         private bool _HasRequiredSettings;
 
         private bool _IsEnabled;
-        public List<AstroMonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public RocketBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<AstroMonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -172,7 +199,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                 Laser.startColor = SystemColors.OrangeRed;
                 Laser.endColor = SystemColors.OrangeRed;
             }
-
+            HasSubscribed = true;
             IsEnabled = false;
         }
 
@@ -226,6 +253,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
         {
             try
             {
+                HasSubscribed = false;
                 RigidBodyController.RestoreOriginalBody();
                 if (gameObject.isLocalPlayerOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);

@@ -1,21 +1,23 @@
-﻿using AstroClient.ClientAttributes;
+﻿using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
-using Il2CppSystem;
 using Il2CppSystem.Collections.Generic;
 using Il2CppSystem.Xml;
 using UnhollowerBaseLib.Attributes;
+using UnityEngine;
 using Int32 = System.Int32;
+using Object = Il2CppSystem.Object;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
 {
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]
-    public class GeoLocator_CustomizationReader : AstroMonoBehaviour
+    public class GeoLocator_CustomizationReader : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -23,8 +25,34 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
         {
             AntiGarbageCollection.Add(this);
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
 
-        internal override void OnRoomLeft()
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
@@ -44,6 +72,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
                     RefreshPatronSystem = obj.UdonBehaviour.FindUdonEvent("_start");
                     Initialize_Customization();
                     // after this just set the patron tier and call the behaviour _start event and say fuck it lol
+                    HasSubscribed = true;
                     __0_mp_tier_Int32 = int.MaxValue;
                     _authorizedTier = int.MaxValue; 
                     RefreshPatronSystem.InvokeBehaviour(); // call it and everything gets unlocked for free LMAO
@@ -63,6 +92,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
 
         private void OnDestroy()
         {
+            HasSubscribed = false;
             Cleanup_Customization();
         }
 

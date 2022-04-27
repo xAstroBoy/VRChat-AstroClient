@@ -1,6 +1,7 @@
 ﻿using System;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.UdonSearcher;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
@@ -29,7 +30,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
 
     [RegisterComponent]
-    public class PrisonEscape_DoorAssister : AstroMonoBehaviour
+    public class PrisonEscape_DoorAssister : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
@@ -37,9 +38,35 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             AntiGarbageCollection.Add(this);
         }
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
         private UdonBehaviour_Cached KeypadDoorEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -79,6 +106,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 if(Triggers.Count != 0)
                 {
                     Log.Debug($"Registered {Triggers.Count} On GameObject {gameObject.name}");
+                    HasSubscribed = true;
                 }
                 else
                 {
@@ -132,6 +160,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         void OnDestroy()
         {
             Triggers.DestroyMeLocal(true);
+            HasSubscribed = false;
         }
 
     }

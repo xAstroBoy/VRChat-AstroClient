@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
     using System.Linq;
     using System.Reflection;
@@ -6,9 +8,12 @@
 
     internal class UiMethods : AstroEvents
     {
-        internal static MethodInfo _apiUserToIUser;
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
 
-        internal override void OnApplicationStart()
+        }
+        private void OnApplicationStart()
         {
             var iUserParent = typeof(VRCPlayer).Assembly.GetTypes()
                 .First(type => type.GetMethods()
@@ -17,5 +22,6 @@
             _apiUserToIUser = typeof(DataModelCache).GetMethod("Method_Public_TYPE_String_TYPE2_Boolean_0");
             _apiUserToIUser = _apiUserToIUser.MakeGenericMethod(iUserParent, typeof(APIUser));
         }
+        internal static MethodInfo _apiUserToIUser;
     }
 }

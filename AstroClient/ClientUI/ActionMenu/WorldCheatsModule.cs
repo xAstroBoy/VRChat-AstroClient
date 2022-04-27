@@ -1,4 +1,5 @@
 using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
+using AstroClient.ClientActions;
 using AstroClient.ClientResources.Loaders;
 using AstroClient.ClientUI.Menu.ESP;
 using AstroClient.Constants;
@@ -21,7 +22,12 @@ using Color = System.Drawing.Color;
 
 internal class WorldCheatsModule : AstroEvents
 {
-    internal override void OnApplicationStart()
+    internal override void RegisterToEvents()
+    {
+        ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+    }
+
+    private void OnApplicationStart()
     {
         AMUtils.AddToModsFolder("World Modules", () =>
         {

@@ -1,4 +1,5 @@
-﻿using Cheetah;
+﻿using AstroClient.ClientActions;
+using Cheetah;
 
 namespace AstroClient.Startup.ModDetector
 {
@@ -7,7 +8,12 @@ namespace AstroClient.Startup.ModDetector
 
     internal class FindMods : AstroEvents
     {
-        internal override void OnApplicationStart()
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+        }
+
+        private void OnApplicationStart()
         {
             if (MelonHandler.Mods.Any(m => m.Info.Name == "Notorious"))
             {

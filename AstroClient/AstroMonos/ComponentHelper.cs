@@ -1,4 +1,6 @@
-﻿namespace AstroClient.AstroMonos
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.AstroMonos
 {
     #region Imports
 
@@ -21,6 +23,13 @@
         {
             RegisterComponent(typeof(T));
         }
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+            ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
+            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+
+        }
 
         internal static void RegisterComponent(Type type)
         {
@@ -37,10 +46,8 @@
             }
         }
 
-        internal override void OnApplicationStart()
+        private void OnApplicationStart()
         {
-            RegisterComponent<AstroMonoBehaviour>();
-
             var classes = Assembly.GetExecutingAssembly().GetTypes();
             for (int i = 0; i < classes.Length; i++)
             {
@@ -65,12 +72,12 @@
             }
         }
 
-        internal override void VRChat_OnUiManagerInit()
+        private void VRChat_OnUiManagerInit()
         {
             if (Bools.AllowOrbitComponent) OrbitManager.MakeInstance();
         }
 
-        internal override void OnRoomJoined()
+        private void OnRoomJoined()
         {
             if (Bools.AllowOrbitComponent) OrbitManager.MakeInstance();
         }

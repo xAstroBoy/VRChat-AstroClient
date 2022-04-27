@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using AstroClient.ClientActions;
+using UnityEngine;
 
 namespace AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 
@@ -15,13 +17,39 @@ using xAstroBoy.Utility;
 using IntPtr = System.IntPtr;
 
 [RegisterComponent]
-public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
+public class Ostinyo_World_PatronCracker : MonoBehaviour
 {
     private readonly List<Object> AntiGarbageCollection = new();
 
     public Ostinyo_World_PatronCracker(IntPtr ptr) : base(ptr)
     {
         AntiGarbageCollection.Add(this);
+    }
+    private bool _HasSubscribed = false;
+    private bool HasSubscribed
+    {
+        [HideFromIl2Cpp]
+        get => _HasSubscribed;
+        [HideFromIl2Cpp]
+        set
+        {
+            if (_HasSubscribed != value)
+            {
+                if (value)
+                {
+
+                    ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+
+                }
+                else
+                {
+
+                    ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+
+                }
+            }
+            _HasSubscribed = value;
+        }
     }
 
     internal void Initiate_UdonVariablePatron()
@@ -109,14 +137,15 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
         }
     }
 
-    internal override void OnRoomLeft()
+    private void OnRoomLeft()
     {
         Destroy(this);
     }
 
     void OnDestroy()
     {
-        Clean_UdonVariablePatron();
+        HasSubscribed = false;
+        Clean_UdonVariablePatron();		
     }
 
     internal string[] SetPatronList(string[] patronlist, bool isPatron)
@@ -188,6 +217,7 @@ public class Ostinyo_World_PatronCracker : AstroMonoBehaviour
             RefreshPatronList = gameObject.FindUdonEvent("_UpdatePatronList");
             if (RefreshPatronList != null)
             {
+                HasSubscribed = true;
                 PatronControl = RefreshPatronList.RawItem;
                 Initiate_UdonVariablePatron();
                 Log.Debug("Added Patron Cracker to This Patron System Successfully!");

@@ -11,7 +11,7 @@
     using VRC.Core;
 
     [RegisterComponent] 
-    public class EntryBase : AstroMonoBehaviour
+    public class EntryBase : MonoBehaviour
     {
         public EntryBase(IntPtr obj0) : base(obj0) { }
 

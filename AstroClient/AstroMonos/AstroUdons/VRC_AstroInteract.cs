@@ -1,4 +1,6 @@
+using AstroClient.ClientActions;
 using AstroClient.Tools.UdonEditor;
+using UnityEngine;
 
 namespace AstroClient.AstroMonos.AstroUdons
 {
@@ -12,11 +14,37 @@ namespace AstroClient.AstroMonos.AstroUdons
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class VRC_AstroInteract : AstroMonoBehaviour
+    public class VRC_AstroInteract : MonoBehaviour
     {
 
         public VRC_AstroInteract(IntPtr ptr) : base(ptr)
         {
+        }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.Event_Udon_OnInteract += UdonBehaviour_Event_OnInteract;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.Event_Udon_OnInteract -= UdonBehaviour_Event_OnInteract;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
         }
 
 
@@ -26,11 +54,12 @@ namespace AstroClient.AstroMonos.AstroUdons
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if(UdonBehaviour != null)
             {
+                HasSubscribed = true;
                 UdonBehaviour._hasInteractiveEvents = true; // This way it activates the interact system in the behaviour
             }
         }
 
-        internal override void UdonBehaviour_Event_OnInteract(UdonBehaviour item)
+        private void UdonBehaviour_Event_OnInteract(UdonBehaviour item)
         {
             if (item.Equals(UdonBehaviour)) OnInteract.SafetyRaise();
 
@@ -38,6 +67,7 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         internal void OnDestroy()
         {
+            HasSubscribed = false;
             if (UdonBehaviour != null)
             {
                 Destroy(UdonBehaviour);
@@ -49,6 +79,7 @@ namespace AstroClient.AstroMonos.AstroUdons
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.enabled = false;
+                HasSubscribed = false;
             }
         }
 
@@ -57,6 +88,8 @@ namespace AstroClient.AstroMonos.AstroUdons
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.enabled = true;
+                HasSubscribed = true;
+
             }
         }
 

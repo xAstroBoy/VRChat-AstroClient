@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 {
     using System;
     using AstroMonos.Components.Tools.Listeners;
@@ -7,15 +9,18 @@
     using UnityEngine;
     using xAstroBoy.Utility;
 
-    internal class ListenerHandler : Tweaker_Events
+    internal class ListenerHandler : AstroEvents
     {
-        internal static event Action Event_OnSelectedObject_Enabled;
+        internal override void RegisterToEvents()
+        {
+            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
 
-        internal static event Action Event_OnSelectedObject_Disabled;
 
-        internal static event Action Event_OnSelectedObject_Destroyed;
+        }
+    
 
-        internal override void On_New_GameObject_Selected(GameObject obj)
+        private void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -25,30 +30,30 @@
                     // Set actions to fire events.
                     listener.OnEnabled += () =>
                     {
-                        Event_OnSelectedObject_Enabled.SafetyRaise();
+                        TweakerEventActions.Event_OnSelectedObject_Enabled.SafetyRaise();
                     };
                     listener.OnDisabled += () =>
                     {
-                        Event_OnSelectedObject_Disabled.SafetyRaise();
+                        TweakerEventActions.Event_OnSelectedObject_Disabled.SafetyRaise();
                     };
                     listener.OnDestroyed += () =>
                     {
-                        Event_OnSelectedObject_Destroyed.SafetyRaise();
+                        TweakerEventActions.Event_OnSelectedObject_Destroyed.SafetyRaise();
                     };
                     // Then call and update the SetActive
                     if (obj.active)
                     {
-                        Event_OnSelectedObject_Enabled.SafetyRaise();
+                        TweakerEventActions.Event_OnSelectedObject_Enabled.SafetyRaise();
                     }
                     else
                     {
-                        Event_OnSelectedObject_Disabled.SafetyRaise();
+                        TweakerEventActions.Event_OnSelectedObject_Disabled.SafetyRaise();
                     }
                 }
             }
         }
 
-        internal override void On_Old_GameObject_Removed(GameObject obj)
+        private void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

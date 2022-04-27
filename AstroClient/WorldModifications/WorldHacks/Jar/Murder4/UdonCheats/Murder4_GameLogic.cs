@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.UdonEditor;
+﻿using AstroClient.ClientActions;
+using AstroClient.Tools.UdonEditor;
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 {
@@ -11,6 +12,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 
     internal class Murder4_GameLogic : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+        }
+
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> Generated = new List<QMSingleButton>();
 
@@ -21,7 +28,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
         private static bool HasGenerated { get; set; } = false;
         private static bool isOpen { get; set; }
 
-        internal override void OnRoomLeft()
+        private void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
             {
@@ -107,7 +114,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
             Generated.Clear();
         }
 
-        internal override void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             OnCloseMenu();
         }
