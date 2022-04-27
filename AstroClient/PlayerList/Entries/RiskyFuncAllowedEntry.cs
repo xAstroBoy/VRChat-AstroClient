@@ -14,7 +14,8 @@ namespace AstroClient.PlayerList.Entries
 
         [HideFromIl2Cpp]
         public override string Name => "Risky Functions Allowed";
-        void Start()
+        [HideFromIl2Cpp]
+        public override void Init(object[] parameters = null)
         {
             ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
         }

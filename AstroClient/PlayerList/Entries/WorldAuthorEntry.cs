@@ -14,7 +14,8 @@ namespace AstroClient.PlayerList.Entries
 
         [HideFromIl2Cpp]
         public override string Name => "World Author";
-        void Start()
+        [HideFromIl2Cpp]
+        public override void Init(object[] parameters = null)
         {
             ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
         }

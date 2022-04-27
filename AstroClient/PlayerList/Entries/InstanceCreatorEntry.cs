@@ -13,20 +13,25 @@ namespace AstroClient.PlayerList.Entries
     [RegisterComponent]
     public class InstanceCreatorEntry : EntryBase
     {
-        public InstanceCreatorEntry(IntPtr obj0) : base(obj0) { }
+        public InstanceCreatorEntry(IntPtr obj0) : base(obj0)
+        {
+        }
 
         [HideFromIl2Cpp]
         public override string Name => "Instance Creator";
 
 
-        void Start()
-        {
-            ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
-        }
         private void OnEnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             MelonCoroutines.Start(GetInstanceCreator(instance));
         }
+
+        [HideFromIl2Cpp]
+        public override void Init(object[] parameters = null)
+        {
+            ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
+        }
+
         [HideFromIl2Cpp]
         public IEnumerator GetInstanceCreator(ApiWorldInstance instance)
         {

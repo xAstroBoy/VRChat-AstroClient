@@ -14,7 +14,9 @@ namespace AstroClient.PlayerList.Entries
 
         [HideFromIl2Cpp]
         public override string Name => "PlayerList Header";
-        void Start()
+		
+        [HideFromIl2Cpp]
+        public override void Init(object[] parameters = null)
         {
             ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
             ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;

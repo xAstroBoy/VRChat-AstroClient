@@ -28,17 +28,15 @@ namespace AstroClient.PlayerList.Entries
 
         public new delegate void UpdateEntryDelegate(Player player, LocalPlayerEntry entry, ref StringBuilder tempString);
         public static new UpdateEntryDelegate updateDelegate;
-        void Start()
+		
+
+        [HideFromIl2Cpp]
+        public override void Init(object[] parameters)
         {
             ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
             ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
             ClientEventActions.Event_OnShowSocialRankChanged += OnShowSocialRankChanged;
 
-        }
-
-        [HideFromIl2Cpp]
-        public override void Init(object[] parameters)
-        {
             isSelf = true;
             EntryManager.localPlayerEntry = this;
             player = Player.prop_Player_0;
