@@ -75,10 +75,10 @@ namespace AstroClient
             ClientEventActions.Event_OnUpdate?.SafetyRaise();
         }
 
-        public override void OnLateUpdate()
-        {
-            ClientEventActions.Event_LateUpdate?.SafetyRaise();
-        }
+        //public override void OnLateUpdate()
+        //{
+        //    ClientEventActions.Event_LateUpdate?.SafetyRaise();
+        //}
 
         private IEnumerator WaitForActionMenuInit()
         {

@@ -25,6 +25,7 @@ namespace AstroClient.ClientUI.Menu.ESP
 
             PlayerESPToggleBtn = new QMToggleButton(main, "Player ESP", () => { Toggle_Player_ESP = true; }, () => { Toggle_Player_ESP = false; }, "Toggles Player ESP");
             PlayerESPToggleBtn.SetToggleState(ConfigManager.ESP.PlayerESP);
+            HasSubscribed = ConfigManager.ESP.PlayerESP;
             ESPColorSelector.InitButtons(main);
         }
 
