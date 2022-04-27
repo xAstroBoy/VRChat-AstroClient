@@ -124,14 +124,20 @@ namespace AstroClient.Tools.UdonEditor
             StringBuilder Output = new StringBuilder();
             var worldname = WorldUtils.WorldName;
             var UdonBehaviours = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
-            string path = null;
+            string path = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Dumper");
+            if(!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string filename = null;
+
             if (IncludeSymbolsAndInternals)
             {
-                path = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Dumper\Udon_Dump_Internals_" + worldname + ".log");
+                filename = "Udon_Dump_Internals_" + worldname + ".log";
             }
             else
             {
-                path = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Dumper\Udon_Dump_" + worldname + ".log");
+                filename = "Udon_Dump_" + worldname + ".log";
             }
             Output.AppendLine($"Dumping all Udon Events in World : {worldname}");
             foreach(var udon in UdonBehaviours)
@@ -161,15 +167,13 @@ namespace AstroClient.Tools.UdonEditor
                         }
                     }
                 }
-                catch(Exception e)
-                {
-                    Log.Exception(e);
-                }
+                catch{}
                 Output.AppendLine();
             }
 
-            File.WriteAllText(path, Output.ToString());
-            Process.Start(path);
+            var fullpath = Path.Combine(path, filename);
+            File.WriteAllText(fullpath, Output.ToString()) ;
+            Process.Start(fullpath);
             if (IncludeSymbolsAndInternals)
             {
                 DumpUdonUnsupportedTypes();

@@ -24,21 +24,25 @@
         {
             get
             {
-                if (_ButtonToolTip == null)
+                if (ButtonObject != null)
                 {
-                    var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
-                    if (attempt1 == null)
+                    if (_ButtonToolTip == null)
                     {
-                        attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
+                        var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                        if (attempt1 == null)
+                        {
+                            attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
+                        }
+
+                        if (attempt1 != null)
+                        {
+                            return _ButtonToolTip = attempt1;
+                        }
                     }
 
-                    if (attempt1 != null)
-                    {
-                        return _ButtonToolTip = attempt1;
-                    }
+                    return _ButtonToolTip;
                 }
-
-                return _ButtonToolTip;
+                return null;
             }
         }
 
