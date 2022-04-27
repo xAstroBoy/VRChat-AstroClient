@@ -241,7 +241,6 @@
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection, true);
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
-                    ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
                     break;
 
                 //case "QA_MainMenu":
@@ -255,8 +254,6 @@
                     ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
-                    ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
-
                     break;
 
                 case "SelectedUser_Local":
@@ -265,7 +262,6 @@
                     ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
-                    ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
                     break;
 
                 default:
@@ -277,7 +273,6 @@
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
-                    ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
                     SetLocation(btnXLocation, btnYLocation);
                     break;
             }
@@ -287,6 +282,7 @@
             {
                 ButtonRect = ButtonObject.GetComponent<RectTransform>();
             }
+            ButtonRect.sizeDelta = QuickMenuTools.SingleButtonDefaultSize;
             SetButtonText(btnText);
             SetToolTip(btnToolTip);
             SetAction(btnAction);

@@ -10,7 +10,7 @@ namespace AstroClient.Cheetos
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.Delayed_Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
         }
         private void VRChat_OnUiManagerInit()
         {
