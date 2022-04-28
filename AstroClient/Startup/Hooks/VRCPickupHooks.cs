@@ -62,13 +62,16 @@ namespace AstroClient.Startup.Hooks
         private static void IsHeldListener(VRC_Pickup __instance, ref bool __result)
         {
             if (!EnableListener) return;
-            if (__instance == null)
+            try
             {
-                return;
+                if (__instance == null)
+                {
+                    return;
+                }
+                ClientEventActions.Event_Pickup_isHeld.SafetyRaiseWithParams(__instance, __result);
+
             }
-
-            ClientEventActions.Event_Pickup_isHeld.SafetyRaiseWithParams(__instance);
-
+            catch{}
         }
 
 
