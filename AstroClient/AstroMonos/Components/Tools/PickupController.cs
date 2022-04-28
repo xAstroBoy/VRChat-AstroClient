@@ -52,15 +52,15 @@ namespace AstroClient.AstroMonos.Components.Tools
             AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
-        private bool _HasSubscribed = false;
-        private bool HasSubscribed
+        private bool _EventsAreEnabled = false;
+        private bool EventsAreEnabled
         {
             [HideFromIl2Cpp]
-            get => _HasSubscribed;
+            get => _EventsAreEnabled;
             [HideFromIl2Cpp]
             set
             {
-                if(_HasSubscribed != value)
+                if(_EventsAreEnabled != value)
                 {
                     if(value)
                     {
@@ -71,8 +71,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                         ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
                         ClientEventActions.OnBigMenuOpen += OnBigMenuOpen;
                         ClientEventActions.OnBigMenuClose += OnBigMenuClose;
-                        ClientEventActions.OnInput_UseRight += OnInput_UseRight;
-                        ClientEventActions.OnInput_UseLeft += OnInput_UseLeft;
 
                     }
                     else
@@ -84,12 +82,40 @@ namespace AstroClient.AstroMonos.Components.Tools
                         ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
                         ClientEventActions.OnBigMenuOpen -= OnBigMenuOpen;
                         ClientEventActions.OnBigMenuClose -= OnBigMenuClose;
+
+                    }
+                }
+                _EventsAreEnabled = value;
+            }
+        }
+
+
+        private bool _EnableInputEvents = false;
+        private bool EnableInputEvents
+        {
+            [HideFromIl2Cpp]
+            get => _EnableInputEvents;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_EnableInputEvents != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.OnInput_UseRight += OnInput_UseRight;
+                        ClientEventActions.OnInput_UseLeft += OnInput_UseLeft;
+
+                    }
+                    else
+                    {
+
                         ClientEventActions.OnInput_UseRight -= OnInput_UseRight;
                         ClientEventActions.OnInput_UseLeft -= OnInput_UseLeft;
 
                     }
                 }
-                _HasSubscribed = value;
+                _EnableInputEvents = value;
             }
         }
 
@@ -102,7 +128,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
             SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
-            HasSubscribed = true;
+            EventsAreEnabled = true;
             SyncProperties(true);
             Log.Debug("Attacked Successfully PickupController to object " + gameObject.name);
             isUsingUI = false;
@@ -133,21 +159,37 @@ namespace AstroClient.AstroMonos.Components.Tools
         private  void OnQuickMenuClose()
         {
             isUsingUI = false;
+            if (AntiTheft)
+            {
+                EnableInputEvents = true;
+            }
         }
 
-        private  void OnQuickMenuOpen()
+        private void OnQuickMenuOpen()
         {
             isUsingUI = true;
+            if (AntiTheft)
+            {
+                EnableInputEvents = false;
+            }
         }
 
-        private  void OnBigMenuOpen()
+        private void OnBigMenuOpen()
         {
             isUsingUI = true;
+            if (AntiTheft)
+            {
+                EnableInputEvents = false;
+            }
         }
 
         private  void OnBigMenuClose()
         {
             isUsingUI = false;
+            if (AntiTheft)
+            {
+                EnableInputEvents = true;
+            }
         }
 
 
@@ -291,6 +333,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             set
             {
                 _AntiTheft = value;
+                EnableInputEvents = value;
                 if (!value)
                 {
                     DisallowTheft = Original_DisallowTheft;
@@ -480,7 +523,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         }
         void OnDestroy()
         {
-            HasSubscribed = false;
+            EventsAreEnabled = false;
         }
 
         internal void RestoreProperties()

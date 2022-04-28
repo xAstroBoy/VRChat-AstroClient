@@ -301,17 +301,60 @@ namespace AstroClient.ClientActions
 
         internal static Action<string> OnUnityError { get; set; }
 
+        /// <summary>
+        /// This is VRChat Big menu ?.
+        /// <para>Params : VRCUiPage page</para>
+        /// </summary>
+
         internal static Action<VRCUiPage> OnShowScreen { get; set; }
 
+        /// <summary>
+        /// This is when a Photon Player joins (it will trigger before OnPlayerJoin)
+        /// <para>Params : Photon.Realtime.Player player</para>
+        /// </summary>
+
         internal static Action<Photon.Realtime.Player> OnPhotonPlayerJoined { get; set; }
+
+        /// <summary>
+        /// This is when a Photon Player leave (it will trigger before OnPlayerLeft)
+        /// <para>Params : Photon.Realtime.Player player</para>
+        /// </summary>
+
         internal static Action<Photon.Realtime.Player> OnPhotonPlayerLeft { get; set; }
+        /// <summary>
+        /// This is when a Photon reassigns a new Instance Master 
+        /// <para>Params : Photon.Realtime.Player player</para>
+        /// </summary>
         internal static Action<Photon.Realtime.Player> OnMasterClientSwitched { get; set; }
 
+        /// <summary>
+        /// This is when you leave a room.
+        /// </summary>
+
         internal static Action OnRoomLeft { get; set; }
+
+        /// <summary>
+        /// This is when you join a new room 
+        /// </summary>
+
         internal static Action OnRoomJoined { get; set; }
+        /// <summary>
+        /// This is when a User friends you 
+        /// <para>Params : ApiUser player</para>
+        /// </summary>
 
         internal static Action<APIUser> OnFriended { get; set; }
+
+        /// <summary>
+        /// This is when a User unfriends you 
+        /// <para>Params : string  UserID </para>
+        /// </summary>
+
         internal static Action<string> OnUnfriended { get; set; }
+        /// <summary>
+        /// This is when you enter a world 
+        /// <para>Params : ApiWorld world, ApiWorldInstance instance </para>
+        /// </summary>
 
         internal static Action<ApiWorld, ApiWorldInstance> OnEnterWorld { get; set; }
 
