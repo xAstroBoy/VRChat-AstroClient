@@ -29,7 +29,7 @@ namespace AstroClient.Tools.Keypads
             // Give time for the component to get the passcode, if it fails after 5s , destroy it
             MiscUtils.DelayFunction(5f, () =>
             {
-                ClientEventActions.Event_Keypad_DestroyFailedFinds.SafetyRaise();
+                ClientEventActions.Keypad_DestroyFailedFinds.SafetyRaise();
             });
         }
         internal static string[] PasswordsVariables { get; } =

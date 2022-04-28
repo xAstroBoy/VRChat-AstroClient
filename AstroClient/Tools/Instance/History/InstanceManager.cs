@@ -15,8 +15,8 @@ namespace AstroClient.Tools.Instance.History
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
-            ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
+            ClientEventActions.OnApplicationStart += OnApplicationStart;
+            ClientEventActions.OnEnterWorld += OnEnterWorld;
 
         }
 

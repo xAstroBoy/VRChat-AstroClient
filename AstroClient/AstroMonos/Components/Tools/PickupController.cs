@@ -65,27 +65,27 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if(value)
                     {
 
-                        ClientEventActions.Event_Pickup_isHeld += Pickup_IsHeld;
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
-                        ClientEventActions.Event_OnQuickMenuOpen += OnQuickMenuOpen;
-                        ClientEventActions.Event_OnBigMenuOpen += OnBigMenuOpen;
-                        ClientEventActions.Event_OnBigMenuClose += OnBigMenuClose;
-                        ClientEventActions.Event_OnInput_UseRight += OnInput_UseRight;
-                        ClientEventActions.Event_OnInput_UseLeft += OnInput_UseLeft;
+                        ClientEventActions.Pickup_isHeld += Pickup_IsHeld;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+                        ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
+                        ClientEventActions.OnBigMenuOpen += OnBigMenuOpen;
+                        ClientEventActions.OnBigMenuClose += OnBigMenuClose;
+                        ClientEventActions.OnInput_UseRight += OnInput_UseRight;
+                        ClientEventActions.OnInput_UseLeft += OnInput_UseLeft;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_Pickup_isHeld -= Pickup_IsHeld;
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnQuickMenuClose -= OnQuickMenuClose;
-                        ClientEventActions.Event_OnQuickMenuOpen -= OnQuickMenuOpen;
-                        ClientEventActions.Event_OnBigMenuOpen -= OnBigMenuOpen;
-                        ClientEventActions.Event_OnBigMenuClose -= OnBigMenuClose;
-                        ClientEventActions.Event_OnInput_UseRight -= OnInput_UseRight;
-                        ClientEventActions.Event_OnInput_UseLeft -= OnInput_UseLeft;
+                        ClientEventActions.Pickup_isHeld -= Pickup_IsHeld;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnQuickMenuClose -= OnQuickMenuClose;
+                        ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
+                        ClientEventActions.OnBigMenuOpen -= OnBigMenuOpen;
+                        ClientEventActions.OnBigMenuClose -= OnBigMenuClose;
+                        ClientEventActions.OnInput_UseRight -= OnInput_UseRight;
+                        ClientEventActions.OnInput_UseLeft -= OnInput_UseLeft;
 
                     }
                 }

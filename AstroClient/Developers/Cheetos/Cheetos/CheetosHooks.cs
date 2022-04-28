@@ -117,7 +117,7 @@ namespace AstroClient.Cheetos
             {
                 return;
             }
-            ClientEventActions.Event_OnAvatarInstantiated.SafetyRaiseWithParams(manager, apiAvatar, avatar);
+            ClientEventActions.OnAvatarInstantiated.SafetyRaiseWithParams(manager, apiAvatar, avatar);
         }
 
 
@@ -137,28 +137,28 @@ namespace AstroClient.Cheetos
             {
                 return;
             }
-            ClientEventActions.Event_OnSetupFlagsReceived.SafetyRaiseWithParams(__instance, __0);
+            ClientEventActions.OnSetupFlagsReceived.SafetyRaiseWithParams(__instance, __0);
 
         }
 
 
         private static void Internal_OnShowSocialRankChanged()
         {
-            ClientEventActions.Event_OnShowSocialRankChanged.SafetyRaise();
+            ClientEventActions.OnShowSocialRankChanged.SafetyRaise();
         }
 
-        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => ClientEventActions.Event_OnEnterWorld.SafetyRaiseWithParams(__0, __1);
+        private static void OnEnterWorldEvent(ApiWorld __0, ApiWorldInstance __1) => ClientEventActions.OnEnterWorld.SafetyRaiseWithParams(__0, __1);
 
-        private static void OnMasterClientSwitchedPatch(Player __0) => ClientEventActions.Event_OnMasterClientSwitched?.SafetyRaiseWithParams(__0);
+        private static void OnMasterClientSwitchedPatch(Player __0) => ClientEventActions.OnMasterClientSwitched?.SafetyRaiseWithParams(__0);
 
-        private static void OnFriended(ref APIUser __0) => ClientEventActions.Event_OnFriended?.SafetyRaiseWithParams(__0);
+        private static void OnFriended(ref APIUser __0) => ClientEventActions.OnFriended?.SafetyRaiseWithParams(__0);
 
-        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => ClientEventActions.Event_OnUnfriended?.SafetyRaiseWithParams(__0);
+        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => ClientEventActions.OnUnfriended?.SafetyRaiseWithParams(__0);
 
 
-        private static void OnRoomLeftPatch() => ClientEventActions.Event_OnRoomLeft?.SafetyRaise();
+        private static void OnRoomLeftPatch() => ClientEventActions.OnRoomLeft?.SafetyRaise();
 
-        private static void OnRoomJoinedPatch() => ClientEventActions.Event_OnRoomJoined?.SafetyRaise();
+        private static void OnRoomJoinedPatch() => ClientEventActions.OnRoomJoined?.SafetyRaise();
 
         private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
         {
@@ -203,7 +203,7 @@ namespace AstroClient.Cheetos
         {
             if (__0 != null)
             {
-                ClientEventActions.Event_OnShowScreen?.SafetyRaiseWithParams(__0);
+                ClientEventActions.OnShowScreen?.SafetyRaiseWithParams(__0);
             }
 
             return true;
@@ -276,7 +276,7 @@ namespace AstroClient.Cheetos
 
         private static void Internal_OnAvatarDownloadProgress(AvatarLoadingBar __instance, float __0, long __1)
         {
-            ClientEventActions.Event_OnAvatarDownloadProgress.SafetyRaiseWithParams(__instance, __0, __1);
+            ClientEventActions.OnAvatarDownloadProgress.SafetyRaiseWithParams(__instance, __0, __1);
         }
 
         //private static bool OnAvatarDownload(ref ApiAvatar __0)
@@ -317,12 +317,12 @@ namespace AstroClient.Cheetos
 
         private static void OnPhotonPlayerJoin(ref Player __0)
         {
-            ClientEventActions.Event_OnPhotonPlayerJoined?.SafetyRaiseWithParams(__0);
+            ClientEventActions.OnPhotonPlayerJoined?.SafetyRaiseWithParams(__0);
         }
 
         private static void OnPhotonPlayerLeft(ref Player __0)
         {
-            ClientEventActions.Event_OnPhotonPlayerLeft.SafetyRaiseWithParams(__0);
+            ClientEventActions.OnPhotonPlayerLeft.SafetyRaiseWithParams(__0);
         }
     }
 }

@@ -19,13 +19,13 @@ namespace AstroClient.Cheetos
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
 
-            ClientEventActions.Event_VRChat_OnQuickMenuInit += VRChat_OnQuickMenuInit;
+            ClientEventActions.VRChat_OnQuickMenuInit += VRChat_OnQuickMenuInit;
 
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
 
-            ClientEventActions.Event_OnShowScreen += OnShowScreen;
+            ClientEventActions.OnShowScreen += OnShowScreen;
 
         }
 

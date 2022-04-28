@@ -24,7 +24,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
         private bool _HasSubscribed = false;
@@ -38,13 +38,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
 
                     }
                 }

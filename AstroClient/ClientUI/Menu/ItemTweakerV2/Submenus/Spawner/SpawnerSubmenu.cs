@@ -16,7 +16,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Spawner
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
 
         }
         internal static void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)

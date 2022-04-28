@@ -18,7 +18,7 @@ namespace AstroClient.ModsDetector
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnPatchShieldRemoved += OnPatchShieldRemoved;
+            ClientEventActions.OnPatchShieldRemoved += OnPatchShieldRemoved;
         }
 
         private static BindingFlags SelectedFlags => BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static;

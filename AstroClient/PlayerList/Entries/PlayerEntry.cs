@@ -85,21 +85,21 @@ namespace AstroClient.PlayerList.Entries
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnSetupFlagsReceived += OnSetupFlagsReceived;
-                        ClientEventActions.Event_OnQuickMenuOpen += OnQuickMenuOpen;
-                        ClientEventActions.Event_OnFriended += OnFriended;
-                        ClientEventActions.Event_OnUnfriended += OnUnfriended;
-                        ClientEventActions.Event_OnOwnerShipTranferred += OnOwnerShipTransferred;
+                        ClientEventActions.OnSetupFlagsReceived += OnSetupFlagsReceived;
+                        ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
+                        ClientEventActions.OnFriended += OnFriended;
+                        ClientEventActions.OnUnfriended += OnUnfriended;
+                        ClientEventActions.OnOwnerShipTranferred += OnOwnerShipTransferred;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnSetupFlagsReceived -= OnSetupFlagsReceived;
-                        ClientEventActions.Event_OnQuickMenuOpen -= OnQuickMenuOpen;
-                        ClientEventActions.Event_OnFriended -= OnFriended;
-                        ClientEventActions.Event_OnUnfriended -= OnUnfriended;
-                        ClientEventActions.Event_OnOwnerShipTranferred -= OnOwnerShipTransferred;
+                        ClientEventActions.OnSetupFlagsReceived -= OnSetupFlagsReceived;
+                        ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
+                        ClientEventActions.OnFriended -= OnFriended;
+                        ClientEventActions.OnUnfriended -= OnUnfriended;
+                        ClientEventActions.OnOwnerShipTranferred -= OnOwnerShipTransferred;
 
                     }
                 }

@@ -37,7 +37,7 @@ namespace AstroClient.Startup.Hooks
 
         private static void OnOwnerShipTransferredEvent(PhotonView __instance, int __0)
         {
-            ClientEventActions.Event_OnOwnerShipTranferred.SafetyRaiseWithParams(__instance, __0);
+            ClientEventActions.OnOwnerShipTranferred.SafetyRaiseWithParams(__instance, __0);
         }
 
     }

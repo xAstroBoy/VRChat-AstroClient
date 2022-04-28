@@ -20,8 +20,8 @@ namespace AstroClient.Startup.Patches
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomJoined += OnRoomJoined;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
 
         }
 
@@ -79,34 +79,34 @@ namespace AstroClient.Startup.Patches
             {
                 case InputTypes.Jump:
                     {
-                        ClientEventActions.Event_OnInput_Jump.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.OnInput_Jump.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
                 case InputTypes.UseLeft:
                     {
-                        ClientEventActions.Event_OnInput_UseLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.OnInput_UseLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.UseRight:
                     {
-                        ClientEventActions.Event_OnInput_UseRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.OnInput_UseRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.GrabLeft:
                     {
-                        ClientEventActions.Event_OnInput_GrabLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.OnInput_GrabLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
                 case InputTypes.GrabRight:
                     {
-                        ClientEventActions.Event_OnInput_GrabRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
+                        ClientEventActions.OnInput_GrabRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }

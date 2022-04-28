@@ -482,15 +482,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnPlayerLeft += OnPlayerLeft;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerLeft -= OnPlayerLeft;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnPlayerLeft -= OnPlayerLeft;
 
                     }
                 }

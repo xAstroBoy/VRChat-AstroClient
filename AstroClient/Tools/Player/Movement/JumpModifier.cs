@@ -14,8 +14,8 @@ namespace AstroClient.Tools.Player.Movement
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnInput_Jump += OnInput_Jump;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnInput_Jump += OnInput_Jump;
 
         }
 

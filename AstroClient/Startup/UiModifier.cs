@@ -12,7 +12,7 @@ namespace AstroClient.Startup
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_VRChat_OnQuickMenuInit += VRChat_OnQuickMenuInit;
+            ClientEventActions.VRChat_OnQuickMenuInit += VRChat_OnQuickMenuInit;
         }
 
         private void VRChat_OnQuickMenuInit()

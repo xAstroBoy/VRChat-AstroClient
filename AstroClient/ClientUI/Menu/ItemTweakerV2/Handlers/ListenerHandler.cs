@@ -13,8 +13,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.On_Old_GameObject_Removed += On_Old_GameObject_Removed;
 
 
         }
@@ -30,24 +30,24 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                     // Set actions to fire events.
                     listener.OnEnabled += () =>
                     {
-                        TweakerEventActions.Event_OnSelectedObject_Enabled.SafetyRaise();
+                        TweakerEventActions.OnSelectedObject_Enabled.SafetyRaise();
                     };
                     listener.OnDisabled += () =>
                     {
-                        TweakerEventActions.Event_OnSelectedObject_Disabled.SafetyRaise();
+                        TweakerEventActions.OnSelectedObject_Disabled.SafetyRaise();
                     };
                     listener.OnDestroyed += () =>
                     {
-                        TweakerEventActions.Event_OnSelectedObject_Destroyed.SafetyRaise();
+                        TweakerEventActions.OnSelectedObject_Destroyed.SafetyRaise();
                     };
                     // Then call and update the SetActive
                     if (obj.active)
                     {
-                        TweakerEventActions.Event_OnSelectedObject_Enabled.SafetyRaise();
+                        TweakerEventActions.OnSelectedObject_Enabled.SafetyRaise();
                     }
                     else
                     {
-                        TweakerEventActions.Event_OnSelectedObject_Disabled.SafetyRaise();
+                        TweakerEventActions.OnSelectedObject_Disabled.SafetyRaise();
                     }
                 }
             }

@@ -20,8 +20,8 @@ namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
         // TODO : Rewrite this Light Control Class (Borked ATM).

@@ -34,7 +34,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 var obj = gameObject.FindUdonEvent("_ConfirmAllPartsPlaced");
                 if (obj != null)
                 {
-                    ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                    ClientEventActions.OnRoomLeft += OnRoomLeft;
                     LevelController = obj.UdonBehaviour.ToRawUdonBehaviour();
                 }
                 else
@@ -51,7 +51,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
 
         void OnDestroy()
         {
-            ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+            ClientEventActions.OnRoomLeft -= OnRoomLeft;
         }
         internal string PolyCounter1
         {

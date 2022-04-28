@@ -15,7 +15,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Rocket
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_OnRocketBehaviourPropertyChanged += OnRocketBehaviour_OnPropertyChanged;
+            TweakerEventActions.OnRocketBehaviourPropertyChanged += OnRocketBehaviour_OnPropertyChanged;
         }
         internal static void Init_RocketComponentSubMenu(QMNestedGridMenu menu)
         {

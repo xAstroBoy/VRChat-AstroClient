@@ -18,7 +18,7 @@ namespace AstroClient.ClientUI.Menu.ESP
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         internal static void InitButtons(QMGridTab menu)

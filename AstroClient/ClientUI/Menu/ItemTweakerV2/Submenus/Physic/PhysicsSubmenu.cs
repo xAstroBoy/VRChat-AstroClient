@@ -15,11 +15,11 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Physic
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            TweakerEventActions.Event_OnRigidBodyControllerSelected += OnRigidBodyController_Selected;
-            TweakerEventActions.Event_OnRigidBodyController_OnUpdate += OnRigidBodyController_OnUpdate;
-            TweakerEventActions.Event_OnRigidBodyControllerPropertyChanged += OnRigidBodyController_PropertyChanged;
-            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            TweakerEventActions.OnRigidBodyControllerSelected += OnRigidBodyController_Selected;
+            TweakerEventActions.OnRigidBodyController_OnUpdate += OnRigidBodyController_OnUpdate;
+            TweakerEventActions.OnRigidBodyControllerPropertyChanged += OnRigidBodyController_PropertyChanged;
+            TweakerEventActions.OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
 
         }
         internal static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)

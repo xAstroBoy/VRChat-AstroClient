@@ -10,7 +10,7 @@ namespace AstroClient.Cheetos.CameraStuff
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
         internal static void Set_Camera_FOV(float v)

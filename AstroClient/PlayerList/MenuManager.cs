@@ -23,11 +23,11 @@ namespace AstroClient.PlayerList
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Delayed_Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
-            ClientEventActions.Event_OnQuickMenuOpen += OnQuickMenuClose;
+            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.OnQuickMenuOpen += OnQuickMenuClose;
 
-            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
         }
         //public static List<SubMenu> playerListMenus { get; set; } = new List<SubMenu>();
 

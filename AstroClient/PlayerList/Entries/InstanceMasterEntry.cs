@@ -20,8 +20,8 @@ namespace AstroClient.PlayerList.Entries
         [HideFromIl2Cpp]
         public override void Init(object[] parameters = null)
         {
-            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
-            ClientEventActions.Event_OnMasterClientSwitched += OnMasterClientSwitched;
+            ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.OnMasterClientSwitched += OnMasterClientSwitched;
         }
 
         private void OnPlayerJoined(VRC.Player player)

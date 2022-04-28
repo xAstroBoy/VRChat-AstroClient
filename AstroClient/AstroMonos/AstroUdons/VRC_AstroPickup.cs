@@ -36,19 +36,19 @@ namespace AstroClient.AstroMonos.AstroUdons
                     if (value)
                     {
 
-                        ClientEventActions.Event_Udon_OnPickup += UdonBehaviour_Event_OnPickup;
-                        ClientEventActions.Event_Udon_OnPickupUseUp += UdonBehaviour_Event_OnPickupUseUp;
-                        ClientEventActions.Event_Udon_OnPickupUseDown += UdonBehaviour_Event_OnPickupUseDown;
-                        ClientEventActions.Event_Udon_OnDrop += UdonBehaviour_Event_OnDrop;
+                        ClientEventActions.Udon_OnPickup += UdonBehaviour_Event_OnPickup;
+                        ClientEventActions.Udon_OnPickupUseUp += UdonBehaviour_Event_OnPickupUseUp;
+                        ClientEventActions.Udon_OnPickupUseDown += UdonBehaviour_Event_OnPickupUseDown;
+                        ClientEventActions.Udon_OnDrop += UdonBehaviour_Event_OnDrop;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_Udon_OnPickup -= UdonBehaviour_Event_OnPickup;
-                        ClientEventActions.Event_Udon_OnPickupUseUp -= UdonBehaviour_Event_OnPickupUseUp;
-                        ClientEventActions.Event_Udon_OnPickupUseDown -= UdonBehaviour_Event_OnPickupUseDown;
-                        ClientEventActions.Event_Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
+                        ClientEventActions.Udon_OnPickup -= UdonBehaviour_Event_OnPickup;
+                        ClientEventActions.Udon_OnPickupUseUp -= UdonBehaviour_Event_OnPickupUseUp;
+                        ClientEventActions.Udon_OnPickupUseDown -= UdonBehaviour_Event_OnPickupUseDown;
+                        ClientEventActions.Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
 
                     }
                 }

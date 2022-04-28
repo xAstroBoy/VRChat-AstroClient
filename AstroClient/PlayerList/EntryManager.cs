@@ -48,17 +48,63 @@ namespace AstroClient.PlayerList
 
         public static Dictionary<string, deferredAvInstantiate> AvInstBacklog = new Dictionary<string, deferredAvInstantiate>();
 
+        private static bool _NeedUpdateEvent = false;
+        private static bool NeedUpdateEvent
+        {
+            get => _NeedUpdateEvent;
+            set
+            {
+                if(_NeedUpdateEvent != value)
+                {
+                    if(value)
+                    {
+                        ClientEventActions.OnUpdate += OnUpdate;
+                    }
+                    else
+                    {
+                        ClientEventActions.OnUpdate -= OnUpdate;
+                    }
+                }
+                _NeedUpdateEvent = value;
+            }
+        }
+
+        internal static void OnQuickMenuOpen()
+        {
+            NeedUpdateEvent = true;
+        }
+        internal static void OnQuickMenuClose()
+        {
+            NeedUpdateEvent = false;
+        }
+        internal static void OnBigMenuOpen()
+        {
+            NeedUpdateEvent = false;
+        }
+        internal static void OnBigMenuClose()
+        {
+            NeedUpdateEvent = false;
+        }
+
+
         public static void Init()
         {
             PlayerListConfig.fontSize.OnValueChanged += (oldValue, newValue) => SetFontSize(newValue);
             ConfigEventActions.OnPlayerListConfigChanged += OnConfigChanged;
-            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
-            ClientEventActions.Event_OnUpdate += OnUpdate;
-            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
-            ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
-            ClientEventActions.Event_OnAvatarInstantiated += OnAvatarInstantiated;
-            ClientEventActions.Event_OnAvatarDownloadProgress += OnavatarDownloadProgress;
-            ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+            ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.OnSceneLoaded += OnSceneLoaded;
+            ClientEventActions.OnEnterWorld += OnEnterWorld;
+            ClientEventActions.OnAvatarInstantiated += OnAvatarInstantiated;
+            ClientEventActions.OnAvatarDownloadProgress += OnavatarDownloadProgress;
+            ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+
+            // this will handle OnUpdate Subscription .
+            ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
+            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnBigMenuOpen += OnBigMenuOpen;
+            ClientEventActions.OnBigMenuClose += OnBigMenuClose;
+
+
             MelonCoroutines.Start(EntryRefreshEnumerator());
         }
 

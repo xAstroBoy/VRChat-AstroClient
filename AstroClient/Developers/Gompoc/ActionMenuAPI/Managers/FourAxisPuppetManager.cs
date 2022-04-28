@@ -12,8 +12,8 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnUpdate += OnUpdate; 
-            ClientEventActions.Event_VRChat_OnActionMenuInit += VRChat_OnActionMenuInit;
+            ClientEventActions.OnUpdate += OnUpdate; 
+            ClientEventActions.VRChat_OnActionMenuInit += VRChat_OnActionMenuInit;
 
         }
 

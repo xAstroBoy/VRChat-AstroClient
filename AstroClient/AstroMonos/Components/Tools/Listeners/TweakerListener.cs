@@ -60,13 +60,13 @@ namespace AstroClient.AstroMonos.Components.Tools.Listeners
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
 
                     }
                 }

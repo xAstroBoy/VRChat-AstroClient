@@ -10,9 +10,9 @@ namespace AstroClient.Startup
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnUnityLog += OnUnityLog;
-            ClientEventActions.Event_OnUnityWarning += OnUnityWarning;
-            ClientEventActions.Event_OnUnityError += OnUnityError;
+            ClientEventActions.OnUnityLog += OnUnityLog;
+            ClientEventActions.OnUnityWarning += OnUnityWarning;
+            ClientEventActions.OnUnityError += OnUnityError;
 
         }
 

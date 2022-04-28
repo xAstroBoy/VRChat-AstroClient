@@ -147,13 +147,13 @@ namespace AstroClient.AstroMonos.Components.ESP
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
 
                     }
                 }

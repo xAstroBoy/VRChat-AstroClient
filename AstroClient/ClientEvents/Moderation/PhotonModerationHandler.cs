@@ -20,8 +20,8 @@ namespace AstroClient.Moderation
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnPhotonPlayerLeft += OnPhotonPlayerLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnPhotonPlayerLeft += OnPhotonPlayerLeft;
         }
 
         private static void RegisterPlayer(string id)
@@ -52,7 +52,7 @@ namespace AstroClient.Moderation
                     if (!PlayerModerations[photonuserid].Blocked)
                     {
                         PlayerModerations[photonuserid].Blocked = true;
-                        ClientEventActions.Event_OnPlayerBlockedYou?.SafetyRaiseWithParams(player);
+                        ClientEventActions.OnPlayerBlockedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -69,7 +69,7 @@ namespace AstroClient.Moderation
                     if (PlayerModerations[photonuserid].Blocked)
                     {
                         PlayerModerations[photonuserid].Blocked = false;
-                        ClientEventActions.Event_OnPlayerUnblockedYou?.SafetyRaiseWithParams(player);
+                        ClientEventActions.OnPlayerUnblockedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -86,7 +86,7 @@ namespace AstroClient.Moderation
                     if (!PlayerModerations[photonuserid].Muted)
                     {
                         PlayerModerations[photonuserid].Muted = true;
-                        ClientEventActions.Event_OnPlayerMutedYou?.SafetyRaiseWithParams(player);
+                        ClientEventActions.OnPlayerMutedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }
@@ -103,7 +103,7 @@ namespace AstroClient.Moderation
                     if (PlayerModerations[photonuserid].Muted)
                     {
                         PlayerModerations[photonuserid].Muted= false;
-                        ClientEventActions.Event_OnPlayerUnmutedYou?.SafetyRaiseWithParams(player);
+                        ClientEventActions.OnPlayerUnmutedYou?.SafetyRaiseWithParams(player);
                     }
                 }
             }

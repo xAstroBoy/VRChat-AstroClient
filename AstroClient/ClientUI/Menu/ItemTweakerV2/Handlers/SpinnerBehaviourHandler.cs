@@ -12,15 +12,15 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
-            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+            TweakerEventActions.OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
         }
          
 
         private void OnSelectedObject_Destroyed()
         {
-            TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(null) ; // Dunno if it works.
+            TweakerEventActions.OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(null) ; // Dunno if it works.
 
             instance = null;
         }
@@ -39,7 +39,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                             instance = newinstance;
                             newinstance.SetOnSpinnerPropertyChanged(() =>
                             {
-                                TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -52,7 +52,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                     instance = newinstance;
                     newinstance.SetOnSpinnerPropertyChanged(() =>
                     {
-                        TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -71,7 +71,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                     instance = SpinnerBehaviour; 
                     SpinnerBehaviour.SetOnSpinnerPropertyChanged(() =>
                     {
-                        TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(SpinnerBehaviour); // Dunno if it works.
+                        TweakerEventActions.OnSpinnerBehaviourPropertyChanged.SafetyRaiseWithParams(SpinnerBehaviour); // Dunno if it works.
                     });
                 }
             }

@@ -24,11 +24,11 @@ namespace AstroClient.Cheetos
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnMasterClientSwitched += OnMasterClientSwitched;
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnMasterClientSwitched += OnMasterClientSwitched;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
 
-            ClientEventActions.Event_OnRoomLeft += OnRoomJoined;
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomJoined;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         private static bool DoOnce;

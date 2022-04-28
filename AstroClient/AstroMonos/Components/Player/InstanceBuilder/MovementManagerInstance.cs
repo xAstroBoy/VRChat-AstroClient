@@ -17,8 +17,8 @@ namespace AstroClient.AstroMonos.Components.Player.InstanceBuilder
 
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
-            ClientEventActions.Delayed_Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.OnRoomJoined += OnRoomJoined;
+            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
         }
 
 

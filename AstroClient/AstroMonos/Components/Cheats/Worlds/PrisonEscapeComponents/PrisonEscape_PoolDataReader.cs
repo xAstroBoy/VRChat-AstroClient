@@ -44,13 +44,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
 
                     }
                 }

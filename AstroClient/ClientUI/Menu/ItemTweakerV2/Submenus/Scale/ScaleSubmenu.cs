@@ -15,9 +15,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Scale
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            TweakerEventActions.Event_OnInflaterBehaviourUpdate += OnInflaterBehaviour_OnUpdate;
-            TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged += OnInflaterBehaviour_PropertyChanged;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            TweakerEventActions.OnInflaterBehaviourUpdate += OnInflaterBehaviour_OnUpdate;
+            TweakerEventActions.OnInflaterBehaviourPropertyChanged += OnInflaterBehaviour_PropertyChanged;
 
         }
         internal static void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)

@@ -19,9 +19,9 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
-            ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.OnPlayerLeft += OnPlayerLeft;
 
         }
 

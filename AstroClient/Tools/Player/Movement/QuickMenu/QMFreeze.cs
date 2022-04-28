@@ -14,11 +14,11 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnQuickMenuOpen += OnQuickMenuOpen;
-            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
-            //ClientEventActions.Event_OnInput_Jump += OnInput_Jump;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
+            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
+            //ClientEventActions.OnInput_Jump += OnInput_Jump;
 
         }
 

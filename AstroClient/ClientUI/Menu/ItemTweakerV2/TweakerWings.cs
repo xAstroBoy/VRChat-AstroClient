@@ -20,9 +20,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_OnPickupController_OnUpdate += OnPickupController_OnUpdate;
-            ClientEventActions.Event_OnTargetSet += OnTargetSet;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.OnPickupController_OnUpdate += OnPickupController_OnUpdate;
+            ClientEventActions.OnTargetSet += OnTargetSet;
         }
         private static QMWingSingleButton Pickup_IsHeldStatus;
         private static QMWingSingleButton Pickup_CurrentObjectHolder;

@@ -12,32 +12,32 @@ namespace AstroClient.ClientActions
 
     internal static class TweakerEventActions
     {
-        internal static Action<GameObject> Event_On_New_GameObject_Selected { get; set; }
+        internal static Action<GameObject> On_New_GameObject_Selected { get; set; }
 
-        internal static Action<GameObject> Event_On_Old_GameObject_Removed { get; set; }
+        internal static Action<GameObject> On_Old_GameObject_Removed { get; set; }
 
-        internal static Action<RocketBehaviour> Event_OnRocketBehaviourPropertyChanged { get; set; }
+        internal static Action<RocketBehaviour> OnRocketBehaviourPropertyChanged { get; set; }
 
-        internal static Action<CrazyBehaviour> Event_OnCrazyBehaviourPropertyChanged { get; set; }
+        internal static Action<CrazyBehaviour> OnCrazyBehaviourPropertyChanged { get; set; }
 
-        internal static Action<InflaterBehaviour> Event_OnInflaterBehaviourPropertyChanged { get; set; }
-        internal static Action<InflaterBehaviour> Event_OnInflaterBehaviourUpdate { get; set; }
+        internal static Action<InflaterBehaviour> OnInflaterBehaviourPropertyChanged { get; set; }
+        internal static Action<InflaterBehaviour> OnInflaterBehaviourUpdate { get; set; }
 
-        internal static Action<PickupController> Event_OnPickupControllerSelected { get; set; }
-        internal static Action<PickupController> Event_OnPickupControllerPropertyChanged { get; set; }
-        internal static Action<PickupController> Event_OnPickupController_OnUpdate { get; set; }
-
-
-        internal static Action<SpinnerBehaviour> Event_OnSpinnerBehaviourPropertyChanged { get; set; }
+        internal static Action<PickupController> OnPickupControllerSelected { get; set; }
+        internal static Action<PickupController> OnPickupControllerPropertyChanged { get; set; }
+        internal static Action<PickupController> OnPickupController_OnUpdate { get; set; }
 
 
+        internal static Action<SpinnerBehaviour> OnSpinnerBehaviourPropertyChanged { get; set; }
 
-        internal static Action Event_OnSelectedObject_Enabled { get; set; }
-        internal static Action Event_OnSelectedObject_Disabled { get; set; }
-        internal static Action Event_OnSelectedObject_Destroyed { get; set; }
 
-        internal static Action<RigidBodyController> Event_OnRigidBodyControllerSelected { get; set; }
-        internal static Action<RigidBodyController> Event_OnRigidBodyControllerPropertyChanged { get; set; }
-        internal static Action<RigidBodyController> Event_OnRigidBodyController_OnUpdate { get; set; }
+
+        internal static Action OnSelectedObject_Enabled { get; set; }
+        internal static Action OnSelectedObject_Disabled { get; set; }
+        internal static Action OnSelectedObject_Destroyed { get; set; }
+
+        internal static Action<RigidBodyController> OnRigidBodyControllerSelected { get; set; }
+        internal static Action<RigidBodyController> OnRigidBodyControllerPropertyChanged { get; set; }
+        internal static Action<RigidBodyController> OnRigidBodyController_OnUpdate { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace AstroClient.Spawnables.Flashlight
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         private void OnRoomLeft()

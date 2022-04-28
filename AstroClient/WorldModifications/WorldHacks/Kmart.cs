@@ -16,7 +16,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
 
@@ -32,15 +32,15 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnPlayerJoin += OnPlayerJoined;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
 
                     }
                 }

@@ -29,23 +29,23 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
-                        ClientEventActions.Event_OnPlayerBlockedYou += OnPlayerBlockedYou;
-                        ClientEventActions.Event_OnPlayerUnblockedYou += OnPlayerUnblockedYou;
-                        ClientEventActions.Event_OnPlayerMutedYou += OnPlayerMutedYou;
-                        ClientEventActions.Event_OnPlayerUnmutedYou += OnPlayerUnmutedYou;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+                        ClientEventActions.OnPlayerBlockedYou += OnPlayerBlockedYou;
+                        ClientEventActions.OnPlayerUnblockedYou += OnPlayerUnblockedYou;
+                        ClientEventActions.OnPlayerMutedYou += OnPlayerMutedYou;
+                        ClientEventActions.OnPlayerUnmutedYou += OnPlayerUnmutedYou;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerLeft -= OnPlayerLeft;
-                        ClientEventActions.Event_OnPlayerBlockedYou -= OnPlayerBlockedYou;
-                        ClientEventActions.Event_OnPlayerUnblockedYou -= OnPlayerUnblockedYou;
-                        ClientEventActions.Event_OnPlayerMutedYou -= OnPlayerMutedYou;
-                        ClientEventActions.Event_OnPlayerUnmutedYou -= OnPlayerUnmutedYou;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnPlayerLeft -= OnPlayerLeft;
+                        ClientEventActions.OnPlayerBlockedYou -= OnPlayerBlockedYou;
+                        ClientEventActions.OnPlayerUnblockedYou -= OnPlayerUnblockedYou;
+                        ClientEventActions.OnPlayerMutedYou -= OnPlayerMutedYou;
+                        ClientEventActions.OnPlayerUnmutedYou -= OnPlayerUnmutedYou;
                     }
                 }
                 _HasSubscribed = value;

@@ -70,9 +70,9 @@ namespace AstroClient.xAstroBoy
 
         }
 
-        private static void OnBigMenuOpen_Event() => ClientEventActions.Event_OnBigMenuOpen.SafetyRaise();
+        private static void OnBigMenuOpen_Event() => ClientEventActions.OnBigMenuOpen.SafetyRaise();
 
-        private static void OnBigMenuClose_Event() => ClientEventActions.Event_OnBigMenuClose.SafetyRaise();
+        private static void OnBigMenuClose_Event() => ClientEventActions.OnBigMenuClose.SafetyRaise();
 
         private static bool OnPlaceUiAfterPause(ref bool __result)
         {
@@ -156,18 +156,18 @@ namespace AstroClient.xAstroBoy
         /// <param name="showDefaultScreen">Whether to show the world menu after opening the big menu</param>
         internal static void OpenBigMenu(bool showDefaultScreen) => NewMenuXrefsSystem.openBigMenu.Invoke(VRCUiManager.prop_VRCUiManager_0, new object[2] { showDefaultScreen, true });
 
-        private static void OnUserInfoOpen_event() => ClientEventActions.Event_OnUserInfoMenuOpen.SafetyRaise();
+        private static void OnUserInfoOpen_event() => ClientEventActions.OnUserInfoMenuOpen.SafetyRaise();
 
-        private static void OnUserInfoClose() => ClientEventActions.Event_OnUserInfoMenuClose.SafetyRaise();
+        private static void OnUserInfoClose() => ClientEventActions.OnUserInfoMenuClose.SafetyRaise();
 
-        private static void OnQuickMenuOpen_Event() => ClientEventActions.Event_OnQuickMenuOpen.SafetyRaise();
+        private static void OnQuickMenuOpen_Event() => ClientEventActions.OnQuickMenuOpen.SafetyRaise();
 
-        private static void OnQuickMenuClose_Event() => ClientEventActions.Event_OnQuickMenuClose.SafetyRaise();
+        private static void OnQuickMenuClose_Event() => ClientEventActions.OnQuickMenuClose.SafetyRaise();
 
         private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
         {
             if (__instance == null) return;
-            ClientEventActions.Event_OnUiPageToggled.SafetyRaiseWithParams(__instance, __0, __1);
+            ClientEventActions.OnUiPageToggled.SafetyRaiseWithParams(__instance, __0, __1);
         }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)

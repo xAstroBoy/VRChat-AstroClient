@@ -84,21 +84,21 @@ namespace AstroClient.AstroMonos.Components.Spoofer
                     {
 
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
-                        ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
-                        ClientEventActions.Event_OnEnterWorld += OnEnterWorld;
-                        ClientEventActions.Event_OnMasterClientSwitched += OnMasterClientSwitched;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnRoomJoined += OnRoomJoined;
+                        ClientEventActions.OnWorldReveal += OnWorldReveal;
+                        ClientEventActions.OnEnterWorld += OnEnterWorld;
+                        ClientEventActions.OnMasterClientSwitched += OnMasterClientSwitched;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnRoomJoined -= OnRoomJoined;
-                        ClientEventActions.Event_OnWorldReveal -= OnWorldReveal;
-                        ClientEventActions.Event_OnEnterWorld -= OnEnterWorld;
-                        ClientEventActions.Event_OnMasterClientSwitched -= OnMasterClientSwitched;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnRoomJoined -= OnRoomJoined;
+                        ClientEventActions.OnWorldReveal -= OnWorldReveal;
+                        ClientEventActions.OnEnterWorld -= OnEnterWorld;
+                        ClientEventActions.OnMasterClientSwitched -= OnMasterClientSwitched;
 
                     }
                 }

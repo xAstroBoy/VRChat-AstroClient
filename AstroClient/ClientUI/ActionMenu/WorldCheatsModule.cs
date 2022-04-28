@@ -24,7 +24,7 @@ internal class WorldCheatsModule : AstroEvents
 {
     internal override void RegisterToEvents()
     {
-        ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
+        ClientEventActions.OnApplicationStart += OnApplicationStart;
     }
 
     private void OnApplicationStart()

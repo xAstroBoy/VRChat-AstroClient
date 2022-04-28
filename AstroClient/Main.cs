@@ -67,7 +67,7 @@ namespace AstroClient
 
             DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
             DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
-            ClientEventActions.Event_OnApplicationStart?.SafetyRaise();
+            ClientEventActions.OnApplicationStart?.SafetyRaise();
 
             Log.Write("Initialization complete!", Cheetah.Color.Green);
             yield return null;
@@ -75,12 +75,12 @@ namespace AstroClient
 
         public override void OnUpdate()
         {
-            ClientEventActions.Event_OnUpdate?.SafetyRaise();
+            ClientEventActions.OnUpdate?.SafetyRaise();
         }
 
         //public override void OnLateUpdate()
         //{
-        //    ClientEventActions.Event_LateUpdate?.SafetyRaise();
+        //    ClientEventActions.LateUpdate?.SafetyRaise();
         //}
 
         private IEnumerator WaitForActionMenuInit()
@@ -91,17 +91,17 @@ namespace AstroClient
 
         //public override void OnGUI()
         //{
-        //    ClientEventActions.Event_OnGui?.SafetyRaiseWithParams();
+        //    ClientEventActions.OnGui?.SafetyRaiseWithParams();
         //}
 
         public override void OnApplicationLateStart()
         {
-            ClientEventActions.Event_OnApplicationLateStart?.SafetyRaise();
+            ClientEventActions.OnApplicationLateStart?.SafetyRaise();
         }
 
         public override void OnApplicationQuit()
         {
-            ClientEventActions.Event_OnApplicationQuit?.SafetyRaise();
+            ClientEventActions.OnApplicationQuit?.SafetyRaise();
             ConfigManager.SaveAll();
         }
 
@@ -189,7 +189,7 @@ namespace AstroClient
                     break;
 
                 default:
-                    ClientEventActions.Event_OnSceneLoaded.SafetyRaiseWithParams(buildIndex, sceneName);
+                    ClientEventActions.OnSceneLoaded.SafetyRaiseWithParams(buildIndex, sceneName);
                     break;
             }
         }
@@ -258,7 +258,7 @@ namespace AstroClient
         private void Start_VRChat_OnQuickMenuInit()
         {
             var sw = Stopwatch.StartNew();
-            ClientEventActions.Event_VRChat_OnQuickMenuInit?.SafetyRaise();
+            ClientEventActions.VRChat_OnQuickMenuInit?.SafetyRaise();
             DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
             sw.Stop(); Log.Debug($"QuickMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
@@ -266,7 +266,7 @@ namespace AstroClient
         private void Start_VRChat_OnActionMenuInit()
         {
             var sw = Stopwatch.StartNew();
-            ClientEventActions.Event_VRChat_OnActionMenuInit?.SafetyRaise();
+            ClientEventActions.VRChat_OnActionMenuInit?.SafetyRaise();
             sw.Stop(); Log.Debug($"ActionMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
 
@@ -280,13 +280,13 @@ namespace AstroClient
         private void Delayed_Start_VRChat_OnUiManagerInit()
         {
             var sw = Stopwatch.StartNew();
-            ClientEventActions.Delayed_Event_VRChat_OnUiManagerInit?.SafetyRaise();
+            ClientEventActions.Delayed_VRChat_OnUiManagerInit?.SafetyRaise();
             sw.Stop(); Log.Debug($"Start_VRChat_OnUiManagerInit: Took {sw.ElapsedMilliseconds}ms");
         }
         private void Start_VRChat_OnUiManagerInit()
         {
             var sw = Stopwatch.StartNew();
-            ClientEventActions.Event_VRChat_OnUiManagerInit?.SafetyRaise();
+            ClientEventActions.VRChat_OnUiManagerInit?.SafetyRaise();
             sw.Stop(); Log.Debug($"Start_VRChat_OnUiManagerInit: Took {sw.ElapsedMilliseconds}ms");
         }
 

@@ -10,7 +10,7 @@ namespace AstroClient.AstroMonos.Components.ESP
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
+            ClientEventActions.OnSceneLoaded += OnSceneLoaded;
         }
 
         private void OnSceneLoaded(int buildIndex, string sceneName)

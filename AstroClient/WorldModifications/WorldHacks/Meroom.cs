@@ -12,7 +12,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

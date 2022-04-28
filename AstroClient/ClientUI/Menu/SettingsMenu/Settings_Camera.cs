@@ -19,7 +19,7 @@ namespace AstroClient.ClientUI.Menu.SettingsMenu
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
         internal static void InitButtons(QMNestedGridMenu tab)

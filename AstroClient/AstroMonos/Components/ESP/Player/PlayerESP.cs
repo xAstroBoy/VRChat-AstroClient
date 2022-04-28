@@ -90,25 +90,25 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnFriended += OnFriended;
-                        ClientEventActions.Event_OnUnfriended += OnUnfriended;
-                        ClientEventActions.Event_OnPlayerBlockedYou += OnPlayerBlockedYou;
-                        ClientEventActions.Event_OnPlayerUnblockedYou += OnPlayerUnblockedYou;
-                        ConfigEventActions.Event_ESP_OnPublicColorChange += OnPublicESPColorChanged;
-                        ConfigEventActions.Event_ESP_OnFriendColorChange += OnFriendESPColorChanged;
-                        ConfigEventActions.Event_ESP_OnBlockedColorChange += OnBlockedESPColorChanged;
+                        ClientEventActions.OnFriended += OnFriended;
+                        ClientEventActions.OnUnfriended += OnUnfriended;
+                        ClientEventActions.OnPlayerBlockedYou += OnPlayerBlockedYou;
+                        ClientEventActions.OnPlayerUnblockedYou += OnPlayerUnblockedYou;
+                        ConfigEventActions.ESP_OnPublicColorChange += OnPublicESPColorChanged;
+                        ConfigEventActions.ESP_OnFriendColorChange += OnFriendESPColorChanged;
+                        ConfigEventActions.ESP_OnBlockedColorChange += OnBlockedESPColorChanged;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnFriended -= OnFriended;
-                        ClientEventActions.Event_OnUnfriended -= OnUnfriended;
-                        ClientEventActions.Event_OnPlayerBlockedYou -= OnPlayerBlockedYou;
-                        ClientEventActions.Event_OnPlayerUnblockedYou -= OnPlayerUnblockedYou;
-                        ConfigEventActions.Event_ESP_OnPublicColorChange -= OnPublicESPColorChanged;
-                        ConfigEventActions.Event_ESP_OnFriendColorChange -= OnFriendESPColorChanged;
-                        ConfigEventActions.Event_ESP_OnBlockedColorChange -= OnBlockedESPColorChanged;
+                        ClientEventActions.OnFriended -= OnFriended;
+                        ClientEventActions.OnUnfriended -= OnUnfriended;
+                        ClientEventActions.OnPlayerBlockedYou -= OnPlayerBlockedYou;
+                        ClientEventActions.OnPlayerUnblockedYou -= OnPlayerUnblockedYou;
+                        ConfigEventActions.ESP_OnPublicColorChange -= OnPublicESPColorChanged;
+                        ConfigEventActions.ESP_OnFriendColorChange -= OnFriendESPColorChanged;
+                        ConfigEventActions.ESP_OnBlockedColorChange -= OnBlockedESPColorChanged;
 
                     }
                 }

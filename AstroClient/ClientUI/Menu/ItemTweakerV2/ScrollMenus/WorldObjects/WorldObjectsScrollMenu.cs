@@ -29,9 +29,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects
         private static bool isOpen { get; set; }
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
         }
 
 

@@ -52,15 +52,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
                     }
                 }
                 _HasSubscribed = value;

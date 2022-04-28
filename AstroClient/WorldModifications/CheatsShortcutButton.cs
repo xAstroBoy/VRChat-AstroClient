@@ -21,7 +21,7 @@ namespace AstroClient.WorldModifications
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
         private static QMWings WorldCheatsShortcut;

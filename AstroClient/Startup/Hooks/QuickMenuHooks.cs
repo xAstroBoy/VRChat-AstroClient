@@ -33,7 +33,7 @@ namespace AstroClient.Startup.Hooks
 
         private static void OnSelectedPlayerPatch(ref VRC.Player __0)
         {
-            ClientEventActions.Event_OnPlayerSelected.SafetyRaiseWithParams(__0);
+            ClientEventActions.OnPlayerSelected.SafetyRaiseWithParams(__0);
         }
 
     }

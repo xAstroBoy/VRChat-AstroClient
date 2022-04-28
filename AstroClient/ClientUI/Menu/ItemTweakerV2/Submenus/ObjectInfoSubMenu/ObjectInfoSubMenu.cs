@@ -14,8 +14,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.ObjectInfoSubMenu
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_OnRigidBodyController_OnUpdate += OnRigidBodyController_OnUpdate;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.OnRigidBodyController_OnUpdate += OnRigidBodyController_OnUpdate;
         }
         internal static void Init_ObjectInfoSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {

@@ -16,8 +16,8 @@ namespace AstroClient.PlayerList
 
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
-            ClientEventActions.Delayed_Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.OnApplicationStart += OnApplicationStart;
+            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
         }
 
         private void OnApplicationStart()

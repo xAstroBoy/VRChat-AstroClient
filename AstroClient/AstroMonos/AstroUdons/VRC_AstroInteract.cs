@@ -33,13 +33,13 @@ namespace AstroClient.AstroMonos.AstroUdons
                     if (value)
                     {
 
-                        ClientEventActions.Event_Udon_OnInteract += UdonBehaviour_Event_OnInteract;
+                        ClientEventActions.Udon_OnInteract += UdonBehaviour_Event_OnInteract;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_Udon_OnInteract -= UdonBehaviour_Event_OnInteract;
+                        ClientEventActions.Udon_OnInteract -= UdonBehaviour_Event_OnInteract;
 
                     }
                 }

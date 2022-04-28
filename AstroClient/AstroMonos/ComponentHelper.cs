@@ -25,9 +25,9 @@ namespace AstroClient.AstroMonos
         }
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnApplicationStart += OnApplicationStart;
-            ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
-            ClientEventActions.Delayed_Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.OnApplicationStart += OnApplicationStart;
+            ClientEventActions.OnRoomJoined += OnRoomJoined;
+            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
 
         }
 

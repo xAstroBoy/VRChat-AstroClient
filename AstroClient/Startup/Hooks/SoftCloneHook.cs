@@ -39,7 +39,7 @@ namespace AstroClient.Startup.Hooks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
 

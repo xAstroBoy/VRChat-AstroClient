@@ -298,15 +298,15 @@ namespace AstroClient.AstroMonos.Components.Player.Movement
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnWorldReveal += OnWorldReveal;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnWorldReveal -= OnWorldReveal;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnWorldReveal -= OnWorldReveal;
 
                     }
                 }

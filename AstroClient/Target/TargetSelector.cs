@@ -13,9 +13,9 @@ namespace AstroClient.Target
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
 
         }
 
@@ -91,7 +91,7 @@ namespace AstroClient.Target
             set
             {
                 _CurrentTarget = value;
-                ClientEventActions.Event_OnTargetSet.SafetyRaiseWithParams(value);
+                ClientEventActions.OnTargetSet.SafetyRaiseWithParams(value);
             }
         }
     }

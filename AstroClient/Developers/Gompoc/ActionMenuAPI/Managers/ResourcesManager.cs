@@ -12,7 +12,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_VRChat_OnActionMenuInit += VRChat_OnActionMenuInit;
+            ClientEventActions.VRChat_OnActionMenuInit += VRChat_OnActionMenuInit;
 
         }
         private void VRChat_OnActionMenuInit()

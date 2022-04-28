@@ -35,7 +35,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
 
@@ -51,17 +51,17 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnUnityLog += OnUnityLog;
-                        ClientEventActions.Event_Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnUnityLog += OnUnityLog;
+                        ClientEventActions.Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnUnityLog -= OnUnityLog;
-                        ClientEventActions.Event_Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnUnityLog -= OnUnityLog;
+                        ClientEventActions.Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
 
                     }
                 }

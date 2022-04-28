@@ -44,9 +44,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Interactable
         }
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.Event_OnUiPageToggled += OnUiPageToggled;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
         }
 
         private void OnRoomLeft()

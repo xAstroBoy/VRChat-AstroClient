@@ -13,8 +13,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.On_Old_GameObject_Removed += On_Old_GameObject_Removed;
         }
     
 
@@ -25,16 +25,16 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                 var PickupController = obj.GetOrAddComponent<PickupController>();
                 if (PickupController != null)
                 {
-                    TweakerEventActions.Event_OnPickupControllerSelected.SafetyRaiseWithParams(PickupController);
+                    TweakerEventActions.OnPickupControllerSelected.SafetyRaiseWithParams(PickupController);
 
                     PickupController.SetOnPickupPropertyChanged(() =>
                     {
-                        TweakerEventActions.Event_OnPickupControllerPropertyChanged.SafetyRaiseWithParams(PickupController); // Dunno if it works.
+                        TweakerEventActions.OnPickupControllerPropertyChanged.SafetyRaiseWithParams(PickupController); // Dunno if it works.
                     });
 
                     PickupController.SetOnPickup_OnUpdate(() =>
                     {
-                        TweakerEventActions.Event_OnPickupController_OnUpdate.SafetyRaiseWithParams(PickupController); // Dunno if it works.
+                        TweakerEventActions.OnPickupController_OnUpdate.SafetyRaiseWithParams(PickupController); // Dunno if it works.
                     });
                 }
             }

@@ -74,19 +74,19 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_Udon_OnDrop += UdonBehaviour_Event_OnDrop;
-                        ClientEventActions.Event_Udon_OnPickupUseDown += UdonBehaviour_Event_OnPickupUseDown;
-                        ClientEventActions.Event_Udon_OnPickupUseUp += UdonBehaviour_Event_OnPickupUseUp;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Udon_OnDrop += UdonBehaviour_Event_OnDrop;
+                        ClientEventActions.Udon_OnPickupUseDown += UdonBehaviour_Event_OnPickupUseDown;
+                        ClientEventActions.Udon_OnPickupUseUp += UdonBehaviour_Event_OnPickupUseUp;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
-                        ClientEventActions.Event_Udon_OnPickupUseDown -= UdonBehaviour_Event_OnPickupUseDown; 
-                        ClientEventActions.Event_Udon_OnPickupUseUp -= UdonBehaviour_Event_OnPickupUseUp;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Udon_OnDrop -= UdonBehaviour_Event_OnDrop;
+                        ClientEventActions.Udon_OnPickupUseDown -= UdonBehaviour_Event_OnPickupUseDown; 
+                        ClientEventActions.Udon_OnPickupUseUp -= UdonBehaviour_Event_OnPickupUseUp;
                     }
                 }
                 _HasSubscribed = value;

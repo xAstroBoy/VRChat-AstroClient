@@ -41,13 +41,13 @@ namespace AstroClient.ClientUI.Menu.ESP
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+                        ClientEventActions.OnPlayerJoin += OnPlayerJoined;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+                        ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
 
                     }
                 }
@@ -83,7 +83,7 @@ namespace AstroClient.ClientUI.Menu.ESP
                     PlayerESPToggleBtn.SetToggleState(value);
                 }
                 HasSubscribed = value;
-                ConfigEventActions.Event_OnPlayerESPPropertyChanged.SafetyRaiseWithParams(value);
+                ConfigEventActions.OnPlayerESPPropertyChanged.SafetyRaiseWithParams(value);
             }
         }
 

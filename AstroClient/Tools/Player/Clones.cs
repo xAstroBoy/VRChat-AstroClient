@@ -11,7 +11,7 @@ namespace AstroClient.Tools.Player
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
 

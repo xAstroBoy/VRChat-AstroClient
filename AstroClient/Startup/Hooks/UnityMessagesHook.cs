@@ -38,14 +38,14 @@ namespace AstroClient.Startup.Hooks
             if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
             if (msg.IsNullOrEmptyOrWhiteSpace()) return;
-            ClientEventActions.Event_OnUnityLog.SafetyRaiseWithParams(msg);
+            ClientEventActions.OnUnityLog.SafetyRaiseWithParams(msg);
         }
         private static void DebugWarning(ref Il2CppSystem.Object __0)
         {
             if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
             if (msg.IsNullOrEmptyOrWhiteSpace()) return;
-            ClientEventActions.Event_OnUnityWarning.SafetyRaiseWithParams(msg);
+            ClientEventActions.OnUnityWarning.SafetyRaiseWithParams(msg);
         }
 
         private static void DebugError(ref Il2CppSystem.Object __0)
@@ -53,7 +53,7 @@ namespace AstroClient.Startup.Hooks
             if (__0 == null) return;
             var msg = Il2CppSystem.Convert.ToString(__0);
             if (msg.IsNullOrEmptyOrWhiteSpace()) return;
-            ClientEventActions.Event_OnUnityError.SafetyRaiseWithParams(msg);
+            ClientEventActions.OnUnityError.SafetyRaiseWithParams(msg);
 
         }
 

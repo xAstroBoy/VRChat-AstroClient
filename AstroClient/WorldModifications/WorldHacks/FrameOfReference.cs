@@ -12,7 +12,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
         private static bool isCurrentWorld = false;

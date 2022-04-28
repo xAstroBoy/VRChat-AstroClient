@@ -8,15 +8,15 @@ namespace AstroClient.ClientActions
 
     internal static class ConfigEventActions
     {
-        internal static Action<UnityEngine.Color> Event_ESP_OnPublicColorChange { get; set; }
-        internal static Action<UnityEngine.Color> Event_ESP_OnBlockedColorChange { get; set; }
-        internal static Action<UnityEngine.Color> Event_ESP_OnFriendColorChange { get; set; }
+        internal static Action<UnityEngine.Color> ESP_OnPublicColorChange { get; set; }
+        internal static Action<UnityEngine.Color> ESP_OnBlockedColorChange { get; set; }
+        internal static Action<UnityEngine.Color> ESP_OnFriendColorChange { get; set; }
 
 
         internal static Action OnPlayerListConfigChanged { get; set; }
 
 
-        internal static Action<bool> Event_OnPlayerESPPropertyChanged{ get; set; }
+        internal static Action<bool> OnPlayerESPPropertyChanged{ get; set; }
 
 
 

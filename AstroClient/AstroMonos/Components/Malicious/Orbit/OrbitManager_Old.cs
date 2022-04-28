@@ -73,13 +73,13 @@ namespace AstroClient.AstroMonos.Components.Malicious.Orbit
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
 
                     }
                 }

@@ -14,7 +14,7 @@ namespace AstroClient.Streamer
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnApplicationLateStart += OnApplicationLateStart;
+            ClientEventActions.OnApplicationLateStart += OnApplicationLateStart;
         }
 
         private void OnApplicationLateStart()

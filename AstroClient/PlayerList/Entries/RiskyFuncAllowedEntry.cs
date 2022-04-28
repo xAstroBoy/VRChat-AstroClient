@@ -17,7 +17,7 @@ namespace AstroClient.PlayerList.Entries
         [HideFromIl2Cpp]
         public override void Init(object[] parameters = null)
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)

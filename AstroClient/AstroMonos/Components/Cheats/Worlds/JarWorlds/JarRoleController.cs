@@ -21,7 +21,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
 
         }
 
@@ -36,15 +36,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnPlayerJoin += OnPlayerJoined;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
                     }
                 }
                 _HasSubscribed = value;
@@ -74,7 +74,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 
                 if (IsAmongUsWorld || IsMurder4World)
                 {
-                    ClientEventActions.Event_OnViewRolesPropertyChanged.SafetyRaiseWithParams(value);
+                    ClientEventActions.OnViewRolesPropertyChanged.SafetyRaiseWithParams(value);
                 }
             }
         }

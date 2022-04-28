@@ -47,19 +47,19 @@ namespace AstroClient.AstroMonos
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
-                        ClientEventActions.Event_OnPlayerLeft += OnPlayerLeft;
-                        ClientEventActions.Event_OnOwnerShipTranferred += OnOwnerShipTransferred;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+                        ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+                        ClientEventActions.OnOwnerShipTranferred += OnOwnerShipTransferred;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
-                        ClientEventActions.Event_OnPlayerLeft -= OnPlayerLeft;
-                        ClientEventActions.Event_OnOwnerShipTranferred -= OnOwnerShipTransferred;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
+                        ClientEventActions.OnPlayerLeft -= OnPlayerLeft;
+                        ClientEventActions.OnOwnerShipTranferred -= OnOwnerShipTransferred;
                     }
                 }
                 _HasSubscribed = value;

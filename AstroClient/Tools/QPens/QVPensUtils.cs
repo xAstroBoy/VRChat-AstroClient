@@ -15,8 +15,8 @@ namespace AstroClient.Tools.QPens
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
 
         }
 

@@ -15,7 +15,7 @@ namespace AstroClient.Tools.ColliderViewer
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
 
         }
 
@@ -91,12 +91,12 @@ namespace AstroClient.Tools.ColliderViewer
             AutoUpdateColliderList = value;
             if (!value)
             {
-                ClientEventActions.Event_OnUpdate -= OnUpdate;
+                ClientEventActions.OnUpdate -= OnUpdate;
                 DisableAll();
             }
             else
             {
-                ClientEventActions.Event_OnUpdate += OnUpdate;
+                ClientEventActions.OnUpdate += OnUpdate;
                 UpdateColliders(false);
             }
         }

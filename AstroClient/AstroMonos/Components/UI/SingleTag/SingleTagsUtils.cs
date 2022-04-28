@@ -18,7 +18,7 @@ namespace AstroClient.AstroMonos.Components.UI.SingleTag
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         private void OnRoomLeft()

@@ -11,7 +11,7 @@ namespace AstroClient.Tools.Colors
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         internal static UnityEngine.Color HexToColor(string hexColor)

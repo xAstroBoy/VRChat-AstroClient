@@ -19,7 +19,7 @@ namespace AstroClient.Tools.Headlight
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         internal static float LightRange = 10f;

@@ -18,9 +18,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_OnPickupControllerSelected += OnPickupController_Selected;
-            TweakerEventActions.Event_OnPickupControllerPropertyChanged += OnPickupController_PropertyChanged;
-            TweakerEventActions.Event_OnPickupController_OnUpdate += OnPickupController_OnUpdate;
+            TweakerEventActions.OnPickupControllerSelected += OnPickupController_Selected;
+            TweakerEventActions.OnPickupControllerPropertyChanged += OnPickupController_PropertyChanged;
+            TweakerEventActions.OnPickupController_OnUpdate += OnPickupController_OnUpdate;
 
         }
         internal static void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)

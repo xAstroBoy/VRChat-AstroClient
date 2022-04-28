@@ -14,7 +14,7 @@ namespace AstroClient.Tools.ObjectEditor.Editor.Scale
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         private static float ModifiedVectorX() => EditVectorX ? ScaleValueToUse : 0;

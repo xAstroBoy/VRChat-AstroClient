@@ -31,12 +31,12 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_OnPickupControllerSelected += OnPickupController_Selected;
-            TweakerEventActions.Event_OnSelectedObject_Enabled += OnSelectedObject_Enabled;
-            TweakerEventActions.Event_OnSelectedObject_Disabled += OnSelectedObject_Disabled;
-            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.OnPickupControllerSelected += OnPickupController_Selected;
+            TweakerEventActions.OnSelectedObject_Enabled += OnSelectedObject_Enabled;
+            TweakerEventActions.OnSelectedObject_Disabled += OnSelectedObject_Disabled;
+            TweakerEventActions.OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
         }
         internal static void Init_TweakerV2Main(int index)
         {

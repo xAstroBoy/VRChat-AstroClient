@@ -14,7 +14,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Crazy
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_OnCrazyBehaviourPropertyChanged += OnCrazyBehaviour_OnPropertyChanged;
+            TweakerEventActions.OnCrazyBehaviourPropertyChanged += OnCrazyBehaviour_OnPropertyChanged;
         }
 
         internal static void Init_CrazyComponentSubMenu(QMNestedGridMenu menu)

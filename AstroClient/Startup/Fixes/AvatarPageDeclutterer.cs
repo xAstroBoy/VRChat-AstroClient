@@ -16,7 +16,7 @@ namespace AstroClient.Startup.Fixes
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnBigMenuOpen += OnBigMenuOpen;
+            ClientEventActions.OnBigMenuOpen += OnBigMenuOpen;
         }
 
         private static Transform _AvatarPageTransform = null;

@@ -12,9 +12,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
-            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+            TweakerEventActions.OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
 
 
         }
@@ -22,7 +22,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 
         private void OnSelectedObject_Destroyed()
         {
-            TweakerEventActions.Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
+            TweakerEventActions.OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
             instance = null;
         }
 
@@ -40,7 +40,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                             instance = newinstance;
                             newinstance.SetOnRocketPropertyChanged(() =>
                             {
-                                TweakerEventActions.Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -53,7 +53,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                     instance = newinstance;
                     newinstance.SetOnRocketPropertyChanged(() =>
                     {
-                        TweakerEventActions.Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
 
@@ -72,7 +72,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                     instance = RocketBehaviour; 
                     RocketBehaviour.SetOnRocketPropertyChanged(() =>
                     {
-                        TweakerEventActions.Event_OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(RocketBehaviour); // Dunno if it works.
+                        TweakerEventActions.OnRocketBehaviourPropertyChanged.SafetyRaiseWithParams(RocketBehaviour); // Dunno if it works.
                     });
                 }
             }

@@ -25,17 +25,17 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Selector
                 }
                 if (value == null)
                 {
-                    TweakerEventActions.Event_On_Old_GameObject_Removed.SafetyRaiseWithParams(null);
-                    TweakerEventActions.Event_On_New_GameObject_Selected.SafetyRaiseWithParams(null);
+                    TweakerEventActions.On_Old_GameObject_Removed.SafetyRaiseWithParams(null);
+                    TweakerEventActions.On_New_GameObject_Selected.SafetyRaiseWithParams(null);
                 }
                 else if (_SelectedObject != null)
                 {
                     if (_SelectedObject != value)
                     {
-                        TweakerEventActions.Event_On_Old_GameObject_Removed.SafetyRaiseWithParams(_SelectedObject);
+                        TweakerEventActions.On_Old_GameObject_Removed.SafetyRaiseWithParams(_SelectedObject);
                     }
                 }
-                TweakerEventActions.Event_On_New_GameObject_Selected.SafetyRaiseWithParams(value);
+                TweakerEventActions.On_New_GameObject_Selected.SafetyRaiseWithParams(value);
                 _SelectedObject = value;
             }
         }

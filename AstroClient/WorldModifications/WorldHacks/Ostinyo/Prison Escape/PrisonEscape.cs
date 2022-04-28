@@ -30,7 +30,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
 
@@ -46,15 +46,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnPlayerJoin += OnPlayerJoined;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnPlayerJoin -= OnPlayerJoined;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
 
                     }
                 }

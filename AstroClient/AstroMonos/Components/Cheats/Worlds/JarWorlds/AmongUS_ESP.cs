@@ -288,17 +288,17 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPC;
-                        ClientEventActions.Event_OnViewRolesPropertyChanged += OnViewRolesPropertyChanged;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnUdonSyncRPC += OnUdonSyncRPC;
+                        ClientEventActions.OnViewRolesPropertyChanged += OnViewRolesPropertyChanged;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnUdonSyncRPC -= OnUdonSyncRPC;
-                        ClientEventActions.Event_OnViewRolesPropertyChanged -= OnViewRolesPropertyChanged;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnUdonSyncRPC -= OnUdonSyncRPC;
+                        ClientEventActions.OnViewRolesPropertyChanged -= OnViewRolesPropertyChanged;
 
                     }
                 }

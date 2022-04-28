@@ -15,7 +15,7 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         private static GameObject SphereColliderDisabler;

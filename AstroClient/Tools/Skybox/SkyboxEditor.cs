@@ -24,8 +24,8 @@ namespace AstroClient.Tools.Skybox
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
 
         }
 

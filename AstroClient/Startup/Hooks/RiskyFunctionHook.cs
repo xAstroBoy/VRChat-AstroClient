@@ -18,8 +18,8 @@ namespace AstroClient.Startup.Hooks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnSceneLoaded += OnSceneLoaded;
         }
 
         internal static bool IsWorldTagPatched { get; private set; } = false;

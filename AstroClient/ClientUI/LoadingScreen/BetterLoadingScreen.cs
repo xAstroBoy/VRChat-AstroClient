@@ -23,7 +23,7 @@ namespace AstroClient.ClientUI.LoadingScreen
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
         }
 
 

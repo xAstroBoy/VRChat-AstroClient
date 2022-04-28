@@ -33,9 +33,9 @@ namespace AstroClient.PlayerList.Entries
         [HideFromIl2Cpp]
         public override void Init(object[] parameters)
         {
-            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
-            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
-            ClientEventActions.Event_OnShowSocialRankChanged += OnShowSocialRankChanged;
+            ClientEventActions.OnSceneLoaded += OnSceneLoaded;
+            ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.OnShowSocialRankChanged += OnShowSocialRankChanged;
 
             isSelf = true;
             EntryManager.localPlayerEntry = this;

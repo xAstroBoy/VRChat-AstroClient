@@ -10,7 +10,7 @@ namespace AstroClient.Startup
         private static bool HasDisplayed;
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
 
@@ -21,7 +21,7 @@ namespace AstroClient.Startup
                 PopupUtils.QueHudMessage($"Welcome Back <Color=#c242f5>{PlayerUtils.DisplayName()}</color>\n<color=#42f5f2>AstroClient</color> Made By\n <color=#2A3EBF>AstroBoy</color> and <color=#F79239>Cheetos</color>");
                 HasDisplayed = true;
             }
-            ClientEventActions.Event_OnWorldReveal -= OnWorldReveal;
+            ClientEventActions.OnWorldReveal -= OnWorldReveal;
         }
     }
 }

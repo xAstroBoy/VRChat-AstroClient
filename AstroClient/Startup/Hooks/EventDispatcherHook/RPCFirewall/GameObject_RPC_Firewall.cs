@@ -22,7 +22,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         private void OnRoomLeft()

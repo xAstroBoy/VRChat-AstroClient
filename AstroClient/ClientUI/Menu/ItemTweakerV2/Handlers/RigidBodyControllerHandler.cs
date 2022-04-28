@@ -13,8 +13,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.On_Old_GameObject_Removed += On_Old_GameObject_Removed;
 
 
         }
@@ -27,16 +27,16 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                 RigidBodyController RigidBodyController = obj.GetOrAddComponent<RigidBodyController>();
                 if (RigidBodyController != null)
                 {
-                    TweakerEventActions.Event_OnRigidBodyControllerSelected.SafetyRaiseWithParams(RigidBodyController);
+                    TweakerEventActions.OnRigidBodyControllerSelected.SafetyRaiseWithParams(RigidBodyController);
 
                     RigidBodyController.SetRigidBodyPropertyChanged(() =>
                     {
-                        TweakerEventActions.Event_OnRigidBodyControllerPropertyChanged.SafetyRaiseWithParams(RigidBodyController); // Dunno if it works.
+                        TweakerEventActions.OnRigidBodyControllerPropertyChanged.SafetyRaiseWithParams(RigidBodyController); // Dunno if it works.
                     });
 
                     RigidBodyController.SetOnRigidbodyControllerOnUpdate(() =>
                     {
-                        TweakerEventActions.Event_OnRigidBodyController_OnUpdate.SafetyRaiseWithParams(RigidBodyController); // Dunno if it works.
+                        TweakerEventActions.OnRigidBodyController_OnUpdate.SafetyRaiseWithParams(RigidBodyController); // Dunno if it works.
                     });
                 }
             }

@@ -45,35 +45,35 @@ namespace AstroClient.Startup.Hooks
         private static void Hook_UdonBehaviour_Event_OnPickup(UdonBehaviour __instance)
         {
             if (__instance == null) return;
-            ClientEventActions.Event_Udon_OnPickup.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Udon_OnPickup.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour __instance)
         {
             if (__instance == null) return;
 
-            ClientEventActions.Event_Udon_OnPickupUseUp.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Udon_OnPickupUseUp.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour __instance)
         {
             if (__instance == null) return;
 
-            ClientEventActions.Event_Udon_OnPickupUseDown.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Udon_OnPickupUseDown.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnDrop(UdonBehaviour __instance)
         {
             if (__instance == null) return;
 
-            ClientEventActions.Event_Udon_OnDrop.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Udon_OnDrop.SafetyRaiseWithParams(__instance);
 
         }
         private static void Hook_UdonBehaviour_Event_OnInteract(UdonBehaviour __instance)
         {
             if (__instance == null) return;
 
-            ClientEventActions.Event_Udon_OnInteract.SafetyRaiseWithParams(__instance);
+            ClientEventActions.Udon_OnInteract.SafetyRaiseWithParams(__instance);
         }
         private static bool Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {

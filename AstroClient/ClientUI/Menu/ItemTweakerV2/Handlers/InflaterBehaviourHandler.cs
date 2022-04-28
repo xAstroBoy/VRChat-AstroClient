@@ -12,15 +12,15 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
-            TweakerEventActions.Event_On_New_GameObject_Selected += On_New_GameObject_Selected;
-            TweakerEventActions.Event_On_Old_GameObject_Removed += On_Old_GameObject_Removed;
+            TweakerEventActions.OnSelectedObject_Destroyed += OnSelectedObject_Destroyed;
+            TweakerEventActions.On_New_GameObject_Selected += On_New_GameObject_Selected;
+            TweakerEventActions.On_Old_GameObject_Removed += On_Old_GameObject_Removed;
 
 
         }
         private void OnSelectedObject_Destroyed()
         {
-            TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
+            TweakerEventActions.OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(null); // Dunno if it works.
             instance = null;
         }
 
@@ -38,11 +38,11 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                             instance = newinstance;
                             newinstance.SetOnInflaterPropertyChanged(() =>
                             {
-                                TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                             newinstance.SetOnInflaterUpdate(() =>
                             {
-                                TweakerEventActions.Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                                TweakerEventActions.OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                             });
                         }
                     }
@@ -55,11 +55,11 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                     instance = newinstance;
                     newinstance.SetOnInflaterPropertyChanged(() =>
                     {
-                        TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                     newinstance.SetOnInflaterUpdate(() =>
                     {
-                        TweakerEventActions.Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
+                        TweakerEventActions.OnInflaterBehaviourUpdate.SafetyRaiseWithParams(newinstance); // Dunno if it works.
                     });
                 }
             }
@@ -77,11 +77,11 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                     instance = InflaterBehaviour;
                     InflaterBehaviour.SetOnInflaterPropertyChanged(() =>
                     {
-                        TweakerEventActions.Event_OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
+                        TweakerEventActions.OnInflaterBehaviourPropertyChanged.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
                     });
                     InflaterBehaviour.SetOnInflaterUpdate(() =>
                     {
-                        TweakerEventActions.Event_OnInflaterBehaviourUpdate.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
+                        TweakerEventActions.OnInflaterBehaviourUpdate.SafetyRaiseWithParams(InflaterBehaviour); // Dunno if it works.
                     });
                 }
             }

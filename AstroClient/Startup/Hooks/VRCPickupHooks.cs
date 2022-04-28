@@ -28,8 +28,8 @@ namespace AstroClient.Startup.Hooks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomJoined += OnRoomJoined;
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomJoined += OnRoomJoined;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
 
         }
 
@@ -68,7 +68,7 @@ namespace AstroClient.Startup.Hooks
                 {
                     return;
                 }
-                ClientEventActions.Event_Pickup_isHeld.SafetyRaiseWithParams(__instance, __result);
+                ClientEventActions.Pickup_isHeld.SafetyRaiseWithParams(__instance, __result);
 
             }
             catch{}

@@ -15,7 +15,7 @@ namespace AstroClient.Startup.Patches
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnSceneLoaded += OnSceneLoaded;
+            ClientEventActions.OnSceneLoaded += OnSceneLoaded;
         }
 
         private static bool IsfirstScene { get; set; }
@@ -151,7 +151,7 @@ namespace AstroClient.Startup.Patches
 
             if(PatchShield != 0)
             {
-                ClientEventActions.Event_OnPatchShieldRemoved.SafetyRaise(); 
+                ClientEventActions.OnPatchShieldRemoved.SafetyRaise(); 
             }
 
         }

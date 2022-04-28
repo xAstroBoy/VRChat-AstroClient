@@ -22,7 +22,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
-            ClientEventActions.Event_Keypad_DestroyFailedFinds += OnDestroyFailedSearch;
+            ClientEventActions.Keypad_DestroyFailedFinds += OnDestroyFailedSearch;
 
         }
 
@@ -55,13 +55,13 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
 
                     }
                 }
@@ -81,13 +81,13 @@ namespace AstroClient.AstroMonos.Components.Tools
                 GeneratedButton.DestroyMe();
             }
             HasSubscribed = false;
-            ClientEventActions.Event_Keypad_DestroyFailedFinds -= OnDestroyFailedSearch;
+            ClientEventActions.Keypad_DestroyFailedFinds -= OnDestroyFailedSearch;
         }
 
 
         private void OnDestroyFailedSearch()
         {
-            ClientEventActions.Event_Keypad_DestroyFailedFinds -= OnDestroyFailedSearch;
+            ClientEventActions.Keypad_DestroyFailedFinds -= OnDestroyFailedSearch;
             if (!Success)
             {
                 Destroy(this);

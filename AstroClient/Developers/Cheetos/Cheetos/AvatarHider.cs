@@ -17,7 +17,7 @@ namespace AstroClient.Cheetos
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnAvatarSpawn += OnAvatarSpawn;
+            ClientEventActions.OnAvatarSpawn += OnAvatarSpawn;
         }
 
         internal static bool HideAvatar = false;

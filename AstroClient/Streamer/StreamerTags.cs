@@ -16,7 +16,7 @@ namespace AstroClient.Streamer
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.OnPlayerJoin += OnPlayerJoined;
         }
 
         private void OnPlayerJoined(Player player)

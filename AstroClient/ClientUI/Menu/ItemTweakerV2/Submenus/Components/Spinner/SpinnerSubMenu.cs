@@ -15,7 +15,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Spinner
     {
         internal override void RegisterToEvents()
         {
-            TweakerEventActions.Event_OnSpinnerBehaviourPropertyChanged += OnSpinnerBehaviour_OnPropertyChanged;
+            TweakerEventActions.OnSpinnerBehaviourPropertyChanged += OnSpinnerBehaviour_OnPropertyChanged;
         }
 
 

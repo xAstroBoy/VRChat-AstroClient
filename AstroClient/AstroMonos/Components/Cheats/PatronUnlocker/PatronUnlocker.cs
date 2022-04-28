@@ -47,15 +47,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
                     if (value)
                     {
 
-                        ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-                        ClientEventActions.Event_OnUdonSyncRPC += OnUdonSyncRPCEvent;
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnUdonSyncRPC += OnUdonSyncRPCEvent;
 
                     }
                     else
                     {
 
-                        ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
-                        ClientEventActions.Event_OnUdonSyncRPC -= OnUdonSyncRPCEvent;
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnUdonSyncRPC -= OnUdonSyncRPCEvent;
                     }
                 }
                 _HasSubscribed = value;

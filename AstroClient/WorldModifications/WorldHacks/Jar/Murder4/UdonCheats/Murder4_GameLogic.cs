@@ -14,8 +14,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
-            ClientEventActions.Event_OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
         }
 
         private static QMNestedGridMenu CurrentScrollMenu;

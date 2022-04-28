@@ -12,7 +12,7 @@ namespace AstroClient.Tools.ObjectEditor.Cloner
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
         private void OnRoomLeft()

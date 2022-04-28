@@ -38,13 +38,13 @@ public class Ostinyo_World_PatronCracker : MonoBehaviour
                 if (value)
                 {
 
-                    ClientEventActions.Event_OnRoomLeft += OnRoomLeft;
+                    ClientEventActions.OnRoomLeft += OnRoomLeft;
 
                 }
                 else
                 {
 
-                    ClientEventActions.Event_OnRoomLeft -= OnRoomLeft;
+                    ClientEventActions.OnRoomLeft -= OnRoomLeft;
 
                 }
             }

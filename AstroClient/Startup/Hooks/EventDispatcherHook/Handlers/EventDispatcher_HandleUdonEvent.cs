@@ -32,7 +32,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
         {
             try
             {
-                ClientEventActions.Event_OnUdonSyncRPC?.SafetyRaiseWithParams(sender, gameObject, EventKey);
+                ClientEventActions.OnUdonSyncRPC?.SafetyRaiseWithParams(sender, gameObject, EventKey);
             }
             catch{}
 
@@ -69,7 +69,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
         {
             try
             {
-                ClientEventActions.Event_Udon_SendCustomEvent?.SafetyRaiseWithParams(UdonEvent, EventKey);
+                ClientEventActions.Udon_SendCustomEvent?.SafetyRaiseWithParams(UdonEvent, EventKey);
             }
             catch { }
 
