@@ -69,6 +69,8 @@ namespace AstroClient
             }
 
             Delegate[] array = eh.GetInvocationList();
+            if (array.Length == 0) return; // if there's no subscribers, just ignore the event
+                
             for (int i = 0; i < array.Length; i++)
             {
                 Delegate handler = array[i];
@@ -149,6 +151,7 @@ namespace AstroClient
         {
             if (eh == null) return;
             Delegate[] array = eh.GetInvocationList();
+            if (array.Length == 0) return; // if there's no subscribers, just ignore the event
             for (int i = 0; i < array.Length; i++)
             {
                 Delegate handler = array[i];
