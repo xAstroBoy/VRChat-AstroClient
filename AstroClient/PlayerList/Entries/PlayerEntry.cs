@@ -422,25 +422,24 @@ namespace AstroClient.PlayerList.Entries
                     entry.isFriend = false;
         }
 
-        private static void OnOwnerShipTransferred(PhotonView __instance, int __0)
+        private static void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
         {
-            if (__instance.GetComponent<VRC_Pickup>() == null)
+            if (instance.GetComponent<VRC_Pickup>() == null)
                 return;
 
             // Its really important that this actually fires so everything in try catch
             try
             {
-                Room room = Player.prop_Player_0?.prop_PlayerNet_0?.field_Private_PhotonView_0?.prop_Player_0?.field_Private_Room_0;
-                if (room == null)
+                if (GameInstances.CurrentRoom == null)
                     return;
 
                 // something is up with the  photon player constructor that makes me have to not use trygetvalue
                 string oldOwner = null;
-                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(__instance.field_Private_Int32_0))
-                    oldOwner = room.field_Private_Dictionary_2_Int32_Player_0[__instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
+                if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(instance.field_Private_Int32_0))
+                    oldOwner = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0[instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
                 string newOwner = null;
-                if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(__0))
-                    newOwner = room.field_Private_Dictionary_2_Int32_Player_0[__0].field_Public_Player_0?.prop_APIUser_0?.id;
+                if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(PhotonID))
+                    newOwner = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0[PhotonID].field_Public_Player_0?.prop_APIUser_0?.id;
 
                 int highestOwnedObjects = 0;
                 totalObjects = 0;

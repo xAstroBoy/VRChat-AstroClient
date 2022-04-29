@@ -29,10 +29,10 @@ namespace AstroClient.AstroMonos
                 {
                     WorldUtils.Pickups[i].GetOrAddComponent<PickupController>();
                 }
-                HasSubscribed = true;
                 HasPickupControllerBeenAdded = true;
                 
             }
+            HasSubscribed = true;
 
         }
         private static bool _HasSubscribed = false;
@@ -116,7 +116,7 @@ namespace AstroClient.AstroMonos
             {
                 if (!blockeduserids.ContainsKey(id))
                 {
-                    blockeduserids.TryAdd(id, new PickupBlockerData(player));
+                    blockeduserids.Add(id, new PickupBlockerData(player));
                 }
                 else
                 {
@@ -156,33 +156,25 @@ namespace AstroClient.AstroMonos
         {
             if (isPickup(instance))
             {
-                Room room = Player.prop_Player_0?.prop_PlayerNet_0?.field_Private_PhotonView_0?.prop_Player_0?.field_Private_Room_0;
-                if (room == null)
+                if (GameInstances.CurrentRoom == null)
                     return;
 
                 if (PickupBlocker.blockeduserids != null)
                 {
                     if (PickupBlocker.blockeduserids.Count != 0)
                     {
-                        if (room.field_Private_Dictionary_2_Int32_Player_0 != null)
+                        if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0 != null)
                         {
-                            if (room.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(value))
+                            if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(value))
                             {
-                                var photonplayer = room.field_Private_Dictionary_2_Int32_Player_0[value];
-                                if (photonplayer != null)
+                                var newOwner = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0[value].field_Public_Player_0?.prop_APIUser_0;
+
+                                if (newOwner != null)
                                 {
-                                    var player = photonplayer.field_Public_Player_0;
-                                    if (player != null)
+                                    if (PickupBlocker.IsPickupBlockedUser(newOwner.id))
                                     {
-                                        var apiuser = player.GetAPIUser();
-                                        if (apiuser != null)
-                                        {
-                                            if (PickupBlocker.IsPickupBlockedUser(apiuser.id))
-                                            {
-                                                instance.gameObject.TakeOwnership();
-                                                Log.Debug($"Blocked User {apiuser.displayName} from Using Pickup {instance.gameObject.name}");
-                                            }
-                                        }
+                                        instance.gameObject.TakeOwnership();
+                                        Log.Debug($"Blocked User {newOwner.displayName} from Using Pickup {instance.gameObject.name}");
                                     }
                                 }
                             }
@@ -192,7 +184,7 @@ namespace AstroClient.AstroMonos
             }
         }
 
-        internal static ConcurrentDictionary<string, PickupBlockerData> blockeduserids = new ConcurrentDictionary<string, PickupBlockerData>();
+        internal static Dictionary<string, PickupBlockerData> blockeduserids = new Dictionary<string, PickupBlockerData>();
 
         internal class PickupBlockerData
         {

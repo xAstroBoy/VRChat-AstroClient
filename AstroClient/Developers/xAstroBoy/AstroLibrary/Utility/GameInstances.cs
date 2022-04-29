@@ -1,5 +1,8 @@
 ﻿// Credits to Blaze and DayOfThePlay
 
+using Photon.Pun;
+using Photon.Realtime;
+
 namespace AstroClient.xAstroBoy.Utility
 {
     using UnityEngine;
@@ -10,6 +13,8 @@ namespace AstroClient.xAstroBoy.Utility
 
     public static class GameInstances
     {
+        public static Room CurrentRoom => CurrentPhotonPlayer.prop_Room_0;
+
         public static VRCUiCursorManager VRCUiCursorManager => VRCUiCursorManager.field_Private_Static_VRCUiCursorManager_0;
 
         public static VRCUiPopupManager VRCUiPopupManager => VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0;
@@ -28,6 +33,10 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static VRCPlayer CurrentUser => VRCPlayer.field_Internal_Static_VRCPlayer_0;
         public static VRC.Player CurrentPlayer => CurrentUser.GetPlayer();
+        public static PlayerNet CurrentPlayerNet => CurrentPlayer.prop_PlayerNet_0;
+
+        public static PhotonView CurrentPhotonView => CurrentPlayerNet.prop_PhotonView_0;
+        public static Photon.Realtime.Player CurrentPhotonPlayer => CurrentPhotonView.prop_Player_0;
 
         public static GameObject CurrentAvatar => CurrentPlayer.GetAvatarObject();
 
