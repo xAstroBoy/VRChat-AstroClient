@@ -13,7 +13,11 @@ namespace AstroClient.xAstroBoy.Utility
 
     public static class GameInstances
     {
-        public static Room CurrentRoom => CurrentPhotonPlayer.prop_Room_0;
+        public static Room CurrentRoom => CurrentPhotonPlayer?.prop_Room_0;
+        public static PlayerNet CurrentPlayerNet => CurrentPlayer?.prop_PlayerNet_0;
+
+        public static PhotonView CurrentPhotonView => CurrentPlayerNet?.prop_PhotonView_0;
+        public static Photon.Realtime.Player CurrentPhotonPlayer => CurrentPhotonView?.prop_Player_0;
 
         public static VRCUiCursorManager VRCUiCursorManager => VRCUiCursorManager.field_Private_Static_VRCUiCursorManager_0;
 
@@ -33,10 +37,6 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static VRCPlayer CurrentUser => VRCPlayer.field_Internal_Static_VRCPlayer_0;
         public static VRC.Player CurrentPlayer => CurrentUser.GetPlayer();
-        public static PlayerNet CurrentPlayerNet => CurrentPlayer.prop_PlayerNet_0;
-
-        public static PhotonView CurrentPhotonView => CurrentPlayerNet.prop_PhotonView_0;
-        public static Photon.Realtime.Player CurrentPhotonPlayer => CurrentPhotonView.prop_Player_0;
 
         public static GameObject CurrentAvatar => CurrentPlayer.GetAvatarObject();
 
@@ -51,7 +51,5 @@ namespace AstroClient.xAstroBoy.Utility
         public static UserCameraController UserCameraController => UserCameraController.field_Internal_Static_UserCameraController_0;
 
         public static VRCTrackingManager VRCTrackingManager => VRCTrackingManager.field_Private_Static_VRCTrackingManager_0;
-
-        public static ActionMenu ActionMenu => ActionMenu.field_Private_ActionMenuOpener_0.field_Public_ActionMenu_0;
     }
 }
