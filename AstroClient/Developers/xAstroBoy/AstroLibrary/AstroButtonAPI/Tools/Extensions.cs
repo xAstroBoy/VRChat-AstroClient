@@ -425,7 +425,14 @@
 
         internal static void PushPage(this MenuStateController _MenuStateController, string Page)
         {
-            _MenuStateController.Method_Public_Void_String_UIContext_Boolean_0(Page);
+            for (int i = 0; i < _MenuStateController.field_Public_ArrayOf_UIPage_0.Count; i++)
+            {
+                if (_MenuStateController.field_Public_ArrayOf_UIPage_0[i].field_Public_String_0 == Page)
+                {
+                    _MenuStateController.ShowTabContent(i, false);
+                    break;
+                }
+            }
         }
 
         internal static void ShowWingsPage(this QMWings pagename)

@@ -84,7 +84,7 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-                foreach (var p in Players.Where(p => PlayerUtils.IsInstanceMaster((VRCPlayer)p._vrcplayer)))
+                foreach (var p in Players.Where(p => p.GetVRCPlayer().IsinstanceMaster()))
                 {
                     return p._vrcplayer;
                 }

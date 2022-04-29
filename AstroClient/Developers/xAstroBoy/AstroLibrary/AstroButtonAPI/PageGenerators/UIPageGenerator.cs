@@ -1,4 +1,7 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
+﻿using System.Linq;
+using UnhollowerBaseLib;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
 {
     using Il2CppSystem.Collections.Generic;
     using Tools;
@@ -22,44 +25,48 @@
                     result.field_Private_Boolean_1 = true;
                     result.field_Private_List_1_UIPage_0 = new List<UIPage>();
                     result.field_Private_List_1_UIPage_0.Add(result);
-                    QuickMenuPageDictionary.Add(menuName, result);
+                    QuickMenuTools.QuickMenuController.AddPage(result);
                 }
             }
 
             return result;
         }
 
-        internal static void RemovePage(this UIPage page)
+
+
+
+        internal static void AddPage(this MenuStateController controller, UIPage page)
         {
             if (page != null)
             {
-                foreach (var item in QuickMenuPageDictionary)
+                var list = controller.field_Public_ArrayOf_UIPage_0.ToList();
+                if (!list.Contains(page))
                 {
-                    if (item != null)
-                    {
-                        if (item.Value != null)
-                        {
-                            if (item.Value.Equals(page))
-                            {
-                                QuickMenuPageDictionary.Remove(item.Key);
-                            }
-                        }
-                        else
-                        {
-                            QuickMenuPageDictionary.Remove(item.Key);
-                        }
-                    }
+                    list.Add(page);
                 }
+                controller.field_Public_ArrayOf_UIPage_0 = list.ToArray();
             }
         }
 
-        private static Dictionary<string, UIPage> QuickMenuPageDictionary
+        internal static void RemovePage(this MenuStateController controller, UIPage page, bool DestroyPage = true)
         {
-            get
+            if (page != null)
             {
-                return QuickMenuTools.QuickMenuController.field_Private_Dictionary_2_String_UIPage_0;
+                var list = controller.field_Public_ArrayOf_UIPage_0.ToList();
+                if (list.Contains(page))
+                {
+                    list.Remove(page);
+                    if (DestroyPage)
+                    {
+                        UnityEngine.Object.Destroy(page);
+                    }
+                }
+                controller.field_Public_ArrayOf_UIPage_0 = list.ToArray();
             }
         }
+
+
+
 
     }
 }

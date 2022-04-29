@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
+﻿using AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 {
     using System;
     using Extensions;
@@ -66,7 +68,7 @@
                 CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
                 CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
                 CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
-                QuickMenuTools.WingMenuStateControllerLeft.field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, CurrentPage); //_uiPages
+                QuickMenuTools.WingMenuStateControllerLeft.AddPage(CurrentPage); //_uiPages
 
                 var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
@@ -114,7 +116,7 @@
                 CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
                 CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
                 CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
-                QuickMenuTools.WingMenuStateControllerRight.field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, CurrentPage); //_uiPages
+                QuickMenuTools.WingMenuStateControllerRight.AddPage(CurrentPage); //_uiPages
 
                 var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;

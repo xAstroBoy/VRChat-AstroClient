@@ -13,11 +13,30 @@ namespace AstroClient.xAstroBoy.Utility
 
     public static class GameInstances
     {
-        public static Room CurrentRoom => CurrentPhotonPlayer?.prop_Room_0;
-        public static PlayerNet CurrentPlayerNet => CurrentPlayer?.prop_PlayerNet_0;
+        public static Room CurrentRoom
+        {
+            get
+            {
+                if (CurrentPlayer != null)
+                {
+                    if (CurrentPlayerNet != null)
+                    {
+                        if (CurrentPhotonView != null)
+                        {
+                            if (CurrentPhotonPlayer != null)
+                            {
+                                return CurrentPhotonPlayer.prop_Room_0; // GODDAMNIT
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+        }
+        public static Photon.Realtime.Player CurrentPhotonPlayer => CurrentPhotonView?.prop_Player_0;
 
         public static PhotonView CurrentPhotonView => CurrentPlayerNet?.prop_PhotonView_0;
-        public static Photon.Realtime.Player CurrentPhotonPlayer => CurrentPhotonView?.prop_Player_0;
+        public static PlayerNet CurrentPlayerNet => CurrentPlayer?.prop_PlayerNet_0;
 
         public static VRCUiCursorManager VRCUiCursorManager => VRCUiCursorManager.field_Private_Static_VRCUiCursorManager_0;
 
