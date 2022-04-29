@@ -13,7 +13,7 @@ namespace AstroClient.Startup.Hooks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
         }
 
 
