@@ -65,7 +65,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if(value)
                     {
 
-                        ClientEventActions.Pickup_isHeld += Pickup_IsHeld;
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
                         ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
@@ -76,7 +75,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                     else
                     {
 
-                        ClientEventActions.Pickup_isHeld -= Pickup_IsHeld;
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnQuickMenuClose -= OnQuickMenuClose;
                         ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
@@ -145,6 +143,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             if (gameObject != null)
             {
+                CurrentHeldStatus = this.IsHeld;
                 Run_onPickupUpdate();
                 if (!EditMode)
                     SyncProperties(true);
@@ -510,17 +509,6 @@ namespace AstroClient.AstroMonos.Components.Tools
             }
         }
 
-        internal void Pickup_IsHeld(VRC_Pickup pickup, bool isHeld)
-        {
-            if(pickup != null)
-            {
-                if(pickup.gameObject.Equals(this.gameObject))
-                {
-                    CurrentHeldStatus = isHeld;
-                }
-            }
-
-        }
         void OnDestroy()
         {
             EventsAreEnabled = false;
