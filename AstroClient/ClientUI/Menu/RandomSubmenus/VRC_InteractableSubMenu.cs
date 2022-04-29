@@ -18,7 +18,6 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
         }
 
         private static QMWings WingMenu;
@@ -39,7 +38,29 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
 
+        private static bool _IsUIPageListenerActive = false;
+        private static bool IsUIPageListenerActive
+        {
+            get => _IsUIPageListenerActive;
+            set
+            {
+                if (_IsUIPageListenerActive != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
 
+                    }
+                    else
+                    {
+                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+
+                    }
+
+                }
+                _IsUIPageListenerActive = value;
+            }
+        }
         internal static void InitButtons(QMGridTab menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "VRC_Interactables", "Interact VRC_Interactable");
@@ -89,7 +110,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
-
+            IsUIPageListenerActive = false;
             isOpen = false;
         }
 
@@ -101,13 +122,14 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-
+            IsUIPageListenerActive = true;
             Regenerate();
         }
 
-        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
+
 
             if (Page != null)
                 if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))

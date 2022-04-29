@@ -80,9 +80,30 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
         }
+        private static bool _IsUIPageListenerActive = false;
+        private static bool IsUIPageListenerActive
+        {
+            get => _IsUIPageListenerActive;
+            set
+            {
+                if (_IsUIPageListenerActive != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
 
+                    }
+                    else
+                    {
+                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+
+                    }
+
+                }
+                _IsUIPageListenerActive = value;
+            }
+        }
         private void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
@@ -246,6 +267,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
+            IsUIPageListenerActive = false;
             isOpen = false;
 
         }
@@ -259,8 +281,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
                 WingMenu.ShowWingsPage();
             }
 
+            IsUIPageListenerActive = true;
             MakeSingleUdonButtonsUnavailable();
-
             if (!isGenerating)
             {
                 Regenerate();
@@ -295,7 +317,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
         }
 
 
-        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
             if (Page != null)

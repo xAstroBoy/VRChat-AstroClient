@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Moderation
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.Moderation
 {
     using Photon.Realtime;
     using xAstroBoy.Utility;
@@ -7,7 +9,11 @@
     {
         internal override void RegisterToEvents()
         {
-            
+            ClientEventActions.OnPlayerBlockedYou += OnPlayerBlockedYou;
+            ClientEventActions.OnPlayerUnblockedYou += OnPlayerUnblockedYou;
+            ClientEventActions.OnPlayerMutedYou += OnPlayerMutedYou;
+            ClientEventActions.OnPlayerUnmutedYou += OnPlayerUnmutedYou;
+
         }
 
         private void OnPlayerBlockedYou(Player player)

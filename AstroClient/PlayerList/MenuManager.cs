@@ -24,13 +24,34 @@ namespace AstroClient.PlayerList
         internal override void RegisterToEvents()
         {
             ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
-            ClientEventActions.OnQuickMenuOpen += OnQuickMenuClose;
+            ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
 
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
         }
         //public static List<SubMenu> playerListMenus { get; set; } = new List<SubMenu>();
+        private static bool _IsUIPageListenerActive = false;
+        private static bool IsUIPageListenerActive
+        {
+            get => _IsUIPageListenerActive;
+            set
+            {
+                if (_IsUIPageListenerActive != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
 
+                    }
+                    else
+                    {
+                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+
+                    }
+
+                }
+                _IsUIPageListenerActive = value;
+            }
+        }
         public static GameObject playerList
         {
             get
@@ -109,7 +130,7 @@ namespace AstroClient.PlayerList
         }
 
 
-        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (Page != null)
             {
@@ -139,11 +160,13 @@ namespace AstroClient.PlayerList
             curMenuState.sort = false;
             curMenuState.userLocal = false;
             curMenuState.userRemote = false;
+            IsUIPageListenerActive = true;
         }
 
         private void OnQuickMenuClose()
         {
             PlayerListConfig.SaveEntries();
+            IsUIPageListenerActive = false;
         }
 
 

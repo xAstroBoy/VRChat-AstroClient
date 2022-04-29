@@ -54,10 +54,11 @@ namespace AstroClient
         }
 
 
-        
-        internal static void SafetyRaiseWithParams(this Delegate eh, params object[] args) => SafetyRaiseWithParamsInternal(eh, args);
+        internal static void SafetyRaiseWithParamsAndNoExceptions(this Delegate eh, params object[] args) => SafetyRaiseWithParamsInternal(eh: eh, SuppressExceptions: true, args: args);
 
-        private static void SafetyRaiseWithParamsInternal(Delegate eh, params object[] args)
+        internal static void SafetyRaiseWithParams(this Delegate eh, params object[] args) => SafetyRaiseWithParamsInternal(eh: eh, SuppressExceptions: false, args: args);
+
+        private static void SafetyRaiseWithParamsInternal(Delegate eh, bool SuppressExceptions, params object[] args)
         {
             if (eh == null) return;
             if(args == null)
@@ -97,14 +98,16 @@ namespace AstroClient
                         }
                         catch (TargetInvocationException invokeexc)
                         {
-                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                            if (!SuppressExceptions)
                             {
-                                Delegate.Remove(eh, handler);
-                                continue;
-                            }
+                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue;
+                                }
 
-                            Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
-                            Log.Exception(invokeexc.InnerException);
+                                Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
+                                Log.Exception(invokeexc.InnerException);
+                            }
                         }
 
                     }
@@ -117,18 +120,21 @@ namespace AstroClient
                         }
                         catch (TargetInvocationException invokeexc)
                         {
-                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                            if (!SuppressExceptions)
                             {
-                                Delegate.Remove(eh, handler);
-                                continue;
-                            }
+                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue;
+                                }
 
-                            Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
-                            Log.Exception(invokeexc.InnerException);
+                                Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
+                                Log.Exception(invokeexc.InnerException);
+                            }
                         }
                         sw.Stop();
                         if (sw.ElapsedMilliseconds > 100)
                         {
+
                             var result = $"{handler.Method.DeclaringType.FullName + "." + handler.Method.Name} Elapsed Milliseconds : {sw.ElapsedMilliseconds}";
                             if (!Results.Contains(result))
                             {
@@ -145,9 +151,9 @@ namespace AstroClient
             }
         }
         
-        internal static void SafetyRaise(this Delegate eh) => SafetyRaiseInternal(eh);
+        internal static void SafetyRaise(this Delegate eh, bool SuppressExceptions = false) => SafetyRaiseInternal(eh, SuppressExceptions);
 
-        private static void SafetyRaiseInternal(Delegate eh)
+        private static void SafetyRaiseInternal(Delegate eh, bool SuppressExceptions = false)
         {
             if (eh == null) return;
             Delegate[] array = eh.GetInvocationList();
@@ -178,14 +184,16 @@ namespace AstroClient
                         }
                         catch (TargetInvocationException invokeexc)
                         {
-                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                            if (!SuppressExceptions)
                             {
-                                //Delegate.Remove(eh, handler);
-                                continue;
-                            }
+                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue;
+                                }
 
-                            Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
-                            Log.Exception(invokeexc.InnerException);
+                                Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
+                                Log.Exception(invokeexc.InnerException);
+                            }
                         }
 
                     }
@@ -198,14 +206,16 @@ namespace AstroClient
                         }
                         catch (TargetInvocationException invokeexc)
                         {
-                            if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                            if (!SuppressExceptions)
                             {
-                                Delegate.Remove(eh, handler);
-                                continue;
-                            }
+                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                                {
+                                    continue;
+                                }
 
-                            Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
-                            Log.Exception(invokeexc.InnerException);
+                                Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
+                                Log.Exception(invokeexc.InnerException);
+                            }
                         }
                         sw.Stop();
                         if (sw.ElapsedMilliseconds > 1)

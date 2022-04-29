@@ -17,9 +17,30 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
         }
+        private static bool _IsUIPageListenerActive = false;
+        private static bool IsUIPageListenerActive
+        {
+            get => _IsUIPageListenerActive;
+            set
+            {
+                if (_IsUIPageListenerActive != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
 
+                    }
+                    else
+                    {
+                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+
+                    }
+
+                }
+                _IsUIPageListenerActive = value;
+            }
+        }
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new();
@@ -116,7 +137,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
-
+            IsUIPageListenerActive = false;
             isOpen = false;
         }
 
@@ -144,11 +165,11 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                     if (ExportSkybox != null) ExportSkybox.SetActive(false);
                 }
             }
-
+            IsUIPageListenerActive = true;
             Regenerate();
         }
 
-        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

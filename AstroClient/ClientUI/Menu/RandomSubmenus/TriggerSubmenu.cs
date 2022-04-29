@@ -19,7 +19,6 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
         }
 
         private static QMWings WingMenu;
@@ -27,7 +26,29 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         private static List<QMSingleButton> GeneratedButtons = new();
         private static List<ScrollMenuListener> Listeners = new();
         private static QMWingToggleButton isGlobalTriggerToggle;
+        private static bool _IsUIPageListenerActive = false;
+        private static bool IsUIPageListenerActive
+        {
+            get => _IsUIPageListenerActive;
+            set
+            {
+                if (_IsUIPageListenerActive != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
 
+                    }
+                    else
+                    {
+                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+
+                    }
+
+                }
+                _IsUIPageListenerActive = value;
+            }
+        }
 
         private static bool CleanOnRoomLeave { get; } = true;
         private static bool DestroyOnMenuClose { get; } = false;
@@ -118,7 +139,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 WingMenu.ClickBackButton();
             }
             isGlobalTrigger = false;
-
+            IsUIPageListenerActive = false;
             isOpen = false;
         }
 
@@ -130,11 +151,11 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-
+            IsUIPageListenerActive = true;
             Regenerate();
         }
 
-        private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

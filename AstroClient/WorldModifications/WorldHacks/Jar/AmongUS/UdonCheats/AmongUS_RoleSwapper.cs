@@ -2,12 +2,12 @@
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
     using AstroMonos.Components.Tools.Listeners;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnhollowerBaseLib;
     using UnityEngine;
     using VRC.Udon;
@@ -22,7 +22,28 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
+        }
+
+        private static bool _IsUIPageListenerActive = false;
+
+        private static bool IsUIPageListenerActive
+        {
+            get => _IsUIPageListenerActive;
+            set
+            {
+                if (_IsUIPageListenerActive != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
+                    }
+                    else
+                    {
+                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+                    }
+                }
+                _IsUIPageListenerActive = value;
+            }
         }
 
         private static QMWings WingMenu;
@@ -56,7 +77,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         }
 
         private static bool isDebugging = true;
-
 
         private static void Debug(string msg)
         {
@@ -103,7 +123,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                                                 var LocalPlayer = JarRoleController.CurrentPlayer_AmongUS_ESP;
                                                 if (LocalPlayer != null)
                                                 {
-                                                  SelfRole = LocalPlayer.CurrentRole;
+                                                    SelfRole = LocalPlayer.CurrentRole;
                                                 }
                                                 if (TargetComponent != null)
                                                 {
@@ -141,7 +161,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                     Generated.Add(btnerror);
                 }
 
-
                 HasGenerated = true;
                 isGenerating = false;
             }
@@ -177,8 +196,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
+            IsUIPageListenerActive = false;
             isOpen = false;
-
         }
 
         private static void OnOpenMenu()
@@ -189,14 +208,14 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-
+            IsUIPageListenerActive = true;
             if (!isGenerating)
             {
                 Regenerate();
             }
         }
 
-                private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
             if (Page != null)
@@ -218,6 +237,5 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
-
     }
 }

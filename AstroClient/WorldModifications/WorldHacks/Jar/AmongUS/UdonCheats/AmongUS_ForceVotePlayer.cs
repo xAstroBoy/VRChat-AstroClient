@@ -3,14 +3,13 @@ using AstroClient.Tools.UdonEditor;
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 {
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.Tools.Listeners;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
-    using AstroMonos.Components.Tools.Listeners;
     using UnityEngine;
     using VRC.Udon;
-    using VRC.Udon.Common.Interfaces;
     using VRC.UI.Elements;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
     using xAstroBoy.AstroButtonAPI.Tools;
@@ -22,7 +21,28 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.OnUiPageToggled += OnUiPageToggled;
+        }
+
+        private static bool _IsUIPageListenerActive = false;
+
+        private static bool IsUIPageListenerActive
+        {
+            get => _IsUIPageListenerActive;
+            set
+            {
+                if (_IsUIPageListenerActive != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
+                    }
+                    else
+                    {
+                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+                    }
+                }
+                _IsUIPageListenerActive = value;
+            }
         }
 
         private static QMWings WingMenu;
@@ -58,7 +78,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
         private static bool isDebugging = true;
 
-
         private static void Debug(string msg)
         {
             if (isDebugging)
@@ -66,6 +85,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                 Log.Debug(msg);
             }
         }
+
         // TODO : Make a mechanism to prevent people who already voted so it doesn't make duplicate votes on instances lol
 
         private static void Regenerate()
@@ -125,10 +145,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                     {
                         Log.Error($"[AMONG US]: Error in Force Vote Button!");
                         Log.Exception(e);
-                        var btnerror = new QMSingleButton(CurrentScrollMenu, "ERROR, SEE CONSOLE", null, "ERROR, SEE CONSOLE",  Color.red);
+                        var btnerror = new QMSingleButton(CurrentScrollMenu, "ERROR, SEE CONSOLE", null, "ERROR, SEE CONSOLE", Color.red);
                         GeneratedButtons.Add(btnerror);
                     }
-
 
                     HasGenerated = true;
                     isGenerating = false;
@@ -138,12 +157,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
         private static void GenerateInternal(QMNestedGridMenu menu, UdonBehaviour action, AmongUS_ESP Component, string NodeTranslated)
         {
-
             bool HasAddedEveryoneVoteBtn = false;
             var eventkeys = action.Get_EventKeys();
-            if(eventkeys != null)
+            if (eventkeys != null)
             {
-                for(int eventkey = 0; eventkey < eventkeys.Length; eventkey++)
+                for (int eventkey = 0; eventkey < eventkeys.Length; eventkey++)
                 {
                     var key = eventkeys[eventkey];
                     var anothertmplist = new List<string>();
@@ -193,14 +211,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                             }
                         }, action.gameObject?.ToString() + " Run " + "Skip Voting", Color.green);
                     }
-
                 }
-
-
             }
-
-
-
         }
 
         internal static void DestroyGeneratedButtons()
@@ -215,13 +227,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             if (GeneratedButtons.Count != 0)
             {
                 foreach (var item in GeneratedButtons) item.DestroyMe();
-
             }
             if (Listeners.Count != 0)
             {
                 foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
             }
-            
         }
 
         private void OnQuickMenuClose()
@@ -235,13 +245,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             {
                 DestroyGeneratedButtons();
             }
+            IsUIPageListenerActive = false;
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
                 WingMenu.ClickBackButton();
             }
             isOpen = false;
-
         }
 
         private static void OnOpenMenu()
@@ -252,14 +262,14 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-
+            IsUIPageListenerActive = true;
             if (!isGenerating)
             {
                 Regenerate();
             }
         }
 
-                private void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
             if (Page != null)
@@ -283,6 +293,5 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             }, "Refresh and force menu to regenerate");
             WingMenu.SetActive(false);
         }
-
     }
 }

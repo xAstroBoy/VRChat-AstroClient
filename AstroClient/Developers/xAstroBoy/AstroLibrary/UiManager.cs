@@ -167,7 +167,7 @@ namespace AstroClient.xAstroBoy
         private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
         {
             if (__instance == null) return;
-            ClientEventActions.OnUiPageToggled.SafetyRaiseWithParams(__instance, __0, __1);
+            ClientEventActions.OnUiPageToggled.SafetyRaiseWithParamsAndNoExceptions(__instance, __0, __1);
         }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)

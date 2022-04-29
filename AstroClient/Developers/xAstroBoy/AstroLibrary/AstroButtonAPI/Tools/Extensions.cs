@@ -84,7 +84,7 @@
 
         internal static bool ContainsPage(this UIPage page, UIPage TargetPage)
         {
-            if (page != null && TargetPage != null)
+            if (page != null && TargetPage != null && page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
             {
                 if (page.name.Equals(TargetPage.name)) return true;
                 if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
