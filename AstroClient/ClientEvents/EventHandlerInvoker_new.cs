@@ -180,7 +180,7 @@ namespace AstroClient
                         {
                             if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
                             {
-                                Delegate.Remove(eh, handler);
+                                //Delegate.Remove(eh, handler);
                                 continue;
                             }
 

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks.PhotonHook.Startup;
+﻿using VRC.Core;
+
+namespace AstroClient.Startup.Hooks.PhotonHook.Startup;
 
 using System.Reflection;
 using AstroClient.Tools;
@@ -39,7 +41,7 @@ internal class PhotonOnEventHook : AstroEvents
     private static void HookPhotonOnEvent()
     {
         Log.Debug("Hooking Photon OnEvent");
-        new AstroPatch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetPatch(nameof(OnEventPatch)));
+        new AstroPatch(typeof(VRCNetworkingClient).GetMethod(nameof(VRCNetworkingClient.OnEvent)), GetPatch(nameof(OnEventPatch)));
     }
 
     // Current Targeted Byte 

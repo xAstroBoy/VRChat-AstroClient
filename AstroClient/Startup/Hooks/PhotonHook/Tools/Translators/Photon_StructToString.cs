@@ -34,7 +34,7 @@ internal static class Photon_StructToString
         }
     }
 
-    internal static string TranslateEventData(byte code)
+    internal static string TranslatePhotonData(byte code)
     {
         switch (code)
         {
@@ -69,4 +69,5 @@ internal static class Photon_StructToString
                 return $"Unrecognized Byte : {code}";
         }
     }
+
 }

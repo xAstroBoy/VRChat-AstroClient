@@ -20,18 +20,18 @@ using Exception = System.Exception;
 
 internal class PhotonLogger
 {
-
+    // TODO : make a config.
     private static bool EventCodeToLog(byte code)
     {
         switch (code)
         {
             case VRChat_Photon_Events.OpRemoveCache_etc: return false;
-            case VRChat_Photon_Events.USpeaker_Voice_Data: return false;
-            case VRChat_Photon_Events.Disconnect_Message: return true;
+            case VRChat_Photon_Events.USpeaker_Voice_Data: return true;
+            case VRChat_Photon_Events.Disconnect_Message: return false;
             case VRChat_Photon_Events.Cached_Events: return false;
             case VRChat_Photon_Events.Master_allowing_player_to_join: return true;
-            case VRChat_Photon_Events.RPC: return false;
-            case VRChat_Photon_Events.PhysBones: return true;
+            case VRChat_Photon_Events.RPC: return true;
+            case VRChat_Photon_Events.PhysBones: return false;
             case VRChat_Photon_Events.Motion: return false;
             case VRChat_Photon_Events.interest: return false;
             case VRChat_Photon_Events.Reliable: return false;
@@ -53,7 +53,7 @@ internal class PhotonLogger
             case VRChat_Photon_Events.Leaving_World: return false;
             case VRChat_Photon_Events.Joining_World: return false;
             default:
-                return false;
+                return true;
         }
     }
 
@@ -69,7 +69,7 @@ internal class PhotonLogger
                 if (EventCodeToLog(PhotonData.Code) || SkipBlock)
                 {
                     var PhotonSender = GameInstances.LoadBalancingPeer.GetPhotonPlayer(PhotonData.sender);
-                    var translated = Photon_StructToString.TranslateEventData(PhotonData.Code);
+                    var translated = Photon_StructToString.TranslatePhotonData(PhotonData.Code);
                     if (translated.IsNotNullOrEmptyOrWhiteSpace())
                         prefix.Append($"[Event ({PhotonData.Code})][{translated}]: ");
                     else
@@ -93,6 +93,7 @@ internal class PhotonLogger
                         ConvertEventDataToString(PhotonData.Code, PhotonData.GetParameterData(), ref line, ref prefix,
                             ref ContainerType);
                     }
+
 
                     Log.Write($"{Photon_StructToString.HookActionToString(HookAction)}{ContainerType}{prefix}{line}");
 
@@ -127,11 +128,31 @@ internal class PhotonLogger
                 line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(casteddict), Formatting.Indented));
             }
         }
+        else if (Data.GetIl2CppType().FullName.Equals("System.Int32[]"))
+        {
+            ContainerType.Append($"[Int[]] : ");
+            line.AppendLine();
+            line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<int[]>(Data), Formatting.Indented));
+        }
+
         else if (Data.GetIl2CppType().FullName.Equals("System.Int32[][]"))
         {
             ContainerType.Append($"[Int[][]] : ");
             line.AppendLine();
             line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<int[][]>(Data), Formatting.Indented));
+        }
+        else if (Data.GetIl2CppType().FullName.Equals("System.Byte[]"))
+        {
+            ContainerType.Append($"[Byte[]] : ");
+            line.AppendLine();
+            line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<byte[]>(Data), Formatting.Indented));
+        }
+
+        else if (Data.GetIl2CppType().FullName.Equals("System.Byte[][]"))
+        {
+            ContainerType.Append($"[Byte[][]] : ");
+            line.AppendLine();
+            line.AppendLine(JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<byte[][]>(Data), Formatting.Indented));
         }
 
         else if (Data.GetIl2CppType().Equals(Il2CppType.Of<Hashtable>()))
