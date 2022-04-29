@@ -190,7 +190,7 @@
         {
             backButton.SetBackButtonAction(() =>
             {
-                QuickMenuTools.QuickMenuController.PushPage("QuickMenuDashboard");
+                QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
                 if (OnCloseAction != null) OnCloseAction();
             });
         }

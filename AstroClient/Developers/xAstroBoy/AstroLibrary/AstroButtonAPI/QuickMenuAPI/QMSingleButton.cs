@@ -18,31 +18,20 @@
     {
         internal string btnQMLoc { get; set; }
         internal string btnType { get; set; }
+
+
         private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
 
         internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
         {
             get
             {
-                if (ButtonObject != null)
+                if (_ButtonToolTip == null)
                 {
-                    if (_ButtonToolTip == null)
-                    {
-                        var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
-                        if (attempt1 == null)
-                        {
-                            attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
-                        }
-
-                        if (attempt1 != null)
-                        {
-                            return _ButtonToolTip = attempt1;
-                        }
-                    }
-
-                    return _ButtonToolTip;
+                    return _ButtonToolTip = ButtonObject.GetGetInChildrens_OrAddComponent<VRC.UI.Elements.Tooltips.UiTooltip>(true);
                 }
-                return null;
+
+                return _ButtonToolTip;
             }
         }
 

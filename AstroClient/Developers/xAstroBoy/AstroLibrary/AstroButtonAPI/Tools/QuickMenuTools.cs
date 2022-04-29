@@ -760,7 +760,7 @@
 
         internal static void ShowQuickmenuPage(string pagename)
         {
-            QuickMenuController.PushPage(pagename);
+            QuickMenuController.ShowTabContent(pagename);
         }
 
         internal static void NoShader(QMSingleButton x)

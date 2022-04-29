@@ -34,11 +34,19 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 
         internal string CurrentBtnColor { get; set; }
         internal string BtnText { get; set; }
+        internal Action OnWingOpen { get; set; }
+        internal Action OnWingClose { get; set; }
 
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Sprite icon = null)
         {
             btnQMLoc = "WingPage" + MenuName;
             initButton(Index, LeftWing, MenuName, btnToolTip, icon);
+            SetBackButtonAction(() =>
+            {
+                this.ShowWingsPage("Root");
+
+            });
+
         }
 
         // TODO : Cleanup and make it prettier and better!
@@ -89,7 +97,15 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
-                SetAction(() => { QuickMenuTools.Wing_Left.ShowQuickmenuPage(btnQMLoc); });
+                SetAction(() =>
+                {
+                    QuickMenuTools.Wing_Left.ShowWingPage(btnQMLoc);
+                });
+                SetBackButtonAction(() =>
+                {
+                    QuickMenuTools.Wing_Left.ShowWingPage("WingMenu");
+
+                });
             }
             else
             {
@@ -136,7 +152,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 backbuttonObject = CurrentPage.transform.FindObject("WngHeader_H1/LeftItemContainer/Button_Back").gameObject;
                 BackButton = backbuttonObject.GetComponent<Button>();
                 //PushPage
-                SetAction(() => { QuickMenuTools.Wing_Right.ShowQuickmenuPage(btnQMLoc); });
+                SetAction(() =>
+                {
+                    QuickMenuTools.Wing_Right.ShowWingPage(btnQMLoc);
+                });
             }
 
             ButtonObject.LoadSprite(icon, "Icon");
@@ -147,6 +166,12 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         {
             btnQMLoc = "WingSubPage" + MenuName;
             initButton(menu, MenuName, btnToolTip, icon);
+            SetBackButtonAction(() =>
+            {
+                menu.ShowWingsPage();
+
+            });
+
         }
 
         private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
@@ -205,7 +230,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
                 CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
                 CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
-                QuickMenuTools.WingMenuStateControllerLeft.field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, CurrentPage); //_uiPages
+                QuickMenuTools.WingMenuStateControllerLeft.AddPage(CurrentPage); //_uiPages
 
                 var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
@@ -226,7 +251,12 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
-                SetAction(() => { QuickMenuTools.Wing_Left.ShowQuickmenuPage(btnQMLoc); });
+                SetAction(() =>
+                {
+                    QuickMenuTools.Wing_Left.ShowWingPage(btnQMLoc);
+                });
+
+
             }
             else
             {
@@ -251,7 +281,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
                 CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
                 CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
-                QuickMenuTools.WingMenuStateControllerRight.field_Private_Dictionary_2_String_UIPage_0.Add(btnQMLoc, CurrentPage); //_uiPages
+                QuickMenuTools.WingMenuStateControllerRight.AddPage(CurrentPage); //_uiPages
 
                 var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
@@ -272,7 +302,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 BackButton = backbuttonObject.GetComponent<Button>();
 
                 //PushPage
-                SetAction(() => { QuickMenuTools.Wing_Right.ShowQuickmenuPage(btnQMLoc); });
+                SetAction(() =>
+                {
+                    QuickMenuTools.Wing_Right.ShowWingPage(btnQMLoc);
+                });
             }
 
             ButtonObject.LoadSprite(icon, "Icon");
@@ -374,12 +407,34 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             var NewText = $"<color={CurrentBtnColor}>{text}</color>";
             ButtonText.text = NewText;
         }
+        internal void SetBackButtonAction(Action buttonAction)
+        {
+            if (buttonAction != null)
+            {
+                backbuttonObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+                backbuttonObject.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(() =>
+                {
+                    if (buttonAction != null) buttonAction();
+                    if (OnWingClose != null) OnWingClose();
+
+                }));
+            }
+        }
 
         internal void SetAction(Action buttonAction)
         {
-            ButtonObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             if (buttonAction != null)
-                ButtonObject.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
+            {
+                ButtonObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+                ButtonObject.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(()=>
+                {
+                    if (buttonAction != null) buttonAction();
+                    if (OnWingOpen != null) OnWingOpen();
+
+                }));
+
+            }
         }
+
     }
 }

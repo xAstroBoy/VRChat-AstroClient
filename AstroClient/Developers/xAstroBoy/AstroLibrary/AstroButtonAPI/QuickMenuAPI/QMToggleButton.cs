@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
+﻿using AstroClient.xAstroBoy.Utility;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using AstroClient.Tools.Extensions;
     using ClientResources.Loaders;
@@ -171,20 +173,7 @@
             {
                 if (_ButtonToolTip == null)
                 {
-                    var attempt1 = ButtonObject.GetComponent<UiToggleTooltip>();
-                    if (attempt1 == null)
-                    {
-                        attempt1 = ButtonObject.GetComponentInChildren<UiToggleTooltip>(true);
-                    }
-                    if (attempt1 == null)
-                    {
-                        attempt1 = ButtonObject.GetComponentInParent<UiToggleTooltip>();
-                    }
-
-                    if (attempt1 != null)
-                    {
-                        return _ButtonToolTip = attempt1;
-                    }
+                    return _ButtonToolTip = ButtonObject.GetGetInChildrens_OrAddComponent<UiToggleTooltip>(true);
                 }
 
                 return _ButtonToolTip;

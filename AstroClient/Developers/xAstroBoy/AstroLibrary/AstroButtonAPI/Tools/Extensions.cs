@@ -142,14 +142,10 @@
             return value.Cast<DataModel<APIUser>>().field_Protected_TYPE_0;
         }
 
-        internal static void ShowQuickmenuPage(this QuickMenu instance, string pagename)
-        {
-            instance.prop_MenuStateController_0.PushPage(pagename);
-        }
 
-        internal static void ShowQuickmenuPage(this Wing instance, string pagename)
+        internal static void ShowWingPage(this Wing instance, string pagename)
         {
-            instance.field_Private_MenuStateController_0.PushPage(pagename);
+            instance.field_Private_MenuStateController_0.ShowTabContent(pagename);
         }
 
         internal static Player GetSelectedPlayer(this SelectedUserMenuQM instance)
@@ -476,7 +472,7 @@
             //}
         }
 
-        internal static void PushPage(this MenuStateController _MenuStateController, string Page)
+        internal static void ShowTabContent(this MenuStateController _MenuStateController, string Page)
         {
             for (int i = 0; i < _MenuStateController.field_Public_ArrayOf_UIPage_0.Count; i++)
             {
@@ -492,11 +488,23 @@
         {
             if (pagename.isLeftWing)
             {
-                QuickMenuTools.Wing_Left.ShowQuickmenuPage(pagename.GetMenuName());
+                QuickMenuTools.Wing_Left.ShowWingPage(pagename.GetMenuName());
             }
             else
             {
-                QuickMenuTools.Wing_Right.ShowQuickmenuPage(pagename.GetMenuName());
+                QuickMenuTools.Wing_Right.ShowWingPage(pagename.GetMenuName());
+            }
+        }
+
+        internal static void ShowWingsPage(this QMWings page, string Page)
+        {
+            if (page.isLeftWing)
+            {
+                QuickMenuTools.Wing_Left.ShowWingPage(Page);
+            }
+            else
+            {
+                QuickMenuTools.Wing_Right.ShowWingPage(Page);
             }
         }
 
@@ -507,7 +515,7 @@
             btn.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
-                QuickMenuTools.QuickMenuController.PushPage("QuickMenuDashboard");
+                QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
             }));
             return btn;
         }

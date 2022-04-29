@@ -208,7 +208,7 @@
         {
             backButton.SetBackButtonAction(() =>
             {
-                QuickMenuTools.QuickMenuController.PushPage("QuickMenuDashboard");
+                QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
                 if (OnCloseAction != null) OnCloseAction();
             });
         }
@@ -231,6 +231,12 @@
         internal void SetInteractable(bool Interactable)
         {
             mainButton.SetInteractable(Interactable);
+        }
+
+
+        internal void SetToolTip(string text)
+        {
+            mainButton.SetToolTip(text);
         }
 
         internal QMSingleButton GetMainButton()
