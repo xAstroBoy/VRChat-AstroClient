@@ -208,25 +208,151 @@
 
         public static void EnableComponents(this GameObject parent)
         {
-            parent.GetComponent<Button>().enabled = true;
-            parent.GetComponent<LayoutElement>().enabled = true;
-            parent.GetComponent<StyleElement>().enabled = true;
-            parent.GetComponentInChildren<StyleElement>(true).enabled = true;
-            parent.GetComponent<CanvasGroup>().enabled = true;
-            parent.GetComponentInChildren<Image>().enabled = true;
-            parent.GetComponentInChildren<TextMeshProUGUI>(true).enabled = true;
-            parent.GetComponent<UiTooltip>().enabled = true;
-            UnhollowerBaseLib.Il2CppArrayBase<Component> list = parent.GetComponents<Component>();
-            for (int i = 0; i < list.Count; i++)
+            var Button = parent.GetComponent<Button>();
+            if (Button != null)
             {
-                var name = list[i].GetIl2CppType().FullName;
+                Button.enabled = true;
+            }
+
+            var Buttons_List = parent.GetComponentsInChildren<Button>(true);
+            for (var i = 0; i < Buttons_List.Count; i++)
+            {
+                var item = Buttons_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+
+            var LayoutElement = parent.GetComponent<LayoutElement>();
+            if (LayoutElement != null)
+            {
+                LayoutElement.enabled = true;
+            }
+
+
+            var LayoutElements_List = parent.GetComponentsInChildren<LayoutElement>(true);
+            for (var i = 0; i < LayoutElements_List.Count; i++)
+            {
+                var item = LayoutElements_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+
+            var StyleElement = parent.GetComponent<StyleElement>();
+            if (StyleElement != null)
+            {
+                StyleElement.enabled = true;
+            }
+
+
+            var StyleElements_List = parent.GetComponentsInChildren<StyleElement>(true);
+            for (var i = 0; i < StyleElements_List.Count; i++)
+            {
+                var item = StyleElements_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+
+            var CanvasGroup = parent.GetComponent<CanvasGroup>();
+            if (CanvasGroup != null)
+            {
+                CanvasGroup.enabled = true;
+            }
+
+
+            var CanvasGroups_List = parent.GetComponentsInChildren<CanvasGroup>(true);
+            for (var i = 0; i < CanvasGroups_List.Count; i++)
+            {
+                var item = CanvasGroups_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+
+            var Image = parent.GetComponent<Image>();
+            if (Image != null)
+            {
+                Image.enabled = true;
+            }
+
+
+            var Images_List = parent.GetComponentsInChildren<Image>(true);
+            for (var i = 0; i < Images_List.Count; i++)
+            {
+                var item = Images_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+
+            var TextMeshProUGUI = parent.GetComponent<TextMeshProUGUI>();
+            if (TextMeshProUGUI != null)
+            {
+                TextMeshProUGUI.enabled = true;
+            }
+
+
+            var TextMeshProUGUIs_List = parent.GetComponentsInChildren<TextMeshProUGUI>(true);
+            for (var i = 0; i < TextMeshProUGUIs_List.Count; i++)
+            {
+                var item = TextMeshProUGUIs_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+
+            var UiTooltip = parent.GetComponent<UiTooltip>();
+            if (UiTooltip != null)
+            {
+                UiTooltip.enabled = true;
+            }
+
+            var UiTooltips_List = parent.GetComponentsInChildren<UiTooltip>(true);
+            for (var i = 0; i < UiTooltips_List.Count; i++)
+            {
+                var item = UiTooltips_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+            var parentcomps = parent.GetComponents<Component>();
+            for (int i = 0; i < parentcomps.Count; i++)
+            {
+                var name = parentcomps[i].GetIl2CppType().FullName;
                 //Log.Debug($"Found {name}");
                 if (!ComponentsToNotDelete.Contains(name))
                 {
-                    UnityEngine.Object.Destroy(list[i]);
+                    UnityEngine.Object.DestroyImmediate(parentcomps[i]);
                 }
             }
-            //UnityEngine.Object.Destroy(parent.GetComponent<MonoBehaviourPublic38Bu12Vo37StVo1237VoUnique>());  
+
+
+            var childs = parent.GetComponentsInChildren<Component>(true);
+            for (int i = 0; i < childs.Count; i++)
+            {
+                var name = childs[i].GetIl2CppType().FullName;
+                //Log.Debug($"Found {name}");
+                if (!ComponentsToNotDelete.Contains(name))
+                {
+                    UnityEngine.Object.DestroyImmediate(childs[i]);
+                }
+            }
         }
 
         public static TextMeshProUGUI NewText(this GameObject Parent, string search)

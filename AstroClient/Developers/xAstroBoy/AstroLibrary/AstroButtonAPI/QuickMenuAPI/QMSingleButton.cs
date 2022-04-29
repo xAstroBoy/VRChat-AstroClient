@@ -92,7 +92,6 @@
             if (isUserPage)
             {
                 //ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Remote.QuickActions.transform, true);
-                ButtonObject.EnableComponents();
                 ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                 ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
             }
@@ -239,6 +238,7 @@
             {
                 case "Dashboard":
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection, true);
+                    ButtonObject.EnableComponents();
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
                     break;
@@ -271,12 +271,12 @@
                         ButtonsMenu = Part1.FindUIObject("Buttons");
                     }
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
+                    ButtonObject.EnableComponents();
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
                     SetLocation(btnXLocation, btnYLocation);
                     break;
             }
-
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>(true);
             if (ButtonRect == null)
             {

@@ -24,7 +24,7 @@ namespace AstroClient.ClientUI.Menu
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnQuickMenuInit;
+            ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnQuickMenuInit;
         }
 
         #region Buttons

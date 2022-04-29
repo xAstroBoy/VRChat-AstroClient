@@ -27,7 +27,7 @@ namespace AstroClient.AstroMonos
         {
             ClientEventActions.OnApplicationStart += OnApplicationStart;
             ClientEventActions.OnRoomJoined += OnRoomJoined;
-            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
 
         }
 

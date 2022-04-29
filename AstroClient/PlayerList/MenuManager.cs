@@ -23,7 +23,7 @@ namespace AstroClient.PlayerList
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
             ClientEventActions.OnQuickMenuOpen += OnQuickMenuClose;
 
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;

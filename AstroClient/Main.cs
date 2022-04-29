@@ -60,8 +60,6 @@ namespace AstroClient
             Bools.IsDeveloper = true;
             MelonCoroutines.Start(InitializeOverridables());
             DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
-            Delay_DoAfterUiManagerInit(() => { Delayed_Start_VRChat_OnUiManagerInit(); });
-
             DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
             DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
             ClientEventActions.OnApplicationStart?.SafetyRaise();
@@ -221,10 +219,6 @@ namespace AstroClient
         {
             _ = MelonCoroutines.Start(OnUiManagerInitCoro(code));
         }
-        protected void Delay_DoAfterUiManagerInit(Action code)
-        {
-            _ = MelonCoroutines.Start(DelayOnUiManagerInitCoro(code));
-        }
 
         protected void DoAfterQuickMenuInit(Action code)
         {
@@ -241,15 +235,6 @@ namespace AstroClient
             while (VRCUiManager.prop_VRCUiManager_0 == null)
                 yield return new WaitForSeconds(0.001f);
             code();
-        }
-        protected IEnumerator DelayOnUiManagerInitCoro(Action code)
-        {
-            while (VRCUiManager.prop_VRCUiManager_0 == null)
-                yield return new WaitForSeconds(0.001f);
-            MiscUtils.DelayFunction(10f, () =>
-            {
-                code();
-            });
         }
 
         private void Start_VRChat_OnQuickMenuInit()
@@ -274,12 +259,6 @@ namespace AstroClient
             sw.Stop(); Log.Debug($"UserInteractMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
 
-        private void Delayed_Start_VRChat_OnUiManagerInit()
-        {
-            var sw = Stopwatch.StartNew();
-            ClientEventActions.Delayed_VRChat_OnUiManagerInit?.SafetyRaise();
-            sw.Stop(); Log.Debug($"Start_VRChat_OnUiManagerInit: Took {sw.ElapsedMilliseconds}ms");
-        }
         private void Start_VRChat_OnUiManagerInit()
         {
             var sw = Stopwatch.StartNew();

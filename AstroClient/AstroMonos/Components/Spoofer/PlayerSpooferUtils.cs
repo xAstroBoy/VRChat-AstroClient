@@ -13,7 +13,7 @@ namespace AstroClient.AstroMonos.Components.Spoofer
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnRoomJoined += OnRoomJoined;
-            ClientEventActions.Delayed_VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
+            ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
 
         }
 

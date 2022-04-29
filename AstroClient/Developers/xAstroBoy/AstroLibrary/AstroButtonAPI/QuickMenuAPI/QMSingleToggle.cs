@@ -111,6 +111,7 @@
             {
                 case "Dashboard":
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection, true);
+                    ButtonObject.EnableComponents();
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     break;
 
@@ -134,6 +135,7 @@
                     }
 
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
+                    ButtonObject.EnableComponents();
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     SetLocation(btnXLocation, btnYLocation);
                     break;

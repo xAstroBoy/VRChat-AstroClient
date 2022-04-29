@@ -33,6 +33,17 @@
             ButtonsMenu = btnMenu.GetButtonsMenu();
             initButton(0, 0, btnTextOn, btnActionOn, btnTextOn, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
         }
+        public QMToggleButton(QmQuickActions baseMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false, bool isUserPage = false)
+        {
+            btnQMLoc = baseMenu.GetMenuName();
+            ButtonsMenu = baseMenu.GetButtonsMenu();
+            initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnOnColor, btnOffColor, Title, DefaultToggleState);
+
+            if (isUserPage)
+            {
+                ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+            }
+        }
 
         public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = null, bool DefaultToggleState = false)
         {
@@ -196,6 +207,7 @@
             }
 
             ButtonObject = Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
+            ButtonObject.EnableComponents(); // FUCK YOU VRCHAT
             ButtonTitleMesh = Extensions.NewText(ButtonObject, "Text_H4");
             ButtonTitleMesh.text = Title;
             ButtonObject.name = id;
