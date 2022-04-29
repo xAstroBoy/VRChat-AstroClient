@@ -204,6 +204,10 @@
             typeof(RectTransform).FullName,
             typeof(CanvasRenderer).FullName,
             typeof(VRC.UI.Core.Styles.StyleElement).FullName,
+            typeof(VRC.UI.Elements.Tooltips.UiToggleTooltip).FullName,
+            typeof(UnityEngine.UI.Toggle).FullName,
+            typeof(UIInvisibleGraphic).FullName,
+
         };
 
         public static void EnableComponents(this GameObject parent)
