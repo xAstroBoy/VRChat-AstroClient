@@ -95,7 +95,7 @@
         {
             mainButton.DestroyMe();
 
-            // page.DestroyMeLocal(true);
+            QuickMenuTools.QuickMenuController.RemovePage(page);
 
             NestedPart.DestroyMeLocal(true);
             backButton.DestroyMeLocal(true);

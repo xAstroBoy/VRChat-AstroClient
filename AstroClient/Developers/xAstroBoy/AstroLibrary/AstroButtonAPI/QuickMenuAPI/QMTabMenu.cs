@@ -77,10 +77,10 @@
 
         internal void DestroyMe()
         {
-            //page.DestroyMeLocal(true);
+
+            QuickMenuTools.QuickMenuController.RemovePage(page);
             ButtonsMenu.DestroyMeLocal(true);
             NestedPart.DestroyMeLocal(true);
-
             backButton.DestroyMe();
             mainButton.DestroyMe();
         }

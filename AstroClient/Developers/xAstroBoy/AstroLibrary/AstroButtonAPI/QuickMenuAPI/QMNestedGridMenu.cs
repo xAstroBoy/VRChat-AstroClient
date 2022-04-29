@@ -228,7 +228,7 @@
             mainButton.DestroyMe();
             backButton.DestroyMeLocal(true);
             ButtonsMenu.DestroyMeLocal(true);
-            // page.DestroyMeLocal(true);
+            QuickMenuTools.QuickMenuController.RemovePage(page);
         }
     }
 }

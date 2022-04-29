@@ -260,6 +260,7 @@
             ButtonObject.DestroyMeLocal(true);
             ButtonTitleMesh.DestroyMeLocal(true);
             ButtonText.DestroyMeLocal(true);
+            
         }
 
         internal void SetToolTip(string text)

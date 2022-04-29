@@ -412,30 +412,6 @@ namespace AstroClient.Tools.Extensions
 
                     return;
                 }
-                else if (obj is VRC.UI.Elements.UIPage page)
-                {
-                    if (page != null) // Special destroy system.
-                    {
-                        page.RemovePage();
-                        Object.Destroy(page);
-                    }
-
-                    MiscUtils.DelayFunction(0.5f, () =>
-                    {
-                        if (page != null)
-                        {
-                            Log.Debug($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
-                        }
-                        else
-                        {
-                            if (!Silent)
-                            {
-                                Log.Debug($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
-                            }
-                        }
-                    });
-                }
-
                 else if (obj is GameObject o)
                 {
                     if (o != null)
