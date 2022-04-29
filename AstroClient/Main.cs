@@ -31,9 +31,6 @@ namespace AstroClient
 
     public class Main : MelonMod
     {
-
-
-
         public override void OnApplicationStart()
         {
             MelonCoroutines.Start(InitializeClient());
@@ -289,6 +286,5 @@ namespace AstroClient
             ClientEventActions.VRChat_OnUiManagerInit?.SafetyRaise();
             sw.Stop(); Log.Debug($"Start_VRChat_OnUiManagerInit: Took {sw.ElapsedMilliseconds}ms");
         }
-
     }
 }
