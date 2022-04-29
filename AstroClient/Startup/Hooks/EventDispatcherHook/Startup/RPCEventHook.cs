@@ -26,7 +26,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
 
         internal override void ExecutePriorityPatches()
         {
-            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent)));
+            new AstroPatch(HarmonyLib.AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_1)), GetPatch(nameof(OnRPCEvent)));
         }
 
         [Obfuscation(Feature = "HarmonyGetPatch")]
