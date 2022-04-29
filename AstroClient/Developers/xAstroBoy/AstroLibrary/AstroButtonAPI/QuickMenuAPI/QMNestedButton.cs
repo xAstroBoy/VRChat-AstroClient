@@ -26,12 +26,15 @@
         internal string btnQMLoc { get; set; }
 
         internal string btnType { get; set; }
+        internal Action OnCloseAction { get; set; }
+        internal Action OnOpenAction { get; set; }
 
         internal QMNestedButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
             Parent = btnMenu.GetButtonsMenu();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+            SetBackButtonMenu(btnMenu);
         }
 
         internal QMNestedButton(QMNestedGridMenu btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
@@ -39,6 +42,7 @@
             btnQMLoc = btnMenu.GetMenuName();
             Parent = btnMenu.GetButtonsMenu();
             InitButton(0, 0, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+            SetBackButtonMenu(btnMenu);
         }
 
         internal QMNestedButton(QmQuickActions btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
@@ -53,6 +57,7 @@
             btnQMLoc = btnMenu.GetMenuName();
             Parent = btnMenu.GetButtonsMenu();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+            SetBackButtonMenu(btnMenu);
         }
 
         internal QMNestedButton(QMGridTab btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
@@ -60,6 +65,7 @@
             btnQMLoc = btnMenu.GetMenuName();
             Parent = btnMenu.GetButtonsMenu();
             InitButton(0, 0, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+            SetBackButtonMenu(btnMenu);
         }
 
         internal QMNestedButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
@@ -67,6 +73,7 @@
             btnQMLoc = btnMenu.GetMenuName();
             Parent = btnMenu.GetButtonsMenu();
             InitButton(btnXLocation, btnYLocation, btnText, btnToolTip, null, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+            SetBackButtonMenuToDashboard();
         }
 
         internal QMNestedButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
@@ -111,11 +118,19 @@
                 TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(System.Drawing.Color.White.ToUnityEngineColor());
             if (Parent != null)
             {
-                mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf);
+                mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
+                {
+                    QuickMenuTools.ShowQuickmenuPage(menuName);
+                    if (OnOpenAction != null) OnOpenAction();
+                }, btnToolTip, TextColorHTML, btnHalf);
             }
             else
             {
-                mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, TextColorHTML, btnHalf);
+                mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
+                {
+                    QuickMenuTools.ShowQuickmenuPage(menuName);
+                    if (OnOpenAction != null) OnOpenAction();
+                }, btnToolTip, TextColorHTML, btnHalf);
             }
 
             switch (Title)
@@ -135,53 +150,48 @@
             mainButton.SetTextColor(buttonTextColor);
         }
 
-        internal void SetBackButtonAction(Action back)
-        {
-            backButton.SetBackButtonAction(back);
-        }
-
-        internal void AddOpenAction(Action onOpenAction)
-        {
-            mainButton.SetAction(() =>
-            {
-                QuickMenuTools.ShowQuickmenuPage(menuName);
-                if (onOpenAction != null) onOpenAction();
-            });
-        }
-
-        internal void SetBackButtonAction(QMNestedButton action, Action onCloseAction = null)
+        internal void SetBackButtonMenu(QMNestedGridMenu menu)
         {
             backButton.SetBackButtonAction(() =>
             {
-                QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
-                if (onCloseAction != null) onCloseAction();
+                QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
+                if (OnCloseAction != null) OnCloseAction();
             });
         }
 
-        internal void SetBackButtonAction(QMNestedGridMenu action, Action onCloseAction = null)
+        internal void SetBackButtonMenu(QMNestedButton menu)
         {
             backButton.SetBackButtonAction(() =>
             {
-                QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
-                if (onCloseAction != null) onCloseAction();
+                QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
+                if (OnCloseAction != null) OnCloseAction();
             });
         }
 
-        internal void SetBackButtonAction(QMTabMenu action, Action onCloseAction = null)
+        internal void SetBackButtonMenu(QMGridTab menu)
         {
             backButton.SetBackButtonAction(() =>
             {
-                QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
-                if (onCloseAction != null) onCloseAction();
+                QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
+                if (OnCloseAction != null) OnCloseAction();
             });
         }
 
-        internal void SetBackButtonAction(QMGridTab action, Action onCloseAction = null)
+        internal void SetBackButtonMenu(QMTabMenu menu)
         {
             backButton.SetBackButtonAction(() =>
             {
-                QuickMenuTools.ShowQuickmenuPage(action.GetMenuName());
-                if (onCloseAction != null) onCloseAction();
+                QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
+                if (OnCloseAction != null) OnCloseAction();
+            });
+        }
+
+        internal void SetBackButtonMenuToDashboard()
+        {
+            backButton.SetBackButtonAction(() =>
+            {
+                QuickMenuTools.QuickMenuController.PushPage("QuickMenuDashboard");
+                if (OnCloseAction != null) OnCloseAction();
             });
         }
 

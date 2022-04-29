@@ -96,8 +96,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal Udon Events", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
-            CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
-            CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
+            ;
+            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
             InitWingPage();
         }
 
@@ -125,7 +126,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
                         var udon = new QMNestedGridMenu(CurrentScrollMenu, action.gameObject.name, $"Open Events of {action.gameObject.name}");
                         GeneratedPages.Add(udon);
                         GenerateInternal(udon, action);
-                        udon.AddOpenAction(() =>
+                        udon.OnOpenAction = (() =>
                         {
                             if (CurrentUnboxBehaviourToConsole != null)
                             {
@@ -151,10 +152,11 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
                             }
 
                         });
-                        udon.SetBackButtonAction(CurrentScrollMenu, () =>
+                        udon.SetBackButtonMenu(CurrentScrollMenu);
+                        udon.OnCloseAction = () =>
                         {
                             MakeSingleUdonButtonsUnavailable();
-                        });
+                        };
                     }
                 }
                 HasGenerated = true;

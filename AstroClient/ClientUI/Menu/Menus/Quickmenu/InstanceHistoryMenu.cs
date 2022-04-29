@@ -41,8 +41,9 @@ namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
         internal static void InitButtons(int index)
         {
             TabMenu = new QMGridTab(index, "Instance History", null, null, null, Icons.history_sprite);
-            TabMenu.SetBackButtonAction(() => { OnCloseMenu(); });
-            TabMenu.AddOpenAction(() => { OnOpenMenu(); });
+
+            TabMenu.OnOpenAction = (() => { OnOpenMenu(); });
+            TabMenu.OnCloseAction = (() => { OnCloseMenu(); });
             InitWingPage();
         }
 

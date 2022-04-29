@@ -27,12 +27,12 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
         {
             var PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
 
-            PickupEditor.SetBackButtonAction(() =>
+            PickupEditor.OnCloseAction = (() =>
             {
                 PickupEditorWings.ClickBackButton();
             });
 
-            PickupEditor.AddOpenAction(() =>
+            PickupEditor.OnOpenAction = (() =>
             {
                 PickupEditorWings.ShowWingsPage();
             });

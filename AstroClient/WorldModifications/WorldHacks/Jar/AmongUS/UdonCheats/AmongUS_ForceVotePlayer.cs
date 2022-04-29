@@ -51,14 +51,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Force Vote", "Control Player Nodes Events (Filtered, only active nodes)");
-            CurrentScrollMenu.SetBackButtonAction(menu, () =>
-            {
-                OnCloseMenu();
-            });
-            CurrentScrollMenu.AddOpenAction(() =>
-            {
-                OnOpenMenu();
-            });
+            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
             InitWingPage();
         }
 

@@ -58,8 +58,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Interactable
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal VRC_Interactable", "Interact with Internal VRC_Interactables", null, null, null, null, btnHalf);
-            CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
-            CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+
             InitWingPage();
         }
 

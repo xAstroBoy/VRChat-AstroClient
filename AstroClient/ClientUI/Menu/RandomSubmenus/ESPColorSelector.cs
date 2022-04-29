@@ -81,8 +81,8 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "ESP Color Selection", "Edit Current ESPs Colors ");
-            CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
-            CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
             FillMenu();
             InitWingPage();
         }

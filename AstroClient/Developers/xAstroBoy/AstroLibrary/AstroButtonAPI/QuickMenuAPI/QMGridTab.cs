@@ -19,10 +19,15 @@
         internal QMTabButton mainButton { get; set; }
         internal string menuName { get; set; }
         internal UIPage page { get; set; }
+        internal Action OnCloseAction { get; set; }
+        internal Action OnOpenAction { get; set; }
+
+
 
         internal QMGridTab(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
         {
             InitButton(index, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, icon);
+            SetBackButtonMenuToDashboard();
         }
 
         internal void InitButton(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
@@ -46,23 +51,21 @@
             NestedPart.NewText("Text_Title").text = btnToolTip;
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
-            mainButton = new QMTabButton(index, () => { QuickMenuTools.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, icon);
+            mainButton = new QMTabButton(index, () =>
+            {
+                QuickMenuTools.ShowQuickmenuPage(menuName);
+                if (OnOpenAction != null) OnOpenAction();
+            }, btnToolTip, btnBackgroundColor, icon);
             backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
         }
 
-        internal void SetBackButtonAction(Action back)
-        {
-            if (backButton == null) return;
-            backButton.SetBackButtonAction(back);
-        }
 
-        internal void AddOpenAction(Action onOpenAction)
+        internal void SetBackButtonMenuToDashboard()
         {
-            if (mainButton == null) return;
-            mainButton.SetAction(() =>
+            backButton.SetBackButtonAction(() =>
             {
-                QuickMenuTools.ShowQuickmenuPage(menuName);
-                if (onOpenAction != null) onOpenAction();
+                QuickMenuTools.QuickMenuController.PushPage("QuickMenuDashboard");
+                if (OnCloseAction != null) OnCloseAction();
             });
         }
 

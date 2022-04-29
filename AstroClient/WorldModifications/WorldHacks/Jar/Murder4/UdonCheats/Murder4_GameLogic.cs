@@ -41,14 +41,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Game Controller", "Control The Game!");
-            CurrentScrollMenu.SetBackButtonAction(menu, () =>
-            {
-                OnCloseMenu();
-            });
-            CurrentScrollMenu.AddOpenAction(() =>
-            {
-                OnOpenMenu();
-            });
+            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
         }
 
         private static UdonBehaviour _CurrentController;

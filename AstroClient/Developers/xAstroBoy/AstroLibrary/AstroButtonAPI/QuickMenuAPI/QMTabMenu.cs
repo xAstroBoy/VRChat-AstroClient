@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
+﻿using System;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using AstroClient.Tools.Extensions;
     using PageGenerators;
@@ -10,7 +12,6 @@
 
     internal class QMTabMenu
     {
-        internal QMSingleButton backButton { get; set; }
         internal string btnQMLoc { get; set; }
         internal string btnType { get; set; }
         internal GameObject ButtonsMenu { get; set; }
@@ -18,6 +19,9 @@
         internal string menuName { get; set; }
         internal UIPage page { get; set; }
         internal GameObject NestedPart { get; set; }
+        internal GameObject backButton { get; set; }
+        internal Action OnCloseAction { get; set; }
+        internal Action OnOpenAction { get; set; }
 
         internal QMTabMenu(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
         {
@@ -47,7 +51,21 @@
             NestedPart.NewText("Text_Title").text = btnToolTip;
             NestedPart.SetActive(false);
             NestedPart.CleanButtonsNestedMenu();
-            mainButton = new QMTabButton(index, () => { OpenMe(); }, btnToolTip, btnBackgroundColor, icon);
+            mainButton = new QMTabButton(index, () =>
+            {
+                QuickMenuTools.ShowQuickmenuPage(menuName);
+                if (OnOpenAction != null) OnOpenAction();
+            }, btnToolTip, btnBackgroundColor, icon);
+            backButton = NestedPart.CreateMainBackButton();
+            SetBackButtonMenuToDashboard();
+        }
+        internal void SetBackButtonMenuToDashboard()
+        {
+            backButton.SetBackButtonAction(() =>
+            {
+                QuickMenuTools.QuickMenuController.PushPage("QuickMenuDashboard");
+                if (OnCloseAction != null) OnCloseAction();
+            });
         }
 
         internal string GetMenuName()
@@ -60,10 +78,6 @@
             return mainButton;
         }
 
-        internal QMSingleButton GetBackButton()
-        {
-            return backButton;
-        }
 
         internal GameObject GetButtonsMenu()
         {
@@ -81,13 +95,9 @@
             QuickMenuTools.QuickMenuController.RemovePage(page);
             ButtonsMenu.DestroyMeLocal(true);
             NestedPart.DestroyMeLocal(true);
-            backButton.DestroyMe();
+            backButton.DestroyMeLocal(true);
             mainButton.DestroyMe();
         }
 
-        internal void OpenMe()
-        {
-            QuickMenuTools.ShowQuickmenuPage(menuName);
-        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
+﻿using AstroClient.xAstroBoy.Utility;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using AstroClient.Tools.Extensions;
     using Extensions;
@@ -87,15 +89,7 @@
             {
                 if (_ButtonToolTip == null)
                 {
-                    var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
-                    if (attempt1 == null)
-                    {
-                        attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
-                    }
-                    if (attempt1 != null)
-                    {
-                        return _ButtonToolTip = attempt1;
-                    }
+                    return _ButtonToolTip = ButtonObject.GetGetInChildrens_OrAddComponent<VRC.UI.Elements.Tooltips.UiTooltip>(true);
                 }
 
                 return _ButtonToolTip;

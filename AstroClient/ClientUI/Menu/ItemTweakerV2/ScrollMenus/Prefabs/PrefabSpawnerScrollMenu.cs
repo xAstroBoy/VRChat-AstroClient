@@ -42,8 +42,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Prefabs
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Spawn Prefabs", "Spawn World Prefabs");
-            CurrentScrollMenu.SetBackButtonAction(menu, () => { OnCloseMenu(); });
-            CurrentScrollMenu.AddOpenAction(() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
+            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
             InitWingPage();
         }
 

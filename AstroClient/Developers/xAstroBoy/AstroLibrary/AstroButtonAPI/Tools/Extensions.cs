@@ -144,7 +144,7 @@
 
         internal static void ShowQuickmenuPage(this QuickMenu instance, string pagename)
         {
-            instance.field_Protected_MenuStateController_0.PushPage(pagename);
+            instance.prop_MenuStateController_0.PushPage(pagename);
         }
 
         internal static void ShowQuickmenuPage(this Wing instance, string pagename)
@@ -196,15 +196,14 @@
         {
             typeof(Button).FullName,
             typeof(LayoutElement).FullName,
-            typeof(StyleElement).FullName,
             typeof(CanvasGroup).FullName,
             typeof(Image).FullName,
             typeof(TextMeshProUGUI).FullName,
-            typeof(UiTooltip).FullName,
             typeof(RectTransform).FullName,
             typeof(CanvasRenderer).FullName,
             typeof(VRC.UI.Core.Styles.StyleElement).FullName,
             typeof(VRC.UI.Elements.Tooltips.UiToggleTooltip).FullName,
+            typeof(VRC.UI.Elements.Tooltips.UiTooltip).FullName,
             typeof(UnityEngine.UI.Toggle).FullName,
             typeof(UIInvisibleGraphic).FullName,
 
@@ -212,6 +211,8 @@
 
         public static void EnableComponents(this GameObject parent)
         {
+            #region Button
+
             var Button = parent.GetComponent<Button>();
             if (Button != null)
             {
@@ -229,12 +230,14 @@
             }
 
 
+            #endregion
+            #region LayoutElement
+
             var LayoutElement = parent.GetComponent<LayoutElement>();
             if (LayoutElement != null)
             {
                 LayoutElement.enabled = true;
             }
-
 
             var LayoutElements_List = parent.GetComponentsInChildren<LayoutElement>(true);
             for (var i = 0; i < LayoutElements_List.Count; i++)
@@ -247,12 +250,14 @@
             }
 
 
+            #endregion
+            #region StyleElement
+
             var StyleElement = parent.GetComponent<StyleElement>();
             if (StyleElement != null)
             {
                 StyleElement.enabled = true;
             }
-
 
             var StyleElements_List = parent.GetComponentsInChildren<StyleElement>(true);
             for (var i = 0; i < StyleElements_List.Count; i++)
@@ -263,14 +268,14 @@
                     item.enabled = true;
                 }
             }
-
+            #endregion
+            #region CanvasGroup
 
             var CanvasGroup = parent.GetComponent<CanvasGroup>();
             if (CanvasGroup != null)
             {
                 CanvasGroup.enabled = true;
             }
-
 
             var CanvasGroups_List = parent.GetComponentsInChildren<CanvasGroup>(true);
             for (var i = 0; i < CanvasGroups_List.Count; i++)
@@ -283,12 +288,13 @@
             }
 
 
+            #endregion
+            #region Image
             var Image = parent.GetComponent<Image>();
             if (Image != null)
             {
                 Image.enabled = true;
             }
-
 
             var Images_List = parent.GetComponentsInChildren<Image>(true);
             for (var i = 0; i < Images_List.Count; i++)
@@ -299,14 +305,13 @@
                     item.enabled = true;
                 }
             }
-
-
+            #endregion
+            #region TextMeshProUGUI
             var TextMeshProUGUI = parent.GetComponent<TextMeshProUGUI>();
             if (TextMeshProUGUI != null)
             {
                 TextMeshProUGUI.enabled = true;
             }
-
 
             var TextMeshProUGUIs_List = parent.GetComponentsInChildren<TextMeshProUGUI>(true);
             for (var i = 0; i < TextMeshProUGUIs_List.Count; i++)
@@ -317,7 +322,8 @@
                     item.enabled = true;
                 }
             }
-
+            #endregion
+            #region UiTooltip
 
             var UiTooltip = parent.GetComponent<UiTooltip>();
             if (UiTooltip != null)
@@ -334,6 +340,53 @@
                     item.enabled = true;
                 }
             }
+
+
+            #endregion
+            #region Toggle
+
+            var Toggle = parent.GetComponent<Toggle>();
+            if (Toggle != null)
+            {
+                Toggle.enabled = true;
+            }
+
+            var Toggles_List = parent.GetComponentsInChildren<Toggle>(true);
+            for (var i = 0; i < Toggles_List.Count; i++)
+            {
+                var item = Toggles_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+
+            #endregion
+            #region UIInvisibleGraphic
+
+            var UIInvisibleGraphic = parent.GetComponent<UIInvisibleGraphic>();
+            if (UIInvisibleGraphic != null)
+            {
+                UIInvisibleGraphic.enabled = true;
+            }
+
+            var UIInvisibleGraphics_List = parent.GetComponentsInChildren<UIInvisibleGraphic>(true);
+            for (var i = 0; i < UIInvisibleGraphics_List.Count; i++)
+            {
+                var item = UIInvisibleGraphics_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+
+
+            #endregion
+
+
+
+
 
             var parentcomps = parent.GetComponents<Component>();
             for (int i = 0; i < parentcomps.Count; i++)
@@ -454,8 +507,7 @@
             btn.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
-                QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.field_Private_UIPage_0.enabled = true;
-                QuickMenuTools.QuickMenuInstance.prop_MenuStateController_0.Method_Public_UIPage_String_0("QuickMenuDashboard");
+                QuickMenuTools.QuickMenuController.PushPage("QuickMenuDashboard");
             }));
             return btn;
         }
@@ -467,7 +519,6 @@
             btn.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
-                var quickmenu = QuickMenuTools.QuickMenuInstance;
                 QuickMenuTools.ShowQuickmenuPage(menuName);
             }));
             return btn;
