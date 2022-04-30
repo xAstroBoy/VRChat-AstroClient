@@ -269,6 +269,15 @@ namespace AstroClient.Tools.UdonEditor
                             {
                                 return PrintAsString<AudioClip[]>(heap, address, FullName);
                             }
+                        case "UnityEngine.Vector2":
+                            {
+                                return PrintAsString<Vector2>(heap, address, FullName);
+                            }
+                        case "UnityEngine.Vector2[]":
+                            {
+                                return PrintAsString<Vector2[]>(heap, address, FullName);
+                            }
+
                         case "UnityEngine.Vector3":
                             {
                                 return PrintAsString<Vector3>(heap, address, FullName);
@@ -406,6 +415,15 @@ namespace AstroClient.Tools.UdonEditor
                             {
                                 return PrintAsString<LineRenderer[]>(heap, address, FullName);
                             }
+                        case "UnityEngine.SpriteRenderer":
+                            {
+                                return PrintAsString<UnityEngine.SpriteRenderer>(heap, address, FullName);
+                            }
+                        case "UnityEngine.SpriteRenderer[]":
+                            {
+                                return PrintAsString<UnityEngine.SpriteRenderer[]>(heap, address, FullName);
+                            }
+
                         case "UnityEngine.RaycastHit":
                             {
                                 return PrintAsString<RaycastHit>(heap, address, FullName);
@@ -938,9 +956,9 @@ namespace AstroClient.Tools.UdonEditor
 
                 return "Null";
             }
-            catch
+            catch(Exception e)
             {
-                //Log.Exception(e);
+                Log.Exception(e);
                 return $"Error Unboxing {obj.GetIl2CppType().FullName}";
             }
         }
@@ -1164,6 +1182,32 @@ namespace AstroClient.Tools.UdonEditor
                     #endregion Returns Displayname
 
                     #region Returns Object Names
+                    case "UnityEngine.GameObject[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.GameObject[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
 
                     case "VRC.SDK3.Components.VRCPickup[]":
                         {
@@ -1595,7 +1639,7 @@ namespace AstroClient.Tools.UdonEditor
                                         var item = content[i];
                                         if (item != null)
                                         {
-                                            var value = item.name;
+                                            var value = item.gameObject.name;
                                             if (value.IsNotNullOrEmptyOrWhiteSpace())
                                             {
                                                 ArrayString.AppendLine(value + " ,");
@@ -1817,6 +1861,37 @@ namespace AstroClient.Tools.UdonEditor
                         }
                     #endregion Returns Object Names
 
+                    #region  Returns Vectors to Strings
+                    case "UnityEngine.Vector3[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Vector3[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = $"new Vector3({item.x}, {item.y}, {item.z})";
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+
+
+                    #endregion
+
 
                     default: // Fallback to .ToString() extraction
                         {
@@ -1977,6 +2052,20 @@ namespace AstroClient.Tools.UdonEditor
                             }
                             return $"empty {FullName}";
                         }
+                    case "UnityEngine.GameObject":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.GameObject>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+
                     case "VRC.Udon.UdonBehaviour":
                         {
                             var item = heap.GetHeapVariable<VRC.Udon.UdonBehaviour>(address);
@@ -2177,7 +2266,7 @@ namespace AstroClient.Tools.UdonEditor
                             var item = heap.GetHeapVariable<UnityEngine.LineRenderer>(address);
                             if (item != null)
                             {
-                                var result = item.name;
+                                var result = item.gameObject.name;
                                 if (result.IsNotNullOrEmptyOrWhiteSpace())
                                 {
                                     return result;
@@ -2292,6 +2381,24 @@ namespace AstroClient.Tools.UdonEditor
 
                     #endregion Returns Object Name
 
+                    #region  Returns Vectors to Strings
+
+                    case "UnityEngine.Vector3":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Vector3>(address);
+                            if (item != null)
+                            {
+                                var result = $"new Vector3({item.x}, {item.y}, {item.z})";
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+
+
+                    #endregion
                     default: // Fallback to .ToString() extraction
                         {
                             #region Default Extraction (using .ToString())

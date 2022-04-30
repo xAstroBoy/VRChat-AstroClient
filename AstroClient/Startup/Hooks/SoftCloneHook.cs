@@ -146,26 +146,26 @@ namespace AstroClient.Startup.Hooks
             }
         }
 
-        //internal static void LocalCloneAvatar(ApiAvatar avatar)
-        //{
-        //    if (avatar != null)
-        //    {
-        //        avatar.ToAvatarDict((avatardict) =>
-        //        {
-        //            if (avatardict != null)
-        //            {
-        //                ModifiedAvatarDict = avatardict;
-        //                isSoftCloneActive = true;
-        //                PacketCounter = 0;
-        //                _loadAvatarMethod.Invoke(VRCPlayer.field_Internal_Static_VRCPlayer_0, new object[] { true }); // Invoke refresh and Hook should locally clone it!
-        //                Log.Debug("Local Clone Avatar");
-        //                PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
+        internal static void LocalCloneAvatar(ApiAvatar avatar)
+        {
+            if (avatar != null)
+            {
+                avatar.ToAvatarDict((avatardict) =>
+                {
+                    if (avatardict != null)
+                    {
+                        AvatarDictCache = avatardict;
+                        isSoftCloneActive = true;
+                        PacketCounter = 0;
+                        _loadAvatarMethod.Invoke(GameInstances.CurrentUser, new object[] { true }); // Invoke refresh and Hook should locally clone it!
+                        Log.Debug("Local Clone Avatar");
+                        PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
 
-        //            }
-        //        });
+                    }
+                });
 
-        //    }
-        //}
+            }
+        }
 
         private static bool ShouldToggleSoftClone()
         {
