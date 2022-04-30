@@ -1,6 +1,6 @@
-﻿using Mono.CSharp;
+﻿using AstroClient.xAstroBoy.Extensions;
+using System.Linq;
 using UnityEngine;
-using VRC.Udon.Common;
 using VRC.Udon.Common.Interfaces;
 
 namespace AstroClient.Tools.UdonEditor
@@ -21,14 +21,13 @@ namespace AstroClient.Tools.UdonEditor
                 try
                 {
                     var address = rawitem.IUdonSymbolTable.GetAddressFromSymbol(SymbolName);
-                    if(address != null)
+                    if (address != null)
                     {
                         return UnboxAsString(rawitem.IUdonHeap, address, rawitem.IUdonHeap.GetHeapVariable(address));
                     }
                 }
                 catch
                 {
-
                 }
             }
             return null;
@@ -41,439 +40,139 @@ namespace AstroClient.Tools.UdonEditor
                 string FullName = obj.GetIl2CppType().FullName;
                 if (obj != null)
                 {
-                    StringBuilder listoutput = new StringBuilder();
-                    listoutput.AppendLine(Environment.NewLine);
                     switch (FullName)
                     {
                         #region System Types
 
                         case "System.String":
                             {
-                                var result = heap.GetHeapVariable<string>(address);
-                                if (result != null)
-                                {
-                                    return result;
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<string>(heap, address, FullName);
                             }
                         case "System.String[]":
                             {
-                                var result = heap.GetHeapVariable<string[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<string>(heap, address, FullName);
                             }
                         case "System.StringComparison":
                             {
-                                var result = heap.GetHeapVariable<System.StringComparison>(address);
-                                return result.ToString();
+                                return PrintAsString<System.StringComparison>(heap, address, FullName);
                             }
                         case "System.StringComparison[]":
                             {
-                                var result = heap.GetHeapVariable<System.StringComparison[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<string>(heap, address, FullName);
                             }
 
                         case "System.UInt32":
                             {
-                                var result = heap.GetHeapVariable<uint>(address);
-
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<uint>(heap, address, FullName);
                             }
                         case "System.UInt32[]":
                             {
-                                var result = heap.GetHeapVariable<uint[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<uint>(heap, address, FullName);
                             }
                         case "System.Int32":
                             {
-                                var result = heap.GetHeapVariable<int>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<int>(heap, address, FullName);
                             }
                         case "System.Int32[]":
                             {
-                                var result = heap.GetHeapVariable<int[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<int>(heap, address, FullName);
                             }
                         case "System.Int64":
                             {
-                                var result = heap.GetHeapVariable<long>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<long>(heap, address, FullName);
                             }
                         case "System.Int64[]":
                             {
-                                var result = heap.GetHeapVariable<long[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<long>(heap, address, FullName);
                             }
                         case "System.Char":
                             {
-                                var result = heap.GetHeapVariable<char>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<char>(heap, address, FullName);
                             }
                         case "System.Char[]":
                             {
-                                var result = heap.GetHeapVariable<char[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<char>(heap, address, FullName);
                             }
                         case "System.Single":
                             {
-                                var result = heap.GetHeapVariable<float>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<float>(heap, address, FullName);
                             }
                         case "System.Single[]":
                             {
-                                var result = heap.GetHeapVariable<float[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<float>(heap, address, FullName);
                             }
                         case "System.Boolean":
                             {
-                                var result = heap.GetHeapVariable<bool>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<bool>(heap, address, FullName);
                             }
                         case "System.Boolean[]":
                             {
-                                var result = heap.GetHeapVariable<bool[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<bool>(heap, address, FullName);
                             }
                         case "System.Byte":
                             {
-                                var result = heap.GetHeapVariable<byte>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<byte>(heap, address, FullName);
                             }
                         case "System.Byte[]":
                             {
-                                var result = heap.GetHeapVariable<byte[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<byte>(heap, address, FullName);
                             }
                         case "System.UInt16":
                             {
-                                var result = heap.GetHeapVariable<ushort>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<ushort>(heap, address, FullName);
                             }
                         case "System.UInt16[]":
                             {
-                                var result = heap.GetHeapVariable<ushort[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<ushort>(heap, address, FullName);
                             }
                         case "System.Double":
                             {
-                                var result = heap.GetHeapVariable<double>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<double>(heap, address, FullName);
                             }
                         case "System.Double[]":
                             {
-                                var result = heap.GetHeapVariable<double[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<double>(heap, address, FullName);
                             }
                         case "System.TimeSpan":
                             {
-                                var result = heap.GetHeapVariable<TimeSpan>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<TimeSpan>(heap, address, FullName);
                             }
                         case "System.TimeSpan[]":
                             {
-                                var result = heap.GetHeapVariable<TimeSpan[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<TimeSpan>(heap, address, FullName);
                             }
                         case "System.Diagnostics.Stopwatch":
                             {
-                                var result = heap.GetHeapVariable<System.Diagnostics.Stopwatch>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<System.Diagnostics.Stopwatch>(heap, address, FullName);
                             }
                         case "System.Diagnostics.Stopwatch[]":
                             {
-                                var result = heap.GetHeapVariable<System.Diagnostics.Stopwatch[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<System.Diagnostics.Stopwatch>(heap, address, FullName);
                             }
                         case "System.DateTime":
                             {
-                                var result = heap.GetHeapVariable<System.DateTime>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<System.DateTime>(heap, address, FullName);
                             }
                         case "System.DateTime[]":
                             {
-                                var result = heap.GetHeapVariable<System.DateTime[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<System.DateTime>(heap, address, FullName);
                             }
                         case "System.DayOfWeek":
                             {
-                                var result = heap.GetHeapVariable<System.DayOfWeek>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<System.DayOfWeek>(heap, address, FullName);
                             }
                         case "System.DayOfWeek[]":
                             {
-                                var result = heap.GetHeapVariable<System.DayOfWeek[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<System.DayOfWeek>(heap, address, FullName);
                             }
 
                         case "System.Object":
                             {
-                                var result = heap.GetHeapVariable<object>(address);
-                                if (result != null)
-                                {
-                                    return result.GetType().FullName;
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<object>(heap, address, FullName);
                             }
                         case "System.Object[]":
                             {
-                                var result = heap.GetHeapVariable<object[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].GetType().FullName + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<System.Object>(heap, address, FullName);
                             }
 
                         #endregion System Types
@@ -482,1777 +181,542 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "UnityEngine.Color":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Color>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.Color>(heap, address, FullName);
                             }
                         case "UnityEngine.Color[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Color[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Color>(heap, address, FullName);
                             }
                         case "UnityEngine.Material":
                             {
-                                var result = heap.GetHeapVariable<Material>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<Material>(heap, address, FullName);
                             }
                         case "UnityEngine.Material[]":
                             {
-                                var result = heap.GetHeapVariable<Material[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Material>(heap, address, FullName);
                             }
                         case "UnityEngine.Renderer":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Renderer>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.Renderer>(heap, address, FullName);
                             }
                         case "UnityEngine.Renderer[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Renderer[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Renderer>(heap, address, FullName);
                             }
 
                         case "UnityEngine.MeshRenderer":
                             {
-                                var result = heap.GetHeapVariable<MeshRenderer>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<MeshRenderer>(heap, address, FullName);
                             }
                         case "UnityEngine.MeshRenderer[]":
                             {
-                                var result = heap.GetHeapVariable<MeshRenderer[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<MeshRenderer>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem":
                             {
-                                var result = heap.GetHeapVariable<ParticleSystem>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-
-                                return $"empty {FullName}";
+                                return PrintAsString<ParticleSystem>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem[]":
                             {
-                                var result = heap.GetHeapVariable<ParticleSystem[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<ParticleSystem>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem.MainModule":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.MainModule>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.ParticleSystem.MainModule>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem.MainModule[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.MainModule[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.ParticleSystem.MainModule[]>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem.MinMaxGradient":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.MinMaxGradient>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem.MinMaxGradient[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.MinMaxGradient[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient[]>(heap, address, FullName);
                             }
 
                         case "UnityEngine.Component":
                             {
-                                var result = heap.GetHeapVariable<Component>(address);
-                                if (result != null)
-                                {
-                                    return result.GetType().FullName;
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Component>(heap, address, FullName);
                             }
                         case "UnityEngine.Component[]":
                             {
-                                var result = heap.GetHeapVariable<Component[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].GetType().FullName + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Component[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Transform":
                             {
-                                var result = heap.GetHeapVariable<Transform>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Transform>(heap, address, FullName);
                             }
                         case "UnityEngine.Transform[]":
                             {
-                                var result = heap.GetHeapVariable<Transform[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Transform[]>(heap, address, FullName);
                             }
                         case "UnityEngine.GameObject":
                             {
-                                var result = heap.GetHeapVariable<GameObject>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<GameObject>(heap, address, FullName);
                             }
                         case "UnityEngine.GameObject[]":
                             {
-                                var result = heap.GetHeapVariable<GameObject[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<GameObject[]>(heap, address, FullName);
                             }
                         case "UnityEngine.AudioClip":
                             {
-                                var result = heap.GetHeapVariable<AudioClip>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<AudioClip>(heap, address, FullName);
                             }
                         case "UnityEngine.AudioClip[]":
                             {
-                                var result = heap.GetHeapVariable<AudioClip[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<AudioClip[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Vector3":
                             {
-                                var result = heap.GetHeapVariable<Vector3>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Vector3>(heap, address, FullName);
                             }
                         case "UnityEngine.Vector3[]":
                             {
-                                var result = heap.GetHeapVariable<Vector3[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Vector3[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Vector4":
                             {
-                                var result = heap.GetHeapVariable<Vector4>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Vector4>(heap, address, FullName);
                             }
                         case "UnityEngine.Vector4[]":
                             {
-                                var result = heap.GetHeapVariable<Vector4[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Vector4[]>(heap, address, FullName);
                             }
 
                         case "UnityEngine.Quaternion":
                             {
-                                var result = heap.GetHeapVariable<Quaternion>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Quaternion>(heap, address, FullName);
                             }
                         case "UnityEngine.Quaternion[]":
                             {
-                                var result = heap.GetHeapVariable<Quaternion[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Quaternion[]>(heap, address, FullName);
                             }
                         case "UnityEngine.AudioSource":
                             {
-                                var result = heap.GetHeapVariable<AudioSource>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<AudioSource>(heap, address, FullName);
                             }
                         case "UnityEngine.AudioSource[]":
                             {
-                                var result = heap.GetHeapVariable<AudioSource[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<AudioSource[]>(heap, address, FullName);
                             }
                         case "UnityEngine.HumanBodyBones":
                             {
-                                var result = heap.GetHeapVariable<HumanBodyBones>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<HumanBodyBones>(heap, address, FullName);
                             }
                         case "UnityEngine.HumanBodyBones[]":
                             {
-                                var result = heap.GetHeapVariable<HumanBodyBones[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<HumanBodyBones[]>(heap, address, FullName);
                             }
                         case "UnityEngine.BoxCollider":
                             {
-                                var result = heap.GetHeapVariable<BoxCollider>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<BoxCollider>(heap, address, FullName);
                             }
                         case "UnityEngine.BoxCollider[]":
                             {
-                                var result = heap.GetHeapVariable<BoxCollider[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<BoxCollider[]>(heap, address, FullName);
                             }
                         case "UnityEngine.CapsuleCollider":
                             {
-                                var result = heap.GetHeapVariable<CapsuleCollider>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<CapsuleCollider>(heap, address, FullName);
                             }
                         case "UnityEngine.CapsuleCollider[]":
                             {
-                                var result = heap.GetHeapVariable<CapsuleCollider[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<CapsuleCollider[]>(heap, address, FullName);
                             }
                         case "UnityEngine.SphereCollider":
                             {
-                                var result = heap.GetHeapVariable<SphereCollider>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<SphereCollider>(heap, address, FullName);
                             }
                         case "UnityEngine.SphereCollider[]":
                             {
-                                var result = heap.GetHeapVariable<SphereCollider[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<SphereCollider[]>(heap, address, FullName);
                             }
                         case "UnityEngine.MeshCollider":
                             {
-                                var result = heap.GetHeapVariable<MeshCollider>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<MeshCollider>(heap, address, FullName);
                             }
                         case "UnityEngine.MeshCollider[]":
                             {
-                                var result = heap.GetHeapVariable<MeshCollider[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<MeshCollider[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Collider":
                             {
-                                var result = heap.GetHeapVariable<Collider>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Collider>(heap, address, FullName);
                             }
                         case "UnityEngine.Collider[]":
                             {
-                                var result = heap.GetHeapVariable<Collider[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Collider[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Sprite":
                             {
-                                var result = heap.GetHeapVariable<Sprite>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Sprite>(heap, address, FullName);
                             }
                         case "UnityEngine.Sprite[]":
                             {
-                                var result = heap.GetHeapVariable<Sprite[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Sprite[]>(heap, address, FullName);
                             }
                         case "UnityEngine.TextAsset":
                             {
-                                var result = heap.GetHeapVariable<TextAsset>(address);
-                                if (result != null)
-                                {
-                                    return "\n" + result.text.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<TextAsset>(heap, address, FullName);
                             }
                         case "UnityEngine.TextAsset[]":
                             {
-                                var result = heap.GetHeapVariable<TextAsset[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].text.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<TextAsset[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Rigidbody":
                             {
-                                var result = heap.GetHeapVariable<Rigidbody>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Rigidbody>(heap, address, FullName);
                             }
                         case "UnityEngine.Rigidbody[]":
                             {
-                                var result = heap.GetHeapVariable<Rigidbody[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Rigidbody[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Bounds":
                             {
-                                var result = heap.GetHeapVariable<Bounds>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Bounds>(heap, address, FullName);
                             }
                         case "UnityEngine.Bounds[]":
                             {
-                                var result = heap.GetHeapVariable<Bounds[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Bounds[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Animator":
                             {
-                                var result = heap.GetHeapVariable<Animator>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Animator>(heap, address, FullName);
                             }
                         case "UnityEngine.Animator[]":
                             {
-                                var result = heap.GetHeapVariable<Animator[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Animator[]>(heap, address, FullName);
                             }
                         case "UnityEngine.LayerMask":
                             {
-                                var result = heap.GetHeapVariable<LayerMask>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<LayerMask>(heap, address, FullName);
                             }
                         case "UnityEngine.LayerMask[]":
                             {
-                                var result = heap.GetHeapVariable<LayerMask[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<LayerMask[]>(heap, address, FullName);
                             }
                         case "UnityEngine.LineRenderer":
                             {
-                                var result = heap.GetHeapVariable<LineRenderer>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<LineRenderer>(heap, address, FullName);
                             }
                         case "UnityEngine.LineRenderer[]":
                             {
-                                var result = heap.GetHeapVariable<LineRenderer[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<LineRenderer[]>(heap, address, FullName);
                             }
                         case "UnityEngine.RaycastHit":
                             {
-                                var result = heap.GetHeapVariable<RaycastHit>(address);
-                                return result.ToString();
+                                return PrintAsString<RaycastHit>(heap, address, FullName);
                             }
                         case "UnityEngine.RaycastHit[]":
                             {
-                                var result = heap.GetHeapVariable<RaycastHit[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<RaycastHit[]>(heap, address, FullName);
                             }
                         case "UnityEngine.RectTransform":
                             {
-                                var result = heap.GetHeapVariable<RectTransform>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<RectTransform>(heap, address, FullName);
                             }
                         case "UnityEngine.RectTransform[]":
                             {
-                                var result = heap.GetHeapVariable<RectTransform[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<RectTransform[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Camera":
                             {
-                                var result = heap.GetHeapVariable<Camera>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Camera>(heap, address, FullName);
                             }
                         case "UnityEngine.Camera[]":
                             {
-                                var result = heap.GetHeapVariable<Camera[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    for (int i = 0; i < result.Length; i++)
-                                    {
-                                        listoutput.AppendLine(result[i].name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Camera[]>(heap, address, FullName);
                             }
                         case "UnityEngine.ReflectionProbe":
                             {
-                                var result = heap.GetHeapVariable<ReflectionProbe>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<ReflectionProbe>(heap, address, FullName);
                             }
                         case "UnityEngine.ReflectionProbe[]":
                             {
-                                var result = heap.GetHeapVariable<ReflectionProbe[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<ReflectionProbe[]>(heap, address, FullName);
                             }
                         case "UnityEngine.KeyCode":
                             {
-                                var result = heap.GetHeapVariable<KeyCode>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<KeyCode>(heap, address, FullName);
                             }
                         case "UnityEngine.KeyCode[]":
                             {
-                                var result = heap.GetHeapVariable<KeyCode[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<KeyCode[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Rect":
                             {
-                                var result = heap.GetHeapVariable<Rect>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Rect>(heap, address, FullName);
                             }
                         case "UnityEngine.Rect[]":
                             {
-                                var result = heap.GetHeapVariable<Rect[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Rect[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Mesh":
                             {
-                                var result = heap.GetHeapVariable<Mesh>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Mesh>(heap, address, FullName);
                             }
                         case "UnityEngine.Mesh[]":
                             {
-                                var result = heap.GetHeapVariable<Mesh[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Mesh[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Texture":
                             {
-                                var result = heap.GetHeapVariable<Texture>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Texture>(heap, address, FullName);
                             }
                         case "UnityEngine.Texture[]":
                             {
-                                var result = heap.GetHeapVariable<Texture[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Texture[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Texture2D":
                             {
-                                var result = heap.GetHeapVariable<Texture2D>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<Texture2D>(heap, address, FullName);
                             }
                         case "UnityEngine.Texture2D[]":
                             {
-                                var result = heap.GetHeapVariable<Texture2D[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<Texture2D[]>(heap, address, FullName);
                             }
                         case "UnityEngine.RenderTexture":
                             {
-                                var result = heap.GetHeapVariable<RenderTexture>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<RenderTexture>(heap, address, FullName);
                             }
                         case "UnityEngine.RenderTexture[]":
                             {
-                                var result = heap.GetHeapVariable<RenderTexture[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<RenderTexture[]>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Text":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Text>(address);
-                                if (result != null)
-                                {
-                                    return result.text.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.UI.Text>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Text[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Text[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.text.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.UI.Text[]>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Toggle":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Toggle>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.UI.Toggle>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Toggle[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Toggle[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.UI.Toggle[]>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.ScrollRect":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.ScrollRect>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.UI.ScrollRect>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.ScrollRect[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.ScrollRect[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.UI.ScrollRect[]>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.InputField":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.InputField>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.UI.InputField>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.InputField[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.InputField[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.UI.InputField[]>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Image":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Image>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.UI.Image>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Image[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Image[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.UI.Image[]>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Button":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Button>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.UI.Button>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Button[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Button[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.UI.Button[]>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Slider":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Slider>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.UI.Slider>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.Slider[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.Slider[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.UI.Slider[]>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.RawImage":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.RawImage>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.UI.RawImage>(heap, address, FullName);
                             }
                         case "UnityEngine.UI.RawImage[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.UI.RawImage[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.UI.RawImage[]>(heap, address, FullName);
                             }
                         case "UnityEngine.AI.NavMeshAgent":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.AI.NavMeshAgent>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.AI.NavMeshAgent>(heap, address, FullName);
                             }
                         case "UnityEngine.AI.NavMeshAgent[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.AI.NavMeshAgent[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.AI.NavMeshAgent[]>(heap, address, FullName);
                             }
                         case "UnityEngine.AI.NavMeshHit":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.AI.NavMeshHit>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.AI.NavMeshHit>(heap, address, FullName);
                             }
                         case "UnityEngine.AI.NavMeshHit[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.AI.NavMeshHit[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.AI.NavMeshHit[]>(heap, address, FullName);
                             }
                         case "UnityEngine.ConstantForce":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ConstantForce>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.ConstantForce>(heap, address, FullName);
                             }
                         case "UnityEngine.ConstantForce[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ConstantForce[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.ConstantForce[]>(heap, address, FullName);
                             }
                         case "UnityEngine.AnimatorStateInfo":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.AnimatorStateInfo>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.AnimatorStateInfo>(heap, address, FullName);
                             }
                         case "UnityEngine.AnimatorStateInfo[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.AnimatorStateInfo[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.AnimatorStateInfo[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Light":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Light>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.Light>(heap, address, FullName);
                             }
                         case "UnityEngine.Light[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Light[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Light[]>(heap, address, FullName);
                             }
                         case "UnityEngine.OcclusionPortal":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.OcclusionPortal>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.OcclusionPortal>(heap, address, FullName);
                             }
                         case "UnityEngine.OcclusionPortal[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.OcclusionPortal[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.OcclusionPortal[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Animations.PositionConstraint":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Animations.PositionConstraint>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.Animations.PositionConstraint>(heap, address, FullName);
                             }
                         case "UnityEngine.Animations.PositionConstraint[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Animations.PositionConstraint[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Animations.PositionConstraint[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Space":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Space>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.Space>(heap, address, FullName);
                             }
                         case "UnityEngine.Space[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Space[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Space[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeMode":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Rendering.ReflectionProbeMode>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeMode>(heap, address, FullName);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeMode[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Rendering.ReflectionProbeMode[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeMode[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeTimeSlicingMode":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode>(heap, address, FullName);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeRefreshMode":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Rendering.ReflectionProbeRefreshMode>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode>(heap, address, FullName);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeRefreshMode[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Rendering.ReflectionProbeRefreshMode[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode[]>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem+EmissionModule":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.EmissionModule>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.ParticleSystem.EmissionModule>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem_EmissionModule[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.EmissionModule[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.ParticleSystem.EmissionModule[]>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem+MinMaxCurve":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.MinMaxCurve>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve>(heap, address, FullName);
                             }
                         case "UnityEngine.ParticleSystem+MinMaxCurve[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ParticleSystem.MinMaxCurve[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve[]>(heap, address, FullName);
                             }
                         case "UnityEngine.JointMotor":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.JointMotor>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.JointMotor>(heap, address, FullName);
                             }
                         case "UnityEngine.JointMotor[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.JointMotor[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.JointMotor[]>(heap, address, FullName);
                             }
                         case "UnityEngine.ForceMode":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ForceMode>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.ForceMode>(heap, address, FullName);
                             }
                         case "UnityEngine.ForceMode[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.ForceMode[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.ForceMode[]>(heap, address, FullName);
                             }
                         case "UnityEngine.HingeJoint":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.HingeJoint>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.HingeJoint>(heap, address, FullName);
                             }
                         case "UnityEngine.HingeJoint[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.HingeJoint[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.HingeJoint[]>(heap, address, FullName);
                             }
                         case "UnityEngine.CustomRenderTexture":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.CustomRenderTexture>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.CustomRenderTexture>(heap, address, FullName);
                             }
                         case "UnityEngine.CustomRenderTexture[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.CustomRenderTexture[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.CustomRenderTexture[]>(heap, address, FullName);
                             }
                         case "UnityEngine.TextureFormat":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.TextureFormat>(address);
-                                return result.ToString();
+                                return PrintAsString<UnityEngine.TextureFormat>(heap, address, FullName);
                             }
                         case "UnityEngine.TextureFormat[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.TextureFormat[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.TextureFormat[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Collision":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Collision>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.Collision>(heap, address, FullName);
                             }
                         case "UnityEngine.Collision[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Collision[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Collision[]>(heap, address, FullName);
                             }
                         case "UnityEngine.Animations.ParentConstraint":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Animations.ParentConstraint>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.Animations.ParentConstraint>(heap, address, FullName);
                             }
                         case "UnityEngine.Animations.ParentConstraint[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.Animations.ParentConstraint[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.Animations.ParentConstraint[]>(heap, address, FullName);
                             }
                         case "UnityEngine.MaterialPropertyBlock":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.MaterialPropertyBlock>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<UnityEngine.MaterialPropertyBlock>(heap, address, FullName);
                             }
                         case "UnityEngine.MaterialPropertyBlock[]":
                             {
-                                var result = heap.GetHeapVariable<UnityEngine.MaterialPropertyBlock[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<UnityEngine.MaterialPropertyBlock[]>(heap, address, FullName);
                             }
 
                         #endregion Unity Engine
@@ -2261,533 +725,174 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "VRC.SDKBase.VRCPlayerApi":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi>(address);
-                                if (result != null)
-                                {
-                                    return result.displayName.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDKBase.VRCPlayerApi>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRCPlayerApi[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.displayName.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDKBase.VRCPlayerApi[]>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingData":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi.TrackingData>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingData[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi.TrackingData[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData[]>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingDataType":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi.TrackingDataType>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingDataType[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi.TrackingDataType[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType[]>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRC_Pickup+PickupHand":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRC_Pickup.PickupHand>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRC_Pickup+PickupHand[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRC_Pickup.PickupHand[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand[]>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRC_SceneDescriptor+SpawnOrientation":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRC_SceneDescriptor+SpawnOrientation[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation[]>(heap, address, FullName);
                             }
 
                         case "VRC.SDKBase.VRCUrl":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRCUrl>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDKBase.VRCUrl>(heap, address, FullName);
                             }
                         case "VRC.SDKBase.VRCUrl[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDKBase.VRCUrl[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDKBase.VRCUrl[]>(heap, address, FullName);
                             }
                         case "VRC.Udon.UdonBehaviour":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.UdonBehaviour>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.Udon.UdonBehaviour>(heap, address, FullName);
                             }
                         case "VRC.Udon.UdonBehaviour[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.UdonBehaviour[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.Udon.UdonBehaviour[]>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.SerializationResult":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.SerializationResult>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.Udon.Common.SerializationResult>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.SerializationResult[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.SerializationResult[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.Udon.Common.SerializationResult[]>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.Interfaces.NetworkEventTarget":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.Interfaces.NetworkEventTarget[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget[]>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.Enums.EventTiming":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.Enums.EventTiming>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.Udon.Common.Enums.EventTiming>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.Enums.EventTiming[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.Enums.EventTiming[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.Udon.Common.Enums.EventTiming[]>(heap, address, FullName);
                             }
 
                         case "VRC.SDK3.Components.Video.VideoError":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.Video.VideoError>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.SDK3.Components.Video.VideoError>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.Video.VideoError[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.Video.VideoError[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Components.Video.VideoError[]>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCUrlInputField":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCUrlInputField>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDK3.Components.VRCUrlInputField>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCUrlInputField[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCUrlInputField[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Components.VRCUrlInputField[]>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCStation":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCStation>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDK3.Components.VRCStation>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCStation[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCStation[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Components.VRCStation[]>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCObjectSync":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCObjectSync>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDK3.Components.VRCObjectSync>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCObjectSync[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCObjectSync[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Components.VRCObjectSync[]>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.UdonInputEventArgs":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.UdonInputEventArgs>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.Udon.Common.UdonInputEventArgs>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.UdonInputEventArgs[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.UdonInputEventArgs[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.Udon.Common.UdonInputEventArgs[]>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.HandType":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.HandType>(address);
-                                return result.ToString();
+                                return PrintAsString<VRC.Udon.Common.HandType>(heap, address, FullName);
                             }
                         case "VRC.Udon.Common.HandType[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.Udon.Common.HandType[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.Udon.Common.HandType[]>(heap, address, FullName);
                             }
 
                         case "VRC.SDK3.Video.Components.VRCUnityVideoPlayer":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Video.Components.VRCUnityVideoPlayer>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCPickup":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCPickup>(address);
-                                if (result != null)
-                                {
-                                    return result.name.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDK3.Components.VRCPickup>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCPickup[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCPickup[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.name.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Components.VRCPickup[]>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCAvatarPedestal":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCAvatarPedestal[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal[]>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCObjectPool":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCObjectPool>(address);
-                                if (result != null)
-                                {
-                                    return result.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<VRC.SDK3.Components.VRCObjectPool>(heap, address, FullName);
                             }
                         case "VRC.SDK3.Components.VRCObjectPool[]":
                             {
-                                var result = heap.GetHeapVariable<VRC.SDK3.Components.VRCObjectPool[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<VRC.SDK3.Components.VRCObjectPool[]>(heap, address, FullName);
                             }
 
                         #endregion VRChat
@@ -2796,57 +901,19 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "TMPro.TextMeshPro":
                             {
-                                var result = heap.GetHeapVariable<TMPro.TextMeshPro>(address);
-                                if (result != null)
-                                {
-                                    return result.text.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<TMPro.TextMeshPro>(heap, address, FullName);
                             }
                         case "TMPro.TextMeshPro[]":
                             {
-                                var result = heap.GetHeapVariable<TMPro.TextMeshPro[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.text.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<TMPro.TextMeshPro[]>(heap, address, FullName);
                             }
                         case "TMPro.TextMeshProUGUI":
                             {
-                                var result = heap.GetHeapVariable<TMPro.TextMeshProUGUI>(address);
-                                if (result != null)
-                                {
-                                    return result.text.ToString();
-                                }
-                                return $"empty {FullName}";
+                                return PrintAsString<TMPro.TextMeshProUGUI>(heap, address, FullName);
                             }
                         case "TMPro.TextMeshProUGUI[]":
                             {
-                                var result = heap.GetHeapVariable<TMPro.TextMeshProUGUI[]>(address);
-                                if (result != null && result.Length != 0)
-                                {
-                                    listoutput.AppendLine();
-                                    foreach (var item in result)
-                                    {
-                                        listoutput.AppendLine(item.text.ToString() + " ,");
-                                    }
-
-                                    return listoutput.ToString();
-                                }
-                                else
-                                {
-                                    return $"empty {FullName}";
-                                }
+                                return PrintAsString<TMPro.TextMeshProUGUI[]>(heap, address, FullName);
                             }
 
                         #endregion TMPRo
@@ -2857,8 +924,6 @@ namespace AstroClient.Tools.UdonEditor
                         case "System.RuntimeType[]": return "Not Unboxable (Protected System Type)";
 
                         #endregion Impossible to Unbox (Unboxables)
-
-
 
                         default:
                             {
@@ -2873,11 +938,1379 @@ namespace AstroClient.Tools.UdonEditor
 
                 return "Null";
             }
-            catch 
+            catch
             {
                 //Log.Exception(e);
                 return $"Error Unboxing {obj.GetIl2CppType().FullName}";
             }
+        }
+
+        /// <summary>
+        /// This System Tries to support generic T Types of udonbehaviour
+        /// This will use a default system to print Various components names and contents using (ToString)
+        /// unless you want to edit the switch cases to support a different content such as textmeshpro and other components.
+        /// IMPORTANT : DONT FORGET TO EDIT BOTH SWITCH CASES IF YOU ADD A DIFFERENT APPROACH (ARRAY & NORMAL)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="heap"></param>
+        /// <param name="address"></param>
+        /// <param name="FullName"></param>
+        /// <returns></returns>
+
+        internal static string PrintAsString<T>(IUdonHeap heap, uint address, string FullName)
+        {
+            // Detect if is a array .
+            if (FullName.EndsWith("[]"))
+            {
+                var ArrayString = new StringBuilder();
+                switch (FullName)
+                {
+                    // Special types (get something else instead of default .ToString())
+
+                    #region Returns Types Fullname
+
+                    case "System.Object[]":
+                        {
+                            var content = heap.GetHeapVariable<System.Object[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var type = content[i].GetType();
+                                        if (type != null)
+                                        {
+                                            var fullname = type.FullName;
+                                            if (fullname.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(fullname + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Component[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Component[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var type = content[i].GetType();
+                                        if (type != null)
+                                        {
+                                            var fullname = type.FullName;
+                                            if (fullname.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(fullname + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+
+                    #endregion Returns Types Fullname
+
+                    #region Returns Text Content
+
+                    case "TMPro.TextMeshPro[]":
+                        {
+                            var content = heap.GetHeapVariable<TMPro.TextMeshPro[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.text;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "TMPro.TextMeshProUGUI[]":
+                        {
+                            var content = heap.GetHeapVariable<TMPro.TextMeshProUGUI[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.text;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Text[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.UI.Text[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.text;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.TextAsset[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.TextAsset[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.text;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    #endregion Returns Text Content
+
+                    #region Returns Displayname
+
+                    case "VRC.SDKBase.VRCPlayerApi[]":
+                        {
+                            var content = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var player = content[i];
+                                        if (player != null)
+                                        {
+                                            var fullname = player.displayName;
+                                            if (fullname.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(fullname + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+
+                    #endregion Returns Displayname
+
+                    #region Returns Object Names
+
+                    case "VRC.SDK3.Components.VRCPickup[]":
+                        {
+                            var content = heap.GetHeapVariable<VRC.SDK3.Components.VRCPickup[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "VRC.Udon.UdonBehaviour[]":
+                        {
+                            var content = heap.GetHeapVariable<VRC.Udon.UdonBehaviour[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.RawImage[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.UI.RawImage[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Slider[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.UI.Slider[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Button[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.UI.Button[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Image[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.UI.Image[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.InputField[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.UI.InputField[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.ScrollRect[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.UI.ScrollRect[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Toggle[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.UI.Toggle[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.RenderTexture[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.RenderTexture[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Texture2D[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Texture2D[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Texture[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Texture[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Mesh[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Mesh[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.ReflectionProbe[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.ReflectionProbe[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Camera[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Camera[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.RectTransform[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.RectTransform[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.LineRenderer[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.LineRenderer[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Animator[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Animator[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Rigidbody[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Rigidbody[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.BoxCollider[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.BoxCollider[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.CapsuleCollider[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.CapsuleCollider[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.SphereCollider[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.SphereCollider[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.MeshCollider[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.MeshCollider[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Collider[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Collider[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Sprite[]":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Sprite[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null && listcontent.Count != 0)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        var item = content[i];
+                                        if (item != null)
+                                        {
+                                            var value = item.name;
+                                            if (value.IsNotNullOrEmptyOrWhiteSpace())
+                                            {
+                                                ArrayString.AppendLine(value + " ,");
+                                            }
+                                        }
+                                    }
+                                    return ArrayString.ToString();
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    #endregion Returns Object Names
+
+
+                    default: // Fallback to .ToString() extraction
+                        {
+                            #region Default Extraction (using .ToString())
+
+                            var content = heap.GetHeapVariable<T[]>(address);
+                            if (content != null)
+                            {
+                                var listcontent = content.ToList();
+                                if (listcontent != null)
+                                {
+                                    ArrayString.AppendLine();
+                                    for (int i = 0; i < content.Length; i++)
+                                    {
+                                        ArrayString.AppendLine(content[i].ToString() + " ,");
+                                    }
+                                }
+                                return ArrayString.ToString();
+                            }
+                            else
+                            {
+                                return $"empty {FullName}";
+                            }
+
+                            #endregion Default Extraction (using .ToString())
+                        }
+                }
+            }
+            else // else is a normal type.
+            {
+                switch (FullName)
+                {
+                    // Special types (get something else instead of default .ToString())
+
+                    #region Returns Types Fullname
+
+                    case "System.Object":
+                        {
+                            var content = heap.GetHeapVariable<System.Object>(address);
+                            if (content != null)
+                            {
+                                var type = content.GetType();
+                                if (type != null)
+                                {
+                                    var resultfullname = type.FullName;
+                                    if (resultfullname.IsNotNullOrEmptyOrWhiteSpace())
+                                    {
+                                        return resultfullname;
+                                    }
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Component":
+                        {
+                            var content = heap.GetHeapVariable<UnityEngine.Component>(address);
+                            if (content != null)
+                            {
+                                var type = content.GetType();
+                                if (type != null)
+                                {
+                                    var resultfullname = type.FullName;
+                                    if (resultfullname.IsNotNullOrEmptyOrWhiteSpace())
+                                    {
+                                        return resultfullname;
+                                    }
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+
+                    #endregion Returns Types Fullname
+
+                    #region Returns Text Content
+
+
+                    case "TMPro.TextMeshPro":
+                        {
+                            var item = heap.GetHeapVariable<TMPro.TextMeshPro>(address);
+                            if (item != null)
+                            {
+                                var result = item.text;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "TMPro.TextMeshProUGUI":
+                        {
+                            var item = heap.GetHeapVariable<TMPro.TextMeshProUGUI>(address);
+                            if (item != null)
+                            {
+                                var result = item.text;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Text":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.UI.Text>(address);
+                            if (item != null)
+                            {
+                                var result = item.text;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.TextAsset":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.TextAsset>(address);
+                            if (item != null)
+                            {
+                                var result = item.text;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+
+                    #endregion Returns Text Content
+
+                    #region Returns Displayname
+
+                    case "VRC.SDKBase.VRCPlayerApi":
+                        {
+                            var item = heap.GetHeapVariable<VRC.SDKBase.VRCPlayerApi>(address);
+                            if (item != null)
+                            {
+                                return item.displayName.ToString();
+                            }
+                            return $"empty {FullName}";
+                        }
+
+                    #endregion Returns Displayname
+
+                    #region Returns Object Name
+
+                    case "VRC.SDK3.Components.VRCPickup":
+                        {
+                            var item = heap.GetHeapVariable<VRC.SDK3.Components.VRCPickup>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "VRC.Udon.UdonBehaviour":
+                        {
+                            var item = heap.GetHeapVariable<VRC.Udon.UdonBehaviour>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.RawImage":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.UI.RawImage>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Slider":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.UI.Slider>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Button":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.UI.Button>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Image":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.UI.Image>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.InputField":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.UI.InputField>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.ScrollRect":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.UI.ScrollRect>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.UI.Toggle":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.UI.Toggle>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.RenderTexture":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.RenderTexture>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Texture2D":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Texture2D>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Texture":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Texture>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Mesh":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Mesh>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.ReflectionProbe":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.ReflectionProbe>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Camera":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Camera>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.RectTransform":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.RectTransform>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.LineRenderer":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.LineRenderer>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Animator":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Animator>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Rigidbody":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Rigidbody>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.BoxCollider":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.BoxCollider>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.CapsuleCollider":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.CapsuleCollider>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.SphereCollider":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.SphereCollider>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.MeshCollider":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.MeshCollider>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Collider":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Collider>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+                    case "UnityEngine.Sprite":
+                        {
+                            var item = heap.GetHeapVariable<UnityEngine.Sprite>(address);
+                            if (item != null)
+                            {
+                                var result = item.name;
+                                if (result.IsNotNullOrEmptyOrWhiteSpace())
+                                {
+                                    return result;
+                                }
+                            }
+                            return $"empty {FullName}";
+                        }
+
+                    #endregion Returns Object Name
+
+                    default: // Fallback to .ToString() extraction
+                        {
+                            #region Default Extraction (using .ToString())
+
+                            var content = heap.GetHeapVariable<T>(address);
+                            if (content != null)
+                            {
+                                return content.ToString();
+                            }
+                            else
+                            {
+                                return $"empty {FullName}";
+                            }
+
+                            #endregion Default Extraction (using .ToString())
+                        }
+                }
+            }
+            return null;
         }
     }
 }
