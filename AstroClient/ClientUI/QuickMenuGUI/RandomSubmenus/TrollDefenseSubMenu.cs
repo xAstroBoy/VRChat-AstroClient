@@ -11,9 +11,6 @@
 
     #endregion Imports
 
-    /// <summary>
-    /// Cheeto's temporary UI for new/wip features
-    /// </summary>
     internal class TrollDefenseSubMenu : AstroEvents
     {
         internal static void InitButtons(QMGridTab tab)
@@ -66,7 +63,7 @@
                     {
                         var originalcoords = player.transform.position;
                         // Teleport To a crashing coordinate (To make the troll crash)
-                        player.transform.position = Vector3.positiveInfinity;
+                        player.transform.position = new Vector3(0, 99999999, 0);
                         MovementSerializer.SerializerActivated = true;
                         // Then Fast Teleport back where you are.
                         player.transform.position = originalcoords;
