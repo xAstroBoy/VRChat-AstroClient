@@ -74,7 +74,7 @@ namespace AstroClient.ClientUI.Menu
             // Tabs.
             ExploitsMenu.InitButtons(TabIndexs.Exploits);
             WorldsCheats.InitButtons(TabIndexs.Cheats);
-            InstanceHistoryMenu.InitButtons(TabIndexs.History);
+            //InstanceHistoryMenu.InitButtons(TabIndexs.History);
 
             // Misc
             TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);

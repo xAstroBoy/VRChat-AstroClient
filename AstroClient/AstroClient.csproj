@@ -200,7 +200,6 @@
     <Compile Include="CustomClasses\KeypadBruteforcer.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
-    <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\InstanceHistoryMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\UserMenu\OrbitUserMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\UserMenu\PickupProtector.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\UserMenu\WatcherUserMenu.cs" />
@@ -352,7 +351,6 @@
     <Compile Include="Developers\Cheetos\CheetosConsole\StyledString.cs" />
     <Compile Include="Developers\Cheetos\CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AstroPatch.cs" />
-    <Compile Include="Developers\Cheetos\Cheetos\InstanceHistory.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Crazy.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\Flashlight.cs" />
     <Compile Include="AstroMonos\Components\Malicious\OrbitManager.cs" />
@@ -446,7 +444,6 @@
     <Compile Include="Tools\Extensions\Texture_Ext.cs" />
     <Compile Include="Tools\Extensions\Reflections_ext.cs" />
     <Compile Include="Tools\Input\InputUtils.cs" />
-    <Compile Include="Tools\Instance\History\InstanceManager.cs" />
     <Compile Include="Tools\Instance\History\WorldManager.cs" />
     <Compile Include="Tools\AvatarPreviewer.cs" />
     <Compile Include="Tools\PedestralImageEditor\AvatarImageEncoder.cs" />
