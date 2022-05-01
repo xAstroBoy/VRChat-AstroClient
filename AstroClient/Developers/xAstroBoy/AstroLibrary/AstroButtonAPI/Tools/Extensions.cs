@@ -108,6 +108,8 @@
                     {
                         image.gameObject.SetActive(true);
                         image.overrideSprite = sprite;
+                        image.color = Color.white;
+                        image.MakeBackgroundMoreSolid();
                     }
                     else
                     {

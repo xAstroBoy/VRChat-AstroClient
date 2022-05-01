@@ -221,8 +221,12 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             btnOff_Rect.anchoredPosition += new Vector2(50, 0);
 
             btnOn_Image.overrideSprite = Icons.check_sprite;
+            btnOn_Image.color = Color.white;
+            btnOn_Image.MakeBackgroundMoreSolid();
 
             btnOff_Image.overrideSprite = Icons.cancel_sprite;
+            btnOff_Image.color = Color.white;
+            btnOff_Image.MakeBackgroundMoreSolid();
 
             SetToolTip(btnToolTip);
             SetAction(btnActionOn, btnActionOff);
