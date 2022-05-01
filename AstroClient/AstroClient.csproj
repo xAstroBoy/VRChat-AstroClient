@@ -647,6 +647,7 @@
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\PuttPuttPond.cs" />
     <Compile Include="CustomClasses\UdonBehaviour_Cached.cs" />
     <Compile Include="WorldModifications\WorldHacks\FrameOfReference.cs" />
+    <Compile Include="WorldModifications\WorldHacks\EvolvantArcade.cs" />
     <Compile Include="WorldModifications\WorldHacks\TierLand.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\PrisonEscape.cs" />

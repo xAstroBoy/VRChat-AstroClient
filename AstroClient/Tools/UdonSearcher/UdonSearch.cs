@@ -114,6 +114,49 @@ namespace AstroClient.Tools.UdonSearcher
             return searchResult;
         }
 
+        internal static List<GameObject> FindAllUdonsContainingSymbol(string TargetedSymbol, bool Debug = false)
+        {
+
+            List<GameObject> searchResult = new List<GameObject>();
+            var udons = WorldUtils.UdonScripts;
+            Log.Debug($"Searching for {TargetedSymbol} Symbol in {udons.Length} Behaviours..");
+            foreach (var item in udons)
+            {
+                if (item != null)
+                {
+                    if (!searchResult.Contains(item.gameObject))
+                    {
+                        if (Debug)
+                        {
+                            Log.Debug($"Inspecting {item.name}...");
+                        }
+                        var rawitem = item.ToRawUdonBehaviour();
+                        if (rawitem != null)
+                        {
+                            if (Debug)
+                            {
+                                Log.Debug($"Udon Heap has  {rawitem.SymbolsDictionary.Count} Symbols!");
+                            }
+
+                            if (rawitem.HasSymbol(TargetedSymbol))
+                            {
+                                if (Debug)
+                                {
+                                    Log.Debug($"Found Symbol {TargetedSymbol} in {item.name}!");
+                                }
+
+                                searchResult.Add(item.gameObject);
+                                break;
+                            }
+
+                        }
+                    }
+                }
+
+            }
+
+            return searchResult;
+        }
 
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
         {

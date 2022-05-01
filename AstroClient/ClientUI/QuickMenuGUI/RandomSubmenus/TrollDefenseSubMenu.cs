@@ -65,7 +65,7 @@
                         // Teleport To a crashing coordinate (To make the troll crash)
 
                         player.transform.position = new Vector3(originalcoords.x, 999999, originalcoords.z);
-                        MiscUtils.DelayFunction(1f, () =>
+                        MiscUtils.DelayFunction(1f, () => // Wait for the teleport message to be sent.
                         {
                             MovementSerializer.SerializerActivated = true;
                             // Then Fast Teleport back where you are.

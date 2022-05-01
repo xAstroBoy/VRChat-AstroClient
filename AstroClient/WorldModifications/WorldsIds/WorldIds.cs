@@ -42,5 +42,6 @@
         public const string GeoLocator = "wrld_c349f354-a368-4282-969a-4b179038217b";
         public const string TierLand = "wrld_db8505a0-4dd9-4344-9d13-208ced35931e";
         public const string KMartExpress_1 = "wrld_aeb82cfe-6875-41f9-af32-1e735a67e051";
+        public const string EvolvantArcade = "wrld_b7acb016-d29f-498b-9d40-0b9a6c38a820";
     }
 }
