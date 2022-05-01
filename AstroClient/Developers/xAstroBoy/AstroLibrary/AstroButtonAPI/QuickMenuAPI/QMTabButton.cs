@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
+﻿using VRC.UI.Elements;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
     using AstroClient.Tools.Extensions;
@@ -17,7 +19,7 @@
         internal string btnType { get; set; }
         internal GameObject ButtonObject { get; set; }
         private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
-
+        private VRC.UI.Elements.Controls.MenuTab _MenuTab { get; set; }
         internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
         {
             get
@@ -50,7 +52,15 @@
         {
             btnType = "_QMTabButton_";
             ButtonObject = Object.Instantiate(QuickMenuTools.TabButtonTemplate.gameObject, QuickMenuTools.TabButtonTemplate.parent, true);
-            ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
+            var pagename = QMButtonAPI.identifier + btnType + Index;
+            ButtonObject.name = pagename;
+            _MenuTab = ButtonObject.GetComponent<VRC.UI.Elements.Controls.MenuTab>();
+            if(_MenuTab != null)
+            {
+                _MenuTab.field_Public_String_0 = string.Empty; // Separate it from glowing along with the template tab 
+            }
+            
+
             SetToolTip(btnToolTip);
             SetAction(btnAction);
             ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
@@ -60,6 +70,22 @@
 
             SetActive(true);
         }
+
+        internal void SetGlowEffect(UIPage page)
+        {
+            if (_MenuTab != null)
+            {
+                _MenuTab.field_Public_String_0 = page.name; // Separate it from glowing along with the settings 
+            }
+        }
+        internal void SetGlowEffect(string pagename)
+        {
+            if (_MenuTab != null)
+            {
+                _MenuTab.field_Public_String_0 = pagename; // Separate it from glowing along with the settings 
+            }
+        }
+
 
         internal void SetActive(bool isActive)
         {

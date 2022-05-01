@@ -56,6 +56,7 @@
                 QuickMenuTools.ShowQuickmenuPage(menuName);
                 if (OnOpenAction != null) OnOpenAction();
             }, btnToolTip, btnBackgroundColor, icon);
+            mainButton.SetGlowEffect(page);
             backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
         }
 

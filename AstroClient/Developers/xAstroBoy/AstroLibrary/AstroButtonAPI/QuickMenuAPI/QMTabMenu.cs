@@ -56,6 +56,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 QuickMenuTools.ShowQuickmenuPage(menuName);
                 if (OnOpenAction != null) OnOpenAction();
             }, btnToolTip, btnBackgroundColor, icon);
+            mainButton.SetGlowEffect(page);
             backButton = NestedPart.CreateMainBackButton();
             SetBackButtonMenuToDashboard();
         }
