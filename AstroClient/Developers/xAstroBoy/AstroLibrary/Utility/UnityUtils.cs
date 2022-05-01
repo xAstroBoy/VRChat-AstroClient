@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.Utility
+﻿using Cinemachine;
+
+namespace AstroClient.xAstroBoy.Utility
 {
     using UnityEngine;
     using UnityEngine.UI;
@@ -14,11 +16,20 @@
             return Transform.FindRelativeTransformWithPath(rootObject, split[1], false);
         }
 
+        /// <summary>
+        ///  this kills The blue effect of vrchat GUI by Destroying StyleElement if present
+        /// </summary>
+        /// <param name="image"></param>
         public static void MakeBackgroundMoreSolid(this Image image)
         {
-            var color = image.color;
-            color.a = 1;
-            image.color = color;
+            var StyleElement = image.GetComponent<VRC.UI.Core.Styles.StyleElement>();
+            if (StyleElement != null)
+            {
+                UnityEngine.Object.DestroyImmediate(StyleElement);
+            }
+
+            // White
+            image.color = new Color(1, 1, 1, 1);
         }
 
 

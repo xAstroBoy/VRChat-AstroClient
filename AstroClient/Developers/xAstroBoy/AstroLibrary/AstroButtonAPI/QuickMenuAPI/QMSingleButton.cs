@@ -364,7 +364,6 @@
             {
                 BackgroundImage.overrideSprite = image.ToSprite();
             }
-            BackgroundImage.color = Color.white;
             BackgroundImage.MakeBackgroundMoreSolid();
         }
 
