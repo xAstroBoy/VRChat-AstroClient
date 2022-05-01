@@ -24,6 +24,7 @@
                 {
                     _one = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}1.png"));
                     _one.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _one.filterMode = FilterMode.Point;
                     return _one;
                 }
 
@@ -66,6 +67,8 @@
                 {
                     _two = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}2.png"));
                     _two.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _two.filterMode = FilterMode.Point;
+
                     return _two;
                 }
 
@@ -108,6 +111,8 @@
                 {
                     _three = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}3.png"));
                     _three.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _three.filterMode = FilterMode.Point;
+
                     return _three;
                 }
 
@@ -150,6 +155,7 @@
                 {
                     _four = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}4.png"));
                     _four.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _four.filterMode = FilterMode.Point;
                     return _four;
                 }
 
@@ -192,6 +198,7 @@
                 {
                     _five = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}5.png"));
                     _five.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _five.filterMode = FilterMode.Point;
                     return _five;
                 }
 
@@ -234,6 +241,7 @@
                 {
                     _six = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}6.png"));
                     _six.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _six.filterMode = FilterMode.Point;
                     return _six;
                 }
 
@@ -276,6 +284,7 @@
                 {
                     _seven = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}7.png"));
                     _seven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _seven.filterMode = FilterMode.Point;
                     return _seven;
                 }
 
@@ -318,6 +327,7 @@
                 {
                     _badge = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}badge.png"));
                     _badge.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _badge.filterMode = FilterMode.Point;
                     return _badge;
                 }
 
@@ -360,6 +370,7 @@
                 {
                     _cheetos = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}cheetos.png"));
                     _cheetos.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _cheetos.filterMode = FilterMode.Point;
                     return _cheetos;
                 }
 
@@ -402,6 +413,7 @@
                 {
                     _blank = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}blank.png"));
                     _blank.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _blank.filterMode = FilterMode.Point;
                     return _blank;
                 }
 
@@ -444,6 +456,7 @@
                 {
                     _box = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}box.png"));
                     _box.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _box.filterMode = FilterMode.Point;
                     return _box;
                 }
 
@@ -486,6 +499,7 @@
                 {
                     _button = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}e"));
                     _button.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _button.filterMode = FilterMode.Point;
                     return _button;
                 }
 
@@ -528,6 +542,7 @@
                 {
                     _cancel = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}cancel.png"));
                     _cancel.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _cancel.filterMode = FilterMode.Point;
                     return _cancel;
                 }
 
@@ -570,6 +585,7 @@
                 {
                     _check = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}check.png"));
                     _check.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _check.filterMode = FilterMode.Point;
                     return _check;
                 }
 
@@ -613,6 +629,7 @@
                 {
                     _history = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}history.png"));
                     _history.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _history.filterMode = FilterMode.Point;
                     return _history;
                 }
 
@@ -655,6 +672,7 @@
                 {
                     _planet = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}planet.png"));
                     _planet.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _planet.filterMode = FilterMode.Point;
                     return _planet;
                 }
 
@@ -697,6 +715,7 @@
                 {
                     _repair = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}repair.png"));
                     _repair.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _repair.filterMode = FilterMode.Point;
                     return _repair;
                 }
 
@@ -739,6 +758,7 @@
                 {
                     _thief = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}thief.png"));
                     _thief.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _thief.filterMode = FilterMode.Point;
                     return _thief;
                 }
 
@@ -782,6 +802,7 @@
                 {
                     _shuttle = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}shuttle.png"));
                     _shuttle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _shuttle.filterMode = FilterMode.Point;
                     return _shuttle;
                 }
 
@@ -824,6 +845,7 @@
                 {
                     _save = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}save.png"));
                     _save.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _save.filterMode = FilterMode.Point;
                     return _save;
                 }
 
@@ -866,6 +888,7 @@
                 {
                     _locked = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}locked.png"));
                     _locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _locked.filterMode = FilterMode.Point;
                     return _locked;
                 }
 
@@ -908,6 +931,7 @@
                 {
                     _unlocked = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}unlocked.png"));
                     _unlocked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _unlocked.filterMode = FilterMode.Point;
                     return _unlocked;
                 }
 
@@ -934,47 +958,6 @@
 
         #endregion unlocked.png
 
-        #region LiveCaptions.png
-
-        private static Texture2D _LiveCaptions;
-        private static Sprite _LiveCaptions_sprite;
-
-        /// <summary>
-        ///     Loads LiveCaptions.png in resources as Texture2D
-        /// </summary>
-        internal static Texture2D LiveCaptions
-        {
-            get
-            {
-                if (_LiveCaptions == null)
-                {
-                    _LiveCaptions = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}LiveCaptions.png"));
-                    _LiveCaptions.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    return _LiveCaptions;
-                }
-
-                return _LiveCaptions;
-            }
-        }
-
-        /// <summary>
-        ///     Loads LiveCaptions.png in resources as sprite
-        /// </summary>
-        internal static Sprite LiveCaptions_sprite
-        {
-            get
-            {
-                if (_LiveCaptions_sprite == null)
-                {
-                    _LiveCaptions_sprite = LiveCaptions.ToSprite(true);
-                    return _LiveCaptions_sprite;
-                }
-
-                return _LiveCaptions_sprite;
-            }
-        }
-
-        #endregion LiveCaptions.png
 
     }
 }

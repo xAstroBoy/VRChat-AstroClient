@@ -1532,9 +1532,6 @@
     <EmbeddedResource Include="ClientResources\ImageArchive\EnderPearl.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClientResources\IconsArchive\LiveCaptions.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ClientResources\IconsArchive\cheetos.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
