@@ -63,10 +63,16 @@
                     {
                         var originalcoords = player.transform.position;
                         // Teleport To a crashing coordinate (To make the troll crash)
-                        player.transform.position = new Vector3(0, 99999999, 0);
-                        MovementSerializer.SerializerActivated = true;
-                        // Then Fast Teleport back where you are.
-                        player.transform.position = originalcoords;
+
+                        player.transform.position = new Vector3(originalcoords.x, 999999, originalcoords.z);
+                        MiscUtils.DelayFunction(1f, () =>
+                        {
+                            MovementSerializer.SerializerActivated = true;
+                            // Then Fast Teleport back where you are.
+                            player.transform.position = originalcoords;
+                        });
+
+
                         if (RejoinInstanceSetting)
                         {
                             RejoinInstance();
