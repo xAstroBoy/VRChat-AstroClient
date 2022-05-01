@@ -109,7 +109,7 @@ namespace AstroClient.Startup.Hooks
             if (user != null)
             {
                 AvatarDictCache = null;
-                var hashtable = user.GetPlayer().prop_Player_1.field_Private_Hashtable_0;
+                var hashtable = user.GetPlayer().prop_Player_1.prop_Hashtable_0;
                 if (hashtable != null)
                 {
                     if (hashtable.ContainsKey("avatarDict"))
@@ -133,8 +133,7 @@ namespace AstroClient.Startup.Hooks
         {
             if (user != null)
             {
-                AvatarDictCache = null;
-                var hashtable = user.GetPlayer().prop_Player_1.field_Private_Hashtable_0;
+                var hashtable = user.GetPlayer().prop_Player_1.prop_Hashtable_0;
                 if (hashtable != null)
                 {
                     if (hashtable.ContainsKey("avatarDict"))
@@ -150,19 +149,18 @@ namespace AstroClient.Startup.Hooks
         {
             if (avatar != null)
             {
-                avatar.ToAvatarDict((avatardict) =>
+                var avatardict = AstroClient.Tools.Player.AvatarUtils.ToAvatarDict2(avatar);
+                if (avatardict != null)
                 {
-                    if (avatardict != null)
-                    {
-                        AvatarDictCache = avatardict;
-                        isSoftCloneActive = true;
-                        PacketCounter = 0;
-                        _loadAvatarMethod.Invoke(GameInstances.CurrentUser, new object[] { true }); // Invoke refresh and Hook should locally clone it!
-                        Log.Debug("Local Clone Avatar");
-                        PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
+                    AvatarDictCache = avatardict;
+                    isSoftCloneActive = true;
+                    PacketCounter = 0;
+                    _loadAvatarMethod.Invoke(GameInstances.CurrentUser, new object[] { true }); // Invoke refresh and Hook should locally clone it!
+                    Log.Debug("Local Clone Avatar");
+                    PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
 
-                    }
-                });
+                }
+
 
             }
         }

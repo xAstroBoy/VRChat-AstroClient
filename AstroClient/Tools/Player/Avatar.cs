@@ -100,24 +100,12 @@
         {
             if (avtr == null)
                 return; // or throw exception
-            avtr.Get(true, new System.Action<ApiContainer>(container =>
+
+            var container = avtr.MakeModelContainer();
+            if (container != null)
             {
-                Log.Debug("OnSuccess ApiContainer action.");
-                if (container == null)
-                {
-                    Log.Debug("ApiContainer is null (Failed!)");
-                    return;
-                }
-
-                if (container.Data == null)
-                {
-                    Log.Debug("ApiContainer Data is null (Failed!)");
-                    return; // you may want to call the callback but with null
-                }
-
-                var data =
-                    container.Data.Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
-                if (data == null)
+                var ContainerData = container.Data.Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
+                if (ContainerData == null)
                 {
                     Log.Debug("ApiContainer Data is null (Failed!)");
                     return;
@@ -125,46 +113,15 @@
                 else
                 {
                     Log.Debug("ApiContainer Data Has been Converted !");
-                    callback(data);
+                   Log.Debug( $"OnFailure Converted Data : \n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(ContainerData), Newtonsoft.Json.Formatting.Indented)}");
+
+                    callback(ContainerData);
                 }
 
-            }), new System.Action<ApiContainer>(container2 =>
-            {
-                Log.Debug("OnFailure ApiContainer action.");
-                if (container2 == null)
-                {
-                    Log.Debug("ApiContainer is null (Failed!)");
-                    return;
-                }
+            }
 
-                if (container2.Data == null)
-                {
-                    Log.Debug("ApiContainer Data is null (Failed!)");
-                    return; // you may want to call the callback but with null
-                }
 
-                var data2 = container2.Data
-                    .Cast<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>();
-                if (data2 == null)
-                {
-                    Log.Debug("ApiContainer Data is null (Failed!)");
-                    return;
-                }
-                else
-                {
-                    Log.Debug("ApiContainer Data Has been Converted !");
-                    try
-                    {
-                        Log.Debug(
-                            $"OnFailure Converted Data : \n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(container2.Data), Newtonsoft.Json.Formatting.Indented)}");
-                    }
-                    catch
-                    {
-                    }
 
-                    callback(data2);
-                }
-            }), null, false);
         }
 
         private static void ToAvatarDict(
@@ -202,6 +159,109 @@
                 callback(result);
             }
         }
+
+
+        internal static Il2CppSystem.Object ToAvatarDict2(ApiAvatar avatar)
+        {
+            
+            if (avatar != null)
+            {
+                Log.Debug("Got ApiAvatar! Generating AvatarDict!");
+            }
+            else
+            {
+                Log.Debug("Got a Empty ApiAvatar! Failed!");
+                return null;
+            }
+
+            var result = new Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>();
+            if (result != null)
+            {
+                result.System_Collections_IDictionary_Add("id", avatar.id);
+                result.System_Collections_IDictionary_Add("assetUrl", "");
+                result.System_Collections_IDictionary_Add("authorId", avatar.authorId);
+                result.System_Collections_IDictionary_Add("authorName", avatar.authorName);
+                result.System_Collections_IDictionary_Add("updated_at", avatar.updated_at.ToString());
+                result.System_Collections_IDictionary_Add("description", avatar.description);
+                if (avatar.featured)
+                {
+                    result.System_Collections_IDictionary_Add("featured", avatar.featured.ToString());
+                }
+                result.System_Collections_IDictionary_Add("imageUrl", avatar.imageUrl);
+                result.System_Collections_IDictionary_Add("thumbnailImageUrl", avatar.thumbnailImageUrl);
+                result.System_Collections_IDictionary_Add("name", avatar.name);
+                result.System_Collections_IDictionary_Add("releaseStatus", avatar.releaseStatus);
+                result.System_Collections_IDictionary_Add("version", Il2CppConverter.Generate_Il2CPPObject(avatar.version));
+                if(avatar.tags != null)
+                {
+                    result.System_Collections_IDictionary_Add("tags", avatar.tags);
+                }
+                else
+                {
+                    result.System_Collections_IDictionary_Add("tags", new Il2CppSystem.Collections.Generic.List<string>());
+                }
+
+
+                result.System_Collections_IDictionary_Add("unityPackages", BuildUnityPackages(avatar));
+                
+                Log.Debug($"Generated AvatarDict \n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(result), Newtonsoft.Json.Formatting.Indented)}");
+                return result;
+            }
+            return null;
+        }
+
+
+
+        private static Il2CppSystem.Object BuildUnityPackages(ApiAvatar avatar)
+        {
+            if (avatar != null)
+            {
+                var unityPackages = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
+
+                var UnityPackage1 = new Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>();
+                if(UnityPackage1 != null)
+                {
+                    UnityPackage1.System_Collections_IDictionary_Add("assetUrl", avatar.assetUrl);
+                    UnityPackage1.System_Collections_IDictionary_Add("unityVersion", avatar.unityVersion);
+                    UnityPackage1.System_Collections_IDictionary_Add("unitySortNumber", Il2CppConverter.Generate_Il2CPPObject(GetUnitySortNumber(avatar.unityVersion)));
+                    UnityPackage1.System_Collections_IDictionary_Add("assetVersion", Il2CppConverter.Generate_Il2CPPObject(avatar.assetVersion.ApiVersion));
+                    UnityPackage1.System_Collections_IDictionary_Add("platform", avatar.platform);
+                    unityPackages.System_Collections_IList_Add(UnityPackage1);
+                }
+                var UnityPackage2 = new Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>();
+                if (UnityPackage2 != null)
+                {
+                    UnityPackage2.System_Collections_IDictionary_Add("platform", "android");
+                    UnityPackage2.System_Collections_IDictionary_Add("unityVersion", "2019.4.31f1");
+                    unityPackages.System_Collections_IList_Add(UnityPackage2);
+                }
+
+
+
+
+
+                return unityPackages;
+            }
+            return null;
+        }
+
+        private static double GetUnitySortNumber(string UnityVersion)
+        {
+            if(UnityVersion.StartsWith("2017"))
+            {
+                return (double)201704150000;
+            }
+            if (UnityVersion.StartsWith("2018"))
+            {
+                return (double)20180420000;
+            }
+            if (UnityVersion.StartsWith("2019"))
+            {
+                return (double)201904310000;
+            }
+            return default(double);
+        }
+
 
         internal static IEnumerator ReloadAllAvatars()
         {

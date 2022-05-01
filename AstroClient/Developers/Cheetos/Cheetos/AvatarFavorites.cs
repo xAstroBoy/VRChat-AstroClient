@@ -25,18 +25,6 @@ namespace AstroClient.Cheetos
     internal class AvatarFavorites : AstroEvents
     {
 
-        internal override void RegisterToEvents()
-        {
-            ClientEventActions.VRChat_OnQuickMenuInit += VRChat_OnQuickMenuInit;
-        }
-
-        private void VRChat_OnQuickMenuInit()
-        {
-
-            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Spawn Preview Avatar", 921f, 170f, delegate { AvatarPreviewer.ClonePreviewAvatar(); }, 1.45f, 1f);
-            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Remove Preview Avatars", 921f, 110f, delegate { AvatarPreviewer.DeleteAllClonedAvatars(); }, 1.45f, 1f);
-
-        }
         //inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
         //// Avatar Favorite
         //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Favorite", 921f, 290f, delegate

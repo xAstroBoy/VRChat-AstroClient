@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.UIPaths
+﻿using VRC;
+
+namespace AstroClient.xAstroBoy.UIPaths
 {
     using UnityEngine;
 
@@ -34,7 +36,34 @@
                 return _ScreenFade;
             }
         }
+        private static SimpleAvatarPedestal _MainAvatar_Pedestral;
 
+        internal static SimpleAvatarPedestal MainAvatar_Pedestral
+        {
+            get
+            {
+                if (_MainAvatar_Pedestral == null)
+                {
+                    _MainAvatar_Pedestral = AvatarPreviewBase_MainAvatar.GetComponentInChildren<SimpleAvatarPedestal>(true);
+                }
+
+                return _MainAvatar_Pedestral;
+            }
+        }
+        private static SimpleAvatarPedestal _FallbackAvatar_Pedestral;
+
+        internal static SimpleAvatarPedestal FallbackAvatar_Pedestral
+        {
+            get
+            {
+                if (_FallbackAvatar_Pedestral == null)
+                {
+                    _FallbackAvatar_Pedestral = AvatarPreviewBase_FallbackAvatar.GetComponentInChildren<SimpleAvatarPedestal>(true);
+                }
+
+                return _FallbackAvatar_Pedestral;
+            }
+        }
         private static Transform _AvatarPreviewBase_MainAvatar;
 
         internal static Transform AvatarPreviewBase_MainAvatar
@@ -65,19 +94,6 @@
             }
         }
 
-        private static Transform _QuickMenuElements;
-
-        internal static Transform QuickMenuElements
-        {
-            get
-            {
-                if (_QuickMenuElements == null)
-                {
-                    return _QuickMenuElements = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements").transform;
-                }
-                return _QuickMenuElements;
-            }
-        }
 
         private static Transform _BigMenuElements;
 
