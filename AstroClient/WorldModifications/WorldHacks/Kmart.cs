@@ -78,17 +78,8 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void FindEverything()
         {
-            var Ejector1 = Root.FindObject("Shelves/Gondola (12)");
-            if (Ejector1 != null)
-            {
-                FuckHisEjectors(Ejector1);
-            }
-
-            var Ejector2 = Root.FindObject("Toasters/Cube (63)");
-            if (Ejector2 != null)
-            {
-                FuckHisEjectors(Ejector1);
-            }
+            FuckHisEjectors(Root.FindObject("Shelves/Gondola (12)"));
+            FuckHisEjectors(Root.FindObject("Toasters/Cube (63)"));
 
 
 
