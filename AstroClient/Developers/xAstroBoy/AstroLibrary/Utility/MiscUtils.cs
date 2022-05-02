@@ -181,20 +181,12 @@ namespace AstroClient.xAstroBoy.Utility
             return text;
         }
 
-        public static void ChangeAvatar(this ApiAvatar instance)
-        {
-            try
-            {
-                ChangeAvatar(instance.id);
-            }
-            catch { Log.Error("Error turning into avatar! Maybe it's non existing?"); }
-        }
 
         public static void ChangeAvatar(this Player instance)
         {
             try
             {
-                ChangeAvatar((string)instance.prop_ApiAvatar_0.id);
+                ChangeAvatar(instance.prop_ApiAvatar_0);
             }
             catch { Log.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
@@ -203,21 +195,21 @@ namespace AstroClient.xAstroBoy.Utility
         {
             try
             {
-                ChangeAvatar((string)instance.prop_ApiAvatar_0.id);
+                ChangeAvatar(instance.prop_ApiAvatar_0);
             }
             catch { Log.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
-        public static void ChangeAvatar(string id)
+        public static void ChangeAvatar(ApiAvatar avatar)
         {
             try
             {
                 PageAvatar component = GameObject.Find("Screens").transform.Find("Avatar").GetComponent<PageAvatar>();
-                component.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar
+                if (component != null)
                 {
-                    id = id
-                };
-                component.ChangeToSelectedAvatar();
+                    component.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = avatar;
+                    component.ChangeToSelectedAvatar();
+                }
             }
             catch { Log.Error("Error turning into avatar! Maybe it's non existing?"); }
         }

@@ -10,7 +10,7 @@
 
             if (player != null)
             {
-                MiscUtils.ChangeAvatar(player.GetApiAvatar().id);
+                MiscUtils.ChangeAvatar(player.GetApiAvatar());
             }
         }
     }
