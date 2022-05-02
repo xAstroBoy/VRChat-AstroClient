@@ -128,12 +128,12 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
         }
 
 
-        private static void EditRule(GameObject gameObject, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = true, bool PrintRuleChanges = false)
+        internal static void EditRule(GameObject gameObject, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = true, bool PrintRuleChanges = false)
         {
             EditRule(gameObject.name, EventKey, AllowLocalSender, AllowRemoteSender, PrintRuleChanges);
         }
 
-        private static void EditRule(string EventName, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = true, bool PrintRuleChanges = false)
+        internal static void EditRule(string EventName, string EventKey, bool AllowLocalSender = true, bool AllowRemoteSender = true, bool PrintRuleChanges = false)
         {
             if (BlockedGameObjectRPCEvents != null)
             {

@@ -29,7 +29,7 @@ namespace AstroClient.WorldModifications
             //FreezeTag.InitButtons(WorldCheats, 1, 2, true);
             AimFactory.InitButtons(WorldCheats);
             BOMBERio.InitButtons(WorldCheats);
-            BClubWorld.InitButtons(WorldCheats);
+            JustBClub1.InitButtons(WorldCheats);
             JustHParty.InitButtons(WorldCheats);
             VoidClub.InitButtons(WorldCheats);
             FBTHeaven.InitButtons(WorldCheats);

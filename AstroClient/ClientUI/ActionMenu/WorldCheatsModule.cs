@@ -504,21 +504,21 @@ internal class WorldCheatsModule : AstroEvents
             #region Just B Club
             if (WorldUtils.WorldID == WorldIds.JustBClub)
             {
-                CustomSubMenu.AddToggle("Rainbow Lights", BClubWorld.IsRainbowEnabled, ToggleValue => { BClubWorld.IsRainbowEnabled = ToggleValue; });
-                CustomSubMenu.AddToggle("Doorbell Spam", BClubWorld.IsDoorbellSpamEnabled, ToggleValue => { BClubWorld.IsDoorbellSpamEnabled = ToggleValue; });
+                CustomSubMenu.AddToggle("Rainbow Lights", JustBClub1.IsRainbowEnabled, ToggleValue => { JustBClub1.IsRainbowEnabled = ToggleValue; });
+                CustomSubMenu.AddToggle("Doorbell Spam", JustBClub1.IsDoorbellSpamEnabled, ToggleValue => { JustBClub1.IsDoorbellSpamEnabled = ToggleValue; });
                 if (Bools.IsDeveloper)
                 {
-                    CustomSubMenu.AddToggle("BlueChair Everyone", BClubWorld.IsBlueChairEnabled, ToggleValue => { BClubWorld.IsBlueChairEnabled = ToggleValue; });
+                    CustomSubMenu.AddToggle("BlueChair Everyone", JustBClub1.IsBlueChairEnabled, ToggleValue => { JustBClub1.IsBlueChairEnabled = ToggleValue; });
                 }
-                CustomSubMenu.AddToggle("NPC Moan Spam", BClubWorld.IsMoanSpamEnabled, ToggleValue => { BClubWorld.IsMoanSpamEnabled = ToggleValue; });
-                CustomSubMenu.AddToggle("NPC Fall Spam", BClubWorld.IsFallSpamEnabled, ToggleValue => { BClubWorld.IsFallSpamEnabled = ToggleValue; });
+                CustomSubMenu.AddToggle("NPC Moan Spam", JustBClub1.IsMoanSpamEnabled, ToggleValue => { JustBClub1.IsMoanSpamEnabled = ToggleValue; });
+                CustomSubMenu.AddToggle("NPC Fall Spam", JustBClub1.IsFallSpamEnabled, ToggleValue => { JustBClub1.IsFallSpamEnabled = ToggleValue; });
 
-                CustomSubMenu.AddToggle("Freeze Locked Door", BClubWorld.IsFreezeLockEnabed, ToggleValue => { BClubWorld.IsFreezeLockEnabed = ToggleValue; });
-                CustomSubMenu.AddToggle("Freeze Unlocked Door", BClubWorld.IsFreezeUnlockEnabed, ToggleValue => { BClubWorld.IsFreezeUnlockEnabed = ToggleValue; });
+                CustomSubMenu.AddToggle("Freeze Locked Door", JustBClub1.IsFreezeLockEnabed, ToggleValue => { JustBClub1.IsFreezeLockEnabed = ToggleValue; });
+                CustomSubMenu.AddToggle("Freeze Unlocked Door", JustBClub1.IsFreezeUnlockEnabed, ToggleValue => { JustBClub1.IsFreezeUnlockEnabed = ToggleValue; });
 
-                if(BClubWorld.EjectNonVips != null)
+                if(JustBClub1.EjectNonVips != null)
                 {
-                    CustomSubMenu.AddButton("Eject Non VIPs (VIP Room)", () => { BClubWorld.EjectNonVips.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Eject Non VIPs (VIP Room)", () => { JustBClub1.EjectNonVips.InvokeBehaviour(); });
 
                 }
             }

@@ -63,9 +63,9 @@ namespace AstroClient.WorldModifications
             }
             else if (id == WorldIds.JustBClub)
             {
-                if (BClubWorld.BClubExploitsPage != null)
+                if (JustBClub1.BClubExploitsPage != null)
                 {
-                    WorldCheatsShortcut.SetButtonShortcut(BClubWorld.BClubExploitsPage);
+                    WorldCheatsShortcut.SetButtonShortcut(JustBClub1.BClubExploitsPage);
                     WorldCheatsShortcut.SetTextColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }

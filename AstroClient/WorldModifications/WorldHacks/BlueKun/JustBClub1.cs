@@ -31,7 +31,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
     #endregion Imports
 
-    internal class BClubWorld : AstroEvents
+    internal class JustBClub1 : AstroEvents
     {
         internal override void RegisterToEvents()
         {
