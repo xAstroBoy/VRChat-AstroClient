@@ -222,47 +222,6 @@ namespace AstroClient.xAstroBoy.Utility
             return null;
         }
 
-        private static AssetBundle BlazeBundle;
-        public static Sprite NP1;
-        public static Sprite NP2;
-        public static Sprite Logo;
-        public static Sprite MediaBack;
-        public static Sprite MediaPause;
-        public static Sprite MediaNext;
-        public static Sprite MediaMute;
-
-        public static void LoadBundle()
-        {
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Blaze.Resources.blaze")) //String is MainNamespace.assetbundlename
-            using (var tempStream = new MemoryStream((int)stream.Length))
-            {
-                stream.CopyTo(tempStream);
-
-                BlazeBundle = AssetBundle.LoadFromMemory_Internal(tempStream.ToArray(), 0);
-                BlazeBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            }
-
-            NP1 = BlazeBundle.LoadAsset_Internal("Assets/Blaze/NameplateTex.png", Il2CppType.Of<Sprite>()).Cast<Sprite>(); //String is the location/name of the asset in the assetbundle
-            NP1.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-
-            NP2 = BlazeBundle.LoadAsset_Internal("Assets/Blaze/iconPlate.png", Il2CppType.Of<Sprite>()).Cast<Sprite>(); //String is the location/name of the asset in the assetbundle
-            NP2.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-
-            Logo = BlazeBundle.LoadAsset_Internal("Assets/Blaze/logo.png", Il2CppType.Of<Sprite>()).Cast<Sprite>(); //String is the location/name of the asset in the assetbundle
-            Logo.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-
-            MediaBack = BlazeBundle.LoadAsset_Internal("Assets/Blaze/back.png", Il2CppType.Of<Sprite>()).Cast<Sprite>(); //String is the location/name of the asset in the assetbundle
-            MediaBack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-
-            MediaMute = BlazeBundle.LoadAsset_Internal("Assets/Blaze/mute.png", Il2CppType.Of<Sprite>()).Cast<Sprite>(); //String is the location/name of the asset in the assetbundle
-            MediaMute.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-
-            MediaNext = BlazeBundle.LoadAsset_Internal("Assets/Blaze/next.png", Il2CppType.Of<Sprite>()).Cast<Sprite>(); //String is the location/name of the asset in the assetbundle
-            MediaNext.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-
-            MediaPause = BlazeBundle.LoadAsset_Internal("Assets/Blaze/pause.png", Il2CppType.Of<Sprite>()).Cast<Sprite>(); //String is the location/name of the asset in the assetbundle
-            MediaPause.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-        }
 
         public static void DropPortal(string RoomId)
         {
