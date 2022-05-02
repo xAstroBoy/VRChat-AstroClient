@@ -1590,9 +1590,13 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (!isCurrentWorld) return;
             if (item == null) return;
             if (EventName.IsNullOrEmptyOrWhiteSpace()) return;
+            //if (item.name.isMatch("RenderCamera") && EventName.isMatch("_ProcessPatronsFromReadRenderTexture"))
+            //{
+            //    ForceEliteTier();
+            //}
+
             if (item.name.isMatch("Patreon") && EventName.isMatch("_ProcessPatronsFromReadRenderTexture"))
             {
-                // The Final step has been sent, let's hijack it!
                 ForceEliteTier();
             }
         }

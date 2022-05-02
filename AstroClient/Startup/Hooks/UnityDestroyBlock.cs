@@ -120,6 +120,7 @@ namespace AstroClient.Startup.Hooks
 
         private static bool MonitoredDestroy(UnityEngine.Object __0)
         {
+            if (!MonitorDestroyingEvent) return true;
             if (__0 != null)
             {
                 var il2Cpptype = __0.GetIl2CppType().FullName;

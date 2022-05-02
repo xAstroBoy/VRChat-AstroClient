@@ -406,8 +406,8 @@
         {
             if (isActivePatch)
             {
-                Instance.UnpatchSelf();
-                if (!isMethodInfoPatch)
+                this.Instance.UnpatchSelf();
+                if (!this.isMethodInfoPatch)
                 {
                     if (isDevMode)
                     {
