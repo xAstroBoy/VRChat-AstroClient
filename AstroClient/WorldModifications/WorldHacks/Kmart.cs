@@ -64,24 +64,33 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static bool RemoveBlocksForJoinedPlayers { get; set; } = false;
         internal static UnityEngine.UI.Text KeypadText { get; set; }
 
+        private static void FuckHisEjectors(GameObject root)
+        {
+            if (root != null)
+            {
+                foreach (var item in root.transform.Get_All_Childs())
+                {
+                    item.gameObject.RemoveAllColliders(false);
+                }
+            }
+
+        }
+
         private static void FindEverything()
         {
-            var UselessColliders = Root.FindObject("Shelves/Gondola (12)");
-            if (UselessColliders != null)
+            var Ejector1 = Root.FindObject("Shelves/Gondola (12)");
+            if (Ejector1 != null)
             {
-                foreach (var item in UselessColliders.transform.Get_All_Childs())
-                {
-                    item.gameObject.RemoveAllColliders(false);
-                }
+                FuckHisEjectors(Ejector1);
             }
-            var UselessColliders2 = Root.FindObject("Pets/Cube (82)");
-            if (UselessColliders2 != null)
+
+            var Ejector2 = Root.FindObject("Toasters/Cube (63)");
+            if (Ejector2 != null)
             {
-                foreach (var item in UselessColliders2.transform.Get_All_Childs())
-                {
-                    item.gameObject.RemoveAllColliders(false);
-                }
+                FuckHisEjectors(Ejector1);
             }
+
+
 
             var keypaddisplay = Root.FindObject("Electronics/bunkbed_office_chair/KeypadStructure/KeypadCanvas/KeypadDisplay");
             if (keypaddisplay != null)
