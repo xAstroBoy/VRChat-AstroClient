@@ -20,7 +20,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
-            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnQuickMenuClose += OnCloseMenu;
+            ClientEventActions.OnBigMenuClose += OnCloseMenu;
+            ClientEventActions.OnBigMenuOpen += OnCloseMenu;
         }
 
 

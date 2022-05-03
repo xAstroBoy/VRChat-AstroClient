@@ -18,7 +18,9 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
-            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnQuickMenuClose += OnCloseMenu;
+            ClientEventActions.OnBigMenuClose += OnCloseMenu;
+            ClientEventActions.OnBigMenuOpen += OnCloseMenu;
         }
 
         private static QMWings WingMenu;

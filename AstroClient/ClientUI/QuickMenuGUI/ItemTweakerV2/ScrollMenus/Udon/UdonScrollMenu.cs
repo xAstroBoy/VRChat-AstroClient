@@ -79,7 +79,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnRoomLeft += OnRoomLeft;
-            ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
+            ClientEventActions.OnQuickMenuClose += OnCloseMenu;
+            ClientEventActions.OnBigMenuClose += OnCloseMenu;
+            ClientEventActions.OnBigMenuOpen += OnCloseMenu;
         }
         //private static bool _IsUIPageListenerActive = false;
         //private static bool IsUIPageListenerActive
@@ -252,10 +254,6 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
             }
         }
 
-        private void OnQuickMenuClose()
-        {
-            OnCloseMenu();
-        }
 
         private static void OnCloseMenu()
         {
