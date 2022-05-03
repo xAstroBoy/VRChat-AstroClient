@@ -161,7 +161,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Triggers
             if (!isOpen) return;
 
             if (Page != null)
-                if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))
+                if (!Page.isPage(CurrentScrollMenu.GetPage()) )
                     OnCloseMenu();
         }
 

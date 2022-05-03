@@ -70,7 +70,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
                 ButtonText_Title.fontSize = 36;
-                CurrentPage.field_Public_String_0 = btnQMLoc; //Name
+				CurrentPage.SetName(btnQMLoc);			
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true; //_inited
                 CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
@@ -126,7 +126,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
                 ButtonText_Title.fontSize = 36;
-                CurrentPage.field_Public_String_0 = btnQMLoc; //Name
+				CurrentPage.SetName(btnQMLoc);			
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true; //_inited
                 CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
@@ -224,7 +224,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
                 ButtonText_Title.fontSize = 36;
-                CurrentPage.field_Public_String_0 = btnQMLoc; //Name
+				CurrentPage.SetName(btnQMLoc);			
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true; //_inited
                 CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
@@ -275,7 +275,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
                 ButtonText_Title.fontSize = 36;
-                CurrentPage.field_Public_String_0 = btnQMLoc; //Name
+				CurrentPage.SetName(btnQMLoc);			
                 CurrentPage.gameObject.name = btnQMLoc;
                 CurrentPage.field_Public_Boolean_0 = true; //_inited
                 CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController

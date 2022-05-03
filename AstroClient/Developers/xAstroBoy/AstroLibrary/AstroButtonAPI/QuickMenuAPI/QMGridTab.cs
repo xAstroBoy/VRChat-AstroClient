@@ -18,7 +18,7 @@
         internal GameObject ButtonsMenu { get; set; }
         internal QMTabButton mainButton { get; set; }
         internal string menuName { get; set; }
-        internal UIPage page { get; set; }
+        private UIPage page { get; set; }
         internal Action OnCloseAction { get; set; }
         internal Action OnOpenAction { get; set; }
 

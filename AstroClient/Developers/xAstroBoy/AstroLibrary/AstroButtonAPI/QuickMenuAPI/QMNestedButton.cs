@@ -17,7 +17,7 @@
         internal GameObject backButton { get; set; }
         internal GameObject ButtonsMenu { get; set; }
         internal GameObject Parent { get; set; }
-        internal UIPage page { get; set; }
+        private UIPage page { get; set; }
 
         internal QMSingleButton mainButton { get; set; }
 

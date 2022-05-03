@@ -219,7 +219,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             if (!_isOpen) return;
             if (Page != null)
             {
-                if (!Page.ContainsPage(CurrentScrollMenu.page)  && !Page.ContainsPage(WingMenu.CurrentPage))
+                if (!Page.isPage(CurrentScrollMenu.GetPage())  )
                 {
                     OnCloseMenu();
                 }

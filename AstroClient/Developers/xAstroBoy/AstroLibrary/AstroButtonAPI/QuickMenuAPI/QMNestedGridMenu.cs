@@ -19,7 +19,7 @@
 
         internal GameObject Parent { get; set; }
 
-        internal UIPage page { get; set; }
+        private UIPage page { get; set; }
 
         internal string menuName { get; set; }
 

@@ -24,7 +24,7 @@
 
             var page = Self.AddComponent<UIPage>();
             page.name = MenuName;
-            page.Name = MenuName;
+            page.SetName(MenuName);
             page._inited = true;
             page._menuStateController = QMUtils.QuickMenuController;
             page._pageStack = new Il2CppSystem.Collections.Generic.List<UIPage>();

@@ -75,7 +75,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         {
             if (_MenuTab != null)
             {
-                _MenuTab.field_Public_String_0 = page.name; // Separate it from glowing along with the settings 
+                _MenuTab.field_Public_String_0 = page.GetName(); // Separate it from glowing along with the settings 
             }
         }
         internal void SetGlowEffect(string pagename)

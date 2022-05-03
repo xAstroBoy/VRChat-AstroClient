@@ -57,49 +57,24 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
         }
 
-        internal static bool isAstroPage(this UIPage page)
+
+
+
+        internal static bool isPage(this UIPage page, UIPage TargetPage)
         {
             if (page != null)
             {
-                if (page.name.isMatch(BuildInfo.Name)) return true;
-                if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
-                    foreach (var item in page.field_Private_List_1_UIPage_0)
-                        if (item.field_Public_String_0.isMatch(BuildInfo.Name))
-                            return true;
-            }
-
-            return false;
-        }
-
-        internal static bool ContainsPage(this UIPage page, List<QMNestedGridMenu> menus)
-        {
-            if (page != null)
-                if (menus != null)
-                    if (menus.Count != 0)
-                        for (int i = 0; i < menus.Count; i++)
-                            if (menus[i] != null)
-                                if (ContainsPage(page, menus[i].GetPage()))
-                                    return true;
-
-            return false;
-        }
-
-        internal static bool ContainsPage(this UIPage page, UIPage TargetPage)
-        {
-            if (page != null && TargetPage != null )
-            {
-                if (page.field_Public_String_0.Equals(TargetPage.field_Public_String_0)) return true;
-                var PageList = page.field_Private_List_1_UIPage_0.ToArray().ToList(); // For some reason is shitting itself in Il2cpp List.
-                if (PageList != null && PageList.Count != 0)
+                if (TargetPage != null)
                 {
-                    foreach (var item in PageList)
+                    var PageName = page.GetName();
+                    var TargetName = TargetPage.GetName();
+                    if (TargetName == PageName)
                     {
-                        if (item.field_Public_String_0.Equals(TargetPage.field_Public_String_0))
-                        {
-                            return true;
-                        }
+                        return true;
                     }
+                    return false;
                 }
+                return false;
             }
             return false;
         }
@@ -182,9 +157,22 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             if (page != null && menus != null)
                 if (menus.Count != 0)
                     foreach (var item in menus)
-                        if (item.page.Equals(page))
+                        if (item.GetPage().GetName().Equals(page.GetName()))
                             return true;
             return false;
+        }
+
+        internal static string GetName(this UIPage page)
+        {
+            return page.field_Public_String_0;
+        }
+        internal static void SetName(this UIPage page, string Name)
+        {
+            if (page != null)
+            {
+                page.name = Name;
+                page.field_Public_String_0 = Name;
+            }
         }
 
         internal static GameObject FindUIObject(this GameObject parent, string name)
@@ -485,7 +473,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         {
             for (int i = 0; i < _MenuStateController.field_Public_ArrayOf_UIPage_0.Count; i++)
             {
-                if (_MenuStateController.field_Public_ArrayOf_UIPage_0[i].field_Public_String_0 == Page)
+                if (_MenuStateController.field_Public_ArrayOf_UIPage_0[i].GetName() == Page)
                 {
                     _MenuStateController.ShowTabContent(i, false);
                     break;

@@ -65,8 +65,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Select Pickup", "Select World Pickup", null, null, null, null, btnHalf);
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction = OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction = OnCloseMenu;
             InitWingPage();
         }
 
@@ -140,8 +140,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
         {
             if (!isOpen) return;
 
-            if (Page != null)
-                if (!Page.ContainsPage(CurrentScrollMenu.page) && !Page.ContainsPage(WingMenu.CurrentPage))
+            if (Page != null && CurrentScrollMenu.GetPage() != null)
+                if (!Page.isPage(CurrentScrollMenu.GetPage()))
                     OnCloseMenu();
         }
 

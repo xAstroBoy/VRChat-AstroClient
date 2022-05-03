@@ -21,7 +21,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
                 {
                     result.name = menuName;
                     result.field_Protected_MenuStateController_0 = QuickMenuTools.QuickMenuController;
-                    result.field_Public_String_0 = menuName;
+					result.SetName(menuName);
                     result.field_Private_Boolean_1 = true;
                     result.field_Private_List_1_UIPage_0 = new List<UIPage>();
                     result.field_Private_List_1_UIPage_0.Add(result);

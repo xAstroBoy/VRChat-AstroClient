@@ -30,7 +30,7 @@ namespace Apollo.Utils.API.QM
 			gameObject.SetActive(false);
 			Object.DestroyImmediate(gameObject.GetComponent<LaunchPadQMMenu>());
 			page = gameObject.AddComponent<UIPage>();
-			page.field_Public_String_0 = menuName;
+			page.SetName(menuName);
 			page.field_Private_Boolean_1 = true;
 			page.field_Private_MenuStateController_0 = APIStuff.GetMenuStateControllerInstance();
 			page.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
