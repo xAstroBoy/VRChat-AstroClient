@@ -126,11 +126,6 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
         private static void OnOpenMenu()
         {
             isOpen = true;
-            if (WingMenu != null)
-            {
-                WingMenu.SetActive(true);
-                WingMenu.ShowWingsPage();
-            }
             IsUIPageListenerActive = true;
             Regenerate();
         }

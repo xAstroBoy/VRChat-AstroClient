@@ -89,22 +89,6 @@ namespace AstroClient.Tools.Headlight
         internal static void HeadlightButtonInit(QMGridTab menu)
         {
             HeadlightConfig = new QMNestedButton(menu, "Custom Headlight", "Headlight Settings");
-            HeadlightConfig.OnOpenAction += (() =>
-            {
-                WingMenu.SetActive(true);
-                WingMenu.ShowWingsPage();
-            });
-
-            HeadlightConfig.OnCloseAction += (() =>
-            {
-                if (WingMenu != null)
-                {
-                    WingMenu.SetActive(false);
-                    
-                }
-
-            });
-            
             QMNestedButton HeadlightColor = new QMNestedButton(HeadlightConfig, 4, 0, "Headlight Color", "Configure the Color For the Headlight", null, null, null);
 
             _ = new QMSingleButton(HeadlightConfig, 1, 0, "+ \n Intensity \n +", () =>
