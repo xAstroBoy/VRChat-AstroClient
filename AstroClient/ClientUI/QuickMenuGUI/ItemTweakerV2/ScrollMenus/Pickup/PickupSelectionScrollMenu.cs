@@ -116,16 +116,21 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
         {
             IsUIPageListenerActive = false;
             isOpen = false;
+            if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
             }
-            if (DestroyOnMenuClose) DestroyGeneratedButtons();
         }
 
         private static void OnOpenMenu()
         {
             isOpen = true;
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(true);
+                WingMenu.ShowWingsPage();
+            }
             IsUIPageListenerActive = true;
             Regenerate();
         }
@@ -134,14 +139,14 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
         {
             if (!isOpen) return;
 
-            if (Page != null && CurrentScrollMenu.GetPage() != null)
+            if (Page != null)
                 if (!Page.isPage(CurrentScrollMenu.GetPage()))
                     OnCloseMenu();
         }
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(CurrentScrollMenu,1008, true, "Tweaker Pickups", "Select Pickup To modify!");
+            WingMenu = new QMWings(CurrentScrollMenu, 1008, true, "Tweaker Pickups", "Select Pickup To modify!");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

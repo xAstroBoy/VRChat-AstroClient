@@ -77,10 +77,10 @@ namespace AstroClient.Tools.Headlight
         private static QMWings WingMenu;
         internal static QMWingToggleButton DesktopHeadlightBtn;
         internal static QMWingToggleButton VRHeadlightBtn;
-        internal static QMNestedButton CurrentScrollMenu;
+        internal static QMNestedButton HeadlightConfig;
         private static void InitWings()
         {
-            WingMenu = new QMWings(CurrentScrollMenu, 1012, true, "Headlight", "Headlight Options");
+            WingMenu = new QMWings(HeadlightConfig, 1012, true, "Headlight", "Headlight Options");
             VRHeadlightBtn = new QMWingToggleButton(WingMenu, "VR headlight", () => { VRHeadLightBool = true; }, () => { VRHeadLightBool = false; }, "Toggle VR Headlight");
             DesktopHeadlightBtn = new QMWingToggleButton(WingMenu, "Desktop Headlight", () => { DesktopHeadlightBool = true; }, () => { DesktopHeadlightBool = false; }, "Toggle Desktop Headlight");
             WingMenu.SetActive(false);
@@ -88,7 +88,7 @@ namespace AstroClient.Tools.Headlight
 
         internal static void HeadlightButtonInit(QMGridTab menu)
         {
-            QMNestedButton HeadlightConfig = new QMNestedButton(menu, "Custom Headlight", "Headlight Settings");
+            HeadlightConfig = new QMNestedButton(menu, "Custom Headlight", "Headlight Settings");
             HeadlightConfig.OnOpenAction += (() =>
             {
                 WingMenu.SetActive(true);
