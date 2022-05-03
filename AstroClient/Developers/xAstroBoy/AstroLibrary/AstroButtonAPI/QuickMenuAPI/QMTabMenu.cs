@@ -57,7 +57,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             mainButton = new QMTabButton(index, () =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menuName);
-                if (OnOpenAction != null) OnOpenAction();
+                OnOpenAction.SafetyRaise();
             }, btnToolTip, btnBackgroundColor, icon);
             mainButton.SetGlowEffect(page);
             backButton = NestedPart.CreateMainBackButton();
@@ -68,7 +68,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
-                if (OnCloseAction != null) OnCloseAction();
+                OnCloseAction.SafetyRaise();
             });
         }
 

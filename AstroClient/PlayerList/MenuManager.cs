@@ -25,7 +25,6 @@ namespace AstroClient.PlayerList
         {
             ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnUiManagerInit;
             ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
-
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
         }
         //public static List<SubMenu> playerListMenus { get; set; } = new List<SubMenu>();

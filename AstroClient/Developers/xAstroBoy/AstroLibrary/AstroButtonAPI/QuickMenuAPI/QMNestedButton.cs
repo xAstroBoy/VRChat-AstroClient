@@ -128,8 +128,8 @@
                 mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
                 {
                     QuickMenuTools.ShowQuickmenuPage(menuName);
-                    if (Wing_OnOpenAction != null) Wing_OnOpenAction();
-                    if (OnOpenAction != null) OnOpenAction();
+                    Wing_OnOpenAction.SafetyRaise();
+                    OnOpenAction.SafetyRaise();
                 }, btnToolTip, TextColorHTML, btnHalf);
             }
             else
@@ -137,8 +137,8 @@
                 mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
                 {
                     QuickMenuTools.ShowQuickmenuPage(menuName);
-                    if (Wing_OnOpenAction != null) Wing_OnOpenAction();
-                    if (OnOpenAction != null) OnOpenAction();
+                    Wing_OnOpenAction.SafetyRaise();
+                    OnOpenAction.SafetyRaise();
                 }, btnToolTip, TextColorHTML, btnHalf);
             }
 
@@ -164,8 +164,8 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
-                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
-                if (OnCloseAction != null) OnCloseAction();
+                Wing_OnCloseAction.SafetyRaise();
+                OnCloseAction.SafetyRaise();
             });
         }
 
@@ -174,8 +174,8 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
-                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
-                if (OnCloseAction != null) OnCloseAction();
+                Wing_OnCloseAction.SafetyRaise();
+                OnCloseAction.SafetyRaise();
             });
         }
 
@@ -184,8 +184,8 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
-                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
-                if (OnCloseAction != null) OnCloseAction();
+                Wing_OnCloseAction.SafetyRaise();
+                OnCloseAction.SafetyRaise();
             });
         }
 
@@ -194,8 +194,8 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
-                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
-                if (OnCloseAction != null) OnCloseAction();
+                Wing_OnCloseAction.SafetyRaise();
+                OnCloseAction.SafetyRaise();
             });
         }
 
@@ -204,8 +204,8 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
-                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
-                if (OnCloseAction != null) OnCloseAction();
+                Wing_OnCloseAction.SafetyRaise();
+                OnCloseAction.SafetyRaise();
             });
         }
 

@@ -56,7 +56,7 @@
             mainButton = new QMTabButton(index, () =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menuName);
-                if (OnOpenAction != null) OnOpenAction();
+                OnOpenAction.SafetyRaise();
             }, btnToolTip, btnBackgroundColor, icon);
             mainButton.SetGlowEffect(page);
             backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
@@ -68,7 +68,7 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
-                if (OnCloseAction != null) OnCloseAction();
+                OnCloseAction.SafetyRaise();
             });
         }
 
