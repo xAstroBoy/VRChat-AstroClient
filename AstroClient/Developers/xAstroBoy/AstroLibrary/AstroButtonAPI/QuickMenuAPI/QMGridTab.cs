@@ -44,7 +44,7 @@
             System.Collections.Generic.List<Transform> list = ButtonsMenu.transform.Get_Childs();
             for (int i = 0; i < list.Count; i++)
             {
-                list[i].DestroyMeLocal(true);
+				UnityEngine.Object.Destroy(list[i]);
             }
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;
@@ -100,10 +100,9 @@
             mainButton.DestroyMe();
 
             QuickMenuTools.QuickMenuController.RemovePage(page);
-
-            NestedPart.DestroyMeLocal(true);
-            backButton.DestroyMeLocal(true);
-            ButtonsMenu.DestroyMeLocal(true);
+            UnityEngine.Object.Destroy(backButton);
+            UnityEngine.Object.Destroy(NestedPart);
+            UnityEngine.Object.Destroy(ButtonsMenu);
         }
 
         internal void OpenMe()

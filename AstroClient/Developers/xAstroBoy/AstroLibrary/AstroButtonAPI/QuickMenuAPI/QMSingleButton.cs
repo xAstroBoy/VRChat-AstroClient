@@ -322,7 +322,7 @@
 
         internal void DestroyMe()
         {
-            ButtonObject.DestroyMeLocal(true);
+            UnityEngine.Object.Destroy(ButtonObject);
         }
 
         internal void SetToolTip(string text)

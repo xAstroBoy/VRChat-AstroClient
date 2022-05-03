@@ -103,7 +103,7 @@
             Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
             foreach (var item in ButtonsMenu.transform.Get_Childs())
             {
-                item.DestroyMeLocal(true);
+                UnityEngine.Object.Destroy(item);
             }
 
             page = NestedPart.GenerateQuickMenuPage(menuName);
@@ -227,9 +227,9 @@
 
         internal void DestroyMe()
         {
-            NestedPart.DestroyMeLocal(true);
-            backButton.DestroyMeLocal(true);
-            ButtonsMenu.DestroyMeLocal(true);
+            UnityEngine.Object.Destroy(NestedPart);
+            UnityEngine.Object.Destroy(backButton);
+            UnityEngine.Object.Destroy(ButtonsMenu);
             QuickMenuTools.QuickMenuController.RemovePage(page);
             mainButton.DestroyMe();
         }

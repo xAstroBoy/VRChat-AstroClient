@@ -17,10 +17,10 @@
 
         internal void DestroyMe()
         {
-            Header.DestroyMeLocal(true);
-            QuickActions.DestroyMeLocal(true);
-            HeaderText.DestroyMeLocal(true);
-            VerticalLayoutGroup.DestroyMeLocal(true);
+            UnityEngine.Object.Destroy(Header);
+            UnityEngine.Object.Destroy(QuickActions);
+            UnityEngine.Object.Destroy(HeaderText);
+            UnityEngine.Object.Destroy(VerticalLayoutGroup);
         }
 
         internal QmQuickActions(int Index, string Menu, string Title, Color32 TextColor)

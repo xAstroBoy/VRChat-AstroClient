@@ -240,18 +240,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 
         internal void DestroyMe()
         {
-            btnOn.DestroyMeLocal(true);
-            btnOff.DestroyMeLocal(true);
-            btnOn_Rect.DestroyMeLocal(true);
-            btnOff_Rect.DestroyMeLocal(true);
-            btnOn_Image.DestroyMeLocal(true);
-            btnOff_Image.DestroyMeLocal(true);
-            ButtonToggle.DestroyMeLocal(true);
-            ButtonToolTip.DestroyMeLocal(true);
-            ButtonObject.DestroyMeLocal(true);
-            ButtonTitleMesh.DestroyMeLocal(true);
-            ButtonText.DestroyMeLocal(true);
-            
+            UnityEngine.Object.Destroy(ButtonObject);
+
         }
 
         internal void SetToolTip(string text)

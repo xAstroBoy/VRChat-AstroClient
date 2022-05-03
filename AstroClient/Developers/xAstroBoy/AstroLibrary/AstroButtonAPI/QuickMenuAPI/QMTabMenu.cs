@@ -44,7 +44,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             for (int i = 0; i < list.Count; i++)
             {
                 Transform item = list[i];
-                item.DestroyMeLocal(true);
+                UnityEngine.Object.Destroy(item.gameObject);
             }
             page = NestedPart.GenerateQuickMenuPage(menuName);
             NestedPart.name = menuName;
@@ -94,9 +94,9 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         {
 
             QuickMenuTools.QuickMenuController.RemovePage(page);
-            ButtonsMenu.DestroyMeLocal(true);
-            NestedPart.DestroyMeLocal(true);
-            backButton.DestroyMeLocal(true);
+            UnityEngine.Object.Destroy(ButtonsMenu);
+            UnityEngine.Object.Destroy(NestedPart);
+            UnityEngine.Object.Destroy(backButton);
             mainButton.DestroyMe();
         }
 
