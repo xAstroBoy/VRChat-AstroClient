@@ -14,6 +14,7 @@
         internal QMSingleButton mainButton { get; set; }
 
         internal GameObject backButton { get; set; }
+        internal GameObject NestedPart { get; set; }
 
         internal GameObject ButtonsMenu { get; set; }
 
@@ -104,7 +105,7 @@
             btnType = QMButtonAPI.identifier + "_Nested_GridMenu_";
             menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}_{btnToolTip}_{Guid.NewGuid().ToString()}";
 
-            var NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
+            NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindUIObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
@@ -251,10 +252,9 @@
 
         internal void DestroyMe()
         {
-            mainButton.DestroyMe();
-            backButton.DestroyMeLocal(true);
-            ButtonsMenu.DestroyMeLocal(true);
             QuickMenuTools.QuickMenuController.RemovePage(page);
+            NestedPart.DestroyMeLocal(true);
+            mainButton.DestroyMe();
         }
     }
 }

@@ -322,13 +322,7 @@
 
         internal void DestroyMe()
         {
-            Background.DestroyMeLocal(true);
-            BackgroundImage.DestroyMeLocal(true);
-            Button.DestroyMeLocal(true);
             ButtonObject.DestroyMeLocal(true);
-            ButtonRect.DestroyMeLocal(true);
-            ButtonText.DestroyMeLocal(true);
-            ButtonToolTip.DestroyMeLocal(true);
         }
 
         internal void SetToolTip(string text)
