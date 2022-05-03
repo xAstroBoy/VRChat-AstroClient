@@ -64,7 +64,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static bool RemoveBlocksForJoinedPlayers { get; set; } = false;
         internal static UnityEngine.UI.Text KeypadText { get; set; }
 
-        private static void FuckHisEjectors(GameObject root)
+        private static void RemoveColliders(GameObject root)
         {
             if (root != null)
             {
@@ -89,9 +89,12 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void FindEverything()
         {
-            // Destroy his Blocking System for keypad
-            FuckHisEjectors(Root.FindObject("Shelves/Gondola (12)"));
-            FuckHisEjectors(Root.FindObject("Toasters/Cube (63)"));
+
+            //Replicate the authorize Trigger Locally.
+
+            // First Destroy his barriers
+            RemoveColliders(Root.FindObject("Shelves/Gondola (12)"));
+            RemoveColliders(Root.FindObject("Toasters/Cube (63)"));
 
              // Activate the "cashier" buttons
             ActivateToggles(Root.FindObject("RoombaBase/instance_1/Quad"));
