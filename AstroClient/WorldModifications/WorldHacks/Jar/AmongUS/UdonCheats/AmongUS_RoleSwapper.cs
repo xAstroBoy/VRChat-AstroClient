@@ -26,25 +26,25 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
         private static bool _IsUIPageListenerActive = false;
 
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-                    }
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
+        //private static bool IsUIPageListenerActive
+        //{
+        //    get => _IsUIPageListenerActive;
+        //    set
+        //    {
+        //        if (_IsUIPageListenerActive != value)
+        //        {
+        //            if (value)
+        //            {
+        //                ClientEventActions.OnUiPageToggled += OnUiPageToggled;
+        //            }
+        //            else
+        //            {
+        //                ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+        //            }
+        //        }
+        //        _IsUIPageListenerActive = value;
+        //    }
+        //}
 
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
@@ -187,7 +187,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
         private static void OnCloseMenu()
         {
-            IsUIPageListenerActive = false;
+            //IsUIPageListenerActive = false;
             isOpen = false;
             if (DestroyOnMenuClose)
             {
@@ -208,24 +208,24 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-            IsUIPageListenerActive = true;
+            //IsUIPageListenerActive = true;
             if (!isGenerating)
             {
                 Regenerate();
             }
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-            if (Page != null)
-            {
-                if (!Page.isPage(CurrentScrollMenu.GetPage()) )
-                {
-                    OnCloseMenu();
-                }
-            }
-        }
+        //private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        //{
+        //    if (!isOpen) return;
+        //    if (Page != null)
+        //    {
+        //        if (!Page.isPage(CurrentScrollMenu.GetPage()) )
+        //        {
+        //            OnCloseMenu();
+        //        }
+        //    }
+        //}
 
         private static void InitWingPage()
         {

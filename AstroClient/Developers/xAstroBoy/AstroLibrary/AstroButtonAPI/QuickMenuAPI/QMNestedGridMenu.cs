@@ -29,6 +29,8 @@
 
         internal Action OnCloseAction { get; set; }
         internal Action OnOpenAction { get; set; }
+        internal Action Wing_OnCloseAction { get; set; }
+        internal Action Wing_OnOpenAction { get; set; }
 
         internal QMNestedGridMenu(QMNestedGridMenu btnMenu, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
@@ -111,6 +113,9 @@
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
             Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
             Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
+			Object.Destroy(NestedPart.FindUIObject("Button_PanoramaMain"));
+            Object.Destroy(NestedPart.FindUIObject("Button_PanoramaStream"));
+
             //UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             System.Collections.Generic.List<Transform> list = ButtonsMenu.transform.Get_Childs();
             for (int i = 0; i < list.Count; i++)
@@ -131,6 +136,7 @@
                 mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
                 {
                     QuickMenuTools.ShowQuickmenuPage(menuName);
+                    if (Wing_OnOpenAction != null) Wing_OnOpenAction();
                     if (OnOpenAction != null) OnOpenAction();
                 }, btnToolTip, TextColorHTML, btnHalf);
             }
@@ -139,6 +145,7 @@
                 mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
                 {
                     QuickMenuTools.ShowQuickmenuPage(menuName);
+                    if (Wing_OnOpenAction != null) Wing_OnOpenAction();
                     if (OnOpenAction != null) OnOpenAction();
                 }, btnToolTip, TextColorHTML, btnHalf);
             }
@@ -174,6 +181,7 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
+                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
                 if (OnCloseAction != null) OnCloseAction();
             });
         }
@@ -183,6 +191,7 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
+                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
                 if (OnCloseAction != null) OnCloseAction();
             });
         }
@@ -192,6 +201,7 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
+                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
                 if (OnCloseAction != null) OnCloseAction();
             });
         }
@@ -201,6 +211,7 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
+                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
                 if (OnCloseAction != null) OnCloseAction();
             });
         }
@@ -210,6 +221,7 @@
             backButton.SetBackButtonAction(() =>
             {
                 QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
+                if (Wing_OnCloseAction != null) Wing_OnCloseAction();
                 if (OnCloseAction != null) OnCloseAction();
             });
         }

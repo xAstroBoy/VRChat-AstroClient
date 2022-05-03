@@ -87,11 +87,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         {
             menuName = "WingSubPage" + MenuName;
             initButton(Index, LeftWing, MenuName, btnToolTip, icon);
-            menu.OnOpenAction += () =>
+            menu.Wing_OnOpenAction += () =>
             {
                 SetActive(true, true);
             };
-            menu.OnCloseAction += () =>
+            menu.Wing_OnCloseAction += () =>
             {
                 SetActive(false);
             };
@@ -101,22 +101,56 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         /// <summary>
         /// Generate a Wing that will register to the Menu Open/Close Events
         /// </summary>
-        internal QMWings(QMNestedButton menu,  int Index, bool LeftWing, string MenuName, string btnToolTip, Sprite icon = null)
+        internal QMWings(QMNestedButton menu, int Index, bool LeftWing, string MenuName, string btnToolTip, Sprite icon = null)
         {
             menuName = "WingSubPage" + MenuName;
             initButton(Index, LeftWing, MenuName, btnToolTip, icon);
-            menu.OnOpenAction += () =>
+            menu.Wing_OnOpenAction += () =>
             {
                 SetActive(true, true);
             };
-            menu.OnCloseAction += () =>
+            menu.Wing_OnCloseAction += () =>
             {
                 SetActive(false);
             };
 
         }
 
+        /// <summary>
+        /// Generate a Wing Menu that will register to the Menu Open/Close Events
+        /// </summary>
+        internal QMWings(QMNestedGridMenu menu, QMWings submenu, string MenuName, string btnToolTip, Sprite icon = null)
+        {
+            menuName = "WingSubPage" + MenuName;
+            initButton(submenu, MenuName, btnToolTip, icon);
+            menu.Wing_OnOpenAction += () =>
+            {
+                SetActive(true, true);
+            };
+            menu.Wing_OnCloseAction += () =>
+            {
+                SetActive(false);
+            };
 
+        }
+
+        /// <summary>
+        /// Generate a Wing that will register to the Menu Open/Close Events
+        /// </summary>
+        internal QMWings(QMNestedButton menu, QMWings submenu, string MenuName, string btnToolTip, Sprite icon = null)
+        {
+            menuName = "WingSubPage" + MenuName;
+            initButton(submenu, MenuName, btnToolTip, icon);
+            menu.Wing_OnOpenAction += () =>
+            {
+                SetActive(true, true);
+            };
+            menu.Wing_OnCloseAction += () =>
+            {
+                SetActive(false);
+            };
+
+        }
 
         internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip, Sprite icon = null)
         {

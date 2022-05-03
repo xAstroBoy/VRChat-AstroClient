@@ -299,7 +299,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(CurrentScrollMenu,1021, true, "Color Selection ESP", "Edit ESP Colors");
+            WingMenu = new QMWings(1021, true, "Color Selection ESP", "Edit ESP Colors");
             PublicESPSettingsToggle = new QMWingToggleButton(WingMenu, "Public ESP", () => { SetPublicESP = true; }, () => { SetPublicESP = false; }, "Set Public ESP Color.");
             FriendESPSettingToggle = new QMWingToggleButton(WingMenu, "Friend ESP", () => { SetFriendESP = true; }, () => { SetFriendESP = false; }, "Set Friend ESP Color.");
             BlockedESPSettingToggle = new QMWingToggleButton(WingMenu, "Blocked ESP", () => { SetBlockedESP = true; }, () => { SetBlockedESP = false; }, "Set Blocked ESP Color.");

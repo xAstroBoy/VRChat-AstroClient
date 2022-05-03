@@ -40,6 +40,9 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
             Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
             Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
+			Object.Destroy(NestedPart.FindUIObject("Button_PanoramaMain"));
+            Object.Destroy(NestedPart.FindUIObject("Button_PanoramaStream"));
+
             System.Collections.Generic.List<Transform> list = ButtonsMenu.transform.Get_Childs();
             for (int i = 0; i < list.Count; i++)
             {

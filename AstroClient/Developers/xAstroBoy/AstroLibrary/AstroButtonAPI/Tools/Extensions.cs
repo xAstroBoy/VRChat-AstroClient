@@ -157,7 +157,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             if (page != null && menus != null)
                 if (menus.Count != 0)
                     foreach (var item in menus)
-                        if (item.GetPage().GetName().Equals(page.GetName()))
+                        if (item.GetPage() == page)
                             return true;
             return false;
         }

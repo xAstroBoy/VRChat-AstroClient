@@ -23,27 +23,27 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
         }
 
-        private static bool _IsUIPageListenerActive = false;
+        //private static bool _IsUIPageListenerActive = false;
 
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-                    }
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
+        //private static bool IsUIPageListenerActive
+        //{
+        //    get => _IsUIPageListenerActive;
+        //    set
+        //    {
+        //        if (_IsUIPageListenerActive != value)
+        //        {
+        //            if (value)
+        //            {
+        //                ClientEventActions.OnUiPageToggled += OnUiPageToggled;
+        //            }
+        //            else
+        //            {
+        //                ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+        //            }
+        //        }
+        //        _IsUIPageListenerActive = value;
+        //    }
+        //}
 
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
@@ -242,7 +242,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         private static void OnCloseMenu()
         {
             isOpen = false;
-            IsUIPageListenerActive = false;
+          //  IsUIPageListenerActive = false;
             if (DestroyOnMenuClose)
             {
                 DestroyGeneratedButtons();
@@ -262,24 +262,24 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-            IsUIPageListenerActive = true;
+            //IsUIPageListenerActive = true;
             if (!isGenerating)
             {
                 Regenerate();
             }
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-            if (Page != null)
-            {
-                if (!Page.isPage(CurrentScrollMenu.GetPage()) && GeneratedPages.ContainsPage(Page))
-                {
-                    OnCloseMenu();
-                }
-            }
-        }
+        //private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        //{
+        //    if (!isOpen) return;
+        //    if (Page != null)
+        //    {
+        //        if (!Page.isPage(CurrentScrollMenu.GetPage()) && GeneratedPages.ContainsPage(Page))
+        //        {
+        //            OnCloseMenu();
+        //        }
+        //    }
+        //}
 
         private static void InitWingPage()
         {

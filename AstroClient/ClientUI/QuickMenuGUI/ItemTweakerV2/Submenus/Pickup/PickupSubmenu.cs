@@ -16,6 +16,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
 
     internal class PickupSubmenu : AstroEvents
     {
+        private static QMNestedButton PickupEditor { get; set; }
         internal override void RegisterToEvents()
         {
             TweakerEventActions.OnPickupControllerSelected += OnPickupController_Selected;
@@ -25,17 +26,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
         }
         internal static void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
-
-            PickupEditor.OnCloseAction = (() =>
-            {
-                PickupEditorWings.CloseMe();
-            });
-
-            PickupEditor.OnOpenAction = (() =>
-            {
-                PickupEditorWings.ShowWingsPage();
-            });
+            PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
 
             _ = new QMSingleButton(PickupEditor, 1, 0, "Pickup Orientation", null, "Pickup Orientation", null, null, true);
             Pickup_PickupOrientation_prop_any = new QMSingleButton(PickupEditor, 1, 0.5f, "Any", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Any); }), "", null, null, true);
@@ -242,7 +233,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
 
         internal static void InitWings(QMWings main)
         {
-            PickupEditorWings = new QMWings(main, "Pickup Modifier", "Modify Pickup Properties", null);
+            PickupEditorWings = new QMWings(PickupEditor, main, "Pickup Modifier", "Modify Pickup Properties", null);
 
             HasPickupComponent = new QMWingSingleButton(PickupEditorWings, "Force Pickup Component", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_ForceComponent(); }), "Forces Pickup component in case there's none.");
             Pickup_IsEditMode = new QMWingSingleButton(PickupEditorWings, "Edit Mode", null, "Shows if Pickup properties are currently being overriden.");

@@ -81,29 +81,29 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
         }
-        private static bool _IsUIPageListenerActive = false;
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
+        //private static bool _IsUIPageListenerActive = false;
+        //private static bool IsUIPageListenerActive
+        //{
+        //    get => _IsUIPageListenerActive;
+        //    set
+        //    {
+        //        if (_IsUIPageListenerActive != value)
+        //        {
+        //            if (value)
+        //            {
+        //                ClientEventActions.OnUiPageToggled += OnUiPageToggled;
 
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
+        //            }
+        //            else
+        //            {
+        //                ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
 
-                    }
+        //            }
 
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
+        //        }
+        //        _IsUIPageListenerActive = value;
+        //    }
+        //}
         private void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
@@ -117,10 +117,10 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal Udon Events", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
-            
+            InitWingPage();
+
             CurrentScrollMenu.OnOpenAction += OnOpenMenu;
             CurrentScrollMenu.OnCloseAction += OnCloseMenu;
-            InitWingPage();
         }
 
         private static bool isDebugging = true;
@@ -149,6 +149,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
                         GenerateInternal(udon, action);
                         udon.OnOpenAction = (() =>
                         {
+                            WingMenu.OpenMe(); // Keep it open.
                             if (CurrentUnboxBehaviourToConsole != null)
                             {
                                 CurrentUnboxBehaviourToConsole.SetButtonText($"Unbox {action.gameObject.name}");
@@ -173,9 +174,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
                             }
 
                         });
-                        udon.SetBackButtonMenu(CurrentScrollMenu);
                         udon.OnCloseAction = () =>
                         {
+                            WingMenu.OpenMe(); // Keep it open.
                             MakeSingleUdonButtonsUnavailable();
                         };
                     }
@@ -258,7 +259,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
 
         private static void OnCloseMenu()
         {
-            IsUIPageListenerActive = false;
+            //IsUIPageListenerActive = false;
             isOpen = false;			
             if (DestroyOnMenuClose)
             {
@@ -273,7 +274,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
         private static void OnOpenMenu()
         {
             isOpen = true;
-            IsUIPageListenerActive = true;
+            //IsUIPageListenerActive = true;
             MakeSingleUdonButtonsUnavailable();
             if (!isGenerating)
             {
@@ -323,7 +324,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(CurrentScrollMenu,1005, true, "Udon Behaviours (Tweaker)", "Interact with udon behaviours");
+            WingMenu = new QMWings(CurrentScrollMenu, 1005, true, "Udon Behaviours (Tweaker)", "Interact with udon behaviours");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();
