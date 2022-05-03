@@ -46,7 +46,7 @@
             {
 				UnityEngine.Object.Destroy(list[i]);
             }
-            page = NestedPart.GenerateQuickMenuPage(menuName);
+            page = NestedPart.GenerateQuickMenuPage(QuickMenuTools.QuickMenuController, menuName);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = btnToolTip;
             NestedPart.SetActive(false);
@@ -100,9 +100,8 @@
             mainButton.DestroyMe();
 
             QuickMenuTools.QuickMenuController.RemovePage(page);
-            UnityEngine.Object.Destroy(backButton);
             UnityEngine.Object.Destroy(NestedPart);
-            UnityEngine.Object.Destroy(ButtonsMenu);
+            UnityEngine.Object.Destroy(backButton);
         }
 
         internal void OpenMe()

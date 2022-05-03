@@ -24,8 +24,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         internal TextMeshProUGUI ButtonText_Title { get; set; }
         internal UIPage CurrentPage { get; set; }
         internal string MenuName { get; set; }
-        internal Transform WingPageTransform { get; set; }
-        internal string btnQMLoc { get; set; }
+        internal string menuName { get; set; }
         internal GameObject VerticalLayoutGroup { get; set; }
         internal string btnType { get; set; } = "WingPage";
         internal MenuStateController CurrentController { get; set; }
@@ -39,13 +38,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Sprite icon = null)
         {
-            btnQMLoc = "WingPage" + MenuName;
+            menuName = "WingPage" + MenuName;
             initButton(Index, LeftWing, MenuName, btnToolTip, icon);
-            SetBackButtonAction(() =>
-            {
-                this.ShowWingsPage("Root");
-
-            });
 
         }
 
@@ -55,7 +49,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             if (LeftWing)
             {
                 isLeftWing = true;
-                btnQMLoc += $"_LEFT_{Guid.NewGuid().ToString()} ";
+                menuName += $"_LEFT_{Guid.NewGuid().ToString()} ";
                 ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, QuickMenuTools.Wing_Left.gameObject.FindUIObject("VerticalLayoutGroup").transform, true);
                 ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
@@ -64,19 +58,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 CurrentController = QuickMenuTools.WingMenuStateControllerLeft;
                 SetToolTip(btnToolTip);
                 ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
-                var Page = QuickMenuTools.UIPageTemplate_Left;
-                CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
-                WingPageTransform = CurrentPage.transform;
+                CurrentPage = QuickMenuTools.UIPageTemplate_Left.GeneratePage(QuickMenuTools.WingMenuStateControllerLeft, menuName);
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
                 ButtonText_Title.fontSize = 36;
-				CurrentPage.SetName(btnQMLoc);			
-                CurrentPage.gameObject.name = btnQMLoc;
-                CurrentPage.field_Public_Boolean_0 = true; //_inited
-                CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
-                CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
-                CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
-                QuickMenuTools.WingMenuStateControllerLeft.AddPage(CurrentPage); //_uiPages
 
                 var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
@@ -99,18 +84,18 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 //PushPage
                 SetAction(() =>
                 {
-                    QuickMenuTools.Wing_Left.ShowWingPage(btnQMLoc);
+                    QuickMenuTools.Wing_Left.ShowWingPage(menuName);
                 });
                 SetBackButtonAction(() =>
                 {
-                    QuickMenuTools.Wing_Left.ShowWingPage("WingMenu");
+                    QuickMenuTools.Wing_Left.ShowWingPage("Root");
 
                 });
             }
             else
             {
                 isLeftWing = false;
-                btnQMLoc += $"_RIGHT_{Guid.NewGuid().ToString()} ";
+                menuName += $"_RIGHT_{Guid.NewGuid().ToString()} ";
                 ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, QuickMenuTools.Wing_Right.gameObject.FindUIObject("VerticalLayoutGroup").transform, true);
                 ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
@@ -120,19 +105,12 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 
                 SetToolTip(btnToolTip);
                 ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
-                var Page = QuickMenuTools.UIPageTemplate_Right;
-                CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
-                WingPageTransform = CurrentPage.transform;
+                CurrentPage = QuickMenuTools.UIPageTemplate_Right.GeneratePage(QuickMenuTools.WingMenuStateControllerRight, menuName);
+
+
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
                 ButtonText_Title.fontSize = 36;
-				CurrentPage.SetName(btnQMLoc);			
-                CurrentPage.gameObject.name = btnQMLoc;
-                CurrentPage.field_Public_Boolean_0 = true; //_inited
-                CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
-                CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
-                CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
-                QuickMenuTools.WingMenuStateControllerRight.AddPage(CurrentPage); //_uiPages
 
                 var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
@@ -154,8 +132,13 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 //PushPage
                 SetAction(() =>
                 {
-                    QuickMenuTools.Wing_Right.ShowWingPage(btnQMLoc);
+                    QuickMenuTools.Wing_Right.ShowWingPage(menuName);
                 });
+                SetBackButtonAction(() =>
+                {
+                    QuickMenuTools.Wing_Right.ShowWingPage("Root");
+                });
+
             }
 
             ButtonObject.LoadSprite(icon, "Icon");
@@ -164,13 +147,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 
         internal QMWings(QMWings menu, string MenuName, string btnToolTip, Sprite icon = null)
         {
-            btnQMLoc = "WingSubPage" + MenuName;
+            menuName = "WingSubPage" + MenuName;
             initButton(menu, MenuName, btnToolTip, icon);
-            SetBackButtonAction(() =>
-            {
-                menu.ShowWingsPage();
-
-            });
 
         }
 
@@ -209,7 +187,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             if (menu.isLeftWing)
             {
                 isLeftWing = true;
-                btnQMLoc += $"_LEFT_{Guid.NewGuid().ToString()} ";
+                menuName += $"_LEFT_{Guid.NewGuid().ToString()} ";
                 ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, menu.VerticalLayoutGroup.transform, true);
                 ButtonObject.name = QMButtonAPI.identifier + btnType;
                 MenuName = AssignedMenu;
@@ -218,19 +196,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 CurrentController = QuickMenuTools.WingMenuStateControllerLeft;
 
                 SetToolTip(btnToolTip);
-                var Page = QuickMenuTools.UIPageTemplate_Left;
-                CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
-                WingPageTransform = CurrentPage.transform;
+                CurrentPage = QuickMenuTools.UIPageTemplate_Left.GeneratePage(QuickMenuTools.WingMenuStateControllerLeft, menuName);
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
                 ButtonText_Title.fontSize = 36;
-				CurrentPage.SetName(btnQMLoc);			
-                CurrentPage.gameObject.name = btnQMLoc;
-                CurrentPage.field_Public_Boolean_0 = true; //_inited
-                CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
-                CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
-                CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
-                QuickMenuTools.WingMenuStateControllerLeft.AddPage(CurrentPage); //_uiPages
 
                 var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
@@ -250,10 +219,16 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 backbuttonObject = CurrentPage.gameObject.FindUIObject("Button_Back");
                 BackButton = backbuttonObject.GetComponent<Button>();
 
+                SetBackButtonAction(() =>
+                {
+                    menu.ShowWingsPage();
+
+                });
+
                 //PushPage
                 SetAction(() =>
                 {
-                    QuickMenuTools.Wing_Left.ShowWingPage(btnQMLoc);
+                    QuickMenuTools.Wing_Left.ShowWingPage(menuName);
                 });
 
 
@@ -261,7 +236,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             else
             {
                 isLeftWing = false;
-                btnQMLoc += $"_RIGHT_{Guid.NewGuid().ToString()} ";
+                menuName += $"_RIGHT_{Guid.NewGuid().ToString()} ";
                 ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, menu.VerticalLayoutGroup.transform, true);
                 MenuName = AssignedMenu;
                 ButtonText = ButtonObject.NewText("Text_QM_H3");
@@ -269,19 +244,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 CurrentController = QuickMenuTools.WingMenuStateControllerRight;
 
                 SetToolTip(btnToolTip);
-                var Page = QuickMenuTools.UIPageTemplate_Right;
-                CurrentPage = Object.Instantiate(Page, Page.transform.parent, true);
-                WingPageTransform = CurrentPage.transform;
+                CurrentPage = QuickMenuTools.UIPageTemplate_Right.GeneratePage(QuickMenuTools.WingMenuStateControllerRight, menuName);
                 ButtonText_Title = CurrentPage.gameObject.NewText("Text_Title");
                 ButtonText_Title.text = $"{MenuName}";
                 ButtonText_Title.fontSize = 36;
-				CurrentPage.SetName(btnQMLoc);			
-                CurrentPage.gameObject.name = btnQMLoc;
-                CurrentPage.field_Public_Boolean_0 = true; //_inited
-                CurrentPage.field_Protected_MenuStateController_0 = CurrentController; //_menuStateController
-                CurrentPage.field_Private_List_1_UIPage_0 = new List<UIPage>(); //_pageStack
-                CurrentPage.field_Private_List_1_UIPage_0.Add(CurrentPage);
-                QuickMenuTools.WingMenuStateControllerRight.AddPage(CurrentPage); //_uiPages
 
                 var VLGC = CurrentPage.GetComponentInChildren<VerticalLayoutGroup>();
                 VLGC.spacing = 12;
@@ -300,11 +266,15 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 Rect.offsetMin = new Vector2(0, 40);
                 backbuttonObject = CurrentPage.gameObject.FindUIObject("Button_Back");
                 BackButton = backbuttonObject.GetComponent<Button>();
+                SetBackButtonAction(() =>
+                {
+                    menu.ShowWingsPage();
+                });
 
                 //PushPage
                 SetAction(() =>
                 {
-                    QuickMenuTools.Wing_Right.ShowWingPage(btnQMLoc);
+                    QuickMenuTools.Wing_Right.ShowWingPage(menuName);
                 });
             }
 
@@ -314,7 +284,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 
         internal string GetMenuName()
         {
-            return btnQMLoc;
+            return menuName;
         }
 
         internal UIPage GetPage()
@@ -383,6 +353,15 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             try
             {
                 Object.Destroy(ButtonObject);
+                if(isLeftWing)
+                {
+                    QuickMenuTools.WingMenuStateControllerLeft.RemovePage(CurrentPage);
+                }
+                else
+                {
+                    QuickMenuTools.WingMenuStateControllerRight.RemovePage(CurrentPage);
+
+                }
             }
             catch
             {

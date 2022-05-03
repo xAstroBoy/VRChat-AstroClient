@@ -118,7 +118,7 @@
                 UnityEngine.Object.Destroy(list[i].gameObject);
             }
 
-            page = NestedPart.GenerateQuickMenuPage(menuName);
+            page = NestedPart.GenerateQuickMenuPage(QuickMenuTools.QuickMenuController, menuName);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = Title;
             NestedPart.SetActive(false);

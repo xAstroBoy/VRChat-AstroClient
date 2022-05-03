@@ -106,7 +106,7 @@
                 UnityEngine.Object.Destroy(item);
             }
 
-            page = NestedPart.GenerateQuickMenuPage(menuName);
+            page = NestedPart.GenerateQuickMenuPage(QuickMenuTools.QuickMenuController, menuName);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = Title;
             NestedPart.SetActive(false);
@@ -229,7 +229,6 @@
         {
             UnityEngine.Object.Destroy(NestedPart);
             UnityEngine.Object.Destroy(backButton);
-            UnityEngine.Object.Destroy(ButtonsMenu);
             QuickMenuTools.QuickMenuController.RemovePage(page);
             mainButton.DestroyMe();
         }

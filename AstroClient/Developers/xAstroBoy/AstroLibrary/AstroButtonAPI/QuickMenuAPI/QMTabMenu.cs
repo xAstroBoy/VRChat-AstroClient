@@ -46,7 +46,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 Transform item = list[i];
                 UnityEngine.Object.Destroy(item.gameObject);
             }
-            page = NestedPart.GenerateQuickMenuPage(menuName);
+            page = NestedPart.GenerateQuickMenuPage(QuickMenuTools.QuickMenuController, menuName);
             NestedPart.name = menuName;
             NestedPart.NewText("Text_Title").text = btnToolTip;
             NestedPart.SetActive(false);

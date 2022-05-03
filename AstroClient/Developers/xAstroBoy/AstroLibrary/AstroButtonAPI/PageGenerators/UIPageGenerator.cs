@@ -10,7 +10,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
 
     internal static class UIPageGenerator
     {
-        internal static UIPage GenerateQuickMenuPage(this GameObject nested, string menuName)
+        internal static UIPage GenerateQuickMenuPage(this GameObject nested, MenuStateController controller, string menuName)
         {
 
             UIPage result = null;
@@ -20,18 +20,39 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
                 if (result != null)
                 {
                     result.name = menuName;
-                    result.field_Protected_MenuStateController_0 = QuickMenuTools.QuickMenuController;
+                    result.field_Protected_MenuStateController_0 = controller;
 					result.SetName(menuName);
                     result.field_Private_Boolean_1 = true;
                     result.field_Private_List_1_UIPage_0 = new List<UIPage>();
                     result.field_Private_List_1_UIPage_0.Add(result);
-                    QuickMenuTools.QuickMenuController.AddPage(result);
+                    controller.AddPage(result);
                 }
             }
 
             return result;
         }
 
+        internal static UIPage GeneratePage(this UIPage template, MenuStateController controller, string menuName)
+        {
+
+            UIPage result = null;
+            if (template != null)
+            {
+                result = Object.Instantiate(template, template.transform.parent, true);
+                if (result != null)
+                {
+                    result.name = menuName;
+                    result.field_Protected_MenuStateController_0 = controller;
+                    result.SetName(menuName);
+                    result.field_Private_Boolean_1 = true;
+                    result.field_Private_List_1_UIPage_0 = new List<UIPage>();
+                    result.field_Private_List_1_UIPage_0.Add(result);
+                    controller.AddPage(result);
+                }
+            }
+
+            return result;
+        }
 
 
 
