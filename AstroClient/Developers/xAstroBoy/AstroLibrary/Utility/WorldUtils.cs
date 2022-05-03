@@ -267,6 +267,8 @@ namespace AstroClient.xAstroBoy.Utility
         public static VRC.SDK3.Components.VRCSceneDescriptor SDK3Descriptor => UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
 
         public static List<VRC_Pickup> Pickups => Resources.FindObjectsOfTypeAll<VRC_Pickup>().ToList();
+        public static List<VRC_Trigger> SDK1Triggers => Resources.FindObjectsOfTypeAll<VRC_Trigger>().ToList();
+        public static List<VRCSDK2.VRC_Trigger> SDK2Triggers => Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().ToList();
 
         public static VRC_Pickup[] ActivePickups => UnityEngine.Object.FindObjectsOfType<VRC_Pickup>();
 

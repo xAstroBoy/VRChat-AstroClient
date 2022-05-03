@@ -337,11 +337,11 @@
                     isActivePatch = true;
                     if (isDevMode)
                     {
-                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
+                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_MethodInfo} | with {patch.PatchType}", Cheetah.Color.Crayola.Present.MangoTango);
                     }
                     else
                     {
-                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodInfo?.Name}");
+                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodInfo?.Name}", Cheetah.Color.Crayola.Present.MangoTango);
                     }
                 }
                 else
@@ -379,11 +379,11 @@
                     isActivePatch = true;
                     if (isDevMode)
                     {
-                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_base} | with {patch.PatchType}");
+                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_base} | with {patch.PatchType}", Cheetah.Color.Crayola.Present.MangoTango);
                     }
                     else
                     {
-                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodBase?.Name}");
+                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodBase?.Name}", Cheetah.Color.Crayola.Present.MangoTango);
                     }
                 }
                 else
@@ -411,22 +411,22 @@
                 {
                     if (isDevMode)
                     {
-                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_base} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
+                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_base} , Unlinked Method : {this.PatchType}", Cheetah.Color.Crayola.Present.TorchRed);
                     }
                     else
                     {
-                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodBase?.Name}", Color.OrangeRed);
+                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodBase?.Name}", Cheetah.Color.Crayola.Present.TorchRed);
                     }
                 }
                 else
                 {
                     if (isDevMode)
                     {
-                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_MethodInfo} , Unlinked Method : {this.PatchType}", Color.OrangeRed);
+                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetPath_MethodInfo} , Unlinked Method : {this.PatchType}", Cheetah.Color.Crayola.Present.TorchRed);
                     }
                     else
                     {
-                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodInfo?.Name}", Color.OrangeRed);
+                        Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodInfo?.Name}", Cheetah.Color.Crayola.Present.TorchRed);
                     }
 
                 }

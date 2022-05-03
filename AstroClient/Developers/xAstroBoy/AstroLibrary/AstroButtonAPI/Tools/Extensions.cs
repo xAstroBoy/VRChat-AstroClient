@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
+﻿using System.Linq;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
     using System;
     using System.Collections.Generic;
@@ -62,7 +64,7 @@
                 if (page.name.isMatch(BuildInfo.Name)) return true;
                 if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
                     foreach (var item in page.field_Private_List_1_UIPage_0)
-                        if (item.name.isMatch(BuildInfo.Name))
+                        if (item.field_Public_String_0.isMatch(BuildInfo.Name))
                             return true;
             }
 
@@ -84,15 +86,21 @@
 
         internal static bool ContainsPage(this UIPage page, UIPage TargetPage)
         {
-            if (page != null && TargetPage != null && page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
+            if (page != null && TargetPage != null )
             {
-                if (page.name.Equals(TargetPage.name)) return true;
-                if (page.field_Private_List_1_UIPage_0 != null && page.field_Private_List_1_UIPage_0.Count != 0)
-                    foreach (var item in page.field_Private_List_1_UIPage_0)
-                        if (item.name.Equals(TargetPage.name))
+                if (page.field_Public_String_0.Equals(TargetPage.field_Public_String_0)) return true;
+                var PageList = page.field_Private_List_1_UIPage_0.ToArray().ToList(); // For some reason is shitting itself in Il2cpp List.
+                if (PageList != null && PageList.Count != 0)
+                {
+                    foreach (var item in PageList)
+                    {
+                        if (item.field_Public_String_0.Equals(TargetPage.field_Public_String_0))
+                        {
                             return true;
+                        }
+                    }
+                }
             }
-
             return false;
         }
 

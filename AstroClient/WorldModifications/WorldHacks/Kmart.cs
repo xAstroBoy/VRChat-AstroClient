@@ -91,32 +91,35 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     KeypadText.resizeTextForBestFit = true;
                     KeypadText.supportRichText = true;
-                    KeypadText.text = $"<color=orange>Click the button above me to Bypass {WorldUtils.AuthorName}'s restrictions for everyone! </color>";
+                    KeypadText.text = $"<color=blue>Click the button above me to Bypass {WorldUtils.AuthorName}'s restrictions for everyone! </color>";
 
                 }
             }
 
-            var keypadtriggerloc = Root.FindObject("Electronics/breakfast_nook");
-            if (keypadtriggerloc != null)
+
+            // This way We dont have to find the path for the Triggers , no matter where he moves em, it will find em <3
+            foreach (var triggers in WorldUtils.SDK1Triggers) 
             {
-                foreach (var triggers in keypadtriggerloc.Get_Triggers())
+                if (AuthorizedTrigger == null)
                 {
-                    if (triggers.name.Contains("Authorized"))
+                    if (triggers.name.Equals("Authorized"))
                     {
-                        var IsSDK1 = triggers.GetComponent<VRC_Trigger>();
-                        if (IsSDK1 != null)
-                        {
-                            AuthorizedTrigger = IsSDK1;
-                        }
+                        Log.Debug($"Found {triggers.name} Keypad Event!");
+                        AuthorizedTrigger = triggers;
                     }
-                    if (triggers.name.Contains("Unauthorized"))
+                }
+                if (UnauthorizedTrigger == null)
+                {
+                    if (triggers.name.Equals("Unauthorized"))
                     {
-                        var IsSDK1 = triggers.GetComponent<VRC_Trigger>();
-                        if (IsSDK1 != null)
-                        {
-                            UnauthorizedTrigger = IsSDK1;
-                        }
+                        Log.Debug($"Found {triggers.name} Keypad Event!");
+                        UnauthorizedTrigger = triggers;
                     }
+                }
+            
+                if(UnauthorizedTrigger != null && AuthorizedTrigger != null)
+                {
+                    break;
                 }
             }
 

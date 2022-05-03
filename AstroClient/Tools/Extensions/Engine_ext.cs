@@ -42,22 +42,32 @@ namespace AstroClient.Tools.Extensions
         {
             if (obj != null)
             {
-                string path = GetPath(obj);
+                string path = obj.GetPath();
                 if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
                 {
                     Log.Write($"{obj.name} Path is : {path}");
                 }
             }
         }
-        public static string GetPath(this GameObject gameObject)
+        /// <summary>
+        /// This gets the GameObject path 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        internal static string GetPath(this GameObject obj)
         {
-            string path = "/" + gameObject.name;
-            while (gameObject.transform.parent != null)
-            {
-                gameObject = gameObject.transform.parent.gameObject;
-                path = "/" + gameObject.name + path;
-            }
-            return path;
+            return GetPath(obj.transform);
+        }
+        /// <summary>
+        /// This gets the Transform path
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        internal static string GetPath(this Transform current)
+        {
+            if (current.parent == null)
+                return current.name;
+            return GetPath(current.parent) + "/" + current.name;
         }
 
         public static void SetLayerRecursive(this GameObject gameObject, int layer)
@@ -67,9 +77,19 @@ namespace AstroClient.Tools.Extensions
                 il2CppObjectBase.Cast<Transform>().gameObject.SetLayerRecursive(layer);
         }
 
-        public static Vector3 SetZ(this Vector3 vector, float newZ)
+        public static Vector3 SetZ(this Vector3 vector, float Z)
         {
-            vector.Set(vector.x, vector.y, newZ);
+            vector.Set(vector.x, vector.y, Z);
+            return vector;
+        }
+        public static Vector3 SetY(this Vector3 vector, float Y)
+        {
+            vector.Set(vector.x, Y, vector.z);
+            return vector;
+        }
+        public static Vector3 SetX(this Vector3 vector, float X)
+        {
+            vector.Set(X, vector.y, vector.z);
             return vector;
         }
 
@@ -151,7 +171,7 @@ namespace AstroClient.Tools.Extensions
         {
             if (obj != null)
             {
-                string path = GameObjectFinder.GetGameObjectPath(obj);
+                string path = obj.GetPath();
                 if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
                 {
                     Log.Write($"{obj.name} Path is : {path}");

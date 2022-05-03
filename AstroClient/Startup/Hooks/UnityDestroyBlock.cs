@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using AstroClient.ClientActions;
+using AstroClient.Tools.Extensions;
 using Boo.Lang.Compiler.Ast;
 
 namespace AstroClient.Startup.Hooks
@@ -71,7 +72,7 @@ namespace AstroClient.Startup.Hooks
         {
             if (obj != null)
             {
-                AddBlock(GetPath(obj));
+                AddBlock(obj.GetPath());
             }
         }
 
@@ -97,7 +98,7 @@ namespace AstroClient.Startup.Hooks
         {
             if (obj != null)
             {
-                RemoveBlock(GetPath(obj));
+                RemoveBlock(obj.GetPath());
             }
         }
 
@@ -114,7 +115,7 @@ namespace AstroClient.Startup.Hooks
             OnDestroyBlock_2 = new AstroPatch(typeof(UnityEngine.Object).GetMethod(nameof(UnityEngine.Object.Destroy), new Type[2] { typeof(UnityEngine.Object), typeof(float) }), GetPatch(nameof(MonitoredDestroy)));
             OnDestroyBlock_3 = new AstroPatch(typeof(UnityEngine.Object).GetMethod(nameof(UnityEngine.Object.DestroyImmediate), new Type[1] { typeof(UnityEngine.Object) }), GetPatch(nameof(MonitoredDestroy)));
             OnDestroyBlock_4 = new AstroPatch(typeof(UnityEngine.Object).GetMethod(nameof(UnityEngine.Object.DestroyImmediate), new Type[2] { typeof(UnityEngine.Object), typeof(bool) }), GetPatch(nameof(MonitoredDestroy)));
-            Log.Warn("Those events will be unpatched now, as it will break the game.");
+            Log.Warn("Those 4 hooks will be unpatched now, as it will break the game if left active.");
             MonitorDestroyingEvent = false; // Deactivate the patches, as we have confirmation of patching success.
         }
 
@@ -132,7 +133,7 @@ namespace AstroClient.Startup.Hooks
                             var obj = __0.Cast<UnityEngine.GameObject>();
                             if (obj != null)
                             {
-                                var path = GetPath(obj);
+                                var path = obj.GetPath();
                                 if (GameObjectsPathsToNotDestroy.Contains(path))
                                 {
                                     Log.Debug($"Blocked Destroy : {path}");
@@ -157,7 +158,7 @@ namespace AstroClient.Startup.Hooks
                             var obj = __0.Cast<UnityEngine.Transform>();
                             if (obj != null)
                             {
-                                var path = GetPath(obj);
+                                var path = obj.GetPath();
                                 if (GameObjectsPathsToNotDestroy.Contains(path))
                                 {
                                     Log.Debug($"Blocked Destroy : {path}");
@@ -185,16 +186,6 @@ namespace AstroClient.Startup.Hooks
             return true;
         }
 
-        private static string GetPath(GameObject obj)
-        {
-           return GetPath(obj.transform);
-        }
-        private static string GetPath(Transform current)
-        {
-            if (current.parent == null)
-                return "/" + current.name;
-            return GetPath(current.parent) + "/" + current.name;
-        }
         private static bool _MonitorDestroyingEvent = true; // Default is true, as the patches will be on.
 
         internal static bool ReportEvent = false;

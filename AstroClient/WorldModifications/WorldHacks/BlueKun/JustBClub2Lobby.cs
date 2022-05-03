@@ -55,7 +55,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnUnityLog += OnUnityLog;
-                        ClientEventActions.Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
+                        ClientEventActions.Udon_SendCustomEvent += Udon_SendCustomEvent;
 
                     }
                     else
@@ -63,7 +63,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnUnityLog -= OnUnityLog;
-                        ClientEventActions.Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
+                        ClientEventActions.Udon_SendCustomEvent -= Udon_SendCustomEvent;
 
                     }
                 }
@@ -685,7 +685,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 isCurrentWorld = true;
                 HasSubscribed = true;
-                UnityDestroyBlock.AddBlock("/Udon 3rd Party/Decoder_Debug");
+                UnityDestroyBlock.AddBlock("Udon 3rd Party/Decoder_Debug");
                 UnityDestroyBlock.MonitorDestroyingEvent = true; // This is to prevent Blue-kun from destroying the RenderCamera system 
                 UnityDestroyBlock.OnDestroyBlocked += OnBlockedDestroy;
                 BlockPatronProcessor = true;
@@ -891,7 +891,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         //    yield return null;
         //}
 
-        private static void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
+        private static void Udon_SendCustomEvent(UdonBehaviour item, string EventName)
         {
             if (!isCurrentWorld) return;
             if (item == null) return;
