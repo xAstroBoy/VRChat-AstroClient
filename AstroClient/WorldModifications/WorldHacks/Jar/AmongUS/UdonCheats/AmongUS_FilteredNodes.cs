@@ -72,8 +72,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Filtered Nodes", "Control Player Nodes Events (Filtered, only active nodes)");
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -249,17 +249,17 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
         private static void OnCloseMenu()
         {
+            IsUIPageListenerActive = false;
+            isOpen = false;
             if (DestroyOnMenuClose)
             {
                 DestroyGeneratedButtons();
             }
             if (WingMenu != null)
             {
+                
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            isOpen = false;
-            IsUIPageListenerActive = false;
         }
 
         private static void OnOpenMenu()
@@ -291,7 +291,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1036, true, "Among US Filtered Nodes", "Interact with udon behaviours");
+            WingMenu = new QMWings(CurrentScrollMenu,1036, true, "Among US Filtered Nodes", "Interact with udon behaviours");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

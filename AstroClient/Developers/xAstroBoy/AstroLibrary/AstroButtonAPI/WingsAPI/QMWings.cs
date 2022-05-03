@@ -19,6 +19,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
     {
         internal GameObject ButtonObject { get; set; }
         internal Button BackButton { get; set; }
+        internal Button OpenButton { get; set; }
+
         internal GameObject backbuttonObject { get; set; }
         internal TextMeshProUGUI ButtonText { get; set; }
         internal TextMeshProUGUI ButtonText_Title { get; set; }
@@ -35,6 +37,34 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         internal string BtnText { get; set; }
         internal Action OnWingOpen { get; set; }
         internal Action OnWingClose { get; set; }
+        private bool isOpened { get; set; } = false;
+
+        private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
+        internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
+        {
+            get
+            {
+                if (_ButtonToolTip == null)
+                {
+                    var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
+                    }
+                    if (attempt1 == null)
+                    {
+                        attempt1 = ButtonObject.GetComponentInParent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                    }
+
+                    if (attempt1 != null)
+                    {
+                        return _ButtonToolTip = attempt1;
+                    }
+                }
+
+                return _ButtonToolTip;
+            }
+        }
 
         internal QMWings(int Index, bool LeftWing, string MenuName, string btnToolTip, Sprite icon = null)
         {
@@ -44,6 +74,50 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         }
 
         // TODO : Cleanup and make it prettier and better!
+
+        internal QMWings(QMWings menu, string MenuName, string btnToolTip, Sprite icon = null)
+        {
+            menuName = "WingSubPage" + MenuName;
+            initButton(menu, MenuName, btnToolTip, icon);
+        }
+        /// <summary>
+        /// Generate a Wing Menu that will register to the Menu Open/Close Events
+        /// </summary>
+        internal QMWings(QMNestedGridMenu menu, int Index, bool LeftWing, string MenuName, string btnToolTip, Sprite icon = null)
+        {
+            menuName = "WingSubPage" + MenuName;
+            initButton(Index, LeftWing, MenuName, btnToolTip, icon);
+            menu.OnOpenAction += () =>
+            {
+                SetActive(true, true);
+            };
+            menu.OnCloseAction += () =>
+            {
+                SetActive(false);
+            };
+
+        }
+
+        /// <summary>
+        /// Generate a Wing that will register to the Menu Open/Close Events
+        /// </summary>
+        internal QMWings(QMNestedButton menu,  int Index, bool LeftWing, string MenuName, string btnToolTip, Sprite icon = null)
+        {
+            menuName = "WingSubPage" + MenuName;
+            initButton(Index, LeftWing, MenuName, btnToolTip, icon);
+            menu.OnOpenAction += () =>
+            {
+                SetActive(true, true);
+            };
+            menu.OnCloseAction += () =>
+            {
+                SetActive(false);
+            };
+
+        }
+
+
+
         internal void initButton(int Index, bool LeftWing, string AssignedMenu, string btnToolTip, Sprite icon = null)
         {
             if (LeftWing)
@@ -78,6 +152,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 var Rect = CurrentPage.gameObject.FindUIObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
+
+                OpenButton = ButtonObject.GetComponent<Button>();
+
+
                 backbuttonObject = CurrentPage.transform.FindObject("WngHeader_H1/LeftItemContainer/Button_Back").gameObject;
                 BackButton = backbuttonObject.GetComponent<Button>();
 
@@ -127,6 +205,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 var Rect = CurrentPage.gameObject.FindUIObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
+
+                OpenButton = ButtonObject.GetComponent<Button>();
+
+
                 backbuttonObject = CurrentPage.transform.FindObject("WngHeader_H1/LeftItemContainer/Button_Back").gameObject;
                 BackButton = backbuttonObject.GetComponent<Button>();
                 //PushPage
@@ -143,41 +225,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 
             ButtonObject.LoadSprite(icon, "Icon");
             SetActive(true);
-        }
-
-        internal QMWings(QMWings menu, string MenuName, string btnToolTip, Sprite icon = null)
-        {
-            menuName = "WingSubPage" + MenuName;
-            initButton(menu, MenuName, btnToolTip, icon);
-
-        }
-
-        private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
-
-        internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
-        {
-            get
-            {
-                if (_ButtonToolTip == null)
-                {
-                    var attempt1 = ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
-                    if (attempt1 == null)
-                    {
-                        attempt1 = ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true);
-                    }
-                    if (attempt1 == null)
-                    {
-                        attempt1 = ButtonObject.GetComponentInParent<VRC.UI.Elements.Tooltips.UiTooltip>();
-                    }
-
-                    if (attempt1 != null)
-                    {
-                        return _ButtonToolTip = attempt1;
-                    }
-                }
-
-                return _ButtonToolTip;
-            }
         }
 
         internal void initButton(QMWings menu, string AssignedMenu, string btnToolTip, Sprite icon = null)
@@ -216,6 +263,9 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 var Rect = CurrentPage.gameObject.FindUIObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
+
+                OpenButton = ButtonObject.GetComponent<Button>();
+
                 backbuttonObject = CurrentPage.gameObject.FindUIObject("Button_Back");
                 BackButton = backbuttonObject.GetComponent<Button>();
 
@@ -264,6 +314,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 var Rect = CurrentPage.gameObject.FindUIObject("Panel_Wing_ScrollRect_Labeled").transform.FindChild("Viewport").GetComponentInChildren<RectTransform>(true);
                 Rect.anchoredPosition = new Vector2(0, 110);
                 Rect.offsetMin = new Vector2(0, 40);
+
+                OpenButton = ButtonObject.GetComponent<Button>();
+
+
                 backbuttonObject = CurrentPage.gameObject.FindUIObject("Button_Back");
                 BackButton = backbuttonObject.GetComponent<Button>();
                 SetBackButtonAction(() =>
@@ -307,12 +361,27 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             ButtonToolTip.SetButtonToolTip(text);
         }
 
-        internal void SetActive(bool isActive)
+        internal void SetActive(bool isActive, bool OpenMenu = false)
         {
+            if (!isActive)
+            {
+                // Invoke this because the Wing Menu is deactivated, thus you aren't supposed to be there.
+                if (isOpened)
+                {
+                    CloseMe(); 
+                }
+            }
+            else
+            {
+                if(OpenMenu)
+                {
+                    OpenMe();
+                }
+            }
             ButtonObject.gameObject.SetActive(isActive);
         }
 
-        internal void ClickBackButton()
+        internal void CloseMe()
         {
             BackButton.onClick.Invoke();
         }
@@ -338,14 +407,15 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             SetAction(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); });
             Log.Debug($"Done Setting Action!");
         }
-        internal void ClickMe()
+
+        internal void OpenMe()
         {
-            ButtonObject.GetComponent<Button>().onClick.Invoke();
+            OpenButton.onClick.Invoke();
         }
 
         internal void SetInteractable(bool isIntractable)
         {
-            ButtonObject.gameObject.GetComponent<Button>().interactable = isIntractable;
+            OpenButton.interactable = isIntractable;
         }
 
         internal void DestroyMe()
@@ -394,6 +464,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 backbuttonObject.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(() =>
                 {
                     if (buttonAction != null) buttonAction();
+                    isOpened = false;
                     if (OnWingClose != null) OnWingClose();
 
                 }));
@@ -408,6 +479,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 ButtonObject.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(()=>
                 {
                     if (buttonAction != null) buttonAction();
+                    isOpened = true;
                     if (OnWingOpen != null) OnWingOpen();
 
                 }));

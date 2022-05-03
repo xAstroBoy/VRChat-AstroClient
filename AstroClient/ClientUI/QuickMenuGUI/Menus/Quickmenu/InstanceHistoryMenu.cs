@@ -131,7 +131,7 @@ namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
+                
             }
             IsUIPageListenerActive = false;
             isOpen = false;
@@ -160,7 +160,7 @@ namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1037, true, "Instance Options", "Manage Instance Options");
+            WingMenu = new QMWings(CurrentScrollMenu,1037, true, "Instance Options", "Manage Instance Options");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

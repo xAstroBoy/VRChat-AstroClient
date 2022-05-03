@@ -63,8 +63,8 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         internal static void InitButtons(QMGridTab menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "AudioSources", "Toggle AudioSources");
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -113,14 +113,14 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void OnCloseMenu()
         {
+            IsUIPageListenerActive = false;
+            isOpen = false;
             if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
+                
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            IsUIPageListenerActive = false;
-            isOpen = false;
         }
 
         private static void OnOpenMenu()
@@ -146,7 +146,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1010, true, "AudioSources", "AudioSources Control");
+            WingMenu = new QMWings(CurrentScrollMenu,1010, true, "AudioSources", "AudioSources Control");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

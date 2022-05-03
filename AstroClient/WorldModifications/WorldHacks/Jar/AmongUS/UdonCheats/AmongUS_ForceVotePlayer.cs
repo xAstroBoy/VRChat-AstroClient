@@ -71,8 +71,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Force Vote", "Control Player Nodes Events (Filtered, only active nodes)");
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -241,17 +241,17 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
         private static void OnCloseMenu()
         {
+            isOpen = false;
+            IsUIPageListenerActive = false;
             if (DestroyOnMenuClose)
             {
                 DestroyGeneratedButtons();
             }
-            IsUIPageListenerActive = false;
             if (WingMenu != null)
             {
+                
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            isOpen = false;
         }
 
         private static void OnOpenMenu()
@@ -283,7 +283,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1034, true, "Among US Force Voting", "Interact with udon behaviours");
+            WingMenu = new QMWings(CurrentScrollMenu,1034, true, "Among US Force Voting", "Interact with udon behaviours");
             new QMWingSingleButton(WingMenu, "All Skip voting", () => { AmongUS_Utils.AllSkipVote(); }, "Force Everyone to Skip Vote");
 
             new QMWingSingleButton(WingMenu, "Refresh", () =>

@@ -63,9 +63,19 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Prefabs
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Spawn Prefabs", "Spawn World Prefabs");
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
-            InitWingPage();
+
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
+
+            WingMenu = new QMWings(CurrentScrollMenu,1013, true, "Tweaker Prefabs", "Prefabs Menu");
+            new QMWingSingleButton(WingMenu, "Refresh", () =>
+            {
+                DestroyGeneratedButtons();
+                Regenerate();
+            }, "Refresh and force menu to regenerate");
+            WingMenu.SetActive(false);
+
+
         }
 
         private static void Regenerate()
@@ -113,14 +123,13 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Prefabs
 
         private static void OnCloseMenu()
         {
+            IsUIPageListenerActive = false;
+            isOpen = false;			
             if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            IsUIPageListenerActive = false;
-            isOpen = false;
         }
 
         private static void OnOpenMenu()
@@ -144,15 +153,5 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Prefabs
                     OnCloseMenu();
         }
 
-        private static void InitWingPage()
-        {
-            WingMenu = new QMWings(1013, true, "Tweaker Prefabs", "Prefabs Menu");
-            new QMWingSingleButton(WingMenu, "Refresh", () =>
-            {
-                DestroyGeneratedButtons();
-                Regenerate();
-            }, "Refresh and force menu to regenerate");
-            WingMenu.SetActive(false);
-        }
     }
 }

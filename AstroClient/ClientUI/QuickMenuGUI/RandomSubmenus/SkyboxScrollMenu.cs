@@ -67,8 +67,8 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         internal static void InitButtons(QMGridTab menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Skybox Options", "Edit Current Skybox");
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -131,14 +131,14 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void OnCloseMenu()
         {
+            IsUIPageListenerActive = false;
+            isOpen = false;
             if (DestroyOnMenuClose || HasThrownException) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
+                
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            IsUIPageListenerActive = false;
-            isOpen = false;
         }
 
         private static void OnOpenMenu()
@@ -180,7 +180,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1007, true, "Skybox Options", "Edit Current Skybox");
+            WingMenu = new QMWings(CurrentScrollMenu,1007, true, "Skybox Options", "Edit Current Skybox");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 SkyboxEditor.FindAndLoadSkyboxes();

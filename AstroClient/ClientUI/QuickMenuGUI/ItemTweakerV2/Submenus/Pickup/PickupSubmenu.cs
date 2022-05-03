@@ -29,7 +29,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
 
             PickupEditor.OnCloseAction = (() =>
             {
-                PickupEditorWings.ClickBackButton();
+                PickupEditorWings.CloseMe();
             });
 
             PickupEditor.OnOpenAction = (() =>

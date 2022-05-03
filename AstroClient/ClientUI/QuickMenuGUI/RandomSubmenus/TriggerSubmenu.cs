@@ -79,8 +79,8 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         internal static void InitButtons(QMGridTab menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Triggers", "Interact with World Triggers");
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -132,15 +132,15 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void OnCloseMenu()
         {
-            if (DestroyOnMenuClose) DestroyGeneratedButtons();
-            if (WingMenu != null)
-            {
-                WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
-            }
             isGlobalTrigger = false;
             IsUIPageListenerActive = false;
             isOpen = false;
+            if (DestroyOnMenuClose) DestroyGeneratedButtons();
+            if (WingMenu != null)
+            {
+                
+                WingMenu.SetActive(false);
+            }
         }
 
         private static void OnOpenMenu()
@@ -166,7 +166,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1006, true, "Triggers", "Interact with World Triggers");
+            WingMenu = new QMWings(CurrentScrollMenu,1006, true, "Triggers", "Interact with World Triggers");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

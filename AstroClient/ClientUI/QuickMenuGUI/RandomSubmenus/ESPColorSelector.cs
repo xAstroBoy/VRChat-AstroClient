@@ -102,8 +102,8 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "ESP Color Selection", "Edit Current ESPs Colors ");
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             FillMenu();
             InitWingPage();
         }
@@ -268,14 +268,13 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void OnCloseMenu()
         {
-            if (WingMenu != null)
-            {
-                WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
-            }
-
             IsUIPageListenerActive = false;
             isOpen = false;
+            if (WingMenu != null)
+            {
+                
+                WingMenu.SetActive(false);
+            }
         }
 
         private static void OnOpenMenu()
@@ -300,7 +299,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1021, true, "Color Selection ESP", "Edit ESP Colors");
+            WingMenu = new QMWings(CurrentScrollMenu,1021, true, "Color Selection ESP", "Edit ESP Colors");
             PublicESPSettingsToggle = new QMWingToggleButton(WingMenu, "Public ESP", () => { SetPublicESP = true; }, () => { SetPublicESP = false; }, "Set Public ESP Color.");
             FriendESPSettingToggle = new QMWingToggleButton(WingMenu, "Friend ESP", () => { SetFriendESP = true; }, () => { SetFriendESP = false; }, "Set Friend ESP Color.");
             BlockedESPSettingToggle = new QMWingToggleButton(WingMenu, "Blocked ESP", () => { SetBlockedESP = true; }, () => { SetBlockedESP = false; }, "Set Blocked ESP Color.");

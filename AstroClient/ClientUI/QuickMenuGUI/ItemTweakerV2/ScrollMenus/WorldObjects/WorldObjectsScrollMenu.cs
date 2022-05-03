@@ -65,8 +65,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Select W.Objects", "Select World Objects to edit", null, null, null, null, btnHalf);
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -110,14 +110,14 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects
 
         private static void OnCloseMenu()
         {
+            IsUIPageListenerActive = false;
+            isOpen = false;
             if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
+                
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            IsUIPageListenerActive = false;
-            isOpen = false;
         }
 
         private static void OnOpenMenu()
@@ -152,7 +152,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1001, true, "Tweaker World Objects", "Select World Obj");
+            WingMenu = new QMWings(CurrentScrollMenu,1001, true, "Tweaker World Objects", "Select World Obj");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

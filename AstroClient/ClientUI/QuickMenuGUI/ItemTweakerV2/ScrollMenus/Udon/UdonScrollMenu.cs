@@ -117,9 +117,9 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal Udon Events", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
-            ;
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -258,6 +258,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
 
         private static void OnCloseMenu()
         {
+            IsUIPageListenerActive = false;
+            isOpen = false;			
             if (DestroyOnMenuClose)
             {
                 DestroyGeneratedButtons();
@@ -265,22 +267,12 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            IsUIPageListenerActive = false;
-            isOpen = false;
-
         }
 
         private static void OnOpenMenu()
         {
             isOpen = true;
-            if (WingMenu != null)
-            {
-                WingMenu.SetActive(true);
-                WingMenu.ShowWingsPage();
-            }
-
             IsUIPageListenerActive = true;
             MakeSingleUdonButtonsUnavailable();
             if (!isGenerating)
@@ -331,7 +323,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1005, true, "Udon Behaviours (Tweaker)", "Interact with udon behaviours");
+            WingMenu = new QMWings(CurrentScrollMenu,1005, true, "Udon Behaviours (Tweaker)", "Interact with udon behaviours");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

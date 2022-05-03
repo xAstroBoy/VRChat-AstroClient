@@ -80,8 +80,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Interactable
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal VRC_Interactable", "Interact with Internal VRC_Interactables", null, null, null, null, btnHalf);
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
 
             InitWingPage();
         }
@@ -144,15 +144,14 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Interactable
 
         private static void OnCloseMenu()
         {
+            IsUIPageListenerActive = false;
+            isGlobalTrigger = false;
+            isOpen = false;
             if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            IsUIPageListenerActive = false;
-            isGlobalTrigger = false;
-            isOpen = false;
         }
 
         private static void OnOpenMenu()
@@ -178,7 +177,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Interactable
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1004, true, "Tweaker VRC_interactables", "Interact with Internal VRC_interactables");
+            WingMenu = new QMWings(CurrentScrollMenu,1004, true, "Tweaker VRC_interactables", "Interact with Internal VRC_interactables");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

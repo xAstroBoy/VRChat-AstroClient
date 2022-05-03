@@ -65,8 +65,8 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Select Pickup", "Select World Pickup", null, null, null, null, btnHalf);
-            CurrentScrollMenu.OnOpenAction = OnOpenMenu;
-            CurrentScrollMenu.OnCloseAction = OnCloseMenu;
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -114,24 +114,18 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
 
         private static void OnCloseMenu()
         {
-            if (DestroyOnMenuClose) DestroyGeneratedButtons();
-            if (WingMenu != null)
-            {
-                WingMenu.ClickBackButton();
-                WingMenu.SetActive(false);
-            }
             IsUIPageListenerActive = false;
             isOpen = false;
+            if (WingMenu != null)
+            {
+                WingMenu.SetActive(false);
+            }
+            if (DestroyOnMenuClose) DestroyGeneratedButtons();
         }
 
         private static void OnOpenMenu()
         {
             isOpen = true;
-            if (WingMenu != null)
-            {
-                WingMenu.SetActive(true);
-                WingMenu.ShowWingsPage();
-            }
             IsUIPageListenerActive = true;
             Regenerate();
         }
@@ -147,7 +141,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1008, true, "Tweaker Pickups", "Select Pickup To modify!");
+            WingMenu = new QMWings(CurrentScrollMenu,1008, true, "Tweaker Pickups", "Select Pickup To modify!");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();

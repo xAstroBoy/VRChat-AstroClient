@@ -75,8 +75,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Unfiltered Nodes", "Control Player Nodes events");
-            CurrentScrollMenu.OnOpenAction = (() => { OnOpenMenu(); });
-            CurrentScrollMenu.OnCloseAction = (() => { OnCloseMenu(); });
+            CurrentScrollMenu.OnOpenAction += OnOpenMenu;
+            CurrentScrollMenu.OnCloseAction += OnCloseMenu;
             InitWingPage();
         }
 
@@ -190,6 +190,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 
         private static void OnCloseMenu()
         {
+            IsUIPageListenerActive = false;
+            isOpen = false;
             if (DestroyOnMenuClose)
             {
                 DestroyGeneratedButtons();
@@ -197,10 +199,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
             if (WingMenu != null)
             {
                 WingMenu.SetActive(false);
-                WingMenu.ClickBackButton();
             }
-            IsUIPageListenerActive = false;
-            isOpen = false;
 
         }
 
@@ -233,7 +232,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(1030, true, "Murder 4 Unfiltered Nodes", "Interact with udon behaviours");
+            WingMenu = new QMWings(CurrentScrollMenu,1030, true, "Murder 4 Unfiltered Nodes", "Interact with udon behaviours");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();
