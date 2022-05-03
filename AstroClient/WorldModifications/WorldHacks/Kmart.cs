@@ -70,7 +70,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 foreach (var item in root.transform.Get_All_Childs())
                 {
-                    item.gameObject.RemoveAllColliders(false);
+                    item.gameObject.IgnoreLocalPlayerCollision();
                 }
             }
 
