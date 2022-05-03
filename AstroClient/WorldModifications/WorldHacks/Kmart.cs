@@ -70,7 +70,18 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 foreach (var item in root.transform.Get_All_Childs())
                 {
-                    item.gameObject.IgnoreLocalPlayerCollision();
+                    item.gameObject.RemoveColliders(true);
+                }
+            }
+
+        }
+        private static void ActivateToggles(GameObject root)
+        {
+            if (root != null)
+            {
+                foreach (var item in root.transform.Get_All_Childs())
+                {
+                    item.gameObject.SetActive(true);
                 }
             }
 
@@ -78,9 +89,12 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void FindEverything()
         {
+            // Destroy his Blocking System for keypad
             FuckHisEjectors(Root.FindObject("Shelves/Gondola (12)"));
             FuckHisEjectors(Root.FindObject("Toasters/Cube (63)"));
 
+             // Activate the "cashier" buttons
+            ActivateToggles(Root.FindObject("RoombaBase/instance_1/Quad"));
 
 
             var keypaddisplay = Root.FindObject("Electronics/bunkbed_office_chair/KeypadStructure/KeypadCanvas/KeypadDisplay");
