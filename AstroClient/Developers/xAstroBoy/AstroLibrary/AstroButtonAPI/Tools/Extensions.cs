@@ -469,35 +469,31 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             //}
         }
 
-        internal static void ShowTabContent(this MenuStateController _MenuStateController, string PageName)
+        internal static void ShowTabContent(this MenuStateController MenuController, string PageName)
         {
-            try
+            if (MenuController != null)
             {
-                if (_MenuStateController != null)
+                UIPage[] Pages = MenuController.field_Public_ArrayOf_UIPage_0;
+                if (Pages != null)
                 {
-                    var Pages = _MenuStateController.field_Public_ArrayOf_UIPage_0;
-                    if (Pages != null)
+                    if (Pages.Length != 0)
                     {
-                        if (Pages.Count != 0)
+                        for (int i = 0; i < Pages.Length; i++)
                         {
-                            for (int i = 0; i < Pages.Count; i++)
+                            var page = Pages[i];
+                            if (page != null)
                             {
-                                var page = Pages[i];
-                                if (page != null)
+                                if (page.GetName() == PageName)
                                 {
-                                    if (page.GetName() == PageName)
-                                    {
-                                        _MenuStateController.ShowTabContent(i, false);
-                                        break;
-                                    }
+                                    MenuController.ShowTabContent(i, false);
+                                    break;
                                 }
-
                             }
+
                         }
                     }
                 }
             }
-            catch{} // Fuck off Harmony
         }
 
         internal static void ShowWingsPage(this QMWings pagename)
