@@ -75,6 +75,27 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
 
         }
+
+        private static void RemoveDoorsCollider(GameObject root)
+        {
+            if (root != null)
+            {
+                foreach (var item in root.transform.Get_All_Childs())
+                {
+                    if (item.name.Equals("Mesh4098"))
+                    {
+                        item.gameObject.RemoveColliders(true);
+                    }
+                    if(item.name.Equals("MovingDoor"))
+                    {
+                        item.gameObject.RemoveColliders(true);
+                    }
+                }
+            }
+
+        }
+
+
         private static void ActivateToggles(GameObject root)
         {
             if (root != null)
@@ -96,7 +117,19 @@ namespace AstroClient.WorldModifications.WorldHacks
             RemoveColliders(Root.FindObject("Shelves/Gondola (12)"));
             RemoveColliders(Root.FindObject("Toasters/Cube (63)"));
 
-             // Activate the "cashier" buttons
+            // This removes The Doors colliders (annoying ffs)
+            RemoveColliders(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group7"));
+            RemoveColliders(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group72/Besam_Passport_900_Series_glass_automatic_Door_System3"));
+            RemoveColliders(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_5"));
+            RemoveColliders(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_6"));
+            RemoveColliders(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_7"));
+            RemoveColliders(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_8"));
+            RemoveColliders(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_2_2"));
+
+            // This deals with the animated doors group, preserving their animations but still removing their colliders.
+            RemoveDoorsCollider(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group72"));
+
+            // Activate the "cashier" buttons
             ActivateToggles(Root.FindObject("RoombaBase/instance_1/Quad"));
 
 

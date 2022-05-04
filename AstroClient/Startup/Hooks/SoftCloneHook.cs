@@ -46,7 +46,7 @@ namespace AstroClient.Startup.Hooks
         private static bool isSoftCloneActive = false;
         private static Il2CppSystem.Object AvatarDictCache { get; set; }
         private static MethodInfo _loadAvatarMethod;
-        private static int PacketMaxLimit { get; set; } = 3;
+        private static int PacketMaxLimit { get; set; } = 3; // Increase this based off how much vrchat tries to reload the avatar package.
 
         private static int _PacketCounter = 0;
         private static int PacketCounter
@@ -206,37 +206,5 @@ namespace AstroClient.Startup.Hooks
                 }
             }
         }
-
-        //internal override void OnUpdate()
-        //{
-        //    if (!Input.GetKey(KeyCode.Tab)) return;
-
-        //    if (Input.GetKeyDown(KeyCode.T))
-        //    {
-        //        if (UserSelectionManager.field_Private_Static_UserSelectionManager_0.field_Private_APIUser_1 == null)
-        //        {
-        //            Log("Invalid Target");
-        //            return;
-        //        }
-
-        //        string target = UserSelectionManager.field_Private_Static_UserSelectionManager_0.field_Private_APIUser_1.id;
-
-        //        AvatarDictCache = PlayerManager.prop_PlayerManager_0
-        //            .field_Private_List_1_Player_0
-        //            .ToArray()
-        //            .FirstOrDefault(a => a.field_Private_APIUser_0.id == target)
-        //            ?.prop_Player_1.field_Private_Hashtable_0["avatarDict"];
-
-        //        _loadAvatarMethod.Invoke(VRCPlayer.field_Internal_Static_VRCPlayer_0, new object[] { true });
-        //    }
-
-        //    if (Input.GetKeyDown(KeyCode.A))
-        //    {
-        //        _state ^= true;
-
-        //        Log("SoftClone " + (_state ? "On" : "Off"));
-        //    }
-        //}
-
     }
 }
