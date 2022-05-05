@@ -62,8 +62,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 if (FlashLight_Light != null && ToggleLightTrigger != null)
                 {
                     FlashLight_Light.enabled = value;
-                    if (FlashLight_Light.enabled) ToggleLightTrigger.UseText = OffText;
-                    else ToggleLightTrigger.UseText = OnText;
+                    if (FlashLight_Light.enabled) ToggleLightTrigger.interactText = OffText;
+                    else ToggleLightTrigger.interactText = OnText;
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                     {
                         HasSubscribed = true;
                         ToggleLightTrigger.OnPickupUseUp += ToggleFlashLight;
-                        ToggleLightTrigger.UseText = OnText;
+                        ToggleLightTrigger.interactText = OnText;
                         ToggleLightTrigger.InteractionText = "Flashlight <3";
                     }
                 }

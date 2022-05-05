@@ -18,7 +18,7 @@
             }
             else
             {
-                Log.Debug("Unable To Patch Udon Heap as is null!");
+                Log.Debug("Unable To Patch RawUdonBehaviour as is null!");
             }
         }
 

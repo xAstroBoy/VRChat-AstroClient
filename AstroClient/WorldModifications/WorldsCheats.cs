@@ -34,7 +34,7 @@ namespace AstroClient.WorldModifications
             VoidClub.InitButtons(WorldCheats);
             FBTHeaven.InitButtons(WorldCheats);
             SuperTowerDefense.InitButtons(WorldCheats);
-            //PoolParlor.InitButtons(WorldCheats);
+            PoolParlor.InitButtons(WorldCheats);
             ClickerGame.InitButtons(WorldCheats);
             PuttPuttPond.InitButtons(WorldCheats);
             GhostGame.InitButtons(WorldCheats);

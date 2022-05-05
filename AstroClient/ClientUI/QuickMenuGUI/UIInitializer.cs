@@ -78,7 +78,7 @@ namespace AstroClient.ClientUI.Menu
 
             // Misc
             TweakerV2Main.Init_TweakerV2Main(TabIndexs.Tweaker);
-            CheatsShortcutButton.Init_Cheats_ShortcutBtn();
+            //CheatsShortcutButton.Init_Cheats_ShortcutBtn();
 
             Log.Debug("Main UI Created!.");
             //_ = new QMSingleButton("MainMenu", 5, 3.5f, "GameObject Toggler", () =>

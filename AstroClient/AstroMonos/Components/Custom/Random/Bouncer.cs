@@ -85,9 +85,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                 {
                     if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
                     if (value)
-                        VRC_AstroPickup.UseText = "Toggle Bouncy Off";
+                        VRC_AstroPickup.interactText = "Toggle Bouncy Off";
                     else
-                        VRC_AstroPickup.UseText = "Toggle Bouncy On";
+                        VRC_AstroPickup.interactText = "Toggle Bouncy On";
                 }
             }
         }

@@ -129,8 +129,8 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _IsEnabled = value;
                 if (VRC_AstroPickup != null)
                 {
-                    if (value) VRC_AstroPickup.UseText = "Toggle Off Freeze";
-                    else VRC_AstroPickup.UseText = "Toggle On Freeze";
+                    if (value) VRC_AstroPickup.interactText = "Toggle Off Freeze";
+                    else VRC_AstroPickup.interactText = "Toggle On Freeze";
                 }
                 if (value)
                 {
@@ -212,8 +212,8 @@ namespace AstroClient.AstroMonos.Components.Tools
                 VRC_AstroPickup.OnPickup += OnPickup;
                 VRC_AstroPickup.OnPickupUseDown += OnPickupUseDown;
                 VRC_AstroPickup.OnDrop += onDrop;
-                if (IsEnabled) VRC_AstroPickup.UseText = "Toggle Off Freeze";
-                else VRC_AstroPickup.UseText = "Toggle On Freeze";
+                if (IsEnabled) VRC_AstroPickup.interactText = "Toggle Off Freeze";
+                else VRC_AstroPickup.interactText = "Toggle On Freeze";
             }
             HasSubscribed = true;
             InvokeRepeating(nameof(FreezeUpdate), 0, 0.3f);

@@ -167,8 +167,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                 if (VRC_AstroPickup != null)
                 {
                     if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
-                    if (value) VRC_AstroPickup.UseText = "Toggle Off Rocket";
-                    else VRC_AstroPickup.UseText = "Toggle On Rocket";
+                    if (value) VRC_AstroPickup.interactText = "Toggle Off Rocket";
+                    else VRC_AstroPickup.interactText = "Toggle On Rocket";
                     Laser.enabled = value;
                 }
             }

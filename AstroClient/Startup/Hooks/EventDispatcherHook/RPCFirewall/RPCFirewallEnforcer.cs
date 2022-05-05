@@ -48,6 +48,8 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             return null;
         }
 
+        
+
 
         internal static bool isRPCEventBlocked(Player sender, GameObject gameObject, string EventKey)
         {

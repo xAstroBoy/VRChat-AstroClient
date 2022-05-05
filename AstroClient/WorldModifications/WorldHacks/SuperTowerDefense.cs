@@ -544,11 +544,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                     RedWrenchPickup.enabled = value;
                     if (value)
                     {
-                        RedWrenchPickup.UseText = "Reset Health (AstroClient)";
+                        RedWrenchPickup.interactText = "Reset Health (AstroClient)";
                     }
                     else
                     {
-                        RedWrenchPickup.UseText = "Use";
+                        RedWrenchPickup.interactText = "Use";
                     }
                 }
                 if (BlueWrenchPickup != null)
@@ -556,11 +556,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                     BlueWrenchPickup.enabled = value;
                     if (value)
                     {
-                        BlueWrenchPickup.UseText = "Reset Health (AstroClient)";
+                        BlueWrenchPickup.interactText = "Reset Health (AstroClient)";
                     }
                     else
                     {
-                        BlueWrenchPickup.UseText = "Use";
+                        BlueWrenchPickup.interactText = "Use";
                     }
                 }
             }
@@ -586,11 +586,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                     HammerPickup.enabled = value;
                     if (value)
                     {
-                        HammerPickup.UseText = "Lose Health (AstroClient)";
+                        HammerPickup.interactText = "Lose Health (AstroClient)";
                     }
                     else
                     {
-                        HammerPickup.UseText = "Use";
+                        HammerPickup.interactText = "Use";
                     }
                 }
             }

@@ -50,14 +50,24 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         private void Start()
         {
-            
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
-            if(UdonBehaviour != null)
+            if (UdonBehaviour != null)
             {
                 HasSubscribed = true;
                 UdonBehaviour._hasInteractiveEvents = true; // This way it activates the interact system in the behaviour
             }
-            _ = VRCInteractable; // make the getter not null.
+            MiscUtils.DelayFunction(1f, () =>
+            {
+                if (_interactText != "Use")
+                {
+                    interactText = _interactText;
+                }
+                if (_InteractionText != "Use")
+                {
+                    InteractionText = _InteractionText;
+                }
+
+            });
         }
 
         private void UdonBehaviour_Event_OnInteract(UdonBehaviour item)
@@ -106,31 +116,28 @@ namespace AstroClient.AstroMonos.AstroUdons
                 if (UdonBehaviour != null)
                 {
                     UdonBehaviour.interactText = value;
-                    UdonBehaviour.InteractionText = value;
-                }
-                if (VRCInteractable != null)
-                {
-                    VRCInteractable.interactText = value;
                 }
             }
         }
+        private string _InteractionText = "Use";
 
-
-        private VRCInteractable _VRCInteractable;
-
-        internal VRCInteractable VRCInteractable
+        internal string InteractionText
         {
             [HideFromIl2Cpp]
-            get
+            get => _InteractionText;
+            [HideFromIl2Cpp]
+            set
             {
-                if (_VRCInteractable == null)
+                _InteractionText = value;
+                if (UdonBehaviour != null)
                 {
-                    return _VRCInteractable = gameObject.GetOrAddComponent<VRCInteractable>();
+                    UdonBehaviour.InteractionText = value                    ;
                 }
-
-                return _VRCInteractable;
             }
         }
+
+
+
 
         internal Action OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }

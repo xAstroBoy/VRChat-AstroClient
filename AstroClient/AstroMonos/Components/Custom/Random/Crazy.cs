@@ -179,9 +179,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                 if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
 
                 if (value)
-                    VRC_AstroPickup.UseText = "Toggle Off Crazy Object";
+                    VRC_AstroPickup.interactText = "Toggle Off Crazy Object";
                 else
-                    VRC_AstroPickup.UseText = "Toggle On Crazy Object";
+                    VRC_AstroPickup.interactText = "Toggle On Crazy Object";
             }
         }
         private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }

@@ -1,4 +1,8 @@
-﻿namespace AstroClient.WorldModifications.WorldHacks
+﻿using AstroClient.ClientActions;
+using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
+using AstroClient.Tools.Extensions;
+
+namespace AstroClient.WorldModifications.WorldHacks
 {
     using System;
     using System.Collections.Generic;
@@ -14,6 +18,39 @@
 
     internal class PoolParlor : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.OnWorldReveal += OnWorldReveal;
+        }
+
+
+
+        private static bool _HasSubscribed = false;
+        private static bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+
         // TODO : Rewrite this (read and cache from behaviour themself!)
         internal static void InitButtons(QMGridTab main)
         {
@@ -30,54 +67,93 @@
             CueSkinOverrideBtn = new QMSingleToggleButton(PoolParlorCheats, 1, 2f, "OVerride Cue Skin", () => { OverrideCurrentSkins = true; }, "Override Cue Skin", () => { OverrideCurrentSkins = false; }, "Enable Cue Skin Override using Spoofer.", Color.green, Color.red, null, false, true);
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private static void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.PoolParlor)
             {
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Tick");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_FixedTick");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("OnSeekSliderChanged");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("IsInVideoMode");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetVideoManager");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetVideoTexture");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetDuration");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetTime");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetCuetip");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_IsInUI");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetCuetip");
+                HasSubscribed = true;
                 if (PoolParlorCheats != null)
                 {
                     PoolParlorCheats.SetInteractable(true);
                     PoolParlorCheats.SetTextColor(Color.green);
                 }
 
-                ModConsole.Log($"Recognized {Name} World, Patching Skins....");
+                Log.Write($"Recognized {Name} World, Patching Skins....");
+                Log.Write("Use the Customization Menu to Access Table and Cue skins!");
 
-                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+                var BilliardsModuleEvent = UdonSearch.FindUdonEvent("BilliardsModule", "_CanUseTableSkin");
+                if (BilliardsModuleEvent != null)
                 {
-                    ModConsole.Warning("Use the New Customization Menu to Access Table and Cue skins!");
-                    PlayerSpooferUtils.SpoofAsWorldAuthor = false;
-                }
-                // DEAD Until Lists gets exposed...
+                    BilliardsModule = BilliardsModuleEvent.RawItem;
+                    BilliardModule_TriggerGlobalSettingsUpdated = BilliardsModule.gameObject.FindUdonEvent("BilliardsModule", "_TriggerGlobalSettingsUpdated");
 
-                var module1 = UdonSearch.FindAllUdonEvents("BilliardsModule", "_start");
-                for (int i = 0; i < module1.Count; i++)
-                {
-                    UdonBehaviour_Cached modules = module1[i];
-                    BilliardsModules.Add(modules.UdonBehaviour.ToRawUdonBehaviour()); // WTF
                 }
-                var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "_start");
+                else
+                {
+                    Log.Warn("failed to Find BilliardsModule");
+                }
+
+                var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "_SetAuthorizedOwners");
                 if (cue_0_unpacked != null)
                 {
                     Cue_0 = cue_0_unpacked.UdonBehaviour.ToRawUdonBehaviour();
                 }
-                var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "_start");
+                else
+                {
+                    Log.Warn("failed to Find intl.cue-0");
+                }
+
+                var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "_SetAuthorizedOwners");
                 if (cue_1_unpacked != null)
                 {
                     Cue_1 = cue_1_unpacked.UdonBehaviour.ToRawUdonBehaviour();
                 }
-                var module2 = UdonSearch.FindAllUdonEvents("NetworkingManager", "_OnGameReset");
-                for (int i = 0; i < module2.Count; i++)
+                else
                 {
-                    UdonBehaviour_Cached modules = module2[i];
-                    NetworkingManagers.Add(modules.UdonBehaviour.ToRawUdonBehaviour()); // WTF
+                    Log.Warn("failed to Find intl.cue-1");
                 }
+
+                var networkingpath = GameObjectFinder.Find("Modules/BilliardsModule/Managers/NetworkingManager");
+                if (networkingpath != null)
+                {
+                    var NetworkingManagerEvent = networkingpath.FindUdonEvent("_OnPlayerPrepareShoot");
+                    if (NetworkingManagerEvent != null)
+                    {
+                        NetworkingManager = NetworkingManagerEvent.RawItem;
+                    }
+                    else
+                    {
+                        Log.Warn("failed to Find NetworkingManager");
+                    }
+                    NetworkingManager_OnGlobalSettingsChanged = networkingpath.FindUdonEvent("_OnGlobalSettingsChanged");
+                    if(NetworkingManager_OnGlobalSettingsChanged == null)
+                    {
+                        Log.Warn("Unable to Find NetworkingManager _OnGlobalSettingsChanged");
+                    }
+                }
+                else
+                {
+                    Log.Warn("failed to Find NetworkingManager");
+                }
+
+
 
                 var PoolParlorModule_unpacked = UdonSearch.FindUdonEvent("PoolParlorModule", "_GetSAOMenu");
                 if (PoolParlorModule_unpacked != null)
                 {
                     PoolParlorModule = PoolParlorModule_unpacked.UdonBehaviour.ToRawUdonBehaviour();
                 }
-
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
                 GetCurrentTable();
                 GetCurrentCue();
@@ -96,15 +172,10 @@
         internal static void GetCurrentTable()
         {
             int currentskin = 0;
-            for (int i = 0; i < NetworkingManagers.Count; i++)
+            var result = UdonHeapParser.Udon_Parse<byte>(NetworkingManager, "tableSkinSynced");
+            if (result != null)
             {
-                RawUdonBehaviour module = NetworkingManagers[i];
-                var result = UdonHeapParser.Udon_Parse_Byte(module, "tableSkinSynced");
-                if (result != null && result.HasValue)
-                {
-                    currentskin = result.Value;
-                }
-                break;
+                currentskin = result;
             }
             if (Enum.IsDefined(typeof(TableSkins), currentskin))
             {
@@ -116,21 +187,17 @@
             }
             else
             {
-                ModConsole.Warning("New Table Skin Detected, Please Notify the developer To implement it.");
+                Log.Warn("New Table Skin Detected, Please Notify the developer To implement it.");
             }
         }
 
         internal static void GetCurrentCue()
         {
             int currentskin = 0;
-            foreach (var module in BilliardsModules)
+            var result = UdonHeapParser.Udon_Parse<int>(BilliardsModule, "activeCueSkin");
+            if (result != null)
             {
-                var result = UdonHeapParser.Udon_Parse_Int32(module, "activeCueSkin");
-                if (result != null && result.HasValue)
-                {
-                    currentskin = result.Value;
-                }
-                break;
+                currentskin = result;
             }
             if (Enum.IsDefined(typeof(CueSkins), currentskin))
             {
@@ -142,105 +209,88 @@
             }
             else
             {
-                ModConsole.Warning("New Cue Skin Detected, Please Notify the developer To implement it.");
+                Log.Warn("New Cue Skin Detected, Please Notify the developer To implement it.");
             }
         }
 
-        internal static void SetTableSkin(TableSkins skin)
+        internal static void SetTableSkin(int skin)
         {
-            SetTableSkinLocal(skin);
+            SetTableSkin_BilliardsModule(skin);
             SetTableSkin_PoolParlorModule(skin);
             SetTableSkin_NetworkingManager(skin);
-            SetTableSkinSynced(skin);
-        }
-
-        private static void SetTableSkinLocal(TableSkins value)
-        {
-            foreach (var module in BilliardsModules)
+            if (BilliardModule_TriggerGlobalSettingsUpdated != null)
             {
-                try
-                {
-                    UdonHeapEditor.PatchHeap(module, "tableSkinLocal", ((int)value), true);
-                    UdonHeapEditor.PatchHeap(module, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", (int)value, true);
-                    UdonHeapEditor.PatchHeap(module, "__0_mp_72681C8A3F190167F4664BA51221AA32_Int32", (int)value, true);
-                    UdonHeapEditor.PatchHeap(module, "__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte", (int)value, true);
-                }
-                catch { }
+                BilliardModule_TriggerGlobalSettingsUpdated.InvokeBehaviour();
+            }
+            if (NetworkingManager_OnGlobalSettingsChanged != null)
+            {
+                NetworkingManager_OnGlobalSettingsChanged.InvokeBehaviour();
+            }
+
+            if (UpdateColorScheme_Table != null)
+            {
+                UpdateColorScheme_Table.InvokeBehaviour();
             }
         }
 
-        private static void SetTableSkin_PoolParlorModule(TableSkins value)
+        private static void SetTableSkin_BilliardsModule(int value)
         {
-            UdonHeapEditor.PatchHeap(PoolParlorModule, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", (int)value, true);
+            UdonHeapEditor.PatchHeap(BilliardsModule, "tableSkinLocal", value);
+            UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", value);
+            UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_72681C8A3F190167F4664BA51221AA32_Int32", value);
+            UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte", (byte)value);
+            UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_680845797CF11D637DB85E28135E758C_Int32", value);
+
+
         }
 
-        private static void SetTableSkin_NetworkingManager(TableSkins value)
+        private static void SetTableSkin_PoolParlorModule(int value)
         {
-            foreach (var module in NetworkingManagers)
-            {
-                UdonHeapEditor.PatchHeap(module, "__0_mp_72681C8A3F190167F4664BA51221AA32_Byte", (int)value, true);
-            }
+            UdonHeapEditor.PatchHeap(PoolParlorModule, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", value);
+            UdonHeapEditor.PatchHeap(PoolParlorModule, "__1_mp_680845797CF11D637DB85E28135E758C_Int32", value);
+
         }
 
-        private static void SetTableSkinSynced(TableSkins value)
+        private static void SetTableSkin_NetworkingManager(int value)
         {
-            foreach (var module in NetworkingManagers)
-            {
-                if (UdonHeapParser.Udon_Parse_System_UInt16(module, "tableSkinSynced").HasValue)
-                {
-                    UdonHeapEditor.PatchHeap(module, "tableSkinSynced", (ushort)value, true);
-                }
-                else
-                {
-                    UdonHeapEditor.PatchHeap(module, "tableSkinSynced", ((byte)value), true);
-                }
-            }
+            UdonHeapEditor.PatchHeap(NetworkingManager, "tableSkinSynced", ((byte)value));
+            UdonHeapEditor.PatchHeap(NetworkingManager, "__0_mp_72681C8A3F190167F4664BA51221AA32_Byte", (byte)value);
+
         }
 
-        internal static void SetCueSkin(CueSkins skin)
+
+        internal static void SetCueSkin(int skin)
         {
             SetActiveCueSkin(skin);
             SetSyncedCueSkin(skin);
         }
 
-        private static void SetActiveCueSkin(CueSkins value)
+        private static void SetActiveCueSkin(int value)
         {
-            foreach (var module in BilliardsModules)
-            {
-                try
-                {
-                    if (UdonHeapParser.Udon_Parse_Int32(module, "activeCueSkin").Value != (int)value)
-                    {
-                        UdonHeapEditor.PatchHeap(module, "activeCueSkin", ((int)value), true);
-                    }
-                }
-                catch
-                {
-                }
-            }
+            UdonHeapEditor.PatchHeap(BilliardsModule, "activeCueSkin", value);
         }
 
-        private static void SetSyncedCueSkin(CueSkins value)
+        private static void SetSyncedCueSkin(int value)
         {
             try
             {
-                UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
+                UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin",value);
             }
             catch { } // Nobody cares .
             try
             {
-                UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
+                UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin",value);
             }
             catch { } // Nobody cares .
 
             try
             {
-                UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin", ((int)value), true);
+                UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin",value);
             }
             catch { } // Nobody cares .
             try
             {
-                UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
+                UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin",value);
             }
             catch { } // Nobody cares .
         }
@@ -256,6 +306,10 @@
             Toaster = 6,
             Chintzy = 7,
             Yuuta = 8,
+            Holystar = 9,
+            Fre = 10,
+            Sezuha = 11,
+            shiga = 12,
         }
 
         internal enum CueSkins
@@ -326,28 +380,20 @@
             }
         }
 
-        internal override void OnRoomLeft()
+        private static void OnRoomLeft()
         {
-            if (OverrideCurrentSkins)
-            {
-                PlayerSpooferUtils.SpoofAsWorldAuthor = false;
-            }
+            HasSubscribed = false;
         }
 
         private static void OnDrop()
         {
-            if (OverrideCurrentSkins)
-            {
-                PlayerSpooferUtils.SpoofAsWorldAuthor = false;
-            }
         }
 
         private static void onPickup()
         {
             if (OverrideCurrentSkins)
             {
-                SetCueSkin(_CurrentCueSkin);
-                PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                SetCueSkin((int)_CurrentCueSkin);
             }
         }
 
@@ -358,15 +404,16 @@
         internal static VRC_AstroPickup Cue2_Secondary { get; private set; }
 
         internal static UdonBehaviour_Cached UpdateColorScheme_Table { get; private set; }
+        internal static UdonBehaviour_Cached BilliardModule_TriggerGlobalSettingsUpdated { get; private set; }
+        internal static UdonBehaviour_Cached NetworkingManager_OnGlobalSettingsChanged { get; private set; }
 
         internal static RawUdonBehaviour Cue_0 { get; private set; }
         internal static RawUdonBehaviour Cue_1 { get; private set; }
 
         internal static RawUdonBehaviour PoolParlorModule { get; private set; }
+        internal static RawUdonBehaviour NetworkingManager { get; private set; }
+        internal static RawUdonBehaviour BilliardsModule { get; private set; }
 
-        internal static List<RawUdonBehaviour> NetworkingManagers { get; private set; } = new List<RawUdonBehaviour>();
-
-        internal static List<RawUdonBehaviour> BilliardsModules { get; private set; } = new List<RawUdonBehaviour>();
         internal static QMNestedButton PoolParlorCheats { get; set; }
 
         private static TableSkins _CurrentTableSkin;
@@ -388,11 +435,7 @@
                 {
                     TableSkinBtn.SetButtonText(value.ToString());
                 }
-                SetTableSkin(value);
-                if (UpdateColorScheme_Table != null)
-                {
-                    UpdateColorScheme_Table.InvokeBehaviour();
-                }
+                SetTableSkin((int) value);
             }
         }
 
@@ -417,7 +460,7 @@
                     CueSkinBtn.SetButtonText(value.ToString());
                 }
                 _CurrentCueSkin = value;
-                SetCueSkin(value);
+                SetCueSkin((int)value);
             }
         }
 

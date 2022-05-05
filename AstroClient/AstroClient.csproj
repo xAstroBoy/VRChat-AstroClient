@@ -548,7 +548,6 @@
     <Compile Include="Tools\Player\Avatar.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="Tools\XrefUtils.cs" />
-    <Compile Include="WorldModifications\CheatsShortcutButton.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ESP\PlayerESPMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\SettingsMenuBtn.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\ExploitsMenu.cs" />
@@ -660,6 +659,7 @@
     <Compile Include="CustomClasses\UdonBehaviour_Cached.cs" />
     <Compile Include="WorldModifications\WorldHacks\FrameOfReference.cs" />
     <Compile Include="WorldModifications\WorldHacks\EvolvantArcade.cs" />
+    <Compile Include="WorldModifications\WorldHacks\PoolParlor.cs" />
     <Compile Include="WorldModifications\WorldHacks\TierLand.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\PrisonEscape.cs" />

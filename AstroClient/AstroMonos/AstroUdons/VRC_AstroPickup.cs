@@ -62,7 +62,6 @@ namespace AstroClient.AstroMonos.AstroUdons
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if (PickupController != null)
             {
-                UseText = _UseText;
                 // Required To 
                 if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
                 {
@@ -70,6 +69,21 @@ namespace AstroClient.AstroMonos.AstroUdons
                     PickupController.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
                 }
             }
+            MiscUtils.DelayFunction(1f, () =>
+            {
+                if (_interactText != "Use")
+                {
+                    interactText = _interactText;
+                }
+
+                if (_InteractionText != "Use")
+                {
+                    InteractionText = _InteractionText;
+                }
+
+            });
+
+
 
         }
 
@@ -124,27 +138,25 @@ namespace AstroClient.AstroMonos.AstroUdons
                 UdonBehaviour.enabled = true;
             }
         }
-        
 
-        private string _UseText = "Use";
 
-        internal string UseText
+        private string _interactText = "Use";
+
+        internal string interactText
         {
             [HideFromIl2Cpp]
-            get => _UseText;
+            get => _interactText;
             [HideFromIl2Cpp]
             set
             {
-                _UseText = value;
-                if (PickupController != null)
+                _interactText = value;
+                if (UdonBehaviour != null)
                 {
-                    PickupController.EditMode = true;
-                    PickupController.UseText = value;
+                    UdonBehaviour.interactText = value;
                 }
             }
         }
-
-        private string _InteractionText;
+        private string _InteractionText = "Use";
 
         internal string InteractionText
         {
@@ -154,11 +166,6 @@ namespace AstroClient.AstroMonos.AstroUdons
             set
             {
                 _InteractionText = value;
-                if (PickupController != null)
-                {
-                    PickupController.EditMode = true;
-                    PickupController.InteractionText = value;
-                }
                 if (UdonBehaviour != null)
                 {
                     UdonBehaviour.InteractionText = value;
