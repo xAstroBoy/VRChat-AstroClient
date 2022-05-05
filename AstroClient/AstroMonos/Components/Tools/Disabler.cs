@@ -25,6 +25,10 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             gameObject.SetActive(false);
         }
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
 
     }
 }

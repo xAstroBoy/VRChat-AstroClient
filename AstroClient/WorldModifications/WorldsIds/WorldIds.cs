@@ -10,7 +10,7 @@
         public const string SmashContest = "wrld_c87d9e7a-d46a-4ca4-9077-a6322ac0f7e7";
         public const string VRChatDefaultHub = "wrld_ba913a96-fac4-4048-a062-9aa5db092812";
         public const string SnoozeScaryMaze5 = "wrld_953eff93-20c9-457b-8ef0-1ac2130d5b8a";
-        public const string Meroom = "wrld_9c72e56b-d2b0-4c9b-b816-07a857f6ae4e";
+        public const string Meroom_939 = "wrld_9c72e56b-d2b0-4c9b-b816-07a857f6ae4e";
         public const string TermalTreatment = "wrld_d010695a-3e7c-43a1-ac38-d80f3ffeab17";
         public const string DontTripWorld = "wrld_a1b9fcc4-1ed1-4e67-8b16-f1edc5a5d6e9";
         public const string FBTHeaven = "wrld_d319c58a-dcec-47de-b5fc-21200116462c";
@@ -44,6 +44,8 @@
         public const string EvolvantArcade = "wrld_b7acb016-d29f-498b-9d40-0b9a6c38a820";
         public const string JustBClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
         public const string JustBClub2Lobby = "wrld_9408c54c-0aa9-4fd1-a6bd-45bd130710ea";
+        public const string DreamWaves = "wrld_860bdea8-0499-4c16-8170-5683a3a3ab8a";
+
 
     }
 }

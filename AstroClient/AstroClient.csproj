@@ -108,6 +108,7 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\ImageRenderCameraReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronEventsLists.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\DreamWaves\DreamWaves_WhiteListManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CellDoorToggler.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Startup\UnityLogger.cs" />
     <Compile Include="Tools\Converters.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
+    <Compile Include="Tools\Extensions\TextAsset_ext.cs" />
     <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
     <Compile Include="Tools\Skybox\Builders\MaterialBuilder.cs" />
     <Compile Include="Tools\Skybox\SkyboxClasses\GeneratedSkyboxes.cs" />
@@ -652,6 +654,7 @@
     <Compile Include="WorldModifications\WorldHacks\GhostGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\GeoLocator.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmart.cs" />
+    <Compile Include="WorldModifications\WorldHacks\DreamWaves.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\Enums\PrisonEscape_Roles.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\PuttPuttQuest.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\PuttPuttPond.cs" />
@@ -672,7 +675,7 @@
     <Compile Include="WorldModifications\WorldHacks\Jar\Murder2\Murder2Cheats.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\Murder4Cheats.cs" />
     <Compile Include="WorldModifications\WorldHacks\ChuckECheeseExperience.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Meroom.cs" />
+    <Compile Include="WorldModifications\WorldHacks\MeRooms\Meroom_939.cs" />
     <Compile Include="WorldModifications\WorldHacks\SnoozeScaryMaze5.cs" />
     <Compile Include="WorldModifications\WorldHacks\SmashContest.cs" />
     <Compile Include="WorldModifications\WorldHacks\ClubMisfitAfterParty.cs" />

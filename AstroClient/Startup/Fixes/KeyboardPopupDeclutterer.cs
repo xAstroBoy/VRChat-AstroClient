@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 
@@ -60,8 +61,8 @@ namespace AstroClient.Startup.Fixes
                     // Only for me, if cheeto wants he can remove this
                     if (GameInstances.CurrentUser.GetAPIUser().id == "usr_a2fb27e8-921e-42f5-aa22-545c816b376e")
                     {
-                        InputPopupTransform.FindObject("Favorite Button(Clone)")?.DestroyMeLocal(true);
-                        InputPopupTransform.FindObject("PasteFromClipboard")?.DestroyMeLocal(true);
+                        InputPopupTransform.FindObject("Favorite Button(Clone)")?.GetOrAddComponent<Disabler>();
+                        InputPopupTransform.FindObject("PasteFromClipboard")?.GetOrAddComponent<Disabler>();
                     }
                     ClientEventActions.OnBigMenuOpen -= OnBigMenuOpen;
                     HasDeclutteredPopup = true;
