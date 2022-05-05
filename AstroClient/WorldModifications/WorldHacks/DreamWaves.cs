@@ -47,8 +47,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (reader.__0_intnl_SystemString.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        // First let's edit the results of the rendercamera.
-
                         // Split the results.
                         bool HasBeenModified = false;
                         var result = reader.__0_intnl_SystemString.ReadLines().ToList();
@@ -82,8 +80,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (reader.__0_intnl_UnityEngineTextAsset != null)
                     {
-                        // First let's edit the results of the rendercamera.
-
                         // Split the results.
                         bool HasBeenModified = false;
                         var result = reader.__0_intnl_UnityEngineTextAsset.GetText().ReadLines().ToList();
@@ -117,8 +113,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (reader.__0_mp_textAsset_TextAsset != null)
                     {
-                        // First let's edit the results of the rendercamera.
-
                         // Split the results.
                         bool HasBeenModified = false;
                         var result = reader.__0_mp_textAsset_TextAsset.GetText().ReadLines().ToList();
