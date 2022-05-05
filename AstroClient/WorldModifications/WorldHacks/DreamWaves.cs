@@ -1,18 +1,14 @@
-﻿using System.Linq;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator;
+﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator;
 using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
-using AstroClient.Tools.UdonEditor;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
-using UnityEngine;
+using System.Linq;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
-    using System.Drawing;
-    using Tools.DeepCloneUtils;
     using WorldsIds;
     using xAstroBoy;
 
@@ -23,7 +19,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
-        private DreamWaves_WhiteListManagerReader reader { get; set; }
+        private static DreamWaves_WhiteListManagerReader reader { get; set; }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -32,33 +28,30 @@ namespace AstroClient.WorldModifications.WorldHacks
                 Log.Write($"Recognized {Name} World, Bypassing Patron System...");
 
                 var find = GameObjectFinder.Find("Core components/WhitelistManager");
-                if(find != null)
+                if (find != null)
                 {
                     reader = find.GetOrAddComponent<DreamWaves_WhiteListManagerReader>();
-                    if(reader != null)
+                    if (reader != null)
                     {
-                        AddNameToList(reader.Private___1_intnl_SystemString);
-                        AddNameToList(reader.Private___0_intnl_UnityEngineTextAsset);
-                        AddNameToList(reader.Private___0_mp_textAsset_TextAsset);
-
+                        AddNameToList();
                     }
                 }
             }
         }
 
-        internal static void AddNameToList(AstroUdonVariable<string> item)
+        internal static void AddNameToList()
         {
-            try
+            if (reader != null)
             {
-                if (item != null)
+                try
                 {
-                    if (item.Value.IsNotNullOrEmptyOrWhiteSpace())
+                    if (reader.__0_intnl_SystemString.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         // First let's edit the results of the rendercamera.
 
                         // Split the results.
                         bool HasBeenModified = false;
-                        var result = item.Value.ReadLines().ToList();
+                        var result = reader.__0_intnl_SystemString.ReadLines().ToList();
                         if (result != null && result.Count != 0)
                         {
                             if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
@@ -80,26 +73,20 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                         if (HasBeenModified)
                         {
-                            item.Value = string.Join("\n", result);
+                            reader.__0_intnl_SystemString = string.Join("\n", result);
                         }
                     }
                 }
-            }
-            catch { } // SHUT UP
-        }
-        internal static void AddNameToList(AstroUdonVariable<TextAsset> item)
-        {
-            try
-            {
-                if (item != null)
+                catch { }
+                try
                 {
-                    if (item.Value != null)
+                    if (reader.__0_intnl_UnityEngineTextAsset != null)
                     {
                         // First let's edit the results of the rendercamera.
 
                         // Split the results.
                         bool HasBeenModified = false;
-                        var result = item.Value.GetText().ReadLines().ToList();
+                        var result = reader.__0_intnl_UnityEngineTextAsset.GetText().ReadLines().ToList();
                         if (result != null && result.Count != 0)
                         {
                             if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
@@ -121,14 +108,47 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                         if (HasBeenModified)
                         {
-                            item.Value.SetText(string.Join("\n", result));
+                            reader.__0_intnl_UnityEngineTextAsset.SetText(string.Join("\n", result));
                         }
                     }
                 }
+                catch { }
+                try
+                {
+                    if (reader.__0_mp_textAsset_TextAsset != null)
+                    {
+                        // First let's edit the results of the rendercamera.
+
+                        // Split the results.
+                        bool HasBeenModified = false;
+                        var result = reader.__0_mp_textAsset_TextAsset.GetText().ReadLines().ToList();
+                        if (result != null && result.Count != 0)
+                        {
+                            if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
+                            {
+                                Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Whitelist System..");
+                                result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
+                                HasBeenModified = true;
+                            }
+                            if (GameInstances.LocalPlayer != null)
+                            {
+                                if (!result.Contains(GameInstances.LocalPlayer.displayName))
+                                {
+                                    Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Whitelist System..");
+                                    result.Insert(1, GameInstances.LocalPlayer.displayName);
+                                    HasBeenModified = true;
+                                }
+                            }
+                        }
+
+                        if (HasBeenModified)
+                        {
+                            reader.__0_mp_textAsset_TextAsset.SetText(string.Join("\n", result));
+                        }
+                    }
+                }
+                catch { }
             }
-            catch { } // SHUT UP
         }
-
-
     }
 }

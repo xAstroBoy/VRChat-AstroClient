@@ -1556,13 +1556,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
         private AstroUdonVariable<string[]> Private__listNames { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___1_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___1_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        internal AstroUdonVariable<string> Private___1_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___1_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___1_i_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___0_i_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___2_i_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___0_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___5_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        internal AstroUdonVariable<UnityEngine.TextAsset> Private___0_intnl_UnityEngineTextAsset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.TextAsset> Private___0_intnl_UnityEngineTextAsset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___5_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___0_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private__hasStarted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -1592,7 +1592,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
         private AstroUdonVariable<bool[]> Private___0_intnl_SystemBooleanArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___4_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___6_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        internal AstroUdonVariable<UnityEngine.TextAsset> Private___0_mp_textAsset_TextAsset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.TextAsset> Private___0_mp_textAsset_TextAsset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___1_intnl_returnValSymbol_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___3_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___3_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;

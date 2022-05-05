@@ -8,7 +8,6 @@ namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections.Generic;
     using System.Drawing;
-    using Tools.DeepCloneUtils;
     using WorldsIds;
     using xAstroBoy;
 
@@ -18,6 +17,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
+
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Meroom_939)
@@ -29,9 +29,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var LockEvent = privateswitch.FindUdonEvent("Switch_Lock", "_interact");
                     if (LockEvent != null)
                     {
-
-
-                        var DisplaySwitchTrigger = GameObjectFinder.Find("Switch/Living room/Switch_Lock dummy/");
+                        var DisplaySwitchTrigger = GameObjectFinder.Find("Switch/Living room/Switch_Lock dummy");
                         if (DisplaySwitchTrigger == null)
                         {
                             Log.Write("Failed to Find Living Room Display Switch, Has MeRoom World updated?", Color.Red);
@@ -48,7 +46,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                                 collider.size = new Vector3(0.085f, 0.17f, 0.011f);
 
                                 var interact = collider.GetOrAddComponent<VRC_AstroInteract>();
-                                if(interact != null)
+                                if (interact != null)
                                 {
                                     interact.OnInteract = () =>
                                     {
@@ -57,11 +55,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                                     interact.interactText = "<color=orange>Lockpick Private Room (AstroClient)</color>";
                                 }
                             }
-
-                            
                         }
                     }
-
                 }
             }
         }
