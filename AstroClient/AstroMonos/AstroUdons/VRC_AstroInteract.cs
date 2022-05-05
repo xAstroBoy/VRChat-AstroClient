@@ -106,28 +106,12 @@ namespace AstroClient.AstroMonos.AstroUdons
                 if (UdonBehaviour != null)
                 {
                     UdonBehaviour.interactText = value;
+                    UdonBehaviour.InteractionText = value;
                 }
                 if (VRCInteractable != null)
                 {
                     VRCInteractable.interactText = value;
                 }
-            }
-        }
-        private string _InteractionText = "Use";
-
-        internal string InteractionText
-        {
-            [HideFromIl2Cpp]
-            get => _InteractionText;
-            [HideFromIl2Cpp]
-            set
-            {
-                _InteractionText = value;
-                if (UdonBehaviour != null)
-                {
-                    UdonBehaviour.InteractionText = value;
-                }
-
             }
         }
 
