@@ -105,7 +105,9 @@ namespace AstroClient.Startup.Fixes
                 {
                     hasDeletedEarlyAccessButton = true;
                 }
+                ClientEventActions.OnBigMenuOpen -= OnBigMenuOpen;
             }
+            
         }
     }
 }

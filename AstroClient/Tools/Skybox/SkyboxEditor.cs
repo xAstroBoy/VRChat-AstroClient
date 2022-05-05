@@ -1,4 +1,6 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.Tools.Skybox.SkyboxClasses;
+using AstroClient.Tools.TextureTools;
 
 namespace AstroClient.Tools.Skybox
 {
@@ -44,31 +46,24 @@ namespace AstroClient.Tools.Skybox
         private static string Side_Right { get; } = "Right";
 
         private static string Texture_Name_Panoramic { get; } = "Panoramic";
-        private static string Texture_Name_Cubemap { get; } = "Cubemap";
-
-        private static string Cubemap_positiveX { get; } = "PositiveX";
-
-        private static string Cubemap_NegativeX { get; } = "NegativeX";
-
-        private static string Cubemap_positiveY { get; } = "PositiveY";
-
-        private static string Cubemap_NegativeY { get; } = "NegativeY";
-
-        private static string Cubemap_positiveZ { get; } = "PositiveZ";
-
-        private static string Cubemap_NegativeZ { get; } = "NegativeZ";
 
         internal static string SkyboxesPath => Path.Combine(Environment.CurrentDirectory, "AstroSkyboxes");
 
         internal static string BundlesPath => Path.Combine(SkyboxesPath, "Bundles");
 
-        internal static string YoinkedSkyboxesPath => Path.Combine(SkyboxesPath, "YoinkedSkyboxes");
+        internal static string ExportedSkyboxPath => Path.Combine(SkyboxesPath, "ExportedSkyboxes");
+        internal static string SixSidedCubePath => Path.Combine(ExportedSkyboxPath, "6 Sided");
+        internal static string CubemapsPath => Path.Combine(ExportedSkyboxPath, "Cubemaps");
 
-        internal static List<AssetBundleSkyboxes> LoadedSkyboxesBundles { get; } = new();
+        internal static List<GeneratedSkyboxes> GeneratedSkyboxesList { get; } = new();
 
-        internal static Material OriginalSkybox { get; private set; }
+        private static Material OriginalSkybox { get; set; } = null;
+
+        internal static bool isUsingCustomSkybox { get; set; } = false;
 
         internal static bool isSupportedSkybox { get; private set; } = false;
+        internal static bool isSixSidedCube { get; private set; } = false;
+        internal static bool isCubeMap { get; private set; } = false;
 
         internal static List<AssetBundle> FailedLoadedBundles { get; } = new();
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -79,51 +74,88 @@ namespace AstroClient.Tools.Skybox
                 FindAndLoadSkyboxes();
                 HasLoadedCachedSkyboxes = true;
             }
-
-            OriginalSkybox = RenderSettings.skybox;
-            if (OriginalSkybox != null)
+            isUsingCustomSkybox = false;
+            if (RenderSettings.skybox != null)
             {
-                Log.Debug("[Skybox INFO] : Material name : " + OriginalSkybox.name);
-                Log.Debug("[Skybox INFO] : Material Shader : " + OriginalSkybox.shader.name);
-                var textureIDs = OriginalSkybox.GetTexturePropertyNames().ToList();
-                for (int i = 0; i < textureIDs.Count; i++)
+                Log.Debug("[Skybox INFO] : Material name : " + RenderSettings.skybox.name);
+                Log.Debug("[Skybox INFO] : Material Shader : " + RenderSettings.skybox.shader.name);
+                var ReadTextureIDs = RenderSettings.skybox.GetTexturePropertyNames().ToList();
+                for (int i = 0; i < ReadTextureIDs.Count; i++)
                 {
-                    Log.Debug("[Skybox INFO] : Texture name : " + textureIDs[i]);
+                    var name = ReadTextureIDs[i];
+                    Log.Debug($"[Skybox INFO] : Texture name : {name}, Type : {RenderSettings.skybox.GetTexture(name).GetIl2CppType().FullName} ");
                 }
 
-                if (textureIDs.Contains("_UpTex") && textureIDs.Contains("_DownTex") && textureIDs.Contains("_BackTex") &&
-                    textureIDs.Contains("_FrontTex") && textureIDs.Contains("_LeftTex") && textureIDs.Contains("_RightTex"))
+                if (RenderSettings.skybox.shader.name.Contains("Cubemap"))
                 {
-                    Log.Debug("This Skybox can be Yoinked!");
-                    if (Bools.IsDeveloper)
-                    {
-                        PopupUtils.QueHudMessage("This Skybox can Be Yoinked!");
-                    }
+                    isCubeMap = true;
                     isSupportedSkybox = true;
                 }
+                else
+                {
+
+
+                    
+                    var textureIDs = RenderSettings.skybox.GetTexturePropertyNames().ToList();
+                    if (textureIDs.Contains("_UpTex") && textureIDs.Contains("_DownTex") && textureIDs.Contains("_BackTex") &&
+                        textureIDs.Contains("_FrontTex") && textureIDs.Contains("_LeftTex") && textureIDs.Contains("_RightTex"))
+                    {
+                        isSixSidedCube = true;
+                        isCubeMap = false;
+                        Log.Debug("This Skybox can be Yoinked!");
+                        isSupportedSkybox = true;
+                        if (Bools.IsDeveloper)
+                        {
+                            PopupUtils.QueHudMessage("This Skybox can Be Yoinked!");
+                        }
+                    }
+                    else if (textureIDs.Contains("_Tex"))
+                    {
+                        var textureType = RenderSettings.skybox.GetTexture("_Tex").GetIl2CppType().FullName;
+                        if (textureType.Contains("Cubemap"))
+                        {
+                            isSixSidedCube = false;
+                            isCubeMap = true;
+                            isSupportedSkybox = true;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        isSixSidedCube = false;
+                        isCubeMap = false;
+                        isSupportedSkybox = true;
+                    }
+                }
+
+
             }
             else
             {
+                isSixSidedCube = false;
+                isCubeMap = false;
                 isSupportedSkybox = false;
             }
         }
 
         private void OnRoomLeft()
         {
+            isSixSidedCube = false;
             isSupportedSkybox = false;
+            isUsingCustomSkybox = false;
             OriginalSkybox = null;
         }
 
         internal static bool IsBundleAlreadyRegistered(string filename)
         {
-            return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any();
+            return GeneratedSkyboxesList != null && GeneratedSkyboxesList.Where(x => x.Name == filename).Any();
         }
 
-        private static IEnumerator LoadPNGsSkyboxes()
+        private static IEnumerator LoadSixSidedSkyboxes()
         {
-            if (Directory.Exists(YoinkedSkyboxesPath))
+            if (Directory.Exists(SixSidedCubePath))
             {
-                var YoinkedSkyboxesDirs = Directory.GetDirectories(YoinkedSkyboxesPath).ToList();
+                var YoinkedSkyboxesDirs = Directory.GetDirectories(SixSidedCubePath).ToList();
                 if (YoinkedSkyboxesDirs.IsNotEmpty())
                     for (var i1 = 0; i1 < YoinkedSkyboxesDirs.Count; i1++)
                     {
@@ -207,19 +239,21 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
                             }
+                            var cachedskybox = new GeneratedSkyboxes(Up, Down, Back, Front, Left, Right, Path.GetFileName(dir));
+                            if (cachedskybox != null)
+                            {
+                                if (cachedskybox.Material != null)
+                                {
+                                    GeneratedSkyboxesList.Add(cachedskybox);
+                                }
+                                else
+                                {
+                                    Log.Error($"Unable to Generate Material For {Path.GetFileName(dir)}");
+                                    cachedskybox.Destroy();
+                                }
+                            }
 
-                            var GeneratedMaterial = BuildSixSidedMaterial(Up, Down, Back, Front, Left, Right);
-                            if (GeneratedMaterial != null)
-                            {
-                                var SkyboxName = GeneratedMaterial.name = Path.GetFileName(dir);
-                                GeneratedMaterial.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                var cachedskybox = new AssetBundleSkyboxes(SkyboxName, new BundleContent(Up, Down, Back, Front, Left, Right, null, null, GeneratedMaterial), false);
-                                if (LoadedSkyboxesBundles != null) LoadedSkyboxesBundles.Add(cachedskybox);
-                            }
-                            else
-                            {
-                                Log.Error($"Unable to Generate Material For {Path.GetFileName(dir)}");
-                            }
+
 
                             yield return new WaitForSeconds(0.001f);
                         }
@@ -229,208 +263,194 @@ namespace AstroClient.Tools.Skybox
                         }
                     }
                 else
-                    Log.Warn("No Skyboxes Found here : " + YoinkedSkyboxesPath);
+                    Log.Warn("No Skyboxes Found here : " + SixSidedCubePath);
             }
             else
             {
-                Directory.CreateDirectory(YoinkedSkyboxesPath);
+                Directory.CreateDirectory(SixSidedCubePath);
             }
-
             yield return null;
         }
-
-        internal static AssetBundle GetValidBundle(string BundlePath)
+         private static IEnumerator LoadCubemaps()
         {
-
-
-            var bundle = AssetBundle.LoadFromFile(BundlePath, 0u);
-            if (bundle != null)
+            if (Directory.Exists(CubemapsPath))
             {
-                if (bundle.name.IsNotNullOrEmptyOrWhiteSpace())
-                {
-                    if (bundle.GetAllAssetNames().Count != 0)
+                var CubeMapsFolders = Directory.GetDirectories(CubemapsPath).ToList();
+                if (CubeMapsFolders.IsNotEmpty())
+                    for (var i1 = 0; i1 < CubeMapsFolders.Count; i1++)
                     {
-                        bundle.hideFlags = HideFlags.DontUnloadUnusedAsset;
-                        return bundle;
-                    }
-                }
-            }
-            return null;
-        }
-
-
-        private static IEnumerator LoadBundleSkyboxes()
-        {
-            if (Directory.Exists(BundlesPath))
-            {
-                var files = Directory.GetFiles(BundlesPath).ToList();
-                if (files.IsNotEmpty())
-                    for (var i1 = 0; i1 < files.Count; i1++)
-                    {
-                        var file = files[i1];
-                        if (!IsBundleAlreadyRegistered(Path.GetFileName(file)))
+                        var dir = CubeMapsFolders[i1];
+                        if (!IsBundleAlreadyRegistered(Path.GetFileName(dir)))
                         {
-                            var bundle = GetValidBundle(file);
+                            var images = Directory.GetFiles(dir).ToList();
+                            if (images.IsEmpty()) continue;
+                            Texture2D Right = null;
+                            Texture2D Left = null;
+                            Texture2D Up = null;
+                            Texture2D Down = null;
+                            Texture2D Back = null;
+                            Texture2D Front = null;
+                            foreach (var imagepaths in images)
+                            {
+                                if (Right == null && imagepaths.EndsWith(CubemapFace.PositiveX + ".png"))
+                                {
+                                    Right = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    if (Right != null)
+                                    {
+                                        Right.wrapMode = TextureWrapMode.Clamp;
+                                        Right.Apply();
+                                        Right.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                                    }
+                                }
 
-                            LoadSkyboxBundle(file, bundle);
+                                if (Left == null && imagepaths.EndsWith(CubemapFace.NegativeX + ".png"))
+                                {
+                                    Left = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    if (Left != null)
+                                    {
+                                        Left.wrapMode = TextureWrapMode.Clamp;
+                                        Left.Apply();
+                                        Left.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                                    }
+                                }
 
-                            yield return null;
+                                if (Up == null && imagepaths.EndsWith(CubemapFace.PositiveY + ".png"))
+                                {
+                                    Up = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    if (Up != null)
+                                    {
+                                        Up.wrapMode = TextureWrapMode.Clamp;
+                                        Up.Apply();
+                                        Up.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                                    }
+                                }
+
+                                if (Down == null && imagepaths.EndsWith(CubemapFace.NegativeY + ".png"))
+                                {
+                                    Down = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    if (Down != null)
+                                    {
+                                        Down.wrapMode = TextureWrapMode.Clamp;
+                                        Down.Apply();
+                                        Down.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                                    }
+                                }
+
+                                if (Back == null && imagepaths.EndsWith(CubemapFace.PositiveZ + ".png"))
+                                {
+                                    Back = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    if (Back != null)
+                                    {
+                                        Back.wrapMode = TextureWrapMode.Clamp;
+                                        Back.Apply();
+                                        Back.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                                    }
+                                }
+
+                                if (Front == null && imagepaths.EndsWith(CubemapFace.NegativeZ + ".png"))
+                                {
+                                    Front = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    if (Front != null)
+                                    {
+                                        Front.wrapMode = TextureWrapMode.Clamp;
+                                        Front.Apply();
+                                        Front.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                                    }
+                                }
+                            }
+                            var cachedskybox = new GeneratedSkyboxes(Up, Down, Back, Front, Left, Right, Path.GetFileName(dir));
+                            if (cachedskybox != null)
+                            {
+                                if (cachedskybox.Material != null)
+                                {
+                                    GeneratedSkyboxesList.Add(cachedskybox);
+                                }
+                                else
+                                {
+                                    Log.Error($"Unable to Generate Material For {Path.GetFileName(dir)}");
+                                    cachedskybox.Destroy();
+                                }
+                            }
 
 
+
+                            yield return new WaitForSeconds(0.001f);
                         }
                         else
                         {
-                            Log.Warn("Skipping Registered Skybox :" + Path.GetFileName(file));
+                            Log.Warn("Skipping Registered Yoinked Skybox :" + Path.GetFileName(dir));
                         }
                     }
+                else
+                    Log.Warn("No Skyboxes Found here : " + CubemapsPath);
             }
             else
             {
-                Directory.CreateDirectory(BundlesPath);
-                Log.Warn("To Add custom Skyboxes , import the skyboxes assetbundles here : " + BundlesPath);
+                Directory.CreateDirectory(CubemapsPath);
             }
-
-            yield break;
+            yield return null;
         }
 
 
-        private static void LoadSkyboxBundle(string file, AssetBundle bundle)
-        {
-            if(bundle == null)
-            {
-                Log.Warn($"Bundle Is null for File {file}");
-                return;
-            }
-            Texture2D Up = null;
-            Texture2D Down = null;
-            Texture2D Back = null;
-            Texture2D Front = null;
-            Texture2D Left = null;
-            Texture2D Right = null;
-            Texture2D CubeMapToTexture = null;
-            var isCubeMap = false;
-            Material Material = null;
-            foreach(var paths in bundle.GetAllAssetNames())
-            {
-                Log.Write($"Checking {bundle.name} Path {paths}");
 
-
-
-                if (!paths.ToLower().EndsWith(".mat")) continue;
-                Material = bundle.LoadAsset(paths, Il2CppType.Of<Material>()).Cast<Material>();
-                Material.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                foreach (var TextureName in Material.GetTexturePropertyNames())
-                {
-                    var MaterialTexture = Material.GetTexture(TextureName);
-                    if (Up == null && TextureName.isMatch("_UpTex"))
-                    {
-                        Up = MaterialTexture.ToTexture2D();
-                        if (Up != null) Up.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    }
-
-                    if (Down == null && TextureName.isMatch("_DownTex"))
-                    {
-                        Down = MaterialTexture.ToTexture2D();
-                        if (Down != null) Down.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    }
-
-                    if (Back == null && TextureName.isMatch("_BackTex"))
-                    {
-                        Back = MaterialTexture.ToTexture2D();
-                        if (Back != null) Back.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    }
-
-                    if (Front == null && TextureName.isMatch("_FrontTex"))
-                    {
-                        Front = MaterialTexture.ToTexture2D();
-                        if (Front != null) Front.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    }
-
-                    if (Left == null && TextureName.isMatch("_LeftTex"))
-                    {
-                        Left = MaterialTexture.ToTexture2D();
-                        if (Left != null) Left.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    }
-
-                    if (Right == null && TextureName.isMatch("_RightTex"))
-                    {
-                        Right = MaterialTexture.ToTexture2D();
-                        if (Right != null) Right.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    }
-
-                    if (CubeMapToTexture == null && TextureName.isMatch("_Tex"))
-                    {
-                        isCubeMap = true;
-                        //CubeMapToTexture = MaterialTexture.TryCast<Cubemap>().ToTexture2D();
-                        //if (CubeMapToTexture != null) CubeMapToTexture.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    }
-                }
-
-            }
-            if (Material != null)
-            {
-                var cachedskybox = new AssetBundleSkyboxes(Path.GetFileName(file), new BundleContent(Up, Down, Back, Front, Left, Right, CubeMapToTexture, null, Material), isCubeMap);
-                if (LoadedSkyboxesBundles != null) LoadedSkyboxesBundles.Add(cachedskybox);
-            }
-            else
-            {
-                Log.Debug("Failed to parse " + file + ", Due to Material being null!");
-                FailedLoadedBundles.Add(bundle); 
-            }
-        }
 
         internal static void FindAndLoadSkyboxes()
         {
             //MelonCoroutines.Start(LoadBundleSkyboxes());
-            MelonCoroutines.Start(LoadPNGsSkyboxes());
+            MelonCoroutines.Start(LoadSixSidedSkyboxes());
+            MelonCoroutines.Start(LoadCubemaps());
             Log.Write("Done checking for skyboxes.");
         }
 
-        internal static bool ExportSixSidedSkybox()
+        internal static bool ExportSkybox()
         {
+            if (isUsingCustomSkybox) return false;
             if (!isSupportedSkybox) return false;
-            if (OriginalSkybox == null) return false;
-            if (!Directory.Exists(YoinkedSkyboxesPath)) Directory.CreateDirectory(YoinkedSkyboxesPath);
+            if (RenderSettings.skybox == null) return false;
+            if (!Directory.Exists(ExportedSkyboxPath)) Directory.CreateDirectory(ExportedSkyboxPath);
             string SkyboxType = "Skybox";
-
-            //foreach (var textureID in OriginalSkybox.GetTexturePropertyNames())
-            //{
-            //    if (textureID.isMatch("_Tex"))
-            //    {
-            //        SkyboxType = "CubeMap";
-            //        return false; // Till we find a way, just disable everything if is not supported.
-            //        break;
-            //    }
-            //}
-            //if (TextureName.isMatch("_Tex") && MaterialTexture != null)
-            //{
-            //    Log.Debug("This is a cubemap Texture!");
-            //    var cubemap = MaterialTexture.TryCast<Texture>().CreateReadableCopy();
-            //    if (cubemap != null)
-            //    {
-            //        Log.Debug($"Created Copy of {cubemap.name}");
-            //        SaveTexture(cubemap.ToTexture2D(), savepath, Texture_Name_Cubemap);
-            //    }
-            //    break;
-            //}
-
-            var savepath = Path.Combine(YoinkedSkyboxesPath, $"{SkyboxType}_" + OriginalSkybox.name);
-            if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
-
-            try
+            if (isSixSidedCube)
             {
-                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_UpTex"), savepath, Side_Up);
-                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_DownTex"), savepath, Side_Down);
-                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_BackTex"), savepath, Side_Back);
-                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_FrontTex"), savepath, Side_Front);
-                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_LeftTex"), savepath, Side_Left);
-                TextureTools.SaveTextureAsPNG(OriginalSkybox.GetTexture("_RightTex"), savepath, Side_Right);
+                var savepath = Path.Combine(SixSidedCubePath, $"{SkyboxType}_" + RenderSettings.skybox.name);
+                if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
+                try
+                {
+                    RenderSettings.skybox.GetTexture("_UpTex").SaveTextureAsPNG(savepath, Side_Up);
+                    RenderSettings.skybox.GetTexture("_DownTex").SaveTextureAsPNG(savepath, Side_Down);
+                    RenderSettings.skybox.GetTexture("_BackTex").SaveTextureAsPNG(savepath, Side_Back);
+                    RenderSettings.skybox.GetTexture("_FrontTex").SaveTextureAsPNG(savepath, Side_Front);
+                    RenderSettings.skybox.GetTexture("_LeftTex").SaveTextureAsPNG(savepath, Side_Left);
+                    RenderSettings.skybox.GetTexture("_RightTex").SaveTextureAsPNG(savepath, Side_Right);
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                    return false;
+                }
             }
-            catch (Exception e)
+            if (isCubeMap)
             {
-                Log.Exception(e);
-                return false;
+                var savepath = Path.Combine(CubemapsPath, $"{SkyboxType}_" + RenderSettings.skybox.name);
+                if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
+                try
+                {
+                    var Tex = RenderSettings.skybox.GetTexture("_Tex").Cast<Cubemap>();
+                    if(Tex != null)
+                    {
+                        Log.Debug("This is a Cubemap! Attempting to save...");
+                        MelonCoroutines.Start(CubeMapAndTexture2D.SaveCubemapToFile(Tex, savepath));
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                    return false;
+                }
+
             }
+
+
+
 
             return true;
         }
@@ -474,12 +494,26 @@ namespace AstroClient.Tools.Skybox
 
         internal static void SetRenderSettingSkybox(Material mat)
         {
+            if (!isUsingCustomSkybox)
+            {
+                OriginalSkybox = RenderSettings.skybox;
+                isUsingCustomSkybox = true;
+            }
             RenderSettings.skybox = mat;
         }
-
-        internal static void SetRenderSettingSkybox(AssetBundleSkyboxes skybox)
+        internal static void RestoreOriginalSkybox()
         {
-            SetRenderSettingSkybox(skybox.content.Material);
+            if (isUsingCustomSkybox)
+            {
+                isUsingCustomSkybox = false;
+                RenderSettings.skybox = OriginalSkybox;
+                OriginalSkybox = null;
+            }
+        }
+
+        internal static void SetRenderSettingSkybox(GeneratedSkyboxes skybox)
+        {
+            SetRenderSettingSkybox(skybox.Material);
         }
 
         internal static bool SetSkyboxByFileName(string name)
@@ -490,84 +524,22 @@ namespace AstroClient.Tools.Skybox
                 return false;
             }
 
-            if (LoadedSkyboxesBundles.IsEmpty())
+            for (int i = 0; i < GeneratedSkyboxesList.Count; i++)
             {
-                Log.Error("There are no skybox Registered, unable to set a custom skybox.");
-                return false;
-            }
-
-            for (int i = 0; i < LoadedSkyboxesBundles.Count; i++)
-            {
-                AssetBundleSkyboxes skybox = LoadedSkyboxesBundles[i];
-                if (skybox != null && skybox.SkyboxName.ToLower().Equals(name.ToLower()))
+                GeneratedSkyboxes skybox = GeneratedSkyboxesList[i];
+                if (skybox != null && skybox.Name.ToLower().Equals(name.ToLower()))
                 {
                     SetRenderSettingSkybox(skybox);
                     return true;
                 }
             }
 
+
             return false;
         }
 
-        internal class AssetBundleSkyboxes
-        {
-            internal AssetBundleSkyboxes(string SkyboxName, BundleContent content, bool isCubeMap)
-            {
-                this.SkyboxName = SkyboxName;
-                this.content = content;
-                this.isCubeMap = isCubeMap;
-            }
 
-            internal string SkyboxName { get; set; }
 
-            internal BundleContent content { get; set; }
-
-            internal bool isCubeMap { get; set; }
-        }
-
-        internal class BundleContent
-        {
-            internal BundleContent(Texture2D Up, Texture2D Down, Texture2D Back, Texture2D Front, Texture2D Left, Texture2D Right, Texture2D CubeMap, Texture2D Panorama, Material Material)
-            {
-                this.Up = Up;
-                this.Down = Down;
-                this.Back = Back;
-                this.Front = Front;
-                this.Left = Left;
-                this.Right = Right;
-                this.CubeMap = CubeMap;
-                this.Material = Material;
-            }
-
-            internal Texture2D Up { get; set; }
-
-            internal Texture2D Down { get; set; }
-
-            internal Texture2D Back { get; set; }
-
-            internal Texture2D Front { get; set; }
-
-            internal Texture2D Left { get; set; }
-
-            internal Texture2D Right { get; set; }
-
-            internal Texture2D PanoramicSkybox { get; set; }
-
-            internal Texture2D CubeMap { get; set; }
-
-            internal Material Material { get; set; }
-
-            internal void Destroy()
-            {
-                Object.Destroy(Up);
-                Object.Destroy(Down);
-                Object.Destroy(Back);
-                Object.Destroy(Front);
-                Object.Destroy(Left);
-                Object.Destroy(Right);
-                Object.Destroy(CubeMap);
-                Object.Destroy(Material);
-            }
-        }
+    
     }
 }

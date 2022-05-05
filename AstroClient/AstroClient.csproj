@@ -161,6 +161,7 @@
     <Compile Include="ModsDetector\EmmPatcher.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
+    <Compile Include="Startup\Fixes\KeyboardPopupDeclutterer.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleTeleportRPC.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleUdonEvent.cs" />
@@ -186,6 +187,12 @@
     <Compile Include="Tools\Converters.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
+    <Compile Include="Tools\Skybox\Builders\MaterialBuilder.cs" />
+    <Compile Include="Tools\Skybox\SkyboxClasses\GeneratedSkyboxes.cs" />
+    <Compile Include="Tools\TextureTools\ICallManager.cs" />
+    <Compile Include="Tools\TextureTools\Il2CppTextureHelper.cs" />
+    <Compile Include="Tools\TextureTools\TextureHelper.cs" />
+    <Compile Include="Tools\TextureTools\Texture_Ext.cs" />
     <Compile Include="Tools\UdonEditor\UdonDumper.cs" />
     <Compile Include="Tools\UdonEditor\UdonAPIExtensions.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />
@@ -444,7 +451,6 @@
     <Compile Include="Tools\Extensions\ModerationExtensions.cs" />
     <Compile Include="ClientEvents\Moderation\ModerationNotifier.cs" />
     <Compile Include="ClientEvents\Moderation\PhotonModerationHandler.cs" />
-    <Compile Include="Tools\Extensions\Texture_Ext.cs" />
     <Compile Include="Tools\Extensions\Reflections_ext.cs" />
     <Compile Include="Tools\Input\InputUtils.cs" />
     <Compile Include="Tools\Instance\History\WorldManager.cs" />
@@ -1446,6 +1452,7 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
     <None Include="PlayerList\PlayerListUI.unitypackage" />
+    <Compile Include="Startup\Fixes\BigUserInfoDeclutterer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientResources\IconsArchive\shuttle.png">

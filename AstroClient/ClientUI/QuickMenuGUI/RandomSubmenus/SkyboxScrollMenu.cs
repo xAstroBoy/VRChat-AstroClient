@@ -20,29 +20,8 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
             ClientEventActions.OnBigMenuClose += OnCloseMenu;
             ClientEventActions.OnBigMenuOpen += OnCloseMenu;
         }
-        private static bool _IsUIPageListenerActive = false;
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
 
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
 
-                    }
-
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<QMSingleButton> GeneratedButtons = new();
@@ -78,38 +57,36 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         {
             if (!HasGenerated)
             {
-                try
+                if (SkyboxEditor.GeneratedSkyboxesList.Count() == 0)
                 {
-                    if (SkyboxEditor.LoadedSkyboxesBundles.Count() != 0)
+                    var empty = new QMSingleButton(CurrentScrollMenu, "No Skyboxes Found", null, "No Skyboxes Found");
+                    GeneratedButtons.Add(empty);
+                    HasGenerated = true;
+                    return;
+                }
+                else
+                {
+                    try
                     {
-                        foreach (var skybox in SkyboxEditor.LoadedSkyboxesBundles)
+                        foreach (var skybox in SkyboxEditor.GeneratedSkyboxesList)
                             if (skybox != null)
                             {
-                                var btn = new QMSingleButton(CurrentScrollMenu, skybox.SkyboxName, () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.SkyboxName} as map Skybox.");
-                                if (!skybox.isCubeMap)
-                                {
-                                    if (skybox.content.Front != null)
-                                        btn.SetButtonImage(skybox.content.Front);
-                                    else if (skybox.content.Left != null)
-                                        btn.SetButtonImage(skybox.content.Left);
-                                    else if (skybox.content.Back != null) btn.SetButtonImage(skybox.content.Back);
-                                }
+                                var btn = new QMSingleButton(CurrentScrollMenu, skybox.Name, () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.Name} as map Skybox.");
+                                if (skybox.Front != null)
+                                    btn.SetButtonImage(skybox.Front);
+                                else if (skybox.Left != null)
+                                    btn.SetButtonImage(skybox.Left);
+                                else if (skybox.Back != null) btn.SetButtonImage(skybox.Back);
 
                                 GeneratedButtons.Add(btn);
                             }
                     }
-                    else
+                    catch (Exception e)
                     {
-                        var empty = new QMSingleButton(CurrentScrollMenu, "No Skyboxes Found", null, "No Skyboxes Found");
-                        GeneratedButtons.Add(empty);
+                        Log.Exception(e);
+                        HasThrownException = true;
                     }
                 }
-                catch (Exception e)
-                {
-                    Log.Exception(e);
-                    HasThrownException = true;
-                }
-
                 HasGenerated = true;
             }
         }
@@ -120,10 +97,6 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
             if (GeneratedButtons.Count != 0)
                 foreach (var item in GeneratedButtons)
                     item.DestroyMe();
-            //if (Listeners.Count != 0)
-            //{
-            //    foreach (var item in Listeners) UnityEngine.Object.DestroyImmediate(item);
-            //}
         }
 
         private void OnQuickMenuClose()
@@ -133,12 +106,10 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
         private static void OnCloseMenu()
         {
-            IsUIPageListenerActive = false;
             isOpen = false;
             if (DestroyOnMenuClose || HasThrownException) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
-                
                 WingMenu.SetActive(false);
             }
         }
@@ -167,34 +138,38 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                     if (ExportSkybox != null) ExportSkybox.SetActive(false);
                 }
             }
-            IsUIPageListenerActive = true;
             Regenerate();
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-
-            if (Page != null)
-                if (!Page.isPage(CurrentScrollMenu.GetPage()) )
-                    OnCloseMenu();
-        }
 
         private static void InitWingPage()
         {
-            WingMenu = new QMWings(CurrentScrollMenu,1007, true, "Skybox Options", "Edit Current Skybox");
+            WingMenu = new QMWings(CurrentScrollMenu, 1007, true, "Skybox Options", "Edit Current Skybox");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
-                SkyboxEditor.FindAndLoadSkyboxes();
+
+
                 DestroyGeneratedButtons();
+                // Reload the list entirely
+                foreach (var item in SkyboxEditor.GeneratedSkyboxesList)
+                {
+                    item.Destroy();
+                }
+                SkyboxEditor.GeneratedSkyboxesList.Clear();
+
+
+                SkyboxEditor.FindAndLoadSkyboxes();
                 Regenerate();
-            }, "Find New Skyboxes");
-            new QMWingSingleButton(WingMenu, "Reset Skybox", () => { SkyboxEditor.SetRenderSettingSkybox(SkyboxEditor.OriginalSkybox); }, "Restore Original Skybox.");
+            }, "Reload Skyboxes ");
+            new QMWingSingleButton(WingMenu, "Reset Skybox", () => { SkyboxEditor.RestoreOriginalSkybox(); }, "Restore Original Skybox.");
+            
+            
             ExportSkybox = new QMWingSingleButton(WingMenu, "Export Skybox", () =>
             {
+                if (SkyboxEditor.isUsingCustomSkybox) return;
                 if (!HasExportedSkybox)
                 {
-                    SkyboxEditor.ExportSixSidedSkybox();
+                    SkyboxEditor.ExportSkybox();
                     SkyboxEditor.FindAndLoadSkyboxes();
                     ExportSkybox.SetActive(false);
                     HasExportedSkybox = true;
