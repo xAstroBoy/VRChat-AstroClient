@@ -1,6 +1,8 @@
 ﻿using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using System.Diagnostics;
+using System.ServiceModel.Configuration;
+using VRC.Udon.Common.Interfaces;
 
 namespace AstroClient.Tools.UdonEditor
 {
@@ -25,6 +27,8 @@ namespace AstroClient.Tools.UdonEditor
 
         private static List<string> GettersSettersGen { get; set; } = new List<string>();
 
+
+
         internal static void HeapGetterGenerator(RawUdonBehaviour behaviour)
         {
             ClearLists();
@@ -47,7 +51,6 @@ namespace AstroClient.Tools.UdonEditor
                         if (UnboxVariable != null)
                         {
                             if (UnboxVariable.GetIl2CppType().FullName == "System.RuntimeType" || UnboxVariable.GetIl2CppType().FullName == "System.RuntimeType[]")
-
                             {
                                 if (!UsedSymbols.Contains(symbol))
                                 {
@@ -178,11 +181,15 @@ namespace AstroClient.Tools.UdonEditor
             }
         }
 
+
+
         internal static void GenerateReaderVariable(string templatename, string Symbol, Il2CppSystem.Object obj)
         {
             UsedSymbols.Add(Symbol);
             var getter = new StringBuilder();
             var ActualType = obj.GetIl2CppType().FullName;
+
+
             var CorrectedType = CorrectType(ActualType);
             if (CorrectedType.Contains("System.UInt32"))
             {

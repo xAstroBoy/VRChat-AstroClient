@@ -5,6 +5,8 @@ using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using System.Linq;
+using AstroClient.CustomClasses;
+using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -19,7 +21,48 @@ namespace AstroClient.WorldModifications.WorldHacks
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.Udon_SendCustomEvent += UdonSendCustomEvent;
+
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Udon_SendCustomEvent -= UdonSendCustomEvent;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void UdonSendCustomEvent(UdonBehaviour instance, string CustomEvent)
+        {
+        }
+
+        private void OnRoomLeft()
+        {
+
+            reader = null;
+            HasSubscribed = false;
+        }
+
         private static DreamWaves_WhiteListManagerReader reader { get; set; }
+        private static UdonBehaviour_Cached ReaderEvent { get; set; }
+
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -30,18 +73,20 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var find = GameObjectFinder.Find("Core components/WhitelistManager");
                 if (find != null)
                 {
-                    MiscUtils.DelayFunction(3f, () =>
+                    reader = find.GetOrAddComponent<DreamWaves_WhiteListManagerReader>();
+                    if (reader != null)
                     {
-                        reader = find.GetOrAddComponent<DreamWaves_WhiteListManagerReader>();
-                        if (reader != null)
-                        {
-                            AddNameToList();
-                        }
-
-                    });
+                        AddNameToList();
+                    }
                 }
             }
+            else
+            {
+                
+            }
         }
+
+
 
         internal static void AddNameToList()
         {
@@ -78,6 +123,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                             reader.__0_intnl_SystemString = string.Join("\n", result);
                         }
                     }
+                    else
+                    {
+                        Log.Warn("Reader : __0_intnl_SystemString is empty!");
+                    }
                 }
                 catch { }
                 try
@@ -111,6 +160,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                             reader.__0_intnl_UnityEngineTextAsset.SetText(string.Join("\n", result));
                         }
                     }
+                    else
+                    {
+                        Log.Warn("Reader : __0_intnl_UnityEngineTextAsset is empty!");
+                    }
+
                 }
                 catch { }
                 try
@@ -144,6 +198,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                             reader.__0_mp_textAsset_TextAsset.SetText(string.Join("\n", result));
                         }
                     }
+                    else
+                    {
+                        Log.Warn("Reader : __0_mp_textAsset_TextAsset is empty!");
+                    }
+
                 }
                 catch { }
             }

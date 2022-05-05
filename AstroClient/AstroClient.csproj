@@ -654,7 +654,6 @@
     <Compile Include="WorldModifications\WorldHacks\GhostGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\GeoLocator.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmart.cs" />
-    <Compile Include="WorldModifications\WorldHacks\DreamWaves.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\Enums\PrisonEscape_Roles.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\PuttPuttQuest.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\PuttPuttPond.cs" />

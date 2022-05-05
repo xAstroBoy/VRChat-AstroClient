@@ -3,6 +3,7 @@ using AstroClient.xAstroBoy.Utility;
 using MelonLoader;
 using System.Collections;
 using System.Diagnostics;
+using System.ServiceModel;
 using System.Text.RegularExpressions;
 using UnityEngine;
 

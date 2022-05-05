@@ -25,7 +25,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 
     #endregion Imports
 
-    internal static class EventDispatcher_HandleUdonEvent
+    internal static class EventDispatcher_HandleUdonEvent 
     {
 
         internal static bool Handle_UdonEvent(VRC_EventHandler.VrcEvent VrcEvent, Player sender, GameObject gameObject, string EventKey)

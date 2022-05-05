@@ -57,6 +57,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 HasSubscribed = true;
                 UdonBehaviour._hasInteractiveEvents = true; // This way it activates the interact system in the behaviour
             }
+            _ = VRCInteractable; // make the getter not null.
         }
 
         private void UdonBehaviour_Event_OnInteract(UdonBehaviour item)

@@ -3,6 +3,7 @@ using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
+using VRC.SDK3.Components;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -52,6 +53,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                                     {
                                         LockEvent.InvokeBehaviour();
                                     };
+                                    interact.GetOrAddComponent<VRCInteractable>();
                                     interact.interactText = "<color=orange>Lockpick Private Room (AstroClient)</color>";
                                 }
                             }

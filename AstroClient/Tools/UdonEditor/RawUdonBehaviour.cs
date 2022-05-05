@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using AstroClient.Tools.Extensions;
 
 namespace AstroClient.Tools.UdonEditor
@@ -17,32 +18,21 @@ namespace AstroClient.Tools.UdonEditor
         private Transform Parent { get; set; }
         private UdonBehaviour behaviour { get; set; }
 
-        internal GameObject gameObject
-        {
-            get
-            {
-                return Parent.gameObject;
-            }
-        }
+        internal GameObject gameObject => Parent.gameObject;
 
-        internal Transform transform
-        {
-            get
-            {
-                return Parent;
-            }
-        }
+        internal Transform transform => Parent;
 
-        internal UdonBehaviour udonBehaviour
-        {
-            get
-            {
-                return behaviour;
-            }
-        }
+        internal UdonBehaviour udonBehaviour => behaviour;
 
-        internal ConcurrentDictionary<string, uint> SymbolsDictionary  = new ConcurrentDictionary<string, uint>(StringComparer.InvariantCultureIgnoreCase);
 
+        internal Dictionary<string, uint> SymbolsDictionary  = new Dictionary<string, uint>(StringComparer.InvariantCultureIgnoreCase);
+
+
+        /// <summary>
+        /// Check if a symbol is existing.
+        /// </summary>
+        /// <param name="Symbol"></param>
+        /// <returns></returns>
         internal bool HasSymbol(string Symbol)
         {
             if(SymbolsDictionary.Count != 0)
@@ -60,6 +50,7 @@ namespace AstroClient.Tools.UdonEditor
             this.Parent = Parent;
             this.behaviour = behaviour;
 
+            // This part extracts the symbols to facilitate everything.
             if (IUdonSymbolTable != null)
             {
                 var SymbolArray = IUdonSymbolTable.GetSymbols();
@@ -69,7 +60,7 @@ namespace AstroClient.Tools.UdonEditor
                     var address = IUdonSymbolTable.GetAddressFromSymbol(item);
                     if (address != null)
                     {
-                        SymbolsDictionary.TryAdd(item, address);
+                        SymbolsDictionary.Add(item, address);
                     }
                 }
             }
