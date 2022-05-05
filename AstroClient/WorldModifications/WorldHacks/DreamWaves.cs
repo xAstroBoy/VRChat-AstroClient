@@ -30,11 +30,15 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var find = GameObjectFinder.Find("Core components/WhitelistManager");
                 if (find != null)
                 {
-                    reader = find.GetOrAddComponent<DreamWaves_WhiteListManagerReader>();
-                    if (reader != null)
+                    MiscUtils.DelayFunction(3f, () =>
                     {
-                        AddNameToList();
-                    }
+                        reader = find.GetOrAddComponent<DreamWaves_WhiteListManagerReader>();
+                        if (reader != null)
+                        {
+                            AddNameToList();
+                        }
+
+                    });
                 }
             }
         }

@@ -29,7 +29,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var LockEvent = privateswitch.FindUdonEvent("Switch_Lock", "_interact");
                     if (LockEvent != null)
                     {
-                        var DisplaySwitchTrigger = GameObjectFinder.Find("Switch/Living room/Switch_Lock dummy");
+                        var DisplaySwitchTrigger = GameObjectFinder.Find("Switch/Living room/Switch_Lock dummy/Switch_LockObject");
                         if (DisplaySwitchTrigger == null)
                         {
                             Log.Write("Failed to Find Living Room Display Switch, Has MeRoom World updated?", Color.Red);
