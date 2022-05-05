@@ -159,9 +159,12 @@ namespace AstroClient.AstroMonos.AstroUdons
                     PickupController.EditMode = true;
                     PickupController.InteractionText = value;
                 }
+                if (UdonBehaviour != null)
+                {
+                    UdonBehaviour.InteractionText = value;
+                }
             }
         }
-
 
         internal Action OnPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Action OnPickupUseUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }

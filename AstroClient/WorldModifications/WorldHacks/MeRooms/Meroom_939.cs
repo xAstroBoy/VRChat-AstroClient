@@ -53,8 +53,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                                     {
                                         LockEvent.InvokeBehaviour();
                                     };
-                                    interact.GetOrAddComponent<VRCInteractable>();
-                                    interact.interactText = "<color=orange>Lockpick Private Room (AstroClient)</color>";
+                                    interact.InteractionText = "<color=orange>Lockpick Private Room (AstroClient)</color>";
                                 }
                             }
                         }
