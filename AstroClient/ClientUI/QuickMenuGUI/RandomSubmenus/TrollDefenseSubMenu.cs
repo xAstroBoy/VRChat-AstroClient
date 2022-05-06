@@ -1,4 +1,6 @@
-﻿namespace AstroClient.ClientUI.Menu.RandomSubmenus
+﻿using AstroClient.ClientActions;
+
+namespace AstroClient.ClientUI.Menu.RandomSubmenus
 {
     #region Imports
 
@@ -16,44 +18,35 @@
         internal static void InitButtons(QMGridTab tab)
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Anti-Troll Section", "Use This only if you are attacked by Game Trolls");
-            TeleportCrashCoordRektbtn = new QMToggleButton(sub, "Crash Sit Troll", () => { SerializerTroll = true; }, () => { SerializerTroll = false; }, "Use in case a troll is sitting on you.");
+            TeleportCrashCoordRektbtn = new QMToggleButton(sub, "Crash Sit Troll", () => { DisappearGhost = true; }, () => { DisappearGhost = false; }, "Use in case a troll is sitting on you.");
 
         }
-        internal static void RejoinInstance()
+
+        internal override void RegisterToEvents()
         {
-            ApiWorldInstance field_Internal_Static_ApiWorldInstance_ = RoomManager.field_Internal_Static_ApiWorldInstance_0;
-            Networking.GoToRoom(field_Internal_Static_ApiWorldInstance_.world.id + ":" + field_Internal_Static_ApiWorldInstance_.instanceId);
+            ClientEventActions.OnRoomLeft += OnRoomLeft;
+        }
+
+        private void OnRoomLeft()
+        {
+            DisappearGhost = false;
         }
 
         private static QMToggleButton TeleportCrashCoordRektbtn { get; set; }
         private static QMToggleButton CrashSitTrollRejoinInstanceBtn { get; set; }
 
-        private static bool _SerializerTrollRejoinInstanceOption;
 
-        internal static bool RejoinInstanceSetting
+        private static bool _DisappearGhost;
+
+        internal static bool DisappearGhost
         {
-            get => _SerializerTrollRejoinInstanceOption;
-            set
-            {
-                _SerializerTrollRejoinInstanceOption = value;
-                if (CrashSitTrollRejoinInstanceBtn != null)
-                {
-                    CrashSitTrollRejoinInstanceBtn.SetToggleState(value);
-                }
-            }
-        }
-
-        private static bool _SerializerTroll;
-
-        internal static bool SerializerTroll
-        {
-            get => _SerializerTroll;
+            get => _DisappearGhost;
             set
             {
                 var player = GameInstances.CurrentPlayer;
                 if (player != null)
                 {
-                    _SerializerTroll = value;
+                    _DisappearGhost = value;
                     if (TeleportCrashCoordRektbtn != null)
                     {
                         TeleportCrashCoordRektbtn.SetToggleState(value);
@@ -62,21 +55,13 @@
                     if (value)
                     {
                         var originalcoords = player.transform.position;
-                        // Teleport To a crashing coordinate (To make the troll crash)
-
-                        player.transform.position = new Vector3(originalcoords.x, 999999, originalcoords.z);
+                        player.transform.position = new Vector3(originalcoords.x, 9999999999, originalcoords.z);
                         MiscUtils.DelayFunction(1f, () => // Wait for the teleport message to be sent.
                         {
                             MovementSerializer.SerializerActivated = true;
-                            // Then Fast Teleport back where you are.
                             player.transform.position = originalcoords;
                         });
 
-
-                        if (RejoinInstanceSetting)
-                        {
-                            RejoinInstance();
-                        }
                     }
                     else
                     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
@@ -34,6 +35,19 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
+        internal static Action<bool> OnShowRolesPropertyChanged { get; set; }
+
+        private static bool _ShowRoles = false;
+        internal static bool ShowRoles
+        {
+            get => _ShowRoles;
+            set
+            {
+                _ShowRoles = value;
+                OnShowRolesPropertyChanged.SafetyRaiseWithParams(value);
+            }
+            
+        }
 
         private bool _HasSubscribed = false;
         private bool HasSubscribed
@@ -72,6 +86,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 _IsCurrentWorld = value;
                 if (!value)
                 {
+                    ShowRoles = false;
                     MoneyInteraction = null;
                     GetRedCard = null;
                     RedCardBehaviour = null;
@@ -90,8 +105,19 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             renderer.transform.RemoveComponent<ESP_HighlightItem>();
                         }
                     }
+                    foreach (var crate in Small_Crates)
+                    {
+                        var renderer = crate.GetGetInChildrens<Renderer>(true);
+                        if (renderer != null)
+                        {
+                            renderer.transform.RemoveComponent<ESP_HighlightItem>();
+                        }
+                    }
+
                     LargeCrateESP = false;
+                    SmallCrateESP = false;
                     Large_Crates.Clear();
+                    Small_Crates.Clear();
                     Large_Crates_udon.Clear();
                     Small_Crates_udon.Clear();
                     Knifes.Clear();
@@ -344,6 +370,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                     if (item.name.Contains("Crate Small"))
                     {
+                        Small_Crates.AddGameObject(item.gameObject);
                         var crateevent = item.FindUdonEvent("_SpawnItem");
                         if (crateevent != null)
                         {
@@ -1524,6 +1551,21 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
+        private static bool _SmallCrateESP = false;
+
+        internal static bool SmallCrateESP
+        {
+            get
+            {
+                return _SmallCrateESP;
+            }
+            set
+            {
+                _SmallCrateESP = value;
+                ToggleSmallCrateESP(value);
+            }
+        }
+
         private static void ToggleLargeCrateESP(bool isOn)
         {
             foreach (var crate in Large_Crates)
@@ -1543,7 +1585,24 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
+        private static void ToggleSmallCrateESP(bool isOn)
+        {
+            foreach (var crate in Small_Crates)
+            {
+                var renderer = crate.GetGetInChildrens<Renderer>(true);
+                if (renderer != null)
+                {
+                    if (isOn)
+                    {
+                        renderer.transform.GetOrAddComponent<ESP_HighlightItem>();
+                    }
+                    else
+                    {
+                        renderer.transform.RemoveComponent<ESP_HighlightItem>();
+                    }
+                }
+            }
+        }
         internal static void TakeKeyCard()
         {
             if (GetRedCard != null)
@@ -1996,6 +2055,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static UdonBehaviour_Cached GetRedCard { get; set; } = null;
         private static List<GameObject> Large_Crates { get; set; } = new List<GameObject>();
+        private static List<GameObject> Small_Crates { get; set; } = new List<GameObject>();
 
 
         private static List<UdonBehaviour_Cached> Large_Crates_udon { get; set; } = new List<UdonBehaviour_Cached>();

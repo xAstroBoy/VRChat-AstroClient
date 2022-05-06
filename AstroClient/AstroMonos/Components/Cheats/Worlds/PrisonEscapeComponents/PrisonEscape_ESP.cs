@@ -162,6 +162,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 Player = p;
             else
                 Destroy(this);
+            PrisonEscape.OnShowRolesPropertyChanged += OnShowRolesPropertyChanged;
 
             if (healthTag != null)
             {
@@ -188,7 +189,48 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
 
         }
-        
+
+        [HideFromIl2Cpp]
+        private void OnShowRolesPropertyChanged(bool value)
+        {
+            if(value)
+            {
+                if (CurrentRole == PrisonEscape_Roles.Dead)
+                {
+                    ToggleWantedTag(false);
+                    ResetESPColor();
+                    isWanted = false;
+                    if (healthTag != null)
+                    {
+                        healthTag.ShowTag = false;
+                    }
+                }
+                else
+                {
+                    isWanted = AssignedReader.isWanted.GetValueOrDefault(false);
+                    if (healthTag != null)
+                    {
+                        healthTag.ShowTag = true;
+                        healthTag.Text = $"Health : {AssignedReader.health}";
+                    }
+                }
+            }
+            else
+            {
+                if (healthTag != null)
+                {
+                    healthTag.ShowTag = false;
+                }
+                if (WantedTag != null)
+                {
+                    WantedTag.ShowTag = false;
+                }
+                
+                ResetESPColor();
+            }
+
+        }
+
         [HideFromIl2Cpp]
         private int GetHealthDefaults()
         {
@@ -378,6 +420,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             if (!isActiveAndEnabled) return;
             if (AssignedReader == null) return;
+            if (!PrisonEscape.ShowRoles) return;
             if (CurrentRole == PrisonEscape_Roles.Dead)
             {
                 healthTag.ShowTag = false;
@@ -404,6 +447,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             if (IsSelf) return;
             if (AssignedReader == null) return;
             if (LocalUserData == null) return;
+            if (!PrisonEscape.ShowRoles) return;
             if (CurrentRole == PrisonEscape_Roles.Dead) return;
             if (CurrentRole == PrisonEscape_Roles.Guard && LocalUserData.CurrentRole == PrisonEscape_Roles.Guard) // Remote & Local Users are Guard role.
             {
@@ -459,6 +503,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         [HideFromIl2Cpp]
         private void ToggleWantedTag(bool Visible)
         {
+            if(!PrisonEscape.ShowRoles)
             if (Visible != WantedTag.ShowTag)
             {
                 WantedTag.ShowTag = Visible;

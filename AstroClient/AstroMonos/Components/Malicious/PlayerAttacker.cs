@@ -58,25 +58,21 @@ namespace AstroClient.AstroMonos.Components.Malicious
         // Use this for initialization
         private void Start()
         {
-            RigidBodyController = GetComponent<RigidBodyController>();
-            if (RigidBodyController == null)
-            {
-                RigidBodyController = gameObject.AddComponent<RigidBodyController>();
-            }
+            RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             body = RigidBodyController.Rigidbody;
             if (body == null)
             {
                 body = GetComponent<Rigidbody>();
                 body ??= gameObject.AddComponent<Rigidbody>();
             }
-            PickupController = GetComponent<PickupController>();
-            PickupController ??= gameObject.AddComponent<PickupController>();
+            PickupController = gameObject.GetOrAddComponent<PickupController>();
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
             if (VRC_AstroPickup != null)
             {
                 VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
                 VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
             }
+            gameObject.TakeOwnership();
             HasSubscribed = true;
         }
 
@@ -101,26 +97,41 @@ namespace AstroClient.AstroMonos.Components.Malicious
             if (!HasRequiredSettings) HasRequiredSettings = true;
             if (isCurrentOwner)
             {
-                gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
+                gameObject.transform.LookAt(HeadTransform.position);
                 ApplyForceX();
-                gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
+                gameObject.transform.LookAt(HeadTransform.position);
                 ApplyForceY();
-                gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
+                gameObject.transform.LookAt(HeadTransform.position);
                 ApplyForceZ();
-                gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
+                gameObject.transform.LookAt(HeadTransform.position);
             }
 
             //AttackerTimeCheck = Time.time;
             //}
         }
 
+        private Transform _HeadTransform;
+        private Transform HeadTransform
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if(_HeadTransform == null)
+                {
+                    return _HeadTransform = TargetPlayer.Get_Player_Bone_Transform(HumanBodyBones.Head);
+                }
+                return _HeadTransform;
+            }
+        }
+
+
         private void ApplyForceX()
         {
             if (body != null && TargetPlayer.transform != null)
             {
-                if (body.transform.position.x <= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.x) body.AddForce(Movementforce, 0, 0, ForceMode.Impulse);
-                else if (gameObject.transform.position.x >= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.x) body.AddForce(-Movementforce, 0, 0, ForceMode.Impulse);
-                else if (gameObject.transform.position.x == BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.x) return;
+                if (body.transform.position.x <= HeadTransform.position.x) body.AddForce(Movementforce, 0, 0, ForceMode.Impulse);
+                else if (gameObject.transform.position.x >= HeadTransform.position.x) body.AddForce(-Movementforce, 0, 0, ForceMode.Impulse);
+                else if (gameObject.transform.position.x == HeadTransform.position.x) return;
             }
         }
 
@@ -128,9 +139,9 @@ namespace AstroClient.AstroMonos.Components.Malicious
         {
             if (body != null && TargetPlayer.transform != null)
             {
-                if (gameObject.transform.position.y <= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.y) body.AddForce(0, Movementforce, 0, ForceMode.Impulse);
-                else if (gameObject.transform.position.y >= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.y) body.AddForce(0, -Movementforce, 0, ForceMode.Impulse);
-                else if (gameObject.transform.position.y == BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.y) return;
+                if (gameObject.transform.position.y <= HeadTransform.position.y) body.AddForce(0, Movementforce, 0, ForceMode.Impulse);
+                else if (gameObject.transform.position.y >= HeadTransform.position.y) body.AddForce(0, -Movementforce, 0, ForceMode.Impulse);
+                else if (gameObject.transform.position.y == HeadTransform.position.y) return;
             }
         }
 
@@ -138,9 +149,9 @@ namespace AstroClient.AstroMonos.Components.Malicious
         {
             if (body != null && TargetPlayer.transform != null)
             {
-                if (gameObject.transform.position.z <= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.z) body.AddForce(0, 0, Movementforce, ForceMode.Impulse);
-                else if (gameObject.transform.position.z >= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.z) body.AddForce(0, 0, -Movementforce, ForceMode.Impulse);
-                else if (gameObject.transform.position.z == BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.z) return;
+                if (gameObject.transform.position.z <= HeadTransform.position.z) body.AddForce(0, 0, Movementforce, ForceMode.Impulse);
+                else if (gameObject.transform.position.z >= HeadTransform.position.z) body.AddForce(0, 0, -Movementforce, ForceMode.Impulse);
+                else if (gameObject.transform.position.z == HeadTransform.position.z) return;
             }
         }
 
@@ -155,7 +166,6 @@ namespace AstroClient.AstroMonos.Components.Malicious
             {
                 HasSubscribed = false;
                 RigidBodyController.RestoreOriginalBody();
-                if (gameObject.isLocalPlayerOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
                 if (!isHeld) GameObjectMenu.RestoreOriginalLocation(gameObject, false);
             }
@@ -194,7 +204,7 @@ namespace AstroClient.AstroMonos.Components.Malicious
                 {
                     if (RigidBodyController != null)
                     {
-                        if (!RigidBodyController.EditMode) RigidBodyController.EditMode = true;
+                        RigidBodyController.EditMode = true;
                         RigidBodyController.useGravity = false;
                         RigidBodyController.drag = 0.3f;
                         RigidBodyController.constraints = RigidbodyConstraints.FreezeRotation;

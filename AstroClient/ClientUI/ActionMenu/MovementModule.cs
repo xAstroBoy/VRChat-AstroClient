@@ -21,7 +21,7 @@ namespace AstroClient.ClientUI.ActionMenu
             {
                 // TODO: Add Textures!
                 CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
-                CustomSubMenu.AddToggle("Crash Sit Troll", TrollDefenseSubMenu.SerializerTroll, ToggleValue => { TrollDefenseSubMenu.SerializerTroll = ToggleValue; }, null, false);
+                CustomSubMenu.AddToggle("Toggle Disappear Ghost", TrollDefenseSubMenu.DisappearGhost, ToggleValue => { TrollDefenseSubMenu.DisappearGhost = ToggleValue; }, null, false);
                 CustomSubMenu.AddButton("Spawn EnderPearl", () => { AstroEnderPearl.SpawnEnderPearl(); }, null, false);
                 CustomSubMenu.AddSubMenu("Enderpearl skins", () =>
                 {

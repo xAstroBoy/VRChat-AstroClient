@@ -412,7 +412,6 @@ internal class WorldCheatsModule : AstroEvents
                         CustomSubMenu.AddToggle("Toggle Double Points", PrisonEscape.WorldSettings_DoublePoints.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_DoublePoints = ToggleValue; });
                     }
                 });
-
                 CustomSubMenu.AddSubMenu("Patreon System Control", () =>
                 {
                     CustomSubMenu.AddToggle("Patron Mode", PrisonEscape.isPatron.GetValueOrDefault(false), ToggleValue => { PrisonEscape.isPatron = ToggleValue; });
@@ -429,7 +428,6 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddToggle("Allow guard Role to use vents", PrisonEscape.GuardsAreAllowedToUseVents, ToggleValue => { PrisonEscape.GuardsAreAllowedToUseVents = ToggleValue; });
                     CustomSubMenu.AddToggle("Free Crates Items", PrisonEscape.FreeCratesItems, ToggleValue => { PrisonEscape.FreeCratesItems = ToggleValue; });
                 });
-
                 CustomSubMenu.AddSubMenu("Game Hacks", () =>
                 {
                     CustomSubMenu.AddToggle("Everyone Has Gold Guns", PrisonEscape.EveryoneHasGoldenGunCamos, ToggleValue => { PrisonEscape.EveryoneHasGoldenGunCamos = ToggleValue; });
@@ -451,6 +449,8 @@ internal class WorldCheatsModule : AstroEvents
 
 
                     CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.LargeCrateESP, ToggleValue => { PrisonEscape.LargeCrateESP = ToggleValue; });
+                    CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.SmallCrateESP, ToggleValue => { PrisonEscape.SmallCrateESP = ToggleValue; });
+
                     CustomSubMenu.AddToggle("Toggle Pickup ESP", VRChat_Map_ESP_Menu.Toggle_Pickup_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = ToggleValue; }, null, false);
                     CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
 
@@ -464,8 +464,30 @@ internal class WorldCheatsModule : AstroEvents
                     }
 
                 });
+                if (UserIdentifiers.is_xAstroBoy)
+                {
+                    CustomSubMenu.AddButton("xAstroBoy Preset", () =>
+                    {
+                        var ESP = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
+                        if (ESP != null)
+                        {
+                            ESP.GodMode = true;
+                        }
+                        PrisonEscape.TakeKeyCardOnWanted = true;
+                        VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = true;
+                        PrisonEscape.ShowRoles  = true;
+                        PrisonEscape.LargeCrateESP = true;
+                        PrisonEscape.SmallCrateESP = true;
+                        PrisonEscape.FreeCratesItems = true;
+                        PrisonEscape.DropKnifeAfterKill = false;
+                        PrisonEscape.WorldSettings_VisualHitBoxes = true;
+                        PrisonEscape.WorldSettings_GoldenGuns = true;
+                        PrisonEscape.WorldSettings_DoublePoints = false;
+                        PrisonEscape.WorldSettings_Music = false;
+                        PrisonEscape.WorldSettings_Avatars = false;
+                    });
 
-
+                }
             }
             #endregion
 

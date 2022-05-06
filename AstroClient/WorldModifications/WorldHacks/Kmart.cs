@@ -207,15 +207,12 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private void OnRoomLeft()
         {
-            if (isCurrentWorld)
-            {
-                _Root = null;
-                AuthorizedTrigger = null;
-                UnauthorizedTrigger = null;
-                RemoveBlocksForJoinedPlayers = false;
-                HasSubscribed = false;
-                isCurrentWorld = false;
-            }
+            _Root = null;
+            AuthorizedTrigger = null;
+            UnauthorizedTrigger = null;
+            RemoveBlocksForJoinedPlayers = false;
+            HasSubscribed = false;
+            isCurrentWorld = false;
         }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -224,14 +221,12 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 Log.Write($"Recognized {Name} World, Removing Blocking System....", System.Drawing.Color.Gold);
                 isCurrentWorld = true;
+                HasSubscribed = true;
                 FindEverything();
             }
             else
             {
-                if (isCurrentWorld)
-                {
-                    isCurrentWorld = false;
-                }
+                isCurrentWorld = false;
             }
         }
 

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Patches
+﻿using Photon.Pun;
+
+namespace AstroClient.Startup.Patches
 {
     #region Imports
 
@@ -25,18 +27,11 @@
         
         internal override void ExecutePriorityPatches()
         {
-            InitPatch();
+            new AstroPatch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_1)), GetPatch(nameof(OpRaiseEvent)));
+            new AstroPatch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_1)), GetPatch(nameof(OpRaiseEvent)));
+            new AstroPatch(typeof(PhotonNetwork).GetMethod(nameof(PhotonNetwork.Method_Public_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
         }
 
-        private void InitPatch()
-        {
-            try
-            {
-                new AstroPatch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_1)), GetPatch(nameof(OpRaiseEvent)));
-            }
-            catch (Exception e) { Log.Error("Error in applying patches : " + e); }
-            finally { }
-        }
 
         private static bool OpRaiseEvent(ref byte __0, ref Il2CppSystem.Object __1, ref Photon.Realtime.RaiseEventOptions __2, ref SendOptions __3)
         {
