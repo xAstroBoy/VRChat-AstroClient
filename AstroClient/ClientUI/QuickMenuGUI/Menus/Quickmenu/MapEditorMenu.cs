@@ -1,4 +1,8 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
+﻿using AstroClient.ClientUI.Menu.RandomSubmenus;
+using AstroClient.Tools.UdonEditor;
+using MelonLoader;
+
+namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
 {
     using System;
     using CheetosUI;
@@ -15,7 +19,7 @@
         internal static void InitButtons(QMGridTab main)
         {
             var menu = new QMNestedGridMenu(main, "Map Editor Utils", "Map Editor");
-            _ = new QMSingleButton(menu, 1, 0, "Spawn Empty Button", new Action(() =>
+            _ = new QMSingleButton(menu,  "Spawn Empty Button", new Action(() =>
               {
                   Vector3? buttonPosition = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
                   Quaternion? buttonRotation = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
@@ -25,8 +29,12 @@
                       btn.MakePickupable();
                       btn.RegisterToWorldMenu();
                   }
-              }), "Spawn Preset Button", null, null, true);
-            _ = new QMSingleButton(menu, 2, 0, "Toggles all Map Items Active", () => { EnableAllObjects(); }, "Sets Map objects active, will Break Instance Locally..", null, Color.red, true);
+              }), "Spawn Preset Button");
+            _ = new QMSingleButton(menu,  "Toggles all Map Items Active", () => { EnableAllObjects(); }, "Sets Map objects active, will Break Instance Locally..", Color.red);
+            new QMSingleButton(menu, "Dumps All udon Events", () => { UdonDumper.Dump_All_UdonBehaviours(false); }, "Dumps all Udon Events in Console & File..");
+            new QMSingleButton(menu, "Dumps all Udon Events in Console & File..", () => { UdonDumper.Dump_All_UdonBehaviours(true); }, "Dumps All udon Events & Internals");
+            new QMSingleButton(menu, "Extract all UdonBehaviour programs..", () => { UdonDumper.Dump_All_UdonBehaviours_Programs(); }, "Dumps All udon Program Codes!");
+
         }
 
         internal static void EnableAllObjects()

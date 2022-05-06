@@ -448,21 +448,20 @@ internal class WorldCheatsModule : AstroEvents
                         {
                             if (!localreader.isGuard.GetValueOrDefault(false))
                             {
-                                bool isded = localreader.isDead.GetValueOrDefault(false);
-                                if (isded)
-                                {
-                                    localreader.isDead = false;
-                                }
                                 localreader.isGuard = false;
+                                if(!localreader.hasKeycard.GetValueOrDefault(false))
+                                {
+                                    localreader.hasKeycard = true;
+                                }
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
                                 localreader.isGuard = true;
-                                if (isded)
-                                {
-                                    localreader.isDead = true;
-                                }
                             }
                             else
                             {
+                                if (!localreader.hasKeycard.GetValueOrDefault(false))
+                                {
+                                    localreader.hasKeycard = true;
+                                }
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
                             }
                         }
@@ -475,23 +474,15 @@ internal class WorldCheatsModule : AstroEvents
                         {
                             if (!localreader.isGuard.GetValueOrDefault(false))
                             {
-                                bool isded = localreader.isDead.GetValueOrDefault(false);
-                                if(isded)
-                                {
-                                    localreader.isDead = false;
-                                }
                                 localreader.isGuard = true;
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
                                 localreader.isGuard = false;
-                                if (isded)
-                                {
-                                    localreader.isDead = true;
-                                }
                             }
                             else
                             {
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
                             }
+
                         }
                     });
                     CustomSubMenu.AddButton("Make Prisoners Wanted", () => { PrisonEscape.MarkPrisonersAsWanted(); });

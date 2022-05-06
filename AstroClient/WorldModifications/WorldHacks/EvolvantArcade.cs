@@ -81,7 +81,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             gems = 225; // Required amount to buy all 3 perks.
             Patch_PatronStuff();
             HasSubscribed = true;
-            isCurrentWorld = false;
+            isCurrentWorld = true;
         }
 
 

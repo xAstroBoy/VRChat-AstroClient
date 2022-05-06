@@ -108,6 +108,7 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\ImageRenderCameraReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronEventsLists.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\DrinkingNight\DrinkingNight_NormalPlusReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DreamWaves\DreamWaves_WhiteListManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />
@@ -500,6 +501,7 @@
     <Compile Include="Tools\UdonEditor\UdonVariableGenerator.cs" />
     <Compile Include="WorldModifications\WorldHacks\BeyondDarkness.cs" />
     <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub2Lobby.cs" />
+    <Compile Include="WorldModifications\WorldHacks\DrinkingNight.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceEjectPlayer.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceVotePlayer.cs" />
