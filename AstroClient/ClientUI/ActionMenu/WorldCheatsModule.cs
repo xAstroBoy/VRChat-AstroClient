@@ -446,11 +446,20 @@ internal class WorldCheatsModule : AstroEvents
                         var localreader = PrisonEscape.GetLocalReader();
                         if (localreader != null)
                         {
-                            if (localreader.isGuard.GetValueOrDefault(false))
+                            if (!localreader.isGuard.GetValueOrDefault(false))
                             {
+                                bool isded = localreader.isDead.GetValueOrDefault(false);
+                                if (isded)
+                                {
+                                    localreader.isDead = false;
+                                }
                                 localreader.isGuard = false;
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
                                 localreader.isGuard = true;
+                                if (isded)
+                                {
+                                    localreader.isDead = true;
+                                }
                             }
                             else
                             {
@@ -460,14 +469,24 @@ internal class WorldCheatsModule : AstroEvents
                     });
                     CustomSubMenu.AddButton("Click Gate Button as Guard", () =>
                     {
+
                         var localreader = PrisonEscape.GetLocalReader();
                         if (localreader != null)
                         {
                             if (!localreader.isGuard.GetValueOrDefault(false))
                             {
+                                bool isded = localreader.isDead.GetValueOrDefault(false);
+                                if(isded)
+                                {
+                                    localreader.isDead = false;
+                                }
                                 localreader.isGuard = true;
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
                                 localreader.isGuard = false;
+                                if (isded)
+                                {
+                                    localreader.isDead = true;
+                                }
                             }
                             else
                             {
