@@ -13,7 +13,6 @@ using AstroClient.WorldModifications.WorldHacks.Ostinyo;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
-using Steamworks;
 using UnityEngine;
 
 namespace AstroClient.ClientUI.ActionMenu;
@@ -34,167 +33,168 @@ internal class WorldCheatsModule : AstroEvents
             #region Super Tower Defense
 
             if (WorldUtils.WorldID == WorldIds.Super_Tower_defense)
-            {  
+            {
                 CustomSubMenu.AddSubMenu("Fixes", () =>
                     {
                         CustomSubMenu.AddButton("Fix Towers And Respawn", () => { SuperTowerDefense.FixTheTowers(true); });
                         CustomSubMenu.AddButton("Fix Towers No Respawn", () => { SuperTowerDefense.FixTheTowers(false); });
                     });
 
-                    CustomSubMenu.AddSubMenu("Protections", () =>
-                    {
-                        CustomSubMenu.AddToggle("Block hammer Return Button", SuperTowerDefense.BlockHammerReturnButton, ToggleValue => { SuperTowerDefense.BlockHammerReturnButton = ToggleValue; });
-                        CustomSubMenu.AddToggle("Block Wrenchs Return Buttons", SuperTowerDefense.BlockWrenchReturnButton, ToggleValue => { SuperTowerDefense.BlockWrenchReturnButton = ToggleValue; });
-                        CustomSubMenu.AddToggle("Freeze hammer", SuperTowerDefense.FreezeHammer, ToggleValue => { SuperTowerDefense.FreezeHammer = ToggleValue; });
-                        CustomSubMenu.AddToggle("Crazy hammer", SuperTowerDefense.CrazyHammer, ToggleValue => { SuperTowerDefense.CrazyHammer = ToggleValue; });
-                        CustomSubMenu.AddToggle("AntiTheft hammer", SuperTowerDefense.Hammer_AntiTheft, ToggleValue => { SuperTowerDefense.Hammer_AntiTheft = ToggleValue; });
+                CustomSubMenu.AddSubMenu("Protections", () =>
+                {
+                    CustomSubMenu.AddToggle("Block hammer Return Button", SuperTowerDefense.BlockHammerReturnButton, ToggleValue => { SuperTowerDefense.BlockHammerReturnButton = ToggleValue; });
+                    CustomSubMenu.AddToggle("Block Wrenchs Return Buttons", SuperTowerDefense.BlockWrenchReturnButton, ToggleValue => { SuperTowerDefense.BlockWrenchReturnButton = ToggleValue; });
+                    CustomSubMenu.AddToggle("Freeze hammer", SuperTowerDefense.FreezeHammer, ToggleValue => { SuperTowerDefense.FreezeHammer = ToggleValue; });
+                    CustomSubMenu.AddToggle("Crazy hammer", SuperTowerDefense.CrazyHammer, ToggleValue => { SuperTowerDefense.CrazyHammer = ToggleValue; });
+                    CustomSubMenu.AddToggle("AntiTheft hammer", SuperTowerDefense.Hammer_AntiTheft, ToggleValue => { SuperTowerDefense.Hammer_AntiTheft = ToggleValue; });
 
-                        CustomSubMenu.AddToggle("Freeze Red Wrench", SuperTowerDefense.FreezeRedWrench, ToggleValue => { SuperTowerDefense.FreezeRedWrench = ToggleValue; });
-                        CustomSubMenu.AddToggle("Freeze Blue Wrench", SuperTowerDefense.FreezeBlueWrench, ToggleValue => { SuperTowerDefense.FreezeBlueWrench = ToggleValue; });
-                        CustomSubMenu.AddToggle("Freeze All Towers", SuperTowerDefense.FreezeAllTowers, ToggleValue => { SuperTowerDefense.FreezeAllTowers = ToggleValue; });
-                        CustomSubMenu.AddSubMenu("Towers Freeze Panel", () =>
-                        {
-                            CustomSubMenu.AddToggle("Freeze Cannon Tower", SuperTowerDefense.FreezeCannonTower, ToggleValue => { SuperTowerDefense.FreezeCannonTower = ToggleValue; });
-                            CustomSubMenu.AddToggle("Freeze Radar Tower", SuperTowerDefense.FreezeRadarTower, ToggleValue => { SuperTowerDefense.FreezeRadarTower = ToggleValue; });
-                            CustomSubMenu.AddToggle("Freeze Lance Tower", SuperTowerDefense.FreezeLanceTower, ToggleValue => { SuperTowerDefense.FreezeLanceTower = ToggleValue; });
-                            CustomSubMenu.AddToggle("Freeze Slower Tower", SuperTowerDefense.FreezeSlowerTower, ToggleValue => { SuperTowerDefense.FreezeSlowerTower = ToggleValue; });
-                            CustomSubMenu.AddToggle("Freeze Rocket Launcher Tower", SuperTowerDefense.FreezeRocketLauncherTower, ToggleValue => { SuperTowerDefense.FreezeRocketLauncherTower = ToggleValue; });
-                            CustomSubMenu.AddToggle("Freeze MiniGun Tower", SuperTowerDefense.FreezeMinigunTower, ToggleValue => { SuperTowerDefense.FreezeMinigunTower = ToggleValue; });
-                        });
-                    });
-                    CustomSubMenu.AddSubMenu("Tool Mods", () =>
+                    CustomSubMenu.AddToggle("Freeze Red Wrench", SuperTowerDefense.FreezeRedWrench, ToggleValue => { SuperTowerDefense.FreezeRedWrench = ToggleValue; });
+                    CustomSubMenu.AddToggle("Freeze Blue Wrench", SuperTowerDefense.FreezeBlueWrench, ToggleValue => { SuperTowerDefense.FreezeBlueWrench = ToggleValue; });
+                    CustomSubMenu.AddToggle("Freeze All Towers", SuperTowerDefense.FreezeAllTowers, ToggleValue => { SuperTowerDefense.FreezeAllTowers = ToggleValue; });
+                    CustomSubMenu.AddSubMenu("Towers Freeze Panel", () =>
                     {
-                        CustomSubMenu.AddToggle("Repair Life Wrenches", SuperTowerDefense.RepairLifeWrenches, ToggleValue => { SuperTowerDefense.RepairLifeWrenches = ToggleValue; });
-                        CustomSubMenu.AddToggle("Lose Life Hammer", SuperTowerDefense.LoseLifeHammer, ToggleValue => { SuperTowerDefense.LoseLifeHammer = ToggleValue; });
+                        CustomSubMenu.AddToggle("Freeze Cannon Tower", SuperTowerDefense.FreezeCannonTower, ToggleValue => { SuperTowerDefense.FreezeCannonTower = ToggleValue; });
+                        CustomSubMenu.AddToggle("Freeze Radar Tower", SuperTowerDefense.FreezeRadarTower, ToggleValue => { SuperTowerDefense.FreezeRadarTower = ToggleValue; });
+                        CustomSubMenu.AddToggle("Freeze Lance Tower", SuperTowerDefense.FreezeLanceTower, ToggleValue => { SuperTowerDefense.FreezeLanceTower = ToggleValue; });
+                        CustomSubMenu.AddToggle("Freeze Slower Tower", SuperTowerDefense.FreezeSlowerTower, ToggleValue => { SuperTowerDefense.FreezeSlowerTower = ToggleValue; });
+                        CustomSubMenu.AddToggle("Freeze Rocket Launcher Tower", SuperTowerDefense.FreezeRocketLauncherTower, ToggleValue => { SuperTowerDefense.FreezeRocketLauncherTower = ToggleValue; });
+                        CustomSubMenu.AddToggle("Freeze MiniGun Tower", SuperTowerDefense.FreezeMinigunTower, ToggleValue => { SuperTowerDefense.FreezeMinigunTower = ToggleValue; });
                     });
-                    CustomSubMenu.AddSubMenu("Cheats", () =>
+                });
+                CustomSubMenu.AddSubMenu("Tool Mods", () =>
+                {
+                    CustomSubMenu.AddToggle("Repair Life Wrenches", SuperTowerDefense.RepairLifeWrenches, ToggleValue => { SuperTowerDefense.RepairLifeWrenches = ToggleValue; });
+                    CustomSubMenu.AddToggle("Lose Life Hammer", SuperTowerDefense.LoseLifeHammer, ToggleValue => { SuperTowerDefense.LoseLifeHammer = ToggleValue; });
+                });
+                CustomSubMenu.AddSubMenu("Cheats", () =>
+                {
+                    CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Remove a Heart", () => { SuperTowerDefense.LoseHealth?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
+                    CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
+                    CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
+                    CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
+                    //CustomSubMenu.AddToggle("Bypass Tower Collider", SuperTowerDefense.IgnoreTowersCollidersPlacement, ToggleValue => { SuperTowerDefense.IgnoreTowersCollidersPlacement = ToggleValue; });
+                });
+                CustomSubMenu.AddSubMenu("Towers Editor", () =>
+                {
+                    CustomSubMenu.AddSubMenu("Tower Range", () =>
                     {
-                        CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Remove a Heart", () => { SuperTowerDefense.LoseHealth?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
-                        CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
-                        CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
-                        CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
-                        //CustomSubMenu.AddToggle("Bypass Tower Collider", SuperTowerDefense.IgnoreTowersCollidersPlacement, ToggleValue => { SuperTowerDefense.IgnoreTowersCollidersPlacement = ToggleValue; });
+                        CustomSubMenu.AddButton("+0.5f Range", () => { SuperTowerDefense.AddTowerRange(0.5f); });
+                        CustomSubMenu.AddButton("+1f Range", () => { SuperTowerDefense.AddTowerRange(1f); });
+                        CustomSubMenu.AddButton("-0.5f Range", () => { SuperTowerDefense.RemoveTowerRange(0.5f); });
+                        CustomSubMenu.AddButton("-1f Range", () => { SuperTowerDefense.RemoveTowerRange(1f); });
+                        CustomSubMenu.AddButton("9999 Range", () => { SuperTowerDefense.SetTowersRange(9999f); });
+                        CustomSubMenu.AddButton("Reset Range", () => { SuperTowerDefense.RestoreTowerRange(); });
                     });
-                    CustomSubMenu.AddSubMenu("Towers Editor", () =>
-                    {
-                        CustomSubMenu.AddSubMenu("Tower Range", () =>
-                        {
-                            CustomSubMenu.AddButton("+0.5f Range", () => { SuperTowerDefense.AddTowerRange(0.5f); });
-                            CustomSubMenu.AddButton("+1f Range", () => { SuperTowerDefense.AddTowerRange(1f); });
-                            CustomSubMenu.AddButton("-0.5f Range", () => { SuperTowerDefense.RemoveTowerRange(0.5f); });
-                            CustomSubMenu.AddButton("-1f Range", () => { SuperTowerDefense.RemoveTowerRange(1f); });
-                            CustomSubMenu.AddButton("9999 Range", () => { SuperTowerDefense.SetTowersRange(9999f); });
-                            CustomSubMenu.AddButton("Reset Range", () => { SuperTowerDefense.RestoreTowerRange(); });
-                        });
 
-                        CustomSubMenu.AddSubMenu("Tower Speed", () =>
-                        {
-                            CustomSubMenu.AddButton("+0.5f Speed", () => { SuperTowerDefense.AddTowerSpeed(0.5f); });
-                            CustomSubMenu.AddButton("+1f Speed", () => { SuperTowerDefense.AddTowerSpeed(1f); });
-                            CustomSubMenu.AddButton("-0.5f Speed", () => { SuperTowerDefense.RemoveTowerSpeed(0.5f); });
-                            CustomSubMenu.AddButton("-1f Speed", () => { SuperTowerDefense.RemoveTowerSpeed(1f); });
-                            CustomSubMenu.AddButton("9999 Speed", () => { SuperTowerDefense.SetTowerSpeed(9999f); });
-                            CustomSubMenu.AddButton("Reset Speed", () => { SuperTowerDefense.RestoreTowerSpeed(); });
-                        });
-                    });
-                    CustomSubMenu.AddSubMenu("Auto Starter Control", () =>
+                    CustomSubMenu.AddSubMenu("Tower Speed", () =>
                     {
-                        CustomSubMenu.AddButton("Place AutoStarter", () => { SuperTowerDefense.AutoStarter_Place?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Activate AutoStarter", () => { SuperTowerDefense.AutoStarter_SetActive?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Deactivate AutoStarter", () => { SuperTowerDefense.AutoStarter_SetInactive?.InvokeBehaviour(); });
-                        CustomSubMenu.AddToggle("Keep AutoStart ON", SuperTowerDefense.KeepAutoStarterActive.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.KeepAutoStarterActive = ToggleValue; });
-                        CustomSubMenu.AddToggle("Keep AutoStart OFF", SuperTowerDefense.KeepAutoStarterInactive.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.KeepAutoStarterInactive = ToggleValue; });
+                        CustomSubMenu.AddButton("+0.5f Speed", () => { SuperTowerDefense.AddTowerSpeed(0.5f); });
+                        CustomSubMenu.AddButton("+1f Speed", () => { SuperTowerDefense.AddTowerSpeed(1f); });
+                        CustomSubMenu.AddButton("-0.5f Speed", () => { SuperTowerDefense.RemoveTowerSpeed(0.5f); });
+                        CustomSubMenu.AddButton("-1f Speed", () => { SuperTowerDefense.RemoveTowerSpeed(1f); });
+                        CustomSubMenu.AddButton("9999 Speed", () => { SuperTowerDefense.SetTowerSpeed(9999f); });
+                        CustomSubMenu.AddButton("Reset Speed", () => { SuperTowerDefense.RestoreTowerSpeed(); });
                     });
-                    CustomSubMenu.AddSubMenu("Bank Mods", () =>
-                    {
-                        CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
-                        CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
-                        CustomSubMenu.AddToggle("Anti-negative Balance", SuperTowerDefense.FixBalanceNegative.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FixBalanceNegative = ToggleValue; });
+                });
+                CustomSubMenu.AddSubMenu("Auto Starter Control", () =>
+                {
+                    CustomSubMenu.AddButton("Place AutoStarter", () => { SuperTowerDefense.AutoStarter_Place?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Activate AutoStarter", () => { SuperTowerDefense.AutoStarter_SetActive?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Deactivate AutoStarter", () => { SuperTowerDefense.AutoStarter_SetInactive?.InvokeBehaviour(); });
+                    CustomSubMenu.AddToggle("Keep AutoStart ON", SuperTowerDefense.KeepAutoStarterActive.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.KeepAutoStarterActive = ToggleValue; });
+                    CustomSubMenu.AddToggle("Keep AutoStart OFF", SuperTowerDefense.KeepAutoStarterInactive.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.KeepAutoStarterInactive = ToggleValue; });
+                });
+                CustomSubMenu.AddSubMenu("Bank Mods", () =>
+                {
+                    CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
+                    CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
+                    CustomSubMenu.AddToggle("Anti-negative Balance", SuperTowerDefense.FixBalanceNegative.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FixBalanceNegative = ToggleValue; });
 
-                        CustomSubMenu.AddButton("Set 0 Money", () =>
-                        {
-                            if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = 0;
-                        });
-                        CustomSubMenu.AddButton("Add 10000 Money", () =>
-                        {
-                            if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 10000;
-                        });
-                        CustomSubMenu.AddButton("Add 100000 Money", () =>
-                        {
-                            if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 100000;
-                        });
-                        CustomSubMenu.AddButton("Add 1000000 Money", () =>
-                        {
-                            if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 1000000;
-                        });
-                        CustomSubMenu.AddButton("Add 10000000 Money", () =>
-                        {
-                            if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 10000000;
-                        });
-                        CustomSubMenu.AddButton("Set 999999999 Money", () =>
-                        {
-                            if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = 999999999;
-                        });
-                        CustomSubMenu.AddButton($"Set {int.MaxValue} Money", () =>
-                        {
-                            if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = int.MaxValue;
-                        });
-                    });
-                    CustomSubMenu.AddSubMenu("Health Mods", () =>
+                    CustomSubMenu.AddButton("Set 0 Money", () =>
                     {
-                        CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Heart +1", () =>
-                        {
-                            if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
-                            {
-                                SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 1;
-                                SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 1;
-                            }
-                        });
-                        CustomSubMenu.AddButton("Heart +10", () =>
-                        {
-                            if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
-                            {
-                                SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 10;
-                                SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 10;
-                            }
-                        });
-                        CustomSubMenu.AddButton("Heart +100", () =>
-                        {
-                            if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
-                            {
-                                SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 100;
-                                SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 100;
-                            }
-                        });
-                        CustomSubMenu.AddButton("Heart -1", () =>
-                        {
-                            if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
-                            {
-                                SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 1;
-                                SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 1;
-                            }
-                        });
-                        CustomSubMenu.AddButton("Heart -10", () =>
-                        {
-                            if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
-                            {
-                                SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 10;
-                                SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 10;
-                            }
-                        });
-                        CustomSubMenu.AddButton("Heart -100", () =>
-                        {
-                            if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
-                            {
-                                SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 100;
-                                SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 100;
-                            }
-                        });
+                        if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = 0;
                     });
+                    CustomSubMenu.AddButton("Add 10000 Money", () =>
+                    {
+                        if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 10000;
+                    });
+                    CustomSubMenu.AddButton("Add 100000 Money", () =>
+                    {
+                        if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 100000;
+                    });
+                    CustomSubMenu.AddButton("Add 1000000 Money", () =>
+                    {
+                        if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 1000000;
+                    });
+                    CustomSubMenu.AddButton("Add 10000000 Money", () =>
+                    {
+                        if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = SuperTowerDefense.BankEditor.Money.Value + 10000000;
+                    });
+                    CustomSubMenu.AddButton("Set 999999999 Money", () =>
+                    {
+                        if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = 999999999;
+                    });
+                    CustomSubMenu.AddButton($"Set {int.MaxValue} Money", () =>
+                    {
+                        if (SuperTowerDefense.BankEditor != null && SuperTowerDefense.BankEditor.Money.HasValue) SuperTowerDefense.BankEditor.Money = int.MaxValue;
+                    });
+                });
+                CustomSubMenu.AddSubMenu("Health Mods", () =>
+                {
+                    CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Heart +1", () =>
+                    {
+                        if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
+                        {
+                            SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 1;
+                            SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 1;
+                        }
+                    });
+                    CustomSubMenu.AddButton("Heart +10", () =>
+                    {
+                        if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
+                        {
+                            SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 10;
+                            SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 10;
+                        }
+                    });
+                    CustomSubMenu.AddButton("Heart +100", () =>
+                    {
+                        if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
+                        {
+                            SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value + 100;
+                            SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value + 100;
+                        }
+                    });
+                    CustomSubMenu.AddButton("Heart -1", () =>
+                    {
+                        if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
+                        {
+                            SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 1;
+                            SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 1;
+                        }
+                    });
+                    CustomSubMenu.AddButton("Heart -10", () =>
+                    {
+                        if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
+                        {
+                            SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 10;
+                            SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 10;
+                        }
+                    });
+                    CustomSubMenu.AddButton("Heart -100", () =>
+                    {
+                        if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
+                        {
+                            SuperTowerDefense.HealthEditor.CurrentHealth = SuperTowerDefense.HealthEditor.CurrentHealth.Value - 100;
+                            SuperTowerDefense.HealthEditor.TimesBoughtLives = SuperTowerDefense.HealthEditor.TimesBoughtLives.Value - 100;
+                        }
+                    });
+                });
             }
+
             #endregion Super Tower Defense
 
             #region AmongUS
@@ -235,7 +235,7 @@ internal class WorldCheatsModule : AstroEvents
                     ToggleValue => { ClickerGame.CubeAutoClicker = ToggleValue; });
             }
 
-            #endregion
+            #endregion ClickerGame
 
             #region BOMBERio
 
@@ -262,10 +262,9 @@ internal class WorldCheatsModule : AstroEvents
                 });
 
                 CustomSubMenu.AddToggle("Bypass Outside Circle Speed", BOMBERio.BypassOutsideCircleSpeed, ToggleValue => { BOMBERio.BypassOutsideCircleSpeed = ToggleValue; });
-
             }
 
-            #endregion
+            #endregion BOMBERio
 
             #region Kitchen Cooks
 
@@ -280,13 +279,10 @@ internal class WorldCheatsModule : AstroEvents
                 {
                     KitchenCooksCheats.OnlySelfHasPatreonPerk = false;
                     KitchenCooksCheats.EveryoneHasPatreonPerk = ToggleValue;
-                    
                 });
-
             }
 
-            
-            #endregion
+            #endregion Kitchen Cooks
 
             #region PuttPuttPond
 
@@ -298,7 +294,7 @@ internal class WorldCheatsModule : AstroEvents
                     ToggleValue => { PuttPuttPond.RainbowBall = ToggleValue; });
             }
 
-            #endregion
+            #endregion PuttPuttPond
 
             #region Ghost Game
 
@@ -338,7 +334,6 @@ internal class WorldCheatsModule : AstroEvents
 
                     CustomSubMenu.AddSubMenu("Armory Manual Control", () =>
                     {
-
                         CustomSubMenu.AddButton("Disable Lock (Clicks it 5 times!)",
                             () => { GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5); });
                         CustomSubMenu.AddButton("Start Armory Weapons crafting.", () =>
@@ -362,7 +357,7 @@ internal class WorldCheatsModule : AstroEvents
                 });
             }
 
-            #endregion
+            #endregion Ghost Game
 
             #region BeyondDarkness
 
@@ -371,9 +366,9 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddToggle("Skip Bedroom Puzzle", BeyondDarkness.SkipBedroomPuzzle, ToggleValue => { BeyondDarkness.SkipBedroomPuzzle = ToggleValue; });
             }
 
-            #endregion
+            #endregion BeyondDarkness
 
-            #region  Prison Escape
+            #region Prison Escape
 
             if (WorldUtils.WorldID == WorldIds.PrisonEscape)
             {
@@ -395,12 +390,10 @@ internal class WorldCheatsModule : AstroEvents
                     }
                     if (PrisonEscape.WorldSettings_Music_Toggle != null)
                     {
-
                         CustomSubMenu.AddToggle("Toggle Music", PrisonEscape.WorldSettings_Music.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_Music = ToggleValue; });
                     }
                     if (PrisonEscape.WorldSettings_VisualHitBoxes_Toggle != null)
                     {
-
                         CustomSubMenu.AddToggle("Toggle Visual Hitbox", PrisonEscape.WorldSettings_VisualHitBoxes.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_VisualHitBoxes = ToggleValue; });
                     }
                     if (PrisonEscape.WorldSettings_GoldenGuns_Toggle != null)
@@ -419,51 +412,73 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddButton("Toggle Double Points", () => { PrisonEscape.ToggleDoublePoints.InvokeBehaviour(); });
                     //CustomSubMenu.AddToggle("Everyone Has Gold Gun", PrisonEscape.EveryoneHasGoldenGuns, ToggleValue => { PrisonEscape.EveryoneHasGoldenGuns = ToggleValue; });
                     // CustomSubMenu.AddToggle("Everyone Has Double Points", PrisonEscape.EveryoneHasGoldenGunCamos, ToggleValue => { PrisonEscape.EveryoneHasGoldenGunCamos = ToggleValue; });
-
                 });
                 CustomSubMenu.AddSubMenu("Game Settings", () =>
                 {
-                
                     CustomSubMenu.AddToggle("Drop Knifes after kill", PrisonEscape.DropKnifeAfterKill, ToggleValue => { PrisonEscape.DropKnifeAfterKill = ToggleValue; });
                     CustomSubMenu.AddToggle("Allow guard Role to use vents", PrisonEscape.GuardsAreAllowedToUseVents, ToggleValue => { PrisonEscape.GuardsAreAllowedToUseVents = ToggleValue; });
                     CustomSubMenu.AddToggle("Free Crates Items", PrisonEscape.FreeCratesItems, ToggleValue => { PrisonEscape.FreeCratesItems = ToggleValue; });
                 });
-                CustomSubMenu.AddSubMenu("Game Hacks", () =>
+                CustomSubMenu.AddSubMenu("Game Cheats", () =>
                 {
-                    CustomSubMenu.AddToggle("Everyone Has Gold Guns", PrisonEscape.EveryoneHasGoldenGunCamos, ToggleValue => { PrisonEscape.EveryoneHasGoldenGunCamos = ToggleValue; });
+                    CustomSubMenu.AddToggle("Show Role, Health & Wanted ", PrisonEscape.ShowRoles, ToggleValue => { PrisonEscape.ShowRoles = ToggleValue; });
 
-                    CustomSubMenu.AddButton("Make Prisoners Wanted", () => { PrisonEscape.MarkPrisonersAsWanted(); });
+                    CustomSubMenu.AddToggle("Everyone Has Gold Guns", PrisonEscape.EveryoneHasGoldenGunCamos, ToggleValue => { PrisonEscape.EveryoneHasGoldenGunCamos = ToggleValue; });
 
                     var ESP = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
                     if (ESP != null)
                     {
                         CustomSubMenu.AddToggle("GodMode", ESP.GodMode, ToggleValue => { ESP.GodMode = ToggleValue; });
-
                     }
 
-
                     CustomSubMenu.AddToggle("Take Keycard On Wanted", PrisonEscape.TakeKeyCardOnWanted, ToggleValue => { PrisonEscape.TakeKeyCardOnWanted = ToggleValue; });
-                    CustomSubMenu.AddButton("Click Gate Button", () => { PrisonEscape.GateInteraction.InvokeBehaviour(); });
-                    
-                  
-
 
                     CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.LargeCrateESP, ToggleValue => { PrisonEscape.LargeCrateESP = ToggleValue; });
                     CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.SmallCrateESP, ToggleValue => { PrisonEscape.SmallCrateESP = ToggleValue; });
 
                     CustomSubMenu.AddToggle("Toggle Pickup ESP", VRChat_Map_ESP_Menu.Toggle_Pickup_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = ToggleValue; }, null, false);
                     CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
-
-                    var localreader = PrisonEscape.GetLocalReader();
-                    if (localreader != null)
-                    {
-                        if (!localreader.hasKeycard.GetValueOrDefault(false))
-                        {
-                            CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
-                        }
-                    }
-
                 });
+                CustomSubMenu.AddSubMenu("Game Events", () =>
+                {
+                    CustomSubMenu.AddButton("Click Gate Button as Prisoner", () =>
+                    {
+                        var localreader = PrisonEscape.GetLocalReader();
+                        if (localreader != null)
+                        {
+                            if (localreader.isGuard.GetValueOrDefault(false))
+                            {
+                                localreader.isGuard = false;
+                                PrisonEscape.GateInteraction.InvokeBehaviour();
+                                localreader.isGuard = true;
+                            }
+                            else
+                            {
+                                PrisonEscape.GateInteraction.InvokeBehaviour();
+                            }
+                        }
+                    });
+                    CustomSubMenu.AddButton("Click Gate Button as Guard", () =>
+                    {
+                        var localreader = PrisonEscape.GetLocalReader();
+                        if (localreader != null)
+                        {
+                            if (!localreader.isGuard.GetValueOrDefault(false))
+                            {
+                                localreader.isGuard = true;
+                                PrisonEscape.GateInteraction.InvokeBehaviour();
+                                localreader.isGuard = false;
+                            }
+                            else
+                            {
+                                PrisonEscape.GateInteraction.InvokeBehaviour();
+                            }
+                        }
+                    });
+                    CustomSubMenu.AddButton("Make Prisoners Wanted", () => { PrisonEscape.MarkPrisonersAsWanted(); });
+                    CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
+                });
+
                 if (UserIdentifiers.is_xAstroBoy)
                 {
                     CustomSubMenu.AddButton("xAstroBoy Preset", () =>
@@ -475,7 +490,7 @@ internal class WorldCheatsModule : AstroEvents
                         }
                         PrisonEscape.TakeKeyCardOnWanted = true;
                         VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = true;
-                        PrisonEscape.ShowRoles  = true;
+                        PrisonEscape.ShowRoles = true;
                         PrisonEscape.LargeCrateESP = true;
                         PrisonEscape.SmallCrateESP = true;
                         PrisonEscape.FreeCratesItems = true;
@@ -486,12 +501,12 @@ internal class WorldCheatsModule : AstroEvents
                         PrisonEscape.WorldSettings_Music = false;
                         PrisonEscape.WorldSettings_Avatars = false;
                     });
-
                 }
             }
-            #endregion
 
-            #region  PuttPuttQuest & PuttPuttQuest Night
+            #endregion Prison Escape
+
+            #region PuttPuttQuest & PuttPuttQuest Night
 
             if (WorldUtils.WorldID == WorldIds.PuttPuttQuest || WorldUtils.WorldID == WorldIds.PuttPuttQuest_Night)
             {
@@ -499,9 +514,10 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddToggle("Rainbow Golf ball", PuttPuttQuest.RainbowBall, ToggleValue => { PuttPuttQuest.RainbowBall = ToggleValue; });
             }
 
-            #endregion
+            #endregion PuttPuttQuest & PuttPuttQuest Night
 
             #region FBT Heaven
+
             if (WorldUtils.WorldID == WorldIds.FBTHeaven)
             {
                 CustomSubMenu.AddButton("Lock Room 1", () => { FBTHeaven.LockDoor(1); });
@@ -515,15 +531,12 @@ internal class WorldCheatsModule : AstroEvents
 
                 CustomSubMenu.AddButton("Lock Room 4", () => { FBTHeaven.LockDoor(4); });
                 CustomSubMenu.AddButton("Unlock Room 4", () => { FBTHeaven.UnlockDoor(4); });
-
-
             }
 
-
-
-            #endregion
+            #endregion FBT Heaven
 
             #region Just B Club
+
             if (WorldUtils.WorldID == WorldIds.JustBClub)
             {
                 CustomSubMenu.AddToggle("Rainbow Lights", JustBClub1.IsRainbowEnabled, ToggleValue => { JustBClub1.IsRainbowEnabled = ToggleValue; });
@@ -538,18 +551,15 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddToggle("Freeze Locked Door", JustBClub1.IsFreezeLockEnabed, ToggleValue => { JustBClub1.IsFreezeLockEnabed = ToggleValue; });
                 CustomSubMenu.AddToggle("Freeze Unlocked Door", JustBClub1.IsFreezeUnlockEnabed, ToggleValue => { JustBClub1.IsFreezeUnlockEnabed = ToggleValue; });
 
-                if(JustBClub1.EjectNonVips != null)
+                if (JustBClub1.EjectNonVips != null)
                 {
                     CustomSubMenu.AddButton("Eject Non VIPs (VIP Room)", () => { JustBClub1.EjectNonVips.InvokeBehaviour(); });
-
                 }
             }
 
+            #endregion Just B Club
 
-
-            #endregion
-
-            #region  Kmart Express
+            #region Kmart Express
 
             if (WorldUtils.WorldID == WorldIds.KMartExpress_1)
             {
@@ -558,18 +568,15 @@ internal class WorldCheatsModule : AstroEvents
 
                 CustomSubMenu.AddToggle("Remove Lock for Every new player join", Kmart.RemoveBlocksForJoinedPlayers, ToggleValue =>
                 {
-                    if(ToggleValue)
+                    if (ToggleValue)
                     {
                         Kmart.BypassKmartRestrictions();
                     }
                     Kmart.RemoveBlocksForJoinedPlayers = ToggleValue;
                 });
-
             }
 
-
-
-            #endregion
+            #endregion Kmart Express
         }, Icons.thief);
 
         Log.Write("World Module is ready!", Color.Green);

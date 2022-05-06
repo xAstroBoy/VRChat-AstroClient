@@ -89,14 +89,10 @@ namespace AstroClient.ClientUI.Menu.ESP
 
         private static void OnPlayerJoined(Player player)
         {
-            MiscUtils.DelayFunction(1, () =>
+            if (Toggle_Player_ESP && player != null && player != GameInstances.LocalPlayer.GetPlayer() && !player.gameObject.GetComponent<PlayerESP>())
             {
-                if (Toggle_Player_ESP && player != null  && player != GameInstances.LocalPlayer.GetPlayer() && !player.gameObject.GetComponent<PlayerESP>())
-                {
-                        player.gameObject.GetOrAddComponent<PlayerESP>();
-                }
-            });
-
+                player.gameObject.GetOrAddComponent<PlayerESP>();
+            }
         }
 
         private static void AddESPToAllPlayers()

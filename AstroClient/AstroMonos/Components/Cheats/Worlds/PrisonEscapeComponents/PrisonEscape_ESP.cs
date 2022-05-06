@@ -213,6 +213,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                         healthTag.ShowTag = true;
                         healthTag.Text = $"Health : {AssignedReader.health}";
                     }
+                    ESPColor = _ESPColor;
                 }
             }
             else
