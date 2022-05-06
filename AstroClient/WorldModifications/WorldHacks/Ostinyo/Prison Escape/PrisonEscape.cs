@@ -86,6 +86,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 _IsCurrentWorld = value;
                 if (!value)
                 {
+                    OnShowRolesPropertyChanged = null;
                     ShowRoles = false;
                     MoneyInteraction = null;
                     GetRedCard = null;
