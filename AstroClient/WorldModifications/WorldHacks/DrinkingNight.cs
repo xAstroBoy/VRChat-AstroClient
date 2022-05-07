@@ -3,6 +3,7 @@ using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.Tools.UdonSearcher;
+using UnityEngine.AI;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -90,6 +91,13 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+        private static GameObject VIPDoor_1 { get; set; }
+        private static GameObject VIPDoor_2 { get; set; }
+        private static GameObject VIPDoor_3 { get; set; }
+        private static GameObject VIPDoor_4 { get; set; }
+        private static GameObject PlayerButtons { get; set; }
+
+
         private static bool _HasSubscribed = false;
         private static bool HasSubscribed
         {
@@ -102,13 +110,14 @@ namespace AstroClient.WorldModifications.WorldHacks
                     {
 
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        ClientEventActions.OnUpdate += OnUpdate;
 
                     }
                     else
                     {
 
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
+                        ClientEventActions.OnUpdate -= OnUpdate;
                     }
                 }
                 _HasSubscribed = value;
@@ -119,6 +128,46 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
 
             HasSubscribed = false;
+        }
+
+        private static void OnUpdate()
+        {
+            if (VIPDoor_1 != null)
+            {
+                if (!VIPDoor_1.active)
+                {
+                    VIPDoor_1.SetActive(true);
+                }
+            }
+            if (VIPDoor_2 != null)
+            {
+                if (!VIPDoor_2.active)
+                {
+                    VIPDoor_2.SetActive(true);
+                }
+            }
+            if (VIPDoor_3 != null)
+            {
+                if (!VIPDoor_3.active)
+                {
+                    VIPDoor_3.SetActive(true);
+                }
+            }
+            if (VIPDoor_4 != null)
+            {
+                if (!VIPDoor_4.active)
+                {
+                    VIPDoor_4.SetActive(true);
+                }
+            }
+            if (PlayerButtons != null)
+            {
+                if (!PlayerButtons.active)
+                {
+                    PlayerButtons.SetActive(true);
+                }
+            }
+
         }
 
         internal static void InitButtons(QMGridTab main)
@@ -153,34 +202,29 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     DebugRoot.gameObject.SetActive(true);
                     DebugRoot.gameObject.SetActive(true);
-                    var VIPRoomDoor1 = DebugRoot.FindObject("Access");
-                    if (VIPRoomDoor1 != null)
+                    VIPDoor_1 = DebugRoot.FindObject("Access").gameObject;
+                    if (VIPDoor_1 != null)
                     {
-                        VIPRoomDoor1.gameObject.SetActive(true);
-                        VIPRoomDoor1.GetOrAddComponent<Enabler>();
+                        VIPDoor_1.SetActive(true);
                     }
-                    var VIPRoomDoor2 = DebugRoot.FindObject("Access other");
-                    if (VIPRoomDoor2 != null)
+                    VIPDoor_2 = DebugRoot.FindObject("Access other").gameObject;
+                    if (VIPDoor_2 != null)
                     {
-                        VIPRoomDoor2.gameObject.SetActive(true);
-                        VIPRoomDoor2.GetOrAddComponent<Enabler>();
+                        VIPDoor_2.SetActive(true);
                     }
                 }
                 var cardgame = GameLocks.FindObject("Card Game");
                 if(cardgame != null)
                 {
-                    
-                    var VIPRoomDoor3 = DebugRoot.FindObject("Enter Game Room (2)");
-                    if (VIPRoomDoor3 != null)
+                    VIPDoor_3 = cardgame.FindObject("Enter Game Room (2)").gameObject;
+                    if (VIPDoor_3 != null)
                     {
-                        VIPRoomDoor3.gameObject.SetActive(true);
-                        VIPRoomDoor3.GetOrAddComponent<Enabler>();
+                        VIPDoor_3.gameObject.SetActive(true);
                     }
-                    var VIPRoomDoor4 = DebugRoot.FindObject("Enter Game Room (3)");
-                    if (VIPRoomDoor4 != null)
+                     VIPDoor_4 = cardgame.FindObject("Enter Game Room (3)").gameObject;
+                    if (VIPDoor_4 != null)
                     {
-                        VIPRoomDoor4.gameObject.SetActive(true);
-                        VIPRoomDoor4.GetOrAddComponent<Enabler>();
+                        VIPDoor_4.gameObject.SetActive(true);
                     }
                 }
             }
@@ -208,11 +252,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var canvas = UserEnableList.FindObject("Canvas");
                 if(canvas != null)
                 {
-                    var playerbtns = canvas.FindObject("Player Buttons");
-                    if(playerbtns != null)
+                    PlayerButtons = canvas.FindObject("Player Buttons").gameObject;
+                    if(PlayerButtons != null)
                     {
-                        playerbtns.gameObject.SetActive(true);
-                        playerbtns.GetOrAddComponent<Enabler>();
+                        PlayerButtons.gameObject.SetActive(true);
+                        PlayerButtons.GetOrAddComponent<Enabler>();
                     }
                 }
             }
@@ -222,34 +266,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             isCurrentWorld = true;
         }
 
-
-        internal static string[] PatronShit { get; } =
-        {
-                    "isPatron",
-                    "bTier3",
-                    "bTier2",
-        };
-
-        private static void Patch_PatronStuff()
-        {
-            var results = UdonSearch.FindAllUdonsContainingSymbols(PatronShit);
-            foreach (var item in results)
-            {
-                foreach (var symbolname in PatronShit)
-                {
-                    var symbol = item.FindUdonVariable(symbolname);
-                    if (symbol != null)
-                    {
-                        UdonHeapEditor.PatchHeap(symbol, symbolname, true, () =>
-                        {
-                            Log.Debug($"Patched {symbol.gameObject.name} {symbolname} To True");
-                        });
-
-                    }
-                }
-
-            }
-        }
 
 
 
@@ -273,6 +289,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             else
             {
                 isCurrentWorld = false;
+                HasSubscribed = false;
                 if (CurrentMenu != null)
                 {
                     CurrentMenu.SetInteractable(false);
