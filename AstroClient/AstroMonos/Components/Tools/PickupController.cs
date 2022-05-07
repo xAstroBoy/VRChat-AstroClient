@@ -21,8 +21,8 @@ namespace AstroClient.AstroMonos.Components.Tools
     [RegisterComponent]
     public class PickupController : MonoBehaviour
     {
-        internal Action OnPickupHeld;
-        internal Action OnPickupDrop;
+        internal Action OnPickupHeld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Action OnPickupDrop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private bool _CurrentHeldStatus = false;
         private bool CurrentHeldStatus
@@ -277,46 +277,12 @@ namespace AstroClient.AstroMonos.Components.Tools
             if (!IsHeld) return;
             if (CurrentHolder == null) return;
             if (CurrentHolder.isLocal) return;
-            if (!AllowOnlySelfToGrab)
+            if (AllowOnlySelfToGrab)
             {
-                if (PickupBlocker.blockeduserids != null && PickupBlocker.blockeduserids.Count() != 0)
-                {
-                    var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
-                    if (PickupBlocker.IsPickupBlockedUser(id))
-                    {
-                        Log.Debug($"Prevented {gameObject.name} from being used from Blacklisted user {CurrentHolderDisplayName}");
-                        OnlineEditor.TakeObjectOwnership(gameObject);
-                        if (!Settings_PickupProtector.RespawnPickupToDefaultPos)
-                        {
-                            gameObject.SetPosition(gameObject.transform.position);
-                            gameObject.SetRotation(gameObject.transform.rotation);
-                        }
-                        else
-                        {
-                            if (RigidBodyController != null)
-                            {
-                                if (RigidBodyController.SyncPhysics != null)
-                                {
-                                    RigidBodyController.SyncPhysics.RespawnItem(true);
-                                }
-                                else
-                                {
-                                    gameObject.SetPosition(gameObject.transform.position);
-                                    gameObject.SetRotation(gameObject.transform.rotation);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (!CurrentHolder.isLocal)
-                    if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
-                        OnlineEditor.TakeObjectOwnership(gameObject);
+                if (!CurrentHolder.isLocal) 
+                    OnlineEditor.TakeObjectOwnership(gameObject);
                 gameObject.SetPosition(gameObject.transform.position);
                 gameObject.SetRotation(gameObject.transform.rotation);
-
             }
         }
 

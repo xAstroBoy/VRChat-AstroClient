@@ -134,6 +134,7 @@
     <Compile Include="AstroMonos\Components\Custom\Items\ColliderSuppresser.cs" />
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
     <Compile Include="AstroMonos\Components\Tools\Command_SetToTweaker.cs" />
+    <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlockerTag.cs" />
     <Compile Include="AstroMonos\Components\Tools\PedestralReader.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Developers\Kaned\KanedWIP.cs" />
     <Compile Include="Developers\Kaned\RotationFix.cs" />
     <Compile Include="ModsDetector\EmmPatcher.cs" />
+    <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlocker_Tools.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
     <Compile Include="Startup\Fixes\KeyboardPopupDeclutterer.cs" />
@@ -373,7 +375,7 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronUnlocker.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Orbit\OrbitBehaviour.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Orbit\OrbitManager_Old.cs" />
-    <Compile Include="AstroMonos\PickupBlocker.cs" />
+    <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlocker.cs" />
     <Compile Include="AstroMonos\Components\Malicious\PlayerAttacker.cs" />
     <Compile Include="AstroMonos\Components\Spoofer\PlayerSpooferUtils.cs" />
     <Compile Include="AstroMonos\Components\Spoofer\PlayerSpoofer.cs" />
