@@ -195,6 +195,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var text = TextCooldown.GetComponent<UnityEngine.UI.Text>();
                 if(text != null)
                 {
+                    text.supportRichText = true;
+                    text.resizeTextForBestFit = true;
                     text.text = $"Cooldown Removed By AstroClient \n R.I.P {WorldUtils.AuthorName} \n ????-2020";
                 }
             }
