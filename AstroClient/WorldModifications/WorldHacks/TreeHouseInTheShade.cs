@@ -221,20 +221,12 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             if(ShaderSphere != null)
             {
-                ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue); 
-                var renderer = ShaderSphere.gameObject.GetComponent<MeshRenderer>();
+                ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);; 
+                var renderer = ShaderSphere.gameObject.GetComponentInChildren<MeshRenderer>(true);
                 if(renderer != null)
                 {
-                    var bounds = renderer.bounds;
-                    if( bounds != null)
-                    {
-                        bounds.extents = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-                        bounds.max = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-                        bounds.min = new Vector3(float.MinValue, float.MinValue, float.MinValue);
-
-                        bounds.size = ShaderSphere.localScale;
-
-                    }
+                  //  renderer.bounds.SetMinMax(NegativeVector, MaxVector3);
+                    renderer.bounds.Expand(float.MaxValue);
                 }
             }
             var UpdateText = GameObjectFinder.Find("ui panel example/Canvas/UpdatesPanel/Extra Text");
