@@ -503,6 +503,7 @@
     <Compile Include="Tools\UdonEditor\UdonVariableGenerator.cs" />
     <Compile Include="WorldModifications\WorldHacks\BeyondDarkness.cs" />
     <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub2Lobby.cs" />
+    <Compile Include="WorldModifications\WorldHacks\TreeHouseInTheShade.cs" />
     <Compile Include="WorldModifications\WorldHacks\DrinkingNight.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceEjectPlayer.cs" />

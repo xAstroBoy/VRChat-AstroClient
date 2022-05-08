@@ -46,7 +46,7 @@
         public const string JustBClub2Lobby = "wrld_9408c54c-0aa9-4fd1-a6bd-45bd130710ea";
         public const string DreamWaves = "wrld_860bdea8-0499-4c16-8170-5683a3a3ab8a";
         public const string DrinkingNight = "wrld_4a65ba53-d8df-40a7-b67d-30c63bff0e95";
-
+        public const string TreeHouseInTheShade = "wrld_551c30cb-0e56-4c69-9176-10e259a89e2a"; // sorry 1001 
 
     }
 }
