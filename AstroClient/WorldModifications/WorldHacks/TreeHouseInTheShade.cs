@@ -1,4 +1,5 @@
-﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
+﻿using System.Text;
+using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.Tools.UdonEditor;
@@ -40,6 +41,21 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
                 return _Jetpack_Panel;
+            }
+        }
+        private static Transform _ShaderSphere;
+
+        internal static Transform ShaderSphere
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_ShaderSphere == null)
+                {
+                    return _ShaderSphere = GameObjectFinder.FindRootSceneObject("ShaderSphere").transform;
+                }
+
+                return _ShaderSphere;
             }
         }
 
@@ -200,12 +216,57 @@ namespace AstroClient.WorldModifications.WorldHacks
                     text.text = $"Cooldown Removed By AstroClient \n R.I.P {WorldUtils.AuthorName} \n ????-2020";
                 }
             }
+
+            // Expand the exploration area.
+
+            if(ShaderSphere != null)
+            {
+                ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue); ;
+            }
+            var UpdateText = GameObjectFinder.Find("ui panel example/Canvas/UpdatesPanel/Extra Text");
+            if(UpdateText != null)
+            {
+                var text = UpdateText.GetComponent<UnityEngine.UI.Text>();
+                if (text != null)
+                {
+                    text.supportRichText = true;
+                    text.text = UpdatedPanelExtraText();
+                }
+
+            }
+
             HasSubscribed = true;
             isCurrentWorld = true;
         }
 
 
+        private static string UpdatedPanelExtraText()
+        {
+            StringBuilder text = new StringBuilder();
+            text.AppendLine();
+            text.AppendLine("- couple of tiny improvements");
+            text.AppendLine("- added new glass refractions shader");
+            text.AppendLine("- removed kali sunset");
+            text.AppendLine("- Removed Jetpack Cooldown (AstroClient)");
+            text.AppendLine();
+            text.AppendLine("visit our other worlds too:");
+            text.AppendLine("fractal explorer");
+            text.AppendLine("music visualizer");
+            text.AppendLine("home arcade");
+            text.AppendLine("fluid flow studio");
+            text.AppendLine("bamboo temple");
+            text.AppendLine("LA2097 cyberpunk city");
+            text.AppendLine();
+            text.AppendLine("jetpacks by butadiene and synqark");
+            text.AppendLine();
+            text.AppendLine("visit shadertoy.com and learn raymarching");
+            text.AppendLine();
+            text.AppendLine();
+            text.AppendLine();
+            text.AppendLine($"RIP {WorldUtils.AuthorName} ????-2020");
 
+            return text.ToString();
+        }
 
 
 
