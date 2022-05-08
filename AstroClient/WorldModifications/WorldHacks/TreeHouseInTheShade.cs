@@ -221,7 +221,21 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             if(ShaderSphere != null)
             {
-                ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue); ;
+                ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue); 
+                var renderer = ShaderSphere.gameObject.GetComponent<MeshRenderer>();
+                if(renderer != null)
+                {
+                    var bounds = renderer.bounds;
+                    if( bounds != null)
+                    {
+                        bounds.extents = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+                        bounds.max = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+                        bounds.min = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+
+                        bounds.size = ShaderSphere.localScale;
+
+                    }
+                }
             }
             var UpdateText = GameObjectFinder.Find("ui panel example/Canvas/UpdatesPanel/Extra Text");
             if(UpdateText != null)
@@ -248,6 +262,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             text.AppendLine("- added new glass refractions shader");
             text.AppendLine("- removed kali sunset");
             text.AppendLine("- Removed Jetpack Cooldown (AstroClient)");
+            text.AppendLine("- Expanded Radius of Shader Sphere (AstroClient)");
             text.AppendLine();
             text.AppendLine("visit our other worlds too:");
             text.AppendLine("fractal explorer");
@@ -260,7 +275,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             text.AppendLine("jetpacks by butadiene and synqark");
             text.AppendLine();
             text.AppendLine("visit shadertoy.com and learn raymarching");
-            text.AppendLine();
             text.AppendLine();
             text.AppendLine();
             text.AppendLine($"RIP {WorldUtils.AuthorName} ????-2020");
