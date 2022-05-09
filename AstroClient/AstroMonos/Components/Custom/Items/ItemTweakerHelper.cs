@@ -1,3 +1,5 @@
+using AstroClient.ClientUI.Menu.ItemTweakerV2.Selector;
+
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using System;
@@ -122,7 +124,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             if (collision.transform.root.name.Contains("VRCPlayer")) return;
             if (collision == null) return;
             if (collision.collider == null) return;
-            collision.transform.gameObject.Set_As_Object_To_Edit();
+            Tweaker_Object.SetObjectToEdit(collision.transform.gameObject, true);
             PopupUtils.QueHudMessage($"<color=#FFA500>Set Object {collision.transform.gameObject.name} In Item Tweaker</color>");
             Activated = false;
 

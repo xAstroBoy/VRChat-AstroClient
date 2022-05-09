@@ -80,7 +80,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects
                 {
                     if (item != null)
                     {
-                        var btn = new QMSingleButton(CurrentScrollMenu, $"Select {item.name}", () => { Tweaker_Object.SetObjectToEdit(item); }, $"Select {item.name}", item.Get_GameObject_Active_ToColor());
+                        var btn = new QMSingleButton(CurrentScrollMenu, $"Select {item.name}", () => { Tweaker_Object.SetObjectToEdit(item, true); }, $"Select {item.name}", item.Get_GameObject_Active_ToColor());
 
                         var listener = item.GetOrAddComponent<ScrollMenuListener>();
                         if (listener != null) listener.SingleButton = btn;

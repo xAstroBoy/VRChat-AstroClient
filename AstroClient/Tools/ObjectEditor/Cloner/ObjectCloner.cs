@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Utility;
 using HarmonyLib;
 
 namespace AstroClient.Tools.ObjectEditor.Cloner
@@ -72,6 +74,19 @@ namespace AstroClient.Tools.ObjectEditor.Cloner
                 if (!SpawnerSubmenu.ClonedObjects.Contains(obj))
                 {
                     SpawnerSubmenu.ClonedObjects.Add(obj);
+                    var listener = obj.GetOrAddComponent<GameObjectListener>();
+                    if (listener != null)
+                    {
+                        listener.OnDestroyed += () =>
+                        {
+                            if (SpawnerSubmenu.ClonedObjects.Contains(obj))
+                            {
+                                SpawnerSubmenu.ClonedObjects.Remove(obj);
+                            }
+                            SpawnerSubmenu.UpdateSpawnedPickupsBtn();
+                        };
+                    }
+
                     SpawnerSubmenu.UpdateSpawnedPickupsBtn();
                 }
                 Log.Write($"Spawned A Copy Successfully!, cloned {obj.name}");

@@ -46,13 +46,6 @@
             }
         }
 
-        internal static void Set_As_Object_To_Edit(this GameObject obj)
-        {
-            if (obj != null)
-            {
-                Tweaker_Object.SetObjectToEdit(obj);
-            }
-        }
 
         internal static bool isCurrentObjectToEdit(this GameObject obj)
         {

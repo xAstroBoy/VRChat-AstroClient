@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Spawner
 {
@@ -80,6 +82,18 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Spawner
                 if (!SpawnedPrefabs.Contains(obj))
                 {
                     SpawnedPrefabs.Add(obj);
+                    var listener = obj.GetOrAddComponent<GameObjectListener>();
+                    if(listener != null)
+                    {
+                        listener.OnDestroyed += () =>
+                        {
+                            if(SpawnedPrefabs.Contains(obj))
+                            {
+                                SpawnedPrefabs.Remove(obj);
+                            }
+                            UpdateSpawnedPrefabsBtn();
+                        };
+                    }
                 }
                 UpdateSpawnedPrefabsBtn();
             }

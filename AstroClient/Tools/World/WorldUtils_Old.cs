@@ -25,32 +25,6 @@ namespace AstroClient.Tools.World
 
     internal class WorldUtils_Old : AstroEvents
     {
-        internal static List<GameObject> Get_Prefabs()
-        {
-            try
-            {
-                var list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-                if (list1.AnyAndNotNull())
-                {
-                    return list1;
-                }
-                else
-                {
-                    var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-                    if (list2 != null && list2.Count() != 0)
-                    {
-                        return list2;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error("Error parsing World Prefabs");
-                Log.Exception(e);
-                return new List<GameObject>();
-            }
-            return new List<GameObject>();
-        }
 
         internal static Player Get_Player_By_ID(string id)
         {

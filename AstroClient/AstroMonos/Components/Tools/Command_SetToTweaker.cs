@@ -21,7 +21,7 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         private void Start()
         {
-            Tweaker_Object.SetObjectToEdit(gameObject);
+            Tweaker_Object.SetObjectToEdit(gameObject, true);
             gameObject.AddToWorldUtilsMenu();
             Destroy(this);
         }

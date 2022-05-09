@@ -4,6 +4,7 @@ using AstroClient.Cheetos;
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.Menu.Menus.Quickmenu;
 using AstroClient.Tools.Extensions;
+using AstroClient.Tools.World;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Text;
 
@@ -42,6 +43,7 @@ namespace AstroClient.PlayerList.Entries
         private static string MiscWorldInfo()
         {
             StringBuilder build = new StringBuilder();
+            build.Append(GenerateText("Avatars", AvatarSearch.worldAvatarsids.Count.ToString()));
             build.Append(GenerateText("SDK", WorldUtils.SDKType));
             if (GameInstances.CurrentUser != null)
             {
@@ -49,11 +51,13 @@ namespace AstroClient.PlayerList.Entries
             }
             build.Append(GenerateText("Scene RespawnHeightY", SceneUtils.RespawnHeightY.ToString(CultureInfo.InvariantCulture)));
             build.Append(GenerateText("Prefabs", WorldUtils.Prefabs.Count.ToString()));
-            build.Append(GenerateText("Pickups", WorldUtils.Pickups.Count.ToString()));
-            build.Append(GenerateText("UdonBehaviours", WorldUtils.UdonScripts.Length.ToString()));
-            build.Append(GenerateText("Triggers", WorldUtils.SDK1Triggers.Count.ToString()));
-            build.Append(GenerateText("Interactables", WorldUtils.Interactables.Length.ToString()));
-            build.Append(GenerateText("Avatars", AvatarSearch.worldAvatarsids.Count.ToString()));
+            build.Append(GenerateText("Pickups", WorldUtils_Old.Get_Pickups().Count.ToString()));
+            build.Append(GenerateText("UdonBehaviours", WorldUtils_Old.Get_UdonBehaviours().Count.ToString()));
+            build.Append(GenerateText("Triggers", WorldUtils_Old.Get_Triggers().Count.ToString()));
+            build.Append(GenerateText("Interactables", WorldUtils_Old.Get_VRCInteractables().Count.ToString()));
+            build.Append(GenerateText("AudioSources", WorldUtils_Old.Get_AudioSources().Count.ToString()));
+           // build.Append(GenerateText("Mirrors", WorldUtils_Old.Get_AudioSources().Count.ToString()));
+
 
             return build.ToString();
         }

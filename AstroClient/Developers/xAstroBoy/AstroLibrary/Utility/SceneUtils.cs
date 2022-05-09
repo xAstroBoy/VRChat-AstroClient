@@ -1,19 +1,8 @@
-﻿// Credits to Blaze and DayOfThePlay
-
-using AstroClient.ClientActions;
-using VRC.SDK3.Components;
-
+﻿
 namespace AstroClient.xAstroBoy.Utility
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using UnityEngine;
-    using UnityEngine.Rendering.PostProcessing;
-    using VRC;
-    using VRC.Core;
-    using VRC.SDKBase;
-    using VRC.Udon;
+    using ClientActions;
 
     internal class SceneUtils : AstroEvents
     {

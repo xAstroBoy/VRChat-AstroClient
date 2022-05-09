@@ -21,11 +21,14 @@
             }
         }
 
-        internal static void SetObjectToEdit(GameObject obj)
+        internal static void SetObjectToEdit(GameObject obj, bool BypassLock = false)
         {
-            if (LockItem)
+            if (!BypassLock)
             {
-                return;
+                if (LockItem)
+                {
+                    return;
+                }
             }
             Tweaker_Selector.SelectedObject = obj;
         }

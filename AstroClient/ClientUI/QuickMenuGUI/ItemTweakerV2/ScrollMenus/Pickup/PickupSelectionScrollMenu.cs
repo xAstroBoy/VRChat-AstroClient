@@ -80,7 +80,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
                 for (int i = 0; i < list.Count; i++)
                 {
                     GameObject pickup = list[i];
-                    var btn = new QMSingleButton(CurrentScrollMenu, $"Select {pickup.name}", () => { Tweaker_Object.SetObjectToEdit(pickup); }, $"Select {pickup.name}", pickup.Get_GameObject_Active_ToColor());
+                    var btn = new QMSingleButton(CurrentScrollMenu, $"Select {pickup.name}", () => { Tweaker_Object.SetObjectToEdit(pickup, true); }, $"Select {pickup.name}", pickup.Get_GameObject_Active_ToColor());
 
                     var listener = pickup.AddComponent<ScrollMenuListener>();
                     if (listener != null) listener.SingleButton = btn;
