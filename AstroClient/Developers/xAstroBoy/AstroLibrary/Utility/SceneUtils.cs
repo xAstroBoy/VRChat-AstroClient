@@ -28,7 +28,6 @@ namespace AstroClient.xAstroBoy.Utility
             }
         }
 
-        // Defaulted to -100f, but let's check the SDK scene descriptors
         private static bool HasRespawnHeightYModified = false;
 
 
@@ -51,32 +50,32 @@ namespace AstroClient.xAstroBoy.Utility
 
         }
 
+        // Defaulted to -100f, but let's check the SDK scene descriptors first
         private static float OriginalRespawnHeightY { get; set; } = -100f;
 
+        /// <summary>
+        ///  returns RespawnHeightY from Scene descriptor of the current world
+        /// </summary>
         internal static float RespawnHeightY
         {
             get
             {
-                if (!HasRespawnHeightYModified)
+                if (WorldUtils.SDKBaseDescriptor != null)
                 {
-                    if (WorldUtils.SDKBaseDescriptor != null)
-                    {
-                        return WorldUtils.SDKBaseDescriptor.RespawnHeightY;
-                    }
-                    else if (WorldUtils.SDK2Descriptor != null)
-                    {
-                        return WorldUtils.SDK2Descriptor.RespawnHeightY;
-                    }
-                    else if (WorldUtils.SDK3Descriptor != null)
-                    {
-                        return WorldUtils.SDK3Descriptor.RespawnHeightY;
-                    }
-                    else
-                    {
-                        return -100f;
-                    }
+                    return WorldUtils.SDKBaseDescriptor.RespawnHeightY;
                 }
-                return OriginalRespawnHeightY;
+                else if (WorldUtils.SDK2Descriptor != null)
+                {
+                    return WorldUtils.SDK2Descriptor.RespawnHeightY;
+                }
+                else if (WorldUtils.SDK3Descriptor != null)
+                {
+                    return WorldUtils.SDK3Descriptor.RespawnHeightY;
+                }
+                else
+                {
+                    return -100f;
+                }
             }
             private set
             {

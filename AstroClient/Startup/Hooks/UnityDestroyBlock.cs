@@ -19,9 +19,10 @@ namespace AstroClient.Startup.Hooks
     #endregion Imports
 
 
-    // This will act as Shield for worlds that tends to destroy Udon components to prevent Udon exploiters from accessing them.
     /// <summary>
-    /// THE MAJORITY OF THE TIMES, THIS NEEDS TO STAY DEACTIVATED!
+    /// This will act as Shield for worlds that tends to destroy Udon components to prevent Udon exploiters from accessing them.
+    /// <para>CRITICAL : THE MAJORITY OF THE TIMES, THIS NEEDS TO STAY DEACTIVATED! </para>
+    /// <para>TODO: ADD A DETECTION FOR PEDESTRALS DESTROYING, AS SOME WORLDS TEND TO DESTROY PEDESTRALS AFTER READING THEIR IMAGE.</para>
     /// </summary>
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class UnityDestroyBlock : AstroEvents

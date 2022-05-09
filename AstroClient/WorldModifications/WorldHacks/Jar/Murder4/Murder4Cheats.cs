@@ -389,8 +389,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4
 
             Clues.RegisterChildsInPath("Game Logic/Clues");
 
-            var weapons = GameObjectFinder.ListFind("Game Logic/Weapons");
-
             DetectiveGuns.AddGameObject(item_DetectiveRevolver);
             SilencedGuns.AddGameObject(item_Silenced_Revolver_0);
             SilencedGuns.AddGameObject(item_Silenced_Revolver_1);

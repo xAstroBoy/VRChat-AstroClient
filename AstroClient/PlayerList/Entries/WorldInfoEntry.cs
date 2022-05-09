@@ -45,11 +45,7 @@ namespace AstroClient.PlayerList.Entries
             StringBuilder build = new StringBuilder();
             build.Append(GenerateText("Avatars", AvatarSearch.worldAvatarsids.Count.ToString()));
             build.Append(GenerateText("SDK", WorldUtils.SDKType));
-            if (GameInstances.CurrentUser != null)
-            {
-                build.Append(GenerateText("User RespawnHeightY", GameInstances.CurrentUser.Get_RespawnHeightY().ToString(CultureInfo.InvariantCulture)));
-            }
-            build.Append(GenerateText("Scene RespawnHeightY", SceneUtils.RespawnHeightY.ToString(CultureInfo.InvariantCulture)));
+            build.Append(GenerateText("RespawnHeightY", SceneUtils.RespawnHeightY.ToString(CultureInfo.InvariantCulture)));
             build.Append(GenerateText("Prefabs", WorldUtils.Prefabs.Count.ToString()));
             build.Append(GenerateText("Pickups", WorldUtils_Old.Get_Pickups().Count.ToString()));
             build.Append(GenerateText("UdonBehaviours", WorldUtils_Old.Get_UdonBehaviours().Count.ToString()));

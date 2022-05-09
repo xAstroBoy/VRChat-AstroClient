@@ -46,7 +46,10 @@
                                 for (int i1 = 0; i1 < objects.Count; i1++)
                                 {
                                     T component = objects[i1];
-                                    results.Add(component);
+                                    if (!results.Contains(component))
+                                    {
+                                        results.Add(component);
+                                    }
                                 }
                             }
                         }
@@ -59,7 +62,10 @@
                             for (int i1 = 0; i1 < objects.Count; i1++)
                             {
                                 T component = objects[i1];
-                                results.Add(component);
+                                if (!results.Contains(component))
+                                {
+                                    results.Add(component);
+                                }
                             }
                         }
                     }

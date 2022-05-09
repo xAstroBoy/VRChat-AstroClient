@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.UdonEditor;
+﻿using AstroClient.Tools.Regexes;
+using AstroClient.Tools.UdonEditor;
 
 namespace AstroClient.Tools.World
 {
@@ -255,12 +256,6 @@ namespace AstroClient.Tools.World
                     if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         AddAvatar(pedestal.blueprintId);
-                        //var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
-
-                        //if (avatar != null)
-                        //{
-                        //    AddAvatar(avatar);
-                        //}
                     }
                 }
             }
@@ -273,12 +268,6 @@ namespace AstroClient.Tools.World
                     if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         AddAvatar(pedestal.blueprintId);
-                        //var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
-
-                        //if (avatar != null)
-                        //{
-                        //    AddAvatar(avatar);
-                        //}
                     }
                 }
             }
@@ -292,13 +281,6 @@ namespace AstroClient.Tools.World
                     if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         AddAvatar(pedestal.blueprintId);
-
-                        //var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
-
-                        //if (avatar != null)
-                        //{
-                        //    AddAvatar(avatar);
-                        //}
                     }
                 }
             }
@@ -328,12 +310,6 @@ namespace AstroClient.Tools.World
                     if (avatarid.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         AddAvatar(avatarid);
-
-                        //var avatar = AvatarUtils.GetApiAvatar(avatarid);
-                        //if (avatar != null)
-                        //{
-                        //    AddAvatar(avatar);
-                        //}
                     }
                 }
             }
