@@ -357,7 +357,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     if (item.name.Contains("Crate Large"))
                     {
                         Large_Crates.AddGameObject(item.gameObject);
-                        var crateevent = item.FindUdonEvent("_SpawnItem");
+                        var crateevent = item.FindUdonEvent("_interact");
                         if (crateevent != null)
                         {
                             if (!Large_Crates_udon.Contains(crateevent))
@@ -372,7 +372,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     if (item.name.Contains("Crate Small"))
                     {
                         Small_Crates.AddGameObject(item.gameObject);
-                        var crateevent = item.FindUdonEvent("_SpawnItem");
+                        var crateevent = item.FindUdonEvent("_interact");
                         if (crateevent != null)
                         {
                             if (!Small_Crates_udon.Contains(crateevent))
@@ -1566,8 +1566,53 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 ToggleSmallCrateESP(value);
             }
         }
+        internal static void OpenAllLargeCrates()
+        {
+            if (!FreeCratesItems)
+            {
+                FreeCratesItems = true;
+            }
+            foreach (var CrateBehaviour in Large_Crates_udon)
+            {
+                if (CrateBehaviour != null)
+                {
+                    var body = CrateBehaviour.transform.FindObject("Crate");
+                    if (body != null)
+                    {
+                        if (body.gameObject.active)
+                        {
+                            CrateBehaviour.InvokeBehaviour();
+                        }
+                    }
+                }
+            }
+        }
 
-        private static void ToggleLargeCrateESP(bool isOn)
+        internal static void OpenAllSmallCrates()
+        {
+            if (!FreeCratesItems)
+            {
+                FreeCratesItems = true;
+            }
+            foreach (var CrateBehaviour in Small_Crates_udon)
+            {
+                if (CrateBehaviour != null)
+                { 
+                    var body = CrateBehaviour.transform.FindObject("Crate");
+                    if (body != null)
+                    {
+                        if (body.gameObject.active)
+                        {
+                            CrateBehaviour.InvokeBehaviour();
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+    private static void ToggleLargeCrateESP(bool isOn)
         {
             foreach (var crate in Large_Crates)
             {

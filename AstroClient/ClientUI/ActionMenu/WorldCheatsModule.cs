@@ -487,6 +487,9 @@ internal class WorldCheatsModule : AstroEvents
                     });
                     CustomSubMenu.AddButton("Make Prisoners Wanted", () => { PrisonEscape.MarkPrisonersAsWanted(); });
                     CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
+                    CustomSubMenu.AddButton("Open All Small Crates", () => { PrisonEscape.OpenAllSmallCrates(); });
+                    CustomSubMenu.AddButton("Open All Large Crates", () => { PrisonEscape.OpenAllLargeCrates(); });
+
                 });
 
                 if (UserIdentifiers.is_xAstroBoy)
