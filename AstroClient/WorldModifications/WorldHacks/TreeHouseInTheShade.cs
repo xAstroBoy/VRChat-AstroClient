@@ -60,6 +60,24 @@ namespace AstroClient.WorldModifications.WorldHacks
         }
 
 
+        private static Renderer _ShaderSphereRenderer;
+        internal static Renderer ShaderSphereRenderer
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (ShaderSphere == null) return null;
+                if (_ShaderSphereRenderer == null)
+                {
+                    return _ShaderSphereRenderer = ShaderSphere.GetComponent<Renderer>();
+                }
+
+                return _ShaderSphereRenderer;
+            }
+        }
+
+
+
         private static Transform _Canvas;
 
         internal static Transform Canvas
@@ -202,6 +220,20 @@ namespace AstroClient.WorldModifications.WorldHacks
 
 
 
+        private static IEnumerator FixRenderSphere()
+        {
+            if (!isCurrentWorld) yield return null;
+            while (ShaderSphereRenderer == null) yield return null;
+            while(isCurrentWorld)
+            {
+                ShaderSphereRenderer.bounds.Expand(float.MaxValue);
+                // Log.Debug("Forcing Bounds to be higher than 2000f...");
+                yield return null;
+            }
+
+            yield return null;
+        }
+
 
         private static void FindEverything()
         {
@@ -217,18 +249,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-            // Expand the exploration area.
+            //// Expand the exploration area.
 
-            if(ShaderSphere != null)
-            {
-                ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);; 
-                var renderer = ShaderSphere.gameObject.GetComponentInChildren<MeshRenderer>(true);
-                if(renderer != null)
-                {
-                  //  renderer.bounds.SetMinMax(NegativeVector, MaxVector3);
-                    renderer.bounds.Expand(float.MaxValue);
-                }
-            }
+            //if(ShaderSphere != null)
+            //{
+            //    ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+            //    MelonCoroutines.Start(FixRenderSphere());
+            //}
             var UpdateText = GameObjectFinder.Find("ui panel example/Canvas/UpdatesPanel/Extra Text");
             if(UpdateText != null)
             {
@@ -254,7 +281,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             text.AppendLine("- added new glass refractions shader");
             text.AppendLine("- removed kali sunset");
             text.AppendLine("- Removed Jetpack Cooldown (AstroClient)");
-            text.AppendLine("- Expanded Radius of Shader Sphere (AstroClient)");
+            text.AppendLine();
+           // text.AppendLine("- Expanded Radius of Shader Sphere (AstroClient)");
             text.AppendLine();
             text.AppendLine("visit our other worlds too:");
             text.AppendLine("fractal explorer");
