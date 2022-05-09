@@ -1,4 +1,6 @@
-using AstroClient.ClientActions;
+
+using AstroClient.ClientUI.Menu.Menus.Quickmenu;
+using AstroClient.Tools.Extensions;
 
 namespace AstroClient.ClientUI.ActionMenu
 {
@@ -7,6 +9,8 @@ namespace AstroClient.ClientUI.ActionMenu
     using Menu.RandomSubmenus;
     using Spawnables.Enderpearl;
     using Tools.Player.Movement.Exploit;
+    using ClientActions;
+    using xAstroBoy.Utility;
 
     internal class MovementModule : AstroEvents
     {
@@ -15,11 +19,13 @@ namespace AstroClient.ClientUI.ActionMenu
             ClientEventActions.OnApplicationStart += OnApplicationStart;
         }
 
+
         private void OnApplicationStart()
         {
             AMUtils.AddToModsFolder("Movement Options", () =>
             {
                 // TODO: Add Textures!
+                CustomSubMenu.AddToggle("Disable Falling Height Limit", MovementMenu.NoFallHeightLimit, ToggleValue => { MovementMenu.NoFallHeightLimit = ToggleValue; }, null, false);
                 CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
                 CustomSubMenu.AddToggle("Toggle Disappear Ghost", TrollDefenseSubMenu.DisappearGhost, ToggleValue => { TrollDefenseSubMenu.DisappearGhost = ToggleValue; }, null, false);
                 CustomSubMenu.AddButton("Spawn EnderPearl", () => { AstroEnderPearl.SpawnEnderPearl(); }, null, false);
@@ -38,5 +44,7 @@ namespace AstroClient.ClientUI.ActionMenu
 
             Log.Write("Movement Module is ready!", Color.Green);
         }
+
+
     }
 }

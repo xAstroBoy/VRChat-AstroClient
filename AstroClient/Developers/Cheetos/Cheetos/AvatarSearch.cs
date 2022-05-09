@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using AstroClient.ClientActions;
 
 namespace AstroClient.Cheetos
 {
@@ -29,6 +30,8 @@ namespace AstroClient.Cheetos
 
         }
 
+        internal static Action OnPedestralDumpDone { get; set; }
+
         //internal static SearchTypes SearchType = SearchTypes.ALL;
 
         //internal static bool IsSearching;
@@ -39,7 +42,7 @@ namespace AstroClient.Cheetos
 
         //private static List<ApiAvatar> foundAvatars = new List<ApiAvatar>();
 
-        private static List<string> worldAvatarsids = new List<string>();
+        internal static List<string> worldAvatarsids { get; set; } = new List<string>();
 
         //private static VRCList searchList;
 
@@ -181,11 +184,12 @@ namespace AstroClient.Cheetos
 
             stopwatch2.Stop();
             Log.Debug($"Avatar Pedestals Completed: found {worldAvatarsids.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
-
+            OnPedestralDumpDone.SafetyRaise();
         }
 
         private void OnRoomLeft()
         {
+            worldAvatarsids.Clear();
             _WorldPedestralAvatars.Clear();
 
         }

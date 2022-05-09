@@ -135,7 +135,6 @@
     <Compile Include="AstroMonos\Components\Player\InstanceBuilder\MovementManagerInstance.cs" />
     <Compile Include="AstroMonos\Components\Tools\Command_SetToTweaker.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlockerTag.cs" />
-    <Compile Include="AstroMonos\Components\Tools\PedestralReader.cs" />
     <Compile Include="AstroMonos\Components\Tools\ObjectFreezer.cs" />
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
@@ -151,6 +150,7 @@
     <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
+    <Compile Include="ClientUI\ActionMenu\WorldManagerModule.cs" />
     <Compile Include="ClientUI\BigMenuGUI\AvatarPage\AvatarPageGUI.cs" />
     <Compile Include="Constants\UserIdentifiers.cs" />
     <Compile Include="Developers\Cheetos\Color.cs" />
@@ -162,6 +162,7 @@
     <Compile Include="Developers\Cheetos\WindowsUtils.cs" />
     <Compile Include="Developers\Kaned\KanedWIP.cs" />
     <Compile Include="Developers\Kaned\RotationFix.cs" />
+    <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
     <Compile Include="ModsDetector\EmmPatcher.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlocker_Tools.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
@@ -401,7 +402,7 @@
     <Compile Include="PlayerList\Entries\PlayerEntry.cs" />
     <Compile Include="PlayerList\Entries\PlayerLeftPairEntry.cs" />
     <Compile Include="PlayerList\Entries\PlayerListHeaderEntry.cs" />
-    <Compile Include="PlayerList\Entries\RiskyFuncAllowedEntry.cs" />
+    <Compile Include="PlayerList\Entries\WorldInfoEntry.cs" />
     <Compile Include="PlayerList\Entries\RoomTimeEntry.cs" />
     <Compile Include="PlayerList\Entries\SystemTime12HrEntry.cs" />
     <Compile Include="PlayerList\Entries\SystemTime24HrEntry.cs" />
@@ -537,7 +538,7 @@
     <Compile Include="Tools\Colors\SystemColors.cs" />
     <Compile Include="Tools\Holders\SpawnedItemsHolder.cs" />
     <Compile Include="Tools\Serialization.cs" />
-    <Compile Include="Tools\Extensions\VRCPlayer_Emoji_Ext.cs" />
+    <Compile Include="Tools\Extensions\VRCPlayer_Ext.cs" />
     <Compile Include="Tools\Extensions\Il2Cpp_ext.cs" />
     <Compile Include="Tools\Extensions\Esp_ext.cs" />
     <Compile Include="Tools\Extensions\Forces_ext.cs" />

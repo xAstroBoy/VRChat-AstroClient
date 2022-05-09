@@ -324,7 +324,7 @@ namespace AstroClient.PlayerList
             AddGeneralInfoEntry(EntryBase.CreateInstance<WorldAuthorEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("WorldAuthor").gameObject, includeConfig: true));
             AddGeneralInfoEntry(EntryBase.CreateInstance<InstanceMasterEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("InstanceMaster").gameObject, includeConfig: true));
             AddGeneralInfoEntry(EntryBase.CreateInstance<InstanceCreatorEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("InstanceCreator").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<RiskyFuncAllowedEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("RiskyFuncAllowed").gameObject, includeConfig: true));
+            AddGeneralInfoEntry(EntryBase.CreateInstance<WorldInfoEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("RiskyFuncAllowed").gameObject, includeConfig: true));
         }
         public static void AddEntry(EntryBase entry)
         {

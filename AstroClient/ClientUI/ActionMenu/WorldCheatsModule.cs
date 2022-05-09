@@ -434,7 +434,7 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddToggle("Take Keycard On Wanted", PrisonEscape.TakeKeyCardOnWanted, ToggleValue => { PrisonEscape.TakeKeyCardOnWanted = ToggleValue; });
 
                     CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.LargeCrateESP, ToggleValue => { PrisonEscape.LargeCrateESP = ToggleValue; });
-                    CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.SmallCrateESP, ToggleValue => { PrisonEscape.SmallCrateESP = ToggleValue; });
+                    CustomSubMenu.AddToggle("Small Crate ESP", PrisonEscape.SmallCrateESP, ToggleValue => { PrisonEscape.SmallCrateESP = ToggleValue; });
 
                     CustomSubMenu.AddToggle("Toggle Pickup ESP", VRChat_Map_ESP_Menu.Toggle_Pickup_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = ToggleValue; }, null, false);
                     CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);

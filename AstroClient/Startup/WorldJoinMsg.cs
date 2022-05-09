@@ -35,6 +35,7 @@ namespace AstroClient.Startup
             Log.Write("World Asset URL : " + AssetURL, System.Drawing.Color.Goldenrod);
             Log.Write("Instance ID : " + WorldUtils.FullID, System.Drawing.Color.Goldenrod);
             Log.Write("This instance has " + WorldUtils.Players.Count() + " Players.", System.Drawing.Color.Goldenrod);
+
         }
 
         private string CurrentWorldTags(List<string> Tags)

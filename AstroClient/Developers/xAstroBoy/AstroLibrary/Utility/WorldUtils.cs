@@ -1,5 +1,7 @@
 ﻿// Credits to Blaze and DayOfThePlay
 
+using VRC.SDK3.Components;
+
 namespace AstroClient.xAstroBoy.Utility
 {
     using System;
@@ -233,6 +235,15 @@ namespace AstroClient.xAstroBoy.Utility
                         {
                             return list2;
                         }
+                        else
+                        {
+                            var list3 = VRCSceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
+                            if (list3 != null && list2.Count() != 0)
+                            {
+                                return list3;
+                            }
+                        }
+
                     }
                 }
                 catch (Exception e)
@@ -261,6 +272,7 @@ namespace AstroClient.xAstroBoy.Utility
             }
             return null;
         }
+        public static VRC_SceneDescriptor SDKBaseDescriptor => UnityEngine.Object.FindObjectOfType<VRC_SceneDescriptor>();
 
         public static VRCSDK2.VRC_SceneDescriptor SDK2Descriptor => UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
 
