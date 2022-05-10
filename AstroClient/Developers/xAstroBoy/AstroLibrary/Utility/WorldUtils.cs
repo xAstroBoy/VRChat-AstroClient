@@ -217,44 +217,38 @@ namespace AstroClient.xAstroBoy.Utility
             return scenes.Contains(lower);
         }
 
-        public static List<GameObject> Prefabs
+
+        internal static GameObject[] DynamicPrefabs
         {
             get
             {
-                try
+                if (SDKBaseDescriptor != null)
                 {
-                    var list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-                    if (list1 != null && list1.Count() != 0)
+                    if (SDKBaseDescriptor.DynamicPrefabs != null)
                     {
-                        return list1;
-                    }
-                    else
-                    {
-                        var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-                        if (list2 != null && list2.Count() != 0)
-                        {
-                            return list2;
-                        }
-                        else
-                        {
-                            var list3 = VRCSceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-                            if (list3 != null && list2.Count() != 0)
-                            {
-                                return list3;
-                            }
-                        }
-
+                        return SDKBaseDescriptor.DynamicPrefabs.ToArray();
                     }
                 }
-                catch (Exception e)
+                else if (SDK2Descriptor != null)
                 {
-                    Log.Error("Error parsing World Prefabs");
-                    Log.Exception(e);
-                    return new List<GameObject>();
+                    if (SDK2Descriptor.DynamicPrefabs != null)
+                    {
+                        return SDK2Descriptor.DynamicPrefabs.ToArray();
+                    }
                 }
-                return new List<GameObject>();
+                else if (SDK3Descriptor != null)
+                {
+                    if(SDK3Descriptor.DynamicPrefabs != null)
+                    {
+                        return SDK3Descriptor.DynamicPrefabs.ToArray();
+                    }
+                }
+                return null;
             }
         }
+
+
+
 
         public static Player GetPlayerByDisplayName(string name)
         {
