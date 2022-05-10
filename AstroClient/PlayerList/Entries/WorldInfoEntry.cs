@@ -43,19 +43,63 @@ namespace AstroClient.PlayerList.Entries
         private static string MiscWorldInfo()
         {
             StringBuilder build = new StringBuilder();
-            build.Append(GenerateText("Avatars", AvatarSearch.worldAvatarsids.Count.ToString()));
             build.Append(GenerateText("SDK", WorldUtils.SDKType));
             build.Append(GenerateText("RespawnHeightY", SceneUtils.RespawnHeightY.ToString(CultureInfo.InvariantCulture)));
-            if (WorldUtils.DynamicPrefabs != null)
+            if (AvatarSearch.worldAvatarsids.Count != 0)
             {
-                build.Append(GenerateText("Prefabs", WorldUtils.DynamicPrefabs.Length.ToString()));
+                build.Append(GenerateText("Avatars", AvatarSearch.worldAvatarsids.Count.ToString()));
             }
-            build.Append(GenerateText("Pickups", WorldUtils_Old.Get_Pickups().Count.ToString()));
-            build.Append(GenerateText("UdonBehaviours", WorldUtils_Old.Get_UdonBehaviours().Count.ToString()));
-            build.Append(GenerateText("Triggers", WorldUtils_Old.Get_Triggers().Count.ToString()));
-            build.Append(GenerateText("Interactables", WorldUtils_Old.Get_VRCInteractables().Count.ToString()));
-            build.Append(GenerateText("AudioSources", WorldUtils_Old.Get_AudioSources().Count.ToString()));
-           // build.Append(GenerateText("Mirrors", WorldUtils_Old.Get_AudioSources().Count.ToString()));
+            var Prefabs = WorldUtils.DynamicPrefabs;
+            if (Prefabs != null)
+            {
+                if (Prefabs.Length != 0)
+                {
+                    build.Append(GenerateText("Prefabs", Prefabs.Length.ToString()));
+                }
+            }
+            var pickups = WorldUtils_Old.Get_Pickups();
+            if (pickups != null)
+            {
+                if (pickups.Count != 0)
+                {
+                    build.Append(GenerateText("Pickups", pickups.Count.ToString()));
+                }
+            }
+            var UdonBehaviours = WorldUtils_Old.Get_UdonBehaviours();
+            if (UdonBehaviours != null)
+            {
+                if (UdonBehaviours.Count != 0)
+                {
+                    build.Append(GenerateText("UdonBehaviours", UdonBehaviours.Count.ToString()));
+                }
+            }
+            var Triggers = WorldUtils_Old.Get_Triggers();
+            if (Triggers != null)
+            {
+                if (Triggers.Count != 0)
+                {
+                    build.Append(GenerateText("Triggers", Triggers.Count.ToString()));
+                }
+            }
+            var Interactables = WorldUtils_Old.Get_VRCInteractables();
+            if (Interactables != null)
+            {
+                if (Interactables.Count != 0)
+                {
+                    build.Append(GenerateText("Interactables", Interactables.Count.ToString()));
+                }
+            }
+            var AudioSources = WorldUtils_Old.Get_AudioSources();
+            if (AudioSources != null)
+            {
+                if (AudioSources.Count != 0)
+                {
+                    build.Append(GenerateText("AudioSources", AudioSources.Count.ToString()));
+                }
+            }
+
+
+            // build.Append(GenerateText("Mirrors", WorldUtils_Old.Get_AudioSources().Count.ToString()));
 
 
             return build.ToString();

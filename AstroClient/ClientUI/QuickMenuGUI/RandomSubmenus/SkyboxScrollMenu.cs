@@ -147,18 +147,8 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
             WingMenu = new QMWings(CurrentScrollMenu, 1007, true, "Skybox Options", "Edit Current Skybox");
             new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
-
-
-                DestroyGeneratedButtons();
-                // Reload the list entirely
-                foreach (var item in SkyboxEditor.GeneratedSkyboxesList)
-                {
-                    item.Destroy();
-                }
-                SkyboxEditor.GeneratedSkyboxesList.Clear();
-
-
                 SkyboxEditor.FindAndLoadSkyboxes();
+                DestroyGeneratedButtons();
                 Regenerate();
             }, "Reload Skyboxes ");
             new QMWingSingleButton(WingMenu, "Reset Skybox", () => { SkyboxEditor.RestoreOriginalSkybox(); }, "Restore Original Skybox.");
