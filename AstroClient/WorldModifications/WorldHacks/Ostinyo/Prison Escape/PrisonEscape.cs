@@ -716,7 +716,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 if (Game_Join_Blocker != null)
                 {
-                    Game_Join_Blocker.RemoveColliders(); // Fuck off annoying shit
+                    Game_Join_Blocker.RemoveAllColliders(); // Fuck off annoying shit
                 }
                 var blocks = Spawn_Area.FindObject("Building/Colliders");
                 if(blocks != null)
