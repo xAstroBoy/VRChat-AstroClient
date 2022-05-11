@@ -448,7 +448,7 @@ internal class WorldCheatsModule : AstroEvents
                         var localreader = PrisonEscape.GetLocalReader();
                         if (localreader != null)
                         {
-                            if (!localreader.isGuard.GetValueOrDefault(false))
+                            if (localreader.isGuard.GetValueOrDefault(false))
                             {
                                 localreader.isGuard = false;
                                 if(!localreader.hasKeycard.GetValueOrDefault(false))
