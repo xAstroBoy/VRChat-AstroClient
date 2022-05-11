@@ -214,11 +214,11 @@ namespace AstroClient.Tools.UdonEditor
                             }
                         case "UnityEngine.Font":
                             {
-                                return PrintAsString<Material>(heap, address);
+                                return PrintAsString<UnityEngine.Font>(heap, address);
                             }
                         case "UnityEngine.Font[]":
                             {
-                                return PrintAsString<Material[]>(heap, address);
+                                return PrintAsString<UnityEngine.Font[]>(heap, address);
                             }
 
                         case "UnityEngine.Material":
