@@ -98,8 +98,14 @@ namespace AstroClient.PlayerList.Entries
                 }
             }
 
-
-            // build.Append(GenerateText("Mirrors", WorldUtils_Old.Get_AudioSources().Count.ToString()));
+            var Mirrors = WorldUtils_Old.Get_Mirrors();
+            if (Mirrors != null)
+            {
+                if (Mirrors.Count != 0)
+                {
+                    build.Append(GenerateText("Mirrors", Mirrors.Count.ToString()));
+                }
+            }
 
 
             return build.ToString();

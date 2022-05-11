@@ -1,5 +1,6 @@
 ﻿using AstroClient.Tools.Regexes;
 using AstroClient.Tools.UdonEditor;
+using VRC.SDKBase;
 
 namespace AstroClient.Tools.World
 {
@@ -26,19 +27,6 @@ namespace AstroClient.Tools.World
 
     internal class WorldUtils_Old : AstroEvents
     {
-
-        internal static Player Get_Player_By_ID(string id)
-        {
-            var zero = PlayerManager.Method_Public_Static_Player_String_0(id);
-            if (zero != null)
-            {
-                Log.Debug("returned Method_Public_Static_Player_String_PDM_0");
-                return zero;
-            }
-
-            Log.Warn("GetPlayerById Failed to find A Player from ID.");
-            return null;
-        }
 
 
         internal static List<GameObject> Get_Pickups()
@@ -93,6 +81,76 @@ namespace AstroClient.Tools.World
             }
             return new List<GameObject>();
         }
+        internal static List<GameObject> Get_Mirrors()
+        {
+            try
+            {
+                List<GameObject> result = new List<GameObject>();
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC_MirrorReflection>();
+                var list2 = GameObjectFinder.GetRootGameObjectsComponents<MirrorReflection>();
+                var list3 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_MirrorReflection>();
+                var list4 = GameObjectFinder.GetRootGameObjectsComponents<VRCMirrorReflection>();
+
+                if (list1 != null)
+                {
+                    if (list1.Count != 0)
+                    {
+                        for (var index = 0; index < list1.Count; index++)
+                        {
+                            var item = list1[index];
+                            result.AddGameObject(item.gameObject);
+                        }
+                    }
+                }
+                if (list2 != null)
+                {
+                    if (list2.Count != 0)
+                    {
+                        for (var index = 0; index < list2.Count; index++)
+                        {
+                            var item = list2[index];
+                            result.AddGameObject(item.gameObject);
+                        }
+                    }
+                }
+
+                if (list3 != null)
+                {
+                    if (list3.Count != 0)
+                    {
+                        for (var index = 0; index < list3.Count; index++)
+                        {
+                            var item = list3[index];
+                            result.AddGameObject(item.gameObject);
+                        }
+                    }
+                }
+
+                if (list4 != null)
+                {
+                    if (list4.Count != 0)
+                    {
+                        for (var index = 0; index < list4.Count; index++)
+                        {
+                            var item = list4[index];
+                            result.AddGameObject(item.gameObject);
+                        }
+                    }
+                }
+
+
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Log.Error("Error parsing World Mirrors");
+                Log.Exception(e);
+                return new List<GameObject>();
+            }
+            return new List<GameObject>();
+        }
+
 
         internal static List<GameObject> Get_VRCInteractables()
         {
