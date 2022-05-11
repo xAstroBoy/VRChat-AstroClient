@@ -117,6 +117,15 @@ namespace AstroClient.Tools.UdonEditor
                             {
                                 return PrintAsString<byte[]>(heap, address);
                             }
+                        case "System.Int16":
+                            {
+                                return PrintAsString<short>(heap, address);
+                            }
+                        case "System.Int16[]":
+                            {
+                                return PrintAsString<short[]>(heap, address);
+                            }
+
                         case "System.UInt16":
                             {
                                 return PrintAsString<ushort>(heap, address);
@@ -174,6 +183,14 @@ namespace AstroClient.Tools.UdonEditor
                             {
                                 return PrintAsString<System.Object[]>(heap, address);
                             }
+                        case "System.Globalization.NumberStyles":
+                            {
+                                return PrintAsString<System.Globalization.NumberStyles>(heap, address);
+                            }
+                        case "System.Globalization.NumberStyles[]":
+                            {
+                                return PrintAsString<System.Globalization.NumberStyles[]>(heap, address);
+                            }
 
                         #endregion System Types
 
@@ -187,6 +204,23 @@ namespace AstroClient.Tools.UdonEditor
                             {
                                 return PrintAsString<UnityEngine.Color[]>(heap, address);
                             }
+                        case "UnityEngine.Color32":
+                            {
+                                return PrintAsString<UnityEngine.Color32>(heap, address);
+                            }
+                        case "UnityEngine.Color32[]":
+                            {
+                                return PrintAsString<UnityEngine.Color32[]>(heap, address);
+                            }
+                        case "UnityEngine.Font":
+                            {
+                                return PrintAsString<Material>(heap, address);
+                            }
+                        case "UnityEngine.Font[]":
+                            {
+                                return PrintAsString<Material[]>(heap, address);
+                            }
+
                         case "UnityEngine.Material":
                             {
                                 return PrintAsString<Material>(heap, address);
@@ -202,6 +236,31 @@ namespace AstroClient.Tools.UdonEditor
                         case "UnityEngine.Renderer[]":
                             {
                                 return PrintAsString<Renderer[]>(heap, address);
+                            }
+                        case "UnityEngine.TrailRenderer":
+                            {
+                                return PrintAsString<UnityEngine.Renderer>(heap, address);
+                            }
+                        case "UnityEngine.TrailRenderer[]":
+                            {
+                                return PrintAsString<Renderer[]>(heap, address);
+                            }
+                        case "UnityEngine.SkinnedMeshRenderer":
+                            {
+                                return PrintAsString<UnityEngine.SkinnedMeshRenderer>(heap, address);
+                            }
+                        case "UnityEngine.SkinnedMeshRenderer[]":
+                            {
+                                return PrintAsString<SkinnedMeshRenderer[]>(heap, address);
+                            }
+
+                        case "UnityEngine.Gradient":
+                            {
+                                return PrintAsString<UnityEngine.Gradient>(heap, address);
+                            }
+                        case "UnityEngine.Gradient[]":
+                            {
+                                return PrintAsString<Gradient[]>(heap, address);
                             }
 
                         case "UnityEngine.MeshRenderer":
@@ -235,6 +294,31 @@ namespace AstroClient.Tools.UdonEditor
                         case "UnityEngine.ParticleSystem.MinMaxGradient[]":
                             {
                                 return PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient[]>(heap, address);
+                            }
+                        case "UnityEngine.ParticleSystem+EmitParams":
+                            {
+                                return PrintAsString<UnityEngine.ParticleSystem.EmitParams>(heap, address);
+                            }
+                        case "UnityEngine.ParticleSystem+EmitParams[]":
+                            {
+                                return PrintAsString<UnityEngine.ParticleSystem.EmitParams[]>(heap, address);
+                            }
+
+                        case "UnityEngine.Ray":
+                            {
+                                return PrintAsString<Ray>(heap, address);
+                            }
+                        case "UnityEngine.Ray[]":
+                            {
+                                return PrintAsString<Ray[]>(heap, address);
+                            }
+                        case "UnityEngine.Canvas":
+                            {
+                                return PrintAsString<Canvas>(heap, address);
+                            }
+                        case "UnityEngine.Canvas[]":
+                            {
+                                return PrintAsString<Canvas[]>(heap, address);
                             }
 
                         case "UnityEngine.Component":
@@ -740,6 +824,23 @@ namespace AstroClient.Tools.UdonEditor
                         #endregion Unity Engine
 
                         #region VRChat
+                        case "VRC.SDKBase.VRC_Pickup+PickupOrientation":
+                            {
+                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation>(heap, address);
+                            }
+                        case "VRC.SDKBase.VRC_Pickup+PickupOrientation[]":
+                            {
+                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation[]>(heap, address);
+                            }
+                        case "VRC.SDKBase.VRC_Pickup+AutoHoldMode":
+                            {
+                                return PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode>(heap, address);
+                            }
+                        case "VRC.SDKBase.VRC_Pickup+AutoHoldMode[]":
+                            {
+                                return PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode[]>(heap, address);
+                            }
+
 
                         case "VRC.SDKBase.VRCPlayerApi":
                             {
@@ -980,46 +1081,8 @@ namespace AstroClient.Tools.UdonEditor
             var FullName = typeof(T).FullName;
 
             // before we start, let's try a extra step.
-            try
-            {
-                if (!heap.IsHeapVariableInitialized(address))
-                {
-                    heap.InitializeHeapVariable<T>(address);
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Exception(e);
-            }
 
-            try
-            {
-                _ = heap.GetHeapVariable<T>(address);
-            }
-            catch(Exception e)
-            {
-                if (e.GetType() == typeof(TypeInitializationException))
-                {
-                    try
-                    {
-                        heap.InitializeHeapVariable<T>(address);
-
-                    }
-                    catch{}
-                    try
-                    {
-                        _ = heap.GetHeapVariable<T>(address);
-                    }
-                    catch (Exception e3)
-                    {
-                        if (e3.GetType() == typeof(TypeInitializationException))
-                        {
-                            return $"Empty {FullName}"; // no need to proceed as udon won't give us anything.
-                        }
-                    }
-
-                }
-            }
+            if (!heap.isHeapVariableValid<T>(address)) return $"Unitialized {FullName}";
 
             if (FullName != null && FullName.EndsWith("[]"))
             {

@@ -14,6 +14,12 @@
         private uint address { get; set; }
         private RawUdonBehaviour rawUdonBehaviour { get; set; }
 
+        /// <summary>
+        /// This will verify if the Udon Heap will provide the heap variable.
+        /// </summary>
+        private bool isInitialized => rawUdonBehaviour.isHeapVariableValid<T>(address);
+        
+
 
         internal AstroUdonVariable(RawUdonBehaviour rawUdonBehaviour, string symbol)
         {
@@ -30,16 +36,16 @@
                     this.rawUdonBehaviour = null;
                     this.address = 0;
                 }
+                // Test if is able to give a valid result.
+                if(!isInitialized)
+                {
+                    Log.Debug($"{rawUdonBehaviour.udonBehaviour.name} symbol {symbol} is Unitialized!");
+                    this.rawUdonBehaviour = null;
+                    this.address = 0;
+                }
             }
         }
-        internal AstroUdonVariable(RawUdonBehaviour rawUdonBehaviour, uint address)
-        {
-            if (rawUdonBehaviour != null)
-            {
-                this.rawUdonBehaviour = rawUdonBehaviour;
-                this.address = address;
-            }
-        }
+
 
         internal T Value
         {

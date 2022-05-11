@@ -1,18 +1,117 @@
-﻿
-
-
+﻿using AstroClient.xAstroBoy.Extensions;
+using System;
 using System.Linq;
-using AstroClient.xAstroBoy.Extensions;
 using VRC.Udon.Common.Interfaces;
 
 namespace AstroClient.Tools.UdonEditor
 {
-    using VRC.Udon;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib;
+    using VRC.Udon;
 
     internal static class UdonAPIExtensions
     {
+        /// <summary>
+        /// This verifies and avoids TypeUnitializedException by doing 2 steps
+        /// First it asks the heap if the Variable is initalized, if not inits it, then tries to read it.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="heap"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        internal static bool isHeapVariableValid<T>(this IUdonHeap heap, uint address)
+        {
+            if (heap == null) return false;
+            try
+            {
+                if (!heap.IsHeapVariableInitialized(address))
+                {
+                    heap.InitializeHeapVariable<T>(address);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+            }
+
+            try
+            {
+                _ = heap.GetHeapVariable<T>(address);
+            }
+            catch (Exception e)
+            {
+                if (e.GetType() == typeof(TypeInitializationException))
+                {
+                    try
+                    {
+                        heap.InitializeHeapVariable<T>(address);
+                    }
+                    catch { }
+                    try
+                    {
+                        _ = heap.GetHeapVariable<T>(address);
+                    }
+                    catch (Exception e3)
+                    {
+                        if (e3.GetType() == typeof(TypeInitializationException))
+                        {
+                            //TODO: Figure how to Get a valid result.
+                            return false; // no need to proceed as udon won't give us anything.
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// This verifies and avoids TypeUnitializedException by doing 2 steps
+        /// First it asks the heap if the Variable is initalized, if not inits it, then tries to read it.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="heap"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        internal static bool isHeapVariableValid<T>(this RawUdonBehaviour udon, string symbolName)
+        {
+            if (udon == null) return false;
+            try
+            {
+                var address = udon.IUdonSymbolTable.GetAddressFromSymbol(symbolName);
+                if (address != null)
+                {
+                    return udon.IUdonHeap.isHeapVariableValid<T>(address);
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
+        /// <summary>
+        /// This verifies and avoids TypeUnitializedException by doing 2 steps
+        /// First it asks the heap if the Variable is initalized, if not inits it, then tries to read it.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="heap"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        public static bool isHeapVariableValid<T>(this RawUdonBehaviour udon, uint address)
+        {
+            if (udon == null) return false;
+            try
+            {
+                if (udon.IUdonSymbolTable.HasSymbolForAddress(address))
+                {
+                    return udon.IUdonHeap.isHeapVariableValid<T>(address);
+                }
+            }
+            catch { }
+
+            return false;
+        }
+
         /// <summary>
         /// This Extracts and filters invalid eventkeys such as
         /// "",
@@ -75,9 +174,7 @@ namespace AstroClient.Tools.UdonEditor
             {
                 action.SendCustomNetworkEvent(target, key);
             }
-
         }
-
 
         /// <summary>
         /// Shortcut to access Udon EventTable
@@ -108,6 +205,5 @@ namespace AstroClient.Tools.UdonEditor
         {
             return behaviour.Get_EventTable().entries;
         }
-
     }
 }
