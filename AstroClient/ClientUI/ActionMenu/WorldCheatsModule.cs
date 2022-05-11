@@ -438,6 +438,8 @@ internal class WorldCheatsModule : AstroEvents
 
                     CustomSubMenu.AddToggle("Toggle Pickup ESP", VRChat_Map_ESP_Menu.Toggle_Pickup_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = ToggleValue; }, null, false);
                     CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
+                    CustomSubMenu.AddToggle("Doors Stay open", PrisonEscape.DoorsStayOpen, ToggleValue => { PrisonEscape.DoorsStayOpen = ToggleValue; });
+
                 });
                 CustomSubMenu.AddSubMenu("Game Events", () =>
                 {

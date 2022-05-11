@@ -1,33 +1,20 @@
-﻿using System;
-using AstroClient.AstroMonos.AstroUdons;
-using AstroClient.AstroMonos.Components.Tools;
+﻿using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
-using AstroClient.Tools.UdonSearcher;
-using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
+using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldsIds;
 using VRC.Udon;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
-    using AstroClient.Tools.Colors;
     using AstroClient.Tools.Extensions;
-    using Boo.Lang.Compiler.Ast;
     using ClientAttributes;
-    using ESP.Player;
     using Il2CppSystem.Collections.Generic;
-    using Tools.Listeners;
-    using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
-    using VRC;
-    using VRC.Core;
-    using WorldModifications.WorldHacks;
-    using xAstroBoy.Extensions;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
     using Object = Il2CppSystem.Object;
-
 
     [RegisterComponent]
     public class PrisonEscape_DoorAssister : MonoBehaviour
@@ -38,11 +25,16 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             AntiGarbageCollection.Add(this);
         }
+
+        
+
         private void OnRoomLeft()
         {
             Destroy(this);
         }
+
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -54,15 +46,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -72,15 +60,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         private UdonBehaviour_Cached KeypadDoorEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private UdonBehaviour_Cached KeypadDoorEvent_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private UdonBehaviour_Cached KeypadDoorEvent_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonBehaviour_Cached OpenDoorSynced { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private UdonBehaviour_Cached OpenDoorInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         private System.Collections.Generic.List<VRC_AstroInteract> Triggers { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new System.Collections.Generic.List<VRC_AstroInteract>();
 
-        void Start()
+        private void Start()
         {
             if (!WorldUtils.WorldID.Equals(WorldIds.PrisonEscape)) Destroy(this);
 
-            // This will work along with the laser component
-            KeypadDoorEvent = gameObject.FindUdonEvent("Keypad","_interact", false);
+            OpenDoorSynced = gameObject.FindUdonEvent("_OpenDoorSynced");
+            OpenDoorInteract = gameObject.FindUdonEvent("Mesh", "_interact");
+
+
+            KeypadDoorEvent = gameObject.FindUdonEvent("Keypad", "_interact", false);
             KeypadDoorEvent_1 = gameObject.FindUdonEvent("Keypad (1)", "_interact", false);
             KeypadDoorEvent_2 = gameObject.FindUdonEvent("Keypad (2)", "_interact", false);
 
@@ -103,7 +96,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                         }
                     }
                 }
-                if(Triggers.Count != 0)
+                if (Triggers.Count != 0)
                 {
                     Log.Debug($"Registered {Triggers.Count} On GameObject {gameObject.name}");
                     HasSubscribed = true;
@@ -113,7 +106,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     Log.Debug($"Failed to Find Any Triggers On GameObject {gameObject.name}");
                     Destroy(this);
                 }
-
             }
             else
             {
@@ -121,47 +113,62 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-
-        void OnInteract()
+        private void OnInteract()
         {
-
+            if (PrisonEscape.DoorsStayOpen)
+            {
+                if(OpenDoorSynced != null)
+                {
+                    OpenDoorSynced.InvokeBehaviour();
+                    return;
+                }
+            }
             if (KeypadDoorEvent != null && KeypadDoorEvent.gameObject.active)
             {
                 KeypadDoorEvent.InvokeBehaviour();
+                if (OpenDoorInteract != null)
+                {
+                    OpenDoorInteract.InvokeBehaviour();
+                }
             }
-            else if(KeypadDoorEvent_1 != null && KeypadDoorEvent_1.gameObject.active)
+            else if (KeypadDoorEvent_1 != null && KeypadDoorEvent_1.gameObject.active)
             {
                 KeypadDoorEvent_1.InvokeBehaviour();
+                if (OpenDoorInteract != null)
+                {
+                    OpenDoorInteract.InvokeBehaviour();
+                }
             }
-            else if(KeypadDoorEvent_2 != null && KeypadDoorEvent_2.gameObject.active)
+            else if (KeypadDoorEvent_2 != null && KeypadDoorEvent_2.gameObject.active)
             {
-                KeypadDoorEvent_2.InvokeBehaviour(); 
+                KeypadDoorEvent_2.InvokeBehaviour();
+                if (OpenDoorInteract != null)
+                {
+                    OpenDoorInteract.InvokeBehaviour();
+                }
             }
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             foreach (var trigger in Triggers)
             {
-            trigger.enabled = true;
-                
+                trigger.enabled = true;
             }
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             foreach (var trigger in Triggers)
             {
                 trigger.enabled = false;
-
             }
         }
-        
-        void OnDestroy()
+
+        private void OnDestroy()
         {
             Triggers.DestroyMeLocal(true);
             HasSubscribed = false;
         }
-
     }
 }

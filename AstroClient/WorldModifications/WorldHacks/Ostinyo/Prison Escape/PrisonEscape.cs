@@ -52,6 +52,17 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             
         }
 
+        private static bool _DoorsStayOpen = false;
+        internal static bool DoorsStayOpen
+        {
+            get => _DoorsStayOpen;
+            set
+            {
+                _DoorsStayOpen = value;
+            }
+
+        }
+
         private bool _HasSubscribed = false;
         private bool HasSubscribed
         {
@@ -89,6 +100,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 _IsCurrentWorld = value;
                 if (!value)
                 {
+                    DoorsStayOpen = false;
                     OnShowRolesPropertyChanged = null;
                     ShowRoles = false;
                     MoneyInteraction = null;

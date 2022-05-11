@@ -478,6 +478,9 @@ namespace AstroClient.AstroMonos.Components.Tools
         void OnDestroy()
         {
             EventsAreEnabled = false;
+            OnPickupDrop = null;
+            OnPickupHeld = null;
+            RestoreProperties();
         }
 
         internal void RestoreProperties()

@@ -15,36 +15,37 @@ namespace AstroClient.ClientUI.ActionMenu
 
         private void OnApplicationStart()
         {
-            AMUtils.AddToModsFolder("World Control", () =>
+            AMUtils.AddToModsFolder("World Pickup Control", () =>
             {
-                CustomSubMenu.AddSubMenu("Pickups Controls", () =>
+                CustomSubMenu.AddButton("Restore Original pickups pos", () =>
                 {
-                    CustomSubMenu.AddButton("Restore Original pickups pos", () =>
-                    {
-                        GameObjectMenu.TeleportPickupsToTheirDefaultPosition(false);
-                    }, null, false);
-                    CustomSubMenu.AddButton("Restore Original pickups pos & Revert Rigidbody Edits", () =>
-                    {
-                        GameObjectMenu.TeleportPickupsToTheirDefaultPosition(true);
-                    }, null, false);
-                    CustomSubMenu.AddButton("Enable World Gravity On kinematic Pickups", () =>
-                    {
-                        ObjectMiscOptions.DisablePickupKinematic(true);
-                    }, null, false);
-                    CustomSubMenu.AddButton("Enable Gravity 0G On kinematic Pickups", () =>
-                    {
-                        ObjectMiscOptions.DisablePickupKinematic(false);
-                    }, null, false);
-                    CustomSubMenu.AddButton("Enable World Gravity on All Pickups", () =>
-                    {
-                        ObjectMiscOptions.SetGravityOnWorldPickups(true);
-                    }, null, false);
-                    CustomSubMenu.AddButton("Disable Gravity on All Pickups", () =>
-                    {
-                        ObjectMiscOptions.SetGravityOnWorldPickups(false);
-                    }, null, false);
+                    GameObjectMenu.TeleportPickupsToTheirDefaultPosition(false);
+                }, null, false);
+                CustomSubMenu.AddButton("Restore Original pickups pos & Revert Rigidbody Edits", () =>
+                {
+                    GameObjectMenu.TeleportPickupsToTheirDefaultPosition(true);
+                }, null, false);
+                CustomSubMenu.AddButton("Enable World Gravity On kinematic Pickups", () =>
+                {
+                    ObjectMiscOptions.DisablePickupKinematic(true);
+                }, null, false);
+                CustomSubMenu.AddButton("Enable Gravity 0G On kinematic Pickups", () =>
+                {
+                    ObjectMiscOptions.DisablePickupKinematic(false);
+                }, null, false);
+                CustomSubMenu.AddButton("Enable World Gravity on All Pickups", () =>
+                {
+                    ObjectMiscOptions.SetGravityOnWorldPickups(true);
+                }, null, false);
+                CustomSubMenu.AddButton("Disable Gravity on All Pickups", () =>
+                {
+                    ObjectMiscOptions.SetGravityOnWorldPickups(false);
+                }, null, false);
 
-                }, null, false, null);
+                //CustomSubMenu.AddSubMenu("Pickups Controls", () =>
+                //{
+
+                //}, null, false, null);
             });
 
             Log.Write("ESP Module is ready!", Color.Green);
