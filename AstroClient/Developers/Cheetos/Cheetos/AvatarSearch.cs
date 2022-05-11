@@ -111,7 +111,7 @@ namespace AstroClient.Cheetos
 
         private void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
         {
-            MiscUtils.DelayFunction(0.1f, () => { PedestalDump(); });
+            PedestalDump();
         }
 
         //internal static void OnSelect()

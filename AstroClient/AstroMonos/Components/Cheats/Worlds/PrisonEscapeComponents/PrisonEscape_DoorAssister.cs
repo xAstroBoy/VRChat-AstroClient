@@ -88,7 +88,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             if(UnlockTrigger_enter != null)
             {
-                if(UnlockTrigger_enter.UdonBehaviour.Equals(item))
+                if(UnlockTrigger_enter.UdonBehaviour.Equals(item.gameObject))
                 {
                     if(action.Equals(UnlockTrigger_enter.EventKey))
                     {
@@ -98,7 +98,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
             if (UnlockTrigger_leave != null)
             {
-                if (UnlockTrigger_leave.UdonBehaviour.Equals(item))
+                if (UnlockTrigger_leave.UdonBehaviour.gameObject.Equals(item.gameObject))
                 {
                     if (action.Equals(UnlockTrigger_leave.EventKey))
                     {
@@ -202,11 +202,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         private void ClickKeypad()
         {
-            if (PrisonEscape.DoorsStayOpen) return;
-            if(UsesUnlockTrigger)
-            {
-                if (!NeedsToInteractWithDoor) return;
-            }
+            //if (PrisonEscape.DoorsStayOpen) return;
+            //if(UsesUnlockTrigger)
+            //{
+            //    if (!NeedsToInteractWithDoor) return;
+            //}
             if (KeypadDoorEvent != null && KeypadDoorEvent.gameObject.active)
             {
                 KeypadDoorEvent.InvokeBehaviour();
@@ -241,7 +241,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             else
             {
                 ClickKeypad();
-                OpenDoor();
+                //OpenDoor();
             }
         }
 
