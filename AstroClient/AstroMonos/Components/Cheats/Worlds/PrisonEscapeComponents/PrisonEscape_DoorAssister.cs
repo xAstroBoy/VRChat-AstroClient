@@ -203,6 +203,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         private void ClickKeypad()
         {
             if (PrisonEscape.DoorsStayOpen) return;
+            if (!NeedsToInteractWithDoor) return;
             if (KeypadDoorEvent != null && KeypadDoorEvent.gameObject.active)
             {
                 KeypadDoorEvent.InvokeBehaviour();
