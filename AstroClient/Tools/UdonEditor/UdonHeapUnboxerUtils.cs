@@ -975,9 +975,52 @@ namespace AstroClient.Tools.UdonEditor
         /// <returns></returns>
 
         internal static string PrintAsString<T>(IUdonHeap heap, uint address)
-        {
+        {  
             // Detect if is a array .
             var FullName = typeof(T).FullName;
+
+            // before we start, let's try a extra step.
+            try
+            {
+                if (!heap.IsHeapVariableInitialized(address))
+                {
+                    heap.InitializeHeapVariable<T>(address);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+            }
+
+            try
+            {
+                _ = heap.GetHeapVariable<T>(address);
+            }
+            catch(Exception e)
+            {
+                if (e.GetType() == typeof(TypeInitializationException))
+                {
+                    try
+                    {
+                        heap.InitializeHeapVariable<T>(address);
+
+                    }
+                    catch{}
+                    try
+                    {
+                        _ = heap.GetHeapVariable<T>(address);
+                    }
+                    catch (Exception e3)
+                    {
+                        if (e3.GetType() == typeof(TypeInitializationException))
+                        {
+                            return $"Empty {FullName}"; // no need to proceed as udon won't give us anything.
+                        }
+                    }
+
+                }
+            }
+
             if (FullName != null && FullName.EndsWith("[]"))
             {
                 var ArrayString = new StringBuilder();
@@ -2214,6 +2257,7 @@ namespace AstroClient.Tools.UdonEditor
                         {
                             try
                             {
+                                
                                 var content = heap.GetHeapVariable<System.Object>(address);
                                 if (content != null)
                                 {
