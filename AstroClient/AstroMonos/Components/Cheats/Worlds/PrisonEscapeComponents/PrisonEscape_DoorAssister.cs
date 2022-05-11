@@ -123,23 +123,23 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             if (!WorldUtils.WorldID.Equals(WorldIds.PrisonEscape)) Destroy(this);
 
             OpenDoorSynced = gameObject.FindUdonEvent("_OpenDoorSynced");
-            OpenDoorInteract = gameObject.FindUdonEvent("Mesh", "_interact");
+            //OpenDoorInteract = gameObject.FindUdonEvent("Mesh", "_interact");
 
-            var unlocktrigger = gameObject.FindObject("Unlock Trigger");
-            if(unlocktrigger == null)
-            {
-                unlocktrigger = gameObject.FindObject("Unlock Trigger (1)");
-            }
-            if(unlocktrigger != null)
-            {
-                if (unlocktrigger.active)
-                {
-                    EnableCustomEventListener = true;
-                    UsesUnlockTrigger = true;
-                    UnlockTrigger_enter = unlocktrigger.FindUdonEvent("_onPlayerTriggerEnter");
-                    UnlockTrigger_leave = unlocktrigger.FindUdonEvent("_onPlayerTriggerExit");
-                }
-            }
+            //var unlocktrigger = gameObject.FindObject("Unlock Trigger");
+            //if(unlocktrigger == null)
+            //{
+            //    unlocktrigger = gameObject.FindObject("Unlock Trigger (1)");
+            //}
+            //if(unlocktrigger != null)
+            //{
+            //    if (unlocktrigger.active)
+            //    {
+            //        EnableCustomEventListener = true;
+            //        UsesUnlockTrigger = true;
+            //        UnlockTrigger_enter = unlocktrigger.FindUdonEvent("_onPlayerTriggerEnter");
+            //        UnlockTrigger_leave = unlocktrigger.FindUdonEvent("_onPlayerTriggerExit");
+            //    }
+            //}
 
             KeypadDoorEvent = gameObject.FindUdonEvent("Keypad", "_interact", false);
             KeypadDoorEvent_1 = gameObject.FindUdonEvent("Keypad (1)", "_interact", false);
