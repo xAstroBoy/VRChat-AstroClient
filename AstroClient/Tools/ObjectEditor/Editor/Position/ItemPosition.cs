@@ -109,6 +109,29 @@
                 obj.transform.rotation = Rotation;
             }
         }
+        internal static void SetRotation(GameObject obj, Vector3 Rotation, bool TakeOwnership = false)
+        {
+            if (TakeOwnership)
+            {
+                OnlineEditor.TakeObjectOwnership(obj);
+            }
+            var controller = obj.GetComponent<RigidBodyController>();
+            if (controller != null)
+            {
+                if (controller.Rigidbody != null)
+                {
+                    controller.rotation = Quaternion.Euler(Rotation);
+                }
+                else
+                {
+                    obj.transform.rotation = Quaternion.Euler(Rotation);
+                }
+            }
+            else
+            {
+                obj.transform.rotation = Quaternion.Euler(Rotation);
+            }
+        }
 
         internal static void TeleportObject(GameObject obj)
         {

@@ -9,9 +9,12 @@ using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.CheetosUI;
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.Menu.ItemTweakerV2.Selector;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.Tools.Holders;
+using AstroClient.Tools.ObjectEditor;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
 using AstroClient.WorldModifications.WorldsIds;
@@ -133,7 +136,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     TakeKeyCardOnWanted = false;
                     PrisonDoors_Open.Clear();
                     PrisonDoors_Close.Clear();
-                    GameManager = null;
                     WorldSettings_DoublePoints_Toggle = null;
                     WorldSettings_GoldenGuns_Toggle = null;
 
@@ -184,6 +186,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
             //    }
             //}
+
+
             var occluder = GameObjectFinder.FindRootSceneObject("Occlusion");
 
             if (occluder != null)
@@ -192,8 +196,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
             if (Yard != null)
             {
-                Yard.FindObject("Colliders/Collider").DestroyMeLocal(true); // Remove roof collider only
-                Yard.FindObject("Colliders/Collider (1)").DestroyMeLocal(true); // Remove roof collider only
+                Yard.FindObject("Colliders/Collider").DestroyMeLocal(true); 
+                Yard.FindObject("Colliders/Collider (1)").DestroyMeLocal(true);
+                Yard.FindObject("Colliders/Collider (2)").DestroyMeLocal(true); 
+                Yard.FindObject("Colliders/Collider (3)").DestroyMeLocal(true); 
+                FixOutsideFence(Yard.FindObject("Colliders/Collider (4)"));
+                FixOutsideFence(Yard.FindObject("Colliders/Collider (5)"));
 
             }
 
@@ -422,12 +430,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
                 if (item.name.Contains("Game Manager"))
                 {
-                    var manager = item.FindUdonEvent("_AbortGame");
-                    if (manager != null)
-                    {
-                        GameManager = manager.UdonBehaviour.gameObject.GetOrAddComponent<PrisonEscape_GameManagerReader>();
-                    }
-                    var startgame = manager.UdonBehaviour.FindUdonEvent("StartGameCountdown");
+                    var startgame = item.FindUdonEvent("StartGameCountdown");
                     if(startgame != null)
                     {
                         var btn = new WorldButton(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game</color> \n <color=orange>Bypass Master Lock!</color> ", () =>
@@ -436,7 +439,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         });
                         btn.SetScale(new Vector3(0.15f, 0.24f, 0.3f));
                     }
-                    manager.gameObject.AddToWorldUtilsMenu();
+                    startgame.gameObject.AddToWorldUtilsMenu();
                 }
 
 
@@ -484,33 +487,28 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
 
-            foreach (var item in Resources.FindObjectsOfTypeAll<VRC_SceneDescriptor>())
+            if (WorldUtils.Spawns != null)
             {
-                if (item != null)
+                foreach (var spawn in WorldUtils.Spawns)
                 {
-                    foreach (var spawn in item.spawns)
+                    if (!SpawnPoints_Spawn.Contains(spawn.position))
                     {
-                        if (!SpawnPoints_Spawn.Contains(spawn.position))
-                        {
-                            SpawnPoints_Spawn.Add(spawn.position);
-                        }
-                    }
-                    if (!SpawnPoints_Spawn.Contains(item.SpawnPosition))
-                    {
-                        SpawnPoints_Spawn.Add(item.SpawnPosition);
-                    }
-                    AddSpawnPointDetector(item.SpawnPosition, PrimitiveType.Sphere, 50f, PrisonEscape_Roles.Dead);
-
-
-                    if (item.SpawnLocation != null)
-                    {
-                        if (!SpawnPoints_Spawn.Contains(item.SpawnLocation.position))
-                        {
-                            SpawnPoints_Spawn.Add(item.SpawnLocation.position);
-                        }
+                        SpawnPoints_Spawn.Add(spawn.position);
                     }
                 }
             }
+            AddSpawnPointDetector(WorldUtils.SpawnPosition, PrimitiveType.Sphere, 50f, PrisonEscape_Roles.Dead);
+
+
+            if (WorldUtils.SpawnLocation != null)
+            {
+                if (!SpawnPoints_Spawn.Contains(WorldUtils.SpawnLocation.position))
+                {
+                    SpawnPoints_Spawn.Add(WorldUtils.SpawnLocation.position);
+                }
+            }
+
+
             foreach (var item in WorldUtils.Pickups)
             {
                 Patch_canDualWield(item.gameObject);
@@ -527,6 +525,134 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         }
                     }
                     item.AddComponent<PrisonEscape_AimAssister>();
+                }
+                // Worldbuttons for Snipers 
+                if (item.name.Equals("Sniper"))
+                {
+                    #region  Turret 1 Sniper
+                    // Turret Respawn Sniper
+
+                    #region  Turret Area
+                    var TurretTop = new WorldButton(new Vector3(60.879f, 11.45f, 282.65f), new Vector3(0, 270, 0), "<color=orange>Respawn Sniper</color>", () =>
+                    {
+                        GameObjectMenu.RestoreOriginalLocation(item.gameObject, false);
+                    });
+                    TurretTop.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
+
+                    #endregion
+
+
+                    #region  Guard Spawn
+                    var GuardArea = new WorldButton(new Vector3(22.9135f, 4.9f, 293.36f), new Vector3(0, 94, 0), "<color=orange>Teleport Sniper</color>", () =>
+                    {
+                        item.gameObject.SetPosition(new Vector3(22.0804f, 4.925f, 293.2137f), true);
+                        item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
+
+                    });
+                    GuardArea.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
+
+
+
+                    #endregion
+                    var Control = item.GetOrAddComponent<PickupController>();
+                    if (Control != null)
+                    {
+                        Control.OnPickupHeld += () =>
+                        {
+                            var RespawnSniper = $"<color=red>Respawn Sniper</color>{Environment.NewLine}<color=red>Currently Held by {Control.CurrentHolderDisplayName}</color>";
+                            var TeleportSniper = $"<color=red>Teleport Sniper</color>{Environment.NewLine}<color=red>Currently Held by {Control.CurrentHolderDisplayName}</color>";
+
+                            if (TurretTop != null)
+                            {
+                                TurretTop.SetText(RespawnSniper);
+                            }
+                            if (GuardArea != null)
+                            {
+                                GuardArea.SetText(TeleportSniper);
+                            }
+
+                        };
+                        Control.GetOrAddComponent<PickupController>().OnPickupDrop += () =>
+                        {
+                            var RespawnSniper = "<color=orange>Respawn Sniper</color>";
+                            var TeleportSniper = "<color=orange>Teleport Sniper</color>";
+
+                            if (TurretTop != null)
+                            {
+                                TurretTop.SetText(RespawnSniper);
+                            }
+                            if (GuardArea != null)
+                            {
+                                GuardArea.SetText(TeleportSniper);
+                            }
+                        };
+                    }
+                    #endregion
+
+                }
+
+                if (item.name.Equals("Sniper (1)"))
+                {
+                    #region  Turret 2 Sniper
+                    // Turret Respawn Sniper
+
+                    #region  Turret Area
+                    var TurretTop = new WorldButton(new Vector3(60.879f, 11.45f, 317.3293f), new Vector3(0, 90, 0), "<color=orange>Respawn Sniper</color>", () =>
+                    {
+                        GameObjectMenu.RestoreOriginalLocation(item.gameObject, false);
+                    });
+                    TurretTop.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
+
+                    #endregion
+
+
+                    #region  Guard Spawn
+                    var GuardArea = new WorldButton(new Vector3(20.6418f, 4.91f, 306.7371f), new Vector3(0, 185, 0), "<color=orange>Teleport Sniper</color>", () =>
+                    {
+                        item.gameObject.SetPosition(new Vector3(22.08039f, 4.925f, 306.7233f), true);
+                        item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
+
+                    });
+                    GuardArea.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
+
+
+
+                    #endregion
+                    var Control = item.GetOrAddComponent<PickupController>();
+                    if (Control != null)
+                    {
+                        Control.OnPickupHeld += () =>
+                        {
+                            var RespawnSniper = $"<color=red>Respawn Sniper</color>{Environment.NewLine}<color=red>Currently Held by {Control.CurrentHolderDisplayName}</color>";
+                            var TeleportSniper = $"<color=red>Teleport Sniper</color>{Environment.NewLine}<color=red>Currently Held by {Control.CurrentHolderDisplayName}</color>";
+
+                            if (TurretTop != null)
+                            {
+                                TurretTop.SetText(RespawnSniper);
+                            }
+                            if (GuardArea != null)
+                            {
+                                GuardArea.SetText(TeleportSniper);
+                            }
+
+                        };
+                        Control.GetOrAddComponent<PickupController>().OnPickupDrop += () =>
+                        {
+                            var RespawnSniper = "<color=orange>Respawn Sniper</color>";
+                            var TeleportSniper = "<color=orange>Teleport Sniper</color>";
+
+                            if (TurretTop != null)
+                            {
+                                TurretTop.SetText(RespawnSniper);
+                            }
+                            if (GuardArea != null)
+                            {
+                                GuardArea.SetText(TeleportSniper);
+                            }
+                        };
+                    }
+                    #endregion
+
                 }
 
                 if (item.name.Contains("RPG"))
@@ -571,6 +697,19 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 if (WorldSettings_DoublePoints_Toggle != null && WorldSettings_GoldenGuns_Toggle != null && WorldSettings_VisualHitBoxes_Toggle != null && WorldSettings_Avatars_Toggle != null && WorldSettings_Music_Toggle != null)
                 {
                     break;
+                }
+            }
+
+            if (Spawn_Area != null)
+            {
+                if (Game_Join_Blocker != null)
+                {
+                    Game_Join_Blocker.RemoveColliders(); // Fuck off annoying shit
+                }
+                var blocks = Spawn_Area.FindObject("Building/Colliders");
+                if(blocks != null)
+                {
+                    blocks.DestroyMeLocal();
                 }
             }
 
@@ -752,6 +891,26 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
 
         }
+
+        /// <summary>
+        ///  This will shrink the border colliders on The guard tower and Adjust their position to allow the player to jump out of the Fence!
+        /// </summary>
+        /// <param name="fence"></param>
+
+        private static void FixOutsideFence(GameObject fence)
+        {
+            if (fence != null)
+            {
+                var box = fence.GetComponent<BoxCollider>();
+                if (box != null)
+                {
+                    box.extents = new Vector3(box.extents.x, 0.29f, box.extents.z);
+                    box.transform.localPosition = new Vector3(box.transform.localPosition.x, 1.9f, box.transform.localPosition.z);
+                }
+            }
+
+        }
+
         /// <summary>
         ///  This will shrink the border colliders on The guard tower and Adjust their position to allow the player to jump out of the Fence!
         /// </summary>
@@ -1735,6 +1894,23 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+        private static GameObject _Game_Join_Blocker;
+        internal static GameObject Game_Join_Blocker
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Game_Join_Blocker == null)
+                    {
+                        return _Game_Join_Blocker = Spawn_Area.FindObject("Game Join Blocker");
+                    }
+                    return _Game_Join_Blocker;
+                }
+
+                return null;
+            }
+        }
 
         private static GameObject _Scripts;
 
@@ -2094,8 +2270,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         private static RawUdonBehaviour RedCardBehaviour { get; set; } = null;
         internal static UdonBehaviour_Cached MoneyInteraction { get; set; } = null;
         internal static UdonBehaviour_Cached GateInteraction { get; set; } = null;
-        internal static PrisonEscape_GameManagerReader GameManager { get; set; } = null;
-
         internal static UdonBehaviour_Cached TogglePatronGuns { get; set; } = null;
         internal static UdonBehaviour_Cached ToggleDoublePoints { get; set; } = null;
 

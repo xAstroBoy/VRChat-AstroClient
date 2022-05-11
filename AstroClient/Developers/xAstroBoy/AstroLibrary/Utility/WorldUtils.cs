@@ -218,6 +218,82 @@ namespace AstroClient.xAstroBoy.Utility
         }
 
 
+        internal static Transform[] Spawns
+        {
+            get
+            {
+                if (SDKBaseDescriptor != null)
+                {
+                    if (SDKBaseDescriptor.spawns != null)
+                    {
+                        return SDKBaseDescriptor.spawns.ToArray();
+                    }
+                }
+                else if (SDK2Descriptor != null)
+                {
+                    if (SDK2Descriptor.spawns != null)
+                    {
+                        return SDK2Descriptor.spawns.ToArray();
+                    }
+                }
+                else if (SDK3Descriptor != null)
+                {
+                    if(SDK3Descriptor.spawns != null)
+                    {
+                        return SDK3Descriptor.spawns.ToArray();
+                    }
+                }
+                return null;
+            }
+        }
+        internal static Vector3 SpawnPosition
+        {
+            get
+            {
+                if (SDKBaseDescriptor != null)
+                {
+                    return SDKBaseDescriptor.SpawnPosition;
+                }
+                else if (SDK2Descriptor != null)
+                {
+                    return SDK2Descriptor.SpawnPosition;
+                }
+                else if (SDK3Descriptor != null)
+                {
+                    return SDK3Descriptor.SpawnPosition;
+                }
+                return default(Vector3);
+            }
+        }
+        internal static Transform SpawnLocation
+        {
+            get
+            {
+                if (SDKBaseDescriptor != null)
+                {
+                    if (SDKBaseDescriptor.SpawnLocation != null)
+                    {
+                        return SDKBaseDescriptor.SpawnLocation;
+                    }
+                }
+                else if (SDK2Descriptor != null)
+                {
+                    if (SDK2Descriptor.SpawnLocation != null)
+                    {
+                        return SDK2Descriptor.SpawnLocation;
+                    }
+                }
+                else if (SDK3Descriptor != null)
+                {
+                    if (SDK3Descriptor.SpawnLocation != null)
+                    {
+                        return SDK3Descriptor.SpawnLocation;
+                    }
+                }
+                return null;
+            }
+        }
+
         internal static GameObject[] DynamicPrefabs
         {
             get
@@ -238,7 +314,7 @@ namespace AstroClient.xAstroBoy.Utility
                 }
                 else if (SDK3Descriptor != null)
                 {
-                    if(SDK3Descriptor.DynamicPrefabs != null)
+                    if (SDK3Descriptor.DynamicPrefabs != null)
                     {
                         return SDK3Descriptor.DynamicPrefabs.ToArray();
                     }
@@ -246,8 +322,6 @@ namespace AstroClient.xAstroBoy.Utility
                 return null;
             }
         }
-
-
 
 
         public static Player GetPlayerByDisplayName(string name)

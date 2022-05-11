@@ -24,18 +24,17 @@ namespace AstroClient.Tools.UdonEditor
             if (heap == null) return false;
             try
             {
+                // Check if Heap is initialized, if not inits it.
                 if (!heap.IsHeapVariableInitialized(address))
                 {
                     heap.InitializeHeapVariable<T>(address);
                 }
             }
-            catch (Exception e)
-            {
-                Log.Exception(e);
-            }
+            catch {}
 
             try
             {
+                // Try to read heap address, if it throws the exception, try again.
                 _ = heap.GetHeapVariable<T>(address);
             }
             catch (Exception e)
@@ -44,11 +43,13 @@ namespace AstroClient.Tools.UdonEditor
                 {
                     try
                     {
+                        // init again.
                         heap.InitializeHeapVariable<T>(address);
                     }
                     catch { }
                     try
                     {
+                        // try for the second time, if it fails, we can't do aything.
                         _ = heap.GetHeapVariable<T>(address);
                     }
                     catch (Exception e3)
