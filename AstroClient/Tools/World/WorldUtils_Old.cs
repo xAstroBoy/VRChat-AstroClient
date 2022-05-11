@@ -98,7 +98,11 @@ namespace AstroClient.Tools.World
                         for (var index = 0; index < list1.Count; index++)
                         {
                             var item = list1[index];
-                            result.AddGameObject(item.gameObject);
+                            if(!result.Contains(item.gameObject))
+                            {
+                                result.Add(item.gameObject);
+                            }
+
                         }
                     }
                 }
@@ -109,7 +113,10 @@ namespace AstroClient.Tools.World
                         for (var index = 0; index < list2.Count; index++)
                         {
                             var item = list2[index];
-                            result.AddGameObject(item.gameObject);
+                            if (!result.Contains(item.gameObject))
+                            {
+                                result.Add(item.gameObject);
+                            }
                         }
                     }
                 }
@@ -121,7 +128,10 @@ namespace AstroClient.Tools.World
                         for (var index = 0; index < list3.Count; index++)
                         {
                             var item = list3[index];
-                            result.AddGameObject(item.gameObject);
+                            if (!result.Contains(item.gameObject))
+                            {
+                                result.Add(item.gameObject);
+                            }
                         }
                     }
                 }
@@ -133,7 +143,10 @@ namespace AstroClient.Tools.World
                         for (var index = 0; index < list4.Count; index++)
                         {
                             var item = list4[index];
-                            result.AddGameObject(item.gameObject);
+                            if (!result.Contains(item.gameObject))
+                            {
+                                result.Add(item.gameObject);
+                            }
                         }
                     }
                 }
