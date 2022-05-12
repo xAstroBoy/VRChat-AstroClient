@@ -77,7 +77,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (id == WorldIds.KMartExpress_1)
+            if (id == WorldIds.Super_Kmart_Center)
             {
                 Log.Write($"Recognized {Name} World, Removing Blocking System....", System.Drawing.Color.Gold);
                 isCurrentWorld = true;
