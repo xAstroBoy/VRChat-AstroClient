@@ -13,7 +13,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     using WorldsIds;
     using xAstroBoy;
 
-    internal class Kmart : AstroEvents
+    internal class KmartExpress_1 : AstroEvents
     {
         internal override void RegisterToEvents()
         {
@@ -131,7 +131,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             RemoveDoorsCollider(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group72"));
 
             // Activate the "cashier" buttons
-            ActivateToggles(Root.FindObject("RoombaBase/instance_1/Quad"));
+            ActivateToggles(Root.FindObject("RoombaBase/instance_1/KLogo"));
 
 
             var keypaddisplay = Root.FindObject("Electronics/bunkbed_office_chair/KeypadStructure/KeypadCanvas/KeypadDisplay");
