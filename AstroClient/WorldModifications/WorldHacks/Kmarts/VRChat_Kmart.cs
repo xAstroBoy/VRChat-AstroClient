@@ -2,6 +2,7 @@
 using AstroClient.CheetosUI;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks;
+using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using VRC;
 using VRC.SDKBase;
@@ -147,17 +148,9 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (root != null)
             {
-                foreach (var item in root.transform.Get_All_Childs())
+                foreach (var item in root.transform.GetComponentsInChildren<BoxCollider>(true))
                 {
-                    var triggers = item.gameObject.Get_Triggers();
-                    if (triggers != null)
-                    {
-                        if (triggers.Count != 0)
-                        {
-                            continue;
-                        }
-                    }
-                    item.gameObject.RemoveColliders(true);
+                    Object.DestroyImmediate(item);
                 }
             }
 
@@ -167,17 +160,12 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (root != null)
             {
-                foreach (var item in root.transform.Get_All_Childs())
+                foreach (var item in root.transform.GetComponentsInChildren<BoxCollider>(true))
                 {
-                    var triggers = item.gameObject.Get_Triggers();
-                    if(triggers != null)
+                    if(!item.gameObject.name.ToLower().Equals("cube"))
                     {
-                        if(triggers.Count != 0)
-                        {
-                            continue;
-                        }
+                        Object.DestroyImmediate(item);
                     }
-                    item.gameObject.RemoveColliders(true);
                 }
             }
 
@@ -200,10 +188,10 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static void FindEverything()
         {
 
-            //Replicate the authorize Trigger Locally.
 
-            // First Destroy his barriers
+            //Destroy his barriers
             RemoveColliders(Root.FindObject("AssociateBoxes/VRCChair (7)"));
+
 
             // This removes The Doors colliders (annoying ffs)
             RemoveColliders(Root.FindObject("Kmart (1)/Group_2_1/Group_65_1/Group3/CartDoorsOpen"));
@@ -222,7 +210,17 @@ namespace AstroClient.WorldModifications.WorldHacks
             RemoveDoorsCollider(Root.FindObject("Kmart (1)/Group_2_1/Group_65_1/Group3/Group7/Besam_Passport_900_Series_glass_automatic_Door_System2/RightDoor"));
             RemoveDoorsCollider(Root.FindObject("Kmart (1)/Group_2_1/Group_65_1/Group3/Group7/Besam_Passport_900_Series_glass_automatic_Door_System2/RightDoor Outside"));
 
-            if(MerchButton != null)
+
+            RemoveColliders(Root.FindObject("OLD Kmart/Group_2_1/Group_65_1/Lobby/Group72/Besam_Passport_900_Series_glass_automatic_Door_System3"));
+            RemoveColliders(Root.FindObject("OLD Kmart/Group_2_1/Group_65_1/Lobby/Group72/Besam_Passport_900_Series_glass_automatic_Door_System4"));
+            RemoveColliders(Root.FindObject("OLD Kmart/Group_2_1/Group_65_1/Lobby/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_5"));
+            RemoveColliders(Root.FindObject("OLD Kmart/Group_2_1/Group_65_1/Lobby/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_6"));
+            RemoveColliders(Root.FindObject("OLD Kmart/Group_2_1/Group_65_1/Lobby/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_7"));
+            RemoveColliders(Root.FindObject("OLD Kmart/Group_2_1/Group_65_1/Lobby/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_8"));
+            RemoveColliders(Root.FindObject("OLD Kmart/Group_2_1/Group_65_1/Lobby/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_2_2"));
+            RemoveColliders(Root.FindObject("OLD Kmart/Group_2_1/Group_65_1/Lobby/Group72/Besam_Passport_900_Series_glass_automatic_Door_System_1_7 (1)"));
+
+            if (MerchButton != null)
             {
                 MerchButton.SetActive(true);
                 MerchButton.GetComponent<Renderer>().DestroyMeLocal(true);
@@ -233,17 +231,19 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             if (EnablePedestralBtn != null)
             {
-                var trigger = EnablePedestralBtn.AddComponent<VRC_AstroInteract>();
+                var trigger = EnablePedestralBtn.GetOrAddComponent<VRC_AstroInteract>();
                 if (trigger != null)
                 {
                     trigger.OnInteract += () =>
                     {
-                        // retard made it that it deactivates itself..
                         // also the retard made it puts the dummy Pedestrals...
-                        // DEACTIVATE MEANS HIDE EVERYTHING..
                         if (DummyPedestrals != null)
                         {
                             DummyPedestrals.SetActive(true);
+                        }
+                        if (DisablePedestralBtn != null)
+                        {
+                            DisablePedestralBtn.SetActive(true);
                         }
                     };
                 }
@@ -251,7 +251,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             if (DisablePedestralBtn != null)
             {
-                var trigger = DisablePedestralBtn.AddComponent<VRC_AstroInteract>();
+                var trigger = DisablePedestralBtn.GetOrAddComponent<VRC_AstroInteract>();
                 if (trigger != null)
                 {
                     trigger.OnInteract += () =>
