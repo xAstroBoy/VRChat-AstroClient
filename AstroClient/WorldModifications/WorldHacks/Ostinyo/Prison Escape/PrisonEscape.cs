@@ -1361,7 +1361,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         #endregion
 
-        internal static bool GodModeActive { get; set; }
 
         internal static bool TakeKeyCardOnWanted { get; set; }
         private static bool _DropKnifeAfterKill = true;
