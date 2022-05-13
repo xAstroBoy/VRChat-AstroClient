@@ -111,6 +111,7 @@
             if (obj == null)
             {
                 Log.Warn($"[WARNING (FindObject) ]  Transform {transform.name} Doesnt have a object in path [ {path} ] !");
+                return null;
             }
 
             return obj;
@@ -150,6 +151,7 @@
             if (obj == null)
             {
                 Log.Warn($"[WARNING (InactiveFind) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
+                return null;
             }
             return obj;
         }

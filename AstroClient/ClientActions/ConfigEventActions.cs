@@ -17,6 +17,7 @@ namespace AstroClient.ClientActions
 
 
         internal static Action<bool> OnPlayerESPPropertyChanged{ get; set; }
+        internal static Action<bool> JoinLeaveNotifier_PropertyChanged { get; set; }
 
 
 

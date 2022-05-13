@@ -592,6 +592,25 @@ internal class WorldCheatsModule : AstroEvents
             }
 
             #endregion Kmart Express
+            #region VRChat Kmart
+
+            if (WorldUtils.WorldID == WorldIds.VRCHAT_Kmart)
+            {
+                CustomSubMenu.AddButton("Bypass Kmart Lock for Everyone", () => { VRChat_Kmart.BypassKmartRestrictions(); });
+                CustomSubMenu.AddButton("Restore Kmart Lock for Everyone", () => { VRChat_Kmart.RestoreKmartRestrictions(); });
+
+                CustomSubMenu.AddToggle("Remove Lock for Every new player join", VRChat_Kmart.RemoveBlocksForJoinedPlayers, ToggleValue =>
+                {
+                    if (ToggleValue)
+                    {
+                        KmartExpress_1.BypassKmartRestrictions();
+                    }
+                    KmartExpress_1.RemoveBlocksForJoinedPlayers = ToggleValue;
+                });
+            }
+
+            #endregion Kmart Express
+
         }, Icons.thief);
 
         Log.Write("World Module is ready!", Color.Green);

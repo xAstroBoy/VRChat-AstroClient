@@ -42,6 +42,7 @@
         public const string TierLand = "wrld_db8505a0-4dd9-4344-9d13-208ced35931e";
         public const string KMartExpress_1 = "wrld_aeb82cfe-6875-41f9-af32-1e735a67e051";
         public const string Super_Kmart_Center = "wrld_dc7ab61c-93d0-4952-8728-94880fd7cc4e";
+        public const string VRCHAT_Kmart = "wrld_5ed2b273-8fe9-45a9-b2a9-dd872ef68489";
         public const string EvolvantArcade = "wrld_b7acb016-d29f-498b-9d40-0b9a6c38a820";
         public const string JustBClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
         public const string JustBClub2Lobby = "wrld_9408c54c-0aa9-4fd1-a6bd-45bd130710ea";

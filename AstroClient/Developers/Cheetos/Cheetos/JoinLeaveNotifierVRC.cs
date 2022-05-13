@@ -14,15 +14,28 @@ namespace AstroClient.Cheetos
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.OnPlayerJoin += OnPlayerJoined;
-            ClientEventActions.OnPlayerLeft  += OnPlayerLeft;
-
-            ClientEventActions.OnRoomLeft+= OnRoomLeft;
-            ClientEventActions.OnWorldReveal += OnWorldReveal;
-
-
+            ConfigEventActions.JoinLeaveNotifier_PropertyChanged += JoinLeaveNotifierPropertyChanged;
+            if (ConfigManager.General.JoinLeave)
+            {
+                ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+                ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+            }
         }
-        private bool isReady = false;
+
+        private void JoinLeaveNotifierPropertyChanged(bool value)
+        {
+            if (value)
+            {
+                ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+                ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+            }
+            else
+            {
+                ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
+                ClientEventActions.OnPlayerLeft -= OnPlayerLeft;
+            }
+        }
+
         private const string BracketColor = "yellow";
         private const string StreamerTextColor = "orange";
         private const string FriendTextColor = "green";
@@ -60,11 +73,8 @@ namespace AstroClient.Cheetos
 
         private void OnPlayerJoined(Player player)
         {
-            if (!isReady) return;
-            if (!ConfigManager.General.JoinLeave) return;
             if (player != null)
             {
-
                 var apiuser = player.GetAPIUser();
                 if (apiuser != null)
                 {
@@ -79,20 +89,10 @@ namespace AstroClient.Cheetos
             }
         }
 
-        private void OnRoomLeft()
-        {
-            isReady = false;
-        }
 
-        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
-        {
-            MiscUtils.DelayFunction(1, () => { isReady = true; });
-        }
 
         private void OnPlayerLeft(Player player)
         {
-            if (!isReady) return;
-            if (!ConfigManager.General.JoinLeave) return;
             if (player != null)
             {
                 var apiuser = player.GetAPIUser();

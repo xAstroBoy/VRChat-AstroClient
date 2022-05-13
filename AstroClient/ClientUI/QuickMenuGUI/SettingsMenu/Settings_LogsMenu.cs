@@ -1,4 +1,5 @@
-﻿using VRC.Udon;
+﻿using AstroClient.ClientActions;
+using VRC.Udon;
 
 namespace AstroClient.ClientUI.Menu.SettingsMenu
 {
@@ -19,7 +20,17 @@ namespace AstroClient.ClientUI.Menu.SettingsMenu
         {
             QMNestedGridMenu sub = new QMNestedGridMenu(tab, "Log Settings", "toggle Events Logs");
 
-            QMToggleButton joinLeaveToggle = new QMToggleButton(sub,  "Join/Leave", () => { ConfigManager.General.JoinLeave = true; }, () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves");
+            QMToggleButton joinLeaveToggle = new QMToggleButton(sub,  "Join/Leave", () =>
+            {
+                ConfigManager.General.JoinLeave = true;
+                ConfigEventActions.JoinLeaveNotifier_PropertyChanged.SafetyRaiseWithParams(true);
+
+            }, () =>
+            {
+                ConfigManager.General.JoinLeave = false;
+                ConfigEventActions.JoinLeaveNotifier_PropertyChanged.SafetyRaiseWithParams(false);
+            }, "Notification when someone joins/leaves");
+
             joinLeaveToggle.SetToggleState(ConfigManager.General.JoinLeave, false);
 
             QMToggleButton rpcLogToggle = new QMToggleButton(sub,  "RPC Log", () => { ConfigManager.General.LogRPCEvents = true; }, () => { ConfigManager.General.LogRPCEvents = false; }, "Log RPC events to the console");
