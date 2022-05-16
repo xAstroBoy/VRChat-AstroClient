@@ -82,27 +82,7 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
             return false;
         }
 
-        internal static void ActivateCollision(Transform collider)
-        {
-            if (collider != null)
-            {
-
-                // Deregister collision.
-                if (DisabledCollisions.Contains(collider))
-                {
-                    DisabledCollisions.Remove(collider);
-
-                    // Process it.
-
-                    collider.IgnoreLocalPlayerCollision(false);
-
-                    // Enable Collider as well on Sphere ..
-                    SphereColliderDisabler.IgnoreObjectCollision(collider, false);
-                }
-            }
-        }
-
-        private static List<Transform> DisabledCollisions = new List<Transform>();
+        private static List<Transform> DisabledCollisions { get; set; } = new();
 
         internal static void FixAndRevertColliderEdits()
         {
@@ -110,7 +90,11 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
             {
                 foreach (var item in DisabledCollisions)
                 {
-                    ActivateCollision(item);
+                    // Process it.
+                    item.IgnoreLocalPlayerCollision(false);
+
+                    // Enable Collider as well on Sphere ..
+                    SphereColliderDisabler.IgnoreObjectCollision(item, false);
                 }
                 DisabledCollisions.Clear();
             }

@@ -1,5 +1,6 @@
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.Menu.Menus.Quickmenu;
+using AstroClient.Spawnables.ColliderSuppresserCube;
 using AstroClient.Spawnables.Flashlight;
 using AstroClient.Tools.ObjectEditor;
 using UnityEngine;
@@ -20,6 +21,11 @@ namespace AstroClient.ClientUI.ActionMenu
         {
             AMUtils.AddToModsFolder("World Control", () =>
             {
+                CustomSubMenu.AddSubMenu("Collider Disabler", () =>
+                {
+                    CustomSubMenu.AddButton("Spawn Collider Disabler Sphere", () => { ColliderSuppresserSphere.SpawnSphere(); }, null, false);
+                    CustomSubMenu.AddButton("Revert Collider Disabler Edits", () => { ColliderSuppresserSphere.FixAndRevertColliderEdits(); }, null, false);
+                }, null, false, null);
 
 
                 CustomSubMenu.AddSubMenu("Lighting Controls", () =>
