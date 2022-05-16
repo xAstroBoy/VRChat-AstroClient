@@ -32,22 +32,23 @@ namespace AstroClient.Tools.Keypads
                 ClientEventActions.Keypad_DestroyFailedFinds.SafetyRaise();
             });
         }
+        /// <summary>
+        ///  All symbols are lowercase, avoid duplicates and such
+        /// </summary>
         internal static string[] PasswordsVariables { get; } =
         {
             "password",
-            "Password",
             "solution",
             "code",
-            "PassCode",
+            "passcode",
             "passcodes",
-            "correctCodes",
+            "correctcodes",
             "answer",
-            "PinCode",
-            "Code1",
-            "Code2",
-            "Code3",
-            "Code8"
-
+            "pincode",
+            "code1",
+            "code2",
+            "code3",
+            "code8"
         };
 
 

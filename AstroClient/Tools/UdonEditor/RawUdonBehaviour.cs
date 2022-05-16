@@ -25,7 +25,7 @@ namespace AstroClient.Tools.UdonEditor
         internal UdonBehaviour udonBehaviour => behaviour;
 
 
-        internal Dictionary<string, uint> SymbolsDictionary = new Dictionary<string, uint>(StringComparer.InvariantCultureIgnoreCase);
+        internal Dictionary<string, uint> SymbolsDictionary = new Dictionary<string, uint>();
 
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace AstroClient.Tools.UdonEditor
         {
             if(SymbolsDictionary.Count != 0)
             {
-                return SymbolsDictionary.ContainsKey(Symbol);
+                return SymbolsDictionary.ContainsKey(Symbol.ToLower());
             }
             return false;
         }
@@ -60,9 +60,9 @@ namespace AstroClient.Tools.UdonEditor
                     var address = IUdonSymbolTable.GetAddressFromSymbol(item);
                     if (address != null)
                     {
-                        if (!SymbolsDictionary.ContainsKey(item))
+                        if (!SymbolsDictionary.ContainsKey(item.ToLower()))
                         {
-                            SymbolsDictionary.Add(item, address);
+                            SymbolsDictionary.Add(item.ToLower(), address);
                         }
                     }
                 }
