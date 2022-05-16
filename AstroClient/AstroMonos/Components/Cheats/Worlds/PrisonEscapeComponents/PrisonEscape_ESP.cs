@@ -163,10 +163,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             else
                 Destroy(this);
             PrisonEscape.OnShowRolesPropertyChanged += OnShowRolesPropertyChanged;
-            if(!IsSelf)
-            {
-                PrisonEscape.OnForceWantedEnabled += OnForceWantedEnabled;
-            }
             if (healthTag != null)
             {
                 healthTag.ShowTag = false;
@@ -179,19 +175,23 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 WantedTag.BackGroundColor = Color.red;
             }
 
-            // this way we avoid some shit errors.
-
+            // Everyone
             InvokeRepeating(nameof(TagsUpdater), 0.1f, 0.1f);
-            InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
-            InvokeRepeating(nameof(ForceWanted), 0.1f, 0.3f);
-            InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.5f);
-            InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
 
-            // Those are only for Local Player.
-            if (Player.GetAPIUser().IsSelf)
+            // Only remote user
+            if (!Player.GetAPIUser().IsSelf)
             {
+                PrisonEscape.OnForceWantedEnabled += OnForceWantedEnabled;
+                InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.1f);
+                InvokeRepeating(nameof(ForceWanted), 0.1f, 0.1f);
             }
 
+            // Only local user
+            if (Player.GetAPIUser().IsSelf)
+            {
+                InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.1f);
+                InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
+            }
 
         }
 
