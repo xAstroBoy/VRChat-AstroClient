@@ -24,7 +24,7 @@ namespace AstroClient.ClientUI.ActionMenu
                 if (Bools.AllowAttackerComponent)
                 {
 
-                    AMUtils.AddToModsFolder("Attacker Component", () =>
+                    CustomSubMenu.AddSubMenu("Attacker Component", () =>
                     {
                         CustomSubMenu.AddButton("Make Held object attack Target (No Collisions)", () =>
                         {
@@ -48,7 +48,7 @@ namespace AstroClient.ClientUI.ActionMenu
                 if (Bools.AllowOrbitComponent)
                 {
 
-                    AMUtils.AddToModsFolder("Orbit Component", () =>
+                    CustomSubMenu.AddSubMenu("Orbit Component", () =>
                     {
                         CustomSubMenu.AddButton("Make Held object Orbit around Target", () =>
                         {
@@ -65,7 +65,7 @@ namespace AstroClient.ClientUI.ActionMenu
 
                     });
                 }
-                AMUtils.AddToModsFolder("Watcher Component", () =>
+                CustomSubMenu.AddSubMenu("Watcher Component", () =>
                 {
                     CustomSubMenu.AddButton("Make Held object Watch Target", () =>
                     {
@@ -84,7 +84,7 @@ namespace AstroClient.ClientUI.ActionMenu
 
             });
 
-            Log.Write("ESP Module is ready!", Color.Green);
+            Log.Write("Component Module is ready!", Color.Green);
         }
     }
 }

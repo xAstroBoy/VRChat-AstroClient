@@ -308,7 +308,6 @@
     <Compile Include="ClientUI\QuickMenuGUI\Wings\MainClientWings.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\UnityUtils.cs" />
     <Compile Include="Developers\xAstroBoy\CodeDebugTools\CodeDebug.cs" />
-    <Compile Include="ClientUI\ActionMenu\LightsModule.cs" />
     <Compile Include="Developers\Cheetos\Exceptions\InvalidArrayItemCount.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Extensions\ButtonExtensions.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Extensions\ButtonStringExtensions.cs" />
