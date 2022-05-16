@@ -149,7 +149,6 @@
     <Compile Include="ClientResources\Loaders\Materials.cs" />
     <Compile Include="ClientResources\Loaders\Figlets.cs" />
     <Compile Include="ClientResources\Paths\ResourcePaths.cs" />
-    <Compile Include="ClientUI\ActionMenu\ComponentsModule.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldManagerModule.cs" />
     <Compile Include="ClientUI\BigMenuGUI\AvatarPage\AvatarPageGUI.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\SettingsMenu\Settings_Performance.cs" />
