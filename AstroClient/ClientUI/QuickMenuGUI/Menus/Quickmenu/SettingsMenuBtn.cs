@@ -47,7 +47,7 @@
             var toggleKeyBinds = new QMToggleButton(sub, "KeyBinds", () => { ConfigManager.General.KeyBinds = true; }, () => { ConfigManager.General.KeyBinds = false; }, "KeyBinds");
             toggleKeyBinds.SetToggleState(ConfigManager.General.KeyBinds, false);
 
-            QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Save Config", () => { ConfigManager.SaveAll(); }, "Save Config", Color.magenta, null, true);
+            new QMSingleButton(sub, "Save Config", () => { ConfigManager.SaveAll(); }, "Save Config", Color.magenta);
 
         }
 

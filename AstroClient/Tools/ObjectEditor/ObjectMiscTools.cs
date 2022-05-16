@@ -212,7 +212,7 @@
             catch (Exception) { }
         }
 
-        internal static void MakeObjectAttackTarget(GameObject obj)
+        internal static void MakeObjectAttackTarget(GameObject obj, bool DisableCollisions)
         {
             try
             {
@@ -225,6 +225,10 @@
                         if (item != null)
                         {
                             item.TargetPlayer = targetuser;
+                            if (DisableCollisions)
+                            {
+                                item.Disablecollisions = true;
+                            }
                         }
                     }
                 }

@@ -11,6 +11,7 @@ namespace AstroClient
 
     #endregion Imports
 
+    // TODO : Rewrite and make it even better <3
     internal static class EventHandlerInvoker
     {
 
@@ -143,10 +144,6 @@ namespace AstroClient
                             }
                         }
                     }
-                }
-                else
-                {
-                    Delegate.Remove(eh, handler);
                 }
             }
         }

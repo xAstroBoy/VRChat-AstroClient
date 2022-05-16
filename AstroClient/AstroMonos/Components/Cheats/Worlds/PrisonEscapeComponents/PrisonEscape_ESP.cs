@@ -33,7 +33,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             AntiGarbageCollection.Add(this);
         }
-
+        private bool IsForceWantedActive { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; } = false;
         private PlayerESP _ESP { [HideFromIl2Cpp] get; [HideFromIl2Cpp]  set; }
 
         private PrisonEscape_PoolDataReader _AssignedReader {  [HideFromIl2Cpp] get;  [HideFromIl2Cpp] set;}
@@ -163,7 +163,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             else
                 Destroy(this);
             PrisonEscape.OnShowRolesPropertyChanged += OnShowRolesPropertyChanged;
-
+            if(!IsSelf)
+            {
+                PrisonEscape.OnForceWantedEnabled += OnForceWantedEnabled;
+            }
             if (healthTag != null)
             {
                 healthTag.ShowTag = false;
@@ -176,10 +179,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 WantedTag.BackGroundColor = Color.red;
             }
 
+            // this way we avoid some shit errors.
 
             InvokeRepeating(nameof(TagsUpdater), 0.1f, 0.1f);
-            InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
-
+            if (!Player.GetAPIUser().IsSelf)
+            {
+                InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
+                InvokeRepeating(nameof(ForceWanted), 0.1f, 0.3f);
+            }
             // Those are only for Local Player.
             if (Player.GetAPIUser().IsSelf)
             {
@@ -187,6 +194,16 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
             }
 
+
+        }
+
+        private void OnForceWantedEnabled()
+        {
+            if (IsSelf) return;
+            if(CurrentRole == PrisonEscape_Roles.Prisoner)
+            {
+                IsForceWantedActive = true;
+            }
 
         }
 
@@ -379,6 +396,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         internal void OnDestroy()
         {
+            PrisonEscape.OnShowRolesPropertyChanged -= OnShowRolesPropertyChanged;
+            if (!IsSelf)
+            {
+                PrisonEscape.OnForceWantedEnabled -= OnForceWantedEnabled;
+            }
+
             if (healthTag != null) Destroy(healthTag);
             if(WantedTag != null) Destroy(WantedTag);
         }
@@ -440,7 +463,27 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
 
 
-
+        internal void ForceWanted()
+        {
+            if (!isActiveAndEnabled) return;
+            if (IsSelf) return;
+            if (!IsForceWantedActive) return;
+            if (AssignedReader == null) return;
+            if (LocalUserData == null) return;
+            if (CurrentRole == PrisonEscape_Roles.Dead)
+            {
+                if(IsForceWantedActive)
+                {
+                    IsForceWantedActive = false;
+                }
+                return;
+            }
+            if (CurrentRole == PrisonEscape_Roles.Guard) return;
+            if(CurrentRole == PrisonEscape_Roles.Prisoner)
+            {
+                AssignedReader.isWanted = true;
+            }
+        }
 
         internal void ESPUpdater()
         {
@@ -565,10 +608,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             if (!IsSelf)
             {
-                if (ESP != null)
+                try
                 {
-                    ESP.ResetColor();
+                    if (ESP != null)
+                    {
+                        ESP.ResetColor();
+                    }
                 }
+                catch{}
             }
         }
 

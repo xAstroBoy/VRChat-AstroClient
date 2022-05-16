@@ -2,12 +2,11 @@
 {
     #region Imports
 
-    using System;
-    using System.Drawing;
-    using System.Reflection;
-    using System.Text;
     using Constants;
     using HarmonyLib;
+    using System;
+    using System.Reflection;
+    using System.Text;
 
     #endregion Imports
 
@@ -33,6 +32,7 @@
 
         internal string TargetPath_MethodInfo => $"{TargetMethod_MethodInfo?.DeclaringType?.FullName}.{TargetMethod_MethodInfo?.Name}";
         internal string TargetPath_base => $"{TargetMethod_MethodInfo?.DeclaringType?.FullName}.{TargetMethod_MethodBase.Name}";
+
         internal string PatchType
         {
             get
@@ -358,6 +358,7 @@
                 }
             }
         }
+
         private void DoPatch_base(AstroPatch patch)
         {
             try
@@ -397,7 +398,6 @@
                     {
                         Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodBase?.Name}");
                     }
-
                 }
             }
         }
@@ -428,11 +428,9 @@
                     {
                         Log.Debug($"[{this.PatchIdentifier}] Removed Patch from {this.TargetMethod_MethodInfo?.Name}", Cheetah.Color.Crayola.Present.TorchRed);
                     }
-
                 }
                 isActivePatch = false;
             }
-
         }
 
         internal void Patch()

@@ -2,12 +2,11 @@
 
 namespace AstroClient.AstroMonos.Components.Malicious
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.ObjectEditor;
-    using AstroClient.Tools.ObjectEditor.Online;
     using AstroUdons;
     using ClientAttributes;
+    using System;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -18,11 +17,28 @@ namespace AstroClient.AstroMonos.Components.Malicious
     public class PlayerAttacker : MonoBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+
         private void OnRoomLeft()
         {
             Destroy(this);
         }
+
+        private bool _DisableCollisions = false;
+
+        internal bool Disablecollisions
+        {
+            [HideFromIl2Cpp]
+            get => _DisableCollisions;
+            [HideFromIl2Cpp]
+            set
+            {
+                _DisableCollisions = value;
+                HasRequiredSettings = true;
+            }
+        }
+
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -34,13 +50,11 @@ namespace AstroClient.AstroMonos.Components.Malicious
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnPlayerLeft += OnPlayerLeft;
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnPlayerLeft -= OnPlayerLeft;
                     }
@@ -111,19 +125,19 @@ namespace AstroClient.AstroMonos.Components.Malicious
         }
 
         private Transform _HeadTransform;
+
         private Transform HeadTransform
         {
             [HideFromIl2Cpp]
             get
             {
-                if(_HeadTransform == null)
+                if (_HeadTransform == null)
                 {
                     return _HeadTransform = TargetPlayer.Get_Player_Bone_Transform(HumanBodyBones.Head);
                 }
                 return _HeadTransform;
             }
         }
-
 
         private void ApplyForceX()
         {
@@ -209,6 +223,10 @@ namespace AstroClient.AstroMonos.Components.Malicious
                         RigidBodyController.drag = 0.3f;
                         RigidBodyController.constraints = RigidbodyConstraints.FreezeRotation;
                         RigidBodyController.isKinematic = false;
+                        if (Disablecollisions)
+                        {
+                            RigidBodyController.detectCollisions = false;
+                        }
                     }
                 }
                 else

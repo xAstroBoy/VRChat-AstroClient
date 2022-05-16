@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using AstroClient.Tools.Extensions.Components_exts;
+
+namespace AstroClient.Tools.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -443,11 +445,11 @@
             }
         }
 
-        internal static void AttackTarget(this GameObject obj)
+        internal static void AttackTarget(this GameObject obj, bool DisableCollisions = false)
         {
             if (obj != null)
             {
-                ObjectMiscOptions.MakeObjectAttackTarget(obj);
+                ObjectMiscOptions.MakeObjectAttackTarget(obj, DisableCollisions);
             }
         }
 
@@ -511,11 +513,11 @@
             }
         }
 
-        internal static void AttackTarget(this List<GameObject> list)
+        internal static void AttackTarget(this List<GameObject> list, bool DisableCollisions = false)
         {
             foreach (var item in list.Where(item => item != null))
             {
-                ObjectMiscOptions.MakeObjectAttackTarget(item);
+                ObjectMiscOptions.MakeObjectAttackTarget(item, DisableCollisions);
             }
         }
 

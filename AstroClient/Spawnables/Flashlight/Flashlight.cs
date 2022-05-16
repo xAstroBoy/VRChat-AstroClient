@@ -35,7 +35,7 @@ namespace AstroClient.Spawnables.Flashlight
         }
         internal static Light CurrentLightTemplate { get; set; }
 
-        internal static bool isGoldenFlashlight { get; set; } = false;
+        internal static bool isGoldenFlashlight { get; set; } = true;
         internal static bool UseExistingLightAsTemplate { get; set; } = false;
         internal static void SpawnFlashlight()
         {

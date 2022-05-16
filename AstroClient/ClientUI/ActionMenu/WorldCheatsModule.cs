@@ -443,6 +443,11 @@ internal class WorldCheatsModule : AstroEvents
                 });
                 CustomSubMenu.AddSubMenu("Game Events", () =>
                 {
+                    var reader = PrisonEscape.GetLocalReader();
+                    if(reader != null)
+                    {
+                        CustomSubMenu.AddToggle("Is Guard", reader.isGuard.GetValueOrDefault(false), ToggleValue => { reader.isGuard = ToggleValue; }, null, false);
+                    }
                     CustomSubMenu.AddButton("Click Gate Button as Prisoner", () =>
                     {
                         var localreader = PrisonEscape.GetLocalReader();

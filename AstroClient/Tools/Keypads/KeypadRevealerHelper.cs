@@ -35,6 +35,7 @@ namespace AstroClient.Tools.Keypads
         internal static string[] PasswordsVariables { get; } =
         {
             "password",
+            "Password",
             "solution",
             "code",
             "PassCode",

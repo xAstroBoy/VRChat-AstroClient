@@ -110,11 +110,31 @@
             NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
             ButtonsMenu = NestedPart.FindUIObject("Buttons");
             NestedPart.ToggleScrollRectOnExistingMenu(true);
-            Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
-            Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
-            Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
-			Object.Destroy(NestedPart.FindUIObject("Button_PanoramaMain"));
-            Object.Destroy(NestedPart.FindUIObject("Button_PanoramaStream"));
+            try
+            {
+                Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+            }
+            catch { }
+            try
+            {
+                Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
+            }
+            catch { }
+            try
+            {
+                Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
+            }
+            catch { }
+            try
+            {
+                Object.Destroy(NestedPart.FindUIObject("Button_PanoramaMain"));
+            }
+            catch { }
+            try
+            {
+                Object.Destroy(NestedPart.FindUIObject("Button_PanoramaStream"));
+            }
+            catch { }
 
             //UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             System.Collections.Generic.List<Transform> list = ButtonsMenu.transform.Get_Childs();

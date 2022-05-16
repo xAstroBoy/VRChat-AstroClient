@@ -1,30 +1,7 @@
-﻿using AstroClient.ClientActions;
-
-namespace AstroClient.Cheetos
+﻿namespace AstroClient.Cheetos
 {
-    #region Imports
-
-    using System;
-    using System.Linq;
-    using AstroNetworkingLibrary.Serializable;
-    using CheetoLibrary;
-    using CheetoLibrary.Menu.MenuApi;
-    using Il2CppSystem.Collections.Generic;
-    using Tools;
-    using Tools.Player;
-    using UnityEngine;
-    using VRC;
-    using VRC.Core;
-    using xAstroBoy;
-    using xAstroBoy.UIPaths;
-    using xAstroBoy.Utility;
-    using ConfigManager = Config.ConfigManager;
-
-    #endregion Imports
-
     internal class AvatarFavorites : AstroEvents
     {
-
         //inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
         //// Avatar Favorite
         //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Favorite", 921f, 290f, delegate
@@ -36,13 +13,11 @@ namespace AstroClient.Cheetos
         //// Avatar Unfavorite
         //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Local clone Avatar", 921f, 230f, delegate { UserInterfaceObjects.AvatarPreviewBase_MainAvatar.GetComponentInChildren<SimpleAvatarPedestal>().field_Internal_ApiAvatar_0.CloneLocalAvatar(); }, 1.45f, 1f);
 
-
         //private static VRCStandaloneInputModule inputModule;
 
         //private static string selectedID;
 
         //private static bool initialized;
-
 
         //internal override void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
         //{
@@ -70,6 +45,5 @@ namespace AstroClient.Cheetos
         //        }
         //    }
         //}
-
     }
 }

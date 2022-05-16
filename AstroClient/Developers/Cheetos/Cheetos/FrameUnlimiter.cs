@@ -17,10 +17,12 @@ namespace AstroClient.Cheetos
         private void VRChat_OnUiManagerInit()
         {
             Default = Application.targetFrameRate;
-
-            if (ConfigManager.Performance.UnlimitedFrames)
+            if (ConfigManager.Performance != null)
             {
-                Unlock(true);
+                if (ConfigManager.Performance.UnlimitedFrames)
+                {
+                    Unlock(true);
+                }
             }
         }
 

@@ -1,10 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
-    #region Imports
-
-    #endregion Imports
-
-    internal class AstroInput 
+    internal class AstroInput
     {
         internal static string Oculus_PrimaryIndexTrigger { get; } = "Oculus_CrossPlatform_PrimaryIndexTrigger";
 
@@ -33,9 +29,5 @@
         internal static string Oculus_SecondaryThumbstickHorizontal { get; } = "Oculus_CrossPlatform_SecondaryThumbstickHorizontal";
 
         internal static string Oculus_SecondaryThumbstickVertical { get; } = "Oculus_CrossPlatform_SecondaryThumbstickVertical";
-
-       
-
-
     }
 }

@@ -37,10 +37,13 @@ namespace AstroClient.Cheetos
         {
             try
             {
-                using (Process process = Process.GetCurrentProcess())
+                using (var process = Process.GetCurrentProcess())
                 {
-                    process.PriorityClass = priority;
-                    Log.Debug($"Process priority: {priority}");
+                    if (process != null)
+                    {
+                        process.PriorityClass = priority;
+                        Log.Debug($"Process priority: {priority}");
+                    }
                 }
             }
             catch (Exception e)
