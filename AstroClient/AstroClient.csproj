@@ -115,7 +115,6 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CellDoorToggler.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_DoorAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Randomizer.cs" />
     <Compile Include="AstroMonos\Components\Tools\LaserPointer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />

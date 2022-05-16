@@ -74,15 +74,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     Log.Error($"Can't Find Player Data behaviour, Unable to Add Reader on  {gameObject.name} GameObject, did the author update the world?");
                     Destroy(this);
                 }
-
-                if (PlayerData != null)
-                {
-                    var hitboxudon = UdonSearch.FindUdonEvent(obj.gameObject, "Player Hitbox", "_Damage");
-                    if (hitboxudon != null)
-                    {
-                        HitBoxReader = hitboxudon.gameObject.GetOrAddComponent<PrisonEscape_HitboxReader>();
-                    }
-                }
             }
             else
             {
@@ -326,23 +317,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal bool EnableHitboxDebugVisual
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return HitBoxReader.EnableDebugVisual;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                HitBoxReader.EnableDebugVisual = value;
-            }
-        }
 
         private static RawUdonBehaviour PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
-        internal PrisonEscape_HitboxReader HitBoxReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         #region Getter / Setters UdonVariables  of PlayerData
 

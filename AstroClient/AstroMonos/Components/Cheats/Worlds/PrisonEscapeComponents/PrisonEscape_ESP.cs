@@ -182,16 +182,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             // this way we avoid some shit errors.
 
             InvokeRepeating(nameof(TagsUpdater), 0.1f, 0.1f);
-            if (!Player.GetAPIUser().IsSelf)
-            {
-                InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
-                InvokeRepeating(nameof(ForceWanted), 0.1f, 0.3f);
-            }
+            InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.3f);
+            InvokeRepeating(nameof(ForceWanted), 0.1f, 0.3f);
+            InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.5f);
+            InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
+
             // Those are only for Local Player.
             if (Player.GetAPIUser().IsSelf)
             {
-                InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.5f);
-                InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
             }
 
 
