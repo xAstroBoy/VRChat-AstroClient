@@ -151,24 +151,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 WantedTag.ShowTag = false;
                 WantedTag.BackGroundColor = Color.red;
             }
+            PrisonEscape.OnForceWantedEnabled += OnForceWantedEnabled;
 
             // Everyone
             InvokeRepeating(nameof(TagsUpdater), 0.1f, 0.1f);
+            InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.1f);
+            InvokeRepeating(nameof(ForceWanted), 0.1f, 0.1f);
+            InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.1f);
+            InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
 
-            // Only remote user
-            if (!Player.GetAPIUser().IsSelf)
-            {
-                PrisonEscape.OnForceWantedEnabled += OnForceWantedEnabled;
-                InvokeRepeating(nameof(ESPUpdater), 0.1f, 0.1f);
-                InvokeRepeating(nameof(ForceWanted), 0.1f, 0.1f);
-            }
-
-            // Only local user
-            if (Player.GetAPIUser().IsSelf)
-            {
-                InvokeRepeating(nameof(KeyCardTaker), 0.1f, 0.1f);
-                InvokeRepeating(nameof(GodModeOn), 0.1f, 0.1f);
-            }
 
         }
 

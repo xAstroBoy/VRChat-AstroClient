@@ -304,6 +304,11 @@ namespace AstroClient.PlayerList.Entries
         }
         public static void UpdateEntry(PlayerNet playerNet, PlayerEntry entry, bool bypassActive = false)
         {
+            // bruh atleast some nullchecks?
+            if (playerNet == null) return;
+            if (entry == null) return;
+            
+
             entry.timeSinceLastUpdate.Restart();
 
             // Update values but not text even if playerlist not active and before decode
