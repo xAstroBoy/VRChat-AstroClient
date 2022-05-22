@@ -37,6 +37,7 @@ namespace AstroClient.Startup.Hooks
                 new AstroPatch(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Get), new Type[1] { typeof(string) }), GetPatch(nameof(DownloadStringPatch)));
                 new AstroPatch(typeof(UnityWebRequest).GetMethod(nameof(UnityWebRequest.Get), new Type[1] { typeof(Uri) }), GetPatch(nameof(CreateHTTPPatch_Uri)));
             });
+            new AstroPatch(typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0)), GetPatch(nameof(ApiWorldTagPatch)));
 
         }
 
@@ -77,50 +78,58 @@ namespace AstroClient.Startup.Hooks
                 __0 = AllowedResponse;
             }
         }
+        private static void ApiWorldTagPatch(ref ApiWorld __0)
+        {
+            if (__0 != null)
+            {
+                if (__0.tags != null)
+                {
+                    if (__0.tags.Count != 0)
+                    {
+                        var newTags = new Il2CppSystem.Collections.Generic.List<string>();
+                        foreach (string text in __0.tags)
+                        {
+                            bool ignore = false;
+                            if (text.ToLower().Contains("game") || text.ToLower().Contains("club"))
+                            {
+                                if (!IsWorldTagPatched)
+                                {
+                                    IsWorldTagPatched = true;
+                                }
+                                Log.Debug($"Removed Tag : {text} in ApiWorld to bypass RiskyFunction Detection");
+                                ignore = true;
+                            }
+                            if(!ignore)
+                            {
+                                newTags.System_Collections_IList_Add(text);
+                            }
+                            OriginalWorldTags.Add(text);
+                        }
+                        if(IsWorldTagPatched)
+                        {
+                            __0.tags = newTags;
+                        }
+
+                    }
+                }
+            }
+
+        }
         private void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (UnityEngine.GameObject.Find("eVRCRiskFuncEnable") == null)
-                Log.Debug("Spawned EmmVRC Risky Function Enabler!");
-            UnityEngine.Object.DontDestroyOnLoad(new UnityEngine.GameObject("eVRCRiskFuncEnable"));
+                UnityEngine.Object.DontDestroyOnLoad(new UnityEngine.GameObject("eVRCRiskFuncEnable"));
 
             if (UnityEngine.GameObject.Find("UniversalRiskyFuncEnable") == null)
-            {
-                Log.Debug("Spawned Universal Risky Function Enabler!");
                 UnityEngine.Object.DontDestroyOnLoad(new UnityEngine.GameObject("UniversalRiskyFuncEnable"));
-            }
 
-            var EmmVRCDisabler = UnityEngine.GameObject.Find("eVRCRiskFuncDisable");
-            if (EmmVRCDisabler != null)
-            {
-                Log.Debug("Found eVRCRiskFuncDisable, Destroying!");
-                EmmVRCDisabler.DestroyMeLocal();
-            }
-            var UniversalDisabler = UnityEngine.GameObject.Find("UniversalRiskyFuncDisable");
-            if (UniversalDisabler != null)
-            {
-                Log.Debug("Found UniversalRiskyFuncDisable, Destroying!");
-                UniversalDisabler.DestroyMeLocal();
-            }
+            UnityEngine.GameObject disabler;
+            if ((disabler = UnityEngine.GameObject.Find("eVRCRiskFuncDisable")) != null)
+                UnityEngine.Object.Destroy(disabler);
 
-            // Hopefully this works!
-            if (WorldUtils.World != null)
-            {
-                if (WorldUtils.World.tags != null)
-                {
-                    foreach (string text in WorldUtils.World.tags)
-                    {
-                        if (text.ToLower().Contains("game") || text.ToLower().Contains("club"))
-                        {
-                            IsWorldTagPatched = true;
-                            Log.Debug($"Removed Tag : {text} in ApiWorld to bypass RiskyFunction Detection");
-                            WorldUtils.World.tags.Remove(text);
-                        }
+            if ((disabler = UnityEngine.GameObject.Find("UniversalRiskyFuncDisable")) != null)
+                UnityEngine.Object.Destroy(disabler);
 
-                        OriginalWorldTags.Add(text);
-                    }
-
-                }
-            }
 
         }
     }

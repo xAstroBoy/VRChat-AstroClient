@@ -27,7 +27,7 @@ namespace AstroClient.Tools.Keypads
                 finds[i].gameObject.GetOrAddComponent<KeypadRevealer>();
             }
             // Give time for the component to get the passcode, if it fails after 5s , destroy it
-            MiscUtils.DelayFunction(5f, () =>
+            MiscUtils.DelayFunction(50f, () =>
             {
                 ClientEventActions.Keypad_DestroyFailedFinds.SafetyRaise();
             });

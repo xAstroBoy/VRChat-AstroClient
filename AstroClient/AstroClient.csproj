@@ -162,6 +162,7 @@
     <Compile Include="Developers\Cheetos\WindowsUtils.cs" />
     <Compile Include="Developers\Kaned\KanedWIP.cs" />
     <Compile Include="Developers\Kaned\RotationFix.cs" />
+    <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
     <Compile Include="ModsDetector\EmmPatcher.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlocker_Tools.cs" />

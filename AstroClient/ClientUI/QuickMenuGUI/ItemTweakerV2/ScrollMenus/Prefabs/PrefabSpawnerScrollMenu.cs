@@ -84,7 +84,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Prefabs
         {
             if (!HasGenerated)
             {
-                foreach (var prefab in WorldUtils.DynamicPrefabs)
+                foreach (var prefab in SceneUtils.DynamicPrefabs)
                 {
                     var btn = new QMSingleButton(CurrentScrollMenu, 0, 0, $"Spawn {prefab.name}", () =>
                     {

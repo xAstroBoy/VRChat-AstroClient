@@ -1,5 +1,6 @@
 ﻿// Credits to Blaze and DayOfThePlay
 
+using AstroClient.Startup.Hooks;
 using VRC.SDK3.Components;
 
 namespace AstroClient.xAstroBoy.Utility
@@ -170,19 +171,6 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static int WorldCapacity => World.capacity;
 
-        public static string SDKType
-        {
-            get
-            {
-                if (SDK2Descriptor != null)
-                    return "SDK2";
-                else if (SDK3Descriptor != null)
-                    return "SDK3";
-                else
-                    return "not found";
-            }
-        }
-
         public static void JoinWorld(string fullID)
         {
             if (!fullID.ToLower().StartsWith("wrld_") || !fullID.ToLower().Contains('#'))
@@ -210,119 +198,6 @@ namespace AstroClient.xAstroBoy.Utility
             }
         }
 
-        public static bool IsDefaultScene(string name)
-        {
-            var lower = name.ToLower();
-            string[] scenes = { "application2", "ui", "empty", "dontdestroyonload", "hideanddontsave", "samplescene" };
-            return scenes.Contains(lower);
-        }
-
-
-        internal static Transform[] Spawns
-        {
-            get
-            {
-                if (SDKBaseDescriptor != null)
-                {
-                    if (SDKBaseDescriptor.spawns != null)
-                    {
-                        return SDKBaseDescriptor.spawns.ToArray();
-                    }
-                }
-                else if (SDK2Descriptor != null)
-                {
-                    if (SDK2Descriptor.spawns != null)
-                    {
-                        return SDK2Descriptor.spawns.ToArray();
-                    }
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    if(SDK3Descriptor.spawns != null)
-                    {
-                        return SDK3Descriptor.spawns.ToArray();
-                    }
-                }
-                return null;
-            }
-        }
-        internal static Vector3 SpawnPosition
-        {
-            get
-            {
-                if (SDKBaseDescriptor != null)
-                {
-                    return SDKBaseDescriptor.SpawnPosition;
-                }
-                else if (SDK2Descriptor != null)
-                {
-                    return SDK2Descriptor.SpawnPosition;
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    return SDK3Descriptor.SpawnPosition;
-                }
-                return default(Vector3);
-            }
-        }
-        internal static Transform SpawnLocation
-        {
-            get
-            {
-                if (SDKBaseDescriptor != null)
-                {
-                    if (SDKBaseDescriptor.SpawnLocation != null)
-                    {
-                        return SDKBaseDescriptor.SpawnLocation;
-                    }
-                }
-                else if (SDK2Descriptor != null)
-                {
-                    if (SDK2Descriptor.SpawnLocation != null)
-                    {
-                        return SDK2Descriptor.SpawnLocation;
-                    }
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    if (SDK3Descriptor.SpawnLocation != null)
-                    {
-                        return SDK3Descriptor.SpawnLocation;
-                    }
-                }
-                return null;
-            }
-        }
-
-        internal static GameObject[] DynamicPrefabs
-        {
-            get
-            {
-                if (SDKBaseDescriptor != null)
-                {
-                    if (SDKBaseDescriptor.DynamicPrefabs != null)
-                    {
-                        return SDKBaseDescriptor.DynamicPrefabs.ToArray();
-                    }
-                }
-                else if (SDK2Descriptor != null)
-                {
-                    if (SDK2Descriptor.DynamicPrefabs != null)
-                    {
-                        return SDK2Descriptor.DynamicPrefabs.ToArray();
-                    }
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    if (SDK3Descriptor.DynamicPrefabs != null)
-                    {
-                        return SDK3Descriptor.DynamicPrefabs.ToArray();
-                    }
-                }
-                return null;
-            }
-        }
-
 
         public static Player GetPlayerByDisplayName(string name)
         {
@@ -340,11 +215,6 @@ namespace AstroClient.xAstroBoy.Utility
             }
             return null;
         }
-        public static VRC_SceneDescriptor SDKBaseDescriptor => UnityEngine.Object.FindObjectOfType<VRC_SceneDescriptor>();
-
-        public static VRCSDK2.VRC_SceneDescriptor SDK2Descriptor => UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
-
-        public static VRC.SDK3.Components.VRCSceneDescriptor SDK3Descriptor => UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
 
         public static List<VRC_Pickup> Pickups => Resources.FindObjectsOfTypeAll<VRC_Pickup>().ToList();
         public static List<VRC_Trigger> SDK1Triggers => Resources.FindObjectsOfTypeAll<VRC_Trigger>().ToList();

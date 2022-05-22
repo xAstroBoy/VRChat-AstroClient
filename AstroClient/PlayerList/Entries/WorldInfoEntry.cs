@@ -43,13 +43,13 @@ namespace AstroClient.PlayerList.Entries
         private static string MiscWorldInfo()
         {
             StringBuilder build = new StringBuilder();
-            build.Append(GenerateText("SDK", WorldUtils.SDKType));
+            build.Append(GenerateText("SDK", SceneUtils.SDKType));
             build.Append(GenerateText("RespawnHeightY", SceneUtils.RespawnHeightY.ToString(CultureInfo.InvariantCulture)));
             if (AvatarSearch.worldAvatarsids.Count != 0)
             {
                 build.Append(GenerateText("Avatars", AvatarSearch.worldAvatarsids.Count.ToString()));
             }
-            var Prefabs = WorldUtils.DynamicPrefabs;
+            var Prefabs = SceneUtils.DynamicPrefabs;
             if (Prefabs != null)
             {
                 if (Prefabs.Length != 0)

@@ -500,9 +500,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
 
-            if (WorldUtils.Spawns != null)
+            if (SceneUtils.Spawns != null)
             {
-                foreach (var spawn in WorldUtils.Spawns)
+                foreach (var spawn in SceneUtils.Spawns)
                 {
                     if (!SpawnPoints_Spawn.Contains(spawn.position))
                     {
@@ -510,14 +510,14 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     }
                 }
             }
-            AddSpawnPointDetector(WorldUtils.SpawnPosition, PrimitiveType.Sphere, 50f, PrisonEscape_Roles.Dead);
+            AddSpawnPointDetector(SceneUtils.SpawnPosition, PrimitiveType.Sphere, 50f, PrisonEscape_Roles.Dead);
 
 
-            if (WorldUtils.SpawnLocation != null)
+            if (SceneUtils.SpawnLocation != null)
             {
-                if (!SpawnPoints_Spawn.Contains(WorldUtils.SpawnLocation.position))
+                if (!SpawnPoints_Spawn.Contains(SceneUtils.SpawnLocation.position))
                 {
-                    SpawnPoints_Spawn.Add(WorldUtils.SpawnLocation.position);
+                    SpawnPoints_Spawn.Add(SceneUtils.SpawnLocation.position);
                 }
             }
 

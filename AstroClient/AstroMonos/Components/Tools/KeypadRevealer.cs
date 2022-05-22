@@ -125,6 +125,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                    value.StartsWith("Error Unboxing") ||
                    value.StartsWith("Not Unboxable") ||
                    value.StartsWith("empty") ||
+                   value.StartsWith("Unitialized") ||
                    value.StartsWith("Null");
         }
 
