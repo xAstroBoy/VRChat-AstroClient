@@ -275,9 +275,50 @@ namespace AstroClient.xAstroBoy.Utility
                 }
             }
         }
-        public static VRC_SceneDescriptor SDKBaseDescriptor => UnityEngine.Object.FindObjectOfType<VRC_SceneDescriptor>();
-        public static VRCSDK2.VRC_SceneDescriptor SDK2Descriptor => UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
-        public static VRC.SDK3.Components.VRCSceneDescriptor SDK3Descriptor => UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
+
+        /// <summary>
+        /// This handles how the objects are being treated after reaching <seealso cref="RespawnHeightY"/> Limits
+        /// </summary>
+        internal static VRC_SceneDescriptor.RespawnHeightBehaviour ObjectBehaviourAtRespawnHeight
+        {
+            get
+            {
+                if (SDKBaseDescriptor != null)
+                {
+                    return SDKBaseDescriptor.ObjectBehaviourAtRespawnHeight;
+                }
+                else if (SDK2Descriptor != null)
+                {
+                    return SDK2Descriptor.ObjectBehaviourAtRespawnHeight;
+                }
+                else if (SDK3Descriptor != null)
+                {
+                    return SDK3Descriptor.ObjectBehaviourAtRespawnHeight;
+                }
+                else
+                {
+                    return VRC_SceneDescriptor.RespawnHeightBehaviour.Respawn;
+                }
+            }
+            set
+            {
+                if (SDKBaseDescriptor != null)
+                {
+                    SDKBaseDescriptor.ObjectBehaviourAtRespawnHeight = value;
+                }
+                else if (SDK2Descriptor != null)
+                {
+                    SDK2Descriptor.ObjectBehaviourAtRespawnHeight = value;
+                }
+                else if (SDK3Descriptor != null)
+                {
+                    SDK3Descriptor.ObjectBehaviourAtRespawnHeight = value;
+                }
+            }
+        }
+        private static VRC_SceneDescriptor SDKBaseDescriptor => UnityEngine.Object.FindObjectOfType<VRC_SceneDescriptor>();
+        private static VRCSDK2.VRC_SceneDescriptor SDK2Descriptor => UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
+        private static VRC.SDK3.Components.VRCSceneDescriptor SDK3Descriptor => UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
 
     }
 }

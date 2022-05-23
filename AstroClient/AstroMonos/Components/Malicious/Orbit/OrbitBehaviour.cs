@@ -166,7 +166,7 @@
 
         private void OnDestroy()
         {
-            GameObjectMenu.RestoreOriginalLocation(obj, false);
+            obj.RespawnPickup(false);
             OnlineEditor.RemoveOwnerShip(obj);
             OrbitManager_Old.RemoveFromList(obj);
         }

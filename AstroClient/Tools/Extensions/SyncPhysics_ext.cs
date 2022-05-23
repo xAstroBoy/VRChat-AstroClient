@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using Il2CppSystem;
+
+namespace AstroClient.Tools.Extensions
 {
     using UnityEngine;
     using xAstroBoy.Utility;
@@ -17,7 +19,17 @@
             }
         }
 
-        internal static void RespawnItem(this SyncPhysics instance, bool TakeOwnership = false)
+
+        internal static Nullable<Vector3> GetDefaultPosition(this SyncPhysics instance)
+        {
+            return instance.field_Private_Nullable_1_Vector3_0;
+        }
+        internal static Nullable<Quaternion> GetDefaultRotation(this SyncPhysics instance)
+        {
+            return instance.field_Private_Nullable_1_Quaternion_0;
+        }
+
+        internal static void RespawnItem(this SyncPhysics instance, bool TakeOwnership = true)
         {
             if (instance != null)
             {
@@ -25,7 +37,15 @@
                 {
                     instance.gameObject.TakeOwnership();
                 }
-                instance.Method_Public_Void_PDM_0();
+
+                if (instance.GetDefaultPosition().HasValue)
+                {
+                    instance.gameObject.SetPosition(instance.GetDefaultPosition().value);
+                }
+                if (instance.GetDefaultPosition().HasValue)
+                {
+                    instance.gameObject.SetRotation(instance.GetDefaultPosition().value);
+                }
             }
         }
         internal static void SetKinematic(this SyncPhysics instance, bool isKinematic, bool TakeOwnership = false)

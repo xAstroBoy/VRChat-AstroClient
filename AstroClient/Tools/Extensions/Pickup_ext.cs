@@ -1,4 +1,7 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using VRC.SDK3.Components;
+using VRC.SDKBase;
+
+namespace AstroClient.Tools.Extensions
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Tools;
@@ -22,6 +25,44 @@
                     obj.GetOrAddComponent<PickupController>().Pickup_AllowOnlySelfToGrab(AllowOnlySelfToGrab);
                 }
             }
+        }
+
+        internal static bool isPickup(this GameObject obj)
+        {
+            if (obj.GetComponent<VRC_Pickup>() != null) return true;
+            if (obj.GetComponent<VRCSDK2.VRC_Pickup>() != null) return true;
+            if (obj.GetComponent<VRCPickup>() != null) return true;
+            return false;
+        }
+
+        internal static void RespawnPickup(this GameObject obj, bool RestoreBodySettings)
+        {
+            if (obj != null)
+            {
+                if (!obj.isPickup()) return; // Refuse to respawn it if pickup component is missing.
+
+                obj.TakeOwnership();
+                if (RestoreBodySettings)
+                {
+                    var control = obj.GetOrAddComponent<RigidBodyController>();
+                    if (control != null)
+                    {
+                        if (RestoreBodySettings)
+                        {
+                            control.RestoreOriginalBody();
+                        }
+                    }
+                }
+
+                var respawner = obj.GetComponent<Respawner>();
+                if(respawner != null)
+                {
+                    respawner.Respawn(); 
+                }
+
+
+            }
+            
         }
 
     }

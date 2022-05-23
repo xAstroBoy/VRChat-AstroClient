@@ -1,4 +1,5 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.Tools.ObjectEditor;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -311,7 +312,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     tower.TakeOwnership();
                     tower.RigidBody_Set_isKinematic(true);
-                    tower.GetComponentInChildren<SyncPhysics>(true)?.RespawnItem();
+                    tower.RespawnPickup(false);
                     tower.KillForces();
                     tower.RigidBody_Set_isKinematic(false);
                 }
@@ -601,7 +602,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (Tower != null)
             {
                 Tower.gameObject.TakeOwnership();
-                Tower.GetComponentInChildren<SyncPhysics>(true).RespawnItem();
+                Tower.RespawnPickup(false);
+                //Tower.GetComponentInChildren<SyncPhysics>(true).RespawnItem();
                 var item = Tower.gameObject.GetOrAddComponent<ObjectFreezer>();
                 if (item != null)
                 {
@@ -1139,12 +1141,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if(Freeze != null)
                 {
                     Freeze.DestroyMeLocal(true);
-                    var sync = item.GetComponentInChildren<SyncPhysics>(true);
-                    if(sync != null)
-                    {
-                        sync.RespawnItem(true);
-                    }
-
+                    item.RespawnPickup(false);
                 }
             }
         }

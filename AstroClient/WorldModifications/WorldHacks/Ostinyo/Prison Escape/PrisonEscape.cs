@@ -548,7 +548,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     #region  Turret Area
                     var TurretTop = new WorldButton(new Vector3(60.879f, 11.45f, 282.65f), new Vector3(0, 270, 0), "<color=orange>Respawn Sniper</color>", () =>
                     {
-                        GameObjectMenu.RestoreOriginalLocation(item.gameObject, false);
+                        item.gameObject.RespawnPickup(false);
                     });
                     TurretTop.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
 
@@ -612,7 +612,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     #region  Turret Area
                     var TurretTop = new WorldButton(new Vector3(60.879f, 11.45f, 317.3293f), new Vector3(0, 90, 0), "<color=orange>Respawn Sniper</color>", () =>
                     {
-                        GameObjectMenu.RestoreOriginalLocation(item.gameObject, false);
+                        item.gameObject.RespawnPickup(false);
                     });
                     TurretTop.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
 

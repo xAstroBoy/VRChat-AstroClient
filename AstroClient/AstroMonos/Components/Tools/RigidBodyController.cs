@@ -10,7 +10,6 @@ namespace AstroClient.AstroMonos.Components.Tools
     using UnityEngine;
     using xAstroBoy.Utility;
 
-    // TODO : Fix this Crap Again ( Backupping mechanism doesn't work!)
     [RegisterComponent]
     public class RigidBodyController : MonoBehaviour
     {
@@ -26,15 +25,13 @@ namespace AstroClient.AstroMonos.Components.Tools
         internal void Start()
         {
             SyncPhysics = gameObject.GetGetInChildrens<SyncPhysics>(true);
-            if (SyncPhysics == null)
-            {
-                Rigidbody = gameObject.GetComponent<Rigidbody>();
-            }
-            else
+            Respawner = gameObject.GetComponent<Respawner>();
+            if(SyncPhysics != null)
             {
                 Rigidbody = SyncPhysics.GetRigidBody();
-                if (Rigidbody == null) Rigidbody = gameObject.GetComponent<Rigidbody>();
             }
+            if (Rigidbody == null)
+                Rigidbody = gameObject.GetComponent<Rigidbody>();
             HasSubscribed = true;
             Log.Debug("Attacked Successfully RigidBodyController to object " + gameObject.name);
             BackupBasicBody();
@@ -932,6 +929,8 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         internal Rigidbody Rigidbody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal SyncPhysics SyncPhysics { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal Respawner Respawner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
         private bool _EditMode;
         private bool isBackupping;
         internal bool RestoreOriginalOnEditModeReset = true;

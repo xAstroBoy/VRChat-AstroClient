@@ -27,8 +27,6 @@ namespace AstroClient.xAstroBoy.Utility
                 {
                     RoomManager.field_Private_Static_Boolean_1  = value;
                 }
-
-
             }
         }
 

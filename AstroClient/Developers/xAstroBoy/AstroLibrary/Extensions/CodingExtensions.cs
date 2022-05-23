@@ -21,6 +21,7 @@ namespace AstroClient.xAstroBoy.Extensions
 
         public static bool IsNotNull<T>(this T? obj) where T : struct => obj.HasValue;
 
+        public static bool isEqual(this string obj, string value) => obj.Equals(value, StringComparison.CurrentCultureIgnoreCase);
         public static bool IsNotNullOrEmptyOrWhiteSpace(this string obj) => !string.IsNullOrEmpty(obj) && !string.IsNullOrWhiteSpace(obj);
         public static bool IsNullOrEmptyOrWhiteSpace(this string obj) => string.IsNullOrEmpty(obj) && string.IsNullOrWhiteSpace(obj);
 

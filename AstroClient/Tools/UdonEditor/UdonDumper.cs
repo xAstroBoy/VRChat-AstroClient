@@ -2,6 +2,7 @@
 using AstroClient.xAstroBoy.Utility;
 using MelonLoader;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
@@ -27,6 +28,49 @@ namespace AstroClient.Tools.UdonEditor
             internal_Dump_All_UdonBehaviours(IncludeSymbolsAndInternals);
         }
 
+        internal static void Dump_AllCustomEventKeysDuplicates()
+        {
+            var duplicatelist = new List<string>();
+            for (var index = 0; index < WorldUtils.UdonScripts.Length; index++)
+            {
+                var udon = WorldUtils.UdonScripts[index];
+                var keys = udon.Get_EventKeys();
+                if (keys != null)
+                {
+                    for (int i = 0; i < keys.Length; i++)
+                    {
+                        var key = keys[i];
+                        if (key.StartsWith("_"))
+                        {
+                            if (UdonCustomEventsLists.VRChatUdonSDKEvents.Contains(key))
+                            {
+                                continue;
+                            }
+                            duplicatelist.Add(key);
+                        }
+
+                    }
+                }
+            }
+
+            var entries = from x in duplicatelist
+                          group x by x into g
+                          let count = g.Count()
+                          orderby count descending
+                          select new { Value = g.Key, Count = count };
+            if (duplicatelist.Count != 0)
+            {
+
+                foreach (var duplicate in entries)
+                {
+                    if (duplicate.Count != 1) // ignore if not higher than 1
+                    {
+                        Log.Debug("Duplicate Value: " + duplicate.Value + " Count: " + duplicate.Count);
+                    }
+
+                }
+            }
+        }
         internal static void UnboxUdonToConsole(UdonBehaviour udonnode)
         {
             if (udonnode != null)

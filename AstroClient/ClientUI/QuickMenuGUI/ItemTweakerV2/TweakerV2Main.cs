@@ -51,7 +51,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2
             //GameObjMenu.InitTogglerMenu(menu, 3, 0f, true); // TODO : Make a better one!
             ObjectInfoSubMenu.Init_ObjectInfoSubMenu(menu, 3, 0.5f, true);
             _ = new QMSingleButton(menu, 3, 1f, "Teleport to Object", new Action(() => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
-            _ = new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { GameObjectMenu.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
+            _ = new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RespawnPickup(false); }), "Reset Object Position.", null, null, true);
             PickupSelectionScrollMenu.InitButtons(menu, 3, 2, true);
             WorldObjectsScrollMenu.InitButtons(menu, 3, 2.5f, true);
             VRC_TriggersScrollMenu.InitButtons(menu, 4, 0, true);

@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
 using AstroClient.Config;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
@@ -51,12 +52,27 @@ namespace AstroClient.Startup.Hooks
             EnableListener = false;
         }
 
+        
+
         internal override void ExecutePriorityPatches()
         {
             new AstroPatch(AccessTools.Property(typeof(VRC_Pickup), nameof(VRC_Pickup.IsHeld)).GetMethod, null, GetPatch(nameof(IsHeldListener)));
-           // new AstroPatch(AccessTools.Property(typeof(VRCSDK2.VRC_Pickup), nameof(VRC_Pickup.IsHeld)).GetMethod, null, GetPatch(nameof(IsHeldListener)));
-           // new AstroPatch(AccessTools.Property(typeof(VRCPickup), nameof(VRC_Pickup.IsHeld)).GetMethod, null, GetPatch(nameof(IsHeldListener)));
+            new AstroPatch(typeof(VRC_Pickup).GetMethod(nameof(VRC_Pickup.Awake)), GetPatch(nameof(SDK1_Pickup)), showErrorOnConsole: false);
 
+        }
+
+
+
+        private static void SDK1_Pickup(VRC_Pickup __instance)
+        {
+            if (__instance != null)
+            {
+                var lol = __instance.gameObject.GetOrAddComponent<Respawner>();
+                if(lol != null)
+                {
+                    lol.CaptureSpawnCoords();
+                }
+            }
         }
 
         private static void IsHeldListener(VRC_Pickup __instance, ref bool __result)

@@ -1,8 +1,11 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
+using AstroClient.Tools.UdonEditor;
 using VRC.Udon;
+using VRC.Udon.Serialization.OdinSerializer.Utilities;
 
 namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 {
@@ -33,6 +36,12 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             
             ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
+
+
+
+
+        
+
 
         private static void OnRoomLeft()
         {
@@ -100,10 +109,23 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
         {
             if(CustomEventMessagesToIgnore.Count != 0)
             {
-                return CustomEventMessagesToIgnore.Contains(EventKey);
+                if(CustomEventMessagesToIgnore.Contains(EventKey))
+                {
+                    return true;
+                }
+            }
+
+            if (UdonCustomEventsLists.VRChatUdonSDKUpdateEvents.Contains(EventKey))
+            {
+                return true;
+            }
+            if (UdonCustomEventsLists.WorldKnownsSpammyKeys.Contains(EventKey))
+            {
+                return true;
             }
             return false;
         }
+
         internal static bool Handle_UdonEvent_CustomEvent(UdonBehaviour UdonEvent, string EventKey)
         {
             try
@@ -114,16 +136,20 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 
 
             bool isBlocked = Bools.BlockUdon;
-            bool IgnoreLogStep = IsEventLogIgnored(EventKey);
+
+
+            bool isEventKeyLoggingIgnored = IsEventLogIgnored(EventKey);
             try
             {
 
                 isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(GameInstances.CurrentPlayer, UdonEvent.gameObject, EventKey);
                 
 
+
+
                 if (ConfigManager.General.LogUdonCustomEvents)
                 {
-                    if (!IgnoreLogStep)
+                    if (!isEventKeyLoggingIgnored)
                     {
                         if (isBlocked)
                         {
@@ -146,6 +172,8 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
 
 
         }
+
+
 
     }
 }

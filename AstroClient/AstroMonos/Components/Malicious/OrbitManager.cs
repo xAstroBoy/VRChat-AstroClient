@@ -120,7 +120,7 @@
             {
                 var pickup = Instance.pickups[i].gameObject;
                 pickup.Pickup_RestoreOriginalProperties();
-                GameObjectMenu.RestoreOriginalLocation(pickup, true);
+                pickup.RespawnPickup(true);
                 OnlineEditor.RemoveOwnerShip(pickup);
             }
             MelonCoroutines.Stop(Instance.Toggle);

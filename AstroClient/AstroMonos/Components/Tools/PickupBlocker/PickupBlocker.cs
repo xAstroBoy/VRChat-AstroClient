@@ -62,15 +62,7 @@ namespace AstroClient.PickupBlockerSystem
                 {
                     if (pickup.RigidBodyController != null)
                     {
-                        if (pickup.RigidBodyController.SyncPhysics != null)
-                        {
-                            pickup.RigidBodyController.SyncPhysics.RespawnItem(true);
-                        }
-                        else
-                        {
-                            pickup.gameObject.SetPosition(pickup.gameObject.transform.position);
-                            pickup.gameObject.SetRotation(pickup.gameObject.transform.rotation);
-                        }
+                        pickup.gameObject.RespawnPickup(false);
                     }
                 }
             }

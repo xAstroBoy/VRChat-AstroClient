@@ -33,10 +33,6 @@ namespace AstroClient.Tools.ObjectEditor
 
     internal class GameObjectMenu : AstroEvents
     {
-        internal override void RegisterToEvents()
-        {
-            ClientEventActions.OnRoomLeft += OnRoomLeft;
-        }
 
         internal static void InitButtons(QMGridTab menu)
         {
@@ -88,62 +84,9 @@ namespace AstroClient.Tools.ObjectEditor
             }
         }
 
-        internal static void CheckObjComponents(Transform Obj)
-        {
-            try
-            {
-                if (Obj != null)
-                {
-                    var components = Obj.GetComponentsInChildren<Component>(true);
-                    for (int i = 0; i < components.Count; i++)
-                    {
-                        Component OriginalComponent = components[i];
-                        Log.Write(Obj.name + " component : " + OriginalComponent.ToString());
-                    }
-                }
-            }
-            catch (Exception) { }
-        }
 
-        internal static void CheckObjComponents(GameObject Obj)
-        {
-            try
-            {
-                if (Obj != null)
-                {
-                    var components = Obj.GetComponentsInChildren<Component>(true);
-                    for (int i = 0; i < components.Count; i++)
-                    {
-                        Component OriginalComponent = components[i];
-                        Log.Write(Obj.name + " component : " + OriginalComponent.ToString());
-                    }
-                }
-            }
-            catch (Exception) { }
-        }
-
-        internal static string ReturnObjectComponentsToString(GameObject Obj)
-        {
-            StringBuilder comp = new StringBuilder();
-            try
-            {
-                if (Obj != null)
-                {
-                    var components = Obj.GetComponentsInChildren<Component>(true);
-                    for (int i = 0; i < components.Count; i++)
-                    {
-                        Component OriginalComponent = components[i];
-                        _ = comp.AppendLine("Component : " + OriginalComponent.ToString() + ",");
-                    }
-                    return comp.ToString();
-                }
-                return "Object is null here!";
-            }
-            catch (Exception)
-            {
-                return "Exception Found! Aborted!";
-            }
-        }
+ 
+        
 
         internal static void EnableAllWorldPickups()
         {
@@ -166,43 +109,6 @@ namespace AstroClient.Tools.ObjectEditor
             }
         }
 
-        internal static void RestoreOriginalLocation(GameObject obj, bool RestoreBodySettings)
-        {
-            if (obj != null)
-            {
-                obj.TryTakeOwnership();
-                var control = obj.GetOrAddComponent<RigidBodyController>();
-
-                if (control != null)
-                {
-                    if (RestoreBodySettings)
-                    {
-                        control.RestoreOriginalBody();
-                    }
-
-                    if (control.SyncPhysics != null)
-                    {
-                        control.SyncPhysics.RespawnItem();
-                    }
-                }
-                else
-                {
-                    var SyncPhysic = obj.GetComponent<SyncPhysics>();
-                    if (SyncPhysic == null)
-                    {
-                        SyncPhysic = obj.GetComponentInChildren<SyncPhysics>(true);
-                    }
-                    if (SyncPhysic != null)
-                    {
-                        SyncPhysic.RespawnItem();
-                    }
-                    else
-                    {
-                        Log.Debug($"");
-                    }
-                }
-            }
-        }
 
         internal static bool IsLocalPlayerHoldingObject(GameObject obj) => obj.GetComponent<VRC_Pickup>() != null && obj.GetComponent<VRC_Pickup>().currentPlayer.displayName == GameInstances.LocalPlayer.GetPlayer().GetVRCPlayerApi().displayName;
 
@@ -214,7 +120,7 @@ namespace AstroClient.Tools.ObjectEditor
                 GameObject Pickup = list[i];
                 if (Pickup != null)
                 {
-                    RestoreOriginalLocation(Pickup.gameObject, RestoreBodySettings);
+                    Pickup.RespawnPickup(RestoreBodySettings);
                 }
             }
         }
@@ -232,67 +138,6 @@ namespace AstroClient.Tools.ObjectEditor
             }
         }
 
-        internal static void GrabbableGameObjDumper()
-        {
-            GrabGameObjDumper.SetInteractable(false);
-            new Thread(() =>
-            {
-                string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_VRCPickups.txt");
-                Thread.CurrentThread.IsBackground = true;
-                var listg = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
-                using (var txtFile = File.AppendText(path))
-                {
-                    for (int i = 0; i < listg.Count; i++)
-                    {
-                        VRC_Pickup gameobj = listg[i];
-                        if (File.Exists(path))
-                        {
-                            txtFile.WriteLine("Found: " + gameobj.name);
-                        }
-                        else
-                        {
-                            using (FileStream fs = File.Create(path))
-                            {
-                                txtFile.WriteLine("Found: " + gameobj.name);
-                            }
-                        }
-                    }
-                    txtFile.Close();
-                }
-                Log.Write("Done Dumping GameObjects, Check The Path");
-            }).Start();
-        }
-
-        internal static void GameObjectDumper()
-        {
-            GameObjDumper.SetInteractable(false);
-            new Thread(() =>
-            {
-                string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects.txt");
-                Thread.CurrentThread.IsBackground = true;
-                var listg = Resources.FindObjectsOfTypeAll<Transform>();
-                using (var txtFile = File.AppendText(path))
-                {
-                    for (int i = 0; i < listg.Count; i++)
-                    {
-                        Transform gameobj = listg[i];
-                        if (File.Exists(path))
-                        {
-                            txtFile.WriteLine("Found: " + gameobj.name);
-                        }
-                        else
-                        {
-                            using (FileStream fs = File.Create(path))
-                            {
-                                txtFile.WriteLine("Found: " + gameobj.name);
-                            }
-                        }
-                    }
-                    txtFile.Close();
-                }
-                Log.Write("Done Dumping GameObjects, Check The Path");
-            }).Start();
-        }
 
         internal static void GetAllPickupsOwners()
         {
@@ -316,172 +161,14 @@ namespace AstroClient.Tools.ObjectEditor
             }
         }
 
-        internal static void GameObjDumperWithComponents()
-        {
-            ObjDumperWithComponentsBtn.SetInteractable(false);
-            string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects_With_components.txt");
-            var listg = Resources.FindObjectsOfTypeAll<GameObject>();
-            using (var txtFile = File.AppendText(path))
-            {
-                for (int i = 0; i < listg.Count; i++)
-                {
-                    GameObject gameobj = listg[i];
-                    if (File.Exists(path))
-                    {
-                        txtFile.WriteLine("Found: " + gameobj.name + " With Components: ");
-                        txtFile.WriteLine("{");
-                        txtFile.Write(ReturnObjectComponentsToString(gameobj));
-                        txtFile.WriteLine("}");
-                    }
-                    else
-                    {
-                        using (FileStream fs = File.Create(path))
-                        {
-                            txtFile.WriteLine("Found: " + gameobj.name + " With Components: ");
-                            txtFile.WriteLine("{");
-                            txtFile.Write(ReturnObjectComponentsToString(gameobj));
-                            txtFile.WriteLine("}");
-                        }
-                    }
-                }
-                txtFile.Close();
-            }
-            Log.Write("Done Dumping GameObjects, Check The Path");
-        }
 
-        internal static List<GameObject> GetAllPickupObjects()
-        {
-            List<GameObject> Objects = new List<GameObject>();
-            var listg = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
-            for (int i = 0; i < listg.Count; i++)
-            {
-                VRC_Pickup obj = listg[i];
-                if (!Objects.Contains(obj.gameObject))
-                {
-                    Objects.Add(obj.gameObject);
-                }
-            }
-            return Objects;
-        }
 
-        internal static void RemoveWorldMirrors()
-        {
-            FindWorldMirrors();
-            DestroyMirrors();
-        }
 
-        internal static void FindWorldMirrors()
-        {
-            Mirrors.Clear();
-            var Mir1 = Resources.FindObjectsOfTypeAll<MirrorReflection>();
-            var Mir2 = Resources.FindObjectsOfTypeAll<VRCMirrorReflection>();
-            var Mir3 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_MirrorReflection>();
-            var Mir4 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_MirrorReflection>();
-            for (int i = 0; i < Mir1.Count; i++)
-            {
-                MirrorReflection item = Mir1[i];
-                if (!Mirrors.Contains(item.gameObject))
-                {
-                    Mirrors.Add(item.gameObject);
-                    Log.Write("Added " + item.gameObject.name + " To the Mirrors List!");
-                }
-            }
-            for (int i = 0; i < Mir2.Count; i++)
-            {
-                VRCMirrorReflection item = Mir2[i];
-                if (!Mirrors.Contains(item.gameObject))
-                {
-                    Mirrors.Add(item.gameObject);
-                    Log.Write("Added " + item.gameObject.name + " To the Mirrors List!");
-                }
-            }
-            for (int i = 0; i < Mir3.Count; i++)
-            {
-                VRC.SDKBase.VRC_MirrorReflection item = Mir3[i];
-                if (!Mirrors.Contains(item.gameObject))
-                {
-                    Mirrors.Add(item.gameObject);
-                    Log.Write("Added " + item.gameObject.name + " To the Mirrors List!");
-                }
-            }
-            for (int i = 0; i < Mir4.Count; i++)
-            {
-                VRCSDK2.VRC_MirrorReflection item = Mir4[i];
-                if (!Mirrors.Contains(item.gameObject))
-                {
-                    Mirrors.Add(item.gameObject);
-                    Log.Write("Added " + item.gameObject.name + " To the Mirrors List!");
-                }
-            }
 
-            Log.Write("Mirrors Found : " + Mirrors.Count());
-        }
 
-        internal static void DestroyMirrors()
-        {
-            for (int i = 0; i < Mirrors.Count; i++)
-            {
-                GameObject item = Mirrors[i];
-                if (item != null)
-                {
-                    Log.Write("Killed Mirror : " + item.name);
-                    OnlineEditor.TakeObjectOwnership(item);
-                    Networking.Destroy(item);
-                    UnityEngine.Object.DestroyImmediate(item);
-                }
-            }
-        }
 
-        private void OnRoomLeft()
-        {
-            Mirrors.Clear();
-            if (GameObjDumper != null)
-            {
-                GameObjDumper.SetInteractable(true);
-            }
-            if (GrabGameObjDumper != null)
-            {
-                GrabGameObjDumper.SetInteractable(true);
-            }
-
-            if (ObjDumperWithComponentsBtn != null)
-            {
-                ObjDumperWithComponentsBtn.SetInteractable(true);
-            }
-
-        }
-
-        internal static void DumpHoldingGameObjComponent()
-        {
-            var held = Tweaker_Object.GetGameObjectToEdit();
-            if (held != null)
-            {
-                CheckObjComponents(held);
-            }
-        }
-
-        internal static void DumpObjectComponent(GameObject obj)
-        {
-            if (obj != null)
-            {
-                CheckObjComponents(obj);
-            }
-        }
-
-        internal static void DumpObjectComponent(Transform obj)
-        {
-            if (obj != null)
-            {
-                CheckObjComponents(obj);
-            }
-        }
-
-        internal static QMSingleButton GameObjDumper;
-        internal static QMSingleButton GrabGameObjDumper;
-        internal static QMSingleButton ObjDumperWithComponentsBtn;
 
         internal static bool HasPrePatchedGameObjects = false;
 
-        internal static List<GameObject> Mirrors = new List<GameObject>();
     }
 }

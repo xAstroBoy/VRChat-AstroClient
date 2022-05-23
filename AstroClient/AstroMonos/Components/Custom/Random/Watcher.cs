@@ -142,7 +142,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                 RigidBodyController.RestoreOriginalBody();
                 if (gameObject.isLocalPlayerOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
-                if (!isHeld) GameObjectMenu.RestoreOriginalLocation(gameObject, false);
+                if (!isHeld) gameObject.RespawnPickup(false);
             }
             catch
             {

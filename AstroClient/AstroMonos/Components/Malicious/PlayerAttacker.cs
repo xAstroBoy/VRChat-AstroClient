@@ -181,7 +181,7 @@ namespace AstroClient.AstroMonos.Components.Malicious
                 HasSubscribed = false;
                 RigidBodyController.RestoreOriginalBody();
                 if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
-                if (!isHeld) GameObjectMenu.RestoreOriginalLocation(gameObject, false);
+                if (!isHeld) gameObject.RespawnPickup(false);
             }
             catch { }
         }

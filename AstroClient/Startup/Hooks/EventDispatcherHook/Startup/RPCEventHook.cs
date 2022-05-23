@@ -67,10 +67,9 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Startup
                     {
                         return EventDispatcher_HandleUdonEvent.Handle_UdonEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText()); ;
                     }
-                    if (!parameter.Equals("UdonSyncRunProgramAsRPC"))
-                    {
-                        return EventDispatcher_HandleRPCEvents.Handle_OtherRPCEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
-                    }
+
+
+                    return EventDispatcher_HandleRPCEvents.Handle_OtherRPCEvent(__1, __0, __1.Get_Parameter_GameObject(), __1.Get_ActionText(), parameter, __1.Get_EventType(), __2.Get_VrcBroadcastType());
                 }
 
             }

@@ -34,6 +34,7 @@ namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
             new QMSingleButton(menu, "Dumps All udon Events", () => { UdonDumper.Dump_All_UdonBehaviours(false); }, "Dumps all Udon Events in Console & File..");
             new QMSingleButton(menu, "Dumps all Udon Events in Console & File..", () => { UdonDumper.Dump_All_UdonBehaviours(true); }, "Dumps All udon Events & Internals");
             new QMSingleButton(menu, "Extract all UdonBehaviour programs..", () => { UdonDumper.Dump_All_UdonBehaviours_Programs(); }, "Dumps All udon Program Codes!");
+            new QMSingleButton(menu, "Dumps All duplicate Udon Custom EventsKeys", () => { UdonDumper.Dump_AllCustomEventKeysDuplicates(); }, "Dumps all Udon Events in Console & File..");
 
         }
 
@@ -57,5 +58,8 @@ namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
                 }
             }
         }
+
+
+        
     }
 }
