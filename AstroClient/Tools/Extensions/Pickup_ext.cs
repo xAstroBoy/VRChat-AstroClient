@@ -47,10 +47,7 @@ namespace AstroClient.Tools.Extensions
                     var control = obj.GetOrAddComponent<RigidBodyController>();
                     if (control != null)
                     {
-                        if (RestoreBodySettings)
-                        {
-                            control.RestoreOriginalBody();
-                        }
+                        control.RestoreOriginalBody();
                     }
                 }
 
