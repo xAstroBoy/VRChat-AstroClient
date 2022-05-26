@@ -220,7 +220,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
             //IsUIPageListenerActive = true;
         }
 
-        //private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
+        //private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType, bool Toggle2)
         //{
         //    if (!isOpen) return;
         //    if (Page != null)

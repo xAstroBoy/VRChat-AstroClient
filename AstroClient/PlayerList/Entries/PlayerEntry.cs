@@ -29,7 +29,6 @@ namespace AstroClient.PlayerList.Entries
     using VRC.Core;
     using VRC.DataModel;
     using VRC.SDKBase;
-    using VRCSDK2.Validation.Performance;
     using Player = VRC.Player;
 
     [RegisterComponent]

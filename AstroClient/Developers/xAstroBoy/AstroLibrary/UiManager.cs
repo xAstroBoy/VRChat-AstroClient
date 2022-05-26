@@ -49,8 +49,8 @@ namespace AstroClient.xAstroBoy
             new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), null, GetPatch(nameof(OnQuickMenuOpen_Event)));
             new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null, GetPatch(nameof(OnQuickMenuClose_Event)));
 
-            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
-            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
+            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_Boolean_0)), GetPatch(nameof(OnUIPageToggle)));
+            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_Boolean_0)), GetPatch(nameof(OnUIPageToggle)));
 
             new AstroPatch(NewMenuXrefsSystem.openBigMenu, null, GetPatch(nameof(OnBigMenuOpen_Event)));
             new AstroPatch(NewMenuXrefsSystem.closeBigMenu, null, GetPatch(nameof(OnBigMenuClose_Event)));
@@ -136,8 +136,8 @@ namespace AstroClient.xAstroBoy
         /// </summary>
         /// <param name="user">The user to open</param>
         internal static void OpenUserInUserInfoPage(IUser user)
-        {
-            UIManagerImpl.prop_UIManagerImpl_0.Method_Public_Void_IUser_0(user);
+        {// Method_Public_Void_IUser_0
+            UIManagerImpl.prop_UIManagerImpl_0.Method_Public_Void_IUser_Boolean_0(user);
         }
 
         /// <summary>
@@ -164,10 +164,10 @@ namespace AstroClient.xAstroBoy
 
         private static void OnQuickMenuClose_Event() => ClientEventActions.OnQuickMenuClose.SafetyRaise();
 
-        private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
+        private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1, bool __2)
         {
             if (__instance == null) return;
-            ClientEventActions.OnUiPageToggled.SafetyRaiseWithParamsAndNoExceptions(__instance, __0, __1);
+            ClientEventActions.OnUiPageToggled.SafetyRaiseWithParamsAndNoExceptions(__instance, __0, __1, __2);
         }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)

@@ -328,7 +328,6 @@
     <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\CustomJsonTypes.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\ExploitManager_Old.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UnityUIUtils.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\Api\API.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\Api\Object\VRChatAPIObjects.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\Api\Object\WebSocketObject.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\ColorUtility\HSBColor.cs" />
@@ -336,13 +335,6 @@
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\ColorUtility\UIColor.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\MiscFunc.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\MiscUtility.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\API.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Classes\VRChatAPIObjects.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Endpoints\AuthEndpoint.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Endpoints\Avatar.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Endpoints\MiscEndpoint.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Utils.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\VRCAPI\Variables.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\AudioUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\AvatarUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\BonesUtils.cs" />

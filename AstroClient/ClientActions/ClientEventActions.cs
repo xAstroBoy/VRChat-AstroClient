@@ -245,7 +245,7 @@ namespace AstroClient.ClientActions
         /// <para>Params : UIPage Page, bool Toggle, UIPage.TransitionType TransitionType</para>
         /// </summary>
 
-        internal static Action<UIPage, bool, UIPage.TransitionType> OnUiPageToggled { get; set; }
+        internal static Action<UIPage, bool, UIPage.TransitionType, bool> OnUiPageToggled { get; set; }
 
         /// <summary>
         /// This listens to VRChat input system for Jump event.

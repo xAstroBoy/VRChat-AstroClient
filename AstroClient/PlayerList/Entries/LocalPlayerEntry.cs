@@ -14,8 +14,6 @@ namespace AstroClient.PlayerList.Entries
     using Utilities;
     using VRC;
     using VRC.Core;
-    using VRC.DataModel;
-    using VRCSDK2.Validation.Performance;
 
     [RegisterComponent]
     public class LocalPlayerEntry : PlayerEntry
