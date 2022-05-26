@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Extensions;
 
 namespace AstroClient.Tools.UdonEditor
 {
@@ -25,8 +26,17 @@ namespace AstroClient.Tools.UdonEditor
         internal UdonBehaviour udonBehaviour => behaviour;
 
 
-        internal Dictionary<string, uint> SymbolsDictionary = new Dictionary<string, uint>(StringComparer.CurrentCultureIgnoreCase);
-
+        internal int SymbolsAmount
+        {
+            get
+            {
+                if(IUdonSymbolTable != null)
+                {
+                    return IUdonSymbolTable.GetSymbols().Length;
+                }
+                return 0;
+            }
+        } 
 
         /// <summary>
         /// Check if a symbol is existing.
@@ -35,38 +45,28 @@ namespace AstroClient.Tools.UdonEditor
         /// <returns></returns>
         internal bool HasSymbol(string Symbol)
         {
-            if(SymbolsDictionary.Count != 0)
-            {
-                return SymbolsDictionary.ContainsKey(Symbol);
-            }
-            return false;
-        }
-
-        internal RawUdonBehaviour(UdonBehaviour behaviour, IUdonProgram IUdonProgram, IUdonSymbolTable IUdonSymbolTable, IUdonHeap IUdonHeap, Transform Parent)
-        {
-            this.IUdonProgram = IUdonProgram;
-            this.IUdonSymbolTable = IUdonSymbolTable;
-            this.IUdonHeap = IUdonHeap;
-            this.Parent = Parent;
-            this.behaviour = behaviour;
-
-            // This part extracts the symbols to facilitate everything.
             if (IUdonSymbolTable != null)
             {
                 var SymbolArray = IUdonSymbolTable.GetSymbols();
                 for (var symbolsitems = 0; symbolsitems < SymbolArray.Length; symbolsitems++)
                 {
                     var item = SymbolArray[symbolsitems];
-                    var address = IUdonSymbolTable.GetAddressFromSymbol(item);
-                    if (address != null)
+                    if(item.isMatchWholeWord(Symbol))
                     {
-                        if (!SymbolsDictionary.ContainsKey(item))
-                        {
-                            SymbolsDictionary.Add(item, address);
-                        }
+                        return true;
                     }
                 }
             }
+            return false;
+        }
+
+        internal RawUdonBehaviour(UdonBehaviour behaviour, IUdonProgram IUdonProgram,  IUdonSymbolTable IUdonSymbolTable, IUdonHeap IUdonHeap, Transform Parent)
+        {
+            this.IUdonProgram = IUdonProgram;
+            this.IUdonSymbolTable = IUdonSymbolTable;
+            this.IUdonHeap = IUdonHeap;
+            this.Parent = Parent;
+            this.behaviour = behaviour;
         }
     }
 }

@@ -24,10 +24,10 @@ namespace AstroClient.AstroMonos.Components.Tools
             AntiGcList.Add(this);
         }
 
-        private void Start()
-        {
-            CaptureSpawnCoords();
-        }
+        //private void Start()
+        //{
+        //    CaptureSpawnCoords();
+        //}
 
         [HideFromIl2Cpp]
         internal void CaptureSpawnCoords()

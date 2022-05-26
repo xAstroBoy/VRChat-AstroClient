@@ -35,11 +35,18 @@ namespace AstroClient.AstroMonos.Components.Tools
         private void Start()
         {
             HasSubscribed = true;
+            FindPassCode();
+        }
+
+
+        internal void FindPassCode()
+        {
             if (FindAndRevealPassword())
             {
                 Success = true;
                 Log.Debug("Found KeyCode password!");
             }
+
         }
 
         private bool _HasSubscribed = false;

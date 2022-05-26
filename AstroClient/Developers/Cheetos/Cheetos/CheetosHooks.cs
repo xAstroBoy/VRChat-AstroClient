@@ -63,7 +63,7 @@ namespace AstroClient.Cheetos
 
                 //new AstroPatch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 //new AstroPatch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
-                //new AstroPatch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
+                //new AstroPatch(AccessTools.Property(typeof(VRC.Tools), nameof(VRC.Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
 
                // new AstroPatch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)));
 
@@ -233,9 +233,10 @@ namespace AstroClient.Cheetos
         {
             try
             {
-                if (ConfigManager.General.SpoofQuest && !WorldUtils.IsInWorld)
+                if (ConfigManager.General.SpoofQuest)
                 {
                     __result = "android";
+                    //ConfigManager.General.SpoofQuest = false;
                 }
             }
             catch (Exception e)

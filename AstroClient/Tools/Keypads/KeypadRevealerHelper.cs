@@ -24,13 +24,12 @@ namespace AstroClient.Tools.Keypads
 
             for (int i = 0; i < finds.Count; i++)
             {
-                finds[i].gameObject.GetOrAddComponent<KeypadRevealer>();
+                var find = finds[i].gameObject.GetOrAddComponent<KeypadRevealer>();
+                if (find != null)
+                {
+                    find.FindPassCode();
+                }
             }
-            // Give time for the component to get the passcode, if it fails after 5s , destroy it
-            MiscUtils.DelayFunction(50f, () =>
-            {
-                ClientEventActions.Keypad_DestroyFailedFinds.SafetyRaise();
-            });
         }
         /// <summary>
         ///  All symbols are lowercase, avoid duplicates and such

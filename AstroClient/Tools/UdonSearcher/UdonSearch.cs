@@ -82,7 +82,7 @@ namespace AstroClient.Tools.UdonSearcher
                         {
                             if (Debug)
                             {
-                                Log.Debug($"Udon Heap has  {rawitem.SymbolsDictionary.Count} Symbols!");
+                                Log.Debug($"Udon Heap has  {rawitem.SymbolsAmount} Symbols!");
                             }
 
                             foreach (var target in TargetedSymbols)
@@ -135,7 +135,7 @@ namespace AstroClient.Tools.UdonSearcher
                         {
                             if (Debug)
                             {
-                                Log.Debug($"Udon Heap has  {rawitem.SymbolsDictionary.Count} Symbols!");
+                                Log.Debug($"Udon Heap has  {rawitem.SymbolsAmount} Symbols!");
                             }
 
                             if (rawitem.HasSymbol(TargetedSymbol))
