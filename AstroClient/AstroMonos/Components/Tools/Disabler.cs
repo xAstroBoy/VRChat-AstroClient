@@ -20,7 +20,10 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             gameObject.SetActive(false);
         }
-
+        private void Update()
+        {
+            gameObject.SetActive(false);
+        }
         private void OnEnable()
         {
             gameObject.SetActive(false);
@@ -29,6 +32,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             gameObject.SetActive(false);
         }
+
 
     }
 }

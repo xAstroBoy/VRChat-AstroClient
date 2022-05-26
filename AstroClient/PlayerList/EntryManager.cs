@@ -362,7 +362,8 @@ namespace AstroClient.PlayerList
         public static void RefreshPlayerEntries(bool bypassActive = false)
         {
             if (RoomManager.field_Internal_Static_ApiWorld_0 == null || Player.prop_Player_0 == null || Player.prop_Player_0.gameObject == null || Player.prop_Player_0.prop_VRCPlayerApi_0 == null || (!MenuManager.playerList.active && !bypassActive)) return;
-
+            if (playerEntries == null) return;
+            if (playerEntries.Count == 0) return; 
             foreach (PlayerEntry entry in playerEntries)
                 PlayerEntry.UpdateEntry(entry.player.prop_PlayerNet_0, entry, bypassActive);
             localPlayerEntry.Refresh();

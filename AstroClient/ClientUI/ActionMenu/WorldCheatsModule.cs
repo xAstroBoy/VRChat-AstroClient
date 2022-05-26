@@ -236,6 +236,19 @@ internal class WorldCheatsModule : AstroEvents
             }
 
             #endregion ClickerGame
+            
+            #region Pool Parlor
+
+            if (WorldUtils.WorldID == WorldIds.PoolParlor)
+            {
+                CustomSubMenu.AddToggle("Start New Match on current match end", PoolParlor.CreateMatchOnGameEnd, ToggleValue => { PoolParlor.CreateMatchOnGameEnd = ToggleValue; });
+                CustomSubMenu.AddButton("Create Match", () => { PoolParlor.StartNewMatchCreation.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Abort Match Creation", () => { PoolParlor.CloseNewMatchCreation.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Start Match", () => { PoolParlor.StartMatch.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Reset Match", () => { PoolParlor.ResetMatch.InvokeBehaviour(); });
+            }
+
+            #endregion Pool Parlor
 
             #region BOMBERio
 
@@ -596,6 +609,7 @@ internal class WorldCheatsModule : AstroEvents
             }
 
             #endregion Kmart Express
+            
             #region VRChat Kmart
 
             if (WorldUtils.WorldID == WorldIds.VRCHAT_Kmart)

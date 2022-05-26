@@ -16,7 +16,7 @@ namespace AstroClient.xAstroBoy.UIPaths
             {
                 if (_VoiceDotDisabled == null)
                 {
-                    _VoiceDotDisabled = GameObject.Find("UserInterface/UnscaledUI/HudContent/Hud/VoiceDotParent/VoiceDotDisabled").transform;
+                    _VoiceDotDisabled = GameObject.Find("UserInterface/UnscaledUI/HudContent_Old/Hud/VoiceDotParent/VoiceDotDisabled").transform;
                 }
 
                 return _VoiceDotDisabled;

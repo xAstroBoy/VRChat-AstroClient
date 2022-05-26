@@ -1,5 +1,7 @@
 ﻿using System;
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.PlayerList;
+using AstroClient.Startup.Hooks;
 using AstroClient.xAstroBoy.Extensions;
 using UnhollowerBaseLib;
 using VRC.Udon;
@@ -434,8 +436,22 @@ namespace AstroClient.Tools.Extensions
                 }
                 else if (obj is GameObject o)
                 {
+
                     if (o != null)
                     {
+                        if (UnityDestroyBlock.MonitorDestroyingEvent)
+                        {
+                            foreach (var item in o.GetComponents<DontDestroyFlag>())
+                            {
+                                Object.DestroyImmediate(item);
+                            }
+                            foreach (var item in o.GetComponentsInChildren<DontDestroyFlag>(true))
+                            {
+                                Object.DestroyImmediate(item);
+                            }
+
+                        }
+
                         Object.Destroy(o);
                     }
 
@@ -458,8 +474,22 @@ namespace AstroClient.Tools.Extensions
                 {
                     if (item != null)
                     {
+                        if (UnityDestroyBlock.MonitorDestroyingEvent)
+                        {
+                            foreach (var item2 in item.GetComponents<DontDestroyFlag>())
+                            {
+                                Object.DestroyImmediate(item2);
+                            }
+                            foreach (var item2 in item.GetComponentsInChildren<DontDestroyFlag>(true))
+                            {
+                                Object.DestroyImmediate(item2);
+                            }
+
+                        }
+
                         Object.Destroy(item.gameObject);
                     }
+
                     MiscUtils.DelayFunction(0.5f, () =>
                     {
                         if (item != null)

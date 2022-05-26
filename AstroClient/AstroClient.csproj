@@ -116,6 +116,8 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_DoorAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Randomizer.cs" />
+    <Compile Include="AstroMonos\Components\Tools\RegisterAsPrefab.cs" />
+    <Compile Include="AstroMonos\Components\Tools\DontDestroyFlag.cs" />
     <Compile Include="AstroMonos\Components\Tools\Respawner.cs" />
     <Compile Include="AstroMonos\Components\Tools\LaserPointer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="ModsDetector\EmmPatcher.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlocker_Tools.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
+    <Compile Include="Startup\Fixes\TabWhiteImageFix.cs" />
     <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
     <Compile Include="Startup\Fixes\KeyboardPopupDeclutterer.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
@@ -195,6 +198,7 @@
     <Compile Include="Tools\Converters.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\Extensions\TextAsset_ext.cs" />
+    <Compile Include="Tools\PrefabsHelper.cs" />
     <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
     <Compile Include="Tools\Skybox\Builders\MaterialBuilder.cs" />
     <Compile Include="Tools\Skybox\SkyboxClasses\GeneratedSkyboxes.cs" />

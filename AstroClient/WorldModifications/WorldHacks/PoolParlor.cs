@@ -1,6 +1,8 @@
 ﻿using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Extensions;
+using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -23,7 +25,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
-
+        internal static bool CreateMatchOnGameEnd { get; set; } = false;
 
         private static bool _HasSubscribed = false;
         private static bool HasSubscribed
@@ -37,12 +39,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                     {
 
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
+                        ClientEventActions.Udon_SendCustomEvent += UdonSendCustomEvent;
                     }
                     else
                     {
 
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.Udon_SendCustomEvent -= UdonSendCustomEvent;
 
                     }
                 }
@@ -50,6 +53,45 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+        private static void UdonSendCustomEvent(UdonBehaviour item, string eventkey)
+        {
+            if(item != null)
+            {
+                if(item.gameObject.name.isMatchWholeWord("NetworkingManager"))
+                {
+                    if (eventkey.isMatchWholeWord("_OnGameReset"))
+                    {
+                        StartANewMatch();
+                    }
+                }
+                if (item.gameObject.name.isMatchWholeWord("BilliardsModule"))
+                {
+                    if (eventkey.isMatchWholeWord("_TriggerGameReset"))
+                    {
+                        StartANewMatch();
+                    }
+                }
+                if (item.gameObject.name.isMatchWholeWord("GraphicsManager"))
+                {
+                    if (eventkey.isMatchWholeWord("_SetWinners"))
+                    {
+                        StartANewMatch();
+                    }
+                }
+
+            }
+        }
+
+
+        private static void StartANewMatch()
+        {
+            if (CreateMatchOnGameEnd)
+            {
+                StartNewMatchCreation.InvokeBehaviour();
+                CreateMatchOnGameEnd = false;
+            }
+            
+        }
 
         // TODO : Rewrite this (read and cache from behaviour themself!)
         internal static void InitButtons(QMGridTab main)
@@ -82,6 +124,12 @@ namespace AstroClient.WorldModifications.WorldHacks
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetCuetip");
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_IsInUI");
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetCuetip");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Get");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_IsShooting");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetDesktopMarker");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_BeginPerf");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_EndPerf");
+
                 HasSubscribed = true;
                 if (PoolParlorCheats != null)
                 {
@@ -97,6 +145,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     BilliardsModule = BilliardsModuleEvent.RawItem;
                     BilliardModule_TriggerGlobalSettingsUpdated = BilliardsModule.gameObject.FindUdonEvent("BilliardsModule", "_TriggerGlobalSettingsUpdated");
+                    StartNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent( "_TriggerLobbyOpen");
+                    CloseNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyClosed");
+                    StartMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameStart");
+                    ResetMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameReset");
 
                 }
                 else
@@ -406,6 +458,10 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static UdonBehaviour_Cached UpdateColorScheme_Table { get; private set; }
         internal static UdonBehaviour_Cached BilliardModule_TriggerGlobalSettingsUpdated { get; private set; }
         internal static UdonBehaviour_Cached NetworkingManager_OnGlobalSettingsChanged { get; private set; }
+        internal static UdonBehaviour_Cached StartNewMatchCreation { get; private set; }
+        internal static UdonBehaviour_Cached CloseNewMatchCreation { get; private set; }
+        internal static UdonBehaviour_Cached StartMatch { get; private set; }
+        internal static UdonBehaviour_Cached ResetMatch { get; private set; }
 
         internal static RawUdonBehaviour Cue_0 { get; private set; }
         internal static RawUdonBehaviour Cue_1 { get; private set; }

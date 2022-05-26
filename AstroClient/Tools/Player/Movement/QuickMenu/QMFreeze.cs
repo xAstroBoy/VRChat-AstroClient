@@ -91,7 +91,7 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
                 if (!Frozen)
                 {
                     Frozen = true;
-                    GameInstances.LocalPlayer.Immobilize(true);
+                    Networking.LocalPlayer.Immobilize(true);
                     //originalVelocity = GameInstances.LocalPlayer.GetVelocity();
                     //if (originalVelocity == Vector3.zero)
                     //{

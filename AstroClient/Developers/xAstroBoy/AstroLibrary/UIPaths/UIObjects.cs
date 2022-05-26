@@ -146,7 +146,7 @@
 
         #region notifications
 
-        public static GameObject HudRoot { get { return GameObject.Find("UserInterface/UnscaledUI/HudContent/Hud").gameObject; } }
+        public static GameObject HudRoot { get { return GameObject.Find("UserInterface/UnscaledUI/HudContent_Old/Hud").gameObject; } }
         public static GameObject InviteObj { get { return HudRoot.transform.Find("NotificationDotParent/InviteDot").gameObject; } }
         public static GameObject InviteReqObj { get { return HudRoot.transform.Find("NotificationDotParent/InviteRequestDot").gameObject; } }
         public static GameObject NotificationObj { get { return HudRoot.transform.Find("NotificationDotParent/NotificationDot").gameObject; } }

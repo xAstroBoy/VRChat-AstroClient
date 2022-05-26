@@ -282,7 +282,7 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static Image CreateImage(string name, float offset)
         {
-            var hudRoot = GameObject.Find("UserInterface/UnscaledUI/HudContent/Hud");
+            var hudRoot = GameObject.Find("UserInterface/UnscaledUI/HudContent_Old/Hud");
             var requestedParent = hudRoot.transform.Find("NotificationDotParent");
             var indicator = UnityEngine.Object.Instantiate(hudRoot.transform.Find("NotificationDotParent/NotificationDot").gameObject, requestedParent, false).Cast<GameObject>();
             indicator.name = "NotifyDot-" + name;

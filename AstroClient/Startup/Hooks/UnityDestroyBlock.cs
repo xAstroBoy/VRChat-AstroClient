@@ -1,7 +1,9 @@
 ﻿
 using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Utility;
 using Boo.Lang.Compiler.Ast;
 
 namespace AstroClient.Startup.Hooks
@@ -135,7 +137,7 @@ namespace AstroClient.Startup.Hooks
                             if (obj != null)
                             {
                                 var path = obj.GetPath();
-                                if (GameObjectsPathsToNotDestroy.Contains(path))
+                                if (GameObjectsPathsToNotDestroy.Contains(path) || obj.GetGetInChildrens<DontDestroyFlag>() != null)
                                 {
                                     Log.Debug($"Blocked Destroy : {path}");
                                     if(OnDestroyBlocked != null)
@@ -160,7 +162,7 @@ namespace AstroClient.Startup.Hooks
                             if (obj != null)
                             {
                                 var path = obj.GetPath();
-                                if (GameObjectsPathsToNotDestroy.Contains(path))
+                                if (GameObjectsPathsToNotDestroy.Contains(path) || obj.gameObject.GetGetInChildrens<DontDestroyFlag>() != null)
                                 {
                                     Log.Debug($"Blocked Destroy : {path}");
                                     if (OnDestroyBlocked != null)
