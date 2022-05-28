@@ -140,6 +140,9 @@
     <Compile Include="AstroMonos\Components\Tools\ModerationTools\ModerationRevealerHelper.cs" />
     <Compile Include="AstroMonos\Components\Tools\UdonDumper\UdonSymbolsAndTypes.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\TagStacker.cs" />
+    <Compile Include="AstroMonos\PickupHelper\RigidbodyControllerHelper.cs" />
+    <Compile Include="AstroMonos\PickupHelper\PickupControllerHelper.cs" />
+    <Compile Include="AstroMonos\PickupHelper\RespawnHelper.cs" />
     <Compile Include="ClientAttributes\RegisterType.cs" />
     <Compile Include="ClientActions\ConfigEventActions.cs" />
     <Compile Include="ClientActions\TweakerEventActions.cs" />

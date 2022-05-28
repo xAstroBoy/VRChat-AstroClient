@@ -1,5 +1,7 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.PickupBlockerSystem;
 using AstroClient.Startup.Hooks;
+using VRC.Core;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
@@ -19,7 +21,7 @@ namespace AstroClient.AstroMonos.Components.Tools
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class PickupController : MonoBehaviour
+    public class  PickupController : MonoBehaviour
     {
         internal Action OnPickupHeld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Action OnPickupDrop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -34,6 +36,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 {
                     if (value)
                     {
+                        PickupBlocker.OnPickupHeldCheck(this);
                         OnPickupHeld?.SafetyRaise();
                     }
                     else
@@ -44,7 +47,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _CurrentHeldStatus = value;
             }
         }
-
+        
         public List<MonoBehaviour> AntiGcList;
 
         public PickupController(IntPtr obj0) : base(obj0)
@@ -128,7 +131,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             EventsAreEnabled = true;
             SyncProperties(true);
-            Log.Debug("Attacked Successfully PickupController to object " + gameObject.name);
+            //Log.Debug("Attacked Successfully PickupController to object " + gameObject.name);
             isUsingUI = false;
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
             InvokeRepeating(nameof(PickupProtection), 0.1f, 0.1f);
@@ -141,8 +144,10 @@ namespace AstroClient.AstroMonos.Components.Tools
         //}
         private void PickupUpdate()
         {
+            if (!isActiveAndEnabled) return;
             if (gameObject != null)
             {
+                
                 CurrentHeldStatus = this.IsHeld;
                 Run_onPickupUpdate();
                 if (!EditMode)

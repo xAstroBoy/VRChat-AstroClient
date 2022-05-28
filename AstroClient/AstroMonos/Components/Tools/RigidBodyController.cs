@@ -33,7 +33,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             if (Rigidbody == null)
                 Rigidbody = gameObject.GetComponent<Rigidbody>();
             HasSubscribed = true;
-            Log.Debug("Attacked Successfully RigidBodyController to object " + gameObject.name);
+            //Log.Debug("Attacked Successfully RigidBodyController to object " + gameObject.name);
             BackupBasicBody();
             InvokeRepeating(nameof(BodyUpdate), 0.1f, 0.3f);
         }
@@ -76,10 +76,9 @@ namespace AstroClient.AstroMonos.Components.Tools
         }
         private void BodyUpdate()
         {
-
-            if (gameObject != null)
+            if (gameObject == null) return;
+            if (!isActiveAndEnabled) return;
                 Run_OnRigidbodyControllerOnUpdate();
-            if (gameObject.active && isActiveAndEnabled)
                 if (isBackupping)
                     return;
             if (!EditMode)

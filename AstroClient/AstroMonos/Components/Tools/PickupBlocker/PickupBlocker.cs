@@ -11,41 +11,30 @@ using AstroClient.xAstroBoy.Utility;
 using Photon.Pun;
 using VRC;
 using VRC.Core;
+using VRC.SDKBase;
 
 namespace AstroClient.PickupBlockerSystem
 {
     internal class PickupBlocker : AstroEvents
     {
-        private static bool HasPickupControllerBeenAdded { get; set; } = false;
 
-        private static void StartPickupBlockerSystem()
+        internal static void OnPickupHeldCheck(PickupController instance)
         {
-            if (!HasPickupControllerBeenAdded)
+            if (DeniedPickupUsersIds.Count != 0)
             {
-                for (int i = 0; i < WorldUtils.Pickups.Count; i++)
+                if (instance.CurrentHolder != null)
                 {
-                    var pickup = WorldUtils.Pickups[i].GetOrAddComponent<PickupController>();
-                    // instead or relying in OnUpdate, let's just use the isHeld event that PickupController listens to
-                    pickup.OnPickupHeld += () =>
+                    var player = instance.CurrentHolder.GetPlayer();
+                    if (player != null)
                     {
-                        if (pickup.CurrentHolder != null)
+                        if (IsPickupBlockedUser(player.GetUserID()))
                         {
-                            var player = pickup.CurrentHolder.GetPlayer();
-                            if (player != null)
-                            {
-                                if(IsPickupBlockedUser(player.GetUserID()))
-                                {
-                                    Log.Debug($"Prevented {pickup.gameObject.name} from being used from Blacklisted user {pickup.CurrentHolder.GetDisplayName()}");
-                                    DenyPickupOwnership(pickup);
-                                }
-                            }
+                            Log.Debug($"Prevented {instance.gameObject.name} from being used from Blacklisted user {instance.CurrentHolder.GetDisplayName()}");
+                            DenyPickupOwnership(instance);
                         }
-                    };
+                    }
                 }
-                HasPickupControllerBeenAdded = true;
-                
-            }
-
+            }                
         }
 
         internal static void DenyPickupOwnership(PickupController pickup)
@@ -107,10 +96,6 @@ namespace AstroClient.PickupBlockerSystem
                 {
                     try
                     {
-                        if (!HasPickupControllerBeenAdded)
-                        {
-                            StartPickupBlockerSystem(); // Add everything only if we need to prevent trolls from accessing pickup interaction
-                        }
                         if (!HasSubscribed)
                         {
                             HasSubscribed = true;
@@ -140,7 +125,6 @@ namespace AstroClient.PickupBlockerSystem
 
         private static void OnRoomLeft()
         {
-            HasPickupControllerBeenAdded = false;
             DeniedPickupUsersIds.Clear();
             HasSubscribed = false;
         }

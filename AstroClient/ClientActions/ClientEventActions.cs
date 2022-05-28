@@ -369,5 +369,13 @@ namespace AstroClient.ClientActions
         internal static Action<VRCAvatarManager, ApiAvatar, GameObject> OnAvatarInstantiated { get; set; }
 
         internal static Action<bool> OnViewRolesPropertyChanged { get; set; }
+
+
+        /// <summary>
+        /// This is a pickup component gets created 
+        /// <para>Params : VRC.SDKBase.VRC_Pickup instance </para>
+        /// </summary>
+        internal static Action<VRC.SDKBase.VRC_Pickup> OnPickupAwake { get; set; }
+
     }
 }

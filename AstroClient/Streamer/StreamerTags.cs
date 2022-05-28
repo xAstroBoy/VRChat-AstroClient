@@ -32,7 +32,7 @@ namespace AstroClient.Streamer
             var esp = player.GetComponent<PlayerESP>();
             if (esp != null)
             {
-                MiscUtils.DelayFunction(0.5f, () =>
+                MiscUtils.DelayFunction(3f, () =>
                 {
                     esp.UseCustomColor = true;
                     esp.ChangeColor(NewColor);
@@ -51,7 +51,7 @@ namespace AstroClient.Streamer
                     if (StreamerIdentifier.IsAStreamer(apiuser.id))
                     {
 
-                        player.AddSingleTag(Color.FromArgb(222, 157, 67), "Streamer");
+                        player.AddSingleTag(SystemColors.Orange, "Streamer");
                         switch (apiuser.id)
                         {
                             case Streamers.StarNovaKitty:

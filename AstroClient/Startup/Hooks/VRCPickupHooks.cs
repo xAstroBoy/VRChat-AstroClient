@@ -65,14 +65,7 @@ namespace AstroClient.Startup.Hooks
 
         private static void SDK1_Pickup(VRC_Pickup __instance)
         {
-            if (__instance != null)
-            {
-                var lol = __instance.gameObject.GetOrAddComponent<Respawner>();
-                if(lol != null)
-                {
-                    lol.CaptureSpawnCoords();
-                }
-            }
+            ClientEventActions.OnPickupAwake.SafetyRaiseWithParams(__instance);
         }
 
         private static void IsHeldListener(VRC_Pickup __instance, ref bool __result)

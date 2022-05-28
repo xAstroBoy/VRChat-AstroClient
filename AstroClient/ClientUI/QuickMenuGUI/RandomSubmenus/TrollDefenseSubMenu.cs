@@ -55,7 +55,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                     if (value)
                     {
                         var originalcoords = player.transform.position;
-                        player.transform.position = new Vector3(originalcoords.x, 9999999999, originalcoords.z);
+                        player.transform.position = new Vector3(originalcoords.x, float.MaxValue, originalcoords.z);
                         MiscUtils.DelayFunction(1f, () => // Wait for the teleport message to be sent.
                         {
                             MovementSerializer.SerializerActivated = true;
