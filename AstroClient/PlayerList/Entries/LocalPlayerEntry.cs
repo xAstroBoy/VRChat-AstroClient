@@ -5,10 +5,10 @@ using VRC.SDKBase.Validation.Performance;
 
 namespace AstroClient.PlayerList.Entries
 {
-    using System;
-    using System.Text;
     using ClientAttributes;
     using Config;
+    using System;
+    using System.Text;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using Utilities;
@@ -18,16 +18,17 @@ namespace AstroClient.PlayerList.Entries
     [RegisterComponent]
     public class LocalPlayerEntry : PlayerEntry
     {
-        public LocalPlayerEntry(IntPtr obj0) : base(obj0) { }
+        public LocalPlayerEntry(IntPtr obj0) : base(obj0)
+        {
+        }
 
         // " - <color={pingcolor}>{ping}ms</color> | <color={fpscolor}>{fps}</color> | {platform} | <color={perfcolor}>{perf}</color> | {relationship} | <color={rankcolor}>{displayname}</color>"
         [HideFromIl2Cpp]
         public override string Name => "Local Player";
 
         public new delegate void UpdateEntryDelegate(Player player, LocalPlayerEntry entry, ref StringBuilder tempString);
-        public static new UpdateEntryDelegate updateDelegate;
 
-        
+        public new static UpdateEntryDelegate updateDelegate;
 
         [HideFromIl2Cpp]
         public override void Init(object[] parameters)
@@ -49,7 +50,6 @@ namespace AstroClient.PlayerList.Entries
             perf = (VRC.SDKBase.Validation.Performance.PerformanceRating)player.GetVRCPlayer().GetAvatarManager().prop_AvatarPerformanceStats_0._performanceRatingCache[(int)AvatarPerformanceCategory.Overall];
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
 
-
             GetPlayerColor();
             EntryBase_OnConfigChanged();
         }
@@ -62,7 +62,6 @@ namespace AstroClient.PlayerList.Entries
                     highestId = photonId;
 
             highestPhotonIdLength = highestId.ToString().Length;
-            
         }
 
         public override void EntryBase_OnConfigChanged()
@@ -93,6 +92,7 @@ namespace AstroClient.PlayerList.Entries
 
             GetPlayerColor();
         }
+
         [HideFromIl2Cpp]
         protected override void ProcessText(object[] parameters)
         {
@@ -114,7 +114,7 @@ namespace AstroClient.PlayerList.Entries
                     }
 
                     if (playerEntry.userID == moderation.targetUserId)
-                    { 
+                    {
                         playerEntry.youBlocked = true;
                         MelonLoader.Log.Debug($"You have blocked {moderation.targetDisplayName}");
                         break;
@@ -134,15 +134,13 @@ namespace AstroClient.PlayerList.Entries
         {
             OwnedObjects = 0;
         }
-        
-        void OnDestroy()
+
+        private void OnDestroy()
         {
             ClientEventActions.OnSceneLoaded -= OnSceneLoaded;
             ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
             ClientEventActions.OnShowSocialRankChanged -= OnShowSocialRankChanged;
-
         }
-
 
         private static void AddPing(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
@@ -154,45 +152,53 @@ namespace AstroClient.PlayerList.Entries
                 tempString.Append(((double)(entry.ping / 1000)).ToString("N1").PadRight(5) + "s</color>");
             tempString.Append(separator);
         }
+
         private static void AddFps(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
             if (entry.timeSinceLastUpdate.ElapsedMilliseconds >= 250)
-            { 
+            {
                 entry.fps = Mathf.Clamp((int)(1f / Time.deltaTime), -99, 999); // Clamp between -99 and 999
                 entry.timeSinceLastUpdate.Restart();
             }
 
             tempString.Append("<color=" + PlayerUtils.GetFpsColor(entry.fps) + ">" + entry.fps.ToString().PadRight(3) + "</color>" + separator);
         }
+
         private static void AddPlatform(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append(entry.platform + separator);
         }
+
         private static void AddPerf(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append(entry.perfString + separator);
         }
+
         private static void AddJeff(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append(entry.jeffString + separator);
         }
+
         private static void AddDistance(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append("0.0 m" + separator);
         }
+
         private static void AddPhotonId(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append(player.prop_VRCPlayer_0.prop_PhotonView_0.field_Private_Int32_0.ToString().PadRight(highestPhotonIdLength) + separator);
         }
-        private void AddOwnedObjects(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
+
+        private static void AddOwnedObjects(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
-            tempString.Append(this.OwnedObjects + separator);
+            tempString.Append(entry.OwnedObjects + separator);
         }
+
         private static void AddDisplayName(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
-            if(entry.apiUser.IsSelf)
+            if (entry.apiUser.IsSelf)
             {
-                if(PlayerSpooferUtils.IsSpooferActive)
+                if (PlayerSpooferUtils.IsSpooferActive)
                 {
                     tempString.Append("<color=" + entry.playerColor + ">" + PlayerSpooferUtils.Original_DisplayName + "</color>" + separator);
                     return;
@@ -200,7 +206,6 @@ namespace AstroClient.PlayerList.Entries
             }
             tempString.Append("<color=" + entry.playerColor + ">" + entry.apiUser.GetDisplayName() + "</color>" + separator);
         }
-
 
         private void OnShowSocialRankChanged()
         {
@@ -215,6 +220,7 @@ namespace AstroClient.PlayerList.Entries
                 case DisplayNameColorMode.None:
                 case DisplayNameColorMode.FriendsOnly:
                     break;
+
                 case DisplayNameColorMode.TrustAndFriends:
                 case DisplayNameColorMode.TrustOnly:
                     playerColor = "#" + ColorUtility.ToHtmlStringRGB(VRCPlayer.Method_Public_Static_Color_APIUser_0(APIUser.CurrentUser));

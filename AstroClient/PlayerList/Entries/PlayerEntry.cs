@@ -69,7 +69,7 @@ namespace AstroClient.PlayerList.Entries
         public readonly Stopwatch timeSinceLastUpdate = Stopwatch.StartNew();
 
         public delegate void UpdateEntryDelegate(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString);
-        public static UpdateEntryDelegate updateDelegate;
+        public static UpdateEntryDelegate updateDelegate { get; set; }
         private static bool _HasSubscribed = false;
         private static bool HasSubscribed
         {
@@ -87,7 +87,6 @@ namespace AstroClient.PlayerList.Entries
                         ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
                         ClientEventActions.OnFriended += OnFriended;
                         ClientEventActions.OnUnfriended += OnUnfriended;
-                        ClientEventActions.OnOwnerShipTranferred += OnOwnerShipTransferred;
 
                     }
                     else
@@ -97,8 +96,6 @@ namespace AstroClient.PlayerList.Entries
                         ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
                         ClientEventActions.OnFriended -= OnFriended;
                         ClientEventActions.OnUnfriended -= OnUnfriended;
-                        ClientEventActions.OnOwnerShipTranferred -= OnOwnerShipTransferred;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -112,36 +109,6 @@ namespace AstroClient.PlayerList.Entries
             new AstroPatch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
         }
 
-
-        private static void OnQuickMenuOpen()
-        {
-            foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
-                entry.playerEntry.GetPlayerColor(false);
-            EntrySortManager.SortAllPlayers();
-            EntryManager.RefreshPlayerEntries();
-
-        }
-
-        [HideFromIl2Cpp]
-        public override void Init(object[] parameters)
-        {
-            player = (Player)parameters[0];
-            apiUser = player.prop_APIUser_0;
-            userId = apiUser.id;
-            
-            platform = platform = PlayerUtils.GetPlatform(player).PadRight(2);
-            perf = VRC.SDKBase.Validation.Performance.PerformanceRating.None;
-            perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
-            jeffString = "<color=#FFFF00>Unknown </color>";
-            partyFouls = 1;
-            gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => apiUser.OpenUserInQuickMenu()));
-
-            isFriend = APIUser.IsFriendsWith(apiUser.id);
-            /*GetPlayerColor();
-            if (player.prop_PlayerNet_0 != null)
-                UpdateEntry(player.prop_PlayerNet_0, this, true);*/
-            GetPlayerColor(false);
-        }
         internal static void OnStaticConfigChanged()
         {
             updateDelegate = null;
@@ -175,6 +142,36 @@ namespace AstroClient.PlayerList.Entries
 
             EntryManager.RefreshPlayerEntries();
         }
+        private static void OnQuickMenuOpen()
+        {
+            foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
+                entry.playerEntry.GetPlayerColor(false);
+            EntrySortManager.SortAllPlayers();
+            EntryManager.RefreshPlayerEntries();
+
+        }
+
+        [HideFromIl2Cpp]
+        public override void Init(object[] parameters)
+        {
+            player = (Player)parameters[0];
+            apiUser = player.prop_APIUser_0;
+            userId = apiUser.id;
+            
+            platform = platform = PlayerUtils.GetPlatform(player).PadRight(2);
+            perf = VRC.SDKBase.Validation.Performance.PerformanceRating.None;
+            perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
+            jeffString = "<color=#FFFF00>Unknown </color>";
+            partyFouls = 1;
+            gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => apiUser.OpenUserInQuickMenu()));
+
+            isFriend = APIUser.IsFriendsWith(apiUser.id);
+            /*GetPlayerColor();
+            if (player.prop_PlayerNet_0 != null)
+                UpdateEntry(player.prop_PlayerNet_0, this, true);*/
+            GetPlayerColor(false);
+        }
+
         public override void EntryBase_OnConfigChanged()
         {
             GetPlayerColor(false);
@@ -313,7 +310,7 @@ namespace AstroClient.PlayerList.Entries
             entry.fps = MelonUtils.Clamp((int)(1000f / playerNet.field_Private_Byte_0), -99, 999);
             entry.ping = playerNet.prop_VRCPlayer_0.prop_Int16_0;
 
-            if (!(MenuManager.playerList.active || bypassActive))
+            if (!(MenuManager.playerList.active || !bypassActive))
                 return;
 
             StringBuilder tempString = new StringBuilder();
@@ -415,48 +412,6 @@ namespace AstroClient.PlayerList.Entries
             foreach (PlayerEntry entry in EntryManager.playerEntries)
                 if (entry.userId == userId)
                     entry.isFriend = false;
-        }
-
-        private static void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
-        {
-            if (!instance.isPickup())
-                // Its really important that this actually fires so everything in try catch
-            try
-            {
-                if (GameInstances.CurrentRoom == null)
-                    return;
-                    string oldOwner = null;
-                    string newOwner = null;
-
-                    // something is up with the  photon player constructor that makes me have to not use trygetvalue
-                    if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(instance.field_Private_Int32_0))
-                    oldOwner = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0[instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
-                if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(PhotonID))
-                    newOwner = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0[PhotonID].field_Public_Player_0?.prop_APIUser_0?.id;
-                foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
-                {
-                        if (entry.playerEntry.userId == oldOwner)
-                        {
-                            if (entry.playerEntry.OwnedObjects > 0)
-                            {
-                                entry.playerEntry.OwnedObjects -= 1;
-                            }
-                        }
-                        else if (entry.playerEntry.userId == newOwner)
-                        {
-                            if (entry.playerEntry.OwnedObjects > 0)
-                            {
-                                entry.playerEntry.OwnedObjects += 1;
-                            }
-                        }
-
-                   
-                }
-            }
-            catch (Exception ex)
-            {
-               Log.Error(ex.ToString());
-            }
         }
 
         [HideFromIl2Cpp]
