@@ -419,9 +419,10 @@ namespace AstroClient.Tools.UdonSearcher
                             continue;
                         }
 
-                        for (int i2 = 0; i2 < unpackedudon.IUdonSymbolTable.GetSymbols().Length; i2++)
+                        var table = unpackedudon.IUdonSymbolTable.GetSymbols();
+                        for (var symbolint = 0; symbolint < table.Length; symbolint++)
                         {
-                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols()[i2];
+                            string symbol = table[symbolint];
                             if (symbol != null)
                             {
                                 var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);

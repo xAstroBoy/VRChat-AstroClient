@@ -24,7 +24,12 @@
         }
         internal static bool isOwner(VRC.Player player, GameObject obj)
         {
-            return Networking.GetOwner(obj).Equals(player.GetVRCPlayerApi());
+            return GetOwner(obj).Equals(player.GetVRCPlayerApi());
+        }
+
+        internal static VRCPlayerApi GetOwner(GameObject obj)
+        {
+            return Networking.GetOwner(obj);
         }
         internal static void ReturnObjectOwner(GameObject obj)
         {

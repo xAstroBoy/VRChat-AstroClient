@@ -1,5 +1,6 @@
 ﻿using AstroClient.AstroMonos;
 using AstroClient.ClientActions;
+using AstroClient.PickupBlockerSystem;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
@@ -39,7 +40,7 @@ namespace AstroClient.PlayerList.Entries
         // - <color={pingcolor}>{ping}ms</color> | <color={fpscolor}>{fps}</color> | {platform} | <color={perfcolor}>{perf}</color> | {relationship} | <color={rankcolor}>{displayname}</color>
         [HideFromIl2Cpp]
         public override string Name => "Player";
-
+        
         public bool isSelf = false;
 
         public PlayerLeftPairEntry playerLeftPairEntry;
@@ -53,8 +54,6 @@ namespace AstroClient.PlayerList.Entries
 
         private static bool spoofFriend;
         protected static int highestPhotonIdLength = 0;
-        protected static int highestOwnedObjectsLength = 0;
-        protected static int totalObjects = 0;
         
         public VRC.SDKBase.Validation.Performance.PerformanceRating perf;
         public string perfString;
@@ -64,8 +63,8 @@ namespace AstroClient.PlayerList.Entries
         public float distance;
         public bool isFriend;
         public string playerColor;
-        public int ownedObjects = 0;
         public int partyFouls = 0;
+        internal int OwnedObjects = 0;
 
         public readonly Stopwatch timeSinceLastUpdate = Stopwatch.StartNew();
 
@@ -108,7 +107,6 @@ namespace AstroClient.PlayerList.Entries
 
         public static void EntryInit()
         {
-
             ConfigEventActions.OnPlayerListConfigChanged += OnStaticConfigChanged;
             HasSubscribed = true;
             new AstroPatch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
@@ -144,7 +142,7 @@ namespace AstroClient.PlayerList.Entries
                 UpdateEntry(player.prop_PlayerNet_0, this, true);*/
             GetPlayerColor(false);
         }
-        public static void OnStaticConfigChanged()
+        internal static void OnStaticConfigChanged()
         {
             updateDelegate = null;
             if (PlayerListConfig.pingToggle.Value)
@@ -399,14 +397,7 @@ namespace AstroClient.PlayerList.Entries
         }
         private static void AddOwnedObjects(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
-            tempString.Append(entry.ownedObjects.ToString().PadRight(highestOwnedObjectsLength) + separator);
-        }
-        private static void AddOwnedObjectsSafe(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
-        {
-            if (entry.ownedObjects > (int)(totalObjects * 0.75))
-                tempString.Append(entry.ownedObjects.ToString().PadRight(highestOwnedObjectsLength) + separator);
-            else
-                tempString.Append("0".PadRight(highestOwnedObjectsLength) + separator);
+            tempString.Append(entry.OwnedObjects + separator);
         }
         private static void AddDisplayName(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
@@ -428,44 +419,39 @@ namespace AstroClient.PlayerList.Entries
 
         private static void OnOwnerShipTransferred(PhotonView instance, int PhotonID)
         {
-            if (instance.GetComponent<VRC_Pickup>() == null)
-                return;
-
-            // Its really important that this actually fires so everything in try catch
+            if (!instance.isPickup())
+                // Its really important that this actually fires so everything in try catch
             try
             {
                 if (GameInstances.CurrentRoom == null)
                     return;
+                    string oldOwner = null;
+                    string newOwner = null;
 
-                // something is up with the  photon player constructor that makes me have to not use trygetvalue
-                string oldOwner = null;
-                if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(instance.field_Private_Int32_0))
+                    // something is up with the  photon player constructor that makes me have to not use trygetvalue
+                    if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(instance.field_Private_Int32_0))
                     oldOwner = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0[instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
-                string newOwner = null;
                 if (GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0.ContainsKey(PhotonID))
                     newOwner = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0[PhotonID].field_Public_Player_0?.prop_APIUser_0?.id;
-
-                int highestOwnedObjects = 0;
-                totalObjects = 0;
                 foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
                 {
-                    if (entry.playerEntry.userId == oldOwner)
-                    {
-                        if (entry.playerEntry.ownedObjects > 0)
-                            entry.playerEntry.ownedObjects -= 1;
-                    }
-                    else if (entry.playerEntry.userId == newOwner)
-                    {
-                        entry.playerEntry.ownedObjects += 1;
-                    }
+                        if (entry.playerEntry.userId == oldOwner)
+                        {
+                            if (entry.playerEntry.OwnedObjects > 0)
+                            {
+                                entry.playerEntry.OwnedObjects -= 1;
+                            }
+                        }
+                        else if (entry.playerEntry.userId == newOwner)
+                        {
+                            if (entry.playerEntry.OwnedObjects > 0)
+                            {
+                                entry.playerEntry.OwnedObjects += 1;
+                            }
+                        }
 
-                    if (entry.playerEntry.ownedObjects > highestOwnedObjects)
-                        highestOwnedObjects = entry.playerEntry.ownedObjects;
-
-                    totalObjects += entry.playerEntry.ownedObjects;
+                   
                 }
-
-                highestOwnedObjectsLength = highestOwnedObjects.ToString().Length;
             }
             catch (Exception ex)
             {

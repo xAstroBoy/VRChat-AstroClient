@@ -1,4 +1,5 @@
 ﻿using AstroClient.xAstroBoy.Utility;
+using VRC.SDKBase;
 
 namespace AstroClient.Constants
 {
@@ -11,7 +12,7 @@ namespace AstroClient.Constants
         
         internal static bool is_xAstroBoy
         {
-            get => GameInstances.CurrentUser.GetAPIUser().id == "usr_a2fb27e8-921e-42f5-aa22-545c816b376e";
+            get => Networking.LocalPlayer.GetPlayer().GetAPIUser().id == "usr_a2fb27e8-921e-42f5-aa22-545c816b376e";
         }
 
         

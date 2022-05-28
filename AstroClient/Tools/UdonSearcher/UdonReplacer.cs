@@ -38,12 +38,14 @@ namespace AstroClient.Tools.UdonSearcher
                     var unpackedudon = udonnode.ToRawUdonBehaviour();
                     if (unpackedudon != null)
                     {
-                        for (int i2 = 0; i2 < unpackedudon.IUdonSymbolTable.GetSymbols().Length; i2++)
+                        var symboltable = unpackedudon.IUdonSymbolTable;
+                        var table = symboltable.GetSymbols(); 
+                        for (int i2 = 0; i2 < table.Length; i2++)
                         {
-                            string symbol = unpackedudon.IUdonSymbolTable.GetSymbols()[i2];
+                            string symbol = table[i2];
                             if (symbol != null)
                             {
-                                var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
+                                var address = symboltable.GetAddressFromSymbol(symbol);
                                 var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
                                 if (UnboxVariable != null)
                                 {
@@ -78,7 +80,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                             string item = list[i];
                                                             if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
-                                                                if (item.Equals(find, StringComparison.InvariantCultureIgnoreCase))
+                                                                if (item.isMatch(find))
                                                                 {
                                                                     var modifiedstring = item.ReplaceWholeWord(find, replacement);
                                                                     //Log.Debug($"Modified String in Array , Original : {item}, Modified : {modifiedstring}");

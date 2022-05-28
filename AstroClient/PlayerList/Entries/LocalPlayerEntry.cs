@@ -26,7 +26,8 @@ namespace AstroClient.PlayerList.Entries
 
         public new delegate void UpdateEntryDelegate(Player player, LocalPlayerEntry entry, ref StringBuilder tempString);
         public static new UpdateEntryDelegate updateDelegate;
-		
+
+        
 
         [HideFromIl2Cpp]
         public override void Init(object[] parameters)
@@ -61,7 +62,7 @@ namespace AstroClient.PlayerList.Entries
                     highestId = photonId;
 
             highestPhotonIdLength = highestId.ToString().Length;
-
+            
         }
 
         public override void EntryBase_OnConfigChanged()
@@ -131,7 +132,15 @@ namespace AstroClient.PlayerList.Entries
 
         private void OnSceneLoaded(int buildIndex, string sceneName)
         {
-            ownedObjects = 0;
+            OwnedObjects = 0;
+        }
+        
+        void OnDestroy()
+        {
+            ClientEventActions.OnSceneLoaded -= OnSceneLoaded;
+            ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
+            ClientEventActions.OnShowSocialRankChanged -= OnShowSocialRankChanged;
+
         }
 
 
@@ -175,17 +184,9 @@ namespace AstroClient.PlayerList.Entries
         {
             tempString.Append(player.prop_VRCPlayer_0.prop_PhotonView_0.field_Private_Int32_0.ToString().PadRight(highestPhotonIdLength) + separator);
         }
-        private static void AddOwnedObjects(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
+        private void AddOwnedObjects(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
-            tempString.Append(entry.ownedObjects.ToString().PadRight(highestOwnedObjectsLength) + separator);
-        }
-        private static void AddOwnedObjectsSafe(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
-        {
-            int num = entry.ownedObjects;
-            if (num > (int)(totalObjects * 0.75))
-                tempString.Append(entry.ownedObjects.ToString().PadRight(highestOwnedObjectsLength) + separator);
-            else
-                tempString.Append("0".PadRight(highestOwnedObjectsLength) + separator);
+            tempString.Append(this.OwnedObjects + separator);
         }
         private static void AddDisplayName(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {

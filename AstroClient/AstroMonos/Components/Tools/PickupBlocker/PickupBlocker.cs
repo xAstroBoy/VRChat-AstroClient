@@ -32,6 +32,22 @@ namespace AstroClient.PickupBlockerSystem
                             Log.Debug($"Prevented {instance.gameObject.name} from being used from Blacklisted user {instance.CurrentHolder.GetDisplayName()}");
                             DenyPickupOwnership(instance);
                         }
+                        else
+                        {
+                            var owner = OnlineEditor.GetOwner(instance.gameObject);
+                            if(owner != null)
+                            {
+                                var ownerplayer = owner.GetPlayer();
+                                if (ownerplayer != null)
+                                {
+                                    if (IsPickupBlockedUser(ownerplayer.GetUserID()))
+                                    {
+                                        Log.Debug($"Prevented {instance.gameObject.name} from being used from Blacklisted user {ownerplayer.GetDisplayName()}");
+                                        DenyPickupOwnership(instance);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }                

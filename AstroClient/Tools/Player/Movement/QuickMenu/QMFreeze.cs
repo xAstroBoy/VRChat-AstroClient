@@ -17,30 +17,19 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
-            ClientEventActions.OnWorldReveal += OnWorldReveal;
-            //ClientEventActions.OnInput_Jump += OnInput_Jump;
 
         }
 
         private void OnRoomLeft()
         {
             Frozen = false;
-            hasBackuppedGravity = false;
-        }
-
-        private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
-        {
-            if (!hasBackuppedGravity)
-            {
-                originalGravity = Physics.gravity;
-            }
         }
 
         private void OnQuickMenuOpen()
         {
-            if (FreezePlayerOnQMOpen)
+            if (Networking.LocalPlayer != null)
             {
-                if (Networking.LocalPlayer != null)
+                if (FreezePlayerOnQMOpen)
                 {
                     Freeze();
                 }
@@ -48,14 +37,15 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
                 {
                     Frozen = false;
                 }
+
             }
         }
 
         private void OnQuickMenuClose()
         {
-            if (FreezePlayerOnQMOpen)
+            if (Networking.LocalPlayer != null)
             {
-                if (Networking.LocalPlayer != null)
+                if (FreezePlayerOnQMOpen)
                 {
                     Unfreeze();
                 }
@@ -74,12 +64,6 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
                 if (Networking.LocalPlayer != null)
                 {
                     GameInstances.LocalPlayer.Immobilize(false);
-
-                    //CurrentGravity = originalGravity;
-                    //if (RestoreVelocity)
-                    //{
-                    //    Networking.LocalPlayer.SetVelocity(originalVelocity);
-                    //}
                 }
             }
         }
@@ -92,32 +76,9 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
                 {
                     Frozen = true;
                     Networking.LocalPlayer.Immobilize(true);
-                    //originalVelocity = GameInstances.LocalPlayer.GetVelocity();
-                    //if (originalVelocity == Vector3.zero)
-                    //{
-                    //    return;
-                    //}
-                    //CurrentGravity = Vector3.zero;
-                    //Networking.LocalPlayer.SetVelocity(Vector3.zero);
                 }
             }
         }
-
-        //private void OnInput_Jump(bool isClicked, bool isDown, bool isUp)
-        //{
-        //    // Prevent Jumping bug.
-        //    if (Frozen && FreezePlayerOnQMOpen)
-        //    {
-        //        if (isClicked)
-        //        {
-        //            if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
-        //            {
-        //                Networking.LocalPlayer.SetVelocity(Vector3.zero);
-        //            }
-        //        }
-        //    }
-
-        //}
 
         internal static bool FreezePlayerOnQMOpen
         {
@@ -137,55 +98,5 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
 
         internal static QMToggleButton FreezePlayerOnQMOpenToggle;
         internal static bool Frozen;
-
-        private static Vector3 CurrentGravity
-        {
-            get
-            {
-                return Physics.gravity;
-            }
-            set
-            {
-                if (Frozen && !GameInstances.LocalPlayer.IsPlayerGrounded())
-                {
-                    Physics.gravity = value;
-                }
-                else
-                {
-                    if (!Frozen)
-                    {
-                        if (value.x == 0f && value.y == 0f && value.z == 0f)
-                        {
-                            value = originalGravity;
-                        }
-                        Physics.gravity = value;
-                    }
-                }
-            }
-        }
-
-        private static Vector3 originalGravity
-        {
-            get
-            {
-                return _originalGravity;
-            }
-            set
-            {
-                if (value.x == 0f && value.y == 0f && value.z == 0f)
-                {
-                    return; // Discard this value as is No Gravity.
-                }
-                _originalGravity = value;
-            }
-        }
-
-        private static Vector3 _originalGravity;
-
-        private static Vector3 originalVelocity;
-
-        internal static bool RestoreVelocity = false;
-
-        internal static bool hasBackuppedGravity = false;
     }
 }
