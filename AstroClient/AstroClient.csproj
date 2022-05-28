@@ -173,7 +173,7 @@
     <Compile Include="ModsDetector\EmmPatcher.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlocker_Tools.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
-    <Compile Include="PlayerList\Utilities\PlayerList_ExternalEvents.cs" />
+    <Compile Include="PlayerList\Utilities\PlayerList_OwnerCountHelper.cs" />
     <Compile Include="Startup\Fixes\TabWhiteImageFix.cs" />
     <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
     <Compile Include="Startup\Fixes\KeyboardPopupDeclutterer.cs" />

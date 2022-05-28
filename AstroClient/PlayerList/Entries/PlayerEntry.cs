@@ -1,14 +1,20 @@
-﻿using AstroClient.AstroMonos;
+﻿using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.PickupBlockerSystem;
-using AstroClient.Tools.Extensions;
-using AstroClient.xAstroBoy;
+using AstroClient.Tools.ObjectEditor.Online;
 using AstroClient.xAstroBoy.Utility;
+using Photon.Pun;
+using VRC.SDKBase;
 using VRC.SDKBase.Validation.Performance;
-using VRC.Utility;
 
 namespace AstroClient.PlayerList.Entries
 {
+    using Cheetos;
+    using ClientAttributes;
+    using Config;
+    using HarmonyLib;
+    using Il2CppSystem.Collections;
+    using MelonLoader;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -16,31 +22,23 @@ namespace AstroClient.PlayerList.Entries
     using System.Reflection;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Cheetos;
-    using ClientAttributes;
-    using Config;
-    using HarmonyLib;
-    using Il2CppSystem.Collections;
-    using MelonLoader;
-    using Photon.Pun;
-    using Photon.Realtime;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using Utilities;
     using VRC.Core;
-    using VRC.DataModel;
-    using VRC.SDKBase;
     using Player = VRC.Player;
 
     [RegisterComponent]
     public class PlayerEntry : EntryBase
     {
-        public PlayerEntry(IntPtr obj0) : base(obj0) { }
+        public PlayerEntry(IntPtr obj0) : base(obj0)
+        {
+        }
 
         // - <color={pingcolor}>{ping}ms</color> | <color={fpscolor}>{fps}</color> | {platform} | <color={perfcolor}>{perf}</color> | {relationship} | <color={rankcolor}>{displayname}</color>
         [HideFromIl2Cpp]
         public override string Name => "Player";
-        
+
         public bool isSelf = false;
 
         public PlayerLeftPairEntry playerLeftPairEntry;
@@ -48,14 +46,15 @@ namespace AstroClient.PlayerList.Entries
         public Player player;
         public APIUser apiUser;
         public string userId;
-       // public PlayerNet playerNet;
+
+        // public PlayerNet playerNet;
         protected string platform;
 
         public static string separator = " | ";
 
         private static bool spoofFriend;
         protected static int highestPhotonIdLength = 0;
-        
+
         public VRC.SDKBase.Validation.Performance.PerformanceRating perf;
         public string perfString;
         public string jeffString;
@@ -65,57 +64,49 @@ namespace AstroClient.PlayerList.Entries
         public bool isFriend;
         public string playerColor;
         public int partyFouls = 0;
-        private int _OwnedObjects = 0;
-        internal int OwnedObjects
-        {
-            [HideFromIl2Cpp]
-            get => _OwnedObjects;
-            [HideFromIl2Cpp]
-            set => _OwnedObjects = Mathf.Clamp(value, 0, int.MaxValue);
-        }
+
         private static AstroPatch isFriendWithPatch;
-        internal int PhotonID { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = 0;
         
         public readonly Stopwatch timeSinceLastUpdate = Stopwatch.StartNew();
 
         public delegate void UpdateEntryDelegate(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString);
+
         public static UpdateEntryDelegate updateDelegate { get; set; }
-        private static bool _HasSubscribed = false;
-        private static bool HasSubscribed
+        private static bool _HasSubscribedGeneralEvents = false;
+
+        private static bool HasSubscribedGeneralEvents
         {
             [HideFromIl2Cpp]
-            get => _HasSubscribed;
+            get => _HasSubscribedGeneralEvents;
             [HideFromIl2Cpp]
             set
             {
-                if (_HasSubscribed != value)
+                if (_HasSubscribedGeneralEvents != value)
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnSetupFlagsReceived += OnSetupFlagsReceived;
                         ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
                         ClientEventActions.OnFriended += OnFriended;
                         ClientEventActions.OnUnfriended += OnUnfriended;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnSetupFlagsReceived -= OnSetupFlagsReceived;
                         ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
                         ClientEventActions.OnFriended -= OnFriended;
                         ClientEventActions.OnUnfriended -= OnUnfriended;
                     }
                 }
-                _HasSubscribed = value;
+                _HasSubscribedGeneralEvents = value;
             }
         }
+    
 
         public static void EntryInit()
         {
             ConfigEventActions.OnPlayerListConfigChanged += OnStaticConfigChanged;
-            HasSubscribed = true;
+            HasSubscribedGeneralEvents = true;
             if (isFriendWithPatch == null)
             {
                 isFriendWithPatch = new AstroPatch(typeof(APIUser).GetMethod(nameof(APIUser.IsFriendsWith)), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));
@@ -157,11 +148,15 @@ namespace AstroClient.PlayerList.Entries
         }
         private static void OnQuickMenuOpen()
         {
-            foreach (PlayerLeftPairEntry entry in EntryManager.playerLeftPairsEntries)
-                entry.playerEntry.GetPlayerColor(false);
+            foreach (var item in EntryManager.playerLeftPairsEntries)
+            {
+                if (item != null)
+                {
+                    item.playerEntry.GetPlayerColor(false);
+                }
+            }
             EntrySortManager.SortAllPlayers();
             EntryManager.RefreshPlayerEntries();
-
         }
 
         [HideFromIl2Cpp]
@@ -170,12 +165,13 @@ namespace AstroClient.PlayerList.Entries
             player = (Player)parameters[0];
             apiUser = player.prop_APIUser_0;
             userId = apiUser.id;
-            
+
             platform = platform = PlayerUtils.GetPlatform(player).PadRight(2);
             perf = VRC.SDKBase.Validation.Performance.PerformanceRating.None;
             perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
             jeffString = "<color=#FFFF00>Unknown </color>";
             partyFouls = 1;
+
             gameObject.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => apiUser.OpenUserInQuickMenu()));
 
             isFriend = APIUser.IsFriendsWith(apiUser.id);
@@ -185,6 +181,9 @@ namespace AstroClient.PlayerList.Entries
             GetPlayerColor(false);
         }
 
+
+
+        
         public override void EntryBase_OnConfigChanged()
         {
             GetPlayerColor(false);
@@ -219,7 +218,6 @@ namespace AstroClient.PlayerList.Entries
             int.TryParse(boundAxes[2].Value, out int boundz);
             Vector3 bsize = new Vector3(boundx, boundy, boundz);
 
-
             partyFouls = 0;
             string failReasons = "";
             if (polycount > PlayerListConfig.polyLimit.Value)
@@ -234,7 +232,7 @@ namespace AstroClient.PlayerList.Entries
                 failReasons += "Me";
             }
             else failReasons += "  ";
-            if (matcount > PlayerListConfig.matLimit.Value) 
+            if (matcount > PlayerListConfig.matLimit.Value)
             {
                 partyFouls++;
                 failReasons += "Mt";
@@ -247,7 +245,7 @@ namespace AstroClient.PlayerList.Entries
             }
             else failReasons += "  ";
 
-            perfString = "<color=#" +  PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
+            perfString = "<color=#" + PlayerUtils.GetPerformanceColor(perf) + ">" + PlayerUtils.ParsePerformanceText(perf) + "</color>";
 
             //PyMsMtBd
             if (partyFouls == 0) jeffString = "<color=#00FF00>   OK   </color>";
@@ -257,14 +255,13 @@ namespace AstroClient.PlayerList.Entries
                 partyFouls++;
             }
 
-
             if (player.GetPlayerNet() != null)
                 UpdateEntry(player.GetPlayerNet(), this, true);
-            
+
             if (EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.AvatarPerf) || EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.Jeff))
                 EntrySortManager.SortPlayer(playerLeftPairEntry);
-
         }
+
         [HideFromIl2Cpp]
         public override void EntryBase_OnAvatarDownloadProgressed(AvatarLoadingBar loadingBar, float downloadPercentage, long fileSize)
         {
@@ -285,10 +282,6 @@ namespace AstroClient.PlayerList.Entries
                     col = col + col + col;
                     jeffString = "<color=#" + col + ">  " + ((downloadPercentage * 100).ToString("N1") + "%").PadRight(6) + "</color>";
                 }
-
-                    
-
-
             }
             else
             {
@@ -296,24 +289,23 @@ namespace AstroClient.PlayerList.Entries
                 partyFouls = 1;
                 jeffString = "<color=#AAAAAA> Loaded </color>";
             }
-
         }
 
         private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
         {
             try
-            {   
+            {
                 if (SetupFlagType.ContainsKey("showSocialRank"))
-                    EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id].playerEntry.GetPlayerColor();
+                    EntryManager.NameToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id].playerEntry.GetPlayerColor();
             }
             catch { }
         }
+
         public static void UpdateEntry(PlayerNet playerNet, PlayerEntry entry, bool bypassActive = false)
         {
             // bruh atleast some nullchecks?
             if (playerNet == null) return;
             if (entry == null) return;
-            
 
             entry.timeSinceLastUpdate.Restart();
 
@@ -321,7 +313,6 @@ namespace AstroClient.PlayerList.Entries
             entry.distance = (entry.player.transform.position - Player.prop_Player_0.transform.position).magnitude;
             entry.fps = MelonUtils.Clamp((int)(1000f / playerNet.field_Private_Byte_0), -99, 999);
             entry.ping = playerNet.prop_VRCPlayer_0.prop_Int16_0;
-            entry.PhotonID = playerNet.prop_PhotonView_0.field_Private_Int32_0;
             if (!(MenuManager.playerList.active || !bypassActive))
                 return;
 
@@ -334,11 +325,12 @@ namespace AstroClient.PlayerList.Entries
             }
             catch (Exception ex)
             {
-               Log.Error($"Errored while updating {entry.apiUser.displayName}'s entry:\n{ex}");
+                Log.Error($"Errored while updating {entry.apiUser.displayName}'s entry:\n{ex}");
             }
 
             entry.textComponent.text = entry.TrimExtra(tempString.ToString());
         }
+
         private static bool OnIsFriend(ref bool __result)
         {
             if (spoofFriend)
@@ -359,6 +351,7 @@ namespace AstroClient.PlayerList.Entries
                 tempString.Append(((double)(entry.ping / 1000)).ToString("N1").PadRight(5) + "s</color>");
             tempString.Append(separator);
         }
+
         protected static void AddFps(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append("<color=" + PlayerUtils.GetFpsColor(entry.fps) + ">");
@@ -368,18 +361,22 @@ namespace AstroClient.PlayerList.Entries
                 tempString.Append(entry.fps.ToString().PadRight(3) + "</color>");
             tempString.Append(separator);
         }
+
         private static void AddPlatform(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append(entry.platform + separator);
         }
+
         private static void AddPerf(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append(entry.perfString + separator);
         }
+
         private static void AddJeff(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append(entry.jeffString + separator);
         }
+
         private static void AddDistance(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
             if (entry.distance < 100)
@@ -400,14 +397,17 @@ namespace AstroClient.PlayerList.Entries
             }
             tempString.Append(separator);
         }
+
         private static void AddPhotonId(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
-            tempString.Append(entry.PhotonID.ToString().PadRight(highestPhotonIdLength) + separator);
+            tempString.Append(playerNet.GetPhotonView().field_Private_Int32_0.ToString().PadRight(highestPhotonIdLength) + separator);
         }
+
         private static void AddOwnedObjects(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
-            tempString.Append(entry.OwnedObjects + separator);
+            tempString.Append(PlayerList_OwnerCountHelper.GetOwnedObjectCount(entry.apiUser) + separator);
         }
+
         private static void AddDisplayName(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
             tempString.Append("<color=" + entry.playerColor + ">" + entry.apiUser.displayName + "</color>" + separator);
@@ -419,6 +419,7 @@ namespace AstroClient.PlayerList.Entries
                 if (entry.userId == user.id)
                     entry.isFriend = true;
         }
+
         private static void OnUnfriended(string userId)
         {
             foreach (PlayerEntry entry in EntryManager.playerEntries)
@@ -435,13 +436,16 @@ namespace AstroClient.PlayerList.Entries
                 case DisplayNameColorMode.TrustAndFriends:
                     playerColor = "#" + ColorUtility.ToHtmlStringRGB(VRCPlayer.Method_Public_Static_Color_APIUser_0(apiUser));
                     break;
+
                 case DisplayNameColorMode.None:
                     break;
+
                 case DisplayNameColorMode.TrustOnly:
                     // ty bono for this (https://github.com/ddakebono/)
                     spoofFriend = true;
                     playerColor = "#" + ColorUtility.ToHtmlStringRGB(VRCPlayer.Method_Public_Static_Color_APIUser_0(apiUser));
                     break;
+
                 case DisplayNameColorMode.FriendsOnly:
                     if (APIUser.IsFriendsWith(apiUser.id))
                         playerColor = "#" + ColorUtility.ToHtmlStringRGB(VRCPlayer.Method_Public_Static_Color_APIUser_0(apiUser));
@@ -450,6 +454,7 @@ namespace AstroClient.PlayerList.Entries
             if (EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.NameColor) && shouldSort)
                 EntrySortManager.SortPlayer(playerLeftPairEntry);
         }
+
         [HideFromIl2Cpp]
         protected string TrimExtra(string tempString)
         {

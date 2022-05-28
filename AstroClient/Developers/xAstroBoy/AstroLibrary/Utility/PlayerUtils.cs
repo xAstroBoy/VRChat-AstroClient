@@ -34,6 +34,7 @@ namespace AstroClient.xAstroBoy.Utility
         public static VRC.Player GetPlayer(this PlayerNet instance) => instance?.prop_Player_0;
 
         public static VRC.Player GetPlayer(this VRCPlayerApi instance) => GameInstances.PlayerManager.GetPlayerID(instance.playerId);
+        public static VRC.Player GetPlayer(this PhotonView instance) => GameInstances.PlayerManager.GetPlayerIDPhoton(instance.field_Private_Int32_0);
 
         public static VRC.Player GetPlayer(this APIUser instance) => GameInstances.PlayerManager.GetPlayer(instance?.id);
 

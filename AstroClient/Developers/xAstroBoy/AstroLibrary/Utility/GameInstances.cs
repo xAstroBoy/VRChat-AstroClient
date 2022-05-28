@@ -61,7 +61,7 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static VRCPlayerApi LocalPlayer => Networking.LocalPlayer;
 
-        public static UserInteractMenu UserInteractMenu => Resources.FindObjectsOfTypeAll<UserInteractMenu>()[0];
+       // public static UserInteractMenu UserInteractMenu => Resources.FindObjectsOfTypeAll<UserInteractMenu>()[0];
 
         public static Camera Camera => VRCVrCamera.field_Private_Static_VRCVrCamera_0.field_Public_Camera_0;
 

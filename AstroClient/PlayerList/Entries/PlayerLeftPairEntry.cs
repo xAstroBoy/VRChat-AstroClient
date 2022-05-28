@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.Extensions;
+﻿using System.Linq;
+using AstroClient.Tools.Extensions;
 
 namespace AstroClient.PlayerList.Entries
 {
@@ -21,7 +22,7 @@ namespace AstroClient.PlayerList.Entries
             get => _playerEntry;
             set
             {
-                EntryManager.idToEntryTable[value.userId] = this;
+                EntryManager.NameToEntryTable[value.userId] = this;
                 _playerEntry = value;
                 _playerEntry.transform.SetParent(transform);
                 value.transform.localPosition.SetZ(0);
@@ -82,7 +83,7 @@ namespace AstroClient.PlayerList.Entries
                 Log.Debug("Player is probably gone. Removing.");
             }*/
             EntryManager.playerLeftPairsEntries.Remove(this);
-            EntryManager.idToEntryTable.Remove(playerEntry.userId);
+            EntryManager.NameToEntryTable.Remove(playerEntry.userId);
             EntryManager.playerEntries.Remove(_playerEntry);
             EntryManager.entries.Remove(_playerEntry);
             EntryManager.entries.Remove(_leftSidePlayerEntry);

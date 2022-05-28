@@ -25,7 +25,7 @@ namespace AstroClient.PlayerList
 
         public static List<PlayerEntry> playerEntries = new List<PlayerEntry>(); // This will not be sorted
         public static List<PlayerLeftPairEntry> playerLeftPairsEntries = new List<PlayerLeftPairEntry>();
-        public static Dictionary<string, PlayerLeftPairEntry> idToEntryTable = new Dictionary<string, PlayerLeftPairEntry>();
+        public static Dictionary<string, PlayerLeftPairEntry> NameToEntryTable = new Dictionary<string, PlayerLeftPairEntry>();
         public static List<EntryBase> generalInfoEntries = new List<EntryBase>();
         public static List<EntryBase> entries = new List<EntryBase>();
         
@@ -113,7 +113,7 @@ namespace AstroClient.PlayerList
             if (player.name.Contains("Local") && player.prop_APIUser_0 == null)
                 player.prop_APIUser_0 = APIUser.CurrentUser;
 
-            if (idToEntryTable.ContainsKey(player.prop_APIUser_0.id))
+            if (NameToEntryTable.ContainsKey(player.prop_APIUser_0.id))
                 return; // If already in list
 
             if (player.name.Contains("Local"))
@@ -212,7 +212,7 @@ namespace AstroClient.PlayerList
             //There's a race condition, sometimes an avatar instantiated event will happen before a player join event.
             //If the player hasn't been added to the idToEntryTable yet, we'll add the information to a backlog to call when the player has been added.
             string playerid = player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id;
-            if (!idToEntryTable.TryGetValue(player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id, out PlayerLeftPairEntry entry))
+            if (!NameToEntryTable.TryGetValue(player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.id, out PlayerLeftPairEntry entry))
             {
                 //Log.WriteMsg("EM: Key not found in dict: " + player.field_Private_VRCPlayer_0.prop_Player_0.prop_APIUser_0?.displayName);
                 if (!AvInstBacklog.ContainsKey(playerid))
@@ -250,7 +250,7 @@ namespace AstroClient.PlayerList
                 foreach (var key in keys)
                 {
                     
-                    if (idToEntryTable.TryGetValue(key, out PlayerLeftPairEntry e))
+                    if (NameToEntryTable.TryGetValue(key, out PlayerLeftPairEntry e))
                     {
                         try
                         {
@@ -303,7 +303,7 @@ namespace AstroClient.PlayerList
             if (player.prop_APIUser_0.IsSelf)
                 return;
             //Log.WriteMsg("OPL: Removing " + player.field_Private_APIUser_0.displayName);
-            if (!idToEntryTable.TryGetValue(player.prop_APIUser_0.id, out PlayerLeftPairEntry entry))
+            if (!NameToEntryTable.TryGetValue(player.prop_APIUser_0.id, out PlayerLeftPairEntry entry))
                 return;
 
             entry.Remove();
@@ -356,8 +356,11 @@ namespace AstroClient.PlayerList
         {
             // If new digit reached (like 9 - 10)
             if (oldCount.ToString().Length != newCount.ToString().Length || bypassCount)
-                foreach (PlayerLeftPairEntry playerLeftPairEntry in playerLeftPairsEntries)
-                    playerLeftPairEntry.leftSidePlayerEntry.CalculateLeftPart();
+                foreach (var item in playerLeftPairsEntries)
+                    if (item != null)
+                    { 
+                        item.leftSidePlayerEntry.CalculateLeftPart();
+                    }
         }
         public static void RefreshPlayerEntries(bool bypassActive = false)
         {

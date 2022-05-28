@@ -33,7 +33,6 @@ namespace AstroClient.PlayerList.Entries
         [HideFromIl2Cpp]
         public override void Init(object[] parameters)
         {
-            ClientEventActions.OnSceneLoaded += OnSceneLoaded;
             ClientEventActions.OnPlayerJoin += OnPlayerJoined;
             ClientEventActions.OnShowSocialRankChanged += OnShowSocialRankChanged;
 
@@ -130,14 +129,9 @@ namespace AstroClient.PlayerList.Entries
             textComponent.text = TrimExtra(tempString.ToString());
         }
 
-        private void OnSceneLoaded(int buildIndex, string sceneName)
-        {
-            OwnedObjects = 0;
-        }
 
         private void OnDestroy()
         {
-            ClientEventActions.OnSceneLoaded -= OnSceneLoaded;
             ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
             ClientEventActions.OnShowSocialRankChanged -= OnShowSocialRankChanged;
         }
@@ -191,7 +185,7 @@ namespace AstroClient.PlayerList.Entries
 
         private static void AddOwnedObjects(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
         {
-            tempString.Append(entry.OwnedObjects + separator);
+            tempString.Append(PlayerList_OwnerCountHelper.GetOwnedObjectCount(entry.apiUser) + separator);
         }
 
         private static void AddDisplayName(Player player, LocalPlayerEntry entry, ref StringBuilder tempString)
