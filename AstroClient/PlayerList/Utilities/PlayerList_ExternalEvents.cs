@@ -7,7 +7,7 @@ namespace AstroClient.PlayerList.Utilities
     using Photon.Pun;
     using System;
 
-    internal class PlayerList_PickupOwnershipUpdater : AstroEvents
+    internal class PlayerList_ExternalEvents : AstroEvents
     {
         internal override void RegisterToEvents()
         {
