@@ -38,26 +38,30 @@ namespace AstroClient.Startup.Fixes
 
         private void OnQuickMenuOpen()
         {
-
-            if (ImageBackgroundTransform != null)
+            try
             {
-                // Only for me, if cheeto wants he can remove this
-                if (UserIdentifiers.is_xAstroBoy)
-                {
 
-                    var image = ImageBackgroundTransform.GetComponent<Image>();
-                    if (image != null)
+                if (ImageBackgroundTransform != null)
+                {
+                    // Only for me, if cheeto wants he can remove this
+                    if (UserIdentifiers.is_xAstroBoy)
                     {
-                        image.gameObject.RemoveComponent<StyleElement>();
-                        image.color = Color.clear;
+
+                        var image = ImageBackgroundTransform.GetComponent<Image>();
+                        if (image != null)
+                        {
+                            image.gameObject.RemoveComponent<StyleElement>();
+                            image.color = Color.clear;
+                            ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
+                        }
+                    }
+                    else
+                    {
                         ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
                     }
                 }
-                else
-                {
-                    ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
-                }
             }
+            catch{}
         }
         
     }

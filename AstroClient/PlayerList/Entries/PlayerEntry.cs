@@ -48,6 +48,7 @@ namespace AstroClient.PlayerList.Entries
         public Player player;
         public APIUser apiUser;
         public string userId;
+       // public PlayerNet playerNet;
         protected string platform;
 
         public static string separator = " | ";
@@ -64,8 +65,17 @@ namespace AstroClient.PlayerList.Entries
         public bool isFriend;
         public string playerColor;
         public int partyFouls = 0;
-        internal int OwnedObjects = 0;
-
+        private int _OwnedObjects = 0;
+        internal int OwnedObjects
+        {
+            [HideFromIl2Cpp]
+            get => _OwnedObjects;
+            [HideFromIl2Cpp]
+            set => _OwnedObjects = Mathf.Clamp(value, 0, int.MaxValue);
+        }
+        private static AstroPatch isFriendWithPatch;
+        internal int PhotonID { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = 0;
+        
         public readonly Stopwatch timeSinceLastUpdate = Stopwatch.StartNew();
 
         public delegate void UpdateEntryDelegate(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString);
@@ -106,7 +116,10 @@ namespace AstroClient.PlayerList.Entries
         {
             ConfigEventActions.OnPlayerListConfigChanged += OnStaticConfigChanged;
             HasSubscribed = true;
-            new AstroPatch(typeof(APIUser).GetMethod("IsFriendsWith"), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));        
+            if (isFriendWithPatch == null)
+            {
+                isFriendWithPatch = new AstroPatch(typeof(APIUser).GetMethod(nameof(APIUser.IsFriendsWith)), new HarmonyMethod(typeof(PlayerEntry).GetMethod(nameof(OnIsFriend), BindingFlags.NonPublic | BindingFlags.Static)));
+            }
         }
 
         internal static void OnStaticConfigChanged()
@@ -245,8 +258,8 @@ namespace AstroClient.PlayerList.Entries
             }
 
 
-            if (player.prop_PlayerNet_0 != null)
-                UpdateEntry(player.prop_PlayerNet_0, this, true);
+            if (player.GetPlayerNet() != null)
+                UpdateEntry(player.GetPlayerNet(), this, true);
             
             if (EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.AvatarPerf) || EntrySortManager.IsSortTypeInUse(EntrySortManager.SortType.Jeff))
                 EntrySortManager.SortPlayer(playerLeftPairEntry);
@@ -286,11 +299,10 @@ namespace AstroClient.PlayerList.Entries
 
         }
 
-        // So apparently if you don't want to name an enum directly in a harmony patch you have to use int as the type... good to know
         private static void OnSetupFlagsReceived(VRCPlayer vrcPlayer, Hashtable SetupFlagType)
         {
             try
-            {   //Will occasionally error at EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id]
+            {   
                 if (SetupFlagType.ContainsKey("showSocialRank"))
                     EntryManager.idToEntryTable[vrcPlayer.prop_Player_0.prop_APIUser_0.id].playerEntry.GetPlayerColor();
             }
@@ -309,7 +321,7 @@ namespace AstroClient.PlayerList.Entries
             entry.distance = (entry.player.transform.position - Player.prop_Player_0.transform.position).magnitude;
             entry.fps = MelonUtils.Clamp((int)(1000f / playerNet.field_Private_Byte_0), -99, 999);
             entry.ping = playerNet.prop_VRCPlayer_0.prop_Int16_0;
-
+            entry.PhotonID = playerNet.prop_PhotonView_0.field_Private_Int32_0;
             if (!(MenuManager.playerList.active || !bypassActive))
                 return;
 
@@ -390,7 +402,7 @@ namespace AstroClient.PlayerList.Entries
         }
         private static void AddPhotonId(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {
-            tempString.Append(playerNet.prop_PhotonView_0.field_Private_Int32_0.ToString().PadRight(highestPhotonIdLength) + separator);
+            tempString.Append(entry.PhotonID.ToString().PadRight(highestPhotonIdLength) + separator);
         }
         private static void AddOwnedObjects(PlayerNet playerNet, PlayerEntry entry, ref StringBuilder tempString)
         {

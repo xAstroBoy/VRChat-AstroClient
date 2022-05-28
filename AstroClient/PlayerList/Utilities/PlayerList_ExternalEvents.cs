@@ -1,4 +1,7 @@
 ﻿
+using AstroClient.xAstroBoy.Extensions;
+using VRC.SDKBase;
+
 namespace AstroClient.PlayerList.Utilities
 {
     using PickupBlockerSystem;
@@ -12,6 +15,12 @@ namespace AstroClient.PlayerList.Utilities
         internal override void RegisterToEvents()
         {
             ClientActions.ClientEventActions.OnOwnerShipTranferred += OnOwnerShipTransferred;
+            ClientActions.ClientEventActions.OnPickupAwake += PickupAwake;
+        }
+
+        private void PickupAwake(VRC_Pickup obj)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -21,36 +30,32 @@ namespace AstroClient.PlayerList.Utilities
             {
                 if (GameInstances.CurrentRoom == null) return;
                 if (!instance.isPickup()) return;
-                    string oldOwner = null;
-                string newOwner = null;
+               // string oldOwner = null;
+               // string newOwner = null;
 
-                var dict = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0;
+                var dict = GameInstances.CurrentRoom.prop_Dictionary_2_Int32_Player_0;
                 if (dict == null) return;
-                
+
+                int oldOwner = instance.field_Private_Int32_0;
+                int newOwner = PhotonID;
                 
                 // something is up with the  photon player constructor that makes me have to not use trygetvalue
-                if (dict.ContainsKey(instance.field_Private_Int32_0))
-                    oldOwner = dict[instance.field_Private_Int32_0].field_Public_Player_0?.prop_APIUser_0?.id;
-                if (dict.ContainsKey(PhotonID))
-                    newOwner = dict[PhotonID].field_Public_Player_0?.prop_APIUser_0?.id;
+                //if (dict.ContainsKey(instance.field_Private_Int32_0))
+                //    oldOwner = dict[instance.field_Private_Int32_0].GetVRCPlayer()?.prop_APIUser_0?.id;
+                //if (dict.ContainsKey(PhotonID))
+                //    newOwner = dict[PhotonID].GetVRCPlayer()?.GetAPIUser()?.id;
                 for (var index = 0; index < EntryManager.playerLeftPairsEntries.Count; index++)
                 {
                     PlayerLeftPairEntry entry = EntryManager.playerLeftPairsEntries[index];
                     if (entry == null) continue;
                     if (entry.playerEntry == null) continue;
-                    if (entry.playerEntry.userId == oldOwner)
+                    if (entry.playerEntry.PhotonID == oldOwner)
                     {
-                        if (entry.playerEntry.OwnedObjects > 0)
-                        {
-                            entry.playerEntry.OwnedObjects -= 1;
-                        }
+                        entry.playerEntry.OwnedObjects--;
                     }
-                    else if (entry.playerEntry.userId == newOwner)
+                    else if (entry.playerEntry.PhotonID == newOwner)
                     {
-                        if (entry.playerEntry.OwnedObjects > 0)
-                        {
-                            entry.playerEntry.OwnedObjects += 1;
-                        }
+                        entry.playerEntry.OwnedObjects++;
                     }
                 }
             }

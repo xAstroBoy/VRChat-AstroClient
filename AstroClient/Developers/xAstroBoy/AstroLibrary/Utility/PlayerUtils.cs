@@ -84,6 +84,7 @@ namespace AstroClient.xAstroBoy.Utility
         public static PhotonHandler GetPhotonHandler() => PhotonHandler.field_Internal_Static_PhotonHandler_0;
 
         public static PhotonView GetPhotonView(this VRCPlayer instance) => instance?.prop_PhotonView_0;
+        public static PhotonView GetPhotonView(this PlayerNet instance) => instance?.prop_PhotonView_0;
 
         private static int GetPhotonID(this PhotonView instance) => instance.field_Private_Int32_0;
 

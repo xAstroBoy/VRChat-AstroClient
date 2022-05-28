@@ -58,26 +58,35 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
 
         internal static void Unfreeze()
         {
-            if (Frozen)
+            try
             {
-                Frozen = false;
                 if (Networking.LocalPlayer != null)
                 {
-                    GameInstances.LocalPlayer.Immobilize(false);
+
+                    if (Frozen)
+                    {
+                        Frozen = false;
+                        GameInstances.LocalPlayer.Immobilize(false);
+                    }
                 }
             }
+            catch { }
+
         }
 
         internal static void Freeze()
         {
-            if (Networking.LocalPlayer != null)
+            try
             {
-                if (!Frozen)
+                if (Networking.LocalPlayer != null)
                 {
-                    Frozen = true;
-                    Networking.LocalPlayer.Immobilize(true);
+                    if (!Frozen)
+                    {
+                        Frozen = true;
+                        Networking.LocalPlayer.Immobilize(true);
+                    }
                 }
-            }
+            } catch{}
         }
 
         internal static bool FreezePlayerOnQMOpen
