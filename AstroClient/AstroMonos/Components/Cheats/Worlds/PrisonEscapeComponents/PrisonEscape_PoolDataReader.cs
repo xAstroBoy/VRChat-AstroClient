@@ -296,11 +296,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     return __30_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 }
-                else if (isNotPoolOrThisBehaviour(__31_intnl_SystemObject))
-                {
-                    return __31_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-
                 #endregion SystemObject Zone
 
                 return this;
@@ -8743,27 +8738,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __31_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___31_intnl_SystemObject != null)
-                {
-                    return Private___31_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___31_intnl_SystemObject != null)
-                {
-                    Private___31_intnl_SystemObject.Value = value;
-                }
-            }
-        }
+ 
 
         #endregion Getter / Setters UdonVariables  of PlayerData
 
@@ -9121,7 +9096,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             Private___5_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_SystemObject");
             Private___0_intnl_GameEffects = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_GameEffects");
             Private___0_intnl_AFKDetector = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_AFKDetector");
-            Private___31_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__31_intnl_SystemObject");
         }
 
         internal void Cleanup_PlayerData()
@@ -9476,7 +9450,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             Private___5_intnl_SystemObject = null;
             Private___0_intnl_GameEffects = null;
             Private___0_intnl_AFKDetector = null;
-            Private___31_intnl_SystemObject = null;
         }
 
         #region UdonVariables  of PlayerData
@@ -9831,7 +9804,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_AFKDetector { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___31_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         #endregion UdonVariables  of PlayerData
 
     }

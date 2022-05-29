@@ -456,52 +456,68 @@ internal class WorldCheatsModule : AstroEvents
                 });
                 CustomSubMenu.AddSubMenu("Game Events", () =>
                 {
-                    if(PrisonEscape.GetLocalReader() != null)
+                    var reader = PrisonEscape.GetLocalReader();
+                    if(reader != null)
                     {
-                        CustomSubMenu.AddToggle("Is Guard", PrisonEscape.GetLocalReader().isGuard.GetValueOrDefault(false), ToggleValue => { PrisonEscape.GetLocalReader().isGuard = ToggleValue; }, null, false);
+                        CustomSubMenu.AddToggle("Is Guard", reader.isGuard.GetValueOrDefault(false), ToggleValue =>
+                        {
+                            reader.isGuard = ToggleValue;
+                        }, null, false);
+                        CustomSubMenu.AddToggle("Is Dead", reader.isDead.GetValueOrDefault(false), ToggleValue =>
+                        {
+                            reader.isDead = ToggleValue;
+
+                        }, null, false);
+
                     }
                     CustomSubMenu.AddButton("Click Gate Button as Prisoner", () =>
                     {
-                        var localreader = PrisonEscape.GetLocalReader();
-                        if (localreader != null)
+                        if (reader != null)
                         {
-                            if (localreader.isGuard.GetValueOrDefault(false))
+                            if (reader.isGuard.GetValueOrDefault(false))
                             {
-                                localreader.isGuard = false;
-                                if(!localreader.hasKeycard.GetValueOrDefault(false))
+                                reader.isGuard = false;
+                                if(!reader.hasKeycard.GetValueOrDefault(false))
                                 {
-                                    localreader.hasKeycard = true;
+                                    reader.hasKeycard = true;
                                 }
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
-                                localreader.isGuard = true;
+                                reader.isGuard = true;
                             }
                             else
                             {
-                                if (!localreader.hasKeycard.GetValueOrDefault(false))
+                                if (!reader.hasKeycard.GetValueOrDefault(false))
                                 {
-                                    localreader.hasKeycard = true;
+                                    reader.hasKeycard = true;
                                 }
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
                             }
+                        }
+                        else
+                        {
+                            PrisonEscape.GateInteraction.InvokeBehaviour();
                         }
                     });
                     CustomSubMenu.AddButton("Click Gate Button as Guard", () =>
                     {
 
-                        var localreader = PrisonEscape.GetLocalReader();
-                        if (localreader != null)
+                        if (reader != null)
                         {
-                            if (!localreader.isGuard.GetValueOrDefault(false))
+                            if (!reader.isGuard.GetValueOrDefault(false))
                             {
-                                localreader.isGuard = true;
+                                reader.isGuard = true;
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
-                                localreader.isGuard = false;
+                                reader.isGuard = false;
                             }
                             else
                             {
                                 PrisonEscape.GateInteraction.InvokeBehaviour();
                             }
 
+                        }
+                        else
+                        {
+                            PrisonEscape.GateInteraction.InvokeBehaviour();
                         }
                     });
                     CustomSubMenu.AddButton("Make Prisoners Wanted", () => { PrisonEscape.MarkPrisonersAsWanted(); });
