@@ -25,16 +25,15 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
         ///     PedalOption Instance (Note: 1. can be null if both action menus are open 2. The gameobject that it is
         ///     attached to is destroyed when you change page on the action menu)
         /// </returns>
-        public static PedalOption AddButton(string text, Action triggerEvent, Texture2D icon = null,
-            bool locked = false)
+        public static PedalOption AddButton(string text, Action triggerEvent, Texture2D icon = null)
         {
             var actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
             var pedalOption = actionMenuOpener.GetActionMenu().AddOption();
             pedalOption.SetText(text);
             pedalOption.SetForegroundIcon(icon);
-            if (!locked) pedalOption.SetPedalAction(triggerEvent);
-            else pedalOption.Lock();
+             pedalOption.SetPedalAction(triggerEvent);
+            
             return pedalOption;
         }
 
@@ -52,7 +51,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
         ///     action menu
         /// </returns>
         public static PedalOption AddRadialPuppet(string text, Action<float> onUpdate, float startingValue = 0,
-            Texture2D icon = null, bool locked = false)
+            Texture2D icon = null)
         {
             var actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
@@ -61,19 +60,17 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
             pedalOption.SetBackgroundIcon(icon);
             pedalOption.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeRadial);
-            if (!locked)
-                pedalOption.SetPedalAction(
-                    delegate
-                    {
-                        var combinedAction = (Action<float>) Delegate.Combine(new Action<float>(delegate(float f)
-                        {
-                            startingValue = f;
-                            pedalOption.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
-                        }), onUpdate);
-                        RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption);
-                    }
-                );
-            else pedalOption.Lock();
+            pedalOption.SetPedalAction(
+             delegate
+             {
+                 var combinedAction = (Action<float>)Delegate.Combine(new Action<float>(delegate (float f)
+                 {
+                     startingValue = f;
+                     pedalOption.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
+                 }), onUpdate);
+                 RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption);
+             }
+            );
             return pedalOption;
         }
 
@@ -91,7 +88,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
         ///     action menu
         /// </returns>
         public static PedalOption AddRestrictedRadialPuppet(string text, Action<float> onUpdate,
-            float startingValue = 0, Texture2D icon = null, bool locked = false)
+            float startingValue = 0, Texture2D icon = null)
         {
             var actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
@@ -100,19 +97,17 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
             pedalOption.SetBackgroundIcon(icon);
             pedalOption.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeRadial);
-            if (!locked)
-                pedalOption.SetPedalAction(
-                    delegate
+            pedalOption.SetPedalAction(
+                delegate
+                {
+                    var combinedAction = (Action<float>) Delegate.Combine(new Action<float>(delegate(float f)
                     {
-                        var combinedAction = (Action<float>) Delegate.Combine(new Action<float>(delegate(float f)
-                        {
-                            startingValue = f;
-                            pedalOption.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
-                        }), onUpdate);
-                        RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption, true);
-                    }
-                );
-            else pedalOption.Lock();
+                        startingValue = f;
+                        pedalOption.SetButtonPercentText($"{Math.Round(startingValue * 100)}%");
+                    }), onUpdate);
+                    RadialPuppetManager.OpenRadialMenu(startingValue, combinedAction, text, pedalOption, true);
+                }
+            );
             return pedalOption;
         }
 
@@ -144,18 +139,16 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
             pedalOption.SetText(text);
             pedalOption.SetBackgroundIcon(icon);
             pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeAxis);
-            if (!locked)
-                pedalOption.SetPedalAction(
-                    delegate
-                    {
-                        FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate, pedalOption);
-                        FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
-                        FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
-                        FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
-                        FourAxisPuppetManager.current.GetButtonLeft().SetButtonText(leftButtonText);
-                    }
-                );
-            else pedalOption.Lock();
+            pedalOption.SetPedalAction(
+                delegate
+                {
+                    FourAxisPuppetManager.OpenFourAxisMenu(text, onUpdate, pedalOption);
+                    FourAxisPuppetManager.current.GetButtonUp().SetButtonText(topButtonText);
+                    FourAxisPuppetManager.current.GetButtonRight().SetButtonText(rightButtonText);
+                    FourAxisPuppetManager.current.GetButtonDown().SetButtonText(downButtonText);
+                    FourAxisPuppetManager.current.GetButtonLeft().SetButtonText(leftButtonText);
+                }
+            );
             return pedalOption;
         }
 
@@ -174,7 +167,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
         ///     PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the
         ///     action menu
         /// </returns>
-        public static PedalOption AddSubMenu(string text, Action openFunc, Texture2D icon = null, bool locked = false,
+        public static PedalOption AddSubMenu(string text, Action openFunc, Texture2D icon = null,
             Action closeFunc = null)
         {
             var actionMenuOpener = Utilities.GetActionMenuOpener();
@@ -183,11 +176,9 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
             pedalOption.SetText(text);
             pedalOption.SetForegroundIcon(icon);
             //pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeFolder);
-            if (!locked)
-                pedalOption.SetPedalAction(
-                    delegate { actionMenuOpener.GetActionMenu().PushPage(openFunc, closeFunc, icon, text); }
-                );
-            else pedalOption.Lock();
+            pedalOption.SetPedalAction(
+                delegate { actionMenuOpener.GetActionMenu().PushPage(openFunc, closeFunc, icon, text); }
+            );
             return pedalOption;
         }
 
@@ -203,8 +194,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
         ///     PedalOption Instance (Note: the gameobject that it is attached to is destroyed when you change page on the
         ///     action menu
         /// </returns>
-        public static PedalOption AddToggle(string text, bool startingState, Action<bool> onToggle,
-            Texture2D icon = null, bool locked = false)
+        public static PedalOption AddToggle(string text, bool startingState, Action<bool> onToggle, Texture2D icon = null)
         {
             var actionMenuOpener = Utilities.GetActionMenuOpener();
             if (actionMenuOpener == null) return null;
@@ -213,19 +203,17 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
             pedalOption.SetBackgroundIcon(icon);
             if (startingState) pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
             else pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
-            if (!locked)
-                pedalOption.SetPedalAction(
-                    delegate
-                    {
-                        startingState = !startingState;
-                        if (startingState)
-                            pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
-                        else
-                            pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
-                        onToggle.Invoke(startingState);
-                    }
-                );
-            else pedalOption.Lock();
+            pedalOption.SetPedalAction(
+                delegate
+                {
+                    startingState = !startingState;
+                    if (startingState)
+                        pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOn);
+                    else
+                        pedalOption.SetPedalTypeIcon(Utilities.GetExpressionsIcons().typeToggleOff);
+                    onToggle.Invoke(startingState);
+                }
+            );
             return pedalOption;
         }
     }

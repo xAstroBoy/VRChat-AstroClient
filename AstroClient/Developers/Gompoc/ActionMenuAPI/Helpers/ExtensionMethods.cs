@@ -509,14 +509,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
             temp.a = amount;
             pedalGraphic.color = temp;
         }
-
-        public static void Lock(this PedalOption pedalOption)
-        {
-            pedalOption.prop_Boolean_0 = true;
-            ResourcesManager.AddLockChildIcon(pedalOption.GetActionButton().gameObject.GetChild("Inner"));
-        }
-
-
+        
         public static void SetAngle(this RadialPuppetMenu radialPuppet, float angle)
         {
             radialPuppet.GetFill().SetFillAngle(angle);

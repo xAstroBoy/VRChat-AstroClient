@@ -18,14 +18,14 @@ namespace AstroClient.ClientUI.ActionMenu
             AMUtils.AddToModsFolder("ESP Options", () =>
             {
                 // TODO: Add Textures!
-                CustomSubMenu.AddToggle("Toggle Player ESP", PlayerESPMenu.Toggle_Player_ESP, ToggleValue => { PlayerESPMenu.Toggle_Player_ESP = ToggleValue; }, null, false);
+                CustomSubMenu.AddToggle("Toggle Player ESP", PlayerESPMenu.Toggle_Player_ESP, ToggleValue => { PlayerESPMenu.Toggle_Player_ESP = ToggleValue; },  null);
                 CustomSubMenu.AddSubMenu("Map ESP", () =>
                 {
-                    CustomSubMenu.AddToggle("Toggle Pickup ESP", VRChat_Map_ESP_Menu.Toggle_Pickup_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = ToggleValue; }, null, false);
-                    CustomSubMenu.AddToggle("Toggle VRC Interactable ESP", VRChat_Map_ESP_Menu.Toggle_VRCInteractable_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_VRCInteractable_ESP = ToggleValue; }, null, false);
-                    CustomSubMenu.AddToggle("Toggle Trigger ESP", VRChat_Map_ESP_Menu.Toggle_Trigger_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Trigger_ESP = ToggleValue; }, null, false);
-                    CustomSubMenu.AddToggle("Toggle Udon Behaviour ESP", VRChat_Map_ESP_Menu.Toggle_UdonBehaviour_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_UdonBehaviour_ESP = ToggleValue; }, null, false);
-                }, null, false, null);
+                    CustomSubMenu.AddToggle("Toggle Pickup ESP", VRChat_Map_ESP_Menu.Toggle_Pickup_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = ToggleValue; },  null);
+                    CustomSubMenu.AddToggle("Toggle VRC Interactable ESP", VRChat_Map_ESP_Menu.Toggle_VRCInteractable_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_VRCInteractable_ESP = ToggleValue; },  null);
+                    CustomSubMenu.AddToggle("Toggle Trigger ESP", VRChat_Map_ESP_Menu.Toggle_Trigger_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_Trigger_ESP = ToggleValue; },  null);
+                    CustomSubMenu.AddToggle("Toggle Udon Behaviour ESP", VRChat_Map_ESP_Menu.Toggle_UdonBehaviour_ESP, ToggleValue => { VRChat_Map_ESP_Menu.Toggle_UdonBehaviour_ESP = ToggleValue; },  null);
+                }, null);
             });
 
             Log.Write("ESP Module is ready!", Color.Green);

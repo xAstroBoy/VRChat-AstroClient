@@ -30,16 +30,16 @@ namespace AstroClient.ClientUI.ActionMenu
         {
             AMUtils.AddToModsFolder("Item Tweaker ", () =>
             {
-                CustomSubMenu.AddButton("Spawn Item Tweaker Object Selector Sphere", () => { TweakerSphere.SpawnSphere(); }, null, false);
-                CustomSubMenu.AddButton("Get Held Item", () => { Tweaker_Object.GetGameObjectToEdit(); }, null, false);
+                CustomSubMenu.AddButton("Spawn Item Tweaker Object Selector Sphere", () => { TweakerSphere.SpawnSphere(); }, null);
+                CustomSubMenu.AddButton("Get Held Item", () => { Tweaker_Object.GetGameObjectToEdit(); }, null);
 
-                CustomSubMenu.AddToggle("Lock Item", Tweaker_Object.LockItem, (toggle) => { Tweaker_Object.LockItem = toggle; }, null, false);
+                CustomSubMenu.AddToggle("Lock Item", Tweaker_Object.LockItem, (toggle) => { Tweaker_Object.LockItem = toggle; }, null);
 
                 CustomSubMenu.AddSubMenu("Physic Editor", () =>
                 {
-                    CustomSubMenu.AddToggle("Smart Kinematic Remover", PhysicsSubmenu.SmartKinematicEnabled, (toggle) => { PhysicsSubmenu.SmartKinematicEnabled = toggle; }, null, false);
-                    CustomSubMenu.AddToggle("Use Gravity", Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<RigidBodyController>().useGravity, (toggle) => { PhysicsSubmenu.Modified_SetGravity(toggle); }, null, false);
-                    CustomSubMenu.AddToggle("is Kinematic", Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<RigidBodyController>().isKinematic, (toggle) => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(toggle); }, null, false);
+                    CustomSubMenu.AddToggle("Smart Kinematic Remover", PhysicsSubmenu.SmartKinematicEnabled, (toggle) => { PhysicsSubmenu.SmartKinematicEnabled = toggle; }, null);
+                    CustomSubMenu.AddToggle("Use Gravity", Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<RigidBodyController>().useGravity, (toggle) => { PhysicsSubmenu.Modified_SetGravity(toggle); }, null);
+                    CustomSubMenu.AddToggle("is Kinematic", Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<RigidBodyController>().isKinematic, (toggle) => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(toggle); }, null);
                 });
 
                 // TODO: Add Textures!

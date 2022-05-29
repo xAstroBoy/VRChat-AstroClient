@@ -86,8 +86,7 @@
                 if (!pedalStruct.shouldAdd) continue;
                 var pedalOption = instance.AddOption();
                 pedalOption.SetText(pedalStruct.text);
-                if (!pedalStruct.locked) pedalOption.SetPedalAction(pedalStruct.triggerEvent);
-                else pedalOption.Lock();
+                pedalOption.SetPedalAction(pedalStruct.triggerEvent);
                 //Additional setup for pedals
                 switch (pedalStruct.Type)
                 {

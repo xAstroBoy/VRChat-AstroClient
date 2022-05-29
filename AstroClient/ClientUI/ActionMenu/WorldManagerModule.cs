@@ -23,24 +23,24 @@ namespace AstroClient.ClientUI.ActionMenu
             {
                 CustomSubMenu.AddSubMenu("Collider Disabler", () =>
                 {
-                    CustomSubMenu.AddButton("Spawn Collider Disabler Sphere", () => { ColliderSuppresserSphere.SpawnSphere(); }, null, false);
-                    CustomSubMenu.AddButton("Revert Collider Disabler Edits", () => { ColliderSuppresserSphere.FixAndRevertColliderEdits(); }, null, false);
-                }, null, false, null);
+                    CustomSubMenu.AddButton("Spawn Collider Disabler Sphere", () => { ColliderSuppresserSphere.SpawnSphere(); },  null);
+                    CustomSubMenu.AddButton("Revert Collider Disabler Edits", () => { ColliderSuppresserSphere.FixAndRevertColliderEdits(); },  null);
+                }, null);
 
 
                 CustomSubMenu.AddSubMenu("Lighting Controls", () =>
                 {
-                    CustomSubMenu.AddButton("Clear Light source template", () => { Astro_Flashlight.ClearTemplate(); }, null, false);
-                    CustomSubMenu.AddButton("Get Light source template", () => { Astro_Flashlight.GetLightTemplate(); }, null, false);
+                    CustomSubMenu.AddButton("Clear Light source template", () => { Astro_Flashlight.ClearTemplate(); },  null);
+                    CustomSubMenu.AddButton("Get Light source template", () => { Astro_Flashlight.GetLightTemplate(); },  null);
 
-                    CustomSubMenu.AddToggle("Toggle Fullbright (RenderSettings)", LightControlMenu.FullbrightByRender, ToggleValue => { LightControlMenu.FullbrightByRender = ToggleValue; }, null, false);
-                    CustomSubMenu.AddToggle("Toggle RenderSettings Fog", RenderSettings.fog, ToggleValue => { LightControlMenu.ToggleFog(ToggleValue); }, null, false);
-                    CustomSubMenu.AddToggle("Toggle Fullbright (Head)", LightControlMenu.IsHeadLightActive, ToggleValue => { LightControlMenu.IsHeadLightActive = ToggleValue; }, null, false);
+                    CustomSubMenu.AddToggle("Toggle Fullbright (RenderSettings)", LightControlMenu.FullbrightByRender, ToggleValue => { LightControlMenu.FullbrightByRender = ToggleValue; },  null);
+                    CustomSubMenu.AddToggle("Toggle RenderSettings Fog", RenderSettings.fog, ToggleValue => { LightControlMenu.ToggleFog(ToggleValue); },  null);
+                    CustomSubMenu.AddToggle("Toggle Fullbright (Head)", LightControlMenu.IsHeadLightActive, ToggleValue => { LightControlMenu.IsHeadLightActive = ToggleValue; },  null);
 
-                    CustomSubMenu.AddButton("Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, null, false);
-                    CustomSubMenu.AddToggle("Flashlight Golden Skin", Astro_Flashlight.isGoldenFlashlight, ToggleValue => { Astro_Flashlight.isGoldenFlashlight = ToggleValue; }, null, false);
-                    CustomSubMenu.AddButton("Destroy Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, null, false);
-                }, null, false, null);
+                    CustomSubMenu.AddButton("Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); },  null);
+                    CustomSubMenu.AddToggle("Flashlight Golden Skin", Astro_Flashlight.isGoldenFlashlight, ToggleValue => { Astro_Flashlight.isGoldenFlashlight = ToggleValue; },  null);
+                    CustomSubMenu.AddButton("Destroy Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); },  null);
+                }, null);
 
                 CustomSubMenu.AddSubMenu("Pickups Controls", () =>
                 {
@@ -48,29 +48,29 @@ namespace AstroClient.ClientUI.ActionMenu
                     CustomSubMenu.AddButton("Restore Original pickups pos", () =>
                     {
                         GameObjectMenu.TeleportPickupsToTheirDefaultPosition(false);
-                    }, null, false);
+                    },  null);
                     CustomSubMenu.AddButton("Restore Original pickups pos & Revert Rigidbody Edits", () =>
                     {
                         GameObjectMenu.TeleportPickupsToTheirDefaultPosition(true);
-                    }, null, false);
+                    },  null);
                     CustomSubMenu.AddButton("Enable World Gravity On kinematic Pickups", () =>
                     {
                         ObjectMiscOptions.DisablePickupKinematic(true);
-                    }, null, false);
+                    },  null);
                     CustomSubMenu.AddButton("Enable Gravity 0G On kinematic Pickups", () =>
                     {
                         ObjectMiscOptions.DisablePickupKinematic(false);
-                    }, null, false);
+                    },  null);
                     CustomSubMenu.AddButton("Enable World Gravity on All Pickups", () =>
                     {
                         ObjectMiscOptions.SetGravityOnWorldPickups(true);
-                    }, null, false);
+                    },  null);
                     CustomSubMenu.AddButton("Disable Gravity on All Pickups", () =>
                     {
                         ObjectMiscOptions.SetGravityOnWorldPickups(false);
-                    }, null, false);
+                    },  null);
 
-                }, null, false, null);
+                }, null);
             });
 
             Log.Write("World Module is ready!", Color.Green);

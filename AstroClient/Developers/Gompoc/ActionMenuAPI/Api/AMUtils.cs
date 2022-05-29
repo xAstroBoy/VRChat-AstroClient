@@ -45,9 +45,9 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
         /// </param>
         /// <param name="icon">(optional) The Button Icon</param>
         /// <param name="locked">(optional) Starting state of pedal</param>
-        public static void AddToModsFolder(string text, Action openFunc, Texture2D icon = null, bool locked = false)
+        public static void AddToModsFolder(string text, Action openFunc, Texture2D icon = null)
         {
-            ModsFolderManager.AddMod(() => { CustomSubMenu.AddSubMenu(text, openFunc, icon, locked); });
+            ModsFolderManager.AddMod(() => { CustomSubMenu.AddSubMenu(text, openFunc, icon); });
         }
     }
 }

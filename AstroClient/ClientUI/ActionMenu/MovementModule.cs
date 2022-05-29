@@ -25,10 +25,10 @@ namespace AstroClient.ClientUI.ActionMenu
             AMUtils.AddToModsFolder("Movement Options", () =>
             {
                 // TODO: Add Textures!
-                CustomSubMenu.AddToggle("Disable Falling Height Limit", MovementMenu.NoFallHeightLimit, ToggleValue => { MovementMenu.NoFallHeightLimit = ToggleValue; }, null, false);
-                CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null, false);
-                CustomSubMenu.AddToggle("Toggle Disappear Ghost", TrollDefenseSubMenu.DisappearGhost, ToggleValue => { TrollDefenseSubMenu.DisappearGhost = ToggleValue; }, null, false);
-                CustomSubMenu.AddButton("Spawn EnderPearl", () => { AstroEnderPearl.SpawnEnderPearl(); }, null, false);
+                CustomSubMenu.AddToggle("Disable Falling Height Limit", MovementMenu.NoFallHeightLimit, ToggleValue => { MovementMenu.NoFallHeightLimit = ToggleValue; },  null);
+                CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; },  null);
+                CustomSubMenu.AddToggle("Toggle Disappear Ghost", TrollDefenseSubMenu.DisappearGhost, ToggleValue => { TrollDefenseSubMenu.DisappearGhost = ToggleValue; },  null);
+                CustomSubMenu.AddButton("Spawn EnderPearl", () => { AstroEnderPearl.SpawnEnderPearl(); },  null);
                 CustomSubMenu.AddSubMenu("Enderpearl skins", () =>
                 {
                     CustomSubMenu.AddToggle("Crystal Skin", AstroEnderPearl.isCrystalMatOn, (value) => { AstroEnderPearl.isCrystalMatOn = value; });
