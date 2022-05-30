@@ -672,6 +672,7 @@
     <Compile Include="WorldModifications\WorldHacks\TierLand.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\PrisonEscape.cs" />
+    <Compile Include="WorldModifications\WorldHacks\SovrenChillHome.cs" />
     <Compile Include="WorldModifications\WorldsIds\WorldIds.cs" />
     <Compile Include="WorldModifications\WorldHacks\VoidClub.cs" />
     <Compile Include="WorldModifications\WorldHacks\JustHParty.cs" />
