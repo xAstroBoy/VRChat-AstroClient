@@ -121,7 +121,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             _EditMode = true; // To be sure to backup the original properties without writing them .
             isBackupping = true;
-            Log.Debug($"Backupping from RigidBody properties for object  {gameObject.name}");
+            //Log.Debug($"Backupping from RigidBody properties for object  {gameObject.name}");
             solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
             inertiaTensor = Rigidbody.inertiaTensor;
             inertiaTensorRotation = Rigidbody.inertiaTensorRotation;

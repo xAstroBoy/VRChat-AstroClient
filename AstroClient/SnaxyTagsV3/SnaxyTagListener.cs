@@ -125,15 +125,15 @@ internal class SnaxyTagsSystem : AstroEvents
         else
         {
             if ((from mbox in PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray()
-                 where GetGroupSaveGetPermissions(mbox.field_Private_APIUser_0.id, SnaxyKey) == text.Split(',')[1]
+                 where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == text.Split(',')[1]
                  select mbox).Count() != 1)
             {
                 yield break;
             }
             Player player = (from mbox in PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray()
-                             where GetGroupSaveGetPermissions(mbox.field_Private_APIUser_0.id, SnaxyKey) == text.Split(',')[1]
+                             where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == text.Split(',')[1]
                              select mbox).First();
-            if (player.field_Private_APIUser_0 == null)
+            if (player.GetAPIUser() == null)
             {
                 yield break;
             }
@@ -169,7 +169,7 @@ internal class SnaxyTagsSystem : AstroEvents
             }
             else
             {
-                var tag = player.AddSingleTag(text, Cheetah.Color.Crayola.Original.Gold);
+                var tag = player.AddSingleTag(text, Color.Black.ToUnityEngineColor());
                 CurrentSnaxyTags.Add(UserID, tag);
             }
         }
@@ -221,7 +221,7 @@ internal class SnaxyTagsSystem : AstroEvents
                 {
                     foreach (Player item in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray())
                     {
-                        SnaxySocket.Send("getUser," + GetGroupSaveGetPermissions(item.field_Private_APIUser_0.id, key));
+                        SnaxySocket.Send("getUser," + GetGroupSaveGetPermissions(item.GetAPIUser().GetUserID(), key));
                     }
                 }
             }
