@@ -55,6 +55,8 @@ internal class SnaxyTagsSystem : AstroEvents
         if (GeneratedUserID.IsNullOrEmptyOrWhiteSpace())
         {
             GeneratedUserID = UserIDGenerator();
+            Log.Debug($"Generated UserID For SnaxyTag API : {GeneratedUserID}");
+
         }
         Task.Run((Action)InitiateWebsocket);
     }
@@ -167,7 +169,7 @@ internal class SnaxyTagsSystem : AstroEvents
             }
             else
             {
-                var tag = player.AddSingleTag(text, Color.Gray);
+                var tag = player.AddSingleTag(text, Cheetah.Color.Crayola.Original.Gold);
                 CurrentSnaxyTags.Add(UserID, tag);
             }
         }
@@ -225,7 +227,9 @@ internal class SnaxyTagsSystem : AstroEvents
             }
             if (text.Split(',')[0] == "gotConsoleMsgName" && SnaxyConsole != Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1])))
             {
+
                 SnaxyConsole = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]));
+                Log.Write($"[SnaxyTag] Console :{SnaxyConsole}");
             }
             if (text.Split(',')[0] == "OutdatedMelons")
             {
