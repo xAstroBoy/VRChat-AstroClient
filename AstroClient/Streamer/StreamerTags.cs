@@ -32,7 +32,7 @@ namespace AstroClient.Streamer
             var esp = player.GetComponent<PlayerESP>();
             if (esp != null)
             {
-                MiscUtils.DelayFunction(3f, () =>
+                MiscUtils.DelayFunction(10f, () =>
                 {
                     esp.UseCustomColor = true;
                     esp.ChangeColor(NewColor);
@@ -51,43 +51,43 @@ namespace AstroClient.Streamer
                     if (StreamerIdentifier.IsAStreamer(apiuser.id))
                     {
 
-                        player.AddSingleTag(SystemColors.Orange, "Streamer");
+                        player.AddSingleTag("Streamer", SystemColors.Orange);
                         switch (apiuser.id)
                         {
                             case Streamers.StarNovaKitty:
-                                player.AddSingleTag(Color.FromArgb(155, 79, 232), "A Sweet Kitty"); ;
+                                player.AddSingleTag("A Sweet Kitty", Color.FromArgb(155, 79, 232)); ;
                                 break;
                             case Streamers.minikatttttt:
-                                player.AddSingleTag(Color.FromArgb(13, 181, 164), "A Sensible Mini!"); ;
+                                player.AddSingleTag("A Sensible Mini!", Color.FromArgb(13, 181, 164)); ;
                                 break;
                             case Streamers.Cambly:
-                                player.AddSingleTag(Color.FromArgb(96, 132, 240), "A Clumsy Birb");
+                                player.AddSingleTag("A Clumsy Birb", Color.FromArgb(96, 132, 240));
                                 break;
                             case Streamers.CyberChimp:
                                 ChangeColorESP(player,Color.FromArgb(255, 115, 0));
                                 break;
 
                             case Streamers.Lolathon:
-                                player.AddSingleTag(Color.FromArgb(255, 115, 0), "Clown & Prankster");
+                                player.AddSingleTag("Clown & Prankster", Color.FromArgb(255, 115, 0));
                                 ChangeColorESP(player, Color.FromArgb(255, 115, 0));
                                 break;
                             case Streamers.PATTIIIIIIII:
-                                player.AddSingleTag(Color.FromArgb(255, 202, 66), "Golden Toast Protector!");
+                                player.AddSingleTag("Golden Toast Protector!", Color.FromArgb(255, 202, 66));
                                 break;
                             case Streamers.Ratchet232:
-                                player.AddSingleTag(Color.FromArgb(140, 35, 35), "Mad Doggo!");
+                                player.AddSingleTag("Mad Doggo!", Color.FromArgb(140, 35, 35));
                                 break;
                             case Streamers.Thor_ChanVR:
-                                player.AddSingleTag(Color.FromArgb(194, 138, 17), "VRChat God!");
+                                player.AddSingleTag("VRChat God!", Color.FromArgb(194, 138, 17));
                                 break;
                             case Streamers.Pud_Pud:
-                                player.AddSingleTag(Color.FromArgb(4, 138, 4), "Sensible Squeaky panda!");
+                                player.AddSingleTag("Sensible Squeaky panda!", Color.FromArgb(4, 138, 4));
                                 break;
                             case Streamers.Ruqaa:
-                                player.AddSingleTag(Color.FromArgb(142, 13, 217), "Bnuuy!");
+                                player.AddSingleTag("Bnuuy!", Color.FromArgb(142, 13, 217));
                                 break;
                             case Streamers.Nifty:
-                                player.AddSingleTag(Color.FromArgb(166, 143, 12), "The Legendary Pan Bonker!");
+                                player.AddSingleTag("The Legendary Pan Bonker!", Color.FromArgb(166, 143, 12));
                                 break;
                             default:
                                 break;

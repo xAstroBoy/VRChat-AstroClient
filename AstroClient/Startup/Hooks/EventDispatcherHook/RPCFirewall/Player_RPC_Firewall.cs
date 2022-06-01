@@ -40,7 +40,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
                 ConfigManager.BlockedRPCPlayers.BlockedRPCPlayersList.Add(id);
                 if (!CurrentTags.ContainsKey(player))
                 {
-                    CurrentTags.TryAdd(player, player.AddSingleTag(Color.Crayola.Present.Razzmatazz, "RPC Blocked"));
+                    CurrentTags.TryAdd(player, player.AddSingleTag("RPC Blocked", Color.Crayola.Present.Razzmatazz));
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall
             {
                 if (!CurrentTags.ContainsKey(player))
                 {
-                    CurrentTags.TryAdd(player, player.AddSingleTag(Color.Crayola.Present.Razzmatazz, "RPC Blocked"));
+                    CurrentTags.TryAdd(player, player.AddSingleTag("RPC Blocked", Color.Crayola.Present.Razzmatazz));
                 }
             }
         }

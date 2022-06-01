@@ -156,11 +156,19 @@
             if (SpawnedTag != null)
             {
                 TextColor = Color.white;
+                TagText.richText = true;
                 TagText.text = Text;
                 SpawnedTag.gameObject.SetActive(ShowTag);
                 if (SpawnedStatsImage != null)
                 {
-                    SpawnedStatsImage.color = BackGroundColor;
+                    if (BackGroundColor == Color.clear)
+                    {
+                        BackGroundColor = SpawnedStatsImage.color;
+                    }
+                    else
+                    {
+                        SpawnedStatsImage.color = BackGroundColor;
+                    }
                 }
 
                 if (TagListener == null)
@@ -345,7 +353,7 @@
                 }
             }
         }
-        private Color _BackGroundColor;
+        private Color _BackGroundColor = Color.clear;
         internal Color BackGroundColor
         {
             [HideFromIl2Cpp]

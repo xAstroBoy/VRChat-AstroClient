@@ -83,7 +83,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             {
                 if (BlockedTag == null)
                 {
-                    BlockedTag = AssignedPlayer.AddSingleTag(System.Drawing.Color.Orange, "Pickup Blocked");
+                    BlockedTag = AssignedPlayer.AddSingleTag("Pickup Blocked", System.Drawing.Color.Orange);
                 }
 
             }

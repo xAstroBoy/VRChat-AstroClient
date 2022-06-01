@@ -78,8 +78,19 @@
             if (player == null) return null;
             return player.AddComponent<SingleTag>();
         }
+        internal static SingleTag AddSingleTag(this Player player, string Text)
+        {
+            if (player == null) return null;
+            var tag = player.AddComponent<SingleTag>();
+            if (tag != null)
+            {
+                tag.Text = Text;
+            }
+            return tag;
+        }
 
-        internal static SingleTag AddSingleTag(this Player player, System.Drawing.Color BackGround, string Text)
+
+        internal static SingleTag AddSingleTag(this Player player,  string Text, System.Drawing.Color BackGround)
         {
             if (player == null) return null;
             var tag = player.AddComponent<SingleTag>();
@@ -91,7 +102,7 @@
             return tag;
         }
 
-        internal static SingleTag AddSingleTag(this Player player, UnityEngine.Color BackGround, string Text)
+        internal static SingleTag AddSingleTag(this Player player,  string Text, UnityEngine.Color BackGround)
         {
             if (player == null) return null;
             var tag = player.AddComponent<SingleTag>();

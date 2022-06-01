@@ -125,7 +125,7 @@ namespace AstroClient.Cheetos
                 PopupUtils.QueHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
             }
 
-            player.GetVRCPlayer().AddSingleTag(System.Drawing.Color.OrangeRed, "Instance Master");
+            player.GetVRCPlayer().AddSingleTag("Instance Master", System.Drawing.Color.OrangeRed);
 
         }
 
@@ -157,7 +157,7 @@ namespace AstroClient.Cheetos
                 DoOnce = true;
             }
 
-            WorldUtils.InstanceMaster.GetPlayer().AddSingleTag(System.Drawing.Color.OrangeRed, "Instance Master");
+            WorldUtils.InstanceMaster.GetPlayer().AddSingleTag("Instance Master", System.Drawing.Color.OrangeRed);
         }
     }
 }
