@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AstroClient;
 using AstroClient.AstroMonos.Components.UI.SingleTag;
 using AstroClient.ClientActions;
+using AstroClient.Streamer;
 using AstroClient.Tools.Colors;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
@@ -72,7 +73,6 @@ internal class SnaxyTagsSystem : AstroEvents
     internal static string UserIDGenerator()
     {
         var result = new StringBuilder();
-        //usr_0a5527a9-9990-4121-b3a7-c211efc63dee
         // Generate a user ID
         result.Append("usr_");
         result.Append(RandomString(8));
@@ -153,6 +153,14 @@ internal class SnaxyTagsSystem : AstroEvents
         if (player != null)
         {
             var UserID = player.GetAPIUser().GetUserID();
+            if (text.isMatchWholeWord("Streamer"))
+            {
+                // if the snaxy says is a streamer, but yet we have it already flagged, we can ignore it as we have a similiar tag saying that already.
+                if (StreamerIdentifier.IsAStreamer(UserID))
+                {
+                    return;
+                }
+            }
             if (CurrentSnaxyTags.ContainsKey(UserID))
             {
                 CurrentSnaxyTags[UserID].Text = text;
