@@ -29,7 +29,7 @@
                                 Il2CppSystem.Object @object = jt.ReadAsObject();
                                 if (@object != null)
                                 {
-                                    if (@object.ToString().Contains("Enter"))
+                                    if (@object.ToString().Contains("OnPlayerEnteredRoom"))
                                     {
                                         Log.Debug($"[Debug] Found [JOIN] Method! [{it.Name} with {@object.ToString()}]");
                                         _OnPhotonPlayerJoinMethod = it;
@@ -68,7 +68,7 @@
                                 Il2CppSystem.Object @object = jt.ReadAsObject();
                                 if (@object != null)
                                 {
-                                    if (@object.ToString().Contains("Left"))
+                                    if (@object.ToString().Contains("OnPlayerLeftRoom"))
                                     {
                                         Log.Debug($"[Debug] Found [Left] Method! [{it.Name} with {@object.ToString()}]");
                                         _OnPhotonPlayerLeftMethod = it;
@@ -364,28 +364,6 @@
 
         private static MethodInfo _placeUi;
 
-        public static AlignTrackingToPlayerDelegate GetAlignTrackingToPlayerDelegate
-        {
-            get
-            {
-                if (alignTrackingToPlayerMethod == null)
-                {
-                    alignTrackingToPlayerMethod = typeof(VRCPlayer).GetMethods(BindingFlags.Instance | BindingFlags.Public).
-                        First((MethodInfo m) => m.ReturnType == typeof(void)
-                        && m.GetParameters().Length == 0
-                        && m.XRefScanForMethod("get_Transform", null)
-                        && m.XRefScanForMethod(null, "Player")
-                        && m.XRefScanForMethod("Vector3_Quaternion", "VRCPlayer")
-                        && m.XRefScanForMethod(null, "VRCTrackingManager")
-                        && m.XRefScanForMethod(null, "InputStateController"));
-                }
-                return (AlignTrackingToPlayerDelegate)Delegate.CreateDelegate(typeof(AlignTrackingToPlayerDelegate), PlayerUtils.GetVRCPlayer(), alignTrackingToPlayerMethod);
-            }
-        }
-
-        private static MethodInfo alignTrackingToPlayerMethod;
-
-        public delegate void AlignTrackingToPlayerDelegate();
 
         private static ResetLastPositionAction ResetLastPositionAct
         {
@@ -416,66 +394,7 @@
             ResetLastPositionAct(instance);
         }
 
-        private static RagDollAction RagDollMethod
-        {
-            get
-            {
-                if (ourRagDollAction != null)
-                {
-                    return ourRagDollAction;
-                }
-                //XrefScanMethodDb.RegisterType<Transform>();
-                MethodInfo method = typeof(RagdollController).GetMethods(BindingFlags.Instance | BindingFlags.Public).Single((MethodInfo it) =>
-                XrefScanner.XrefScan(it).Any((XrefInstance jt) =>
-                jt.Type == XrefType.Method
-                && jt.TryResolve() != null
-                && jt.TryResolve().GetParameters().Length == 1
-                && jt.TryResolve().GetParameters()[0].ParameterType == typeof(bool)
-                && jt.TryResolve().ReflectedType == typeof(IkController)
-                ));
-                Log.Write($"[Debug] Found RagDoll Method! {method.Name}");
-                ourRagDollAction = (RagDollAction)Delegate.CreateDelegate(typeof(RagdollController), method);
-                return ourRagDollAction;
-            }
-        }
 
-        private static RagDollAction ourRagDollAction;
 
-        private delegate void RagDollAction(RagdollController @this);
-
-        public static void RagDoll(this RagdollController instance)
-        {
-            RagDollMethod(instance);
-        }
-
-        private static EndRagDollAction EndRagDollMethod
-        {
-            get
-            {
-                if (ourRagDollAction != null)
-                {
-                    return ourEndRagDollAction;
-                }
-                MethodInfo method = typeof(RagdollController).GetMethods(BindingFlags.Instance | BindingFlags.Public).Single((MethodInfo it) =>
-                XrefScanner.XrefScan(it).Any((XrefInstance jt) =>
-                jt.Type == XrefType.Method
-                && jt.TryResolve() != null
-                && jt.TryResolve().GetParameters().Length == 0
-                && jt.TryResolve().ReflectedType == typeof(IkController)
-                ));
-                Log.Write($"[Debug] Found EndRagDoll Method! {method.Name}");
-                ourEndRagDollAction = (EndRagDollAction)Delegate.CreateDelegate(typeof(RagdollController), method);
-                return ourEndRagDollAction;
-            }
-        }
-
-        private static EndRagDollAction ourEndRagDollAction;
-
-        private delegate void EndRagDollAction(RagdollController @this);
-
-        public static void EndRagDoll(this RagdollController instance)
-        {
-            EndRagDollMethod(instance);
-        }
     }
 }
