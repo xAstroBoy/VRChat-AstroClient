@@ -53,7 +53,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
-    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
+    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CHEETOS</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
