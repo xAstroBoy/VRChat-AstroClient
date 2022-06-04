@@ -136,7 +136,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                             if (player.GetAPIUser().IsSelf) return;
                             if (ESP.CurrentRole == PrisonEscape_Roles.Prisoner && LocalUserData.CurrentRole == PrisonEscape_Roles.Guard)
                             {
-                                if (ESP.isWanted)
+                                if (ESP.isWanted || ESP.isSuspicious)
                                 {
                                     ShootInteraction.InvokeBehaviour();
                                 }

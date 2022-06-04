@@ -397,9 +397,9 @@ internal class WorldCheatsModule : AstroEvents
                 });
                 CustomSubMenu.AddSubMenu("World Settings", () =>
                 {
-                    if (PrisonEscape.WorldSettings_Avatars_Toggle != null)
+                    if (PrisonEscape.WorldSettings_Subtitles_Toggle != null)
                     {
-                        CustomSubMenu.AddToggle("Toggle Avatars", PrisonEscape.WorldSettings_Avatars.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_Avatars = ToggleValue; });
+                        CustomSubMenu.AddToggle("Toggle Subtitles", PrisonEscape.WorldSettings_Subtitles.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_Subtitles = ToggleValue; });
                     }
                     if (PrisonEscape.WorldSettings_Music_Toggle != null)
                     {
@@ -444,6 +444,7 @@ internal class WorldCheatsModule : AstroEvents
                         CustomSubMenu.AddToggle("GodMode", ESP.GodMode, ToggleValue => { ESP.GodMode = ToggleValue; });
                     }
 
+                    CustomSubMenu.AddToggle("Take Keycard On Suspicious", PrisonEscape.TakeKeyCardOnSuspicious, ToggleValue => { PrisonEscape.TakeKeyCardOnSuspicious = ToggleValue; });
                     CustomSubMenu.AddToggle("Take Keycard On Wanted", PrisonEscape.TakeKeyCardOnWanted, ToggleValue => { PrisonEscape.TakeKeyCardOnWanted = ToggleValue; });
 
                     CustomSubMenu.AddToggle("Large Crate ESP", PrisonEscape.LargeCrateESP, ToggleValue => { PrisonEscape.LargeCrateESP = ToggleValue; });
@@ -547,7 +548,7 @@ internal class WorldCheatsModule : AstroEvents
                         PrisonEscape.WorldSettings_GoldenGuns = true;
                         PrisonEscape.WorldSettings_DoublePoints = false;
                         PrisonEscape.WorldSettings_Music = false;
-                        PrisonEscape.WorldSettings_Avatars = false;
+                        PrisonEscape.WorldSettings_Subtitles = true;
                     });
                 }
             }

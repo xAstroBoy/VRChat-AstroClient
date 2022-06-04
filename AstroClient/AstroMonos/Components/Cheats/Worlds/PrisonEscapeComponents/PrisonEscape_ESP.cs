@@ -3,6 +3,7 @@ using AstroClient.ClientActions;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
 using AstroClient.WorldModifications.WorldsIds;
+using Il2CppSystem;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
@@ -90,19 +91,19 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 return _HealthTag;
             }
         }
-        private SingleTag _WantedTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal SingleTag WantedTag
+        private SingleTag _CurrentPrisonerStatus { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal SingleTag CurrentPrisonerStatus
         {
             [HideFromIl2Cpp]
             get
             {
                 if (Player == null) return null;
-                if (_WantedTag == null)
+                if (_CurrentPrisonerStatus == null)
                 {
-                    return _WantedTag = Player.gameObject.AddComponent<SingleTag>();
+                    return _CurrentPrisonerStatus = Player.gameObject.AddComponent<SingleTag>();
                 }
 
-                return _WantedTag;
+                return _CurrentPrisonerStatus;
             }
         }
 
@@ -140,16 +141,17 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             else
                 Destroy(this);
             PrisonEscape.OnShowRolesPropertyChanged += OnShowRolesPropertyChanged;
+            _ = healthTag;
             if (healthTag != null)
             {
                 healthTag.ShowTag = false;
                 healthTag.BackGroundColor = Color.green;
             }
 
-            if (WantedTag != null)
+            _ = CurrentPrisonerStatus;
+            if (CurrentPrisonerStatus != null)
             {
-                WantedTag.ShowTag = false;
-                WantedTag.BackGroundColor = Color.red;
+                CurrentPrisonerStatus.ShowTag = false;
             }
             PrisonEscape.OnForceWantedEnabled += OnForceWantedEnabled;
 
@@ -180,9 +182,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (CurrentRole == PrisonEscape_Roles.Dead)
                 {
-                    ToggleWantedTag(false);
+                    TogglePrisonerStatus(false, "", Color.clear);
                     ResetESPColor();
                     isWanted = false;
+                    isSuspicious = false;
                     if (healthTag != null)
                     {
                         healthTag.ShowTag = false;
@@ -190,6 +193,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 }
                 else
                 {
+                    isSuspicious =AssignedReader.isSuspicious.GetValueOrDefault(false);
                     isWanted = AssignedReader.isWanted.GetValueOrDefault(false);
                     if (healthTag != null)
                     {
@@ -205,9 +209,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     healthTag.ShowTag = false;
                 }
-                if (WantedTag != null)
+                if (CurrentPrisonerStatus != null)
                 {
-                    WantedTag.ShowTag = false;
+                    CurrentPrisonerStatus.ShowTag = false;
                 }
                 
                 ResetESPColor();
@@ -216,7 +220,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         }
 
         [HideFromIl2Cpp]
-        private int GetHealthDefaults()
+        private System.UInt16 GetHealthDefaults()
         {
             switch (CurrentRole)
             {
@@ -244,7 +248,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                             return;
                             break;
                         default:
-                            AssignedReader.health = int.MaxValue;
+                            AssignedReader.health = System.UInt16.MaxValue;
                             break;
                     }
                 } 
@@ -301,11 +305,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 LockRole = false;
                 CurrentRole = role;
-                ToggleWantedTag(false);
-                if(healthTag != null)
+                TogglePrisonerStatus(false, "", Color.clear);
+                if (healthTag != null)
                 {
                     healthTag.ShowTag = false;
                 }
+                isSuspicious = false;
                 isWanted = false;
                 HasTakenKeyCardAutomatically = false;
                 if (!Player.GetAPIUser().IsSelf)
@@ -342,12 +347,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             if (!isActiveAndEnabled) return;
             if (!Player.GetAPIUser().IsSelf) return;
-            if (!PrisonEscape.TakeKeyCardOnWanted) return;
             if (CurrentRole == PrisonEscape_Roles.Prisoner)
             {
                 if (!HasTakenKeyCardAutomatically)
                 {
-                    if (AssignedReader.isWanted.GetValueOrDefault(false))
+                    if (AssignedReader.isSuspicious.GetValueOrDefault(false) && PrisonEscape.TakeKeyCardOnSuspicious || AssignedReader.isWanted.GetValueOrDefault(false) && PrisonEscape.TakeKeyCardOnWanted)
                     {
                         PrisonEscape.TakeKeyCard();
                         HasTakenKeyCardAutomatically = true;
@@ -368,7 +372,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
 
             if (healthTag != null) Destroy(healthTag);
-            if(WantedTag != null) Destroy(WantedTag);
+            if(CurrentPrisonerStatus != null) Destroy(CurrentPrisonerStatus);
         }
 
 
@@ -386,23 +390,49 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                
+                if (_isWanted == value) return;
+
                 if (CurrentRole == PrisonEscape_Roles.Guard || CurrentRole == PrisonEscape_Roles.Dead)
                 {
                     value = false;
                     _isWanted = false;
-                    ToggleWantedTag(false);
+                    TogglePrisonerStatus(false, "", Color.clear);
                 }
                 if (CurrentRole == PrisonEscape_Roles.Prisoner)
                 {
-                    ToggleWantedTag(value);
+                    TogglePrisonerStatus(value, "Wanted", Color.red);
                 }
 
                 _isWanted = value;
             }
         }
 
+        private bool _isSuspicious { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        internal bool isSuspicious
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return _isSuspicious;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_isSuspicious == value) return;
+                if (CurrentRole == PrisonEscape_Roles.Guard || CurrentRole == PrisonEscape_Roles.Dead)
+                {
+                    value = false;
+                    _isSuspicious = false;
+                    TogglePrisonerStatus(false, "", Color.clear);
+                }
+                if (CurrentRole == PrisonEscape_Roles.Prisoner)
+                {
+                    TogglePrisonerStatus(value, "Suspicious", Cheetah.Color.Crayola.Original.Orange);
+                }
 
+                _isSuspicious = value;
+            }
+        }
 
 
         internal void TagsUpdater()
@@ -413,13 +443,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             if (CurrentRole == PrisonEscape_Roles.Dead)
             {
                 healthTag.ShowTag = false;
-                ToggleWantedTag(false);
+                TogglePrisonerStatus(false, "", Color.clear);
                 ResetESPColor();
                 isWanted = false;
+                isSuspicious = false;
             }
             else
             {
                 isWanted = AssignedReader.isWanted.GetValueOrDefault(false);
+                isSuspicious = AssignedReader.isSuspicious.GetValueOrDefault(false);
                 healthTag.ShowTag = true;
                 healthTag.Text = $"Health : {AssignedReader.health}";
 
@@ -474,7 +506,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 }
                 else
                 {
-                    ESPColor = SystemColors.YellowGreen;
+                    if (isSuspicious)
+                    {
+                        ESPColor = Cheetah.Color.Crayola.Original.Orange;
+                    }
+                    else
+                    {
+                        ESPColor = SystemColors.YellowGreen;
+                    }
                 }
             }
             else if (CurrentRole == PrisonEscape_Roles.Prisoner && LocalUserData.CurrentRole == PrisonEscape_Roles.Prisoner) // Remote & Local Prisoners
@@ -510,18 +549,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
 
         [HideFromIl2Cpp]
-        private void ToggleWantedTag(bool Visible)
+        private void TogglePrisonerStatus(bool Visible, string Text, Color BackgroundColor)
         {
-            if(!PrisonEscape.ShowRoles)
-            if (Visible != WantedTag.ShowTag)
-            {
-                WantedTag.ShowTag = Visible;
-                if (WantedTag != null)
+            if (!PrisonEscape.ShowRoles)
+                if (CurrentPrisonerStatus != null)
                 {
-                    WantedTag.BackGroundColor = Color.red;
-                    WantedTag.Text = "Wanted";
+                    CurrentPrisonerStatus.ShowTag = Visible;
+                    CurrentPrisonerStatus.BackGroundColor = BackgroundColor;
+                    CurrentPrisonerStatus.Text = Text;
                 }
-            }
         }
         private bool _HasSubscribed = false;
         private bool HasSubscribed

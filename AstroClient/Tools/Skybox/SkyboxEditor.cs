@@ -402,16 +402,35 @@ namespace AstroClient.Tools.Skybox
             Log.Write("Done checking for skyboxes.");
         }
 
+        private static string SavePath(string path, string SkyboxName, int count = 0)
+        {
+            var result = Path.Combine(path, SkyboxName); ;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            else
+            {
+                var files = Directory.GetFiles(path);
+                if (files.Length != 0)
+                {
+                    var duplicate = count++;
+                    return SavePath(path, SkyboxName + "_" + duplicate, duplicate);
+                }
+            }
+            return result;
+        }
+
         internal static bool ExportSkybox()
         {
             if (isUsingCustomSkybox) return false;
             if (!isSupportedSkybox) return false;
             if (RenderSettings.skybox == null) return false;
             if (!Directory.Exists(ExportedSkyboxPath)) Directory.CreateDirectory(ExportedSkyboxPath);
-            string SkyboxType = "Skybox";
             if (isSixSidedCube)
             {
-                var savepath = Path.Combine(SixSidedCubePath, $"{SkyboxType}_" + RenderSettings.skybox.name);
+                
+                var savepath = SavePath(SixSidedCubePath,  RenderSettings.skybox.name);
                 if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
                 try
                 {
@@ -430,7 +449,7 @@ namespace AstroClient.Tools.Skybox
             }
             if (isCubeMap)
             {
-                var savepath = Path.Combine(CubemapsPath, $"{SkyboxType}_" + RenderSettings.skybox.name);
+                var savepath = SavePath(CubemapsPath,  RenderSettings.skybox.name);
                 if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
                 try
                 {
