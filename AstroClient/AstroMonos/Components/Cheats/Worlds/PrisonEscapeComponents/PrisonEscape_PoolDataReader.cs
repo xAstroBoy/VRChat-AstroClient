@@ -7,7 +7,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using AstroClient.Tools.UdonEditor;
     using AstroClient.Tools.UdonSearcher;
     using ClientAttributes;
-    using Il2CppSystem;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using VRC.Udon;
@@ -115,8 +114,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             get
             {
-                //if (!HitBoxReader.Root.active) return null; // do this to allow more accuracy and get the correct ones!
-
                 #region PlayerData Zone
 
                 if (isNotPoolOrThisBehaviour(__0_this_intnl_PlayerData))
@@ -2446,7 +2443,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal int? health
+        internal System.UInt16? health
         {
             [HideFromIl2Cpp]
             get
@@ -8292,27 +8289,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __0_intnl_GameJoinTrigger
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_intnl_GameJoinTrigger != null)
-                {
-                    return Private___0_intnl_GameJoinTrigger.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_GameJoinTrigger != null)
-                {
-                    Private___0_intnl_GameJoinTrigger.Value = value;
-                }
-            }
-        }
 
         internal VRC.Udon.UdonBehaviour __1_intnl_GameEffects
         {
@@ -8738,7 +8714,32 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
- 
+        internal bool? isSuspicious
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_isSuspicious != null)
+                {
+                    return Private_isSuspicious.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_isSuspicious != null)
+                    {
+                        Private_isSuspicious.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+
 
         #endregion Getter / Setters UdonVariables  of PlayerData
 
@@ -8834,7 +8835,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             Private___16_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__16_const_intnl_SystemInt32");
             Private___19_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__19_intnl_SystemBoolean");
             Private___refl_const_intnl_udonTypeName = new AstroUdonVariable<string>(PlayerData, "__refl_const_intnl_udonTypeName");
-            Private_health = new AstroUdonVariable<int>(PlayerData, "health");
+            Private_health = new AstroUdonVariable<System.UInt16>(PlayerData, "health");
             Private_healthRegenDelay = new AstroUdonVariable<float>(PlayerData, "healthRegenDelay");
             Private___0_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_SystemObject");
             Private___1_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__1_intnl_SystemBoolean");
@@ -9096,6 +9097,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             Private___5_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_SystemObject");
             Private___0_intnl_GameEffects = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_GameEffects");
             Private___0_intnl_AFKDetector = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_AFKDetector");
+            Private_isSuspicious = new AstroUdonVariable<bool>(PlayerData, "isSuspicious");
+
+
+
         }
 
         internal void Cleanup_PlayerData()
@@ -9450,6 +9455,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             Private___5_intnl_SystemObject = null;
             Private___0_intnl_GameEffects = null;
             Private___0_intnl_AFKDetector = null;
+            Private_isSuspicious = null;
         }
 
         #region UdonVariables  of PlayerData
@@ -9542,7 +9548,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         private AstroUdonVariable<int> Private___16_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___19_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___refl_const_intnl_udonTypeName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private_health { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<System.UInt16> Private_health { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private_healthRegenDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___1_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -9804,6 +9810,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_AFKDetector { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_isSuspicious { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
         #endregion UdonVariables  of PlayerData
 
     }

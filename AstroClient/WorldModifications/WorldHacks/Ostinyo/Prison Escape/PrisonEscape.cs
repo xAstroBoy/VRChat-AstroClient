@@ -151,6 +151,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     PrisonDoors_Close.Clear();
                     WorldSettings_DoublePoints_Toggle = null;
                     WorldSettings_GoldenGuns_Toggle = null;
+                    WorldSettings_Subtitles_Toggle = null;
+                    Gun_Blue_Color_Button = null;
+                    Gun_Green_Color_Button = null;
+                    Gun_Purple_Color_Button = null;
+                    Gun_Gold_Color_Button = null;
+                    
 
                 }
             }
@@ -698,16 +704,16 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     WorldSettings_VisualHitBoxes_Toggle = item;
                 }
-                if (item.name.Equals("Toggle Avatars"))
+                if (item.name.Equals("Toggle Subtitles"))
                 {
-                    WorldSettings_Avatars_Toggle = item;
+                    WorldSettings_Subtitles_Toggle = item;
                 }
                 if (item.name.Equals("Toggle Music"))
                 {
                     WorldSettings_Music_Toggle = item;
                 }
 
-                if (WorldSettings_DoublePoints_Toggle != null && WorldSettings_GoldenGuns_Toggle != null && WorldSettings_VisualHitBoxes_Toggle != null && WorldSettings_Avatars_Toggle != null && WorldSettings_Music_Toggle != null)
+                if (WorldSettings_DoublePoints_Toggle != null && WorldSettings_GoldenGuns_Toggle != null && WorldSettings_VisualHitBoxes_Toggle != null && WorldSettings_Subtitles_Toggle != null && WorldSettings_Music_Toggle != null)
                 {
                     break;
                 }
@@ -718,6 +724,33 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 if (Game_Join_Blocker != null)
                 {
                     Game_Join_Blocker.RemoveAllColliders(); // Fuck off annoying shit
+                }
+                if(Gun_Color_Panel != null)
+                {
+                    Gun_Color_Panel.SetActive(true);
+                    Gun_Color_Panel.GetOrAddComponent<Enabler>();
+
+                    var GoldButton = Gun_Color_Panel.transform.FindObject("Button Mat0");
+                    if (GoldButton != null)
+                    {
+                        Gun_Gold_Color_Button = GoldButton.GetComponent<Button>();
+                    }
+                    var GreenButton = Gun_Color_Panel.transform.FindObject("Button Mat1");
+                    if (GreenButton != null)
+                    {
+                        Gun_Green_Color_Button = GreenButton.GetComponent<Button>();
+                    }
+                    var BlueButton = Gun_Color_Panel.transform.FindObject("Button Mat2");
+                    if (BlueButton != null)
+                    {
+                        Gun_Blue_Color_Button = BlueButton.GetComponent<Button>();
+                    }
+                    var PurpleButton = Gun_Color_Panel.transform.FindObject("Button Mat3");
+                    if (PurpleButton != null)
+                    {
+                        Gun_Purple_Color_Button = PurpleButton.GetComponent<Button>();
+                    }
+                    
                 }
                 var blocks = Spawn_Area.FindObject("Building/Colliders");
                 if(blocks != null)
@@ -1211,13 +1244,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
         #region  Getter/setters From WorldSettings Menu
-        internal static bool? WorldSettings_Avatars
+        internal static bool? WorldSettings_Subtitles
         {
             get
             {
-                if (WorldSettings_Avatars_Toggle != null)
+                if (WorldSettings_Subtitles_Toggle != null)
                 {
-                    return WorldSettings_Avatars_Toggle.isOn;
+                    return WorldSettings_Subtitles_Toggle.isOn;
                 }
                 return null;
             }
@@ -1225,9 +1258,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 if (value.HasValue)
                 {
-                    if (WorldSettings_Avatars_Toggle != null)
+                    if (WorldSettings_Subtitles_Toggle != null)
                     {
-                        WorldSettings_Avatars_Toggle.isOn = value.Value;
+                        WorldSettings_Subtitles_Toggle.isOn = value.Value;
                     }
                 }
             }
@@ -1340,6 +1373,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
 
         internal static bool TakeKeyCardOnWanted { get; set; }
+        internal static bool TakeKeyCardOnSuspicious { get; set; }
         private static bool _DropKnifeAfterKill = true;
 
         internal static bool DropKnifeAfterKill
@@ -1844,6 +1878,25 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+        private static GameObject _Gun_Color_Panel;
+
+        internal static GameObject Gun_Color_Panel
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (Spawn_Area == null) return null;
+                    if (_Gun_Color_Panel == null)
+                    {
+                        return _Gun_Color_Panel = Spawn_Area.FindObject("Signs/Settings Sign/Panel/Gun Color Panel");
+                    }
+                    return _Gun_Color_Panel;
+                }
+
+                return null;
+            }
+        }
 
 
         private static GameObject _Respawn_Points;
@@ -2277,8 +2330,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static Toggle WorldSettings_DoublePoints_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_VisualHitBoxes_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_Music_Toggle { get; set; } = null;
-        internal static Toggle WorldSettings_Avatars_Toggle { get; set; } = null;
+        internal static Toggle WorldSettings_Subtitles_Toggle { get; set; } = null;
 
+        internal static Button Gun_Gold_Color_Button { get; set; } = null;
+        internal static Button Gun_Green_Color_Button { get; set; } = null;
+        internal static Button Gun_Blue_Color_Button { get; set; } = null;
+        internal static Button Gun_Purple_Color_Button { get; set; } = null;
 
     }
 }
