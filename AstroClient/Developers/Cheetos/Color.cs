@@ -230,7 +230,7 @@ public struct Color
         public static readonly Color Comment = new(87, 166, 74);
     }
 
-    public static implicit operator UnityEngine.Color(Color c) => new UnityEngine.Color(c.R, c.G, c.B, c.A);
+    public static implicit operator UnityEngine.Color(Color c) => new((float)c.R / 255, (float)c.G / 255, (float)c.B / 255, (float)c.A / 255);
 
     public static implicit operator UnityEngine.Color32(Color c) => new(c.R, c.G, c.B, c.A);
 
