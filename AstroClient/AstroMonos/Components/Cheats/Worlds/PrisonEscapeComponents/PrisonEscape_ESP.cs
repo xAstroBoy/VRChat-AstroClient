@@ -427,7 +427,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 }
                 if (CurrentRole == PrisonEscape_Roles.Prisoner)
                 {
-                    TogglePrisonerStatus(value, "Suspicious", Cheetah.Color.Crayola.Original.Orange);
+                    TogglePrisonerStatus(value, "Suspicious", SystemColors.Orange);
                 }
 
                 _isSuspicious = value;
@@ -508,7 +508,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     if (isSuspicious)
                     {
-                        ESPColor = Cheetah.Color.Crayola.Original.Orange;
+                        ESPColor = SystemColors.Orange;
                     }
                     else
                     {

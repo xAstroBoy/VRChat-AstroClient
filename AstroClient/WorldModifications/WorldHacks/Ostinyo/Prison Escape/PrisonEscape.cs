@@ -151,6 +151,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     PrisonDoors_Close.Clear();
                     WorldSettings_DoublePoints_Toggle = null;
                     WorldSettings_GoldenGuns_Toggle = null;
+                    WorldSettings_Subtitles_Toggle = null;
+                    Gun_Blue_Color_Button = null;
+                    Gun_Green_Color_Button = null;
+                    Gun_Purple_Color_Button = null;
+                    Gun_Gold_Color_Button = null;
+                    
 
                 }
             }
@@ -723,6 +729,28 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     Gun_Color_Panel.SetActive(true);
                     Gun_Color_Panel.GetOrAddComponent<Enabler>();
+
+                    var GoldButton = Gun_Color_Panel.transform.FindObject("Button Mat0");
+                    if (GoldButton != null)
+                    {
+                        Gun_Gold_Color_Button = GoldButton.GetComponent<Button>();
+                    }
+                    var GreenButton = Gun_Color_Panel.transform.FindObject("Button Mat1");
+                    if (GreenButton != null)
+                    {
+                        Gun_Green_Color_Button = GreenButton.GetComponent<Button>();
+                    }
+                    var BlueButton = Gun_Color_Panel.transform.FindObject("Button Mat2");
+                    if (BlueButton != null)
+                    {
+                        Gun_Blue_Color_Button = BlueButton.GetComponent<Button>();
+                    }
+                    var PurpleButton = Gun_Color_Panel.transform.FindObject("Button Mat3");
+                    if (PurpleButton != null)
+                    {
+                        Gun_Purple_Color_Button = PurpleButton.GetComponent<Button>();
+                    }
+                    
                 }
                 var blocks = Spawn_Area.FindObject("Building/Colliders");
                 if(blocks != null)
@@ -2304,6 +2332,10 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static Toggle WorldSettings_Music_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_Subtitles_Toggle { get; set; } = null;
 
+        internal static Button Gun_Gold_Color_Button { get; set; } = null;
+        internal static Button Gun_Green_Color_Button { get; set; } = null;
+        internal static Button Gun_Blue_Color_Button { get; set; } = null;
+        internal static Button Gun_Purple_Color_Button { get; set; } = null;
 
     }
 }

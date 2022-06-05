@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Text;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.PlayerList;
 using AstroClient.Startup.Hooks;
 using AstroClient.xAstroBoy.Extensions;
+using TMPro;
 using UnhollowerBaseLib;
 using VRC.Udon;
 
@@ -72,7 +74,78 @@ namespace AstroClient.Tools.Extensions
             return GetPath(current.parent) + "/" + current.name;
         }
 
-        public static void SetLayerRecursive(this GameObject gameObject, int layer)
+
+
+        // HTML Rainbow codes
+        internal static string ToRainbow(this string text)
+        {
+            var sb = new StringBuilder();
+            var rainbow = new List<string>
+            {
+                "FF0000",
+                "FF1F00",
+                "FF3D00",
+                "FF5C00",
+                "FF7A00",
+                "FF9900",
+                "FFB800",
+                "FFD600",
+                "FFF500",
+                "EBFF00",
+                "CCFF00",
+                "ADFF00",
+                "8FFF00",
+                "70FF00",
+                "52FF00",
+                "33FF00",
+                "14FF00",
+                "00FF0A",
+                "00FF29",
+                "00FF47",
+                "00FF66",
+                "00FF85",
+                "00FFA3",
+                "00FFC2",
+                "00FFE0",
+                "00FFFF",
+                "00E0FF",
+                "00C2FF",
+                "00A3FF",
+                "0085FF",
+                "0066FF",
+                "0047FF",
+                "0029FF",
+                "000AFF",
+                "1400FF",
+                "3300FF",
+                "5200FF",
+                "7000FF",
+                "8F00FF",
+                "AD00FF",
+                "CC00FF",
+                "EB00FF",
+                "FF00F5",
+                "FF00D6",
+                "FF00B8",
+                "FF0099",
+                "FF007A",
+                "FF005C",
+            };
+            var index = 0;
+            foreach (var letter in text)
+            {
+                sb.Append($"<color=#{rainbow[index]}>{letter}</color>");
+                index = (index + 1) % rainbow.Count;
+            }
+
+            return sb.ToString();
+        }
+
+
+
+
+
+public static void SetLayerRecursive(this GameObject gameObject, int layer)
         {
             gameObject.layer = layer;
             foreach (Il2CppObjectBase il2CppObjectBase in gameObject.transform)

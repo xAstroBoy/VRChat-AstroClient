@@ -418,13 +418,31 @@ internal class WorldCheatsModule : AstroEvents
                         CustomSubMenu.AddToggle("Toggle Double Points", PrisonEscape.WorldSettings_DoublePoints.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_DoublePoints = ToggleValue; });
                     }
                 });
+                CustomSubMenu.AddSubMenu("Gun Colors", () =>
+                {
+                    if (PrisonEscape.Gun_Gold_Color_Button != null)
+                    {
+                        CustomSubMenu.AddButton("Set Gold Color", () => { PrisonEscape.Gun_Gold_Color_Button.onClick.Invoke(); });
+                    }
+                    if (PrisonEscape.Gun_Green_Color_Button != null)
+                    {
+                        CustomSubMenu.AddButton("Set Green Color", () => { PrisonEscape.Gun_Green_Color_Button.onClick.Invoke(); });
+                    }
+                    if (PrisonEscape.Gun_Blue_Color_Button != null)
+                    {
+                        CustomSubMenu.AddButton("Set Blue Color", () => { PrisonEscape.Gun_Blue_Color_Button.onClick.Invoke(); });
+                    }
+                    if (PrisonEscape.Gun_Purple_Color_Button != null)
+                    {
+                        CustomSubMenu.AddButton("Set Purple Color", () => { PrisonEscape.Gun_Purple_Color_Button.onClick.Invoke(); });
+                    }
+                });
+
                 CustomSubMenu.AddSubMenu("Patreon System Control", () =>
                 {
                     CustomSubMenu.AddToggle("Patron Mode", PrisonEscape.isPatron.GetValueOrDefault(false), ToggleValue => { PrisonEscape.isPatron = ToggleValue; });
                     CustomSubMenu.AddButton("Toggle Patron Guns", () => { PrisonEscape.TogglePatronGuns.InvokeBehaviour(); });
                     CustomSubMenu.AddButton("Toggle Double Points", () => { PrisonEscape.ToggleDoublePoints.InvokeBehaviour(); });
-                    //CustomSubMenu.AddToggle("Everyone Has Gold Gun", PrisonEscape.EveryoneHasGoldenGuns, ToggleValue => { PrisonEscape.EveryoneHasGoldenGuns = ToggleValue; });
-                    // CustomSubMenu.AddToggle("Everyone Has Double Points", PrisonEscape.EveryoneHasGoldenGunCamos, ToggleValue => { PrisonEscape.EveryoneHasGoldenGunCamos = ToggleValue; });
                 });
                 CustomSubMenu.AddSubMenu("Game Settings", () =>
                 {
