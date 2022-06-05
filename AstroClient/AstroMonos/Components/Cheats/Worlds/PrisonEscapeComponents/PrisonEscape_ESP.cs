@@ -439,6 +439,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                             }
                         }
                     }
+                    else
+                    {
+                        if (!isWanted)
+                        {
+                            if (PrisonEscape.ShowRoles)
+                            {
+                                if (CurrentPrisonerStatus != null)
+                                {
+                                    CurrentPrisonerStatus.ShowTag = false;
+                                }
+                            }
+                        }
+
+                    }
                 }
                 _isSuspicious = value;
             }
@@ -524,13 +538,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     }
                     else
                     {
-                        ESPColor = SystemColors.YellowGreen;
+                        ESPColor = SystemColors.Yellow;
                     }
                 }
             }
             else if (CurrentRole == PrisonEscape_Roles.Prisoner && LocalUserData.CurrentRole == PrisonEscape_Roles.Prisoner) // Remote & Local Prisoners
             {
-                ESPColor = SystemColors.YellowGreen;
+                ESPColor = SystemColors.Green;
             }
         }
 
