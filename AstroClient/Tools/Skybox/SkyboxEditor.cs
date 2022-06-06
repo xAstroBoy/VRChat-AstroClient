@@ -457,7 +457,7 @@ namespace AstroClient.Tools.Skybox
                     if(Tex != null)
                     {
                         Log.Debug("This is a Cubemap! Attempting to save...");
-                        MelonCoroutines.Start(CubeMapAndTexture2D.SaveCubemapToFile(Tex, savepath));
+                        CubeMapAndTexture2D.SaveCubemapToFile(Tex, savepath);
                     }
                 }
                 catch (Exception e)

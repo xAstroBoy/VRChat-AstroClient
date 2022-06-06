@@ -13,11 +13,19 @@ namespace AstroClient.Tools.Skybox.CubemapTools
 
     public static class CubeMapAndTexture2D
     {
+        private static Texture2D CorrectTextureFormat(Texture2D tex)
+        {
+            if (tex.format != TextureFormat.ARGB32)
+            {
+                return TextureHelper.CopyToARGB32CubeMap(tex);
+            }
+            return tex;
+        }
 
-        internal static IEnumerator SaveCubemapToFile(Cubemap cubemap, string path)
+        internal static void SaveCubemapToFile(Texture cubemap, string path)
         {
 
-                CubemapFace[] faces = new CubemapFace[] {
+            CubemapFace[] faces = new CubemapFace[] {
                 CubemapFace.PositiveX, CubemapFace.NegativeX,
                 CubemapFace.PositiveY, CubemapFace.NegativeY,
                 CubemapFace.PositiveZ, CubemapFace.NegativeZ };
@@ -27,50 +35,35 @@ namespace AstroClient.Tools.Skybox.CubemapTools
                 try
                 {
                     var imagepath = Path.Combine(path, $"{face.ToString()}.png");
-                    Texture2D newTex = new Texture2D(cubemap.width, cubemap.height, cubemap.format, false);
-                    newTex.filterMode = FilterMode.Point;
                     Log.Debug($"Generating Texture of {face}");
-                    Graphics.CopyTexture(cubemap, (int)face, 0, newTex, 0, 0);
-                    Log.Debug("Saving Texture...");
-
-
-                    Log.Debug($"Saved {cubemap.name} {face.ToString()}");
-                    byte[] data = Il2CppTextureHelper.Internal_EncodeToPNG(newTex);
-
-                    if (!Directory.Exists(path))
-                        Directory.CreateDirectory(path);
-
-                    File.WriteAllBytes(imagepath, data);
-
-
-                    switch (face)
+                    var newTex = TextureHelper.CopyTexture(cubemap, new Rect(0, 0, cubemap.width, cubemap.height), (int)face);
+                    if (newTex != null)
                     {
-                        case CubemapFace.NegativeX:
-                        case CubemapFace.PositiveX:
-                        case CubemapFace.NegativeZ:
-                        case CubemapFace.PositiveZ:
-
-                            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(imagepath);
-                            bitmap1.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                            bitmap1.Save(imagepath);
-
-
-
-                            break;
-
-
-                        default:
-                            break;
+                        TextureHelper.SaveTextureAsPNG(newTex, imagepath);
+                        UnityEngine.Object.Destroy(newTex);
                     }
-                    UnityEngine.Object.Destroy(newTex);
-
+                    if (File.Exists(imagepath))
+                    {
+                        switch (face)
+                        {
+                            case CubemapFace.NegativeX:
+                            case CubemapFace.PositiveX:
+                            case CubemapFace.NegativeZ:
+                            case CubemapFace.PositiveZ:
+                                Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(imagepath);
+                                bitmap1.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                bitmap1.Save(imagepath);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
                     Log.Exception(e);
                 }
             }
-            yield return null;
         }
     }
 }
