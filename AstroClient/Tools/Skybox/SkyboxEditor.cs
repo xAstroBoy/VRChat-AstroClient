@@ -149,12 +149,11 @@ namespace AstroClient.Tools.Skybox
             }
             return false;
         }
-
-        private static IEnumerator LoadSixSidedSkyboxes()
+        private static IEnumerator LoadFromPath(string MainFolder, string Image_Up, string Image_Down, string Image_Back, string Image_Front, string Image_Left, string Image_Right)
         {
-            if (Directory.Exists(SixSidedCubePath))
+            if (Directory.Exists(MainFolder))
             {
-                var YoinkedSkyboxesDirs = Directory.GetDirectories(SixSidedCubePath);
+                var YoinkedSkyboxesDirs = Directory.GetDirectories(MainFolder);
                 if (YoinkedSkyboxesDirs.IsNotEmpty())
                     for (var i1 = 0; i1 < YoinkedSkyboxesDirs.Length; i1++)
                     {
@@ -172,7 +171,7 @@ namespace AstroClient.Tools.Skybox
                             foreach (var imagepaths in images)
                             {
                                 //Log.Debug("Found File in " + imagepaths);
-                                if (Up == null && imagepaths.EndsWith(SixSidedFaces.UpTex + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Up == null && imagepaths.EndsWith(Image_Up + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
                                     Up = CheetoUtils.LoadPNGFromDir(imagepaths);
                                     if (Up != null)
@@ -183,7 +182,7 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Down == null && imagepaths.EndsWith(SixSidedFaces.DownTex + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Down == null && imagepaths.EndsWith(Image_Down + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
                                     Down = CheetoUtils.LoadPNGFromDir(imagepaths);
                                     if (Down != null)
@@ -194,7 +193,7 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Back == null && imagepaths.EndsWith(SixSidedFaces.BackTex + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Back == null && imagepaths.EndsWith(Image_Back + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
                                     Back = CheetoUtils.LoadPNGFromDir(imagepaths);
                                     if (Back != null)
@@ -205,7 +204,7 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Front == null && imagepaths.EndsWith(SixSidedFaces.FrontTex + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Front == null && imagepaths.EndsWith(Image_Front + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
                                     Front = CheetoUtils.LoadPNGFromDir(imagepaths);
                                     if (Front != null)
@@ -216,7 +215,7 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Left == null && imagepaths.EndsWith(SixSidedFaces.LeftTex + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Left == null && imagepaths.EndsWith(Image_Left + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
                                     Left = CheetoUtils.LoadPNGFromDir(imagepaths);
                                     if (Left != null)
@@ -227,7 +226,7 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Right == null && imagepaths.EndsWith(SixSidedFaces.RightTex + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Right == null && imagepaths.EndsWith(Image_Right + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
                                     Right = CheetoUtils.LoadPNGFromDir(imagepaths);
                                     if (Right != null)
@@ -258,134 +257,15 @@ namespace AstroClient.Tools.Skybox
                         }
                         else
                         {
-                            Log.Warn("Skipping Registered Yoinked Skybox :" + Path.GetFileName(dir));
+                            Log.Warn("Skipping Registered Exported Skybox :" + Path.GetFileName(dir));
                         }
                     }
                 else
-                    Log.Warn("No Skyboxes Found here : " + SixSidedCubePath);
+                    Log.Warn("No Skyboxes Found here : " + MainFolder);
             }
             else
             {
-                Directory.CreateDirectory(SixSidedCubePath);
-            }
-            yield return null;
-        }
-         private static IEnumerator LoadCubemaps()
-        {
-            if (Directory.Exists(CubemapsPath))
-            {
-                var CubeMapsFolders = Directory.GetDirectories(CubemapsPath);
-                if (CubeMapsFolders.IsNotEmpty())
-                    for (var i1 = 0; i1 < CubeMapsFolders.Length; i1++)
-                    {
-                        var dir = CubeMapsFolders[i1];
-                        if (!IsBundleAlreadyRegistered(Path.GetFileName(dir)))
-                        {
-                            var images = Directory.GetFiles(dir);
-                            if (images.IsEmpty()) continue;
-                            Texture2D Right = null;
-                            Texture2D Left = null;
-                            Texture2D Up = null;
-                            Texture2D Down = null;
-                            Texture2D Back = null;
-                            Texture2D Front = null;
-                            foreach (var imagepaths in images)
-                            {
-                                if (Right == null && imagepaths.EndsWith(CubemapFace.PositiveX + ".png"))
-                                {
-                                    Right = CheetoUtils.LoadPNGFromDir(imagepaths);
-                                    if (Right != null)
-                                    {
-                                        Right.wrapMode = TextureWrapMode.Clamp;
-                                        Right.Apply();
-                                        Right.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                }
-
-                                if (Left == null && imagepaths.EndsWith(CubemapFace.NegativeX + ".png"))
-                                {
-                                    Left = CheetoUtils.LoadPNGFromDir(imagepaths);
-                                    if (Left != null)
-                                    {
-                                        Left.wrapMode = TextureWrapMode.Clamp;
-                                        Left.Apply();
-                                        Left.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                }
-
-                                if (Up == null && imagepaths.EndsWith(CubemapFace.PositiveY + ".png"))
-                                {
-                                    Up = CheetoUtils.LoadPNGFromDir(imagepaths);
-                                    if (Up != null)
-                                    {
-                                        Up.wrapMode = TextureWrapMode.Clamp;
-                                        Up.Apply();
-                                        Up.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                }
-
-                                if (Down == null && imagepaths.EndsWith(CubemapFace.NegativeY + ".png"))
-                                {
-                                    Down = CheetoUtils.LoadPNGFromDir(imagepaths);
-                                    if (Down != null)
-                                    {
-                                        Down.wrapMode = TextureWrapMode.Clamp;
-                                        Down.Apply();
-                                        Down.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                }
-
-                                if (Back == null && imagepaths.EndsWith(CubemapFace.PositiveZ + ".png"))
-                                {
-                                    Back = CheetoUtils.LoadPNGFromDir(imagepaths);
-                                    if (Back != null)
-                                    {
-                                        Back.wrapMode = TextureWrapMode.Clamp;
-                                        Back.Apply();
-                                        Back.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                }
-
-                                if (Front == null && imagepaths.EndsWith(CubemapFace.NegativeZ + ".png"))
-                                {
-                                    Front = CheetoUtils.LoadPNGFromDir(imagepaths);
-                                    if (Front != null)
-                                    {
-                                        Front.wrapMode = TextureWrapMode.Clamp;
-                                        Front.Apply();
-                                        Front.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                                    }
-                                }
-                            }
-                            try
-                            {
-                                var cachedskybox = new GeneratedSkyboxes(Up, Down, Back, Front, Left, Right, Path.GetFileName(dir));
-                                if (cachedskybox != null)
-                                {
-                                    GeneratedSkyboxesList.Add(cachedskybox.Name, cachedskybox);
-                                }
-
-                            }
-                            catch(Exception e)
-                            {
-                                Log.Exception(e);
-                            }
-
-
-
-                            yield return new WaitForSeconds(0.001f);
-                        }
-                        else
-                        {
-                            Log.Warn("Skipping Registered Yoinked Skybox :" + Path.GetFileName(dir));
-                        }
-                    }
-                else
-                    Log.Warn("No Skyboxes Found here : " + CubemapsPath);
-            }
-            else
-            {
-                Directory.CreateDirectory(CubemapsPath);
+                Directory.CreateDirectory(MainFolder);
             }
             yield return null;
         }
@@ -396,8 +276,8 @@ namespace AstroClient.Tools.Skybox
         internal static void FindAndLoadSkyboxes()
         {
             //MelonCoroutines.Start(LoadBundleSkyboxes());
-            MelonCoroutines.Start(LoadSixSidedSkyboxes());
-            MelonCoroutines.Start(LoadCubemaps());
+            MelonCoroutines.Start(LoadFromPath(SixSidedCubePath, SixSidedFaces.UpTex, SixSidedFaces.DownTex, SixSidedFaces.BackTex, SixSidedFaces.FrontTex, SixSidedFaces.LeftTex, SixSidedFaces.RightTex));
+            MelonCoroutines.Start(LoadFromPath(CubemapsPath, CubemapFace.PositiveY.ToString(), CubemapFace.NegativeY.ToString(), CubemapFace.PositiveZ.ToString(), CubemapFace.NegativeZ.ToString(), CubemapFace.NegativeX.ToString(), CubemapFace.PositiveX.ToString()));
             Log.Write("Done checking for skyboxes.");
         }
 
