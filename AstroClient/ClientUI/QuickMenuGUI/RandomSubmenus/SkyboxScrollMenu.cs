@@ -78,7 +78,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                                         btn.SetButtonImage(skybox.Left);
                                     else if (skybox.Back != null) 
                                         btn.SetButtonImage(skybox.Back);
-
+                                    skybox.SetAssignedButton(btn);
                                     GeneratedButtons.Add(btn);
                                 }
                             }
@@ -172,7 +172,10 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 Regenerate();
             }, "Loads all the skyboxes in folders.");
             new QMWingSingleButton(WingMenu, "Reset Skybox", () => { SkyboxEditor.RestoreOriginalSkybox(); }, "Restore Original Skybox.");
-            new QMWingSingleButton(WingMenu, "Reload Custom Skybox Textures", () => { SkyboxEditor.RefreshMaterialTextures(); }, "Refreshes the material textures.");
+            new QMWingSingleButton(WingMenu, "Reload Custom Skybox Textures", () =>
+            {
+                SkyboxEditor.RefreshMaterialTextures();
+            }, "Refreshes the material textures.");
             
             
             ExportSkybox = new QMWingSingleButton(WingMenu, "Export Skybox", () =>

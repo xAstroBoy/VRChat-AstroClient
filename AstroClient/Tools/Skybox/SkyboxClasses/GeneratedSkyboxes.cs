@@ -1,5 +1,7 @@
 ﻿
 
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+
 namespace AstroClient.Tools.Skybox.SkyboxClasses
 {
     using System;
@@ -39,6 +41,29 @@ namespace AstroClient.Tools.Skybox.SkyboxClasses
                  
         internal string Texture_Path_Right { get; set; }
 
+
+        private QMSingleButton AssignedButton { get; set; }
+
+
+        internal void SetAssignedButton(QMSingleButton button)
+        {
+            AssignedButton = button;
+        }
+
+
+        private void UpdateButtonPreview()
+        {
+            if(AssignedButton != null)
+            {
+                if (Front != null)
+                    AssignedButton.SetButtonImage(Front);
+                else if (Left != null)
+                    AssignedButton.SetButtonImage(Left);
+                else if (Back != null)
+                    AssignedButton.SetButtonImage(Back);
+
+            }
+        }
 
         /// <summary>
         /// To Make life easier, convert Any skybox to 6 sided, and then apply it back.
@@ -182,6 +207,7 @@ namespace AstroClient.Tools.Skybox.SkyboxClasses
                     Right = loaded;
                 }
             }
+            UpdateButtonPreview();
             if(SkyboxEditor.SelectedSkybox == this)
             {
                 SkyboxEditor.SetRenderSettingSkybox(this);
