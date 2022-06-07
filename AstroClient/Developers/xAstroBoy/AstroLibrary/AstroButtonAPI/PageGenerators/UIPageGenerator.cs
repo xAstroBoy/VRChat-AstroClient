@@ -64,8 +64,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
                 if (!list.Contains(page))
                 {
                     list.Add(page);
+                    controller.field_Public_ArrayOf_UIPage_0 = list.ToArray();
                 }
-                controller.field_Public_ArrayOf_UIPage_0 = list.ToArray();
             }
         }
 
@@ -81,8 +81,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
                     {
                         UnityEngine.Object.Destroy(page);
                     }
+                    controller.field_Public_ArrayOf_UIPage_0 = list.ToArray();
                 }
-                controller.field_Public_ArrayOf_UIPage_0 = list.ToArray();
             }
         }
 

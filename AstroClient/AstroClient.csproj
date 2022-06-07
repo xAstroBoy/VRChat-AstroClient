@@ -198,7 +198,7 @@
     <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="PlayerList\Utilities\PlayerList_OwnerCountHelper.cs" />
     <Compile Include="SnaxyTagsV3\SnaxyTagListener.cs" />
-    <Compile Include="Startup\Fixes\TabWhiteImageFix.cs" />
+    <Compile Include="Startup\Fixes\FixRandomQMOpen.cs" />
     <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
     <Compile Include="Startup\Fixes\KeyboardPopupDeclutterer.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
