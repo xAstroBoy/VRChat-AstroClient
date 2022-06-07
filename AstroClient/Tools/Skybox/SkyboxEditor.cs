@@ -41,9 +41,8 @@ namespace AstroClient.Tools.Skybox
 
         internal static string BundlesPath => Path.Combine(SkyboxesPath, "Bundles");
 
-        internal static string ExportedSkyboxPath => Path.Combine(SkyboxesPath, "ExportedSkyboxes");
-        internal static string SixSidedCubePath => Path.Combine(ExportedSkyboxPath, "6 Sided");
-        internal static string CubemapsPath => Path.Combine(ExportedSkyboxPath, "Cubemaps");
+        internal static string SixSidedCubePath => Path.Combine(SkyboxesPath, "6 Sided");
+        internal static string CubemapsPath => Path.Combine(SkyboxesPath, "Cubemaps");
 
         internal static Dictionary<string, GeneratedSkyboxes> GeneratedSkyboxesList { get; set; } = new();
 
@@ -53,7 +52,6 @@ namespace AstroClient.Tools.Skybox
 
         internal static bool isUsingCustomSkybox { get; set; } = false;
 
-        internal static bool isSupportedSkybox { get; private set; } = false;
         internal static bool isSixSidedCube { get; private set; } = false;
         internal static bool isCubeMap { get; private set; } = false;
 
@@ -69,17 +67,25 @@ namespace AstroClient.Tools.Skybox
 
         internal static bool hasExportedSkybox()
         {
-            if(!isUsingCustomSkybox)
+            if (!isUsingCustomSkybox)
             {
+                if (!CanExtract())
+                {
+                    return false;
+                }
                 if (ExportedSkyboxes != null)
                 {
                     if (ExportedSkyboxes.Count != 0)
                     {
-                        return ExportedSkyboxes.Contains(RenderSettings.skybox);
+                        if (ExportedSkyboxes.Contains(RenderSettings.skybox))
+                        {
+                            return true;
+
+                        }
                     }
                 }
             }
-            return true;
+            return false;
         }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -92,10 +98,9 @@ namespace AstroClient.Tools.Skybox
             }
             isUsingCustomSkybox = false;
             PrintSkyboxInfo();
-            if(CheckIfExportingIsSupported())
+            if(CanExtract())
             {
                 Log.Debug("This Skybox can be Exported!");
-                isSupportedSkybox = true;
                 if (Bools.IsDeveloper)
                 {
                     PopupUtils.QueHudMessage("This Skybox can Be Exported!".ToRainbow());
@@ -105,12 +110,10 @@ namespace AstroClient.Tools.Skybox
         }
 
 
-        internal static bool CheckIfExportingIsSupported()
+        internal static bool CanExtract()
         {
             if (!isUsingCustomSkybox)
             {
-
-
                 if (RenderSettings.skybox != null)
                 {
                     var textureIDs = RenderSettings.skybox.GetTexturePropertyNames().ToList();
@@ -123,19 +126,22 @@ namespace AstroClient.Tools.Skybox
                     }
                     else if (textureIDs.Contains("_Tex"))
                     {
-                        var textureType = RenderSettings.skybox.GetTexture("_Tex").GetIl2CppType().FullName;
-                        if (textureType.Contains("Cubemap"))
+                        if (RenderSettings.skybox.shader.name.ToLower().Contains("cubemap"))
                         {
-                            isSixSidedCube = false;
-                            isCubeMap = true;
-                            return true;
+                            var textureType = RenderSettings.skybox.GetTexture("_Tex").GetIl2CppType().FullName;
+                            if (textureType.Contains("Cubemap"))
+                            {
+                                isSixSidedCube = false;
+                                isCubeMap = true;
+                                return true;
+                            }
                         }
                     }
                     else
                     {
                         isSixSidedCube = false;
                         isCubeMap = false;
-                        return true;
+                        return false;
                     }
                 }
             }
@@ -163,7 +169,7 @@ namespace AstroClient.Tools.Skybox
         private void OnRoomLeft()
         {
             isSixSidedCube = false;
-            isSupportedSkybox = false;
+            isCubeMap = false;
             isUsingCustomSkybox = false;
             OriginalSkybox = null;
             SelectedSkybox = null;
@@ -341,66 +347,73 @@ namespace AstroClient.Tools.Skybox
             return result;
         }
 
-        internal static bool ExportSkybox()
+        internal static void ExportSkybox()
         {
-            if (isUsingCustomSkybox) return false;
-            if (!isSupportedSkybox) return false;
-            if (RenderSettings.skybox == null) return false;
-            if (!Directory.Exists(ExportedSkyboxPath)) Directory.CreateDirectory(ExportedSkyboxPath);
+            if (isUsingCustomSkybox) return;
+            if (RenderSettings.skybox == null) return;
+            
+            if (!Directory.Exists(SkyboxesPath)) Directory.CreateDirectory(SkyboxesPath);
             if (isSixSidedCube)
             {
-                
-                var savepath = SavePath(SixSidedCubePath,  RenderSettings.skybox.name);
-                if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
-                try
-                {
-                    RenderSettings.skybox.GetTexture("_UpTex").SaveTextureAsPNG(savepath, SixSidedFaces.UpTex);
-                    RenderSettings.skybox.GetTexture("_DownTex").SaveTextureAsPNG(savepath, SixSidedFaces.DownTex);
-                    RenderSettings.skybox.GetTexture("_BackTex").SaveTextureAsPNG(savepath, SixSidedFaces.BackTex);
-                    RenderSettings.skybox.GetTexture("_FrontTex").SaveTextureAsPNG(savepath, SixSidedFaces.FrontTex);
-                    RenderSettings.skybox.GetTexture("_LeftTex").SaveTextureAsPNG(savepath, SixSidedFaces.LeftTex);
-                    RenderSettings.skybox.GetTexture("_RightTex").SaveTextureAsPNG(savepath, SixSidedFaces.RightTex);
+                ExportSixSidedSkybox();
+            }
+            else if (isCubeMap)
+            {
+                ExportCubeMap();
+            }
+        }
+        private static void ExportSixSidedSkybox()
+        {
+            var savepath = SavePath(SixSidedCubePath, RenderSettings.skybox.name);
+            if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
+            try
+            {
+                RenderSettings.skybox.GetTexture("_UpTex").SaveTextureAsPNG(savepath, SixSidedFaces.UpTex);
+                RenderSettings.skybox.GetTexture("_DownTex").SaveTextureAsPNG(savepath, SixSidedFaces.DownTex);
+                RenderSettings.skybox.GetTexture("_BackTex").SaveTextureAsPNG(savepath, SixSidedFaces.BackTex);
+                RenderSettings.skybox.GetTexture("_FrontTex").SaveTextureAsPNG(savepath, SixSidedFaces.FrontTex);
+                RenderSettings.skybox.GetTexture("_LeftTex").SaveTextureAsPNG(savepath, SixSidedFaces.LeftTex);
+                RenderSettings.skybox.GetTexture("_RightTex").SaveTextureAsPNG(savepath, SixSidedFaces.RightTex);
 
+                if (!ExportedSkyboxes.Contains(RenderSettings.skybox))
+                {
+                    ExportedSkyboxes.Add(RenderSettings.skybox);
+                }
+                return;
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+                return;
+            }
+
+
+        }
+
+        private static void ExportCubeMap()
+        {
+            var savepath = SavePath(CubemapsPath, RenderSettings.skybox.name);
+            if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
+            try
+            {
+                var Tex = RenderSettings.skybox.GetTexture("_Tex").Cast<Cubemap>();
+                if (Tex != null)
+                {
+                    Log.Debug("This is a Cubemap! Attempting to save...");
+                    CubeMapAndTexture2D.SaveCubemapToFile(Tex, savepath);
                     if (!ExportedSkyboxes.Contains(RenderSettings.skybox))
                     {
                         ExportedSkyboxes.Add(RenderSettings.skybox);
                     }
                 }
-                catch (Exception e)
-                {
-                    Log.Exception(e);
-                    return false;
-                }
+                return;
             }
-            if (isCubeMap)
+            catch (Exception e)
             {
-                var savepath = SavePath(CubemapsPath,  RenderSettings.skybox.name);
-                if (!Directory.Exists(savepath)) Directory.CreateDirectory(savepath);
-                try
-                {
-                    var Tex = RenderSettings.skybox.GetTexture("_Tex").Cast<Cubemap>();
-                    if(Tex != null)
-                    {
-                        Log.Debug("This is a Cubemap! Attempting to save...");
-                        CubeMapAndTexture2D.SaveCubemapToFile(Tex, savepath);
-                        if (!ExportedSkyboxes.Contains(RenderSettings.skybox))
-                        {
-                            ExportedSkyboxes.Add(RenderSettings.skybox);
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Log.Exception(e);
-                    return false;
-                }
-
+                Log.Exception(e);
+                return;
             }
 
-
-
-
-            return true;
         }
 
         internal static void SetRenderSettingSkybox(GeneratedSkyboxes Skybox)

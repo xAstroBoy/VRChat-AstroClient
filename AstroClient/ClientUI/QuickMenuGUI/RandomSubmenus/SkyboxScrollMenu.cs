@@ -124,7 +124,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
 
-                if (SkyboxEditor.isSupportedSkybox)
+                if (SkyboxEditor.CanExtract())
                 {
                     if (!SkyboxEditor.hasExportedSkybox())
                     {

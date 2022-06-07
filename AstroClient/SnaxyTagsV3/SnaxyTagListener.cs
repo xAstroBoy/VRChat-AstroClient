@@ -109,44 +109,60 @@ internal class SnaxyTagsSystem : AstroEvents
         {
             yield break;
         }
-        string message = text.Split(',')[0];
-        if (message != "gotTag")
+        var Command = text.Split(',')[0];
+        if (Command != "gotTag")
         {
-            if (message == "recieveNotification" && !string.IsNullOrEmpty(Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]))))
+            var Content = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]));
+
+            if (Command == "recieveNotification" && Content.IsNotNullOrEmptyOrWhiteSpace()) 
             {
-                string SnaxyNotification = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]));
-                if (SnaxyNotification.Contains("\\a"))
-                {
-                    Log.Write("\a");
-                }
-                PopupUtils.QueHudMessage(SnaxyNotification);
+                PopupUtils.QueHudMessage(Content);
             }
+            Log.Debug($"[SnaxyTag] Command: {Command}, Content {Content}");
         }
         else
         {
+            var UserID = text.Split(',')[1];
+            var Content = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[2]));
             if ((from mbox in PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray()
-                 where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == text.Split(',')[1]
+                 where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == UserID
                  select mbox).Count() != 1)
             {
                 yield break;
             }
             Player player = (from mbox in PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray()
-                             where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == text.Split(',')[1]
+                             where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == UserID
                              select mbox).First();
             if (player.GetAPIUser() == null)
             {
                 yield break;
             }
-            if (string.IsNullOrEmpty(Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[2]))) || Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[2])).Length < 1)
+            Log.Debug($"[SnaxyTag] Command: {Command}, User : {player.GetAPIUser().GetDisplayName()} , Content : {Content}");
+
+            if (Content.IsNullOrEmptyOrWhiteSpace()|| Content.Length < 1)
             {
                 RemoveSnaxyTag(player);
             }
-            else if (Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[2])) != "none" || Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[2])).Length > 0)
+            else if (Content != "none" || Content.Length > 0)
             {
-                var TagText = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[2]));
-                SetSnaxyTag(player, TagText);
+                var TagText = Content;
+                SetSnaxyTag(player, CheckTagText(TagText));
             }
         }
+    }
+
+    private static string CheckTagText(string TagText)
+    {
+        if (TagText.Contains("<color=#000000>"))
+        {
+            TagText = TagText.Replace("<color=#000000>", "<color=white>");
+        }
+        if (TagText.Contains("<color=black>"))
+        {
+            TagText = TagText.Replace("<color=black>", "<color=white>");
+        }
+
+        return TagText;
     }
 
     // Sets tags into a dictionary
@@ -155,6 +171,7 @@ internal class SnaxyTagsSystem : AstroEvents
         if (player != null)
         {
             var UserID = player.GetAPIUser().GetUserID();
+            
             if (text.isMatchWholeWord("Streamer"))
             {
                 // if the snaxy says is a streamer, but yet we have it already flagged, we can ignore it as we have a similiar tag saying that already.
@@ -212,28 +229,32 @@ internal class SnaxyTagsSystem : AstroEvents
         SnaxySocket.OnMessage += delegate (object sender, MessageEventArgs e)
         {
             string text = e.Data.ToString();
-            if (text.Split(',')[0] == "getKey" && SnaxyKey!= Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1])))
+            var Command = text.Split(',')[0];
+            var Content = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]));
+            Log.Write($"Snaxy OnMessage : Command : {Command}, : {Content}");
+
+
+            if (Command == "getKey" && SnaxyKey != Content)
             {
-                var key = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1])); ;
-                Log.Write($"[SnaxyTag] : Got key from socket. {key}");
-                SnaxyKey = key;
+                Log.Write($"[SnaxyTag] : Got key from socket. {Content}");
+                SnaxyKey = Content;
                 if (SnaxySocket != null && VRCPlayer.field_Internal_Static_VRCPlayer_0 != null)
                 {
                     foreach (Player item in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray())
                     {
-                        SnaxySocket.Send("getUser," + GetGroupSaveGetPermissions(item.GetAPIUser().GetUserID(), key));
+                        SnaxySocket.Send("getUser," + GetGroupSaveGetPermissions(item.GetAPIUser().GetUserID(), SnaxyKey));
                     }
                 }
             }
-            if (text.Split(',')[0] == "gotConsoleMsgName" && SnaxyConsole != Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1])))
+            if (text.Split(',')[0] == "gotConsoleMsgName" && SnaxyConsole != Content)
             {
 
-                SnaxyConsole = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]));
+                SnaxyConsole = Content;
                 Log.Write($"[SnaxyTag] Console :{SnaxyConsole}");
             }
             if (text.Split(',')[0] == "OutdatedMelons")
             {
-                Log.Write($"[SnaxyTag] :{Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]))}");
+                Log.Write($"[SnaxyTag] :{Content}");
             }
             MelonCoroutines.Start(WebsocketTag(text));
         };
@@ -249,9 +270,9 @@ internal class SnaxyTagsSystem : AstroEvents
     {
         if (SnaxySocket != null)
         {
-            SnaxySocket.Send("getUser," + GetGroupSaveGetPermissions(player.GetAPIUser().GetUserID(), SnaxyKey));
-
-            
+            var Message = GetGroupSaveGetPermissions(player.GetAPIUser().GetUserID(), SnaxyKey);
+            Log.Write($"[SnaxyTag] : Sending Request getUser , Message : {Message}");
+            SnaxySocket.Send("getUser," + Message);
         }
     }
     private void OnPlayerLeft(Player player)
