@@ -1,4 +1,5 @@
-﻿using AstroClient.Tools.Skybox.CubemapTools;
+﻿using AstroClient.ClientUI.Menu.RandomSubmenus;
+using AstroClient.Tools.Skybox.CubemapTools;
 using UnityEngine;
 
 namespace AstroClient.Tools.Skybox.MaterialBuilders
@@ -48,6 +49,25 @@ namespace AstroClient.Tools.Skybox.MaterialBuilders
         //    return null;
         //}
 
+        private static Material GetOriginalSkyboxMaterial()
+        {
+            if (SkyboxEditor.isUsingCustomSkybox)
+            {
+                if (SkyboxEditor.OriginalSkybox != null)
+                {
+                    return SkyboxEditor.OriginalSkybox;
+                }
+            }
+            else
+            {
+                if (RenderSettings.skybox != null)
+                {
+                    return RenderSettings.skybox;
+                }
+            }
+            return null;
+        }
+
         internal static Material BuildSixSidedMaterial(Texture2D Up, Texture2D Down, Texture2D Back, Texture2D Front, Texture2D Left, Texture2D Right)
         {
             var reason = new StringBuilder();
@@ -71,15 +91,37 @@ namespace AstroClient.Tools.Skybox.MaterialBuilders
                 var result = new Material(shader);
                 if (result != null)
                 {
-                    result.SetPass(0);
+
+                    if (SkyboxScrollMenu.ShouldCopyOriginalMatProperties)
+                    {
+                        var mat = GetOriginalSkyboxMaterial();
+                        if (mat != null)
+                        {
+                            if (mat.shader.name == "Skybox/6 Sided")
+                            {
+                                Log.Debug("Detected the same shader in original skybox! Copying properties...");
+                                result.CopyPropertiesFromMaterial(mat);
+                            }
+                            else
+                            {
+                                result.SetPass(0);
+                            }
+                        }
+                        else
+                        {
+                            result.SetPass(0);
+                        }
+                    }
+                    else
+                    {
+                        result.SetPass(0);
+                    }
                     result.SetTexture("_UpTex", Up);
                     result.SetTexture("_DownTex", Down);
                     result.SetTexture("_BackTex", Back);
                     result.SetTexture("_FrontTex", Front);
                     result.SetTexture("_LeftTex", Left);
                     result.SetTexture("_RightTex", Right);
-                    result.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-
                     return result;
                 }
             }

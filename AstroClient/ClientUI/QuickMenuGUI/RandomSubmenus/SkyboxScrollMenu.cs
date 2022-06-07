@@ -68,17 +68,22 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 {
                     try
                     {
-                        foreach (var skybox in SkyboxEditor.GeneratedSkyboxesList)
-                            if (skybox != null)
+                        foreach (var entry in SkyboxEditor.GeneratedSkyboxesList)
+                            if (entry.Value != null)
                             {
-                                var btn = new QMSingleButton(CurrentScrollMenu, skybox.Name, () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.Name} as map Skybox.");
-                                if (skybox.Front != null)
-                                    btn.SetButtonImage(skybox.Front);
-                                else if (skybox.Left != null)
-                                    btn.SetButtonImage(skybox.Left);
-                                else if (skybox.Back != null) btn.SetButtonImage(skybox.Back);
+                                var skybox = entry.Value;
+                                if (skybox != null)
+                                {
+                                    var btn = new QMSingleButton(CurrentScrollMenu, skybox.Name, () => { SkyboxEditor.SetRenderSettingSkybox(skybox.Material); }, $"Load Skybox {skybox.Name} as map Skybox.");
+                                    if (skybox.Front != null)
+                                        btn.SetButtonImage(skybox.Front);
+                                    else if (skybox.Left != null)
+                                        btn.SetButtonImage(skybox.Left);
+                                    else if (skybox.Back != null) 
+                                        btn.SetButtonImage(skybox.Back);
 
-                                GeneratedButtons.Add(btn);
+                                    GeneratedButtons.Add(btn);
+                                }
                             }
                     }
                     catch (Exception e)
@@ -142,15 +147,34 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         }
 
 
+        private static QMWingToggleButton MaterialCopierToggle = null;
+        private static bool _shouldCopyOriginalMatProperties = false;
+
+        internal static bool ShouldCopyOriginalMatProperties
+        {
+            get => _shouldCopyOriginalMatProperties;
+            set
+            {
+                
+                _shouldCopyOriginalMatProperties = value;
+                if(MaterialCopierToggle != null)
+                {
+                    MaterialCopierToggle.SetToggleState(value);
+                }
+
+            }
+        }
+
         private static void InitWingPage()
         {
             WingMenu = new QMWings(CurrentScrollMenu, 1007, true, "Skybox Options", "Edit Current Skybox");
-            new QMWingSingleButton(WingMenu, "Refresh", () =>
+            new QMWingSingleButton(WingMenu, "Clear & Reload", () =>
             {
-                SkyboxEditor.FindAndLoadSkyboxes();
                 DestroyGeneratedButtons();
+                SkyboxEditor.ClearAll();
+                SkyboxEditor.FindAndLoadSkyboxes();
                 Regenerate();
-            }, "Reload Skyboxes ");
+            }, "Clear and Reload All Skyboxes");
             new QMWingSingleButton(WingMenu, "Reset Skybox", () => { SkyboxEditor.RestoreOriginalSkybox(); }, "Restore Original Skybox.");
             
             
@@ -168,6 +192,14 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                 }
             }, "Attempts to Export Skybox and save it. (WIP).");
 
+            MaterialCopierToggle = new QMWingToggleButton(WingMenu, "Copy Original Skybox Properties", () =>
+            {
+
+                ShouldCopyOriginalMatProperties = true;
+            }, () =>
+            {
+                ShouldCopyOriginalMatProperties = false;
+            },"Copy Original Skybox Properties in case the applied skybox is not well visible.");
             WingMenu.SetActive(false);
         }
     }

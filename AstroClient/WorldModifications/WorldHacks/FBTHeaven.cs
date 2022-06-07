@@ -147,7 +147,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         Unlock_Door_4 = Lock_Door_4.UdonBehaviour.FindUdonEvent("OffToggle");
                     }
                 }
-                if (SkyboxEditor.SetSkyboxByFileName("Skybox_Hong Kong Skybox"))
+                if (SkyboxEditor.SetSkyboxByFileName("Moon"))
                 {
                     Log.Debug("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                 }

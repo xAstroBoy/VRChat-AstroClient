@@ -230,6 +230,7 @@
     <Compile Include="Tools\Keypads\KeypadRevealerHelper.cs" />
     <Compile Include="Tools\Skybox\Builders\MaterialBuilder.cs" />
     <Compile Include="Tools\Skybox\SkyboxClasses\GeneratedSkyboxes.cs" />
+    <Compile Include="Tools\Skybox\SkyboxStructs\SixSidedFaces.cs" />
     <Compile Include="Tools\TextureTools\ICallManager.cs" />
     <Compile Include="Tools\TextureTools\Il2CppTextureHelper.cs" />
     <Compile Include="Tools\TextureTools\TextureHelper.cs" />

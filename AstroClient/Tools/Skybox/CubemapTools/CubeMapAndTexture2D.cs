@@ -13,14 +13,6 @@ namespace AstroClient.Tools.Skybox.CubemapTools
 
     public static class CubeMapAndTexture2D
     {
-        private static Texture2D CorrectTextureFormat(Texture2D tex)
-        {
-            if (tex.format != TextureFormat.ARGB32)
-            {
-                return TextureHelper.CopyToARGB32CubeMap(tex);
-            }
-            return tex;
-        }
 
         internal static void SaveCubemapToFile(Texture cubemap, string path)
         {
@@ -29,12 +21,25 @@ namespace AstroClient.Tools.Skybox.CubemapTools
                 CubemapFace.PositiveX, CubemapFace.NegativeX,
                 CubemapFace.PositiveY, CubemapFace.NegativeY,
                 CubemapFace.PositiveZ, CubemapFace.NegativeZ };
+            bool isNegativeX = false;
+            bool isPositiveX = false;
 
             foreach (CubemapFace face in faces)
             {
                 try
                 {
-                    var imagepath = Path.Combine(path, $"{face.ToString()}.png");
+                    string filename = $"{face.ToString()}.png";
+                    // Swapping Positive X & NegativeX names due to cubemaps being weird af when loaded.
+                    if(face == CubemapFace.PositiveX)
+                    {
+                        filename = $"{CubemapFace.NegativeX.ToString()}.png";
+                    }
+                    if (face == CubemapFace.NegativeX)
+                    {
+                        filename = $"{CubemapFace.PositiveX.ToString()}.png"; 
+                    }
+
+                    string imagepath = Path.Combine(path,filename);
                     Log.Debug($"Generating Texture of {face}");
                     var newTex = TextureHelper.CopyTexture(cubemap, new Rect(0, 0, cubemap.width, cubemap.height), (int)face);
                     if (newTex != null)
@@ -47,16 +52,31 @@ namespace AstroClient.Tools.Skybox.CubemapTools
                         switch (face)
                         {
                             case CubemapFace.NegativeX:
+                                Rotate(imagepath);
+                                break;
+
                             case CubemapFace.PositiveX:
+                                Rotate(imagepath);
+                                break;
+
                             case CubemapFace.NegativeZ:
+                                Rotate(imagepath);
+                                break;
+
                             case CubemapFace.PositiveZ:
-                                Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(imagepath);
-                                bitmap1.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                                bitmap1.Save(imagepath);
+                                Rotate(imagepath);
                                 break;
                             default:
                                 break;
                         }
+                    }
+
+                    void Rotate(string path)
+                    {
+                        Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(path);
+                        bitmap1.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        bitmap1.Save(path);
+
                     }
                 }
                 catch (Exception e)

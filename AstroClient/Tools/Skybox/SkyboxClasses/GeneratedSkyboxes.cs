@@ -33,12 +33,6 @@ namespace AstroClient.Tools.Skybox.SkyboxClasses
             this.Left = Left;
             this.Right = Right;
             this.Name = Name;
-            Material = MaterialBuilder.BuildSixSidedMaterial(Up, Down, Back, Front, Left, Right);
-            if(Material != null)
-            {
-                Material.name = Name;
-            }
-
         }
 
 
@@ -54,19 +48,37 @@ namespace AstroClient.Tools.Skybox.SkyboxClasses
 
         internal Texture2D Right { get; set; }
 
-        internal Material Material { get; set; }
+        internal Material Material
+        {
+            get
+            {
+                if(GeneratedMat != null)
+                {
+                    UnityEngine.Object.DestroyImmediate(GeneratedMat);
+                }
 
+                GeneratedMat = MaterialBuilder.BuildSixSidedMaterial(Up, Down, Back, Front, Left, Right);
+                if (GeneratedMat != null)
+                {
+                    GeneratedMat.name = Name;
+                    return GeneratedMat;
+                }
+                return null;
+
+            }
+        }
+        private Material GeneratedMat  { get; set; }
         internal string Name { get; set; }
 
         internal void Destroy()
         {
-            UnityEngine.Object.Destroy(Up);
-            UnityEngine.Object.Destroy(Down);
-            UnityEngine.Object.Destroy(Back);
-            UnityEngine.Object.Destroy(Front);
-            UnityEngine.Object.Destroy(Left);
-            UnityEngine.Object.Destroy(Right);
-            UnityEngine.Object.Destroy(Material);
+            UnityEngine.Object.DestroyImmediate(Up);
+            UnityEngine.Object.DestroyImmediate(Down);
+            UnityEngine.Object.DestroyImmediate(Back);
+            UnityEngine.Object.DestroyImmediate(Front);
+            UnityEngine.Object.DestroyImmediate(Left);
+            UnityEngine.Object.DestroyImmediate(Right);
+            UnityEngine.Object.DestroyImmediate(GeneratedMat);
         }
     }
 }
