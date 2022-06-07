@@ -26,6 +26,18 @@ namespace AstroClient.Tools.Skybox.SkyboxClasses
         /// <param name="Name"></param>
         internal GeneratedSkyboxes(Texture2D Up, Texture2D Down, Texture2D Back, Texture2D Front, Texture2D Left, Texture2D Right, string Name)
         {
+            var reason = new StringBuilder();
+            if (Up == null) reason.AppendLine("Up Texture is missing!");
+            if (Down == null) reason.AppendLine("Down Texture is missing!");
+            if (Back == null) reason.AppendLine("Back Texture is missing!");
+            if (Front == null) reason.AppendLine("Front Texture is missing!");
+            if (Left == null) reason.AppendLine("Left Texture is missing!");
+            if (Right == null) reason.AppendLine("Right Texture is missing!");
+            if (Up == null || Down == null || Back == null || Front == null || Left == null || Right == null)
+            {
+                throw new Exception("Failed Material Generation " + reason.ToString());
+            }
+
             this.Up = Up;
             this.Down = Down;
             this.Back = Back;

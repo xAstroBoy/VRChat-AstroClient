@@ -10,8 +10,10 @@ namespace AstroClient.xAstroBoy.Extensions
     public static class CodingExtensions
     {
         public static bool IsEmpty<T>(this List<T> list) => list == null || list.Count == 0;
+        public static bool IsEmpty(this Array list) => list == null || list.Length == 0;
 
         public static bool IsNotEmpty<T>(this List<T> list) => list.Count != 0;
+        public static bool IsNotEmpty(this Array list) => list.Length != 0;
 
         public static bool IsNull<T>(this T obj) where T : class => obj == null;
 

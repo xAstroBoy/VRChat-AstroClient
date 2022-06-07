@@ -107,6 +107,11 @@ namespace AstroClient.Tools.Skybox
                             isSixSidedCube = false;
                             isCubeMap = true;
                             isSupportedSkybox = true;
+                            Log.Debug("This Skybox can be Exported!");
+                            if (Bools.IsDeveloper)
+                            {
+                                PopupUtils.QueHudMessage("This Skybox can Be Exported!".ToRainbow());
+                            }
                             return;
                         }
                     }
@@ -138,21 +143,25 @@ namespace AstroClient.Tools.Skybox
 
         internal static bool IsBundleAlreadyRegistered(string filename)
         {
-            return GeneratedSkyboxesList.ContainsKey(filename);
+            if (GeneratedSkyboxesList.Count != 0)
+            {
+                return GeneratedSkyboxesList.ContainsKey(filename);
+            }
+            return false;
         }
 
         private static IEnumerator LoadSixSidedSkyboxes()
         {
             if (Directory.Exists(SixSidedCubePath))
             {
-                var YoinkedSkyboxesDirs = Directory.GetDirectories(SixSidedCubePath).ToList();
+                var YoinkedSkyboxesDirs = Directory.GetDirectories(SixSidedCubePath);
                 if (YoinkedSkyboxesDirs.IsNotEmpty())
-                    for (var i1 = 0; i1 < YoinkedSkyboxesDirs.Count; i1++)
+                    for (var i1 = 0; i1 < YoinkedSkyboxesDirs.Length; i1++)
                     {
                         var dir = YoinkedSkyboxesDirs[i1];
                         if (!IsBundleAlreadyRegistered(Path.GetFileName(dir)))
                         {
-                            var images = Directory.GetFiles(dir).ToList();
+                            var images = Directory.GetFiles(dir);
                             if (images.IsEmpty()) continue;
                             Texture2D Up = null;
                             Texture2D Down = null;
@@ -229,18 +238,18 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
                             }
-                            var cachedskybox = new GeneratedSkyboxes(Up, Down, Back, Front, Left, Right, Path.GetFileName(dir));
-                            if (cachedskybox != null)
+                            try
                             {
-                                if (cachedskybox.Material != null)
+                                var cachedskybox = new GeneratedSkyboxes(Up, Down, Back, Front, Left, Right, Path.GetFileName(dir));
+                                if (cachedskybox != null)
                                 {
                                     GeneratedSkyboxesList.Add(cachedskybox.Name, cachedskybox);
                                 }
-                                else
-                                {
-                                    Log.Error($"Unable to Generate Material For {Path.GetFileName(dir)}");
-                                    cachedskybox.Destroy();
-                                }
+
+                            }
+                            catch (Exception e)
+                            {
+                                Log.Exception(e);
                             }
 
 
@@ -265,14 +274,14 @@ namespace AstroClient.Tools.Skybox
         {
             if (Directory.Exists(CubemapsPath))
             {
-                var CubeMapsFolders = Directory.GetDirectories(CubemapsPath).ToList();
+                var CubeMapsFolders = Directory.GetDirectories(CubemapsPath);
                 if (CubeMapsFolders.IsNotEmpty())
-                    for (var i1 = 0; i1 < CubeMapsFolders.Count; i1++)
+                    for (var i1 = 0; i1 < CubeMapsFolders.Length; i1++)
                     {
                         var dir = CubeMapsFolders[i1];
                         if (!IsBundleAlreadyRegistered(Path.GetFileName(dir)))
                         {
-                            var images = Directory.GetFiles(dir).ToList();
+                            var images = Directory.GetFiles(dir);
                             if (images.IsEmpty()) continue;
                             Texture2D Right = null;
                             Texture2D Left = null;
@@ -348,18 +357,18 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
                             }
-                            var cachedskybox = new GeneratedSkyboxes(Up, Down, Back, Front, Left, Right, Path.GetFileName(dir));
-                            if (cachedskybox != null)
+                            try
                             {
-                                if (cachedskybox.Material != null)
+                                var cachedskybox = new GeneratedSkyboxes(Up, Down, Back, Front, Left, Right, Path.GetFileName(dir));
+                                if (cachedskybox != null)
                                 {
                                     GeneratedSkyboxesList.Add(cachedskybox.Name, cachedskybox);
                                 }
-                                else
-                                {
-                                    Log.Error($"Unable to Generate Material For {Path.GetFileName(dir)}");
-                                    cachedskybox.Destroy();
-                                }
+
+                            }
+                            catch(Exception e)
+                            {
+                                Log.Exception(e);
                             }
 
 
