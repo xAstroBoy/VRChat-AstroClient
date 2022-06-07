@@ -29,7 +29,6 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         //private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
         private static QMWingSingleButton ExportSkybox;
 
-        private static bool HasExportedSkybox { get; set; }
 
         private static bool HasThrownException { get; set; }
         private static bool CleanOnRoomLeave { get; } = false;
@@ -41,8 +40,6 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         private void OnRoomLeft()
         {
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
-
-            HasExportedSkybox = false;
         }
 
         internal static void InitButtons(QMGridTab menu)
@@ -74,7 +71,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
                                 var skybox = entry.Value;
                                 if (skybox != null)
                                 {
-                                    var btn = new QMSingleButton(CurrentScrollMenu, skybox.Name, () => { SkyboxEditor.SetRenderSettingSkybox(skybox.Material); }, $"Load Skybox {skybox.Name} as map Skybox.");
+                                    var btn = new QMSingleButton(CurrentScrollMenu, skybox.Name, () => { SkyboxEditor.SetRenderSettingSkybox(skybox); }, $"Load Skybox {skybox.Name} as map Skybox.");
                                     if (skybox.Front != null)
                                         btn.SetButtonImage(skybox.Front);
                                     else if (skybox.Left != null)
@@ -129,7 +126,7 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
 
                 if (SkyboxEditor.isSupportedSkybox)
                 {
-                    if (!HasExportedSkybox)
+                    if (!SkyboxEditor.hasExportedSkybox())
                     {
                         if (ExportSkybox != null) ExportSkybox.SetActive(true);
                     }
@@ -168,28 +165,24 @@ namespace AstroClient.ClientUI.Menu.RandomSubmenus
         private static void InitWingPage()
         {
             WingMenu = new QMWings(CurrentScrollMenu, 1007, true, "Skybox Options", "Edit Current Skybox");
-            new QMWingSingleButton(WingMenu, "Clear & Reload", () =>
+            new QMWingSingleButton(WingMenu, "Refresh", () =>
             {
                 DestroyGeneratedButtons();
-                SkyboxEditor.ClearAll();
                 SkyboxEditor.FindAndLoadSkyboxes();
                 Regenerate();
-            }, "Clear and Reload All Skyboxes");
+            }, "Loads all the skyboxes in folders.");
             new QMWingSingleButton(WingMenu, "Reset Skybox", () => { SkyboxEditor.RestoreOriginalSkybox(); }, "Restore Original Skybox.");
+            new QMWingSingleButton(WingMenu, "Reload Custom Skybox Textures", () => { SkyboxEditor.RefreshMaterialTextures(); }, "Refreshes the material textures.");
             
             
             ExportSkybox = new QMWingSingleButton(WingMenu, "Export Skybox", () =>
             {
                 if (SkyboxEditor.isUsingCustomSkybox) return;
-                if (!HasExportedSkybox)
-                {
-                    SkyboxEditor.ExportSkybox();
-                    SkyboxEditor.FindAndLoadSkyboxes();
-                    ExportSkybox.SetActive(false);
-                    HasExportedSkybox = true;
-                    DestroyGeneratedButtons();
-                    Regenerate();
-                }
+                SkyboxEditor.ExportSkybox();
+                SkyboxEditor.FindAndLoadSkyboxes();
+                ExportSkybox.SetActive(false);
+                DestroyGeneratedButtons();
+                Regenerate();
             }, "Attempts to Export Skybox and save it. (WIP).");
 
             MaterialCopierToggle = new QMWingToggleButton(WingMenu, "Copy Original Skybox Properties", () =>

@@ -47,6 +47,8 @@ namespace AstroClient.Tools.Skybox
 
         internal static Dictionary<string, GeneratedSkyboxes> GeneratedSkyboxesList { get; set; } = new();
 
+        internal static List<Material> ExportedSkyboxes { get; set; } = new();
+        internal static GeneratedSkyboxes SelectedSkybox { get; set; }
         internal static Material OriginalSkybox { get; set; } = null;
 
         internal static bool isUsingCustomSkybox { get; set; } = false;
@@ -56,6 +58,30 @@ namespace AstroClient.Tools.Skybox
         internal static bool isCubeMap { get; private set; } = false;
 
         internal static List<AssetBundle> FailedLoadedBundles { get; } = new();
+
+        internal static void RefreshMaterialTextures()
+        {
+            if (SelectedSkybox != null)
+            {
+                MelonCoroutines.Start(SelectedSkybox.UpdateTextures());
+            }
+        }
+
+        internal static bool hasExportedSkybox()
+        {
+            if(!isUsingCustomSkybox)
+            {
+                if (ExportedSkyboxes != null)
+                {
+                    if (ExportedSkyboxes.Count != 0)
+                    {
+                        return ExportedSkyboxes.Contains(RenderSettings.skybox);
+                    }
+                }
+            }
+            return true;
+        }
+
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (!HasLoadedCachedSkyboxes)
@@ -65,39 +91,35 @@ namespace AstroClient.Tools.Skybox
                 HasLoadedCachedSkyboxes = true;
             }
             isUsingCustomSkybox = false;
-            if (RenderSettings.skybox != null)
+            PrintSkyboxInfo();
+            if(CheckIfExportingIsSupported())
             {
-                Log.Debug("[Skybox INFO] : Material name : " + RenderSettings.skybox.name);
-                Log.Debug("[Skybox INFO] : Material Shader : " + RenderSettings.skybox.shader.name);
-                var ReadTextureIDs = RenderSettings.skybox.GetTexturePropertyNames().ToList();
-                for (int i = 0; i < ReadTextureIDs.Count; i++)
+                Log.Debug("This Skybox can be Exported!");
+                isSupportedSkybox = true;
+                if (Bools.IsDeveloper)
                 {
-                    var name = ReadTextureIDs[i];
-                    Log.Debug($"[Skybox INFO] : Texture name : {name}, Type : {RenderSettings.skybox.GetTexture(name).GetIl2CppType().FullName} ");
+                    PopupUtils.QueHudMessage("This Skybox can Be Exported!".ToRainbow());
                 }
+            }
 
-                if (RenderSettings.skybox.shader.name.Contains("Cubemap"))
+        }
+
+
+        internal static bool CheckIfExportingIsSupported()
+        {
+            if (!isUsingCustomSkybox)
+            {
+
+
+                if (RenderSettings.skybox != null)
                 {
-                    isCubeMap = true;
-                    isSupportedSkybox = true;
-                }
-                else
-                {
-
-
-                    
                     var textureIDs = RenderSettings.skybox.GetTexturePropertyNames().ToList();
                     if (textureIDs.Contains("_UpTex") && textureIDs.Contains("_DownTex") && textureIDs.Contains("_BackTex") &&
                         textureIDs.Contains("_FrontTex") && textureIDs.Contains("_LeftTex") && textureIDs.Contains("_RightTex"))
                     {
                         isSixSidedCube = true;
                         isCubeMap = false;
-                        Log.Debug("This Skybox can be Exported!");
-                        isSupportedSkybox = true;
-                        if (Bools.IsDeveloper)
-                        {
-                            PopupUtils.QueHudMessage("This Skybox can Be Exported!".ToRainbow());
-                        }
+                        return true;
                     }
                     else if (textureIDs.Contains("_Tex"))
                     {
@@ -106,30 +128,35 @@ namespace AstroClient.Tools.Skybox
                         {
                             isSixSidedCube = false;
                             isCubeMap = true;
-                            isSupportedSkybox = true;
-                            Log.Debug("This Skybox can be Exported!");
-                            if (Bools.IsDeveloper)
-                            {
-                                PopupUtils.QueHudMessage("This Skybox can Be Exported!".ToRainbow());
-                            }
-                            return;
+                            return true;
                         }
                     }
                     else
                     {
                         isSixSidedCube = false;
                         isCubeMap = false;
-                        isSupportedSkybox = true;
+                        return true;
                     }
                 }
-
-
             }
-            else
+            return false;
+        }
+
+        internal static void PrintSkyboxInfo()
+        {
+            if (!isUsingCustomSkybox)
             {
-                isSixSidedCube = false;
-                isCubeMap = false;
-                isSupportedSkybox = false;
+                if (RenderSettings.skybox != null)
+                {
+                    Log.Debug("[Skybox INFO] : Material name : " + RenderSettings.skybox.name);
+                    Log.Debug("[Skybox INFO] : Material Shader : " + RenderSettings.skybox.shader.name);
+                    var ReadTextureIDs = RenderSettings.skybox.GetTexturePropertyNames().ToList();
+                    for (int i = 0; i < ReadTextureIDs.Count; i++)
+                    {
+                        var name = ReadTextureIDs[i];
+                        Log.Debug($"[Skybox INFO] : Texture name : {name}, Type : {RenderSettings.skybox.GetTexture(name).GetIl2CppType().FullName} ");
+                    }
+                }
             }
         }
 
@@ -139,6 +166,8 @@ namespace AstroClient.Tools.Skybox
             isSupportedSkybox = false;
             isUsingCustomSkybox = false;
             OriginalSkybox = null;
+            SelectedSkybox = null;
+            ExportedSkyboxes.Clear();
         }
 
         internal static bool IsBundleAlreadyRegistered(string filename)
@@ -158,7 +187,8 @@ namespace AstroClient.Tools.Skybox
                     for (var i1 = 0; i1 < YoinkedSkyboxesDirs.Length; i1++)
                     {
                         var dir = YoinkedSkyboxesDirs[i1];
-                        if (!IsBundleAlreadyRegistered(Path.GetFileName(dir)))
+                        var foldername = Path.GetFileName(dir);
+                        if (!IsBundleAlreadyRegistered(foldername))
                         {
                             var images = Directory.GetFiles(dir);
                             if (images.IsEmpty()) continue;
@@ -168,12 +198,20 @@ namespace AstroClient.Tools.Skybox
                             Texture2D Front = null;
                             Texture2D Left = null;
                             Texture2D Right = null;
-                            foreach (var imagepaths in images)
+                            string  Path_Up = null;
+                            string  Path_Down = null;
+                            string  Path_Back = null;
+                            string  Path_Front = null;
+                            string  Path_Left = null;
+                            string  Path_Right = null;
+
+                            foreach (var image_path in images)
                             {
                                 //Log.Debug("Found File in " + imagepaths);
-                                if (Up == null && imagepaths.EndsWith(Image_Up + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Up == null && image_path.EndsWith(Image_Up + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    Up = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    Path_Up = image_path;
+                                    Up = CheetoUtils.LoadPNGFromDir(image_path);
                                     if (Up != null)
                                     {
                                         Up.wrapMode = TextureWrapMode.Clamp;
@@ -182,9 +220,11 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Down == null && imagepaths.EndsWith(Image_Down + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Down == null && image_path.EndsWith(Image_Down + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    Down = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    Path_Down = image_path;
+
+                                    Down = CheetoUtils.LoadPNGFromDir(image_path);
                                     if (Down != null)
                                     {
                                         Down.wrapMode = TextureWrapMode.Clamp;
@@ -193,9 +233,11 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Back == null && imagepaths.EndsWith(Image_Back + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Back == null && image_path.EndsWith(Image_Back + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    Back = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    Path_Back = image_path;
+
+                                    Back = CheetoUtils.LoadPNGFromDir(image_path);
                                     if (Back != null)
                                     {
                                         Back.wrapMode = TextureWrapMode.Clamp;
@@ -204,9 +246,10 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Front == null && imagepaths.EndsWith(Image_Front + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Front == null && image_path.EndsWith(Image_Front + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    Front = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    Path_Front = image_path;
+                                    Front = CheetoUtils.LoadPNGFromDir(image_path);
                                     if (Front != null)
                                     {
                                         Front.wrapMode = TextureWrapMode.Clamp;
@@ -215,9 +258,11 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Left == null && imagepaths.EndsWith(Image_Left + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Left == null && image_path.EndsWith(Image_Left + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    Left = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    Path_Left = image_path;
+
+                                    Left = CheetoUtils.LoadPNGFromDir(image_path);
                                     if (Left != null)
                                     {
                                         Left.wrapMode = TextureWrapMode.Clamp;
@@ -226,9 +271,10 @@ namespace AstroClient.Tools.Skybox
                                     }
                                 }
 
-                                if (Right == null && imagepaths.EndsWith(Image_Right + ".png", StringComparison.CurrentCultureIgnoreCase))
+                                if (Right == null && image_path.EndsWith(Image_Right + ".png", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    Right = CheetoUtils.LoadPNGFromDir(imagepaths);
+                                    Path_Right = image_path;
+                                    Right = CheetoUtils.LoadPNGFromDir(image_path);
                                     if (Right != null)
                                     {
                                         Right.wrapMode = TextureWrapMode.Clamp;
@@ -239,7 +285,8 @@ namespace AstroClient.Tools.Skybox
                             }
                             try
                             {
-                                var cachedskybox = new GeneratedSkyboxes(Up, Down, Back, Front, Left, Right, Path.GetFileName(dir));
+
+                                var cachedskybox = new GeneratedSkyboxes(Up, Path_Up, Down, Path_Down, Back, Path_Back, Front, Path_Front, Left, Path_Left, Right, Path_Right, foldername);
                                 if (cachedskybox != null)
                                 {
                                     GeneratedSkyboxesList.Add(cachedskybox.Name, cachedskybox);
@@ -250,15 +297,9 @@ namespace AstroClient.Tools.Skybox
                             {
                                 Log.Exception(e);
                             }
-
-
-
                             yield return new WaitForSeconds(0.001f);
                         }
-                        else
-                        {
-                            Log.Warn("Skipping Registered Exported Skybox :" + Path.GetFileName(dir));
-                        }
+
                     }
                 else
                     Log.Warn("No Skyboxes Found here : " + MainFolder);
@@ -319,6 +360,11 @@ namespace AstroClient.Tools.Skybox
                     RenderSettings.skybox.GetTexture("_FrontTex").SaveTextureAsPNG(savepath, SixSidedFaces.FrontTex);
                     RenderSettings.skybox.GetTexture("_LeftTex").SaveTextureAsPNG(savepath, SixSidedFaces.LeftTex);
                     RenderSettings.skybox.GetTexture("_RightTex").SaveTextureAsPNG(savepath, SixSidedFaces.RightTex);
+
+                    if (!ExportedSkyboxes.Contains(RenderSettings.skybox))
+                    {
+                        ExportedSkyboxes.Add(RenderSettings.skybox);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -337,6 +383,10 @@ namespace AstroClient.Tools.Skybox
                     {
                         Log.Debug("This is a Cubemap! Attempting to save...");
                         CubeMapAndTexture2D.SaveCubemapToFile(Tex, savepath);
+                        if (!ExportedSkyboxes.Contains(RenderSettings.skybox))
+                        {
+                            ExportedSkyboxes.Add(RenderSettings.skybox);
+                        }
                     }
                 }
                 catch (Exception e)
@@ -353,16 +403,17 @@ namespace AstroClient.Tools.Skybox
             return true;
         }
 
-        internal static void SetRenderSettingSkybox(Material mat)
+        internal static void SetRenderSettingSkybox(GeneratedSkyboxes Skybox)
         {
-            if (mat != null)
+            if (Skybox != null)
             {
                 if (!isUsingCustomSkybox)
                 {
                     OriginalSkybox = RenderSettings.skybox;
                     isUsingCustomSkybox = true;
                 }
-                RenderSettings.skybox = mat;
+                SelectedSkybox = Skybox;
+                RenderSettings.skybox = Skybox.Material;
             }
         }
         internal static void RestoreOriginalSkybox()
@@ -372,13 +423,11 @@ namespace AstroClient.Tools.Skybox
                 isUsingCustomSkybox = false;
                 RenderSettings.skybox = OriginalSkybox;
                 OriginalSkybox = null;
+                SelectedSkybox = null;
+
             }
         }
 
-        internal static void SetRenderSettingSkybox(GeneratedSkyboxes skybox)
-        {
-            SetRenderSettingSkybox(skybox.Material);
-        }
 
         internal static bool SetSkyboxByFileName(string name)
         {
@@ -389,7 +438,7 @@ namespace AstroClient.Tools.Skybox
             }
             if (GeneratedSkyboxesList.ContainsKey(name))
             {
-                SetRenderSettingSkybox(GeneratedSkyboxesList[name].Material);
+                SetRenderSettingSkybox(GeneratedSkyboxesList[name]);
                 return true;
             }
             else
@@ -399,18 +448,6 @@ namespace AstroClient.Tools.Skybox
             }
 
             return false;
-        }
-
-        internal static void ClearAll()
-        {
-
-            RestoreOriginalSkybox();
-            foreach (var skybox in GeneratedSkyboxesList)
-            {
-                skybox.Value.Destroy();
-            }
-            GeneratedSkyboxesList.Clear();
-            HasLoadedCachedSkyboxes = false;
         }
 
     
