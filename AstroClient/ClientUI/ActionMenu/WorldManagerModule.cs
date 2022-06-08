@@ -2,7 +2,10 @@ using AstroClient.ClientActions;
 using AstroClient.ClientUI.Menu.Menus.Quickmenu;
 using AstroClient.Spawnables.ColliderSuppresserCube;
 using AstroClient.Spawnables.Flashlight;
+using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.Tools.ObjectEditor;
+using AstroClient.Tools.World;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using UnityEngine;
 
 namespace AstroClient.ClientUI.ActionMenu
@@ -44,6 +47,10 @@ namespace AstroClient.ClientUI.ActionMenu
 
                 CustomSubMenu.AddSubMenu("Pickups Controls", () =>
                 {
+                    CustomSubMenu.AddButton("Revert Pickup Edits", () =>
+                    {
+                        WorldUtils_Old.Get_Pickups().Pickup_RestoreOriginalProperties();
+                    }, null);
 
                     CustomSubMenu.AddButton("Restore Original pickups pos", () =>
                     {
@@ -69,6 +76,11 @@ namespace AstroClient.ClientUI.ActionMenu
                     {
                         ObjectMiscOptions.SetGravityOnWorldPickups(false);
                     },  null);
+                    CustomSubMenu.AddButton("Pickup Hulk Toss", () =>
+                    {
+                        WorldUtils_Old.Get_Pickups().Pickup_Set_ThrowVelocityBoostScale(9.5f);
+                    }, null);
+
 
                 }, null);
             });

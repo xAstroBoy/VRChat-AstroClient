@@ -213,51 +213,10 @@ internal class SnaxyTagsSystem : AstroEvents
         SnaxySocket = new WebSocket("ws://45.56.79.98:81");
         SnaxySocket.SetCookie(new Cookie("uid", GeneratedUserID));
         SnaxySocket.SetCookie(new Cookie("melonversion", (string)typeof(BuildInfo).GetField("Version").GetValue(null)));
-        SnaxySocket.Log.Output = delegate
-        {
-        };
-        SnaxySocket.OnError += delegate
-        {
-            SnaxySocket = null;
-            InitiateWebsocket();
-        };
-        SnaxySocket.OnClose += delegate
-        {
-            SnaxySocket = null;
-            InitiateWebsocket();
-        };
-        SnaxySocket.OnMessage += delegate (object sender, MessageEventArgs e)
-        {
-            string text = e.Data.ToString();
-            var Command = text.Split(',')[0];
-            var Content = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]));
-            Log.Write($"Snaxy OnMessage : Command : {Command}, : {Content}");
-
-
-            if (Command == "getKey" && SnaxyKey != Content)
-            {
-                Log.Write($"[SnaxyTag] : Got key from socket. {Content}");
-                SnaxyKey = Content;
-                if (SnaxySocket != null && VRCPlayer.field_Internal_Static_VRCPlayer_0 != null)
-                {
-                    foreach (Player item in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray())
-                    {
-                        SnaxySocket.Send("getUser," + GetGroupSaveGetPermissions(item.GetAPIUser().GetUserID(), SnaxyKey));
-                    }
-                }
-            }
-            if (text.Split(',')[0] == "gotConsoleMsgName" && SnaxyConsole != Content)
-            {
-
-                SnaxyConsole = Content;
-                Log.Write($"[SnaxyTag] Console :{SnaxyConsole}");
-            }
-            if (text.Split(',')[0] == "OutdatedMelons")
-            {
-                Log.Write($"[SnaxyTag] :{Content}");
-            }
-            MelonCoroutines.Start(WebsocketTag(text));
-        };
+        SnaxySocket.Log.Output += OnOutput;
+        SnaxySocket.OnError += OnError;
+        SnaxySocket.OnClose += OnClose;
+        SnaxySocket.OnMessage += OnMessage;
         SnaxySocket.OnOpen += async delegate
         {
             await Task.Delay(250);
@@ -266,12 +225,67 @@ internal class SnaxyTagsSystem : AstroEvents
         SnaxySocket.Connect();
     }
 
+    private void OnOutput(LogData arg1, string arg2)
+    {
+        Log.Debug($"[SnaxyTag] Logger : {arg2}");
+
+    }
+
+    private void OnError(object sender, ErrorEventArgs e)
+    {
+        Log.Debug($"[SnaxyTag] Connection lost , Reason : {e.Message}!");
+        SnaxySocket = null;
+        InitiateWebsocket();
+    }
+
+
+    private void OnClose(object sender, CloseEventArgs closeEventArgs)
+    {
+
+        Log.Debug($"[SnaxyTag] Connection lost , Reason : {closeEventArgs.Reason} !");
+        SnaxySocket = null;
+        InitiateWebsocket();
+
+    }
+
+    private void OnMessage(object sender, MessageEventArgs e)
+    {
+        string text = e.Data.ToString();
+        var Command = text.Split(',')[0];
+        var Content = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[1]));
+        //Log.Write($"Snaxy OnMessage : Command : {Command}, : {Content}");
+
+
+        if (Command == "getKey" && SnaxyKey != Content)
+        {
+            //Log.Write($"[SnaxyTag] : Got key from socket. {Content}");
+            SnaxyKey = Content;
+            if (SnaxySocket != null && VRCPlayer.field_Internal_Static_VRCPlayer_0 != null)
+            {
+                foreach (Player item in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray())
+                {
+                    SnaxySocket.Send("getUser," + GetGroupSaveGetPermissions(item.GetAPIUser().GetUserID(), SnaxyKey));
+                }
+            }
+        }
+        if (text.Split(',')[0] == "gotConsoleMsgName" && SnaxyConsole != Content)
+        {
+
+            SnaxyConsole = Content;
+            Log.Write($"[SnaxyTag] Console :{SnaxyConsole}");
+        }
+        if (text.Split(',')[0] == "OutdatedMelons")
+        {
+            Log.Write($"[SnaxyTag] :{Content}");
+        }
+        MelonCoroutines.Start(WebsocketTag(text));
+    }
     private void OnPlayerJoin(Player player)
     {
         if (SnaxySocket != null)
         {
             var Message = GetGroupSaveGetPermissions(player.GetAPIUser().GetUserID(), SnaxyKey);
-            Log.Write($"[SnaxyTag] : Sending Request getUser , Message : {Message}");
+            //Log.Write($"[SnaxyTag] : Sending Request getUser , Message : {Message}");
             SnaxySocket.Send("getUser," + Message);
         }
     }

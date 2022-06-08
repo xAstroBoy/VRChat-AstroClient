@@ -299,6 +299,18 @@
             }
         }
 
+
+        internal static void Pickup_Set_ThrowVelocityBoostScale(this List<GameObject> items, float ThrowVelocityBoostScale)
+        {
+            foreach (var obj in items)
+            {
+                if (obj != null)
+                {
+                    obj.GetOrAddComponent<PickupController>().Pickup_Set_ThrowVelocityBoostScale(ThrowVelocityBoostScale);
+                }
+            }
+        }
+
         internal static string Get_IsHeld_ButtonText(this PickupController controller)
         {
             if (controller != null)

@@ -6,11 +6,13 @@ using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
+    using AstroClient.AstroMonos.Components.Tools.Listeners;
+    using AstroClient.Tools.Bruteforcer;
+    using AstroClient.xAstroBoy.Utility;
+    using AstroMonos.AstroUdons;
+    using CustomClasses;
     using System;
     using System.Collections.Generic;
-    using AstroMonos.AstroUdons;
-    using AstroMonos.Components.Spoofer;
-    using CustomClasses;
     using Tools.UdonEditor;
     using Tools.UdonSearcher;
     using UnityEngine;
@@ -28,6 +30,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static bool CreateMatchOnGameEnd { get; set; } = false;
 
         private static bool _HasSubscribed = false;
+
         private static bool HasSubscribed
         {
             get => _HasSubscribed;
@@ -37,16 +40,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.Udon_SendCustomEvent += UdonSendCustomEvent;
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.Udon_SendCustomEvent -= UdonSendCustomEvent;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -55,9 +55,9 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void UdonSendCustomEvent(UdonBehaviour item, string eventkey)
         {
-            if(item != null)
+            if (item != null)
             {
-                if(item.gameObject.name.isMatchWholeWord("NetworkingManager"))
+                if (item.gameObject.name.isMatchWholeWord("NetworkingManager"))
                 {
                     if (eventkey.isMatchWholeWord("_OnGameReset"))
                     {
@@ -78,10 +78,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                         StartANewMatch();
                     }
                 }
-
             }
         }
-
 
         private static void StartANewMatch()
         {
@@ -90,7 +88,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 StartNewMatchCreation.InvokeBehaviour();
                 CreateMatchOnGameEnd = false;
             }
-            
         }
 
         // TODO : Rewrite this (read and cache from behaviour themself!)
@@ -145,11 +142,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     BilliardsModule = BilliardsModuleEvent.RawItem;
                     BilliardModule_TriggerGlobalSettingsUpdated = BilliardsModule.gameObject.FindUdonEvent("BilliardsModule", "_TriggerGlobalSettingsUpdated");
-                    StartNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent( "_TriggerLobbyOpen");
+                    StartNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyOpen");
                     CloseNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyClosed");
                     StartMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameStart");
                     ResetMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameReset");
-
                 }
                 else
                 {
@@ -189,7 +185,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         Log.Warn("failed to Find NetworkingManager");
                     }
                     NetworkingManager_OnGlobalSettingsChanged = networkingpath.FindUdonEvent("_OnGlobalSettingsChanged");
-                    if(NetworkingManager_OnGlobalSettingsChanged == null)
+                    if (NetworkingManager_OnGlobalSettingsChanged == null)
                     {
                         Log.Warn("Unable to Find NetworkingManager _OnGlobalSettingsChanged");
                     }
@@ -198,8 +194,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     Log.Warn("failed to Find NetworkingManager");
                 }
-
-
 
                 var PoolParlorModule_unpacked = UdonSearch.FindUdonEvent("PoolParlorModule", "_GetSAOMenu");
                 if (PoolParlorModule_unpacked != null)
@@ -210,6 +204,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 GetCurrentTable();
                 GetCurrentCue();
                 SetupCues();
+                SetupBruteforcerForPopCat();
             }
             else
             {
@@ -220,6 +215,73 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
         }
+
+        private static List<string> KnownCommands => new List<string>
+        {
+            "?",
+           "help",
+           "version",
+           "v",
+           "tournament",
+           "t",
+           "list",
+           "finger",
+           "clear",
+           "si",
+           "hi",
+           "sync",
+        };
+
+        private static void SetupBruteforcerForPopCat()
+        {
+
+            var popcat = GameObject.Find("Pool Parlour/Dynamic/EasterEggs/PortablePopCat");
+            if (popcat != null)
+            {
+                var listener = popcat.gameObject.GetOrAddComponent<GameObjectListener>();
+                if(listener != null)
+                {
+                    listener.OnEnabled += () =>
+                    {
+                        TextBruteforcer.HasFoundCode = true;
+                    };
+                }
+                SendCommand = UdonSearch.FindUdonEvent("PoolParlorModule", "_OnChatCommand");
+                if (SendCommand != null)
+                {
+                    CommandInput = new AstroUdonVariable<string>(SendCommand.RawItem, "inCommand");
+                    if (CommandInput != null)
+                    {
+                        TextBruteforcer.TestPasscode += delegate (string a)
+                        {
+                            if (KnownCommands.Contains(a.ToLower()))
+                            {
+                                return;
+                            }
+                            Log.Debug($"Testing command : {a}");
+                            CommandInput.Value = a;
+                            SendCommand.InvokeBehaviour();
+                        };
+
+                    }
+                    else
+                    {
+                        Log.Warn("Unable to Find CommandInput");
+                    }
+                }
+                else
+                {
+                    Log.Warn("failed to Find PoolParlorModule _OnChatCommand");
+                }
+            }
+            else
+            {
+                Log.Warn("failed to Find PortablePopCat");
+            }
+        }
+
+        private static AstroUdonVariable<string> CommandInput = null;
+        private static UdonBehaviour_Cached SendCommand = null;
 
         internal static void GetCurrentTable()
         {
@@ -292,24 +354,19 @@ namespace AstroClient.WorldModifications.WorldHacks
             UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_72681C8A3F190167F4664BA51221AA32_Int32", value);
             UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte", (byte)value);
             UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_680845797CF11D637DB85E28135E758C_Int32", value);
-
-
         }
 
         private static void SetTableSkin_PoolParlorModule(int value)
         {
             UdonHeapEditor.PatchHeap(PoolParlorModule, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", value);
             UdonHeapEditor.PatchHeap(PoolParlorModule, "__1_mp_680845797CF11D637DB85E28135E758C_Int32", value);
-
         }
 
         private static void SetTableSkin_NetworkingManager(int value)
         {
             UdonHeapEditor.PatchHeap(NetworkingManager, "tableSkinSynced", ((byte)value));
             UdonHeapEditor.PatchHeap(NetworkingManager, "__0_mp_72681C8A3F190167F4664BA51221AA32_Byte", (byte)value);
-
         }
-
 
         internal static void SetCueSkin(int skin)
         {
@@ -326,23 +383,23 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             try
             {
-                UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin",value);
+                UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", value);
             }
             catch { } // Nobody cares .
             try
             {
-                UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin",value);
+                UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", value);
             }
             catch { } // Nobody cares .
 
             try
             {
-                UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin",value);
+                UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin", value);
             }
             catch { } // Nobody cares .
             try
             {
-                UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin",value);
+                UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", value);
             }
             catch { } // Nobody cares .
         }
@@ -491,7 +548,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     TableSkinBtn.SetButtonText(value.ToString());
                 }
-                SetTableSkin((int) value);
+                SetTableSkin((int)value);
             }
         }
 

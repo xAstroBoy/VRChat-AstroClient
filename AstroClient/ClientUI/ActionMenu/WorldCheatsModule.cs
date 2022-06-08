@@ -4,6 +4,7 @@ using AstroClient.ClientResources.Loaders;
 using AstroClient.ClientUI.Menu.ESP;
 using AstroClient.Constants;
 using AstroClient.Gompoc.ActionMenuAPI.Api;
+using AstroClient.Tools.Bruteforcer;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Player.Movement.Exploit;
 using AstroClient.WorldModifications.WorldHacks;
@@ -246,6 +247,8 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddButton("Abort Match Creation", () => { PoolParlor.CloseNewMatchCreation.InvokeBehaviour(); });
                 CustomSubMenu.AddButton("Start Match", () => { PoolParlor.StartMatch.InvokeBehaviour(); });
                 CustomSubMenu.AddButton("Reset Match", () => { PoolParlor.ResetMatch.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Bruteforce Popcat", () => { TextBruteforcer.StartBruteforcer = true; });
+
             }
 
             #endregion Pool Parlor

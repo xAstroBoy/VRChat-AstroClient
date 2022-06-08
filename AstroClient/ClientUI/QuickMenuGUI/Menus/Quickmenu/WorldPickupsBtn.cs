@@ -28,6 +28,9 @@
             _ = new QMSingleButton(sub, "Enable World Gravity on All Pickups", () => { ObjectMiscOptions.SetGravityOnWorldPickups(true); }, "Gravity Toggler");
             _ = new QMSingleButton(sub, "Disable Gravity on All Pickups ", () => { ObjectMiscOptions.SetGravityOnWorldPickups(false); }, "Space Mode for all pickups");
 
+            _ = new QMSingleButton(sub, "Pickup Hulk Toss", () => { WorldUtils_Old.Get_Pickups().Pickup_Set_ThrowVelocityBoostScale(9.5f); }, "Toss Pickups with Extreme Velocity!");
+
+
         }
     }
 }
