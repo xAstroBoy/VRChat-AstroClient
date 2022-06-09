@@ -258,9 +258,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                             {
                                 return;
                             }
-                            Log.Debug($"Testing command : {a}");
+                            //Log.Debug($"Testing command : {a}");
                             CommandInput.Value = a;
                             SendCommand.InvokeBehaviour();
+                            if(popcat.gameObject.active)
+                            {
+                                Log.Debug("Command for Popcat is : " + a);
+                            }
                         };
 
                     }

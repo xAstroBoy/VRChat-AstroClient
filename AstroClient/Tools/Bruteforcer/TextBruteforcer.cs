@@ -145,8 +145,6 @@
                     _ASCII.Add('x');
                     _ASCII.Add('y');
                     _ASCII.Add('z');
-                    _ASCII.Add('z');
-
                     //char letter = '0';
                     //for (int i = 0; i < 81; i++)
                     //{
@@ -207,12 +205,13 @@
         {
             List<char> passwordAttempt = new List<char>();
 
-            passwordAttempt.Add('g'); // First character to be checked (if there is a minimum length, add more 0s to the list)
-            passwordAttempt.Add('c');
-            passwordAttempt.Add('b');
-            passwordAttempt.Add('w');
-            passwordAttempt.Add('u');
-            passwordAttempt.Add('g');
+            passwordAttempt.Add('a'); // First character to be checked (if there is a minimum length, add more 0s to the list)
+            passwordAttempt.Add('b'); // First character to be checked (if there is a minimum length, add more 0s to the list)
+            passwordAttempt.Add('a');
+            passwordAttempt.Add('a');
+            passwordAttempt.Add('a');
+            passwordAttempt.Add('a');
+            passwordAttempt.Add('a');
             int Counter = 0;
             while (!HasFoundCode)
             {
@@ -234,7 +233,7 @@
 
                 // Check if the password is correct
                 CheckPassword(ref passwordAttempt);
-                if (Counter > 1000)
+                if (Counter > 10000)
                 {
                     Counter = 0;
                     yield return new WaitForEndOfFrame();
