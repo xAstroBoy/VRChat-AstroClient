@@ -1,6 +1,6 @@
 ﻿using AstroClient.ClientActions;
 
-namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
+namespace AstroClient.AstroMonos.Components.ESP
 {
     using System;
     using System.Linq;
@@ -11,11 +11,11 @@ namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_VRCInteractable : MonoBehaviour
+    public class ESP_ItemTweaker : MonoBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
-        public ESP_VRCInteractable(IntPtr obj0) : base(obj0)
+        public ESP_ItemTweaker(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
@@ -27,7 +27,7 @@ namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
         {
             if (DebugMode)
             {
-                Log.Debug($"[ESP_VRCInteractable Debug] : {msg}");
+                Log.Debug($"[ESP_ItemTweaker Debug] : {msg}");
             }
         }
 
@@ -38,7 +38,7 @@ namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
             ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
             if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
             {
-                Log.Error($"Unable to add ESP_VRCInteractable to  {gameObject.name} due to MeshRenderer Being null or empty");
+                Log.Error($"Unable to add ESP_ItemTweaker to  {gameObject.name} due to MeshRenderer Being null or empty");
                 Destroy(this);
                 return;
             }
@@ -57,7 +57,6 @@ namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
                 }
             }
         }
-
 
         private void SetupHighlighter()
         {
@@ -83,13 +82,19 @@ namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
             }
         }
 
+        //void OnBecameInvisible()
+        //{
+        //    HighLightOptions.enabled = false;
+        //}
+        //void OnBecameVisible()
+        //{
+        //    HighLightOptions.enabled = true;
+        //}
+
         internal void ResetColor()
         {
             ESPColor = DefaultColor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighlighterColor(DefaultColor);
-            }
+            HighLightOptions?.SetHighlighterColor(DefaultColor);
         }
 
         internal void OnDestroy()
@@ -111,20 +116,14 @@ namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
         internal void ChangeColor(Color newcolor)
         {
             ESPColor = newcolor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighlighterColor(newcolor);
-            }
+            HighLightOptions?.SetHighlighterColor(newcolor);
         }
 
         internal void ChangeColor(string HexColor)
         {
             Color hextocolor = ColorUtils.HexToColor(HexColor);
             ESPColor = hextocolor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighlighterColor(hextocolor);
-            }
+            HighLightOptions?.SetHighlighterColor(hextocolor);
         }
 
         internal Color GetCurrentESPColor
@@ -133,11 +132,6 @@ namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
             get
             {
                 return HighLightOptions.highlightColor;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                HighLightOptions.highlightColor = value;
             }
         }
         private bool _HasSubscribed = false;
@@ -173,7 +167,7 @@ namespace AstroClient.AstroMonos.Components.ESP.VRCInteractable
         }
 
         internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("E47D39");
+        internal Color DefaultColor { [HideFromIl2Cpp] get; } = Color.yellow;
 
         internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;

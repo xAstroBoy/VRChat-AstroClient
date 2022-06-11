@@ -1,6 +1,6 @@
 ﻿using AstroClient.ClientActions;
 
-namespace AstroClient.AstroMonos.Components.ESP.UdonBehaviour
+namespace AstroClient.AstroMonos.Components.ESP
 {
     using System;
     using System.Linq;
@@ -11,11 +11,11 @@ namespace AstroClient.AstroMonos.Components.ESP.UdonBehaviour
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_UdonBehaviour : MonoBehaviour
+    public class ESP_VRCInteractable : MonoBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
-        public ESP_UdonBehaviour(IntPtr obj0) : base(obj0)
+        public ESP_VRCInteractable(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
@@ -27,7 +27,7 @@ namespace AstroClient.AstroMonos.Components.ESP.UdonBehaviour
         {
             if (DebugMode)
             {
-                Log.Debug($"[ESP_UdonBehaviour Debug] : {msg}");
+                Log.Debug($"[ESP_VRCInteractable Debug] : {msg}");
             }
         }
 
@@ -38,7 +38,7 @@ namespace AstroClient.AstroMonos.Components.ESP.UdonBehaviour
             ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
             if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
             {
-                Log.Error($"Unable to add ESP_UdonBehaviour to  {gameObject.name} due to MeshRenderer Being null or empty");
+                Log.Error($"Unable to add ESP_VRCInteractable to  {gameObject.name} due to MeshRenderer Being null or empty");
                 Destroy(this);
                 return;
             }
@@ -81,33 +81,15 @@ namespace AstroClient.AstroMonos.Components.ESP.UdonBehaviour
                 }
             }
         }
-        private bool _HasSubscribed = false;
-        private bool HasSubscribed
-        {
-            [HideFromIl2Cpp]
-            get => _HasSubscribed;
-            [HideFromIl2Cpp]
-            set
-            {
-                if (_HasSubscribed != value)
-                {
-                    if (value)
-                    {
 
-                        ClientEventActions.OnRoomLeft += OnRoomLeft;
-
-                    }
-                    else
-                    {
-
-                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
-                    }
-                }
-                _HasSubscribed = value;
-            }
-        }
-
+        //void OnBecameInvisible()
+        //{
+        //    HighLightOptions.enabled = false;
+        //}
+        //void OnBecameVisible()
+        //{
+        //    HighLightOptions.enabled = true;
+        //}
 
         internal void ResetColor()
         {
@@ -152,13 +134,40 @@ namespace AstroClient.AstroMonos.Components.ESP.UdonBehaviour
                 return HighLightOptions.highlightColor;
             }
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
         private void OnRoomLeft()
         {
             Destroy(this);
         }
 
         internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("CD14C7");
+        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("EF2C3F");
 
         internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;

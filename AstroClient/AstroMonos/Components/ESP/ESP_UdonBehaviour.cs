@@ -1,6 +1,6 @@
 ﻿using AstroClient.ClientActions;
 
-namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
+namespace AstroClient.AstroMonos.Components.ESP
 {
     using System;
     using System.Linq;
@@ -11,11 +11,11 @@ namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_ItemTweaker : MonoBehaviour
+    public class ESP_UdonBehaviour : MonoBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
-        public ESP_ItemTweaker(IntPtr obj0) : base(obj0)
+        public ESP_UdonBehaviour(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
             AntiGcList.Add(this);
@@ -27,7 +27,7 @@ namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
         {
             if (DebugMode)
             {
-                Log.Debug($"[ESP_Tweaker Debug] : {msg}");
+                Log.Debug($"[ESP_UdonBehaviour Debug] : {msg}");
             }
         }
 
@@ -35,15 +35,27 @@ namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
         internal void Start()
         {
             ESPColor = DefaultColor;
-            ObjRenderers = gameObject.GetComponentsInChildren<Renderer>(true);
-            if (ObjRenderers == null && ObjRenderers.Count() == 0)
+            ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
+            if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
             {
-                Log.Error($"Unable to add ESP_Tweaker to  {gameObject.name} due to Renderer Being null or empty");
+                Log.Error($"Unable to add ESP_UdonBehaviour to  {gameObject.name} due to MeshRenderer Being null or empty");
                 Destroy(this);
                 return;
             }
             SetupHighlighter();
             HasSubscribed = true;
+            for (int i = 0; i < ObjMeshRenderers.Count; i++)
+            {
+                MeshRenderer obj = ObjMeshRenderers[i];
+                if (obj != null && obj.gameObject.active)
+                {
+                    HighLightOptions.AddRenderer(obj);
+                }
+                else
+                {
+                    HighLightOptions.RemoveRenderer(obj);
+                }
+            }
         }
 
         private void SetupHighlighter()
@@ -55,9 +67,9 @@ namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighlighterColor(ESPColor);
-                for (int i = 0; i < ObjRenderers.Count; i++)
+                for (int i = 0; i < ObjMeshRenderers.Count; i++)
                 {
-                    Renderer obj = ObjRenderers[i];
+                    MeshRenderer obj = ObjMeshRenderers[i];
                     if (obj != null && obj.gameObject.active)
                     {
                         HighLightOptions.AddRenderer(obj);
@@ -70,6 +82,58 @@ namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
             }
         }
 
+        //void OnBecameInvisible()
+        //{
+        //    HighLightOptions.enabled = false;
+        //}
+        //void OnBecameVisible()
+        //{
+        //    HighLightOptions.enabled = true;
+        //}
+
+        internal void ResetColor()
+        {
+            ESPColor = DefaultColor;
+            HighLightOptions?.SetHighlighterColor(DefaultColor);
+        }
+
+        internal void OnDestroy()
+        {
+            HasSubscribed = false;
+            HighLightOptions.DestroyHighlighter();
+        }
+
+        internal void OnEnable()
+        {
+            HighLightOptions.enabled = true;
+        }
+
+        internal void OnDisable()
+        {
+            HighLightOptions.enabled = false;
+        }
+
+        internal void ChangeColor(Color newcolor)
+        {
+            ESPColor = newcolor;
+            HighLightOptions?.SetHighlighterColor(newcolor);
+        }
+
+        internal void ChangeColor(string HexColor)
+        {
+            Color hextocolor = ColorUtils.HexToColor(HexColor);
+            ESPColor = hextocolor;
+            HighLightOptions?.SetHighlighterColor(hextocolor);
+        }
+
+        internal Color GetCurrentESPColor
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return HighLightOptions.highlightColor;
+            }
+        }
         private bool _HasSubscribed = false;
         private bool HasSubscribed
         {
@@ -99,67 +163,13 @@ namespace AstroClient.AstroMonos.Components.ESP.ItemTweaker
 
         private void OnRoomLeft()
         {
-            HasSubscribed = false;
             Destroy(this);
         }
 
-
-        internal void ResetColor()
-        {
-            ESPColor = DefaultColor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighlighterColor(DefaultColor);
-            }
-        }
-
-        internal void OnDestroy()
-        {
-            HighLightOptions.DestroyHighlighter();
-        }
-
-        internal void OnEnable()
-        {
-            SetupHighlighter();
-        }
-
-        internal void OnDisable()
-        {
-            HighLightOptions.DestroyHighlighter();
-        }
-
-        internal void ChangeColor(Color newcolor)
-        {
-            ESPColor = newcolor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighlighterColor(newcolor);
-            }
-        }
-
-        internal void ChangeColor(string HexColor)
-        {
-            Color hextocolor = ColorUtils.HexToColor(HexColor);
-            ESPColor = hextocolor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighlighterColor(hextocolor);
-            }
-        }
-
-        internal Color GetCurrentESPColor
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return HighLightOptions.highlightColor;
-            }
-        }
-
         internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        internal Color DefaultColor { [HideFromIl2Cpp] get; } = Color.yellow;
+        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("EF2C3F");
 
         internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers;
+        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
     }
 }

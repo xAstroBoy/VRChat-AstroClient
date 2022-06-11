@@ -579,11 +579,11 @@
     <Compile Include="Developers\Cheetos\Cheetos\VRCPlusHider.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\CheetosTestStuff.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\MediaController\MediaController.cs" />
-    <Compile Include="AstroMonos\Components\ESP\Pickup\ESP_Pickup.cs" />
-    <Compile Include="AstroMonos\Components\ESP\Trigger\ESP_Trigger.cs" />
-    <Compile Include="AstroMonos\Components\ESP\ItemTweaker\ESP_ItemTweaker.cs" />
-    <Compile Include="AstroMonos\Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
-    <Compile Include="AstroMonos\Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
+    <Compile Include="AstroMonos\Components\ESP\ESP_Pickup.cs" />
+    <Compile Include="AstroMonos\Components\ESP\ESP_Trigger.cs" />
+    <Compile Include="AstroMonos\Components\ESP\ESP_ItemTweaker.cs" />
+    <Compile Include="AstroMonos\Components\ESP\ESP_UdonBehaviour.cs" />
+    <Compile Include="AstroMonos\Components\ESP\ESP_VRCInteractable.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Bouncer.cs" />
     <Compile Include="AstroMonos\Components\Tools\Listeners\TweakerListener.cs" />
     <Compile Include="Config\Config.cs" />
@@ -603,7 +603,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Murder4_ESP.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupController.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Rocket.cs" />
-    <Compile Include="AstroMonos\Components\ESP\Player\PlayerESP.cs" />
+    <Compile Include="AstroMonos\Components\ESP\PlayerESP.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\SingleTag.cs" />
     <Compile Include="AstroMonos\Components\UI\SingleTag\SingleTagsUtils.cs" />
     <Compile Include="Tools\ObjectEditor\Editor\Colliders\ColliderEditors.cs" />
