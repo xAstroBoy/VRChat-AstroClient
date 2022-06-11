@@ -1,8 +1,8 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.ClientActions;
 
 namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
 {
-    using AstroMonos.Components.ESP.ItemTweaker;
     using Selector;
     using Tools.Extensions;
     using UnityEngine;

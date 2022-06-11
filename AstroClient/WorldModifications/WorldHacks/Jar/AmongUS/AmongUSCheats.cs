@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.ClientActions;
 using AstroClient.Tools.UdonEditor;
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
@@ -9,7 +10,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
     using System.Linq;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
-    using AstroMonos.Components.ESP.VRCInteractable;
     using AstroMonos.Components.Spoofer;
     using CustomClasses;
     using MelonLoader;

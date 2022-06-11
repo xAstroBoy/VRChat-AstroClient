@@ -35,8 +35,8 @@ namespace AstroClient.AstroMonos.Components.ESP.Trigger
         internal void Start()
         {
             ESPColor = DefaultColor;
-            ObjMeshRenderers = gameObject.GetComponentsInChildren<Renderer>(true);
-            if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
+            Object_Renderers = gameObject.GetComponentsInChildren<Renderer>(true);
+            if (Object_Renderers == null && Object_Renderers.Count() == 0)
             {
                 Log.Error($"Unable to add ESP_Trigger to  {gameObject.name} due to MeshRenderer Being null or empty");
                 Destroy(this);
@@ -45,9 +45,9 @@ namespace AstroClient.AstroMonos.Components.ESP.Trigger
 
             SetupHighlighter();
             HasSubscribed = true;
-            for (int i = 0; i < ObjMeshRenderers.Count; i++)
+            for (int i = 0; i < Object_Renderers.Count; i++)
             {
-                Renderer obj = ObjMeshRenderers[i];
+                Renderer obj = Object_Renderers[i];
                 if (obj != null && obj.gameObject.active)
                 {
                     HighLightOptions.AddRenderer(obj);
@@ -70,9 +70,9 @@ namespace AstroClient.AstroMonos.Components.ESP.Trigger
                 if (HighLightOptions != null)
                 {
                     HighLightOptions.SetHighlighterColor(ESPColor);
-                    for (int i = 0; i < ObjMeshRenderers.Count; i++)
+                    for (int i = 0; i < Object_Renderers.Count; i++)
                     {
-                        Renderer obj = ObjMeshRenderers[i];
+                        Renderer obj = Object_Renderers[i];
                         if (obj != null && obj.gameObject.active)
                         {
                             HighLightOptions.AddRenderer(obj);
@@ -117,6 +117,7 @@ namespace AstroClient.AstroMonos.Components.ESP.Trigger
                 }
             }
         }
+
         internal void ResetColor()
         {
             ESPColor = DefaultColor;
@@ -169,11 +170,14 @@ namespace AstroClient.AstroMonos.Components.ESP.Trigger
                 return HighLightOptions.highlightColor;
             }
         }
+
         private void OnRoomLeft()
         {
             Destroy(this);
         }
+
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -185,21 +189,16 @@ namespace AstroClient.AstroMonos.Components.ESP.Trigger
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
             }
         }
-
 
         internal VRC.SDKBase.VRC_Trigger trigger;
         internal VRCSDK2.VRC_Trigger trigger2;
@@ -209,6 +208,6 @@ namespace AstroClient.AstroMonos.Components.ESP.Trigger
         internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("EF2C3F");
 
         internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjMeshRenderers;
+        private UnhollowerBaseLib.Il2CppArrayBase<Renderer> Object_Renderers;
     }
 }

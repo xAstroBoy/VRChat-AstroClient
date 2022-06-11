@@ -29,11 +29,14 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+
         private void OnRoomLeft()
         {
             Destroy(this);
         }
+
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -45,15 +48,11 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -67,7 +66,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal float CrazyTimer
         {
-            [HideFromIl2Cpp] get => _CrazyTimer;
+            [HideFromIl2Cpp]
+            get => _CrazyTimer;
             [HideFromIl2Cpp]
             set
             {
@@ -80,7 +80,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal float ImpulseTimer
         {
-            [HideFromIl2Cpp] get => _ImpulseTimer;
+            [HideFromIl2Cpp]
+            get => _ImpulseTimer;
             [HideFromIl2Cpp]
             set
             {
@@ -93,7 +94,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal float ImpulseForce
         {
-            [HideFromIl2Cpp] get => _ImpulseForce;
+            [HideFromIl2Cpp]
+            get => _ImpulseForce;
             [HideFromIl2Cpp]
             set
             {
@@ -106,7 +108,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal bool ShouldDoImpulseMode
         {
-            [HideFromIl2Cpp] get => _ShouldDoImpulseMode;
+            [HideFromIl2Cpp]
+            get => _ShouldDoImpulseMode;
             [HideFromIl2Cpp]
             set
             {
@@ -119,7 +122,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal bool IsDoingImpulseMode
         {
-            [HideFromIl2Cpp] get => _IsDoingImpulseMode;
+            [HideFromIl2Cpp]
+            get => _IsDoingImpulseMode;
             [HideFromIl2Cpp]
             set
             {
@@ -132,7 +136,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal bool IsImpulseModeActive
         {
-            [HideFromIl2Cpp] get => _IsImpulseModeActive;
+            [HideFromIl2Cpp]
+            get => _IsImpulseModeActive;
             [HideFromIl2Cpp]
             set
             {
@@ -145,7 +150,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal bool UseGravity
         {
-            [HideFromIl2Cpp] get => _UseGravity;
+            [HideFromIl2Cpp]
+            get => _UseGravity;
             [HideFromIl2Cpp]
             set
             {
@@ -163,7 +169,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal bool IsEnabled
         {
-            [HideFromIl2Cpp] get => _IsEnabled;
+            [HideFromIl2Cpp]
+            get => _IsEnabled;
             [HideFromIl2Cpp]
             set
             {
@@ -184,6 +191,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                     VRC_AstroPickup.interactText = "Toggle On Crazy Object";
             }
         }
+
         private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
@@ -202,7 +210,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         private bool HasRequiredSettings
         {
-            [HideFromIl2Cpp] get => _HasRequiredSettings;
+            [HideFromIl2Cpp]
+            get => _HasRequiredSettings;
             [HideFromIl2Cpp]
             set
             {

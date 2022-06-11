@@ -24,7 +24,6 @@ namespace AstroClient.AstroMonos.Components.ESP
                         Object.DestroyImmediate(SpawnedESPsHolders[i]);
                     }
                     SpawnedESPsHolders.Clear();
-
                 }
             }
         }
@@ -41,10 +40,9 @@ namespace AstroClient.AstroMonos.Components.ESP
                     return _HighlightFXCamera = HighlightsFX.prop_HighlightsFX_0.gameObject;
                 }
                 return _HighlightFXCamera;
-
             }
         }
 
-        internal static List<HighlightsFXStandalone> SpawnedESPsHolders = new ();
+        internal static List<HighlightsFXStandalone> SpawnedESPsHolders = new();
     }
 }

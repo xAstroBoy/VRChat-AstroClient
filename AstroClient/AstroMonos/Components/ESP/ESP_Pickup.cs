@@ -2,11 +2,11 @@
 
 namespace AstroClient.AstroMonos.Components.ESP
 {
-    using System;
-    using System.Linq;
     using AstroClient.Tools.Colors;
     using AstroClient.Tools.Extensions;
     using ClientAttributes;
+    using System;
+    using System.Linq;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
@@ -27,7 +27,7 @@ namespace AstroClient.AstroMonos.Components.ESP
         {
             if (DebugMode)
             {
-                Log.Debug($"[ESP_Pickup Debug] : {msg}");
+                Log.Debug($"[ESP_Pickup  Debug] : {msg}");
             }
         }
 
@@ -35,19 +35,19 @@ namespace AstroClient.AstroMonos.Components.ESP
         internal void Start()
         {
             ESPColor = DefaultColor;
-            ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
-            if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
+            Object_Renderers = gameObject.GetComponentsInChildren<Renderer>(true);
+            if (Object_Renderers == null && Object_Renderers.Count() == 0)
             {
-                Log.Error($"Unable to add ESP_Pickup to  {gameObject.name} due to MeshRenderer Being null or empty");
+                Log.Error($"Unable to add ESP_Pickup  to  {gameObject.name} due to MeshRenderer Being null or empty");
                 Destroy(this);
                 return;
             }
             SetupHighlighter();
             HasSubscribed = true;
-            for (int i = 0; i < ObjMeshRenderers.Count; i++)
+            for (int i = 0; i < Object_Renderers.Count; i++)
             {
-                MeshRenderer obj = ObjMeshRenderers[i];
-                if (obj != null && obj.gameObject.active)
+                var obj = Object_Renderers[i];
+                if (obj != null)
                 {
                     HighLightOptions.AddRenderer(obj);
                 }
@@ -67,9 +67,9 @@ namespace AstroClient.AstroMonos.Components.ESP
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighlighterColor(ESPColor);
-                for (int i = 0; i < ObjMeshRenderers.Count; i++)
+                for (int i = 0; i < Object_Renderers.Count; i++)
                 {
-                    MeshRenderer obj = ObjMeshRenderers[i];
+                    var obj = Object_Renderers[i];
                     if (obj != null && obj.gameObject.active)
                     {
                         HighLightOptions.AddRenderer(obj);
@@ -81,6 +81,15 @@ namespace AstroClient.AstroMonos.Components.ESP
                 }
             }
         }
+
+        //void OnBecameInvisible()
+        //{
+        //    HighLightOptions.enabled = false;
+        //}
+        //void OnBecameVisible()
+        //{
+        //    HighLightOptions.enabled = true;
+        //}
 
         internal void ResetColor()
         {
@@ -125,7 +134,9 @@ namespace AstroClient.AstroMonos.Components.ESP
                 return HighLightOptions.highlightColor;
             }
         }
+
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -137,15 +148,11 @@ namespace AstroClient.AstroMonos.Components.ESP
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -159,8 +166,7 @@ namespace AstroClient.AstroMonos.Components.ESP
 
         internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("4AB30D");
-
         internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
+        private UnhollowerBaseLib.Il2CppArrayBase<Renderer> Object_Renderers;
     }
 }

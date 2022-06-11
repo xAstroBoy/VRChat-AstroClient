@@ -1,11 +1,9 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using AstroClient.AstroMonos.Components.ESP;
+
+namespace AstroClient.Tools.Extensions
 {
     using System.Collections.Generic;
-    using AstroMonos.Components.ESP.ItemTweaker;
-    using AstroMonos.Components.ESP.Pickup;
     using AstroMonos.Components.ESP.Trigger;
-    using AstroMonos.Components.ESP.UdonBehaviour;
-    using AstroMonos.Components.ESP.VRCInteractable;
     using Colors;
     using UnityEngine;
 

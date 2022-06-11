@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {
-    using System;
     using AstroClient.Tools.UdonSearcher;
     using AstroUdons;
     using ClientAttributes;
     using CustomClasses;
     using Il2CppSystem.Collections.Generic;
+    using System;
     using UnhollowerBaseLib.Attributes;
 
     [RegisterComponent]
@@ -25,6 +25,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         private UdonBehaviour_Cached ExtendCheese { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal VRC_AstroPickup PickupBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -36,15 +37,11 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -66,6 +63,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 Destroy(this);
             }
         }
+
         private void OnRoomLeft()
         {
             Destroy(this);

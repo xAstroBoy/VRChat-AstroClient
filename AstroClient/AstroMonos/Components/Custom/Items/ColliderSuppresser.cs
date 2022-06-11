@@ -36,6 +36,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         internal bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = true;
 
         private bool _Activated { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
         private bool Activated
         {
             [HideFromIl2Cpp]
@@ -50,12 +51,10 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 if (value)
                 {
                     if (renderer != null) renderer.material = Materials.strawberry_milshake_foam;
-
                 }
                 else
                 {
                     if (renderer != null) renderer.material = Materials.strawberry;
-
                 }
             }
         }
@@ -111,7 +110,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 Log.Exception(e);
             }
         }
-        void Update()
+
+        private void Update()
         {
             // Animates main texture scale in a funky way!
             float scaleX = Mathf.Cos(Time.time) * 0.5f + 1;
@@ -130,7 +130,6 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             Log.Debug($"Deactivated Collider {collision.transform.gameObject.name} from blocking Player collision!");
             PopupUtils.QueHudMessage($"<color=#FFA500>Deactivated Collider {collision.transform.gameObject.name}</color>");
             Activated = false;
-
         }
 
         private void OnDrop()
@@ -150,6 +149,5 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 Activated = !Activated;
             }
         }
-
     }
 }

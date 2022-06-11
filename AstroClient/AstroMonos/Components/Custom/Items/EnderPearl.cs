@@ -1,12 +1,12 @@
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using AstroUdons;
     using ClientAttributes;
     using ClientResources.Loaders;
     using Il2CppSystem.Collections.Generic;
     using Spawnables.Enderpearl;
+    using System;
     using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -33,8 +33,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         internal MeshRenderer renderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal static bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = true;
+
         //private static Color Ender { [HideFromIl2Cpp] get; } = new(0f, 2f, 0f, 0.4f);
-        void Update()
+        private void Update()
         {
             // Animates main texture scale in a funky way!
             float scaleX = Mathf.Cos(Time.time) * 0.5f + 1;
@@ -160,6 +161,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 return Materials.coffee_grains_001;
             }
         }
+
         private void OnPickup()
         {
             if (pickup.RigidBodyController != null)

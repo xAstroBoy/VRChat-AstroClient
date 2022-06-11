@@ -26,7 +26,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -38,15 +40,11 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -62,12 +60,12 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
         internal Vector3 lastFrameVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Rigidbody rb { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal float minVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
-        
+
         //TODO : MAKE PLAYER BOUNCE  BACK SUPPORTED AS WELL
         internal float bias { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.5f;
-        
+
         internal float bounceVelocity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10f;
-        
+
         internal bool BounceTowardPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
         internal PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -76,7 +74,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         internal bool IsEnabled
         {
-            [HideFromIl2Cpp] get => _IsEnabled;
+            [HideFromIl2Cpp]
+            get => _IsEnabled;
             [HideFromIl2Cpp]
             set
             {

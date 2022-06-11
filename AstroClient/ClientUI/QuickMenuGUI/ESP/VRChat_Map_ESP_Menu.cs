@@ -1,12 +1,10 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.ClientActions;
 
 namespace AstroClient.ClientUI.Menu.ESP
 {
     using System;
-    using AstroMonos.Components.ESP.Pickup;
     using AstroMonos.Components.ESP.Trigger;
-    using AstroMonos.Components.ESP.UdonBehaviour;
-    using AstroMonos.Components.ESP.VRCInteractable;
     using Tools.Extensions;
     using Tools.World;
     using UnityEngine;

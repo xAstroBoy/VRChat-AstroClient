@@ -20,7 +20,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -32,20 +34,17 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
             }
         }
+
         private void OnRoomLeft()
         {
             Destroy(this);
@@ -68,12 +67,11 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             }
         }
 
-
-        void OnDestroy()
+        private void OnDestroy()
         {
             HasSubscribed = false;
-
         }
+
         internal string OnText { [HideFromIl2Cpp] get; } = "Turn On Flashlight";
         internal string OffText { [HideFromIl2Cpp] get; } = "Turn Off Flashlight";
         internal GameObject FlashLight_Base { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
