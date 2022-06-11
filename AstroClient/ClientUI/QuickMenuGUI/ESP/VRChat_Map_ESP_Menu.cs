@@ -23,10 +23,10 @@ namespace AstroClient.ClientUI.Menu.ESP
         {
             var main = new QMNestedGridMenu(menu, "ESP Menu", "ESP Options");
 
-            PickupESPToggleBtn = new QMToggleButton(main, 1, 0f, "Pickup ESP", new Action(() => { Toggle_Pickup_ESP = true; }), new Action(() => { Toggle_Pickup_ESP = false; }), "Toggle Pickup ESP");
-            VRCInteractableESPToggleBtn = new QMToggleButton(main, 1, 0.5f, "VRC Interactable ESP", new Action(() => { Toggle_VRCInteractable_ESP = true; }), new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP");
-            TriggerESPToggleBtn = new QMToggleButton(main, 1, 1f, "Trigger ESP", new Action(() => { Toggle_Trigger_ESP = true; }), new Action(() => { Toggle_Trigger_ESP = false; }), "Toggle Trigger ESP");
-            UdonBehaviourESPToggleBtn = new QMToggleButton(main, 1, 1.5f, "Udon Behaviour ESP", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP");
+            PickupESPToggleBtn = new QMToggleButton(main,  "Pickup ESP", new Action(() => { Toggle_Pickup_ESP = true; }), new Action(() => { Toggle_Pickup_ESP = false; }), "Toggle Pickup ESP");
+            VRCInteractableESPToggleBtn = new QMToggleButton(main,  "VRC Interactable ESP", new Action(() => { Toggle_VRCInteractable_ESP = true; }), new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP");
+            TriggerESPToggleBtn = new QMToggleButton(main,  "Trigger ESP", new Action(() => { Toggle_Trigger_ESP = true; }), new Action(() => { Toggle_Trigger_ESP = false; }), "Toggle Trigger ESP");
+            UdonBehaviourESPToggleBtn = new QMToggleButton(main,  "Udon Behaviour ESP", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP");
         }
 
         private static QMToggleButton VRCInteractableESPToggleBtn;
@@ -96,7 +96,7 @@ namespace AstroClient.ClientUI.Menu.ESP
             var items = WorldUtils_Old.Get_VRCInteractables();
             foreach (var item in items)
             {
-                var ESP = item.GetComponent<ESP_VRCInteractable>();
+                var ESP = item.GetGetInChildrens<ESP_VRCInteractable>(true);
                 if (ESP != null)
                 {
                     ESP.DestroyMeLocal();
@@ -160,7 +160,7 @@ namespace AstroClient.ClientUI.Menu.ESP
             var items = WorldUtils_Old.Get_Pickups();
             foreach (var item in items)
             {
-                var ESP = item.GetComponent<ESP_Pickup>();
+                var ESP = item.GetGetInChildrens<ESP_Pickup>(true);
                 if (ESP != null)
                 {
                     ESP.DestroyMeLocal();
@@ -313,7 +313,7 @@ namespace AstroClient.ClientUI.Menu.ESP
             {
                 foreach (var item in items)
                 {
-                    var ESP = item.GetComponent<ESP_UdonBehaviour>();
+                    var ESP = item.gameObject.GetGetInChildrens<ESP_UdonBehaviour>(true);
                     if (ESP != null)
                     {
                         ESP.DestroyMeLocal();

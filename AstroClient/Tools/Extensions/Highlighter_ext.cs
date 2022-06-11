@@ -35,7 +35,7 @@
                     }
                 }
 
-                Object.DestroyImmediate(item);
+                Object.Destroy(item);
             }
         }
 
