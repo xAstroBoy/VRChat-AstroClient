@@ -242,12 +242,30 @@ internal class WorldCheatsModule : AstroEvents
 
             if (WorldUtils.WorldID == WorldIds.PoolParlor)
             {
-                CustomSubMenu.AddToggle("Start New Match on current match end", PoolParlor.CreateMatchOnGameEnd, ToggleValue => { PoolParlor.CreateMatchOnGameEnd = ToggleValue; });
-                CustomSubMenu.AddButton("Create Match", () => { PoolParlor.StartNewMatchCreation.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Abort Match Creation", () => { PoolParlor.CloseNewMatchCreation.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Start Match", () => { PoolParlor.StartMatch.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Reset Match", () => { PoolParlor.ResetMatch.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Bruteforce Popcat", () => { TextBruteforcer.StartBruteforcer = true; });
+                CustomSubMenu.AddSubMenu("Pool Table Settings", () =>
+                {
+                    CustomSubMenu.AddToggle("Longer Guideline", PoolParlor.LongerGuideline, ToggleValue => { PoolParlor.LongerGuideline = ToggleValue; });
+                    CustomSubMenu.AddToggle("Force Guideline", PoolParlor.BilliardsModule.ForceGuidelineOn, ToggleValue => { PoolParlor.BilliardsModule.ForceGuidelineOn = ToggleValue; });
+                    CustomSubMenu.AddToggle("Force Locking Cue", PoolParlor.BilliardsModule.ForceLockingOn, ToggleValue => { PoolParlor.BilliardsModule.ForceLockingOn = ToggleValue; });
+                    CustomSubMenu.AddToggle("Can Hit Cue Ball", PoolParlor.BilliardsModule.canHitCueBall.GetValueOrDefault(false), ToggleValue => { PoolParlor.BilliardsModule.canHitCueBall = ToggleValue; });
+                    CustomSubMenu.AddToggle("Practice mode", PoolParlor.BilliardsModule.isPracticeMode.GetValueOrDefault(false), ToggleValue => { PoolParlor.BilliardsModule.isPracticeMode = ToggleValue; });
+
+
+                });
+                CustomSubMenu.AddSubMenu("Match Settings", () =>
+                {
+                    CustomSubMenu.AddButton("Create Match", () => { PoolParlor.StartNewMatchCreation.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Abort Match Creation", () => { PoolParlor.CloseNewMatchCreation.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Start Match", () => { PoolParlor.StartMatch.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Reset Match", () => { PoolParlor.ResetMatch.InvokeBehaviour(); });
+
+
+                });
+                CustomSubMenu.AddSubMenu("Popcat Bruteforcer", () =>
+                {
+                    CustomSubMenu.AddToggle("Bruteforce Popcat", TextBruteforcer.StartBruteforcer, ToggleValue => { TextBruteforcer.StartBruteforcer = ToggleValue; });
+
+                });
 
             }
 

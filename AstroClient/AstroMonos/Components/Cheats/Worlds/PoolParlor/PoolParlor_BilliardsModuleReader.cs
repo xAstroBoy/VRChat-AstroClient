@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using AstroClient.ClientActions;
 using AstroClient.ClientAttributes;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
@@ -7,14 +8,15 @@ using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Collections.Generic;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
-using IntPtr = System.IntPtr;
+using Object = Il2CppSystem.Object;
+
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
 {
     [RegisterComponent]
     public class PoolParlor_BilliardsModuleReader : MonoBehaviour
     {
-        private List<object> AntiGarbageCollection = new();
+        private List<Object> AntiGarbageCollection = new();
 
         public PoolParlor_BilliardsModuleReader(IntPtr ptr) : base(ptr)
         {
@@ -36,6 +38,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     ClientEventActions.OnRoomLeft += OnRoomLeft;
                     BilliardsModule = obj.UdonBehaviour.ToRawUdonBehaviour();
                     Initialize_BilliardsModule();
+                    
                 }
                 else
                 {
@@ -46,6 +49,34 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             else
             {
                 Destroy(this);
+            }
+        }
+
+        internal bool ForceGuidelineOn { get; set; } = false;
+        internal bool ForceLockingOn { get; set; } = false;
+
+        private void StartStuff()
+        {
+            InvokeRepeating(nameof(ForceSettings), 0.1f, 0.1f);
+
+        }
+
+
+        private void ForceSettings()
+        {
+            if (ForceGuidelineOn)
+            {
+                if (noGuidelineLocal.GetValueOrDefault(false))
+                {
+                    noGuidelineLocal = false;
+                }
+            }
+            if(ForceLockingOn)
+            {
+                if (noLockingLocal.GetValueOrDefault(false))
+                {
+                    noLockingLocal = false;
+                }
             }
         }
 

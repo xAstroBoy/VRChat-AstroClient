@@ -1,4 +1,6 @@
 ﻿using AstroClient.ClientActions;
+using System;
+using AstroClient.ClientActions;
 using AstroClient.ClientAttributes;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
@@ -7,14 +9,15 @@ using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Collections.Generic;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
-using IntPtr = System.IntPtr;
+using Object = Il2CppSystem.Object;
+
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
 {
     [RegisterComponent]
     public class PoolParlor_PoolParlorModuleReader : MonoBehaviour
     {
-        private List<object> AntiGarbageCollection = new();
+        private List<Object> AntiGarbageCollection = new();
 
         public PoolParlor_PoolParlorModuleReader(IntPtr ptr) : base(ptr)
         {

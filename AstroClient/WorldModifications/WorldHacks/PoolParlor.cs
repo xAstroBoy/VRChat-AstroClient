@@ -54,6 +54,38 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+        private static float GuidelineOriginalLenght { get; set; } = 0f;
+        private static float GuidelineOriginalLenghtPos { get; set; } = 0f;
+
+        private static GameObject Guideline { get; set; }
+
+        private static bool _LongerGuideline = false;
+
+        internal static bool LongerGuideline
+        {
+            get => _LongerGuideline;
+            set
+            {
+                if (Guideline != null)
+                {
+                    if (value)
+                    {
+                        Guideline.transform.localPosition = Guideline.transform.localPosition.SetX(26.49f);
+                        Guideline.transform.localScale = Guideline.transform.localScale.SetX(52.6869f);
+
+                    }
+                    else
+                    {
+                        Guideline.transform.localPosition = Guideline.transform.localPosition.SetX(GuidelineOriginalLenghtPos);
+                        Guideline.transform.localScale = Guideline.transform.localScale.SetX(GuidelineOriginalLenght);
+
+                    }
+                    _LongerGuideline = value;
+                }
+            }
+        }
+
+
         private static void UdonSendCustomEvent(UdonBehaviour item, string eventkey)
         {
             if (item != null)
@@ -104,7 +136,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             CueSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 1f, "Default Cue", () => { CurrentCueSkin = _CurrentCueSkin; }, "Cue Skin!", null, null, true);
             _ = new QMSingleButton(PoolParlorCheats, 3, 1, "-", () => { CurrentCueSkin--; }, "Set Cue Skin!", null, null, true);
 
-            CueSkinOverrideBtn = new QMSingleToggleButton(PoolParlorCheats, 1, 2f, "OVerride Cue Skin", () => { OverrideCurrentSkins = true; }, "Override Cue Skin", () => { OverrideCurrentSkins = false; }, "Enable Cue Skin Override using Spoofer.", Color.green, Color.red, null, false, true);
+            CueSkinOverrideBtn = new QMSingleToggleButton(PoolParlorCheats, 1, 2f, "Override Cue Skin", () => { OverrideCurrentSkins = true; }, "Override Cue Skin", () => { OverrideCurrentSkins = false; }, "Enable Cue Skin Override using Spoofer.", Color.green, Color.red, null, false, true);
         }
 
         private static void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -206,6 +238,14 @@ namespace AstroClient.WorldModifications.WorldHacks
                 GetCurrentCue();
                 SetupCues();
                 SetupBruteforcerForPopCat();
+                var guideline = GameObjectFinder.Find("Modules/BilliardsModule/intl.balls/guide/guide_display");
+                if(guideline != null)
+                {
+                    Guideline = guideline;
+                    GuidelineOriginalLenghtPos = guideline.transform.localPosition.x;
+
+                    GuidelineOriginalLenght = guideline.transform.localScale.x;
+                }
             }
             else
             {
@@ -478,6 +518,9 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static void OnRoomLeft()
         {
             HasSubscribed = false;
+            GuidelineOriginalLenght = 0f;
+            GuidelineOriginalLenghtPos = 0f;
+
         }
 
         private static void OnDrop()
