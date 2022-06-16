@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor;
+using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
@@ -140,7 +141,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var BilliardsModuleEvent = UdonSearch.FindUdonEvent("BilliardsModule", "_CanUseTableSkin");
                 if (BilliardsModuleEvent != null)
                 {
-                    BilliardsModule = BilliardsModuleEvent.RawItem;
+                    BilliardsModule = BilliardsModuleEvent.gameObject.GetOrAddComponent<PoolParlor_BilliardsModuleReader>();
                     BilliardModule_TriggerGlobalSettingsUpdated = BilliardsModule.gameObject.FindUdonEvent("BilliardsModule", "_TriggerGlobalSettingsUpdated");
                     StartNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyOpen");
                     CloseNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyClosed");
@@ -155,7 +156,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "_SetAuthorizedOwners");
                 if (cue_0_unpacked != null)
                 {
-                    Cue_0 = cue_0_unpacked.UdonBehaviour.ToRawUdonBehaviour();
+                    Cue_0 = cue_0_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
                 }
                 else
                 {
@@ -165,7 +166,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "_SetAuthorizedOwners");
                 if (cue_1_unpacked != null)
                 {
-                    Cue_1 = cue_1_unpacked.UdonBehaviour.ToRawUdonBehaviour();
+                    Cue_1 = cue_1_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
                 }
                 else
                 {
@@ -178,7 +179,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var NetworkingManagerEvent = networkingpath.FindUdonEvent("_OnPlayerPrepareShoot");
                     if (NetworkingManagerEvent != null)
                     {
-                        NetworkingManager = NetworkingManagerEvent.RawItem;
+                        NetworkingManager = NetworkingManagerEvent.gameObject.GetOrAddComponent<PoolParlor_NetworkingManagerReader>();
                     }
                     else
                     {
@@ -198,7 +199,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var PoolParlorModule_unpacked = UdonSearch.FindUdonEvent("PoolParlorModule", "_GetSAOMenu");
                 if (PoolParlorModule_unpacked != null)
                 {
-                    PoolParlorModule = PoolParlorModule_unpacked.UdonBehaviour.ToRawUdonBehaviour();
+                    PoolParlorModule = PoolParlorModule_unpacked.gameObject.GetOrAddComponent<PoolParlor_PoolParlorModuleReader>();
                 }
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
                 GetCurrentTable();
@@ -290,10 +291,10 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static void GetCurrentTable()
         {
             int currentskin = 0;
-            var result = UdonHeapParser.Udon_Parse<byte>(NetworkingManager, "tableSkinSynced");
+            var result = NetworkingManager.tableSkinSynced;
             if (result != null)
             {
-                currentskin = result;
+                currentskin = (int) result;
             }
             if (Enum.IsDefined(typeof(TableSkins), currentskin))
             {
@@ -312,10 +313,10 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static void GetCurrentCue()
         {
             int currentskin = 0;
-            var result = UdonHeapParser.Udon_Parse<int>(BilliardsModule, "activeCueSkin");
+            var result = BilliardsModule.activeCueSkin;
             if (result != null)
             {
-                currentskin = result;
+                currentskin = result.Value;
             }
             if (Enum.IsDefined(typeof(CueSkins), currentskin))
             {
@@ -353,23 +354,23 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void SetTableSkin_BilliardsModule(int value)
         {
-            UdonHeapEditor.PatchHeap(BilliardsModule, "tableSkinLocal", value);
-            UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", value);
-            UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_72681C8A3F190167F4664BA51221AA32_Int32", value);
-            UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte", (byte)value);
-            UdonHeapEditor.PatchHeap(BilliardsModule, "__0_mp_680845797CF11D637DB85E28135E758C_Int32", value);
+            BilliardsModule.tableSkinLocal = value;
+            BilliardsModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
+            BilliardsModule.__0_mp_72681C8A3F190167F4664BA51221AA32_Int32 = value;
+            BilliardsModule.__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte = (byte)value;
+            BilliardsModule.__0_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
         }
 
         private static void SetTableSkin_PoolParlorModule(int value)
         {
-            UdonHeapEditor.PatchHeap(PoolParlorModule, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", value);
-            UdonHeapEditor.PatchHeap(PoolParlorModule, "__1_mp_680845797CF11D637DB85E28135E758C_Int32", value);
+            PoolParlorModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
+            PoolParlorModule.__1_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
         }
 
         private static void SetTableSkin_NetworkingManager(int value)
         {
-            UdonHeapEditor.PatchHeap(NetworkingManager, "tableSkinSynced", ((byte)value));
-            UdonHeapEditor.PatchHeap(NetworkingManager, "__0_mp_72681C8A3F190167F4664BA51221AA32_Byte", (byte)value);
+            NetworkingManager.tableSkinSynced = (byte)value;
+            NetworkingManager.__0_mp_72681C8A3F190167F4664BA51221AA32_Byte = (byte)value;
         }
 
         internal static void SetCueSkin(int skin)
@@ -380,32 +381,13 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void SetActiveCueSkin(int value)
         {
-            UdonHeapEditor.PatchHeap(BilliardsModule, "activeCueSkin", value);
+            BilliardsModule.activeCueSkin = value;
         }
 
         private static void SetSyncedCueSkin(int value)
         {
-            try
-            {
-                UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", value);
-            }
-            catch { } // Nobody cares .
-            try
-            {
-                UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", value);
-            }
-            catch { } // Nobody cares .
-
-            try
-            {
-                UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin", value);
-            }
-            catch { } // Nobody cares .
-            try
-            {
-                UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", value);
-            }
-            catch { } // Nobody cares .
+            Cue_0.syncedCueSkin = value;
+            Cue_1.syncedCueSkin = value;
         }
 
         internal enum TableSkins
@@ -524,12 +506,12 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static UdonBehaviour_Cached StartMatch { get; private set; }
         internal static UdonBehaviour_Cached ResetMatch { get; private set; }
 
-        internal static RawUdonBehaviour Cue_0 { get; private set; }
-        internal static RawUdonBehaviour Cue_1 { get; private set; }
+        internal static PoolParlor_CueReader Cue_0 { get; private set; }
+        internal static PoolParlor_CueReader Cue_1 { get; private set; }
 
-        internal static RawUdonBehaviour PoolParlorModule { get; private set; }
-        internal static RawUdonBehaviour NetworkingManager { get; private set; }
-        internal static RawUdonBehaviour BilliardsModule { get; private set; }
+        internal static PoolParlor_PoolParlorModuleReader PoolParlorModule { get; private set; }
+        internal static PoolParlor_NetworkingManagerReader NetworkingManager { get; private set; }
+        internal static PoolParlor_BilliardsModuleReader BilliardsModule { get; private set; }
 
         internal static QMNestedButton PoolParlorCheats { get; set; }
 
@@ -543,9 +525,17 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             set
             {
+                
                 if (!Enum.IsDefined(typeof(TableSkins), value))
                 {
-                    value = TableSkins.White;
+                    if (value == (TableSkins)(-1))
+                    {
+                        value = TableSkins.shiga;
+                    }
+                    else
+                    {
+                        value = TableSkins.White;
+                    }
                 }
                 _CurrentTableSkin = value;
                 if (TableSkinBtn != null)
@@ -570,7 +560,14 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (!Enum.IsDefined(typeof(CueSkins), value))
                 {
-                    value = CueSkins.DefaultLight;
+                    if (value == (CueSkins)(-1))
+                    {
+                        value = CueSkins.BetaTester;
+                    }
+                    else
+                    {
+                        value = CueSkins.DefaultDark;
+                    }
                 }
                 if (CueSkinBtn != null)
                 {
