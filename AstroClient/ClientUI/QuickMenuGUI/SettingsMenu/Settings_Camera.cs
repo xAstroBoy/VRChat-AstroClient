@@ -32,12 +32,21 @@ namespace AstroClient.ClientUI.Menu.SettingsMenu
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
+            FarClipPlaneSetting = PlayerCameraEditor.PlayerCamera.farClipPlane;
             if (farClipPlaneSlider != null)
             {
                 farClipPlaneSlider.SetValue(PlayerCameraEditor.PlayerCamera.farClipPlane);
             }
+            PlayerCameraEditor.PlayerCamera.nearClipPlane = 0.0001f;
         }
 
+        internal static void RestoreFarClipPlane()
+        {
+            PlayerCameraEditor.PlayerCamera.farClipPlane = FarClipPlaneSetting;
+        }
+
+
+        private static float FarClipPlaneSetting = 0f;
         private static QMSlider farClipPlaneSlider;
         private static QMSlider fovSlider;
     }

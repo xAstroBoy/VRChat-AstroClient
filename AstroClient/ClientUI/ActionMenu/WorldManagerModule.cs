@@ -1,11 +1,13 @@
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.Menu.Menus.Quickmenu;
+using AstroClient.ClientUI.Menu.SettingsMenu;
 using AstroClient.Spawnables.ColliderSuppresserCube;
 using AstroClient.Spawnables.Flashlight;
 using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.Tools.ObjectEditor;
 using AstroClient.Tools.World;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.UIPaths;
 using UnityEngine;
 
 namespace AstroClient.ClientUI.ActionMenu
@@ -24,6 +26,12 @@ namespace AstroClient.ClientUI.ActionMenu
         {
             AMUtils.AddToModsFolder("World Control", () =>
             {
+                CustomSubMenu.AddSubMenu("Player Camera Controls", () =>
+                {
+                    CustomSubMenu.AddButton("Reset FarClipPlane", () => { Settings_Camera.RestoreFarClipPlane(); }, null);
+                    CustomSubMenu.AddButton("Set FarClipPlane to 999999999f", () => { PlayerCameraEditor.PlayerCamera.farClipPlane = 999999999f; }, null);
+                }, null);
+
                 CustomSubMenu.AddSubMenu("Collider Disabler", () =>
                 {
                     CustomSubMenu.AddButton("Spawn Collider Disabler Sphere", () => { ColliderSuppresserSphere.SpawnSphere(); },  null);

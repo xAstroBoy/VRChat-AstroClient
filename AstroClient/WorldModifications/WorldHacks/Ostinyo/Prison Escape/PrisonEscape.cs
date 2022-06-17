@@ -206,7 +206,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             //    }
             //}
 
-
+            var heightlimiter = GameObjectFinder.Find("Scripts/Avatar Height Checker");
+            if(heightlimiter != null)
+            {
+                heightlimiter.DestroyMeLocal(true);
+            }
+                
             var occluder = GameObjectFinder.FindRootSceneObject("Occlusion");
 
             if (occluder != null)
@@ -289,20 +294,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
             if (MoneyPile != null)
             {
-                MoneyInteraction = MoneyPile.FindUdonEvent("_interact");
-                if (MoneyInteraction != null)
-                {
-                    Remove_MaxPickupDist(MoneyInteraction); // Get Rid of the anti-cheat!
-                }
+                Patch__MaxPickupDist(MoneyPile);
             }
 
             if (Keycard != null)
             {
-                GetRedCard = Keycard.FindUdonEvent("_interact");
-                if (GetRedCard != null)
-                {
-                    Remove_MaxPickupDist(GetRedCard); // Get Rid of the anti-cheat!
-                }
+                Patch__MaxPickupDist(Keycard);
 
             }
 
@@ -355,9 +352,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             foreach (var item in WorldUtils.Pickups)
             {
 
+                Patch__MaxPickupDist(item.gameObject);
+
                 var beh = item.gameObject.FindUdonEvent("EnablePatronEffects");
                 if (beh != null)
                 {
+
                     var unlocker = item.GetOrAddComponent<PatronUnlocker>();
                     MiscUtils.DelayFunction(5f, () =>
                     {
@@ -727,9 +727,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
                 if(Gun_Color_Panel != null)
                 {
-                    Gun_Color_Panel.SetActive(true);
-                    Gun_Color_Panel.GetOrAddComponent<Enabler>();
-
+                    var enabler = Gun_Color_Panel.GetOrAddComponent<Enabler>();
+                    if(enabler != null)
+                    {
+                        enabler.ForceStart();
+                    }
                     var GoldButton = Gun_Color_Panel.transform.FindObject("Button Mat0");
                     if (GoldButton != null)
                     {
@@ -750,7 +752,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         Gun_Purple_Color_Button = PurpleButton.GetComponent<Button>();
                     }
-                    
+                    var RedButton = Gun_Color_Panel.transform.FindObject("Button Mat4");
+                    if (RedButton != null)
+                    {
+                        Gun_Red_Color_Button = RedButton.GetComponent<Button>();
+                    }
+
                 }
                 var blocks = Spawn_Area.FindObject("Building/Colliders");
                 if(blocks != null)
@@ -1655,27 +1662,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-        private static void Remove_MaxPickupDist(UdonBehaviour_Cached item)
-        {
-            if (item != null)
-            {
-                try
-                {
-
-                    if (item.RawItem != null)
-                    {
-                        UdonHeapEditor.PatchHeap(item.RawItem, "maxPickupDist", 999999999f, () =>
-                        {
-                            Log.Debug($"Setting {item.name} maxPickupDist to 999999999");
-                        });
-
-                    }
-                }
-                catch
-                {
-                }
-            }
-        }
         private static void Patch_canDualWield(GameObject item)
         {
 
@@ -1692,6 +1678,29 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             UdonHeapEditor.PatchHeap(rawitem, "canDualWield", true, () =>
                             {
                                 Log.Debug($"Setting {item.name} canDualWield to true");
+                            });
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
+        private static void Patch__MaxPickupDist(GameObject item)
+        {
+
+            foreach (var udon in item.GetComponentsInChildren<UdonBehaviour>(true))
+            {
+                if (udon != null)
+                {
+                    try
+                    {
+                        var rawitem = udon.ToRawUdonBehaviour();
+                        if (rawitem != null)
+                        {
+
+                            UdonHeapEditor.PatchHeap(rawitem, "maxPickupDist", 999999999f, () =>
+                            {
+                                Log.Debug($"Setting {item.gameObject.name} maxPickupDist to 999999999");
                             });
                         }
                     }
@@ -2336,6 +2345,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static Button Gun_Green_Color_Button { get; set; } = null;
         internal static Button Gun_Blue_Color_Button { get; set; } = null;
         internal static Button Gun_Purple_Color_Button { get; set; } = null;
+        internal static Button Gun_Red_Color_Button { get; set; } = null;
 
     }
 }

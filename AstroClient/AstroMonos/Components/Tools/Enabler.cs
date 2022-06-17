@@ -19,6 +19,8 @@ namespace AstroClient.AstroMonos.Components.Tools
             AntiGcList.Add(this);
         }
 
+
+        private bool HasStartedEvent = false;
         private bool _HasSubscribed = false;
         private bool HasSubscribed
         {
@@ -53,9 +55,21 @@ namespace AstroClient.AstroMonos.Components.Tools
         }
         private void Start()
         {
-            HasSubscribed = true;
+            ForceStart();
+        }
+
+        internal void ForceStart()
+        {
+            if (!HasSubscribed)
+            {
+                HasSubscribed = true;
+            }
             gameObject.SetActive(true);
-            InvokeRepeating(nameof(CustomUpdate), 0.1f, 0.3f);
+            if (!HasStartedEvent)
+            {
+                InvokeRepeating(nameof(CustomUpdate), 0.1f, 0.3f);
+                HasStartedEvent = true;
+            }
         }
 
         private void OnDisable()

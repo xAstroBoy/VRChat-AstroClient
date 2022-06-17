@@ -457,6 +457,10 @@ internal class WorldCheatsModule : AstroEvents
                     {
                         CustomSubMenu.AddButton("Set Purple Color", () => { PrisonEscape.Gun_Purple_Color_Button.onClick.Invoke(); });
                     }
+                    if (PrisonEscape.Gun_Red_Color_Button != null)
+                    {
+                        CustomSubMenu.AddButton("Set Red Color", () => { PrisonEscape.Gun_Red_Color_Button.onClick.Invoke(); });
+                    }
                 });
 
                 CustomSubMenu.AddSubMenu("Patreon System Control", () =>
@@ -583,9 +587,10 @@ internal class WorldCheatsModule : AstroEvents
                         PrisonEscape.SmallCrateESP = true;
                         PrisonEscape.FreeCratesItems = true;
                         PrisonEscape.DropKnifeAfterKill = false;
+                        PrisonEscape.GuardsAreAllowedToUseVents = true;
                         PrisonEscape.WorldSettings_VisualHitBoxes = true;
-                        PrisonEscape.WorldSettings_GoldenGuns = true;
-                        PrisonEscape.WorldSettings_DoublePoints = false;
+                        PrisonEscape.WorldSettings_GoldenGuns = false;
+                        PrisonEscape.WorldSettings_DoublePoints = true;
                         PrisonEscape.WorldSettings_Music = false;
                         PrisonEscape.WorldSettings_Subtitles = true;
                     });
