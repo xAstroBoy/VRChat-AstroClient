@@ -580,6 +580,7 @@ internal class WorldCheatsModule : AstroEvents
                         {
                             ESP.GodMode = true;
                         }
+                        PrisonEscape.TakeKeyCardOnSuspicious = true;
                         PrisonEscape.TakeKeyCardOnWanted = true;
                         VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = true;
                         PrisonEscape.ShowRoles = true;

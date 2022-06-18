@@ -27,7 +27,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
         {
             Destroy(this);
         }
-
+        internal bool ForceGuidelineOn { get; set; } = false;
         internal void Start()
         {
             if (WorldUtils.WorldID.Equals(WorldIds.PoolParlor))

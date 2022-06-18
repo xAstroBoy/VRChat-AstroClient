@@ -146,6 +146,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     _EveryoneHasGoldenGunCamos = false;
                     SpawnPoints_Spawn.Clear();
                     EnableGoldenCamos.Clear();
+                    TakeKeyCardOnSuspicious = false;
                     TakeKeyCardOnWanted = false;
                     PrisonDoors_Open.Clear();
                     PrisonDoors_Close.Clear();
@@ -156,7 +157,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     Gun_Green_Color_Button = null;
                     Gun_Purple_Color_Button = null;
                     Gun_Gold_Color_Button = null;
-                    
+                    Gun_Red_Color_Button = null;
+
 
                 }
             }
@@ -459,6 +461,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         btn.SetScale(new Vector3(0.15f, 0.24f, 0.3f));
                     }
                     startgame.gameObject.AddToWorldUtilsMenu();
+                    var keycardtake = startgame.UdonBehaviour.FindUdonEvent("_TakeKeycard");
+                    if(keycardtake != null)
+                    {
+                        TakeKeycard = keycardtake;
+                    }
                 }
 
 
@@ -1841,25 +1848,34 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
         internal static void TakeKeyCard()
         {
-            if (GetRedCard != null)
+            if (TakeKeycard != null)
             {
-                if (RedCardBehaviour == null)
-                {
-                    // Check if Taken, if so set the heap value back to false.
-                    RedCardBehaviour = GetRedCard.UdonBehaviour.ToRawUdonBehaviour();
-                }
+                TakeKeycard.InvokeBehaviour();
+            }
+            else
+            {
 
-                if (RedCardBehaviour != null)
+
+                if (GetRedCard != null)
                 {
-                    var isTaken = UdonHeapParser.Udon_Parse<bool>(RedCardBehaviour, "taken");
-                    if (isTaken)
+                    if (RedCardBehaviour == null)
                     {
-                        UdonHeapEditor.PatchHeap(RedCardBehaviour, "taken", false);
+                        // Check if Taken, if so set the heap value back to false.
+                        RedCardBehaviour = GetRedCard.UdonBehaviour.ToRawUdonBehaviour();
                     }
+
+                    if (RedCardBehaviour != null)
+                    {
+                        var isTaken = UdonHeapParser.Udon_Parse<bool>(RedCardBehaviour, "taken");
+                        if (isTaken)
+                        {
+                            UdonHeapEditor.PatchHeap(RedCardBehaviour, "taken", false);
+                        }
+                    }
+
+                    GetRedCard.InvokeBehaviour();
+
                 }
-
-                GetRedCard.InvokeBehaviour();
-
             }
         }
 
@@ -2322,6 +2338,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static UdonBehaviour_Cached GateInteraction { get; set; } = null;
         internal static UdonBehaviour_Cached TogglePatronGuns { get; set; } = null;
         internal static UdonBehaviour_Cached ToggleDoublePoints { get; set; } = null;
+        internal static UdonBehaviour_Cached TakeKeycard { get; set; } = null;
 
         private static UdonBehaviour_Cached GetRedCard { get; set; } = null;
         private static List<GameObject> Large_Crates { get; set; } = new List<GameObject>();

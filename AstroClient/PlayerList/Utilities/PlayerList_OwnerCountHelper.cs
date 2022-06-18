@@ -47,9 +47,12 @@ namespace AstroClient.PlayerList.Utilities
             if (isPlayerAlone)
             {
                 SetValueForUser(GameInstances.CurrentPlayer.GetUserID(), WorldUtils_Old.Get_Pickups().Count);
-                return;
             }
-            
+            else
+            {
+                SetValueForUser(GameInstances.CurrentPlayer.GetUserID(), 0); // Set it to 0, then let the hook do the work.
+            }
+
             //int currentowned = 0;
             //var pickups = WorldUtils.Pickups;
             //for (var index = 0; index < pickups.Count; index++)
@@ -113,9 +116,10 @@ namespace AstroClient.PlayerList.Utilities
         {
             if(user != null)
             {
-                if (OwnedObjectCounts.ContainsKey(user.GetUserID()))
+                var userid = user.GetUserID();
+                if (OwnedObjectCounts.ContainsKey(userid))
                 {
-                    return OwnedObjectCounts[user.GetUserID()].ToString();
+                    return OwnedObjectCounts[userid].ToString();
                 }
             }
             return "Unknown";
@@ -126,13 +130,14 @@ namespace AstroClient.PlayerList.Utilities
         {
             if (!userid.IsNullOrEmptyOrWhiteSpace())
             {
+                var correct = Mathf.Clamp(amount, 0, int.MaxValue);
                 if (OwnedObjectCounts.ContainsKey(userid))
                 {
-                    OwnedObjectCounts[userid] = Mathf.Clamp(amount, 0, int.MaxValue);
+                    OwnedObjectCounts[userid] = correct;
                 }
                 else
                 {
-                    OwnedObjectCounts.Add(userid, Mathf.Clamp(amount, 0, int.MaxValue));
+                    OwnedObjectCounts.Add(userid, correct);
                 }
             }
         }
@@ -164,7 +169,7 @@ namespace AstroClient.PlayerList.Utilities
                 }
                 else
                 {
-                    OwnedObjectCounts.Add(userid, Mathf.Clamp(0, 0, int.MaxValue));
+                    OwnedObjectCounts.Add(userid, 0);
                 }
             }
         }
@@ -179,19 +184,18 @@ namespace AstroClient.PlayerList.Utilities
                 if (!instance.isPickup()) return;
 
                 // something is up with the  photon player constructor that makes me have to not use trygetvalue
-                var dict = GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0;
                 var oldownerid = instance.field_Private_Int32_0;
-                if (dict.ContainsKey(oldownerid))
+                if (CurrentRoomPlayers.ContainsKey(oldownerid))
                 {
-                    var oldOwner = dict[oldownerid].GetVRCPlayer()?.GetAPIUser()?.GetUserID();
+                    var oldOwner = CurrentRoomPlayers[oldownerid].GetVRCPlayer()?.GetAPIUser()?.GetUserID();
                     if (!oldOwner.IsNullOrEmptyOrWhiteSpace())
                     {
                         DecreaseForUser(oldOwner);
                     }
                 }
-                if (dict.ContainsKey(PhotonID))
+                if (CurrentRoomPlayers.ContainsKey(PhotonID))
                 {
-                    var newOwner = dict[PhotonID].GetVRCPlayer()?.GetAPIUser()?.GetUserID();
+                    var newOwner = CurrentRoomPlayers[PhotonID].GetVRCPlayer()?.GetAPIUser()?.GetUserID();
                     if (!newOwner.IsNullOrEmptyOrWhiteSpace())
                     {
                         IncreaseForUser(newOwner);
@@ -204,7 +208,15 @@ namespace AstroClient.PlayerList.Utilities
             }
         }
         
-        
+
+        private static Il2CppSystem.Collections.Generic.Dictionary<int, Photon.Realtime.Player> CurrentRoomPlayers
+        {
+            get
+            {
+                return GameInstances.CurrentRoom.field_Private_Dictionary_2_Int32_Player_0;
+            }
+        }
+
 
         private static Dictionary<string, int> OwnedObjectCounts { get; set; } = new();
     }

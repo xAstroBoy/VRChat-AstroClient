@@ -34,6 +34,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         internal MeshRenderer renderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = true;
+        internal bool IncludeTriggers { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
         private bool _Activated { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 

@@ -37,7 +37,7 @@ namespace AstroClient.ClientUI.Menu.SettingsMenu
             {
                 farClipPlaneSlider.SetValue(PlayerCameraEditor.PlayerCamera.farClipPlane);
             }
-            PlayerCameraEditor.PlayerCamera.nearClipPlane = 0.0001f;
+            PlayerCameraEditor.PlayerCamera.nearClipPlane = 0.001f;
         }
 
         internal static void RestoreFarClipPlane()

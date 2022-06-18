@@ -46,6 +46,20 @@
                 }
             }
         }
+        internal static void RemoveComponents<T>(this GameObject obj) where T : Component
+        {
+            if (obj != null)
+            {
+                var all = obj.GetComponents<T>();
+                foreach (var exist in all)
+                {
+                    if (exist)
+                    {
+                        exist.DestroyMeLocal();
+                    }
+                }
+            }
+        }
 
         #endregion
 

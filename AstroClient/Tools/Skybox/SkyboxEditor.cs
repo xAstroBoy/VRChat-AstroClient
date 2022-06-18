@@ -150,20 +150,30 @@ namespace AstroClient.Tools.Skybox
 
         internal static void PrintSkyboxInfo()
         {
-            if (!isUsingCustomSkybox)
+            try
             {
-                if (RenderSettings.skybox != null)
+                if (!isUsingCustomSkybox)
                 {
-                    Log.Debug("[Skybox INFO] : Material name : " + RenderSettings.skybox.name);
-                    Log.Debug("[Skybox INFO] : Material Shader : " + RenderSettings.skybox.shader.name);
-                    var ReadTextureIDs = RenderSettings.skybox.GetTexturePropertyNames().ToList();
-                    for (int i = 0; i < ReadTextureIDs.Count; i++)
+                    if (RenderSettings.skybox != null)
                     {
-                        var name = ReadTextureIDs[i];
-                        Log.Debug($"[Skybox INFO] : Texture name : {name}, Type : {RenderSettings.skybox.GetTexture(name).GetIl2CppType().FullName} ");
+                        Log.Debug("[Skybox INFO] : Material name : " + RenderSettings.skybox.name);
+                        Log.Debug("[Skybox INFO] : Material Shader : " + RenderSettings.skybox.shader.name);
+                        var texturelist = RenderSettings.skybox.GetTexturePropertyNames();
+                        if (texturelist != null)
+                        {
+                            if (texturelist.Count != 0)
+                            {
+                                for (int i = 0; i < texturelist.Count; i++)
+                                {
+                                    var name = texturelist[i];
+                                    Log.Debug($"[Skybox INFO] : Texture name : {name}, Type : {RenderSettings.skybox.GetTexture(name).GetIl2CppType().FullName} ");
+                                }
+                            }
+                        }
                     }
                 }
             }
+            catch{}
         }
 
         private void OnRoomLeft()
