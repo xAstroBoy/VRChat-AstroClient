@@ -301,7 +301,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (boxcollider != null)
                     {
                         boxcollider.center = new Vector3(-0.01286684f, 0.577245f, -0.5576066f);
-                        boxcollider.size = new Vector3(1.068004f, 0.04464191f, 348152f);
+                        boxcollider.size = new Vector3(1.068004f, 0.04464191f, 1.359998f);
                     }
 
                 }
