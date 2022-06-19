@@ -83,7 +83,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
         private void LateUpdate()
         {
             if (!ActuallyDoThings) return;
-
+            if (!ConfigManager.AvatarOptions.ScalingAvatarSupportEnabled) return;
             Vector3 originalPsToAvOffset = default;
             Vector3 originalAvPosition = default;
             if (ConfigManager.AvatarOptions.FixPlayspaceCenterBias)
