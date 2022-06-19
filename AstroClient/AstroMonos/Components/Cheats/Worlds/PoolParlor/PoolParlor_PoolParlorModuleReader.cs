@@ -1,6 +1,5 @@
 ﻿using AstroClient.ClientActions;
 using System;
-using AstroClient.ClientActions;
 using AstroClient.ClientAttributes;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;

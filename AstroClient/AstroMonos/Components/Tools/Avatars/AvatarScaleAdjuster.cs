@@ -7,6 +7,7 @@ using AstroClient.LocalAvatar.ScaleAdjuster;
 using Il2CppSystem.Collections.Generic;
 using RootMotion.FinalIK;
 using UnityEngine;
+using Object = Il2CppSystem.Object;
 
 namespace AstroClient.AstroMonos.Components.Tools.Avatars
 {
@@ -52,12 +53,8 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
         // Some mods instantiate extra copies of local avatar. This will be always false if Unity "clones" this component
         public bool ActuallyDoThings;
 
-        private List<MonoBehaviour> AntiGarbageCollection;
-
         public AvatarScaleAdjuster(IntPtr obj0) : base(obj0)
         {
-            AntiGarbageCollection = new List<MonoBehaviour>(1);
-            AntiGarbageCollection.Add(this);
         }
         private static Vector3 Scale(Vector3 original, float scale)
         {

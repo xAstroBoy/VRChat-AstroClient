@@ -12,6 +12,7 @@
     {
         //Templates and references
         internal static bool SelectSelf = false;
+        private static Transform _UnscaledUI;
 
         private static Transform _UserInterface;
         private static BoxCollider _QuickMenuBackground = null;
@@ -137,10 +138,19 @@
         {
             get
             {
-                if (_UserInterface == null) return _UserInterface = GameObject.Find("UserInterface").transform;
+                if (_UserInterface == null) return _UserInterface = GameObjectFinder.Find("UserInterface").transform;
                 return _UserInterface;
             }
         }
+        internal static Transform UnscaledUI
+        {
+            get
+            {
+                if (_UnscaledUI == null) return _UnscaledUI = UserInterface.FindObject("UnscaledUI");
+                return _UnscaledUI;
+            }
+        }
+
 
         internal static UIPage QuickMenuPage
         {

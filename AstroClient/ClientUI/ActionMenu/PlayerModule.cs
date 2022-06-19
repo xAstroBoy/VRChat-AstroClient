@@ -1,6 +1,8 @@
+using AstroClient.AstroMonos.Components.Tools.Avatars;
 using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
 using AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus;
 using AstroClient.Config;
+using AstroClient.LocalAvatar.ColliderAdjuster;
 using AstroClient.Tools.Extensions;
 
 namespace AstroClient.ClientUI.ActionMenu
@@ -51,9 +53,9 @@ namespace AstroClient.ClientUI.ActionMenu
                     CustomSubMenu.AddToggle("Scale towards avatar root (not playspace center)", ConfigManager.AvatarOptions.FixPlayspaceCenterBias, ToggleValue => { ConfigManager.AvatarOptions.FixPlayspaceCenterBias = ToggleValue; }, null);
                     
                     CustomSubMenu.AddToggle("Adjust Player Collider (Avatar scale & Avatar change)", ConfigManager.AvatarOptions.AdjustColliderOnScaleChange, ToggleValue => { ConfigManager.AvatarOptions.AdjustColliderOnScaleChange = ToggleValue; }, null);
-                    CustomSubMenu.AddToggle("Adjust Player Collider on Scale change", ConfigManager.AvatarOptions.AdjustAvatarCollider, ToggleValue => { ConfigManager.AvatarOptions.AdjustAvatarCollider = ToggleValue; }, null);
+                    CustomSubMenu.AddToggle("Adjust Player Collider on Scale change", AvatarRealHeight.AdjustAvatarCollider, ToggleValue => { AvatarRealHeight.AdjustAvatarCollider = ToggleValue; }, null);
 
-                    CustomSubMenu.AddToggle("Use Pose Height", ConfigManager.AvatarOptions.UsePoseHeight, ToggleValue => { ConfigManager.AvatarOptions.UsePoseHeight = ToggleValue; }, null);
+                    CustomSubMenu.AddToggle("Use Pose Height", AvatarRealHeight.UsePoseHeight, ToggleValue => { AvatarRealHeight.UsePoseHeight = ToggleValue; }, null);
 
 
 

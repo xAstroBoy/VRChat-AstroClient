@@ -2,6 +2,7 @@
 using AstroClient.ClientAttributes;
 using Il2CppSystem.Collections.Generic;
 using UnityEngine;
+using Object = Il2CppSystem.Object;
 
 namespace AstroClient.AstroMonos.Components.Tools.Avatars
 {
@@ -33,14 +34,14 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
         float m_center = ms_defaultColliderCenter;
         float m_radius = ms_defaultColliderRadius;
         PoseState m_poseState = PoseState.Standing;
-        private List<MonoBehaviour> AntiGarbageCollection;
+
+        
 
         public HeightAdjuster(IntPtr obj0) : base(obj0)
         {
             m_avatarReadyEvent = new Action(this.RecacheComponents);
-            AntiGarbageCollection = new List<MonoBehaviour>(1);
-            AntiGarbageCollection.Add(this);
         }
+
 
         void Awake()
         {

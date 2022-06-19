@@ -200,7 +200,7 @@ namespace AstroClient.Config
             {
                 FileStream fs = new FileStream(ConfigAvatarOptionsPath, FileMode.Create);
                 fs.Dispose();
-                Save_BlockedRPCPlayers();
+                Save_AvatarOptions();
                 Log.Warn($"AvatarOptions File Created: {ConfigAvatarOptionsPath}");
             }
 

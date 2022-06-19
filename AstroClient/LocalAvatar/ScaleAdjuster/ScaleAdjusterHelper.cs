@@ -1,11 +1,17 @@
-using System;
-using System.Collections;
 using AstroClient.AstroMonos.Components.Tools.Avatars;
 using AstroClient.ClientActions;
 using AstroClient.Config;
 using MelonLoader;
 using RootMotion.FinalIK;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using AstroClient.Tools.Player;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
+using VRC.SDK3.Avatars.Components;
 using VRC.SDKBase;
 
 namespace AstroClient.LocalAvatar.ScaleAdjuster
@@ -14,10 +20,46 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
     {
         internal override void RegisterToEvents()
         {
-
             ClientEventActions.VRChat_OnUiManagerInit += OnUiManagerInit;
-
+            //ClientEventActions.OnWorldReveal += OnWorldReveal;
             ClientEventActions.OnPlayerStart += OnPlayerStart;
+        }
+
+        //private void OnWorldReveal(string arg1, string arg2, List<string> arg3, string arg4, string arg5)
+        //{
+        //    Log.Debug("Analyzing Avatar...");
+
+        //    GameInstances.CurrentUser.field_Private_VRCAvatarManager_0.field_Private_AvatarCreationCallback_0 += new Action<GameObject, VRC_AvatarDescriptor, bool>(OnLocalPlayerAvatarCreated);
+        //    var avatar = GameInstances.CurrentUser.transform.root.Get_Avatar();
+        //    if (avatar != null)
+        //    {
+        //        Log.Debug("Hooking into Avatar creation callback system..");
+        //        OnLocalPlayerAvatarCreated(avatar.gameObject, null, false);
+        //    }
+        //}
+        private static IEnumerator WaitForPlayerBrr(VRCPlayer player)
+        {
+            Log.Debug("Analyzing Player...");
+
+            while (player != null && player.field_Private_VRCPlayerApi_0 == null)
+                yield return null;
+
+            if (player == null || !player.prop_VRCPlayerApi_0.isLocal) yield break;
+            Log.Debug("Player is Local!");
+            Log.Debug("Hooking into Avatar creation callback system..");
+            player.field_Private_VRCAvatarManager_0.field_Private_AvatarCreationCallback_0 += new Action<GameObject, VRC_AvatarDescriptor, bool>(OnLocalPlayerAvatarCreated);
+            var avatar = player.transform.FindObject("ForwardDirection/Avatar");
+            if (avatar != null)
+            {
+                Log.Debug("Starting Coroutine on avatar..");
+                OnLocalPlayerAvatarCreated(avatar.gameObject, null, false);
+
+            }
+        }
+
+        private static void OnPlayerStart(VRCPlayer instance)
+        {
+            MelonCoroutines.Start(WaitForPlayerBrr(instance));
         }
 
         internal static VRCVrCameraSteam ourSteamCamera { get; set; }
@@ -27,7 +69,6 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
         {
             ClientEventActions.OnAvatarScaleChanged.SafetyRaiseWithParams(avatarRoot, newScale);
         }
-
 
         private void OnUiManagerInit()
         {
@@ -39,7 +80,7 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
 
                 ourSteamCamera = trackingSteam.GetComponentInChildren<VRCVrCameraSteam>();
                 ourCameraTransform = trackingSteam.transform.Find("SteamCamera/[CameraRig]/Neck/Camera (head)/Camera (eye)");
-                
+
                 return;
             }
         }
@@ -51,27 +92,26 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
                 ourCameraTransform.localPosition = -offset / ourCameraTransform.lossyScale.x;
         }
 
-        private static IEnumerator WaitForPlayerBrr(VRCPlayer player)
-        {
-            while (player != null && player.field_Private_VRCPlayerApi_0 == null)
-                yield return null;
-            
-            if (player == null || !player.prop_VRCPlayerApi_0.isLocal) yield break;
-            
-            player.field_Private_VRCAvatarManager_0.field_Private_AvatarCreationCallback_0 += new Action<GameObject, VRC_AvatarDescriptor, bool>(OnLocalPlayerAvatarCreated);
-            var avatar = player.transform.Find("ForwardDirection/Avatar");
-            if (avatar != null)
-                OnLocalPlayerAvatarCreated(avatar.gameObject, avatar.GetComponent<VRC_AvatarDescriptor>(), false);
-        }
-
-        private void OnPlayerStart(VRCPlayer instance)
-        {
-            MelonCoroutines.Start(WaitForPlayerBrr(instance));
-        }
 
         private static void OnLocalPlayerAvatarCreated(GameObject go, VRC_AvatarDescriptor descriptor, bool unknown)
         {
-            OnLocalPlayerAvatarCreatedImpl(go, descriptor);
+            if(go == null)
+            {
+                Log.Debug("Go is null");
+            }
+            if (go != null)
+            {
+                if (go.GetComponent<VRCAvatarDescriptor>() != null)
+                {
+                    Log.Debug("Initializing Avatar Scaling support....");
+
+                    OnLocalPlayerAvatarCreatedImpl(go);
+                }
+                else
+                {
+                    Log.Write("Current avatar is SDK2, ignoring rescaling support");
+                }
+            }
         }
 
         internal static void FixAvatarRootFlyingOff(Transform avatarRoot)
@@ -86,19 +126,21 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
         private static IEnumerator OnLocalPlayerAvatarCreatedCoro(Vector3 originalScale, GameObject go)
         {
             var trackingRoot = VRCTrackingManager.field_Private_Static_VRCTrackingManager_0.transform;
-            var uiRoot = GameObject.Find("/UserInterface").transform;
-            var unscaledUi = uiRoot.Find("UnscaledUI");
-            
+            Log.Debug("Waiting for VRCTrackingManager to unbamboozle itself....");
+
             // give it 3 frames for VRCTrackingManager to unbamboozle itself
             for (var i = 0; i < 3 && go != null; i++)
             {
                 Log.Debug($"Funny numbers go brr: {i} {VRCTrackingManager.field_Private_Static_Vector3_0.ToString()} {VRCTrackingManager.field_Private_Static_Vector3_1.ToString()}");
                 Log.Debug($"Scale stuff: a={go.transform.localScale.y} t={trackingRoot.localScale.y}");
-                Log.Debug($"UI stuff: r={uiRoot.localScale.y} u={unscaledUi.localScale.y}");
+                Log.Debug($"UI stuff: r={QuickMenuTools.UserInterface.localScale.y} u={QuickMenuTools.UnscaledUI.localScale.y}");
                 yield return null;
             }
+            if (go == null)
+            {
+                Log.Debug("Avatar is null? WUT!");
+            }
 
-            if (go == null) yield break;
 
             var originalTrackingRootScale = trackingRoot.localScale;
 
@@ -112,8 +154,8 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             comp.targetAl.get_localScale_Injected(out comp.originalTargetAlScale);
             comp.originalSourceScale = originalScale;
             comp.originalTargetPsScale = originalTrackingRootScale;
-            comp.targetUi = uiRoot.transform;
-            comp.targetUiInverted = unscaledUi;
+            comp.targetUi = QuickMenuTools.UserInterface.transform;
+            comp.targetUiInverted = QuickMenuTools.UnscaledUI;
 
             comp.vrik = go.GetComponent<VRIK>().solver.locomotion;
             comp.originalStep = comp.vrik.footDistance;
@@ -130,8 +172,7 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             comp.amSingle6 = avatarManager.field_Private_Single_6;
             comp.amSingle7 = avatarManager.field_Private_Single_7;
 
-            comp.targetVp = avatarManager.field_Private_VRC_AnimationController_0
-                .GetComponentInChildren<IKHeadAlignment>().transform;
+            comp.targetVp = avatarManager.field_Private_VRC_AnimationController_0.GetComponentInChildren<IKHeadAlignment>().transform;
             comp.targetVpParent = comp.targetVp.parent;
 
             // hand effector scaling is used for IKTweaks compat
@@ -144,20 +185,21 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             comp.tmReady = true;
         }
 
-        private static void OnLocalPlayerAvatarCreatedImpl(GameObject go, VRC_AvatarDescriptor descriptor)
+        private static void OnLocalPlayerAvatarCreatedImpl(GameObject go)
         {
-            if (!ConfigManager.AvatarOptions.ScalingAvatarSupportEnabled) return;
-            
-            if (descriptor == null || descriptor.TryCast<VRCSDK2.VRC_AvatarDescriptor>() != null)
+            if (ConfigManager.AvatarOptions.ScalingAvatarSupportEnabled)
             {
-                Log.Write("Current avatar is SDK2, ignoring rescaling support");
-                return;
+                Log.Debug("Backupped Original scale...");
+                var originalScale = go.transform.localScale;
+
+                Log.Debug("Adding Scaling support....");
+
+                MelonCoroutines.Start(OnLocalPlayerAvatarCreatedCoro(originalScale, go));
             }
-
-            var originalScale = go.transform.localScale;
-            
-            MelonCoroutines.Start(OnLocalPlayerAvatarCreatedCoro(originalScale, go));
+            else
+            {
+                Log.Debug("Scaling Support is off!");
+            }
         }
-
     }
 }
