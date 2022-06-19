@@ -11,15 +11,24 @@ namespace AstroClient.AstroMonos.Components.Tools
     [RegisterComponent]
     public class Command_SetToTweaker : MonoBehaviour
     {
-        public List<MonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGarbageCollection;
 
         public Command_SetToTweaker(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new List<MonoBehaviour>(1);
-            AntiGcList.Add(this);
+            AntiGarbageCollection = new List<MonoBehaviour>(1);
+            AntiGarbageCollection.Add(this);
         }
 
         private void Start()
+        {
+            AddToTweaker();
+        }
+        void Awake()
+        {
+            AddToTweaker();
+        }
+
+        internal void AddToTweaker()
         {
             Tweaker_Object.SetObjectToEdit(gameObject, true);
             gameObject.AddToWorldUtilsMenu();

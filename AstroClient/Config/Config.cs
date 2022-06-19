@@ -107,6 +107,29 @@
 
         public bool QMFreeze = false;
     }
+    [Serializable, Obfuscation]
+    public class ConfigAvatarOptions
+    {
+        /// <summary>
+        /// Enable avatar scaling support
+        /// </summary>
+        public bool ScalingAvatarSupportEnabled = true;
+        
+        /// <summary>
+        /// Fix avatar root flying off
+        /// </summary>
+        public bool FixAvatarFlyingOffOnScale = true;
+        
+        /// <summary>
+        /// Scale towards avatar root (not playspace center)
+        /// </summary>
+        public bool FixPlayspaceCenterBias = true;
+        
+        public bool AdjustColliderOnScaleChange = false;
+        public bool AdjustAvatarCollider = true;
+        public bool UsePoseHeight = true;
+
+    }
 
     [Serializable, Obfuscation]
     public class ConfigFavorites

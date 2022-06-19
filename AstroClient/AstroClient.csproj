@@ -197,6 +197,10 @@
     <Compile Include="Developers\Kaned\RotationFix.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
+    <Compile Include="LocalAvatar\ColliderAdjuster\AvatarRealHeigh.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Avatars\AvatarScaleAdjuster.cs" />
+    <Compile Include="LocalAvatar\ScaleAdjuster\ScaleAdjusterHelper.cs" />
     <Compile Include="ModsDetector\EmmPatcher.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlocker_Tools.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
@@ -223,6 +227,7 @@
     <Compile Include="Startup\Hooks\PhotonHook\Tools\Translators\Photon_StructToString.cs" />
     <Compile Include="Startup\Hooks\UnityDestroyBlock.cs" />
     <Compile Include="Startup\Hooks\VRCPickupHooks.cs" />
+    <Compile Include="Startup\Hooks\PlayerHooks.cs" />
     <Compile Include="Startup\Hooks\WorldTriggerHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\Hooks\UnityMessagesHook.cs" />
@@ -308,7 +313,7 @@
     <Compile Include="AstroMonos\Components\Player\Movement\MovementManager.cs" />
     <Compile Include="AstroMonos\Components\Tools\Enabler.cs" />
     <Compile Include="ClientUI\ActionMenu\ESPModule.cs" />
-    <Compile Include="ClientUI\ActionMenu\MovementModule.cs" />
+    <Compile Include="ClientUI\ActionMenu\PlayerModule.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\GameProcessMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\ProtectionsMenu.cs" />

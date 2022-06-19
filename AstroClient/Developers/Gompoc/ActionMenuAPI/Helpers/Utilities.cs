@@ -186,7 +186,7 @@
 
         public static void ScanMethod(MethodInfo m)
         {
-            MelonLogger.Msg($"Scanning: {m.FullDescription()}");
+            Log.Write($"Scanning: {m.FullDescription()}");
             foreach (var instance in XrefScanner.XrefScan(m))
                 try
                 {

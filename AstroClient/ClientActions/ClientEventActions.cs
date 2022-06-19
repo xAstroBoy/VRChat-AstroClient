@@ -115,6 +115,13 @@ namespace AstroClient.ClientActions
         /// </summary>
         internal static Action<Player> OnPlayerJoin { get; set; }
 
+
+        /// <summary>
+        /// This Gets called when Player Component Starts.
+        /// <para>Params : VRC.Player player</para>
+        /// </summary>
+        internal static Action<VRCPlayer> OnPlayerStart { get; set; }
+
         /// <summary>
         /// This Gets called when a Player Leaves.
         /// <para>Params : VRC.Player player</para>
@@ -376,6 +383,16 @@ namespace AstroClient.ClientActions
         /// <para>Params : VRC.SDKBase.VRC_Pickup instance </para>
         /// </summary>
         internal static Action<VRC.SDKBase.VRC_Pickup> OnPickupAwake { get; set; }
+
+
+
+        /// <summary>
+        /// this gets invoked when the avatar scale gets changed.
+        /// <para>Params : Transform avatartransform, float newscale </para>
+        /// </summary>
+
+        internal static Action<Transform, float> OnAvatarScaleChanged { get; set; }
+
 
     }
 }

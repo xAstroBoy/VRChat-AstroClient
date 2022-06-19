@@ -334,7 +334,7 @@
             }
             catch
             {
-                MelonLogger.Msg("Invite Failed");
+                Log.Write("Invite Failed");
             }
         }
 

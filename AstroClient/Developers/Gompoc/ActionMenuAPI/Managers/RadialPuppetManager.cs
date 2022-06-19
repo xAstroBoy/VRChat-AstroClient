@@ -146,7 +146,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
             }
             catch (Exception e)
             {
-                MelonLogger.Error($"Exception caught in onUpdate action passed to Radial Puppet:");
+                Log.Error($"Exception caught in onUpdate action passed to Radial Puppet:");
                 Log.Exception(e);
             }
         }

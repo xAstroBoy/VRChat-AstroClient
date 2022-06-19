@@ -57,6 +57,10 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             ForceStart();
         }
+        private void Awake()
+        {
+            ForceStart();
+        }
 
         internal void ForceStart()
         {

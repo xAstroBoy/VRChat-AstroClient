@@ -42,6 +42,7 @@ namespace AstroClient.Config
         internal static string ConfigLoadingScreenPath { get; } = ConfigFolder + @"\ConfigLoadingScreen.json";
 
         internal static string AstroInstances { get; } = ConfigFolder + @"\AstroInstances.json";
+        internal static string ConfigAvatarOptionsPath { get; } = ConfigFolder + @"\ConfigAvatarOptions.json";
 
         internal static string ConfigBlockedRPCPlayersPath { get; } = ConfigFolder + @"\BlockedRPCPlayers.json";
 
@@ -67,6 +68,7 @@ namespace AstroClient.Config
 
         public static ConfigBlockedRPCPlayers BlockedRPCPlayers { get; set; } = new ConfigBlockedRPCPlayers();
 
+        public static ConfigAvatarOptions AvatarOptions { get; set; } = new ConfigAvatarOptions();
 
         #endregion Config Classes
 
@@ -192,7 +194,14 @@ namespace AstroClient.Config
                 FileStream fs = new FileStream(ConfigBlockedRPCPlayersPath, FileMode.Create);
                 fs.Dispose();
                 Save_BlockedRPCPlayers();
-                Log.Warn($"AstroInstances File Created: {BlockedRPCPlayers}");
+                Log.Warn($"BlockedRPCPlayers File Created: {BlockedRPCPlayers}");
+            }
+            if (!File.Exists(ConfigAvatarOptionsPath))
+            {
+                FileStream fs = new FileStream(ConfigAvatarOptionsPath, FileMode.Create);
+                fs.Dispose();
+                Save_BlockedRPCPlayers();
+                Log.Warn($"AvatarOptions File Created: {ConfigAvatarOptionsPath}");
             }
 
             if (!Directory.Exists(ConfigTempFolder))
@@ -256,6 +265,11 @@ namespace AstroClient.Config
             JSonWriter.WriteToJsonFile(ConfigBlockedRPCPlayersPath, BlockedRPCPlayers);
             Log.Debug("Blocked RPC Players Config Saved.");
         }
+        public static void Save_AvatarOptions()
+        {
+            JSonWriter.WriteToJsonFile(ConfigAvatarOptionsPath, AvatarOptions);
+            Log.Debug("Avatar Options Config Saved.");
+        }
 
         public static void SaveAll()
         {
@@ -271,6 +285,7 @@ namespace AstroClient.Config
             Save_Performance();
             Save_LoadingScreen();
             Save_BlockedRPCPlayers();
+            Save_AvatarOptions();
             stopwatch.Stop();
             Log.Write($"Finished Saving Configuration Files: {stopwatch.ElapsedMilliseconds}ms");
             SaveMutex.ReleaseMutex();
@@ -359,6 +374,14 @@ namespace AstroClient.Config
             catch
             {
                 Log.Error("Failed to load Blocked RPC Players config, creating a new one..");
+            }
+            try
+            {
+                AvatarOptions = JSonWriter.ReadFromJsonFile<ConfigAvatarOptions>(ConfigAvatarOptionsPath);
+            }
+            catch
+            {
+                Log.Error("Failed to load Avatar Options config, creating a new one..");
             }
 
             stopwatch.Stop();

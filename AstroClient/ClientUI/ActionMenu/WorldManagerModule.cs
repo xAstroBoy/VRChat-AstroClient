@@ -26,6 +26,7 @@ namespace AstroClient.ClientUI.ActionMenu
         {
             AMUtils.AddToModsFolder("World Control", () =>
             {
+
                 CustomSubMenu.AddSubMenu("Player Camera Controls", () =>
                 {
                     CustomSubMenu.AddButton("Reset FarClipPlane", () => { Settings_Camera.RestoreFarClipPlane(); }, null);
