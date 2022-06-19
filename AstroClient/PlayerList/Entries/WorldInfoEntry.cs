@@ -2,7 +2,7 @@
 using System.Globalization;
 using AstroClient.Cheetos;
 using AstroClient.ClientActions;
-using AstroClient.ClientUI.Menu.Menus.Quickmenu;
+using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.World;
 using AstroClient.xAstroBoy.Utility;

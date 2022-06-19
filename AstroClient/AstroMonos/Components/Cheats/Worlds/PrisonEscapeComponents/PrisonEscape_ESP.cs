@@ -1,4 +1,5 @@
-﻿using AstroClient.AstroMonos.Components.Spoofer;
+﻿using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.ClientActions;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
@@ -8,7 +9,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Colors;
     using ClientAttributes;
-    using ESP.Player;
     using Il2CppSystem.Collections.Generic;
     using UI.SingleTag;
     using UnhollowerBaseLib.Attributes;

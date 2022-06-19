@@ -1,10 +1,10 @@
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ESP;
 
 namespace AstroClient.ClientUI.ActionMenu
 {
     using System.Drawing;
     using Gompoc.ActionMenuAPI.Api;
-    using Menu.ESP;
 
     internal class ESPModule : AstroEvents
     {

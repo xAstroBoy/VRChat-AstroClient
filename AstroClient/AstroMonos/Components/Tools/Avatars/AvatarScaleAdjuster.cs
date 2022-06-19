@@ -3,12 +3,12 @@ using System.Runtime.CompilerServices;
 using AstroClient.ClientAttributes;
 using AstroClient.Config;
 using AstroClient.LocalAvatar.ColliderAdjuster;
+using AstroClient.LocalAvatar.ScaleAdjuster;
 using Il2CppSystem.Collections.Generic;
 using RootMotion.FinalIK;
 using UnityEngine;
-using UnityEngine.TextCore;
 
-namespace ScaleGoesBrr
+namespace AstroClient.AstroMonos.Components.Tools.Avatars
 {
 
     [RegisterComponent]

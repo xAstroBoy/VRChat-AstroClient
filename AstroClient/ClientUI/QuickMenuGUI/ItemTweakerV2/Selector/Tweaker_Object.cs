@@ -1,9 +1,9 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Selector
-{
-    using Tools.Player;
-    using UnityEngine;
-    using xAstroBoy;
+﻿using AstroClient.Tools.Player;
+using AstroClient.xAstroBoy;
+using UnityEngine;
 
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector
+{
     internal class Tweaker_Object
     {
         internal static GameObject SetObjectToEditWithPath(string objpath)

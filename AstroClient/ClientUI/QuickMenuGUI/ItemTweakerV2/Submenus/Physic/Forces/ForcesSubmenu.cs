@@ -1,11 +1,10 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Physic.Forces
-{
-    using System;
-    using Selector;
-    using Tools.Extensions;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+﻿using System;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic.Forces
+{
     internal class ForcesSubmenu 
     {
         internal static void Init_ForceSubMenu(QMNestedGridMenu menu, float x, float y, bool btnHalf)

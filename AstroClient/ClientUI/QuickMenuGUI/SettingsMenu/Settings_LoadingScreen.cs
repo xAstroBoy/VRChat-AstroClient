@@ -1,11 +1,9 @@
-﻿namespace AstroClient.ClientUI.Menu.SettingsMenu
+﻿using AstroClient.ClientUI.LoadingScreen.Settings;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+
+namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 {
     #region Imports
-
-    using Config;
-    using LoadingScreen.Settings;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     #endregion Imports
 

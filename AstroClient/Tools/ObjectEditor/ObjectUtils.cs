@@ -1,4 +1,5 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 
 namespace AstroClient.Tools.ObjectEditor
 {
@@ -10,7 +11,6 @@ namespace AstroClient.Tools.ObjectEditor
     using System.Linq;
     using System.Threading;
     using AstroMonos.Components.Tools;
-    using ClientUI.Menu.ItemTweakerV2.Selector;
     using ColliderViewer;
     using Extensions;
     using Il2CppSystem.Text;

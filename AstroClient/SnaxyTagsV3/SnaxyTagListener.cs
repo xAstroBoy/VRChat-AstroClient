@@ -1,4 +1,3 @@
-using MelonLoader;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,23 +5,20 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using AstroClient;
 using AstroClient.AstroMonos.Components.UI.SingleTag;
 using AstroClient.ClientActions;
 using AstroClient.Streamer;
-using AstroClient.Tools.Colors;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
-using TMPro;
-using UnityEngine;
+using MelonLoader;
 using VRC;
-using VRC.Core;
 using WebSocketSharp;
 using WebSocketSharp.Net;
-using BuildInfo = MelonLoader.BuildInfo;
 using Color = System.Drawing.Color;
 using Random = System.Random;
+
+namespace AstroClient.SnaxyTagsV3;
 
 internal class SnaxyTagsSystem : AstroEvents
 {
@@ -125,14 +121,14 @@ internal class SnaxyTagsSystem : AstroEvents
             var UserID = text.Split(',')[1];
             var Content = Encoding.UTF8.GetString(Convert.FromBase64String(text.Split(',')[2]));
             if ((from mbox in PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray()
-                 where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == UserID
-                 select mbox).Count() != 1)
+                    where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == UserID
+                    select mbox).Count() != 1)
             {
                 yield break;
             }
             Player player = (from mbox in PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0.ToArray()
-                             where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == UserID
-                             select mbox).First();
+                where GetGroupSaveGetPermissions(mbox.GetAPIUser().GetUserID(), SnaxyKey) == UserID
+                select mbox).First();
             if (player.GetAPIUser() == null)
             {
                 yield break;
@@ -212,7 +208,7 @@ internal class SnaxyTagsSystem : AstroEvents
         await Task.Delay(2000);
         SnaxySocket = new WebSocket("ws://45.56.79.98:81");
         SnaxySocket.SetCookie(new Cookie("uid", GeneratedUserID));
-        SnaxySocket.SetCookie(new Cookie("melonversion", (string)typeof(BuildInfo).GetField("Version").GetValue(null)));
+        SnaxySocket.SetCookie(new Cookie("melonversion", (string)typeof(MelonLoader.BuildInfo).GetField("Version").GetValue(null)));
         SnaxySocket.Log.Output += OnOutput;
         SnaxySocket.OnError += OnError;
         SnaxySocket.OnClose += OnClose;

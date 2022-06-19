@@ -1,19 +1,16 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions.Components_exts;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC.SDKBase;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Pickup
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Pickup
 {
-    using System;
-    using AstroMonos.Components.Tools;
-    using Selector;
-    using Tools.Extensions.Components_exts;
-    using UnityEngine;
-    using VRC.SDKBase;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-    using xAstroBoy.Utility;
-
     internal class PickupSubmenu : AstroEvents
     {
         private static QMNestedButton PickupEditor { get; set; }

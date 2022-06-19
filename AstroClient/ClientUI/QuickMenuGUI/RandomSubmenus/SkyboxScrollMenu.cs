@@ -1,16 +1,14 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AstroClient.ClientActions;
+using AstroClient.Tools.Skybox;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
 
-namespace AstroClient.ClientUI.Menu.RandomSubmenus
+namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Tools.Skybox;
-    using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-
     internal class SkyboxScrollMenu : AstroEvents
     {
         internal override void RegisterToEvents()

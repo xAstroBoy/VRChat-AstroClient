@@ -1,11 +1,8 @@
 ﻿using AstroClient.ClientActions;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Selector
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector
 {
-    using System;
-    using Tools.Extensions;
-    using UnityEngine;
-
     internal class Tweaker_Selector 
     {
 

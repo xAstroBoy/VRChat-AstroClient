@@ -1,5 +1,4 @@
 ﻿using AstroClient.ClientActions;
-using AstroClient.PickupBlockerSystem;
 using AstroClient.Startup.Hooks;
 using VRC.Core;
 
@@ -12,7 +11,6 @@ namespace AstroClient.AstroMonos.Components.Tools
     using AstroClient.Tools.ObjectEditor.Online;
     using AstroClient.Tools.Player;
     using ClientAttributes;
-    using ClientUI.Menu.SettingsMenu;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -36,7 +34,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 {
                     if (value)
                     {
-                        PickupBlocker.OnPickupHeldCheck(this);
+                        PickupBlocker.PickupBlocker.OnPickupHeldCheck(this);
                         OnPickupHeld?.SafetyRaise();
                     }
                     else

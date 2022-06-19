@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.ClientActions;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
@@ -6,7 +7,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
     using AstroClient.Tools.UdonSearcher;
     using ClientAttributes;
     using Constants;
-    using ESP.Player;
     using Il2CppSystem.Collections.Generic;
     using MelonLoader;
     using Roles;

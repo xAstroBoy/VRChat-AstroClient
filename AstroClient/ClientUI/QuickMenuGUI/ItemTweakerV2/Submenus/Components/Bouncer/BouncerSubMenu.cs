@@ -1,11 +1,10 @@
-﻿namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Bouncer
-{
-    using System;
-    using Selector;
-    using Tools.Extensions.Components_exts;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+﻿using System;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions.Components_exts;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components.Bouncer
+{
     internal class BouncerSubMenu 
     {
         internal static void Init_BouncerMenu(QMNestedGridMenu main)

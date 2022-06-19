@@ -1,17 +1,14 @@
-﻿using AstroClient.AstroMonos.Components.ESP;
+﻿using System;
+using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.ClientActions;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.World;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ESP
+namespace AstroClient.ClientUI.QuickMenuGUI.ESP
 {
-    using System;
-    using AstroMonos.Components.ESP.Trigger;
-    using Tools.Extensions;
-    using Tools.World;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
-
     internal class VRChat_Map_ESP_Menu : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -85,7 +82,7 @@ namespace AstroClient.ClientUI.Menu.ESP
                     }
                     else
                     {
-                        item.GetOrAddComponent<ESP_VRCInteractable>();
+                        ComponentUtils.GetOrAddComponent<ESP_VRCInteractable>(item);
                     }
                 }
             }
@@ -149,7 +146,7 @@ namespace AstroClient.ClientUI.Menu.ESP
                     }
                     else
                     {
-                        item.GetOrAddComponent<ESP_Pickup>();
+                        ComponentUtils.GetOrAddComponent<ESP_Pickup>(item);
                     }
                 }
             }
@@ -214,7 +211,7 @@ namespace AstroClient.ClientUI.Menu.ESP
                     }
                     else
                     {
-                      triggeresp =  item.GetOrAddComponent<ESP_Trigger>();
+                      triggeresp =  ComponentUtils.GetOrAddComponent<ESP_Trigger>(item);
                     }
 
                     if (triggeresp != null)
@@ -299,7 +296,7 @@ namespace AstroClient.ClientUI.Menu.ESP
                         }
                         else
                         {
-                            item.gameObject.GetOrAddComponent<ESP_UdonBehaviour>();
+                            ComponentUtils.GetOrAddComponent<ESP_UdonBehaviour>(item.gameObject);
                         }
                     }
                 }

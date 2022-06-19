@@ -1,6 +1,5 @@
 ﻿using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
-using AstroClient.PickupBlockerSystem;
 using AstroClient.Tools.ObjectEditor.Online;
 using AstroClient.xAstroBoy.Utility;
 using Photon.Pun;

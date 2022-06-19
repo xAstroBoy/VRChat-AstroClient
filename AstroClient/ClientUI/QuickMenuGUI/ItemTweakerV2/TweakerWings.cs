@@ -1,21 +1,18 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientResources.Loaders;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Pickup;
+using AstroClient.Target;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Extensions.Components_exts;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using AstroClient.xAstroBoy.Extensions;
+using UnityEngine;
+using VRC;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2
 {
-    using AstroMonos.Components.Tools;
-    using ClientResources;
-    using ClientResources.Loaders;
-    using Selector;
-    using Submenus.Pickup;
-    using Target;
-    using Tools.Extensions;
-    using Tools.Extensions.Components_exts;
-    using UnityEngine;
-    using VRC;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-    using xAstroBoy.Extensions;
-
     internal class TweakerWings : AstroEvents
     {
         internal override void RegisterToEvents()

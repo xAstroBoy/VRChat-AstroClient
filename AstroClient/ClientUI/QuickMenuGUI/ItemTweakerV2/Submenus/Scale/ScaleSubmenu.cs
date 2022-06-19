@@ -1,16 +1,14 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using AstroClient.AstroMonos.Components.Custom.Random;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.ObjectEditor.Editor.Scale;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Scale
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Scale
 {
-    using System;
-    using AstroMonos.Components.Custom.Random;
-    using Selector;
-    using Tools.Extensions;
-    using Tools.ObjectEditor.Editor.Scale;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-
     internal class ScaleSubmenu : AstroEvents
     {
         internal override void RegisterToEvents()

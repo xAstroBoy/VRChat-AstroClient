@@ -9,7 +9,6 @@ using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.CheetosUI;
 using AstroClient.ClientActions;
-using AstroClient.ClientUI.Menu.ItemTweakerV2.Selector;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Extensions.Components_exts;

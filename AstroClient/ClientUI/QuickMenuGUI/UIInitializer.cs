@@ -1,25 +1,20 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos;
+using AstroClient.ClientActions;
+using AstroClient.ClientResources.Loaders;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2;
+using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
+using AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus;
+using AstroClient.ClientUI.QuickMenuGUI.Tabs;
+using AstroClient.ClientUI.QuickMenuGUI.Wings;
+using AstroClient.Constants;
 using AstroClient.Kaned;
+using AstroClient.Tools.Headlight;
+using AstroClient.Tools.ObjectEditor;
+using AstroClient.WorldModifications;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-namespace AstroClient.ClientUI.Menu
+namespace AstroClient.ClientUI.QuickMenuGUI
 {
-    using AstroMonos;
-    using Cheetos;
-    using ClientResources.Loaders;
-    using Constants;
-    using Experiments;
-    using ItemTweakerV2;
-    using Menus;
-    using Menus.Quickmenu;
-    using RandomSubmenus;
-    using Tabs;
-    using Tools.Headlight;
-    using Tools.ObjectEditor;
-    using Wings;
-    using WorldModifications;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-
     internal class UIInitializer : AstroEvents
     {
         internal override void RegisterToEvents()

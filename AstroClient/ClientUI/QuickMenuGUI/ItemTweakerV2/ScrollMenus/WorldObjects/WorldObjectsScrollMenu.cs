@@ -1,18 +1,17 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC.UI.Elements;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.WorldObjects
 {
-    using System.Collections.Generic;
-    using AstroMonos.Components.Tools.Listeners;
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-    using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-    using xAstroBoy.Utility;
-
     internal class WorldObjectsScrollMenu : AstroEvents
     {
         private static QMWings WingMenu;
@@ -82,7 +81,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects
                     {
                         var btn = new QMSingleButton(CurrentScrollMenu, $"Select {item.name}", () => { Tweaker_Object.SetObjectToEdit(item, true); }, $"Select {item.name}", item.Get_GameObject_Active_ToColor());
 
-                        var listener = item.GetOrAddComponent<ScrollMenuListener>();
+                        var listener = ComponentUtils.GetOrAddComponent<ScrollMenuListener>(item);
                         if (listener != null) listener.SingleButton = btn;
                         Listeners.Add(listener);
 

@@ -1,18 +1,17 @@
-﻿using AstroClient.CheetosUI;
+﻿using System.Collections.Generic;
+using AstroClient.CheetosUI;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks;
+using AstroClient.Tools.Extensions;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 using VRC;
 using VRC.SDKBase;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.Kmarts
 {
-    using System.Collections.Generic;
-    using Tools.Extensions;
-    using UnityEngine;
-    using WorldsIds;
-    using xAstroBoy;
-
     internal class KmartExpress_1 : AstroEvents
     {
         internal override void RegisterToEvents()

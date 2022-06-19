@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools.Avatars;
+using AstroClient.ClientActions;
 using AstroClient.Config;
 using AstroClient.xAstroBoy.Utility;
 

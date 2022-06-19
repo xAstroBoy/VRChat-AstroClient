@@ -1,6 +1,7 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Scale;
+
+namespace AstroClient.Tools.Extensions
 {
-    using ClientUI.Menu.ItemTweakerV2.Submenus.Scale;
     using UnityEngine;
 
     internal static class Scale_ext

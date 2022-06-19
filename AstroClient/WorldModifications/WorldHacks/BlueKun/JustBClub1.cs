@@ -1,33 +1,31 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using AstroClient.AstroMonos.AstroUdons;
+using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.CheetosUI;
+using AstroClient.ClientActions;
+using AstroClient.Constants;
+using AstroClient.CustomClasses;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.UdonSearcher;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using MelonLoader;
+using UnityEngine;
+using VRC.Udon;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 {
     #region Imports
-
-    using AstroClient.xAstroBoy.Extensions;
-    using AstroMonos.AstroUdons;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using AstroMonos.Components.Spoofer;
-    using AstroMonos.Components.Tools;
-    using AstroMonos.Components.Tools.Listeners;
-    using CheetosUI;
-    using Constants;
-    using CustomClasses;
-    using MelonLoader;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Tools.Extensions;
-    using Tools.UdonEditor;
-    using Tools.UdonSearcher;
-    using UnityEngine;
-    using VRC.Udon;
-    using WorldsIds;
-    using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
 
     #endregion Imports
 
@@ -576,7 +574,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (_RenderCameraReader == null)
                 {
-                    return _RenderCameraReader = RenderCamera.GetOrAddComponent<ImageRenderCameraReader>();
+                    return _RenderCameraReader = ComponentUtils.GetOrAddComponent<ImageRenderCameraReader>(RenderCamera);
                 }
                 return _RenderCameraReader;
             }
@@ -1018,7 +1016,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (Object != null)
             {
-                var listener = Object.GetOrAddComponent<GameObjectListener>();
+                var listener = ComponentUtils.GetOrAddComponent<GameObjectListener>(Object);
                 MiscUtils.DelayFunction(1f, () =>
                 {
                     if (listener != null)
@@ -1158,13 +1156,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (VIPControls != null)
                     {
                         VIPControls.SetActive(true);
-                        VIPControls.GetOrAddComponent<Enabler>();
+                        ComponentUtils.GetOrAddComponent<Enabler>(VIPControls);
                     }
 
                     if (ElevatorFlairBtn != null)
                     {
                         ElevatorFlairBtn.SetActive(true);
-                        ElevatorFlairBtn.GetOrAddComponent<Enabler>();
+                        ComponentUtils.GetOrAddComponent<Enabler>(ElevatorFlairBtn);
                     }
                 }
 
@@ -1173,7 +1171,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (FlairBtnTablet != null)
                     {
                         FlairBtnTablet.SetActive(true);
-                        FlairBtnTablet.GetOrAddComponent<Enabler>();
+                        ComponentUtils.GetOrAddComponent<Enabler>(FlairBtnTablet);
                     }
                 }
 
@@ -1231,7 +1229,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if(VIP_Outside_Door_Entrance != null)
                 {
-                    var trigger = VIP_Outside_Door_Entrance.GetOrAddComponent<VRC_AstroInteract>();
+                    var trigger = ComponentUtils.GetOrAddComponent<VRC_AstroInteract>(VIP_Outside_Door_Entrance);
                     if(trigger != null)
                     {
                         trigger.OnInteract = () =>
@@ -1244,7 +1242,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (VIPRoom_Internal_Door != null)
                 {
-                    var Trigger = VIPRoom_Internal_Door.GetOrAddComponent<VRC_AstroInteract>();
+                    var Trigger = ComponentUtils.GetOrAddComponent<VRC_AstroInteract>(VIPRoom_Internal_Door);
                     if (Trigger != null)
                     {
                         Trigger.OnInteract = () =>

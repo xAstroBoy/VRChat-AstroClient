@@ -1,19 +1,14 @@
-﻿
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using AstroClient.AstroMonos.Components.Tools;
+﻿using System.Collections.Generic;
 using AstroClient.ClientActions;
-using AstroClient.ClientUI.Menu.SettingsMenu;
+using AstroClient.ClientUI.QuickMenuGUI.SettingsMenu;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.ObjectEditor.Online;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using Photon.Pun;
-using VRC;
 using VRC.Core;
-using VRC.SDKBase;
 
-namespace AstroClient.PickupBlockerSystem
+namespace AstroClient.AstroMonos.Components.Tools.PickupBlocker
 {
     internal class PickupBlocker : AstroEvents
     {
@@ -151,7 +146,7 @@ namespace AstroClient.PickupBlockerSystem
         }
 
 
-        private static void OnPlayerJoined(Player player)
+        private static void OnPlayerJoined(VRC.Player player)
         {
             var id = player.GetAPIUser().id;
             if (id != null)

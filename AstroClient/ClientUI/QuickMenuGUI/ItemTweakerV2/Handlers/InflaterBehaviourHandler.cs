@@ -1,13 +1,9 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Custom.Random;
+using AstroClient.ClientActions;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Handlers
 {
-    using System;
-    using AstroMonos.Components.Custom.Random;
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-
     internal class InflaterBehaviourHandler : AstroEvents
     {
         internal override void RegisterToEvents()

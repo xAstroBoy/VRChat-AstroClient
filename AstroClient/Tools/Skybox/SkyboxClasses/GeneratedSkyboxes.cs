@@ -1,5 +1,6 @@
 ﻿
 
+using AstroClient.Tools.Skybox.Builders;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
 namespace AstroClient.Tools.Skybox.SkyboxClasses
@@ -7,7 +8,6 @@ namespace AstroClient.Tools.Skybox.SkyboxClasses
     using System;
     using System.Text;
     using CheetoLibrary.Utility;
-    using MaterialBuilders;
     using AstroClient.xAstroBoy.Extensions;
     using UnityEngine;
     using System.Collections;

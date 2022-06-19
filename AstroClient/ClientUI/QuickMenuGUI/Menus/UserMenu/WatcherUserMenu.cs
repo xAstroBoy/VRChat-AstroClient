@@ -1,8 +1,8 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.UserMenu
-{
-    using Tools.ObjectEditor;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+﻿using AstroClient.Tools.ObjectEditor;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.UserMenu
+{
     internal class WatcherUserMenu : AstroEvents
     {
         internal static void InitButtons(QMNestedGridMenu menu)

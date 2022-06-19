@@ -1,16 +1,15 @@
-﻿namespace AstroClient.ClientUI.Menu.Wings
+﻿using System.Windows.Forms;
+using AstroClient.ClientResources.Loaders;
+using AstroClient.Constants;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using AstroClient.xAstroBoy.Utility;
+using MelonLoader;
+using VRC;
+using VRC.Core;
+using VRC.UI;
+
+namespace AstroClient.ClientUI.QuickMenuGUI.Wings
 {
-    using System.Windows.Forms;
-    using ClientResources;
-    using ClientResources.Loaders;
-    using Constants;
-    using MelonLoader;
-    using VRC;
-    using VRC.Core;
-    using VRC.UI;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-    using xAstroBoy.Utility;
     using AvatarUtils = Tools.Player.AvatarUtils;
 
     internal class MainClientWings

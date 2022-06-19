@@ -1,4 +1,5 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.Menus.UserMenu;
 using AstroClient.xAstroBoy.Utility;
 using Cheetah;
 
@@ -13,9 +14,7 @@ namespace AstroClient
     using System.Reflection;
     using CheetosConsole;
     using ClientResources.Loaders;
-    using ClientUI.Menu.ItemTweakerV2.Selector;
     using ClientUI.Menu.Menus;
-    using ClientUI.Menu.Menus.UserMenu;
     using Config;
     using Constants;
     using MelonLoader;

@@ -1,14 +1,8 @@
 ﻿using Photon.Pun;
 using VRC.SDKBase;
 
-namespace AstroClient.PickupBlockerSystem
+namespace AstroClient.AstroMonos.Components.Tools.PickupBlocker
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     internal static class PickupBlocker_Tools
     {
         internal static bool isPickup(this PhotonView instance)

@@ -1,28 +1,20 @@
-﻿using AstroClient.ClientActions;
-using AstroClient.xAstroBoy.Extensions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.CustomClasses;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.UdonEditor;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC.Udon;
+using VRC.UI.Elements;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Udon
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Udon
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using AstroMonos.Components.Tools.Listeners;
-    using CustomClasses;
-    using ItemTweakerV2.Selector;
-    using MelonLoader;
-    using Tools.Extensions;
-    using Tools.UdonEditor;
-    using UnityEngine;
-    using VRC.Udon;
-    using VRC.Udon.Common.Interfaces;
-    using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-    using xAstroBoy.Utility;
-
     internal class UdonScrollMenu : AstroEvents
     {
         private static QMWings WingMenu;

@@ -1,17 +1,15 @@
-﻿using AstroClient.AstroMonos.AstroUdons;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
-using VRC.SDK3.Components;
+using Color = System.Drawing.Color;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.MeRooms
 {
-    using System.Collections.Generic;
-    using System.Drawing;
-    using WorldsIds;
-    using xAstroBoy;
-
     internal class Meroom_939 : AstroEvents
     {
         internal override void RegisterToEvents()

@@ -6,7 +6,6 @@ namespace AstroClient.AstroMonos.Components.Tools
     using System;
     using AstroClient.Tools.Extensions;
     using ClientAttributes;
-    using ClientUI.Menu.ItemTweakerV2.Selector;
     using Il2CppSystem.Collections.Generic;
     using UnityEngine;
 

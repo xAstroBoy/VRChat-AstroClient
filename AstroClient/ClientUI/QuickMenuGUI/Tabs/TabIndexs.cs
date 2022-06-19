@@ -1,4 +1,4 @@
-﻿namespace AstroClient.ClientUI.Menu.Tabs
+﻿namespace AstroClient.ClientUI.QuickMenuGUI.Tabs
 {
     internal struct TabIndexs
     {

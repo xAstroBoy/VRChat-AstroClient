@@ -1,21 +1,16 @@
 ﻿using System;
-using AstroClient.AstroMonos;
-using AstroClient.PickupBlockerSystem;
+using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.AstroMonos.Components.Tools.PickupBlocker;
+using AstroClient.Cheetos;
+using AstroClient.Startup.Hooks;
+using AstroClient.Target;
+using AstroClient.Tools.ObjectEditor;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.Menus.UserMenu
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.UserMenu
 {
-    using System.Collections;
-    using AstroMonos.Components.Spoofer;
-    using AstroMonos.Components.Tools;
-    using Cheetos;
-    using Startup.Hooks;
-    using Target;
-    using Tools.ObjectEditor;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.UIPaths;
-    using xAstroBoy.Utility;
-
     internal class UserInteractMenuBtns : AstroEvents
     {
         internal static void InitUserButtons()

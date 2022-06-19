@@ -1,20 +1,18 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
 using MelonLoader;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
+using VRC.Core;
 
-namespace AstroClient.AstroMonos.Components.ESP.Player
+namespace AstroClient.AstroMonos.Components.ESP
 {
-    using AstroClient.Tools.Extensions;
-    using ClientAttributes;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
-    using VRC;
-    using VRC.Core;
-    using xAstroBoy.Extensions;
-    using xAstroBoy.Utility;
-
     [RegisterComponent]
     public class PlayerESP : MonoBehaviour
     {
@@ -375,16 +373,16 @@ namespace AstroClient.AstroMonos.Components.ESP.Player
             }
         }
 
-        private Player _AssignedPlayer;
+        private VRC.Player _AssignedPlayer;
 
-        internal Player AssignedPlayer
+        internal VRC.Player AssignedPlayer
         {
             [HideFromIl2Cpp]
             get
             {
                 if (_AssignedPlayer == null)
                 {
-                    return _AssignedPlayer = GetComponent<Player>();
+                    return _AssignedPlayer = GetComponent<VRC.Player>();
                 }
                 return _AssignedPlayer;
             }

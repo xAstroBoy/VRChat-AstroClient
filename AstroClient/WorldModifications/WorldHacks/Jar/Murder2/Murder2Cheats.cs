@@ -1,4 +1,5 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ESP;
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder2
 {
@@ -7,7 +8,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder2
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ClientUI.Menu.ESP;
     using Constants;
     using Tools.Extensions;
     using Tools.Extensions.Components_exts;

@@ -1,4 +1,4 @@
-using AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Spawner;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Spawner;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {

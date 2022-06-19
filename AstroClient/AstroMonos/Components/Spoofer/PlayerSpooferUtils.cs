@@ -1,9 +1,9 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
 
 namespace AstroClient.AstroMonos.Components.Spoofer
 {
     using System.Drawing;
-    using ClientUI.Menu.Menus.Quickmenu;
     using Constants;
     using UnhollowerBaseLib.Attributes;
     using xAstroBoy.Utility;

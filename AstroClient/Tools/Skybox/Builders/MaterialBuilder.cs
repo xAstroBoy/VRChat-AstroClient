@@ -1,15 +1,9 @@
-﻿using AstroClient.ClientUI.Menu.RandomSubmenus;
-using AstroClient.Tools.Skybox.CubemapTools;
+﻿using System.Text;
+using AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus;
 using UnityEngine;
 
-namespace AstroClient.Tools.Skybox.MaterialBuilders
+namespace AstroClient.Tools.Skybox.Builders
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     internal class MaterialBuilder
     {
         //internal static Material BuildCubemap(Texture2D PositiveX, Texture2D NegativeX, Texture2D PositiveY, Texture2D NegativeY, Texture2D PositiveZ, Texture2D NegativeZ)

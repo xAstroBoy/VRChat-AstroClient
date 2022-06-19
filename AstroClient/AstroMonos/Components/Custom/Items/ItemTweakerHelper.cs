@@ -1,4 +1,4 @@
-using AstroClient.ClientUI.Menu.ItemTweakerV2.Selector;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {

@@ -1,4 +1,5 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Scale;
 
 namespace AstroClient.Tools.ObjectEditor.Editor.Scale
 {
@@ -7,7 +8,7 @@ namespace AstroClient.Tools.ObjectEditor.Editor.Scale
     using Extensions;
     using UnityEngine;
     using VRC.Udon;
-    using static ClientUI.Menu.ItemTweakerV2.Submenus.Scale.ScaleSubmenu;
+    using static ScaleSubmenu;
     using static Constants.CustomLists;
 
     internal class ScaleEditor : AstroEvents

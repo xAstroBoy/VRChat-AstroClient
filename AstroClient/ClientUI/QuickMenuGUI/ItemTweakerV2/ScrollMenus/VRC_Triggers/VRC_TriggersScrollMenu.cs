@@ -1,19 +1,18 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 using AstroClient.Startup.Hooks;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC.UI.Elements;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Triggers
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.VRC_Triggers
 {
-    using System.Collections.Generic;
-    using AstroMonos.Components.Tools.Listeners;
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-    using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-    using xAstroBoy.Utility;
-
     internal class VRC_TriggersScrollMenu : AstroEvents
     {
         private static QMWings WingMenu;
@@ -106,7 +105,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.VRC_Triggers
                             obj.TriggerClick();
                         }
                     }, $"Click {obj.name}", obj.Get_GameObject_Active_ToColor());
-                    var listener = obj.gameObject.GetOrAddComponent<ScrollMenuListener>();
+                    var listener = ComponentUtils.GetOrAddComponent<ScrollMenuListener>(obj.gameObject);
                     if (listener != null) listener.SingleButton = btn;
                     Listeners.Add(listener);
                     GeneratedButtons.Add(btn);

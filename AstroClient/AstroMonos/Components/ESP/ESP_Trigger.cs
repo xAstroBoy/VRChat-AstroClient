@@ -1,15 +1,14 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using System.Linq;
+using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
+using AstroClient.Tools.Colors;
+using AstroClient.Tools.Extensions;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
 
-namespace AstroClient.AstroMonos.Components.ESP.Trigger
+namespace AstroClient.AstroMonos.Components.ESP
 {
-    using System;
-    using System.Linq;
-    using AstroClient.Tools.Colors;
-    using AstroClient.Tools.Extensions;
-    using ClientAttributes;
-    using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
-
     [RegisterComponent]
     public class ESP_Trigger : MonoBehaviour
     {

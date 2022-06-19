@@ -1,11 +1,10 @@
-﻿namespace AstroClient.ClientUI.Menu.SettingsMenu
+﻿using AstroClient.Cheetos;
+using AstroClient.Config;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+
+namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 {
     #region Imports
-
-    using Cheetos;
-    using Config;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     #endregion Imports
 

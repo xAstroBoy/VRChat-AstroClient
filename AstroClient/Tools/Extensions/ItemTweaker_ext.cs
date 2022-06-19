@@ -1,10 +1,11 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Handlers;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.WorldObjects;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+
+namespace AstroClient.Tools.Extensions
 {
     using System.Collections.Generic;
     using AstroMonos.Components.Custom.Random;
-    using ClientUI.Menu.ItemTweakerV2.Handlers;
-    using ClientUI.Menu.ItemTweakerV2.ScrollMenus.WorldObjects;
-    using ClientUI.Menu.ItemTweakerV2.Selector;
     using UnityEngine;
 
     internal static class ItemTweaker_ext

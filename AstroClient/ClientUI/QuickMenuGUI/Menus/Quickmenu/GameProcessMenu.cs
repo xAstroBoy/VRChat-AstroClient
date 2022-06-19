@@ -1,12 +1,11 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
+﻿using System.Diagnostics;
+using System.IO;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using UnityEngine;
+
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
 {
     #region Imports
-
-    using System.Diagnostics;
-    using System.IO;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     #endregion Imports
 

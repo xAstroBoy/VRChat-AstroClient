@@ -1,14 +1,10 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Handlers
 {
-    using System;
-    using AstroMonos.Components.Tools;
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-    using xAstroBoy.Utility;
-
     internal class PickupControllerHandler : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -22,7 +18,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
         {
             if (obj != null)
             {
-                var PickupController = obj.GetOrAddComponent<PickupController>();
+                var PickupController = ComponentUtils.GetOrAddComponent<PickupController>(obj);
                 if (PickupController != null)
                 {
                     TweakerEventActions.OnPickupControllerSelected.SafetyRaiseWithParams(PickupController);
@@ -44,7 +40,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
         {
             if (obj != null)
             {
-                PickupController PickupController = obj.GetOrAddComponent<PickupController>();
+                PickupController PickupController = ComponentUtils.GetOrAddComponent<PickupController>(obj);
                 if (PickupController != null)
                 {
                     PickupController.RemoveActionEvents(); // No more Focused on tweaker, so no need for The property Event changed.

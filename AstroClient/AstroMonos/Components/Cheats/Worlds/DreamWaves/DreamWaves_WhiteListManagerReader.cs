@@ -10,7 +10,7 @@ using UnityEngine;
 using Object = Il2CppSystem.Object;
 using IntPtr = System.IntPtr;
 
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.DreamWaves
 {
 
     [RegisterComponent]

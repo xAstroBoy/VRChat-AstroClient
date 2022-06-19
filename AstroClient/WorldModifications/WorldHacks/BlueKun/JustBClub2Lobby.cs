@@ -1,35 +1,26 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.ClientActions;
+using AstroClient.CustomClasses;
 using AstroClient.Startup.Hooks;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
-using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.UdonSearcher;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using MelonLoader;
+using UnityEngine;
+using VRC.Udon;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 {
     #region Imports
-
-    using AstroClient.xAstroBoy.Extensions;
-    using AstroMonos.AstroUdons;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using AstroMonos.Components.Spoofer;
-    using AstroMonos.Components.Tools;
-    using AstroMonos.Components.Tools.Listeners;
-    using CheetosUI;
-    using Constants;
-    using CustomClasses;
-    using MelonLoader;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Tools.Extensions;
-    using Tools.UdonEditor;
-    using Tools.UdonSearcher;
-    using UnityEngine;
-    using VRC.Udon;
-    using WorldsIds;
-    using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
 
     #endregion Imports
 
@@ -172,7 +163,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (_RenderCameraReader == null)
                 {
-                    return _RenderCameraReader = ReadRenderTexture.GetOrAddComponent<ImageRenderCameraReader2>();
+                    return _RenderCameraReader = ComponentUtils.GetOrAddComponent<ImageRenderCameraReader2>(ReadRenderTexture);
                 }
                 return _RenderCameraReader;
             }
@@ -188,7 +179,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (_PatronSystemReader == null)
                 {
-                    return _PatronSystemReader = ProcessPatrons.gameObject.GetOrAddComponent<BClub2PatronReader>();
+                    return _PatronSystemReader = ComponentUtils.GetOrAddComponent<BClub2PatronReader>(ProcessPatrons.gameObject);
                 }
                 return _PatronSystemReader;
             }

@@ -1,29 +1,19 @@
-﻿using System.Collections.Generic;
-using AstroClient.ClientActions;
-using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
-using UnityEngine;
+﻿using System.Reflection;
+using AstroClient.Cheetos;
+using HarmonyLib;
 using VRC.UI.Elements;
 
-namespace AstroClient.Startup.Hooks
+namespace AstroClient.Startup.Fixes
 {
     #region Imports
 
-    using System;
-    using System.Collections;
-    using System.Reflection;
-    
-    using Cheetos;
-    using HarmonyLib;
-    using MelonLoader;
-    using Tools.Extensions;
-
     #endregion Imports
 
-    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+    [Obfuscation(Feature = "HarmonyRenamer")]
     internal class FixRandomQMOpen : AstroEvents
     {
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        [Obfuscation(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(FixRandomQMOpen).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));

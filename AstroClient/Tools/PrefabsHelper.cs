@@ -1,17 +1,10 @@
 ﻿using System.Collections.Generic;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
-using AstroClient.Tools.Extensions;
-using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
 
-namespace AstroClient.Tools.Instance.History
+namespace AstroClient.Tools
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using xAstroBoy;
-
     internal class PrefabsHelper : AstroEvents
     {
         internal override void RegisterToEvents()

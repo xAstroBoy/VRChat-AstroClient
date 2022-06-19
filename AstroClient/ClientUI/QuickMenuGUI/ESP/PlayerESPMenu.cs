@@ -1,21 +1,13 @@
-﻿using AstroClient.ClientActions;
-using UnhollowerBaseLib.Attributes;
+﻿using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus;
+using AstroClient.Config;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
+using VRC;
 
-namespace AstroClient.ClientUI.Menu.ESP
+namespace AstroClient.ClientUI.QuickMenuGUI.ESP
 {
-    using System;
-    
-    using AstroMonos.Components.ESP.Player;
-    using Config;
-    using RandomSubmenus;
-    using Tools.Colors;
-    using Tools.Extensions;
-    using UnityEngine;
-    using VRC;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
-
     internal class PlayerESPMenu : AstroEvents
     {
 
@@ -91,7 +83,7 @@ namespace AstroClient.ClientUI.Menu.ESP
         {
             if (Toggle_Player_ESP && player != null && player != GameInstances.LocalPlayer.GetPlayer() && !player.gameObject.GetComponent<PlayerESP>())
             {
-                player.gameObject.GetOrAddComponent<PlayerESP>();
+                ComponentUtils.GetOrAddComponent<PlayerESP>(player.gameObject);
             }
         }
 
@@ -102,7 +94,7 @@ namespace AstroClient.ClientUI.Menu.ESP
                 Player item = WorldUtils.Players[i];
                 if (item != GameInstances.LocalPlayer.GetPlayer() && !item.gameObject.GetComponent<PlayerESP>())
                 {
-                    _ = item.gameObject.GetOrAddComponent<PlayerESP>();
+                    _ = ComponentUtils.GetOrAddComponent<PlayerESP>(item.gameObject);
                 }
             }
         }

@@ -1,5 +1,5 @@
-
-using AstroClient.ClientUI.Menu.Menus.Quickmenu;
+using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
+using AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus;
 using AstroClient.Config;
 using AstroClient.Tools.Extensions;
 
@@ -7,7 +7,6 @@ namespace AstroClient.ClientUI.ActionMenu
 {
     using System.Drawing;
     using Gompoc.ActionMenuAPI.Api;
-    using Menu.RandomSubmenus;
     using Spawnables.Enderpearl;
     using Tools.Player.Movement.Exploit;
     using ClientActions;

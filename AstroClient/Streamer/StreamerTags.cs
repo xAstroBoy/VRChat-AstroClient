@@ -1,10 +1,10 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.ClientActions;
 
 namespace AstroClient.Streamer
 {
     using System.Collections;
     using System.Drawing;
-    using AstroMonos.Components.ESP.Player;
     using Constants;
     using MelonLoader;
     using Tools.Extensions;

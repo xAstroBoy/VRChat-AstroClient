@@ -1,18 +1,17 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections.Generic;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Spawner;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC.SDKBase;
+using VRC.UI.Elements;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Prefabs
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Prefabs
 {
-    using System.Collections.Generic;
-    using Selector;
-    using Submenus.Spawner;
-    using UnityEngine;
-    using VRC.SDKBase;
-    using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-    using xAstroBoy.Utility;
-
     internal class PrefabSpawnerScrollMenu : AstroEvents
     {
         private static QMWings WingMenu;

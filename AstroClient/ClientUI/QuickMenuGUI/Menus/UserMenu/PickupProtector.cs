@@ -1,14 +1,11 @@
-﻿using AstroClient.PickupBlockerSystem;
+﻿using System;
+using AstroClient.AstroMonos.Components.Tools.PickupBlocker;
+using AstroClient.Constants;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
 
-namespace AstroClient.ClientUI.Menu.Menus.UserMenu
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.UserMenu
 {
-    using System;
-    using AstroMonos;
-    using Constants;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
-
     internal class PickupProtector : AstroEvents
     {
 

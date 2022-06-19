@@ -1,17 +1,16 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.ClientActions;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.World;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using UnityEngine;
+using VRC.UI.Elements;
 
-namespace AstroClient.ClientUI.Menu.RandomSubmenus
+namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
 {
-    using System.Collections.Generic;
-    using AstroMonos.Components.Tools.Listeners;
-    using Tools.Extensions;
-    using Tools.World;
-    using UnityEngine;
-    using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-
     internal class VRC_InteractableSubMenu : AstroEvents
     {
         internal override void RegisterToEvents()

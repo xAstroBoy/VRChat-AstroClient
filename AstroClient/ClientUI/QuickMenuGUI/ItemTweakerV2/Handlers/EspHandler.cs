@@ -1,13 +1,12 @@
 ﻿using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Handlers
 {
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-    using xAstroBoy.Utility;
-
     internal class EspHandler : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -23,7 +22,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
             {
                 if (TweakerESPEnabled)
                 {
-                    _ = obj.GetOrAddComponent<ESP_ItemTweaker>();
+                    _ = ComponentUtils.GetOrAddComponent<ESP_ItemTweaker>(obj);
                 }
             }
         }
@@ -55,7 +54,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
                 {
                     if (Tweaker_Selector.SelectedObject != null)
                     {
-                        _ = Tweaker_Selector.SelectedObject.GetOrAddComponent<ESP_ItemTweaker>();
+                        _ = ComponentUtils.GetOrAddComponent<ESP_ItemTweaker>(Tweaker_Selector.SelectedObject);
                     }
                 }
                 else

@@ -1,15 +1,13 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Extensions;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.ObjectInfoSubMenu
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.ObjectInfoSubMenu
 {
-    using AstroMonos.Components.Tools;
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Extensions;
-
     internal class ObjectInfoSubMenu : AstroEvents
     {
         internal override void RegisterToEvents()

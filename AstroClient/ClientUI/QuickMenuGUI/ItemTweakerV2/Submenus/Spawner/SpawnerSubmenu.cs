@@ -1,19 +1,16 @@
-﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AstroClient.AstroMonos.Components.Tools.Listeners;
 using AstroClient.ClientActions;
-using AstroClient.xAstroBoy.Utility;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Prefabs;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.ObjectEditor.Cloner;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Spawner
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Spawner
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using ScrollMenus.Prefabs;
-    using Selector;
-    using Tools.Extensions;
-    using Tools.ObjectEditor.Cloner;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-
     internal class SpawnerSubmenu : AstroEvents
     {
         internal override void RegisterToEvents()

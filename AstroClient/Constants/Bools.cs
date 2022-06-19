@@ -1,7 +1,8 @@
-﻿namespace AstroClient.Constants
+﻿using AstroClient.ClientUI.QuickMenuGUI;
+using AstroClient.ClientUI.QuickMenuGUI.Wings;
+
+namespace AstroClient.Constants
 {
-    using ClientUI.Menu;
-    using ClientUI.Menu.Wings;
     using Config;
 
     internal class Bools

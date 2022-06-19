@@ -1,10 +1,11 @@
 ﻿//using System.Threading.Tasks;
 
+using AstroClient.ClientUI.QuickMenuGUI.SettingsMenu;
+
 namespace AstroClient.ClientUI.LoadingScreen.Settings
 {
     using Assets;
     using AstroMonos.Components.Tools;
-    using Menu.SettingsMenu;
     using xAstroBoy.UIPaths;
     using xAstroBoy.Utility;
     using ConfigManager = Config.ConfigManager;

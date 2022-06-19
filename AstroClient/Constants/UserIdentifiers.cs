@@ -3,8 +3,6 @@ using VRC.SDKBase;
 
 namespace AstroClient.Constants
 {
-    using ClientUI.Menu;
-    using ClientUI.Menu.Wings;
     using Config;
 
     internal class UserIdentifiers

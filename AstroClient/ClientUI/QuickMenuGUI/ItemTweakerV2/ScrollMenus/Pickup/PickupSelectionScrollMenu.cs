@@ -1,18 +1,17 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.World;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using UnityEngine;
+using VRC.UI.Elements;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.ScrollMenus.Pickup
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Pickup
 {
-    using System.Collections.Generic;
-    using AstroMonos.Components.Tools.Listeners;
-    using Selector;
-    using Tools.Extensions;
-    using Tools.World;
-    using UnityEngine;
-    using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-
     internal class PickupSelectionScrollMenu : AstroEvents
     {
         private static QMWings WingMenu;

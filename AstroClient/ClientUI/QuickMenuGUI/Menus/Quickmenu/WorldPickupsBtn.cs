@@ -1,13 +1,12 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
-{
-    using System;
-    using Tools.Extensions.Components_exts;
-    using Tools.ObjectEditor;
-    using Tools.QPens;
-    using Tools.World;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+﻿using System;
+using AstroClient.Tools.Extensions.Components_exts;
+using AstroClient.Tools.ObjectEditor;
+using AstroClient.Tools.QPens;
+using AstroClient.Tools.World;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
+{
     internal class WorldPickupsBtn
     {
         internal static void InitButtons(QMGridTab menu)

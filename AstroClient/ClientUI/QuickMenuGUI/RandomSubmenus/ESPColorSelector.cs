@@ -1,15 +1,14 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Drawing;
+using AstroClient.ClientActions;
+using AstroClient.Config;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using VRC.UI.Elements;
 
-namespace AstroClient.ClientUI.Menu.RandomSubmenus
+namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
 {
-    using System.Drawing;
-    using Config;
-    using Tools.Extensions;
-    using VRC.UI.Elements;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
-    using xAstroBoy.AstroButtonAPI.WingsAPI;
-
     internal class ESPColorSelector : AstroEvents
     {
         internal override void RegisterToEvents()

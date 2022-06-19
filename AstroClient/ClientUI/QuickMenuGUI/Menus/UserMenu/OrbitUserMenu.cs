@@ -1,13 +1,12 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.UserMenu
-{
-    using System;
-    using AstroMonos.Components.Malicious;
-    using Constants;
-    using Tools.ObjectEditor;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
+﻿using System;
+using AstroClient.AstroMonos.Components.Malicious;
+using AstroClient.Constants;
+using AstroClient.Tools.ObjectEditor;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
 
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.UserMenu
+{
     internal class OrbitUserMenu : AstroEvents
     {
 

@@ -1,18 +1,17 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AstroClient.ClientActions;
+using AstroClient.Spawnables.Flashlight;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.UIPaths;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using UnityEngine.Rendering;
 
-namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Spawnables.Flashlight;
-    using Tools.Extensions;
-    using UnityEngine;
-    using UnityEngine.Rendering;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.UIPaths;
-    using xAstroBoy.Utility;
     using static Constants.CustomLists;
     using static Constants.GlobalLists;
 

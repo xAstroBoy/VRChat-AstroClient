@@ -9,7 +9,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using AstroClient.Tools.Extensions;
     using Boo.Lang.Compiler.Ast;
     using ClientAttributes;
-    using ESP.Player;
     using Il2CppSystem.Collections.Generic;
     using Tools.Listeners;
     using UI.SingleTag;

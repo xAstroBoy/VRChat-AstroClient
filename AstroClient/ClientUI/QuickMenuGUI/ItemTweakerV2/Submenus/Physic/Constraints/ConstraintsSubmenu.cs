@@ -1,15 +1,13 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions.Components_exts;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Physic.Constraints
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic.Constraints
 {
-    using System;
-    using AstroMonos.Components.Tools;
-    using Selector;
-    using Tools.Extensions.Components_exts;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-
     internal class ConstraintsSubmenu : AstroEvents
     {
         internal override void RegisterToEvents()

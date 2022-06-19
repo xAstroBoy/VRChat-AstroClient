@@ -1,32 +1,29 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientResources.Loaders;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Handlers;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Pickup;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Udon;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.VRC_Interactable;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.VRC_Triggers;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.WorldObjects;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.ObjectInfoSubMenu;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Pickup;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Scale;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Spawner;
+using AstroClient.Constants;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Extensions.Components_exts;
+using AstroClient.Tools.ObjectEditor;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2
 {
-    using System;
-    using AstroMonos.Components.Tools;
-    using ClientResources;
-    using ClientResources.Loaders;
-    using Constants;
-    using Handlers;
-    using ScrollMenus.Pickup;
-    using ScrollMenus.Udon;
-    using ScrollMenus.VRC_Interactable;
-    using ScrollMenus.VRC_Triggers;
-    using ScrollMenus.WorldObjects;
-    using Selector;
-    using Submenus.Components;
-    using Submenus.ObjectInfoSubMenu;
-    using Submenus.Physic;
-    using Submenus.Pickup;
-    using Submenus.Scale;
-    using Submenus.Spawner;
-    using Tools.Extensions;
-    using Tools.Extensions.Components_exts;
-    using Tools.ObjectEditor;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-
     internal class TweakerV2Main : AstroEvents
     {
         internal override void RegisterToEvents()

@@ -1,15 +1,12 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.Tools.Player.Movement.Exploit;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.RandomSubmenus
+namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
 {
     #region Imports
-
-    using Tools.Player.Movement.Exploit;
-    using UnityEngine;
-    using VRC.Core;
-    using VRC.SDKBase;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
 
     #endregion Imports
 

@@ -1,20 +1,14 @@
 using System;
 using System.Collections;
-using System.Linq;
-using System.Reflection;
-using AstroClient;
+using AstroClient.AstroMonos.Components.Tools.Avatars;
 using AstroClient.ClientActions;
 using AstroClient.Config;
-using BestHTTP.Decompression.Zlib;
-using HarmonyLib;
 using MelonLoader;
 using RootMotion.FinalIK;
-using ScaleGoesBrr;
-using UnhollowerRuntimeLib;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace ScaleGoesBrr
+namespace AstroClient.LocalAvatar.ScaleAdjuster
 {
     internal class ScaleAdjusterHelper : AstroEvents
     {

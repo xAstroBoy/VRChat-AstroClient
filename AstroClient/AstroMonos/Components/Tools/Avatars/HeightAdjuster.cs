@@ -3,7 +3,7 @@ using AstroClient.ClientAttributes;
 using Il2CppSystem.Collections.Generic;
 using UnityEngine;
 
-namespace AstroClient.LocalAvatar.ColliderAdjuster
+namespace AstroClient.AstroMonos.Components.Tools.Avatars
 {
     [RegisterComponent]
     class HeightAdjuster : MonoBehaviour

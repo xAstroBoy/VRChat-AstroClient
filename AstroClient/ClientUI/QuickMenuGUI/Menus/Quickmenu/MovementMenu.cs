@@ -1,18 +1,17 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using AstroClient.ClientActions;
+using AstroClient.Config;
+using AstroClient.Spawnables.Enderpearl;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Player.Movement;
+using AstroClient.Tools.Player.Movement.Exploit;
+using AstroClient.Tools.Player.Movement.QuickMenu;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
 
-namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
 {
     #region Imports
-
-    using AstroClient.Tools.Extensions;
-    using Config;
-    using Spawnables.Enderpearl;
-    using System;
-    using Tools.Player.Movement;
-    using Tools.Player.Movement.Exploit;
-    using Tools.Player.Movement.QuickMenu;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
 
     #endregion Imports
 

@@ -1,10 +1,10 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.ESP;
+using AstroClient.ClientActions;
 
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
     using AstroClient.Tools.Colors;
     using ClientAttributes;
-    using ESP.Player;
     using Il2CppSystem.Collections.Generic;
     using MelonLoader;
     using Roles;

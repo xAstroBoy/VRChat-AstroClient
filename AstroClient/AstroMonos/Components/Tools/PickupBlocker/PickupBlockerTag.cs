@@ -1,21 +1,19 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using AstroClient.AstroMonos.Components.UI.SingleTag;
+using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
 
-namespace AstroClient.AstroMonos.Components.Tools
+namespace AstroClient.AstroMonos.Components.Tools.PickupBlocker
 {
-    using System;
-    using AstroClient.Tools.Extensions;
-    using ClientAttributes;
-    using UI.SingleTag;
-    using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
-    using VRC;
-    using xAstroBoy.Utility;
-
     [RegisterComponent]
     public class PickupBlockerTag : MonoBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
-        internal Player AssignedPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal VRC.Player AssignedPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private SingleTag BlockedTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool _HasSubscribed = false;
         private bool HasSubscribed
@@ -62,7 +60,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             if (AssignedPlayer == null)
             {
-                AssignedPlayer = GetComponent<Player>();
+                AssignedPlayer = GetComponent<VRC.Player>();
                 if (AssignedPlayer == null)
                 {
                     Destroy(this);
@@ -88,7 +86,7 @@ namespace AstroClient.AstroMonos.Components.Tools
 
             }
         }
-        private void OnPlayerLeft(Player player)
+        private void OnPlayerLeft(VRC.Player player)
         {
             if (AssignedPlayer.Equals(player)) Destroy(this);
         }

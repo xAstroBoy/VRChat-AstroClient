@@ -1,14 +1,10 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Handlers
 {
-    using System;
-    using AstroMonos.Components.Tools;
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-    using xAstroBoy.Utility;
-
     internal class RigidBodyControllerHandler : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -24,7 +20,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
         {
             if (obj != null)
             {
-                RigidBodyController RigidBodyController = obj.GetOrAddComponent<RigidBodyController>();
+                RigidBodyController RigidBodyController = ComponentUtils.GetOrAddComponent<RigidBodyController>(obj);
                 if (RigidBodyController != null)
                 {
                     TweakerEventActions.OnRigidBodyControllerSelected.SafetyRaiseWithParams(RigidBodyController);
@@ -46,7 +42,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
         {
             if (obj != null)
             {
-                RigidBodyController RigidBodyController = obj.GetOrAddComponent<RigidBodyController>();
+                RigidBodyController RigidBodyController = ComponentUtils.GetOrAddComponent<RigidBodyController>(obj);
                 if (RigidBodyController != null)
                 {
                     RigidBodyController.RemoveActionEvents(); // No more Focused on tweaker, so no need for The property Event changed.

@@ -10,7 +10,7 @@ using UnityEngine;
 using IntPtr = System.IntPtr;
 using Object = Il2CppSystem.Object;
 
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.DrinkingNight
 {
     [RegisterComponent]
     public class DrinkingNight_NormalPlusReader : MonoBehaviour

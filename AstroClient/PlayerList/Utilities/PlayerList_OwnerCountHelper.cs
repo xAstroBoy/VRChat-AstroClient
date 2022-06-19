@@ -1,6 +1,6 @@
 ﻿using System;
+using AstroClient.AstroMonos.Components.Tools.PickupBlocker;
 using AstroClient.ClientActions;
-using AstroClient.PickupBlockerSystem;
 using AstroClient.Tools.ObjectEditor.Online;
 using AstroClient.Tools.World;
 using AstroClient.xAstroBoy.Extensions;

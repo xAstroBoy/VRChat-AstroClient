@@ -1,16 +1,14 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using System.Linq;
+using AstroClient.AstroMonos.Components.Custom.Random;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Rocket
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components.Rocket
 {
-    using System;
-    using System.Linq;
-    using AstroMonos.Components.Custom.Random;
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-
     internal class RocketComponentSubMenu : AstroEvents
     {
         internal override void RegisterToEvents()

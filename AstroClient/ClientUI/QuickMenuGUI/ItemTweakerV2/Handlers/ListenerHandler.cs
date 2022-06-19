@@ -1,14 +1,10 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
+using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Handlers
 {
-    using System;
-    using AstroMonos.Components.Tools.Listeners;
-    using Selector;
-    using Tools.Extensions;
-    using UnityEngine;
-    using xAstroBoy.Utility;
-
     internal class ListenerHandler : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -24,7 +20,7 @@ namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Handlers
         {
             if (obj != null)
             {
-                var listener = obj.GetOrAddComponent<TweakerListener>();
+                var listener = ComponentUtils.GetOrAddComponent<TweakerListener>(obj);
                 if (listener != null)
                 {
                     // Set actions to fire events.

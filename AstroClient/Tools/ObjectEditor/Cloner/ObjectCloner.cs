@@ -1,12 +1,12 @@
 ﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Spawner;
 using AstroClient.xAstroBoy.Utility;
 using HarmonyLib;
 
 namespace AstroClient.Tools.ObjectEditor.Cloner
 {
-    using ClientUI.Menu.ItemTweakerV2.Selector;
-    using ClientUI.Menu.ItemTweakerV2.Submenus.Spawner;
     using Extensions;
     using UnityEngine;
 

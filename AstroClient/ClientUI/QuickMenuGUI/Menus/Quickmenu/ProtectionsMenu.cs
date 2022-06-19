@@ -1,10 +1,9 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
+﻿using AstroClient.Constants;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
 {
     #region Imports
-
-    using Constants;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     #endregion Imports
 

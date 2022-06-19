@@ -1,6 +1,6 @@
 using AstroClient.ClientActions;
-using AstroClient.ClientUI.Menu.Menus.Quickmenu;
-using AstroClient.ClientUI.Menu.SettingsMenu;
+using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
+using AstroClient.ClientUI.QuickMenuGUI.SettingsMenu;
 using AstroClient.Spawnables.ColliderSuppresserCube;
 using AstroClient.Spawnables.Flashlight;
 using AstroClient.Tools.Extensions.Components_exts;

@@ -3,7 +3,6 @@
 namespace AstroClient.Tools.Extensions
 {
     using System.Collections.Generic;
-    using AstroMonos.Components.ESP.Trigger;
     using Colors;
     using UnityEngine;
 

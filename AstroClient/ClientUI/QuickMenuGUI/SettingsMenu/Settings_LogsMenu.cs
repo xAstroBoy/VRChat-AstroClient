@@ -1,13 +1,10 @@
 ﻿using AstroClient.ClientActions;
-using VRC.Udon;
+using AstroClient.Config;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-namespace AstroClient.ClientUI.Menu.SettingsMenu
+namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 {
     #region Imports
-
-    using Config;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     #endregion Imports
 

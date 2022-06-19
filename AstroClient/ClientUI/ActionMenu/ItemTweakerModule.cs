@@ -1,4 +1,6 @@
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic;
 
 namespace AstroClient.ClientUI.ActionMenu
 {
@@ -8,10 +10,6 @@ namespace AstroClient.ClientUI.ActionMenu
     using CheetoLibrary.Utility;
     using ClientResources.Loaders;
     using Gompoc.ActionMenuAPI.Api;
-    using Menu.ESP;
-    using Menu.ItemTweakerV2.Selector;
-    using Menu.ItemTweakerV2.Submenus.Physic;
-    using Menu.Menus.Quickmenu;
     using Spawnables.ColliderSuppresserCube;
     using Spawnables.Enderpearl;
     using Tools.Extensions.Components_exts;

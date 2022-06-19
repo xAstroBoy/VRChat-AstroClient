@@ -1,11 +1,10 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.UserMenu
-{
-    using System;
-    using Constants;
-    using Tools.ObjectEditor;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+﻿using System;
+using AstroClient.Constants;
+using AstroClient.Tools.ObjectEditor;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.UserMenu
+{
     internal class AttackerUserMenu : AstroEvents
     {
 

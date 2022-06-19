@@ -1,14 +1,12 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections.Generic;
+using AstroClient.Cheetos.CameraStuff;
+using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.UIPaths;
 
-namespace AstroClient.ClientUI.Menu.SettingsMenu
+namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 {
     #region Imports
-
-    using System.Collections.Generic;
-    using Cheetos.CameraStuff;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.UIPaths;
 
     #endregion Imports
 

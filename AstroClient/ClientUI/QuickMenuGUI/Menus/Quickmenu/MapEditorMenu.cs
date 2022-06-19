@@ -1,19 +1,14 @@
-﻿using AstroClient.ClientUI.Menu.RandomSubmenus;
+﻿using System;
+using AstroClient.CheetosUI;
+using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
-using MelonLoader;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
 {
-    using System;
-    using CheetosUI;
-    using Tools.Extensions;
-    using Tools.Extensions.Components_exts;
-    using UnityEngine;
-    using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
-
     internal static class MapEditorMenu
     {
         internal static void InitButtons(QMGridTab main)

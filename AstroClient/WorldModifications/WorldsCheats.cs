@@ -1,4 +1,5 @@
-﻿using AstroClient.WorldModifications.WorldHacks.Ostinyo;
+﻿using AstroClient.WorldModifications.WorldHacks.BlueKun;
+using AstroClient.WorldModifications.WorldHacks.Ostinyo;
 
 namespace AstroClient.WorldModifications
 {

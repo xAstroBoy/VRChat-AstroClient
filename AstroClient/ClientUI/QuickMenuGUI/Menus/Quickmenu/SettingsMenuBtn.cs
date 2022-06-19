@@ -1,12 +1,11 @@
-﻿namespace AstroClient.ClientUI.Menu.Menus.Quickmenu
-{
-    using Config;
-    using ESP;
-    using SettingsMenu;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+﻿using AstroClient.ClientUI.QuickMenuGUI.ESP;
+using AstroClient.ClientUI.QuickMenuGUI.SettingsMenu;
+using AstroClient.Config;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using UnityEngine;
 
+namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
+{
     internal class SettingsMenuBtn : AstroEvents
     {
 

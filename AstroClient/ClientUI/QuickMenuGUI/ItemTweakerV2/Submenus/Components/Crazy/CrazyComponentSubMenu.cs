@@ -1,15 +1,14 @@
-﻿using AstroClient.ClientActions;
+﻿using System;
+using System.Linq;
+using AstroClient.AstroMonos.Components.Custom.Random;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using UnityEngine;
 
-namespace AstroClient.ClientUI.Menu.ItemTweakerV2.Submenus.Components.Crazy
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components.Crazy
 {
-    using AstroMonos.Components.Custom.Random;
-    using Selector;
-    using System;
-    using System.Linq;
-    using Tools.Extensions;
-    using UnityEngine;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-
     internal class CrazyComponentSubMenu : AstroEvents
     {
         internal override void RegisterToEvents()
