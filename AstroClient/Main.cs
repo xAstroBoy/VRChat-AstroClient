@@ -14,7 +14,6 @@ namespace AstroClient
     using System.Reflection;
     using CheetosConsole;
     using ClientResources.Loaders;
-    using ClientUI.Menu.Menus;
     using Config;
     using Constants;
     using MelonLoader;
