@@ -15,7 +15,7 @@ namespace AstroClient.Tools.Extensions
                 {
                     instance.gameObject.TakeOwnership();
                 }
-                instance.Method_Public_Void_1();
+                instance.Method_Public_Void_0();
             }
         }
 
@@ -29,37 +29,18 @@ namespace AstroClient.Tools.Extensions
             return instance.field_Private_Nullable_1_Quaternion_0;
         }
 
-        internal static void RespawnItem(this SyncPhysics instance, bool TakeOwnership = true)
+        internal static void SetKinematic(this SyncPhysics instance, bool isKinematic)
         {
             if (instance != null)
             {
-                if (TakeOwnership)
-                {
-                    instance.gameObject.TakeOwnership();
-                }
-
-                if (instance.GetDefaultPosition().HasValue)
-                {
-                    instance.gameObject.SetPosition(instance.GetDefaultPosition().value);
-                }
-                if (instance.GetDefaultPosition().HasValue)
-                {
-                    instance.gameObject.SetRotation(instance.GetDefaultPosition().value);
-                }
+                instance.SetKinematicFor(GameInstances.CurrentPlayer, isKinematic);
             }
         }
-        internal static void SetKinematic(this SyncPhysics instance, bool isKinematic, bool TakeOwnership = false)
+        internal static void SetGravity(this SyncPhysics instance, bool useGravity)
         {
             if (instance != null)
             {
-                instance.SetKinematicFor(GameInstances.CurrentPlayer, isKinematic, TakeOwnership);
-            }
-        }
-        internal static void SetGravity(this SyncPhysics instance, bool useGravity, bool TakeOwnership = false)
-        {
-            if (instance != null)
-            {
-                instance.SetGravityFor(GameInstances.CurrentPlayer, useGravity, TakeOwnership);
+                instance.SetGravityFor(GameInstances.CurrentPlayer, useGravity);
             }
         }
 
@@ -67,11 +48,7 @@ namespace AstroClient.Tools.Extensions
         {
             if (instance != null && player != null)
             {
-                if (TakeOwnership)
-                {
-                    instance.gameObject.TakeOwnership();
-                }
-
+                instance.gameObject.TakeOwnership();
                 if (isKinematic)
                 {
                     instance.EnableKinematic(player);
@@ -87,11 +64,12 @@ namespace AstroClient.Tools.Extensions
         {
             if (instance != null)
             {
-                for (int i = 0; i < WorldUtils.Players.Count; i++)
+                var players = WorldUtils.Players;
+                for (int i = 0; i < players.Count; i++)
                 {
                     try
                     {
-                        SetGravityFor(instance, WorldUtils.Players[i], useGravity);
+                        SetGravityFor(instance, players[i], useGravity);
                     }
                     catch { }
                 }
@@ -102,11 +80,12 @@ namespace AstroClient.Tools.Extensions
         {
             if (instance != null)
             {
-                for (int i = 0; i < WorldUtils.Players.Count; i++)
+                var players = WorldUtils.Players;
+                for (int i = 0; i < players.Count; i++)
                 {
                     try
                     {
-                        SetKinematicFor(instance, WorldUtils.Players[i], isKinematic);
+                        SetKinematicFor(instance, players[i], isKinematic);
                     }
                     catch { }
                 }
