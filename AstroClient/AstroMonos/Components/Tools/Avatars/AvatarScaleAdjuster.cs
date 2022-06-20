@@ -162,6 +162,11 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
                 {
                     AvatarRealHeight.Adjuster.AdjustCollider();
                 }
+                else
+                {
+                    // should set it when the avatar got swapped, and that's the original collider.
+                    AvatarRealHeight.Adjuster.Reset();
+                }
             }
 
         }

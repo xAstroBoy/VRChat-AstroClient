@@ -35,7 +35,11 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
         float m_radius = ms_defaultColliderRadius;
         PoseState m_poseState = PoseState.Standing;
 
-        
+        private bool HasStoredOriginalAvatarHeight = false;
+        float new_m_avatarEyeHeight = ms_defaultColliderHeight;
+        float new_m_center = ms_defaultColliderCenter;
+        float new_m_radius = ms_defaultColliderRadius;
+
 
         public HeightAdjuster(IntPtr obj0) : base(obj0)
         {
@@ -79,6 +83,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
 
         internal void RecacheComponents()
         {
+            HasStoredOriginalAvatarHeight = false;
             m_ikController = null;
 
             m_ikController = m_player.field_Private_VRC_AnimationController_0.field_Private_VRCVrIkController_0;
@@ -94,6 +99,14 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
 
             if (isEnabled)
                 UpdateCollider(m_avatarEyeHeight, m_center, m_radius);
+            if (!HasStoredOriginalAvatarHeight)
+            {
+                new_m_avatarEyeHeight = m_avatarEyeHeight;
+                new_m_center = m_center;
+                new_m_radius = m_radius;
+                HasStoredOriginalAvatarHeight = true;
+            }
+
         }
 
         internal void UpdateCollider(float p_height, float p_center, float p_radius, bool p_radiusUpdate = true)
@@ -124,6 +137,16 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
                     isEnabled ? m_radius : ms_defaultColliderRadius
                 );
             }
+        }
+
+        internal void Reset()
+        {
+            UpdateCollider(
+                 new_m_avatarEyeHeight,
+                new_m_center,
+                new_m_radius
+            );
+
         }
 
         internal void SetPoseHeight(bool p_state)
