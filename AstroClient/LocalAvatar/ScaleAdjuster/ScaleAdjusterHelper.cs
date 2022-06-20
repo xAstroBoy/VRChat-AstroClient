@@ -157,9 +157,14 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             comp.targetUi = QuickMenuTools.UserInterface.transform;
             comp.targetUiInverted = QuickMenuTools.UnscaledUI;
 
-            comp.vrik = go.GetComponent<VRIK>().solver.locomotion;
-            comp.originalStep = comp.vrik.footDistance;
+            var ikSolverVR = go.GetComponent<VRIK>().solver;
+            comp.locomotion = ikSolverVR.locomotion;
+            comp.originalStep = comp.locomotion.footDistance;
 
+            comp.targetLeftArm = ikSolverVR.leftArm;
+            comp.targetRightArm = ikSolverVR.rightArm;
+            comp.leftArmOriginalShoulder = ikSolverVR.leftArm.vrcShoulderHeightAboveChest;
+            comp.rightArmOriginalShoulder = ikSolverVR.rightArm.vrcShoulderHeightAboveChest;
             comp.ActuallyDoThings = true;
 
             var avatarManager = go.GetComponentInParent<VRCAvatarManager>();

@@ -115,6 +115,7 @@
         public bool ScalingAvatarSupportEnabled = true;
         public bool FixAvatarFlyingOffOnScale = true;
         public bool FixPlayspaceCenterBias = true;
+        public bool DoShoulderScaling = true;
         public bool AdjustColliderOnScaleChange = false;
         public bool AdjustAvatarCollider = true;
         public bool UsePoseHeight = true;

@@ -32,7 +32,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
 
         internal Transform RootFix;
 
-        internal IKSolverVR.Locomotion vrik;
+        internal IKSolverVR.Locomotion locomotion;
         internal float originalStep;
 
         internal VRCAvatarManager avatarManager;
@@ -49,9 +49,13 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
         internal Vector3 tmSV2;
         internal bool tmReady;
         private float lastScaleFactor = 1;
+        internal IKSolverVR.Arm targetLeftArm;
+        internal IKSolverVR.Arm targetRightArm;
 
+        internal float leftArmOriginalShoulder;
+        internal float rightArmOriginalShoulder;
         // Some mods instantiate extra copies of local avatar. This will be always false if Unity "clones" this component
-        public bool ActuallyDoThings;
+        internal bool ActuallyDoThings;
 
         public AvatarScaleAdjuster(IntPtr obj0) : base(obj0)
         {
@@ -98,6 +102,11 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
             DoScale(1 / scaleFactor, originalTargetAlScale, targetAl);
             DoScale(scaleFactor, originalTargetPsScale, targetUi);
             DoScale(1 / scaleFactor / originalTargetPsScale.y, vOne, targetUiInverted);
+            if (ConfigManager.AvatarOptions.DoShoulderScaling)
+            {
+                targetLeftArm.vrcShoulderHeightAboveChest = leftArmOriginalShoulder * scaleFactor;
+                targetRightArm.vrcShoulderHeightAboveChest = rightArmOriginalShoulder * scaleFactor;
+            }
 
             var scaleVector = new Vector3
             {
@@ -129,7 +138,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
                 targetVp.get_localPosition_Injected(out var vpOffset);
                 vpOffset = Scale(vpOffset, scaleFactor); // it will be applied by VpParent scale
                 ScaleAdjusterHelper.UpdateCameraOffsetForScale(vpOffset);
-                vrik.footDistance = originalStep * scaleFactor;
+                locomotion.footDistance = originalStep * scaleFactor;
                 ScaleAdjusterHelper.FireScaleChange(source, scaleFactor);
             }
 
