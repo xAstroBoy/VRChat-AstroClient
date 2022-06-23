@@ -68,9 +68,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     ForceRestart = obj.gameObject.FindUdonEvent("_start");
                     Initialize_PatronCredits();
                     HasSubscribed = true;
-                    ForceHightTier();
-                    InvokeRepeating(nameof(ForceHightTier), 0.01f, 0.01f);
-                    ForceRestart.InvokeBehaviour();
+                    ////ForceHightTier();
+                    //InvokeRepeating(nameof(ForceHightTier), 0.01f, 0.01f);
+                    //ForceRestart.InvokeBehaviour();
 
                 }
                 else
@@ -90,7 +90,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             //__0_newTier_Int32 = 3;
             //__0_tier_Int32 = 3;
             //__0_intnl_returnValSymbol_Int32 = 3;
-            localPlayerIsPatron = true;
+            //localPlayerIsPatron = true;
             if (!__10_const_intnl_SystemString.isMatchWholeWord(GameInstances.CurrentUser.GetDisplayName()))
             {
                 __10_const_intnl_SystemString = GameInstances.CurrentUser.GetDisplayName();

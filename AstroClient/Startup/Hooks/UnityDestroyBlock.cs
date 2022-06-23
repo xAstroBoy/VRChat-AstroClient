@@ -5,6 +5,7 @@ using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using Boo.Lang.Compiler.Ast;
+using Mono.CSharp;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -41,6 +42,7 @@ namespace AstroClient.Startup.Hooks
                 GameObjectsPathsToNotDestroy.Clear();
                 OnDestroyBlocked = null;
                 MonitorDestroyingEvent = false;
+                
             }
         }
 

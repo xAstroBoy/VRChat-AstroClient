@@ -1,6 +1,7 @@
 ﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
 using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.ClientActions;
+using AstroClient.Startup.Hooks;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Tools.UdonEditor;
 using VRC.Core;
@@ -33,19 +34,25 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
-            ClientEventActions.OnEnterWorld += EnterWorld;
+           // ClientEventActions.OnEnterWorld += EnterWorld;
         }
 
-        private void EnterWorld(ApiWorld world, ApiWorldInstance instance)
-        {
-            if (world == null) return;
-            if (world.id.Equals(WorldIds.AmongUS))
-            {
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("BoundsContainsPoint");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("Check");
-
-            }
-        }
+        //private void EnterWorld(ApiWorld world, ApiWorldInstance instance)
+        //{
+        //    if (world == null) return;
+        //    if (world.id.Equals(WorldIds.AmongUS))
+        //    {
+        //        EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("BoundsContainsPoint");
+        //        EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("Check");
+        //        UnityDestroyBlock.MonitorDestroyingEvent = true;
+        //        UnityDestroyBlock.ReportEvent = true;
+        //    }
+        //    else
+        //    {
+        //        UnityDestroyBlock.MonitorDestroyingEvent = false;
+        //        UnityDestroyBlock.ReportEvent = false;
+        //    }
+        //}
 
 
 
