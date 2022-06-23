@@ -109,7 +109,7 @@
                 var obj = gameObject.FindUdonEvent("_HideGolfBall");
                 if (obj != null)
                 {
-                    PoolObject = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    PoolObject = obj.RawItem;
                 }
                 else
                 {

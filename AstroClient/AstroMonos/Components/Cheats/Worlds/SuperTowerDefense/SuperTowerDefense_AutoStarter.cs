@@ -89,7 +89,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 
                     AutoStarter_SetInactive = obj;
                     AutoStarter_SetActive = gameObject.FindUdonEvent("SetActive");
-                    AutoStarterController = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    AutoStarterController = obj.RawItem;
                     HasSubscribed = true;
                 }
                 else

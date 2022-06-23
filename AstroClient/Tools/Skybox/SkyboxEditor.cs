@@ -103,7 +103,7 @@ namespace AstroClient.Tools.Skybox
                 Log.Debug("This Skybox can be Exported!");
                 if (Bools.IsDeveloper)
                 {
-                    PopupUtils.QueHudMessage("This Skybox can Be Exported!".ToRainbow());
+                    PopupUtils.QueHudMessage("This Skybox can Be Exported!".RainbowRichText());
                 }
             }
 

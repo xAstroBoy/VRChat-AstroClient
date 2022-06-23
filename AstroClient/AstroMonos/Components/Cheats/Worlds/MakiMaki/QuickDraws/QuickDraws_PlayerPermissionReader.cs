@@ -14,11 +14,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]
-    public class QuickDraws_PermissionReader : MonoBehaviour
+    public class QuickDraws_PlayerPermissionReader : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
-        public QuickDraws_PermissionReader(IntPtr ptr) : base(ptr)
+        public QuickDraws_PlayerPermissionReader(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
@@ -65,10 +65,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
         {
             if (WorldUtils.WorldID.Equals(WorldIds.QuickDraws))
             {
-                var obj = gameObject.FindUdonEvent("_AddAuthorizedPlayers");
+                var obj = gameObject.FindUdonEvent("_GetAuthTier");
                 if (obj != null)
                 {
-                    PermissionManager = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    PermissionManager = obj.RawItem;
                     Initialize_PermissionManager();
                     HasSubscribed = true;
                     InvokeRepeating(nameof(ForceHightTier), 0.01f, 0.01f);
@@ -2392,7 +2392,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
         private AstroUdonVariable<int> Private___0_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___1_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___0_intnl_returnValSymbol_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        #endregion AstroUdonVariables  of PermissionManager
 
+        #endregion AstroUdonVariables  of PermissionManager
     }
 }

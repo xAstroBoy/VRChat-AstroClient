@@ -112,7 +112,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                 if (obj != null)
                 {
                     ResetHealth = obj;
-                    HealthController = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    HealthController = obj.RawItem;
                     HasSubscribed = true;
                 }
                 else

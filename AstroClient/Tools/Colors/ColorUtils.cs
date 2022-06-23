@@ -32,6 +32,12 @@ namespace AstroClient.Tools.Colors
             return ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(color.ToArgb()));
         }
 
+
+        internal static string ColorToHex(UnityEngine.Color color)
+        {
+            return ColorUtility.ToHtmlStringRGBA(color);
+        }
+
         internal static UnityEngine.Color ToUnityEngineColor(System.Drawing.Color color)
         {
             return HexToColor(ColorToHex(color));

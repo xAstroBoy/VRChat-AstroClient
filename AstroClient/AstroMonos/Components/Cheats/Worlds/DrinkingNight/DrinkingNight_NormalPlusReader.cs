@@ -61,7 +61,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.DrinkingNight
                 var obj = gameObject.FindUdonEvent("_LoadList");
                 if (obj != null)
                 {
-                    WhitelistSystem = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    WhitelistSystem = obj.RawItem;
                     Initialize_WhitelistSystem();
                 }
                 else

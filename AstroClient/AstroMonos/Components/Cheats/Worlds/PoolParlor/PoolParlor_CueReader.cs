@@ -35,7 +35,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (obj != null)
                 {
                     ClientEventActions.OnRoomLeft += OnRoomLeft;
-                    PoolCue = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    PoolCue = obj.RawItem;
                     Initialize_PoolCue();
                 }
                 else

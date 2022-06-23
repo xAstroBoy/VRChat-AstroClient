@@ -17,11 +17,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]
-    public class GeoLocator_CustomizationReader : MonoBehaviour
+    public class MakiMaki_CustomizationReader : MonoBehaviour
     {
         private List<Object> AntiGarbageCollection = new();
 
-        public GeoLocator_CustomizationReader(IntPtr ptr) : base(ptr)
+        public MakiMaki_CustomizationReader(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
@@ -57,18 +57,34 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
             Destroy(this);
         }
 
+        private string GetWorldUdonEvent()
+        {
+            if (WorldUtils.WorldID.Equals(WorldIds.GeoLocator))
+            {
+                return "GetLocalPin";
+            }
+            if (WorldUtils.WorldID.Equals(WorldIds.Maki_Tanks))
+            {
+                return "GetHat";
+            }
+
+            return null;
+        }
+
+
         private UdonBehaviour_Cached RefreshPatronSystem  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private RawUdonBehaviour Customization { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         // Use this for initialization
         internal void Start()
         {
-            if (WorldUtils.WorldID.Equals(WorldIds.GeoLocator))
+            if (WorldUtils.WorldID.Equals(WorldIds.GeoLocator) || WorldUtils.WorldID.Equals(WorldIds.Maki_Tanks))
             {
-                var obj = gameObject.FindUdonEvent("GetLocalPin");
+                var keytosearch = GetWorldUdonEvent();
+                var obj = gameObject.FindUdonEvent(keytosearch);
                 if (obj != null)
                 {
-                    Customization = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    Customization = obj.RawItem;
                     RefreshPatronSystem = obj.UdonBehaviour.FindUdonEvent("_start");
                     Initialize_Customization();
                     // after this just set the patron tier and call the behaviour _start event and say fuck it lol

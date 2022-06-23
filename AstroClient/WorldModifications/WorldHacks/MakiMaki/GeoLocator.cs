@@ -26,7 +26,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             
             if(Customization != null)
             {
-                Customization.GetOrAddComponent<GeoLocator_CustomizationReader>();
+                Customization.GetOrAddComponent<MakiMaki_CustomizationReader>();
             }
 
         }

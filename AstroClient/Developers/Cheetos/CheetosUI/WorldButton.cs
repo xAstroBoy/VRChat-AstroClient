@@ -98,10 +98,35 @@ namespace AstroClient.CheetosUI
         {
             TextMesh.text = text;
         }
-
+        internal void SetAction(Action action)
+        {
+            if (Front != null)
+            {
+                AstroTrigger = Front.GetOrAddComponent<VRC_AstroInteract>();
+                if (AstroTrigger != null)
+                {
+                    AstroTrigger.OnInteract = action;
+                }
+            }
+        }
+        internal void SetInteractText(string text)
+        {
+            if (Front != null)
+            {
+                AstroTrigger = Front.GetOrAddComponent<VRC_AstroInteract>();
+                if (AstroTrigger != null)
+                {
+                    AstroTrigger.interactText = text;
+                }
+            }
+        }
         internal void SetTextColor(Color color)
         {
             TextMesh.color = color;
+        }
+        internal void RemoveInteractions()
+        {
+            AstroTrigger.DestroyMeLocal(true);
         }
 
         private void InitializeButton(string label, Action action)

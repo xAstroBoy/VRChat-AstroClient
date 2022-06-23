@@ -35,7 +35,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 if (obj != null)
                 {
                     ClientEventActions.OnRoomLeft += OnRoomLeft;
-                    LevelController = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    LevelController = obj.RawItem;
                 }
                 else
                 {

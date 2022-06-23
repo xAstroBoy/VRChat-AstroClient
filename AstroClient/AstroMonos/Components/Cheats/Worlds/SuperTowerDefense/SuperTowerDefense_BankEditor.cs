@@ -146,7 +146,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                 var obj = gameObject.FindUdonEvent("Restart");
                 if (obj != null)
                 {
-                    BankController = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    BankController = obj.RawItem;
                     HasSubscribed = true;
                 }
                 else

@@ -62,7 +62,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.DreamWaves
                 var obj = gameObject.FindUdonEvent("_IsWhitelisted");
                 if (obj != null)
                 {
-                    WhitelistSystem = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    WhitelistSystem = obj.RawItem;
                     Initialize_WhitelistSystem();
                 }
                 else

@@ -181,7 +181,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                 var obj = gameObject.FindUdonEvent("SetTowerBehaviour");
                 if (obj != null)
                 {
-                    CurrentTower = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    CurrentTower = obj.RawItem;
                     HasSubscribed = true;
                     Init();
 

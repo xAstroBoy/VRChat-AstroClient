@@ -29,13 +29,13 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             if(MakiKeyboardReader != null)
             {
-                AnswerRevealer = new WorldButton(new Vector3(4.6627f, 1.7976f, 10.8649f), new Vector3(0, 320, 0), null, "Click Me to Reveal Answers".ToRainbow(), () =>
+                AnswerRevealer = new WorldButton(new Vector3(4.6627f, 1.7976f, 10.8649f), new Vector3(0, 320, 0), null, "Click Me to Reveal Answers".RainbowRichText(), () =>
                 {
 
                     ShowAnswers = !ShowAnswers;
                     if(!ShowAnswers)
                     {
-                        AnswerRevealer.SetText("Click Me to Reveal Words!".ToRainbow());
+                        AnswerRevealer.SetText("Click Me \n to Reveal \n Words!".RainbowRichText());
                     }
                 });
                 AnswerRevealer.SetScale(new Vector3(0.23f, 0.5f, 1.2527f));
@@ -52,6 +52,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             else
             {
                 isCurrentWorld = false;
+                ShowAnswers = false;
             }
         }
         private static GameObject PlayerPermissionManager = null;
@@ -101,9 +102,9 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             }
         }
-        private static QuickDraws_PermissionReader _PlayerPermissionManagerReader;
+        private static QuickDraws_PlayerPermissionReader _PlayerPermissionManagerReader;
 
-        public static QuickDraws_PermissionReader PlayerPermissionManagerReader
+        public static QuickDraws_PlayerPermissionReader PlayerPermissionManagerReader
         {
             get
             {
@@ -113,7 +114,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (PlayerPermissionManager != null)
                     {
-                        return _PlayerPermissionManagerReader = PlayerPermissionManager.GetOrAddComponent<QuickDraws_PermissionReader>();
+                        return _PlayerPermissionManagerReader = PlayerPermissionManager.GetOrAddComponent<QuickDraws_PlayerPermissionReader>();
                     }
                 }
                 return _PlayerPermissionManagerReader;

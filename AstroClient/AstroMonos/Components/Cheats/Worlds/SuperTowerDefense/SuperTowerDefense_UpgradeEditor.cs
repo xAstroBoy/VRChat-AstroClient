@@ -70,7 +70,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                 var obj = gameObject.FindUdonEvent("PlayWhack");
                 if (obj != null)
                 {
-                    Upgrader = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    Upgrader = obj.RawItem;
                     HasSubscribed = true;
                     Initialize_Upgrader();
                     var obj2 = gameObject.FindUdonEvent("SetController");

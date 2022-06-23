@@ -51,6 +51,8 @@
         public const string TreeHouseInTheShade = "wrld_551c30cb-0e56-4c69-9176-10e259a89e2a"; // sorry 1001 
         public const string SovrenChillHome = "wrld_1b482eca-bede-4de8-88a8-bbb6ca7e24cd";
         public const string QuickDraws = "wrld_16248871-a374-4819-a284-555ddfc33380";
+        public const string SpiritsOfTheSea = "wrld_9da1349e-470b-47fd-a9b5-bd57d49255e2";
+        public const string Maki_Tanks = "wrld_c7423848-bb22-4cba-9341-37d8b076b6fd";
 
     }
 }

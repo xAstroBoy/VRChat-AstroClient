@@ -110,9 +110,10 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronEventsLists.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DrinkingNight\DrinkingNight_NormalPlusReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DreamWaves\DreamWaves_WhiteListManagerReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS\AmongUS_PatronCreditsReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_PermissionReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\SpiritsOfSeas\SpiritsOfSeas_PlayerPermissionReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_PlayerPermissionReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_MakiKeyboardReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_CustomizationReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_CueReader.cs" />
@@ -131,7 +132,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PoolDataReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\GeoLocator\GeoLocator_CustomizationReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\MakiMaki_CustomizationReader.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_HighlightItem.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
@@ -524,6 +525,8 @@
     <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub2Lobby.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\VRChat_Kmart.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\SuperKmartCenter.cs" />
+    <Compile Include="WorldModifications\WorldHacks\MakiMaki\Maki_SpiritOfSeas.cs" />
+    <Compile Include="WorldModifications\WorldHacks\MakiMaki\Tanks.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\QuickDraws.cs" />
     <Compile Include="WorldModifications\WorldHacks\TreeHouseInTheShade.cs" />
     <Compile Include="WorldModifications\WorldHacks\DrinkingNight.cs" />

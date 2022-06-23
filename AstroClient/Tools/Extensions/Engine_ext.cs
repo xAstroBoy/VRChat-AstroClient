@@ -74,10 +74,19 @@ namespace AstroClient.Tools.Extensions
             return GetPath(current.parent) + "/" + current.name;
         }
 
+        internal static string AddRichColorTag(this string text, Color color)
+        {
+            return $"<color=#{ColorUtils.ColorToHex(color)}>{text}</color>";
 
+        }
+        internal static string AddRichColorTag(this string text, UnityEngine.Color color)
+        {
+            return $"<color=#{ColorUtils.ColorToHex(color)}>{text}</color>";
+
+        }
 
         // HTML Rainbow codes
-        internal static string ToRainbow(this string text)
+        internal static string RainbowRichText(this string text)
         {
             var sb = new StringBuilder();
             var rainbow = new List<string>

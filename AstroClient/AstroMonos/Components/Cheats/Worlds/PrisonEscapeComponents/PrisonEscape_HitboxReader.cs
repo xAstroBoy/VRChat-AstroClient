@@ -104,7 +104,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 var obj = gameObject.FindUdonEvent("_Damage");
                 if (obj != null)
                 {
-                    HitBox = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    HitBox = obj.RawItem;
                     Initialize_HitBox();
                     HasSubscribed = true;
                 }

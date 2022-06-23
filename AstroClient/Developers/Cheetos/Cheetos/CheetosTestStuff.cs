@@ -71,7 +71,7 @@ namespace AstroClient.Cheetos
 
             if (Bools.IsDeveloper && !DoOnce)
             {
-                PopupUtils.QueHudMessage("Developer Mode!".ToRainbow());
+                PopupUtils.QueHudMessage("Developer Mode!".RainbowRichText());
                 DoOnce = true;
             }
 

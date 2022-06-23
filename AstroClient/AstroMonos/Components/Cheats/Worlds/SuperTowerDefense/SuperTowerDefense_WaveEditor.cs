@@ -88,7 +88,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                 var obj = gameObject.FindUdonEvent("AskForNewWave");
                 if (obj != null)
                 {
-                    WaveController = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    WaveController = obj.RawItem;
                     HasSubscribed = true;
                 }
                 else

@@ -32,7 +32,7 @@
                 var obj = gameObject.FindUdonEvent("_StartCellDoorOpening");
                 if (obj != null)
                 {
-                    DoorControl = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    DoorControl = obj.RawItem;
                     Initialize_DoorControl();
                 }
                 else

@@ -70,7 +70,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                 var obj = gameObject.FindUdonEvent("_NextPen");
                 if (obj != null)
                 {
-                    Customizer = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    Customizer = obj.RawItem;
                     RefreshPatronSystem = obj.UdonBehaviour.FindUdonEvent("_start");
                     Initialize_Customizer();
                     // after this just set the patron tier and call the behaviour _start event and say fuck it lol

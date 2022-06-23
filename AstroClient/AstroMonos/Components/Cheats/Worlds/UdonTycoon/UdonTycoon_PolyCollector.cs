@@ -88,7 +88,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 var obj = gameObject.FindUdonEvent("_UpdateCounter");
                 if (obj != null)
                 {
-                    PolyCollector = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    PolyCollector = obj.RawItem;
                     HasSubscribed = true;
                 }
                 else

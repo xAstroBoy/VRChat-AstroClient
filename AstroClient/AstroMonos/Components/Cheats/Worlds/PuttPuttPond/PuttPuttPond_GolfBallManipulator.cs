@@ -76,7 +76,7 @@
                 var obj = gameObject.FindUdonEvent("LaunchFireworks");
                 if (obj != null)
                 {
-                    GolfBallFireworks = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    GolfBallFireworks = obj.RawItem;
                     Log.Debug("Added GolfBallManipulator to Golf Ball Successfully!");
                 }
                 else

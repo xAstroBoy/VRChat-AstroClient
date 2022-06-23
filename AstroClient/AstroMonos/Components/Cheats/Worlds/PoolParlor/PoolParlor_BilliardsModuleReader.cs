@@ -36,7 +36,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (obj != null)
                 {
                     ClientEventActions.OnRoomLeft += OnRoomLeft;
-                    BilliardsModule = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    BilliardsModule = obj.RawItem;
                     Initialize_BilliardsModule();
                     StartStuff();
                     

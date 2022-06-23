@@ -69,7 +69,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                 var obj = gameObject.FindUdonEvent("_OnAutoSubmitClick");
                 if (obj != null)
                 {
-                    Keyboard = obj.UdonBehaviour.ToRawUdonBehaviour();
+                    Keyboard = obj.RawItem;
                     HasSubscribed = true;
                     Initialize_Keyboard();
                     InvokeRepeating(nameof(AnswerRevealer), 0.01f, 0.01f);
@@ -92,7 +92,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
             if (!QuickDraws.ShowAnswers) return;
             if(QuickDraws.AnswerRevealer != null)
             {
-                QuickDraws.AnswerRevealer.SetText($"Current Word is : \n {__0_mp_word_String}");
+                QuickDraws.AnswerRevealer.SetText($"{__0_mp_word_String}".AddRichColorTag(Cheetah.Color.Crayola.Present.JazzberryJam));
             }
         }
 
