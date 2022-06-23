@@ -49,7 +49,8 @@
         public const string DreamWaves = "wrld_860bdea8-0499-4c16-8170-5683a3a3ab8a";
         public const string DrinkingNight = "wrld_4a65ba53-d8df-40a7-b67d-30c63bff0e95";
         public const string TreeHouseInTheShade = "wrld_551c30cb-0e56-4c69-9176-10e259a89e2a"; // sorry 1001 
-        public const string SovrenChillHome = "wrld_1b482eca-bede-4de8-88a8-bbb6ca7e24cd"; 
+        public const string SovrenChillHome = "wrld_1b482eca-bede-4de8-88a8-bbb6ca7e24cd";
+        public const string QuickDraws = "wrld_16248871-a374-4819-a284-555ddfc33380";
 
     }
 }

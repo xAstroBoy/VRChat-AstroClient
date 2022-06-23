@@ -110,8 +110,11 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronEventsLists.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DrinkingNight\DrinkingNight_NormalPlusReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DreamWaves\DreamWaves_WhiteListManagerReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\GeoLocator\GeoLocator_PermissionManagerReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_PermissionReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_MakiKeyboardReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_CustomizationReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_CueReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_PoolParlorModuleReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_NetworkingManagerReader.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_DoorAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_BilliardsModuleReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_UpgradeEditor.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Randomizer.cs" />
     <Compile Include="AstroMonos\Components\Tools\RegisterAsPrefab.cs" />
     <Compile Include="AstroMonos\Components\Tools\DontDestroyFlag.cs" />
@@ -127,7 +131,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PoolDataReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\GeoLocator\GeoLocator_CustomizationReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\GeoLocator\GeoLocator_CustomizationReader.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_HighlightItem.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
@@ -198,6 +202,7 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
+    <Compile Include="TestCodes.cs" />
     <Compile Include="LocalAvatar\ColliderAdjuster\AvatarRealHeigh.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\AvatarScaleAdjuster.cs" />
     <Compile Include="LocalAvatar\ScaleAdjuster\ScaleAdjusterHelper.cs" />
@@ -519,6 +524,7 @@
     <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub2Lobby.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\VRChat_Kmart.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\SuperKmartCenter.cs" />
+    <Compile Include="WorldModifications\WorldHacks\MakiMaki\QuickDraws.cs" />
     <Compile Include="WorldModifications\WorldHacks\TreeHouseInTheShade.cs" />
     <Compile Include="WorldModifications\WorldHacks\DrinkingNight.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
@@ -672,7 +678,7 @@
     <Compile Include="Constants\InstanceBuilder.cs" />
     <Compile Include="WorldModifications\WorldHacks\ClickerGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\GhostGame.cs" />
-    <Compile Include="WorldModifications\WorldHacks\GeoLocator.cs" />
+    <Compile Include="WorldModifications\WorldHacks\MakiMaki\GeoLocator.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\KmartExpress_1.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\Enums\PrisonEscape_Roles.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\PuttPuttQuest.cs" />

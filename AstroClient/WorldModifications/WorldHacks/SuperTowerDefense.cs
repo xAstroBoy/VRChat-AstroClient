@@ -412,6 +412,8 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         // TODO : make a Hook to detect when a object is instantiated to immediately add and optimize the component as well, to avoid running this on loop.
 
+        internal static bool MakeUpgradesFree { get; set; } = false;
+
         private static List<SuperTowerDefense_TowerEditor> GetCurrentEditors
         {
             get
@@ -419,7 +421,14 @@ namespace AstroClient.WorldModifications.WorldHacks
                 List<SuperTowerDefense_TowerEditor> result = new List<SuperTowerDefense_TowerEditor>();
                 foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
                 {
-                    if (item.name.StartsWith("TowerMiniGun") && item.name.EndsWith("(Clone)") ||
+                    if (
+                        item.name.Equals("TowerMiniGun") ||
+                        item.name.Equals("TowerRocketLauncher") ||
+                        item.name.Equals("TowerSlow") ||
+                        item.name.Equals("TowerLance") ||
+                        item.name.Equals("TowerRadar") ||
+                        item.name.Equals("TowerCannon") ||
+                        item.name.StartsWith("TowerMiniGun") && item.name.EndsWith("(Clone)") ||
                         item.name.StartsWith("TowerRocketLauncher") && item.name.EndsWith("(Clone)") ||
                         item.name.StartsWith("TowerSlow") && item.name.EndsWith("(Clone)") ||
                         item.name.StartsWith("TowerLance") && item.name.EndsWith("(Clone)") ||
@@ -436,6 +445,35 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 return result;
             }
+        }
+        private static List<SuperTowerDefense_UpgradeEditor> GetCurrentUpgraders
+        {
+            get
+            {
+                List<SuperTowerDefense_UpgradeEditor> result = new List<SuperTowerDefense_UpgradeEditor>();
+                foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
+                {
+                    if (
+                        item.name.Equals("TowerUpgradeInteractable") ||
+                         item.name.StartsWith("TowerUpgradeInteractable") && item.name.EndsWith("(Clone)"))
+                    {
+                        var editor = item.GetOrAddComponent<SuperTowerDefense_UpgradeEditor>();
+                        if (editor != null)
+                        {
+                            result.Add(editor);
+                        }
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        internal static void ActivateFreeUpgrades(bool value)
+        {
+            MakeUpgradesFree = value;
+            _ = GetCurrentUpgraders;
+
         }
 
         internal static void SetTowersRange(float value)

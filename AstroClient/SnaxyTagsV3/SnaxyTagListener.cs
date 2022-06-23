@@ -24,13 +24,13 @@ internal class SnaxyTagsSystem : AstroEvents
 {
     private static readonly Random random = new Random();
 
-    internal static WebSocket SnaxySocket { get; set; } = null;
+    private static WebSocket SnaxySocket { get; set; } = null;
 
-    internal static string SnaxyKey { get; set; } = "";
+    private static string SnaxyKey { get; set; } = "";
 
-    internal static string SnaxyConsole { get; set; } = "";
+    private static string SnaxyConsole { get; set; } = "";
 
-    internal static string GeneratedUserID { get; set; } = "";
+    private static string GeneratedUserID { get; set; } = "";
     
     internal override void RegisterToEvents()
     {
@@ -54,7 +54,7 @@ internal class SnaxyTagsSystem : AstroEvents
             Log.Debug($"Generated UserID For SnaxyTag API : {GeneratedUserID}");
 
         }
-        Task.Run((Action)InitiateWebsocket);
+        Task.Run(InitiateWebsocket);
     }
 
     internal static string RandomString(int length)
@@ -203,33 +203,33 @@ internal class SnaxyTagsSystem : AstroEvents
     }
 
 
-    private async void InitiateWebsocket()
+    private void InitiateWebsocket()
     {
-        await Task.Delay(2000);
         SnaxySocket = new WebSocket("ws://45.56.79.98:81");
         SnaxySocket.SetCookie(new Cookie("uid", GeneratedUserID));
         SnaxySocket.SetCookie(new Cookie("melonversion", (string)typeof(MelonLoader.BuildInfo).GetField("Version").GetValue(null)));
         SnaxySocket.Log.Output += OnOutput;
-        SnaxySocket.OnError += OnError;
+        SnaxySocket.OnError -= OnError;
         SnaxySocket.OnClose += OnClose;
         SnaxySocket.OnMessage += OnMessage;
-        SnaxySocket.OnOpen += async delegate
-        {
-            await Task.Delay(250);
-            Log.Write("Connected to SnaxyTag.");
-        };
+        SnaxySocket.OnOpen += OnOpen;
         SnaxySocket.Connect();
+
+    }
+
+    private void OnOpen(object sender, EventArgs e)
+    {
+        Log.Write("Connected to SnaxyTag!.");
     }
 
     private void OnOutput(LogData arg1, string arg2)
     {
         Log.Debug($"[SnaxyTag] Logger : {arg2}");
-
     }
 
     private void OnError(object sender, ErrorEventArgs e)
     {
-        Log.Debug($"[SnaxyTag] Connection lost , Reason : {e.Message}!");
+        Log.Write($"[SnaxyTag] Connection lost , Reason : {e.Message}!");
         SnaxySocket = null;
         InitiateWebsocket();
     }
@@ -238,7 +238,7 @@ internal class SnaxyTagsSystem : AstroEvents
     private void OnClose(object sender, CloseEventArgs closeEventArgs)
     {
 
-        Log.Debug($"[SnaxyTag] Connection lost , Reason : {closeEventArgs.Reason} !");
+        Log.Write($"[SnaxyTag] Connection lost , Reason : {closeEventArgs.Reason} !");
         SnaxySocket = null;
         InitiateWebsocket();
 

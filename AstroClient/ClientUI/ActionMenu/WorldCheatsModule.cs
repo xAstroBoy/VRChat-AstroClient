@@ -77,6 +77,8 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
                     CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
                     CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
+                    CustomSubMenu.AddToggle("Free Towers Upgrade", SuperTowerDefense.MakeUpgradesFree, ToggleValue => { SuperTowerDefense.ActivateFreeUpgrades(ToggleValue); });
+
                     //CustomSubMenu.AddToggle("Bypass Tower Collider", SuperTowerDefense.IgnoreTowersCollidersPlacement, ToggleValue => { SuperTowerDefense.IgnoreTowersCollidersPlacement = ToggleValue; });
                 });
                 CustomSubMenu.AddSubMenu("Towers Editor", () =>

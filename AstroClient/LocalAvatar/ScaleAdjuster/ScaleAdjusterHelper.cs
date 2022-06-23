@@ -39,19 +39,19 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
         //}
         private static IEnumerator WaitForPlayerBrr(VRCPlayer player)
         {
-            Log.Debug("Analyzing Player...");
+           // Log.Debug("Analyzing Player...");
 
             while (player != null && player.field_Private_VRCPlayerApi_0 == null)
                 yield return null;
 
             if (player == null || !player.prop_VRCPlayerApi_0.isLocal) yield break;
-            Log.Debug("Player is Local!");
-            Log.Debug("Hooking into Avatar creation callback system..");
+           // Log.Debug("Player is Local!");
+           // Log.Debug("Hooking into Avatar creation callback system..");
             player.field_Private_VRCAvatarManager_0.field_Private_AvatarCreationCallback_0 += new Action<GameObject, VRC_AvatarDescriptor, bool>(OnLocalPlayerAvatarCreated);
             var avatar = player.transform.FindObject("ForwardDirection/Avatar");
             if (avatar != null)
             {
-                Log.Debug("Starting Coroutine on avatar..");
+              //  Log.Debug("Starting Coroutine on avatar..");
                 OnLocalPlayerAvatarCreated(avatar.gameObject, null, false);
 
             }
@@ -97,13 +97,13 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
         {
             if(go == null)
             {
-                Log.Debug("Go is null");
+                //Log.Debug("Go is null");
             }
             if (go != null)
             {
                 if (go.GetComponent<VRCAvatarDescriptor>() != null)
                 {
-                    Log.Debug("Initializing Avatar Scaling support....");
+                    //Log.Debug("Initializing Avatar Scaling support....");
 
                     OnLocalPlayerAvatarCreatedImpl(go);
                 }

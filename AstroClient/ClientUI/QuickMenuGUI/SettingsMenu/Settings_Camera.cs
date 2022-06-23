@@ -30,6 +30,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
+            PlayerCameraEditor.PlayerCamera.farClipPlane *= 5f;
             FarClipPlaneSetting = PlayerCameraEditor.PlayerCamera.farClipPlane;
             if (farClipPlaneSlider != null)
             {

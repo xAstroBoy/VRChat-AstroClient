@@ -51,9 +51,18 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
             }
         }
 
+
+        private void Init()
+        {
+            Private__SpeedMultiplier = new AstroUdonVariable<float>(CurrentTower, "SpeedMultiplier");
+            Private__Range = new AstroUdonVariable<float>(CurrentTower,  "Range");
+
+        }
         void OnDestroy()
         {
             HasSubscribed = false;
+            Private__SpeedMultiplier = null;
+            Private__Range = null;
         }
 
         private void OnRoomLeft()
@@ -65,20 +74,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<float>(CurrentTower, RangeAddress);
+                if (Private__Range != null) return Private__Range.Value;
                 return null;
             }
             [HideFromIl2Cpp]
             private set
             {
-                if (CurrentTower != null)
+                if (Private__Range != null)
                 {
                     if (value.HasValue)
                     {
                         var fixedvalue = Math.Abs(value.GetValueOrDefault(0));
                         if (fixedvalue != 0)
                         {
-                            UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, fixedvalue);
+                            Private__Range.Value = Math.Abs(value.Value);
                         }
                     }
                 }
@@ -115,21 +124,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
             [HideFromIl2Cpp]
             get
             {
-                if (CurrentTower != null) return UdonHeapParser.Udon_Parse<float>(CurrentTower, SpeedMultiplierAddress);
+                if(Private__SpeedMultiplier != null) return Private__SpeedMultiplier.Value;
                 return null;
             }
             [HideFromIl2Cpp]
 
             private set
             {
-                if (CurrentTower != null)
+                if (Private__SpeedMultiplier != null)
                 {
                     if (value.HasValue)
                     {
                         var fixedvalue = Math.Abs(value.GetValueOrDefault(0));
                         if (fixedvalue != 0)
                         {
-                            UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, Math.Abs(value.Value));
+                            Private__SpeedMultiplier.Value = Math.Abs(value.Value);
                         }
                     }
                 }
@@ -159,9 +168,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 
         private bool HasModifiedSpeedMultiplier { get; set; }
         private float OriginalSpeedMultiplier { get; set; }
-
-        private string SpeedMultiplierAddress { [HideFromIl2Cpp] get; } = "SpeedMultiplier";
-        private string RangeAddress { [HideFromIl2Cpp] get; } = "Range";
+        private AstroUdonVariable<float> Private__SpeedMultiplier { [HideFromIl2Cpp] get;[HideFromIl2Cpp]  set; }
+        private AstroUdonVariable<float> Private__Range { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal RawUdonBehaviour CurrentTower { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
@@ -175,6 +183,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                 {
                     CurrentTower = obj.UdonBehaviour.ToRawUdonBehaviour();
                     HasSubscribed = true;
+                    Init();
+
                 }
                 else
                 {

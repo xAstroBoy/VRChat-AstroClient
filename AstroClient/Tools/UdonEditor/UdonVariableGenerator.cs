@@ -136,6 +136,7 @@ namespace AstroClient.Tools.UdonEditor
                 case "System.Double": return "double?";
                 case "System.Double[]": return "double[]";
                 case "UnityEngine.Vector3": return "UnityEngine.Vector3?";
+                case "UnityEngine.Vector2": return "UnityEngine.Vector2?";
                 case "UnityEngine.Quaternion": return "UnityEngine.Quaternion?";
                 case "UnityEngine.Color": return "UnityEngine.Color?";
                 case "VRC.Udon.Common.Interfaces.NetworkEventTarget": return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
@@ -165,6 +166,7 @@ namespace AstroClient.Tools.UdonEditor
                 case "System.UInt16":
                 case "System.Double":
                 case "UnityEngine.Vector3":
+                case "UnityEngine.Vector2":
                 case "UnityEngine.Quaternion":
                 case "UnityEngine.Color":
                 case "VRC.Udon.Common.Interfaces.NetworkEventTarget":

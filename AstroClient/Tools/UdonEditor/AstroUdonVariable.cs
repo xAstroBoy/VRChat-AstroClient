@@ -39,7 +39,7 @@
                 // Test if is able to give a valid result.
                 if(!isInitialized)
                 {
-                    Log.Debug($"{rawUdonBehaviour.udonBehaviour.name} symbol {symbol} is Unitialized!");
+                    //Log.Debug($"{rawUdonBehaviour.udonBehaviour.name} symbol {symbol} is Unitialized!");
                     this.rawUdonBehaviour = null;
                     this.address = 0;
                 }

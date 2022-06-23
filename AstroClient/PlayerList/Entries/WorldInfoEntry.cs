@@ -5,6 +5,7 @@ using AstroClient.ClientActions;
 using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.World;
+using AstroClient.xAstroBoy.UIPaths;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Text;
 
@@ -45,6 +46,8 @@ namespace AstroClient.PlayerList.Entries
             StringBuilder build = new StringBuilder();
             build.Append(GenerateText("SDK", SceneUtils.SDKType));
             build.Append(GenerateText("RespawnHeightY", SceneUtils.RespawnHeightY.ToString(CultureInfo.InvariantCulture)));
+            build.Append(GenerateText("FarClipPlane", PlayerCameraEditor.PlayerCamera.farClipPlane.ToString()));
+            build.Append(GenerateText("NearClipPlane", PlayerCameraEditor.PlayerCamera.nearClipPlane.ToString()));
             if (AvatarSearch.worldAvatarsids.Count != 0)
             {
                 build.Append(GenerateText("Avatars", AvatarSearch.worldAvatarsids.Count.ToString()));
@@ -106,6 +109,7 @@ namespace AstroClient.PlayerList.Entries
                     build.Append(GenerateText("Mirrors", Mirrors.Count.ToString()));
                 }
             }
+
 
 
             return build.ToString();
