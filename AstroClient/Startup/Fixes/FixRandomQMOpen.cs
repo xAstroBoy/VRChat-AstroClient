@@ -21,7 +21,7 @@ namespace AstroClient.Startup.Fixes
 
         internal override void ExecutePriorityPatches()
         {
-            new AstroPatch(typeof(MenuStateController).GetMethod(nameof(MenuStateController.Method_Public_Void_String_Boolean_Boolean_2)), GetPatch(nameof(BlockAndReport)));
+            new AstroPatch(typeof(MenuStateController).GetMethod(nameof(MenuStateController.Method_Public_Void_String_Boolean_Boolean_0)), GetPatch(nameof(BlockAndReport)));
 
         }
 
