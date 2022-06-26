@@ -102,6 +102,7 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroMonos\AstroUdons\VRC_AstroStation.cs" />
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\BClub2PatronReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\ImageRenderCameraReader2.cs" />
@@ -124,7 +125,9 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_BilliardsModuleReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_UpgradeEditor.cs" />
+    <Compile Include="AstroMonos\Components\Tools\JetpackController.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Randomizer.cs" />
+    <Compile Include="AstroMonos\Components\Tools\OnPrefabSpawn.cs" />
     <Compile Include="AstroMonos\Components\Tools\RegisterAsPrefab.cs" />
     <Compile Include="AstroMonos\Components\Tools\DontDestroyFlag.cs" />
     <Compile Include="AstroMonos\Components\Tools\Respawner.cs" />
@@ -203,6 +206,8 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
+    <Compile Include="Spawnables\Jetpack\AstroJetPack.cs" />
+    <Compile Include="Startup\Hooks\VRCStationEventHooks.cs" />
     <Compile Include="TestCodes.cs" />
     <Compile Include="LocalAvatar\ColliderAdjuster\AvatarRealHeigh.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\AvatarScaleAdjuster.cs" />
@@ -694,6 +699,7 @@
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\PrisonEscape.cs" />
     <Compile Include="WorldModifications\WorldHacks\SovrenChillHome.cs" />
+    <Compile Include="WorldModifications\WorldHacks\VRWare.cs" />
     <Compile Include="WorldModifications\WorldsIds\WorldIds.cs" />
     <Compile Include="WorldModifications\WorldHacks\VoidClub.cs" />
     <Compile Include="WorldModifications\WorldHacks\JustHParty.cs" />
@@ -1482,6 +1488,7 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\waffle.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\WorldButton.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\Jetpacks.assetbundle" />
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
     <None Include="PlayerList\PlayerListUI.unitypackage" />
@@ -1568,6 +1575,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AstroMonos\Components\Cheats\Worlds\PuttPuttPond\" />
+    <Folder Include="AstroMonos\Components\Cheats\Worlds\TreeHouseInTheShade\" />
     <Folder Include="AstroMonos\Components\Player\Fly\" />
     <Folder Include="ClientEvents\AstroEventArgs\" />
     <Folder Include="ClientResources\ProgramsArchive\" />

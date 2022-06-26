@@ -1770,7 +1770,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 var room_ToggleLock = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
                 var room_ToggleIncognito = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
                 var room_DND = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
-
+                
                 GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 buttonGroup.transform.SetParent(room.transform);
                 buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now

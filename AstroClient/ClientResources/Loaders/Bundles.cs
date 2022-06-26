@@ -211,7 +211,19 @@
                 return _WorldButton;
             }
         }
-
+        private static AssetBundle _JetpacksBundle;
+        internal static AssetBundle JetpacksBundle
+        {
+            get
+            {
+                if (_JetpacksBundle == null)
+                {
+                    _JetpacksBundle = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}Jetpacks.assetbundle"), 0u);
+                    _JetpacksBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _JetpacksBundle;
+            }
+        }
 
     }
 }

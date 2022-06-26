@@ -1,11 +1,16 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
+using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
+using AstroClient.AstroMonos.Components.Custom.Items;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.Tools.UdonSearcher;
 using UnityEngine.AI;
+using VRC.SDKBase;
+using VRC_EventHandler = VRCSDK2.VRC_EventHandler;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -317,17 +322,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                 Log.Write("Im Bypassing the Jetpack because in his other worlds , the jetpack panel has no delay...", System.Drawing.Color.Gold);
                 Log.Write("And I hope this guy doesn't mind this bypass...", System.Drawing.Color.Gold);
                 Log.Write("If you use munchen, and this world breaks, remove it....", System.Drawing.Color.Gold);
-                
-                // Hotfix for the prefabs
-                
-                foreach(var prefab in SceneUtils.DynamicPrefabs)
-                {
-                    foreach(var child in prefab.transform.Get_All_Childs())
-                    {
-                        child.GetOrAddComponent<DontDestroyFlag>(); // there's a new bug causing the item to destroy itself once you sit or try to use it.
-                    }
-                }
-                
+
+
 
                 isCurrentWorld = true;
                 if (CurrentMenu != null)

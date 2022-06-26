@@ -62,7 +62,8 @@ namespace AstroClient.AstroMonos.AstroUdons
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if (PickupController != null)
             {
-                // Required To 
+                // Required To Show the interaction text
+                PickupController.EditMode = true;
                 if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
                 {
                     OriginalMode = PickupController.AutoHold;
@@ -216,6 +217,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 PickupController.ForceComponent = value;
                 if (value)
                 {
+                    PickupController.EditMode = true;
                     if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
                     {
                         OriginalMode = PickupController.AutoHold;

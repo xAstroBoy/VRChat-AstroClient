@@ -695,6 +695,23 @@ internal class WorldCheatsModule : AstroEvents
 
             #endregion Kmart Express
 
+            #region VRWare
+
+            if (WorldUtils.WorldID == WorldIds.VRWare)
+            {
+                CustomSubMenu.AddButton("Toggle Console", () => { VRWare.ToggleConsole.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Toggle Music", () => { VRWare.ToggleMusic.InvokeBehaviour(); });
+
+                CustomSubMenu.AddButton("Force Devouring Minigame", () => { VRWare.Trigger_Devouring_Level?.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Force Break The Target Minigame", () => { VRWare.Trigger_BreakTheTargets_Level?.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Force Japan World Minigame", () => { VRWare.Trigger_JapanWorld_Level?.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Force Race Minigame", () => { VRWare.Trigger_Race_Level?.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Force Exit VRChat Minigame", () => { VRWare.Trigger_ExitVRChat_Level?.InvokeBehaviour(); });
+
+
+            }
+
+            #endregion VRWare
         }, Icons.thief);
 
         Log.Write("World Module is ready!", Color.Green);

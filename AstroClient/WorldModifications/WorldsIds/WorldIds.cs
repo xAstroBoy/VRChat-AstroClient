@@ -53,6 +53,7 @@
         public const string QuickDraws = "wrld_16248871-a374-4819-a284-555ddfc33380";
         public const string SpiritsOfTheSea = "wrld_9da1349e-470b-47fd-a9b5-bd57d49255e2";
         public const string Maki_Tanks = "wrld_c7423848-bb22-4cba-9341-37d8b076b6fd";
+        public const string VRWare = "wrld_5a528c03-01f5-4399-8f0d-cbcc5c305a57";
 
     }
 }

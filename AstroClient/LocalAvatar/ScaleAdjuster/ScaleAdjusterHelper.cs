@@ -25,6 +25,7 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             ClientEventActions.OnPlayerStart += OnPlayerStart;
         }
 
+        internal static bool AddSettingsToPlayerExpressions { get; private set; } = false;
         //private void OnWorldReveal(string arg1, string arg2, List<string> arg3, string arg4, string arg5)
         //{
         //    Log.Debug("Analyzing Avatar...");
@@ -104,11 +105,12 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
                 if (go.GetComponent<VRCAvatarDescriptor>() != null)
                 {
                     //Log.Debug("Initializing Avatar Scaling support....");
-
+                    AddSettingsToPlayerExpressions = true;
                     OnLocalPlayerAvatarCreatedImpl(go);
                 }
                 else
                 {
+                    AddSettingsToPlayerExpressions = false;
                     Log.Write("Current avatar is SDK2, ignoring rescaling support");
                 }
             }
@@ -126,8 +128,6 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
         private static IEnumerator OnLocalPlayerAvatarCreatedCoro(Vector3 originalScale, GameObject go)
         {
             var trackingRoot = VRCTrackingManager.field_Private_Static_VRCTrackingManager_0.transform;
-            //Log.Debug("Waiting for VRCTrackingManager to unbamboozle itself....");
-
             // give it 3 frames for VRCTrackingManager to unbamboozle itself
             for (var i = 0; i < 3 && go != null; i++)
             {
@@ -135,10 +135,6 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
                 Log.Debug($"Scale stuff: a={go.transform.localScale.y} t={trackingRoot.localScale.y}");
                 Log.Debug($"UI stuff: r={QuickMenuTools.UserInterface.localScale.y} u={QuickMenuTools.UnscaledUI.localScale.y}");
                 yield return null;
-            }
-            if (go == null)
-            {
-                //Log.Debug("Avatar is null? WUT!");
             }
 
 

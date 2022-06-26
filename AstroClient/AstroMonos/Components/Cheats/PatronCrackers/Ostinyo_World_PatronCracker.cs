@@ -54,7 +54,7 @@ public class Ostinyo_World_PatronCracker : MonoBehaviour
 
     internal void Initiate_UdonVariablePatron()
     {
-        Private_isPatron = new AstroUdonVariable<bool>(PatronControl, isPatron_address);
+        Private_isPatron = new AstroUdonVariable<bool>(PatronControl, "isPatron");
         Private___0_hiddenList_StringArray = new AstroUdonVariable<string[]>(PatronControl, "__0_hiddenList_StringArray");
         Private___4_intnl_SystemStringArray = new AstroUdonVariable<string[]>(PatronControl, "__4_intnl_SystemStringArray");
 
@@ -66,8 +66,6 @@ public class Ostinyo_World_PatronCracker : MonoBehaviour
         Private___0_hiddenList_StringArray = null;
         Private___4_intnl_SystemStringArray = null;
     }
-
-    private string isPatron_address { [HideFromIl2Cpp] get; } = "isPatron";
 
     internal AstroUdonVariable<bool> Private_isPatron {  [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string[]> Private___0_hiddenList_StringArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;

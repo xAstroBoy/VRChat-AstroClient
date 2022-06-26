@@ -128,6 +128,43 @@
             }
         }
 
+        private static GameObject _SDK2_VRJetpack;
 
+        /// <summary>
+        ///     Loads SDK2_VRJetpack bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject VRJetpack
+        {
+            get
+            {
+                if (_SDK2_VRJetpack == null)
+                {
+                    _SDK2_VRJetpack = Bundles.JetpacksBundle.LoadAsset_Internal("assets/drivesystem/tbdd_twohand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _SDK2_VRJetpack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _SDK2_VRJetpack;
+                }
+
+                return _SDK2_VRJetpack;
+            }
+        }
+        private static GameObject _SDK2_DesktopJetpack;
+
+        /// <summary>
+        ///     Loads SDK2_DesktopJetpack bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject DesktopJetpack
+        {
+            get
+            {
+                if (_SDK2_DesktopJetpack == null)
+                {
+                    _SDK2_DesktopJetpack = Bundles.JetpacksBundle.LoadAsset_Internal("assets/drivesystem/tbdd_onehand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _SDK2_DesktopJetpack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _SDK2_DesktopJetpack;
+                }
+
+                return _SDK2_DesktopJetpack;
+            }
+        }
     }
 }

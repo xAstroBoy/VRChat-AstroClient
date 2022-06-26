@@ -1144,26 +1144,26 @@ namespace AstroClient.AstroMonos.Components.Tools
                 if (!HasTriedWithSDKBase_Pickup)
                     if (SDKBase_Pickup == null)
                     {
-                        Log.Debug("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                       // Log.Debug("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
                         SDKBase_Pickup = gameObject.AddComponent<VRC_Pickup>();
                         if (SDKBase_Pickup == null)
                         {
-                            Log.Debug("PickupController : Failed to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                            //Log.Debug("PickupController : Failed to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
                             HasTriedWithSDKBase_Pickup = true;
                         }
                         else
                         {
-                            Log.Debug("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                            //Log.Debug("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
                             if (SDKBase_Pickup.ExactGrip == null)
                             {
                                 SDKBase_Pickup.ExactGrip = gameObject.transform;
-                                Log.Debug("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + gameObject.name);
+                                //Log.Debug("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + gameObject.name);
                             }
 
                             if (SDKBase_Pickup.ExactGun == null)
                             {
                                 SDKBase_Pickup.ExactGun = gameObject.transform;
-                                Log.Debug("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGun to object transform " + gameObject.name);
+                                //Log.Debug("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGun to object transform " + gameObject.name);
                             }
 
                             hasRequiredComponentBeenAdded = true;
@@ -1175,26 +1175,26 @@ namespace AstroClient.AstroMonos.Components.Tools
                 if (!HasTriedWithSDK2_Pickup)
                     if (SDK2_Pickup == null)
                     {
-                        Log.Debug("PickupController : Attempting to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                        //Log.Debug("PickupController : Attempting to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
                         SDK2_Pickup = gameObject.AddComponent<VRCSDK2.VRC_Pickup>();
                         if (SDK2_Pickup == null)
                         {
-                            Log.Debug("PickupController : Failed to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                            //Log.Debug("PickupController : Failed to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
                             HasTriedWithSDK2_Pickup = true;
                         }
                         else
                         {
-                            Log.Debug("PickupController : Added VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                           // Log.Debug("PickupController : Added VRCSDK2.VRC_Pickup to object " + gameObject.name);
                             if (SDK2_Pickup.ExactGrip == null)
                             {
                                 SDK2_Pickup.ExactGrip = gameObject.transform;
-                                Log.Debug("PickupController : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + gameObject.name);
+                             //   Log.Debug("PickupController : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + gameObject.name);
                             }
 
                             if (SDK2_Pickup.ExactGun == null)
                             {
                                 SDK2_Pickup.ExactGun = gameObject.transform;
-                                Log.Debug("PickupController : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + gameObject.name);
+                                //Log.Debug("PickupController : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + gameObject.name);
                             }
 
                             hasRequiredComponentBeenAdded = true;
@@ -1206,26 +1206,26 @@ namespace AstroClient.AstroMonos.Components.Tools
                 if (!HasTriedWithSDK3_Pickup)
                     if (SDK3_Pickup == null)
                     {
-                        Log.Debug("PickupController : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                       // Log.Debug("PickupController : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
                         SDK3_Pickup = gameObject.AddComponent<VRCPickup>();
                         if (SDK3_Pickup == null)
                         {
-                            Log.Debug("PickupController : Failed to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                            //Log.Debug("PickupController : Failed to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
                             HasTriedWithSDK3_Pickup = true;
                         }
                         else
                         {
-                            Log.Debug("PickupController : Added VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                          //  Log.Debug("PickupController : Added VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
                             if (SDK3_Pickup.ExactGrip == null)
                             {
                                 SDK3_Pickup.ExactGrip = gameObject.transform;
-                                Log.Debug("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + gameObject.name);
+                              //  Log.Debug("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + gameObject.name);
                             }
 
                             if (SDK3_Pickup.ExactGun == null)
                             {
                                 SDK3_Pickup.ExactGun = gameObject.transform;
-                                Log.Debug("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGun to object transform " + gameObject.name);
+                               // Log.Debug("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGun to object transform " + gameObject.name);
                             }
 
                             hasRequiredComponentBeenAdded = true;
@@ -1236,7 +1236,7 @@ namespace AstroClient.AstroMonos.Components.Tools
 
                 if (!hasRequiredComponentBeenAdded && HasTriedWithSDKBase_Pickup && HasTriedWithSDK2_Pickup && HasTriedWithSDK3_Pickup)
                 {
-                    Log.Warn("Failed to add A Pickup Component to the object : " + gameObject.name);
+                    //Log.Warn("Failed to add A Pickup Component to the object : " + gameObject.name);
                     ForceComponent = false;
                     HasTriedWithSDKBase_Pickup = false;
                     HasTriedWithSDK2_Pickup = false;
