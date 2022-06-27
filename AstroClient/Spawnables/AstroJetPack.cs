@@ -1,3 +1,5 @@
+using AstroClient.AstroMonos.Components.Tools;
+
 namespace AstroClient.Spawnables.Enderpearl
 {
     using AstroMonos.Components.Custom.Items;
@@ -26,11 +28,11 @@ namespace AstroClient.Spawnables.Enderpearl
                 var item = Object.Instantiate(ClientResources.Loaders.Prefabs.VRJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
                 item.AddToWorldUtilsMenu();
                 var  jet = item.GetOrAddComponent<JetpackController>();
-                MiscUtils.DelayFunction(2f, () =>
-                {
+                MiscUtils.DelayFunction(1f, () => {
                     jet.CurrentChair.OverrideStationExit = true;
 
                 });
+                item.GetOrAddComponent<RegisterAsPrefab>();
                 VRJetpack = item;
             }
 
@@ -54,6 +56,8 @@ namespace AstroClient.Spawnables.Enderpearl
                 item.AddToWorldUtilsMenu();
                 item.GetOrAddComponent<JetpackController>();
                 DesktopJetpack = item;
+                item.GetOrAddComponent<RegisterAsPrefab>();
+
             }
 
         }

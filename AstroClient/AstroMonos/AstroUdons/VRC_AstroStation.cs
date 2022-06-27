@@ -103,10 +103,12 @@ namespace AstroClient.AstroMonos.AstroUdons
         internal void EnterStation()
         {
             Station.UseStation(Networking.LocalPlayer);
+            StationTrigger.DisableInteractive = true;
         }
         internal void ExitStation()
         {
             Station.ExitStation(Networking.LocalPlayer);
+            StationTrigger.DisableInteractive = false;
         }
 
 

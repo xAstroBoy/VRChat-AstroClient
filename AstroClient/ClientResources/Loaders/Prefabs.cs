@@ -128,7 +128,7 @@
             }
         }
 
-        private static GameObject _SDK2_VRJetpack;
+        private static GameObject _VRJetpack;
 
         /// <summary>
         ///     Loads SDK2_VRJetpack bundle in resources as Prefab Object
@@ -137,17 +137,17 @@
         {
             get
             {
-                if (_SDK2_VRJetpack == null)
+                if (_VRJetpack == null)
                 {
-                    _SDK2_VRJetpack = Bundles.JetpacksBundle.LoadAsset_Internal("assets/drivesystem/tbdd_twohand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
-                    _SDK2_VRJetpack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    return _SDK2_VRJetpack;
+                    _VRJetpack = Bundles.JetpacksBundle.LoadAsset_Internal("assets/drivesystem/tbdd_twohand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _VRJetpack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _VRJetpack;
                 }
 
-                return _SDK2_VRJetpack;
+                return _VRJetpack;
             }
         }
-        private static GameObject _SDK2_DesktopJetpack;
+        private static GameObject _DesktopJetpack;
 
         /// <summary>
         ///     Loads SDK2_DesktopJetpack bundle in resources as Prefab Object
@@ -156,15 +156,35 @@
         {
             get
             {
-                if (_SDK2_DesktopJetpack == null)
+                if (_DesktopJetpack == null)
                 {
-                    _SDK2_DesktopJetpack = Bundles.JetpacksBundle.LoadAsset_Internal("assets/drivesystem/tbdd_onehand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
-                    _SDK2_DesktopJetpack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                    return _SDK2_DesktopJetpack;
+                    _DesktopJetpack = Bundles.JetpacksBundle.LoadAsset_Internal("assets/drivesystem/tbdd_onehand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _DesktopJetpack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _DesktopJetpack;
                 }
 
-                return _SDK2_DesktopJetpack;
+                return _DesktopJetpack;
             }
         }
+
+        private static GameObject _EightBall;
+
+        /// <summary>
+        ///     Loads EightBall bundle in resources as Prefab Object
+        /// </summary>
+        //internal static GameObject EightBall
+        //{
+        //    get
+        //    {
+        //        if (_EightBall == null)
+        //        {
+        //            _EightBall = Bundles.EightBall.LoadAsset_Internal("assets/crazy 8 ball/crazy8ballv1.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+        //            _EightBall.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+        //            return _EightBall;
+        //        }
+
+        //        return _EightBall;
+        //    }
+        //}
     }
 }

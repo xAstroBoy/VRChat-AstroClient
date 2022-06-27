@@ -224,6 +224,19 @@
                 return _JetpacksBundle;
             }
         }
+        //private static AssetBundle _EightBall;
+        //internal static AssetBundle EightBall
+        //{
+        //    get
+        //    {
+        //        if (_EightBall == null)
+        //        {
+        //            _EightBall = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}8Ball.assetbundle"), 0u);
+        //            _EightBall.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+        //        }
+        //        return _EightBall;
+        //    }
+        //}
 
     }
 }

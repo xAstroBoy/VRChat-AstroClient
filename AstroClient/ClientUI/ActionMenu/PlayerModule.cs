@@ -1,20 +1,15 @@
-using AstroClient.AstroMonos.Components.Tools.Avatars;
 using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
 using AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus;
 using AstroClient.Config;
 using AstroClient.LocalAvatar.ColliderAdjuster;
-using AstroClient.LocalAvatar.ScaleAdjuster;
-using AstroClient.Tools.Extensions;
-using UnityEngine;
 
 namespace AstroClient.ClientUI.ActionMenu
 {
-    using System.Drawing;
+    using ClientActions;
     using Gompoc.ActionMenuAPI.Api;
     using Spawnables.Enderpearl;
+    using System.Drawing;
     using Tools.Player.Movement.Exploit;
-    using ClientActions;
-    using xAstroBoy.Utility;
 
     internal class PlayerModule : AstroEvents
     {
@@ -23,10 +18,11 @@ namespace AstroClient.ClientUI.ActionMenu
             ClientEventActions.OnApplicationStart += OnApplicationStart;
         }
 
-
         private void OnApplicationStart()
         {
-            VRCActionMenuPage.AddSubMenu(ActionMenuPage.Main, "Avatar Scale & Collider Control", () =>
+            AMUtils.AddToModsFolder("Player Options", () =>
+           {
+               CustomSubMenu.AddSubMenu("Avatar Scale & Collider Options", () =>
             {
                 CustomSubMenu.AddToggle("Enable avatar scaling support", ConfigManager.AvatarOptions.ScalingAvatarSupportEnabled, ToggleValue => { ConfigManager.AvatarOptions.ScalingAvatarSupportEnabled = ToggleValue; }, null);
                 CustomSubMenu.AddToggle("Fix avatar root flying off", ConfigManager.AvatarOptions.FixAvatarFlyingOffOnScale, ToggleValue => { ConfigManager.AvatarOptions.FixAvatarFlyingOffOnScale = ToggleValue; }, null);
@@ -36,42 +32,26 @@ namespace AstroClient.ClientUI.ActionMenu
                 CustomSubMenu.AddToggle("Use Pose Height", AvatarRealHeight.UsePoseHeight, ToggleValue => { AvatarRealHeight.UsePoseHeight = ToggleValue; }, null);
             });
 
-            AMUtils.AddToModsFolder("Movement Options", () =>
-            {
-                CustomSubMenu.AddToggle("Disable Falling Height Limit", MovementMenu.NoFallHeightLimit, ToggleValue => { MovementMenu.NoFallHeightLimit = ToggleValue; }, null);
-                CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null);
-                CustomSubMenu.AddToggle("Toggle Disappear Ghost", TrollDefenseSubMenu.DisappearGhost, ToggleValue => { TrollDefenseSubMenu.DisappearGhost = ToggleValue; }, null);
-                CustomSubMenu.AddButton("Spawn EnderPearl", () => { AstroEnderPearl.SpawnEnderPearl(); }, null);
-                CustomSubMenu.AddSubMenu("Enderpearl skins", () =>
-                {
-                    CustomSubMenu.AddToggle("Crystal Skin", AstroEnderPearl.isCrystalMatOn, (value) => { AstroEnderPearl.isCrystalMatOn = value; });
-                    CustomSubMenu.AddToggle("Coral Skin", AstroEnderPearl.isCoralMatOn, (value) => { AstroEnderPearl.isCoralMatOn = value; });
-                    CustomSubMenu.AddToggle("Strawberry Skin", AstroEnderPearl.isStrawberryMatOn, (value) => { AstroEnderPearl.isStrawberryMatOn = value; });
-                    CustomSubMenu.AddToggle("Strawberry Milkshake foam Skin", AstroEnderPearl.isStrawberryMilshakeFoamMatOn, (value) => { AstroEnderPearl.isStrawberryMilshakeFoamMatOn = value; });
-                    CustomSubMenu.AddToggle("Chocolate Skin", AstroEnderPearl.isChocolateMatOn, (value) => { AstroEnderPearl.isChocolateMatOn = value; });
-                    CustomSubMenu.AddToggle("Coffee Skin", AstroEnderPearl.isCoffeeMatOn, (value) => { AstroEnderPearl.isCoffeeMatOn = value; });
-                    CustomSubMenu.AddToggle("Waffle Skin", AstroEnderPearl.isWaffleMatOn, (value) => { AstroEnderPearl.isWaffleMatOn = value; });
+               CustomSubMenu.AddSubMenu("Movement Options", () =>
+               {
+                   CustomSubMenu.AddToggle("Disable Falling Height Limit", MovementMenu.NoFallHeightLimit, ToggleValue => { MovementMenu.NoFallHeightLimit = ToggleValue; }, null);
+                   CustomSubMenu.AddToggle("Toggle Ghost", MovementSerializer.SerializerActivated, ToggleValue => { MovementSerializer.SerializerActivated = ToggleValue; }, null);
+                   CustomSubMenu.AddToggle("Toggle Disappear Ghost", TrollDefenseSubMenu.DisappearGhost, ToggleValue => { TrollDefenseSubMenu.DisappearGhost = ToggleValue; }, null);
+                   CustomSubMenu.AddButton("Spawn EnderPearl", () => { AstroEnderPearl.SpawnEnderPearl(); }, null);
+                   CustomSubMenu.AddSubMenu("Enderpearl skins", () =>
+                   {
+                       CustomSubMenu.AddToggle("Crystal Skin", AstroEnderPearl.isCrystalMatOn, (value) => { AstroEnderPearl.isCrystalMatOn = value; });
+                       CustomSubMenu.AddToggle("Coral Skin", AstroEnderPearl.isCoralMatOn, (value) => { AstroEnderPearl.isCoralMatOn = value; });
+                       CustomSubMenu.AddToggle("Strawberry Skin", AstroEnderPearl.isStrawberryMatOn, (value) => { AstroEnderPearl.isStrawberryMatOn = value; });
+                       CustomSubMenu.AddToggle("Strawberry Milkshake foam Skin", AstroEnderPearl.isStrawberryMilshakeFoamMatOn, (value) => { AstroEnderPearl.isStrawberryMilshakeFoamMatOn = value; });
+                       CustomSubMenu.AddToggle("Chocolate Skin", AstroEnderPearl.isChocolateMatOn, (value) => { AstroEnderPearl.isChocolateMatOn = value; });
+                       CustomSubMenu.AddToggle("Coffee Skin", AstroEnderPearl.isCoffeeMatOn, (value) => { AstroEnderPearl.isCoffeeMatOn = value; });
+                       CustomSubMenu.AddToggle("Waffle Skin", AstroEnderPearl.isWaffleMatOn, (value) => { AstroEnderPearl.isWaffleMatOn = value; });
+                   });
+               });
 
-                });
-                CustomSubMenu.AddButton("Spawn VR Jetpack", () =>
-                {
-                AstroJetPack.SpawnVRJetpack();
-
-                }, null);
-                CustomSubMenu.AddButton("Spawn Desktop Jetpack", () =>
-                {
-                    AstroJetPack.SpawnDesktopJetpack();
-                }, null);
-                CustomSubMenu.AddButton("Exit Jetpack Seat", () =>
-                {
-                    AstroJetPack.ExitJetpacks();
-                }, null);
-
-            });
-
-            Log.Write("Player Module is ready!", Color.Green);
+               Log.Write("Player Module is ready!", Color.Green);
+           });
         }
-
-
     }
 }

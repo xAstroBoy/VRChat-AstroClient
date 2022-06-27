@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AstroClient.AstroMonos.Components.UI.SingleTag;
 using AstroClient.ClientActions;
+using AstroClient.Config;
 using AstroClient.Streamer;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
@@ -30,14 +31,12 @@ internal class SnaxyTagsSystem : AstroEvents
 
     private static string SnaxyConsole { get; set; } = "";
 
-    private static string GeneratedUserID { get; set; } = "";
-    
     internal override void RegisterToEvents()
     {
-        //ClientEventActions.OnApplicationStart += ApplicationStart;
-        //ClientEventActions.OnPlayerJoin += OnPlayerJoin;
-        //ClientEventActions.OnPlayerLeft += OnPlayerLeft;
-        //ClientEventActions.OnRoomLeft += RoomLeft;
+        ClientEventActions.OnApplicationStart += ApplicationStart;
+        ClientEventActions.OnPlayerJoin += OnPlayerJoin;
+        ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+        ClientEventActions.OnRoomLeft += RoomLeft;
 
     }
 
@@ -48,10 +47,10 @@ internal class SnaxyTagsSystem : AstroEvents
 
     private void ApplicationStart()
     {
-        if (GeneratedUserID.IsNullOrEmptyOrWhiteSpace())
+        if (ConfigManager.General.SpoofedUserID.IsNullOrEmptyOrWhiteSpace())
         {
-            GeneratedUserID = UserIDGenerator();
-            Log.Debug($"Generated UserID For SnaxyTag API : {GeneratedUserID}");
+            ConfigManager.General.SpoofedUserID = UserIDGenerator();
+            Log.Debug($"Generated UserID For SnaxyTag API : {ConfigManager.General.SpoofedUserID}");
 
         }
         Task.Run(InitiateWebsocket);
@@ -205,8 +204,8 @@ internal class SnaxyTagsSystem : AstroEvents
 
     private void InitiateWebsocket()
     {
-        SnaxySocket = new WebSocket("ws://45.56.79.98:81");
-        SnaxySocket.SetCookie(new Cookie("uid", GeneratedUserID));
+        SnaxySocket = new WebSocket("ws://totallynotaipleaktomyvps.nulls.sbs:81");
+        SnaxySocket.SetCookie(new Cookie("uid", ConfigManager.General.SpoofedUserID));
         SnaxySocket.SetCookie(new Cookie("melonversion", (string)typeof(MelonLoader.BuildInfo).GetField("Version").GetValue(null)));
         SnaxySocket.Log.Output += OnOutput;
         SnaxySocket.OnError -= OnError;

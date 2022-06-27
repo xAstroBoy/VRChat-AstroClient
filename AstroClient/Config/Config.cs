@@ -74,6 +74,8 @@
         public bool KeyBinds = false;
 
         public bool PreloadClientResources = false;
+
+        public string SpoofedUserID = string.Empty;
     }
 
     [Serializable, Obfuscation]

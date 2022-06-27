@@ -1,4 +1,5 @@
 using AstroClient.ClientActions;
+using UnityEngine.UIElements;
 
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {
@@ -88,6 +89,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                     if (ToggleLightTrigger != null)
                     {
                         HasSubscribed = true;
+                        ToggleLightTrigger.ForcePickupComponent = true;
                         ToggleLightTrigger.OnPickupUseUp += ToggleFlashLight;
                         ToggleLightTrigger.interactText = OnText;
                         ToggleLightTrigger.InteractionText = "Flashlight <3";

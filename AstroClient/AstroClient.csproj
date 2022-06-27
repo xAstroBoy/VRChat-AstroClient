@@ -206,7 +206,7 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
-    <Compile Include="Spawnables\Jetpack\AstroJetPack.cs" />
+    <Compile Include="Spawnables\AstroJetPack.cs" />
     <Compile Include="Startup\Hooks\VRCStationEventHooks.cs" />
     <Compile Include="TestCodes.cs" />
     <Compile Include="LocalAvatar\ColliderAdjuster\AvatarRealHeigh.cs" />
@@ -323,7 +323,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\UdonTycoon\UdonTycoon_PolyCollector.cs" />
     <Compile Include="AstroMonos\Components\Player\Movement\MovementManager.cs" />
     <Compile Include="AstroMonos\Components\Tools\Enabler.cs" />
-    <Compile Include="ClientUI\ActionMenu\ESPModule.cs" />
+    <Compile Include="ClientUI\ActionMenu\SpawnableModule.cs" />
     <Compile Include="ClientUI\ActionMenu\PlayerModule.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\GameProcessMenu.cs" />
@@ -438,8 +438,8 @@
     <Compile Include="PlayerList\UIXManager.cs" />
     <Compile Include="PlayerList\Utilities\PlayerList_Constants.cs" />
     <Compile Include="PlayerList\Utilities\PlayerUtils.cs" />
-    <Compile Include="Spawnables\ColliderSuppresserCube\TweakerSphere.cs" />
-    <Compile Include="Spawnables\ColliderSuppresserCube\ColliderSuppresserSphere.cs" />
+    <Compile Include="Spawnables\TweakerSphere.cs" />
+    <Compile Include="Spawnables\ColliderSuppresserSphere.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\PhotonHandlers\Photon_PlayerModerationHandler.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Structs\ModerationStructures\PlayerModerationCode.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Structs\HookAction.cs" />
@@ -493,7 +493,7 @@
     <Compile Include="Tools\Regexes\RegexExtensions.cs" />
     <Compile Include="Tools\Regexes\RegexUtils.cs" />
     <Compile Include="ClientAttributes\RegisterComponent.cs" />
-    <Compile Include="Spawnables\Enderpearl\AstroEnderPearl.cs" />
+    <Compile Include="Spawnables\AstroEnderPearl.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\EnderPearl.cs" />
     <Compile Include="Tools\Exploits\Exploit_Exts\Teleport_Ext.cs" />
     <Compile Include="Tools\Exploits\TeleportExploit.cs" />
@@ -507,7 +507,7 @@
     <Compile Include="Tools\Extensions\Components_exts\PickupControllerExtensions.cs" />
     <Compile Include="Tools\Extensions\Components_exts\RigidBodyControllerExtensions.cs" />
     <Compile Include="Startup\ModDetector\FindMods.cs" />
-    <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
+    <Compile Include="Spawnables\Flashlight.cs" />
     <Compile Include="Startup\Welcome.cs" />
     <Compile Include="Startup\Hooks\PhotonHook\Startup\PhotonOnEventHook.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />

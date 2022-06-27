@@ -136,7 +136,27 @@ namespace AstroClient.AstroMonos.AstroUdons
             }
         }
 
+        internal bool DisableInteractive
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (UdonBehaviour != null)
+                {
+                    return UdonBehaviour.DisableInteractive;
+                }
+                return false;
+            }
 
+            [HideFromIl2Cpp]
+            set
+            {
+                if (UdonBehaviour != null)
+                {
+                    UdonBehaviour.DisableInteractive = value;
+                }
+            }
+        }
 
 
         internal Action OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }

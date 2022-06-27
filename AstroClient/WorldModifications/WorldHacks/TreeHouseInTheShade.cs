@@ -179,14 +179,12 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnUpdate += OnUpdate;
-                        UnityDestroyBlock.MonitorDestroyingEvent = true;
                     }
                     else
                     {
 
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnUpdate -= OnUpdate;
-                        UnityDestroyBlock.MonitorDestroyingEvent = false;
                     }
                 }
                 _HasSubscribed = value;

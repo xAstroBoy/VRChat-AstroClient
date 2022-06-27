@@ -1,3 +1,4 @@
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 
 namespace AstroClient.Spawnables.Flashlight
@@ -56,6 +57,7 @@ namespace AstroClient.Spawnables.Flashlight
 
             if (flashlight != null)
             {
+                flashlight.GetOrAddComponent<RegisterAsPrefab>();
                 flashlight.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
                 var collider = flashlight.AddComponent<MeshCollider>();
                 if (collider != null)
@@ -73,13 +75,6 @@ namespace AstroClient.Spawnables.Flashlight
                 flashlight.IgnoreLocalPlayerCollision();
                 flashlight.transform.position = GameInstances.CurrentUser.transform.position + new Vector3(0f, 1f, 0f);
                 flashlights.AddGameObject(flashlight);
-
-                var pickup = flashlight.AddComponent<VRCSDK2.VRC_Pickup>();
-                if (pickup != null)
-                {
-                    pickup.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
-                    pickup.pickupable = true;
-                }
 
                 var behaviour = flashlight.AddComponent<FlashlightBehaviour>();
                 if (behaviour != null)
@@ -105,18 +100,18 @@ namespace AstroClient.Spawnables.Flashlight
                 {
 
                     // before copying let's backup the prefab Properties!
-                    Log.Debug("Backupping SpotAngle.");
+                    //Log.Debug("Backupping SpotAngle.");
                     var spotAngle = Result.spotAngle;
-                    Log.Debug("Backupping innerSpotAngle.");
+                    //Log.Debug("Backupping innerSpotAngle.");
                     var innerSpotAngle = Result.innerSpotAngle;
 
                     Result.CopyFromLight(CurrentLightTemplate);
 
-                    Log.Debug("Restoring Prefab Spot Angle Settings.");
+                    //Log.Debug("Restoring Prefab Spot Angle Settings.");
                     Result.innerSpotAngle = innerSpotAngle;
-                    Log.Debug($"Restoring innerSpotAngle: {Result.spotAngle}.");
+                   // Log.Debug($"Restoring innerSpotAngle: {Result.spotAngle}.");
                     Result.spotAngle = spotAngle;
-                    Log.Debug($"Restoring spotAngle : {Result.spotAngle}.");
+                   // Log.Debug($"Restoring spotAngle : {Result.spotAngle}.");
 
                 }
 
