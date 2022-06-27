@@ -67,9 +67,6 @@ namespace AstroClient.AstroMonos.AstroUdons
                 StationTrigger.InteractionText = "Sit";
                 HasSubscribed = true;
             }
-
-
-
         }
         private void OnStationEnter(VRC.SDKBase.VRCStation instance)
         {

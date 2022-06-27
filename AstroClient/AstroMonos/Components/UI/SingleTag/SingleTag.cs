@@ -106,8 +106,6 @@
                         //Debug($"Spawned SingleTag for {Player.DisplayName()}!");
                         SpawnedTag.name = TagName;
 
-                        // TODO : MAKE A SYSTEM TO MAKE IT AUTOMATIC STACK!
-
                         //Debug($"Purging  {Player.DisplayName()}  {SpawnedTag.name} from Useless Internals");
                         for (int i = SpawnedTag.childCount; i > 0; i--)
                         {

@@ -34,10 +34,10 @@ internal class SnaxyTagsSystem : AstroEvents
     
     internal override void RegisterToEvents()
     {
-        ClientEventActions.OnApplicationStart += ApplicationStart;
-        ClientEventActions.OnPlayerJoin += OnPlayerJoin;
-        ClientEventActions.OnPlayerLeft += OnPlayerLeft;
-        ClientEventActions.OnRoomLeft += RoomLeft;
+        //ClientEventActions.OnApplicationStart += ApplicationStart;
+        //ClientEventActions.OnPlayerJoin += OnPlayerJoin;
+        //ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+        //ClientEventActions.OnRoomLeft += RoomLeft;
 
     }
 

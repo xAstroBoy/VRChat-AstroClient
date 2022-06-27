@@ -1489,6 +1489,7 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\WorldButton.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\Jetpacks.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\8Ball.assetbundle" />
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
     <None Include="PlayerList\PlayerListUI.unitypackage" />
