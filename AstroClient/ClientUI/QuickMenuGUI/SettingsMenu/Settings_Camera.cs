@@ -3,6 +3,7 @@ using AstroClient.Cheetos.CameraStuff;
 using AstroClient.ClientActions;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.UIPaths;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 {
@@ -30,20 +31,31 @@ namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            PlayerCameraEditor.PlayerCamera.farClipPlane *= 5f;
+            //PlayerCameraEditor.PlayerCamera.farClipPlane *= 5f;
             FarClipPlaneSetting = PlayerCameraEditor.PlayerCamera.farClipPlane;
+            NearClipPlaneSetting = PlayerCameraEditor.PlayerCamera.farClipPlane;
+
             if (farClipPlaneSlider != null)
             {
                 farClipPlaneSlider.SetValue(PlayerCameraEditor.PlayerCamera.farClipPlane);
             }
-            PlayerCameraEditor.PlayerCamera.nearClipPlane = 0.001f;
+            //MiscUtils.DelayFunction(5f, ()=>
+            //{
+            //PlayerCameraEditor.PlayerCamera.nearClipPlane = 1E-06f;
+            //});
         }
 
         internal static void RestoreFarClipPlane()
         {
             PlayerCameraEditor.PlayerCamera.farClipPlane = FarClipPlaneSetting;
         }
+        internal static void RestoreNearClipPlane()
+        {
+            PlayerCameraEditor.PlayerCamera.nearClipPlane = NearClipPlaneSetting;
+        }
 
+
+        private static float NearClipPlaneSetting = 0f;
 
         private static float FarClipPlaneSetting = 0f;
         private static QMSlider farClipPlaneSlider;

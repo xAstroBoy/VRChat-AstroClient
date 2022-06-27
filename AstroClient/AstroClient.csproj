@@ -208,7 +208,6 @@
     <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
     <Compile Include="Spawnables\AstroJetPack.cs" />
     <Compile Include="Startup\Hooks\VRCStationEventHooks.cs" />
-    <Compile Include="TestCodes.cs" />
     <Compile Include="LocalAvatar\ColliderAdjuster\AvatarRealHeigh.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\AvatarScaleAdjuster.cs" />
     <Compile Include="LocalAvatar\ScaleAdjuster\ScaleAdjusterHelper.cs" />

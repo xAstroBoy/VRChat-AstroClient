@@ -31,6 +31,8 @@ namespace AstroClient.ClientUI.ActionMenu
                 {
                     CustomSubMenu.AddButton("Reset FarClipPlane", () => { Settings_Camera.RestoreFarClipPlane(); }, null);
                     CustomSubMenu.AddButton("Set FarClipPlane to 999999999f", () => { PlayerCameraEditor.PlayerCamera.farClipPlane = 999999999f; }, null);
+                    CustomSubMenu.AddButton("Set NearClipPlane to 0.000001f", () => { PlayerCameraEditor.PlayerCamera.nearClipPlane = 1E-06f; }, null);
+
                 }, null);
 
                 CustomSubMenu.AddSubMenu("Collider Disabler", () =>
