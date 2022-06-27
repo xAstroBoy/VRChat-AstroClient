@@ -114,39 +114,39 @@ namespace AstroClient.WorldModifications.WorldHacks
                     logger.DestroyMeLocal();
                 }
 
-                if (Room_1_main_script != null)
-                {
-                    Lock_Door_1 = Room_1_main_script.FindUdonEvent("OnToggle");
-                    if (Lock_Door_1 != null)
-                    {
-                        Unlock_Door_1 = Lock_Door_1.UdonBehaviour.FindUdonEvent("OffToggle");
-                    }
-                }
+                //if (Room_1_main_script != null)
+                //{
+                //    Lock_Door_1 = Room_1_main_script.FindUdonEvent("OnToggle");
+                //    if (Lock_Door_1 != null)
+                //    {
+                //        Unlock_Door_1 = Lock_Door_1.UdonBehaviour.FindUdonEvent("OffToggle");
+                //    }
+                //}
 
-                if (Room_2_main_script != null)
-                {
-                    Lock_Door_2 = Room_2_main_script.FindUdonEvent("OnToggle");
-                    if (Lock_Door_2 != null)
-                    {
-                        Unlock_Door_2 = Lock_Door_2.UdonBehaviour.FindUdonEvent("OffToggle");
-                    }
-                }
-                if (Room_3_main_script != null)
-                {
-                    Lock_Door_3 = Room_3_main_script.FindUdonEvent("OnToggle");
-                    if (Lock_Door_3 != null)
-                    {
-                        Unlock_Door_3 = Lock_Door_3.UdonBehaviour.FindUdonEvent("OffToggle");
-                    }
-                }
-                if (Room_4_main_script != null)
-                {
-                    Lock_Door_4 = Room_4_main_script.FindUdonEvent("OnToggle");
-                    if (Lock_Door_4 != null)
-                    {
-                        Unlock_Door_4 = Lock_Door_4.UdonBehaviour.FindUdonEvent("OffToggle");
-                    }
-                }
+                //if (Room_2_main_script != null)
+                //{
+                //    Lock_Door_2 = Room_2_main_script.FindUdonEvent("OnToggle");
+                //    if (Lock_Door_2 != null)
+                //    {
+                //        Unlock_Door_2 = Lock_Door_2.UdonBehaviour.FindUdonEvent("OffToggle");
+                //    }
+                //}
+                //if (Room_3_main_script != null)
+                //{
+                //    Lock_Door_3 = Room_3_main_script.FindUdonEvent("OnToggle");
+                //    if (Lock_Door_3 != null)
+                //    {
+                //        Unlock_Door_3 = Lock_Door_3.UdonBehaviour.FindUdonEvent("OffToggle");
+                //    }
+                //}
+                //if (Room_4_main_script != null)
+                //{
+                //    Lock_Door_4 = Room_4_main_script.FindUdonEvent("OnToggle");
+                //    if (Lock_Door_4 != null)
+                //    {
+                //        Unlock_Door_4 = Lock_Door_4.UdonBehaviour.FindUdonEvent("OffToggle");
+                //    }
+                //}
                 if (SkyboxEditor.SetSkyboxByFileName("Moon"))
                 {
                     Log.Debug("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");

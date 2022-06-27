@@ -137,6 +137,6 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         internal VRC.SDKBase.VRCStation Station { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal VRC_AstroInteract StationTrigger  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal bool DenyExits { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        internal bool OverrideStationExit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
     }
 }

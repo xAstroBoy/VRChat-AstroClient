@@ -62,7 +62,7 @@ namespace AstroClient.Startup.Hooks
             var Station = __instance.gameObject.GetComponent<VRC_AstroStation>();
             if (Station != null)
             {
-                if (Station.DenyExits)
+                if (Station.OverrideStationExit)
                 {
                     return false;
                 }
@@ -91,7 +91,7 @@ namespace AstroClient.Startup.Hooks
             var Station = __instance.gameObject.GetComponent<VRC_AstroStation>();
             if (Station != null)
             {
-                if(Station.DenyExits)
+                if(Station.OverrideStationExit)
                 {
                     return false;
                 }

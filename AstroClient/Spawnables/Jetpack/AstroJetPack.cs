@@ -28,7 +28,7 @@ namespace AstroClient.Spawnables.Enderpearl
                 var  jet = item.GetOrAddComponent<JetpackController>();
                 MiscUtils.DelayFunction(2f, () =>
                 {
-                    jet.CurrentChair.DenyExits = true;
+                    jet.CurrentChair.OverrideStationExit = true;
 
                 });
                 VRJetpack = item;
@@ -65,7 +65,7 @@ namespace AstroClient.Spawnables.Enderpearl
                 var Jetpack = DesktopJetpack.GetOrAddComponent<JetpackController>();
                 if(Jetpack != null)
                 {
-                    Jetpack.CurrentChair.DenyExits = false;
+                    Jetpack.CurrentChair.OverrideStationExit = false;
                     Jetpack.CurrentChair.ExitStation();
 
                 }
@@ -75,7 +75,7 @@ namespace AstroClient.Spawnables.Enderpearl
                 var Jetpack = VRJetpack.GetOrAddComponent<JetpackController>();
                 if (Jetpack != null)
                 {
-                    Jetpack.CurrentChair.DenyExits = false;
+                    Jetpack.CurrentChair.OverrideStationExit = false;
                     Jetpack.CurrentChair.ExitStation();
                 }
             }

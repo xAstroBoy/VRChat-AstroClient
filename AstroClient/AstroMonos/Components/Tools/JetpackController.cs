@@ -70,12 +70,12 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 {
                     MiscUtils.DelayFunction(1f, () =>
                     {
-                        CurrentChair.Station.PlayerMobility = VRCStation.Mobility.Mobile;
+                        CurrentChair.Station.PlayerMobility = VRCStation.Mobility.ImmobilizeForVehicle;
                         //CurrentChair.Station.canUseStationFromStation = false;
                         CurrentChair.Station.seated = true;
                         CurrentChair.Station.stationEnterPlayerLocation = Enter_Point;
                         CurrentChair.Station.stationExitPlayerLocation = Exit_Point;
-                        CurrentChair.Station.disableStationExit = true;
+                        //CurrentChair.Station.disableStationExit = true;
                         CurrentChair.OnStationEnterEvent = OnStationEnter;
                         CurrentChair.OnStationExitEvent = OnStationExit;
 
