@@ -1,6 +1,7 @@
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy;
 using Boo.Lang.Compiler.Ast;
+using UnityEngine.Animations;
 using VRC.SDK3.Components;
 using VRCSDK2;
 using VRCStation = VRC.SDKBase.VRCStation;
@@ -42,8 +43,10 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 {
                     JetstickPickup.ForcePickupComponent = true;
                     JetstickPickup.PickupController.pickupable = true;
-                    JetstickPickup.OnPickupUseDown = Enable_Jet;
-                    JetstickPickup.OnPickupUseUp = Disable_Jet;
+                    JetstickPickup.OnPickup = VRCChairStick_OnPickup;
+                    JetstickPickup.OnPickupUseDown = VRCChairStick_OnPickupUseDown;
+                    JetstickPickup.OnPickupUseUp = VRCChairStick_OnPickupUseUp;
+                    JetstickPickup.OnDrop = VRCChairStick_OnDrop;
                     JetstickPickup.interactText = "Jet";
                     JetstickPickup.InteractionText = "Jet";
                 }
@@ -56,8 +59,10 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 {
                     ThrusterStickPickup.ForcePickupComponent = true;
                     ThrusterStickPickup.PickupController.pickupable = true;
-                    ThrusterStickPickup.OnPickupUseDown = Enable_Thruster;
-                    ThrusterStickPickup.OnPickupUseUp = Disable_Thruster;
+                    ThrusterStickPickup.OnPickup = ThrusterStick_OnPickup;
+                    ThrusterStickPickup.OnPickupUseDown = ThrusterStick_OnPickupUseDown;
+                    ThrusterStickPickup.OnPickupUseUp = ThrusterStick_OnPickupUseUp;
+                    ThrusterStickPickup.OnDrop = ThrusterStick_OnDrop;
                     ThrusterStickPickup.interactText = "Thruster";
                     ThrusterStickPickup.InteractionText = "Thruster";
                 }
@@ -86,7 +91,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         }
 
 
-        private void Enable_Jet()
+        private void VRCChairStick_OnPickupUseDown()
         {
             JetpackForce.enabled = true;
             ParticleThrustParticles.Play();
@@ -95,7 +100,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         }
 
 
-        private void Disable_Jet()
+        private void VRCChairStick_OnPickupUseUp()
         {
             JetpackForce.enabled = false;
             //ParticleThrustParticles.Play();
@@ -104,7 +109,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
         }
 
-        private void Enable_Thruster()
+        private void ThrusterStick_OnPickupUseDown()
         {
             ThrusterForce.enabled = true;
             QuickBoost.Play("quickboost");
@@ -126,8 +131,41 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             Destroy(this.gameObject);
         }
 
+        private void ThrusterStick_OnPickup()
+        {
+            if (ThrusterStick_ParentConstraint != null)
+            {
+                ThrusterStick_ParentConstraint.enabled = false;
+            }
 
-        private void Disable_Thruster()
+        }
+
+        private void ThrusterStick_OnDrop()
+        {
+            if(ThrusterStick_ParentConstraint != null)
+            {
+                ThrusterStick_ParentConstraint.enabled = true;
+            }
+        }
+
+        private void VRCChairStick_OnPickup()
+        {
+            if (VRCChairStick_ParentConstraint != null)
+            {
+                VRCChairStick_ParentConstraint.enabled = false;
+            }
+
+        }
+
+        private void VRCChairStick_OnDrop()
+        {
+            if (VRCChairStick_ParentConstraint != null)
+            {
+                VRCChairStick_ParentConstraint.enabled = true;
+            }
+        }
+
+        private void ThrusterStick_OnPickupUseUp()
         {
             ThrusterForce.enabled = false;
             //QuickBoost.Play("quickboost");
@@ -252,6 +290,22 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 return _VRCChairStick;
             }
         }
+
+        private ParentConstraint _VRCChairStick_ParentConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParentConstraint VRCChairStick_ParentConstraint
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (VRCChairStick == null) return null;
+                if (_VRCChairStick_ParentConstraint == null)
+                {
+                    _VRCChairStick_ParentConstraint = VRCChairStick.GetComponent<ParentConstraint>();
+                }
+                return _VRCChairStick_ParentConstraint;
+            }
+        }
+
         private UnityEngine.ConstantForce _JetpackForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private UnityEngine.ConstantForce JetpackForce
         {
@@ -296,6 +350,20 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             }
         }
 
+        private ParentConstraint _ThrusterStick_ParentConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParentConstraint ThrusterStick_ParentConstraint
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (ThrusterStick == null) return null;
+                if (_ThrusterStick_ParentConstraint == null)
+                {
+                    _ThrusterStick_ParentConstraint = ThrusterStick.GetComponent<ParentConstraint>();
+                }
+                return _ThrusterStick_ParentConstraint;
+            }
+        }
 
         private Transform _LowerJet { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Transform LowerJet
