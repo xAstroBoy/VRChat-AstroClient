@@ -17,6 +17,7 @@ namespace AstroClient.ModsDetector
         internal override void ExecutePriorityPatches()
         {
             MelonCoroutines.Start(AntiNotoConsoleClear());
+
         }
 
         private static HarmonyMethod GetPatch(string name)
