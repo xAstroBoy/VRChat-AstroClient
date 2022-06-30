@@ -1,5 +1,6 @@
 ﻿using System;
 using AstroClient.ClientActions;
+using AstroClient.PlayerList.Entries;
 
 namespace AstroClient.Cheetos
 {
@@ -184,6 +185,7 @@ namespace AstroClient.Cheetos
 
             stopwatch2.Stop();
             Log.Debug($"Avatar Pedestals Completed: found {worldAvatarsids.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
+            WorldInfoEntry.Update_Avatars = true;
             OnPedestralDumpDone.SafetyRaise();
         }
 

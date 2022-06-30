@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.AstroMonos.Components.Tools.Listeners;
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Prefabs;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.PlayerList.Entries;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.ObjectEditor.Cloner;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
@@ -92,6 +94,11 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Spawner
                             UpdateSpawnedPrefabsBtn();
                         };
                     }
+                    if(obj.GetGetInChildrens<PickupController>(true) != null)
+                    {
+                        WorldInfoEntry.Update_Pickups = true;
+                    }
+
                 }
                 UpdateSpawnedPrefabsBtn();
             }

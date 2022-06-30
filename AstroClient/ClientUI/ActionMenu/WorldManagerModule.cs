@@ -30,8 +30,15 @@ namespace AstroClient.ClientUI.ActionMenu
                 CustomSubMenu.AddSubMenu("Player Camera Controls", () =>
                 {
                     CustomSubMenu.AddButton("Reset FarClipPlane", () => { Settings_Camera.RestoreFarClipPlane(); }, null);
-                    CustomSubMenu.AddButton("Set FarClipPlane to 999999999f", () => { PlayerCameraEditor.PlayerCamera.farClipPlane = 999999999f; }, null);
-                    CustomSubMenu.AddButton("Set NearClipPlane to 0.000001f", () => { PlayerCameraEditor.PlayerCamera.nearClipPlane = 1E-06f; }, null);
+                    CustomSubMenu.AddButton("Reset NearClipPlane", () => { Settings_Camera.RestoreNearClipPlane(); }, null);
+
+                    CustomSubMenu.AddButton("Increase FarClipPlane of 100", () => { Settings_Camera.Increase_FarClipPlane(100); }, null);
+                    CustomSubMenu.AddButton("Increase FarClipPlane of 1000", () => { Settings_Camera.Increase_FarClipPlane(1000); }, null);
+                    CustomSubMenu.AddButton("Increase FarClipPlane of 10000", () => { Settings_Camera.Increase_FarClipPlane(10000); }, null);
+                    CustomSubMenu.AddButton("Set FarClipPlane to 999999999f", () => { Settings_Camera.Set_FarClipPlane(999999999f); }, null);
+
+
+                    CustomSubMenu.AddButton("Set NearClipPlane to 0.000001f", () => { Settings_Camera.Set_nearClipPlane(1E-06f); }, null);
 
                 }, null);
 

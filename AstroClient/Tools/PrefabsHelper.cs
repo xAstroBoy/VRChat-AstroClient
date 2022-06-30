@@ -16,11 +16,11 @@ namespace AstroClient.Tools
         {
             if (SceneUtils.DynamicPrefabs.Length != 0)
             {
-                foreach (var prefab in SceneUtils.DynamicPrefabs)
+                for (var index = 0; index < SceneUtils.DynamicPrefabs.Length; index++)
                 {
+                    var prefab = SceneUtils.DynamicPrefabs[index];
                     prefab.GetOrAddComponent<RegisterAsPrefab>();
                 }
-
             }
         }
     }

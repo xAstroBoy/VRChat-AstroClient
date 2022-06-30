@@ -1,4 +1,6 @@
-﻿using AstroClient.Tools.Regexes;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.Tools.Extensions.Components_exts;
+using AstroClient.Tools.Regexes;
 using AstroClient.Tools.UdonEditor;
 using VRC.SDKBase;
 
@@ -32,46 +34,19 @@ namespace AstroClient.Tools.World
         internal static List<GameObject> Get_Pickups()
         {
             try
-            {
-                List<GameObject> result = new List<GameObject>();
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Pickup>()
-                        .Select(i => i.gameObject)
-                        .Where(x => x.gameObject != null)
-                        .Where(x2 => x2.name != "AvatarDebugConsole")
-                        .Where(x3 => x3.transform != CameraTweaker.ViewFinder)
-                        .ToList();
-                if (list1.AnyAndNotNull())
-                {
-                    result = list1;
-                }
-                else
-                {
-                    var list2 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_Pickup>()
-                        .Select(i => i.gameObject)
-                        .Where(x => x.gameObject != null)
-                        .Where(x2 => x2.name != "AvatarDebugConsole")
-                        .Where(x3 => x3.transform != CameraTweaker.ViewFinder)
-                        .ToList();
+            { 
+                // All 3 Pickups Components inherit this.
 
-                    if (list2 != null && list2.Count() != 0)
-                    {
-                        result = list2;
-                    }
-                    else
-                    {
-                        var list3 = GameObjectFinder.GetRootGameObjectsComponents<VRCPickup>()
-                        .Select(i => i.gameObject)
-                        .Where(x => x.gameObject != null)
-                        .Where(x2 => x2.name != "AvatarDebugConsole")
-                        .Where(x3 => x3.transform != CameraTweaker.ViewFinder)
-                        .ToList();
-                        if (list3 != null && list3.Count() != 0)
-                        {
-                            result = list3;
-                        }
-                    }
-                }
-                return result;
+
+                return GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Pickup>()
+                           .Select(i => i.gameObject)
+                           .Where(x => x.gameObject != null)
+                           .Where(x2 => x2.name != "AvatarDebugConsole")
+                           .Where(x3 => x3.transform != CameraTweaker.ViewFinder)
+                           .Where(x4 => x4.gameObject.Pickup_Get_ForceComponent() == false)
+                           .ToList();
+
+
             }
             catch (Exception e)
             {
@@ -85,75 +60,8 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                List<GameObject> result = new List<GameObject>();
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC_MirrorReflection>();
-                var list2 = GameObjectFinder.GetRootGameObjectsComponents<MirrorReflection>();
-                var list3 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_MirrorReflection>();
-                var list4 = GameObjectFinder.GetRootGameObjectsComponents<VRCMirrorReflection>();
-
-                if (list1 != null)
-                {
-                    if (list1.Count != 0)
-                    {
-                        for (var index = 0; index < list1.Count; index++)
-                        {
-                            var item = list1[index];
-                            if(!result.Contains(item.gameObject))
-                            {
-                                result.Add(item.gameObject);
-                            }
-
-                        }
-                    }
-                }
-                if (list2 != null)
-                {
-                    if (list2.Count != 0)
-                    {
-                        for (var index = 0; index < list2.Count; index++)
-                        {
-                            var item = list2[index];
-                            if (!result.Contains(item.gameObject))
-                            {
-                                result.Add(item.gameObject);
-                            }
-                        }
-                    }
-                }
-
-                if (list3 != null)
-                {
-                    if (list3.Count != 0)
-                    {
-                        for (var index = 0; index < list3.Count; index++)
-                        {
-                            var item = list3[index];
-                            if (!result.Contains(item.gameObject))
-                            {
-                                result.Add(item.gameObject);
-                            }
-                        }
-                    }
-                }
-
-                if (list4 != null)
-                {
-                    if (list4.Count != 0)
-                    {
-                        for (var index = 0; index < list4.Count; index++)
-                        {
-                            var item = list4[index];
-                            if (!result.Contains(item.gameObject))
-                            {
-                                result.Add(item.gameObject);
-                            }
-                        }
-                    }
-                }
-
-
-
-                return result;
+                return GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_MirrorReflection>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+     
             }
             catch (Exception e)
             {
@@ -169,27 +77,9 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
-                if (list1.AnyAndNotNull())
-                {
-                    return list1;
-                }
-                else
-                {
-                    var list2 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
-                    if (list2 != null && list2.Count() != 0)
-                    {
-                        return list2;
-                    }
-                    else
-                    {
-                        var list3 = GameObjectFinder.GetRootGameObjectsComponents<VRCInteractable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
-                        if (list3 != null && list3.Count() != 0)
-                        {
-                            return list3;
-                        }
-                    }
-                }
+                // All 2 extra component inherit this.
+                return GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList(); 
+                
             }
             catch (Exception e)
             {
@@ -204,18 +94,10 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
-                if (list1.AnyAndNotNull())
+                var list = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
+                if (list.AnyAndNotNull())
                 {
-                    return list1;
-                }
-                else
-                {
-                    var list2 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
-                    if (list2 != null && list2.Count() != 0)
-                    {
-                        return list2;
-                    }
+                    return list;
                 }
             }
             catch (Exception e)
@@ -640,14 +522,5 @@ namespace AstroClient.Tools.World
             return scenes.Contains(lower);
         }
 
-        internal static string GetSDKType()
-        {
-            if (GetSDK2Descriptor() != null)
-                return "SDK2";
-            else if (GetSDK3Descriptor() != null)
-                return "SDK3";
-            else
-                return "not found";
-        }
     }
 }

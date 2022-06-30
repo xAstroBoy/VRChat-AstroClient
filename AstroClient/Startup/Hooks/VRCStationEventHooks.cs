@@ -41,6 +41,9 @@ namespace AstroClient.Startup.Hooks
 
             new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal.UseStation)), GetPatch(nameof(OnStationEnter2)));
             new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal.ExitStation)), GetPatch(nameof(OnStationExit2)));
+            new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal2.ExitStation)), GetPatch(nameof(OnStationExit3)));
+            new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal3.ExitStation)), GetPatch(nameof(OnStationExit4)));
+
 
         }
 
@@ -102,5 +105,44 @@ namespace AstroClient.Startup.Hooks
             ClientEventActions.OnStationExit2.SafetyRaiseWithParams(__instance);
             return true;
         }
+        private static bool OnStationExit3(VRC_StationInternal2 __instance, VRCPlayerApi __0)
+        {
+            if (__instance == null) return true;
+            if (__0 == null) return true;
+            if (!__0.isLocal) return true;
+            var Station = __instance.gameObject.GetComponent<VRC_AstroStation>();
+            if (Station != null)
+            {
+                if (Station.OverrideStationExit)
+                {
+                    return false;
+                }
+            }
+
+
+            Log.Debug($"Unsit Event {__instance.gameObject.name}");
+            ClientEventActions.OnStationExit2.SafetyRaiseWithParams(__instance);
+            return true;
+        }
+        private static bool OnStationExit4(VRC_StationInternal3 __instance, VRCPlayerApi __0)
+        {
+            if (__instance == null) return true;
+            if (__0 == null) return true;
+            if (!__0.isLocal) return true;
+            var Station = __instance.gameObject.GetComponent<VRC_AstroStation>();
+            if (Station != null)
+            {
+                if (Station.OverrideStationExit)
+                {
+                    return false;
+                }
+            }
+
+
+            Log.Debug($"Unsit Event {__instance.gameObject.name}");
+            ClientEventActions.OnStationExit2.SafetyRaiseWithParams(__instance);
+            return true;
+        }
+
     }
 }

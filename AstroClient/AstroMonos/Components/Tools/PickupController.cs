@@ -1,4 +1,5 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.PlayerList.Entries;
 using AstroClient.Startup.Hooks;
 using VRC.Core;
 
@@ -152,6 +153,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     SyncProperties(true);
             }
         }
+
 
         private  void OnRoomLeft()
         {
@@ -484,6 +486,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             OnPickupDrop = null;
             OnPickupHeld = null;
             RestoreProperties();
+            WorldInfoEntry.Update_Pickups = true;
         }
 
         internal void RestoreProperties()
@@ -1263,7 +1266,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             {
                 if (value)
                 {
-                    _ForceComponent = value;
+                    _ForceComponent = true;
                     if (!hasRequiredComponentBeenAdded) ForcePickupComponent();
                     Run_OnOnPickupPropertyChanged();
                 }

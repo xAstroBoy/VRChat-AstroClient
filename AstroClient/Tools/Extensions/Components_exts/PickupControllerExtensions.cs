@@ -41,6 +41,14 @@
                 instance.proximity = proximity;
             }
         }
+        internal static bool Pickup_Get_ForceComponent(this PickupController instance)
+        {
+            if (instance != null)
+            {
+                return  instance.ForceComponent;
+            }
+            return false;
+        }
 
         internal static void Pickup_Set_ForceComponent(this PickupController instance, bool ForceComponent = true)
         {
@@ -143,6 +151,23 @@
             }
 
             return null;
+        }
+        /// <summary>
+        /// This won't add the pickupcontroller, but it checks if is present, if is , returns ForceComponent.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        internal static bool Pickup_Get_ForceComponent(this GameObject obj)
+        {
+            if(obj != null)
+            {
+                var controller = obj.GetComponent<PickupController>();
+                if(controller != null)
+                {
+                    return controller.ForceComponent;
+                }
+            }
+            return false;
         }
 
         internal static void Pickup_Set_AntiTheft(this GameObject obj, bool AntiTheft)

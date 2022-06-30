@@ -344,7 +344,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (Scripts == null) return null;
                 if (_Room_Scripts == null)
                 {
-                    return _Room_Scripts = Scripts.FindObject("Room Scripts");
+                    return _Room_Scripts = Scripts.FindObject("WunderCrossPrivateRoom");
                 }
 
                 return _Room_Scripts;
@@ -361,7 +361,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (Room_Scripts == null) return null;
                 if (_Room_1_main_script == null)
                 {
-                    return _Room_1_main_script = Room_Scripts.FindObject("Room 1 main script");
+                    return _Room_1_main_script = Room_Scripts.FindObject("Room 1");
                 }
 
                 return _Room_1_main_script;
@@ -378,7 +378,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (Room_Scripts == null) return null;
                 if (_Room_2_main_script == null)
                 {
-                    return _Room_2_main_script = Room_Scripts.FindObject("Room 2 main script");
+                    return _Room_2_main_script = Room_Scripts.FindObject("Room 2");
                 }
 
                 return _Room_2_main_script;
@@ -395,7 +395,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (Room_Scripts == null) return null;
                 if (_Room_3_main_script == null)
                 {
-                    return _Room_3_main_script = Room_Scripts.FindObject("Room 3 main script");
+                    return _Room_3_main_script = Room_Scripts.FindObject("Room 3");
                 }
 
                 return _Room_3_main_script;
@@ -412,7 +412,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (Room_Scripts == null) return null;
                 if (_Room_4_main_script == null)
                 {
-                    return _Room_4_main_script = Room_Scripts.FindObject("Room 4 main script");
+                    return _Room_4_main_script = Room_Scripts.FindObject("Room 4");
                 }
 
                 return _Room_4_main_script;
