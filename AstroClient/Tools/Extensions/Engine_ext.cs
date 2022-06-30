@@ -176,7 +176,6 @@ public static void SetLayerRecursive(this GameObject gameObject, int layer)
             vector.Set(X, vector.y, vector.z);
             return vector;
         }
-
         public static float RoundAmount(this float i, float nearestFactor) => (float)Math.Round((double)i / (double)nearestFactor) * nearestFactor;
 
         public static Vector3 RoundAmount(this Vector3 i, float nearestFactor) => new Vector3(i.x.RoundAmount(nearestFactor), i.y.RoundAmount(nearestFactor), i.z.RoundAmount(nearestFactor));

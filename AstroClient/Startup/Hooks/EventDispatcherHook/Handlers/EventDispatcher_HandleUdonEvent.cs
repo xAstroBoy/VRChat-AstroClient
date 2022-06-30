@@ -141,9 +141,10 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             bool isEventKeyLoggingIgnored = IsEventLogIgnored(EventKey);
             try
             {
-
-                isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(GameInstances.CurrentPlayer, UdonEvent.gameObject, EventKey);
-                
+                if (!Bools.BlockUdon)
+                {
+                    isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(GameInstances.CurrentPlayer, UdonEvent.gameObject, EventKey);
+                }
 
 
 

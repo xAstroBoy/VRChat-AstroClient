@@ -60,7 +60,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
         private static VRC_Trigger AuthorizedTrigger { get; set; }
         private static VRC_Trigger UnauthorizedTrigger { get; set; }
 
-        internal static bool RemoveBlocksForJoinedPlayers { get; set; } = false;
+        internal static bool EmployeeModeForJoinedPlayers { get; set; } = false;
         internal static UnityEngine.UI.Text KeypadText { get; set; }
 
         private static void RemoveColliders(GameObject root)
@@ -113,9 +113,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
 
             //Replicate the authorize Trigger Locally.
 
-            // First Destroy his barriers
-            RemoveColliders(Root.FindObject("Shelves/Gondola (12)"));
-            RemoveColliders(Root.FindObject("Toasters/Cube (63)"));
+            //// First Destroy his barriers
+            //RemoveColliders(Root.FindObject("Shelves/Gondola (12)"));
+            //RemoveColliders(Root.FindObject("Toasters/Cube (63)"));
 
             // This removes The Doors colliders (annoying ffs)
             RemoveColliders(Root.FindObject("Kmart/Group_2_1/Group_65_1/Group3/Group7"));
@@ -141,7 +141,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
                 {
                     KeypadText.resizeTextForBestFit = true;
                     KeypadText.supportRichText = true;
-                    KeypadText.text = $"<color=blue>Click the button above me to Bypass {WorldUtils.AuthorName}'s restrictions for everyone! </color>";
+                    KeypadText.text = $"We won!! Ericirno Removed All the restrictions!!!".RainbowRichText();
 
                 }
             }
@@ -175,7 +175,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
 
             if (AuthorizedTrigger != null)
             {
-                new WorldButton(new Vector3(-16.6f, 3.2f, -5.92f), new Vector3(0, 90, 0), " <color=red>Bypass Keypad For Everyone!</color>", () =>
+                new WorldButton(new Vector3(-16.6f, 3.2f, -5.92f), new Vector3(0, 90, 0), " <color=red>Activate employee mode For Everyone!</color>", () =>
                  {
                      BypassKmartRestrictions();
                  });
@@ -186,7 +186,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
         {
             if (UnauthorizedTrigger != null)
             {
-                RemoveBlocksForJoinedPlayers = false;
+                EmployeeModeForJoinedPlayers = false;
                 WorldTriggerHook.SendTriggerToEveryone = true;
                 UnauthorizedTrigger.TriggerClick();
                 WorldTriggerHook.SendTriggerToEveryone = false;
@@ -199,7 +199,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
             {
                 WorldTriggerHook.SendTriggerToEveryone = true;
                 AuthorizedTrigger.TriggerClick();
-                KeypadText.text =  $"<color=red>Fuck off {WorldUtils.AuthorName}, from AstroClient <3 </color>";
+                KeypadText.text =  $"<color=red>Employee Mode On!</color>";
                 WorldTriggerHook.SendTriggerToEveryone = false;
             }
         }
@@ -209,7 +209,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
             _Root = null;
             AuthorizedTrigger = null;
             UnauthorizedTrigger = null;
-            RemoveBlocksForJoinedPlayers = false;
+            EmployeeModeForJoinedPlayers = false;
             HasSubscribed = false;
             isCurrentWorld = false;
         }
@@ -218,7 +218,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
         {
             if (id == WorldIds.KMartExpress_1)
             {
-                Log.Write($"Recognized {Name} World, Removing Blocking System....", System.Drawing.Color.Gold);
+                Log.Write($"Recognized {Name} World! Ericirno is defeated!", System.Drawing.Color.Gold);
                 isCurrentWorld = true;
                 HasSubscribed = true;
                 FindEverything();
@@ -231,7 +231,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
 
         private void OnPlayerJoined(Player player)
         {
-            if (RemoveBlocksForJoinedPlayers)
+            if (EmployeeModeForJoinedPlayers)
             {
                 BypassKmartRestrictions();  // KEK
             }

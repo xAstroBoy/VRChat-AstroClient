@@ -171,6 +171,14 @@ namespace AstroClient.AstroMonos.AstroUdons
                 {
                     UdonBehaviour.InteractionText = value;
                 }
+                if (PickupController != null)
+                {
+                    if (!PickupController.EditMode)
+                    {
+                        PickupController.EditMode = true;
+                    }
+                    PickupController.InteractionText = value;
+                }
             }
         }
 

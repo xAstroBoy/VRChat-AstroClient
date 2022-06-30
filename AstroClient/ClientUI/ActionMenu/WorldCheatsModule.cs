@@ -618,17 +618,10 @@ internal class WorldCheatsModule : AstroEvents
 
             if (WorldUtils.WorldID == WorldIds.FBTHeaven)
             {
-                CustomSubMenu.AddButton("Lock Room 1", () => { FBTHeaven.LockDoor(1); });
-                CustomSubMenu.AddButton("Unlock Room 1", () => { FBTHeaven.UnlockDoor(1); });
-
-                CustomSubMenu.AddButton("Lock Room 2", () => { FBTHeaven.LockDoor(2); });
-                CustomSubMenu.AddButton("Unlock Room 2", () => { FBTHeaven.UnlockDoor(2); });
-
-                CustomSubMenu.AddButton("Lock Room 3", () => { FBTHeaven.LockDoor(3); });
-                CustomSubMenu.AddButton("Unlock Room 3", () => { FBTHeaven.UnlockDoor(3); });
-
-                CustomSubMenu.AddButton("Lock Room 4", () => { FBTHeaven.LockDoor(4); });
-                CustomSubMenu.AddButton("Unlock Room 4", () => { FBTHeaven.UnlockDoor(4); });
+                CustomSubMenu.AddButton("Toggle Room 1", () => { FBTHeaven.ToggleDoor(1); });
+                CustomSubMenu.AddButton("Toggle Room 2", () => { FBTHeaven.ToggleDoor(2); });
+                CustomSubMenu.AddButton("Toggle Room 3", () => { FBTHeaven.ToggleDoor(3); });
+                CustomSubMenu.AddButton("Toggle Room 4", () => { FBTHeaven.ToggleDoor(4); });
             }
 
             #endregion FBT Heaven
@@ -664,13 +657,13 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddButton("Bypass Kmart Lock for Everyone", () => { KmartExpress_1.BypassKmartRestrictions(); });
                 CustomSubMenu.AddButton("Restore Kmart Lock for Everyone", () => { KmartExpress_1.RestoreKmartRestrictions(); });
 
-                CustomSubMenu.AddToggle("Remove Lock for Every new player join", KmartExpress_1.RemoveBlocksForJoinedPlayers, ToggleValue =>
+                CustomSubMenu.AddToggle("Remove Lock for Every new player join", KmartExpress_1.EmployeeModeForJoinedPlayers, ToggleValue =>
                 {
                     if (ToggleValue)
                     {
                         KmartExpress_1.BypassKmartRestrictions();
                     }
-                    KmartExpress_1.RemoveBlocksForJoinedPlayers = ToggleValue;
+                    KmartExpress_1.EmployeeModeForJoinedPlayers = ToggleValue;
                 });
             }
 
@@ -689,7 +682,7 @@ internal class WorldCheatsModule : AstroEvents
                     {
                         KmartExpress_1.BypassKmartRestrictions();
                     }
-                    KmartExpress_1.RemoveBlocksForJoinedPlayers = ToggleValue;
+                    KmartExpress_1.EmployeeModeForJoinedPlayers = ToggleValue;
                 });
             }
 
