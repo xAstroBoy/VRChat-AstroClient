@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Tools.Input
 {
-    internal struct InputTypes
+    internal struct VRCInputs
     {
         internal const string MoveForward = "MoveForward";
         internal const string MoveBackward = "MoveBackward";

@@ -100,7 +100,15 @@
 
         public static GameObject FindObject(this GameObject obj, string path)
         {
-            return obj.transform.FindObject(path).gameObject;
+            if (obj != null)
+            {
+                var result = obj.transform.FindObject(path);
+                if (result != null)
+                {
+                    return result.gameObject;
+                }
+            }
+            return null;
         }
 
 

@@ -520,7 +520,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             HasSubscribed = false;
             GuidelineOriginalLenght = 0f;
             GuidelineOriginalLenghtPos = 0f;
-
+            LongerGuideline = false;
+            
         }
 
         private static void OnDrop()

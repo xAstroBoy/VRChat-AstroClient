@@ -1,4 +1,5 @@
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Spawner;
+using UnhollowerBaseLib.Attributes;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
@@ -18,10 +19,11 @@ namespace AstroClient.AstroMonos.Components.Tools
             AntiGcList.Add(this);
         }
 
-
+        internal Action OnPrefabSpawn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         public void Start()
         {
             SpawnerSubmenu.RegisterPrefab(gameObject);
+            OnPrefabSpawn.SafetyRaise();
             Destroy(this);
         }
     }

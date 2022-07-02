@@ -5,6 +5,7 @@ using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
+using VRC;
 using VRC.SDKBase;
 using VRC.Udon;
 
@@ -41,8 +42,8 @@ namespace AstroClient.Startup.Hooks
 
             new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal.UseStation)), GetPatch(nameof(OnStationEnter2)));
             new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal.ExitStation)), GetPatch(nameof(OnStationExit2)));
-            new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal2.ExitStation)), GetPatch(nameof(OnStationExit3)));
-            new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal3.ExitStation)), GetPatch(nameof(OnStationExit4)));
+            new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal.Method_Private_Void_Player_2)), GetPatch(nameof(OnStationExit2)));
+            new AstroPatch(typeof(VRC_StationInternal).GetMethod(nameof(VRC_StationInternal.Method_Private_Void_Player_4)), GetPatch(nameof(OnStationExit2)));
 
 
         }
@@ -53,7 +54,7 @@ namespace AstroClient.Startup.Hooks
             if (__instance == null) return;
             if(__0 == null) return;
             if (!__0.isLocal) return;
-            Log.Debug($"Sit Event {__instance.gameObject.name}");
+            //Log.Debug($"Sit Event {__instance.gameObject.name}");
             ClientEventActions.OnStationEnter.SafetyRaiseWithParams(__instance);
 
         }
@@ -65,84 +66,47 @@ namespace AstroClient.Startup.Hooks
             var Station = __instance.gameObject.GetComponent<VRC_AstroStation>();
             if (Station != null)
             {
-                if (Station.OverrideStationExit)
+                if (Station.BlockVanillaStationExit)
                 {
                     return false;
                 }
             }
 
 
-            Log.Debug($"Unsit Event {__instance.gameObject.name}");
+            //Log.Debug($"Unsit Event {__instance.gameObject.name}");
             ClientEventActions.OnStationExit.SafetyRaiseWithParams(__instance);
             return true;
         }
 
-        private static void OnStationEnter2(VRC_StationInternal __instance, VRCPlayerApi __0)
+        private static void OnStationEnter2(VRC_StationInternal __instance, Player __0)
         {
             if (__instance == null) return;
             if (__0 == null) return;
-            if (!__0.isLocal) return;
-            Log.Debug($"Sit Event {__instance.gameObject.name}");
+            if (!__0.GetVRCPlayerApi().isLocal) return;
+            //Log.Debug($"Sit Event {__instance.gameObject.name}");
             ClientEventActions.OnStationEnter2.SafetyRaiseWithParams(__instance);
 
         }
-        private static bool OnStationExit2(VRC_StationInternal __instance, VRCPlayerApi __0)
+        private static bool OnStationExit2(VRC_StationInternal __instance, Player __0)
         {
             if (__instance == null) return true;
             if (__0 == null) return true;
-            if (!__0.isLocal) return true;
+            if (!__0.GetVRCPlayerApi().isLocal) return true;
             var Station = __instance.gameObject.GetComponent<VRC_AstroStation>();
             if (Station != null)
             {
-                if(Station.OverrideStationExit)
+                if(Station.BlockVanillaStationExit)
                 {
                     return false;
                 }
             }
 
 
-            Log.Debug($"Unsit Event {__instance.gameObject.name}");
+            //Log.Debug($"Unsit Event {__instance.gameObject.name}");
             ClientEventActions.OnStationExit2.SafetyRaiseWithParams(__instance);
             return true;
         }
-        private static bool OnStationExit3(VRC_StationInternal2 __instance, VRCPlayerApi __0)
-        {
-            if (__instance == null) return true;
-            if (__0 == null) return true;
-            if (!__0.isLocal) return true;
-            var Station = __instance.gameObject.GetComponent<VRC_AstroStation>();
-            if (Station != null)
-            {
-                if (Station.OverrideStationExit)
-                {
-                    return false;
-                }
-            }
 
-
-            Log.Debug($"Unsit Event {__instance.gameObject.name}");
-            ClientEventActions.OnStationExit2.SafetyRaiseWithParams(__instance);
-            return true;
-        }
-        private static bool OnStationExit4(VRC_StationInternal3 __instance, VRCPlayerApi __0)
-        {
-            if (__instance == null) return true;
-            if (__0 == null) return true;
-            if (!__0.isLocal) return true;
-            var Station = __instance.gameObject.GetComponent<VRC_AstroStation>();
-            if (Station != null)
-            {
-                if (Station.OverrideStationExit)
-                {
-                    return false;
-                }
-            }
-
-
-            Log.Debug($"Unsit Event {__instance.gameObject.name}");
-            ClientEventActions.OnStationExit2.SafetyRaiseWithParams(__instance);
-            return true;
-        }
 
     }
 }

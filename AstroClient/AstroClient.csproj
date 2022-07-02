@@ -216,7 +216,6 @@
     <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="PlayerList\Utilities\PlayerList_OwnerCountHelper.cs" />
     <Compile Include="SnaxyTagsV3\SnaxyTagListener.cs" />
-    <Compile Include="Startup\Fixes\FixRandomQMOpen.cs" />
     <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
     <Compile Include="Startup\Fixes\KeyboardPopupDeclutterer.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
@@ -555,7 +554,7 @@
     <Compile Include="Tools\Decompiler\MethodsTools\MethodSignatureTools.cs" />
     <Compile Include="Tools\Decompiler\MethodsTools\TypeExtensionMethods.cs" />
     <Compile Include="Tools\Decompiler\MethodsTools\TypeSignatureTools.cs" />
-    <Compile Include="Tools\Input\InputTypes.cs" />
+    <Compile Include="Tools\Input\VRCInputs.cs" />
     <Compile Include="Tools\Input\InputAPI.cs" />
     <Compile Include="Tools\UdonSearcher\UdonReplacer.cs" />
     <Compile Include="Tools\UdonEditor\Il2CppConverter.cs" />

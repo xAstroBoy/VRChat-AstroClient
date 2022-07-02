@@ -9,9 +9,11 @@ namespace AstroClient.Spawnables.Enderpearl
     using VRC.SDKBase;
     using xAstroBoy.Utility;
 
-    internal class AstroJetPack 
+    internal class AstroJetPack
     {
         private static GameObject VRJetpack;
+        internal static bool SitOnJetpackOnSpawn { get; set; }
+
 
         internal static void SpawnVRJetpack()
         {
@@ -28,9 +30,11 @@ namespace AstroClient.Spawnables.Enderpearl
                 var item = Object.Instantiate(ClientResources.Loaders.Prefabs.VRJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
                 item.AddToWorldUtilsMenu();
                 var  jet = item.GetOrAddComponent<JetpackController>();
-                MiscUtils.DelayFunction(1f, () => {
-                    jet.CurrentChair.OverrideStationExit = true;
-
+                MiscUtils.DelayFunction(0.2f, () => {
+                    if (SitOnJetpackOnSpawn)
+                    {
+                        jet.CurrentChair.EnterStation();
+                    }
                 });
                 item.GetOrAddComponent<RegisterAsPrefab>();
                 VRJetpack = item;
@@ -54,7 +58,15 @@ namespace AstroClient.Spawnables.Enderpearl
             {
                 var item = Object.Instantiate(ClientResources.Loaders.Prefabs.DesktopJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
                 item.AddToWorldUtilsMenu();
-                item.GetOrAddComponent<JetpackController>();
+                var jet = item.GetOrAddComponent<JetpackController>();
+                MiscUtils.DelayFunction(0.2f, () =>
+                {
+                    if (SitOnJetpackOnSpawn)
+                    {
+                        jet.CurrentChair.EnterStation();
+                    }
+                });
+
                 DesktopJetpack = item;
                 item.GetOrAddComponent<RegisterAsPrefab>();
 
@@ -62,27 +74,24 @@ namespace AstroClient.Spawnables.Enderpearl
 
         }
 
-        internal static void ExitJetpacks()
+        private static void ExitJetpack(GameObject obj)
         {
-            if(DesktopJetpack != null)
+            if (obj != null)
             {
-                var Jetpack = DesktopJetpack.GetOrAddComponent<JetpackController>();
-                if(Jetpack != null)
+                var Jetpack = obj.GetComponent<JetpackController>();
+                if (Jetpack != null)
                 {
-                    Jetpack.CurrentChair.OverrideStationExit = false;
+                    Jetpack.CurrentChair.BlockVanillaStationExit = false;
                     Jetpack.CurrentChair.ExitStation();
 
                 }
             }
-            if (VRJetpack != null)
-            {
-                var Jetpack = VRJetpack.GetOrAddComponent<JetpackController>();
-                if (Jetpack != null)
-                {
-                    Jetpack.CurrentChair.OverrideStationExit = false;
-                    Jetpack.CurrentChair.ExitStation();
-                }
-            }
+        }
+
+        internal static void ExitJetpacks()
+        {
+            ExitJetpack(VRJetpack);
+            ExitJetpack(DesktopJetpack);
 
         }
 

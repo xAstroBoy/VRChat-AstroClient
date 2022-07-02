@@ -16,7 +16,7 @@ namespace AstroClient.ClientUI.ActionMenu
 
         private void OnApplicationStart()
         {
-            AMUtils.AddToModsFolder("Spawnables", () =>
+            AMUtils.AddToModsFolder("Jetpacks", () =>
             {
                 CustomSubMenu.AddButton("Spawn VR Jetpack", () =>
                 {
@@ -30,7 +30,7 @@ namespace AstroClient.ClientUI.ActionMenu
                 {
                     AstroJetPack.ExitJetpacks();
                 }, null);
-
+                CustomSubMenu.AddToggle("Sit On Jetpack Spawn", AstroJetPack.SitOnJetpackOnSpawn, value => AstroJetPack.SitOnJetpackOnSpawn = value);
                 //CustomSubMenu.AddSubMenu("Jetpack", () =>
                 //{
                 //});

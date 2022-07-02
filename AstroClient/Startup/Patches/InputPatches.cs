@@ -77,34 +77,34 @@ namespace AstroClient.Startup.Patches
             EnableListener = false;
             switch (__instance.Name())
             {
-                case InputTypes.Jump:
+                case VRCInputs.Jump:
                     {
                         ClientEventActions.OnInput_Jump.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
-                case InputTypes.UseLeft:
+                case VRCInputs.UseLeft:
                     {
                         ClientEventActions.OnInput_UseLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
-                case InputTypes.UseRight:
+                case VRCInputs.UseRight:
                     {
                         ClientEventActions.OnInput_UseRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
-                case InputTypes.GrabLeft:
+                case VRCInputs.GrabLeft:
                     {
                         ClientEventActions.OnInput_GrabLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
                         break;
                     }
 
-                case InputTypes.GrabRight:
+                case VRCInputs.GrabRight:
                     {
                         ClientEventActions.OnInput_GrabRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
                         EnableListener = true;
@@ -118,23 +118,6 @@ namespace AstroClient.Startup.Patches
 
         }
 
-        private static void InputListener_two(VRCInput __instance, float __0)
-        {
-            try
-            {
-                if (__instance != null)
-                {
-                    if (__instance.Name().Equals("UseRight"))
-                    {
-                        ConvertToString(__instance);
-                    }
-                }
-            }
-            catch (System.Exception ex)
-            {
-                Log.Exception(ex);
-            }
-        }
 
         private static void ConvertToString(VRCInput input)
         {

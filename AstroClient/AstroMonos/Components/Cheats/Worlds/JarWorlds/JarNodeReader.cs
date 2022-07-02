@@ -27,15 +27,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
             [HideFromIl2Cpp]
             get
             {
-                if (RawNode != null)
-                {
-                    var player = UdonHeapParser.Udon_Parse<VRCPlayerApi>(RawNode, "playerApi");
-                    if (player != null) return player;
-                }
-
-                return null;
+                return playerAPI?.Value;
             }
         }
+
+
+        internal AstroUdonVariable<VRCPlayerApi> playerAPI { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal UdonBehaviour Node { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal RawUdonBehaviour RawNode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
@@ -45,7 +42,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
         {
             Node = gameObject.GetComponent<UdonBehaviour>();
             if (Node != null) RawNode = Node.ToRawUdonBehaviour();
+            playerAPI = new AstroUdonVariable<VRCPlayerApi>(RawNode, "playerApi");
             HasSubscribed = true;
+
         }
         private bool _HasSubscribed = false;
         private bool HasSubscribed
@@ -75,6 +74,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
         }
         void OnDestroy()
         {
+            playerAPI = null;
             HasSubscribed = false;
         }
         private void OnRoomLeft()

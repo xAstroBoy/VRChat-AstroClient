@@ -15,7 +15,8 @@
 
         internal static bool isClicked(this VRCInput instance)
         {
-            return instance.prop_Single_0 == 1;
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            return instance.GetAxis() == 1f;
         }
 
         internal static bool isDown(this VRCInput instance)
@@ -26,6 +27,10 @@
         internal static bool isUp(this VRCInput instance)
         {
             return instance.prop_Boolean_1;
+        }
+        internal static float GetAxis(this VRCInput instance)
+        {
+            return instance.prop_Single_0;
         }
 
     }

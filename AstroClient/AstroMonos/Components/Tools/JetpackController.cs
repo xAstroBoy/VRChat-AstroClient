@@ -70,27 +70,44 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             
             if(VRCChair != null)
             {
+                // Check if Chair is present
+                bool isPresent = VRCChair.GetComponent<VRC_Station>() != null || VRCChair.GetComponent<VRCStation>() != null;
                 CurrentChair = VRCChair.GetOrAddComponent<VRC_AstroStation>();
                 if(CurrentChair != null)
                 {
-                    MiscUtils.DelayFunction(1f, () =>
-                    {
-                        CurrentChair.Station.PlayerMobility = VRCStation.Mobility.ImmobilizeForVehicle;
-                        //CurrentChair.Station.canUseStationFromStation = false;
-                        CurrentChair.Station.seated = true;
-                        CurrentChair.Station.stationEnterPlayerLocation = Enter_Point;
-                        CurrentChair.Station.stationExitPlayerLocation = Exit_Point;
-                        //CurrentChair.Station.disableStationExit = true;
-                        CurrentChair.OnStationEnterEvent = OnStationEnter;
-                        CurrentChair.OnStationExitEvent = OnStationExit;
-
-                    });
+                        MiscUtils.DelayFunction(0.1f, () =>
+                        {
+                            if (!isPresent)
+                            {
+                                CurrentChair.Station.PlayerMobility = VRCStation.Mobility.ImmobilizeForVehicle;
+                                CurrentChair.Station.seated = true;
+                                CurrentChair.Station.stationEnterPlayerLocation = Enter_Point;
+                                CurrentChair.Station.stationExitPlayerLocation = Exit_Point;
+                                //CurrentChair.Station.canUseStationFromStation = false;
+                                //CurrentChair.Station.disableStationExit = true;
+                            }
+                            if (ThrusterStick != null)
+                            {
+                                CurrentChair.BlockVanillaStationExit = true;
+                            }
+                        });
+                    
+                    CurrentChair.OnStationEnterEvent = OnStationEnter;
+                    CurrentChair.OnStationExitEvent = OnStationExit;
                 }
             }
 
         }
 
 
+        void OnDestroy()
+        {
+            if(CurrentChair != null)
+            {
+                CurrentChair.BlockVanillaStationExit = false;
+                CurrentChair.ExitStation();
+            }
+        }
         private void VRCChairStick_OnPickupUseDown()
         {
             JetpackForce.enabled = true;
@@ -187,6 +204,22 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 return _VRCChair;
             }
         }
+
+        private Transform _Collider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform SeatCollider
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (VRCChair == null) return null;
+                if (_Collider == null)
+                {
+                    _Collider = VRCChair.FindObject("Collider");
+                }
+                return _Collider;
+            }
+        }
+
         private Transform _Enter_Point { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Transform Enter_Point
         {

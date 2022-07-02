@@ -24,6 +24,9 @@ namespace AstroClient.xAstroBoy.Utility
             Restore_DefaultRespawnHeightY();
             HasRespawnHeightYModified = false;
             OriginalRespawnHeightY = -100f;
+            _SDK_Base = null;
+            _SDK_2 = null;
+            _SDK_3 = null;
         }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -68,17 +71,14 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-                if (SDKBaseDescriptor != null)
+
+                if (SDK_2 != null)
                 {
-                    return SDKBaseDescriptor.ForbidUserPortals;
+                    return SDK_2.ForbidUserPortals;
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    return SDK2Descriptor.ForbidUserPortals;
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    return SDK3Descriptor.ForbidUserPortals;
+                    return SDK_3.ForbidUserPortals;
                 }
                 else
                 {
@@ -87,17 +87,14 @@ namespace AstroClient.xAstroBoy.Utility
             }
             set
             {
-                if (SDKBaseDescriptor != null)
+
+                if (SDK_2 != null)
                 {
-                    SDKBaseDescriptor.ForbidUserPortals = value;
+                    SDK_2.ForbidUserPortals = value;
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    SDK2Descriptor.ForbidUserPortals = value;
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    SDK3Descriptor.ForbidUserPortals = value;
+                    SDK_3.ForbidUserPortals = value;
                 }
                 RoomUtils.userPortalsForbidden = value;
 
@@ -116,25 +113,19 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-                if (SDKBaseDescriptor != null)
+
+                if (SDK_2 != null)
                 {
-                    if (SDKBaseDescriptor.spawns != null)
+                    if (SDK_2.spawns != null)
                     {
-                        return SDKBaseDescriptor.spawns.ToArray();
+                        return SDK_2.spawns.ToArray();
                     }
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    if (SDK2Descriptor.spawns != null)
+                    if (SDK_3.spawns != null)
                     {
-                        return SDK2Descriptor.spawns.ToArray();
-                    }
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    if (SDK3Descriptor.spawns != null)
-                    {
-                        return SDK3Descriptor.spawns.ToArray();
+                        return SDK_3.spawns.ToArray();
                     }
                 }
                 return null;
@@ -144,17 +135,14 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-                if (SDKBaseDescriptor != null)
+
+                if (SDK_2 != null)
                 {
-                    return SDKBaseDescriptor.SpawnPosition;
+                    return SDK_2.SpawnPosition;
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    return SDK2Descriptor.SpawnPosition;
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    return SDK3Descriptor.SpawnPosition;
+                    return SDK_3.SpawnPosition;
                 }
                 return default(Vector3);
             }
@@ -163,25 +151,19 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-                if (SDKBaseDescriptor != null)
+
+                if (SDK_2 != null)
                 {
-                    if (SDKBaseDescriptor.SpawnLocation != null)
+                    if (SDK_2.SpawnLocation != null)
                     {
-                        return SDKBaseDescriptor.SpawnLocation;
+                        return SDK_2.SpawnLocation;
                     }
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    if (SDK2Descriptor.SpawnLocation != null)
+                    if (SDK_3.SpawnLocation != null)
                     {
-                        return SDK2Descriptor.SpawnLocation;
-                    }
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    if (SDK3Descriptor.SpawnLocation != null)
-                    {
-                        return SDK3Descriptor.SpawnLocation;
+                        return SDK_3.SpawnLocation;
                     }
                 }
                 return null;
@@ -192,25 +174,18 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-                if (SDKBaseDescriptor != null)
+                if (SDK_2 != null)
                 {
-                    if (SDKBaseDescriptor.DynamicPrefabs != null)
+                    if (SDK_2.DynamicPrefabs != null)
                     {
-                        return SDKBaseDescriptor.DynamicPrefabs.ToArray();
+                        return SDK_2.DynamicPrefabs.ToArray();
                     }
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    if (SDK2Descriptor.DynamicPrefabs != null)
+                    if (SDK_3.DynamicPrefabs != null)
                     {
-                        return SDK2Descriptor.DynamicPrefabs.ToArray();
-                    }
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    if (SDK3Descriptor.DynamicPrefabs != null)
-                    {
-                        return SDK3Descriptor.DynamicPrefabs.ToArray();
+                        return SDK_3.DynamicPrefabs.ToArray();
                     }
                 }
                 return null;
@@ -218,16 +193,16 @@ namespace AstroClient.xAstroBoy.Utility
         }
 
 
-        public static string SDKType
+        public static int SDKVersion
         {
             get
             {
-                if (SDK2Descriptor != null)
-                    return "SDK2";
-                else if (SDK3Descriptor != null)
-                    return "SDK3";
+                if (SDK_2 != null)
+                    return 2;
+                else if (SDK_3 != null)
+                    return 3;
                 else
-                    return "not found";
+                    return 1;
             }
         }
 
@@ -241,18 +216,14 @@ namespace AstroClient.xAstroBoy.Utility
         internal static float RespawnHeightY
         {
             get
-            {
-                if (SDKBaseDescriptor != null)
+            { 
+                if (SDK_2 != null)
                 {
-                    return SDKBaseDescriptor.RespawnHeightY;
+                    return SDK_2.RespawnHeightY;
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    return SDK2Descriptor.RespawnHeightY;
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    return SDK3Descriptor.RespawnHeightY;
+                    return SDK_3.RespawnHeightY;
                 }
                 else
                 {
@@ -260,18 +231,14 @@ namespace AstroClient.xAstroBoy.Utility
                 }
             }
             set
-            {
-                if (SDKBaseDescriptor != null)
+            { 
+                if (SDK_2 != null)
                 {
-                    SDKBaseDescriptor.RespawnHeightY = value;
+                    SDK_2.RespawnHeightY = value;
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    SDK2Descriptor.RespawnHeightY = value;
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    SDK3Descriptor.RespawnHeightY = value;
+                    SDK_3.RespawnHeightY = value;
                 }
             }
         }
@@ -283,17 +250,13 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-                if (SDKBaseDescriptor != null)
+                 if (SDK_2 != null)
                 {
-                    return SDKBaseDescriptor.ObjectBehaviourAtRespawnHeight;
+                    return SDK_2.ObjectBehaviourAtRespawnHeight;
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    return SDK2Descriptor.ObjectBehaviourAtRespawnHeight;
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    return SDK3Descriptor.ObjectBehaviourAtRespawnHeight;
+                    return SDK_3.ObjectBehaviourAtRespawnHeight;
                 }
                 else
                 {
@@ -301,24 +264,56 @@ namespace AstroClient.xAstroBoy.Utility
                 }
             }
             set
-            {
-                if (SDKBaseDescriptor != null)
+            { 
+                if (SDK_2 != null)
                 {
-                    SDKBaseDescriptor.ObjectBehaviourAtRespawnHeight = value;
+                    SDK_2.ObjectBehaviourAtRespawnHeight = value;
                 }
-                else if (SDK2Descriptor != null)
+                else if (SDK_3 != null)
                 {
-                    SDK2Descriptor.ObjectBehaviourAtRespawnHeight = value;
-                }
-                else if (SDK3Descriptor != null)
-                {
-                    SDK3Descriptor.ObjectBehaviourAtRespawnHeight = value;
+                    SDK_3.ObjectBehaviourAtRespawnHeight = value;
                 }
             }
         }
-        private static VRC_SceneDescriptor SDKBaseDescriptor => UnityEngine.Object.FindObjectOfType<VRC_SceneDescriptor>();
-        private static VRCSDK2.VRC_SceneDescriptor SDK2Descriptor => UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
-        private static VRC.SDK3.Components.VRCSceneDescriptor SDK3Descriptor => UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
+        private static VRC_SceneDescriptor _SDK_Base = null;
+        internal static VRC_SceneDescriptor SDK_Base
+        {
+            get
+            {
+                if (_SDK_Base == null)
+                {
+                    return _SDK_Base = UnityEngine.Object.FindObjectOfType<VRC_SceneDescriptor>();
+                }
+                return _SDK_Base;
+            }
+        }
+
+        private static VRCSDK2.VRC_SceneDescriptor _SDK_2 = null;
+        internal static VRCSDK2.VRC_SceneDescriptor SDK_2
+        {
+            get
+            {
+                if(_SDK_2 == null)
+                {
+                   return _SDK_2 = UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>(); 
+                }
+                return _SDK_2;
+            }
+        }
+
+        private static VRC.SDK3.Components.VRCSceneDescriptor _SDK_3 = null;
+        internal static VRC.SDK3.Components.VRCSceneDescriptor SDK_3
+        {
+            get
+            {
+                if (_SDK_3 == null)
+                {
+                    return _SDK_3 = UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
+                }
+                return _SDK_3;
+            }
+        }
+
 
 
 

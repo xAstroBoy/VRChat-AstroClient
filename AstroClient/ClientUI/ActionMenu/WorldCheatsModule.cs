@@ -253,9 +253,13 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddToggle("Force Locking Cue", PoolParlor.BilliardsModule.ForceLockingOn, ToggleValue => { PoolParlor.BilliardsModule.ForceLockingOn = ToggleValue; });
                     CustomSubMenu.AddToggle("Can Hit Cue Ball", PoolParlor.BilliardsModule.canHitCueBall.GetValueOrDefault(false), ToggleValue => { PoolParlor.BilliardsModule.canHitCueBall = ToggleValue; });
                     CustomSubMenu.AddToggle("Practice mode", PoolParlor.BilliardsModule.isPracticeMode.GetValueOrDefault(false), ToggleValue => { PoolParlor.BilliardsModule.isPracticeMode = ToggleValue; });
-
+                    if (UserIdentifiers.is_xAstroBoy)
+                    {
+                        CustomSubMenu.AddButton("Set Holystar Camo", () => { PoolParlor.CurrentTableSkin = PoolParlor.TableSkins.Holystar;});
+                    }
 
                 });
+
                 CustomSubMenu.AddSubMenu("Match Settings", () =>
                 {
                     CustomSubMenu.AddButton("Create Match", () => { PoolParlor.StartNewMatchCreation.InvokeBehaviour(); });

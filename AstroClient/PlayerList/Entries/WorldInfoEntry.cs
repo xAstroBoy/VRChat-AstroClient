@@ -35,7 +35,7 @@ namespace AstroClient.PlayerList.Entries
 
         private void OnRoomLeft()
         {
-            _SDKType = string.Empty;
+            _SDKType = 1;
             _Avatars = 0;
             _Prefabs = 0;
             _Pickups = 0;
@@ -71,7 +71,7 @@ namespace AstroClient.PlayerList.Entries
         private static string MiscWorldInfo()
         {
             StringBuilder build = new StringBuilder();
-            build.Append(GenerateText("SDK", SDKType));
+            build.Append(GenerateText("SDK", SDKType.ToString()));
             build.Append(GenerateText("RespawnHeightY", SceneUtils.RespawnHeightY.ToString("R")));
             build.Append(GenerateText("FarClipPlane", PlayerCameraEditor.PlayerCamera.farClipPlane.ToString("R")));
             build.Append(GenerateText("NearClipPlane", PlayerCameraEditor.PlayerCamera.nearClipPlane.ToString("R")));
@@ -126,14 +126,15 @@ namespace AstroClient.PlayerList.Entries
         #region  SDKType
         internal static bool Update_SDKType { get; set; } = true;
 
-        private static string _SDKType;
-        internal static string SDKType
+        private static int _SDKType;
+        internal static int SDKType
         {
             get
             {
                 if (Update_SDKType)
                 {
-                    _SDKType = SceneUtils.SDKType;
+                    _SDKType = SceneUtils.SDKVersion;
+                    Update_SDKType = false;
                 }
                 return _SDKType;
             }
@@ -154,6 +155,7 @@ namespace AstroClient.PlayerList.Entries
                 if (Update_Avatars)
                 {
                     _Avatars = AvatarSearch.worldAvatarsids.Count;
+                    Update_Avatars = false;
                 }
                 return _Avatars;
             }
@@ -174,6 +176,7 @@ namespace AstroClient.PlayerList.Entries
                 if (Update_Prefabs)
                 {
                     _Prefabs = SceneUtils.DynamicPrefabs.Length;
+                    Update_Prefabs = false;
                 }
                 return _Prefabs;
             }
@@ -196,6 +199,7 @@ namespace AstroClient.PlayerList.Entries
                 if (Update_Pickups)
                 {
                     _Pickups = WorldUtils_Old.Get_Pickups().Count;
+                    Update_Pickups = false;
                 }
                 return _Pickups;
             }
@@ -216,6 +220,7 @@ namespace AstroClient.PlayerList.Entries
                 if (Update_UdonBehaviours)
                 {
                     _UdonBehaviours = WorldUtils_Old.Get_UdonBehaviours().Count;
+                    Update_UdonBehaviours = false;
                 }
                 return _UdonBehaviours;
             }
@@ -236,6 +241,7 @@ namespace AstroClient.PlayerList.Entries
                 if (Update_Triggers)
                 {
                     _Triggers = WorldUtils_Old.Get_Triggers().Count;
+                    Update_Triggers = false;
                 }
                 return _Triggers;
             }
@@ -256,6 +262,7 @@ namespace AstroClient.PlayerList.Entries
                 if (Update_VRCInteractables)
                 {
                     _VRCInteractables = WorldUtils_Old.Get_VRCInteractables().Count;
+                    Update_VRCInteractables = false;
                 }
                 return _VRCInteractables;
             }
@@ -276,6 +283,7 @@ namespace AstroClient.PlayerList.Entries
                 if (Update_AudioSources)
                 {
                     _AudioSources = WorldUtils_Old.Get_AudioSources().Count;
+                    Update_AudioSources = false;
                 }
                 return _AudioSources;
             }
@@ -296,6 +304,7 @@ namespace AstroClient.PlayerList.Entries
                 if (Update_Mirror)
                 {
                     _Mirror = WorldUtils_Old.Get_Mirrors().Count;
+                    Update_Mirror = false;
                 }
                 return _Mirror;
             }
