@@ -1,4 +1,5 @@
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Input;
 using AstroClient.xAstroBoy.Extensions;
@@ -37,24 +38,30 @@ namespace AstroClient.AstroMonos.AstroUdons
                     {
                         ClientEventActions.OnStationEnter += OnStationEnter;
                         ClientEventActions.OnStationExit += OnStationExit;
-                        ClientEventActions.OnStationEnter2 += OnStationEnter2;
-                        ClientEventActions.OnStationExit2 += OnStationExit2;
+                        MovementMenu.OnNoFallHeightLimitToggled += NoFallHeightLimitToggled;
+
                     }
                     else
                     {
                         ClientEventActions.OnStationEnter -= OnStationEnter;
                         ClientEventActions.OnStationExit -= OnStationExit;
-                        ClientEventActions.OnStationEnter2 -= OnStationEnter2;
-                        ClientEventActions.OnStationExit2 -= OnStationExit2;
+                        MovementMenu.OnNoFallHeightLimitToggled -= NoFallHeightLimitToggled;
                     }
                 }
                 _HasSubscribed = value;
             }
         }
 
+        private void NoFallHeightLimitToggled()
+        {
+            RespawnHeight = SceneUtils.RespawnHeightY;
+        }
+
+
         private void Start()
         {
-            Identifier = "AstroStation_" + Guid.NewGuid().ToString();
+            RespawnHeight = SceneUtils.RespawnHeightY;
+            Identifier = "AstroStation_" + Guid.NewGuid();
             if (SceneUtils.SDKVersion == 2)
             {
                 Station = gameObject.GetOrAddComponent<VRC_Station>();
@@ -71,52 +78,33 @@ namespace AstroClient.AstroMonos.AstroUdons
                 StationTrigger.OnInteract = EnterStation;
                 StationTrigger.interactText = "Sit";
                 StationTrigger.InteractionText = "Sit";
-                HasSubscribed = true;
             }
+            HasSubscribed = true;
+            InvokeRepeating(nameof(CheckForHeightLimit), 0.1f, 0.1f);
+
+            
+            InvokeRepeating(nameof(ReplacevanillaStationExit), 0.1f, 0.1f);
+
         }
 
-        private void OnStationEnter(VRC.SDKBase.VRCStation instance)
+        private void OnStationEnter(VRC_StationInternal instance)
         {
             var AstroStation = instance.gameObject.GetComponent<VRC_AstroStation>();
             if (AstroStation != null)
             {
-                if (AstroStation.Identifier.Equals(Identifier))
+                if (AstroStation.Identifier == Identifier)
                 {
                     OnStationEnterEvent.SafetyRaise();
                 }
             }
         }
 
-        private void OnStationExit(VRC.SDKBase.VRCStation instance)
+        private void OnStationExit(VRC_StationInternal instance)
         {
             var AstroStation = instance.gameObject.GetComponent<VRC_AstroStation>();
             if (AstroStation != null)
             {
-                if (AstroStation.Identifier.Equals(Identifier))
-                {
-                    OnStationExitEvent.SafetyRaise();
-                }
-            }
-        }
-
-        private void OnStationEnter2(VRC_StationInternal instance)
-        {
-            var AstroStation = instance.gameObject.GetComponent<VRC_AstroStation>();
-            if (AstroStation != null)
-            {
-                if (AstroStation.Identifier.Equals(Identifier))
-                {
-                    OnStationEnterEvent.SafetyRaise();
-                }
-            }
-        }
-
-        private void OnStationExit2(VRC_StationInternal instance)
-        {
-            var AstroStation = instance.gameObject.GetComponent<VRC_AstroStation>();
-            if (AstroStation != null)
-            {
-                if(AstroStation.Identifier.Equals(Identifier))
+                if (AstroStation.Identifier == Identifier)
                 {
                     OnStationExitEvent.SafetyRaise();
                 }
@@ -147,28 +135,38 @@ namespace AstroClient.AstroMonos.AstroUdons
         }
 
 
-        void Update()
+        void CheckForHeightLimit()
         {
-            // Makes the chair act as a normal item as the height limit has been reached, aka eject the player, avoiding some bugs as well.
-            if (base.transform.position.y < SceneUtils.RespawnHeightY)
+            if (isActiveAndEnabled)
             {
-                ExitStation();
+                // Makes the chair act as a normal item as the height limit has been reached, aka eject the player, avoiding some bugs as well.
+                if (transform.position.y < RespawnHeight)
+                {
+                    if (isSeated)
+                    {
+                        ExitStation();
+                    }
+                }
             }
+        }
+
+        void ReplacevanillaStationExit()
+        {
             if (!BlockVanillaStationExit) return;
-            if (!isSeated) return;
             // Needed to Bypass broken Chairs relying on anti-motion sickness, as is bugging some events.
             // taken from VRChat mono version, should be technically the same, if the original one is blocked, act as a replacement.
             Vector2 zero = Vector2.zero;
-            if (this.inAxisHorizontal == null || this.inAxisVertical == null)
+            if (inAxisHorizontal == null || inAxisVertical == null)
             {
                 Log.Debug("StationUseExit input(s) are null!");
             }
-            zero.x = this.inAxisHorizontal.GetAxis();
-            zero.y = this.inAxisVertical.GetAxis();
+            zero.x = inAxisHorizontal.GetAxis();
+            zero.y = inAxisVertical.GetAxis();
             if (zero.sqrMagnitude > 0f)
             {
                 ExitStation();
             }
+
         }
 
         internal void OnDestroy()
@@ -195,19 +193,21 @@ namespace AstroClient.AstroMonos.AstroUdons
             get => Networking.LocalPlayer;
         }
 
-        internal Action OnStationEnterEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal Action OnStationExitEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Action OnStationEnterEvent;
+        internal Action OnStationExitEvent;
 
-        internal VRC.SDKBase.VRCStation Station { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal VRC_AstroInteract StationTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal bool BlockVanillaStationExit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        internal VRC.SDKBase.VRCStation Station;
+        internal VRC_AstroInteract StationTrigger;
+        internal bool BlockVanillaStationExit = false;
 
-        private VRCInput inAxisVertical { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRCInput inAxisVertical;
 
-        private VRCInput inAxisHorizontal { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRCInput inAxisHorizontal;
 
-        private bool isSeated { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private bool isSeated  = false;
 
-        internal string Identifier  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal string Identifier;
+
+        internal float RespawnHeight = -100f;
     }
 }

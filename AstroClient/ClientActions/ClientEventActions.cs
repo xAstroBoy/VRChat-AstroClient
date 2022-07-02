@@ -394,26 +394,13 @@ namespace AstroClient.ClientActions
         internal static Action<Transform, float> OnAvatarScaleChanged { get; set; }
 
 
-        /// <summary>
-        /// this gets invoked when You sit the Station.
-        /// <para>Params : VRCStation instance </para>
-        /// </summary>
-
-        internal static Action<VRCStation> OnStationEnter { get; set; }
+        internal static Action<VRC_StationInternal> OnStationEnter { get; set; }
 
         /// <summary>
         /// this gets invoked when You leave the Station.
         /// <para>Params : VRCStation instance </para>
         /// </summary>
-        internal static Action<VRCStation> OnStationExit { get; set; }
-
-        internal static Action<VRC_StationInternal> OnStationEnter2 { get; set; }
-
-        /// <summary>
-        /// this gets invoked when You leave the Station.
-        /// <para>Params : VRCStation instance </para>
-        /// </summary>
-        internal static Action<VRC_StationInternal> OnStationExit2 { get; set; }
+        internal static Action<VRC_StationInternal> OnStationExit { get; set; }
 
 
     }
