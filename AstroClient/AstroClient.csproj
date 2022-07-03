@@ -125,7 +125,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_BilliardsModuleReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_UpgradeEditor.cs" />
-    <Compile Include="AstroMonos\Components\Tools\JetpackController.cs" />
+    <Compile Include="AstroMonos\Prefabs\JetpackController.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Randomizer.cs" />
     <Compile Include="AstroMonos\Components\Tools\OnPrefabSpawn.cs" />
     <Compile Include="AstroMonos\Components\Tools\RegisterAsPrefab.cs" />

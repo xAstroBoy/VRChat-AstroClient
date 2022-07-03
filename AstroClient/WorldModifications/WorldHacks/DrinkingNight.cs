@@ -146,20 +146,20 @@ namespace AstroClient.WorldModifications.WorldHacks
                     VIPDoor_2.SetActive(true);
                 }
             }
-            if (VIPDoor_3 != null)
-            {
-                if (!VIPDoor_3.active)
-                {
-                    VIPDoor_3.SetActive(true);
-                }
-            }
-            if (VIPDoor_4 != null)
-            {
-                if (!VIPDoor_4.active)
-                {
-                    VIPDoor_4.SetActive(true);
-                }
-            }
+            //if (VIPDoor_3 != null)
+            //{
+            //    if (!VIPDoor_3.active)
+            //    {
+            //        VIPDoor_3.SetActive(true);
+            //    }
+            //}
+            //if (VIPDoor_4 != null)
+            //{
+            //    if (!VIPDoor_4.active)
+            //    {
+            //        VIPDoor_4.SetActive(true);
+            //    }
+            //}
             if (PlayerButtons != null)
             {
                 if (!PlayerButtons.active)
@@ -174,6 +174,33 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
         }
 
+        private static string[] ElevatorBtnPaths = new[]
+        {
+            "--- Always On ---/Elevator TPs/Hot Seat TP",
+            "--- Always On ---/Elevator TPs/Kings Game TP",
+            "--- Always On ---/Elevator TPs/VIP Room TP (1)",
+            "--- Always On ---/Elevator TPs/Board Game TP",
+            "--- Always On ---/Elevator TPs/Card Troubles Off",
+            "--- Always On ---/Elevator TPs/Kings Game OFF",
+            "--- Always On ---/Elevator TPs/Outdoor Fun TP",
+            "--- Always On ---/Elevator TPs/Card Troubles TP",
+            "--- Always On ---/Elevator TPs/Main Floor TP",
+            "--- Always On ---/Elevator TPs/Random TP",
+            "--- Always On ---/Elevator TPs/Board Game Off",
+            "--- Always On ---/Elevator TPs/VIP Room TP",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/VIP",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Colliders Toggle",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Cylinder (24)",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/VIPPlus",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Chairs Toggle",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Music Toggle",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Join Leave Sound Toggle",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Optimize",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Optimize Normal",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Discord",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Discord Gold",
+
+        };
 
 
         private static void FindEverything()
@@ -188,19 +215,31 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 VIPRoom.gameObject.SetActive(true);
                 VIPRoom.GetOrAddComponent<Enabler>();
+                VIPRoom.Set_UdonBehaviour_DisableInteractive(false);
                 var VIPTP = VIPRoom.FindObject("VIP TP");
                 if (VIPTP != null)
                 {
                     VIPTP.gameObject.SetActive(true);
                     VIPTP.GetOrAddComponent<Enabler>();
+                    VIPTP.Set_UdonBehaviour_DisableInteractive(false);
                 }
             }
+            foreach(var item in ElevatorBtnPaths)
+            {
+                var obj = GameObjectFinder.Find(item);
+                if (obj != null)
+                {
+                    obj.gameObject.SetActive(true);
+                    //obj.GetOrAddComponent<Enabler>();
+                    obj.Set_UdonBehaviour_DisableInteractive(false);
+                }
+            }
+
             if(GameLocks != null)
             {
                 var DebugRoot = GameLocks.FindObject("Debug");
                 if(DebugRoot != null)
                 {
-                    DebugRoot.gameObject.SetActive(true);
                     DebugRoot.gameObject.SetActive(true);
                     VIPDoor_1 = DebugRoot.FindObject("Access").gameObject;
                     if (VIPDoor_1 != null)
@@ -214,37 +253,26 @@ namespace AstroClient.WorldModifications.WorldHacks
                     }
                 }
                 var cardgame = GameLocks.FindObject("Card Game");
-                if(cardgame != null)
+                if (cardgame != null)
                 {
-                    VIPDoor_3 = cardgame.FindObject("Enter Game Room (2)").gameObject;
+                    VIPDoor_3 = cardgame.FindObject("Dare Button").gameObject;
                     if (VIPDoor_3 != null)
                     {
                         VIPDoor_3.gameObject.SetActive(true);
+                        //VIPDoor_3.GetOrAddComponent<Enabler>();
+                        VIPDoor_3.Set_UdonBehaviour_DisableInteractive(false);
                     }
-                     VIPDoor_4 = cardgame.FindObject("Enter Game Room (3)").gameObject;
+                    VIPDoor_4 = cardgame.FindObject("Dare Button 2").gameObject;
                     if (VIPDoor_4 != null)
                     {
                         VIPDoor_4.gameObject.SetActive(true);
-                    }
-                }
-            }
-            if(Elevator_Buttons != null)
-            {
-                var LegitVIPButton = Elevator_Buttons.FindObject("VIP Room TP (1)");
-                if(LegitVIPButton != null)
-                {
-                    LegitVIPButton.gameObject.SetActive(true);
-                    LegitVIPButton.RemoveComponent<BoxCollider>(); // Remove and set a meshCollider instead..
-                    LegitVIPButton.AddComponent<MeshCollider>();
-                    foreach(var udon in LegitVIPButton.Get_UdonBehaviours())
-                    {
-                        // author being sneaky enabled DisableInteractiveEvent...
-
-                        udon.DisableInteractive = false; // Fuck off
+                        //VIPDoor_4.GetOrAddComponent<Enabler>();
+                        VIPDoor_4.Set_UdonBehaviour_DisableInteractive(false);
 
                     }
                 }
             }
+        
 
             var UserEnableList = AlwaysOn.FindObject("User Enable List (1)");
             if(UserEnableList != null)

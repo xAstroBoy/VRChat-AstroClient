@@ -97,6 +97,25 @@ namespace AstroClient.Tools.Extensions
             return UdonBehaviourObjects;
         }
 
+
+        internal static void Set_UdonBehaviour_DisableInteractive(this GameObject obj, bool DisableInteractive)
+        {
+            var list = obj.GetComponentsInChildren<UdonBehaviour>(true);
+            if (list.Count() != 0)
+            {
+                foreach (var item in list)
+                {
+                    item.DisableInteractive = DisableInteractive;
+                }
+            }
+        }
+
+        internal static void Set_UdonBehaviour_DisableInteractive(this Transform obj, bool DisableInteractive)
+        {
+            obj.gameObject.Set_UdonBehaviour_DisableInteractive(DisableInteractive);
+        }
+
+        
         internal static List<UdonBehaviour> Get_UdonBehaviours(this Transform obj)
         {
             return obj.gameObject.Get_UdonBehaviours();
