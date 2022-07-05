@@ -2,6 +2,7 @@
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Spawner;
+using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
@@ -87,18 +88,16 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Prefabs
                 {
                     var btn = new QMSingleButton(CurrentScrollMenu, 0, 0, $"Spawn {prefab.name}", () =>
                     {
-                        var broadcast = VRC_EventHandler.VrcBroadcastType.Always;
-                        var prefabinfo = prefab.name;
-                        var position = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.RightHand).position;
-                        var Rotation = prefab.transform.rotation;
+                        Vector3? buttonPosition = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
+                        Quaternion? buttonRotation = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
 
-                        if (position != null)
+                        if (buttonPosition.HasValue && buttonRotation.HasValue)
                         {
-                            var newprefab = Networking.Instantiate(broadcast, prefabinfo, position, Rotation);
+                            var newprefab = Networking.Instantiate(VRC_EventHandler.VrcBroadcastType.Always, prefab.name, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault());
                             if (newprefab != null)
                             {
-                                SpawnerSubmenu.RegisterPrefab(newprefab);
                                 Tweaker_Object.SetObjectToEdit(newprefab);
+                                newprefab.AddToWorldUtilsMenu();
                             }
                         }
                     }, $"Spawn {prefab.name}");

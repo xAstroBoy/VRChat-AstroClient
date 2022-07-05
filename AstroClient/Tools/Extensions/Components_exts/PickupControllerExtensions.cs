@@ -174,6 +174,10 @@
         {
             obj.GetOrAddComponent<PickupController>().Pickup_Set_AntiTheft(AntiTheft);
         }
+        internal static bool Pickup_Get_AntiTheft(this GameObject obj)
+        {
+            return obj.GetOrAddComponent<PickupController>().Pickup_Get_AntiTheft();
+        }
 
         internal static void Pickup_Set_DisallowTheft(this GameObject obj, bool DisallowTheft)
         {

@@ -29,13 +29,13 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             if(MakiKeyboardReader != null)
             {
-                AnswerRevealer = new WorldButton(new Vector3(4.6627f, 1.7976f, 10.8649f), new Vector3(0, 320, 0), null, "Click Me to Reveal Answers".RainbowRichText(), () =>
+                AnswerRevealer = new WorldButton(new Vector3(4.6627f, 1.7976f, 10.8649f), new Vector3(0, 320, 0), null, "<rainb>Click Me \n to Reveal \n Words!</rainb>", () =>
                 {
 
                     ShowAnswers = !ShowAnswers;
                     if(!ShowAnswers)
                     {
-                        AnswerRevealer.SetText("Click Me \n to Reveal \n Words!".RainbowRichText());
+                        AnswerRevealer.SetText("<rainb>Click Me \n to Reveal \n Words!</rainb>");
                     }
                 });
                 AnswerRevealer.SetScale(new Vector3(0.23f, 0.5f, 1.2527f));

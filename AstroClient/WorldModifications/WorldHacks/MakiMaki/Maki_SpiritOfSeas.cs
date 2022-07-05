@@ -60,7 +60,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 Passcodes.SetScale(new Vector3(0.15f, 0.4f, 0.5f));
                 Passcodes.RemoveInteractions();
-                Passcodes.SetText(PasscodeText());
+                Passcodes.SetText($"{PasscodeText()}");
             }
             //Passcodes = new WorldButton(new Vector3(-3.0607f, 6.0675f, -4.1859f), new Vector3(0, 180, 0), String.Empty, null);
             CollectAllCoins = new WorldButton(new Vector3(6.015f, -2.5074f, -3.1304f), new Vector3(0, 270, 0), String.Empty, null);
@@ -89,7 +89,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (TeleportGoldShells != null)
             {
                 TeleportGoldShells.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
-                TeleportGoldShells.SetText("Teleport all Gold Shells".AddRichColorTag(Cheetah.Color.Crayola.Present.BananaMania));
+                TeleportGoldShells.SetText("<wave a=0.1>Teleport all Gold Shells</wave>".AddRichColorTag(Cheetah.Color.Crayola.Present.BananaMania));
                 TeleportGoldShells.SetAction(() =>
                 {
                     var parent = GameObjectFinder.Find("----INTERACTABLE----/CrabPuzzle/GoldShells");
@@ -100,6 +100,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                             pickup.gameObject.TeleportToMe();
                         }
                     }
+                    TeleportGoldShells.DestroyMe();
                 });
             }
 
@@ -107,7 +108,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (TeleportAllCrabs != null)
             {
                 TeleportAllCrabs.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
-                TeleportAllCrabs.SetText("Teleport all Crabs".AddRichColorTag(Cheetah.Color.Crayola.Present.CottonCandy));
+                TeleportAllCrabs.SetText("<rainb>Teleport all Crabs</rainb>");
                 TeleportAllCrabs.SetAction(() =>
                 {
                     var parent = GameObjectFinder.Find("----INTERACTABLE----/Crabs/");

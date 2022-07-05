@@ -28,7 +28,7 @@ namespace AstroClient.PlayerList.Entries
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
             AvatarSearch.OnPedestralDumpDone += RefreshInfo;
-            MovementMenu.OnNoFallHeightLimitToggled += RefreshInfo;
+            SceneUtils.OnNoFallHeightLimitToggled += RefreshInfo;
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             Settings_Camera.OnCameraPropertyChanged += RefreshInfo;
         }

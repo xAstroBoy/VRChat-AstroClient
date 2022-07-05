@@ -175,6 +175,13 @@
                 case "Main Menu":
                     backButton = NestedPart.CreateMainBackButton();
                     break;
+                case "SelectedUser_Remote":
+                    backButton = NestedPart.CreateBackButton("SelectedUser_Local");
+                    break;
+
+                case "SelectedUser_Local":
+                    backButton = NestedPart.CreateBackButton("SelectedUser_Local");
+                    break;
 
                 default:
                     backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");

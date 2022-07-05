@@ -694,7 +694,7 @@ internal class WorldCheatsModule : AstroEvents
 
             #region VRWare
 
-            if (WorldUtils.WorldID == WorldIds.VRWare)
+            if (WorldUtils.WorldID == WorldIds.VRWare || WorldUtils.WorldID == WorldIds.VRWare_Test_CrossPlatform)
             {
                 CustomSubMenu.AddButton("Toggle Console", () => { VRWare.ToggleConsole.InvokeBehaviour(); });
                 CustomSubMenu.AddButton("Toggle Music", () => { VRWare.ToggleMusic.InvokeBehaviour(); });

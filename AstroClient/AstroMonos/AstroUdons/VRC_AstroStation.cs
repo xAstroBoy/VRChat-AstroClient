@@ -38,14 +38,14 @@ namespace AstroClient.AstroMonos.AstroUdons
                     {
                         ClientEventActions.OnStationEnter += OnStationEnter;
                         ClientEventActions.OnStationExit += OnStationExit;
-                        MovementMenu.OnNoFallHeightLimitToggled += NoFallHeightLimitToggled;
+                        SceneUtils.OnNoFallHeightLimitToggled += NoFallHeightLimitToggled;
 
                     }
                     else
                     {
                         ClientEventActions.OnStationEnter -= OnStationEnter;
                         ClientEventActions.OnStationExit -= OnStationExit;
-                        MovementMenu.OnNoFallHeightLimitToggled -= NoFallHeightLimitToggled;
+                        SceneUtils.OnNoFallHeightLimitToggled -= NoFallHeightLimitToggled;
                     }
                 }
                 _HasSubscribed = value;

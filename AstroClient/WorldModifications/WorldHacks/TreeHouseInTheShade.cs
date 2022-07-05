@@ -357,7 +357,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         //ThrusterStick.RemoveComponent<VRC_EventHandler>();
                         //ThrusterStick.RemoveComponent<VRC_Trigger>();
                     }
-                    var controller = prefab.AddComponent<JetpackController>();
+                    prefab.AddComponent<JetpackController>();
 
                 }
             }

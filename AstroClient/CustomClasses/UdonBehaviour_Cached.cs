@@ -203,6 +203,31 @@
                 return UdonBehaviour.name;
             }
         }
+        /// <summary>
+        /// Toggles DisableInteractive on the UdonBehaviour
+        /// </summary>
+
+        internal bool? DisableInteractive
+        {
+            get
+            {
+                if (UdonBehaviour != null)
+                {
+                    return UdonBehaviour.DisableInteractive;
+                }
+                return null;
+            }
+            set
+            {
+                if (UdonBehaviour != null)
+                {
+                    if (value.HasValue)
+                    {
+                        UdonBehaviour.DisableInteractive = value.Value;
+                    }
+                }
+            }
+        }
 
         private RawUdonBehaviour _RawItem;
 

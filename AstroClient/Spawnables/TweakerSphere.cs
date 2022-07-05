@@ -9,14 +9,14 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
 
     internal class TweakerSphere : AstroEvents
     {
-        private static GameObject TweakerSphereHelper;
+        private static GameObject obj;
 
-        internal static void SpawnSphere()
+        internal static void Spawn()
         {
-            if (TweakerSphereHelper != null)
+            if (obj != null)
             {
-                UnityEngine.Object.Destroy(TweakerSphereHelper);
-                TweakerSphereHelper = null;
+                UnityEngine.Object.Destroy(obj);
+                obj = null;
                 return;
             }
             Vector3 bonePosition = Networking.LocalPlayer.GetBonePosition(HumanBodyBones.RightHand);
@@ -34,7 +34,7 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
             }
             Cube.IgnoreLocalPlayerCollision();
             Cube.GetOrAddComponent<ItemTweakerHelper>();
-            TweakerSphereHelper = Cube;
+            obj = Cube;
         }
 
     }

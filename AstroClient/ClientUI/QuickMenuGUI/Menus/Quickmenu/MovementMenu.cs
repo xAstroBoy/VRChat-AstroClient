@@ -18,17 +18,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
     internal class MovementMenu : AstroEvents
     {
 
-        internal static Action OnNoFallHeightLimitToggled { get; set; }
 
-        internal override void RegisterToEvents()
-        {
-            ClientEventActions.OnRoomLeft += OnRoomLeft;
-        }
-
-        private void OnRoomLeft()
-        {
-            NoFallHeightLimit = false;
-        }
 
         internal static void InitButtons(QMGridTab menu)
         {
@@ -49,7 +39,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
             ToggleGhost = new QMToggleButton(temp, "Ghost", () => { MovementSerializer.SerializerActivated = true; }, () => { MovementSerializer.SerializerActivated = false; }, "Enable/Disable Ghost");
             ToggleGhost.SetToggleState(MovementSerializer.SerializerActivated);
 
-            ToggleNoFallHeightLimiter = new QMToggleButton(temp, "Disable Fall Height Limit", () => { NoFallHeightLimit = true; }, () => { NoFallHeightLimit = false; }, "Disables Height Limit fall, allowing you to fall below default limit set by the scene");
+            SceneUtils.ToggleNoFallHeightLimiter = new QMToggleButton(temp, "Disable Fall Height Limit", () => { SceneUtils.NoFallHeightLimit = true; }, () => { SceneUtils.NoFallHeightLimit = false; }, "Disables Height Limit fall, allowing you to fall below default limit set by the scene");
             //ToggleFly = new QMToggleButton(SubMenu, -0.6f, -1, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
             //ToggleNoClip = new QMToggleButton(SubMenu, -0.6f, -0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
         }
@@ -59,40 +49,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
         internal static QMToggleButton ToggleNoClip;
 
         internal static QMToggleButton ToggleGhost;
-        internal static QMToggleButton ToggleNoFallHeightLimiter;
 
-        private static bool _NoFallHeightLimit = false;
 
-        internal static bool NoFallHeightLimit
-        {
-            get => _NoFallHeightLimit;
-            set
-            {
-                if (GameInstances.CurrentUser != null)
-                {
-                    if (value)
-                    {
-                        // this is more than enought lol
-                        SceneUtils.Set_Scene_RespawnHeightY(-99999);
-                        GameInstances.CurrentUser.Set_RespawnHeightY(-99999); 
-                    }
-                    else
-                    {
-                        SceneUtils.Restore_DefaultRespawnHeightY();
-                        GameInstances.CurrentUser.Set_RespawnHeightY(SceneUtils.RespawnHeightY);
-                    }
-                }
-                else
-                {
-                    value = false;
-                }
-                _NoFallHeightLimit = value;
-                if(ToggleNoFallHeightLimiter != null)
-                {
-                    ToggleNoFallHeightLimiter.SetToggleState(value);
-                }
-                OnNoFallHeightLimitToggled.SafetyRaise();
-            }
-        }
     }
 }

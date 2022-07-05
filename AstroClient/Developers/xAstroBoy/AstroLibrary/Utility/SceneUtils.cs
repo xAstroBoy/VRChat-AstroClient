@@ -1,5 +1,8 @@
 ﻿
 
+using System;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using Mono.CSharp;
 
 namespace AstroClient.xAstroBoy.Utility
@@ -24,6 +27,7 @@ namespace AstroClient.xAstroBoy.Utility
             Restore_DefaultRespawnHeightY();
             HasRespawnHeightYModified = false;
             OriginalRespawnHeightY = -100f;
+            NoFallHeightLimit = false;
             _SDK_Base = null;
             _SDK_2 = null;
             _SDK_3 = null;
@@ -315,8 +319,42 @@ namespace AstroClient.xAstroBoy.Utility
         }
 
 
+        private static bool _NoFallHeightLimit = false;
 
+        internal static bool NoFallHeightLimit
+        {
+            get => _NoFallHeightLimit;
+            set
+            {
+                if (GameInstances.CurrentUser != null)
+                {
+                    if (value)
+                    {
+                        // this is more than enought lol
+                        SceneUtils.Set_Scene_RespawnHeightY(-99999);
+                        GameInstances.CurrentUser.Set_RespawnHeightY(-99999);
+                    }
+                    else
+                    {
+                        SceneUtils.Restore_DefaultRespawnHeightY();
+                        GameInstances.CurrentUser.Set_RespawnHeightY(SceneUtils.RespawnHeightY);
+                    }
+                }
+                else
+                {
+                    value = false;
+                }
+                _NoFallHeightLimit = value;
+                if (ToggleNoFallHeightLimiter != null)
+                {
+                    ToggleNoFallHeightLimiter.SetToggleState(value);
+                }
+                OnNoFallHeightLimitToggled.SafetyRaise();
+            }
+        }
 
+        internal static QMToggleButton ToggleNoFallHeightLimiter;
+        internal static Action OnNoFallHeightLimitToggled { get; set; }
 
     }
 }

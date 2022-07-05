@@ -28,10 +28,11 @@ namespace AstroClient.ClientUI.ActionMenu
         {
             AMUtils.AddToModsFolder("Item Tweaker ", () =>
             {
-                CustomSubMenu.AddButton("Spawn Item Tweaker Object Selector Sphere", () => { TweakerSphere.SpawnSphere(); }, null);
+                CustomSubMenu.AddButton("Spawn Item Tweaker Object Selector Sphere", () => { TweakerSphere.Spawn(); }, null);
                 CustomSubMenu.AddButton("Get Held Item", () => { Tweaker_Object.GetGameObjectToEdit(); }, null);
 
                 CustomSubMenu.AddToggle("Lock Item", Tweaker_Object.LockItem, (toggle) => { Tweaker_Object.LockItem = toggle; }, null);
+                CustomSubMenu.AddToggle("AntiTheft", Tweaker_Object.GetGameObjectToEdit().Pickup_Get_AntiTheft(), (toggle) => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(toggle); }, null);
 
                 CustomSubMenu.AddSubMenu("Physic Editor", () =>
                 {

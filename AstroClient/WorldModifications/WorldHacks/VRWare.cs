@@ -1,5 +1,6 @@
 ﻿using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
+using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonSearcher;
 using VRC.Udon;
 
@@ -23,7 +24,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (id.Equals(WorldIds.VRWare))
+            if (id.Equals(WorldIds.VRWare) || id.Equals(WorldIds.VRWare_Test_CrossPlatform))
             {
                 ToggleConsole = UdonSearch.FindUdonEvent("ToggleConsole", "_interact");
                 ToggleMusic = UdonSearch.FindUdonEvent("Dev_NoMusic", "_interact");
@@ -35,36 +36,48 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (ToggleConsole != null)
                 {
                     ToggleConsole.gameObject.SetActive(true);
+                    ToggleConsole.DisableInteractive = false;
+
                 }
 
                 if (ToggleMusic != null)
                 {
                     ToggleMusic.gameObject.SetActive(true);
+                    ToggleMusic.DisableInteractive = false;
                 }
 
                 if (Trigger_Devouring_Level != null)
                 {
                     Trigger_Devouring_Level.gameObject.SetActive(true);
+                    Trigger_Devouring_Level.DisableInteractive = false;
                 }
 
                 if (Trigger_BreakTheTargets_Level != null)
                 {
                     Trigger_BreakTheTargets_Level.gameObject.SetActive(true);
+                    Trigger_BreakTheTargets_Level.DisableInteractive = false;
+
                 }
 
                 if (Trigger_JapanWorld_Level != null)
                 {
                     Trigger_JapanWorld_Level.gameObject.SetActive(true);
+                    Trigger_JapanWorld_Level.DisableInteractive = false;
+
                 }
 
                 if (Trigger_ExitVRChat_Level != null)
                 {
                     Trigger_ExitVRChat_Level.gameObject.SetActive(true);
+                    Trigger_ExitVRChat_Level.DisableInteractive = false;
+
                 }
 
                 if (Trigger_Race_Level != null)
                 {
                     Trigger_Race_Level.gameObject.SetActive(true);
+                    Trigger_Race_Level.DisableInteractive = false;
+
                 }
 
 

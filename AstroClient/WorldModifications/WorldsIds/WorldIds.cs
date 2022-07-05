@@ -54,6 +54,8 @@
         public const string SpiritsOfTheSea = "wrld_9da1349e-470b-47fd-a9b5-bd57d49255e2";
         public const string Maki_Tanks = "wrld_c7423848-bb22-4cba-9341-37d8b076b6fd";
         public const string VRWare = "wrld_5a528c03-01f5-4399-8f0d-cbcc5c305a57";
+        public const string VRWare_Test_CrossPlatform = "wrld_e5237774-f905-495d-a97c-ba22a36b2249";
+       // public const string VRWare_Quest = "wrld_e5237774-f905-495d-a97c-ba22a36b2249";
 
     }
 }

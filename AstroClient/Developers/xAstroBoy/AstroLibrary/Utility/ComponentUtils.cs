@@ -26,6 +26,17 @@
                 result = obj.GetComponentInChildren<T>(IncludeInactive);
             return result;
         }
+        public static T GetGetInChildrens_OrParent<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
+        {
+            if (obj == null) return null;
+            var result = obj.GetComponent<T>();
+            if (result == null)
+                result = obj.GetComponentInChildren<T>(IncludeInactive);
+            if (result == null)
+                result = obj.GetComponentInParent<T>();
+            return result;
+        }
+
 
         public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
         {

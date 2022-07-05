@@ -115,11 +115,43 @@ namespace AstroClient.AstroMonos.Components.Tools
                     solverIterations = Rigidbody.solverIterations;
                 }
             }
+            else // Do the opposite (VRChat messed it up, now is not safely applying it)
+            {
+
+                if (Rigidbody != null)
+                {
+                    Rigidbody.solverVelocityIterationCount = solverVelocityIterationCount;
+                    Rigidbody.inertiaTensor = inertiaTensor;
+                    Rigidbody.inertiaTensorRotation = inertiaTensorRotation;
+                    Rigidbody.centerOfMass = centerOfMass;
+                    Rigidbody.collisionDetectionMode = collisionDetectionMode;
+                    Rigidbody.constraints = constraints;
+                    Rigidbody.freezeRotation = freezeRotation;
+                    Rigidbody.maxDepenetrationVelocity = maxDepenetrationVelocity;
+                    Rigidbody.detectCollisions = detectCollisions;
+                    Rigidbody.useGravity = useGravity;
+                    Rigidbody.mass = mass;
+                    Rigidbody.solverIterationCount = solverIterationCount;
+                    Rigidbody.angularDrag = angularDrag;
+                    Rigidbody.drag = drag;
+                    Rigidbody.angularVelocity = angularVelocity;
+                    Rigidbody.velocity = velocity;
+                    Rigidbody.isKinematic = isKinematic;
+                    Rigidbody.sleepVelocity = sleepVelocity;
+                    Rigidbody.sleepThreshold = sleepThreshold;
+                    Rigidbody.maxAngularVelocity = maxAngularVelocity;
+                    Rigidbody.solverVelocityIterations = solverVelocityIterations;
+                    Rigidbody.interpolation = interpolation;
+                    Rigidbody.sleepAngularVelocity = sleepAngularVelocity;
+                    Rigidbody.useConeFriction = useConeFriction;
+                    Rigidbody.solverIterations = solverIterations;
+                }
+            }
         }
 
         internal void BackupBasicBody()
         {
-            _EditMode = true; // To be sure to backup the original properties without writing them .
+            //_EditMode = true; // To be sure to backup the original properties without writing them .
             isBackupping = true;
             //Log.Debug($"Backupping from RigidBody properties for object  {gameObject.name}");
             solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
@@ -174,7 +206,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             Original_useConeFriction = Rigidbody.useConeFriction;
             Original_solverIterations = Rigidbody.solverIterations;
             isBackupping = false;
-            _EditMode = false;
+            //_EditMode = false;
         }
 
         internal void RestoreOriginalBody() // Restore only if Editmode is already active, and Activate sync mode Once Restored.

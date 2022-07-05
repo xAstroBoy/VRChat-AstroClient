@@ -1,3 +1,4 @@
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
 using AstroClient.ClientUI.QuickMenuGUI.SettingsMenu;
@@ -8,6 +9,7 @@ using AstroClient.Tools.ObjectEditor;
 using AstroClient.Tools.World;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.UIPaths;
+using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
 
 namespace AstroClient.ClientUI.ActionMenu
@@ -26,6 +28,10 @@ namespace AstroClient.ClientUI.ActionMenu
         {
             AMUtils.AddToModsFolder("World Control", () =>
             {
+                CustomSubMenu.AddSubMenu("Scene Options", () =>
+                {
+                    CustomSubMenu.AddToggle("Disable Falling Height Limit", SceneUtils.NoFallHeightLimit, ToggleValue => { SceneUtils.NoFallHeightLimit = ToggleValue; }, null);
+                }, null);
 
                 CustomSubMenu.AddSubMenu("Player Camera Controls", () =>
                 {
@@ -65,6 +71,11 @@ namespace AstroClient.ClientUI.ActionMenu
 
                 CustomSubMenu.AddSubMenu("Pickups Controls", () =>
                 {
+                    CustomSubMenu.AddButton("Spawn Pickup Respawner Sphere", () =>
+                    {
+                        RespawnerSphere.Spawn();
+                    }, null);
+
                     CustomSubMenu.AddButton("Revert Pickup Edits", () =>
                     {
                         WorldUtils_Old.Get_Pickups().Pickup_RestoreOriginalProperties();

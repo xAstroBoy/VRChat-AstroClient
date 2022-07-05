@@ -40,12 +40,12 @@ internal class SnaxyTagsSystem : AstroEvents
 
     }
 
-    private void RoomLeft()
+    internal static void RoomLeft()
     {
         CurrentSnaxyTags.Clear(); 
     }
 
-    private void ApplicationStart()
+    internal static void ApplicationStart()
     {
         if (ConfigManager.General.SpoofedUserID.IsNullOrEmptyOrWhiteSpace())
         {
@@ -53,7 +53,7 @@ internal class SnaxyTagsSystem : AstroEvents
             Log.Debug($"Generated UserID For SnaxyTag API : {ConfigManager.General.SpoofedUserID}");
 
         }
-        Task.Run(InitiateWebsocket);
+        InitiateWebsocket();
     }
 
     internal static string RandomString(int length)
@@ -97,7 +97,7 @@ internal class SnaxyTagsSystem : AstroEvents
 
 
 
-    private IEnumerator WebsocketTag(string text)
+    internal static IEnumerator WebsocketTag(string text)
     {
         yield return null;
         if (VRCPlayer.field_Internal_Static_VRCPlayer_0 == null || string.IsNullOrEmpty(text))
@@ -146,7 +146,7 @@ internal class SnaxyTagsSystem : AstroEvents
         }
     }
 
-    private static string CheckTagText(string TagText)
+    internal static string CheckTagText(string TagText)
     {
         if (TagText.Contains("<color=#000000>"))
         {
@@ -161,7 +161,7 @@ internal class SnaxyTagsSystem : AstroEvents
     }
 
     // Sets tags into a dictionary
-    private static void SetSnaxyTag(Player player, string text)
+    internal static void SetSnaxyTag(Player player, string text)
     {
         if (player != null)
         {
@@ -187,7 +187,7 @@ internal class SnaxyTagsSystem : AstroEvents
         }
     }
 
-    private static void RemoveSnaxyTag(Player player)
+    internal static void RemoveSnaxyTag(Player player)
     {
         if (player != null)
         {
@@ -202,7 +202,7 @@ internal class SnaxyTagsSystem : AstroEvents
     }
 
 
-    private void InitiateWebsocket()
+    internal static void InitiateWebsocket()
     {
         SnaxySocket = new WebSocket("ws://totallynotaipleaktomyvps.nulls.sbs:81");
         SnaxySocket.SetCookie(new Cookie("uid", ConfigManager.General.SpoofedUserID));
@@ -216,17 +216,17 @@ internal class SnaxyTagsSystem : AstroEvents
 
     }
 
-    private void OnOpen(object sender, EventArgs e)
+    internal static void OnOpen(object sender, EventArgs e)
     {
         Log.Write("Connected to SnaxyTag!.");
     }
 
-    private void OnOutput(LogData arg1, string arg2)
+    internal static void OnOutput(LogData arg1, string arg2)
     {
         Log.Debug($"[SnaxyTag] Logger : {arg2}");
     }
 
-    private void OnError(object sender, ErrorEventArgs e)
+    internal static void OnError(object sender, ErrorEventArgs e)
     {
         Log.Write($"[SnaxyTag] Connection lost , Reason : {e.Message}!");
         SnaxySocket = null;
@@ -234,7 +234,7 @@ internal class SnaxyTagsSystem : AstroEvents
     }
 
 
-    private void OnClose(object sender, CloseEventArgs closeEventArgs)
+    internal static void OnClose(object sender, CloseEventArgs closeEventArgs)
     {
 
         Log.Write($"[SnaxyTag] Connection lost , Reason : {closeEventArgs.Reason} !");
@@ -243,7 +243,7 @@ internal class SnaxyTagsSystem : AstroEvents
 
     }
 
-    private void OnMessage(object sender, MessageEventArgs e)
+    internal static void OnMessage(object sender, MessageEventArgs e)
     {
         string text = e.Data.ToString();
         var Command = text.Split(',')[0];
@@ -275,7 +275,7 @@ internal class SnaxyTagsSystem : AstroEvents
         }
         MelonCoroutines.Start(WebsocketTag(text));
     }
-    private void OnPlayerJoin(Player player)
+    internal static void OnPlayerJoin(Player player)
     {
         if (SnaxySocket != null)
         {
@@ -284,7 +284,7 @@ internal class SnaxyTagsSystem : AstroEvents
             SnaxySocket.Send("getUser," + Message);
         }
     }
-    private void OnPlayerLeft(Player player)
+    internal static void OnPlayerLeft(Player player)
     {
         var user = player.GetAPIUser().GetUserID();
         if(CurrentSnaxyTags.ContainsKey(user))
@@ -298,6 +298,6 @@ internal class SnaxyTagsSystem : AstroEvents
         }
     }
 
-    private static Dictionary<string, SingleTag> CurrentSnaxyTags = new(StringComparer.OrdinalIgnoreCase);
+    internal static Dictionary<string, SingleTag> CurrentSnaxyTags = new(StringComparer.OrdinalIgnoreCase);
 
 }

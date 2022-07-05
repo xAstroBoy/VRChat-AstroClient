@@ -1,4 +1,7 @@
-﻿using AstroClient.xAstroBoy;
+﻿using AstroClient.febucci;
+using AstroClient.febucci.Core;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.Extensions;
 using Mono.Security.X509;
 using VRC.SDKBase;
 
@@ -97,6 +100,34 @@ namespace AstroClient.CheetosUI
         internal void SetText(string text)
         {
             TextMesh.text = text;
+            if(NeedsRichTextAnimator(text))
+            {
+                TextMesh.GetOrAddComponent<TextAnimator>();
+            }
+            else
+            {
+                TextMesh.RemoveComponent<TextAnimator>();
+            }
+        }
+
+        internal bool NeedsRichTextAnimator(string text)
+        {
+            foreach (var item in TAnimTags.defaultBehaviors)
+            {
+                if (text.Contains("</" + item + ">") || text.Contains("{/" + item + "}") || text.Contains("{/#" + item + "}"))
+                {
+                    return true;
+                }
+            }
+            foreach (var item in TAnimTags.defaultAppearances)
+            {
+                if (text.Contains("</"+item+">") || text.Contains("{/" + item + "}") || text.Contains("{/#" + item + "}"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
         internal void SetAction(Action action)
         {
@@ -153,6 +184,14 @@ namespace AstroClient.CheetosUI
                 TextMesh.color = Color.black;
                 TextMesh.text = label;
                 TextMesh.richText = true;
+                if (NeedsRichTextAnimator(label))
+                {
+                    TextMesh.GetOrAddComponent<TextAnimator>();
+                }
+                else
+                {
+                    TextMesh.RemoveComponent<TextAnimator>();
+                }
             }
             FixPlayercollisions();
         }

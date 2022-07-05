@@ -1,5 +1,4 @@
 
-
 // ReSharper disable HeuristicUnreachableCode
 
 namespace AstroClient.Gompoc.ActionMenuAPI.Api
