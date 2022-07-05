@@ -72,7 +72,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                     Keyboard = obj.RawItem;
                     HasSubscribed = true;
                     Initialize_Keyboard();
-                    InvokeRepeating(nameof(AnswerRevealer), 0.01f, 0.01f);
+                    InvokeRepeating(nameof(RevealAnswer), 0.01f, 0.01f);
                 }
                 else
                 {
@@ -86,13 +86,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
             }
         }
 
-
-        private void AnswerRevealer()
+        internal void RevealAnswer()
         {
             if (!QuickDraws.ShowAnswers) return;
-            if(QuickDraws.AnswerRevealer != null)
+            if (QuickDraws.AnswerRevealer != null)
             {
-                QuickDraws.AnswerRevealer.SetText("{rdir}" + __0_mp_word_String+ "{/rdir}".AddRichColorTag(Cheetah.Color.Crayola.Present.JazzberryJam));
+                QuickDraws.AnswerRevealer.SetText("{rdir a=1}" + __0_mp_word_String.AddRichColorTag(Cheetah.Color.Crayola.Present.JazzberryJam) + "{/rdir}");
             }
         }
 

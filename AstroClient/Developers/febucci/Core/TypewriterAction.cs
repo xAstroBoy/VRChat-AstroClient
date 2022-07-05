@@ -14,10 +14,10 @@ namespace AstroClient.febucci.Core
         public string actionID;
 
         /// <summary>
-        /// Contains all the parameters passed via the rich text tag
+        /// Contains all the parameters passed via the rich text2 tag
         /// </summary>
         /// <example>
-        /// If you write <waitfor=5> in the text, the following code will result in:
+        /// If you write <waitfor=5> in the text2, the following code will result in:
         /// <code>
         /// float waitTime;
         /// Febucci.UI.Core.FormatUtils.TryGetFloat(action.parameters, 0, 1f, out waitTime);

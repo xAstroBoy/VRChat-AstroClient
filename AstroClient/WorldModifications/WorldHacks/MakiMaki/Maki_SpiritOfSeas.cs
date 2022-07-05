@@ -67,7 +67,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (CollectAllCoins != null)
             {
                 CollectAllCoins.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
-                CollectAllCoins.SetText("Collect All Gold Coins".AddRichColorTag(Cheetah.Color.Crayola.Present.TorchRed));
+                CollectAllCoins.SetText("<rainb>Collect All Gold Coins</rainb>");
                 CollectAllCoins.SetAction(() =>
                 {
                     var parent = GameObjectFinder.Find("----INTERACTABLE----/CoinCollection/Coins/");
@@ -89,7 +89,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (TeleportGoldShells != null)
             {
                 TeleportGoldShells.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
-                TeleportGoldShells.SetText("<wave a=0.1>Teleport all Gold Shells</wave>".AddRichColorTag(Cheetah.Color.Crayola.Present.BananaMania));
+                TeleportGoldShells.SetText("<rainb>Teleport all Gold Shells</rainb>");
                 TeleportGoldShells.SetAction(() =>
                 {
                     var parent = GameObjectFinder.Find("----INTERACTABLE----/CrabPuzzle/GoldShells");
@@ -119,6 +119,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                             pickup.gameObject.TeleportToMe();
                         }
                     }
+                    TeleportAllCrabs.DestroyMe();
+
                 });
             }
 

@@ -8,7 +8,7 @@ namespace AstroClient.febucci.Core
     /// <summary>
     /// Stores TextAnimator's global data, shared in all your project (eg. Global Behaviors and Appearances).<br/>
     /// Must be placed inside the Resources Path <see cref="resourcesPath"/><br/>
-    /// - Manual: <see href="https://www.febucci.com/text-animator-unity/docs/creating-effects-in-the-inspector/#global-effects">Creating Global Effects</see>
+    /// - Manual: <see href="https://www.febucci.com/text2-animator-unity/docs/creating-effects-in-the-inspector/#global-effects">Creating Global Effects</see>
     /// </summary>
     
     [System.Serializable]

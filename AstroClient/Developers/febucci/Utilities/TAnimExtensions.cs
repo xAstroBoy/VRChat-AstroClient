@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AstroClient.febucci.Core;
 using AstroClient.febucci.Core.Base;
 
 namespace AstroClient.febucci.Utilities
@@ -6,6 +7,25 @@ namespace AstroClient.febucci.Utilities
 
     internal static class TAnimExtensions
     {
+        internal static bool NeedsTextAnimator(this string text)
+        {
+            foreach (var item in TAnimTags.defaultBehaviors)
+            {
+                if (text.Contains("</" + item + ">") || text.Contains("{/" + item + "}") || text.Contains("{/#" + item + "}"))
+                {
+                    return true;
+                }
+            }
+            foreach (var item in TAnimTags.defaultAppearances)
+            {
+                if (text.Contains("</" + item + ">") || text.Contains("{/" + item + "}") || text.Contains("{/#" + item + "}"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         internal static int GetIndexOfEffectNamed<T>(this List<T> effects, string tag) where T : EffectsBase
         {

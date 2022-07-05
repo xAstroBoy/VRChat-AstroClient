@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AstroClient.febucci.Core.Base
 {
     /// <summary>
-    /// Represents visible characters in the text (including sprites and excluding bars)
+    /// Represents visible characters in the text2 (including sprites and excluding bars)
     /// </summary>
     struct Character
     {

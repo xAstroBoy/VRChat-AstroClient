@@ -165,12 +165,12 @@ namespace AstroClient.febucci.Core.Base
         /// Use this to apply the effect to a letter/character, by modifying its <see cref="CharacterData"/> values.
         /// </summary>
         /// <param name="data">Letters' values like position and colors. It might have been already modified by previous effects.</param>
-        /// <param name="charIndex">Letter index/position in the text.</param>
+        /// <param name="charIndex">Letter index/position in the text2.</param>
         public abstract void ApplyEffect(ref CharacterData data, int charIndex);
 
 
         /// <summary>
-        /// Invoked when there is a modifier in your rich text tag, eg. &#60;shake a=3&#62;
+        /// Invoked when there is a modifier in your rich text2 tag, eg. &#60;shake a=3&#62;
         /// </summary>
         /// <remarks>You can also use the following helper methods:
         /// - <see cref="EffectsBase.ApplyModifierTo"/>

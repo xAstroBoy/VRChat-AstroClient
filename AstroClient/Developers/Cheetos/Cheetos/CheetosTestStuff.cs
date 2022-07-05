@@ -75,7 +75,7 @@ namespace AstroClient.Cheetos
                 DoOnce = true;
             }
 
-            WorldUtils.InstanceMaster.GetPlayer().AddSingleTag("Instance Master", System.Drawing.Color.OrangeRed);
+            WorldUtils.InstanceMaster.GetPlayer().AddSingleTag("<rainb>Instance Master</rainb>", System.Drawing.Color.OrangeRed);
         }
     }
 }

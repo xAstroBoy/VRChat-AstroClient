@@ -1,4 +1,8 @@
-﻿namespace AstroClient.AstroMonos.Components.UI.SingleTag
+﻿using AstroClient.febucci;
+using AstroClient.febucci.Utilities;
+using AstroClient.xAstroBoy.Utility;
+
+namespace AstroClient.AstroMonos.Components.UI.SingleTag
 {
     using System;
     using System.Collections;
@@ -155,7 +159,22 @@
             {
                 TextColor = Color.white;
                 TagText.richText = true;
-                TagText.text = Text;
+
+
+                if (Text.NeedsTextAnimator())
+                {
+                    if (Animator == null)
+                    {
+                        Animator = TagText.GetOrAddComponent<TextAnimator>();
+                    }
+                    //TagText.text = text;
+                    Animator.SetText(Text, false);
+
+                }
+                else
+                {
+                    TagText.text = Text;
+                }
                 SpawnedTag.gameObject.SetActive(ShowTag);
                 if (SpawnedStatsImage != null)
                 {
@@ -326,9 +345,28 @@
             set
             {
                 _Text = value;
-                if (TagText != null)
+                if (value.NeedsTextAnimator())
                 {
-                    TagText.text = value;
+                    if (Animator == null)
+                    {
+                        Animator = TagText.GetOrAddComponent<TextAnimator>();
+                    }
+                    if (Animator.Fulltext == value) return;
+                    //TagText.text = text;
+                    Animator.SetText(value, false);
+
+                }
+                else
+                {
+                    if (Animator != null)
+                    {
+                        Animator.DestroyMeLocal(true);
+                    }
+                    if (TagText.text == value) return;
+                    if (TagText != null)
+                    {
+                        TagText.text = value;
+                    }
                 }
             }
         }
@@ -450,5 +488,6 @@
         // STATS
         private Transform Player_QuickStats { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private ImageThreeSlice SpawnedStatsImage { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private TextAnimator Animator { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

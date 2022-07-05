@@ -30,7 +30,7 @@ namespace AstroClient.Streamer
                 {
                     if (apiuser.IsWorldCreator())
                     {
-                        player.AddSingleTag("World Author", Color.DarkOrange);
+                        player.AddSingleTag("<dangle><rainb>World Author</rainb></dangle>", Color.DarkOrange);
                         PopupUtils.QueHudMessage($"World Author : {apiuser.displayName} Joined!");
                         Log.Warn($"World Author : {apiuser.displayName} Joined!");
                     }

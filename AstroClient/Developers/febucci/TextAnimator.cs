@@ -128,7 +128,6 @@ namespace AstroClient.febucci
             }
 
             m_time.UpdateDeltaTime(timeScale);
-            InvokeRepeating(nameof(UpdateText), 0.1f, 0.1f);
         }
 
         #region Variables
@@ -253,6 +252,12 @@ namespace AstroClient.febucci
         /// The text stored in the TextAnimator component, without TextAnimator's tags.
         /// </summary>
         public string text { get => latestText; private set => latestText = value; }
+        /// <summary>
+        /// The text stored in the TextAnimator component, With The Animator tags.
+        /// </summary>
+        string FulllatestText;
+
+        public string Fulltext { get => FulllatestText; private set => FulllatestText = value; }
 
         /// <summary>
         /// <c>true</c> if the text is entirely visible.
@@ -442,12 +447,9 @@ namespace AstroClient.febucci
                 SetText(text, hideText);
                 return;
             }
-
+            Fulltext = this.text + text;
             _ApplyTextToCharacters(this.text + _FormatText(text, this.text.Length));
 
-#if TA_DEBUG
-            DebugText();
-#endif
         }
         #endregion
 
@@ -1052,16 +1054,15 @@ namespace AstroClient.febucci
             if (text.Length <= 0)
             {
                 hasText = false;
-                text = string.Empty;
                 tmproText.text = string.Empty;
+                Fulltext = string.Empty;
                 tmproText.ClearMesh();
                 return;
             }
-
             BuildTagsDatabase();
 
             #region Resets text variables
-
+            Fulltext = text;
             skipAppearanceEffects = false;
             hasActions = false;
             noparseEnabled = false;
@@ -1611,7 +1612,6 @@ namespace AstroClient.febucci
 
         #endregion
 
-#if TA_DEBUG
         void DebugText()
         {
             System.Text.StringBuilder debugBuilder = new System.Text.StringBuilder();
@@ -1719,11 +1719,10 @@ namespace AstroClient.febucci
             }
 
 
-            Log.Debug(debugBuilder.ToString(), this.gameObject);
+            Log.Debug(debugBuilder.ToString());
         }
-#endif
 
-        private void UpdateText()
+        private void Update()
         {
             //TMPRO's text changed, setting the text again
             if (!tmproText.text.Equals(text))
@@ -1735,9 +1734,6 @@ namespace AstroClient.febucci
                 if (triggerAnimPlayerOnChange && tAnimPlayer != null)
                 {
 
-#if TA_NoTempFix
-                    tAnimPlayer.ShowText(tmproText.text);
-#else
 
                     //temp fix, opening and closing this TMPro tag (which won't be showed in the text, acting like they aren't there) because otherwise
                     //there isn't any way to trigger that the text has changed, if it's actually the same as the previous one.
@@ -1746,7 +1742,6 @@ namespace AstroClient.febucci
                         tAnimPlayer.ShowText("");
                     else
                         tAnimPlayer.ShowText($"<noparse></noparse>{tmproText.text}");
-#endif
 
                 }
                 else //user is typing from TMPro
