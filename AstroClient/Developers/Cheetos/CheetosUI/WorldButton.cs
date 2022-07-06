@@ -178,6 +178,10 @@ namespace AstroClient.CheetosUI
                 TextMesh.color = Color.black;
                 TextMesh.richText = true;
                 SetText(label);
+                if(Animator != null)
+                {
+                    AstroTrigger.interactText = Animator.text;
+                }
             }
             FixPlayercollisions();
         }

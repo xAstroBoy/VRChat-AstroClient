@@ -651,7 +651,7 @@
     <Compile Include="Developers\Cheetos\Cheetos\AvatarHider.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\ForceClone.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\VRCPlusHider.cs" />
-    <Compile Include="Developers\Cheetos\Cheetos\CheetosTestStuff.cs" />
+    <Compile Include="Streamer\InstanceMasterDetector.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\MediaController\MediaController.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_Pickup.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_Trigger.cs" />

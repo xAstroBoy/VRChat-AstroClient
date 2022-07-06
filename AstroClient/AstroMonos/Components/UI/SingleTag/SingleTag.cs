@@ -158,22 +158,23 @@ namespace AstroClient.AstroMonos.Components.UI.SingleTag
             if (SpawnedTag != null)
             {
                 TextColor = Color.white;
-                TagText.richText = true;
-
-
-                if (Text.NeedsTextAnimator())
+                if (TagText != null)
                 {
-                    if (Animator == null)
+                    TagText.richText = true;
+                    if (Text.NeedsTextAnimator())
                     {
-                        Animator = TagText.GetOrAddComponent<TextAnimator>();
-                    }
-                    //TagText.text = text;
-                    Animator.SetText(Text, false);
+                        if (Animator == null)
+                        {
+                            Animator = TagText.GetOrAddComponent<TextAnimator>();
+                        }
+                        //TagText.text = text;
+                        Animator.SetText(Text, false);
 
-                }
-                else
-                {
-                    TagText.text = Text;
+                    }
+                    else
+                    {
+                        TagText.text = Text;
+                    }
                 }
                 SpawnedTag.gameObject.SetActive(ShowTag);
                 if (SpawnedStatsImage != null)
@@ -345,27 +346,30 @@ namespace AstroClient.AstroMonos.Components.UI.SingleTag
             set
             {
                 _Text = value;
-                if (value.NeedsTextAnimator())
+                if (TagText != null)
                 {
-                    if (Animator == null)
+                    if (value.NeedsTextAnimator())
                     {
-                        Animator = TagText.GetOrAddComponent<TextAnimator>();
-                    }
-                    if (Animator.Fulltext == value) return;
-                    //TagText.text = text;
-                    Animator.SetText(value, false);
+                        if (Animator == null)
+                        {
+                            Animator = TagText.GetOrAddComponent<TextAnimator>();
+                        }
+                        if (Animator.Fulltext == value) return;
+                        //TagText.text = text;
+                        Animator.SetText(value, false);
 
-                }
-                else
-                {
-                    if (Animator != null)
-                    {
-                        Animator.DestroyMeLocal(true);
                     }
-                    if (TagText.text == value) return;
-                    if (TagText != null)
+                    else
                     {
-                        TagText.text = value;
+                        if (Animator != null)
+                        {
+                            Animator.DestroyMeLocal(true);
+                        }
+                        if (TagText.text == value) return;
+                        if (TagText != null)
+                        {
+                            TagText.text = value;
+                        }
                     }
                 }
             }

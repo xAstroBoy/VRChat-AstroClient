@@ -20,7 +20,7 @@ namespace AstroClient.Cheetos
 
     #endregion Imports
 
-    internal class CheetosTestStuff : AstroEvents
+    internal class InstanceMasterDetector : AstroEvents
     {
         internal override void RegisterToEvents()
         {
@@ -41,8 +41,7 @@ namespace AstroClient.Cheetos
             {
                 if (PlayerSpooferUtils.IsSpooferActive)
                 {
-                    PopupUtils.QueHudMessage(
-                        $"'{PlayerSpooferUtils.SpooferInstance.Original_DisplayName}' is now the room master.");
+                    PopupUtils.QueHudMessage($"'{PlayerSpooferUtils.SpooferInstance.Original_DisplayName}' is now the room master.");
                 }
             }
             else
@@ -50,10 +49,12 @@ namespace AstroClient.Cheetos
                 PopupUtils.QueHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
             }
 
-            player.GetVRCPlayer().AddSingleTag("Instance Master", System.Drawing.Color.OrangeRed);
+            player.GetVRCPlayer().AddSingleTag(InstanceMasterTag, System.Drawing.Color.OrangeRed);
 
         }
 
+
+        private static string InstanceMasterTag => "<bounce><rainb>Instance Master</rainb></bounce>";
         private void OnRoomJoined()
         {
             Log.Write("You joined a room.");
@@ -75,7 +76,7 @@ namespace AstroClient.Cheetos
                 DoOnce = true;
             }
 
-            WorldUtils.InstanceMaster.GetPlayer().AddSingleTag("<rainb>Instance Master</rainb>", System.Drawing.Color.OrangeRed);
+            WorldUtils.InstanceMaster.GetPlayer().AddSingleTag(InstanceMasterTag, System.Drawing.Color.OrangeRed);
         }
     }
 }
