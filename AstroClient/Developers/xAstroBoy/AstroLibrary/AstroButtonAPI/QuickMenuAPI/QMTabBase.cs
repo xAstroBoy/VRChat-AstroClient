@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
+﻿using AstroClient.Tools.Extensions;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using CheetoLibrary.Utility;
     using Tools;
@@ -59,7 +61,7 @@
 
         internal void DestroyMe()
         {
-            button);
+            button.DestroyMeLocal(false);
         }
 
         internal void LoadSprite(Sprite sprite)
