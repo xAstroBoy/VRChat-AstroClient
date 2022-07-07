@@ -138,7 +138,7 @@
         {
             get
             {
-                if (_UserInterface == null) return _UserInterface = GameObjectFinder.Find("UserInterface").transform;
+                if (_UserInterface == null) return _UserInterface = Finder.Find("UserInterface").transform;
                 return _UserInterface;
             }
         }

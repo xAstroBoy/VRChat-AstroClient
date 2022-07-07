@@ -56,22 +56,22 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder2
 
         internal static void FindGameMurderObjects()
         {
-            item_detectiveGun = GameObjectFinder.Find("Murder Logic 3/Weapons/Gun Revolver");
-            item_SilencedGun = GameObjectFinder.Find("Murder Logic 3/Weapons/Gun Silenced");
-            item_clue_0 = GameObjectFinder.Find("Murder Logic 3/ClueCollecting/Clues/Clue/Clue hidden/Clue interact");
-            item_clue_1 = GameObjectFinder.Find("Murder Logic 3/ClueCollecting/Clues/Clue (1)/Clue hidden/Clue interact");
-            item_clue_2 = GameObjectFinder.Find("Murder Logic 3/ClueCollecting/Clues/Clue (2)/Clue hidden/Clue interact");
-            item_clue_3 = GameObjectFinder.Find("Murder Logic 3/ClueCollecting/Clues/Clue (3)/Clue hidden/Clue interact");
-            item_knife_0 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife");
-            item_knife_1 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife (1)");
-            item_knife_2 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife (2)");
-            item_knife_3 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife (3)");
-            item_knife_4 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife (4)");
-            item_knife_5 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife (5)");
-            item_knife_6 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife (6)");
-            item_knife_7 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife (7)");
-            item_knife_8 = GameObjectFinder.Find("Murder Logic 3/Weapons/Knife (8)");
-            Death = GameObjectFinder.Find("Murder Logic 3/Death");
+            item_detectiveGun = Finder.Find("Murder Logic 3/Weapons/Gun Revolver");
+            item_SilencedGun = Finder.Find("Murder Logic 3/Weapons/Gun Silenced");
+            item_clue_0 = Finder.Find("Murder Logic 3/ClueCollecting/Clues/Clue/Clue hidden/Clue interact");
+            item_clue_1 = Finder.Find("Murder Logic 3/ClueCollecting/Clues/Clue (1)/Clue hidden/Clue interact");
+            item_clue_2 = Finder.Find("Murder Logic 3/ClueCollecting/Clues/Clue (2)/Clue hidden/Clue interact");
+            item_clue_3 = Finder.Find("Murder Logic 3/ClueCollecting/Clues/Clue (3)/Clue hidden/Clue interact");
+            item_knife_0 = Finder.Find("Murder Logic 3/Weapons/Knife");
+            item_knife_1 = Finder.Find("Murder Logic 3/Weapons/Knife (1)");
+            item_knife_2 = Finder.Find("Murder Logic 3/Weapons/Knife (2)");
+            item_knife_3 = Finder.Find("Murder Logic 3/Weapons/Knife (3)");
+            item_knife_4 = Finder.Find("Murder Logic 3/Weapons/Knife (4)");
+            item_knife_5 = Finder.Find("Murder Logic 3/Weapons/Knife (5)");
+            item_knife_6 = Finder.Find("Murder Logic 3/Weapons/Knife (6)");
+            item_knife_7 = Finder.Find("Murder Logic 3/Weapons/Knife (7)");
+            item_knife_8 = Finder.Find("Murder Logic 3/Weapons/Knife (8)");
+            Death = Finder.Find("Murder Logic 3/Death");
 
             Clues.AddGameObject(item_clue_0);
             Clues.AddGameObject(item_clue_1);

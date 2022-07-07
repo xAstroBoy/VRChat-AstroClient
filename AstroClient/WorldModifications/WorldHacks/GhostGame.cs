@@ -240,7 +240,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isGhostGameWorld) return null;
                 if (_ArmoryRoom == null)
                 {
-                    return _ArmoryRoom = GameObjectFinder.Find("/PoliceStation_A/RoomParts/1F/ArmoryRoom");
+                    return _ArmoryRoom = Finder.Find("/PoliceStation_A/RoomParts/1F/ArmoryRoom");
                 }
                 return _ArmoryRoom;
             }
@@ -329,7 +329,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isGhostGameWorld) return null;
                 if (_WeaponsWorkshopObject == null)
                 {
-                    return _WeaponsWorkshopObject = GameObjectFinder.Find("/PoliceStation_A/Functions/WeaponWorkShops");
+                    return _WeaponsWorkshopObject = Finder.Find("/PoliceStation_A/Functions/WeaponWorkShops");
                 }
                 return _WeaponsWorkshopObject;
             }

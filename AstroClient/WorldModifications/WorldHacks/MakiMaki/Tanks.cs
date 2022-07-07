@@ -21,7 +21,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private void PatchPatronSystem()
         {
-                CustomizationManager = GameObjectFinder.Find("Customization");
+                CustomizationManager = Finder.Find("Customization");
             if(CustomizationManager != null)
             {
                 _ = CustomizerManagerReader;

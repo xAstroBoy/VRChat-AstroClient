@@ -19,19 +19,19 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (id == WorldIds.ClubMisfitAfterParty)
             {
                 Log.Write($"Recognized {Name} World, Removing Anti-Client user mechanism And Blacklist.");
-                var avatar = GameObjectFinder.Find("Godseye");
+                var avatar = Finder.Find("Godseye");
                 if (avatar != null)
                 {
                     avatar.DestroyMeLocal();
                 }
 
-                var AntiClientUserCanvas1 = GameObjectFinder.Find("Map/Scripts/BlacklistCanvas");
+                var AntiClientUserCanvas1 = Finder.Find("Map/Scripts/BlacklistCanvas");
                 if (AntiClientUserCanvas1 != null)
                 {
                     AntiClientUserCanvas1.DestroyMeLocal();
                 }
 
-                var AntiClientUserCanvas2 = GameObjectFinder.Find("Map/Scripts/Canvas");
+                var AntiClientUserCanvas2 = Finder.Find("Map/Scripts/Canvas");
                 if (AntiClientUserCanvas2 != null)
                 {
                     AntiClientUserCanvas2.DestroyMeLocal();

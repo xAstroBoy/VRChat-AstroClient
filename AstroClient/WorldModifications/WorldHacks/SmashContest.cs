@@ -19,7 +19,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (id == WorldIds.SmashContest)
             {
                 Log.Debug($"Recognized {Name} World, Searching For Sandbag");
-                var sandbag = GameObjectFinder.Find("SandBag");
+                var sandbag = Finder.Find("SandBag");
                 if (sandbag != null)
                 {
                     Log.Write("Registered Sandbag To World objects!");

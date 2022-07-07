@@ -38,7 +38,7 @@ namespace AstroClient.Tools.World
                 // All 3 Pickups Components inherit this.
 
 
-                return GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Pickup>()
+                return Finder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Pickup>()
                            .Select(i => i.gameObject)
                            .Where(x => x.gameObject != null)
                            .Where(x2 => x2.name != "AvatarDebugConsole")
@@ -60,7 +60,7 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                return GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_MirrorReflection>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+                return Finder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_MirrorReflection>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
      
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace AstroClient.Tools.World
             try
             {
                 // All 2 extra component inherit this.
-                return GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList(); 
+                return Finder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList(); 
                 
             }
             catch (Exception e)
@@ -94,7 +94,7 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                var list = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
+                var list = Finder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
                 if (list.AnyAndNotNull())
                 {
                     return list;
@@ -113,7 +113,7 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                return GameObjectFinder.GetRootGameObjectsComponents<AudioSource>(true, false);
+                return Finder.GetRootGameObjectsComponents<AudioSource>(true, false);
             }
             catch (Exception e)
             {
@@ -283,7 +283,7 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                var list = GameObjectFinder.GetRootGameObjectsComponents<VRCAvatarPedestal>();
+                var list = Finder.GetRootGameObjectsComponents<VRCAvatarPedestal>();
                 if (list.Count() != 0)
                 {
                     foreach (var item in list)
@@ -318,7 +318,7 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                var list = GameObjectFinder.GetRootGameObjectsComponents<SimpleAvatarPedestal>();
+                var list = Finder.GetRootGameObjectsComponents<SimpleAvatarPedestal>();
                 var result = list
                     .Where(
                     i => i.field_Internal_ApiAvatar_0 != null &&
@@ -347,7 +347,7 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                var list = GameObjectFinder.GetRootGameObjectsComponents<AvatarPedestal>();
+                var list = Finder.GetRootGameObjectsComponents<AvatarPedestal>();
                 if (list.Count() != 0)
                 {
                     foreach (var item in list)
@@ -387,7 +387,7 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                var list = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_AvatarPedestal>();
+                var list = Finder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_AvatarPedestal>();
                 if (list.Count() != 0)
                 {
                     foreach (var item in list)
@@ -422,7 +422,7 @@ namespace AstroClient.Tools.World
         {
             try
             {
-                var list = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>();
+                var list = Finder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>();
                 if (list.Count() != 0)
                 {
                     foreach (var item in list)
@@ -458,7 +458,7 @@ namespace AstroClient.Tools.World
         internal static List<UdonBehaviour> Get_UdonBehaviours()
         {
             var UdonBehaviourObjects = new List<UdonBehaviour>();
-            var list = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
+            var list = Finder.GetRootGameObjectsComponents<UdonBehaviour>();
             if (list.Count() != 0)
             {
                 for (int i = 0; i < list.Count; i++)

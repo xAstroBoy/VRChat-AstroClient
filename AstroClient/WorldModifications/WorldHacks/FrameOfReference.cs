@@ -40,7 +40,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Logic == null)
                 {
-                    return _Logic = GameObjectFinder.FindRootSceneObject("--LOGIC--");
+                    return _Logic = Finder.FindRootSceneObject("--LOGIC--");
                 }
 
                 return _Logic;

@@ -8,7 +8,7 @@
     using UnityEngine.SceneManagement;
     using Utility;
 
-    public static class GameObjectFinder
+    public static class Finder
     {
         public static GameObject Find(string path)
         {
@@ -23,7 +23,7 @@
                 return null;
             }
         }
-
+        
         public static List<GameObject> RootSceneObjects => SceneManager.GetActiveScene().GetRootGameObjects().ToList();
 
         public static List<GameObject> RootSceneObjects_WithoutAvatars => SceneManager.GetActiveScene().GetRootGameObjects().Where(x => !x.gameObject.name.Contains("VRCPlayer")).ToList();
@@ -35,7 +35,7 @@
                 var results = new List<T>();
                 for (int i = 0; i < RootSceneObjects.Count; i++)
                 {
-                    GameObject obj = GameObjectFinder.RootSceneObjects[i];
+                    GameObject obj = Finder.RootSceneObjects[i];
                     if (!IncludeAvatarComponents)
                     {
                         if (!obj.name.Contains("VRCPlayer"))

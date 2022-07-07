@@ -207,7 +207,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
                 if (!isPuttPuttPond) return null;
                 if (_Scene == null)
                 {
-                    return _Scene = GameObjectFinder.FindRootSceneObject("Scene");
+                    return _Scene = Finder.FindRootSceneObject("Scene");
                 }
 
                 return _Scene;

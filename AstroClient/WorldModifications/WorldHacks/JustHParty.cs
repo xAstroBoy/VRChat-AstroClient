@@ -43,7 +43,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     JustHPartyMenu.SetInteractable(true);
                     JustHPartyMenu.SetTextColor(Color.green);
                 }
-                GameObjectFinder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
+                Finder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
             }
             else
             {
@@ -57,7 +57,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void GoToRooms()
         {
-            GameObjectFinder.Find("기믹/LOBBY/엘베/엘베 3층").GetComponents<VRC_Trigger>().ToList()[1].Interact();
+            Finder.Find("기믹/LOBBY/엘베/엘베 3층").GetComponents<VRC_Trigger>().ToList()[1].Interact();
         }
 
         private static void ToggleDoor(int doorID)
@@ -66,11 +66,11 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             if (doorID == 1)
             {
-                doorLock = GameObjectFinder.Find($"기믹/lock system/sys/00{doorID}/lock");
+                doorLock = Finder.Find($"기믹/lock system/sys/00{doorID}/lock");
             }
             else if (doorID >= 2)
             {
-                doorLock = GameObjectFinder.Find($"기믹/lock system/sys/00{doorID}/lock ({doorID - 1})");
+                doorLock = Finder.Find($"기믹/lock system/sys/00{doorID}/lock ({doorID - 1})");
             }
 
             VRC_Trigger trigger = doorLock?.GetComponent<VRC_Trigger>();

@@ -22,13 +22,13 @@ namespace AstroClient.WorldModifications.WorldHacks.MeRooms
             if (id == WorldIds.Meroom_939)
             {
                 Log.Write($"Recognized {Name} World, Spawning Lockpick Trigger.");
-                var privateswitch = GameObjectFinder.Find("Switch/Private room/Switch_Lock");
+                var privateswitch = Finder.Find("Switch/Private room/Switch_Lock");
                 if (privateswitch != null)
                 {
                     var LockEvent = privateswitch.FindUdonEvent("Switch_Lock", "_interact");
                     if (LockEvent != null)
                     {
-                        var DisplaySwitchTrigger = GameObjectFinder.Find("Switch/Living room/Switch_Lock dummy/Switch_LockObject");
+                        var DisplaySwitchTrigger = Finder.Find("Switch/Living room/Switch_Lock dummy/Switch_LockObject");
                         if (DisplaySwitchTrigger == null)
                         {
                             Log.Write("Failed to Find Living Room Display Switch, Has MeRoom World updated?", Color.Red);

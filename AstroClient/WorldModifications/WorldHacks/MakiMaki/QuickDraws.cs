@@ -20,9 +20,9 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private void FindEverything()
         {
-            Customization = GameObjectFinder.Find("----UI----/RightSettings/Customization");
-            MakiKeyboard = GameObjectFinder.Find("----SYSTEMS----/KeyboardToggle/MakiKeyboard");
-            PlayerPermissionManager = GameObjectFinder.Find("----SYSTEMS----/PlayerManager/PlayerPermissionManager");
+            Customization = Finder.Find("----UI----/RightSettings/Customization");
+            MakiKeyboard = Finder.Find("----SYSTEMS----/KeyboardToggle/MakiKeyboard");
+            PlayerPermissionManager = Finder.Find("----SYSTEMS----/PlayerManager/PlayerPermissionManager");
             _ = CustomizationReader;
             _ = MakiKeyboardReader;
             _ = PlayerPermissionManagerReader; 

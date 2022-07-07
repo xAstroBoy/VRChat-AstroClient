@@ -245,7 +245,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_CurrentWorldRoot == null)
                 {
-                    return _CurrentWorldRoot = GameObjectFinder.FindRootSceneObject("World").transform;
+                    return _CurrentWorldRoot = Finder.FindRootSceneObject("World").transform;
                 }
 
                 return _CurrentWorldRoot;

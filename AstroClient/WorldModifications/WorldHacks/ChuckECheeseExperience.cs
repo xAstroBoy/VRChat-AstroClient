@@ -21,7 +21,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 Log.Write($"Recognized {Name} World, Removing Showtime Collider..");
 
-                var showtimeobj = GameObjectFinder.Find("Stages Resize/Road Stage/Road Stage/Cube");
+                var showtimeobj = Finder.Find("Stages Resize/Road Stage/Road Stage/Cube");
                 if (showtimeobj != null)
                 {
                     var boxcollider = showtimeobj.GetComponent<BoxCollider>();

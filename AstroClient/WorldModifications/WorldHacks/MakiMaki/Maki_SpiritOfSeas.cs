@@ -70,7 +70,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 CollectAllCoins.SetText("<rainb>Collect All Gold Coins</rainb>");
                 CollectAllCoins.SetAction(() =>
                 {
-                    var parent = GameObjectFinder.Find("----INTERACTABLE----/CoinCollection/Coins/");
+                    var parent = Finder.Find("----INTERACTABLE----/CoinCollection/Coins/");
                     if (parent != null)
                     {
                         foreach (var coin in parent.Get_UdonBehaviours())
@@ -92,7 +92,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 TeleportGoldShells.SetText("<rainb>Teleport all Gold Shells</rainb>");
                 TeleportGoldShells.SetAction(() =>
                 {
-                    var parent = GameObjectFinder.Find("----INTERACTABLE----/CrabPuzzle/GoldShells");
+                    var parent = Finder.Find("----INTERACTABLE----/CrabPuzzle/GoldShells");
                     if (parent != null)
                     {
                         foreach (var pickup in parent.GetComponentsInChildren<PickupController>())
@@ -111,7 +111,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 TeleportAllCrabs.SetText("<rainb>Teleport all Crabs</rainb>");
                 TeleportAllCrabs.SetAction(() =>
                 {
-                    var parent = GameObjectFinder.Find("----INTERACTABLE----/Crabs/");
+                    var parent = Finder.Find("----INTERACTABLE----/Crabs/");
                     if (parent != null)
                     {
                         foreach (var pickup in parent.GetComponentsInChildren<PickupController>())

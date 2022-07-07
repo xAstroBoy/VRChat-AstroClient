@@ -385,7 +385,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 try
                 {
-                    var obj = GameObjectFinder.Find(item);
+                    var obj = Finder.Find(item);
                     if (obj != null)
                     {
                         obj.DestroyMeLocal(false);
@@ -399,7 +399,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 try
                 {
-                    var obj = GameObjectFinder.Find(item);
+                    var obj = Finder.Find(item);
                     if (obj != null)
                     {
                         obj.IgnoreLocalPlayerCollision(true, true, false);
@@ -411,7 +411,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 try
                 {
-                    var obj = GameObjectFinder.Find(item);
+                    var obj = Finder.Find(item);
                     if (obj != null)
                     {
                         Fix_BoothBasicTable(obj);
@@ -423,7 +423,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 try
                 {
-                    var obj = GameObjectFinder.Find(item);
+                    var obj = Finder.Find(item);
                     if (obj != null)
                     {
                         Fix_SmallDiningTable(obj);
@@ -435,7 +435,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 try
                 {
-                    var obj = GameObjectFinder.Find(item);
+                    var obj = Finder.Find(item);
                     if (obj != null)
                     {
                         Fix_Table_Small(obj);
@@ -445,7 +445,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
 
 
-            var kitchenwall = GameObjectFinder.Find("great_pug/exterior_walls_patio_001");
+            var kitchenwall = Finder.Find("great_pug/exterior_walls_patio_001");
             if (kitchenwall != null)
             {
                 var obj = kitchenwall.GetOrAddComponent<MeshCollider>();
@@ -454,7 +454,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     obj.enabled = true;
                 }
             }
-            var idk = GameObjectFinder.Find(" - Collision/Corner-Booth Walk Colider");
+            var idk = Finder.Find(" - Collision/Corner-Booth Walk Colider");
             if (idk != null)
             {
                 if (idk != null)
@@ -474,7 +474,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 try
                 {
-                    var obj = GameObjectFinder.Find(item);
+                    var obj = Finder.Find(item);
                     if (obj != null)
                     {
                         obj.SetActive(true);

@@ -107,9 +107,9 @@ namespace AstroClient.WorldModifications.WorldHacks
                     AutoStarter_SetActive = AutoStarter_ActiveEvent;
                 }
 
-                RedWrench = GameObjectFinder.Find("UpgradeTool0");
-                BlueWrench = GameObjectFinder.Find("UpgradeTool1");
-                Hammer = GameObjectFinder.Find("SellTool");
+                RedWrench = Finder.Find("UpgradeTool0");
+                BlueWrench = Finder.Find("UpgradeTool1");
+                Hammer = Finder.Find("SellTool");
                 if (RedWrench != null)
                 {
                     RedWrenchPickup = RedWrench.GetOrAddComponent<VRC_AstroPickup>();
@@ -162,7 +162,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 //    }
                 //}
 
-                var toolshop = GameObjectFinder.FindRootSceneObject("ToolShop");
+                var toolshop = Finder.FindRootSceneObject("ToolShop");
                 if (toolshop != null)
                 {
                     // Button is SM_Switch_Button_Button_02
@@ -171,19 +171,19 @@ namespace AstroClient.WorldModifications.WorldHacks
                     ReturnRedWrenchButton = toolshop.transform.FindObject("ReturnUpgradeTool0").gameObject;
                 }
 
-                Tower_RocketLauncher = GameObjectFinder.Find("TowerRocketLauncher1Grabbable (0)");
-                Tower_Slower = GameObjectFinder.Find("TowerSlower1Grabbable (0)");
-                Tower_Cannon = GameObjectFinder.Find("TowerCannon1Grabbable (0)");
-                Tower_Radar = GameObjectFinder.Find("TowerRadar1Grabbable (0)");
-                Tower_Minigun = GameObjectFinder.Find("TowerMiniGun1Grabbable (0)");
-                Tower_Lance = GameObjectFinder.Find("TowerLance1Grabbable (0)");
+                Tower_RocketLauncher = Finder.Find("TowerRocketLauncher1Grabbable (0)");
+                Tower_Slower = Finder.Find("TowerSlower1Grabbable (0)");
+                Tower_Cannon = Finder.Find("TowerCannon1Grabbable (0)");
+                Tower_Radar = Finder.Find("TowerRadar1Grabbable (0)");
+                Tower_Minigun = Finder.Find("TowerMiniGun1Grabbable (0)");
+                Tower_Lance = Finder.Find("TowerLance1Grabbable (0)");
 
-                Tower_RocketLauncher_1 = GameObjectFinder.Find("TowerRocketLauncher1Grabbable (1)");
-                Tower_Slower_1 = GameObjectFinder.Find("TowerSlower1Grabbable (1)");
-                Tower_Cannon_1 = GameObjectFinder.Find("TowerCannon1Grabbable (1)");
-                Tower_Radar_1 = GameObjectFinder.Find("TowerRadar1Grabbable (1)");
-                Tower_Minigun_1 = GameObjectFinder.Find("TowerMiniGun1Grabbable (1)");
-                Tower_Lance_1 = GameObjectFinder.Find("TowerLance1Grabbable (1)");
+                Tower_RocketLauncher_1 = Finder.Find("TowerRocketLauncher1Grabbable (1)");
+                Tower_Slower_1 = Finder.Find("TowerSlower1Grabbable (1)");
+                Tower_Cannon_1 = Finder.Find("TowerCannon1Grabbable (1)");
+                Tower_Radar_1 = Finder.Find("TowerRadar1Grabbable (1)");
+                Tower_Minigun_1 = Finder.Find("TowerMiniGun1Grabbable (1)");
+                Tower_Lance_1 = Finder.Find("TowerLance1Grabbable (1)");
 
                 Tower_RocketLauncher.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
                 Tower_Slower.GetOrAddComponent<SuperTowerDefense_TowerCollisionFixer>();
@@ -419,7 +419,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             get
             {
                 List<SuperTowerDefense_TowerEditor> result = new List<SuperTowerDefense_TowerEditor>();
-                foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
+                foreach (var item in Finder.RootSceneObjects_WithoutAvatars)
                 {
                     if (
                         item.name.Equals("TowerMiniGun") ||
@@ -451,7 +451,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             get
             {
                 List<SuperTowerDefense_UpgradeEditor> result = new List<SuperTowerDefense_UpgradeEditor>();
-                foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
+                foreach (var item in Finder.RootSceneObjects_WithoutAvatars)
                 {
                     if (
                         item.name.Equals("TowerUpgradeInteractable") ||
@@ -1368,7 +1368,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (Obj_Apple_1 == null)
                 {
-                    return Obj_Apple_1 = GameObjectFinder.Find("Apples/Apple_01");
+                    return Obj_Apple_1 = Finder.Find("Apples/Apple_01");
                 }
 
                 return Obj_Apple_1;
@@ -1383,7 +1383,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (Obj_Apple_2 == null)
                 {
-                    return Obj_Apple_2 = GameObjectFinder.Find("Apples/Apple_01 (1)");
+                    return Obj_Apple_2 = Finder.Find("Apples/Apple_01 (1)");
                 }
 
                 return Obj_Apple_2;
@@ -1399,7 +1399,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (Obj_Apple_3 == null)
                 {
-                    return Obj_Apple_3 = GameObjectFinder.Find("Apples/Apple_01 (2)");
+                    return Obj_Apple_3 = Finder.Find("Apples/Apple_01 (2)");
                 }
 
                 return Obj_Apple_3;
@@ -1414,7 +1414,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (Obj_Apple_4 == null)
                 {
-                    return Obj_Apple_4 = GameObjectFinder.Find("Apples/Apple_01 (3)");
+                    return Obj_Apple_4 = Finder.Find("Apples/Apple_01 (3)");
                 }
 
                 return Obj_Apple_4;

@@ -78,7 +78,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (!isCurrentWorld) return null;
                 if (_Bedroom_VIP == null)
                 {
-                    return _Bedroom_VIP = GameObjectFinder.FindRootSceneObject("Bedroom VIP");
+                    return _Bedroom_VIP = Finder.FindRootSceneObject("Bedroom VIP");
                 }
                 return _Bedroom_VIP;
             }
@@ -93,7 +93,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (!isCurrentWorld) return null;
                 if (_Lobby == null)
                 {
-                    return _Lobby = GameObjectFinder.FindRootSceneObject("Lobby");
+                    return _Lobby = Finder.FindRootSceneObject("Lobby");
                 }
                 return _Lobby;
             }
@@ -108,7 +108,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (!isCurrentWorld) return null;
                 if (_Udon == null)
                 {
-                    return _Udon = GameObjectFinder.FindRootSceneObject("Udon");
+                    return _Udon = Finder.FindRootSceneObject("Udon");
                 }
                 return _Udon;
             }
@@ -157,7 +157,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (!isCurrentWorld) return null;
                 if (_Penthouse == null)
                 {
-                    return _Penthouse = GameObjectFinder.FindRootSceneObject("Penthouse");
+                    return _Penthouse = Finder.FindRootSceneObject("Penthouse");
                 }
                 return _Penthouse;
             }
@@ -172,7 +172,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (!isCurrentWorld) return null;
                 if (_Bedrooms == null)
                 {
-                    return _Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
+                    return _Bedrooms = Finder.FindRootSceneObject("Bedrooms");
                 }
                 return _Bedrooms;
             }
@@ -187,7 +187,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (!isCurrentWorld) return null;
                 if (_Decoder_Debug == null)
                 {
-                    return _Decoder_Debug = GameObjectFinder.FindRootSceneObject("Decoder_Debug");
+                    return _Decoder_Debug = Finder.FindRootSceneObject("Decoder_Debug");
                 }
                 return _Decoder_Debug;
             }

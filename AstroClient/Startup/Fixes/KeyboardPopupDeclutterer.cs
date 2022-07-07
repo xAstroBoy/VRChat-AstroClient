@@ -28,7 +28,7 @@ namespace AstroClient.Startup.Fixes
             {
                 if (_InputPopupTransform == null)
                 {
-                    return _InputPopupTransform = GameObjectFinder.Find("UserInterface/MenuContent/Popups/InputPopup")?.transform;
+                    return _InputPopupTransform = Finder.Find("UserInterface/MenuContent/Popups/InputPopup")?.transform;
                 }
                 return _InputPopupTransform;
             }

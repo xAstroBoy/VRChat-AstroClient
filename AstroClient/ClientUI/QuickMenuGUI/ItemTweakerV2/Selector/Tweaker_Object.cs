@@ -8,7 +8,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector
     {
         internal static GameObject SetObjectToEditWithPath(string objpath)
         {
-            var obj = GameObjectFinder.Find(objpath);
+            var obj = Finder.Find(objpath);
             if (obj != null)
             {
                 Log.Write("Path is valid, Found Gameobject obj : " + obj.name + "Using path " + objpath);

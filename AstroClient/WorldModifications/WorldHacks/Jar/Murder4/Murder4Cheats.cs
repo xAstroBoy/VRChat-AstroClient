@@ -247,7 +247,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4
         {
             Log.Write("Removing Anti-Peek Protection...");
 
-            var occlusion = GameObjectFinder.Find("Environment/Occlusion");
+            var occlusion = Finder.Find("Environment/Occlusion");
             if (occlusion != null) occlusion.DestroyMeLocal();
             //var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start"); //  Not working.
             //if (patronCheckFool != null)
@@ -264,36 +264,36 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4
             //        patronCheckFool.Invoke();
             //    }
             //}
-            item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
+            item_DetectiveRevolver = Finder.Find("Game Logic/Weapons/Revolver");
             if (item_DetectiveRevolver != null) DetectiveGunPerkUnlocker = item_DetectiveRevolver.GetOrAddComponent<PatronUnlocker>();
-            Clue_photograph = GameObjectFinder.Find("Game Logic/Clues/Clue (photograph)");
-            Clue_notebook = GameObjectFinder.Find("Game Logic/Clues/Clue (notebook)");
-            Clue_Locket = GameObjectFinder.Find("Game Logic/Clues/Clue (locket)");
-            Clue_PocketWatch = GameObjectFinder.Find("Game Logic/Clues/Clue (pocketwatch)");
-            Clue_Postcard = GameObjectFinder.Find("Game Logic/Clues/Clue (postcard)");
+            Clue_photograph = Finder.Find("Game Logic/Clues/Clue (photograph)");
+            Clue_notebook = Finder.Find("Game Logic/Clues/Clue (notebook)");
+            Clue_Locket = Finder.Find("Game Logic/Clues/Clue (locket)");
+            Clue_PocketWatch = Finder.Find("Game Logic/Clues/Clue (pocketwatch)");
+            Clue_Postcard = Finder.Find("Game Logic/Clues/Clue (postcard)");
             if (!IsChristmasMode)
             {
-                Clue_Present = GameObjectFinder.Find("Game Logic/Clues (xmas)/Clue (present) (5)");
+                Clue_Present = Finder.Find("Game Logic/Clues (xmas)/Clue (present) (5)");
                 if (Clue_Present != null)
                     IsChristmasMode = true;
                 else
                     Log.Write("Could Not Find The Present Clue!");
             }
 
-            item_Knife_0 = GameObjectFinder.Find("Game Logic/Weapons/Knife (0)");
-            item_Knife_1 = GameObjectFinder.Find("Game Logic/Weapons/Knife (1)");
-            item_Knife_2 = GameObjectFinder.Find("Game Logic/Weapons/Knife (2)");
-            item_Knife_3 = GameObjectFinder.Find("Game Logic/Weapons/Knife (3)");
-            item_Knife_4 = GameObjectFinder.Find("Game Logic/Weapons/Knife (4)");
-            item_Knife_5 = GameObjectFinder.Find("Game Logic/Weapons/Knife (5)");
-            item_Bear_trap_0 = GameObjectFinder.Find("Game Logic/Weapons/Bear Trap (0)");
-            item_Bear_trap_1 = GameObjectFinder.Find("Game Logic/Weapons/Bear Trap (1)");
-            item_Bear_trap_2 = GameObjectFinder.Find("Game Logic/Weapons/Bear Trap (2)");
-            item_Shotgun = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Shotgun (0)");
-            item_Silenced_Revolver_0 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (0)");
-            item_Silenced_Revolver_1 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
-            item_Grenade = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
-            Snake_Crate = GameObjectFinder.Find("/Game Logic/Snakes/SnakeDispenser");
+            item_Knife_0 = Finder.Find("Game Logic/Weapons/Knife (0)");
+            item_Knife_1 = Finder.Find("Game Logic/Weapons/Knife (1)");
+            item_Knife_2 = Finder.Find("Game Logic/Weapons/Knife (2)");
+            item_Knife_3 = Finder.Find("Game Logic/Weapons/Knife (3)");
+            item_Knife_4 = Finder.Find("Game Logic/Weapons/Knife (4)");
+            item_Knife_5 = Finder.Find("Game Logic/Weapons/Knife (5)");
+            item_Bear_trap_0 = Finder.Find("Game Logic/Weapons/Bear Trap (0)");
+            item_Bear_trap_1 = Finder.Find("Game Logic/Weapons/Bear Trap (1)");
+            item_Bear_trap_2 = Finder.Find("Game Logic/Weapons/Bear Trap (2)");
+            item_Shotgun = Finder.Find("Game Logic/Weapons/Unlockables/Shotgun (0)");
+            item_Silenced_Revolver_0 = Finder.Find("Game Logic/Weapons/Unlockables/Luger (0)");
+            item_Silenced_Revolver_1 = Finder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
+            item_Grenade = Finder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
+            Snake_Crate = Finder.Find("/Game Logic/Snakes/SnakeDispenser");
             bool HasFoundLogicEvents = false;
             foreach (var action in WorldUtils.UdonScripts)
             {

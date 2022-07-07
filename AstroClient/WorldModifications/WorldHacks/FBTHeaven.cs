@@ -59,7 +59,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if(_Room_1_Bounds == null)
                 {
-                    _Room_1_Bounds = GameObjectFinder.Find("Scripts/WunderCrossPrivateRoom/Room 1/Room Trigger").GetComponent<BoxCollider>();
+                    _Room_1_Bounds = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 1/Room Trigger").GetComponent<BoxCollider>();
                 }
                 return _Room_1_Bounds;
             }
@@ -72,7 +72,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_2_Bounds == null)
                 {
-                    _Room_2_Bounds = GameObjectFinder.Find("Scripts/WunderCrossPrivateRoom/Room 2/Room Trigger (1)").GetComponent<BoxCollider>();
+                    _Room_2_Bounds = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 2/Room Trigger (1)").GetComponent<BoxCollider>();
                 }
                 return _Room_2_Bounds;
             }
@@ -86,7 +86,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_3_Bounds == null)
                 {
-                    _Room_3_Bounds = GameObjectFinder.Find("Scripts/WunderCrossPrivateRoom/Room 3/Room Trigger (2)").GetComponent<BoxCollider>();
+                    _Room_3_Bounds = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 3/Room Trigger (2)").GetComponent<BoxCollider>();
                 }
                 return _Room_3_Bounds;
             }
@@ -99,7 +99,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_4_Bounds == null)
                 {
-                    _Room_4_Bounds = GameObjectFinder.Find("Scripts/WunderCrossPrivateRoom/Room 4/Room Trigger (3)").GetComponent<BoxCollider>();
+                    _Room_4_Bounds = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 4/Room Trigger (3)").GetComponent<BoxCollider>();
                 }
                 return _Room_4_Bounds;
             }
@@ -295,7 +295,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     try
                     {
-                        var obj = GameObjectFinder.Find(item);
+                        var obj = Finder.Find(item);
                         if (obj != null)
                         {
                             obj.DestroyMeLocal(false);
@@ -327,7 +327,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     Log.Debug("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                 }
-                var doorinvisibleplane = GameObjectFinder.Find("FBT/Plane");
+                var doorinvisibleplane = Finder.Find("FBT/Plane");
                 if (doorinvisibleplane != null)
                 {
                     // make invisible this shit.
@@ -550,7 +550,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_1_ExternalBtn == null)
                 {
-                    return _Room_1_ExternalBtn = GameObjectFinder.Find("Scripts/WunderCrossPrivateRoom/Room 1/Door_Handle_Sign_1 (1)");
+                    return _Room_1_ExternalBtn = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 1/Door_Handle_Sign_1 (1)");
                 }
 
                 return _Room_1_ExternalBtn;
@@ -564,7 +564,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_2_ExternalBtn == null)
                 {
-                    return _Room_2_ExternalBtn = GameObjectFinder.Find("Scripts/WunderCrossPrivateRoom/Room 2/Door_Handle_Sign_2 (1)");
+                    return _Room_2_ExternalBtn = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 2/Door_Handle_Sign_2 (1)");
                 }
 
                 return _Room_2_ExternalBtn;
@@ -578,7 +578,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_3_ExternalBtn == null)
                 {
-                    return _Room_3_ExternalBtn = GameObjectFinder.Find("Scripts/WunderCrossPrivateRoom/Room 3/Door_Handle_Sign_3 (1)");
+                    return _Room_3_ExternalBtn = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 3/Door_Handle_Sign_3 (1)");
                 }
 
                 return _Room_3_ExternalBtn;
@@ -592,7 +592,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_4_ExternalBtn == null)
                 {
-                    return _Room_4_ExternalBtn = GameObjectFinder.Find("Scripts/WunderCrossPrivateRoom/Room 4/Door_Handle_Sign_4 (1)");
+                    return _Room_4_ExternalBtn = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 4/Door_Handle_Sign_4 (1)");
                 }
 
                 return _Room_4_ExternalBtn;
@@ -607,7 +607,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Scripts == null)
                 {
-                    return _Scripts = GameObjectFinder.FindRootSceneObject("Scripts");
+                    return _Scripts = Finder.FindRootSceneObject("Scripts");
                 }
 
                 return _Scripts;

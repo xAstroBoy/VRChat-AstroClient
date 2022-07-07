@@ -28,7 +28,7 @@ namespace AstroClient.Startup.Fixes
             {
                 if(_UserInfoPageTransform == null)
                 {
-                    return _UserInfoPageTransform = GameObjectFinder.Find("UserInterface/MenuContent/Screens/UserInfo")?.transform;
+                    return _UserInfoPageTransform = Finder.Find("UserInterface/MenuContent/Screens/UserInfo")?.transform;
                 }
                 return _UserInfoPageTransform;
             }

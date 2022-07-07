@@ -30,7 +30,7 @@ namespace AstroClient.xAstroBoy.UIPaths
             {
                 if (_ScreenFade == null)
                 {
-                    _ScreenFade = GameObjectFinder.Find("UserInterface/PlayerDisplay/BlackFade/inverted_sphere").transform;
+                    _ScreenFade = Finder.Find("UserInterface/PlayerDisplay/BlackFade/inverted_sphere").transform;
                 }
 
                 return _ScreenFade;
@@ -72,7 +72,7 @@ namespace AstroClient.xAstroBoy.UIPaths
             {
                 if (_AvatarPreviewBase_MainAvatar == null)
                 {
-                    _AvatarPreviewBase_MainAvatar = GameObjectFinder.Find("UserInterface/MenuContent/Screens/Avatar/AvatarPreviewBase/MainRoot").transform;
+                    _AvatarPreviewBase_MainAvatar = Finder.Find("UserInterface/MenuContent/Screens/Avatar/AvatarPreviewBase/MainRoot").transform;
                 }
 
                 return _AvatarPreviewBase_MainAvatar;
@@ -87,7 +87,7 @@ namespace AstroClient.xAstroBoy.UIPaths
             {
                 if (_AvatarPreviewBase_FallbackAvatar == null)
                 {
-                    _AvatarPreviewBase_FallbackAvatar = GameObjectFinder.Find("UserInterface/MenuContent/Screens/Avatar/AvatarPreviewBase/FallbackRoot").transform;
+                    _AvatarPreviewBase_FallbackAvatar = Finder.Find("UserInterface/MenuContent/Screens/Avatar/AvatarPreviewBase/FallbackRoot").transform;
                 }
 
                 return _AvatarPreviewBase_FallbackAvatar;
@@ -103,7 +103,7 @@ namespace AstroClient.xAstroBoy.UIPaths
             {
                 if (_BigMenuElements == null)
                 {
-                    return _BigMenuElements = GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Backdrop").transform;;
+                    return _BigMenuElements = Finder.Find("UserInterface/MenuContent/Backdrop/Backdrop").transform;;
                 }
                 return _BigMenuElements;
             }

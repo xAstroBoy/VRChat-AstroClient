@@ -91,7 +91,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
             if (!QuickDraws.ShowAnswers) return;
             if (QuickDraws.AnswerRevealer != null)
             {
-                QuickDraws.AnswerRevealer.SetText("{size d=1.2}" + __0_mp_word_String.AddRichColorTag(Cheetah.Color.Crayola.Present.JazzberryJam) + "{/size}");
+                QuickDraws.AnswerRevealer.SetText("{fade d=5}<rainb>" + __0_mp_word_String + "</rainb>{/fade}");
             }
         }
 

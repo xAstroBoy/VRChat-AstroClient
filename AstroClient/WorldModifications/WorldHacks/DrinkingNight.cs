@@ -37,7 +37,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Rooms == null)
                 {
-                    return _Rooms = GameObjectFinder.FindRootSceneObject("--- Rooms ---").transform;
+                    return _Rooms = Finder.FindRootSceneObject("--- Rooms ---").transform;
                 }
 
                 return _Rooms;
@@ -52,7 +52,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_AlwaysOn == null)
                 {
-                    return _AlwaysOn = GameObjectFinder.FindRootSceneObject("--- Always On ---").transform;
+                    return _AlwaysOn = Finder.FindRootSceneObject("--- Always On ---").transform;
                 }
 
                 return _AlwaysOn;
@@ -205,7 +205,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void FindEverything()
         {
-            var trash1 = GameObjectFinder.FindRootSceneObject("Cubessss");
+            var trash1 = Finder.FindRootSceneObject("Cubessss");
             if(trash1 != null)
             {
                 trash1.DestroyMeLocal();
@@ -226,7 +226,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             foreach(var item in ElevatorBtnPaths)
             {
-                var obj = GameObjectFinder.Find(item);
+                var obj = Finder.Find(item);
                 if (obj != null)
                 {
                     obj.gameObject.SetActive(true);

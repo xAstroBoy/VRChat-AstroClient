@@ -91,12 +91,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks
 
         private static void FindKnifes()
         {
-            Knife0 = GameObjectFinder.Find("/APPLIANCES/Cutting board (0)/Knife zone/Knife");
+            Knife0 = Finder.Find("/APPLIANCES/Cutting board (0)/Knife zone/Knife");
             if (Knife0 != null)
             {
                 GoldenKnife0 = Knife0.GetOrAddComponent<PatronUnlocker>();
             }
-            Knife1 = GameObjectFinder.Find("/APPLIANCES/Cutting board (1)/Knife zone/Knife");
+            Knife1 = Finder.Find("/APPLIANCES/Cutting board (1)/Knife zone/Knife");
             if (Knife1 != null)
             {
                 GoldenKnife1 = Knife1.GetOrAddComponent<PatronUnlocker>();

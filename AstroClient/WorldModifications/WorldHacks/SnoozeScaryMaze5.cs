@@ -19,7 +19,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (id == WorldIds.SnoozeScaryMaze5)
             {
                 Log.Write($"Recognized {Name} World, Removing Anti-cheat protections..");
-                var world = GameObjectFinder.Find("World");
+                var world = Finder.Find("World");
                 if (world != null)
                 {
                     var roofAndPreventionsanticheat1 = world.transform.FindObject("Etc../Roof & Preventions");

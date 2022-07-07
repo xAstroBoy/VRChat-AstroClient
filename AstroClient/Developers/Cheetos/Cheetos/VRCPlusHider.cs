@@ -21,7 +21,7 @@ namespace AstroClient.Cheetos
         {
             if (ConfigManager.UI.RemoveVRCPlusMenu)
             {
-                var found = GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Header/Tabs/ViewPort/Content/VRC+PageTab");
+                var found = Finder.Find("UserInterface/MenuContent/Backdrop/Header/Tabs/ViewPort/Content/VRC+PageTab");
                 if (found != null)
                 {
                     found.SetActive(false);
@@ -30,7 +30,7 @@ namespace AstroClient.Cheetos
 
             if (ConfigManager.UI.RemoveReportButton)
             {
-                var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/ReportWorldButton");
+                var found = Finder.Find("UserInterface/QuickMenu/ShortcutMenu/ReportWorldButton");
                 if (found != null)
                 {
                     found.SetActive(false);
@@ -39,7 +39,7 @@ namespace AstroClient.Cheetos
 
             if (ConfigManager.UI.RemoveUserIconButton)
             {
-                var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconButton");
+                var found = Finder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconButton");
                 if (found != null)
                 {
                     found.SetActive(false);
@@ -48,8 +48,8 @@ namespace AstroClient.Cheetos
 
             if (ConfigManager.UI.RemoveVRCPlusMiniBanner)
             {
-                var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner");
-                var found_2 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner/Image");
+                var found = Finder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner");
+                var found_2 = Finder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner/Image");
                 if (found != null)
                 {
                     found.SetActive(false);
@@ -63,7 +63,7 @@ namespace AstroClient.Cheetos
 
             if (ConfigManager.UI.RemoveVRCPlusBanner)
             {
-                var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/HeaderContainer/VRCPlusBanner");
+                var found = Finder.Find("UserInterface/QuickMenu/ShortcutMenu/HeaderContainer/VRCPlusBanner");
                 if (found != null)
                 {
                     found.SetActive(false);
@@ -72,7 +72,7 @@ namespace AstroClient.Cheetos
 
             if (ConfigManager.UI.RemoveUserIconCameraButton)
             {
-                var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconCameraButton");
+                var found = Finder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconCameraButton");
                 if (found != null)
                 {
                     found.SetActive(false);
@@ -81,7 +81,7 @@ namespace AstroClient.Cheetos
 
             if (ConfigManager.UI.RemoveVRCPlusThankYou)
             {
-                var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusThankYou");
+                var found = Finder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusThankYou");
                 if (found != null)
                 {
                     found.SetActive(false);
@@ -90,7 +90,7 @@ namespace AstroClient.Cheetos
 
             if (ConfigManager.UI.RemoveGalleryButton)
             {
-                var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/GalleryButton");
+                var found = Finder.Find("UserInterface/QuickMenu/ShortcutMenu/GalleryButton");
                 if (found != null)
                 {
                     found.SetActive(false);

@@ -230,17 +230,17 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 
         internal static void FindAmongUsObjects()
         {
-            var forcepatron = GameObjectFinder.Find("Game Logic/Patreon Credits/");
+            var forcepatron = Finder.Find("Game Logic/Patreon Credits/");
             if (forcepatron != null)
             {
                 forcepatron.GetOrAddComponent<AmongUS_PatronCreditsReader>();
             }
             Log.Write("Removing Anti-Peek Protection...");
-            var occlusion = GameObjectFinder.Find("Environment/skeld occ");
+            var occlusion = Finder.Find("Environment/skeld occ");
             if (occlusion != null) occlusion.DestroyMeLocal();
             Log.Write("Removing Invisible Walls");
-            var invisiblewall = GameObjectFinder.Find("Environment/Invisible wall");
-            var invisiblewall_1 = GameObjectFinder.Find("Environment/Invisible wall (1)");
+            var invisiblewall = Finder.Find("Environment/Invisible wall");
+            var invisiblewall_1 = Finder.Find("Environment/Invisible wall (1)");
             if (invisiblewall != null) invisiblewall.DestroyMeLocal();
             if (invisiblewall_1 != null) invisiblewall_1.DestroyMeLocal();
 

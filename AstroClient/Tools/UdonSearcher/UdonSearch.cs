@@ -405,7 +405,7 @@ namespace AstroClient.Tools.UdonSearcher
 
         internal static List<string> FindUdonAvatarPedestrals()
         {
-            var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
+            var udons = Finder.GetRootGameObjectsComponents<UdonBehaviour>();
             var result = new List<string>();
             if (udons.Count() != 0)
             {

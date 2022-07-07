@@ -210,8 +210,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
             if (IsAmongUsWorld || IsMurder4World)
             {
                 
-                var PlayerEntries = GameObjectFinder.Find("Game Logic/Game Canvas/Game In Progress/Player List/Player List Group"); // SHOULD WORK IN MURDER 4 AND AMONG US.
-                var GameNodes = GameObjectFinder.Find("Game Logic/Player Nodes"); // SHOULD WORK IN MURDER 4 AND AMONG US.
+                var PlayerEntries = Finder.Find("Game Logic/Game Canvas/Game In Progress/Player List/Player List Group"); // SHOULD WORK IN MURDER 4 AND AMONG US.
+                var GameNodes = Finder.Find("Game Logic/Player Nodes"); // SHOULD WORK IN MURDER 4 AND AMONG US.
                 Il2CppArrayBase<Transform> EntryChilds;
                 Il2CppArrayBase<Transform> NodeChilds;
 

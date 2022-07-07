@@ -29,7 +29,7 @@ namespace AstroClient.Tools.UdonSearcher
             int Failed = 0;
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
+            var udons = Finder.GetRootGameObjectsComponents<UdonBehaviour>();
             if (udons.Count() != 0)
             {
                 for (int i1 = 0; i1 < udons.Count; i1++)

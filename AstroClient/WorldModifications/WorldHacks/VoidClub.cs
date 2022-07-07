@@ -49,17 +49,17 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void UnlockHotel()
         {
-            GameObjectFinder.Find("Room_Hotel/Door_system Hotel/Canvas (2)/Button (1)")?.GetComponent<Button>().Press();
+            Finder.Find("Room_Hotel/Door_system Hotel/Canvas (2)/Button (1)")?.GetComponent<Button>().Press();
         }
 
         private static void UnlockJapanese()
         {
-            GameObjectFinder.Find("Japanese_rroom/Door_system Japanese/Canvas (2)/Button (1)")?.GetComponent<Button>().Press();
+            Finder.Find("Japanese_rroom/Door_system Japanese/Canvas (2)/Button (1)")?.GetComponent<Button>().Press();
         }
 
         private static void UnlockForest()
         {
-            GameObjectFinder.Find("Room_forest/Door_system Forest/Canvas (2)/Button (1)")?.GetComponent<Button>().Press();
+            Finder.Find("Room_forest/Door_system Forest/Canvas (2)/Button (1)")?.GetComponent<Button>().Press();
         }
     }
 }

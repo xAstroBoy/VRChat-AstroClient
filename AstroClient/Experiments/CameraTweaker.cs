@@ -21,14 +21,14 @@
             {
                 if (_UserCamera == null)
                 {
-                    var camerapath1 = GameObjectFinder.Find("_Application/TrackingVolume/PlayerObjects/UserCamera").transform;
+                    var camerapath1 = Finder.Find("_Application/TrackingVolume/PlayerObjects/UserCamera").transform;
                     if (camerapath1 != null)
                     {
                         return _UserCamera = camerapath1;
                     }
                     else
                     {
-                        var camerapath2 = GameObjectFinder.Find("UserCamera").transform;
+                        var camerapath2 = Finder.Find("UserCamera").transform;
                         if (camerapath2 != null)
                         {
                             return _UserCamera = camerapath2;
@@ -73,7 +73,7 @@
                 }
                 else
                 {
-                    var item = GameObjectFinder.Find("_Application/TrackingVolume/PlayerObjects").transform;
+                    var item = Finder.Find("_Application/TrackingVolume/PlayerObjects").transform;
                     if (item != null)
                     {
                         return _UserCameraParent = item;

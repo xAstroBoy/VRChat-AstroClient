@@ -44,7 +44,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
             {
                 if (_KmartBlockers == null)
                 {
-                    _KmartBlockers = GameObjectFinder.FindRootSceneObject("Cube");
+                    _KmartBlockers = Finder.FindRootSceneObject("Cube");
                 }
                 return _KmartBlockers;
             }

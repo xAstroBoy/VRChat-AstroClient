@@ -70,7 +70,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
                 if (!isCurrentWorld) return null;
                 if (_Root == null)
                 {
-                    _Root = GameObjectFinder.FindRootSceneObject("Fuck off lol");
+                    _Root = Finder.FindRootSceneObject("Fuck off lol");
                 }
                 return _Root;
             }

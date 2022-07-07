@@ -108,7 +108,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         internal static GameObject GetRandomQuad()
         {
-            List<Transform> list = GameObjectFinder.FindRootSceneObject("ItemManager").transform.Get_Childs();
+            List<Transform> list = Finder.FindRootSceneObject("ItemManager").transform.Get_Childs();
             for (int i = 0; i < list.Count; i++)
             {
                 Transform item = list[i];

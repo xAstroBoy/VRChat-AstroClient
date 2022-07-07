@@ -10,7 +10,7 @@
 
         public static void RegisterChildsInPath(this List<GameObject> Original, string path)
         {
-            var list = GameObjectFinder.ListFind(path);
+            var list = Finder.ListFind(path);
             if (list != null)
             {
                 if (list.Count() != 0)

@@ -48,7 +48,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Jetpack_Panel == null)
                 {
-                    return _Jetpack_Panel = GameObjectFinder.FindRootSceneObject("Jetpack Panel").transform;
+                    return _Jetpack_Panel = Finder.FindRootSceneObject("Jetpack Panel").transform;
                 }
 
                 return _Jetpack_Panel;
@@ -63,7 +63,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_ShaderSphere == null)
                 {
-                    return _ShaderSphere = GameObjectFinder.FindRootSceneObject("ShaderSphere").transform;
+                    return _ShaderSphere = Finder.FindRootSceneObject("ShaderSphere").transform;
                 }
 
                 return _ShaderSphere;
@@ -266,7 +266,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             //    ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
             //    MelonCoroutines.Start(FixRenderSphere());
             //}
-            var UpdateText = GameObjectFinder.Find("ui panel example/Canvas/UpdatesPanel/Extra Text");
+            var UpdateText = Finder.Find("ui panel example/Canvas/UpdatesPanel/Extra Text");
             if(UpdateText != null)
             {
                 var text = UpdateText.GetComponent<UnityEngine.UI.Text>();

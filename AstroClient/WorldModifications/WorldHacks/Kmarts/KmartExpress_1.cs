@@ -51,7 +51,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
             {
                 if (_Root == null)
                 {
-                    _Root = GameObjectFinder.FindRootSceneObject("Fuck off lmao");
+                    _Root = Finder.FindRootSceneObject("Fuck off lmao");
                 }
                 return _Root;
             }

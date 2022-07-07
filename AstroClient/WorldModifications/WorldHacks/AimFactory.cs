@@ -155,13 +155,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                     AimFactoryCheatPage.GetMainButton().SetTextColor(Color.green);
                 }
 
-                var Gamesound = GameObjectFinder.FindRootSceneObject("GameSound");
+                var Gamesound = Finder.FindRootSceneObject("GameSound");
                 if (Gamesound != null)
                 {
                     Gamesound.DestroyMeLocal();
                 }
 
-                var TargetsRootScene = GameObjectFinder.FindRootSceneObject("Targets");
+                var TargetsRootScene = Finder.FindRootSceneObject("Targets");
                 if (TargetsRootScene != null)
                 {
                     UnhollowerBaseLib.Il2CppArrayBase<Transform> list = TargetsRootScene.GetComponentsInChildren<Transform>(true);

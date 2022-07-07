@@ -73,7 +73,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (!isCurrentWorld) return null;
                 if (_Special == null)
                 {
-                    return _Special = GameObjectFinder.FindRootSceneObject("Special");
+                    return _Special = Finder.FindRootSceneObject("Special");
                 }
                 return _Special;
             }
@@ -87,7 +87,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (!isCurrentWorld) return null;
                 if (_Udon_third_Party == null)
                 {
-                    return _Udon_third_Party = GameObjectFinder.FindRootSceneObject("Udon 3rd Party");
+                    return _Udon_third_Party = Finder.FindRootSceneObject("Udon 3rd Party");
                 }
                 return _Udon_third_Party;
             }

@@ -27,7 +27,7 @@ namespace AstroClient.Startup.Fixes
             {
                 if(_AvatarPageTransform == null)
                 {
-                    return _AvatarPageTransform = GameObjectFinder.Find("UserInterface/MenuContent/Screens/Avatar")?.transform;
+                    return _AvatarPageTransform = Finder.Find("UserInterface/MenuContent/Screens/Avatar")?.transform;
                 }
                 return _AvatarPageTransform;
             }
@@ -40,7 +40,7 @@ namespace AstroClient.Startup.Fixes
             {
                 if(_EarlyAccessBS == null)
                 {
-                    return _EarlyAccessBS = GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Backdrop/Image")?.transform;
+                    return _EarlyAccessBS = Finder.Find("UserInterface/MenuContent/Backdrop/Backdrop/Image")?.transform;
                 }
                 return _EarlyAccessBS;
             }

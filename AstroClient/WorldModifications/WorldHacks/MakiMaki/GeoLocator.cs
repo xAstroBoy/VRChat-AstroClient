@@ -68,7 +68,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Game == null)
                 {
-                    return _Game = GameObjectFinder.FindRootSceneObject("Game");
+                    return _Game = Finder.FindRootSceneObject("Game");
                 }
 
                 return _Game;
@@ -98,7 +98,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_PlayerManager == null)
                 {
-                    return _PlayerManager = GameObjectFinder.FindRootSceneObject("PlayerManager");
+                    return _PlayerManager = Finder.FindRootSceneObject("PlayerManager");
                 }
 
                 return _PlayerManager;

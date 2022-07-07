@@ -145,7 +145,7 @@ namespace AstroClient.ClientUI.LoadingScreen
             {
                 Log.Debug("Creating " + obj.name);
                 step = 1;
-                var UIRoot = GameObjectFinder.Find(rootDest);
+                var UIRoot = Finder.Find(rootDest);
                 if (UIRoot != null)
                 {
                     Log.Debug($"Found Root : {rootDest}");

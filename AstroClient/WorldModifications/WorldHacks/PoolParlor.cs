@@ -205,7 +205,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     Log.Warn("failed to Find intl.cue-1");
                 }
 
-                var networkingpath = GameObjectFinder.Find("Modules/BilliardsModule/Managers/NetworkingManager");
+                var networkingpath = Finder.Find("Modules/BilliardsModule/Managers/NetworkingManager");
                 if (networkingpath != null)
                 {
                     var NetworkingManagerEvent = networkingpath.FindUdonEvent("_OnPlayerPrepareShoot");
@@ -238,7 +238,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 GetCurrentCue();
                 SetupCues();
                 SetupBruteforcerForPopCat();
-                var guideline = GameObjectFinder.Find("Modules/BilliardsModule/intl.balls/guide/guide_display");
+                var guideline = Finder.Find("Modules/BilliardsModule/intl.balls/guide/guide_display");
                 if(guideline != null)
                 {
                     Guideline = guideline;
@@ -463,7 +463,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         public static void SetupCues()
         {
-            var cue1 = GameObjectFinder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-0");
+            var cue1 = Finder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-0");
             if (cue1 != null)
             {
                 var Primary = cue1.FindObject("primary");
@@ -489,7 +489,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     }
                 }
             }
-            var cue2 = GameObjectFinder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-1");
+            var cue2 = Finder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-1");
             if (cue2 != null)
             {
                 var Primary_2 = cue2.FindObject("primary");

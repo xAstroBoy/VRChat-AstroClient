@@ -208,7 +208,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
                 if (!isPuttPuttPond) return null;
                 if (_SpawnArea == null)
                 {
-                    return _SpawnArea = GameObjectFinder.FindRootSceneObject("Spawn Area");
+                    return _SpawnArea = Finder.FindRootSceneObject("Spawn Area");
                 }
 
                 return _SpawnArea;

@@ -57,7 +57,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-            var PinkRoomDoor_DNDBtnObj = GameObjectFinder.Find("PinkRoomDoor/Inside/UI/Do Not Disturb Button");
+            var PinkRoomDoor_DNDBtnObj = Finder.Find("PinkRoomDoor/Inside/UI/Do Not Disturb Button");
             if (PinkRoomDoor_DNDBtnObj != null)
             {
                 var toggle = PinkRoomDoor_DNDBtnObj.GetComponent<UnityEngine.UI.Toggle>();
@@ -67,7 +67,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
             }
-            var PinkRoomDoor_LockToggle = GameObjectFinder.Find("PinkRoomDoor/Inside/UI/Toggle");
+            var PinkRoomDoor_LockToggle = Finder.Find("PinkRoomDoor/Inside/UI/Toggle");
             if (PinkRoomDoor_LockToggle != null)
             {
                 var toggle = PinkRoomDoor_LockToggle.GetComponent<UnityEngine.UI.Toggle>();
@@ -78,7 +78,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
 
 
-            var OrangeRoomDoor_DNDBtnObj = GameObjectFinder.Find("OrangeRoomDoor/Inside/UI/Do Not Disturb Button");
+            var OrangeRoomDoor_DNDBtnObj = Finder.Find("OrangeRoomDoor/Inside/UI/Do Not Disturb Button");
             if (OrangeRoomDoor_DNDBtnObj != null)
             {
                 var toggle = OrangeRoomDoor_DNDBtnObj.GetComponent<UnityEngine.UI.Toggle>();
@@ -88,7 +88,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
             }
-            var OrangeRoomDoor_LockToggle = GameObjectFinder.Find("OrangeRoomDoor/Inside/UI/Toggle");
+            var OrangeRoomDoor_LockToggle = Finder.Find("OrangeRoomDoor/Inside/UI/Toggle");
             if (OrangeRoomDoor_LockToggle != null)
             {
                 var toggle = OrangeRoomDoor_LockToggle.GetComponent<UnityEngine.UI.Toggle>();
@@ -98,7 +98,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-            var GreenRoomDoor_DNDBtnObj = GameObjectFinder.Find("GreenRoomDoor/Inside/UI/Do Not Disturb Button");
+            var GreenRoomDoor_DNDBtnObj = Finder.Find("GreenRoomDoor/Inside/UI/Do Not Disturb Button");
             if (GreenRoomDoor_DNDBtnObj != null)
             {
                 var toggle = GreenRoomDoor_DNDBtnObj.GetComponent<UnityEngine.UI.Toggle>();
@@ -108,7 +108,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
 
             }
-            var GreenRoomDoor_LockToggle = GameObjectFinder.Find("GreenRoomDoor/Inside/UI/Toggle");
+            var GreenRoomDoor_LockToggle = Finder.Find("GreenRoomDoor/Inside/UI/Toggle");
             if (GreenRoomDoor_LockToggle != null)
             {
                 var toggle = GreenRoomDoor_LockToggle.GetComponent<UnityEngine.UI.Toggle>();
@@ -197,7 +197,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_SovOS == null)
                 {
-                    _SovOS = GameObjectFinder.Find("SovOS").transform;
+                    _SovOS = Finder.Find("SovOS").transform;
                 }
                 return _SovOS;
             }

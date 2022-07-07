@@ -14,7 +14,7 @@
             {
                 if (_VRChat_UIRoot == null)
                 {
-                    return _VRChat_UIRoot = GameObjectFinder.Find("UserInterface/MenuContent/Popups/LoadingPopup");
+                    return _VRChat_UIRoot = Finder.Find("UserInterface/MenuContent/Popups/LoadingPopup");
                 }
                 return _VRChat_UIRoot;
             }
@@ -56,7 +56,7 @@
             {
                 if (_VRChat_loginBubbles == null)
                 {
-                    return _VRChat_loginBubbles = GameObjectFinder.Find("UserInterface/LoadingBackground_TealGradient_Music/_FX_ParticleBubbles");
+                    return _VRChat_loginBubbles = Finder.Find("UserInterface/LoadingBackground_TealGradient_Music/_FX_ParticleBubbles");
                 }
                 return _VRChat_loginBubbles;
             }
@@ -69,7 +69,7 @@
             {
                 if (_VRChat_StartScreen == null)
                 {
-                    return _VRChat_StartScreen = GameObjectFinder.Find("UserInterface/LoadingBackground_TealGradient_Music");
+                    return _VRChat_StartScreen = Finder.Find("UserInterface/LoadingBackground_TealGradient_Music");
                 }
                 return _VRChat_StartScreen;
             }
@@ -82,7 +82,7 @@
             {
                 if (_VRChat_originalStartScreenAudio == null)
                 {
-                    return _VRChat_originalStartScreenAudio = GameObjectFinder.Find("UserInterface/LoadingBackground_TealGradient_Music/LoadingSound");
+                    return _VRChat_originalStartScreenAudio = Finder.Find("UserInterface/LoadingBackground_TealGradient_Music/LoadingSound");
                 }
                 return _VRChat_originalStartScreenAudio;
             }
@@ -95,7 +95,7 @@
             {
                 if (_VRChat_originalStartScreenSkyCube == null)
                 {
-                    return _VRChat_originalStartScreenSkyCube = GameObjectFinder.Find("UserInterface/LoadingBackground_TealGradient_Music/SkyCube_Baked");
+                    return _VRChat_originalStartScreenSkyCube = Finder.Find("UserInterface/LoadingBackground_TealGradient_Music/SkyCube_Baked");
                 }
                 return _VRChat_originalStartScreenSkyCube;
             }

@@ -55,10 +55,10 @@ namespace AstroClient.Streamer
                         switch (apiuser.id)
                         {
                             case Streamers.StarNovaKitty:
-                                player.AddSingleTag("A Sweet Kitty", Color.FromArgb(155, 79, 232)); ;
+                                player.AddSingleTag("<rainb>A Sweet Kitty</rainb>", Color.FromArgb(155, 79, 232)); ;
                                 break;
                             case Streamers.minikatttttt:
-                                player.AddSingleTag("A Sensible Mini!", Color.FromArgb(13, 181, 164)); ;
+                                player.AddSingleTag("<wave>A Sensible Mini!</wave>", Color.FromArgb(13, 181, 164)); ;
                                 break;
                             case Streamers.Cambly:
                                 player.AddSingleTag("A Clumsy Birb", Color.FromArgb(96, 132, 240));
@@ -75,7 +75,7 @@ namespace AstroClient.Streamer
                                 player.AddSingleTag("Golden Toast Protector!", Color.FromArgb(255, 202, 66));
                                 break;
                             case Streamers.Ratchet232:
-                                player.AddSingleTag("Mad Doggo!", Color.FromArgb(140, 35, 35));
+                                player.AddSingleTag("<shake>Mad Doggo!</shake>", Color.FromArgb(140, 35, 35));
                                 break;
                             case Streamers.Thor_ChanVR:
                                 player.AddSingleTag("VRChat God!", Color.FromArgb(194, 138, 17));

@@ -58,6 +58,9 @@ public struct Color
     /// </summary>
     public static Color RandomAlpha => new(Randomizer.Byte(255), Randomizer.Byte(255), Randomizer.Byte(255), Randomizer.Byte(255));
 
+    public static Color CheetoOrange = new("#F79239");
+    public static Color CheetoYellow = new("#FFFB00");
+
     /// <summary>
     /// Interpolates between a and b by t.
     /// </summary>

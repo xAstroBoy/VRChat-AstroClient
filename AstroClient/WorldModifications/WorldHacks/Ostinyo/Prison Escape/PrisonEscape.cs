@@ -207,13 +207,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             //    }
             //}
 
-            var heightlimiter = GameObjectFinder.Find("Scripts/Avatar Height Checker");
+            var heightlimiter = Finder.Find("Scripts/Avatar Height Checker");
             if(heightlimiter != null)
             {
                 heightlimiter.DestroyMeLocal(true);
             }
                 
-            var occluder = GameObjectFinder.FindRootSceneObject("Occlusion");
+            var occluder = Finder.FindRootSceneObject("Occlusion");
 
             if (occluder != null)
             {
@@ -696,7 +696,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
             
-            foreach (var item in GameObjectFinder.GetRootGameObjectsComponents<Toggle>(true))
+            foreach (var item in Finder.GetRootGameObjectsComponents<Toggle>(true))
             {
                 if(item.name.Equals("Toggle Patron Guns"))
                 {
@@ -1894,7 +1894,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (_Spawn_Area == null)
                     {
-                        return _Spawn_Area = GameObjectFinder.FindRootSceneObject("Spawn Area");
+                        return _Spawn_Area = Finder.FindRootSceneObject("Spawn Area");
                     }
                     return _Spawn_Area;
                 }
@@ -1987,7 +1987,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (_Scripts == null)
                     {
-                        return _Scripts = GameObjectFinder.FindRootSceneObject("Scripts");
+                        return _Scripts = Finder.FindRootSceneObject("Scripts");
                     }
                     return _Scripts;
                 }
@@ -2026,7 +2026,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (_Openables == null)
                     {
-                        return _Openables = GameObjectFinder.FindRootSceneObject("Openables");
+                        return _Openables = Finder.FindRootSceneObject("Openables");
                     }
                     return _Openables;
                 }
@@ -2084,7 +2084,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (_Prison == null)
                     {
-                        return _Prison = GameObjectFinder.FindRootSceneObject("Prison");
+                        return _Prison = Finder.FindRootSceneObject("Prison");
                     }
                     return _Prison;
                 }
@@ -2243,7 +2243,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (_ITEMS == null)
                     {
-                        return _ITEMS = GameObjectFinder.FindRootSceneObject("Items");
+                        return _ITEMS = Finder.FindRootSceneObject("Items");
                     }
                     return _ITEMS;
                 }
