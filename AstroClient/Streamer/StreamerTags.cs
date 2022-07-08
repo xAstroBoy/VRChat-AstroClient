@@ -75,7 +75,7 @@ namespace AstroClient.Streamer
                                 player.AddSingleTag("Golden Toast Protector!", Color.FromArgb(255, 202, 66));
                                 break;
                             case Streamers.Ratchet232:
-                                player.AddSingleTag("<shake>Mad Doggo!</shake>", Color.FromArgb(140, 35, 35));
+                                player.AddSingleTag("<shake a=0.1>Mad Doggo!</shake>", Color.FromArgb(140, 35, 35));
                                 break;
                             case Streamers.Thor_ChanVR:
                                 player.AddSingleTag("VRChat God!", Color.FromArgb(194, 138, 17));
