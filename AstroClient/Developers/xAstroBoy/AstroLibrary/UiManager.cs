@@ -46,8 +46,8 @@ namespace AstroClient.xAstroBoy
         internal static void Init()
         {
 
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)), null, GetPatch(nameof(OnQuickMenuOpen_Event)));
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null, GetPatch(nameof(OnQuickMenuClose_Event)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)),  GetPatch(nameof(OnQuickMenuOpen_Event)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), GetPatch(nameof(OnQuickMenuClose_Event)));
 
             new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_Boolean_0)), GetPatch(nameof(OnUIPageToggle)));
             new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_Boolean_0)), GetPatch(nameof(OnUIPageToggle)));
@@ -172,6 +172,7 @@ namespace AstroClient.xAstroBoy
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)
         {
+            
             // There's actually no better way to do this https://github.com/knah/Il2CppAssemblyUnhollower/blob/master/UnhollowerBaseLib/Il2CppException.cs
             if (__exception is NullReferenceException || __exception.Message.Contains("System.NullReferenceException"))
                 return null;

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using AstroClient.AstroMonos.Components.Custom.Random;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components.Bouncer;
@@ -25,6 +26,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components
             FunBehavioursSubMenu.Init_FunMenu(main);
             FreezerSubMenu.Init_FreezerMenu(main);
             new QMSingleButton(main, "Reveal Current Object Keycode ", () => { ComponentUtils.GetOrAddComponent<KeypadRevealer>(Tweaker_Object.GetGameObjectToEdit()); }, "(works only with keycodes Objects.)");
+            new QMSingleButton(main, "Add Chair To Current Pickup ", () => { ComponentUtils.GetOrAddComponent<PickupChair>(Tweaker_Object.GetGameObjectToEdit()); }, "(works only with keycodes Objects.)");
 
             _ = new QMSingleButton(main, "Remove All Components", () => { KillCustomComponents(); }, "Kill All Custom Add-ons.", Color.Red);
         }

@@ -1,6 +1,7 @@
 ﻿using AstroClient.ClientActions;
 using AstroClient.PlayerList.Entries;
 using AstroClient.Startup.Hooks;
+using AstroClient.xAstroBoy.Extensions;
 using VRC.Core;
 
 namespace AstroClient.AstroMonos.Components.Tools
@@ -577,19 +578,13 @@ namespace AstroClient.AstroMonos.Components.Tools
             [HideFromIl2Cpp]
             get
             {
-                if (SDKBase_Pickup != null) return SDKBase_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
-                else if (SDK2_Pickup != null) return SDK2_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
-                else if (SDK3_Pickup != null) return SDK3_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
-                else return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (SDKBase_Pickup != null) SDKBase_Pickup.currentlyHeldBy = value;
-                else if (SDK2_Pickup != null) SDK2_Pickup.currentlyHeldBy = value;
-                else if (SDK3_Pickup != null) SDK3_Pickup.currentlyHeldBy = value;
-                Run_OnOnPickupPropertyChanged();
-
+                try
+                {
+                    if (SDK2_Pickup != null) return SDK2_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
+                    else if (SDK3_Pickup != null) return SDK3_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
+                }
+                catch{}
+                return null;
             }
         }
 
@@ -1033,6 +1028,11 @@ namespace AstroClient.AstroMonos.Components.Tools
 
                 return "None";
             }
+        }
+
+        internal void Drop()
+        {
+            currentlyHeldBy.Drop();
         }
 
         internal VRCPlayerApi CurrentHolder

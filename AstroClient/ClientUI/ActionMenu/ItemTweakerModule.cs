@@ -40,6 +40,10 @@ namespace AstroClient.ClientUI.ActionMenu
                     CustomSubMenu.AddToggle("Use Gravity", Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<RigidBodyController>().useGravity, (toggle) => { PhysicsSubmenu.Modified_SetGravity(toggle); }, null);
                     CustomSubMenu.AddToggle("is Kinematic", Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<RigidBodyController>().isKinematic, (toggle) => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(toggle); }, null);
                 });
+                //CustomSubMenu.AddSubMenu("Component Editor", () =>
+                //{
+
+                //});
 
                 // TODO: Add Textures!
             }, Icons.box);

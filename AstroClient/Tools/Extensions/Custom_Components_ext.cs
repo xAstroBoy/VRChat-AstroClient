@@ -731,6 +731,8 @@ namespace AstroClient.Tools.Extensions
                 var PickupController = obj.GetComponent<PickupController>();
                 var StretchyCheese = obj.GetComponent<StretchyCheeseBehaviour>();
                 var ObjectFreezer = obj.GetComponent<ObjectFreezer>();
+                var PickupSitter = obj.GetComponent<PickupChair>();
+
                 if (Bools.AllowAttackerComponent)
                 {
                     var attacker = obj.GetComponent<PlayerAttacker>();
@@ -781,6 +783,10 @@ namespace AstroClient.Tools.Extensions
                 if (ObjectFreezer != null)
                 {
                     ObjectFreezer.DestroyMeLocal();
+                }
+                if(PickupSitter != null)
+                {
+                    PickupSitter.DestroyMeLocal();
                 }
 
                 if (ResetRigidBody)

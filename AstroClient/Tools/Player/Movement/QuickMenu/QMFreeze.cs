@@ -91,10 +91,7 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
 
         internal static bool FreezePlayerOnQMOpen
         {
-            get
-            {
-                return ConfigManager.Movement.QMFreeze;
-            }
+            get => ConfigManager.Movement.QMFreeze;
             set
             {
                 ConfigManager.Movement.QMFreeze = value;

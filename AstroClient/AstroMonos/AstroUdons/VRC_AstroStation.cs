@@ -94,6 +94,8 @@ namespace AstroClient.AstroMonos.AstroUdons
             {
                 if (AstroStation.Identifier == Identifier)
                 {
+                    StationTrigger.DisableInteractive = true;
+                    isSeated = true;
                     OnStationEnterEvent.SafetyRaise();
                 }
             }
@@ -106,6 +108,8 @@ namespace AstroClient.AstroMonos.AstroUdons
             {
                 if (AstroStation.Identifier == Identifier)
                 {
+                    StationTrigger.DisableInteractive = false;
+                    isSeated = false;
                     OnStationExitEvent.SafetyRaise();
                 }
             }
@@ -124,16 +128,12 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         internal void ExitStation()
         {
-            if (isSeated)
-            {
-                var value = BlockVanillaStationExit;
-                StationTrigger.DisableInteractive = false;
-                Station.ExitStation(Player);
-                OnStationExitEvent.SafetyRaise();
-                isSeated = false;
-                BlockVanillaStationExit = value;
-            }
-
+            isSeated = false;
+            var value = BlockVanillaStationExit;
+            StationTrigger.DisableInteractive = false;
+            Station.ExitStation(Player);
+            OnStationExitEvent.SafetyRaise();
+            BlockVanillaStationExit = value;
         }
 
 
@@ -184,12 +184,18 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         private void OnDisable()
         {
-            Station.enabled = false;
+            if (Station != null)
+            {
+                Station.enabled = false;
+            }
         }
 
         private void OnEnable()
         {
-            Station.enabled = true;
+            if (Station != null)
+            {
+                Station.enabled = true;
+            }
         }
 
         internal VRCPlayerApi Player
@@ -198,21 +204,21 @@ namespace AstroClient.AstroMonos.AstroUdons
             get => Networking.LocalPlayer;
         }
 
-        internal Action OnStationEnterEvent;
-        internal Action OnStationExitEvent;
+        internal Action OnStationEnterEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Action OnStationExitEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal VRC.SDKBase.VRCStation Station;
-        internal VRC_AstroInteract StationTrigger;
-        internal bool BlockVanillaStationExit = false;
+        internal VRC.SDKBase.VRCStation Station { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal VRC_AstroInteract StationTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal bool BlockVanillaStationExit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
-        private VRCInput inAxisVertical;
+        private VRCInput inAxisVertical  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private VRCInput inAxisHorizontal;
+        private VRCInput inAxisHorizontal { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool isSeated  = false;
+        private bool isSeated  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
-        internal string Identifier;
+        internal string Identifier { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal float RespawnHeight = -100f;
+        internal float RespawnHeight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = -100f;
     }
 }

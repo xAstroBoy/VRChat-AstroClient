@@ -126,6 +126,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_BilliardsModuleReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_UpgradeEditor.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\RespawnerHelper.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Random\PickupChair.cs" />
     <Compile Include="AstroMonos\Prefabs\JetpackController.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Randomizer.cs" />
     <Compile Include="AstroMonos\Components\Tools\OnPrefabSpawn.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="Developers\febucci\Utilities\TAnimExtensions.cs" />
     <Compile Include="Developers\febucci\Utilities\TextUtilities.cs" />
     <Compile Include="Developers\febucci\Utilities\Tween.cs" />
+    <Compile Include="Developers\xAstroBoy\AstroLibrary\Extensions\VRCHandGrasperExtensions.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
@@ -328,7 +330,7 @@
     <Compile Include="ClientUI\QuickMenuGUI\SettingsMenu\Settings_PickupProtector.cs" />
     <Compile Include="CustomClasses\KeypadBruteforcer.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\VRChat_LoadingScreenObjects.cs" />
-    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\Freezer\FreezerSubMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\FreezerSubMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\UserMenu\OrbitUserMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\UserMenu\PickupProtector.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\UserMenu\WatcherUserMenu.cs" />
@@ -529,7 +531,7 @@
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\ScrollMenus\Prefabs\PrefabSpawnerScrollMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\ScrollMenus\VRC_Triggers\VRC_TriggersScrollMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\ScrollMenus\WorldObjects\WorldObjectsScrollMenu.cs" />
-    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\Fun\FunBehavioursSubMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\FunBehavioursSubMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\TweakerWings.cs" />
     <Compile Include="Developers\Kaned\Pathfinder.cs" />
     <Compile Include="Developers\Kaned\Pathfinding.cs" />
@@ -696,16 +698,16 @@
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Spawner\SpawnerSubmenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\TweakerV2Main.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Physic\ColliderEditor\ColliderEditor.cs" />
-    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\Rocket\RocketComponentSubMenu.cs" />
-    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\Crazy\CrazyComponentSubMenu.cs" />
-    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\Spinner\SpinnerSubMenu.cs" />
-    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\Bouncer\BouncerSubMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\RocketComponentSubMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\CrazyComponentSubMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\SpinnerSubMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\BouncerSubMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Components\ComponentSubMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Physic\Forces\ForcesSubmenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Physic\Constraints\ConstraintsSubmenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Pickup\PickupSubmenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Scale\ScaleSubmenu.cs" />
-    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\ObjectInfoSubMenu\ObjectInfoSubMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\ObjectInfoSubMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\LightControlMenu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\MovementMenu.cs" />

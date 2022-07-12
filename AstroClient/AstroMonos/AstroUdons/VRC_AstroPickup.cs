@@ -1,5 +1,6 @@
 using AstroClient.ClientActions;
 using AstroClient.Tools.UdonEditor;
+using AstroClient.xAstroBoy.Extensions;
 using VRC.SDKBase;
 using VRC.Udon.Common;
 
@@ -92,24 +93,36 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         private void UdonBehaviour_Event_OnPickup(UdonBehaviour item)
         {
-            if(item.Equals(UdonBehaviour)) OnPickup.SafetyRaise();
+            if(item.Equals(UdonBehaviour))
+            {
+                OnPickup.SafetyRaise();
+                isHeld = true;
+            }
         }
 
 
         private void UdonBehaviour_Event_OnPickupUseUp(UdonBehaviour item)
         {
-            if (item.Equals(UdonBehaviour)) OnPickupUseUp.SafetyRaise();
+            if (item.Equals(UdonBehaviour))
+            {
+                OnPickupUseUp.SafetyRaise();
+            }
         }
         private void UdonBehaviour_Event_OnPickupUseDown(UdonBehaviour item)
         {
-            if (item.Equals(UdonBehaviour)) OnPickupUseDown.SafetyRaise();
-
+            if (item.Equals(UdonBehaviour))
+            {
+                OnPickupUseDown.SafetyRaise();
+            }
         }
 
         private void UdonBehaviour_Event_OnDrop(UdonBehaviour item)
         {
-            if (item.Equals(UdonBehaviour)) OnDrop.SafetyRaise();
-
+            if (item.Equals(UdonBehaviour))
+            {
+                OnDrop.SafetyRaise();
+                isHeld = true;
+            }
         }
 
         private void OnDestroy()
@@ -138,6 +151,21 @@ namespace AstroClient.AstroMonos.AstroUdons
             {
                 UdonBehaviour.enabled = true;
             }
+        }
+
+        internal void Drop()
+        {
+            try
+            {
+                if (PickupController != null)
+                {
+                    if (PickupController.currentlyHeldBy != null)
+                    {
+                        PickupController.currentlyHeldBy.Drop();
+                    }
+                }
+            }
+            catch{} // SHUT THE FUCK UP
         }
 
 
@@ -187,6 +215,7 @@ namespace AstroClient.AstroMonos.AstroUdons
         internal Action OnPickupUseDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Action OnDrop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
+        internal bool isHeld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private PickupController _PickupController;
 
@@ -235,6 +264,13 @@ namespace AstroClient.AstroMonos.AstroUdons
             }
         }
 
+        internal bool pickupable
+        {
+            [HideFromIl2Cpp]
+            get => PickupController.pickupable;
+            [HideFromIl2Cpp]
+            set => PickupController.pickupable = value;
+        }
 
         private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
