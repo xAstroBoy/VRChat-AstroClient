@@ -70,7 +70,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 pickup = gameObject.GetOrAddComponent<PickupController>();
                 renderer = gameObject.GetOrAddComponent<MeshRenderer>();
                 PickupEvents = gameObject.AddComponent<VRC_AstroPickup>();
-                this.gameObject.IgnoreLocalPlayerCollision();
+                gameObject.IgnoreLocalPlayerCollision();
                 if (renderer != null) renderer.material = Materials.crystal_003;
 
                 if (body != null)
@@ -120,11 +120,20 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
         private void OnCollisionEnter(Collision collision)
         {
+            OnColliderHit(collision.collider);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            OnColliderHit(other);
+        }
+
+        private void OnColliderHit(Collider collision)
+        {
             if (!Activated) return;
             if (collision.transform.name.Contains("VRCPlayer")) return;
             if (collision.transform.root.name.Contains("VRCPlayer")) return;
             if (collision == null) return;
-            if (collision.collider == null) return;
             Tweaker_Object.SetObjectToEdit(collision.transform.gameObject, true);
             PopupUtils.QueHudMessage($"<color=#FFA500>Set Object {collision.transform.gameObject.name} In Item Tweaker</color>");
             Activated = false;

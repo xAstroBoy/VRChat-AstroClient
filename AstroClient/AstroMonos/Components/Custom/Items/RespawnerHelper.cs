@@ -1,28 +1,26 @@
-using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
-
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {
-    using System;
+    using AstroClient.AstroMonos.AstroUdons;
+    using AstroClient.AstroMonos.Components.Tools;
+    using AstroClient.ClientResources.Loaders;
     using AstroClient.Tools.Extensions;
-    using AstroUdons;
     using ClientAttributes;
-    using ClientResources.Loaders;
     using Il2CppSystem.Collections.Generic;
-    using Spawnables.Enderpearl;
-    using Tools;
+    using System;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using xAstroBoy.Utility;
+    using IntPtr = System.IntPtr;
+    using Object = Il2CppSystem.Object;
 
     [RegisterComponent]
     public class RespawnerHelper : MonoBehaviour
     {
-        public List<MonoBehaviour> AntiGcList;
+        private List<Object> AntiGarbageCollection = new();
 
-        public RespawnerHelper(IntPtr obj0) : base(obj0)
+        public RespawnerHelper(IntPtr ptr) : base(ptr)
         {
-            AntiGcList = new List<MonoBehaviour>(1);
-            AntiGcList.Add(this);
+            AntiGarbageCollection.Add(this);
         }
 
         internal PickupController pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
@@ -70,7 +68,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                 pickup = gameObject.GetOrAddComponent<PickupController>();
                 renderer = gameObject.GetOrAddComponent<MeshRenderer>();
                 PickupEvents = gameObject.AddComponent<VRC_AstroPickup>();
-                this.gameObject.IgnoreLocalPlayerCollision();
+                gameObject.IgnoreLocalPlayerCollision();
                 if (renderer != null) renderer.material = Materials.chocolate;
 
                 if (body != null)
@@ -86,7 +84,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
                     pickup.pickupable = true;
                 }
 
-                if (pickup.RigidBodyController != null)
+                if (pickup != null && pickup.RigidBodyController != null)
                 {
                     if (!pickup.RigidBodyController.EditMode) pickup.RigidBodyController.EditMode = true;
 
@@ -120,28 +118,23 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!Activated) return;
-            if (collision.transform.name.Contains("VRCPlayer")) return;
-            if (collision.transform.root.name.Contains("VRCPlayer")) return;
-            if (collision == null) return;
-            if (collision.collider == null) return;
-            var Respawner = collision.gameObject.GetGetInChildrens_OrParent<Respawner>();
-            if (Respawner == null) return;
-            Respawner.Respawn();
+            OnColliderHit(collision.collider);
         }
-        private void OnTriggerEnter(Collision collision)
+
+        private void OnTriggerEnter(Collider other)
+        {
+            OnColliderHit(other);
+        }
+
+        private void OnColliderHit(Collider collision)
         {
             if (!Activated) return;
             if (collision.transform.name.Contains("VRCPlayer")) return;
             if (collision.transform.root.name.Contains("VRCPlayer")) return;
-            if (collision == null) return;
-            if (collision.collider == null) return;
             var Respawner = collision.gameObject.GetGetInChildrens_OrParent<Respawner>();
             if (Respawner == null) return;
             Respawner.Respawn();
         }
-
-
 
         private void OnDrop()
         {

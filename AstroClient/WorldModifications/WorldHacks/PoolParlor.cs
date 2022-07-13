@@ -273,6 +273,7 @@ namespace AstroClient.WorldModifications.WorldHacks
            "sync",
         };
 
+        
         private static void SetupBruteforcerForPopCat()
         {
 

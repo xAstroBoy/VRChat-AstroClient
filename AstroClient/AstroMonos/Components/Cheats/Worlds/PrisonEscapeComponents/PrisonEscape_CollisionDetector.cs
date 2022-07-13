@@ -1,8 +1,4 @@
-﻿using System;
-using AstroClient.ClientActions;
-using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
-using AstroClient.WorldModifications.WorldsIds;
-
+﻿
 namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Colors;
@@ -21,6 +17,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
     using Object = Il2CppSystem.Object;
+    using System;
+    using AstroClient.ClientActions;
+    using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
+    using AstroClient.WorldModifications.WorldsIds;
 
     [RegisterComponent]
     public class PrisonEscape_CollisionDetector : MonoBehaviour
@@ -74,7 +74,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             HasSubscribed = false;
         }
-        void OnTriggerStay(Collider other)
+
+        private void OnTriggerStay(Collider other)
         {
             OnColliderHit(other);
         }

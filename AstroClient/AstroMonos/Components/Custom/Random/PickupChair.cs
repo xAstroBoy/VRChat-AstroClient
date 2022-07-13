@@ -149,7 +149,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             if (newchair != null)
             {
                 newchair.name = ChairName;
-                newchair.transform.localScale = new Vector3(0.092f, 0.092f, 0.092f);
+                newchair.transform.localScale = new Vector3(cubeSize, cubeSize, cubeSize);
                 
                 var coll = newchair.GetComponent<Collider>();
                 if (coll != null)
@@ -172,6 +172,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
         
         private string ChairName => "AstroClient Pickup Chair";
         private bool _HasSubscribed = false;
+        private float cubeSize => 0.082f;
 
         private bool HasSubscribed
         {

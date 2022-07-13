@@ -21,6 +21,7 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
             }
             Vector3 bonePosition = Networking.LocalPlayer.GetBonePosition(HumanBodyBones.RightHand);
             GameObject Cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            Cube.gameObject.AddComponent<SphereCollider>().isTrigger = true;
             Cube.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
             Cube.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
             Cube.transform.position = bonePosition;
