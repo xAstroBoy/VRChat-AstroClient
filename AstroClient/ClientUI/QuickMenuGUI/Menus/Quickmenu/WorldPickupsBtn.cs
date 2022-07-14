@@ -1,7 +1,6 @@
 ﻿using System;
 using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.Tools.ObjectEditor;
-using AstroClient.Tools.QPens;
 using AstroClient.Tools.World;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
@@ -17,7 +16,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
 
             new QMSingleButton(sub, "Restore Original pickups pos (Revert Rigidbody Edits)", () => { GameObjectMenu.TeleportPickupsToTheirDefaultPosition(true); }, "Restores all Pickups Original Position!");
             new QMSingleButton(sub, "Restore Original pickups pos (Dont Revert Rigidbody Edits)", () => { GameObjectMenu.TeleportPickupsToTheirDefaultPosition(false); }, "Restores all Pickups Original Position!");
-            _ = new QMSingleButton(sub, "Clear QPens Drawing Globally", new Action(QVPensUtils.ResetQPensGlobal), "Clears QPens Globally");
+           // _ = new QMSingleButton(sub, "Clear QPens Drawing Globally", new Action(QVPensUtils.ResetQPensGlobal), "Clears QPens Globally");
             _ = new QMSingleButton(sub, "Allow Theft Globally", () => { WorldUtils_Old.Get_Pickups().Pickup_Set_DisallowTheft(false); }, "Allows Theft");
             _ = new QMSingleButton(sub, "Disallow Theft Globally", () => { WorldUtils_Old.Get_Pickups().Pickup_Set_DisallowTheft(true); }, "Blocks Theft");
 

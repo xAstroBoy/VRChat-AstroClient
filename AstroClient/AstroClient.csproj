@@ -727,7 +727,6 @@
     <Compile Include="Tools\ObjectEditor\ObjectUtils.cs" />
     <Compile Include="Tools\Player\PlayerCloner.cs" />
     <Compile Include="Tools\Player\Hands.cs" />
-    <Compile Include="Tools\QPens\QVPensUtils.cs" />
     <Compile Include="Tools\UdonSearcher\UdonSearch.cs" />
     <Compile Include="Tools\World\WorldUtils_Old.cs" />
     <Compile Include="Tools\XrefScannerUtils.cs" />
@@ -1633,6 +1632,7 @@
     <Folder Include="ClientResources\ProgramsArchive\" />
     <Folder Include="ClientUI\QuickMenuGUI\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />
     <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
+    <Folder Include="Tools\QPens\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientResources\ImageArchive\EnderPearl.jpg" />

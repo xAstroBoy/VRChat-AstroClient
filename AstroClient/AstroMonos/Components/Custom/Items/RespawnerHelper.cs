@@ -115,15 +115,34 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             float scaleY = Mathf.Sin(Time.time) * 0.5f + 1;
             renderer.material.SetTextureScale("_MainTex", new Vector2(scaleX, scaleY));
         }
-
         private void OnCollisionEnter(Collision collision)
         {
-            OnColliderHit(collision.collider);
+            OnColliderHit(collision.collider, false);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            OnColliderHit(other);
+            OnColliderHit(other, true);
+        }
+
+        private void OnColliderHit(Collider collision, bool isTriggerHit)
+        {
+            if (!Activated) return;
+            if (collision == null) return;
+            if (collision.transform.name.Contains("VRCPlayer")) return;
+            if (collision.transform.root.name.Contains("VRCPlayer")) return;
+            if (isTriggerHit)
+            {
+                // verify if a renderer is present, anything with a renderer can be selected if is a trigger.
+                if (!collider.gameObject.HasComponent<Renderer>())
+                {
+                    return;
+                }
+
+            }
+            var Respawner = collision.gameObject.GetGetInChildrens_OrParent<Respawner>();
+            if (Respawner == null) return;
+            Respawner.Respawn();
         }
 
         private void OnColliderHit(Collider collision)

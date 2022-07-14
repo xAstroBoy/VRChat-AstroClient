@@ -121,7 +121,7 @@ namespace AstroClient.AstroMonos.AstroUdons
             if (item.Equals(UdonBehaviour))
             {
                 OnDrop.SafetyRaise();
-                isHeld = true;
+                isHeld = false;
             }
         }
 

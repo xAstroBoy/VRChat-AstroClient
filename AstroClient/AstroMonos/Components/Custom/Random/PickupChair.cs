@@ -1,7 +1,10 @@
 ﻿using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.Tools.Colors;
+using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
+using RootMotion.FinalIK;
+using UnityEngine.Animations;
 using VRC.SDKBase;
 
 namespace AstroClient.AstroMonos.Components.Custom.Random
@@ -41,7 +44,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             CurrentChair = Chair.GetOrAddComponent<VRC_AstroStation>();
             if (CurrentChair != null)
             {
-
+                
                 CurrentChair.OnStationEnterEvent = StationEnterEvent;
                 CurrentChair.OnStationExitEvent = StationExitEvent;
                 MiscUtils.DelayFunction(0.1f, () =>
@@ -73,7 +76,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
             }
             Parentcontroller = transform.GetComponent<PickupController>();
-            
+            LastParentRotation = transform.localRotation;
             HasSubscribed = true;
         }
 
@@ -81,7 +84,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
         {
             if (Pickup != null)
             {
-                Pickup.enabled = true;
+                Pickup.pickupable = true;
             }
         }
 
@@ -90,7 +93,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             if (Pickup != null)
             {
                 Pickup.Drop();
-                Pickup.enabled = false;
+                Pickup.pickupable = false;
             }
             if (Parentcontroller != null)
             {
@@ -110,22 +113,72 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
         private void Update()
         {
             if (Pickup == null) return;
-            if (!Pickup.isHeld) return;
-            if (Laser == null) return;
-            Laser.SetPosition(0, Chair.transform.position);
-            Laser.SetPosition(1, Chair.transform.position + Chair.transform.up * 10f);
+            if (Pickup.isHeld)
+            {
+                if (Laser == null) return;
+                Laser.SetPosition(0, Chair.transform.position);
+                Laser.SetPosition(1, Chair.transform.position + Chair.transform.up * 10f);
+            }
+            else
+            {
+                if(FreezeChair)
+                {
+                    Chair.transform.localRotation = Quaternion.Inverse(transform.localRotation) * LastParentRotation * Chair.transform.localRotation;
+                    LastParentRotation = transform.localRotation;
+                }
+            }
+
         }
 
         private void OnPickup()
         {
             if (Laser == null) return;
             Laser.enabled = true;
+            if (FreezeChair)
+            {
+                //if (PosConstraint != null)
+                //{
+                //    PosConstraint.locked = false;
+                //    PosConstraint.constraintActive = false;
+                //    PosConstraint.enabled = false;
+                //}
+
+                //if (RotConstraint != null)
+                //{
+                //    RotConstraint.locked = false;
+                //    RotConstraint.constraintActive = false;
+                //    RotConstraint.enabled = false;
+                //}
+
+            }
         }
         private void OnDrop()
         {
             if (Laser == null) return;
             Laser.enabled = false;
+            //if (FreezeChair)
+            //{
+            //    if (PosConstraint != null)
+            //    {
+            //        PosConstraint.translationOffset = Chair.transform.localPosition;
+            //        PosConstraint.locked = true;
+            //        PosConstraint.constraintActive = true;
+            //        PosConstraint.enabled = true;
+            //    }
+
+            //    if (RotConstraint != null)
+            //    {
+            //        RotConstraint.rotationOffset = -transform.eulerAngles;
+            //        RotConstraint.rotationAtRest = -transform.eulerAngles;
+            //        RotConstraint.locked = true;
+            //        RotConstraint.constraintActive = true;
+            //        RotConstraint.enabled = true;
+            //    }
+
+            //}
+
         }
+
 
         private void OnDestroy()
         {
@@ -143,36 +196,27 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             }
         }
 
-        private GameObject SpawnChairObject()
+
+
+        /// <summary>
+        /// TODO : Calculate a perfect size for each child, so it doesn't overlap it.
+        /// </summary>
+        /// <returns></returns>
+        private float GetCubeSize()
         {
-            var newchair = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            if (newchair != null)
-            {
-                newchair.name = ChairName;
-                newchair.transform.localScale = new Vector3(cubeSize, cubeSize, cubeSize);
-                
-                var coll = newchair.GetComponent<Collider>();
-                if (coll != null)
-                {
-                    coll.isTrigger = true;
-                }
-                var rigidbody = newchair.GetOrAddComponent<Rigidbody>();
-                if (rigidbody != null)
-                {
-                    rigidbody.isKinematic = true;
-                }
-                newchair.transform.parent = transform;
-                newchair.transform.localPosition = Vector3.zero;
-                return newchair;
-            }
-            return null;
+            //// Calculate the size based off the parent transform
+            //var parentSize = transform.lossyScale;
+            //var parentSizeX = parentSize.x;
+            //var parentSizeY = parentSize.y;
+            //var parentSizeZ = parentSize.z;
+            //var cubeSize (parentSizeX, parentSizeY, parentSizeZ);
+            //return cubeSize;
+
+             return 0.082f;
         }
 
-
-        
         private string ChairName => "AstroClient Pickup Chair";
         private bool _HasSubscribed = false;
-        private float cubeSize => 0.082f;
 
         private bool HasSubscribed
         {
@@ -196,13 +240,48 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             }
         }
 
+        private ConstraintSource GenerateConstraintRule(Transform obj)
+        {
+            var source = new ConstraintSource
+            {
+                m_SourceTransform = obj,
+                m_Weight = 1
+            };
+            return source;
+        }
+
+        private bool _FreezeChair { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+        internal bool FreezeChair
+        {
+            [HideFromIl2Cpp]
+            get => _FreezeChair;
+            [HideFromIl2Cpp]
+            set
+            {
+                _FreezeChair = value;
+                //if (RotConstraint != null)
+                //{
+                //    RotConstraint.enabled = value;
+                //}
+                //if (PosConstraint  != null)
+                //{
+                //    PosConstraint.enabled = value;
+                //}
+            }
+        }
+        private Quaternion LastParentRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
         private LineRenderer Laser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private VRC_AstroStation CurrentChair { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RigidBodyController ChairBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private VRC_AstroPickup Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private PickupController Parentcontroller { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        //private RotationConstraint RotConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        //private PositionConstraint PosConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private GameObject _Chair;
+        private GameObject _Chair { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         private GameObject Chair
         {
@@ -211,7 +290,53 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             {
                 if (_Chair == null)
                 {
-                    _Chair = SpawnChairObject();
+                    _Chair = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    _Chair.name = ChairName;
+                    var size = GetCubeSize();
+                    _Chair.transform.localScale = new Vector3(size, size, size);
+
+                    var coll = _Chair.GetComponent<Collider>();
+                    if (coll != null)
+                    {
+                        coll.isTrigger = true;
+                    }
+                    ChairBodyController = _Chair.GetOrAddComponent<RigidBodyController>();
+                    if (ChairBodyController != null)
+                    {
+                        ChairBodyController.EditMode = true;
+                        ChairBodyController.Forced_Rigidbody = true;
+                    }
+                    //PosConstraint = newchair.GetOrAddComponent<PositionConstraint>();
+                    //if (PosConstraint != null)
+                    //{
+                    //    PosConstraint.AddSource(GenerateConstraintRule(transform));
+                    //    PosConstraint.locked = false;
+                    //    PosConstraint.constraintActive = false;
+                    //    PosConstraint.enabled = false;
+                    //    //PosConstraint.translationOffset = Chair.transform.localPosition;
+                    //}
+                    //RotConstraint = _Chair.GetOrAddComponent<RotationConstraint>();
+                    //if (RotConstraint != null)
+                    //{
+                    //    RotConstraint.AddSource(GenerateConstraintRule(transform));
+                    //    RotConstraint.locked = false;
+                    //    RotConstraint.constraintActive = false;
+                    //    RotConstraint.enabled = false;
+                    //    RotConstraint.rotationOffset = transform.localEulerAngles;
+                    //}
+
+                    var rend = _Chair.GetComponent<Renderer>();
+                    if (rend != null)
+                    {
+                        rend.material = new Material(Shader.Find("VRChat/UI/Additive"))
+                        {
+                            color = SystemColors.OrangeRed
+                        };
+                    }
+                    _Chair.transform.parent = transform;
+                    _Chair.transform.localPosition = Vector3.zero;
+                    return _Chair;
+
                 }
                 return _Chair;
             }

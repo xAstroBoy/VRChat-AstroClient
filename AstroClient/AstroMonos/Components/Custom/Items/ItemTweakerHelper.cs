@@ -120,20 +120,29 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
         private void OnCollisionEnter(Collision collision)
         {
-            OnColliderHit(collision.collider);
+            OnColliderHit(collision.collider, false);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            OnColliderHit(other);
+            OnColliderHit(other, true);
         }
 
-        private void OnColliderHit(Collider collision)
+        private void OnColliderHit(Collider collision, bool isTriggerHit)
         {
             if (!Activated) return;
+            if (collision == null) return;
             if (collision.transform.name.Contains("VRCPlayer")) return;
             if (collision.transform.root.name.Contains("VRCPlayer")) return;
-            if (collision == null) return;
+            if(isTriggerHit)
+            {
+                // verify if a renderer is present, anything with a renderer can be selected if is a trigger.
+                if(!collider.gameObject.HasComponent<Renderer>())
+                {
+                    return;
+                }
+
+            }
             Tweaker_Object.SetObjectToEdit(collision.transform.gameObject, true);
             PopupUtils.QueHudMessage($"<color=#FFA500>Set Object {collision.transform.gameObject.name} In Item Tweaker</color>");
             Activated = false;

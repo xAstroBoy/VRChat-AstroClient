@@ -1,11 +1,12 @@
 ﻿using AstroClient.ClientActions;
+using VRC.SDK3.Components;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
-    using System;
     using AstroClient.Tools.Extensions;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
+    using System;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using xAstroBoy.Utility;
@@ -26,12 +27,15 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             SyncPhysics = gameObject.GetGetInChildrens<SyncPhysics>(true);
             Respawner = gameObject.GetComponent<Respawner>();
-            if(SyncPhysics != null)
+            if (SyncPhysics != null)
             {
                 Rigidbody = SyncPhysics.GetRigidBody();
             }
             if (Rigidbody == null)
                 Rigidbody = gameObject.GetComponent<Rigidbody>();
+            if (VRCObjectSync == null)
+                gameObject.GetComponent<VRCObjectSync>();
+
             HasSubscribed = true;
             //Log.Debug("Attacked Successfully RigidBodyController to object " + gameObject.name);
             BackupBasicBody();
@@ -39,6 +43,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         }
 
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -50,22 +55,18 @@ namespace AstroClient.AstroMonos.Components.Tools
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
             }
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             HasSubscribed = false;
         }
@@ -74,13 +75,14 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             Destroy(this);
         }
+
         private void BodyUpdate()
         {
             if (gameObject == null) return;
             if (!isActiveAndEnabled) return;
-                Run_OnRigidbodyControllerOnUpdate();
-                if (isBackupping)
-                    return;
+            Run_OnRigidbodyControllerOnUpdate();
+            if (isBackupping)
+                return;
             if (!EditMode)
             {
                 // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
@@ -115,38 +117,37 @@ namespace AstroClient.AstroMonos.Components.Tools
                     solverIterations = Rigidbody.solverIterations;
                 }
             }
-            else // Do the opposite (VRChat messed it up, now is not safely applying it)
-            {
-
-                if (Rigidbody != null)
-                {
-                    Rigidbody.solverVelocityIterationCount = solverVelocityIterationCount;
-                    Rigidbody.inertiaTensor = inertiaTensor;
-                    Rigidbody.inertiaTensorRotation = inertiaTensorRotation;
-                    Rigidbody.centerOfMass = centerOfMass;
-                    Rigidbody.collisionDetectionMode = collisionDetectionMode;
-                    Rigidbody.constraints = constraints;
-                    Rigidbody.freezeRotation = freezeRotation;
-                    Rigidbody.maxDepenetrationVelocity = maxDepenetrationVelocity;
-                    Rigidbody.detectCollisions = detectCollisions;
-                    Rigidbody.useGravity = useGravity;
-                    Rigidbody.mass = mass;
-                    Rigidbody.solverIterationCount = solverIterationCount;
-                    Rigidbody.angularDrag = angularDrag;
-                    Rigidbody.drag = drag;
-                    Rigidbody.angularVelocity = angularVelocity;
-                    Rigidbody.velocity = velocity;
-                    Rigidbody.isKinematic = isKinematic;
-                    Rigidbody.sleepVelocity = sleepVelocity;
-                    Rigidbody.sleepThreshold = sleepThreshold;
-                    Rigidbody.maxAngularVelocity = maxAngularVelocity;
-                    Rigidbody.solverVelocityIterations = solverVelocityIterations;
-                    Rigidbody.interpolation = interpolation;
-                    Rigidbody.sleepAngularVelocity = sleepAngularVelocity;
-                    Rigidbody.useConeFriction = useConeFriction;
-                    Rigidbody.solverIterations = solverIterations;
-                }
-            }
+            //else // Do the opposite (VRChat messed it up, now is not safely applying it)
+            //{
+            //    if (Rigidbody != null)
+            //    {
+            //        Rigidbody.solverVelocityIterationCount = solverVelocityIterationCount;
+            //        Rigidbody.inertiaTensor = inertiaTensor;
+            //        Rigidbody.inertiaTensorRotation = inertiaTensorRotation;
+            //        Rigidbody.centerOfMass = centerOfMass;
+            //        Rigidbody.collisionDetectionMode = collisionDetectionMode;
+            //        Rigidbody.constraints = constraints;
+            //        Rigidbody.freezeRotation = freezeRotation;
+            //        Rigidbody.maxDepenetrationVelocity = maxDepenetrationVelocity;
+            //        Rigidbody.detectCollisions = detectCollisions;
+            //        Rigidbody.useGravity = useGravity;
+            //        Rigidbody.mass = mass;
+            //        Rigidbody.solverIterationCount = solverIterationCount;
+            //        Rigidbody.angularDrag = angularDrag;
+            //        Rigidbody.drag = drag;
+            //        Rigidbody.angularVelocity = angularVelocity;
+            //        Rigidbody.velocity = velocity;
+            //        Rigidbody.isKinematic = isKinematic;
+            //        Rigidbody.sleepVelocity = sleepVelocity;
+            //        Rigidbody.sleepThreshold = sleepThreshold;
+            //        Rigidbody.maxAngularVelocity = maxAngularVelocity;
+            //        Rigidbody.solverVelocityIterations = solverVelocityIterations;
+            //        Rigidbody.interpolation = interpolation;
+            //        Rigidbody.sleepAngularVelocity = sleepAngularVelocity;
+            //        Rigidbody.useConeFriction = useConeFriction;
+            //        Rigidbody.solverIterations = solverIterations;
+            //    }
+            //}
         }
 
         internal void BackupBasicBody()
@@ -300,7 +301,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.solverVelocityIterationCount = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -319,7 +320,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.inertiaTensor = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -338,7 +339,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.inertiaTensorRotation = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -357,7 +358,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.centerOfMass = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -376,7 +377,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.collisionDetectionMode = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -395,7 +396,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.constraints = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -414,7 +415,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.freezeRotation = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -433,7 +434,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.maxDepenetrationVelocity = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -452,7 +453,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.detectCollisions = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -471,14 +472,21 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.useGravity = value;
-                        SyncPhysics.RefreshProperties();
-                        if (!isPublic)
+                        if (VRCObjectSync != null)
                         {
-                            SyncPhysics.SetGravity(value);
+                            VRCObjectSync.SetGravity(value);
                         }
-                        else
+                        if (SyncPhysics != null)
                         {
-                            SyncPhysics.SetGravityForEveryone(value);
+                            SyncPhysics.RefreshProperties();
+                            if (!isPublic)
+                            {
+                                SyncPhysics.SetGravity(value);
+                            }
+                            else
+                            {
+                                SyncPhysics.SetGravityForEveryone(value);
+                            }
                         }
                     }
 
@@ -498,7 +506,10 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.mass = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null)
+                        {
+                            SyncPhysics.RefreshProperties();
+                        }
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -517,7 +528,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.solverIterationCount = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -536,7 +547,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.angularDrag = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -555,7 +566,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.drag = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -574,7 +585,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.angularVelocity = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -593,7 +604,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.velocity = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -612,14 +623,22 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.isKinematic = value;
-                        SyncPhysics.RefreshProperties();
-                        if (!isPublic)
+                        if (VRCObjectSync != null)
                         {
-                            SyncPhysics.SetKinematic(value);
+                            VRCObjectSync.SetKinematic(value);
                         }
-                        else
+
+                        if (SyncPhysics != null)
                         {
-                            SyncPhysics.SetKinematicForEveryone(value);
+                            SyncPhysics.RefreshProperties();
+                            if (!isPublic)
+                            {
+                                SyncPhysics.SetKinematic(value);
+                            }
+                            else
+                            {
+                                SyncPhysics.SetKinematicForEveryone(value);
+                            }
                         }
                     }
                 Run_OnRigidBodyPropertyChanged();
@@ -638,7 +657,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.sleepVelocity = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -657,7 +676,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.sleepThreshold = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -676,7 +695,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.maxAngularVelocity = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -695,7 +714,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.solverVelocityIterations = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -714,7 +733,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.interpolation = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -731,7 +750,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 if (Rigidbody != null)
                 {
                     Rigidbody.position = value;
-                    SyncPhysics.RefreshProperties();
+                    if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                 }
             }
         }
@@ -746,7 +765,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 if (Rigidbody != null)
                 {
                     Rigidbody.rotation = value;
-                    SyncPhysics.RefreshProperties();
+                    if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                 }
             }
         }
@@ -763,7 +782,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.sleepAngularVelocity = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -782,7 +801,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.useConeFriction = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -801,7 +820,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (Rigidbody != null)
                     {
                         Rigidbody.solverIterations = value;
-                        SyncPhysics.RefreshProperties();
+                        if (SyncPhysics != null) SyncPhysics.RefreshProperties();
                     }
 
                 Run_OnRigidBodyPropertyChanged();
@@ -898,16 +917,24 @@ namespace AstroClient.AstroMonos.Components.Tools
             if (Rigidbody != null)
             {
                 Rigidbody.isKinematic = value;
-                SyncPhysics.RefreshProperties();
-                if (!isPublic)
+                if (VRCObjectSync != null)
                 {
-                    SyncPhysics.SetKinematic(value);
-                }
-                else
-                {
-                    SyncPhysics.SetKinematicForEveryone(value);
+                    VRCObjectSync.SetKinematic(value);
                 }
 
+                if (SyncPhysics != null)
+                {
+                    SyncPhysics.RefreshProperties();
+                    if (!isPublic)
+                    {
+                        SyncPhysics.SetKinematic(value);
+                    }
+                    else
+                    {
+                        SyncPhysics.SetKinematicForEveryone(value);
+                    }
+                }
+                if (SyncPhysics != null) SyncPhysics.RefreshProperties();
             }
 
             Run_OnRigidBodyPropertyChanged();
@@ -924,42 +951,53 @@ namespace AstroClient.AstroMonos.Components.Tools
             if (Rigidbody != null)
             {
                 Rigidbody.useGravity = value;
-                SyncPhysics.RefreshProperties();
-                if (!isPublic)
+                if(VRCObjectSync != null)
                 {
-                    SyncPhysics.SetGravity(value);
+                    VRCObjectSync.SetGravity(value);
                 }
-                else
+                if (SyncPhysics != null)
                 {
-                    SyncPhysics.SetGravityForEveryone(value);
+
+
+                    SyncPhysics.RefreshProperties();
+                    if (!isPublic)
+                    {
+                        SyncPhysics.SetGravity(value);
+                    }
+                    else
+                    {
+                        SyncPhysics.SetGravityForEveryone(value);
+                    }
                 }
             }
 
             Run_OnRigidBodyPropertyChanged();
         }
 
-        #endregion Random Methods
+        #endregion Override Methods
 
         #region Rigidbody Methods Reflection
 
         internal void MovePosition(Vector3 value)
         {
             Rigidbody.MovePosition(value);
-            SyncPhysics.RefreshProperties();
+            if (SyncPhysics != null) SyncPhysics.RefreshProperties();
         }
 
         internal void MoveRotation(Quaternion value)
         {
             Rigidbody.MoveRotation(value);
-            SyncPhysics.RefreshProperties();
+            if (SyncPhysics != null) SyncPhysics.RefreshProperties();
         }
 
-        #endregion
+        #endregion Rigidbody Methods Reflection
 
         #region Essential Variables.
 
         internal Rigidbody Rigidbody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal SyncPhysics SyncPhysics { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal VRCObjectSync VRCObjectSync { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
         internal Respawner Respawner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         private bool _EditMode;
@@ -986,7 +1024,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                             RestoreOriginalOnEditModeReset = true;
                         }
                     }
-
                 }
 
                 Run_OnRigidBodyPropertyChanged();

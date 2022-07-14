@@ -71,7 +71,18 @@
                 }
             }
         }
-
+        internal static bool HasComponent<T>(this GameObject obj) where T : Component
+        {
+            if (obj != null)
+            {
+                var existing = obj.GetComponent<T>();
+                if (existing)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
 
         #region  Transform
@@ -92,6 +103,10 @@
         internal static void RemoveComponent<T>(this Transform obj) where T : Component
         {
             obj.gameObject.RemoveComponent<T>();
+        }
+        internal static bool HasComponent<T>(this Transform obj) where T : Component
+        {
+           return obj.gameObject.HasComponent<T>();
         }
 
         #endregion
@@ -122,6 +137,12 @@
                 }
             }
         }
+
+        internal static bool HasComponent<T>(this Component obj) where T : Component
+        {
+            return obj.transform.HasComponent<T>();
+        }
+
         #endregion 
 
     }

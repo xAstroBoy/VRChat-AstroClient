@@ -85,7 +85,7 @@ namespace AstroClient.Startup.Patches
                     Log.Debug("PatchShield should be removed now!");
                 }
                 ClientEventActions.OnSceneLoaded -= OnSceneLoaded; //  unsubscribe as we did our job.
-                DumpMelonHarmonyPatches(MelonLoaderCoreInstance);
+                //DumpMelonHarmonyPatches(MelonLoaderCoreInstance);
 
             }
 

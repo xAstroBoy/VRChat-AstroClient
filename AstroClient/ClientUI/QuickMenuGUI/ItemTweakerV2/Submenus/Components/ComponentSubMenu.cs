@@ -14,8 +14,9 @@ using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components
 {
-    internal class ComponentSubMenu 
+    internal class ComponentSubMenu : AstroEvents
     {
+
         internal static void Init_ComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedGridMenu(menu, x, y, "Astro Components", "Custom Component Editor Menu!", null, null, null, null, btnHalf);
@@ -26,8 +27,42 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components
             FunBehavioursSubMenu.Init_FunMenu(main);
             FreezerSubMenu.Init_FreezerMenu(main);
             new QMSingleButton(main, "Reveal Current Object Keycode ", () => { ComponentUtils.GetOrAddComponent<KeypadRevealer>(Tweaker_Object.GetGameObjectToEdit()); }, "(works only with keycodes Objects.)");
-            new QMSingleButton(main, "Add Chair To Current Pickup ", () => { ComponentUtils.GetOrAddComponent<PickupChair>(Tweaker_Object.GetGameObjectToEdit()); }, "(works only with keycodes Objects.)");
+            new QMSingleButton(main, "Add Chair To Current Pickup ", () =>
+            {
+                var comp = ComponentUtils.GetOrAddComponent<PickupChair>(Tweaker_Object.GetGameObjectToEdit());
+                if (comp != null)
+                {
+                    if (AlwaysFaceUP != null)
+                    {
+                        AlwaysFaceUP.SetToggleState(comp.FreezeChair);
+                    }
+                }
 
+
+            }, "Spawns a cube on the gameobject where you can sit on!");
+            AlwaysFaceUP = new QMToggleButton(main, "Lock Chair Rotation", () =>
+            {
+                var comp = ComponentUtils.GetOrAddComponent<PickupChair>(Tweaker_Object.GetGameObjectToEdit());
+                if (comp != null)
+                {
+                    comp.FreezeChair = true;
+                    if (AlwaysFaceUP != null)
+                    {
+                        AlwaysFaceUP.SetToggleState(true);
+                    }
+                }
+            }, () =>
+            {
+                var comp = ComponentUtils.GetOrAddComponent<PickupChair>(Tweaker_Object.GetGameObjectToEdit());
+                if (comp != null)
+                {
+                    comp.FreezeChair = false;
+                    if (AlwaysFaceUP != null)
+                    {
+                        AlwaysFaceUP.SetToggleState(false);
+                    }
+                }
+            }, "Lock Chair Rotation");
             _ = new QMSingleButton(main, "Remove All Components", () => { KillCustomComponents(); }, "Kill All Custom Add-ons.", Color.Red);
         }
 
@@ -38,5 +73,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components
             SpinnerSubMenu.KillAllSpinners();
             Tweaker_Object.GetGameObjectToEdit().KillCustomComponents();
         }
+
+        private static QMToggleButton AlwaysFaceUP = null;
     }
 }
