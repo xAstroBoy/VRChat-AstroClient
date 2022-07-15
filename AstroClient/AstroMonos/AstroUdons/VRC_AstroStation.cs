@@ -160,16 +160,19 @@ namespace AstroClient.AstroMonos.AstroUdons
                 if (!BlockVanillaStationExit) return;
                 // Needed to Bypass broken Chairs relying on anti-motion sickness, as is bugging some events.
                 // taken from VRChat mono version, should be technically the same, if the original one is blocked, act as a replacement.
-                Vector2 zero = Vector2.zero;
-                if (inAxisHorizontal == null || inAxisVertical == null)
+                if (isSeated)
                 {
-                    Log.Debug("StationUseExit input(s) are null!");
-                }
-                zero.x = inAxisHorizontal.GetAxis();
-                zero.y = inAxisVertical.GetAxis();
-                if (zero.sqrMagnitude > 0f)
-                {
-                    ExitStation();
+                    Vector2 zero = Vector2.zero;
+                    if (inAxisHorizontal == null || inAxisVertical == null)
+                    {
+                        Log.Debug("StationUseExit input(s) are null!");
+                    }
+                    zero.x = inAxisHorizontal.GetAxis();
+                    zero.y = inAxisVertical.GetAxis();
+                    if (zero.sqrMagnitude > 0f)
+                    {
+                        ExitStation();
+                    }
                 }
             }
         }

@@ -111,6 +111,7 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronEventsLists.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DrinkingNight\DrinkingNight_NormalPlusReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DreamWaves\DreamWaves_WhiteListManagerReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\Infested\Infested_GameManager.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS\AmongUS_PatronCreditsReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\SpiritsOfSeas\SpiritsOfSeas_PlayerPermissionReader.cs" />
@@ -589,6 +590,7 @@
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\Maki_SpiritOfSeas.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\Tanks.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\QuickDraws.cs" />
+    <Compile Include="WorldModifications\WorldHacks\NoLife1942\Infested.cs" />
     <Compile Include="WorldModifications\WorldHacks\TreeHouseInTheShade.cs" />
     <Compile Include="WorldModifications\WorldHacks\DrinkingNight.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
@@ -736,7 +738,7 @@
     <Compile Include="Constants\GlobalLists.cs" />
     <Compile Include="Constants\InstanceBuilder.cs" />
     <Compile Include="WorldModifications\WorldHacks\ClickerGame.cs" />
-    <Compile Include="WorldModifications\WorldHacks\GhostGame.cs" />
+    <Compile Include="WorldModifications\WorldHacks\NoLife1942\GhostGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\GeoLocator.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\KmartExpress_1.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\Enums\PrisonEscape_Roles.cs" />

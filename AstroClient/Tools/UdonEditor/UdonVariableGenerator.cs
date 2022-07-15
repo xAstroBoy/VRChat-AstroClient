@@ -131,6 +131,8 @@ namespace AstroClient.Tools.UdonEditor
                 case "System.Boolean[]": return "bool[]";
                 case "System.Byte": return "byte?";
                 case "System.Byte[]": return "byte[]";
+                case "System.Int16": return "short?";
+                case "System.Int16[]": return "short[]?";
                 case "System.UInt16": return "ushort?";
                 case "System.UInt16[]": return "ushort[]";
                 case "System.Double": return "double?";
@@ -165,6 +167,7 @@ namespace AstroClient.Tools.UdonEditor
                 case "System.Byte":
                 case "System.UInt16":
                 case "System.Double":
+                case "System.Int16":
                 case "UnityEngine.Vector3":
                 case "UnityEngine.Vector2":
                 case "UnityEngine.Quaternion":

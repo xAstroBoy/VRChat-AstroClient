@@ -2,6 +2,7 @@
 using AstroClient.ClientActions;
 using AstroClient.Tools.Colors;
 using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Holders;
 using AstroClient.xAstroBoy;
 using RootMotion.FinalIK;
 using UnityEngine.Animations;
@@ -37,6 +38,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
         {
             Initialize();
         }
+
+        private bool isDebugMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
 
         internal void Initialize()
         {
@@ -76,7 +79,6 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
             }
             Parentcontroller = transform.GetComponent<PickupController>();
-            LastParentRotation = transform.localRotation;
             HasSubscribed = true;
         }
 
@@ -112,23 +114,25 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
 
         private void Update()
         {
-            if (Pickup == null) return;
-            if (Pickup.isHeld)
+            if (!isDebugMode)
+            {
+                if (Pickup == null) return;
+                if (Pickup.isHeld)
+                {
+                    if (Laser == null) return;
+                    Laser.SetPosition(0, Chair.transform.position);
+                    Laser.SetPosition(1, Chair.transform.position + Chair.transform.up * 10f);
+                }
+            }
+            else
             {
                 if (Laser == null) return;
                 Laser.SetPosition(0, Chair.transform.position);
                 Laser.SetPosition(1, Chair.transform.position + Chair.transform.up * 10f);
-            }
-            else
-            {
-                if(FreezeChair)
-                {
-                    Chair.transform.localRotation = Quaternion.Inverse(transform.localRotation) * LastParentRotation * Chair.transform.localRotation;
-                    LastParentRotation = transform.localRotation;
-                }
-            }
 
+            }
         }
+
 
         private void OnPickup()
         {
@@ -136,12 +140,12 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             Laser.enabled = true;
             if (FreezeChair)
             {
-                //if (PosConstraint != null)
-                //{
-                //    PosConstraint.locked = false;
-                //    PosConstraint.constraintActive = false;
-                //    PosConstraint.enabled = false;
-                //}
+                if (PosConstraint != null)
+                {
+                    PosConstraint.locked = false;
+                    PosConstraint.constraintActive = false;
+                    PosConstraint.enabled = false;
+                }
 
                 //if (RotConstraint != null)
                 //{
@@ -156,26 +160,27 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
         {
             if (Laser == null) return;
             Laser.enabled = false;
-            //if (FreezeChair)
-            //{
-            //    if (PosConstraint != null)
-            //    {
-            //        PosConstraint.translationOffset = Chair.transform.localPosition;
-            //        PosConstraint.locked = true;
-            //        PosConstraint.constraintActive = true;
-            //        PosConstraint.enabled = true;
-            //    }
+            if (FreezeChair)
+            {
+                if (PosConstraint != null)
+                {
+                    PosConstraint.translationOffset = PositionOffset;
+                    PosConstraint.translationAtRest = PositionOffset;
+                    PosConstraint.locked = true;
+                    PosConstraint.constraintActive = true;
+                    PosConstraint.enabled = true;
+                }
 
-            //    if (RotConstraint != null)
-            //    {
-            //        RotConstraint.rotationOffset = -transform.eulerAngles;
-            //        RotConstraint.rotationAtRest = -transform.eulerAngles;
-            //        RotConstraint.locked = true;
-            //        RotConstraint.constraintActive = true;
-            //        RotConstraint.enabled = true;
-            //    }
+                //if (RotConstraint != null)
+                //{
+                //    RotConstraint.rotationOffset = RotationOffset;
+                //    RotConstraint.rotationAtRest = RotationOffset;
+                //    RotConstraint.locked = true;
+                //    RotConstraint.constraintActive = true;
+                //    RotConstraint.enabled = true;
+                //}
 
-            //}
+            }
 
         }
 
@@ -250,6 +255,13 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             return source;
         }
 
+        [HideFromIl2Cpp]
+        internal Vector3 RotationOffset => Chair.transform.eulerAngles - transform.localEulerAngles;
+        [HideFromIl2Cpp]
+        internal Vector3 PositionOffset => Chair.transform.position - transform.position;
+
+
+
         private bool _FreezeChair { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal bool FreezeChair
@@ -260,17 +272,48 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
             set
             {
                 _FreezeChair = value;
-                //if (RotConstraint != null)
-                //{
-                //    RotConstraint.enabled = value;
-                //}
-                //if (PosConstraint  != null)
-                //{
-                //    PosConstraint.enabled = value;
-                //}
+                if (value)
+                {
+                    if (PosConstraint != null)
+                    {
+                        PosConstraint.translationOffset = PositionOffset;
+                        PosConstraint.translationAtRest = PositionOffset;
+                        PosConstraint.locked = true;
+                        PosConstraint.constraintActive = true;
+                        PosConstraint.enabled = true;
+                    }
+
+                    //if (RotConstraint != null)
+                    //{
+                    //    RotConstraint.rotationOffset = RotationOffset;
+                    //    RotConstraint.rotationAtRest = RotationOffset;
+                    //    RotConstraint.locked = true;
+                    //    RotConstraint.constraintActive = true;
+                    //    RotConstraint.enabled = true;
+                    //}
+
+                    Chair.transform.parent = SpawnedItemsHolder.GetSpawnedItemsHolder().transform;
+                }
+                else
+                {
+                    if (PosConstraint != null)
+                    {
+                        PosConstraint.locked = false;
+                        PosConstraint.constraintActive = false;
+                        PosConstraint.enabled = false;
+                    }
+
+                    //if (RotConstraint != null)
+                    //{
+                    //    RotConstraint.locked = false;
+                    //    RotConstraint.constraintActive = false;
+                    //    RotConstraint.enabled = false;
+                    //}
+                    Chair.transform.parent = transform;
+
+                }
             }
         }
-        private Quaternion LastParentRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private LineRenderer Laser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
@@ -278,8 +321,9 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
         private RigidBodyController ChairBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private VRC_AstroPickup Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private PickupController Parentcontroller { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        
         //private RotationConstraint RotConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        //private PositionConstraint PosConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PositionConstraint PosConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private GameObject _Chair { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
@@ -306,15 +350,15 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                         ChairBodyController.EditMode = true;
                         ChairBodyController.Forced_Rigidbody = true;
                     }
-                    //PosConstraint = newchair.GetOrAddComponent<PositionConstraint>();
-                    //if (PosConstraint != null)
-                    //{
-                    //    PosConstraint.AddSource(GenerateConstraintRule(transform));
-                    //    PosConstraint.locked = false;
-                    //    PosConstraint.constraintActive = false;
-                    //    PosConstraint.enabled = false;
-                    //    //PosConstraint.translationOffset = Chair.transform.localPosition;
-                    //}
+                    PosConstraint = _Chair.GetOrAddComponent<PositionConstraint>();
+                    if (PosConstraint != null)
+                    {
+                        PosConstraint.AddSource(GenerateConstraintRule(transform));
+                        PosConstraint.locked = false;
+                        PosConstraint.constraintActive = false;
+                        PosConstraint.enabled = false;
+                        PosConstraint.translationOffset = PositionOffset;
+                    }
                     //RotConstraint = _Chair.GetOrAddComponent<RotationConstraint>();
                     //if (RotConstraint != null)
                     //{
@@ -322,7 +366,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Random
                     //    RotConstraint.locked = false;
                     //    RotConstraint.constraintActive = false;
                     //    RotConstraint.enabled = false;
-                    //    RotConstraint.rotationOffset = transform.localEulerAngles;
+                    //    //(RotConstraint.rotationAxis == Axis.X + Axis.Z;
+                    //    RotConstraint.rotationOffset = RotationOffset;
                     //}
 
                     var rend = _Chair.GetComponent<Renderer>();
