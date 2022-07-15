@@ -591,6 +591,7 @@
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\Tanks.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\QuickDraws.cs" />
     <Compile Include="WorldModifications\WorldHacks\NoLife1942\Infested.cs" />
+    <Compile Include="WorldModifications\WorldHacks\SakuraIsland.cs" />
     <Compile Include="WorldModifications\WorldHacks\TreeHouseInTheShade.cs" />
     <Compile Include="WorldModifications\WorldHacks\DrinkingNight.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
