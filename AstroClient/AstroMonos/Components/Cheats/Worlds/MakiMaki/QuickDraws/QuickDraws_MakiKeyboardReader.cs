@@ -1,17 +1,16 @@
 ﻿using AstroClient.ClientActions;
-using AstroClient.WorldModifications.WorldHacks;
+using AstroClient.ClientAttributes;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.UdonEditor;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy.Utility;
+using Il2CppSystem.Collections.Generic;
+using UnhollowerBaseLib.Attributes;
 using UnityEngine;
+using Object = Il2CppSystem.Object;
 
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.QuickDraws
 {
-    using AstroClient.Tools.Extensions;
-    using AstroClient.Tools.UdonEditor;
-    using ClientAttributes;
-    using Il2CppSystem;
-    using Il2CppSystem.Collections.Generic;
-    using UnhollowerBaseLib.Attributes;
-    using WorldModifications.WorldsIds;
-    using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]
@@ -88,10 +87,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 
         internal void RevealAnswer()
         {
-            if (!QuickDraws.ShowAnswers) return;
-            if (QuickDraws.AnswerRevealer != null)
+            if (!WorldModifications.WorldHacks.MakiMaki.QuickDraws.ShowAnswers) return;
+            if (WorldModifications.WorldHacks.MakiMaki.QuickDraws.AnswerRevealer != null)
             {
-                QuickDraws.AnswerRevealer.SetText("{fade d=5}<rainb>" + __0_mp_word_String + "</rainb>{/fade}");
+                WorldModifications.WorldHacks.MakiMaki.QuickDraws.AnswerRevealer.SetText("{fade d=5}<rainb>" + __0_mp_word_String + "</rainb>{/fade}");
             }
         }
 

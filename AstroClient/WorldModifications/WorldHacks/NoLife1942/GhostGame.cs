@@ -1,23 +1,35 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections;
+using System.Collections.Generic;
+using AstroClient.ClientActions;
+using AstroClient.CustomClasses;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.UdonSearcher;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using MelonLoader;
+using UnityEngine;
+using VRC.Core;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.NoLife1942
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using CustomClasses;
-    using MelonLoader;
-    using Tools.Extensions;
-    using Tools.UdonSearcher;
-    using UnityEngine;
-    using WorldsIds;
-    using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-
     internal class GhostGame : AstroEvents
     {
         internal override void RegisterToEvents()
         {
+            ClientEventActions.OnEnterWorld += EnterWorld;
             ClientEventActions.OnWorldReveal += OnWorldReveal;
+
+        }
+        private void EnterWorld(ApiWorld world, ApiWorldInstance instance)
+        {
+            if (world == null) return;
+            //if (world.id.Equals(WorldIds.GhostGame))
+            //{
+            //    UdonReplacer.ReplaceString(world.authorName, PlayerSpooferUtils.Original_DisplayName);
+            //}
+
+
         }
 
 

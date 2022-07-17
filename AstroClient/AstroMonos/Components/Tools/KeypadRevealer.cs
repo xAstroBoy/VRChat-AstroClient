@@ -1,12 +1,12 @@
 ﻿using AstroClient.ClientActions;
 using AstroClient.Tools.Keypads;
+using AstroClient.xAstroBoy;
 using UnityEngine.UIElements;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
     using AstroClient.Tools.Extensions;
-    using CheetosUI;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;

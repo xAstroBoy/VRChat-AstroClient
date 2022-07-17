@@ -120,7 +120,17 @@ namespace AstroClient.ClientActions
         /// This Gets called when Player Component Starts.
         /// <para>Params : VRC.Player player</para>
         /// </summary>
-        internal static Action<VRCPlayer> OnPlayerStart { get; set; }
+        internal static Action<VRCPlayer> OnVRCPlayerStart { get; set; }
+        /// <summary>
+        /// This Gets called when Player Component Awakes.
+        /// <para>Params : VRC.Player player</para>
+        /// </summary>
+        internal static Action<Player> OnPlayerAwake { get; set; }
+        /// <summary>
+        /// This Gets called when Player Component Start.
+        /// <para>Params : VRC.Player player</para>
+        /// </summary>
+        internal static Action<Player> OnPlayerStart { get; set; }
 
         /// <summary>
         /// This Gets called when a Player Leaves.
@@ -170,6 +180,13 @@ namespace AstroClient.ClientActions
         /// </summary>
 
         internal static Action<UdonBehaviour, string> Udon_SendCustomEvent { get; set; }
+
+        /// <summary>
+        /// This Gets called when a UdonBehaviour is initializing.
+        /// <para>Params : UdonBehaviour instance</para>
+        /// </summary>
+
+        internal static Action<UdonBehaviour> Udon_OnInit { get; set; }
 
         /// <summary>
         /// This listens to all VRC_Pickups IsHeld properties.

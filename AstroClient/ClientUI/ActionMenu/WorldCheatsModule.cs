@@ -12,6 +12,7 @@ using AstroClient.WorldModifications.WorldHacks.BlueKun;
 using AstroClient.WorldModifications.WorldHacks.Jar.AmongUS;
 using AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks;
 using AstroClient.WorldModifications.WorldHacks.Kmarts;
+using AstroClient.WorldModifications.WorldHacks.NoLife1942;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape;
 using AstroClient.WorldModifications.WorldsIds;
@@ -401,6 +402,18 @@ internal class WorldCheatsModule : AstroEvents
 
             #endregion Ghost Game
 
+            #region Infested
+
+            if (WorldUtils.WorldID == WorldIds.Infested)
+            {
+                CustomSubMenu.AddToggle("Unlimited Ammo",
+                    Infested.UnlimitedAmmo, value => { Infested.UnlimitedAmmo = value; });
+                CustomSubMenu.AddToggle("Unlimited Money",
+                    Infested.UnlimitedMoney, value => { Infested.UnlimitedMoney = value; });
+            }
+
+
+            #endregion
             #region BeyondDarkness
 
             if (WorldUtils.WorldID == WorldIds.BeyondDarkness)

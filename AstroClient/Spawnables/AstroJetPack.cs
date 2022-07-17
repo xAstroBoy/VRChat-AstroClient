@@ -1,14 +1,11 @@
 using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.AstroMonos.Prefabs;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.Spawnables.Enderpearl
+namespace AstroClient.Spawnables
 {
-    using AstroMonos.Components.Custom.Items;
-    using Tools.Extensions;
-    using Tools.Holders;
-    using UnityEngine;
-    using VRC.SDKBase;
-    using xAstroBoy.Utility;
-
     internal class AstroJetPack
     {
         private static GameObject VRJetpack;
@@ -29,14 +26,14 @@ namespace AstroClient.Spawnables.Enderpearl
             {
                 var item = Object.Instantiate(ClientResources.Loaders.Prefabs.VRJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
                 item.AddToWorldUtilsMenu();
-                var  jet = item.GetOrAddComponent<JetpackController>();
+                var  jet = ComponentUtils.GetOrAddComponent<JetpackController>(item);
                 MiscUtils.DelayFunction(0.2f, () => {
                     if (SitOnJetpackOnSpawn)
                     {
                         jet.CurrentChair.EnterStation();
                     }
                 });
-                item.GetOrAddComponent<RegisterAsPrefab>();
+                ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(item);
                 VRJetpack = item;
             }
 
@@ -58,7 +55,7 @@ namespace AstroClient.Spawnables.Enderpearl
             {
                 var item = Object.Instantiate(ClientResources.Loaders.Prefabs.DesktopJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
                 item.AddToWorldUtilsMenu();
-                var jet = item.GetOrAddComponent<JetpackController>();
+                var jet = ComponentUtils.GetOrAddComponent<JetpackController>(item);
                 MiscUtils.DelayFunction(0.2f, () =>
                 {
                     if (SitOnJetpackOnSpawn)
@@ -68,7 +65,7 @@ namespace AstroClient.Spawnables.Enderpearl
                 });
 
                 DesktopJetpack = item;
-                item.GetOrAddComponent<RegisterAsPrefab>();
+                ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(item);
 
             }
 

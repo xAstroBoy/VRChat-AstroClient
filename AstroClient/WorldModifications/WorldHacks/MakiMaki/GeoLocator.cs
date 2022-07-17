@@ -1,15 +1,14 @@
-﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki;
 using AstroClient.ClientActions;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
 {
-    using System.Collections.Generic;
-    using UnityEngine;
-    using WorldsIds;
-    using xAstroBoy;
-    using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
-
     internal class GeoLocator : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -26,7 +25,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             
             if(Customization != null)
             {
-                Customization.GetOrAddComponent<MakiMaki_CustomizationReader>();
+                ComponentUtils.GetOrAddComponent<MakiMaki_CustomizationReader>(Customization);
             }
 
         }

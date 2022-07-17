@@ -1,26 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
+using AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.SpiritsOfSeas;
 using AstroClient.AstroMonos.Components.Tools;
-using AstroClient.CheetosUI;
 using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonSearcher;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
-using VRC;
+using UnityEngine;
 using VRC.Core;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
 {
-    using System.Collections.Generic;
-    using UnityEngine;
-    using WorldsIds;
-    using xAstroBoy;
-
     internal class Maki_SpiritOfSeas : AstroEvents
     {
         internal override void RegisterToEvents()

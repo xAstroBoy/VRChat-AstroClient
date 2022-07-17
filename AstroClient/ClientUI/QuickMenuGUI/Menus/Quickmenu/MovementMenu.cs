@@ -1,7 +1,7 @@
 ﻿using System;
 using AstroClient.ClientActions;
 using AstroClient.Config;
-using AstroClient.Spawnables.Enderpearl;
+using AstroClient.Spawnables;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Player.Movement;
 using AstroClient.Tools.Player.Movement.Exploit;

@@ -1,3 +1,5 @@
+using AstroClient.Spawnables;
+
 namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using AstroClient.Tools.Extensions;
@@ -5,7 +7,6 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
     using ClientAttributes;
     using ClientResources.Loaders;
     using Il2CppSystem.Collections.Generic;
-    using Spawnables.Enderpearl;
     using System;
     using Tools;
     using UnhollowerBaseLib.Attributes;

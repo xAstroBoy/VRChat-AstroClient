@@ -1,18 +1,16 @@
 ﻿using AstroClient.ClientActions;
-using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
-using AstroClient.WorldModifications.WorldHacks;
+using AstroClient.ClientAttributes;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.UdonEditor;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy.Utility;
+using Il2CppSystem.Collections.Generic;
+using UnhollowerBaseLib.Attributes;
 using UnityEngine;
+using Object = Il2CppSystem.Object;
 
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.SpiritsOfSeas
 {
-    using AstroClient.Tools.Extensions;
-    using AstroClient.Tools.UdonEditor;
-    using ClientAttributes;
-    using Il2CppSystem;
-    using Il2CppSystem.Collections.Generic;
-    using UnhollowerBaseLib.Attributes;
-    using WorldModifications.WorldsIds;
-    using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]

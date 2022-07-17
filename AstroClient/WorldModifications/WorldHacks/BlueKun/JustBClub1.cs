@@ -7,7 +7,6 @@ using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.AstroMonos.Components.Tools.Listeners;
-using AstroClient.CheetosUI;
 using AstroClient.ClientActions;
 using AstroClient.Constants;
 using AstroClient.CustomClasses;

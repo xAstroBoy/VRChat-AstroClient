@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AstroClient.ClientActions;
-using AstroClient.Spawnables.Flashlight;
+using AstroClient.Spawnables;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.UIPaths;

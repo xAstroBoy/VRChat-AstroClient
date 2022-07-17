@@ -1,12 +1,12 @@
-namespace AstroClient.Spawnables.Enderpearl
-{
-    using AstroMonos.Components.Custom.Items;
-    using Tools.Extensions;
-    using Tools.Holders;
-    using UnityEngine;
-    using VRC.SDKBase;
-    using xAstroBoy.Utility;
+using AstroClient.AstroMonos.Components.Custom.Items;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Holders;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC.SDKBase;
 
+namespace AstroClient.Spawnables
+{
     internal class AstroEnderPearl
     {
         private static GameObject ENDER;
@@ -188,13 +188,13 @@ namespace AstroClient.Spawnables.Enderpearl
             pearl.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             pearl.name = "EnderPearl (AstroClient)";
             pearl.AddToWorldUtilsMenu();
-            var body = pearl.GetOrAddComponent<Rigidbody>();
+            var body = ComponentUtils.GetOrAddComponent<Rigidbody>(pearl);
             if (body != null)
             {
                 body.useGravity = false;
             }
             pearl.RemoveAllColliders();
-            pearl.GetOrAddComponent<EnderPearlBehaviour>();
+            ComponentUtils.GetOrAddComponent<EnderPearlBehaviour>(pearl);
             ENDER = pearl;
         }
     }

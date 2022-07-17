@@ -1,6 +1,7 @@
 ﻿
 using AstroClient.ClientActions;
 using AstroClient.xAstroBoy.Extensions;
+using VRC;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -17,8 +18,10 @@ namespace AstroClient.Startup.Hooks
 
         internal override void ExecutePriorityPatches()
         {
-            new AstroPatch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Start)), null, GetPatch(nameof(PlayerStartPatch)));
-            
+            new AstroPatch(typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.Start)), null, GetPatch(nameof(VRCPlayerStartPatch)));
+            new AstroPatch(typeof(Player).GetMethod(nameof(Player.Awake)), null, GetPatch(nameof(PlayerAwakePatch)));
+            new AstroPatch(typeof(Player).GetMethod(nameof(Player.Start)), null, GetPatch(nameof(PlayerStartPatch)));
+
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
@@ -27,7 +30,16 @@ namespace AstroClient.Startup.Hooks
             return new HarmonyMethod(typeof(PlayerHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        private static void PlayerStartPatch(VRCPlayer __instance)
+        private static void VRCPlayerStartPatch(VRCPlayer __instance)
+        {
+            ClientEventActions.OnVRCPlayerStart.SafetyRaiseWithParams(__instance);
+        }
+
+        private static void PlayerAwakePatch(Player __instance)
+        {
+            ClientEventActions.OnPlayerAwake.SafetyRaiseWithParams(__instance);
+        }
+        private static void PlayerStartPatch(Player __instance)
         {
             ClientEventActions.OnPlayerStart.SafetyRaiseWithParams(__instance);
         }

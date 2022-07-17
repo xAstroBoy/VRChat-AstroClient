@@ -144,6 +144,7 @@ namespace AstroClient.Tools.UdonEditor
                 case "VRC.Udon.Common.Interfaces.NetworkEventTarget": return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
                 case "VRC.Udon.Common.Enums.EventTiming": return "VRC.Udon.Common.Enums.EventTiming?";
                 case "UnityEngine.Rect": return "UnityEngine.Rect?";
+                case "UnityEngine.HumanBodyBones": return "UnityEngine.HumanBodyBones?";
 
                 default:
                     if (name.Contains("+"))
@@ -174,6 +175,7 @@ namespace AstroClient.Tools.UdonEditor
                 case "UnityEngine.Color":
                 case "VRC.Udon.Common.Interfaces.NetworkEventTarget":
                 case "VRC.Udon.Common.Enums.EventTiming":
+                case "UnityEngine.HumanBodyBones":
                 case "UnityEngine.Rect":    
                     return true;
 

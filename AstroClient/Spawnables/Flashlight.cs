@@ -1,20 +1,18 @@
+using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Custom.Items;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
+using AstroClient.ClientResources.Loaders;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Holders;
+using AstroClient.Tools.Player;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.Spawnables.Flashlight
+namespace AstroClient.Spawnables
 {
-    using System;
-    using System.Collections.Generic;
-    using AstroMonos.Components.Custom.Items;
-    using ClientResources.Loaders;
-    using Tools.Extensions;
-    using Tools.Holders;
-    using Tools.Player;
-    using UnityEngine;
-    using VRC.SDK.Internal.Tutorial;
-    using xAstroBoy;
-    using xAstroBoy.Extensions;
-    using xAstroBoy.Utility;
     using Object = UnityEngine.Object;
 
     internal class Astro_Flashlight : AstroEvents
@@ -57,7 +55,7 @@ namespace AstroClient.Spawnables.Flashlight
 
             if (flashlight != null)
             {
-                flashlight.GetOrAddComponent<RegisterAsPrefab>();
+                ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(flashlight);
                 flashlight.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
                 var collider = flashlight.AddComponent<MeshCollider>();
                 if (collider != null)
@@ -65,7 +63,7 @@ namespace AstroClient.Spawnables.Flashlight
                     collider.convex = true;
                     collider.IgnoreLocalPlayerCollision(true);
                 }
-                var rigidbody = flashlight.GetOrAddComponent<Rigidbody>();
+                var rigidbody = ComponentUtils.GetOrAddComponent<Rigidbody>(flashlight);
                 if (rigidbody != null)
                 {
                     rigidbody.useGravity = false;

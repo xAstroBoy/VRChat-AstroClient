@@ -1,16 +1,13 @@
-﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
-using AstroClient.CheetosUI;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.QuickDraws;
 using AstroClient.ClientActions;
-using AstroClient.Tools.Extensions;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
 
-namespace AstroClient.WorldModifications.WorldHacks
+namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
 {
-    using System.Collections.Generic;
-    using UnityEngine;
-    using WorldsIds;
-    using xAstroBoy;
-
     internal class QuickDraws : AstroEvents
     {
         internal override void RegisterToEvents()

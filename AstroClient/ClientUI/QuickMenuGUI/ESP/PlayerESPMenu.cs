@@ -33,17 +33,25 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ESP
                     if (value)
                     {
 
-                        ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+                        ClientEventActions.OnPlayerStart += OnPlayerStart;
 
                     }
                     else
                     {
 
-                        ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
+                        ClientEventActions.OnPlayerStart -= OnPlayerStart;
 
                     }
                 }
                 _HasSubscribed = value;
+            }
+        }
+
+        private static void OnPlayerStart(Player player)
+        {
+            if (Toggle_Player_ESP)
+            {
+                player.gameObject.GetOrAddComponent<PlayerESP>();
             }
         }
 
@@ -79,13 +87,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ESP
             }
         }
 
-        private static void OnPlayerJoined(Player player)
-        {
-            if (Toggle_Player_ESP && player != null && player != GameInstances.LocalPlayer.GetPlayer() && !player.gameObject.GetComponent<PlayerESP>())
-            {
-                ComponentUtils.GetOrAddComponent<PlayerESP>(player.gameObject);
-            }
-        }
 
         private static void AddESPToAllPlayers()
         {
@@ -104,11 +105,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ESP
             for (int i = 0; i < WorldUtils.Players.Count; i++)
             {
                 Player player = WorldUtils.Players[i];
-                var esp = player.gameObject.GetComponent<PlayerESP>();
-                if (esp != null)
-                {
-                    UnityEngine.Object.Destroy(esp);
-                }
+                player.RemoveComponent<PlayerESP>();
             }
         }
 

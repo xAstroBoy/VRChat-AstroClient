@@ -1,6 +1,6 @@
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.QuickMenuGUI.ESP;
-using AstroClient.Spawnables.Enderpearl;
+using AstroClient.Spawnables;
 
 namespace AstroClient.ClientUI.ActionMenu
 {

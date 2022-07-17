@@ -6,7 +6,7 @@ using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.Extensions;
 using UnityEngine;
 
-namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.ObjectInfoSubMenu
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus
 {
     internal class ObjectInfoSubMenu : AstroEvents
     {

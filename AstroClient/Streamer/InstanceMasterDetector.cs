@@ -1,22 +1,15 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.ClientActions;
+using AstroClient.Constants;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using Photon.Realtime;
 
-namespace AstroClient.Cheetos
+namespace AstroClient.Streamer
 {
     #region Imports
-
-    using System.Collections.Generic;
-    using AstroMonos.Components.Player;
-    using AstroMonos.Components.Spoofer;
-    using Constants;
-    using Photon.Realtime;
-    using Tools.Extensions;
-    using UnityEngine;
-    using UnityEngine.UI;
-    using VRC.Core;
-    using WebSocketSharp;
-    using xAstroBoy;
-    using xAstroBoy.Extensions;
-    using xAstroBoy.Utility;
 
     #endregion Imports
 

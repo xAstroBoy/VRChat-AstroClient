@@ -28,50 +28,53 @@ namespace AstroClient.AstroMonos.Components.ESP
         {
             if (PlayerSelector == null)
             {
-                Destroy(this);
+                this.DestroyMeLocal();
             }
             else
             {
-                if (CurrentRenderer == null)
-                {
-                    Log.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
-                    Destroy(this);
-                    return;
-                }
-                else
-                {
-                    MelonCoroutines.Start(ForceHighlightSystem());
-                }
+                MelonCoroutines.Start(ForceHighlightSystem());
             }
-            HasSubscribed = true;
-            SetPlayerDefaultESP();
-
-            InvokeRepeating(nameof(ForceActiveESP), 0.5f, 0.1f);
         }
+
 
         private IEnumerator ForceHighlightSystem()
         {
-            while (HighLightOptions == null)
-                yield return null;
             while (AssignedPlayer == null)
                 yield return null;
+            while (AssignedPlayer.GetAPIUser() == null)
+                yield return null;
+            if(AssignedPlayer.GetAPIUser().IsSelf)
+            {
+                Destroy(this);
+                yield return null;
+            }
+            while (HighLightOptions == null)
+                yield return null;
+            while (PlayerSelector == null)
+                yield return null;
+            while (CurrentRenderer == null)
+                yield return null;
 
-            yield return null;
-        }
 
-        private void ForceActiveESP()
-        {
             if (!HighLightOptions.enabled)
             {
                 HighLightOptions.enabled = true;
             }
+            
             if (CurrentRenderer != null)
             {
-                //CurrentRenderer.enabled = true;
-                //CurrentRenderer.gameObject.SetActive(true);
                 HighLightOptions.AddRenderer(CurrentRenderer);
+                while (HighLightOptions.field_Protected_HashSet_1_Renderer_0.Count == 0)
+                {
+                    HighLightOptions.AddRenderer(CurrentRenderer);
+                }
             }
+
+            HasSubscribed = true;
+            SetPlayerDefaultESP();
+            yield return null;
         }
+
 
         private bool _HasSubscribed = false;
 
@@ -332,7 +335,7 @@ namespace AstroClient.AstroMonos.Components.ESP
             {
                 if (_PlayerSelector == null)
                 {
-                    return _PlayerSelector = this.GetComponentInChildren<PlayerSelector>(true);
+                    return _PlayerSelector = AssignedPlayer.GetGetInChildrens_OrParent<PlayerSelector>(true);
                 }
                 return _PlayerSelector;
             }

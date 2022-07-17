@@ -3,7 +3,7 @@ using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components.Bouncer
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components
 {
     internal class BouncerSubMenu 
     {

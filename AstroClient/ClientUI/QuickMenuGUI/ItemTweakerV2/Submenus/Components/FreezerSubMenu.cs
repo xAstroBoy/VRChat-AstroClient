@@ -4,7 +4,7 @@ using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.Utility;
 
-namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components.Freezer
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components
 {
     internal class FreezerSubMenu 
     {

@@ -22,7 +22,7 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
         {
             ClientEventActions.VRChat_OnUiManagerInit += OnUiManagerInit;
             //ClientEventActions.OnWorldReveal += OnWorldReveal;
-            ClientEventActions.OnPlayerStart += OnPlayerStart;
+            ClientEventActions.OnVRCPlayerStart += OnPlayerStart;
         }
 
         internal static bool AddSettingsToPlayerExpressions { get; private set; } = false;

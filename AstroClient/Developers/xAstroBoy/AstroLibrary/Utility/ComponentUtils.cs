@@ -95,54 +95,68 @@
         {
             return obj.gameObject.GetGetInChildrens<T>(IncludeInactive);
         }
+        public static T GetGetInChildrens_OrParent<T>(this Transform obj, bool IncludeInactive = false) where T : Component
+        {
+            return obj.gameObject.GetGetInChildrens_OrParent<T>(IncludeInactive);
+        }
+
 
         public static T GetOrAddComponent<T>(this Transform obj) where T : Component
         {
-            return obj.gameObject.GetOrAddComponent<T>();
+            return  obj.gameObject.GetOrAddComponent<T>();
         }
         internal static void RemoveComponent<T>(this Transform obj) where T : Component
         {
             obj.gameObject.RemoveComponent<T>();
         }
+        internal static void RemoveComponents<T>(this Transform obj) where T : Component
+        {
+            obj.gameObject.RemoveComponents<T>();
+        }
         internal static bool HasComponent<T>(this Transform obj) where T : Component
         {
-           return obj.gameObject.HasComponent<T>();
+            return obj.gameObject.HasComponent<T>();
         }
 
         #endregion
 
         #region  component
-
         internal static T AddComponent<T>(this Component c) where T : Component
         {
             return c.gameObject.AddComponent<T>();
         }
 
-        internal static T GetOrAddComponent<T>(this Component c) where T : Component
+        public static T GetGetInChildrens_OrAddComponent<T>(this Component obj, bool IncludeInactive = false) where T : Component
         {
-            if (c == null) return null;
-            var existing = c.GetComponent<T>();
-            if (existing) return existing;
-            return c.transform.AddComponent<T>();
+            return obj.transform.GetGetInChildrens_OrAddComponent<T>(IncludeInactive);
         }
 
-        internal static void RemoveComponent<T>(this Component c) where T : Component
+        public static T GetGetInChildrens<T>(this Component obj, bool IncludeInactive = false) where T : Component
         {
-            if (c != null)
-            {
-                var existing = c.GetComponent<T>();
-                if (existing)
-                {
-                    existing.DestroyMeLocal();
-                }
-            }
+            return obj.transform.GetGetInChildrens<T>(IncludeInactive);
+        }
+        public static T GetGetInChildrens_OrParent<T>(this Component obj, bool IncludeInactive = false) where T : Component
+        {
+            return obj.transform.GetGetInChildrens_OrParent<T>(IncludeInactive);
         }
 
+
+        public static T GetOrAddComponent<T>(this Component obj) where T : Component
+        {
+            return obj.transform.GetOrAddComponent<T>();
+        }
+        internal static void RemoveComponent<T>(this Component obj) where T : Component
+        {
+            obj.transform.RemoveComponent<T>();
+        }
+        internal static void RemoveComponents<T>(this Component obj) where T : Component
+        {
+            obj.transform.RemoveComponents<T>();
+        }
         internal static bool HasComponent<T>(this Component obj) where T : Component
         {
             return obj.transform.HasComponent<T>();
         }
-
         #endregion 
 
     }

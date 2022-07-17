@@ -1,16 +1,14 @@
+using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Custom.Items;
 using AstroClient.ClientActions;
-using UnhollowerBaseLib.Attributes;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Holders;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC.SDKBase;
 
-namespace AstroClient.Spawnables.ColliderSuppresserCube
+namespace AstroClient.Spawnables
 {
-    using System.Collections.Generic;
-    using AstroMonos.Components.Custom.Items;
-    using Tools.Extensions;
-    using Tools.Holders;
-    using UnityEngine;
-    using VRC.SDKBase;
-    using xAstroBoy.Utility;
-
     internal class ColliderSuppresserSphere : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -41,7 +39,7 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
             Cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             Cube.name = "Collider Patcher Cube  (AstroClient)";
             Cube.AddToWorldUtilsMenu();
-            var body = Cube.GetOrAddComponent<Rigidbody>();
+            var body = ComponentUtils.GetOrAddComponent<Rigidbody>(Cube);
             if (body != null)
             {
                 body.useGravity = false;
@@ -54,7 +52,7 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
                     Cube.IgnoreObjectCollision(item); // Make sure the sphere is the same as the despawned one
                 }
             }
-            Cube.GetOrAddComponent<ColliderSuppresserBehaviour>();
+            ComponentUtils.GetOrAddComponent<ColliderSuppresserBehaviour>(Cube);
             SphereColliderDisabler = Cube;
         }
 

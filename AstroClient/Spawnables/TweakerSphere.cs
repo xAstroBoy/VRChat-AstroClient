@@ -1,12 +1,12 @@
-namespace AstroClient.Spawnables.ColliderSuppresserCube
-{
-    using AstroMonos.Components.Custom.Items;
-    using Tools.Extensions;
-    using Tools.Holders;
-    using UnityEngine;
-    using VRC.SDKBase;
-    using xAstroBoy.Utility;
+using AstroClient.AstroMonos.Components.Custom.Items;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Holders;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine;
+using VRC.SDKBase;
 
+namespace AstroClient.Spawnables
+{
     internal class TweakerSphere : AstroEvents
     {
         private static GameObject obj;
@@ -28,13 +28,13 @@ namespace AstroClient.Spawnables.ColliderSuppresserCube
             Cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             Cube.name = "Tweaker Sphere Helper  (AstroClient)";
             Cube.AddToWorldUtilsMenu();
-            var body = Cube.GetOrAddComponent<Rigidbody>();
+            var body = ComponentUtils.GetOrAddComponent<Rigidbody>(Cube);
             if (body != null)
             {
                 body.useGravity = false;
             }
             Cube.IgnoreLocalPlayerCollision();
-            Cube.GetOrAddComponent<ItemTweakerHelper>();
+            ComponentUtils.GetOrAddComponent<ItemTweakerHelper>(Cube);
             obj = Cube;
         }
 

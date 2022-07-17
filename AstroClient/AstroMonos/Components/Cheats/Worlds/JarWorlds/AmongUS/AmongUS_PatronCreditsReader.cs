@@ -1,17 +1,17 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
 using AstroClient.CustomClasses;
+using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using Il2CppSystem.Collections.Generic;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
 
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds.AmongUS
 {
-    using AstroClient.Tools.Extensions;
-    using ClientAttributes;
-    using Il2CppSystem.Collections.Generic;
-    using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
-    using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
     using Object = Il2CppSystem.Object;
 

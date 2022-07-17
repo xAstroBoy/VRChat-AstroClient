@@ -1,23 +1,17 @@
-﻿using AstroClient.febucci;
-using AstroClient.febucci.Core;
+﻿using System;
+using AstroClient.AstroMonos.AstroUdons;
+using AstroClient.ClientResources.Loaders;
+using AstroClient.febucci;
 using AstroClient.febucci.Utilities;
-using AstroClient.xAstroBoy;
-using AstroClient.xAstroBoy.Extensions;
-using Mono.Security.X509;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Extensions.Components_exts;
+using AstroClient.xAstroBoy.Utility;
+using TMPro;
+using UnityEngine;
 using VRC.SDKBase;
 
-namespace AstroClient.CheetosUI
+namespace AstroClient.xAstroBoy
 {
-    using System;
-    using AstroMonos.AstroUdons;
-    using ClientResources.Loaders;
-    using TMPro;
-    using Tools.Extensions;
-    using Tools.Extensions.Components_exts;
-    using UnityEngine;
-    using UnityEngine.UI;
-    using xAstroBoy.Utility;
-
     internal class WorldButton
     {
         internal GameObject ButtonBody { get; set; }
@@ -127,7 +121,7 @@ namespace AstroClient.CheetosUI
         {
             if (Front != null)
             {
-                AstroTrigger = Front.GetOrAddComponent<VRC_AstroInteract>();
+                AstroTrigger = ComponentUtils.GetOrAddComponent<VRC_AstroInteract>(Front);
                 if (AstroTrigger != null)
                 {
                     AstroTrigger.OnInteract = action;
@@ -138,7 +132,7 @@ namespace AstroClient.CheetosUI
         {
             if (Front != null)
             {
-                AstroTrigger = Front.GetOrAddComponent<VRC_AstroInteract>();
+                AstroTrigger = ComponentUtils.GetOrAddComponent<VRC_AstroInteract>(Front);
                 if (AstroTrigger != null)
                 {
                     AstroTrigger.interactText = text;

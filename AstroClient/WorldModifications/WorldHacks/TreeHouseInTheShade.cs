@@ -4,6 +4,7 @@ using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
 using AstroClient.AstroMonos.Components.Custom.Items;
 using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.AstroMonos.Prefabs;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks;
 using AstroClient.Tools;

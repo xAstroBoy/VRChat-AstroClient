@@ -111,6 +111,8 @@
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronEventsLists.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DrinkingNight\DrinkingNight_NormalPlusReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DreamWaves\DreamWaves_WhiteListManagerReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\Infested\Infested_CharacterObject.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\Infested\Infested_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\Infested\Infested_GameManager.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS\AmongUS_PatronCreditsReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />

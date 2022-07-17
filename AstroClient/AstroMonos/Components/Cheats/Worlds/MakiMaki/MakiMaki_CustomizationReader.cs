@@ -6,13 +6,11 @@ using AstroClient.Tools.UdonEditor;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Collections.Generic;
-using Il2CppSystem.Xml;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
-using Int32 = System.Int32;
 using Object = Il2CppSystem.Object;
 
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.GeoLocator
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki
 {
     using IntPtr = System.IntPtr;
 

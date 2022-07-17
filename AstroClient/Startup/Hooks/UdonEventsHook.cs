@@ -5,6 +5,7 @@ using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using VRC.Udon;
+using VRC.Udon.Common.Interfaces;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -39,7 +40,16 @@ namespace AstroClient.Startup.Hooks
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.OnDrop)), GetPatch(nameof(Hook_UdonBehaviour_Event_OnDrop)));
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.Interact)), GetPatch(nameof(Hook_UdonBehaviour_Event_OnInteract)));
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.SendCustomEvent)), GetPatch(nameof(Hook_UdonBehaviour_Event_SendCustomEvent)));
+            //ClientEventActions.VRChat_OnQuickMenuInit += VrChatOnQuickMenuInit;
+
+
         }
+
+        //private void VrChatOnQuickMenuInit()
+        //{
+        //    UdonBehaviour.OnInit += (Il2CppSystem.Action<UdonBehaviour, IUdonProgram>)Hook_Udon_OnInit;
+        //    Log.Debug("Hooked UdonBehaviour OnInit!");
+        //}
 
 
         private static void Hook_UdonBehaviour_Event_OnPickup(UdonBehaviour __instance)
@@ -75,6 +85,15 @@ namespace AstroClient.Startup.Hooks
 
             ClientEventActions.Udon_OnInteract.SafetyRaiseWithParams(__instance);
         }
+        private static void Hook_Udon_OnInit(UdonBehaviour instance, IUdonProgram program)
+        {
+            if (instance == null) return;
+
+            ClientEventActions.Udon_OnInit.SafetyRaiseWithParams(instance);
+
+        }
+
+
         private static bool Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {
             if (__instance == null) return true;

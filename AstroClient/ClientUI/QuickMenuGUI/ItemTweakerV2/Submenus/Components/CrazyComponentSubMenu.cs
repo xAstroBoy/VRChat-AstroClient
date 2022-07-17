@@ -7,7 +7,7 @@ using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using UnityEngine;
 
-namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components.Crazy
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components
 {
     internal class CrazyComponentSubMenu : AstroEvents
     {

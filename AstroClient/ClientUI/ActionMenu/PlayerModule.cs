@@ -2,12 +2,12 @@ using AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu;
 using AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus;
 using AstroClient.Config;
 using AstroClient.LocalAvatar.ColliderAdjuster;
+using AstroClient.Spawnables;
 
 namespace AstroClient.ClientUI.ActionMenu
 {
     using ClientActions;
     using Gompoc.ActionMenuAPI.Api;
-    using Spawnables.Enderpearl;
     using System.Drawing;
     using Tools.Player.Movement.Exploit;
 

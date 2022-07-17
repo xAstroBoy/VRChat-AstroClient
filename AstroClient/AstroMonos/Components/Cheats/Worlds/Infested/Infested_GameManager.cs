@@ -1,16 +1,16 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.UdonEditor;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy.Utility;
+using Il2CppSystem.Collections.Generic;
+using UnhollowerBaseLib.Attributes;
 using UnityEngine;
+using Object = Il2CppSystem.Object;
 
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
 {
-    using AstroClient.Tools.Extensions;
-    using AstroClient.Tools.UdonEditor;
-    using ClientAttributes;
-    using Il2CppSystem;
-    using Il2CppSystem.Collections.Generic;
-    using UnhollowerBaseLib.Attributes;
-    using WorldModifications.WorldsIds;
-    using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
 
     [RegisterComponent]
@@ -37,6 +37,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 {
                     ClientEventActions.OnRoomLeft += OnRoomLeft;
                     GameManager = obj.RawItem;
+                    Initialize_GameManager();
+                    InvokeRepeating(nameof(UnlimitedAmmos), 0.1f, 0.1f);
+                    InvokeRepeating(nameof(UnlimitedMoney), 0.1f, 0.1f);
+
                 }
                 else
                 {
@@ -50,9 +54,29 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        private  void UnlimitedAmmos()
+        {
+            if(WorldModifications.WorldHacks.NoLife1942.Infested.UnlimitedAmmo)
+            {
+                ammoReserve = System.Int32.MaxValue;
+                maxAmmo = System.Int32.MaxValue;
+            }
+        }
+
+        private void UnlimitedMoney()
+        {
+            if (WorldModifications.WorldHacks.NoLife1942.Infested.UnlimitedMoney)
+            {
+                currency = System.Int32.MaxValue;
+                maxMoney = System.Int32.MaxValue;
+            }
+        }
+
+
         private void OnDestroy()
         {
             ClientEventActions.OnRoomLeft -= OnRoomLeft;
+            Cleanup_GameManager();
         }
 
         // TODO: Bind UdonBehaviour with this section
@@ -116,6 +140,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private_spectateCharacters = new AstroUdonVariable<UnityEngine.Component[]>(GameManager, "spectateCharacters");
             Private___2_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__2_intnl_VRCSDKBaseVRCPlayerApi");
             Private___6_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__6_intnl_VRCSDKBaseVRCPlayerApi");
+            Private___3_intnl_UnityEngineComponent = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__3_intnl_UnityEngineComponent");
             Private___93_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__93_intnl_SystemBoolean");
             Private___53_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__53_intnl_SystemInt32");
             Private___4_const_intnl_SystemInt64 = new AstroUdonVariable<long>(GameManager, "__4_const_intnl_SystemInt64");
@@ -133,6 +158,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private_killRewards = new AstroUdonVariable<int>(GameManager, "killRewards");
             Private___22_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__22_intnl_SystemInt16");
             Private___96_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__96_intnl_SystemBoolean");
+            Private___34_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__34_intnl_VRCSDKBaseVRCPlayerApi");
             Private___9_intnl_SystemObject = new AstroUdonVariable<bool>(GameManager, "__9_intnl_SystemObject");
             Private___0_this_intnl_UnityEngineTransform = new AstroUdonVariable<UnityEngine.Transform>(GameManager, "__0_this_intnl_UnityEngineTransform");
             Private___5_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__5_intnl_SystemBoolean");
@@ -141,12 +167,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private_playerIndex = new AstroUdonVariable<int>(GameManager, "playerIndex");
             Private___62_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__62_intnl_SystemInt32");
             Private___0_spawnPoint_Transform = new AstroUdonVariable<UnityEngine.Transform>(GameManager, "__0_spawnPoint_Transform");
+            Private___1_itemInHand_VRC_Pickup = new AstroUdonVariable<VRC.SDK3.Components.VRCPickup>(GameManager, "__1_itemInHand_VRC_Pickup");
             Private___10_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__10_const_intnl_exitJumpLoc_UInt32");
             Private___104_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__104_intnl_SystemBoolean");
             Private___2_intnl_returnValSymbol_Boolean = new AstroUdonVariable<bool>(GameManager, "__2_intnl_returnValSymbol_Boolean");
             Private___5_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__5_intnl_SystemInt32");
             Private___0_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__0_const_intnl_exitJumpLoc_UInt32");
             Private___103_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__103_intnl_SystemBoolean");
+            Private___1_gunInHand_NL_Gun = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__1_gunInHand_NL_Gun");
             Private___15_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__15_intnl_SystemBoolean");
             Private_humanPlayerCount = new AstroUdonVariable<int>(GameManager, "humanPlayerCount");
             Private___1_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__1_intnl_VRCSDKBaseVRCPlayerApi");
@@ -170,6 +198,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___138_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__138_intnl_SystemBoolean");
             Private___75_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__75_intnl_SystemBoolean");
             Private___5_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__5_const_intnl_exitJumpLoc_UInt32");
+            Private___3_intnl_returnValSymbol_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__3_intnl_returnValSymbol_NL_PlayerCharacter");
             Private___13_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__13_intnl_SystemBoolean");
             Private_isJoinedGame = new AstroUdonVariable<bool>(GameManager, "isJoinedGame");
             Private___1_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__1_const_intnl_SystemString");
@@ -188,6 +217,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___1_const_intnl_SystemSingle = new AstroUdonVariable<float>(GameManager, "__1_const_intnl_SystemSingle");
             Private___23_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__23_const_intnl_exitJumpLoc_UInt32");
             Private___59_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__59_const_intnl_SystemString");
+            Private___0_resultCharacter_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_resultCharacter_NL_PlayerCharacter");
             Private___5_intnl_SystemSingle = new AstroUdonVariable<float>(GameManager, "__5_intnl_SystemSingle");
             Private___84_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__84_const_intnl_SystemString");
             Private___56_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__56_intnl_SystemInt32");
@@ -207,6 +237,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___9_character_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__9_character_NL_PlayerCharacter");
             Private___1_intnl_NL_UpdateManager = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__1_intnl_NL_UpdateManager");
             Private___22_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__22_intnl_SystemBoolean");
+            Private___20_intnl_SystemObject = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__20_intnl_SystemObject");
             Private___1_intnl_NLI_PlayerSlotUI = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__1_intnl_NLI_PlayerSlotUI");
             Private___0_intnl_UnityEngineComponentArray = new AstroUdonVariable<UnityEngine.Component[]>(GameManager, "__0_intnl_UnityEngineComponentArray");
             Private___7_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__7_const_intnl_exitJumpLoc_UInt32");
@@ -225,6 +256,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private_teleportCheckTimer = new AstroUdonVariable<float>(GameManager, "teleportCheckTimer");
             Private___48_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__48_intnl_SystemInt32");
             Private_isInfested = new AstroUdonVariable<bool>(GameManager, "isInfested");
+            Private___2_intnl_UnityEngineComponentArray = new AstroUdonVariable<UnityEngine.Component[]>(GameManager, "__2_intnl_UnityEngineComponentArray");
             Private___89_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__89_intnl_SystemBoolean");
             Private___36_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__36_intnl_VRCSDKBaseVRCPlayerApi");
             Private___16_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__16_intnl_SystemInt16");
@@ -233,6 +265,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___65_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__65_const_intnl_SystemString");
             Private___4_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__4_intnl_SystemBoolean");
             Private___11_intnl_SystemSingle = new AstroUdonVariable<float>(GameManager, "__11_intnl_SystemSingle");
+            Private___0_intnl_NL_Gun = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_intnl_NL_Gun");
             Private___106_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__106_intnl_SystemBoolean");
             Private___43_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__43_const_intnl_SystemString");
             Private___34_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__34_intnl_SystemInt32");
@@ -260,6 +293,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___34_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__34_const_intnl_SystemString");
             Private___27_intnl_SystemObject = new AstroUdonVariable<UnityEngine.Transform>(GameManager, "__27_intnl_SystemObject");
             Private___17_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__17_const_intnl_SystemString");
+            Private___22_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__22_intnl_VRCSDKBaseVRCPlayerApi");
             Private___68_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__68_intnl_SystemInt32");
             Private___100_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__100_intnl_SystemBoolean");
             Private___14_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__14_intnl_VRCSDKBaseVRCPlayerApi");
@@ -270,6 +304,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___5_intnl_SystemInt64 = new AstroUdonVariable<long>(GameManager, "__5_intnl_SystemInt64");
             Private___26_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__26_const_intnl_exitJumpLoc_UInt32");
             Private___4_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__4_const_intnl_SystemString");
+            Private___28_intnl_SystemObject = new AstroUdonVariable<long>(GameManager, "__28_intnl_SystemObject");
             Private___81_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__81_intnl_SystemBoolean");
             Private___1_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__1_intnl_SystemInt16");
             Private_infestedRunningSpeed = new AstroUdonVariable<float>(GameManager, "infestedRunningSpeed");
@@ -296,6 +331,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___54_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__54_intnl_SystemBoolean");
             Private___2_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__2_intnl_SystemString");
             Private___21_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__21_const_intnl_SystemString");
+            Private___13_intnl_SystemObject = new AstroUdonVariable<short>(GameManager, "__13_intnl_SystemObject");
             Private___51_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__51_const_intnl_SystemString");
             Private___41_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__41_intnl_SystemInt32");
             Private___47_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__47_intnl_SystemInt32");
@@ -318,6 +354,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___37_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__37_const_intnl_SystemString");
             Private___6_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(GameManager, "__6_intnl_UnityEngineVector3");
             Private___2_intnl_SystemSingle = new AstroUdonVariable<float>(GameManager, "__2_intnl_SystemSingle");
+            Private___3_intnl_UnityEngineComponentArray = new AstroUdonVariable<UnityEngine.Component[]>(GameManager, "__3_intnl_UnityEngineComponentArray");
             Private___0_workshop_NL_WorkshopManager = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_workshop_NL_WorkshopManager");
             Private___64_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__64_intnl_SystemInt32");
             Private___5_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__5_const_intnl_SystemString");
@@ -342,6 +379,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___97_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__97_const_intnl_SystemString");
             Private___44_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__44_intnl_SystemBoolean");
             Private___0_mp_delta_Int32 = new AstroUdonVariable<int>(GameManager, "__0_mp_delta_Int32");
+            Private___29_intnl_SystemObject = new AstroUdonVariable<int>(GameManager, "__29_intnl_SystemObject");
             Private___82_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__82_const_intnl_SystemString");
             Private___72_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__72_intnl_SystemBoolean");
             Private___6_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__6_intnl_SystemString");
@@ -375,14 +413,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___58_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__58_intnl_SystemBoolean");
             Private___11_intnl_SystemInt64 = new AstroUdonVariable<long>(GameManager, "__11_intnl_SystemInt64");
             Private___137_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__137_intnl_SystemBoolean");
+            Private___3_intnl_NL_Gun = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__3_intnl_NL_Gun");
+            Private___0_itemInHand_VRC_Pickup = new AstroUdonVariable<VRC.SDK3.Components.VRCPickup>(GameManager, "__0_itemInHand_VRC_Pickup");
             Private___73_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__73_const_intnl_SystemString");
             Private___15_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__15_const_intnl_exitJumpLoc_UInt32");
             Private___2_intnl_SystemInt64 = new AstroUdonVariable<long>(GameManager, "__2_intnl_SystemInt64");
+            Private___14_intnl_SystemObject = new AstroUdonVariable<short>(GameManager, "__14_intnl_SystemObject");
             Private_infestedJumpHeight = new AstroUdonVariable<float>(GameManager, "infestedJumpHeight");
-            Private___11_intnl_SystemObject = new AstroUdonVariable<short>(GameManager, "__11_intnl_SystemObject");
             Private___19_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__19_const_intnl_exitJumpLoc_UInt32");
             Private_lobbyManager = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "lobbyManager");
-            Private___4_intnl_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__4_intnl_NL_PlayerCharacter");
             Private___1_intnl_UnityEngineComponentArray = new AstroUdonVariable<UnityEngine.Component[]>(GameManager, "__1_intnl_UnityEngineComponentArray");
             Private___35_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__35_intnl_SystemInt16");
             Private___0_character_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_character_NL_PlayerCharacter");
@@ -413,6 +452,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___44_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__44_const_intnl_SystemString");
             Private___65_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__65_intnl_SystemBoolean");
             Private___92_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__92_const_intnl_SystemString");
+            Private___0_lastHuman_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_lastHuman_NL_PlayerCharacter");
             Private___0_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__0_intnl_SystemString");
             Private___33_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__33_intnl_SystemBoolean");
             Private___24_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__24_intnl_VRCSDKBaseVRCPlayerApi");
@@ -437,12 +477,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___88_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__88_const_intnl_SystemString");
             Private___0_intnl_SystemSingle = new AstroUdonVariable<float>(GameManager, "__0_intnl_SystemSingle");
             Private___108_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__108_intnl_SystemBoolean");
+            Private___12_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__12_intnl_SystemString");
             Private___40_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__40_intnl_SystemBoolean");
             Private___120_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__120_intnl_SystemBoolean");
             Private___8_intnl_SystemObject = new AstroUdonVariable<short>(GameManager, "__8_intnl_SystemObject");
             Private___94_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__94_intnl_SystemBoolean");
             Private___0_this_intnl_NLI_GameManager = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_this_intnl_NLI_GameManager");
             Private_audioSource_InGame = new AstroUdonVariable<UnityEngine.AudioSource>(GameManager, "audioSource_InGame");
+            Private___15_intnl_SystemObject = new AstroUdonVariable<short>(GameManager, "__15_intnl_SystemObject");
             Private___25_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__25_intnl_SystemInt32");
             Private___18_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__18_const_intnl_SystemString");
             Private___109_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__109_intnl_SystemBoolean");
@@ -461,6 +503,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___3_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(GameManager, "__3_intnl_UnityEngineVector3");
             Private___47_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__47_intnl_SystemBoolean");
             Private_humanRunningSpeed = new AstroUdonVariable<float>(GameManager, "humanRunningSpeed");
+            Private___4_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__4_intnl_SystemString");
             Private___134_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__134_intnl_SystemBoolean");
             Private___47_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__47_const_intnl_SystemString");
             Private___133_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__133_intnl_SystemBoolean");
@@ -486,11 +529,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___6_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__6_intnl_SystemBoolean");
             Private___4_intnl_SystemSingle = new AstroUdonVariable<float>(GameManager, "__4_intnl_SystemSingle");
             Private___2_const_intnl_SystemInt64 = new AstroUdonVariable<long>(GameManager, "__2_const_intnl_SystemInt64");
+            Private___11_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__11_intnl_SystemString");
             Private___63_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__63_intnl_SystemInt32");
             Private___84_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__84_intnl_SystemBoolean");
             Private___110_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__110_intnl_SystemBoolean");
             Private_isHero = new AstroUdonVariable<bool>(GameManager, "isHero");
             Private___24_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__24_const_intnl_SystemString");
+            Private___0_gunInHand_NL_Gun = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_gunInHand_NL_Gun");
             Private___54_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__54_const_intnl_SystemString");
             Private_isPlayerInVR = new AstroUdonVariable<bool>(GameManager, "isPlayerInVR");
             Private___16_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__16_intnl_SystemInt32");
@@ -519,6 +564,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___8_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__8_intnl_SystemBoolean");
             Private___20_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__20_intnl_SystemBoolean");
             Private___2_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(GameManager, "__2_intnl_UnityEngineVector3");
+            Private___3_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__3_intnl_SystemString");
             Private___98_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__98_const_intnl_SystemString");
             Private___54_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__54_intnl_SystemInt32");
             Private___39_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__39_const_intnl_SystemString");
@@ -542,6 +588,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___80_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__80_const_intnl_SystemString");
             Private___3_const_intnl_SystemInt64 = new AstroUdonVariable<long>(GameManager, "__3_const_intnl_SystemInt64");
             Private___27_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__27_intnl_SystemBoolean");
+            Private___0_mp_hitCharacter_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_mp_hitCharacter_NL_PlayerCharacter");
             Private___99_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__99_const_intnl_SystemString");
             Private___2_const_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__2_const_intnl_SystemInt32");
             Private___3_intnl_SystemSingle = new AstroUdonVariable<float>(GameManager, "__3_intnl_SystemSingle");
@@ -549,6 +596,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___0_mp_playerIndex_Int32 = new AstroUdonVariable<int>(GameManager, "__0_mp_playerIndex_Int32");
             Private_lobbySpawnPoints = new AstroUdonVariable<UnityEngine.Transform[]>(GameManager, "lobbySpawnPoints");
             Private___74_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__74_const_intnl_SystemString");
+            Private___3_intnl_VRCSDK3ComponentsVRCPickup = new AstroUdonVariable<VRC.SDK3.Components.VRCPickup>(GameManager, "__3_intnl_VRCSDK3ComponentsVRCPickup");
             Private___136_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__136_intnl_SystemBoolean");
             Private___0_mp_zValue_Single = new AstroUdonVariable<float>(GameManager, "__0_mp_zValue_Single");
             Private___27_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__27_const_intnl_SystemString");
@@ -559,6 +607,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___34_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__34_intnl_SystemInt16");
             Private___0_playerSlotUI_NLI_PlayerSlotUI = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_playerSlotUI_NLI_PlayerSlotUI");
             Private___32_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__32_intnl_SystemBoolean");
+            Private___4_intnl_UnityEngineComponent = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__4_intnl_UnityEngineComponent");
             Private___56_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__56_intnl_SystemBoolean");
             Private_maxMoney = new AstroUdonVariable<int>(GameManager, "maxMoney");
             Private___42_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__42_const_intnl_SystemString");
@@ -576,6 +625,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___86_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__86_const_intnl_SystemString");
             Private___14_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__14_intnl_SystemInt16");
             Private___1_const_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__1_const_intnl_SystemBoolean");
+            Private___2_intnl_NL_Gun = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__2_intnl_NL_Gun");
             Private___0_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__0_intnl_SystemInt16");
             Private___90_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__90_intnl_SystemBoolean");
             Private_nameBoard = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "nameBoard");
@@ -583,9 +633,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___75_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__75_const_intnl_SystemString");
             Private___130_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__130_intnl_SystemBoolean");
             Private_currency = new AstroUdonVariable<int>(GameManager, "currency");
+            Private___33_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(GameManager, "__33_intnl_VRCSDKBaseVRCPlayerApi");
             Private___62_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__62_intnl_SystemBoolean");
             Private___11_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__11_const_intnl_SystemString");
             Private___17_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__17_intnl_SystemInt16");
+            Private___1_intnl_VRCSDK3ComponentsVRCPickup = new AstroUdonVariable<VRC.SDK3.Components.VRCPickup>(GameManager, "__1_intnl_VRCSDK3ComponentsVRCPickup");
             Private___16_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__16_const_intnl_SystemString");
             Private___5_intnl_SystemObject = new AstroUdonVariable<short>(GameManager, "__5_intnl_SystemObject");
             Private___112_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__112_intnl_SystemBoolean");
@@ -603,6 +655,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___10_intnl_SystemSingle = new AstroUdonVariable<float>(GameManager, "__10_intnl_SystemSingle");
             Private___14_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__14_const_intnl_exitJumpLoc_UInt32");
             Private_teleportCheckTime = new AstroUdonVariable<float>(GameManager, "teleportCheckTime");
+            Private___1_resultCharacter_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__1_resultCharacter_NL_PlayerCharacter");
             Private___83_const_intnl_SystemString = new AstroUdonVariable<string>(GameManager, "__83_const_intnl_SystemString");
             Private___3_const_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__3_const_intnl_SystemInt32");
             Private___0_index_Int32 = new AstroUdonVariable<int>(GameManager, "__0_index_Int32");
@@ -611,6 +664,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget = new AstroUdonVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget>(GameManager, "__0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget");
             Private___26_intnl_SystemInt16 = new AstroUdonVariable<short>(GameManager, "__26_intnl_SystemInt16");
             Private___59_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__59_intnl_SystemBoolean");
+            Private___2_intnl_returnValSymbol_NL_PlayerCharacter = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__2_intnl_returnValSymbol_NL_PlayerCharacter");
             Private___18_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__18_const_intnl_exitJumpLoc_UInt32");
             Private___46_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__46_intnl_SystemBoolean");
             Private___39_intnl_SystemInt32 = new AstroUdonVariable<int>(GameManager, "__39_intnl_SystemInt32");
@@ -631,6 +685,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___3_intnl_SystemInt64 = new AstroUdonVariable<long>(GameManager, "__3_intnl_SystemInt64");
             Private___13_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(GameManager, "__13_const_intnl_exitJumpLoc_UInt32");
             Private___3_intnl_UnityEngineTransform = new AstroUdonVariable<UnityEngine.Transform>(GameManager, "__3_intnl_UnityEngineTransform");
+            Private___1_intnl_NL_Gun = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__1_intnl_NL_Gun");
             Private___10_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__10_intnl_SystemBoolean");
             Private_forceInfestedTeleport = new AstroUdonVariable<bool>(GameManager, "forceInfestedTeleport");
             Private___34_intnl_SystemObject = new AstroUdonVariable<short>(GameManager, "__34_intnl_SystemObject");
@@ -666,7 +721,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___0_intnl_UnityEngineComponent = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(GameManager, "__0_intnl_UnityEngineComponent");
             Private___132_intnl_SystemBoolean = new AstroUdonVariable<bool>(GameManager, "__132_intnl_SystemBoolean");
         }
-
         private void Cleanup_GameManager()
         {
             Private___35_intnl_SystemInt32 = null;
@@ -723,6 +777,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private_spectateCharacters = null;
             Private___2_intnl_VRCSDKBaseVRCPlayerApi = null;
             Private___6_intnl_VRCSDKBaseVRCPlayerApi = null;
+            Private___3_intnl_UnityEngineComponent = null;
             Private___93_intnl_SystemBoolean = null;
             Private___53_intnl_SystemInt32 = null;
             Private___4_const_intnl_SystemInt64 = null;
@@ -740,6 +795,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private_killRewards = null;
             Private___22_intnl_SystemInt16 = null;
             Private___96_intnl_SystemBoolean = null;
+            Private___34_intnl_VRCSDKBaseVRCPlayerApi = null;
             Private___9_intnl_SystemObject = null;
             Private___0_this_intnl_UnityEngineTransform = null;
             Private___5_intnl_SystemBoolean = null;
@@ -748,12 +804,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private_playerIndex = null;
             Private___62_intnl_SystemInt32 = null;
             Private___0_spawnPoint_Transform = null;
+            Private___1_itemInHand_VRC_Pickup = null;
             Private___10_const_intnl_exitJumpLoc_UInt32 = null;
             Private___104_intnl_SystemBoolean = null;
             Private___2_intnl_returnValSymbol_Boolean = null;
             Private___5_intnl_SystemInt32 = null;
             Private___0_const_intnl_exitJumpLoc_UInt32 = null;
             Private___103_intnl_SystemBoolean = null;
+            Private___1_gunInHand_NL_Gun = null;
             Private___15_intnl_SystemBoolean = null;
             Private_humanPlayerCount = null;
             Private___1_intnl_VRCSDKBaseVRCPlayerApi = null;
@@ -777,6 +835,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___138_intnl_SystemBoolean = null;
             Private___75_intnl_SystemBoolean = null;
             Private___5_const_intnl_exitJumpLoc_UInt32 = null;
+            Private___3_intnl_returnValSymbol_NL_PlayerCharacter = null;
             Private___13_intnl_SystemBoolean = null;
             Private_isJoinedGame = null;
             Private___1_const_intnl_SystemString = null;
@@ -795,6 +854,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___1_const_intnl_SystemSingle = null;
             Private___23_const_intnl_exitJumpLoc_UInt32 = null;
             Private___59_const_intnl_SystemString = null;
+            Private___0_resultCharacter_NL_PlayerCharacter = null;
             Private___5_intnl_SystemSingle = null;
             Private___84_const_intnl_SystemString = null;
             Private___56_intnl_SystemInt32 = null;
@@ -814,6 +874,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___9_character_NL_PlayerCharacter = null;
             Private___1_intnl_NL_UpdateManager = null;
             Private___22_intnl_SystemBoolean = null;
+            Private___20_intnl_SystemObject = null;
             Private___1_intnl_NLI_PlayerSlotUI = null;
             Private___0_intnl_UnityEngineComponentArray = null;
             Private___7_const_intnl_exitJumpLoc_UInt32 = null;
@@ -832,6 +893,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private_teleportCheckTimer = null;
             Private___48_intnl_SystemInt32 = null;
             Private_isInfested = null;
+            Private___2_intnl_UnityEngineComponentArray = null;
             Private___89_intnl_SystemBoolean = null;
             Private___36_intnl_VRCSDKBaseVRCPlayerApi = null;
             Private___16_intnl_SystemInt16 = null;
@@ -840,6 +902,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___65_const_intnl_SystemString = null;
             Private___4_intnl_SystemBoolean = null;
             Private___11_intnl_SystemSingle = null;
+            Private___0_intnl_NL_Gun = null;
             Private___106_intnl_SystemBoolean = null;
             Private___43_const_intnl_SystemString = null;
             Private___34_intnl_SystemInt32 = null;
@@ -867,6 +930,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___34_const_intnl_SystemString = null;
             Private___27_intnl_SystemObject = null;
             Private___17_const_intnl_SystemString = null;
+            Private___22_intnl_VRCSDKBaseVRCPlayerApi = null;
             Private___68_intnl_SystemInt32 = null;
             Private___100_intnl_SystemBoolean = null;
             Private___14_intnl_VRCSDKBaseVRCPlayerApi = null;
@@ -877,6 +941,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___5_intnl_SystemInt64 = null;
             Private___26_const_intnl_exitJumpLoc_UInt32 = null;
             Private___4_const_intnl_SystemString = null;
+            Private___28_intnl_SystemObject = null;
             Private___81_intnl_SystemBoolean = null;
             Private___1_intnl_SystemInt16 = null;
             Private_infestedRunningSpeed = null;
@@ -903,6 +968,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___54_intnl_SystemBoolean = null;
             Private___2_intnl_SystemString = null;
             Private___21_const_intnl_SystemString = null;
+            Private___13_intnl_SystemObject = null;
             Private___51_const_intnl_SystemString = null;
             Private___41_intnl_SystemInt32 = null;
             Private___47_intnl_SystemInt32 = null;
@@ -925,6 +991,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___37_const_intnl_SystemString = null;
             Private___6_intnl_UnityEngineVector3 = null;
             Private___2_intnl_SystemSingle = null;
+            Private___3_intnl_UnityEngineComponentArray = null;
             Private___0_workshop_NL_WorkshopManager = null;
             Private___64_intnl_SystemInt32 = null;
             Private___5_const_intnl_SystemString = null;
@@ -949,6 +1016,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___97_const_intnl_SystemString = null;
             Private___44_intnl_SystemBoolean = null;
             Private___0_mp_delta_Int32 = null;
+            Private___29_intnl_SystemObject = null;
             Private___82_const_intnl_SystemString = null;
             Private___72_intnl_SystemBoolean = null;
             Private___6_intnl_SystemString = null;
@@ -982,14 +1050,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___58_intnl_SystemBoolean = null;
             Private___11_intnl_SystemInt64 = null;
             Private___137_intnl_SystemBoolean = null;
+            Private___3_intnl_NL_Gun = null;
+            Private___0_itemInHand_VRC_Pickup = null;
             Private___73_const_intnl_SystemString = null;
             Private___15_const_intnl_exitJumpLoc_UInt32 = null;
             Private___2_intnl_SystemInt64 = null;
+            Private___14_intnl_SystemObject = null;
             Private_infestedJumpHeight = null;
-            Private___11_intnl_SystemObject = null;
             Private___19_const_intnl_exitJumpLoc_UInt32 = null;
             Private_lobbyManager = null;
-            Private___4_intnl_NL_PlayerCharacter = null;
             Private___1_intnl_UnityEngineComponentArray = null;
             Private___35_intnl_SystemInt16 = null;
             Private___0_character_NL_PlayerCharacter = null;
@@ -1020,6 +1089,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___44_const_intnl_SystemString = null;
             Private___65_intnl_SystemBoolean = null;
             Private___92_const_intnl_SystemString = null;
+            Private___0_lastHuman_NL_PlayerCharacter = null;
             Private___0_intnl_SystemString = null;
             Private___33_intnl_SystemBoolean = null;
             Private___24_intnl_VRCSDKBaseVRCPlayerApi = null;
@@ -1044,12 +1114,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___88_const_intnl_SystemString = null;
             Private___0_intnl_SystemSingle = null;
             Private___108_intnl_SystemBoolean = null;
+            Private___12_intnl_SystemString = null;
             Private___40_intnl_SystemBoolean = null;
             Private___120_intnl_SystemBoolean = null;
             Private___8_intnl_SystemObject = null;
             Private___94_intnl_SystemBoolean = null;
             Private___0_this_intnl_NLI_GameManager = null;
             Private_audioSource_InGame = null;
+            Private___15_intnl_SystemObject = null;
             Private___25_intnl_SystemInt32 = null;
             Private___18_const_intnl_SystemString = null;
             Private___109_intnl_SystemBoolean = null;
@@ -1068,6 +1140,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___3_intnl_UnityEngineVector3 = null;
             Private___47_intnl_SystemBoolean = null;
             Private_humanRunningSpeed = null;
+            Private___4_intnl_SystemString = null;
             Private___134_intnl_SystemBoolean = null;
             Private___47_const_intnl_SystemString = null;
             Private___133_intnl_SystemBoolean = null;
@@ -1093,11 +1166,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___6_intnl_SystemBoolean = null;
             Private___4_intnl_SystemSingle = null;
             Private___2_const_intnl_SystemInt64 = null;
+            Private___11_intnl_SystemString = null;
             Private___63_intnl_SystemInt32 = null;
             Private___84_intnl_SystemBoolean = null;
             Private___110_intnl_SystemBoolean = null;
             Private_isHero = null;
             Private___24_const_intnl_SystemString = null;
+            Private___0_gunInHand_NL_Gun = null;
             Private___54_const_intnl_SystemString = null;
             Private_isPlayerInVR = null;
             Private___16_intnl_SystemInt32 = null;
@@ -1126,6 +1201,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___8_intnl_SystemBoolean = null;
             Private___20_intnl_SystemBoolean = null;
             Private___2_intnl_UnityEngineVector3 = null;
+            Private___3_intnl_SystemString = null;
             Private___98_const_intnl_SystemString = null;
             Private___54_intnl_SystemInt32 = null;
             Private___39_const_intnl_SystemString = null;
@@ -1149,6 +1225,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___80_const_intnl_SystemString = null;
             Private___3_const_intnl_SystemInt64 = null;
             Private___27_intnl_SystemBoolean = null;
+            Private___0_mp_hitCharacter_NL_PlayerCharacter = null;
             Private___99_const_intnl_SystemString = null;
             Private___2_const_intnl_SystemInt32 = null;
             Private___3_intnl_SystemSingle = null;
@@ -1156,6 +1233,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___0_mp_playerIndex_Int32 = null;
             Private_lobbySpawnPoints = null;
             Private___74_const_intnl_SystemString = null;
+            Private___3_intnl_VRCSDK3ComponentsVRCPickup = null;
             Private___136_intnl_SystemBoolean = null;
             Private___0_mp_zValue_Single = null;
             Private___27_const_intnl_SystemString = null;
@@ -1166,6 +1244,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___34_intnl_SystemInt16 = null;
             Private___0_playerSlotUI_NLI_PlayerSlotUI = null;
             Private___32_intnl_SystemBoolean = null;
+            Private___4_intnl_UnityEngineComponent = null;
             Private___56_intnl_SystemBoolean = null;
             Private_maxMoney = null;
             Private___42_const_intnl_SystemString = null;
@@ -1183,6 +1262,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___86_const_intnl_SystemString = null;
             Private___14_intnl_SystemInt16 = null;
             Private___1_const_intnl_SystemBoolean = null;
+            Private___2_intnl_NL_Gun = null;
             Private___0_intnl_SystemInt16 = null;
             Private___90_intnl_SystemBoolean = null;
             Private_nameBoard = null;
@@ -1190,9 +1270,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___75_const_intnl_SystemString = null;
             Private___130_intnl_SystemBoolean = null;
             Private_currency = null;
+            Private___33_intnl_VRCSDKBaseVRCPlayerApi = null;
             Private___62_intnl_SystemBoolean = null;
             Private___11_const_intnl_SystemString = null;
             Private___17_intnl_SystemInt16 = null;
+            Private___1_intnl_VRCSDK3ComponentsVRCPickup = null;
             Private___16_const_intnl_SystemString = null;
             Private___5_intnl_SystemObject = null;
             Private___112_intnl_SystemBoolean = null;
@@ -1210,6 +1292,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___10_intnl_SystemSingle = null;
             Private___14_const_intnl_exitJumpLoc_UInt32 = null;
             Private_teleportCheckTime = null;
+            Private___1_resultCharacter_NL_PlayerCharacter = null;
             Private___83_const_intnl_SystemString = null;
             Private___3_const_intnl_SystemInt32 = null;
             Private___0_index_Int32 = null;
@@ -1218,6 +1301,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget = null;
             Private___26_intnl_SystemInt16 = null;
             Private___59_intnl_SystemBoolean = null;
+            Private___2_intnl_returnValSymbol_NL_PlayerCharacter = null;
             Private___18_const_intnl_exitJumpLoc_UInt32 = null;
             Private___46_intnl_SystemBoolean = null;
             Private___39_intnl_SystemInt32 = null;
@@ -1238,6 +1322,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             Private___3_intnl_SystemInt64 = null;
             Private___13_const_intnl_exitJumpLoc_UInt32 = null;
             Private___3_intnl_UnityEngineTransform = null;
+            Private___1_intnl_NL_Gun = null;
             Private___10_intnl_SystemBoolean = null;
             Private_forceInfestedTeleport = null;
             Private___34_intnl_SystemObject = null;
@@ -1482,9 +1567,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___29_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___29_intnl_SystemInt16.Value = value.Value;
+                    if (Private___29_intnl_SystemInt16 != null)
+                    {
+                        Private___29_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -1601,9 +1689,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___3_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___3_intnl_SystemInt16.Value = value.Value;
+                    if (Private___3_intnl_SystemInt16 != null)
+                    {
+                        Private___3_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -1864,9 +1955,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___30_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___30_intnl_SystemInt16.Value = value.Value;
+                    if (Private___30_intnl_SystemInt16 != null)
+                    {
+                        Private___30_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -2171,9 +2265,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___33_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___33_intnl_SystemInt16.Value = value.Value;
+                    if (Private___33_intnl_SystemInt16 != null)
+                    {
+                        Private___33_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -2193,9 +2290,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___10_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___10_intnl_SystemInt16.Value = value.Value;
+                    if (Private___10_intnl_SystemInt16 != null)
+                    {
+                        Private___10_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -2287,9 +2387,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___35_intnl_SystemObject != null)
+                if (value.HasValue)
                 {
-                    Private___35_intnl_SystemObject.Value = value.Value;
+                    if (Private___35_intnl_SystemObject != null)
+                    {
+                        Private___35_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -2456,9 +2559,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___13_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___13_intnl_SystemInt16.Value = value.Value;
+                    if (Private___13_intnl_SystemInt16 != null)
+                    {
+                        Private___13_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -2550,6 +2656,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 if (Private___6_intnl_VRCSDKBaseVRCPlayerApi != null)
                 {
                     Private___6_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __3_intnl_UnityEngineComponent
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_UnityEngineComponent != null)
+                {
+                    return Private___3_intnl_UnityEngineComponent.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_UnityEngineComponent != null)
+                {
+                    Private___3_intnl_UnityEngineComponent.Value = value;
                 }
             }
         }
@@ -2882,9 +3010,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___7_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___7_intnl_SystemInt16.Value = value.Value;
+                    if (Private___7_intnl_SystemInt16 != null)
+                    {
+                        Private___7_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -2929,9 +3060,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___22_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___22_intnl_SystemInt16.Value = value.Value;
+                    if (Private___22_intnl_SystemInt16 != null)
+                    {
+                        Private___22_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -2957,6 +3091,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                     {
                         Private___96_intnl_SystemBoolean.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.SDKBase.VRCPlayerApi __34_intnl_VRCSDKBaseVRCPlayerApi
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___34_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    return Private___34_intnl_VRCSDKBaseVRCPlayerApi.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___34_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    Private___34_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
                 }
             }
         }
@@ -3155,6 +3311,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.SDK3.Components.VRCPickup __1_itemInHand_VRC_Pickup
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_itemInHand_VRC_Pickup != null)
+                {
+                    return Private___1_itemInHand_VRC_Pickup.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_itemInHand_VRC_Pickup != null)
+                {
+                    Private___1_itemInHand_VRC_Pickup.Value = value;
+                }
+            }
+        }
+
         internal uint? __10_const_intnl_exitJumpLoc_UInt32
         {
             [HideFromIl2Cpp]
@@ -3301,6 +3479,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                     {
                         Private___103_intnl_SystemBoolean.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __1_gunInHand_NL_Gun
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_gunInHand_NL_Gun != null)
+                {
+                    return Private___1_gunInHand_NL_Gun.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_gunInHand_NL_Gun != null)
+                {
+                    Private___1_gunInHand_NL_Gun.Value = value;
                 }
             }
         }
@@ -3853,6 +4053,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __3_intnl_returnValSymbol_NL_PlayerCharacter
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_returnValSymbol_NL_PlayerCharacter != null)
+                {
+                    return Private___3_intnl_returnValSymbol_NL_PlayerCharacter.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_returnValSymbol_NL_PlayerCharacter != null)
+                {
+                    Private___3_intnl_returnValSymbol_NL_PlayerCharacter.Value = value;
+                }
+            }
+        }
+
         internal bool? __13_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
@@ -4034,9 +4256,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___8_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___8_intnl_SystemInt16.Value = value.Value;
+                    if (Private___8_intnl_SystemInt16 != null)
+                    {
+                        Private___8_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -4156,9 +4381,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___25_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___25_intnl_SystemInt16.Value = value.Value;
+                    if (Private___25_intnl_SystemInt16 != null)
+                    {
+                        Private___25_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -4278,6 +4506,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 if (Private___59_const_intnl_SystemString != null)
                 {
                     Private___59_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_resultCharacter_NL_PlayerCharacter
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_resultCharacter_NL_PlayerCharacter != null)
+                {
+                    return Private___0_resultCharacter_NL_PlayerCharacter.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_resultCharacter_NL_PlayerCharacter != null)
+                {
+                    Private___0_resultCharacter_NL_PlayerCharacter.Value = value;
                 }
             }
         }
@@ -4730,6 +4980,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.SDKBase.VRCPlayerApi __20_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___20_intnl_SystemObject != null)
+                {
+                    return Private___20_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___20_intnl_SystemObject != null)
+                {
+                    Private___20_intnl_SystemObject.Value = value;
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour __1_intnl_NLI_PlayerSlotUI
         {
             [HideFromIl2Cpp]
@@ -5153,6 +5425,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal UnityEngine.Component[] __2_intnl_UnityEngineComponentArray
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_UnityEngineComponentArray != null)
+                {
+                    return Private___2_intnl_UnityEngineComponentArray.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_intnl_UnityEngineComponentArray != null)
+                {
+                    Private___2_intnl_UnityEngineComponentArray.Value = value;
+                }
+            }
+        }
+
         internal bool? __89_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
@@ -5215,9 +5509,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___16_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___16_intnl_SystemInt16.Value = value.Value;
+                    if (Private___16_intnl_SystemInt16 != null)
+                    {
+                        Private___16_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -5337,6 +5634,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                     {
                         Private___11_intnl_SystemSingle.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_intnl_NL_Gun
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_intnl_NL_Gun != null)
+                {
+                    return Private___0_intnl_NL_Gun.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_intnl_NL_Gun != null)
+                {
+                    Private___0_intnl_NL_Gun.Value = value;
                 }
             }
         }
@@ -5707,9 +6026,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___28_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___28_intnl_SystemInt16.Value = value.Value;
+                    if (Private___28_intnl_SystemInt16 != null)
+                    {
+                        Private___28_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -5974,6 +6296,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.SDKBase.VRCPlayerApi __22_intnl_VRCSDKBaseVRCPlayerApi
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___22_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    return Private___22_intnl_VRCSDKBaseVRCPlayerApi.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___22_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    Private___22_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
+                }
+            }
+        }
+
         internal int? __68_intnl_SystemInt32
         {
             [HideFromIl2Cpp]
@@ -6218,6 +6562,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal long? __28_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___28_intnl_SystemObject != null)
+                {
+                    return Private___28_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___28_intnl_SystemObject != null)
+                    {
+                        Private___28_intnl_SystemObject.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal bool? __81_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
@@ -6258,9 +6627,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___1_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___1_intnl_SystemInt16.Value = value.Value;
+                    if (Private___1_intnl_SystemInt16 != null)
+                    {
+                        Private___1_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -6832,6 +7204,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal short? __13_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___13_intnl_SystemObject != null)
+                {
+                    return Private___13_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___13_intnl_SystemObject != null)
+                    {
+                        Private___13_intnl_SystemObject.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal string __51_const_intnl_SystemString
         {
             [HideFromIl2Cpp]
@@ -7085,9 +7482,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___19_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___19_intnl_SystemInt16.Value = value.Value;
+                    if (Private___19_intnl_SystemInt16 != null)
+                    {
+                        Private___19_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -7361,6 +7761,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal UnityEngine.Component[] __3_intnl_UnityEngineComponentArray
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_UnityEngineComponentArray != null)
+                {
+                    return Private___3_intnl_UnityEngineComponentArray.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_UnityEngineComponentArray != null)
+                {
+                    Private___3_intnl_UnityEngineComponentArray.Value = value;
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour __0_workshop_NL_WorkshopManager
         {
             [HideFromIl2Cpp]
@@ -7470,9 +7892,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___21_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___21_intnl_SystemInt16.Value = value.Value;
+                    if (Private___21_intnl_SystemInt16 != null)
+                    {
+                        Private___21_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -7517,9 +7942,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___5_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___5_intnl_SystemInt16.Value = value.Value;
+                    if (Private___5_intnl_SystemInt16 != null)
+                    {
+                        Private___5_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -7923,6 +8351,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                     if (Private___0_mp_delta_Int32 != null)
                     {
                         Private___0_mp_delta_Int32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __29_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___29_intnl_SystemObject != null)
+                {
+                    return Private___29_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___29_intnl_SystemObject != null)
+                    {
+                        Private___29_intnl_SystemObject.Value = value.Value;
                     }
                 }
             }
@@ -8338,9 +8791,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___32_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___32_intnl_SystemInt16.Value = value.Value;
+                    if (Private___32_intnl_SystemInt16 != null)
+                    {
+                        Private___32_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -8360,9 +8816,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___24_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___24_intnl_SystemInt16.Value = value.Value;
+                    if (Private___24_intnl_SystemInt16 != null)
+                    {
+                        Private___24_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -8476,9 +8935,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___12_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___12_intnl_SystemInt16.Value = value.Value;
+                    if (Private___12_intnl_SystemInt16 != null)
+                    {
+                        Private___12_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -8523,9 +8985,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___27_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___27_intnl_SystemInt16.Value = value.Value;
+                    if (Private___27_intnl_SystemInt16 != null)
+                    {
+                        Private___27_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -8702,6 +9167,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __3_intnl_NL_Gun
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_NL_Gun != null)
+                {
+                    return Private___3_intnl_NL_Gun.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_NL_Gun != null)
+                {
+                    Private___3_intnl_NL_Gun.Value = value;
+                }
+            }
+        }
+
+        internal VRC.SDK3.Components.VRCPickup __0_itemInHand_VRC_Pickup
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_itemInHand_VRC_Pickup != null)
+                {
+                    return Private___0_itemInHand_VRC_Pickup.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_itemInHand_VRC_Pickup != null)
+                {
+                    Private___0_itemInHand_VRC_Pickup.Value = value;
+                }
+            }
+        }
+
         internal string __73_const_intnl_SystemString
         {
             [HideFromIl2Cpp]
@@ -8774,6 +9283,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal short? __14_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___14_intnl_SystemObject != null)
+                {
+                    return Private___14_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___14_intnl_SystemObject != null)
+                    {
+                        Private___14_intnl_SystemObject.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal float? infestedJumpHeight
         {
             [HideFromIl2Cpp]
@@ -8795,28 +9329,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                     {
                         Private_infestedJumpHeight.Value = value.Value;
                     }
-                }
-            }
-        }
-
-        internal short? __11_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___11_intnl_SystemObject != null)
-                {
-                    return Private___11_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___11_intnl_SystemObject != null)
-                {
-                    Private___11_intnl_SystemObject.Value= value.Value;
                 }
             }
         }
@@ -8868,28 +9380,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __4_intnl_NL_PlayerCharacter
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___4_intnl_NL_PlayerCharacter != null)
-                {
-                    return Private___4_intnl_NL_PlayerCharacter.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___4_intnl_NL_PlayerCharacter != null)
-                {
-                    Private___4_intnl_NL_PlayerCharacter.Value = value;
-                }
-            }
-        }
-
         internal UnityEngine.Component[] __1_intnl_UnityEngineComponentArray
         {
             [HideFromIl2Cpp]
@@ -8927,9 +9417,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___35_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___35_intnl_SystemInt16.Value = value.Value;
+                    if (Private___35_intnl_SystemInt16 != null)
+                    {
+                        Private___35_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -9209,9 +9702,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___15_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___15_intnl_SystemInt16.Value = value.Value;
+                    if (Private___15_intnl_SystemInt16 != null)
+                    {
+                        Private___15_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -9281,9 +9777,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___7_intnl_SystemObject != null)
+                if (value.HasValue)
                 {
-                    Private___7_intnl_SystemObject.Value = value.Value;
+                    if (Private___7_intnl_SystemObject != null)
+                    {
+                        Private___7_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -9597,6 +10096,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 if (Private___92_const_intnl_SystemString != null)
                 {
                     Private___92_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_lastHuman_NL_PlayerCharacter
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_lastHuman_NL_PlayerCharacter != null)
+                {
+                    return Private___0_lastHuman_NL_PlayerCharacter.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_lastHuman_NL_PlayerCharacter != null)
+                {
+                    Private___0_lastHuman_NL_PlayerCharacter.Value = value;
                 }
             }
         }
@@ -9957,9 +10478,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___19_intnl_SystemObject != null)
+                if (value.HasValue)
                 {
-                    Private___19_intnl_SystemObject.Value = value.Value;
+                    if (Private___19_intnl_SystemObject != null)
+                    {
+                        Private___19_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -10004,9 +10528,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___2_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___2_intnl_SystemInt16.Value = value.Value;
+                    if (Private___2_intnl_SystemInt16 != null)
+                    {
+                        Private___2_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -10177,6 +10704,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal string __12_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___12_intnl_SystemString != null)
+                {
+                    return Private___12_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___12_intnl_SystemString != null)
+                {
+                    Private___12_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
         internal bool? __40_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
@@ -10242,9 +10791,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___8_intnl_SystemObject != null)
+                if (value.HasValue)
                 {
-                    Private___8_intnl_SystemObject.Value = value.Value;
+                    if (Private___8_intnl_SystemObject != null)
+                    {
+                        Private___8_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -10314,6 +10866,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 if (Private_audioSource_InGame != null)
                 {
                     Private_audioSource_InGame.Value = value;
+                }
+            }
+        }
+
+        internal short? __15_intnl_SystemObject
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___15_intnl_SystemObject != null)
+                {
+                    return Private___15_intnl_SystemObject.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___15_intnl_SystemObject != null)
+                    {
+                        Private___15_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -10624,9 +11201,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___18_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___18_intnl_SystemInt16.Value = value.Value;
+                    if (Private___18_intnl_SystemInt16 != null)
+                    {
+                        Private___18_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -10671,9 +11251,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___9_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___9_intnl_SystemInt16.Value = value.Value;
+                    if (Private___9_intnl_SystemInt16 != null)
+                    {
+                        Private___9_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -10749,6 +11332,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                     {
                         Private_humanRunningSpeed.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal string __4_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_SystemString != null)
+                {
+                    return Private___4_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_intnl_SystemString != null)
+                {
+                    Private___4_intnl_SystemString.Value = value;
                 }
             }
         }
@@ -11022,9 +11627,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___20_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___20_intnl_SystemInt16.Value = value.Value;
+                    if (Private___20_intnl_SystemInt16 != null)
+                    {
+                        Private___20_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -11069,9 +11677,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___0_const_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___0_const_intnl_SystemInt16.Value = value.Value;
+                    if (Private___0_const_intnl_SystemInt16 != null)
+                    {
+                        Private___0_const_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -11141,9 +11752,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___6_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___6_intnl_SystemInt16.Value = value.Value;
+                    if (Private___6_intnl_SystemInt16 != null)
+                    {
+                        Private___6_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -11210,9 +11824,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___23_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___23_intnl_SystemInt16.Value = value.Value;
+                    if (Private___23_intnl_SystemInt16 != null)
+                    {
+                        Private___23_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -11342,6 +11959,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal string __11_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___11_intnl_SystemString != null)
+                {
+                    return Private___11_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___11_intnl_SystemString != null)
+                {
+                    Private___11_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
         internal int? __63_intnl_SystemInt32
         {
             [HideFromIl2Cpp]
@@ -11460,6 +12099,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 if (Private___24_const_intnl_SystemString != null)
                 {
                     Private___24_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __0_gunInHand_NL_Gun
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_gunInHand_NL_Gun != null)
+                {
+                    return Private___0_gunInHand_NL_Gun.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_gunInHand_NL_Gun != null)
+                {
+                    Private___0_gunInHand_NL_Gun.Value = value;
                 }
             }
         }
@@ -11867,9 +12528,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___31_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___31_intnl_SystemInt16.Value = value.Value;
+                    if (Private___31_intnl_SystemInt16 != null)
+                    {
+                        Private___31_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -12140,6 +12804,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal string __3_intnl_SystemString
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_SystemString != null)
+                {
+                    return Private___3_intnl_SystemString.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_SystemString != null)
+                {
+                    Private___3_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
         internal string __98_const_intnl_SystemString
         {
             [HideFromIl2Cpp]
@@ -12249,9 +12935,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___11_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___11_intnl_SystemInt16.Value = value.Value;
+                    if (Private___11_intnl_SystemInt16 != null)
+                    {
+                        Private___11_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -12697,6 +13386,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __0_mp_hitCharacter_NL_PlayerCharacter
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_mp_hitCharacter_NL_PlayerCharacter != null)
+                {
+                    return Private___0_mp_hitCharacter_NL_PlayerCharacter.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_mp_hitCharacter_NL_PlayerCharacter != null)
+                {
+                    Private___0_mp_hitCharacter_NL_PlayerCharacter.Value = value;
+                }
+            }
+        }
+
         internal string __99_const_intnl_SystemString
         {
             [HideFromIl2Cpp]
@@ -12856,6 +13567,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                 if (Private___74_const_intnl_SystemString != null)
                 {
                     Private___74_const_intnl_SystemString.Value = value;
+                }
+            }
+        }
+
+        internal VRC.SDK3.Components.VRCPickup __3_intnl_VRCSDK3ComponentsVRCPickup
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___3_intnl_VRCSDK3ComponentsVRCPickup != null)
+                {
+                    return Private___3_intnl_VRCSDK3ComponentsVRCPickup.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___3_intnl_VRCSDK3ComponentsVRCPickup != null)
+                {
+                    Private___3_intnl_VRCSDK3ComponentsVRCPickup.Value = value;
                 }
             }
         }
@@ -13038,9 +13771,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___34_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___34_intnl_SystemInt16.Value = value.Value;
+                    if (Private___34_intnl_SystemInt16 != null)
+                    {
+                        Private___34_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -13088,6 +13824,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                     {
                         Private___32_intnl_SystemBoolean.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __4_intnl_UnityEngineComponent
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___4_intnl_UnityEngineComponent != null)
+                {
+                    return Private___4_intnl_UnityEngineComponent.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___4_intnl_UnityEngineComponent != null)
+                {
+                    Private___4_intnl_UnityEngineComponent.Value = value;
                 }
             }
         }
@@ -13458,9 +14216,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___14_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___14_intnl_SystemInt16.Value = value.Value;
+                    if (Private___14_intnl_SystemInt16 != null)
+                    {
+                        Private___14_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -13490,6 +14251,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __2_intnl_NL_Gun
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_NL_Gun != null)
+                {
+                    return Private___2_intnl_NL_Gun.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_intnl_NL_Gun != null)
+                {
+                    Private___2_intnl_NL_Gun.Value = value;
+                }
+            }
+        }
+
         internal short? __0_intnl_SystemInt16
         {
             [HideFromIl2Cpp]
@@ -13505,9 +14288,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___0_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___0_intnl_SystemInt16.Value = value.Value;
+                    if (Private___0_intnl_SystemInt16 != null)
+                    {
+                        Private___0_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -13656,6 +14442,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.SDKBase.VRCPlayerApi __33_intnl_VRCSDKBaseVRCPlayerApi
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___33_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    return Private___33_intnl_VRCSDKBaseVRCPlayerApi.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___33_intnl_VRCSDKBaseVRCPlayerApi != null)
+                {
+                    Private___33_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
+                }
+            }
+        }
+
         internal bool? __62_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
@@ -13718,9 +14526,34 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___17_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___17_intnl_SystemInt16.Value = value.Value;
+                    if (Private___17_intnl_SystemInt16 != null)
+                    {
+                        Private___17_intnl_SystemInt16.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.SDK3.Components.VRCPickup __1_intnl_VRCSDK3ComponentsVRCPickup
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_VRCSDK3ComponentsVRCPickup != null)
+                {
+                    return Private___1_intnl_VRCSDK3ComponentsVRCPickup.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_VRCSDK3ComponentsVRCPickup != null)
+                {
+                    Private___1_intnl_VRCSDK3ComponentsVRCPickup.Value = value;
                 }
             }
         }
@@ -13762,9 +14595,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___5_intnl_SystemObject != null)
+                if (value.HasValue)
                 {
-                    Private___5_intnl_SystemObject.Value = value.Value;
+                    if (Private___5_intnl_SystemObject != null)
+                    {
+                        Private___5_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -14135,6 +14971,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __1_resultCharacter_NL_PlayerCharacter
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_resultCharacter_NL_PlayerCharacter != null)
+                {
+                    return Private___1_resultCharacter_NL_PlayerCharacter.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_resultCharacter_NL_PlayerCharacter != null)
+                {
+                    Private___1_resultCharacter_NL_PlayerCharacter.Value = value;
+                }
+            }
+        }
+
         internal string __83_const_intnl_SystemString
         {
             [HideFromIl2Cpp]
@@ -14247,9 +15105,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___37_intnl_SystemObject != null)
+                if (value.HasValue)
                 {
-                    Private___37_intnl_SystemObject.Value = value.Value;
+                    if (Private___37_intnl_SystemObject != null)
+                    {
+                        Private___37_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -14294,9 +15155,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___26_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___26_intnl_SystemInt16.Value = value.Value;
+                    if (Private___26_intnl_SystemInt16 != null)
+                    {
+                        Private___26_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -14322,6 +15186,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
                     {
                         Private___59_intnl_SystemBoolean.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __2_intnl_returnValSymbol_NL_PlayerCharacter
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___2_intnl_returnValSymbol_NL_PlayerCharacter != null)
+                {
+                    return Private___2_intnl_returnValSymbol_NL_PlayerCharacter.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___2_intnl_returnValSymbol_NL_PlayerCharacter != null)
+                {
+                    Private___2_intnl_returnValSymbol_NL_PlayerCharacter.Value = value;
                 }
             }
         }
@@ -14507,9 +15393,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___38_intnl_SystemObject != null)
+                if (value.HasValue)
                 {
-                    Private___38_intnl_SystemObject.Value = value.Value;
+                    if (Private___38_intnl_SystemObject != null)
+                    {
+                        Private___38_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -14651,9 +15540,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___4_intnl_SystemInt16 != null)
+                if (value.HasValue)
                 {
-                    Private___4_intnl_SystemInt16.Value = value.Value;
+                    if (Private___4_intnl_SystemInt16 != null)
+                    {
+                        Private___4_intnl_SystemInt16.Value = value.Value;
+                    }
                 }
             }
         }
@@ -14799,6 +15691,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __1_intnl_NL_Gun
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_intnl_NL_Gun != null)
+                {
+                    return Private___1_intnl_NL_Gun.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_intnl_NL_Gun != null)
+                {
+                    Private___1_intnl_NL_Gun.Value = value;
+                }
+            }
+        }
+
         internal bool? __10_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
@@ -14864,9 +15778,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
             [HideFromIl2Cpp]
             set
             {
-                if (Private___34_intnl_SystemObject != null)
+                if (value.HasValue)
                 {
-                    Private___34_intnl_SystemObject.Value = value.Value;
+                    if (Private___34_intnl_SystemObject != null)
+                    {
+                        Private___34_intnl_SystemObject.Value = value.Value;
+                    }
                 }
             }
         }
@@ -15677,6 +16594,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<UnityEngine.Component[]> Private_spectateCharacters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___2_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___6_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_UnityEngineComponent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___93_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___53_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<long> Private___4_const_intnl_SystemInt64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15694,6 +16612,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<int> Private_killRewards { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___22_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___96_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___34_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___9_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Transform> Private___0_this_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___5_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15702,12 +16621,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<int> Private_playerIndex { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___62_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Transform> Private___0_spawnPoint_Transform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDK3.Components.VRCPickup> Private___1_itemInHand_VRC_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___10_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___104_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___2_intnl_returnValSymbol_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___5_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___0_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___103_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_gunInHand_NL_Gun { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___15_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_humanPlayerCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___1_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15731,6 +16652,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<bool> Private___138_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___75_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___5_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_returnValSymbol_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___13_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isJoinedGame { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___1_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15749,6 +16671,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<float> Private___1_const_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___23_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___59_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_resultCharacter_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___5_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___84_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___56_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15768,6 +16691,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___9_character_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_NL_UpdateManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___22_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___20_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_NLI_PlayerSlotUI { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Component[]> Private___0_intnl_UnityEngineComponentArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___7_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15786,6 +16710,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<float> Private_teleportCheckTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___48_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isInfested { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Component[]> Private___2_intnl_UnityEngineComponentArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___89_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___36_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___16_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15794,6 +16719,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___65_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___4_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___11_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_NL_Gun { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___106_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___43_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___34_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15821,6 +16747,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___34_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Transform> Private___27_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___17_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___22_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___68_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___100_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___14_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15831,6 +16758,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<long> Private___5_intnl_SystemInt64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___26_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___4_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<long> Private___28_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___81_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___1_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private_infestedRunningSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15857,6 +16785,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<bool> Private___54_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___2_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___21_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<short> Private___13_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___51_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___41_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___47_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15879,6 +16808,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___37_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Vector3> Private___6_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___2_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Component[]> Private___3_intnl_UnityEngineComponentArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_workshop_NL_WorkshopManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___64_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___5_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15903,6 +16833,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___97_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___44_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___0_mp_delta_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___29_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___82_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___72_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___6_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15936,14 +16867,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<bool> Private___58_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<long> Private___11_intnl_SystemInt64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___137_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_NL_Gun { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDK3.Components.VRCPickup> Private___0_itemInHand_VRC_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___73_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___15_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<long> Private___2_intnl_SystemInt64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<short> Private___14_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private_infestedJumpHeight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<short> Private___11_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___19_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_lobbyManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___4_intnl_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Component[]> Private___1_intnl_UnityEngineComponentArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___35_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_character_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15974,6 +16906,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___44_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___65_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___92_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_lastHuman_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___0_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___33_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___24_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15998,12 +16931,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___88_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___0_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___108_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___12_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___40_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___120_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___8_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___94_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_this_intnl_NLI_GameManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.AudioSource> Private_audioSource_InGame { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<short> Private___15_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___25_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___18_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___109_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16022,6 +16957,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<UnityEngine.Vector3> Private___3_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___47_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private_humanRunningSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___4_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___134_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___47_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___133_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16047,11 +16983,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<bool> Private___6_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___4_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<long> Private___2_const_intnl_SystemInt64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___11_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___63_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___84_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___110_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isHero { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___24_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_gunInHand_NL_Gun { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___54_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isPlayerInVR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___16_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16080,6 +17018,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<bool> Private___8_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___20_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Vector3> Private___2_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___3_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___98_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___54_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___39_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16103,6 +17042,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___80_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<long> Private___3_const_intnl_SystemInt64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___27_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_mp_hitCharacter_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___99_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___2_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___3_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16110,6 +17050,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<int> Private___0_mp_playerIndex_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Transform[]> Private_lobbySpawnPoints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___74_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDK3.Components.VRCPickup> Private___3_intnl_VRCSDK3ComponentsVRCPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___136_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___0_mp_zValue_Single { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___27_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16120,6 +17061,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<short> Private___34_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_playerSlotUI_NLI_PlayerSlotUI { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___32_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___4_intnl_UnityEngineComponent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___56_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_maxMoney { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___42_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16137,6 +17079,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___86_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___14_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___1_const_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___2_intnl_NL_Gun { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___0_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___90_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_nameBoard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16144,9 +17087,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<string> Private___75_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___130_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_currency { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___33_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___62_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___11_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___17_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDK3.Components.VRCPickup> Private___1_intnl_VRCSDK3ComponentsVRCPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___16_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___5_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___112_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16164,6 +17109,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<float> Private___10_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___14_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private_teleportCheckTime { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_resultCharacter_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___83_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___3_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___0_index_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16172,6 +17118,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget> Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___26_intnl_SystemInt16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___59_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___2_intnl_returnValSymbol_NL_PlayerCharacter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___18_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___46_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___39_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -16192,6 +17139,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.UdonTycoon
         private AstroUdonVariable<long> Private___3_intnl_SystemInt64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___13_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Transform> Private___3_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_NL_Gun { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___10_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_forceInfestedTeleport { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<short> Private___34_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;

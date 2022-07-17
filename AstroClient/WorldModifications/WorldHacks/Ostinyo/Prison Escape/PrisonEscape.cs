@@ -7,7 +7,6 @@ using AstroClient.AstroMonos.Components.Cheats.PatronUnlocker;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
 using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.AstroMonos.Components.Tools;
-using AstroClient.CheetosUI;
 using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;

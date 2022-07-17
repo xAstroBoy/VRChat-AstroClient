@@ -4,7 +4,7 @@ using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.Utility;
 
-namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components.Fun
+namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components
 {
     internal class FunBehavioursSubMenu 
     {

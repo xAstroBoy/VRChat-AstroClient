@@ -9,8 +9,8 @@ using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.VRC_Interactab
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.VRC_Triggers;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.WorldObjects;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
+using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Components;
-using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.ObjectInfoSubMenu;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Pickup;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Scale;

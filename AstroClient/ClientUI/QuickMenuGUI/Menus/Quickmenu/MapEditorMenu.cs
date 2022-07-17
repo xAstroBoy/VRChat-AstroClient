@@ -1,5 +1,4 @@
 ﻿using System;
-using AstroClient.CheetosUI;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.xAstroBoy;

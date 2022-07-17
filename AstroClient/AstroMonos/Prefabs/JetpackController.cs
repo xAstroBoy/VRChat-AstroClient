@@ -1,25 +1,17 @@
-using AstroClient.WorldModifications.WorldsIds;
+using System;
+using AstroClient.AstroMonos.AstroUdons;
+using AstroClient.ClientAttributes;
 using AstroClient.xAstroBoy;
-using Boo.Lang.Compiler.Ast;
+using AstroClient.xAstroBoy.Utility;
+using Il2CppSystem.Collections.Generic;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
 using UnityEngine.Animations;
-using VRC.SDK3.Components;
 using VRCSDK2;
 using VRCStation = VRC.SDKBase.VRCStation;
 
-namespace AstroClient.AstroMonos.Components.Custom.Items
+namespace AstroClient.AstroMonos.Prefabs
 {
-    using AstroClient.Tools.Extensions;
-    using AstroUdons;
-    using ClientAttributes;
-    using ClientResources.Loaders;
-    using Il2CppSystem.Collections.Generic;
-    using Spawnables.Enderpearl;
-    using System;
-    using Tools;
-    using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
-    using xAstroBoy.Utility;
-
     [RegisterComponent]
     public class JetpackController : MonoBehaviour
     {

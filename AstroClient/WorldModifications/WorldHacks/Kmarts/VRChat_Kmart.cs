@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using AstroClient.AstroMonos.AstroUdons;
-using AstroClient.CheetosUI;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks;
 using AstroClient.Tools.Extensions;
