@@ -32,50 +32,39 @@ namespace AstroClient.AstroMonos.Components.ESP
             }
             else
             {
-                MelonCoroutines.Start(ForceHighlightSystem());
+                HasSubscribed = true;
+                InvokeRepeating(nameof(ForceESPFix), 0.1f, 0.1f);
             }
         }
 
 
-        private IEnumerator ForceHighlightSystem()
+        private void ForceESPFix()
         {
-            while (AssignedPlayer == null)
-                yield return null;
-            while (AssignedPlayer.GetAPIUser() == null)
-                yield return null;
-            if(AssignedPlayer.GetAPIUser().IsSelf)
+            if (AssignedPlayer == null) return;
+            if (AssignedPlayer.GetAPIUser() == null) return;
+            if (AssignedPlayer.GetAPIUser().IsSelf)
             {
                 Destroy(this);
-                yield return null;
+                return;
             }
-            while (HighLightOptions == null)
-                yield return null;
-            while (PlayerSelector == null)
-                yield return null;
-            while (CurrentRenderer == null)
-                yield return null;
-
-
-            if (!HighLightOptions.enabled)
-            {
-                HighLightOptions.enabled = true;
-            }
-            
             if (CurrentRenderer != null)
             {
-                HighLightOptions.AddRenderer(CurrentRenderer);
-                while (HighLightOptions.field_Protected_HashSet_1_Renderer_0.Count == 0)
+                if (HighLightOptions != null)
                 {
+                    HighLightOptions.enabled = true;
                     HighLightOptions.AddRenderer(CurrentRenderer);
+                    if (!HighLightOptions.field_Protected_HashSet_1_Renderer_0.Contains(CurrentRenderer))
+                    {
+                        HighLightOptions.field_Protected_HashSet_1_Renderer_0.Add(CurrentRenderer);
+                    }
+
                 }
             }
-
-            HasSubscribed = true;
-            SetPlayerDefaultESP();
-            yield return null;
+            if (!UseCustomColor)
+            {
+                SetPlayerDefaultESP();
+            }
         }
-
-
         private bool _HasSubscribed = false;
 
         private bool HasSubscribed

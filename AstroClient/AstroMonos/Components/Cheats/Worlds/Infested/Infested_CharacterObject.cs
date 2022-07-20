@@ -3,6 +3,7 @@ using AstroClient.ClientAttributes;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Collections.Generic;
 using UnhollowerBaseLib.Attributes;
@@ -51,6 +52,32 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             }
         }
 
+
+        private  GameObject _InfestedBar { get; set; }
+        internal GameObject InfestedBar
+        {
+            get
+            {
+                if(_InfestedBar == null)
+                {
+                    _InfestedBar = this.transform.FindObject("FloatingHUD/HealthBar/HealthBar_Infested/Infested_Shadow").gameObject;
+                }
+                return _InfestedBar;
+            }
+        }
+
+        private GameObject _HumanBar { get; set; }
+        internal GameObject HumanBar
+        {
+            get
+            {
+                if (_HumanBar == null)
+                {
+                    _HumanBar = this.transform.FindObject("FloatingHUD/HealthBar/HealthBar_Human/Human_Shadow").gameObject;
+                }
+                return _HumanBar;
+            }
+        }
         private void OnDestroy()
         {
             ClientEventActions.OnRoomLeft -= OnRoomLeft;
@@ -192,7 +219,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             Private___refl_const_intnl_udonTypeName = new AstroUdonVariable<string>(PlayerCharacterObject, "__refl_const_intnl_udonTypeName");
             Private___127_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerCharacterObject, "__127_intnl_SystemBoolean");
             Private___87_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerCharacterObject, "__87_const_intnl_SystemString");
-            Private_healthRegenDelay = new AstroUdonVariable<float>(PlayerCharacterObject, "healthRegenDelay");
             Private___0_intnl_SystemObject = new AstroUdonVariable<bool>(PlayerCharacterObject, "__0_intnl_SystemObject");
             Private___1_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerCharacterObject, "__1_intnl_SystemBoolean");
             Private___38_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerCharacterObject, "__38_intnl_SystemBoolean");
@@ -218,7 +244,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             Private_hitboxFadeSpeed = new AstroUdonVariable<float>(PlayerCharacterObject, "hitboxFadeSpeed");
             Private___67_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerCharacterObject, "__67_const_intnl_SystemString");
             Private___20_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerCharacterObject, "__20_const_intnl_SystemString");
-            Private___0_mp_duration_Int32 = new AstroUdonVariable<int>(PlayerCharacterObject, "__0_mp_duration_Int32");
             Private___50_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerCharacterObject, "__50_const_intnl_SystemString");
             Private___4_const_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerCharacterObject, "__4_const_intnl_SystemSingle");
             Private___101_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerCharacterObject, "__101_intnl_SystemBoolean");
@@ -498,7 +523,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             Private_huntMark = new AstroUdonVariable<UnityEngine.GameObject>(PlayerCharacterObject, "huntMark");
             Private___19_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerCharacterObject, "__19_intnl_SystemInt32");
             Private___0_distance_Single = new AstroUdonVariable<float>(PlayerCharacterObject, "__0_distance_Single");
-            Private_immuneTimer = new AstroUdonVariable<float>(PlayerCharacterObject, "immuneTimer");
             Private___24_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerCharacterObject, "__24_intnl_SystemInt32");
             Private___63_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerCharacterObject, "__63_const_intnl_SystemString");
             Private___13_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerCharacterObject, "__13_const_intnl_exitJumpLoc_UInt32");
@@ -515,7 +539,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             Private_healthRegenTimer = new AstroUdonVariable<float>(PlayerCharacterObject, "healthRegenTimer");
             Private_playerName = new AstroUdonVariable<string>(PlayerCharacterObject, "playerName");
             Private___87_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerCharacterObject, "__87_intnl_SystemBoolean");
-            Private_healthBar = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerCharacterObject, "healthBar");
             Private___51_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerCharacterObject, "__51_intnl_SystemBoolean");
             Private___0_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerCharacterObject, "__0_const_intnl_SystemInt32");
             Private___107_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerCharacterObject, "__107_intnl_SystemBoolean");
@@ -665,7 +688,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             Private___refl_const_intnl_udonTypeName = null;
             Private___127_intnl_SystemBoolean = null;
             Private___87_const_intnl_SystemString = null;
-            Private_healthRegenDelay = null;
             Private___0_intnl_SystemObject = null;
             Private___1_intnl_SystemBoolean = null;
             Private___38_intnl_SystemBoolean = null;
@@ -691,7 +713,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             Private_hitboxFadeSpeed = null;
             Private___67_const_intnl_SystemString = null;
             Private___20_const_intnl_SystemString = null;
-            Private___0_mp_duration_Int32 = null;
             Private___50_const_intnl_SystemString = null;
             Private___4_const_intnl_SystemSingle = null;
             Private___101_intnl_SystemBoolean = null;
@@ -971,7 +992,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             Private_huntMark = null;
             Private___19_intnl_SystemInt32 = null;
             Private___0_distance_Single = null;
-            Private_immuneTimer = null;
             Private___24_intnl_SystemInt32 = null;
             Private___63_const_intnl_SystemString = null;
             Private___13_const_intnl_exitJumpLoc_UInt32 = null;
@@ -988,7 +1008,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             Private_healthRegenTimer = null;
             Private_playerName = null;
             Private___87_intnl_SystemBoolean = null;
-            Private_healthBar = null;
             Private___51_intnl_SystemBoolean = null;
             Private___0_const_intnl_SystemInt32 = null;
             Private___107_intnl_SystemBoolean = null;
@@ -4162,30 +4181,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             }
         }
 
-        internal float? healthRegenDelay
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private_healthRegenDelay != null)
-                {
-                    return Private_healthRegenDelay.Value;
-                }
 
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private_healthRegenDelay != null)
-                    {
-                        Private_healthRegenDelay.Value = value.Value;
-                    }
-                }
-            }
-        }
 
         internal bool? __0_intnl_SystemObject
         {
@@ -4788,30 +4784,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             }
         }
 
-        internal int? __0_mp_duration_Int32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_mp_duration_Int32 != null)
-                {
-                    return Private___0_mp_duration_Int32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___0_mp_duration_Int32 != null)
-                    {
-                        Private___0_mp_duration_Int32.Value = value.Value;
-                    }
-                }
-            }
-        }
+  
 
         internal string __50_const_intnl_SystemString
         {
@@ -11533,30 +11506,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             }
         }
 
-        internal float? immuneTimer
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private_immuneTimer != null)
-                {
-                    return Private_immuneTimer.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private_immuneTimer != null)
-                    {
-                        Private_immuneTimer.Value = value.Value;
-                    }
-                }
-            }
-        }
+    
 
         internal int? __24_intnl_SystemInt32
         {
@@ -11937,28 +11887,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             }
         }
 
-        internal VRC.Udon.UdonBehaviour healthBar
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private_healthBar != null)
-                {
-                    return Private_healthBar.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private_healthBar != null)
-                {
-                    Private_healthBar.Value = value;
-                }
-            }
-        }
-
+      
         internal bool? __51_intnl_SystemBoolean
         {
             [HideFromIl2Cpp]
@@ -12435,7 +12364,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
         private AstroUdonVariable<string> Private___refl_const_intnl_udonTypeName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___127_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___87_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private_healthRegenDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___0_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___1_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___38_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -12461,7 +12389,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
         private AstroUdonVariable<float> Private_hitboxFadeSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___67_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___20_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___0_mp_duration_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___50_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___4_const_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___101_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -12741,7 +12668,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
         private AstroUdonVariable<UnityEngine.GameObject> Private_huntMark { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___19_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___0_distance_Single { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private_immuneTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___24_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___63_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___13_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -12758,7 +12684,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
         private AstroUdonVariable<float> Private_healthRegenTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private_playerName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___87_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_healthBar { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___51_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___0_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___107_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;

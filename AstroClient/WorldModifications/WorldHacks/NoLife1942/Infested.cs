@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.Infested;
 using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.ClientActions;
@@ -163,6 +164,7 @@ namespace AstroClient.WorldModifications.WorldHacks.NoLife1942
             HasSubscribed = false;
             UnlimitedMoney = false;
             UnlimitedAmmo = false;
+            ShowRole = false;
             CharactersReaders.Clear();
             GameManager = null;
         }
@@ -308,9 +310,44 @@ namespace AstroClient.WorldModifications.WorldHacks.NoLife1942
             }
         }
 
-        internal static bool UnlimitedAmmo { get; set; }
-        internal static bool UnlimitedMoney { get; set; }        
+        private static bool _UnlimitedAmmo { get; set; }
+        internal static bool UnlimitedAmmo
+        {
+            get => _UnlimitedAmmo;
+            set
+            {
+                _UnlimitedAmmo = value;
+                if (!value)
+                {
+                    GameManager.AmmoReserve.active = true;
+                }
+            }
+        }
+        private static bool _UnlimitedMoney { get; set; }
+        internal static bool UnlimitedMoney
+        {
+            get => _UnlimitedMoney;
+            set
+            {
+                _UnlimitedMoney = value;
+                if(!value)
+                {
+                    GameManager.MoneyAmount.active = true;
+                }
+            }
+        }
+        private static bool _ShowRole { get; set; }
+        internal static bool ShowRole
+        {
+            get => _ShowRole;
+            set
+            {
+                _ShowRole = value;
+                OnShowRoleChange.SafetyRaiseWithParams(value);
+            }
+        }
 
+        internal static Action<bool> OnShowRoleChange { get; set; }
         private static bool isCurrentWorld  { get; set; }   = false;
 
         private static List<Infested_CharacterObject> CharactersReaders { get; set; } = new List<Infested_CharacterObject>();

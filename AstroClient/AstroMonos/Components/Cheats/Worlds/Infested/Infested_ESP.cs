@@ -26,6 +26,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
 
         internal VRC.Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         private bool SaidFoundMessage { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool ShowRole { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
 
         private Infested_CharacterObject _AssignedReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
@@ -110,22 +112,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
         {
             if (!isActiveAndEnabled) return;
             if (Player.GetAPIUser().IsSelf) return;
+            if (!ShowRole) return;
             if (AssignedReader == null) return;
-            if(AssignedReader.isAlive.GetValueOrDefault(false))
+            if (AssignedReader.HumanBar != null && AssignedReader.InfestedBar != null)
             {
-                
-                if(AssignedReader.isInfested.GetValueOrDefault(false) || AssignedReader.__0_mp_isInfested_Boolean.GetValueOrDefault(false))
+                if (!AssignedReader.HumanBar.active && !AssignedReader.InfestedBar.active)
                 {
-                    ESPColor = SystemColors.Red;
+                    ResetESPColor();
                 }
-                else
+                if (AssignedReader.HumanBar.active)
                 {
                     ESPColor = SystemColors.LightGreen;
                 }
-            }
-            else
-            {
-                ResetESPColor();
+                if (AssignedReader.InfestedBar.active)
+                {
+                    ESPColor = SystemColors.Red;
+                }
             }
 
 
@@ -168,14 +170,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
                     {
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnPlayerLeft += OnPlayerLeft;
+                        if (!Player.GetAPIUser().IsSelf)
+                        {
+                            WorldModifications.WorldHacks.NoLife1942.Infested.OnShowRoleChange += ShowRoleChange;
+                        }
                     }
                     else
                     {
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnPlayerLeft -= OnPlayerLeft;
+                        if (!Player.GetAPIUser().IsSelf) return;
+                        {
+                            WorldModifications.WorldHacks.NoLife1942.Infested.OnShowRoleChange -= ShowRoleChange;
+                        }
                     }
                 }
                 _HasSubscribed = value;
+            }
+        }
+
+        private void ShowRoleChange(bool value)
+        {
+            ShowRole = value;
+            if(!value)
+            {
+                ResetESPColor();
             }
         }
 

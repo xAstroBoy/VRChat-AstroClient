@@ -3,6 +3,7 @@ using AstroClient.ClientAttributes;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Collections.Generic;
 using UnhollowerBaseLib.Attributes;
@@ -53,13 +54,37 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
                 Destroy(this);
             }
         }
-
+        private GameObject _AmmoReserve { get; set; }
+        internal GameObject AmmoReserve
+        {
+            get
+            {
+                if (_AmmoReserve == null)
+                {
+                    _AmmoReserve = Finder.Find("PlayerMainHUD/Offset/RightCanvas/AmmoReserve");
+                }
+                return _AmmoReserve;
+            }
+        }
+        private GameObject _MoneyAmount { get; set; }
+        internal GameObject MoneyAmount
+        {
+            get
+            {
+                if (_MoneyAmount == null)
+                {
+                    _MoneyAmount = Finder.Find("PlayerMainHUD/Offset/LeftCanvas/MainHUD/MoneyAmount");
+                }
+                return _MoneyAmount;
+            }
+        }
         private  void UnlimitedAmmos()
         {
             if(WorldModifications.WorldHacks.NoLife1942.Infested.UnlimitedAmmo)
             {
                 ammoReserve = System.Int32.MaxValue;
                 maxAmmo = System.Int32.MaxValue;
+                AmmoReserve.active = false;
             }
         }
 
@@ -69,6 +94,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.Infested
             {
                 currency = System.Int32.MaxValue;
                 maxMoney = System.Int32.MaxValue;
+                MoneyAmount.active = false;
             }
         }
 

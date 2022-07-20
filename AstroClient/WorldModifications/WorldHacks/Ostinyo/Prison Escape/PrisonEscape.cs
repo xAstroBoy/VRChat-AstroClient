@@ -146,8 +146,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     EnableGoldenCamos.Clear();
                     TakeKeyCardOnSuspicious = false;
                     TakeKeyCardOnWanted = false;
-                    PrisonDoors_Open.Clear();
-                    PrisonDoors_Close.Clear();
                     WorldSettings_DoublePoints_Toggle = null;
                     WorldSettings_GoldenGuns_Toggle = null;
                     WorldSettings_Subtitles_Toggle = null;
@@ -373,7 +371,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
 
-            int WantedTriggersRegistered = 0;
 
             foreach (var item in WorldUtils.UdonScripts)
             {
@@ -1902,7 +1899,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
         private static GameObject _Gun_Color_Panel;
-
         internal static GameObject Gun_Color_Panel
         {
             get
@@ -1941,23 +1937,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        private static GameObject _Game_Join_Trigger;
-        internal static GameObject Game_Join_Trigger
-        {
-            get
-            {
-                if (isCurrentWorld)
-                {
-                    if (_Game_Join_Trigger == null)
-                    {
-                        return _Game_Join_Trigger = Spawn_Area.FindObject("Game Join Trigger");
-                    }
-                    return _Game_Join_Trigger;
-                }
-
-                return null;
-            }
-        }
         private static GameObject _Game_Join_Blocker;
         internal static GameObject Game_Join_Blocker
         {
@@ -2063,7 +2042,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (_Floor_Vents == null)
                     {
-                        return _Floor_Vents = Openables.FindObject("Floor Vent");
+                        return _Floor_Vents = Prison.FindObject("Floor Vent");
                     }
                     return _Floor_Vents;
                 }
@@ -2348,8 +2327,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static List<UdonBehaviour_Cached> Knifes { get; set; } = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> VentsMeshes { get; set; } = new List<UdonBehaviour_Cached>();
-        private static List<UdonBehaviour_Cached> PrisonDoors_Open { get; set; } = new List<UdonBehaviour_Cached>();
-        private static List<UdonBehaviour_Cached> PrisonDoors_Close { get; set; } = new List<UdonBehaviour_Cached>();
         internal static Toggle WorldSettings_GoldenGuns_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_DoublePoints_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_VisualHitBoxes_Toggle { get; set; } = null;

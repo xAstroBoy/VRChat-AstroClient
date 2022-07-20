@@ -410,10 +410,14 @@ internal class WorldCheatsModule : AstroEvents
                     Infested.UnlimitedAmmo, value => { Infested.UnlimitedAmmo = value; });
                 CustomSubMenu.AddToggle("Unlimited Money",
                     Infested.UnlimitedMoney, value => { Infested.UnlimitedMoney = value; });
+                CustomSubMenu.AddToggle("Role ESP",
+                    Infested.ShowRole, value => { Infested.ShowRole = value; });
+
             }
 
 
             #endregion
+
             #region BeyondDarkness
 
             if (WorldUtils.WorldID == WorldIds.BeyondDarkness)

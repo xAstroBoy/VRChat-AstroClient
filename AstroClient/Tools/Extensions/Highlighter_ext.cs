@@ -55,7 +55,10 @@ namespace AstroClient.Tools.Extensions
             {
                 if (rend != null)
                 {
-                    _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                    if(!item.field_Protected_HashSet_1_Renderer_0.Contains(rend))
+                    {
+                        item.field_Protected_HashSet_1_Renderer_0.Add(rend);
+                    }
                     // This way it shouldn't affect anything if is in the original Renderer
                     if (HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Contains(rend))
                     {
@@ -72,11 +75,17 @@ namespace AstroClient.Tools.Extensions
             {
                 if (rend != null)
                 {
-                    _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
-                    if (HighlightFXRenderers.Contains(rend))
+                    if (item.field_Protected_HashSet_1_Renderer_0.Contains(rend))
                     {
-                        HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
-                        HighlightFXRenderers.Remove(rend);
+                        _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                        if (HighlightFXRenderers.Contains(rend))
+                        {
+                            if (!HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Contains(rend))
+                            {
+                                HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Add(rend);
+                            }
+                            HighlightFXRenderers.Remove(rend);
+                        }
                     }
                 }
             }
