@@ -14,6 +14,7 @@ using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.Tools.Holders;
 using AstroClient.Tools.ObjectEditor;
 using AstroClient.Tools.UdonEditor;
+using AstroClient.Tools.World;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy;
@@ -48,7 +49,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 _ShowRoles = value;
                 OnShowRolesPropertyChanged.SafetyRaiseWithParams(value);
             }
-            
+
         }
 
         private static bool _DoorsStayOpen = false;
@@ -165,7 +166,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             CurrentMenu = new QMNestedGridMenu(main, "Prison Escape Cheats", "Prison Escape Cheats");
         }
 
-        internal static void FindEverything()
+        private static void AdjustWorld()
         {
 
             //var AprilFoolsPatcher = GameObjectFinder.FindRootSceneObject("April Fools");
@@ -204,12 +205,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             //    }
             //}
 
+
             var heightlimiter = Finder.Find("Scripts/Avatar Height Checker");
-            if(heightlimiter != null)
+            if (heightlimiter != null)
             {
                 heightlimiter.DestroyMeLocal(true);
             }
-                
+
             var occluder = Finder.FindRootSceneObject("Occlusion");
 
             if (occluder != null)
@@ -218,10 +220,10 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
             if (Yard != null)
             {
-                Yard.FindObject("Colliders/Collider").DestroyMeLocal(true); 
+                Yard.FindObject("Colliders/Collider").DestroyMeLocal(true);
                 Yard.FindObject("Colliders/Collider (1)").DestroyMeLocal(true);
-                Yard.FindObject("Colliders/Collider (2)").DestroyMeLocal(true); 
-                Yard.FindObject("Colliders/Collider (3)").DestroyMeLocal(true); 
+                Yard.FindObject("Colliders/Collider (2)").DestroyMeLocal(true);
+                Yard.FindObject("Colliders/Collider (3)").DestroyMeLocal(true);
                 FixOutsideFence(Yard.FindObject("Colliders/Collider (4)"));
                 FixOutsideFence(Yard.FindObject("Colliders/Collider (5)"));
 
@@ -288,69 +290,14 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
 
             }
+        }
 
-
-            if (MoneyPile != null)
-            {
-                Patch__MaxPickupDist(MoneyPile);
-            }
-
-            if (Keycard != null)
-            {
-                Patch__MaxPickupDist(Keycard);
-
-            }
-
-            if (Gate_Button != null)
-            {
-                GateInteraction = Gate_Button.FindUdonEvent("_interact");
-            }
-
-            if (Vents != null)
-            {
-                foreach (var triggervent in Vents.Get_UdonBehaviours())
-                {
-                    var interactevent = triggervent.FindUdonEvent("_interact");
-                    if (interactevent != null)
-                    {
-                        Remove_maxUseDist(interactevent);
-                    }
-                }
-            }
-            if (Floor_Vents != null)
-            {
-                foreach (var triggervent in Floor_Vents.Get_UdonBehaviours())
-                {
-                    var interactevent = triggervent.FindUdonEvent("_interact");
-                    if (interactevent != null)
-                    {
-                        Remove_maxUseDist(interactevent);
-                    }
-                }
-            }
-
-            foreach (var item in Player_Object_Pool.transform.Get_UdonBehaviours())
-            {
-
-                var obj = item.FindUdonEvent("_SetWantedSynced");
-                if (obj != null)
-                {
-                    var reader = obj.transform.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                    if (reader != null)
-                    {
-                        if (!CurrentReaders.Contains(reader))
-                        {
-                            // Log.Debug($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
-                            CurrentReaders.Add(reader);
-                        }
-                    }
-                }
-            }
-
+        private static void AdjustPickups()
+        {
             foreach (var item in WorldUtils.Pickups)
             {
-
                 Patch__MaxPickupDist(item.gameObject);
+                Patch_canDualWield(item.gameObject);
 
                 var beh = item.gameObject.FindUdonEvent("EnablePatronEffects");
                 if (beh != null)
@@ -369,170 +316,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                     });
                 }
-            }
 
-
-            foreach (var item in WorldUtils.UdonScripts)
-            {
-
-
-                if (item.name.Contains("Crate"))
-                {
-                    if (item.name.Contains("Crate Large"))
-                    {
-                        Large_Crates.AddGameObject(item.gameObject);
-                        var crateevent = item.FindUdonEvent("_interact");
-                        if (crateevent != null)
-                        {
-                            if (!Large_Crates_udon.Contains(crateevent))
-                            {
-                                Large_Crates_udon.Add(crateevent);
-                            }
-                        }
-
-                        //CreateSpawnItemButton(item, false);
-                    }
-
-                    if (item.name.Contains("Crate Small"))
-                    {
-                        Small_Crates.AddGameObject(item.gameObject);
-                        var crateevent = item.FindUdonEvent("_interact");
-                        if (crateevent != null)
-                        {
-                            if (!Small_Crates_udon.Contains(crateevent))
-                            {
-                                Small_Crates_udon.Add(crateevent);
-                            }
-                        }
-                        //CreateSpawnItemButton(item, true);
-                    }
-                }
-                // Not Reliable.
-                //if(item.name.StartsWith("Wanted Trigger"))
-                //{
-                //    var WantedDetector = item.GetOrAddComponent<PrisonEscape_WantedDetector>();
-                //    if(WantedDetector != null)
-                //    {
-                //        WantedTriggersRegistered++;
-                //    }
-                //}
-
-                if (item.name.ToLower().Contains("door"))
-                {
-                    // Check if The door first contains the same System
-                    var unlock = item.FindUdonEvent("_UnlockDoorSynced");
-                    if (unlock != null)
-                    {
-                        // If the unlock is present, add this to bypass the keypad interaction .
-                        unlock.gameObject.GetOrAddComponent<PrisonEscape_DoorAssister>();
-                    }
-
-                }
-                if (item.name.Contains("Knife"))
-                {
-                    var knife = item.FindUdonEvent("PlayMeleeEffects");
-                    if (knife != null)
-                    {
-                        if (!Knifes.Contains(knife))
-                        {
-                            Knifes.Add(knife);
-                        }
-                    }
-                }
-
-                if(item.name.Equals("Cell Door"))
-                {
-                    item.GetOrAddComponent<PrisonEscape_CellDoorToggler>();
-                }
-                if (item.name.Contains("Game Manager"))
-                {
-                    var startgame = item.FindUdonEvent("StartGameCountdown");
-                    if(startgame != null)
-                    {
-                        var btn = new WorldButton(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game</color> \n <color=orange>Bypass Master Lock!</color> ", () =>
-                        {
-                            startgame.InvokeBehaviour();
-                        });
-                        btn.SetScale(new Vector3(0.15f, 0.24f, 0.3f));
-                    }
-                    startgame.gameObject.AddToWorldUtilsMenu();
-                    var keycardtake = startgame.UdonBehaviour.FindUdonEvent("_TakeKeycard");
-                    if(keycardtake != null)
-                    {
-                        TakeKeycard = keycardtake;
-                    }
-                }
-
-
-                if (item.name.Contains("VentMesh"))
-                {
-                    var ventmesh = item.FindUdonEvent("_interact");
-                    if (ventmesh != null)
-                    {
-                        if (!VentsMeshes.Contains(ventmesh))
-                        {
-                            VentsMeshes.Add(ventmesh);
-                        }
-                    }
-                }
-
-                if (item.name.Equals("Patron Control"))
-                {
-                    PatronController = item.GetOrAddComponent<Ostinyo_World_PatronCracker>(); // Fuck u Ostinyo 
-                    TogglePatronGuns = item.FindUdonEvent("_TogglePatronGuns");
-                    ToggleDoublePoints = item.FindUdonEvent("_ToggleDoublePoints");
-
-                }
-            }
-
-            foreach (var item in Prisoner_Spawns.Get_Childs())
-            {
-                if (!SpawnPoints_Prisoners.Contains(item.position))
-                {
-                    SpawnPoints_Prisoners.Add(item.position);
-                }
-            }
-
-            foreach (var item in Guard_Spawns.Get_Childs())
-            {
-                if (!SpawnPoints_Guards.Contains(item.position))
-                {
-                    SpawnPoints_Guards.Add(item.position);
-                }
-            }
-            foreach (var item in Respawn_Points.Get_Childs())
-            {
-                if (!SpawnPoints_Spawn.Contains(item.position))
-                {
-                    SpawnPoints_Spawn.Add(item.position);
-                }
-            }
-
-            if (SceneUtils.Spawns != null)
-            {
-                foreach (var spawn in SceneUtils.Spawns)
-                {
-                    if (!SpawnPoints_Spawn.Contains(spawn.position))
-                    {
-                        SpawnPoints_Spawn.Add(spawn.position);
-                    }
-                }
-            }
-            AddSpawnPointDetector(SceneUtils.SpawnPosition, PrimitiveType.Sphere, 50f, PrisonEscape_Roles.Dead);
-
-
-            if (SceneUtils.SpawnLocation != null)
-            {
-                if (!SpawnPoints_Spawn.Contains(SceneUtils.SpawnLocation.position))
-                {
-                    SpawnPoints_Spawn.Add(SceneUtils.SpawnLocation.position);
-                }
-            }
-
-
-            foreach (var item in WorldUtils.Pickups)
-            {
-                Patch_canDualWield(item.gameObject);
                 if (item.name.Contains("Sniper"))
                 {
                     var MuzzlePos = item.transform.FindObject("Mesh/Muzzle Loc");
@@ -546,6 +330,20 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         }
                     }
                     item.AddComponent<PrisonEscape_AimAssister>();
+                }
+                if (item.name.Contains("RPG"))
+                {
+                    var MuzzlePos = item.transform.FindObject("Rocket");
+                    if (MuzzlePos != null)
+                    {
+                        var laser = MuzzlePos.AddComponent<LaserPointer>();
+                        if (laser != null)
+                        {
+                            laser.ChangeOnPlayerHit = true;
+                            laser.ShowEndPointSphere = true;
+                            laser.SphereSize = 5f;
+                        }
+                    }
                 }
                 // Worldbuttons for Snipers 
                 if (item.name.Equals("Sniper"))
@@ -676,29 +474,248 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                 }
 
-                if (item.name.Contains("RPG"))
+            }
+        }
+        private static void RemoveMaxDist()
+        {
+            if (MoneyPile != null)
+            {
+                Patch__MaxPickupDist(MoneyPile);
+            }
+
+            if (Keycard != null)
+            {
+                Patch__MaxPickupDist(Keycard);
+
+            }
+            if (Vents != null)
+            {
+                foreach (var triggervent in Vents.Get_UdonBehaviours())
                 {
-                    var MuzzlePos = item.transform.FindObject("Rocket");
-                    if (MuzzlePos != null)
+                    var interactevent = triggervent.FindUdonEvent("_interact");
+                    if (interactevent != null)
                     {
-                        var laser = MuzzlePos.AddComponent<LaserPointer>();
-                        if (laser != null)
+                        Remove_maxUseDist(interactevent);
+                    }
+                }
+            }
+            if (Floor_Vents != null)
+            {
+                foreach (var triggervent in Floor_Vents.Get_UdonBehaviours())
+                {
+                    var interactevent = triggervent.FindUdonEvent("_interact");
+                    if (interactevent != null)
+                    {
+                        Remove_maxUseDist(interactevent);
+                    }
+                }
+            }
+        }
+
+        private static void FindGateButton()
+        {
+            if (Gate_Button != null)
+            {
+                GateInteraction = Gate_Button.FindUdonEvent("_interact");
+            }
+        }
+        private static void InstallReaders()
+        {
+            foreach (var item in Player_Object_Pool.transform.Get_UdonBehaviours())
+            {
+
+                var obj = item.FindUdonEvent("_SetWantedSynced");
+                if (obj != null)
+                {
+                    var reader = obj.transform.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                    if (reader != null)
+                    {
+                        if (!CurrentReaders.Contains(reader))
                         {
-                            laser.ChangeOnPlayerHit = true;
-                            laser.ShowEndPointSphere = true;
-                            laser.SphereSize = 5f;
+                            // Log.Debug($"Found Behaviour with name {obj.gameObject.name}, having Event _SetWantedSynced");
+                            CurrentReaders.Add(reader);
                         }
                     }
                 }
             }
-            
+        }
+        private static void DoUdonStuff()
+        {
+            foreach (var item in WorldUtils_Old.Get_UdonBehaviours())
+            {
+
+                if (item == null) continue;
+                if (item.name.Contains("Crate"))
+                {
+                    if (item.name.Contains("Crate Large"))
+                    {
+                        Large_Crates.AddGameObject(item.gameObject);
+                        var crateevent = item.FindUdonEvent("_interact");
+                        if (crateevent != null)
+                        {
+                            if (!Large_Crates_udon.Contains(crateevent))
+                            {
+                                Large_Crates_udon.Add(crateevent);
+                            }
+                        }
+
+                        //CreateSpawnItemButton(item, false);
+                    }
+
+                    if (item.name.Contains("Crate Small"))
+                    {
+                        Small_Crates.AddGameObject(item.gameObject);
+                        var crateevent = item.FindUdonEvent("_interact");
+                        if (crateevent != null)
+                        {
+                            if (!Small_Crates_udon.Contains(crateevent))
+                            {
+                                Small_Crates_udon.Add(crateevent);
+                            }
+                        }
+                        //CreateSpawnItemButton(item, true);
+                    }
+                }
+                // Not Reliable.
+                //if(item.name.StartsWith("Wanted Trigger"))
+                //{
+                //    var WantedDetector = item.GetOrAddComponent<PrisonEscape_WantedDetector>();
+                //    if(WantedDetector != null)
+                //    {
+                //        WantedTriggersRegistered++;
+                //    }
+                //}
+
+                if (item.name.ToLower().Contains("door"))
+                {
+                    // Check if The door first contains the same System
+                    var unlock = item.FindUdonEvent("_UnlockDoorSynced");
+                    if (unlock != null)
+                    {
+                        // If the unlock is present, add this to bypass the keypad interaction .
+                        unlock.gameObject.GetOrAddComponent<PrisonEscape_DoorAssister>();
+                    }
+
+                }
+                if (item.name.Contains("Knife"))
+                {
+                    var knife = item.FindUdonEvent("PlayMeleeEffects");
+                    if (knife != null)
+                    {
+                        if (!Knifes.Contains(knife))
+                        {
+                            Knifes.Add(knife);
+                        }
+                    }
+                }
+
+                if (item.name.Equals("Cell Door"))
+                {
+                    item.GetOrAddComponent<PrisonEscape_CellDoorToggler>();
+                }
+                if (item.name.Contains("Game Manager"))
+                {
+                    var keycardtake = item.FindUdonEvent("_TakeKeycard");
+                    if (keycardtake != null)
+                    {
+                        TakeKeycard = keycardtake;
+                    }
+                }
+
+                if (item.name.Equals("Game State"))
+                {
+                    var startgame = item.FindUdonEvent("StartGameCountdown");
+                    if (startgame != null)
+                    {
+                        var btn = new WorldButton(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game</color> \n <color=orange>Bypass Master Lock!</color> ", () =>
+                        {
+                            startgame.InvokeBehaviour();
+                        });
+                        btn.SetScale(new Vector3(0.15f, 0.24f, 0.3f));
+                    }
+                    startgame.gameObject.AddToWorldUtilsMenu();
+
+                }
+
+                if (item.name.Contains("VentMesh"))
+                {
+                    var ventmesh = item.FindUdonEvent("_interact");
+                    if (ventmesh != null)
+                    {
+                        if (!VentsMeshes.Contains(ventmesh))
+                        {
+                            VentsMeshes.Add(ventmesh);
+                        }
+                    }
+                }
+
+                if (item.name.Equals("Patron Control"))
+                {
+                    PatronController = item.GetOrAddComponent<Ostinyo_World_PatronCracker>(); // Fuck u Ostinyo 
+                    TogglePatronGuns = item.FindUdonEvent("_TogglePatronGuns");
+                    ToggleDoublePoints = item.FindUdonEvent("_ToggleDoublePoints");
+
+                }
+            }
+        }
+
+        private static void GetSpawnPoints()
+        {
+            foreach (var item in Prisoner_Spawns.Get_Childs())
+            {
+                if (!SpawnPoints_Prisoners.Contains(item.position))
+                {
+                    SpawnPoints_Prisoners.Add(item.position);
+                }
+            }
+
+            foreach (var item in Guard_Spawns.Get_Childs())
+            {
+                if (!SpawnPoints_Guards.Contains(item.position))
+                {
+                    SpawnPoints_Guards.Add(item.position);
+                }
+            }
+            foreach (var item in Respawn_Points.Get_Childs())
+            {
+                if (!SpawnPoints_Spawn.Contains(item.position))
+                {
+                    SpawnPoints_Spawn.Add(item.position);
+                }
+            }
+
+            if (SceneUtils.Spawns != null)
+            {
+                foreach (var spawn in SceneUtils.Spawns)
+                {
+                    if (!SpawnPoints_Spawn.Contains(spawn.position))
+                    {
+                        SpawnPoints_Spawn.Add(spawn.position);
+                    }
+                }
+            }
+            AddSpawnPointDetector(SceneUtils.SpawnPosition, PrimitiveType.Sphere, 50f, PrisonEscape_Roles.Dead);
+
+
+            if (SceneUtils.SpawnLocation != null)
+            {
+                if (!SpawnPoints_Spawn.Contains(SceneUtils.SpawnLocation.position))
+                {
+                    SpawnPoints_Spawn.Add(SceneUtils.SpawnLocation.position);
+                }
+            }
+
+        }
+
+        private static void GetToggles()
+        {
             foreach (var item in Finder.GetRootGameObjectsComponents<Toggle>(true))
             {
-                if(item.name.Equals("Toggle Patron Guns"))
+                if (item.name.Equals("Toggle Patron Guns"))
                 {
                     WorldSettings_GoldenGuns_Toggle = item;
                 }
-                if(item.name.Equals("Toggle Double Points"))
+                if (item.name.Equals("Toggle Double Points"))
                 {
                     WorldSettings_DoublePoints_Toggle = item;
                 }
@@ -720,17 +737,19 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     break;
                 }
             }
-
+        }
+        private static void CleanSpawnArea()
+        {
             if (Spawn_Area != null)
             {
                 if (Game_Join_Blocker != null)
                 {
                     Game_Join_Blocker.RemoveAllColliders(); // Fuck off annoying shit
                 }
-                if(Gun_Color_Panel != null)
+                if (Gun_Color_Panel != null)
                 {
                     var enabler = Gun_Color_Panel.GetOrAddComponent<Enabler>();
-                    if(enabler != null)
+                    if (enabler != null)
                     {
                         enabler.ForceStart();
                     }
@@ -762,28 +781,17 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                 }
                 var blocks = Spawn_Area.FindObject("Building/Colliders");
-                if(blocks != null)
+                if (blocks != null)
                 {
                     blocks.DestroyMeLocal();
                 }
             }
 
 
-            Log.Debug($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
+        }
 
-            Log.Debug($"Registered {SpawnPoints_Spawn.Count} Spawn Area Positions!", System.Drawing.Color.Chartreuse);
-            Log.Debug($"Registered {SpawnPoints_Guards.Count} Guard Spawn Positions!", System.Drawing.Color.Chartreuse);
-            Log.Debug($"Registered {SpawnPoints_Prisoners.Count} Prisoner Spawn Positions!", System.Drawing.Color.Chartreuse);
-            //Log.Debug($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
-
-
-            AddSpawnDetector(SpawnPoints_Guards, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Guard);
-            AddSpawnDetector(SpawnPoints_Prisoners, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Prisoner);
-            //AddSpawnDetector(SpawnPoints_Spawn, PrimitiveType.Cube, 10f, PrisonEscape_Roles.Dead);
-            //if (Game_Join_Trigger != null)
-            //{
-            //    BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
-            //}
+        private static void CreateEscapeButtons()
+        {
 
             CreateEscapeButton(new Vector3(7.9167f, 1.2052f, 293.6856f), 0, "ESCAPE 1", () => { InteractWithVent("Openable Vent"); });
             CreateEscapeButton(new Vector3(4.0886f, 1.3629f, 294.0434f), 180, "ESCAPE 2", () => { InteractWithVent("Openable Vent (1)"); });
@@ -794,6 +802,52 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             CreateEscapeButton(new Vector3(-4.0806f, 1.1905f, 306.1707f), 0, "ESCAPE 5", () => { InteractWithVent("Openable Vent (2)"); });
 
             CreateEscapeButton(new Vector3(4.8376f, 1.1809f, 306.921f), 270, "ESCAPE 6", () => { InteractWithVent("Openable Vent (5)"); });
+
+        }
+
+        private static void AddSpawnDetectors()
+        {
+            AddSpawnDetector(SpawnPoints_Guards, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Guard);
+            AddSpawnDetector(SpawnPoints_Prisoners, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Prisoner);
+
+        }
+        internal static void FindEverything()
+        {
+
+            AdjustWorld();
+            AdjustPickups();
+            RemoveMaxDist();
+            FindGateButton();
+            InstallReaders();
+            DoUdonStuff();
+            GetToggles();
+            GetSpawnPoints();
+            CleanSpawnArea();
+            AddSpawnDetectors();
+            CreateEscapeButtons();
+
+
+
+
+
+            
+
+
+
+            //Log.Debug($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
+
+
+            //AddSpawnDetector(SpawnPoints_Spawn, PrimitiveType.Cube, 10f, PrisonEscape_Roles.Dead);
+            //if (Game_Join_Trigger != null)
+            //{
+            //    BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
+            //}
+
+
+            Log.Debug($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
+            Log.Debug($"Registered {SpawnPoints_Spawn.Count} Spawn Area Positions!", System.Drawing.Color.Chartreuse);
+            Log.Debug($"Registered {SpawnPoints_Guards.Count} Guard Spawn Positions!", System.Drawing.Color.Chartreuse);
+            Log.Debug($"Registered {SpawnPoints_Prisoners.Count} Prisoner Spawn Positions!", System.Drawing.Color.Chartreuse);
 
         }
 

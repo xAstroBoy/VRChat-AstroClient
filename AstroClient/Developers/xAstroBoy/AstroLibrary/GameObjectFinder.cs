@@ -102,16 +102,10 @@
         {
             if (obj != null)
             {
-                var result = obj.transform.Find(path);
+                var result = obj.transform.FindObject(path);
                 if (result != null)
                 {
                     return result.gameObject;
-                }
-                else
-                {
-
-                    Log.Warn($"[WARNING (FindObject) ]  Transform {obj.name} Doesnt have a object in path [ {path} ] !");
-                    return null;
                 }
             }
             return null;

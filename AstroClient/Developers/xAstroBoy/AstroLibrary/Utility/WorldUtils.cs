@@ -1,6 +1,7 @@
 ﻿// Credits to Blaze and DayOfThePlay
 
 using AstroClient.Startup.Hooks;
+using AstroClient.Tools.World;
 using VRC.SDK3.Components;
 
 namespace AstroClient.xAstroBoy.Utility
@@ -230,7 +231,7 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static PostProcessVolume[] ActiveBloom => UnityEngine.Object.FindObjectsOfType<PostProcessVolume>();
 
-        public static UdonBehaviour[] UdonScripts => Resources.FindObjectsOfTypeAll<UdonBehaviour>();
+        public static UdonBehaviour[] UdonScripts => WorldUtils_Old.Get_UdonBehaviours().ToArray();
 
         public static UdonBehaviour[] ActiveUdonScripts => UnityEngine.Object.FindObjectsOfType<UdonBehaviour>();
 
