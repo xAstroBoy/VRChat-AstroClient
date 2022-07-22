@@ -672,7 +672,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (id.Equals(WorldIds.JustBClub2Lobby))
+            if (id.Equals(WorldIds.JustBClub2Lobby) || id.Equals(WorldIds.JustBClub2))
             {
                 isCurrentWorld = true;
                 HasSubscribed = true;
