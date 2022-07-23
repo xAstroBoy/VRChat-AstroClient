@@ -16,6 +16,7 @@ using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using MelonLoader;
 using UnityEngine;
+using VRC.Core;
 using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks.BlueKun
@@ -29,8 +30,28 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnEnterWorld += OnWorldEnter;
         }
 
+        private void OnWorldEnter(ApiWorld world, ApiWorldInstance instance)
+        {
+            if (world == null) return;
+
+
+            if (world.id.Equals(WorldIds.JustBClub2Lobby) || world.id.Equals(WorldIds.JustBClub2))
+            {
+
+                UnityDestroyBlock.AddBlock("Udon 3rd Party/Decoder_Debug");
+                UnityDestroyBlock.MonitorDestroyingEvent = true; // This is to prevent Blue-kun from destroying the RenderCamera system 
+                UnityDestroyBlock.OnDestroyBlocked += OnBlockedDestroy;
+                BlockPatronProcessor = true;
+                _ = MelonCoroutines.Start(ForcePatronReader());
+                _ = MelonCoroutines.Start(ForceEnableRenderCamera());
+                HasSubscribed = true;
+                isCurrentWorld = true;
+
+            }
+        }
 
 
         private static bool _HasSubscribed = false;
@@ -674,16 +695,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         {
             if (id.Equals(WorldIds.JustBClub2Lobby) || id.Equals(WorldIds.JustBClub2))
             {
-                isCurrentWorld = true;
-                HasSubscribed = true;
-                UnityDestroyBlock.AddBlock("Udon 3rd Party/Decoder_Debug");
-                UnityDestroyBlock.MonitorDestroyingEvent = true; // This is to prevent Blue-kun from destroying the RenderCamera system 
-                UnityDestroyBlock.OnDestroyBlocked += OnBlockedDestroy;
-                BlockPatronProcessor = true;
-                _ = MelonCoroutines.Start(ForcePatronReader());
-                _ = MelonCoroutines.Start(ForceEnableRenderCamera());
-
-                
                 if (BClubExploitsPage != null)
                 {
                     BClubExploitsPage.SetInteractable(true);
@@ -693,6 +704,39 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
+                var VIPPath = Finder.Find("Just B Club 2/Bedroom/Udon Bedroom/Canvas TP/Room Canvas/UICanvas/UIHover/Main Canvas/Intercom/Left/Padding/Buttons");
+                foreach(var item in VIPPath.Get_Childs())
+                {
+                    if (item != null)
+                    {
+                        item.gameObject.SetActive(true);
+                        var rect = item.GetComponent<RectTransform>();
+                        if (rect != null)
+                        {
+                            if (item.name.Equals("Button | _TryToggleVipOnly"))
+                            {
+                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -90);
+                            }
+                            if (item.name.Equals("Button | _Lock"))
+                            {
+                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -320);
+                            }
+                            if (item.name.Equals("Button | _Dnd"))
+                            {
+                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -550);
+                            }
+                            if (item.name.Equals("Button | _Anon"))
+                            {
+                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -780);
+                            }
+                            if (item.name.Equals("Button | _Looking"))
+                            {
+                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -1010);
+                            }
+
+                        }
+                    }
+                }
 
                 //MiscUtils.DelayFunction(2f, () =>
                 //{
