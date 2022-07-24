@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Startup.Hooks;
@@ -416,7 +417,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         private static bool _isMoanSpamEnabled;
         private static bool _isFallSpamEnabled;
         private static bool _isLocalPlayerSupporter;
-        private static bool _isLocalPlayerPatron;
 
         private static bool _isCurrentWorld;
 
@@ -432,7 +432,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     IsMoanSpamEnabled = false;
                     IsFallSpamEnabled = false;
                     _isLocalPlayerSupporter = false;
-                    _isLocalPlayerPatron = false;
 
                    // Bells.Clear();
                    // Chairs.Clear();
@@ -709,6 +708,11 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 {
                     if (item != null)
                     {
+                        var enabler = item.GetOrAddComponent<Enabler>();
+                        if (enabler != null)
+                        {
+                            enabler.ForceStart();
+                        }
                         item.gameObject.SetActive(true);
                         var rect = item.GetComponent<RectTransform>();
                         if (rect != null)
@@ -767,6 +771,15 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 if (Cancer_Spawn != null)
                 {
                     Cancer_Spawn.DestroyMeLocal();
+                }
+
+
+                if (isLocalPlayerSupporter)
+                {
+                    MiscUtils.DelayFunction(4f, () =>
+                    {
+                        Decoder_Debug.DestroyMeLocal(true);
+                    });
                 }
             }
             else

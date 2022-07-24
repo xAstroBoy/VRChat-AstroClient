@@ -418,6 +418,13 @@ namespace AstroClient.ClientActions
         /// <para>Params : VRCStation instance </para>
         /// </summary>
         internal static Action<VRC_StationInternal> OnStationExit { get; set; }
+        
+        
+        /// <summary>
+        /// this gets invoked when Your avatar is done loading.
+        /// <para>Params : GameObject avatar</para>
+        /// </summary>
+        internal static Action<GameObject> OnLocalAvatarLoaded { get; set; }
 
 
     }

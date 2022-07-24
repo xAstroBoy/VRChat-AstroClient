@@ -1,9 +1,13 @@
 using System;
 using AstroClient.AstroMonos.AstroUdons;
+using AstroClient.ClientActions;
 using AstroClient.ClientAttributes;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Player;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Collections.Generic;
+using Il2CppSystem.Xml.Schema;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -24,10 +28,129 @@ namespace AstroClient.AstroMonos.Prefabs
         }
 
 
+        private GameObject CurrentAvatar { get; set; } = null;
+
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            [HideFromIl2Cpp]
+            get => _HasSubscribed;
+            [HideFromIl2Cpp]
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.OnLocalAvatarLoaded += OnLocalAvatarLoaded;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.OnLocalAvatarLoaded -= OnLocalAvatarLoaded;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private bool _AdjustScaleBasedOffAvatar = false;
+        internal bool AdjustScaleBasedOffAvatar
+        {
+            get => _AdjustScaleBasedOffAvatar;
+            set
+            {
+                if (_AdjustScaleBasedOffAvatar != value)
+                {
+                    if (value)
+                    {
+                        ActivateConstraint();
+                    }
+                    else
+                    {
+                        UninstallScaleConstraint();
+                    }
+                }
+                _AdjustScaleBasedOffAvatar = value;
+            }
+        }
+
+        private void UninstallScaleConstraint()
+        {
+            if (JetpackScaleConstraint != null)
+            {
+                JetpackScaleConstraint.locked = false;
+                JetpackScaleConstraint.constraintActive = false;
+                JetpackScaleConstraint.weight = 0;
+                for (int i = 0; i < JetpackScaleConstraint.sourceCount; i++)
+                {
+                    JetpackScaleConstraint.RemoveSource(i);
+                }
+                JetpackScaleConstraint.enabled = false;
+                transform.localScale = Vector3.one; 
+            }
+        }
+
+        private  void ActivateConstraint()
+        {
+            // First we uninstall it and reset the current constraint.
+            if(JetpackScaleConstraint != null)
+            {
+                UninstallScaleConstraint();
+            }
+            
+            transform.localScale = Vector3.one;
+            if (CurrentAvatar == null)
+            {
+                CurrentAvatar = GameInstances.CurrentAvatar;
+            }
+
+            // Let's make a new source
+            if (CurrentAvatar != null)
+            {
+                var source = GenerateSource(CurrentAvatar);
+                // Then let's reset the constraint
+                JetpackScaleConstraint.enabled = true;
+                JetpackScaleConstraint.locked = false;
+                JetpackScaleConstraint.weight = 1;
+                JetpackScaleConstraint.AddSource(source);
+                // Let's lock at scale 1.
+                JetpackScaleConstraint.scaleOffset = new Vector3(1, 1, 1);
+                JetpackScaleConstraint.locked = true;
+                JetpackScaleConstraint.constraintActive = true;
+
+            }
+
+        }
+
+
+
+        private  void OnLocalAvatarLoaded(GameObject avatar)
+        {
+            if(avatar == null) return; 
+            CurrentAvatar = GameInstances.CurrentAvatar;
+            if(AdjustScaleBasedOffAvatar)
+            {
+                ActivateConstraint();
+            }
+
+        }
+
+
 
 
         private void Start()
         {
+
+            // For better manageability, correct the jetpack size to avatar size.
+            HasSubscribed = true;
+            
+            
+
+
             if (VRCChairStick != null)
             {
                 JetstickPickup = VRCChairStick.GetOrAddComponent<VRC_AstroPickup>();
@@ -84,7 +207,6 @@ namespace AstroClient.AstroMonos.Prefabs
                             }
                         });
                     
-                    CurrentChair.OnStationEnterEvent = OnStationEnter;
                     CurrentChair.OnStationExitEvent = OnStationExit;
                 }
             }
@@ -92,6 +214,16 @@ namespace AstroClient.AstroMonos.Prefabs
         }
 
 
+
+        private ConstraintSource GenerateSource(GameObject avatar)
+        {
+            return new ConstraintSource
+            {
+                m_SourceTransform = CurrentAvatar.transform,
+                m_Weight = 1,
+
+            };
+        }
         void OnDestroy()
         {
             if(CurrentChair != null)
@@ -129,48 +261,62 @@ namespace AstroClient.AstroMonos.Prefabs
         }
 
 
-        private void OnStationEnter()
-        {
-            LocalStar.gameObject.SetActive(true);
-        }
 
         private void OnStationExit()
         {
-            LocalStar.gameObject.SetActive(false);
             Destroy(this.gameObject);
         }
 
         private void ThrusterStick_OnPickup()
         {
-            if (ThrusterStick_ParentConstraint != null)
+            if (ThrusterStick_PositionConstraint != null)
             {
-                ThrusterStick_ParentConstraint.enabled = false;
+                ThrusterStick_PositionConstraint.enabled = false;
             }
+            if (ThrusterStick_RotationConstraint != null)
+            {
+                ThrusterStick_RotationConstraint.enabled = false;
+            }
+
 
         }
 
         private void ThrusterStick_OnDrop()
         {
-            if(ThrusterStick_ParentConstraint != null)
+            if (ThrusterStick_PositionConstraint != null)
             {
-                ThrusterStick_ParentConstraint.enabled = true;
+                ThrusterStick_PositionConstraint.enabled = true;
+            }
+            if (ThrusterStick_RotationConstraint != null)
+            {
+                ThrusterStick_RotationConstraint.enabled = true;
             }
         }
 
+
         private void VRCChairStick_OnPickup()
         {
-            if (VRCChairStick_ParentConstraint != null)
+            if (VRCChairStick_PositionConstraint != null)
             {
-                VRCChairStick_ParentConstraint.enabled = false;
+                VRCChairStick_PositionConstraint.enabled = false;
             }
+            if (VRCChairStick_RotationConstraint != null)
+            {
+                VRCChairStick_RotationConstraint.enabled = false;
+            }
+
 
         }
 
         private void VRCChairStick_OnDrop()
         {
-            if (VRCChairStick_ParentConstraint != null)
+            if (VRCChairStick_PositionConstraint != null)
             {
-                VRCChairStick_ParentConstraint.enabled = true;
+                VRCChairStick_PositionConstraint.enabled = true;
+            }
+            if (VRCChairStick_RotationConstraint != null)
+            {
+                VRCChairStick_RotationConstraint.enabled = true;
             }
         }
 
@@ -183,6 +329,22 @@ namespace AstroClient.AstroMonos.Prefabs
             LowerJet_ON.gameObject.SetActive(false);
 
         }
+
+        private ScaleConstraint _JetpackScaleConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ScaleConstraint JetpackScaleConstraint
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_JetpackScaleConstraint == null)
+                {
+                    _JetpackScaleConstraint = transform.GetOrAddComponent<ScaleConstraint>();
+                }
+                return _JetpackScaleConstraint;
+            }
+        }
+
+
         private Transform _VRCChair {   [HideFromIl2Cpp]  get; [HideFromIl2Cpp] set; }
         private Transform VRCChair
         {
@@ -242,20 +404,6 @@ namespace AstroClient.AstroMonos.Prefabs
         }
 
 
-        private Transform _LocalStar { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Transform LocalStar
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (VRCChair == null) return null;
-                if (_LocalStar == null)
-                {
-                    _LocalStar = VRCChair.FindObject("LocalStar");
-                }
-                return _LocalStar;
-            }
-        }
 
         private Transform _UpperJet {   [HideFromIl2Cpp]  get; [HideFromIl2Cpp] set; }
         private Transform UpperJet
@@ -316,18 +464,32 @@ namespace AstroClient.AstroMonos.Prefabs
             }
         }
 
-        private ParentConstraint _VRCChairStick_ParentConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParentConstraint VRCChairStick_ParentConstraint
+        private PositionConstraint _VRCChairStick_PositionConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PositionConstraint VRCChairStick_PositionConstraint
         {
             [HideFromIl2Cpp]
             get
             {
                 if (VRCChairStick == null) return null;
-                if (_VRCChairStick_ParentConstraint == null)
+                if (_VRCChairStick_PositionConstraint == null)
                 {
-                    _VRCChairStick_ParentConstraint = VRCChairStick.GetComponent<ParentConstraint>();
+                    _VRCChairStick_PositionConstraint = VRCChairStick.GetComponent<PositionConstraint>();
                 }
-                return _VRCChairStick_ParentConstraint;
+                return _VRCChairStick_PositionConstraint;
+            }
+        }
+        private RotationConstraint _VRCChairStick_RotationConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RotationConstraint VRCChairStick_RotationConstraint
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (VRCChairStick == null) return null;
+                if (_VRCChairStick_RotationConstraint == null)
+                {
+                    _VRCChairStick_RotationConstraint = VRCChairStick.GetComponent<RotationConstraint>();
+                }
+                return _VRCChairStick_RotationConstraint;
             }
         }
 
@@ -375,18 +537,32 @@ namespace AstroClient.AstroMonos.Prefabs
             }
         }
 
-        private ParentConstraint _ThrusterStick_ParentConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParentConstraint ThrusterStick_ParentConstraint
+        private PositionConstraint _ThrusterStick_PositionConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PositionConstraint ThrusterStick_PositionConstraint
         {
             [HideFromIl2Cpp]
             get
             {
                 if (ThrusterStick == null) return null;
-                if (_ThrusterStick_ParentConstraint == null)
+                if (_ThrusterStick_PositionConstraint == null)
                 {
-                    _ThrusterStick_ParentConstraint = ThrusterStick.GetComponent<ParentConstraint>();
+                    _ThrusterStick_PositionConstraint = ThrusterStick.GetComponent<PositionConstraint>();
                 }
-                return _ThrusterStick_ParentConstraint;
+                return _ThrusterStick_PositionConstraint;
+            }
+        }
+        private RotationConstraint _ThrusterStick_RotationConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RotationConstraint ThrusterStick_RotationConstraint
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (ThrusterStick == null) return null;
+                if (_ThrusterStick_RotationConstraint == null)
+                {
+                    _ThrusterStick_RotationConstraint = ThrusterStick.GetComponent<RotationConstraint>();
+                }
+                return _ThrusterStick_RotationConstraint;
             }
         }
 

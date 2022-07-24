@@ -1,37 +1,16 @@
-﻿using System;
-using System.Text;
-using AstroClient.AstroMonos.AstroUdons;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
-using AstroClient.AstroMonos.Components.Custom.Items;
-using AstroClient.AstroMonos.Components.Tools;
-using AstroClient.AstroMonos.Prefabs;
+﻿using AstroClient.AstroMonos.Prefabs;
 using AstroClient.ClientActions;
-using AstroClient.Startup.Hooks;
-using AstroClient.Tools;
-using AstroClient.Tools.UdonEditor;
-using AstroClient.Tools.UdonSearcher;
 using AstroClient.xAstroBoy.Extensions;
-using UnityEngine.AI;
 using UnityEngine.Animations;
-using VRC.SDKBase;
-using VRC_EventHandler = VRCSDK2.VRC_EventHandler;
 using VRC_Pickup = VRCSDK2.VRC_Pickup;
 using VRC_Trigger = VRCSDK2.VRC_Trigger;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
-    using System.Collections;
     using System.Collections.Generic;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using CustomClasses;
-    using MelonLoader;
-    using Tools.Extensions;
-    using Tools.World;
-    using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.Utility;
 
     internal class SakuraIsland : AstroEvents
@@ -41,15 +20,12 @@ namespace AstroClient.WorldModifications.WorldHacks
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
-
-
         private static void FixJetpack()
         {
             foreach (var prefab in SceneUtils.DynamicPrefabs)
             {
                 if (prefab != null)
                 {
-
                     // Sakura island has only one Jetpack Prefab.
                     if (prefab.name.isMatch("TBDD_TwoHand"))
                     {
@@ -62,60 +38,95 @@ namespace AstroClient.WorldModifications.WorldHacks
                             m_SourceTransform = collider
                         };
 
-
-                        var JetpackStick = prefab.transform.FindObject("VRCChairStick");
-                        if (JetpackStick != null)
+                        var VRCChairStick_Prefab = prefab.transform.FindObject("VRCChairStick");
+                        if (VRCChairStick_Prefab != null)
                         {
-                            var clonethis = template.FindObject("VRCChairStick").GetComponent<ParentConstraint>();
-                            if (clonethis != null)
+                            var VRCChairStick_Template = template.FindObject("VRCChairStick");
+                            if (VRCChairStick_Template != null)
                             {
-                                var constraint = JetpackStick.AddComponent<ParentConstraint>();
-                                if (constraint != null)
-                                {
-                                    constraint.rotationAtRest = clonethis.rotationAtRest;
-                                    constraint.rotationAxis = clonethis.rotationAxis;
-                                    constraint.rotationOffsets = clonethis.rotationOffsets;
-                                    constraint.translationAtRest = clonethis.translationAtRest;
-                                    constraint.translationOffsets = clonethis.translationOffsets;
-                                    constraint.weight = clonethis.weight;
-                                    constraint.locked = clonethis.locked;
-                                    constraint.constraintActive = true;
-                                    constraint.AddSource(colliderconstraint);
-                                }
+                                var PosConstraint = VRCChairStick_Template.GetComponent<PositionConstraint>();
 
+                                if (PosConstraint != null)
+                                {
+                                    var constraint = VRCChairStick_Prefab.AddComponent<PositionConstraint>();
+                                    if (constraint != null)
+                                    {
+                                        constraint.translationAtRest = PosConstraint.translationAtRest;
+                                        constraint.translationAxis = PosConstraint.translationAxis;
+                                        constraint.translationOffset = PosConstraint.translationOffset;
+                                        constraint.weight = PosConstraint.weight;
+                                        constraint.locked = PosConstraint.locked;
+                                        constraint.constraintActive = true;
+                                        constraint.AddSource(colliderconstraint);
+                                    }
+                                }
+                                var RotConstraint = VRCChairStick_Template.GetComponent<RotationConstraint>();
+
+                                if (RotConstraint != null)
+                                {
+                                    var constraint = VRCChairStick_Prefab.AddComponent<RotationConstraint>();
+                                    if (constraint != null)
+                                    {
+                                        constraint.rotationAtRest = RotConstraint.rotationAtRest;
+                                        constraint.rotationOffset = RotConstraint.rotationOffset;
+                                        constraint.rotationAxis = RotConstraint.rotationAxis;
+                                        constraint.weight = RotConstraint.weight;
+                                        constraint.locked = RotConstraint.locked;
+                                        constraint.constraintActive = true;
+                                        constraint.AddSource(colliderconstraint);
+                                    }
+                                }
                             }
 
-                            JetpackStick.RemoveComponent<VRC_Pickup>();
-                            JetpackStick.RemoveComponent<VRC_Trigger>();
+                            VRCChairStick_Prefab.RemoveComponent<VRC_Pickup>();
+                            VRCChairStick_Prefab.RemoveComponent<VRC_Trigger>();
                             //JetpackStick.RemoveComponent<VRC_EventHandler>();
                             //JetpackStick.RemoveComponent<VRC_Trigger>();
                         }
-                        var ThrusterStick = prefab.transform.FindObject("ThrusterStick");
-                        if (ThrusterStick != null)
+                        var ThrusterStick_Prefab = prefab.transform.FindObject("ThrusterStick");
+                        if (ThrusterStick_Prefab != null)
                         {
-                            var clonethis = template.FindObject("ThrusterStick").GetComponent<ParentConstraint>();
-                            if (clonethis != null)
+                            var ThrusterStick_Template = template.FindObject("ThrusterStick");
+                            if (ThrusterStick_Template != null)
                             {
-                                var constraint = ThrusterStick.AddComponent<ParentConstraint>();
-                                if (constraint != null)
+                                var PosConstraint = ThrusterStick_Template.GetComponent<PositionConstraint>();
+
+                                if (PosConstraint != null)
                                 {
-                                    constraint.rotationAtRest = clonethis.rotationAtRest;
-                                    constraint.rotationAxis = clonethis.rotationAxis;
-                                    constraint.rotationOffsets = clonethis.rotationOffsets;
-                                    constraint.translationAtRest = clonethis.translationAtRest;
-                                    constraint.translationOffsets = clonethis.translationOffsets;
-                                    constraint.weight = clonethis.weight;
-                                    constraint.locked = clonethis.locked;
-                                    constraint.constraintActive = true;
-
-                                    constraint.AddSource(colliderconstraint);
+                                    var constraint = ThrusterStick_Prefab.AddComponent<PositionConstraint>();
+                                    if (constraint != null)
+                                    {
+                                        constraint.translationAtRest = PosConstraint.translationAtRest;
+                                        constraint.translationAxis = PosConstraint.translationAxis;
+                                        constraint.translationOffset = PosConstraint.translationOffset;
+                                        constraint.weight = PosConstraint.weight;
+                                        constraint.locked = PosConstraint.locked;
+                                        constraint.constraintActive = true;
+                                        constraint.AddSource(colliderconstraint);
+                                    }
                                 }
+                                var RotConstraint = ThrusterStick_Template.GetComponent<RotationConstraint>();
 
+                                if (RotConstraint != null)
+                                {
+                                    var constraint = ThrusterStick_Prefab.AddComponent<RotationConstraint>();
+                                    if (constraint != null)
+                                    {
+                                        constraint.rotationAtRest = RotConstraint.rotationAtRest;
+                                        constraint.rotationOffset = RotConstraint.rotationOffset;
+                                        constraint.rotationAxis = RotConstraint.rotationAxis;
+                                        constraint.weight = RotConstraint.weight;
+                                        constraint.locked = RotConstraint.locked;
+                                        constraint.constraintActive = true;
+                                        constraint.AddSource(colliderconstraint);
+                                    }
+                                }
                             }
-                            ThrusterStick.RemoveComponent<VRC_Pickup>();
-                            ThrusterStick.RemoveComponent<VRC_Trigger>();
-                            //ThrusterStick.RemoveComponent<VRC_EventHandler>();
-                            //ThrusterStick.RemoveComponent<VRC_Trigger>();
+
+                            ThrusterStick_Prefab.RemoveComponent<VRC_Pickup>();
+                            ThrusterStick_Prefab.RemoveComponent<VRC_Trigger>();
+                            //JetpackStick.RemoveComponent<VRC_EventHandler>();
+                            //JetpackStick.RemoveComponent<VRC_Trigger>();
                         }
                         prefab.AddComponent<JetpackController>();
                         break;
@@ -123,11 +134,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
         }
-
-
-
-
-
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -141,6 +147,5 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static bool isCurrentWorld { get; set; } = false;
 
         internal static QMNestedGridMenu CurrentMenu { get; set; }
-
     }
 }

@@ -25,6 +25,8 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             ClientEventActions.OnVRCPlayerStart += OnPlayerStart;
         }
 
+
+
         internal static bool AddSettingsToPlayerExpressions { get; private set; } = false;
         //private void OnWorldReveal(string arg1, string arg2, List<string> arg3, string arg4, string arg5)
         //{
@@ -102,6 +104,7 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             }
             if (go != null)
             {
+                ClientEventActions.OnLocalAvatarLoaded.SafetyRaise(go);
                 if (go.GetComponent<VRCAvatarDescriptor>() != null)
                 {
                     //Log.Debug("Initializing Avatar Scaling support....");

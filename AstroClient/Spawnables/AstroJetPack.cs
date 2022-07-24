@@ -26,15 +26,20 @@ namespace AstroClient.Spawnables
             {
                 var item = Object.Instantiate(ClientResources.Loaders.Prefabs.VRJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
                 item.AddToWorldUtilsMenu();
-                var  jet = ComponentUtils.GetOrAddComponent<JetpackController>(item);
-                MiscUtils.DelayFunction(0.2f, () => {
-                    if (SitOnJetpackOnSpawn)
+                var jet = ComponentUtils.GetOrAddComponent<JetpackController>(item);
+                if (jet != null)
+                {
+                    jet.AdjustScaleBasedOffAvatar = true;
+                    MiscUtils.DelayFunction(0.2f, () =>
                     {
-                        jet.CurrentChair.EnterStation();
-                    }
-                });
-                ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(item);
-                VRJetpack = item;
+                        if (SitOnJetpackOnSpawn)
+                        {
+                            jet.CurrentChair.EnterStation();
+                        }
+                    });
+                    ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(item);
+                    VRJetpack = item;
+                }
             }
 
         }
@@ -56,14 +61,17 @@ namespace AstroClient.Spawnables
                 var item = Object.Instantiate(ClientResources.Loaders.Prefabs.DesktopJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
                 item.AddToWorldUtilsMenu();
                 var jet = ComponentUtils.GetOrAddComponent<JetpackController>(item);
-                MiscUtils.DelayFunction(0.2f, () =>
+                if (jet != null)
                 {
-                    if (SitOnJetpackOnSpawn)
+                    jet.AdjustScaleBasedOffAvatar = true;
+                    MiscUtils.DelayFunction(0.2f, () =>
                     {
-                        jet.CurrentChair.EnterStation();
-                    }
-                });
-
+                        if (SitOnJetpackOnSpawn)
+                        {
+                            jet.CurrentChair.EnterStation();
+                        }
+                    });
+                }
                 DesktopJetpack = item;
                 ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(item);
 
