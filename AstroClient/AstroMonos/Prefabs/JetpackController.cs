@@ -71,35 +71,30 @@ namespace AstroClient.AstroMonos.Prefabs
                     }
                     else
                     {
-                        UninstallScaleConstraint();
+                        CleanConstraint();
                     }
                 }
                 _AdjustScaleBasedOffAvatar = value;
             }
         }
 
-        private void UninstallScaleConstraint()
+        private void CleanConstraint()
         {
             if (JetpackScaleConstraint != null)
             {
-                JetpackScaleConstraint.locked = false;
                 JetpackScaleConstraint.constraintActive = false;
-                JetpackScaleConstraint.weight = 0;
                 for (int i = 0; i < JetpackScaleConstraint.sourceCount; i++)
                 {
                     JetpackScaleConstraint.RemoveSource(i);
                 }
-                JetpackScaleConstraint.enabled = false;
-                transform.localScale = Vector3.one; 
             }
         }
 
         private  void ActivateConstraint()
         {
-            // First we uninstall it and reset the current constraint.
             if(JetpackScaleConstraint != null)
             {
-                UninstallScaleConstraint();
+                CleanConstraint();
             }
             
             transform.localScale = Vector3.one;
@@ -111,16 +106,9 @@ namespace AstroClient.AstroMonos.Prefabs
             // Let's make a new source
             if (CurrentAvatar != null)
             {
-                var source = GenerateSource(CurrentAvatar);
-                // Then let's reset the constraint
-                JetpackScaleConstraint.enabled = true;
-                JetpackScaleConstraint.locked = false;
-                JetpackScaleConstraint.weight = 1;
-                JetpackScaleConstraint.AddSource(source);
-                // Let's lock at scale 1.
-                JetpackScaleConstraint.scaleOffset = new Vector3(1, 1, 1);
-                JetpackScaleConstraint.locked = true;
                 JetpackScaleConstraint.constraintActive = true;
+                var source = GenerateSource(CurrentAvatar);
+                JetpackScaleConstraint.AddSource(source);
 
             }
 
@@ -128,7 +116,7 @@ namespace AstroClient.AstroMonos.Prefabs
 
 
 
-        private  void OnLocalAvatarLoaded(GameObject avatar)
+        private void OnLocalAvatarLoaded(GameObject avatar)
         {
             if(avatar == null) return; 
             CurrentAvatar = GameInstances.CurrentAvatar;
