@@ -16,16 +16,16 @@ namespace AstroClient.Startup
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
-
+        private  float WelcomeDuration { get; } = 3f;
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            HudNotifier.WriteHudMessage($"Welcome Back <color=#c242f5>{PlayerUtils.DisplayName()}</color>", 10f);
-            HudNotifier.WriteHudMessage("<color=#42f5f2>AstroClient</color> Made By", 10f);
-            HudNotifier.WriteHudMessage("<rainb>AstroBoy</rainb> and <color=#F79239>Cheetos</color>", 10f);
+            HudNotifier.WriteHudMessage($"Welcome Back <color=#c242f5>{PlayerUtils.DisplayName()}</color>", WelcomeDuration);
+            HudNotifier.WriteHudMessage("<color=#42f5f2>AstroClient</color> Made By", WelcomeDuration);
+            HudNotifier.WriteHudMessage("<rainb>AstroBoy</rainb> and <color=#F79239>Cheetos</color>", WelcomeDuration);
 
             if (Bools.IsDeveloper)
             {
-                HudNotifier.WriteHudMessage("<rainb>Developer Mode!</rainb>", 10f);
+                HudNotifier.WriteHudMessage("<rainb>Developer Mode!</rainb>", WelcomeDuration);
             }
 
             ClientEventActions.OnWorldReveal -= OnWorldReveal;

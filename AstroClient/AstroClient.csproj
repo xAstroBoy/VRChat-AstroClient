@@ -336,7 +336,6 @@
     <Compile Include="Tools\TextureTools\Il2CppTextureHelper.cs" />
     <Compile Include="Tools\TextureTools\TextureHelper.cs" />
     <Compile Include="Tools\TextureTools\Texture_Ext.cs" />
-    <Compile Include="Startup\Hooks\HeapVariablePatcher.cs" />
     <Compile Include="Tools\UdonEditor\UdonCustomEventsLists.cs" />
     <Compile Include="Tools\UdonEditor\UdonDumper.cs" />
     <Compile Include="Tools\UdonEditor\UdonAPIExtensions.cs" />
